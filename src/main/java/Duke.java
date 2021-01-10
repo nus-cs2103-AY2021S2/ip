@@ -1,4 +1,6 @@
-import controllers.AppController;
+import controllers.*;
+import views.TodosView;
+import models.*;
 
 public class Duke {
     public static void main(String[] args) {
