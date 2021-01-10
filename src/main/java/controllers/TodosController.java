@@ -14,8 +14,10 @@ import models.Todo;
 import views.TodosView;
 
 public class TodosController {
-    List<Optional<? extends Todo>> todosList;
-    TodosView todosView = new TodosView();
+    /** todosList contains the state of the todos */
+    private List<Optional<? extends Todo>> todosList;
+    /** TodosView initialised to render view of Todos */
+    private TodosView todosView = new TodosView();
 
     /**
      * Constructor of TodosController without any arguments initialises a new
@@ -61,6 +63,14 @@ public class TodosController {
                 Stream.concat(this.todosList.stream(), Stream.of(newTodoObject)).collect(Collectors.toList()));
     }
 
+    /**
+     * Takes in the list containing details about the new deadline and returns a new
+     * TodosController with the new Deadline added
+     * 
+     * @param newDeadlineList takes in list of arguments provided to the command for
+     *                        processing into a Deadline object
+     * @return new TodosController with the new Deadline object added into it
+     */
     public TodosController addDeadline(List<String> newDeadlineList) {
         ArrayList<String> message = new ArrayList<>();
         ArrayList<String> deadline = new ArrayList<>();
@@ -91,13 +101,21 @@ public class TodosController {
                 Stream.concat(this.todosList.stream(), Stream.of(newDeadline)).collect(Collectors.toList()));
     }
 
-    public TodosController addEvent(List<String> newDeadlineList) {
+    /**
+     * Takes in the list containing details about the new deadline and returns a new
+     * TodosController with the new Event added
+     * 
+     * @param newEventList takes in list of arguments provided to the command for
+     *                     processing into a Event object
+     * @return new TodosController with the new Event object added into it
+     */
+    public TodosController addEvent(List<String> newEventList) {
         ArrayList<String> message = new ArrayList<>();
         ArrayList<String> eventTime = new ArrayList<>();
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
-        newDeadlineList.stream().forEach(substring -> {
+        newEventList.stream().forEach(substring -> {
             if (substring.contains("/")) {
                 eventTime.add(substring);
             } else if (eventTime.size() == 0) {
@@ -107,7 +125,7 @@ public class TodosController {
             }
         });
 
-        // Create new Deadline object
+        // Create new Event object
         Optional<Event> newEvent = Optional.ofNullable(
                 new Event(String.join(" ", message), String.join(" ", eventTime.subList(1, eventTime.size()))));
         try {

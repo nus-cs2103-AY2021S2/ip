@@ -8,8 +8,13 @@ import java.util.stream.IntStream;
 import models.Todo;
 
 public class TodosView {
-    String spacing = "---";
+    /** Denotes the divider to use to go between lines */
+    String divider = "---";
 
+    /**
+     * Explicit definition of the default constructor to create a new Todos View
+     * renderer
+     */
     public TodosView() {
     }
 
@@ -40,7 +45,9 @@ public class TodosView {
      * Prints 'Got it, I've added this task:', followed by the message contained in
      * the new todo
      * 
-     * @param newTodo Optional Todo object containing a new Todo to be printed
+     * @param newTodo  Optional Todo object containing a new Todo to be printed
+     * @param listSize Integer list size taken to return the number of tasks user
+     *                 currently has
      * @throws Exception if the newTodo object is empty
      */
     public void added(Optional<? extends Todo> newTodo, int listSize) throws Exception {
@@ -60,12 +67,12 @@ public class TodosView {
     }
 
     /**
-     * Private method printWithSpacing adds spacing around the text passed in to be
+     * Private method printWithSpacing adds divider around the text passed in to be
      * printed
      * 
-     * @param text String to be printed with spacing put around it
+     * @param text String to be printed with divider put around it
      */
     private void printWithSpacing(String text) {
-        System.out.println(String.format("\n%s\n%s\n%s\n", spacing, text, spacing));
+        System.out.println(String.format("\n%s\n%s\n%s\n", divider, text, divider));
     }
 }
