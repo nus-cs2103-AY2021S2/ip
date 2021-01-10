@@ -19,43 +19,49 @@ public class TodosView {
      * @param todoRender Optional Todo to be rendered
      * @return String which renders out how the information carried by the Todo
      */
-    private String renderTodoLine(Optional<Todo> todoToRender) {
-        return String.format("[%s] %s",
-                todoToRender.map(todo -> todo.isTodoDone() ? "\u2713" : "\u2718").orElse(" "),
-                todoToRender.map(todo -> todo.getMessage()).orElse("Empty Todo"));
+    private String renderTodoLine(Optional<? extends Todo> todoToRender) {
+        return todoToRender.map(todo -> todo.getMessage()).orElse("Empty Todo");
     }
 
     /**
-     * Turns the todosList into a stream of messages from Todos and output them with a new line in
-     * between each Todo
+     * Turns the todosList into a stream of messages from Todos and output them with
+     * a new line in between each Todo
      * 
      * @param todosList List of optional todos passed in from TodosController
      */
-    public void listTodos(List<Optional<Todo>> todosList) {
-        printWithSpacing(IntStream.range(0, todosList.size())
-                .mapToObj(
-                        idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
-                .collect(Collectors.joining("\n")));
+    public void listTodos(List<Optional<? extends Todo>> todosList) {
+        printWithSpacing(String.format("Here are the tasks in your list:\n%s",
+                IntStream.range(0, todosList.size())
+                        .mapToObj(idx -> String.format("%d.%s", idx + 1, renderTodoLine(todosList.get(idx))))
+                        .collect(Collectors.joining("\n"))));
     }
 
     /**
-     * Prints 'added:', followed by the message contained in the new todo
+     * Prints 'Got it, I've added this task:', followed by the message contained in
+     * the new todo
      * 
      * @param newTodo Optional Todo object containing a new Todo to be printed
      * @throws Exception if the newTodo object is empty
      */
-    public void added(Optional<Todo> newTodo) throws Exception {
-        printWithSpacing(String.format("added: %s", newTodo.map(todo -> todo.getMessage())
-                .orElseThrow(() -> new Exception("The Todo object supplied is empty"))));
-    }
-
-    public void markAsDone(Optional<Todo> newTodo) throws Exception {
-        printWithSpacing(
-                String.format("Nice! I've marked this task as done:\n%s", renderTodoLine(newTodo)));
+    public void added(Optional<? extends Todo> newTodo, int listSize) throws Exception {
+        printWithSpacing(String.format("Got it! I've added this task:\n%s\nNow you have %d tasks in the list.",
+                renderTodoLine(newTodo), listSize));
     }
 
     /**
-     * Private method printWithSpacing adds spacing around the text passed in to be printed
+     * Adds text indicating todo is marked as done and renders the String to show
+     * the Todo
+     * 
+     * @param newTodo Optional Todo to be marked as Done
+     * @throws Exception if newTodo object is empty
+     */
+    public void markAsDone(Optional<? extends Todo> newTodo) throws Exception {
+        printWithSpacing(String.format("Nice! I've marked this task as done:\n%s", renderTodoLine(newTodo)));
+    }
+
+    /**
+     * Private method printWithSpacing adds spacing around the text passed in to be
+     * printed
      * 
      * @param text String to be printed with spacing put around it
      */

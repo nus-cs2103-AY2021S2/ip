@@ -8,8 +8,8 @@ import views.Greeting;
 
 public class AppController {
     /**
-     * AppController starts to listen to commands from the user and performs actions as required by
-     * user's commands
+     * AppController starts to listen to commands from the user and performs actions
+     * as required by user's commands
      */
     public void start() {
         // initialise greeting view
@@ -39,14 +39,19 @@ public class AppController {
                         todosController.listTodos();
                         break;
 
+                    case "event":
+                        // add a new event to the model
+                        todosController = todosController.addEvent(command.getCommandArgs());
+                        break;
+
                     case "todo":
                         // add a new todo to the model
-                        System.out.println("Add new Todo");
+                        todosController = todosController.addTodos(command.getCommandArgs());
                         break;
 
                     case "deadline":
                         // amend a current todo's deadline
-                        System.out.println("Amend Deadline");
+                        todosController = todosController.addDeadline(command.getCommandArgs());
                         break;
 
                     case "done":
@@ -66,7 +71,7 @@ public class AppController {
 
                     default:
                         // print command printed in if not recognised
-                        todosController = todosController.addTodos(command.getFullCommand());
+                        System.out.println("Sorry, I'm not sure what this command is!");
                         break;
                 }
 

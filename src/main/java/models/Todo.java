@@ -14,7 +14,11 @@ public class Todo {
     }
 
     public String getMessage() {
-        return this.message;
+        return String.format("[T][%s] %s", this.getIsDoneIcon(), this.message);
+    }
+
+    public String getIsDoneIcon() {
+        return this.isDone ? "\u2713" : "\u2718";
     }
 
     public boolean isTodoDone() {
