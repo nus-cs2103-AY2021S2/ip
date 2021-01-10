@@ -8,8 +8,8 @@ import views.Greeting;
 
 public class AppController {
     /**
-     * AppController starts to listen to commands from the user and performs actions
-     * as required by user's commands
+     * AppController starts to listen to commands from the user and performs actions as required by
+     * user's commands
      */
     public void start() {
         // initialise greeting view
@@ -51,7 +51,7 @@ public class AppController {
 
                     case "done":
                         // mark a todo as done
-                        System.out.println("Todo mark as done");
+                        todosController = todosController.markAsDone(command.getCommandArgs());
                         break;
 
                     case "bye":

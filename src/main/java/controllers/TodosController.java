@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 import models.Todo;
 
@@ -36,7 +37,7 @@ public class TodosController {
      * Todos
      */
     public void listTodos() {
-        todosView.listTodos(todosList);
+        this.todosView.listTodos(this.todosList);
     }
 
     /**
@@ -48,11 +49,38 @@ public class TodosController {
     public TodosController addTodos(List<String> newTodoList) {
         Optional<Todo> newTodoObject = Optional.ofNullable(new Todo(String.join(" ", newTodoList)));
         try {
-            todosView.added(newTodoObject);
+            this.todosView.added(newTodoObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new TodosController(Stream.concat(todosList.stream(), Stream.of(newTodoObject))
+        return new TodosController(Stream.concat(this.todosList.stream(), Stream.of(newTodoObject))
                 .collect(Collectors.toList()));
     }
+
+    /**
+     * Asserts that index of todo passed in to be marked as done is lesser than length of todosList,
+     * else there would be an arrayoutofboundsexception thrown
+     * 
+     * @param doneArgs should be a List<String> of size 1 containing one argument that is the ID of
+     *                 which todo to mark as done and uses a 1-based indexing of the todos
+     * @return TodosController containing Todo that's now updated as done
+     */
+    public TodosController markAsDone(List<String> doneArgs) {
+        int idxIsDone = Integer.parseInt(doneArgs.get(0)) - 1;
+        assert (idxIsDone < this.todosList.size());
+        return new TodosController(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
+            if (idx == idxIsDone) {
+                Optional<Todo> doneTodo = this.todosList.get(idx).map(todo -> todo.markAsDone());
+                try {
+                    this.todosView.markAsDone(doneTodo);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return doneTodo;
+            } else {
+                return this.todosList.get(idx);
+            }
+        }).collect(Collectors.toList()));
+    }
+
 }
