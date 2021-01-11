@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import java.util.stream.IntStream;
 
+import exceptions.DukeBlankDetailsException;
+import exceptions.DukeBlankTaskException;
+import exceptions.DukeTaskIndexOutOfRangeException;
 import models.Deadline;
 import models.Event;
 import models.Todo;
@@ -49,10 +53,15 @@ public class TodosController {
      * Adds a new Todo to the todosList and returns new TodosController containing
      * that list
      * 
-     * @param newTodo
+     * @param newTodoList contains the new Todo that must not be an empty array
+     * @throws DukeBlankTaskException when user types in 'todo' but has nothing
+     *                                afterwards
      * @return TodosController with todosList containing the new Todo added
      */
-    public TodosController addTodos(List<String> newTodoList) {
+    public TodosController addTodos(List<String> newTodoList) throws DukeBlankTaskException {
+        if (newTodoList.size() == 0) {
+            throw new DukeBlankTaskException("The Todo you are trying to add cannot be blank!");
+        }
         Optional<? extends Todo> newTodoObject = Optional.ofNullable(new Todo(String.join(" ", newTodoList)));
         try {
             this.todosView.added(newTodoObject, this.todosList.size() + 1);
@@ -70,8 +79,19 @@ public class TodosController {
      * @param newDeadlineList takes in list of arguments provided to the command for
      *                        processing into a Deadline object
      * @return new TodosController with the new Deadline object added into it
+     * @throws DukeBlankTaskException    Exception is thrown when user does not add
+     *                                   in any details after typing the 'deadline'
+     *                                   command
+     * @throws DukeBlankDetailsException Exception is thrown when user tries to
+     *                                   define an deadline, without adding /by
+     *                                   <details> for the event
      */
-    public TodosController addDeadline(List<String> newDeadlineList) {
+    public TodosController addDeadline(List<String> newDeadlineList)
+            throws DukeBlankTaskException, DukeBlankDetailsException {
+        if (newDeadlineList.size() == 0) {
+            throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
+        }
+
         ArrayList<String> message = new ArrayList<>();
         ArrayList<String> deadline = new ArrayList<>();
 
@@ -87,7 +107,19 @@ public class TodosController {
             }
         });
 
-        // Create new Deadline object
+        // if no message, throw exception
+        if (message.size() == 0) {
+            throw new DukeBlankTaskException("Please define a task message for your Deadline");
+        }
+
+        // if no deadline input or /by without any deadline, throw exception
+        if (deadline.size() <= 1) {
+            throw new DukeBlankDetailsException(
+                    "Please add a /by followed by the deadline to specify a deadline for the Deadline task");
+        }
+
+        // Create new Deadline object, slicing deadline array from index 1 since we
+        // added the '/by' which shouldn't be in the actual Deadline object
         Optional<Deadline> newDeadline = Optional.ofNullable(
                 new Deadline(String.join(" ", message), String.join(" ", deadline.subList(1, deadline.size()))));
         try {
@@ -108,8 +140,20 @@ public class TodosController {
      * @param newEventList takes in list of arguments provided to the command for
      *                     processing into a Event object
      * @return new TodosController with the new Event object added into it
+     * @throws DukeBlankTaskException    Exception is thrown when user does not add
+     *                                   in any details after typing the 'event'
+     *                                   command
+     * @throws DukeBlankDetailsException Exception is thrown when user tries to
+     *                                   define an event, without adding /at
+     *                                   <details> for the event
      */
-    public TodosController addEvent(List<String> newEventList) {
+    public TodosController addEvent(List<String> newEventList)
+            throws DukeBlankDetailsException, DukeBlankTaskException {
+        // if list is empty, throw error
+        if (newEventList.size() == 0) {
+            throw new DukeBlankTaskException("The Event you are trying to add cannot be blank!");
+        }
+
         ArrayList<String> message = new ArrayList<>();
         ArrayList<String> eventTime = new ArrayList<>();
 
@@ -125,7 +169,19 @@ public class TodosController {
             }
         });
 
-        // Create new Event object
+        // if no message, throw exception
+        if (message.size() == 0) {
+            throw new DukeBlankTaskException("Please define a task message for your Event");
+        }
+
+        // if no event time is found or defined /at without anything else, throw
+        // exception
+        if (eventTime.size() <= 1) {
+            throw new DukeBlankDetailsException("Please specify a time and date for an Event.");
+        }
+
+        // Create new Event object, slicing eventTime array from index 1 since we
+        // added the '/at' which shouldn't be in the actual Event object
         Optional<Event> newEvent = Optional.ofNullable(
                 new Event(String.join(" ", message), String.join(" ", eventTime.subList(1, eventTime.size()))));
         try {
@@ -147,10 +203,16 @@ public class TodosController {
      *                 that is the ID of which todo to mark as done and uses a
      *                 1-based indexing of the todos
      * @return TodosController containing Todo that's now updated as done
+     * @throws DukeTaskIndexOutOfRangeException Exception is thrown when the user
+     *                                          specifies a task index that is out
+     *                                          of range.
      */
-    public TodosController markAsDone(List<String> doneArgs) {
+    public TodosController markAsDone(List<String> doneArgs) throws DukeTaskIndexOutOfRangeException {
         int idxIsDone = Integer.parseInt(doneArgs.get(0)) - 1;
-        assert (idxIsDone < this.todosList.size());
+        if (idxIsDone >= this.todosList.size()) {
+            throw new DukeTaskIndexOutOfRangeException(
+                    "The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.");
+        }
         return new TodosController(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
             if (idx == idxIsDone) {
                 Optional<? extends Todo> doneTodo = this.todosList.get(idx).map(todo -> todo.markAsDone());

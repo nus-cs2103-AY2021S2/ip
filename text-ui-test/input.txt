@@ -1,4 +1,3 @@
-todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
@@ -9,4 +8,23 @@ list
 deadline do homework /by no idea :-p
 list
 done 4
+event 
+event borrow book
+event /at 1 Sep
+event borrow book /at 1 Sep
+list
+event borrow book /at
+deadline 
+deadline return book
+deadline /by 2 Sep
+deadline return book /by 2 Sep
+list
+deadline return book /by
+list
+todo
+todo something todo!
+list
+blah
+list
+blah blah
 bye

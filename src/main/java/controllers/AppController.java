@@ -3,6 +3,9 @@ package controllers;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import exceptions.DukeBlankTaskException;
+import exceptions.DukeCommandNotFoundException;
+import exceptions.DukeTaskIndexOutOfRangeException;
 import models.Command;
 import views.Greeting;
 
@@ -41,22 +44,42 @@ public class AppController {
 
                     case "event":
                         // add a new event to the model
-                        todosController = todosController.addEvent(command.getCommandArgs());
+                        try {
+                            todosController = todosController.addEvent(command.getCommandArgs());
+
+                        } catch (Exception e) {
+                            greeting.printErrorMessage(e);
+                        }
                         break;
 
                     case "todo":
                         // add a new todo to the model
-                        todosController = todosController.addTodos(command.getCommandArgs());
+                        try {
+                            todosController = todosController.addTodos(command.getCommandArgs());
+
+                        } catch (DukeBlankTaskException e) {
+                            greeting.printErrorMessage(e);
+                        }
                         break;
 
                     case "deadline":
                         // amend a current todo's deadline
-                        todosController = todosController.addDeadline(command.getCommandArgs());
+                        try {
+                            todosController = todosController.addDeadline(command.getCommandArgs());
+
+                        } catch (Exception e) {
+                            greeting.printErrorMessage(e);
+                        }
                         break;
 
                     case "done":
                         // mark a todo as done
-                        todosController = todosController.markAsDone(command.getCommandArgs());
+                        try {
+                            todosController = todosController.markAsDone(command.getCommandArgs());
+
+                        } catch (DukeTaskIndexOutOfRangeException e) {
+                            greeting.printErrorMessage(e);
+                        }
                         break;
 
                     case "bye":
@@ -71,7 +94,12 @@ public class AppController {
 
                     default:
                         // print command printed in if not recognised
-                        System.out.println("Sorry, I'm not sure what this command is!");
+                        try {
+                            throw new DukeCommandNotFoundException(
+                                    "Sorry, the command you are trying to use is not found, please try again!");
+                        } catch (DukeCommandNotFoundException e) {
+                            greeting.printErrorMessage(e);
+                        }
                         break;
                 }
 
