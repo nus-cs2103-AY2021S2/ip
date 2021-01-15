@@ -83,10 +83,10 @@ public class Duke {
 
     //Prints out the items in the list.
     public static void showList(List<Task> list) {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________\n"
+                        + "Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf("\t%d.[%s] %s\n", i + 1, list.get(i).getStatusIcon(),
-                    list.get(i).description);
+            System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
         }
         System.out.println("\t____________________________________________________________\n");
     }
