@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.zip.DataFormatException;
 
 
 public class Duke {
@@ -55,9 +56,8 @@ public class Duke {
                     if (num > 0 && num <= list.size()) {
                         list.get(num - 1).markAsDone();
                         System.out.println("\t____________________________________________________________\n"
-                                        + "\tNice! I've marked this task as done:\n\t\t["
-                                        + list.get(num - 1).getStatusIcon() + "] "
-                                        + list.get(num - 1).description + "\n"
+                                        + "\tNice! I've marked this task as done:\n\t\t"
+                                        + list.get(num - 1).toString() + "\n"
                                         + "\t____________________________________________________________\n");
 
                     } else {
@@ -66,9 +66,32 @@ public class Duke {
                                     + "\t____________________________________________________________\n");
                     }
                 } else {
-                    list.add(new Task(input));
+                    Task temp;
+                    String description = "";
+                    String date = "";
+
+                    if (check[0].equals("todo")) {
+                        description = input.substring(5);
+                        temp = new TodoTask(description);
+                    } else if (check[0].equals("deadline")) {
+                        int index = input.lastIndexOf("/by");
+                        description = input.substring(9, index - 1);
+                        date = input.substring(index + 4);
+                        temp = new DeadlineTask(description, date);
+                    } else if (check[0].equals("event")) {
+                        int index = input.lastIndexOf("/at");
+                        description = input.substring(6, index - 1);
+                        date = input.substring(index + 4);
+                        temp = new EventTask(description, date);
+                    } else {
+                        description = input;
+                        temp = new Task(description);
+                    }
+                    list.add(temp);
                     System.out.println("\t____________________________________________________________\n"
-                            + "\tadded: " + input + "\n"
+                            + "\tGot it. I've added this task:\n"
+                            + "\t   " + temp.toString() + "\n"
+                            + "\tNow you have " + list.size() + " tasks in the list.\n"
                             + "\t____________________________________________________________\n");
 
                 }
@@ -84,7 +107,7 @@ public class Duke {
     //Prints out the items in the list.
     public static void showList(List<Task> list) {
         System.out.println("\t____________________________________________________________\n"
-                        + "Here are the tasks in your list:\n");
+                        + "\tHere are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
         }
