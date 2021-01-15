@@ -19,7 +19,7 @@ public class EventTask extends Task{
 
     @Override
     public void getStatusAndTask() {
-        System.out.println("      " + this.type + "[" + this.getStatusIcon() + "] " + this.description + this.getTiming());
+        System.out.println("      " + this.type + this.getStatus() + this.description + this.getTiming());
     }
 
     @Override

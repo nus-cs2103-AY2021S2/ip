@@ -13,16 +13,20 @@ public class Task {
         return (isDone ? "\u2718" : " ");
     }
 
+    public String getStatus() {
+        return "{" + getStatusIcon() + "]";
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
     public void getStatusAndTask() {
-        System.out.println("       [" + this.getStatusIcon() + "] " + this.description);
+        System.out.println("       " + getStatus() + " " + this.description);
     }
 
     @Override
     public String toString() {
-        return "       [" + this.getStatusIcon() + "] " + this.description;
+        return "       " + this.getStatus() + " " + this.description;
     }
 }

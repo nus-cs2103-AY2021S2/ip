@@ -40,40 +40,53 @@ public class TaskHandler {
     public void handleToDoTask(String action) {
         int index = action.indexOf(" ");
         String description = action.substring(index + 1);
+
         ToDoTask toDoTask = new ToDoTask(description);
+
         this.add(toDoTask);
         this.addPrint();
+
         System.out.println(toDoTask);
+
         this.countTasks();
     }
 
     public void handleEventTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
+
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String event =  action.substring(descriptionIndex + 1);
         EventTask eventTask= new EventTask(description, event);
+
         this.add(eventTask);
         addPrint();
+
         System.out.println(eventTask);
+
         this.countTasks();
     }
 
     public void handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
+
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
         String event =  action.substring(descriptionIndex + 1);
         EventTask eventTask= new EventTask(description, event);
+
         this.add(eventTask);
         addPrint();
+
         System.out.println(eventTask);
         this.countTasks();
     }
 
+
     public void handleDone(int index) {
         printMarked();
         Task markDone = this.inputList.get(index - 1);
+
         markDone.markAsDone();
         markDone.getStatusAndTask();
     }

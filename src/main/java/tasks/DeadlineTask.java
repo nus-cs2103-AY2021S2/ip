@@ -17,7 +17,7 @@ public class DeadlineTask extends Task{
 
     @Override
     public void getStatusAndTask() {
-        System.out.println("      " + this.type + "[" + this.getStatusIcon() + "] " + this.description + this.getDeadline());
+        System.out.println("      " + this.type + this.getStatus() + this.description + this.getDeadline());
     }
 
     @Override

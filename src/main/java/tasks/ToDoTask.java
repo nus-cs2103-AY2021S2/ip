@@ -10,7 +10,7 @@ public class ToDoTask extends Task{
 
     @Override
     public void getStatusAndTask() {
-        System.out.println("      " + this.type + "[" + this.getStatusIcon() + "] " + this.description);
+        System.out.println("      " + this.type + this.getStatus() + this.description);
     }
 
     @Override
