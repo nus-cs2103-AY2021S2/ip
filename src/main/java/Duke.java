@@ -6,9 +6,9 @@ public class Duke {
 
     public static void greeting() {
         partition();
-        String logo = "    __  _____ _  ___   ___   _ ___ \n" +
+        String logo = "    __  _____ _  ___   ___   _ ___\n" +
                 "    \\ \\/ /_ _| \\| \\ \\ / / | | | __|\n" +
-                "     >  < | || .` |\\ V /| |_| | _| \n" +
+                "     >  < | || .` |\\ V /| |_| | _|\n" +
                 "    /_/\\_\\___|_|\\_| |_|  \\___/|___|\n";
         System.out.println("    Hi there! Welcome to\n" + logo);
         System.out.println("    What can I do for you today?");
