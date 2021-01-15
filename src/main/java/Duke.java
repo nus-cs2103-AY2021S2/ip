@@ -30,7 +30,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(welcome);
-        String command = sc.next();
+        String command = sc.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
             System.out.print(horizontalLine);
             while (command.length() > 60) {
@@ -39,7 +39,7 @@ public class Duke {
             }
             System.out.print(command + "\n");
             System.out.println(horizontalLine);
-            command = sc.next();
+            command = sc.nextLine();
         }
         System.out.println(bye);
     }
