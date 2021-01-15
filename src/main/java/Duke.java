@@ -7,5 +7,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println(1234);
+        System.out.println(23456);
     }
 }
