@@ -27,6 +27,7 @@ public class Duke {
         ArrayList<Task> listOfTasks = new ArrayList<>(100);
 
         Scanner sc = new Scanner(System.in);
+        System.out.print(">>> ");
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -56,6 +57,7 @@ public class Duke {
                         break;
                 }
             }
+            System.out.print(">>> ");
             input = sc.nextLine();
         }
     }
