@@ -14,32 +14,56 @@ public class Duke {
                 "\nDuke's dead, so I'm here to take his job." +
                 "\nYou want to jot down some tasks?");
 
-        ArrayList<Task> listOfInputs = new ArrayList<>(100);
+        ArrayList<Task> listOfTasks = new ArrayList<>(100);
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        while(!input.equals("bye")){
-            if (input.equals("list")){
+        while (!input.equals("bye")) {
+            if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < listOfInputs.size(); i++) {
-                    System.out.println((i + 1)+ ". " + listOfInputs.get(i));
+                for (int i = 0; i < listOfTasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + listOfTasks.get(i));
                 }
             } else if (input.startsWith("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]);
-                try{
-                    listOfInputs.get(index - 1).setDone(true);
+                try {
+                    listOfTasks.get(index - 1).setDone(true);
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(listOfInputs.get(index - 1));
+                    System.out.println(listOfTasks.get(index - 1));
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("You have " + listOfInputs.size() + " tasks in your list. Try again.");
+                    System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
                 }
+            } else if (input.startsWith("todo")) {
+                String task = input.substring(input.indexOf(" ") + 1);
+                Task temp = new ToDo(task);
+                listOfTasks.add(temp);
+                printUpdate(temp, listOfTasks.size());
             } else {
-                listOfInputs.add(new Task(input));
-                System.out.println("Added: " + input);
+                try {
+                    String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+                    Task temp = null;
+                    if (input.startsWith("deadline ")) {
+                        String deadline = input.substring(input.indexOf("/by") + 4);
+                        temp = new Deadline(taskName, deadline);
+                    } else if (input.startsWith("event ")) {
+                        String eventTime = input.substring(input.indexOf("/at") + 4);
+                        temp = new Event(taskName, eventTime);
+                    }
+                    listOfTasks.add(temp);
+                    printUpdate(temp, listOfTasks.size());
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("The timing of the task is not included. Please check your input.");
+                }
             }
             input = sc.nextLine();
         }
         System.out.println("Bye Bye. Please give me 5-star rating, I still need this job." +
                 "\nMuch thanks.");
+    }
+
+    public static void printUpdate(Task t, int size) {
+        System.out.println("Got it. I have added this task:");
+        System.out.println(t);
+        System.out.println("Now you have " + size + " tasks in the list.");
     }
 }
