@@ -12,7 +12,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
         greet();
         addList(list);
@@ -42,16 +42,36 @@ public class Duke {
 
     //Adds the input in a list and echo it back to the user.
     //Prints the list if input is "list"
-    public static void addList(List<String> list) {
+    //Mark task as done if input is "done" with task number.
+    public static void addList(List<Task> list) {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 showList(list);
             } else {
-                list.add(input);
-                System.out.println("\t____________________________________________________________\n"
-                                + "\tadded: " + input + "\n"
-                                + "\t____________________________________________________________\n");
+                String[] check = input.split(" ");
+                if (check.length == 2 && check[0].equals("done") && isNumber(check[1])) {
+                    int num = Integer.parseInt(check[1]);
+                    if (num > 0 && num <= list.size()) {
+                        list.get(num - 1).markAsDone();
+                        System.out.println("\t____________________________________________________________\n"
+                                        + "\tNice! I've marked this task as done:\n\t\t["
+                                        + list.get(num - 1).getStatusIcon() + "] "
+                                        + list.get(num - 1).description + "\n"
+                                        + "\t____________________________________________________________\n");
+
+                    } else {
+                        System.out.println("\t____________________________________________________________\n"
+                                    + "\tTask not in list.\n"
+                                    + "\t____________________________________________________________\n");
+                    }
+                } else {
+                    list.add(new Task(input));
+                    System.out.println("\t____________________________________________________________\n"
+                            + "\tadded: " + input + "\n"
+                            + "\t____________________________________________________________\n");
+
+                }
             }
             input = sc.nextLine();
         }
@@ -62,11 +82,22 @@ public class Duke {
     }
 
     //Prints out the items in the list.
-    public static void showList(List<String> list) {
+    public static void showList(List<Task> list) {
         System.out.println("\t____________________________________________________________");
         for (int i = 0; i < list.size(); i++) {
-            System.out.printf("\t%d. %s\n", i + 1, list.get(i));
+            System.out.printf("\t%d.[%s] %s\n", i + 1, list.get(i).getStatusIcon(),
+                    list.get(i).description);
         }
         System.out.println("\t____________________________________________________________\n");
+    }
+
+    //Check if string is number
+    public static boolean isNumber(String s) {
+        try {
+            int i = Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
