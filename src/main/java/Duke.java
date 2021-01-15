@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
 
-    public static List<String> userInputItems = new ArrayList<>();
+    public static List<Task> tasks = new ArrayList<>();
 
     public static void greeting() {
         partition();
@@ -25,17 +25,18 @@ public class Duke {
         System.out.println("    ---------------------------");
     }
 
-    public static void addItem(String userInput) {
-        userInputItems.add(userInput);
+    public static void addTask(String userInput) {
+        tasks.add(new Task(userInput));
         partition();
         System.out.println("    added: " + userInput);
         partition();
     }
 
-    public static void listItems() {
+    public static void listTasks() {
         partition();
-        for (int i = 1; i <= userInputItems.size(); ++i) {
-            System.out.println("    " + i + ". " + userInputItems.get(i - 1));
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.size(); ++i) {
+            System.out.println("    " + i + "." + tasks.get(i - 1).toString());
         }
         partition();
     }
@@ -49,9 +50,9 @@ public class Duke {
             if (userInput.equals("bye")) {
                 break;
             } else if (userInput.equals("list")) {
-                listItems();
+                listTasks();
             } else {
-                addItem(userInput);
+                addTask(userInput);
             }
         }
 
