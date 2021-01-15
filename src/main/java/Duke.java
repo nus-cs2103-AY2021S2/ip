@@ -25,6 +25,7 @@ public class Duke {
 
         while (flagger) {
             String input = sc.nextLine();
+            String action = input.split(" ")[0];
             if (input.equals("bye")) {
                 System.out.println(line);
                 System.out.println("Bye. Hope to see you again soon!");
@@ -39,16 +40,52 @@ public class Duke {
                 }
                 System.out.println(line);
 
-            } else if (input.split(" ")[0].equals("done")) {
+            } else if (action.equals("done")) {
                 System.out.println(line);
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 System.out.println("Nice! I've marked this task as done:");
                 list.get(index).setDone();
-//                list.set(index, item);
                 System.out.println(list.get(index));
                 System.out.println(line);
 
 
+            } else if (action.equals("todo")) {
+                String[] temp = input.split(" ", 2);
+
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                Task t = new Todo(temp[1]);
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
+
+            } else if (action.equals("deadline")) {
+                String[] temp = input.split(" ", 2);
+                String data = temp[1];
+                String description = data.split(" /by ", 2)[0];
+                String by = data.split(" /by ", 2)[1];
+
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                Task t = new Deadline(description, by);
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
+            } else if (action.equals("event")) {
+                String[] temp = input.split(" ", 2);
+                String data = temp[1];
+                String description = data.split(" /at ", 2)[0];
+                String at = data.split(" /at ", 2)[1];
+
+                System.out.println(line);
+                System.out.println("Got it. I've added this task: ");
+                Task t = new Event(description, at);
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
             } else {
                 System.out.println(line);
                 list.add(new Task(input));
