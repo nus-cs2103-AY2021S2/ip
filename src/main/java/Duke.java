@@ -4,25 +4,15 @@ import java.util.Scanner;
 public class Duke {
     public static ArrayList<String> tasks = new ArrayList<>();
     public static String GREETING = "Hi, I am Sonia! How can I help you?";
+    public static String CLOSING = "Goodbye!";
 
-    public static void echo(String message) {
-        System.out.println("Sonia: " + message);
+    public static void terminate() {
+        echo(CLOSING);
+        System.exit(0);
     }
 
-    public static void parse(String command) {
-        if (command.equals("bye")) {
-            echo("Goodbye!");
-            System.exit(0);
-        } else if (command.equals("list")) {
-            echo("Here are your tasks!");
-            prettyPrint(tasks);
-        } else {
-            tasks.add(command);
-            echo("I added \"" + command + "\" to the task list!");
-        }
-    }
-
-    public static void prettyPrint(ArrayList<String> tasks) {
+    public static void showTasks() {
+        echo("Here are your tasks!");
         if (tasks.size() > 0) {
             for (int i = 1; i <= tasks.size(); i++) {
                 System.out.println("   " + i + ": " + tasks.get(i - 1));
@@ -32,17 +22,39 @@ public class Duke {
         }
     }
 
-    public static String prompt() {
+    public static void addTask(String task) {
+        tasks.add(task);
+        echo("I added \"" + task + "\" to the task list!");
+    }
+
+    public static void parse(String[] input) {
+        String command = input[0];
+
+        if (command.equals("bye")) {
+            terminate();
+        } else if (command.equals("list")) {
+            showTasks();
+        } else {
+            String task = String.join(" ", input);
+            addTask(task);
+        }
+    }
+
+    public static void echo(String message) {
+        System.out.println("Sonia: " + message);
+    }
+
+    public static String[] prompt() {
         System.out.print("You: ");
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return sc.nextLine().split(" ");
     }
 
     public static void main(String[] args) {
         echo(GREETING);
         while (true) {
-            String command = prompt();
-            parse(command);
+            String[] input = prompt();
+            parse(input);
         }
     }
 }
