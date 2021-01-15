@@ -21,7 +21,7 @@ public class Duke {
         boolean flagger = true;
 
         while (flagger) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println(line);
                 System.out.println("Bye. Hope to see you again soon!");
