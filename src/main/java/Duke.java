@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import task.ToDo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"

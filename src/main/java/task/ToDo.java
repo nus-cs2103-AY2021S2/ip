@@ -1,10 +1,12 @@
+package task;
+
 public class ToDo extends Task{
 
-    ToDo(String taskName) {
+    public ToDo(String taskName) {
         super(taskName);
     }
 
-    ToDo(String taskName, boolean done) {
+    public ToDo(String taskName, boolean done) {
         super(taskName, done);
     }
 
