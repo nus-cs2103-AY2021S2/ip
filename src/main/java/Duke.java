@@ -18,57 +18,89 @@ public class Duke {
         System.out.println("Hello! I'm Duke's friend, Ekud." +
                 "\nDuke's dead, so I'm here to take his job." +
                 "\nYou want to jot down some tasks?");
+        run();
+        System.out.println("Bye Bye. Please give me 5-star rating, I still need this job." +
+                "\nMuch thanks.");
+    }
 
+    public static void run() {
         ArrayList<Task> listOfTasks = new ArrayList<>(100);
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < listOfTasks.size(); i++) {
-                    System.out.println((i + 1) + ". " + listOfTasks.get(i));
-                }
-            } else if (input.startsWith("done")) {
-                int index = Integer.parseInt(input.split(" ")[1]);
-                try {
-                    listOfTasks.get(index - 1).setDone(true);
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(listOfTasks.get(index - 1));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
-                }
-            } else if (input.startsWith("todo")) {
-                String task = input.substring(input.indexOf(" ") + 1);
-                Task temp = new ToDo(task);
-                listOfTasks.add(temp);
-                printUpdate(temp, listOfTasks.size());
+                handleList(listOfTasks);
             } else {
-                try {
-                    String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
-                    Task temp = null;
-                    if (input.startsWith("deadline ")) {
-                        String deadline = input.substring(input.indexOf("/by") + 4);
-                        temp = new Deadline(taskName, deadline);
-                    } else if (input.startsWith("event ")) {
-                        String eventTime = input.substring(input.indexOf("/at") + 4);
-                        temp = new Event(taskName, eventTime);
-                    }
-                    listOfTasks.add(temp);
-                    printUpdate(temp, listOfTasks.size());
-                } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("The timing of the task is not included. Please check your input.");
+                // handle the commands with arguments
+                int spaceIndex = input.indexOf(" ");
+                int cutOffPoint = spaceIndex == -1 ? input.length() : spaceIndex;
+                String command = input.substring(0, cutOffPoint);
+
+                switch (command) {
+                    case "done":
+                        handleDone(input, listOfTasks);
+                        break;
+                    case "todo":
+                        handleTodo(input, listOfTasks);
+                        break;
+                    case "deadline":
+                    case "event":
+                        handleTasksWithTime(command, input, listOfTasks);
+                        break;
+                    default:
+                        System.out.println("I have no idea what that means, what do you want?");
+                        break;
                 }
             }
             input = sc.nextLine();
         }
-        System.out.println("Bye Bye. Please give me 5-star rating, I still need this job." +
-                "\nMuch thanks.");
     }
 
     public static void printUpdate(Task t, int size) {
         System.out.println("Got it. I have added this task:");
         System.out.println(t);
         System.out.println("Now you have " + size + " tasks in the list.");
+    }
+
+    public static void handleList(ArrayList<Task> listOfTasks){
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            System.out.println((i + 1) + ". " + listOfTasks.get(i));
+        }
+    }
+    public static void handleDone(String input, ArrayList<Task> listOfTasks) {
+        try {
+            int index = Integer.parseInt(input.split(" ")[1]);
+            listOfTasks.get(index - 1).setDone(true);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(listOfTasks.get(index - 1));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
+        }
+    }
+
+    public static void handleTodo(String input, ArrayList<Task> listOfTasks) {
+        String task = input.substring(input.indexOf(" ") + 1);
+        Task temp = new ToDo(task);
+        listOfTasks.add(temp);
+        printUpdate(temp, listOfTasks.size());
+    }
+
+    public static void handleTasksWithTime(String command, String input, ArrayList<Task> listOfTasks) {
+        try {
+            String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+            Task temp;
+            String timing = input.substring(input.indexOf("/") + 4);
+            if (command.startsWith("deadline")) {
+                temp = new Deadline(taskName, timing);
+            } else {
+                temp = new Event(taskName, timing);
+            }
+            listOfTasks.add(temp);
+            printUpdate(temp, listOfTasks.size());
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("The timing of the task is not included. Please check your input.");
+        }
     }
 }
