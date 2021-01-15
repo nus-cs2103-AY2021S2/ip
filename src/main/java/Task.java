@@ -1,10 +1,15 @@
+enum Status {
+    DONE,
+    NOT_DONE
+}
+
 abstract class Task {
     protected String name;
-    protected boolean done;
+    protected Status done;
 
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.done = Status.NOT_DONE;
     }
 
     public String getName() {
@@ -12,6 +17,6 @@ abstract class Task {
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.done = Status.DONE;
     }
 }

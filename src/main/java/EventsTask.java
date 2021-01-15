@@ -9,7 +9,7 @@ public class EventsTask extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (by: %s)",
-                done ? "X" : " ",
+                done == Status.DONE ? "X" : " ",
                 name,
                 duration);
     }

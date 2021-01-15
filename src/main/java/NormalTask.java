@@ -5,7 +5,7 @@ public class NormalTask extends Task {
 
     @Override
     public String toString() {
-        if (done) {
+        if (done == Status.DONE) {
             return "[ ][X] " + name;
         }
         return "[ ][ ] " + name;

@@ -5,7 +5,7 @@ public class ToDoTask extends Task{
 
     @Override
     public String toString() {
-        if (done) {
+        if (done == Status.DONE) {
             return "[T][X] " + name;
         }
         return "[T][ ] " + name;
