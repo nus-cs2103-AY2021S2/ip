@@ -9,7 +9,7 @@ public class Task {
 
     //Return tick or X symbols according to task completion status.
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "\u2718" : " ");
     }
 
     //Change the completion status of a task to done.
