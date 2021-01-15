@@ -1,6 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
+    protected static ArrayList<String> texts = new ArrayList<String>();
 
     /**
      *  Greeter for Duke
@@ -22,6 +24,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
         greet();
 
         boolean done = false;
@@ -31,8 +34,16 @@ public class Duke {
             if (command.equals("bye")) {
                 done = true;
                 System.out.println("Bye bye!");
+            } else if (command.equals("list")) {
+                for (int i = 0; i < texts.size(); i++) {
+                    Integer count = i + 1;
+                    System.out.println("     " +
+                            (count).toString() +
+                            ": " + texts.get(i));
+                }
             } else {
-                System.out.println("    " + command);
+                texts.add(command);
+                System.out.println("    added: " + command);
             }
             System.out.println("    ---------------------------------------");
         }
