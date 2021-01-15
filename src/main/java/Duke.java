@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static List<String> inputList = new ArrayList<>();
+    public static List<Task> inputList = new ArrayList<>();
 
 
     public static void printDivider() {
@@ -27,8 +27,18 @@ public class Duke {
 
     public static void printStored() {
         for (int i = 0; i < inputList.size(); i++) {
-            System.out.println("      " + (i + 1) + ". " + inputList.get(i));
+            Task task = inputList.get(i);
+            System.out.println("      " + (i + 1) + ".[" + task.getStatusIcon()
+                    +  "]" + task);
         }
+    }
+
+    public static void printMarked() {
+        System.out.println("     " + "Nice! I've marked this task as done:");
+    }
+
+    public static void printSingleTask(int number) {
+        inputList.get(number);
     }
 
     public static void main(String[] args) {
@@ -42,20 +52,30 @@ public class Duke {
 
         while (carryOn) {
             String action = sc.nextLine();
-
-            switch(action) {
+            String[] arr = action.split(" ");
+            Task task = new Task(action);
+            switch(arr[0]) {
                 case "list":
                     printDivider();
                     printStored();
+                    printDivider();
+                    break;
+                case "done":
+                    int number = Integer.valueOf(arr[1]);
+                    printDivider();
+                    printMarked();
+                    Task markDone = inputList.get(number - 1);
+                    markDone.markAsDone();
+                    markDone.getStatusAndTask();
                     printDivider();
                     break;
                 case "bye":
                     carryOn = false;
                     break;
                 default:
-                    inputList.add(action);
+                    inputList.add(task);
                     printDivider();
-                    printMessage("added: " + action);
+                    printMessage("added: " + task);
                     printDivider();
                     break;
             }
