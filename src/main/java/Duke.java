@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<String> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static String GREETING = "Hi, I am Sonia! How can I help you?";
     public static String CLOSING = "Goodbye!";
 
@@ -23,7 +23,8 @@ public class Duke {
     }
 
     public static void addTask(String task) {
-        tasks.add(task);
+        Task t = new Task(task);
+        tasks.add(t);
         echo("I added \"" + task + "\" to the task list!");
     }
 
