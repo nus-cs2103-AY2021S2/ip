@@ -1,2 +1,16 @@
-package PACKAGE_NAME;public class EventsTask {
+public class EventsTask extends Task {
+    protected String duration;
+
+    public EventsTask(String name, String duration) {
+        super(name);
+        this.duration = duration;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[E][%s] %s (by: %s)",
+                done ? "X" : " ",
+                name,
+                duration);
+    }
 }

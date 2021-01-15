@@ -26,18 +26,19 @@ public class Duke {
 
         boolean done = false;
         while (!done) {
-            String command = sc.next();
+            String command = sc.nextLine();
+            String[] params = command.split(" ", 2);
             System.out.println("    ---------------------------------------");
-            if (command.equals("bye")) {
+            if (params[0].equals("bye")) {
                 done = true;
                 System.out.println("Bye bye!");
-            } else if (command.equals("list")) {
+            } else if (params[0].equals("list")) {
                 tm.listTasks();
-            } else if (command.equals("done")) {
-                Integer index = Integer.parseInt(sc.next());
+            } else if (params[0].equals("done")) {
+                int index = Integer.parseInt(params[1]);
                 tm.markTaskAsDone(index);
             } else {
-                tm.addTask(command);
+                tm.addTask(params);
             }
             System.out.println("    ---------------------------------------");
         }

@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
     protected String name;
     protected boolean done;
 
@@ -7,14 +7,11 @@ public class Task {
         this.done = false;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void markAsDone() {
         this.done = true;
-    }
-    @Override
-    public String toString() {
-        if (done) {
-            return "[X] " + this.name;
-        }
-        return "[ ] " + this.name;
     }
 }

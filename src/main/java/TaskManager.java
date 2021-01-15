@@ -4,13 +4,26 @@ public class TaskManager {
     protected ArrayList<Task> tasks;
 
     public TaskManager() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
-    public void addTask(String taskName) {
-        Task newTask = new Task(taskName);
+    public void addTask(String[] command) {
+        String taskType = command[0];
+        Task newTask;
+        if (taskType.equals("todo")) {
+            newTask = new ToDoTask(command[1]);
+        } else if (taskType.equals("deadline")) {
+            String[] temp = command[1].split("/by ");
+            newTask = new DeadlineTask(temp[0], temp[1]);
+        } else if (taskType.equals("event")) {
+            String[] temp = command[1].split("/at ");
+            newTask = new EventsTask(temp[0], temp[1]);
+        } else {
+            newTask = new NormalTask(String.join(" ", command));
+        }
+
         tasks.add(newTask);
-        System.out.println("    added: " + taskName);
+        System.out.println("    added: " + newTask.getName());
     }
 
     public void markTaskAsDone(int x) {
@@ -23,10 +36,9 @@ public class TaskManager {
     public void listTasks() {
         System.out.println("    Listing all tasks: ");
         for (int i = 0; i < tasks.size(); i++) {
-            Integer num = i + 1;
+            int num = i + 1;
             System.out.println("     " +
-                    (num).toString() +
-                    ": " + tasks.get(i));
+                    num + ": " + tasks.get(i));
         }
     }
 
