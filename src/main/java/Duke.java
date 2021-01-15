@@ -22,6 +22,13 @@ public class Duke {
         }
     }
 
+    public static void completeTask(int id) {
+        Task t = tasks.get(id - 1);
+        t.markAsDone();
+        echo("I marked the following task as done!");
+        System.out.println("   " + t);
+    }
+
     public static void addTask(String task) {
         Task t = new Task(task);
         tasks.add(t);
@@ -35,6 +42,9 @@ public class Duke {
             terminate();
         } else if (command.equals("list")) {
             showTasks();
+        } else if (command.equals("done")) {
+            int id = Integer.parseInt(input[1]);
+            completeTask(id);
         } else {
             String task = String.join(" ", input);
             addTask(task);
