@@ -2,14 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String line = "------------------------------------------";
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
 
         //introduction
         System.out.println(line);
@@ -21,7 +15,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean flagger = true;
         ArrayList<Task> list = new ArrayList<Task>();
-
 
         while (flagger) {
             String input = sc.nextLine();
@@ -48,66 +41,98 @@ public class Duke {
                 System.out.println(list.get(index));
                 System.out.println(line);
 
-
             } else if (action.equals("todo")) {
                 String[] temp = input.split(" ", 2);
-                if (temp.length == 1) {
-                    System.out.println(line);
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                    System.out.println(line);
-                } else {
-                    System.out.println(line);
-                    System.out.println("Got it. I've added this task:");
+                try {
                     Task t = new Todo(temp[1]);
-                    list.add(t);
-                    System.out.println(t);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    System.out.println(line);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    new EmptyToDoException();
+                    return;
                 }
+                Task t = new Todo(temp[1]);
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
 
             } else if (action.equals("deadline")) {
                 String[] temp = input.split(" ", 2);
-                if (temp.length == 1) {
-                    System.out.println(line);
-                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    System.out.println(line);
-                } else {
-                    String data = temp[1];
-                    String description = data.split(" /by ", 2)[0];
-                    String by = data.split(" /by ", 2)[1];
-
-                    System.out.println(line);
-                    System.out.println("Got it. I've added this task:");
-                    Task t = new Deadline(description, by);
-                    list.add(t);
-                    System.out.println(t);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    System.out.println(line);
+                try {
+                    Task t = new Todo(temp[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    new EmptyDeadlineException();
+                    return;
                 }
+                String data = temp[1];
+                String description = data.split(" /by ", 2)[0];
+                String by = data.split(" /by ", 2)[1];
+
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                Task t = new Deadline(description, by);
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
+
             } else if (action.equals("event")) {
                 String[] temp = input.split(" ", 2);
-
-                if (temp.length == 1) {
-                    System.out.println(line);
-                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
-                    System.out.println(line);
-                } else {
-                    String data = temp[1];
-                    String description = data.split(" /at ", 2)[0];
-                    String at = data.split(" /at ", 2)[1];
-
-                    System.out.println(line);
-                    System.out.println("Got it. I've added this task:");
-                    Task t = new Event(description, at);
-                    list.add(t);
-                    System.out.println(t);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    System.out.println(line);
+                try {
+                    Task t = new Todo(temp[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    new EmptyEventException();
+                    return;
                 }
+                String data = temp[1];
+                String description = data.split(" /at ", 2)[0];
+                String at = data.split(" /at ", 2)[1];
+
+                System.out.println(line);
+                System.out.println("Got it. I've added this task:");
+                Task t = new Event(description, at);
+                list.add(t);
+                System.out.println(t);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
+
+            } else if (action.equals("delete")) {
+                String[] temp = input.split(" ", 2);
+                try {
+                    Task t = new Todo(temp[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    new EmptyDeleteException();
+                    return;
+                }
+
+                try {
+                    list.get(Integer.parseInt(temp[1]));
+                } catch (NumberFormatException e) {
+                    new AlphabetsInsteadOfNumberException();
+                    return;
+                }
+
+                try {
+                    list.get(Integer.parseInt(temp[1]));
+                } catch (IndexOutOfBoundsException e) {
+                    new EmptyListDeletionException();
+                    return;
+                }
+
+
+
+                System.out.println(line);
+                System.out.println("Noted. I've removed this task:");
+                int index = Integer.parseInt(temp[1]) - 1;
+                System.out.println(list.get(index));
+                list.remove(index);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println(line);
+
             } else {
-                System.out.println(line);
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println(line);
+                new InvalidInstructionException();
+                return;
             }
         }
     }
