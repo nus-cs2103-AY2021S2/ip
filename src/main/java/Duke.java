@@ -77,10 +77,16 @@ public class Duke {
             System.out.println(listOfTasks.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
+        } catch (NumberFormatException e) {
+            System.out.println("The input must be a positive integer!");
         }
     }
 
     public static void handleTodo(String input, ArrayList<Task> listOfTasks) {
+        if (!input.contains(" ")){
+            System.out.println("The description of a todo cannot be empty.");
+            return;
+        }
         String task = input.substring(input.indexOf(" ") + 1);
         Task temp = new ToDo(task);
         listOfTasks.add(temp);
