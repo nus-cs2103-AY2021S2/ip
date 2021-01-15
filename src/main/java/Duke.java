@@ -29,11 +29,20 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Task currTask;
+        JobList list = new JobList();
+
         System.out.println(welcome);
         String command = sc.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
             System.out.print(horizontalLine);
-            System.out.print(StringParser.newLiner(command, 60));
+            if (command.equalsIgnoreCase("list")) {
+                System.out.print(list.formatList());
+            } else {
+                currTask = new Task(command);
+                list.addJob(currTask);
+                System.out.print(StringParser.newLiner("Added: " + currTask.getDescription(), 60));
+            }
             System.out.println(horizontalLine);
             command = sc.nextLine();
         }
