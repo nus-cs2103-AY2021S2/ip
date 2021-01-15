@@ -29,12 +29,6 @@ public class Duke {
         System.out.println("   " + t);
     }
 
-    public static void addTask(String task) {
-        Task t = new Task(task);
-        tasks.add(t);
-        echo("I added \"" + task + "\" to the task list!");
-    }
-
     public static void parse(String[] input) {
         String command = input[0];
 
@@ -45,9 +39,6 @@ public class Duke {
         } else if (command.equals("done")) {
             int id = Integer.parseInt(input[1]);
             completeTask(id);
-        } else {
-            String task = String.join(" ", input);
-            addTask(task);
         }
     }
 
