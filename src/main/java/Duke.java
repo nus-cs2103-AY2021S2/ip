@@ -106,9 +106,13 @@ public class Duke {
 
     public static void listTasks() {
         partition();
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); ++i) {
-            System.out.println("    " + i + "." + tasks.get(i - 1).toString());
+        if (tasks.isEmpty()) {
+            System.out.println("    It seems like there is nothing in your list.");
+        } else {
+            System.out.println("    Here are the tasks in your list:");
+            for (int i = 1; i <= tasks.size(); ++i) {
+                System.out.println("    " + i + "." + tasks.get(i - 1).toString());
+            }
         }
         partition();
     }
