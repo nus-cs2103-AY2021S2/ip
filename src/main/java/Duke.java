@@ -51,47 +51,64 @@ public class Duke {
 
             } else if (action.equals("todo")) {
                 String[] temp = input.split(" ", 2);
-
-                System.out.println(line);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Todo(temp[1]);
-                list.add(t);
-                System.out.println(t);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                System.out.println(line);
+                if (temp.length == 1) {
+                    System.out.println(line);
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println(line);
+                } else {
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    Task t = new Todo(temp[1]);
+                    list.add(t);
+                    System.out.println(t);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println(line);
+                }
 
             } else if (action.equals("deadline")) {
                 String[] temp = input.split(" ", 2);
-                String data = temp[1];
-                String description = data.split(" /by ", 2)[0];
-                String by = data.split(" /by ", 2)[1];
+                if (temp.length == 1) {
+                    System.out.println(line);
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println(line);
+                } else {
+                    String data = temp[1];
+                    String description = data.split(" /by ", 2)[0];
+                    String by = data.split(" /by ", 2)[1];
 
-                System.out.println(line);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Deadline(description, by);
-                list.add(t);
-                System.out.println(t);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
-                System.out.println(line);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    Task t = new Deadline(description, by);
+                    list.add(t);
+                    System.out.println(t);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println(line);
+                }
             } else if (action.equals("event")) {
                 String[] temp = input.split(" ", 2);
-                String data = temp[1];
-                String description = data.split(" /at ", 2)[0];
-                String at = data.split(" /at ", 2)[1];
 
+                if (temp.length == 1) {
+                    System.out.println(line);
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                    System.out.println(line);
+                } else {
+                    String data = temp[1];
+                    String description = data.split(" /at ", 2)[0];
+                    String at = data.split(" /at ", 2)[1];
+
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task:");
+                    Task t = new Event(description, at);
+                    list.add(t);
+                    System.out.println(t);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println(line);
+                }
+            } else {
                 System.out.println(line);
-                System.out.println("Got it. I've added this task:");
-                Task t = new Event(description, at);
-                list.add(t);
-                System.out.println(t);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
-            } /*else {
-                System.out.println(line);
-                list.add(new Task(input));
-                System.out.println("added: " + input);
-                System.out.println(line);
-            } */
+            }
         }
     }
 }
