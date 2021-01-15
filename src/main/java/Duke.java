@@ -33,11 +33,7 @@ public class Duke {
         String command = sc.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
             System.out.print(horizontalLine);
-            while (command.length() > 60) {
-                System.out.print(command.substring(0, 59) + "\n");
-                command = command.substring(59);
-            }
-            System.out.print(command + "\n");
+            System.out.print(StringParser.newLiner(command, 60));
             System.out.println(horizontalLine);
             command = sc.nextLine();
         }
