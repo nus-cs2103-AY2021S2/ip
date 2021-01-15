@@ -24,6 +24,7 @@ public class Duke {
                 System.out.println("  ~~~");
                 break;
             } else if (input.equals("list")) {
+                System.out.println("  Tasks in list:");
                 for (int i = 0; i < tasks.size(); i++) {
                     System.out.println("  " + (i + 1) + "." + tasks.get(i));
                 }
@@ -32,10 +33,32 @@ public class Duke {
                 tasks.get(i - 1).markAsDone();
                 System.out.println("  Successfully marked as done:");
                 System.out.println("  " + tasks.get(i - 1));
-            } else {
-                Task inputTask = new Task(input);
-                tasks.add(inputTask);
-                System.out.println("  added: " + input);
+            } else  {
+                Task task;
+                switch (input.split(" ")[0]) {
+                    case "todo":
+                        task = new Todo(input.substring(5));
+                        break;
+                    case "deadline": {
+                        String[] inputs = input.substring(9).split("/by");
+                        String name = inputs[0] + "(by:" + inputs[1] + ")";
+                        task = new Deadline(name);
+                        break;
+                    }
+                    case "event": {
+                        String[] inputs = input.substring(6).split("/at");
+                        String name = inputs[0] + "(at:" + inputs[1] + ")";
+                        task = new Event(name);
+                        break;
+                    }
+                    default:
+                        task = new Task(input);
+                        break;
+                }
+                tasks.add(task);
+                System.out.println("  Task added:");
+                System.out.println("    " + task);
+                System.out.println("  Total tasks in list: " + tasks.size());
             }
             System.out.println("  ~~~");
         }
