@@ -67,8 +67,12 @@ public class Duke {
         partition();
         System.out.println("    Got it. I've added this task");
         System.out.println("        " + task.toString());
-        System.out.println("    Now you have " + tasks.size() + " in the list.");
+        displayTaskCount();
         partition();
+    }
+
+    public static void displayTaskCount() {
+        System.out.println("    Now you have " + tasks.size() + " in the list.");
     }
 
     public static void markTaskAsDone(int taskIndex) {
@@ -81,6 +85,16 @@ public class Duke {
             System.out.println("    Congratulations! You have completed this task:");
         }
         System.out.println("        " + task.toString());
+        partition();
+    }
+
+    public static void deleteTask(int taskIndex) {
+        Task task = tasks.get(taskIndex - 1);
+        tasks.remove(taskIndex - 1);
+        partition();
+        System.out.println("    Noted. This task has been removed:");
+        System.out.println("        " + task.toString());
+        displayTaskCount();
         partition();
     }
 
@@ -106,6 +120,13 @@ public class Duke {
                     }
                     int taskIndex = Integer.parseInt(userInputArr[1]);
                     markTaskAsDone(taskIndex);
+                    break;
+                case "delete":
+                    if (userInputArr.length != 2) {
+                        throw new DukeException("I'm not sure which task you want to delete!");
+                    }
+                    taskIndex = Integer.parseInt(userInputArr[1]);
+                    deleteTask(taskIndex);
                     break;
                 case "todo":
                     if (userInputArr.length != 2) {
