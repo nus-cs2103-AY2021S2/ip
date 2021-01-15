@@ -11,10 +11,19 @@ public class JobList {
         this.list.add(t);
     }
 
+    Task getJob(int index) {
+        return this.list.get(index);
+    }
+
+    void replaceJob(int index, Task newTask) {
+        this.list.remove(index);
+        this.list.add(index, newTask);
+    }
+
     String formatList() {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
-            resultStr.append(StringParser.newLiner((i + 1) + ". " + list.get(i).getDescription(), 60));
+            resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).getDescription(), 60));
         }
         return resultStr.toString();
     }
