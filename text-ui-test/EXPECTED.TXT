@@ -5,3 +5,36 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Please input a command.
+  ~~~
+  Task added:
+    [T][ ] borrow book
+  Total tasks in list: 1
+  ~~~
+  ~~~
+  Tasks in list:
+  1.[T][ ] borrow book
+  ~~~
+  ~~~
+  Task added:
+    [D][ ] return book (by: Sunday)
+  Total tasks in list: 2
+  ~~~
+  ~~~
+  Task added:
+    [E][ ] project meeting (at: Mon 2-4pm)
+  Total tasks in list: 3
+  ~~~
+  ~~~
+  Successfully marked as done:
+  [D][X] return book (by: Sunday)
+  ~~~
+  ~~~
+  Tasks in list:
+  1.[T][ ] borrow book
+  2.[D][X] return book (by: Sunday)
+  3.[E][ ] project meeting (at: Mon 2-4pm)
+  ~~~
+  ~~~
+  See you next time.
+  ~~~

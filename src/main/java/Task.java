@@ -16,7 +16,7 @@ public class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[\u2718] " + this.name;
+            return "[X] " + this.name;
         } else {
             return "[ ] " + this.name;
         }
