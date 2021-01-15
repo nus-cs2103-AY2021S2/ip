@@ -75,7 +75,10 @@ public class Duke {
         System.out.println("    Now you have " + tasks.size() + " in the list.");
     }
 
-    public static void markTaskAsDone(int taskIndex) {
+    public static void markTaskAsDone(int taskIndex) throws DukeException {
+        if (taskIndex < 1 || taskIndex > tasks.size()) {
+            throw new DukeException("I cannot find the task you are referring to.");
+        }
         Task task = tasks.get(taskIndex - 1);
         partition();
         if (task.isDone()) {
@@ -88,7 +91,10 @@ public class Duke {
         partition();
     }
 
-    public static void deleteTask(int taskIndex) {
+    public static void deleteTask(int taskIndex) throws DukeException {
+        if (taskIndex < 1 || taskIndex > tasks.size()) {
+            throw new DukeException("I cannot find the task you are referring to.");
+        }
         Task task = tasks.get(taskIndex - 1);
         tasks.remove(taskIndex - 1);
         partition();
