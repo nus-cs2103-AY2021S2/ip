@@ -21,15 +21,14 @@ public class Duke {
         partition();
     }
 
-    public static void partition() {
-        System.out.println("    ---------------------------");
+    public static void printErrorMessage(String message) {
+        partition();
+        System.out.println("    ☹ OOPS!!! " + message);
+        partition();
     }
 
-    public static void addTask(String userInput) {
-        tasks.add(new Task(userInput));
-        partition();
-        System.out.println("    added: " + userInput);
-        partition();
+    public static void partition() {
+        System.out.println("    ---------------------------");
     }
 
     public static void addTodo(String userInput) {
@@ -38,18 +37,26 @@ public class Duke {
         addTaskReport(todo);
     }
 
-    public static void addDeadline(String userInput) {
+    public static void addDeadline(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" /by ", 2);
-        Deadline deadline = new Deadline(userInputArr[0], userInputArr[1]);
-        tasks.add(deadline);
-        addTaskReport(deadline);
+        if (userInputArr.length != 2) {
+            throw new DukeException("You can't add a deadline without a deadline!");
+        } else {
+            Deadline deadline = new Deadline(userInputArr[0], userInputArr[1]);
+            tasks.add(deadline);
+            addTaskReport(deadline);
+        }
     }
 
-    public static void addEvent(String userInput) {
+    public static void addEvent(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" /at ", 2);
-        Event event = new Event(userInputArr[0], userInputArr[1]);
-        tasks.add(event);
-        addTaskReport(event);
+        if (userInputArr.length != 2) {
+            throw new DukeException("You can't add an event without an event time.");
+        } else {
+            Event event = new Event(userInputArr[0], userInputArr[1]);
+            tasks.add(event);
+            addTaskReport(event);
+        }
     }
 
     public static void addTaskReport(Task task) {
@@ -82,36 +89,65 @@ public class Duke {
         partition();
     }
 
+    public static void handleUserInput(String userInput) throws DukeException {
+        String[] userInputArr = userInput.split(" ", 2);
+
+        switch (userInputArr[0]) {
+            case "done":
+                if (userInputArr.length != 2) {
+                    throw new DukeException("I'm not sure which task you want to mark as done!");
+                }
+                int taskIndex = Integer.parseInt(userInputArr[1]);
+                markTaskAsDone(taskIndex);
+                break;
+            case "todo":
+                if (userInputArr.length != 2) {
+                    throw new DukeException("The description of a todo cannot be empty!");
+                }
+                addTodo(userInputArr[1]);
+                break;
+            case "deadline":
+                if (userInputArr.length != 2) {
+                    throw new DukeException("The description of a deadline cannot be empty!");
+                }
+                try {
+                    addDeadline(userInputArr[1]);
+                } catch (DukeException e) {
+                    throw e;
+                }
+                break;
+            case "event":
+                if (userInputArr.length != 2) {
+                    throw new DukeException("The description of an event cannot be empty!");
+                }
+                try {
+                    addEvent(userInputArr[1]);
+                } catch (DukeException e) {
+                    throw e;
+                }
+                break;
+            default:
+                throw new DukeException("Sorry, I dont understand what that means :-(");
+        }
+    }
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         greeting();
 
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
-            String[] userInputArr = userInput.split(" ", 2);
-
             if (userInput.equals("bye")) {
                 break;
             } else if (userInput.equals("list")) {
                 listTasks();
                 continue;
             }
-            switch (userInputArr[0]) {
-                case "done":
-                    int taskIndex = Integer.parseInt(userInputArr[1]);
-                    markTaskAsDone(taskIndex);
-                    break;
-                case "todo":
-                    addTodo(userInputArr[1]);
-                    break;
-                case "deadline":
-                    addDeadline(userInputArr[1]);
-                    break;
-                case "event":
-                    addEvent(userInputArr[1]);
-                    break;
-                default:
-                    addTask(userInput);
+            try {
+                handleUserInput(userInput);
+            } catch (DukeException e) {
+                printErrorMessage(e.getMessage());
             }
         }
 
