@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- *  ToDo Task.
+ *  ToDo tasks.Task.
  *
  *  @author Yap Jing Kang
  */
@@ -7,9 +9,9 @@
 public class ToDoTask extends Task {
 
     /**
-     *  ToDoTask constructor.
+     *  tasks.ToDoTask constructor.
      *
-     *  @param name Name of ToDoTask.
+     *  @param name Name of tasks.ToDoTask.
      */
     public ToDoTask(String name) {
         super(name);

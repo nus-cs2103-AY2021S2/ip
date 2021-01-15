@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- *  Event Task.
+ *  Event tasks.Task.
  *
  *  @author Yap Jing Kang
  */
@@ -9,9 +11,9 @@ public class EventsTask extends Task {
     protected String duration;
 
     /**
-     *  EventsTask constructor.
+     *  tasks.EventsTask constructor.
      *
-     *  @param name Name of EventsTask.
+     *  @param name Name of tasks.EventsTask.
      *  @param duration Specified duration of task.
      */
     public EventsTask(String name, String duration) {

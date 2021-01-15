@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- *  Deadline Task.
+ *  Deadline tasks.Task.
  *
  *  @author Yap Jing Kang
  */
@@ -9,9 +11,9 @@ public class DeadlineTask extends Task {
     protected String deadline;
 
     /**
-     *  DeadlineTask constructor.
+     *  tasks.DeadlineTask constructor.
      *
-     *  @param name Name of DeadlineTask.
+     *  @param name Name of tasks.DeadlineTask.
      *  @param deadline Specified deadline of task.
      */
     public DeadlineTask(String name, String deadline) {

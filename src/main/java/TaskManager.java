@@ -1,7 +1,11 @@
 import exceptions.DukeException;
-import exceptions.InsufficientParametersException;
-import exceptions.MissingFlagException;
-import exceptions.UnknownCommandException;
+import exceptions.DukeInsufficientParametersException;
+import exceptions.DukeMissingFlagException;
+import exceptions.DukeUnknownCommandException;
+import tasks.DeadlineTask;
+import tasks.EventsTask;
+import tasks.Task;
+import tasks.ToDoTask;
 
 import java.util.ArrayList;
 
@@ -52,30 +56,32 @@ public class TaskManager {
             Task newTask;
 
             if (!verifyCommand(taskType)) {
-                throw new UnknownCommandException();
+                throw new DukeUnknownCommandException();
             }
 
             if (command.length < 2) {
-                throw new InsufficientParametersException(taskType);
+                throw new DukeInsufficientParametersException(taskType);
             } else if (taskType.equals("todo")) {
                 newTask = new ToDoTask(command[1]);
             } else if (taskType.equals("deadline")) {
                 String[] temp = command[1].split("/by ");
                 if (temp.length < 2) {
-                    throw new MissingFlagException(taskType, "/by");
+                    throw new DukeMissingFlagException(taskType, "/by");
                 }
                 newTask = new DeadlineTask(temp[0], temp[1]);
             } else if (taskType.equals("event")) {
                 String[] temp = command[1].split("/at ");
                 if (temp.length < 2) {
-                    throw new MissingFlagException(taskType, "/at");
+                    throw new DukeMissingFlagException(taskType, "/at");
                 }
                 newTask = new EventsTask(temp[0], temp[1]);
             } else {
-                throw new UnknownCommandException();
+                throw new DukeUnknownCommandException();
             }
             tasks.add(newTask);
             System.out.println("    added: " + newTask.getName());
+            System.out.printf("    Now you have %d task(s)%n",
+                    tasks.size());
         } catch (DukeException e) {
             System.out.println(e.toString());
         }
@@ -84,16 +90,39 @@ public class TaskManager {
     /**
      *  Method to mark specified task done.
      *
-     *	@param x Task index.
+     *	@param x tasks.Task index.
      *
      */
     public void markTaskAsDone(int x) {
-        Task t = tasks.get(x - 1);
-        if (t.markAsDone()) {
-            System.out.println("    Marked as Done: ");
-            System.out.println("      " + t.toString());
-        } else {
-            System.out.println("    Task is already done.");
+        try {
+            Task t = tasks.get(x - 1);
+            if (t.markAsDone()) {
+                System.out.println("    Marked as Done: ");
+                System.out.println("      " + t.toString());
+            } else {
+                System.out.println("    tasks. Task is already done.");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Index provided out of range");
+        }
+    }
+
+    /**
+     *  Method to remove specified.
+     *
+     *	@param x tasks.Task index.
+     *
+     */
+    public void deleteTask(int x) {
+        try {
+            Task t = tasks.get(x - 1);
+            tasks.remove(x - 1);
+            System.out.println("    The following task has been removed: ");
+            System.out.println("       " + t.toString());
+            System.out.printf("    Now you have %d task(s)%n",
+                    tasks.size());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("    Index provided out of range");
         }
     }
 

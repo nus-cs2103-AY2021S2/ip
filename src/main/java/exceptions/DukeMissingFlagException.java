@@ -6,7 +6,7 @@ package exceptions;
  *
  *  @author Yap Jing Kang
  */
-public class MissingFlagException extends DukeException {
+public class DukeMissingFlagException extends DukeException {
     protected String command;
     protected String flag;
 
@@ -16,13 +16,13 @@ public class MissingFlagException extends DukeException {
      *  @param cmd Name of command in question.
      *  @param flag Missing flag.
      */
-    public MissingFlagException(String cmd, String flag) {
+    public DukeMissingFlagException(String cmd, String flag) {
         this.command = cmd;
         this.flag = flag;
     }
 
     @Override
     public String toString() {
-        return String.format("%s expects '%s' flag; None found", command, flag);
+        return String.format("    %s expects '%s' flag; None found", command, flag);
     }
 }

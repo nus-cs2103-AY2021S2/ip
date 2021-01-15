@@ -6,15 +6,15 @@ package exceptions;
  *
  *  @author Yap Jing Kang
  */
-public class UnknownCommandException extends DukeException {
+public class DukeUnknownCommandException extends DukeException {
 
     /**
      *  InsufficientParametersException constructor.
      */
-    public UnknownCommandException() {}
+    public DukeUnknownCommandException() {}
 
     @Override
     public String toString() {
-        return "I do not know what you are trying to do here..";
+        return "    I do not know what you are trying to do here..";
     }
 }

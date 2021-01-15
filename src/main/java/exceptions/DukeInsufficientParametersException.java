@@ -6,7 +6,7 @@ package exceptions;
  *
  *  @author Yap Jing Kang
  */
-public class InsufficientParametersException extends DukeException {
+public class DukeInsufficientParametersException extends DukeException {
     protected String command;
 
     /**
@@ -14,12 +14,12 @@ public class InsufficientParametersException extends DukeException {
      *
      *  @param cmd Name of command in question.
      */
-    public InsufficientParametersException(String cmd) {
+    public DukeInsufficientParametersException(String cmd) {
         this.command = cmd;
     }
 
     @Override
     public String toString() {
-        return String.format("Description of %s cannot be empty", command);
+        return String.format("    Description of %s cannot be empty", command);
     }
 }

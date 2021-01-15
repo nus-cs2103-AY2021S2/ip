@@ -1,22 +1,24 @@
+package tasks;
+
 enum Status {
     DONE,
     NOT_DONE
 }
 
 /**
- *  Generic Task for inheritance.
+ *  Generic tasks.Task for inheritance.
  *
  *  @author Yap Jing Kang
  */
 
-abstract class Task {
+public abstract class Task {
     protected String name;
     protected Status done;
 
     /**
-     *  Generic Task constructor.
+     *  Generic tasks.Task constructor.
      *
-     *  @param name Name of Task.
+     *  @param name Name of tasks.Task.
      */
     public Task(String name) {
         this.name = name;
@@ -24,19 +26,19 @@ abstract class Task {
     }
 
     /**
-     *  Task name getter.
+     *  tasks.Task name getter.
      *
-     *  @return Name of Task.
+     *  @return Name of tasks.Task.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     *  Marks Task to be completed.
+     *  Marks tasks.Task to be completed.
      *  Returns true if successful, false if unsuccessful.
      *
-     *  @return Name of Task.
+     *  @return Name of tasks.Task.
      */
     public boolean markAsDone() {
         if (this.done == Status.DONE) {

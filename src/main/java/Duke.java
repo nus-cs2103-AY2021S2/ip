@@ -36,12 +36,14 @@ public class Duke {
             } else if (params[0].equals("list")) {
                 tm.listTasks();
             } else if (params[0].equals("done")) {
-                int index = Integer.parseInt(params[1]);
-                tm.markTaskAsDone(index);
+                tm.markTaskAsDone(Integer.parseInt(params[1]));
+            } else if (params[0].equals("delete")) {
+                tm.deleteTask(Integer.parseInt(params[1]));
             } else {
                 tm.addTask(params);
             }
             System.out.println("    ---------------------------------------");
         }
+        sc.close();
     }
 }
