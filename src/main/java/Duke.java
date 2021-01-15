@@ -75,33 +75,35 @@ public class Duke {
         System.out.println("    Now you have " + tasks.size() + " in the list.");
     }
 
-    public static void markTaskAsDone(int taskIndex) throws DukeException {
-        if (taskIndex < 1 || taskIndex > tasks.size()) {
-            throw new DukeException("I cannot find the task you are referring to.");
+    public static void markTaskAsDone(int taskIndex) {
+        try {
+            Task task = tasks.get(taskIndex - 1);
+            partition();
+            if (task.isDone()) {
+                System.out.println("    You have already completed this task:");
+            } else {
+                task.markAsDone();
+                System.out.println("    Congratulations! You have completed this task:");
+            }
+            System.out.println("        " + task.toString());
+            partition();
+        } catch (IndexOutOfBoundsException e) {
+            printErrorMessage("I cannot find the task you are referring to.");
         }
-        Task task = tasks.get(taskIndex - 1);
-        partition();
-        if (task.isDone()) {
-            System.out.println("    You have already completed this task:");
-        } else {
-            task.markAsDone();
-            System.out.println("    Congratulations! You have completed this task:");
-        }
-        System.out.println("        " + task.toString());
-        partition();
     }
 
-    public static void deleteTask(int taskIndex) throws DukeException {
-        if (taskIndex < 1 || taskIndex > tasks.size()) {
-            throw new DukeException("I cannot find the task you are referring to.");
+    public static void deleteTask(int taskIndex) {
+        try {
+            Task task = tasks.get(taskIndex - 1);
+            tasks.remove(taskIndex - 1);
+            partition();
+            System.out.println("    Noted. This task has been removed:");
+            System.out.println("        " + task.toString());
+            displayTaskCount();
+            partition();
+        } catch (IndexOutOfBoundsException e) {
+            printErrorMessage("I cannot find the task you are referring to.");
         }
-        Task task = tasks.get(taskIndex - 1);
-        tasks.remove(taskIndex - 1);
-        partition();
-        System.out.println("    Noted. This task has been removed:");
-        System.out.println("        " + task.toString());
-        displayTaskCount();
-        partition();
     }
 
     public static void listTasks() {
@@ -119,7 +121,7 @@ public class Duke {
 
     // Handling user inputs
 
-    public static void handleUserInput(String userInput) throws DukeException {
+    public static void handleUserInput(String userInput) {
         String[] userInputArr = userInput.split(" ", 2);
 
         try {
@@ -159,8 +161,10 @@ public class Duke {
                 default:
                     throw new DukeException("Sorry, I dont understand what that means :-(");
             }
+        } catch (NumberFormatException e) {
+            printErrorMessage("I can only find a task with its index number.");
         } catch (DukeException e) {
-            throw e;
+            printErrorMessage(e.getMessage());
         }
     }
 
@@ -176,11 +180,7 @@ public class Duke {
                 listTasks();
                 continue;
             }
-            try {
-                handleUserInput(userInput);
-            } catch (DukeException e) {
-                printErrorMessage(e.getMessage());
-            }
+            handleUserInput(userInput);
         }
 
         farewell();
