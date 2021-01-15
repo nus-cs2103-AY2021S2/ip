@@ -1,4 +1,16 @@
-public class ToDoTask extends Task{
+/**
+ *  ToDo Task.
+ *
+ *  @author Yap Jing Kang
+ */
+
+public class ToDoTask extends Task {
+
+    /**
+     *  ToDoTask constructor.
+     *
+     *  @param name Name of ToDoTask.
+     */
     public ToDoTask(String name) {
         super(name);
     }

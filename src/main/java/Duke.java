@@ -29,6 +29,7 @@ public class Duke {
             String command = sc.nextLine();
             String[] params = command.split(" ", 2);
             System.out.println("    ---------------------------------------");
+
             if (params[0].equals("bye")) {
                 done = true;
                 System.out.println("Bye bye!");
