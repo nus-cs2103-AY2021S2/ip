@@ -9,7 +9,7 @@
     ___________________________________________
     ___________________________________________
      Got it. I've added this task: 
-       [E][ ] return book (by: Sunday)
+       [D][ ] return book (by: Sunday)
      Now you have 2 tasks in the list.
     ___________________________________________
     ___________________________________________
@@ -20,7 +20,7 @@
     ___________________________________________
      Here are the tasks in your list:
       1.[T][ ] borrow book
-      2.[E][ ] return book (by: Sunday)
+      2.[D][ ] return book (by: Sunday)
       3.[E][ ] project meeting (at: Mon 2-4pm)
     ___________________________________________
     ___________________________________________

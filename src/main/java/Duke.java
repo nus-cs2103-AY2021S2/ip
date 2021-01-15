@@ -70,6 +70,12 @@ public class Duke {
                     case "bye":
                         carryOn = false;
                         break;
+                    case "delete":
+                        int index = Integer.valueOf(arr[1]);
+                        printDivider();
+                        handler.handleDelete(index);
+                        printDivider();
+                        break;
                     default:
                         throw new UnknownInputException();
                 }

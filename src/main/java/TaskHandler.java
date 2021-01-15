@@ -37,6 +37,10 @@ public class TaskHandler {
         System.out.println("     " + "Nice! I've marked this task as done:");
     }
 
+    public static void printRemoved() {
+        System.out.println("     Noted. I've removed this task: ");
+    }
+
     public void handleToDoTask(String action) {
         int index = action.indexOf(" ");
         String description = action.substring(index + 1);
@@ -72,13 +76,13 @@ public class TaskHandler {
         int descriptionIndex = action.indexOf("/");
 
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
-        String event =  action.substring(descriptionIndex + 1);
-        EventTask eventTask= new EventTask(description, event);
+        String deadline =  action.substring(descriptionIndex + 1);
+        DeadlineTask deadlineTask= new DeadlineTask(description, deadline);
 
-        this.add(eventTask);
+        this.add(deadlineTask);
         addPrint();
 
-        System.out.println(eventTask);
+        System.out.println(deadlineTask);
         this.countTasks();
     }
 
@@ -89,6 +93,14 @@ public class TaskHandler {
 
         markDone.markAsDone();
         markDone.getStatusAndTask();
+    }
+
+    public void handleDelete(int index) {
+        printMarked();
+        Task task = this.inputList.remove(index - 1);
+        System.out.println(task);
+
+        this.countTasks();
     }
 
     public void countTasks() {

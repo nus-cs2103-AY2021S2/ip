@@ -14,7 +14,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return "{" + getStatusIcon() + "]";
+        return "[" + getStatusIcon() + "]";
     }
 
     public void markAsDone() {
