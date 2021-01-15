@@ -34,10 +34,23 @@ public class Duke {
 
     public static void listTasks() {
         partition();
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("    Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); ++i) {
             System.out.println("    " + i + "." + tasks.get(i - 1).toString());
         }
+        partition();
+    }
+
+    public static void markTaskAsDone(int taskIndex) {
+        Task task = tasks.get(taskIndex - 1);
+        partition();
+        if (task.isDone()) {
+            System.out.println("    You have already completed this task:");
+        } else {
+            task.markAsDone();
+            System.out.println("    Congratulations! You have completed this task:");
+        }
+        System.out.println("        " + task.toString());
         partition();
     }
 
@@ -47,10 +60,15 @@ public class Duke {
 
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
+            String[] userInputArr = userInput.split(" ");
+
             if (userInput.equals("bye")) {
                 break;
             } else if (userInput.equals("list")) {
                 listTasks();
+            } else if (userInputArr[0].equals("done")) {
+                int taskIndex = Integer.parseInt(userInputArr[1]);
+                markTaskAsDone(taskIndex);
             } else {
                 addTask(userInput);
             }
