@@ -4,12 +4,12 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         String line = "------------------------------------------";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
 
         //introduction
         System.out.println(line);
@@ -53,7 +53,7 @@ public class Duke {
                 String[] temp = input.split(" ", 2);
 
                 System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 Task t = new Todo(temp[1]);
                 list.add(t);
                 System.out.println(t);
@@ -67,7 +67,7 @@ public class Duke {
                 String by = data.split(" /by ", 2)[1];
 
                 System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 Task t = new Deadline(description, by);
                 list.add(t);
                 System.out.println(t);
@@ -80,18 +80,18 @@ public class Duke {
                 String at = data.split(" /at ", 2)[1];
 
                 System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 Task t = new Event(description, at);
                 list.add(t);
                 System.out.println(t);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
                 System.out.println(line);
-            } else {
+            } /*else {
                 System.out.println(line);
                 list.add(new Task(input));
                 System.out.println("added: " + input);
                 System.out.println(line);
-            }
+            } */
         }
     }
 }
