@@ -42,7 +42,7 @@ public class Duke {
 
     //Adds the input in a list and echo it back to the user.
     //Prints the list if input is "list"
-    public static void addList(List list) {
+    public static void addList(List<String> list) {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -62,7 +62,7 @@ public class Duke {
     }
 
     //Prints out the items in the list.
-    public static void showList(List list) {
+    public static void showList(List<String> list) {
         System.out.println("\t____________________________________________________________");
         for (int i = 0; i < list.size(); i++) {
             System.out.printf("\t%d. %s\n", i + 1, list.get(i));
