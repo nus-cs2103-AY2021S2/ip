@@ -99,6 +99,7 @@ public class Duke {
 
             } else if (action.equals("delete")) {
                 String[] temp = input.split(" ", 2);
+
                 try {
                     Task t = new Todo(temp[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -119,8 +120,6 @@ public class Duke {
                     new EmptyListDeletionException();
                     return;
                 }
-
-
 
                 System.out.println(line);
                 System.out.println("Noted. I've removed this task:");
