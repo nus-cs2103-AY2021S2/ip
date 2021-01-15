@@ -4,6 +4,12 @@ public class Duke {
 
     public static List<Task> tasks = new ArrayList<>();
 
+    // Formatting display content
+
+    public static void partition() {
+        System.out.println("    ---------------------------");
+    }
+
     public static void greeting() {
         partition();
         String logo = "    __  _____ _  ___   ___   _ ___\n" +
@@ -27,9 +33,7 @@ public class Duke {
         partition();
     }
 
-    public static void partition() {
-        System.out.println("    ---------------------------");
-    }
+    // Adding, Editing & Displaying Tasks
 
     public static void addTodo(String userInput) {
         Todo todo = new Todo(userInput);
@@ -67,15 +71,6 @@ public class Duke {
         partition();
     }
 
-    public static void listTasks() {
-        partition();
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i <= tasks.size(); ++i) {
-            System.out.println("    " + i + "." + tasks.get(i - 1).toString());
-        }
-        partition();
-    }
-
     public static void markTaskAsDone(int taskIndex) {
         Task task = tasks.get(taskIndex - 1);
         partition();
@@ -89,50 +84,56 @@ public class Duke {
         partition();
     }
 
+    public static void listTasks() {
+        partition();
+        System.out.println("    Here are the tasks in your list:");
+        for (int i = 1; i <= tasks.size(); ++i) {
+            System.out.println("    " + i + "." + tasks.get(i - 1).toString());
+        }
+        partition();
+    }
+
+    // Handling user inputs
+
     public static void handleUserInput(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" ", 2);
 
-        switch (userInputArr[0]) {
-            case "done":
-                if (userInputArr.length != 2) {
-                    throw new DukeException("I'm not sure which task you want to mark as done!");
-                }
-                int taskIndex = Integer.parseInt(userInputArr[1]);
-                markTaskAsDone(taskIndex);
-                break;
-            case "todo":
-                if (userInputArr.length != 2) {
-                    throw new DukeException("The description of a todo cannot be empty!");
-                }
-                addTodo(userInputArr[1]);
-                break;
-            case "deadline":
-                if (userInputArr.length != 2) {
-                    throw new DukeException("The description of a deadline cannot be empty!");
-                }
-                try {
+        try {
+            switch (userInputArr[0]) {
+                case "done":
+                    if (userInputArr.length != 2) {
+                        throw new DukeException("I'm not sure which task you want to mark as done!");
+                    }
+                    int taskIndex = Integer.parseInt(userInputArr[1]);
+                    markTaskAsDone(taskIndex);
+                    break;
+                case "todo":
+                    if (userInputArr.length != 2) {
+                        throw new DukeException("The description of a todo cannot be empty!");
+                    }
+                    addTodo(userInputArr[1]);
+                    break;
+                case "deadline":
+                    if (userInputArr.length != 2) {
+                        throw new DukeException("The description of a deadline cannot be empty!");
+                    }
                     addDeadline(userInputArr[1]);
-                } catch (DukeException e) {
-                    throw e;
-                }
-                break;
-            case "event":
-                if (userInputArr.length != 2) {
-                    throw new DukeException("The description of an event cannot be empty!");
-                }
-                try {
+                    break;
+                case "event":
+                    if (userInputArr.length != 2) {
+                        throw new DukeException("The description of an event cannot be empty!");
+                    }
                     addEvent(userInputArr[1]);
-                } catch (DukeException e) {
-                    throw e;
-                }
-                break;
-            default:
-                throw new DukeException("Sorry, I dont understand what that means :-(");
+                    break;
+                default:
+                    throw new DukeException("Sorry, I dont understand what that means :-(");
+            }
+        } catch (DukeException e) {
+            throw e;
         }
     }
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         greeting();
 
