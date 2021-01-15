@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         String userInput = "";
         int index = 0;
 
@@ -14,18 +14,35 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             userInput = scanner.nextLine();
-            if (userInput.equals("list")) {
-                printSegment();
-                for (int i = 0; i < index; i++) {
-                    System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+            String[] arrOfUserInput = userInput.split(" ");
+            switch (arrOfUserInput[0]) {
+                case "list": {
+                    printSegment();
+                    System.out.println("\tHere are the tasks in your list:");
+                    for (int i = 0; i < index; i++) {
+                        System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+                    }
+                    printSegment();
+                    break;
                 }
-                printSegment();
-            } else if (!userInput.equals("bye")) {
-                tasks[index] = userInput;
-                index++;
-                printSegment();
-                System.out.println("\t added: " + userInput);
-                printSegment();
+                case "done": {
+                    int userIndex = Integer.parseInt(arrOfUserInput[1]);
+                    tasks[userIndex].markAsDone();
+                    printSegment();
+                    System.out.println("\tNice! I've marked this task as done:");
+                    System.out.println("\t" + tasks[userIndex]);
+                    printSegment();
+                }
+                case "bye":
+                    break;
+                default: {
+                    Task task = new Task(userInput);
+                    tasks[index] = task;
+                    index++;
+                    printSegment();
+                    System.out.println("\t added: " + userInput);
+                    printSegment();
+                }
             }
         }
 
