@@ -32,6 +32,34 @@ public class Duke {
         partition();
     }
 
+    public static void addTodo(String userInput) {
+        Todo todo = new Todo(userInput);
+        tasks.add(todo);
+        addTaskReport(todo);
+    }
+
+    public static void addDeadline(String userInput) {
+        String[] userInputArr = userInput.split(" /by ", 2);
+        Deadline deadline = new Deadline(userInputArr[0], userInputArr[1]);
+        tasks.add(deadline);
+        addTaskReport(deadline);
+    }
+
+    public static void addEvent(String userInput) {
+        String[] userInputArr = userInput.split(" /at ", 2);
+        Event event = new Event(userInputArr[0], userInputArr[1]);
+        tasks.add(event);
+        addTaskReport(event);
+    }
+
+    public static void addTaskReport(Task task) {
+        partition();
+        System.out.println("    Got it. I've added this task");
+        System.out.println("        " + task.toString());
+        System.out.println("    Now you have " + tasks.size() + " in the list.");
+        partition();
+    }
+
     public static void listTasks() {
         partition();
         System.out.println("    Here are the tasks in your list:");
@@ -60,17 +88,30 @@ public class Duke {
 
         while (sc.hasNext()) {
             String userInput = sc.nextLine();
-            String[] userInputArr = userInput.split(" ");
+            String[] userInputArr = userInput.split(" ", 2);
 
             if (userInput.equals("bye")) {
                 break;
             } else if (userInput.equals("list")) {
                 listTasks();
-            } else if (userInputArr[0].equals("done")) {
-                int taskIndex = Integer.parseInt(userInputArr[1]);
-                markTaskAsDone(taskIndex);
-            } else {
-                addTask(userInput);
+                continue;
+            }
+            switch (userInputArr[0]) {
+                case "done":
+                    int taskIndex = Integer.parseInt(userInputArr[1]);
+                    markTaskAsDone(taskIndex);
+                    break;
+                case "todo":
+                    addTodo(userInputArr[1]);
+                    break;
+                case "deadline":
+                    addDeadline(userInputArr[1]);
+                    break;
+                case "event":
+                    addEvent(userInputArr[1]);
+                    break;
+                default:
+                    addTask(userInput);
             }
         }
 
