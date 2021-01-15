@@ -44,6 +44,9 @@ public class Duke {
                     case "todo":
                         handleTodo(input, listOfTasks);
                         break;
+                    case "delete":
+                        handleDelete(input, listOfTasks);
+                        break;
                     case "deadline":
                     case "event":
                         handleTasksWithTime(command, input, listOfTasks);
@@ -57,21 +60,22 @@ public class Duke {
         }
     }
 
-    public static void printUpdate(Task t, int size) {
-        System.out.println("Got it. I have added this task:");
+    public static void printUpdate(String preMessage, Task t, int size) {
+        System.out.println(preMessage);
         System.out.println(t);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
-    public static void handleList(ArrayList<Task> listOfTasks){
+    public static void handleList(ArrayList<Task> listOfTasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < listOfTasks.size(); i++) {
             System.out.println((i + 1) + ". " + listOfTasks.get(i));
         }
     }
+
     public static void handleDone(String input, ArrayList<Task> listOfTasks) {
         try {
-            int index = Integer.parseInt(input.split(" ")[1]);
+            int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
             listOfTasks.get(index - 1).setDone(true);
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(listOfTasks.get(index - 1));
@@ -83,14 +87,14 @@ public class Duke {
     }
 
     public static void handleTodo(String input, ArrayList<Task> listOfTasks) {
-        if (!input.contains(" ")){
+        if (!input.contains(" ")) {
             System.out.println("The description of a todo cannot be empty.");
             return;
         }
         String task = input.substring(input.indexOf(" ") + 1);
         Task temp = new ToDo(task);
         listOfTasks.add(temp);
-        printUpdate(temp, listOfTasks.size());
+        printUpdate("Got it. I have added the following task:", temp, listOfTasks.size());
     }
 
     public static void handleTasksWithTime(String command, String input, ArrayList<Task> listOfTasks) {
@@ -104,9 +108,24 @@ public class Duke {
                 temp = new Event(taskName, timing);
             }
             listOfTasks.add(temp);
-            printUpdate(temp, listOfTasks.size());
+            printUpdate("Got it. I have added the following task:", temp, listOfTasks.size());
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("The timing of the task is not included. Please check your input.");
+        }
+    }
+
+    public static void handleDelete(String input, ArrayList<Task> listOfTasks) {
+        try {
+            int index = Integer.parseInt(input.substring(input.indexOf(" ") + 1));
+            printUpdate(
+                    "Noted. I have removed the following task:",
+                    listOfTasks.remove(index - 1),
+                    listOfTasks.size()
+            );
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
+        } catch (NumberFormatException e) {
+            System.out.println("The input must be a positive integer!");
         }
     }
 }
