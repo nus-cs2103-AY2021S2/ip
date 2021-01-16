@@ -53,6 +53,8 @@ public class Duke {
                     String[] check = input.split(" ");
                     if (check[0].equals("done")) {
                         markTaskDone(list, check);
+                    } else if (check[0].equals("delete")) {
+                        deleteFromList(list, check);
                     } else {
                         addToList(list, input, check);
                     }
@@ -65,6 +67,7 @@ public class Duke {
                                     + "\tCommand not valid. Please use \"todo\", \"deadline\"\n"
                                     + "\tor \"event\" followed by task description to add new tasks.\n"
                                     + "\tPlease use \"done\" followed by index to mark completed tasks.\n"
+                                    + "\tPlease use \"delete\" followed by index to delete tasks.\n"
                                     + "\tPlease use \"bye\" to exit.\n"
                                     + "\t____________________________________________________________\n");
                 } catch (DescriptionNotFoundException e) {
@@ -180,5 +183,26 @@ public class Duke {
                 + "\t   " + temp.toString() + "\n"
                 + "\tNow you have " + list.size() + " tasks in the list.\n"
                 + "\t____________________________________________________________\n");
+    }
+
+    //Delete task from list
+    public static void deleteFromList(List<Task> list, String[] check)
+            throws InvalidTaskSelectionException, TaskNotFoundException{
+        if (check.length == 1 || !isNumber(check[1])) {
+            throw new InvalidTaskSelectionException();
+        }
+        int num = Integer.parseInt(check[1]);
+        if (num > 0 && num <= list.size()) {
+            Task deleted = list.get(num - 1);
+            list.remove(num - 1);
+            System.out.println("\t____________________________________________________________\n"
+                    + "\tNoted. I've removed this task:\n"
+                    + "\t   " + deleted.toString() + "\n"
+                    + "\tNow you have " + list.size() + " tasks in the list.\n"
+                    + "\t____________________________________________________________\n");
+
+        } else {
+            throw new TaskNotFoundException();
+        }
     }
 }
