@@ -1,4 +1,4 @@
-public class LevelOne {
+public class EchoMachine {
 
      public String echo(String input){
          return input;
