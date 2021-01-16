@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class IO {
@@ -5,6 +6,18 @@ public class IO {
     public static void printBotMessage(String message){
         String printMessage = DIVIDER + message + "\n"+DIVIDER;
         print(printMessage);
+    }
+    public static void printList(List<String> messages){
+        StringBuilder printMessage = new StringBuilder(DIVIDER);
+
+        for(int i = 1; i <= messages.size();i++) {
+            printMessage.append(i);
+            printMessage.append(". ");
+            printMessage.append(messages.get(i - 1));
+            printMessage.append("\n");
+        }
+        printMessage.append(DIVIDER);
+        print(printMessage.toString());
     }
     private static void print(String message) {
         System.out.println(message);
