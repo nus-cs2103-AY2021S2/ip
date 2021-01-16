@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class DukeBot {
+    private List<String> memory;
 
     public DukeBot() {
+        this.memory = new ArrayList<>();
         handleCommand("welcome");
     }
 
@@ -8,13 +13,13 @@ public class DukeBot {
         String commandOutput = "";
         boolean exit = false;
 
-        switch(command) {
+        switch (command) {
             case "welcome":
                 commandOutput = "\t Hello! I'm Duke\n"
-                    + "\t What can I do for you?\n\n";
+                        + "\t What can I do for you?\n\n";
                 break;
             case "list":
-                commandOutput = "\t list\n\n";
+                commandOutput = "\t " + memoryContents() + "\n\n";
                 break;
             case "blah":
                 commandOutput = "\t blah\n\n";
@@ -23,9 +28,23 @@ public class DukeBot {
                 commandOutput = "\t Bye. Hope to see you again soon!\n\n";
                 exit = true;
                 break;
+            default:
+                commandOutput = "\t added: " + command + "\n\n";
+                memory.add(command);
+                break;
         }
 
         respondToCommand(commandOutput, exit);
+    }
+
+    private String memoryContents() {
+        String contents = "";
+
+        for(int i = 0; i < memory.size(); i++) {
+            contents += String.format("\t %d. %s\n", (i + 1), memory.get(i));
+        }
+
+        return contents;
     }
 
     private void respondToCommand(String commandOutput, boolean exit) {
@@ -35,7 +54,7 @@ public class DukeBot {
 
         System.out.println(responseMsg);
 
-        if(exit) {
+        if (exit) {
             System.exit(0);
         }
     }
