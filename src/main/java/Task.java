@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String status() {
-        return (isDone ? "\u2713" : " ");
+        return (isDone ? "X" : " ");
     }
 
     public String toString() {

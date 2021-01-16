@@ -29,7 +29,7 @@ public class Duke {
                         break;
                     case "deadline":
                         String descriptionDeadline = command.substring(index+1, findSlash-1);
-                        String date = command.substring(findSlash+3);
+                        String date = command.substring(findSlash+4);
                         Deadline newDeadline = new Deadline(descriptionDeadline, date);
                         store.add(newDeadline);
                         System.out.println("Got it. I've added this task:\n" + newDeadline.toString() +
@@ -37,7 +37,7 @@ public class Duke {
                         break;
                     case "event":
                         String descriptionEvent = command.substring(index+1, findSlash-1);
-                        String time = command.substring(findSlash+3);
+                        String time = command.substring(findSlash+4);
                         Event newEvent = new Event(descriptionEvent, time);
                         store.add(newEvent);
                         System.out.println("Got it. I've added this task:\n" + newEvent.toString() +
