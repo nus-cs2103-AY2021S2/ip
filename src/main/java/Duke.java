@@ -15,35 +15,55 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         while(true) {
             String command = scan.nextLine();
-            switch (command.toLowerCase()) {
-                case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    break;
-                case "list":
-                    System.out.println("Here are the tasks in your list:");
-                    for(int i =0; i < store.size(); i++) {
-                        System.out.println((i + 1) + "." + store.get(i).display());
-                    }
-                    break;
-                default:
-                    String findDone = "";
-                    if (command.length() > 4) {
-                        findDone = command.substring(0, 4);
-                    }
-                    if (findDone.equalsIgnoreCase("done")) {
-                            if (command.charAt(4) == ' ') {
-                                int number = Integer.parseInt(command.substring(5));
-                                Task toMark = store.get(number - 1);
-                                String response = toMark.markAsDone();
-                                System.out.println(response);
-                            }
-                    } else {
-                        Task newTask = new Task(command);
-                        store.add(newTask);
-                        System.out.println("added: " + command);
-                    }
+            int index = command.indexOf(' ');
+            int findSlash = command.indexOf('/');
+            if (index > -1) {
+                String type = command.substring(0, index);
+                switch (type) {
+                    case "todo":
+                        String descriptionTask = command.substring(index+1);
+                        ToDo newToDo = new ToDo(descriptionTask);
+                        store.add(newToDo);
+                        System.out.println("Got it. I've added this task:\n" + newToDo.toString() + "\nNow you have "
+                        + store.size() + " tasks in the list");
+                        break;
+                    case "deadline":
+                        String descriptionDeadline = command.substring(index+1, findSlash-1);
+                        String date = command.substring(findSlash+3);
+                        Deadline newDeadline = new Deadline(descriptionDeadline, date);
+                        store.add(newDeadline);
+                        System.out.println("Got it. I've added this task:\n" + newDeadline.toString() +
+                                "\nNow you have " + store.size() + " tasks in the list");
+                        break;
+                    case "event":
+                        String descriptionEvent = command.substring(index+1, findSlash-1);
+                        String time = command.substring(findSlash+3);
+                        Event newEvent = new Event(descriptionEvent, time);
+                        store.add(newEvent);
+                        System.out.println("Got it. I've added this task:\n" + newEvent.toString() +
+                                "\nNow you have " + store.size() + " tasks in the list");
+                        break;
+                    case "done":
+                        int number = Integer.parseInt(command.substring(index+1));
+                        Task toMark = store.get(number - 1);
+                        String response = toMark.markAsDone();
+                        System.out.println(response);
+                        break;
+                }
+            } else {
+                switch (command) {
+                    case "bye":
+                        System.out.println("Bye. Hope to see you again soon!");
+                        break;
+                    case "list":
+                        System.out.println("Here are the tasks in your list:");
+                        for(int i =0; i < store.size(); i++) {
+                            System.out.println((i + 1) + "." + store.get(i).toString());
+                        }
+                        break;
+                }
             }
-            if (command.equalsIgnoreCase("bye")) {
+            if (command.equals("bye")) {
                 break;
             }
         }

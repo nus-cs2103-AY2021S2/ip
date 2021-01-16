@@ -12,16 +12,12 @@ public class Task {
     }
 
     public String toString() {
-        return this.name;
-    }
-
-    public String display() {
         return "[" + status() + "] " + this.name;
     }
 
     public String markAsDone() {
         this.isDone = true;
-        return "Nice! I've marked this task as done:\n" + display();
+        return "Nice! I've marked this task as done:\n" + toString();
     }
 
 }
