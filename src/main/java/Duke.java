@@ -63,7 +63,9 @@ public class Duke {
                 } catch (CommandNotValidException e) {
                     System.out.println("\t____________________________________________________________\n"
                                     + "\tCommand not valid. Please use \"todo\", \"deadline\"\n"
-                                    + "\tor \"event\" before task description.\n\t\"bye\" to exit.\n"
+                                    + "\tor \"event\" followed by task description to add new tasks.\n"
+                                    + "\tPlease use \"done\" followed by index to mark completed tasks.\n"
+                                    + "\tPlease use \"bye\" to exit.\n"
                                     + "\t____________________________________________________________\n");
                 } catch (DescriptionNotFoundException e) {
                     System.out.println("\t____________________________________________________________\n"
@@ -76,7 +78,7 @@ public class Duke {
                                     + "\t____________________________________________________________\n");
                 } catch (InvalidTaskSelectionException e) {
                     System.out.println("\t____________________________________________________________\n"
-                                    + "\tPlease enter task number after \"done\".\n"
+                                    + "\tPlease enter task number after command.\n"
                                     + "\t____________________________________________________________\n");
                 }
             }
