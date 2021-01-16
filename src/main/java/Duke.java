@@ -63,9 +63,13 @@ public class Duke {
                 continue;
             }
             switch (type) {
-                case BYE -> loop = false;
-                case LIST -> message = list.toString();
-                case DONE -> {
+                case BYE:
+                    loop = false;
+                    break;
+                case LIST:
+                    message = list.toString();
+                    break;
+                case DONE:
                     int index;
                     index = Integer.parseInt(command.substring(5)) - 1;
                     if (index < list.getSize() && index >= 0) {
@@ -77,10 +81,11 @@ public class Duke {
                     } else {
                         message = "No such task in the list\n";
                     }
-                }
-
-                case OTHER -> message = "Invalid command\n";
-                default -> {
+                    break;
+                case OTHER:
+                    message = "Invalid command\n";
+                    break;
+                default:
                     try {
                         Task t = Command.convertToTask(command, type);
                         list.addJob(t);
@@ -90,7 +95,6 @@ public class Duke {
                     } catch (DukeException e) {
                         message = e.getMessage() + "\n";
                     }
-                }
             }
 
             if (!loop) {

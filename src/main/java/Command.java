@@ -61,41 +61,38 @@ public class Command {
 
     public static Task convertToTask(String command, CommandType type) throws DukeException {
         switch (type) {
-            case TODO -> {
+            case TODO:
                 String subStr = command.substring(5);
                 if (StringParser.isBlank(subStr)) {
                     throw new DukeException("Void argument");
                 } else {
                     return new Todo(command.substring(5));
                 }
-            }
-            case DEADLINE -> {
+            case DEADLINE:
                 int indexOfBy = command.toLowerCase().indexOf("/by");
-                String subStrContent = command.substring(9, indexOfBy - 1);
-                String subStrTime = command.substring(indexOfBy + 4);
-                if (StringParser.isBlank(subStrContent)) {
+                String subStrContentBy = command.substring(9, indexOfBy - 1);
+                String subStrTimeBy = command.substring(indexOfBy + 4);
+                if (StringParser.isBlank(subStrContentBy)) {
                     throw new DukeException("Void argument");
-                } else if (StringParser.isBlank(subStrTime)) {
+                } else if (StringParser.isBlank(subStrTimeBy)) {
                     throw new DukeException("Void argument");
                 } else {
-                    return new Deadline(subStrContent, subStrTime);
+                    return new Deadline(subStrContentBy, subStrTimeBy);
                 }
-            }
-            case EVENT -> {
+            case EVENT:
                 int indexOfAt = command.toLowerCase().indexOf("/at");
-                String subStrContent = command.substring(6, indexOfAt - 1);
-                String subStrTime = command.substring(indexOfAt + 4);
-                if (StringParser.isBlank(subStrContent)) {
+                String subStrContentAt = command.substring(6, indexOfAt - 1);
+                String subStrTimeAt = command.substring(indexOfAt + 4);
+                if (StringParser.isBlank(subStrContentAt)) {
                     throw new DukeException("Void argument");
-                } else if (StringParser.isBlank(subStrTime)) {
+                } else if (StringParser.isBlank(subStrTimeAt)) {
                     throw new DukeException("Void argument");
                 } else {
-                    return new Event(subStrContent, subStrTime);
+                    return new Event(subStrContentAt, subStrTimeAt);
                 }
-            }
-            default -> {
+            default:
                 throw new DukeException("Invalid command");
-            }
+
         }
     }
 
