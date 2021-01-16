@@ -1,4 +1,4 @@
-package main.java.Entity;
+package main.java.entity;
 
 public class Event extends Task {
 

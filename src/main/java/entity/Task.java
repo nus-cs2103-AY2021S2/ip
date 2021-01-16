@@ -1,4 +1,4 @@
-package main.java.Entity;
+package main.java.entity;
 
 public class Task {
     protected String name;
