@@ -138,8 +138,8 @@ public class Duke {
 
         FastIO fio = new FastIO();
 
-        Task[] leest = new Task[100];
-        int leestCounter = 0;
+        List<Task> leest = new ArrayList<>();
+        //int leestCounter = 0;
 
         while(true) {
 
@@ -148,23 +148,25 @@ public class Duke {
 
             switch (split[0]) {
                 case "list":
-                    if (leestCounter == 0) {
+                    if (leest.size() == 0) {
                         System.out.println("☹ OOPS!!! Your list is currently empty uwu.");
                     } else {
                         System.out.println("Here are the tasks in your list uwu:");
-                        for (int i = 0; i < leestCounter; i++) {
-                            System.out.println((i + 1) + ". " + leest[i]);
+                        int counter = 1;
+                        for (Task t : leest) {
+                            System.out.println(counter + ". " + t);
+                            counter++;
                         }
                     }
                     break;
                 case "done":
                     try {
                         int done = Integer.parseInt(split[1]) - 1;
-                        leest[done].setDone();
+                        leest.get(done).setDone();
                         System.out.println("Sugoi! I've marked this task as done uwu: ");
-                        System.out.println(leest[done]);
+                        System.out.println(leest.get(done));
                     } catch (Exception e) {
-                        System.out.println("☹ OOPS!!! Please indicate which task you completed uwu");
+                        System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
                     }
                     break;
                 case "bye":
@@ -172,11 +174,10 @@ public class Duke {
                     return;
                 case "todo":
                     try {
-                        leest[leestCounter] = new Task(input.substring(5));
-                        System.out.println("    " + leest[leestCounter]);
-                        leestCounter++;
+                        leest.add(new Task(input.substring(5)));
+                        System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task uwu:");
-                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                        System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
                     }
@@ -184,11 +185,10 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] splitagain = input.substring(9).split("/by");
-                        leest[leestCounter] = new Deadline(splitagain[0], splitagain[1]);
-                        System.out.println("    " + leest[leestCounter]);
-                        leestCounter++;
+                        leest.add(new Deadline(splitagain[0], splitagain[1]));
+                        System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task:");
-                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                        System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
                     }
@@ -196,13 +196,23 @@ public class Duke {
                 case "event":
                     try {
                         String[] splitagain2 = input.substring(6).split("/at");
-                        leest[leestCounter] = new Deadline(splitagain2[0], splitagain2[1]);
-                        System.out.println("    " + leest[leestCounter]);
-                        leestCounter++;
+                        leest.add(new Deadline(splitagain2[0], splitagain2[1]));
+                        System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task:");
-                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                        System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your event properly uwu.");
+                    }
+                    break;
+                case "delete":
+                    try {
+                        Task toDelete = leest.get(Integer.parseInt(split[1]) - 1);
+                        System.out.println("Noted. I've removed this task uwu:");
+                        System.out.println(toDelete);
+                        leest.remove(toDelete);
+                        System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! Please indicate a valid task to delete uwu");
                     }
                     break;
                 default:
