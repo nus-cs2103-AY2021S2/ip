@@ -1,25 +1,22 @@
 import java.util.*;
 
 public class Duke {
-    public static List<String> textList = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         greeting();
         
-        String userCmd = sc.nextLine();
-        while (!userCmd.equals("bye")) {
-            if (userCmd.equals("list")) {
-                printLineBreak();
-                for (int i = 0; i < textList.size(); i++) {
-                    System.out.println(String.format("\t%d. %s", i+1, textList.get(i)));
-                }
-                printLineBreak();
+        TaskList taskList = new TaskList();
+        String task = sc.nextLine();
+        while (!task.equals("bye")) {
+            if (task.equals("list")) {
+                taskList.show();
+            } else if (task.split(" ")[0].equals("done")) {
+                taskList.markDone(Integer.parseInt(task.split(" ")[1]));
             } else {
-                textList.add(userCmd);
-                responseWrapper(String.format("added: %s", userCmd));
+                taskList.add(task);
             }
-            userCmd = sc.nextLine();
+            task = sc.nextLine();
         }
         exit();
         sc.close();
@@ -29,20 +26,20 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
-    public static void responseWrapper(String msg) {
-        printLineBreak();
-        System.out.println(String.format("\t%s", msg));
-        printLineBreak();
+    public static void printIndented(String text) {
+        System.out.println(String.format("\t%s", text));
     }
 
     public static void greeting() {
         printLineBreak();
-        System.out.println("\tHello! I'm Duke");
-        System.out.println("\tWhat can I do for you?");
+        printIndented("Hello! I'm Duke");
+        printIndented("What can I do for you?");
         printLineBreak();
     }
 
     public static void exit() {
-        responseWrapper("Bye. Hope to see you again soon!");
+        printLineBreak();
+        printIndented("Bye. Hope to see you again soon!");
+        printLineBreak();
     }
 }
