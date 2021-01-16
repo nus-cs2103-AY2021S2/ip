@@ -13,6 +13,8 @@ public class Duke {
         nextGreet(username);
 
         boolean endOfCycle = false;
+        String[] list = new String[100];
+        int count = 0;
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
@@ -20,8 +22,12 @@ public class Duke {
             if (nextCommand.equals("bye")) {
                 bye(username);
                 endOfCycle = true;
-            } else {
-                echo(nextCommand);
+            } else if(nextCommand.equals("list")) {
+                list(list, count);
+            }
+            else {
+                add(nextCommand, list, count);
+                count++;
             }
         }
 
@@ -49,12 +55,27 @@ public class Duke {
     }
 
     /**
-     * Echo/Repeat what the user typed as input by printing out what the user keyed in.
+     * Add what the user typed as input by printing out what the user keyed in.
      * @param command The user input.
      */
-    public static void echo(String command) {
+    public static void add(String command, String[] list, int count) {
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println(command);
+        System.out.println("added: " + command);
+        System.out.println("----------------------------------------------------------------------------------------");
+        list[count] = command;
+    }
+
+    /**
+     * List out all user inputs in sequence.
+     * @param list A list of user inputs in sequence, up to 100.
+     * @param count The current number of user inputs stored inside the list.
+     */
+    public static void list(String[] list, int count) {
+        System.out.println("----------------------------------------------------------------------------------------");
+        for (int i = 0; i < count; i++){
+            int listNum = i + 1;
+            System.out.println(listNum + ". " + list[i]);
+        }
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
