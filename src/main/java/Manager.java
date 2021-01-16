@@ -17,7 +17,7 @@ public class Manager {
         System.out.println(res);
     }
 
-    public void finishTask(int index) {
+    public void finishTask(int index)  {
         Task task = this.ls.get(index - 1);
         task.markAsDone();
         String res = "\t" + line + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + task + "\n\t" + line;
