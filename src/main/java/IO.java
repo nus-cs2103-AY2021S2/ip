@@ -13,7 +13,7 @@ public class IO {
 
         for(int i = 1; i <= messages.size();i++) {
             printMessage.append(i);
-            printMessage.append(". ");
+            printMessage.append(".");
             printMessage.append(messages.get(i - 1));
             printMessage.append("\n");
         }

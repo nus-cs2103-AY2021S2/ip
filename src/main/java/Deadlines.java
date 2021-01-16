@@ -1,10 +1,13 @@
-public class ToDos extends Task{
-    public ToDos(String name) {
+public class Deadlines extends Task{
+    protected String deadline;
+    public Deadlines(String name, String deadline) {
+
         super(name);
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return "[T]"+super.toString();
+        return "[D]"+super.toString()+" (by: "+deadline+")";
     }
 }

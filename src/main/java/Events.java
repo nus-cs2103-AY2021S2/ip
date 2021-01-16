@@ -1,13 +1,12 @@
-public class Deadlines extends Task{
-    protected String deadline;
-    public Deadlines(String name, String deadline) {
-
+public class Events extends Task{
+    protected String timing;
+    public Events(String name, String timing) {
         super(name);
-        this.deadline = deadline;
+        this.timing = timing;
     }
 
     @Override
     public String toString() {
-        return "[D]"+super.toString()+" ("+deadline+")";
+        return "[E]"+super.toString()+" (at: "+timing+")";
     }
 }

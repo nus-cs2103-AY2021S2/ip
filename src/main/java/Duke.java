@@ -1,3 +1,5 @@
+import jdk.jfr.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class Duke {
     private static String EXITCOMMAND = "bye";
     private static String LISTCOMMAND = "list";
     private static String DONECOMMAND = "done";
+    private static String TODOCOMMAND = "todo";
+    private static String DEADLINECOMMAND = "deadline";
+    private static String EVENTCOMMAND = "event";
 
     public static void main(String[] args) {
         printHelloMessage();
@@ -33,14 +38,25 @@ public class Duke {
             }else if(reply.equals(LISTCOMMAND)) {
                 IO.printTasks(Tasks);
             }else if(reply.startsWith(DONECOMMAND)){
-                IO.printBotMessage(reply.substring(5));
                 Integer index = Integer.parseInt(reply.substring(5));
                 Tasks.get(index-1).markCompleted();
                 printDoneMessage(Tasks.get(index-1));
-            }else {
-                Tasks.add(new Task(reply));
-                IO.printBotMessage("added: "+reply);
-
+            }else if(reply.startsWith(TODOCOMMAND)){
+                ToDos newTask = new ToDos(reply.substring(TODOCOMMAND.length()+1));
+                Tasks.add(newTask);
+                printAddedTaskMessage(newTask, Tasks.size());
+            }else if(reply.startsWith(DEADLINECOMMAND)){
+                String message = reply.substring(DEADLINECOMMAND.length()+1);
+                String[] messages = message.split(" /by ");
+                Deadlines newTask = new Deadlines(messages[0], messages[1]);
+                Tasks.add(newTask);
+                printAddedTaskMessage(newTask, Tasks.size());
+            }else if(reply.startsWith(EVENTCOMMAND)){
+                String message = reply.substring(EVENTCOMMAND.length()+1);
+                String[] messages = message.split(" /at ");
+                Events newTask = new Events(messages[0], messages[1]);
+                Tasks.add(newTask);
+                printAddedTaskMessage(newTask, Tasks.size());
             }
         }
         IO.printBotMessage("Bye. Hope to see you again soon!");
@@ -51,6 +67,10 @@ public class Duke {
     }
 
     public static void printDoneMessage(Task task){
-        IO.printBotMessage("Nice! I've marked this task as done:\n" + task.toString());
+        IO.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
+    }
+
+    public static void printAddedTaskMessage(Task task, int count){
+        IO.printBotMessage("Got it. I've added this task: \n  " + task.toString()+"\nNow you have "+count+" tasks in the list.");
     }
 }

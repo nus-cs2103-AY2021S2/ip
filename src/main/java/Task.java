@@ -1,6 +1,6 @@
-public class Task {
-    private String taskName;
-    private boolean completed;
+public abstract class Task {
+    protected String taskName;
+    protected boolean completed;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -12,10 +12,6 @@ public class Task {
 
     @Override
     public String toString() {
-        StringBuilder message = new StringBuilder("[ ] "+taskName);
-        if(completed)
-            return "[X] "+taskName;
-        else
-            return "[ ] "+taskName;
+        return (completed ? "[X] "+taskName : "[ ] "+taskName);
     }
 }
