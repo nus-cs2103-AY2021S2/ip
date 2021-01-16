@@ -2,10 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DukeBot {
-    private List<String> memory;
+    private List<Task> taskList;
 
     public DukeBot() {
-        this.memory = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         handleCommand("welcome");
     }
 
@@ -20,7 +20,7 @@ public class DukeBot {
                     + "\t What can I do for you?";
             break;
         case "list":
-            commandOutput = getMemoryContents();
+            commandOutput = getTaskListContents();
             break;
         case "blah":
             commandOutput += "blah";
@@ -31,19 +31,21 @@ public class DukeBot {
             break;
         default:
             commandOutput += "added: " + command;
-            memory.add(command);
+            Task task = new Task(command);
+            taskList.add(task);
             break;
         }
+
         commandOutput += "\n";
 
         respondToCommand(commandOutput, isExit);
     }
 
-    private String getMemoryContents() {
-        String contents = "";
+    private String getTaskListContents() {
+        String contents = "\t Here are the tasks in your list:\n";
 
-        for (int i = 0; i < memory.size(); i++) {
-            contents += String.format("\t %d. %s\n", (i + 1), memory.get(i));
+        for (int i = 0; i < taskList.size(); i++) {
+            contents += String.format("\t %d.r%s\n", (i + 1), taskList.get(i).getTaskInfo());
         }
 
         return contents;
