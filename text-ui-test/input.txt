@@ -1,2 +1,40 @@
 abc
+todo abc
+todo  
+todoa
+tod
+todo fneujiwhtfjkrewahgtfijarhjkldhgfiuerjngfijdsakhgmkdsanvijuerngjksadfghjkasdfbnghiejrabghkdfjabgkndfsghijrkaghiuyreabguieranvjrehgijrekgbjkdfahgbjhierbgiuvjrebghijrbfgjkearbvireghjergb
+list
+deadline def /by 123aaa
+deadline qwer /at axcdgfer
+deadline/by
+deadline /by abc
+deadline asnf by abca
+deadline a /bysafefdc
+event abc /at avb
+eventa dnuf
+event def /at basjf
+list
+done
+done 
+done  
+done 1
+list 
+list
+delete
+delete 
+delete  
+delete 1
+list
+delete 100
+delete -5
+delete 1
+list
+delete 1
+list
+delete 1
+list
+delete 1
+done 1
+list
 bye
