@@ -8,8 +8,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
 
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
+   1. Click `File` > `Project Structure` and under `Project Settings`, click on the `Project` tab (or <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> on Windows/Linux, <kbd>&#8984;</kbd> + <kbd>:</kbd> on Mac)
+   1. Select JDK 11 if is listed in the `Project SDK` drop down. If it is not, click `Add SDK` and select the directory where you installed JDK 11
    1. Click `OK`
 1. Import the project into Intellij as follows:
    1. Click `Open or Import`.
