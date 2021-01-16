@@ -7,7 +7,7 @@ public class Duke {
     public static void main(String[] args) throws DukeException {
         // Output initial greeting before asking for input
         String initialGreeting = "Hello I'm Duke \n"
-                + "What can I do for you? \n";
+            + "What can I do for you? \n";
         System.out.println(initialGreeting);
 
         // Standard Input Scanner
@@ -33,10 +33,16 @@ public class Duke {
                 for (int index = 0; index < taskList.size(); index++) {
                     System.out.println(index + 1 + ". " + taskList.get(index).toString());
                 }
+                System.out.println(""); // Blank line
 
             } else if (userInput.startsWith("todo")) {
                 // Create a new task with the description from user input
                 try {
+                    // Catch error where the user put empty spaces as description
+                    if (userInput.substring(5).isBlank()) {
+                        throw new StringIndexOutOfBoundsException();
+                    }
+
                     ToDo newToDoTask = new ToDo(userInput.substring(5));
                     taskList.add(newToDoTask);
 
@@ -52,6 +58,11 @@ public class Duke {
 
             } else if (userInput.startsWith("deadline")) {
                 try {
+                    // Catch error where the user put empty spaces as description
+                    if (userInput.substring(9).isBlank()) {
+                        throw new StringIndexOutOfBoundsException();
+                    }
+
                     // Deadline task values
                     String[] userInputValues = userInput.substring(9).split("/by ");
                     String description = userInputValues[0];
@@ -72,6 +83,11 @@ public class Duke {
 
             } else if (userInput.startsWith("event")) {
                 try {
+                    // Catch error where the user put empty spaces as description
+                    if (userInput.substring(5).isBlank()) {
+                        throw new StringIndexOutOfBoundsException();
+                    }
+                    
                     // Event task values
                     String[] userInputValues = userInput.substring(6).split("/at ");
                     String description = userInputValues[0];
@@ -101,17 +117,28 @@ public class Duke {
                     // Print success message that the task was marked as done
                     System.out.println("Nice! I've marked this task as done:\n "
                         + "   " + taskList.get(taskIndex - 1).toString() + "\n");
-                } catch (StringIndexOutOfBoundsException ex) {
+                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                     // Task number is empty
-                    System.out.println("Please enter a valid task number. Thank you.");
-                } catch (IndexOutOfBoundsException exception) {
-                    // Print an error message if the task number is invalid
-                    System.out.println("The task number you have entered in invalid. \n" +
-                        "Please try again later.");
+                    System.out.println("Please enter a valid task number.");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from done");
                 }
                 
+            } else if (userInput.startsWith("delete")) {
+                try {
+                    // Delete task
+                    int taskIndex = Integer.parseInt(userInput.substring(7)) - 1;
+                    Task taskToBeRemoved = taskList.get(taskIndex);
+
+                    // Remove the appropriate task away from the list of task
+                    taskList.remove(taskIndex);
+                    System.out.println(taskToBeRemoved.deleteMessage(taskList.size()));
+                } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                    // Task number is empty
+                    System.out.println("Please enter a valid task number.");
+                }  
+                
+
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
