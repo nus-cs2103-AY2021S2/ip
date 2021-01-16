@@ -19,7 +19,7 @@ public class Duke {
         Set<Integer> done = new HashSet<>();
         Scanner sc = new Scanner(System.in);
         String input;
-        while (true) {
+        while (sc.hasNextLine()) {
             input = sc.nextLine();
             if (input.toLowerCase().equals("bye")) {
                 break;

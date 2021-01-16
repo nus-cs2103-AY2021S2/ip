@@ -1,0 +1,42 @@
+This is
+  ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Dear user, welcome to the world of duke!
+    Got it. I've added this task:
+        [T][ ] get book from Jack
+    Now you have 1 tasks in the list.
+    Got it. I've added this task:
+        [E][ ] party at pgp (on: 2nd jan 2021)
+    Now you have 2 tasks in the list.
+    1. [T][ ] get book from Jack
+    2. [E][ ] party at pgp (on: 2nd jan 2021)
+    Got it. I've added this task:
+        [E][ ] alice bd at 12 kent ridge drive (in: afternoon 3rd jan)
+    Now you have 3 tasks in the list.
+    Got it. I've added this task:
+        [D][ ] homework (by: monday)
+    Now you have 4 tasks in the list.
+    1. [T][ ] get book from Jack
+    2. [E][ ] party at pgp (on: 2nd jan 2021)
+    3. [E][ ] alice bd at 12 kent ridge drive (in: afternoon 3rd jan)
+    4. [D][ ] homework (by: monday)
+    Nice! I've mark this task as done:
+        [E][X] party at pgp (on: 2nd jan 2021)
+    1. [T][ ] get book from Jack
+    2. [E][X] party at pgp (on: 2nd jan 2021)
+    3. [E][ ] alice bd at 12 kent ridge drive (in: afternoon 3rd jan)
+    4. [D][ ] homework (by: monday)
+    Nice! I've mark this task as done:
+        [T][X] get book from Jack
+    1. [T][X] get book from Jack
+    2. [E][X] party at pgp (on: 2nd jan 2021)
+    3. [E][ ] alice bd at 12 kent ridge drive (in: afternoon 3rd jan)
+    4. [D][ ] homework (by: monday)
+    Got it. I've added this task:
+        [T][ ] finish testing
+    Now you have 5 tasks in the list.
+Bye. Until next time!
