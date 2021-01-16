@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,11 +14,22 @@ public class Duke {
         System.out.println("This is\n " + logo);
         String greetings = "Dear user, welcome to the world of duke!";
         System.out.println(greetings);
+        List<String> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while (!input.toLowerCase().equals("bye")) {
-            System.out.println("    " + input);
+        String input;
+        while (true) {
             input = sc.nextLine();
+            if (input.toLowerCase().equals("bye")) {
+                break;
+            }
+            if (input.toLowerCase().equals("list")) {
+                for (int i = 0; i < list.size(); i++) {
+                    System.out.println("    " + (i + 1) + ". " + list.get(i));
+                }
+                continue;
+            }
+            System.out.println("    added: " + input);
+            list.add(input);
         }
         System.out.println("Bye. Until next time!");
     }
