@@ -19,6 +19,19 @@ public class Command {
                     throw new DukeException("Invalid argument");
                 }
             }
+        } else if (strLength >= 6 && str.substring(0, 6).equalsIgnoreCase("delete")) {
+            if (str.length() == 6 || (str.length() <= 7 && str.charAt(6) == ' ')) {
+                throw new DukeException("No argument");
+            } else if (str.charAt(6) != ' ') {
+                return CommandType.OTHER;
+            } else {
+                try {
+                    Integer.parseInt(str.substring(7));
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Invalid argument");
+                }
+                return CommandType.DELETE;
+            }
         } else if (strLength >= 5 && str.substring(0, 5).equalsIgnoreCase("event")) {
             if (str.length() == 5 || (str.length() <= 6 && str.charAt(5) == ' ')) {
                 throw new DukeException("No argument");

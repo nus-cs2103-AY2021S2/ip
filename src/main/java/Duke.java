@@ -78,7 +78,20 @@ public class Duke {
                         message = "No such task in the list\n";
                     }
                 }
-
+                case DELETE -> {
+                    int index;
+                    index = Integer.parseInt(command.substring(7)) - 1;
+                    if (index < list.getSize() && index >= 0) {
+                        currTask = list.getJob(index);
+                        list.deleteJob(index);
+                        message = "This task is deleted: \n"
+                                + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE)
+                                + "Now you have " + list.getSize()
+                                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");;
+                    } else {
+                        message = "No such task in the list\n";
+                    }
+                }
                 case OTHER -> message = "Invalid command\n";
                 default -> {
                     try {
