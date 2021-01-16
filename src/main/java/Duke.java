@@ -7,10 +7,10 @@ public class Duke {
         // Start up greeting message
         String greetingMessage = "Hello! I'm a Chat bot and my name " +
                 "is Joe \nHow may I help you?";
-        System.out.println(messageFormatter(greetingMessage));
+        System.out.println(formatMessage(greetingMessage));
 
         // Task list
-        List<String> taskList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
 
         boolean isChatBotOnline = true;
         while (isChatBotOnline) {
@@ -19,31 +19,45 @@ public class Duke {
             String input = sc.nextLine();
 
             // Echoing the input
-            switch(input) {
-                case "bye":
-                    String byeMessage = "Goodbye, hope you had a great time!";
-                    System.out.println(messageFormatter(byeMessage));
-                    isChatBotOnline = false;
-                    break;
-                case "list":
-                    System.out.println(messageFormatter(getTaskListString(taskList)));
-                    break;
-                default:
-                    taskList.add(input);
-                    System.out.println(messageFormatter("Added: " + input));
+            if (input.equals("bye")) {
+                String byeMessage = "Goodbye, hope you had a great time!";
+                System.out.println(formatMessage(byeMessage));
+                isChatBotOnline = false;
+            } else if (input.equals("list")) {
+                System.out.println(formatMessage(getTaskListString(taskList)));
+            } else if (input.contains("done")) {
+                try {
+                    int taskNumber = Integer.parseInt(input.substring(5));
+                    int arrayNumber = taskNumber - 1;
+                    Task task = taskList.get(arrayNumber);
+                    String doneMessage = task.setDone();
+                    System.out.println(formatMessage(doneMessage));
+                } catch (NumberFormatException e) {
+                    System.out.println(formatMessage(e +
+                            "\nError! Invalid task number." +
+                            "\nPlease input a valid task number!"));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e +
+                            "\nError! Task number does not exist." +
+                            "\nPlease input a valid task number!");
+                }
+            } else {
+                Task newTask = new Task(input);
+                taskList.add(newTask);
+                System.out.println(formatMessage("Added: " + input));
             }
         }
     }
 
 
-    public static String messageFormatter(String str) {
+    public static String formatMessage(String str) {
         return "____________________________________________________________" +
                 "\n" + str + "\n" +
                 "____________________________________________________________\n";
     }
 
     // prints all of the tasks in the taskList
-    public static String getTaskListString(List<String> taskList) {
+    public static String getTaskListString(List<Task> taskList) {
         String taskListString = "";
         for (int i = 0; i < taskList.size(); i++) {
             String taskString = (i + 1) + ". " + taskList.get(i);
