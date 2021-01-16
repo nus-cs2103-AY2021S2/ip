@@ -134,7 +134,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___| uwu\n";
         System.out.println("Hello from\n" + logo);
 
-        System.out.println("Hello! I'm Duwuke\n What can I do for you? uwu");
+        System.out.println("Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!\n" +
+                "What can I do for you? uwu");
 
         FastIO fio = new FastIO();
 
