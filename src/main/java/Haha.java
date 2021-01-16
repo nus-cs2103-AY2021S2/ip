@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Haha {
@@ -19,16 +21,32 @@ public class Haha {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println(STARTER);
+
+        List<String> database = new ArrayList<>();
+
+
         while (sc.hasNext()) {
             String command = sc.nextLine();
             System.out.println(LINE_BREAK);
 
             if (command.equals("bye")) {
                 System.out.println("Bye now!");
+                System.out.println(LINE_BREAK);
                 break;
+            } else if (command.equals("list")) {
+                System.out.println("Here are your list of tasks:");
+                for (int i = 0; i < database.size(); i++) {
+                    String idx = Integer.toString(i + 1) + '.';
+                    String task = idx + database.get(i);
+                    System.out.println(task);
+                }
+                System.out.println(LINE_BREAK);
+            } else {
+                database.add(command);
+                System.out.print("Added: ");
+                System.out.println(command);
+                System.out.println(LINE_BREAK);
             }
-            System.out.println(command);
-            System.out.println(LINE_BREAK);
         }
     }
 }
