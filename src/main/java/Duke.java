@@ -61,6 +61,30 @@ public class Duke {
         }
     }
 
+    public static class Task{
+
+        private String todo;
+        private boolean done;
+
+        public Task(String s) {
+            this.todo = s;
+            this.done = false;
+        }
+
+        public void setDone() {
+            this.done = true;
+        }
+
+        @Override
+        public String toString() {
+            if (!done) {
+                return ("[ ] " + todo);
+            } else {
+                return ("[X] " + todo);
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -74,24 +98,31 @@ public class Duke {
 
         FastIO fio = new FastIO();
 
-        String[] leest = new String[100];
+        Task[] leest = new Task[100];
         int leestCounter = 0;
 
         while(true) {
 
             String input = fio.nextLine();
+            String[] split = input.split("\\s+");
 
-            switch (input) {
+            switch (split[0]) {
                 case "list":
                     for(int i = 0; i < leestCounter; i++) {
-                        System.out.println(i + ". "+ leest[i] + " uwu");
+                        System.out.println((i + 1) + ". " + leest[i] + " uwu");
                     }
+                    break;
+                case "done":
+                    int done = Integer.parseInt(split[1]) - 1;
+                    leest[done].setDone();
+                    System.out.println("Sugoi! I've marked this task as done uwu: ");
+                    System.out.println(leest[done]);
                     break;
                 case "bye":
                     System.out.println("Bye, hope to see you again! uwu");
                     return;
                 default:
-                    leest[leestCounter] = input;
+                    leest[leestCounter] = new Task(input);
                     leestCounter++;
                     System.out.println("added: " + input + " uwu");
             }
