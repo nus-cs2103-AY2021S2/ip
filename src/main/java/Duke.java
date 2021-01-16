@@ -10,10 +10,13 @@ public class Duke {
         while (true) {
             String userInput = sc.nextLine();
             if (userInput.equals("bye")) {
-                System.out.println("bye, have a good day! :)");
+                Response.bye();
                 break;
             } else if (userInput.equals("list")) {
                 Response.listTasks();
+            } else if (userInput.contains("done")) {
+                int taskNumber = Integer.parseInt(userInput.substring(5));
+                Response.markAsDone(taskNumber);
             } else {
                 Response.addTask(userInput);
             }
