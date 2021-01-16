@@ -2,10 +2,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Scanner sc = new Scanner(System.in);
-    final String lines = "----------------------------------------";
+    private static String[] taskArray;
+    private static int count =0;
+    private static Scanner sc = new Scanner(System.in);
+    static final String lines = "----------------------------------------";
 
-    public void displayWelcomeMessage(){
+
+    public static void displayWelcomeMessage(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,21 +19,37 @@ public class Duke {
 
     }
 
-    public void displayEndMessage(){
+    public static void displayEndMessage(){
         sc.close();
         System.out.println( lines + "\n" + " Bye. Hope to see you again!" + "\n" + lines);
     }
 
-    public void main(String[] args) {
+    public static void executeCommand(String command){
+        if(!command.equals("list")){
+            taskArray[count] = command;
+            count++;
+            System.out.println( "added: " + command + "\n" + lines);
+        }
+        else{
+            for (int i = 0; i <count; i++) {
+                System.out.println((i+1) + ". " +  taskArray[i]);
+            }
+            System.out.println(lines);
+        }
+    }
+
+    public static void main(String[] args) {
 
         displayWelcomeMessage();
 
         String userInput = sc.nextLine();
+        taskArray = new String[100];
 
         while(!userInput.equals("bye")) {
-            System.out.println("\t" + lines + "\n\t" + " " + userInput + "\n\t" + lines);
+            executeCommand(userInput);
             userInput = sc.nextLine();
         }
+
         displayEndMessage();
     }
 }
