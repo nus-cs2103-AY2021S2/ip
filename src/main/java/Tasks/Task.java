@@ -16,7 +16,7 @@ public class Task {
 
     // Get the status icon depending on whether the task is done or not
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : " "); //return X symbols if done, else return blank space
+        return (isDone ? "X" : " "); //return X symbols if done, else return blank space
     }
 
     public String successMessage(int taskListSize) {

@@ -81,7 +81,7 @@ public class Duke {
 
                     // Successfully marked the task as done
                     System.out.println("Nice! I've marked this task as done:\n "
-                        + "   " + taskList.get(taskIndex - 1).toString());
+                        + "   " + taskList.get(taskIndex - 1).toString() + "\n");
                 } catch (IndexOutOfBoundsException exception) {
                     // Print an error message if the task number is invalid
                     System.out.println("The task number you have entered in invalid. \n" +
