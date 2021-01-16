@@ -27,3 +27,9 @@ Here are the tasks in your list:
 1. [T][X] borrow book
 2. [D][ ] return book  (by: Sunday)
 3. [E][X] project meeting  (at: Mon 2-4pm)
+OOPS!!! The description of a todo cannot be empty.
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][ ] return book  (by: Sunday)
+3. [E][X] project meeting  (at: Mon 2-4pm)
