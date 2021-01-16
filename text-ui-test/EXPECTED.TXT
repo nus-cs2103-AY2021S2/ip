@@ -3,5 +3,27 @@ Hello from
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+|____/ \__,_|_|\_\___| uwu
 
+Hello! I'm Duwuke
+ What can I do for you? uwu
+Hai. I've added this task uwu:
+    [T][ ] watch anime
+Now you have 1 task(s) in the list uwu
+Hai. I've added this task:
+    [D][ ] finish CS2103 project  (by: Thursday)
+Now you have 2 task(s) in the list uwu
+Hai. I've added this task:
+    [D][ ] Usada Pekora livestream  (by: Mon 2-4pm JST)
+Now you have 3 task(s) in the list uwu
+Here are the tasks in your list uwu:
+1. [T][ ] watch anime
+2. [D][ ] finish CS2103 project  (by: Thursday)
+3. [D][ ] Usada Pekora livestream  (by: Mon 2-4pm JST)
+Sugoi! I've marked this task as done uwu:
+[T][X] watch anime
+Here are the tasks in your list uwu:
+1. [T][X] watch anime
+2. [D][ ] finish CS2103 project  (by: Thursday)
+3. [D][ ] Usada Pekora livestream  (by: Mon 2-4pm JST)
+Bye, hope to see you again! uwu

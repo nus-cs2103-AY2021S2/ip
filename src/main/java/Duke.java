@@ -187,6 +187,7 @@ public class Duke {
                     break;
                 default:
                     System.out.println("uwu");
+                    break;
             }
         }
     }
