@@ -7,4 +7,8 @@ public class StringParser {
         }
         return resultStr.toString() + str + "\n";
     }
+
+    public static String underlineGenerator(int i) {
+        return "_".repeat(i) + "\n";
+    }
 }

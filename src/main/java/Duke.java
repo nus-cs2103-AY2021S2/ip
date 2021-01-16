@@ -11,6 +11,8 @@ enum CommandType {
 }
 
 public class Duke {
+    static final int LENGTH_OF_LINE = 60;
+
     static String welcome = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
             + "|   ____        _          |\n"
@@ -33,7 +35,7 @@ public class Duke {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    static String horizontalLine = "____________________________________________________________\n";
+    static String horizontalLine = StringParser.underlineGenerator(LENGTH_OF_LINE);
 
 
 
@@ -41,7 +43,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String message = "";
         Task currTask;
-        JobList list = new JobList();
+        JobList list = new JobList(LENGTH_OF_LINE);
 
         System.out.println(welcome);
         String command = sc.nextLine();
@@ -57,7 +59,7 @@ public class Duke {
                         currTask = list.getJob(index);
                         currTask.markAsDone();
                         message = "This task is marked as done: \n"
-                                + StringParser.newLiner(currTask.toString(), 60);
+                                + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE);
                         list.replaceJob(index, currTask);
                     } catch (NumberFormatException e) {
                         message = "Invalid command\n";
@@ -69,7 +71,7 @@ public class Duke {
                     try {
                         Task t = Command.convertToTask(command, type);
                         list.addJob(t);
-                        message = "Task added:\n" + StringParser.newLiner(t.toString(), 60)
+                        message = "Task added:\n" + StringParser.newLiner(t.toString(), LENGTH_OF_LINE)
                                 + "Now you have " + list.getSize()
                                 + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
                     } catch (DukeException e) {

@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class JobList {
     ArrayList<Task> list;
+    int lengthOfLine;
 
-    JobList() {
+    JobList(int length) {
          this.list = new ArrayList<>();
+         this.lengthOfLine = length;
     }
 
     void addJob(Task t) {
@@ -28,7 +30,7 @@ public class JobList {
     public String toString() {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
-            resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).toString(), 60));
+            resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).toString(), lengthOfLine));
         }
         return resultStr.toString();
     }
