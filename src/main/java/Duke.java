@@ -123,6 +123,7 @@ public class Duke {
             System.out.println("Noted meow. I've removed this task:");
             System.out.printf("  [%s][%s] %s\n", deletedTask.getTypeSymbol(), deletedTask.getStatusSymbol(),
                     deletedTask.getDesc());
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
             System.out.println("___________________________________________________________\n");
         }
     }
