@@ -11,28 +11,30 @@ public class DukeBot {
 
     public void handleCommand(String command) {
         String commandOutput = "";
+        commandOutput += "\t ";
         boolean exit = false;
 
         switch (command) {
             case "welcome":
-                commandOutput = "\t Hello! I'm Duke\n"
-                        + "\t What can I do for you?\n\n";
+                commandOutput += "Hello! I'm Duke\n"
+                        + "\t What can I do for you?";
                 break;
             case "list":
-                commandOutput = "\t " + memoryContents() + "\n\n";
+                commandOutput = memoryContents();
                 break;
             case "blah":
-                commandOutput = "\t blah\n\n";
+                commandOutput += "blah";
                 break;
             case "bye":
-                commandOutput = "\t Bye. Hope to see you again soon!\n\n";
+                commandOutput += "Bye. Hope to see you again soon!";
                 exit = true;
                 break;
             default:
-                commandOutput = "\t added: " + command + "\n\n";
+                commandOutput += "added: " + command;
                 memory.add(command);
                 break;
         }
+        commandOutput += "\n";
 
         respondToCommand(commandOutput, exit);
     }
