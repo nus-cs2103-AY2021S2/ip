@@ -24,41 +24,73 @@ public class Duke {
      * Add a ToDo into the internal list
      * @param desc Description of the ToDo
      */
-    private static void addToDo(String desc) {
-        ToDo newToDo = new ToDo(desc);
-        tasks.add(newToDo);
-        printTaskAdding(newToDo);
+    private static void addToDo(String desc) throws DukeCommandException {
+        if(desc.length() == 0) {
+            throw new DukeCommandException("todo", desc, "The details of a ToDo cannot be empty.");
+        } else {
+            ToDo newToDo = new ToDo(desc);
+            tasks.add(newToDo);
+            printTaskAdding(newToDo);
+        }
     }
 
     /**
      * Add a Deadline into the internal list
-     * @param desc Description of the Deadline
-     * @param dateTime Date/Time that the Deadline must be done
+     * @param params Parameters of Deadline (Description, Date/Time) in String form that will be processed
      */
-    private static void addDeadline(String desc, String dateTime) {
-        Deadline newDeadline = new Deadline(desc, dateTime);
-        tasks.add(newDeadline);
-        printTaskAdding(newDeadline);
+    private static void addDeadline(String params) throws DukeCommandException {
+        if(params.length() == 0) {
+            throw new DukeCommandException("deadline", params, "The details of a Deadline cannot be empty.");
+        } else if(!params.contains("/by") || params.split(" /by ").length != 2) {
+            throw new DukeCommandException("deadline", params, "Proper description and date/time must be given for a " +
+                    "Deadline.");
+        } else {
+            String[] splits = params.split(" /by ");
+
+            Deadline newDeadline = new Deadline(splits[0], splits[1]);
+            tasks.add(newDeadline);
+
+            printTaskAdding(newDeadline);
+        }
     }
 
     /**
      * Add an Event into the internal list
-     * @param desc Description of the Event
-     * @param dateTimeRange Date/Time range when the Event take place
+     * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
      */
-    private static void addEvent(String desc, String dateTimeRange) {
-        Event newEvent = new Event(desc, dateTimeRange);
-        tasks.add(newEvent);
-        printTaskAdding(newEvent);
+    private static void addEvent(String params) throws DukeCommandException {
+        if(params.length() == 0) {
+            throw new DukeCommandException("event", params, "The details of a Event cannot be empty.");
+        } else if(!params.contains("/at") || params.split(" /at ").length != 2) {
+            throw new DukeCommandException("event", params, "Proper description and date/time range must be given for" +
+                    " a Event.");
+        } else {
+            String[] splits = params.split(" /at ");
+
+            Event newEvent = new Event(splits[0], splits[1]);
+            tasks.add(newEvent);
+
+            printTaskAdding(newEvent);
+        }
     }
 
     /**
      * Mark a task as completed
-     * @param index Index of the completed task
+     * @param param Parameter in String form to complete a task (Index)
      */
-    private static void completeTask(int index) throws IndexOutOfBoundsException {
-        if(index < 0 || index >= tasks.size()) {
-            throw new IndexOutOfBoundsException();
+    private static void doneTask(String param) throws DukeCommandException {
+        if(!param.matches("-?(0|[1-9]\\d*)")) {
+            throw new DukeCommandException("done", param, "Please provide an actual number for the task you are done " +
+                    "with.");
+        }
+
+        int index = Integer.valueOf(param) - 1;
+
+        if(tasks.size() == 0){
+            throw new DukeCommandException("done", param, "There are no task to be completed.");
+        } else if(index < 0 || index >= tasks.size()) {
+            throw new DukeCommandException("done", param, "Please enter a valid task index ranging " +
+                    "from 1 to " + String.valueOf(tasks.size()) + " (inclusive).");
         } else {
             Task task = tasks.get(index);
             task.markAsDone();
@@ -102,38 +134,27 @@ public class Duke {
         while(isActive) {
             command = scanner.nextLine();
 
-            if(command.matches("^todo .+$")) {
-                String desc = command.substring(5);
-                addToDo(desc);
-            } else if(command.matches("^deadline .+$")) {
-                String[] splits = command.substring(9).split(" /by ");
-                addDeadline(splits[0], splits[1]);
-            } else if(command.matches("^event .+$")) {
-                String[] splits = command.substring(6).split(" /at ");
-                addEvent(splits[0], splits[1]);
-            } else if(command.matches("^done ((100)|[1-9][0-9]|[0-9])$")) {
-                String[] splits = command.split(" ");
-                try {
-                    completeTask(Integer.valueOf(splits[1]) - 1);
-                } catch(IndexOutOfBoundsException e) {
-                    if(tasks.size() == 0) {
-                        System.out.println("___________________________________________________________");
-                        System.out.println("There are no task to be completed");
-                        System.out.println("___________________________________________________________\n");
-                    } else {
-                        System.out.println("___________________________________________________________");
-                        System.out.printf("Please enter a valid task index ranging from 1 to %d (inclusive)\n",
-                                tasks.size());
-                        System.out.println("___________________________________________________________\n");
-                    }
+            try {
+                if(command.matches("^todo($|.+$)")) {
+                    addToDo(command.substring(4).stripLeading());
+                } else if(command.matches("^deadline($|.+$)")) {
+                    addDeadline(command.substring(8).stripLeading());
+                } else if(command.matches("^event($|.+$)")) {
+                    addEvent(command.substring(5).stripLeading());
+                } else if(command.matches("^done($|.+$)")) {
+                    doneTask(command.substring(4).stripLeading());
+                } else if(command.equals("list")) {
+                    listTasks();
+                } else if(command.equals("bye")) {
+                    isActive = false;
+                } else {
+                    System.out.println("___________________________________________________________");
+                    System.out.println("No such command, Please try again with another command meow.");
+                    System.out.println("___________________________________________________________\n");
                 }
-            } else if(command.equals("list")) {
-                listTasks();
-            } else if(command.equals("bye")) {
-                isActive = false;
-            } else {
+            } catch(DukeCommandException e) {
                 System.out.println("___________________________________________________________");
-                System.out.println("No such command, Please try again with another command meow.");
+                System.out.printf("ERROR MEOW! %s\n", e.getMessage());
                 System.out.println("___________________________________________________________\n");
             }
         }
