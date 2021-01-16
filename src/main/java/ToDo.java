@@ -1,0 +1,16 @@
+/**
+ * ToDo is a child class of Task, retaining all the
+ * same functionalities as its parent.
+ */
+public class ToDo extends Task {
+
+    /**
+     * Constructor for ToDo class.
+     * @param id id of task
+     * @param taskName name of task
+     * @param status task completion status
+     */
+    public ToDo(int id, String taskName, String status) {
+        super(id, taskName, status, "T");
+    }
+}
