@@ -5,13 +5,8 @@ public class Deadlines extends Task{
         this.by = by;
     }
 
-    Deadlines(String name, boolean done, String by){
-        super(name, done, "[D]");
-        this.by = by;
-    }
-
     @Override
     public String toString(){
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + (this.done ? "[X] " : "[ ]") + this.getTaskName() +  " (by: " + this.by + ")";
     }
 }

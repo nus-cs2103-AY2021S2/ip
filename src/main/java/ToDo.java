@@ -3,13 +3,9 @@ public class ToDo extends Task{
         super(name);
     }
 
-    ToDo(String name, boolean done){
-
-        super(name, done, "[T]");
-    }
 
     @Override
     public String toString(){
-        return "[T]" + super.toString();
+        return "[T]" + (this.done ? "[X]" : "[ ]") + this.getTaskName();
     }
 }

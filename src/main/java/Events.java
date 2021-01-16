@@ -5,14 +5,9 @@ public class Events extends Task{
         this.by = by;
     }
 
-    Events(String name, boolean done, String by){
-
-        super(name, done, "[E]");
-        this.by = by;
-    }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (by: " + this.by + ")";
+        return "[E]" + (this.done ? "[X] " : "[ ]") + this.getTaskName() +  " (by: " + this.by + ")";
     }
 }
