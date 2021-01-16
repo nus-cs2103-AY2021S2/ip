@@ -18,6 +18,7 @@ public class TaskManager {
     static final String emptyList = prefix + "Currently there is nothing on your list.";
     static final String ADDED = prefix + "Got it. I've added this task:";
     static final String markAsDone = prefix + "Nice! I've mark this task as done:";
+    static final String removeTask = prefix + "Noted, I've removed this task:";
 
     public TaskManager() {
     }
@@ -66,6 +67,10 @@ public class TaskManager {
     public void printAfterAdd(Task task) {
         System.out.println(ADDED);
         System.out.println(prefix + task);
+        printListSize();
+    }
+
+    public void printListSize() {
         System.out.println(prefix + "Now you have " + list.size() + " tasks in the list.");
     }
 
@@ -83,6 +88,22 @@ public class TaskManager {
         task.markAsDone();
         System.out.println(markAsDone);
         System.out.println(prefix + task);
+    }
+
+    public void deleteTask(String input) throws Exception {
+        int index;
+        try {
+            index = Integer.parseInt(input.split(" ")[1]) - 1;
+        } catch (Exception e) {
+            throw new IllegalInputFormatException();
+        }
+        if (index < 0 || index >= list.size()) {
+            throw new TaskDoesNotExistException();
+        }
+        Task task = list.remove(index);
+        System.out.println(removeTask);
+        System.out.println(prefix + task);
+        printListSize();
     }
 
     public void list() {

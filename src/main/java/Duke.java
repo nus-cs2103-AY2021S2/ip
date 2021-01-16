@@ -28,6 +28,10 @@ public class Duke {
                     tm.done(input);
                     continue;
                 }
+                if (input.toLowerCase().split(" ")[0].equals("delete")) {
+                    tm.deleteTask(input);
+                    continue;
+                }
                 if (input.toLowerCase().split(" ")[0].equals("todo")) {
                     tm.addTodo(input);
                     continue;
