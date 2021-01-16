@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,6 +19,13 @@ public class IO {
         }
         printMessage.append(DIVIDER);
         print(printMessage.toString());
+    }
+    public static void printTasks(List<Task> tasks){
+        List<String> messages = new ArrayList<>();
+        for (Task task: tasks) {
+            messages.add(task.toString());
+        }
+        printList(messages);
     }
     private static void print(String message) {
         System.out.println(message);

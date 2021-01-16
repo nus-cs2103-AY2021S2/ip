@@ -20,22 +20,37 @@ public class Duke {
 
     private static String EXITCOMMAND = "bye";
     private static String LISTCOMMAND = "list";
+    private static String DONECOMMAND = "done";
 
     public static void main(String[] args) {
-        IO.printBotMessage("Hello from\n" + LOGO +"What can I do for you?");
+        printHelloMessage();
 
-        List<String> Task = new ArrayList<String>();
+        List<Task> Tasks = new ArrayList<Task>();
         while(true){
             String reply = IO.readLine();
             if(reply.equals(EXITCOMMAND)) {
                 break;
             }else if(reply.equals(LISTCOMMAND)) {
-                IO.printList(Task);
+                IO.printTasks(Tasks);
+            }else if(reply.startsWith(DONECOMMAND)){
+                IO.printBotMessage(reply.substring(5));
+                Integer index = Integer.parseInt(reply.substring(5));
+                Tasks.get(index-1).markCompleted();
+                printDoneMessage(Tasks.get(index-1));
             }else {
-                Task.add(reply);
+                Tasks.add(new Task(reply));
                 IO.printBotMessage("added: "+reply);
+
             }
         }
         IO.printBotMessage("Bye. Hope to see you again soon!");
+    }
+
+    public static void printHelloMessage(){
+        IO.printBotMessage("Hello from\n" + LOGO +"What can I do for you?");
+    }
+
+    public static void printDoneMessage(Task task){
+        IO.printBotMessage("Nice! I've marked this task as done:\n" + task.toString());
     }
 }
