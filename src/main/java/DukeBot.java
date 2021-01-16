@@ -15,37 +15,41 @@ public class DukeBot {
     public void handleCommand(String text) {
         String command = text.split(" ")[0];
         String commandOutput = "";
+        Task task;
         commandOutput += "\t ";
 
         switch (command) {
-        case "welcome":
-            commandOutput += "Hello! I'm Duke\n"
-                    + "\t What can I do for you?";
-            break;
-        case "list":
-            commandOutput = getTaskListContents();
-            break;
-        case "blah":
-            commandOutput += "blah";
-            break;
-        case "bye":
-            isExit = true;
-            commandOutput += "Bye. Hope to see you again soon!";
-            break;
-        case "done":
-            int taskNum = Integer.parseInt(text.split(" ")[1]);
-            taskList.get(taskNum).markAsDone();
-            commandOutput += "Nice! I've marked this task as done:\n"
-                    + "\t " + getTaskInfo(taskNum);
-            break;
-        case "todo":
-            text = text.replaceFirst("todo ", "");
-            Task task = new ToDo(text);
-            taskList.add(task);
-            commandOutput += task.toString() + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
-            break;
-        default:
-            break;
+            case "welcome":
+                commandOutput += "Hello! I'm Duke\n"
+                        + "\t What can I do for you?";
+                break;
+            case "list":
+                commandOutput = getTaskListContents();
+                break;
+            case "blah":
+                commandOutput += "blah";
+                break;
+            case "bye":
+                isExit = true;
+                commandOutput += "Bye. Hope to see you again soon!";
+                break;
+            case "done":
+                int taskNum = Integer.parseInt(text.split(" ")[1]);
+                task = taskList.get(taskNum);
+                task.markAsDone();
+                commandOutput += "Nice! I've marked this task as done:\n"
+                        + "\t " + task.toString();
+                break;
+            case "todo":
+                text = text.replaceFirst("todo ", "");
+                task = new ToDo(text);
+                taskList.add(task);
+                commandOutput += "Got it. I've added this task: \n\t\t "
+                        + task.toString()
+                        + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+                break;
+            default:
+                break;
         }
 
         commandOutput += "\n";
@@ -58,16 +62,10 @@ public class DukeBot {
 
         for (int i = 1; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            contents += String.format("\t %d. [%s] %s\n", (i), task.getStatusIcon(), task.getDescription());
+            contents += String.format("\t %d. %s\n", i, task.toString());
         }
 
         return contents;
-    }
-
-    private String getTaskInfo(int taskNum) {
-        Task task;
-        task = taskList.get(taskNum);
-        return String.format("[%s][%s] %s", task.getType(), task.getStatusIcon(), task.getDescription());
     }
 
     private void respondToCommand(String commandOutput) {

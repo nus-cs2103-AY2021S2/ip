@@ -6,7 +6,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return String.format("Got it. I've added this task:\n" +
-                "\t [%s][%s] %s", super.getType(), super.getStatusIcon(), super.getDescription());
+        return "[T]" + super.toString();
     }
 }
