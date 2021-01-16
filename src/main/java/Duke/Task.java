@@ -1,3 +1,5 @@
+package Duke;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -8,9 +10,8 @@ public class Task {
     }
 
     // Mark the task as done and return a success message from getTask()
-    public String markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
-        return getTask();
     }
 
     // Get the status icon depending on whether the task is done or not
@@ -18,9 +19,14 @@ public class Task {
         return (isDone ? "\u2718" : " "); //return X symbols if done, else return blank space
     }
 
-    // Return the task in the format [tick / X] <Task Description>
-    public String getTask() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+    public String successMessage(int taskListSize) {
+        return String.format("Got it. I've added this task:\n" +
+        "  %s\n" + "Now you have %d tasks in the list.\n",
+        this.toString(), taskListSize);
     }
 
+    @Override
+    public String toString() {
+        return description;
+    }
 }
