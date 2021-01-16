@@ -38,9 +38,13 @@ public class DukeBot {
             commandOutput += "Nice! I've marked this task as done:\n"
                     + "\t " + getTaskInfo(taskNum);
             break;
+        case "todo":
+            text = text.replaceFirst("todo ", "");
+            Task task = new ToDo(text);
+            taskList.add(task);
+            commandOutput += task.toString() + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+            break;
         default:
-            addTask(text);
-            commandOutput += "added: " + text;
             break;
         }
 
@@ -63,12 +67,7 @@ public class DukeBot {
     private String getTaskInfo(int taskNum) {
         Task task;
         task = taskList.get(taskNum);
-        return String.format("[%s] %s", task.getStatusIcon(), task.getDescription());
-    }
-
-    private void addTask(String task) {
-        Task toDo = new Task(task);
-        taskList.add(toDo);
+        return String.format("[%s][%s] %s", task.getType(), task.getStatusIcon(), task.getDescription());
     }
 
     private void respondToCommand(String commandOutput) {
