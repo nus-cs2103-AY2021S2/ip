@@ -1,20 +1,22 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
 
-        String line = "---------------------------\n";
+    public static void main(String[] args) {
+        Response.hello();
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(line + "what's up? :)" + "\n" + line);
 
         while (true) {
             String userInput = sc.nextLine();
             if (userInput.equals("bye")) {
+                System.out.println("bye, have a good day! :)");
                 break;
+            } else if (userInput.equals("list")) {
+                Response.listTasks();
+            } else {
+                Response.addTask(userInput);
             }
-            System.out.println(line + userInput + "\n" + line);
         }
-        System.out.println("bye, have a good day! :)");
     }
 }
