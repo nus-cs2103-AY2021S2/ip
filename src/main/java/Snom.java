@@ -11,8 +11,7 @@ public class Snom {
     public static void main(String[] args) {
         Snomio snomio = new Snomio(System.in, System.out);
         String command = "";
-        String content = "";
-        ArrayList<String> todoList = new ArrayList<>();
+        ArrayList<Task> todoList = new ArrayList<>();
 
         snomio.println("--------------------------------");
         snomio.println("Bonjour! I'm Snom! *squish*");
@@ -27,18 +26,28 @@ public class Snom {
             switch(command){
                 case "list":
                     for(int i = 0; i < todoList.size(); i++){
-                        snomio.println((i+1) + ". " + todoList.get(i));
+                        Task task = todoList.get(i);
+                        String status = task.getStatusSymbol();
+                        snomio.println((i+1) + ".[" + status + "]" + task.getDescription());
                     }
+                    break;
+                case "done":
+                    int taskNo = snomio.readInt() - 1;
+                    Task task = todoList.get(taskNo);
+                    task.setStatus(true);
+                    String status = task.getStatusSymbol();
+                    snomio.println("Great Job! I've marked this task as done:");
+                    snomio.println("[" + status + "]" + task.getDescription());
                     break;
                 case "bye":
                     snomio.println("Ciao! Hope to see you again soon!");
                     break;
                 default:
-                    content = command;
+                    String content = command;
                     while(snomio.hasMoreWord()){
                         content += " " + snomio.readWord();
                     }
-                    todoList.add(content);
+                    todoList.add(new Task(content));
                     snomio.println(content + " has been added to your to do list!");
             }
             snomio.println("--------------------------------");
