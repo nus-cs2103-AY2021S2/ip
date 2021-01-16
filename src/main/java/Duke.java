@@ -66,12 +66,18 @@ public class Duke {
 
     //Prints out the items in the list.
     public static void showList(List<Task> list) {
-        System.out.println("\t____________________________________________________________\n"
-                        + "\tHere are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
+        if (list.size() == 0) {
+            System.out.println("\t____________________________________________________________\n"
+                        + "\tThere are no items in your list."
+                        + "\t____________________________________________________________\n");
+        } else {
+            System.out.println("\t____________________________________________________________\n"
+                    + "\tHere are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("\t" + (i + 1) + "." + list.get(i).toString());
+            }
+            System.out.println("\t____________________________________________________________\n");
         }
-        System.out.println("\t____________________________________________________________\n");
     }
 
     //Check if string is number
