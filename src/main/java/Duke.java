@@ -1,3 +1,6 @@
+import Exceptions.DukeException;
+import Exceptions.IncompleteInputException;
+import Exceptions.UnknownCommandException;
 import Task.*;
 import Utils.Command;
 
@@ -9,8 +12,7 @@ public class Duke {
     private static final String BOT_NAME = "Chip the Squirrel";
     private static final TaskList taskList = new TaskList();
 
-
-    public static void processInput(String input) {
+    public static void processInput(String input) throws DukeException {
         String[] tokens = input.split(" ", 2);
         String command = tokens[0];
 
@@ -19,15 +21,6 @@ public class Duke {
                 printWithIndentation("Bye! Hope to see you again soon!");
                 System.exit(0);
                 break;
-            case "todo":
-                taskList.addTask(Command.TODO, tokens[1]);
-                break;
-            case "event":
-                taskList.addTask(Command.EVENT, tokens[1]);
-                break;
-            case "deadline":
-                taskList.addTask(Command.DEADLINE, tokens[1]);
-                break;
             case "done":
                 int idx = Integer.parseInt(tokens[1]) - 1;
                 taskList.markAsDone(idx);
@@ -35,8 +28,29 @@ public class Duke {
             case "list":
                 taskList.printTasks();
                 break;
+            case "todo":
+                if (tokens.length == 1) {
+                    throw new IncompleteInputException(Command.TODO);
+                }
+
+                taskList.addTask(Command.TODO, tokens[1]);
+                break;
+            case "event":
+                if (tokens.length == 1) {
+                    throw new IncompleteInputException(Command.EVENT);
+                }
+
+                taskList.addTask(Command.EVENT, tokens[1]);
+                break;
+            case "deadline":
+                if (tokens.length == 1) {
+                    throw new IncompleteInputException(Command.DEADLINE);
+                }
+
+                taskList.addTask(Command.DEADLINE, tokens[1]);
+                break;
             default:
-                printWithIndentation("I do not understand.");
+                throw new UnknownCommandException(command);
         }
     }
 
@@ -47,7 +61,16 @@ public class Duke {
 
         while (sc.hasNext()) {
             String input = sc.nextLine().trim();
-            processInput(input);
+
+            if (input.equals("")) {
+                continue;
+            }
+
+            try {
+                processInput(input);
+            } catch (DukeException e) {
+                printWithIndentation(e.getMessage());
+            }
         }
     }
 }
