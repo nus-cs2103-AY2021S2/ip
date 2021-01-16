@@ -62,7 +62,7 @@ Meow, here are the tasks in your list:
 ___________________________________________________________
 
 ___________________________________________________________
-Please enter a valid task index ranging from 1 to 3 (inclusive)
+ERROR MEOW! Please enter a valid task index ranging from 1 to 3 (inclusive).
 ___________________________________________________________
 
 ___________________________________________________________
