@@ -27,6 +27,14 @@ public class Task {
     }
 
     /**
+     * Provide the task's typing
+     * @return
+     */
+    public String getTypeSymbol() {
+        return " ";
+    }
+
+    /**
      * Provide the completion status of the task
      * @return
      */
