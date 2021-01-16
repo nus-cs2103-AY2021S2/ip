@@ -1,9 +1,8 @@
 public class Task {
-    protected String description;
+    protected StringBuilder description = new StringBuilder();
     protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
+    public Task(String[] description) {
     }
 
     public String getStatusIcon() {
@@ -14,6 +13,7 @@ public class Task {
         this.isDone = true;
     }
 
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

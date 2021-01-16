@@ -4,38 +4,55 @@ public class Duke {
     public static String topBorder = "\n    ********************************* \n";
     public static String btmBorder = "    ********************************* \n";
     public static ArrayList<Task> list = new ArrayList<>();
-    public static String doneMsg = "You have marked this task as completed: \n";
+    public static String markMsg = "You have marked this task as completed: \n";
+    public static String addMsg = "Roger that! Added the following: \n \n      ";
+    public static String indent4 = "     ";
 
     public static void printBox(String input) {
-        System.out.println(topBorder + "     " + input + "\n" + btmBorder);
+        System.out.println(topBorder + indent4 + input + "\n" + btmBorder);
     }
 
     public static void printList(List<Task> list) {
-        System.out.println(topBorder);
+        System.out.print(topBorder);
+        System.out.println("     This is your present task list: \n");
         for (int i = 1; i <= list.size(); i++) {
             if (i == list.size()) {
-                System.out.println("     " + i + ") " + list.get(i - 1));
+                System.out.println(indent4 + i + ") " + list.get(i - 1));
             } else {
-                System.out.println("     " + i + ") " + list.get(i - 1) + "\n");
+                System.out.println(indent4 + i + ") " + list.get(i - 1));
             }
         }
 
         System.out.println(btmBorder);
     }
 
-    public static void process(String command) {
+    public static void process(String input) {
+        String[] content = input.split("\\s+");
+        String command = content[0];
         if (command.equals("list")) {
             printList(list);
         } else {
-            if (command.split("\\s+")[0].equals("done")) {
-                int index = Integer.parseInt(command.split("\\s+")[1]);
+            if (command.equals("done")) {
+                int index = Integer.parseInt(content[1]);
                 Task task = list.get(index - 1);
                 task.complete();
-                printBox(doneMsg + "      " + task);
+                printBox(markMsg + "      " + task);
             } else {
-                Task newTask = new Task(command);
-                list.add(newTask);
-                printBox("added: " + newTask);
+                String[] description = Arrays.copyOfRange(content, 1, content.length);
+                Task newTask;
+                if (command.equals("todo")) {
+                    newTask = new Todo(description);
+                    list.add(newTask);
+                } else if (command.equals("deadline")) {
+                    newTask = new Deadline(description);
+                    list.add(newTask);
+                } else {
+                    newTask = new Event(description);
+                    list.add(newTask);
+                }
+                String tally = "     Currently you have " + list.size() + " tasks in the list.";
+                printBox(addMsg + newTask + "\n \n" + tally);
+
             }
         }
     }
