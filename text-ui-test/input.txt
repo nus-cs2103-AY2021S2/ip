@@ -1,0 +1,13 @@
+todo todo one
+event event /at Mon 12-4pm
+event event one /at Tues 4-6pm
+deadline deadline /by Mon 12-4pm
+deadline deadline one /by Tues 4-6pm
+list
+done 1
+done 2
+done 3
+done 4
+done 5
+list
+bye

@@ -65,7 +65,7 @@ public class Duke {
         tasks.add(task);
         int numTasks =  tasks.size();
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
-        printWithIndentation("Got it! I've added this task: ",
+        printWithIndentation("Got it! I've added this task:",
                 "  " + task.toString(),
                 "Now you have " + formattedTasksCount + " in the list.");
     }
