@@ -1,4 +1,4 @@
-package Tasks;
+package Duke;
 
 public class Event extends Task {
 
