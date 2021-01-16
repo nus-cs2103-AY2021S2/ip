@@ -130,8 +130,9 @@ public class Duke {
      * List all tasks entered by user.
      */
     public static void list() {
-        for (Task task: tasks) {
-            System.out.println(task);
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task task = tasks.get(i - 1);
+            System.out.println(i + "." + task);
         }
     }
 

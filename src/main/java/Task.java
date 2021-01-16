@@ -53,9 +53,9 @@ public class Task {
     @Override
     public String toString() {
         if (this.getStatus().equals("incomplete")) {
-            return this.getId() + ".[" + this.getType() + "][ ] " + this.getTaskName();
+            return "[" + this.getType() + "][ ] " + this.getTaskName();
         } else {
-            return this.getId() + ".[" + this.getType() + "][X] " + this.getTaskName();
+            return "[" + this.getType() + "][X] " + this.getTaskName();
         }
     }
 }
