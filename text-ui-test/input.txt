@@ -1,11 +1,13 @@
-done 3
-eat
-sleep
-play
+test
+todo eat
+deadline sleep /by 10pm Sunday
+event play /at 11am Saturday
 list
 done 3
+done 1
+list
 done 2
 list
-done 1
+done 0
 list
 bye

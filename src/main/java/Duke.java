@@ -14,7 +14,7 @@ public class Duke {
      */
     private static void printTaskAdding(Task task) {
         System.out.println("___________________________________________________________");
-        System.out.println("Got it meow. I've added this task: ");
+        System.out.println("Got it meow. I've added this task:");
         System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
         System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
         System.out.println("___________________________________________________________\n");
