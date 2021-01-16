@@ -1,18 +1,8 @@
-public class Task {
-    private boolean isDone;
-    private String name;
-
-    public Task(String n) {
-        isDone = false;
-        name = n;
-    }
+abstract public class Task {
+    protected boolean isDone;
+    protected String name;
 
     public void markAsDone() {
         isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return (isDone ? "[X] " : "[ ] ") + name;
     }
 }
