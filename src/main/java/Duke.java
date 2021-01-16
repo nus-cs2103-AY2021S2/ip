@@ -24,7 +24,7 @@ public class Duke {
             String[] tasksArr = new String[tasks.size()];
 
             for (int i = 0; i < tasks.size(); i++) {
-                tasksArr[i] = i + 1 + ". " + tasks.get(i).toString();
+                tasksArr[i] = (i + 1) + "." + tasks.get(i).toString();
             }
 
             printWithIndentation(tasksArr);
@@ -44,12 +44,19 @@ public class Duke {
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
-            String command = input.split(" ", 2)[0];
+            String[] tokens = input.split(" ", 2);
+            String command = tokens[0];
 
             switch(command) {
                 case "bye":
                     printWithIndentation("Bye! Hope to see you again soon!");
                     System.exit(0);
+                    break;
+                case "done":
+                    int idx = Integer.parseInt(tokens[1]) - 1;
+                    Task task = tasks.get(idx);
+                    task.markAsDone();
+                    printWithIndentation("Good Job! I've marked this task as done!", task.toString());
                     break;
                 case "list":
                     printTasks();
