@@ -148,45 +148,65 @@ public class Duke {
 
             switch (split[0]) {
                 case "list":
-                    System.out.println("Here are the tasks in your list uwu:");
-                    for(int i = 0; i < leestCounter; i++) {
-                        System.out.println((i + 1) + ". " + leest[i]);
+                    if (leestCounter == 0) {
+                        System.out.println("☹ OOPS!!! Your list is currently empty uwu.");
+                    } else {
+                        System.out.println("Here are the tasks in your list uwu:");
+                        for (int i = 0; i < leestCounter; i++) {
+                            System.out.println((i + 1) + ". " + leest[i]);
+                        }
                     }
                     break;
                 case "done":
-                    int done = Integer.parseInt(split[1]) - 1;
-                    leest[done].setDone();
-                    System.out.println("Sugoi! I've marked this task as done uwu: ");
-                    System.out.println(leest[done]);
+                    try {
+                        int done = Integer.parseInt(split[1]) - 1;
+                        leest[done].setDone();
+                        System.out.println("Sugoi! I've marked this task as done uwu: ");
+                        System.out.println(leest[done]);
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! Please indicate which task you completed uwu");
+                    }
                     break;
                 case "bye":
                     System.out.println("Bye, hope to see you again! uwu");
                     return;
                 case "todo":
-                    System.out.println("Hai. I've added this task uwu:");
-                    leest[leestCounter] = new Task(input.substring(5));
-                    System.out.println("    " + leest[leestCounter]);
-                    leestCounter++;
-                    System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    try {
+                        leest[leestCounter] = new Task(input.substring(5));
+                        System.out.println("    " + leest[leestCounter]);
+                        leestCounter++;
+                        System.out.println("Hai. I've added this task uwu:");
+                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
+                    }
                     break;
                 case "deadline":
-                    System.out.println("Hai. I've added this task:");
-                    String[] splitagain = input.substring(9).split("/by");
-                    leest[leestCounter] = new Deadline(splitagain[0], splitagain[1]);
-                    System.out.println("    " + leest[leestCounter]);
-                    leestCounter++;
-                    System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    try {
+                        String[] splitagain = input.substring(9).split("/by");
+                        leest[leestCounter] = new Deadline(splitagain[0], splitagain[1]);
+                        System.out.println("    " + leest[leestCounter]);
+                        leestCounter++;
+                        System.out.println("Hai. I've added this task:");
+                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
+                    }
                     break;
                 case "event":
-                    System.out.println("Hai. I've added this task:");
-                    String[] splitagain2 = input.substring(6).split("/at");
-                    leest[leestCounter] = new Deadline(splitagain2[0], splitagain2[1]);
-                    System.out.println("    " + leest[leestCounter]);
-                    leestCounter++;
-                    System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    try {
+                        String[] splitagain2 = input.substring(6).split("/at");
+                        leest[leestCounter] = new Deadline(splitagain2[0], splitagain2[1]);
+                        System.out.println("    " + leest[leestCounter]);
+                        leestCounter++;
+                        System.out.println("Hai. I've added this task:");
+                        System.out.println("Now you have " + leestCounter + " task(s) in the list uwu");
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! Please define your event properly uwu.");
+                    }
                     break;
                 default:
-                    System.out.println("uwu");
+                    System.out.println("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
                     break;
             }
         }
