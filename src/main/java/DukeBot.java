@@ -3,7 +3,7 @@ import java.util.List;
 
 public class DukeBot {
     private List<Task> taskList;
-    private boolean isExit = false;
+    private boolean isExit;
 
     public DukeBot() {
         taskList = new ArrayList<>();
@@ -28,12 +28,12 @@ public class DukeBot {
             commandOutput += "blah";
             break;
         case "bye":
-            commandOutput += "Bye. Hope to see you again soon!";
             isExit = true;
+            commandOutput += "Bye. Hope to see you again soon!";
             break;
         default:
             if (command.length() > 1 && command.split(" ")[0].equals("done")) {
-                int taskNum = Integer.parseInt(command.split(" ")[1] + 1);
+                int taskNum = Integer.parseInt(command.split(" ")[1]);
                 taskList.get(taskNum).markAsDone();
                 commandOutput += "Nice! I've marked this task as done:\n"
                     + "\t " + getTaskInfo(taskNum);
@@ -52,9 +52,9 @@ public class DukeBot {
     private String getTaskListContents() {
         String contents = "\t Here are the tasks in your list:\n";
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 1; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            contents += String.format("\t %d. [%s] %s\n", (i + 1), task.getStatusIcon(), task.getDescription());
+            contents += String.format("\t %d. [%s] %s\n", (i), task.getStatusIcon(), task.getDescription());
         }
 
         return contents;
