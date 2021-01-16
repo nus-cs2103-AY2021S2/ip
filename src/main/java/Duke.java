@@ -5,7 +5,7 @@ public class Duke {
     private static String LINE_BREAK = "------------------------------------------------------------";
     private static String INDENT = "    ";
     private static String BOT_NAME = "Chip the Squirrel";
-    private static ArrayList<String> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void printWithIndentation(String ... strings) {
         System.out.println(INDENT + LINE_BREAK);
@@ -24,7 +24,7 @@ public class Duke {
             String[] tasksArr = new String[tasks.size()];
 
             for (int i = 0; i < tasks.size(); i++) {
-                tasksArr[i] = i + 1 + ". " + tasks.get(i);
+                tasksArr[i] = i + 1 + ". " + tasks.get(i).toString();
             }
 
             printWithIndentation(tasksArr);
@@ -32,7 +32,7 @@ public class Duke {
     }
 
     public static void addTask(String task) {
-        tasks.add(task);
+        tasks.add(new Task(task));
 
         printWithIndentation("added: " + task);
     }
