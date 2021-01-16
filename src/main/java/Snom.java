@@ -4,9 +4,15 @@
  *
  * @author: Sharptail
  */
+
+import java.util.ArrayList;
+
 public class Snom {
     public static void main(String[] args) {
         Snomio snomio = new Snomio(System.in, System.out);
+        String command = "";
+        String content = "";
+        ArrayList<String> todoList = new ArrayList<>();
 
         snomio.println("--------------------------------");
         snomio.println("Bonjour! I'm Snom! *squish*");
@@ -15,19 +21,29 @@ public class Snom {
         snomio.println("--------------------------------");
         snomio.flush();
 
-        String input = snomio.readWord();
         do{
+            command = snomio.readWord();
             snomio.println("--------------------------------");
-            snomio.println(input);
+            switch(command){
+                case "list":
+                    for(int i = 0; i < todoList.size(); i++){
+                        snomio.println((i+1) + ". " + todoList.get(i));
+                    }
+                    break;
+                case "bye":
+                    snomio.println("Ciao! Hope to see you again soon!");
+                    break;
+                default:
+                    content = command;
+                    while(snomio.hasMoreWord()){
+                        content += " " + snomio.readWord();
+                    }
+                    todoList.add(content);
+                    snomio.println(content + " has been added to your to do list!");
+            }
             snomio.println("--------------------------------");
             snomio.flush();
-            input = snomio.readWord();
-        }while(!input.equalsIgnoreCase("bye"));
-
-        snomio.println("--------------------------------");
-        snomio.println("Bye. Hope to see you again soon!");
-        snomio.println("--------------------------------");
-        snomio.flush();
+        }while(!command.equalsIgnoreCase("bye"));
 
         snomio.close();
     }

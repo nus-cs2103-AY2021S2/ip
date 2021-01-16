@@ -18,11 +18,15 @@ public class Snomio extends PrintWriter {
         reader = new BufferedReader(new InputStreamReader(is));
     }
 
+    public boolean hasMoreWord(){
+        return tokenizer.hasMoreTokens();
+    }
+
     public String readWord() {
         String input = null;
         String token;
 
-        while(tokenizer == null || tokenizer.hasMoreTokens() == false){
+        while(tokenizer == null || !tokenizer.hasMoreTokens()){
             try {
                 input = reader.readLine();
             } catch (IOException e) {
@@ -36,6 +40,15 @@ public class Snomio extends PrintWriter {
         token = tokenizer.nextToken();
 
         return token;
+    }
+
+    public String readLine(){
+        try {
+            return reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public int readInt(){
