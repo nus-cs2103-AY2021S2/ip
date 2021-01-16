@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.zip.DataFormatException;
 
 
 public class Duke {
@@ -16,7 +15,7 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         greet();
-        addList(list);
+        commandList(list);
     }
 
     //Duke greets the user.
@@ -44,7 +43,7 @@ public class Duke {
     //Adds the input in a list and echo it back to the user.
     //Prints the list if input is "list"
     //Mark task as done if input is "done" with task number.
-    public static void addList(List<Task> list) {
+    public static void commandList(List<Task> list) {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             if (input.equals("list")) {
@@ -52,48 +51,9 @@ public class Duke {
             } else {
                 String[] check = input.split(" ");
                 if (check.length == 2 && check[0].equals("done") && isNumber(check[1])) {
-                    int num = Integer.parseInt(check[1]);
-                    if (num > 0 && num <= list.size()) {
-                        list.get(num - 1).markAsDone();
-                        System.out.println("\t____________________________________________________________\n"
-                                        + "\tNice! I've marked this task as done:\n\t\t"
-                                        + list.get(num - 1).toString() + "\n"
-                                        + "\t____________________________________________________________\n");
-
-                    } else {
-                        System.out.println("\t____________________________________________________________\n"
-                                    + "\tTask not in list.\n"
-                                    + "\t____________________________________________________________\n");
-                    }
+                    markTaskDone(list, check);
                 } else {
-                    Task temp;
-                    String description = "";
-                    String date = "";
-
-                    if (check[0].equals("todo")) {
-                        description = input.substring(5);
-                        temp = new TodoTask(description);
-                    } else if (check[0].equals("deadline")) {
-                        int index = input.lastIndexOf("/by");
-                        description = input.substring(9, index - 1);
-                        date = input.substring(index + 4);
-                        temp = new DeadlineTask(description, date);
-                    } else if (check[0].equals("event")) {
-                        int index = input.lastIndexOf("/at");
-                        description = input.substring(6, index - 1);
-                        date = input.substring(index + 4);
-                        temp = new EventTask(description, date);
-                    } else {
-                        description = input;
-                        temp = new Task(description);
-                    }
-                    list.add(temp);
-                    System.out.println("\t____________________________________________________________\n"
-                            + "\tGot it. I've added this task:\n"
-                            + "\t   " + temp.toString() + "\n"
-                            + "\tNow you have " + list.size() + " tasks in the list.\n"
-                            + "\t____________________________________________________________\n");
-
+                    addToList(list, input, check);
                 }
             }
             input = sc.nextLine();
@@ -117,10 +77,56 @@ public class Duke {
     //Check if string is number
     public static boolean isNumber(String s) {
         try {
-            int i = Integer.parseInt(s);
+            Integer.parseInt(s);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static void markTaskDone(List<Task> list, String[] check) {
+        int num = Integer.parseInt(check[1]);
+        if (num > 0 && num <= list.size()) {
+            list.get(num - 1).markAsDone();
+            System.out.println("\t____________________________________________________________\n"
+                    + "\tNice! I've marked this task as done:\n\t\t"
+                    + list.get(num - 1).toString() + "\n"
+                    + "\t____________________________________________________________\n");
+
+        } else {
+            System.out.println("\t____________________________________________________________\n"
+                    + "\tTask not in list.\n"
+                    + "\t____________________________________________________________\n");
+        }
+    }
+
+    public static void addToList(List<Task> list, String input, String[] check) {
+        Task temp;
+        String description;
+        String date;
+
+        if (check[0].equals("todo")) {
+            description = input.substring(5);
+            temp = new TodoTask(description);
+        } else if (check[0].equals("deadline")) {
+            int index = input.lastIndexOf("/by");
+            description = input.substring(9, index - 1);
+            date = input.substring(index + 4);
+            temp = new DeadlineTask(description, date);
+        } else if (check[0].equals("event")) {
+            int index = input.lastIndexOf("/at");
+            description = input.substring(6, index - 1);
+            date = input.substring(index + 4);
+            temp = new EventTask(description, date);
+        } else {
+            description = input;
+            temp = new Task(description);
+        }
+        list.add(temp);
+        System.out.println("\t____________________________________________________________\n"
+                + "\tGot it. I've added this task:\n"
+                + "\t   " + temp.toString() + "\n"
+                + "\tNow you have " + list.size() + " tasks in the list.\n"
+                + "\t____________________________________________________________\n");
     }
 }
