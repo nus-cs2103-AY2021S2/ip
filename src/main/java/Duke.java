@@ -1,39 +1,62 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static String LINE_BREAK = "------------------------------------------------------------";
+    private static String INDENT = "    ";
     private static String BOT_NAME = "Chip the Squirrel";
+    private static ArrayList<String> tasks = new ArrayList<>();
 
-    public static void printWithIndentation(String s) {
-        String indent = "    ";
-        System.out.println(indent + s);
+    public static void printWithIndentation(String ... strings) {
+        System.out.println(INDENT + LINE_BREAK);
+
+        for (String s : strings) {
+            System.out.println(INDENT + s);
+        }
+
+        System.out.println(INDENT + LINE_BREAK);
+    }
+
+    public static void printTasks() {
+        if (tasks.size() == 0) {
+            printWithIndentation("You have not added any tasks.");
+        } else {
+            String[] tasksArr = new String[tasks.size()];
+
+            for (int i = 0; i < tasks.size(); i++) {
+                tasksArr[i] = i + 1 + ". " + tasks.get(i);
+            }
+
+            printWithIndentation(tasksArr);
+        }
+    }
+
+    public static void addTask(String task) {
+        tasks.add(task);
+
+        printWithIndentation("added: " + task);
     }
 
     public static void main(String[] args) {
-        printWithIndentation(LINE_BREAK);
-
-        printWithIndentation("Hello! I'm " + BOT_NAME + "!");
-        printWithIndentation("What can I do for you today?");
-        printWithIndentation(LINE_BREAK);
+        printWithIndentation("Hello! I'm " + BOT_NAME + "!", "What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
-            String command = sc.next();
+            String input = sc.nextLine();
+            String command = input.split(" ", 2)[0];
 
             switch(command) {
                 case "bye":
-                    printWithIndentation(LINE_BREAK);
                     printWithIndentation("Bye! Hope to see you again soon!");
-                    printWithIndentation(LINE_BREAK);
                     System.exit(0);
                     break;
+                case "list":
+                    printTasks();
+                    break;
                 default:
-                    printWithIndentation(LINE_BREAK);
-                    printWithIndentation(command);
-                    printWithIndentation(LINE_BREAK);
+                    addTask(input);
             }
-
         }
     }
 }
