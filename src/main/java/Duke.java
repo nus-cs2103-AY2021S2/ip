@@ -9,10 +9,21 @@ public class Duke {
 
         Scanner scan = new Scanner(System.in);
         String string = scan.nextLine();
+        String[] str = new String[100];
+        int k, i = 0;
 
         while (!string.equals("bye")) {
-            System.out.println(string);
-            string = scan.nextLine();
+            if (string.equals("list")) {
+                for (int j = 0; j < i; j++) {
+                    k = j + 1;
+                    System.out.println(k + ". " + str[j]);
+                }
+                string = scan.nextLine();
+            } else {
+                System.out.println("added: " + string);
+                str[i++] = string;
+                string = scan.nextLine();
+            }
         }
 
         System.out.println("Bye. Hope to see you again soon");
