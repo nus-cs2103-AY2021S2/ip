@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -12,7 +14,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
 
-        Storage newStorage = new Storage();
+        List<String> newStorage = new ArrayList<>();
 
         while(sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -22,8 +24,8 @@ public class Duke {
             }
 
             else if (userInput.equals("list")) {
-                for (int i = 0; i < newStorage.getStorage().size(); i++) {
-                    System.out.println(i+1 + "." + newStorage.getStorage().get(i));
+                for (int i = 0; i < newStorage.size(); i++) {
+                    System.out.println(i+1 + "." + newStorage.get(i));
                 }
             }
             else {
