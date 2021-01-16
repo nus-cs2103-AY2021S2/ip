@@ -1,15 +1,52 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 
     @Test
-    public void parseInputEchoToOutput() {
-        assertEquals("list", Duke.parseInput("list"));
-        assertEquals("blah", Duke.parseInput("blah"));
+    public void parseInputAddToList() {
+        int tasksStateLength = Duke.tasks.size();
+
+        assertEquals("added: help people", Duke.parseInput("help people"));
+
+        assertEquals(tasksStateLength + 1, Duke.tasks.size());
+
+        assertEquals(Duke.tasks.get(tasksStateLength), "help people");
+    }
+
+    @Test
+    public void parseInputAddToListMaintainsOrder() {
+        int tasksStateLength = Duke.tasks.size();
+
+        assertEquals("added: help people", Duke.parseInput("help people"));
+        assertEquals("added: blah", Duke.parseInput("blah"));
+        assertEquals("added: read book", Duke.parseInput("read book"));
+
+        assertEquals(tasksStateLength + 3, Duke.tasks.size());
+
+        assertEquals(Duke.tasks.get(tasksStateLength), "help people");
+        assertEquals(Duke.tasks.get(tasksStateLength + 1), "blah");
+        assertEquals(Duke.tasks.get(tasksStateLength + 2), "read book");
+    }
+
+    @Test
+    public void parseInputListOutputTasksState() {
+        // Setup
+        Duke.tasks = new ArrayList<>(100);
+        assertEquals("added: help people", Duke.parseInput("help people"));
+        assertEquals("added: blah", Duke.parseInput("blah"));
+        assertEquals("added: read book", Duke.parseInput("read book"));
+
+        final String expectedString = "1. help people\n2. blah\n3. read book\n";
+
+        // Test
+        assertEquals(expectedString, Duke.parseInput("list"));
     }
 
     @Test
@@ -39,6 +76,6 @@ public class DukeTest {
         Duke.chatLoop(ins, out);
 
         assertEquals(null, in.readLine());
-        assertEquals(testInput, new String(out.toByteArray()));
+        assertNotEquals("", new String(out.toByteArray()));
     }
 }
