@@ -4,9 +4,4 @@ public class LevelOne {
          return input;
      }
 
-     @Override
-    public String toString(){
-         return "Hello! I'm Duke \nWhat can I do for you?";
-
-     }
 }
