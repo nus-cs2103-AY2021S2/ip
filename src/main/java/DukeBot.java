@@ -3,16 +3,18 @@ import java.util.List;
 
 public class DukeBot {
     private List<Task> taskList;
+    private boolean isExit = false;
 
     public DukeBot() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
+        taskList.add(null);
+        isExit = false;
         handleCommand("welcome");
     }
 
     public void handleCommand(String command) {
         String commandOutput = "";
         commandOutput += "\t ";
-        boolean isExit = false;
 
         switch (command) {
         case "welcome":
@@ -30,31 +32,49 @@ public class DukeBot {
             isExit = true;
             break;
         default:
-            commandOutput += "added: " + command;
-            Task task = new Task(command);
-            taskList.add(task);
+            if (command.length() > 1 && command.split(" ")[0].equals("done")) {
+                int taskNum = Integer.parseInt(command.split(" ")[1] + 1);
+                taskList.get(taskNum).markAsDone();
+                commandOutput += "Nice! I've marked this task as done:\n"
+                    + "\t " + getTaskInfo(taskNum);
+            } else { //Add a task
+                addTask(command);
+                commandOutput += "added: " + command;
+            }
             break;
         }
 
         commandOutput += "\n";
 
-        respondToCommand(commandOutput, isExit);
+        respondToCommand(commandOutput);
     }
 
     private String getTaskListContents() {
         String contents = "\t Here are the tasks in your list:\n";
 
         for (int i = 0; i < taskList.size(); i++) {
-            contents += String.format("\t %d.r%s\n", (i + 1), taskList.get(i).getTaskInfo());
+            Task task = taskList.get(i);
+            contents += String.format("\t %d. [%s] %s\n", (i + 1), task.getStatusIcon(), task.getDescription());
         }
 
         return contents;
     }
 
-    private void respondToCommand(String commandOutput, boolean isExit) {
-        String responseMsg = "\n\t____________________________________________________________\n"
+    private String getTaskInfo(int taskNum) {
+        Task task;
+        task = taskList.get(taskNum);
+        return String.format("[%s] %s", task.getStatusIcon(), task.getDescription());
+    }
+
+    private void addTask(String task) {
+        Task toDo = new Task(task);
+        taskList.add(toDo);
+    }
+
+    private void respondToCommand(String commandOutput) {
+        String responseMsg = "\t____________________________________________________________\n"
                 + commandOutput
-                + "\t____________________________________________________________\n\n";
+                + "\t____________________________________________________________\n";
 
         System.out.println(responseMsg);
 
