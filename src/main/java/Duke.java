@@ -27,10 +27,10 @@ public class Duke {
                 }
                 case "done": {
                     int userIndex = Integer.parseInt(arrOfUserInput[1]);
-                    tasks[userIndex].markAsDone();
+                    tasks[userIndex - 1].markAsDone();
                     printSegment();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t" + tasks[userIndex]);
+                    System.out.println("\t" + tasks[userIndex - 1]);
                     printSegment();
                 }
                 case "bye":
