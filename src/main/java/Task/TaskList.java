@@ -1,5 +1,6 @@
 package Task;
 
+import Exceptions.InvalidInputException;
 import Utils.Command;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class TaskList {
         }
     }
 
-    public void addTask(Command command, String input) {
+    public void addTask(Command command, String input) throws ArrayIndexOutOfBoundsException {
         String[] tokens;
         Task task;
 
@@ -58,14 +59,29 @@ public class TaskList {
                 "Now you have " + formattedTasksCount + " in the list.");
     }
 
-    public void markAsDone(int idx) {
-        Task task = taskList.get(idx);
+    public void markAsDone(int idx) throws InvalidInputException {
+        Task task;
+        try {
+            task = taskList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidInputException(taskList.size());
+        }
+
         task.markAsDone();
         printWithIndentation("Good Job! I've marked this task as done!", task.toString());
     }
 
-    public void delete(int idx) {
-        Task task = taskList.get(idx);
+    public void delete(int idx) throws InvalidInputException {
+        Task task;
+        try {
+            task = taskList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            if (taskList.size() == 0) {
+                throw new InvalidInputException();
+            } else {
+                throw new InvalidInputException(taskList.size());
+            }
+        }
 
         taskList.remove(idx);
 

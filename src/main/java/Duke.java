@@ -14,45 +14,42 @@ public class Duke {
 
     public static void processInput(String input) throws DukeException {
         String[] tokens = input.split(" ", 2);
-        String command = tokens[0];
+        Command command;
+
+        try {
+            command = Command.valueOf(tokens[0].trim().toUpperCase());
+        } catch (IllegalArgumentException e){
+            throw new UnknownCommandException(tokens[0].trim());
+        }
 
         switch(command) {
-            case "bye":
+            case BYE:
                 printWithIndentation("Bye! Hope to see you again soon!");
                 System.exit(0);
                 break;
-            case "done":
-                taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+            case DONE:
+                try {
+                    taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new IncompleteInputException(command);
+                }
                 break;
-            case "delete":
-                taskList.delete(Integer.parseInt(tokens[1]) - 1);
+            case DELETE:
+                try {
+                    taskList.delete(Integer.parseInt(tokens[1]) - 1);
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new IncompleteInputException(command);
+                }
                 break;
-            case "list":
+            case LIST:
                 taskList.printTasks();
                 break;
-            case "todo":
-                if (tokens.length == 1) {
-                    throw new IncompleteInputException(Command.TODO);
-                }
-
-                taskList.addTask(Command.TODO, tokens[1]);
-                break;
-            case "event":
-                if (tokens.length == 1) {
-                    throw new IncompleteInputException(Command.EVENT);
-                }
-
-                taskList.addTask(Command.EVENT, tokens[1]);
-                break;
-            case "deadline":
-                if (tokens.length == 1) {
-                    throw new IncompleteInputException(Command.DEADLINE);
-                }
-
-                taskList.addTask(Command.DEADLINE, tokens[1]);
-                break;
             default:
-                throw new UnknownCommandException(command);
+                try {
+                    taskList.addTask(command, tokens[1].trim());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new IncompleteInputException(command);
+                }
         }
     }
 

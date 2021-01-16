@@ -1,9 +1,11 @@
 package Utils;
 
 public enum Command {
-    DEADLINE,
-    TODO,
-    EVENT,
     BYE,
-    LIST
+    DEADLINE,
+    DELETE,
+    DONE,
+    EVENT,
+    LIST,
+    TODO
 }

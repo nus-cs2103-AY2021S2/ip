@@ -17,4 +17,10 @@ todo
 deadline
 event
 blah
+done
+delete
+event no date
+deadline no date
+delete one
+done one
 bye

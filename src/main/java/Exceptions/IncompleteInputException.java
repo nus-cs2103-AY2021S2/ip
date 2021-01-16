@@ -17,6 +17,12 @@ public class IncompleteInputException extends DukeException {
             case DEADLINE:
                 message = "Deadline requires a description and a date :(";
                 break;
+            case DELETE:
+                message = "Please enter a valid number after delete :(";
+                break;
+            case DONE:
+                message = "Please enter a valid number after done :(";
+                break;
             default:
                 message = "I am not sure what happened. Please try again :(";
         }
