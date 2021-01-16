@@ -1,9 +1,12 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Duke {
 
     public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     public static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    public static List<String> database = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         // Prints greeting
@@ -13,23 +16,36 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        pw.println("Hello! I'm \n" + logo + "\nWhat can I do for you?");
+        pw.printf("Hello! I'm \n%s\nWhat can I do for you?\n", logo);
         printHorizontalLine();
         pw.flush();
 
         // Ask for commands
+        boolean isExiting = false;
         while (true) {
             String command = br.readLine();
             printHorizontalLine();
-            if (command.equals("bye")) {
-                // Exit program
-                break;
-            } else {
-                // Echos command
-                pw.println(command);
-                printHorizontalLine();
-                pw.flush();
+            switch (command) {
+                case "list":
+                    if (database.isEmpty()) {
+                        pw.println("You do not have anything to do at the moment!");
+                    }
+                    for (int i = 1; i <= database.size(); i++) {
+                        pw.printf("%d. %s\n", i, database.get(i - 1));
+                    }
+                    break;
+                case "bye":
+                    isExiting = true;
+                    break;
+                default:
+                    database.add(command);
+                    printAddedTask(command);
             }
+            if (isExiting) {
+                break;
+            }
+            printHorizontalLine();
+            pw.flush();
         }
 
         pw.println("Bye. Hope to see you again soon!");
@@ -42,5 +58,9 @@ public class Duke {
             pw.print('-');
         }
         pw.println();
+    }
+
+    public static void printAddedTask(String str) {
+        pw.printf("Added task: %s\n", str);
     }
 }
