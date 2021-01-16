@@ -1,11 +1,11 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         DukeBot dukeBot = new DukeBot();
 
-        while(true) {
+        while (true) {
             String command = sc.nextLine();
             dukeBot.handleCommand(command);
         }

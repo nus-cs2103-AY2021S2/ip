@@ -12,7 +12,7 @@ public class DukeBot {
     public void handleCommand(String command) {
         String commandOutput = "";
         commandOutput += "\t ";
-        boolean exit = false;
+        boolean isExit = false;
 
         switch (command) {
             case "welcome":
@@ -20,14 +20,14 @@ public class DukeBot {
                         + "\t What can I do for you?";
                 break;
             case "list":
-                commandOutput = memoryContents();
+                commandOutput = getMemoryContents();
                 break;
             case "blah":
                 commandOutput += "blah";
                 break;
             case "bye":
                 commandOutput += "Bye. Hope to see you again soon!";
-                exit = true;
+                isExit = true;
                 break;
             default:
                 commandOutput += "added: " + command;
@@ -36,27 +36,27 @@ public class DukeBot {
         }
         commandOutput += "\n";
 
-        respondToCommand(commandOutput, exit);
+        respondToCommand(commandOutput, isExit);
     }
 
-    private String memoryContents() {
+    private String getMemoryContents() {
         String contents = "";
 
-        for(int i = 0; i < memory.size(); i++) {
+        for (int i = 0; i < memory.size(); i++) {
             contents += String.format("\t %d. %s\n", (i + 1), memory.get(i));
         }
 
         return contents;
     }
 
-    private void respondToCommand(String commandOutput, boolean exit) {
+    private void respondToCommand(String commandOutput, boolean isExit) {
         String responseMsg = "\n\t____________________________________________________________\n"
                 + commandOutput
                 + "\t____________________________________________________________\n\n";
 
         System.out.println(responseMsg);
 
-        if (exit) {
+        if (isExit) {
             System.exit(0);
         }
     }
