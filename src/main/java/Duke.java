@@ -12,13 +12,24 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
 
+        Storage newStorage = new Storage();
+
         while(sc.hasNextLine()) {
             String userInput = sc.nextLine();
             if (userInput.equals("bye")) {
                 indentInput("Hope to see you again!");
                 break;
             }
-            indentInput(userInput);
+
+            else if (userInput.equals("list")) {
+                for (int i = 0; i < newStorage.getStorage().size(); i++) {
+                    System.out.println(i+1 + "." + newStorage.getStorage().get(i));
+                }
+            }
+            else {
+                indentInput(userInput);
+                newStorage.add(userInput);
+            }
         }
 
     }
