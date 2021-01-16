@@ -27,16 +27,18 @@ public class Duke {
     private static String DEADLINECOMMAND = "deadline";
     private static String EVENTCOMMAND = "event";
 
+    private static IO io;
     public static void main(String[] args) {
+        io = new IO();
         printHelloMessage();
 
         List<Task> Tasks = new ArrayList<Task>();
         while(true){
-            String reply = IO.readLine();
+            String reply = io.readLine();
             if(reply.equals(EXITCOMMAND)) {
                 break;
             }else if(reply.equals(LISTCOMMAND)) {
-                IO.printTasks(Tasks);
+                io.printTasks(Tasks);
             }else if(reply.startsWith(DONECOMMAND)){
                 Integer index = Integer.parseInt(reply.substring(5));
                 Tasks.get(index-1).markCompleted();
@@ -59,18 +61,18 @@ public class Duke {
                 printAddedTaskMessage(newTask, Tasks.size());
             }
         }
-        IO.printBotMessage("Bye. Hope to see you again soon!");
+        io.printBotMessage("Bye. Hope to see you again soon!");
     }
 
     public static void printHelloMessage(){
-        IO.printBotMessage("Hello from\n" + LOGO +"What can I do for you?");
+        io.printBotMessage("Hello from\n" + LOGO +"What can I do for you?");
     }
 
     public static void printDoneMessage(Task task){
-        IO.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
+        io.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
     }
 
     public static void printAddedTaskMessage(Task task, int count){
-        IO.printBotMessage("Got it. I've added this task: \n  " + task.toString()+"\nNow you have "+count+" tasks in the list.");
+        io.printBotMessage("Got it. I've added this task: \n  " + task.toString()+"\nNow you have "+count+" tasks in the list.");
     }
 }
