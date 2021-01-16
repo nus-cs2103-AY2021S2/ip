@@ -24,10 +24,9 @@ public class Command {
 
     public static Task convertToTask(String command, CommandType type) throws DukeException {
         switch (type) {
-            case TODO -> {
+            case TODO:
                 return new Todo(command.substring(5));
-            }
-            case DEADLINE -> {
+            case DEADLINE:
                 int indexOfBy = command.toLowerCase().indexOf("/by");
                 if (indexOfBy > 0 && command.charAt(indexOfBy - 1) == ' '
                         && command.charAt(indexOfBy + 3) == ' ') {
@@ -35,8 +34,7 @@ public class Command {
                 } else {
                     throw new DukeException("Invalid Argument");
                 }
-            }
-            case EVENT -> {
+            case EVENT:
                 int indexOfAt = command.toLowerCase().indexOf("/at");
                 if (indexOfAt > 0 && command.charAt(indexOfAt - 1) == ' '
                         && command.charAt(indexOfAt + 3) == ' ') {
@@ -44,10 +42,9 @@ public class Command {
                 } else {
                     throw new DukeException("Invalid Argument");
                 }
-            }
-            default -> {
+            default:
                 throw new DukeException("Invalid Type");
-            }
+
         }
     }
 

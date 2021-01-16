@@ -49,8 +49,10 @@ public class Duke {
         while (type != CommandType.BYE) {
             System.out.print(horizontalLine);
             switch (type) {
-                case LIST -> message = list.toString();
-                case DONE -> {
+                case LIST:
+                    message = list.toString();
+                    break;
+                case DONE:
                     int index;
                     try {
                         index = Integer.parseInt(command.substring(5)) - 1;
@@ -64,8 +66,8 @@ public class Duke {
                     } catch (IndexOutOfBoundsException e) {
                         message = "Do not have such task\n";
                     }
-                }
-                default -> {
+                    break;
+                default:
                     try {
                         Task t = Command.convertToTask(command, type);
                         list.addJob(t);
@@ -75,7 +77,7 @@ public class Duke {
                     } catch (DukeException e) {
                         message = e.getMessage() + "\n";
                     }
-                }
+
             }
 
             System.out.print(message);
