@@ -1,16 +1,5 @@
 import java.util.Scanner;
 
-enum CommandType {
-    TODO,
-    DEADLINE,
-    EVENT,
-    LIST,
-    DONE,
-    DELETE,
-    BYE,
-    OTHER
-}
-
 public class Duke {
     static final int LENGTH_OF_LINE = 80;
 
@@ -62,47 +51,46 @@ public class Duke {
                 System.out.println(horizontalLine);
                 continue;
             }
-            switch (type) {
-                case BYE -> loop = false;
-                case LIST -> message = list.toString();
-                case DONE -> {
-                    int index;
-                    index = Integer.parseInt(command.substring(5)) - 1;
-                    if (index < list.getSize() && index >= 0) {
-                        currTask = list.getJob(index);
-                        currTask.markAsDone();
-                        message = "This task is marked as done: \n"
-                                + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE);
-                        list.replaceJob(index, currTask);
-                    } else {
-                        message = "No such task in the list\n";
-                    }
+            if (type == CommandType.BYE) {
+                loop = false;
+            } else if (type == CommandType.LIST) {
+                message = list.toString();
+            } else if (type == CommandType.DONE) {
+                int index;
+                index = Integer.parseInt(command.substring(5)) - 1;
+                if (index < list.getSize() && index >= 0) {
+                    currTask = list.getJob(index);
+                    currTask.markAsDone();
+                    message = "This task is marked as done: \n"
+                            + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE);
+                    list.replaceJob(index, currTask);
+                } else {
+                    message = "No such task in the list\n";
                 }
-                case DELETE -> {
-                    int index;
-                    index = Integer.parseInt(command.substring(7)) - 1;
-                    if (index < list.getSize() && index >= 0) {
-                        currTask = list.getJob(index);
-                        list.deleteJob(index);
-                        message = "This task is deleted: \n"
-                                + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE)
-                                + "Now you have " + list.getSize()
-                                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");;
-                    } else {
-                        message = "No such task in the list\n";
-                    }
+            } else if (type == CommandType.DELETE) {
+                int index;
+                index = Integer.parseInt(command.substring(7)) - 1;
+                if (index < list.getSize() && index >= 0) {
+                    currTask = list.getJob(index);
+                    list.deleteJob(index);
+                    message = "This task is deleted: \n"
+                            + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE)
+                            + "Now you have " + list.getSize()
+                            + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");;
+                } else {
+                    message = "No such task in the list\n";
                 }
-                case OTHER -> message = "Invalid command\n";
-                default -> {
-                    try {
-                        Task t = Command.convertToTask(command, type);
-                        list.addJob(t);
-                        message = "Task added:\n" + StringParser.newLiner(t.toString(), LENGTH_OF_LINE)
-                                + "Now you have " + list.getSize()
-                                + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
-                    } catch (DukeException e) {
-                        message = e.getMessage() + "\n";
-                    }
+            } else if (type == CommandType.OTHER) {
+                message = "Invalid command\n";
+            } else {
+                try {
+                    Task t = Command.convertToTask(command, type);
+                    list.addJob(t);
+                    message = "Task added:\n" + StringParser.newLiner(t.toString(), LENGTH_OF_LINE)
+                            + "Now you have " + list.getSize()
+                            + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n");
+                } catch (DukeException e) {
+                    message = e.getMessage() + "\n";
                 }
             }
 

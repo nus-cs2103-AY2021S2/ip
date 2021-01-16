@@ -73,16 +73,14 @@ public class Command {
     }
 
     public static Task convertToTask(String command, CommandType type) throws DukeException {
-        switch (type) {
-            case TODO -> {
+        if (type == CommandType.TODO) {
                 String subStr = command.substring(5);
                 if (StringParser.isBlank(subStr)) {
                     throw new DukeException("Void argument: Content field is blank");
                 } else {
                     return new Todo(command.substring(5));
                 }
-            }
-            case DEADLINE -> {
+            } else if (type == CommandType.DEADLINE) {
                 int indexOfBy = command.toLowerCase().indexOf("/by");
                 String subStrContent = command.substring(9, indexOfBy - 1);
                 String subStrTime = command.substring(indexOfBy + 4);
@@ -93,8 +91,7 @@ public class Command {
                 } else {
                     return new Deadline(subStrContent, subStrTime);
                 }
-            }
-            case EVENT -> {
+            } else if (type == CommandType.EVENT) {
                 int indexOfAt = command.toLowerCase().indexOf("/at");
                 String subStrContent = command.substring(6, indexOfAt - 1);
                 String subStrTime = command.substring(indexOfAt + 4);
@@ -105,10 +102,8 @@ public class Command {
                 } else {
                     return new Event(subStrContent, subStrTime);
                 }
-            }
-            default -> {
+            } else {
                 throw new DukeException("Invalid command: Unknown reason");
             }
-        }
     }
 }
