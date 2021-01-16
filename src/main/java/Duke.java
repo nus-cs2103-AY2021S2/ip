@@ -13,7 +13,7 @@ public class Duke {
 
         // User input data
         String userInput;
-        ArrayList<String> userInputs = new ArrayList();
+        ArrayList<String> userInputs = new ArrayList<>();
 
         // Loop through and echo the input until the user inputs "bye"
         while (true) {
