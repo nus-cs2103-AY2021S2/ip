@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Duke is a project that eventually builds into a personal assistant chat bot.
  */
 public class Duke {
-    public static ArrayList<String> words = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Entry point of the program, first greets then listens for input from user.
@@ -14,7 +14,6 @@ public class Duke {
     public static void main(String[] args) {
         greet();
         listenInput();
-
     }
 
     /**
@@ -35,9 +34,13 @@ public class Duke {
             //program exits on bye
             if (input.equals("bye")) {
                 exit();
+            //program shows entered tasks on list
             } else if (input.equals("list")) {
                 list();
-            //program echoes input otherwise
+            //program marks task as complete on done
+            } else if (input.contains("done")) {
+                done(input);
+            //program adds task and echoes otherwise
             } else {
                 add(input);
                 echo(input);
@@ -73,21 +76,43 @@ public class Duke {
     }
 
     /**
-     * Add the input from user into an ArrayList and prints "added: ".
+     * Add the input from user as task and prints "added: ".
      * @param input input provided by user
      */
     public static void add(String input) {
-        words.add(input);
+        Task task = new Task(Task.numTasks + 1, input, "incomplete");
+        tasks.add(task);
         System.out.print("added: ");
     }
 
     /**
-     * List all words entered by user.
+     * List all tasks entered by user.
      */
     public static void list() {
-        for (int i = 0; i < words.size(); i++) {
-            int itemNo = i + 1;
-            System.out.println(itemNo + ". " + words.get(i));
+        for (Task task: tasks) {
+            if (task.getStatus().equals("incomplete")) {
+                System.out.println(task.getId() + ".[ ] " + task.getTaskName());
+            } else {
+                System.out.println(task.getId() + ".[X] " + task.getTaskName());
+            }
         }
     }
+
+    /**
+     * Mark given task as done and informs user of success/failure.
+     * @param input input provided by user
+     */
+    public static void done(String input) {
+        String[] parsedString = input.split("\\s+");
+        int taskId;
+        try {
+            taskId = Integer.parseInt(parsedString[1]);
+            Task task = tasks.get(taskId - 1);
+            task.markCompleted();
+            System.out.println("Yay your task is done! :D");
+        } catch (Exception e) {
+            System.out.println("Invalid input!");
+        }
+    }
+
 }
