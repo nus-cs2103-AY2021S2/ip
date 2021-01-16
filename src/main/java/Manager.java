@@ -25,6 +25,15 @@ public class Manager {
 
     }
 
+    public void deleteTask(int index){
+        Task task = this.ls.get(index - 1);
+        this.ls.remove(index-1);
+        int len = this.ls.size();
+        String res = "\t" + line + "\n\t" + " Noted. I've removed this task:\n\t\t" + task + "\n\tNow you have " + len +" tasks in the list.\n\t" + line;
+        System.out.println(res);
+
+    }
+
     public void  listTask() {
         String res = "\t" + line + "\n\tHere are the tasks in your list:\n";
         for (int i = 0; i < ls.size(); i++) {

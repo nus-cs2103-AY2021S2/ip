@@ -32,6 +32,10 @@ public class Duke {
                     int index = Integer.parseInt(input.split(" ")[1]);
                     manager.finishTask(index);
                 }
+                else if(input.split(" ")[0].equals("delete")){
+                    int index = Integer.parseInt(input.split(" ")[1]);
+                    manager.deleteTask(index);
+                }
 
                 else if(input.split(" ")[0].equals("todo")){
                     if(input.split(" ").length == 1){
