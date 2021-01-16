@@ -77,6 +77,7 @@ public class Duke {
     /**
      * Mark a task as completed
      * @param param Parameter in String form to complete a task (Index)
+     * @throws DukeCommandException
      */
     private static void doneTask(String param) throws DukeCommandException {
         if(!param.matches("-?(0|[1-9]\\d*)")) {
@@ -103,6 +104,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Delete a task from the internal list
+     * @param param Parameter in String form to identify a task for deletion (Index)
+     * @throws DukeCommandException
+     */
     private static void deleteTask(String param) throws DukeCommandException {
         if(!param.matches("-?(0|[1-9]\\d*)")) {
             throw new DukeCommandException("delete", param, "Please provide an actual number for the task you are " +
