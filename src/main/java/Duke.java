@@ -49,26 +49,50 @@ public class Duke {
             if (input.equals("list")) {
                 showList(list);
             } else {
-                String[] check = input.split(" ");
-                if (check.length == 2 && check[0].equals("done") && isNumber(check[1])) {
-                    markTaskDone(list, check);
-                } else {
-                    addToList(list, input, check);
+                try {
+                    String[] check = input.split(" ");
+                    //if (check.length == 2 && check[0].equals("done") && isNumber(check[1])) {
+                    if (check[0].equals("done")) {
+                        markTaskDone(list, check);
+                    } else {
+                        addToList(list, input, check);
+                    }
+                } catch (TaskNotFoundException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                                    + "\tTask not in list.\n"
+                                    + "\t____________________________________________________________\n");
+                } catch (CommandNotValidException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                                    + "\tCommand not valid. Please use \"todo\", \"deadline\"\n"
+                                    + "\tor \"event\" before task description.\n\t\"bye\" to exit.\n"
+                                    + "\t____________________________________________________________\n");
+                } catch (DescriptionNotFoundException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                                    + "\tPlease provide description for your task.\n"
+                                    + "\t____________________________________________________________\n");
+                } catch (DateNotFoundException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                                    + "\tPlease enter a valid deadline (after \"/by\") for Deadline Tasks\n"
+                                    + "\tor time (after \"/at\") for Event Tasks.\n"
+                                    + "\t____________________________________________________________\n");
+                } catch (InvalidTaskSelectionException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                                    + "\tPlease enter task number after \"done\".\n"
+                                    + "\t____________________________________________________________\n");
                 }
             }
             input = sc.nextLine();
         }
         System.out.println("\t____________________________________________________________\n"
                 + "\tBye. Hope to see you again soon!\n"
-                + "\t____________________________________________________________\n"
-        );
+                + "\t____________________________________________________________\n");
     }
 
     //Prints out the items in the list.
     public static void showList(List<Task> list) {
         if (list.size() == 0) {
             System.out.println("\t____________________________________________________________\n"
-                        + "\tThere are no items in your list."
+                        + "\tThere are no items in your list.\n"
                         + "\t____________________________________________________________\n");
         } else {
             System.out.println("\t____________________________________________________________\n"
@@ -90,7 +114,12 @@ public class Duke {
         }
     }
 
-    public static void markTaskDone(List<Task> list, String[] check) {
+    //Mark numbered task in list as done.
+    public static void markTaskDone(List<Task> list, String[] check)
+            throws TaskNotFoundException, InvalidTaskSelectionException {
+        if (check.length == 1 || !isNumber(check[1])) {
+            throw new InvalidTaskSelectionException();
+        }
         int num = Integer.parseInt(check[1]);
         if (num > 0 && num <= list.size()) {
             list.get(num - 1).markAsDone();
@@ -100,33 +129,49 @@ public class Duke {
                     + "\t____________________________________________________________\n");
 
         } else {
-            System.out.println("\t____________________________________________________________\n"
-                    + "\tTask not in list.\n"
-                    + "\t____________________________________________________________\n");
+            throw new TaskNotFoundException();
         }
     }
 
-    public static void addToList(List<Task> list, String input, String[] check) {
+    //Add different type of tasks in list.
+    public static void addToList(List<Task> list, String input, String[] check)
+            throws CommandNotValidException, DescriptionNotFoundException, DateNotFoundException {
         Task temp;
         String description;
         String date;
 
-        if (check[0].equals("todo")) {
-            description = input.substring(5);
-            temp = new TodoTask(description);
-        } else if (check[0].equals("deadline")) {
-            int index = input.lastIndexOf("/by");
-            description = input.substring(9, index - 1);
-            date = input.substring(index + 4);
-            temp = new DeadlineTask(description, date);
-        } else if (check[0].equals("event")) {
-            int index = input.lastIndexOf("/at");
-            description = input.substring(6, index - 1);
-            date = input.substring(index + 4);
-            temp = new EventTask(description, date);
+        if (check[0].equals("todo") || check[0].equals("deadline") || check[0].equals("event")) {
+            if (check.length == 1) {
+                throw new DescriptionNotFoundException();
+            }
+            if (check[0].equals("todo")) {
+                description = input.substring(5);
+                temp = new TodoTask(description);
+            } else if (check[0].equals("deadline")) {
+                int index = input.lastIndexOf("/by");
+                if (index == -1) {
+                    throw new DateNotFoundException();
+                }
+                description = input.substring(9, index - 1);
+                date = input.substring(index + 3).stripLeading().stripTrailing();
+                if (date.isEmpty()) {
+                    throw new DateNotFoundException();
+                }
+                temp = new DeadlineTask(description, date);
+            } else {
+                int index = input.lastIndexOf("/at");
+                if (index == -1) {
+                    throw new DateNotFoundException();
+                }
+                description = input.substring(6, index - 1);
+                date = input.substring(index + 3).stripLeading().stripTrailing();
+                if (date.isEmpty()) {
+                    throw new DateNotFoundException();
+                }
+                temp = new EventTask(description, date);
+            }
         } else {
-            description = input;
-            temp = new Task(description);
+            throw new CommandNotValidException();
         }
         list.add(temp);
         System.out.println("\t____________________________________________________________\n"
