@@ -12,9 +12,13 @@ public class TaskList {
         tasksList.add(newTask);
     }
 
+    public Task getTask(int index){
+        return tasksList.get(index);
+    }
+
     public void displayTasks(){
         for(int i = 0; i < tasksList.size(); i++) {
-            System.out.println((i + 1) + ". " + tasksList.get(i));
+            System.out.println(String.valueOf(i + 1) + "." + tasksList.get(i));
         }
     }
 }

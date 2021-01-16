@@ -13,6 +13,12 @@ public class Task {
 
     @Override
     public String toString(){
-        return this.taskDesc;
+        String marked = new String();
+        if (this.isCompleted) {
+            marked = "X";
+        } else {
+            marked = " ";
+        }
+        return "[" + marked + "] " + this.taskDesc;
     }
 }

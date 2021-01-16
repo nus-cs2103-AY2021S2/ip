@@ -36,6 +36,7 @@ public class Duke {
         System.out.println(printLine());
     }
 
+    //Level-2 and Level-3 Tasks are implemented here.
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
         TaskList taskList = new TaskList();
@@ -46,8 +47,13 @@ public class Duke {
             System.out.println(printLine());
             if(cmd.equals("list")) {
                 taskList.displayTasks();
-            } else if(cmd.equals("bye")){
+            } else if(cmd.equals("bye")) {
                 break;
+            } else if(cmd.contains("done")) {
+                int index = Integer.parseInt(cmd.substring(5));
+                taskList.getTask(index - 1).setCompleted();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println(taskList.getTask(index-1));
             } else {
                 taskList.addTask(new Task(cmd));
                 System.out.println("added: " + cmd);
