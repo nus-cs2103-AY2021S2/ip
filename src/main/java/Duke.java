@@ -26,34 +26,49 @@ public class Duke {
         System.out.println(btmBorder);
     }
 
+    public static String getTally() {
+        return "     Currently you have " + list.size() + " tasks in the list.";
+    }
+
     public static void process(String input) {
-        String[] content = input.split("\\s+");
-        String command = content[0];
-        if (command.equals("list")) {
-            printList(list);
-        } else {
-            if (command.equals("done")) {
-                int index = Integer.parseInt(content[1]);
-                Task task = list.get(index - 1);
-                task.complete();
-                printBox(markMsg + "      " + task);
+
+        try {
+            String[] content = input.split("\\s+");
+            String command = content[0];
+            if (command.equals("list")) {
+                printList(list);
             } else {
-                String[] description = Arrays.copyOfRange(content, 1, content.length);
-                Task newTask;
-                if (command.equals("todo")) {
-                    newTask = new Todo(description);
-                    list.add(newTask);
-                } else if (command.equals("deadline")) {
-                    newTask = new Deadline(description);
-                    list.add(newTask);
+                if (command.equals("done")) {
+                    int index = Integer.parseInt(content[1]);
+                    Task task = list.get(index - 1);
+                    task.complete();
+                    printBox(markMsg + "      " + task);
                 } else {
-                    newTask = new Event(description);
-                    list.add(newTask);
+                    String[] description = Arrays.copyOfRange(content, 1, content.length);
+                    Task newTask;
+                    if (command.equals("todo")) {
+                        newTask = new Todo(description);
+                        list.add(newTask);
+                        printBox(addMsg + newTask + "\n \n" + getTally());
+                    } else if (command.equals("deadline")) {
+                        newTask = new Deadline(description);
+                        list.add(newTask);
+                        printBox(addMsg + newTask + "\n \n" + getTally());
+                    } else if (command.equals("event")) {
+                        newTask = new Event(description);
+                        list.add(newTask);
+                        printBox(addMsg + newTask + "\n \n" + getTally());
+                    } else {
+                        printBox("☹ OOPS!!! Incorrect input, please check!");
+                    }
+
                 }
-                String tally = "     Currently you have " + list.size() + " tasks in the list.";
-                printBox(addMsg + newTask + "\n \n" + tally);
 
             }
+        } catch (DukeException ex) {
+            printBox(ex.getMessage());
+        } catch (Exception ex) {
+            printBox("☹ OOPS!!! Incorrect input, please check!");
         }
     }
 
