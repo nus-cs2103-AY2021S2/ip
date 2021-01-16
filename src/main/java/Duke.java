@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Duke {
+    public static List<String> textList = new ArrayList<>();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -8,7 +9,16 @@ public class Duke {
         
         String userCmd = sc.nextLine();
         while (!userCmd.equals("bye")) {
-            responseWrapper(userCmd);
+            if (userCmd.equals("list")) {
+                printLineBreak();
+                for (int i = 0; i < textList.size(); i++) {
+                    System.out.println(String.format("\t%d. %s", i+1, textList.get(i)));
+                }
+                printLineBreak();
+            } else {
+                textList.add(userCmd);
+                responseWrapper(String.format("added: %s", userCmd));
+            }
             userCmd = sc.nextLine();
         }
         exit();
