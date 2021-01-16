@@ -7,4 +7,12 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
     }
+
+    public static String parseInput(String input) {
+        switch(input) {
+            case "bye":
+                return "Bye. Hope to see you again soon!";
+        }
+        return input;
+    }
 }
