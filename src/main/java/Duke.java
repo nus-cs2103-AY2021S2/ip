@@ -72,7 +72,6 @@ public class Duke {
 
             if(command.matches("^done ((100)|[1-9][0-9]|[0-9])$")) {
                 String[] splits = command.split(" ");
-
                 try {
                     completeTask(Integer.valueOf(splits[1]) - 1);
                 } catch(IndexOutOfBoundsException e) {
@@ -100,5 +99,5 @@ public class Duke {
         System.out.println("___________________________________________________________");
         System.out.println("Meow. Hope to see you again soon!");
         System.out.println("___________________________________________________________");
-}
     }
+}
