@@ -13,6 +13,7 @@ public class DukeBot {
 
     public boolean echo(String command) {
         boolean continueInput = true;
+
         if(command.equals("bye")) {
             output = border + "\t" + "Bye. Hope to see you again soon!\n" + border;
             continueInput = false;
