@@ -10,4 +10,8 @@ done 2
 list
 done 0
 list
+delete 3
+delete 2
+delete 1
+list
 bye

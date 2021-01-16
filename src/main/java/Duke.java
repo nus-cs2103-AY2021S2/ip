@@ -103,6 +103,30 @@ public class Duke {
         }
     }
 
+    private static void deleteTask(String param) throws DukeCommandException {
+        if(!param.matches("-?(0|[1-9]\\d*)")) {
+            throw new DukeCommandException("delete", param, "Please provide an actual number for the task you are " +
+                    "deleting.");
+        }
+
+        int index = Integer.valueOf(param) - 1;
+
+        if(tasks.size() == 0){
+            throw new DukeCommandException("delete", param, "There are no task to be deleted.");
+        } else if(index < 0 || index >= tasks.size()) {
+            throw new DukeCommandException("delete", param, "Please enter a valid task index ranging " +
+                    "from 1 to " + String.valueOf(tasks.size()) + " (inclusive).");
+        } else {
+            Task deletedTask = tasks.remove(index);
+
+            System.out.println("___________________________________________________________");
+            System.out.println("Noted meow. I've removed this task:");
+            System.out.printf("  [%s][%s] %s\n", deletedTask.getTypeSymbol(), deletedTask.getStatusSymbol(),
+                    deletedTask.getDesc());
+            System.out.println("___________________________________________________________\n");
+        }
+    }
+
     /**
      * List down all tasks in the internal list
      */
@@ -143,6 +167,8 @@ public class Duke {
                     addEvent(command.substring(5).stripLeading());
                 } else if(command.matches("^done($|.+$)")) {
                     doneTask(command.substring(4).stripLeading());
+                } else if(command.matches("^delete($|.+$)")) {
+                    deleteTask(command.substring(6).stripLeading());
                 } else if(command.equals("list")) {
                     listTasks();
                 } else if(command.equals("bye")) {
