@@ -26,13 +26,22 @@ public class JobList {
         this.list.add(index, newTask);
     }
 
+    void deleteJob(int index) {
+        this.list.remove(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
             resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).toString(), lengthOfLine));
         }
-        return resultStr.toString();
+        if (list.size() == 0) {
+            return "List is empty\n";
+        } else {
+            return resultStr.toString();
+        }
+
     }
 
 }

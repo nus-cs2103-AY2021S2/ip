@@ -11,4 +11,13 @@ public class StringParser {
     public static String underlineGenerator(int i) {
         return "_".repeat(i) + "\n";
     }
+
+    public static boolean isBlank(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) != ' ') {
+                return false;
+            }
+        }
+        return true;
+    }
 }

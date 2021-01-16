@@ -6,12 +6,13 @@ enum CommandType {
     EVENT,
     LIST,
     DONE,
+    DELETE,
     BYE,
     OTHER
 }
 
 public class Duke {
-    static final int LENGTH_OF_LINE = 60;
+    static final int LENGTH_OF_LINE = 80;
 
     static String welcome = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
@@ -40,33 +41,45 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        boolean loop = true;
         String message = "";
+        String command;
         Task currTask;
+        CommandType type;
         JobList list = new JobList(LENGTH_OF_LINE);
+        Scanner sc = new Scanner(System.in);
 
         System.out.println(welcome);
-        String command = sc.nextLine();
-        CommandType type = Command.getType(command);
-        while (type != CommandType.BYE) {
-            System.out.print(horizontalLine);
+
+        while (true) {
+            command = sc.nextLine();
+            try {
+                type = Command.getType(command);
+            } catch (DukeException e) {
+                message = e.getMessage() + "\n";
+                System.out.print(horizontalLine);
+                System.out.print(message);
+                System.out.println(horizontalLine);
+                continue;
+            }
             switch (type) {
+                case BYE -> loop = false;
                 case LIST -> message = list.toString();
                 case DONE -> {
                     int index;
-                    try {
-                        index = Integer.parseInt(command.substring(5)) - 1;
+                    index = Integer.parseInt(command.substring(5)) - 1;
+                    if (index < list.getSize() && index >= 0) {
                         currTask = list.getJob(index);
                         currTask.markAsDone();
                         message = "This task is marked as done: \n"
                                 + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE);
                         list.replaceJob(index, currTask);
-                    } catch (NumberFormatException e) {
-                        message = "Invalid command\n";
-                    } catch (IndexOutOfBoundsException e) {
-                        message = "Do not have such task\n";
+                    } else {
+                        message = "No such task in the list\n";
                     }
                 }
+
+                case OTHER -> message = "Invalid command\n";
                 default -> {
                     try {
                         Task t = Command.convertToTask(command, type);
@@ -80,10 +93,14 @@ public class Duke {
                 }
             }
 
+            if (!loop) {
+                break;
+            }
+
+            System.out.print(horizontalLine);
             System.out.print(message);
             System.out.println(horizontalLine);
-            command = sc.nextLine();
-            type = Command.getType(command);
+
         }
         System.out.println(bye);
     }
