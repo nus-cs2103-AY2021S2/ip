@@ -12,7 +12,8 @@ public class DukeBot {
         handleCommand("welcome");
     }
 
-    public void handleCommand(String command) {
+    public void handleCommand(String text) {
+        String command = text.split(" ")[0];
         String commandOutput = "";
         commandOutput += "\t ";
 
@@ -31,16 +32,15 @@ public class DukeBot {
             isExit = true;
             commandOutput += "Bye. Hope to see you again soon!";
             break;
-        default:
-            if (command.length() > 1 && command.split(" ")[0].equals("done")) {
-                int taskNum = Integer.parseInt(command.split(" ")[1]);
-                taskList.get(taskNum).markAsDone();
-                commandOutput += "Nice! I've marked this task as done:\n"
+        case "done":
+            int taskNum = Integer.parseInt(text.split(" ")[1]);
+            taskList.get(taskNum).markAsDone();
+            commandOutput += "Nice! I've marked this task as done:\n"
                     + "\t " + getTaskInfo(taskNum);
-            } else { //Add a task
-                addTask(command);
-                commandOutput += "added: " + command;
-            }
+            break;
+        default:
+            addTask(text);
+            commandOutput += "added: " + text;
             break;
         }
 
