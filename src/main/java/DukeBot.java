@@ -1,5 +1,5 @@
 public class DukeBot {
-    private final String border = "\t___________________________________\n";
+    private static final String BORDER = "\t___________________________________\n";
     private String output;
 
     public DukeBot() {
@@ -7,7 +7,7 @@ public class DukeBot {
     }
 
     public void greeting() {
-        output = border + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + border;
+        output = BORDER + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + BORDER;
         System.out.println(output);
     }
 
@@ -15,10 +15,10 @@ public class DukeBot {
         boolean continueInput = true;
 
         if(command.equals("bye")) {
-            output = border + "\t" + "Bye. Hope to see you again soon!\n" + border;
+            output = BORDER + "\t" + "Bye. Hope to see you again soon!\n" + BORDER;
             continueInput = false;
         } else {
-            output = border + "\t" + command + "\n" + border;
+            output = BORDER + "\t" + command + "\n" + BORDER;
         }
         System.out.println(output);
         return continueInput;
