@@ -22,8 +22,10 @@ public class Duke {
                 System.exit(0);
                 break;
             case "done":
-                int idx = Integer.parseInt(tokens[1]) - 1;
-                taskList.markAsDone(idx);
+                taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+                break;
+            case "delete":
+                taskList.delete(Integer.parseInt(tokens[1]) - 1);
                 break;
             case "list":
                 taskList.printTasks();

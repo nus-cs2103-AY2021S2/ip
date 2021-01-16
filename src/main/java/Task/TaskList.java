@@ -63,4 +63,16 @@ public class TaskList {
         task.markAsDone();
         printWithIndentation("Good Job! I've marked this task as done!", task.toString());
     }
+
+    public void delete(int idx) {
+        Task task = taskList.get(idx);
+
+        taskList.remove(idx);
+
+        int numTasks =  taskList.size();
+        String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
+        printWithIndentation("Got it! I've removed this task:",
+                "  " + task.toString(),
+                "Now you have " + formattedTasksCount + " in the list.");
+    }
 }
