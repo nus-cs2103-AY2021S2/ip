@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,6 +10,14 @@ public class Duke {
     public static void terminate() {
         echo(CLOSING);
         System.exit(0);
+    }
+
+    public static void addTodo(String[] args) {
+        String task = String.join(" ", args);
+        Task t = new Todo(task);
+        tasks.add(t);
+        echo("I added this task to the task list!");
+        System.out.println("   " + t);
     }
 
     public static void showTasks() {
@@ -31,6 +40,7 @@ public class Duke {
 
     public static void parse(String[] input) {
         String command = input[0];
+        String[] args = Arrays.copyOfRange(input, 1, input.length);
 
         if (command.equals("bye")) {
             terminate();
@@ -39,6 +49,8 @@ public class Duke {
         } else if (command.equals("done")) {
             int id = Integer.parseInt(input[1]);
             completeTask(id);
+        } else if (command.equals("todo")) {
+            addTodo(args);
         }
     }
 
