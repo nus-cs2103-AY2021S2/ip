@@ -11,12 +11,25 @@ public class Duke {
             if (input.equals("list")) {
                 showList();
             } else {
-                addNewTask(input);
+                String[] arr = input.split(" ");
+                if (arr[0].equals("done")) {
+                    markAsDone(Integer.parseInt(arr[1]));
+                } else {
+                    addNewTask(input);
+                }
             }
             input = sc.nextLine();
         }
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
+    }
+
+    public static void markAsDone(int taskNum) {
+        Task t = myTasks.get(taskNum - 1);
+        t.markAsDone();
+        System.out.println("Nice! I've marked this task as done: ");
+        String icon = t.getStatusIcon();
+        System.out.println(icon + t);
     }
 
     public static void addNewTask(String name) {
@@ -25,8 +38,10 @@ public class Duke {
     }
 
     public static void showList() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= myTasks.size(); i++) {
-            System.out.println(i + ". " + myTasks.get(i-1));
+            Task t = myTasks.get(i - 1);
+            System.out.println(i + "." + t.getStatusIcon() + t);
         }
     }
     public static void welcomeMessage() {
