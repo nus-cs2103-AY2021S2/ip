@@ -11,23 +11,41 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        List<String> store = new ArrayList<String>();
+        List<Task> store = new ArrayList<Task>();
         Scanner scan = new Scanner(System.in);
         while(true) {
             String command = scan.nextLine();
+            switch (command.toLowerCase()) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
+                case "list":
+                    System.out.println("Here are the tasks in your list:");
+                    for(int i =0; i < store.size(); i++) {
+                        System.out.println((i + 1) + "." + store.get(i).display());
+                    }
+                    break;
+                default:
+                    String findDone = "";
+                    if (command.length() > 4) {
+                        findDone = command.substring(0, 4);
+                    }
+                    if (findDone.equalsIgnoreCase("done")) {
+                            if (command.charAt(4) == ' ') {
+                                int number = Integer.parseInt(command.substring(5));
+                                Task toMark = store.get(number - 1);
+                                String response = toMark.markAsDone();
+                                System.out.println(response);
+                            }
+                    } else {
+                        Task newTask = new Task(command);
+                        store.add(newTask);
+                        System.out.println("added: " + command);
+                    }
+            }
             if (command.equalsIgnoreCase("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (command.equalsIgnoreCase("list")) {
-                for(int i =0; i < store.size(); i++) {
-                    System.out.println((i + 1) + ". " + store.get(i));
-                }
-            } else {
-                store.add(command);
-                System.out.println("added: " + command);
             }
         }
-
     }
-
 }
