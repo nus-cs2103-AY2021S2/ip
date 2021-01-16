@@ -1,7 +1,10 @@
-package Duke;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.ToDo;
 
 public class Duke {
     public static void main(String[] args) {
