@@ -1,20 +1,18 @@
 # User Guide
 
+## Introduction
+Introducing... a custom chatbot based on Meme Man and the Surreal Memes. 
+Meme Man is sure to entertain you every step of the way!
+
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Early Functionality
+At this point, Meme Man is just going to echo after you, yah? (NS reference here)
+Not to worry, if you say "bye" to Meme Man, he will EJECT you... er... I mean, leave.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `bye` - Exit command
 
-Describe action and its outcome.
+Key this command in to cause Meme Man to EJECT you... er... I mean leave...
 
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
