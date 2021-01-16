@@ -2,13 +2,12 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static String[] taskArray;
-    private static int count =0;
+    private static Task[] taskArray;
+    private static int count = 0;
     private static Scanner sc = new Scanner(System.in);
     static final String lines = "----------------------------------------";
 
-
-    public static void displayWelcomeMessage(){
+    public static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -19,22 +18,38 @@ public class Duke {
 
     }
 
-    public static void displayEndMessage(){
+    public static void displayEndMessage() {
         sc.close();
-        System.out.println( lines + "\n" + " Bye. Hope to see you again!" + "\n" + lines);
+        System.out.println(lines + "\n" + " Bye. Hope to see you again!" + "\n" + lines);
     }
 
-    public static void executeCommand(String command){
-        if(!command.equals("list")){
-            taskArray[count] = command;
-            count++;
-            System.out.println( "added: " + command + "\n" + lines);
-        }
-        else{
-            for (int i = 0; i <count; i++) {
-                System.out.println((i+1) + ". " +  taskArray[i]);
-            }
-            System.out.println(lines);
+    public static void executeCommand(String command) {
+
+        String commandArray[] = command.split("\\s+");
+
+        switch (commandArray[0]) {
+            case ("list"):
+                
+                System.out.println(lines);
+                for (int i = 0; i < count; i++) {
+                    System.out.println((i + 1) + ". " + taskArray[i].toString());
+                }
+                System.out.println(lines);
+                break;
+
+            case ("done"):
+                int index = Integer.parseInt(commandArray[1])-1;
+                taskArray[index].setCompleted();
+
+                System.out.println(lines + " \n" +"Nice! I'll make this task as done:" + "\n"
+                        + taskArray[index].toString() + "\n" + lines);
+                break;
+
+            default:
+                taskArray[count] = new Task(command);
+                count++;
+                System.out.println("added: " + command + "\n" + lines);
+                break;
         }
     }
 
@@ -43,9 +58,9 @@ public class Duke {
         displayWelcomeMessage();
 
         String userInput = sc.nextLine();
-        taskArray = new String[100];
+        taskArray = new Task[100];
 
-        while(!userInput.equals("bye")) {
+        while (!userInput.equals("bye")) {
             executeCommand(userInput);
             userInput = sc.nextLine();
         }
