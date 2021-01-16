@@ -51,7 +51,6 @@ public class Duke {
             } else {
                 try {
                     String[] check = input.split(" ");
-                    //if (check.length == 2 && check[0].equals("done") && isNumber(check[1])) {
                     if (check[0].equals("done")) {
                         markTaskDone(list, check);
                     } else {
