@@ -8,8 +8,8 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        String[] records = new String[100];
-        int numberOfRecords = 0;
+        Task[] tasks = new Task[100];
+        int numberOfTasks = 0;
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -18,15 +18,24 @@ public class Duke {
                 return;
             } else if (userInput.equals("list")) {
                 String output = "";
-                for (int i = 0; i < numberOfRecords; i++) {
-                    output += (i + 1) + ". " + records[i];
-                    if (i != numberOfRecords - 1) {
+                for (int i = 0; i < numberOfTasks; i++) {
+                    Task task = tasks[i];
+                    String completionStatus = task.isComplete() ? "[X]" : "[ ]";
+                    output += (i + 1) + "." + completionStatus + " " + task;
+                    if (i != numberOfTasks - 1) {
                         output += "\n";
                     }
                 }
                 Duke.printWithBorders(output);
+            } else if (userInput.startsWith("done")) {
+                int userChoice = Integer.valueOf(userInput.split(" ")[1]);
+                Task task = tasks[userChoice - 1];
+                task.markComplete();
+                String output = "Nice! I've marked this task as done:\n";
+                output += "  [X] " + task;
+                Duke.printWithBorders(output);
             } else {
-                records[numberOfRecords++] = userInput;
+                tasks[numberOfTasks++] = new Task(userInput);
                 String output = "added: " + userInput;
                 Duke.printWithBorders(output);
             }
