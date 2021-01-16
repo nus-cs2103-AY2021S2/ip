@@ -88,7 +88,7 @@ public class Duke {
         String logo = "         ──────▄▀▄─────▄▀▄ \n" + "         ─────▄█░░▀▀▀▀▀░░█▄ \n"
                 + "         ─▄▄──█░░░░░░░░░░░█──▄▄ \n" + "         █▄▄█─█░░▀░░┬░░▀░░█─█▄▄█ ";
 
-        String greeting = "Hey there! I'm Kawaii Kat \n" + "     How can i assist you nya~?";
+        String greeting = "Hey there! I'm Kawaii Kat \n" + "     How can i assist you ~nya~?";
 
         String exitMessage = "Farewell. See you soon :)!";
 
