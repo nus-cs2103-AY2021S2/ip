@@ -1,6 +1,7 @@
 public class Task {
-    private String description;
-    private boolean done;
+    protected String description;
+    protected boolean done;
+    protected TaskEnum type;
 
     public Task() {
 
