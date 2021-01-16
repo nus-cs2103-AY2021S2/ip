@@ -74,16 +74,26 @@ public class Duke {
 
         FastIO fio = new FastIO();
 
+        String[] leest = new String[100];
+        int leestCounter = 0;
+
         while(true) {
 
             String input = fio.nextLine();
 
             switch (input) {
+                case "list":
+                    for(int i = 0; i < leestCounter; i++) {
+                        System.out.println(i + ". "+ leest[i] + " uwu");
+                    }
+                    break;
                 case "bye":
                     System.out.println("Bye, hope to see you again! uwu");
                     return;
                 default:
-                    System.out.println(input + " uwu");
+                    leest[leestCounter] = input;
+                    leestCounter++;
+                    System.out.println("added: " + input + " uwu");
             }
         }
 
