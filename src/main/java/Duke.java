@@ -91,7 +91,7 @@ public class Duke {
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ \\__,_|_|\\_\\___| uwu\n";
         System.out.println("Hello from\n" + logo);
 
         System.out.println("Hello! I'm Duwuke\n What can I do for you? uwu");
