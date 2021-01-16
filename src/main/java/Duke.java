@@ -5,7 +5,7 @@ public class Duke {
     private static final String TOP_BORDER = "╭--------------------------------------------╮";
     private static final String BTM_BORDER = "╰|╱ -----------------------------------------╯";
     private static final String PADDING = "  ";
-    private static final ArrayList<String> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         printGreeting();
@@ -23,13 +23,38 @@ public class Duke {
 
     public static void readCommand(String cmd) {
         if (cmd.equals("list")) {
+            // list
             displayList();
+        } else if (cmd.split(" ")[0].equals("done") && cmd.length() > 5 && isNumber(cmd.split(" ")[1])) {
+            // done
+            int taskNum = Integer.parseInt(cmd.split(" ")[1]) - 1;
+            Task doneTask = taskList.get(taskNum);
+            doneTask.markDone();
+            displayDoneMessage(doneTask);
         } else {
+            // add to list
             addToList(cmd);
         }
     }
 
-    public static void displayList() {
+    private static void displayDoneMessage(Task task) {
+        System.out.println(TOP_BORDER);
+        System.out.println(PADDING + "Well done human on completing " + task.toString().substring(4) + "!");
+        System.out.println(PADDING + "I have marked it as done.");
+        System.out.println(PADDING + PADDING + task);
+        System.out.println(BTM_BORDER);
+    }
+
+    private static boolean isNumber(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private static void displayList() {
         System.out.println(TOP_BORDER);
         for (int i = 1; i <= taskList.size(); i++) {
             System.out.println(PADDING + i + ". " + taskList.get(i - 1));
@@ -37,7 +62,7 @@ public class Duke {
         System.out.println(BTM_BORDER);
     }
 
-    public static void printGreeting() {
+    private static void printGreeting() {
         String logo = "              .--.    .-.         .-.   \n" +
                 "             : .-'    : :         : :   \n" +
                 " .--.  .--.  : `;.--. : `-.  .--. : `-. \n" +
@@ -52,15 +77,15 @@ public class Duke {
         System.out.println(greeting);
     }
 
-    public static void printBye() {
+    private static void printBye() {
         String farewell = " ╭---------------------------------------╮\n"
                         + " |  Bye! Hope you complete your tasks!   |\n"
                         + " ╰|╱ ------------------------------------╯\n";
         System.out.println(farewell);
     }
 
-    public static void addToList(String input) {
-        taskList.add(input);
+    private static void addToList(String input) {
+        taskList.add(new Task(input));
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "added: " + input);
         System.out.println(BTM_BORDER);
