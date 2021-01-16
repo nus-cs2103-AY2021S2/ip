@@ -1,0 +1,11 @@
+done 3
+eat
+sleep
+play
+list
+done 3
+done 2
+list
+done 1
+list
+bye
