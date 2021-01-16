@@ -15,15 +15,20 @@ public class JobList {
         return this.list.get(index);
     }
 
+    int getSize() {
+        return this.list.size();
+    }
+
     void replaceJob(int index, Task newTask) {
         this.list.remove(index);
         this.list.add(index, newTask);
     }
 
-    String formatList() {
+    @Override
+    public String toString() {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
-            resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).getDescription(), 60));
+            resultStr.append(StringParser.newLiner((i + 1) + "." + list.get(i).toString(), 60));
         }
         return resultStr.toString();
     }
