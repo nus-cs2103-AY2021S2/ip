@@ -1,6 +1,6 @@
 package main.java;
 
-import main.java.Entity.Task;
+import main.java.Entity.*;
 
 import java.util.ArrayList;
 import java.util.*;
@@ -42,8 +42,40 @@ public class Duke {
                 System.out.println("        " + task);
                 continue;
             }
-            System.out.println("    added: " + input);
-            list.add(new Task(input));
+            if (input.toLowerCase().split(" ")[0].equals("todo")) {
+                String todoName = input.substring(5);
+                Task task = new Todo(todoName);
+                list.add(task);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + task);
+                System.out.println("    Now you have " + list.size() + " tasks in the list.");
+                continue;
+            }
+            if (input.toLowerCase().split(" ")[0].equals("deadline")) {
+                String[] arr = input.split(" /");
+                String name = arr[0].substring(9);
+                String[] arr2 = arr[1].split(" ", 2);
+                Task task = new Deadline(name, arr2[1], arr2[0]);
+                list.add(task);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + task);
+                System.out.println("    Now you have " + list.size() + " tasks in the list.");
+                continue;
+            }
+            if (input.toLowerCase().split(" ")[0].equals("event")) {
+                String[] arr = input.split(" /");
+                String name = arr[0].substring(6);
+                String[] arr2 = arr[1].split(" ", 2);
+                Task task = new Event(name, arr2[1], arr2[0]);
+                list.add(task);
+                System.out.println("    Got it. I've added this task:");
+                System.out.println("        " + task);
+                System.out.println("    Now you have " + list.size() + " tasks in the list.");
+                continue;
+            }
+//            System.out.println("    added: " + input);
+//            list.add(new Task(input));
+            System.out.println("    Unrecognizable input: " + input);
         }
         System.out.println("Bye. Until next time!");
     }
