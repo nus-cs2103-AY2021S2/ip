@@ -5,7 +5,8 @@ public class Duke {
     public static String btmBorder = "    ********************************* \n";
     public static ArrayList<Task> list = new ArrayList<>();
     public static String markMsg = "You have marked this task as completed: \n";
-    public static String addMsg = "Roger that! Added the following: \n \n      ";
+    public static String addMsg = "Roger that! Added the following task: \n \n      ";
+    public static String deleteMsg = "Roger that! Deleted the follow task: \n \n      ";
     public static String indent4 = "     ";
 
     public static void printBox(String input) {
@@ -31,7 +32,6 @@ public class Duke {
     }
 
     public static void process(String input) {
-
         try {
             String[] content = input.split("\\s+");
             String command = content[0];
@@ -43,7 +43,14 @@ public class Duke {
                     Task task = list.get(index - 1);
                     task.complete();
                     printBox(markMsg + "      " + task);
+                } else if (command.equals("delete")) {
+                    int index = Integer.parseInt(content[1]);
+                    String task = list.get(index - 1).toString();
+                    list.remove(index - 1);
+                    printBox(deleteMsg + task + "\n \n" + getTally());
+
                 } else {
+
                     String[] description = Arrays.copyOfRange(content, 1, content.length);
                     Task newTask;
                     if (command.equals("todo")) {
@@ -65,11 +72,13 @@ public class Duke {
                 }
 
             }
-        } catch (DukeException ex) {
-            printBox(ex.getMessage());
-        } catch (Exception ex) {
-            printBox("☹ OOPS!!! Incorrect input, please check!");
+        } catch (DukeException err) {
+            printBox(err.getMessage());
+
         }
+        // catch (Exception err) {
+        // printBox("☹ OOPS!!! Incorrect input, please check!");
+        // }
     }
 
     public static void main(String[] args) {
