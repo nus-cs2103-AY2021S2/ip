@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Duke is a project that eventually builds into a personal assistant chat bot.
  */
 public class Duke {
+    public static ArrayList<String> words = new ArrayList<>();
 
     /**
      * Entry point of the program, first greets then listens for input from user.
@@ -33,8 +35,11 @@ public class Duke {
             //program exits on bye
             if (input.equals("bye")) {
                 exit();
+            } else if (input.equals("list")) {
+                list();
             //program echoes input otherwise
             } else {
+                add(input);
                 echo(input);
             }
         }
@@ -65,5 +70,24 @@ public class Duke {
      */
     public static void exit() {
         System.out.println("Bye! See you later :D");
+    }
+
+    /**
+     * Add the input from user into an ArrayList and prints "added: ".
+     * @param input input provided by user
+     */
+    public static void add(String input) {
+        words.add(input);
+        System.out.print("added: ");
+    }
+
+    /**
+     * List all words entered by user.
+     */
+    public static void list() {
+        for (int i = 0; i < words.size(); i++) {
+            int itemNo = i + 1;
+            System.out.println(itemNo + ". " + words.get(i));
+        }
     }
 }
