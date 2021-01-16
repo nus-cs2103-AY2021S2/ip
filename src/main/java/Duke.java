@@ -7,9 +7,7 @@ public class Duke {
     public static String line = "------------------------------------------------------";
 
     public static String listTask(List<Task> ls){
-        String res = "";
-
-        res += "\t" + line + "\n";
+        String res = "\t" + line + "\n\tHere are the tasks in your list:\n";
         for(int i = 0; i < ls.size(); i++){
             res += "\t" + (i+1) + "." + ls.get(i) + "\n";
         }
@@ -18,11 +16,28 @@ public class Duke {
 
     public static void finishTask(List<Task> ls, int index){
         Task task = ls.get(index - 1);
-        Task newTask = new Task(task.taskName, true);
-        Collections.replaceAll(ls, task, newTask );
+        task.done = true;
+        Task newTask = task;
+        if(task instanceof ToDo){
+            newTask = new ToDo(task.taskName, true);
+        }
+        else if(task instanceof Deadlines){
+            newTask = new Deadlines(task.taskName, true, ((Deadlines) task).by);
+        }
+        else{
+            newTask = new Events(task.taskName, true, ((Deadlines) task).by);
+        }
         String res = "\t" + line + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + newTask + "\n\t" + line ;
         System.out.println(res);
 
+    }
+
+    public static void addTask(List<Task> ls, Task task){
+        String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
+        ls.add(task);
+        int numOfTasks = ls.size();
+        res += "\tNow you have " + numOfTasks + " tasks in the list\n\t" + line;
+        System.out.println(res);
     }
 
     public static void greeting(){
@@ -56,7 +71,7 @@ public class Duke {
         while(scanner.hasNext()){
             String input = scanner.nextLine();
             if(input.equals("bye")){
-                System.out.println("\t" + line + "\n\tBye. Hope to see you again soon!\n\t" + line);
+                System.out.println("\t" + line + "\n\tBye. Need to go now since I am impeached twice\n\t" + line);
                 break;
             }
             else if(input.equals("list")){
@@ -66,6 +81,29 @@ public class Duke {
                 int index = Integer.parseInt(input.split(" ")[1]);
                 finishTask(ls, index);
             }
+
+            else if(input.split(" ")[0].equals("done")){
+                int index = Integer.parseInt(input.split(" ")[1]);
+                finishTask(ls, index);
+            }
+            else if(input.split(" ")[0].equals("todo")){
+                String res = input.split("todo")[1];
+                addTask(ls, new ToDo(res));
+            }
+            else if(input.split(" ")[0].equals("deadline")){
+                String[] res = (input.split("deadline")[1]).split(" /by ");
+                String description = res[0];
+                String by = res[1];
+                addTask(ls, new Deadlines(description, by));
+            }
+
+            else if(input.split(" ")[0].equals("event")){
+                String[] res = (input.split("event")[1]).split(" /at ");
+                String description = res[0];
+                String by = res[1];
+                addTask(ls, new Events(description, by));
+            }
+
             else{
                 System.out.println("\t" + line);
                 System.out.println(Duke.echo("\tadded: " + input));

@@ -1,24 +1,28 @@
 public class Task {
-    public final String taskName;
-    public final boolean done;
+    public  String taskName;
+    public boolean done;
+    public String type;
 
     Task(String name){
         this.taskName = name;
         this.done = false;
+        this.type = "";
     }
 
-    Task(String name, boolean done){
-        this.done = done;
+    Task(String name, boolean done , String type){
         this.taskName = name;
+        this.done = done;
+        this.type = type;
     }
 
-    public Task done(){
-        return  new Task(this.taskName, true);
+    public Task done() {
+        this.done = true;
+        return this;
     }
 
     @Override
     public String toString(){
-        return done ? "[X] " + this.taskName : "[ ] " + this.taskName;
+        return done ?  " [X] " + this.taskName  : " [ ] " + this.taskName;
     }
 
 
