@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Duke {
     private static final String REPLY_OUTLINE = "    ____________________________________________________________";
@@ -19,11 +18,6 @@ public class Duke {
         reply(msg);
     }
 
-    public static void add(String input) {
-        tasks.add(new Task(input));
-        reply(REPLY_INDENTATION + "added: " + input + "\n");
-    }
-
     public static void addReply(Task task) {
         String msg = REPLY_INDENTATION + "Got it. I've added this task:\n"
                 + REPLY_INDENTATION +  "  " + task + "\n"
@@ -39,10 +33,25 @@ public class Duke {
     }
 
     public static void addDeadline(String input) {
-        String[] parts = input.split(" ", 2)[1].split("/by");
-        Task deadline = new Deadline(parts[0], parts[1]);
-        tasks.add(deadline);
-        addReply(deadline);
+        try {
+            String[] parts = input.split(" ", 2)[1].split("/by");
+            Task deadline = new Deadline(parts[0], parts[1]);
+            tasks.add(deadline);
+            addReply(deadline);
+        } catch (IndexOutOfBoundsException exception) {
+            reply(REPLY_INDENTATION + "Invalid deadline provided.\n");
+        }
+    }
+
+    public static void addEvent(String input) {
+        try {
+            String[] parts = input.split(" ", 2)[1].split("/at");
+            Task event = new Event(parts[0], parts[1]);
+            tasks.add(event);
+            addReply(event);
+        } catch (IndexOutOfBoundsException exception) {
+            reply(REPLY_INDENTATION + "Invalid event provided.\n");
+        }
     }
 
     public static void done(String input) {
@@ -89,8 +98,10 @@ public class Duke {
                     addTodo(input);
                 } else if (input.matches("deadline .+")) {
                     addDeadline(input);
+                } else if (input.matches("event .+")) {
+                    addEvent(input);
                 } else {
-                    add(input);
+                    reply(REPLY_INDENTATION + "Sorry, I'm not sure how to respond to that command.\n");
                 }
                 break;
         }
