@@ -42,7 +42,8 @@ public class Task {
      * A display to show the task information.
      * @return Show the status of the task, together with its description.
      */
-    public String display() {
+    @Override
+    public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 }

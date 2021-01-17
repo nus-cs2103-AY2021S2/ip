@@ -20,6 +20,7 @@ public class Duke {
             System.out.print(username + ": ");
             String nextCommand = sc.nextLine();
             String[] commandToWords = nextCommand.split(" ");
+            String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
             if (nextCommand.equals("bye")) {
                 bye(username);
                 endOfCycle = true;
@@ -28,10 +29,15 @@ public class Duke {
             } else if (commandToWords[0].equals("done")) {
                 int itemNum = Integer.parseInt(commandToWords[1]);
                 done(tasks, itemNum);
-            }
-            else {
-                add(nextCommand, tasks, count);
+            } else if (commandToWords[0].equals("todo")) {
                 count++;
+                todo(nextCommand.substring(5), tasks, count);
+            } else if (commandToWords[0].equals("deadline")) {
+                count++;
+                deadline(nextCommand.substring(9, nextCommand.indexOf("/") - 1), dateInfo, tasks, count);
+            } else if (commandToWords[0].equals("event")){
+                count++;
+                event(nextCommand.substring(6, nextCommand.indexOf("/") - 1), dateInfo, tasks, count);
             }
         }
 
@@ -58,17 +64,27 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
-    /**
-     * Add what the user typed as input by adding it into the Task array.
-     * Show the user the task that has been added in the display.
-     * @param command The user input.
-     * @param tasks The Task array containing all the user tasks.
-     * @param count The number of tasks in the array at the moment.
-     */
-    public static void add(String command, Task[] tasks, int count) {
-        tasks[count] = new Task(command);
+    public static void todo(String command, Task[] tasks, int count) {
+        tasks[count - 1] = new Todo(command);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("added: " + command);
+        System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    public static void deadline(String command, String by, Task[] tasks, int count) {
+        tasks[count - 1] = new Deadline(command, by);
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    public static void event(String command, String at, Task[] tasks, int count) {
+        tasks[count - 1] = new Event(command, at);
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
+        System.out.println("Now you have " + count + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
@@ -82,7 +98,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < count; i++){
             int listNum = i + 1;
-            System.out.println(listNum + ". " + tasks[i].display());
+            System.out.println(listNum + ". " + tasks[i].toString());
         }
         System.out.println("----------------------------------------------------------------------------------------");
     }
@@ -96,7 +112,7 @@ public class Duke {
     public static void done(Task[] tasks, int itemNum) {
         tasks[itemNum - 1].makeDone();
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Nice! I've marked this task as done:\n" + tasks[itemNum - 1].display());
+        System.out.println("Nice! I've marked this task as done:\n" + tasks[itemNum - 1].toString());
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
