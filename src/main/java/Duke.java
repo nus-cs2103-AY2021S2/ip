@@ -3,11 +3,10 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static ArrayList<String> list = new ArrayList<>();
+    static ArrayList<Task> tasks = new ArrayList<>();
 
     static void display(String str) {
         String[] strings = str.split("\n");
-
         System.out.println("    " + "___________________________________________________________________");
         for (String s : strings) {
             System.out.println("    " + s);
@@ -15,10 +14,11 @@ public class Duke {
         System.out.println("    " + "___________________________________________________________________");
     }
 
-    static void displayList() {
+    static void displayTasks() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= list.size(); i++) {
-            sb.append(i + ". " + list.get(i - 1) + "\n");
+        for (int i = 1; i <= tasks.size(); i++) {
+            String formattedTask = i + ". " + tasks.get(i - 1).toString();
+            sb.append(formattedTask);
         }
         display(sb.toString());
     }
@@ -27,15 +27,24 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         display("Hello! I'm Duke\nWhat can I do for you?");
         while (sc.hasNextLine()) {
-            String[] command = sc.nextLine().split(" ");
-            if (command[0].equals("bye")) {
-                display("Bye. Hope to see you again soon!");
-                return;
-            } else if (command[0].equals("list")) {
-                displayList();
-            } else {
-                list.add(command[0]);
-                display("added: " + command[0]);
+            String original = sc.nextLine();
+            String[] command = original.split(" ");
+            switch (command[0]) {
+                case "bye":
+                    display("Bye. Hope to see you again soon!");
+                    return;
+                case "list":
+                    displayTasks();
+                    break;
+                case "done":
+                    Task toMarkDone = tasks.get(Integer.parseInt(command[1]) - 1);
+                    toMarkDone.markDone();
+                    display("Nice! I've marked this task as done:\n  " + toMarkDone);
+                    break;
+                default:
+                    tasks.add(new Task(original));
+                    display("added: " + original);
+                    break;
             }
         }
     }
