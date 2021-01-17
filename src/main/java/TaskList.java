@@ -20,7 +20,12 @@ public class TaskList {
         return tasksList.get(index);
     }
 
+    public void removeTask(int index){
+        tasksList.remove(index - 1);
+    }
+
     public void displayTasks(){
+        System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < tasksList.size(); i++) {
             System.out.println(String.valueOf(i + 1) + "." + tasksList.get(i));
         }
