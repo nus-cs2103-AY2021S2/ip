@@ -15,3 +15,12 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+text-ui-test/Test_1/ACTUAL_OK_1.TXT
+text-ui-test/Test_2/ACTUAL_ERR_2.TXT
+text-ui-test/Test_2/ACTUAL_OK_2.TXT
+text-ui-test/Test_3/ACTUAL_ERR_3.TXT
+text-ui-test/Test_3/ACTUAL_OK_3.TXT
+text-ui-test/Test_4/ACTUAL_ERR_4.TXT
+text-ui-test/Test_4/ACTUAL_OK_4.TXT
+text-ui-test/Test_5/ACTUAL_ERR_5.TXT
+text-ui-test/Test_5/ACTUAL_OK_5.TXT

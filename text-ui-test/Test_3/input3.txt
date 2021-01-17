@@ -1,0 +1,6 @@
+list
+done 1
+done 2
+undone 1
+undone 2
+bye

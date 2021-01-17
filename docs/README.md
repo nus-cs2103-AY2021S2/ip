@@ -5,6 +5,8 @@ Introducing... a custom chatbot based on Meme Man and the Surreal Memes.
 Not only will Meme Man entertain you every step of the way, Meme Man will also help you keep track of your tasks.
 If your task has a tick, it's done. If your task has a cross, it's not done.
 
+Meme Man will also catch exceptions for you, because Meme Man thinks exceptions are not stonks...
+
 Based on the Duke chatbot.
 
 ## Features
@@ -52,8 +54,10 @@ Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`deadline Do CS2103T lecture quiz /by this Saturday`
-`deadline Do CS2103T ip /by next Monday`
+```
+deadline Do CS2103T lecture quiz /by this Saturday
+deadline Do CS2103T ip /by next Monday
+```
 
 Expected outcome:
 
@@ -64,6 +68,9 @@ Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: next Monday)
 Total number of tasks: 3
 ```
 
+Outcome if "/by" is missing:
+
+`Wrong formatting. Did you forget to put '/by'? Not stonks!`
 
 ### `event (insert task description) /at (insert time)` - Add Event task command
 
@@ -80,6 +87,14 @@ Expected outcome:
 Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: next Tuesday)
 Total number of tasks: 4
 ```
+Outcome if "/at" is missing:
+
+`Wrong formatting. Did you forget to put '/at'? Not stonks!`
+
+### What happens if task description is empty?
+This applies to all 3 types of tasks:
+
+`Empty (insert task type) task description. Not stonks!`
 
 ## Other commands
 
@@ -98,6 +113,7 @@ Now suppose you have 4 tasks:
 4. Attend CS2101 class (Event happens next Tuesday, Not done)
 
 How to get Meme Man to list out above tasks:
+
 `list` 
 
 Expected outcome:
@@ -110,6 +126,7 @@ I print the tasks:
 Hmmst've... Stonks
 ```
 Outcome if there is nothing in task list:
+
 `I have nothing to print. Not stonks!`
 
 ### `done (insert number)` - Do task command
@@ -125,6 +142,11 @@ Expected outcome:
 Stonks! You've done this task:
 Do CS2103T lecture quiz
 ```
+
+Outcome if you do not put a number in the number field:
+
+`Did you forget to put a number for the command you just typed in? Not stonks!`
+
 A task number is invalid if any of the following conditions are met:
 1. 0
 2. Negative number
@@ -133,6 +155,13 @@ A task number is invalid if any of the following conditions are met:
 Outcome if task number is invalid:
 
 `Invalid task number. Not stonks!`
+
+Outcome if task was already done:
+```
+This task is already done.
+I would have wanted to say Stonks...
+but your usage of an illegal operation is Not Stonks!
+```
 
 ### `undone (insert number)` - Undo task command
 
@@ -147,9 +176,17 @@ Expected outcome:
 Not stonks! This task has been marked as undone: 
 Do CS2103T lecture quiz
 ```
+Outcome if you do not put a number in the number field:
+
+`Did you forget to put a number for the command you just typed in? Not stonks!`
+
 Outcome if task number is invalid:
 
 `Invalid task number. Not stonks!`
+
+Outcome if task was not done in the first place:
+
+`This task is already not done. Not stonks anyway!`
 
 ### `orang` - Easter egg command
 The orang here refers to the Surreal Memes orange (spelled "Orang"), not Orang Utan orang.
@@ -160,4 +197,5 @@ Did someone said... NO VEGETALS?
 
 ### Invalid commands
 If you key in an unrecognised command, this is what Meme Man has to say:
+
 `Command not recognised. Not stonks!`
