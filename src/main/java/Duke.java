@@ -29,7 +29,7 @@ public class Duke {
 
     /**
      * Takes in user's command line arguments and treats them accordingly.
-     * Chatbot Duke will end the session when user input "bye".
+     * Chatbot Duke will end the session when user inputs "bye".
      */
     public static void listenToUserCommand() throws DukeException {
         Scanner sc = new Scanner(System.in);
@@ -41,29 +41,35 @@ public class Duke {
             } else if (input.equals("list")) {
                 displayUserCommands();
             } else if (input.startsWith("done ")) {
-                int taskNumber = Integer.parseInt(input.substring(5));
-                Task task = taskList.get(taskNumber - 1);
-                markTaskDone(task);
+                markTaskDone(input);
             } else if (input.startsWith("todo ")) {
                 if (input.split(" ").length == 1) {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
-                String todoTask = input.substring(5);
-                addTodoTask(todoTask);
+                createTodoTask(input);
             } else if (input.startsWith("event ")) {
-                String[] taskAndDate = input.substring(6).split("/");
-                String eventTask = taskAndDate[0];
-                String date = taskAndDate[1].substring(3);
-                addEventTask(eventTask, date);
+                createEventTask(input);
             } else if (input.startsWith("deadline ")) {
-                String[] taskAndDate = input.substring(9).split("/");
-                String deadlineTask = taskAndDate[0];
-                String date = taskAndDate[1].substring(3);
-                addDeadlineTask(deadlineTask, date);
+                createDeadlineTask(input);
+            } else if (input.startsWith("delete ")) {
+                deleteTask(input);
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
+    }
+
+    /**
+     * Chatbot deletes the task from the task list
+     * @param input referring to the delete command-line input supplied by the user
+     */
+    public static void deleteTask(String input) {
+        int taskNumber = Integer.parseInt(input.substring(7));
+        Task taskDeleted = taskList.get(taskNumber-1);
+        System.out.println("Noted. I've removed this task: ");
+        taskList.remove(taskNumber-1);
+        System.out.println(taskDeleted);
+        updateTaskList();
     }
 
     /**
@@ -75,7 +81,7 @@ public class Duke {
 
     /**
      * Chatbot prints out line-by-line all of the user's tasks
-     * stored in the list in that given session.
+     * stored in the task list in that given session.
      */
     public static void displayUserCommands() {
         System.out.println("Here are your tasks!");
@@ -89,34 +95,69 @@ public class Duke {
 
     /**
      * Mark task as done and notify user of that change
-     * @param task supplied from the user's command-line input
+     * @param input supplied from the user's command-line input to mark a task as done
      */
-    public static void markTaskDone(Task task) {
+    public static void markTaskDone(String input) {
+        int taskNumber = Integer.parseInt(input.substring(5));
+        Task task = taskList.get(taskNumber - 1);
         task.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
         System.out.println();
     }
 
-    public static void addTodoTask(String input) {
-        Task task = new Todo(input);
-        updateTaskList(task);
+    /**
+     * creates a todo task and adds it to the task list
+     * @param input supplied from user's command-line input to add a todo task
+     */
+    public static void createTodoTask(String input) {
+        String todoTask = input.substring(5);
+        Task task = new Todo(todoTask);
+        addTaskToList(task);
+        updateTaskList();
     }
 
-    public static void addEventTask(String input, String date) {
-        Task task = new Event(input, date);
-        updateTaskList(task);
+    /**
+     * creates an event task and adds it to the task list
+     * @param input supplied from user's command-line input to add an event task
+     */
+    public static void createEventTask(String input) {
+        String[] taskAndDate = input.substring(6).split("/");
+        String eventTask = taskAndDate[0];
+        String date = taskAndDate[1].substring(3);
+        Task task = new Event(eventTask, date);
+        addTaskToList(task);
+        updateTaskList();
     }
 
-    public static void addDeadlineTask(String input, String date) {
-        Task task = new Deadline(input, date);
-        updateTaskList(task);
+    /**
+     * creates a deadline task and adds it to the task list
+     * @param input supplied from user's command-line input to add a deadline task
+     */
+    public static void createDeadlineTask(String input) {
+        String[] taskAndDate = input.substring(9).split("/");
+        String deadlineTask = taskAndDate[0];
+        String deadline = taskAndDate[1].substring(3);
+        Task task = new Deadline(deadlineTask, deadline);
+        addTaskToList(task);
+        updateTaskList();
     }
 
-    public static void updateTaskList(Task task) {
+    /**
+     * adds task into the task list
+     * @param task to be added into the task list
+     */
+    public static void addTaskToList(Task task) {
         taskList.add(task);
+        System.out.println("added: " + task);
+    }
+
+    /**
+     * prints out the number of current tasks in the task list
+     */
+    public static void updateTaskList() {
         int numTasks = taskList.size();
-        System.out.println("added: " + task + "\nyou have " + numTasks + " tasks in your list");
+        System.out.println("you have " + numTasks + " tasks in your list");
         System.out.println();
     }
 
