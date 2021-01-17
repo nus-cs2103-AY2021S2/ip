@@ -9,5 +9,7 @@ list
 todo
 event
 deadline
+delete
+delete 2
 list
 bye
