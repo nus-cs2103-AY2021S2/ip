@@ -35,17 +35,13 @@ public class Lihua {
      */
     private static void actionUpon(String userInput) {
         printHorizontalLine();
-        if (FormatChecker.isListFormat(userInput)) {
+        if (FormatChecker.isPrintingList(userInput)) {
             tasks.printList();
-        } else if (FormatChecker.isDoneFormat(userInput)) {
+        } else if (FormatChecker.isGettingTaskDone(userInput)) {
             Integer index = Integer.valueOf(userInput.split(" ")[1]);
             tasks.getTaskDone(index);
-        } else if (FormatChecker.isToDoFormat(userInput)) {
-            tasks.addTodo(userInput);
-        } else if (FormatChecker.isDeadLineFormat(userInput)) {
-            tasks.addDeadLine(userInput);
-        } else if (FormatChecker.isEventFormat(userInput)) {
-            tasks.addEvent(userInput);
+        } else if (FormatChecker.isAddingTask(userInput)) {
+            tasks.addTask(userInput);
         } else {
             // Dummy case, to be modified
             System.out.println("Sorry, I do not understand your command :')");

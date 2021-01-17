@@ -15,46 +15,30 @@ public class Tasks {
     }
 
     /**
-     * Add the given todo item into the list, with necessary information printed
-     * @param userInput User input is assumed to be in todo format
+     * Add the given task into the list, with necessary information printed
+     * @param userInput User input is assumed to be in the format of adding new tasks
      */
-    public void addTodo(String userInput) {
+    public void addTask(String userInput) {
         System.out.println("Got it. I have added this task to your list: ");
-        String content = InputInformationExtractor.getToDoContent(userInput);
-        ToDo todo = new ToDo(content);
-        tasks.add(todo);
-        System.out.print("---- ");
-        System.out.println(todo);
-        reportTotalNumberOfTasks();
-    }
+        Task task = null;
 
-    /**
-     * Add the given deadline item into the list, with necessary information printed
-     * @param userInput User input is assumed to be in deadline format
-     */
-    public void addDeadLine(String userInput) {
-        System.out.println("Got it. I have added this task to your list: ");
-        String content = InputInformationExtractor.getDeadlineContent(userInput);
-        String by = InputInformationExtractor.getDeadlineTime(userInput);
-        Deadline deadline = new Deadline(content, by);
-        tasks.add(deadline);
+        // It is guaranteed that either one of the three blocks will be entered
+        // therefore the final value for task can never be null
+        if (FormatChecker.isToDoFormat(userInput)) {
+            String content = InputInformationExtractor.getToDoContent(userInput);
+            task = new ToDo(content);
+        } else if (FormatChecker.isDeadLineFormat(userInput)) {
+            String content = InputInformationExtractor.getDeadlineContent(userInput);
+            String by = InputInformationExtractor.getDeadlineTime(userInput);
+            task = new Deadline(content, by);
+        } else if (FormatChecker.isEventFormat(userInput)) {
+            String content = InputInformationExtractor.getEventContent(userInput);
+            String time = InputInformationExtractor.getEventTime(userInput);
+            task = new Event(content, time);
+        }
+        tasks.add(task);
         System.out.print("---- ");
-        System.out.println(deadline);
-        reportTotalNumberOfTasks();
-    }
-
-    /**
-     * Add the given event item into the list, with necessary information printed
-     * @param userInput User input is assumed to be in event format
-     */
-    public void addEvent(String userInput) {
-        System.out.println("Got it. I have added this task to your list: ");
-        String content = InputInformationExtractor.getEventContent(userInput);
-        String time = InputInformationExtractor.getEventTime(userInput);
-        Event event = new Event(content, time);
-        tasks.add(event);
-        System.out.print("---- ");
-        System.out.println(event);
+        System.out.println(task);
         reportTotalNumberOfTasks();
     }
 

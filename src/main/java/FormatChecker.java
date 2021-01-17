@@ -8,7 +8,7 @@ public class FormatChecker {
      * @param userInput user input string
      * @return true if the input string is in the format of getting task done
      */
-    public static boolean isDoneFormat(String userInput) {
+    public static boolean isGettingTaskDone(String userInput) {
         try {
             String[] splited = userInput.split(" ");
             boolean isDone = splited[0].equals("done");
@@ -24,8 +24,19 @@ public class FormatChecker {
      * @param userInput user input string
      * @return true if the input string is in the format of getting task done
      */
-    public static boolean isListFormat(String userInput) {
+    public static boolean isPrintingList(String userInput) {
         return userInput.equals("list");
+    }
+
+    /**
+     * Checks if the user input is trying to add a new task
+     * @param userInput User input string
+     * @return True if the using input string indicates adding a new task
+     */
+    public static boolean isAddingTask(String userInput) {
+        return isToDoFormat(userInput)
+                || isDeadLineFormat(userInput)
+                || isEventFormat(userInput);
     }
 
     /**
