@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 /**
  * Main class for the application
  */
@@ -38,6 +37,9 @@ public class Lihua {
         printHorizontalLine();
         if (userInput.equals("list")) {
             todos.printList();
+        } else if (FormatChecker.isDoneFormat(userInput)) {
+            Integer index = Integer.valueOf(userInput.split(" ")[1]);
+            todos.getItemDone(index);
         } else {
             todos.addItem(userInput);
             System.out.println(String.format("Added: %s", userInput));
