@@ -21,53 +21,54 @@ public class inputCommand {
         this.argument = "";
     }
 
-    public inputCommand(String in) {
+    public inputCommand(String in) throws DukeException.NoDescriptionException {
+        String tempDate = "";
+        String tempCommand = "";
         String[] result = in.split("\\s");
-        String msg = "";
-        if (result[0].equals("done")) {
-            this.command = result[0];
-            msg = result[1];
-            this.date = null;
-        } else if (result[0].equals("todo")) {
-            String temp = in.substring(in.indexOf(" ") + 1);
-            msg = temp;
-            if (temp.equals("todo")) {
-                this.command = "error";
-            } else {
-                this.command = result[0];
-            }
-            this.date = null;
-        } else if (result[0].equals("deadline") || result[0].equals("event")) {
-            String firstParam = in.substring(in.indexOf("/") + 1);
-            if (firstParam.equals("deadline") || firstParam.equals("event")) {
-                this.command = "error";
-                this.date = null;
-                msg = result[0];
-            } else {
-                int dateIndex = firstParam.indexOf("by ");
-                System.out.println(dateIndex);
-                if(dateIndex == -1){
-                    this.command = "error";
-                    this.date = null;
-                    msg = result[0];
-                }else {
-                    this.command = result[0];
-                    this.date = firstParam.substring(dateIndex + 1);
-                    firstParam = in.substring(in.indexOf(" ") + 1);
-                    msg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+        String tempArg = "";
+        try {
+            if (result[0].equals("done")) {
+                tempCommand = result[0];
+                tempArg = result[1];
+                tempDate = null;
+            } else if (result[0].equals("todo")) {
+                String temp = in.substring(in.indexOf(" ") + 1);
+                tempArg = temp;
+                if (temp.equals("todo")) {
+                    throw new DukeException.NoDescriptionException(result[0]);
+                } else {
+                    tempCommand = result[0];
                 }
+                tempDate = null;
+            } else if (result[0].equals("deadline") || result[0].equals("event")) {
+                String firstParam = in.substring(in.indexOf("/") + 1);
+                if (firstParam.equals("deadline") || firstParam.equals("event")) {
+                    tempDate = null;
+                    throw new DukeException.NoDescriptionException(result[0]);
+                } else {
+                    int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
+                    if (dateIndex == -1) {
+                        tempDate = null;
+                        throw new DukeException.NoDescriptionException(result[0]);
+                    } else {
+                        tempCommand = result[0];
+                        tempDate = firstParam.substring(dateIndex + 1);
+                        firstParam = in.substring(in.indexOf(" ") + 1);
+                        tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
+                    }
+                }
+            } else {
+                tempDate = null;
+                throw new DukeException.UnknownCommandException();
             }
-        } else {
-            this.command = "error";
-            this.date = null;
+        }catch(DukeException ex){
+            tempCommand = "error";
+            tempArg = ex.getMessage();
+//            System.out.println(tempArg);
         }
-        if (this.command == "error" && !msg.isEmpty()) {
-            this.argument = "☹ OOPS!!! The description of a " + msg + " cannot be empty.";
-        } else if (this.command == "error" && msg.isEmpty()) {
-            this.argument = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-        }else{
-            this.argument = msg;
-        }
+        this.command = tempCommand;
+        this.argument = tempArg;
+        this.date = tempDate;
     }
 
     public String getCommand() {
