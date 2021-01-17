@@ -1,7 +1,104 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+-------------------------------------------------
+Hello! My name is Lihua.
+What can I do for you today? (=~ω~=)
+-------------------------------------------------
+-------------------------------------------------
+Got it. I have added this task to your list:
+---- [T][ ] a
+Now you have 1 task in total. Good Luck.
+-------------------------------------------------
+-------------------------------------------------
+Got it. I have added this task to your list:
+---- [T][ ] a b c
+Now you have 2 tasks in total. Good Luck.
+-------------------------------------------------
+-------------------------------------------------
+These are the tasks in your list so far:
+1.[T][ ] a
+2.[T][ ] a b c
+-------------------------------------------------
+-------------------------------------------------
+Nice! I have marked this task as done:
+---- [T][X] a
+-------------------------------------------------
+-------------------------------------------------
+These are the tasks in your list so far:
+1.[T][X] a
+2.[T][ ] a b c
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the task number you specified is not valid.
+Try enter 'list' to see the range of task numbers you can enter.
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the task number you specified is not valid.
+Try enter 'list' to see the range of task numbers you can enter.
+-------------------------------------------------
+-------------------------------------------------
+Got it. I have added this task to your list:
+---- [D][ ] have fun (by: Sunday 10pm)
+Now you have 3 tasks in total. Good Luck.
+-------------------------------------------------
+-------------------------------------------------
+Got it. I have added this task to your list:
+---- [D][ ] cook (by: Sunday)
+Now you have 4 tasks in total. Good Luck.
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Got it. I have added this task to your list:
+---- [E][ ] party (at: Sunday 2-4 pm)
+Now you have 5 tasks in total. Good Luck.
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+These are the tasks in your list so far:
+1.[T][X] a
+2.[T][ ] a b c
+3.[D][ ] have fun (by: Sunday 10pm)
+4.[D][ ] cook (by: Sunday)
+5.[E][ ] party (at: Sunday 2-4 pm)
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Nice! I have marked this task as done:
+---- [E][X] party (at: Sunday 2-4 pm)
+-------------------------------------------------
+-------------------------------------------------
+These are the tasks in your list so far:
+1.[T][X] a
+2.[T][ ] a b c
+3.[D][ ] have fun (by: Sunday 10pm)
+4.[D][ ] cook (by: Sunday)
+5.[E][X] party (at: Sunday 2-4 pm)
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
+Goodbye! Hope to see you again soon! (=~ω~=)
+-------------------------------------------------

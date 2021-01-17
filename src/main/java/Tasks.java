@@ -19,7 +19,7 @@ public class Tasks {
      * @param userInput User input is assumed to be in the format of adding new tasks
      */
     public void addTask(String userInput) {
-        System.out.println("Got it. I have added this task to your list: ");
+        System.out.println("Got it. I have added this task to your list:");
         Task task = null;
 
         // It is guaranteed that either one of the three blocks will be entered
@@ -49,11 +49,11 @@ public class Tasks {
     public void getTaskDone(int index) {
         try {
             tasks.get(index - 1).setDone(true);
-            System.out.println("Nice! I have marked this task as done: ");
+            System.out.println("Nice! I have marked this task as done:");
             System.out.print("---- ");
             System.out.println(tasks.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, the task number you specified is not valid. " +
+            System.out.println("Sorry, the task number you specified is not valid.\n" +
                     "Try enter \'list\' to see the range of task numbers you can enter.");
         }
     }

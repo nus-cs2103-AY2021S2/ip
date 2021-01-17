@@ -1,0 +1,25 @@
+todo a
+todo a b c
+list
+done 1
+list
+done 999
+done -1
+deadline have fun /by Sunday 10pm
+deadline cook /by Sunday
+deadline wrong /byy Monday
+deadlinewrong /by Sunday
+event party /at Sunday 2-4 pm
+event wrong /by Sunday
+events wrong /by Sunday
+list
+wrong
+wrong message
+very wrong message
+
+.
+done 5
+list
+list all
+list everything
+bye

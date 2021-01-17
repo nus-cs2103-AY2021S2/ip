@@ -21,10 +21,10 @@ public class Lihua {
             if (userInput.equals(EXIT_SIGNAL)) {
                 printGoodbye();
                 return;
-            } else {
+            } else if (!userInput.equals("")) {
                 actionUpon(userInput);
-                userInput = sc.nextLine();
             }
+            userInput = sc.nextLine();
         }
     }
 
@@ -52,14 +52,14 @@ public class Lihua {
     private static void printHello() {
         printHorizontalLine();
         String welcome = "Hello! My name is Lihua.\n"
-                + "What can I do for you today? ♪(^∇^*)";
+                + "What can I do for you today? (=~ω~=)";
         System.out.println(welcome);
         printHorizontalLine();
     }
 
     private static void printGoodbye() {
         printHorizontalLine();
-        System.out.println("Goodbye! Hope to see you again soon! (๑•̀ㅂ•́)و✧");
+        System.out.println("Goodbye! Hope to see you again soon! (=~ω~=)");
         printHorizontalLine();
     }
 
