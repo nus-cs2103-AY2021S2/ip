@@ -12,8 +12,9 @@ public class Duke {
         System.exit(0);
     }
 
-    public static void addTodo(String[] args) {
+    public static void addTodo(String[] args) throws DukeInvalidArgumentException {
         String task = String.join(" ", args);
+        if (task.length() == 0) throw new DukeInvalidArgumentException();
 
         Task t = new Todo(task);
         tasks.add(t);
@@ -22,11 +23,14 @@ public class Duke {
         System.out.println("   " + t);
     }
 
-    public static void addDeadline(String[] args) {
+    public static void addDeadline(String[] args) throws DukeInvalidArgumentException {
         String input = String.join(" ", args);
         String[] pair = input.split(" /by ");
+        if (pair.length != 2) throw new DukeInvalidArgumentException();
+
         String name = pair[0];
         String timestamp = pair[1];
+        if (name.length() * timestamp.length() == 0) throw new DukeInvalidArgumentException();
 
         Task t = new Deadline(name, timestamp);
         tasks.add(t);
@@ -35,11 +39,14 @@ public class Duke {
         System.out.println("   " + t);
     }
 
-    public static void addEvent(String[] args) {
+    public static void addEvent(String[] args) throws DukeInvalidArgumentException {
         String input = String.join(" ", args);
         String[] pair = input.split(" /at ");
+        if (pair.length != 2) throw new DukeInvalidArgumentException();
+
         String name = pair[0];
         String timestamp = pair[1];
+        if (name.length() * timestamp.length() == 0) throw new DukeInvalidArgumentException();
 
         Task t = new Event(name, timestamp);
         tasks.add(t);
@@ -66,7 +73,7 @@ public class Duke {
         System.out.println("   " + t);
     }
 
-    public static void parse(String[] input) throws DukeInvalidCommandException {
+    public static void parse(String[] input) throws DukeInvalidCommandException, DukeInvalidArgumentException {
         String command = input[0];
         String[] args = Arrays.copyOfRange(input, 1, input.length);
 
