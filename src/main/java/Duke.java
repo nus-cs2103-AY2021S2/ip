@@ -17,7 +17,7 @@ public class Duke {
             toDo.doTask();
             System.out.println("Affirmative. The following task has been marked as done: \n" + toDo);
         } else {
-            Task newTask = new Task(command);
+            Task newTask = new Todo(command);
             toDoList.add(newTask);
             System.out.println("Added to to-do list: \n" + newTask);
         }

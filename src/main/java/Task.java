@@ -1,6 +1,6 @@
-public class Task {
-    private String task;
-    private boolean done;
+public abstract class Task {
+    protected String task;
+    protected boolean done;
 
     Task(String task) {
         this.task = task;
