@@ -66,7 +66,7 @@ public class Duke {
         System.out.println("   " + t);
     }
 
-    public static void parse(String[] input) {
+    public static void parse(String[] input) throws DukeInvalidCommandException {
         String command = input[0];
         String[] args = Arrays.copyOfRange(input, 1, input.length);
 
@@ -83,6 +83,8 @@ public class Duke {
             addDeadline(args);
         } else if (command.equals("event")) {
             addEvent(args);
+        } else {
+            throw new DukeInvalidCommandException();
         }
     }
 
@@ -95,7 +97,13 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String[] input = sc.nextLine().split(" ");
-            parse(input);
+
+            try {
+                parse(input);
+            } catch (DukeException e) {
+                echo(e.toString());
+            }
+
             System.out.print("You: ");
         }
     }
