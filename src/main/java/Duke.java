@@ -23,13 +23,13 @@ public class Duke {
         while (!exit) {
             String userInput = sc.nextLine();
 
-            if (userInput.equals("bye")) {
+            if (userInput.equals("bye")) { //bye
                 exit = true;
                 System.out.println(horzLine
                         + "\n     Bye. Hope to see you again soon!\n"
                         + horzLine);
                 
-            } else if (userInput.equals("list")) {
+            } else if (userInput.equals("list")) { //list
                 System.out.println(horzLine
                     + "\n     Here are the tasks in your list: ");
 
@@ -39,20 +39,35 @@ public class Duke {
                 }
                 System.out.println(horzLine);
                 
-            } else if (userInput.startsWith("done")) {
+            } else if (userInput.startsWith("done")) { //Mark task as done
                 int taskNumber = Integer.parseInt(userInput.substring(5, 6)) - 1;
                 list.get(taskNumber).markAsDone();
 
                 System.out.println(horzLine
-                        + "\n     Nice! I've marked this task as done: \n"
+                        + "\n     Nice! I've marked this task as done:\n"
                         + "        " + list.get(taskNumber) + "\n"
                         + horzLine);
 
-            } else {
-                Task newTask = new Task(userInput);
+            } else { //Add new tasks to list
+                Task newTask;
+
+                if (userInput.startsWith("todo")) {
+                    newTask = new ToDo(userInput.substring(5));
+                } else if (userInput.startsWith("deadline")) {
+                    int index = userInput.indexOf('/');
+                    newTask = new Deadline(userInput.substring(9, index),
+                            userInput.substring(index + 4));
+                } else {
+                    int index = userInput.indexOf('/');
+                    newTask = new Event(userInput.substring(6, index),
+                            userInput.substring(index + 4));
+                }
+
                 list.add(newTask);
                 System.out.println(horzLine
-                        + "\n      added: " + userInput + "\n"
+                        + "\n      Got it. I've added this task:\n"
+                        + "            " + newTask + "\n"
+                        + "      Now you have " + list.size() + " tasks in the list.\n"
                         + horzLine);
             }
         }
