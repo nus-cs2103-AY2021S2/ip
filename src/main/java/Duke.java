@@ -19,7 +19,8 @@ public class Duke {
                 int taskId = Integer.valueOf(input.split(" ")[1]) - 1;
                 taskManager.done(taskId);
             } else {
-                taskManager.add(input);
+                String task = input.split(" ", 2)[1];
+                taskManager.add(command, task);
             }
             input = sc.nextLine();
             command = input.split(" ")[0];

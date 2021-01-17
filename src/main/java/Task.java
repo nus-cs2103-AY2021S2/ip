@@ -1,7 +1,7 @@
 public class Task {
-    int id;
-    String description;
-    boolean isCompleted;
+    protected int id;
+    protected String description;
+    protected boolean isCompleted;
 
     public Task(int id, String description){
         this.id = id;
