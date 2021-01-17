@@ -39,6 +39,8 @@ public class Controller {
                 doneTask(input);
             } else if (input.equals("list")) {
                 printList();
+            } else if (input.startsWith("delete")) {
+                deleteTask(input);
             } else {
                 addTask(input);
             }
@@ -71,7 +73,7 @@ public class Controller {
             }
             list.add(t);
             String output = String.format(INDENT + " Got it. I've added this task:" + NEWLINE
-                            + INDENT + INDENT + " %s" + NEWLINE + INDENT + "Now you have %d tasks "
+                            + INDENT + INDENT + " %s" + NEWLINE + INDENT + " Now you have %d tasks "
                             + "in the list."
                     , t, list.size());
             System.out.println(output);
@@ -115,5 +117,16 @@ public class Controller {
             System.out.println(output);
             num++;
         }
+    }
+
+    private void deleteTask(String input) {
+        int index = Integer.parseInt(input.substring(7)) - 1;
+        Task t = list.get(index);
+        list.remove(index);
+        String output =
+                String.format(INDENT + " Noted. I've removed this task:" + NEWLINE + INDENT + INDENT
+                        + t + NEWLINE + INDENT + " Now you have %d tasks in the list.",
+                        list.size());
+        System.out.println(output);
     }
 }
