@@ -11,12 +11,16 @@ public class Task {
         this.isDone = true;
     }
 
+    String getName() {
+        return this.name;
+    }
+
+    String getStatus() {
+        return (isDone ? "X" : " ");
+    }
+
     @Override
     public String toString() {
-        if(isDone) {
-            return "[X] " + this.name;
-        } else {
-            return "[ ] " + this.name;
-        }
+        return String.format("[%s] %s", this.getStatus(), this.getName());
     }
 }
