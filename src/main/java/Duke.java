@@ -6,7 +6,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String horzLine = "    _________________________________________________";
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "               |  _ \\ _   _| | _____ \n"
@@ -28,17 +28,29 @@ public class Duke {
                 System.out.println(horzLine
                         + "\n     Bye. Hope to see you again soon!\n"
                         + horzLine);
+                
             } else if (userInput.equals("list")) {
-                System.out.println(horzLine);
+                System.out.println(horzLine
+                    + "\n     Here are the tasks in your list: ");
 
                 for (int i = 0; i < list.size(); i++) {
                     int number = 1 + i;
                     System.out.println("     " + number + ". " + list.get(i));
                 }
-
                 System.out.println(horzLine);
+                
+            } else if (userInput.startsWith("done")) {
+                int taskNumber = Integer.parseInt(userInput.substring(5, 6)) - 1;
+                list.get(taskNumber).markAsDone();
+
+                System.out.println(horzLine
+                        + "\n     Nice! I've marked this task as done: \n"
+                        + "        " + list.get(taskNumber) + "\n"
+                        + horzLine);
+
             } else {
-                list.add(userInput);
+                Task newTask = new Task(userInput);
+                list.add(newTask);
                 System.out.println(horzLine
                         + "\n      added: " + userInput + "\n"
                         + horzLine);
