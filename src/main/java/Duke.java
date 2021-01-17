@@ -19,10 +19,27 @@ public class Duke {
     }
 
     private static void printList() {
+        System.out.println("Here are the tasks in your list:");
         int counter = 1;
         for (Task t : taskList) {
             System.out.println(counter + ". " + t);
             counter++;
+        }
+    }
+
+    private static boolean isDoneCommand(String command) {
+        return command.equals(Commands.DONE.getCommand());
+    }
+
+    private static Task defineTask(String command, String[] taskInputAndDate) {
+        if (command.equals(TaskTypes.TODO.getType())) {
+            return new ToDo(taskInputAndDate[0].trim());
+        } else if (command.equals(TaskTypes.DEADLINE.getType())) {
+            return new Deadline(taskInputAndDate[0].trim(), taskInputAndDate[1].trim());
+        } else if (command.equals(TaskTypes.EVENT.getType())) {
+            return new Event(taskInputAndDate[0].trim(), taskInputAndDate[1].trim());
+        } else {
+            return null;
         }
     }
 
@@ -40,27 +57,34 @@ public class Duke {
     private static void run() {
         introduction();
         while (scanner.hasNext()) {
+            String command = scanner.next();
             String input = scanner.nextLine();
-            if (input.equals(Commands.BYE.getCommand())) {
+            if (command.equals(Commands.BYE.getCommand())) {
                 endProgram();
                 break;
-            } else if (input.equals(Commands.LIST.getCommand())) {
+            } else if (command.equals(Commands.LIST.getCommand())) {
                 printList();
             } else {
-                String[] inputWords = input.split(" ");
-                if (inputWords.length == 2 && inputWords[0].equals(Commands.DONE.getCommand())) {
+                String[] taskInputAndDate = input.split("/");
+                if (isDoneCommand(command)) {
                     try {
-                        int pos = Integer.parseInt(inputWords[1]) - 1;
+                        int pos = Integer.parseInt(taskInputAndDate[0].trim()) - 1;
                         setTaskDone(pos);
                     } catch (NumberFormatException numEx) {
-                        System.err.println("'done' is command word; please pass a numerical index or start your task with another word!");
+                        System.err.println("'done' is command word; please pass a numerical index or start your task"
+                                + " with another word!");
                     } catch (IndexOutOfBoundsException arrEx) {
                         System.err.println("Please pass a valid index!");
                     }
                 } else {
-                    Task t = new Task(input);
-                    taskList.add(t);
-                    System.out.println("added: " + t.getDescription());
+                    Task t = defineTask(command, taskInputAndDate);
+                    if (t != null) {
+                        taskList.add(t);
+                        System.out.println("Got it. I've added this task:\n" + task);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    } else {
+                        System.err.println("Please enter a valid task command (todo, deadline, event, list, done, bye)!");
+                    }
                 }
             }
         }
