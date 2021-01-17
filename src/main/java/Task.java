@@ -17,4 +17,9 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); // return tick or cross symbols
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%c] %s", isDone ? 'X' : ' ', description);
+    }
 }

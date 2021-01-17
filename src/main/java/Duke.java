@@ -27,7 +27,7 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            System.out.printf("\t %d. [%c] %s%n", i + 1, currentTask.isDone() ? 'X' : ' ', currentTask.description);
+            System.out.printf("\t %d. %s%n", i + 1, currentTask);
         }
         System.out.println(HORIZONTAL_LINE);
     }
@@ -48,8 +48,7 @@ public class Duke {
                 int index = Integer.parseInt(description.substring(5)) - 1;
                 Task currentTask = tasks.get(index);
                 currentTask.markAsDone();
-                wrappedPrint(new String[]{"Good job! The task below is marked done!",
-                                          "[X] " + currentTask.description});
+                wrappedPrint(new String[]{"Good job! The task below is marked done!", currentTask.toString()});
                 continue;
             }
             switch (description) {
