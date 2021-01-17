@@ -12,66 +12,80 @@ ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-  [D][?] having lunch (by: Sunday 2pm)
+  [T][?] sweep the floor
 Now you have 1 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-  [E][?] team project meeting (at: Monday 2-4pm)
+  [D][?] having lunch (by: Sunday 2pm)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 Got it. I've added this task:
-  [T][?] sleep early
+  [E][?] team project meeting (at: Monday 2-4pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
-Here are the tasks in your list:
-1. [D][?] having lunch (by: Sunday 2pm)
-2. [E][?] team project meeting (at: Monday 2-4pm)
-3. [T][?] sleep early
-____________________________________________________________
-
-____________________________________________________________
-Nice! I've marked this task as done:
-  [?] team project meeting
-____________________________________________________________
-
-____________________________________________________________
-Nice! I've marked this task as done:
-  [?] having lunch
-____________________________________________________________
-
-____________________________________________________________
-No such command. In order to add a new task, start a command with todo, deadline or event.
-____________________________________________________________
-
-____________________________________________________________
-Here are the tasks in your list:
-1. [D][?] having lunch (by: Sunday 2pm)
-2. [E][?] team project meeting (at: Monday 2-4pm)
-3. [T][?] sleep early
-____________________________________________________________
-
-____________________________________________________________
 Got it. I've added this task:
-  [D][?] study for the test (by: 27 April 2021)
+  [T][?] sleep early
 Now you have 4 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][?] having lunch (by: Sunday 2pm)
-2. [E][?] team project meeting (at: Monday 2-4pm)
-3. [T][?] sleep early
-4. [D][?] study for the test (by: 27 April 2021)
+1. [T][?] sweep the floor
+2. [D][?] having lunch (by: Sunday 2pm)
+3. [E][?] team project meeting (at: Monday 2-4pm)
+4. [T][?] sleep early
 ____________________________________________________________
 
 ____________________________________________________________
-Done command should be followed by a number between 1 and 4.
+done command should be followed by a number between 1 and 4.
+____________________________________________________________
+
+____________________________________________________________
+Nice! I've marked this task as done:
+  [D][?] having lunch (by: Sunday 2pm)
+____________________________________________________________
+
+____________________________________________________________
+Nice! I've marked this task as done:
+  [T][?] sweep the floor
+____________________________________________________________
+
+____________________________________________________________
+Γÿ╣ OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+
+____________________________________________________________
+Here are the tasks in your list:
+1. [T][?] sweep the floor
+2. [D][?] having lunch (by: Sunday 2pm)
+3. [E][?] team project meeting (at: Monday 2-4pm)
+4. [T][?] sleep early
+____________________________________________________________
+
+____________________________________________________________
+Got it. I've added this task:
+  [D][?] study for the test (by: 27 April 2021)
+Now you have 5 tasks in the list.
+____________________________________________________________
+
+____________________________________________________________
+delete command should be followed by a number between 1 and 5.
+____________________________________________________________
+
+____________________________________________________________
+Invalid command for deadline! Try again
+____________________________________________________________
+
+____________________________________________________________
+Noted. I've removed this task:
+  [E][?] team project meeting (at: Monday 2-4pm)
+Now you have 4 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________

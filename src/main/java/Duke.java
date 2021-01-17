@@ -30,7 +30,7 @@ public class Duke {
         System.out.println();
     }
 
-    public static void handleInput(){
+    public static void handleInput() {
         while (sc.hasNextLine()){
             String command = sc.nextLine();
             if (command.equals("bye")){
@@ -38,20 +38,32 @@ public class Duke {
                 break;
             } else if (command.equals("list")){
                 listingTasks(list);
+            } else if (command.equals("done") || command.equals("delete")){
+                handleIndexOutOfBoundTask(command);
             } else if (command.startsWith("done ")){
                 try{
                     int doneIndex = Integer.parseInt(command.substring(5));
                     if (doneIndex > list.size() || doneIndex <= 0){
-                        handleIndexOutOfBoundTask();
+                        handleIndexOutOfBoundTask("done");
                     } else {
                         Task task = list.get(doneIndex - 1);
                         markingDoneTask(task);
                     }
-                } catch (NumberFormatException e){ //just add a normal task
-                    handleIndexOutOfBoundTask();
+                } catch (NumberFormatException e){
+                    handleIndexOutOfBoundTask("done");
                 }
-            }
-            else {
+            } else if (command.startsWith("delete ")){
+                try{
+                    int deleteIndex = Integer.parseInt(command.substring(7));
+                    if (deleteIndex > list.size() || deleteIndex <= 0){
+                        handleIndexOutOfBoundTask("delete");
+                    } else {
+                        removeTask(list, deleteIndex - 1);
+                    }
+                } catch (NumberFormatException e){
+                    handleIndexOutOfBoundTask("delete");
+                }
+            } else {
                 try {
                     addTask(command);
                 } catch (NoSuchCommandException e){
@@ -143,14 +155,24 @@ public class Duke {
         task.markAsDone();
         System.out.println(LINES);
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  [" + task.getStatusIcon() + "] " + task.getDescription());
+        System.out.println("  " + task.toString());
         System.out.println(LINES);
         System.out.println();
     }
 
-    public static void handleIndexOutOfBoundTask(){
+    public static void removeTask(ArrayList<Task> list, int index){
+        Task task = list.remove(index);
         System.out.println(LINES);
-        System.out.println("Done command should be followed by a number between 1 and " + list.size() + ".");
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("  " + task.toString());
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println(LINES);
+        System.out.println();
+    }
+
+    public static void handleIndexOutOfBoundTask(String type){
+        System.out.println(LINES);
+        System.out.println(type + " command should be followed by a number between 1 and " + list.size() + ".");
         System.out.println(LINES);
         System.out.println();
     }
