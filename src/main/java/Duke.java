@@ -11,7 +11,12 @@ public class Duke {
         inputCommand in = new inputCommand();
         while(!in.getInput().equals("bye")){
             in = new inputCommand(sc.nextLine());
-            System.out.println(in.getInput());
+            if(in.getInput().equals("bye")){
+                System.out.println("Bye. Hope to see you again soon!");
+            }else {
+                System.out.println(in.getInput());
+            }
         }
+
     }
 }
