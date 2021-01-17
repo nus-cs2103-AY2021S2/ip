@@ -33,7 +33,7 @@ public class Duke {
                 for (int index = 0; index < taskList.size(); index++) {
                     System.out.println(index + 1 + ". " + taskList.get(index).toString());
                 }
-                System.out.println(""); // Blank line
+                System.out.println(); // Blank line
 
             } else if (userInput.startsWith("todo")) {
                 // Create a new task with the description from user input
