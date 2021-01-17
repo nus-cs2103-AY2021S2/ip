@@ -10,14 +10,19 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\n" + "What can I do for you? \n");
         TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
+        String input = sc.nextLine();
+        String command = input.split(" ")[0];
         while(!command.equals("bye")){
-            if(!command.equals("list")) {
-                taskManager.add(command);
-            } else {
+            if(command.equals("list")) {
                 taskManager.printList();
+            } else if (command.equals("done")) {
+                int taskId = Integer.valueOf(input.split(" ")[1]) - 1;
+                taskManager.done(taskId);
+            } else {
+                taskManager.add(input);
             }
-            command = sc.nextLine();
+            input = sc.nextLine();
+            command = input.split(" ")[0];
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
