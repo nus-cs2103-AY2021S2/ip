@@ -23,7 +23,7 @@ public class Duke {
     }
 
     private static void doneCommand(String command) {
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("Nice! I've marked this task as done:");
         String[] inputs = command.split(" ");
         int itemPosition = Integer.parseInt(inputs[1]) - 1;
         Task selectedTask = taskList.get(itemPosition);
@@ -32,7 +32,7 @@ public class Duke {
     }
 
     private static void todoCommand(String command) {
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         ToDo newToDo = new ToDo(command.substring(5));
         taskList.add(newToDo);
 
@@ -41,7 +41,7 @@ public class Duke {
     }
 
     private static void deadlineCommand(String command) {
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
         int slashPosition = command.indexOf("/");
         Deadline newDeadline = new Deadline(command.substring(9, slashPosition - 1), command.substring(slashPosition + 4));
         taskList.add(newDeadline);
@@ -51,7 +51,7 @@ public class Duke {
     }
 
     private static void eventCommand(String command) {
-        System.out.println("Got it. I've added this task: ");
+        System.out.println("Got it. I've added this task:");
 
         int slashPosition = command.indexOf("/");
         Event newEvent = new Event(command.substring(6, slashPosition - 1), command.substring(slashPosition + 4));
