@@ -4,7 +4,7 @@ import java.util.Scanner;
  * The Duke project
  */
 public class Duke {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         greet();
 
         Scanner sc = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class Duke {
      */
     public static void greet() {
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Hello! I'm Jay \n" + "What is your name!");
+        System.out.println("Hello! I'm Jay!\n" + "What is your name!");
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
@@ -59,20 +59,23 @@ public class Duke {
     }
 
     /**
-     * Add what the user typed as input by printing out what the user keyed in.
+     * Add what the user typed as input by adding it into the Task array.
+     * Show the user the task that has been added in the display.
      * @param command The user input.
+     * @param tasks The Task array containing all the user tasks.
+     * @param count The number of tasks in the array at the moment.
      */
     public static void add(String command, Task[] tasks, int count) {
+        tasks[count] = new Task(command);
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("added: " + command);
         System.out.println("----------------------------------------------------------------------------------------");
-        tasks[count] = new Task(command);
     }
 
     /**
      * List out all user inputs in sequence.
-     * @param tasks A list of user inputs in sequence, up to 100.
-     * @param count The current number of user inputs stored inside the list.
+     * @param tasks An array of tasks in sequence, up to 100.
+     * @param count The current number of tasks stored inside the Task array.
      */
     public static void list(Task[] tasks, int count) {
         System.out.println("----------------------------------------------------------------------------------------");
@@ -84,9 +87,14 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
-    public static void done(Task[] tasks, int itemNum) throws InterruptedException {
-        tasks[itemNum - 1].isDone = true;
-        Thread.sleep(500);
+    /**
+     * Mark the task in the given task number as done.
+     * Tell the user that the task has been marked done.
+     * @param tasks An array of tasks in sequence, up to 100.
+     * @param itemNum The item number to be marked as done.
+     */
+    public static void done(Task[] tasks, int itemNum) {
+        tasks[itemNum - 1].makeDone();
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Nice! I've marked this task as done:\n" + tasks[itemNum - 1].display());
         System.out.println("----------------------------------------------------------------------------------------");
@@ -101,6 +109,5 @@ public class Duke {
         System.out.println("Bye " + username + "! Hope to see you again soon!");
         System.out.println("----------------------------------------------------------------------------------------");
     }
-
 }
 
