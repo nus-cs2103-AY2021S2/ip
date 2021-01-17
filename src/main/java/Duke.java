@@ -6,21 +6,19 @@ public class Duke {
     public static void main(String[] args) {
         // Start up greeting message
         String greetingMessage = "Hello! I'm a Chat bot and my name " +
-                "is Joe \nHow may I help you?";
+                "is Joe" + "\nHow may I help you?";
         System.out.println(formatMessage(greetingMessage));
 
         // Task list
         List<Task> taskList = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
         boolean isChatBotOnline = true;
         while (isChatBotOnline) {
             // Listen to input
-            Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
             String command = formatCommand(input);
             String additionalText = formatCommandText(input);
-            System.out.println(command);
-            System.out.println(additionalText);
 
             // Echoing the input
             if (command.equals("bye")) {
@@ -63,6 +61,7 @@ public class Duke {
                         "Type help for a list of commands"));
             }
         }
+        sc.close();
     }
 
 
@@ -77,7 +76,8 @@ public class Duke {
         String taskListString = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             String taskString = (i + 1) + ". " + taskList.get(i);
-            taskListString = taskListString + taskString + "\n";
+            taskListString = taskListString + taskString +
+                    (i == taskList.size() - 1 ? "" : "\n");
         }
         return taskListString;
     }
@@ -96,7 +96,7 @@ public class Duke {
     }
 
     static void printTaskAddedMessage(Task task) {
-        System.out.println(formatMessage("Got it. I've added this task: \n"
+        System.out.println(formatMessage("Got it. I've added this task:\n"
                 + task + "\n" + Task.getNumOfTasksString()));
     }
 }

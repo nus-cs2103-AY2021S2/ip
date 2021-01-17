@@ -32,7 +32,7 @@ public class Deadlines extends Task {
     @Override
     public String setDone() {
         super.setTaskCompleted();
-        return "Nice! I've marked this deadline as done: \n" +
+        return "Nice! I've marked this deadline as done:\n" +
                 toString();
     }
 

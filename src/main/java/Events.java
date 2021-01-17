@@ -32,7 +32,7 @@ public class Events extends Task {
     @Override
     public String setDone() {
         super.setTaskCompleted();
-        return "Nice! I've marked this event as done: \n" +
+        return "Nice! I've marked this event as done:\n" +
                 toString();
     }
 
