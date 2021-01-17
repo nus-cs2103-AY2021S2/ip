@@ -12,10 +12,10 @@ public class Duke {
         String byeMessage = "\t  Bye. Hope to see you again soon!\n";
         Scanner sc = new Scanner(System.in);
 
-        System.out.println(horizontalLine + logo + greeting + horizontalLine);
 
+        System.out.println(horizontalLine + logo + greeting + horizontalLine);
         String input = sc.nextLine();
-        while(!input.equals("bye")) {
+        while(!input.equals("bye")) {  // exit only when user input "bye"
             System.out.println(horizontalLine + "\t  " + input + "\n" + horizontalLine);
             input = sc.nextLine();
         }
