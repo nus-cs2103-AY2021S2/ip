@@ -18,6 +18,7 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 -------------------------------------
 -------------------------------------
+Here are the tasks in your list:
 1.[T][ ] read up on blockchain
 2.[E][ ] dinner appointment (at: Jewel)
 3.[D][ ] CS3244 Assignment 1 (by: Saturday)
@@ -27,6 +28,7 @@ Nice! I've marked this task as done:
 [D][X] CS3244 Assignment 1 (by: Saturday)
 -------------------------------------
 -------------------------------------
+Here are the tasks in your list:
 1.[T][ ] read up on blockchain
 2.[E][ ] dinner appointment (at: Jewel)
 3.[D][X] CS3244 Assignment 1 (by: Saturday)

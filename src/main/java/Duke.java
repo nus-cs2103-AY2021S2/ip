@@ -19,6 +19,7 @@ public class Duke {
                 Duke.printWithBorders(response.toString());
                 return;
             } else if (userInput.equals("list")) {
+                response.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < numberOfTasks; i++) {
                     Task task = tasks[i];
                     response.append(i + 1);
