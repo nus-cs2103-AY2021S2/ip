@@ -15,40 +15,47 @@ public class Tasks {
     }
 
     /**
-     * Add the given task into the list
-     * @param taskName The task to be added to the list
-     */
-    public void addTask(String taskName) {
-        tasks.add(new Task(taskName));
-    }
-
-    /**
-     * Add the given todo item into the list
+     * Add the given todo item into the list, with necessary information printed
      * @param userInput User input is assumed to be in todo format
      */
     public void addTodo(String userInput) {
+        System.out.println("Got it. I have added this task to your list: ");
         String content = InputInformationExtractor.getToDoContent(userInput);
-        tasks.add(new ToDo(content));
+        ToDo todo = new ToDo(content);
+        tasks.add(todo);
+        System.out.print("----");
+        System.out.println(todo);
+        reportTotalNumberOfTasks();
     }
 
     /**
-     * Add the given deadline item into the list
+     * Add the given deadline item into the list, with necessary information printed
      * @param userInput User input is assumed to be in deadline format
      */
     public void addDeadLine(String userInput) {
+        System.out.println("Got it. I have added this task to your list: ");
         String content = InputInformationExtractor.getDeadlineContent(userInput);
         String by = InputInformationExtractor.getDeadlineTime(userInput);
-        tasks.add(new Deadline(content, by));
+        Deadline deadline = new Deadline(content, by);
+        tasks.add(deadline);
+        System.out.print("----");
+        System.out.println(deadline);
+        reportTotalNumberOfTasks();
     }
 
     /**
-     * Add the given event item into the list
+     * Add the given event item into the list, with necessary information printed
      * @param userInput User input is assumed to be in event format
      */
     public void addEvent(String userInput) {
+        System.out.println("Got it. I have added this task to your list: ");
         String content = InputInformationExtractor.getEventContent(userInput);
         String time = InputInformationExtractor.getEventTime(userInput);
-        tasks.add(new Deadline(content, time));
+        Event event = new Event(content, time);
+        tasks.add(event);
+        System.out.print("----");
+        System.out.println(event);
+        reportTotalNumberOfTasks();
     }
 
     /**
@@ -75,5 +82,21 @@ public class Tasks {
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(String.format("%d.%s", i, tasks.get(i - 1)));
         }
+    }
+
+    /**
+     * Get the total number of tasks now
+     * @return The total number of tasks now, including done and undone tasks
+     */
+    public int getTotalNumberOfTasks() {
+        return tasks.size();
+    }
+
+    /**
+     * Print the report for total number of tasks, including done and undone tasks
+     */
+    public void reportTotalNumberOfTasks() {
+        String noun = tasks.size() <= 1? "task": "tasks";
+        System.out.println(String.format("Now you have %d %s in total. Good Luck.", tasks.size(), noun));
     }
 }

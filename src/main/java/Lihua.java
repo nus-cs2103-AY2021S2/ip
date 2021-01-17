@@ -1,3 +1,4 @@
+import java.text.Normalizer;
 import java.util.Scanner;
 
 /**
@@ -35,14 +36,20 @@ public class Lihua {
      */
     private static void actionUpon(String userInput) {
         printHorizontalLine();
-        if (userInput.equals("list")) {
+        if (FormatChecker.isListFormat(userInput)) {
             tasks.printList();
         } else if (FormatChecker.isDoneFormat(userInput)) {
             Integer index = Integer.valueOf(userInput.split(" ")[1]);
             tasks.getTaskDone(index);
+        } else if (FormatChecker.isToDoFormat(userInput)) {
+            tasks.addTodo(userInput);
+        } else if (FormatChecker.isDeadLineFormat(userInput)) {
+            tasks.addDeadLine(userInput);
+        } else if (FormatChecker.isEventFormat(userInput)) {
+            tasks.addEvent(userInput);
         } else {
-            tasks.addTask(userInput);
-            System.out.println(String.format("Added: %s", userInput));
+            // Dummy case; to be modified
+            System.out.println("Sorry, I do not understand your command :')");
         }
         printHorizontalLine();
     }
@@ -62,6 +69,6 @@ public class Lihua {
     }
 
     private static void printHorizontalLine() {
-        System.out.println("------------------------------------------------");
+        System.out.println("-------------------------------------------------");
     }
 }
