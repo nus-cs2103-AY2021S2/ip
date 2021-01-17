@@ -1,6 +1,7 @@
 public class inputCommand {
     private final String command;
     private final String argument;
+    private final String date;
 
     enum predefinedCommand {
         list,
@@ -13,6 +14,7 @@ public class inputCommand {
 
     public inputCommand() {
         this.command = "";
+        this.date = null;
         this.argument = "";
     }
 
@@ -21,14 +23,20 @@ public class inputCommand {
         if (result[0].equals("done")) {
             this.command = result[0];
             this.argument = result[1];
+            this.date = null;
         } else if (result[0].equals("todo")) {
             this.command = result[0];
             this.argument = in.substring(in.indexOf(" ") + 1);
+            this.date = null;
         } else if (result[0].equals("deadline") || result[0].equals("event")) {
             this.command = result[0];
-            this.argument = in.substring(in.indexOf("/") + 1);
+            String temp = in.substring(in.indexOf("/") + 1);
+            this.date = temp.substring(temp.indexOf(" ") + 1);
+            temp = in.substring(in.indexOf(" ") + 1);
+            this.argument = temp.substring(0, temp.indexOf("/") - 1);
         } else {
             this.command = in;
+            this.date = null;
             this.argument = "";
         }
     }
@@ -38,6 +46,10 @@ public class inputCommand {
     }
 
     public String getArgument() {
+        return this.argument;
+    }
+
+    public String getDate() {
         return this.argument;
     }
 
@@ -57,13 +69,17 @@ public class inputCommand {
                     inputList.updateItemMutable(Integer.parseInt(this.argument));
                     return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1);
                 case event:
-                    return "";
+                    event newEvent = new event(this.argument, this.date);
+                    inputList.addCommandMutable(newEvent);
+                    return printPredefinedMessage(newEvent.toString(), inputList);
                 case deadline:
-                    return "";
+                    deadline newDeadline = new deadline(this.argument, this.date);
+                    inputList.addCommandMutable(newDeadline);
+                    return printPredefinedMessage(newDeadline.toString(), inputList);
                 case todo:
                     todo newTodo = new todo(this.argument);
                     inputList.addCommandMutable(newTodo);
-                    return "Got it. I've added this task: \n" + newTodo + "\nNow you have " + inputList.getDukeList().size() +" tasks in the list";
+                    return printPredefinedMessage(newTodo.toString(), inputList);
             }
             return "";
 
@@ -71,5 +87,9 @@ public class inputCommand {
 //            inputList.addCommandMutable();
             return "added: " + this.command;
         }
+    }
+
+    public String printPredefinedMessage(String typeOfTask, lists inputList){
+        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() +" tasks in the list";
     }
 }
