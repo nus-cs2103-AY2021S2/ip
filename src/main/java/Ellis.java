@@ -12,7 +12,7 @@ public class Ellis {
         System.out.println("Here are the items in your list:\n");
         int i = 1;
         for (Task item : lst) {
-            System.out.println(i + ". " + item.getStatusIcon() + item.description);
+            System.out.println(i + ". " + item.toString());
             i++;
         }
     }
@@ -38,7 +38,7 @@ public class Ellis {
             Task task = lst.get(index);
             task.markAsDone();
             formatText("Sweet! I have marked the following task as done:\n"
-                    + task.getStatusIcon() + task.description);
+                    + task.toString());
         }
     }
 
