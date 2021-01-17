@@ -8,7 +8,7 @@ public class Duke {
     public static List<Task> database = new ArrayList<>();
 
     public static void main(String[] args) {
-        // Prints greeting
+        // Print greeting
         printGreeting();
 
         // Ask for commands
@@ -80,7 +80,9 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.printf("Hello! I'm \n%s\nWhat can I do for you?\n", logo);
+        System.out.println("Hello! I'm");
+        System.out.println(logo);
+        System.out.println("What can I do for you?");
         printHorizontalLine();
     }
 
