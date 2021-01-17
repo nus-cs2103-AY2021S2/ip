@@ -8,7 +8,7 @@ public class Blarb {
     private final List<Task> list;
 
     /**
-     * Initializes Blarb
+     * Initializes Blarb.
      */
     public Blarb() {
         list = new ArrayList<>(100);
@@ -93,59 +93,71 @@ public class Blarb {
         //Splits the input into two parts -- the command and the description.
         String[] tokens = input.split(" ", 2);
 
-        if (tokens[0].equalsIgnoreCase("list") && tokens.length < 2) {
-            list();
-        } else if (tokens[0].equalsIgnoreCase("done")) {
-            try {
-                int idx = Integer.parseInt(tokens[1]) - 1;
-                done(idx);
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                blurt("What have you done! More specific!");
-            } catch (NumberFormatException ex) {
-                blurt("Done what now? I don't understand");
-            }
-        } else if (tokens[0].equalsIgnoreCase("delete")) {
-            try {
-                int idx = Integer.parseInt(tokens[1]) - 1;
-                delete(idx);
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                blurt("What do you want to hide?");
-            } catch (NumberFormatException ex) {
-                blurt("You can't delete your past.");
-            }
-        } else if (tokens[0].equalsIgnoreCase("todo")) {
-            try {
-                Task task = new ToDo(tokens[1]);
-                add(task);
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                blurt("Todo what?");
-            }
-        } else if (tokens[0].equalsIgnoreCase("deadline")) {
-            try {
-                String[] fragments = tokens[1].split(" /by ");
+        //Calls method and handles exception according to command
+        switch (Command.command(tokens[0])) {
+            case DONE:
                 try {
-                    Task task = new Deadline(fragments[0], fragments[1]);
+                    int idx = Integer.parseInt(tokens[1]) - 1;
+                    done(idx);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    blurt("What have you done! More specific!");
+                } catch (NumberFormatException ex) {
+                    blurt("Done what now? I don't understand");
+                }
+                break;
+            case DELETE:
+                try {
+                    int idx = Integer.parseInt(tokens[1]) - 1;
+                    delete(idx);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    blurt("What do you want to hide?");
+                } catch (NumberFormatException ex) {
+                    blurt("You can't delete your past.");
+                }
+                break;
+            case TODO:
+                try {
+                    Task task = new ToDo(tokens[1]);
                     add(task);
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    blurt("Type the deadline, then give the time using \"/by\".");
+                    blurt("Todo what?");
                 }
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                blurt("Someone's having trouble with deadlines.");
-            }
-        } else if (tokens[0].equalsIgnoreCase("event")) {
-            try {
-                String[] fragments = tokens[1].split(" /at ");
+                break;
+            case DEADLINE:
                 try {
-                    Task task = new Event(fragments[0], fragments[1]);
-                    add(task);
+                    String[] fragments = tokens[1].split(" /by ");
+                    try {
+                        Task task = new Deadline(fragments[0], fragments[1]);
+                        add(task);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        blurt("Type the deadline, then give the time using \"/by\".");
+                    }
                 } catch (ArrayIndexOutOfBoundsException ex) {
-                    blurt("Type the event, then give the time using \"/at\".");
+                    blurt("Someone's having trouble with deadlines.");
                 }
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                blurt("Tell me the event!");
-            }
-        } else {
-            blurt(String.format("I have detailed files on human anatomy, but not %s.", input));
+                break;
+            case EVENT:
+                try {
+                    String[] fragments = tokens[1].split(" /at ");
+                    try {
+                        Task task = new Event(fragments[0], fragments[1]);
+                        add(task);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        blurt("Type the event, then give the time using \"/at\".");
+                    }
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    blurt("Tell me the event!");
+                }
+                break;
+            case LIST:
+                if (tokens.length == 1) {
+                    list();
+                } else {
+                    blurt("Listing is simple, so typing \"list\" would suffice.");
+                }
+                break;
+            default:
+                blurt(String.format("I have detailed files on human anatomy, but not %s.", input));
         }
 
         return true;
