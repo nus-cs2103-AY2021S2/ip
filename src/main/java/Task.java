@@ -10,7 +10,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[ ]"); //return [tick] or [ ] symbols
+        return (isDone ? "[X]" : "[ ]"); //return [X] or [ ] symbols
     }
 
     public String getTypeIcon() {

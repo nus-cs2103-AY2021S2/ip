@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Haha {
     private static final String LINE_BREAK = "____________________________________________________________\n";
-    private static final String LOGO = " _    _          _    _          \n" +
-            "| |  | |   /\\   | |  | |   /\\    \n" +
-            "| |__| |  /  \\  | |__| |  /  \\   \n" +
-            "|  __  | / /\\ \\ |  __  | / /\\ \\  \n" +
-            "| |  | |/ ____ \\| |  | |/ ____ \\ \n" +
+    private static final String LOGO = " _    _          _    _\n" +
+            "| |  | |   /\\   | |  | |   /\\\n" +
+            "| |__| |  /  \\  | |__| |  /  \\\n" +
+            "|  __  | / /\\ \\ |  __  | / /\\ \\\n" +
+            "| |  | |/ ____ \\| |  | |/ ____ \\\n" +
             "|_|  |_/_/    \\_\\_|  |_/_/    \\_\\\n";
     private static final String STARTER = "Hello from\n" + LOGO
             + LINE_BREAK
