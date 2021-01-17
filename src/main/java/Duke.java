@@ -1,7 +1,12 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final List<String> inputList = new ArrayList<>();
+    private static final String BYE = "bye";
+    private static final String LIST = "list";
 
     private static void introduction() {
         String loading = "Hello from\n"
@@ -15,6 +20,14 @@ public class Duke {
         System.out.println(welcomeMessage);
     }
 
+    private static void printList() {
+        int counter = 1;
+        for (String s : inputList) {
+            System.out.println(counter + ". " + s);
+            counter++;
+        }
+    }
+
     private static void endProgram() {
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
@@ -25,11 +38,14 @@ public class Duke {
         introduction();
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
+            if (input.equals(BYE)) {
                 endProgram();
                 break;
+            } else if (input.equals(LIST)) {
+                printList();
             } else {
-                System.out.println(input);
+                inputList.add(input);
+                System.out.println("added: " + input);
             }
         }
     }
