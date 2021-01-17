@@ -17,7 +17,9 @@ public class DukeTest {
 
         assertEquals(tasksStateLength + 1, Duke.tasks.size());
 
-        assertEquals(Duke.tasks.get(tasksStateLength), "help people");
+        assertEquals(Duke.tasks.get(tasksStateLength).getTaskInfo(), "help people");
+        assertEquals(Duke.tasks.get(tasksStateLength).getCompletionState(), false);
+        assertEquals(Duke.tasks.get(tasksStateLength).toString(), "[✗] help people");
     }
 
     @Test
@@ -30,9 +32,9 @@ public class DukeTest {
 
         assertEquals(tasksStateLength + 3, Duke.tasks.size());
 
-        assertEquals(Duke.tasks.get(tasksStateLength), "help people");
-        assertEquals(Duke.tasks.get(tasksStateLength + 1), "blah");
-        assertEquals(Duke.tasks.get(tasksStateLength + 2), "read book");
+        assertEquals(Duke.tasks.get(tasksStateLength).getTaskInfo(), "help people");
+        assertEquals(Duke.tasks.get(tasksStateLength + 1).getTaskInfo(), "blah");
+        assertEquals(Duke.tasks.get(tasksStateLength + 2).getTaskInfo(), "read book");
     }
 
     @Test
@@ -43,7 +45,7 @@ public class DukeTest {
         assertEquals("added: blah", Duke.parseInput("blah"));
         assertEquals("added: read book", Duke.parseInput("read book"));
 
-        final String expectedString = "1. help people\n2. blah\n3. read book\n";
+        final String expectedString = "1.[✗] help people\n2.[✗] blah\n3.[✗] read book\n";
 
         // Test
         assertEquals(expectedString, Duke.parseInput("list"));

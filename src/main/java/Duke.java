@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Duke {
 
-    public static ArrayList<String> tasks;
+    public static ArrayList<Task> tasks;
 
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -46,12 +46,12 @@ public class Duke {
             case "list": {
                 String output = "";
                 for (int i = 0; i < tasks.size(); i++) {
-                    output += String.format("%d. %s\n", i + 1, tasks.get(i));
+                    output += String.format("%d.%s\n", i + 1, tasks.get(i));
                 }
                 return output;
             }
             default:
-                tasks.add(input);
+                tasks.add(new Task(input));
                 return "added: " + input;
         }
     }
