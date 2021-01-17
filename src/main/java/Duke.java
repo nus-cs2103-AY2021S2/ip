@@ -51,9 +51,15 @@ public class Duke {
         String[] split = input.split(" ",2);
         String command = split[0];
 
-        if (split.length < 2 || (!command.equals("todo") && !command.equals("deadline") && !command.equals("event"))) {
-            formatText("Did you have a stroke? I don't\n" +
-                    " know what you want me to do.");
+        if (!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
+            // error: unknown command
+            formatText("Hey! What is this gibberish?");
+            return;
+        }
+
+        if (split.length < 2) {
+            // error: command empty
+            formatText("You gotta give me a description to work with, buddy.");
             return;
         }
 
