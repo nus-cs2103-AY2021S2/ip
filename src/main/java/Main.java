@@ -9,8 +9,10 @@ public class Main {
         boolean toExit = false;
         while (!toExit) {
             String input = sc.nextLine();
+            String arr[] = input.split(" ");
 
-            switch (input) {
+            // First word of input is used as switch argument.
+            switch (arr[0]) {
             case "bye":
                 duke.printDivider();
                 duke.indentedPrint("Bye. Hope to see you again soon!");
@@ -22,8 +24,17 @@ public class Main {
                 duke.iterateList();
                 duke.printDivider();
                 break;
+            case "done":
+                int index = Integer.parseInt(arr[1]);
+                duke.setTask(index, true);
+
+                duke.printDivider();
+                duke.indentedPrint("Nice! I've marked this task as done:");
+                duke.indentedPrint(duke.getTask(index).toString());
+                duke.printDivider();
+                break;
             default:
-                duke.addText(input);
+                duke.addTask(input);
 
                 duke.printDivider();
                 duke.indentedPrint("added: " + input);
