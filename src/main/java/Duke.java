@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,11 +17,8 @@ public class Duke {
             String cmd = words[0];
 
             // Recombine cmdArgs for further parsing in individual cmd classes
-            StringBuilder sb = new StringBuilder();
-            for (int i = 1; i < words.length; i++) {
-                sb.append(words[i]).append(" ");
-            }
-            String cmdArgs = sb.toString();
+            String[] remain = Arrays.copyOfRange(words, 1, words.length);
+            String cmdArgs = String.join(" ", remain);
 
             String resp = "";
 
@@ -33,6 +31,10 @@ public class Duke {
                 case "list":
                     ListCmd listCmd = new ListCmd(taskLst);
                     resp = listCmd.process(cmdArgs);
+                    break;
+                case "done":
+                    DoneCmd doneCmd = new DoneCmd(taskLst);
+                    resp = doneCmd.process(cmdArgs);
                     break;
                 default:
                     AddCmd addCmd = new AddCmd(taskLst);
