@@ -37,9 +37,8 @@ public class Lihua {
         printHorizontalLine();
         if (FormatChecker.isPrintingList(userInput)) {
             tasks.printList();
-        } else if (FormatChecker.isGettingTaskDone(userInput)) {
-            Integer index = Integer.valueOf(userInput.split(" ")[1]);
-            tasks.getTaskDone(index);
+        } else if (FormatChecker.isTryingToGetTaskDone(userInput)) {
+            tasks.getTaskDone(userInput);
         } else if (FormatChecker.isAddingTask(userInput)) {
             tasks.addTask(userInput);
         } else {

@@ -64,4 +64,17 @@ public class InputInformationExtractor {
     public static String getEventTime(String userInput) {
         return userInput.split(" /at ")[1];
     }
+
+    /**
+     * Get the index argument (at second place) from user input
+     * @param userInput User input string
+     * @return The index value in integer type, if applicable
+     * @throws Exception If the input does not contain index value at second place,
+     * throws exception
+     */
+    public static int getIndexArgument(String userInput) throws Exception {
+        String[] splited = userInput.split(" ");
+        int index = Integer.parseInt(splited[1]);
+        return index;
+    }
 }

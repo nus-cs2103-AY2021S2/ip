@@ -46,7 +46,7 @@ public class Tasks {
      * Get the given task done, print out the result for reference
      * @param index 1-based index number referring to the specific task in the list
      */
-    public void getTaskDone(int index) {
+    private void getTaskDone(int index) {
         try {
             tasks.get(index - 1).setDone(true);
             System.out.println("Nice! I have marked this task as done:");
@@ -55,6 +55,21 @@ public class Tasks {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, the task number you specified is not valid.\n" +
                     "Try enter \'list\' to see the range of task numbers you can enter.");
+        }
+    }
+
+    /**
+     * Get the given task done, represented by the user input string
+     * @param userInput Assumed to be of the format of trying to get tasks done
+     */
+    public void getTaskDone(String userInput) {
+        try {
+            int index = InputInformationExtractor.getIndexArgument(userInput);
+            getTaskDone(index);
+        } catch (Exception e) {
+            // index argument not found
+            System.out.println("Sorry, the format for getting task done is \'done [a valid task number]\'. " +
+                    "Please retry :')");
         }
     }
 

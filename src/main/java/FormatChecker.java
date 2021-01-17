@@ -6,14 +6,14 @@ public class FormatChecker {
     /**
      * Check whether the user input string is in the format of getting task done
      * @param userInput user input string
-     * @return true if the input string is in the format of getting task done
+     * @return True if the input string is trying to get task done;
+     * the argument format, however, may be incorrect
      */
-    public static boolean isGettingTaskDone(String userInput) {
+    public static boolean isTryingToGetTaskDone(String userInput) {
         try {
             String[] splited = userInput.split(" ");
             boolean isDone = splited[0].equals("done");
-            boolean hasInteger = isInteger(splited[1]);
-            return isDone && hasInteger;
+            return isDone;
         } catch (Exception e) {
             return false;
         }

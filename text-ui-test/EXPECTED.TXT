@@ -100,5 +100,20 @@ Sorry, I do not understand your command :')
 Sorry, I do not understand your command :')
 -------------------------------------------------
 -------------------------------------------------
+Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
 Goodbye! Hope to see you again soon! (=~ω~=)
 -------------------------------------------------
