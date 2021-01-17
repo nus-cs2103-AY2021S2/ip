@@ -8,19 +8,19 @@ public class Duke {
 
     private static List<Task> tasks = new ArrayList<>();
 
+    public static void reply(String msg) {
+        System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
+    }
+
     public static void greet() {
-        String reply = REPLY_OUTLINE + "\n"
-                + REPLY_INDENTATION + "Hello! I'm Duke\n"
-                + REPLY_INDENTATION + "What can I do for you?\n"
-                + REPLY_OUTLINE + "\n";
-        System.out.println(reply);
+        String msg = REPLY_INDENTATION + "Hello! I'm Duke\n"
+                + REPLY_INDENTATION + "What can I do for you?\n";
+        reply(msg);
     }
 
     public static void add(String input) {
         tasks.add(new Task(input));
-        System.out.println(REPLY_OUTLINE);
-        System.out.println(REPLY_INDENTATION + "added: " + input);
-        System.out.println(REPLY_OUTLINE + "\n");
+        reply(REPLY_INDENTATION + "added: " + input + "\n");
     }
 
     public static void done(String input) {
@@ -29,31 +29,25 @@ public class Duke {
         try {
             tasks.get(index).markDone();
 
-            System.out.println(REPLY_OUTLINE);
-            System.out.println(REPLY_INDENTATION + "Nice! I've marked this task as done:");
-            System.out.println(REPLY_INDENTATION + "  " + tasks.get(index));
-            System.out.println(REPLY_OUTLINE + "\n");
+            String msg = REPLY_INDENTATION + "Nice! I've marked this task as done:\n"
+                    + REPLY_INDENTATION + "  " + tasks.get(index) + "\n";
+            reply(msg);
         } catch (IndexOutOfBoundsException exception) {
-            System.out.println(REPLY_OUTLINE);
-            System.out.println(REPLY_INDENTATION + "Sorry, I was not able to find the task.");
-            System.out.println(REPLY_OUTLINE + "\n");
+            reply(REPLY_INDENTATION + "Sorry, I was not able to find the task.\n");
         }
-
-
     }
 
     public static void list() {
-        System.out.println(REPLY_OUTLINE);
+        String msg = "";
+
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(REPLY_INDENTATION + (i + 1) + ". " + tasks.get(i));
+            msg += REPLY_INDENTATION + (i + 1) + ". " + tasks.get(i) + "\n";
         }
-        System.out.println(REPLY_OUTLINE + "\n");
+        reply(msg);
     }
 
     public static void exit() {
-        System.out.println(REPLY_OUTLINE);
-        System.out.println(REPLY_INDENTATION + "Bye. Hope to see you again soon!");
-        System.out.println(REPLY_OUTLINE + "\n");
+        reply(REPLY_INDENTATION + "Bye. Hope to see you again soon!");
     }
 
     public static boolean readInput(Scanner sc) {
