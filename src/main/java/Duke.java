@@ -12,22 +12,26 @@ public class Duke {
         Task[] tasks = new Task[100];
         int k, i = 0;
 
-        while (!string.equals("bye")) {
+        while (true) {
 
-            if (string.equals("list")) {
+            if (string.equals("bye")) {
+
+                System.out.println("Bye. Hope to see you again soon");
+                break;
+
+            } else if (string.equals("list")) {
 
                 System.out.println("Here are the tasks in your list:");
                 for (int j = 0; j < i; j++) {
                     k = j + 1;
-                    System.out.println(k + ".[" + tasks[j].getStatusIcon()
-                            + "] " + tasks[j].description);
+                    System.out.println(k + "." + tasks[j]);
                 }
 
             } else {
 
-                String front = " ", back = " ";
+                String front = "", back = "";
                 if (string.contains(" ")) {
-                    String[] str = string.split(" ");
+                    String[] str = string.split(" ", 2);
                     front = str[0];
                     back = str[1];
                 }
@@ -36,19 +40,36 @@ public class Duke {
                     k = Integer.parseInt(back) - 1;
                     tasks[k].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  [" + tasks[k].getStatusIcon()
-                            + "] " + tasks[k].description);
+                    System.out.println(tasks[k]);
                 } else {
-                    System.out.println("added: " + string);
-                    tasks[i++] = new Task(string);
+
+                    String task = "", time = "";
+                    if (back.contains("/")) {
+                        String[] str = back.split("/", 2);
+                        task = str[0];
+                        time = str[1];
+                    } else {
+                        task = back;
+                    }
+
+                    if (front.equals("todo")) {
+                        tasks[i++] = new Todo(task);
+                    } else if (front.equals("deadline")) {
+                        tasks[i++] = new Deadline(task, time);
+                    } else if (front.equals("event")) {
+                        tasks[i++] = new Event(task, time);
+                    }
+
+                    System.out.println("Got it. I've added this task:\n"
+                            + "  " + tasks[i - 1].toString()
+                            + "\nNow you have " + i + " tasks in the list.");
+
                 }
 
             }
             string = scan.nextLine();
 
         }
-
-        System.out.println("Bye. Hope to see you again soon");
 
     }
 
