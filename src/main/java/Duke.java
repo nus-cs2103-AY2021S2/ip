@@ -9,13 +9,10 @@ public class Duke {
         "____________________________________________________________");
 
         inputCommand in = new inputCommand();
-        while(!in.getInput().equals("bye")){
+        lists programList = new lists();
+        while(!in.getCommand().equals("bye")){
             in = new inputCommand(sc.nextLine());
-            if(in.getInput().equals("bye")){
-                System.out.println("Bye. Hope to see you again soon!");
-            }else {
-                System.out.println(in.getInput());
-            }
+            System.out.println(in.print(programList));
         }
 
     }
