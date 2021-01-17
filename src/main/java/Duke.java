@@ -31,6 +31,17 @@ public class Duke {
         System.out.println("   " + t);
     }
 
+    public static void addEvent(String[] args) {
+        String input = String.join(" ", args);
+        String[] pair = input.split(" /at ");
+        String name = pair[0];
+        String timestamp = pair[1];
+        Task t = new Event(name, timestamp);
+        tasks.add(t);
+        echo("I added this task to the task list!");
+        System.out.println("   " + t);
+    }
+
     public static void showTasks() {
         echo("Here are your tasks!");
         if (tasks.size() > 0) {
@@ -64,6 +75,8 @@ public class Duke {
             addTodo(args);
         } else if (command.equals("deadline")) {
             addDeadline(args);
+        } else if (command.equals("event")) {
+            addEvent(args);
         }
     }
 
