@@ -98,6 +98,15 @@ public class Duke {
             task = new Event(input);
             tasks.add(task);
             displayAddedTask(task);
+        } else if (command[0].equals("delete")) {
+            if (command.length > 2)
+                throw new DukeException("I can only delete one order at a time...\nTry again!");
+            try {
+                task = tasks.remove(Integer.parseInt(command[1]));
+                displayRemovedTask(task);
+            } catch (Exception e) {
+                throw new DukeException("Oops! That doesn't seem like a valid order number...\nTry again!");
+            }
         } else {
             throw new DukeException("Hmm... That doesn't look like an item in our menu...");
         }
