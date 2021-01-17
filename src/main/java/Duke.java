@@ -14,8 +14,10 @@ public class Duke {
 
     public static void addTodo(String[] args) {
         String task = String.join(" ", args);
+
         Task t = new Todo(task);
         tasks.add(t);
+
         echo("I added this task to the task list!");
         System.out.println("   " + t);
     }
@@ -25,8 +27,10 @@ public class Duke {
         String[] pair = input.split(" /by ");
         String name = pair[0];
         String timestamp = pair[1];
+
         Task t = new Deadline(name, timestamp);
         tasks.add(t);
+
         echo("I added this task to the task list!");
         System.out.println("   " + t);
     }
@@ -36,8 +40,10 @@ public class Duke {
         String[] pair = input.split(" /at ");
         String name = pair[0];
         String timestamp = pair[1];
+
         Task t = new Event(name, timestamp);
         tasks.add(t);
+
         echo("I added this task to the task list!");
         System.out.println("   " + t);
     }
