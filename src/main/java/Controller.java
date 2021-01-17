@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Controller {
     private final static String LINE = "\t__________________________________\n";
-    private final static String GREETING = "\t Hello! I'm Duke\n\t What can I do for you? \n";
+    private final static String GREETING = "\t Hello! I'm Duke\n\t What can I do for you?\n";
     private final static String ENDDUKE = "\t Bye. Hope to see you again soon!\n";
     private final List<Task> list;
 
@@ -42,7 +42,7 @@ public class Controller {
         int index = Integer.parseInt(input.substring(5)) - 1;
         Task task = list.get(index);
         task.done();
-        String output = String.format("\t Nice! I've marked this task as done: \n \t\t %s", task);
+        String output = String.format("\t Nice! I've marked this task as done:\n \t\t %s", task);
         System.out.println(output);
     }
 
@@ -60,7 +60,8 @@ public class Controller {
             t = new Todo("");
         }
         list.add(t);
-        String output = String.format("\t Got it. I've added this task: \n\t\t %s \n\t Now you have %d tasks in the list.", t, list.size());
+        String output = String.format("\t Got it. I've added this task:\n\t\t %s\n\t "
+                + "Now you have %d tasks in the list.", t, list.size());
         System.out.println(output);
     }
 
