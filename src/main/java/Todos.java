@@ -4,13 +4,13 @@ import java.util.ArrayList;
 /**
  * Store all the todos in a list DS
  */
-public class Todo {
+public class Todos {
     private List<Item> todos;
 
     /**
      * Initialize the todo list with an empty ArrayList
      */
-    public Todo() {
+    public Todos() {
         todos = new ArrayList<Item>();
     }
 
@@ -40,7 +40,7 @@ public class Todo {
             System.out.println(String.format("%d.[%s] %s", i, doneMark, todos.get(i - 1)));
         }
     }
-    
+
     private void printIntro() {
         System.out.println("These are the tasks in your list so far:");
     }

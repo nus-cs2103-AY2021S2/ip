@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -7,7 +6,7 @@ import java.util.Scanner;
  */
 public class Lihua {
     private static final String EXIT_SIGNAL = "bye";
-    private static Todo todos = new Todo();
+    private static Todos todos = new Todos();
 
     public static void main(String[] args) {
         // Initialization phase
