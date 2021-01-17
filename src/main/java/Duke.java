@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void instructionEcho(String instruction) {
+    public static void echo(String instruction) {
         System.out.println("     --------------------------------");
         System.out.println("     " + instruction);
         System.out.println("     --------------------------------");
@@ -19,9 +19,9 @@ public class Duke {
         System.out.println("How can I help you?");
         String instruction = s.nextLine();
         while(!instruction.equals("bye")) {
-            instructionEcho(instruction);
+            echo(instruction);
             instruction = s.nextLine();
         }
-        instructionEcho("bye");
+        echo("Bye. Cya");
     }
 }
