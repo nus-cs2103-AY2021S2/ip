@@ -8,3 +8,22 @@ todo borrow book
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+todo
+deadline
+event
+todos
+deadlines
+events
+blah
+deadline test
+event test
+done
+dones
+done yu
+done -1
+done 8
+done 0
+done
+event
+deadline
+todo
