@@ -43,6 +43,10 @@ public class Duke {
                         AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
                         resp = addCmd.process(cmdArgs);
                         break;
+                    case "delete":
+                        DeleteCmd delCmd = new DeleteCmd(taskLst);
+                        resp = delCmd.process(cmdArgs);
+                        break;
                     default:
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
                 }
