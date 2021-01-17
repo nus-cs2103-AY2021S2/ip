@@ -1,11 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Task[] tasks = new Task[100];
+        List<Task> tasks = new ArrayList<>();
         String userInput = "";
-        int index = 0;
 
         printSegment();
         System.out.println("\tHello! I'm Duke");
@@ -19,19 +20,30 @@ public class Duke {
                 case "list": {
                     printSegment();
                     System.out.println("\tHere are the tasks in your list:");
-                    for (int i = 0; i < index; i++) {
-                        System.out.println("\t" + (i + 1) + ". " + tasks[i]);
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println("\t" + (i + 1) + ". " + tasks.get(i));
                     }
                     printSegment();
                     break;
                 }
                 case "done": {
                     int userIndex = Integer.parseInt(userInputArray[1]);
-                    tasks[userIndex - 1].markAsDone();
+                    tasks.get(userIndex - 1).markAsDone();
                     printSegment();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.println("\t" + tasks[userIndex - 1]);
+                    System.out.println("\t" + tasks.get(userIndex - 1));
                     printSegment();
+                    break;
+                }
+                case "delete": {
+                    int userIndex = Integer.parseInt(userInputArray[1]);
+                    Task removedTask = tasks.remove(userIndex - 1);
+                    printSegment();
+                    System.out.println("\tNoted. I've removed this task:");
+                    System.out.println("\t\t" + removedTask);
+                    System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+                    printSegment();
+                    break;
                 }
                 case "bye":
                     break;
@@ -39,12 +51,11 @@ public class Duke {
                     Task newTask = null;
                     try {
                         newTask = parseTask(userInputArray);
-                        tasks[index] = newTask;
-                        index++;
+                        tasks.add(newTask);
                         printSegment();
                         System.out.println("\tGot it. I've added this task:");
                         System.out.println("\t\t" + newTask);
-                        System.out.println("\tNow you have " + index + " tasks in the list.");
+                        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
                         printSegment();
                     } catch (DukeException e) {
                         printSegment();
