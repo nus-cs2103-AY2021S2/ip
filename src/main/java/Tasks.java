@@ -23,6 +23,35 @@ public class Tasks {
     }
 
     /**
+     * Add the given todo item into the list
+     * @param userInput User input is assumed to be in todo format
+     */
+    public void addTodo(String userInput) {
+        String content = InputInformationExtractor.getToDoContent(userInput);
+        tasks.add(new ToDo(content));
+    }
+
+    /**
+     * Add the given deadline item into the list
+     * @param userInput User input is assumed to be in deadline format
+     */
+    public void addDeadLine(String userInput) {
+        String content = InputInformationExtractor.getDeadlineContent(userInput);
+        String by = InputInformationExtractor.getDeadlineTime(userInput);
+        tasks.add(new Deadline(content, by));
+    }
+
+    /**
+     * Add the given event item into the list
+     * @param userInput User input is assumed to be in event format
+     */
+    public void addEvent(String userInput) {
+        String content = InputInformationExtractor.getEventContent(userInput);
+        String time = InputInformationExtractor.getEventTime(userInput);
+        tasks.add(new Deadline(content, time));
+    }
+
+    /**
      * Get the given task done, print out the result for reference
      * @param index 1-based index number referring to the specific task in the list
      */
