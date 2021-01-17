@@ -33,8 +33,8 @@ public class Duke {
     }
 
     static void displayRemovedTask(Task task) {
-        display("Aw man... I told Ronald that was a bad item to put on the menu. He didn't listen though.\n"
-        +"Anyways... Here you go, I've removed this item from your order list!\n" + task +
+        display("Aw man... I told Ronald that was a bad item to put on the menu.\n"
+        +"Here you go, I've removed this item from your order list!\n" + task +
                 "You have " + tasks.size() + " order(s) left!");
     }
 
@@ -102,7 +102,7 @@ public class Duke {
             if (command.length > 2)
                 throw new DukeException("I can only delete one order at a time...\nTry again!");
             try {
-                task = tasks.remove(Integer.parseInt(command[1]));
+                task = tasks.remove(Integer.parseInt(command[1]) - 1);
                 displayRemovedTask(task);
             } catch (Exception e) {
                 throw new DukeException("Oops! That doesn't seem like a valid order number...\nTry again!");
