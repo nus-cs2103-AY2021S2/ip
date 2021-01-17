@@ -28,8 +28,8 @@ public class Duke {
     }
 
     /**
-     * Takes in user's command line arguments and treats them accordingly
-     * until user inputs "bye", then Chatbot will end the session
+     * Takes in user's command line arguments and treats them accordingly.
+     * Chatbot Duke will end the session when user input "bye".
      */
     public static void listenToUserCommand() {
         Scanner sc = new Scanner(System.in);
@@ -42,11 +42,23 @@ public class Duke {
                 displayUserCommands();
             } else if (input.startsWith("done ")) {
                 int taskNumber = Integer.parseInt(input.substring(5));
-                Task task = taskList.get(taskNumber-1);
+                Task task = taskList.get(taskNumber - 1);
                 markTaskDone(task);
+            } else if (input.startsWith("todo ")) {
+                String todoTask = input.substring(5);
+                addTodoTask(todoTask);
+            } else if (input.startsWith("event ")) {
+                String[] taskAndDate = input.substring(6).split("/");
+                String eventTask = taskAndDate[0];
+                String date = taskAndDate[1].substring(3);
+                addEventTask(eventTask, date);
+            } else if (input.startsWith("deadline ")) {
+                String[] taskAndDate = input.substring(9).split("/");
+                String deadlineTask = taskAndDate[0];
+                String date = taskAndDate[1].substring(3);
+                addDeadlineTask(deadlineTask, date);
             } else {
-                addUserCommand(input);
-                echoUserCommand(input);
+                System.out.println("Invalid task");
             }
         }
     }
@@ -59,36 +71,15 @@ public class Duke {
     }
 
     /**
-     * Chatbot prints out what the user has just fed in as command-line input
-     * @param input command-line input
-     */
-    public static void echoUserCommand(String input) {
-        System.out.println(input + "\n");
-    }
-
-    /**
-     * Chatbot creates new task with the user's command-line input
-     * and stores it in a list
-     * @param input command-line input
-     */
-    public static void addUserCommand(String input) {
-       Task task = new Task(input);
-        taskList.add(task);
-        System.out.print("added: ");
-    }
-
-    /**
      * Chatbot prints out line-by-line all of the user's tasks
      * stored in the list in that given session.
-     * Completed tasks will be marked with a tick and uncompleted
-     * ones with a cross.
      */
     public static void displayUserCommands() {
         System.out.println("Here are your tasks!");
         for(int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.get(i-1);
-            System.out.println(i + ". [" + task.getStatusIcon()
-                    + "]" + task.description);
+            System.out.print(i + ".");
+            System.out.println(task);
         }
         System.out.println();
     }
@@ -100,7 +91,30 @@ public class Duke {
     public static void markTaskDone(Task task) {
         task.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + task.getStatusIcon() + "]" + task.description);
+        System.out.println(task);
         System.out.println();
     }
+
+    public static void addTodoTask(String input) {
+        Task task = new Todo(input);
+        updateTaskList(task);
+    }
+
+    public static void addEventTask(String input, String date) {
+        Task task = new Event(input, date);
+        updateTaskList(task);
+    }
+
+    public static void addDeadlineTask(String input, String date) {
+        Task task = new Deadline(input, date);
+        updateTaskList(task);
+    }
+
+    public static void updateTaskList(Task task) {
+        taskList.add(task);
+        int numTasks = taskList.size();
+        System.out.println("added: " + task + "\nyou have " + numTasks + " tasks in your list");
+        System.out.println();
+    }
+
 }
