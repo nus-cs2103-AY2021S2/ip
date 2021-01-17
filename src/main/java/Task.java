@@ -22,6 +22,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + isCompleted() + "]" + this.getTaskName();
+        return "[" + isCompleted() + "] " + this.getTaskName();
     }
 }

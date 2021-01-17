@@ -13,6 +13,6 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return  "\t [E]" + super.toString() + "(by:" + this.date + " " + this.startTime + "-" + this.endTime + ")";
+        return  "[E]" + super.toString() + "(by:" + this.date + " " + this.startTime + "-" + this.endTime + ")";
     }
 }
