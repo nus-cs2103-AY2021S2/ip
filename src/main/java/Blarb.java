@@ -76,7 +76,7 @@ public class Blarb {
             return false;
         }
 
-        //Splits the input into two parts -- the command and the subsidiary.
+        //Splits the input into two parts -- the command and the description.
         String[] tokens = input.split(" ", 2);
 
         if (tokens[0].equalsIgnoreCase("list") && tokens.length < 2) {
@@ -85,20 +85,42 @@ public class Blarb {
             try {
                 int idx = Integer.parseInt(tokens[1]) - 1;
                 done(idx);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                blurt("What have you done! More specific!");
             } catch (NumberFormatException ex) {
-                blurt(String.format("I have detailed files on human anatomy, but not %s.", input));
+                blurt("Done what now? I don't understand");
             }
         } else if (tokens[0].equalsIgnoreCase("todo")) {
-            Task task = new ToDo(tokens[1]);
-            add(task);
+            try {
+                Task task = new ToDo(tokens[1]);
+                add(task);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                blurt("Todo what?");
+            }
         } else if (tokens[0].equalsIgnoreCase("deadline")) {
-            String[] fragments = tokens[1].split(" /by ");
-            Task task = new Deadline(fragments[0], fragments[1]);
-            add(task);
+            try {
+                String[] fragments = tokens[1].split(" /by ");
+                try {
+                    Task task = new Deadline(fragments[0], fragments[1]);
+                    add(task);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    blurt("Type the deadline, then give the time using \"/by\".");
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                blurt("Someone's having trouble with deadlines.");
+            }
         } else if (tokens[0].equalsIgnoreCase("event")) {
-            String[] fragments = tokens[1].split(" /at ");
-            Task task = new Event(fragments[0], fragments[1]);
-            add(task);
+            try {
+                String[] fragments = tokens[1].split(" /at ");
+                try {
+                    Task task = new Event(fragments[0], fragments[1]);
+                    add(task);
+                } catch (ArrayIndexOutOfBoundsException ex) {
+                    blurt("Type the event, then give the time using \"/at\".");
+                }
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                blurt("Tell me the event!");
+            }
         } else {
             blurt(String.format("I have detailed files on human anatomy, but not %s.", input));
         }
