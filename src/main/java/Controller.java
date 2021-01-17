@@ -82,7 +82,7 @@ public class Controller {
     }
 
     private Todo createTodo(String task) throws DukeNoDescriptionException {
-        if (task.length() < 6) {
+        if (task.length() < 6 || task.substring(5).isBlank()) {
             throw new DukeNoDescriptionException("todo");
         } else {
             return new Todo(task.substring(5));
@@ -90,7 +90,7 @@ public class Controller {
     }
 
     private Deadline createDeadline(String task) throws DukeNoDescriptionException {
-        if (task.length() < 10) {
+        if (task.length() < 10 || task.substring(9).isBlank()) {
             throw new DukeNoDescriptionException("deadline");
         } else {
             task = task.substring(9);
@@ -99,7 +99,7 @@ public class Controller {
     }
 
     private Event createEvent(String task) throws DukeNoDescriptionException {
-        if (task.length() < 7) {
+        if (task.length() < 7 || task.substring(6).isBlank()) {
             throw new DukeNoDescriptionException("event");
         } else {
             task = task.substring(6);
