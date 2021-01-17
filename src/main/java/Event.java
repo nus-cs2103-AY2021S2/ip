@@ -16,7 +16,12 @@ public class Event extends Task {
         return output.toString();
     }
 
-    public static Event parseEvent(String description) {
+    public static Event parseEvent(String description) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        } else if (!description.contains("/at")) {
+            throw new DukeException("☹ OOPS!!! The description of an event must contain a location.");
+        }
         String[] partitioned = description.split("/at");
         return new Event(partitioned[0].strip(), partitioned[1].strip());
     }

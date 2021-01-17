@@ -16,7 +16,12 @@ public class Deadline extends Task {
         return output.toString();
     }
 
-    public static Deadline parseDeadline(String description) {
+    public static Deadline parseDeadline(String description) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!description.contains("/by")) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline must contain a time.");
+        }
         String[] partitioned = description.split("/by");
         return new Deadline(partitioned[0].strip(), partitioned[1].strip());
     }
