@@ -34,6 +34,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return "[" + this.getStatusSymbol() + "] " + this.description;
+        return "[" + this.getStatusSymbol() + "]" + this.description;
     }
 }
