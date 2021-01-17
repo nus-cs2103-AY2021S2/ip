@@ -23,10 +23,11 @@ public class Duke {
         wrappedPrint(new String[]{line});
     }
 
-    private static void printHistory(Vector<String> commandHistory) {
+    private static void printHistory(Vector<Task> tasks) {
         System.out.println(HORIZONTAL_LINE);
-        for (int i = 0; i < commandHistory.size(); i++) {
-            System.out.printf("\t %d: %s%n", i + 1, commandHistory.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            System.out.printf("\t %d. [%c] %s%n", i + 1, currentTask.isDone() ? 'X' : ' ', currentTask.description);
         }
         System.out.println(HORIZONTAL_LINE);
     }
@@ -37,23 +38,31 @@ public class Duke {
 
         // store whatever is given until bye is detected
         Scanner input = new Scanner(System.in);
-        Vector<String> commandHistory = new Vector<>();
-        String command;
+        Vector<Task> tasks = new Vector<>();
+        String description;
         boolean active = true;
 
         do {
-            command = input.nextLine();
-            switch (command) {
+            description = input.nextLine();
+            if (description.startsWith("done")) {
+                int index = Integer.parseInt(description.substring(5)) - 1;
+                Task currentTask = tasks.get(index);
+                currentTask.markAsDone();
+                wrappedPrint(new String[]{"Good job! The task below is marked done!",
+                                          "[X] " + currentTask.description});
+                continue;
+            }
+            switch (description) {
                 case "list":
-                    printHistory(commandHistory);
+                    printHistory(tasks);
                     break;
                 case "bye":
                     wrappedPrint("Bye bye. Anything call me ah!");
                     active = false;
                     break;
                 default:
-                    commandHistory.add(command);
-                    wrappedPrint("added: " + command);
+                    tasks.add(new Task(description));
+                    wrappedPrint("added: " + tasks.lastElement().description);
             }
         } while (active);
     }
