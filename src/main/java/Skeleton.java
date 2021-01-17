@@ -12,7 +12,7 @@ public class Skeleton {
     static Scanner sc = new Scanner(System.in);
     static String cmd;
     static Task[] storage = new Task[100];
-    static int itemcount = 0;
+    static int itemCount = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
