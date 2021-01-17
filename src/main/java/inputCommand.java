@@ -3,6 +3,8 @@ public class inputCommand {
     private final String argument;
     private final String date;
 
+    private final String line = "\n____________________________________________________________";
+
     enum predefinedCommand {
         list,
         bye,
@@ -60,14 +62,14 @@ public class inputCommand {
                 case bye:
                     return "Bye. Hope to see you again soon!";
                 case list:
-                    String initStr = "";
+                    String initStr = "Here are the tasks in your list:";
                     for (int i = 0; i < inputList.getDukeList().size(); i++) {
-                        initStr += ((i + 1) + "." + inputList.getDukeList().get(i) + "\n");
+                        initStr += "\n" + ((i + 1) + "." + inputList.getDukeList().get(i));
                     }
-                    return initStr;
+                    return initStr + line;
                 case done:
                     inputList.updateItemMutable(Integer.parseInt(this.argument));
-                    return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1);
+                    return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1) + line;
                 case event:
                     event newEvent = new event(this.argument, this.date);
                     inputList.addCommandMutable(newEvent);
@@ -90,6 +92,6 @@ public class inputCommand {
     }
 
     public String printPredefinedMessage(String typeOfTask, lists inputList){
-        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() +" tasks in the list";
+        return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() +" tasks in the list" + line;
     }
 }
