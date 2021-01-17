@@ -17,12 +17,26 @@ public class DukeBot {
         String[] commandLine = text.split(" "); //entire line of command in String array
         String command = commandLine[0];
         String commandOutput, taskName, date;
+        int taskNum;
         Task task;
 
-        if ((command.equals("todo") || command.equals("event") || command.equals("deadline"))
-                && commandLine.length < 2) {
-            String errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
-            throw new DukeException(errMsg);
+        if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
+            String errMsg = "";
+            if (commandLine.length < 2) {
+                errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
+                throw new DukeException(errMsg);
+            }
+        }
+
+        if (command.equals("done") || command.equals("delete")) {
+            String errMsg = "";
+            if (commandLine.length < 2) {
+                errMsg = "☹ OOPS!!! The selection for " + command + " cannot be empty.";
+                throw new DukeException(errMsg);
+            } else if (!isNumeric(text.split(" ")[1])) {
+                errMsg = "☹ OOPS!!! The selection for " + command + " should be a valid Integer.";
+                throw new DukeException(errMsg);
+            }
         }
 
         switch (command) {
@@ -34,18 +48,25 @@ public class DukeBot {
                 commandOutput = "Bye. Hope to see you again soon!";
                 break;
             case "done":
-                int taskNum = Integer.parseInt(text.split(" ")[1]);
+                taskNum = Integer.parseInt(text.split(" ")[1]);
                 task = taskList.get(taskNum);
                 task.markAsDone();
                 commandOutput = "Nice! I've marked this task as done:\n"
                         + "\t" + task.toString();
+                break;
+            case "delete":
+                taskNum = Integer.parseInt(text.split(" ")[1]);
+                task = taskList.get(taskNum);
+                taskList.remove(task);
+                commandOutput = "Noted. I've removed this task: \n\t\t"
+                        + task.toString() + getRemainingTasks();
                 break;
             case "event":
                 taskName = text.split(" /at")[0].replaceFirst("event ", "");
                 date = text.split(" /at ")[1];
                 task = new Event(taskName, date);
                 taskList.add(task);
-                commandOutput = "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t"
                         + task.toString() + getRemainingTasks();
                 break;
             case "deadline":
@@ -53,14 +74,14 @@ public class DukeBot {
                 date = text.split(" /by ")[1];
                 task = new Deadline(taskName, date);
                 taskList.add(task);
-                commandOutput = "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t"
                         + task.toString() + getRemainingTasks();
                 break;
             case "todo":
                 taskName = text.split("todo ")[1];
                 task = new ToDo(taskName);
                 taskList.add(task);
-                commandOutput = "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t"
                         + task.toString() + getRemainingTasks();
                 break;
             default:
@@ -95,6 +116,15 @@ public class DukeBot {
         if (isExit) {
             System.exit(0);
         }
+    }
+
+    private boolean isNumeric(String text) {
+        try {
+            Integer.parseInt(text);
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
     }
 
 }
