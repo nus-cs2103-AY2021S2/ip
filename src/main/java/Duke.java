@@ -10,7 +10,6 @@ public class Duke {
         ArrayList<String> taskLst = new ArrayList<>();
         boolean isExited = false;
 
-
         while (true) {
             String input = sc.nextLine();
             String[] words = input.trim().split(" ");
@@ -36,7 +35,9 @@ public class Duke {
                     resp = listCmd.process(cmdArgs);
                     break;
                 default:
-                    resp = processEcho(input);
+                    AddCmd addCmd = new AddCmd(taskLst);
+                    resp = addCmd.process(input);
+                    break;
             }
 
             printResponse(resp);
@@ -44,10 +45,6 @@ public class Duke {
                 break;
             }
         }
-    }
-
-    public static String processEcho(String input) {
-        return input;
     }
 
     public static String getWelcomeMsg() {

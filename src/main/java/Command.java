@@ -1,3 +1,3 @@
 public interface Command {
-    public String process(String cmdArgs);
+    String process(String cmdArgs);
 }
