@@ -11,6 +11,6 @@ public class Duke {
             System.out.print("User (Enter an input): ");
             userInput = sc.nextLine();
         }
-        System.out.println("Duke: Bye, hope to see you again!");
+        System.out.println("Duke: Bye, hope to see you again! :)");
     }
 }
