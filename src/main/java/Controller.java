@@ -47,12 +47,25 @@ public class Controller {
     }
 
     private void addTask(String task) {
-        list.add(new Task(task));
-        String output = String.format("\t added: %s", task);
+        Task t;
+        if (task.startsWith("todo")) {
+            t = new Todo(task.substring(5));
+        } else if (task.startsWith("deadline")) {
+            task = task.substring(9);
+            t = new Deadline(task.split("/"));
+        } else if (task.startsWith("event")) {
+            task = task.substring(6);
+            t = new Event(task.split("/"));
+        } else {
+            t = new Todo("");
+        }
+        list.add(t);
+        String output = String.format("\t Got it. I've added this task: \n\t\t %s \n\t Now you have %d tasks in the list.", t, list.size());
         System.out.println(output);
     }
 
     private void printList() {
+        System.out.println("\t Here are the tasks in your list:");
         int num = 1;
         for (Task task : list) {
             String output = String.format("\t %d.%s", num, task);
