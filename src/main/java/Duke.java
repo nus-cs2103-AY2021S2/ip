@@ -2,18 +2,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<String> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
+    private final static String listCommand = "list";
+    private final static String doneCommand = "done";
+    private final static String exitCommand = "bye";
 
     public static void getTasks() {
         System.out.println("____________________________________________________________\n");
 
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i+1 + ". " + taskList.get(i));
+            System.out.println(i+1 + ". "
+                    + taskList.get(i).getStatusIcon() + " "
+                    + taskList.get(i).getDescription());
         }
 
         System.out.println("____________________________________________________________\n");
 
-        storeTask();
     }
 
     public static void Greet() {
@@ -27,23 +31,38 @@ public class Duke {
 
     public static void storeTask() {
         Scanner sc = new Scanner(System.in);
-        String task = sc.nextLine();
-        String listCommand = "list";
-        String exitCommand = "bye";
+        String description = sc.nextLine();
 
-        if (task.equals(listCommand)) {
+        if (description.equals(listCommand)) {
             getTasks();
+            storeTask();
 
-        } else if ((task.toLowerCase()).equals(exitCommand)) {
+        } else if ((description.toLowerCase()).equals(exitCommand)) {
             Exit();
 
+        } else if (description.contains("done")) {
+            int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
+            updateTaskStatus(taskIndex);
+            storeTask();
+
         } else{
-            taskList.add(task);
+            Task myTask = new Task(description);
+            taskList.add(myTask);
             System.out.println("____________________________________________________________\n"
-                    + "added: " + task
+                    + "added: " + myTask.getDescription()
                     + "\n____________________________________________________________\n");
             storeTask();
         }
+    }
+
+    public static void updateTaskStatus(Integer index) {
+        taskList.get(index - 1).markAsDone();
+
+        System.out.println("____________________________________________________________\n"
+                + "Nice! I've marked this task as done:\n"
+                + taskList.get(index - 1).getStatusIcon() + " "
+                + taskList.get(index - 1).getDescription()
+                + "\n____________________________________________________________\n");
     }
 
     public static void Exit() {
