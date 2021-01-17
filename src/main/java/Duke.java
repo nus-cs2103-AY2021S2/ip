@@ -9,8 +9,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         System.out.println("Duke: Hello I'm Duke, what can I do for you?");
         System.out.println("-----------------------------------------------------");
-        System.out.print("User (Enter an input): ");
+        System.out.println("Enter an input ('bye' to quit): ");
         String userInput = sc.nextLine();
+        System.out.println("User Input: " + userInput);
         while (!"bye".equals(userInput)) {
             if ("list".equals(userInput)) {
                 Duke.printList();
@@ -20,8 +21,9 @@ public class Duke {
             } else {
                 Duke.addTask(userInput);
             }
-            System.out.print("User (Enter an input): ");
+            System.out.println("Enter an input ('bye' to quit): ");
             userInput = sc.nextLine();
+            System.out.println("User Input: " + userInput);
         }
         System.out.println("Duke: Bye, hope to see you again! :)");
         System.out.println("-----------------------------------------------------");
@@ -63,10 +65,8 @@ public class Duke {
             System.out.println("Got it, I've added this task to the list: ");
             System.out.println("  " + addedTask);
         }
-
         System.out.println("Now you have " + Duke.ls.size() + " tasks in the list.");
         System.out.println("-----------------------------------------------------");
-
     }
 
 }
