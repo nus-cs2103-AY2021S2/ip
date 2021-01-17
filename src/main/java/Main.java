@@ -6,17 +6,28 @@ public class Main {
         duke.greet();
 
         Scanner sc = new Scanner(System.in);
-        boolean toTerminate = false;
-        while (!toTerminate) {
+        boolean toExit = false;
+        while (!toExit) {
             String input = sc.nextLine();
 
             switch (input) {
             case "bye":
-                duke.formattedPrint("Bye. Hope to see you again soon!");
-                toTerminate = true;
+                duke.printDivider();
+                duke.indentedPrint("Bye. Hope to see you again soon!");
+                duke.printDivider();
+                toExit = true;
+                break;
+            case "list":
+                duke.printDivider();
+                duke.iterateList();
+                duke.printDivider();
                 break;
             default:
-                duke.formattedPrint(input);
+                duke.addText(input);
+
+                duke.printDivider();
+                duke.indentedPrint("added: " + input);
+                duke.printDivider();
                 break;
             }
         }
