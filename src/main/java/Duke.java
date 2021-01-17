@@ -52,7 +52,18 @@ public class Duke {
                 }
             }
             else {
-                addTask(command);
+                try {
+                    addTask(command);
+                } catch (NoSuchCommandException e){
+                    System.out.println(e.getMessage());
+                } catch (EmptyTaskException e){
+                    System.out.println(e.getMessage());
+                } catch (InvalidTask e){
+                    System.out.println(e.getMessage());
+                } finally {
+                    System.out.println(LINES);
+                    System.out.println();
+                }
             }
         }
     }
@@ -64,10 +75,15 @@ public class Duke {
         System.out.println();
     }
 
-    public static void addTask(String command){
+    public static void addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
         System.out.println(LINES);
-        if (command.startsWith("todo ")){
+        if (command.equals("todo") || command.equals("deadline") || command.equals("event")){
+            throw new EmptyTaskException(command);
+        } else if (command.startsWith("todo ")){
             String description = command.substring(5);
+            if (description.isEmpty()){
+                throw new EmptyTaskException("todo");
+            }
             Task task = new Todo(description);
             list.add(task);
             System.out.println("Got it. I've added this task: ");
@@ -75,9 +91,12 @@ public class Duke {
             System.out.println("Now you have " + list.size() + " tasks in the list.");
         } else if (command.startsWith("deadline ")){
             String content = command.substring(9);
+            if (content.isEmpty()){
+                throw new EmptyTaskException("deadline");
+            }
             int byIndex = content.indexOf("/by");
             if (byIndex == -1){
-                System.out.println("Invalid command for deadline! Try again");
+                throw new InvalidTask("deadline");
             } else {
                 String description = content.substring(0, byIndex - 1);
                 String by = content.substring(byIndex + 4);
@@ -89,9 +108,12 @@ public class Duke {
             }
         } else if (command.startsWith("event ")){
             String content = command.substring(6);
+            if (content.isEmpty()){
+                throw new EmptyTaskException("event");
+            }
             int atIndex = content.indexOf("/at");
             if (atIndex == -1){
-                System.out.println("Invalid command for event! Try again");
+                throw new InvalidTask("event");
             } else {
                 String description = content.substring(0, atIndex - 1);
                 String at = content.substring(atIndex + 4);
@@ -102,10 +124,8 @@ public class Duke {
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         } else {
-            System.out.println("No such command. In order to add a new task, start a command with todo, deadline or event.");
+            throw new NoSuchCommandException();
         }
-        System.out.println(LINES);
-        System.out.println();
     }
 
     public static void listingTasks(ArrayList<Task> list) {
