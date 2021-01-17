@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
-    public static final String REPLY_OUTLINE = "    ____________________________________________________________";
-    public static final String REPLY_INDENTATION = "     ";
+    private static final String REPLY_OUTLINE = "    ____________________________________________________________";
+    private static final String REPLY_INDENTATION = "     ";
+
+    private static List<String> tasks = new ArrayList<>();
 
     public static void greet() {
         System.out.println(REPLY_OUTLINE);
@@ -11,9 +15,18 @@ public class Duke {
         System.out.println(REPLY_OUTLINE + "\n");
     }
 
-    public static void echo(String input) {
+    public static void add(String input) {
+        tasks.add(input);
         System.out.println(REPLY_OUTLINE);
-        System.out.println(REPLY_INDENTATION + input);
+        System.out.println(REPLY_INDENTATION + "added: " + input);
+        System.out.println(REPLY_OUTLINE + "\n");
+    }
+
+    public static void list() {
+        System.out.println(REPLY_OUTLINE);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(REPLY_INDENTATION + (i + 1) + ". " + tasks.get(i));
+        }
         System.out.println(REPLY_OUTLINE + "\n");
     }
 
@@ -25,13 +38,19 @@ public class Duke {
 
     public static boolean readInput(Scanner sc) {
         String input = sc.nextLine();
-        
-        if (input.equals("bye")) {
-            exit();
-            return false;
+
+        switch (input) {
+            case "bye":
+                exit();
+                return false;
+            case "list":
+                list();
+                break;
+            default:
+                add(input);
+                break;
         }
 
-        echo(input);
         return true;
     }
 
