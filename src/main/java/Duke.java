@@ -62,7 +62,7 @@ public class Duke {
                 }
                 Duke.printWithBorders(response.toString());
             } catch (DukeException e) {
-                Duke.printWithBorders(e.toString());
+                Duke.printWithBorders(e.getMessage());
             }
         }
     }
