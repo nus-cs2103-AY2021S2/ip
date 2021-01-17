@@ -8,10 +8,11 @@
 import java.util.ArrayList;
 
 public class Snom {
+    static Snomio snomio = new Snomio(System.in, System.out);
+    static ArrayList<Task> taskList = new ArrayList<>();
+    
     public static void main(String[] args) {
-        Snomio snomio = new Snomio(System.in, System.out);
         String command = "";
-        ArrayList<Task> todoList = new ArrayList<>();
 
         snomio.println("--------------------------------");
         snomio.println("Bonjour! I'm Snom! *squish*");
@@ -25,35 +26,61 @@ public class Snom {
             snomio.println("--------------------------------");
             switch(command){
                 case "list":
-                    for(int i = 0; i < todoList.size(); i++){
-                        Task task = todoList.get(i);
-                        String status = task.getStatusSymbol();
-                        snomio.println((i+1) + ".[" + status + "]" + task.getDescription());
+                    for(int i = 0; i < taskList.size(); i++){
+                        snomio.println((i+1) + ". " + taskList.get(i).toString());
                     }
                     break;
                 case "done":
                     int taskNo = snomio.readInt() - 1;
-                    Task task = todoList.get(taskNo);
-                    task.setStatus(true);
-                    String status = task.getStatusSymbol();
-                    snomio.println("Great Job! I've marked this task as done:");
-                    snomio.println("[" + status + "]" + task.getDescription());
+                    finishTask(taskNo);
                     break;
                 case "bye":
                     snomio.println("Ciao! Hope to see you again soon!");
                     break;
+                case "todo":
+                    addTask(new Todo(snomio.readLine()));
+                    break;
+                case "deadline":
+                    String[] dlArr = snomio.readLine().split("/by");
+                    addTask(new Deadline(dlArr[0], dlArr[1]));
+                    break;
+                case "event":
+                    String[] eArr = snomio.readLine().split("/at");
+                    addTask(new Event(eArr[0], eArr[1]));
+                    break;
                 default:
-                    String content = command;
-                    while(snomio.hasMoreWord()){
-                        content += " " + snomio.readWord();
-                    }
-                    todoList.add(new Task(content));
-                    snomio.println(content + " has been added to your to do list!");
+                    addTask(new Task(command + snomio.readLine()));
             }
             snomio.println("--------------------------------");
             snomio.flush();
         }while(!command.equalsIgnoreCase("bye"));
 
         snomio.close();
+    }
+
+    /**
+     * This method add the given task, can be a todo, deadline or event task.
+     * Then prints out respective messages.
+     *
+     * @param task either Todo, Deadline, Event
+     */
+    public static void addTask(Task task){
+        taskList.add(task);
+        snomio.println("Got it. I've added this task:");
+        snomio.println("\t" + task.toString());
+        snomio.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    /**
+     * This method mark the task by the given task number as done.
+     * Then prints out the complete messages.
+     *
+     * @param taskNo task number that needs to mark as done
+     */
+    public static void finishTask(int taskNo){
+        Task task = taskList.get(taskNo);
+        task.setStatus(true);
+        snomio.println("Great Job! I've marked this task as done:");
+        snomio.println("\t" + task.toString());
     }
 }

@@ -22,6 +22,14 @@ public class Snomio extends PrintWriter {
         return tokenizer.hasMoreTokens();
     }
 
+    /**
+     * This method will read in the whole line and split each word into tokens.
+     * Then it will extract out the first token and return it.
+     *
+     * If there are already words/tokens in the tokenizer, it will return the next first token instead.
+     *
+     * @return  the first word that extracted from the tokenizer
+     */
     public String readWord() {
         String input = null;
         String token;
@@ -32,9 +40,6 @@ public class Snomio extends PrintWriter {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(input == null){
-                return null;
-            }
             tokenizer = new StringTokenizer(input);
         }
         token = tokenizer.nextToken();
@@ -42,19 +47,42 @@ public class Snomio extends PrintWriter {
         return token;
     }
 
+    /**
+     * This method is similar to BufferedReader.readLine() except it will read from the tokenizer
+     * if there are remaining tokens in it. It will return everything in the tokenizer as a whole sentence.
+     *
+     * @return the whole line of input or the rest of the sentence from the previous read line
+     */
     public String readLine(){
-        try {
-            return reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String line = "";
+
+        if(tokenizer == null || !tokenizer.hasMoreTokens()){
+            try {
+                line = reader.readLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            line += tokenizer.nextToken("");
         }
-        return null;
+
+        return line;
     }
 
+    /**
+     * This method only reads the first integer input and returns it.
+     *
+     * @return  single integer input
+     */
     public int readInt(){
         return Integer.parseInt(readWord());
     }
 
+    /**
+     * This method only reads the first double input and returns it.
+     *
+     * @return  single double input
+     */
     public double readDouble(){
         return Double.parseDouble(readWord());
     }
