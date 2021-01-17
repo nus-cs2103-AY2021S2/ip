@@ -23,6 +23,17 @@ public class Duke {
         reply(REPLY_INDENTATION + "added: " + input + "\n");
     }
 
+    public static void addTodo(String input) {
+        String description = input.split(" ", 2)[1];
+        Task todo = new Todo(description);
+        tasks.add(todo);
+
+        String msg = REPLY_INDENTATION + "Got it. I've added this task:\n"
+                + REPLY_INDENTATION +  "  " + todo + "\n"
+                + REPLY_INDENTATION +  "Now you have " + tasks.size() + " tasks in the list.\n";
+        reply(msg);
+    }
+
     public static void done(String input) {
         int index = Integer.parseInt(input.split(" ")[1]) - 1;
 
@@ -38,7 +49,7 @@ public class Duke {
     }
 
     public static void list() {
-        String msg = "";
+        String msg = REPLY_INDENTATION + "Here are the tasks in your list:\n";
 
         for (int i = 0; i < tasks.size(); i++) {
             msg += REPLY_INDENTATION + (i + 1) + ". " + tasks.get(i) + "\n";
@@ -63,6 +74,8 @@ public class Duke {
             default:
                 if (input.matches("done \\d+")) {
                     done(input);
+                } else if (input.matches("todo .+")) {
+                    addTodo(input);
                 } else {
                     add(input);
                 }
