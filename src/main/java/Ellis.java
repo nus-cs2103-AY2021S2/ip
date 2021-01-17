@@ -3,12 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ellis {
-    List<String> lst = new ArrayList<>();
+    List<Task> lst = new ArrayList<>();
 
     public void iterateList() {
         int i = 1;
-        for (String item : lst) {
-            System.out.println(i + ". " + item);
+        for (Task item : lst) {
+            System.out.println(i + ". " + item.description);
             i++;
         }
     }
@@ -27,7 +27,7 @@ public class Ellis {
                 iterateList();
                 System.out.println("**********************");
             } else {
-                lst.add(input);
+                lst.add(new Task(input));
                 System.out.println("**********************");
                 System.out.println("Added: " + input);
                 System.out.println("**********************");
