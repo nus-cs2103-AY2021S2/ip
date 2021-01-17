@@ -75,7 +75,7 @@ public class Duke {
         } else {
             Task doneTask = taskArray[taskNumber - 1];
             doneTask.markAsDone();
-            System.out.println("Stonks! You've done this task: ");
+            System.out.println("Stonks! You've done this task:");
             System.out.println(doneTask.getDescription());
             taskArray[taskNumber - 1] = doneTask;
         }
@@ -87,7 +87,7 @@ public class Duke {
         } else {
             Task undoneTask = taskArray[taskNumber - 1];
             undoneTask.markAsUndone();
-            System.out.println("Not stonks! This task has been marked as undone: ");
+            System.out.println("Not stonks! This task has been marked as undone:");
             System.out.println(undoneTask.getDescription());
             taskArray[taskNumber - 1] = undoneTask;
         }

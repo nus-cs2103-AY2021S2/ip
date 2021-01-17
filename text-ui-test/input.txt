@@ -1,0 +1,28 @@
+orang
+vegetal
+list
+todo Watch CS2103T lecture
+list
+deadline Do CS2103T lecture quiz /by this Saturday
+deadline Do CS2103T ip /by next Monday
+event Attend CS2101 class /at next Tuesday
+list
+done 1
+done 2
+list
+undone 2
+list
+undone 1
+list
+done 1
+done 2
+done 3
+done 4
+list
+done 5
+undone 5
+done -1
+undone -1
+done 0
+undone 0
+bye
