@@ -78,7 +78,7 @@ public class Duke {
     }
 
     public static void exit() {
-        reply(REPLY_INDENTATION + "Bye. Hope to see you again soon!");
+        reply(REPLY_INDENTATION + "Bye. Hope to see you again soon!\n");
     }
 
     public static boolean readInput(Scanner sc) {
