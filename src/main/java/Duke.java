@@ -97,46 +97,63 @@ public class Duke {
         io.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
     }
 
-    public static void validateCommand(String command, int taskCount) throws CommandException {
-        if(command.equals(EXITCOMMAND)||command.equals(LISTCOMMAND))
-            return;
-        if(command.equals(DONECOMMAND) || command.equals(DELETECOMMAND)) {
-            throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be "+command+".");
+    public static Command validateCommand(String command, int taskCount) throws CommandException {
+        if (command.equals(EXITCOMMAND)) {
+            return new Command(CommandType.BYE);
+        } else if (command.equals(LISTCOMMAND)) {
+            return new Command(CommandType.LIST);
         }
 
-        if(command.equals(TODOCOMMAND)||command.equals(DEADLINECOMMAND)||command.equals(EVENTCOMMAND)) {
-            throw new CommandException("☹ OOPS!!! The description of a "+command+" cannot be empty.");
+        if (command.equals(DONECOMMAND) || command.equals(DELETECOMMAND)) {
+            throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
+        }
+
+        if (command.equals(TODOCOMMAND) || command.equals(DEADLINECOMMAND) || command.equals(EVENTCOMMAND)) {
+            throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
         int firstSplit = command.indexOf(' ');
-        if(firstSplit<0) {
+        if (firstSplit < 0) {
             throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         String commandName = command.substring(0, firstSplit);
-        String description= command.substring(firstSplit + 1);
+        String description = command.substring(firstSplit + 1);
 
-        if(commandName.equals(DONECOMMAND)||commandName.equals(DELETECOMMAND)||commandName.equals(TODOCOMMAND)||commandName.equals(EVENTCOMMAND)||commandName.equals(DEADLINECOMMAND)) {
-            if(description.isEmpty()) {
-                throw new CommandException("☹ OOPS!!! The description of a "+commandName+" cannot be empty.");
-            }else if (commandName.equals(DONECOMMAND)||commandName.equals(DELETECOMMAND)) {
+        if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND) || commandName.equals(TODOCOMMAND) || commandName.equals(EVENTCOMMAND) || commandName.equals(DEADLINECOMMAND)) {
+            if (description.isEmpty()) {
+                throw new CommandException("☹ OOPS!!! The description of a " + commandName + " cannot be empty.");
+            } else if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND)) {
                 try {
                     int index = Integer.parseInt(description);
-                    if(index > taskCount || index < 1) {
+                    if (index > taskCount || index < 1) {
                         throw new CommandException("☹ OOPS!!! Task number out of range.");
                     }
-                }catch (NumberFormatException e) {
+                } catch (NumberFormatException e) {
                     throw new CommandException("☹ OOPS!!! Invalid Task Index Format.");
                 }
-            }else if (commandName.equals(DEADLINECOMMAND)) {
-                if(!description.contains(DEADLINESPLITREGEX))
-                    throw new CommandException("☹ OOPS!!! The description of a "+DEADLINECOMMAND+" must contain Date indicated by \""+DEADLINESPLITREGEX+"\".");
+                if (commandName.equals(DONECOMMAND)) {
+                    return new Command(CommandType.DONE, description);
+
+                } else if (commandName.equals(DELETECOMMAND)) {
+                    return new Command(CommandType.DELETE, description);
+                }
+            } else if (commandName.equals(TODOCOMMAND)) {
+                return new Command(CommandType.TODO, description);
+            } else if (commandName.equals(DEADLINECOMMAND)) {
+                if (!description.contains(DEADLINESPLITREGEX))
+                    throw new CommandException("☹ OOPS!!! The description of a " + DEADLINECOMMAND + " must contain Date indicated by \"" + DEADLINESPLITREGEX + "\".");
+
+
+                return new Command(CommandType.DEADLINE, description);
             } else if (commandName.equals(EVENTCOMMAND)) {
-                if(!description.contains(EVENTSPLITREGEX))
-                    throw new CommandException("☹ OOPS!!! The description of a "+EVENTCOMMAND+ " must contain Date and Duration indicated by \""+EVENTSPLITREGEX+"\".");
+                if (!description.contains(EVENTSPLITREGEX))
+                    throw new CommandException("☹ OOPS!!! The description of a " + EVENTCOMMAND + " must contain Date and Duration indicated by \"" + EVENTSPLITREGEX + "\".");
+
+                return new Command(CommandType.EVENT, description);
             }
-        }else {
-            throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
+        throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
