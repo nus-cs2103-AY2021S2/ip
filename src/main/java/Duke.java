@@ -7,7 +7,11 @@ public class Duke {
 
         while (true) {
             String command = sc.nextLine();
-            dukeBot.handleCommand(command);
+            try {
+                dukeBot.handleCommand(command);
+            } catch(DukeException ex) {
+                dukeBot.respondToCommand(ex.getMessage());
+            }
         }
     }
 }

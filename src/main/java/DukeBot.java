@@ -9,35 +9,35 @@ public class DukeBot {
         taskList = new ArrayList<>();
         taskList.add(null);
         isExit = false;
-        handleCommand("welcome");
+        respondToCommand("Hello! I'm Duke\n"
+                + "\tWhat can I do for you?");
     }
 
-    public void handleCommand(String text) {
-        String command = text.split(" ")[0];
-        String taskName, date;
-        String commandOutput = "";
+    public void handleCommand(String text) throws DukeException {
+        String[] commandLine = text.split(" "); //entire line of command in String array
+        String command = commandLine[0];
+        String commandOutput, taskName, date;
         Task task;
 
+        if ((command.equals("todo") || command.equals("event") || command.equals("deadline"))
+                && commandLine.length < 2) {
+            String errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
+            throw new DukeException(errMsg);
+        }
+
         switch (command) {
-            case "welcome":
-                commandOutput += "Hello! I'm Duke\n"
-                        + "\tWhat can I do for you?";
-                break;
             case "list":
                 commandOutput = getTaskListContents();
                 break;
-            case "blah":
-                commandOutput += "blah";
-                break;
             case "bye":
                 isExit = true;
-                commandOutput += "Bye. Hope to see you again soon!";
+                commandOutput = "Bye. Hope to see you again soon!";
                 break;
             case "done":
                 int taskNum = Integer.parseInt(text.split(" ")[1]);
                 task = taskList.get(taskNum);
                 task.markAsDone();
-                commandOutput += "Nice! I've marked this task as done:\n"
+                commandOutput = "Nice! I've marked this task as done:\n"
                         + "\t" + task.toString();
                 break;
             case "event":
@@ -45,7 +45,7 @@ public class DukeBot {
                 date = text.split(" /at ")[1];
                 task = new Event(taskName, date);
                 taskList.add(task);
-                commandOutput += "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t "
                         + task.toString() + getRemainingTasks();
                 break;
             case "deadline":
@@ -53,18 +53,18 @@ public class DukeBot {
                 date = text.split(" /by ")[1];
                 task = new Deadline(taskName, date);
                 taskList.add(task);
-                commandOutput += "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t "
                         + task.toString() + getRemainingTasks();
                 break;
             case "todo":
                 taskName = text.split("todo ")[1];
                 task = new ToDo(taskName);
                 taskList.add(task);
-                commandOutput += "Got it. I've added this task: \n\t\t "
+                commandOutput = "Got it. I've added this task: \n\t\t "
                         + task.toString() + getRemainingTasks();
                 break;
             default:
-                break;
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         respondToCommand(commandOutput);
@@ -85,7 +85,7 @@ public class DukeBot {
         return "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.";
     }
 
-    private void respondToCommand(String commandOutput) {
+    public void respondToCommand(String commandOutput) {
         String responseMsg = "\t____________________________________________________________\n"
                 + "\t" + commandOutput + "\n"
                 + "\t____________________________________________________________\n";
