@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Duke {
     private static final String REPLY_OUTLINE = "    ____________________________________________________________";
@@ -23,15 +24,25 @@ public class Duke {
         reply(REPLY_INDENTATION + "added: " + input + "\n");
     }
 
+    public static void addReply(Task task) {
+        String msg = REPLY_INDENTATION + "Got it. I've added this task:\n"
+                + REPLY_INDENTATION +  "  " + task + "\n"
+                + REPLY_INDENTATION +  "Now you have " + tasks.size() + " tasks in the list.\n";
+        reply(msg);
+    }
+
     public static void addTodo(String input) {
         String description = input.split(" ", 2)[1];
         Task todo = new Todo(description);
         tasks.add(todo);
+        addReply(todo);
+    }
 
-        String msg = REPLY_INDENTATION + "Got it. I've added this task:\n"
-                + REPLY_INDENTATION +  "  " + todo + "\n"
-                + REPLY_INDENTATION +  "Now you have " + tasks.size() + " tasks in the list.\n";
-        reply(msg);
+    public static void addDeadline(String input) {
+        String[] parts = input.split(" ", 2)[1].split("/by");
+        Task deadline = new Deadline(parts[0], parts[1]);
+        tasks.add(deadline);
+        addReply(deadline);
     }
 
     public static void done(String input) {
@@ -76,6 +87,8 @@ public class Duke {
                     done(input);
                 } else if (input.matches("todo .+")) {
                     addTodo(input);
+                } else if (input.matches("deadline .+")) {
+                    addDeadline(input);
                 } else {
                     add(input);
                 }
