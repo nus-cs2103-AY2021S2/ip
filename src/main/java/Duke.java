@@ -36,7 +36,7 @@ public class Duke {
                 case "bye":
                     break;
                 default: {
-                    Task newTask = parseTask(userInput, userInputArray);
+                    Task newTask = parseTask(userInputArray);
                     tasks[index] = newTask;
                     index++;
                     printSegment();
@@ -53,7 +53,7 @@ public class Duke {
         printSegment();
     }
 
-    static Task parseTask(String userInput, String[] userInputArray) {
+    static Task parseTask(String[] userInputArray) {
         Task newTask;
         switch (userInputArray[0]) {
             case "todo": {
