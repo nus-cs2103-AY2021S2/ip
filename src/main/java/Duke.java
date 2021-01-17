@@ -116,7 +116,7 @@ public class Duke {
                 + "| '--'D|| '--'U|| '--'K|| '--'E|\n"
                 + "`------'`------'`------'`------'";
 
-        System.out.println("Hello, this is \n" + logo);
+        System.out.println("Hello, this is\n" + logo);
         Duke e = new Duke();
         e.run();
     }
