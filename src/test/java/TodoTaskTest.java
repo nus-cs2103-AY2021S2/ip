@@ -13,20 +13,22 @@ public class TodoTaskTest {
         assertEquals("[T][✗] read book", t.toString());
     }
 
+    @Test
     public void todoTaskSetDoneChangesCompletionState() {
         TodoTask t = new TodoTask("read book");
 
         assertEquals(false, t.getCompletionState());
         assertEquals("read book", t.getTaskInfo());
-        assertEquals("[T][✗] read book (by: June 6th)", t.toString());
+        assertEquals("[T][✗] read book", t.toString());
 
         t.setTaskAsDone();
 
         assertEquals(true, t.getCompletionState());
         assertEquals("read book", t.getTaskInfo());
-        assertEquals("[T][✓] read book (by: June 6th)", t.toString());
+        assertEquals("[T][✓] read book", t.toString());
     }
 
+    @Test
     public void todoTaskIsOfTypeTask() {
         TodoTask t = new TodoTask("read book");
 

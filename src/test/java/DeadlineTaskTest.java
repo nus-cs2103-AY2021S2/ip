@@ -14,6 +14,7 @@ public class DeadlineTaskTest {
         assertEquals("[D][✗] return book (by: June 6th)", t.toString());
     }
 
+    @Test
     public void deadlineTaskSetDoneChangesCompletionState() {
         DeadlineTask t = new DeadlineTask("return book", "June 6th");
 
@@ -30,6 +31,7 @@ public class DeadlineTaskTest {
         assertEquals("[D][✓] return book (by: June 6th)", t.toString());
     }
 
+    @Test
     public void deadlineTaskIsOfTypeTask() {
         DeadlineTask t = new DeadlineTask("return book", "Today");
 
