@@ -22,7 +22,7 @@ public class Haha {
         Scanner sc = new Scanner(System.in);
         System.out.println(STARTER);
 
-        List<String> database = new ArrayList<>();
+        List<Task> database = new ArrayList<>();
 
 
         while (sc.hasNext()) {
@@ -33,20 +33,39 @@ public class Haha {
                 System.out.println("Bye now!");
                 System.out.println(LINE_BREAK);
                 break;
-            } else if (command.equals("list")) {
-                System.out.println("Here are your list of tasks:");
-                for (int i = 0; i < database.size(); i++) {
-                    String idx = Integer.toString(i + 1) + '.';
-                    String task = idx + database.get(i);
-                    System.out.println(task);
+            } else if (command.equals("list") || command.equals("ls") ) {
+                if (database.size() == 0) {
+                    System.out.println("You have nothing going on!");
+                } else {
+                    System.out.println("Here are your list of tasks:");
+                    for (int i = 0; i < database.size(); i++) {
+                        String idx = Integer.toString(i + 1) + '.';
+                        String task = idx + database.get(i).getDescription();
+                        System.out.println(task);
+                    }
                 }
+
                 System.out.println(LINE_BREAK);
-            } else {
-                database.add(command);
+            } else if (command.startsWith("done")) {
+                // might blow up
+                // done when it is already done,
+                // task number out of bound
+                // undone and done ?
+                Task currentTask = database.get(taskNumber(command) - 1);
+                System.out.println("Nice! I've marked this task as done:");
+                currentTask.setDone(true);
+                System.out.println(currentTask.getDescription());
+                System.out.println(LINE_BREAK);
+            }else {
+                database.add(new Task(false, command));
                 System.out.print("Added: ");
                 System.out.println(command);
                 System.out.println(LINE_BREAK);
             }
         }
+    }
+
+    private static int taskNumber(String command) { // for "done" command
+        return Integer.parseInt("" + command.charAt(command.length() - 1));
     }
 }
