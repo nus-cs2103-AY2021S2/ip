@@ -32,11 +32,11 @@ public class Blarb {
             blurt("You have nothing on your list.");
         } else {
             int i = 1;
-            StringBuilder sb = new StringBuilder("Here are your tasks: \n");
+            StringBuilder sb = new StringBuilder("Here are your tasks:\n");
             for (Task task : list) {
                 sb.append(String.format("\n%d. %s", i++, task.toString()));
             }
-            blurt(sb.substring(1));
+            blurt(sb.substring(0));
         }
     }
 
@@ -47,7 +47,7 @@ public class Blarb {
     private void done(Integer index) {
         try {
             list.get(index).markAsDone();
-            String done = "I've marked this task as done:\n %s";
+            String done = "I've marked this task as done:\n%s";
             blurt(String.format(done, list.get(index)));
         } catch (IndexOutOfBoundsException ex) {
             blurt("There is no such task.");
@@ -59,7 +59,7 @@ public class Blarb {
      * @param task Task to be added.
      */
     private void add(Task task) {
-        String addTask = "Affirmative. I've added this task: \n %s \n"
+        String addTask = "Affirmative. I've added this task:\n %s\n"
                 + "Now you have %d tasks in the list.";
         list.add(task);
         blurt(String.format(addTask, task.toString(), list.size()));
@@ -106,3 +106,4 @@ public class Blarb {
         return true;
     }
 }
+
