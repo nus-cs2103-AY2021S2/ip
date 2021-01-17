@@ -23,25 +23,24 @@ public class Todos {
     }
 
     /**
-     * Get the current todo list
-     * @return The current todo list
+     * Get the given item done, print out the result for reference
+     * @param index 1-based index number referring to the items in the list
      */
-    public List<Item> getTodos() {
-        return todos;
+    public void getItemDone(int index) {
+        todos.get(index - 1).setDone(true);
+        System.out.println("Nice! I have marked this item as done: ");
+        System.out.print("----");
+        System.out.println(todos.get(index - 1));
     }
 
     /**
      * Print out the todo list in a user-friendly format
      */
     public void printList() {
-        printIntro();
+        System.out.println("These are the tasks in your list so far:");
         for (int i = 1; i <= todos.size(); i++) {
             String doneMark = todos.get(i - 1).isDone()? "X": " ";
             System.out.println(String.format("%d.[%s] %s", i, doneMark, todos.get(i - 1)));
         }
-    }
-
-    private void printIntro() {
-        System.out.println("These are the tasks in your list so far:");
     }
 }

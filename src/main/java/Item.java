@@ -29,4 +29,13 @@ public class Item {
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    /**
+     * toString method overriding its predefined one
+     * @return the user-friendly String representation of the item
+     */
+    public String toString() {
+        String doneMark = isDone? "X": " ";
+        return String.format("[%s] %s", doneMark, name);
+    }
 }
