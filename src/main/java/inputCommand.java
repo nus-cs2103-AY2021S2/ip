@@ -12,7 +12,8 @@ public class inputCommand {
         todo,
         deadline,
         event,
-        error
+        error,
+        delete
     }
 
     public inputCommand() {
@@ -21,8 +22,8 @@ public class inputCommand {
         this.argument = "";
     }
 
-    public inputCommand(String in) throws DukeException.NoDescriptionException {
-        String tempDate = "";
+    public inputCommand(String in) {
+        String tempDate = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
         String tempArg = "";
@@ -30,25 +31,21 @@ public class inputCommand {
             if (result[0].equals("done")) {
                 tempCommand = result[0];
                 tempArg = result[1];
-                tempDate = null;
-            } else if (result[0].equals("todo")) {
+            } else if (result[0].equals("todo") || result[0].equals("delete")) {
                 String temp = in.substring(in.indexOf(" ") + 1);
                 tempArg = temp;
-                if (temp.equals("todo")) {
+                if (temp.equals("todo") || temp.equals("delete")) {
                     throw new DukeException.NoDescriptionException(result[0]);
                 } else {
                     tempCommand = result[0];
                 }
-                tempDate = null;
             } else if (result[0].equals("deadline") || result[0].equals("event")) {
                 String firstParam = in.substring(in.indexOf("/") + 1);
                 if (firstParam.equals("deadline") || firstParam.equals("event")) {
-                    tempDate = null;
                     throw new DukeException.NoDescriptionException(result[0]);
                 } else {
                     int dateIndex = Math.max(firstParam.indexOf("by "), firstParam.indexOf("at "));
                     if (dateIndex == -1) {
-                        tempDate = null;
                         throw new DukeException.NoDescriptionException(result[0]);
                     } else {
                         tempCommand = result[0];
@@ -58,7 +55,6 @@ public class inputCommand {
                     }
                 }
             } else {
-                tempDate = null;
                 throw new DukeException.UnknownCommandException();
             }
         }catch(DukeException ex){
@@ -111,6 +107,11 @@ public class inputCommand {
                 return printPredefinedMessage(newTodo.toString(), inputList);
             case error:
                 return this.argument;
+            case delete:
+                int index = Integer.parseInt(this.argument);
+                listItem tempItem = inputList.getDukeList().get(index - 1);
+                inputList.deleteCommandMutable(index);
+                return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
         }
         return "";
     }

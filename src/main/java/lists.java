@@ -36,4 +36,9 @@ public class lists {
         listItem tempItem = this.dukeList.get(correctIndex).markAsDone();
         this.dukeList.set(correctIndex, tempItem);
     }
+
+    public void deleteCommandMutable(int index){
+        int correctIndex = index - 1;
+        this.dukeList.remove(correctIndex);
+    }
 }
