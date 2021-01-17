@@ -48,6 +48,7 @@ public class Duke {
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
+            System.out.println(cmd);
             System.out.println(printLine());
             if (cmd.equals("list")) {
                 taskList.displayTasks();
