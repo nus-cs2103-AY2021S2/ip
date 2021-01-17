@@ -34,11 +34,23 @@ public class Chatbot {
         } else if (todo.get(order).getDone()) {
             throw new DukeException("This task has been finished before.\n");
         }
+        todo.get(order).markDone();
         System.out.print(Duke.horizontalLine);
         System.out.println("\t  Nice! I've marked this task as done:");
-        System.out.println("\t\t[x] " + todo.get(order).getName());
+        System.out.println("\t\t " + todo.get(order).toString());
         System.out.println(Duke.horizontalLine);
-        todo.get(order).markDone();
+
+    }
+
+    public void delete(int order) throws DukeException {
+        if (order < 0 || order >= todo.size()) {
+            throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
+        }
+        System.out.print(Duke.horizontalLine);
+        System.out.println("\t  Noted. I've removed this task:");
+        System.out.println("\t\t " + todo.get(order).toString());
+        System.out.println(Duke.horizontalLine);
+        todo.remove(order);
     }
 
     public void addTask(Task newTask) {
@@ -59,14 +71,23 @@ public class Chatbot {
         String[] taskTimeSplit;
         Task newTask;
 
-        while (!input.toLowerCase().equals("bye")) {  // exit only when user input "bye"
+        while (!input.toLowerCase().equals("bye")) {
             try {
                 String[] taskTypeSplit = input.split(" ");
                 if (input.toLowerCase().equals("list")) {
                     printTodo(todo);
                 } else if (taskTypeSplit[0].toLowerCase().contains("done")) {
+                    if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                        throw new DukeException("The description of done cannot be empty.\n");
+                    }
                     int tempOrder = Integer.parseInt(taskTypeSplit[1]);
                     markDone(tempOrder - 1);
+                } else if (taskTypeSplit[0].toLowerCase().contains("delete")) {
+                    if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                        throw new DukeException("The description of delete cannot be empty.\n");
+                    }
+                    int tempOrder = Integer.parseInt(taskTypeSplit[1]);
+                    delete(tempOrder - 1);
                 } else if (taskTypeSplit[0].toLowerCase().equals("todo")) {
                     if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
                         throw new DukeException("The description of a todo cannot be empty.\n");
