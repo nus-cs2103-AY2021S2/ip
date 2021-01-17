@@ -11,7 +11,8 @@ public class ListCmd implements Command {
     public String process(String cmdArgs) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lst.size(); i++) {
-            sb.append(String.format("%d. %s\n", i + 1, lst.get(i).getContent()));
+            Task task = lst.get(i);
+            sb.append(String.format("%d. [%s] %s\n", i + 1, task.getStatusIcon(), task.getContent()));
         }
         return sb.toString();
     }
