@@ -1,0 +1,12 @@
+deadline having lunch /by Sunday 2pm
+event team project meeting /at Monday 2-4pm
+todo sleep early
+list
+done 2
+done 1
+invalid command
+list
+deadline study for the test /by 27 April 2021
+list
+done 5
+bye

@@ -31,7 +31,7 @@ public class Duke {
     }
 
     public static void handleInput(){
-        while (true){
+        while (sc.hasNextLine()){
             String command = sc.nextLine();
             if (command.equals("bye")){
                 printBye();
@@ -130,7 +130,7 @@ public class Duke {
 
     public static void handleIndexOutOfBoundTask(){
         System.out.println(LINES);
-        System.out.println("Done command should be followed by a number between 1 and the number of tasks.");
+        System.out.println("Done command should be followed by a number between 1 and " + list.size() + ".");
         System.out.println(LINES);
         System.out.println();
     }
