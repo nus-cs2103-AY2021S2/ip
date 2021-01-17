@@ -1,4 +1,5 @@
 public class Task {
+
     public String taskDesc;
     public boolean isCompleted; //Task 1.3
 
