@@ -11,7 +11,7 @@ public class Skeleton {
 
     static Scanner sc = new Scanner(System.in);
     static String cmd;
-    static String[] storage = new String[100];
+    static Task[] storage = new Task[100];
     static int itemcount = 0;
 
     public static void main(String[] args) {
@@ -21,7 +21,11 @@ public class Skeleton {
         while (!cmd.equals("bye")) {
             if (cmd.equals("list")) {
                 listItems();
-            } else {
+            } else if (cmd.contains("done")) {
+                int value = Integer.parseInt(cmd.replaceAll("[^0-9]", ""));
+                done(value);
+            }
+            else {
                 add();
             }
         }
@@ -31,8 +35,16 @@ public class Skeleton {
     /** function that echos whatever the user types*/
     static void add(){
         System.out.println("added: " + cmd);
-        storage[itemcount] = cmd;
+        storage[itemcount] = new Task(cmd);
         itemcount++;
+        System.out.println();
+        cmd = sc.nextLine();
+    }
+
+    static void done(int value) {
+        storage[value-1].markAsDone();
+        System.out.println("YOSHA! KONNO TASK WA OWARIMASHITA! GANBARE");
+        System.out.println(storage[value-1]);
         System.out.println();
         cmd = sc.nextLine();
     }
