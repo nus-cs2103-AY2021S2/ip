@@ -1,4 +1,8 @@
 import java.util.*;
+// potential exceptions to catch:
+// 1) deleting a non-existent task
+// 2) marking a non-existent task as done
+// 3) marking an already done task done again
 
 public class Duke {
     public static void main(String[] args) {
@@ -27,6 +31,14 @@ public class Duke {
                     t.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(t);
+                    System.out.println("----------------------------------------------");
+                } else if (command[0].equals("delete")) {
+                    System.out.println("----------------------------------------------");
+                    int index = Integer.parseInt(command[1]);
+                    Task t = col.remove(index - 1);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(t);
+                    System.out.println("Now there are " + col.size() + " tasks on the list");
                     System.out.println("----------------------------------------------");
                 } else if (command[0].equals("todo")) {
                     System.out.println("----------------------------------------------");
