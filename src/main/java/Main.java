@@ -8,11 +8,18 @@ public class Main {
 
         chatbox.initialize();
 
-        String currCommand = "";
+        String currInput = "";
 
-        while(!currCommand.equals("bye")){
-            currCommand = sc.next();
-            chatbox.acceptCommand(currCommand);
+        while(!currInput.equals("bye")){
+            currInput = sc.nextLine();
+
+            if(currInput.equals("list")){
+                chatbox.acceptCommand("list");
+            }else{
+                chatbox.acceptCommand("add", currInput);
+                System.out.println("added: " + currInput);
+            }
+
         }
 
         chatbox.end();
