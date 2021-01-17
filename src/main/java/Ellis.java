@@ -9,7 +9,7 @@ public class Ellis {
      * Iterates and returns enumerated list of tasks.
      */
     public void iterateList() {
-        System.out.println("Here are the items in your list:\n");
+        System.out.println("Here are the items in your list:");
         int i = 1;
         for (Task item : lst) {
             System.out.println(i + ". " + item.toString());
@@ -42,13 +42,46 @@ public class Ellis {
         }
     }
 
+    public void addTask(String input) {
+        String[] split = input.split(" ",2);
+        String command = split[0];
+
+        if (!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
+            formatText("Did you have a stroke? I don't\n" +
+                    " know what you want me to do.");
+            return;
+        }
+
+        if (command.equals("todo")) {
+            Todo todo = new Todo(split[1]);
+            lst.add(todo);
+            formatText("You got it! I added this task:\n"
+                + todo.toString());
+        } else {
+            String[] separateDetails = split[1].split("/");
+            String description = separateDetails[0];
+            String date = separateDetails[1];
+            if (command.equals("deadline")) {
+                Deadline deadline = new Deadline(description, date);
+                lst.add(deadline);
+                formatText("You got it! I added this task:\n"
+                        + deadline.toString());
+            } else if (command.equals("event")) {
+                Event event = new Event(description, date);
+                lst.add(event);
+                formatText("You got it! I added this task:\n"
+                        + event.toString());
+            }
+        }
+    }
+
     public void run() {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 // close program
-                formatText("Bye, see you soon!");
+                formatText("Bye, see you soon! Don't miss me too much.");
                 break;
             } else if (input.equals("list")) {
                 // show everything in the list
@@ -61,8 +94,7 @@ public class Ellis {
                 handleTaskStatus(index);
             } else {
                 // add new task to list
-                lst.add(new Task(input));
-                formatText("Added: " + input);
+                addTask(input);
             }
         }
         sc.close();
