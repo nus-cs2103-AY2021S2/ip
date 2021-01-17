@@ -15,6 +15,8 @@ public class Duke {
         List<Task> store = new ArrayList<Task>();
         Scanner scan = new Scanner(System.in);
         Validation validate = new Validation();
+        int number;
+
         while(true) {
             String command = scan.nextLine();
             try {
@@ -60,11 +62,17 @@ public class Duke {
                                 break;
                             }
                         case "done":
-                            int number = Integer.parseInt(command.substring(index+1));
+                            number = Integer.parseInt(command.substring(index+1));
                             Task toMark = store.get(number - 1);
                             String response = toMark.markAsDone();
                             System.out.println(response);
                             break;
+                        case "delete":
+                            number = Integer.parseInt(command.substring(index+1));
+                            Task selected = store.get(number - 1);
+                            store.remove(number - 1);
+                            System.out.println("Noted, I've removed this task:\n" + selected.toString() +
+                                    "\nNow you have " + store.size() + " tasks in the list.");
                     }
                 } else {
                     switch (command) {
