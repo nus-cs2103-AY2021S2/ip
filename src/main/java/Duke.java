@@ -32,11 +32,21 @@ public class Duke {
                         }
                     }
                 } else if (userInput.startsWith("done")) {
+                    // TODO: 17/1/21 Throw exception if no valid choice is entered
                     int userChoice = Integer.valueOf(userInput.split(" ")[1]);
                     Task task = tasks.get(userChoice - 1);
                     task.markComplete();
                     response.append("Nice! I've marked this task as done:\n");
                     response.append(task);
+                } else if (userInput.startsWith("delete")) {
+                    // TODO: 17/1/21 Throw exception if no valid choice is entered
+                    int userChoice = Integer.valueOf(userInput.split(" ")[1]);
+                    Task task = tasks.remove(userChoice - 1);
+                    response.append("Noted. I've removed this task:\n  ");
+                    response.append(task);
+                    response.append("\nNow you have ");
+                    response.append(tasks.size());
+                    response.append(" tasks in the list.");
                 } else if (userInput.startsWith("event") ||
                         userInput.startsWith("todo") ||
                         userInput.startsWith("deadline")) {
