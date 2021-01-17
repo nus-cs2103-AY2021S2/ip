@@ -9,10 +9,14 @@ public class FormatChecker {
      * @return true if the input string is in the format of getting task done
      */
     public static boolean isDoneFormat(String userInput) {
-        String[] splited = userInput.split(" ");
-        boolean isDone = splited[0].equals("done");
-        boolean hasInteger = isInteger((splited[1]));
-        return isDone && hasInteger;
+        try {
+            String[] splited = userInput.split(" ");
+            boolean isDone = splited[0].equals("done");
+            boolean hasInteger = isInteger((splited[1]));
+            return isDone && hasInteger;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

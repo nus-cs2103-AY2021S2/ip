@@ -23,7 +23,7 @@ public class Tasks {
         String content = InputInformationExtractor.getToDoContent(userInput);
         ToDo todo = new ToDo(content);
         tasks.add(todo);
-        System.out.print("----");
+        System.out.print("---- ");
         System.out.println(todo);
         reportTotalNumberOfTasks();
     }
@@ -38,7 +38,7 @@ public class Tasks {
         String by = InputInformationExtractor.getDeadlineTime(userInput);
         Deadline deadline = new Deadline(content, by);
         tasks.add(deadline);
-        System.out.print("----");
+        System.out.print("---- ");
         System.out.println(deadline);
         reportTotalNumberOfTasks();
     }
@@ -53,7 +53,7 @@ public class Tasks {
         String time = InputInformationExtractor.getEventTime(userInput);
         Event event = new Event(content, time);
         tasks.add(event);
-        System.out.print("----");
+        System.out.print("---- ");
         System.out.println(event);
         reportTotalNumberOfTasks();
     }
@@ -66,7 +66,7 @@ public class Tasks {
         try {
             tasks.get(index - 1).setDone(true);
             System.out.println("Nice! I have marked this task as done: ");
-            System.out.print("----");
+            System.out.print("---- ");
             System.out.println(tasks.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, the task number you specified is not valid. " +
