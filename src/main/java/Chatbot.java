@@ -27,7 +27,7 @@ public class Chatbot {
 
     public void markDone(int order) {
         System.out.print(Duke.horizontalLine);
-        System.out.println("\t  Nice! I've marked this task as done: ");
+        System.out.println("\t  Nice! I've marked this task as done:");
         System.out.println("\t\t[x] " + todo.get(order).getName());
         System.out.println(Duke.horizontalLine);
         todo.get(order).markDone();
@@ -36,7 +36,7 @@ public class Chatbot {
     public void addTask(Task newTask) {
         todo.add(newTask);
         System.out.print(Duke.horizontalLine);
-        System.out.println("\t  Got it. I've added this task: ");
+        System.out.println("\t  Got it. I've added this task:");
         System.out.println("\t\t" + newTask.toString());
         System.out.println("\t  Now you have " + todo.size() + " tasks in the list.");
         System.out.println(Duke.horizontalLine);
