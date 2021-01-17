@@ -7,7 +7,7 @@ public class Duke {
         welcome();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            echo(sc.nextLine());hi
+            echo(sc.nextLine());
         }
     }
 
