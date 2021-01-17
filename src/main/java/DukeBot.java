@@ -14,10 +14,9 @@ public class DukeBot {
 
     public void handleCommand(String text) {
         String command = text.split(" ")[0];
-        String commandOutput = "";
-        Task task;
         String taskName, date;
-        commandOutput += "\t ";
+        String commandOutput = "\t ";
+        Task task;
 
         switch (command) {
             case "welcome":
@@ -47,8 +46,7 @@ public class DukeBot {
                 task = new Event(taskName, date);
                 taskList.add(task);
                 commandOutput += "Got it. I've added this task: \n\t\t "
-                        + task.toString()
-                        + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+                        + task.toString() + getRemainingTasks();
                 break;
             case "deadline":
                 taskName = text.split(" /by")[0].replaceFirst("deadline ", "");
@@ -56,16 +54,13 @@ public class DukeBot {
                 task = new Deadline(taskName, date);
                 taskList.add(task);
                 commandOutput += "Got it. I've added this task: \n\t\t "
-                        + task.toString()
-                        + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+                        + task.toString() + getRemainingTasks();
                 break;
             case "todo":
-                taskName = text.replaceFirst("todo ", "");
                 task = new ToDo(text);
                 taskList.add(task);
                 commandOutput += "Got it. I've added this task: \n\t\t "
-                        + task.toString()
-                        + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+                        + task.toString() + getRemainingTasks();
                 break;
             default:
                 break;
@@ -81,10 +76,14 @@ public class DukeBot {
 
         for (int i = 1; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            contents += String.format("\t %d. %s\n", i, task.toString());
+            contents += String.format("\t %d.%s\n", i, task.toString());
         }
 
         return contents;
+    }
+
+    private String getRemainingTasks() {
+        return "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
     }
 
     private void respondToCommand(String commandOutput) {
