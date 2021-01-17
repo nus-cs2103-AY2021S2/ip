@@ -5,6 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         printResponse(getWelcomeMsg());
         Scanner sc = new Scanner(System.in);
+        boolean isExited = false;
 
         while (true) {
             String input = sc.nextLine();
@@ -18,12 +19,21 @@ public class Duke {
             }
             String cmdArgs = sb.toString();
 
+            String resp = "";
+
             switch (cmd) {
                 case "bye":
-                    printResponse(getByeMsg());
-                    System.exit(0);
+                    ByeCmd byeCmd = new ByeCmd();
+                    resp = byeCmd.process(cmdArgs);
+                    isExited = true;
+                    break;
                 default:
-                    printResponse(processEcho(input));
+                    resp = processEcho(input);
+            }
+
+            printResponse(resp);
+            if (isExited) {
+                break;
             }
         }
     }
@@ -41,10 +51,6 @@ public class Duke {
         return logo +
                 "Hello! I am duke\n" +
                 "What can I do for you?\n";
-    }
-
-    public static String getByeMsg() {
-        return "Bye. Hope to see you again soon!\n";
     }
 
     public static void printResponse(String resp) {
