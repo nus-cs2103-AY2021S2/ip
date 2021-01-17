@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.concurrent.Flow.Subscriber;
 import java.io.IOException;
 
 public class Duke {
@@ -40,20 +41,32 @@ public class Duke {
     }
 
     public static String parseInput(String input) {
-        switch (input) {
+        String[] tokenizedInput = input.split(" ");
+        switch (tokenizedInput[0]) {
             case "bye":
                 return "Bye. Hope to see you again soon!";
-            case "list": {
-                String output = "";
-                for (int i = 0; i < tasks.size(); i++) {
-                    output += String.format("%d.%s\n", i + 1, tasks.get(i));
-                }
-                return output;
-            }
+            case "list":
+                return executeList();
+            case "done":
+                return executeDone(tokenizedInput);
             default:
                 tasks.add(new Task(input));
                 return "added: " + input;
         }
+    }
+
+    private static String executeList() {
+        String output = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            output += String.format("%d.%s\n", i + 1, tasks.get(i));
+        }
+        return output.substring(0, output.length() - 1);
+    }
+
+    private static String executeDone(String[] tokenizedInput) {
+        Task t = tasks.get(Integer.parseInt(tokenizedInput[1]) - 1);
+        t.setTaskAsDone();
+        return "Nice! I've marked this task as done:\n  " + t.toString();
     }
 
     private static PrintStream getWriter(OutputStream out) {

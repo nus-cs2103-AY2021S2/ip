@@ -8,6 +8,43 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 public class DukeTest {
+    @Test
+    public void chatLoopParseDoneSetsTaskAsDone() throws IOException {
+        // Setup
+        Duke.tasks = new ArrayList<>(100);
+
+        // Test
+        String testInput = "help people\n" + "help myself\n" + "done 1\n" + "list\n";
+
+        InputStream in = makeInputStreamFromString(testInput);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        Duke.chatLoop(in, out);
+
+        final String expectedOutput = "added: help people\n" + "added: help myself\n"
+                + "Nice! I've marked this task as done:\n  [✓] help people\n" + "1.[✓] help people\n"
+                + "2.[✗] help myself\n";
+        assertEquals(expectedOutput, new String(out.toByteArray()));
+    }
+
+    @Test
+    public void parseInputDoneSetsTaskAsDone() {
+        // Setup
+        Duke.tasks = new ArrayList<>(100);
+        assertEquals("added: help people", Duke.parseInput("help people"));
+
+        // Test
+        assertEquals("help people", Duke.tasks.get(0).getTaskInfo());
+        assertEquals(false, Duke.tasks.get(0).getCompletionState());
+        assertEquals("[✗] help people", Duke.tasks.get(0).toString());
+
+        final String expectedOutput = "Nice! I've marked this task as done:\n  [✓] help people";
+        assertEquals(expectedOutput, Duke.parseInput("done 1"));
+
+        assertEquals("help people", Duke.tasks.get(0).getTaskInfo());
+        assertEquals(true, Duke.tasks.get(0).getCompletionState());
+        assertEquals("[✓] help people", Duke.tasks.get(0).toString());
+    }
 
     @Test
     public void parseInputAddToList() {
@@ -17,9 +54,9 @@ public class DukeTest {
 
         assertEquals(tasksStateLength + 1, Duke.tasks.size());
 
-        assertEquals(Duke.tasks.get(tasksStateLength).getTaskInfo(), "help people");
-        assertEquals(Duke.tasks.get(tasksStateLength).getCompletionState(), false);
-        assertEquals(Duke.tasks.get(tasksStateLength).toString(), "[✗] help people");
+        assertEquals("help people", Duke.tasks.get(tasksStateLength).getTaskInfo());
+        assertEquals(false, Duke.tasks.get(tasksStateLength).getCompletionState());
+        assertEquals("[✗] help people", Duke.tasks.get(tasksStateLength).toString());
     }
 
     @Test
@@ -32,9 +69,9 @@ public class DukeTest {
 
         assertEquals(tasksStateLength + 3, Duke.tasks.size());
 
-        assertEquals(Duke.tasks.get(tasksStateLength).getTaskInfo(), "help people");
-        assertEquals(Duke.tasks.get(tasksStateLength + 1).getTaskInfo(), "blah");
-        assertEquals(Duke.tasks.get(tasksStateLength + 2).getTaskInfo(), "read book");
+        assertEquals("help people", Duke.tasks.get(tasksStateLength).getTaskInfo());
+        assertEquals("blah", Duke.tasks.get(tasksStateLength + 1).getTaskInfo());
+        assertEquals("read book", Duke.tasks.get(tasksStateLength + 2).getTaskInfo());
     }
 
     @Test
@@ -45,7 +82,7 @@ public class DukeTest {
         assertEquals("added: blah", Duke.parseInput("blah"));
         assertEquals("added: read book", Duke.parseInput("read book"));
 
-        final String expectedString = "1.[✗] help people\n2.[✗] blah\n3.[✗] read book\n";
+        final String expectedString = "1.[✗] help people\n2.[✗] blah\n3.[✗] read book";
 
         // Test
         assertEquals(expectedString, Duke.parseInput("list"));
@@ -60,9 +97,9 @@ public class DukeTest {
     public void chatInputByeExitsLoop() throws IOException {
         String testInput = "bye\n" + "hello\n" + "bye\n";
 
-        InputStream ins = new ByteArrayInputStream(testInput.getBytes(StandardCharsets.UTF_8));
+        InputStream in = makeInputStreamFromString(testInput);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        Duke.chatLoop(ins, out);
+        Duke.chatLoop(in, out);
 
         assertEquals("Bye. Hope to see you again soon!\n", new String(out.toByteArray()));
     }
@@ -71,13 +108,15 @@ public class DukeTest {
     public void chatLoopWritesToOutput() throws IOException {
         String testInput = "echoThis\n" + "echoThisAsWell\n" + "echoThisFinally\n";
 
-        InputStream ins = new ByteArrayInputStream(testInput.getBytes(StandardCharsets.UTF_8));
-        BufferedReader in = new BufferedReader(new InputStreamReader(ins));
+        InputStream in = makeInputStreamFromString(testInput);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        Duke.chatLoop(ins, out);
+        Duke.chatLoop(in, out);
 
-        assertEquals(null, in.readLine());
         assertNotEquals("", new String(out.toByteArray()));
+    }
+
+    private ByteArrayInputStream makeInputStreamFromString(String testInput) {
+        return new ByteArrayInputStream(testInput.getBytes(StandardCharsets.UTF_8));
     }
 }
