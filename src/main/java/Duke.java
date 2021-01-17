@@ -13,7 +13,9 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        List<String> myList = new ArrayList<>();
+        List<String> taskList = new ArrayList<>();
+        List<Boolean> doneList = new ArrayList<>();
+
         String indent = "         ";
         String horizSep = indent + "________________________________________________";
 
@@ -21,10 +23,13 @@ public class Duke {
         String farewell = indent + " Bye. Hope to see you again soon!\n";
         Scanner sc = new Scanner(System.in);
 
+
+
         System.out.println(horizSep + "\n" + greeting + horizSep + "\n");
 
         while (sc.hasNextLine()) {
             String next = sc.nextLine();
+            String[] params = next.split(" ");
 
             if (next.equals("bye")) {
 
@@ -32,16 +37,33 @@ public class Duke {
                 sc.close();
                 return;
             } else if (next.equals("list")) {
-                ListIterator iter = myList.listIterator();
+                ListIterator<String> taskIter = taskList.listIterator();
+                ListIterator<Boolean> doneIter = doneList.listIterator();
 
                 System.out.println(horizSep);
-                while (iter.hasNext()) {
-                    System.out.println(indent + " " + String.valueOf(iter.nextIndex() + 1) + ". " + iter.next());
+                System.out.println(indent + " Here are the tasks in your list:");
+                while (taskIter.hasNext()) {
+                    String doneIndicator;
+                    if (doneIter.next()) {
+                        doneIndicator = "X";
+                    } else {
+                        doneIndicator = " ";
+                    }
+
+                    System.out.println(indent + " " + String.valueOf(taskIter.nextIndex() + 1) + "." + "[" + doneIndicator + "]" + " " + taskIter.next());
                 }
+                System.out.println(horizSep + "\n");
+
+            } else if (params[0].equals("done")) {
+                Integer index = Integer.parseInt(params[1]) - 1;
+                doneList.set(index, true);
+                System.out.println(horizSep + "\n" + indent + " Nice! I've marked this task as done:");
+                System.out.println(indent + "   [X] " + taskList.get(index));
                 System.out.println(horizSep);
 
             } else {
-                myList.add(next);
+                taskList.add(next);
+                doneList.add(false);
                 System.out.println(horizSep + "\n" +  indent + " added: " + next + "\n" + horizSep + "\n");
             }
         }
