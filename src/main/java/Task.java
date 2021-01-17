@@ -2,6 +2,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+
     public Task(String description) {
         this.description = description;
         this.isDone = false; //task not done is represented by a X
@@ -17,6 +18,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true; //a task that is done is represented by a tick
+    }
+
+    public String getType() {
+        return "[ ]";
     }
 
 }
