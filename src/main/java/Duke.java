@@ -7,7 +7,7 @@ public class Duke {
         while (sc.hasNext()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
-                System.out.println("I hope I have been of assistance. Goodbye.");
+                System.out.println("I hope I have been of assistance. Goodbye. C:");
                 break;
             } else {
                 System.out.println(command);
