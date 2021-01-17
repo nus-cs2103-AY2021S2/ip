@@ -4,9 +4,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
-    private static final List<String> inputList = new ArrayList<>();
-    private static final String BYE = "bye";
-    private static final String LIST = "list";
+    private static final List<Task> taskList = new ArrayList<>();
 
     private static void introduction() {
         String loading = "Hello from\n"
@@ -22,8 +20,8 @@ public class Duke {
 
     private static void printList() {
         int counter = 1;
-        for (String s : inputList) {
-            System.out.println(counter + ". " + s);
+        for (Task t : taskList) {
+            System.out.println(counter + ". " + t);
             counter++;
         }
     }
@@ -34,18 +32,36 @@ public class Duke {
         scanner.close();
     }
 
+    private static void setTaskDone(int pos) {
+        taskList.get(pos).markAsDone();
+        System.out.println("Nice! I've marked this task as done:\n" + taskList.get(pos));
+    }
+
     private static void run() {
         introduction();
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
-            if (input.equals(BYE)) {
+            if (input.equals(Commands.BYE.getCommand())) {
                 endProgram();
                 break;
-            } else if (input.equals(LIST)) {
+            } else if (input.equals(Commands.LIST.getCommand())) {
                 printList();
             } else {
-                inputList.add(input);
-                System.out.println("added: " + input);
+                String[] inputWords = input.split(" ");
+                if (inputWords.length == 2 && inputWords[0].equals(Commands.DONE.getCommand())) {
+                    try {
+                        int pos = Integer.parseInt(inputWords[1]) - 1;
+                        setTaskDone(pos);
+                    } catch (NumberFormatException numEx) {
+                        System.err.println("'done' is command word; please pass a numerical index or start your task with another word!");
+                    } catch (IndexOutOfBoundsException arrEx) {
+                        System.err.println("Please pass a valid index!");
+                    }
+                } else {
+                    Task t = new Task(input);
+                    taskList.add(t);
+                    System.out.println("added: " + t.getDescription());
+                }
             }
         }
     }
