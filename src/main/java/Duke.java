@@ -13,7 +13,7 @@ public class Duke {
      * Greets the user and begins listening to user commands
      * @param args supplies command-line arguments to the Chatbot
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         greetUser();
         listenToUserCommand();
     }
@@ -31,7 +31,7 @@ public class Duke {
      * Takes in user's command line arguments and treats them accordingly.
      * Chatbot Duke will end the session when user input "bye".
      */
-    public static void listenToUserCommand() {
+    public static void listenToUserCommand() throws DukeException {
         Scanner sc = new Scanner(System.in);
         while(true) {
             String input = sc.nextLine();
@@ -45,6 +45,9 @@ public class Duke {
                 Task task = taskList.get(taskNumber - 1);
                 markTaskDone(task);
             } else if (input.startsWith("todo ")) {
+                if (input.split(" ").length == 1) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                }
                 String todoTask = input.substring(5);
                 addTodoTask(todoTask);
             } else if (input.startsWith("event ")) {
@@ -58,7 +61,7 @@ public class Duke {
                 String date = taskAndDate[1].substring(3);
                 addDeadlineTask(deadlineTask, date);
             } else {
-                System.out.println("Invalid task");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
