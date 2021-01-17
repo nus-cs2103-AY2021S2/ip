@@ -9,10 +9,26 @@ public class AddCmd implements Command {
         this.taskType = taskType;
     }
 
+    private void validateNotEmpty(String str, String msg) {
+        if (str.equals("")) {
+            throw new DukeException(msg);
+        }
+    }
+
+    private String[] trimStrArr(String[] strArr) {
+        for (int i = 0; i < strArr.length; i++) {
+            strArr[i] = strArr[i].trim();
+        }
+
+        return strArr;
+    }
+
     @Override
     public String process(String input) {
         Task task;
         String[] words;
+
+        validateNotEmpty(input, "OOPS!!! The description of a task cannot be empty");
 
         switch (taskType) {
             case TODO:
@@ -20,11 +36,13 @@ public class AddCmd implements Command {
                 break;
             case EVENT:
                 words = input.split("/at");
-                task = new Event(words[0].trim(), words[1].trim());
+                trimStrArr(words);
+                task = new Event(words[0], words[1]);
                 break;
             case DEADLINE:
                 words = input.split("/by");
-                task = new Deadline(words[0].trim(), words[1].trim());
+                trimStrArr(words);
+                task = new Deadline(words[0], words[1]);
                 break;
             default:
                 task = new Task("placeholder task");
