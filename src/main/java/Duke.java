@@ -36,14 +36,21 @@ public class Duke {
                 case "bye":
                     break;
                 default: {
-                    Task newTask = parseTask(userInputArray);
-                    tasks[index] = newTask;
-                    index++;
-                    printSegment();
-                    System.out.println("\tGot it. I've added this task:");
-                    System.out.println("\t\t" + newTask);
-                    System.out.println("\tNow you have " + index + " tasks in the list.");
-                    printSegment();
+                    Task newTask = null;
+                    try {
+                        newTask = parseTask(userInputArray);
+                        tasks[index] = newTask;
+                        index++;
+                        printSegment();
+                        System.out.println("\tGot it. I've added this task:");
+                        System.out.println("\t\t" + newTask);
+                        System.out.println("\tNow you have " + index + " tasks in the list.");
+                        printSegment();
+                    } catch (DukeException e) {
+                        printSegment();
+                        System.out.println("\t☹ OOPS!!! " + e.getLocalizedMessage());
+                        printSegment();
+                    }
                 }
             }
         }
@@ -53,10 +60,13 @@ public class Duke {
         printSegment();
     }
 
-    static Task parseTask(String[] userInputArray) {
+    static Task parseTask(String[] userInputArray) throws DukeException {
         Task newTask;
         switch (userInputArray[0]) {
             case "todo": {
+                if (userInputArray.length == 1) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
                 newTask = new ToDo(userInputArray[1]);
                 break;
             }
@@ -71,7 +81,7 @@ public class Duke {
                 break;
             }
             default:
-                throw new IllegalStateException("Unexpected value: " + userInputArray[0]);
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         return newTask;
     }
