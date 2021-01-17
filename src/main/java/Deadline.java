@@ -2,9 +2,9 @@ public class Deadline extends Task {
 
     public String date;
 
-    Deadline(String title) {
-        super(title.substring(9).split(" /by ")[0]);
-        this.date = title.substring(9).split(" /by ")[1];
+    Deadline(String description) {
+        super(description.substring(9).split(" /by ")[0]);
+        this.date = description.substring(9).split(" /by ")[1];
         isDone = false;
     }
 
@@ -15,7 +15,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String check = isDone ? "[X] " : "[ ] ";
-        return "[D]" + check + title + getDate() + "\n";
+        return "[D]" + super.toString() + getDate() + "\n";
     }
 }

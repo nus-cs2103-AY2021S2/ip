@@ -1,9 +1,9 @@
 public class Event extends Task {
     public String date;
 
-    Event(String title) {
-        super(title.substring(6).split(" /at ")[0]);
-        this.date = title.substring(6).split(" /at ")[1];
+    Event(String description) {
+        super(description.substring(6).split(" /at ")[0]);
+        this.date = description.substring(6).split(" /at ")[1];
         isDone = false;
     }
     @Override
@@ -13,7 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String check = isDone ? "[X] " : "[ ] ";
-        return "[E]" + check + title + getDate() + "\n";
+        return "[E]" + super.toString() + getDate() + "\n";
     }
 }

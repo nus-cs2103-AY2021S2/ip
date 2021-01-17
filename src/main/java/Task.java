@@ -1,11 +1,15 @@
 public class Task {
 
-    String title;
+    String description;
     boolean isDone;
 
-    Task(String title) {
-        this.title = title;
+    Task(String description) {
+        this.description = description;
         isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return isDone ? "[\u2713] " : "[ ] ";
     }
 
     String getDate() {
@@ -14,5 +18,10 @@ public class Task {
 
     public void markDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return getStatusIcon() + description;
     }
 }
