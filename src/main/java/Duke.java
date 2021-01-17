@@ -12,44 +12,48 @@ public class Duke {
         boolean isExited = false;
 
         while (true) {
-            String input = sc.nextLine();
-            String[] words = input.trim().split(" ");
-            String cmd = words[0];
+            try {
+                String input = sc.nextLine();
+                String[] words = input.trim().split(" ");
+                String cmd = words[0];
 
-            // Recombine cmdArgs for further parsing in individual cmd classes
-            String[] remain = Arrays.copyOfRange(words, 1, words.length);
-            String cmdArgs = String.join(" ", remain);
+                // Recombine cmdArgs for further parsing in individual cmd classes
+                String[] remain = Arrays.copyOfRange(words, 1, words.length);
+                String cmdArgs = String.join(" ", remain);
 
-            String resp = "";
+                String resp = "";
 
-            switch (cmd) {
-                case "bye":
-                    ByeCmd byeCmd = new ByeCmd();
-                    resp = byeCmd.process(cmdArgs);
-                    isExited = true;
+                switch (cmd) {
+                    case "bye":
+                        ByeCmd byeCmd = new ByeCmd();
+                        resp = byeCmd.process(cmdArgs);
+                        isExited = true;
+                        break;
+                    case "list":
+                        ListCmd listCmd = new ListCmd(taskLst);
+                        resp = listCmd.process(cmdArgs);
+                        break;
+                    case "done":
+                        DoneCmd doneCmd = new DoneCmd(taskLst);
+                        resp = doneCmd.process(cmdArgs);
+                        break;
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
+                        resp = addCmd.process(cmdArgs);
+                        break;
+                    default:
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
+                }
+
+                printResponse(resp);
+                if (isExited) {
                     break;
-                case "list":
-                    ListCmd listCmd = new ListCmd(taskLst);
-                    resp = listCmd.process(cmdArgs);
-                    break;
-                case "done":
-                    DoneCmd doneCmd = new DoneCmd(taskLst);
-                    resp = doneCmd.process(cmdArgs);
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
-                    resp = addCmd.process(cmdArgs);
-                    break;
-                default:
-                    resp = "Invalid cmd";
-                    break;
+                }
             }
-
-            printResponse(resp);
-            if (isExited) {
-                break;
+            catch (DukeException e) {
+                printResponse(e.getMessage());
             }
         }
     }
