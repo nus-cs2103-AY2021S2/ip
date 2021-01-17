@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static Scanner sc = new Scanner(System.in);
 
+    // Checks the user input and throws exceptions
     public static void startResponse(String userInput) throws Exception {
         if (userInput.equals("list")) {
             if (Response.numTasks == 0) {
@@ -37,6 +38,12 @@ public class Duke {
             Task currentTask = new Event(userInput.substring(6, temp),
                     userInput.substring(temp + 4));
             Response.addTask(currentTask);
+        } else if (userInput.contains("delete")) {
+            int taskNumber = Integer.parseInt(userInput.substring(7));
+            if (taskNumber <= 0 || taskNumber > Response.numTasks) {
+                throw new IndexOutOfBoundsException();
+            }
+            Response.deleteTask(taskNumber);
         } else {
             throw new Exception();
         }
@@ -56,7 +63,7 @@ public class Duke {
             } catch (IllegalArgumentException e) {
                 System.out.println("\nerror: not enough information to create task!\n");
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("\nerror: taskd does not exist!\n");
+                System.out.println("\nerror: task does not exist!\n");
             } catch (NullPointerException e) {
                 System.out.println("\nerror: there is nothing in the list!\n");
             } catch (Exception e) {

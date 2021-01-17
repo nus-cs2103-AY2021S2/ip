@@ -3,12 +3,6 @@ import java.util.ArrayList;
 public class Response {
     public static int numTasks = 0;
     public static ArrayList<Task> tasks = new ArrayList<>();
-    //public static Task[] tasks = new Task[100]; // Array of tasks
-    //public static String line = "---------------------------";
-
-//    public static void myPrint(String str) {
-//        System.out.println(line + "\n" + str + "\n" + line + "\n");
-//    }
 
     public static void hello() {
         System.out.println("\nwhat's up? :)\n");
@@ -18,7 +12,7 @@ public class Response {
         System.out.println("\nbye, have a good day! :)\n");
     }
 
-    public static void listTasks() {
+    public static void listTasks() { // Prints out the tasks in the list
         System.out.println("");
 
         for (int i = 1; i < numTasks + 1; i++) {
@@ -28,20 +22,26 @@ public class Response {
         System.out.println("");
     }
 
-    public static void addTask(Task task) {
+    public static void addTask(Task task) { // Add a task to the list
         System.out.println("\nokay, added this task:");
-        tasks.add(numTasks, task); // [numTasks] = task;
+        tasks.add(numTasks, task);
         numTasks++;
         System.out.println(task.toString());
         System.out.println("you now have a total of " + numTasks + " tasks.\n");
-        //System.out.println(line + "\n");
     }
 
-    public static void markAsDone(int num) {
+    public static void markAsDone(int num) { // Marks a task as done
         System.out.println("\nokay, this task has been marked as done:");
         Task currentTask = tasks.get(num - 1);
         currentTask.markAsDone();
         System.out.println(num + ". " + currentTask.toString() + "\n");
-        //System.out.println("\n");
+    }
+
+    public static void deleteTask(int num) { // Delete a task from the list
+        System.out.println("\nokay, deleted this task:");
+        System.out.println(tasks.get(num - 1).toString());
+        tasks.remove(num - 1);
+        numTasks--;
+        System.out.println("you now have a total of " + numTasks + " tasks.\n");
     }
 }

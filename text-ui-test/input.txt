@@ -2,10 +2,15 @@ list
 todo read book
 event
 event project meeting /at Mon 2-4pm
+deadline return book
 deadline return book /by Sunday
 list
 done 1
 done 4
 done 3
 list
+delete 2
+delete 2
+list
+delete 2
 bye
