@@ -13,7 +13,7 @@ public class Task {
 
     public String isCompleted(){
 
-        return (this.status ? "\u2718" : "");
+        return (this.status ? "\u2718" : " ");
     }
 
     public String getTaskName(){
@@ -22,6 +22,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return  "[" + isCompleted() + "]" + this.getTaskName();
+        return "[" + isCompleted() + "]" + this.getTaskName();
     }
 }

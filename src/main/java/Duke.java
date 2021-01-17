@@ -23,32 +23,83 @@ public class Duke {
         System.out.println(lines + "\n" + " Bye. Hope to see you again!" + "\n" + lines);
     }
 
+    public static void displayAddedTaskMessage(){
+        System.out.println(lines + "\nGot it. I've added this task: \n"
+                + taskArray[count-1].toString() + "\n Now you have " + count
+                + " tasks in your list \n" + lines);
+    }
+
+    public static void addTask(String userInput, String typeOfTask){
+
+        boolean defaultTask = false;
+
+        switch (typeOfTask){
+            case ("todo"):
+                taskArray [count++] = new ToDos(generateTaskName(userInput, "todo"));
+                break;
+
+            case("deadline"):
+
+                String dueBy[] = userInput.split("/by");
+                taskArray [count++] = new Deadlines(generateTaskName(dueBy[0], "deadline"),
+                        dueBy[dueBy.length-1]);
+                break;
+            case("event"):
+
+                String dueDetails[] = userInput.split("/at ");
+
+                String date[] = dueDetails[dueDetails.length-1].split(" ");
+
+                String[] startTimeArr = date[date.length-1].split("-");
+                String startTime = startTimeArr[0];
+                String endTime = startTimeArr[startTimeArr.length-1];
+
+                taskArray [count++] = new Events(generateTaskName(dueDetails[0], "event"),
+                        date[0], startTime,endTime);
+                break;
+            default:
+                taskArray [count++] = new Task (userInput);
+                defaultTask = true;
+                System.out.println("added: " + userInput + "\n" + lines);
+                break;
+        }
+        if(!defaultTask) {
+            displayAddedTaskMessage();
+        }
+
+    }
+
+    public static String generateTaskName(String userInput, String type){
+        return userInput.replace(type, "");
+    }
+
+
     public static void executeCommand(String command) {
 
         String commandArray[] = command.split("\\s+");
 
         switch (commandArray[0]) {
             case ("list"):
-                
-                System.out.println(lines);
+
+                System.out.println(lines + "\nHere are the tasks in your list:");
                 for (int i = 0; i < count; i++) {
-                    System.out.println((i + 1) + ". " + taskArray[i].toString());
+                    System.out.println((i + 1) + "." + taskArray[i].toString());
                 }
                 System.out.println(lines);
                 break;
 
             case ("done"):
+
                 int index = Integer.parseInt(commandArray[1])-1;
                 taskArray[index].setCompleted();
 
-                System.out.println(lines + " \n" +"Nice! I'll make this task as done:" + "\n"
+                System.out.println(lines + "\nNice! I'll make this task as done: \n"
                         + taskArray[index].toString() + "\n" + lines);
                 break;
 
+
             default:
-                taskArray[count] = new Task(command);
-                count++;
-                System.out.println("added: " + command + "\n" + lines);
+                addTask(command, commandArray[0]);
                 break;
         }
     }
