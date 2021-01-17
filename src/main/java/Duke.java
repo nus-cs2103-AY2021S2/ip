@@ -90,17 +90,18 @@ public class Duke {
         System.out.println("Sonia: " + message);
     }
 
-    public static String[] prompt() {
+    public static void prompt() {
         System.out.print("You: ");
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine().split(" ");
+        while (sc.hasNextLine()) {
+            String[] input = sc.nextLine().split(" ");
+            parse(input);
+            System.out.print("You: ");
+        }
     }
 
     public static void main(String[] args) {
         echo(GREETING);
-        while (true) {
-            String[] input = prompt();
-            parse(input);
-        }
+        prompt();
     }
 }
