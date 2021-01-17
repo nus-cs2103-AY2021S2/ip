@@ -42,7 +42,7 @@ public class Controller {
             } else {
                 addTask(input);
             }
-        } catch (Exception e) {
+        } catch (DukeException e) {
             String output = String.format(INDENT + " %s", e);
             System.out.println(output);
         }
@@ -57,7 +57,7 @@ public class Controller {
         System.out.println(output);
     }
 
-    private void addTask(String task) {
+    private void addTask(String task) throws DukeUnknownArgumentsException {
         try {
             Task t;
             if (task.startsWith("todo")) {
@@ -67,7 +67,7 @@ public class Controller {
             } else if (task.startsWith("event")) {
                 t = createEvent(task);
             } else {
-                throw new DukeNoDescriptionException("unknown");
+                throw new DukeUnknownArgumentsException();
             }
             list.add(t);
             String output = String.format(INDENT + " Got it. I've added this task:" + NEWLINE
