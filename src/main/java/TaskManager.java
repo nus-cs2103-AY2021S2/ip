@@ -5,18 +5,23 @@ public class TaskManager {
 
     public void add(String type, String task) throws DukeException{
         if(type.equals("todo")){
-            list.add(new ToDo(list.size() + 1, task));
+            list.add(new ToDo(task));
         } else {
             String description = task.split("/")[0];
             String deadline = task.split("/")[1].split(" ", 2)[1];
             if (type.equals("deadline")) {
-                list.add(new Deadline(list.size() + 1, description, deadline));
+                list.add(new Deadline(description, deadline));
             } else if (type.equals("event")) {
-                list.add(new Event(list.size() + 1, description, deadline));
+                list.add(new Event(description, deadline));
             }
         }
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\nNow you have " +
-        list.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    public void delete(int taskId){
+        Task deletedTask = list.get(taskId);
+        list.remove(taskId);
+        System.out.println("Noted. I've removed this task:\n" + deletedTask +"\n Now you have " + list.size() + " tasks in the list.");
     }
 
     public void done(int taskId) {

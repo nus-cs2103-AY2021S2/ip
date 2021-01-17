@@ -18,7 +18,14 @@ public class Duke {
                 taskManager.printList();
             } else {
                 try {
-                    if (command.equals("done")) {
+                    if(command.equals("delete")){
+                        if (inputLength > 1) {
+                            int taskId = Integer.valueOf(input.split(" ")[1]) - 1;
+                            taskManager.delete(taskId);
+                        } else {
+                            throw new DukeException("Missing argument. Please key in the task number to delete.");
+                        }
+                    } else if (command.equals("done")) {
                         if (inputLength > 1) {
                             int taskId = Integer.valueOf(input.split(" ")[1]) - 1;
                             taskManager.done(taskId);

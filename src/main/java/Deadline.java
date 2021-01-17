@@ -1,8 +1,8 @@
 public class Deadline extends Task{
     protected String deadline;
 
-    Deadline(int id, String description, String deadline){
-        super(id, description);
+    Deadline(String description, String deadline){
+        super(description);
         this.deadline = deadline;
     }
 
