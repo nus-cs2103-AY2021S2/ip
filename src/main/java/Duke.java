@@ -43,6 +43,23 @@ public class Duke {
                             "\nError! Task number does not exist." +
                             "\nPlease input a valid task number!");
                 }
+            } else if (command.equals("delete")) {
+                try {
+                    int taskNumber = Integer.parseInt(additionalText);
+                    int arrayNumber = taskNumber - 1;
+                    Task task = taskList.get(arrayNumber);
+                    taskList.remove(arrayNumber);
+                    System.out.println(formatMessage("The following task has been removed:\n" +
+                            task + "\n" + Task.getNumOfTasksString()));
+                } catch (NumberFormatException e) {
+                    System.out.println(formatMessage(e +
+                            "\nError! Invalid task number." +
+                            "\nPlease input a valid task number!"));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e +
+                            "\nError! Task number does not exist." +
+                            "\nPlease input a valid task number!");
+                }
             } else if (command.equals("todo")) {
                 try {
                     Todos todos = new Todos(additionalText);
@@ -73,6 +90,7 @@ public class Duke {
                         "event *text* /at *text*\n" +
                         "done *number*\n" +
                         "list\n" +
+                        "delete *number*\n" +
                         "bye";
                 System.out.println(formatMessage(allCommands));
             } else {

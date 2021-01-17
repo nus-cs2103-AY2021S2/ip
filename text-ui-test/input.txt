@@ -4,4 +4,5 @@ deadline 3230 assignment /by Sun 12am
 event play games with friends
 list
 done 2
+delete 2
 bye
