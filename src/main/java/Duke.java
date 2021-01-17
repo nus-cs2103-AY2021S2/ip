@@ -13,32 +13,37 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
+            StringBuilder response = new StringBuilder();
             if (userInput.equals("bye")) {
-                Duke.printWithBorders("Bye. Hope to see you soon!");
+                response.append("Bye. Hope to see you soon!");
+                Duke.printWithBorders(response.toString());
                 return;
             } else if (userInput.equals("list")) {
-                String output = "";
                 for (int i = 0; i < numberOfTasks; i++) {
                     Task task = tasks[i];
-                    String completionStatus = task.isComplete() ? "[X]" : "[ ]";
-                    output += (i + 1) + "." + completionStatus + " " + task;
+                    response.append(i + 1);
+                    response.append(".");
+                    response.append(task);
                     if (i != numberOfTasks - 1) {
-                        output += "\n";
+                        response.append("\n");
                     }
                 }
-                Duke.printWithBorders(output);
             } else if (userInput.startsWith("done")) {
                 int userChoice = Integer.valueOf(userInput.split(" ")[1]);
                 Task task = tasks[userChoice - 1];
                 task.markComplete();
-                String output = "Nice! I've marked this task as done:\n";
-                output += "  [X] " + task;
-                Duke.printWithBorders(output);
+                response.append("Nice! I've marked this task as done:\n");
+                response.append(task);
             } else {
-                tasks[numberOfTasks++] = new Task(userInput);
-                String output = "added: " + userInput;
-                Duke.printWithBorders(output);
+                Task task = Task.parseTask(userInput);
+                tasks[numberOfTasks++] = task;
+                response.append("Got it. I've added this task: \n  added: ");
+                response.append(task);
+                response.append("\nNow you have ");
+                response.append(numberOfTasks);
+                response.append(" tasks in the list.");
             }
+            Duke.printWithBorders(response.toString());
         }
     }
 
