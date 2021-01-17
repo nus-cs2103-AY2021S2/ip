@@ -12,12 +12,16 @@ public class Main {
 
         while(!currInput.equals("bye")){
             currInput = sc.nextLine();
+            Scanner sc2 = new Scanner(currInput);
 
-            if(currInput.equals("list")){
+            String firstWord = sc2.next();
+
+            if(firstWord.equals("done")) {
+                chatbox.acceptCommand("done", sc2.next());
+            }else if(firstWord.equals("list")){
                 chatbox.acceptCommand("list");
             }else{
                 chatbox.acceptCommand("add", currInput);
-                System.out.println("added: " + currInput);
             }
 
         }

@@ -19,9 +19,10 @@ class Chatbox {
     //information about the task to manipulate
     void acceptCommand(String command, String item){
         if(command.equals("add")){
-            storage.add(item);
-        }else{
-            return;
+            Task newTask = new Task(item);
+            storage.add(newTask);
+        }else if(command.equals("done")){
+            storage.markTaskAsDone(item);
         }
     }
 
