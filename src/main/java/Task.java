@@ -1,3 +1,7 @@
+/**
+ * This class represents a task that can be created
+ * through user command.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

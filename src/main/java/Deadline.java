@@ -1,3 +1,7 @@
+/**
+ * This class extends the Task class and is used to
+ * represent a single item with a deadline that users can add to their list.
+ */
 public class Deadline extends Task {
     protected String by;
 

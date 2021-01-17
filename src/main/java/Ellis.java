@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Ellis is a personal assistant chat bot that
+ * helps users to keep track of various things.
+ * @author Damith C. Rajapakse, Jeffry Lum, Wu Weiming
+ */
 public class Ellis {
     List<Task> lst = new ArrayList<>();
 
