@@ -8,14 +8,9 @@ public class Duke {
 
     private static List<Task> tasks = new ArrayList<>();
 
+    // Helper functions
     public static void reply(String msg) {
         System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
-    }
-
-    public static void greet() {
-        String msg = REPLY_INDENTATION + "Hello! I'm Duke\n"
-                + REPLY_INDENTATION + "What can I do for you?\n";
-        reply(msg);
     }
 
     public static void addReply(Task task) {
@@ -25,32 +20,51 @@ public class Duke {
         reply(msg);
     }
 
+    public static String removeCommand(String input, String command) {
+        String[] parts = input.split(" ", 2);
+
+        if (parts.length != 2) {
+            throw new EmptyDescriptionException("☹ The description of a " + command + " cannot be empty.");
+        } else {
+            return parts[1];
+        }
+    }
+
+    // Commands
+    public static void greet() {
+        String msg = REPLY_INDENTATION + "Hello! I'm Duke\n"
+                + REPLY_INDENTATION + "What can I do for you?\n";
+        reply(msg);
+    }
+
     public static void addTodo(String input) {
-        String description = input.split(" ", 2)[1];
+        String description = removeCommand(input, "todo");
         Task todo = new Todo(description);
         tasks.add(todo);
         addReply(todo);
     }
 
     public static void addDeadline(String input) {
-        try {
-            String[] parts = input.split(" ", 2)[1].split("/by");
+        String[] parts = removeCommand(input, "deadline").split("/by");
+
+        if (parts.length != 2) {
+            throw new InvalidTaskException("☹ You have provided an invalid deadline.");
+        } else {
             Task deadline = new Deadline(parts[0], parts[1]);
             tasks.add(deadline);
             addReply(deadline);
-        } catch (IndexOutOfBoundsException exception) {
-            reply(REPLY_INDENTATION + "Invalid deadline provided.\n");
         }
     }
 
     public static void addEvent(String input) {
-        try {
-            String[] parts = input.split(" ", 2)[1].split("/at");
+        String[] parts = removeCommand(input, "event").split("/at");
+
+        if (parts.length != 2) {
+            throw new InvalidTaskException("☹ You have provided an invalid event.");
+        } else {
             Task event = new Event(parts[0], parts[1]);
             tasks.add(event);
             addReply(event);
-        } catch (IndexOutOfBoundsException exception) {
-            reply(REPLY_INDENTATION + "Invalid event provided.\n");
         }
     }
 
@@ -64,7 +78,7 @@ public class Duke {
                     + REPLY_INDENTATION + "  " + tasks.get(index) + "\n";
             reply(msg);
         } catch (IndexOutOfBoundsException exception) {
-            reply(REPLY_INDENTATION + "Sorry, I was not able to find the task.\n");
+            reply(REPLY_INDENTATION + "☹ Sorry, I was not able to find the task.\n");
         }
     }
 
@@ -82,7 +96,7 @@ public class Duke {
     }
 
     public static boolean readInput(Scanner sc) {
-        String input = sc.nextLine();
+        String input = sc.nextLine().trim();
 
         switch (input) {
             case "bye":
@@ -92,16 +106,20 @@ public class Duke {
                 list();
                 break;
             default:
-                if (input.matches("done \\d+")) {
-                    done(input);
-                } else if (input.matches("todo .+")) {
-                    addTodo(input);
-                } else if (input.matches("deadline .+")) {
-                    addDeadline(input);
-                } else if (input.matches("event .+")) {
-                    addEvent(input);
-                } else {
-                    reply(REPLY_INDENTATION + "Sorry, I'm not sure how to respond to that command.\n");
+                try {
+                    if (input.matches("done \\d+")) {
+                        done(input);
+                    } else if (input.matches("todo.*")) {
+                        addTodo(input);
+                    } else if (input.matches("deadline.*")) {
+                        addDeadline(input);
+                    } else if (input.matches("event.*")) {
+                        addEvent(input);
+                    } else {
+                        reply(REPLY_INDENTATION + "☹ I'm sorry, but I don't know what that means :-(\n");
+                    }
+                } catch (EmptyDescriptionException | InvalidTaskException ex) {
+                    reply(REPLY_INDENTATION + ex.getMessage() + "\n");
                 }
                 break;
         }
