@@ -99,7 +99,7 @@ public class Duke {
         taskList.add(myTask);
         System.out.println("____________________________________________________________\n"
                 + "Got it. I've added this task: \n"
-                + myTask.type + "[ ] " + myTask.getDescription());
+                + myTask.toString());
         Remark();
     }
 
@@ -112,8 +112,7 @@ public class Duke {
 
         System.out.println("____________________________________________________________\n"
                 + "Got it. I've added this task: \n"
-                + myTask.type + "[ ] " + myTask.getDescription()
-                + " (by: " + myTask.getTime() + ")");
+                + myTask.toString());
         Remark();
 
     }
@@ -127,8 +126,7 @@ public class Duke {
 
         System.out.println("____________________________________________________________\n"
                 + "Got it. I've added this task: \n"
-                + myTask.type + "[ ] " + myTask.getDescription()
-                + " (at: " + myTask.getTime() + ")");
+                + myTask.toString());
         Remark();
     }
 

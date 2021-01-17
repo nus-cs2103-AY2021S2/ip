@@ -13,4 +13,9 @@ class Todo extends Task {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return getType() + super.toString();
+    }
+
 }

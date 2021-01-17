@@ -17,4 +17,10 @@ public class Event extends Task{
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return getType() + super.toString() + " (at: " + getTime() + ")";
+    }
+
 }

@@ -24,4 +24,9 @@ public class Task {
         return "[ ]";
     }
 
+    @Override
+    public String toString() {
+        return "[ ]" + " " + getDescription();
+    }
+
 }
