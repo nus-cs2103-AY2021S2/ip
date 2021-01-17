@@ -80,7 +80,7 @@ public class Duke {
                     Task t = defineTask(command, taskInputAndDate);
                     if (t != null) {
                         taskList.add(t);
-                        System.out.println("Got it. I've added this task:\n" + task);
+                        System.out.println("Got it. I've added this task:\n" + t);
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     } else {
                         System.err.println("Please enter a valid task command (todo, deadline, event, list, done, bye)!");
