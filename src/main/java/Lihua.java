@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -6,9 +7,10 @@ import java.util.Scanner;
  */
 public class Lihua {
     private static final String EXIT_SIGNAL = "bye";
+    private static Todo todos = new Todo();
 
     public static void main(String[] args) {
-        // Initialize new Scanner object to receive input
+        // Initialization phase
         Scanner sc = new Scanner(System.in);
 
         // Print out welcome message
@@ -22,10 +24,26 @@ public class Lihua {
                 printGoodbye();
                 return;
             } else {
-                printEchoMessage(userInput);
+                actionUpon(userInput);
                 userInput = sc.nextLine();
             }
         }
+    }
+
+    /**
+     * Action upon the user input.
+     * E.g. Store the user input to the list, show the items in the list
+     * @param userInput user input string which is not the exit signal
+     */
+    private static void actionUpon(String userInput) {
+        printHorizontalLine();
+        if (userInput.equals("list")) {
+            todos.printList();
+        } else {
+            todos.addItem(userInput);
+            System.out.println(String.format("Added: %s", userInput));
+        }
+        printHorizontalLine();
     }
 
     private static void printHello() {
@@ -33,12 +51,6 @@ public class Lihua {
                 + "What can I do for you today?";
         printHorizontalLine();
         System.out.println(welcome);
-        printHorizontalLine();
-    }
-
-    private static void printEchoMessage(String message) {
-        printHorizontalLine();
-        System.out.println(String.format("Your input command: %s", message));
         printHorizontalLine();
     }
 
