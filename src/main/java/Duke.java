@@ -34,10 +34,10 @@ public class Duke {
 
                 if (front.equals("done")) {
                     k = Integer.parseInt(back) - 1;
+                    tasks[k].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("  [" + tasks[k].getStatusIcon()
                             + "] " + tasks[k].description);
-                    tasks[k].markAsDone();
                 } else {
                     System.out.println("added: " + string);
                     tasks[i++] = new Task(string);
