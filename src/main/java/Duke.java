@@ -6,20 +6,40 @@ public class Duke {
     private static final String REPLY_OUTLINE = "    ____________________________________________________________";
     private static final String REPLY_INDENTATION = "     ";
 
-    private static List<String> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void greet() {
-        System.out.println(REPLY_OUTLINE);
-        System.out.println(REPLY_INDENTATION + "Hello! I'm Duke");
-        System.out.println(REPLY_INDENTATION + "What can I do for you?");
-        System.out.println(REPLY_OUTLINE + "\n");
+        String reply = REPLY_OUTLINE + "\n"
+                + REPLY_INDENTATION + "Hello! I'm Duke\n"
+                + REPLY_INDENTATION + "What can I do for you?\n"
+                + REPLY_OUTLINE + "\n";
+        System.out.println(reply);
     }
 
     public static void add(String input) {
-        tasks.add(input);
+        tasks.add(new Task(input));
         System.out.println(REPLY_OUTLINE);
         System.out.println(REPLY_INDENTATION + "added: " + input);
         System.out.println(REPLY_OUTLINE + "\n");
+    }
+
+    public static void done(String input) {
+        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+        try {
+            tasks.get(index).markDone();
+
+            System.out.println(REPLY_OUTLINE);
+            System.out.println(REPLY_INDENTATION + "Nice! I've marked this task as done:");
+            System.out.println(REPLY_INDENTATION + "  " + tasks.get(index));
+            System.out.println(REPLY_OUTLINE + "\n");
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println(REPLY_OUTLINE);
+            System.out.println(REPLY_INDENTATION + "Sorry, I was not able to find the task.");
+            System.out.println(REPLY_OUTLINE + "\n");
+        }
+
+
     }
 
     public static void list() {
@@ -47,7 +67,11 @@ public class Duke {
                 list();
                 break;
             default:
-                add(input);
+                if (input.matches("done \\d+")) {
+                    done(input);
+                } else {
+                    add(input);
+                }
                 break;
         }
 
