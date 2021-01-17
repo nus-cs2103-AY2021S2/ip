@@ -46,7 +46,7 @@ public class Ellis {
         String[] split = input.split(" ",2);
         String command = split[0];
 
-        if (!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
+        if (split.length < 2 || (!command.equals("todo") && !command.equals("deadline") && !command.equals("event"))) {
             formatText("Did you have a stroke? I don't\n" +
                     " know what you want me to do.");
             return;
@@ -55,8 +55,9 @@ public class Ellis {
         if (command.equals("todo")) {
             Todo todo = new Todo(split[1]);
             lst.add(todo);
-            formatText("You got it! I added this task:\n"
-                + todo.toString());
+            formatText("You got it! I added this task:\n   "
+                + todo.toString()
+                + "\nNow you have " + lst.size() + " items.");
         } else {
             String[] separateDetails = split[1].split("/");
             String description = separateDetails[0];
@@ -64,13 +65,15 @@ public class Ellis {
             if (command.equals("deadline")) {
                 Deadline deadline = new Deadline(description, date);
                 lst.add(deadline);
-                formatText("You got it! I added this task:\n"
-                        + deadline.toString());
+                formatText("You got it! I added this task:\n   "
+                        + deadline.toString()
+                        + "\nNow you have " + lst.size() + " items.");
             } else if (command.equals("event")) {
                 Event event = new Event(description, date);
                 lst.add(event);
-                formatText("You got it! I added this task:\n"
-                        + event.toString());
+                formatText("You got it! I added this task:\n   "
+                        + event.toString()
+                        + "\nNow you have " + lst.size() + " items.");
             }
         }
     }
