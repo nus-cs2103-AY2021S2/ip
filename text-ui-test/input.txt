@@ -1,9 +1,11 @@
+list
 todo read book
+event
 event project meeting /at Mon 2-4pm
 deadline return book /by Sunday
-todo walk
 list
 done 1
-done 2
+done 4
+done 3
 list
 bye
