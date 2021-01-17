@@ -3,11 +3,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Ellis is a personal assistant chat bot that
+ * Duke is a personal assistant chat bot that
  * helps users to keep track of various things.
  * @author Damith C. Rajapakse, Jeffry Lum, Wu Weiming
  */
-public class Ellis {
+public class Duke {
     List<Task> lst = new ArrayList<>();
 
     /**
@@ -109,15 +109,15 @@ public class Ellis {
     }
 
     public static void main(String[] args) {
-        String logo = ".------..------..------..------..------.\n"
-                + "|E.--. ||L.--. ||L.--. ||I.--. ||S.--. |\n"
-                + "| (\\/) || :/\\: || :/\\: || (\\/) || :/\\: |\n"
-                + "| :\\/: || (__) || (__) || :\\/: || :\\/: |\n"
-                + "| '--'E|| '--'L|| '--'L|| '--'I|| '--'S|\n"
-                + "`------'`------'`------'`------'`------'\n";
+        String logo = ".------..------..------..------.\n"
+                + "|D.--. ||U.--. ||K.--. ||E.--. |\n"
+                + "| :/\\: || (\\/) || :/\\: || (\\/) |\n"
+                + "| (__) || :\\/: || :\\/: || :\\/: |\n"
+                + "| '--'D|| '--'U|| '--'K|| '--'E|\n"
+                + "`------'`------'`------'`------'";
 
         System.out.println("Hello, this is \n" + logo);
-        Ellis e = new Ellis();
+        Duke e = new Duke();
         e.run();
     }
 }
