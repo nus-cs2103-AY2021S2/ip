@@ -19,6 +19,11 @@ public class lists {
         public listItem markAsDone(){
             return new listItem(new inputCommand(this.task), true);
         }
+
+        @Override
+        public String toString() {
+            return (doneStatus == true ? "[X] " : "[ ] ") + this.task;
+        }
     }
 
     public lists(){
@@ -46,5 +51,11 @@ public class lists {
 
     public List<listItem> getDukeList(){
         return this.dukeList;
+    }
+
+    public void updateItemMutable(int index){
+        int correctIndex = index - 1;
+        listItem tempItem = this.dukeList.get(correctIndex).markAsDone();
+        this.dukeList.set(correctIndex, tempItem);
     }
 }
