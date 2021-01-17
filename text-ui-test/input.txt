@@ -1,0 +1,7 @@
+todo read up on blockchain
+event dinner appointment /at Jewel
+deadline CS3244 Assignment 1 /by Saturday
+list
+done 3
+list
+bye
