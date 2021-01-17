@@ -16,11 +16,11 @@ public class Event extends Task {
 
     /**
      * toString method overriding the one in class Task
-     * @return the user-friendly String representation of the Event item
+     * @return a user-friendly String representation of the Event item
      */
     @Override
     public String toString() {
         String doneMark = isDone? "X": " ";
-        return String.format("[E][%s] %s", doneMark, name);
+        return String.format("[E][%s] %s (at: %s)", doneMark, name, period);
     }
 }

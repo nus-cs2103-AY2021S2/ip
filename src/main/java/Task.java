@@ -32,7 +32,7 @@ public class Task {
 
     /**
      * toString method overriding its predefined one
-     * @return the user-friendly String representation of the task
+     * @return a user-friendly String representation of the task
      */
     @Override
     public String toString() {

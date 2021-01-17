@@ -1,6 +1,5 @@
 /**
- * Provide methods for extracting information
- * from user input string
+ * Provide methods for extracting information from user input string
  */
 public class InputInformationExtractor {
     /**

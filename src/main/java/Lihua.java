@@ -1,4 +1,3 @@
-import java.text.Normalizer;
 import java.util.Scanner;
 
 /**
@@ -15,8 +14,8 @@ public class Lihua {
         // Print out welcome message
         printHello();
 
-        // Get user input, and echo the input
-        // If the input is the exit signal, exit the application
+        // Get user input, perform operations on it
+        // If the input received is the exit signal, the application exits
         String userInput = sc.nextLine();
         while (true) {
             if (userInput.equals(EXIT_SIGNAL)) {
@@ -31,8 +30,8 @@ public class Lihua {
 
     /**
      * Action upon the user input.
-     * E.g. Store a new task in the list, show the tasks in the list
-     * @param userInput user input string which is not the exit signal
+     * E.g. Add a new task to the list, show the tasks in the list
+     * @param userInput user input string, which is not the exit signal
      */
     private static void actionUpon(String userInput) {
         printHorizontalLine();
@@ -48,23 +47,23 @@ public class Lihua {
         } else if (FormatChecker.isEventFormat(userInput)) {
             tasks.addEvent(userInput);
         } else {
-            // Dummy case; to be modified
+            // Dummy case, to be modified
             System.out.println("Sorry, I do not understand your command :')");
         }
         printHorizontalLine();
     }
 
     private static void printHello() {
-        String welcome = "Hello! My name is Lihua.\n"
-                + "What can I do for you today?";
         printHorizontalLine();
+        String welcome = "Hello! My name is Lihua.\n"
+                + "What can I do for you today? ♪(^∇^*)";
         System.out.println(welcome);
         printHorizontalLine();
     }
 
     private static void printGoodbye() {
         printHorizontalLine();
-        System.out.println("Goodbye! Hope to see you again soon!");
+        System.out.println("Goodbye! Hope to see you again soon! (๑•̀ㅂ•́)و✧");
         printHorizontalLine();
     }
 

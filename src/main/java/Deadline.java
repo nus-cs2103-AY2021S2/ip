@@ -5,9 +5,9 @@ public class Deadline extends Task {
     private String by;
 
     /**
-     * Initialize a Deadline item with a given end date
+     * Initialize a Deadline item with a given end time
      * @param name The name of the deadline
-     * @param by The deadline of the item
+     * @param by The end time of the item
      */
     public Deadline(String name, String by) {
         super(name);
@@ -16,11 +16,11 @@ public class Deadline extends Task {
 
     /**
      * toString method overriding the one in class Task
-     * @return the user-friendly String representation of the Deadline item
+     * @return a user-friendly String representation of the Deadline item
      */
     @Override
     public String toString() {
         String doneMark = isDone? "X": " ";
-        return String.format("[D][%s] %s", doneMark, name);
+        return String.format("[D][%s] %s (by: %s)", doneMark, name, by);
     }
 }

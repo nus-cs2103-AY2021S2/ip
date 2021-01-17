@@ -12,7 +12,7 @@ public class ToDo extends Task {
 
     /**
      * toString method overriding the one in class Task
-     * @return the user-friendly String representation of the ToDo item
+     * @return a user-friendly String representation of the ToDo item
      */
     @Override
     public String toString() {

@@ -12,7 +12,7 @@ public class FormatChecker {
         try {
             String[] splited = userInput.split(" ");
             boolean isDone = splited[0].equals("done");
-            boolean hasInteger = isInteger((splited[1]));
+            boolean hasInteger = isInteger(splited[1]);
             return isDone && hasInteger;
         } catch (Exception e) {
             return false;
