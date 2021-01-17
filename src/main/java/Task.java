@@ -17,7 +17,7 @@ public class Task {
      * @return A cross symbol if task is incomplete, a tick symbol if task is completed.
      */
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
@@ -31,6 +31,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 }

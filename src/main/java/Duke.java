@@ -30,6 +30,17 @@ public class Duke {
                 case "list":
                     print(list);
                     break;
+                case "todo":
+                    addTask(new ToDo(parseInput[1]));
+                    break;
+                case "deadline":
+                    String[] parseDeadline = userInput.substring(9).split(" /by ");
+                    addTask(new Deadline(parseDeadline[0], parseDeadline[1]));
+                    break;
+                case "event":
+                    String[] parseEvent = userInput.substring(6).split(" /at ");
+                    addTask(new Event(parseEvent[0], parseEvent[1]));
+                    break;
                 case "done":
                     int taskIndex = Integer.parseInt(parseInput[1])-1;
                     markTaskAsDone(list.get(taskIndex));
@@ -67,18 +78,19 @@ public class Duke {
 
     private static void addTask(Task task) {
         list.add(task);
-        print("added: " + task);
+        print("Got it. I've added this task:\n\t\t" + task +
+                "\n\t  You have " +
+                list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
     }
 
     /**
-     * Mark a task as completed.
+     * Mark task as completed.
      * @param task Task entered by the user.
      */
 
     private static void markTaskAsDone(Task task) {
         task.markDone();
-        print("Nice! I have marked this task as done:\n\t\t "
-                + "[" + task.getStatusIcon() + "] " + task);
+        print("Nice! I have marked this task as done:\n\t\t " + task);
     }
 
     /**
@@ -102,8 +114,7 @@ public class Duke {
         System.out.println("\t  Your tasks:");
         int listCounter = 1;
         for (Task task : list) {
-            System.out.println("  \t  " + listCounter +
-                    ".[" + task.getStatusIcon() + "] " + task);
+            System.out.println("  \t  " + listCounter + "." + task);
             listCounter++;
         }
         System.out.println("\n\t____________________________________________________________\n");
