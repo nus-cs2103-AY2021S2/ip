@@ -1,6 +1,14 @@
+/**
+ * Represent a Deadline item, which is a child of Task
+ */
 public class Deadline extends Task {
     private String by;
 
+    /**
+     * Initialize a Deadline item with a given end date
+     * @param name The name of the deadline
+     * @param by The deadline of the item
+     */
     public Deadline(String name, String by) {
         super(name);
         this.by = by;

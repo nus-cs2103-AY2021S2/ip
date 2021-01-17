@@ -1,4 +1,11 @@
+/**
+ * Represent a ToDo item, which is a child of Task
+ */
 public class ToDo extends Task {
+    /**
+     * Initialize a ToDo item
+     * @param name The name of the item
+     */
     public ToDo(String name) {
         super(name);
     }
