@@ -2,8 +2,8 @@
  * Represent a task in the task list
  */
 public class Task {
-    private String name;
-    private boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
     /**
      * Initialize a new undone task
@@ -34,6 +34,7 @@ public class Task {
      * toString method overriding its predefined one
      * @return the user-friendly String representation of the task
      */
+    @Override
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[%s] %s", doneMark, name);
