@@ -7,7 +7,7 @@ public class Task {
         this.done = false;
     }
 
-    private void doTask() {
+    void doTask() {
         this.done = true;
     }
 
