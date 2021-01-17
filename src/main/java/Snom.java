@@ -12,11 +12,8 @@ public class Snom {
     private static ArrayList<Task> taskList = new ArrayList<>();
     
     public static void main(String[] args) {
-        String command = "";
-
         init();
-        execute(command);
-
+        execute();
         snomio.close();
     }
 
@@ -38,71 +35,52 @@ public class Snom {
      * This is the main execution code that will run all the respective command.
      * Commands will simply be validated by switch cases. Dont need exception for this.
      * Contents will be validated with exception before execution.
-     *
-     * @param command command to be executed
      */
-    public static void execute(String command){
+    public static void execute(){
+        String input;
+        CommandEnum command;
         do{
-            command = snomio.readWord();
+            input = snomio.readWord();
+            command = CommandEnum.getCommand(input);
             snomio.println("--------------------------------");
-            switch(command){
-                case "list":
-                    try {
+            try{
+                switch(command){
+                    case LIST:
                         printTaskList();
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                case "done":
-                    try {
-                        int[] taskNums = snomio.readContentWithNumbers(command);
-                        finishTask(taskNums);
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                case "delete":
-                    try {
-                        int[] taskNums = snomio.readContentWithNumbers(command);
-                        deleteTask(taskNums);
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                case "bye":
-                    snomio.println("Ciao! Hope to see you again soon!");
-                    break;
-                case "todo":
-                    String content;
-                    try {
-                        content = snomio.readContent(command);
+                        break;
+                    case FINISH:
+                        int[] finishList = snomio.readContentWithNumbers(command.name());
+                        finishTask(finishList);
+                        break;
+                    case DELETE:
+                        int[] deleteList = snomio.readContentWithNumbers(command.name());
+                        deleteTask(deleteList);
+                        break;
+                    case BYE:
+                        snomio.println("Ciao! Hope to see you again soon!");
+                        break;
+                    case TODO:
+                        String content;
+                        content = snomio.readContent(command.name());
                         addTask(new Todo(content));
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        String[] dlArr = snomio.readContentWithDate(command, "/by");
+                        break;
+                    case DEADLINE:
+                        String[] dlArr = snomio.readContentWithDate(command.name(), "/by");
                         addTask(new Deadline(dlArr[0], dlArr[1]));
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                case "event":
-                    try {
-                        String[] eArr = snomio.readContentWithDate(command, "/at");
+                        break;
+                    case EVENT:
+                        String[] eArr = snomio.readContentWithDate(command.name(), "/at");
                         addTask(new Event(eArr[0], eArr[1]));
-                    } catch (SnomException e) {
-                        snomio.println(e.getMessage());
-                    }
-                    break;
-                default:
-                    snomio.println("OOPS!!! I'm sorry, but I don't know what '" + command + "' means :-(");
+                        break;
+                    default:
+                        snomio.println("OOPS!!! I'm sorry, but I don't know what '" + input + "' means :-(");
+                }
+            }catch (SnomException e) {
+                snomio.println(e.getMessage());
             }
             snomio.println("--------------------------------");
             snomio.flush();
-        }while(!command.equalsIgnoreCase("bye"));
+        }while(command != CommandEnum.BYE);
     }
 
     /**
@@ -135,10 +113,10 @@ public class Snom {
     }
 
     /**
-     * This method mark the task by the given task number as done.
+     * This method mark the task by the given task number as finish.
      * Then prints out the complete messages.
      *
-     * @param taskNums       task number list that needs to mark as done
+     * @param taskNums       task number list that needs to mark as finish
      * @throws SnomException throws exception when the task number is not available in the task list.
      */
     public static void finishTask(int[] taskNums) throws SnomException{
@@ -148,8 +126,8 @@ public class Snom {
                 Task task = taskList.get(taskNo);
                 task.setStatus(true);
 
-                // Only print this for the first task marked as done
-                if(i == 0) snomio.println("Great Job! I've marked this task(s) as done:");
+                // Only print this for the first task marked as finish
+                if(i == 0) snomio.println("Great Job! I've marked this task(s) as finish:");
                 snomio.println("\t" + task.toString());
             }catch(IndexOutOfBoundsException e){
                 throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");

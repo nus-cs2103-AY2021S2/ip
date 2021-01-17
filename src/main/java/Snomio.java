@@ -78,12 +78,12 @@ public class Snomio extends PrintWriter {
         }else if(array.length < 2){
             throw new SnomException("Please enter a valid " + command + " date!");
         }else{
-            throw new SnomException("OOPS! You have entered more than ONE date, please try again!");
+            throw new SnomException("Oops! You have entered more than ONE date, please try again!");
         }
     }
 
     /**
-     * This method is exclusive to read the content of the commands with number list (done, delete)
+     * This method is exclusive to read the content of the commands with number list (finish, delete)
      *
      * @param command        command to be executed
      * @return               a number list for command to be executed
@@ -91,10 +91,14 @@ public class Snomio extends PrintWriter {
      */
     public int[] readContentWithNumbers(String command) throws SnomException{
         int[] nums = new int[tokenizer.countTokens()];
-        for(int i = 0; i < nums.length; i++){
-            nums[i] = this.readInt();
+        if(nums.length > 0){
+            for(int i = 0; i < nums.length; i++){
+                nums[i] = this.readInt();
+            }
+            return nums;
+        }else{
+            throw new SnomException("Oops! Please at least give one task number to " + command + " a task");
         }
-        return nums;
     }
 
     /**
