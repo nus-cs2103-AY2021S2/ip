@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     private static final String BORDER = "-------------------------------------";
@@ -8,8 +10,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        Task[] tasks = new Task[100];
-        int numberOfTasks = 0;
+        List<Task> tasks = new ArrayList<>(100);
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -21,18 +22,18 @@ public class Duke {
                     return;
                 } else if (userInput.equals("list")) {
                     response.append("Here are the tasks in your list:\n");
-                    for (int i = 0; i < numberOfTasks; i++) {
-                        Task task = tasks[i];
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task task = tasks.get(i);
                         response.append(i + 1);
                         response.append(".");
                         response.append(task);
-                        if (i != numberOfTasks - 1) {
+                        if (i != tasks.size() - 1) {
                             response.append("\n");
                         }
                     }
                 } else if (userInput.startsWith("done")) {
                     int userChoice = Integer.valueOf(userInput.split(" ")[1]);
-                    Task task = tasks[userChoice - 1];
+                    Task task = tasks.get(userChoice - 1);
                     task.markComplete();
                     response.append("Nice! I've marked this task as done:\n");
                     response.append(task);
@@ -40,11 +41,11 @@ public class Duke {
                         userInput.startsWith("todo") ||
                         userInput.startsWith("deadline")) {
                     Task task = Task.parseTask(userInput);
-                    tasks[numberOfTasks++] = task;
+                    tasks.add(task);
                     response.append("Got it. I've added this task:\n  added: ");
                     response.append(task);
                     response.append("\nNow you have ");
-                    response.append(numberOfTasks);
+                    response.append(tasks.size());
                     response.append(" tasks in the list.");
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
