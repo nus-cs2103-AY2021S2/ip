@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Controller {
     private final static String INDENT = "\t";
     private final static String NEWLINE = System.lineSeparator();
-    private final static String LINE = INDENT + "__________________________________" + NEWLINE;
+    private final static String LINE = INDENT + "__________________________________________________"
+            + "______________" + NEWLINE;
     private final static String GREETING = INDENT + " Hello! I'm Duke\n\t What can I do for you?"
             + NEWLINE;
     private final static String ENDDUKE = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
@@ -33,12 +34,17 @@ public class Controller {
     }
 
     private void handleInput(String input) {
-        if (input.startsWith("done")) {
-            doneTask(input);
-        } else if(input.equals("list")) {
-            printList();
-        } else {
-            addTask(input);
+        try {
+            if (input.startsWith("done")) {
+                doneTask(input);
+            } else if (input.equals("list")) {
+                printList();
+            } else {
+                addTask(input);
+            }
+        } catch (Exception e) {
+            String output = String.format(INDENT + " %s", e);
+            System.out.println(output);
         }
     }
 
@@ -52,23 +58,53 @@ public class Controller {
     }
 
     private void addTask(String task) {
-        Task t;
-        if (task.startsWith("todo")) {
-            t = new Todo(task.substring(5));
-        } else if (task.startsWith("deadline")) {
-            task = task.substring(9);
-            t = new Deadline(task.split("/"));
-        } else if (task.startsWith("event")) {
-            task = task.substring(6);
-            t = new Event(task.split("/"));
-        } else {
-            t = new Todo("");
+        try {
+            Task t;
+            if (task.startsWith("todo")) {
+                t = createTodo(task);
+            } else if (task.startsWith("deadline")) {
+                t = createDeadline(task);
+            } else if (task.startsWith("event")) {
+                t = createEvent(task);
+            } else {
+                throw new DukeNoDescriptionException("unknown");
+            }
+            list.add(t);
+            String output = String.format(INDENT + " Got it. I've added this task:" + NEWLINE
+                            + INDENT + INDENT + " %s" + NEWLINE + INDENT + "Now you have %d tasks "
+                            + "in the list."
+                    , t, list.size());
+            System.out.println(output);
+        } catch (DukeNoDescriptionException e) {
+            String output = String.format(INDENT + " %s", e);
+            System.out.println(output);
         }
-        list.add(t);
-        String output = String.format(INDENT + " Got it. I've added this task:" + NEWLINE + INDENT
-                + INDENT + " %s" + NEWLINE + INDENT + "Now you have %d tasks in the list."
-                , t, list.size());
-        System.out.println(output);
+    }
+
+    private Todo createTodo(String task) throws DukeNoDescriptionException {
+        if (task.length() < 6) {
+            throw new DukeNoDescriptionException("todo");
+        } else {
+            return new Todo(task.substring(5));
+        }
+    }
+
+    private Deadline createDeadline(String task) throws DukeNoDescriptionException {
+        if (task.length() < 10) {
+            throw new DukeNoDescriptionException("deadline");
+        } else {
+            task = task.substring(9);
+            return new Deadline(task.split("/"));
+        }
+    }
+
+    private Event createEvent(String task) throws DukeNoDescriptionException {
+        if (task.length() < 7) {
+            throw new DukeNoDescriptionException("event");
+        } else {
+            task = task.substring(6);
+            return new Event(task.split("/"));
+        }
     }
 
     private void printList() {
