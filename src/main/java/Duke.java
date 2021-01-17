@@ -15,6 +15,7 @@ public class Duke {
         System.out.println(INDENT + "What can I do for you?");
         System.out.println(BORDER + "\n");
 
+        ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner sc = new Scanner(System.in);
         while(true) {
             String msg = sc.next();
@@ -23,9 +24,16 @@ public class Duke {
                 System.out.println(INDENT + "Bye. Hope to see you again!");
                 System.out.println(BORDER + "\n");
                 break;
-            } else {
+            } else if(msg.equals("list")){
                 System.out.println(BORDER);
-                System.out.println(INDENT + msg);
+                for(int i = 0; i < tasks.size(); i++) {
+                    System.out.println(INDENT + (i+1)  + ". " + tasks.get(i).getName());
+                }
+                System.out.println(BORDER + "\n");
+            } else {
+                tasks.add(new Task(msg));
+                System.out.println(BORDER);
+                System.out.println(INDENT + "added: " + msg);
                 System.out.println(BORDER + "\n");
             }
         }
