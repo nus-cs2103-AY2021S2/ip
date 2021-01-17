@@ -8,22 +8,33 @@ You are now in the presence of
 This is BLARB.
 You may speak.
 
-> Todo what?
+> Affirmative. I've added this task:
+ [T][✘] curl up and cry
+Now you have 1 tasks in the list.
 
-> Someone's having trouble with deadlines.
+> Affirmative. I've added this task:
+ [D][✘] SWE IP (by: Thursday)
+Now you have 2 tasks in the list.
 
-> Type the deadline, then give the time using "/by".
+> Affirmative. I've added this task:
+ [E][✘] barhopping (at: Clarke Quay)
+Now you have 3 tasks in the list.
 
-> Tell me the event!
+> Here are your tasks:
 
-> Type the event, then give the time using "/at".
+1. [T][✘] curl up and cry
+2. [D][✘] SWE IP (by: Thursday)
+3. [E][✘] barhopping (at: Clarke Quay)
 
-> I have detailed files on human anatomy, but not blah.
+> The task is terminated:
+[E][✘] barhopping (at: Clarke Quay)
 
-> What have you done! More specific!
+> I've marked this task as done:
+[T][✓] curl up and cry
 
-> There is no such task.
+> Here are your tasks:
 
-> Done what now? I don't understand
+1. [T][✓] curl up and cry
+2. [D][✘] SWE IP (by: Thursday)
 
 > Hasta la vida, baby.

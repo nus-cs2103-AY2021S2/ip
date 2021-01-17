@@ -44,11 +44,25 @@ public class Blarb {
      * Changes the indexed task to a completed state.
      * @param index The index of the task.
      */
-    private void done(Integer index) {
+    private void done(int index) {
         try {
             list.get(index).markAsDone();
             String done = "I've marked this task as done:\n%s";
             blurt(String.format(done, list.get(index)));
+        } catch (IndexOutOfBoundsException ex) {
+            blurt("There is no such task.");
+        }
+    }
+
+    /**
+     * Delete the indexed task.
+     * @param index The index of the task.
+     */
+    private void delete(int index) {
+        try {
+            String delete = "The task is terminated:\n%s";
+            blurt(String.format(delete, list.get(index)));
+            list.remove(index);
         } catch (IndexOutOfBoundsException ex) {
             blurt("There is no such task.");
         }
@@ -89,6 +103,15 @@ public class Blarb {
                 blurt("What have you done! More specific!");
             } catch (NumberFormatException ex) {
                 blurt("Done what now? I don't understand");
+            }
+        } else if (tokens[0].equalsIgnoreCase("delete")) {
+            try {
+                int idx = Integer.parseInt(tokens[1]) - 1;
+                delete(idx);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                blurt("What do you want to hide?");
+            } catch (NumberFormatException ex) {
+                blurt("You can't delete your past.");
             }
         } else if (tokens[0].equalsIgnoreCase("todo")) {
             try {
