@@ -33,7 +33,7 @@ public class Todos {
             System.out.print("----");
             System.out.println(todos.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, the item id you specified is not valid." +
+            System.out.println("Sorry, the item id you specified is not valid. " +
                     "Try enter \'list\' to see the range of id you can enter.");
         }
     }
@@ -44,8 +44,7 @@ public class Todos {
     public void printList() {
         System.out.println("These are the tasks in your list so far:");
         for (int i = 1; i <= todos.size(); i++) {
-            String doneMark = todos.get(i - 1).isDone()? "X": " ";
-            System.out.println(String.format("%d.[%s] %s", i, doneMark, todos.get(i - 1)));
+            System.out.println(String.format("%d.%s", i, todos.get(i - 1)));
         }
     }
 }
