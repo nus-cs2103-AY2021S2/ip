@@ -1,15 +1,12 @@
 public class Task {
-    private final String name;
-    private final boolean done;
+    protected final String name;
+    protected final TaskType type;
+    protected boolean done;
 
-    Task(String name) {
+    Task(String name, TaskType type) {
         this.name = name;
         this.done = false;
-    }
-
-    Task(String name, boolean done) {
-        this.name = name;
-        this.done = done;
+        this.type = type;
     }
 
 
@@ -17,7 +14,17 @@ public class Task {
         return name;
     }
 
+    public void markDone() {
+        done = true;
+    }
+
     public boolean getDone() {
         return done;
+    }
+
+    @Override
+    public String toString() {
+        String returnString = "[" + type.getType() + "][" + (done ? "X" : " ") + "] ";
+        return returnString + name;
     }
 }
