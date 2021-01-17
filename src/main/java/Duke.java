@@ -73,6 +73,13 @@ public class Duke {
         System.out.println("   " + t);
     }
 
+    public static void deleteTask(int id) {
+        Task t = tasks.get(id - 1);
+        tasks.remove(id - 1);
+        echo("I deleted the following task!");
+        System.out.println("   " + t);
+    }
+
     public static void parse(String[] input) throws DukeInvalidCommandException, DukeInvalidArgumentException {
         String command = input[0];
         String[] args = Arrays.copyOfRange(input, 1, input.length);
@@ -90,6 +97,9 @@ public class Duke {
             addDeadline(args);
         } else if (command.equals("event")) {
             addEvent(args);
+        } else if (command.equals("delete")) {
+            int id = Integer.parseInt(input[1]);
+            deleteTask(id);
         } else {
             throw new DukeInvalidCommandException();
         }
