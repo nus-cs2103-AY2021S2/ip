@@ -18,7 +18,7 @@ public class Duke {
         Task t = new Todo(task);
         tasks.add(t);
 
-        echo("I added this task to the task list!");
+        echo("I added this to-do to the task list!");
         System.out.println("   " + t);
     }
 
@@ -31,7 +31,7 @@ public class Duke {
         Task t = new Deadline(name, timestamp);
         tasks.add(t);
 
-        echo("I added this task to the task list!");
+        echo("I added this deadline to the task list!");
         System.out.println("   " + t);
     }
 
@@ -44,7 +44,7 @@ public class Duke {
         Task t = new Event(name, timestamp);
         tasks.add(t);
 
-        echo("I added this task to the task list!");
+        echo("I added this event to the task list!");
         System.out.println("   " + t);
     }
 
