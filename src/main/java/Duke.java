@@ -48,7 +48,6 @@ public class Duke {
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
-            System.out.println(cmd);
             System.out.println(printLine());
             if (cmd.equals("list")) {
                 taskList.displayTasks();
@@ -70,35 +69,60 @@ public class Duke {
         return taskList;
     }
 
+    //Error handling for some of the Level-4 Tasks.
     public static TaskList performChildTask(TaskList taskList, String cmd) {
         String task = new String();
-        System.out.println("Got it. I've added this task: ");
-        if (cmd.contains("todo")) {
-            task = cmd.substring(5);
-            ToDo newToDo = new ToDo(task);
-            taskList.addTask(newToDo);
-            System.out.println(newToDo);
-        } else if (cmd.contains("deadline")) {
-            int seg = cmd.indexOf("/");
-            task = cmd.substring(9, seg);
-            String by = cmd.substring(seg + 4);
-            Deadline newDeadline = new Deadline(task, by);
-            taskList.addTask(newDeadline);
-            System.out.println(newDeadline);
-        } else if (cmd.contains("event")) {
-            int seg = cmd.indexOf("/");
-            task = cmd.substring(6, seg);
-            String at = cmd.substring(seg + 4);
-            Event newEvent = new Event(task, at);
-            taskList.addTask(newEvent);
-            System.out.println(newEvent);
-        } else {
-            taskList.addTask(new Task(cmd));
-            System.out.println("added: " + cmd);
+        try {
+            if (cmd.contains("todo")) {
+                if(cmd.length() > 4) {
+                    task = cmd.substring(5);
+                }
+                if(task.equals("")){
+                    throw new DukeException(" ☹ OOPS!!! " +
+                        "The description of a todo cannot be empty.");
+                }
+                ToDo newToDo = new ToDo(task);
+                taskList.addTask(newToDo);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newToDo);
+            } else if (cmd.contains("deadline")) {
+                int seg = cmd.indexOf("/");
+                if(cmd.length() > 8 && seg != -1) {
+                    task = cmd.substring(9, seg);
+                }
+                if(task.equals("")){
+                    throw new DukeException(" ☹ OOPS!!! " +
+                        "The description of a deadline cannot be empty.");
+                }
+                String by = cmd.substring(seg + 4);
+                Deadline newDeadline = new Deadline(task, by);
+                taskList.addTask(newDeadline);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newDeadline);
+            } else if (cmd.contains("event")) {
+                int seg = cmd.indexOf("/");
+                if(cmd.length() > 5 && seg != -1) {
+                    task = cmd.substring(6, seg);
+                } else if (task.equals("")) {
+                    throw new DukeException(" ☹ OOPS!!! " +
+                        "The description of a event cannot be empty.");
+                }
+                String at = cmd.substring(seg + 4);
+                Event newEvent = new Event(task, at);
+                taskList.addTask(newEvent);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println(newEvent);
+            } else {
+                throw new
+                    DukeException("☹ OOPS!!! I'm sorry, " +
+                    "but I don't know what that means :-(");
+            }
+            System.out.println("Now you have "
+                + taskList.getSize()
+                + " tasks in the list.");
+        } catch (DukeException de) {
+            System.out.println(de.getMessage());
         }
-        System.out.println("Now you have "
-            + taskList.getSize()
-            + " tasks in the list.");
         return taskList;
     }
 }
