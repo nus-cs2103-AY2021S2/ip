@@ -1,61 +1,76 @@
-import java.io.*;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
 
-    public static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    public static Scanner sc = new Scanner(System.in);
     public static List<Task> database = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Prints greeting
         printGreeting();
 
         // Ask for commands
         boolean isExiting = false;
         while (true) {
-            String[] inputArr = br.readLine().split(" ");
-            String command = inputArr[0];
+            String command = sc.next();
             printHorizontalLine();
             switch (command) {
                 case "list":
                     if (database.isEmpty()) {
-                        pw.println("You do not have anything to do at the moment!");
+                        System.out.println("You do not have anything to do at the moment!");
                     } else {
-                        pw.println("Here are the tasks in your list:");
+                        System.out.println("Here are the tasks in your list:");
                         for (Task task : database) {
-                            pw.printf("%d.[%s] %s\n", task.getIndex(),
-                                    (task.isDone() ? "X" : " "), task.getName());
+                            System.out.printf("%d.%s\n", task.getIndex(), task.toString());
                         }
                     }
                     break;
+                case "todo":
+                    String toDoTaskName = sc.nextLine().strip();
+                    ToDoTask toDoTask = new ToDoTask(toDoTaskName);
+                    database.add(toDoTask);
+                    printAddedTask(toDoTask);
+                    break;
+                case "deadline":
+                    String[] deadlineInputArr = sc.nextLine().split("/by");
+                    String deadlineTaskName = deadlineInputArr[0].strip();
+                    String deadline = deadlineInputArr[1].strip();
+                    DeadlineTask deadlineTask = new DeadlineTask(deadlineTaskName, deadline);
+                    database.add(deadlineTask);
+                    printAddedTask(deadlineTask);
+                    break;
+                case "event":
+                    String[] eventInputArr = sc.nextLine().split("/at");
+                    String eventTaskName = eventInputArr[0].strip();
+                    String eventTime = eventInputArr[1].strip();
+                    EventTask eventTask = new EventTask(eventTaskName, eventTime);
+                    database.add(eventTask);
+                    printAddedTask(eventTask);
+                    break;
                 case "done":
-                    int index = Integer.parseInt(inputArr[1]);
+                    String doneInput = sc.nextLine().strip();
+                    int index = Integer.parseInt(doneInput);
                     Task task = database.get(index - 1);
                     task.completeTask();
-                    pw.println("Nice! I've marked this task as done:");
-                    pw.printf("  [X] %s\n", task.getName());
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.printf("  [X] %s\n", task.getName());
                     break;
                 case "bye":
                     isExiting = true;
                     break;
                 default:
-                    String taskName = String.join(" ", inputArr);
-                    Task newTask = new Task(taskName);
-                    database.add(newTask);
-                    printAddedTask(taskName);
+                    System.out.println("Please enter a valid command!!");
             }
             if (isExiting) {
                 break;
             }
             printHorizontalLine();
-            pw.flush();
         }
 
-        pw.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
-        pw.close();
     }
 
     public static void printGreeting() {
@@ -65,49 +80,21 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        pw.printf("Hello! I'm \n%s\nWhat can I do for you?\n", logo);
+        System.out.printf("Hello! I'm \n%s\nWhat can I do for you?\n", logo);
         printHorizontalLine();
-        pw.flush();
     }
 
     public static void printHorizontalLine() {
         for (int i = 0; i < 60; i++) {
-            pw.print('-');
+            System.out.print('-');
         }
-        pw.println();
+        System.out.println();
     }
 
-    public static void printAddedTask(String str) {
-        pw.printf("Added task: %s\n", str);
-    }
-}
-
-class Task {
-    private static int count = 1;
-    private int index;
-    private String name;
-    private boolean isCompleted;
-
-    public Task(String name) {
-        this.index = count;
-        count++;
-        this.name = name;
-        this.isCompleted = false;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isDone() {
-        return isCompleted;
-    }
-
-    public void completeTask() {
-        this.isCompleted = true;
+    public static void printAddedTask(Task task) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task.toString());
+        System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
 }
+
