@@ -27,15 +27,15 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         display("Hello! I'm Duke\nWhat can I do for you?");
         while (sc.hasNextLine()) {
-            String command = sc.nextLine();
-            if (command.equals("bye")) {
+            String[] command = sc.nextLine().split(" ");
+            if (command[0].equals("bye")) {
                 display("Bye. Hope to see you again soon!");
                 return;
-            } else if (command.equals("list")) {
+            } else if (command[0].equals("list")) {
                 displayList();
             } else {
-                list.add(command);
-                display("added: " + command);
+                list.add(command[0]);
+                display("added: " + command[0]);
             }
         }
     }
