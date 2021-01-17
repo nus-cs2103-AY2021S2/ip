@@ -7,7 +7,7 @@ public class Duke {
         printResponse(getWelcomeMsg());
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> taskLst = new ArrayList<>();
+        ArrayList<Task> taskLst = new ArrayList<>();
         boolean isExited = false;
 
         while (true) {
