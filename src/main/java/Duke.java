@@ -4,22 +4,12 @@ public class Duke {
 
     static void display(String str) {
         String[] strings = str.split("\n");
-        ArrayList<String> displayedStrings = new ArrayList<>();
-        int longest = 0;
 
+        System.out.println("    " + "___________________________________________________________________");
         for (String s : strings) {
-            if (s.length() > longest) longest = s.length();
-            displayedStrings.add("    | " + s);
+            System.out.println("    " + s);
         }
-
-        String border = "     " + "-".repeat(longest + 2);
-        System.out.println(border);
-
-        for (String s : displayedStrings) {
-            String rightSpace = " ".repeat(longest - s.length() + 7);
-            System.out.println(s + rightSpace + "|");
-        }
-        System.out.println(border);
+        System.out.println("    " + "___________________________________________________________________");
     }
 
     public static void main(String[] args) {
