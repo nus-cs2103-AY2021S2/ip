@@ -1,6 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
+
+    /**
+     * An application that reads user inputs and echoes back to them.
+     * Exit the program by entering "bye".
+     */
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -18,19 +26,37 @@ public class Duke {
         exit();
     }
 
-    public static void greet() {
+    /**
+     * Greets the user when he/she starts the application.
+     */
+
+    private static void greet() {
         print("Hello! I'm Duke.\n\t  How can I help you?");
     }
 
-    public static void echo(String message) {
+    /**
+     * Echoes the user input.
+     * @param message the message to echo back to the user.
+     */
+
+    private static void echo(String message) {
         print(message);
     }
 
-    public static void exit() {
+    /**
+     * Says goodbye to the user when he/she exits the application.
+     */
+
+    private static void exit() {
         print("Goodbye. See you later!");
     }
 
-    public static void print(String message) {
+    /**
+     * Formats the user input or welcome/exit message and print it.
+     * @param message the user input or welcome/exit message
+     */
+
+    private static void print(String message) {
         String horizLine = "\n\t____________________________________________________________\n";
         System.out.println(horizLine + "\t  " + message + horizLine);
     }
