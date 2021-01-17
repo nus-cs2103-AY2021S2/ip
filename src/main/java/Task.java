@@ -18,4 +18,9 @@ public class Task {
     public void markDone() {
         isDone = true;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s\n", getStatusIcon(), getContent());
+    }
 }

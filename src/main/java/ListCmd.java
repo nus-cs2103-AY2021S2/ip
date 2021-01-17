@@ -12,7 +12,7 @@ public class ListCmd implements Command {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lst.size(); i++) {
             Task task = lst.get(i);
-            sb.append(String.format("%d. [%s] %s\n", i + 1, task.getStatusIcon(), task.getContent()));
+            sb.append(String.format("%d. %s", i + 1, task.toString()));
         }
         return sb.toString();
     }

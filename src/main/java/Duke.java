@@ -36,9 +36,14 @@ public class Duke {
                     DoneCmd doneCmd = new DoneCmd(taskLst);
                     resp = doneCmd.process(cmdArgs);
                     break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
+                    resp = addCmd.process(cmdArgs);
+                    break;
                 default:
-                    AddCmd addCmd = new AddCmd(taskLst);
-                    resp = addCmd.process(input);
+                    resp = "Invalid cmd";
                     break;
             }
 
