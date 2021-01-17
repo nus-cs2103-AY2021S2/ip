@@ -37,7 +37,7 @@ public class Duke {
             } else {
                 Task task = Task.parseTask(userInput);
                 tasks[numberOfTasks++] = task;
-                response.append("Got it. I've added this task: \n  added: ");
+                response.append("Got it. I've added this task: \n  added:");
                 response.append(task);
                 response.append("\nNow you have ");
                 response.append(numberOfTasks);
