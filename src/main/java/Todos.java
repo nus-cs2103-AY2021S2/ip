@@ -1,5 +1,5 @@
 public class Todos extends Task {
-    public Todos(String input) {
+    public Todos(String input) throws EmptyTaskDukeException {
         super(input);
     }
 

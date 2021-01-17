@@ -3,10 +3,14 @@ public class Task {
     private String taskName;
     private boolean isTaskCompleted;
 
-    public Task(String input) {
-        this.taskName = input;
-        isTaskCompleted = false;
-        numOfTasks++;
+    public Task(String input) throws EmptyTaskDukeException {
+        if (input.replaceAll("\\s+","").equals("")) {
+            throw new EmptyTaskDukeException();
+        } else {
+            this.taskName = input;
+            isTaskCompleted = false;
+            numOfTasks++;
+        }
     }
 
     public String setDone() {

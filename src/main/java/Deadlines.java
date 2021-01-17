@@ -1,7 +1,7 @@
 public class Deadlines extends Task {
     private String dueBy;
     private static final String DUE_COMMAND = "/by";
-    public Deadlines(String input) {
+    public Deadlines(String input) throws EmptyTaskDukeException {
         super(getTaskNameFromInput(input));
         dueBy = getDueDateFromInput(input);
     }

@@ -44,17 +44,37 @@ public class Duke {
                             "\nPlease input a valid task number!");
                 }
             } else if (command.equals("todo")) {
-                Todos todos = new Todos(additionalText);
-                taskList.add(todos);
-                printTaskAddedMessage(todos);
+                try {
+                    Todos todos = new Todos(additionalText);
+                    taskList.add(todos);
+                    printTaskAddedMessage(todos);
+                } catch (EmptyTaskDukeException e) {
+                    System.out.println(formatMessage(e + ""));
+                }
             } else if (command.equals("deadline")) {
-                Deadlines deadlines = new Deadlines(additionalText);
-                taskList.add(deadlines);
-                printTaskAddedMessage(deadlines);
+                try {
+                    Deadlines deadlines = new Deadlines(additionalText);
+                    taskList.add(deadlines);
+                    printTaskAddedMessage(deadlines);
+                } catch (EmptyTaskDukeException e) {
+                    System.out.println(formatMessage(e + ""));
+                }
             } else if (command.equals("event")) {
-                Events events = new Events(additionalText);
-                taskList.add(events);
-                printTaskAddedMessage(events);
+                try {
+                    Events events = new Events(additionalText);
+                    taskList.add(events);
+                    printTaskAddedMessage(events);
+                } catch (EmptyTaskDukeException e) {
+                    System.out.println(formatMessage(e + ""));
+                }
+            } else if (command.equals("help")) {
+                String allCommands = "todo\n" +
+                        "deadline *text* /by *date*\n" +
+                        "event *text* /at *text*\n" +
+                        "done *number*\n" +
+                        "list\n" +
+                        "bye";
+                System.out.println(formatMessage(allCommands));
             } else {
                 // no valid command
                 System.out.println(formatMessage("Please enter a valid command! \n" +

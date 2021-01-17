@@ -1,7 +1,7 @@
 public class Events extends Task {
     private String dueAt;
     private static final String DUE_COMMAND = "/at";
-    public Events(String input) {
+    public Events(String input) throws EmptyTaskDukeException {
         super(getTaskNameFromInput(input));
         dueAt = getDueDateFromInput(input);
     }
