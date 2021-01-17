@@ -33,7 +33,7 @@ public class Duke {
                 System.out.println("----------------------------------------------");
                 String todo = "";
                 for (int i = 1; i < command.length; i++) {
-                    todo += command[i];
+                    todo += " " + command[i];
                 }
                 ToDoTask newTodo = new ToDoTask(todo);
                 col.add(newTodo);
