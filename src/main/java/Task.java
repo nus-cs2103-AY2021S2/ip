@@ -1,21 +1,17 @@
 /**
- * A {@code Task} contains an action and its completion status.
+ * {@code Task} contains an action and its completion status.
  */
 public class Task {
     private final String description;
-    private final boolean isDone;
-
-    private Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
+    private boolean isDone;
 
     /**
-     * Constructs a new uncompleted immutable {@code Task}.
+     * Constructs a new uncompleted  {@code Task}.
      * @param description The name of the task.
      */
     public Task(String description) {
-        this(description, false);
+        this.description = description;
+        this.isDone = false;
     }
 
     private String getStatusIcon() {
@@ -23,11 +19,10 @@ public class Task {
     }
 
     /**
-     * Create a completed version of the current Task.
-     * @return The completed version of the current Task.
+     * Toggles to completion status to completed.
      */
-    public Task markAsDone() {
-        return new Task(description, true);
+    public void markAsDone() {
+        isDone = true;
     }
 
     /**
