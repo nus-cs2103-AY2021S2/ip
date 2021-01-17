@@ -7,15 +7,17 @@ public class TaskList {
     taskList = new ArrayList<>();
   }
 
-  public void add(String task) {
-    taskList.add(new Task(task));
+  public void add(Task task) {
+    taskList.add(task);
     Duke.printLineBreak();
-    Duke.printIndented(String.format("added: %s", task));
+    Duke.printIndented("Got it. I've added this task:");
+    Duke.printIndented(String.format("  %s", task));
+    Duke.printIndented(String.format("Now you have %d tasks in the list", taskList.size()));
     Duke.printLineBreak();
   }
 
   public void markDone(int idx) {
-    taskList.get(idx-1).isDone = true;
+    taskList.get(idx-1).setDone();
     Duke.printLineBreak();
     Duke.printIndented("Nice! I've marked this task as done");
     Duke.printIndented(taskList.get(idx-1).toString());

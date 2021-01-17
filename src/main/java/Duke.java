@@ -7,16 +7,30 @@ public class Duke {
         greeting();
         
         TaskList taskList = new TaskList();
-        String task = sc.nextLine();
-        while (!task.equals("bye")) {
-            if (task.equals("list")) {
+        String userInput = sc.nextLine();
+        while (!userInput.equals("bye")) {
+            if (userInput.equals("list")) {
                 taskList.show();
-            } else if (task.split(" ")[0].equals("done")) {
-                taskList.markDone(Integer.parseInt(task.split(" ")[1]));
             } else {
-                taskList.add(task);
+                String[] splitInput = userInput.split(" ", 2);
+                switch (splitInput[0]) {
+                    case "done":
+                        taskList.markDone(Integer.parseInt(splitInput[1]));
+                        break;
+                    case "todo":
+                        taskList.add(new Todo(splitInput[1]));
+                        break;
+                    case "deadline":
+                        String[] splitDeadlineInput = splitInput[1].split(" /by ");
+                        taskList.add(new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]));
+                        break;
+                    case "event":
+                        String[] splitEventInput = splitInput[1].split(" /at ");
+                        taskList.add(new Event(splitEventInput[0], splitEventInput[1]));
+                        break;
+                }
             }
-            task = sc.nextLine();
+            userInput = sc.nextLine();
         }
         exit();
         sc.close();
