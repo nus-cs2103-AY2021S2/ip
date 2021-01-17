@@ -16,7 +16,7 @@ public class DukeBot {
         String command = text.split(" ")[0];
         String commandOutput = "";
         Task task;
-        String taskName;
+        String taskName, date;
         commandOutput += "\t ";
 
         switch (command) {
@@ -41,10 +41,19 @@ public class DukeBot {
                 commandOutput += "Nice! I've marked this task as done:\n"
                         + "\t " + task.toString();
                 break;
+            case "event":
+                taskName = text.split(" /at")[0].replaceFirst("event ", "");
+                date = text.split(" /at ")[1];
+                task = new Event(taskName, date);
+                taskList.add(task);
+                commandOutput += "Got it. I've added this task: \n\t\t "
+                        + task.toString()
+                        + "\n\t Now you have " + (taskList.size() - 1) + " tasks in the list.\n";
+                break;
             case "deadline":
                 taskName = text.split(" /by")[0].replaceFirst("deadline ", "");
-                String deadline = text.substring(text.lastIndexOf(" ") + 1);
-                task = new Deadline(taskName, deadline);
+                date = text.split(" /by ")[1];
+                task = new Deadline(taskName, date);
                 taskList.add(task);
                 commandOutput += "Got it. I've added this task: \n\t\t "
                         + task.toString()
