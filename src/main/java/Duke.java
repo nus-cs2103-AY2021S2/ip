@@ -41,7 +41,7 @@ public class Duke {
     public static void main(String[] args) {
         todoList = new ArrayList<>();
         Scanner sc =  new Scanner(System.in);
-        System.out.println("Greetings. My name is I-01B, but you may call me CHEF. What can I assist you with?");
+        System.out.println("Greetings. My name is I-01B, but you may call me DUKE. What can I assist you with?");
         while (sc.hasNext()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
