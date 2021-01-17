@@ -25,7 +25,7 @@ public class Duke {
     }
 
     static void displayAddedTask(Task task) {
-        display("Got it. I've added this task: \n  "
+        display("Got it. I've added this task:\n  "
                 + task
                 + "Now you have "
                 + tasks.size()
@@ -36,39 +36,43 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         display("Hello! I'm Duke\nWhat can I do for you?");
-
         while (sc.hasNextLine()) {
-            String original = sc.nextLine();
-            String[] command = original.split(" ");
-            Task task;
-            switch (command[0]) {
-                case "bye":
-                    display("Bye. Hope to see you again soon!");
-                    return;
-                case "list":
-                    displayAllTasks();
-                    break;
-                case "done":
-                    Task toMarkDone = tasks.get(Integer.parseInt(command[1]) - 1);
-                    toMarkDone.markDone();
-                    display("Nice! I've marked this task as done:\n  " + toMarkDone);
-                    break;
-                case "todo":
-                    task = new Todo(original);
-                    tasks.add(task);
-                    displayAddedTask(task);
-                    break;
-                case "deadline":
-                    task = new Deadline(original);
-                    tasks.add(task);
-                    displayAddedTask(task);
-                    break;
-                case "event":
-                    task = new Event(original);
-                    tasks.add(task);
-                    displayAddedTask(task);
-                    break;
-            }
+            String input = sc.nextLine();
+            if (input.equals("bye")) break;
+            respond(input);
+        }
+        display("Bye!");
+        sc.close();
+    }
+
+    public static void respond(String input) {
+        String[] command = input.split(" ");
+        Task task;
+        switch (command[0]) {
+            case "list":
+                displayAllTasks();
+                break;
+            case "done":
+                Task toMarkDone = tasks.get(Integer.parseInt(command[1]) - 1);
+                toMarkDone.markDone();
+                display("Nice! I've marked this task as done:\n  " + toMarkDone);
+                break;
+            case "todo":
+                task = new Todo(input);
+                tasks.add(task);
+                displayAddedTask(task);
+                break;
+            case "deadline":
+                task = new Deadline(input);
+                tasks.add(task);
+                displayAddedTask(task);
+                break;
+            case "event":
+                task = new Event(input);
+                tasks.add(task);
+                displayAddedTask(task);
+                break;
         }
     }
 }
+
