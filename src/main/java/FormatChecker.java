@@ -4,9 +4,9 @@
 public class FormatChecker {
 
     /**
-     * Check whether the user input string is in the format of getting item done
+     * Check whether the user input string is in the format of getting task done
      * @param userInput user input string
-     * @return true if the input string is in the format of getting item done
+     * @return true if the input string is in the format of getting task done
      */
     public static boolean isDoneFormat(String userInput) {
         String[] splited = userInput.split(" ");

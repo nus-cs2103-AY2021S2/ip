@@ -5,7 +5,7 @@ import java.util.Scanner;
  */
 public class Lihua {
     private static final String EXIT_SIGNAL = "bye";
-    private static Todos todos = new Todos();
+    private static Tasks tasks = new Tasks();
 
     public static void main(String[] args) {
         // Initialization phase
@@ -30,18 +30,18 @@ public class Lihua {
 
     /**
      * Action upon the user input.
-     * E.g. Store the user input to the list, show the items in the list
+     * E.g. Store a new task in the list, show the tasks in the list
      * @param userInput user input string which is not the exit signal
      */
     private static void actionUpon(String userInput) {
         printHorizontalLine();
         if (userInput.equals("list")) {
-            todos.printList();
+            tasks.printList();
         } else if (FormatChecker.isDoneFormat(userInput)) {
             Integer index = Integer.valueOf(userInput.split(" ")[1]);
-            todos.getItemDone(index);
+            tasks.getTaskDone(index);
         } else {
-            todos.addItem(userInput);
+            tasks.addTask(userInput);
             System.out.println(String.format("Added: %s", userInput));
         }
         printHorizontalLine();
