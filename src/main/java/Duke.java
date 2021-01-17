@@ -7,13 +7,12 @@ public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
 
     private static void introduction() {
-        String loading = "Hello from\n"
-                + " ____        _        \n"
+        String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  /\n"
-                + "|____/ \\,_|_|\\_\\___|\n";
-        System.out.println(loading);
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(logo);
         String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(welcomeMessage);
     }
@@ -56,15 +55,15 @@ public class Duke {
 
     private static void run() {
         introduction();
-        while (scanner.hasNext()) {
+        while (scanner.hasNextLine()) {
             String command = scanner.next();
-            String input = scanner.nextLine();
             if (command.equals(Commands.BYE.getCommand())) {
                 endProgram();
                 break;
             } else if (command.equals(Commands.LIST.getCommand())) {
                 printList();
             } else {
+                String input = scanner.nextLine();
                 String[] taskInputAndDate = input.split("/");
                 if (isDoneCommand(command)) {
                     try {
