@@ -17,17 +17,21 @@ public class Duke {
             // Listen to input
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
+            String command = formatCommand(input);
+            String additionalText = formatCommandText(input);
+            System.out.println(command);
+            System.out.println(additionalText);
 
             // Echoing the input
-            if (input.equals("bye")) {
+            if (command.equals("bye")) {
                 String byeMessage = "Goodbye, hope you had a great time!";
                 System.out.println(formatMessage(byeMessage));
                 isChatBotOnline = false;
-            } else if (input.equals("list")) {
+            } else if (command.equals("list")) {
                 System.out.println(formatMessage(getTaskListString(taskList)));
-            } else if (input.contains("done")) {
+            } else if (command.equals("done")) {
                 try {
-                    int taskNumber = Integer.parseInt(input.substring(5));
+                    int taskNumber = Integer.parseInt(additionalText);
                     int arrayNumber = taskNumber - 1;
                     Task task = taskList.get(arrayNumber);
                     String doneMessage = task.setDone();
@@ -41,28 +45,58 @@ public class Duke {
                             "\nError! Task number does not exist." +
                             "\nPlease input a valid task number!");
                 }
+            } else if (command.equals("todo")) {
+                Todos todos = new Todos(additionalText);
+                taskList.add(todos);
+                printTaskAddedMessage(todos);
+            } else if (command.equals("deadline")) {
+                Deadlines deadlines = new Deadlines(additionalText);
+                taskList.add(deadlines);
+                printTaskAddedMessage(deadlines);
+            } else if (command.equals("event")) {
+                Events events = new Events(additionalText);
+                taskList.add(events);
+                printTaskAddedMessage(events);
             } else {
-                Task newTask = new Task(input);
-                taskList.add(newTask);
-                System.out.println(formatMessage("Added: " + input));
+                // no valid command
+                System.out.println(formatMessage("Please enter a valid command! \n" +
+                        "Type help for a list of commands"));
             }
         }
     }
 
 
-    public static String formatMessage(String str) {
+    static String formatMessage(String str) {
         return "____________________________________________________________" +
                 "\n" + str + "\n" +
                 "____________________________________________________________\n";
     }
 
     // prints all of the tasks in the taskList
-    public static String getTaskListString(List<Task> taskList) {
-        String taskListString = "";
+    static String getTaskListString(List<Task> taskList) {
+        String taskListString = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             String taskString = (i + 1) + ". " + taskList.get(i);
             taskListString = taskListString + taskString + "\n";
         }
         return taskListString;
+    }
+
+    // extracts the command from the input
+    static String formatCommand(String input) {
+        return input.split(" ")[0];
+    }
+
+    // extracts the additional text after the command from the input
+    static String formatCommandText(String input) {
+        if (input.split(" ").length == 1) {
+            return "";
+        }
+        return input.substring(formatCommand(input).length() + 1);
+    }
+
+    static void printTaskAddedMessage(Task task) {
+        System.out.println(formatMessage("Got it. I've added this task: \n"
+                + task + "\n" + Task.getNumOfTasksString()));
     }
 }
