@@ -27,10 +27,15 @@ public class Todos {
      * @param index 1-based index number referring to the items in the list
      */
     public void getItemDone(int index) {
-        todos.get(index - 1).setDone(true);
-        System.out.println("Nice! I have marked this item as done: ");
-        System.out.print("----");
-        System.out.println(todos.get(index - 1));
+        try {
+            todos.get(index - 1).setDone(true);
+            System.out.println("Nice! I have marked this item as done: ");
+            System.out.print("----");
+            System.out.println(todos.get(index - 1));
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Sorry, the item id you specified is not valid." +
+                    "Try enter \'list\' to see the range of id you can enter.");
+        }
     }
 
     /**
