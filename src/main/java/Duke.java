@@ -30,15 +30,26 @@ public class Duke {
         return command.equals(Commands.DONE.getCommand());
     }
 
-    private static Task defineTask(String command, String[] taskInputAndDate) {
-        if (command.equals(TaskTypes.TODO.getType())) {
-            return new ToDo(taskInputAndDate[0].trim());
-        } else if (command.equals(TaskTypes.DEADLINE.getType())) {
-            return new Deadline(taskInputAndDate[0].trim(), taskInputAndDate[1].trim());
-        } else if (command.equals(TaskTypes.EVENT.getType())) {
-            return new Event(taskInputAndDate[0].trim(), taskInputAndDate[1].trim());
+    private static boolean checkValidCommand(String command) {
+        return command.equals(TaskTypes.TODO.getType()) || command.equals(TaskTypes.DEADLINE.getType())
+                || command.equals(TaskTypes.EVENT.getType());
+    }
+
+    private static Task defineTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
+            EmptyDescriptionException {
+        if (checkValidCommand(command)) {
+            if (taskInputAndDate[0].length() == 0) {
+                throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+            } else if (command.equals(TaskTypes.TODO.getType())) {
+                return new ToDo(taskInputAndDate[0]);
+            } else if (command.equals(TaskTypes.DEADLINE.getType())) {
+                return new Deadline(taskInputAndDate[0], taskInputAndDate[1]);
+            } else {
+                return new Event(taskInputAndDate[0], taskInputAndDate[1]);
+            }
         } else {
-            return null;
+            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" +
+                    "Please enter a valid command that starts with 'todo', 'deadline', 'event', 'list' or 'done'!");
         }
     }
 
@@ -53,6 +64,19 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n" + taskList.get(pos));
     }
 
+    private static void doneTask(String taskIndex) throws NumberFormatException, IndexOutOfBoundsException {
+        int pos = Integer.parseInt(taskIndex) - 1;
+        setTaskDone(pos);
+    }
+
+    private static void addTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
+            EmptyDescriptionException {
+        Task task = defineTask(command, taskInputAndDate);
+        taskList.add(task);
+        System.out.println("Got it. I've added this task:\n" + task);
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
     private static void run() {
         introduction();
         while (scanner.hasNextLine()) {
@@ -63,12 +87,12 @@ public class Duke {
             } else if (command.equals(Commands.LIST.getCommand())) {
                 printList();
             } else {
-                String input = scanner.nextLine();
-                String[] taskInputAndDate = input.split("/");
+                String taskInput = scanner.nextLine();
+                String[] taskInputAndDate = taskInput.split("/");
+                String taskDescription = taskInputAndDate[0].trim();
                 if (isDoneCommand(command)) {
                     try {
-                        int pos = Integer.parseInt(taskInputAndDate[0].trim()) - 1;
-                        setTaskDone(pos);
+                        doneTask(taskDescription);
                     } catch (NumberFormatException numEx) {
                         System.err.println("'done' is command word; please pass a numerical index or start your task"
                                 + " with another word!");
@@ -76,13 +100,10 @@ public class Duke {
                         System.err.println("Please pass a valid index!");
                     }
                 } else {
-                    Task t = defineTask(command, taskInputAndDate);
-                    if (t != null) {
-                        taskList.add(t);
-                        System.out.println("Got it. I've added this task:\n" + t);
-                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                    } else {
-                        System.err.println("Please enter a valid task command (todo, deadline, event, list, done, bye)!");
+                    try {
+                        addTask(command, taskInputAndDate);
+                    } catch (InvalidCommandException | EmptyDescriptionException e) {
+                        System.err.println(e.getMessage());
                     }
                 }
             }
