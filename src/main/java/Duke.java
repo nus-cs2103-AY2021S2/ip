@@ -1,11 +1,15 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
     public static void main(String[] args) {
         printResponse(getWelcomeMsg());
+
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> taskLst = new ArrayList<>();
         boolean isExited = false;
+
 
         while (true) {
             String input = sc.nextLine();
@@ -26,6 +30,10 @@ public class Duke {
                     ByeCmd byeCmd = new ByeCmd();
                     resp = byeCmd.process(cmdArgs);
                     isExited = true;
+                    break;
+                case "list":
+                    ListCmd listCmd = new ListCmd(taskLst);
+                    resp = listCmd.process(cmdArgs);
                     break;
                 default:
                     resp = processEcho(input);
