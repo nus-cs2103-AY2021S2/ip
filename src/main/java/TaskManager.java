@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TaskManager {
     private ArrayList<Task> list = new ArrayList<>(100);
 
-    public void add(String type, String task){
+    public void add(String type, String task) throws DukeException{
         if(type.equals("todo")){
             list.add(new ToDo(list.size() + 1, task));
         } else {
@@ -11,11 +11,11 @@ public class TaskManager {
             String deadline = task.split("/")[1].split(" ", 2)[1];
             if (type.equals("deadline")) {
                 list.add(new Deadline(list.size() + 1, description, deadline));
-            } else {
+            } else if (type.equals("event")) {
                 list.add(new Event(list.size() + 1, description, deadline));
             }
         }
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\n Now you have " +
+        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\nNow you have " +
         list.size() + " tasks in the list.");
     }
 
