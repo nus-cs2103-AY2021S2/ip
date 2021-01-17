@@ -8,22 +8,30 @@ public class Duke {
         System.out.println("Hey there! This is Kums");
         System.out.println("How can i help?");
         System.out.println("---------------------------------------");
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int listLength = 0;
         String command = br.readLine();
+        String[] arr = command.split(" ");
         System.out.println("---------------------------------------");
         while (!command.equals("bye")) {
-            if (!command.equals("list")) {
-                list[listLength] = (listLength + 1) + ". " + command;
-                listLength++;
+            if (arr[0].equals("done")) {
+                Task tobeDone = list[Integer.parseInt(arr[1]) - 1];
+                tobeDone.completed();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("    " + tobeDone);
+            }  else if (!command.equals("list")) {
+                Task task = new Task(command);
+                list[listLength++] = task;
                 System.out.println("added: " + command);
-            } else {
+            } else if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int i = 0;  i < listLength; i++) {
-                    System.out.println(list[i]);
+                    System.out.println( (i+1) + "."  + list[i]);
                 }
             }
             System.out.println("---------------------------------------");
             command = br.readLine();
+            arr = command.split(" ");
             System.out.println("---------------------------------------");
         }
         System.out.println("Bye. Hope to see you again soon!");
