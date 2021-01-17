@@ -1,6 +1,15 @@
 public class TaskManager {
-    public static int manage(Task[] list, String[] info, int listLength) {
+    public static int listLength = 0;
+
+    public static void manage(Task[] list, String[] info) throws DukeException {
+        int length = info.length;
         if (info[0].equals("done")) {
+            if (length == 1) {
+                throw new DukeException("OOPS! Task completed is not specified");
+            }
+            if (Integer.parseInt(info[1]) > listLength || Integer.parseInt(info[1]) <= 0) {
+                throw new DukeException("OOPS! There is no such specified task");
+            }
             Task tobeDone = list[Integer.parseInt(info[1]) - 1];
             tobeDone.completed();
             System.out.println("Nice! I've marked this task as done: ");
@@ -12,15 +21,24 @@ public class TaskManager {
             }
         } else {
             Task task = null;
-            System.out.println("Got it. I've added this task: ");
             if (info[0].equals("todo")) {
+                if (length == 1) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot be empty");
+                }
                 StringBuffer sb = new StringBuffer();
                 for (int i = 1; i < info.length; i++) {
                     sb.append(info[i]);
                     if (i != info.length - 1) { sb.append(" "); }
                 }
                 task = new ToDo(sb.toString());
-            } else {
+            } else if (info[0].equals("event") || info[0].equals("deadline")){
+                if (length == 1) {
+                    if (info[0].equals("event")) {
+                        throw new DukeException("OOPS! Specifics are needed for this event");
+                    } else {
+                        throw new DukeException("OOPS! Specifics are needed for this deadline");
+                    }
+                }
                 StringBuffer description = new StringBuffer();
                 StringBuffer dateAndTime = new StringBuffer();
                 boolean descriptionDone = false;
@@ -43,11 +61,13 @@ public class TaskManager {
                     task = new Deadline(description.toString(), dateAndTime.toString());
                 }
 
+            } else {
+                throw new DukeException("Sorry but I don't understand what that means! :-(");
             }
             list[listLength++] = task;
+            System.out.println("Got it. I've added this task: ");
             System.out.println("    " + task);
             System.out.println("Now you have " + (listLength) + " tasks in the list.");
         }
-        return listLength;
     }
 }

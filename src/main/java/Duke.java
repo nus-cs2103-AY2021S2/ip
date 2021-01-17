@@ -14,7 +14,11 @@ public class Duke {
         String[] arr = command.split(" ");
         System.out.println("---------------------------------------");
         while (!command.equals("bye")) {
-            listLength = TaskManager.manage(list, arr, listLength);
+            try {
+                TaskManager.manage(list, arr);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             System.out.println("---------------------------------------");
             command = br.readLine();
             arr = command.split(" ");
