@@ -64,6 +64,12 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
+    /**
+     * Adds a Todo task.
+     * @param command The description of the task.
+     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param count The current number of tasks stored inside the Task array.
+     */
     public static void todo(String command, Task[] tasks, int count) {
         tasks[count - 1] = new Todo(command);
         System.out.println("----------------------------------------------------------------------------------------");
@@ -72,6 +78,13 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
+    /**
+     * Adds a Deadline task.
+     * @param command The description of the task.
+     * @param by The deadline for the task to be completed.
+     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param count The current number of tasks stored inside the Task array.
+     */
     public static void deadline(String command, String by, Task[] tasks, int count) {
         tasks[count - 1] = new Deadline(command, by);
         System.out.println("----------------------------------------------------------------------------------------");
@@ -80,6 +93,13 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
+    /**
+     * Adds an Event task.
+     * @param command The description of the task.
+     * @param at The timing for the event.
+     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param count The current number of tasks stored inside the Task array.
+     */
     public static void event(String command, String at, Task[] tasks, int count) {
         tasks[count - 1] = new Event(command, at);
         System.out.println("----------------------------------------------------------------------------------------");
