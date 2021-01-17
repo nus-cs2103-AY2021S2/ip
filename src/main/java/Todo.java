@@ -5,13 +5,13 @@ import java.util.ArrayList;
  * Store all the todos in a list DS
  */
 public class Todo {
-    private List<String> todos;
+    private List<Item> todos;
 
     /**
      * Initialize the todo list with an empty ArrayList
      */
     public Todo() {
-        todos = new ArrayList<String>();
+        todos = new ArrayList<Item>();
     }
 
     /**
@@ -19,20 +19,29 @@ public class Todo {
      * @param item The item to be added to the todo list
      */
     public void addItem(String item) {
-        todos.add(item);
+        todos.add(new Item(item));
     }
 
     /**
      * Get the current todo list
      * @return The current todo list
      */
-    public List<String> getTodos() {
+    public List<Item> getTodos() {
         return todos;
     }
 
+    /**
+     * Print out the todo list in a user-friendly format
+     */
     public void printList() {
+        printIntro();
         for (int i = 1; i <= todos.size(); i++) {
-            System.out.println(String.format("%d. %s", i, todos.get(i - 1)));
+            String doneMark = todos.get(i - 1).isDone()? "X": " ";
+            System.out.println(String.format("%d.[%s] %s", i, doneMark, todos.get(i - 1)));
         }
+    }
+    
+    private void printIntro() {
+        System.out.println("These are the tasks in your list so far:");
     }
 }
