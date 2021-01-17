@@ -3,50 +3,28 @@ import java.util.List;
 
 public class lists {
     List<listItem> dukeList;
-    class listItem{
-        private final boolean doneStatus;
-        private final String task;
-        public listItem(inputCommand command){
-            this.task = command.getCommand();
-            this.doneStatus = false;
-        }
-
-        public listItem(inputCommand command, boolean isDone){
-            this.task = command.getCommand();
-            this.doneStatus = isDone;
-        }
-
-        public listItem markAsDone(){
-            return new listItem(new inputCommand(this.task), true);
-        }
-
-        @Override
-        public String toString() {
-            return (doneStatus == true ? "[X] " : "[ ] ") + this.task;
-        }
-    }
 
     public lists(){
         this.dukeList = new ArrayList<>();
     }
 
-    public lists(inputCommand command){
+    public lists(String task){
         this.dukeList = new ArrayList<listItem>();
-        dukeList.add(new listItem(command));
+        dukeList.add(new listItem(task));
     }
 
     public lists(List<listItem> inputList){
         this.dukeList = new ArrayList<listItem>(inputList);
     }
 
-    public lists addCommand(inputCommand command){
+    public lists addCommand(listItem task){
         List<listItem> tempList = new ArrayList<>(this.dukeList);
-        tempList.add(new listItem(command));
+        tempList.add(task);
         return new lists(tempList);
     }
 
-    public void addCommandMutable(inputCommand command){
-        this.dukeList.add(new listItem(command));
+    public void addCommandMutable(listItem task){
+        this.dukeList.add(task);
     }
 
     public List<listItem> getDukeList(){
