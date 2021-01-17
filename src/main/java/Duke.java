@@ -48,7 +48,7 @@ public class Duke {
                         markingDoneTask(task);
                     }
                 } catch (NumberFormatException e){ //just add a normal task
-                    addTask(command);
+                    handleIndexOutOfBoundTask();
                 }
             }
             else {
@@ -66,8 +66,44 @@ public class Duke {
 
     public static void addTask(String command){
         System.out.println(LINES);
-        list.add(new Task(command));
-        System.out.println("added: " + command);
+        if (command.startsWith("todo ")){
+            String description = command.substring(5);
+            Task task = new Todo(description);
+            list.add(task);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println("  " + task);
+            System.out.println("Now you have " + list.size() + " tasks in the list.");
+        } else if (command.startsWith("deadline ")){
+            String content = command.substring(9);
+            int byIndex = content.indexOf("/by");
+            if (byIndex == -1){
+                System.out.println("Invalid command for deadline! Try again");
+            } else {
+                String description = content.substring(0, byIndex - 1);
+                String by = content.substring(byIndex + 4);
+                Task task = new Deadline(description, by);
+                list.add(task);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            }
+        } else if (command.startsWith("event ")){
+            String content = command.substring(6);
+            int atIndex = content.indexOf("/at");
+            if (atIndex == -1){
+                System.out.println("Invalid command for event! Try again");
+            } else {
+                String description = content.substring(0, atIndex - 1);
+                String at = content.substring(atIndex + 4);
+                Task task = new Event(description, at);
+                list.add(task);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+            }
+        } else {
+            System.out.println("No such command. In order to add a new task, start a command with todo, deadline or event.");
+        }
         System.out.println(LINES);
         System.out.println();
     }
@@ -77,7 +113,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            System.out.println((i + 1) + ". [" + task.getStatusIcon() + "] " + task.getDescription());
+            System.out.println((i + 1) + ". " + task);
         }
         System.out.println(LINES);
         System.out.println();
@@ -94,7 +130,7 @@ public class Duke {
 
     public static void handleIndexOutOfBoundTask(){
         System.out.println(LINES);
-        System.out.println("No such task in the list");
+        System.out.println("Done command should be followed by a number between 1 and the number of tasks.");
         System.out.println(LINES);
         System.out.println();
     }
