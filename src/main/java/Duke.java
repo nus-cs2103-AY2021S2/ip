@@ -4,20 +4,26 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         boolean shouldRun = true;
 
         greet();
 
         while (shouldRun) {
             String input = scanner.nextLine();
-            switch (input) {
+            switch (input.split(" ")[0]) {
             case "list": {
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < tasks.size(); i++) {
-                    builder.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+                    builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
                 }
                 echo(builder.toString().trim());
+                break;
+            }
+            case "done": {
+                int taskIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+                tasks.get(taskIdx).setDone();
+                echo(String.format("Nice! This task is done :) \n%s", tasks.get(taskIdx).toString()));
                 break;
             }
             case "bye": {
@@ -26,7 +32,7 @@ public class Duke {
                 break;
             }
             default: {
-                tasks.add(input);
+                tasks.add(new Task(input));
                 echo(String.format("Added %s", input));
                 break;
             }
