@@ -26,7 +26,7 @@ public class Kelbot {
         // Add todotask to list
         String name = "";
         for (int i = 1; i < commands.length; i++) {
-          name += commands[i] + " ";
+          name += " " + commands[i];
         }
         TodoTask newTodoTask = new TodoTask(name);
         taskList.add(newTodoTask);
@@ -44,7 +44,7 @@ public class Kelbot {
             }
             break;
           }
-          name += commands[i] + " ";
+          name += " " + commands[i];
         }
         DeadlineTask newDeadlineTask = new DeadlineTask(name, by);
         taskList.add(newDeadlineTask);
@@ -62,7 +62,7 @@ public class Kelbot {
             }
             break;
           }
-          name += commands[i] + " ";
+          name += " " + commands[i];
         }
         EventTask newEventTask = new EventTask(name, at);
         taskList.add(newEventTask);

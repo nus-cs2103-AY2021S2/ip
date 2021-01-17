@@ -24,7 +24,7 @@ public class Task {
 
   public String getStatusIcon() {
     if (this.done) {
-      return "[\u2718]";
+      return "[X]";
     } else {
       return "[ ]";
     }
@@ -33,6 +33,6 @@ public class Task {
 
   @Override
   public String toString() {
-    return this.getStatusIcon() + " " + this.name;
+    return this.getStatusIcon() + this.name;
   }
 }
