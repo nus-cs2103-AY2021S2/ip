@@ -21,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s\n", getStatusIcon(), getContent());
+        return String.format("[%s] %s", getStatusIcon(), getContent());
     }
 }

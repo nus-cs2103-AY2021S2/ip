@@ -51,9 +51,9 @@ public class AddCmd implements Command {
 
         this.lst.add(task);
 
-        return "Got it. I've added this task:\n" +
-                "  " +
-                task.toString() +
-                String.format("Now you have %d tasks in the list", this.lst.size());
+        String resp = "Got it. I've added this task:\n";
+        resp += String.format("\t%s\n", task.toString());
+        resp += String.format("Now you have %d tasks in the list\n", this.lst.size());
+        return resp;
     }
 }

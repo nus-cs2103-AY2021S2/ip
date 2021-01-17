@@ -8,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)\n", getStatusIcon(), getContent(), at);
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), getContent(), at);
     }
 }

@@ -16,8 +16,8 @@ public class DeleteCmd implements Command {
 
         Task t = this.lst.remove(idx);
         String resp = "Noted. I've removed this task:\n";
-        resp += String.format("\t%s", t.toString());
-        resp += String.format("Now you have %d tasks in the list", lst.size());
+        resp += String.format("\t%s\n", t.toString());
+        resp += String.format("Now you have %d tasks in the list\n", lst.size());
         return resp;
     }
 }

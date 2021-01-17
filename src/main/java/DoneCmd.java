@@ -14,7 +14,7 @@ public class DoneCmd implements Command {
         t.markDone();
 
         String resp = "Nice! I've marked this task as done:\n";
-        resp += String.format("[%s] %s\n", t.getStatusIcon(), t.getContent());
+        resp += String.format("%s\n", t.toString());
         return resp;
     }
 }
