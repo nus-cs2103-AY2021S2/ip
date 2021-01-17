@@ -17,7 +17,10 @@ public class Chatbot {
      *
      * @param todo The list of things to do.
      */
-    public static void printTodo(List<Task> todo) {
+    public static void printTodo(List<Task> todo) throws DukeException {
+        if (todo.size() == 0) {
+            throw new DukeException("There's currently no any tasks.\n");
+        }
         System.out.print(Duke.horizontalLine);
         for (int i = 0; i < todo.size(); i++) {
             System.out.println("\t  " + (i + 1) + "." + todo.get(i).toString());
@@ -25,7 +28,12 @@ public class Chatbot {
         System.out.println(Duke.horizontalLine);
     }
 
-    public void markDone(int order) {
+    public void markDone(int order) throws DukeException {
+        if (order < 0 || order >= todo.size()) {
+            throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
+        } else if (todo.get(order).getDone()) {
+            throw new DukeException("This task has been finished before.\n");
+        }
         System.out.print(Duke.horizontalLine);
         System.out.println("\t  Nice! I've marked this task as done:");
         System.out.println("\t\t[x] " + todo.get(order).getName());
@@ -50,30 +58,50 @@ public class Chatbot {
         String input = sc.nextLine();
         String[] taskTimeSplit;
         Task newTask;
-        while (!input.toLowerCase().equals("bye")) {  // exit only when user input "bye"
-            String[] taskTypeSplit = input.split(" ");
-            if (input.toLowerCase().equals("list")) {
-                printTodo(todo);
-            } else if (taskTypeSplit[0].toLowerCase().contains("done")) {
-                int tempOrder = Integer.parseInt(taskTypeSplit[1]);
-                if (taskTypeSplit.length == 2 && tempOrder > 0 && tempOrder <= todo.size()) {
-                    markDone(tempOrder - 1);
-                }
-            } else if (taskTypeSplit[0].toLowerCase().equals("todo")) {
-                newTask = new ToDo(input.substring(5), TaskType.TODO);
-                addTask(newTask);
-            } else if (taskTypeSplit[0].toLowerCase().equals("deadline")) {
-                taskTimeSplit = input.split(" /by ");
-                newTask = new Deadline(taskTimeSplit[0].substring(9), TaskType.DEADLINE, taskTimeSplit[1]);
-                addTask(newTask);
 
-            } else if (taskTypeSplit[0].toLowerCase().equals("event")) {
-                taskTimeSplit = input.split(" /at ");
-                newTask = new Event(taskTimeSplit[0].substring(6), TaskType.EVENT, taskTimeSplit[1]);
-                addTask(newTask);
+        while (!input.toLowerCase().equals("bye")) {  // exit only when user input "bye"
+            try {
+                String[] taskTypeSplit = input.split(" ");
+                if (input.toLowerCase().equals("list")) {
+                    printTodo(todo);
+                } else if (taskTypeSplit[0].toLowerCase().contains("done")) {
+                    int tempOrder = Integer.parseInt(taskTypeSplit[1]);
+                    markDone(tempOrder - 1);
+                } else if (taskTypeSplit[0].toLowerCase().equals("todo")) {
+                    if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                        throw new DukeException("The description of a todo cannot be empty.\n");
+                    }
+                    newTask = new ToDo(input.substring(5), TaskType.TODO);
+                    addTask(newTask);
+                } else if (taskTypeSplit[0].toLowerCase().equals("deadline")) {
+                    if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                        throw new DukeException("The description of a deadline cannot be empty.\n");
+                    }
+                    taskTimeSplit = input.split(" /by ");
+                    if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
+                        throw new DukeException("The time of a deadline cannot be empty.\n");
+                    }
+                    newTask = new Deadline(taskTimeSplit[0].substring(9), TaskType.DEADLINE, taskTimeSplit[1]);
+                    addTask(newTask);
+                } else if (taskTypeSplit[0].toLowerCase().equals("event")) {
+                    if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                        throw new DukeException("The description of an event cannot be empty.\n");
+                    }
+                    taskTimeSplit = input.split(" /at ");
+                    if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
+                        throw new DukeException("The time of an event cannot be empty.\n");
+                    }
+                    newTask = new Event(taskTimeSplit[0].substring(6), TaskType.EVENT, taskTimeSplit[1]);
+                    addTask(newTask);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
+                }
+            } catch (DukeException ex) {
+                System.out.println(ex.toString());
             }
             input = sc.nextLine();
         }
+
     }
 
 }
