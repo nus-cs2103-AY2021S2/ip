@@ -61,6 +61,14 @@ public class Snom {
                         snomio.println(e.getMessage());
                     }
                     break;
+                case "delete":
+                    try {
+                        int[] taskNums = snomio.readContentWithNumbers(command);
+                        deleteTask(taskNums);
+                    } catch (SnomException e) {
+                        snomio.println(e.getMessage());
+                    }
+                    break;
                 case "bye":
                     snomio.println("Ciao! Hope to see you again soon!");
                     break;
@@ -135,15 +143,39 @@ public class Snom {
      */
     public static void finishTask(int[] taskNums) throws SnomException{
         for(int i = 0; i < taskNums.length; i++){
-            if(i <= taskList.size()){
-                Task task = taskList.get(taskNums[i] - 1);
+            int taskNo = taskNums[i] - 1;
+            try{
+                Task task = taskList.get(taskNo);
                 task.setStatus(true);
 
                 // Only print this for the first task marked as done
                 if(i == 0) snomio.println("Great Job! I've marked this task(s) as done:");
                 snomio.println("\t" + task.toString());
-            }else{
-                throw new SnomException("Oops! You have entered a task number that is invalid! Please try again!");
+            }catch(IndexOutOfBoundsException e){
+                throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
+            }
+        }
+    }
+
+    /**
+     * This method removes the given task numbers from the task list.
+     * Then prints out the deleted messages.
+     *
+     * @param  taskNums      task number list that needs to be removed
+     * @throws SnomException throws exception when the task number is not available in the task list.
+     */
+    public static void deleteTask(int[] taskNums) throws SnomException{
+        for(int i = 0; i < taskNums.length; i++){
+            int taskNo = taskNums[i] - 1 - i;
+            try{
+                Task task = taskList.get(taskNo);
+                taskList.remove(task);
+
+                // Only print this for the first task removed
+                if(i == 0) snomio.println("Noted, I've removed this task");
+                snomio.println("\t" + task.toString());
+            }catch(IndexOutOfBoundsException e){
+                throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
             }
         }
     }
