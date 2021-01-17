@@ -3,5 +3,10 @@ event dinner appointment /at Jewel
 deadline CS3244 Assignment 1 /by Saturday
 list
 done 3
+delete 1
 list
+event
+invalid
+deadline
+todo
 bye
