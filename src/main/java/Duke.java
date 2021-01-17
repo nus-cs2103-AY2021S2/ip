@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -9,7 +10,7 @@ public class Duke {
 
         Scanner scan = new Scanner(System.in);
         String string = scan.nextLine();
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         int k, i = 0;
 
         while (true) {
@@ -28,7 +29,7 @@ public class Duke {
                         System.out.println("Here are the tasks in your list:");
                         for (int j = 0; j < i; j++) {
                             k = j + 1;
-                            System.out.println(k + "." + tasks[j]);
+                            System.out.println(k + "." + tasks.get(j));
                         }
                     }
 
@@ -50,14 +51,20 @@ public class Duke {
                         }
                     }
 
-                    if (front.equals("done")) {
+                    if (front.equals("done") || front.equals("delete")) {
                         k = Integer.parseInt(back);
-                        if (k > i) {
+                        if (k > i || k == 0) {
                             throw new DukeException("☹ OOPS!!! There is no task number " + k + ".");
+                        } else if (front.equals("done")) {
+                            tasks.get(k - 1).markAsDone();
+                            System.out.println("Nice! I've marked this task as done:\n  "
+                                    + tasks.get(k - 1));
                         } else {
-                            tasks[k - 1].markAsDone();
-                            System.out.println("Nice! I've marked this task as done:");
-                            System.out.println("  " + tasks[k - 1]);
+                            Task t = tasks.get(k - 1);
+                            tasks.remove(k - 1);
+                            System.out.println("Noted. I've removed this task:\n  "
+                                    + t + "\nNow you have "
+                                    + --i + " tasks in the list.");
                         }
                     } else {
 
@@ -71,16 +78,23 @@ public class Duke {
                         }
 
                         if (front.equals("todo")) {
-                            tasks[i++] = new Todo(task);
+                            tasks.add(new Todo(task));
+                            task = "";
                         } else if (front.equals("deadline")) {
-                            tasks[i++] = new Deadline(task, time);
+                            tasks.add(new Deadline(task, time));
+                            task = "";
                         } else if (front.equals("event")) {
-                            tasks[i++] = new Event(task, time);
+                            tasks.add(new Event(task, time));
+                            task = "";
                         }
 
-                        System.out.println("Got it. I've added this task:\n"
-                                + "  " + tasks[i - 1].toString()
-                                + "\nNow you have " + i + " tasks in the list.");
+                        if (task.equals("")) {
+                            System.out.println("Got it. I've added this task:\n"
+                                    + "  " + tasks.get(i).toString()
+                                    + "\nNow you have " + ++i + " tasks in the list.");
+                        } else {
+                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        }
                     }
 
                 }
