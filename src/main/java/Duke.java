@@ -29,6 +29,59 @@ public class Duke {
                 System.out.println(t);
                 System.out.println("----------------------------------------------");
             }
+            else if(command[0].equals("todo")) {
+                System.out.println("----------------------------------------------");
+                String todo = "";
+                for (int i = 1; i < command.length; i++) {
+                    todo += command[i];
+                }
+                ToDoTask newTodo = new ToDoTask(todo);
+                col.add(newTodo);
+                System.out.println("Added this:");
+                System.out.println(newTodo);
+                System.out.println("Now there are " + col.size() + " tasks on the list");
+                System.out.println("----------------------------------------------");
+            }
+            else if(command[0].equals("deadline")) {
+                System.out.println("----------------------------------------------");
+                String description = "";
+                String by = "";
+                for (int i = 1; i < command.length; i++) {
+                    if (command[i].equals("/by")) {
+                        for (int j = i + 1; j < command.length; j++) {
+                            by += " " + command[j];
+                        }
+                        break;
+                    }
+                    description += " " + command[i];
+                }
+                DeadlineTask newDdlTask = new DeadlineTask(description, by);
+                col.add(newDdlTask);
+                System.out.println("Added this:");
+                System.out.println(newDdlTask);
+                System.out.println("Now there are " + col.size() + " tasks on the list");
+                System.out.println("----------------------------------------------");
+            }
+            else if(command[0].equals("event")) {
+                System.out.println("----------------------------------------------");
+                String description = "";
+                String at = "";
+                for (int i = 1; i < command.length; i++) {
+                    if (command[i].equals("/at")) {
+                        for (int j = i + 1; j < command.length; j++) {
+                            at += " " + command[j];
+                        }
+                        break;
+                    }
+                    description += " " + command[i];
+                }
+                EventTask newETask = new EventTask(description, at);
+                col.add(newETask);
+                System.out.println("Added this:");
+                System.out.println(newETask);
+                System.out.println("Now there are " + col.size() + " tasks on the list");
+                System.out.println("----------------------------------------------");
+            }
             else { //must be add task
                 col.add(new Task(x));
                 System.out.println("----------------------------------------------");
