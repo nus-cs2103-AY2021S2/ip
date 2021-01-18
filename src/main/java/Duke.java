@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,8 +14,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         System.out.println(lineAfterCommand + "\nHello! I'm  Duke");
         System.out.println("What can I do for you?\n" + lineAfterCommand + "\n");
-        Task[] tasks = new Task[100];
-        int index = 0;
+        List<Task> tasks = new ArrayList<>();
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
             if (command.equals("bye")){
@@ -21,38 +22,55 @@ public class Duke {
             }
             System.out.println(lineAfterCommand);
             String[] temp = command.split(" ");
-            if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    System.out.println(String.valueOf(i + 1) + "." + tasks[i]);
+            try {
+                if (command.equals("list")) {
+                    System.out.println("Here are the tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        System.out.println(String.valueOf(i + 1) + "." + tasks.get(i));
+                    }
+                    System.out.println(lineAfterCommand + "\n");
+                } else if (temp[0].equals("done")) {
+                    try {
+                        tasks.set(Integer.parseInt(command.split(" ")[1]) - 1, tasks.get(Integer.parseInt(command.split(" ")[1]) - 1).finishTask());
+                        System.out.println("  " + tasks.get(Integer.parseInt(command.split(" ")[1]) - 1));
+                        System.out.println(lineAfterCommand + "\n");
+                    }
+                    catch(ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The index of done cannot be empty.");
+                    }
+                
+                } else {
+                    Task task;
+                    if (temp[0].equals("todo")) {
+                        try {
+                            task = new Todo(command.substring(5));
+                        } catch (StringIndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                    } else if (temp[0].equals("deadline")) {
+                        try {
+                            task = new Deadline(command.substring(9));
+                        } catch (StringIndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        }
+                    } else if (temp[0].equals("event")) {
+                        try {
+                            task = new Event(command.substring(6));
+                        } catch (StringIndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        }
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    System.out.println("Got it. I've added this task:");
+                    tasks.add(task);
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    System.out.println(lineAfterCommand + "\n");
                 }
-                //System.out.println("\n");
-                System.out.println(lineAfterCommand + "\n");
             }
-            else if (temp[0].equals("done")) {
-                tasks[Integer.parseInt(command.split(" ")[1]) - 1] = tasks[Integer.parseInt(command.split(" ")[1]) - 1].finishTask();
-                System.out.println("  " + tasks[Integer.parseInt(command.split(" ")[1]) - 1]);
-                System.out.println(lineAfterCommand + "\n");
-            }
-            else {
-                System.out.println("Got it. I've added this task:");
-                Task task;
-                if (temp[0].equals("todo")) {
-                    task = new Todo(command.substring(5));
-                }
-                else if (temp[0].equals("deadline")) {
-                    task = new Deadline(command.substring(9));
-                }
-                else if (temp[0].equals("event")) {
-                    task = new Event(command.substring(6));
-                }
-                else{
-                    task = new Task(command);
-                }
-                tasks[index] = task;
-                System.out.println("  " + task);
-                index++;
-                System.out.println("Now you have " + index + " tasks in the list.");
+            catch (DukeException e) {
+                System.out.println(e.getMessage());
                 System.out.println(lineAfterCommand + "\n");
             }
         }
