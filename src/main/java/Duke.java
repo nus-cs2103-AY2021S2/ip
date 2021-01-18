@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import exception.*;
 public class Duke {
 
     private static void dukeReply(String reply){
@@ -23,49 +23,78 @@ public class Duke {
         ArrayList<Task> list = new ArrayList<>();
         while(sc.hasNextLine()){
             String line = sc.nextLine();
-            if(line.equals("bye")){
-                dukeReply("Bye. Hope to see you again soon!");
-                break;
-            } else if(line.equals("list")) {
-                String reply = "Here are the tasks in your list:\n";
-                for(int i=0; i<list.size(); i++){
-                    reply += "\t";
-                    reply += (i+1) + ". " + list.get(i);
-                    if(i!=list.size()-1) reply += "\n";
-                }
-                dukeReply(reply);
-            } else if(line.contains("done")){
-                line = line.substring(4);
-                Scanner s = new Scanner(line);
-                int index = s.nextInt();
-                Task t = list.get(index-1);
-                t.isDone = true;
-                String reply = "Nice! I've marked this task as done:\n\t  "
-                        + t.toString();
-                dukeReply(reply);
+            String command = line.split(" ")[0];
+            try {
+                switch (command) {
+                    case "bye":
+                        dukeReply("Bye. Hope to see you again soon!");
+                        break;
+                    case "list": {
+                        String reply = "Here are the tasks in your list:\n";
+                        for (int i = 0; i < list.size(); i++) {
+                            reply += "\t";
+                            reply += (i + 1) + ". " + list.get(i);
+                            if (i != list.size() - 1) reply += "\n";
+                        }
+                        if (list.size() != 0) dukeReply(reply);
+                        else dukeReply("Your list is empty!");
+                        break;
+                    }
+                    case "done": {
+                        line = line.split(" ",2)[1];
+                        int index = Integer.parseInt(line);
+                        Task t = list.get(index - 1);
+                        t.isDone = true;
+                        String reply = "Nice! I've marked this task as done:\n\t  "
+                                + t.toString();
+                        dukeReply(reply);
 
-            } else {
-                if(line.contains("todo")){
-                    Todo t = new Todo(line.substring(5));
-                    list.add(t);
-                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
-                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
-                } else if(line.contains("deadline")){
-                    line = line.substring(9);
-                    String[] result = line.split("/by ");
-                    Deadline t = new Deadline(result[0],result[1]);
-                    list.add(t);
-                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
-                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
-                } else if(line.contains("event")){
-                    line = line.substring(6);
-                    String[] result = line.split("/at ");
-                    Event t = new Event(result[0],result[1]);
-
-                    list.add(t);
-                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
-                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
+                        break;
+                    }
+                    case "todo": {
+                        String[] ar = line.split(" ",2);
+                        if(ar.length==1) throw new CommandException("I can't add an empty task to the list!");
+                        line = line.split(" ",2)[1];
+                        Todo t = new Todo(line);
+                        list.add(t);
+                        dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                                + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.");
+                        break;
+                    }
+                    case "deadline": {
+                        String[] ar = line.split(" ",2);
+                        if(ar.length==1) throw new CommandException("I can't add an empty task to the list!");
+                        line = line.split(" ",2)[1];
+                        String[] result = line.split("/by ");
+                        if(result.length==1) throw new CommandException("Er... when do you need to finish this /by?");
+                        Deadline t = new Deadline(result[0], result[1]);
+                        list.add(t);
+                        dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                                + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.");
+                        break;
+                    }
+                    case "event": {
+                        String[] ar = line.split(" ",2);
+                        if(ar.length==1) throw new CommandException("I can't add an empty task to the list!");
+                        line = line.split(" ",2)[1];
+                        String[] result = line.split("/at ");
+                        if(result.length==1) throw new CommandException("Er... /at what time does this event start?");
+                        Event t = new Event(result[0], result[1]);
+                        list.add(t);
+                        dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                                + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.");
+                        break;
+                    }
+                    default: {
+                        dukeReply("I don't understand");
+                        break;
+                    }
                 }
+
+            } catch (IndexOutOfBoundsException | NumberFormatException e){
+                dukeReply("Please enter a valid value");
+            } catch (CommandException e){
+                dukeReply(e.getMessage());
             }
         }
         sc.close();
