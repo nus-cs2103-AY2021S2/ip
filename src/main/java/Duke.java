@@ -5,7 +5,9 @@ import java.util.Scanner;
  * The Duke project
  */
 public class Duke {
+
     static int totalTasks = 0;
+    static boolean endOfCycle = false;
 
     public static void main(String[] args) {
         greet();
@@ -15,9 +17,7 @@ public class Duke {
         String username = sc.nextLine();
         nextGreet(username);
 
-        boolean endOfCycle = false;
         ArrayList<Task> tasks = new ArrayList<>();
-//        Task[] tasks = new Task[100];
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
@@ -26,7 +26,6 @@ public class Duke {
             try {
                 if (nextCommand.equals("bye")) {
                     bye(username);
-                    endOfCycle = true;
                 } else if (nextCommand.equals("list")) {
                     list(tasks, totalTasks);
                 } else if (commandToWords[0].equals("done")) {
@@ -43,11 +42,19 @@ public class Duke {
                     wrongCommand();
                 }
             } catch (DukeException e) {
+                //noinspection ThrowablePrintedToSystemOut
                 System.out.println(e);
             }
         }
 
         sc.close();
+    }
+
+    /**
+     * Signal termination of the conversation.
+     */
+    public static void setEndOfCycle() {
+        endOfCycle = true;
     }
 
     /**
@@ -57,6 +64,9 @@ public class Duke {
         totalTasks++;
     }
 
+    /**
+     * Decrease the total number of tasks in the list by 1.
+     */
     public static void taskDeleted() {
         totalTasks--;
     }
@@ -84,7 +94,7 @@ public class Duke {
     /**
      * Adds a Todo task.
      * @param nextCommand The description of the task.
-     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public static void todo(String nextCommand, ArrayList<Task> tasks) throws DukeException{
@@ -103,7 +113,7 @@ public class Duke {
     /**
      * Adds a Deadline task.
      * @param nextCommand The description of the task.
-     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public static void deadline(String nextCommand, ArrayList<Task> tasks) throws DukeException{
@@ -125,7 +135,7 @@ public class Duke {
     /**
      * Adds an Event task.
      * @param nextCommand The description of the task.
-     * @param tasks The Task array containing user tasks in sequence, up to 100.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public static void event(String nextCommand, ArrayList<Task> tasks) throws DukeException{
@@ -146,8 +156,8 @@ public class Duke {
 
     /**
      * List out all user inputs in sequence.
-     * @param tasks The Task array containing user tasks in sequence, up to 100.
-     * @param count The current number of tasks stored inside the Task array.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param count The current number of tasks stored inside the Task Arraylist.
      */
     public static void list(ArrayList<Task> tasks, int count) {
         System.out.println("----------------------------------------------------------------------------------------");
@@ -159,6 +169,32 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
+    /**
+     * Mark the task in the given task number as done.
+     * @param command The command given by user input.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param count The current number of tasks stored inside the Task Arraylist.
+     * @throws DukeException Exception thrown if the number given is out of range.
+     */
+    public static void done(String command, ArrayList<Task> tasks, int count) throws DukeException{
+        String[] commandToWords = command.split(" ");
+        int itemNum = Integer.parseInt(commandToWords[1]);
+        if (itemNum > count || itemNum < 1) {
+            throw new DukeException("Item number selected is out of range.");
+        }
+        tasks.get(itemNum - 1).makeDone();
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(itemNum - 1).toString());
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * Delete the task corresponding to the number input by the user.
+     * @param command The command given by user input.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param count The current number of tasks stored inside the Task Arraylist.
+     * @throws DukeException Exception thrown if the number given is out of range.
+     */
     public static void delete(String command, ArrayList<Task> tasks, int count) throws DukeException {
         String[] commandToWords = command.split(" ");
         int itemNum = Integer.parseInt(commandToWords[1]);
@@ -171,25 +207,6 @@ public class Duke {
         System.out.println("Noted. I've removed this task: \n" + "    " + taskRemoved);
         taskDeleted();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
-        System.out.println("----------------------------------------------------------------------------------------");
-    }
-
-    /**
-     * Mark the task in the given task number as done.
-     * @param command The command given by user input.
-     * @param tasks The Task array containing user tasks in sequence, up to 100.
-     * @param count The current number of tasks stored inside the Task array.
-     * @throws DukeException Exception thrown if the number given is out of range.
-     */
-    public static void done(String command, ArrayList<Task> tasks, int count) throws DukeException{
-        String[] commandToWords = command.split(" ");
-        int itemNum = Integer.parseInt(commandToWords[1]);
-        if (itemNum > count || itemNum < 1) {
-            throw new DukeException("Item number selected is out of range.");
-        }
-        tasks.get(itemNum - 1).makeDone();
-        System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(itemNum - 1).toString());
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
@@ -209,6 +226,7 @@ public class Duke {
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Bye " + username + "! Hope to see you again soon!");
         System.out.println("----------------------------------------------------------------------------------------");
+        setEndOfCycle();
     }
 }
 
