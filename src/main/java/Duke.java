@@ -11,7 +11,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -35,11 +35,18 @@ public class Duke {
                 printIndentOutput("Bye. Hope to see you again soon!");
                 end = true;
             } else if (line.equals("list")) {
+                printIndentOutput("Here are the tasks in you list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    printIndentOutput((i + 1) + ": " + tasks.get(i));
+                    printIndentOutput((i + 1) + ". " + tasks.get(i));
                 }
+            } else if (line.length() >= 5 && line.substring(0, 5).equals("done ")) {
+                int index = Integer.parseInt(line.split(" ")[1]);
+                Task curTask = tasks.get(index - 1);
+                curTask.markAsDone();
+                printIndentOutput("Nice! I've marked this task as done:");
+                printIndentOutput("   " + curTask);
             } else {
-                tasks.add(line);
+                tasks.add(new Task(line));
                 printIndentOutput("added: " + line);
             }
 
