@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Duke {
     public static String BOT_NAME = "Apollo the Robot";
     public static String INDENTATION = "    ";
-    public static ArrayList<String> taskList = new ArrayList<>();
+    public static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void printlnWithIndentation(String s) {
         System.out.println(INDENTATION + " " + s);
@@ -16,19 +16,19 @@ public class Duke {
         System.out.println(INDENTATION + line);
     }
 
-    public static void addTask(String task, ArrayList<String> taskList) {
+    public static void addTask(Task task, ArrayList<Task> taskList) {
         taskList.add(task);
         printHorizontalLine();
-        printlnWithIndentation("added: " + task);
+        printlnWithIndentation("added: " + task.toString());
         printHorizontalLine();
     }
 
-    public static void listTasks(ArrayList<String> taskList) {
+    public static void listTasks(ArrayList<Task> taskList) {
         printHorizontalLine();
 
         for(int i = 0; i < taskList.size(); i++ ) {
             int index = i + 1;
-            printlnWithIndentation(index + ". " + taskList.get(i));
+            printlnWithIndentation(index + ". " + taskList.get(i).toString());
         }
 
         printHorizontalLine();
@@ -55,7 +55,8 @@ public class Duke {
                 listTasks(taskList);
             }
             else {
-                addTask(input, taskList);
+                Task task = new Task(input);
+                addTask(task, taskList);
             }
         }
     }
