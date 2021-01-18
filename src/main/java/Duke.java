@@ -3,6 +3,7 @@ import java.io.*;
 public class Duke {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    static List list = new List();
 
     public static void main(String[] args) throws IOException{
         String logo = " ____        _        \n"
@@ -16,7 +17,11 @@ public class Duke {
         while(true) {
             String string = br.readLine();
             if(!string.equals("bye")) {
-                echo(string);
+                if(string.equals("list")) {
+                    list.printList();
+                } else {
+                    addTask(string);
+                }
             } else {
                 exit();
                 break;
@@ -31,8 +36,9 @@ public class Duke {
         pw.flush();
     }
 
-    public static void echo(String string) {
-        pw.println(string);
+    public static void addTask(String string) {
+        list.addItem(string);
+        pw.printf("added: %s%n", string);
         pw.flush();
     }
 
