@@ -14,13 +14,21 @@ public class Duke {
         String command;
 
         while (sc.hasNext()) {
-            command = sc.next();
+            command = sc.nextLine();
+            switch (command) {
+                case "bye":
+                    System.out.println("\t\t" + "See you again soon!");
+                    sc.close();
+                    break;
+                case "list":
+                    bot.displayTasks();
+                    break;
+                default:
+                    bot.addTask(command);
+            }
             if (command.equals("bye")) {
-                System.out.println("\t\t" + "See you again soon!");
-                sc.close();
                 break;
             }
-            System.out.println("\t\t" + command);
 
         }
     }
