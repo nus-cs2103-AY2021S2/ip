@@ -36,6 +36,7 @@ public class Duke {
         commands.add("todo");
         commands.add("deadline");
         commands.add("event");
+        commands.add("delete");
     }
 
     private void printGreeting() {
@@ -80,6 +81,9 @@ public class Duke {
                 case "event":
                     createTask(command, arguments);
                     break;
+                case "delete":
+                    deleteTask(arguments);
+                    break;
             }
         } catch (InvalidCommandException | NoDescriptionException | InvalidDescriptionException ex) {
             System.out.println(ex.getMessage());
@@ -110,38 +114,39 @@ public class Duke {
         if (taskDescription.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
+        Task task = null;
         switch (taskType) {
             case "todo":
-                createToDoTask(taskDescription.strip());
+                task = createToDoTask(taskDescription.strip());
                 break;
             case "deadline":
-                createDeadlineTask(taskDescription.strip());
+                task = createDeadlineTask(taskDescription.strip());
                 break;
             case "event":
-                createEventTask(taskDescription.strip());
+                task = createEventTask(taskDescription.strip());
                 break;
+        }
+        if (task != null) {
+            addTask(task);
         }
     }
 
-    private void createToDoTask(String taskDescription) {
-        ToDoTask toDoTask = new ToDoTask(taskDescription);
-        addTask(toDoTask);
+    private Task createToDoTask(String taskDescription) {
+        return new ToDoTask(taskDescription);
     }
 
-    private void createDeadlineTask(String taskDescription) {
+    private Task createDeadlineTask(String taskDescription) {
         String[] deadlineInputArr = taskDescription.split("/by");
         String deadlineTaskName = deadlineInputArr[0].strip();
         String deadline = deadlineInputArr[1].strip();
-        DeadlineTask deadlineTask = new DeadlineTask(deadlineTaskName, deadline);
-        addTask(deadlineTask);
+        return new DeadlineTask(deadlineTaskName, deadline);
     }
 
-    private void createEventTask(String taskDescription) {
+    private Task createEventTask(String taskDescription) {
         String[] eventInputArr = taskDescription.split("/at");
         String eventTaskName = eventInputArr[0].strip();
         String eventTime = eventInputArr[1].strip();
-        EventTask eventTask = new EventTask(eventTaskName, eventTime);
-        addTask(eventTask);
+        return new EventTask(eventTaskName, eventTime);
     }
 
     private void markTaskAsDone(String arguments) throws NoDescriptionException, InvalidDescriptionException {
@@ -166,6 +171,26 @@ public class Duke {
 
     private void printAddedMessage(Task task) {
         System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task.toString());
+        System.out.printf("Now you have %d tasks in your list.\n", database.size());
+    }
+
+    private void deleteTask(String arguments) throws NoDescriptionException, InvalidDescriptionException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException("Please indicate a task number to be deleted.");
+        }
+        try {
+            int index = Integer.parseInt(arguments.strip());
+            Task task = database.get(index - 1);
+            database.remove(index);
+            printDeletedMessage(task);
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("Please enter a valid task number");
+        }
+    }
+
+    private void printDeletedMessage(Task task) {
+        System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.toString());
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
