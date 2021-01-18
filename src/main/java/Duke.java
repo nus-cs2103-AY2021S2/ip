@@ -19,7 +19,6 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
         System.out.println("POWERED BY\n" + logo);
         greet();
         String userInput = sc.next();
@@ -31,7 +30,7 @@ public class Duke {
                     print(list);
                     break;
                 case "todo":
-                    addTask(new ToDo(parseInput[1]));
+                    addTask(new ToDo(userInput.substring(5)));
                     break;
                 case "deadline":
                     String[] parseDeadline = userInput.substring(9).split(" /by ");
@@ -46,7 +45,7 @@ public class Duke {
                     markTaskAsDone(list.get(taskIndex));
                     break;
                 default:
-                    addTask(new Task(userInput));
+                    print("Invalid Command Entered!");
             }
             userInput = sc.next();
             parseInput = userInput.split(" ");
