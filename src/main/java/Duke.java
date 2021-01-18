@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -7,11 +8,11 @@ public class Duke {
         System.out.println("Duchess: Hello, Duchess here. What can i do for you?");
 
         String command = sc.nextLine();  // Read user input
-        System.out.println("Duchess: " + command);
         while (!command.equals("bye")) {
+            System.out.println("Duchess: " + command);
             String nextCommand = sc.nextLine();
             command = nextCommand;
-            System.out.println("Duchess: " + command);
         }
+        System.out.println("Duchess: Bye, Have an awesome day!");
     }
 }
