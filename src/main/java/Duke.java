@@ -8,7 +8,7 @@ public class Duke {
         duke.run();
     }
 
-    ArrayList<String> taskList = new ArrayList<>();
+    ArrayList<Task> taskList = new ArrayList<>();
 
     public void run() {
         System.out.println(makeOutput("Hello! I'm Duke\nWhat can I do for you?"));
@@ -19,6 +19,9 @@ public class Duke {
         while (!input.equals("bye")) {
             if (input.equals("list")) {
                 listTasks();
+            } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
+                int id = Integer.valueOf(input.substring(5));
+                completeTask(id);
             } else {
                 addTask(input);
             }
@@ -38,16 +41,23 @@ public class Duke {
     public void listTasks() {
         String output = "";
         for (int i = 0; i < taskList.size(); i++) {
-            output += String.valueOf(i + 1) + ". " + taskList.get(i);
+            output += String.valueOf(i + 1) + ". " + taskList.get(i).getInformation();
             if (i != taskList.size() - 1) output += "\n";
         }
 
         System.out.println(makeOutput(output));
     }
 
-    public void addTask(String task) {
-        taskList.add(task);
-        System.out.println(makeOutput("added: " + task));
+    public void addTask(String taskName) {
+        taskList.add(new Task(taskName));
+        System.out.println(makeOutput("added: " + taskName));
+    }
+
+    public void completeTask(int id) {
+        int realId = id - 1;
+        taskList.set(realId, taskList.get(realId).completeTask());
+        System.out.println(makeOutput("Nice! I've marked this item as done:\n\t" 
+            + taskList.get(realId).getInformation()));
     }
 
 }
