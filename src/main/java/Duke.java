@@ -34,11 +34,22 @@ public class Duke {
                         tasks.set(Integer.parseInt(command.split(" ")[1]) - 1, tasks.get(Integer.parseInt(command.split(" ")[1]) - 1).finishTask());
                         System.out.println("  " + tasks.get(Integer.parseInt(command.split(" ")[1]) - 1));
                         System.out.println(lineAfterCommand + "\n");
-                    }
-                    catch(ArrayIndexOutOfBoundsException e) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("☹ OOPS!!! The index of done cannot be empty.");
                     }
-                
+                }
+                else if (temp[0].equals("delete")) {
+                        try {
+                            Task deleted = tasks.get(Integer.parseInt(command.split(" ")[1]) - 1);
+                            tasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+                            System.out.println("Noted. I've removed this task:");
+                            System.out.println("  " + deleted);
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                            System.out.println(lineAfterCommand + "\n");
+                        }
+                        catch(ArrayIndexOutOfBoundsException e) {
+                            throw new DukeException("☹ OOPS!!! The index of delete cannot be empty.");
+                        }
                 } else {
                     Task task;
                     if (temp[0].equals("todo")) {
