@@ -1,6 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
+
+    static Task[] tasks = new Task[100];
+    static int numTask = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -11,14 +14,38 @@ public class Duke {
                 bye();
                 break;
             }
-            command(s);
+            if (s.length() >= 6) {
+                if (s.substring(0, 4).equals("done")) {
+                    int num = Integer.parseInt(s.substring(5));
+                    continue;
+                }
+            }
+            store(s);
         }
     }
 
-    static public void command(String str) {
-        System.out.println("    ____________________________________________________________\n     " +
-                str + "\n" +
-                "    ____________________________________________________________\n");
+    static public void store(String str) {
+        if (str.equals("list")) {
+            String printList = "";
+            int idx = 1;
+            for (int i = 0; i < numTask; i++) {
+                Task task = tasks[idx - 1];
+                printList += idx + ". " + task + "\n    ";
+                if (i != numTask - 1) {
+                    printList += " ";
+                }
+                idx++;
+            }
+            System.out.println("    ____________________________________________________________\n     " +
+                    printList +
+                    "____________________________________________________________\n");
+        } else {
+            tasks[numTask] = new Task(str);
+            numTask++;
+            System.out.println("    ____________________________________________________________\n     " +
+                    "added: " + str + "\n" +
+                    "    ____________________________________________________________\n");
+        }
     }
 
     static public void bye() {
