@@ -73,6 +73,20 @@ public class TodosController {
                 Stream.concat(this.todosList.stream(), Stream.of(newTodoObject)).collect(Collectors.toList()));
     }
 
+    /**
+     * Deletes a todo from the list of the todos controller
+     * 
+     * @param deleteTodoArgs is a list of size 1, containing the index of the todo
+     *                       to delete
+     * @return TodosController with the todo with index passed in deleted from the
+     *         list
+     * @throws DukeBlankTaskException           when user specifies the delete
+     *                                          command without providing an index
+     *                                          of the todo to delete
+     * @throws DukeTaskIndexOutOfRangeException when user specifies an index that is
+     *                                          out of the range of the list size of
+     *                                          todos in the controller
+     */
     public TodosController deleteTodo(List<String> deleteTodoArgs)
             throws DukeBlankTaskException, DukeTaskIndexOutOfRangeException {
         // check if args is empty
@@ -195,10 +209,10 @@ public class TodosController {
             throw new DukeBlankTaskException("Please define a task message for your Event");
         }
 
-        // if no event time is found or defined /at without anything else, throw
-        // exception
+        // if no deadline input or /by without any deadline, throw exception
         if (eventTime.size() <= 1) {
-            throw new DukeBlankDetailsException("Please specify a time and date for an Event.");
+            throw new DukeBlankDetailsException(
+                    "Please add a /at followed by the event time and date to specify a time and date for the Event task");
         }
 
         // Create new Event object, slicing eventTime array from index 1 since we

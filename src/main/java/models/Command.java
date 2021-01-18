@@ -3,6 +3,8 @@ package models;
 import java.util.List;
 import java.util.Optional;
 
+import exceptions.DukeCommandNotFoundException;
+
 public class Command {
     Optional<String> command;
     Optional<List<String>> commandArgs;
@@ -23,11 +25,30 @@ public class Command {
      * Gets the first String passed in from the list of inputs, which is the Command
      * in the input line
      * 
-     * @return String depicting which command is to be executed by the bot.
-     * @throws IllegalArgumentException
+     * @return Commands enum depicting which command is to be executed by the bot.
+     * @throws DukeCommandNotFoundException when the command is blank
      */
-    public String getCommand() throws IllegalArgumentException {
-        return this.command.orElseThrow(() -> new IllegalArgumentException("No command was supplied from input."));
+    public Commands getCommand() throws DukeCommandNotFoundException {
+        return this.command.map(commandString -> {
+            switch (commandString) {
+                case "done":
+                    return Commands.DONE;
+                case "list":
+                    return Commands.LIST;
+                case "todo":
+                    return Commands.TODO;
+                case "event":
+                    return Commands.EVENT;
+                case "deadline":
+                    return Commands.DEADLINE;
+                case "delete":
+                    return Commands.DELETE;
+                case "bye":
+                    return Commands.BYE;
+                default:
+                    return Commands.UNKNOWN;
+            }
+        }).orElseThrow(() -> new DukeCommandNotFoundException("No command was supplied from input."));
     }
 
     /**
@@ -36,15 +57,23 @@ public class Command {
      * 
      * @return List<String> which contains the rest of the arguments passed into the
      *         terminal
-     * @throws IllegalArgumentException
+     * @throws DukeCommandNotFoundException when command is blank
      */
-    public List<String> getCommandArgs() throws IllegalArgumentException {
+    public List<String> getCommandArgs() throws DukeCommandNotFoundException {
         return this.commandArgs
-                .orElseThrow(() -> new IllegalArgumentException("No command arguments were supplied from input."));
+                .orElseThrow(() -> new DukeCommandNotFoundException("No command arguments were supplied from input."));
     }
 
-    public List<String> getFullCommand() throws IllegalArgumentException {
+    /**
+     * Used for level 1 to get full argument passed into the CLI, where todo, events
+     * and deadline were yet to be implemented
+     * 
+     * @return List<String> which contains the rest of the arguments passed into the
+     *         terminal
+     * @throws DukeCommandNotFoundException when the command is blank
+     */
+    public List<String> getFullCommand() throws DukeCommandNotFoundException {
         return this.fullCommand
-                .orElseThrow(() -> new IllegalArgumentException("No command arguments were supplied from input."));
+                .orElseThrow(() -> new DukeCommandNotFoundException("No command arguments were supplied from input."));
     }
 }

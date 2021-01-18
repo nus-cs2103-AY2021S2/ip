@@ -37,12 +37,12 @@ public class AppController {
             try {
                 switch (command.getCommand()) {
 
-                    case "list":
+                    case LIST:
                         // list all the current todos
                         todosController.listTodos();
                         break;
 
-                    case "event":
+                    case EVENT:
                         // add a new event to the model
                         try {
                             todosController = todosController.addEvent(command.getCommandArgs());
@@ -52,7 +52,7 @@ public class AppController {
                         }
                         break;
 
-                    case "todo":
+                    case TODO:
                         // add a new todo to the model
                         try {
                             todosController = todosController.addTodos(command.getCommandArgs());
@@ -62,7 +62,7 @@ public class AppController {
                         }
                         break;
 
-                    case "deadline":
+                    case DEADLINE:
                         // amend a current todo's deadline
                         try {
                             todosController = todosController.addDeadline(command.getCommandArgs());
@@ -72,7 +72,7 @@ public class AppController {
                         }
                         break;
 
-                    case "done":
+                    case DONE:
                         // mark a todo as done
                         try {
                             todosController = todosController.markAsDone(command.getCommandArgs());
@@ -82,7 +82,7 @@ public class AppController {
                         }
                         break;
 
-                    case "delete":
+                    case DELETE:
                         // delete a todo from the list
                         try {
                             todosController = todosController.deleteTodo(command.getCommandArgs());
@@ -92,7 +92,7 @@ public class AppController {
                         }
                         break;
 
-                    case "bye":
+                    case BYE:
                         // break out of main function
                         greeting.bye();
 
@@ -102,6 +102,7 @@ public class AppController {
                         // return to end function
                         return;
 
+                    case UNKNOWN:
                     default:
                         // print command printed in if not recognised
                         try {
@@ -113,7 +114,11 @@ public class AppController {
                         break;
                 }
 
+            } catch (DukeCommandNotFoundException e) {
+                // catch error from Comamnd.getCommand()
+                greeting.printErrorMessage(e);
             } catch (Exception e) {
+                // program not supposed to end up here
                 e.printStackTrace();
             }
         }

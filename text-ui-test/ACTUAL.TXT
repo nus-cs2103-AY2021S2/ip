@@ -78,7 +78,7 @@ The Event you are trying to add cannot be blank!
 
 
 ---
-Please specify a time and date for an Event.
+Please add a /at followed by the event time and date to specify a time and date for the Event task
 ---
 
 
@@ -104,7 +104,7 @@ Here are the tasks in your list:
 
 
 ---
-Please specify a time and date for an Event.
+Please add a /at followed by the event time and date to specify a time and date for the Event task
 ---
 
 
@@ -229,6 +229,16 @@ Here are the tasks in your list:
 2.[E][✘] borrow book (at:1 Sep)
 3.[D][✘] return book (by:2 Sep)
 4.[T][✘] something todo!
+---
+
+
+---
+The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.
+---
+
+
+---
+The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.
 ---
 
 
