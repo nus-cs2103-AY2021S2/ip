@@ -11,10 +11,10 @@ public class Sweh {
             "/\\__/ /\\  /\\  / |___| | | | \n" +
             "\\____/  \\/  \\/\\____/\\_| |_/ \n";
 
-        String greeting = "Hello from\n" 
+        String greeting = "Hello, I am\n" 
             + logo 
             + "\nYour Simple Word-Executed Helper!"
-            + "\nHow can I help?\n";
+            + "\nWhat shall we do today?\n";
                                   
         System.out.println(greeting);
         
@@ -29,11 +29,19 @@ public class Sweh {
         sc.close();
     }
 
-    public static String respond(String command) {
+    public static String respond(String commandString) {
+        String[] commandArr = commandString.split(" ", 2);
+        String command = commandArr[0];
+        Optional<String> argOptional = commandArr.length > 1
+            ? Optional.of(commandArr[1])
+            : Optional.empty();
 
         switch (command) {
             case "list":
                 return taskList.listTasks();
+            case "done":
+                String args = argOptional.get();
+                return taskList.markTaskDone(Integer.parseInt(args) - 1);
             case "bye":
                 return "Bye. See ya again soon!";
             default:
