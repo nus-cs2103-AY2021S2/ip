@@ -55,6 +55,11 @@ public class Duke {
         String[] toPrint = new String[1];
         String bye = "bye";
 
+        // testing purposes
+        taskList.add(new Event("hello", "mon 4-6pm"));
+        taskList.add(new Deadline("submit quiz", "tues 6pm"));
+        taskList.add(new Todo("understand"));
+
         while (true) {
             userInput = sc.nextLine().trim();
             if (userInput.equals(bye)) {
