@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,11 +15,19 @@ public class Duke {
         System.out.println(INDENTATION + line);
     }
 
+    public static void printBetweenLines(String ... strings) {
+        printHorizontalLine();
+
+        for (int i = 0; i < strings.length; i++) {
+            printlnWithIndentation(strings[i]);
+        }
+
+        printHorizontalLine();
+    }
+
     public static void addTask(Task task, ArrayList<Task> taskList) {
         taskList.add(task);
-        printHorizontalLine();
-        printlnWithIndentation("added: " + task.toString());
-        printHorizontalLine();
+        printBetweenLines("added: " + task.toString());
     }
 
     public static void listTasks(ArrayList<Task> taskList) {
@@ -35,24 +42,25 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        printHorizontalLine();
-        printlnWithIndentation("Hello! I'm " + BOT_NAME + "!");
-        printlnWithIndentation("What would you like to do today?");
-        printHorizontalLine();
+        printBetweenLines("Hello! I'm " + BOT_NAME + "!", "What would you like to do today?");
 
         Scanner scanner = new Scanner(System.in);
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
-            String command = input.split(" ", 1)[0];
+            String[] command = input.split(" ", 5);
 
-            if (command.equals("bye")) {
-                printHorizontalLine();
-                printlnWithIndentation("Bye. Hope to see you again soon!");
-                printHorizontalLine();
+
+            if (command[0].equals("bye")) {
+                printBetweenLines("Bye. Hope to see you again soon!");
                 System.exit(0);
-            } else if (command.equals("list")) {
+            } else if (command[0].equals("list")) {
                 listTasks(taskList);
+            } else if (command[0].equals("done")) {
+                int index = Integer.parseInt(command[1]) - 1;
+                Task task = taskList.get(index);
+                task.markAsDone();
+                printBetweenLines("Nice! I've marked this task as done:", task.toString());
             }
             else {
                 Task task = new Task(input);
