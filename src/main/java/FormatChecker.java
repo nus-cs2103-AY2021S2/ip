@@ -39,7 +39,7 @@ public class FormatChecker {
     }
 
     /**
-     * Check wehther the user input is trying to delete a existing task
+     * Check whether the user input is trying to delete a existing task
      * @param userInput User input string
      * @return True if the user is trying to add a new task;
      * the argument, however, may not be correct and may be subject to exception handling
@@ -48,6 +48,17 @@ public class FormatChecker {
         String[] splited = userInput.split(" ");
         boolean isDelete = splited[0].equals("delete");
         return isDelete;
+    }
+
+    /**
+     * Check whether the user input is trying to get help with commands
+     * @return True if the user input is trying to get help;
+     * only the first argument will be considered, the rest are ignored
+     */
+    public static boolean isTryingToGetHelp(String userInput) {
+        String[] splited = userInput.split(" ");
+        boolean isGettingHelp = splited[0].equals("help");
+        return isGettingHelp;
     }
 
     /**

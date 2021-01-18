@@ -44,4 +44,5 @@ delete 1
 delete 1
 delete 9
 done 10
+help
 bye

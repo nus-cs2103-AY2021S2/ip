@@ -20,6 +20,7 @@ Sorry, the format for adding a todo task is 'todo [task name]'. Please retry :')
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 These are the tasks in your list so far:
@@ -58,6 +59,7 @@ Sorry, the format for adding a deadline task is 'deadline [task name] /by time'.
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Got it. I have added this task to your list:
@@ -69,6 +71,7 @@ Sorry, the format for adding an event task is 'event [task name] /at time'. Plea
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 These are the tasks in your list so far:
@@ -80,15 +83,19 @@ These are the tasks in your list so far:
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Nice! I have marked this task as done:
@@ -104,9 +111,11 @@ These are the tasks in your list so far:
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, the format for getting task done is 'done [a valid task number]'. Please retry :')
@@ -131,6 +140,7 @@ Sorry, the format for deleting a task is 'delete [a valid task number]'. Please 
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
+If you are stuck, type 'help' to get a list of operations available
 -------------------------------------------------
 -------------------------------------------------
 Sorry, the format for deleting a task is 'delete [a valid task number]'. Please retry :')
@@ -176,6 +186,17 @@ Sorry, there is no task right now, please add one first :')
 -------------------------------------------------
 -------------------------------------------------
 Sorry, there is no task right now, please add one first :')
+-------------------------------------------------
+-------------------------------------------------
+Here are a list of commands available :)
+list----get the current task list
+todo [task description]----add a todo to list
+event [task description] /at [task time]----add an event to list
+deadline [task description] /by [task time]----add a deadline to list
+done [task number]----get a task done, specified by the task number
+delete [task number]----delete a task, specified by the task number
+bye----quit the application
+help----get help with the commands
 -------------------------------------------------
 -------------------------------------------------
 Goodbye! Hope to see you again soon! (=~ω~=)

@@ -43,11 +43,17 @@ public class Lihua {
             tasks.addTask(userInput);
         } else if (FormatChecker.isTryingToDeleteTask(userInput)) {
             tasks.deleteTask(userInput);
+        } else if (FormatChecker.isTryingToGetHelp(userInput)) {
+            OperationTypes.printInstructions();
         } else {
-            // Dummy case, to be modified
-            System.out.println("Sorry, I do not understand your command :')");
+            printGetHelpMessage();
         }
         printHorizontalLine();
+    }
+
+    private static void printGetHelpMessage() {
+        System.out.println("Sorry, I do not understand your command :')");
+        System.out.println("If you are stuck, type \'help\' to get a list of operations available");
     }
 
     private static void printHello() {
