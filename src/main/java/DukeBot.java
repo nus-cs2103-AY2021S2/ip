@@ -6,21 +6,19 @@ public class DukeBot {
     private static final String BORDER = "\t___________________________________\n";
     private final List<Task> taskList = new ArrayList<>();
     private int numTasks;
+    private String output;
 
     public DukeBot() {
-        echo("greeting");
+        output = BORDER + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + BORDER;
+        System.out.println(output);
     }
 
     public boolean echo(String input) {
-        String output;
         String[] commandStr = input.trim().split("\\s+");
         String taskAction = commandStr[0];
         boolean continueInput = true;
 
         switch (taskAction) {
-            case "greeting":
-                output = BORDER + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + BORDER;
-                break;
             case "bye":
                 output = BORDER + "\t" + " Bye. Hope to see you again soon!\n" + BORDER;
                 continueInput = false;
@@ -64,34 +62,21 @@ public class DukeBot {
     }
 
     public String handleTask(String taskAction, String[] commandStr) {
-        int num;
         Task newTask;
-        StringBuilder description = new StringBuilder();
-        StringBuilder dateTime = new StringBuilder();
+        String[] result;
+        StringBuilder description = new StringBuilder();;
         List<String> taskDetails =  Arrays.asList(commandStr);
         String currText = BORDER + "\t" + " Got it. I've added this task: \n";
 
         if(!taskAction.equals("todo")) {
-            for(num = 1; num < taskDetails.size(); num++) {
-                String curr = taskDetails.get(num);
-                if(curr.contains("/")) {
-                    break;
-                }
-                description.append(curr).append(" ");
-            }
-            for(int i = num + 1; i < taskDetails.size(); i++) {
-                dateTime.append(taskDetails.get(i));
-                if(i < taskDetails.size() - 1) {
-                    dateTime.append(" ");
-                }
-            }
+            result = handleEventDeadLine(taskDetails);
             if(taskAction.equals("event")) {
-                newTask = new Event(description.toString(), dateTime.toString());
+                newTask = new Event(result[0], result[1]);
             } else {
-                newTask = new Deadline(description.toString(), dateTime.toString());
+                newTask = new Deadline(result[0], result[1]);
             }
         } else {
-            for(num = 1; num < taskDetails.size(); num++) {
+            for(int num = 1; num < taskDetails.size(); num++) {
                 String curr = taskDetails.get(num);
                 description.append(curr).append(" ");
             }
@@ -101,5 +86,29 @@ public class DukeBot {
         currText +=  "\t  " + newTask.toString() + "\n\t Now you have "
                 + this.numTasks + " tasks in the list.\n" + BORDER;
         return currText;
+    }
+
+    public String[] handleEventDeadLine(List<String> taskDetails) {
+        int num;
+        StringBuilder description = new StringBuilder();
+        StringBuilder dateTime = new StringBuilder();
+        String[] result = new String[2];
+
+        for(num = 1; num < taskDetails.size(); num++) {
+            String curr = taskDetails.get(num);
+            if(curr.contains("/")) {
+                break;
+            }
+            description.append(curr).append(" ");
+        }
+        for(int i = num + 1; i < taskDetails.size(); i++) {
+            dateTime.append(taskDetails.get(i));
+            if(i < taskDetails.size() - 1) {
+                dateTime.append(" ");
+            }
+        }
+        result[0] = description.toString();
+        result[1] = dateTime.toString();
+        return result;
     }
 }
