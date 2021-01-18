@@ -10,9 +10,10 @@ public class Task {
     public boolean markAsDone() {
         if(!this.isDone) {
             this.isDone = true;
+            return true;
         }
         //Return boolean to signal that we have successfully / fail to mark task as done.
-        return this.isDone;
+        return false;
     }
 
     public String toString() {
