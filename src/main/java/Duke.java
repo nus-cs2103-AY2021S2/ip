@@ -25,7 +25,7 @@ public class Duke {
                     print(list);
                     break;
                 case "todo":
-                    addTask(new ToDo(userInput.substring(5)));
+                    handleToDo(userInput);
                     break;
                 case "deadline":
                     String[] parseDeadline = userInput.substring(9).split(" /by ");
@@ -40,7 +40,7 @@ public class Duke {
                     markTaskAsDone(list.get(taskIndex));
                     break;
                 default:
-                    print("Invalid Command Entered!");
+                    handleInvalidCommand();
             }
             userInput = sc.nextLine();
             parseInput = userInput.split(" ");
@@ -63,6 +63,26 @@ public class Duke {
 
     private static void exit() {
         print("Goodbye. See you later!");
+    }
+
+    private static void handleInvalidCommand() {
+        try {
+            throw new DukeInvalidCommandException("Invalid Command!");
+        } catch (DukeInvalidCommandException e) {
+            print(e.getMessage());
+        }
+    }
+
+    private static void handleToDo(String userInput) {
+        try {
+            if (userInput.split(" ").length == 1) {
+                throw new DukeDescriptionException("You have not entered a description!");
+            }
+            String description = userInput.substring(5);
+            addTask(new ToDo(description));
+        } catch (DukeDescriptionException e) {
+            print(e.getMessage());
+        }
     }
 
     /**
