@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -5,6 +7,40 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+        String lines = "    ____________________________________________________________";
+        String indentation = "     ";
         System.out.println("Hello from\n" + logo);
+        System.out.println(lines);
+        System.out.println("     Hello! I'm Duke\n     What can I do for you?");
+        System.out.println(lines);
+/*
+        String[] list = new String[101];
+        int index = 1;
+        boolean[] done = new boolean[101];
+*/
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        while (!input.equals("bye")) {
+            System.out.println(lines);
+            /*if (input.equals("list")) {
+                for (int i = 1; i < index; i++) {
+                    String output = ". " + list[i];
+                    System.out.println(indentation + i + output);
+                }
+            } else if (input.contains("done")){
+                int number = Integer.parseInt(input.substring(5));
+                done[number] = true;
+            } else {
+                System.out.println(indentation + "added: " + input);
+                list[index] = input;
+                index++;
+            }*/
+            System.out.println(indentation + input);
+            System.out.println(lines);
+            input = sc.nextLine();
+        }
+        System.out.println(lines);
+        System.out.println(indentation + "Bye. Hope to see you again soon!");
+        System.out.println(lines);
     }
 }
