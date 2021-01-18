@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -9,7 +10,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        Task[] storage = new Task[100];
+        ArrayList<Task> storage = new ArrayList<>();
         int count = 0;
 
         System.out.println("Hello from\n" + logo);
@@ -25,15 +26,21 @@ public class Duke {
             } else if (inp.equals("list")) {
                 for (int i = 0; i < count; i++) {
                     int next = i + 1;
-                    System.out.println("     " + next + ". " + storage[i]);
+                    System.out.println("     " + next + ". " + storage.get(i));
                 }
 
             } else if (spl[0].equals("done") && is_int(spl[1])) {
                 int number = Integer.parseInt(spl[1]);
-                Task current = storage[number-1];
+                Task current = storage.get(number - 1);
                 current.finished();
-                storage[number-1] = current;
+                storage.add(number - 1, current);
                 System.out.println("     Good job! Another Task completed! I have marked it as done:\n     " + current);
+
+            } else if (spl[0].equals("delete") && is_int(spl[1])) {
+                int number = Integer.parseInt(spl[1]);
+                System.out.println("     Deleted the following task: " + storage.get(number - 1));
+                storage.remove(number-1);
+                count--;
 
             } else {
                 if (spl.length != 2 && (spl[0].equals("todo") || spl[0].equals("deadline") || spl[0].equals("event"))) {
@@ -42,7 +49,7 @@ public class Duke {
                 }
 
                 if (spl[0].equals("todo")) {
-                    storage[count] = new todo(spl[1]);
+                    storage.add(new todo(spl[1]));
 
                 } else if (spl[0].equals("deadline")) {
                     String[] spl2 = spl[1].split("/by", 2);
@@ -50,7 +57,7 @@ public class Duke {
                         System.out.println("     ERROR! D: Deadline needs a deadline! Give a time using /by.");
                         continue;
                     }
-                    storage[count] = new deadline(spl2[0], spl2[1]);
+                    storage.add(new deadline(spl2[0], spl2[1]));
 
                 } else if (spl[0].equals("event")) {
                     String[] spl2 = spl[1].split("/at", 2);
@@ -58,7 +65,7 @@ public class Duke {
                         System.out.println("     ERROR! D: Event needs a duration! Give a time using /at.");
                         continue;
                     }
-                    storage[count] = new event(spl2[0], spl2[1]);
+                    storage.add(new event(spl2[0], spl2[1]));
 
                 } else {
                     System.out.println("     ERROR! D: You have not entered a valid Task.");
@@ -67,7 +74,7 @@ public class Duke {
                 }
 
                 count++;
-                System.out.println("     Done adding: " + storage[count - 1]);
+                System.out.println("     Done adding: " + storage.get(count - 1));
                 System.out.println("     There are now these number of tasks in the list: " + count);
 
             }
