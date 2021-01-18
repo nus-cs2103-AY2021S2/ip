@@ -7,7 +7,7 @@ public class Task {
      * @param description A brief description of the task.
      */
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }

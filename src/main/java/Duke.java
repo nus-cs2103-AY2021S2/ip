@@ -12,16 +12,11 @@ public class Duke {
      */
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in).useDelimiter("\n");
+        Scanner sc = new Scanner(System.in);
         list = new ArrayList<>();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("POWERED BY\n" + logo);
+        System.out.println("POWERED BY JARVIS\n");
         greet();
-        String userInput = sc.next();
+        String userInput = sc.nextLine();
         String[] parseInput = userInput.split(" ");
         String command = parseInput[0];
         while (!userInput.equals("bye")) {
@@ -47,7 +42,7 @@ public class Duke {
                 default:
                     print("Invalid Command Entered!");
             }
-            userInput = sc.next();
+            userInput = sc.nextLine();
             parseInput = userInput.split(" ");
             command = parseInput[0];
         }
@@ -78,7 +73,7 @@ public class Duke {
     private static void addTask(Task task) {
         list.add(task);
         print("Got it. I've added this task:\n\t\t" + task +
-                "\n\t  You have " +
+                "\n\n\t  You have " +
                 list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
     }
 
