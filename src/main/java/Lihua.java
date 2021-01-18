@@ -39,7 +39,7 @@ public class Lihua {
             tasks.printList();
         } else if (FormatChecker.isTryingToGetTaskDone(userInput)) {
             tasks.getTaskDone(userInput);
-        } else if (FormatChecker.isAddingTask(userInput)) {
+        } else if (FormatChecker.isTryingToAddTask(userInput)) {
             tasks.addTask(userInput);
         } else {
             // Dummy case, to be modified

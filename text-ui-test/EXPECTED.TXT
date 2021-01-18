@@ -13,6 +13,15 @@ Got it. I have added this task to your list:
 Now you have 2 tasks in total. Good Luck.
 -------------------------------------------------
 -------------------------------------------------
+Sorry, the format for adding a todo task is 'todo [task name]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, the format for adding a todo task is 'todo [task name]'. Please retry :')
+-------------------------------------------------
+-------------------------------------------------
+Sorry, I do not understand your command :')
+-------------------------------------------------
+-------------------------------------------------
 These are the tasks in your list so far:
 1.[T][ ] a
 2.[T][ ] a b c
@@ -45,7 +54,7 @@ Got it. I have added this task to your list:
 Now you have 4 tasks in total. Good Luck.
 -------------------------------------------------
 -------------------------------------------------
-Sorry, I do not understand your command :')
+Sorry, the format for adding a deadline task is 'deadline [task name] /by time'. Please retry :')
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')
@@ -56,7 +65,7 @@ Got it. I have added this task to your list:
 Now you have 5 tasks in total. Good Luck.
 -------------------------------------------------
 -------------------------------------------------
-Sorry, I do not understand your command :')
+Sorry, the format for adding an event task is 'event [task name] /at time'. Please retry :')
 -------------------------------------------------
 -------------------------------------------------
 Sorry, I do not understand your command :')

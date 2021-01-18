@@ -29,68 +29,46 @@ public class FormatChecker {
     }
 
     /**
-     * Checks if the user input is trying to add a new task
+     * Check whether the user is trying to add a new task
      * @param userInput User input string
-     * @return True if the using input string indicates adding a new task
+     * @return True if the user is trying to add a new task;
+     * the argument, however, may not be correct
      */
-    public static boolean isAddingTask(String userInput) {
-        return isToDoFormat(userInput)
-                || isDeadLineFormat(userInput)
-                || isEventFormat(userInput);
+    public static boolean isTryingToAddTask(String userInput) {
+        return likeAddingToDo(userInput) || likeAddingDeadline(userInput) || likeAddingEvent(userInput);
     }
 
     /**
-     * Check whether the user input string is in the format of adding new ToDo task
+     * Check whether the user input string seems to be the format of adding new ToDo task
      * @param userInput user input string
-     * @return true if the input string is in the format of adding new ToDo task
+     * @return true if the input string seems to be the format of adding new ToDo task
      */
-    public static boolean isToDoFormat(String userInput) {
+    public static boolean likeAddingToDo(String userInput) {
         String[] splited = userInput.split(" ");
         boolean isToDo = splited[0].equals("todo");
-        boolean notSingle = splited.length > 1;
-        return isToDo && notSingle;
+        return isToDo;
     }
 
     /**
-     * Check whether the user input string is in the format of adding new deadline task
+     * Check whether the user input string seems to be the format of adding new Deadline task
      * @param userInput user input string
-     * @return true if the input string is in the format of adding new deadline task
+     * @return true if the input string seems to be the format of adding new Deadline task
      */
-    public static boolean isDeadLineFormat(String userInput) {
+    public static boolean likeAddingDeadline(String userInput) {
         String[] splited = userInput.split(" ");
         boolean isDeadline = splited[0].equals("deadline");
-        if (!isDeadline) {
-            return false;
-        }
-
-        userInput = InputInformationExtractor.getDeadlineDetail(userInput);
-        splited = userInput.split(" /by ");
-        if (splited.length != 2) {
-            return false;
-        }
-
-        return true;
+        return isDeadline;
     }
 
     /**
-     * Check whether the user input string is in the format of adding new event task
+     * Check whether the user input string seems to be the format of adding new Event task
      * @param userInput user input string
-     * @return true if the input string is in the format of adding new event task
+     * @return true if the input string seems to be the format of adding new Event task
      */
-    public static boolean isEventFormat(String userInput) {
+    public static boolean likeAddingEvent(String userInput) {
         String[] splited = userInput.split(" ");
         boolean isEvent = splited[0].equals("event");
-        if (!isEvent) {
-            return false;
-        }
-
-        userInput = InputInformationExtractor.getEventDetail(userInput);
-        splited = userInput.split(" /at ");
-        if (splited.length != 2) {
-            return false;
-        }
-
-        return true;
+        return isEvent;
     }
 
     private static boolean isInteger(String toCheck) {
