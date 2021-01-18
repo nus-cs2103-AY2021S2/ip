@@ -14,4 +14,8 @@ done 100
 done 4
 list
 blah
+delete read book
+delete 2
+delete 3
+list
 bye

@@ -81,5 +81,23 @@ Here are the tasks in your list:
 OOPS!!! I'm sorry, but I don't know what that means :-(
 ------------------------------------------------------------
 ------------------------------------------------------------
+Please enter a valid task number
+------------------------------------------------------------
+------------------------------------------------------------
+Noted. I've removed this task:
+  [D][X] return book (by: Sunday, 24th Jan)
+Now you have 3 tasks in your list.
+------------------------------------------------------------
+------------------------------------------------------------
+Noted. I've removed this task:
+  [D][X] cs2103t luminus quiz 2 (by: friday 2pm)
+Now you have 2 tasks in your list.
+------------------------------------------------------------
+------------------------------------------------------------
+Here are the tasks in your list:
+1.[T][ ] read book
+2.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
+------------------------------------------------------------
+------------------------------------------------------------
 Bye. Hope to see you again soon!
 ------------------------------------------------------------
