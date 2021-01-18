@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Level1 {
+public class DukeLevel {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String line = "    _________________________________________________";
