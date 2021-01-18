@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     private static final StringBuffer boundOfChatBox = new StringBuffer();
     private static final int lenOfChatBox = 50;
     private static final ArrayList<Task> tasks = new ArrayList<>();
+    public static enum command {
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+    }
 
     public static void setBoundOfChatBox() {
         boundOfChatBox.append('\n');
@@ -35,40 +39,56 @@ public class Duke {
                         + "Now you have " + tasks.size() + " tasks in the list.\n");
     }
 
-    public static void analyzeTypeAndAdd(String input) throws TextException {
+    public static void addToDo(String des) throws TextException {
         try {
-            if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
-                if (input.length() <= 5)
-                    throw new TextException("OOPS!!! The description of a todo cannot be empty.\n");
-                ToDo task = new ToDo(input.substring(5));
-                add(task);
-            } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
-                if (input.length() <= 9)
-                    throw new TextException("OOPS!!! The description of a deadline cannot be empty.\n");
-                if (input.contains("/by ")) {
-                    int endOfDescription = input.indexOf("/by ");
-                    String description = input.substring(9, endOfDescription);
-                    String deadline = input.substring(endOfDescription + 4);
-                    Deadline task = new Deadline(description, deadline);
-                    add(task);
-                } else {
-                    throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
-                }
-            } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
-                if (input.length() <= 6)
-                    throw new TextException("OOPS!!! The description of a event cannot be empty.\n");
-                if (input.contains("/at ")) {
-                    int endOfDescription = input.indexOf("/at ");
-                    String description = input.substring(6, endOfDescription);
-                    String time = input.substring(endOfDescription + 4);
-                    Event task = new Event(description, time);
-                    add(task);
-                } else {
-                    throw new TextException("OOPS!!! Please enter '/at time' after description\n");
-                }
+            if (des.isEmpty() || des.equals(" "))
+                throw new TextException("OOPS!!! The description of a todo cannot be empty.\n");
+            ToDo todo = new ToDo(des);
+            add(todo);
+        } catch (TextException e) {
+            formatInChatBox(e.getMsgDes());
+        }
+    }
+
+    public static void addDeadline(String des) throws TextException {
+        try {
+            if (des.isEmpty() || des.equals(" "))
+                throw new TextException("OOPS!!! The description of a todo cannot be empty.\n");
+            if (des.contains("/by ")) {
+                int endOfDescription = des.indexOf("/by ");
+                String description = des.substring(0, endOfDescription);
+                String deadline = des.substring(endOfDescription + 4);
+                Deadline ddl = new Deadline(description, deadline);
+                add(ddl);
             } else {
-                throw new TextException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
             }
+        } catch (TextException e) {
+            formatInChatBox(e.getMsgDes());
+        }
+    }
+
+    public static void addEvent(String des) throws TextException {
+        try {
+            if (des.isEmpty() || des.equals(" "))
+                throw new TextException("OOPS!!! The description of a event cannot be empty.\n");
+            if (des.contains("/at ")) {
+                int endOfDescription = des.indexOf("/at ");
+                String description = des.substring(0, endOfDescription);
+                String time = des.substring(endOfDescription + 4);
+                Event event = new Event(description, time);
+                add(event);
+            } else {
+                throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
+            }
+        } catch (TextException e) {
+            formatInChatBox(e.getMsgDes());
+        }
+    }
+
+    public static void error() throws TextException {
+        try {
+            throw new TextException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
         } catch (TextException e) {
             formatInChatBox(e.getMsgDes());
         }
@@ -90,7 +110,7 @@ public class Duke {
     public static void mark(int index) {
         Task taskToBeMarked = tasks.get(index - 1);
         taskToBeMarked.markedAsDone();
-        formatInChatBox("Nice! I've marked this task as done:\n" + taskToBeMarked);
+        formatInChatBox("Nice! I've marked this task as done:\n" + taskToBeMarked + "\n");
     }
 
     public static void delete(int index) {
@@ -105,26 +125,47 @@ public class Duke {
         formatInChatBox(goodbye);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TextException {
         init();
         String input;
         Scanner sc = new Scanner(System.in);
         do {
-            input = sc.nextLine();
-            if (input.equals("bye")) {
-                exit();
-                return ;
-            } else if (input.equals("list")) {
-                list();
-            } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
-                int index = Integer.parseInt(input.substring(5));
-                mark(index);
-            } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
-                int index = Integer.parseInt(input.substring(7));
-                delete(index);
-            } else {
-                analyzeTypeAndAdd(input);
+            input = sc.next();
+            try {
+                command c = command.valueOf(input.toUpperCase(Locale.ROOT));
+                switch (c) {
+                    case BYE:
+                        exit();
+                        return;
+                    case LIST:
+                        list();
+                        break;
+                    case DONE:
+                        int i = sc.nextInt();
+                        mark(i);
+                        break;
+                    case DELETE:
+                        int j = sc.nextInt();
+                        delete(j);
+                        break;
+                    case TODO:
+                        String toDoDes = sc.nextLine();
+                        addToDo(toDoDes);
+                        break;
+                    case DEADLINE:
+                        String deadlineDes = sc.nextLine();
+                        addDeadline(deadlineDes);
+                        break;
+                    case EVENT:
+                        String eventDes = sc.nextLine();
+                        addEvent(eventDes);
+                        break;
+                    default:
+                        error();
+                }
+            } catch (IllegalArgumentException e) {
+                error();
             }
-        } while(true);
+        } while (true);
     }
 }
