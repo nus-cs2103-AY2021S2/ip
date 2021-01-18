@@ -29,6 +29,8 @@ class ChatBot {
 		functions.put("deadline", x -> this.deadline(x));
 
 		functions.put("event", x -> this.event(x));
+
+		functions.put("delete", x -> this.delete(x));
     }
 
 	void parser(String s) {
@@ -98,16 +100,8 @@ class ChatBot {
 	}
 
 	void toDo(String s) {
-		if (s.equals("")) {
-			System.out.println("    ____________________________________________________________");
-			System.out.println("");
-			System.out.println("      ☹ OOPS!!! The description of a todo cannot be empty.");
-			System.out.println("    ____________________________________________________________");
-			System.out.println("");
-		} else {
-			ToDo t = new ToDo(s);
-			this.store(t);
-		}
+		ToDo t = new ToDo(s);
+		this.store(t);
 	}
 
 	void deadline(String s) {
@@ -122,7 +116,20 @@ class ChatBot {
 		this.store(t);
 	}
 
+	void delete(String s) {
+		int i = Integer.parseInt(s);
+		Task t = this.mem.get(i - 1);
+		this.mem.remove(i - 1);
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+		System.out.println("      Noted. I've removed this task:");
+		System.out.println("      " + t);
+		System.out.println("      now you have " + this.mem.size() + " tasks in the list.");
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+	}
+
 	boolean checkValid(String s) {
-		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done");
+		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
 	}
 }
