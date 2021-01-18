@@ -60,14 +60,17 @@ public class Tasks {
      * @param index 1-based index number referring to the specific task in the list
      */
     private void getTaskDone(int index) {
+        if (tasks.size() == 0) {
+            reportNoTaskRightNow();
+            return;
+        }
         try {
             tasks.get(index - 1).setDone(true);
             System.out.println("Nice! I have marked this task as done:");
             System.out.print("---- ");
             System.out.println(tasks.get(index - 1));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Sorry, the task number you specified is not valid.\n" +
-                    "Try enter \'list\' to see the range of task numbers you can enter.");
+            reportInvalidIndexNumber();
         }
     }
 
@@ -82,6 +85,41 @@ public class Tasks {
         } catch (Exception e) {
             // index argument not found
             System.out.println("Sorry, the format for getting task done is \'done [a valid task number]\'. " +
+                    "Please retry :')");
+        }
+    }
+
+    /**
+     * Delete the given task, print out the result for reference
+     * @param index 1-based index number referring to the specific task in the list
+     */
+    private void deleteTask(int index) {
+        if (tasks.size() == 0) {
+            reportNoTaskRightNow();
+            return;
+        }
+        try {
+            Task task = tasks.remove(index - 1);
+            System.out.println("Noted! The task has successfully been removed.");
+            System.out.print("---- ");
+            System.out.println(task);
+            reportTotalNumberOfTasks();
+        } catch (IndexOutOfBoundsException e) {
+            reportInvalidIndexNumber();
+        }
+    }
+
+    /**
+     * Get the given task deleted, represented by the user input string
+     * @param userInput Assumed to be of the format of trying to delete a task
+     */
+    public void deleteTask(String userInput) {
+        try {
+            int index = InputInformationExtractor.getIndexArgument(userInput);
+            deleteTask(index);
+        } catch (Exception e) {
+            // index argument not found
+            System.out.println("Sorry, the format for deleting a task is \'delete [a valid task number]\'. " +
                     "Please retry :')");
         }
     }
@@ -110,5 +148,21 @@ public class Tasks {
     public void reportTotalNumberOfTasks() {
         String noun = tasks.size() <= 1? "task": "tasks";
         System.out.println(String.format("Now you have %d %s in total. Good Luck.", tasks.size(), noun));
+    }
+
+    /**
+     * Print the report for error message: invalid index number of the list
+     */
+    private void reportInvalidIndexNumber() {
+        System.out.println("Sorry, the task number you specified is not valid.\n" +
+                "Try enter \'list\' to see the range of task numbers you can enter.");
+    }
+
+    /**
+     * Print the report for error message:
+     * no task right now, no delete/get done operation can be performed
+     */
+    private void reportNoTaskRightNow() {
+        System.out.println("Sorry, there is no task right now, please add one first :')");
     }
 }

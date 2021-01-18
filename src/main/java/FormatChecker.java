@@ -32,10 +32,22 @@ public class FormatChecker {
      * Check whether the user is trying to add a new task
      * @param userInput User input string
      * @return True if the user is trying to add a new task;
-     * the argument, however, may not be correct
+     * the argument, however, may not be correct and may be subject to exception handling
      */
     public static boolean isTryingToAddTask(String userInput) {
         return likeAddingToDo(userInput) || likeAddingDeadline(userInput) || likeAddingEvent(userInput);
+    }
+
+    /**
+     * Check wehther the user input is trying to delete a existing task
+     * @param userInput User input string
+     * @return True if the user is trying to add a new task;
+     * the argument, however, may not be correct and may be subject to exception handling
+     */
+    public static boolean isTryingToDeleteTask(String userInput) {
+        String[] splited = userInput.split(" ");
+        boolean isDelete = splited[0].equals("delete");
+        return isDelete;
     }
 
     /**

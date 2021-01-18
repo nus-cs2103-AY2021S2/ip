@@ -41,6 +41,8 @@ public class Lihua {
             tasks.getTaskDone(userInput);
         } else if (FormatChecker.isTryingToAddTask(userInput)) {
             tasks.addTask(userInput);
+        } else if (FormatChecker.isTryingToDeleteTask(userInput)) {
+            tasks.deleteTask(userInput);
         } else {
             // Dummy case, to be modified
             System.out.println("Sorry, I do not understand your command :')");
