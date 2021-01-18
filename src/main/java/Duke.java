@@ -16,7 +16,7 @@ public class Duke {
 
         String[] list = new String[101];
         int index = 1;
-//        boolean[] done = new boolean[101];
+        boolean[] done = new boolean[101];
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -24,12 +24,21 @@ public class Duke {
             System.out.println(lines);
             if (input.equals("list")) {
                 for (int i = 1; i < index; i++) {
-                    String output = ". " + list[i];
+                    String status = "";
+                    if (done[i]) {
+                        status = ".[X] ";
+                    } else {
+                        status = ".[ ] ";
+                    }
+                    String output = status + list[i];
                     System.out.println(indentation + i + output);
                 }
-            /*} else if (input.contains("done")){
+            } else if (input.contains("done")){
                 int number = Integer.parseInt(input.substring(5));
-                done[number] = true;*/
+                done[number] = true;
+                System.out.print(indentation);
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(indentation + "[X]" + list[number]);
             } else {
                 System.out.println(indentation + "added: " + input);
                 list[index] = input;
