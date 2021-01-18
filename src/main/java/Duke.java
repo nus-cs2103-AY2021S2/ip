@@ -41,27 +41,61 @@ public class Duke {
 
     public static void list(String msg) {
         System.out.println(line);
-        if (msg.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(line);
-            System.exit(0);
+        String[] msgs = msg.split(" ");
+        switch (msgs[0]) {
+            case "bye": {
+                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(line);
+                System.exit(0);
+                break;
+            }
+            case "list": {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + "." + list.get(i - 1).toString());
+                }
+                break;
+            }
+            case "done": {
+                int id = Integer.parseInt(msgs[1]) - 1;
+                Task t = list.get(id);
+                t.markAsDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(t);
+                break;
+            }
+            case "todo": {
+                ToDo td = new ToDo(msg.substring(5, msg.length()));
+                list.add(td);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(td);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                break;
+            }
+            case "deadline": {
+                int slash = msg.indexOf('/');
+                Deadline dl = new Deadline(msg.substring(9, slash - 1), msg.substring(slash + 4, msg.length()));
+                list.add(dl);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(dl);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                break;
+            }
+            case "event": {
+                int slash = msg.indexOf('/');
+                Event e = new Event(msg.substring(6, slash - 1), msg.substring(slash + 4, msg.length()));
+                list.add(e);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(e);
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                break;
+            }
+            default: {
+                list.add(new Task(msg));
+                System.out.println("added: " + msg);
+                break;
+            }
         }
-        else if (msg.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            for (Task t : list) System.out.println(t);
-            System.out.println(line);
-        }
-        else if (msg.matches("done \\d+")) {
-            int id = Integer.parseInt(msg.split(" ")[1]) - 1;
-            Task t = list.get(id);
-            t.markAsDone();
-            System.out.println("[" + t.getStatusIcon() + "] " + t.getName());
-            System.out.println(line);
-        }
-        else {
-            list.add(new Task(list.size() + 1, msg));
-            System.out.println("added: " + msg);
-            System.out.println(line);
-        }
+        System.out.println(line);
     }
 }

@@ -1,10 +1,8 @@
 public class Task {
-    private int id;
     private String name;
     private boolean isDone;
 
-    public Task(int id, String name) {
-        this.id = id;
+    public Task(String name) {
         this.name = name;
         this.isDone = false;
     }
@@ -23,6 +21,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.id + ".[" + this.getStatusIcon() + "] " + this.name;
+        return "[" + this.getStatusIcon() + "] " + this.name;
     }
 }
