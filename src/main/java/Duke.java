@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Duke {
-    public static ArrayList<String> data = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -27,15 +27,26 @@ public class Duke {
             System.out.println("     Bye. Hope to see you again soon!" + "\n"
                     + "    ____________________________________________________________\n");
         } else if (cmd.equals("list")) {
-            for(int i = 0; i < data.size(); i++) {
-                System.out.println("     " + (i + 1) + ". " + data.get(i));
+            System.out.println("     Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task curr = tasks.get(i);
+                System.out.println("     " + (i + 1) + "."
+                        + curr.getStatusIcon() + curr.getDescription());
             }
             System.out.println("    ____________________________________________________________\n");
+            run(sc.nextLine());
+        } else if (cmd.startsWith("done")) {
+            int index = Integer.parseInt(cmd.substring(5)) - 1;
+            tasks.get(index).markAsDone();
+            Task curr = tasks.get(index);
+            System.out.println("     Nice! I've marked this task as done:\n"
+                    + "       " + curr.getStatusIcon() + curr.getDescription() + "\n"
+                    + "    ____________________________________________________________\n");
             run(sc.nextLine());
         } else {
             System.out.println("     added: " + cmd + "\n"
                     + "    ____________________________________________________________\n");
-            data.add(cmd);
+            tasks.add(new Task(cmd));
             run(sc.nextLine());
         }
     }
