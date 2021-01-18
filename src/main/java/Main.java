@@ -10,6 +10,7 @@ public class Main {
         System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
         Duke duke = new Duke();
+
         while(sc.hasNextLine()) {
             if (duke.parse(sc.nextLine()) == 0) break;
             System.out.println(duke.output());
