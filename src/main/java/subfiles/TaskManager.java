@@ -3,7 +3,7 @@ package main.java.subfiles;
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<String> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskManager() {
         tasks = new ArrayList<>();
@@ -19,13 +19,21 @@ public class TaskManager {
     }
 
     public void addTask(String s) {
-        tasks.add(s);
+        tasks.add(new Task(s));
         System.out.println("added: " + s);
     }
 
     public void printTasks() {
         for (int i = 1; i < tasks.size() + 1; i++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
+            Task task = tasks.get(i - 1);
+            char isDone = task.isDone() ? 'X' : ' ';
+            System.out.println(i + ". [" + isDone + "] " + task.toString());
         }
+    }
+
+    public void markDone(int index) {
+        tasks.get(index).setDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("[X] " + tasks.get(index).toString());
     }
 }
