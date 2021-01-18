@@ -1,11 +1,19 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Bot that handles user inputs, identifies specific commands and respond accordingly
+ * Available commands: list, bye, done, delete, delete, event, deadline, todo
+ */
 public class DukeBot {
     private List<Task> taskList;
     private boolean isExit;
     private String commandOutput;
 
+    /**
+     * Constructor for DukeBot
+     * Sets up duke bot to welcome user
+     */
     public DukeBot() {
         taskList = new ArrayList<>();
         taskList.add(null);
@@ -15,31 +23,42 @@ public class DukeBot {
         respondToCommand(commandOutput);
     }
 
+    /**
+     *
+     * @param text Text provided by user
+     * @throws DukeException If task description is empty, task selection is invalid, task selection is empty
+     */
     public void handleCommand(String text) throws DukeException {
         commandOutput = "";
-        String[] commandLine = text.split(" "); //entire line of command in String array
+        String[] commandLine = text.split(" ");
         String command = commandLine[0];
         String taskInfo = text.replaceFirst(command + " ", "");
 
+        // Throws exception for ToDo, Event and Deadline tasks
         if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
             String errMsg;
             if (taskInfo.equals(command)) {
+                //Empty description
                 errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
                 throw new DukeException(errMsg);
             }
         }
 
+        // Throws exception for done and delete commands
         if (command.equals("done") || command.equals("delete")) {
             String errMsg;
             if (taskInfo.equals(command)) {
+                // Empty selection
                 errMsg = "☹ OOPS!!! The selection for " + command + " cannot be empty.";
                 throw new DukeException(errMsg);
             } else if (!isNumeric(taskInfo)) {
+                // Selection not numeric
                 errMsg = "☹ OOPS!!! The selection for " + command + " should be a valid Integer.";
                 throw new DukeException(errMsg);
             }
         }
 
+        // Sets up process to be done for specific commands
         switch (command) {
             case "list":
                 listProcess();
@@ -69,15 +88,25 @@ public class DukeBot {
         respondToCommand(commandOutput);
     }
 
+    /**
+     * Sets up program to list out tasks
+     */
     private void listProcess() {
         commandOutput = getTaskListContents();
     }
 
+    /**
+     * Sets up program for System exit
+     */
     private void byeProcess() {
         isExit = true;
         commandOutput = "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Marks selected task as done inside list of tasks
+     * @param selection Selected task
+     */
     private void doneProcess(String selection) {
         int taskNum = Integer.parseInt(selection);
         Task task = taskList.get(taskNum);
@@ -86,6 +115,10 @@ public class DukeBot {
                 + task.toString();
     }
 
+    /**
+     * Deletes selected task from list of tasks
+     * @param selection Selected task
+     */
     private void deleteProcess(String selection) {
         int taskNum = Integer.parseInt(selection);
         Task task = taskList.get(taskNum);
@@ -94,6 +127,10 @@ public class DukeBot {
                 + task.toString() + getRemainingTasks();
     }
 
+    /**
+     * Adds event task to list of tasks
+     * @param taskInfo Task information containing task name, specific start and end time
+     */
     private void eventProcess(String taskInfo) {
         String taskName = taskInfo.split(" /at")[0].replaceFirst("event ", "");
         String date = taskInfo.split(" /at ")[1];
@@ -103,6 +140,10 @@ public class DukeBot {
                 + task.toString() + getRemainingTasks();
     }
 
+    /**
+     * Adds deadline task to list of tasks
+     * @param taskInfo Task information containing task name, specific date/time to be done by
+     */
     private void deadlineProcess(String taskInfo) {
         String taskName = taskInfo.split(" /by")[0].replaceFirst("deadline ", "");
         String date = taskInfo.split(" /by ")[1];
@@ -112,6 +153,10 @@ public class DukeBot {
                 + task.toString() + getRemainingTasks();
     }
 
+    /**
+     * Adds ToDo task to list of tasks
+     * @param taskName Task information containing only task name
+     */
     private void todoProcess(String taskName) {
         Task task = new ToDo(taskName);
         taskList.add(task);
@@ -119,6 +164,10 @@ public class DukeBot {
                 + task.toString() + getRemainingTasks();
     }
 
+    /**
+     * Iterates through the list of tasks and numbers each of them
+     * @return Contents of list of tasks in String
+     */
     private String getTaskListContents() {
         String contents = "Here are the tasks in your list:";
 
@@ -130,10 +179,18 @@ public class DukeBot {
         return contents;
     }
 
+    /**
+     * Shows how many tasks are remaining inside list of tasks
+     * @return Size of list of tasks
+     */
     private String getRemainingTasks() {
         return "\n\tNow you have " + (taskList.size() - 1) + " tasks in the list.";
     }
 
+    /**
+     * Echoes out a response to the user's input
+     * @param selectedOutput Contains different output to be concatenated with main message depending on command
+     */
     public void respondToCommand(String selectedOutput) {
         String responseMsg = "\t____________________________________________________________\n"
                 + "\t" + selectedOutput + "\n"
@@ -146,6 +203,11 @@ public class DukeBot {
         }
     }
 
+    /**
+     * Used for DukeException handling, to check if user provides valid numeric selection when necessary
+     * @param text String to check for numeric value
+     * @return True if valid numeric, false if invalid
+     */
     private boolean isNumeric(String text) {
         try {
             Integer.parseInt(text);
