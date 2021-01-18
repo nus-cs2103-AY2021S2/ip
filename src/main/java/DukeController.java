@@ -24,26 +24,43 @@ public class DukeController {
 
         while (validState) {
             String[] doneLine = line.split(" ", 2);
+            line = doneLine[0]; // get the first keyword
+            String line2 = "";
 
-            if (doneLine[0].equals("done")) {
-                this.list.done(Integer.parseInt(doneLine[1]));
-                line = sc.nextLine();
-            } else {
-                switch (line) {
-                    case ("bye"):
-                        this.goodbye();
-                        validState = false;
-                        break;
-                    case ("list"):
-                        this.list.listItems();
-                        line = sc.nextLine();
-                        break;
-                    default:
-                        list.add(line);
-                        line = sc.nextLine();
-                }
+            if (doneLine.length != 1) {
+                line2 = doneLine[1];
             }
 
+            if (line.equals("bye")) {
+                this.goodbye();
+                validState = false;
+                continue;
+            } else {
+                switch (line) {
+                    case ("list"):
+                        this.list.listItems();
+                        break;
+                    case ("done"):
+                        this.list.done(Integer.parseInt(doneLine[1]));
+                        break;
+                    case ("todo"):
+                        System.out.println(doneLine[1]);
+                        this.list.add(new ToDos(doneLine[1]));
+                        break;
+                    case ("deadline"):
+                        String[] info = doneLine[1].split(" /by ");
+                        this.list.add(new Deadlines(info[0], info[1]));
+                        break;
+                    case ("event"):
+                        String[] info2 = doneLine[1].split(" /at ");
+                        this.list.add(new Events(info2[0], info2[1]));
+                        break;
+                    default:
+                        list.add(line + " " + line2);
+
+                }
+                line = sc.nextLine();
+            }
         }
 
         sc.close();
