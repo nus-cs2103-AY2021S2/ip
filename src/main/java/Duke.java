@@ -9,7 +9,7 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         String logo = " ____        _        \n"
-                + "               |  _ \\ _   _| | _____ \n"
+                + "               |  _ \\ _   _| | _____\n"
                 + "               | | | | | | | |/ / _ \\\n"
                 + "               | |_| | |_| |   <  __/\n"
                 + "               |____/ \\__,_|_|\\_\\___|\n";
@@ -31,7 +31,7 @@ public class Duke {
                 
             } else if (userInput.equals("list")) { //list
                 System.out.println(horzLine
-                    + "\n     Here are the tasks in your list: ");
+                    + "\n     Here are the tasks in your list:");
 
                 for (int i = 0; i < list.size(); i++) {
                     int number = 1 + i;
