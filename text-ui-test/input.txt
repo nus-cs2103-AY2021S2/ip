@@ -5,8 +5,10 @@ event project meeting for cs2103t /at next friday 2-4pm
 list
 done 2
 list
+deadline
 deadline cs2103t luminus quiz 2 /by friday 2pm
 list
 done 4
 list
+blah
 bye

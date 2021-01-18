@@ -43,6 +43,9 @@ Here are the tasks in your list:
 3.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
 ------------------------------------------------------------
 ------------------------------------------------------------
+OOPS!!! The description of a task cannot be empty.
+------------------------------------------------------------
+------------------------------------------------------------
 Got it. I've added this task:
   [D][ ] cs2103t luminus quiz 2 (by: friday 2pm)
 Now you have 4 tasks in your list.
@@ -64,6 +67,10 @@ Here are the tasks in your list:
 2.[D][X] return book (by: Sunday, 24th Jan)
 3.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
 4.[D][X] cs2103t luminus quiz 2 (by: friday 2pm)
+------------------------------------------------------------
+------------------------------------------------------------
+OOPS!!! I'm sorry, but I don't know what that means :-(
+Please enter a valid command:
 ------------------------------------------------------------
 ------------------------------------------------------------
 Bye. Hope to see you again soon!
