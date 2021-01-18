@@ -4,21 +4,59 @@ import java.util.regex.Pattern;
 
 
 public enum CommandType {
-    ADD_EVENT("^event\\s*(.+)"),
-    ADD_DEADLINE("^deadline\\s*(.*)"),
-    ADD_TODO("^todo\\s*(.*)"),
-    MARK_AS_DONE("^done\\s*(.+)"),
-    REMOVE_TASK("^delete\\s*(.+)");
+    ADD_EVENT(){
+        @Override
+        public boolean isMatchingInput(String input) {
+            if (input.startsWith("event ") || input.equals("event")){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+    ADD_DEADLINE() {
+        @Override
+        public boolean isMatchingInput(String input) {
+            if (input.startsWith("deadline ") || input.equals("deadline")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+    ADD_TODO() {
+        @Override
+        public boolean isMatchingInput(String input) {
+            if (input.startsWith("todo ")||input.equals("todo")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+    MARK_AS_DONE() {
+        @Override
+        public boolean isMatchingInput(String input) {
+            if (input.startsWith("done ")|| input.equals("done")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    },
+    REMOVE_TASK() {
+        @Override
+        public boolean isMatchingInput(String input) {
+            if (input.startsWith("delete ")||input.equals("delete")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
 
-    protected final Pattern patternToMatch;
 
-    CommandType(String patternToMatch) {
-        this.patternToMatch = Pattern.compile(patternToMatch);
-    }
-    public boolean isMatchingInput(String input) {
-        Matcher m = patternToMatch.matcher(input);
-        return (m.matches());
-    }
+    public abstract boolean isMatchingInput(String input);
 
 
 

@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 
 public class Duke {
     private static List<Task> listOfTasks = new ArrayList<>();
-    private static final Pattern patternToMarkDone = Pattern.compile("^done\\s+([0-9]+)$");
+
 
     private static void printAllTasks() {
         int counter = 1;
@@ -24,10 +24,16 @@ public class Duke {
     }
 
 
-
-    private static int parseMarkDoneCommand(String input) {
-        Matcher m = patternToMarkDone.matcher(input);
-        m.matches(); // to be implemented : throw error here is m does not match...
+    private static int parseMarkDoneCommand (String input) throws DukeException {
+        String regex = "^done\\s+([0-9]+)$";
+        Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m = patternToMatch.matcher(input);
+        if (input.equals("done")) {
+            throw new DukeException("OOPS!!!The input for done cannot be empty.");
+        }
+        if (!m.matches()){
+            throw new DukeException("OOPS!!!The input for done must be integer.");
+        }
         int indexToMarkDone = Integer.parseInt(m.group(1));
         return indexToMarkDone;
     }
@@ -39,19 +45,19 @@ public class Duke {
         System.out.println("\t" + task);
     }
 
-    private static Task parseAddDeadline(String input) {
+    private static Task parseAddDeadline(String input) throws DukeException {
         String regex = "^deadline\\s+(.+)\\s+/by\\s+(.+)$";
-        Pattern patternToMatch = Pattern.compile(regex);
+        Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
-        m.matches(); //to be implemented : throw error if m does not match
+        m.matches();
         String description = m.group(1);
         String by = m.group(2);
         return new Deadline(description,by);
     }
 
-    private static Task parseAddEvent(String input) {
+    private static Task parseAddEvent(String input) throws DukeException{
         String regex = "^event\\s+(.+)\\s+/at\\s+(.+)$";
-        Pattern patternToMatch = Pattern.compile(regex);
+        Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
         m.matches(); //to be implemented : throw error if m does not match
         String description = m.group(1);
@@ -61,7 +67,7 @@ public class Duke {
 
     private static Task parseToDo(String input) {
         String regex = "^todo\\s+(.+)$";
-        Pattern patternToMatch = Pattern.compile(regex);
+        Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher m = patternToMatch.matcher(input);
         m.matches(); //to be implemented : throw error if m does not match
         String description = m.group(1);
@@ -82,21 +88,25 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             input = sc.nextLine();
-            if (input.equals("bye")) break;
-            if (input.equals("list")) {
-                printAllTasks();
-            } else if (CommandType.MARK_AS_DONE.isMatchingInput(input)) {
-                 int indexToMarkDone = parseMarkDoneCommand(input);
-                 markTaskDone(indexToMarkDone);
-            } else if (CommandType.ADD_DEADLINE.isMatchingInput(input)){
-                Task incomingTask = parseAddDeadline(input);
-                addTask(incomingTask);
-            } else if (CommandType.ADD_EVENT.isMatchingInput(input)) {
-                Task incomingTask = parseAddEvent(input);
-                addTask(incomingTask);
-            } else if (CommandType.ADD_TODO.isMatchingInput(input)) {
-                Task incomingTask = parseToDo(input);
-                addTask(incomingTask);
+            try {
+                if (input.equals("bye")) break;
+                if (input.equals("list")) {
+                    printAllTasks();
+                } else if (CommandType.MARK_AS_DONE.isMatchingInput(input)) {
+                    int indexToMarkDone = parseMarkDoneCommand(input);
+                    markTaskDone(indexToMarkDone);
+                } else if (CommandType.ADD_DEADLINE.isMatchingInput(input)) {
+                    Task incomingTask = parseAddDeadline(input);
+                    addTask(incomingTask);
+                } else if (CommandType.ADD_EVENT.isMatchingInput(input)) {
+                    Task incomingTask = parseAddEvent(input);
+                    addTask(incomingTask);
+                } else if (CommandType.ADD_TODO.isMatchingInput(input)) {
+                    Task incomingTask = parseToDo(input);
+                    addTask(incomingTask);
+                }
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
