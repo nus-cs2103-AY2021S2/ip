@@ -1,18 +1,22 @@
+package task;
+
+import misc.Color;
+
 /**
- * Task object.
+ * task.Task object.
  */
 public class Task {
     /**
-     * Task description.
+     * task.Task description.
      */
-    protected String description;
+    public String description;
     /**
-     * Task completion status.
+     * task.Task completion status.
      */
-    protected boolean isDone;
+    public boolean isDone;
 
     /**
-     * Instantiates a new Task.
+     * Instantiates a new task.Task.
      *
      * @param description the description
      */
@@ -30,10 +34,17 @@ public class Task {
 
     /**
      * Retrieves status string.
-     *
+     *r
      * @return status icon. A check mark for complete tasks , an x mark otherwise.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone
+                ? Color.GREEN + "\u2713" + Color.RESET
+                : Color.RED + "\u2718" + Color.RESET);
+    }
+
+    @Override
+    public String toString() {
+        return this.description + " " + getStatusIcon();
     }
 }

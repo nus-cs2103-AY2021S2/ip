@@ -13,8 +13,6 @@ public class Main {
 
         while(sc.hasNextLine()) {
             if (duke.parse(sc.nextLine()) == 0) break;
-            System.out.println(duke.output());
         }
-        System.out.println(duke.output());
     }
 }
