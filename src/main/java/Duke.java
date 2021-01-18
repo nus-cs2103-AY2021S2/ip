@@ -56,7 +56,6 @@ public class Duke {
         } else if (keyword.equals("done")) {
             doneTask(splitBySpaces);
         } else if (keyword.equals("deadline")) {
-            System.out.println("Hey");
             addDeadline(splitBySpaces);
         } else if (keyword.equals("todo")) {
             addToDo(splitBySpaces);
@@ -74,8 +73,7 @@ public class Duke {
         String task = join(userInputSplit, 1, userInputSplit.length - 1);
         list.add(new ToDo(task));
     }
-    void addDeadline(String[] userInputSplit) {
-        System.out.println(Arrays.toString(userInputSplit));
+    void addDeadline(String[] userInputSplit) throws DukeException {
         //Index of /by keyword
         int byIndex = 0;
         for (int i = 0; i < userInputSplit.length; i++) {
@@ -83,10 +81,17 @@ public class Duke {
                 byIndex = i;
             }
         }
+        if (byIndex == 0) {
+            throw new DukeException("Missing /by keyword for new deadline.");
+        } else if (byIndex == 1) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (byIndex == userInputSplit.length - 1) {
+            throw new DukeException("Missing date of the deadline.");
+        }
         String task = join(userInputSplit, 1, byIndex - 1);
         String date = join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
         list.add(new Deadline(task, date));
-        ;
     }
 
     void addEvent(String[] userInputSplit) {
