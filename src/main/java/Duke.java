@@ -1,8 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    public static void list() {
-        System.out.println("     list");
+    public static void list(ArrayList<String> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("     " + (i + 1) + ": " + tasks.get(i));
+        }
     }
 
     public static void blah() {
@@ -16,6 +19,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
+        ArrayList<String> userTasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,7 +35,7 @@ public class Duke {
             System.out.println("     _______________________________________");
             switch (userInput) {
                 case "list":
-                    list();
+                    list(userTasks);
                     break;
                 case "blah":
                     blah();
@@ -40,6 +44,8 @@ public class Duke {
                     bye();
                     break;
                 default:
+                    userTasks.add(userInput);
+                    System.out.println("     added: " + userInput);
                     break;
             }
             System.out.println("     _______________________________________\n");
