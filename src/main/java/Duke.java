@@ -29,6 +29,22 @@ public class Duke {
                     markAsDone(num);
                     System.out.println(partition);
                     break;
+                case "todo" :
+                    addTask(new Todo(sc.nextLine()));
+                    System.out.println(partition);
+                    break;
+                case "deadline" :
+                    String inst1 = sc.nextLine();
+                    String[] part1 = inst1.split("/by ");
+                    addTask(new Deadline(part1[0], part1[1]));
+                    System.out.println(partition);
+                    break;
+                case "event" :
+                    String inst2 = sc.nextLine();
+                    String[] part2 = inst2.split("/at ");
+                    addTask(new Event(part2[0], part2[1]));
+                    System.out.println(partition);
+                    break;
                 default :
                     addTask(new Task(command));
                     System.out.println(partition);
@@ -42,7 +58,8 @@ public class Duke {
 
     public static void addTask(Task task) {
         ls.add(task);
-        System.out.println("added: " + task.getName());
+        System.out.println("Got it. I've added this task:\n" + task.getStatus());
+        System.out.println("Now you have " + ls.size() + " tasks in the list.");
     }
 
     public static void printTasks() {

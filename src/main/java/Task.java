@@ -12,10 +12,11 @@ public class Task {
     }
 
     public String getStatus() {
-        return "[" + (this.done ? "\u2713" : "\u2718") + "] " + this.name;
+        return "[" + (this.done ? "\u2713" : "\u2718") + "]" + this.name;
     }
 
     public void markDone() {
         this.done = true;
     }
+
 }
