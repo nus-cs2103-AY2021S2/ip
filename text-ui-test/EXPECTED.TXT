@@ -5,3 +5,101 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+
+____________________________________________________________
+Hey there! I'm Duke
+What can I do for you today?
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+TODO » read book [0;31m?[0m
+Now you have 1 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+DEADLINE » read book  (by:  June 6th) [0;31m?[0m
+Now you have 2 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+EVENT » project meeting  (at:  Aug 6th 2-4pm) [0;31m?[0m
+Now you have 3 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+TODO » join sports club [0;31m?[0m
+Now you have 4 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+Sweet! I've marked this task as done:
+[[0;32m?[0m] read book
+____________________________________________________________
+
+
+____________________________________________________________
+Sweet! I've marked this task as done:
+[[0;32m?[0m] join sports club
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+TODO » borrow book [0;31m?[0m
+Now you have 5 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+1 » TODO » read book [0;32m?[0m
+2 » DEADLINE » read book  (by:  June 6th) [0;31m?[0m
+3 » EVENT » project meeting  (at:  Aug 6th 2-4pm) [0;31m?[0m
+4 » TODO » join sports club [0;32m?[0m
+5 » TODO » borrow book [0;31m?[0m
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+DEADLINE » return book  (by:  Sunday) [0;31m?[0m
+Now you have 6 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+Alrighty! I've added this task:
+EVENT » project meeting  (at:  Mon 2-4pm) [0;31m?[0m
+Now you have 7 tasks in the list.
+____________________________________________________________
+
+
+____________________________________________________________
+1 » TODO » read book [0;32m?[0m
+2 » DEADLINE » read book  (by:  June 6th) [0;31m?[0m
+3 » EVENT » project meeting  (at:  Aug 6th 2-4pm) [0;31m?[0m
+4 » TODO » join sports club [0;32m?[0m
+5 » TODO » borrow book [0;31m?[0m
+6 » DEADLINE » return book  (by:  Sunday) [0;31m?[0m
+7 » EVENT » project meeting  (at:  Mon 2-4pm) [0;31m?[0m
+____________________________________________________________
+
+
+____________________________________________________________
+1 » TODO » read book [0;32m?[0m
+2 » DEADLINE » read book  (by:  June 6th) [0;31m?[0m
+3 » EVENT » project meeting  (at:  Aug 6th 2-4pm) [0;31m?[0m
+4 » TODO » join sports club [0;32m?[0m
+5 » TODO » borrow book [0;31m?[0m
+6 » DEADLINE » return book  (by:  Sunday) [0;31m?[0m
+7 » EVENT » project meeting  (at:  Mon 2-4pm) [0;31m?[0m
+____________________________________________________________
+

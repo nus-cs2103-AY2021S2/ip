@@ -1,3 +1,6 @@
+import duke.Duke;
+import exception.DukeException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +15,11 @@ public class Main {
         Duke duke = new Duke();
 
         while(sc.hasNextLine()) {
-            if (duke.parse(sc.nextLine()) == 0) break;
+            try {
+                if (duke.parse(sc.nextLine()) == 0) break;
+            } catch (DukeException ex) {
+                System.out.println(ex.toString());
+            }
         }
     }
 }
