@@ -82,6 +82,16 @@ public class AppController {
                         }
                         break;
 
+                    case "delete":
+                        // delete a todo from the list
+                        try {
+                            todosController = todosController.deleteTodo(command.getCommandArgs());
+
+                        } catch (Exception e) {
+                            greeting.printErrorMessage(e);
+                        }
+                        break;
+
                     case "bye":
                         // break out of main function
                         greeting.bye();

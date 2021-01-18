@@ -27,4 +27,8 @@ list
 blah
 list
 blah blah
+delete 1
+list
+delete 2
+list
 bye

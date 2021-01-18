@@ -48,11 +48,15 @@ public class TodosView {
      * @param newTodo  Optional Todo object containing a new Todo to be printed
      * @param listSize Integer list size taken to return the number of tasks user
      *                 currently has
-     * @throws Exception if the newTodo object is empty
      */
-    public void added(Optional<? extends Todo> newTodo, int listSize) throws Exception {
+    public void added(Optional<? extends Todo> newTodo, int listSize) {
         printWithSpacing(String.format("Got it! I've added this task:\n%s\nNow you have %d tasks in the list.",
                 renderTodoLine(newTodo), listSize));
+    }
+
+    public void deleted(Optional<? extends Todo> deletedTodo, int listSize) {
+        printWithSpacing(String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                renderTodoLine(deletedTodo), listSize));
     }
 
     /**

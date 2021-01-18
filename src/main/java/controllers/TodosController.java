@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 import exceptions.DukeBlankDetailsException;
 import exceptions.DukeBlankTaskException;
 import exceptions.DukeTaskIndexOutOfRangeException;
+
 import models.Deadline;
 import models.Event;
 import models.Todo;
@@ -72,6 +73,28 @@ public class TodosController {
                 Stream.concat(this.todosList.stream(), Stream.of(newTodoObject)).collect(Collectors.toList()));
     }
 
+    public TodosController deleteTodo(List<String> deleteTodoArgs)
+            throws DukeBlankTaskException, DukeTaskIndexOutOfRangeException {
+        // check if args is empty
+        if (deleteTodoArgs.size() == 0) {
+            throw new DukeBlankTaskException("Please input an index for the Todo you want to delete!");
+        }
+
+        // get index of todo to delete
+        int idxDelete = Integer.parseInt(deleteTodoArgs.get(0)) - 1;
+        if (idxDelete >= this.todosList.size()) {
+            throw new DukeTaskIndexOutOfRangeException(
+                    "The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.");
+        }
+
+        // render deleted view
+        todosView.deleted(this.todosList.get(idxDelete), this.todosList.size() - 1);
+
+        // remove from stream
+        return new TodosController(IntStream.range(0, this.todosList.size()).filter(idx -> idx != idxDelete)
+                .mapToObj(idx -> this.todosList.get(idx)).collect(Collectors.toList()));
+    }
+
     /**
      * Takes in the list containing details about the new deadline and returns a new
      * TodosController with the new Deadline added
@@ -122,11 +145,9 @@ public class TodosController {
         // added the '/by' which shouldn't be in the actual Deadline object
         Optional<Deadline> newDeadline = Optional.ofNullable(
                 new Deadline(String.join(" ", message), String.join(" ", deadline.subList(1, deadline.size()))));
-        try {
-            this.todosView.added(newDeadline, this.todosList.size() + 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        // render added view
+        this.todosView.added(newDeadline, this.todosList.size() + 1);
 
         // return new controller
         return new TodosController(
