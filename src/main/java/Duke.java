@@ -6,12 +6,14 @@ public class Duke {
     static ArrayList<Task> tasks = new ArrayList<>();
 
     static void display(String str) {
+        int longest = 0;
         String[] strings = str.split("\n");
-        System.out.println("    " + "___________________________________________________________________");
-        for (String s : strings) {
-            System.out.println("     " + s);
-        }
-        System.out.println("    " + "___________________________________________________________________");
+        for (String s : strings) if (s.length() > longest) longest = s.length();
+        String topBorder = "    ╭" + "-".repeat(longest + 2) + "╮\n";
+        String botBorder = "    ╰" + "-".repeat(longest + 2) + "╯\n";
+        StringBuilder mainText = new StringBuilder();
+        for (String s : strings) mainText.append("    | " + s + " ".repeat(longest - s.length() + 1) + "|\n");
+        System.out.println(topBorder + mainText + botBorder);
     }
 
     static void displayAllTasks() {
@@ -34,7 +36,7 @@ public class Duke {
 
     static void displayRemovedTask(Task task) {
         display("Aw man... I told Ronald that was a bad item to put on the menu.\n"
-        +"Here you go, I've removed this item from your order list!\n" + task +
+                + "Here you go, I've removed this item from your order list!\n" + task +
                 "You have " + tasks.size() + " order(s) left!");
     }
 
