@@ -13,22 +13,19 @@ public class Duke {
             printLine();
             // Split command to check if first word is done
             // and also to extract the option
-            String[] commandArr = command.split(" ");
-            switch (commandArr[0]) {
+            int firstSpace = command.indexOf(" ");
+            switch (command.substring(0,firstSpace)) {
                 case "list":
                     //Display all task added
                     listTasks();
                     break;
                 case "done":
-                    int option = Integer.parseInt(commandArr[commandArr.length - 1]) - 1;
+                    int option = Integer.parseInt(command.substring(firstSpace)) - 1;
                     //Mark task of choice as done
                     completeTask(option);
                     break;
-                default:
-                    //Adding command as task into taskList
-                    taskList.add(new Task(command));
-                    //Echo command
-                    System.out.printf("added: %s\n", command);
+                case "todo":
+                    addTask(new Todo(retrieveTask(command,firstSpace, command.length())));
                     break;
             }
             printLine();
@@ -37,6 +34,21 @@ public class Duke {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
+    }
+
+    public static String retrieveTask(String command , int start, int end) {
+        return command.substring(start,end);
+    }
+
+    public static void addTask(Task newTask) {
+        taskList.add(newTask);
+        System.out.println("Got it. I`ve added this task: ");
+        printTask("", newTask);
+        printTaskNum();
+    }
+
+    public static void printTaskNum() {
+        System.out.printf("Now you have %d task in the list\n", taskList.size());
     }
 
     public static void completeTask(int option) {
@@ -50,19 +62,19 @@ public class Duke {
 
         if (res) {
             System.out.println("Nice! I`ve marked this task as done:");
-            System.out.println(taskList.get(option));
+            printTask("", taskList.get(option));
         } else {
             System.out.println(message);
         }
     }
 
     public static void printTask(String numbering, Task task) {
-        System.out.printf("%s %s\n", numbering , task);
+        System.out.printf("%2s %s\n", numbering , task);
     }
 
     public static void listTasks() {
         for(int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d. %s\n", (i+1) , taskList.get(i));
+            printTask (i+1+ "." , taskList.get(i));
         }
     }
 
