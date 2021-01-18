@@ -18,28 +18,24 @@ public class Skeleton {
         String word = "";
         String rest = "";
         greet();
-        cmd = sc.nextLine();
-        int i = cmd.indexOf(' ');
-        if (i >= 0) {
-            word = cmd.substring(0, i);
-            rest = cmd.substring(i);
-        }
-        while (!cmd.equals("bye")) {
-            if (cmd.equals("list")) {
-                listItems();
-            } else if (word.equals("done")) {
-                int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
-                done(value);
-            } else {
-                add(word, rest);
-            }
-            i = cmd.indexOf(' ');
+        while (true) {
+            cmd = sc.nextLine();
+            int i = cmd.indexOf(' ');
             if (i >= 0) {
                 word = cmd.substring(0, i);
                 rest = cmd.substring(i);
             }
+            if (cmd.equals("bye")) {
+                terminate();
+            } else if (cmd.equals("list")) {
+                listItems();
+            } else if (word.equals("done")) {
+                int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
+                done(value);
+            }  else {
+                add(word, rest);
+            }
         }
-        terminate();
     }
 
     /** function that adds to a storage list the type of task the user has input. */
@@ -61,7 +57,6 @@ public class Skeleton {
         System.out.println(storage.get(current));
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
         System.out.println();
-        cmd = sc.nextLine();
         current++;
     }
 
@@ -70,7 +65,6 @@ public class Skeleton {
         System.out.println("YOSHA! KONNO TASK GA OWARIMASHITA! GANBARE");
         System.out.println(storage.get(value-1));
         System.out.println();
-        cmd = sc.nextLine();
     }
 
     /** function that lists whatever the user has stored.*/
@@ -85,13 +79,13 @@ public class Skeleton {
                 System.out.println((j+1) + ". " + storage.get(j));
             }
             System.out.println();
-            cmd = sc.nextLine();
         }
     }
     /** function that exits the program when the user types bye*/
     static void terminate(){
         System.out.println("Sayonara, mata ne!");
         System.out.println();
+        sc.close();
         exit(0);
     }
 
@@ -99,6 +93,6 @@ public class Skeleton {
     static void greet(){
         System.out.println("Konnichiwa! watashi wa Duke desu");
         System.out.println("Dou shi mashi taka?");
-        System.out.println();
+        System.out.println("***********");
     }
 }
