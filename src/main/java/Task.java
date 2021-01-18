@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     public String toString() {
         return (this.isDone ? "[\u2713]" : "[\u2718]") + " " + this.description;
     }

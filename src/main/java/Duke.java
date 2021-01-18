@@ -13,29 +13,34 @@ public class Duke {
         
         printMessage("Hey! It's PAson, ready to help :)\nHow can I help you today?");
         while(scanner.hasNext()) {
-            input = scanner.nextLine();
-            splitInput = input.split(" ");
-            String command = splitInput[0].toLowerCase();
-            switch (command) {
-                case "bye":
-                    printMessage("Bye! I shall go rest now. PAge me when you need me!");
-                    return;
-                case "list":
-                    listTasks();
-                break;
-                case "done":
-                    doneTask(Integer.parseInt(splitInput[1]));
-                    break;
-                case "todo":
-                    addToDo(input);
-                    break;
-                case "deadline":
-                    addDeadline(input);
-                    break;
-                case "event":
-                    addEvent(input);
-                    break;
-                default:
+            try {
+                input = scanner.nextLine();
+                splitInput = input.split(" ");
+                String command = splitInput[0].toLowerCase();
+                switch (command) {
+                    case "bye":
+                        printMessage("Bye! I shall go rest now. PAge me when you need me!");
+                        return;
+                    case "list":
+                        listTasks();
+                        break;
+                    case "done":
+                        doneTask(Integer.parseInt(splitInput[1]));
+                        break;
+                    case "todo":
+                        addToDo(input);
+                        break;
+                    case "deadline":
+                        addDeadline(input);
+                        break;
+                    case "event":
+                        addEvent(input);
+                        break;
+                    default:
+                        throw new DukeException("I can't help you with this command yet. Sorry!");
+                }
+            } catch(Exception e) {
+                printMessage("Oops! " + e.getMessage());
             }
         }
     }
@@ -47,8 +52,17 @@ public class Duke {
     }
 
     public static void doneTask(int index) {
-        tasks.get(index - 1).markAsDone();
-        printMessage("Good job! I've marked this task as done:\n"+tasks.get(index - 1));
+        try {
+            if(tasks.get(index - 1).isDone()) {
+                throw new DukeException("You've already marked this task as done.");
+            }
+            tasks.get(index - 1).markAsDone();
+            printMessage("Good job! I've marked this task as done:\n" + tasks.get(index - 1));
+        } catch(IndexOutOfBoundsException e) {
+            printMessage("Oops! We couldn't find this task. Please enter the correct task number.");
+        } catch(Exception e) {
+            printMessage("Oops! " + e.getMessage());
+        }
     }
 
     public static void listTasks() {
@@ -65,38 +79,59 @@ public class Duke {
     }
 
     public static void addToDo(String input) {
-        Pattern p = Pattern.compile("(todo) ([\\w ]*)");
-        Matcher m = p.matcher(input);
-        if(!m.find()) {
-            printMessage("You've entered an invalid format.");
-            return;
+        try {
+            Pattern p = Pattern.compile("(todo) ([\\w ]*)");
+            Matcher m = p.matcher(input);
+            if(!m.find()) {
+                throw new DukeException("Please include a description for your todo task.");
+            }
+            ToDo newToDo = new ToDo(m.group(2));
+            tasks.add(newToDo);
+            printMessage("Done! I've added a new todo:\n\t" + newToDo + "\nNow there are " + tasks.size() + " tasks in your list.");
+        } catch(Exception e) {
+            printMessage("Oops! " + e.getMessage());
         }
-        ToDo newToDo = new ToDo(m.group(2));
-        tasks.add(newToDo);
-        printMessage("Done! I've added a new todo:\n\t" + newToDo + "\nNow there are " + tasks.size() + " tasks in your list.");
     }
 
     public static void addDeadline(String input) {
-        Pattern p = Pattern.compile("(deadline) ([\\w ]*)( \\/by )([\\w- ]*)");
-        Matcher m = p.matcher(input);
-        if(!m.find()) {
-            printMessage("You've entered an invalid format.");
-            return;
+        try {
+            String[] splitInput;
+            splitInput = input.substring(8).trim().split(" /by ");
+            if(splitInput.length == 2) {
+                Deadline newDeadline = new Deadline(splitInput[0], splitInput[1]);
+                tasks.add(newDeadline);
+                printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
+            } else if(splitInput.length == 1) {
+                System.out.println(splitInput[0]);
+                throw new DukeException("Please enter a by date for '" + splitInput[0] + "'");
+            } else if(splitInput.length == 0) {
+                throw new DukeException("Please enter a description followed by the date in the format: deadline <description> /by <when>");
+            } else {
+                throw new DukeException("You've entered an invalid format. Please use: deadline <description> /by <when>");
+            }
+        } catch(DukeException e) {
+            printMessage("Oops! " + e.getMessage());
         }
-        Deadline newDeadline = new Deadline(m.group(2), m.group(4));
-        tasks.add(newDeadline);
-        printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
     }
 
     public static void addEvent(String input) {
-        Pattern p = Pattern.compile("(event) ([\\w ]*)( \\/at )([\\w-]*) ([\\w- ]*)");
-        Matcher m = p.matcher(input);
-        if(!m.find()) {
-            printMessage("You've entered an invalid format.");
-            return;
+        try {
+            String[] splitInput;
+            splitInput = input.substring(5).trim().split(" /at ");
+            if(splitInput.length == 2) {
+                Event newEvent = new Event(splitInput[0], splitInput[1]);
+                tasks.add(newEvent);
+                printMessage("Done! I've added a new event:\n\t" + newEvent + "\nNow there are " + tasks.size() + " tasks in your list.");
+            } else if(splitInput.length == 1) {
+                System.out.println(splitInput[0]);
+                throw new DukeException("Please enter a by date for '" + splitInput[0] + "'");
+            } else if(splitInput.length == 0) {
+                throw new DukeException("Please enter a description followed by the date in the format: event <description> /at <when>");
+            } else {
+                throw new DukeException("You've entered an invalid format. Please use: event <description> /at <when>");
+            }
+        } catch(DukeException e) {
+            printMessage("Oops! " + e.getMessage());
         }
-        Event newEvent = new Event(m.group(2), m.group(4), m.group(5));
-        tasks.add(newEvent);
-        printMessage("Done! I've added a new event:\n\t" + newEvent + "\nNow there are " + tasks.size() + " tasks in your list.");
     }
 }

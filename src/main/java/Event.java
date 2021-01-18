@@ -1,14 +1,12 @@
 public class Event extends Task {
-    protected String day;
-    protected String time;
+    protected String at;
 
-    public Event(String description, String day, String time) {
+    public Event(String description, String at) {
         super(description);
-        this.day = day;
-        this.time = time;
+        this.at = at;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " " + "(at: " + this.day + " " + this.time + ")";
+        return "[E]" + super.toString() + " " + "(at: " + this.at + ")";
     }
 }
