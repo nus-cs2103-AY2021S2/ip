@@ -22,10 +22,7 @@ public class Duke {
         }
         printHorizontalLine();
         printEmptyLine();
-        if (command.equals("bye")) {
-            return false;
-        }
-        return true;
+        return !command.equals("bye");
     }
 
     public static void main(String[] args) {
