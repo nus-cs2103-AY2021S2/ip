@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -15,9 +19,9 @@ public class Task {
 
     public String getStatusIcon() {
         if(isDone) {
-            return "[ ]";
-        } else {
             return "[X]";
+        } else {
+            return "[ ]";
         }
     }
 

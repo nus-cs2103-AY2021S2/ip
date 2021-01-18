@@ -22,6 +22,9 @@ public class Duke {
                     list.printList();
                 } else if(starr[0].equals("done")){
                     list.lst.get(Integer.parseInt(starr[1]) - 1).done();
+                    pw.println("Nice! I've marked this task as done:");
+                    pw.printf(" %s%n", list.lst.get(Integer.parseInt(starr[1]) - 1));
+                    pw.flush();
                 } else if(starr[0].equals("todo")) {
                     String message = "";
                     String type = null;
