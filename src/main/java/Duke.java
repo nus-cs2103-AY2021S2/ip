@@ -15,8 +15,8 @@ public class Duke {
 
     public static void addReply(Task task) {
         String msg = REPLY_INDENTATION + "Got it. I've added this task:\n"
-                + REPLY_INDENTATION +  "  " + task + "\n"
-                + REPLY_INDENTATION +  "Now you have " + tasks.size() + " tasks in the list.\n";
+                + REPLY_INDENTATION + "  " + task + "\n"
+                + REPLY_INDENTATION + "Now you have " + tasks.size() + " tasks in the list.\n";
         reply(msg);
     }
 
@@ -28,6 +28,10 @@ public class Duke {
         } else {
             return parts[1];
         }
+    }
+
+    public static int getIndex(String input) {
+        return Integer.parseInt(input.split(" ")[1]) - 1;
     }
 
     // Commands
@@ -69,13 +73,28 @@ public class Duke {
     }
 
     public static void done(String input) {
-        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+        int index = getIndex(input);
 
         try {
             tasks.get(index).markDone();
 
             String msg = REPLY_INDENTATION + "Nice! I've marked this task as done:\n"
                     + REPLY_INDENTATION + "  " + tasks.get(index) + "\n";
+            reply(msg);
+        } catch (IndexOutOfBoundsException exception) {
+            reply(REPLY_INDENTATION + "☹ Sorry, I was not able to find the task.\n");
+        }
+    }
+
+    public static void delete(String input) {
+        int index = getIndex(input);
+
+        try {
+            Task deletedTask = tasks.remove(index);
+
+            String msg = REPLY_INDENTATION + "Noted. I've removed this task:\n"
+                    + REPLY_INDENTATION + "  " + deletedTask + "\n"
+                    + REPLY_INDENTATION + "Now you have " + tasks.size() + " tasks in the list.\n";
             reply(msg);
         } catch (IndexOutOfBoundsException exception) {
             reply(REPLY_INDENTATION + "☹ Sorry, I was not able to find the task.\n");
@@ -109,6 +128,8 @@ public class Duke {
                 try {
                     if (input.matches("done \\d+")) {
                         done(input);
+                    } else if (input.matches("delete \\d+")) {
+                        delete(input);
                     } else if (input.matches("todo.*")) {
                         addTodo(input);
                     } else if (input.matches("deadline.*")) {
