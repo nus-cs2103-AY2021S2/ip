@@ -12,7 +12,7 @@ public class Duke {
      */
     private static void markDone(int i) {
         taskList.get(i - 1).markAsDone();
-
+        print(new String[]{"Nice! I've marked this task as done: ", "  " + taskList.get(i - 1)});
     }
 
     private static void printTaskList() {
@@ -64,9 +64,8 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 printTaskList();
-            } else if (userInput.startsWith("done")) {
+            } else if (userInput.startsWith("done ")) {
                 Scanner stringSc = new Scanner(userInput);
-                System.out.println("user input: " + userInput);
                 stringSc.next();
                 markDone(stringSc.nextInt());
                 stringSc.close();

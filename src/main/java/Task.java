@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); // return tick or space
+        return (isDone ? "/" : " "); // todo check if custom symbols okay
     }
 
     // return type?
