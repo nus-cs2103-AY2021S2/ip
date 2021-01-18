@@ -44,7 +44,14 @@ public class IOManager {
                     pw.println("bye");
                     break;
                 } else {
-                    pw.println(s);
+                    String toPrint = "";
+                    for(var x : InputType.values()) {
+                        if(x.doesMatch(s)) {
+                            toPrint += listener.onNewInput(x, s);
+                            break;
+                        }
+                    }
+                    pw.println(toPrint);
                 }
                 postOutputFormatting();
                 pw.flush();
