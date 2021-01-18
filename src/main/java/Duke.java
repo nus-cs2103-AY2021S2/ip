@@ -1,6 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Duke {
+    public static ArrayList<String> tasks = new ArrayList<String>();
+
+    private static final Set<String> EXIT_COMMANDS = Set.of(
+            "bye", "exit", "quit"
+    );
+
     public static void printLine(String line) {
         System.out.println("     " + line);
     }
@@ -15,14 +23,25 @@ public class Duke {
 
     public static boolean processCommand(String command) {
         printHorizontalLine();
-        if (command.equals("bye")) {
+        if (EXIT_COMMANDS.contains(command)) {
             printLine("Bye. Hope to see you again soon!");
         } else {
-            printLine(command);
+            switch (command) {
+                case "list":
+                    int index = 0;
+                    for (String task : tasks) {
+                        printLine(String.format("%d: %s", ++index, task));
+                    }
+                    break;
+                default:
+//                printLine(command);
+                    tasks.add(command);
+                    printLine(String.format("added: %s", command));
+            }
         }
         printHorizontalLine();
         printEmptyLine();
-        return !command.equals("bye");
+        return !EXIT_COMMANDS.contains(command);
     }
 
     public static void main(String[] args) {
