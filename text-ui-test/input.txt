@@ -9,4 +9,11 @@ list
 deadline do homework /by no idea :-p
 done 1
 list done 4
+event random event /at some time in the future
+todo blah
+list
+random
+delete 3
+done 1
+list
 bye
