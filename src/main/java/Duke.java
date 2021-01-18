@@ -60,7 +60,7 @@ public class Duke {
                 else {
                     task = new Task("dummy");
                 }
-                System.out.println("Got it, I've added this task:");
+                System.out.println("Got it. I've added this task:");
                 System.out.println(task);
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
             }
