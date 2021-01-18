@@ -1,4 +1,4 @@
-import java.util.ArrayList;;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,44 +6,49 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String task = "", deadline = "";
-        int firstSpace = 0, firstSlash = 0;
+        String task, deadline, keyword;
+        int firstSpace, firstSlash;
         //Greet User
         printGreetings();
         String command = scanner.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
             printLine();
-            // Split command to check if first word is done
-            // and also to extract the option
+
             firstSpace = command.indexOf(" ");
-            firstSpace = firstSpace == -1 ? command.length() : firstSpace;
+            keyword = firstSpace == -1 ? command : command.substring(0,firstSpace).toLowerCase();
             firstSlash = findSlash(command);
-            switch (command.substring(0,firstSpace).toLowerCase()) {
-                case "list":
-                    //Display all task added
-                    listTasks();
-                    break;
-                case "done":
-                    // -1 as ArrayList starts from 0 , user input starts from 1
-                    int option = Integer.parseInt(command.substring(firstSpace + 1)) - 1;
-                    //Mark task of choice as done
-                    completeTask(option);
-                    break;
-                case "todo":
-                    task = retrieveTask(command,firstSpace, command.length());
-                    addTask(new Todo(task));
-                    break;
-                case "deadline":
-                    task = retrieveTask(command,firstSpace, firstSlash);
-                    deadline = retrieveDeadline(command,firstSlash);
-                    // +1 to exclude / in the deadline
-                    addTask(new Deadline(task, deadline));
-                    break;
-                case "event":
-                    task = retrieveTask(command,firstSpace, firstSlash);
-                    deadline = retrieveDeadline(command,firstSlash);
-                    addTask(new Event(task,deadline));
-                    break;
+            try {
+                switch (keyword) {
+                    case "list":
+                        //Display all task added
+                        listTasks();
+                        break;
+                    case "done":
+                        // -1 as ArrayList starts from 0 , user input starts from 1
+                        int option = Integer.parseInt(command.substring(firstSpace + 1)) - 1;
+                        //Mark task of choice as done
+                        completeTask(option);
+                        break;
+                    case "todo":
+                        task = retrieveTask(command, firstSpace, command.length());
+                        addTask(new Todo(task));
+                        break;
+                    case "deadline":
+                        task = retrieveTask(command, firstSpace, firstSlash);
+                        deadline = retrieveDeadline(command, firstSlash);
+                        addTask(new Deadline(task, deadline));
+                        break;
+                    case "event":
+                        task = retrieveTask(command, firstSpace, firstSlash);
+                        deadline = retrieveDeadline(command, firstSlash);
+                        addTask(new Event(task, deadline));
+                        break;
+                    default:
+                        System.out.println("OOPS!!! I`m sorry. but i don`t know what that means :-(");
+                        break;
+                }
+            } catch (DukeException e) {
+                System.out.printf("OOPS!!! %s %s cannot be empty.\n", e.getMessage(), keyword);
             }
             printLine();
             command = scanner.nextLine();
@@ -72,7 +77,17 @@ public class Duke {
         return command.indexOf("/");
     }
 
-    public static String retrieveTask(String command , int start, int end) {
+    public static String retrieveTask(String command , int start, int end) throws DukeException {
+        // RetrieveTask starts from the space after the keyword
+        // RetrieveTask ends either end of the string or before / (deadline and event)
+        // E.g <keyword> <description> (datetime/time)
+        // if start == -1 --> e.g todo , deadline , event
+        // if end == -1 --> deadline buy book , event buy book
+        if (start == -1) {
+            throw new DukeException("The description of a");
+        } else if (end == -1) {
+            throw new DukeException("The deadline of a");
+        }
         return command.substring(start,end);
     }
 
