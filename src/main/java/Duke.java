@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.ArrayList;;
 import java.util.Scanner;
 
 public class Duke {
@@ -6,27 +6,40 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String task = "", deadline = "";
+        int firstSpace = 0;
         //Greet User
         printGreetings();
-        String command = scanner.nextLine();
+        String command = scanner.nextLine().toLowerCase();
         while (!command.equalsIgnoreCase("bye")) {
             printLine();
             // Split command to check if first word is done
             // and also to extract the option
-            int firstSpace = command.indexOf(" ");
+            firstSpace = command.indexOf(" ");
+            firstSpace = firstSpace == -1 ? command.length() : firstSpace;
             switch (command.substring(0,firstSpace)) {
                 case "list":
                     //Display all task added
                     listTasks();
                     break;
                 case "done":
-                    int option = Integer.parseInt(command.substring(firstSpace)) - 1;
+                    // -1 as ArrayList starts from 0 , user input starts from 1
+                    int option = Integer.parseInt(command.substring(firstSpace + 1)) - 1;
                     //Mark task of choice as done
                     completeTask(option);
                     break;
                 case "todo":
-                    addTask(new Todo(retrieveTask(command,firstSpace, command.length())));
+                    task = retrieveTask(command,firstSpace, command.length());
+                    addTask(new Todo(task));
                     break;
+                case "deadline":
+                    int firstSlash = findSlash(command);
+                    task = retrieveTask(command,firstSpace, firstSlash);
+                    deadline = retrieveDeadline(command,firstSlash);
+                    // +1 to exclude / in the deadline
+                    addTask(new Deadline(task, deadline));
+                    break;
+
             }
             printLine();
             command = scanner.nextLine().toLowerCase();
@@ -34,6 +47,25 @@ public class Duke {
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
+    }
+
+    public static String retrieveDeadline(String command, int start) {
+        boolean space = false;
+        StringBuilder res = new StringBuilder();
+        for(int i = start + 1; i < command.length(); i++) {
+            if (!space && command.charAt(i) == ' ') {
+                space = true;
+                continue;
+            }
+            if(space) {
+                res.append(command.charAt(i));
+            }
+        }
+        return res.toString();
+    }
+
+    public static int findSlash(String command) {
+        return command.indexOf("/");
     }
 
     public static String retrieveTask(String command , int start, int end) {
