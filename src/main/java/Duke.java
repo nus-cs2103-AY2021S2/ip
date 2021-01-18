@@ -72,7 +72,6 @@ public class Duke {
         } catch (TextException e) {
             formatInChatBox(e.getMsgDes());
         }
-
     }
 
     public static void list() {
@@ -94,6 +93,13 @@ public class Duke {
         formatInChatBox("Nice! I've marked this task as done:\n" + taskToBeMarked);
     }
 
+    public static void delete(int index) {
+        Task taskToBeDeleted = tasks.remove(index - 1);
+        formatInChatBox("Got it. I've removed this task:" + '\n'
+                + taskToBeDeleted + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n");
+    }
+
     public static void exit() {
         String goodbye = "Bye. Hope to see you again soon!\n";
         formatInChatBox(goodbye);
@@ -113,6 +119,9 @@ public class Duke {
             } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
                 int index = Integer.parseInt(input.substring(5));
                 mark(index);
+            } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
+                int index = Integer.parseInt(input.substring(7));
+                delete(index);
             } else {
                 analyzeTypeAndAdd(input);
             }
