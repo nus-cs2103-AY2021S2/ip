@@ -50,6 +50,9 @@ public class Duke {
                         checkList.add(Event.createEvent(input));
                         taskAdded();
                         break;
+                    case "delete":
+                        deleteTask(input);
+                        break;
                     default: 
                         echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } 
@@ -84,8 +87,17 @@ public class Duke {
         System.out.println("\t____________________________________________________________\n");
     }
 
-    private void completeTask(String s) {
-        int taskNum = Integer.parseInt(s);
+    private void completeTask(String num) throws DukeException {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new DukeException("This is not a valid number!");
+        }
+        if (taskNum > checkList.size()) {
+            throw new DukeException("This number is too big!");
+        }
+
         Task t = checkList.get(taskNum-1);
         t.completed();
         
@@ -98,4 +110,22 @@ public class Duke {
                 "Now you have "+checkList.size()+" tasks in the list."));
     }
 
+    private void deleteTask(String num) throws DukeException {
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(num);
+        } catch (NumberFormatException e) {
+            throw new DukeException("This is not a valid number!");
+        }
+        if (taskNum > checkList.size()) {
+            throw new DukeException("This number is too big!");
+        }
+        
+        Task t = checkList.get(taskNum-1);
+        checkList.remove(taskNum-1);
+        
+        echo(List.of("Noted. I've removed this task:",
+                t.toString(),
+                "Now you have "+checkList.size()+" tasks in the list."));
+    }
 }
