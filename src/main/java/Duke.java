@@ -25,6 +25,15 @@ public class Duke {
                                 taskList.markDone(Integer.parseInt(splitInput[1]));
                             }
                             break;
+                        case "delete":
+                            if (splitInput.length < 2) {
+                                throw new DukeException("The task index is missing.");
+                            } else if (Integer.parseInt(splitInput[1]) > taskList.size()) {
+                                throw new DukeException("The task index is out of range.");
+                            } else {
+                                taskList.delete(Integer.parseInt(splitInput[1]));
+                            }
+                            break;
                         case "todo":
                             if (splitInput.length < 2) {
                                 throw new DukeException("The description of a todo cannot be empty.");

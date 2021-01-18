@@ -16,6 +16,15 @@ public class TaskList {
     Duke.printLineBreak();
   }
 
+  public void delete(int idx) {
+    Task deleted = taskList.remove(idx-1);
+    Duke.printLineBreak();
+    Duke.printIndented("Noted. I've removed this task:");
+    Duke.printIndented(String.format("  %s", deleted));
+    Duke.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
+    Duke.printLineBreak();
+  }
+
   public void markDone(int idx) {
     taskList.get(idx-1).setDone();
     Duke.printLineBreak();
