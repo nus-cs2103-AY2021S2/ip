@@ -17,86 +17,95 @@ public class Duke {
         while (isChatBotOnline) {
             // Listen to input
             String input = sc.nextLine();
-            String command = formatCommand(input);
+            String inputCommand = formatCommand(input);
+            Commands command = Commands.get(inputCommand);
             String additionalText = formatCommandText(input);
 
             // Echoing the input
-            if (command.equals("bye")) {
-                String byeMessage = "Goodbye, hope you had a great time!";
-                System.out.println(formatMessage(byeMessage));
-                isChatBotOnline = false;
-            } else if (command.equals("list")) {
-                System.out.println(formatMessage(getTaskListString(taskList)));
-            } else if (command.equals("done")) {
-                try {
-                    int taskNumber = Integer.parseInt(additionalText);
-                    int arrayNumber = taskNumber - 1;
-                    Task task = taskList.get(arrayNumber);
-                    String doneMessage = task.setDone();
-                    System.out.println(formatMessage(doneMessage));
-                } catch (NumberFormatException e) {
-                    System.out.println(formatMessage(e +
-                            "\nError! Invalid task number." +
-                            "\nPlease input a valid task number!"));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e +
-                            "\nError! Task number does not exist." +
-                            "\nPlease input a valid task number!");
-                }
-            } else if (command.equals("delete")) {
-                try {
-                    int taskNumber = Integer.parseInt(additionalText);
-                    int arrayNumber = taskNumber - 1;
-                    Task task = taskList.get(arrayNumber);
-                    taskList.remove(arrayNumber);
-                    System.out.println(formatMessage("The following task has been removed:\n" +
-                            task + "\n" + Task.getNumOfTasksString()));
-                } catch (NumberFormatException e) {
-                    System.out.println(formatMessage(e +
-                            "\nError! Invalid task number." +
-                            "\nPlease input a valid task number!"));
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e +
-                            "\nError! Task number does not exist." +
-                            "\nPlease input a valid task number!");
-                }
-            } else if (command.equals("todo")) {
-                try {
-                    Todos todos = new Todos(additionalText);
-                    taskList.add(todos);
-                    printTaskAddedMessage(todos);
-                } catch (EmptyTaskDukeException e) {
-                    System.out.println(formatMessage(e + ""));
-                }
-            } else if (command.equals("deadline")) {
-                try {
-                    Deadlines deadlines = new Deadlines(additionalText);
-                    taskList.add(deadlines);
-                    printTaskAddedMessage(deadlines);
-                } catch (EmptyTaskDukeException e) {
-                    System.out.println(formatMessage(e + ""));
-                }
-            } else if (command.equals("event")) {
-                try {
-                    Events events = new Events(additionalText);
-                    taskList.add(events);
-                    printTaskAddedMessage(events);
-                } catch (EmptyTaskDukeException e) {
-                    System.out.println(formatMessage(e + ""));
-                }
-            } else if (command.equals("help")) {
-                String allCommands = "todo\n" +
-                        "deadline *text* /by *date*\n" +
-                        "event *text* /at *text*\n" +
-                        "done *number*\n" +
-                        "list\n" +
-                        "delete *number*\n" +
-                        "bye";
-                System.out.println(formatMessage(allCommands));
-            } else {
-                // no valid command
-                System.out.println(formatMessage("Please enter a valid command! \n" +
-                        "Type help for a list of commands"));
+            switch (command) {
+                case TODO:
+                    try {
+                        Todos todos = new Todos(additionalText);
+                        taskList.add(todos);
+                        printTaskAddedMessage(todos);
+                    } catch (EmptyTaskDukeException e) {
+                        System.out.println(formatMessage(e + ""));
+                    }
+                    break;
+                case DEADLINE:
+                    try {
+                        Deadlines deadlines = new Deadlines(additionalText);
+                        taskList.add(deadlines);
+                        printTaskAddedMessage(deadlines);
+                    } catch (EmptyTaskDukeException e) {
+                        System.out.println(formatMessage(e + ""));
+                    }
+                    break;
+                case EVENT:
+                    try {
+                        Events events = new Events(additionalText);
+                        taskList.add(events);
+                        printTaskAddedMessage(events);
+                    } catch (EmptyTaskDukeException e) {
+                        System.out.println(formatMessage(e + ""));
+                    }
+                    break;
+                case LIST:
+                    System.out.println(formatMessage(getTaskListString(taskList)));
+                    break;
+                case DONE:
+                    try {
+                        int taskNumber = Integer.parseInt(additionalText);
+                        int arrayNumber = taskNumber - 1;
+                        Task task = taskList.get(arrayNumber);
+                        String doneMessage = task.setDone();
+                        System.out.println(formatMessage(doneMessage));
+                    } catch (NumberFormatException e) {
+                        System.out.println(formatMessage(e +
+                                "\nError! Invalid task number." +
+                                "\nPlease input a valid task number!"));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e +
+                                "\nError! Task number does not exist." +
+                                "\nPlease input a valid task number!");
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        int taskNumber = Integer.parseInt(additionalText);
+                        int arrayNumber = taskNumber - 1;
+                        Task task = taskList.get(arrayNumber);
+                        taskList.remove(arrayNumber);
+                        System.out.println(formatMessage("The following task has been removed:\n" +
+                                task + "\n" + Task.getNumOfTasksString()));
+                    } catch (NumberFormatException e) {
+                        System.out.println(formatMessage(e +
+                                "\nError! Invalid task number." +
+                                "\nPlease input a valid task number!"));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e +
+                                "\nError! Task number does not exist." +
+                                "\nPlease input a valid task number!");
+                    }
+                    break;
+                case HELP:
+                    String allCommands = "todo\n" +
+                            "deadline *text* /by *date*\n" +
+                            "event *text* /at *text*\n" +
+                            "done *number*\n" +
+                            "list\n" +
+                            "delete *number*\n" +
+                            "bye";
+                    System.out.println(formatMessage(allCommands));
+                    break;
+                case BYE:
+                    String byeMessage = "Goodbye, hope you had a great time!";
+                    System.out.println(formatMessage(byeMessage));
+                    isChatBotOnline = false;
+                    break;
+                default:
+                    System.out.println(formatMessage("Please enter a valid command! \n" +
+                            "Type help for a list of commands"));
             }
         }
         sc.close();
