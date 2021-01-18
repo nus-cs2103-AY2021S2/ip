@@ -35,9 +35,34 @@ public class Duke {
                 System.out.println(currTask);
             }
             else {
-                Task task = new Task(word);
-                lst.add(task);
-                System.out.println("added: " + word);
+                Task task;
+                if (tmp[0].equals("todo")) {
+                    String realWord = word.substring(5);
+                    task = new ToDo(realWord);
+                    lst.add(task);
+                }
+                else if (tmp[0].equals("deadline")) {
+                    String realWord = word.substring(9);
+                    String[] deadlineWords = realWord.split("/by");
+                    String deadlineWord = deadlineWords[0];
+                    String deadlineTime = deadlineWords[1];
+                    task = new Deadline(deadlineWord, deadlineTime);
+                    lst.add(task);
+                }
+                else if (tmp[0].equals("event")){
+                    String realWord = word.substring(6);
+                    String[] eventWords = realWord.split("/at");
+                    String eventWord = eventWords[0];
+                    String eventTime = eventWords[1];
+                    task = new Event(eventWord, eventTime);
+                    lst.add(task);
+                }
+                else {
+                    task = new Task("dummy");
+                }
+                System.out.println("Got it, I've added this task:");
+                System.out.println(task);
+                System.out.println("Now you have " + lst.size() + " tasks in the list.");
             }
         }
     }
