@@ -16,7 +16,7 @@ public class Duke {
 
     }
 
-    private List<String> checkList = new ArrayList<>();
+    private List<Task> checkList = new ArrayList<>();
 
     private void start() {
         Scanner sc = new Scanner(System.in);
@@ -25,7 +25,8 @@ public class Duke {
 
         for (;;) {
             String input = sc.nextLine(); 
-            switch(input) 
+            String command = input.split(" ")[0];
+            switch(command) 
             { 
                 case "bye": 
                     echo("Bye. Hope to see you again soon!");  
@@ -33,8 +34,11 @@ public class Duke {
                 case "list": 
                     displayList(checkList);
                     break; 
+                case "done":
+                    completeTask(input);
+                    break;
                 default: 
-                    checkList.add(input);
+                    checkList.add(new Task(input));
                     echo("added: " + input);
             } 
         }
@@ -54,13 +58,23 @@ public class Duke {
         System.out.println("\t____________________________________________________________");
     }
 
-    private void displayList(List<String> lst) {
+    private void displayList(List<Task> lst) {
         System.out.println("\t____________________________________________________________");
+        System.out.println("Here are the tasks in your list:");
+
         int num = 1;
-        for (String s : lst) {
-            System.out.printf("\t  %d. %s\n", num++, s);
+        for (Task t : lst) {
+            System.out.printf("\t  %d. %s\n", num++, t);
         }
         System.out.println("\t____________________________________________________________\n");
+    }
+
+    private void completeTask(String s) {
+        int taskNum = Integer.parseInt(s.split(" ")[1]);
+        Task t = checkList.get(taskNum-1);
+        t.completed();
+        
+        echo(List.of("Nice! I've marked this task as done:", t.toString()));
     }
 
 }
