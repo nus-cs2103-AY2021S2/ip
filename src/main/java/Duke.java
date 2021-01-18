@@ -14,25 +14,33 @@ public class Duke {
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.println(lines);
 
-        Tasks tasks = new Tasks();
+        Task[] tasks = new Task[101];
+        int index = 1;
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(lines);
             if (input.equals("list")) {
-                for (int i = 1; i < tasks.index(); i++) {
-                    String output = tasks.checkDone(i);
+                for (int i = 1; i < index; i++) {
+                    Task currTask = tasks[i];
+                    String output = "";
+                    if (currTask.checkDone()) {
+                        output = i + ".[X] " + currTask.getTask();
+                    } else {
+                        output = i + ".[ ] " + currTask.getTask();
+                    }
                     System.out.println(indentation + output);
                 }
             } else if (input.contains("done")){
                 int number = Integer.parseInt(input.substring(5));
-                tasks.markDone(number);
+                tasks[number].markDone();
                 System.out.println(indentation + "Nice! I've marked this task as done:");
-                System.out.println(indentation + "  [X] " + tasks.get(number));
+                System.out.println(indentation + "  [X] " + tasks[number].getTask());
             } else {
                 System.out.println(indentation + "added: " + input);
-                tasks.add(input);
+                tasks[index] = new Task(input);
+                index++;
             }
             System.out.println(lines);
             input = sc.nextLine();
