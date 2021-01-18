@@ -1,6 +1,9 @@
 import java.util.*;
 
 public class Duke{
+    enum Command{
+        list,done,delete,todo,deadline,event,bye;
+    }
     public static void main(String[] args) {
 
             List<Task> taskList = new ArrayList<Task>(100);
@@ -9,15 +12,15 @@ public class Duke{
                     + "What can I do for you?\n";
             System.out.println(logo);
 
-
             while (sc.hasNext()) {
                 try {
                     String line = sc.nextLine();
-                    String[] command = line.split(" ", 2);
-                    if (command[0].equals("bye")) {
+                    String[] lineSplit = line.split(" ", 2);
+                    Command command = Command.valueOf(lineSplit[0]);
+                    if (command.equals(Command.bye)) {
                     break;
                     } else {
-                        if (command[0].equals("list")) {
+                        if (command.equals(Command.list)) {
                             System.out.println("____________________________________________________________\n" +
                                     "Here are the tasks in your list");
                             for (int i = 1; i <= taskList.size(); i++) {
@@ -25,9 +28,9 @@ public class Duke{
                                 System.out.println(i + "." + curTask.toString());
                             }
                             System.out.println("____________________________________________________________");
-                        } else if (command[0].equals("done")) {
+                        } else if (command.equals(Command.done)) {
                             try {
-                            int index = Integer.valueOf(command[1]) - 1;
+                            int index = Integer.valueOf(lineSplit[1]) - 1;
                             Task curTask = taskList.get(index);
                             curTask.markAsDone();
                             System.out.println("____________________________________________________________\n" +
@@ -36,9 +39,9 @@ public class Duke{
                             }catch (ArrayIndexOutOfBoundsException ex){
                                 throw new DukeException("\u00a9 OOPS!!! The description of a done cannot be empty.");
                             }
-                        } else if (command[0].equals("delete")) {
+                        } else if (command.equals(Command.delete)) {
                             try {
-                                int index = Integer.valueOf(command[1]) - 1;
+                                int index = Integer.valueOf(lineSplit[1]) - 1;
                                 Task curTask = taskList.get(index);
                                 taskList.remove(index);
                                 System.out.println("____________________________________________________________\n" +
@@ -48,12 +51,12 @@ public class Duke{
                             } catch (ArrayIndexOutOfBoundsException ex) {
                                 throw new DukeException("\u00a9 OOPS!!! The description of a delete cannot be empty.");
                             } catch (IndexOutOfBoundsException ex){
-                                throw new DukeException("\u00a9 OOPS!!! There is nothing to delete at "+command[1]);
+                                throw new DukeException("\u00a9 OOPS!!! There is nothing to delete at "+lineSplit[1]);
                             }
                         } else {
-                            if (command[0].equals("todo")) {
+                            if (command.equals(Command.todo)) {
                                 try {
-                                    String[] item = command[1].split("/");
+                                    String[] item = lineSplit[1].split("/");
                                     Task newTask = new ToDos(item[0]);
                                     taskList.add(newTask);
                                     System.out.println("____________________________________________________________\n" +
@@ -63,9 +66,9 @@ public class Duke{
                                 }catch (ArrayIndexOutOfBoundsException ex){
                                     throw new DukeException("\u00a9 OOPS!!! The description of a todo cannot be empty.");
                                 }
-                            } else if (command[0].equals("deadline")) {
+                            } else if (command.equals(Command.deadline)) {
                                 try {
-                                String[] item = command[1].split("/by ");
+                                String[] item = lineSplit[1].split("/by ");
                                 Task newTask = new Deadline(item[0], item[1]);
                                 taskList.add(newTask);
                                 System.out.println("____________________________________________________________\n" +
@@ -75,9 +78,9 @@ public class Duke{
                                 }catch (ArrayIndexOutOfBoundsException ex){
                                     throw new DukeException("\u00a9 OOPS!!! The description of a deadline cannot be empty.");
                                 }
-                            } else if (command[0].equals("event")) {
+                            } else if (command.equals(Command.event)) {
                                 try {
-                                String[] item = command[1].split("/at ");
+                                String[] item = lineSplit[1].split("/at ");
                                 Task newTask = new Events(item[0], item[1]);
                                 taskList.add(newTask);
                                 System.out.println("____________________________________________________________\n" +
