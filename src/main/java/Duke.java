@@ -4,7 +4,7 @@ public class Duke {
 
     static List<Task> tasks = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner sc = new Scanner(System.in);
         greet();
         while (sc.hasNextLine()) {
@@ -19,13 +19,22 @@ public class Duke {
                 done(Integer.parseInt(s.substring(5)));
             } else if (key.equals("todo") || key.equals("event") || key.equals("deadline")) {
                 addTask(getTask(s, key));
+            } else {
+                throw (new DukeException("\n    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "    ____________________________________________________________"));
             }
         }
     }
 
-    static public Task getTask(String s, String key) {
+    static public Task getTask(String s, String key) throws DukeException {
         String desc = "";
         if (key.equals("todo")) {
+            if (s.length() == 4) {
+                throw new DukeException("\n    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! The description of a todo cannot be empty.\n" +
+                        "    ____________________________________________________________");
+            }
             return new ToDo(s.substring(5));
         }
         int keyLen = key.length();
@@ -35,10 +44,21 @@ public class Duke {
             }
             desc += s.charAt(i);
         }
-        String time = s.substring(keyLen + desc.length() + 6);
         if (key.equals("event")) {
+            if (s.length() == 5) {
+                throw new DukeException("\n    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! The description of a event cannot be empty.\n" +
+                        "    ____________________________________________________________");
+            }
+            String time = s.substring(keyLen + desc.length() + 6);
             return new Event(desc, time);
         } else {
+            if (s.length() == 8) {
+                throw new DukeException("\n    ____________________________________________________________\n" +
+                        "     ☹ OOPS!!! The description of a deadline cannot be empty.\n" +
+                        "    ____________________________________________________________");
+            }
+            String time = s.substring(keyLen + desc.length() + 6);
             return new Deadline(desc, time);
         }
     }
@@ -46,19 +66,19 @@ public class Duke {
     static public void list() {
         String s = "";
         if (tasks.size() == 0) {
-            System.out.println("    ____________________________________________________________\n     " +
-                    "Here are the tasks in your list:\n    " +
+            System.out.println("    ____________________________________________________________\n    " +
+                    "     Here are the tasks in your list:\n    " +
                     "____________________________________________________________\n");
             return;
         }
         for (int i = 0; i < tasks.size(); i++) {
-            s += (i + 1) + "." + tasks.get(i) + "\n";
+            s += (i+1) + "." + tasks.get(i) + "\n";
             if (i != tasks.size() - 1) {
-                s += "          ";
+                s += "     ";
             }
         }
         System.out.println("    ____________________________________________________________\n     " +
-                "     Here are the tasks in your list:\n          " + s +
+                "Here are the tasks in your list:\n     " + s +
                 "    ____________________________________________________________\n");
     }
 
