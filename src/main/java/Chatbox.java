@@ -28,7 +28,7 @@ class Chatbox {
                 storage.listOut();
                 break;
             case "todo":
-                storage.add(new Todo(commAndArgs.get(1)));
+                storage.add(new Todo(commAndArgs.get(1).trim()));
                 break;
             case "deadline":
                 storage.add(new Deadline(commAndArgs.get(1).trim(),commAndArgs.get(2)));
