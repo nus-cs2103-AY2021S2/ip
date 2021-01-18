@@ -24,7 +24,7 @@ public class DukeBot {
     }
 
     /**
-     *
+     * Executes processes depending on command given by user
      * @param text Text provided by user
      * @throws DukeException If task description is empty, task selection is invalid, task selection is empty
      */
