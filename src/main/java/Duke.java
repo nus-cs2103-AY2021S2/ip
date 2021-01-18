@@ -22,25 +22,43 @@ public class Duke {
         while (!input.equals("bye")) {
             System.out.println(lines);
             if (input.equals("list")) {
+                System.out.println(indentation + "Here are the tasks in your list:");
                 for (int i = 1; i < index; i++) {
                     Task currTask = tasks[i];
-                    String output = "";
-                    if (currTask.checkDone()) {
-                        output = i + ".[X] " + currTask.getTask();
-                    } else {
-                        output = i + ".[ ] " + currTask.getTask();
-                    }
-                    System.out.println(indentation + output);
+                    String output = indentation + i + "." + currTask.toString();
+                    System.out.println(output);
                 }
             } else if (input.contains("done")){
                 int number = Integer.parseInt(input.substring(5));
                 tasks[number].markDone();
                 System.out.println(indentation + "Nice! I've marked this task as done:");
-                System.out.println(indentation + "  [X] " + tasks[number].getTask());
-            } else {
-                System.out.println(indentation + "added: " + input);
-                tasks[index] = new Task(input);
+                System.out.println(indentation + "  " + tasks[number].toString());
+            } else if (input.contains("todo")) {
+                String task = input.substring(5);
+                System.out.println(indentation + "Got it. I've added this task:");
+                Task newTask = new Task(task, 0);
+                System.out.println(indentation + "  " + newTask);
+                tasks[index] = newTask;
+                System.out.println(indentation + "Now you have " + index + " tasks in the list.");
                 index++;
+            } else if (input.contains("deadline")) {
+                String task = input.substring(9);
+                System.out.println(indentation + "Got it. I've added this task:");
+                Task newTask = new Task(task, 1);
+                System.out.println(indentation + "  " + newTask);
+                tasks[index] = newTask;
+                System.out.println(indentation + "Now you have " + index + " tasks in the list.");
+                index++;
+            } else if (input.contains("event")) {
+                String task = input.substring(6);
+                System.out.println(indentation + "Got it. I've added this task:");
+                Task newTask = new Task(task, 2);
+                System.out.println(indentation + "  " + newTask);
+                tasks[index] = newTask;
+                System.out.println(indentation + "Now you have " + index + " tasks in the list.");
+                index++;
+            } else {
+                System.out.println(indentation + "Please specify task type!");
             }
             System.out.println(lines);
             input = sc.nextLine();
