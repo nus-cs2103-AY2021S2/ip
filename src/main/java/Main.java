@@ -61,7 +61,7 @@ public class Main {
                 duke.indentedPrint("Got it. I've added this task:");
                 duke.indentedPrint(" " + t.toString());
                 duke.indentedPrint("Now you have " + duke.getTasksSize() +
-                        " tasks in the list.");
+                        " task(s) in the list.");
                 duke.printDivider();
                 break;
             case "deadline":
@@ -83,7 +83,7 @@ public class Main {
                 duke.indentedPrint("Got it. I've added this task:");
                 duke.indentedPrint(" " + d.toString());
                 duke.indentedPrint("Now you have " + duke.getTasksSize() +
-                        " tasks in the list.");
+                        " task(s) in the list.");
                 duke.printDivider();
                 break;
             case "event":
@@ -95,8 +95,29 @@ public class Main {
                 duke.indentedPrint("Got it. I've added this task:");
                 duke.indentedPrint(" " + e.toString());
                 duke.indentedPrint("Now you have " + duke.getTasksSize() +
-                        " tasks in the list.");
+                        " task(s) in the list.");
                 duke.printDivider();
+                break;
+            case "delete":
+                try {
+                    duke.checkArgument("delete", input);
+                } catch (DukeException de){
+                    duke.printDivider();
+                    duke.indentedPrint(de.getMessage());
+                    duke.printDivider();
+                    break;
+                }
+
+                int index1 = Integer.parseInt(arr[1]);
+
+                duke.printDivider();
+                duke.indentedPrint("Noted. I've removed this task: ");
+                duke.indentedPrint(" " + duke.getTask(index1).toString());
+                duke.indentedPrint("Now you have " + (duke.getTasksSize() - 1) +
+                        " task(s) in the list.");
+                duke.printDivider();
+
+                duke.deleteTask(index1);
                 break;
             default:
                 duke.printDivider();

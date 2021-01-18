@@ -2,12 +2,13 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static ArrayList<Task> tasks = new ArrayList<Task>(100);
+    private static final ArrayList<Task> tasks = new ArrayList<>(100);
 
-    private static String[] commands = { "bye", "list", "done", "todo", "deadline", "event"};
+    private static final String[] commands = { "bye", "list", "done", "todo", "deadline", "event",
+            "delete"};
 
     // Divider for Duke's Hello message.
-    private static String BORDER = "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+    private static final String BORDER = "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
             + "+-+-+-+-+-+";
 
     // Prints a string with a 4-space indent.
@@ -82,5 +83,9 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a " + task +
                     " cannot be empty.");
         }
+    }
+
+    public void deleteTask(int index) {
+        tasks.remove(index - 1);
     }
 }
