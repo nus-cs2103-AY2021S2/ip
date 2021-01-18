@@ -5,6 +5,8 @@ import java.util.HashMap;
  * The Command class handles the logic of all allowed user commands for Duke.
  */
 public class Command {
+
+    //tracks all valid commands
     private enum Cmd {
         BYE,
         LIST,
@@ -16,9 +18,12 @@ public class Command {
         HELP
     }
 
-    //list command usage, ideally store in json file
+    //list storing commands/descriptions, ideally store in json file
     private final static HashMap<String, String> cmdInfo = new HashMap<>();
 
+    /**
+     * Constructor for Command class that initialises all valid commands.
+     */
     public Command() {
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
         cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
@@ -67,6 +72,7 @@ public class Command {
     /**
      * Parses, adds and prints the input from user as task.
      * @param input input provided by user
+      * @param tasks list of tasks entered by user
      */
     public void add(String input, ArrayList<Task> tasks) {
         //split input on first space to retrieve task type
@@ -123,6 +129,7 @@ public class Command {
 
     /**
      * List all tasks entered by user.
+     * @param tasks list of tasks entered by user
      */
     public void list(ArrayList<Task> tasks) {
         for (int i = 1; i <= tasks.size(); i++) {
@@ -134,6 +141,7 @@ public class Command {
     /**
      * Checks and marks given task as done and informs user of success/failure.
      * @param input input provided by user
+     * @param tasks list of tasks entered by user
      */
     public void done(String input, ArrayList<Task> tasks) {
         String[] parsedString = input.split("\\s+");
@@ -165,6 +173,7 @@ public class Command {
     /**
      * Deletes given task as done and informs user of success/failure.
      * @param input input provided by user
+     * @param tasks list of tasks entered by user
      */
     public void delete(String input, ArrayList<Task> tasks) {
         String[] parsedString = input.split("\\s+");

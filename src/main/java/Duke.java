@@ -22,6 +22,7 @@ public class Duke {
 
     /**
      * Listens for input from the user.
+     * @param command command class that handles parsing of input
      */
     public static void listenInput(Command command) {
         Scanner sc = new Scanner(System.in);
