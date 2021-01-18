@@ -1,6 +1,6 @@
-public class Task {
-    private String taskName;
-    private boolean done;
+public abstract class Task {
+    protected String taskName;
+    protected boolean done;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -22,9 +22,5 @@ public class Task {
     public void setDone() {
         this.done = true;
     }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", done ? "X" : " ", taskName);
-    }
 }
+
