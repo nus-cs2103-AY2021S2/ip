@@ -5,3 +5,55 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+------------------------------------
+Sorry, I do not recognise the following instruction:
+come and catch me
+------------------------------------
+------------------------------------
+Got it! I have added this task:
+[T][ ] play catching
+You have 1 task(s) now!
+------------------------------------
+------------------------------------
+Got it! I have added this task:
+[D][ ] read book (by: sunday 3pm)
+You have 2 task(s) now!
+------------------------------------
+------------------------------------
+Got it! I have added this task:
+[E][ ] swimming class (at: monday 4-6pm)
+You have 3 task(s) now!
+------------------------------------
+------------------------------------
+1.[T][ ] play catching
+2.[D][ ] read book (by: sunday 3pm)
+3.[E][ ] swimming class (at: monday 4-6pm)
+------------------------------------
+------------------------------------
+Yay your task is done! :D
+------------------------------------
+------------------------------------
+1.[T][X] play catching
+2.[D][ ] read book (by: sunday 3pm)
+3.[E][ ] swimming class (at: monday 4-6pm)
+------------------------------------
+------------------------------------
+Task is already completed!
+------------------------------------
+------------------------------------
+1.[T][X] play catching
+2.[D][ ] read book (by: sunday 3pm)
+3.[E][ ] swimming class (at: monday 4-6pm)
+------------------------------------
+------------------------------------
+Yay your task is done! :D
+------------------------------------
+------------------------------------
+1.[T][X] play catching
+2.[D][X] read book (by: sunday 3pm)
+3.[E][ ] swimming class (at: monday 4-6pm)
+------------------------------------
+------------------------------------
+Bye! See you later :D
+------------------------------------
