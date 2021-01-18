@@ -7,12 +7,26 @@ public class Duke {
         System.out.println("Hi! I'm Timmy!\nWhat can Timmy do for you today?");
         System.out.println("------------------------------------------------");
         String input;
-        while(!(input = sc.nextLine()).equals("bye")){
-            System.out.println("------------------------------------------------");
-            System.out.println(input);
-            System.out.println("------------------------------------------------");
+        String[] items = new String[100];
+        int i = 0;
+        while (!(input = sc.nextLine()).equals("bye")) {
+            if (input.equals("list")) {
+                System.out.println("------------------------------------------------");
+                for (int j = 0; j < i; j++) {
+                    System.out.println(j + 1 + ". " + items[j]);
+                }
+                System.out.println("------------------------------------------------");
+            } else {
+                System.out.println("------------------------------------------------");
+                items[i] = input;
+                i++;
+                System.out.println("added: " + input);
+                System.out.println("------------------------------------------------");
+            }
         };
         sc.close();
+        System.out.println("------------------------------------------------");
         System.out.println("Bye! Hope to see you again!");
+        System.out.println("------------------------------------------------");
     }
 }
