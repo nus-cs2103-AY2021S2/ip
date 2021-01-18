@@ -71,6 +71,19 @@ public enum DukeCommand {
 
             Duke.doneCommand(index);
         }
+    },
+    DELETE {
+        @Override
+        public void runCommand(String actions) throws DukeException {
+            int index = Integer.parseInt(actions) - 1;
+            int listSize = Duke.taskList.size();
+
+            if (index < 0 || index >= listSize) {
+                throw new DukeException("☹ OOPS!!! The number you entered is invalid.");
+            }
+
+            Duke.deleteCommand(index);
+        }
     };
 
     public abstract void runCommand(String actions) throws DukeException;

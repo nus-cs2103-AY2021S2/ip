@@ -32,16 +32,19 @@ public class Duke {
     }
 
     public static void addCommand(Task newTask) {
+        int taskListSize = taskList.size();
         taskList.add(newTask);
+
         System.out.println("Got it. I've added this task:");
         System.out.printf(PRINT_FORMAT, newTask.toString());
-        System.out.printf("Now you have %d tasks in the list.%n", Duke.taskList.size());
+        System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
     }
 
     public static void doneCommand(int index) {
-        System.out.println("Nice! I've marked this task as done:");
         Task selectedTask = taskList.get(index);
         selectedTask.setDone();
+
+        System.out.println("Nice! I've marked this task as done:");
         System.out.printf(PRINT_FORMAT, selectedTask.toString());
     }
 
@@ -50,6 +53,15 @@ public class Duke {
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("%d.%s%n", i + 1, taskList.get(i).toString());
         }
+    }
+
+    public static void deleteCommand(int index) {
+        Task selectedTask = taskList.get(index);
+        taskList.remove(selectedTask);
+
+        System.out.println("Noted. I've removed this task:");
+        System.out.printf(PRINT_FORMAT, selectedTask.toString());
+        System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
     }
 
     private static void exitCommand() {
