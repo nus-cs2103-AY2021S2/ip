@@ -41,6 +41,9 @@ class Chatbox {
                 case "done":
                     storage.markTaskAsDone(commAndArgs.get(1).trim());
                     break;
+                case "delete":
+                    storage.delete(commAndArgs.get(1).trim());
+                    break;
             }
         }catch(DukeException err){
             String errMsg = err.getMessage();

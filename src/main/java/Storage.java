@@ -17,7 +17,7 @@ class Storage {
 
     void listOut(){
         if(list.isEmpty()){
-            System.out.println("There is currently no task in the list");
+            System.out.println("There is currently no task in the list.");
         }else{
             System.out.println("Here are the tasks in your list:");
             int index = 1;
@@ -34,5 +34,19 @@ class Storage {
         targetTask.markAsDone();
         System.out.println("Nice! I've mark this task as done");
         System.out.println(targetTask);
+    }
+
+    void delete(String num) throws DukeException {
+        int index = Integer.valueOf(num) - 1;
+
+        //the index is not appropriate
+        if(index >= list.size() || index < 0)
+            throw new DukeException("Please provide an appropriate index.");
+
+        Task deletedTask = list.remove(index);
+
+        System.out.println("Noted, I've removed this task: ");
+        System.out.println(deletedTask);
+        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
     }
 }

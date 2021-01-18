@@ -11,6 +11,7 @@ class Statement {
         argsTable.put("list", 0);
         argsTable.put("done", 1);
         argsTable.put("todo", 1);
+        argsTable.put("delete", 1);
         argsTable.put("deadline", 2);
         argsTable.put("event", 2);
     }
@@ -34,7 +35,7 @@ class Statement {
 
         if(!sc.hasNext()){
             switch(command){
-                case "done":
+                case "done": case "delete":
                     throw new DukeException("OOPS! " + command + " requires the index of the task.");
                 case "todo":
                     throw new DukeException("OOPS! " + command + " requires a description.");
