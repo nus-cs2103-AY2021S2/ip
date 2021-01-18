@@ -25,6 +25,16 @@ public class Main {
                 duke.printDivider();
                 break;
             case "done":
+
+                try {
+                    duke.checkArgument("done", input);
+                } catch (DukeException de){
+                    duke.printDivider();
+                    duke.indentedPrint(de.getMessage());
+                    duke.printDivider();
+                    break;
+                }
+
                 int index = Integer.parseInt(arr[1]);
                 duke.setTask(index, true);
 
@@ -34,6 +44,16 @@ public class Main {
                 duke.printDivider();
                 break;
             case "todo":
+
+                try {
+                    duke.checkArgument("todo", input);
+                } catch (DukeException de){
+                    duke.printDivider();
+                    duke.indentedPrint(de.getMessage());
+                    duke.printDivider();
+                    break;
+                }
+
                 ToDo t = new ToDo(arr[1]);
                 duke.addTask(t);
 
@@ -45,6 +65,16 @@ public class Main {
                 duke.printDivider();
                 break;
             case "deadline":
+
+                try {
+                    duke.checkArgument("deadline", input);
+                } catch (DukeException de){
+                    duke.printDivider();
+                    duke.indentedPrint(de.getMessage());
+                    duke.printDivider();
+                    break;
+                }
+
                 String[] dSplit = arr[1].split(" /by ");
                 Deadline d = new Deadline(dSplit[0], dSplit[1]);
                 duke.addTask(d);
@@ -70,7 +100,13 @@ public class Main {
                 break;
             default:
                 duke.printDivider();
-                duke.indentedPrint("Sorry, I don't quite understand.");
+
+                try {
+                    duke.checkInput(input);
+                } catch (DukeException de) {
+                    duke.indentedPrint(de.getMessage());
+                }
+
                 duke.printDivider();
                 break;
             }
