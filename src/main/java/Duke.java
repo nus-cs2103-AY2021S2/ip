@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private static final StringBuffer boundOfChatBox = new StringBuffer();
     private static final int lenOfChatBox = 50;
-    private static final ArrayList<String> tasks = new ArrayList<>();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     public static void setBoundOfChatBox() {
         boundOfChatBox.append('\n');
@@ -28,9 +28,10 @@ public class Duke {
         formatInChatBox(greeting + '\n');
     }
 
-    public static void add(String task) {
+    public static void add(String description) {
+        Task task = new Task(description);
         tasks.add(task);
-        formatInChatBox("added: " + task + '\n');
+        formatInChatBox("added: " + description + '\n');
     }
 
     public static void list() {
@@ -43,7 +44,13 @@ public class Duke {
         for (int i = 0; i < n; i++)
             buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         String res = new String(buf);
-        formatInChatBox(res);
+        formatInChatBox("Here are the tasks in your list:\n" + res);
+    }
+
+    public static void mark(int index) {
+        Task taskToBeMarked = tasks.get(index - 1);
+        taskToBeMarked.markedAsDone();
+        formatInChatBox("Nice! I've marked this task as done:\n" + taskToBeMarked);
     }
 
     public static void exit() {
@@ -57,15 +64,16 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         do {
             input = sc.nextLine();
-            switch (input) {
-                case "bye":
-                    exit();
-                    return ;
-                case "list":
-                    list();
-                    break;
-                default:
-                    add(input);
+            if (input.equals("bye")) {
+                exit();
+                return ;
+            } else if (input.equals("list")) {
+                list();
+            } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
+                int index = Integer.parseInt(input.substring(5));
+                mark(index);
+            } else {
+                add(input);
             }
         } while(true);
     }
