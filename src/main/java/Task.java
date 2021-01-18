@@ -29,6 +29,14 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Update the task as incomplete.
+     */
+
+    public void markIncomplete() {
+        this.isDone = false;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
