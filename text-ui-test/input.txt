@@ -1,0 +1,10 @@
+todo borrow book
+todo blah blah
+list
+deadline cs2103 assignment /by Thursday 2359
+event cs2103 lecture /at Thursday too!! :566&:$$
+done 3
+list
+done 4
+list
+bye

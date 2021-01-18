@@ -20,11 +20,10 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + incomingTask);
         listOfTasks.add(incomingTask);
-        String s  = listOfTasks.size() <= 1? " task" : " tasks";
-        System.out.println("Now you have " + listOfTasks.size() + s + " in the list.");
+        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
     }
 
-    
+
 
     private static int parseMarkDoneCommand(String input) {
         Matcher m = patternToMarkDone.matcher(input);
@@ -69,7 +68,6 @@ public class Duke {
         return new ToDo(description);
     }
 
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -78,12 +76,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello from\n" + logo);
-        System.out.println("\n\n");
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         String input;
         Scanner sc = new Scanner(System.in);
 
-        do {
+        while (sc.hasNextLine()) {
             input = sc.nextLine();
             if (input.equals("bye")) break;
             if (input.equals("list")) {
@@ -101,7 +98,7 @@ public class Duke {
                 Task incomingTask = parseToDo(input);
                 addTask(incomingTask);
             }
-        } while(true);
-        System.out.println("Bye. Hope to see you again soon!\n");
+        }
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }

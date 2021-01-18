@@ -5,3 +5,32 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+	[T][ ] borrow book
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+	[T][ ] blah blah
+Now you have 2 tasks in the list.
+1.[T][ ] borrow book
+2.[T][ ] blah blah
+Got it. I've added this task:
+	[D][ ] cs2103 assignment (by: Thursday 2359)
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+	[E][ ] cs2103 lecture (at: Thursday too!! :566&:$$)
+Now you have 4 tasks in the list.
+Nice! I've marked this task as done:
+	[D][X] cs2103 assignment (by: Thursday 2359)
+1.[T][ ] borrow book
+2.[T][ ] blah blah
+3.[D][X] cs2103 assignment (by: Thursday 2359)
+4.[E][ ] cs2103 lecture (at: Thursday too!! :566&:$$)
+Nice! I've marked this task as done:
+	[E][X] cs2103 lecture (at: Thursday too!! :566&:$$)
+1.[T][ ] borrow book
+2.[T][ ] blah blah
+3.[D][X] cs2103 assignment (by: Thursday 2359)
+4.[E][X] cs2103 lecture (at: Thursday too!! :566&:$$)
+Bye. Hope to see you again soon!
