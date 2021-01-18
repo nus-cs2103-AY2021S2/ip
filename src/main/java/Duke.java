@@ -42,6 +42,8 @@ public class Duke {
                     taskAdded();
                     break;
                 case "deadline":
+                    checkList.add(Deadline.createDeadline(input));
+                    taskAdded();
                     break;
                 case "event":
                     break;
