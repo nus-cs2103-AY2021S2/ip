@@ -33,6 +33,9 @@ public class Skeleton {
                 } else if (word.equals("done")) {
                     int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
                     done(value);
+                } else if (word.equals("delete")) {
+                    int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
+                    delete(value);
                 } else {
                     add(word, rest);
                 }
@@ -77,10 +80,18 @@ public class Skeleton {
         }
         storage.get(value-1).markAsDone();
         System.out.println("YOSHA! KONNO TASK GA OWARIMASHITA! GANBARE");
-        System.out.println(storage.get(value-1));
+        System.out.println(storage.get(value - 1));
         System.out.println();
     }
 
+    /** function that deletes en entry in the list*/
+    static void delete(int value) {
+        System.out.println("OK. TASK REMOVED.");
+        System.out.println(storage.get(value - 1));
+        storage.remove(value - 1);
+        System.out.println("Now you have " + storage.size() + " tasks in the list.");
+        System.out.println();
+    }
     /** function that lists whatever the user has stored.*/
     static void listItems() {
         if (storage.isEmpty()) {
