@@ -11,9 +11,11 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         String string = scan.nextLine();
         ArrayList<Task> tasks = new ArrayList<>();
-        int k, i = 0;
+        int size = 0;
 
         while (true) {
+
+            size = tasks.size();
 
             try {
                 if (string.equals("bye")) {
@@ -23,78 +25,47 @@ public class Duke {
 
                 } else if (string.equals("list")) {
 
-                    if (i == 0) {
+                    if (size == 0) {
                         throw new DukeException("☹ OOPS!!! There is currently no tasks for you.");
                     } else {
                         System.out.println("Here are the tasks in your list:");
-                        for (int j = 0; j < i; j++) {
-                            k = j + 1;
-                            System.out.println(k + "." + tasks.get(j));
+                        for (int i = 0; i < size; i++) {
+                            System.out.println((i + 1) + "." + tasks.get(i));
                         }
                     }
 
+                } else if (string.equals("todo") || string.equals("deadline")|| string.equals("event")
+                        || string.equals("done") || string.equals("delete")) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + string + " cannot be empty.");
                 } else {
 
-                    String front = "", back = "";
+                    String action = "", info = "";
                     if (string.contains(" ")) {
                         String[] str = string.split(" ", 2);
-                        front = str[0];
-                        back = str[1];
+                        action = str[0];
+                        info = str[1];
                     }
 
-                    if (back.equals("")) {
-                        if (string.equals("todo") || string.equals("deadline")
-                                || string.equals("event") || string.equals("done")) {
-                            throw new DukeException("☹ OOPS!!! The description of a " + string + " cannot be empty.");
-                        } else {
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        }
-                    }
+                    if (action.equals("done") || action.equals("delete")) {
 
-                    if (front.equals("done") || front.equals("delete")) {
-                        k = Integer.parseInt(back);
-                        if (k > i || k == 0) {
-                            throw new DukeException("☹ OOPS!!! There is no task number " + k + ".");
-                        } else if (front.equals("done")) {
-                            tasks.get(k - 1).markAsDone();
-                            System.out.println("Nice! I've marked this task as done:\n  "
-                                    + tasks.get(k - 1));
-                        } else {
-                            Task t = tasks.get(k - 1);
-                            tasks.remove(k - 1);
-                            System.out.println("Noted. I've removed this task:\n  "
-                                    + t + "\nNow you have "
-                                    + --i + " tasks in the list.");
+                        int num = 0;
+
+                        try {
+                            num = Integer.parseInt(info);
+                        } catch (NumberFormatException e) {
+                            throw new DukeException("☹ OOPS!!! There is no such task number.");
                         }
+
+                        if (num > size || num == 0) {
+                            throw new DukeException("☹ OOPS!!! There is no such task number.");
+                        } else {
+                            goneTask(action, num - 1, tasks);
+                        }
+
+                    } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
+                        addTask(action, info, tasks);
                     } else {
-
-                        String task = "", time = "";
-                        if (back.contains("/")) {
-                            String[] str = back.split("/", 2);
-                            task = str[0];
-                            time = str[1];
-                        } else {
-                            task = back;
-                        }
-
-                        if (front.equals("todo")) {
-                            tasks.add(new Todo(task));
-                            task = "";
-                        } else if (front.equals("deadline")) {
-                            tasks.add(new Deadline(task, time));
-                            task = "";
-                        } else if (front.equals("event")) {
-                            tasks.add(new Event(task, time));
-                            task = "";
-                        }
-
-                        if (task.equals("")) {
-                            System.out.println("Got it. I've added this task:\n"
-                                    + "  " + tasks.get(i).toString()
-                                    + "\nNow you have " + ++i + " tasks in the list.");
-                        } else {
-                            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        }
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
 
                 }
@@ -105,6 +76,58 @@ public class Duke {
             string = scan.nextLine();
 
         }
+
+    }
+
+    private static void goneTask(String action, int num, ArrayList<Task> tasks) {
+
+        int size = tasks.size();
+
+        if (action.equals("done")) {
+            tasks.get(num).markAsDone();
+            System.out.println("Nice! I've marked this task as done:\n  "
+                    + tasks.get(num));
+        } else {
+            Task t = tasks.get(num);
+            tasks.remove(num);
+            System.out.println("Noted. I've removed this task:\n  "
+                    + t + "\nNow you have "
+                    + (size - 1) + " tasks in the list.");
+        }
+
+    }
+
+    private static void addTask(String action, String info, ArrayList<Task> tasks) throws DukeException {
+
+        String task = "", time = "";
+        int size = tasks.size();
+
+        if (info.contains(" /")) {
+            String[] str = info.split(" /", 2);
+            task = str[0];
+            if (str[1].contains(" ")) {
+                str = str[1].split(" ", 2);
+                time = str[1];
+            }
+        } else {
+            task = info;
+        }
+
+        if (task.equals("")) {
+            throw new DukeException("☹ OOPS!!! There is no task given");
+        } else {
+            if (action.equals("todo")) {
+                tasks.add(new Todo(task));
+            } else if (action.equals("deadline")) {
+                tasks.add(new Deadline(task, time));
+            } else if (action.equals("event")) {
+                tasks.add(new Event(task, time));
+            }
+        }
+
+        System.out.println("Got it. I've added this task:\n"
+                    + "  " + tasks.get(size).toString()
+                    + "\nNow you have " + (size + 1) + " tasks in the list.");
 
     }
 
