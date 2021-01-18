@@ -22,11 +22,6 @@ public class Duke {
      */
     public DukeResponse dukeResponse;
     /**
-     * Duke message dividers.
-     */
-    public final static String  DIV = "\n____________________________"
-        + "________________________________\n";
-    /**
      * Duke task headers.
      */
     public final static String TASK_HEADER = "Alrighty! I've added this task:\n";
