@@ -17,7 +17,7 @@ class Statement {
 
     //return a list of String with the first element as the command
     //the second element is description and third element is time (if applicable)
-    List<String> parseStatement() {
+    List<String> parseStatement() throws DukeException {
         Scanner sc = new Scanner(statement);
         String command = sc.next();
 
@@ -25,19 +25,31 @@ class Statement {
         result.add(command);
 
         if (!argsTable.containsKey(command))  //unknown command
-            throw new RuntimeException(command);
+            throw new DukeException("Sorry, but I don't know what " + command + " means. :(");
 
         int numOfArgs = argsTable.get(command);
 
         //there are no more arguments
         if(numOfArgs == 0) return result;
 
+        if(!sc.hasNext()){
+            switch(command){
+                case "done":
+                    throw new DukeException("OOPS! " + command + " requires the index of the task.");
+                case "todo":
+                    throw new DukeException("OOPS! " + command + " requires a description.");
+                default:
+                    throw new DukeException("OOPS! " + command + " requires a description and a time.");
+            }
+        }
+
         String rest = sc.nextLine();
         String[] args = rest.split("[/]");
 
         //missing arguments
-        if (args.length != numOfArgs)
-            throw new NoSuchElementException("Too less arguments");
+        if (args.length != numOfArgs){
+            throw new DukeException("OOPS! " + command + " requires a description and a time");
+        }
 
 
 
