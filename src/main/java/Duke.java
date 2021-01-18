@@ -1,4 +1,7 @@
+import main.java.Deadline;
+import main.java.Event;
 import main.java.Task;
+import main.java.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         List<Task> taskList = new ArrayList<>();
-//        List<Boolean> doneList = new ArrayList<>();
+
 
         String indent = "         ";
         String horizSep = indent + "________________________________________________";
@@ -31,7 +34,7 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String next = sc.nextLine();
-            String[] params = next.split(" ");
+            String[] params = next.split(" ", 2);
 
             if (next.equals("bye")) {
 
@@ -44,15 +47,10 @@ public class Duke {
                 System.out.println(horizSep);
                 System.out.println(indent + " Here are the tasks in your list:");
                 while (taskIter.hasNext()) {
-//                    String doneIndicator;
-//                    if (doneIter.next()) {
-//                        doneIndicator = "X";
-//                    } else {
-//                        doneIndicator = " ";
-//                    }
+
                     Task curr = taskIter.next();
 
-                    System.out.println(indent + " " + String.valueOf(taskIter.nextIndex() + 1) + "." + "[" + curr.getStatusIcon() + "]" + " " + curr);
+                    System.out.println(indent + " " + String.valueOf(taskIter.nextIndex()) + "." + curr);
                 }
                 System.out.println(horizSep + "\n");
 
@@ -66,12 +64,38 @@ public class Duke {
 
                 taskList.set(index, taskList.get(index).markAsDone());
                 System.out.println(horizSep + "\n" + indent + " Nice! I've marked this task as done:");
-                System.out.println(indent + "   [X] " + taskList.get(index));
+                Task curr = taskList.get(index);
+                System.out.println(indent + "   " + curr);
+                System.out.println(horizSep + "\n");
+
+            } else if (params[0].equals("todo")) {
+                Todo newTask = new Todo(params[1]);
+                taskList.add(newTask);
+                System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
+                System.out.println(indent + "   " + newTask);
+                System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println(horizSep + "\n");
+
+            } else if (params[0].equals("deadline")) {
+                String[] deadlineParams = params[1].split(" /by ");
+                Deadline newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                taskList.add(newTask);
+                System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
+                System.out.println(indent + "   " + newTask);
+                System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println(horizSep + "\n");
+
+            } else if (params[0].equals("event")) {
+                String[] eventParams = params[1].split(" /at ");
+                Event newTask = new Event(eventParams[0], eventParams[1]);
+                taskList.add(newTask);
+                System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
+                System.out.println(indent + "   " + newTask);
+                System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
                 System.out.println(horizSep + "\n");
 
             } else {
-                taskList.add(new Task(next));
-                System.out.println(horizSep + "\n" +  indent + " added: " + next + "\n" + horizSep + "\n");
+                throw new IllegalArgumentException(next + " , is an invalid command");
             }
         }
 
