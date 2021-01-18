@@ -43,4 +43,8 @@ public class Task {
         return taskDescription;
     }
 
+    public String toString() {
+        return getTaskUID() + ". [" + getStatusIcon() + "] " + getTaskDescription() + "\n";
+    }
+
 }
