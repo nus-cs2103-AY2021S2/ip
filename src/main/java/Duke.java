@@ -2,9 +2,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void list(ArrayList<String> tasks) {
+    public static void list(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("     " + (i + 1) + ": " + tasks.get(i));
+            System.out.println("     " + (i + 1) + "." + tasks.get(i));
         }
     }
 
@@ -16,10 +16,15 @@ public class Duke {
         System.out.println("     Bye. Hope to see you again soon!");
     }
 
+    public static void done(Task task) {
+        task.completeTask();
+        System.out.println("     Nice! I've marked this task as done:\n     " + task);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
-        ArrayList<String> userTasks = new ArrayList<>();
+        ArrayList<Task> userTasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -33,21 +38,21 @@ public class Duke {
         do {
             userInput = sc.nextLine();
             System.out.println("     _______________________________________");
-            switch (userInput) {
-                case "list":
-                    list(userTasks);
-                    break;
-                case "blah":
-                    blah();
-                    break;
-                case "bye":
-                    bye();
-                    break;
-                default:
-                    userTasks.add(userInput);
-                    System.out.println("     added: " + userInput);
-                    break;
+            if (userInput.equals("list")) {
+                System.out.println("     Here are the tasks in your list");
+                list(userTasks);
+            } else if (userInput.equals("blah")) {
+                blah();
+            } else if (userInput.equals("bye")) {
+                bye();
+            } else if (userInput.substring(0, 4).equals("done")) {
+                int taskNum = Integer.parseInt(userInput.substring(5)) - 1;
+                done(userTasks.get(taskNum));
+            } else {
+                userTasks.add(new Task(false, userInput));
+                System.out.println("     added: " + userInput);
             }
+
             System.out.println("     _______________________________________\n");
 
         } while(!userInput.equals("bye"));
