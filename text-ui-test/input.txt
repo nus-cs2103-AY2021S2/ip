@@ -8,6 +8,8 @@ list
 deadline
 deadline cs2103t luminus quiz 2 /by friday 2pm
 list
+done 
+done read book
 done 4
 list
 blah
