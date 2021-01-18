@@ -39,8 +39,8 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone
-                ? Color.GREEN + "\u2713" + Color.RESET
-                : Color.RED + "\u2718" + Color.RESET);
+                ? Color.GREEN_BOLD + "\u2713" + Color.RESET
+                : Color.RED_BOLD + "\u2718" + Color.RESET);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package duke;
 
+import exception.DukeEmptyTaskListException;
+import misc.Color;
 import misc.Emoji;
 import task.Task;
 
@@ -25,9 +27,13 @@ public class DukeResponse {
     public final static String  DIVIDER2 = "\n════════════════════════════"
             + "════════════════════════════════\n";
     /**
-     * Duke task headers.
+     * Duke task add headers.
      */
-    public final static String TASK_HEADER = "Alrighty! I've added this task:\n";
+    public final static String TASK_ADD_HEADER = "Alrighty! I've added this task:\n";
+    /**
+     * Duke task delete headers.
+     */
+    public final static String TASK_DELETE_HEADER = "Gotcha! I've removed this task:\n";
     /**
      * Duke task footer1.
      */
@@ -68,8 +74,21 @@ public class DukeResponse {
      * @param count the count
      */
     public void addTask(Task task, int count) {
-        this.currentMessage = TASK_HEADER + Emoji.TASK + " "
+        this.currentMessage = TASK_ADD_HEADER + Emoji.TASK + " "
                 + task + TASK_FOOTER1 + count + TASK_FOOTER2;
+        printMessage();
+    }
+
+    /**
+     * Acknowledges user with deleted task message.
+     *
+     * @param task  the task
+     * @param count the count
+     */
+    public void deleteTask(Task task, int count) {
+        this.currentMessage = TASK_DELETE_HEADER + Color.BLUE_BOLD
+                + Emoji.TRASH +  Color.RESET + " " + task
+                + TASK_FOOTER1 + count + TASK_FOOTER2;
         printMessage();
     }
 
@@ -89,7 +108,10 @@ public class DukeResponse {
      *
      * @param list the list
      */
-    public void listTasks(ArrayList<Task> list) {
+    public void listTasks(ArrayList<Task> list) throws DukeEmptyTaskListException {
+        if (list.size() == 0) {
+            throw new DukeEmptyTaskListException();
+        }
         StringBuilder strList = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);

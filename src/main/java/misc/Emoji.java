@@ -4,13 +4,8 @@ package misc;
  * The enum Emoji.
  */
 public enum Emoji {
-    /**
-     * Task emoji.
-     */
     TASK("\uD83D\uDCC5"),
-    /**
-     * Error emoji.
-     */
+    TRASH("\uD83D\uDEAE"),
     ERROR("\u26A0");
 
     /**

@@ -22,18 +22,6 @@ public class Duke {
      */
     public DukeResponse dukeResponse;
     /**
-     * Duke task headers.
-     */
-    public final static String TASK_HEADER = "Alrighty! I've added this task:\n";
-    /**
-     * Duke task footer1.
-     */
-    public final static String TASK_FOOTER1 = "\nNow you have ";
-    /**
-     * Duke task footer2.
-     */
-    public final static String TASK_FOOTER2 = " tasks in the list.";
-    /**
      * Instantiates a new duke.
      */
     public Duke() {
@@ -47,8 +35,7 @@ public class Duke {
      * @param input the input message.
      * @return integer. 0 represents an terminating entry, 1 represents a continuing entry.
      */
-    public int parse(String input) throws DukeMissingArgumentsException,
-            DukeException, DukeMissingTaskException {
+    public int parse(String input) throws DukeException {
         String[] parsedInput = input.split("\\s+", 2);
         switch(parsedInput[0]) {
             case (""):
@@ -89,6 +76,18 @@ public class Duke {
                 dukeResponse.addTask(currDeadline, taskList.size());
                 break;
             }
+            case ("delete"):
+                if (parsedInput.length < 2) {
+                    throw new DukeMissingArgumentsException();
+                }
+                int deleteIndex = Integer.parseInt(parsedInput[1]) - 1;
+                if (deleteIndex > taskList.size()) {
+                    throw new DukeMissingTaskException();
+                }
+                Task deletedTask = taskList.get(deleteIndex);
+                taskList.remove(deleteIndex);
+                dukeResponse.deleteTask(deletedTask, taskList.size());
+                break;
             case ("list"):
                 dukeResponse.listTasks(taskList);
                 break;
