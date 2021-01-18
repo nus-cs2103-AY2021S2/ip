@@ -3,18 +3,30 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Duke {
+    /**
+     * Starts the program.
+     */
     public static void main(String[] args) throws IOException {
         printGreeting();
-//        performFirstTask();
+        //performFirstTask();
         TaskList taskList = performSecondTask();
     }
 
-    //Function is meant to print line for formatting.
+    /**
+     * Returns a line of ---- for organization.
+     * <p>
+     * This method always returns immediately upon launch.
+     *
+     * @return      a number of - to simulate a line.
+     */
     public static String printLine() {
         return "---------------------------";
     }
 
-    //To input greeting.
+
+    /**
+     * Prints out a greeting format.
+     */
     public static void printGreeting() {
         String greet = "Hello! I'm Duke\nWhat can I do for you?";
         System.out.println(printLine());
@@ -22,7 +34,10 @@ public class Duke {
         System.out.println(printLine());
     }
 
-    //To perform Level-1 Task.
+    /**
+     * Performs the first macro task which will echo whatever the user types
+     * in and ends when the user types 'bye'.
+     */
     public static void performFirstTask() throws IOException {
         String cmd = new String();
         BufferedReader input = new
@@ -40,7 +55,12 @@ public class Duke {
         System.out.println(printLine());
     }
 
-    //Level-2 and Level-3 and Level-4 Tasks are implemented here.
+    /**
+     * Performs the second macro task which can add, delete or mark a task as
+     * done. Macro will end when user types in 'bye'.
+     *
+     * @return      updated Task List.
+     */
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
         TaskList taskList = new TaskList();
@@ -78,7 +98,14 @@ public class Duke {
         return taskList;
     }
 
-    //Error handling for some of the Level-4 Tasks.
+    /**
+     * Performs the addition of the respective child task into Task List and
+     * returns the updated Task List.
+     *
+     * @param  taskList  previous Task List.
+     * @param  cmd       the command type for the respective task.
+     * @return           updated Task List.
+     */
     public static TaskList performChildTask(TaskList taskList, String cmd) {
         String task = new String();
         try {
