@@ -35,9 +35,24 @@ public class Duke {
                 System.out.println(lineAfterCommand + "\n");
             }
             else {
-                tasks[index] = new Task(command);
+                System.out.println("Got it. I've added this task:");
+                Task task;
+                if (temp[0].equals("todo")) {
+                    task = new Todo(command.substring(5));
+                }
+                else if (temp[0].equals("deadline")) {
+                    task = new Deadline(command.substring(9));
+                }
+                else if (temp[0].equals("event")) {
+                    task = new Event(command.substring(6));
+                }
+                else{
+                    task = new Task(command);
+                }
+                tasks[index] = task;
+                System.out.println("  " + task);
                 index++;
-                System.out.println("added: " + command);
+                System.out.println("Now you have " + index + " tasks in the list.");
                 System.out.println(lineAfterCommand + "\n");
             }
         }

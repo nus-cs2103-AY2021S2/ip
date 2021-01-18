@@ -1,14 +1,30 @@
 public class Task {
-    private final String task;
+    protected final String task;
     private final boolean done;
 
     Task(String task) {
-        this.task = task;
+        String processedTask = "";
+        String[] tmp = task.split("/");
+        if (tmp.length > 1) {
+            processedTask = tmp[0] + "(" + tmp[1] + ")";
+        }
+        else {
+            processedTask = task;
+        }
+        this.task = processedTask;
         this.done = false;
     }
 
     Task(String task, boolean done) {
-        this.task = task;
+        String processedTask = "";
+        String[] tmp = task.split("/");
+        if (tmp.length > 1) {
+            processedTask = tmp[0] + "(" + tmp[1] + ")";
+        }
+        else {
+            processedTask = task;
+        }
+        this.task = processedTask;
         this.done = done;
     }
 
