@@ -1,73 +1,92 @@
 import java.util.*;
 
-public class Duke {
+public class Duke{
     public static void main(String[] args) {
-        List<Task> taskList= new ArrayList<Task>(100);
-        Scanner sc= new Scanner(System.in);
-        String logo = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
-        System.out.println(logo);
+
+            List<Task> taskList = new ArrayList<Task>(100);
+            Scanner sc = new Scanner(System.in);
+            String logo = "Hello! I'm Duke\n"
+                    + "What can I do for you?\n";
+            System.out.println(logo);
 
 
-        while (sc.hasNext()) {
-            String line = sc.nextLine();
-            String[] command = line.split(" ",2);
-            if (command[0].equals("bye")){
-                break;
-            } else {
-                if(command[0].equals("list")){
-                    System.out.println("____________________________________________________________\n"+
-                            "Here are the tasks in your list");
-                    for(int i=1;i<=taskList.size();i++){
-                        Task curTask = taskList.get(i-1);
-                        System.out.println(i+"."+curTask.toString());
+            while (sc.hasNext()) {
+                try {
+                    String line = sc.nextLine();
+                    String[] command = line.split(" ", 2);
+                    if (command[0].equals("bye")) {
+                    break;
+                    } else {
+                        if (command[0].equals("list")) {
+                            System.out.println("____________________________________________________________\n" +
+                                    "Here are the tasks in your list");
+                            for (int i = 1; i <= taskList.size(); i++) {
+                                Task curTask = taskList.get(i - 1);
+                                System.out.println(i + "." + curTask.toString());
+                            }
+                            System.out.println("____________________________________________________________");
+                        } else if (command[0].equals("done")) {
+                            try {
+                            int index = Integer.valueOf(command[1]) - 1;
+                            Task curTask = taskList.get(index);
+                            curTask.markAsDone();
+                            System.out.println("____________________________________________________________\n" +
+                                    "Nice! I've marked this task as done:\n" + curTask.toString() +
+                                    "\n____________________________________________________________");
+                            }catch (ArrayIndexOutOfBoundsException ex){
+                                throw new DukeException("☹ OOPS!!! The description of a done cannot be empty.");
+                            }
+                        } else {
+                            if (command[0].equals("todo")) {
+                                try {
+                                    String[] item = command[1].split("/");
+                                    Task newTask = new ToDos(item[0]);
+                                    taskList.add(newTask);
+                                    System.out.println("____________________________________________________________\n" +
+                                            "Got it. I've added this task:\n  " + newTask.toString() +
+                                            "\nNow you have " + taskList.size() + " tasks in the list.\n" +
+                                            "____________________________________________________________");
+                                }catch (ArrayIndexOutOfBoundsException ex){
+                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                }
+                            } else if (command[0].equals("deadline")) {
+                                try {
+                                String[] item = command[1].split("/by ");
+                                Task newTask = new Deadline(item[0], item[1]);
+                                taskList.add(newTask);
+                                System.out.println("____________________________________________________________\n" +
+                                        "Got it. I've added this task:\n  " + newTask.toString() +
+                                        "\nNow you have " + taskList.size() + " tasks in the list.\n" +
+                                        "____________________________________________________________");
+                                }catch (ArrayIndexOutOfBoundsException ex){
+                                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                                }
+                            } else if (command[0].equals("event")) {
+                                try {
+                                String[] item = command[1].split("/at ");
+                                Task newTask = new Events(item[0], item[1]);
+                                taskList.add(newTask);
+                                System.out.println("____________________________________________________________\n" +
+                                        "Got it. I've added this task:\n  " + newTask.toString() +
+                                        "\nNow you have " + taskList.size() + " tasks in the list.\n" +
+                                        "____________________________________________________________");
+                                }catch (ArrayIndexOutOfBoundsException ex){
+                                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                                }
+                            } else{
+                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            }
+                        }
                     }
-                    System.out.println("____________________________________________________________");
-                } else if(command[0].equals("done")){
-                    int index = Integer.valueOf(command[1])-1;
-                    Task curTask = taskList.get(index);
-                    curTask.markAsDone();
-                    System.out.println("____________________________________________________________\n"+
-                            "Nice! I've marked this task as done:\n" +curTask.toString()+
-                            "\n____________________________________________________________");
-
-                }
-                else {
-                    if (command[0].equals("todo")) {
-                        String[] item=command[1].split("/");
-                        Task newTask = new ToDos(item[0]);
-                        taskList.add(newTask);
-                        System.out.println("____________________________________________________________\n" +
-                                "Got it. I've added this task:\n  " + newTask.toString() +
-                                "\nNow you have "+taskList.size()+" tasks in the list.\n"+
-                                "____________________________________________________________");
-                    } else if (command[0].equals("deadline")){
-                        String[] item = command[1].split("/by ");
-                        Task newTask = new Deadline(item[0],item[1]);
-                        taskList.add(newTask);
-                        System.out.println("____________________________________________________________\n" +
-                                "Got it. I've added this task:\n  " + newTask.toString() +
-                                "\nNow you have "+taskList.size()+" tasks in the list.\n"+
-                                "____________________________________________________________");
-
-                    } else if (command[0].equals("event")){
-                        String[] item=command[1].split("/at ");
-                        Task newTask = new Events(item[0],item[1]);
-                        taskList.add(newTask);
-                        System.out.println("____________________________________________________________\n" +
-                                "Got it. I've added this task:\n  " + newTask.toString() +
-                                "\nNow you have "+taskList.size()+" tasks in the list.\n"+
-                                "____________________________________________________________");
-
-                    }
+                } catch(DukeException ex){
+                System.out.println( "____________________________________________________________\n"+
+                        ex.getMessage() +
+                        "\n____________________________________________________________" );
                 }
             }
-        }
-        System.out.println("____________________________________________________________\n"
-                +"Bye. Hope to see you again soon!"
-                + "\n____________________________________________________________");
-
-
+            System.out.println("____________________________________________________________\n"
+                    + "Bye. Hope to see you again soon!"
+                    + "\n____________________________________________________________");
     }
 }
 class Task {
@@ -93,11 +112,11 @@ class Task {
     }
 
 }
-class Deadline extends Task {
+class Deadline extends Task{
 
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by){
         super(description);
         this.by = by;
     }
@@ -111,7 +130,7 @@ class ToDos extends Task {
 
     protected String by;
 
-    public ToDos(String description) {
+    public ToDos(String description)  {
         super(description);
 
     }
@@ -125,7 +144,7 @@ class Events extends Task {
 
     protected String duration;
 
-    public Events(String description,String duration) {
+    public Events(String description,String duration){
         super(description);
         this.duration = duration;
     }
@@ -134,4 +153,10 @@ class Events extends Task {
     public String toString() {
         return "[E]" + super.toString() + "(at: " + duration + ")";
     }
+}
+class DukeException extends Exception{
+    public DukeException(String message){
+        super(message);
+    }
+
 }
