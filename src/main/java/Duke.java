@@ -50,20 +50,29 @@ public class Duke {
     }
 
     public static void markAsDone(String userInput) throws InvalidTaskNumberException {
-        int taskNumber = Integer.parseInt(userInput.substring(5, 6)) - 1;
+        StringTokenizer token = new StringTokenizer(userInput);
+        int numWord = token.countTokens();
+        boolean checker = false;
 
-        if (taskNumber >= 0 && taskNumber <= list.size() - 1) {
-            list.get(taskNumber).markAsDone();
-        } else {
+        if (numWord == 2) {
+            int taskNumber = Integer.parseInt(userInput.split(" ")[1]) - 1;
+
+            if (taskNumber >= 0 && taskNumber <= list.size() - 1) {
+                list.get(taskNumber).markAsDone();
+                System.out.println(horzLine
+                        + "\n     Nice! I've marked this task as done:\n"
+                        + "        " + list.get(taskNumber) + "\n"
+                        + horzLine);
+
+                checker = true;
+            }
+        }
+
+        if (!checker) {
             throw new InvalidTaskNumberException(horzLine
                     + "\n     ☹ OOPS!!! You have entered an invalid task number.\n"
                     + horzLine);
         }
-
-        System.out.println(horzLine
-                + "\n     Nice! I've marked this task as done:\n"
-                + "        " + list.get(taskNumber) + "\n"
-                + horzLine);
     }
 
     public static void addNewTask(String userInput) throws EmptyDescriptionException, InvalidDateException  {
@@ -107,6 +116,32 @@ public class Duke {
                 + horzLine);
     }
 
+    public static void deleteTask(String userInput) throws InvalidTaskNumberException {
+        StringTokenizer token = new StringTokenizer(userInput);
+        int numWord = token.countTokens();
+        boolean checker = false;
+
+        if (numWord == 2) {
+            int taskNumber = Integer.parseInt(userInput.split(" ")[1]) - 1;
+
+            if (taskNumber >= 0 && taskNumber <= list.size() - 1) {
+                System.out.println(horzLine
+                        + "\n     Noted. I've removed this task:\n"
+                        + "        " + list.get(taskNumber)
+                        + "\n     Now you have " + (list.size() - 1) + " tasks in the list.\n"
+                        + horzLine);
+                list.remove(taskNumber);
+                checker = true;
+            }
+        }
+
+        if (!checker) {
+            throw new InvalidTaskNumberException(horzLine
+                    + "\n     ☹ OOPS!!! You have entered an invalid task number.\n"
+                    + horzLine);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         welcome();
@@ -125,6 +160,8 @@ public class Duke {
                         || userInput.startsWith("deadline")
                         || userInput.startsWith("event")) { //add new task
                     addNewTask(userInput);
+                } else if (userInput.startsWith("delete")) { //delete task
+                    deleteTask(userInput);
                 } else {
                     throw new InvalidInputException(horzLine
                             + "\n     ☹ OOPS!!! I'm sorry, but I don't know what that means :(\n"
