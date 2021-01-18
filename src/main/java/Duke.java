@@ -1,16 +1,17 @@
-import java.lang.reflect.Array;
+import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    ArrayList<ListObject> list;
+    TaskList list;
 
     public Duke() {
         greet();
-        this.list = new ArrayList<>();
+        this.list = new TaskList();
     }
 
-    private void printWithStyle(String[] output) {
+    public static void printWithStyle(String[] output) {
         System.out.println("    ________________________________________________________________");
         for (String str : output) {
             System.out.println("    " + str);
@@ -18,10 +19,29 @@ public class Duke {
         System.out.println("    ________________________________________________________________");
     }
 
-    private void printWithStyle(String output) {
+    public static void printWithStyle(String output) {
         System.out.println("    ________________________________________________________________");
         System.out.println("    " + output );
         System.out.println("    ________________________________________________________________");
+    }
+
+    /**
+     * Joins a sub-array of strings into 1 string where each element in sub-array is separate by a space.
+     *
+     * @param arr array containing sub-array to join
+     * @param start start index of sub-array to join
+     * @param end end index of sub-array to join
+     * @return string of sub-array joined with space
+     */
+    private String join(String[] arr, int start, int end) {
+        StringBuilder output = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            output.append(arr[i]);
+            if (i < end) {
+                output.append(" ");
+            }
+        }
+        return output.toString();
     }
 
     void greet() {
@@ -29,33 +49,61 @@ public class Duke {
     }
 
     void handleInput(String userInput) {
-        if (userInput.equals("list")) {
-            printList();
-        } else if (userInput.trim().split("\\s+")[0].equals("done")) {
-            int doneTaskNumber = Integer.parseInt(userInput.trim().split("\\s+")[1]);
-            printDone(doneTaskNumber);
+        String[] splitBySpaces = userInput.trim().split("\\s+");
+        String keyword = splitBySpaces[0];
+        if (keyword.equals("list")) {
+            this.list.printList();
+        } else if (keyword.equals("done")) {
+            doneTask(splitBySpaces);
+        } else if (keyword.equals("deadline")) {
+            System.out.println("Hey");
+            addDeadline(splitBySpaces);
+        } else if (keyword.equals("todo")) {
+            addToDo(splitBySpaces);
+        } else if (keyword.equals("event")) {
+            addEvent(splitBySpaces);
         } else {
-            printWithStyle("added: " + userInput);
-            this.list.add(new ListObject(userInput));
+            this.list.add(new Task(userInput));
         }
     }
 
-    void printDone(int taskNumber) {
-        ListObject task = this.list.get(taskNumber - 1);
-        task.done();
-        printWithStyle(new String[] {"Nice! I've marked this task as done:", task.toString()});
+    void addToDo(String[] userInputSplit) {
+        String task = join(userInputSplit, 1, userInputSplit.length - 1);
+        list.add(new ToDo(task));
+    }
+    void addDeadline(String[] userInputSplit) {
+        System.out.println(Arrays.toString(userInputSplit));
+        //Index of /by keyword
+        int byIndex = 0;
+        for (int i = 0; i < userInputSplit.length; i++) {
+            if (userInputSplit[i].equals("/by")) {
+                byIndex = i;
+            }
+        }
+        String task = join(userInputSplit, 1, byIndex - 1);
+        String date = join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
+        list.add(new Deadline(task, date));
+        ;
     }
 
-    void printList() {
-        String[] printedArray = new String[this.list.size() + 1];
-        printedArray[0] = "Here are the tasks in your list:";
-        for (int i = 0; i < this.list.size(); i++) {
-            String listEntry = String.valueOf(i + 1) + "." +
-                    this.list.get(i).toString();
-            printedArray[i + 1] = listEntry;
+    void addEvent(String[] userInputSplit) {
+        //Index of /at keyword
+        int atIndex = 0;
+        for (int i = 0; i < userInputSplit.length; i++) {
+            if (userInputSplit[i].equals("/at")) {
+                atIndex = i;
+            }
         }
-        printWithStyle(printedArray);
+        String task = join(userInputSplit, 1, atIndex - 1);
+        String date = join(userInputSplit, atIndex + 1, userInputSplit.length - 1);
+        list.add(new Event(task, date));
     }
+
+    void doneTask(String[] userInputSplit) {
+        int taskNumber = Integer.parseInt(userInputSplit[1]);
+        this.list.done(taskNumber);
+    }
+
 
     void bye() {
         printWithStyle("Bye. Hope to see you again soon!");
