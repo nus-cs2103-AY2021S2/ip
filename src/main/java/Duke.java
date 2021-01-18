@@ -16,9 +16,12 @@ public class Duke {
 
         while(true) {
             String string = br.readLine();
-            if(!string.equals("bye")) {
-                if(string.equals("list")) {
+            String[] starr = string.split(" ");
+            if(!starr[0].equals("bye")) {
+                if(starr[0].equals("list")) {
                     list.printList();
+                } else if(starr[0].equals("done")){
+                    list.lst.get(Integer.parseInt(starr[1]) - 1).done();
                 } else {
                     addTask(string);
                 }
@@ -37,7 +40,8 @@ public class Duke {
     }
 
     public static void addTask(String string) {
-        list.addItem(string);
+        Task task = new Task(string);
+        list.addItem(task);
         pw.printf("added: %s%n", string);
         pw.flush();
     }
