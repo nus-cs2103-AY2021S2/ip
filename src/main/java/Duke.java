@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,6 +11,8 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        ArrayList<String> tasks = new ArrayList<>();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -31,8 +34,13 @@ public class Duke {
             if (line.equals("bye")) {
                 printIndentOutput("Bye. Hope to see you again soon!");
                 end = true;
+            } else if (line.equals("list")) {
+                for (int i = 0; i < tasks.size(); i++) {
+                    printIndentOutput((i + 1) + ": " + tasks.get(i));
+                }
             } else {
-                printIndentOutput(line);
+                tasks.add(line);
+                printIndentOutput("added: " + line);
             }
 
             printHorizontalLine();
