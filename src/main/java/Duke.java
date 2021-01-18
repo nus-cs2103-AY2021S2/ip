@@ -28,10 +28,38 @@ public class Duke {
         formatInChatBox(greeting + '\n');
     }
 
-    public static void add(String description) {
-        Task task = new Task(description);
+    public static void add(Task task) {
         tasks.add(task);
-        formatInChatBox("added: " + description + '\n');
+        formatInChatBox("Got it. I've added this task:" + '\n'
+                        + task + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.\n");
+    }
+
+    public static void analyzeTypeAndAdd(String input) {
+        if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
+            ToDo task = new ToDo(input.substring(5));
+            add(task);
+            return ;
+        } else if (input.length() > 10 && input.substring(0, 9).equals("deadline ")) {
+            if (input.contains("/by ")) {
+                int endOfDescription = input.indexOf("/by ");
+                String description = input.substring(9, endOfDescription);
+                String deadline = input.substring(endOfDescription + 4);
+                Deadline task = new Deadline(description, deadline);
+                add(task);
+                return ;
+            }
+        } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
+            if (input.contains("/at ")) {
+                int endOfDescription = input.indexOf("/at ");
+                String description = input.substring(6, endOfDescription);
+                String time = input.substring(endOfDescription + 4);
+                Event task = new Event(description, time);
+                add(task);
+                return ;
+            }
+        }
+        formatInChatBox("Sorry Momo is still naive. Could you write in correct format?\n");
     }
 
     public static void list() {
@@ -73,7 +101,7 @@ public class Duke {
                 int index = Integer.parseInt(input.substring(5));
                 mark(index);
             } else {
-                add(input);
+                analyzeTypeAndAdd(input);
             }
         } while(true);
     }
