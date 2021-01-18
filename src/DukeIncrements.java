@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class DukeL1 {
+public class DukeIncrements {
     public static void main(String[] agrs) {
         System.out.println("yo im Duke!");
         System.out.println("what can i do for ya ;)");
