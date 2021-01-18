@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,14 +12,17 @@ public class Duke {
         Task[] storage = new Task[100];
         int count = 0;
 
-        System.out.println("     Heyyoo! I am Luna!\n     What can I echo for you today? :D\n" + logo);
+        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        String inp = sc.nextLine();
 
-        while (!inp.equals("bye")) {
+        while (sc.hasNext()) {
+            String inp = sc.nextLine();
             String[] spl = inp.split(" ", 2);
 
-            if (inp.equals("list")) {
+            if (inp.equals("bye")) {
+                System.out.println("     Byeee! It was wonderful to have you here!");
+
+            } else if (inp.equals("list")) {
                 for (int i = 0; i < count; i++) {
                     int next = i + 1;
                     System.out.println("     " + next + ". " + storage[i]);
@@ -32,14 +36,34 @@ public class Duke {
                 System.out.println("     Good job! Another Task completed! I have marked it as done:\n     " + current);
 
             } else {
+                if (spl.length != 2 && (spl[0].equals("todo") || spl[0].equals("deadline") || spl[0].equals("event"))) {
+                    System.out.println("     ERROR! D: The task needs a description with it.");
+                    continue;
+                }
+
                 if (spl[0].equals("todo")) {
                     storage[count] = new todo(spl[1]);
+
                 } else if (spl[0].equals("deadline")) {
                     String[] spl2 = spl[1].split("/by", 2);
+                    if (spl2.length != 2) {
+                        System.out.println("     ERROR! D: Deadline needs a deadline! Give a time using /by.");
+                        continue;
+                    }
                     storage[count] = new deadline(spl2[0], spl2[1]);
-                } else {
+
+                } else if (spl[0].equals("event")) {
                     String[] spl2 = spl[1].split("/at", 2);
+                    if (spl2.length != 2) {
+                        System.out.println("     ERROR! D: Event needs a duration! Give a time using /at.");
+                        continue;
+                    }
                     storage[count] = new event(spl2[0], spl2[1]);
+
+                } else {
+                    System.out.println("     ERROR! D: You have not entered a valid Task.");
+                    continue;
+
                 }
 
                 count++;
@@ -47,9 +71,7 @@ public class Duke {
                 System.out.println("     There are now these number of tasks in the list: " + count);
 
             }
-            inp = sc.nextLine();
         }
-        System.out.println("     Byeee! It was wonderful to have you here!");
     }
 
     static boolean is_int(String s) {
