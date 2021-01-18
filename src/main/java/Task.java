@@ -16,6 +16,6 @@ class Task {
 		if (this.done) {
 			check = "X";
 		}
-		return String.format("[%s] %s", check, this.name);
+		return String.format("[%s]  %s", check, this.name);
 	}
 }
