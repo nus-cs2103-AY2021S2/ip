@@ -54,7 +54,7 @@ public class Duke {
      */
 
     private static void greet() {
-        print("Hello! I'm Duke.\n\t  How may I help you?");
+        print("Hello! I'm Jarvis.\n\t  How may I help you?");
     }
 
     /**
