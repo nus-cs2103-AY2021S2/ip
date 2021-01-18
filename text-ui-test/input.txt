@@ -1,0 +1,13 @@
+list
+todo Do CS2103T quiz
+list
+deadline Complete week 2 iP /by Sunday
+list
+event Birthday party /at Mon 2-4pm
+list
+done 1
+list
+done 2
+list
+done 3
+list
