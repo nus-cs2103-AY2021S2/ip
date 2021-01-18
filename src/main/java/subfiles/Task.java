@@ -1,8 +1,8 @@
 package main.java.subfiles;
 
 public class Task {
-    private String name;
-    private boolean isDone;
+    protected String name;
+    protected boolean isDone;
 
     public Task(String name) {
         this.name = name;
@@ -19,6 +19,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return name;
+        return "[ ][" + (isDone ? "X" : " ") + "] " + name;
     }
 }

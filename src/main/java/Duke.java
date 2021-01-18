@@ -20,6 +20,8 @@ public class Duke {
                 taskManager.printTasks();
             else if (sArray[0].equals("done"))
                 taskManager.markDone(Integer.parseInt(sArray[1]) - 1);
+            else if (sArray[0].equals("todo") || sArray[0].equals("deadline") || sArray[0].equals("event"))
+                taskManager.addTask(s, s.charAt(0));
             else
                 taskManager.addTask(s);
         }
