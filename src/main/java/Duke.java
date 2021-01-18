@@ -26,12 +26,10 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input;
 
-        while (true) {
+        while (sc.hasNextLine()) {
             System.out.println("------------------------------------");
 
             input = sc.nextLine();
-
-            System.out.println("------------------------------------");
 
             //program exits on bye
             if (input.equals("bye")) {
@@ -52,6 +50,8 @@ public class Duke {
             } else {
                 echo(input);
             }
+
+            System.out.println("------------------------------------");
         }
     }
 
