@@ -8,7 +8,7 @@ public class Task {
     /** Creates a task instance.
      @param description String describing the task
      */
-    public Task(String description) {
+    public Task(String description){
         this.description = description;
         this.isDone = false;
     }
