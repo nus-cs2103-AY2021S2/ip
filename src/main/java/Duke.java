@@ -1,9 +1,9 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static Task[] taskArray;
-    private static int count = 0;
+    private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
     private static Scanner sc = new Scanner(System.in);
     static final String lines = "----------------------------------------";
 
@@ -25,7 +25,7 @@ public class Duke {
 
     public static void displayAddedTaskMessage() {
         System.out.println(lines + "\nGot it. I've added this task: \n\t"
-                + taskArray[count - 1].toString() + "\n Now you have " + count
+                + taskArraylist.get(taskArraylist.size()-1).toString() + "\n Now you have " + taskArraylist.size()
                 + " tasks in your list \n" + lines);
     }
 
@@ -39,7 +39,7 @@ public class Duke {
 
                 taskName = returnTaskName(userInput,"todo");
                 if(!taskName.equals("no task name")){
-                    taskArray[count++] = new ToDos(returnTaskName(userInput, "todo"));
+                    taskArraylist.add(new ToDos(returnTaskName(userInput, "todo")));
                     addToTask= 1;
                 }
                 break;
@@ -51,7 +51,7 @@ public class Duke {
                     taskName = returnTaskName(dueBy[0], "deadline");
 
                     if (!taskName.equals("no task name") || !checkForAdditionalInfo(dueBy[0])) {
-                        taskArray[count++] = new Deadlines(taskName, dueBy[dueBy.length - 1]);
+                        taskArraylist.add( new Deadlines(taskName, dueBy[dueBy.length - 1]));
                         addToTask = 1;
                     }
                 }else {
@@ -72,7 +72,7 @@ public class Duke {
                     taskName = returnTaskName(dueDetails[0], "event");
 
                     if (!taskName.equals("no task name") || !checkForAdditionalInfo(date[0])) {
-                        taskArray[count++] = new Events(taskName, date[0], startTime, endTime);
+                        taskArraylist.add(new Events(taskName, date[0], startTime, endTime));
                         addToTask = 1;
                     }
                 } else{
@@ -114,13 +114,18 @@ public class Duke {
         return task;
     }
 
-    public static boolean invalidItemNumber(int no){
+    public static boolean invalidItemNumber(int no, String type){
 
         try{
-            if(no <= 0){
+            if(no < 0 || no >= taskArraylist.size() && !type.equals("done") ){
                 throw new DukeException("There are no task in list. Please add some task and try again.");
             }
-            return false;
+            else if(no >= taskArraylist.size() && type.equals("delete") ){
+                throw new DukeException("Item number " + no + " is not found in list. Please check again");
+            }else {
+                return false;
+            }
+
         }catch (DukeException e){
             e.printMessage();
             return true;
@@ -155,10 +160,10 @@ public class Duke {
         switch (commandArray[0]) {
 
             case ("list"):
-                if(!invalidItemNumber(count)) {
+                if(!invalidItemNumber(taskArraylist.size()-1, "")) {
                     System.out.println(lines + "\nHere are the tasks in your list:");
-                    for (int i = 0; i < count; i++) {
-                        System.out.println((i + 1) + "." + taskArray[i].toString());
+                    for (int i = 0; i < taskArraylist.size(); i++) {
+                        System.out.println((i + 1) + "." + taskArraylist.get(i).toString());
                     }
                     System.out.println(lines);
                 }
@@ -166,11 +171,19 @@ public class Duke {
 
             case ("done"):
                 int index = Integer.parseInt(commandArray[1])-1;
-
-                if(!invalidItemNumber(index)) {
-                    taskArray[index].setCompleted();
+                if(!invalidItemNumber(index,"")) {
+                    taskArraylist.get(index).setCompleted();
                     System.out.println(lines + "\nNice! I'll make this task as done: \n"
-                            + taskArray[index].toString() + "\n" + lines);
+                            + taskArraylist.get(index).toString() + "\n" + lines);
+                }
+                break;
+
+            case("delete"):
+                int indexInArray = Integer.parseInt(commandArray[1])-1;
+                if(!invalidItemNumber(indexInArray, "delete")) {
+                    System.out.println(lines + "\nNice! I've removed this task: \n"
+                            + taskArraylist.get(indexInArray).toString() + "\n" + lines);
+                    taskArraylist.remove(indexInArray);
                 }
                 break;
             default:
@@ -183,7 +196,6 @@ public class Duke {
         displayWelcomeMessage();
 
         String userInput = sc.nextLine();
-        taskArray = new Task[100];
 
         while (!userInput.equals("bye")) {
             executeCommand(userInput);
