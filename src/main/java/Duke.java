@@ -27,31 +27,35 @@ public class Duke {
             String command = sc.next();
             String input = sc.nextLine().strip();
 
-            switch(command) { 
-                case "bye": 
-                    echo("Bye. Hope to see you again soon!");  
-                    return; 
-                case "list": 
-                    displayList(checkList);
-                    break; 
-                case "done":
-                    completeTask(input);
-                    break;
-                case "todo":
-                    checkList.add(Todo.createTodo(input));
-                    taskAdded();
-                    break;
-                case "deadline":
-                    checkList.add(Deadline.createDeadline(input));
-                    taskAdded();
-                    break;
-                case "event":
-                    checkList.add(Event.createEvent(input));
-                    taskAdded();
-                    break;
-                default: 
-                    echo("invalid input");
-            } 
+            try {
+                switch(command) { 
+                    case "bye": 
+                        echo("Bye. Hope to see you again soon!");  
+                        return; 
+                    case "list": 
+                        displayList(checkList);
+                        break; 
+                    case "done":
+                        completeTask(input);
+                        break;
+                    case "todo":
+                        checkList.add(Todo.createTodo(input));
+                        taskAdded();
+                        break;
+                    case "deadline":
+                        checkList.add(Deadline.createDeadline(input));
+                        taskAdded();
+                        break;
+                    case "event":
+                        checkList.add(Event.createEvent(input));
+                        taskAdded();
+                        break;
+                    default: 
+                        echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                } 
+            } catch (DukeException e) {
+                echo(e.getMessage());
+            }
         }
     }
 

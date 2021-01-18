@@ -1,8 +1,13 @@
 public class Deadline extends Task {
     String dueDate;
 
-    public static Deadline createDeadline(String input) {
+    public static Deadline createDeadline(String input) throws DukeException {
         String[] details = input.split(" /by ");
+
+        if (!input.contains("/by") || details.length == 1) {
+            throw new DukeException("Due date is missing!");
+        }
+
         return new Deadline(details[0], details[1]);
     }
 
