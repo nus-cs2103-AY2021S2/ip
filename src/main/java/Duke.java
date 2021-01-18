@@ -27,6 +27,7 @@ public class Duke {
     public static void listenInput(Command command) {
         Scanner sc = new Scanner(System.in);
         String input;
+        System.out.println("------------------------------------");
 
         while (sc.hasNextLine()) {
             System.out.println("------------------------------------");

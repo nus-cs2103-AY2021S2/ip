@@ -132,9 +132,13 @@ public class Command {
      * @param tasks list of tasks entered by user
      */
     public void list(ArrayList<Task> tasks) {
-        for (int i = 1; i <= tasks.size(); i++) {
-            Task task = tasks.get(i - 1);
-            System.out.println(i + "." + task);
+        if (tasks.size() == 0) {
+            System.out.println("You have no task at the moment!");
+        } else {
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task task = tasks.get(i - 1);
+                System.out.println(i + "." + task);
+            }
         }
     }
 
