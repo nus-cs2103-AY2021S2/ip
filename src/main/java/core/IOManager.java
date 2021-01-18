@@ -21,14 +21,24 @@ public class IOManager {
         this.listener = listener;
     }
 
+    private void preOutputFormatting() {
+        pw.println("=================");
+    }
+
+    private void postOutputFormatting() {
+        pw.println("=================");
+    }
+
+
+
     /**
      * The main input loop.
      */
     public void run() {
-
         try (var br = new BufferedReader(new InputStreamReader(this.is))) {
             while (true) {
                 String s = br.readLine();
+                preOutputFormatting();
                 if (s.equalsIgnoreCase("bye")) {
                     // exit condition
                     pw.println("bye");
@@ -36,13 +46,12 @@ public class IOManager {
                 } else {
                     pw.println(s);
                 }
+                postOutputFormatting();
                 pw.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 }
