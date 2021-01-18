@@ -1,3 +1,5 @@
+import main.java.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,8 +15,8 @@ public class Duke {
 //                + "| |_| | |_| |   <  __/\n"
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
-        List<String> taskList = new ArrayList<>();
-        List<Boolean> doneList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
+//        List<Boolean> doneList = new ArrayList<>();
 
         String indent = "         ";
         String horizSep = indent + "________________________________________________";
@@ -37,33 +39,38 @@ public class Duke {
                 sc.close();
                 return;
             } else if (next.equals("list")) {
-                ListIterator<String> taskIter = taskList.listIterator();
-                ListIterator<Boolean> doneIter = doneList.listIterator();
+                ListIterator<Task> taskIter = taskList.listIterator();
 
                 System.out.println(horizSep);
                 System.out.println(indent + " Here are the tasks in your list:");
                 while (taskIter.hasNext()) {
-                    String doneIndicator;
-                    if (doneIter.next()) {
-                        doneIndicator = "X";
-                    } else {
-                        doneIndicator = " ";
-                    }
+//                    String doneIndicator;
+//                    if (doneIter.next()) {
+//                        doneIndicator = "X";
+//                    } else {
+//                        doneIndicator = " ";
+//                    }
+                    Task curr = taskIter.next();
 
-                    System.out.println(indent + " " + String.valueOf(taskIter.nextIndex() + 1) + "." + "[" + doneIndicator + "]" + " " + taskIter.next());
+                    System.out.println(indent + " " + String.valueOf(taskIter.nextIndex() + 1) + "." + "[" + curr.getStatusIcon() + "]" + " " + curr);
                 }
                 System.out.println(horizSep + "\n");
 
             } else if (params[0].equals("done")) {
+
                 Integer index = Integer.parseInt(params[1]) - 1;
-                doneList.set(index, true);
+
+                if (index >= taskList.size()) {
+                    throw new IllegalArgumentException("No such task in the list");
+                }
+
+                taskList.set(index, taskList.get(index).markAsDone());
                 System.out.println(horizSep + "\n" + indent + " Nice! I've marked this task as done:");
                 System.out.println(indent + "   [X] " + taskList.get(index));
-                System.out.println(horizSep);
+                System.out.println(horizSep + "\n");
 
             } else {
-                taskList.add(next);
-                doneList.add(false);
+                taskList.add(new Task(next));
                 System.out.println(horizSep + "\n" +  indent + " added: " + next + "\n" + horizSep + "\n");
             }
         }
