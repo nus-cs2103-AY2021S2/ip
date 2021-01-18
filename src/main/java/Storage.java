@@ -10,7 +10,9 @@ class Storage {
 
     void add(Task task){
         list.add(task);
-        System.out.println("added: " + task.getDescription());
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task);
+        System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
     }
 
     void listOut(){

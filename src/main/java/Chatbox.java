@@ -1,5 +1,8 @@
+import java.util.List;
+
 class Chatbox {
     private final Storage storage;
+    private Statement statement;
 
     Chatbox(){
         storage = new Storage();
@@ -10,19 +13,32 @@ class Chatbox {
         System.out.println("What can I do for you?");
     }
 
-    //called when the command is list
-    void acceptCommand(String command){
-        if(command.equals("list")) storage.listOut();
+    //accept the input
+    void acceptInput(String input){
+        statement = new Statement(input);
     }
 
-    //called when the command is add and mark as done, these two require additional
-    //information about the task to manipulate
-    void acceptCommand(String command, String item){
-        if(command.equals("add")){
-            Task newTask = new Task(item);
-            storage.add(newTask);
-        }else if(command.equals("done")){
-            storage.markTaskAsDone(item);
+    //execute the following command
+    void executeCommand(){
+        List<String> commAndArgs = statement.parseStatement();
+        String command = commAndArgs.get(0);
+
+        switch (command){
+            case "list":
+                storage.listOut();
+                break;
+            case "todo":
+                storage.add(new Todo(commAndArgs.get(1)));
+                break;
+            case "deadline":
+                storage.add(new Deadline(commAndArgs.get(1).trim(),commAndArgs.get(2)));
+                break;
+            case "event":
+                storage.add(new Event(commAndArgs.get(1).trim(),commAndArgs.get(2)));
+                break;
+            case "done":
+                storage.markTaskAsDone(commAndArgs.get(1).trim());
+                break;
         }
     }
 

@@ -10,20 +10,13 @@ public class Main {
 
         String currInput = "";
 
-        while(!currInput.equals("bye")){
+        while(true){
             currInput = sc.nextLine();
-            Scanner sc2 = new Scanner(currInput);
 
-            String firstWord = sc2.next();
+            if(currInput.equals("bye")) break;
 
-            if(firstWord.equals("done")) {
-                chatbox.acceptCommand("done", sc2.next());
-            }else if(firstWord.equals("list")){
-                chatbox.acceptCommand("list");
-            }else{
-                chatbox.acceptCommand("add", currInput);
-            }
-
+            chatbox.acceptInput(currInput);
+            chatbox.executeCommand();
         }
 
         chatbox.end();
