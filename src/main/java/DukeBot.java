@@ -38,7 +38,7 @@ public class DukeBot {
                 output = handleDeleteTask(Integer.parseInt(commandStr[1]));
                 break;
             default:
-                output = handleInvalidInput();
+                output = handleInvalidTask();
                 break;
         }
         System.out.println(output);
@@ -46,10 +46,14 @@ public class DukeBot {
     }
 
     public String markDoneTask(int index) {
-        Task doneTask = this.taskList.get(index-1);
-        doneTask.markAsDone();
-        return BORDER +  "\t" + " Nice! I've marked this task as done:\n" +  "\t  "
-                + doneTask.toString() + "\n" + BORDER;
+        if(index <= 0 || index > this.numTasks) {
+            return handleInvalidValue();
+        } else {
+            Task doneTask = this.taskList.get(index-1);
+            doneTask.markAsDone();
+            return BORDER +  "\t" + " Nice! I've marked this task as done:\n" +  "\t  "
+                    + doneTask.toString() + "\n" + BORDER;
+        }
     }
 
     public String retrieveList() {
@@ -120,16 +124,24 @@ public class DukeBot {
     }
 
     public String handleDeleteTask(int index) {
-        Task deleteTask = this.taskList.get(index-1);
-        this.taskList.remove(deleteTask);
-        return BORDER +  "\t" + "Noted. I've removed this task: \n" +
-                "\t  " + deleteTask.toString() + "\n\t Now you have "
-                + this.numTasks + " tasks in the list.\n" + BORDER;
-
+        if(index <= 0 || index > this.numTasks) {
+            return handleInvalidValue();
+        } else {
+            Task deleteTask = this.taskList.get(index - 1);
+            this.taskList.remove(deleteTask);
+            return BORDER + "\t" + "Noted. I've removed this task: \n" +
+                    "\t  " + deleteTask.toString() + "\n\t Now you have "
+                    + this.numTasks + " tasks in the list.\n" + BORDER;
+        }
     }
 
-    public String handleInvalidInput() {
-        DukeException exception = new DukeException("invalid input", "");
+    public String handleInvalidTask() {
+        DukeException exception = new DukeException("invalid task", "");
+        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
+    }
+
+    public String handleInvalidValue() {
+        DukeException exception = new DukeException("invalid integer value", "");
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 }

@@ -9,12 +9,19 @@ public class DukeException extends Exception {
 
     @Override
     public String getMessage() {
-        String errorMsg;
-        if(this.typeException.equals("invalid input")) {
-            errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-        } else {
-            errorMsg = "☹ OOPS!!! The description of a " + this.taskName +
-                    " cannot be " + this.typeException + ".";
+        String errorMsg = "";
+
+        switch (this.typeException) {
+            case "invalid input":
+                errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                break;
+            case "invalid integer value":
+                errorMsg = "☹ OOPS!!! The integer value is invalid!!!";
+                break;
+            default:
+                errorMsg = "☹ OOPS!!! The description of a " + this.taskName +
+                        " cannot be " + this.typeException + ".";
+                break;
         }
         return errorMsg;
     }
