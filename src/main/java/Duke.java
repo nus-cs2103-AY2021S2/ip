@@ -12,7 +12,6 @@ public class Duke {
             if (s.equals("bye")) break;
             else System.out.println(s);
         }
-
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
     }
