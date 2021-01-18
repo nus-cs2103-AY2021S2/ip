@@ -149,7 +149,8 @@ public class Duke {
         return new EventTask(eventTaskName, eventTime);
     }
 
-    private void markTaskAsDone(String arguments) throws NoDescriptionException, InvalidDescriptionException {
+    private void markTaskAsDone(String arguments) throws NoDescriptionException, 
+            InvalidDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("Please indicate a task number to be marked as done.");
         }
@@ -161,6 +162,8 @@ public class Duke {
             System.out.printf("  [X] %s\n", task.getName());
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException("Please enter a valid index!");
         }
     }
 
@@ -175,7 +178,8 @@ public class Duke {
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
 
-    private void deleteTask(String arguments) throws NoDescriptionException, InvalidDescriptionException {
+    private void deleteTask(String arguments) throws NoDescriptionException, 
+            InvalidDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("Please indicate a task number to be deleted.");
         }
@@ -186,6 +190,8 @@ public class Duke {
             printDeletedMessage(task);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException("Please enter a valid index!");
         }
     }
 
