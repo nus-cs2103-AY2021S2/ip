@@ -20,7 +20,7 @@ public class Duke {
         while ( !userinput.equals("bye")){
             if (userinput.equals("list")){
                 System.out.println(listManager.returnTaskList());
-            }else if(userinput.contains("done ")){
+            }else if(userinput.length() > 5 && userinput.substring(0, 5).equals("done ")){
 
                 int taskInt = Integer.parseInt(userinput.split(" ")[1]);
                 String outputString = listManager.checkTaskAsDone(taskInt);

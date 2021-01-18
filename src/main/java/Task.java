@@ -14,7 +14,8 @@ public class Task {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
 
-    public String returnDescription(){
+    @Override
+    public String toString(){
         return "[" + getStatusIcon() + "] " + description;
     }
 
