@@ -1,5 +1,5 @@
 public enum Commands {
-    BYE("bye"), LIST("list"), DONE("done");
+    BYE("bye"), LIST("list"), DONE("done"), DELETE("delete");
 
     private final String command;
 
