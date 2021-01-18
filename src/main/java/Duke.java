@@ -3,7 +3,7 @@ import java.io.*;
 public class Duke {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
-    static List list = new List();
+    static Tasklist list = new Tasklist();
 
     public static void main(String[] args) throws IOException{
         String logo = " ____        _        \n"
@@ -17,13 +17,42 @@ public class Duke {
         while(true) {
             String string = br.readLine();
             String[] starr = string.split(" ");
-            if(!starr[0].equals("bye")) {
-                if(starr[0].equals("list")) {
+            if(!string.equals("bye")) {
+                if(string.equals("list")) {
                     list.printList();
                 } else if(starr[0].equals("done")){
                     list.lst.get(Integer.parseInt(starr[1]) - 1).done();
-                } else {
-                    addTask(string);
+                } else if(starr[0].equals("todo")) {
+                    String message = "";
+                    String type = null;
+                    for (int i = 0; i < starr.length; i++) {
+                        if (i == 0) {
+                            type = starr[i];
+                        } else {
+                            message = message.concat(starr[i]);
+                            if (i != starr.length - 1) {
+                                message = message + " ";
+                            }
+                        }
+                    }
+                    addTask(message, type, null);
+                } else if(starr[0].equals("deadline") || starr[0].equals("event")) {
+                    String[] arr = string.split("/");
+                    String date = arr[1];
+                    String message = "";
+                    String[] s = arr[0].split(" ");
+                    String type = "";
+                    for(int i = 0; i < s.length; i++) {
+                        if(i == 0) {
+                            type = s[i];
+                        } else {
+                            message = message.concat(s[i]);
+                            if(i != s.length - 1) {
+                                message = message + " ";
+                            }
+                        }
+                    }
+                    addTask(message, type, date);
                 }
             } else {
                 exit();
@@ -39,10 +68,24 @@ public class Duke {
         pw.flush();
     }
 
-    public static void addTask(String string) {
-        Task task = new Task(string);
+    public static void addTask(String message, String type, String date) {
+        Task task = null;
+        switch (type) {
+            case "todo":
+                task = new Todo(message);
+                break;
+            case "deadline":
+                task = new Deadline(message, date);
+                break;
+            case "event":
+                task = new Event(message, date);
+                break;
+        }
+
         list.addItem(task);
-        pw.printf("added: %s%n", string);
+        pw.println("Got it. I've added this task:");
+        pw.printf(" %s%n", task);
+        pw.printf("Now you have %d tasks in the list.%n", list.lst.size());
         pw.flush();
     }
 

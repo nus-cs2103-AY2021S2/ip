@@ -2,12 +2,13 @@ import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
-public class List {
-    protected final ArrayList<Task> lst;
+public class Tasklist {
+    protected final List<Task> lst;
     private final static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
-    public List() {
+    public Tasklist() {
         this.lst = new ArrayList<>();
     }
 
@@ -17,7 +18,8 @@ public class List {
 
     public void printList() {
         for(int i = 0; i < lst.size(); i++) {
-            pw.printf("%d.%s %s%n", i + 1, lst.get(i).getStatusIcon(), lst.get(i).description);
+            //pw.printf("%d.%s %s %s%n", i + 1, lst.get(i).getType(), lst.get(i).getStatusIcon(), lst.get(i).description);
+            pw.printf("%d.%s%n", i + 1, lst.get(i));
         }
         pw.flush();
     }
