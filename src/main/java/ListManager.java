@@ -3,21 +3,24 @@ package main.java;
 import java.util.ArrayList;
 
 public class ListManager extends Manager {
-    ArrayList<String> TaskArray;
+    ArrayList<Task> TaskArray;
 
     public ListManager(){
-        TaskArray = new ArrayList<String>();
+        TaskArray = new ArrayList<Task>();
     }
 
-    public void addTask(String Task){
-        TaskArray.add(Task);
+    public void addTask(String TaskDescription){
+        TaskArray.add(new Task(TaskDescription));
     }
 
     public String returnTaskList(){
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
         for (int i = 0; i < TaskArray.size(); i++) {
-            sb.append(indentedString( String.valueOf(i+1) + ". " + TaskArray.get(i) + '\n' ));
+
+            Task currentTask = TaskArray.get(i);
+            String temp = String.valueOf(i+1) + ". " + currentTask.description + '\n';
+            sb.append(indentedString( temp ));
         }
         sb.append(horizontalLine());
 
