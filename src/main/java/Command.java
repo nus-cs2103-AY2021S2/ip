@@ -144,6 +144,9 @@ public class Command {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
             return;
+        } catch (NumberFormatException e) {
+            System.out.println("Specify a valid task number to mark as complete!");
+            return;
         }
 
         try {
@@ -171,6 +174,9 @@ public class Command {
             taskId = Integer.parseInt(parsedString[1]);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
+            return;
+        } catch (NumberFormatException e) {
+            System.out.println("Specify a valid task number to delete!");
             return;
         }
 
