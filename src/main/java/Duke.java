@@ -61,6 +61,7 @@ public class Duke {
             printLine("Bye. Hope to see you again soon!");
         } else {
             if (tokens[0].equals("list")) {
+                printLine("Here are the tasks in your list:");
                 int index = 0;
                 for (Task task : tasks) {
                     printLine(String.format("%d.[%s] %s", ++index, task.getIsDone() ? "X" : " ", task.getName()));
