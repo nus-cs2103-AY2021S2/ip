@@ -14,35 +14,25 @@ public class Duke {
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.println(lines);
 
-        String[] list = new String[101];
-        int index = 1;
-        boolean[] done = new boolean[101];
+        Tasks tasks = new Tasks();
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println(lines);
             if (input.equals("list")) {
-                for (int i = 1; i < index; i++) {
-                    String status = "";
-                    if (done[i]) {
-                        status = ".[X] ";
-                    } else {
-                        status = ".[ ] ";
-                    }
-                    String output = status + list[i];
-                    System.out.println(indentation + i + output);
+                for (int i = 1; i < tasks.index(); i++) {
+                    String output = tasks.checkDone(i);
+                    System.out.println(indentation + output);
                 }
             } else if (input.contains("done")){
                 int number = Integer.parseInt(input.substring(5));
-                done[number] = true;
-                System.out.print(indentation);
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(indentation + "[X]" + list[number]);
+                tasks.markDone(number);
+                System.out.println(indentation + "Nice! I've marked this task as done:");
+                System.out.println(indentation + "  [X] " + tasks.get(number));
             } else {
                 System.out.println(indentation + "added: " + input);
-                list[index] = input;
-                index++;
+                tasks.add(input);
             }
             System.out.println(lines);
             input = sc.nextLine();
