@@ -32,7 +32,6 @@ public class Duke {
     }
 
     public static void addCommand(Task newTask) {
-        int taskListSize = taskList.size();
         taskList.add(newTask);
 
         System.out.println("Got it. I've added this task:");

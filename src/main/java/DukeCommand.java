@@ -18,15 +18,30 @@ public enum DukeCommand {
             Duke.addCommand(newDeadline);
         }
     },
-    TODO {
+    DELETE {
         @Override
         public void runCommand(String actions) throws DukeException {
-            if (actions.isEmpty() || actions.isBlank()) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            int index = Integer.parseInt(actions) - 1;
+            int listSize = Duke.taskList.size();
+
+            if (index < 0 || index >= listSize) {
+                throw new DukeException("☹ OOPS!!! The number you entered is invalid.");
             }
 
-            ToDo newToDo = new ToDo(actions);
-            Duke.addCommand(newToDo);
+            Duke.deleteCommand(index);
+        }
+    },
+    DONE {
+        @Override
+        public void runCommand(String actions) throws DukeException {
+            int index = Integer.parseInt(actions) - 1;
+            int listSize = Duke.taskList.size();
+
+            if (index < 0 || index >= listSize) {
+                throw new DukeException("☹ OOPS!!! The number you entered is invalid.");
+            }
+
+            Duke.doneCommand(index);
         }
     },
     EVENT {
@@ -59,30 +74,15 @@ public enum DukeCommand {
             Duke.listCommand();
         }
     },
-    DONE {
+    TODO {
         @Override
         public void runCommand(String actions) throws DukeException {
-            int index = Integer.parseInt(actions) - 1;
-            int listSize = Duke.taskList.size();
-
-            if (index < 0 || index >= listSize) {
-                throw new DukeException("☹ OOPS!!! The number you entered is invalid.");
+            if (actions.isEmpty() || actions.isBlank()) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
 
-            Duke.doneCommand(index);
-        }
-    },
-    DELETE {
-        @Override
-        public void runCommand(String actions) throws DukeException {
-            int index = Integer.parseInt(actions) - 1;
-            int listSize = Duke.taskList.size();
-
-            if (index < 0 || index >= listSize) {
-                throw new DukeException("☹ OOPS!!! The number you entered is invalid.");
-            }
-
-            Duke.deleteCommand(index);
+            ToDo newToDo = new ToDo(actions);
+            Duke.addCommand(newToDo);
         }
     };
 
