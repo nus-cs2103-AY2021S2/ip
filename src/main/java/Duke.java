@@ -48,7 +48,7 @@ public class Duke {
         printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
-    void handleInput(String userInput) {
+    void handleInput(String userInput) throws DukeException {
         String[] splitBySpaces = userInput.trim().split("\\s+");
         String keyword = splitBySpaces[0];
         if (keyword.equals("list")) {
@@ -63,11 +63,14 @@ public class Duke {
         } else if (keyword.equals("event")) {
             addEvent(splitBySpaces);
         } else {
-            this.list.add(new Task(userInput));
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    void addToDo(String[] userInputSplit) {
+    void addToDo(String[] userInputSplit) throws DukeException {
+        if (userInputSplit.length <= 1) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
         String task = join(userInputSplit, 1, userInputSplit.length - 1);
         list.add(new ToDo(task));
     }
@@ -120,7 +123,11 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         while (!input.equals("bye")) {
-            duke.handleInput(input);
+            try {
+                duke.handleInput(input);
+            } catch (DukeException e) {
+                printWithStyle(e.getMessage());
+            }
             input = scanner.nextLine();
         }
         duke.bye();
