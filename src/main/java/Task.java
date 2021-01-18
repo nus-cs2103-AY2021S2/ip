@@ -28,7 +28,7 @@ public class Task {
      * @return Return an icon, cross if done, empty space if not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : " ");
+        return (isDone ? "-" : " ");
     }
 
     /**
