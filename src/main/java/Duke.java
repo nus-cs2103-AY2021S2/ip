@@ -9,14 +9,18 @@ public class Duke {
     private static List<Task> tasks = new ArrayList<>();
 
     // Helper functions
+    public static String formatLine(String line) {
+        return INDENTATION + line + "\n";
+    }
+
     public static void reply(String msg) {
         System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
     }
 
     public static void addedTaskReply(Task task) {
-        String msg = INDENTATION + "Got it. I've added this task:\n"
-                + INDENTATION + "  " + task + "\n"
-                + INDENTATION + "Now you have " + tasks.size() + " tasks in the list.\n";
+        String msg = formatLine("Got it. I've added this task:")
+                + formatLine("  " + task)
+                + formatLine("Now you have " + tasks.size() + " tasks in the list.");
         reply(msg);
     }
 
@@ -39,8 +43,8 @@ public class Duke {
 
     // Commands
     public static void greet() {
-        String msg = INDENTATION + "Hello! I'm Duke\n"
-                + INDENTATION + "What can I do for you?\n";
+        String msg = formatLine("Hello! I'm Duke")
+                + formatLine("What can I do for you?");
         reply(msg);
     }
 
@@ -81,8 +85,8 @@ public class Duke {
             throw new TaskNotFoundException();
         } else {
             tasks.get(index).markDone();
-            String msg = INDENTATION + "Nice! I've marked this task as done:\n"
-                    + INDENTATION + "  " + tasks.get(index) + "\n";
+            String msg = formatLine("Nice! I've marked this task as done:")
+                    + formatLine("  " + tasks.get(index));
             reply(msg);
         }
     }
@@ -94,24 +98,24 @@ public class Duke {
             throw new TaskNotFoundException();
         } else {
             Task deletedTask = tasks.remove(index);
-            String msg = INDENTATION + "Noted. I've removed this task:\n"
-                    + INDENTATION + "  " + deletedTask + "\n"
-                    + INDENTATION + "Now you have " + tasks.size() + " tasks in the list.\n";
+            String msg = formatLine("Noted. I've removed this task:")
+                    + formatLine("  " + deletedTask)
+                    + formatLine("Now you have " + tasks.size() + " tasks in the list.");
             reply(msg);
         }
     }
 
     public static void list() {
-        String msg = INDENTATION + "Here are the tasks in your list:\n";
+        String msg = formatLine("Here are the tasks in your list:");
 
         for (int i = 0; i < tasks.size(); i++) {
-            msg += INDENTATION + (i + 1) + ". " + tasks.get(i) + "\n";
+            msg += formatLine((i + 1) + ". " + tasks.get(i));            
         }
         reply(msg);
     }
 
     public static void exit() {
-        reply(INDENTATION + "Bye. Hope to see you again soon!\n");
+        reply(formatLine("Bye. Hope to see you again soon!"));
     }
 
     public static boolean readInput(Scanner sc) {
@@ -146,7 +150,7 @@ public class Duke {
                     throw new UnknownCommandException();
             }
         } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException exception) {
-            reply(INDENTATION + exception.getMessage() + "\n");
+            reply(formatLine(exception.getMessage()));
         }
 
         return true;
