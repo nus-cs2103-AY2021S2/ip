@@ -17,6 +17,7 @@ public class Duke {
         while (sc.hasNext()) {
             String word = sc.nextLine();
             String[] tmp = word.split(" ");
+            String command = tmp[0];
             if (word.equals("bye")) {
                 System.out.println(bye);
                 break;
@@ -28,26 +29,43 @@ public class Duke {
                     System.out.println(lst.get(i));
                 }
             }
-            else if (tmp[0].equals("done")) {
-                Task currTask = lst.get(Integer.parseInt(tmp[1]) - 1);
-                currTask = currTask.doTask();
-                lst.set(Integer.parseInt(tmp[1]) - 1, currTask);
-                System.out.println("Nice I have marked this task as done!");
-                System.out.println(currTask);
+            else if (command.equals("done")) {
+                try {
+                    Task currTask = lst.get(Integer.parseInt(tmp[1]) - 1);
+                    currTask = currTask.doTask();
+                    lst.set(Integer.parseInt(tmp[1]) - 1, currTask);
+                    System.out.println("Nice I have marked this task as done!");
+                    System.out.println(currTask);
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of a done cannot be empty.");
+                }
+            }
+            else if (command.equals("delete")) {
+                try {
+                    Task currTask = lst.get(Integer.parseInt(tmp[1]) - 1);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(currTask);
+                    lst.remove(Integer.parseInt(tmp[1]) - 1);
+                    System.out.println("Now you have " + lst.size() + " tasks in the list.");
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! The description of a delete cannot be empty.");
+                }
             }
             else {
                 try {
                     Task task = new Task("dummy");
-                    if (tmp[0].equals("todo")) {
+                    if (command.equals("todo")) {
                         try {
                             String realWord = word.substring(5);
                             task = new ToDo(realWord);
                             lst.add(task);
                         } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new NoMeaningException("☹ OOPS!!! The description of a todo cannot be empty.");
                         }
                     }
-                    else if (tmp[0].equals("deadline")) {
+                    else if (command.equals("deadline")) {
                         try {
                             String realWord = word.substring(9);
                             String[] deadlineWords = realWord.split("/by");
@@ -56,10 +74,10 @@ public class Duke {
                             task = new Deadline(deadlineWord, deadlineTime);
                             lst.add(task);
                         } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            throw new NoMeaningException("☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
                     }
-                    else if (tmp[0].equals("event")) {
+                    else if (command.equals("event")) {
                         try {
                             String realWord = word.substring(6);
                             String[] eventWords = realWord.split("/at");
@@ -68,7 +86,7 @@ public class Duke {
                             task = new Event(eventWord, eventTime);
                             lst.add(task);
                         } catch (StringIndexOutOfBoundsException e) {
-                            System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+                            throw new NoMeaningException("☹ OOPS!!! The description of a event cannot be empty.");
                         }
                     }
                     else {
@@ -79,7 +97,7 @@ public class Duke {
                     System.out.println("Now you have " + lst.size() + " tasks in the list.");
                 }
                 catch (NoMeaningException e){
-                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+                    System.out.println(e.getMessage());
                 }
             }
         }
