@@ -10,6 +10,7 @@ public class Kelbot {
     while (true) {
       try {
         if (input.equals("bye")) {
+          // Terminates programme
           break;
         } else if (input.equals("list")) {
           // List out all the tasks
@@ -18,11 +19,35 @@ public class Kelbot {
           }
         } else if (commands[0].equals("done")) {
           // Marks a completed task as done
-          int index = Integer.parseInt(commands[1]);
-          Task taskToComplete = taskList.get(index - 1);
-          taskToComplete.complete();
-          System.out.println("Well done! You have completed this task!");
-          System.out.println(taskToComplete);
+          try {
+            if (commands.length == 1) {
+              throw new KelbotException("Which task did you finish?");
+            } else {
+              int index = Integer.parseInt(commands[1]);
+              Task taskToComplete = taskList.get(index - 1);
+              taskToComplete.complete();
+              System.out.println("Well done! You have completed this task!");
+              System.out.println(taskToComplete);
+            }
+          } catch (KelbotException e) {
+            System.out.println(e.getMessage());
+          }
+        } else if (commands[0].equals("delete")) {
+          // Deletes selected task
+          try {
+            if (commands.length == 1) {
+              throw new KelbotException("Which task do you want to delete?");
+            } else {
+              int index = Integer.parseInt(commands[1]);
+              Task taskToDelete = taskList.remove(index - 1);
+              System.out.println("Noted! You have deleted this task!");
+              System.out.println(taskToDelete);
+            }
+          } catch (KelbotException e) {
+            System.out.println(e.getMessage());
+          } catch (IndexOutOfBoundsException e) {
+            System.out.println("The list is empty");
+          }
         } else if (commands[0].equals("todo")) {
           // Add todotask to list
           String name = "";
@@ -32,12 +57,13 @@ public class Kelbot {
             }
             if (name.equals("")) {
               throw new KelbotException("Todo name cannot be empty!");
+            } else {
+              TodoTask newTodoTask = new TodoTask(name);
+              taskList.add(newTodoTask);
+              System.out.println("Okay! I have added:");
+              System.out.println(newTodoTask);
+              System.out.println("Now there are " + taskList.size() + " tasks on the list");
             }
-            TodoTask newTodoTask = new TodoTask(name);
-            taskList.add(newTodoTask);
-            System.out.println("Okay! I have added:");
-            System.out.println(newTodoTask);
-            System.out.println("Now there are " + taskList.size() + " tasks on the list");
           } catch (KelbotException e) {
             System.out.println(e.getMessage());
           }
@@ -57,17 +83,17 @@ public class Kelbot {
             }
             if (name.equals("")) {
               throw new KelbotException("Deadline name cannot be empty!");
-            }
-            if (by.equals("")) {
+            } else if (by.equals("")) {
               throw new KelbotException("Deadline by cannot be empty!");
+            } else {
+              DeadlineTask newDeadlineTask = new DeadlineTask(name, by);
+              taskList.add(newDeadlineTask);
+              System.out.println("Okay! I have added:");
+              System.out.println(newDeadlineTask);
+              System.out.println("Now there are " + taskList.size() + " tasks on the list");
             }
-            DeadlineTask newDeadlineTask = new DeadlineTask(name, by);
-            taskList.add(newDeadlineTask);
-            System.out.println("Okay! I have added:");
-            System.out.println(newDeadlineTask);
-            System.out.println("Now there are " + taskList.size() + " tasks on the list");
           } catch (KelbotException e) {
-          System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
           }
         } else if (commands[0].equals("event")) {
           // Add event task to list
@@ -85,15 +111,15 @@ public class Kelbot {
             }
             if (name.equals("")) {
               throw new KelbotException("Event name cannot be empty!");
-            }
-            if (at.equals("")) {
+            } else if (at.equals("")) {
               throw new KelbotException("Event at cannot be empty!");
+            } else {
+              EventTask newEventTask = new EventTask(name, at);
+              taskList.add(newEventTask);
+              System.out.println("Okay! I have added:");
+              System.out.println(newEventTask);
+              System.out.println("Now there are " + taskList.size() + " tasks on the list");
             }
-            EventTask newEventTask = new EventTask(name, at);
-            taskList.add(newEventTask);
-            System.out.println("Okay! I have added:");
-            System.out.println(newEventTask);
-            System.out.println("Now there are " + taskList.size() + " tasks on the list");
           } catch (KelbotException e) {
             System.out.println(e.getMessage());
           }

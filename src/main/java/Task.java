@@ -22,6 +22,9 @@ public class Task {
     this.done = true;
   }
 
+  /*
+   * Provide the status icon for the toString() method.
+   */
   public String getStatusIcon() {
     if (this.done) {
       return "[X]";
