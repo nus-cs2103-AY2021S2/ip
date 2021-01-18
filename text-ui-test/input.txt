@@ -10,6 +10,7 @@ deadline cs2103t luminus quiz 2 /by friday 2pm
 list
 done 
 done read book
+done 100
 done 4
 list
 blah
