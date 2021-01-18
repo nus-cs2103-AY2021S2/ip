@@ -36,7 +36,8 @@ public class DukeBot {
                 output = handleTask(taskAction, commandStr);
                 break;
             default:
-                output = BORDER + "\t " + taskAction + "\n" + BORDER;
+                DukeException exception = new DukeException("invalid input", "");
+                output = BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
                 break;
         }
         System.out.println(output);
@@ -63,13 +64,12 @@ public class DukeBot {
 
     public String handleTask(String taskAction, String[] commandStr) {
         Task newTask;
-        String[] result;
         StringBuilder description = new StringBuilder();;
         List<String> taskDetails =  Arrays.asList(commandStr);
         String currText = BORDER + "\t" + " Got it. I've added this task: \n";
 
         if(!taskAction.equals("todo")) {
-            result = handleEventDeadLine(taskDetails);
+            String[] result = handleEventDeadLine(taskDetails);
             if(taskAction.equals("event")) {
                 newTask = new Event(result[0], result[1]);
             } else {
@@ -82,10 +82,16 @@ public class DukeBot {
             }
             newTask = new ToDo(description.toString());
         }
-        this.taskList.add(newTask);
-        currText +=  "\t  " + newTask.toString() + "\n\t Now you have "
-                + this.numTasks + " tasks in the list.\n" + BORDER;
-        return currText;
+
+        if(newTask.getDescription().equals("")) {
+            DukeException exception = new DukeException("empty", taskAction);
+            return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
+        } else {
+            this.taskList.add(newTask);
+            currText +=  "\t  " + newTask.toString() + "\n\t Now you have "
+                    + this.numTasks + " tasks in the list.\n" + BORDER;
+            return currText;
+        }
     }
 
     public String[] handleEventDeadLine(List<String> taskDetails) {
