@@ -41,12 +41,28 @@ public class Duke {
                         break;
                     }
                     case "done": {
+                        String[] ar = line.split(" ",2);
+                        if(ar.length==1) throw new CommandException("Which task are you done with?");
                         line = line.split(" ",2)[1];
-                        int index = Integer.parseInt(line);
-                        Task t = list.get(index - 1);
+                        int index = Integer.parseInt(line)-1;
+                        Task t = list.get(index);
                         t.isDone = true;
                         String reply = "Nice! I've marked this task as done:\n\t  "
                                 + t.toString();
+                        dukeReply(reply);
+
+                        break;
+                    }
+                    case "delete": {
+                        String[] ar = line.split(" ",2);
+                        if(ar.length==1) throw new CommandException("Which task are you deleting?");
+                        line = line.split(" ",2)[1];
+                        int index = Integer.parseInt(line)-1;
+                        Task t=list.get(index);
+                        list.remove(index);
+                        String reply = "Noted. I've removed this task:\n\t" + t.toString()
+                                    + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.";
+
                         dukeReply(reply);
 
                         break;
