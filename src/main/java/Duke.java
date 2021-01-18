@@ -16,10 +16,17 @@ public class Duke {
         list = new ArrayList<>();
         System.out.println("POWERED BY JARVIS\n");
         greet();
-        String userInput = sc.nextLine();
-        String[] parseInput = userInput.split(" ");
-        String command = parseInput[0];
+        String userInput = "";
+        String[] parseInput;
+        String command;
         while (!userInput.equals("bye")) {
+            userInput = sc.nextLine();
+            parseInput = userInput.split(" ");
+            if (parseInput.length == 0) {
+                // handle blank spaces input
+                continue;
+            }
+            command = parseInput[0];
             switch (command) {
                 case "list":
                     print(list);
@@ -28,23 +35,19 @@ public class Duke {
                     handleToDo(userInput);
                     break;
                 case "deadline":
-                    String[] parseDeadline = userInput.substring(9).split(" /by ");
-                    addTask(new Deadline(parseDeadline[0], parseDeadline[1]));
+                    handleDeadline(userInput);
                     break;
                 case "event":
-                    String[] parseEvent = userInput.substring(6).split(" /at ");
-                    addTask(new Event(parseEvent[0], parseEvent[1]));
+                    handleEvent(userInput);
                     break;
                 case "done":
-                    int taskIndex = Integer.parseInt(parseInput[1])-1;
-                    markTaskAsDone(list.get(taskIndex));
+                    handleDone(parseInput);
+                    break;
+                case "bye":
                     break;
                 default:
                     handleInvalidCommand();
             }
-            userInput = sc.nextLine();
-            parseInput = userInput.split(" ");
-            command = parseInput[0];
         }
         exit();
     }
@@ -65,6 +68,10 @@ public class Duke {
         print("Goodbye. See you later!");
     }
 
+    /**
+     * Handle user input when an invalid command is given.
+     */
+
     private static void handleInvalidCommand() {
         try {
             throw new DukeInvalidCommandException("Invalid Command!");
@@ -72,6 +79,11 @@ public class Duke {
             print(e.getMessage());
         }
     }
+
+    /**
+     * Handle user input when user enters a "todo" command.
+     * @param userInput User's input.
+     */
 
     private static void handleToDo(String userInput) {
         try {
@@ -82,6 +94,70 @@ public class Duke {
             addTask(new ToDo(description));
         } catch (DukeDescriptionException e) {
             print(e.getMessage());
+        }
+    }
+
+    /**
+     * Handle user input when user enters a "deadline" command.
+     * @param userInput User's input.
+     */
+
+    private static void handleDeadline(String userInput) {
+        try {
+            if (userInput.split(" ").length == 1) {
+                throw new DukeDescriptionException("You have not entered a description!");
+            }
+            if (userInput.split(" ").length <= 3) {
+                throw new DukeDeadlineException("You have not entered a deadline for this task!");
+            }
+            String[] parseDeadline = userInput.substring(9).split(" /by ");
+            addTask(new Deadline(parseDeadline[0], parseDeadline[1]));
+        } catch (DukeDescriptionException e) {
+            print(e.getMessage());
+        } catch (DukeDeadlineException e) {
+            print(e.getMessage());
+        }
+    }
+
+    /**
+     * Handle user input when user enters a "event" command.
+     * @param userInput User's input.
+     */
+
+    private static void handleEvent(String userInput) {
+        try {
+            if (userInput.split(" ").length == 1) {
+                throw new DukeDescriptionException("You have not entered a description!");
+            }
+            if (userInput.split(" ").length <= 3) {
+                throw new DukeEventException("You have not entered the date/time for this event!");
+            }
+            String[] parseEvent = userInput.substring(6).split(" /at ");
+            addTask(new Event(parseEvent[0], parseEvent[1]));
+        } catch (DukeDescriptionException e) {
+            print(e.getMessage());
+        } catch (DukeEventException e) {
+            print(e.getMessage());
+        }
+    }
+
+    /**
+     * Handle user input when user enters a "done" command.
+     * @param parseInput Parsed user's input.
+     */
+
+    private static void handleDone(String[] parseInput) {
+        try {
+            int taskIndex = Integer.parseInt(parseInput[1])-1;
+            markTaskAsDone(list.get(taskIndex));
+        } catch (NumberFormatException e) {
+            print("Please enter a numerical value as the list index!");
+        } catch (IndexOutOfBoundsException e) {
+            if (parseInput.length == 1) {
+                print("You have not entered a list index!");
+            } else {
+                print("Please enter a valid list index!");
+            }
         }
     }
 
