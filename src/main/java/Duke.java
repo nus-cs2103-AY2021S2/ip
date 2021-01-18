@@ -24,33 +24,11 @@ public class Duke {
             Map.entry("event", Function.EVENT)
     );
 
-    /**
-     * Wrap line(s) with horizontal lines and indent using tab
-     *
-     * @param lines: array of strings
-     */
-    private static void wrappedPrint(String[] lines) {
-        System.out.println(HORIZONTAL_LINE);
-        for (String l : lines) {
-            printLine(l);
-        }
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    private static void wrappedPrint(Vector<Task> tasks) {
-        System.out.println(HORIZONTAL_LINE);
+    private static void printTasks(Vector<Task> tasks) {
         printLine("Go do work! You need finish these things:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("\t %d. %s%n", i + 1, tasks.get(i).toString());
         }
-        System.out.println(HORIZONTAL_LINE);
-    }
-
-    /**
-     * Wrap single line with horizontal lines and indent using tab
-     */
-    private static void wrappedPrint(String line) {
-        wrappedPrint(new String[]{line});
     }
 
     private static void printLine(String line) {
@@ -76,11 +54,9 @@ public class Duke {
     }
 
     private static void postAddTaskSummary(Vector<Task> tasks) {
-        System.out.println(HORIZONTAL_LINE);
         printLine("Okay I remember for you liao:");
         printLine("\t" + tasks.lastElement());
         printLine(getTasksLeftString(tasks));
-        System.out.println(HORIZONTAL_LINE);
     }
 
     private static boolean processInput(Vector<Task> tasks, Function func, String details)
@@ -95,14 +71,15 @@ public class Duke {
                 if (tasks.isEmpty())
                     throw new NoTasksException();
                 else
-                    wrappedPrint(tasks);
+                    printTasks(tasks);
                 break;
             case DONE:  // mark a single task as done
                 try {
                     int index = Integer.parseInt(details.trim()) - 1;
                     Task currentTask = tasks.get(index);
                     currentTask.markAsDone();
-                    wrappedPrint(new String[]{"Good job! The task below is marked done!", currentTask.toString()});
+                    printLine("Good job! The task below is marked done!");
+                    printLine(currentTask.toString());
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new InvalidTaskIndexException();
                 }
@@ -112,17 +89,15 @@ public class Duke {
                     int index = Integer.parseInt(details.trim()) - 1;
                     Task selectedTask = tasks.get(index);
                     tasks.remove(index);
-                    wrappedPrint(new String[]{
-                            "Poof! This task is gone:",
-                            "\t" + selectedTask.toString(),
-                            getTasksLeftString(tasks)
-                    });
+                    printLine("Poof! This task is gone:");
+                    printLine("\t" + selectedTask.toString());
+                    printLine(getTasksLeftString(tasks));
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new InvalidTaskIndexException();
                 }
                 break;
             case BYE:
-                wrappedPrint("Bye bye. Anything call me ah!");
+                printLine("Bye bye. Anything call me ah!");
                 active = false;
                 break;
             case TODO:
@@ -155,10 +130,10 @@ public class Duke {
 
     public static void main(String[] args) {
         // Initial greeting
-        wrappedPrint(new String[]{
-                "Yo! I'm Ekud!",
-                "What you want?"
-        });
+        System.out.println(HORIZONTAL_LINE);
+        printLine("Yo! I'm Ekud!");
+        printLine("What you want?");
+        System.out.println(HORIZONTAL_LINE);
 
         // store whatever is given until bye is detected
         Scanner input = new Scanner(System.in);
@@ -170,11 +145,13 @@ public class Duke {
             String firstWord = input.next();
             Function function = nameToFunction.getOrDefault(firstWord, Function.NULL);
             String details = input.nextLine();
+            System.out.println(HORIZONTAL_LINE);
             try {
                 active = processInput(tasks, function, details);
             } catch (DukeException e) {
-                wrappedPrint(e.toString());
+                printLine(e.toString());
             }
+            System.out.println(HORIZONTAL_LINE);
         } while (active);
     }
 }
