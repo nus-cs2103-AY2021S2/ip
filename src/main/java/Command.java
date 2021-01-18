@@ -12,7 +12,7 @@ public class Command {
     public Command() {
         cmdInfo.put("bye", "bye | Description: exits the program");
         cmdInfo.put("list", "list | Description: list all entered tasks");
-        cmdInfo.put("done", "done | Description: marks by index a given task as done");
+        cmdInfo.put("done", "done <task index> | Description: marks by index a given task as done");
         cmdInfo.put("todo", "todo <name> | Description: adds a new todo task");
         cmdInfo.put("deadline", "deadline <name> /by <end date> | Description: adds a new deadline task");
         cmdInfo.put("event", "event <name> /at <start date - end date> | Description: adds a new event task");
@@ -96,8 +96,16 @@ public class Command {
      */
     public void done(String input, ArrayList<Task> tasks) {
         String[] parsedString = input.split("\\s+");
+        int taskId;
+
         try {
-            int taskId = Integer.parseInt(parsedString[1]);
+            taskId = Integer.parseInt(parsedString[1]);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Usage for done: " + cmdInfo.get("done"));
+            return;
+        }
+
+        try {
             Task task = tasks.get(taskId - 1);
             if (task.getStatus().equals("complete")) {
                 System.out.println("Task is already completed!");
@@ -105,8 +113,8 @@ public class Command {
                 task.markCompleted();
                 System.out.println("Yay your task is done! :D");
             }
-        } catch (Exception e) {
-            System.out.println("Invalid input!");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The specified task index does not exist!");
         }
     }
 
