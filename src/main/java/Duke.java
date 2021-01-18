@@ -35,31 +35,44 @@ public class Duke {
                         + "Now you have " + tasks.size() + " tasks in the list.\n");
     }
 
-    public static void analyzeTypeAndAdd(String input) {
-        if (input.length() > 5 && input.substring(0, 5).equals("todo ")) {
-            ToDo task = new ToDo(input.substring(5));
-            add(task);
-            return ;
-        } else if (input.length() > 10 && input.substring(0, 9).equals("deadline ")) {
-            if (input.contains("/by ")) {
-                int endOfDescription = input.indexOf("/by ");
-                String description = input.substring(9, endOfDescription);
-                String deadline = input.substring(endOfDescription + 4);
-                Deadline task = new Deadline(description, deadline);
+    public static void analyzeTypeAndAdd(String input) throws TextException {
+        try {
+            if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+                if (input.length() <= 5)
+                    throw new TextException("OOPS!!! The description of a todo cannot be empty.\n");
+                ToDo task = new ToDo(input.substring(5));
                 add(task);
-                return ;
+            } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+                if (input.length() <= 9)
+                    throw new TextException("OOPS!!! The description of a deadline cannot be empty.\n");
+                if (input.contains("/by ")) {
+                    int endOfDescription = input.indexOf("/by ");
+                    String description = input.substring(9, endOfDescription);
+                    String deadline = input.substring(endOfDescription + 4);
+                    Deadline task = new Deadline(description, deadline);
+                    add(task);
+                } else {
+                    throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
+                }
+            } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+                if (input.length() <= 6)
+                    throw new TextException("OOPS!!! The description of a event cannot be empty.\n");
+                if (input.contains("/at ")) {
+                    int endOfDescription = input.indexOf("/at ");
+                    String description = input.substring(6, endOfDescription);
+                    String time = input.substring(endOfDescription + 4);
+                    Event task = new Event(description, time);
+                    add(task);
+                } else {
+                    throw new TextException("OOPS!!! Please enter '/at time' after description\n");
+                }
+            } else {
+                throw new TextException("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
-        } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) {
-            if (input.contains("/at ")) {
-                int endOfDescription = input.indexOf("/at ");
-                String description = input.substring(6, endOfDescription);
-                String time = input.substring(endOfDescription + 4);
-                Event task = new Event(description, time);
-                add(task);
-                return ;
-            }
+        } catch (TextException e) {
+            formatInChatBox(e.getMsgDes());
         }
-        formatInChatBox("Sorry Momo is still naive. Could you write in correct format?\n");
+
     }
 
     public static void list() {
