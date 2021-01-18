@@ -32,4 +32,8 @@ public class TaskList {
     }
     Duke.printLineBreak();
   }
+
+  public int size() {
+    return taskList.size();
+  }
 }

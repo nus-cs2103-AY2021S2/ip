@@ -7,27 +7,62 @@ public class Duke {
         greeting();
         
         TaskList taskList = new TaskList();
+        
         String userInput = sc.nextLine();
         while (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
                 taskList.show();
             } else {
                 String[] splitInput = userInput.split(" ", 2);
-                switch (splitInput[0]) {
-                    case "done":
-                        taskList.markDone(Integer.parseInt(splitInput[1]));
-                        break;
-                    case "todo":
-                        taskList.add(new Todo(splitInput[1]));
-                        break;
-                    case "deadline":
-                        String[] splitDeadlineInput = splitInput[1].split(" /by ");
-                        taskList.add(new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]));
-                        break;
-                    case "event":
-                        String[] splitEventInput = splitInput[1].split(" /at ");
-                        taskList.add(new Event(splitEventInput[0], splitEventInput[1]));
-                        break;
+                try {
+                    switch (splitInput[0]) {
+                        case "done":
+                            if (splitInput.length < 2) {
+                                throw new DukeException("The task index is missing.");
+                            } else if (Integer.parseInt(splitInput[1]) > taskList.size()) {
+                                throw new DukeException("The task index is out of range.");
+                            } else {
+                                taskList.markDone(Integer.parseInt(splitInput[1]));
+                            }
+                            break;
+                        case "todo":
+                            if (splitInput.length < 2) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            } else {
+                                taskList.add(new Todo(splitInput[1]));
+                            }
+                            break;
+                        case "deadline":
+                            if (splitInput.length < 2) {
+                                throw new DukeException("The description of a deadline cannot be empty.");
+                            } else {
+                                String[] splitDeadlineInput = splitInput[1].split(" /by ");
+                                if (splitDeadlineInput.length < 2) {
+                                    throw new DukeException("Insufficient info given for a deadline.");
+                                } else {
+                                    taskList.add(new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]));
+                                }
+                            }
+                            break;
+                        case "event":
+                            if (splitInput.length < 2) {
+                                throw new DukeException("The description of an event cannot be empty.");
+                            } else {
+                                String[] splitEventInput = splitInput[1].split(" /at ");
+                                if (splitEventInput.length < 2) {
+                                    throw new DukeException("Insufficient info given for a deadline.");
+                                } else {
+                                    taskList.add(new Event(splitEventInput[0], splitEventInput[1]));
+                                }
+                            }
+                            break;
+                        default:
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                } catch (DukeException e) {
+                    printLineBreak();
+                    printIndented(e.toString());
+                    printLineBreak();
                 }
             }
             userInput = sc.nextLine();
