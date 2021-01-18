@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,18 +16,27 @@ public class Duke {
 
     }
 
+    private List<String> checkList = new ArrayList<>();
+
     private void start() {
         Scanner sc = new Scanner(System.in);
 
         echo(List.of("Hello! I'm Duke","What can I do for you?"));
 
         for (;;) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                echo("Bye. Hope to see you again soon!");
-                return;
-            }
-            echo(input);
+            String input = sc.nextLine(); 
+            switch(input) 
+            { 
+                case "bye": 
+                    echo("Bye. Hope to see you again soon!");  
+                    return; 
+                case "list": 
+                    displayList(checkList);
+                    break; 
+                default: 
+                    checkList.add(input);
+                    echo("added: " + input);
+            } 
         }
     }
 
@@ -43,4 +53,14 @@ public class Duke {
         }
         System.out.println("\t____________________________________________________________");
     }
+
+    private void displayList(List<String> lst) {
+        System.out.println("\t____________________________________________________________");
+        int num = 1;
+        for (String s : lst) {
+            System.out.printf("\t  %d. %s\n", num++, s);
+        }
+        System.out.println("\t____________________________________________________________\n");
+    }
+
 }
