@@ -119,6 +119,30 @@ public class Command {
     }
 
     /**
+     * Deletes given task as done and informs user of success/failure.
+     * @param input input provided by user
+     */
+    public void delete(String input, ArrayList<Task> tasks) {
+        String[] parsedString = input.split("\\s+");
+        int taskId;
+
+        try {
+            taskId = Integer.parseInt(parsedString[1]);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Usage for delete: " + cmdInfo.get("delete"));
+            return;
+        }
+
+        try {
+            Task task = tasks.get(taskId - 1);
+            tasks.remove(task);
+            System.out.println("The following task has been deleted:\n" + task);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("The specified task index does not exist!");
+        }
+    }
+
+    /**
      * List all available command usage and descriptions.
      */
     public void help() {

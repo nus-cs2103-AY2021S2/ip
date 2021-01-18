@@ -41,6 +41,9 @@ public class Duke {
             //program marks task as complete on done
             } else if (input.startsWith("done")) {
                 command.done(input, tasks);
+            //program removes task on delete
+            } else if (input.startsWith("delete")) {
+                command.delete(input, tasks);
             //program list help commands
             } else if (input.equals("help")) {
                 command.help();
