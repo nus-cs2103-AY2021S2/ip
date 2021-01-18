@@ -4,7 +4,7 @@ import java.util.List;
 
 public class DukeBot {
     private static final String BORDER = "\t___________________________________\n";
-    private final List<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
     private int numTasks;
     private String output;
 
@@ -35,6 +35,10 @@ public class DukeBot {
                 this.numTasks++;
                 output = handleTask(taskAction, commandStr);
                 break;
+            case "delete":
+                this.numTasks--;
+                output = handleDeleteTask(Integer.parseInt(commandStr[1]));
+                break;
             default:
                 DukeException exception = new DukeException("invalid input", "");
                 output = BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
@@ -64,7 +68,7 @@ public class DukeBot {
 
     public String handleTask(String taskAction, String[] commandStr) {
         Task newTask;
-        StringBuilder description = new StringBuilder();;
+        StringBuilder description = new StringBuilder();
         List<String> taskDetails =  Arrays.asList(commandStr);
         String currText = BORDER + "\t" + " Got it. I've added this task: \n";
 
@@ -116,5 +120,14 @@ public class DukeBot {
         result[0] = description.toString();
         result[1] = dateTime.toString();
         return result;
+    }
+
+    public String handleDeleteTask(int index) {
+        Task deleteTask = this.taskList.get(index-1);
+        this.taskList.remove(deleteTask);
+        return BORDER +  "\t" + "Noted. I've removed this task: \n" +
+                "\t  " + deleteTask.toString() + "\n\t Now you have "
+                + this.numTasks + " tasks in the list.\n" + BORDER;
+
     }
 }
