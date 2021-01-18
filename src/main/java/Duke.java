@@ -20,7 +20,7 @@ public class Duke {
                             "Here are the tasks in your list");
                     for(int i=1;i<=taskList.size();i++){
                         Task curTask = taskList.get(i-1);
-                        System.out.println(i+". ["+curTask.getStatusIcon()+"] "+curTask.getDescription());
+                        System.out.println(i+".["+curTask.getStatusIcon()+"] "+curTask.getDescription());
                     }
                     System.out.println("____________________________________________________________");
                 } else if(command[0].equals("done")){
@@ -28,7 +28,7 @@ public class Duke {
                     Task curTask = taskList.get(index);
                     curTask.markAsDone();
                     System.out.println("____________________________________________________________\n"+
-                            "Nice! I've marked this task as done:\n"+index+". ["+curTask.getStatusIcon()+"] "+curTask.getDescription()+
+                            "Nice! I've marked this task as done:\n"+"  ["+curTask.getStatusIcon()+"] "+curTask.getDescription()+
                             "\n____________________________________________________________");
 
                 }
