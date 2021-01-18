@@ -31,52 +31,122 @@ public class Duke {
 
     public static void addTask(String userInput, String typeOfTask) throws DukeException {
 
-        boolean defaultTask = false;
+        int addToTask = 0;
+        String taskName;
 
         switch (typeOfTask) {
             case ("todo"):
-                taskArray[count++] = new ToDos(generateTaskName(userInput, "todo"));
+
+                taskName = returnTaskName(userInput,"todo");
+                if(!taskName.equals("no task name")){
+                    taskArray[count++] = new ToDos(returnTaskName(userInput, "todo"));
+                    addToTask= 1;
+                }
                 break;
 
             case ("deadline"):
 
-                String dueBy[] = userInput.split("/by");
-                taskArray[count++] = new Deadlines(generateTaskName(dueBy[0], "deadline"),
-                        dueBy[dueBy.length - 1]);
+                if(userInput.contains("/by")){
+                    String dueBy[] = userInput.split("/by");
+                    taskName = returnTaskName(dueBy[0], "deadline");
+
+                    if (!taskName.equals("no task name") || !checkForAdditionalInfo(dueBy[0])) {
+                        taskArray[count++] = new Deadlines(taskName, dueBy[dueBy.length - 1]);
+                        addToTask = 1;
+                    }
+                }else {
+                    checkForAdditionalInfo("wrongInfo");
+                }
+
                 break;
             case ("event"):
 
-                String dueDetails[] = userInput.split("/at ");
+               if(userInput.contains("/at")) {
 
-                String date[] = dueDetails[dueDetails.length - 1].split(" ");
+                    String dueDetails[] = userInput.split("/at ");
+                    String date[] = dueDetails[dueDetails.length - 1].split(" ");
 
-                String[] startTimeArr = date[date.length - 1].split("-");
-                String startTime = startTimeArr[0];
-                String endTime = startTimeArr[startTimeArr.length - 1];
+                    String[] startTimeArr = date[date.length - 1].split("-");
+                    String startTime = startTimeArr[0];
+                    String endTime = startTimeArr[startTimeArr.length - 1];
+                    taskName = returnTaskName(dueDetails[0], "event");
 
-                taskArray[count++] = new Events(generateTaskName(dueDetails[0], "event"),
-                        date[0], startTime, endTime);
+                    if (!taskName.equals("no task name") || !checkForAdditionalInfo(date[0])) {
+                        taskArray[count++] = new Events(taskName, date[0], startTime, endTime);
+                        addToTask = 1;
+                    }
+                } else{
+                    checkForAdditionalInfo("wrongInfo");
+                }
+
                 break;
             default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                returnTaskName(userInput,"default");
         }
 
-        displayAddedTaskMessage();
+        if(addToTask == 1){
+            displayAddedTaskMessage();
+        }
+
     }
 
     public static String generateTaskName(String userInput, String type) throws DukeException {
 
-        if (userInput.equals(type) && type.equals("todo")) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-        } else if (userInput.equals(type) && type.equals("deadlines")) {
-            throw new DukeException("OOPS!!! The due date of a" + type + " cannot be empty.");
-        } else if (userInput.equals(type) && type.equals("events")) {
-            throw new DukeException("OOPS!!! The start and end time of an event  cannot be empty.");
-        } else{
-            return userInput.replace(type, "");
+        String taskName  = userInput.replace(type, "");
+
+        if(type.equals("default")){
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (taskName.isBlank() && !type.equals("default")) {
+            throw new DukeException("OOPS!!! The description of a " + type + " cannot be empty.");
+        }  else{
+            return taskName;
         }
     }
 
+    public static String returnTaskName(String userInput, String type){
+
+        String task = "no task name";
+        try {
+            task = generateTaskName(userInput,type);
+        } catch (DukeException exception){
+            exception.printMessage();
+        }
+        return task;
+    }
+
+    public static boolean invalidItemNumber(int no){
+
+        try{
+            if(no <= 0){
+                throw new DukeException("There are no task in list. Please add some task and try again.");
+            }
+            return false;
+        }catch (DukeException e){
+            e.printMessage();
+            return true;
+        }
+    }
+
+    public static void noAdditionalInfo(String s) throws DukeException {
+        if(s.isBlank()){
+            throw new DukeException("OOPS!!! The deadline or start/end time cannot be empty");
+        }
+        if(s.equals("wrongInfo")){
+            throw new DukeException("OOPS!!! Wrong command to add deadlines or start/end time. " +
+                    "Use /by for deadline and /at for event");
+        }
+    }
+
+    public static boolean checkForAdditionalInfo (String input){
+        try{
+            noAdditionalInfo(input);
+            return true;
+        }
+        catch (DukeException de){
+            de.printMessage();
+            return false;
+        }
+    }
 
     public static void executeCommand(String command) throws DukeException {
 
@@ -85,30 +155,24 @@ public class Duke {
         switch (commandArray[0]) {
 
             case ("list"):
-
-                if(count <0){
-                    throw new DukeException("There are no task in list. Please add some task and try again.");
-                }
-                else{
+                if(!invalidItemNumber(count)) {
                     System.out.println(lines + "\nHere are the tasks in your list:");
                     for (int i = 0; i < count; i++) {
                         System.out.println((i + 1) + "." + taskArray[i].toString());
                     }
                     System.out.println(lines);
-                    break;
                 }
+                break;
 
             case ("done"):
                 int index = Integer.parseInt(commandArray[1])-1;
-                if(index < count){
-                    throw new DukeException("Item number " + index + " is not found in list. Please check again");
+
+                if(!invalidItemNumber(index)) {
+                    taskArray[index].setCompleted();
+                    System.out.println(lines + "\nNice! I'll make this task as done: \n"
+                            + taskArray[index].toString() + "\n" + lines);
                 }
-                taskArray[index].setCompleted();
-
-                System.out.println(lines + "\nNice! I'll make this task as done: \n"
-                        + taskArray[index].toString() + "\n" + lines);
                 break;
-
             default:
                 addTask(command, commandArray[0]);
         }
@@ -125,7 +189,6 @@ public class Duke {
             executeCommand(userInput);
             userInput = sc.nextLine();
         }
-
         displayEndMessage();
     }
 }

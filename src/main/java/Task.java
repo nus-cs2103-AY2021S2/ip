@@ -4,7 +4,7 @@ public class Task {
 
     public Task(String title){
         this.title = title;
-        this.status = false;
+         this.status = false;
     }
 
     public void setCompleted(){
@@ -12,7 +12,6 @@ public class Task {
     }
 
     public String isCompleted(){
-
         return (this.status ? "\u2718" : " ");
     }
 
