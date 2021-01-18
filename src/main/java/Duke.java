@@ -6,6 +6,8 @@ public class Duke {
         // initialise all necessary variables
         Scanner inputScanner = new Scanner(System.in);
         Boolean terminate = false; // to check if the chatbot should be terminated
+        String[] inputHistory = new String[100]; // to store history of inputs
+        int historyCounter = 0;
 
         System.out.println("    Good morning comrade, welcome to KGB.\n    What can I do for you?");
 
@@ -14,22 +16,17 @@ public class Duke {
             String userInput = inputScanner.nextLine();
 
             if (userInput.equals("list")) {
-                System.out.println("    Here you have your requested name list of the traitors of our motherland.");
-            } else if (userInput.equals("operation")) {
-                System.out.println("    Here you have the operation plan to sabotage the CIA");
+                for (int i = 0; i < historyCounter; i++) {
+                    System.out.println("    " + Integer.toString(i + 1) + ". " + inputHistory[i]);
+                }
             } else if (userInput.equals("bye")) {
                 System.out.println("    Goodbye comrade. Hope to see you again soon!");
                 terminate = true;
             } else {
-                System.out.println("    I don't understand what you are saying.");
+                inputHistory[historyCounter] = userInput;
+                historyCounter++;
+                System.out.println("    added: " + userInput);
             }
         }
-
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
     }
 }
