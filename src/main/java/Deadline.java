@@ -1,4 +1,4 @@
-public class Deadline extends Task {
+class Deadline extends Task {
     protected boolean isDone;
     protected String time;
     protected final static String type = "[D]";
@@ -6,7 +6,7 @@ public class Deadline extends Task {
     public Deadline(String description, String time) {
         super(description);
         this.isDone = false;
-        this.time = time.substring(2);
+        this.time = time;
     }
 
     public String getTime() {

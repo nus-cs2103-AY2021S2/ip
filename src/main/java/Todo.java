@@ -7,7 +7,6 @@ class Todo extends Task {
         this.isDone = false;
     }
 
-
     @Override
     public String getType() {
         return type;
