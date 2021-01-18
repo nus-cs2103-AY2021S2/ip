@@ -34,9 +34,8 @@ public class Duke {
         System.out.println("How may I help you?");
     }
 
-    // Store input string in ArrayList.
-    public void addTask(String s) {
-        Task t = new Task(s);
+    // Adds Task to ArrayList.
+    public void addTask(Task t) {
         tasks.add(t);
     }
 
@@ -51,9 +50,14 @@ public class Duke {
         return tasks.get(index - 1);
     }
 
-    // Marks task at index number to the desired boolean value.
+    // Marks Task at index number to the desired boolean value.
     public void setTask(int index, boolean b) {
         Task targetTask = tasks.get(index - 1);
         targetTask.setDone(b);
+    }
+
+    // Returns the number of tasks in the ArrayList.
+    public int getTasksSize() {
+        return tasks.size();
     }
 }

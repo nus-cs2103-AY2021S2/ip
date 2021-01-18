@@ -9,7 +9,7 @@ public class Main {
         boolean toExit = false;
         while (!toExit) {
             String input = sc.nextLine();
-            String arr[] = input.split(" ");
+            String[] arr = input.split(" ", 2);
 
             // First word of input is used as switch argument.
             switch (arr[0]) {
@@ -33,11 +33,44 @@ public class Main {
                 duke.indentedPrint(duke.getTask(index).toString());
                 duke.printDivider();
                 break;
-            default:
-                duke.addTask(input);
+            case "todo":
+                ToDo t = new ToDo(arr[1]);
+                duke.addTask(t);
 
                 duke.printDivider();
-                duke.indentedPrint("added: " + input);
+                duke.indentedPrint("Got it. I've added this task:");
+                duke.indentedPrint(" " + t.toString());
+                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+                        " tasks in the list.");
+                duke.printDivider();
+                break;
+            case "deadline":
+                String[] dSplit = arr[1].split(" /by ");
+                Deadline d = new Deadline(dSplit[0], dSplit[1]);
+                duke.addTask(d);
+
+                duke.printDivider();
+                duke.indentedPrint("Got it. I've added this task:");
+                duke.indentedPrint(" " + d.toString());
+                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+                        " tasks in the list.");
+                duke.printDivider();
+                break;
+            case "event":
+                String[] eSplit = arr[1].split(" /at ");
+                Event e = new Event(eSplit[0], eSplit[1]);
+                duke.addTask(e);
+
+                duke.printDivider();
+                duke.indentedPrint("Got it. I've added this task:");
+                duke.indentedPrint(" " + e.toString());
+                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+                        " tasks in the list.");
+                duke.printDivider();
+                break;
+            default:
+                duke.printDivider();
+                duke.indentedPrint("Sorry, I don't quite understand.");
                 duke.printDivider();
                 break;
             }
