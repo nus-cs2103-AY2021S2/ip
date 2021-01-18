@@ -13,6 +13,7 @@ public class Duke {
         System.out.println(lineAfterCommand + "Hello! I'm  Duke");
         System.out.println("What can I do for you?\n" + lineAfterCommand);
         String command = scanner.next();
+        String[] tasks = new String[100];
         while (!command.equals("bye")) {
             System.out.println("\n" + lineAfterCommand + command + "\n" + lineAfterCommand);
             command = scanner.next();
