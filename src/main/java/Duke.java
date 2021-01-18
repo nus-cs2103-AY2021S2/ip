@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         String input;
         Task[] tasks = new Task[100];
@@ -12,7 +14,7 @@ public class Duke {
         System.out.println("------------------------------------------------");
 
         while (!(input = sc.nextLine()).equals("bye")) {
-            String[] tokens = input.split(" ");
+            String[] tokens = input.split(" ", 2);
             if (tokens[0].equals("list")) {
                 System.out.println("------------------------------------------------");
                 System.out.println("Here are the tasks in your list:");
@@ -28,10 +30,37 @@ public class Duke {
                 System.out.println("------------------------------------------------");
             } else {
                 System.out.println("------------------------------------------------");
-                Task t = new Task(input);
-                tasks[i] = t;
+                Task task = new Task();
+
+                switch(tokens[0]) {
+                case "todo":
+                    {
+                        task = new ToDo(tokens[1]);
+                        break;
+                    }
+                case "deadline":
+                    {
+                        String[] nextTokens = tokens[1].split(" /by ", 2);
+                        task = new Deadline(nextTokens[0], nextTokens[1]);
+                        break;
+                    }
+                case "event":
+                    {
+                        String[] nextTokens = tokens[1].split(" /at ", 2);
+                        task = new Event(nextTokens[0], nextTokens[1]);
+                        break;
+                    }
+                default:
+                    {
+                        System.out.println("Invalid task!");
+                        break;
+                    }
+                }
+
+                tasks[i] = task;
                 i++;
-                System.out.println("added: " + input);
+                System.out.println("Ok! I've added this task:\n" + task.toString());
+                System.out.println("Currently, you have " + i + " task(s) in the list!");
                 System.out.println("------------------------------------------------");
             }
         };
