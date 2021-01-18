@@ -44,27 +44,11 @@ public class Duke {
         return output.toString();
     }
 
+
     void greet() {
         printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
-    void handleInput(String userInput) throws DukeException {
-        String[] splitBySpaces = userInput.trim().split("\\s+");
-        String keyword = splitBySpaces[0];
-        if (keyword.equals("list")) {
-            this.list.printList();
-        } else if (keyword.equals("done")) {
-            doneTask(splitBySpaces);
-        } else if (keyword.equals("deadline")) {
-            addDeadline(splitBySpaces);
-        } else if (keyword.equals("todo")) {
-            addToDo(splitBySpaces);
-        } else if (keyword.equals("event")) {
-            addEvent(splitBySpaces);
-        } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-    }
 
     void addToDo(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length <= 1) {
@@ -73,6 +57,8 @@ public class Duke {
         String task = join(userInputSplit, 1, userInputSplit.length - 1);
         list.add(new ToDo(task));
     }
+
+
     void addDeadline(String[] userInputSplit) throws DukeException {
         //Index of /by keyword
         int byIndex = 0;
@@ -94,6 +80,7 @@ public class Duke {
         list.add(new Deadline(task, date));
     }
 
+
     void addEvent(String[] userInputSplit) {
         //Index of /at keyword
         int atIndex = 0;
@@ -107,15 +94,39 @@ public class Duke {
         list.add(new Event(task, date));
     }
 
-    void doneTask(String[] userInputSplit) {
-        int taskNumber = Integer.parseInt(userInputSplit[1]);
-        this.list.done(taskNumber);
+
+    void doneTask(String[] userInputSplit) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(userInputSplit[1]);
+            this.list.done(taskNumber);
+        } catch (Exception e) {
+            throw new DukeException("Please enter a valid task number to mark a task as done.");
+        }
     }
 
 
     void bye() {
         printWithStyle("Bye. Hope to see you again soon!");
     }
+
+    void handleInput(String userInput) throws DukeException {
+        String[] splitBySpaces = userInput.trim().split("\\s+");
+        String keyword = splitBySpaces[0];
+        if (keyword.equals("list")) {
+            this.list.printList();
+        } else if (keyword.equals("done")) {
+            doneTask(splitBySpaces);
+        } else if (keyword.equals("deadline")) {
+            addDeadline(splitBySpaces);
+        } else if (keyword.equals("todo")) {
+            addToDo(splitBySpaces);
+        } else if (keyword.equals("event")) {
+            addEvent(splitBySpaces);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
