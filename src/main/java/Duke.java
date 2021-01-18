@@ -71,7 +71,7 @@ public class Duke {
 
     private void displayList(List<Task> lst) {
         System.out.println("\t____________________________________________________________");
-        System.out.println("Here are the tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
 
         int num = 1;
         for (Task t : lst) {
