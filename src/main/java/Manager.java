@@ -1,6 +1,6 @@
 package main.java;
 
-public abstract class Task {
+public abstract class Manager {
 
     public String horizontalLine(){
         return "    __________________________________________________________________________";

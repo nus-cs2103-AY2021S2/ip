@@ -1,7 +1,5 @@
-import main.java.Echo;
 import main.java.ListManager;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Duke {

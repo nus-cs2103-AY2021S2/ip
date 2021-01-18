@@ -2,7 +2,7 @@ package main.java;
 
 import java.util.ArrayList;
 
-public class ListManager extends Task{
+public class ListManager extends Manager {
     ArrayList<String> TaskArray;
 
     public ListManager(){

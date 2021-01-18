@@ -1,8 +1,8 @@
 package main.java;
 
-public class Echo extends Task{
+public class EchoManager extends Manager {
 
-    public Echo(){
+    public EchoManager(){
 
     }
     public String DukeResponse(String input){
