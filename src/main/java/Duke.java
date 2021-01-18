@@ -1,8 +1,28 @@
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
+
+    private enum Function {
+        LIST,
+        DONE,
+        DELETE,
+        BYE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        NULL
+    }
+
+    private static final Map<String, Function> nameToFunction = Map.ofEntries(
+            Map.entry("list", Function.LIST),
+            Map.entry("done", Function.DONE),
+            Map.entry("delete", Function.DELETE),
+            Map.entry("bye", Function.BYE),
+            Map.entry("todo", Function.TODO),
+            Map.entry("deadline", Function.DEADLINE),
+            Map.entry("event", Function.EVENT)
+    );
 
     /**
      * Wrap line(s) with horizontal lines and indent using tab
@@ -63,21 +83,21 @@ public class Duke {
         System.out.println(HORIZONTAL_LINE);
     }
 
-    private static boolean processInput(Vector<Task> tasks, String firstWord, String details)
+    private static boolean processInput(Vector<Task> tasks, Function func, String details)
             throws NoTasksException,
                    InvalidTaskIndexException,
                    NoTaskDescriptionException,
                    IncompleteDetailException,
                    InvalidCommandException {
         boolean active = true;
-        switch (firstWord) {
-            case "list":  // list all stored tasks
+        switch (func) {
+            case LIST:  // list all stored tasks
                 if (tasks.isEmpty())
                     throw new NoTasksException();
                 else
                     wrappedPrint(tasks);
                 break;
-            case "done":  // mark a single task as done
+            case DONE:  // mark a single task as done
                 try {
                     int index = Integer.parseInt(details.trim()) - 1;
                     Task currentTask = tasks.get(index);
@@ -87,7 +107,7 @@ public class Duke {
                     throw new InvalidTaskIndexException();
                 }
                 break;
-            case "delete":
+            case DELETE:
                 try {
                     int index = Integer.parseInt(details.trim()) - 1;
                     Task selectedTask = tasks.get(index);
@@ -101,11 +121,11 @@ public class Duke {
                     throw new InvalidTaskIndexException();
                 }
                 break;
-            case "bye":
+            case BYE:
                 wrappedPrint("Bye bye. Anything call me ah!");
                 active = false;
                 break;
-            case "todo":
+            case TODO:
                 if (details.isBlank())
                     throw new NoTaskDescriptionException();
                 else {
@@ -113,14 +133,14 @@ public class Duke {
                     postAddTaskSummary(tasks);
                 }
                 break;
-            case "deadline": {
+            case DEADLINE: {
                 String[] descriptions = new String[2];
                 processDescription(details, "/by", descriptions);
                 tasks.add(new Deadline(descriptions[0], descriptions[1]));
                 postAddTaskSummary(tasks);
                 break;
             }
-            case "event": {
+            case EVENT: {
                 String[] descriptions = new String[2];
                 processDescription(details, "/at", descriptions);
                 tasks.add(new EventTask(descriptions[0], descriptions[1]));
@@ -148,9 +168,10 @@ public class Duke {
         // process input and act accordingly until bye is encountered
         do {
             String firstWord = input.next();
+            Function function = nameToFunction.getOrDefault(firstWord, Function.NULL);
             String details = input.nextLine();
             try {
-                active = processInput(tasks, firstWord, details);
+                active = processInput(tasks, function, details);
             } catch (DukeException e) {
                 wrappedPrint(e.toString());
             }
