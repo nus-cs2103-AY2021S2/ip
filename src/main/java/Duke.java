@@ -34,7 +34,21 @@ public class Duke{
                                     "Nice! I've marked this task as done:\n" + curTask.toString() +
                                     "\n____________________________________________________________");
                             }catch (ArrayIndexOutOfBoundsException ex){
-                                throw new DukeException("☹ OOPS!!! The description of a done cannot be empty.");
+                                throw new DukeException("\u00a9 OOPS!!! The description of a done cannot be empty.");
+                            }
+                        } else if (command[0].equals("delete")) {
+                            try {
+                                int index = Integer.valueOf(command[1]) - 1;
+                                Task curTask = taskList.get(index);
+                                taskList.remove(index);
+                                System.out.println("____________________________________________________________\n" +
+                                        "Noted. I've removed this task:\n  " + curTask.toString() +
+                                        "\nNow you have "+ taskList.size() +" tasks in the list.\n"+
+                                        "____________________________________________________________");
+                            } catch (ArrayIndexOutOfBoundsException ex) {
+                                throw new DukeException("\u00a9 OOPS!!! The description of a delete cannot be empty.");
+                            } catch (IndexOutOfBoundsException ex){
+                                throw new DukeException("\u00a9 OOPS!!! There is nothing to delete at "+command[1]);
                             }
                         } else {
                             if (command[0].equals("todo")) {
@@ -47,7 +61,7 @@ public class Duke{
                                             "\nNow you have " + taskList.size() + " tasks in the list.\n" +
                                             "____________________________________________________________");
                                 }catch (ArrayIndexOutOfBoundsException ex){
-                                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                                    throw new DukeException("\u00a9 OOPS!!! The description of a todo cannot be empty.");
                                 }
                             } else if (command[0].equals("deadline")) {
                                 try {
@@ -59,7 +73,7 @@ public class Duke{
                                         "\nNow you have " + taskList.size() + " tasks in the list.\n" +
                                         "____________________________________________________________");
                                 }catch (ArrayIndexOutOfBoundsException ex){
-                                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                                    throw new DukeException("\u00a9 OOPS!!! The description of a deadline cannot be empty.");
                                 }
                             } else if (command[0].equals("event")) {
                                 try {
@@ -71,10 +85,10 @@ public class Duke{
                                         "\nNow you have " + taskList.size() + " tasks in the list.\n" +
                                         "____________________________________________________________");
                                 }catch (ArrayIndexOutOfBoundsException ex){
-                                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                                    throw new DukeException("\u00a9 OOPS!!! The description of a event cannot be empty.");
                                 }
                             } else{
-                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                                throw new DukeException("\u00a9 OOPS!!! I'm sorry, but I don't know what that means :-(");
                             }
                         }
                     }
