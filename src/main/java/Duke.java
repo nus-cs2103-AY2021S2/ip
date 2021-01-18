@@ -16,12 +16,13 @@ public class Duke {
         }
     }
 
-    /*private static boolean isDoneCommand(String input) {
-        boolean flagToMarkDone;
-        String regex = "done\\s+[0-9]+";
-        return input.matches(regex);
+    private static void addTask(Task incomingTask) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + incomingTask);
+        listOfTasks.add(incomingTask);
+        String s  = listOfTasks.size() <= 1? " task" : " tasks";
+        System.out.println("Now you have " + listOfTasks.size() + s + " in the list.");
     }
-     */
 
     private static int parseMarkDoneCommand(String input) {
         Matcher m = patternToMarkDone.matcher(input);
@@ -89,23 +90,14 @@ public class Duke {
                  int indexToMarkDone = parseMarkDoneCommand(input);
                  markTaskDone(indexToMarkDone);
             } else if (CommandType.ADD_DEADLINE.isMatchingInput(input)){
-                System.out.println("Got it. I've added this task:");
                 Task incomingTask = parseAddDeadline(input);
-                System.out.println("\t" + incomingTask);
-                listOfTasks.add(incomingTask);
-                System.out.println("Now you have " + listOfTasks.size() + "tasks in the list.");
+                addTask(incomingTask);
             } else if (CommandType.ADD_EVENT.isMatchingInput(input)) {
-                System.out.println("Got it. I've added this task:");
                 Task incomingTask = parseAddEvent(input);
-                System.out.println("\t" + incomingTask);
-                listOfTasks.add(incomingTask);
-                System.out.println("Now you have " + listOfTasks.size() + "tasks in the list.");
+                addTask(incomingTask);
             } else if (CommandType.ADD_TODO.isMatchingInput(input)) {
-                System.out.println("Got it. I've added this task:");
                 Task incomingTask = parseToDo(input);
-                System.out.println("\t" + incomingTask);
-                listOfTasks.add(incomingTask);
-                System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+                addTask(incomingTask);
             }
         } while(true);
         System.out.println("Bye. Hope to see you again soon!\n");
