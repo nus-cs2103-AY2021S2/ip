@@ -37,11 +37,11 @@ public class Duke {
     }
 
     public static void printLineBreak() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("  ____________________________________________________________");
     }
 
     public static void printIndented(String text) {
-        System.out.println(String.format("\t%s", text));
+        System.out.println(String.format("    %s", text));
     }
 
     public static void greeting() {

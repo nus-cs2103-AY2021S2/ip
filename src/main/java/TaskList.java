@@ -12,7 +12,7 @@ public class TaskList {
     Duke.printLineBreak();
     Duke.printIndented("Got it. I've added this task:");
     Duke.printIndented(String.format("  %s", task));
-    Duke.printIndented(String.format("Now you have %d tasks in the list", taskList.size()));
+    Duke.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
     Duke.printLineBreak();
   }
 
