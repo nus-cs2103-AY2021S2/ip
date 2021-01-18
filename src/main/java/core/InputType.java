@@ -13,9 +13,15 @@ public enum InputType {
     }),
 
     DONE(x -> x.toLowerCase().startsWith("done"), (tm, data) -> {
-        int loc = Integer.parseInt(data.substring(5)) - 1;
-        tm.doTaskByListID(loc);
-        return "The task has been set to done ! \n - " + tm.retrieveTaskByListID(loc);
+        try {
+            int loc = Integer.parseInt(data.substring(5)) - 1;
+            tm.doTaskByListID(loc);
+            return "The task has been set to done ! \n - " + tm.retrieveTaskByListID(loc);
+        } catch (NumberFormatException e1) {
+            return "Not a valid index given !!";
+        } catch (IndexOutOfBoundsException | TaskAlreadyDoneException e) {
+            return e.getMessage();
+        }
     }),
 
     EVENT(x -> x.toLowerCase().startsWith("event"), (tm, data) -> {
@@ -34,17 +40,16 @@ public enum InputType {
     }),
 
     TODO(x -> x.toLowerCase().startsWith("todo"), (tm, data) -> {
-        Task t = new Todo(data.substring(5));
-        tm.addTask(t);
-        return "Added the TODO : " + t;
+        try {
+            Task t = new Todo(data.substring(5));
+            tm.addTask(t);
+            return "Added the TODO : " + t;
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
     }),
 
-    ADD(x -> true, (tm, data) -> {
-        tm.addTask(new Task(data));
-        return "added: " + data + "\n";
-    }),
-
-    UNKNOWN(x -> true, (tm, data) -> data);
+    UNKNOWN(x -> true, (tm, data) -> "Unknown command!! I don't know what you mean");
 
     // ==========================================================================
     // ==================== CLASS DETAILS STARTING HERE =========================

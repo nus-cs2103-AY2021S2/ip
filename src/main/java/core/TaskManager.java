@@ -28,7 +28,10 @@ public class TaskManager {
     }
 
     public void doTaskByListID(int id) {
-        retrieveTaskByListID(id).markAsDone();
+        var task = retrieveTaskByListID(id);
+        if(task.isDone()) {
+            throw new TaskAlreadyDoneException();
+        }
     }
 
     public void doTaskByTaskUID(int id) {
