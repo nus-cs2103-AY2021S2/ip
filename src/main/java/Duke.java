@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.stream.StreamSupport;
 
 /**
  * The Duke project
@@ -21,24 +20,28 @@ public class Duke {
             System.out.print(username + ": ");
             String nextCommand = sc.nextLine();
             String[] commandToWords = nextCommand.split(" ");
-            String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
-            if (nextCommand.equals("bye")) {
-                bye(username);
-                endOfCycle = true;
-            } else if (nextCommand.equals("list")) {
-                list(tasks, count);
-            } else if (commandToWords[0].equals("done")) {
-                int itemNum = Integer.parseInt(commandToWords[1]);
-                done(tasks, itemNum);
-            } else if (commandToWords[0].equals("todo")) {
-                count++;
-                todo(nextCommand.substring(5), tasks, count);
-            } else if (commandToWords[0].equals("deadline")) {
-                count++;
-                deadline(nextCommand.substring(9, nextCommand.indexOf("/") - 1), dateInfo, tasks, count);
-            } else if (commandToWords[0].equals("event")){
-                count++;
-                event(nextCommand.substring(6, nextCommand.indexOf("/") - 1), dateInfo, tasks, count);
+            try {
+                if (nextCommand.equals("bye")) {
+                    bye(username);
+                    endOfCycle = true;
+                } else if (nextCommand.equals("list")) {
+                    list(tasks, count);
+                } else if (commandToWords[0].equals("done")) {
+                    done(nextCommand, tasks, count);
+                } else if (commandToWords[0].equals("todo")) {
+                    todo(nextCommand, tasks, count);
+                    count++;
+                } else if (commandToWords[0].equals("deadline")) {
+                    deadline(nextCommand, tasks, count);
+                    count++;
+                } else if (commandToWords[0].equals("event")){
+                    event(nextCommand, tasks, count);
+                    count++;
+                } else {
+                    wrongCommand();
+                }
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
 
@@ -67,27 +70,37 @@ public class Duke {
 
     /**
      * Adds a Todo task.
-     * @param command The description of the task.
+     * @param nextCommand The description of the task.
      * @param tasks The Task array containing user tasks in sequence, up to 100.
      * @param count The current number of tasks stored inside the Task array.
      */
-    public static void todo(String command, Task[] tasks, int count) {
-        tasks[count - 1] = new Todo(command);
+    public static void todo(String nextCommand, Task[] tasks, int count) throws DukeException{
+        if (nextCommand.length() < 6) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        String command = nextCommand.substring(5);
+        tasks[count] = new Todo(command);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
-        System.out.println("Now you have " + count + " tasks in the list.");
+        System.out.println("Got it. I've added this task: \n" + "    " + tasks[count].toString());
+        System.out.println("Now you have " + count + 1 + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
     /**
      * Adds a Deadline task.
-     * @param command The description of the task.
-     * @param by The deadline for the task to be completed.
+     * @param nextCommand The description of the task.
      * @param tasks The Task array containing user tasks in sequence, up to 100.
      * @param count The current number of tasks stored inside the Task array.
      */
-    public static void deadline(String command, String by, Task[] tasks, int count) {
-        tasks[count - 1] = new Deadline(command, by);
+    public static void deadline(String nextCommand, Task[] tasks, int count) throws DukeException{
+        if (nextCommand.length() < 10) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!nextCommand.contains("/")){
+            throw new DukeException("OOPS!!! The date information of a deadline cannot be empty.");
+        }
+        String command = nextCommand.substring(9, nextCommand.indexOf("/") - 1);
+        String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
+        tasks[count - 1] = new Deadline(command, dateInfo);
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
         System.out.println("Now you have " + count + " tasks in the list.");
@@ -96,13 +109,19 @@ public class Duke {
 
     /**
      * Adds an Event task.
-     * @param command The description of the task.
-     * @param at The timing for the event.
+     * @param nextCommand The description of the task.
      * @param tasks The Task array containing user tasks in sequence, up to 100.
      * @param count The current number of tasks stored inside the Task array.
      */
-    public static void event(String command, String at, Task[] tasks, int count) {
-        tasks[count - 1] = new Event(command, at);
+    public static void event(String nextCommand, Task[] tasks, int count) throws DukeException{
+        if (nextCommand.length() < 7) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        } else if (!nextCommand.contains("/")) {
+            throw new DukeException("OOPS!!! The date information of an event cannot be empty.");
+        }
+        String command = nextCommand.substring(6, nextCommand.indexOf("/") - 1);
+        String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
+        tasks[count - 1] = new Event(command, dateInfo);
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task: \n" + "    " + tasks[count - 1].toString());
         System.out.println("Now you have " + count + " tasks in the list.");
@@ -128,13 +147,21 @@ public class Duke {
      * Mark the task in the given task number as done.
      * Tell the user that the task has been marked done.
      * @param tasks An array of tasks in sequence, up to 100.
-     * @param itemNum The item number to be marked as done.
      */
-    public static void done(Task[] tasks, int itemNum) {
+    public static void done(String command, Task[] tasks, int count) throws DukeException{
+        String[] commandToWords = command.split(" ");
+        int itemNum = Integer.parseInt(commandToWords[1]);
+        if (itemNum > count || itemNum < 1) {
+            throw new DukeException("Item number selected is out of range.");
+        }
         tasks[itemNum - 1].makeDone();
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Nice! I've marked this task as done:\n" + tasks[itemNum - 1].toString());
         System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    public static void wrongCommand() throws  DukeException{
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
