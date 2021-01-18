@@ -23,7 +23,6 @@ public class Duke {
             + "|______|     Inn\n"
             + "####################";
 
-
         Scanner sc = new Scanner(System.in);
 
         // intro message
@@ -36,7 +35,7 @@ public class Duke {
         String bye = "bye";
 
         while (true) {
-            userInput = sc.next();
+            userInput = sc.nextLine();
             if (userInput.equals(bye)) {
                 toPrint[0] = "Bye. See you again soon!";
                 print(toPrint);
