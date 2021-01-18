@@ -12,7 +12,7 @@ public class DukeBot {
     }
 
     public boolean echo(String input) {
-        String output = "";
+        String output;
         String[] commandStr = input.trim().split("\\s+");
         String taskAction = commandStr[0];
         boolean continueInput = true;
@@ -29,7 +29,7 @@ public class DukeBot {
                 output = retrieveList();
                 break;
             case "done":
-                output = markDoneTask(Integer.parseInt(commandStr[1]) - 1);
+                output = markDoneTask(Integer.parseInt(commandStr[1]));
                 break;
             case "todo":
             case "deadline":
@@ -38,26 +38,18 @@ public class DukeBot {
                 output = handleTask(taskAction, commandStr);
                 break;
             default:
-                output = addTask(taskAction);
+                output = BORDER + "\t " + taskAction + "\n" + BORDER;
                 break;
         }
         System.out.println(output);
         return continueInput;
     }
 
-    public String addTask(String taskAction) {
-        String currentText = BORDER + "\t added: " + taskAction + "\n" + BORDER;
-        Task newTask = new Task(taskAction);
-        this.taskList.add(newTask);
-        return currentText;
-    }
-
     public String markDoneTask(int index) {
-        Task doneTask = this.taskList.get(index);
+        Task doneTask = this.taskList.get(index-1);
         doneTask.markAsDone();
-        String currentText = BORDER +  "\t" + " Nice! I've marked this task as done:\n" +  "\t  "
+        return BORDER +  "\t" + " Nice! I've marked this task as done:\n" +  "\t  "
                 + doneTask.toString() + "\n" + BORDER;
-        return currentText;
     }
 
     public String retrieveList() {
@@ -88,7 +80,10 @@ public class DukeBot {
                 description.append(curr).append(" ");
             }
             for(int i = num + 1; i < taskDetails.size(); i++) {
-                dateTime.append(taskDetails.get(i)).append(" ");
+                dateTime.append(taskDetails.get(i));
+                if(i < taskDetails.size() - 1) {
+                    dateTime.append(" ");
+                }
             }
             if(taskAction.equals("event")) {
                 newTask = new Event(description.toString(), dateTime.toString());
