@@ -1,3 +1,5 @@
+import Exceptions.*;
+
 import java.util.*;
 
 public class Duke {
@@ -5,16 +7,18 @@ public class Duke {
 
     public static void printExceptions(String message) {
         System.err.println(message);
+        System.err.println();
     }
 
     public static void taskManager(String task) {
         String[] line = task.split(" ", 2); // split type of task from description
-        String type = line[0];
+        String type = line[0]; // type of task
         
         try {
             if (task.isBlank()) {
                 throw new EmptyLineException(" ");
-            } else if (type.equals("done")) {
+            }
+            else if (type.equals("done")) {
                 markAsDone(line[1]);
             } else if (type.equals("delete")) {
                 deleteTask(line[1]);
@@ -62,7 +66,7 @@ public class Duke {
 
             Task t = myTasks.get(num - 1);
             myTasks.remove(num - 1); // removing task from list
-            System.out.println("Noted. I've removed this task:");
+            System.out.println("☺ Noted. I've removed this task:");
             System.out.println(t);
             System.out.println("Now you have " + myTasks.size() + " tasks in the list.");
 
@@ -77,19 +81,19 @@ public class Duke {
 
         Task t = myTasks.get(num - 1);
         t.markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("☺ Nice! I've marked this task as done:");
         System.out.println(t);
     }
 
     public static void addToDo(String name) {
         Task task = new ToDos(name);
         myTasks.add(task);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);
     }
 
     public static void addDeadline(String name) throws MissingDateException {
-        String[] description = name.split(" /by", 2);
+        String[] description = name.split(" /by ", 2);
 
         if (description.length != 2) {
             throw new MissingDateException("");
@@ -97,12 +101,12 @@ public class Duke {
 
         Task task = new Deadline(description[0], description[1]);
         myTasks.add(task);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);
     }
 
     public static void addEvent(String name) throws MissingDateException {
-        String[] description = name.split(" /at", 2);
+        String[] description = name.split(" /at ", 2);
 
         if (description.length != 2) {
             throw new MissingDateException("");
@@ -110,7 +114,7 @@ public class Duke {
 
         Task task = new Event(description[0], description[1]);
         myTasks.add(task);
-        System.out.println("Got it. I've added this task:");
+        System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);
     }
 
@@ -151,7 +155,7 @@ public class Duke {
 
         }
         System.out.println();
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon! ☺");
         sc.close();
     }
 }
