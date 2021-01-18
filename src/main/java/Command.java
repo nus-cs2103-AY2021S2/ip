@@ -118,6 +118,9 @@ public class Command {
         }
     }
 
+    /**
+     * List all available command usage and descriptions.
+     */
     public void help() {
         System.out.println("The available commands are as listed below:");
         for (String info : cmdInfo.values()) {
