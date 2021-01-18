@@ -11,4 +11,10 @@ done 2
 list
 done 3
 list
+fakecommand
+todo
+deadline Incomplete command
+delete 0
+delete 1
+list
 bye

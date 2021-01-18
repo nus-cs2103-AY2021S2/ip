@@ -27,6 +27,9 @@ public class Duke {
                     case "done":
                         doneTask(Integer.parseInt(splitInput[1]));
                         break;
+                    case "delete":
+                        deleteTask(Integer.parseInt(splitInput[1]));
+                        break;
                     case "todo":
                         addToDo(input);
                         break;
@@ -78,6 +81,20 @@ public class Duke {
         }
     }
 
+    public static void deleteTask(int index) {
+        index = index - 1;
+        try {
+            if(index > tasks.size() - 1 || index < 0) {
+                throw new DukeException("You've entered an invalid task number.");
+            } else {
+                printMessage("Okay! I've removed this task:\n\t" + tasks.get(index) + "\nNow there are " + (tasks.size() - 1) + " tasks in your list.");
+                tasks.remove(index);
+            }
+        } catch(Exception e) {
+            printMessage("Oops! " + e.getMessage());
+        }
+    }
+
     public static void addToDo(String input) {
         try {
             Pattern p = Pattern.compile("(todo) ([\\w ]*)");
@@ -102,7 +119,6 @@ public class Duke {
                 tasks.add(newDeadline);
                 printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
             } else if(splitInput.length == 1) {
-                System.out.println(splitInput[0]);
                 throw new DukeException("Please enter a by date for '" + splitInput[0] + "'");
             } else if(splitInput.length == 0) {
                 throw new DukeException("Please enter a description followed by the date in the format: deadline <description> /by <when>");
