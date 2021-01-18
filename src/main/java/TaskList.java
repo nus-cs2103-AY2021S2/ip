@@ -19,6 +19,16 @@ public class TaskList {
         this.list.get(taskNumber - 1).done();
     }
 
+    public void remove(int taskNumber) {
+
+        Duke.printWithStyle(new String[] {
+                "Noted. I've removed this task:",
+                this.list.get(taskNumber - 1).toString(),
+                "Now you have " + (this.list.size() - 1) + " tasks in the list."
+        });
+        this.list.remove(taskNumber - 1);
+    }
+
     public void printList() {
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:";

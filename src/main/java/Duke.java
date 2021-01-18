@@ -112,10 +112,19 @@ public class Duke {
         }
     }
 
+    void deleteTask(String[] userInputSplit) throws DukeException {
+        try {
+            int taskNumber = Integer.parseInt(userInputSplit[1]);
+            this.list.remove(taskNumber);
+        } catch (Exception e) {
+            throw new DukeException("Please enter a valid task number to delete a task.");
+        }
+    }
 
     void bye() {
         printWithStyle("Bye. Hope to see you again soon!");
     }
+
 
     void handleInput(String userInput) throws DukeException {
         String[] splitBySpaces = userInput.trim().split("\\s+");
@@ -130,6 +139,8 @@ public class Duke {
             addToDo(splitBySpaces);
         } else if (keyword.equals("event")) {
             addEvent(splitBySpaces);
+        } else if (keyword.equals("delete")) {
+            deleteTask(splitBySpaces);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
