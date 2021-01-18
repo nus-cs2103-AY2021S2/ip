@@ -1,13 +1,18 @@
 public class Task {
-    String job;
-    Boolean done;
+    protected final String job;
+    private final Boolean done;
     public Task(String job) {
         this.job = job;
         this.done = false;
     }
 
-    public void doTask() {
-        this.done = true;
+    public Task(String job, Boolean done) {
+        this.job = job;
+        this.done = done;
+    }
+
+    public Task doTask() {
+        return new Task(this.job, true);
     }
 
     public String getJob() {

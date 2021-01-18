@@ -30,7 +30,8 @@ public class Duke {
             }
             else if (tmp[0].equals("done")) {
                 Task currTask = lst.get(Integer.parseInt(tmp[1]) - 1);
-                currTask.doTask();
+                currTask = currTask.doTask();
+                lst.set(Integer.parseInt(tmp[1]) - 1, currTask);
                 System.out.println("Nice I have marked this task as done!");
                 System.out.println(currTask);
             }
