@@ -17,7 +17,7 @@ public class List {
 
     public void printList() {
         for(int i = 0; i < lst.size(); i++) {
-            pw.printf("%d %s %s%n", i + 1, lst.get(i).getStatusIcon(), lst.get(i).description);
+            pw.printf("%d.%s %s%n", i + 1, lst.get(i).getStatusIcon(), lst.get(i).description);
         }
         pw.flush();
     }
