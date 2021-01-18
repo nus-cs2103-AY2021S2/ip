@@ -45,9 +45,27 @@ public class Duke {
                 dukeReply(reply);
 
             } else {
-                Task t = new Task(line);
-                list.add(t);
-                dukeReply("added: " + line);
+                if(line.contains("todo")){
+                    Todo t = new Todo(line.substring(5));
+                    list.add(t);
+                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
+                } else if(line.contains("deadline")){
+                    line = line.substring(9);
+                    String[] result = line.split("/by ");
+                    Deadline t = new Deadline(result[0],result[1]);
+                    list.add(t);
+                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
+                } else if(line.contains("event")){
+                    line = line.substring(6);
+                    String[] result = line.split("/at ");
+                    Event t = new Event(result[0],result[1]);
+
+                    list.add(t);
+                    dukeReply("Got it. I've added this task:\n\t" + t.toString()
+                            + "\n\tNow you have " + list.size() + " task" + (list.size()!=1 ? "s " : " ") + "in the list.");
+                }
             }
         }
         sc.close();

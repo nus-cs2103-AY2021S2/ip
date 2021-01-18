@@ -12,7 +12,8 @@ public class Task {
         return (isDone ? "\u2713" : " ");
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
