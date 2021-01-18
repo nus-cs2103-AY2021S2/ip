@@ -1,0 +1,12 @@
+todo get book from Jack
+event meet friends /at Aug 6th 2-4pm
+list
+event project meeting /at Mon 2-4pm
+deadline project /by June 6th
+deadline homework /by Monday
+list
+done 5
+list
+done 1
+list
+bye
