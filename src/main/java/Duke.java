@@ -1,16 +1,17 @@
 import java.util.*;
 
 public class Duke {
-
-    private static final Scanner sc = new Scanner(System.in);
-    private static final List<Task> database = new ArrayList<>();
-    private static final Set<String> commands = new HashSet<>();
+    private final Scanner sc = new Scanner(System.in);
+    private final List<Task> database = new ArrayList<>();
+    private final Set<String> commands = new HashSet<>();
     private static final String EXIT_COMMAND = "bye";
-
-    public static void main(String[] args) {
-        // Populating valid commands
+    
+    public Duke() {
+        // Populate valid commands
         setUpCommandList();
-        
+    }
+    
+    public void run() {
         // Print greeting
         printGreeting();
 
@@ -24,21 +25,20 @@ public class Duke {
             String arguments = sc.nextLine();
             parseCommand(command, arguments);
         }
-        
+
         // Print exit message
         printExitMessage();
     }
-    
-    private static void setUpCommandList() {
-        commands.add("bye");
+
+    private void setUpCommandList() {
         commands.add("list");
         commands.add("done");
         commands.add("todo");
         commands.add("deadline");
         commands.add("event");
     }
-    
-    private static void printGreeting() {
+
+    private void printGreeting() {
         printHorizontalLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -51,20 +51,20 @@ public class Duke {
         printHorizontalLine();
     }
 
-    private static void printExitMessage() {
+    private void printExitMessage() {
         printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
 
-    private static void printHorizontalLine() {
+    private void printHorizontalLine() {
         for (int i = 0; i < 60; i++) {
             System.out.print('-');
         }
         System.out.println();
     }
 
-    private static void parseCommand(String command, String arguments) {
+    private void parseCommand(String command, String arguments) {
         try {
             printHorizontalLine();
             checkValidCommand(command);
@@ -92,14 +92,14 @@ public class Duke {
 
     }
 
-    private static void checkValidCommand(String command) throws InvalidCommandException{
+    private void checkValidCommand(String command) throws InvalidCommandException{
         if (!commands.contains(command)) {
 //            throw new InvalidCommandException("Invalid command thrown from checkvalidcommand");
             throw new InvalidCommandException();
         }
     }
 
-    private static void printAllTasks() {
+    private void printAllTasks() {
         if (database.isEmpty()) {
             System.out.println("You do not have anything to do at the moment!");
         } else {
@@ -110,10 +110,8 @@ public class Duke {
         }
     }
 
-    private static void createTask(String taskType, String taskDescription) throws NoDescriptionException {
-        // Note: use isEmpty()?
+    private void createTask(String taskType, String taskDescription) throws NoDescriptionException {
         if (taskDescription.isBlank()) {
-//            throw new NoDescriptionException("Empty description thrown from createTask");
             throw new NoDescriptionException();
         }
         switch (taskType) {
@@ -129,12 +127,12 @@ public class Duke {
         }
     }
 
-    private static void createToDoTask(String taskDescription) {
+    private void createToDoTask(String taskDescription) {
         ToDoTask toDoTask = new ToDoTask(taskDescription);
         addTask(toDoTask);
     }
 
-    private static void createDeadlineTask(String taskDescription) {
+    private void createDeadlineTask(String taskDescription) {
         String[] deadlineInputArr = taskDescription.split("/by");
         String deadlineTaskName = deadlineInputArr[0].strip();
         String deadline = deadlineInputArr[1].strip();
@@ -142,7 +140,7 @@ public class Duke {
         addTask(deadlineTask);
     }
 
-    private static void createEventTask(String taskDescription) {
+    private void createEventTask(String taskDescription) {
         String[] eventInputArr = taskDescription.split("/at");
         String eventTaskName = eventInputArr[0].strip();
         String eventTime = eventInputArr[1].strip();
@@ -150,10 +148,8 @@ public class Duke {
         addTask(eventTask);
     }
 
-    private static void markTaskAsDone(String arguments) throws NoDescriptionException {
-        // Note: use isEmpty()?
+    private void markTaskAsDone(String arguments) throws NoDescriptionException {
         if (arguments.isBlank()) {
-//            throw new NoDescriptionException("Empty description thrown from markTaskAsDone");
             throw new NoDescriptionException();
         }
         int index = Integer.parseInt(arguments.strip());
@@ -163,15 +159,14 @@ public class Duke {
         System.out.printf("  [X] %s\n", task.getName());
     }
 
-    private static void addTask(Task task) {
+    private void addTask(Task task) {
         database.add(task);
         printAddedMessage(task);
     }
 
-    private static void printAddedMessage(Task task) {
+    private void printAddedMessage(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
 }
-
