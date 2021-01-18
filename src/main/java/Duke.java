@@ -81,13 +81,21 @@ public class Duke {
     }
 
 
-    void addEvent(String[] userInputSplit) {
+    void addEvent(String[] userInputSplit) throws DukeException {
         //Index of /at keyword
         int atIndex = 0;
         for (int i = 0; i < userInputSplit.length; i++) {
             if (userInputSplit[i].equals("/at")) {
                 atIndex = i;
             }
+        }
+        if (atIndex == 0) {
+            throw new DukeException("Missing /at keyword for new Event.");
+        } else if (atIndex == 1) {
+            throw new DukeException("☹ OOPS!!! The description of an Event cannot be empty.");
+        }
+        if (atIndex == userInputSplit.length - 1) {
+            throw new DukeException("Missing date of the Event.");
         }
         String task = join(userInputSplit, 1, atIndex - 1);
         String date = join(userInputSplit, atIndex + 1, userInputSplit.length - 1);
