@@ -104,8 +104,8 @@ public class Duke {
             System.out.println("You do not have anything to do at the moment!");
         } else {
             System.out.println("Here are the tasks in your list:");
-            for (Task task : database) {
-                System.out.printf("%d.%s\n", task.getIndex(), task.toString());
+            for (int i = 1; i <= database.size(); i++) {
+                System.out.printf("%d.%s\n", i, database.get(i - 1).toString());
             }
         }
     }
@@ -155,16 +155,20 @@ public class Duke {
             throw new NoDescriptionException("Please indicate a task number to be marked as done.");
         }
         try {
-            int index = Integer.parseInt(arguments.strip());
-            Task task = database.get(index - 1);
+            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
+            Task task = database.get(index);
             task.completeTask();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.printf("  [X] %s\n", task.getName());
+            printMarkedAsDoneMessage(task);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidDescriptionException("Please enter a valid index!");
         }
+    }
+
+    private void printMarkedAsDoneMessage(Task task) {
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.printf("  [X] %s\n", task.getName());
     }
 
     private void addTask(Task task) {
@@ -184,8 +188,8 @@ public class Duke {
             throw new NoDescriptionException("Please indicate a task number to be deleted.");
         }
         try {
-            int index = Integer.parseInt(arguments.strip());
-            Task task = database.get(index - 1);
+            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
+            Task task = database.get(index);
             database.remove(index);
             printDeletedMessage(task);
         } catch (NumberFormatException ex) {
