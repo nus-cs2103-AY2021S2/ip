@@ -3,16 +3,6 @@ import java.util.Scanner;
 public class Duke {
     public static String BOT_NAME = "Apollo the Robot!";
     public static String INDENTATION = "    ";
-    public static String logo = INDENTATION
-            + "     \\    ___\\   ___\\  \\     \\       ___\n"
-            + INDENTATION
-            + "   /  \\  |    |/     \\ |     |     /     \\ \n"
-            + INDENTATION
-            + "  ------ |___/ |      ||     |    |       |\n"
-            + INDENTATION
-            + " /      \\|     \\     / |     |     \\     / \n"
-            + INDENTATION
-            + "/        |      \\___/  \\_____\\_____ \\___/ \n";
 
     public static void printlnWithIndentation(String s) {
         System.out.println(INDENTATION + " " + s);
@@ -25,8 +15,8 @@ public class Duke {
 
     public static void main(String[] args) {
         printHorizontalLine();
-        printlnWithIndentation("Hello from " + BOT_NAME + "\n" + logo);
-        printlnWithIndentation("What would you like to do today?\n");
+        printlnWithIndentation("Hello! I'm " + BOT_NAME + "!");
+        printlnWithIndentation("What would you like to do today?");
         printHorizontalLine();
 
         Scanner scanner = new Scanner(System.in);
