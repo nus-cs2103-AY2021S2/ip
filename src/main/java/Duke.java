@@ -81,11 +81,8 @@ public class Duke {
                     createTask(command, arguments);
                     break;
             }
-        } catch (InvalidCommandException ex) {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            System.out.println("Please enter a valid command:");
-        } catch (NoDescriptionException ex) {
-            System.out.println("OOPS!!! The description of a task cannot be empty.");
+        } catch (InvalidCommandException | NoDescriptionException | InvalidDescriptionException ex) {
+            System.out.println(ex.getMessage());
         } finally {
             printHorizontalLine();
         }
@@ -94,8 +91,7 @@ public class Duke {
 
     private void checkValidCommand(String command) throws InvalidCommandException{
         if (!commands.contains(command)) {
-//            throw new InvalidCommandException("Invalid command thrown from checkvalidcommand");
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -112,7 +108,7 @@ public class Duke {
 
     private void createTask(String taskType, String taskDescription) throws NoDescriptionException {
         if (taskDescription.isBlank()) {
-            throw new NoDescriptionException();
+            throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
         switch (taskType) {
             case "todo":
@@ -148,15 +144,19 @@ public class Duke {
         addTask(eventTask);
     }
 
-    private void markTaskAsDone(String arguments) throws NoDescriptionException {
+    private void markTaskAsDone(String arguments) throws NoDescriptionException, InvalidDescriptionException {
         if (arguments.isBlank()) {
-            throw new NoDescriptionException();
+            throw new NoDescriptionException("Please indicate a task number to be marked as done.");
         }
-        int index = Integer.parseInt(arguments.strip());
-        Task task = database.get(index - 1);
-        task.completeTask();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("  [X] %s\n", task.getName());
+        try {
+            int index = Integer.parseInt(arguments.strip());
+            Task task = database.get(index - 1);
+            task.completeTask();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.printf("  [X] %s\n", task.getName());
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("Please enter a valid task number");
+        }
     }
 
     private void addTask(Task task) {
