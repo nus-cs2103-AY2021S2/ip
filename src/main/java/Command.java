@@ -16,6 +16,7 @@ public class Command {
         cmdInfo.put("todo", "todo <name> | Description: adds a new todo task");
         cmdInfo.put("deadline", "deadline <name> /by <end date> | Description: adds a new deadline task");
         cmdInfo.put("event", "event <name> /at <start date - end date> | Description: adds a new event task");
+        cmdInfo.put("delete", "delete <task index> | Description: delete by index a given task");
         cmdInfo.put("help", "help | Description: list this help menu");
     }
 
