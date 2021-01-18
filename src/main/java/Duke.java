@@ -65,7 +65,7 @@ public class Duke {
     private void echo(String s) {
         System.out.println("\t____________________________________________________________");
         System.out.println("\t  " + s);
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________\n");
     }
 
     private void echo(List<String> lst) {
@@ -73,7 +73,7 @@ public class Duke {
         for (String s : lst) {
             System.out.println("\t  " + s);
         }
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t____________________________________________________________\n");
     }
 
     private void displayList(List<Task> lst) {
