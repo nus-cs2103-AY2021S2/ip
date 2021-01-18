@@ -31,6 +31,8 @@ public class TaskManager {
         var task = retrieveTaskByListID(id);
         if(task.isDone()) {
             throw new TaskAlreadyDoneException();
+        } else {
+            task.markAsDone();
         }
     }
 
@@ -41,5 +43,7 @@ public class TaskManager {
     public List<Task> retrieveAllTasks() {
         return allTasks;
     }
-
+    public void deleteTaskByListID(int id){
+        allTasks.remove(id);
+    }
 }

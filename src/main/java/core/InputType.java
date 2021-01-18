@@ -49,6 +49,19 @@ public enum InputType {
         }
     }),
 
+    DELETE(x -> x.toLowerCase().startsWith("delete"), (tm, data) -> {
+        try {
+            int loc = Integer.parseInt(data.substring(5)) - 1;
+            Task x = tm.retrieveTaskByListID(loc);
+            tm.deleteTaskByListID(loc);
+            return "The task has been deleted ! \n - " + x;
+        } catch (NumberFormatException e1) {
+            return "Not a valid index given !!";
+        } catch (IndexOutOfBoundsException e) {
+            return e.getMessage();
+        }
+    }),
+
     UNKNOWN(x -> true, (tm, data) -> "Unknown command!! I don't know what you mean");
 
     // ==========================================================================
