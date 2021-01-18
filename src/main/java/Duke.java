@@ -15,7 +15,9 @@ public class Duke {
 
         while (sc.hasNext()) {
             command = sc.nextLine();
-            switch (command) {
+            String arr[] = command.split(" ", 2);
+            String firstWord = arr[0];
+            switch (firstWord) {
                 case "bye":
                     System.out.println("\t\t" + "See you again soon!");
                     sc.close();
@@ -23,8 +25,12 @@ public class Duke {
                 case "list":
                     bot.displayTasks();
                     break;
+                case "done":
+                    String num = arr[1];
+                    bot.markAsDone(Integer.valueOf(num));
+                    break;
                 default:
-                    bot.addTask(command);
+                    bot.addTask(new Task(command));
             }
             if (command.equals("bye")) {
                 break;
