@@ -24,10 +24,10 @@ public class Duke {
         echo(List.of("Hello! I'm Duke","What can I do for you?"));
 
         for (;;) {
-            String input = sc.nextLine(); 
-            String command = input.split(" ")[0];
-            switch(command) 
-            { 
+            String command = sc.next();
+            String input = sc.nextLine().strip();
+
+            switch(command) { 
                 case "bye": 
                     echo("Bye. Hope to see you again soon!");  
                     return; 
@@ -37,9 +37,16 @@ public class Duke {
                 case "done":
                     completeTask(input);
                     break;
+                case "todo":
+                    checkList.add(Todo.createTodo(input));
+                    taskAdded();
+                    break;
+                case "deadline":
+                    break;
+                case "event":
+                    break;
                 default: 
-                    checkList.add(new Task(input));
-                    echo("added: " + input);
+                    echo("invalid input");
             } 
         }
     }
@@ -70,11 +77,17 @@ public class Duke {
     }
 
     private void completeTask(String s) {
-        int taskNum = Integer.parseInt(s.split(" ")[1]);
+        int taskNum = Integer.parseInt(s);
         Task t = checkList.get(taskNum-1);
         t.completed();
         
         echo(List.of("Nice! I've marked this task as done:", t.toString()));
+    }
+
+    private void taskAdded() {
+        echo(List.of("Got it. I've added this task:",
+                checkList.get(checkList.size()-1).toString(),
+                "Now you have "+checkList.size()+" tasks in the list."));
     }
 
 }
