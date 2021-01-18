@@ -9,7 +9,7 @@ public class Chatbox {
         robot.welcome();
         while (true){
             String userMessage = user.inputMessage(keyboard);
-            if (userMessage.equals("bye")) break;
+            if (robot.wantExit(userMessage)) break;
             robot.response(userMessage);
         }
 
