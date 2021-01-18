@@ -9,3 +9,9 @@ todo join sports club
 list
 done 4
 list
+todo
+blah
+deadline
+deadline buy book
+event
+event buy book
