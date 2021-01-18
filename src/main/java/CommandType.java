@@ -7,6 +7,7 @@ public enum CommandType {
     ADD_EVENT(){
         @Override
         public boolean isMatchingInput(String input) {
+            input = input.toLowerCase();
             if (input.startsWith("event ") || input.equals("event")){
                 return true;
             } else {
@@ -17,6 +18,7 @@ public enum CommandType {
     ADD_DEADLINE() {
         @Override
         public boolean isMatchingInput(String input) {
+            input = input.toLowerCase();
             if (input.startsWith("deadline ") || input.equals("deadline")) {
                 return true;
             } else {
@@ -27,6 +29,7 @@ public enum CommandType {
     ADD_TODO() {
         @Override
         public boolean isMatchingInput(String input) {
+            input = input.toLowerCase();
             if (input.startsWith("todo ")||input.equals("todo")) {
                 return true;
             } else {
@@ -37,6 +40,7 @@ public enum CommandType {
     MARK_AS_DONE() {
         @Override
         public boolean isMatchingInput(String input) {
+            input = input.toLowerCase();
             if (input.startsWith("done ")|| input.equals("done")) {
                 return true;
             } else {
@@ -47,6 +51,7 @@ public enum CommandType {
     REMOVE_TASK() {
         @Override
         public boolean isMatchingInput(String input) {
+            input = input.toLowerCase();
             if (input.startsWith("delete ")||input.equals("delete")) {
                 return true;
             } else {
