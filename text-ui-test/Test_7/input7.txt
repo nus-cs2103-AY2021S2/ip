@@ -1,0 +1,16 @@
+list
+todo Watch CS2103T lecture
+deadline Do CS2103T lecture quiz /by this Saturday
+list
+delete 1
+delete 0
+delete
+done
+undone
+list
+delete 1
+delete undone
+undone undone
+done undone
+list
+bye

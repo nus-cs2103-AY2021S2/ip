@@ -24,3 +24,8 @@ text-ui-test/Test_4/ACTUAL_ERR_4.TXT
 text-ui-test/Test_4/ACTUAL_OK_4.TXT
 text-ui-test/Test_5/ACTUAL_ERR_5.TXT
 text-ui-test/Test_5/ACTUAL_OK_5.TXT
+text-ui-test/Test_6/ACTUAL_OK_6.TXT
+text-ui-test/Test_7/ACTUAL_ERR_7.TXT
+text-ui-test/Test_7/ACTUAL_OK_7.TXT
+text-ui-test/Test_8/ACTUAL_ERR_8.TXT
+text-ui-test/Test_8/ACTUAL_OK_8.TXT

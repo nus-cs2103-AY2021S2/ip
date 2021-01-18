@@ -17,6 +17,9 @@ You can add 3 types of tasks:
 2. Deadline tasks (Be sure not to miss these deadlines!)
 3. Event tasks (Used to reserve certain timings like a calendar app)
 
+### Delete tasks
+If you feel that keeping them on the list is not necessary, Meme Man will delete them for you.
+
 ### List tasks
 You can key in "list" and Meme Man will display the tasks in the order that you have keyed them in.
 
@@ -29,7 +32,7 @@ You can key in "done" along with a task number and Meme Man will cross that task
 ### Surreal Memes easter eggs
 Keep scrolling to find them.
 
-## Commands to add tasks
+## Commands related to tasks
 
 ### `todo (insert task description)` - Add ToDo task command
 
@@ -69,8 +72,9 @@ Total number of tasks: 3
 ```
 
 Outcome if "/by" is missing:
-
-`Wrong formatting. Did you forget to put '/by'? Not stonks!`
+```
+Wrong formatting. Did you forget to put '/by'? Not stonks!
+```
 
 ### `event (insert task description) /at (insert time)` - Add Event task command
 
@@ -88,46 +92,16 @@ Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: next Tuesda
 Total number of tasks: 4
 ```
 Outcome if "/at" is missing:
+```
+Wrong formatting. Did you forget to put '/at'? Not stonks!
+```
 
-`Wrong formatting. Did you forget to put '/at'? Not stonks!`
 
 ### What happens if task description is empty?
 This applies to all 3 types of tasks:
-
-`Empty (insert task type) task description. Not stonks!`
-
-## Other commands
-
-### `bye` - Exit command
-
-Key this command in to cause Meme Man to EJECT you... er... I mean leave...
-
-### `list` - List command
-
-Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
-
-Now suppose you have 4 tasks:
-1. Watch CS2103T lecture (ToDo, Done)
-2. Do CS2103T lecture quiz (Deadline of this Saturday, Done)
-3. Do CS2103T ip (Deadline of next Monday, Not done)
-4. Attend CS2101 class (Event happens next Tuesday, Not done)
-
-How to get Meme Man to list out above tasks:
-
-`list` 
-
-Expected outcome:
 ```
-I print the tasks:
-1. [T][✓] Watch CS2103T lecture
-2. [D][✓] Do CS2103T lecture quiz (by: this Saturday)
-3. [D][✘] Do CS2103T ip (by: next Monday)
-4. [E][✘] Attend CS2101 class (at: next Tuesday)
-Hmmst've... Stonks
+Empty (insert task type) task description. Not stonks!
 ```
-Outcome if there is nothing in task list:
-
-`I have nothing to print. Not stonks!`
 
 ### `done (insert number)` - Do task command
 
@@ -143,18 +117,27 @@ Stonks! You've done this task:
 Do CS2103T lecture quiz
 ```
 
-Outcome if you do not put a number in the number field:
+Outcome if number field is empty:
+```
+Did you forget to put a number for the command you just typed in? Not stonks!
+```
 
-`Did you forget to put a number for the command you just typed in? Not stonks!`
+Outcome if number field has anything other than number or improper number (e.g. `done meme` or `done 1b`):
+```
+Did you put something other than a number or did you put a number incorrectly? Not stonks!
+```
 
 A task number is invalid if any of the following conditions are met:
+```
 1. 0
 2. Negative number
 3. Number is greater than number of tasks Meme Man has stored
+```
 
 Outcome if task number is invalid:
-
-`Invalid task number. Not stonks!`
+```
+Invalid task number. Not stonks!
+```
 
 Outcome if task was already done:
 ```
@@ -176,17 +159,93 @@ Expected outcome:
 Not stonks! This task has been marked as undone: 
 Do CS2103T lecture quiz
 ```
-Outcome if you do not put a number in the number field:
 
-`Did you forget to put a number for the command you just typed in? Not stonks!`
+Outcome if number field is empty:
+```
+Did you forget to put a number for the command you just typed in? Not stonks!
+```
+Outcome if number field has anything other than number or improper number (e.g. `undone meme` or `undone 1b`):
+```
+Did you put something other than a number or did you put a number incorrectly? Not stonks!
+```
 
 Outcome if task number is invalid:
-
-`Invalid task number. Not stonks!`
+```
+Invalid task number. Not stonks!
+```
 
 Outcome if task was not done in the first place:
+```
+This task is already not done. Not stonks anyway!
+```
 
-`This task is already not done. Not stonks anyway!`
+### `delete (insert number)` - Delete task command
+
+Key this command in along with task number to delete the corresponding task.
+Meme Man will display how many tasks you have left.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+```
+This task has been deleted:
+[T][✓] Watch CS2103T lecture
+Total number of tasks: 3
+```
+
+Outcome if number field is empty:
+```
+Did you forget to put a number for the command you just typed in? Not stonks!
+```
+
+Outcome if number field has anything other than number or improper number (e.g. `delete meme` or `delete 1b`):
+```
+Did you put something other than a number or did you put a number incorrectly? Not stonks!
+```
+
+Outcome if task number is invalid:
+```
+Invalid task number. Not stonks!
+```
+
+## Other commands
+
+### `bye` - Exit command
+
+Key this command in to cause Meme Man to EJECT you... er... I mean leave...
+
+### `list` - List command
+
+Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
+
+Now suppose you have 4 tasks:
+```
+1. Watch CS2103T lecture (ToDo, Done)
+2. Do CS2103T lecture quiz (Deadline of this Saturday, Done)
+3. Do CS2103T ip (Deadline of next Monday, Not done)
+4. Attend CS2101 class (Event happens next Tuesday, Not done)
+```
+
+How to get Meme Man to list out above tasks:
+
+`list` 
+
+Expected outcome:
+```
+I print the tasks:
+1. [T][✓] Watch CS2103T lecture
+2. [D][✓] Do CS2103T lecture quiz (by: this Saturday)
+3. [D][✘] Do CS2103T ip (by: next Monday)
+4. [E][✘] Attend CS2101 class (at: next Tuesday)
+Hmmst've... Stonks
+```
+
+Outcome if there is nothing in task list:
+```
+I have nothing to print. Not stonks!
+```
 
 ### `orang` - Easter egg command
 The orang here refers to the Surreal Memes orange (spelled "Orang"), not Orang Utan orang.
@@ -197,5 +256,6 @@ Did someone said... NO VEGETALS?
 
 ### Invalid commands
 If you key in an unrecognised command, this is what Meme Man has to say:
-
-`Command not recognised. Not stonks!`
+```
+Command not recognised. Not stonks!
+```

@@ -1,9 +1,10 @@
 import java.util.Scanner;
 import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
-    public static Task[] taskArray = new Task[100];
-    public static int taskArraySize = 0;
+    public static List<Task> taskList = new ArrayList<Task>();
 
     private static void initialGreeting() {
         System.out.println("I am Meme Man. Whoms't be entering the VIMension?\n");
@@ -30,18 +31,21 @@ public class Duke {
     }
 
     /**
-     * Used to obtain number to pull out task from array
-     * @param sc - The scanner. Used to obtain the number in the user input.
+     * Used to obtain number from a given description
+     * @param description - The raw description
      * @return taskNumber - The number to find task in the array
      */
-    private static int getInputNumber(Scanner sc) {
-        if (sc.hasNextInt()) {
-            int taskNumber = sc.nextInt();
-            sc.nextLine(); //Clears the line
-            return taskNumber;
+    private static int getInputNumber(String description) {
+        description = description.trim();
+        if (description.isEmpty()) {
+            throw new NoSuchElementException("Did you forget to put a number for the command you just typed in? Not stonks!");
         } else {
-            sc.nextLine(); //Clears the line
-            throw new IllegalArgumentException("Did you forget to put a number for the command you just typed in? Not stonks!");
+            try {
+                Integer taskNumber = Integer.valueOf(description);
+                return taskNumber;
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Did you put something other than a number or did you put a number incorrectly? Not stonks!");
+            }
         }
     }
 
@@ -86,24 +90,23 @@ public class Duke {
     }
 
     private static void addTask(Task task) {
-        taskArray[taskArraySize] = task;
-        taskArraySize++;
-        System.out.printf("Total number of tasks: %d\n\n", Duke.taskArraySize);
+        Duke.taskList.add(task);
+        System.out.printf("Total number of tasks: %d\n\n", Duke.taskList.size());
     }
 
     private static boolean checkInvalidTaskNumber(int taskNumber) {
-        return ((taskNumber <= 0) || (taskNumber > Duke.taskArraySize));
+        return ((taskNumber <= 0) || (taskNumber > Duke.taskList.size()));
     }
 
     private static void markAsDone(int taskNumber) {
         if (Duke.checkInvalidTaskNumber(taskNumber)) {
             throw new IllegalArgumentException("Invalid task number. Not stonks!");
         } else {
-            Task doneTask = taskArray[taskNumber - 1];
+            Task doneTask = Duke.taskList.get(taskNumber - 1);
             doneTask.markAsDone();
             System.out.println("Stonks! You've done this task:");
             System.out.println(doneTask.getDescription() + "\n");
-            taskArray[taskNumber - 1] = doneTask;
+            Duke.taskList.set(taskNumber - 1, doneTask);
         }
     }
 
@@ -111,21 +114,32 @@ public class Duke {
         if (Duke.checkInvalidTaskNumber(taskNumber)) {
             throw new IllegalArgumentException("Invalid task number. Not stonks!");
         } else {
-            Task undoneTask = taskArray[taskNumber - 1];
+            Task undoneTask = Duke.taskList.get(taskNumber - 1);
             undoneTask.markAsUndone();
             System.out.println("Not stonks! This task has been marked as undone:");
             System.out.println(undoneTask.getDescription() + "\n");
-            taskArray[taskNumber - 1] = undoneTask;
+            Duke.taskList.set(taskNumber - 1, undoneTask);
+        }
+    }
+
+    private static void deleteTask(int taskNumber) {
+        if (Duke.checkInvalidTaskNumber(taskNumber)) {
+            throw new IllegalArgumentException("Invalid task number. Not stonks!");
+        } else {
+            Task deletedTask = Duke.taskList.remove(taskNumber - 1);
+            System.out.println("This task has been deleted:");
+            System.out.println(deletedTask);
+            System.out.printf("Total number of tasks: %d\n\n", Duke.taskList.size());
         }
     }
 
     private static void printList() {
-        if (Duke.taskArraySize == 0) {
+        if (Duke.taskList.isEmpty()) {
             throw new NoSuchElementException("I have nothing to print. Not stonks!");
         } else {
             System.out.println("I print the tasks:");
-            for (int i = 1; i <= taskArraySize; i++) {
-                System.out.println(i + ". " + taskArray[i - 1]);
+            for (int i = 1; i <= Duke.taskList.size(); i++) {
+                System.out.println(i + ". " + Duke.taskList.get(i - 1));
             }
             System.out.println("Hmmst've... Stonks\n");
         }
@@ -167,12 +181,19 @@ public class Duke {
                 Duke.addEvent(description);
                 break;
             case "done":
-                int taskNumber = Duke.getInputNumber(sc);
+                description = Duke.getInputDescription(sc); //Get raw form
+                int taskNumber = Duke.getInputNumber(description); //Process to obtain int
                 Duke.markAsDone(taskNumber);
                 break;
             case "undone":
-                taskNumber = Duke.getInputNumber(sc);
+                description = Duke.getInputDescription(sc); //Get raw form
+                taskNumber = Duke.getInputNumber(description); //Process to obtain int
                 Duke.markAsUndone(taskNumber);
+                break;
+            case "delete":
+                description = Duke.getInputDescription(sc); //Get raw form
+                taskNumber = Duke.getInputNumber(description); //Process to obtain int
+                Duke.deleteTask(taskNumber);
                 break;
             case "orang":
                 sc.nextLine(); //Clear input line
@@ -189,6 +210,10 @@ public class Duke {
         return maintainLoop;
     }
 
+    /**
+     * The driver code for Meme Man chatbot.
+     * @param args - Optional argument
+     */
     public static void main(String[] args) {
         Duke.initialGreeting();
         Scanner sc = new Scanner(System.in);
