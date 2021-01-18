@@ -7,6 +7,10 @@ done 1
 done 2
 list
 done 4
+done 500
+todo
+event No date
+delete 1
 list
 hi
 bye

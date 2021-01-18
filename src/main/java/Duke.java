@@ -75,6 +75,23 @@ public class Duke {
     }
 
     /**
+     * Deletes the indicated task from the task list
+     *
+     * @param tasks A list of Task objects
+     * @param index An integer representing the index of the task to be deleted
+     */
+    public static void deleteTask(ArrayList<Task> tasks, int index) {
+        Task task = tasks.get(index);
+        tasks.remove(index);
+        System.out.println(FORMAT_LINE);
+        System.out.println(" Noted. I've removed this task:\n" +
+                "   " + task.toString());
+        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+        System.out.println(FORMAT_LINE);
+
+    }
+
+    /**
      * main method which runs the chatbot.
      *
      * @param args empty string array.
@@ -97,7 +114,7 @@ public class Duke {
                 } else if (input.startsWith("done")) {
                     int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
                     if (index > tasks.size() || index <= 0) {
-                        throw new DukeException("The list number provided is invalid");
+                        throw new DukeException("The list item number provided is invalid");
                     }
                     markAsDone(tasks, index - 1);
                 } else if (input.startsWith("todo")) {
@@ -140,6 +157,13 @@ public class Duke {
                     Event event = new Event(description, date);
                     tasks.add(event);
                     printAddedTask(tasks, event);
+
+                } else if (input.startsWith("delete")) {
+                    int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
+                    if (index > tasks.size() || index <= 0) {
+                        throw new DukeException("The list item number provided is invalid");
+                    }
+                    deleteTask(tasks, index - 1);
 
                 } else if (input.equals("bye")) {
                     farewellUser();

@@ -66,14 +66,29 @@ You have the following task(s) in your list.
    [D][X]  return book  (by: Sunday)
 ....................................................
 
+>>> done 500
+The list item number provided is invalid
+
+>>> todo
+todo description cannot be empty
+
+>>> event No date
+Wrong command format: Missing `/at`
+
+>>> delete 1
+....................................................
+ Noted. I've removed this task:
+   [T][X]  borrow book
+Now you have 4 task(s) in the list.
+....................................................
+
 >>> list
 ....................................................
 You have the following task(s) in your list.
-1.[T][X]  borrow book
-2.[T][X]  study
-3.[T][ ]  exercise
-4.[D][X]  return book  (by: Sunday)
-5.[E][ ]  project meeting  (at: Mon 2-4pm)
+1.[T][X]  study
+2.[T][ ]  exercise
+3.[D][X]  return book  (by: Sunday)
+4.[E][ ]  project meeting  (at: Mon 2-4pm)
 ....................................................
 
 >>> hi
