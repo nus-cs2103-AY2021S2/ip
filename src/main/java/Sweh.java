@@ -1,6 +1,8 @@
+import java.util.Optional;
 import java.util.Scanner;
 
-public class Duke {
+public class Sweh {
+    public static TaskList taskList = new TaskList();
     public static void main(String[] args) {
         String logo = " _____  _    _ _____ _   _ \n" +
             "/  ___|| |  | |  ___| | | | \n" +
@@ -24,15 +26,16 @@ public class Duke {
                 break;
             }
         }
-
+        sc.close();
     }
 
     public static String respond(String command) {
+
         switch (command) {
             case "bye":
                 return "Bye. See ya again soon!";
             default:
-                return echo(command);
+                return taskList.addTask(command);
         }
     }
 
