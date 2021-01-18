@@ -51,11 +51,15 @@ public class Duke {
             throw new IncompleteDetailException("time");
     }
 
+    private static String getTasksLeftString(Vector<Task> tasks) {
+        return String.format("Eh you got %d task%s in total leh", tasks.size(), tasks.size() == 1 ? "" : "s");
+    }
+
     private static void postAddTaskSummary(Vector<Task> tasks) {
         System.out.println(HORIZONTAL_LINE);
         printLine("Okay I remember for you liao:");
         printLine("\t" + tasks.lastElement());
-        printLine(String.format("Eh you got %d task%s in total leh", tasks.size(), tasks.size() == 1 ? "" : "s"));
+        printLine(getTasksLeftString(tasks));
         System.out.println(HORIZONTAL_LINE);
     }
 
@@ -79,6 +83,20 @@ public class Duke {
                     Task currentTask = tasks.get(index);
                     currentTask.markAsDone();
                     wrappedPrint(new String[]{"Good job! The task below is marked done!", currentTask.toString()});
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new InvalidTaskIndexException();
+                }
+                break;
+            case "delete":
+                try {
+                    int index = Integer.parseInt(details.trim()) - 1;
+                    Task selectedTask = tasks.get(index);
+                    tasks.remove(index);
+                    wrappedPrint(new String[]{
+                            "Poof! This task is gone:",
+                            "\t" + selectedTask.toString(),
+                            getTasksLeftString(tasks)
+                    });
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new InvalidTaskIndexException();
                 }
