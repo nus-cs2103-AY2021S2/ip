@@ -7,17 +7,18 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String task = "", deadline = "";
-        int firstSpace = 0;
+        int firstSpace = 0, firstSlash = 0;
         //Greet User
         printGreetings();
-        String command = scanner.nextLine().toLowerCase();
+        String command = scanner.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
             printLine();
             // Split command to check if first word is done
             // and also to extract the option
             firstSpace = command.indexOf(" ");
             firstSpace = firstSpace == -1 ? command.length() : firstSpace;
-            switch (command.substring(0,firstSpace)) {
+            firstSlash = findSlash(command);
+            switch (command.substring(0,firstSpace).toLowerCase()) {
                 case "list":
                     //Display all task added
                     listTasks();
@@ -33,16 +34,19 @@ public class Duke {
                     addTask(new Todo(task));
                     break;
                 case "deadline":
-                    int firstSlash = findSlash(command);
                     task = retrieveTask(command,firstSpace, firstSlash);
                     deadline = retrieveDeadline(command,firstSlash);
                     // +1 to exclude / in the deadline
                     addTask(new Deadline(task, deadline));
                     break;
-
+                case "event":
+                    task = retrieveTask(command,firstSpace, firstSlash);
+                    deadline = retrieveDeadline(command,firstSlash);
+                    addTask(new Event(task,deadline));
+                    break;
             }
             printLine();
-            command = scanner.nextLine().toLowerCase();
+            command = scanner.nextLine();
         }  //Exits the program
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
@@ -74,7 +78,7 @@ public class Duke {
 
     public static void addTask(Task newTask) {
         taskList.add(newTask);
-        System.out.println("Got it. I`ve added this task: ");
+        System.out.println("Got it. I`ve added this task:");
         printTask("", newTask);
         printTaskNum();
     }
