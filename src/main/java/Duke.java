@@ -1,21 +1,19 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static final StringBuffer boundOfChatBox = new StringBuffer();
-    private static int lenOfChatBox = 50;
+    private static final int lenOfChatBox = 50;
+    private static final ArrayList<String> tasks = new ArrayList<>();
 
     public static void setBoundOfChatBox() {
         boundOfChatBox.append('\n');
-        for (int i = 0; i < lenOfChatBox; i++) {
-            boundOfChatBox.append('-');
-        }
+        boundOfChatBox.append("-".repeat(lenOfChatBox));
         boundOfChatBox.append('\n');
     }
 
     public static void formatInChatBox(String s) {
-        StringBuffer res = new StringBuffer();
-        res.append(boundOfChatBox).append(s).append(boundOfChatBox);
-        System.out.println(res);
+        System.out.println(boundOfChatBox + s + boundOfChatBox);
     }
 
     public static void init() {
@@ -27,25 +25,47 @@ public class Duke {
                       "/_/    \\__/    \\_\\ \\____/";
         String greeting = "Hello! I'm Momo\nWhat can I do for you?";
         formatInChatBox(logo);
-        formatInChatBox(greeting);
+        formatInChatBox(greeting + '\n');
+    }
+
+    public static void add(String task) {
+        tasks.add(task);
+        formatInChatBox("added: " + task + '\n');
+    }
+
+    public static void list() {
+        int n = tasks.size();
+        if (n == 0) {
+            formatInChatBox("There is no task yet\n");
+            return ;
+        }
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < n; i++)
+            buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        String res = new String(buf);
+        formatInChatBox(res);
     }
 
     public static void exit() {
-        String goodbye = "Bye. Hope to see you again soon!";
+        String goodbye = "Bye. Hope to see you again soon!\n";
         formatInChatBox(goodbye);
     }
 
     public static void main(String[] args) {
         init();
-        String input = "";
+        String input;
         Scanner sc = new Scanner(System.in);
         do {
             input = sc.nextLine();
-            if(input.equals("bye")) {
-                exit();
-                return ;
-            } else {
-                formatInChatBox(input);
+            switch (input) {
+                case "bye":
+                    exit();
+                    return ;
+                case "list":
+                    list();
+                    break;
+                default:
+                    add(input);
             }
         } while(true);
     }
