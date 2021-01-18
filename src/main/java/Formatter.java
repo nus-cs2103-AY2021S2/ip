@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class Formatter {
     public static String formatOut(String output) {
         String opening = "\"----------------------------------------\n";
@@ -14,11 +16,13 @@ public abstract class Formatter {
     }
 
     public static String formatList(String[] strArray) {
-        StringBuilder stringBuilder = new StringBuilder();
-
         for (int i = 0; i < strArray.length; i++) {
-            stringBuilder.append(String.valueOf(i + 1)).append(". ").append(strArray[i]);
+            strArray[i] = String.valueOf(i + 1) + ". " + strArray[i];
         }
-        return stringBuilder.toString();
+        return String.join("\n", strArray);
+    }
+
+    public static String formatList(List<String> strList) {
+        return formatList(strList.toArray(new String[] { }));
     }
 }

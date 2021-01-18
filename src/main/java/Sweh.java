@@ -32,6 +32,8 @@ public class Sweh {
     public static String respond(String command) {
 
         switch (command) {
+            case "list":
+                return taskList.listTasks();
             case "bye":
                 return "Bye. See ya again soon!";
             default:

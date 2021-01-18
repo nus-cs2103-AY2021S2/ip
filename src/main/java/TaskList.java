@@ -16,4 +16,7 @@ public class TaskList {
         return "added: " + task;
     }
 
+    public String listTasks() {
+        return Formatter.formatList(taskList);
+    }
 }
