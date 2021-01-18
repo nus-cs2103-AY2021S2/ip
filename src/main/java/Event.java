@@ -1,6 +1,16 @@
+/**
+ * Represents an Event task.
+ * Has a date.
+ */
 public class Event extends Task {
-    String date;
+    private String date;
 
+    /**
+     * Factory method for creating Event task.
+     * @param input Description of the task and its date. Date should be indicated after "/at".
+     * @return An Event task
+     * @throws DukeException if date is missing
+     */
     public static Event createEvent(String input) throws DukeException {
         String[] details = input.split(" /at ");
 

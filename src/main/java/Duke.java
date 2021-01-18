@@ -2,6 +2,26 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Duke is a task manager.
+ * 
+ * <p>Currently supports these functionalities:
+ * 
+ * <p>bye 
+ *   - Close Duke
+ * <p>list
+ *   - List out all task
+ * <p>done [number]
+ *   - Mark selected task as done
+ * <p>todo [description]
+ *   - Add a todo task
+ * <p>deadline [description] /by [due date]
+ *   - Add a deadline task with a due date
+ * <p>event [description] /at [date]
+ *   - Add a event task with a date
+ * <p>delete [number]
+ *   - Delete a task
+ */
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -18,7 +38,10 @@ public class Duke {
 
     private List<Task> checkList = new ArrayList<>();
 
-    private void start() {
+    /**
+     * Starts the Duke bot
+     */
+    public void start() {
         Scanner sc = new Scanner(System.in);
 
         echo(List.of("Hello! I'm Duke","What can I do for you?"));

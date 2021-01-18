@@ -1,6 +1,16 @@
+/**
+ * Represents an deadline task.
+ * Has a due date.
+ */
 public class Deadline extends Task {
-    String dueDate;
+    private String dueDate;
 
+    /**
+     * Factory method for creating deadline task.
+     * @param input Description of the task and its due date. Due date should be indicated after "/by".
+     * @return A deadline task
+     * @throws DukeException if due date is missing
+     */
     public static Deadline createDeadline(String input) throws DukeException {
         String[] details = input.split(" /by ");
 
