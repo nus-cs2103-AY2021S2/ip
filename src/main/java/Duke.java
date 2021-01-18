@@ -21,7 +21,10 @@ public class Duke {
         boolean terminate = false;
 
         // create LinkedList to store information of user inputs
-        LinkedList<String> tasks = new LinkedList<>();
+        Task[] tasks = new Task[100];
+
+        // to keep track of num of task
+        int itemNum = 1; // starts from 1
 
         //Duke will keep repeating until command given "Bye"
         while (!terminate) {
@@ -31,15 +34,25 @@ public class Duke {
                 terminate = true; // terminates Duke
             } else if (text.equals("list")) {
                 // print all the tasks stored currently in the list
-                int itemNum = 1; // starts from 1
-                while(!tasks.isEmpty()) {
-                    System.out.println(itemNum + ". " + tasks.poll());
-                    itemNum++;
+                for (int i = 0; i < itemNum-1; i++) {
+                    System.out.println((i+1) + ". [" + tasks[i].getStatusIcon() + "] " + tasks[i].description);
                 }
+            } else if (text.contains("done")) {
+                String num = text.substring(5); // take out the int value of the task to be completed
+                int listNum = Integer.parseInt(num); // changes to int
+                Task hold = tasks[listNum-1];
+                hold.markAsDone();
+
+                // format
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(" " + "[" + tasks[listNum-1].getStatusIcon() + "] " + tasks[listNum-1].description);
             }
             else {
                 System.out.println("added: " + text);
-                tasks.add(text);
+                // create new instance of task and add to the list
+                Task holder = new Task(text);
+                tasks[itemNum-1] = holder; // position corresponds to item number
+                itemNum++; // increase the item list count
             }
         }
 
