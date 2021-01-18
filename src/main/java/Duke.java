@@ -6,11 +6,20 @@ public class Duke {
     private static String lines = "    ______________________________________________";
     private static String indent = "      ";
 
+    /**
+     * Mark specified task done
+     * @param i off-by-one index of a task in array list
+     */
+    private static void markDone(int i) {
+        taskList.get(i - 1).markAsDone();
+
+    }
+
     private static void printTaskList() {
         System.out.println(lines);
 
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(indent + (i + 1) + ". " + taskList.get(i));
+            System.out.println(indent + (i + 1) + "." + taskList.get(i));
         }
 
         System.out.println(lines);
@@ -55,6 +64,12 @@ public class Duke {
                 break;
             } else if (userInput.equals("list")) {
                 printTaskList();
+            } else if (userInput.startsWith("done")) {
+                Scanner stringSc = new Scanner(userInput);
+                System.out.println("user input: " + userInput);
+                stringSc.next();
+                markDone(stringSc.nextInt());
+                stringSc.close();
             } else {
                 // todo add to list
                 taskList.add(new Task(userInput));
