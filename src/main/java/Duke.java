@@ -2,12 +2,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Todo:
+ *   - exceptions yet to be handled:
+ *     - number of tasks > 100
+ *     - multiple spaces in between tokens
+ *     - done command
+ *       - w/o number
+ *       - number out of range
+ *   - help command
+ */
+
 public class Duke {
 
     /**
      * The task list
      */
-    public static ArrayList<String> tasks = new ArrayList<String>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * All exit commands are listed here
@@ -44,21 +55,25 @@ public class Duke {
      * @return whether the program should continue (<code>true</code> if not an exit command)
      */
     public static boolean processCommand(String command) {
+        String[] tokens = command.split(" ");
         printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
             printLine("Bye. Hope to see you again soon!");
         } else {
-            switch (command) {
-                case "list":
-                    int index = 0;
-                    for (String task : tasks) {
-                        printLine(String.format("%d: %s", ++index, task));
-                    }
-                    break;
-                default:
-//                printLine(command);
-                    tasks.add(command);
-                    printLine(String.format("added: %s", command));
+            if (tokens[0].equals("list")) {
+                int index = 0;
+                for (Task task : tasks) {
+                    printLine(String.format("%d.[%s] %s", ++index, task.getIsDone() ? "X" : " ", task.getName()));
+                }
+            } else if (tokens[0].equals("done")) {
+                if (Integer.parseInt(tokens[1]) <= tasks.size()) {
+                    tasks.get(Integer.parseInt(tokens[1]) - 1).setIsDone(true);
+                    printLine("Nice! I've marked this task as done:");
+                    printLine(String.format("  [X] %s", tasks.get(Integer.parseInt(tokens[1]) - 1).getName()));
+                }
+            } else {
+                tasks.add(new Task(command));
+                printLine(String.format("added: %s", command));
             }
         }
         printHorizontalLine();
