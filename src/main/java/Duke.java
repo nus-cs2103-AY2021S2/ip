@@ -17,20 +17,37 @@ public class Duke {
         System.out.println("What do you want?");
         System.out.println(partingLine);
 
-        ArrayList<String> items = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             System.out.println(partingLine);
             if (input.equals("list")) {
-                for (int i = 1; i <= items.size(); i++) {
-                    System.out.println(" " + i + ". "
-                            + items.get(i - 1));
+                System.out.println("Here are the tasks"
+                        + " in your list: ");
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task tempTask = tasks.get(i);
+                    System.out.println(" " + (i + 1) + ".["
+                            + tempTask.getStatusIcon() + "] "
+                            + tempTask);
+                }
+            } else if (isDoneCommand(input)){
+                int index = Character
+                        .getNumericValue(input.charAt(5)) - 1;
+                if (index < tasks.size()) {
+                    Task completedTask = tasks.get(index);
+                    completedTask.complete();
+                    System.out.println("Nice! "
+                            + "I've marked this task as done: ");
+                    System.out.println("  ["
+                            + completedTask.getStatusIcon()
+                            + "] " + completedTask);
                 }
             } else {
-                items.add(input);
-                System.out.println(" added: " + input);
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+                System.out.println(" added: " + newTask);
             }
             System.out.println(partingLine);
             input = sc.nextLine();
@@ -38,5 +55,11 @@ public class Duke {
         System.out.println(partingLine);
         System.out.println(" Seeya.");
         System.out.println(partingLine);
+    }
+
+    public static boolean isDoneCommand(String input) {
+        return (input.length() > 5
+                && input.substring(0, 5).equals("done ")
+                && Character.isDigit(input.charAt(5)));
     }
 }
