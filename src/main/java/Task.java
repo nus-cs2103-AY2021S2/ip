@@ -11,14 +11,14 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "X" : " "); //return tick or X symbols
     }
 
     public String returnDescription(){
-        return description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
-    public void taskDone(){
+    public void changeTaskToDone(){
         isDone = true;
     }
 }

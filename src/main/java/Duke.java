@@ -14,19 +14,25 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         ListManager listManager = new ListManager();
 
-        System.out.println(listManager.defaultFormatting("Hello! I'm Duke\n" + "     What can I do for you?"));
+        System.out.println(listManager.welcomeLine());
         String userinput = scanner.nextLine();
 
         while ( !userinput.equals("bye")){
             if (userinput.equals("list")){
                 System.out.println(listManager.returnTaskList());
+            }else if(userinput.contains("done ")){
+
+                int taskInt = Integer.parseInt(userinput.split(" ")[1]);
+                String outputString = listManager.checkTaskAsDone(taskInt);
+
+                System.out.println(outputString);
             }else{
-                listManager.addTask(userinput);
-                System.out.println(listManager.defaultFormatting("added: " + userinput));
+                String outputString = listManager.addTask(userinput);
+                System.out.println(outputString);
             }
             userinput = scanner.nextLine();
         }
 
-        System.out.println(listManager.defaultFormatting("Bye. Hope to see you again soon!"));
+        System.out.println(listManager.goodbyeLine());
     }
 }
