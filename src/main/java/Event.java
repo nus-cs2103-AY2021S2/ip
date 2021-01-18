@@ -13,6 +13,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (by: %s)", super.toString(), date);
+        return String.format("[E]%s (at: %s)", super.toString(), date);
     }
 }
