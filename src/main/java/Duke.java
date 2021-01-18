@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static final String line = "____________________________________________________________";
-    public static ArrayList<String> list = new ArrayList<String>();
+    public static ArrayList<Task> list = new ArrayList<Task>();
 
     public static void main(String[] args) {
         welcome();
@@ -47,13 +47,19 @@ public class Duke {
             System.exit(0);
         }
         else if (msg.equals("list")) {
-            for (int i = 1; i <= list.size(); i++) {
-                System.out.println(i + ". " + list.get(i - 1));
-            }
+            System.out.println("Here are the tasks in your list:");
+            for (Task t : list) System.out.println(t);
+            System.out.println(line);
+        }
+        else if (msg.matches("done \\d+")) {
+            int id = Integer.parseInt(msg.split(" ")[1]) - 1;
+            Task t = list.get(id);
+            t.markAsDone();
+            System.out.println("[" + t.getStatusIcon() + "] " + t.getName());
             System.out.println(line);
         }
         else {
-            list.add(msg);
+            list.add(new Task(list.size() + 1, msg));
             System.out.println("added: " + msg);
             System.out.println(line);
         }
