@@ -46,6 +46,8 @@ public class Duke {
                     taskAdded();
                     break;
                 case "event":
+                    checkList.add(Event.createEvent(input));
+                    taskAdded();
                     break;
                 default: 
                     echo("invalid input");
