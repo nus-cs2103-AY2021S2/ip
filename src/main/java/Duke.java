@@ -17,11 +17,21 @@ public class Duke {
             if (s.length() >= 6) {
                 if (s.substring(0, 4).equals("done")) {
                     int num = Integer.parseInt(s.substring(5));
+                    done(num);
                     continue;
                 }
             }
             store(s);
         }
+    }
+
+    static public void done(int num) {
+        Task task = tasks[num - 1];
+        task.markAsDone();
+        System.out.println("    ____________________________________________________________\n" +
+                "     Nice! I've marked this task as done: \n" +
+                "       " + task + "\n" +
+                "    ____________________________________________________________\n");
     }
 
     static public void store(String str) {
@@ -30,7 +40,7 @@ public class Duke {
             int idx = 1;
             for (int i = 0; i < numTask; i++) {
                 Task task = tasks[idx - 1];
-                printList += idx + ". " + task + "\n    ";
+                printList += idx + "." + task + "\n    ";
                 if (i != numTask - 1) {
                     printList += " ";
                 }
