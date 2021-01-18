@@ -8,6 +8,7 @@ public class Duke {
     //user commands
     private final static String listCommand = "list";
     private final static String doneCommand = "done";
+    private final static String deleteCommand = "delete";
     private final static String exitCommand = "bye"; //only command that will end chat
     private final static String ToDos = "todo"; //tasks without any date/time attached to it
     private final static String Deadlines = "deadline"; //tasks that need to be done before a specific date/time
@@ -62,12 +63,22 @@ public class Duke {
             int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
             try {
                 updateTaskStatus(taskIndex);
-                storeTask();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(
                         "\n___________________________________________________________________\n"
-                        + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
-                        + "___________________________________________________________________\n");
+                                + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
+                                + "___________________________________________________________________\n");
+            }
+
+        } else if (description.toLowerCase().contains(deleteCommand)) {
+            int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
+            try {
+                Delete(taskIndex);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(
+                        "\n___________________________________________________________________\n"
+                                + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
+                                + "___________________________________________________________________\n");
             }
 
         } else if (description.toLowerCase().contains(Deadlines)) {
@@ -177,6 +188,16 @@ public class Duke {
                 }
             }
         }
+    }
+
+    public static void Delete(Integer index) {
+        System.out.println("____________________________________________________________\n"
+                + "Noted. I've removed this task:\n"
+                + taskList.get(index - 1).toString()
+                + "\n____________________________________________________________\n");
+
+        taskList.remove(index - 1);
+
     }
 
 
