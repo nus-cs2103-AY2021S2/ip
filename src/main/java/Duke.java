@@ -1,5 +1,7 @@
 import main.java.Echo;
+import main.java.ListManager;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Duke {
@@ -9,20 +11,24 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        //System.out.println("Hello from\n" + logo);
 
         Scanner scanner = new Scanner(System.in);
-        Echo DukeEchoer = new Echo();
+        ListManager listManager = new ListManager();
 
-        System.out.println(DukeEchoer.DukeResponse("Hello! I'm Duke\n" + "     What can I do for you?"));
-
+        System.out.println(listManager.defaultFormatting("Hello! I'm Duke\n" + "     What can I do for you?"));
         String userinput = scanner.nextLine();
 
         while ( !userinput.equals("bye")){
-            System.out.println(DukeEchoer.DukeResponse(userinput));
+            if (userinput.equals("list")){
+                System.out.println(listManager.returnTaskList());
+            }else{
+                listManager.addTask(userinput);
+                System.out.println(listManager.defaultFormatting("added: " + userinput));
+            }
             userinput = scanner.nextLine();
         }
 
-        System.out.println(DukeEchoer.DukeResponse("Bye. Hope to see you again soon!"));
+        System.out.println(listManager.defaultFormatting("Bye. Hope to see you again soon!"));
     }
 }
