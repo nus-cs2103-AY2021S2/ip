@@ -16,7 +16,7 @@ public class Duke {
     /**
      * Duke stored task list.
      */
-    public ArrayList<String> taskList;
+    public ArrayList<Task> taskList;
 
     /**
      * Instantiates a new duke.
@@ -35,24 +35,38 @@ public class Duke {
      * @return integer. 0 represents an terminating entry, 1 represents a continuing entry.
      */
     public int parse(String input) {
-        switch(input) {
+        String[] parsedInput = input.split("\\s+");
+        switch(parsedInput[0]) {
             case ("blah"):
                 this.currentMessage = "blah";
                 break;
             case ("list"):
                 StringBuilder currList = new StringBuilder();
                 for (int i = 0; i < taskList.size(); i++) {
-                    String currStr = (i+1) + ". " + taskList.get(i) + "\n";
+                    Task currTask = taskList.get(i);
+                    String currStr = (i+1) + ". [" + currTask.getStatusIcon()
+                            + "] " + currTask.description + "\n";
                     currList.append(currStr);
                 }
                 this.currentMessage = currList.toString()
                         .substring(0, currList.toString().length() - 1);
                 break;
+            case ("done"):
+                int index = Integer.parseInt(parsedInput[1]);
+                if (index >= taskList.size()) {
+                    this.currentMessage = "Oops! Task not found, please try again.";
+                    break;
+                }
+                Task currTask = taskList.get(index);
+                currTask.markAsDone();
+                this.currentMessage = "Sweet! I've marked this task as done:\n"
+                        + "[" + currTask.getStatusIcon() + "] " + currTask.description;
+                break;
             case ("bye"):
                 this.currentMessage = "Good bye. Hope to see you again soon!";
                 return 0;
             default:
-                taskList.add(input);
+                taskList.add(new Task(input));
                 this.currentMessage = "added: " + input;
         }
         return 1;
