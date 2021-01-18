@@ -29,19 +29,16 @@ public class DukeBot {
             case "done":
                 output = markDoneTask(Integer.parseInt(commandStr[1]));
                 break;
-            case "todo":
-            case "deadline":
-            case "event":
+            case "todo": case "deadline": case "event":
                 this.numTasks++;
-                output = handleTask(taskAction, commandStr);
+                output = handleNewTask(taskAction, commandStr);
                 break;
             case "delete":
                 this.numTasks--;
                 output = handleDeleteTask(Integer.parseInt(commandStr[1]));
                 break;
             default:
-                DukeException exception = new DukeException("invalid input", "");
-                output = BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
+                output = handleInvalidInput();
                 break;
         }
         System.out.println(output);
@@ -66,7 +63,7 @@ public class DukeBot {
         return currText.toString();
     }
 
-    public String handleTask(String taskAction, String[] commandStr) {
+    public String handleNewTask(String taskAction, String[] commandStr) {
         Task newTask;
         StringBuilder description = new StringBuilder();
         List<String> taskDetails =  Arrays.asList(commandStr);
@@ -74,6 +71,7 @@ public class DukeBot {
 
         if(!taskAction.equals("todo")) {
             String[] result = handleEventDeadLine(taskDetails);
+
             if(taskAction.equals("event")) {
                 newTask = new Event(result[0], result[1]);
             } else {
@@ -92,9 +90,8 @@ public class DukeBot {
             return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
         } else {
             this.taskList.add(newTask);
-            currText +=  "\t  " + newTask.toString() + "\n\t Now you have "
+            return currText +  "\t  " + newTask.toString() + "\n\t Now you have "
                     + this.numTasks + " tasks in the list.\n" + BORDER;
-            return currText;
         }
     }
 
@@ -129,5 +126,10 @@ public class DukeBot {
                 "\t  " + deleteTask.toString() + "\n\t Now you have "
                 + this.numTasks + " tasks in the list.\n" + BORDER;
 
+    }
+
+    public String handleInvalidInput() {
+        DukeException exception = new DukeException("invalid input", "");
+        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 }
