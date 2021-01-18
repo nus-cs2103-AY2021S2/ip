@@ -26,8 +26,20 @@ public class Duke {
         }
     }
 
+    private static boolean isByeCommand(String command) {
+        return command.equals(Commands.BYE.getCommand());
+    }
+
+    private static boolean isListCommand(String command) {
+        return command.equals(Commands.LIST.getCommand());
+    }
+
     private static boolean isDoneCommand(String command) {
         return command.equals(Commands.DONE.getCommand());
+    }
+
+    private static boolean isDeleteCommand(String command) {
+        return command.equals(Commands.DELETE.getCommand());
     }
 
     private static boolean checkValidCommand(String command) {
@@ -64,9 +76,20 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done:\n" + taskList.get(pos));
     }
 
-    private static void doneTask(String taskIndex) throws NumberFormatException, IndexOutOfBoundsException {
-        int pos = Integer.parseInt(taskIndex) - 1;
-        setTaskDone(pos);
+    private static int calcListPos(String taskIndex) throws NumberFormatException {
+        return Integer.parseInt(taskIndex) - 1;
+    }
+
+    private static void doneTask(String taskIndex) throws IndexOutOfBoundsException {
+        setTaskDone(calcListPos(taskIndex));
+    }
+
+    private static void deleteTask(String taskIndex) throws IndexOutOfBoundsException {
+        int pos = calcListPos(taskIndex);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(taskList.get(pos));
+        taskList.remove(pos);
+        printNumTasksInList();
     }
 
     private static void addTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
@@ -74,6 +97,10 @@ public class Duke {
         Task task = defineTask(command, taskInputAndDate);
         taskList.add(task);
         System.out.println("Got it. I've added this task:\n" + task);
+        printNumTasksInList();
+    }
+
+    private static void printNumTasksInList() {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
@@ -81,20 +108,24 @@ public class Duke {
         introduction();
         while (scanner.hasNextLine()) {
             String command = scanner.next();
-            if (command.equals(Commands.BYE.getCommand())) {
+            if (isByeCommand(command)) {
                 endProgram();
                 break;
-            } else if (command.equals(Commands.LIST.getCommand())) {
+            } else if (isListCommand(command)) {
                 printList();
             } else {
                 String taskInput = scanner.nextLine();
                 String[] taskInputAndDate = taskInput.split("/");
                 String taskDescription = taskInputAndDate[0].trim();
-                if (isDoneCommand(command)) {
+                if (isDoneCommand(command) || isDeleteCommand(command)) {
                     try {
-                        doneTask(taskDescription);
+                        if (isDoneCommand(command)) {
+                            doneTask(taskDescription);
+                        } else {
+                            deleteTask(taskDescription);
+                        }
                     } catch (NumberFormatException numEx) {
-                        System.err.println("'done' is command word; please pass a numerical index or start your task"
+                        System.err.println("'" + command + "' is command word; please pass a numerical index or start your task"
                                 + " with another word!");
                     } catch (IndexOutOfBoundsException arrEx) {
                         System.err.println("Please pass a valid index!");
