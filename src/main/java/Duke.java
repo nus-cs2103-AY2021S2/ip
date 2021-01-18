@@ -31,26 +31,7 @@ public class Duke {
             System.out.println("------------------------------------");
 
             input = sc.nextLine();
-
-            //program exits on bye
-            if (input.equals("bye")) {
-                command.exit();
-            //program shows entered tasks on list
-            } else if (input.equals("list")) {
-                command.list(tasks);
-            //program marks task as complete on done
-            } else if (input.startsWith("done")) {
-                command.done(input, tasks);
-            //program removes task on delete
-            } else if (input.startsWith("delete")) {
-                command.delete(input, tasks);
-            //program list help commands
-            } else if (input.equals("help")) {
-                command.help();
-            //program tries to add task otherwise
-            } else {
-                command.add(input, tasks);
-            }
+            command.parseInput(input, tasks);
 
             System.out.println("------------------------------------");
         }

@@ -5,19 +5,56 @@ import java.util.HashMap;
  * The Command class handles the logic of all allowed user commands for Duke.
  */
 public class Command {
+    private enum Cmd {
+        BYE,
+        LIST,
+        DONE,
+        TODO,
+        DEADLINE,
+        EVENT,
+        DELETE,
+        HELP
+    }
 
     //list command usage, ideally store in json file
     private final static HashMap<String, String> cmdInfo = new HashMap<>();
 
     public Command() {
-        cmdInfo.put("bye", "bye | Description: exits the program");
-        cmdInfo.put("list", "list | Description: list all entered tasks");
-        cmdInfo.put("done", "done <task index> | Description: marks by index a given task as done");
-        cmdInfo.put("todo", "todo <name> | Description: adds a new todo task");
-        cmdInfo.put("deadline", "deadline <name> /by <end date> | Description: adds a new deadline task");
-        cmdInfo.put("event", "event <name> /at <start date - end date> | Description: adds a new event task");
-        cmdInfo.put("delete", "delete <task index> | Description: delete by index a given task");
-        cmdInfo.put("help", "help | Description: list this help menu");
+        cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
+        cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
+        cmdInfo.put(Cmd.DONE.toString(), "done <task index> | Description: marks by index a given task as done");
+        cmdInfo.put(Cmd.TODO.toString(), "todo <name> | Description: adds a new todo task");
+        cmdInfo.put(Cmd.DEADLINE.toString(), "deadline <name> /by <end date> | Description: adds a new deadline task");
+        cmdInfo.put(Cmd.EVENT.toString(), "event <name> /at <start date - end date> | Description: adds a new event task");
+        cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
+        cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
+    }
+
+    /**
+     * Parses input from user to determine action to take.
+     * @param input input provided by user
+     * @param tasks list of tasks entered by user
+     */
+    public void parseInput(String input, ArrayList<Task> tasks) {
+        //program exits on bye
+        if (input.toUpperCase().equals(Cmd.BYE.toString())) {
+            exit();
+            //program shows entered tasks on list
+        } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
+            list(tasks);
+            //program marks task as complete on done
+        } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
+            done(input, tasks);
+            //program removes task on delete
+        } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
+            delete(input, tasks);
+            //program list help commands
+        } else if (input.toUpperCase().equals(Cmd.HELP.toString())) {
+            help();
+            //program tries to add task otherwise
+        } else {
+            add(input, tasks);
+        }
     }
 
     /**
@@ -41,7 +78,10 @@ public class Command {
         //attempt to create a task, inform user if input is invalid
         try {
             taskType = parsedString[0];
-            if (!taskType.equals("todo") && !taskType.equals("deadline") && !taskType.equals("event")) {
+            if (!taskType.toUpperCase().equals(Cmd.TODO.toString())
+                && !taskType.toUpperCase().equals(Cmd.DEADLINE.toString())
+                && !taskType.toUpperCase().equals(Cmd.EVENT.toString()))
+            {
                 throw new DukeException("Invalid action, type 'help' for more options");
             }
         } catch (DukeException e) {
@@ -54,18 +94,18 @@ public class Command {
 
         try {
             taskDetails = parsedString[1];
-            switch (taskType) {
-                case "todo":
+            switch (Cmd.valueOf(taskType.toUpperCase())) {
+                case TODO:
                     taskName = taskDetails.trim();
                     task = new ToDo(Task.numTasks + 1, taskName, "incomplete");
                     break;
-                case "deadline":
+                case DEADLINE:
                     parsedTaskDetails = taskDetails.split("/by");
                     taskName = parsedTaskDetails[0].trim();
                     String endDate = parsedTaskDetails[1].trim();
                     task = new Deadline(Task.numTasks + 1, taskName, "incomplete", endDate);
                     break;
-                case "event":
+                case EVENT:
                     parsedTaskDetails = taskDetails.split("/at");
                     taskName = parsedTaskDetails[0].trim();
                     String startEndDate = parsedTaskDetails[1].trim();
@@ -77,7 +117,7 @@ public class Command {
             tasks.add(task);
             System.out.print("Got it! I have added this task:\n" + task + "\nYou have " + Task.numTasks + " task(s) now!\n");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for " + taskType + ": " + cmdInfo.get(taskType));
+            System.out.println("Usage for " + taskType + ": " + cmdInfo.get(taskType.toUpperCase()));
         }
     }
 
@@ -102,7 +142,7 @@ public class Command {
         try {
             taskId = Integer.parseInt(parsedString[1]);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for done: " + cmdInfo.get("done"));
+            System.out.println("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
             return;
         }
 
@@ -130,7 +170,7 @@ public class Command {
         try {
             taskId = Integer.parseInt(parsedString[1]);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for delete: " + cmdInfo.get("delete"));
+            System.out.println("Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
             return;
         }
 
