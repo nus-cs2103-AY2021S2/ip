@@ -13,7 +13,7 @@ public class Duke {
         ArrayList<Task> taskLst = new ArrayList<>();
         while(true) {
             String str = sc.nextLine();
-            Task task = new Task(str);
+            Task task;
             String[] components = str.split(" ");
             if(str.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -33,8 +33,50 @@ public class Duke {
                 System.out.println("  " + taskLst.get(index).toString());
             }
             else {
+                if(components[0].equals("deadline")) {
+                    StringBuilder desc = new StringBuilder(), time = new StringBuilder();
+                    int i = 1;
+                    while(!components[i].equals("/by")) {
+                        desc.append(components[i] + " ");
+                        i++;
+                    }
+                    i++;
+                    while(i < components.length) {
+                        time.append(components[i] + " ");
+                        i++;
+                    }
+                    time.deleteCharAt(time.length() - 1);
+                    task = new Deadline(desc.toString(), time.toString());
+                }
+                else if (components[0].equals("todo")) {
+                    StringBuilder desc = new StringBuilder();
+                    int i = 1;
+                    while(i < components.length) {
+                        desc.append(components[i] + " ");
+                        i++;
+                    }
+                    task = new ToDo(desc.toString());
+                }
+                else if (components[0].equals("event")) {
+                    StringBuilder desc = new StringBuilder(), time = new StringBuilder();
+                    int i = 1;
+                    while(!components[i].equals("/at")) {
+                        desc.append(components[i] + " ");
+                        i++;
+                    }
+                    i++;
+                    while(i < components.length) {
+                        time.append(components[i] + " ");
+                        i++;
+                    }
+                    time.deleteCharAt(time.length() - 1);
+                    task = new Event(desc.toString(), time.toString());
+                }
+                else task = new Task(str);
                 taskLst.add(task);
-                System.out.println("added: " + task.getTask());
+                System.out.println("Got it. Now I have added this " +
+                        "task:\n" + "  " + task.toString() + "\n" +
+                        "Now you have " + taskLst.size() + " tasks in the list.");
             }
             System.out.println(sep);
         }
