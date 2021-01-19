@@ -1,3 +1,4 @@
+// TODO: Change to abstract once Task is not required
 public class Task {
     private final String taskName;
     private boolean isDone;

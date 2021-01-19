@@ -10,6 +10,16 @@ public class Duke {
         printIndentOutput("_____________________________________________________");
     }
 
+    private static boolean checkMatchString(String line, String match) {
+        return line.length() >= match.length() && line.substring(0, match.length()).equals(match);
+    }
+
+    private static void printTaskListStatus(ArrayList<Task> tasks, Task curTask) {
+        printIndentOutput("Got it. I've added this task:");
+        printIndentOutput("   " + curTask);
+        printIndentOutput("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -39,15 +49,36 @@ public class Duke {
                 for (int i = 0; i < tasks.size(); i++) {
                     printIndentOutput((i + 1) + ". " + tasks.get(i));
                 }
-            } else if (line.length() >= 5 && line.substring(0, 5).equals("done ")) {
-                int index = Integer.parseInt(line.split(" ")[1]);
+            } else if (checkMatchString(line, "done ")) {
+                int index = Integer.parseInt(line.split(" ", 2)[1]);
                 Task curTask = tasks.get(index - 1);
                 curTask.markAsDone();
                 printIndentOutput("Nice! I've marked this task as done:");
                 printIndentOutput("   " + curTask);
+            } else if (checkMatchString(line, "todo ")) {
+                String taskName = line.split(" ", 2)[1];
+                Task curTask = new Todo(taskName);
+                tasks.add(curTask);
+                printTaskListStatus(tasks, curTask);
+            } else if (checkMatchString(line, "deadline ")) {
+                // TODO: Handle error
+                String[] commandArgs = line.split(" ", 2)[1].split(" /by ", 2);
+                String taskName = commandArgs[0];
+                String deadline = commandArgs[1];
+                Task curTask = new Deadline(taskName, deadline);
+                tasks.add(curTask);
+                printTaskListStatus(tasks, curTask);
+            } else if (checkMatchString(line, "event ")) {
+                String[] commandArgs = line.split(" ", 2)[1].split(" /at ", 2);
+                String taskName = commandArgs[0];
+                String date = commandArgs[1];
+                Task curTask = new Event(taskName, date);
+                tasks.add(curTask);
+                printTaskListStatus(tasks, curTask);
             } else {
+                Task curTask = new Task(line);
                 tasks.add(new Task(line));
-                printIndentOutput("added: " + line);
+                printTaskListStatus(tasks, curTask);
             }
 
             printHorizontalLine();
