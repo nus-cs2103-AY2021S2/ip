@@ -1,3 +1,4 @@
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SwitchBlade {
@@ -17,10 +18,26 @@ public class SwitchBlade {
             input = sc.nextLine();
 
         while (!input.equalsIgnoreCase("bye")) {
-            if (!input.equalsIgnoreCase("list"))
-                taskList.addTask(input);
-            else
-                System.out.println(taskList.toString());
+            String command = input.split("\\s+")[0];
+
+            switch (command.toLowerCase(Locale.ROOT)) {
+                case "list":
+                    System.out.println(taskList.toString());
+                    break;
+                case "done":
+                    if (input.split("\\s+").length < 3) {
+                        int index = Integer.parseInt(input.split("\\s+")[1]);
+                        taskList.markCompleted(index - 1);
+                    } else {
+                        System.out.println("Too many arguments, please give me just 1 task to mark as completed");
+                    }
+                    break;
+
+                default:
+                    taskList.addTask(input);
+                    break;
+
+            }
 
             if (sc.hasNext())
                 input = sc.nextLine();
