@@ -58,17 +58,35 @@ public class Duke {
                     int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
                     Task doneTask = taskList.get(taskId).setDone();
                     System.out.println("Great~! Task completed:");
-                    System.out.println("    " + "[" + doneTask.getStatusIcon() + "] " + doneTask);
+                    System.out.println("    " + doneTask);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Hey!!! You made an error in the number >:(");
                     System.out.println("Check and try it again!");
                 }
-            } else {
-                taskList.add(new Task(inputString));
-                System.out.println("    added: " + inputString);
-            }
-        }
+            } else if (inputString.startsWith("todo")) {
+                    taskList.add(new Todo(inputString.substring(5)));
+                    System.out.println("    Wakarimashita! Task added to list:");
+                    System.out.println("      " + taskList.get(taskList.size() - 1));
+                    System.out.println("    The size of your task list is now: " + taskList.size());
+                } else if (inputString.startsWith("event")) {
+                    String[] eventString = inputString.split("/at");
+                    String taskString = eventString[0].substring(6);
+                    String eventTime = eventString[1];
+                    taskList.add(new Event(taskString, eventTime));
+                    System.out.println("    Wakarimashita! Task added to list:");
+                    System.out.println("      " + taskList.get(taskList.size() - 1));
+                    System.out.println("    The size of your task list is now: " + taskList.size());
+                } else if (inputString.startsWith("deadline")) {
+                    String[] eventString = inputString.split("/by");
+                    String taskString = eventString[0].substring(9);
+                    String deadlineTime = eventString[1];
+                    taskList.add(new Deadline(taskString, deadlineTime));
+                    System.out.println("    Wakarimashita! Task added to list:");
+                    System.out.println("      " + taskList.get(taskList.size() - 1));
+                    System.out.println("    The size of your task list is now: " + taskList.size());
+                }
 
+            }
     }
 
     /**
@@ -82,7 +100,7 @@ public class Duke {
         System.out.println("    Tasks in your list are~: ");
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            System.out.println("    " + (i + 1) + ". [" + task.getStatusIcon() + "] " + task);
+            System.out.println("    " + (i + 1) + "." + task);
         }
     }
 
@@ -93,5 +111,4 @@ public class Duke {
         System.out.println("    Hope you had an enjoyable experience! Good-bye~");
         System.exit(0);
     }
-
 }
