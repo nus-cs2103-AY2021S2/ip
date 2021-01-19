@@ -60,7 +60,7 @@ public class Duke {
         System.out.println("     What can I do for you?");
         System.out.println("     _______________________________________\n");
 
-        do {
+        while (sc.hasNext()) {
             userInput = sc.next();
             System.out.println("     _______________________________________");
             if (userInput.equals("list")) {
@@ -70,17 +70,16 @@ public class Duke {
                 blah();
             } else if (userInput.equals("bye")) {
                 bye();
+                System.out.println("     _______________________________________\n");
+                break;
             } else if (userInput.equals("done")) {
                 done(userTasks.get(sc.nextInt() - 1));
             } else {
                 System.out.println("     Got it. I've added this task:");
                 addTask(userInput, userTasks, sc);
             }
-
             System.out.println("     _______________________________________\n");
-
-        } while(!userInput.equals("bye"));
+        }
         sc.close();
-
     }
 }
