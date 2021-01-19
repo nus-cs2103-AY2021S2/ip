@@ -1,12 +1,15 @@
 package duke.main;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
 import duke.command.CommandOption;
 
+/**
+ * Main class for project duke.
+ * Takes in an user command (within the exclusive list) and react accordingly.
+ */
 public class Duke {
     private static final String[] greet = {
             " ____        _        ",
@@ -24,13 +27,8 @@ public class Duke {
             "    ____________________________________________________________\n";
     private static final String indent = "     ";
 
-    private static ArrayList<String> storage = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
-    /**
-     * Main class for project duke.
-     * Takes in an user command (within the exclusive list) and react accordingly.
-     * @param args normal input as per other Java programmes
-     */
     public static void main(String[] args) {
         System.out.println(parseMessage(greet));
         Scanner sc = new Scanner(System.in);
@@ -42,35 +40,49 @@ public class Duke {
         System.out.println(parseMessage(exit));
     }
 
-
     /**
-     * 1. Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
+     * 1. Takes in the first word from user input and carries out relevant actions based on
+     *      the word by printing out corresponding replies.
+     * 2. A command is NOT case sensitive.
+     *      For example, "LIST"/"list"/"List" will have the same effect.
+     * 3. However, no additional whitespaces should be entered.
+     *      For example, "LIST "/"list "/"List " will not work.
+     * 4. Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
      *      based on discussion of #Issue 14 in forum.
      *      Credit to @samuelfangjw who mentioned it first.
-     * 2. Takes in the first word from user input and carries out relevant actions based on
-     *      the word by printing out corresponding replies.
-     * 3. A command is NOT case sensitive.
-     *      For example, "LIST"/"list"/"List" will have the same effect.
-     * 4. However, no additional whitespaces should be entered.
-     *      For example, "LIST "/"list "/"List " will not work.
-     *
      * @param message first (String) word from user input
      */
     private static void printReply(String message) {
+        String[] msgArray = message.split(" ", 2);
+        String commandWord = msgArray[0];
+        String otherInfo = null;
+        if (msgArray.length > 1) {
+            otherInfo = msgArray[1];
+        }
+
+        System.out.print(border);
         try {
-            CommandOption command = CommandOption.valueOf(message.toUpperCase(Locale.ROOT));
+            CommandOption command = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
             switch (command) {
                 case LIST:
-                    System.out.println(parseMessage(storage));
+                    printList();
+                    break;
+                case DONE:
+                    completeTask(otherInfo);
                     break;
             }
         }
         catch (IllegalArgumentException e) {
-            System.out.println(parseMessage(new String[]{"added: " + message}));
-            storage.add(message);
+            addTask(message);
         }
+        System.out.println(border);
     }
 
+    /**
+     * Returns the formatted message (specifically, greet and bye) to be printed.
+     * @param messages an array of strings, main body of the message to be formatted.
+     * @return the formatted message (specifically, greet and bye) to be printed.
+     */
     private static String parseMessage(String[] messages) {
         StringBuilder res = new StringBuilder(border);
         for (String message : messages) {
@@ -80,14 +92,61 @@ public class Duke {
         return res.toString();
     }
 
-    private static String parseMessage(List<String> messages) {
-        StringBuilder res = new StringBuilder(border);
-        for (int i = 0; i < messages.size(); i++) {
-            String message = messages.get(i);
-            int index = i + 1;
-            res.append(indent).append(index + ".").append(message).append("\n");
+    private static void printList() {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            res.append(indent)
+                    .append(i+1 + ".")
+                    .append("[" + task.getStatusIcon() + "] ")
+                    .append(task.getDescription())
+                    .append("\n");
         }
-        res.append(border);
-        return res.toString();
+        System.out.print(res.toString());
+    }
+
+    /**
+     * Complete the task with the given index and print the confirmation message.
+     *
+     * Two possible errors are handled. Namely, they are:
+     *      1. taskIndex is not an integer;
+     *      2. taskIndex is out of bound.
+     * @param taskIndex taskIndex from user input, in String.
+     */
+    private static void completeTask(String taskIndex) {
+        int index;
+        Task task;
+        try{
+            index = Integer.parseInt(taskIndex) - 1;
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Task index entered is not an integer");
+            return;
+        }
+
+        try {
+            task = tasks.get(index);
+            task.markAsDone();
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Task index is out of bound");
+            return;
+        }
+
+        String res = indent +
+                "Wonderful! You have completed this task:\n" +
+                indent +
+                "[" + task.getStatusIcon() + "] " +
+                task.getDescription();
+        System.out.println(res);
+    }
+
+    private static void addTask(String taskDescription) {
+        Task task = new Task(taskDescription);
+        tasks.add(task);
+
+        String res = indent +
+                "Added: " +
+                taskDescription;
+        System.out.println(res);
     }
 }
