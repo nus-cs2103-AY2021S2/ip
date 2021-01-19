@@ -38,13 +38,17 @@ public class Duke {
         Duke chatbot = new Duke();
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Duchess: Hello, Duchess here. What can i do for you?");
+        boolean readOn = true;
 
-        String command = sc.nextLine();  // Read user input
-        while (!command.equals("bye")) {
+        while (readOn) {
+            String command = sc.nextLine();  // Read user input
             String arr[] = command.split(" ", 2);
             String action = arr[0];
             try {
                 switch (action) {
+                    case "bye" :
+                        readOn = false;
+                        break;
                     case "list":
                         chatbot.printList();
                         break;
@@ -96,10 +100,8 @@ public class Duke {
             } catch (DukeExceptions e) {
                 System.out.println((e.getMessage()));
             }
-            String nextCommand = sc.nextLine();
-            command = nextCommand;
         }
-        System.out.println("Bye, Have an awesome day!");
+        System.out.println("Duchess: Bye, Have an awesome day!");
         sc.close();
     }
 }

@@ -1,24 +1,28 @@
 Duchess: Hello, Duchess here. What can i do for you?
 Duchess: Great! I have added:
-[T] workout
+[T] [ ] Workout
 U have 1 tasks in the list now :)
-Here are the tasks in your list:
-1. [T] workout
 Duchess: When will this event be?
 Duchess: Great! I have added:
-[E] meeting (at: Monday 2-4pm)
+[E] [ ] Meeting (at: Monday 2-4pm)
 U have 2 tasks in the list now :)
-Duchess: Woohoo I've checked off this task:
-[E] meeting (at: Monday 2-4pm) ✓
 Here are the tasks in your list:
-1. [T] workout
-2. [E] meeting (at: Monday 2-4pm) ✓
+1. [T] [ ] Workout
+2. [E] [ ] Meeting (at: Monday 2-4pm)
 Duchess: When does this have to be done by?
 Duchess: Great! I have added:
-[D] submit homework (by: Saturday 11pm)
+[D] [ ] Homework (by: Saturday)
 U have 3 tasks in the list now :)
+Duchess: Woohoo I've checked off this task:
+[T] [X] Workout
 Here are the tasks in your list:
-1. [T] workout
-2. [E] meeting (at: Monday 2-4pm) ✓
-3. [D] submit homework (by: Saturday 11pm)
-
+1. [T] [X] Workout
+2. [E] [ ] Meeting (at: Monday 2-4pm)
+3. [D] [ ] Homework (by: Saturday)
+Duchess: As requested, i have removed this task:
+[E] [ ] Meeting (at: Monday 2-4pm)
+U have 2 tasks in the list now :)
+Here are the tasks in your list:
+1. [T] [X] Workout
+2. [D] [ ] Homework (by: Saturday)
+Duchess: Bye, Have an awesome day!

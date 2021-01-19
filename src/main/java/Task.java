@@ -14,10 +14,10 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (completed ? "\u2713" : ""); //return tick or blank
+        return (completed ? "X" : " "); //return tick or blank
     }
 
     public String toString() {
-        return this.name ;
+        return "[" + this.getStatusIcon() + "] " + this.name ;
     }
 }
