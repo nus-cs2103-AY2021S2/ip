@@ -75,7 +75,7 @@ public class Duke {
                 currentTask.markAsDone();
 
                 // print out relevant information
-                System.out.println("    Nice! I've marked this task as done: ");
+                System.out.println("    Nice! I've marked this task as done:");
                 System.out.println("     " + currentTask.toString());
 
             } else if (userInput.startsWith("todo")){
