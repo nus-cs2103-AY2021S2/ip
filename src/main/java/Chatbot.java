@@ -29,11 +29,12 @@ public class Chatbot {
         // Event
         else if (userMessage.startsWith("event")) doAddEvent(userMessage);
 
+        else if (userMessage.startsWith("delete")) doDelete(userMessage);
+
         else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
-
-
+        
     // These will only be used in the response methods.
     private void doList(String userMessage){
         int numOfTasks = Task.getNumOfTasks();
@@ -75,7 +76,6 @@ public class Chatbot {
 
             task.markAsDone();
 
-
         }
         catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! The description of a done is wrong.");
@@ -86,7 +86,6 @@ public class Chatbot {
     }
 
     private void doAddTodo(String userMessage) throws DukeException{
-
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");
@@ -135,6 +134,35 @@ public class Chatbot {
             String botMessage = builder.toString();
             Chatbox.chatbotDisplay(botMessage);
         }
+
+    private void doDelete(String userMessage) throws DukeException{
+        String [] arr = userMessage.split("\\s+");
+        //Exception: If the input is like delete 1 2 3:
+        if (arr.length > 2) throw new DukeException("OOPS!!! The description of a delete is wrong.");
+        try {
+            // Possible exceptions like delete A.
+            int taskIndex = Integer.valueOf(arr[1]) - 1;
+            LinkedList<Task> tasks = Task.getTasks();
+            Task task = tasks.get(taskIndex);
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("Noted. I've removed this task:\n");
+            builder.append("["+task.getStatusIcon()+"]"+task.getTaskName());
+            builder.append("Now you have " + Task.getNumOfTasks() + "tasks in the list.");
+            String botMessage = builder.toString();
+            Chatbox.chatbotDisplay(botMessage);
+
+            task.delete();
+
+        }
+        catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! The description of a delete is wrong.");
+        }
+        catch (IndexOutOfBoundsException e){
+            throw new DukeException("OOPS!!! The event index of a delete is wrong.");
+        }
+    }
+
 
     public boolean wantExit(String userMessage){
         return userMessage.equals("bye") ? true:false;

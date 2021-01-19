@@ -44,6 +44,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public void delete(){
+        int taskIndex = Tasks.indexOf(this);
+        Tasks.remove(taskIndex);
+        numOfTasks -= 1;
+    }
 
 
 }
