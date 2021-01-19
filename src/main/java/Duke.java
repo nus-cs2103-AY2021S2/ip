@@ -1,57 +1,34 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
-    static ArrayList<Task> list = new ArrayList<Task>();
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        TaskManager taskManager = new TaskManager();
+        CommandMap commands = new CommandMap(new CommandDecorator(new AddCommand(taskManager)));
+        ICommand printCommand = new CommandDecorator(new PrintCommand());
+        commands.add("done", new CommandDecorator(new DoneCommand(taskManager)));
+        commands.add("list", new CommandDecorator(new PrintListCommand(taskManager)));
+        commands.add("bye", new CommandDecorator(new ExitCommand(taskManager)));
+
+        printCommand.execute(getIntro());
+        while (!taskManager.hasExited()) {
+            String input = scanner.nextLine();
+            input = input.replace("\n", "");
+            String[] parsedInput = input.split(" ");
+            commands.get(parsedInput[0]).execute(parsedInput);
+        }
+    }
+
+    private static String[] getIntro(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        boolean hasExited = false;
-        Scanner scanner = new Scanner(System.in);
-        String intro = "Hello I'm\n" + logo +"\nWhat can I do for you?\n";
+        String intro ="Hello I'm\n" + logo +"\nWhat can I do for you?\n";
 
-        printWithBorders(intro);
-        while (!hasExited) {
-            String input = scanner.nextLine();
-            input = input.replace("\n", "");
-            if (input.matches("bye")) {
-                hasExited = true;
-                printWithBorders("Bye. Hope to see you again soon");
-            } else if (input.matches("list")) {
-                printWithBorders(listToString());
-            }
-            else {
-                addTask(input);
-                printWithBorders("added: "+input);
-            }
-
-        }
+        String[] introArray = new String[]{intro};
+        return introArray;
     }
-
-    public static void printWithBorders(String string) {
-        System.out.println("-".repeat(25));
-        System.out.println(string);
-        System.out.println("-".repeat(25));
-    }
-    private static String listToString() {
-        String content="";
-        Integer count = 1;
-        for(Task t:list) {
-            content += count.toString() + ".";
-            content += t.getContent();
-            content += "\n";
-            count++;
-        }
-        return content;
-    }
-    private static void addTask(String content) {
-        list.add(new Task(content));
-    }
-
-
-
 }
