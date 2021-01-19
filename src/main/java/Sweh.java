@@ -36,49 +36,28 @@ public class Sweh {
         Optional<String> argOptional = commandArr.length > 1
             ? Optional.of(commandArr[1])
             : Optional.empty();
-        String args;
 
-        switch (command) {
-            case "list":
-                return taskList.listTasks();
-            case "done":
-                try {
+        try {
+            switch (command) {
+                case "list":
+                    return taskList.listTasks();
+                case "done":
                     return taskList.markTaskDone(argOptional);
-                } catch (NoSuchElementException e) {
-                    return e.getMessage();
-                } catch (IndexOutOfBoundsException e) {
-                    return e.getMessage();
-                }
-            case "delete":
-            try {
-                return taskList.deleteTask(argOptional);
-            } catch (NoSuchElementException e) {
-                return e.getMessage();
-            } catch (IndexOutOfBoundsException e) {
-                return e.getMessage();
-            }
-            case "todo":
-                try {
+                case "delete":
+                    return taskList.deleteTask(argOptional);
+                case "todo":
                     return taskList.addTask(ToDo.newInstance(argOptional));
-                } catch (NoSuchElementException e) {
-                    return e.getMessage();
-                }
-            case "deadline":
-                try {
+                case "deadline":
                     return taskList.addTask(Deadline.newInstance(argOptional));
-                } catch (NoSuchElementException e) {
-                    return e.getMessage();
-                }
-            case "event":
-                try {
+                case "event":
                     return taskList.addTask(Event.newInstance(argOptional));
-                } catch (NoSuchElementException e) {
-                    return e.getMessage();
-                }
-            case "bye":
-                return "Bye. See ya again soon!";
-            default:
-                return "Error: Sorry, I didn\'t understand that";
+                case "bye":
+                    return "Bye. See ya again soon!";
+                default:
+                    return "Error: Sorry, I didn\'t understand that";
+            }
+        } catch (NoSuchElementException | IndexOutOfBoundsException e) {
+            return e.getMessage();
         }
     }
 
