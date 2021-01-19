@@ -5,3 +5,48 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm Duke
+What can I do for you?
+------------------------------
+These are the possible commands: "list" "done" "todo" "deadline" "event"
+------------------------------
+------------------------------
+Your list is empty!
+------------------------------
+------------------------------
+Your list is empty!
+------------------------------
+------------------------------
+Your list is empty!
+------------------------------
+------------------------------
+Your todo task has been added: [T][ ] abcde fgh
+You currently have 1 task(s) in the list.
+------------------------------
+------------------------------
+Your deadline task has been added: [D][ ] bobobobo dadada (by: shwepsed)
+You currently have 2 task(s) in the list.
+------------------------------
+------------------------------
+Your event task has been added: [D][ ] event (by: event)
+You currently have 3 task(s) in the list.
+------------------------------
+------------------------------
+Here are the tasks in your list:
+1.[T][ ] abcde fgh
+2.[D][ ] bobobobo dadada (by: shwepsed)
+3.[D][ ] event (by: event)
+------------------------------
+------------------------------
+Swee chai. It's done.
+[D][X] bobobobo dadada (by: shwepsed)
+------------------------------
+------------------------------
+Here are the tasks in your list:
+1.[T][ ] abcde fgh
+2.[D][X] bobobobo dadada (by: shwepsed)
+3.[D][ ] event (by: event)
+------------------------------
+------------------------------
+Bye. Hope to see you again soon!
+------------------------------

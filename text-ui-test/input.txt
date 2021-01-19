@@ -1,0 +1,11 @@
+hi
+list
+done
+done 1
+todo abcde fgh
+deadline bobobobo dadada /by shwepsed
+event event /at event
+list
+done 2
+list
+bye
