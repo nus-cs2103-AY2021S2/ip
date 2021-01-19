@@ -43,7 +43,7 @@
         4.[D][ ] do homework (by: no idea :-p)
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Uh oh, I don't recognise this command. Please try something else.
+      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
       Your tasks:
@@ -73,7 +73,7 @@
       MissingArgumentException: Please include a description and a /by argument for your deadline.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Uh oh, I don't recognise this command. Please try something else.
+      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
       Success. I've added this task:
@@ -102,7 +102,13 @@
       MissingArgumentException: Please include the list item number of the task to mark done.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Uh oh, I don't recognise this command. Please try something else.
+      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+    ______________________________________________
+    ______________________________________________
+      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+    ______________________________________________
+    ______________________________________________
+      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
       Bye. See you again soon!

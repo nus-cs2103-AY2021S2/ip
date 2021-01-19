@@ -52,8 +52,8 @@ public class Duke {
         print(messages);
     }
 
-    // todo make this an exception too
-    private static void handleFirstArg(String oneArg) throws MissingArgumentException {
+    private static void handleOnlyFirstArgGiven(String oneArg)
+            throws MissingArgumentException, UnsupportedCommandException {
         String errMsg = "";
 
         switch (oneArg){
@@ -70,8 +70,7 @@ public class Duke {
             errMsg = "Please include a description and a /by argument for your deadline.";
             break;
         default:
-            errMsg = "Uh oh, I don't recognise this command. Please try something else.";
-            break;
+            throw new UnsupportedCommandException();
         }
 
         throw new MissingArgumentException(errMsg);
@@ -111,13 +110,13 @@ public class Duke {
 
     // parse done, todos, deadline or event commands
     // make enums for supported commands?
-    private static void parseCommand(String userInput) throws MissingArgumentException {
+    private static void parseCommand(String userInput) throws MissingArgumentException, UnsupportedCommandException {
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
 
         // only one word was provided
 
         if (firstSpaceIndex == -1) {
-            handleFirstArg(userInput); // seems like try catch block not necessary, because of throws
+            handleOnlyFirstArgGiven(userInput); // seems like try catch block not necessary, because of throws
             return;
         }
 
@@ -153,21 +152,17 @@ public class Duke {
                 thirdArg = userInput.substring(atIndex + 3).trim();
 
                 addTask(new Event(desc, thirdArg));
+            } else {
+                throw new UnsupportedCommandException();
             }
         } catch (StringIndexOutOfBoundsException e) {
-//            String errMsg = "wrong bounds " + e;
-//            String s = "";
-//            if (desc.equals("")) {
-//                s = "desc empty";
-//            } else if (thirdArg.equals("")) {
-//                s = "thirdarg empty";
-//            }
-
             if (secondCmdIndex == -1) {
                 throw new MissingArgumentException(determineErrMsg(firstWord, 3), e);
             } else if (firstSpaceIndex + 1 > secondCmdIndex - 1) {
                 throw new MissingArgumentException(determineErrMsg(firstWord, 2), e);
             }
+        } catch (UnsupportedCommandException e) {
+            throw e;
         } catch (Exception e) {
             String errMsg = "don't know " + e;
             print(new String[]{errMsg});
@@ -207,7 +202,7 @@ public class Duke {
                 // assumed to be a valid command and have space
                 try {
                     parseCommand(userInput.trim());
-                } catch (MissingArgumentException e) {
+                } catch (MissingArgumentException | UnsupportedCommandException e) {
                     print(new String[]{e.toString()});
                 }
             }
