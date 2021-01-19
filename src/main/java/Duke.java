@@ -3,6 +3,8 @@ import java.util.*;
 public class Duke {
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
+    public static String line2 = ind + "____________________________________________________________\n";
+    public static ArrayList<String> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -20,19 +22,29 @@ public class Duke {
             if (text.equals("bye")) {
                 goodbye();
                 break;
+            } else if(text.equals("list")) {
+                showList();
             } else {
-                echo(text);
+                addItem(text);
             }
         }
         sc.close();
     }
 
-    public static void echo(String echoedText) {
-        System.out.println(line + echoedText + "\n" + line);
+    public static void addItem(String echoedText) {
+        tasks.add(echoedText);
+        System.out.println(line + "added: " + echoedText + "\n" + line);
     }
 
     public static void goodbye() {
         System.out.println(line + "Bye. Kobe hopes to see you again soon!\n" + line);
     }
 
+    public static void showList() {
+        System.out.print(line2);
+        for(int i = 0; i < tasks.size(); i++) {
+            System.out.print(ind + (i+1) + ". " + tasks.get(i) + "\n");
+        }
+        System.out.println(line);
+    }
 }
