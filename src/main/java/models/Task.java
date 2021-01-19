@@ -1,7 +1,6 @@
 package models;
 
-// TODO: Change to abstract once models.Task is not required
-public class Task {
+public abstract class Task {
     private final String taskName;
     private boolean isDone;
 

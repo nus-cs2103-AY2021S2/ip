@@ -1,8 +1,8 @@
 list
-add book
-throw book
+todo add book
+todo throw book
 list
-store book
+todo store book
 list
 done 2
 list
