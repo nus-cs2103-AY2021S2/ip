@@ -17,7 +17,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String text = sc.next();
-//            System.out.println(text);
             if (text.equals("bye")) {
                 goodbye();
                 break;
