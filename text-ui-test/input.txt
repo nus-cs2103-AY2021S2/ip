@@ -1,0 +1,16 @@
+list
+add book
+throw book
+list
+store book
+list
+done 2
+list
+deadline read book /by Sunday
+event book signing /at Monday
+todo buy new book
+list
+done 1
+done 5
+list
+bye
