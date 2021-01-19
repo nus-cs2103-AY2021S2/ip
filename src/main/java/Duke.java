@@ -1,10 +1,12 @@
 import javax.lang.model.type.NullType;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     private static String indentation = "    ";
     private static String horizon = "------------------------------------------------------";
-    private static Task[] taskList = new Task[100];
+    //private static Task[] taskList = new Task[100];
+    private static ArrayList<Task>taskList= new ArrayList<Task>();
     private static void printReply(String reply){
         System.out.println(indentation+horizon);
         switch (reply) {
@@ -18,20 +20,23 @@ public class Duke {
 
             case "list":
                 System.out.println(indentation + "Here are the tasks in your list:");
-                for (int i = 0; i < Task.countTask; i++) {
-                    System.out.println(indentation + (i+1) + "." + taskList[i].getTaskInfo());
+                for (int i = 0; i < taskList.size(); i++) {
+                    System.out.println(indentation + (i+1) + "." + taskList.get(i).getTaskInfo());
                 }
                 break;
             case"error_no_meaning":
                 System.out.println(indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(");
                 break;
             case"error_done_empty":
-                System.out.println(indentation + "OOPS!!! The number of a done cannot be empty :-(");
+            case"error_delete_empty":
+                System.out.println(indentation + "OOPS!!! The number cannot be empty :-(");
                 break;
             case"error_done_no_meaning":
+            case "error_delete_no_meaning":
                 System.out.println(indentation + "OOPS!!! Please input a number of Task :-(");
                 break;
             case"error_done_non_existed_task":
+            case "error_delete_non_existed_task":
                 System.out.println(indentation + "OOPS!!! the Task you choosing isn't existed :-(");
                 break;
             case"error_todo_empty":
@@ -53,8 +58,8 @@ public class Duke {
                 break;
             default:
                 System.out.println(indentation+"Got it. I've added this task:");
-                System.out.println(indentation + taskList[Task.countTask-1].getTaskInfo());
-                System.out.println(indentation + "Now you have "+Task.countTask+" tasks in the list.");
+                System.out.println(indentation + taskList.get(taskList.size()-1).getTaskInfo());
+                System.out.println(indentation + "Now you have "+taskList.size()+" tasks in the list.");
         }
         System.out.println(indentation+horizon);
     }
@@ -62,14 +67,16 @@ public class Duke {
     private  static void printDoneReply(int done){
         System.out.println(indentation+horizon);
         System.out.println(indentation+"Nice! I've marked this task as done:");
-        System.out.println(indentation + (done+1) + "." + taskList[done].getTaskInfo());
+        System.out.println(indentation + (done+1) + "." + taskList.get(done).getTaskInfo());
         System.out.println(indentation+horizon);
     }
-
-    private static void taskAdd(String task){
-         taskList[Task.countTask] = new Todo(task);
+    private  static void printDeleteReply(int done){
+        System.out.println(indentation+horizon);
+        System.out.println(indentation+"Noted. I've removed this task: ");
+        System.out.println(indentation + (done+1) + "." + taskList.get(done).getTaskInfo());
+        System.out.println(indentation+"Now you have "+(taskList.size()-1)+" tasks in the list.");
+        System.out.println(indentation+horizon);
     }
-
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -83,7 +90,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         do {
-            command = scanner.nextLine();
+            command = scanner.nextLine().trim();
             switch (command){
                 case "bye":
                 case "list":
@@ -94,7 +101,7 @@ public class Duke {
                     switch (commandSplit[0]){
                         case "done":
                             try {
-                                taskList[Integer.parseInt(commandSplit[1]) - 1].markAsDone();
+                                taskList.get(Integer.parseInt(commandSplit[1]) - 1).markAsDone();
                                 printDoneReply(Integer.parseInt(commandSplit[1]) - 1);
                             }catch (ArrayIndexOutOfBoundsException e){
                                 printReply("error_done_empty");
@@ -102,6 +109,21 @@ public class Duke {
                                 printReply("error_done_no_meaning");
                             }catch (NullPointerException e){
                                 printReply("error_done_non_existed_task");
+                            }
+                            break;
+                        case "delete":
+                            try {
+                                taskList.get(Integer.parseInt(commandSplit[1]) - 1);
+                                printDeleteReply(Integer.parseInt(commandSplit[1]) - 1);
+                                taskList.remove(Integer.parseInt(commandSplit[1]) - 1);
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_delete_empty");
+                            }catch (NumberFormatException e){
+                                printReply("error_delete_no_meaning");
+                            }catch (NullPointerException e){
+                                printReply("error_delete_non_existed_task");
+                            }catch (IndexOutOfBoundsException e){
+                                printReply("error_delete_non_existed_task");
                             }
                             break;
                         case "todo":
@@ -112,7 +134,7 @@ public class Duke {
                                 break;
                             }
                             command = command.replaceAll("todo"," ").trim();
-                            taskList[Task.countTask] = new Todo(command);
+                            taskList.add(new Todo(command)) ;
                             printReply(command);
                             break;
 
@@ -126,7 +148,7 @@ public class Duke {
                             command = command.replaceAll("deadline"," ").trim();
                             commandSplit = command.split("/by");
                             try{
-                                taskList[Task.countTask] = new Deadline(commandSplit[0].trim(),commandSplit[1].trim());
+                                taskList.add(new Deadline(commandSplit[0].trim(),commandSplit[1].trim()));
                                 printReply(command);
                             }catch (ArrayIndexOutOfBoundsException e){
                                 printReply("error_deadline_by");
@@ -142,7 +164,7 @@ public class Duke {
                             command = command.replaceAll("event"," ").trim();
                             commandSplit = command.split("/at");
                             try {
-                                taskList[Task.countTask] = new Event(commandSplit[0].trim(),commandSplit[1].trim());
+                                taskList.add(new Event(commandSplit[0].trim(),commandSplit[1].trim()));
                                 printReply(command);
                             }catch (ArrayIndexOutOfBoundsException e){
                                 printReply("error_event_at");

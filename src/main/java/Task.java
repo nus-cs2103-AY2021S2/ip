@@ -1,11 +1,9 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    public static int countTask ;
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.countTask++;
     }
 
     public String getStatusIcon() {
