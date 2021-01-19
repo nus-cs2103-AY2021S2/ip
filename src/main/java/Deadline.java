@@ -13,7 +13,7 @@ public class Deadline extends Task {
                 return new Deadline(argArr[0], s.substring(3));
             }
         }
-        return new Deadline(argArr[0], "N/A")
+        return new Deadline(argArr[0], "N/A");
     }
 
     @Override
