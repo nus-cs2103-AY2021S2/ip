@@ -10,21 +10,29 @@ public class Duke {
         System.out.println(greeting);
 
         Scanner in = new Scanner(System.in);
-        boolean isDone = false;
-        List<String> taskList = new ArrayList<>();
+        boolean isRun = true;
+        List<Task> taskList = new ArrayList<>();
 
-        while (!isDone) {
-            String task = in.nextLine();
-            if (task.equals("bye"))
-                isDone = true;
-            else if (task.equals("list")) {
+        while (isRun) {
+            String command = in.next();
+            String desc = in.nextLine();
+
+            if (command.equals("bye"))
+                isRun = false;
+            else if (command.equals("list")) {
                 IntStream.range(0, taskList.size())
                         .forEach(idx -> {
-                            System.out.println(idx + 1 + ": " + taskList.get(idx));
+                            System.out.println(idx + 1 + "." + taskList.get(idx));
                         });
+                System.out.println();
+            } else if (command.equals("done")) {
+                Integer idx = Integer.valueOf(desc.replaceAll("\\s", ""));
+                taskList.get(idx - 1).setDone(true);
+                System.out.println();
             } else {
+                String task = command + desc;
                 System.out.println("added: " + task + "\n");
-                taskList.add(task);
+                taskList.add(new Task(task));
             }
         }
 
