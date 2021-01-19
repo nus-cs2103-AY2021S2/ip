@@ -33,14 +33,14 @@ public class Duke {
     public static void handleInput() {
         while (sc.hasNextLine()){
             String command = sc.nextLine();
-            if (command.equals("bye")){
+            if (command.equals(Command.BYE.getAction())){
                 printBye();
                 break;
-            } else if (command.equals("list")){
+            } else if (command.equals(Command.LIST.getAction())){
                 listingTasks(list);
-            } else if (command.equals("done") || command.equals("delete")){
+            } else if (command.equals(Command.DONE.getAction()) || command.equals(Command.DELETE.getAction())){
                 handleIndexOutOfBoundTask(command);
-            } else if (command.startsWith("done ")){
+            } else if (command.startsWith(Command.DONE.getAction() + " ")){
                 try{
                     int doneIndex = Integer.parseInt(command.substring(5));
                     if (doneIndex > list.size() || doneIndex <= 0){
@@ -52,7 +52,7 @@ public class Duke {
                 } catch (NumberFormatException e){
                     handleIndexOutOfBoundTask("done");
                 }
-            } else if (command.startsWith("delete ")){
+            } else if (command.startsWith(Command.DELETE.getAction() + " ")){
                 try{
                     int deleteIndex = Integer.parseInt(command.substring(7));
                     if (deleteIndex > list.size() || deleteIndex <= 0){
@@ -89,9 +89,9 @@ public class Duke {
 
     public static void addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
         System.out.println(LINES);
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event")){
+        if (command.equals(Command.TODO.getAction()) || command.equals(Command.DEADLINE.getAction()) || command.equals(Command.EVENT.getAction())){
             throw new EmptyTaskException(command);
-        } else if (command.startsWith("todo ")){
+        } else if (command.startsWith(Command.TODO.getAction() + " ")){
             String description = command.substring(5);
             if (description.isEmpty()){
                 throw new EmptyTaskException("todo");
@@ -101,7 +101,7 @@ public class Duke {
             System.out.println("Got it. I've added this task: ");
             System.out.println("  " + task);
             System.out.println("Now you have " + list.size() + " tasks in the list.");
-        } else if (command.startsWith("deadline ")){
+        } else if (command.startsWith(Command.DEADLINE.getAction() + " ")){
             String content = command.substring(9);
             if (content.isEmpty()){
                 throw new EmptyTaskException("deadline");
@@ -118,7 +118,7 @@ public class Duke {
                 System.out.println("  " + task);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
-        } else if (command.startsWith("event ")){
+        } else if (command.startsWith(Command.EVENT.getAction() + " ")){
             String content = command.substring(6);
             if (content.isEmpty()){
                 throw new EmptyTaskException("event");
