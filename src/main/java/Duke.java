@@ -34,7 +34,7 @@ public class Duke {
                     Task curr = tasks.get(i);
                     System.out.println("     " + (i + 1) + "." + curr.toString());
                 }
-            } else if (inputArr[0].equals("done") && inputArr.length < 3) {
+            } else if ((inputArr[0].equals("done") || inputArr[0].equals("delete")) && inputArr.length < 3) {
                 if (inputArr.length == 1) {
                     throw new DukeException("       OOPS!!! The task number cannot be empty.");
                 } else if (!isNumeric(inputArr[1])) {
@@ -44,10 +44,16 @@ public class Duke {
                     if (i > (tasks.size() - 1) || i < 0) {
                         throw new DukeException("       OOPS!!! The task number is out of range.");
                     } else {
-                        tasks.get(i).markAsDone();
-                        Task curr = tasks.get(i);
-                        System.out.println("     Nice! I've marked this task as done:\n"
-                                + "       " + curr.toString());
+                        if(inputArr[0].equals("done")) {
+                            tasks.get(i).markAsDone();
+                            Task curr = tasks.get(i);
+                            System.out.println("     Nice! I've marked this task as done:\n"
+                                    + "       " + curr.toString());
+                        } else if (inputArr[0].equals("delete")) {
+                            System.out.println("     Noted. I've removed this task:\n"
+                                    + "       " + tasks.remove(i).toString() + "\n"
+                                    + "     Now you have " + tasks.size() + " tasks in the list.");
+                        }
                     }
                 }
             } else if (inputArr[0].equals("todo") || inputArr[0].equals("deadline") || inputArr[0].equals("event")) {
