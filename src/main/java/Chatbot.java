@@ -44,24 +44,58 @@ public class Chatbot {
             LinkedList<Task> tasks = Task.getTasks();
             Task task = tasks.get(taskIndex);
 
-
             StringBuilder builder = new StringBuilder();
             builder.append("Nice! I've marked this as done!\n");
             builder.append("["+task.getStatusIcon()+"]"+task.getTaskName());
             String botMessage = builder.toString();
             Chatbox.chatbotDisplay(botMessage);
-            
+
             task.markAsDone();
 
         }
 
-        // Level-2 : When user add tasks:
+        // Level-4 : When user add tasks(T,D,E):
         else {
-            Task newTask = new Task(userMessage);
-            Chatbox.chatbotDisplay("Added: " + userMessage);
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("Got it! I've added this task:\n");
+
+            // Todo
+            if (userMessage.startsWith("todo")){
+                int spaceIndex = userMessage.indexOf(" ");
+                String todoName = userMessage.substring(spaceIndex+1);
+                ToDo todo = new ToDo(todoName);
+
+                builder.append("[" + todo.getStatusIcon() + "] " + todo.getTaskName());
+                builder.append("\nNow you have " + Integer.toString(Task.getNumOfTasks()) + " tasks in the list.");
+            }
+            // Deadline
+            if (userMessage.startsWith("deadline")){
+                int spaceIndex = userMessage.indexOf(" ");
+                int dateIndex = userMessage.indexOf('/');
+                String deadlineName = userMessage.substring(spaceIndex+1,dateIndex);
+                String by = userMessage.substring(dateIndex + 4);
+                Deadline deadline = new Deadline(deadlineName,by);
+
+                builder.append("[" + deadline.getStatusIcon() + "] " + deadline.getTaskName());
+                builder.append("\nNow you have " + Integer.toString(Task.getNumOfTasks()) + " tasks in the list.");
+            }
+            // Event
+            if (userMessage.startsWith("event")){
+                int spaceIndex = userMessage.indexOf(" ");
+                int dateIndex = userMessage.indexOf('/');
+                String eventName = userMessage.substring(spaceIndex+1,dateIndex);
+                String at = userMessage.substring(dateIndex + 4);
+                Event event = new Event(eventName,at);
+
+                builder.append("[" + event.getStatusIcon() + "] " + event.getTaskName());
+                builder.append("\nNow you have " + Integer.toString(Task.getNumOfTasks()) + " tasks in the list.");
+            }
+
+            String botMessage = builder.toString();
+            Chatbox.chatbotDisplay(botMessage);
+
         }
-
-
 
 
     }
