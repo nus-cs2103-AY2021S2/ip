@@ -5,7 +5,7 @@ public class Duke {
     private static ArrayList<Task> taskList = new ArrayList<>();
     private static String lines = "    ______________________________________________";
     private static String indent = "      ";
-    private static String taskIndent = "  ";
+    private static String taskIndent = "  "; // just an extra indent for listing tasks
 
     /**
      * Mark specified task done
@@ -13,16 +13,17 @@ public class Duke {
      */
     private static void markDone(int i) {
         taskList.get(i - 1).markAsDone();
-        print(new String[]{"Good work! I've marked this task done: ",
+        print(new String[]{"Good work! I've marked this task done:",
                 taskIndent + taskList.get(i - 1)});
     }
 
     private static void printTaskList() {
         System.out.println(lines);
 
-        System.out.println(indent + "Your tasks: ");
+        System.out.println(indent + "Your tasks:");
 
         for (int i = 0; i < taskList.size(); i++) {
+            System.out.print(taskIndent);
             System.out.println(indent + (i + 1) + "." + taskList.get(i));
         }
 
@@ -44,7 +45,7 @@ public class Duke {
     private static void addTask(Task t) {
         taskList.add(t);
         String[] messages = {
-                "Success. I've added this task: ",
+                "Success. I've added this task:",
                 taskIndent + t // standardize this indent,
         };
         print(messages);
