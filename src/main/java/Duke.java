@@ -39,28 +39,7 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println ("Array index is out of bounds, enter a number from 1-100!");
                 }
-            } else if (input.substring(0, 4).equals("todo")) {
-                todo t = new todo(input.substring(5));
-                list.add(t);
-                System.out.println("Got it. I've added this task:\n" +
-                        t.toString() + "\nNow you have " + list.size() + " tasks in the list.");
-            } else if (input.substring(0, 5).equals("event")) {
-                String[] split = input.split("/");
-                String description = split[0].substring(6);
-                String at = split[1].substring(3);
-                Event e = new Event(description, at);
-                list.add(e);
-                System.out.println("Got it. I've added this task:\n" +
-                        e.toString() + "\nNow you have " + list.size() + " tasks in the list.");
-            } else if (input.substring(0, 8).equals("deadline")) {
-                String[] split = input.split("/");
-                String description = split[0].substring(9);
-                String by = split[1].substring(3);
-                Deadline d = new Deadline(description, by);
-                list.add(d);
-                System.out.println("Got it. I've added this task:\n" +
-                        d.toString() + "\nNow you have " + list.size() + " tasks in the list.");
-            }  else {
+            } else {
                 list.add(new Task(input));
                 System.out.println("added: " + input);
             }
