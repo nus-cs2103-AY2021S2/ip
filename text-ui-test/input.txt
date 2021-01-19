@@ -1,0 +1,12 @@
+todo borrow book
+deadline return book /by June 6th
+list
+project meeting
+event project meeting /at Aug 10th 2-4 pm
+todo go for cca
+todo borrow book
+list
+done 4
+done 1
+list
+bye

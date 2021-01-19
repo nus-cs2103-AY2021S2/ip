@@ -15,7 +15,7 @@ public class DukeBot {
     public void addTask(Task task) {
         this.list.add(task);
         System.out.println("\t\tOkay I have added this task:\n\t\t\t" + task);
-        System.out.println("\t\tNow you have " + list.size() + " tasks in the list.");
+        System.out.println("\t\tNow you have " + list.size() + " tasks in the list\n");
     }
 
     public void displayTasks() {
@@ -48,7 +48,7 @@ public class DukeBot {
     public void markAsDone(int num) {
         //TODO consider adding assertion here(to prevent indexing issues)
         list.get(num-1).markAsDone();
-        System.out.println("\t\tOkay! I've marked this task as done:\n\t\t" + list.get(num-1));
+        System.out.println("\t\tOkay! I've marked this task as done:\n\t\t" + list.get(num-1) + "\n");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class DukeBot {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        return "Hello from\n" + logo + "\t\tHello! I'm " +
+        return "\t\tHello! I'm " +
                 this.name + "\n" +
                 "\t\tWhat can I do for you?\n";
     }
