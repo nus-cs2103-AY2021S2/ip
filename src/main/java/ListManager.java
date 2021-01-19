@@ -105,31 +105,65 @@ public class ListManager extends Manager {
     }
 
     public String handleTaskRelatedUserInput(String userInput) throws DukeException{
-        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("done")){
 
+        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("done")){
+            // done block
             if (userInput.equals("done") || userInput.equals("done ")){
                 throw new DukeException(defaultFormatting("Error! Please indicate the task " +
                         "which is done by its number on the list"));
             }else {
-
                 try {
                     int taskInt = Integer.parseInt(userInput.split(" ")[1]);
                     String outputString = this.checkTaskAsDone(taskInt);
                     return outputString;
                 } catch (NumberFormatException e) {
                     throw new DukeException(defaultFormatting("Error! You must give a number " +
-                            "corresponding to a task on the list"));
+                            "corresponding to a task on the list to check as done"));
+                } catch (DukeException e) {
+                    throw e;
+                }
+            }
+        }else if(userInput.length() >= 6 && userInput.substring(0,6).equals("delete")){
+            // delete block
+            if (userInput.equals("delete") || userInput.equals("delete ")){
+                throw new DukeException(defaultFormatting("Error! Please indicate the task " +
+                        "which want to delete by its number on the list"));
+            }else {
+                try {
+                    int taskInt = Integer.parseInt(userInput.split(" ")[1]);
+                    String outputString = this.deleteTask(taskInt);
+                    return outputString;
+                } catch (NumberFormatException e) {
+                    throw new DukeException(defaultFormatting("Error! You must give a number " +
+                            "corresponding to a task on the list to delete"));
                 } catch (DukeException e) {
                     throw e;
                 }
             }
         }else{
+            // event deadline to-do block
             try{
                 String outputString = this.addTask(userInput);
                 return outputString;
             }catch (DukeException e){
                 throw e;
             }
+        }
+    }
+
+    public String deleteTask(int taskInt) throws DukeException{
+        if (taskInt >= 1 && taskInt <= TaskArray.size()){
+
+            Task todelete = TaskArray.get(taskInt - 1);
+            TaskArray.remove(taskInt - 1);
+            numberOfTasks = numberOfTasks - 1;
+
+            String a = "Noted. I've removed this task:\n       " + todelete.toString() + "\n" + getNumberOfTasks();
+
+            return defaultFormatting(a);
+        }else{
+            throw new DukeException(defaultFormatting("Error! Please make sure the " +
+                    "number given has a corresponding task!"));
         }
 
     }
