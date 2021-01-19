@@ -3,7 +3,7 @@ package main.java;
 public abstract class Manager {
 
     public String horizontalLine(){
-        return "    __________________________________________________________________________";
+        return "    ____________________________________________________________";
     }
 
     public String indentedString(String input){
