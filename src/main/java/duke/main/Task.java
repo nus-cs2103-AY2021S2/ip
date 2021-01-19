@@ -1,7 +1,7 @@
 package duke.main;
 
 /**
- * Basic object structure for all todos in Duke
+ * Parent class for all tasks in Duke
  */
 public class Task {
     protected String description;
@@ -20,14 +20,15 @@ public class Task {
         return (isDone ? "\u2713" : " ");
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     /**
      * Updates the isDone status of the current task to be true.
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
