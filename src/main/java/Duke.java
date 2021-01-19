@@ -21,9 +21,11 @@ public class Duke {
                 + line);
 
         Scanner scan = new Scanner(System.in);
+        String[] data = new String[100];
+        int index = 0;
 
-        while (scan.hasNext()) {
-            String input = scan.next();
+        while (scan.hasNextLine()) {
+            String input = scan.nextLine();
 
             System.out.println(line);
 
@@ -31,10 +33,17 @@ public class Duke {
                 System.out.println(tab + "Goodbye, can't wait to see you again!");
                 System.out.println(line);
                 break;
+            } else if (input.equals("list")) {
+                for (int i = 0; i < index; i++) {
+                    int num = i + 1;
+                    System.out.println(tab + num + ". " + data[i]);
+                }
             } else {
-                System.out.println(tab + input);
-                System.out.println(line);
+                data[index] = input;
+                index++;
+                System.out.println(tab + "added: " + input);
             }
+            System.out.println(line);
         }
     }
 }
