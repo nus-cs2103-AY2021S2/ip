@@ -3,7 +3,7 @@ import java.util.*;
 public class Duke {
     static String input = " ";
     static List<Task> list = new ArrayList<>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -52,28 +52,45 @@ public class Duke {
         return "Got it. I've added this task: \n  " + t.toString() + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
-    static String add() {
-        if (input.contains("todo")) {
-            String task = input.replaceFirst("todo", "");
-            Todo t1 = new Todo(task);
-            list.add(t1);
-            return addString(t1);
-        } else if(input.contains("deadline")) {
-            String deadline = input.replaceFirst("deadline ", "");
-            String[] deadlineArr = deadline.split("/");
-            Deadline current = new Deadline(deadlineArr[0], deadlineArr[1].replaceFirst("by ", ""));
-            list.add(current);
-            return addString(current);
-        } else if (input.contains("event")) {
-            String eventDetails = input.replaceFirst("event ", "");
-            String[] eventDeats = eventDetails.split("/");
-            Event current = new Event(eventDeats[0], eventDeats[1].replaceFirst("at ", ""));
-            list.add(current);
-            return addString(current);
-        } else {
-            return "HALP";
-        }
+    static String add() throws Exception {
+        try {
 
+            if (input.contains("todo")) {
+                String task = input.replaceFirst("todo", "");
+                task = task.stripTrailing();
+                if (task.isEmpty()) {
+                    throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                Todo t1 = new Todo(task);
+                list.add(t1);
+                return addString(t1);
+            } else if (input.contains("deadline")) {
+                String deadline = input.replaceFirst("deadline", "");
+                deadline = deadline.stripLeading();
+                String[] deadlineArr = deadline.split("/");
+                Deadline current = new Deadline(deadlineArr[0], deadlineArr[1].replaceFirst("by ", ""));
+                list.add(current);
+                return addString(current);
+            } else if (input.contains("event")) {
+                String eventDetails = input.replaceFirst("event", "");
+                eventDetails = eventDetails.stripLeading();
+                String[] eventDeats = eventDetails.split("/");
+                Event current = new Event(eventDeats[0], eventDeats[1].replaceFirst("at ", ""));
+                list.add(current);
+                return addString(current);
+            } else if (input.contains("delete")) {
+                String value = input.replaceFirst("delete", "");
+                value = value.strip();
+                int val = Integer.parseInt(value);
+                Task delete = list.get(val - 1);
+                list.remove(val - 1);
+                return "Noted. I've removed this task: \n " + delete + "\nNow you have" + list.size() + "tasks in the list.";
+            } else {
+                throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new Exception("☹ OOPS!!! The description of task cannot be empty.");
+        }
     }
 }
 
