@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class DukeIncrements {
     public static void main(String[] args) throws DukeException {
@@ -10,7 +11,8 @@ public class DukeIncrements {
 
         Scanner sc = new Scanner(System.in);
         int count = 0;
-        Task[] arr = new Task[100];
+        ArrayList<Task> arr = new ArrayList<>();
+
         try {
             while (sc.hasNext()) {
                 String input = sc.nextLine();
@@ -30,16 +32,22 @@ public class DukeIncrements {
 
                 } else if (input.equalsIgnoreCase("list")) {
                     System.out.println(line);
-                    System.out.println("get to work! these are the tasks in your list: ");
+                    if (count == 0) {
+                        System.out.println("there are no tasks in your list!");
+                    } else if (count == 1) {
+                        System.out.println("get to work! this is the task in your list: ");
+                    } else {
+                        System.out.println("get to work! these are the tasks in your list: ");
+                    }
                     for (int i = 0; i < count; i++) {
-                        System.out.println(i + 1 + "." + arr[i].toString());
+                        System.out.println(i + 1 + "." + arr.get(i).toString());
                     }
                     System.out.println(line);
 
                 } else if (str[0].equalsIgnoreCase("done")) {
                     System.out.println(line);
                     int taskNum = Integer.parseInt(str[1]);
-                    Task temp = arr[taskNum - 1];
+                    Task temp = arr.get(taskNum - 1);
                     temp.markDone();
                     System.out.println("cool! this task is marked as done:");
                     System.out.println(temp.toString());
@@ -48,35 +56,70 @@ public class DukeIncrements {
                 } else if (str[0].equalsIgnoreCase("todo")) {
                     System.out.println(line);
                     ToDo tempT = new ToDo(str[1]);
-                    arr[count] = tempT;
+                    arr.add(tempT);
+                   // arr[count] = tempT;
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempT.toString());
                     count++;
-                    System.out.println("you have " + count + " tasks in your list! keep working!");
+                    if (count == 0) {
+                        System.out.println("there are no tasks in your list!");
+                    } else if (count == 1) {
+                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else {
+                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                    }
                     System.out.println(line);
 
                 } else if (str[0].equalsIgnoreCase("event")) {
                     System.out.println(line);
                     String[] strE = str[1].split("/at", 2);
                     Event tempE = new Event(strE[0], strE[1]);
-                    arr[count] = tempE;
+                    arr.add(tempE);
+                    //arr[count] = tempE;
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempE.toString());
                     count++;
-                    System.out.println("you have " + count + " tasks in your list! keep working!");
+                    if (count == 0) {
+                        System.out.println("there are no tasks in your list!");
+                    } else if (count == 1) {
+                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else {
+                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                    }
                     System.out.println(line);
 
                 } else if (str[0].equalsIgnoreCase("deadline")) {
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
                     Deadline tempD = new Deadline(strD[0], strD[1]);
-                    arr[count] = tempD;
+                    //arr[count] = tempD;
+                    arr.add(tempD);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempD.toString());
                     count++;
-                    System.out.println("you have " + count + " tasks in your list! keep working!");
+                    if (count == 0) {
+                        System.out.println("there are no tasks in your list!");
+                    } else if (count == 1) {
+                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else {
+                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                    }
                     System.out.println(line);
 
+                } else if (str[0].equalsIgnoreCase("delete")) {
+                    System.out.println(line);
+                    System.out.println("ok! i've deleted this task: ");
+                    int deleteNum = Integer.parseInt(str[1]);
+                    System.out.println(arr.get(deleteNum - 1).toString());
+                    arr.remove(deleteNum - 1);
+                    count--;
+                    if (count == 0) {
+                        System.out.println("yay! you are done!");
+                    } else if (count == 1) {
+                        System.out.println("yay! you have " + count + " task left to do!");
+                    } else {
+                        System.out.println("yay! you have " + count + " tasks left to do!");
+                    }
                 } else {
                     throw new DukeException("invalid input! start with todo/event/deadline");
                 }
