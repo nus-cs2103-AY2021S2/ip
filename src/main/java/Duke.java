@@ -19,21 +19,33 @@ public class Duke {
         //++++++++++++++++++++++++++ IGNORE THE CODE ABOVE +++++++++++++++++++++++++++++
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.next();
+        String input = sc.nextLine();
         List<String> list = new ArrayList<>();
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                for (int i = 1; i <= list.size(); i++) {
+                String temp = "";
 
+                for (int i = 0; i < list.size(); i++) {
+                    temp += String.format("%d. %s", i + 1, list.get(i));
+                    if (i != list.size() - 1) {
+                        temp += "\n";
+                    }
                 }
-            }
-            System.out.println(
+                System.out.println(
                     "____________________________________________________________\n" +
-                    input + "\n" +
+                    temp + "\n" +
                     "____________________________________________________________\n"
-            );
-            input = sc.next();
+                );
+            } else {
+                list.add(input);
+                System.out.println(
+                    "____________________________________________________________\n" +
+                    "added: " + input + "\n" +
+                    "____________________________________________________________\n"
+                );
+            }
+            input = sc.nextLine();
         }
 
         System.out.println("Bye. Hope to see you again soon!");
