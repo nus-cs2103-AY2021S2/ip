@@ -24,8 +24,14 @@ public class Duke {
     public void markComplete(int n) {
         Task temp = this.taskList.get(n - 1);
         temp.checkTask();
-        System.out.println("Duchess: Woohoo I've checked off this task:" + "\n" + temp.toString());
+        System.out.println("Duchess: Woohoo I've checked off this task:" + "\n" + temp);
 
+    }
+
+    public void deleteTask(int task) {
+        Task temp = this.taskList.get(task - 1);
+        this.taskList.remove(task - 1);
+        System.out.println("Duchess: As requested, i have removed this task:" + "\n" + temp + "\n" + "U have " + taskList.size() + " tasks in the list now :)");
     }
 
     public static void main(String[] args) {
@@ -73,6 +79,12 @@ public class Duke {
                         String due = sc.nextLine();
                         Task deadline = new Deadline(arr[1], due);
                         chatbot.storeTask(deadline);
+                        break;
+                    case "delete":
+                        if(arr.length <= 1) {
+                            throw new MissingTaskException();
+                        }
+                        chatbot.deleteTask(Integer.parseInt(arr[1]));
                         break;
                     default:
                         throw new UnlcearInputException();
