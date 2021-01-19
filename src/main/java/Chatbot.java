@@ -34,7 +34,7 @@ public class Chatbot {
         else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
-        
+
     // These will only be used in the response methods.
     private void doList(String userMessage){
         int numOfTasks = Task.getNumOfTasks();
@@ -148,11 +148,11 @@ public class Chatbot {
             StringBuilder builder = new StringBuilder();
             builder.append("Noted. I've removed this task:\n");
             builder.append("["+task.getStatusIcon()+"]"+task.getTaskName());
-            builder.append("Now you have " + Task.getNumOfTasks() + "tasks in the list.");
+            task.delete();
+            builder.append("\nNow you have " + Task.getNumOfTasks() + " tasks in the list.");
             String botMessage = builder.toString();
             Chatbox.chatbotDisplay(botMessage);
 
-            task.delete();
 
         }
         catch (NumberFormatException e) {
@@ -162,7 +162,6 @@ public class Chatbot {
             throw new DukeException("OOPS!!! The event index of a delete is wrong.");
         }
     }
-
 
     public boolean wantExit(String userMessage){
         return userMessage.equals("bye") ? true:false;
