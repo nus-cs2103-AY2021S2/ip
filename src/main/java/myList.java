@@ -39,7 +39,7 @@ public class myList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here's your list of tasks! ");
+        sb.append("Here's your list of tasks!");
 
         for (int i = 0; i < taskList.size(); i++) {
             sb.append("\n"

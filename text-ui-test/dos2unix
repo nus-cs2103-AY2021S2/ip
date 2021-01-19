@@ -1,0 +1,6 @@
+#!/bin/sh
+#https://schmeits.wordpress.com/2010/08/26/dos2unix-alternative-those-darn-m-characters/
+cp "$1" "$1.temp"
+cat "$1.temp" | col -b > "$1"
+rm "$1.temp"
+
