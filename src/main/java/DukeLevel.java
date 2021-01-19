@@ -14,8 +14,8 @@ public class DukeLevel {
         ArrayList<Task> tasksArray = new ArrayList<>();
         int count = 0;
 
-        try {
-            while (sc.hasNext()) {
+        while (sc.hasNext()) {
+            try {
 
                 String input = sc.nextLine().trim();
                 String[] strArray = input.split(" ", 2);
@@ -53,7 +53,7 @@ public class DukeLevel {
                     System.out.println(line);
                     System.out.println("     Noted. I've removed this task: ");
                     System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
-                    tasksArray.remove(cmdNum-1);
+                    tasksArray.remove(cmdNum - 1);
                     count--;
                     if (count == 1) {
                         System.out.println("     Now you have " + count + " task in the list.");
@@ -62,8 +62,8 @@ public class DukeLevel {
                     }
                     System.out.println(line);
                 } else {
-                    System.out.println(line);
                     if (cmd.equalsIgnoreCase("todo")) {
+                        System.out.println(line);
                         String cmdTask = strArray[1];
                         ToDo tempTask = new ToDo(cmdTask);
                         tasksArray.add(tempTask);
@@ -71,6 +71,10 @@ public class DukeLevel {
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("deadline")) {
                         String cmdTask = strArray[1];
+                        if (!strArray[1].contains("/by")) {
+                            throw new DukeException("Uh oh! Please specify a timing using /by.");
+                        }
+                        System.out.println(line);
                         String[] tempStrArray = cmdTask.split("/by", 2);
                         Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
                         tasksArray.add(tempTask);
@@ -78,6 +82,10 @@ public class DukeLevel {
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("event")) {
                         String cmdTask = strArray[1];
+                        if (!strArray[1].contains("/at")) {
+                            throw new DukeException("Uh oh! Please specify a timing using /at.");
+                        }
+                        System.out.println(line);
                         String[] tempStrArray = cmdTask.split("/at", 2);
                         Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
                         tasksArray.add(tempTask);
@@ -94,9 +102,11 @@ public class DukeLevel {
                     }
                     System.out.println(line);
                 }
+            } catch (DukeException exception) {
+                System.out.println(line);
+                System.out.println("     " + exception);
+                System.out.println(line);
             }
-        } catch (DukeException exception) {
-            System.err.print(exception);
         }
     }
 }
