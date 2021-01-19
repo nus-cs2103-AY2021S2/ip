@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,24 +21,35 @@ public class Duke {
         System.out.print(greeting);
 
         Scanner sc = new Scanner(System.in);
-        String command = "";
+        String command;
 
-        String[] toDo = new String[100];
+        List<Task> toDoList = new ArrayList<Task>();
         int currIdx = 0;
         //while loop to echo commands of the user
         command = sc.nextLine();
         while(!command.equals("bye")) {
             //if command is list, we print out the to-do list.
-            if(command.equals("list")) {
+            String[] parsedCommand = command.split(" ", 2);
+            if(parsedCommand[0].equals("list")) {
                 int index = 1;
                 System.out.print(line);
-                for(int i = 0; i < currIdx; i++) {
-                    System.out.println(String.format("    %d. %s", i+1, toDo[i]));
+                for(Task t : toDoList) {
+                    System.out.print(String.format("    %d. [%s] %s\n",
+                            index++, t.getStatusIcon(), t.toString()));
+
                 }
                 System.out.print(line);
-                index++;
+            } else if(parsedCommand[0].equals("done")) {
+                int taskNum = Integer.valueOf(parsedCommand[1]);
+                Task t = toDoList.get(taskNum - 1);
+                t = t.finishTask();
+                toDoList.set(taskNum - 1, t);
+                String statement = "     Nice! I've marked this task as done:\n" + "" +
+                        String.format("\t [%s] %s\n", t.getStatusIcon(), t.toString());
+                System.out.print(line + statement + line);
+
             } else {
-                toDo[currIdx++] = command;
+                toDoList.add(new Task(command));
                 System.out.print(line + "    added: " + command + "\n" + line);
             }
             command = sc.nextLine();
