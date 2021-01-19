@@ -17,7 +17,7 @@ public class Duke {
     private static void printTaskListStatus(ArrayList<Task> tasks, Task curTask) {
         printIndentOutput("Got it. I've added this task:");
         printIndentOutput("   " + curTask);
-        printIndentOutput("Now you have " + tasks.size() + " tasks in the list.");
+        printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
     }
 
     public static void main(String[] args) {
@@ -45,9 +45,13 @@ public class Duke {
                 printIndentOutput("Bye. Hope to see you again soon!");
                 end = true;
             } else if (line.equals("list")) {
-                printIndentOutput("Here are the tasks in you list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    printIndentOutput((i + 1) + ". " + tasks.get(i));
+                if (tasks.size() <= 0) {
+                    printIndentOutput("The current list is empty.");
+                } else {
+                    printIndentOutput("Here are the tasks in you list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        printIndentOutput((i + 1) + ". " + tasks.get(i));
+                    }
                 }
             } else if (checkMatchString(line, "done ")) {
                 int index = Integer.parseInt(line.split(" ", 2)[1]);
