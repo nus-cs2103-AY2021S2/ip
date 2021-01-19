@@ -14,7 +14,9 @@ public class TaskList {
 
     public String addTask(Task task) {
         taskList.add(task);
-        return "added: " + task;
+        return "Gotcha. I've added the task: \n    " 
+                + task 
+                + "\nNow you have " + taskList.size() + " task(s) in your list";
     }
 
     public String markTaskDone(int position) {
@@ -28,6 +30,6 @@ public class TaskList {
                 .stream()
                 .map(t -> t.toString())
                 .collect(Collectors.toList())
-        ) + "\n Now you have " + taskList.size() + "task(s) in your list";
+        );
     }
 }
