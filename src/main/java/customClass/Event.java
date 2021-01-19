@@ -1,6 +1,8 @@
 package customClass;
 
-public class Event extends Task{
+import customClass.Task;
+
+public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
