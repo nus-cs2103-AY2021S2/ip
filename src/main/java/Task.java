@@ -15,11 +15,11 @@ public class Task {
         isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         String indicator = getStatusIcon();
-        return "[" + indicator + "]" + description;
+        return "[" + indicator + "]  " + description;
     }
 
     public String displayTask() {
         String indicator = getStatusIcon();
-        return "[" + indicator + "]" + description;
+        return "[" + indicator + "]  " + description;
     }
 }

@@ -28,7 +28,22 @@ public class Duke {
                 int index = Integer.parseInt(parts[1]);
                 System.out.println(storageList.get(index-1).markAsDone());
                 userInput = sc.nextLine();
-            } else {
+            }
+            else if (keyword.equals("todo") || keyword.equals("deadline") || keyword.equals("event")) {
+                System.out.println("Got it. I've added this task:");
+                StringBuilder str = new StringBuilder();
+                for (int i = 1; i < parts.length; i++) {
+                    str.append(" ");
+                    str.append(parts[i]);
+                }
+                String taskString = str.toString();
+                Todo todo = new Todo(taskString);
+                storageList.add(todo);
+                System.out.println(todo.displayTodo() + todo.displayTask());
+                System.out.println("Now you have " + storageList.size() + " tasks in the list.");
+                userInput = sc.nextLine();
+            }
+            else {
                 Task task = new Task(userInput);
                 storageList.add(task);
                 System.out.println("added: " + userInput);
