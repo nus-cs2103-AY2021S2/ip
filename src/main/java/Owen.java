@@ -1,7 +1,16 @@
+/**
+ * Owen is a personal assistant chatbot.
+ * 
+ * As Owen is an immutable class, modifications will return a copy
+ * with updated internal state.
+ */
 public class Owen implements Chatbot {
     private final boolean isRunning;
     private final Response latestResponse;
 
+    /**
+     * Creates an Owen chatbot with a hello response.
+     */
     public Owen() {
         this.isRunning = true;
 
