@@ -21,7 +21,7 @@ public class DukeIncrements {
 
                 if (input.equalsIgnoreCase("todo") ||
                         input.equalsIgnoreCase("event") ||
-                        input.equalsIgnoreCase("deadline")) {
+                            input.equalsIgnoreCase("deadline")) {
                     throw new DukeException("there is nothing to do!");
                 }
 
@@ -57,7 +57,6 @@ public class DukeIncrements {
                     System.out.println(line);
                     ToDo tempT = new ToDo(str[1]);
                     arr.add(tempT);
-                    // arr[count] = tempT;
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempT.toString());
                     count++;
@@ -78,7 +77,6 @@ public class DukeIncrements {
                     String[] strE = str[1].split("/at", 2);
                     Event tempE = new Event(strE[0], strE[1]);
                     arr.add(tempE);
-                    //arr[count] = tempE;
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempE.toString());
                     count++;
@@ -98,7 +96,6 @@ public class DukeIncrements {
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
                     Deadline tempD = new Deadline(strD[0], strD[1]);
-                    //arr[count] = tempD;
                     arr.add(tempD);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempD.toString());
