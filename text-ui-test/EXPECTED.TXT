@@ -34,6 +34,7 @@ Now you have 2 tasks in the list.
 --------------------------------------------------
 Nice! I've marked this task as done:
 [D][X] return book (by: June 6th)
+
 --------------------------------------------------
 
 
@@ -56,6 +57,7 @@ Now you have 4 tasks in the list.
 --------------------------------------------------
 Nice! I've marked this task as done:
 [T][X] join sports club
+
 --------------------------------------------------
 
 
