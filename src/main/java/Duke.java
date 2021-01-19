@@ -42,6 +42,26 @@ public class Duke {
                     Todo todo = new Todo(taskString);
                     storageList.add(todo);
                     System.out.println(todo.toString());
+                } else if (keyword.equals("deadline")) {
+                    int slashIndex = 0;
+                    for (int i = 0; i < parts.length; i++) {
+                        if (parts[i].contains(Character.toString('/'))) {
+                            slashIndex = i;
+                        }
+                    }
+                    for (int j = 1; j < slashIndex; j++) {
+                        str.append(" ");
+                        str.append(parts[j]);
+                    }
+                    String taskString = str.toString();
+                    StringBuilder byStringBuilder = new StringBuilder();
+                    for (int k = slashIndex + 1; k < parts.length; k++) {
+                        byStringBuilder.append(" ");
+                        byStringBuilder.append(parts[k]);
+                    }
+                    Deadline deadline = new Deadline(taskString, byStringBuilder.toString());
+                    storageList.add(deadline);
+                    System.out.println(deadline.toString());
                 }
                 System.out.println("Now you have " + storageList.size() + " tasks in the list.");
                 userInput = sc.nextLine();
