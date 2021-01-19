@@ -1,3 +1,4 @@
+import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Duke {
     /** Allows for easy change of the bot name in future. **/
     final private static String BOTNAME = "DukeNukem";
     final private static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
-    static private List<String> taskList = new ArrayList<>();
+    static private List<Task> taskList = new ArrayList<>();
     public static void main(String[] args) {
         greetUser();
         listenInput();
@@ -46,28 +47,42 @@ public class Duke {
         String inputString;
         while (stillListening) {
             printSeparators();
-            inputString = scannerObject.nextLine();
+            inputString = scannerObject.nextLine().trim();
             printSeparators();
-            switch (inputString.trim()) {
-                case "list":
-                    printList();
-                    break;
-                case "bye":
-                    quit();
-                    stillListening = false;
-                    break;
-                default:
-                    taskList.add(inputString);
-                    System.out.println("    added: " + inputString);
+            if (inputString.equals("list")) {
+                printList();
+            } else if (inputString.equals("bye")) {
+                quit();
+            } else if (inputString.startsWith("done")) {
+                try {
+                    int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
+                    Task doneTask = taskList.get(taskId).setDone();
+                    System.out.println("Great~! Task completed:");
+                    System.out.println("    " + "[" + doneTask.getStatusIcon() + "] " + doneTask);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Hey!!! You made an error in the number >:(");
+                    System.out.println("Check and try it again!");
+                }
+            } else {
+                taskList.add(new Task(inputString));
+                System.out.println("    added: " + inputString);
             }
         }
 
     }
 
+    /**
+     * Prints the list of tasks in the list, including the status.
+     */
     public static void printList() {
-        System.out.println("    List: ");
+        if (taskList.size() < 1) {
+            System.out.println("    There are no tasks in your list! :c");
+            return;
+        }
+        System.out.println("    Tasks in your list are~: ");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("    " + (i + 1) + ". " + taskList.get(i));
+            Task task = taskList.get(i);
+            System.out.println("    " + (i + 1) + ". [" + task.getStatusIcon() + "] " + task);
         }
     }
 
