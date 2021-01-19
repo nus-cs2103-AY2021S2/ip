@@ -14,7 +14,7 @@ public class DukeController {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public void run() {
+    public void run() throws DukeException {
         this.introduction();
 
         Scanner sc = new Scanner(System.in);
@@ -25,40 +25,61 @@ public class DukeController {
         while (validState) {
             String[] doneLine = line.split(" ", 2);
             line = doneLine[0]; // get the first keyword
-            String line2 = "";
-
-            if (doneLine.length != 1) {
-                line2 = doneLine[1];
-            }
 
             if (line.equals("bye")) {
                 this.goodbye();
                 validState = false;
                 continue;
             } else {
-                switch (line) {
-                    case ("list"):
-                        this.list.listItems();
-                        break;
-                    case ("done"):
-                        this.list.done(Integer.parseInt(doneLine[1]));
-                        break;
-                    case ("todo"):
-                        System.out.println(doneLine[1]);
-                        this.list.add(new ToDos(doneLine[1]));
-                        break;
-                    case ("deadline"):
-                        String[] info = doneLine[1].split(" /by ");
-                        this.list.add(new Deadlines(info[0], info[1]));
-                        break;
-                    case ("event"):
-                        String[] info2 = doneLine[1].split(" /at ");
-                        this.list.add(new Events(info2[0], info2[1]));
-                        break;
-                    default:
-                        list.add(line + " " + line2);
-
+                try {
+                    switch (line) {
+                        case ("list"):
+                            this.list.listItems();
+                            break;
+                        case ("done"):
+                            if (doneLine.length == 1) {
+                                throw new DukeException("☹ OOPS!!! I need the index of the task you want done.");
+                            }
+                            int index = Integer.parseInt(doneLine[1]);
+                            if (index > this.list.size() || index == 0) {
+                                throw new DukeException("☹ OOPS!!! The index needs to be in range of the list.");
+                            } else {
+                                this.list.done(index);
+                            }
+                            break;
+                        case ("todo"):
+                            if (doneLine.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            this.list.add(new ToDos(doneLine[1]));
+                            break;
+                        case ("deadline"):
+                            if (doneLine.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                            }
+                            String[] info = doneLine[1].split(" /by ");
+                            if (info.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
+                            }
+                            this.list.add(new Deadlines(info[0], info[1]));
+                            break;
+                        case ("event"):
+                            if (doneLine.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                            }
+                            String[] info2 = doneLine[1].split(" /at ");
+                            if (info2.length == 1) {
+                                throw new DukeException("☹ OOPS!!! The timing of an event cannot be empty.");
+                            }
+                            this.list.add(new Events(info2[0], info2[1]));
+                            break;
+                        default:
+                            throw new DukeException("☹ OOPS!!! Command is not recognized!!");
+                    }
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage() + "\n");
                 }
+
                 line = sc.nextLine();
             }
         }
