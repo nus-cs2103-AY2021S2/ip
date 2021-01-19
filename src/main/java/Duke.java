@@ -42,6 +42,9 @@ public class Duke {
         System.out.println("-----------------------------------------------------");
     }
 
+    /**
+     * Prints out the list of all events.
+     */
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i=1; i<=Duke.ls.size(); i++) {
@@ -50,6 +53,11 @@ public class Duke {
         System.out.println("-----------------------------------------------------");
     }
 
+    /**
+     * Sets a task as done and prints out the task marked as done.
+     * @param userInput Takes in command from user in the format: done &lt;indexOfItem&gt;
+     * @throws DukeException Throws error if the indexOfItem given is invalid
+     */
     public static void setAsDone(String userInput) throws DukeException {
         try {
             int indexToMark = Integer.parseInt(userInput.substring(5));
@@ -63,6 +71,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes a task in the list and prints out the task deleted with the remaining number of tasks in the list.
+     * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
+     * @throws DukeException Throws error if the indexOfItem given is invalid
+     */
     public static void deleteFromList(String userInput) throws DukeException {
         try {
             int indexToDelete = Integer.parseInt(userInput.substring(7));
@@ -77,6 +90,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a task into the list and prints out the task added with the number of tasks in the list.
+     * @param userInput Takes in command from user in the given formats for each task type:
+     *                  <p> todo task: todo &lt;task_description&gt; </p>
+     *                  <p> deadline task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
+     *                  <p> event task: event &lt;event_description&gt; /at &lt;date&gt; </p>
+     * @throws DukeException Throws error if the keyword or format is wrong.
+     */
     public static void addTask(String userInput) throws DukeException {
         if (userInput.startsWith("todo ")) {
             String[] splits = userInput.split("todo ");
