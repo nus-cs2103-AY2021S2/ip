@@ -7,6 +7,10 @@ public class Task {
         isDone = false;
     }
 
+    /**
+     * This is the setter to for the "isDone"
+     * status of the Task.
+     */
     public void complete() {
         isDone = true;
     }
@@ -19,6 +23,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * This method overrides the toString() method.
+     * @return the name of the Task
+     */
     @Override
     public String toString() {
         return name;

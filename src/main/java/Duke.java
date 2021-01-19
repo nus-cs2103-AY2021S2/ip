@@ -57,6 +57,12 @@ public class Duke {
         System.out.println(partingLine);
     }
 
+    /**
+     * This method judges whether input string is a valid
+     * command that contains keyword "done".
+     * @param input is the string to be tested
+     * @return true if the input is valid, false otherwise
+     */
     public static boolean isDoneCommand(String input) {
         return (input.length() > 5
                 && input.substring(0, 5).equals("done ")
