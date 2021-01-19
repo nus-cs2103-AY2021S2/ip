@@ -81,7 +81,20 @@ public class Duke {
                         if (sc.hasNextLine()) {
                             userInput = sc.nextLine();
                         }
-                    } else {
+                    } else if (keyword.equals("delete")) {
+                        if (parts.length > 2) {
+                            throw new InsufficientArgumentsException("Wrong arguments");
+                        }
+                        int index = Integer.parseInt(parts[1]);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(storageList.get(index - 1).toString());
+                        storageList.remove(index-1);
+                        System.out.println("Now you have " + storageList.size() + " tasks in the list.");
+                        if (sc.hasNextLine()) {
+                            userInput = sc.nextLine();
+                        }
+                    }
+                    else {
                         throw new IllegalKeywordException("Invalid keyword");
                     }
                 }
