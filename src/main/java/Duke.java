@@ -37,29 +37,58 @@ public class Duke {
         while (!command.equals("bye")) {
             String arr[] = command.split(" ", 2);
             String action = arr[0];
-            if(command.equals("list")) {
-                chatbot.printList();
-            } else if (action.equals("done")) {
-                int n = Integer.parseInt(arr[1]);
-                chatbot.markComplete(n);
-            } else if (action.equals("todo")) {
-                Task todo = new Todo(arr[1]);
-                chatbot.storeTask(todo);
-            } else if(action.equals("event")) {
-                System.out.println("Duchess: When will this event be?");
-                String date = sc.nextLine();
-                Task event = new Event(arr[1], date);
-                chatbot.storeTask(event);
-            } else if(action.equals("deadline")) {
-                System.out.println("Duchess: When does this have to be done by?");
-                String due = sc.nextLine();
-                Task deadline = new Deadline(arr[1], due);
-                chatbot.storeTask(deadline);
+            try {
+                switch (action) {
+                    case "list":
+                        chatbot.printList();
+                        break;
+                    case "done":
+                        if (arr.length <= 1) {
+                            throw new MissingTaskException();
+                        }
+                        int n = Integer.parseInt(arr[1]);
+                        chatbot.markComplete(n);
+                        break;
+                    case "todo":
+                        if (arr.length <= 1) {
+                            throw new MissingInputException(action);
+                        }
+                        Task todo = new Todo(arr[1]);
+                        chatbot.storeTask(todo);
+                        break;
+                    case "event":
+                        if (arr.length <= 1) {
+                            throw new MissingInputException(action);
+                        }
+                        System.out.println("Duchess: When will this event be?");
+                        String date = sc.nextLine();
+                        Task event = new Event(arr[1], date);
+                        chatbot.storeTask(event);
+                        break;
+                    case "deadline":
+                        if (arr.length <= 1) {
+                            throw new MissingInputException(action);
+                        }
+                        System.out.println("Duchess: When does this have to be done by?");
+                        String due = sc.nextLine();
+                        Task deadline = new Deadline(arr[1], due);
+                        chatbot.storeTask(deadline);
+                        break;
+                    default:
+                        throw new UnlcearInputException();
+                }
+            } catch (MissingInputException e) {
+                System.out.println((e.getMessage()));
+            } catch (UnlcearInputException e) {
+                System.out.println((e.getMessage()));
+            } catch (DukeExceptions e) {
+                System.out.println((e.getMessage()));
             }
             String nextCommand = sc.nextLine();
             command = nextCommand;
         }
         System.out.println("Bye, Have an awesome day!");
+        sc.close();
     }
 }
 
