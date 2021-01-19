@@ -3,12 +3,10 @@ import java.util.*;
 public class Duke {
     private final Scanner sc = new Scanner(System.in);
     private final List<Task> database = new ArrayList<>();
-    private final Set<String> commands = new HashSet<>();
-    private static final String EXIT_COMMAND = "bye";
+    private State state;
     
     public Duke() {
-        // Populate valid commands
-        setUpCommandList();
+        this.state = State.ONLINE;
     }
     
     public void run() {
@@ -16,27 +14,28 @@ public class Duke {
         printGreeting();
 
         // Get user input
-        while (sc.hasNextLine()) {
-            String command = sc.next();
-            if (command.equals(EXIT_COMMAND)) {
-                // User wants to exit program
-                break;
+        while (isOnline()) {
+            try {
+                printHorizontalLine();
+                Command command = parseCommand(sc.next());
+                String arguments = sc.nextLine();
+                executeCommand(command, arguments);
+            } catch (InvalidCommandException ex) {
+                printHorizontalLine();
+                System.out.println(ex.getMessage());
             }
-            String arguments = sc.nextLine();
-            parseCommand(command, arguments);
         }
 
         // Print exit message
         printExitMessage();
     }
-
-    private void setUpCommandList() {
-        commands.add("list");
-        commands.add("done");
-        commands.add("todo");
-        commands.add("deadline");
-        commands.add("event");
-        commands.add("delete");
+    
+    private boolean isOnline() {
+        return this.state == State.ONLINE;
+    }
+    
+    private void off() {
+        this.state = State.OFF;
     }
 
     private void printGreeting() {
@@ -49,11 +48,9 @@ public class Duke {
         System.out.println("Hello! I'm");
         System.out.println(logo);
         System.out.println("What can I do for you?");
-        printHorizontalLine();
     }
 
     private void printExitMessage() {
-        printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
@@ -65,37 +62,38 @@ public class Duke {
         System.out.println();
     }
 
-    private void parseCommand(String command, String arguments) {
+    private Command parseCommand(String userInputCommand) throws InvalidCommandException {
+        try {
+            return Command.valueOf(userInputCommand.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+    
+    private void executeCommand(Command command, String arguments) {
         try {
             printHorizontalLine();
-            checkValidCommand(command);
             switch (command) {
-                case "list":
+                case BYE:
+                    off();
+                    break;
+                case LIST:
                     printAllTasks();
                     break;
-                case "done":
+                case DONE:
                     markTaskAsDone(arguments);
                     break;
-                case "todo":
-                case "deadline":
-                case "event":
+                case TODO:
+                case DEADLINE:
+                case EVENT:
                     createTask(command, arguments);
                     break;
-                case "delete":
+                case DELETE:
                     deleteTask(arguments);
                     break;
             }
-        } catch (InvalidCommandException | NoDescriptionException | InvalidDescriptionException ex) {
+        } catch (NoDescriptionException | InvalidDescriptionException ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            printHorizontalLine();
-        }
-
-    }
-
-    private void checkValidCommand(String command) throws InvalidCommandException{
-        if (!commands.contains(command)) {
-            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -110,19 +108,19 @@ public class Duke {
         }
     }
 
-    private void createTask(String taskType, String taskDescription) throws NoDescriptionException {
+    private void createTask(Command taskType, String taskDescription) throws NoDescriptionException {
         if (taskDescription.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
         Task task = null;
         switch (taskType) {
-            case "todo":
+            case TODO:
                 task = createToDoTask(taskDescription.strip());
                 break;
-            case "deadline":
+            case DEADLINE:
                 task = createDeadlineTask(taskDescription.strip());
                 break;
-            case "event":
+            case EVENT:
                 task = createEventTask(taskDescription.strip());
                 break;
         }
