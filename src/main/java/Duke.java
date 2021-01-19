@@ -1,4 +1,5 @@
 import java.util.*;
+import duke.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,9 +14,10 @@ public class Duke {
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
+                System.out.println(">>> Bye. Hope to see you again soon!");
                 break;
             } else {
-                System.out.println(input);
+                System.out.println(">>> " + input);
             }
 
         }
