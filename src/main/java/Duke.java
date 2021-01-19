@@ -24,10 +24,24 @@ public class Duke {
         Scanner s = new Scanner(System.in);
         String instruction = s.nextLine();
         while(!instruction.equals("bye")) {
-            echo(instruction);
+            manageTask(instruction);
             instruction = s.nextLine();
         }
         echo("Bye. Cya");
+    }
+
+    public void manageTask(String task) {
+        if(task.equals("list")) {
+            System.out.println("     --------------------------------");
+            for(int i = 0; i < tasks.size(); i++) {
+                String rank = String.valueOf(i + 1);
+                System.out.println("     " + rank + ". " + tasks.get(i));
+            }
+            System.out.println("     --------------------------------");
+        } else {
+            tasks.add(task);
+            echo(("added: " + task));
+        }
     }
 
     public static void echo(String instruction) {
