@@ -17,7 +17,7 @@ public class Duke {
                 + "          \\___/\\___/---;_| |_|\n";
 
         String border = " --*---*---*---*---*---*---*---*---*---*--";
-        System.out.println(logo + "\n" + border + "\n  Hey there, Olaf here!\n  What can I do for you?");
+        System.out.println(logo + "\n" + border + "\n  Hey there, Olaf here!\n  What will we be doing today?");
 
         while(true) {
             String command = bf.readLine();
@@ -39,7 +39,7 @@ public class Duke {
                 tasks.get(idx-1).markAsDone();
                 System.out.printf("  %s. %s\n",String.valueOf(idx), tasks.get(idx-1));
                 System.out.println(border);
-            } else {
+            } else if(){
                 tasks.add(new Task(command));
                 System.out.println(border + "\n  added: " + command + "\n" + border);
             }
