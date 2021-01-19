@@ -28,6 +28,10 @@ public class Duke {
                     markTaskAsDone(input, tasks);
                     break;
                 }
+                case "delete": {
+                    deleteTask(input, tasks);
+                    break;
+                }
                 case "todo": {
                     Task todoTask = createTodoTask(input);
                     tasks.add(todoTask);
@@ -145,6 +149,27 @@ public class Duke {
             throw new DukeException("Please mark a task that exists in the list as done. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be marked as done.");
         } catch (NumberFormatException numberFormatException) {
             throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+        }
+    }
+
+    public static void deleteTask(String input, ArrayList<Task> tasks) throws DukeException {
+        int taskIdx;
+        String taskIdxStr;
+        try {
+            taskIdxStr = input.split(" ")[1];
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list].");
+        }
+
+        try {
+            taskIdx = Integer.parseInt(taskIdxStr) - 1;
+            Task taskToDelete = tasks.get(taskIdx);
+            tasks.remove(taskToDelete);
+            echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            throw new DukeException("Please delete a task that exists in the list. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be deleted.");
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
         }
     }
 
