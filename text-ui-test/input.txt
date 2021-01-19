@@ -1,0 +1,18 @@
+todo eat cake
+list
+done 1
+deadline shoot pancakes /by Tuesday
+list
+list
+todo go to school
+deadline return book /by Sunday
+list
+event project meeting /at Mon 2-4pm
+list
+done 4
+todo play cards against humanity
+deadline submit cs2103 assignment /by tomorrow
+event nomination of hawker culture /at Sunday wholeday
+done 7
+list
+bye
