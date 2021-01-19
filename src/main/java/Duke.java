@@ -1,10 +1,12 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
+// @@author: VRSoorya (??)
+// adapted from GitHub repo nus-cs2103-AY2021S2/ip
 
 public class Duke {
-    private static List<String> tasks = new ArrayList<>();
+    private static List<Task> tasks = new ArrayList<>();
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -24,15 +26,21 @@ public class Duke {
                 System.out.println(border + "\n  " + out + "\n" + border);
                 break;
             } else if(command.toLowerCase().equals("list")){
-                System.out.println(border);
+                System.out.println(border + "\n  Here are your pending tasks:");
                 // adapted from: https://howtodoinjava.com/java/collections/arraylist/iterate-through-objects/
                 int idx = 0;
                 while (tasks.size() > idx){
                     System.out.printf("  %s. %s\n",String.valueOf(idx+1),tasks.get(idx++));
                 }
                 System.out.println(border);
+            } else if(command.toLowerCase().startsWith("done")){
+                int idx = Integer.parseInt(command.split(" ")[1]);
+                System.out.println(border + "\n  Great job! You're done with:");
+                tasks.get(idx-1).markAsDone();
+                System.out.printf("  %s. %s\n",String.valueOf(idx), tasks.get(idx-1));
+                System.out.println(border);
             } else {
-                tasks.add(command);
+                tasks.add(new Task(command));
                 System.out.println(border + "\n  added: " + command + "\n" + border);
             }
         }
