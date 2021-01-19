@@ -51,6 +51,19 @@
   4. [T][X] borrow book
   5. [D][ ] do homework (by: no idea :-p )
 ╰|╱ -----------------------------------------╯
+╭--------------------------------------------╮
+  Task has been deleted.
+  Just like you will be deleted someday too.
+    [E][ ] project meeting (at: Aug 6th 2-4pm)
+  Now you have 4 tasks in your list.
+╰|╱ -----------------------------------------╯
+╭--------------------------------------------╮
+  Here are the tasks in your list:
+  1. [T][ ] read book
+  2. [D][X] return book (by: June 6th)
+  3. [T][X] borrow book
+  4. [D][ ] do homework (by: no idea :-p )
+╰|╱ -----------------------------------------╯
  ╭---------------------------------------╮
  |  Bye! Hope you complete your tasks!   |
  ╰|╱ ------------------------------------╯

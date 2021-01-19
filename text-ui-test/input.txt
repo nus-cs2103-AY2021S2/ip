@@ -6,4 +6,6 @@ todo borrow book
 done 4
 deadline do homework /by no idea :-p 
 list
+delete 3
+list
 bye
