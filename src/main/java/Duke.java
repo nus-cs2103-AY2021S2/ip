@@ -20,10 +20,32 @@ public class Duke {
                     int taskIndex = Integer.parseInt(tokens[1]) - 1;
                     list[taskIndex].markAsDone();
                     System.out.println("Nice! I've marked this task as done: \n" +  list[taskIndex].toString());
-            } else {
-                list[index] = new Task(command);
-                System.out.println("added: " + list[index]);
+            } else if (commandType.equals("todo"))  {
+            // ADD TODO TASK
+                String todo = command.substring(5);
+                Task task = new Todo(todo);
+                list[index] = task;
                 index++;
+                System.out.println("Got it. I've added this task: \n " + list[index - 1]);
+                System.out.printf("Now you have %d task(s) in the list. \n", index);
+            } else  if (commandType.equals("deadline")) {
+            // ADD DEADLINE TASK
+            String description = command.substring(9);
+            String[] deadlineSplit = description.split("/by");
+            Task task = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+            list[index] = task;
+            index++;
+            System.out.println("Got it. I've added this task: \n " + list[index - 1]);
+            System.out.printf("Now you have %d task(s) in the list. \n", index);
+        } else if (commandType.equals("event")) {
+            // ADD EVENT TASK
+            String description = command.substring(6);
+            String[] eventSplit = description.split("/at");
+            Task task = new Event(eventSplit[0], eventSplit[1]);
+            list[index] = task;
+            index++;
+            System.out.println("Got it. I've added this task: \n " + list[index - 1]);
+            System.out.printf("Now you have %d task(s) in the list. \n", index);
             }
             command = scanner.nextLine();
         }
