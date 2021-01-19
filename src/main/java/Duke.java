@@ -131,7 +131,9 @@ public class Duke {
     }
 
     public static void printByeMessage() {
+        printDivider();
         System.out.println("Bye. Hope to see you again soon!\n");
+        printDivider();
     }
 
     public static void runDuke(Scanner in) {
