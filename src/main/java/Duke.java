@@ -45,11 +45,12 @@ public class Duke {
 
     public void removeTask(String id) {
         int n = Integer.parseInt(id) - 1;
+        Task task = list.lst.get(n);
+        list.removeItem(n);
         pw.println("Noted. I've removed this task:");
-        pw.printf(" %s%n", list.lst.get(n));
+        pw.printf(" %s%n", task);
         pw.printf("Now you have %d tasks in the list.%n", list.lst.size());
         pw.flush();
-        list.removeItem(n);
     }
 
     public void exit() {
