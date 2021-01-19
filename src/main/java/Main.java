@@ -11,7 +11,13 @@ public class Main {
 
         while(true) {
             String string = br.readLine();
-            parser.processInput(string);
+            try {
+                parser.processInput(string, bot);
+            } catch (InvalidCommandException | InvalidArgumentException ex){
+                ex.printStackTrace();
+                continue;
+            }
+
             if(!(parser.isEquals("bye"))) {
                 String[] starr = string.split(" ");
                 if(parser.isEquals("list")) {
