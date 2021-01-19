@@ -85,7 +85,9 @@ public class Duke {
                 }
                 String taskName = fullCmd.substring(5); // remove "todo "
                 TodoTask newTodoTask = new TodoTask(taskName);
-                addToList(newTodoTask);
+
+                taskList.add(newTodoTask);
+                displayAddToList(newTodoTask);
                 break;
             case "event":
                 String eErrorMsg = "Invalid format. Please enter as such:" +
@@ -101,7 +103,9 @@ public class Duke {
                     String eTaskName = eTaskDetailsArray[0];
                     String eTaskDate = eTaskDetailsArray[1];
                     EventTask newEventTask = new EventTask(eTaskName, eTaskDate);
-                    addToList(newEventTask);
+
+                    taskList.add(newEventTask);
+                    displayAddToList(newEventTask);
                 } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
                     throw new DukeException(eErrorMsg);
                 }
@@ -120,14 +124,55 @@ public class Duke {
                     String dTaskName = dTaskDetailsArray[0];
                     String dTaskDate = dTaskDetailsArray[1];
                     DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, dTaskDate);
-                    addToList(newDeadlineTask);
+
+                    taskList.add(newDeadlineTask);
+                    displayAddToList(newDeadlineTask);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeException(dErrorMsg);
                 }
                 break;
+            case "delete":
+                if (fullCmdStrArray.length > 2) { // too many parameters (>1)
+                    String errorMsg = "Sorry human, please enter only one task for me to delete." +
+                            "\n" +
+                            PADDING +
+                            "I am unable to process more than one task at one time.";
+                    throw new DukeException(errorMsg);
+                }
+
+                if (fullCmdStrArray.length < 2) { // no parameter
+                    String errorMsg = "Sorry human, please enter a task number.";
+                    throw new DukeException(errorMsg);
+                }
+
+                if (!isNumber(fullCmdStrArray[1])) { // handle commands such as 'delete a', 'delete hello'
+                    String errorMsg = "Sorry human, please enter the number of the task you want me to" +
+                            "\n" +
+                            PADDING +
+                            "delete.";
+                    throw new DukeException(errorMsg);
+                }
+
+                int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
+                if (taskIndex > taskList.size() - 1 || taskIndex < 0) {
+                    throw new DukeException("Sorry human, that task does not seem to exist.");
+                }
+                Task deletedTask = taskList.get(taskIndex);
+                taskList.remove(taskIndex);
+                displayDeletedMessage(deletedTask);
+                break;
             default:
                 throw new DukeException("Sorry human, I have not been trained to process that command.");
         }
+    }
+
+    private static void displayDeletedMessage(Task task) {
+        System.out.println(TOP_BORDER);
+        System.out.println(PADDING + "Task has been deleted.");
+        System.out.println(PADDING + "Just like you will be deleted someday too.");
+        System.out.println(PADDING + PADDING + task);
+        System.out.println(PADDING + "Now you have " + taskList.size() + (taskList.size() == 1 ? " task " : " tasks ") + "in your list.");
+        System.out.println(BTM_BORDER);
     }
 
     private static void displayDoneMessage(Task task) {
@@ -156,9 +201,7 @@ public class Duke {
         System.out.println(BTM_BORDER);
     }
 
-    private static void addToList(Task task) {
-        taskList.add(task);
-
+    private static void displayAddToList(Task task) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Got it: I've added this task:");
         System.out.println(PADDING + PADDING + task);
