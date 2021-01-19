@@ -13,11 +13,16 @@ public class DukeLevel {
         Task[] tasksArray = new Task[100];
         int count = 0;
 
-        // try {
+        try {
             while (sc.hasNext()) {
-                String input = sc.nextLine();
+
+                String input = sc.nextLine().trim();
                 String[] strArray = input.split(" ", 2);
                 String cmd = strArray[0];
+
+                if (input.equalsIgnoreCase("todo") || input.equalsIgnoreCase("deadline") || input.equalsIgnoreCase("event")) {
+                    throw new DukeException("Uh oh! There is nothing to do.");
+                }
 
                 if (input.equalsIgnoreCase("bye")) {
                     System.out.println(line);
@@ -41,26 +46,28 @@ public class DukeLevel {
                 } else {
                     tasksArray[count] = new Task(input);
                     System.out.println(line);
-                    System.out.println("     Got it. I've added this task: ");
                     if (cmd.equalsIgnoreCase("todo")) {
                         String cmdTask = strArray[1];
                         ToDo tempTask = new ToDo(cmdTask);
                         tasksArray[count] = tempTask;
+                        System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("deadline")) {
                         String cmdTask = strArray[1];
                         String[] tempStrArray = cmdTask.split("/by", 2);
                         Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
                         tasksArray[count] = tempTask;
+                        System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("event")) {
                         String cmdTask = strArray[1];
                         String[] tempStrArray = cmdTask.split("/at", 2);
                         Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
                         tasksArray[count] = tempTask;
+                        System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else {
-                        System.out.println("          added: " + input);
+                        throw new DukeException("I'm sorry but I don't know what this means :(");
                     }
                     if (count == 0) {
                         System.out.println("     Now you have " + (count + 1) + " task in the list.");
@@ -71,9 +78,9 @@ public class DukeLevel {
                     count++;
                 }
             }
-//        } catch (DukeException exception) {
-//            System.err.print(exception);
-//        }
+        } catch (DukeException exception) {
+            System.err.print(exception);
+        }
     }
 }
 
