@@ -35,6 +35,9 @@ public class Duke {
             System.out.println("Added to to-do list: \n" + newTask);
         } else {
             //error handling
+            String msg = "I apologize, I do not comprehend your command.";
+            DukeException exception = new DukeException(msg);
+            System.out.println(exception);
         }
     }
 
