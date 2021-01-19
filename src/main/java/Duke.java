@@ -35,9 +35,11 @@ public class Duke {
                 formatText();
                 tasks.iterateList();
                 formatText();
-            } else if (input.split(" ",2)[0].equals("done")){
+            } else if (input.split(" ", 2)[0].equals("done")) {
                 // mark task with the given index as completed
                 tasks.markAsDone(input.split(" ", 2)[1]);
+            } else if (input.split(" ", 2)[0].equals("delete")) {
+                tasks.deleteTask(input.split(" ", 2)[1]);
             } else {
                 // add new task to list
                 tasks.addTask(input);

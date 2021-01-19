@@ -26,7 +26,7 @@ public class Tasks {
     /**
      * Checks for task in the given index and marks it as completed if valid.
      *
-     * @param str task number given one-based indexing.
+     * @param str task number given one-based indexing
      */
     public void markAsDone(String str) {
         try {
@@ -67,26 +67,52 @@ public class Tasks {
             Todo todo = new Todo(split[1]);
             lst.add(todo);
             System.out.println("You got it! I added this task:\n   "
-                    + todo.toString()
-                    + "\nNow you have " + lst.size() + " items.");
+                    + todo.toString());
+            countTasks();
         } else {
             String[] separateDetails = split[1].split("/");
             String description = separateDetails[0];
             String date = separateDetails[1];
-            if (command.equals("deadline")) {
+            if (command.equals(ADD_DEADLINE_COMMAND)) {
                 Deadline deadline = new Deadline(description, date);
                 lst.add(deadline);
                 System.out.println("You got it! I added this task:\n   "
-                        + deadline.toString()
-                        + "\nNow you have " + lst.size() + " items.");
-            } else if (command.equals("event")) {
+                        + deadline.toString());
+            } else {
+                // command is ADD_EVENT_COMMAND
                 Event event = new Event(description, date);
                 lst.add(event);
                 System.out.println("You got it! I added this task:\n   "
-                        + event.toString()
-                        + "\nNow you have " + lst.size() + " items.");
+                        + event.toString());
             }
+            countTasks();
         }
         Duke.formatText();
+    }
+
+    /**
+     * Deletes task from list of tasks.
+     * @param str task number given one-based indexing
+     */
+    public void deleteTask(String str) {
+        try {
+            int index = Integer.parseInt(str) - 1;
+            Task task = lst.get(index);
+            lst.remove(index);
+
+            Duke.formatText();
+            System.out.println("Sweet! I have deleted the following task:\n"
+                    + task.toString());
+            countTasks();
+            Duke.formatText();
+        } catch (final NumberFormatException e) {
+            System.err.println("Oof, did you type a valid number or not?");
+        } catch (IndexOutOfBoundsException exception) {
+            System.err.println("You don't have so many items, dumbass!");
+        }
+    }
+
+    public void countTasks() {
+        System.out.println("Now you have " + lst.size() + " tasks.");
     }
 }

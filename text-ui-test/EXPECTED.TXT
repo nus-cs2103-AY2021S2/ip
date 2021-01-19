@@ -8,17 +8,17 @@ Hello, this is
 ******************************************************
 You got it! I added this task:
    [T] [ ] buy milk
-Now you have 1 items.
+Now you have 1 tasks.
 ******************************************************
 ******************************************************
 You got it! I added this task:
    [D] [ ] do essay  (by tomorrow)
-Now you have 2 items.
+Now you have 2 tasks.
 ******************************************************
 ******************************************************
 You got it! I added this task:
    [E] [ ] go party  (at Thursday evening)
-Now you have 3 items.
+Now you have 3 tasks.
 ******************************************************
 ******************************************************
 Sweet! I have marked the following task as done:
@@ -31,7 +31,8 @@ Here are the items in your list:
 3. [E] [ ] go party  (at Thursday evening)
 ******************************************************
 ******************************************************
-You gotta give me a description to work with, buddy.
+You gotta give me a description to work with, buddy:
+Command "todo" cannot be empty.
 ******************************************************
 ******************************************************
 Bye, see you soon! Don't miss me too much.
