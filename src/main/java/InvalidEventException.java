@@ -13,7 +13,7 @@ class InvalidEventException extends DukeException{
                     + "\u2639 OOPS!!! The description of an event cannot be empty :-( \n"
                     + "____________________________________________________________\n";
         } else {
-            return "_______________________________________________________________\n"
+            return "____________________________________________________________\n"
                     + "\u2639 OOPS!! format for event: event (task) /at (time)\n"
                     + "____________________________________________________________\n";
         }

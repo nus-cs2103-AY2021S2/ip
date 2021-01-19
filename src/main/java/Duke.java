@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
     protected static boolean canExit = false;
 
     //user commands
@@ -60,24 +60,34 @@ public class Duke {
             Exit();
 
         } else if (description.toLowerCase().contains(doneCommand)) {
-            int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
-            try {
+            try{
+                int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
                 updateTaskStatus(taskIndex);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(
                         "\n___________________________________________________________________\n"
                                 + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
                                 + "___________________________________________________________________\n");
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        "\n___________________________________________________________________\n"
+                        + "\u2639 OOPS!!! you need to enter the index of the task :-( \n"
+                        + "___________________________________________________________________\n");
             }
 
         } else if (description.toLowerCase().contains(deleteCommand)) {
-            int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
             try {
+                int taskIndex = Integer.parseInt(description.replaceAll("[^0-9]", ""));
                 Delete(taskIndex);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(
                         "\n___________________________________________________________________\n"
                                 + "\u2639 OOPS!!! the task you are referring to does not seem to exist :-( \n"
+                                + "___________________________________________________________________\n");
+            } catch(NumberFormatException e) {
+                System.out.println(
+                        "\n___________________________________________________________________\n"
+                                + "\u2639 OOPS!!! you need to enter the index of the task :-( \n"
                                 + "___________________________________________________________________\n");
             }
 
@@ -219,6 +229,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         System.out.println("Hello from\n" + logo);
 
         Greet();

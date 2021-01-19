@@ -13,7 +13,7 @@ class InvalidDeadlineException extends DukeException {
                     + "\u2639 OOPS!!! The description of a deadline cannot be empty :-( \n"
                     + "____________________________________________________________\n";
         } else {
-            return "_______________________________________________________________\n"
+            return "____________________________________________________________\n"
                     + "\u2639 OOPS!! format for deadline: deadline (task) /by (date)\n"
                     + "____________________________________________________________\n";
         }
