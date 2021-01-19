@@ -7,16 +7,22 @@ public class Chatbox {
         Scanner keyboard = new Scanner(System.in);
 
         robot.welcome();
-        while (true){
+
+        while (true) {
             String userMessage = user.inputMessage(keyboard);
             if (robot.wantExit(userMessage)) break;
-            robot.response(userMessage);
+            try{
+                robot.response(userMessage);
+            }
+            catch(DukeException e){
+                Chatbox.chatbotDisplay(e.getMessage());
+            }
         }
-
         robot.goodbye();
         keyboard.close();
 
     }
+
     public static void chatbotDisplay(String botMessage){
         System.out.println("**************** Chatbot Message ****************");
         System.out.println(botMessage);
