@@ -40,8 +40,7 @@ public class Duke {
                             + "How cool is that?");
                     System.out.println(completedTask);
                 }
-            } else if (isTodo(input) || isDeadline(input)
-                    || isEvent(input)) {
+            } else if (isTask(input)) {
                 System.out.println(" Added: ");
                 Task thisTask;
                 String name;
@@ -82,6 +81,11 @@ public class Duke {
         return (input.length() > 5
                 && input.substring(0, 5).equals("done ")
                 && Character.isDigit(input.charAt(5)));
+    }
+
+    public static boolean isTask(String input) {
+        return (isTodo(input) || isDeadline(input)
+                || isEvent(input));
     }
 
     public static boolean isTodo(String input) {
