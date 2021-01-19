@@ -11,14 +11,37 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
+            Parser parser = new Parser(input);
+            String parsedCommand = parser.getParsedCommand();
+            String taskName = parser.getTaskName();
+            String additionals = parser.getAdditionals();
+            Task thisTask;
+
             System.out.println(PARTING_LINE);
-            if (input.equals("list")) {
-                listTasks();
-            } else if (isDoneCommand(input)){
-                int index = Character.getNumericValue(input.charAt(5)) - 1;
-                markAsComplete(index);
-            } else if (isTask(input)) {
-                addThisTask(input);
+            try {
+                Command command = Command.valueOf(parsedCommand);
+                switch (command) {
+                case LIST:
+                    listTasks();
+                    break;
+                case DONE:
+                    int index = Integer.parseInt(additionals) - 1;
+                    markAsComplete(index);
+                    break;
+                case TODO:
+                    thisTask = new Todo(taskName);
+                    addThisTask(thisTask);
+                    break;
+                case DEADLINE:
+                    thisTask = new Deadline(taskName, additionals);
+                    addThisTask(thisTask);
+                    break;
+                case EVENT:
+                    thisTask = new Event(taskName, additionals);
+                    addThisTask(thisTask);
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid command!");
             }
             System.out.println(PARTING_LINE);
             input = sc.nextLine();
@@ -62,53 +85,10 @@ public class Duke {
         }
     }
 
-    public static void addThisTask(String input) {
+    public static void addThisTask(Task task) {
         System.out.println(" Added: ");
-        Task thisTask;
-        String name;
-        if (isTodo(input)) {
-            name = input.substring(5);
-            thisTask = new Todo(name);
-        } else if (isDeadline(input)) {
-            int byIndex = input.indexOf(" /by ");
-            name = input.substring(9, byIndex);
-            String ddl = input.substring(byIndex + 5);
-            thisTask = new Deadline(name, ddl);
-        } else {
-            int atIndex = input.indexOf(" /at ");
-            name = input.substring(6, atIndex);
-            String date = input.substring(atIndex + 5);
-            thisTask = new Event(name, date);
-        }
-        tasks.add(thisTask);
-        System.out.println("  " + thisTask);
+        tasks.add(task);
+        System.out.println("  " + task);
         System.out.println(" Now you have " + tasks.size() + " tasks.");
-    }
-
-    /**
-     * This method judges whether input string is a valid
-     * command that contains keyword "done".
-     * @param input is the string to be tested
-     * @return true if the input is valid, false otherwise
-     */
-    public static boolean isDoneCommand(String input) {
-        return (input.length() > 5 && input.substring(0, 5).equals("done ")
-                && Character.isDigit(input.charAt(5)));
-    }
-
-    public static boolean isTask(String input) {
-        return (isTodo(input) || isDeadline(input) || isEvent(input));
-    }
-
-    public static boolean isTodo(String input) {
-        return (input.length() > 5 && input.substring(0, 5).equals("todo "));
-    }
-
-    public static boolean isDeadline(String input) {
-        return (input.length() > 9 && input.substring(0, 9).equals("deadline "));
-    }
-
-    public static boolean isEvent(String input) {
-        return (input.length() > 6 && input.substring(0, 6).equals("event "));
     }
 }
