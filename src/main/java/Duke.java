@@ -6,12 +6,14 @@ public class Duke {
 
     public static void initiate(Scanner s) {
         Duke.Greet();
-        String input = s.nextLine();
-        String[] arr = input.split(" ", 2);
-        String command = arr[0];
 
-        while(!command.equals("bye")){
-            if (command.equals("list")) {
+        while(s.hasNextLine()){
+            String input = s.nextLine();
+            String[] arr = input.split(" ", 2);
+            String command = arr[0];
+            if (command.equals("bye")) {
+                break;
+            } else if (command.equals("list")) {
                 Duke.list();
             } else if (command.equals("done")) {
                 String msg = arr[1];
@@ -20,37 +22,32 @@ public class Duke {
                 String msg = arr[1];
                 Duke.add(command, msg);
             }
-            input = s.nextLine();
-            arr = input.split(" ", 2);
-            command = arr[0];
         }
         Duke.exit();
     }
 
+    public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        Duke.initiate(s);
+    }
 
     public static void add(String typeOfTask, String msg) {
-//        System.out.println(msg);
         Task newTask;
         String[] arr1;
         if (typeOfTask.equals("todo")) {
             newTask = new Todo(msg);
         } else if (typeOfTask.equals("deadline")) {
             arr1 = msg.split("/by ");
-//            System.out.println(arr1[2]);
-//            System.out.println(arr1[0]);
-//            System.out.println(arr1[1]);
             newTask = new Deadline(arr1[0], arr1[1]);
         } else {
             arr1 = msg.split("/at ");
-//            System.out.println(arr1[0]);
-//            System.out.println(arr1[1]);
             newTask = new Event(arr1[0], arr1[1]);
         }
         lst.add(newTask);
         System.out.println("---------------------------------------");
-        System.out.println("Got it. I 've added this task: \n" + newTask);
+        System.out.println("Got it. I 've added this task:\n" + newTask);
         Duke.status();
-        System.out.println("---------------------------------------\n");
+        System.out.println("---------------------------------------");
     }
 
     public static void markAsDone(int i) {
@@ -58,7 +55,7 @@ public class Duke {
         System.out.println("---------------------------------------");
         System.out.println("Nice! I 've marked this task as done");
         System.out.println(lst.get(i - 1).toString());
-        System.out.println("---------------------------------------\n");
+        System.out.println("---------------------------------------");
     }
 
     public static void list() {
@@ -67,7 +64,7 @@ public class Duke {
         for(int i = 0; i < lst.size(); i++) {
            System.out.println((i + 1) + "." + lst.get(i).toString());
         }
-        System.out.println("---------------------------------------\n");
+        System.out.println("---------------------------------------");
     }
 
     public static void status() {
@@ -75,20 +72,23 @@ public class Duke {
     }
 
     public static void Greet() {
-        System.out.println("---------------------------------------");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("---------------------------------------\n");
+        String instructions = "Hello! I'm Duke\nWhat can I do for you?";
+        Duke.output(instructions);
     }
 
     public static void echo(String msg) {
-        System.out.println("---------------------------------------");
-        System.out.println(msg);
-        System.out.println("---------------------------------------\n");
+        String instructions = msg;
+        Duke.output(instructions);
     }
 
     public static void exit() {
+        String instructions = "Bye. Hope to see you again soon!";
+        Duke.output(instructions);
+    }
+
+    public static void output(String instructions) {
         System.out.println("---------------------------------------");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("---------------------------------------\n");
+        System.out.println(instructions);
+        System.out.println("---------------------------------------");
     }
 }

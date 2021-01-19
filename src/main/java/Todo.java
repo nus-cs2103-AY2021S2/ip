@@ -4,12 +4,17 @@ public class Todo extends Task{
         super(msg);
     }
 
+    Todo(String msg, Boolean isDone) {
+        super(msg, isDone);
+    }
+
+    @Override
+    public Todo setDone() {
+        return new Todo(this.msg, true);
+    }
+
     @Override
     public String toString() {
-        if (this.isDone.equals(true)) {
-            return "[T][X] " + msg;
-        } else {
-            return "[T][ ] " + msg;
-        }
+        return "[T]" + super.toString();
     }
 }

@@ -5,12 +5,17 @@ public class Event extends Task{
         this.time = time;
     }
 
+    Event(String msg, Boolean isDone) {
+        super(msg, isDone);
+    }
+
+    @Override
+    public Event setDone() {
+        return new Event(this.msg, true);
+    }
+
     @Override
     public String toString() {
-        if (this.isDone.equals(true)) {
-            return "[E][X] " + msg + time;
-        } else {
-            return "[E][ ] " + msg + time;
-        }
+        return "[E]" + super.toString() + "(at: " + time + ")";
     }
 }
