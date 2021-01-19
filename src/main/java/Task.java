@@ -1,12 +1,7 @@
-enum TaskType
-{
-    ToDo, Deadline, Event;
-}
-
 public class Task {
-    private final String description;
-    private boolean isDone;
-    private final int id;
+    protected final String description;
+    protected boolean isDone;
+    protected final int id;
 
     Task(String description, int id) {
         this.description = description;
