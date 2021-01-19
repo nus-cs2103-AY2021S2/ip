@@ -21,25 +21,18 @@ public class Duke {
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
-            String nextCommand = sc.nextLine();
-            String[] commandToWords = nextCommand.split(" ");
+            String nextInput = sc.nextLine();
+            String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
             try {
-                if (nextCommand.equals("bye")) {
-                    bye(username);
-                } else if (nextCommand.equals("list")) {
-                    list(tasks, totalTasks);
-                } else if (commandToWords[0].equals("done")) {
-                    done(nextCommand, tasks, totalTasks);
-                } else if (commandToWords[0].equals("todo")) {
-                    todo(nextCommand, tasks);
-                } else if (commandToWords[0].equals("deadline")) {
-                    deadline(nextCommand, tasks);
-                } else if (commandToWords[0].equals("event")) {
-                    event(nextCommand, tasks);
-                } else if (commandToWords[0].equals("delete")) {
-                    delete(nextCommand, tasks, totalTasks);
-                } else {
-                    wrongCommand();
+                switch (command) {
+                    case "todo" -> todo(nextInput, tasks);
+                    case "deadline" -> deadline(nextInput, tasks);
+                    case "event" -> event(nextInput, tasks);
+                    case "done" -> done(nextInput, tasks, totalTasks);
+                    case "delete" -> delete(nextInput, tasks, totalTasks);
+                    case "list" -> list(tasks, totalTasks);
+                    case "bye" -> bye(username);
+                    default -> wrongCommand();
                 }
             } catch (DukeException e) {
                 //noinspection ThrowablePrintedToSystemOut
@@ -93,15 +86,15 @@ public class Duke {
 
     /**
      * Adds a Todo task.
-     * @param nextCommand The description of the task.
+     * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public static void todo(String nextCommand, ArrayList<Task> tasks) throws DukeException{
-        if (nextCommand.length() < 6) {
+    public static void todo(String nextInput, ArrayList<Task> tasks) throws DukeException{
+        if (nextInput.length() < 6) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
-        String command = nextCommand.substring(5);
+        String command = nextInput.substring(5);
         tasks.add(new Todo(command));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
@@ -112,18 +105,18 @@ public class Duke {
 
     /**
      * Adds a Deadline task.
-     * @param nextCommand The description of the task.
+     * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public static void deadline(String nextCommand, ArrayList<Task> tasks) throws DukeException{
-        if (nextCommand.length() < 10) {
+    public static void deadline(String nextInput, ArrayList<Task> tasks) throws DukeException{
+        if (nextInput.length() < 10) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-        } else if (!nextCommand.contains("/")){
+        } else if (!nextInput.contains("/")){
             throw new DukeException("OOPS!!! The date information of a deadline cannot be empty.");
         }
-        String command = nextCommand.substring(9, nextCommand.indexOf("/") - 1);
-        String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
+        String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
+        String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
@@ -134,38 +127,23 @@ public class Duke {
 
     /**
      * Adds an Event task.
-     * @param nextCommand The description of the task.
+     * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
-    public static void event(String nextCommand, ArrayList<Task> tasks) throws DukeException{
-        if (nextCommand.length() < 7) {
+    public static void event(String nextInput, ArrayList<Task> tasks) throws DukeException{
+        if (nextInput.length() < 7) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-        } else if (!nextCommand.contains("/")) {
+        } else if (!nextInput.contains("/")) {
             throw new DukeException("OOPS!!! The date information of an event cannot be empty.");
         }
-        String command = nextCommand.substring(6, nextCommand.indexOf("/") - 1);
-        String dateInfo = nextCommand.substring(nextCommand.indexOf("/") + 4);
+        String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
+        String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
-        System.out.println("----------------------------------------------------------------------------------------");
-    }
-
-    /**
-     * List out all user inputs in sequence.
-     * @param tasks The Task Arraylist containing user tasks in sequence.
-     * @param count The current number of tasks stored inside the Task Arraylist.
-     */
-    public static void list(ArrayList<Task> tasks, int count) {
-        System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < count; i++){
-            int listNum = i + 1;
-            System.out.println(listNum + ". " + tasks.get(i).toString());
-        }
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
@@ -207,6 +185,21 @@ public class Duke {
         System.out.println("Noted. I've removed this task: \n" + "    " + taskRemoved);
         taskDeleted();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
+        System.out.println("----------------------------------------------------------------------------------------");
+    }
+
+    /**
+     * List out all user inputs in sequence.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param count The current number of tasks stored inside the Task Arraylist.
+     */
+    public static void list(ArrayList<Task> tasks, int count) {
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("Here are the tasks in your list:");
+        for (int i = 0; i < count; i++){
+            int listNum = i + 1;
+            System.out.println(listNum + ". " + tasks.get(i).toString());
+        }
         System.out.println("----------------------------------------------------------------------------------------");
     }
 
