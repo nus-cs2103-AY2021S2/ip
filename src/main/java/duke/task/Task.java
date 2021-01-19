@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -10,6 +12,10 @@ public class Task {
     public String getStatusIcon(){
         //return tick or cross symbols
         return (isDone ? "\u2713" : " ");
+    }
+
+    public void done(){
+        this.isDone = true;
     }
 
     @Override

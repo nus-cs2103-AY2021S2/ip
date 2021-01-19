@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 // does not fit syntax for command
 public class CommandException extends DukeException{
