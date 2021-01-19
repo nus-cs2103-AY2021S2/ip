@@ -1,6 +1,11 @@
 public class Task {
     String description;
-    private boolean completed;
+    protected boolean completed;
+
+    Task() {
+        description = "";
+        completed = false;
+    }
 
     Task(String description) {
         this.description = description;
@@ -16,9 +21,9 @@ public class Task {
         StringBuilder sb = new StringBuilder();
 
         if (this.completed)
-            sb.append("[x] ");
+            sb.append("[T] [x] ");
         else
-            sb.append("[ ] ");
+            sb.append("[T] [ ] ");
 
         sb.append(this.description);
         return sb.toString();

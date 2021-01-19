@@ -2,19 +2,33 @@ import java.util.ArrayList;
 
 public class myList {
     ArrayList<Task> taskList;
-    int counter;
 
     public myList() {
         taskList = new ArrayList<>();
-        counter = 0;
     }
 
     public void addTask(String taskDescription) {
         Task task = new Task(taskDescription);
 
         taskList.add(task);
-        counter++;
-        System.out.println("Added to list: " + taskDescription + "\n");
+        System.out.println("Added to list:\n" + task.toString());
+        System.out.println("You now have " + taskList.size() + " tasks\n");
+    }
+
+    public void addDeadline(String description, String datetime) {
+        Deadline deadline = new Deadline(description, datetime);
+
+        taskList.add(deadline);
+        System.out.println("Added to list:\n" + deadline.toString());
+        System.out.println("You now have " + taskList.size() + " tasks\n");
+    }
+
+    public void addEvent(String description, String datetime) {
+        myEvent event = new myEvent(description, datetime);
+
+        taskList.add(event);
+        System.out.println("Added to list:\n" + event.toString());
+        System.out.println("You now have " + taskList.size() + " tasks\n");
     }
 
     public void markCompleted(int index) {
@@ -27,7 +41,7 @@ public class myList {
         StringBuilder sb = new StringBuilder();
         sb.append("Here's your list of tasks! ");
 
-        for (int i = 0; i < counter; i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             sb.append("\n"
                     + (i + 1)
                     + ". "
