@@ -7,4 +7,11 @@ event
 deadline
 event a
 deadline b
+list
+done 3
+done 2
+done 1
+delete 3
+delete 2
+delete 1
 bye
