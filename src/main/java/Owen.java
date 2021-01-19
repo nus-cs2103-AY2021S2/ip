@@ -1,7 +1,10 @@
 public class Owen implements Chatbot {
+    private final boolean isRunning;
     private final Response latestResponse;
 
     public Owen() {
+        this.isRunning = true;
+
         StringBuilder stringBuilder = new StringBuilder();
         String logo = ""
                 + " /\\_/\\ \n"
@@ -11,6 +14,22 @@ public class Owen implements Chatbot {
         stringBuilder.append(logo);
         stringBuilder.append("\nHello I am Owen the Owl!");
         this.latestResponse = new DefaultResponse(stringBuilder.toString());
+    }
+
+    private Owen(boolean isRunning, Response latestResponse) {
+        this.isRunning = isRunning;
+        this.latestResponse = latestResponse;
+    }
+
+    @Override
+    public Owen shutdown() {
+        Response shutdownResponse = new DefaultResponse("Bye. Hope to see you again soon!");
+        return new Owen(false, shutdownResponse);
+    }
+
+    @Override
+    public boolean isRunning() {
+        return this.isRunning;
     }
 
     @Override
