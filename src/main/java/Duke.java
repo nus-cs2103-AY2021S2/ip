@@ -22,6 +22,35 @@ public class Duke {
                     System.out.println(indentation + (i+1) + "." + taskList[i].getTaskInfo());
                 }
                 break;
+            case"error_no_meaning":
+                System.out.println(indentation + "OOPS!!! I'm sorry, but I don't know what that means :-(");
+                break;
+            case"error_done_empty":
+                System.out.println(indentation + "OOPS!!! The number of a done cannot be empty :-(");
+                break;
+            case"error_done_no_meaning":
+                System.out.println(indentation + "OOPS!!! Please input a number of Task :-(");
+                break;
+            case"error_done_non_existed_task":
+                System.out.println(indentation + "OOPS!!! the Task you choosing isn't existed :-(");
+                break;
+            case"error_todo_empty":
+                System.out.println(indentation + "OOPS!!! The description of a todo task cannot be empty. :-(");
+                break;
+            case"error_deadline_empty":
+                System.out.println(indentation + "OOPS!!! The description of a deadline task cannot be empty. :-(");
+                break;
+            case "error_deadline_by":
+                System.out.println(indentation + "OOPS!!! The deadline of a deadline task cannot be empty. :-(");
+                System.out.println(indentation + "Please enter according to the format eg.description /by deadline");
+                break;
+            case"error_event_empty":
+                System.out.println(indentation + "OOPS!!! The description of a event task cannot be empty. :-(");
+                break;
+            case "error_event_at":
+                System.out.println(indentation + "OOPS!!! The period of a event task cannot be empty. :-(");
+                System.out.println(indentation + "Please enter according to the format eg.description /at period");
+                break;
             default:
                 System.out.println(indentation+"Got it. I've added this task:");
                 System.out.println(indentation + taskList[Task.countTask-1].getTaskInfo());
@@ -64,28 +93,63 @@ public class Duke {
                     String[] commandSplit = command.split(" ");
                     switch (commandSplit[0]){
                         case "done":
-                            if(commandSplit.length == 2){
-                                taskList[Integer.parseInt(commandSplit[1])-1].markAsDone();
-                                printDoneReply(Integer.parseInt(commandSplit[1])-1);
+                            try {
+                                taskList[Integer.parseInt(commandSplit[1]) - 1].markAsDone();
+                                printDoneReply(Integer.parseInt(commandSplit[1]) - 1);
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_done_empty");
+                            }catch (NumberFormatException e){
+                                printReply("error_done_no_meaning");
+                            }catch (NullPointerException e){
+                                printReply("error_done_non_existed_task");
                             }
                             break;
                         case "todo":
+                            try{
+                                String test = commandSplit[1];
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_todo_empty");
+                                break;
+                            }
                             command = command.replaceAll("todo"," ").trim();
                             taskList[Task.countTask] = new Todo(command);
                             printReply(command);
                             break;
+
                         case "deadline":
+                            try{
+                                String test = commandSplit[1];
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_deadline_empty");
+                                break;
+                            }
                             command = command.replaceAll("deadline"," ").trim();
                             commandSplit = command.split("/by");
-                            taskList[Task.countTask] = new Deadline(commandSplit[0].trim(),commandSplit[1].trim());
-                            printReply(command);
+                            try{
+                                taskList[Task.countTask] = new Deadline(commandSplit[0].trim(),commandSplit[1].trim());
+                                printReply(command);
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_deadline_by");
+                            }
                             break;
                         case "event":
+                            try{
+                                String test = commandSplit[1];
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_event_empty");
+                                break;
+                            }
                             command = command.replaceAll("event"," ").trim();
                             commandSplit = command.split("/at");
-                            taskList[Task.countTask] = new Event(commandSplit[0].trim(),commandSplit[1].trim());
-                            printReply(command);
+                            try {
+                                taskList[Task.countTask] = new Event(commandSplit[0].trim(),commandSplit[1].trim());
+                                printReply(command);
+                            }catch (ArrayIndexOutOfBoundsException e){
+                                printReply("error_event_at");
+                            }
+
                             break;
+                        default:printReply("error_no_meaning");
                     }
             }
 
