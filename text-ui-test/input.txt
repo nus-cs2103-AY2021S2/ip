@@ -1,13 +1,14 @@
-todo borrow book
-todo blah blah
+deadline read book /by Someday
+event cs2103 lecture /at next Thursday
 list
 deadline cs2103 assignment /by Thursday 2359
-event cs2103 lecture /at Thursday too!! :566&:$$
+event cs2103 lecture /at this Thursday too!! :566&:$$
 done 3
 list
 done 4
 list
 deadline
-todo
+todo lunch
 event
+blahff
 bye

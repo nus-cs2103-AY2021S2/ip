@@ -107,21 +107,24 @@ public class Duke {
                 if (input.equals("bye")) break;
                 if (input.equals("list")) {
                     printAllTasks();
-                } else if (CommandType.MARK_AS_DONE.isMatchingInput(input)) {
+                } else if (CommandType.MARK_AS_DONE.isMatching(input)) {
                     int indexToMarkDone = parseMarkDone(input);
                     markTaskDone(indexToMarkDone);
-                } else if (CommandType.ADD_DEADLINE.isMatchingInput(input)) {
+                } else if (CommandType.ADD_DEADLINE.isMatching(input)) {
                     Task incomingTask = parseAddDeadline(input);
                     addTask(incomingTask);
-                } else if (CommandType.ADD_EVENT.isMatchingInput(input)) {
+                } else if (CommandType.ADD_EVENT.isMatching(input)) {
                     Task incomingTask = parseAddEvent(input);
                     addTask(incomingTask);
-                } else if (CommandType.ADD_TODO.isMatchingInput(input)) {
+                } else if (CommandType.ADD_TODO.isMatching(input)) {
                     Task incomingTask = parseToDo(input);
                     addTask(incomingTask);
+                } else {
+                    throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
+
             } catch (DukeException e) {
-                System.out.println("OOPS!!!" + e.getMessage());
+                System.out.println("OOPS!!! " + e.getMessage());
             }
         }
         System.out.println("Bye. Hope to see you again soon!");

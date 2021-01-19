@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum CommandType {
     ADD_EVENT(){
         @Override
-        public boolean isMatchingInput(String input) {
+        public boolean isMatching(String input) {
             input = input.toLowerCase();
             if (input.startsWith("event ") || input.equals("event")){
                 return true;
@@ -17,7 +17,7 @@ public enum CommandType {
     },
     ADD_DEADLINE() {
         @Override
-        public boolean isMatchingInput(String input) {
+        public boolean isMatching(String input) {
             input = input.toLowerCase();
             if (input.startsWith("deadline ") || input.equals("deadline")) {
                 return true;
@@ -28,7 +28,7 @@ public enum CommandType {
     },
     ADD_TODO() {
         @Override
-        public boolean isMatchingInput(String input) {
+        public boolean isMatching(String input) {
             input = input.toLowerCase();
             if (input.startsWith("todo ")||input.equals("todo")) {
                 return true;
@@ -39,7 +39,7 @@ public enum CommandType {
     },
     MARK_AS_DONE() {
         @Override
-        public boolean isMatchingInput(String input) {
+        public boolean isMatching(String input) {
             input = input.toLowerCase();
             if (input.startsWith("done ")|| input.equals("done")) {
                 return true;
@@ -50,7 +50,7 @@ public enum CommandType {
     },
     REMOVE_TASK() {
         @Override
-        public boolean isMatchingInput(String input) {
+        public boolean isMatching(String input) {
             input = input.toLowerCase();
             if (input.startsWith("delete ")||input.equals("delete")) {
                 return true;
@@ -61,7 +61,7 @@ public enum CommandType {
     };
 
 
-    public abstract boolean isMatchingInput(String input);
+    public abstract boolean isMatching(String input);
 
 
 
