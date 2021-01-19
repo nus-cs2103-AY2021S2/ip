@@ -20,6 +20,6 @@ event /at 4-6pm monday
 event read books
 event
 list
-bye
-
+done
+blah
 bye

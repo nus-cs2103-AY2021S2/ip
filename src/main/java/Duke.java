@@ -58,16 +58,16 @@ public class Duke {
 
         switch (oneArg){
         case "done":
-            errMsg = "Please include the list item number of the task to mark done ";
+            errMsg = "Please include the list item number of the task to mark done.";
             break;
         case "todo":
-            errMsg = "Please include a description for your todo";
+            errMsg = "Please include a description for your todo.";
             break;
         case "event":
-            errMsg = "Please include a description and an /at argument for your event";
+            errMsg = "Please include a description and an /at argument for your event.";
             break;
         case "deadline":
-            errMsg = "Please include a description and a /by argument for your deadline";
+            errMsg = "Please include a description and a /by argument for your deadline.";
             break;
         default:
             errMsg = "Uh oh, I don't recognise this command. Please try something else.";
