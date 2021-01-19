@@ -3,10 +3,6 @@ import java.io.*;
 
 public class Duke {
 
-    public static final int TODO = 0;
-    public static final int DEADLINE = 1;
-    public static final int EVENT = 2;
-
     static class FastIO extends PrintWriter
     {
         BufferedReader br;
@@ -164,7 +160,7 @@ public class Duke {
                     try {
                         int done = Integer.parseInt(split[1]) - 1;
                         leest.get(done).setDone();
-                        System.out.println("Sugoi! I've marked this task as done uwu: ");
+                        System.out.println("Sugoi! I've marked this task as done uwu:");
                         System.out.println(leest.get(done));
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");

@@ -5,16 +5,16 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___| uwu
 
-Hello! I'm Duwuke
- What can I do for you? uwu
-Hai. I've added this task uwu:
+Nyahello! I'm Duwuke, your neighbourhood disgusting weeb bot!
+What can I do for you? uwu
     [T][ ] watch anime
+Hai. I've added this task uwu:
 Now you have 1 task(s) in the list uwu
-Hai. I've added this task:
     [D][ ] finish CS2103 project  (by: Thursday)
-Now you have 2 task(s) in the list uwu
 Hai. I've added this task:
+Now you have 2 task(s) in the list uwu
     [D][ ] Usada Pekora livestream  (by: Mon 2-4pm JST)
+Hai. I've added this task:
 Now you have 3 task(s) in the list uwu
 Here are the tasks in your list uwu:
 1. [T][ ] watch anime
