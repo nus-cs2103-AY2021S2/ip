@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void list(ArrayList<Task> tasks) {
+        System.out.println("     Here are the tasks in your list");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("     " + (i + 1) + "." + tasks.get(i));
         }
@@ -14,6 +15,7 @@ public class Duke {
 
     public static void bye() {
         System.out.println("     Bye. Hope to see you again soon!");
+        System.out.println("     _______________________________________\n");
     }
 
     public static void done(Task task) {
@@ -65,11 +67,9 @@ public class Duke {
             userInput = sc.next();
             System.out.println("     _______________________________________");
             if (userInput.equals("list")) {
-                System.out.println("     Here are the tasks in your list");
                 list(userTasks);
             } else if (userInput.equals("bye")) {
                 bye();
-                System.out.println("     _______________________________________\n");
                 break;
             } else if (userInput.equals("done")) {
                 done(userTasks.get(sc.nextInt() - 1));
