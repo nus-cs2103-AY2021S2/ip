@@ -23,6 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.description;
+        return String.format("[%s] ", this.getStatusIcon()) + this.description ;
     }
 }

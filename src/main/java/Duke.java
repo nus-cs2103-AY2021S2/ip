@@ -23,7 +23,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String command;
 
-        List<Task> toDoList = new ArrayList<Task>();
+        List<Task> taskList = new ArrayList<Task>();
         int currIdx = 0;
         //while loop to echo commands of the user
         command = sc.nextLine();
@@ -33,31 +33,46 @@ public class Duke {
             if(parsedCommand[0].equals("list")) {
                 int index = 1;
                 System.out.print(line);
-                for(Task t : toDoList) {
-                    System.out.print(String.format("    %d. [%s] %s\n",
-                            index++, t.getStatusIcon(), t.toString()));
+                for(Task t : taskList) {
+                    System.out.print(String.format("    %d. %s\n",
+                            index++, t.toString()));
 
                 }
                 System.out.print(line);
             } else if(parsedCommand[0].equals("done")) {
                 int taskNum = Integer.valueOf(parsedCommand[1]);
-                Task t = toDoList.get(taskNum - 1);
+                Task t = taskList.get(taskNum - 1);
                 t = t.finishTask();
-                toDoList.set(taskNum - 1, t);
-                String statement = "     Nice! I've marked this task as done:\n" + "" +
-                        String.format("\t [%s] %s\n", t.getStatusIcon(), t.toString());
+                taskList.set(taskNum - 1, t);
+                String statement = "     Nice! I've marked this task as done:\n" +
+                        String.format("\t%s\n", t.toString());
                 System.out.print(line + statement + line);
 
             } else {
-                toDoList.add(new Task(command));
-                System.out.print(line + "    added: " + command + "\n" + line);
+                Task t;
+                if(parsedCommand[0].equals("todo")) {
+                    t = new ToDo(parsedCommand[1]);
+                } else if(parsedCommand[0].equals("deadline")) {
+                    String[] ppCmd = parsedCommand[1].split(" /by ", 2);
+                    t = new Deadline(ppCmd[0], ppCmd[1]);
+                } else {
+                    String[] ppCmd = parsedCommand[1].split(" /at ", 2);
+                    t = new Event(ppCmd[0], ppCmd[1]);
+                }
+                taskList.add(t);
+                String taskCount =
+                        String.format("     Now you have %d task(s) in the list\n",
+                        taskList.size());
+                String addTask = line + "     Got it. I've added this task:\n"
+                        + "\t" + t.toString() + "\n" + taskCount + line;
+                System.out.print(addTask);
             }
             command = sc.nextLine();
         }
 
         //print out the bye message
         String byeMessage = line
-                + "    Bye. Hope to see you again soon!\n"
+                + "     Bye. Hope to see you again soon!\n"
                 + line;
         System.out.print(byeMessage);
     }
