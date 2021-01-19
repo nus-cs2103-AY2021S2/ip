@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,13 +11,21 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         boolean isDone = false;
+        List<String> taskList = new ArrayList<>();
 
         while (!isDone) {
-            String command = in.nextLine();
-            if (command.equals("bye"))
+            String task = in.nextLine();
+            if (task.equals("bye"))
                 isDone = true;
-            else
-                System.out.println(command + "\n");
+            else if (task.equals("list")) {
+                IntStream.range(0, taskList.size())
+                        .forEach(idx -> {
+                            System.out.println(idx + 1 + ": " + taskList.get(idx));
+                        });
+            } else {
+                System.out.println("added: " + task + "\n");
+                taskList.add(task);
+            }
         }
 
         System.out.println("Bye. Hope to see you again soon!\n");
