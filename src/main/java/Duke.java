@@ -1,3 +1,4 @@
+import main.java.DukeException;
 import main.java.ListManager;
 
 import java.util.Scanner;
@@ -27,8 +28,15 @@ public class Duke {
 
                 System.out.println(outputString);
             }else{
-                String outputString = listManager.addTask(userinput);
-                System.out.println(outputString);
+
+
+                try{
+                    String outputString = listManager.addTask(userinput);
+                    System.out.println(outputString);
+                }catch (DukeException e){
+                    System.out.println(e.getMessage());
+                }
+
             }
             userinput = scanner.nextLine();
         }

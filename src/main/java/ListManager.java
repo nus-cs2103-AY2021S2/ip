@@ -11,37 +11,65 @@ public class ListManager extends Manager {
         numberOfTasks = 0;
     }
 
-    public String addTask(String userinput){
-        Task newTask;
-
-        if(userinput.length() > 5 && userinput.substring(0, 5).equals("todo ")){
-            newTask = new ToDo(userinput.substring(5));
-
-        }else if(userinput.length() > 6 && userinput.substring(0,6).equals("event ")) {
-            String[] arr = userinput.substring(6).split(" /at ");
-            newTask = new Event(arr[0], arr[1]);
-
-        }else if(userinput.length() > 9 && userinput.substring(0, 9).equals("deadline ")){
-            String[] arr = userinput.substring(9).split(" /by ");
-            newTask = new Deadline(arr[0], arr[1]);
-
-        }else{
-            newTask = new Task(userinput);
-            TaskArray.add(newTask);
-            return defaultFormatting("added: " + userinput);
-        }
-        TaskArray.add(newTask);
-        numberOfTasks = numberOfTasks + 1;
-        String temp = "Got it. I've added this task:\n       " + newTask.toString() + "\n" + getNumberOfTasks();
-        return defaultFormatting(temp);
+    public String welcomeLine(){
+        return defaultFormatting("Hello! I'm Duke\n" + "     What can I do for you?");
     }
 
     public String goodbyeLine(){
         return defaultFormatting("Bye. Hope to see you again soon!");
     }
 
-    public String welcomeLine(){
-        return defaultFormatting("Hello! I'm Duke\n" + "     What can I do for you?");
+    public String addTask(String userInput) throws DukeException{
+        Task newTask;
+
+        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")){
+
+            if (userInput.equals("todo") || userInput.equals("todo ")){
+                throw new DukeException(defaultFormatting("Error! The description of a todo cannot be empty!"));
+            }else{
+                newTask = new ToDo(userInput.substring(5));
+            }
+
+        }else if(userInput.length() >= 5 && userInput.substring(0,5).equals("event")) {
+
+            if (userInput.equals("event") || userInput.equals("event ")){
+                throw new DukeException(defaultFormatting("Error! The description of a event cannot be empty!"));
+            }else {
+                if (userInput.contains(" /at ")) {
+                    String[] arr = userInput.substring(6).split(" /at ");
+                    String eventdescription = arr[0];
+                    String descriptionAt = arr[1];
+                    newTask = new Event(eventdescription, descriptionAt);
+
+                }else{
+                    throw new DukeException(defaultFormatting("Error! Please provide where and when the" +
+                            " event will take place after /at."));
+                }
+            }
+        }else if(userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline")){
+
+            if (userInput.equals("deadline") || userInput.equals("deadline ")){
+                throw new DukeException(defaultFormatting("Error! The description of a deadline cannot be empty!"));
+            }else {
+                if (userInput.contains(" /by ")) {
+                    String[] arr = userInput.substring(9).split(" /by ");
+                    String deadlinedescription = arr[0];
+                    String descriptionBy = arr[1];
+                    newTask = new Deadline(deadlinedescription, descriptionBy);
+
+                }else{
+                    throw new DukeException(defaultFormatting("Error! Please provide when the deadline " +
+                            "will be due after /by."));
+                }
+            }
+        }else{
+            throw new DukeException(defaultFormatting("Error! I'm sorry, but I don't know what that means"));
+        }
+
+        TaskArray.add(newTask);
+        numberOfTasks = numberOfTasks + 1;
+        String temp = "Got it. I've added this task:\n       " + newTask.toString() + "\n" + getNumberOfTasks();
+        return defaultFormatting(temp);
     }
 
     public String getNumberOfTasks(){
