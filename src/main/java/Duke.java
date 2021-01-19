@@ -8,22 +8,36 @@ public class Duke {
         System.out.println("What can I do for you?");
         horizontalLine();
 
+        final String store[] = new String[100];
+        int counter = 0;
         final Scanner scan = new Scanner(System.in);
         while (true) {
             final String input = scan.nextLine();
             horizontalLine();
+
             if (input.toLowerCase().equals("bye")) {
                 System.out.println("\tBye. Hope to see you again soon!");
                 horizontalLine();
                 break;
             }
-            System.out.println("\t" + input);
+
+            if (input.equals("list")) {
+                for (int i = 0; i < counter; i++) {
+                    System.out.printf("\t%d. %s\n", i + 1, store[i]);
+                }
+            } else if (counter >= 100) {
+                System.out.println("\tSorry. The database is full!");
+            } else {
+                store[counter++] = input;
+                System.out.printf("\tadded: %s\n", input);
+            }
+
             horizontalLine();
         }
         scan.close();
     }
 
     private static void horizontalLine() {
-        System.out.println("─────────────────────────────────────────────────");
+        System.out.println("────────────────────────────────────────────────────────────────────");
     }
 }
