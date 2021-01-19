@@ -10,4 +10,9 @@ done 4
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+todo
+event
+deadline
+deadline notime
+event notime
 bye

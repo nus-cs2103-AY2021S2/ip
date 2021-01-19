@@ -47,7 +47,6 @@ public class Duke {
             }
         } else if (strippedCommand.startsWith("event")) {
             String cmd = strippedCommand.substring(5).strip();
-            System.out.println(cmd);
             if (cmd.isBlank()) {
                 String msg = "I apologize, please input description and time for 'event'.";
                 DukeException exception = new DukeException(msg);
