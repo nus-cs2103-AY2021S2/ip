@@ -39,4 +39,16 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 OOPS!!! The description of a event cannot be empty.
 OOPS!!! I'm sorry, but I don't know what that means :-(
+1.[D][ ] read book (by: Someday)
+2.[E][ ] cs2103 lecture (at: next Thursday)
+3.[D][X] cs2103 assignment (by: Thursday 2359)
+4.[E][X] cs2103 lecture (at: this Thursday too!! :566&:$$)
+5.[T][ ] lunch
+Noted. I've removed this task:
+	[T][ ] lunch
+Now you have 4 tasks in the list.
+1.[D][ ] read book (by: Someday)
+2.[E][ ] cs2103 lecture (at: next Thursday)
+3.[D][X] cs2103 assignment (by: Thursday 2359)
+4.[E][X] cs2103 lecture (at: this Thursday too!! :566&:$$)
 Bye. Hope to see you again soon!

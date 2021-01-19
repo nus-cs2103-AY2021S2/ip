@@ -45,6 +45,28 @@ public class Duke {
         System.out.println("\t" + task);
     }
 
+    private static int parseDelete(String input) throws DukeException{
+        if (input.toLowerCase().matches("^delete\\s*$")) {
+            throw new DukeException("The input cannot be empty.");
+        }
+        String regex = "^delete\\s+([0-9]+)$";
+        Pattern patternToMatch = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher m = patternToMatch.matcher(input);
+        if (!m.matches()){
+            throw new DukeException("The input for delete must be integer.");
+        }
+        int indexToDelete = Integer.parseInt(m.group(1));
+        return indexToDelete;
+    }
+
+    private static void deleteTask(int indexToDelete) {
+        Task task = listOfTasks.get(indexToDelete-1);
+        listOfTasks.remove(indexToDelete-1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+    }
+
     private static Task parseAddDeadline(String input) throws DukeException {
         if (input.toLowerCase().matches("^deadline\\s*$")) {
             throw new DukeException("The description of a deadline cannot be empty.");
@@ -89,6 +111,7 @@ public class Duke {
         return new ToDo(description);
     }
 
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -119,7 +142,10 @@ public class Duke {
                 } else if (CommandType.ADD_TODO.isMatching(input)) {
                     Task incomingTask = parseToDo(input);
                     addTask(incomingTask);
-                } else {
+                } else if (CommandType.REMOVE_TASK.isMatching(input)) {
+                    int indexToDelete = parseDelete(input);
+                    deleteTask(indexToDelete);
+                } else{
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
 

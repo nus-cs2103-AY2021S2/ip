@@ -11,4 +11,7 @@ deadline
 todo lunch
 event
 blahff
+list
+delete 5
+list
 bye
