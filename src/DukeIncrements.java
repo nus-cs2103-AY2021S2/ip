@@ -13,15 +13,15 @@ public class DukeIncrements {
         int count = 0;
         ArrayList<Task> arr = new ArrayList<>();
 
-        try {
-            while (sc.hasNext()) {
+        while (sc.hasNext()) {
+            try {
                 String input = sc.nextLine();
                 input = input.trim();
                 String[] str = input.split(" ", 2);
 
                 if (input.equalsIgnoreCase("todo") ||
                         input.equalsIgnoreCase("event") ||
-                            input.equalsIgnoreCase("deadline")) {
+                        input.equalsIgnoreCase("deadline")) {
                     throw new DukeException("there is nothing to do!");
                 }
 
@@ -57,7 +57,7 @@ public class DukeIncrements {
                     System.out.println(line);
                     ToDo tempT = new ToDo(str[1]);
                     arr.add(tempT);
-                   // arr[count] = tempT;
+                    // arr[count] = tempT;
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempT.toString());
                     count++;
@@ -71,6 +71,9 @@ public class DukeIncrements {
                     System.out.println(line);
 
                 } else if (str[0].equalsIgnoreCase("event")) {
+                    if (!str[1].contains("/at")) {
+                        throw new DukeException("oops! please specify time using '/at'");
+                    }
                     System.out.println(line);
                     String[] strE = str[1].split("/at", 2);
                     Event tempE = new Event(strE[0], strE[1]);
@@ -89,6 +92,9 @@ public class DukeIncrements {
                     System.out.println(line);
 
                 } else if (str[0].equalsIgnoreCase("deadline")) {
+                    if (!str[1].contains("/by")) {
+                        throw new DukeException("oops! please specify time using '/by'");
+                    }
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
                     Deadline tempD = new Deadline(strD[0], strD[1]);
@@ -123,11 +129,11 @@ public class DukeIncrements {
                 } else {
                     throw new DukeException("invalid input! start with todo/event/deadline");
                 }
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
         }
-        catch (DukeException e){
-            System.out.println(e);
-        }
+
     }
 }
 
