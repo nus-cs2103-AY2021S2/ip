@@ -15,24 +15,26 @@ public class Duke {
         System.out.println(line);
         Scanner sc = new Scanner(System.in);
         String toPrint = "";
+        int currentID = 1;
         String input = sc.nextLine();
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
         while (!input.equals("bye")) { //user input is not bye
             System.out.println(line);
             if (input.equals("list")) {
-                toPrint = ""; //reinitialising toPrint
-                for (int i = 1; i < list.size() + 1; i++) {
-                    String point = i + ". " + list.get(i - 1);
-                    if (i != list.size()) {
-                        toPrint = toPrint + align(point) + "\n";
-                    } else {
-                        toPrint = toPrint + align(point);
-                    }
+                System.out.println(align("Here are the tasks in your list:"));
+                for (Task t : list) {
+                    System.out.println(align(t.getID() + "." + t));
                 }
-                System.out.println(toPrint);
+            } else if (input.substring(0,4).equals("done")) {
+                int taskNo = Integer.parseInt(String.valueOf(input.charAt(5))) - 1;
+                list.get(taskNo).markAsDone();
+                System.out.println(align("Nice! I've marked this task as done:"));
+                System.out.println(align(list.get(taskNo).toString()));
             } else {
-                list.add(input);
-                toPrint = "added: " + input;
+                Task newTask = new Task(input, currentID);
+                list.add(newTask);
+                currentID++;
+                toPrint = "added: " + newTask.getDescription();
                 System.out.println(align(toPrint));
             }
             System.out.println(line);
