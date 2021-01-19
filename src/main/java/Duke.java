@@ -8,8 +8,8 @@ public class Duke {
         }
     }
 
-    public static void blah() {
-        System.out.println("     blah");
+    public static void blah() throws InvalidInputException {
+        throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public static void bye() {
@@ -21,27 +21,28 @@ public class Duke {
         System.out.println("     Nice! I've marked this task as done:\n     " + task);
     }
 
-    public static void addTask(String type, ArrayList<Task> tasks, Scanner sc) {
-        String taskName = "";
-        Task task = null;
-        if (type.equals("todo")) {
-            taskName = sc.nextLine();
-            task = new ToDo(false, taskName);
+    public static void addTask(String type, ArrayList<Task> tasks, Scanner sc) throws InvalidDescriptionException {
+        String taskDescription = sc.nextLine();
+        Task task;
+        if (taskDescription.equals("")) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        } else if (type.equals("todo")) {
+            task = new ToDo(false, taskDescription);
+        } else if (!taskDescription.contains("/by") && !taskDescription.contains("/at")) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The description format " + type + " is wrong.");
         } else {
-            String placeholder = "";
-            String dateTime;
-            while (!placeholder.equals("/by") && !placeholder.equals("/at")) {
-                taskName += (placeholder + " ");
-                placeholder = sc.next();
-            }
-            dateTime = sc.nextLine();
+            int index = type.equals("deadline") ? taskDescription.indexOf("/by") : taskDescription.indexOf("/at");
+            String taskName = taskDescription.substring(0, index);
+            String dateTime = taskDescription.substring(index + 4, taskDescription.length());
+
             if (type.equals("deadline")) {
                 task = new Deadline(false, taskName, dateTime);
-            } else if (type.equals("event")) {
+            } else {
                 task = new Event(false, taskName, dateTime);
             }
         }
         tasks.add(task);
+        System.out.println("     Got it. I've added this task:");
         System.out.println("     " + task);
         System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
     }
@@ -66,17 +67,25 @@ public class Duke {
             if (userInput.equals("list")) {
                 System.out.println("     Here are the tasks in your list");
                 list(userTasks);
-            } else if (userInput.equals("blah")) {
-                blah();
             } else if (userInput.equals("bye")) {
                 bye();
                 System.out.println("     _______________________________________\n");
                 break;
             } else if (userInput.equals("done")) {
                 done(userTasks.get(sc.nextInt() - 1));
+            } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event") ) {
+                try{
+                    addTask(userInput, userTasks, sc);
+                } catch (InvalidDescriptionException ex) {
+                    System.out.println("     " + ex.getMessage());
+                }
             } else {
-                System.out.println("     Got it. I've added this task:");
-                addTask(userInput, userTasks, sc);
+                // Could have just printed the exception message. But doing it to satisfy the minimal requirement.
+                try {
+                    blah();
+                } catch (InvalidInputException ex) {
+                    System.out.println("     " + ex.getMessage());
+                }
             }
             System.out.println("     _______________________________________\n");
         }
