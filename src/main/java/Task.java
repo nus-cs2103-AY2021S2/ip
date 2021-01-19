@@ -1,9 +1,9 @@
 public class Task {
-    protected String desc;
+    protected String description;
     protected boolean isDone;
 
-    public Task(String desc) {
-        this.desc = desc;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
@@ -11,8 +11,12 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
     @Override
     public String toString() {
-        return String.format((isDone ? "[X] " : "[] ") + this.desc);
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }
