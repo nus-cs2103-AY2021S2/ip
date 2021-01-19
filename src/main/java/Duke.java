@@ -1,14 +1,24 @@
 package main.java;
 
+import main.java.exceptions.*;
 import main.java.subfiles.*;
 import java.util.Scanner;
 
 public class Duke {
+    public static void greet() {
+        System.out.println("Hello! I'm Duke");
+        System.out.println("What can I do for you?");
+    }
+
+    public static void exit() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
 
-        taskManager.greet();
+        greet();
 
         while (true) {
             String s = sc.nextLine();
@@ -20,13 +30,16 @@ public class Duke {
                 taskManager.printTasks();
             else if (sArray[0].equals("done"))
                 taskManager.markDone(Integer.parseInt(sArray[1]) - 1);
-            else if (sArray[0].equals("todo") || sArray[0].equals("deadline") || sArray[0].equals("event"))
-                taskManager.addTask(s, s.charAt(0));
-            else
-                taskManager.addTask(s);
+            else {
+                try {
+                    taskManager.addTask(s);
+                } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
 
-        taskManager.exit();
+        exit();
         sc.close();
     }
 }

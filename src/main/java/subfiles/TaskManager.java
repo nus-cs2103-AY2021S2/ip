@@ -1,6 +1,7 @@
 package main.java.subfiles;
 
 import java.util.ArrayList;
+import main.java.exceptions.*;
 
 public class TaskManager {
     private ArrayList<Task> tasks;
@@ -9,42 +10,56 @@ public class TaskManager {
         tasks = new ArrayList<>();
     }
 
-    public void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-    }
-
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    private void addedTask() {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.size() - 1).toString());
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    }
-
-    public void addTask(String s) {
-        tasks.add(new Task(s));
-        addedTask();
-    }
-
-    public void addTask(String s, char type) {
-        if (type == 't') {
+    private void addTodo(String s)
+            throws EmptyDescriptionException {
+        try {
             s = s.substring(5);
             tasks.add(new ToDo(s));
-        } else if (type == 'd') {
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("todo");
+        }
+    }
+
+    private void addDeadline(String s)
+            throws EmptyDescriptionException, EmptyTimeException {
+        try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(9, sArray[0].length() - 1);
             String t = sArray[1].substring(3);
             tasks.add(new Deadline(s, t));
-        } else {
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("deadline");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyTimeException("deadline");
+        }
+    }
+
+    private void addEvent(String s)
+            throws EmptyDescriptionException, EmptyTimeException {
+        try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(6, sArray[0].length() - 1);
             String t = sArray[1].substring(3);
             tasks.add(new Event(s, t));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new EmptyDescriptionException("event");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new EmptyTimeException("event");
         }
-        addedTask();
+    }
+
+    public void addTask(String s)
+            throws EmptyDescriptionException, EmptyTimeException, InvalidInputException {
+        String command = s.split(" ", 2)[0];
+
+        if (command.equals("todo"))  addTodo(s);
+        else if (command.equals("deadline")) addDeadline(s);
+        else if (command.equals("event")) addEvent(s);
+        else throw new InvalidInputException();
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(tasks.get(tasks.size() - 1).toString());
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public void printTasks() {
