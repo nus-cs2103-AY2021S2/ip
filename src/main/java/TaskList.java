@@ -10,6 +10,10 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    private String taskCountMsg() {
+        return "\nNow you have " + taskList.size() + " task(s) in your list";
+    }
+
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
@@ -18,7 +22,7 @@ public class TaskList {
         taskList.add(task);
         return "Gotcha. I've added the task: \n    " 
                 + task 
-                + "\nNow you have " + taskList.size() + " task(s) in your list";
+                + taskCountMsg();
     }
 
     public String markTaskDone(int position) throws NoSuchElementException, IndexOutOfBoundsException {
@@ -46,6 +50,24 @@ public class TaskList {
         }
         return "Nice, another job well done!\n" 
             + taskList.get(position).toString();
+    }
+
+    public String deleteTask(Optional<String> args) throws NoSuchElementException, 
+            IndexOutOfBoundsException {
+        int position;
+        Task taskToRemove;
+        try {
+            position = Integer.parseInt(args.get()) - 1;
+            taskToRemove = taskList.get(position);
+            taskList.remove(position);
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Error: Please incude the index of the task.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+        }
+        return "I've removed the task:\n" 
+            + taskToRemove.toString()
+            + taskCountMsg();
     }
 
     public String listTasks() {

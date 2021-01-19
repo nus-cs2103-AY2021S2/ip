@@ -49,6 +49,14 @@ public class Sweh {
                 } catch (IndexOutOfBoundsException e) {
                     return e.getMessage();
                 }
+            case "delete":
+            try {
+                return taskList.deleteTask(argOptional);
+            } catch (NoSuchElementException e) {
+                return e.getMessage();
+            } catch (IndexOutOfBoundsException e) {
+                return e.getMessage();
+            }
             case "todo":
                 try {
                     return taskList.addTask(ToDo.newInstance(argOptional));
