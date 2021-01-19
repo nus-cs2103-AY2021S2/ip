@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -27,7 +29,7 @@ public class DukeIncrements {
 
                 if (input.equalsIgnoreCase("bye")) {
                     System.out.println(line);
-                    System.out.println("sayonara nerd! c ya soon ;)");
+                    System.out.println("goodbye! c ya soon ;)");
                     System.out.println(line);
 
                 } else if (input.equalsIgnoreCase("list")) {
