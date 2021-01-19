@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import customClass.Task;
+import customClass.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -24,6 +24,7 @@ public class Duke {
         List<Task> list = new ArrayList<>();
 
         while (!input.equals("bye")) {
+            System.out.println("____________________________________________________________");
             if (input.equals("list")) {
                 // Check if the command is list and display the list of tasks.
                 String temp = "";
@@ -34,31 +35,41 @@ public class Duke {
                         temp += "\n";
                     }
                 }
-                System.out.println(
-                    "____________________________________________________________\n" +
-                    temp + "\n" +
-                    "____________________________________________________________\n"
-                );
+                System.out.println(temp);
             } else if (input.split(" ")[0].equals("done")) {
                 int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
 
                 list.get(itemNumber).toggleIsDone();
                 System.out.println(
-                    "____________________________________________________________\n" +
                     "Nice! I've marked this task as done:\n" +
-                    list.get(itemNumber) + "\n" +
-                    "____________________________________________________________\n"
+                    list.get(itemNumber)
                 );
+            } else if (input.split(" ")[0].equals("todo")) {
+                Todo todo = new Todo(input.split(" ", 2)[1]);
+                list.add(todo);
+                System.out.println("added: " + todo);
+            } else if (input.split(" ")[0].equals("deadline")) {
+                String taskAndDate = input.split(" ", 2)[1];
+                String task = taskAndDate.split(" /by ")[0];
+                String date = taskAndDate.split(" /by ")[1];
+                Deadline deadline = new Deadline(task, date);
+                list.add(deadline);
+                System.out.println("added: " + deadline);
+            } else if (input.split(" ")[0].equals("event")) {
+                String taskAndDate = input.split(" ", 2)[1];
+                String task = taskAndDate.split(" /at ")[0];
+                String date = taskAndDate.split(" /at ")[1];
+                Event event = new Event(task, date);
+                list.add(event);
+                System.out.println("added: " + event);
             } else {
                 // Otherwise add tasks to the list and print it.
                 Task currentTask = new Task(input);
                 list.add(currentTask);
-                System.out.println(
-                    "____________________________________________________________\n" +
-                    "added: " + input + "\n" +
-                    "____________________________________________________________\n"
-                );
+                System.out.println("added: " + input);
             }
+
+            System.out.println("____________________________________________________________");
             input = sc.nextLine();
         }
 
