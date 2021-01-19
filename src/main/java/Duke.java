@@ -1,31 +1,32 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
-    static void printList(Task[] tasks, int noOfTasks) {
+    static void printList(ArrayList<Task> tasks, int noOfTasks) {
         System.out.println("------------------------------------------------");
         System.out.println("Here are the tasks in your list:");
 
         for (int j = 0; j < noOfTasks; j++) {
-            System.out.println(j + 1 + "." + tasks[j].toString());
+            System.out.println(j + 1 + "." + tasks.get(j).toString());
         }
 
         System.out.println("------------------------------------------------");
     }
 
-    static void markTask(Task[] tasks, int taskIndex, int noOfTasks) throws InvalidDescriptionException{
+     static void markTask(ArrayList<Task> tasks, int taskIndex, int noOfTasks) throws InvalidDescriptionException{
         if (taskIndex >= noOfTasks) {
             throw new InvalidDescriptionException("");
         }
 
-        tasks[taskIndex].markAsDone();
+        tasks.get(taskIndex).markAsDone();
 
         System.out.println("------------------------------------------------");
-        System.out.println("Nice! I've marked this task as done:\n" + tasks[taskIndex].toString());
+        System.out.println("Nice! I've marked this task as done:\n" + tasks.get(taskIndex).toString());
         System.out.println("------------------------------------------------");
     }
 
-    static void addTask(Task[] tasks, String taskType, String taskInfo, int noOfTasks) throws InvalidDescriptionException{
+    static void addTask(ArrayList<Task> tasks, String taskType, String taskInfo, int noOfTasks) throws InvalidDescriptionException{
         Task task = new Task();
 
         switch(taskType) {
@@ -65,7 +66,7 @@ public class Duke {
             }
         }
 
-        tasks[noOfTasks] = task;
+        tasks.add(noOfTasks, task);
 
         System.out.println("------------------------------------------------");
         System.out.println("Ok! I've added this task:\n" + task.toString());
@@ -73,9 +74,21 @@ public class Duke {
         System.out.println("------------------------------------------------");
     }
 
+    static void deleteTask(ArrayList<Task> tasks, int taskIndex, int noOfTasks) throws InvalidDescriptionException {
+        if (taskIndex >= noOfTasks) {
+            throw new InvalidDescriptionException("");
+        }
+        System.out.println("------------------------------------------------");
+        System.out.println("Ok! I've removed this task:\n" + tasks.get(taskIndex).toString());
+        System.out.println("Currently, you have " + (noOfTasks - 1) + " task(s) in the list!");
+        System.out.println("------------------------------------------------");
+
+        tasks.remove(taskIndex);
+    }
+
     static void invalidCommandChecker(String taskType) throws InvalidCommandException {
         if (!(taskType.equals("todo") || taskType.equals("done") || taskType.equals("list") || taskType.equals("event")
-                || taskType.equals("deadline"))) {
+                || taskType.equals("deadline") || taskType.equals("delete"))) {
             throw new InvalidCommandException("");
         }
     }
@@ -90,7 +103,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input;
         int noOfTasks = 0;
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         boolean caughtException;
 
         do {
@@ -106,10 +119,16 @@ public class Duke {
                     } else if (taskType.equals("done")) {
                         emptyDescriptionChecker(tokens);
 
-
                         String taskInfo = tokens[1];
                         int taskIndex = Integer.parseInt(taskInfo) - 1;
                         markTask(tasks, taskIndex, noOfTasks);
+                    } else if (taskType.equals("delete")) {
+                        emptyDescriptionChecker(tokens);
+
+                        String taskInfo = tokens[1];
+                        int taskIndex = Integer.parseInt(taskInfo) - 1;
+                        deleteTask(tasks, taskIndex, noOfTasks);
+                        noOfTasks--;
                     } else {
                         emptyDescriptionChecker(tokens);
 
