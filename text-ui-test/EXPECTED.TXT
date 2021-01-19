@@ -1,7 +1,49 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello, I am
+ _____  _    _ _____ _   _ 
+/  ___|| |  | |  ___| | | | 
+\ `--. | |  | | |__ | |_| | 
+ `--. \| |/\| |  __||  _  | 
+/\__/ /\  /\  / |___| | | | 
+\____/  \/  \/\____/\_| |_/ 
+
+Your Simple Word-Executed Helper!
+What shall we do today?
+
+	"----------------------------------------
+	Sorry, I didn't understand that
+	----------------------------------------"
+
+	"----------------------------------------
+	Gotcha. I've added the task: 
+	    [E][ ] Gym with the boys (at: 2pm)
+	Now you have 1 task(s) in your list
+	----------------------------------------"
+
+	"----------------------------------------
+	Gotcha. I've added the task: 
+	    [D][ ] Finish 2103 iP (by: Thu)
+	Now you have 2 task(s) in your list
+	----------------------------------------"
+
+	"----------------------------------------
+	Nice, another job well done!
+	[D][?] Finish 2103 iP (by: Thu)
+	----------------------------------------"
+
+	"----------------------------------------
+	Gotcha. I've added the task: 
+	    [T][ ] Make CS2040 TA Slides
+	Now you have 3 task(s) in your list
+	----------------------------------------"
+
+	"----------------------------------------
+	Here is your list of tasks: 
+	1. [E][ ] Gym with the boys (at: 2pm)
+	2. [D][?] Finish 2103 iP (by: Thu)
+	3. [T][ ] Make CS2040 TA Slides
+	----------------------------------------"
+
+	"----------------------------------------
+	Bye. See ya again soon!
+	----------------------------------------"
 
