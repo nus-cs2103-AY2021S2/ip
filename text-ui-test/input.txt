@@ -1,0 +1,8 @@
+todo myjob
+deadline my another job /by 2021
+event my test /at Today
+list
+done 1
+done 2
+list
+bye
