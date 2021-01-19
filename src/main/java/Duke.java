@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private ArrayList<String> list;
-    private Duke(ArrayList<String> list){
+    private ArrayList<Task> list;
+    private Duke(ArrayList<Task> list){
 
         this.list = list;
 
@@ -18,18 +18,27 @@ public class Duke {
     }
 
     public void add(String input){
-
-        this.list.add(input);
+        Task t = new Task(input);
+        this.list.add(t);
         System.out.println("added: " + input);
 
     }
 
     public void display(){
+        System.out.println("Here are the tasks in your list:");
         int len = this.list.size();
                 for(int i = 0; i < len; i++){
                     int index = i + 1;
-                    System.out.println(index + ". " + this.list.get(i));
+                    System.out.println(index + "." + this.list.get(i).getDescription());
                 }
+    }
+
+    public void markDone(int index){
+
+        Task t = this.list.get(index);
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(t.getDescription());
+        this.list.set(index, t.markAsDone());
     }
     public void bye(){
         System.out.println("Bye. Hope to see you again soon!");
@@ -54,6 +63,11 @@ public class Duke {
             }
             else if(input.equals("list")) {
                 duke.display();
+
+            } else if(input.startsWith("done")){
+                String lastPart = input.substring(5);
+                int index = Integer.parseInt(lastPart) - 1;
+                duke.markDone(index);
 
             }
             else {
