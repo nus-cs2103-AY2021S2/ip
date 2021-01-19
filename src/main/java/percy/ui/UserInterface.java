@@ -1,6 +1,7 @@
 package percy.ui;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.PrintStream;
 import java.io.InputStream;
 
@@ -46,6 +47,17 @@ public class UserInterface {
 
     public void showBlankLine() {
         out.println();
+    }
+
+    public void list(ArrayList<String> list) {
+        int i = 1;
+        for (String s : list) {
+            System.out.println(INDENT + String.valueOf(i++) + ". " + s.toString());
+        }
+    }
+
+    public void add(String item) {
+        System.out.println(INDENT + "added " + item);
     }
 
     public void showEcho(String command) {
