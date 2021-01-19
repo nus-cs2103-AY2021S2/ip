@@ -19,7 +19,7 @@ public class SwitchBlade {
                 }
                 break;
             case "todo":
-                taskList.addTask(input);
+                addTask(input,taskList);
                 break;
             case "deadline":
                 addDeadline(input, taskList);
@@ -29,6 +29,14 @@ public class SwitchBlade {
                 break;
             default:
                 System.out.println("Unfortunately I don't know what you want me to do :L");
+        }
+    }
+
+    private static void addTask(String input, myList taskList) {
+        if (input.replaceAll("todo", "").length() > 0) {
+            taskList.addTask(input);
+        } else {
+            System.out.println("It seems like you have not specified the description correctly :(");
         }
     }
 
