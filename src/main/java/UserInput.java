@@ -100,18 +100,47 @@ public class UserInput {
         String[] input = userInput.split(" ");
         List<String> possibleActionInputs = new ArrayList<>();
         List<String> possibleSingleInputs = new ArrayList<>();
+        List<String> possibleTaskInputs = new ArrayList<>();
         possibleActionInputs.add("done");
-        possibleSingleInputs.add("delete");
+        possibleActionInputs.add("delete");
         possibleSingleInputs.add("bye");
-        possibleActionInputs.add("todo");
-        possibleActionInputs.add("event");
-        possibleActionInputs.add("deadline");
+        possibleTaskInputs.add("todo");
+        possibleTaskInputs.add("event");
+        possibleTaskInputs.add("deadline");
         possibleSingleInputs.add("list");
-        if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0])) {
+        if (!possibleActionInputs.contains(input[0]) && !possibleSingleInputs.contains(input[0]) && !possibleTaskInputs.contains(input[0])) {
             throw new DukeException("user action is not recognised!");
-        } else {
-            if (possibleActionInputs.contains(input[0]) && input.length == 1) {
+        } else if ((possibleTaskInputs.contains(input[0]) || possibleActionInputs.contains(input[0])) && input.length == 1) {
                 throw new DukeException("no description added!");
+        } else if (possibleSingleInputs.contains(input[0]) && input.length > 1) {
+            throw new DukeException("no description should be added for this command!");
+        } else if (possibleTaskInputs.contains(input[0])) {
+            switch(input[0]) {
+                case "deadline":
+                    if (!userInput.contains("/by")) {
+                        throw new DukeException("Deadline entries must have a /by phrase!");
+                    } else {
+                        break;
+                    }
+                case "event":
+                    if (!userInput.contains("/at")) {
+                        throw new DukeException("Event entries must have a /at phrase!");
+                    } else {
+                        break;
+                    }
+            }
+        } else if (possibleActionInputs.contains(input[0])) {
+            if (input.length > 2) {
+                throw new DukeException("enter a specific number");
+            } else {
+                try {
+                    int number = Integer.parseInt(input[1]);
+                    if (number < 0 || number > this.newStorage.size()) {
+                        throw new DukeException("number entered does not match the list of tasks in list");
+                    }
+                } catch (NumberFormatException ex) {
+                    throw new DukeException("Enter a number!");
+                }
             }
         }
     }
