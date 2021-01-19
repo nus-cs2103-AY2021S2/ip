@@ -1,9 +1,11 @@
 public class Task {
+    public static int totalTasks = 0;
     private boolean isDone;
     private String taskDetail;
     Task(String taskDetail){
         this.taskDetail = taskDetail;
         this.isDone = false;
+        Task.totalTasks++;
     }
 
     public boolean getTaskStatus(){
@@ -24,6 +26,11 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    @Override
+    public String toString(){
+        return "[" + this.getStatusIcon() + "] " + this.getTaskDetail();
     }
 
 }
