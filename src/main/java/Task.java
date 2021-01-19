@@ -2,7 +2,7 @@ public class Task {
     protected String name;
     protected boolean isDone;
 
-    Task(String taskName) {
+    public Task(String taskName) {
         name = taskName;
         isDone = false;
     }
@@ -25,10 +25,10 @@ public class Task {
 
     /**
      * This method overrides the toString() method.
-     * @return the name of the Task
+     * @return the status and name of the Task
      */
     @Override
     public String toString() {
-        return name;
+        return "[" + getStatusIcon() + "] " + name;
     }
 }
