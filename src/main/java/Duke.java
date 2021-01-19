@@ -28,8 +28,7 @@ public class Duke {
                         + " in your list: ");
                 for (int i = 0; i < tasks.size(); i++) {
                     Task tempTask = tasks.get(i);
-                    System.out.println(" " + (i + 1) + ".["
-                            + tempTask.getStatusIcon() + "] "
+                    System.out.println(" " + (i + 1) + "."
                             + tempTask);
                 }
             } else if (isDoneCommand(input)){
@@ -40,9 +39,7 @@ public class Duke {
                     completedTask.complete();
                     System.out.println("Nice! "
                             + "I've marked this task as done: ");
-                    System.out.println("  ["
-                            + completedTask.getStatusIcon()
-                            + "] " + completedTask);
+                    System.out.println(completedTask);
                 }
             } else {
                 Task newTask = new Task(input);
