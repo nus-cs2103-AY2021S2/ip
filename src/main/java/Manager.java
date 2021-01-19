@@ -9,6 +9,12 @@ public class Manager {
         this.ls = new ArrayList<>();
     }
 
+    public void greeting(){
+        System.out.println(line);
+        System.out.println("I am Donald Trump, the Greatest American President ever\nWhat can I do for you?");
+        System.out.println(line);
+    }
+
     public void addTask(Task task) {
         String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
         this.ls.add(task);
@@ -29,7 +35,8 @@ public class Manager {
         Task task = this.ls.get(index - 1);
         this.ls.remove(index-1);
         int len = this.ls.size();
-        String res = "\t" + line + "\n\t" + " Noted. I've removed this task:\n\t\t" + task + "\n\tNow you have " + len +" tasks in the list.\n\t" + line;
+        String res = "\t" + line + "\n\t" + " Noted. I've removed this task:\n\t\t" + task +
+                "\n\tNow you have " + len +" tasks in the list.\n\t" + line;
         System.out.println(res);
 
     }

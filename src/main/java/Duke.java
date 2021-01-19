@@ -14,9 +14,8 @@ public class Duke {
     }
     public static void main(String[] args) {
         List<Task> ls = new ArrayList<>();
-        greeting();
         Manager manager = new Manager();
-        EchoMachine Duke = new EchoMachine();
+        manager.greeting();
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             try{
