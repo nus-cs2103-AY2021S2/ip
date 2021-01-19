@@ -7,7 +7,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String task, deadline, keyword;
-        int firstSpace, firstSlash;
+        int firstSpace, firstSlash, option;
         //Greet User
         printGreetings();
         String command = scanner.nextLine();
@@ -16,7 +16,7 @@ public class Duke {
 
             firstSpace = command.indexOf(" ");
             keyword = firstSpace == -1 ? command : command.substring(0,firstSpace).toLowerCase();
-            firstSlash = findSlash(command);
+            firstSlash = command.indexOf("/");;
             try {
                 switch (keyword) {
                     case "list":
@@ -25,9 +25,13 @@ public class Duke {
                         break;
                     case "done":
                         // -1 as ArrayList starts from 0 , user input starts from 1
-                        int option = Integer.parseInt(command.substring(firstSpace + 1)) - 1;
+                        option = getChoice(command, firstSpace);
                         //Mark task of choice as done
                         completeTask(option);
+                        break;
+                    case "delete":
+                        option = getChoice(command, firstSpace);
+                        deleteTask(option);
                         break;
                     case "todo":
                         task = retrieveTask(command, firstSpace, command.length());
@@ -57,6 +61,17 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
+    public static void deleteTask(int option) {
+        Task removed_task = taskList.get(option);
+        taskList.remove(option);
+        System.out.println("Noted. I`ve removed this task:");
+        printTask("", removed_task);
+        printTaskNum();
+    }
+
+    public static int getChoice(String command, int firstSpace) {
+        return Integer.parseInt(command.substring(firstSpace + 1)) - 1;
+    }
 
     public static String retrieveDeadline(String command, int start) {
         boolean space = false;
@@ -71,10 +86,6 @@ public class Duke {
             }
         }
         return res.toString();
-    }
-
-    public static int findSlash(String command) {
-        return command.indexOf("/");
     }
 
     public static String retrieveTask(String command , int start, int end) throws DukeException {
