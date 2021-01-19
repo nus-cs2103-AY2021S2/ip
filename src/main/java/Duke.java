@@ -31,30 +31,65 @@ public class Duke {
                 print("Bye. Hope to see you again!");
                 break;
             } else if(cmd.equals("list")) {
-                String toPrint = "";
-                for (int i = 0; i < tasks.size(); i++) {
-                    toPrint += (i + 1) + "." + tasks.get(i) + "\n";
+                if (tasks.size() == 0) {
+                    print("No tasks right now");
+                } else {
+                    String toPrint = "";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        toPrint += (i + 1) + "." + tasks.get(i) + "\n";
+                    }
+                    print(toPrint);
                 }
-                print(toPrint);
             } else if(cmd.equals("done")) {
-                int taskIndex = Integer.parseInt(msg0[1]) - 1;
-                tasks.get(taskIndex).setDone();
-                print("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
+                if(msg0.length != 2) {
+                    print((new DukeException("wrong number of arguments for done")).toString());
+                    continue;
+                }
+                try {
+                    int taskIndex = Integer.parseInt(msg0[1]) - 1;
+                    tasks.get(taskIndex).setDone();
+                    print("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
+                } catch(IndexOutOfBoundsException e) {
+                    print((new DukeException("task number does not exist")).toString());
+                } catch(NumberFormatException e) {
+                    print((new DukeException("indicate task number to be marked as done")).toString());
+                }
             } else if(cmd.equals("todo")) {
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for todo")).toString());
+                    continue;
+                }
                 Task curr = new ToDo(msg0[1]);
                 tasks.add(curr);
                 print("Got it. I've added this task:\n" + curr + "\nNow you have " + tasks.size() + " tasks in the list.");
             } else if(cmd.equals("deadline")) {
-                String time = msg[1].split(" ", 2)[1];
-                Task curr = new Deadline(msg0[1], time);
-                tasks.add(curr);
-                print("Got it. I've added this task:\n" + curr + "\nNow you have " + tasks.size() + " tasks in the list.");
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for deadline")).toString());
+                    continue;
+                }
+                try {
+                    String time = msg[1].split(" ", 2)[1];
+                    Task curr = new Deadline(msg0[1], time);
+                    tasks.add(curr);
+                    print("Got it. I've added this task:\n" + curr + "\nNow you have " + tasks.size() + " tasks in the list.");
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    print((new DukeException("please provide a time for deadline")).toString());
+                }
             } else if(cmd.equals("event")) {
-                String time = msg[1].split(" ", 2)[1];
-                Task curr = new Event(msg0[1], time);
-                tasks.add(curr);
-                print("Got it. I've added this task:\n" + curr + "\nNow you have " + tasks.size() + " tasks in the list.");
-
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for event")).toString());
+                    continue;
+                }
+                try {
+                    String time = msg[1].split(" ", 2)[1];
+                    Task curr = new Event(msg0[1], time);
+                    tasks.add(curr);
+                    print("Got it. I've added this task:\n" + curr + "\nNow you have " + tasks.size() + " tasks in the list.");
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    print((new DukeException("please provide a time for event")).toString());
+                }
+            } else {
+                print((new DukeException("I can't understand the message")).toString());
             }
         }
     }
