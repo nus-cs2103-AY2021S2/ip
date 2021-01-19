@@ -17,12 +17,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String status = "";
-        if (this.isDone) {
-            status = "[" + "X" + "]";
-        } else {
-            status = "[ ]";
-        }
+        String status = this.isDone ? "[X]" : "[ ]";
         return status + " " + taskName;
     }
 }
