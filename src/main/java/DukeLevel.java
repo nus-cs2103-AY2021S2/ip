@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DukeLevel {
@@ -10,7 +11,7 @@ public class DukeLevel {
         System.out.println("     What can I do for you?");
         System.out.println(line);
 
-        Task[] tasksArray = new Task[100];
+        ArrayList<Task> tasksArray = new ArrayList<>();
         int count = 0;
 
         try {
@@ -31,51 +32,67 @@ public class DukeLevel {
                     break;
                 } else if (input.equalsIgnoreCase("list")) {
                     System.out.println(line);
-                    System.out.println("     Here are the tasks in your list:");
-                    for (int i = 0; i < count; i++) {
-                        System.out.println("      " + (i + 1) + "." + tasksArray[i].toString());
+                    if (tasksArray.isEmpty()) {
+                        System.out.println("     Your list is empty, there is nothing to do. Yay!");
+                    } else {
+                        System.out.println("     Here are the tasks in your list:");
+                        for (int i = 0; i < count; i++) {
+                            System.out.println("      " + (i + 1) + "." + tasksArray.get(i).toString());
+                        }
                     }
                     System.out.println(line);
                 } else if (cmd.equalsIgnoreCase("done")) {
                     int cmdNum = Integer.parseInt(strArray[1]);
-                    tasksArray[cmdNum - 1].markAsDone();
+                    tasksArray.get(cmdNum - 1).markAsDone();
                     System.out.println(line);
                     System.out.println("     Nice! I've marked this task as done:");
-                    System.out.println("       " + tasksArray[cmdNum - 1].toString());
+                    System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
+                    System.out.println(line);
+                } else if (cmd.equalsIgnoreCase("delete")) {
+                    int cmdNum = Integer.parseInt(strArray[1]);
+                    System.out.println(line);
+                    System.out.println("     Noted. I've removed this task: ");
+                    System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
+                    tasksArray.remove(cmdNum-1);
+                    count--;
+                    if (count == 1) {
+                        System.out.println("     Now you have " + count + " task in the list.");
+                    } else {
+                        System.out.println("     Now you have " + count + " tasks in the list.");
+                    }
                     System.out.println(line);
                 } else {
-                    tasksArray[count] = new Task(input);
                     System.out.println(line);
                     if (cmd.equalsIgnoreCase("todo")) {
                         String cmdTask = strArray[1];
                         ToDo tempTask = new ToDo(cmdTask);
-                        tasksArray[count] = tempTask;
+                        tasksArray.add(tempTask);
                         System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("deadline")) {
                         String cmdTask = strArray[1];
                         String[] tempStrArray = cmdTask.split("/by", 2);
                         Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
-                        tasksArray[count] = tempTask;
+                        tasksArray.add(tempTask);
                         System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else if (cmd.equalsIgnoreCase("event")) {
                         String cmdTask = strArray[1];
                         String[] tempStrArray = cmdTask.split("/at", 2);
                         Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
-                        tasksArray[count] = tempTask;
+                        tasksArray.add(tempTask);
                         System.out.println("     Got it. I've added this task: ");
                         System.out.println("       " + tempTask.toString());
                     } else {
                         throw new DukeException("I'm sorry but I don't know what this means :(");
                     }
-                    if (count == 0) {
-                        System.out.println("     Now you have " + (count + 1) + " task in the list.");
+                    count++;
+                    if (count == 1) {
+                        System.out.println("     Now you have " + count + " task in the list.");
                     } else {
-                        System.out.println("     Now you have " + (count + 1) + " tasks in the list.");
+                        System.out.println("     Now you have " + count + " tasks in the list.");
                     }
                     System.out.println(line);
-                    count++;
                 }
             }
         } catch (DukeException exception) {
