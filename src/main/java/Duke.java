@@ -13,49 +13,53 @@ public class Duke {
         greet();
 
         while (shouldRun) {
-            String input = scanner.nextLine();
-            switch (input.split(" ")[0]) {
-            case "list": {
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < tasks.size(); i++) {
-                    builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
+            try {
+                String input = scanner.nextLine().toLowerCase();
+                switch (input.split(" ")[0]) {
+                case "list": {
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < tasks.size(); i++) {
+                        builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
+                    }
+                    echo(builder.toString().trim());
+                    break;
                 }
-                echo(builder.toString().trim());
-                break;
-            }
-            case "done": {
-                int taskIdx = Integer.parseInt(input.split(" ")[1]) - 1;
-                tasks.get(taskIdx).setDone();
-                echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
-                break;
-            }
-            case "todo": {
-                Task todoTask = createTodoTask(input);
-                // echo(String.format("Added %s", input));
-                tasks.add(todoTask);
-                echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
-                break;
-            }
-            case "deadline": {
-                Task deadline = createDeadlineTask(input);
-                tasks.add(deadline);
-                echo(String.format("Added a deadline for you:\n%s\n%s", deadline.toString(), getNumberOfTasksString(tasks)));
-                break;
-            }
-            case "event": {
-                Task event = createEventTask(input);
-                tasks.add(event);
-                echo(String.format("Added a deadline for you:\n%s\n%s", event.toString(), getNumberOfTasksString(tasks)));
-                break;
-            }
-            case "bye": {
-                echo("Bye. Hope to see you again soon!");
-                shouldRun = false;
-                break;
-            }
-            default: {
-                break;
-            }
+                case "done": {
+                    markTaskAsDone(input, tasks);
+                    break;
+                }
+                case "todo": {
+                    Task todoTask = createTodoTask(input);
+                    tasks.add(todoTask);
+                    echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
+                    break;
+                }
+                case "deadline": {
+                    Task deadline = createDeadlineTask(input);
+                    tasks.add(deadline);
+                    echo(String.format("Added a deadline for you:\n%s\n%s", deadline.toString(), getNumberOfTasksString(tasks)));
+                    break;
+                }
+                case "event": {
+                    Task event = createEventTask(input);
+                    tasks.add(event);
+                    echo(String.format("Added a deadline for you:\n%s\n%s", event.toString(), getNumberOfTasksString(tasks)));
+                    break;
+                }
+                case "bye": {
+                    echo("Bye. Hope to see you again soon!");
+                    shouldRun = false;
+                    break;
+                }
+                default: {
+                    echo(String.format("I'm sorry, I don't know what %s means.", input));
+                    break;
+                }
+                }
+            } catch (DukeException dukeException) {
+                echo(String.format("Francis encountered an error while processing your request. Here are the details:\n%s", dukeException.getMessage()));
+            } catch (Exception e) {
+                echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
             }
         }
     }
@@ -74,44 +78,74 @@ public class Duke {
         System.out.println("Enter a command below for me to assist you");
     }
 
-    public static Task createTodoTask(String input) {
+    public static Task createTodoTask(String input) throws DukeException {
         Pattern p = Pattern.compile("(?<=todo ).*");
         Matcher matcher = p.matcher(input);
-        matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("Todo tasks should be formatted as such: todo [task name].");
+        }
         String taskName = matcher.group();
         return new Todo(taskName);
     }
 
-    public static Deadline createDeadlineTask(String input) {
+    public static Deadline createDeadlineTask(String input) throws DukeException {
         // First get the task name
         Pattern p = Pattern.compile("(?<=deadline )(.*)(?= \\/by)");
         Matcher matcher = p.matcher(input);
-        matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
+        }
         String taskName = matcher.group();
 
         // The get the deadline
         p = Pattern.compile("(?<=\\/by ).*");
         matcher = p.matcher(input);
-        matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
+        }
         String deadline = matcher.group();
 
         return new Deadline(taskName, deadline);
     }
 
-    public static Event createEventTask(String input) {
+    public static Event createEventTask(String input) throws DukeException {
         // First get the task name
         Pattern p = Pattern.compile("(?<=event )(.*)(?= \\/at)");
         Matcher matcher = p.matcher(input);
-        matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
+        }
         String taskName = matcher.group();
 
         // The get the time
         p = Pattern.compile("(?<=\\/at ).*");
         matcher = p.matcher(input);
-        matcher.find();
+        if (!matcher.find()) {
+            throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
+        }
         String time = matcher.group();
 
         return new Event(taskName, time);
+    }
+
+    public static void markTaskAsDone(String input, ArrayList<Task> tasks) throws DukeException {
+        int taskIdx;
+        String taskIdxStr;
+        try {
+            taskIdxStr = input.split(" ")[1];
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            throw new DukeException("Marking a task as done needs to be done like this: done [task number from list].");
+        }
+
+        try {
+            taskIdx = Integer.parseInt(taskIdxStr) - 1;
+            tasks.get(taskIdx).setDone();
+            echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
+        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+            throw new DukeException("Please mark a task that exists in the list as done. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be marked as done.");
+        } catch (NumberFormatException numberFormatException) {
+            throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+        }
     }
 
     public static String getNumberOfTasksString(ArrayList<Task> tasks) {
