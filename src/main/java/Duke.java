@@ -18,15 +18,16 @@ public class Duke {
 
         while(sc.hasNext()) {
             String message = sc.nextLine();
+            Task t = new Task(message);
             int type = inputHandler(message);
             if (type == 0) {
                 break;
             } else {
-                System.out.println(Format.chatBox(message));
+                System.out.println(Format.chatBox("Added: " + message));
             }
 
         }
-
+        
         System.out.println(Format.farewell);
     }
 }
