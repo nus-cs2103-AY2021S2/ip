@@ -5,7 +5,6 @@ public class Duke {
     private static String indentation = "    ";
     private static String horizon = "------------------------------------------------------";
     private static Task[] taskList = new Task[100];
-    private static int countTask = 0;
     private static void printReply(String reply){
         System.out.println(indentation+horizon);
         switch (reply) {
@@ -24,8 +23,10 @@ public class Duke {
                 }
                 break;
             default:
-                System.out.println(indentation + "added:" + reply);
-            }
+                System.out.println(indentation+"Got it. I've added this task:");
+                System.out.println(indentation + taskList[Task.countTask-1].getTaskInfo());
+                System.out.println(indentation + "Now you have "+Task.countTask+" tasks in the list.");
+        }
         System.out.println(indentation+horizon);
     }
 
@@ -37,7 +38,7 @@ public class Duke {
     }
 
     private static void taskAdd(String task){
-         taskList[Task.countTask] = new Task(task);
+         taskList[Task.countTask] = new Todo(task);
     }
 
     public static void main(String[] args) {
@@ -61,15 +62,31 @@ public class Duke {
                     printReply(command);break;
                 default:
                     String[] commandSplit = command.split(" ");
-                    if (commandSplit[0].equals("done") && commandSplit.length == 2){
-                        taskList[Integer.parseInt(commandSplit[1])-1].markAsDone();
-                        printDoneReply(Integer.parseInt(commandSplit[1])-1);
+                    switch (commandSplit[0]){
+                        case "done":
+                            if(commandSplit.length == 2){
+                                taskList[Integer.parseInt(commandSplit[1])-1].markAsDone();
+                                printDoneReply(Integer.parseInt(commandSplit[1])-1);
+                            }
+                            break;
+                        case "todo":
+                            command = command.replaceAll("todo"," ").trim();
+                            taskList[Task.countTask] = new Todo(command);
+                            printReply(command);
+                            break;
+                        case "deadline":
+                            command = command.replaceAll("deadline"," ").trim();
+                            commandSplit = command.split("/by");
+                            taskList[Task.countTask] = new Deadline(commandSplit[0].trim(),commandSplit[1].trim());
+                            printReply(command);
+                            break;
+                        case "event":
+                            command = command.replaceAll("event"," ").trim();
+                            commandSplit = command.split("/at");
+                            taskList[Task.countTask] = new Event(commandSplit[0].trim(),commandSplit[1].trim());
+                            printReply(command);
+                            break;
                     }
-                    else {
-                        taskAdd(command);
-                        printReply(command);
-                    }
-
             }
 
         }while(!command.equals("bye"));
