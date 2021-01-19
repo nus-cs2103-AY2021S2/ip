@@ -36,4 +36,15 @@ public class Owen implements Chatbot {
     public Response getResponse() {
         return this.latestResponse;
     }
+
+    @Override
+    public Owen parseCommand(String command) {
+        switch (command) {
+        case "bye":
+            return this.shutdown();
+        default:
+            Response response = new DefaultResponse(command);
+            return new Owen(true, response);
+        }
+    }
 }
