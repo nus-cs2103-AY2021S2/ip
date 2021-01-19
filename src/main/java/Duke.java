@@ -97,7 +97,7 @@ public class Duke {
         String command = nextInput.substring(5);
         tasks.add(new Todo(command));
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
+        System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
@@ -119,7 +119,7 @@ public class Duke {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo));
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
+        System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
@@ -141,7 +141,7 @@ public class Duke {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo));
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task: \n" + "    " + tasks.get(totalTasks).toString());
+        System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
@@ -182,7 +182,7 @@ public class Duke {
         String taskRemoved = tasks.get(itemNum - 1).toString();
         tasks.remove(itemNum - 1);
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Noted. I've removed this task: \n" + "    " + taskRemoved);
+        System.out.println("Noted. I've removed this task:\n" + "    " + taskRemoved);
         taskDeleted();
         System.out.println("Now you have " + totalTasks + " tasks in the list.");
         System.out.println("----------------------------------------------------------------------------------------");
