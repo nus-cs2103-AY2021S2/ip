@@ -1,3 +1,6 @@
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 public class Event extends Task {
     private String eventTime;
 
@@ -8,6 +11,23 @@ public class Event extends Task {
 
     public static Event newInstance(String args) {
         String[] argArr = args.split("/");
+        for (String s: argArr) {
+            if (s.startsWith("at ")) {
+                return new Event(argArr[0], s.substring(3));
+            }
+        }
+        return new Event(argArr[0], "N/A");
+    }
+
+    public static Event newInstance(Optional<String> argsOpt) throws NoSuchElementException{
+        String[] argArr;
+
+        try {
+            argArr = argsOpt.get().split("/");
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Error: The description for event cannot be empty");
+        }
+
         for (String s: argArr) {
             if (s.startsWith("at ")) {
                 return new Event(argArr[0], s.substring(3));

@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -44,18 +45,27 @@ public class Sweh {
                 args = argOptional.get();
                 return taskList.markTaskDone(Integer.parseInt(args) - 1);
             case "todo":
-                args = argOptional.get();
-                return taskList.addTask(new ToDo(args));
+                try {
+                    return taskList.addTask(ToDo.newInstance(argOptional));
+                } catch (NoSuchElementException e) {
+                    return e.getMessage();
+                }
             case "deadline":
-                args = argOptional.get();
-                return taskList.addTask(Deadline.newInstance(args));
+                try {
+                    return taskList.addTask(Deadline.newInstance(argOptional));
+                } catch (NoSuchElementException e) {
+                    return e.getMessage();
+                }
             case "event":
-                args = argOptional.get();
-                return taskList.addTask(Event.newInstance(args));
+                try {
+                    return taskList.addTask(Event.newInstance(argOptional));
+                } catch (NoSuchElementException e) {
+                    return e.getMessage();
+                }
             case "bye":
                 return "Bye. See ya again soon!";
             default:
-                return "Sorry, I didn\'t understand that";
+                return "Error: Sorry, I didn\'t understand that";
         }
     }
 
