@@ -16,8 +16,8 @@ public class Duke {
 
         while(true) {
             String string = br.readLine();
-            String[] starr = string.split(" ");
             if(!string.equals("bye")) {
+                String[] starr = string.split(" ");
                 if(string.equals("list")) {
                     list.printList();
                 } else if(starr[0].equals("done")){
