@@ -1,6 +1,11 @@
 public class Task {
-    private String msg;
-    private Boolean isDone = false;
+    protected String msg;
+    protected Boolean isDone = false;
+
+    Task(String msg) {
+        this.msg = msg;
+        this.isDone = false;
+    }
 
     Task(String msg, Boolean isDone) {
         this.msg = msg;
