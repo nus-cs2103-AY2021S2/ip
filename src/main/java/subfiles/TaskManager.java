@@ -70,9 +70,31 @@ public class TaskManager {
         }
     }
 
-    public void markDone(int index) {
-        tasks.get(index).setDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.get(index).toString());
+    public void markDone(String s)
+            throws InvalidInputException, ListOutOfBoundsException {
+        try {
+            int index = Integer.parseInt(s) - 1;
+            tasks.get(index).setDone();
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(tasks.get(index).toString());
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListOutOfBoundsException(tasks.size());
+        }
+    }
+
+    public void deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
+        try {
+            int index = Integer.parseInt(s) - 1;
+            Task t = tasks.remove(index);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(t.toString());
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new ListOutOfBoundsException(tasks.size());
+        }
     }
 }
