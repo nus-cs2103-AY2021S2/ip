@@ -16,6 +16,7 @@ public class Task {
         this.isDone = true;
     }
 
+
     //format how task is printed out
     public String toString() {
         if (this.isDone) {

@@ -123,6 +123,14 @@ public class ChatBot {
                     System.out.println(taskList.get(len - 1));
                     System.out.println("Now you have " + len + " tasks in the list.");
                     System.out.println();
+                } else if(input.equals("delete")) {
+                    //input is to delete a task
+                    int index = Integer.parseInt(inputWords[1]) - 1;
+                    Task removedTask = taskList.remove(index);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(removedTask);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println();
                 } else {
                     throw new UnknownInputException();
                 }

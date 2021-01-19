@@ -13,9 +13,15 @@ Got it. I've added this task:
 [E][ ] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 
+Nice! I've marked this task as done:
+[T][X] borrow book
+
+Noted. I've removed this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+
 Here are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][X] borrow book
+2. [E][ ] project meeting (at: Mon 2-4pm)
 
 Bye. Hope to see you again soon!
