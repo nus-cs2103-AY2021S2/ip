@@ -31,6 +31,8 @@ public class Main {
                     bot.addTask(parser.description, parser.command, null);
                 } else if(parser.isEquals("deadline") || parser.isEquals("event")) {
                     bot.addTask(parser.description, parser.command, parser.deadline);
+                } else if(parser.isEquals("delete")) {
+                    bot.removeTask(parser.description);
                 }
             } else {
                 bot.exit();

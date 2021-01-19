@@ -15,7 +15,7 @@ public class Parser {
         if (starr.length == 1) {
             if(!(starr[0].equals("bye") || starr[0].equals("list"))) {
                 if(starr[0].equals("todo") || starr[0].equals("done") ||
-                        starr[0].equals("deadline") || starr[0].equals("event")) {
+                        starr[0].equals("deadline") || starr[0].equals("event") || starr[0].equals("delete")) {
                     throw new InvalidCommandException("☹ OOPS!!! "
                             + "The description of a " + starr[0] + " cannot be empty.");
                 } else {
@@ -28,6 +28,7 @@ public class Parser {
             this.command = starr[0];
             switch (starr[0]) {
                 case "done":
+                case "delete":
                     try {
                         Integer.parseInt(starr[1]);
                     } catch(NumberFormatException ex) {
