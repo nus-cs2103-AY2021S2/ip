@@ -59,6 +59,22 @@ public class Duke {
                 } else {
                     markTaskDone(myDuke, Integer.parseInt(command.substring(5)));
                 }
+            } else if (command.startsWith("delete ")) {
+                if (command.length() == 7 || !isNumeric(command.substring(7))) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else if (Integer.parseInt(command.substring(7)) > myDuke.listToDo.size()) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    deleteTask(myDuke, Integer.parseInt(command.substring(7)));
+                }
             } else if (command.startsWith("todo ")) {
                 if (command.length() == 5) {
                     try {
@@ -161,6 +177,16 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    public static void deleteTask(Duke duke, int index) {
+        System.out.println("    ____________________________________________________________");
+        Task task = duke.listToDo.get(index - 1);
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("       " + task.printTask());
+        System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size() - 1);
+        System.out.println("    ____________________________________________________________\n");
+        duke.listToDo.remove(index - 1);
+    }
+
     public static void executeFalseCommand(String command) throws DukeException {
         if (command.startsWith("list")) {
             throw new DukeException("     list command should not have body, Sir!");
@@ -168,6 +194,8 @@ public class Duke {
             throw new DukeException("     bye command should not have body, Sir!");
         } else if (command.startsWith("done ")) {
             throw new DukeException("     No body or wrong body format or unvalid number for done command, Sir!");
+        } else if (command.startsWith("delete ")) {
+            throw new DukeException("     No body or wrong body format or unvalid number for delete command, Sir!");
         } else if (command.startsWith("todo ")) {
             throw new DukeException("     No body detected for todo command, Sir!");
         } else if (command.startsWith("deadline ")) {
@@ -188,7 +216,7 @@ public class Duke {
             return false;
         }
         try {
-            double d = Double.parseDouble(strNum);
+            double randomNo = Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
             return false;
         }
