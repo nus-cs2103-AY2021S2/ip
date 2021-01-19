@@ -15,4 +15,9 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }
