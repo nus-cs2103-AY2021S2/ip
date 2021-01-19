@@ -19,10 +19,11 @@ public class Duke {
             if (userInput.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 while (storageList.size() != listCounter) {
-                    System.out.println(listCounter + ". " + storageList.get(listCounter - 1).displayTask());
+                    Task task = storageList.get(listCounter - 1);
+                    System.out.println(listCounter + "." + storageList.get(listCounter - 1).toString());
                     listCounter++;
                 }
-                System.out.println(listCounter + ". " + storageList.get(listCounter - 1).displayTask());
+                System.out.println(listCounter + "." +storageList.get(listCounter - 1).toString());
                 userInput = sc.nextLine();
             } else if (keyword.equals("done")) {
                 int index = Integer.parseInt(parts[1]);
@@ -32,14 +33,16 @@ public class Duke {
             else if (keyword.equals("todo") || keyword.equals("deadline") || keyword.equals("event")) {
                 System.out.println("Got it. I've added this task:");
                 StringBuilder str = new StringBuilder();
-                for (int i = 1; i < parts.length; i++) {
-                    str.append(" ");
-                    str.append(parts[i]);
+                if (keyword.equals("todo")) {
+                    for (int i = 1; i < parts.length; i++) {
+                        str.append(" ");
+                        str.append(parts[i]);
+                    }
+                    String taskString = str.toString();
+                    Todo todo = new Todo(taskString);
+                    storageList.add(todo);
+                    System.out.println(todo.toString());
                 }
-                String taskString = str.toString();
-                Todo todo = new Todo(taskString);
-                storageList.add(todo);
-                System.out.println(todo.displayTodo() + todo.displayTask());
                 System.out.println("Now you have " + storageList.size() + " tasks in the list.");
                 userInput = sc.nextLine();
             }
