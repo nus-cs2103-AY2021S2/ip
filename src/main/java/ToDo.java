@@ -1,5 +1,6 @@
 /**
  * {@code ToDo} is a {@code Task} that does not have further details attached.
+ *
  * @see Task
  */
 public class ToDo extends Task {

@@ -1,5 +1,6 @@
 /**
  * {@code Event} is a {@code Task} that has a specific time of occurrence.
+ *
  * @see Task
  */
 public class Event extends Task {

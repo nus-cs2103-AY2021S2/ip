@@ -2,28 +2,29 @@
  * {@code Command} is an enumeration of the possible commands.
  */
 public enum Command {
-    DONE, TODO, DEADLINE, EVENT, LIST, DELETE, UNKNOWN;
+    DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
+    LIST("list"), DELETE("delete"), UNKNOWN("");
+
+    private final String command;
+
+    Command(String command) {
+        this.command = command;
+    }
 
     /**
      * Reads in string and transforms to command.
+     *
      * @param string String form of command.
      * @return The command
      */
     public static Command command(String string) {
-        if (string.equalsIgnoreCase("list")) {
-            return LIST;
-        } else if (string.equalsIgnoreCase("done")) {
-            return DONE;
-        } else if (string.equalsIgnoreCase("delete")) {
-            return DELETE;
-        } else if (string.equalsIgnoreCase("todo")) {
-            return TODO;
-        } else if (string.equalsIgnoreCase("deadline")) {
-            return DEADLINE;
-        } else if (string.equalsIgnoreCase("event")) {
-            return EVENT;
-        } else {
-            return UNKNOWN;
+        String command = string.toLowerCase();
+        for (Command c : Command.values()) {
+            if (c.command.equals(command)) {
+                return c;
+            }
         }
+        return UNKNOWN;
     }
+
 }

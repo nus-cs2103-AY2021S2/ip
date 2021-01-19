@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Duke {
     /**
      * Main method for execution.
+     *
      * @param args Command Line Argument
      */
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 /**
  * {@code Deadline} is a Task that has to be done before a specific date/time.
+ *
  * @see Task
  */
 public class Deadline extends Task {

@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Constructs a new uncompleted  {@code Task}.
+     *
      * @param description The name of the task.
      */
     public Task(String description) {
@@ -27,6 +28,7 @@ public class Task {
 
     /**
      * String representation of the Task.
+     *
      * @return Task in check list form.
      */
     @Override
