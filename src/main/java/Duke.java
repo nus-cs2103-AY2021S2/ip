@@ -24,8 +24,7 @@ public class Duke {
         while (!input.equals("bye")) {
             System.out.println(partingLine);
             if (input.equals("list")) {
-                System.out.println("Here are the tasks"
-                        + " in your list: ");
+                System.out.println("Here are the tasks: ");
                 for (int i = 0; i < tasks.size(); i++) {
                     Task tempTask = tasks.get(i);
                     System.out.println(" " + (i + 1) + "."
@@ -37,14 +36,33 @@ public class Duke {
                 if (index < tasks.size()) {
                     Task completedTask = tasks.get(index);
                     completedTask.complete();
-                    System.out.println("Nice! "
-                            + "I've marked this task as done: ");
+                    System.out.println("Marked. "
+                            + "How cool is that?");
                     System.out.println(completedTask);
                 }
-            } else {
-                Task newTask = new Task(input);
-                tasks.add(newTask);
-                System.out.println(" added: " + newTask);
+            } else if (isTodo(input) || isDeadline(input)
+                    || isEvent(input)) {
+                System.out.println(" Added: ");
+                Task thisTask;
+                String name;
+                if (isTodo(input)) {
+                    name = input.substring(5);
+                    thisTask = new Todo(name);
+                } else if (isDeadline(input)) {
+                    int byIndex = input.indexOf(" /by ");
+                    name = input.substring(9, byIndex);
+                    String ddl = input.substring(byIndex + 5);
+                    thisTask = new Deadline(name, ddl);
+                } else {
+                    int atIndex = input.indexOf(" /at ");
+                    name = input.substring(6, atIndex);
+                    String date = input.substring(atIndex + 5);
+                    thisTask = new Event(name, date);
+                }
+                tasks.add(thisTask);
+                System.out.println("  " + thisTask);
+                System.out.println("Now you have "
+                        + tasks.size() + " tasks.");
             }
             System.out.println(partingLine);
             input = sc.nextLine();
@@ -64,5 +82,20 @@ public class Duke {
         return (input.length() > 5
                 && input.substring(0, 5).equals("done ")
                 && Character.isDigit(input.charAt(5)));
+    }
+
+    public static boolean isTodo(String input) {
+        return (input.length() > 5
+                && input.substring(0, 5).equals("todo "));
+    }
+
+    public static boolean isDeadline(String input) {
+        return (input.length() > 9
+                && input.substring(0, 9).equals("deadline "));
+    }
+
+    public static boolean isEvent(String input) {
+        return (input.length() > 6
+                && input.substring(0, 6).equals("event "));
     }
 }
