@@ -1,25 +1,37 @@
 public class Task {
-    Boolean isDone;
-    String name;
-    int id;
+    private final Boolean isDone;
+    protected final String name;
+    protected final int id;
 
-    Task(String name,int id){
-        this.isDone = false;
+    Task(String name,int id,Boolean isDone){
+        this.isDone = isDone;
         this.name = name;
         this.id = id;
     }
 
-    void finish(){
-        this.isDone = true;
+    String getName(){
+        return this.name;
+    }
+
+    int getId(){
+        return this.id;
+    }
+
+    Boolean getIsDone(){
+        return this.isDone;
+    }
+
+    Task finish(){
+        return new Task(this.getName(),this.getId(), true) ;
     }
 
     @Override
     public String toString(){
         if(this.isDone){
-            return "[X] "+ this.id + "." + this.name;
+            return "[X] "+ this.getId() + "." + this.getName();
         }
         else{
-            return "[ ] "+ this.id + "." + this.name;
+            return "[ ] "+ this.getId() + "." + this.getName();
         }
     }
 }

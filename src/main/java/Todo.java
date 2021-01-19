@@ -1,14 +1,19 @@
 public class Todo extends Task{
-        Todo(String name, int id){
-            super(name, id);
+        Todo(String name, int id,Boolean isDone){
+            super(name, id, isDone);
         }
         @Override
+        Todo finish(){
+            return new Todo(this.getName(),this.getId(), true) ;
+        }
+
+        @Override
         public String toString(){
-            if(this.isDone){
-                return "[T][X] "+ this.id + "." + this.name;
+            if(this.getIsDone()){
+                return "[T][X] "+ this.getId() + "." + this.getName();
             }
             else{
-                return "[T][ ] "+ this.id + "." + this.name;
+                return "[T][ ] "+ this.getId() + "." + this.getName();
             }
     }
 

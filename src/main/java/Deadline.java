@@ -1,16 +1,24 @@
 public class Deadline extends Task{
     String deadline;
-    Deadline(String name, int id, String deadline){
-        super(name,id);
+    Deadline(String name, int id,Boolean isDone, String deadline){
+        super(name,id,isDone);
         this.deadline = deadline;
     }
+    public String getDeadline(){
+        return this.deadline;
+    }
+    @Override
+    Deadline finish(){
+        return new Deadline(this.getName(),this.getId(), true, this.getDeadline()) ;
+    }
+
     @Override
     public String toString(){
-        if(this.isDone){
-            return "[D][X] "+ this.id + "." + this.name + "(" + this.deadline + ")";
+        if(this.getIsDone()){
+            return "[D][X] "+ this.getId() + "." + this.getName() + "(" + this.getDeadline() + ")";
         }
         else{
-            return "[D][ ] "+ this.id + "." + this.name + "(" + this.deadline + ")";
+            return "[D][ ] "+ this.getId() + "." + this.getName() + "(" + this.getDeadline() + ")";
         }
     }
 }

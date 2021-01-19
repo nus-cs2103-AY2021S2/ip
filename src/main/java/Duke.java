@@ -20,7 +20,6 @@ public class Duke {
         String[] pre = cmd.split("\\s+");
         while(cmd.equals("bye") == false){
             if(cmd.equals("list") == true) {
-
                 if(tasks.size() > 0) {
                     System.out.println("Here are the tasks in your list:\n");
                     for (int i = 1; i <= tasks.size(); i++) {
@@ -30,11 +29,10 @@ public class Duke {
                 else{
                     System.out.println("No tasks");
                 }
-
             }
             else if(pre[0].equals("done")){
                 if(parseInt(pre[1]) <= tasks.size()) {
-                    tasks.get(parseInt(pre[1]) - 1).finish();
+                    tasks.set(parseInt(pre[1]) - 1,tasks.get(parseInt(pre[1]) - 1).finish());
                     System.out.println("Nice! I've marked this task as done: \n");
                     System.out.println(tasks.get(parseInt(pre[1]) - 1));
                 }
@@ -49,7 +47,7 @@ public class Duke {
                     for(int i = 1 ; i < pre.length ; i++){
                          s = s + pre[i] + " ";
                     }
-                    tasks.add(new Todo(s, tasks.size() + 1));
+                    tasks.add(new Todo(s, tasks.size() + 1, false));
                 }
                 if(pre[0].equals("deadline")) {
                     String s = "";
@@ -66,7 +64,7 @@ public class Duke {
                             s = s + pre[i] + " ";
                         }
                     }
-                    tasks.add(new Deadline(s, tasks.size() + 1,t));
+                    tasks.add(new Deadline(s, tasks.size() + 1, false,t));
                 }
                 if(pre[0].equals("event")) {
                     String s = "";
@@ -83,7 +81,7 @@ public class Duke {
                             s = s + pre[i] + " ";
                         }
                     }
-                    tasks.add(new Event(s, tasks.size() + 1,t));
+                    tasks.add(new Event(s, tasks.size() + 1,false,t));
                 }
                 System.out.println(tasks.get(tasks.size()-1));
                 System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
