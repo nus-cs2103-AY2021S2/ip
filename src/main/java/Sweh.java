@@ -35,17 +35,24 @@ public class Sweh {
         Optional<String> argOptional = commandArr.length > 1
             ? Optional.of(commandArr[1])
             : Optional.empty();
+        String args;
 
         switch (command) {
             case "list":
                 return taskList.listTasks();
             case "done":
-                String args = argOptional.get();
+                args = argOptional.get();
                 return taskList.markTaskDone(Integer.parseInt(args) - 1);
+            case "todo":
+                args = argOptional.get();
+                return taskList.addTask(new ToDo(args));
+            case "deadline":
+                args = argOptional.get();
+                return taskList.addTask(Deadline.newInstance(args));
             case "bye":
                 return "Bye. See ya again soon!";
             default:
-                return taskList.addTask(command);
+                return "Sorry, I didn\'t understand that";
         }
     }
 
