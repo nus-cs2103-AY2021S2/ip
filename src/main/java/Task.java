@@ -10,7 +10,7 @@ public class Task {
             this.date = null;
         } else {
             String[] info = s.split("/");
-            if (info[0].equals(" ")) {
+            if (info.length == 1 || info[0].equals(" ")) {
                 throw new IllegalArgumentException();
             } else {
                 this.task = info[0];
