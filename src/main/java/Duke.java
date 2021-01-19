@@ -8,28 +8,30 @@ public class Duke {
         String input = sc.nextLine();
 
         // Initialise list
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int numOfItems = 0;
 
+        // User input
         while (!input.equals("bye")) {
-            System.out.println("_________________________________________________________");
+            String[] inputArr = input.split(" ");
             if (input.equals("list")) {
                 for (int i = 1; i <= numOfItems; i++) {
-                    System.out.println(i + ". " + list[i - 1]);
+                    String output = String.format("%s. %s", i, list[i - 1].toString());
+                    System.out.println(output);
                 }
+            } else if (inputArr[0].equals("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                list[Integer.parseInt(inputArr[1]) - 1].markAsDone();
+                System.out.println(list[Integer.parseInt(inputArr[1]) - 1].toString());
             } else {
-                list[numOfItems] = input;
+                list[numOfItems] = new Task(input);
                 numOfItems++;
                 System.out.println("added: " + input);
             }
-            System.out.println("_________________________________________________________");
             input = sc.nextLine();
         }
 
-        System.out.println("_________________________________________________________");
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("_________________________________________________________");
-
         sc.close();
     }
 }
