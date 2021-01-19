@@ -1,3 +1,6 @@
+/**
+ * Stores information of a Task - the description and a boolean flag to indicate if the task is done.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
