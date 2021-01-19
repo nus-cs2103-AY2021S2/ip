@@ -49,9 +49,31 @@ public class Duke {
             System.out.println("     Noice! I've marked this task as done:");
             System.out.println("     " + doneTask);
         } else {
-            Task newTask = new Task(description);
-            tasks.add(newTask);
-            System.out.println("     added: " + newTask.getDescription());
+            System.out.println("     Got it. I've added this task:");
+            if (description.contains("todo")){
+                String descLocation = description.substring(5);
+                ToDo newToDo = new ToDo(descLocation);
+                tasks.add(newToDo);
+                System.out.println("       " + newToDo);
+            } else if (description.contains("deadline")){
+                String descLocation = description.substring(9);
+                int byPosition = descLocation.indexOf("/by");
+                String desc = descLocation.substring(0, byPosition);
+                String by = descLocation.substring(byPosition + 4);
+                Deadline newDeadline = new Deadline(desc, by);
+                tasks.add(newDeadline);
+                System.out.println("       " + newDeadline);
+            } else if (description.contains("event")) {
+                String descLocation = description.substring(6);
+                int atPosition = descLocation.indexOf("/at");
+                String desc = descLocation.substring(0, atPosition);
+                String at = descLocation.substring(atPosition + 4);
+                Event newEvent = new Event(desc, at);
+                tasks.add(newEvent);
+                System.out.println("       " + newEvent);
+            }
+            String listLength = Integer.toString(tasks.size());
+            System.out.println("     Now you have " + listLength + " tasks in the list!");
         }
         System.out.println("     --------------------------------");
     }

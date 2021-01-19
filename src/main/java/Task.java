@@ -7,10 +7,6 @@ public abstract class Task {
         isDone = false;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String checkStatus() {
         return (isDone ? "\u2713" : " ");
     }
