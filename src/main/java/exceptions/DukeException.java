@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  *  Generic DukeException.
- *  Occurs when duke.Duke-related exceptions happens.
+ *  Occurs when Duke-related exceptions happens.
  *
  *  @author Yap Jing Kang
  */

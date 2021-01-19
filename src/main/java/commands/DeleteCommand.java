@@ -3,7 +3,6 @@ package commands;
 import duke.Ui;
 import duke.TaskManager;
 import exceptions.DukeException;
-import exceptions.DukeIndexOutOfRangeException;
 
 public class DeleteCommand extends Command {
     private int taskIndex;

@@ -10,7 +10,7 @@ import tasks.ToDoTask;
 import java.util.ArrayList;
 
 /**
- *  duke.TaskManager manages all tasks given to duke.Duke.
+ *  duke.TaskManager manages all tasks given to Duke.
  *
  *  @author Yap Jing Kang
  */

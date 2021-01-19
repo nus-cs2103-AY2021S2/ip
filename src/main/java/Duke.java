@@ -1,5 +1,7 @@
-package duke;
-
+import commands.Command;
+import duke.Parser;
+import duke.TaskManager;
+import duke.Ui;
 import exceptions.DukeException;
 
 public class Duke {

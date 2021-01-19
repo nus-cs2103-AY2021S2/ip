@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("      Thanks for using me!");
     }
     /**
-     *  LineBreak for duke.Duke
+     *  LineBreak for Duke
      */
     public void showLine() {
         System.out.println("    ---------------------------------------");
