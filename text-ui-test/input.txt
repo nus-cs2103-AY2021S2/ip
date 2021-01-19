@@ -1,0 +1,28 @@
+list
+todo
+todo 
+todo kadfhkh
+deadline
+deadline 
+deadline  
+deadline skdhf
+deadline /by sksdjfh
+deadline askdh /by kajsh
+event
+event 
+event  
+event sakdh
+event /on akshd
+event aksjdh /on kahsdk
+list
+done
+done 
+done 2
+delete
+delete 
+delete 2
+delete 1
+list
+delete 1
+list
+bye
