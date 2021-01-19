@@ -4,19 +4,23 @@ public class DukeIncrements {
     public static void main(String[] agrs) {
         System.out.println("yo im Duke!");
         System.out.println("what can i do for ya ;)");
+
         String line = ":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)";
         System.out.println(line);
 
         Scanner sc = new Scanner(System.in);
         int count = 0;
         Task[] arr = new Task[100];
+
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] str = input.split(" ", 2);
+
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println(line);
                 System.out.println("sayonara nerd! c ya soon ;)");
                 System.out.println(line);
+
             } else if (input.equalsIgnoreCase("list")) {
                 System.out.println(line);
                 System.out.println("get to work! these are the tasks in your list: ");
@@ -24,6 +28,7 @@ public class DukeIncrements {
                     System.out.println(i + 1 + "." + arr[i].toString());
                 }
                 System.out.println(line);
+
             } else if (str[0].equalsIgnoreCase("done")) {
                 System.out.println(line);
                 int taskNum = Integer.parseInt(str[1]);
@@ -32,6 +37,7 @@ public class DukeIncrements {
                 System.out.println("cool! this task is marked as done:");
                 System.out.println(temp.toString());
                 System.out.println(line);
+
             } else if (str[0].equalsIgnoreCase("todo")) {
                 System.out.println(line);
                 ToDo tempT = new ToDo(str[1]);
@@ -41,6 +47,7 @@ public class DukeIncrements {
                 count++;
                 System.out.println("you have " + count + " tasks in your list! keep working!");
                 System.out.println(line);
+
             } else if (str[0].equalsIgnoreCase("event")) {
                 System.out.println(line);
                 String[] strE = str[1].split("/at", 2);
@@ -51,6 +58,7 @@ public class DukeIncrements {
                 count++;
                 System.out.println("you have " + count + " tasks in your list! keep working!");
                 System.out.println(line);
+
             } else if (str[0].equalsIgnoreCase("deadline")) {
                 System.out.println(line);
                 String[] strD = str[1].split("/by", 2);
@@ -61,15 +69,16 @@ public class DukeIncrements {
                 count++;
                 System.out.println("you have " + count + " tasks in your list! keep working!");
                 System.out.println(line);
+
             } else {
                 System.out.println(line);
                 System.out.println("added: " + input);
                 System.out.println(line);
                 arr[count] = new Task(input);
                 count++;
-                }
             }
         }
+    }
 }
 
 class Task {
