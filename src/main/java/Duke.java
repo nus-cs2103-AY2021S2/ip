@@ -3,24 +3,20 @@ import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> lst = new ArrayList<>();
+    private static Boolean doExit = false;
 
     public static void initiate(Scanner s) {
         Duke.Greet();
-
         while(s.hasNextLine()){
-            String input = s.nextLine();
-            String[] arr = input.split(" ", 2);
-            String command = arr[0];
-            if (command.equals("bye")) {
-                break;
-            } else if (command.equals("list")) {
-                Duke.list();
-            } else if (command.equals("done")) {
-                String msg = arr[1];
-                Duke.markAsDone(Integer.parseInt(msg));
-            } else {
-                String msg = arr[1];
-                Duke.add(command, msg);
+            try {
+                if (doExit.equals(true)) {
+                    break;
+                }
+                Duke.process(s);
+            } catch (EmptyDescription e) {
+                System.out.println(e);
+            } catch (InvalidTypeofTask e) {
+                System.out.println(e);
             }
         }
         Duke.exit();
@@ -31,23 +27,50 @@ public class Duke {
         Duke.initiate(s);
     }
 
-    public static void add(String typeOfTask, String msg) {
-        Task newTask;
-        String[] arr1;
-        if (typeOfTask.equals("todo")) {
-            newTask = new Todo(msg);
-        } else if (typeOfTask.equals("deadline")) {
-            arr1 = msg.split("/by ");
-            newTask = new Deadline(arr1[0], arr1[1]);
-        } else {
-            arr1 = msg.split("/at ");
-            newTask = new Event(arr1[0], arr1[1]);
+    public static void process(Scanner s) throws InvalidTypeofTask, EmptyDescription {
+        String input = s.nextLine();
+        String[] arr = input.split(" ", 2);
+        String TypeofTask = arr[0];
+
+        if (TypeofTask.equals("bye")) {
+            doExit = true;
+        } else if (TypeofTask.equals("list")) {
+            Duke.list();
+        } else if (TypeofTask.equals("done")) {
+            String msg = arr[1];
+            Duke.markAsDone(Integer.parseInt(msg));
+        } else if (TypeofTask.equals("todo") ||
+                TypeofTask.equals("deadline") ||
+                        TypeofTask.equals("event")){
+            Duke.add(arr);
+        }  else {
+            throw new InvalidTypeofTask();
         }
-        lst.add(newTask);
-        System.out.println("---------------------------------------");
-        System.out.println("Got it. I 've added this task:\n" + newTask);
-        Duke.status();
-        System.out.println("---------------------------------------");
+    }
+
+    public static void add(String[] arr) throws EmptyDescription {
+        String TypeOfTask = arr[0];
+        if (arr[1].equals("")) {
+            throw new EmptyDescription(TypeOfTask);
+        } else {
+            String msg = arr[1];
+            Task newTask;
+            String[] arr1;
+            if (TypeOfTask.equals("todo")) {
+                newTask = new Todo(msg);
+            } else if (TypeOfTask.equals("deadline")) {
+                arr1 = msg.split("/by ");
+                newTask = new Deadline(arr1[0], arr1[1]);
+            } else {
+                arr1 = msg.split("/at ");
+                newTask = new Event(arr1[0], arr1[1]);
+            }
+            lst.add(newTask);
+            System.out.println("---------------------------------------");
+            System.out.println("Got it. I 've added this task:\n" + newTask);
+            Duke.status();
+            System.out.println("---------------------------------------");
+        }
     }
 
     public static void markAsDone(int i) {
