@@ -47,50 +47,59 @@ public class Duke {
                 // Exit command
                 break;
             } else if (cmd.toLowerCase().equals(listCmd)) {
-                // List command
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task t = tasks.get(i);
-                    String desc = t.getDescription();
-                    int index = i + 1;
-                    String icon = t.getStatusIcon();
-                    printer.println(String.format("%d.[%s] %s", index, icon, desc));
-                }
+                handleListCmd();
             } else if (cmd.toLowerCase().startsWith(doneCmd)) {
-                // Done command
-                String[] tokens = cmd.split(" ");
-                if (tokens.length > 1) {
-                    String argStr = tokens[1];
-                    try {
-                        int arg = Integer.parseInt(argStr);
-                        if (arg < 1 || arg > tasks.size()) {
-                            // Argument out of range
-                            printer.println(String.format("Task %d does not exist!", arg));
-                        } else {
-                            // Valid argument in range
-                            int index = arg - 1;
-                            Task t = tasks.get(index);
-                            t.markAsDone();
-                            String icon = t.getStatusIcon();
-                            String desc = t.getDescription();
-                            printer.println("Nice! I've marked this task as done:");
-                            printer.println(String.format("[%s] %s", icon, desc));
-                        }
-                    } catch (NumberFormatException nfe) {
-                        // Argument of wrong type
-                        printer.println(String.format("Illegal argument: '%s'. Expected integer", argStr));
-                    }
-                }
+                handleDoneCmd(cmd);
             } else {
                 // Add command (default)
-                printer.println(String.format("added: %s", cmd));
-                Task task = new Task(cmd);
-                tasks.add(task);
+                handleAddCmd(cmd);
             }
         }
     }
 
-
     public void displayFarewell() {
         printer.println("Goodbye, cruel world!");
+    }
+
+    private void handleAddCmd(String cmd) {
+        printer.println(String.format("added: %s", cmd));
+        Task task = new Task(cmd);
+        tasks.add(task);
+    }
+
+    private void handleListCmd() {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            String desc = t.getDescription();
+            int index = i + 1;
+            String icon = t.getStatusIcon();
+            printer.println(String.format("%d.[%s] %s", index, icon, desc));
+        }
+    }
+
+    private void handleDoneCmd(String cmd) {
+        String[] tokens = cmd.split(" ");
+        if (tokens.length > 1) {
+            String argStr = tokens[1];
+            try {
+                int arg = Integer.parseInt(argStr);
+                if (arg < 1 || arg > tasks.size()) {
+                    // Argument out of range
+                    printer.println(String.format("Task %d does not exist!", arg));
+                } else {
+                    // Valid argument in range
+                    int index = arg - 1;
+                    Task t = tasks.get(index);
+                    t.markAsDone();
+                    String icon = t.getStatusIcon();
+                    String desc = t.getDescription();
+                    printer.println("Nice! I've marked this task as done:");
+                    printer.println(String.format("[%s] %s", icon, desc));
+                }
+            } catch (NumberFormatException nfe) {
+                // Argument of wrong type
+                printer.println(String.format("Illegal argument: '%s'. Expected integer", argStr));
+            }
+        }
     }
 }
