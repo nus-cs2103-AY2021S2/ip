@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("     Hello! I'm Duke\n     What can I do for you?");
         System.out.println(lines);
 
-        ArrayList<Task> tasks = new ArrayList<>(100);
+        LinkedList<Task> tasks = new LinkedList<>();
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -40,7 +40,7 @@ public class Duke {
                     System.out.println(indentation + "Nice! I've marked this task as done:");
                     System.out.println(indentation + "  " + tasks.get(number));
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println(indentation + "☹ OOPS!!! No task was input to be mark as done.");
+                    System.out.println(indentation + "☹ OOPS!!! No task was input to be marked as done.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indentation + "☹ OOPS!!! No task has been stored at that index yet.");
                 } catch (NumberFormatException e) {
@@ -55,7 +55,7 @@ public class Duke {
                     System.out.println(indentation + "  " + removed);
                     System.out.println(indentation + "Now you have " + tasks.size() + " tasks in the list.");
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println(indentation + "☹ OOPS!!! No task was input to be mark as done.");
+                    System.out.println(indentation + "☹ OOPS!!! No task was input to be deleted.");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indentation + "☹ OOPS!!! No task has been stored at that index yet.");
                 } catch (NumberFormatException e) {
