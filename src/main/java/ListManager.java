@@ -75,7 +75,6 @@ public class ListManager extends Manager {
     }
 
     public String checkTaskAsDone(int number) throws DukeException{
-
         if (number >= 1 && number<= TaskArray.size()) {
             Task currentTask = TaskArray.get(number - 1);
             currentTask.changeTaskToDone();

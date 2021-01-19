@@ -31,7 +31,6 @@ public class Duke {
             }
             userinput = scanner.nextLine();
         }
-
         System.out.println(listManager.goodbyeLine());
     }
 }
