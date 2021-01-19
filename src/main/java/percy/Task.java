@@ -10,10 +10,23 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
+
+    public Task doTask() {
+        return new Task(this.description, true);
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : " "); //return tick or X symbols
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
     //...
 }
 

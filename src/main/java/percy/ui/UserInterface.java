@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.io.InputStream;
 
 import static percy.messages.Messages.*;
+import percy.Task;
 
 public class UserInterface {
     private Scanner in;
@@ -42,26 +43,49 @@ public class UserInterface {
     }
 
     public void showBye() {
+        System.out.println(DIVIDER);
         out.println(INDENT + MESSAGE_GOODBYE);
+        System.out.println(DIVIDER);
     }
 
     public void showBlankLine() {
         out.println();
     }
 
-    public void list(ArrayList<String> list) {
+    public void list(ArrayList<Task> list) {
         int i = 1;
-        for (String s : list) {
-            System.out.println(INDENT + String.valueOf(i++) + ". " + s.toString());
+        showDivider();
+        for (Task t : list) {
+            System.out.println(INDENT
+                    + String.valueOf(i++)
+                    + ". " + "["
+                    + t.getStatusIcon() + "] "
+                    + t.getDescription());
         }
+        showDivider();
+        showBlankLine();
     }
 
     public void add(String item) {
+        System.out.println(DIVIDER);
         System.out.println(INDENT + "added " + item);
+        System.out.println(DIVIDER);
+        showBlankLine();
     }
 
     public void showEcho(String command) {
+        System.out.println(DIVIDER);
         out.println(INDENT + command);
+        System.out.println(DIVIDER);
+        showBlankLine();
+    }
+
+    public void checkOff(Task t) {
+        System.out.println(DIVIDER);
+        System.out.println(INDENT + "Nice! I've marked this task as done:");
+        System.out.println(INDENT + INDENT + "[" + t.getStatusIcon() + "] " + t.getDescription());
+        System.out.println(DIVIDER);
+        showBlankLine();
     }
 
 }

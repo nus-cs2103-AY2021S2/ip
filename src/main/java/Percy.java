@@ -1,7 +1,9 @@
 import percy.ui.UserInterface;
 
 import java.util.ArrayList;
-// import percy.command.Command;
+
+import percy.command.Command;
+import percy.Task;
 // import percy.command.ByeCommand;
 
 
@@ -13,29 +15,28 @@ public class Percy {
     }
 
     public void run() {
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<Task>();
         ui.showStartUp();
         boolean isExit = false;
         while(!isExit) {
             String command = ui.readCommand();
-            command = command.trim().strip();
-            // System.out.println(command);
-            ui.showDivider();
-            if (command.equals("bye")) {
+            Command cmd = new Command(command);
+            if (cmd.getVerbCmd().equals("bye")) {
                 ui.showBye();
                 isExit = true;
-            } else if (command.equals("list")) {
+            } else if (cmd.getVerbCmd().equals("list")) {
                 ui.list(list);
             }
-            else if (command.equals("done")) {
-
+            else if (cmd.getVerbCmd().equals("done")) {
+                Integer index = Integer.valueOf(cmd.getItem()) -1;
+                list.set(index, list.get(index).doTask());
+                ui.checkOff(list.get(index));
             }
+
             else {
-                list.add(command);
+                list.add(new Task(command));
                 ui.add(command);
             }
-            ui.showDivider();
-            ui.showBlankLine();
         }
     }
 
