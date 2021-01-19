@@ -21,6 +21,31 @@ public class Duke {
         System.out.println("     Nice! I've marked this task as done:\n     " + task);
     }
 
+    public static void addTask(String type, ArrayList<Task> tasks, Scanner sc) {
+        String taskName = "";
+        Task task = null;
+        if (type.equals("todo")) {
+            taskName = sc.nextLine();
+            task = new ToDo(false, taskName);
+        } else {
+            String placeholder = "";
+            String dateTime;
+            while (!placeholder.equals("/by") && !placeholder.equals("/at")) {
+                taskName += (placeholder + " ");
+                placeholder = sc.next();
+            }
+            dateTime = sc.nextLine();
+            if (type.equals("deadline")) {
+                task = new Deadline(false, taskName, dateTime);
+            } else if (type.equals("event")) {
+                task = new Event(false, taskName, dateTime);
+            }
+        }
+        tasks.add(task);
+        System.out.println("     " + task);
+        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
@@ -36,7 +61,7 @@ public class Duke {
         System.out.println("     _______________________________________\n");
 
         do {
-            userInput = sc.nextLine();
+            userInput = sc.next();
             System.out.println("     _______________________________________");
             if (userInput.equals("list")) {
                 System.out.println("     Here are the tasks in your list");
@@ -45,17 +70,17 @@ public class Duke {
                 blah();
             } else if (userInput.equals("bye")) {
                 bye();
-            } else if (userInput.substring(0, 4).equals("done")) {
-                int taskNum = Integer.parseInt(userInput.substring(5)) - 1;
-                done(userTasks.get(taskNum));
+            } else if (userInput.equals("done")) {
+                done(userTasks.get(sc.nextInt() - 1));
             } else {
-                userTasks.add(new Task(false, userInput));
-                System.out.println("     added: " + userInput);
+                System.out.println("     Got it. I've added this task:");
+                addTask(userInput, userTasks, sc);
             }
 
             System.out.println("     _______________________________________\n");
 
         } while(!userInput.equals("bye"));
+        sc.close();
 
     }
 }
