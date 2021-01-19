@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,8 +12,9 @@ import java.util.regex.Pattern;
 
 public class Duke {
     /** Allows for easy change of the bot name in future. **/
-    final static String BOTNAME = "DukeNukem";
-    final static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
+    final private static String BOTNAME = "DukeNukem";
+    final private static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
+    static private List<String> taskList = new ArrayList<>();
     public static void main(String[] args) {
         greetUser();
         listenInput();
@@ -35,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Listens to the user's input and echoes it back.
+     * Listens to the user's input, adds to list or prints appropriately.
      */
     public static void listenInput() {
         Scanner scannerObject = new Scanner(System.in);
@@ -45,14 +48,27 @@ public class Duke {
             printSeparators();
             inputString = scannerObject.nextLine();
             printSeparators();
-            if (inputString.trim().equals("bye")) {
-                quit();
-                stillListening = false;
-                continue;
+            switch (inputString.trim()) {
+                case "list":
+                    printList();
+                    break;
+                case "bye":
+                    quit();
+                    stillListening = false;
+                    break;
+                default:
+                    taskList.add(inputString);
+                    System.out.println("    added: " + inputString);
             }
-            System.out.println("    " + inputString);
         }
 
+    }
+
+    public static void printList() {
+        System.out.println("    List: ");
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("    " + (i + 1) + ". " + taskList.get(i));
+        }
     }
 
     /**
