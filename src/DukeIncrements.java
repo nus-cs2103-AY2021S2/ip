@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class DukeIncrements {
-    public static void main(String[] agrs) {
+    public static void main(String[] args) throws DukeException {
         System.out.println("yo im Duke!");
         System.out.println("what can i do for ya ;)");
 
@@ -15,6 +15,13 @@ public class DukeIncrements {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] str = input.split(" ", 2);
+
+            try {
+
+            }
+            catch (DukeException e) {
+                System.out.println("oh no! your ToDo is empty :(");
+            }
 
             if (input.equalsIgnoreCase("bye")) {
                 System.out.println(line);
@@ -84,7 +91,7 @@ public class DukeIncrements {
 class Task {
     protected String description;
     protected boolean isDone;
-    
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -137,5 +144,11 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException(String message) {
+        super(message);
     }
 }

@@ -1,0 +1,7 @@
+todo eat lunch
+deadline project /by 2pm
+event conference /at 3pm
+list
+done 1
+done 2
+bye
