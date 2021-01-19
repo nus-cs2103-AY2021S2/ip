@@ -1,4 +1,9 @@
+import Task.Task;
+
 import java.util.*;
+import Task.TodoTask;
+import Task.DeadlineTask;
+import Task.EventTask;
 
 public class ChatBot {
     public static void main(String[] args) {
@@ -10,58 +15,98 @@ public class ChatBot {
         System.out.println("What can I do for you?");
 
         while (sc.hasNext()) {
-            String input = sc.nextLine();
+            //split the input into an array
+            String[] inputWords = sc.nextLine().split(" ");
+            //input type
+            String input = inputWords[0];
 
             if (input.equals("bye")) {
                 //inputs is bye, terminate the chat bot
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-
             } else if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 //input is to read the list
                 for (int i = 0; i < taskList.size(); i++) {
-
                     System.out.println ((i+1) + ". " + (taskList.get(i)));
-
                 }
-            } else if (isInputDone(input)) {
+            } else if (input.equals("done")) {
                 //input is to finish a task
-                String[] inputDone = input.split(" ");
-                int index = Integer.parseInt(inputDone[1]) - 1;
+                int index = Integer.parseInt(inputWords[1]) - 1;
                 taskList.get(index).taskDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(taskList.get(index));
+            } else if (input.equals("todo")) {
+                //input is to add a todoTask
+                System.out.println("Got it. I've added this task: ");
+                String taskName = "";
+                for (int i = 1; i < inputWords.length; i++) {
+                    taskName = taskName + inputWords[i] + " ";
+                }
+                taskList.add(new TodoTask(taskName));
+                int len = taskList.size();
+                System.out.println(taskList.get(len - 1));
+                System.out.println("Now you have " + len + " tasks in the list.");
 
-            } else {
-                //inputs are tasks, add into arrayList
-                taskList.add(new Task(input));
-                System.out.println("added: " + input);
+            } else if (input.equals("deadline")){
+                //input is to add a deadlineTask
+                System.out.println("Got it. I've added this task: ");
+                String taskName = "";
+                String date = "";
+                int dateIndex = 0;
+                //get the taskName
+                for (int i = 1; i < inputWords.length; i++) {
+                    if (inputWords[i].charAt(0) == '/') {
+                        dateIndex = i;
+                        break;
+                    } else {
+                        taskName = taskName + inputWords[i] + " ";
+                    }
+                }
+                //get the date
+                date = date + inputWords[dateIndex].substring(1) + ": ";
+                for (int i = dateIndex + 1; i < inputWords.length; i++) {
+                    if (i == inputWords.length - 1) {
+                        date = date + inputWords[i];
+                    } else {
+                        date = date + inputWords[i] + " ";
+                    }
+                }
+                taskList.add(new DeadlineTask(taskName.stripTrailing(), date));
+                int len = taskList.size();
+                System.out.println(taskList.get(len - 1));
+                System.out.println("Now you have " + len + " tasks in the list.");
+            } else if (input.equals("event")){
+            //input is to add a eventTask
+            System.out.println("Got it. I've added this task: ");
+            String taskName = "";
+            String time = "";
+            int timeIndex = 0;
+            //get the taskName
+            for (int i = 1; i < inputWords.length; i++) {
+                if (inputWords[i].charAt(0) == '/') {
+                    timeIndex = i;
+                    break;
+                } else {
+                    taskName = taskName + inputWords[i] + " ";
+                }
             }
-
-
+            //get the time
+            time = time + inputWords[timeIndex].substring(1) + ": ";
+            for (int i = timeIndex + 1; i < inputWords.length; i++) {
+                if (i == inputWords.length - 1) {
+                    time = time + inputWords[i];
+                } else {
+                    time = time + inputWords[i] + " ";
+                }
+            }
+            taskList.add(new EventTask(taskName.stripTrailing(), time));
+            int len = taskList.size();
+            System.out.println(taskList.get(len - 1));
+            System.out.println("Now you have " + len + " tasks in the list.");
         }
-    }
-    public static boolean isInputDone(String input) {
-        if (input.charAt(0) == ('d') &&
-                input.charAt(1) == ('o') &&
-                input.charAt(2) == 'n' &&
-                input.charAt(3) == 'e' &&
-                input.charAt(4) == ' ' &&
-                (input.charAt(5) == '0' ||
-                        input.charAt(5) == '1' ||
-                        input.charAt(5) == '2' ||
-                        input.charAt(5) == '3' ||
-                        input.charAt(5) == '4' ||
-                        input.charAt(5) == '5' ||
-                        input.charAt(5) == '6' ||
-                        input.charAt(5) == '7' ||
-                        input.charAt(5) == '8' ||
-                        input.charAt(5) == '9' )
-                        ) {
-                return true;
-        } else {
-            return false;
+
+
         }
     }
 }
