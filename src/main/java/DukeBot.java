@@ -3,16 +3,19 @@ import java.util.ArrayList;
 public class DukeBot {
     private String name;
     private ArrayList<Task> list;
+    public boolean isAlive;
 
     public DukeBot(String name) {
 
         this.name = name;
         this.list = new ArrayList<>();
+        this.isAlive = true;
     }
 
     public void addTask(Task task) {
         this.list.add(task);
-        System.out.println("\t\tadded: " + task);
+        System.out.println("\t\tOkay I have added this task:\n\t\t\t" + task);
+        System.out.println("\t\tNow you have " + list.size() + " tasks in the list.");
     }
 
     public void displayTasks() {
@@ -32,6 +35,16 @@ public class DukeBot {
         }
     }
 
+    //TODO consider throwing an exception (eg. DukeException)
+    public void complain() {
+        System.out.println("\t\tSorry I do not understand that!");
+    }
+
+    public void exit() {
+        System.out.println("\t\t" + "See you again soon!");
+        this.isAlive = false;
+    }
+
     public void markAsDone(int num) {
         //TODO consider adding assertion here(to prevent indexing issues)
         list.get(num-1).markAsDone();
@@ -40,6 +53,14 @@ public class DukeBot {
 
     @Override
     public String toString() {
-        return "\t\tHello! I'm " + this.name + "\n" + "\t\tWhat can I do for you?\n";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        return "Hello from\n" + logo + "\t\tHello! I'm " +
+                this.name + "\n" +
+                "\t\tWhat can I do for you?\n";
     }
 }
