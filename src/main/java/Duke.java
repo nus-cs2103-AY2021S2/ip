@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,7 +24,8 @@ public class Duke {
         // initialise all necessary variables
         Scanner inputScanner = new Scanner(System.in);
         Boolean terminate = false; // to check if the chatbot should be terminated
-        Task[] taskList = new Task[100]; // to store history of inputs
+        List<Task> taskList = new ArrayList<>();
+        //Task[] taskList = new Task[100]; // to store history of inputs
         int taskCounter = 0;
 
         System.out.println("    Good morning comrade, welcome to KGB.\n    What can I do for you?");
@@ -37,11 +40,10 @@ public class Duke {
 
                     System.out.println("    Here are the tasks in your list:");
                     // print out all tasks
-                    for (int i = 0; i < taskCounter; i++) {
-                        // extract relevant information of each task
-                        Task currentTask = taskList[i];
-                        int taskID = i + 1;
-                        System.out.println("    " + taskID + "." + currentTask.toString());
+                    int i = 1;
+                    for (Task t : taskList) {
+                        System.out.println("    " + i + "." + t.toString());
+                        i++;
                     }
 
                 } else if (userInput.equals("bye")) {
@@ -68,10 +70,10 @@ public class Duke {
                     }
 
                     // check if the task number entered is valid
-                    if (taskIndex < 1 || taskIndex > 101 || taskList[taskIndex - 1] == null) {
+                    if (taskIndex < 1 || taskIndex > 101 || taskList.get(taskIndex - 1) == null) {
                         throw new DukeException("Your requested task does not exist!");
                     }
-                    Task currentTask = taskList[taskIndex - 1];
+                    Task currentTask = taskList.get(taskIndex - 1);
                     currentTask.markAsDone();
 
                     // print out relevant information
@@ -87,7 +89,7 @@ public class Duke {
                     // create new todos and put inside taskList
                     String todoDescription = userInput.substring(5);
                     Todo newTodo = new Todo(todoDescription);
-                    taskList[taskCounter] = newTodo;
+                    taskList.add(newTodo);
                     taskCounter++;
 
                     // print out relevant information
@@ -113,7 +115,7 @@ public class Duke {
                     String dlDescription = temp[0];
                     String by = temp[1];
                     Deadline newDL = new Deadline(dlDescription, by);
-                    taskList[taskCounter] = newDL;
+                    taskList.add(newDL);
                     taskCounter++;
 
                     // print out relevant information
@@ -139,7 +141,7 @@ public class Duke {
                     String eDescription = temp[0];
                     String at = temp[1];
                     Event newEvent = new Event(eDescription, at);
-                    taskList[taskCounter] = newEvent;
+                    taskList.add(newEvent);
                     taskCounter++;
 
                     // print out relevant information
@@ -147,6 +149,34 @@ public class Duke {
                     System.out.println("     " + newEvent.toString());
                     System.out.println("    Now you have " + taskCounter + " tasks in the list.");
 
+                } else if (userInput.startsWith("delete")) {
+                    // check if delete index is provided
+                    if (userInput.equals("delete")) {
+                        throw new DukeException("The delete number should not be empty!");
+                    }
+
+                    // extract task index, then mark task as done
+                    String temp = userInput.substring(7);
+                    int taskIndex;
+
+                    // check if the task number after done is a valid number
+                    if (isNumber(temp)) {
+                        taskIndex = Integer.parseInt(temp);
+                    } else {
+                        throw new DukeException("Please enter a numerical task number");
+                    }
+
+                    // check if the task number entered is valid
+                    if (taskIndex < 1 || taskIndex > 101 || taskList.get(taskIndex - 1) == null) {
+                        throw new DukeException("Your requested task does not exist!");
+                    }
+
+                    Task currentTask = taskList.get(taskIndex - 1);
+                    taskList.remove(taskIndex - 1);
+                    taskCounter--;
+                    System.out.println("    Noted. I've removed this task:");
+                    System.out.println("     " + currentTask.toString());
+                    System.out.println("    Now you have " + taskCounter + " tasks in the list.");
                 } else {
                     throw new DukeException("I'm sorry, I don't understand what that means.");
                 }
