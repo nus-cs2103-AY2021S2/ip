@@ -1,13 +1,4 @@
 list
-todo read book
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-list
-done 2
-deadline do homework /by no idea :-p
-list
-
-list
 todo tea
 todo
 deadline coffee /by 4pm
@@ -22,4 +13,3 @@ event
 list
 bye
 
-bye

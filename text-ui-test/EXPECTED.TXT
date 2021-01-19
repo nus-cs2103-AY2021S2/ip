@@ -43,5 +43,61 @@
         4.[D][ ] do homework (by: no idea :-p)
     ______________________________________________
     ______________________________________________
+      MissingArgumentException: Uh oh, I don't recognise this command. Please try something else.
+    ______________________________________________
+    ______________________________________________
+      Your tasks:
+        1.[T][ ] read book
+        2.[D][/] return book (by: Sunday)
+        3.[E][ ] project meeting (at: Mon 2-4pm)
+        4.[D][ ] do homework (by: no idea :-p)
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [T][ ] tea
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Please include a description for your todo
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [D][ ] coffee (by: 4pm)
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Missing argument 2. Please include a description of the deadline.
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Missing a /by argument. Please include a deadline.
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Please include a description and a /by argument for your deadline
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Uh oh, I don't recognise this command. Please try something else.
+    ______________________________________________
+    ______________________________________________
+      Success. I've added this task:
+        [E][ ] read books (at: 4-6pm monday)
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Missing argument 2. Please include an event description.
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Missing an /at argument. Please include an event timing.
+    ______________________________________________
+    ______________________________________________
+      MissingArgumentException: Please include a description and an /at argument for your event
+    ______________________________________________
+    ______________________________________________
+      Your tasks:
+        1.[T][ ] read book
+        2.[D][/] return book (by: Sunday)
+        3.[E][ ] project meeting (at: Mon 2-4pm)
+        4.[D][ ] do homework (by: no idea :-p)
+        5.[T][ ] tea
+        6.[D][ ] coffee (by: 4pm)
+        7.[E][ ] read books (at: 4-6pm monday)
+    ______________________________________________
+    ______________________________________________
       Bye. See you again soon!
     ______________________________________________
