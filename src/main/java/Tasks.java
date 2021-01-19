@@ -5,6 +5,10 @@ import java.util.List;
  * Class to handle all the tasks.
  */
 public class Tasks {
+    private static final String ADD_TODO_COMMAND = "todo";
+    private static final String ADD_DEADLINE_COMMAND = "deadline";
+    private static final String ADD_EVENT_COMMAND = "event";
+
     List<Task> lst = new ArrayList<>();
 
     /**
@@ -35,15 +39,15 @@ public class Tasks {
                     + task.toString());
             Duke.formatText();
         } catch (final NumberFormatException e) {
-            System.err.println("Oof, did you type a number or not?");
+            System.err.println("Oof, did you type a valid number or not?");
         } catch (IndexOutOfBoundsException exception) {
             System.err.println("You don't have so many items, dumbass!");
         }
     }
 
     /**
-     *
-     * @param input
+     * Adds task to list of tasks if it is a valid input.
+     * @param input user input in command line
      */
     public void addTask(String input) {
         String[] split = input.split(" ",2);
@@ -51,13 +55,14 @@ public class Tasks {
 
         Duke.formatText();
 
-        if (!command.equals("todo") && !command.equals("deadline") && !command.equals("event")) {
+        if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
+                && !command.equals(ADD_EVENT_COMMAND)) {
             // error: unknown command
             System.out.println("Hey! What is this gibberish?");
-            return;
         } else if (split.length < 2) {
             // error: command empty
-            System.out.println("You gotta give me a description to work with, buddy.");
+            System.out.println("You gotta give me a description to work with, buddy:\nCommand \""
+                    + command + "\" cannot be empty.");
         } else if (command.equals("todo")) {
             Todo todo = new Todo(split[1]);
             lst.add(todo);
@@ -82,7 +87,6 @@ public class Tasks {
                         + "\nNow you have " + lst.size() + " items.");
             }
         }
-
         Duke.formatText();
     }
 }
