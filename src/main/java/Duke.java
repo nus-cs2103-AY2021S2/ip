@@ -65,7 +65,7 @@ public class Duke {
                         }
                     }
                 } else if (checkMatchString(line, "done ")) {
-                    String[] cmdArgs = getCommandArgs(line, "I'm sorry, but done needs an index of a Task.");
+                    String[] cmdArgs = getCommandArgs(line, "I'm sorry, but done needs the index of a Task.");
                     try {
                         int index = Integer.parseInt(cmdArgs[1]);
                         Task curTask = tasks.get(index - 1);
@@ -105,6 +105,20 @@ public class Duke {
                     Task curTask = new Event(taskName, date);
                     tasks.add(curTask);
                     printTaskListStatus(tasks, curTask);
+                } else if (checkMatchString(line, "delete ")) {
+                    String[] cmdArgs = getCommandArgs(line, "I'm sorry, but delete needs the index of a Task.");
+                    try {
+                        int index = Integer.parseInt(cmdArgs[1]);
+                        Task curTask = tasks.get(index - 1);
+                        tasks.remove(index - 1);
+                        printIndentOutput("Nice! I've removed this task:");
+                        printIndentOutput("   " + curTask);
+                        printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("The index of the task needs to be an integer.");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("The index of the task needs to be present in the list.");
+                    }
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
