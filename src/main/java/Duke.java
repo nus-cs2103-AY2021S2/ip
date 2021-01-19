@@ -40,7 +40,7 @@ public class Duke {
                 "You have " + tasks.size() + " order(s) left!");
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         display(
