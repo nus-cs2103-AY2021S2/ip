@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -19,8 +21,29 @@ public class TaskList {
                 + "\nNow you have " + taskList.size() + " task(s) in your list";
     }
 
-    public String markTaskDone(int position) {
-        taskList.get(position).markDone();
+    public String markTaskDone(int position) throws NoSuchElementException, IndexOutOfBoundsException {
+        try {
+            taskList.get(position).markDone();
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Error: Please incude the index of the task.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+        }
+        return "Nice, another job well done!\n" 
+            + taskList.get(position).toString();
+    }
+
+    public String markTaskDone(Optional<String> args) throws NoSuchElementException, 
+            IndexOutOfBoundsException {
+        int position;
+        try {
+            position = Integer.parseInt(args.get()) - 1;
+            taskList.get(position).markDone();
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Error: Please incude the index of the task.");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
+        }
         return "Nice, another job well done!\n" 
             + taskList.get(position).toString();
     }

@@ -42,8 +42,13 @@ public class Sweh {
             case "list":
                 return taskList.listTasks();
             case "done":
-                args = argOptional.get();
-                return taskList.markTaskDone(Integer.parseInt(args) - 1);
+                try {
+                    return taskList.markTaskDone(argOptional);
+                } catch (NoSuchElementException e) {
+                    return e.getMessage();
+                } catch (IndexOutOfBoundsException e) {
+                    return e.getMessage();
+                }
             case "todo":
                 try {
                     return taskList.addTask(ToDo.newInstance(argOptional));
