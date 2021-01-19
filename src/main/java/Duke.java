@@ -22,6 +22,7 @@ public class Duke {
                 if (tasks.size() == 0) {
                     System.out.println("Your list is empty!");
                 } else {
+                    System.out.println("Here are the tasks in your list:");
                     for (int i = 1; i <= tasks.size(); i++) {
                         System.out.println(i + "." + tasks.get(i - 1));
                     }
@@ -30,10 +31,29 @@ public class Duke {
             case "done":
                 findAndMarkTask(command);
                 break;
+            case "todo":
+                Task toDoTask = new ToDo(command);
+                tasks.add(toDoTask);
+                System.out.println("Your todo task has been added: " + toDoTask +
+                        "\nYou currently have " + tasks.size() + " task(s) in the list.");
+                break;
+            case "deadline":
+                String[] splitCommand1 = command.split("/by");
+                Task deadlineTask = new Deadline(splitCommand1[0].trim(), splitCommand1[1].trim());
+                tasks.add(deadlineTask);
+                System.out.println("Your deadline task has been added: " + deadlineTask +
+                        "\nYou currently have " + tasks.size() + " task(s) in the list.");
+                break;
+            case "event":
+                String[] splitCommand2 = command.split("/at");
+                Task eventTask = new Deadline(splitCommand2[0].trim(), splitCommand2[1].trim());
+                tasks.add(eventTask);
+                System.out.println("Your event task has been added: " + eventTask +
+                        "\nYou currently have " + tasks.size() + " task(s) in the list.");
+                break;
             default:
                 if (command.trim().length() > 0) {
-                    System.out.println("added: " + command);
-                    tasks.add(new Task(command));
+                    System.out.println("These are the possible commands: \"list\" \"done\" \"todo\" \"deadline\" \"event\"");
                 } else {
                     System.out.println("Please enter something ...");
                 }
