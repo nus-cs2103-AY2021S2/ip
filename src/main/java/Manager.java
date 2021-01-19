@@ -42,10 +42,17 @@ public class Manager {
     }
 
     public void  listTask() {
-        String res = "\t" + line + "\n\tHere are the tasks in your list:\n";
-        for (int i = 0; i < ls.size(); i++) {
-            res += "\t" + (i + 1) + "." + ls.get(i) + "\n";
+        String res = "";
+        if(ls.isEmpty()){
+            res = "\t" + line + "\n\tWell Done! All task has been completed\n";
         }
+        else{
+            res = "\t" + line + "\n\tHere are the tasks in your list:\n";
+            for (int i = 0; i < ls.size(); i++) {
+                res += "\t" + (i + 1) + "." + ls.get(i) + "\n";
+            }
+        }
+
         res += "\t" + line;
         System.out.println(res);
     }
