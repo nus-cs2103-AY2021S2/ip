@@ -49,6 +49,9 @@ public class Sweh {
             case "deadline":
                 args = argOptional.get();
                 return taskList.addTask(Deadline.newInstance(args));
+            case "event":
+                args = argOptional.get();
+                return taskList.addTask(Event.newInstance(args));
             case "bye":
                 return "Bye. See ya again soon!";
             default:
