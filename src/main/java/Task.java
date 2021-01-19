@@ -10,8 +10,12 @@ public class Task {
             this.date = null;
         } else {
             String[] info = s.split("/");
-            this.task = info[0];
-            this.date = info[1].substring(3);
+            if (info[0].equals(" ")) {
+                throw new IllegalArgumentException();
+            } else {
+                this.task = info[0];
+                this.date = info[1].substring(3);
+            }
         }
         this.type = i;
     }
@@ -22,9 +26,9 @@ public class Task {
 
     public String checkDone() {
         if (this.done) {
-            return "[X] ";
+            return "[X]";
         } else {
-            return "[ ] ";
+            return "[ ]";
         }
     }
 
@@ -42,9 +46,9 @@ public class Task {
         if (this.type == 0) {
             return checkType() + checkDone() + this.task;
         } else if  (this.type == 1) {
-            return checkType() + checkDone() + this.task + " (by: " + this.date + ")";
+            return checkType() + checkDone() + this.task + "(by: " + this.date + ")";
         } else {
-            return checkType() + checkDone() + this.task + " (at: " + this.date + ")";
+            return checkType() + checkDone() + this.task + "(at: " + this.date + ")";
         }
     }
 }
