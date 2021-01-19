@@ -79,7 +79,10 @@ public class Duke {
 
     }
 
-    private static void goneTask(String action, int num, ArrayList<Task> tasks) {
+    /**
+     * Method to delete or done the task according to the task number.
+     */
+    public static void goneTask(String action, int num, ArrayList<Task> tasks) {
 
         int size = tasks.size();
 
@@ -97,7 +100,10 @@ public class Duke {
 
     }
 
-    private static void addTask(String action, String info, ArrayList<Task> tasks) throws DukeException {
+    /**
+     * Method to add the requested task to the list of tasks.
+     */
+    public static void addTask(String action, String info, ArrayList<Task> tasks) throws DukeException {
 
         String task = "", time = "";
         int size = tasks.size();
