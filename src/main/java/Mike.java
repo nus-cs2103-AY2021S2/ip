@@ -1,7 +1,5 @@
 public class Mike {
-    /**
-     * Duke chatbot constructor
-     */
+
     private final String logo = "  __  __   _   _               _     _                _    _                      _\n" +
             " |  \\/  | (_) | |             | |   | |              | |  | |                    | |   \n" +
             " | \\  / |  _  | | __   ___    | |_  | |__     ___    | |__| |   __ _  __      __ | | __\n" +
@@ -18,8 +16,14 @@ public class Mike {
             "                                             \"-V-\"";
 
     public boolean isRunning;
+    public TaskList taskList;
+
+    /**
+     * Mike chatbot constructor
+     */
     public Mike() {
         this.isRunning = true;
+        this.taskList = new TaskList();
     }
 
     /**
@@ -31,7 +35,8 @@ public class Mike {
 
     public String getResponse(Command inputCommand) {
         this.isRunning = !inputCommand.isExitCommand();
-        return inputCommand.runCommand();
+        this.taskList = inputCommand.runCommand(this.taskList);
+        return inputCommand.getResponse();
     }
 
 //    public void mikeRun() {

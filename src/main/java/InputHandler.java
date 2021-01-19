@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class inputHandler {
+public class InputHandler {
     /**
      * Reads user input and parses it
      * @return Command type object with parameters entered by user
@@ -9,10 +9,12 @@ public class inputHandler {
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
-        if (userInput.equals("bye")) {
-            return new Bye();
+        if (userInput.toLowerCase().equals("bye")) {
+            return new ByeCommand();
+        } else if (userInput.toLowerCase().equals("list")) {
+            return new ListCommand();
         } else {
-            return new Echo(userInput);
+            return new AddCommand(userInput);
         }
     }
 }

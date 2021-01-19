@@ -5,7 +5,7 @@ public class Main {
 
         mike.mikeInit();
         while(mike.isRunning) {
-            Command inputCommand = inputHandler.parseInput();
+            Command inputCommand = InputHandler.parseInput();
             mikeResponse = mike.getResponse(inputCommand);
             System.out.println(mikeResponse);
         }
