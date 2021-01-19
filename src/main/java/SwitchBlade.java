@@ -27,6 +27,14 @@ public class SwitchBlade {
             case "event":
                 addEvent(input, taskList);
                 break;
+            case "delete":
+                if (input.split("\\s+").length == 2) {
+                    int index = Integer.parseInt(input.split("\\s+")[1]);
+                    taskList.delete(index - 1);
+                } else {
+                    System.out.println("Too many arguments, please give me just 1 task to mark as completed");
+                }
+                break;
             default:
                 System.out.println("Unfortunately I don't know what you want me to do :L");
         }

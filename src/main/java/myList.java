@@ -36,6 +36,12 @@ public class myList {
         System.out.println("Good job! I've marked it as completed for you as well!\n");
     }
 
+    public void delete(int index) {
+        taskList.remove(index);
+        System.out.println("Got it! I've removed the task for you\n");
+        System.out.println("You now have " + taskList.size() + " tasks\n");
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
