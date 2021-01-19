@@ -13,63 +13,67 @@ public class DukeLevel {
         Task[] tasksArray = new Task[100];
         int count = 0;
 
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            String[] strArray = input.split(" ", 2);
-            String cmd = strArray[0];
+        // try {
+            while (sc.hasNext()) {
+                String input = sc.nextLine();
+                String[] strArray = input.split(" ", 2);
+                String cmd = strArray[0];
 
-            if (input.equalsIgnoreCase("bye")) {
-                System.out.println(line);
-                System.out.println("     Bye. Hope to see you again soon! :)");
-                System.out.println(line);
-                break;
-            } else if (input.equalsIgnoreCase("list")) {
-                System.out.println(line);
-                System.out.println("     Here are the tasks in your list:");
-                for (int i = 0; i < count; i++) {
-                    System.out.println("      " + (i+1) + "." + tasksArray[i].toString());
-                }
-                System.out.println(line);
-            } else if (cmd.equalsIgnoreCase("done")) {
-                int cmdNum = Integer.parseInt(strArray[1]);
-                tasksArray[cmdNum-1].markAsDone();
-                System.out.println(line);
-                System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       " + tasksArray[cmdNum-1].toString());
-                System.out.println(line);
-            } else {
-                tasksArray[count] = new Task(input);
-                System.out.println(line);
-                System.out.println("     Got it. I've added this task: ");
-                if (cmd.equalsIgnoreCase("todo")) {
-                    String cmdTask = strArray[1];
-                    ToDo tempTask = new ToDo(cmdTask);
-                    tasksArray[count] = tempTask;
-                    System.out.println("       " + tempTask.toString());
-                } else if (cmd.equalsIgnoreCase("deadline")) {
-                    String cmdTask = strArray[1];
-                    String[] tempStrArray = cmdTask.split("/by", 2);
-                    Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
-                    tasksArray[count] = tempTask;
-                    System.out.println("       " + tempTask.toString());
-                } else if (cmd.equalsIgnoreCase("event")) {
-                    String cmdTask = strArray[1];
-                    String[] tempStrArray = cmdTask.split("/at", 2);
-                    Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
-                    tasksArray[count] = tempTask;
-                    System.out.println("       " + tempTask.toString());
+                if (input.equalsIgnoreCase("bye")) {
+                    System.out.println(line);
+                    System.out.println("     Bye. Hope to see you again soon! :)");
+                    System.out.println(line);
+                    break;
+                } else if (input.equalsIgnoreCase("list")) {
+                    System.out.println(line);
+                    System.out.println("     Here are the tasks in your list:");
+                    for (int i = 0; i < count; i++) {
+                        System.out.println("      " + (i + 1) + "." + tasksArray[i].toString());
+                    }
+                    System.out.println(line);
+                } else if (cmd.equalsIgnoreCase("done")) {
+                    int cmdNum = Integer.parseInt(strArray[1]);
+                    tasksArray[cmdNum - 1].markAsDone();
+                    System.out.println(line);
+                    System.out.println("     Nice! I've marked this task as done:");
+                    System.out.println("       " + tasksArray[cmdNum - 1].toString());
+                    System.out.println(line);
                 } else {
-                    System.out.println("          added: " + input);
+                    tasksArray[count] = new Task(input);
+                    System.out.println(line);
+                    System.out.println("     Got it. I've added this task: ");
+                    if (cmd.equalsIgnoreCase("todo")) {
+                        String cmdTask = strArray[1];
+                        ToDo tempTask = new ToDo(cmdTask);
+                        tasksArray[count] = tempTask;
+                        System.out.println("       " + tempTask.toString());
+                    } else if (cmd.equalsIgnoreCase("deadline")) {
+                        String cmdTask = strArray[1];
+                        String[] tempStrArray = cmdTask.split("/by", 2);
+                        Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
+                        tasksArray[count] = tempTask;
+                        System.out.println("       " + tempTask.toString());
+                    } else if (cmd.equalsIgnoreCase("event")) {
+                        String cmdTask = strArray[1];
+                        String[] tempStrArray = cmdTask.split("/at", 2);
+                        Event tempTask = new Event(tempStrArray[0], tempStrArray[1]);
+                        tasksArray[count] = tempTask;
+                        System.out.println("       " + tempTask.toString());
+                    } else {
+                        System.out.println("          added: " + input);
+                    }
+                    if (count == 0) {
+                        System.out.println("     Now you have " + (count + 1) + " task in the list.");
+                    } else {
+                        System.out.println("     Now you have " + (count + 1) + " tasks in the list.");
+                    }
+                    System.out.println(line);
+                    count++;
                 }
-                if (count == 0) {
-                    System.out.println("     Now you have " + (count+1) + " task in the list.");
-                } else {
-                    System.out.println("     Now you have " + (count+1) + " tasks in the list.");
-                }
-                System.out.println(line);
-                count++;
             }
-        }
+//        } catch (DukeException exception) {
+//            System.err.print(exception);
+//        }
     }
 }
 
@@ -130,5 +134,11 @@ class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + at + ")";
+    }
+}
+
+class DukeException extends Exception {
+    public DukeException(String message) {
+        super(message);
     }
 }
