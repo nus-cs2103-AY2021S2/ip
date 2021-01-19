@@ -19,6 +19,11 @@ public class DukeInsufficientParametersException extends DukeException {
     }
 
     @Override
+    public String getMessage() {
+        return String.format("Description of %s cannot be empty", command);
+    }
+
+    @Override
     public String toString() {
         return String.format("    Description of %s cannot be empty", command);
     }

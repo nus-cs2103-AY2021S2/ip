@@ -22,6 +22,10 @@ public class DukeMissingFlagException extends DukeException {
     }
 
     @Override
+    public String getMessage() {
+        return String.format("%s expects '%s' flag; None found", command, flag);
+    }
+    @Override
     public String toString() {
         return String.format("    %s expects '%s' flag; None found", command, flag);
     }

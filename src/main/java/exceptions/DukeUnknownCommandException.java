@@ -14,6 +14,10 @@ public class DukeUnknownCommandException extends DukeException {
     public DukeUnknownCommandException() {}
 
     @Override
+    public String getMessage() {
+        return "I do not know what you are trying to do here..";
+    }
+    @Override
     public String toString() {
         return "    I do not know what you are trying to do here..";
     }

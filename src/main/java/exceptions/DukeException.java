@@ -2,10 +2,11 @@ package exceptions;
 
 /**
  *  Generic DukeException.
- *  Occurs when Duke-related exceptions happens.
+ *  Occurs when duke.Duke-related exceptions happens.
  *
  *  @author Yap Jing Kang
  */
 
 public abstract class DukeException extends Exception {
+    public abstract String getMessage();
 }

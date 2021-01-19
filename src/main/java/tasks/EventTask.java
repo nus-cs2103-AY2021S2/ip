@@ -7,7 +7,7 @@ package tasks;
  */
 
 
-public class EventsTask extends Task {
+public class EventTask extends Task {
     protected String duration;
 
     /**
@@ -16,7 +16,7 @@ public class EventsTask extends Task {
      *  @param name Name of tasks.EventsTask.
      *  @param duration Specified duration of task.
      */
-    public EventsTask(String name, String duration) {
+    public EventTask(String name, String duration) {
         super(name);
         this.duration = duration;
     }
