@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class DukeIncrements {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         System.out.println("yo im Duke!");
         System.out.println("what can i do for ya ;)");
 
