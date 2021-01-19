@@ -47,6 +47,17 @@ public class DukeController {
                                 this.list.done(index);
                             }
                             break;
+                        case ("delete"):
+                            if (doneLine.length == 1) {
+                                throw new DukeException("☹ OOPS!!! I need the index of the task you want done.");
+                            }
+                            index = Integer.parseInt(doneLine[1]);
+                            if (index > this.list.size() || index == 0) {
+                                throw new DukeException("☹ OOPS!!! The index needs to be in range of the list.");
+                            } else {
+                                this.list.delete(index);
+                            }
+                            break;
                         case ("todo"):
                             if (doneLine.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");

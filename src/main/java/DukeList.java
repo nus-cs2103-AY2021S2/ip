@@ -27,6 +27,7 @@ public class DukeList {
 
     public void listItems() {
         int i = 1;
+        System.out.println("Here are the tasks in your list:");
         for (DukeTask items : this.list) {
             System.out.println(String.format("%d.%s", i, items));
             i++;
@@ -39,6 +40,14 @@ public class DukeList {
         this.list.set(index - 1, task);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + task + "\n");
+    }
+
+    public void delete(int index) {
+        DukeTask task = this.list.get(index - 1);
+        this.list.remove(index - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + task);
+        System.out.println(String.format("Now you have %d tasks in the list.\n", this.list.size()));
     }
 
     public int size() {
