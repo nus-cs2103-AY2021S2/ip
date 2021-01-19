@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-  private ArrayList<String> tasklist;
+  private ArrayList<Task> tasklist;
 
   public Duke() {
     this.tasklist = new ArrayList<>();
@@ -11,16 +11,17 @@ public class Duke {
 
   public void list() {
     int i = 1;
-    for (String task : tasklist) {
-      System.out.println(i + ". " + task + "\n");
+    System.out.println("Here are the tasks in your list:");
+    for (Task task : tasklist) {
+      System.out.println(i + ". " + task);
       i++;
     }
   }
 
-  public void addList(String input) {
+  public void addList(Task input) {
     this.tasklist.add(input);
     System.out.println(" ___________________________________________");
-    System.out.println("added: " + input);
+    System.out.println("added: " + input.getDescription());
     System.out.println(" ___________________________________________");
   }
 
@@ -50,8 +51,15 @@ public class Duke {
         duke.list();
         System.out.println(" ___________________________________________");
 
+      } else if (input.contains("done") && input.split(" ")[1].length() == 1) {
+        duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)).taskDone();
+        System.out.println(" ___________________________________________");
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println(duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)));
+        System.out.println(" ___________________________________________");
       } else {
-        duke.addList(input);
+        Task task = new Task(input);
+        duke.addList(task);
 
       }
 
