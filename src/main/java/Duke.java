@@ -1,7 +1,10 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class Duke {
+    private static List<String> tasks = new ArrayList<>();
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -20,8 +23,18 @@ public class Duke {
                 String out = "Aww hope to see you soon, goodbye!";
                 System.out.println(border + "\n  " + out + "\n" + border);
                 break;
+            } else if(command.toLowerCase().equals("list")){
+                System.out.println(border);
+                // adapted from: https://howtodoinjava.com/java/collections/arraylist/iterate-through-objects/
+                int idx = 0;
+                while (tasks.size() > idx){
+                    System.out.printf("  %s. %s\n",String.valueOf(idx+1),tasks.get(idx++));
+                }
+                System.out.println(border);
+            } else {
+                tasks.add(command);
+                System.out.println(border + "\n  added: " + command + "\n" + border);
             }
-            System.out.println(border + "\n  " + command + "\n" + border);
         }
     }
 }
