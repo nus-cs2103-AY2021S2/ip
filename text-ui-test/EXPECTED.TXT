@@ -30,10 +30,14 @@ Please input a command.
   [D][X] return book (by: Sunday)
   ~~~
   ~~~
+  Successfully removed:
+    [T][ ] borrow book
+  Total tasks in list: 2
+  ~~~
+  ~~~
   Tasks in list:
-  1.[T][ ] borrow book
-  2.[D][X] return book (by: Sunday)
-  3.[E][ ] project meeting (at: Mon 2-4pm)
+  1.[D][X] return book (by: Sunday)
+  2.[E][ ] project meeting (at: Mon 2-4pm)
   ~~~
   ~~~
   See you next time.

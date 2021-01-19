@@ -42,6 +42,21 @@ public class Duke {
                     tasks.get(i - 1).markAsDone();
                     System.out.println("  Successfully marked as done:");
                     System.out.println("  " + tasks.get(i - 1));
+                } else if (input.split(" ")[0].equals("delete")){
+                    int i;
+                    try {
+                        i = Integer.parseInt(input.split(" ")[1]);
+                    } catch (Exception ex) {
+                        throw new DukeException("  Please provide an integer.");
+                    }
+                    if (i > tasks.size() || i <= 0) {
+                        throw new DukeException("  That number is invalid.");
+                    }
+                    Task taskToRemove = tasks.get(i - 1);
+                    tasks.remove(i - 1);
+                    System.out.println("  Successfully removed:");
+                    System.out.println("    " + taskToRemove);
+                    System.out.println("  Total tasks in list: " + tasks.size());
                 } else {
                     Task task;
                     switch (input.split(" ")[0]) {
