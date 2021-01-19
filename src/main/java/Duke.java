@@ -1,6 +1,5 @@
 package duke;
 
-import commands.Command;
 import exceptions.DukeException;
 
 public class Duke {
