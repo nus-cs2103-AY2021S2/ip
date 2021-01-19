@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final ArrayList<String> listToDo;
+    private final ArrayList<Task> listToDo;
 
     private Duke() {
         this.listToDo = new ArrayList<>();
@@ -23,17 +23,25 @@ public class Duke {
         boolean signalToExit = false;
         while (!signalToExit && input.hasNextLine()) {
             String command = input.nextLine();
-            switch (command) {
-                case "list":
-                    printList(myDuke);
-                    break;
-                case "bye":
-                    signalToExit = true;
-                    break;
-                default:
+            if (command.length() < 5) {
+                switch (command) {
+                    case "list":
+                        printList(myDuke);
+                        break;
+                    case "bye":
+                        signalToExit = true;
+                        break;
+                    default:
+                        addToList(myDuke, command);
+                }
+            } else {
+                if ("done ".equals(command.substring(0, 5))) {
+                    markTaskDone(myDuke, Integer.parseInt(command.substring(5)));
+                } else {
                     addToList(myDuke, command);
+                }
             }
-            if (!command.equals("list")) {
+            if (!command.equals("list") && !((command.length() > 4) && command.startsWith("done "))) {
                 echo(command);
             }
         }
@@ -56,15 +64,25 @@ public class Duke {
     public static void printList(Duke duke) {
         int index = 1;
         System.out.println("    ____________________________________________________________");
-        for (String task : duke.listToDo) {
-            System.out.format("     %d. " + task + "\n", index);
+        System.out.println("     Here are the tasks in your list:");
+        for (Task task : duke.listToDo) {
+            System.out.format("     %d. " + task.printTask() + "\n", index);
             index++;
         }
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void addToList(Duke duke, String task) {
-        duke.listToDo.add(task);
+    public static void addToList(Duke duke, String taskName) {
+        duke.listToDo.add(new Task(taskName));
+    }
+
+    public static void markTaskDone(Duke duke, int index) {
+        System.out.println("    ____________________________________________________________");
+        Task task = duke.listToDo.get(index);
+        task.markAsDone();
+        System.out.println("     Nice! I've marked this task as done: ");
+        System.out.println("       " + task.printTask());
+        System.out.println("    ____________________________________________________________\n");
     }
 }
 
