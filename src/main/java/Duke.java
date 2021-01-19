@@ -21,31 +21,61 @@ public class Duke {
     /** Task manager which manages the tasks created by user input */
     private static TaskManager taskManager = new TaskManager();
 
+    /**
+     * Greets the user upon execution of the program.
+     */
     private static void greet() {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
     }
 
+    /**
+     * Bids the user farewell before termination of the program.
+     */
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    private static void inputDone(String s) {
+    /**
+     * Calls the task manager to mark a specified task as done
+     * upon receiving a user input that attempts to mark a task
+     * as done.
+     *
+     * @param index Index of the task to be marked as done
+     *              in the list of tasks.
+     */
+    private static void inputDone(String index) {
         try {
-            taskManager.markDone(s);
+            taskManager.markDone(index);
         } catch (InvalidInputException | ListOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static void inputDelete(String s) {
+    /**
+     * Calls the task manager to delete a specified task from
+     * the list upon receiving a user input that attempts to
+     * delete a task from the list.
+     *
+     * @param index Index of the task to be deleted
+     *              in the list of tasks.
+     */
+    private static void inputDelete(String index) {
         try {
-            taskManager.deleteTask(s);
+            taskManager.deleteTask(index);
         } catch (InvalidInputException | ListOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Calls the task manager to add a specified task to the
+     * list upon receiving a user input that attempts to add
+     * a task to the list.
+     *
+     * @param s The user input which demanded for a task to be
+     *          added to the list.
+     */
     private static void inputAdd(String s) {
         try {
             taskManager.addTask(s);
@@ -54,23 +84,44 @@ public class Duke {
         }
     }
 
+    /**
+     * Calls the task manager to perform either task addition,
+     * deletion, printing, or marking as done, based on the
+     * user input. Also terminates the program if a terminating
+     * input is supplied by the user.
+     *
+     * @param s A user input.
+     * @return True if the user input is not a terminating
+     *         input, and false otherwise.
+     */
     private static boolean executeInput(String s) {
         String[] sArray = s.split(" ");
 
-        if (sArray[0].equals("bye")) {
+        switch (sArray[0]) {
+        case "bye":
             return false;
-        } else if (sArray[0].equals("list")) {
+        case "list":
             taskManager.printTasks();
-        } else if (sArray[0].equals("done")) {
+            break;
+        case "done":
             inputDone(sArray[1]);
-        } else if (sArray[0].equals("delete")) {
+            break;
+        case "delete":
             inputDelete(sArray[1]);
-        } else {
+            break;
+        default:
             inputAdd(s);
+            break;
         }
         return true;
     }
 
+    /**
+     * The main method which is executed when the Duke program
+     * is run.
+     *
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean hasInput = true;

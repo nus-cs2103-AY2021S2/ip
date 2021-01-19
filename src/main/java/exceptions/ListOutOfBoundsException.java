@@ -12,6 +12,12 @@ package main.java.exceptions;
  */
 public class ListOutOfBoundsException extends Exception {
 
+    /**
+     * Default constructor for the ListOutOfBoundsException class.
+     *
+     * @param size The current size of the list in a TaskManager
+     *             object.
+     */
     public ListOutOfBoundsException(int size) {
         super("OOPS!!! The list currently only has " + size + " elements.");
     }

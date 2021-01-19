@@ -11,6 +11,11 @@ package main.java.exceptions;
  */
 public class EmptyDescriptionException extends Exception {
 
+    /**
+     * Default constructor for the EmptyDescriptionException class.
+     *
+     * @param s The type of task which triggered this exception.
+     */
     public EmptyDescriptionException(String s) {
         super("OOPS!!! The description of a " + s + " cannot be empty.");
     }

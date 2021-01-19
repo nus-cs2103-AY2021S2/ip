@@ -14,11 +14,23 @@ public class Event extends Task {
     /** Date which the event is held on */
     private String date;
 
-    public Event(String s, String t) {
-        super(s);
-        date = t;
+    /**
+     * Default constructor for the Event class.
+     *
+     * @param name Description of the event.
+     * @param date Date which the event is held on.
+     */
+    public Event(String name, String date) {
+        super(name);
+        this.date = date;
     }
 
+    /**
+     * Returns a description of the event, formatted with its
+     * type, followed by an "X" if it has been marked as done.
+     *
+     * @return Formatted description of the event.
+     */
     @Override
     public String toString() {
         return "[E][" + (isDone ? "X" : " ") + "] " + name + " (at: " + date + ")";

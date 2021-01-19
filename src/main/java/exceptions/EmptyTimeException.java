@@ -11,6 +11,11 @@ package main.java.exceptions;
  */
 public class EmptyTimeException extends Exception {
 
+    /**
+     * Default constructor for the EmptyTimeException class.
+     *
+     * @param s The type of task which triggered this exception.
+     */
     public EmptyTimeException(String s) {
         super("OOPS!!! The time of a " + s + " cannot be empty.");
     }

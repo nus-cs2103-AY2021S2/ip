@@ -20,10 +20,21 @@ public class TaskManager {
     /** List of tasks created by user input */
     private ArrayList<Task> tasks;
 
+    /**
+     * Default constructor for the TaskManager class.
+     */
     public TaskManager() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a to-do to the list of tasks.
+     *
+     * @param s User input triggering the addition of a to-do
+     *          to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided
+     *                                   for the to-do.
+     */
     private void addTodo(String s)
             throws EmptyDescriptionException {
         try {
@@ -34,6 +45,16 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a deadline to the list of tasks.
+     *
+     * @param s User input triggering the addition of a deadline
+     *          to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided
+     *                                   for the deadline.
+     * @throws EmptyTimeException If no date or time is specified for
+     *                            the deadline.
+     */
     private void addDeadline(String s)
             throws EmptyDescriptionException, EmptyTimeException {
         try {
@@ -48,6 +69,16 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds an event to the list of tasks.
+     *
+     * @param s User input triggering the addition of an event
+     *          to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided
+     *                                   for the event.
+     * @throws EmptyTimeException If no date or time is specified for
+     *                            the event.
+     */
     private void addEvent(String s)
             throws EmptyDescriptionException, EmptyTimeException {
         try {
@@ -62,17 +93,36 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a task to the list of tasks. Calls either addTodo,
+     * addDeadline, or addEvent, depending on the type of task
+     * specified by the user.
+     *
+     * @param s User input triggering the addition of a task
+     *          to the list of tasks.
+     * @throws EmptyDescriptionException If no description is provided
+     *                                   for the task.
+     * @throws EmptyTimeException If no date or time is specified for
+     *                            the task, which is either a deadline
+     *                            or an event.
+     * @throws InvalidInputException If the task is neither a to-do, a
+     *                               deadline, nor an event.
+     */
     public void addTask(String s)
             throws EmptyDescriptionException, EmptyTimeException, InvalidInputException {
         String command = s.split(" ", 2)[0];
 
-        if (command.equals("todo")) {
+        switch (command) {
+        case "todo":
             addTodo(s);
-        } else if (command.equals("deadline")) {
+            break;
+        case "deadline":
             addDeadline(s);
-        } else if (command.equals("event")) {
+            break;
+        case "event":
             addEvent(s);
-        } else {
+            break;
+        default:
             throw new InvalidInputException();
         }
 
@@ -81,6 +131,10 @@ public class TaskManager {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Prints the list of tasks added by the user till this point,
+     * based on the order they were added by the user.
+     */
     public void printTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < tasks.size() + 1; i++) {
@@ -89,6 +143,18 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Marks a task that is specified by the user as done. The
+     * user should specify the index of the task in the list
+     * which he or she intends to mark as done.
+     *
+     * @param s Index of the task to be marked as done
+     *          in the list of tasks, in String format.
+     * @throws InvalidInputException If the user provided a non-integer index
+     *                               in the user input.
+     * @throws ListOutOfBoundsException If the user provided an index which is
+     *                                  not in the list.
+     */
     public void markDone(String s)
             throws InvalidInputException, ListOutOfBoundsException {
         try {
@@ -103,6 +169,18 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Deletes a task that is specified by the user from the
+     * list of tasks. The user should specify the index of the
+     * task in the list which he or she intends to delete.
+     *
+     * @param s Index of the task to be marked as done
+     *          in the list of tasks, in String format.
+     * @throws InvalidInputException If the user provided a non-integer index
+     *                               in the user input.
+     * @throws ListOutOfBoundsException If the user provided an index which is
+     *                                  not in the list.
+     */
     public void deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
         try {
             int index = Integer.parseInt(s) - 1;
