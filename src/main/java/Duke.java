@@ -1,7 +1,7 @@
 import java.util.*;
 public class Duke {
     public static void main(String[] args) {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Amanda :)\nWhat can I do for you?");
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         ArrayList<Task> list = new ArrayList<Task>();
@@ -59,7 +59,7 @@ public class Duke {
                     list.remove(taskIndex);
                     index--;
                     System.out.println("Noted. I've removed this task: \n " + task.toString());
-                    System.out.printf("Now you have %d tasks in the list.", index);
+                    System.out.printf("Now you have %d tasks in the list.\n", index);
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
