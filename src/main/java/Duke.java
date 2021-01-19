@@ -45,28 +45,37 @@ public class Duke {
                     list.get(itemNumber)
                 );
             } else if (input.split(" ")[0].equals("todo")) {
-                Todo todo = new Todo(input.split(" ", 2)[1]);
-                list.add(todo);
-                System.out.println("added: " + todo);
+                try {
+                    Todo todo = new Todo(input.split(" ", 2)[1]);
+                    list.add(todo);
+                    System.out.println("added: " + todo);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oops, your todo requires at least a description.");
+                }
             } else if (input.split(" ")[0].equals("deadline")) {
-                String taskAndDate = input.split(" ", 2)[1];
-                String task = taskAndDate.split(" /by ")[0];
-                String date = taskAndDate.split(" /by ")[1];
-                Deadline deadline = new Deadline(task, date);
-                list.add(deadline);
-                System.out.println("added: " + deadline);
+                try {
+                    String taskAndDate = input.split(" ", 2)[1];
+                    String task = taskAndDate.split(" /by ")[0];
+                    String date = taskAndDate.split(" /by ")[1];
+                    Deadline deadline = new Deadline(task, date);
+                    list.add(deadline);
+                    System.out.println("added: " + deadline);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oops, your deadline requires both a description and date.");
+                }
             } else if (input.split(" ")[0].equals("event")) {
-                String taskAndDate = input.split(" ", 2)[1];
-                String task = taskAndDate.split(" /at ")[0];
-                String date = taskAndDate.split(" /at ")[1];
-                Event event = new Event(task, date);
-                list.add(event);
-                System.out.println("added: " + event);
+                try {
+                    String taskAndDate = input.split(" ", 2)[1];
+                    String task = taskAndDate.split(" /at ")[0];
+                    String date = taskAndDate.split(" /at ")[1];
+                    Event event = new Event(task, date);
+                    list.add(event);
+                    System.out.println("added: " + event);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Oops, your Event requires both a description and date");
+                }
             } else {
-                // Otherwise add tasks to the list and print it.
-                Task currentTask = new Task(input);
-                list.add(currentTask);
-                System.out.println("added: " + input);
+                System.out.println("Oops, I'm sorry but that command is not valid.");
             }
 
             System.out.println("____________________________________________________________");
