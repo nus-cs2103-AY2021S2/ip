@@ -94,6 +94,8 @@ public class Duke {
 
     private static void printList() {
         StringBuilder res = new StringBuilder();
+        res.append(indent)
+                .append("Hi! This is your todo list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             res.append(indent)
@@ -135,7 +137,7 @@ public class Duke {
         String res = indent +
                 "Wonderful! You have completed this task:\n" +
                 indent +
-                "[" + task.getStatusIcon() + "] " +
+                "  [" + task.getStatusIcon() + "] " +
                 task.getDescription();
         System.out.println(res);
     }
