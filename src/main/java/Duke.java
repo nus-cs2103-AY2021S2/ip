@@ -1,12 +1,24 @@
+import tasks.Deadline;
+import tasks.Event;
 import tasks.Task;
+import tasks.Todo;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
     public static String BOT_NAME = "Apollo the Robot";
     public static String INDENTATION = "    ";
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public enum Command {
+        LIST,
+        DONE,
+        BYE,
+        TODO,
+        DEADLINE,
+        EVENT
+    }
 
     public static void printlnWithIndentation(String s) {
         System.out.println(INDENTATION + " " + s);
@@ -27,9 +39,44 @@ public class Duke {
         printHorizontalLine();
     }
 
-    public static void addTask(Task task, ArrayList<Task> taskList) {
-        taskList.add(task);
-        printBetweenLines("added: " + task.toString());
+    public static void addTask(Command command, String input, ArrayList<Task> taskList) {
+        int numberOfTasks = taskList.size();
+
+        switch (command) {
+            case TODO:
+                Task todo = new Todo(input);
+                taskList.add(todo);
+                numberOfTasks += 1;
+                printBetweenLines("Got it. I've added this task:",
+                        INDENTATION + todo.toString(),
+                        "Now you have " + numberOfTasks + " tasks in the list."
+                );
+                break;
+            case DEADLINE:
+                int indexOfBy = input.indexOf("/by");
+                String deadlineMessage = input.substring(0, indexOfBy);
+                String by = input.substring(indexOfBy + 4);
+                Task deadline = new Deadline(deadlineMessage, by);
+                taskList.add(deadline);
+                numberOfTasks += 1;
+                printBetweenLines("Got it. I've added this task:",
+                        INDENTATION + deadline.toString(),
+                        "Now you have " + numberOfTasks + " tasks in the list."
+                );
+                break;
+            case EVENT:
+                int indexOfAt = input.indexOf("/at");
+                String eventMessage = input.substring(0, indexOfAt);
+                String at = input.substring(indexOfAt + 4);
+                Task event = new Event(eventMessage, at);
+                taskList.add(event);
+                numberOfTasks += 1;
+                printBetweenLines("Got it. I've added this task:",
+                        INDENTATION + event.toString(),
+                        "Now you have " + numberOfTasks + " tasks in the list."
+                );
+                break;
+        }
     }
 
     public static void listTasks(ArrayList<Task> taskList) {
@@ -50,23 +97,34 @@ public class Duke {
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
-            String[] command = input.split(" ", 5);
+            String[] inputArr = input.split(" ", 2);
 
+            Command command = Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
 
-            if (command[0].equals("bye")) {
-                printBetweenLines("Bye. Hope to see you again soon!");
-                System.exit(0);
-            } else if (command[0].equals("list")) {
-                listTasks(taskList);
-            } else if (command[0].equals("done")) {
-                int index = Integer.parseInt(command[1]) - 1;
-                Task task = taskList.get(index);
-                task.markAsDone();
-                printBetweenLines("Nice! I've marked this task as done:", task.toString());
-            }
-            else {
-                Task task = new Task(input);
-                addTask(task, taskList);
+            switch (command) {
+                case LIST:
+                    listTasks(taskList);
+                    break;
+                case DONE:
+                    int index = Integer.parseInt(inputArr[1]) - 1;
+                    Task task = taskList.get(index);
+                    task.markAsDone();
+                    printBetweenLines("Nice! I've marked this task as done:", task.toString());
+                    break;
+                case BYE:
+                    addTask(command, inputArr[1], taskList);
+                    break;
+                case TODO:
+                    addTask(command, inputArr[1], taskList);
+                    break;
+                case DEADLINE:
+                    addTask(command, inputArr[1], taskList);
+                    break;
+                case EVENT:
+                    addTask(command, inputArr[1], taskList);
+                    break;
+                default:
+                    printBetweenLines("Invalid command, please try again!");
             }
         }
     }
