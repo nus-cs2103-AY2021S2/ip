@@ -11,6 +11,7 @@ public class Duke {
             String[] arr = s.split(" ");
             String taskConfirmation = "Got it. I've added this task:\n";
             if (s.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int index = 1;
                 for (Task task : list) {
                     System.out.println(index + "." + task);
