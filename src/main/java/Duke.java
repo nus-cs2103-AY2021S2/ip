@@ -1,29 +1,60 @@
 import java.util.Scanner;
 
 public class Duke {
+    public static void addLine() {
+        System.out.println("    ----------------------------------");
+    }
+
     public static void main(String[] args) {
-        String inputArr[] = new String[100];
+        Task[] inputArr = new Task[100];
         Scanner sc = new Scanner(System.in);
-        System.out.println("    ----------------------------------\n    Hello! I'm Duke\n    What can I do for you?\n    ----------------------------------\n");
-        String input = "";
+        addLine();
+        System.out.println("    Hello! I'm Duke\n    What can I do for you?");
+        addLine();
+        System.out.println();
         int n = 0;
 
         while(true) {
-            input = sc.nextLine();
+            String input = sc.nextLine();
+            String[] markDone = new String[2];
+            markDone = input.split(" ");
 
-            if(input.equals("bye")) break;
-            if(input.equals("list")) {
-                System.out.println("    ----------------------------------");
-                for(int i = 1; i <= n; i++) {
-                    System.out.println("    " + i + ". " + inputArr[i - 1]);
-                }
-                System.out.println("    ----------------------------------\n");
-            } else {
-                System.out.println("    ----------------------------------\n    " + "added: " + input + "\n    ----------------------------------\n");
+            switch(markDone[0]) {
+                case "bye":
+                    break;
+                case "list":
+                    addLine();
+                    for(int i = 1; i <= n; i++) {
+                        Task curr = inputArr[i - 1];
+                        System.out.println("    " + i + ". " + "[" + curr.getStatusIcon() + "] " + curr.getDescription());
+                    }
+                    addLine();
+                    System.out.println();
+                    break;
+                case "done":
+                    int taskNum = Integer.parseInt(markDone[1]);
+                    Task curr = inputArr[taskNum - 1];
+                    addLine();
+                    System.out.println("    Nice! I've marked this task as done:");
+                    System.out.println("      " + "[" + curr.getStatusIcon() + "] " + curr.getDescription());
+                    addLine();
+                    System.out.println();
+                    curr.toggleStatus();
+                    break;
+                default:
+                    addLine();
+                    System.out.println("    added: " + input);
+                    addLine();
+                    System.out.println();
+                    inputArr[n] = new Task(input);
+                    n++;
+                    break;
             }
-            inputArr[n] = input;
-            n++;
+            if(input.equals("bye")) break;
         }
-        System.out.println("    ----------------------------------\n    " + "Bye. Hope to see you again soon!" + "\n    ----------------------------------\n");
+        addLine();
+        System.out.println("    Bye. Hope to see you again soon!");
+        addLine();
+        System.out.println();
     }
 }
