@@ -1,7 +1,7 @@
 public class Deadline extends Task{
     String deadline;
-    Deadline(String name, int id,Boolean isDone, String deadline){
-        super(name,id,isDone);
+    Deadline(String name,Boolean isDone, String deadline){
+        super(name,isDone);
         this.deadline = deadline;
     }
     public String getDeadline(){
@@ -9,16 +9,16 @@ public class Deadline extends Task{
     }
     @Override
     Deadline finish(){
-        return new Deadline(this.getName(),this.getId(), true, this.getDeadline()) ;
+        return new Deadline(this.getName(), true, this.getDeadline()) ;
     }
 
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[D][X] "+ this.getId() + "." + this.getName() + "(" + this.getDeadline() + ")";
+            return "[D][X] " + this.getName() + "(" + this.getDeadline() + ")";
         }
         else{
-            return "[D][ ] "+ this.getId() + "." + this.getName() + "(" + this.getDeadline() + ")";
+            return "[D][ ] "  + this.getName() + "(" + this.getDeadline() + ")";
         }
     }
 }

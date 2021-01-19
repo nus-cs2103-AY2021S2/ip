@@ -1,7 +1,7 @@
 public class Event extends Task{
     protected final String time;
-    Event(String name, int id, Boolean isDone,String time){
-        super(name,id,isDone);
+    Event(String name, Boolean isDone,String time){
+        super(name,isDone);
         this.time = time;
 
     }
@@ -10,15 +10,15 @@ public class Event extends Task{
     }
     @Override
     Event finish(){
-        return new Event(this.getName(),this.getId(), true,this.getTime()) ;
+        return new Event(this.getName(), true,this.getTime()) ;
     }
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[E][X] "+ this.id + "." + this.name + "(" + this.time + ")";
+            return "[E][X] " + this.name + "(" + this.time + ")";
         }
         else{
-            return "[E][ ] "+ this.id + "." + this.name + "(" + this.time + ")";
+            return "[E][ ] " + this.name + "(" + this.time + ")";
         }
     }
 }

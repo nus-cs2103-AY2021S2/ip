@@ -12,7 +12,6 @@ public class Duke {
         String hello = "What can I do for you?\n";
         String goodbye = "Bye. Hope to see you again soon!\n";
         ArrayList<Task> tasks = new ArrayList<>();
-
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo);
         System.out.println("Duke: " + hello);
@@ -23,7 +22,7 @@ public class Duke {
                 if(tasks.size() > 0) {
                     System.out.println("Here are the tasks in your list:\n");
                     for (int i = 1; i <= tasks.size(); i++) {
-                        System.out.println(tasks.get(i-1));
+                        System.out.println(i + ". " + tasks.get(i-1));
                     }
                 }
                 else{
@@ -40,78 +39,76 @@ public class Duke {
                         } else {
                             System.out.println("error");
                         }
-                    } else if (pre[0].equals("deadline")) {
+                    }
+                    else if(pre[0].equals("delete")){
+                        if(parseInt(pre[1]) <= tasks.size()){
+                            System.out.println("Noted. I've removed this task: ");
+                            System.out.println(tasks.get(parseInt(pre[1])-1));
+                            tasks.remove(parseInt(pre[1])-1);
+                            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+
+                        }
+                        else{
+                            System.out.println("error");
+                        }
+                    }
+                    else if (pre[0].equals("deadline")) {
                         String s = "";
                         String t = "";
-                        for (int i = 1; i < pre.length; i++) {
-                            if (pre[i].equals("/by")) {
-                                for (int j = i + 1; j < pre.length; j++) {
-                                    t = t + pre[j] + " ";
-                                }
-                                t = t.substring(0, t.length() - 1);
-                                break;
-                            } else {
-                                s = s + pre[i] + " ";
-                            }
+                        String[] pre2 = cmd.split("/by");
+                        try {
+                            s = pre2[0];
+                            t = pre2[1];
+                            System.out.println("Got it. I've added this task:");
+                            tasks.add(new Deadline(s, false, t));
+                            System.out.println(tasks.get(tasks.size() - 1));
+                            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
                         }
-
-                        System.out.println("Got it. I've added this task:");
-                        tasks.add(new Deadline(s, tasks.size() + 1, false, t));
-                        System.out.println(tasks.get(tasks.size() - 1));
-                        System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
-
+                        catch (Exception e){
+                            System.out.println("Please enter a description for deadline");
+                        }
                     } else if (pre[0].equals("event")) {
                         String s = "";
                         String t = "";
-                        for (int i = 1; i < pre.length; i++) {
-                            if (pre[i].equals("/at")) {
-                                for (int j = i + 1; j < pre.length; j++) {
-                                    t = t + pre[j] + " ";
-                                }
-                                t = t.substring(0, t.length() - 1);
-                                break;
-                            } else {
-                                s = s + pre[i] + " ";
-                            }
+                        String[] pre2 = cmd.split("/at");
+                        try {
+                            s = pre2[0];
+                            t = pre2[1];
+                            System.out.println("Got it. I've added this task:");
+                            tasks.add(new Deadline(s, false, t));
+                            System.out.println(tasks.get(tasks.size() - 1));
+                            System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
                         }
-                        System.out.println("Got it. I've added this task:");
-                        tasks.add(new Event(s, tasks.size() + 1, false, t));
-                        System.out.println(tasks.get(tasks.size() - 1));
-                        System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
-
+                        catch (Exception e){
+                            System.out.println("Please enter a description for event");
+                        }
                     }
                     else if (pre[0].equals("todo")) {
                             String s = "";
                             for (int i = 1; i < pre.length; i++) {
-                                s = s + pre[i] + " ";
+                                s =
+                                        s + pre[i] + " ";
                             }
                             if (!s.equals("")) {
-                                tasks.add(new Todo(s, tasks.size() + 1, false));
+                                tasks.add(new Todo(s,false));
                                 System.out.println("Got it. I've added this task:");
                                 System.out.println(tasks.get(tasks.size() - 1));
                                 System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
                             } else {
-                                System.out.println("Please enter a description");
+                                System.out.println("Please enter a description for todo");
                             }
                     }
                     else{
                         System.out.println("Command not understood");
                     }
-
-
                 }
                 catch (Exception e){
                     System.out.println("Invalid command");
                 }
-
             }
             cmd = sc.nextLine();
             pre = cmd.split("\\s+");
-
         }
         System.out.println("Duke: "+goodbye);
-
-
-
     }
 }
