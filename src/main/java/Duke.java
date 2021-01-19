@@ -30,61 +30,80 @@ public class Duke {
                     System.out.println("No tasks");
                 }
             }
-            else if(pre[0].equals("done")){
-                if(parseInt(pre[1]) <= tasks.size()) {
-                    tasks.set(parseInt(pre[1]) - 1,tasks.get(parseInt(pre[1]) - 1).finish());
-                    System.out.println("Nice! I've marked this task as done: \n");
-                    System.out.println(tasks.get(parseInt(pre[1]) - 1));
-                }
-                else{
-                    System.out.println("error");
-                }
-            }
             else{
-                System.out.println("Got it. I've added this task:");
-                if(pre[0].equals("todo")) {
-                    String s = "";
-                    for(int i = 1 ; i < pre.length ; i++){
-                         s = s + pre[i] + " ";
-                    }
-                    tasks.add(new Todo(s, tasks.size() + 1, false));
-                }
-                if(pre[0].equals("deadline")) {
-                    String s = "";
-                    String t = "";
-                    for(int i = 1 ; i < pre.length ; i++){
-                        if(pre[i].equals("/by")){
-                            for(int j = i+1 ; j < pre.length ; j++){
-                                t = t +pre[j] + " ";
+                try {
+                    if (pre[0].equals("done")) {
+                        if (parseInt(pre[1]) <= tasks.size()) {
+                            tasks.set(parseInt(pre[1]) - 1, tasks.get(parseInt(pre[1]) - 1).finish());
+                            System.out.println("Nice! I've marked this task as done: \n");
+                            System.out.println(tasks.get(parseInt(pre[1]) - 1));
+                        } else {
+                            System.out.println("error");
+                        }
+                    } else if (pre[0].equals("deadline")) {
+                        String s = "";
+                        String t = "";
+                        for (int i = 1; i < pre.length; i++) {
+                            if (pre[i].equals("/by")) {
+                                for (int j = i + 1; j < pre.length; j++) {
+                                    t = t + pre[j] + " ";
+                                }
+                                t = t.substring(0, t.length() - 1);
+                                break;
+                            } else {
+                                s = s + pre[i] + " ";
                             }
-                            t = t.substring(0,t.length()-1);
-                            break;
                         }
-                        else {
-                            s = s + pre[i] + " ";
-                        }
-                    }
-                    tasks.add(new Deadline(s, tasks.size() + 1, false,t));
-                }
-                if(pre[0].equals("event")) {
-                    String s = "";
-                    String t = "";
-                    for(int i = 1 ; i < pre.length ; i++){
-                        if(pre[i].equals("/at")){
-                            for(int j = i+1 ; j < pre.length ; j++){
-                                t = t +pre[j] + " ";
+
+                        System.out.println("Got it. I've added this task:");
+                        tasks.add(new Deadline(s, tasks.size() + 1, false, t));
+                        System.out.println(tasks.get(tasks.size() - 1));
+                        System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+
+                    } else if (pre[0].equals("event")) {
+                        String s = "";
+                        String t = "";
+                        for (int i = 1; i < pre.length; i++) {
+                            if (pre[i].equals("/at")) {
+                                for (int j = i + 1; j < pre.length; j++) {
+                                    t = t + pre[j] + " ";
+                                }
+                                t = t.substring(0, t.length() - 1);
+                                break;
+                            } else {
+                                s = s + pre[i] + " ";
                             }
-                            t = t.substring(0,t.length()-1);
-                            break;
                         }
-                        else {
-                            s = s + pre[i] + " ";
-                        }
+                        System.out.println("Got it. I've added this task:");
+                        tasks.add(new Event(s, tasks.size() + 1, false, t));
+                        System.out.println(tasks.get(tasks.size() - 1));
+                        System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+
                     }
-                    tasks.add(new Event(s, tasks.size() + 1,false,t));
+                    else if (pre[0].equals("todo")) {
+                            String s = "";
+                            for (int i = 1; i < pre.length; i++) {
+                                s = s + pre[i] + " ";
+                            }
+                            if (!s.equals("")) {
+                                tasks.add(new Todo(s, tasks.size() + 1, false));
+                                System.out.println("Got it. I've added this task:");
+                                System.out.println(tasks.get(tasks.size() - 1));
+                                System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+                            } else {
+                                System.out.println("Please enter a description");
+                            }
+                    }
+                    else{
+                        System.out.println("Command not understood");
+                    }
+
+
                 }
-                System.out.println(tasks.get(tasks.size()-1));
-                System.out.printf("Now you have %d tasks in the list.\n", tasks.size());
+                catch (Exception e){
+                    System.out.println("Invalid command");
+                }
+
             }
             cmd = sc.nextLine();
             pre = cmd.split("\\s+");
