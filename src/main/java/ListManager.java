@@ -3,8 +3,8 @@ package main.java;
 import java.util.ArrayList;
 
 public class ListManager extends Manager {
-    ArrayList<Task> TaskArray;
-    int numberOfTasks;
+    protected ArrayList<Task> TaskArray;
+    protected int numberOfTasks;
 
     public ListManager(){
         TaskArray = new ArrayList<Task>();
@@ -17,6 +17,10 @@ public class ListManager extends Manager {
 
     public String goodbyeLine(){
         return defaultFormatting("Bye. Hope to see you again soon!");
+    }
+
+    public String getNumberOfTasks(){
+        return "     Now you have " + String.valueOf(numberOfTasks)+ " tasks in the list.";
     }
 
     public String addTask(String userInput) throws DukeException{
@@ -37,10 +41,9 @@ public class ListManager extends Manager {
             }else {
                 if (userInput.contains(" /at ")) {
                     String[] arr = userInput.substring(6).split(" /at ");
-                    String eventdescription = arr[0];
+                    String eventDescription = arr[0];
                     String descriptionAt = arr[1];
-                    newTask = new Event(eventdescription, descriptionAt);
-
+                    newTask = new Event(eventDescription, descriptionAt);
                 }else{
                     throw new DukeException(defaultFormatting("Error! Please provide where and when the" +
                             " event will take place after /at."));
@@ -53,17 +56,16 @@ public class ListManager extends Manager {
             }else {
                 if (userInput.contains(" /by ")) {
                     String[] arr = userInput.substring(9).split(" /by ");
-                    String deadlinedescription = arr[0];
+                    String deadlineDescription = arr[0];
                     String descriptionBy = arr[1];
-                    newTask = new Deadline(deadlinedescription, descriptionBy);
-
+                    newTask = new Deadline(deadlineDescription, descriptionBy);
                 }else{
                     throw new DukeException(defaultFormatting("Error! Please provide when the deadline " +
                             "will be due after /by."));
                 }
             }
         }else{
-            throw new DukeException(defaultFormatting("Error! I'm sorry, but I don't know what that means"));
+            throw new DukeException(defaultFormatting("I'm sorry, but I don't know what that means"));
         }
 
         TaskArray.add(newTask);
@@ -72,16 +74,16 @@ public class ListManager extends Manager {
         return defaultFormatting(temp);
     }
 
-    public String getNumberOfTasks(){
-        return "     Now you have " + String.valueOf(numberOfTasks)+ " tasks in the list.";
-    }
+    public String checkTaskAsDone(int number) throws DukeException{
 
-    public String checkTaskAsDone(int number){
-
-        Task currentTask = TaskArray.get(number - 1);
-        currentTask.changeTaskToDone();
-
-        return defaultFormatting("Nice! I've marked this task as done:\n       " + currentTask.toString());
+        if (number >= 1 && number<= TaskArray.size()) {
+            Task currentTask = TaskArray.get(number - 1);
+            currentTask.changeTaskToDone();
+            return defaultFormatting("Nice! I've marked this task as done:\n       " + currentTask.toString());
+        }else{
+            throw new DukeException(defaultFormatting("Error! Please make sure the " +
+                    "number given has a corresponding task!"));
+        }
     }
 
     public String returnTaskList(){
@@ -101,5 +103,35 @@ public class ListManager extends Manager {
         sb.append(horizontalLine());
 
         return sb.toString();
+    }
+
+    public String handleTaskRelatedUserInput(String userInput) throws DukeException{
+        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("done")){
+
+            if (userInput.equals("done") || userInput.equals("done ")){
+                throw new DukeException(defaultFormatting("Error! Please indicate the task " +
+                        "which is done by its number on the list"));
+            }else {
+
+                try {
+                    int taskInt = Integer.parseInt(userInput.split(" ")[1]);
+                    String outputString = this.checkTaskAsDone(taskInt);
+                    return outputString;
+                } catch (NumberFormatException e) {
+                    throw new DukeException(defaultFormatting("Error! You must give a number " +
+                            "corresponding to a task on the list"));
+                } catch (DukeException e) {
+                    throw e;
+                }
+            }
+        }else{
+            try{
+                String outputString = this.addTask(userInput);
+                return outputString;
+            }catch (DukeException e){
+                throw e;
+            }
+        }
+
     }
 }
