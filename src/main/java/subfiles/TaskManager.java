@@ -52,10 +52,15 @@ public class TaskManager {
             throws EmptyDescriptionException, EmptyTimeException, InvalidInputException {
         String command = s.split(" ", 2)[0];
 
-        if (command.equals("todo"))  addTodo(s);
-        else if (command.equals("deadline")) addDeadline(s);
-        else if (command.equals("event")) addEvent(s);
-        else throw new InvalidInputException();
+        if (command.equals("todo")) {
+            addTodo(s);
+        } else if (command.equals("deadline")) {
+            addDeadline(s);
+        } else if (command.equals("event")) {
+            addEvent(s);
+        } else {
+            throw new InvalidInputException();
+        }
 
         System.out.println("Got it. I've added this task:");
         System.out.println(tasks.get(tasks.size() - 1).toString());

@@ -45,29 +45,34 @@ public class Duke {
         }
     }
 
+    private static boolean executeInput(String s) {
+        String[] sArray = s.split(" ");
+
+        if (sArray[0].equals("bye")) {
+            return false;
+        } else if (sArray[0].equals("list")) {
+            taskManager.printTasks();
+        } else if (sArray[0].equals("done")) {
+            inputDone(sArray[1]);
+        } else if (sArray[0].equals("delete")) {
+            inputDelete(sArray[1]);
+        } else {
+            inputAdd(s);
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        boolean hasInput = true;
 
         greet();
-
-        while (true) {
+        while (hasInput) {
             String s = sc.nextLine();
-            String[] sArray = s.split(" ");
-
-            if (sArray[0].equals("bye")) {
-                break;
-            } else if (sArray[0].equals("list")) {
-                taskManager.printTasks();
-            } else if (sArray[0].equals("done")) {
-                inputDone(sArray[1]);
-            } else if (sArray[0].equals("delete")) {
-                inputDelete(sArray[1]);
-            } else {
-                inputAdd(s);
-            }
+            hasInput = executeInput(s);
         }
-
         exit();
+
         sc.close();
     }
 }

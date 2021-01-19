@@ -1,7 +1,7 @@
 package main.java.subfiles;
 
 public class Deadline extends Task {
-    String date;
+    private String date;
 
     public Deadline(String s, String t) {
         super(s);
