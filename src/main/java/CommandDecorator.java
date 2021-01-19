@@ -6,7 +6,7 @@ public class CommandDecorator implements ICommand {
         this.decoratedCommand = decoratedCommand;
     }
 
-    public void execute(String[] parameters){
+    public void execute(String parameters){
         System.out.println("-".repeat(40));
         decoratedCommand.execute(parameters);
         System.out.println("-".repeat(40));

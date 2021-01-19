@@ -6,7 +6,7 @@ public class ExitCommand implements ICommand {
     }
 
     @Override
-    public void execute(String[] parameters) {
+    public void execute(String parameters) {
         tasks.setExited();
         System.out.println("Bye. Hope to see you again soon!");
     }

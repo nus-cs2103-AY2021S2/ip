@@ -12,8 +12,8 @@ public class TaskManager {
     public ArrayList<Task> getTasks() {
         return this.list;
     }
-    public void addTask(String content) {
-        list.add(new Task(content));
+    public void addTask(Task content) {
+        list.add(content);
     }
 
     //note count starts from 1 not 0

@@ -6,7 +6,7 @@ public class PrintListCommand implements ICommand {
     }
 
     @Override
-    public void execute(String[] parameters) {
+    public void execute(String parameters) {
         System.out.println(listToString());
 
     }

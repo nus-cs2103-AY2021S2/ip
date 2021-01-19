@@ -1,3 +1,3 @@
 public interface ICommand {
-    void execute(String[] parameters);
+    void execute(String parameters);
 }

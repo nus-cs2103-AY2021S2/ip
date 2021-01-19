@@ -6,10 +6,10 @@ public class DoneCommand implements ICommand {
     }
 
     @Override
-    public void execute(String[] parameters) {
+    public void execute(String parameters) {
         Integer count;
         try {
-            count = Integer.parseInt(parameters[1]);
+            count = Integer.parseInt(parameters);
         } catch (NumberFormatException e) {
             count = -1;
         }

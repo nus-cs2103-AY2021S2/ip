@@ -2,20 +2,19 @@ import java.util.StringJoiner;
 
 public class AddCommand implements ICommand {
     private TaskManager tasks;
-    String string;
-    AddCommand(TaskManager tasks) {
+    AbstractTaskFactory taskFactory;
+
+    AddCommand(TaskManager tasks, AbstractTaskFactory taskFactory) {
         this.tasks = tasks;
+        this.taskFactory = taskFactory;
+
     }
 
     @Override
-    public void execute(String[] parameters) {
-        StringJoiner joiner = new StringJoiner(" ");
-        for (String string:parameters) {
-            joiner.add(string);
-        }
-        String input = joiner.toString();
-        this.tasks.addTask(input);
+    public void execute(String parameters) {
+        Task newTask = taskFactory.getTask(parameters);
+        this.tasks.addTask(newTask);
 
-        System.out.println(input);
+        System.out.println(newTask.toString());
     }
 }
