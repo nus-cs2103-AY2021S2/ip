@@ -17,11 +17,6 @@ public class TaskList {
         return "added: " + task;
     }
 
-    public String addTask(String taskDesc) {
-        taskList.add(new Task(taskDesc));
-        return "added: " + taskDesc;
-    }
-
     public String markTaskDone(int position) {
         taskList.get(position).markDone();
         return "Nice, another job well done!\n" 
@@ -33,6 +28,6 @@ public class TaskList {
                 .stream()
                 .map(t -> t.toString())
                 .collect(Collectors.toList())
-        );
+        ) + "\n Now you have " + taskList.size() + "task(s) in your list";
     }
 }
