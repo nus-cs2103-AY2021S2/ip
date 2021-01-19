@@ -1,9 +1,23 @@
 package main.java.subfiles;
 
 import java.util.ArrayList;
-import main.java.exceptions.*;
 
+import main.java.exceptions.EmptyDescriptionException;
+import main.java.exceptions.EmptyTimeException;
+import main.java.exceptions.InvalidInputException;
+import main.java.exceptions.ListOutOfBoundsException;
+
+/**
+ * The TaskManager class contains a list of tasks created by
+ * user input, and allows the user to add, print, or delete
+ * tasks, as well as to mark a task in the list as done.
+ *
+ * @author  arsatis
+ * @version 1.0
+ * @since   2021-01-19
+ */
 public class TaskManager {
+    /** List of tasks created by user input */
     private ArrayList<Task> tasks;
 
     public TaskManager() {
@@ -102,4 +116,5 @@ public class TaskManager {
             throw new ListOutOfBoundsException(tasks.size());
         }
     }
+
 }

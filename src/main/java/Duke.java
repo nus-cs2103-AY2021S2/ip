@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.Scanner;
+
 import main.java.exceptions.EmptyDescriptionException;
 import main.java.exceptions.EmptyTimeException;
 import main.java.exceptions.InvalidInputException;
@@ -7,10 +9,17 @@ import main.java.exceptions.ListOutOfBoundsException;
 
 import main.java.subfiles.TaskManager;
 
-import java.util.Scanner;
-
+/**
+ * The Duke program is an interactive application which
+ * enables users to store and modify their tasks.
+ *
+ * @author  arsatis
+ * @version 1.0
+ * @since   2021-01-19
+ */
 public class Duke {
-    private static TaskManager taskManager= new TaskManager();
+    /** Task manager which manages the tasks created by user input */
+    private static TaskManager taskManager = new TaskManager();
 
     private static void greet() {
         System.out.println("Hello! I'm Duke");
@@ -75,4 +84,5 @@ public class Duke {
 
         sc.close();
     }
+
 }
