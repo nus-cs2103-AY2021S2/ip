@@ -25,6 +25,7 @@ public class Duke {
 
             if (input.equals("bye")) {
                 System.out.println(tab + "Bye. Hope to see you again soon!");
+                break;
             } else {
                 System.out.println(tab + input);
             }
