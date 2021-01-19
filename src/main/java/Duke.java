@@ -1,5 +1,6 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.lang.System.exit;
 
 public class Duke {
     public static ArrayList<Task> ls = new ArrayList<>();
@@ -35,13 +36,13 @@ public class Duke {
                     break;
                 case "deadline" :
                     String inst1 = sc.nextLine();
-                    String[] part1 = inst1.split("/by ");
+                    String[] part1 = inst1.split("/by");
                     addTask(new Deadline(part1[0], part1[1]));
                     System.out.println(partition);
                     break;
                 case "event" :
                     String inst2 = sc.nextLine();
-                    String[] part2 = inst2.split("/at ");
+                    String[] part2 = inst2.split("/at");
                     addTask(new Event(part2[0], part2[1]));
                     System.out.println(partition);
                     break;
@@ -54,6 +55,8 @@ public class Duke {
         }
 
         System.out.println("Bye. Hope to see you again soon!\n" + logo);
+        sc.close();
+        exit(0);
     }
 
     public static void addTask(Task task) {
