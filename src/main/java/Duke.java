@@ -32,6 +32,7 @@ public class Duke {
 
     // helper method to format chat bot responses
     // prints all strings in messages array in a separate indented line
+    // maybe can think of splitting strings that are too long into different lines
     private static void print(String[] messages) {
         System.out.println(lines);
 
@@ -51,32 +52,125 @@ public class Duke {
         print(messages);
     }
 
+    // todo make this an exception too
+    private static void handleFirstArg(String oneArg) throws MissingArgumentException {
+        String errMsg = "";
+
+        switch (oneArg){
+        case "done":
+            errMsg = "Please include the list item number of the task to mark done ";
+            break;
+        case "todo":
+            errMsg = "Please include a description for your todo";
+            break;
+        case "event":
+            errMsg = "Please include a description and an /at argument for your event";
+            break;
+        case "deadline":
+            errMsg = "Please include a description and a /by argument for your deadline";
+            break;
+        default:
+            errMsg = "Uh oh, I don't recognise this command. Please try something else.";
+            break;
+        }
+
+        throw new MissingArgumentException(errMsg);
+//        print(new String[]{errMsg});
+    }
+
+
+    // for missing second/third arguments
+    // replace String taskType with Enum later
+    private static String determineErrMsg(String taskType, int positionMissing) {
+        String errMsg = "";
+
+        switch (taskType){
+        case "todo":
+            errMsg = "Missing argument " + positionMissing + ". Please include a todo description.";
+            break;
+        case "event":
+            if (positionMissing == 2) {
+                errMsg = "Missing argument " + positionMissing + ". Please include an event description.";
+            } else if (positionMissing == 3) {
+                errMsg = "Missing an /at argument. Please include an event timing.";
+            }
+            break;
+        case "deadline":
+            if (positionMissing == 2) {
+                errMsg = "Missing argument " + positionMissing + ". Please include a description of the deadline.";
+            } else if (positionMissing == 3) {
+                errMsg = "Missing a /by argument. Please include a deadline.";
+            }
+            break;
+        default:
+            errMsg = "Missing arguments for this task type.";
+            break;
+        }
+        return errMsg;
+    }
+
     // parse done, todos, deadline or event commands
-    private static void parseCommand(String userInput) {
-        int firstSpaceIndex = userInput.indexOf(" ");
+    // make enums for supported commands?
+    private static void parseCommand(String userInput) throws MissingArgumentException {
+        int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
+
+        // only one word was provided
+
+        if (firstSpaceIndex == -1) {
+            handleFirstArg(userInput); // seems like try catch block not necessary, because of throws
+            return;
+        }
+
         String firstWord = userInput.substring(0, firstSpaceIndex); // don't include the space
 
-        if (firstWord.equals("done")) {
-            int secondArg = Integer.parseInt(userInput.substring(firstSpaceIndex + 1).trim());
-            markDone(secondArg);
-        } else if (firstWord.equals("todo")) {
-            String secondArg = userInput.substring(firstSpaceIndex + 1).trim();
-            addTask(new Todo(secondArg));
-        } else if (firstWord.equals("deadline")) {
+        // declare variables here to help with exception checking
+        String desc = "";
+        String thirdArg = "";
+        int secondCmdIndex = 0;
 
-            int byIndex = userInput.indexOf("/by"); // assuming valid
-            String desc = userInput.substring(firstSpaceIndex + 1, byIndex - 1).trim();
-            String deadline = userInput.substring(byIndex + 3).trim();
+        try {
+            if (firstWord.equals("done")) {
+                desc = userInput.substring(firstSpaceIndex + 1).trim();
+                int secondArg = Integer.parseInt(desc);
+                markDone(secondArg);
+            } else if (firstWord.equals("todo")) {
+                desc = userInput.substring(firstSpaceIndex + 1).trim();
+                addTask(new Todo(desc));
+            } else if (firstWord.equals("deadline")) {
 
-            addTask(new Deadline(desc, deadline));
+                secondCmdIndex = userInput.indexOf("/by"); // assuming valid
+                int byIndex = secondCmdIndex; // for readability
+                desc = userInput.substring(firstSpaceIndex + 1, byIndex - 1).trim();
+                thirdArg = userInput.substring(byIndex + 3).trim();
 
-        } else if (firstWord.equals("event")) {
+                addTask(new Deadline(desc, thirdArg));
 
-            int atIndex = userInput.indexOf("/at"); // assuming valid
-            String desc = userInput.substring(firstSpaceIndex + 1, atIndex - 1).trim();
-            String timing = userInput.substring(atIndex + 3).trim();
+            } else if (firstWord.equals("event")) {
 
-            addTask(new Event(desc, timing));
+                secondCmdIndex = userInput.indexOf("/at"); // assuming valid
+                int atIndex = secondCmdIndex; // for readability
+                desc = userInput.substring(firstSpaceIndex + 1, atIndex - 1).trim();
+                thirdArg = userInput.substring(atIndex + 3).trim();
+
+                addTask(new Event(desc, thirdArg));
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+//            String errMsg = "wrong bounds " + e;
+//            String s = "";
+//            if (desc.equals("")) {
+//                s = "desc empty";
+//            } else if (thirdArg.equals("")) {
+//                s = "thirdarg empty";
+//            }
+
+            if (secondCmdIndex == -1) {
+                throw new MissingArgumentException(determineErrMsg(firstWord, 3), e);
+            } else if (firstSpaceIndex + 1 > secondCmdIndex - 1) {
+                throw new MissingArgumentException(determineErrMsg(firstWord, 2), e);
+            }
+        } catch (Exception e) {
+            String errMsg = "don't know " + e;
+            print(new String[]{errMsg});
         }
 
         // catch exceptions where substring end is wrong i.e. extra arguments not found?
@@ -111,7 +205,11 @@ public class Duke {
                 printTaskList();
             } else {
                 // assumed to be a valid command and have space
-                parseCommand(userInput);
+                try {
+                    parseCommand(userInput.trim());
+                } catch (MissingArgumentException e) {
+                    print(new String[]{e.toString()});
+                }
             }
         }
     }
