@@ -16,6 +16,12 @@ public class Duke {
             Task toDo = todoList.get(index);
             toDo.doTask();
             System.out.println("Affirmative. The following task has been marked as done: \n" + toDo);
+        } else if (strippedCommand.startsWith("delete")) {
+            String indexString = strippedCommand.substring(6).strip();
+            int index = Integer.parseInt(indexString) - 1;
+            Task toDo = todoList.get(index);
+            todoList.remove(index);
+            System.out.println("Affirmative. The following task has been removed: \n" + toDo);
         } else if (strippedCommand.startsWith("todo")) {
             String cmd = strippedCommand.substring(4).strip();
             if (cmd.isBlank()) {
