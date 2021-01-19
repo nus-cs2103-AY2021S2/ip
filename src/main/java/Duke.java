@@ -17,7 +17,7 @@ public class Duke {
         while (isOnline()) {
             try {
                 printHorizontalLine();
-                Command command = parseCommand(sc.next());
+                Command command = Parser.parseCommand(sc.next());
                 String arguments = sc.nextLine();
                 executeCommand(command, arguments);
             } catch (InvalidCommandException ex) {
@@ -60,14 +60,6 @@ public class Duke {
             System.out.print('-');
         }
         System.out.println();
-    }
-
-    private Command parseCommand(String userInputCommand) throws InvalidCommandException {
-        try {
-            return Command.valueOf(userInputCommand.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
     }
     
     private void executeCommand(Command command, String arguments) {
