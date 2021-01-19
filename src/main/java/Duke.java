@@ -2,18 +2,22 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo =
+                  " _____   _   _ \n"
+                + "| ____| | | | | \n"
+                + "| |___  | | | | __   __ \n"
+                + "|  ___| | | | | \\ \\ / / \n"
+                + "| |___  | | | |  \\ v / \n"
+                + "|_____| |_| |_|  /  / \n"
+                + "                /__/  \n";
+
+        System.out.println("   C H A T   W I T H \n" + logo);
 
         String tab = "     ";
-        String line = "     ____________________________________________________________";
+        String line = "     ............................................................";
         System.out.println(line + "\n"
-                + tab + "Hello! I'm Duke\n"
-                + tab + "What can I do for you?\n"
+                + tab + "Hi there! I'm Elly.\n"
+                + tab + "How can I help you today?\n"
                 + line);
 
         Scanner scan = new Scanner(System.in);
@@ -24,13 +28,13 @@ public class Duke {
             System.out.println(line);
 
             if (input.equals("bye")) {
-                System.out.println(tab + "Bye. Hope to see you again soon!");
+                System.out.println(tab + "Goodbye, can't wait to see you again!");
+                System.out.println(line);
                 break;
             } else {
                 System.out.println(tab + input);
+                System.out.println(line);
             }
-
-            System.out.println(line);
         }
     }
 }
