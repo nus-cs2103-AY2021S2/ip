@@ -1,70 +1,85 @@
-public class Parser {
-    private final String input;
-    private String parsedCommand = "";
-    private String taskName = "";
-    private String additionals = "";
+import java.util.Locale;
 
-    Parser(String input) {
-        this.input = input;
-        if (isListCommand(input)) {
-            parsedCommand = "LIST";
-        } else if (isDoneCommand(input)) {
-            parsedCommand = "DONE";
-            additionals = String.valueOf(input.charAt(5));
-        } else if (isTask(input)) {
-            if (isTodo(input)) {
-                parsedCommand = "TODO";
-                taskName = input.substring(5);
-            } else if (isDeadline(input)) {
-                parsedCommand = "DEADLINE";
-                int byIndex = input.indexOf(" /by ");
-                taskName = input.substring(9, byIndex);
-                String ddl = input.substring(byIndex + 5);
-                additionals = ddl;
-            } else if (isEvent(input)) {
-                parsedCommand = "EVENT";
-                int atIndex = input.indexOf(" /at ");
-                taskName = input.substring(6, atIndex);
-                String date = input.substring(atIndex + 5);
-                additionals = date;
+public class Parser {
+    Parser() {}
+
+    public static Command parseCommand(String input) throws DukeException {
+        int endIndex = input.indexOf(" ");
+        String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
+        Command command;
+
+        if (potentialCommand.toUpperCase().equals("TODO")) {
+            command = Command.TODO;
+        } else if (potentialCommand.toUpperCase().equals("DEADLINE")) {
+            command = Command.DEADLINE;
+        } else if (potentialCommand.toUpperCase().equals("EVENT")) {
+            command = Command.EVENT;
+        } else if (potentialCommand.toUpperCase().equals("LIST")) {
+            command = Command.LIST;
+        } else if (potentialCommand.toUpperCase().equals("DONE")) {
+            command = Command.DONE;
+        } else if (potentialCommand.toUpperCase().equals("BYE")) {
+            command = Command.BYE;
+        } else {
+            throw new CommandNotFoundException("What do you mean? ");
+        }
+        return command;
+    }
+
+    public static int getDoneIndex(String input) throws DescriptionMissingException {
+        if (input.length() < 6 || !Character.isDigit(input.charAt(5))) {
+            throw new DescriptionMissingException("The index of the task done?");
+        } else {
+            return Character.getNumericValue(input.charAt(5)) - 1;
+        }
+    }
+
+    public static Todo getTodo(String input) throws DescriptionMissingException {
+        if (input.length() < 6) {
+            throw new DescriptionMissingException("No description?");
+        } else {
+            String description = input.substring(5);
+            return new Todo(description);
+        }
+    }
+
+    public static Deadline getDeadline(String input) throws DescriptionMissingException {
+        if (input.length() < 10) {
+            throw new DescriptionMissingException("No description?");
+        } else {
+            String description = input.substring(9);
+            int index = description.indexOf(" /by");
+            if (index == -1) {
+                throw new DescriptionMissingException("Invalid input");
+            } else {
+                try {
+                    String name = description.substring(0, index);
+                    String ddl = description.substring(index + 5);
+                    return new Deadline(name, ddl);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DescriptionMissingException("Missing description?");
+                }
             }
         }
     }
 
-    public String getParsedCommand() {
-        return parsedCommand;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public String getAdditionals() {
-        return additionals;
-    }
-
-    private static boolean isListCommand(String sentence) {
-        return sentence.equals("list");
-    }
-
-    private static boolean isDoneCommand(String sentence) {
-        return (sentence.length() > 5 && sentence.substring(0, 5).equals("done ")
-                && Character.isDigit(sentence.charAt(5)));
-    }
-
-    private boolean isTask(String sentence) {
-        return (isTodo(sentence) || isDeadline(sentence) || isEvent(sentence));
-    }
-
-    private boolean isTodo(String sentence) {
-        return (sentence.length() > 5 && sentence.substring(0, 5).equals("todo "));
-    }
-
-    private boolean isDeadline(String sentence) {
-        return (sentence.length() > 9 && sentence.substring(0, 9).equals("deadline "));
-    }
-
-    private boolean isEvent(String sentence) {
-        return (sentence.length() > 6 && sentence.substring(0, 6).equals("event "));
+    public static Event getEvent(String input) throws DescriptionMissingException {
+        if (input.length() < 7) {
+            throw new DescriptionMissingException("No description?");
+        } else {
+            String description = input.substring(6);
+            int index = description.indexOf(" /at");
+            if (index == -1) {
+                throw new DescriptionMissingException("Invalid input");
+            } else {
+                try {
+                    String name = description.substring(0, index);
+                    String time = description.substring(index + 5);
+                    return new Event(name, time);
+                } catch (StringIndexOutOfBoundsException e) {
+                    throw new DescriptionMissingException("Missing description?");
+                }
+            }
+        }
     }
 }

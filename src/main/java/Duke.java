@@ -9,44 +9,38 @@ public class Duke {
         printGreeting();
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            Parser parser = new Parser(input);
-            String parsedCommand = parser.getParsedCommand();
-            String taskName = parser.getTaskName();
-            String additionals = parser.getAdditionals();
-            Task thisTask;
-
+        boolean isOver = false;
+        while (!isOver) {
+            String input = sc.nextLine();
             System.out.println(PARTING_LINE);
             try {
-                Command command = Command.valueOf(parsedCommand);
+                Command command = Parser.parseCommand(input);
                 switch (command) {
                 case LIST:
                     listTasks();
                     break;
                 case DONE:
-                    int index = Integer.parseInt(additionals) - 1;
-                    markAsComplete(index);
+                    markAsComplete(Parser.getDoneIndex(input));
                     break;
                 case TODO:
-                    thisTask = new Todo(taskName);
-                    addThisTask(thisTask);
+                    addThisTask(Parser.getTodo(input));
                     break;
                 case DEADLINE:
-                    thisTask = new Deadline(taskName, additionals);
-                    addThisTask(thisTask);
+                    addThisTask(Parser.getDeadline(input));
                     break;
                 case EVENT:
-                    thisTask = new Event(taskName, additionals);
-                    addThisTask(thisTask);
+                    addThisTask(Parser.getEvent(input));
+                    break;
+                case BYE:
+                    isOver = true;
+                    farewell();
+                    break;
                 }
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid command!");
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
             System.out.println(PARTING_LINE);
-            input = sc.nextLine();
         }
-        farewell();
     }
 
     public static void printGreeting() {
@@ -63,9 +57,7 @@ public class Duke {
     }
 
     public static void farewell() {
-        System.out.println(PARTING_LINE);
         System.out.println(" See you.");
-        System.out.println(PARTING_LINE);
     }
 
     public static void listTasks() {
