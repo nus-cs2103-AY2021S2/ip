@@ -50,8 +50,8 @@ class Task {
     public int index;
     public String command;
     public boolean done;
-    static String CHECKED = "[X] ";
-    static String UNCHECKED = "[ ] ";
+    static String CHECKED = "[X]";
+    static String UNCHECKED = "[ ]";
 
     public Task(int index, String command) {
         this.index = index;
@@ -71,7 +71,7 @@ class Task {
         } else {
             str += UNCHECKED;
         }
-        str += command;
+        str += " " + command;
         return str;
     }
 
@@ -88,13 +88,16 @@ class Todo extends Task {
     }
 
     public String toString() {
+        String[] words = command.split(" ");
         String str = "[T]";
         if (done) {
             str += CHECKED;
         } else {
             str += UNCHECKED;
         }
-        str += command;
+        for (int i = 1; i < words.length; i++) {
+            str += " " + words[i];
+        }
         return str;
     }
 }
@@ -122,9 +125,9 @@ class Deadline extends Task {
         String[] words = command.split(" ");
         String str = "[D]";
         if (done) {
-            str += CHECKED;
+            str += CHECKED + " ";
         } else {
-            str += UNCHECKED;
+            str += UNCHECKED + " ";
         }
         int num = findDeadline();
         for (int i = 1; i < num; i++) {
@@ -162,9 +165,9 @@ class Event extends Task {
         String[] words = command.split(" ");
         String str = "[E]";
         if (done) {
-            str += CHECKED;
+            str += CHECKED + " ";
         } else {
-            str += UNCHECKED;
+            str += UNCHECKED + " ";
         }
         int num = findDate();
         for (int i = 1; i < num; i++) {
