@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        DukeList list = new DukeList();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,15 +13,21 @@ public class Duke {
                 + logo + "\nHello! I'm Duke\n" + "What can I do for you?\n"
                 + "____________________________________________________________\n");
         while(sc.hasNextLine()) {
-            String input = sc.next();
+            String input = sc.nextLine();
             if (input.equals("bye")) {
                 System.out.println("____________________________________________________________\n"
                         + "Good bye! Stay calm and keep coding o7"
                         + "\n____________________________________________________________\n");
                 sc.close();
                 break;
+            } else if (input.equals("list")){
+                System.out.println("____________________________________________________________");
+                list.print();
+                System.out.println("____________________________________________________________\n");
             } else {
+                list.add(input);
                 System.out.println("____________________________________________________________\n"
+                        + "added: "
                         + input
                         + "\n____________________________________________________________\n");
             }
