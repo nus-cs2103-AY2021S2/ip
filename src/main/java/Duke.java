@@ -21,6 +21,7 @@ public class Duke {
     private final String BYE = "See you next time :)";
     private final String TASK_ADD = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
     private final String TASK_DONE = "Nice! I've marked this task as done:\n%s";
+    private final String TASK_DELETE = "I've deleted this task:\n%s";
 
     private static final Pattern TODO_REGEX = Pattern.compile("todo\\s+(.*)");
     private static final Pattern DEADLINE_REGEX = Pattern.compile("deadline\\s+(.*)\\s+/by\\s+(.*)");
@@ -121,6 +122,29 @@ public class Duke {
         return newAgent;
     }
 
+    private Duke processDelete(String command) {
+        Duke newAgent;
+        String[] tokens = command.split("\\s+");
+        try {
+            int index = Integer.parseInt(tokens[1]);
+            if (index < 0 || index > this.store.size()) {
+                throw new DukeException(
+                        String.format("Index %d out of bounds for schedule of size %d.", index, this.store.size()));
+            }
+            List<Task> newStore = this.store.stream().map(t -> t.clone()).collect(Collectors.toList());
+            newStore.remove(index - 1);
+            String response = String.format(TASK_DELETE, this.store.get(index - 1));
+            newAgent = new Duke(response, newStore, this.done);
+        }
+        catch (NumberFormatException numberFormatException) {
+            newAgent = new Duke("Invalid number", this.store, this.done);
+        }
+        catch (DukeException dukeException) {
+            newAgent = new Duke(dukeException.getMessage(), this.store, this.done);
+        }
+        return newAgent;
+    }
+
     private Duke processEcho(String command) {
         return new Duke(command, this.store, this.done);
     }
@@ -134,6 +158,8 @@ public class Duke {
                 return processAdd(input);
             case "done":
                 return processDone(input);
+            case "delete":
+                return processDelete(input);
             case "bye":
                 return processBye(input);
             case "list":
