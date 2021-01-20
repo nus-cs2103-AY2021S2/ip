@@ -29,6 +29,8 @@ public class Duke {
                 listTasks(store);
             } else if (command.equals("done")) { // mark task as done
                 markTaskAsDone(store, input);
+            } else if (command.equals("delete")) { // mark task as delete
+                deleteTask(store, input);
             } else { // add task to list
                 addTaskToList(store, command, input);
             }
@@ -37,7 +39,29 @@ public class Duke {
         scan.close();
     }
 
-    private static void addTaskToList(List<Task> store, String command, String input) {
+    private static void deleteTask(List<Task> store, String input) {
+        final String[] splitOnSpace = input.split(" ", 2);
+
+        if (splitOnSpace.length == 2 && !splitOnSpace[1].strip().equals("")) {
+            try {
+                final int index = Integer.parseInt(splitOnSpace[1].strip()) - 1;
+                if (0 <= index && index < store.size()) {
+                    final Task removed = store.remove(index);
+                    System.out.println("\tNoted. I've removed this task: ");
+                    System.out.printf("\t%s\n", removed);
+                    System.out.printf("\tNow you have %d task%s in the list.\n", store.size(), store.size() == 1 ? "" : "s");
+                } else {
+                    System.out.println("\tOops! The index is out of bound.");
+                }
+            } catch (final NumberFormatException e) {
+                System.out.println("\tOops! Please input a number.");
+            }
+        } else {
+            System.out.println("\tPlease follow this format \"done <index>\".");
+        }
+	}
+
+	private static void addTaskToList(List<Task> store, String command, String input) {
         boolean isInsert = false;
         if (store.size() >= 100) {
             System.out.println("\tSorry. The database is full!");
