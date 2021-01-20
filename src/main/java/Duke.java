@@ -7,7 +7,9 @@ public class Duke {
 
     private void setLengthOfChatBox() {
         lengthOfChatBox.append("\n");
-        lengthOfChatBox.append("-".repeat(50));
+        for (int i = 0; i < 50; i++) {
+            lengthOfChatBox.append("-");
+        }
         lengthOfChatBox.append("\n");
     }
 
@@ -32,7 +34,7 @@ public class Duke {
             output.append("Here are the tasks in your list: \n");
             for (int i = 0; i < taskList.size(); i++) {
                 Task currentTask = taskList.get(i);
-                output.append(i + 1).append(".").append(currentTask).append("\n");
+                output.append(i + 1).append(". ").append(currentTask).append("\n");
             }
         }
         formatInChatBox(output.toString());
