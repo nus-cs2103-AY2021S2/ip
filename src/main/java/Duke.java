@@ -1,9 +1,15 @@
 public class Duke {
 
     private boolean isRunning;
+    private TaskList taskList;
 
     public Duke() {
         isRunning = true;
+        taskList = new TaskList();
+    }
+
+    public void init() {
+        displayWelcomeMessage();
     }
 
     public boolean isRunning() {
@@ -11,14 +17,11 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        String command = InputHandler.parse(input);
-
-        if (command.equals("bye")) {
-            isRunning = false;
-            return "Bye. Hope to see you again soon!";
-        } else {
-            return command;
-        }
+        Command command = InputHandler.parse(input);
+        isRunning = !command.shouldExit();
+        taskList = command.execute(taskList);
+        String output = command.getResponse();
+        return output;
     }
 
     public void displayWelcomeMessage() {

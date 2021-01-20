@@ -10,7 +10,7 @@ public class Main {
         String input = "";
         String output = "";
 
-        duke.displayWelcomeMessage();
+        duke.init();
 
         while(duke.isRunning()) {
             while(!sc.hasNext());
