@@ -20,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + " " + desc;
+        return "[D]" + getStatusIcon() + " " + desc + " (by: " + by + ")";
     }
 }
