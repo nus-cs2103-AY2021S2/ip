@@ -53,6 +53,50 @@ public class Duke {
     }
 
     /**
+     * Tokenize a command
+     *
+     * @param command a line of command
+     * @return tokenized command as a String array
+     */
+    public static String[] tokenizeCommand(String command) {
+        ArrayList<String> tokens = new ArrayList<>();
+        boolean newToken = true;
+        boolean unmatchedQuote = false;
+        char quotationMark = ' ';
+        for (char ch : command.toCharArray()) {
+            if (!unmatchedQuote) {
+                // if not a whitespace character
+                if (ch != ' ' && ch != '\t') {
+                    // if right after a whitespace character
+                    if (newToken) {
+                        // start of a quoted token
+                        if (ch == '"' || ch == '\'') {
+                            quotationMark = ch;
+                            unmatchedQuote = true;
+                            tokens.add("");
+                        } else {
+                            tokens.add(String.valueOf(ch));
+                            newToken = false;
+                        }
+                    } else {
+                        tokens.set(tokens.size() - 1, tokens.get(tokens.size() - 1) + ch);
+                    }
+                } else {
+                    newToken = true;
+                }
+            } else {
+                if (ch != quotationMark) {
+                    tokens.set(tokens.size() - 1, tokens.get(tokens.size() - 1) + ch);
+                } else {
+                    unmatchedQuote = false;
+                    newToken = true;
+                }
+            }
+        }
+        return (String[]) tokens.toArray();
+    }
+
+    /**
      * Process a command
      *
      * @param command the command to process
