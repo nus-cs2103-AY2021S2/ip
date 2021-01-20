@@ -9,6 +9,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         Duke.printHorizontalLine();
+
         while(true) {
             String s = sc.nextLine();
             if(s.equals("bye")) {
@@ -19,13 +20,32 @@ public class Duke {
                 Duke.listCommand(list, counter);
                 Duke.printHorizontalLine();
             } else {
-                String[] array = s.split(" ");
-                if(array[0].equals("done")) {
+                if(s.contains("done")) {
+                    String[] array = s.split(" ");
                     doneCommand(list,array);
+                } else if(s.contains("todo")) {
+                    String st = s.substring(5);
+                    toDoCommand(counter, st, list);
+                    counter++;
+                    continue;
+                } else if(s.contains("deadline")) {
+                    String[] strArr = s.split("/by ");
+                    String description = strArr[0].substring(9).trim();
+                    String by = strArr[1];
+                    deadlineCommand(counter, description, by, list);
+                    counter++;
+                    continue;
+
+                } else if(s.contains("event")) {
+                    String[] strArr = s.split("/at ");
+                    String description = strArr[0].substring(6).trim();
+                    String date = strArr[1];
+                    eventCommand(counter, description, date, list);
+                    counter++;
+                    continue;
                 } else {
-                    Task t = new Task(s);
-                    addCommand(t);
-                    list[counter++] = t;
+                    //do nothing
+                    continue;
                 }
             }
         }
@@ -46,7 +66,7 @@ public class Duke {
         for(int i = 0; i < counter; i++) {
             int j = i + 1;
             Task t = list[i];
-            System.out.printf("[%s] %d. %s%n", t.getStatusIcon(), j , t.getDescription());
+            System.out.println((j) + "." + t);
         }
     }
 
@@ -61,9 +81,50 @@ public class Duke {
         Duke.printHorizontalLine();
     }
 
-    public static void addCommand(Task t) {
+    /*public static void addCommand(Task t) {
         Duke.printHorizontalLine();
         System.out.printf("added: %s%n", t);
+        Duke.printHorizontalLine();
+    }*/
+
+    public static void toDoCommand(int counter, String s, Task[] list) {
+        Duke.printHorizontalLine();
+        System.out.println("Got it. I've added this task:");
+        ToDo td = new ToDo(s);
+        list[counter] = td;
+        System.out.println(" " + td.toString());
+        if(counter == 0) {
+            System.out.printf("Now you have %d task in the list.%n", counter + 1);
+        } else {
+            System.out.printf("Now you have %d tasks in the list.%n", counter + 1);
+        }
+        Duke.printHorizontalLine();
+    }
+
+    public static void deadlineCommand(int counter, String description, String by, Task[] list) {
+        Duke.printHorizontalLine();
+        System.out.println("Got it. I've added this task:");
+        Deadline d = new Deadline(description, by);
+        list[counter] = d;
+        System.out.println(" " + d.toString());
+        if(counter == 0) {
+            System.out.printf("Now you have %d task in the list.%n", counter + 1);
+        } else {
+            System.out.printf("Now you have %d tasks in the list.%n", counter + 1);
+        }
+        Duke.printHorizontalLine();
+    }
+
+    public static void eventCommand(int counter, String description, String date, Task[] list) {
+        System.out.println("Got it. I've added this task:");
+        Event e = new Event(description, date);
+        list[counter] = e;
+        System.out.println(" " + e.toString());
+        if(counter == 0) {
+            System.out.printf("Now you have %d task in the list.%n", counter + 1);
+        } else {
+            System.out.printf("Now you have %d tasks in the list.%n", counter + 1);
+        }
         Duke.printHorizontalLine();
     }
 }
