@@ -33,6 +33,9 @@ public class Kobe {
                 } else if (text.equals("done")) {
                     int taskNumber = Integer.parseInt(commandArr[1]) - 1;
                     completeTask(taskNumber);
+                } else if (text.equals("delete")) {
+                    int taskNumber = Integer.parseInt(commandArr[1]) - 1;
+                    deleteTask(taskNumber);
                 } else {
                     String taskName = "";
                     String type = text;
@@ -45,13 +48,14 @@ public class Kobe {
 //                    System.out.println("First2Parts: " + Arrays.toString(commandArrFirst2Parts));
                     String firstWord = commandArrFirst2Parts[0];
 //
-                    if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
-                        String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
-                        throw new CustomExceptions.IncompleteDecriptionException(errMessage);
-                    }
                     if (commandArrFirst2Parts.length == 1) {
-                        String errMessage = "Oh no! Kobe doesn't know what you mean!";
-                        throw new CustomExceptions.IncorrectDecriptionException(errMessage);
+                        if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
+                            String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
+                            throw new CustomExceptions.IncompleteDecriptionException(errMessage);
+                        } else {
+                            String errMessage = "Oh no! Kobe doesn't know what you mean!";
+                            throw new CustomExceptions.IncorrectDecriptionException(errMessage);
+                        }
                     }
 
                     String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
@@ -107,5 +111,20 @@ public class Kobe {
         System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
         System.out.println(ind + tasks.get(taskNumber));
         System.out.println(line);
+    }
+
+    public static void deleteTask(int taskNumber) {
+        if (tasks.isEmpty()) { //Managing empty lists from the start
+            System.out.print(line + "Kobe sees no more tasks from the list!\n" + line + "\n");
+        } else {
+            System.out.print(line + "Okay! Kobe will remove your task from the list!\n" + ind);
+            System.out.println(ind + tasks.get(taskNumber));
+            tasks.remove(taskNumber);
+            System.out.println(ind + "Kobe sees that you now have " + tasks.size() + " task(s) in the list.");
+            if (tasks.isEmpty()) { //If it's now empty, inform them.
+                System.out.print(ind + "Your list is now empty!\n");
+            }
+            System.out.println(line);
+        }
     }
 }
