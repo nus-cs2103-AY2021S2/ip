@@ -31,12 +31,33 @@ public class Duke {
                     output.append(String.format("%d.%s%n", i + 1, contentList.get(i).toString()));
                 }
             } else if (input.startsWith("done")) {
-                output.append("Nice! I've marked this task as done: \n");
+                output.append("Nice! I've marked this task as done: \n  ");
 
                 int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
                 contentList.get(index).setCompleted();
 
                 output.append(contentList.get(index));
+            } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+                String[] arr = input.split(" ", 2);
+                Task temp;
+                switch (arr[0]) {
+                    case "todo":
+                        temp = new ToDo(arr[1]);
+                        break;
+                    case "deadline":
+                        temp = new Deadline(arr[1]);
+                        break;
+                    case "event":
+                        temp = new Event(arr[1]);
+                        break;
+                    default:
+                        temp = new Task(arr[1]);
+                }
+                contentList.add(temp);
+                output.append("Got it. I've added this task:\n ");
+                output.append(temp.toString() + "\n");
+                output.append(String.format("Now you have %d tasks in the list.", contentList.size()));
+
             } else {
                 contentList.add(new Task(input));
                 output.append("added: " + input);
