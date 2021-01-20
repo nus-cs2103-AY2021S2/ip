@@ -1,28 +1,51 @@
+
+apple
+banana rolls
 list
 done 1
+ todo
 todo
 todobuy groceries
-todo
+todo 
+todo       
 todo buy groceries
 deadline
 deadlineeat an apple
-deadline
+deadline 
+deadline     
 deadline eat an apple
 deadline eat an apple /by
+deadline /by
+deadline /by 
+deadline /by night
+deadline eat an apple /by 
+deadline eat an apple /by /by
+deadline eat an apple /by /by night
+deadline eat an apple /by night /by
 deadline eat an apple /by night
 event
 eventfinal exam
-event
+event 
+event       
 event final exam
 event final exam /at
+event final exam /at 
+event /at
+event /at 
+event /at Mon
 event final exam /at Mon
 event final exam /at Mon 2
 event final exam /at Mon 2-
+event final exam /at /at
+event final exam /at /at 
+event final exam /at /at Mon 2-5
+event final exam /at Mon 2-5 /at
 event final exam /at Mon 2-5
 list
 done
 done1
 done 9
+done -1
 done str
 done 1
 list
