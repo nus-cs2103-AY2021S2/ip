@@ -2,17 +2,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DukeBot that manages user input, recognise and response to inputs accordingly
+ * Commands that are available: list, bye, done, delete, todo, delete, event, deadline
+ */
 public class DukeBot {
     private static final String BORDER = "\t___________________________________\n";
     private final ArrayList<Task> taskList = new ArrayList<>();
     private int numTasks;
     private String output;
 
+    /**
+     * Constructor for DukeBot class
+     * Configuration for DukeBot to welcome the user
+     */
     public DukeBot() {
         output = BORDER + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + BORDER;
         System.out.println(output);
     }
 
+    /**
+     * Bot will carry out the different process depending on the user input
+     * @param input provided by the user
+     * @return boolean when the user enters bye command to terminate the DukeBot
+     */
     public boolean echo(String input) {
         String[] commandStr = input.trim().split("\\s+");
         String taskAction = commandStr[0];
@@ -47,6 +60,11 @@ public class DukeBot {
         return continueInput;
     }
 
+    /**
+     * Indicated a given task as done among the list of tasks
+     * @param index provided when user enters an input like "done 2" to mark 2nd task on the list as done
+     * @return the output string to be displayed in return of the user input
+     */
     public String markDoneTask(int index) {
         if (index <= 0 || index > this.numTasks) {
             return handleInvalidValue();
@@ -58,6 +76,10 @@ public class DukeBot {
         }
     }
 
+    /**
+     * Iterating through the list of tasks and numbering the tasks
+     * @return the list of tasks formatted in String
+     */
     public String retrieveList() {
         StringBuilder currText = new StringBuilder(BORDER + "\t" + " Here are the tasks in your list:\n");
 
@@ -69,6 +91,10 @@ public class DukeBot {
         return currText.toString();
     }
 
+    /**
+     * Manage the new task of todo, event or deadline types
+     * @return the output string to be displayed in return of the user input
+     */
     public String handleNewTask(String taskAction, String[] commandStr) {
         Task newTask;
         StringBuilder description = new StringBuilder();
@@ -100,6 +126,10 @@ public class DukeBot {
         }
     }
 
+    /**
+     * Sub-function to manage the new task of event or deadline types only
+     * @return the output string array of description and date/time as required
+     */
     public String[] handleEventDeadLine(List<String> taskDetails) {
         int num;
         StringBuilder description = new StringBuilder();
@@ -124,6 +154,10 @@ public class DukeBot {
         return result;
     }
 
+    /**
+     * Delete the task as entered by the user input by removing the task from the list of tasks
+     * @return the output string to be displayed in return of the user input
+     */
     public String handleDeleteTask(int index) {
         if (index <= 0 || index > this.numTasks) {
             return handleInvalidValue();
@@ -135,16 +169,28 @@ public class DukeBot {
         }
     }
 
+    /**
+     * Manage the invalid input (Unrecognised commands) exception entered by the user
+     * @return the output string to be displayed in return of the user input
+     */
     public String handleInvalidInput() {
         DukeException exception = new DukeException(ExceptionType.INVALID_INPUT, "");
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 
+    /**
+     * Manage the invalid integer value (negative or out of list range) exception entered by the user
+     * @return the output string to be displayed in return of the user input
+     */
     public String handleInvalidValue() {
         DukeException exception = new DukeException(ExceptionType.INVALID_INTEGER, "");
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 
+    /**
+     * Manage the blank description exception entered by the user
+     * @return the output string to be displayed in return of the user input
+     */
     public String handleBlankDescription(String taskAction) {
         DukeException exception = new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;

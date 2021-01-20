@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Driver class for Duke project
+ */
 public class Duke {
     public static void main(String[] args) {
         DukeBot dukeBot = new DukeBot();
