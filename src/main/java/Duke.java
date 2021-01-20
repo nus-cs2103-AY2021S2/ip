@@ -40,27 +40,31 @@ public class Duke {
             } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
                 String[] arr = input.split(" ", 2);
                 Task temp;
-                switch (arr[0]) {
-                    case "todo":
-                        temp = new ToDo(arr[1]);
-                        break;
-                    case "deadline":
-                        temp = new Deadline(arr[1]);
-                        break;
-                    case "event":
-                        temp = new Event(arr[1]);
-                        break;
-                    default:
-                        temp = new Task(arr[1]);
+                if (input.endsWith("todo") || input.endsWith("deadline") || input.endsWith("event")) {
+                    output.append("☹ OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    switch (arr[0]) {
+                        case "todo":
+                            temp = new ToDo(arr[1]);
+                            break;
+                        case "deadline":
+                            temp = new Deadline(arr[1]);
+                            break;
+                        case "event":
+                            temp = new Event(arr[1]);
+                            break;
+                        default:
+                            temp = new Task(arr[1]);
+                    }
+                    contentList.add(temp);
+                    output.append("Got it. I've added this task:\n ");
+                    output.append(temp.toString() + "\n");
+                    output.append(String.format("Now you have %d tasks in the list.", contentList.size()));
                 }
-                contentList.add(temp);
-                output.append("Got it. I've added this task:\n ");
-                output.append(temp.toString() + "\n");
-                output.append(String.format("Now you have %d tasks in the list.", contentList.size()));
-
             } else {
-                contentList.add(new Task(input));
-                output.append("added: " + input);
+                textWarper("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                // contentList.add(new Task(input));
+                // output.append("added: " + input);
             }
 
             textWarper(output.toString());
