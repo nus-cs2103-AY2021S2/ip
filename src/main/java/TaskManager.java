@@ -12,14 +12,9 @@ public class TaskManager {
         taskList.add(task);
     }
 
-    public List getTaskList() {
+    public List<Task> getTaskList() {
         return taskList;
     }
 
-    public void printTasks() {
-        int count = 1;
-        for (Task task : taskList) {
-            System.out.println(count++ + ". " + task);
-        }
-    }
+
 }

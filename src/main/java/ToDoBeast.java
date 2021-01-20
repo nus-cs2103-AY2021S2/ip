@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class ToDoBeast {
     public static void main(String[] args) {
@@ -18,16 +19,30 @@ public class ToDoBeast {
                 + "\tLet's get this bread! How would you like to be productive today?\n" + line;
         System.out.println(greeting);
 
+        TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
 
         while (!userInput.equals("bye")) {
-            System.out.println(line + "\t" + userInput + "\n" + line);
-            userInput = sc.nextLine();
+            if (userInput.equals("list")) {
+                printTaskList(taskManager.getTaskList());
+            } else {
+
+                System.out.println(line + "\t" + userInput + "\n" + line);
+                userInput = sc.nextLine();
+            }
+
         }
 
         String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n\tSee you again soon!\n" + line;
         System.out.println(exitMsg);
         System.exit(0);
+    }
+
+    public static void printTaskList(List<Task> taskList) {
+        int count = 1;
+        for (Task task : taskList) {
+            System.out.println(count++ + ". " + task);
+        }
     }
 }
