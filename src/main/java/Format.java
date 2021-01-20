@@ -17,7 +17,7 @@ public class Format {
             + LOWER;
 
     public static final String chatBox(String s) {
-        if (s.length() > 38) {
+        if (s.length() > 50) {
             return "Walao! Your command too long lah!";
         } else {
             return UPPER + " ".repeat(36 - s.length() / 2) + s + LOWER;

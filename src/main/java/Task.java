@@ -18,6 +18,12 @@ public class Task {
         }
     }
 
+    private static void toDo(Todo t) {
+        if (t.getTaskName().length() <= 38) {
+            taskList[capacity - 1] = t;
+        }
+    }
+
     public static final void done(int i) {
         if (taskList[i - 1] != null) {
             taskList[i - 1].done = "X";
@@ -40,6 +46,9 @@ public class Task {
         return done;
     }
 
+    public int getIndex() {
+        return index;
+    }
     @Override
     public String toString() {
         return String.format("[%s] %d. %s", done, index, taskName);

@@ -39,6 +39,9 @@ public class Duke {
                 } else {
                     System.out.println("Wrong format liao");
                 }
+            } else if (command.equals("todo")) {
+                Todo todo = new Todo(message);
+                System.out.println(Format.chatBox("Added liao: " + todo.toString()));
             } else {
                 Task task = new Task(message);
                 System.out.println(Format.chatBox("Added: " + message));
