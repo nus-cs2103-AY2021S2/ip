@@ -28,6 +28,11 @@ public class Chatbot {
         System.out.println(Duke.horizontalLine);
     }
 
+    /**
+     * Mark the task as done.
+     * @param order the order of the task
+     * @throws DukeException if there's no such task or the task had been finished
+     */
     public void markDone(int order) throws DukeException {
         if (order < 0 || order >= todo.size()) {
             throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
@@ -42,6 +47,11 @@ public class Chatbot {
 
     }
 
+    /**
+     * Delete the task.
+     * @param order the order of the task
+     * @throws DukeException if there's no such task
+     */
     public void delete(int order) throws DukeException {
         if (order < 0 || order >= todo.size()) {
             throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
@@ -53,6 +63,10 @@ public class Chatbot {
         todo.remove(order);
     }
 
+    /**
+     * Add more task.
+     * @param newTask Append the newTask to the end of the task list.
+     */
     public void addTask(Task newTask) {
         todo.add(newTask);
         System.out.print(Duke.horizontalLine);
