@@ -5,6 +5,8 @@ public class Duke {
         String indent = "    ";
         String divider = "____________________________________________________________";
 
+        ArrayList<String> tasks = new ArrayList<String>();
+
         // initialize scanner
         Scanner sc = new Scanner(System.in);
 
@@ -17,10 +19,21 @@ public class Duke {
         // get user input
         String userInput = sc.nextLine();
         while (!userInput.toLowerCase().equals("bye")) {
-            System.out.println(indent + divider);
-            System.out.println(indent + userInput);
-            System.out.println(indent + divider);
-            userInput = sc.nextLine();
+            if (userInput.toLowerCase().equals("list")) {
+                System.out.println(indent + divider);
+                for (int i = 0; i < tasks.size(); i++) {
+                    String item = indent + " " + String.valueOf(i+1) + ". " + tasks.get(i);
+                    System.out.println(item);
+                }
+                System.out.println(indent + divider);
+                userInput = sc.nextLine();
+            } else {
+                tasks.add(userInput);
+                System.out.println(indent + divider);
+                System.out.println(indent + " added: " + userInput);
+                System.out.println(indent + divider);
+                userInput = sc.nextLine();
+            }
         }
 
         // exit sequence
