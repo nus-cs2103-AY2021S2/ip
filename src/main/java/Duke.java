@@ -58,6 +58,22 @@ public class Duke {
         System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
     }
 
+    public static void delete(ArrayList<Task> tasks, String taskDescription) throws InvalidDescriptionException {
+        try {
+            int index = Integer.parseInt(taskDescription.substring(1, 2)) - 1;
+            System.out.println("     Noted. I've removed this task: ");
+            System.out.println("     " + tasks.get(index));
+            tasks.remove(index);
+            System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
+                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+        }
+
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
@@ -87,6 +103,8 @@ public class Duke {
                     done(userTasks, taskDescription);
                 } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event")) {
                     addTask(userInput, userTasks, taskDescription);
+                } else if (userInput.equals("delete")) {
+                    delete(userTasks, taskDescription);
                 } else {
                     blah();
                 }
