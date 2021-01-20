@@ -36,6 +36,8 @@ public class ToDoBeast {
             }
             else {
                 Task newTask = null;
+                // handle exception for empty description
+
                 if (command.equals("todo")) {
                     newTask = new Todo(userInput[1]);
                 } else if (command.equals("deadline")) {
