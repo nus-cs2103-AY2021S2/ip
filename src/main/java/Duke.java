@@ -20,7 +20,9 @@ public class Duke {
     public void add(String input){
         Task t = new Task(input);
         this.list.add(t);
-        System.out.println("added: " + input);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(t.toString());
+
 
     }
 
@@ -72,6 +74,7 @@ public class Duke {
             }
             else {
                 duke.add(input);
+                System.out.println("Now you have " + duke.list.size() + " tasks in the list." );
             }
         }
     }
