@@ -194,12 +194,11 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String logo = "██████╗ ██╗   ██╗██╗  ██╗███████╗\n" +
-                "██╔══██╗██║   ██║██║ ██╔╝██╔════╝\n" +
-                "██║  ██║██║   ██║█████╔╝ █████╗  \n" +
-                "██║  ██║██║   ██║██╔═██╗ ██╔══╝  \n" +
-                "██████╔╝╚██████╔╝██║  ██╗███████╗\n" +
-                "╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝\n";
+        String logo = " ____        _        \n" +
+                "|  _ \\ _   _| | _____ \n" +
+                "| | | | | | | |/ / _ \\\n" +
+                "| |_| | |_| |   <  __/\n" +
+                "|____/ \\__,_|_|\\_\\___|";
         printHorizontalLine();
         printEmptyLine();
         for (String line : logo.split("\n")) {
@@ -207,7 +206,7 @@ public class Duke {
         }
         printEmptyLine();
         printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
-        printLine("そう、私です！");
+        printLine("Sou, watashi desu!");
         printHorizontalLine();
         printEmptyLine();
         while (processCommand(sc.nextLine())) ;
