@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class  Duke {
     public static void main(String[] args) {
         String[] list = new String[100];
+        String[] done = new String[100];
         int numitems = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -17,11 +18,15 @@ public class  Duke {
         while (!str.equals("bye")) {
             if (str.equals("list")) {
                 for (int i = 0; i < numitems; i++) {
-                    System.out.println(i+1 + ". " + list[i]);
+                    System.out.println("Here are the tasks in your list!");
+                    System.out.println(i+1 + "." + done[i] + list[i]);
                 }
+
+            } else if (str.equals("done")) {
 
             } else {
                 System.out.println("added: " + str);
+                done[numitems] = "[ ] ";
                 list[numitems] = str;
                 numitems += 1;
             }
