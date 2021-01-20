@@ -30,21 +30,35 @@ public class Duke {
                     printDone(taskIndex);
                     break;
                 default:
-                    String description = scan.nextLine();
+                    StringBuilder description = new StringBuilder();
+                    String str;
 
-                    switch (input) {
-                        case "todo":
-                            ToDos todo = new ToDos(description);
-                            tasks[numTasks] = todo;
-                            break;
-                        case "deadline":
-                            Deadlines deadline = new Deadlines(description);
-                            tasks[numTasks] = deadline;
-                            break;
-                        case "event":
-                            Events event = new Events(description);
-                            tasks[numTasks] = event;
-                            break;
+                    if ("todo".equals(input)) {
+                        description = new StringBuilder(scan.nextLine());
+                        ToDos todo = new ToDos(description.toString());
+                        tasks[numTasks] = todo;
+                    } else {
+                        String date = "";
+                        while (scan.hasNext()) {
+                            str = scan.next();
+                            if (str.charAt(0) == '/') {
+                                date = scan.nextLine();
+                                break;
+                            } else {
+                                description.append(str).append(" ");
+                            }
+                        }
+
+                        switch (input) {
+                            case "deadline":
+                                Deadlines deadline = new Deadlines(description.toString(), date);
+                                tasks[numTasks] = deadline;
+                                break;
+                            case "event":
+                                Events event = new Events(description.toString(), date);
+                                tasks[numTasks] = event;
+                                break;
+                        }
                     }
                     printAdd(numTasks);
 
