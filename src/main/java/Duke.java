@@ -20,7 +20,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
         // Define the termination string
-        String termination_str = "bye";
+        final String termination_str = "bye";
         Scanner scanner = new Scanner(System.in);
 
 
