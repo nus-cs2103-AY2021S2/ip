@@ -18,13 +18,20 @@ public class Duke {
     }
   }
 
-  public void addList(Task input) {
+  public void addList(Task input) throws DescriptionError {
     this.tasklist.add(input);
-
   }
 
+  public String inputEventDescription(String input) {
+    String[] inputs = input.split(" ");
+    String output = "";
+    for (int i = 1; i < inputs.length; i++) {
+      output += " " + inputs[i];
+    }
+    return output;
+  }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws DescriptionError, UnknownInputError {
     Duke duke = new Duke();
     String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -48,21 +55,66 @@ public class Duke {
         duke.list();
         System.out.println(" ___________________________________________");
 
-      } else if (input.contains("done") && input.split(" ")[1].length() == 1) {
-        duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)).taskDone();
-        System.out.println(" ___________________________________________");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)));
-        System.out.println(" ___________________________________________");
+      } else if (input.split(" ")[0].equals("done")) {
+        try {
+          if (input.length() == 4) {
+            throw new DescriptionError("☹ OOPS!!! The description of a done task cannot be empty.");
+          }
+          if (input.split(" ").length > 2) {
+            throw new UnknownInputError("☹ OOPS!!! I'm sorry,"
+                    + " but I don't know what that means :-(");
+          }
+          if (Integer.parseInt(input.split(" ")[1])
+                  / Integer.parseInt(input.split(" ")[1]) != 1) {
+            throw new NumberFormatException();
+          }
+          if (Integer.parseInt(input.split(" ")[1]) > duke.tasklist.size()) {
+            throw new DescriptionError("☹ OOPS!!! The task is not in the list.");
+          }
+
+          if (input.split(" ").length == 2 && Integer.parseInt(input.split(" ")[1])
+                  / Integer.parseInt(input.split(" ")[1]) == 1) {
+            duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)).taskDone();
+            System.out.println(" ___________________________________________");
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)));
+            System.out.println(" ___________________________________________");
+          }
+        } catch (DescriptionError | UnknownInputError | NumberFormatException e) {
+          if (e instanceof  NumberFormatException) {
+            System.out.println("☹ OOPS!!! The description of a done task needs to be an integer.");
+            continue;
+          } else {
+            System.out.println(e.getMessage());
+            continue;
+          }
+        }
+
       } else if (input.split(" ")[0].equals("todo")) {
-        Todo task  = new Todo(input.split(" ")[1] + " " + input.split(" ")[2]);
+        try {
+          if (input.length() == 4) {
+            throw new DescriptionError("☹ OOPS!!! The description of a todo cannot be empty.");
+          }
+        } catch (DescriptionError e) {
+          System.out.println(e.getMessage());
+          continue;
+        }
+        String inputDes = duke.inputEventDescription(input);
+        Todo task = new Todo(inputDes);
         System.out.println(" ___________________________________________");
         System.out.println("Got it. I've added this task: ");
         duke.addList(task);
         System.out.println(task);
-        System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
-
+        System.out.println("Now you have " + duke.tasklist.size() + " tasks in the list.");
       } else if (input.split(" ")[0].equals("deadline")) {
+        try {
+          if (input.length() == 8) {
+            throw new DescriptionError("☹ OOPS!!! The description of a deadline cannot be empty.");
+          }
+        } catch (DescriptionError e) {
+          System.out.println(e.getMessage());
+          continue;
+        }
         Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
                 input.split("/")[1]);
         System.out.println("Got it. I've added this task: ");
@@ -70,19 +122,26 @@ public class Duke {
         System.out.println(task);
         System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
       } else if (input.split(" ")[0].equals("event")) {
+        try {
+          if (input.length() == 5) {
+            throw new DescriptionError("☹ OOPS!!! The description of a event cannot be empty.");
+          }
+        } catch (DescriptionError e) {
+          System.out.println(e.getMessage());
+          continue;
+        }
         Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
                 input.split("/")[1]);
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
         System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
 
-
       } else {
-        Task task = new Task(input);
-        duke.addList(task);
-        System.out.println(" ___________________________________________");
-        System.out.println("added: " + task.getDescription());
-        System.out.println(" ___________________________________________");
+        try {
+          throw new UnknownInputError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (UnknownInputError e) {
+          System.out.println(e.getMessage());
+        }
       }
 
     }
