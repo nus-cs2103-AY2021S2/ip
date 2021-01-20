@@ -10,20 +10,20 @@ public class DukeBot {
     }
 
     public void printOut(final String msg) {
-        System.out.println(Messages.SEPERATOR);
+        System.out.println(DukeStrings.SEPERATOR);
         System.out.println(msg);
-        System.out.println(Messages.SEPERATOR);
+        System.out.println(DukeStrings.SEPERATOR);
     }
 
     public void run() {
         Command command;
-        printOut(Messages.WELCOME_MESSGAGE);
+        printOut(DukeStrings.WELCOME_MESSGAGE);
 
         while (!parser.isBye()) {
             command = parser.parseInput(scanner.nextLine());
             printOut(command.execute());
         }
 
-        printOut(Messages.GOODBYE);
+        printOut(DukeStrings.GOODBYE);
     }
 }
