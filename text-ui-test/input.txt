@@ -7,5 +7,10 @@ done 1
 done 2
 list
 done 3
+blah
+todo
+delete 1
+done 2
+done 10
 list
 bye

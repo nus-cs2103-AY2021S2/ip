@@ -18,7 +18,7 @@ public class Haha {
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
     private static final String[] LEGITCOMMANDS = new String[]{
-            "todo", "deadline", "event", "list", "done", "bye"
+            "todo", "deadline", "event", "list", "done", "delete", "bye"
     };
 
     private enum TaskType {
@@ -91,19 +91,19 @@ public class Haha {
                 handleCommand(command);
             } catch (HahaEmptyDescriptionException | HahaWrongCommandException ex) {
                 System.out.println(ex);
+                System.out.println(LINE_BREAK);
                 continue;
             } catch (HahaException ex) {
                 System.out.println("Last layer of defense");
                 System.out.println("SOMETHING IS WRONG!");
-                continue;
-            } finally {
                 System.out.println(LINE_BREAK);
+                continue;
             }
 
             if (command.equals("bye")) {
                 System.out.println("Bye now!");
                 break;
-            } else if (command.equals("list") || command.equals("ls")) {
+            } else if (command.equals("list")) {
                 if (database.size() == 0) {
                     System.out.println("You have nothing going on!");
                 } else {
@@ -129,6 +129,16 @@ public class Haha {
                             System.out.println(currentTask);
                         }
                     }
+                } catch (HahaTaskNumberNotIntException ex) {
+                    System.out.println(ex);
+                }
+            } else if (command.startsWith("delete")) {
+                try {
+                    Task currentTask = database.get(taskNumber(command) - 1);
+                    System.out.println("Noted. I've removed this task: ");
+                    System.out.println(currentTask);
+                    database.remove(currentTask);
+                    tellSize(database);
                 } catch (HahaTaskNumberNotIntException ex) {
                     System.out.println(ex);
                 }
