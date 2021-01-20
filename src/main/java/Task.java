@@ -29,6 +29,6 @@ public abstract class Task {
     protected abstract String getTypeIcon();
 
     protected String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "X" : " ");
     }
 }
