@@ -1,11 +1,11 @@
 public class EmptyDescription extends DukeException{
-    protected String TypeOfTask;
-    EmptyDescription(String TypeOfTask) {
-        this.TypeOfTask = TypeOfTask;
+    protected String typeOfTask;
+    EmptyDescription(String typeOfTask) {
+        this.typeOfTask = typeOfTask;
     }
 
     @Override
     public String toString() {
-        return "OOPS!!! The description of a " + this.TypeOfTask + " cannot be empty.";
+        return "OOPS!!! The description of a " + this.typeOfTask + " cannot be empty.\n";
     }
 }
