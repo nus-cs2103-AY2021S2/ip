@@ -4,7 +4,7 @@ public class TaskManager {
     private ArrayList<Task> list = new ArrayList<>(100);
 
     public void add(String type, String task) throws DukeException{
-        if(type.equals("todo")){
+        if (type.equals("todo")) {
             list.add(new ToDo(task));
         } else {
             String description = task.split("/")[0];
@@ -19,25 +19,31 @@ public class TaskManager {
         System.out.println("");
     }
 
-    public void delete(int taskId){
-        Task deletedTask = list.get(taskId);
-        list.remove(taskId);
-        System.out.println("Noted. I've removed this task:\n" + deletedTask +"\nNow you have " + list.size() + " tasks in the list.");
-        System.out.println("");
+    public void delete(int taskId) throws DukeException{
+        if (taskId < list.size() && taskId >= 0) {
+            Task deletedTask = list.get(taskId);
+            list.remove(taskId);
+            System.out.println("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " + list.size() + " tasks in the list.");
+            System.out.println("");
+        } else {
+            throw new DukeException("Invalid task number. You only have " + list.size() + " tasks in the list.");
+        }
     }
 
-    public void done(int taskId) {
-        if (taskId < list.size()) {
+    public void done(int taskId) throws DukeException{
+        if (taskId < list.size() && taskId >= 0) {
             Task completedTask = list.get(taskId);
             completedTask.markComplete();
             System.out.println("Nice! I've marked this task as done:\n" + completedTask);
             System.out.println("");
+        } else {
+            throw new DukeException("Invalid task number. You only have " + list.size() + " tasks in the list.");
         }
     }
 
     public void printList(){
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i));
         }
         System.out.println("");

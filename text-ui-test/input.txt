@@ -5,3 +5,4 @@ deadline 2103 project /by Sunday
 done 2
 delete 3
 list
+delete 3

@@ -33,4 +33,6 @@ Here are the tasks in your list:
 1.[T][] borrow book
 2.[E][X] dance (at: Kallang CC from 2-4pm)
 
+Invalid task number. You only have 2 tasks in the list.
+
 Bye. Hope to see you again soon!
