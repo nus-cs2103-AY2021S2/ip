@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
     private boolean isActive;
     private final Scanner scanner;
-    private final ArrayList<String> list;
+    private final ArrayList<Task> tasks;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -21,7 +21,7 @@ public class Duke {
     public Duke() {
         isActive = true;
         scanner = new Scanner(System.in);
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         greet();
         listen();
@@ -35,10 +35,15 @@ public class Duke {
         while (isActive) {
             System.out.println("Let me know what to do!");
             String input = scanner.nextLine();
+            String command = input.split(" ")[0];
 
-            switch (input) {
+            switch (command) {
             case "bye":
                 shutDown();
+                break;
+            case "done":
+                int index = Integer.parseInt(input.split(" ")[1]);
+                taskDone(index);
                 break;
             case "list":
                 printList();
@@ -50,18 +55,26 @@ public class Duke {
         }
     }
 
-    private void addToList(String item) {
-        list.add(item);
-        System.out.println("added: " + item + "\n");
+    private void addToList(String name) {
+        tasks.add(new Task(name));
+        System.out.println("added: " + name + "\n");
     }
 
     private void printList() {
         int i = 1;
-        for (String s : list) {
-            System.out.println(i + ". " + s);
+        for (Task t : tasks) {
+            System.out.println(i + ". " + t);
             i++;
         }
         System.out.println();
+    }
+
+    private void taskDone(int index) {
+        Task task = tasks.get(index);
+        task.markAsDone();
+        System.out.println("Nice! I shall mark this task as done: \n"
+                + task
+                + "\nOne step closer to freedom :D\n");
     }
 
     private void shutDown() {
