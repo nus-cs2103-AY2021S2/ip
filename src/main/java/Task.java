@@ -6,7 +6,7 @@ public class Task {
         return new Task(false, description);
     }
 
-    private Task(final boolean isDone, final String description) {
+    protected Task(final boolean isDone, final String description) {
         this.isDone = isDone;
         this.description = description;
     }
