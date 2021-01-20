@@ -14,7 +14,7 @@ public class Duke {
         while(true) {
             try {
                 String str = sc.nextLine();
-                Task task;
+                Task task = null;
                 String[] components = str.split(" ");
                 if(str.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
@@ -77,8 +77,19 @@ public class Duke {
                         task = new Event(desc.toString(), time.toString());
                         taskLst.add(task);
                     }
+                    else if (components[0].equals("delete")) {
+                        if (components.length == 1) throw new DukeException("Please insert an index!");
+                        int index = Integer.parseInt(components[1]);
+                        if (index > taskLst.size()) throw new DukeException("Index out of bounds!");
+                        Task removedTask = taskLst.remove(index);
+                        System.out.println("Noted. I've removed this task:\n" +
+                                removedTask.toString() + "\nNow you have " + (taskLst.size())
+                                + (taskLst.size() > 1 ? " tasks" : " task")
+                                + " in the list.");
+                        System.out.println(sep);
+                        continue;
+                    }
                     else {
-                        task = new Task(str);
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                     System.out.println("Got it. Now I have added this " +
