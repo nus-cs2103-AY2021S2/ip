@@ -12,10 +12,24 @@ public class DukeBot {
         this.isAlive = true;
     }
 
+    private void echoNoOfTask() {
+        System.out.println("\t\tNow you have " + getNoOfTasks() + " tasks in the list\n");
+    }
+
     public void addTask(Task task) {
         this.list.add(task);
         System.out.println("\t\tOkay I have added this task:\n\t\t\t" + task);
-        System.out.println("\t\tNow you have " + getNoOfTasks() + " tasks in the list\n");
+        echoNoOfTask();
+    }
+
+    public void deleteTask(int index) throws DukeException {
+        if (index < 1 || index > getNoOfTasks()) {
+            throw new DukeException("\t\tThere is no such task number!");
+        }
+        Task task = list.get(index - 1);
+        this.list.remove(index - 1);
+        System.out.println("\t\tOkay, I've I have removed this task:\n\t\t\t" + task);
+        echoNoOfTask();
     }
 
     public int getNoOfTasks() {

@@ -27,6 +27,15 @@ public class Execute {
                 }
 
                 break;
+            case "delete":
+                try {
+                    String num = arr[1];
+                    bot.deleteTask(Integer.valueOf(num));
+                } catch (NumberFormatException e) {
+                    throw new DukeException("\t\tEnter an integer only");
+                }
+
+                break;
             case "todo":
                 if (arr.length == 1) {
                     throw new DukeException("\t\tSorry description of a todo cannot be empty");
