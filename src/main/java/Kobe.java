@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Duke {
+public class Kobe {
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
