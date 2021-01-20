@@ -27,4 +27,9 @@ public class Task {
         return this.getStatusIcon() + " " + this.description;
     }
 
+    public Task decreaseIndex() {
+        this.index--;
+        return this;
+    }
+
 }

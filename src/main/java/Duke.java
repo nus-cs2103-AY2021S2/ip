@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         String input;
         ArrayList<Task> arrayList = new ArrayList<Task>();
-        int listNumber = 1;
+       // int listNumber = 1;
 
         System.out.println("--------------------------");
         System.out.println("Hello! I'm Duke");
@@ -17,9 +17,9 @@ public class Duke {
 
                 input = scanner.nextLine();
             try {
-                if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")|| input.contains("list") || input.contains("done") )) {
+                if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")|| input.contains("list") || input.contains("done") || input.contains("delete") )) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                } else if (input.equals("todo") || input.equals("event") || input.equals("deadline") || input.equals("done") ) {
+                } else if (input.equals("todo") || input.equals("event") || input.equals("deadline") || input.equals("done") || input.equals("delete")  ) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }                                 // can add in more exceptions
             } catch (DukeException e) {
@@ -65,8 +65,9 @@ public class Duke {
                 System.out.println("--------------------------");
                 System.out.println("Got it. I've added this task: ");
                 Task task = new Todo(input.substring(5));
-                task.index = listNumber;
-                listNumber++;
+                //task.index = listNumber;
+                //listNumber++;
+                task.index = arrayList.size()+1;
                 arrayList.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
@@ -79,8 +80,9 @@ public class Duke {
                 String part1 = parts[0];
                 String part2 = parts[1];
                 Task task = new Deadline(part1.substring(9), part2);
-                task.index = listNumber;
-                listNumber++;
+                //task.index = listNumber;
+                //listNumber++;
+                task.index = arrayList.size()+1;
                 arrayList.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
@@ -93,14 +95,38 @@ public class Duke {
                 String part1 = parts[0];
                 String part2 = parts[1];
                 Task task = new Event(part1.substring(6), part2.substring(3));
-                task.index = listNumber;
-                listNumber++;
+                //task.index = listNumber;
+                //listNumber++;
+                task.index = arrayList.size()+1;
                 arrayList.add(task);
                 System.out.println(task);
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
                 System.out.println("--------------------------");
 
-        }
+        }  else if (input.contains("delete") && !(input.equals("delete"))) {
+
+                int deletedNumber = Integer.parseInt(input.substring(7));
+                try {
+                    if (deletedNumber > arrayList.size()) {
+                        throw new DukeException("☹ OOPS!!! Sorry item no found :-(");
+                    } else {
+                        System.out.println("--------------------------");
+                        System.out.println("Noted. I've removed this task: ");
+                        int moved = deletedNumber -1;
+                        System.out.println(arrayList.get(moved));
+                        arrayList.remove(arrayList.get(moved));
+                        for (int i = moved; i < arrayList.size(); i++){
+                            arrayList.set(i, arrayList.get(i).decreaseIndex());
+                        }
+                        System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
+                        System.out.println("--------------------------");
+                    }
+                } catch (DukeException e){
+                    System.out.println("--------------------------");
+                    System.out.println(e.getMessage());
+                    System.out.println("--------------------------");
+                    }
+            }
           /*  else {
                 Task task = new Task(input);
                 task.index = listNumber;
@@ -114,4 +140,5 @@ public class Duke {
     } }
 }
 
-
+// issue 1: when deleting the item, the time is not shown in the delete statement
+// issue 2: when adding the same item, no warning.
