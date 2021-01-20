@@ -22,7 +22,8 @@ public class ToDoBeast {
 
         TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
-        String command = sc.next();
+        String[] userInput = sc.nextLine().split(" ", 2);
+        String command = userInput[0];
 
         while (!command.equals("bye")) {
             if (command.equals("list")) {
@@ -43,7 +44,9 @@ public class ToDoBeast {
 
                 }
             }
-            command = sc.next();
+            userInput = sc.nextLine().split(" ", 2);
+            command = userInput[0];
+
         }
 
         String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n\tSee you again soon!\n" + line;
