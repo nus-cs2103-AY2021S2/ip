@@ -18,8 +18,10 @@ public class  Duke {
         String str = sc.nextLine();
 
         while (!str.equals("bye")) {
-            Pattern p = Pattern.compile("(done )([0-9]+)");
-            Matcher m = p.matcher(str);
+            Pattern pdone = Pattern.compile("^(done )([0-9]+)");
+            Matcher mdone = pdone.matcher(str);
+            Pattern ptodo = Pattern.compile("^([Tt]odo )([a-zA-Z_0-9]+)");
+            Matcher mtodo = ptodo.matcher(str);
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list!");
                 for (int i = 0; i < numitems; i++) {
@@ -27,17 +29,25 @@ public class  Duke {
 
                 }
 
-            } else if (m.find()) {
-                    System.out.println("Good job, I've marked the task as done!");
-                    int n = Integer.parseInt(m.group(2)) - 1;
-                    list[n].markAsDone();
-                    System.out.println(list[n]);
-            } else {
+            } else if (mdone.find()) {
+                System.out.println("Good job, I've marked the task as done!");
+                int n = Integer.parseInt(mdone.group(2)) - 1;
+                list[n].markAsDone();
+                System.out.println(list[n]);
+            } else if (mtodo.find()) {
+                list[numitems] = new Todo(mtodo.group(2));
+                System.out.println("Got it!. I have added the following task:");
+                System.out.println(list[numitems]);
+                numitems += 1;
+                System.out.println("Now you have " + numitems + " tasks in the list.");
+
+            }else {
                 System.out.println("added: " + str);
                 list[numitems] = new Task(str);
                 numitems += 1;
             }
             str = sc.nextLine();
+
         }
         System.out.println("Bye friend, see you soon!");
     }
