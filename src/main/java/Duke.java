@@ -27,9 +27,16 @@ public class Duke {
             try {
                 String command = scanner.next();
                 listen(command);
+            } catch (DukeInvalidCommandException e) {
+                System.out.println("Sorry I don't understand, please key in a valid command!\n");
+            } catch (DukeToDoException e) {
+                System.out.println("ToDo description cannot be blank!\n");
+            } catch (DukeEventException e) {
+                System.out.println("Event command must follow the format: description /at time\n");
+            } catch (DukeDeadlineException e) {
+                System.out.println("Deadline command must follow the format: description /by time\n");
+            } finally {
                 System.out.println("Let me know what to do!");
-            } catch (Exception pokemon) {
-                System.out.println("Please key in valid input\n");
             }
         }
     }
@@ -38,28 +45,23 @@ public class Duke {
         System.out.println("Hello, I'm Duke!\n" + "What can I do for you?\n");
     }
 
-    private void listen(String command) {
+    private void listen(String command) throws
+            DukeInvalidCommandException, DukeToDoException, DukeEventException, DukeDeadlineException {
         switch (command) {
         case "bye":
             shutDown();
             break;
         case "deadline":
-            String[] splitD = scanner.nextLine().split(" /by ");
             // substring from index=1 to ignore the whitespace following "deadline", at index = 0.
-            String deadline = splitD[0].substring(1);
-            String deadlineTime = splitD[1];
-            addToList(new Deadline(deadline, deadlineTime));
+            addToList(new Deadline(scanner.nextLine().substring(1)));
             break;
         case "done":
             int index = scanner.nextInt();
             taskDone(index);
             break;
         case "event":
-            String[] splitE = scanner.nextLine().split(" /at ");
             // substring from index=1 to ignore the whitespace following "event", at index = 0.
-            String event = splitE[0].substring(1);
-            String eventTime = splitE[1];
-            addToList(new Event(event, eventTime));
+            addToList(new Event(scanner.nextLine().substring(1)));
             break;
         case "list":
             printList();
@@ -69,8 +71,7 @@ public class Duke {
             addToList(new ToDo(scanner.nextLine().substring(1)));
             break;
         default:
-            System.out.println("Invalid input\n");
-            break;
+            throw new DukeInvalidCommandException();
         }
     }
 
@@ -80,7 +81,7 @@ public class Duke {
     }
 
     private void printList() {
-        System.out.println("You have " + tasks.size() + " task(s) in the list.");
+        System.out.println("You have " + tasks.size() + " task(s) in the list:");
 
         int i = 1;
         for (Task t : tasks) {
