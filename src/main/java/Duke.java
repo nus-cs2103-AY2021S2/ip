@@ -30,9 +30,22 @@ public class Duke {
                     printDone(taskIndex);
                     break;
                 default:
-                    String description = input + scan.nextLine();
-                    Task newTask = new Task(description);
-                    tasks[numTasks] = newTask;
+                    String description = scan.nextLine();
+
+                    switch (input) {
+                        case "todo":
+                            ToDos todo = new ToDos(description);
+                            tasks[numTasks] = todo;
+                            break;
+                        case "deadline":
+                            Deadlines deadline = new Deadlines(description);
+                            tasks[numTasks] = deadline;
+                            break;
+                        case "event":
+                            Events event = new Events(description);
+                            tasks[numTasks] = event;
+                            break;
+                    }
                     printAdd(numTasks);
 
                     numTasks++;
@@ -76,7 +89,9 @@ public class Duke {
     }
 
     public static void printAdd(int index) {
-        System.out.println(tab + "added: " + tasks[index].getDescription());
+        System.out.println(tab + "Got it. I've added this task: ");
+        System.out.println(tab + tasks[index].toString());
+        System.out.println(tab + "Now you have " + (index + 1) + " tasks in the list.");
     }
 
     public static void printBye() {
