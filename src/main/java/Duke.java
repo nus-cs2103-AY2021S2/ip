@@ -96,11 +96,11 @@ public class Duke {
     // could simplify it somehow
     // todo definitely need to simplify, too much duplication?
     // but how else do you want to detect the first word if not for the space?
-    private static void handleOnlyFirstArgGiven(String oneArg)
+    private static void handleOnlyFirstArgGiven(String command)
             throws MissingArgumentException, UnsupportedCommandException {
         String errMsg;
 
-        switch (oneArg) {
+        switch (command) {
         case "todo":
             errMsg = "Please include a description for your todo.";
             break;
@@ -209,9 +209,21 @@ public class Duke {
         }
     }
 
-    // parse done, todos, deadline or event commands
+    // this check could be done using an enum property?
+    private static void checkIfTooManyArgs(String command) throws InvalidArgumentException {
+        switch (command) {
+        case "bye":
+        case "list":
+            throw new InvalidArgumentException("Too many commands provided. Did you mean '" + command + "'?");
+        default:
+            break;
+        }
+    }
+
+    // parse done, todos, deadline, event, delete commands
     // make enums for supported commands?
-    private static void parseMultiArgCommand(String userInput) throws MissingArgumentException,
+    // return whether to keep scanner open
+    private static boolean parseMultiArgCommand(String userInput) throws MissingArgumentException,
             UnsupportedCommandException, InvalidArgumentException {
 
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
@@ -219,20 +231,36 @@ public class Duke {
 
         if (firstSpaceIndex == -1) {
             // why is this needed - detect commands that are invalid before detecting missing arguments
+            // i.e. specifically for the empty task list check
             firstWord = userInput.trim();
         } else {
             firstWord = userInput.substring(0, firstSpaceIndex);
         }
 
-        // check for invalid commands on an empty task list
+        // check for commands that are invalid on an empty task list
         if (taskList.isEmpty() && (firstWord.equals("done") || firstWord.equals("delete"))) {
             throw new InvalidArgumentException("Invalid command. The task list is empty.");
         }
 
-        // if only one argument was provided when more are needed
-        if (firstSpaceIndex == -1) {
+
+
+
+        if (firstSpaceIndex == -1) { // if only one argument was provided
+
+            // check if only one argument needed
+            if (firstWord.equals("bye")) {
+                printExitMsg(); // how to handle these valid lines should be abstracted into one function that handles everything?
+                return false;
+            } else if (firstWord.equals("list")) {
+                printTaskList(); // how to handle these valid lines should be abstracted into one function that handles everything?
+                return true;
+            }
+
+            // print correct error message when insufficient arguments
             handleOnlyFirstArgGiven(userInput); // try catch block not necessary, because of throws
-            return;
+            return true;
+        } else { // check more than one argument provided when just one needed
+            checkIfTooManyArgs(firstWord);
         }
 
         try {
@@ -244,33 +272,39 @@ public class Duke {
         } catch (Exception e) {
             String errMsg = "didn't expect this exception " + e;
             print(new String[]{errMsg});
+            return true;
         }
 
+        return true;
         // catch exceptions where substring end is wrong i.e. extra arguments not found?
     }
 
+    public static void printExitMsg() {
+        print("Bye. See you again soon!");
+    }
+
     // return value signals whether or not to close scanner
+    // should be renamed parseLine
     public static boolean parseCommand(String userInput) {
-        if (userInput.equals("bye")) {
-            print("Bye. See you again soon!");
-            return false;
-        } else if (userInput.equals("list")) {
-            printTaskList();
-            return true;
-        } else {
-            // assumed to be a valid command and have space
+//        if (userInput.equals("bye")) {
+//            print("Bye. See you again soon!");
+//            return false;
+//        } else if (userInput.equals("list")) {
+//            printTaskList();
+//            return true;
+//        } else {
+//            // assumed to be a valid command and have space
             try {
-                parseMultiArgCommand(userInput.trim());
+                return parseMultiArgCommand(userInput.trim());
             } catch (MissingArgumentException | UnsupportedCommandException | InvalidArgumentException e) {
-                print(new String[]{e.toString()});
+                print(new String[]{e.toString()}); // or should this be thrown out and printed at main? think it fits for the parser to print right
+                return true;
             }
-            return true;
-        }
+//        }
     }
 
     public static void intro() {
-        String logo =
-                " ______\n"
+        String logo = " ______\n"
                         + "/______\\ Kiwi's\n"
                         + "|______|     Inn\n"
                         + "####################";
@@ -282,7 +316,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         intro();
