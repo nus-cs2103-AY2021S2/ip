@@ -1,3 +1,13 @@
 public enum Task_State {
-    NOTDONE, DONE
+    NOTDONE{
+        @Override
+        public String toString() {
+            return " ";
+        }
+    }, DONE {
+        @Override
+        public String toString() {
+            return "x";
+        }
+    }
 }

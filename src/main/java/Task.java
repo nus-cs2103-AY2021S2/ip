@@ -18,4 +18,9 @@ public class Task {
     public Task_State getState() {
         return state;
     }
+
+    @Override
+    public String toString() {
+        return "[" + state + "] " + input;
+    }
 }
