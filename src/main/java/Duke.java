@@ -38,7 +38,8 @@ public class Duke {
 
         while (isChatting) {
             String input = sc.next();
-            mike.chat(input);
+            isChatting = mike.chat(input);
         }
+        sc.close();
     }
 }
