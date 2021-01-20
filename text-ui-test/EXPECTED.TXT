@@ -8,6 +8,8 @@
     ______________________________________________
     ______________________________________________
       Your tasks:
+
+      You have 0 tasks. 
     ______________________________________________
     ______________________________________________
       Success. I've added this task:
@@ -26,6 +28,8 @@
         1.[T][ ] read book
         2.[D][ ] return book (by: Sunday)
         3.[E][ ] project meeting (at: Mon 2-4pm)
+
+      You have 3 tasks. 
     ______________________________________________
     ______________________________________________
       Good work! I've marked this task done:
@@ -41,6 +45,8 @@
         2.[D][/] return book (by: Sunday)
         3.[E][ ] project meeting (at: Mon 2-4pm)
         4.[D][ ] do homework (by: no idea :-p)
+
+      You have 4 tasks. 
     ______________________________________________
     ______________________________________________
       UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
@@ -51,6 +57,8 @@
         2.[D][/] return book (by: Sunday)
         3.[E][ ] project meeting (at: Mon 2-4pm)
         4.[D][ ] do homework (by: no idea :-p)
+
+      You have 4 tasks. 
     ______________________________________________
     ______________________________________________
       Success. I've added this task:
@@ -97,6 +105,8 @@
         5.[T][ ] tea
         6.[D][ ] coffee (by: 4pm)
         7.[E][ ] read books (at: 4-6pm monday)
+
+      You have 7 tasks. 
     ______________________________________________
     ______________________________________________
       MissingArgumentException: Please include the list item number of the task to mark done.
@@ -118,7 +128,7 @@
     ______________________________________________
     ______________________________________________
       Got you. I've deleted this task:
-        [T][/] tea
+        [T][ ] tea
     ______________________________________________
     ______________________________________________
       Bye. See you again soon!

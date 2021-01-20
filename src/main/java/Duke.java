@@ -21,6 +21,7 @@ public class Duke {
         }
 
         taskList.get(i - 1).markAsDone();
+
         print(new String[]{"Good work! I've marked this task done:",
                 taskIndent + taskList.get(i - 1)});
     }
@@ -54,6 +55,7 @@ public class Duke {
         System.out.println(lines);
     }
 
+    // print formatted single-line message
     private static void print(String message) {
         System.out.println(lines);
 
@@ -64,10 +66,12 @@ public class Duke {
 
     private static void addTask(Task t) {
         taskList.add(t);
+
         String[] messages = {
-                "Success. I've added this task:",
-                taskIndent + t // standardize this indent,
+            "Success. I've added this task:",
+            taskIndent + t // standardize this indent,
         };
+
         print(messages);
     }
 
@@ -91,7 +95,6 @@ public class Duke {
     // for every new command to support, need to add to cases here and if statements in parse method
     // could simplify it somehow
     // todo definitely need to simplify, too much duplication?
-    // e.g. delete and done shouldn't be inputted when list is empty, whether or not numArgs is correct
     // but how else do you want to detect the first word if not for the space?
     private static void handleOnlyFirstArgGiven(String oneArg)
             throws MissingArgumentException, UnsupportedCommandException {
@@ -225,9 +228,7 @@ public class Duke {
             } else if (firstSpaceIndex + 1 > secondCmdIndex - 1) {
                 throw new MissingArgumentException(determineErrMsg(firstWord, 2), e);
             }
-        } catch (UnsupportedCommandException e) {
-            throw e;
-        } catch (InvalidArgumentException e) {
+        } catch (UnsupportedCommandException | InvalidArgumentException e) {
             throw e;
         } catch (Exception e) {
             String errMsg = "don't know " + e;
@@ -237,12 +238,32 @@ public class Duke {
         // catch exceptions where substring end is wrong i.e. extra arguments not found?
     }
 
+    public static boolean parseCommand(String userInput) {
+        if (userInput.equals("bye")) {
+            print("Bye. See you again soon!");
+//            sc.close();
+//            break;
+            return false;
+        } else if (userInput.equals("list")) {
+            printTaskList();
+            return true;
+        } else {
+            // assumed to be a valid command and have space
+            try {
+                parseMultiArgCommand(userInput.trim());
+            } catch (MissingArgumentException | UnsupportedCommandException | InvalidArgumentException e) {
+                print(new String[]{e.toString()});
+            }
+            return true;
+        }
+    }
+
     public static void main(String[] args) {
         String logo =
                 " ______\n"
-                        + "/______\\ Kiwi's\n"
-                        + "|______|     Inn\n"
-                        + "####################";
+                + "/______\\ Kiwi's\n"
+                + "|______|     Inn\n"
+                + "####################";
 
         Scanner sc = new Scanner(System.in);
 
@@ -252,26 +273,12 @@ public class Duke {
 
         // variables to reuse
         String userInput;
-        String[] toPrint = new String[1];
-        String bye = "bye";
+        boolean remainOpen = true;
 
-        while (true) {
+        while (remainOpen) {
             userInput = sc.nextLine().trim();
-            if (userInput.equals(bye)) {
-                toPrint[0] = "Bye. See you again soon!";
-                print(toPrint);
-                sc.close();
-                break;
-            } else if (userInput.equals("list")) {
-                printTaskList();
-            } else {
-                // assumed to be a valid command and have space
-                try {
-                    parseMultiArgCommand(userInput.trim());
-                } catch (MissingArgumentException | UnsupportedCommandException | InvalidArgumentException e) {
-                    print(new String[]{e.toString()});
-                }
-            }
+            remainOpen = parseCommand(userInput);
         }
+        sc.close();
     }
 }
