@@ -2,7 +2,10 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    // use collection for holding all tasks
     private static ArrayList<Task> taskList = new ArrayList<>();
+
+    // formatting for print messages
     private static String lines = "    ______________________________________________";
     private static String indent = "      ";
     private static String taskIndent = "  "; // just an extra indent for listing tasks
@@ -32,6 +35,9 @@ public class Duke {
             System.out.println(indent + (i + 1) + "." + taskList.get(i));
         }
 
+        System.out.println();
+        System.out.println(indent + "You have " + taskList.size() + " tasks. ");
+
         System.out.println(lines);
     }
 
@@ -44,6 +50,14 @@ public class Duke {
         for (int i = 0; i < messages.length; i++) {
             System.out.println(indent + messages[i]);
         }
+
+        System.out.println(lines);
+    }
+
+    private static void print(String message) {
+        System.out.println(lines);
+
+        System.out.println(indent + message);
 
         System.out.println(lines);
     }
@@ -139,7 +153,7 @@ public class Duke {
 
     // parse done, todos, deadline or event commands
     // make enums for supported commands?
-    private static void parseMultiWordCommand(String userInput) throws MissingArgumentException,
+    private static void parseMultiArgCommand(String userInput) throws MissingArgumentException,
             UnsupportedCommandException, InvalidArgumentException {
 
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
@@ -157,7 +171,7 @@ public class Duke {
             throw new InvalidArgumentException("Invalid command. The task list is empty.");
         }
 
-        // only one word was provided
+        // if only one argument was provided
         if (firstSpaceIndex == -1) {
             handleOnlyFirstArgGiven(userInput); // seems like try catch block not necessary, because of throws
             return;
@@ -171,9 +185,12 @@ public class Duke {
 
         try {
             if (firstWord.equals("done")) {
+
                 desc = userInput.substring(firstSpaceIndex + 1).trim();
                 int secondArg = Integer.parseInt(desc);
+
                 markDone(secondArg);
+
             } else if (firstWord.equals("todo")) {
                 desc = userInput.substring(firstSpaceIndex + 1).trim();
                 addTask(new Todo(desc));
@@ -197,6 +214,7 @@ public class Duke {
             } else if (firstWord.equals("delete")) {
                 desc = userInput.substring(firstSpaceIndex + 1).trim();
                 int secondArg = Integer.parseInt(desc);
+
                 deleteTask(secondArg);
             } else {
                 throw new UnsupportedCommandException();
@@ -249,7 +267,7 @@ public class Duke {
             } else {
                 // assumed to be a valid command and have space
                 try {
-                    parseMultiWordCommand(userInput.trim());
+                    parseMultiArgCommand(userInput.trim());
                 } catch (MissingArgumentException | UnsupportedCommandException | InvalidArgumentException e) {
                     print(new String[]{e.toString()});
                 }
