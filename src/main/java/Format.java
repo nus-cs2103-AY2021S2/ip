@@ -1,3 +1,6 @@
+/**
+ * A class that store all the possible String format for Duke for code simplicity.
+ */
 public class Format {
 
     public static final String LINEBREAK = "\n";
@@ -17,6 +20,11 @@ public class Format {
             + "Awww, need help ah?"
             + LOWER;
 
+    /**
+     * make a chatBox that wrap a given String.
+     * @param s the String to be wrapped.
+     * @return a String with a chatBox wrapped.
+     */
     public static final String chatBox(String s) {
         if (s.length() > 50) {
             return "Walao! Your command too long lah!";
@@ -25,6 +33,12 @@ public class Format {
         }
     }
 
+
+    /**
+     * make a Bigger ChatBox that wrap the name of a given Task.
+     * @param t task to be wrapped.
+     * @return the String representation of the task name wrapped in a chatBox.
+     */
     public static final String biggerBox(Task t) {
         return Format.UPPER + "Added liao: "
                 + t.toString() + Format.LINEBREAK
@@ -32,6 +46,10 @@ public class Format {
                 + Format.LOWER;
     }
 
+    /**
+     * Display all the current task and status store in the tasklist.
+     *
+     */
     public static final void LISTING() {
         System.out.println(UPPER);
         for (Task task : Task.getTaskList()) {

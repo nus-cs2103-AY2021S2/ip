@@ -1,9 +1,16 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Encapsulates the main class of the Object.
+ */
 public class Duke {
 
-
+    /**
+     * Executes the programs.
+     *
+     * @param args command line arguments key in by user.
+     */
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -20,6 +27,11 @@ public class Duke {
         System.out.println(Format.farewell);
     }
 
+    /**
+     * handle done command key in by user.
+     *
+     * @param line String array of the full line key in by user.
+     */
     public static void handleDone(String[] line) {
         if (line.length == 2) {
             String arg = line[1].replaceAll("[^0-9]", "");
@@ -34,6 +46,13 @@ public class Duke {
         }
     }
 
+
+    /**
+     * handle todo command key in by user
+     *
+     * @param line String array of the full line key in by user.
+     * @param message the name of the task to be set.
+     */
     public static void handleToDo(String[] line, String message) {
         if (line.length > 1) {
             String msg = message.replaceAll(line[0], "")
@@ -44,6 +63,13 @@ public class Duke {
             DukeException.argumentErrorException();
         }
     }
+
+    /**
+     * handle deadline command user key in.
+     *
+     * @param line String array of the full line that user key in.
+     * @param message String representation of the name of the task key in.
+     */
     public static void handleDeadline(String[] line, String message) {
         if (line.length > 2) {
             String[] comments = message.trim().toLowerCase().split("/");
@@ -64,6 +90,12 @@ public class Duke {
         }
     }
 
+    /**
+     * handle event command key in by user.
+     *
+     * @param line String array of the full line key in by user.
+     * @param message String representation of the name of the task key in by user.
+     */
     public static void handleEvent(String[] line, String message) {
         if (line.length > 2) {
             String[] comments = message.trim().toLowerCase().split("/");
@@ -84,7 +116,12 @@ public class Duke {
     }
 
 
-
+    /**
+     * The main handler of all the command.
+     *
+     * @param message String representation of the message key in by user.
+     * @return a boolean to whether to exit the program.
+     */
     public static boolean inputHandler(String message) {
         String[] line = message.trim().toLowerCase().split(" ");
         String command = line[0];

@@ -1,12 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that store the task that user key in.
+ */
 public class Task {
     private static List<Task> taskList = new ArrayList<>();
     private String taskName;
     private static int capacity = 0;
     private int index;
     private String done;
+
+    /**
+     * Construct a task object with taskname attached and its index label in the taskList.
+     * @param taskName name of the task.
+     */
+
     Task(String taskName) {
         this.taskName = taskName;
         this.index = capacity + 1;
@@ -15,11 +24,20 @@ public class Task {
         add(this);
     }
 
+    /**
+     * Store the task key in by user in the taskList.
+     *
+     * @param t Task key in by user.
+     */
     private static void add(Task t) {
         taskList.add(t);
     }
 
-
+    /**
+     * Mark a given task as done.
+     *
+     * @param i the index label of the Task.
+     */
     public static final void done(int i) {
         try {
             Task t = taskList.get(i - 1);
@@ -32,26 +50,52 @@ public class Task {
     }
 
 
-
+    /**
+     * Get the name of the task.
+     *
+     * @return a String representation of the task name.
+     */
     public String getTaskName() {
         return taskName;
     }
+
+    /**
+     * Get the taskList.
+     *
+     * @return the List of all tasks stored.
+     */
 
     public static final List<Task> getTaskList() {
         return Task.taskList;
     }
 
+    /**
+     * get the isDone status of the task.
+     *
+     * @return a String representation of the isDone status (X for done).
+     */
     public String isDone() {
         return done;
     }
 
+    /**
+     * get the index label of the task.
+     *
+     * @return the int representation of the index label.
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * get the current capacity of the taskList.
+     *
+     * @return the int representation of the capacity of the taskList.
+     */
     public static final int getCapacity() {
         return Task.capacity;
     }
+
     @Override
     public String toString() {
         return String.format("[%s] %d. %s", done, index, taskName);
