@@ -13,7 +13,7 @@ public class Duke {
         final Scanner scan = new Scanner(System.in);
         while (true) {
             final String input = scan.nextLine();
-            String[] inputArray = input.split(" ");
+            final String[] tokens = input.split(" ");
             horizontalLine();
 
             if (input.toLowerCase().equals("bye")) {
@@ -21,20 +21,22 @@ public class Duke {
                 horizontalLine();
                 break;
             }
-            
-            if (input.equals("")) {
 
-            } else if (input.equals("list")) {
+            if (input.equals("")) { // empty string
+
+            } else if (input.equals("list")) { // list tasks
                 if (counter == 0) {
-                    System.out.println("\t Hmm... You do not have any tasks!");
+                    System.out.println("\tHmm... You do not have any tasks!");
+                } else {
+                    System.out.println("\tHere are the tasks in your list:");
                 }
                 for (int i = 0; i < counter; i++) {
                     System.out.printf("\t%d. %s\n", i + 1, store[i]);
                 }
-            } else if (inputArray[0].equals("done")) {
-                if (inputArray.length == 2) {
+            } else if (tokens[0].equals("done")) { // mark task as done
+                if (tokens.length == 2) {
                     try {
-                        final int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                        final int index = Integer.parseInt(tokens[1]) - 1;
                         if (0 <= index && index < counter) {
                             store[index].markAsDone();
                             System.out.println("\tNice! I've marked this task as done:");
@@ -42,19 +44,56 @@ public class Duke {
                         } else {
                             System.out.println("\tOpps! The index is out of bound.");
                         }
-                    } catch (NumberFormatException e) {
+                    } catch (final NumberFormatException e) {
                         System.out.println("\tOpps! Please input a number.");
                     }
                 } else {
                     System.out.println("\tPlease follow this format \"done <index>\".");
                 }
-            } else if (counter >= 100) {
-                System.out.println("\tSorry. The database is full!");
-            } else {
-                store[counter++] = Task.create(input);
-                System.out.printf("\tTask added: %s\n", input);
-            }
+            } else { // add task to list
+                if (counter >= 100) {
+                    System.out.println("\tSorry. The database is full!");
+                } else if (tokens[0].equals("todo")) {
+                    if (tokens.length < 2) {
+                        System.out.println("\tPlease follow this format \"todo <task>\".");
+                    } else {
+                        store[counter] = new ToDo(input.split(" ", 2)[1]);
+                        System.out.println("\tGot it. I've added this task: ");
+                        System.out.printf("\tTask added: %s\n", store[counter++]);
+                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                    }
+                } else if (tokens[0].equals("deadline")) {
+                    final int index = input.indexOf(" /by ");
+                    final String[] splitOnBy = input.split(" /by ", 2);
 
+                    if (index == -1 || splitOnBy.length < 2) {
+                        System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
+                    } else {
+                        final String task = splitOnBy[0].split("deadline ", 2)[1];
+                        final String datetime = splitOnBy[1];
+                        store[counter] = new Deadline(task, datetime);
+                        System.out.println("\tGot it. I've added this task: ");
+                        System.out.printf("\tTask added: %s\n", store[counter++]);
+                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                    }
+                } else if (tokens[0].equals("event")) {
+                    final int index = input.indexOf(" /at ");
+                    final String[] splitOnAt = input.split(" /at ", 2);
+
+                    if (index == -1 || splitOnAt.length < 2) {
+                        System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
+                    } else {
+                        final String task = splitOnAt[0].split("event ", 2)[1];
+                        final String datetime = splitOnAt[1];
+                        store[counter] = new Event(task, datetime);
+                        System.out.println("\tGot it. I've added this task: ");
+                        System.out.printf("\tTask added: %s\n", store[counter++]);
+                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                    }
+                } else {
+                    System.out.println("\tOpps! Try inputting \"todo|deadline|event <task> (/by|/at <datetime>)\".");
+                }
+            }
             horizontalLine();
         }
         scan.close();
