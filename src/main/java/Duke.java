@@ -1,8 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private final Scanner scanner;
     private boolean isActive;
+    private final Scanner scanner;
+    private final ArrayList<String> list;
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -19,6 +21,7 @@ public class Duke {
     public Duke() {
         isActive = true;
         scanner = new Scanner(System.in);
+        list = new ArrayList<>();
 
         greet();
         listen();
@@ -31,14 +34,38 @@ public class Duke {
     private void listen() {
         while (isActive) {
             System.out.println("Let me know what to do!");
-            String command = scanner.next();
+            String input = scanner.nextLine();
 
-            if (command.equals("bye")) {
-                isActive = false;
-                System.out.println("Bye bye, see you soon!\n");
-            } else {
-                System.out.println(command + "\n");
+            switch (input) {
+            case "bye":
+                shutDown();
+                break;
+            case "list":
+                printList();
+                break;
+            default:
+                addToList(input);
+                break;
             }
         }
+    }
+
+    private void addToList(String item) {
+        list.add(item);
+        System.out.println("added: " + item + "\n");
+    }
+
+    private void printList() {
+        int i = 1;
+        for (String s : list) {
+            System.out.println(i + ". " + s);
+            i++;
+        }
+        System.out.println();
+    }
+
+    private void shutDown() {
+        isActive = false;
+        System.out.println("Bye bye, see you soon!\n");
     }
 }
