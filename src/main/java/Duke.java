@@ -17,7 +17,8 @@ public class Duke {
                 + "          \\___/\\___/---;_| |_|\n";
 
         String border = " --*---*---*---*---*---*---*---*---*---*--";
-        System.out.println(logo + "\n" + border + "\n  Hey there, Olaf here!\n  What will we be doing today?");
+        System.out.println(logo + "\n" + border + "\n  Hey there, Olaf here!" +
+                "\n  What will we be doing today?");
 
         while(true) {
             String command = bf.readLine();
@@ -26,7 +27,7 @@ public class Duke {
                 System.out.println(border + "\n  " + out + "\n" + border);
                 break;
             } else if(command.toLowerCase().equals("list")){
-                System.out.println(border + "\n  Here are your pending tasks:");
+                System.out.println(border + "\n  Here are your pending tasks:\n");
                 // adapted from: https://howtodoinjava.com/java/collections/arraylist/iterate-through-objects/
                 int idx = 0;
                 while (tasks.size() > idx){
@@ -39,9 +40,9 @@ public class Duke {
                 int undone = tasks.stream()
                         .mapToInt(Task::isNotDone)
                         .reduce(0, Integer::sum);
-                System.out.println(border + "\n  Great job! You're done with:");
+                System.out.println(border + "\n  Great job! You're done with:\n");
                 System.out.printf("  %s. %s\n",String.valueOf(idx), tasks.get(idx-1));
-                System.out.printf("  Now %o tasks are left to be done!\n", undone);
+                System.out.printf("\n  Now %o tasks are left to be done!\n", undone);
                 System.out.println(border);
             } else if(command.toLowerCase().startsWith("todo")){
                 try {
@@ -51,12 +52,12 @@ public class Duke {
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
                             .reduce(0, Integer::sum);
-                    System.out.println(border + "\n  Okie added new task:");
+                    System.out.println(border + "\n  Okie added new task:\n");
                     System.out.printf("  %o. %s\n", total, tasks.get(total-1));
-                    System.out.printf("  Total %o tasks, only %o left to be done!\n", total, undone);
+                    System.out.printf("\n  Total %o tasks, only %o left to be done!\n", total, undone);
                     System.out.println(border);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(border + "\n  Oops! Please add a task description as follows:");
+                    System.out.println(border + "\n  Oops! Please add a task description as follows:\n");
                     System.out.println("  todo <task description>\n" + border);
                 }
             } else if(command.toLowerCase().startsWith("deadline")){
@@ -68,12 +69,13 @@ public class Duke {
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
                             .reduce(0, Integer::sum);
-                    System.out.println(border + "\n  Okie added new task:");
+                    System.out.println(border + "\n  Okie added new task:\n");
                     System.out.printf("  %o. %s\n", total, tasks.get(total-1));
-                    System.out.printf("  Total %o tasks, only %o left to be done!\n", total, undone);
+                    System.out.printf("\n  Total %o tasks, only %o left to be done!\n", total, undone);
                     System.out.println(border);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(border + "\n  Oops! Please add a deadline using\n  the 24-hour time format as follows:");
+                    System.out.println(border + "\n  Oops! Please add a deadline using" +
+                            "\n  the 24-hour time format as follows:\n");
                     System.out.println("  deadline <task description> /by <DD-MM-YYYY HHMM>\n" + border);
                 }
             } else if(command.toLowerCase().startsWith("event")){
@@ -85,21 +87,25 @@ public class Duke {
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
                             .reduce(0, Integer::sum);
-                    System.out.println(border + "\n  Okie added new task:");
+                    System.out.println(border + "\n  Okie added new task:\n");
                     System.out.printf("  %o. %s\n", total, tasks.get(total-1));
-                    System.out.printf("  Total %o tasks, only %o left to be done!\n", total, undone);
+                    System.out.printf("\n  Total %o tasks, only %o left to be done!\n", total, undone);
                     System.out.println(border);
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println(border + "\n  Oops! Please add an event using\n  the 24-hour time format as follows:");
+                    System.out.println(border + "\n  Oops! Please add an event using" +
+                            "\n  the 24-hour time format as follows:\n");
                     System.out.println("  event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>\n" + border);
                 }
             } else {
                 System.out.println(border + "\n  Hmm I don't understand :(" +
-                        "\n  Please use the following to update me!");
-                System.out.println("  todo <task description>");
-                System.out.println("  deadline <task description> /by <DD-MM-YYYY>" + border);
-                System.out.println("  event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>");
-                System.out.println("  list\n  done <task number>\n  bye\n" + border);
+                        "\n  Please use the following to update me!\n");
+                System.out.println("    todo <task description>\n      ^ adds a task to be done");
+                System.out.println("    deadline <task description> /by <DD-MM-YYYY>\n      ^ adds a deadline");
+                System.out.println("    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>" +
+                        "\n      ^ adds an event");
+                System.out.println("    list\n      ^ lists all tasks, deadlines and events");
+                System.out.println("    done <task number>\n      ^ marks a task as done");
+                System.out.println("    bye\n      ^ exists this application\n" + border);
             }
         }
     }
