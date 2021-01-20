@@ -68,20 +68,26 @@ public class Duke {
         return sc.nextLine();
     }
 
-    public static String[] parseInput(String input) {
+    public static String[] parseInput(String input) throws DukeException {
         String[] inputArr = input.split(" ");
-        String taskType = inputArr[0];
+        String taskType = inputArr[0].toLowerCase();
         String taskDesc = "";
         String taskArg = "";
 
         // Get description
         int i;
         for (i = 1; i < inputArr.length; i++) {
-            if (taskType.toLowerCase().equals("todo") || (!inputArr[i].toLowerCase().equals("/by") && !inputArr[i].toLowerCase().equals("/at"))) {
+            if (taskType.equals("todo") || (!inputArr[i].toLowerCase().equals("/by") && !inputArr[i].toLowerCase().equals("/at"))) {
                 if (!taskDesc.equals(""))
                     taskDesc += " ";
                 taskDesc += inputArr[i];
             } else {
+                // Ensure no misuse of arguments
+                if (!inputArr[i].toLowerCase().equals("/by") && taskType.equals("deadline"))
+                    throw new DukeException("You're confusing me with parameters from other commands...");
+                else if (!inputArr[i].toLowerCase().equals("/at") && taskType.equals("event"))
+                    throw new DukeException("You're confusing me with parameters from other commands...");
+
                 break;
             }
         }
@@ -120,16 +126,26 @@ public class Duke {
         }
     }
 
-    public static void add(ArrayList<Task> collection, String input) {
+    public static void add(ArrayList<Task> collection, String input) throws DukeException {
         // Parse input
         String[] parsedInputArr = Duke.parseInput(input);
 
+        // Ensure task description and argument cannot be empty
+        if (parsedInputArr[1].equals("")) {
+            throw new DukeException("I need a description of your task...");
+        } else if (parsedInputArr[2].equals("")) {
+            if (parsedInputArr[0].equals("deadline"))
+                throw new DukeException("I need to know when your task ends...");
+            if (parsedInputArr[0].equals("event"))
+                throw new DukeException("I need to know the time period of your event...");
+        }
+
         // Add to collection
-        if (parsedInputArr[0].toLowerCase().equals("todo"))
+        if (parsedInputArr[0].equals("todo"))
             collection.add(new Todo(parsedInputArr[1]));
-        else if (parsedInputArr[0].toLowerCase().equals("deadline"))
+        else if (parsedInputArr[0].equals("deadline"))
             collection.add(new Deadline(parsedInputArr[1], parsedInputArr[2]));
-        else if (parsedInputArr[0].toLowerCase().equals("event"))
+        else if (parsedInputArr[0].equals("event"))
             collection.add(new Event(parsedInputArr[1], parsedInputArr[2]));
         Duke.say("Got it, I have added the task '" + parsedInputArr[1] + "' to your collection.");
     }
