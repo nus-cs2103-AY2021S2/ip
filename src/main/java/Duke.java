@@ -3,6 +3,12 @@ import java.util.Scanner;
 
 public class Duke {
 
+    public enum CommandsEnum {
+        TODO, DEADLINE, EVENT,
+        DONE, DELETE, LIST,
+        BYE, EMPTY
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> collection = new ArrayList<Task>();
@@ -14,22 +20,33 @@ public class Duke {
         do {
             try {
                 String input = Duke.ask(sc);
-                String command = input.split(" ")[0].toLowerCase();
-
-                if (command.equals("todo") || command.equals("deadline") || command.equals("event"))
-                    add(collection, input);
-                else if (command.equals("done"))
-                    done(collection, input);
-                else if (command.equals("delete"))
-                    delete(collection, input);
-                else if (command.equals("list"))
-                    list(collection);
-                else if (command.equals("bye"))
-                    exit = bye();
-                else if (command.equals(""))
+                // Check if input is an empty line
+                if (input.equals(""))
                     continue;
-                else
-                    invalid();
+
+                // Process input
+                CommandsEnum command = CommandsEnum.valueOf(input.split(" ")[0].toUpperCase());
+                switch (command) {
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
+                        add(collection, input);
+                        break;
+                    case DONE:
+                        done(collection, input);
+                        break;
+                    case DELETE:
+                        delete(collection, input);
+                        break;
+                    case LIST:
+                        list(collection);
+                        break;
+                    case BYE:
+                        exit = bye();
+                        break;
+                }
+            } catch (IllegalArgumentException e) {
+                invalid(); // Invalid enum value (i.e. no such command)
             } catch (DukeException e) {
                 Duke.say("Oh no... " + e.getMessage());
             }
@@ -145,8 +162,8 @@ public class Duke {
         }
     }
 
-    public static void invalid() throws DukeException {
-        throw new DukeException("I'm not trained with these commands yet...");
+    public static void invalid() {
+        Duke.say("I'm not trained with these commands yet...");
     }
 
 }
