@@ -27,4 +27,11 @@ Here are the tasks you requested to see sir/maam:
 2.[D][X] return book (by: Sunday)
 3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
 DukeException: I am unable to comprehend what you have just said. I deeply regret my insufficiency.
+DukeException: I am incapable of deleting something that does not exist sir/maam.
+Understood. I shall remove this task off the list for you. I hope you are pleased.
+  [T][ ] read book
+You now have 2 tasks left on the list.
+Here are the tasks you requested to see sir/maam:
+1.[D][X] return book (by: Sunday)
+2.[E][ ] project meeting (at: 6th August 2pm - 4pm)
 Farewell sir/maam. Hope to see you again soon.

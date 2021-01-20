@@ -5,7 +5,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("How can I help you sir/maam?");
         Scanner sc = new Scanner(System.in);
-        Task[] tasks = new Task[100];
+        ArrayList<Task> tasks = new ArrayList<>();
         int index = 0;
         boolean exit = false;
         while (!exit) {
@@ -20,7 +20,7 @@ public class Duke {
                 } else if (input.equals("list")) {
                     System.out.println("Here are the tasks you requested to see sir/maam:");
                     for (int i = 0; i < index; i++) {
-                        System.out.println(tasks[i].listTask());
+                        System.out.println(String.valueOf(i + 1) + "." + tasks.get(i));
                     }
                 } else if (input.equals("done")) {
                     throw new DukeException("I apologise but I must ask you to specify the task you have conquered.");
@@ -29,35 +29,48 @@ public class Duke {
                     if (taskNum >= index || taskNum < 0) {
                         throw new DukeException("I apologise but there is no such index in your list of tasks sir/maam.");
                     } else {
-                        String str = tasks[taskNum].checkTask();
+                        String str = tasks.get(taskNum).checkTask();
                         System.out.println("Well done. I have checked off this task. You are one step closer to victory after conquering:");
                         System.out.println(str);
                     }
                 } else if (cmd[0].equals("todo") || cmd[0].equals("deadline") || cmd[0].equals("event")) {
                     if (cmd[0].equals("todo")) {
                         System.out.println("Understood. I have added this task to the list:");
-                        Todo task = new Todo(index + 1, input);
-                        tasks[index] = task;
+                        Todo task = new Todo(input);
+                        tasks.add(task);
                     } else if (cmd[0].equals("deadline")) {
-                        Deadline task = new Deadline(index + 1, input);
+                        Deadline task = new Deadline(input);
                         if (task.isValidDeadline()) {
                             System.out.println("Understood. I have added this task to the list:");
-                            tasks[index] = task;
+                            tasks.add(task);
                         } else {
                             throw new DukeException("Please specify the deadline for this task using /by.");
                         }
                     } else if (cmd[0].equals("event")) {
-                        Event task = new Event(index + 1, input);
+                        Event task = new Event(input);
                         if (task.isValidDate()) {
                             System.out.println("Understood. I have added this task to the list:");
-                            tasks[index] = task;
+                            tasks.add(task);
                         } else {
                             throw new DukeException("Please specify the date of this event using /at.");
                         }
                     }
-                    System.out.println("  " + tasks[index]);
+                    System.out.println("  " + tasks.get(index));
                     index++;
                     System.out.println(String.format("Now you have %d tasks in the list.", index));
+                } else if (input.equals("delete")) {
+                    throw new DukeException("I apologise but I must ask you to specify which task you wish to remove.");
+                } else if (cmd[0].equals("delete")) {
+                    int taskNum = Integer.parseInt(cmd[1]) - 1;
+                    if (taskNum >= index || taskNum < 0) {
+                        throw new DukeException("I am incapable of deleting something that does not exist sir/maam.");
+                    } else {
+                        System.out.println("Understood. I shall remove this task off the list for you. I hope you are pleased.");
+                        System.out.println("  " + tasks.get(taskNum));
+                        tasks.remove(taskNum);
+                        index--;
+                        System.out.println(String.format("You now have %d tasks left on the list.", index));
+                    }
                 } else {
                     throw new DukeException("I am unable to comprehend what you have just said. I deeply regret my insufficiency.");
                 }
@@ -69,14 +82,12 @@ public class Duke {
 }
 
 class Task {
-    public int index;
     public String command;
     public boolean done;
     static String CHECKED = "[X]";
     static String UNCHECKED = "[ ]";
 
-    public Task(int index, String command) {
-        this.index = index;
+    public Task(String command) {
         this.command = command;
         this.done = false;
     }
@@ -87,7 +98,7 @@ class Task {
     }
 
     public String toString() {
-        String str = String.valueOf(index) + ".";
+        String str = "";
         if (done) {
             str += CHECKED;
         } else {
@@ -96,17 +107,11 @@ class Task {
         str += " " + command;
         return str;
     }
-
-    public String listTask() {
-        String str = String.valueOf(index) + ".";
-        str += this.toString();
-        return str;
-    }
 }
 
 class Todo extends Task {
-    public Todo(int index, String command) {
-        super(index, command);
+    public Todo(String command) {
+        super(command);
     }
 
     public String toString() {
@@ -125,8 +130,8 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    public Deadline(int index, String command) {
-        super(index, command);
+    public Deadline(String command) {
+        super(command);
     }
 
     public int findDeadline() {
@@ -174,8 +179,8 @@ class Deadline extends Task {
 }
 
 class Event extends Task {
-    public Event(int index, String command) {
-        super(index, command);
+    public Event(String command) {
+        super(command);
     }
 
     public int findDate() {
