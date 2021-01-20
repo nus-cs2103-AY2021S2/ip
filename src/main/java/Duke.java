@@ -1,15 +1,15 @@
 
-import java.io.OutputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.io.IOException;
 
 public class Duke {
 
-    public static ArrayList<Task> tasks;
+    protected static ArrayList<Task> tasks;
 
     private static final String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
@@ -42,20 +42,20 @@ public class Duke {
     public static String parseInput(String input) {
         String[] tokenizedInput = input.split(" ");
         switch (tokenizedInput[0]) {
-            case "bye":
-                return "Bye. Hope to see you again soon!";
-            case "list":
-                return executeList();
-            case "done":
-                return executeDone(tokenizedInput);
-            case "todo":
-                return executeTodo(input);
-            case "deadline":
-                return executeDeadline(input);
-            case "event":
-                return executeEvent(input);
-            default:
-                return addTaskAndReturnMessage(new Task(input));
+        case "bye":
+            return "Bye. Hope to see you again soon!";
+        case "list":
+            return executeList();
+        case "done":
+            return executeDone(tokenizedInput);
+        case "todo":
+            return executeTodo(input);
+        case "deadline":
+            return executeDeadline(input);
+        case "event":
+            return executeEvent(input);
+        default:
+            return addTaskAndReturnMessage(new Task(input));
         }
     }
 
