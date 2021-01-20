@@ -26,6 +26,11 @@ public class InvalidOptionException extends DukeException {
                         + INDENTATION
                         + "Did you specify a valid number? Please try again!";
                 break;
+            case "DELETE":
+                message = "You have entered an invalid option for delete.\n "
+                        + INDENTATION
+                        + "Did you specify a valid number? Please try again!";
+                break;
             default:
                 message = "You have entered an invalid option. Please try again!";
                 break;

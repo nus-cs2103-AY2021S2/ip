@@ -213,4 +213,101 @@
      7. [T][X] go to the gym
      8. [D][X] eat dinner  (by: tonight)
     ____________________________________________________________
+    ____________________________________________________________
+     Got it. I've added this task:
+         [T][ ] sleep early
+     Now you have 9 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: tomorrow)
+     3. [E][ ] competition  (at: monday)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: wednesday)
+     6. [E][ ] play soccer  (at: thursday)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: tonight)
+     9. [T][ ] sleep early
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for delete.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered an invalid option for delete.
+     Did you specify a valid number? Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: tomorrow)
+     3. [E][ ] competition  (at: monday)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: wednesday)
+     6. [E][ ] play soccer  (at: thursday)
+     7. [T][X] go to the gym
+     8. [D][X] eat dinner  (by: tonight)
+     9. [T][ ] sleep early
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [T][ ] sleep early
+     Now you have 8 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [E][ ] play soccer  (at: thursday)
+     Now you have 7 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [D][ ] finish book  (by: tomorrow)
+     3. [E][ ] competition  (at: monday)
+     4. [T][ ] go fishing
+     5. [D][ ] finish tutorial  (by: wednesday)
+     6. [T][X] go to the gym
+     7. [D][X] eat dinner  (by: tonight)
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [D][ ] finish book  (by: tomorrow)
+     Now you have 6 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [E][ ] competition  (at: monday)
+     3. [T][ ] go fishing
+     4. [D][ ] finish tutorial  (by: wednesday)
+     5. [T][X] go to the gym
+     6. [D][X] eat dinner  (by: tonight)
+    ____________________________________________________________
+    ____________________________________________________________
+     Noted. I've removed this task:
+         [T][ ] go fishing
+     Now you have 5 tasks in the list.
+    ____________________________________________________________
+    ____________________________________________________________
+     1. [T][X] read long book
+     2. [E][ ] competition  (at: monday)
+     3. [D][ ] finish tutorial  (by: wednesday)
+     4. [T][X] go to the gym
+     5. [D][X] eat dinner  (by: tonight)
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "BLAH", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "WRONG", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "1", which is an unrecognised command. Please try again!
+    ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "2", which is an unrecognised command. Please try again!
+    ____________________________________________________________
      Bye. Hope to see you again soon!

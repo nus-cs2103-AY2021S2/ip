@@ -106,6 +106,17 @@ public class Duke {
         printBetweenLines("Nice! I've marked this task as done:", task.toString());
     }
 
+    public static void deleteTask(String input) {
+        int index = Integer.parseInt(input) - 1;
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        Integer numberOfTasks = taskList.size();
+
+        printBetweenLines("Noted. I've removed this task:",
+                INDENTATION + task.toString(),
+                "Now you have " + numberOfTasks.toString() + " tasks in the list.");
+    }
+
     public static void handleInput(String s) throws DukeException {
         String input = s.trim();
         Commands command;
@@ -129,6 +140,13 @@ public class Duke {
             case DONE:
                 try {
                     doneTask(inputArr[1]);
+                    break;
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    throw new InvalidOptionException(command.name());
+                }
+            case DELETE:
+                try {
+                    deleteTask(inputArr[1]);
                     break;
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     throw new InvalidOptionException(command.name());

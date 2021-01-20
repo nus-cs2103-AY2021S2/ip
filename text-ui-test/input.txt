@@ -36,4 +36,20 @@ done 8
 list
 done 9
 list
+todo sleep early
+list
+delete 10
+delete a
+list
+delete 9
+delete 6
+list
+delete 2
+list
+delete 3
+list
+blah
+wrong
+1
+2
 bye
