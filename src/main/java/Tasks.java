@@ -35,6 +35,6 @@ public class Tasks {
                 System.out.println(j + 1 + ".[ ] " + Tasks.get(j));
             }
         }
-        System.out.println("Now you have " + numOfTasks() + " in your list");
+        System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 }

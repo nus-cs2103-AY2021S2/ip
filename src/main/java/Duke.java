@@ -10,13 +10,12 @@ public class Duke {
 
         while(true){
             command = ui.getCommand();
-            String[] executable = new String[2];
+            String[] executable = new String[100];
             executable = command.split(" ");
             if(command.equals("bye")){
                 ui.goodbye();
                 break;
-            }
-            if(command.equals("list")){
+            }else if(command.equals("list")){
                 taskList.printTasks();
             }else if(executable[0].equals("done")){
                 taskList.markAsDone(Integer.parseInt(executable[1]));

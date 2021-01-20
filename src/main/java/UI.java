@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
 public class UI {
-    Scanner io;
+    Scanner ui;
 
     UI(){
-        io = new Scanner(System.in);
+        ui = new Scanner(System.in);
     }
 
     public String getCommand(){
-        return io.nextLine();
+        return ui.nextLine();
     }
 
     public void greetings(){
@@ -23,4 +23,5 @@ public class UI {
     public void goodbye(){
         System.out.println("Goodbye for now.\nHope to see you soon!");
     }
+
 }
