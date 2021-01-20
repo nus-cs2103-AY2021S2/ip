@@ -5,3 +5,9 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Greetings and salutations! I am Duke, a helpful chatbot.
+Please enter your command(s).
+Available commands: todo (task), deadline (task) /by (time), event (task) /at (time)
+To view the list of tasks, enter the command 'list'.
+To exit, enter the command 'bye'.
+Farewell. Hope that you will visit again soon!
