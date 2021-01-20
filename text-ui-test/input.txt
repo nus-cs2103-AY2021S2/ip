@@ -12,5 +12,8 @@ deadline
 event
 deadline fail
 event fail
+delete 1
+delete ab
+delete 2
 list
 blah

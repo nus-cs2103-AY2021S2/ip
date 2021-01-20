@@ -60,9 +60,20 @@ Error: Please add a time limit to your deadline
 Error: Please add a start time to your event
 ----------------------------------------
 ----------------------------------------
-1.[T][ ] borrow book
-2.[D][X] return book  (by: Sunday)
-3.[E][X] project meeting  (at: Mon 2-4pm)
+Noted. I've removed this task:
+[T][ ] borrow book
+Now you have 2 tasks in the list
+----------------------------------------
+----------------------------------------
+Error: Invalid argument for delete
+----------------------------------------
+----------------------------------------
+Noted. I've removed this task:
+[E][X] project meeting  (at: Mon 2-4pm)
+Now you have 1 tasks in the list
+----------------------------------------
+----------------------------------------
+1.[D][X] return book  (by: Sunday)
 ----------------------------------------
 ----------------------------------------
 Error: Unknown command word. Please try again.

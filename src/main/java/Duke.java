@@ -16,7 +16,7 @@ public class Duke {
         commands.add("event", new CommandDecorator(new AddCommand(taskManager,new EventFactory())));
         commands.add("todo", new CommandDecorator(new AddCommand(taskManager,new ToDoFactory())));
         commands.add("deadline", new CommandDecorator(new AddCommand(taskManager,new DeadlineFactory())));
-
+        commands.add("delete", new CommandDecorator(new DeleteCommand(taskManager)));
         printCommand.execute(getIntro());
         try {
             while (!taskManager.hasExited()) {

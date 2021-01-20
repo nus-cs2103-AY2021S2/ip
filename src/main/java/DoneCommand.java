@@ -7,14 +7,15 @@ public class DoneCommand implements ICommand {
 
     @Override
     public void execute(String parameters) {
-        Integer count;
         try {
-            count = Integer.parseInt(parameters);
+            Integer count = Integer.parseInt(parameters);
+            tasks.setTaskDone(count);
+            System.out.println("Nice! I've marked this task as done:");
+            System.out.println(tasks.getTasks().get(count - 1));
         } catch (NumberFormatException e) {
-            count = -1;
+            System.out.println("Error: Invalid argument for done");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
-        tasks.setTaskDone(count);
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(tasks.getTasks().get(count-1));
     }
 }
