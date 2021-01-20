@@ -12,6 +12,11 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public String doneTask(int idx) {
+        taskList.get(idx - 1).markDone();
+        return taskList.get(idx - 1).toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();

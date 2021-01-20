@@ -13,6 +13,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] %s", isDone ? '✓' : '✘', description);
+        return String.format("[%c] %s", isDone ? '✓' : 'X', description);
     }
 }
