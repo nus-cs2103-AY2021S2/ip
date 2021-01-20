@@ -11,7 +11,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[ ]" : "[X]"); //return tick or X symbols
+        return (isDone ? "[X]" : "[ ]"); //return tick or X symbols
     }
 
     public Task markAsDone() {
@@ -21,6 +21,10 @@ public class Task {
 
     public String printTask() {
         return this.getStatusIcon() + " " + description;
+    }
+
+    public String toString() {
+        return this.getStatusIcon() + " " + this.description;
     }
 
 }
