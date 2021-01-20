@@ -19,7 +19,7 @@ public class Task {
     @Override
     public String toString() {
         if (isDone.equals(true)) {
-            return "[" + "\u2713" + "] " + msg;
+            return "[X] " + msg;
         } else {
             return "[ ] " + msg;
         }

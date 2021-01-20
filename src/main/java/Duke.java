@@ -1,24 +1,9 @@
-/**
- * Duke program maintains a taskList for user to track tasks.
- * Reads user input tasks(todo, event, deadline).
- * Can add, delete, markasDone tasks.
- *
- * @author Oh Jun Ming
- * @version 1.0
- * @Since 2020-01-17
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static ArrayList<Task> tasklist = new ArrayList<>();
+    private static ArrayList<Task> lst = new ArrayList<>();
     private static Boolean doExit = false;
-
-    public static void main(String[] args){
-        Scanner s = new Scanner(System.in);
-        Duke.initiate(s);
-    }
 
     public static void initiate(Scanner s) {
         Duke.Greet();
@@ -29,33 +14,34 @@ public class Duke {
                 }
                 Duke.process(s);
             } catch (EmptyDescription e) {
-                Duke.output(e.toString());
+                System.out.println(e);
             } catch (InvalidTypeofTask e) {
-                Duke.output(e.toString());
+                System.out.println(e);
             }
         }
         Duke.exit();
+    }
 
+    public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        Duke.initiate(s);
     }
 
     public static void process(Scanner s) throws InvalidTypeofTask, EmptyDescription {
         String input = s.nextLine();
         String[] arr = input.split(" ", 2);
-        String typeofTask = arr[0];
-        String description;
+        String TypeofTask = arr[0];
 
-        if (typeofTask.equals("bye")) {
+        if (TypeofTask.equals("bye")) {
             doExit = true;
-        } else if (typeofTask.equals("list")) {
+        } else if (TypeofTask.equals("list")) {
             Duke.list();
-        } else if (typeofTask.equals("done")) {
-            description = arr[1];
-            Duke.markAsDone(description);
-        } else if (typeofTask.equals("delete")) {
-            description = arr[1];
-            Duke.delete(description);
-        } else if (typeofTask.equals("todo") || typeofTask.equals("deadline") ||
-                        typeofTask.equals("event")){
+        } else if (TypeofTask.equals("done")) {
+            String msg = arr[1];
+            Duke.markAsDone(Integer.parseInt(msg));
+        } else if (TypeofTask.equals("todo") ||
+                TypeofTask.equals("deadline") ||
+                        TypeofTask.equals("event")){
             Duke.add(arr);
         }  else {
             throw new InvalidTypeofTask();
@@ -63,71 +49,69 @@ public class Duke {
     }
 
     public static void add(String[] arr) throws EmptyDescription {
-        String typeOfTask = arr[0];
+        String TypeOfTask = arr[0];
         if (arr[1].equals("")) {
-            throw new EmptyDescription(typeOfTask);
+            throw new EmptyDescription(TypeOfTask);
         } else {
             String msg = arr[1];
             Task newTask;
             String[] arr1;
-            if (typeOfTask.equals("todo")) {
+            if (TypeOfTask.equals("todo")) {
                 newTask = new Todo(msg);
-            } else if (typeOfTask.equals("deadline")) {
+            } else if (TypeOfTask.equals("deadline")) {
                 arr1 = msg.split("/by ");
                 newTask = new Deadline(arr1[0], arr1[1]);
             } else {
                 arr1 = msg.split("/at ");
                 newTask = new Event(arr1[0], arr1[1]);
             }
-            tasklist.add(newTask);
-            String instructions = Response.ADD.toString() + newTask + "\n" + Duke.status();
-            Duke.output(instructions);
+            lst.add(newTask);
+            System.out.println("---------------------------------------");
+            System.out.println("Got it. I 've added this task:\n" + newTask);
+            Duke.status();
+            System.out.println("---------------------------------------");
         }
     }
 
-    public static void delete(String msg) {
-        String[] arr = msg.split(" ",2);
-        int i = Integer.parseInt(arr[0]);
-
-        String instructions = Response.DELETE.toString() + tasklist.get(i - 1) + "\n" + Duke.status();
-        tasklist.remove(i - 1);
-        Duke.output(instructions);
-    }
-
-    public static void markAsDone(String msg) {
-        String[] arr = msg.split(" ", 2);
-        int i = Integer.parseInt(arr[0]);
-        tasklist.set(i - 1, tasklist.get(i - 1).setDone());
-        Duke.output(Response.DONE.toString() + tasklist.get(i - 1) + "\n");
+    public static void markAsDone(int i) {
+        lst.set(i - 1, lst.get(i - 1).setDone());
+        System.out.println("---------------------------------------");
+        System.out.println("Nice! I 've marked this task as done");
+        System.out.println(lst.get(i - 1).toString());
+        System.out.println("---------------------------------------");
     }
 
     public static void list() {
-        String msg = "";
-        for(int i = 0; i < tasklist.size(); i++) {
-            msg += (i + 1) + "." + tasklist.get(i) + "\n";
+        System.out.println("---------------------------------------");
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 0; i < lst.size(); i++) {
+           System.out.println((i + 1) + "." + lst.get(i).toString());
         }
-        Duke.output(Response.LIST.toString() + msg);
+        System.out.println("---------------------------------------");
     }
 
-    public static String status() {
-        return "Now you have " + tasklist.size() + " tasks in the list.\n";
+    public static void status() {
+        System.out.println("Now you have " + lst.size() + " tasks in the list.");
     }
 
     public static void Greet() {
-        Duke.output(Response.GREET.toString());
+        String instructions = "Hello! I'm Duke\nWhat can I do for you?";
+        Duke.output(instructions);
     }
 
     public static void echo(String msg) {
-        Duke.output(msg+ "\n");
+        String instructions = msg;
+        Duke.output(instructions);
     }
 
     public static void exit() {
-        Duke.output(Response.EXIT.toString());
+        String instructions = "Bye. Hope to see you again soon!";
+        Duke.output(instructions);
     }
 
-    public static void output(String response) {
+    public static void output(String instructions) {
         System.out.println("---------------------------------------");
-        System.out.println(response);
-        System.out.println("---------------------------------------\n");
+        System.out.println(instructions);
+        System.out.println("---------------------------------------");
     }
 }
