@@ -2,10 +2,22 @@ hi
 list
 done
 done 1
-todo abcde fgh
-deadline bobobobo dadada /by shwepsed
-event event /at event
+todo hustle
+todo
+event grinding
+event grinding /at
+event
+event grinding /at all day err day
+deadline profit
+deadline profit /by 2022
+deadline
+deadline profit /by
 list
 done 2
+done 3
+done 4
 list
+done 1
+list
+can i yolo
 bye

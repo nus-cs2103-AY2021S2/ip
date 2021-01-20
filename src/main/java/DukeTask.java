@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Creates a task with the specified description.
+     *
      * @param description The task's description.
      */
     public Task(String description) {

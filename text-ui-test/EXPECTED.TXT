@@ -8,7 +8,9 @@ Hello from
 Hello! I'm Duke
 What can I do for you?
 ------------------------------
-These are the possible commands: "list" "done" "todo" "deadline" "event"
+That is not a valid command!
+These are the possible commands:
+"list" "done" "todo" "deadline" "event"
 ------------------------------
 ------------------------------
 Your list is empty!
@@ -20,32 +22,75 @@ Your list is empty!
 Your list is empty!
 ------------------------------
 ------------------------------
-Your todo task has been added: [T][ ] abcde fgh
+Your task has been added: [T][ ] hustle
 You currently have 1 task(s) in the list.
 ------------------------------
 ------------------------------
-Your deadline task has been added: [D][ ] bobobobo dadada (by: shwepsed)
+Expected argument describing task after "todo"
+------------------------------
+------------------------------
+Expected argument "/at" specifying duration of task for "event"
+------------------------------
+------------------------------
+Expected argument "/at" specifying duration of task for "event"
+------------------------------
+------------------------------
+Expected argument describing task after "event"
+------------------------------
+------------------------------
+Your task has been added: [E][ ] grinding (at: all day err day)
 You currently have 2 task(s) in the list.
 ------------------------------
 ------------------------------
-Your event task has been added: [D][ ] event (by: event)
+Expected argument "/by" specifying deadline of task for "deadline"
+------------------------------
+------------------------------
+Your task has been added: [D][ ] profit (by: 2022)
 You currently have 3 task(s) in the list.
 ------------------------------
 ------------------------------
+Expected argument describing task after "deadline"
+------------------------------
+------------------------------
+Expected argument "/by" specifying deadline of task for "deadline"
+------------------------------
+------------------------------
 Here are the tasks in your list:
-1.[T][ ] abcde fgh
-2.[D][ ] bobobobo dadada (by: shwepsed)
-3.[D][ ] event (by: event)
+1.[T][ ] hustle
+2.[E][ ] grinding (at: all day err day)
+3.[D][ ] profit (by: 2022)
 ------------------------------
 ------------------------------
 Swee chai. It's done.
-[D][X] bobobobo dadada (by: shwepsed)
+[E][X] grinding (at: all day err day)
+------------------------------
+------------------------------
+Swee chai. It's done.
+[D][X] profit (by: 2022)
+------------------------------
+------------------------------
+The task number provided does not exist. :/
 ------------------------------
 ------------------------------
 Here are the tasks in your list:
-1.[T][ ] abcde fgh
-2.[D][X] bobobobo dadada (by: shwepsed)
-3.[D][ ] event (by: event)
+1.[T][ ] hustle
+2.[E][X] grinding (at: all day err day)
+3.[D][X] profit (by: 2022)
+------------------------------
+------------------------------
+Swee chai. It's done.
+[T][X] hustle
+------------------------------
+------------------------------
+Here are the tasks in your list:
+1.[T][X] hustle
+2.[E][X] grinding (at: all day err day)
+3.[D][X] profit (by: 2022)
+------------------------------
+------------------------------
+That is not a valid command!
+These are the possible commands:
+"list" "done" "todo" "deadline" "event"
 ------------------------------
 ------------------------------
 Bye. Hope to see you again soon!
