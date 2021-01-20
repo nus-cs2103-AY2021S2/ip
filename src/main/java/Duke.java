@@ -24,17 +24,105 @@ public class Duke {
         while (!signalToExit && input.hasNextLine()) {
             String command = input.nextLine();
             if (command.startsWith("list")) {
-                printList(myDuke);
+                if (command.length() != 4) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    printList(myDuke);
+                }
             } else if (command.startsWith("bye")) {
-                signalToExit = true;
+                if (command.length() != 3) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    signalToExit = true;
+                }
             } else if (command.startsWith("done ")) {
-                markTaskDone(myDuke, Integer.parseInt(command.substring(5)));
+                if (command.length() == 5 || !isNumeric(command.substring(5))) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else if (Integer.parseInt(command.substring(5)) > myDuke.listToDo.size()) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    markTaskDone(myDuke, Integer.parseInt(command.substring(5)));
+                }
+            } else if (command.startsWith("delete ")) {
+                if (command.length() == 7 || !isNumeric(command.substring(7))) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else if (Integer.parseInt(command.substring(7)) > myDuke.listToDo.size()) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    deleteTask(myDuke, Integer.parseInt(command.substring(7)));
+                }
             } else if (command.startsWith("todo ")) {
-                addToList(myDuke, command.substring(5));
+                if (command.length() == 5) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    addToList(myDuke, command.substring(5));
+                }
             } else if (command.startsWith("deadline ")) {
-                addToList(myDuke, command.substring(9));
+                if (command.length() == 9 || !command.contains("/by ")) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else if (command.indexOf("/by ") + 4 == command.length()) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    addToList(myDuke, command.substring(9));
+                }
             } else if (command.startsWith("event ")) {
-                addToList(myDuke, command.substring(6));
+                if (command.length() == 6 || !command.contains("/at ")) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else if (command.indexOf("/at ") + 4 == command.length()) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    addToList(myDuke, command.substring(6));
+                }
+            } else {
+                try {
+                    executeFalseCommand(command);
+                } catch (DukeException err) {
+                    printErrMsg(err);
+                }
             }
             if (command.equals("bye")) {
                 echoBye();
@@ -82,11 +170,57 @@ public class Duke {
 
     public static void markTaskDone(Duke duke, int index) {
         System.out.println("    ____________________________________________________________");
-        Task task = duke.listToDo.get(index-1);
+        Task task = duke.listToDo.get(index - 1);
         task.markAsDone();
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + task.printTask());
         System.out.println("    ____________________________________________________________\n");
+    }
+
+    public static void deleteTask(Duke duke, int index) {
+        System.out.println("    ____________________________________________________________");
+        Task task = duke.listToDo.get(index - 1);
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("       " + task.printTask());
+        System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size() - 1);
+        System.out.println("    ____________________________________________________________\n");
+        duke.listToDo.remove(index - 1);
+    }
+
+    public static void executeFalseCommand(String command) throws DukeException {
+        if (command.startsWith("list")) {
+            throw new DukeException("     list command should not have body, Sir!");
+        } else if (command.startsWith("bye")) {
+            throw new DukeException("     bye command should not have body, Sir!");
+        } else if (command.startsWith("done ")) {
+            throw new DukeException("     No body or wrong body format or unvalid number for done command, Sir!");
+        } else if (command.startsWith("delete ")) {
+            throw new DukeException("     No body or wrong body format or unvalid number for delete command, Sir!");
+        } else if (command.startsWith("todo ")) {
+            throw new DukeException("     No body detected for todo command, Sir!");
+        } else if (command.startsWith("deadline ")) {
+            throw new DukeException("     no body detected or no dlTime detected for deadline command, Sir!");
+        } else if (command.startsWith("event ")) {
+            throw new DukeException("     no body detected or no eTime detected for Event command, Sir!");
+        } else {
+            throw new DukeException("     Invalid command format");
+        }
+    }
+
+    public static void printErrMsg(DukeException err) {
+        System.out.println("    ____________________________________________________________\n" + err.getMessage() + "\n" + "    ____________________________________________________________\n");
+    }
+
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double randomNo = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }
 
