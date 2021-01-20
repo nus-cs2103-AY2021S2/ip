@@ -8,7 +8,7 @@ public class Duke {
         ui.greetings();
     }
 
-    //Uses the UI and runs against variuos conditions
+    //Uses the UI and runs against various conditions
     public void process () throws DukeException {
         String command;
         while (true) {
