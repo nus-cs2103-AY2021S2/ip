@@ -2,10 +2,11 @@ import java.util.*;
 
 public class Duke {
 
-	private ArrayList<String> store = new ArrayList<>();
+	private ArrayList<Task> store = new ArrayList<>();
 
 	public void addText (String text) {
-		this.store.add(text);
+		Task t = new Task(text);
+		this.store.add(t);
 	}
 
 	void greet() {
@@ -20,21 +21,27 @@ public class Duke {
 
     void chat() {
         this.greet();
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
         while (!(input.equals("bye"))) {
         	if (input.equals("list")) {
+        		System.out.println("Here are the tasks in your list:");
         		int counter = 1;
-        		for (String elem: this.store) {
-        			System.out.println(counter + ". " + elem);
+        		for (Task elem: this.store) {
+        			System.out.println(counter + ". " + "[" + elem.getStatusIcon() + "] " + elem.toString());
         			counter += 1;
         		}
+        	} else if (input.split(" ")[0].equals("done")) {
+        		int tasknumber = Integer.valueOf(input.split(" ")[1]);
+        		this.store.get(tasknumber -1).markAsDone();
+        		System.out.println("Nice! I've marked this task as done:");
+        		System.out.println("[" + this.store.get(tasknumber -1).getStatusIcon() + "] " + this.store.get(tasknumber -1).toString());
         	} else {
 	            this.addText(input);
 	            System.out.println("added: " + input);
 	        }
-	        in = new Scanner(System.in);
-	        input = in.nextLine();
+	        sc = new Scanner(System.in);
+	        input = sc.nextLine();
         }
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
