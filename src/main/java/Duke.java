@@ -13,7 +13,7 @@ public class Duke {
         System.out.println("\n~ Hello! I am Zee :) ~\n"
                 + logo + "\n"
                 + "~ What can I do for you today? ~\n");
-        List<String[]> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         while(!command.equals("bye")) {
@@ -21,12 +21,8 @@ public class Duke {
                 int count = 1;
                 System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println("Here are the tasks in your list:");
-                for (String[] task : tasks) {
-                    if (task[1].equals("done")) {
-                        System.out.println("  " + count + ".[X] " + task[0]);
-                    } else {
-                        System.out.println("  " + count + ".[ ] " + task[0]);
-                    }
+                for (Task task : tasks) {
+                        System.out.println("  " + count + ".[" + task.getStatusIcon() +"] " + task.getDescription());
                     count++;
                 }
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
@@ -34,12 +30,12 @@ public class Duke {
                 int index = Integer.parseInt(command.split(" ")[1]) - 1;
                 System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                 System.out.println("Good job, I have marked this task as done!");
-                System.out.println("[X] " + tasks.get(index)[0]);
+                System.out.println("[X] " + tasks.get(index).getDescription());
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-                tasks.set(index, new String[]{tasks.get(index)[0], "done"});
+                tasks.get(index).markAsDone();
             } else {
                 System.out.println("\n~ added: " + command + " ~\n");
-                tasks.add(new String[]{command, "not done"});
+                tasks.add(new Task(command));
             }
             command = scanner.nextLine();
         }
