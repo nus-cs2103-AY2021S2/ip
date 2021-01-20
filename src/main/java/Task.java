@@ -1,6 +1,10 @@
-public class Task implements Cloneable {
-    private final String name;
-    private final boolean done;
+import java.util.HashMap;
+import java.util.Map;
+
+public abstract class Task implements Cloneable {
+
+    protected final String name;
+    protected final boolean done;
 
     public Task(String name) {
         this.name = name;
@@ -20,18 +24,13 @@ public class Task implements Cloneable {
         return this.done;
     }
 
-    public Task setDone(boolean done) {
-        return new Task(this.name, done);
-    }
+    public abstract Task setDone(boolean done);
+
+    @Override
+    protected abstract Task clone();
 
     @Override
     public String toString() {
         return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.name);
     }
-
-    @Override
-    protected Task clone() {
-        return new Task(this.name, this.done);
-    }
-
 }

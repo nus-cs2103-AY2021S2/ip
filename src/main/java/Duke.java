@@ -11,6 +11,8 @@ public class Duke {
 
     private final String GREETING = "Hello :)";
     private final String BYE = "See you next time :)";
+    private final String ADD_TASK = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
+    private final String TASK_DONE = "Nice! I've marked this task as done:\n%s";
 
     private final String currentMessage;
     private final List<Task> store;
@@ -38,22 +40,36 @@ public class Duke {
                     .mapToObj(i -> (i + 1) + ". " + this.store.get(i))
                     .collect(Collectors.joining("\n"));
             newAgent = new Duke(response, this.store, false);
-        } else if (tokens[0].equals("add")) {
+        } else if (tokens[0].equals("todo") || tokens[0].equals("deadline") || tokens[0].equals("event")) {
             List<Task> newStore = new ArrayList<>();
             for (Task t : this.store) {
                 newStore.add(t.clone());
             }
-            Task t = new Task(input.substring(4), false);
+            Task t = null;
+            switch (tokens[0]) {
+                case "todo":
+                    t = new TaskTodo(input.substring("todo".length() + 1), false);
+                    break;
+                case "deadline":
+                    String deadline = input.substring(input.indexOf("/by ") + 4);
+                    t = new TaskDeadline(input.substring("deadline".length() + 1, input.indexOf(" /by ")),false, deadline);
+                    break;
+                case "event":
+                    String time = input.substring(input.indexOf("/at ") + 4);
+                    t = new TaskEvent(input.substring("event".length() + 1, input.indexOf(" /at ")), false, time);
+                    break;
+            }
             newStore.add(t);
-            String response = "added: " + input.substring(4);
+            String response = String.format(ADD_TASK, t, newStore.size());
             newAgent = new Duke(response, newStore, false);
         } else if (tokens[0].equals("done")) {
             List<Task> newStore = new ArrayList<>();
             String response = "";
+            Task t;
             for (int i = 0; i <  this.store.size(); i++) {
                 if (i + 1 == Integer.parseInt(tokens[1])) {
                     newStore.add(this.store.get(i).setDone(true));
-                    response = String.format("Nice! I've marked this task as done:\n%s", newStore.get(i));
+                    response = String.format(TASK_DONE, newStore.get(i));
                 } else {
                     newStore.add(this.store.get(i).clone());
                 }
