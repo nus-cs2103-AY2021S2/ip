@@ -1,5 +1,5 @@
 public enum Task_State {
-    NOTDONE{
+    NOTDONE {
         @Override
         public String toString() {
             return " ";
