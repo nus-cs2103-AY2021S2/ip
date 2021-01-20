@@ -3,10 +3,12 @@ import java.util.*;
 class Task {
     private boolean done;
     private String taskName;
+    private String type;
 
-    public Task(String taskName) {
+    public Task(String taskName, String type) {
         this.done = false;
         this.taskName = taskName;
+        this.type = type;
     }
 
     public void markAsDone() {
@@ -15,10 +17,18 @@ class Task {
 
     @Override
     public String toString() {
+        String doneString = "[ ]";
+        String typeString = "[ ]";
         if (done) {
-            return "[X] " + taskName;
-        } else {
-            return "[ ] " + taskName;
+            doneString = "[X]";
         }
+        if (this.type.equals("todo")) {
+            typeString = "[T]";
+        } else if (this.type.equals("deadline")) {
+            typeString = "[D]";
+        } else if (this.type.equals("event")) {
+            typeString = "[E]";
+        } else {}
+        return typeString + doneString + " " + taskName;
     }
 }

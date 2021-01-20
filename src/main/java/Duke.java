@@ -28,15 +28,18 @@ public class Duke {
                 int taskNumber = Integer.parseInt(sc.next()) - 1;
                 completeTask(taskNumber);
             } else {
-                addItem(text);
+                String taskName = sc.next();
+                addItem(taskName, text);
             }
         }
         sc.close();
     }
 
-    public static void addItem(String echoedText) {
-        tasks.add(new Task(echoedText));
-        System.out.println(line + "added: " + echoedText + "\n" + line);
+    public static void addItem(String echoedText, String type) {
+        Task currentTask = new Task(echoedText, type);
+        tasks.add(currentTask);
+        System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
+                 currentTask + "\n" + line);
     }
 
     public static void goodbye() {
