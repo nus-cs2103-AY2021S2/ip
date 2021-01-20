@@ -58,6 +58,13 @@ public class Duke {
                         System.out.println("The following event item has been added:\n" +
                                 formatOrderedPrint(store,-1));
                         break;
+                    case "delete":
+                        int deleteIndex = Integer.valueOf(tokens[1]) - 1;
+                        System.out.println("Deleting the following Task:");
+                        System.out.println(formatOrderedPrint(store, deleteIndex));
+                        store.remove(deleteIndex);
+                        System.out.println("Done");
+                        break;
                     default:
                         throw new InvalidCommandException(tokens[0]);
                 }
