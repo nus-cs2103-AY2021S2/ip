@@ -70,6 +70,21 @@ public class Duke {
                 case DONE:
                     completeTask(otherInfo);
                     break;
+                case TODO:
+                    addTask(new Todo(otherInfo));
+                    break;
+                case EVENT:
+                    String[] temp = otherInfo.split("/at",2);
+                    String description = temp[0].trim();
+                    String at = temp[1].trim();
+                    addTask(new Event(description, at));
+                    break;
+                case DEADLINE:
+                    temp = otherInfo.split("/by",2);
+                    description = temp[0].trim();
+                    String by = temp[1].trim();
+                    addTask(new Deadline(description, by));
+                    break;
             }
         }
         catch (IllegalArgumentException e) {
@@ -99,9 +114,9 @@ public class Duke {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             res.append(indent)
-                    .append(i+1 + ".")
-                    .append("[" + task.getStatusIcon() + "] ")
-                    .append(task.getDescription())
+                    .append(i+1)
+                    .append(".")
+                    .append(task.toString())
                     .append("\n");
         }
         System.out.print(res.toString());
@@ -136,9 +151,7 @@ public class Duke {
 
         String res = indent +
                 "Wonderful! You have completed this task:\n" +
-                indent +
-                "  [" + task.getStatusIcon() + "] " +
-                task.getDescription();
+                indent + "  " + task.toString();
         System.out.println(res);
     }
 
@@ -149,6 +162,15 @@ public class Duke {
         String res = indent +
                 "Added: " +
                 taskDescription;
+        System.out.println(res);
+    }
+
+    private static void addTask(Task newTask) {
+        tasks.add(newTask);
+
+        String res = indent + "Roger that! Added new task:\n" +
+                indent + " " + newTask.toString() + "\n" +
+                indent + "Now you have " + tasks.size() + " tasks in the list.";
         System.out.println(res);
     }
 }
