@@ -9,10 +9,11 @@ public class Format {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    public static final void WRONGFORMAT() {
-        System.out.println("Wrong Format Liao");
-    }
-
+    public static final String EMPTYBODY = "Walao!Description empty!";
+    public static final String SLASHERR = "Too many / or no /, only 1 / allow for dates and time";
+    public static final String ARGSERR = "TOO MANY OR TOO FEW ARGUMENTS";
+    public static final String MISSINGERR = "Missing description or dates";
+    public static final String COMMANDERR = "I DON'T KNOW WHAT U SAYING";
     public static final String farewell = UPPER
             + "I zao liao, don't miss me."
             + LOWER;

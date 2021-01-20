@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         Scanner sc = new Scanner(System.in);
         System.out.println(Format.LOGO);
@@ -20,7 +20,7 @@ public class Duke {
         System.out.println(Format.farewell);
     }
 
-    public static void handleDone(String[] line) {
+    public static void handleDone(String[] line) throws DukeException {
         if (line.length == 2) {
             String arg = line[1].replaceAll("[^0-9]", "");
             try {
@@ -30,52 +30,58 @@ public class Duke {
                 System.out.println("Please lah, key in number");
             }
         } else {
-            Format.WRONGFORMAT();
+            throw new DukeException(Format.ARGSERR);
         }
     }
 
-    public static void handleToDo(String[] line, String message) {
+    public static void handleToDo(String[] line, String message) throws DukeException {
         if (line.length > 1) {
             String msg = message.replaceAll(line[0], "")
                     .trim();
             Todo todo = new Todo(msg);
             System.out.println(Format.biggerBox(todo));
         } else {
-            Format.WRONGFORMAT();
+            throw new DukeException(Format.ARGSERR);
         }
     }
-    public static void handleDeadline(String[] line, String message) {
+    public static void handleDeadline(String[] line, String message) throws DukeException {
         if (line.length > 2) {
             String[] comments = message.trim().toLowerCase().split("/");
             String msg = comments[0].replaceAll(line[0], "").trim();
             if (comments.length == 2) {
+                if (msg.equals("")) {
+                    throw new DukeException(Format.EMPTYBODY);
+                }
                 Deadlines deadline = new Deadlines(msg, comments[1]);
                 System.out.println(Format.biggerBox(deadline));
             } else {
-                Format.WRONGFORMAT();
+                throw new DukeException(Format.SLASHERR);
             }
 
         } else {
-            Format.WRONGFORMAT();
+            throw new DukeException(Format.MISSINGERR);
         }
     }
 
-    public static void handleEvent(String[] line, String message) {
+    public static void handleEvent(String[] line, String message) throws DukeException {
         if (line.length > 2) {
             String[] comments = message.trim().toLowerCase().split("/");
             String msg = comments[0].replaceAll(line[0], "").trim();
             if (comments.length == 2) {
+                if (msg.equals("")) {
+                    throw new DukeException(Format.EMPTYBODY);
+                }
                 Event event = new Event(msg, comments[1]);
                 System.out.println(Format.biggerBox(event));
             } else {
-                Format.WRONGFORMAT();
+                throw new DukeException(Format.SLASHERR);
             }
         } else {
-            Format.WRONGFORMAT();
+            throw new DukeException(Format.MISSINGERR);
         }
     }
 
-    public static boolean inputHandler(String message) {
+    public static boolean inputHandler(String message) throws DukeException {
         String[] line = message.trim().toLowerCase().split(" ");
         String command = line[0];
         if (command.equals("bye")) {
@@ -92,8 +98,7 @@ public class Duke {
             } else if (command.equals("event")){
                 handleEvent(line, message);
             } else {
-                Task task = new Task(message);
-                System.out.println(Format.chatBox("Added: " + message));
+                throw new DukeException(Format.COMMANDERR);
             }
             return false;
         }
