@@ -29,7 +29,7 @@ public class Duke {
         int len = this.list.size();
                 for(int i = 0; i < len; i++){
                     int index = i + 1;
-                    System.out.println(index + "." + this.list.get(i).getDescription());
+                    System.out.println(index + "." + this.list.get(i).toString());
                 }
     }
 
@@ -37,7 +37,7 @@ public class Duke {
 
         Task t = this.list.get(index);
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(t.getDescription());
+        System.out.println(t.toString());
         this.list.set(index, t.markAsDone());
     }
     public void bye(){

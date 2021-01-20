@@ -23,7 +23,7 @@ public class Task {
 
     public Task markAsDone(){
         String description = this.getDescription();
-        //System.out.println(" Nice! I've marked this task as done: ");
+
         return new Task(description,true);
     }
 
@@ -31,5 +31,9 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+
+    public String toString(){
+        return "[" + this.getStatusIcon() + "]" + this.getDescription();
+    }
 
 }
