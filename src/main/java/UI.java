@@ -17,7 +17,7 @@ public class UI {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello this is\n" + logo + "\nHow may I help you?");
+        System.out.println(logo + "\nHello this is Duke\nHow may I help you?");
     }
 
     public void goodbye(){
