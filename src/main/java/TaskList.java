@@ -9,9 +9,30 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Add task to list of tasks then increment number of tasks stored
+     * @param task task to be added to list
+     */
     public void addTaskToList(Task task) {
         taskList.add(task);
         numTasks++;
+    }
+
+    /**
+     * Get number of tasks stored in task list
+     * @return num of tasks in list
+     */
+    public int getNumTasks() {
+        return numTasks;
+    }
+
+    /**
+     * return nth task starting at index 1
+     * @param i the index of the task to be retrieved
+     * @return the Task object
+     */
+    public Task getNthTask(int i){
+        return this.taskList.get(i-1);
     }
 
     @Override

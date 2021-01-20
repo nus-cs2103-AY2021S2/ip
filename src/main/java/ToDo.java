@@ -1,18 +1,15 @@
-public class ToDo implements Task {
-
-    private String taskDescription;
+public class ToDo extends Task {
 
     public ToDo(String taskDescription) {
         this.taskDescription = taskDescription;
     }
 
     @Override
-    public String getTaskDescription() {
-        return this.taskDescription;
-    }
-
-    @Override
     public String toString() {
-        return this.taskDescription;
+        if (isDone) {
+            return "[X] " + this.taskDescription;
+        } else {
+            return "[ ] " + this.taskDescription;
+        }
     }
 }
