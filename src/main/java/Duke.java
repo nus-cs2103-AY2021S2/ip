@@ -1,5 +1,9 @@
 import java.util.*;
 
+enum Call {
+    DELETE, TODO, EVENT, DEADLINE, LIST, DONE;
+}
+
 public class Duke {
     static String input = " ";
     static List<Task> list = new ArrayList<>();
@@ -15,82 +19,140 @@ public class Duke {
         System.out.println(greet);
 
         Scanner sc = new Scanner(System.in);
+        System.out.println(sc.hasNext());
         input = sc.nextLine();
+        cleanInput();
+        Call call = Call.DONE;
+        while (!input.contains("bye")) {
 
-        while (!(input.equals("bye")) && !(input.equals("Bye"))) {
             if(input.contains("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i < list.size(); i++) {
-                    Task current = list.get(i);
-                    if (current.completed()) {
-                        System.out.println(i+1 + ". " + list.get(i));
-                    } else {
-                        System.out.println(i+1 + ". " + list.get(i));
-                    }
-                }
+                call = Call.LIST;
             } else if (input.contains("done")){
-                 System.out.println(Duke.done());
+                call = Call.DONE;
+            } else if (input.contains("todo")) {
+                call = Call.TODO;
+            } else if (input.contains("event")) {
+                call = Call.EVENT;
+            } else if (input.contains("deadline")) {
+                call = Call.DEADLINE;
+            } else if (input.contains("delete")) {
+                call = Call.DELETE;
             } else {
-                System.out.println(Duke.add());
+                if(sc.hasNextLine()) {
+                    input = sc.nextLine();
+                } else {
+                    throw new Exception("Please enter a valid command!");
+                }
+                continue;
             }
-            input = sc.nextLine();
-            input = input.stripLeading();
+            switch (call) {
+                case LIST:
+                    commandList();
+                    break;
+                case DONE:
+                    commandDone();
+                    break;
+                case TODO:
+                    commandTodo();
+                    break;
+                case DEADLINE:
+                    commandDeadline();
+                    break;
+                case EVENT:
+                    commandEvent();
+                    break;
+                case DELETE:
+                    commandDelete();
+                    break;
+            }
+
+            System.out.println(sc.hasNext());
+            input = sc.next();
+            cleanInput();
+            System.out.println(input);
+
         }
 
+        System.out.println("input was: " + input);
+        System.out.println("input is valid: " + validCommand());
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
     }
 
-    static String done() {
-        String value = input.split(" ")[1];
-        int val = Integer.parseInt(value);
-        list.get(val - 1).isCompleted();
-        return "Nice! I've marked this task as done:\n " + list.get(val - 1);
+    static void commandDone() throws Exception {
+        try {
+            String value = input.split(" ")[1];
+            System.out.println(value);
+            int val = Integer.parseInt(value);
+            list.get(val - 1).isCompleted();
+            System.out.println("Nice! I've marked this task as done:\n " + list.get(val - 1));
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
 
     static String addString(Task t) {
         return "Got it. I've added this task: \n  " + t.toString() + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
-    static String add() throws Exception {
-        try {
+    static void cleanInput() {
+//        input = input.strip();
+        input = input.replaceAll("\n", "");
+        input = input.toLowerCase();
+    }
 
-            if (input.contains("todo")) {
-                String task = input.replaceFirst("todo", "");
-                task = task.stripTrailing();
-                if (task.isEmpty()) {
-                    throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                Todo t1 = new Todo(task);
-                list.add(t1);
-                return addString(t1);
-            } else if (input.contains("deadline")) {
-                String deadline = input.replaceFirst("deadline", "");
-                deadline = deadline.stripLeading();
-                String[] deadlineArr = deadline.split("/");
-                Deadline current = new Deadline(deadlineArr[0], deadlineArr[1].replaceFirst("by ", ""));
-                list.add(current);
-                return addString(current);
-            } else if (input.contains("event")) {
-                String eventDetails = input.replaceFirst("event", "");
-                eventDetails = eventDetails.stripLeading();
-                String[] eventDeats = eventDetails.split("/");
-                Event current = new Event(eventDeats[0], eventDeats[1].replaceFirst("at ", ""));
-                list.add(current);
-                return addString(current);
-            } else if (input.contains("delete")) {
-                String value = input.replaceFirst("delete", "");
-                value = value.strip();
-                int val = Integer.parseInt(value);
-                Task delete = list.get(val - 1);
-                list.remove(val - 1);
-                return "Noted. I've removed this task: \n " + delete + "\nNow you have" + list.size() + "tasks in the list.";
-            } else {
-                throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new Exception("☹ OOPS!!! The description of task cannot be empty.");
+    static void commandTodo() throws Exception{
+        System.out.println(input);
+        String task = input.replaceFirst("todo", "");
+        System.out.println("task was: " + task);
+        task = task.stripTrailing();
+        if (task.isEmpty()) {
+            throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
         }
+        Todo t1 = new Todo(task);
+        list.add(t1);
+        System.out.println(addString(t1));
+    }
+
+    static void commandDeadline() {
+        String deadline = input.replaceFirst("deadline", "");
+        deadline = deadline.stripLeading();
+        String[] deadlineArr = deadline.split("/");
+        Deadline current = new Deadline(deadlineArr[0], deadlineArr[1].replaceFirst("by ", ""));
+        list.add(current);
+        System.out.println(addString(current));
+    }
+
+    static void commandEvent() {
+        String eventDetails = input.replaceFirst("event", "");
+        eventDetails = eventDetails.stripLeading();
+        String[] eventDeats = eventDetails.split("/");
+        Event current = new Event(eventDeats[0], eventDeats[1].replaceFirst("at ", ""));
+        list.add(current);
+        System.out.println(addString(current));
+    }
+
+    static void commandDelete() {
+        String value = input.replaceFirst("delete", "");
+        value = value.strip();
+        int val = Integer.parseInt(value);
+        Task delete = list.get(val - 1);
+        list.remove(val - 1);
+        System.out.println("Noted. I've removed this task: \n " + delete + "\nNow you have " + list.size() + " tasks in the list.");
+    }
+
+    static void commandList() {
+        System.out.println("Here are the tasks in your list:");
+        for(int i = 0; i < list.size(); i++) {
+            Task current = list.get(i);
+            System.out.println(i+1 + ". " + list.get(i));
+        }
+    }
+
+    static boolean validCommand() {
+        return input.contains("delete") || input.contains("event") || input.contains("done") ||
+                input.contains("todo") || input.contains("deadline") || input.contains("list");
     }
 }
 
@@ -164,3 +226,5 @@ class Event extends Task {
         return "[E]" + this.completedBox() + this.task + "(at: " + this.date + ")";
     }
 }
+
+
