@@ -14,7 +14,7 @@ public class Duke {
                 dukeBot.handleCommand(command);
             } catch(DukeException ex) {
                 // Echoes out reason for invalid inputs
-                dukeBot.respondToCommand(ex.getMessage());
+                dukeBot.respondToCommand(ex.toString());
             }
         }
     }

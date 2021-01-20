@@ -36,25 +36,22 @@ public class DukeBot {
 
         // Throws exception for ToDo, Event and Deadline tasks
         if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
-            String errMsg;
             if (taskInfo.equals(command)) {
                 //Empty description
-                errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
-                throw new DukeException(errMsg);
+                throw new DukeException(command, DukeExceptionType.EMPTY_DESCRIPTION);
             }
         }
 
         // Throws exception for done and delete commands
         if (command.equals("done") || command.equals("delete")) {
-            String errMsg;
             if (taskInfo.equals(command)) {
-                // Empty selection
-                errMsg = "☹ OOPS!!! The selection for " + command + " cannot be empty.";
-                throw new DukeException(errMsg);
+                throw new DukeException(command, DukeExceptionType.EMPTY_SELECTION);
             } else if (!isNumeric(taskInfo)) {
                 // Selection not numeric
-                errMsg = "☹ OOPS!!! The selection for " + command + " should be a valid Integer.";
-                throw new DukeException(errMsg);
+                throw new DukeException(command, DukeExceptionType.INVALID_INTEGER);
+            } else if (Integer.parseInt(taskInfo) > taskList.size() || Integer.parseInt(taskInfo) <= 0) {
+                // Selection out of taskList range
+                throw new DukeException(command, DukeExceptionType.SELECTION_EXCEED_RANGE);
             }
         }
 
@@ -82,7 +79,7 @@ public class DukeBot {
                 todoProcess(taskInfo);
                 break;
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
         }
 
         respondToCommand(commandOutput);
