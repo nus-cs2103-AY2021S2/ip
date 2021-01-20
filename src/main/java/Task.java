@@ -17,4 +17,9 @@ public class Task {
     public String getTaskName(){
         return this.task;
     }
+
+    @Override
+    public String toString(){
+        return this.task;
+    }
 }
