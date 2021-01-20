@@ -1,103 +1,133 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    public static void addLine() {
-        System.out.println("    ------------------------------------------------------------------------------------------------------");
-    }
-
-    public static void main(String[] args) {
-        Task[] inputArr = new Task[100];
+    public static void main(String[] args) throws DukeException {
+        ArrayList<Task> inputArr = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        addLine();
-        System.out.println("    Hello! I'm Duke\n    What can I do for you?");
-        addLine();
-        System.out.println();
         int n = 0;
-        String dateTime, taskDesc = "";
+        int taskNum = 0;
+        String dateTime = "", taskDesc = "";
+        ArrayList<String> validInputs = new ArrayList<>(Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete"));
+        Output.printWelcomeMsg();
 
-        while(true) {
+        while(sc.hasNext()) {
             String input = sc.next();
+            try {
+                DukeException.validInputHandler(validInputs, input);
+            } catch (DukeException e) {
+                Output.printErrorMsg(e);
+                continue;
+            }
             switch(input) {
                 case "bye":
                     break;
                 case "list":
-                    addLine();
+                    try {
+                        DukeException.listHandler(n);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    }
+                    Output.addLine();
                     for(int i = 1; i <= n; i++) {
-                        Task task = inputArr[i - 1];
+                        Task task = inputArr.get(i - 1);
                         System.out.println("    " + i + ". " + "[" + task.getType() + "]" + "[" + task.getStatusIcon() + "] " + task.getDescription());
                     }
-                    addLine();
+                    Output.addLine();
                     System.out.println();
                     break;
                 case "done":
-                    int taskNum = sc.nextInt();
-                    Task task = inputArr[taskNum - 1];
-                    task.toggleStatus();
+                    String temp = sc.nextLine();
+                    taskNum = temp.equals("") ? 0 : Integer.parseInt(temp.substring(1));
+                    try {
+                        DukeException.doneHandler(taskNum, n);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    }
 
-                    addLine();
-                    System.out.println("    Nice! I've marked this task as done:");
-                    System.out.println("      " + "[" + task.getStatusIcon() + "] " + task.getDescription());
-                    addLine();
-                    System.out.println();
+                    Task done = inputArr.get(taskNum - 1);
+                    done.toggleStatus();
+
+                    Output.printDoneMsg(done.getStatusIcon(), done.getDescription());
                     break;
                 case "todo":
                     taskDesc = sc.nextLine();
+                    try {
+                        DukeException.taskHandler(taskDesc);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    }
                     Todo todo = new Todo(taskDesc);
-                    inputArr[n] = todo;
+                    inputArr.add(n, todo);
                     n++;
-
-                    addLine();
-                    System.out.println("    Got it. I've added this task:");
-                    System.out.println("      " + "[T]" + "[" + todo.getStatusIcon() + "] " + todo.getDescription());
-                    System.out.println("    Now you have " + n + " tasks in the list.");
-                    addLine();
-                    System.out.println();
+                    Output.printTodoMsg(todo.getStatusIcon(), todo.getDescription(), n);
                     break;
                 case "deadline":
                     taskDesc = sc.nextLine();
-                    dateTime = taskDesc.split("/")[1];
-                    taskDesc = taskDesc.split("/")[0] + "(by: " + dateTime.substring(3) + ")";
+                    try {
+                        DukeException.taskHandler(taskDesc);
+                        DukeException.dateHandler(taskDesc.split(" /").length);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    } catch (NullPointerException np) {
+                        Output.printErrorMsg(np);
+                        continue;
+                    }
+                    dateTime = taskDesc.split(" /by ")[1];
+                    taskDesc = taskDesc.split("/")[0] + " (by: " + dateTime + ")";
                     Deadline deadline = new Deadline(taskDesc);
-                    inputArr[n] = deadline;
+                    inputArr.add(n, deadline);
                     n++;
 
-                    addLine();
-                    System.out.println("    Got it. I've added this task:");
-                    System.out.println("      " + "[D]" + "[" + deadline.getStatusIcon() + "] " + deadline.getDescription());
-                    System.out.println("    Now you have " + n + " tasks in the list.");
-                    addLine();
-                    System.out.println();
+                    Output.printDeadlineMsg(deadline.getStatusIcon(), deadline.getDescription(), n);
                     break;
                 case "event":
                     taskDesc = sc.nextLine();
-                    dateTime = taskDesc.split("/")[1];
-                    taskDesc = taskDesc.split("/")[0] + "(at: " + dateTime.substring(3) + ")";
+                    try {
+                        DukeException.taskHandler(taskDesc);
+                        DukeException.dateHandler(taskDesc.split(" /").length);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    }
+                    dateTime = taskDesc.split(" /at ")[1];
+                    taskDesc = taskDesc.split(" /")[0] + " (at: " + dateTime + ")";
                     Event event = new Event(taskDesc);
-                    inputArr[n] = event;
+                    inputArr.add(n, event);
                     n++;
 
-                    addLine();
-                    System.out.println("    Got it. I've added this task:");
-                    System.out.println("      " + "[D]" + "[" + event.getStatusIcon() + "] " + event.getDescription());
-                    System.out.println("    Now you have " + n + " tasks in the list.");
-                    addLine();
-                    System.out.println();
+                    Output.printEventMsg(event.getStatusIcon(), event.getDescription(), n);
+                    break;
+                case "delete":
+                    String delete = sc.nextLine();
+                    taskNum = delete.equals("") ? 0 : Integer.parseInt(delete.substring(1));
+                    try {
+                        DukeException.deleteHandler(taskNum, n);
+                    } catch (DukeException e) {
+                        Output.printErrorMsg(e);
+                        continue;
+                    }
+                    taskDesc = taskDesc.split(" /")[0] + "(at: " + dateTime.substring(3) + ")";
+                    Task deleteTask = inputArr.get(taskNum - 1);
+                    inputArr.remove(taskNum - 1);
+                    n--;
+
+                    Output.printDeleteMsg(deleteTask.getStatusIcon(), deleteTask.getDescription(), n);
                     break;
                 default:
-                    inputArr[n] = new Task(taskDesc, "");
+                    inputArr.set(n, new Task(taskDesc, ""));
                     n++;
-                    addLine();
-                    System.out.println("    added: " + input);
-                    addLine();
-                    System.out.println();
+                    Output.printAddedMsg(input);
                     break;
             }
             if(input.equals("bye")) break;
 
         }
-        addLine();
-        System.out.println("    Bye. Hope to see you again soon!");
-        addLine();
-        System.out.println();
+        Output.printByeMsg();
     }
 }
