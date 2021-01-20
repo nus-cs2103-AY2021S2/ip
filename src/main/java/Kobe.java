@@ -17,51 +17,68 @@ public class Kobe {
 
         System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            //Read the whole line, dissect each command word, including the condition after "/"
-            String command = sc.nextLine();
-            String[] commandArr = command.split(" ");
-            String text = commandArr[0];
 
-            if (text.equals("bye")) {
-                goodbye();
-                break;
-            } else if (text.equals("list")) {
-                showList();
-            } else if (text.equals("done")) {
-                int taskNumber = Integer.parseInt(commandArr[1]) - 1;
-                completeTask(taskNumber);
-            } else {
-                String taskName = "";
-                String type = text;
-                String condition = "";
+        try {
+            while (sc.hasNext()) {
+                //Read the whole line, dissect each command word, including the condition after "/"
+                String command = sc.nextLine();
+                String[] commandArr = command.split(" ");
+                String text = commandArr[0];
 
-
-                String[] commandArrFirst2Parts = command.split(" ", 2);
-                String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
-
-//                //Check for correct splitting
-//                System.out.println("Second2Parts: " + Arrays.toString(commandArrSecond2Parts));
+                if (text.equals("bye")) {
+                    goodbye();
+                    break;
+                } else if (text.equals("list")) {
+                    showList();
+                } else if (text.equals("done")) {
+                    int taskNumber = Integer.parseInt(commandArr[1]) - 1;
+                    completeTask(taskNumber);
+                } else {
+                    String taskName = "";
+                    String type = text;
+                    String condition = "";
 
 
-                taskName = commandArrSecond2Parts[0];
-                //If the array is in 2 parts, there is a condition, add that
-                if (commandArrSecond2Parts.length > 1) {
-                    condition = commandArrSecond2Parts[1];
+                    String[] commandArrFirst2Parts = command.split(" ", 2);
+
+////                    Check for correct splitting
+//                    System.out.println("First2Parts: " + Arrays.toString(commandArrFirst2Parts));
+                    String firstWord = commandArrFirst2Parts[0];
+//
+                    if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
+                        String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
+                        throw new CustomExceptions.IncompleteDecriptionException(errMessage);
+                    }
+                    if (commandArrFirst2Parts.length == 1) {
+                        String errMessage = "Oh no! Kobe doesn't know what you mean!";
+                        throw new CustomExceptions.IncorrectDecriptionException(errMessage);
+                    }
+
+                    String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
+
+                    //                //Check for correct splitting
+                    //                System.out.println("Second2Parts: " + Arrays.toString(commandArrSecond2Parts));
+
+
+                    taskName = commandArrSecond2Parts[0];
+
+                    //If the array is in 2 parts, there is a condition, add that
+                    if (commandArrSecond2Parts.length > 1) {
+                        condition = commandArrSecond2Parts[1];
+                    }
+
+                    addItem(taskName, type, condition);
                 }
-
-//                Unwanted code:
-//                while(sc.hasNext()) { //To manage for tasks that are named longer than one word
-//                    String currStr = sc.next();
-//                    if(currStr.substring(0, 0).equals("/")) { //Account for task duration condition
-//                        condition = currStr.substring(1);
-//                    }
-//                    taskName = taskName + currStr + " ";
-//                }
-
-                addItem(taskName, type, condition);
             }
+        } catch (CustomExceptions.IncompleteDecriptionException e) {
+            System.out.println(e);
+        } catch (CustomExceptions.IncorrectDecriptionException e) {
+            System.out.println(e);
         }
+//        } catch (KobeException e) {
+//            System.out.println(e);
+//        }
+
         sc.close();
     }
 
