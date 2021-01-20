@@ -1,15 +1,10 @@
-import java.util.Scanner;
+import java.lang.reflect.Array;
 import java.util.*;
 
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
+public class test{
+
+    public static void main(String[] args) {
 
         //task 1
         //greeting line
@@ -47,8 +42,6 @@ public class Duke {
         }
         */
 
-        //task 3
-        // mark as done
         System.out.println("Hello! I am Duke\n" + "What can I do for you");
         Scanner sc = new Scanner(System.in);
         ArrayList<String> xsString = new ArrayList<>();
@@ -77,6 +70,7 @@ public class Duke {
                 System.out.println(xsTask.get(end-1).getDecs() + xsTask.get(end-1).getStatusIcon());
             }
         }
-    }
-}
 
+    }
+
+}
