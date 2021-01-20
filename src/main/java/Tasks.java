@@ -15,6 +15,13 @@ public class Tasks {
         System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 
+    //Delete a task
+    public void DeleteTask(int idx){
+        System.out.println("Noted. Task removed: \n" + Tasks.get(idx - 1));
+        Tasks.remove(idx - 1);
+        System.out.println("Now you have " + numOfTasks() + " items in your list");
+    }
+
     //Marks a task as done
     public void markAsDone(int idx) {
         Tasks.get(idx - 1).markDone();
