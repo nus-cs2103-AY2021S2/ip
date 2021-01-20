@@ -26,6 +26,8 @@ public class Duke {
         taskList.add("todo");
         taskList.add("deadline");
         taskList.add("event");
+        taskList.add("done");
+        taskList.add("delete");
 
         while (input.hasNextLine()) {
             String s = input.nextLine();
@@ -36,7 +38,7 @@ public class Duke {
                 displayList(myList);
             } else {
                 try {
-                    addTask(s, taskList, myList);
+                    executeTask(s, taskList, myList);
                 } catch (DukeException e) {
                     System.out.println("---------------------------------------------");
                     System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -46,14 +48,13 @@ public class Duke {
         }
     }
 
-    private void addTask(String s, ArrayList<String> taskList, ArrayList<Task> myList) throws DukeException{
+    private void executeTask(String s, ArrayList<String> taskList, ArrayList<Task> myList) throws DukeException{
         String[] parts = s.split(" ", 2);
         String taskType = parts[0];
 
         if (!taskList.contains(taskType)) {
             throw new DukeException("invalid input");
         } else{
-
             if (taskType.toLowerCase().equals("done")) {
                 completeTask(parts, myList);
             }else {
@@ -112,7 +113,7 @@ public class Duke {
     private void deleteTask(String[] parts, ArrayList<Task> myList){
         int taskNo = Integer.valueOf(parts[1]);
         Task curTask = myList.get(taskNo - 1);
-        myList.remove(taskNo);
+        myList.remove(taskNo-1);
         System.out.println("---------------------------------------------");
         System.out.println("Noted. I've removed this task:");
         System.out.println(curTask);
@@ -163,24 +164,3 @@ public class Duke {
         System.out.println("---------------------------------------------");
     }
 }
-
-//                    int taskNo = Integer.valueOf(s.substring(5, s.length()));
-    // try {
-    //if (taskNo <= myList.size()) {
-
-//                        } else {
-//                            Task newTask = new Task(s);
-//                            myList.add(newTask);
-//                            System.out.println("---------------------------------------------");
-//                            System.out.println("added: " + s);
-//                            System.out.println("---------------------------------------------");
-//
-//                    catch (DukeException e){
-//                        System.err.println(e.getLocalizedMessage());
-//                    }
-
-//                    catch (NumberFormatException e){
-//                        System.out.println("---------------------------------------------");
-//
-//                        throw new DukeException("OOPS! The task is invalid.", e);
-//                    }
