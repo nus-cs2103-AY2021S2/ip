@@ -22,23 +22,26 @@ public class ToDoBeast {
 
         TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
+        String command = sc.next();
 
-        while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
+        while (!command.equals("bye")) {
+            if (command.equals("list")) {
                 printTaskList(taskManager.getTaskList());
             }
-            else if (userInput.split(" ")[0].equals("done")){
-                Task currentTask = taskManager.getTask(Integer.parseInt(userInput.split(" ")[1]));
+            else if (command.equals("done")){
+                Task currentTask = taskManager.getTask(sc.nextInt());
                 currentTask.setDone();
                 System.out.println(line + "\tGood job! You've just completed this task:\n" + "\t\t" + currentTask + "\n" + line);
             }
             else {
-                Task newTask = new Task(userInput);
-                taskManager.addTask(newTask);
-                System.out.println(line + "\tadded: " + newTask + "\n" + line);
+                String taskDescription = sc.nextLine();
+                if (command.equals("todo")) {
+                    Task newTask = new Todo(taskDescription);
+                    taskManager.addTask(newTask);
+                    System.out.println(line + "\tadded: " + newTask + "\n" + line);
+                }
             }
-            userInput = sc.nextLine();
+            command = sc.next();
         }
 
         String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n\tSee you again soon!\n" + line;
