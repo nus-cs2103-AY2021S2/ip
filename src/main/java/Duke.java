@@ -92,15 +92,19 @@ public class Duke {
                 }
             } else { //adding a task
                 Task task = new Task("");
-                String[] inputArr;
+                String[] inputArr1;
+                String[] inputArr2;
                 if (inputArray[0].equals("todo")) {
-                    task = new ToDoTask(input);
+                    inputArr1 = input.split("todo ");
+                    task = new ToDoTask(inputArr1[1]);
                 } else if (inputArray[0].equals("deadline")) {
-                    inputArr = input.split(" /by ");
-                    task = new DeadlineTask(inputArr[0], inputArr[1]);
+                    inputArr1 = input.split("deadline ");
+                    inputArr2 = inputArr1[1].split(" /by ");
+                    task = new DeadlineTask(inputArr2[0], inputArr2[1]);
                 } else if (inputArray[0].equals("event")) {
-                    inputArr = input.split(" /at ");
-                    task = new EventTask(inputArr[0], inputArr[1]);
+                    inputArr1 = input.split("event ");
+                    inputArr2 = inputArr1[1].split(" /at ");
+                    task = new EventTask(inputArr2[0], inputArr2[1]);
                 }
                 lst.add(task);
                 System.out.println("Got it. I've added this task: ");
@@ -116,14 +120,16 @@ public class Duke {
 
 
     public static void main(String[] args) {
+        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+         */
 
-        //level4();
+        level4();
 
     }
 }
