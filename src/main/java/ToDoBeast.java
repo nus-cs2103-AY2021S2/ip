@@ -26,5 +26,8 @@ public class ToDoBeast {
             userInput = sc.nextLine();
         }
 
+        String exitMsg = line + "\tThis app may have stopped but the grind never stops.\n\tSee you again soon!\n" + line;
+        System.out.println(exitMsg);
+        System.exit(0);
     }
 }
