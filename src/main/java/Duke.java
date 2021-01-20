@@ -12,7 +12,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String separator = "------------------\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Parrot mode engaged");
+        System.out.println("No unicode allowed");
         Scanner in = new Scanner(System.in);
         String line;
         List<Task> store = new ArrayList<>();
