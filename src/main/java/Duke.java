@@ -6,7 +6,7 @@ public class Duke {
     public enum CommandsEnum {
         TODO, DEADLINE, EVENT,
         DONE, DELETE, LIST,
-        BYE, EMPTY
+        BYE, USAGE
     }
 
     public static void main(String[] args) {
@@ -44,6 +44,8 @@ public class Duke {
                     case BYE:
                         exit = bye();
                         break;
+                    case USAGE:
+                        usage();
                 }
             } catch (IllegalArgumentException e) {
                 invalid(); // Invalid enum value (i.e. no such command)
@@ -111,7 +113,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|");
         System.out.println("____________________________________________________________");
         Duke.say("Hey, hello there! I'm Duke, your personal chat bot.");
-        Duke.say("Is there anything I can do for you today?");
+        Duke.say("To know more about what I can do, type 'usage'.");
+        Duke.say("Sooooo... Is there anything I can do for you today?");
     }
 
     public static boolean bye() {
@@ -182,4 +185,15 @@ public class Duke {
         Duke.say("I'm not trained with these commands yet...");
     }
 
+    public static void usage() {
+        Duke.say("Hey! These are commands available:");
+        Duke.say("\t1. todo <task_description>");
+        Duke.say("\t2. deadline <task_description> /by <date_time>");
+        Duke.say("\t3. event <task_description> /at <date_time>");
+        Duke.say("\t4. done <task_number>");
+        Duke.say("\t5. delete <task_number>");
+        Duke.say("\t6. list");
+        Duke.say("\t7. bye");
+        Duke.say("\t8. usage");
+    }
 }
