@@ -2,18 +2,28 @@ import java.util.Scanner;
 
 public class DukeBot {
     private final Scanner scanner;
+    private final Parser parser;
 
-    public DukeBot(Scanner scanner) {
-        this.scanner = scanner;
+    public DukeBot(final Scanner sc) {
+        this.scanner = sc;
+        this.parser = new Parser();
     }
 
-    public void printOut(String msg) {
+    public void printOut(final String msg) {
+        System.out.println(Messages.SEPERATOR);
         System.out.println(msg);
         System.out.println(Messages.SEPERATOR);
     }
 
     public void run() {
+        Command command;
         printOut(Messages.WELCOME_MESSGAGE);
+
+        while (!parser.isBye()) {
+            command = parser.parseInput(scanner.nextLine());
+            printOut(command.execute());
+        }
+
         printOut(Messages.GOODBYE);
     }
 }
