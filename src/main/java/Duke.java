@@ -26,8 +26,8 @@ public class Duke {
                     System.out.println(separator + "Goodbye from\n" + logo);
                     break;
                 case "list":
-                    for (Task t: store) {
-                        System.out.println(t.toString());
+                    for (int i = 0 ; i < store.size(); i++) {
+                        System.out.println("Entry " + (i+1) + "|" + store.get(i).toString());
                     }
                     break;
                 case "done":
