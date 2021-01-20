@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,13 +11,22 @@ public class Duke {
         System.out.println(divider + logo + "\nHello! I'm Duke\nWhat can I do for you?\n" + divider);
 
         Scanner sc = new Scanner(System.in);
-        while(sc.hasNext()) {
-            String input = sc.next();
+        List<String> list = new ArrayList<>();
+
+        while(sc.hasNextLine()) {
+            String input = sc.nextLine();
             if(input.equals("bye")) {
                 System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
                 break;
+            } else if(input.equals("list")) {
+                System.out.print(divider);
+                for(int i = 1; i <= list.size(); i++) {
+                    System.out.println(i + ". " + list.get(i-1));
+                }
+                System.out.println(divider);
             } else {
-                System.out.println(divider + input + "\n" + divider);
+                list.add(input);
+                System.out.println(divider + "Added: " + input + "\n" + divider);
             }
         }
     }
