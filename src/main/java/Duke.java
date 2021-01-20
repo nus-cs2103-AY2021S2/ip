@@ -23,15 +23,25 @@ public class Duke {
     public void scan() {
         Scanner s = new Scanner(System.in);
         String description = s.nextLine();
-        while(!description.equals("bye")) {
-            manageTask(description);
-            description = s.nextLine();
+        while (!description.equals("bye")) {
+            try {
+                manageTask(description);
+            } catch (DukeException e) {
+                System.out.println("     " + e);
+                System.out.println("     --------------------------------");
+            } finally {
+                description = s.nextLine();
+            }
         }
-        manageTask(description);
+        try {
+            manageTask(description);
+        } catch (DukeException e) {
+            System.out.println("     " + e);
+        }
         s.close();
     }
 
-    public void manageTask(String description) {
+    public void manageTask(String description) throws DukeException{
         System.out.println("     --------------------------------");
         if (description.equals("list")) {
             System.out.println("     Here are the tasks in your list:");
@@ -48,32 +58,52 @@ public class Duke {
             doneTask.markAsDone();
             System.out.println("     Noice! I've marked this task as done:");
             System.out.println("     " + doneTask);
-        } else {
-            System.out.println("     Got it. I've added this task:");
+        } else if (description.contains("todo") || description.contains("deadline")
+                || description.contains("event")){
             if (description.contains("todo")){
-                String descLocation = description.substring(5);
-                ToDo newToDo = new ToDo(descLocation);
-                tasks.add(newToDo);
-                System.out.println("       " + newToDo);
+                if (description.equals("todo")) {
+                    throw new DukeException("OOPS!!! The description of a todo cannot " +
+                            "be empty");
+                } else {
+                    System.out.println("     Got it. I've added this task:");
+                    String descLocation = description.substring(5);
+                    ToDo newToDo = new ToDo(descLocation);
+                    tasks.add(newToDo);
+                    System.out.println("       " + newToDo);
+                }
             } else if (description.contains("deadline")){
-                String descLocation = description.substring(9);
-                int byPosition = descLocation.indexOf("/by");
-                String desc = descLocation.substring(0, byPosition);
-                String by = descLocation.substring(byPosition + 4);
-                Deadline newDeadline = new Deadline(desc, by);
-                tasks.add(newDeadline);
-                System.out.println("       " + newDeadline);
+                if (description.equals("deadline")) {
+                    throw new DukeException("OOPS!!! The description of a deadline cannot " +
+                            "be empty");
+                } else {
+                    System.out.println("     Got it. I've added this task:");
+                    String descLocation = description.substring(9);
+                    int byPosition = descLocation.indexOf("/by");
+                    String desc = descLocation.substring(0, byPosition);
+                    String by = descLocation.substring(byPosition + 4);
+                    Deadline newDeadline = new Deadline(desc, by);
+                    tasks.add(newDeadline);
+                    System.out.println("       " + newDeadline);
+                }
             } else if (description.contains("event")) {
-                String descLocation = description.substring(6);
-                int atPosition = descLocation.indexOf("/at");
-                String desc = descLocation.substring(0, atPosition);
-                String at = descLocation.substring(atPosition + 4);
-                Event newEvent = new Event(desc, at);
-                tasks.add(newEvent);
-                System.out.println("       " + newEvent);
+                if (description.equals("event")) {
+                    throw new DukeException("OOPS!!! The description of an event cannot " +
+                            "be empty");
+                } else {
+                    System.out.println("     Got it. I've added this task:");
+                    String descLocation = description.substring(6);
+                    int atPosition = descLocation.indexOf("/at");
+                    String desc = descLocation.substring(0, atPosition);
+                    String at = descLocation.substring(atPosition + 4);
+                    Event newEvent = new Event(desc, at);
+                    tasks.add(newEvent);
+                    System.out.println("       " + newEvent);
+                }
             }
             String listLength = Integer.toString(tasks.size());
             System.out.println("     Now you have " + listLength + " tasks in the list!");
+        } else {
+            throw new DukeException("OOPS!!! I don't know what that means. Try again :(");
         }
         System.out.println("     --------------------------------");
     }
