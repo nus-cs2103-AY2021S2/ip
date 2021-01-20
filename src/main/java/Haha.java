@@ -20,7 +20,6 @@ public class Haha {
     private static final String[] LEGITCOMMANDS = new String[]{
             "todo", "deadline", "event", "list", "done", "delete", "bye"
     };
-
     private enum TaskType {
         TODO("todo"), DEADLINE("deadline"), EVENT("event");
         private final String rep;
@@ -33,14 +32,12 @@ public class Haha {
             return rep;
         }
     }
-
     private static int taskNumber(String command) throws HahaTaskNumberNotIntException {
         try {
             return Integer.parseInt("" + command.charAt(command.length() - 1));
         } catch (NumberFormatException ex) {
             throw new HahaTaskNumberNotIntException(command);
         }
-
     }
 
     private static void tellAdd() {
@@ -57,6 +54,26 @@ public class Haha {
         tellAdd();
         System.out.println("  " + database.get(database.size() - 1));
         tellSize(database);
+    }
+
+    private static void deleteFromDB(List<Task> database, Task currentTask) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(currentTask);
+        database.remove(currentTask);
+        tellSize(database);
+    }
+
+    private static void listFromDB(List<Task> database) {
+        if (database.size() == 0) {
+            System.out.println("You have nothing going on!");
+        } else {
+            System.out.println("Here are your list of tasks:");
+            for (int i = 0; i < database.size(); i++) {
+                String idx = Integer.toString(i + 1) + '.';
+                String task = idx + database.get(i);
+                System.out.println(task);
+            }
+        }
     }
 
     private static void handleCommand(String command) throws HahaException {
@@ -99,21 +116,11 @@ public class Haha {
                 System.out.println(LINE_BREAK);
                 continue;
             }
-
             if (command.equals("bye")) {
                 System.out.println("Bye now!");
                 break;
             } else if (command.equals("list")) {
-                if (database.size() == 0) {
-                    System.out.println("You have nothing going on!");
-                } else {
-                    System.out.println("Here are your list of tasks:");
-                    for (int i = 0; i < database.size(); i++) {
-                        String idx = Integer.toString(i + 1) + '.';
-                        String task = idx + database.get(i);
-                        System.out.println(task);
-                    }
-                }
+                listFromDB(database);
             } else if (command.startsWith("done")) {
                 try {
                     int givenIndex = taskNumber(command) - 1;
@@ -135,10 +142,7 @@ public class Haha {
             } else if (command.startsWith("delete")) {
                 try {
                     Task currentTask = database.get(taskNumber(command) - 1);
-                    System.out.println("Noted. I've removed this task: ");
-                    System.out.println(currentTask);
-                    database.remove(currentTask);
-                    tellSize(database);
+                    deleteFromDB(database, currentTask);
                 } catch (HahaTaskNumberNotIntException ex) {
                     System.out.println(ex);
                 }
