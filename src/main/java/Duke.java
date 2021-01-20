@@ -18,13 +18,11 @@ public class Duke {
 
     public static void start() {
         System.out.println(line);
-        String logo = "\n" +
-                "     ███╗░░░███╗░█████╗░██╗░░░██╗███╗░░░███╗░█████╗░██╗░░░██╗\n" +
-                "     ████╗░████║██╔══██╗██║░░░██║████╗░████║██╔══██╗██║░░░██║\n" +
-                "     ██╔████╔██║██║░░██║██║░░░██║██╔████╔██║██║░░██║██║░░░██║\n" +
-                "     ██║╚██╔╝██║██║░░██║██║░░░██║██║╚██╔╝██║██║░░██║██║░░░██║\n" +
-                "     ██║░╚═╝░██║╚█████╔╝╚██████╔╝██║░╚═╝░██║╚█████╔╝╚██████╔╝\n" +
-                "     ╚═╝░░░░░╚═╝░╚════╝░░╚═════╝░╚═╝░░░░░╚═╝░╚════╝░░╚═════╝░";
+        String logo =
+                "      _ __ ___   ___  _   _ _ __ ___   ___  _   _ \n" +
+                "     | '_ ` _ \\ / _ \\| | | | '_ ` _ \\ / _ \\| | | |\n" +
+                "     | | | | | | (_) | |_| | | | | | | (_) | |_| |\n" +
+                "     |_| |_| |_|\\___/ \\__,_|_| |_| |_|\\___/ \\__,_|";
         System.out.println(logo + " is back!\n     What have you awoken MouMou for?");
         System.out.println(line);
     }
@@ -39,7 +37,7 @@ public class Duke {
         } else if (command.substring(0,4).equals("done")) {
             int taskNo = Integer.parseInt(String.valueOf(command.charAt(5))) - 1;
             list.get(taskNo).markAsDone();
-            System.out.println(align("Nice! I've marked this task as done:"));
+            System.out.println(align("Good job! I've marked this task as done:"));
             System.out.println(align(list.get(taskNo).toString()));
         } else {
             System.out.println(align("Sure! I've added this task:"));
@@ -62,7 +60,7 @@ public class Duke {
                 }
             }
             currentID++;
-            System.out.println(align("Now you have " + list.size() + " tasks in the list."));
+            System.out.println(align("Now you have a whopping " + list.size() + " task(s) in the list."));
         }
         System.out.println(line);
     }
