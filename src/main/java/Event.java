@@ -4,7 +4,7 @@ public class Event extends Task {
     protected String at;
 
     Event(String name, String at) {
-        super(name);
+        super(name, "Event coming right up!");
         this.at = at;
     }
 

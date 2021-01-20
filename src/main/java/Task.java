@@ -3,10 +3,16 @@ package main.java;
 public class Task {
     String name;
     Boolean status;
+    String addMessage;
 
     Task(String name) {
         this.name = name;
         this.status = false;
+    }
+
+    Task(String name, String addMessage) {
+        this(name);
+        this.addMessage = addMessage;
     }
 
     public void setDone() {
