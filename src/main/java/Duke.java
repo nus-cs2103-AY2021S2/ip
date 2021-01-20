@@ -38,12 +38,15 @@ public class Duke {
                             formatOrderedPrint(store,-1));
                     break;
                 case "todo":
-                    store.add(new ToDos(tokens[0]));
+                    store.add(new ToDos(tokens[1]));
                     System.out.println("The following todo item has been added:\n" +
                             formatOrderedPrint(store,-1));
                     break;
                 case "deadline":
                     tokens = tokens[1].split(" /by ",2);
+                    if (tokens.length < 2){
+
+                    }
                     store.add(new Deadline(tokens[0],tokens[1]));
                     System.out.println("The following deadline item has been added:\n" +
                             formatOrderedPrint(store,-1));
