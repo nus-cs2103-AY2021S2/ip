@@ -84,6 +84,6 @@ public class Duke {
             }
         }
 
-        System.out.println("___\n Bye! Hope to see you again! :)\n___\n");
+        System.out.println("___\n   Bye! Hope to see you again! :)\n___\n");
     }
 }
