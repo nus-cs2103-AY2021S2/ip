@@ -56,23 +56,8 @@ public class Duke {
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task doneTask = taskList.get(taskId).setDone();
-            System.out.println("    Great~! Task completed:");
+            System.out.println("Great~! Task completed:");
             System.out.println("    " + doneTask);
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidTaskException();
-        }
-    }
-
-    /**
-     * Delete the specified task from the list.
-     * @param inputString User input string.
-     */
-    public static void deleteTask(String inputString) {
-        try {
-            int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
-            Task deletedTask = taskList.remove(taskId);
-            System.out.println("    Okie! I've deleted the task from your list:");
-            System.out.println("    " + deletedTask + "\n    The size of your task list is now: " + taskList.size());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskException();
         }
@@ -108,8 +93,6 @@ public class Duke {
             quit();
         } else if (inputString.startsWith("done")) {
             completeTask(inputString);
-        } else if (inputString.startsWith("delete")) {
-            deleteTask(inputString);
         } else if (inputString.startsWith("todo")) {
             try {
                 Todo newTodo = new Todo(inputString.substring(5));
