@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean exit = false;
         String input;
+        ArrayList<String> collection = new ArrayList<String>();
+        boolean exit = false;
 
         // Welcomes user
         greeting();
@@ -14,10 +16,12 @@ public class Duke {
             System.out.print("<< ");
             input = sc.nextLine().toLowerCase();
 
-            if (input.equals("bye"))
+            if (input.equals("list"))
+                list(collection);
+            else if (input.equals("bye"))
                 exit = exit();
             else
-                echo(input);
+                add(collection, input);
         }
         while (!exit);
     }
@@ -37,12 +41,21 @@ public class Duke {
         System.out.println(">> Is there anything I can do for you today?");
     }
 
-    public static void echo(String input) {
-        System.out.println(">> " + input);
+    public static void list(ArrayList<String> collection) {
+        System.out.println(">> Got it, this is your list.");
+        for (int i = 0; i < collection.size(); i++) {
+            String formattedString = String.format("\t%d. %s", i + 1, collection.get(i));
+            System.out.println(formattedString);
+        }
     }
 
     public static boolean exit() {
         System.out.println(">> Alright, take care. I hope to see you again soon!");
         return true;
+    }
+
+    public static void add(ArrayList<String> collection, String input) {
+        collection.add(input);
+        System.out.println(">> Added: " + input);
     }
 }
