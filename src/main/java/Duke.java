@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] parts = input.split(" ");
-            Task newTask = new Task(input);
             System.out.println("    ____________________________________________________________");
             if (parts[0].equals("bye")) {
                 System.out.println("     Bye. Hope to see you again soon!");
@@ -42,8 +42,93 @@ public class Duke {
                     }
                     count++;
                 }
+            } else if (parts[0].equals("todo")){
+                System.out.println("     Got it. I've added this task:");
+                String taskDescription = "";
+                boolean first = true;
+                for (int i = 1; i < parts.length; ++i) {
+                    if (!first) {
+                        taskDescription += " " + parts[i];
+                    } else {
+                        taskDescription += parts[i];
+                    }
+                    first = false;
+                }
+                Todo todo = new Todo(taskDescription);
+                store.add(todo);
+                System.out.println("     " + todo);
+                System.out.println("     Now you have " + store.size() + " tasks in the list.");
+            } else if (parts[0].equals("deadline")){
+                System.out.println("     Got it. I've added this task:");
+                boolean flag = false, first = true;
+                String dueDate = "";
+                for (String s: parts) {
+                    if (flag) {
+                        if (!first) {
+                            dueDate += ' ' + s;
+                        } else {
+                            dueDate += s;
+                        }
+                        first = false;
+                    }
+                    if (s.equals("/by")) {
+                        flag = true;
+                    }
+                }
+                String taskDescription = "";
+                first = true;
+                for (int i = 1; i < parts.length; ++i) {
+                    if (!parts[i].equals("/by")) {
+                        if (!first) {
+                            taskDescription += " " + parts[i];
+                        } else {
+                            taskDescription += parts[i];
+                        }
+                        first = false;
+                    } else {
+                        break;
+                    }
+                }
+                Deadline deadline = new Deadline(taskDescription, dueDate);
+                store.add(deadline);
+                System.out.println("     " + deadline);
+                System.out.println("     Now you have " + store.size() + " tasks in the list.");
+            } else if (parts[0].equals("event")){
+                System.out.println("     Got it. I've added this task:");
+                boolean flag = false, first = true;
+                String eventDate = "";
+                for (String s: parts) {
+                    if (flag) {
+                        if (!first) {
+                            eventDate += ' ' + s;
+                        } else {
+                            eventDate += s;
+                        }
+                        first = false;
+                    }
+                    if (s.equals("/at")) {
+                        flag = true;
+                    }
+                }
+                String eventDescription = "";
+                first = true;
+                for (int i = 1; i < parts.length; ++i) {
+                    if (!parts[i].equals("/at")) {
+                        if (!first) {
+                            eventDescription += " " + parts[i];
+                        } else {
+                            eventDescription += parts[i];
+                        }
+                        first = false;
+                    } else {
+                        break;
+                    }
+                }
+                Event event = new Event(eventDescription, eventDate);
+                store.add(event);
+                System.out.println("     " + event);
+                System.out.println("     Now you have " + store.size() + " tasks in the list.");
             } else {
-                store.add(newTask);
                 System.out.println("     added: " + input);
             }
             System.out.println("    ____________________________________________________________");

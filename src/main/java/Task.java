@@ -1,14 +1,14 @@
 public class Task {
-    protected String task;
+    protected String description;
     protected boolean isDone;
 
     public Task(String task) {
-        this.task = task;
+        this.description = task;
         this.isDone = false;
     }
 
     private Task(String task, boolean isCompleted) {
-        this.task = task;
+        this.description = task;
         this.isDone = isCompleted;
     }
 
@@ -17,13 +17,13 @@ public class Task {
     }
 
     public Task markAsDone() {
-        return new Task(this.task, true);
+        return new Task(this.description, true);
     }
 
     public String toString() {
         if (this.isDone) {
-            return "[X] " + this.task;
+            return "[X] " + this.description;
         }
-        return "[ ] " + this.task;
+        return "[ ] " + this.description;
     }
 }
