@@ -66,13 +66,13 @@ public class Duke {
             int num = i + 1;
             Task task = tasks[i];
             System.out.println(
-                    tab + num + ".[" + task.getStatusIcon() +  "] " + task.getDescription());
+                    tab + num + "." + task.toString());
         }
     }
 
     public static void printDone(int index) {
         System.out.println(tab + "Nice! I've marked this task as done:");
-        System.out.println(tab + "  [X] " + tasks[index].getDescription());
+        System.out.println(tab + tasks[index].toString());
     }
 
     public static void printAdd(int index) {
