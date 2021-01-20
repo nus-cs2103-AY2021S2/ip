@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Duke {
     private static final String divider = "\t____________________________________________________________\n";
-    private static List<String> tasks;
+    private static List<Task> tasks;
     private static BufferedReader in;
     private static BufferedWriter out;
 
@@ -35,9 +35,13 @@ public class Duke {
         String input = in.readLine();
 
         while (!input.equals("bye")) {
-            switch (input) {
+            String[] tokens = input.split(" ");
+            switch (tokens[0]) {
             case "list":
                 list();
+                break;
+            case "done":
+                done(Integer.parseInt(tokens[1]));
                 break;
             default:
                 add(input);
@@ -51,22 +55,31 @@ public class Duke {
         out.close();
     }
 
-    static void add(String task) throws IOException {
-        tasks.add(task);
-        write("added: " + task);
+    static void add(String taskDescription) throws IOException {
+        tasks.add(new Task(taskDescription));
+        write("added: " + taskDescription);
     }
 
     static void list() throws IOException {
         out.write(divider);
         int lineNum = 1;
-        for (String task : tasks) {
+        for (Task task : tasks) {
             out.write('\t');
             out.write(lineNum++ + ". ");
-            out.write(task);
+            out.write('[');
+            out.write(task.getStatusIcon());
+            out.write("] ");
+            out.write(task.getDescription());
             out.newLine();
         }
         out.write(divider);
         out.flush();
+    }
+
+    static void done(int selection) throws IOException {
+        Task task = tasks.get(selection - 1);
+        task.markAsDone();
+        write("  [" + task.getStatusIcon() + "] " + task.getDescription());
     }
 
     static void write(String line) throws IOException {
