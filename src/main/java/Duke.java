@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,8 +10,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         horizontalLine();
 
-        final Task store[] = new Task[100];
-        int counter = 0;
+        final List<Task> store = new ArrayList<>();
         final Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
             final String input = scan.nextLine().strip();
@@ -25,20 +26,20 @@ public class Duke {
             if (input.equals("")) { // empty string
                 System.out.println("\t...");
             } else if (input.equals("list")) { // list tasks
-                listTasks(counter, store);
+                listTasks(store);
             } else if (command.equals("done")) { // mark task as done
-                markTaskAsDone(counter, store, input);
-            } else if (addTaskToList(counter, store, command, input)) { // add task to list
-                ++counter;
+                markTaskAsDone(store, input);
+            } else { // add task to list
+                addTaskToList(store, command, input);
             }
             horizontalLine();
         }
         scan.close();
     }
 
-    private static boolean addTaskToList(int counter, Task[] store, String command, String input) {
+    private static void addTaskToList(List<Task> store, String command, String input) {
         boolean isInsert = false;
-        if (counter >= 100) {
+        if (store.size() >= 100) {
             System.out.println("\tSorry. The database is full!");
         } else if (command.equals("todo")) {
             final String[] splitOnSpace = input.split(" ", 2);
@@ -47,7 +48,7 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"todo <task>\".");
             } else {
                 final String task = splitOnSpace[1].strip();
-                store[counter] = new ToDo(task);
+                store.add(new ToDo(task));
                 isInsert = true;
             }
         } else if (command.equals("deadline")) {
@@ -59,7 +60,7 @@ public class Duke {
             } else {
                 final String task = splitOnBy[0].split("deadline ", 2)[1].strip();
                 final String datetime = splitOnBy[1].strip();
-                store[counter] = new Deadline(task, datetime);
+                store.add(new Deadline(task, datetime));
                 isInsert = true;
             }
         } else if (command.equals("event")) {
@@ -71,7 +72,7 @@ public class Duke {
             } else {
                 final String task = splitOnAt[0].split("event ", 2)[1].strip();
                 final String datetime = splitOnAt[1].strip();
-                store[counter] = new Event(task, datetime);
+                store.add(new Event(task, datetime));
                 isInsert = true;
             }
         } else {
@@ -80,23 +81,21 @@ public class Duke {
 
         if (isInsert) {
             System.out.println("\tGot it. I've added this task: ");
-            System.out.printf("\tTask added: %s\n", store[counter]);
-            System.out.printf("\tNow you have %d task%s in the list.\n", counter + 1, counter + 1 == 1 ? "" : "s");
+            System.out.printf("\tTask added: %s\n", store.get(store.size() - 1));
+            System.out.printf("\tNow you have %d task%s in the list.\n", store.size(), store.size() == 1 ? "" : "s");
         }
-
-        return isInsert;
     }
 
-    private static void markTaskAsDone(int counter, Task[] store, String input) {
+    private static void markTaskAsDone(List<Task> store, String input) {
         final String[] splitOnSpace = input.split(" ", 2);
 
         if (splitOnSpace.length == 2 && !splitOnSpace[1].strip().equals("")) {
             try {
                 final int index = Integer.parseInt(splitOnSpace[1].strip()) - 1;
-                if (0 <= index && index < counter) {
-                    store[index].markAsDone();
+                if (0 <= index && index < store.size()) {
+                    store.get(index).markAsDone();
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.printf("\t%s\n", store[index]);
+                    System.out.printf("\t%s\n", store.get(index));
                 } else {
                     System.out.println("\tOops! The index is out of bound.");
                 }
@@ -108,14 +107,15 @@ public class Duke {
         }
     }
 
-    private static void listTasks(int counter, Task[] store) {
-        if (counter == 0) {
+    private static void listTasks(List<Task> store) {
+        if (store.size() == 0) {
             System.out.println("\tHmm... You do not have any tasks!");
         } else {
             System.out.println("\tHere are the tasks in your list:");
         }
-        for (int i = 0; i < counter; i++) {
-            System.out.printf("\t%d. %s\n", i + 1, store[i]);
+        int i = 0;
+        for (final Task t : store) {
+            System.out.printf("\t%d. %s\n", ++i, t);
         }
     }
 
