@@ -11,7 +11,7 @@ public class Duke {
         System.out.println(divider + logo + "\nHello! I'm Duke\nWhat can I do for you?\n" + divider);
 
         Scanner sc = new Scanner(System.in);
-        List<String> list = new ArrayList<>();
+        List<Task> list = new ArrayList<>();
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -21,12 +21,21 @@ public class Duke {
             } else if(input.equals("list")) {
                 System.out.print(divider);
                 for(int i = 1; i <= list.size(); i++) {
-                    System.out.println(i + ". " + list.get(i-1));
+                    Task curr = list.get(i-1);
+                    System.out.println(i + ".[" + curr.getStatusIcon() + "] " + curr.description);
                 }
                 System.out.println(divider);
             } else {
-                list.add(input);
-                System.out.println(divider + "Added: " + input + "\n" + divider);
+                String[] check = input.split(" ");
+                if(check[0].equals("done")) {
+                    Task curr = list.get(Integer.parseInt(check[1])-1);
+                    curr.markAsDone();
+                    System.out.println(divider + "Nice! I've marked this task as done:\n[\u2713] " + curr.description + "\n" + divider);
+
+                } else {
+                    list.add(new Task(input));
+                    System.out.println(divider + "Added: " + input + "\n" + divider);
+                }
             }
         }
     }
