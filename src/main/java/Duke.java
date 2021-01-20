@@ -1,5 +1,6 @@
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +23,8 @@ public class Duke {
             System.out.print(separator + "Listening to your input: ");
             line = in.nextLine();
             try {
-                tokens = splitTokenIntoTwo(line," ", "bye");
+                String singleTokens[] = {"bye","list"};
+                tokens = splitTokenIntoTwo(line," ", singleTokens);
                 switch(tokens[0]){
                     case "bye":
                         System.out.println(separator + "Goodbye from\n" + logo);
@@ -88,9 +90,10 @@ public class Duke {
         return tokens;
     }
     
-    private static String[] splitTokenIntoTwo(String parseTarget,String delimiter, String exception) throws ParseException{
+    private static String[] splitTokenIntoTwo(String parseTarget,String delimiter, String[] exception) throws ParseException{
+        List<String> exceptionList = Arrays.asList(exception);
         String[] tokens = parseTarget.split(delimiter,2);
-        if (!tokens[0].equals(exception) && tokens.length < 2){
+        if (!exceptionList.contains(tokens[0]) && tokens.length < 2){
             throw new ParseException("Expected deliminter '"+ delimiter +"'", tokens[0].length());
         }
         return tokens;
