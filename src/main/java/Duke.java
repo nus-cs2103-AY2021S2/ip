@@ -46,7 +46,7 @@ public class Duke {
 
     /**
      * Marks the task at a particular index as done.
-     * @param index Index of the task to be removed.
+     * @param index index of the task to be removed.
      */
     public static void markDone(int index) {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -58,11 +58,16 @@ public class Duke {
 
     /**
      * Adds a todo task to the list.
-     * @param command Command input by the user
+     * @param command command input by the user
      *                which contains the name of
      *                the task.
+     * @throws InvalidTodoException If Todo task does not
+     *                              have a description
      */
-    public static void addTodo(String command) {
+    public static void addTodo(String command) throws InvalidTodoException {
+        if(command.length() < 6) {
+            throw new InvalidTodoException();
+        }
         tasks.add(new Todo(command.substring(5)));
         count++;
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -74,7 +79,7 @@ public class Duke {
 
     /**
      * Adds a deadline to the list.
-     * @param command Command input by the user
+     * @param command command input by the user
      *                which contains the name of
      *                the task and the deadline
      *                to submit it by.
@@ -91,7 +96,7 @@ public class Duke {
 
     /**
      * Adds a deadline to the list.
-     * @param command Command input by the user
+     * @param command command input by the user
      *                which contains the name of
      *                the event and the date and time.
      */
@@ -105,22 +110,41 @@ public class Duke {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
+    /**
+     *
+     * @param command command input by the user.
+     * @throws InvalidCommandException if the command cannot be recognised.
+     */
+    public static void runCommand(String command) throws InvalidCommandException{
+        if (command.equals("list")) {
+            printList();
+        } else if (command.split(" ")[0].equals("done")) {
+            int index = Integer.parseInt(command.split(" ")[1]) - 1;
+            markDone(index);
+        } else if (command.split(" ")[0].equals("todo")) {
+            try {
+                addTodo(command);
+            } catch (InvalidTodoException e) {
+                System.out.println("\nOOPS!!! The description of a todo cannot be empty.\n");
+            }
+        } else if (command.split(" ")[0].equals("deadline")) {
+            addDeadline(command);
+        } else if (command.split(" ")[0].equals("event")) {
+            addEvent(command);
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
     public static void main(String[] args) {
         printWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                printList();
-            } else if (command.split(" ")[0].equals("done")) {
-                int index = Integer.parseInt(command.split(" ")[1]) - 1;
-                markDone(index);
-            } else if (command.split(" ")[0].equals("todo")) {
-                addTodo(command);
-            } else if (command.split(" ")[0].equals("deadline")) {
-                addDeadline(command);
-            } else if (command.split(" ")[0].equals("event")) {
-                addEvent(command);
+            try {
+                runCommand(command);
+            } catch(InvalidCommandException e) {
+                System.out.println("\nI'm sorry, but I don't know what that means :-(\n");
             }
             command = scanner.nextLine();
         }
