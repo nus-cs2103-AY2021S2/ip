@@ -17,26 +17,25 @@ public class Duke {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                listTasks();
-            } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
-                int id = Integer.valueOf(input.substring(5));
-                completeTask(id);
-            } else if (input.length() >= 5 && input.substring(0, 5).equals("todo ")) {
-                addTask(new Task(input.substring(5)));
-            } else if (input.length() >= 6 && input.substring(0, 6).equals("event ")) {
-                int cutoff = input.indexOf("/at");
-                String name = input.substring(6, cutoff - 1);
-                String time = input.substring(cutoff + 4);
-                addTask(new Event(name, time));
-            } else if (input.length() >= 9 && input.substring(0, 9).equals("deadline ")) {
-                int cutoff = input.indexOf("/by");
-                String name = input.substring(9, cutoff - 1);
-                String dueDate = input.substring(cutoff + 4);
-                addTask(new Deadline(name, dueDate));
-            } else {
-                System.out.println(makeOutput("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+            try {
+                if (input.equals("list")) {
+                    listTasks();
+                } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
+                    int id = Integer.valueOf(input.substring(5));
+                    completeTask(id);
+                } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
+                    addTask(Task.createTask(input));
+                } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
+                    addTask(Event.createEvent(input));
+                } else if (input.length() >= 8 && input.substring(0, 8).equals("deadline")) {
+                    addTask(Deadline.createDeadline(input));
+                } else {
+                    System.out.println(makeOutput("☹ OOPS!!! I'm sorry, but I don't know what that means :-("));
+                }
+            } catch (DukeException e) {
+                System.out.println(makeOutput(e.getMessage()));
             }
+            
             input = sc.nextLine();
         }
         System.out.println(makeOutput("Bye. Hope to see you again soon!"));

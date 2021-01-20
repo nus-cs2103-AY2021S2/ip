@@ -1,0 +1,18 @@
+todo borrow book
+deadline assignment /by Friday 2359
+deadline return book /by Sunday
+event class /at Monday 2pm - 4pm
+event competition /at Saturday 10am - 2pm
+done 1
+done 3
+done 2
+done 4
+done 5
+todo
+todo 
+event
+event 
+deadline
+deadline 
+vasdyi
+bye

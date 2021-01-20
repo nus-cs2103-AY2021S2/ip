@@ -3,7 +3,16 @@ public class Task {
     protected final String name;
     protected final boolean completed;
 
-    public Task(String name) {
+    public final static Task createTask(String input) throws DukeException {
+        String name = input.substring(4);
+        if (name.equals("") || name.equals(" ")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        name = name.substring(1);
+        return new Task(name);
+    }
+
+    protected Task(String name) {
         this.name = name;
         this.completed = false;
     }

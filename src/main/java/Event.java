@@ -2,7 +2,30 @@ public class Event extends Task {
     
     protected String time;
 
-    public Event(String name, String time) {
+    public final static Event createEvent(String input) throws DukeException {
+        String name = input.substring(5);
+        if (name.equals("") || name.equals(" ")) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+
+        name = name.substring(1);
+        int cutoff = name.indexOf("/at");
+        if (cutoff == -1) {
+            throw new DukeException("☹ OOPS!!! Events need a timing! Use \"/at\" to indicate timings!");
+        }
+
+        String eventName = name.substring(0, cutoff - 1);
+        String eventTime = name.substring(cutoff + 3);
+        if (eventTime.equals("") || eventTime.equals(" ")) {
+            throw new DukeException("☹ OOPS!!! Events need a timing!");
+        }
+
+        eventTime = eventTime.substring(1);
+        System.out.println(eventTime);
+        return new Event(eventName, eventTime);
+    }
+
+    protected Event(String name, String time) {
         super(name);
         this.time = time;
     }
