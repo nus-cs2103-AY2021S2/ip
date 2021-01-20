@@ -4,7 +4,7 @@ public class Duke {
     public static String ind = "    ";
     public static String line = ind + "____________________________________________________________\n" + ind;
     public static String line2 = ind + "____________________________________________________________\n";
-    public static ArrayList<String> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -32,7 +32,7 @@ public class Duke {
     }
 
     public static void addItem(String echoedText) {
-        tasks.add(echoedText);
+        tasks.add(new Task(echoedText));
         System.out.println(line + "added: " + echoedText + "\n" + line);
     }
 
@@ -41,7 +41,7 @@ public class Duke {
     }
 
     public static void showList() {
-        System.out.print(line2);
+        System.out.print(line + "Here are the tasks in your list:\n");
         for(int i = 0; i < tasks.size(); i++) {
             System.out.print(ind + (i+1) + ". " + tasks.get(i) + "\n");
         }
