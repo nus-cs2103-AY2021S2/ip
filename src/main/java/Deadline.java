@@ -13,9 +13,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[D][X] " + this.description;
+            return "[D][X] " + this.description + this.getDeadline();
         } else {
-            return "[D][ ] " + this.description;
+            return "[D][ ] " + this.description + this.getDeadline();
         }
     }
 }

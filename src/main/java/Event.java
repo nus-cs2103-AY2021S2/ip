@@ -13,9 +13,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[E][X] " + this.description;
+            return "[E][X] " + this.description + this.getTime();
         } else {
-            return "[E][ ] " + this.description;
+            return "[E][ ] " + this.description + this.getTime();
         }
     }
 }
