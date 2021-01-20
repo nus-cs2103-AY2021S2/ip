@@ -11,7 +11,7 @@ public class Duke {
         final Task store[] = new Task[100];
         int counter = 0;
         final Scanner scan = new Scanner(System.in);
-        while (true) {
+        while (scan.hasNextLine()) {
             final String input = scan.nextLine();
             final String[] tokens = input.split(" ");
             boolean isInsert = false;
