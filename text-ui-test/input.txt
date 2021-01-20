@@ -1,4 +1,3 @@
-deadline /SundayAfternoon 3-4 pm
 todo read book
 todo
 deadline study
