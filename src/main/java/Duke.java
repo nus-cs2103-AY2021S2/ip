@@ -75,7 +75,7 @@ public class Duke {
         List<Task> lst = new ArrayList<>();
         lst.add(new ToDoTask("read book"));
         lst.add(new DeadlineTask("return book", "June 6th"));
-        lst.add(new EventTask("project meeting", "Aug 6th"));
+        lst.add(new EventTask("project meeting", "Aug 6th 2-4pm"));
         lst.add(new ToDoTask("join sports club"));
         lst.get(0).markAsDone();
         lst.get(3).markAsDone();
@@ -120,16 +120,14 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-         */
 
-        level4();
+        //level4();
 
     }
 }
