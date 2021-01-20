@@ -16,13 +16,15 @@ public abstract class AddCommand implements Command{
     @Override
     public TaskList runCommand(TaskList taskList) {
         this.taskList = taskList;
-        this.taskToAdd = new Todo(this.taskDescription);
+        this.taskToAdd = new TodoTask(this.taskDescription);
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }
 
     @Override
     public String getResponse() {
-        return "added: " + this.taskDescription;
+        return String.format(" Got it. I've added this task: \n" +
+                "       %s\n" +
+                " Now you have %d tasks in the list.", this.taskToAdd.taskDescription, this.taskList.getNumTasks());
     }
 }

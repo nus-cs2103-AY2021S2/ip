@@ -1,8 +1,8 @@
-public class Event extends Task {
+public class EventTask extends Task {
 
     private String timeWindow;
 
-    public Event(String taskDescription, String timeWindow) {
+    public EventTask(String taskDescription, String timeWindow) {
         this.taskDescription = taskDescription;
         this.timeWindow = timeWindow;
     }

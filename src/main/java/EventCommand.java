@@ -10,7 +10,7 @@ public class EventCommand extends AddCommand {
     @Override
     public TaskList runCommand(TaskList taskList) {
         this.taskList = taskList;
-        this.taskToAdd = new Event(this.taskDescription, this.timeWindow);
+        this.taskToAdd = new EventTask(this.taskDescription, this.timeWindow);
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }

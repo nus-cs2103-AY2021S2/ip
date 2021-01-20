@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InputHandler {
 
@@ -28,29 +30,34 @@ public class InputHandler {
             case DONE_COMMAND:
                 try {
                     return new DoneCommand(Integer.parseInt(userInputArr[1]));
-                } catch(NullPointerException | NumberFormatException | IndexOutOfBoundsException e) {
+                } catch(NumberFormatException | IndexOutOfBoundsException e) {
                     return new ExceptionCommand("Please enter a task index to mark as completed!!");
                 }
 
             case TODO_COMMAND:
                 try {
-                    return new TodoCommand(userInputArr[1]);
-                } catch(NullPointerException | IndexOutOfBoundsException e) {
+                    Pattern p = Pattern.compile("(?i)todo (.+)");
+                    Matcher m = p.matcher(userInput);
+                    m.find();
+                    return new TodoCommand(m.group(1));
+                } catch(IllegalStateException e) {
                     return new ExceptionCommand("Please enter a task description to add to the list!!");
                 }
 
-                case EVENT_COMMAND:
+            case EVENT_COMMAND:
                 try {
-                    if (userInputArr[2].matches("/at(.*)")) {
-                        return new EventCommand(userInputArr[1], userInputArr[2]);
-                    } else {
-                        throw new IndexOutOfBoundsException();
-                    }
-                } catch(NullPointerException | IndexOutOfBoundsException e) {
+                    Pattern p = Pattern.compile("(?i)event (.+) /at (.+)");
+                    Matcher m = p.matcher(userInput);
+
+                    m.find();
+                    return new EventCommand(m.group(1), m.group(2));
+
+                } catch(IllegalStateException e) {
                     return new ExceptionCommand("Please enter an event description and timing to add to the list!!");
                 }
+
             default:
-                return new TodoCommand(userInput);
+                return new ExceptionCommand(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
