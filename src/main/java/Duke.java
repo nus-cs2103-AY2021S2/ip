@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class Duke {
     // use collection for holding all tasks
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private static final ArrayList<Task> taskList = new ArrayList<>();
 
     // formatting for print messages
-    private static String lines = "    ______________________________________________";
-    private static String indent = "      ";
-    private static String taskIndent = "  "; // just an extra indent for listing tasks
+    private static final String lines = "    ______________________________________________";
+    private static final String indent = "      ";
+    private static final String taskIndent = "  "; // just an extra indent for listing tasks
 
     /**
      * Mark specified task done
@@ -68,8 +68,8 @@ public class Duke {
         taskList.add(t);
 
         String[] messages = {
-            "Success. I've added this task:",
-            taskIndent + t // standardize this indent,
+                "Success. I've added this task:",
+                taskIndent + t // standardize this indent,
         };
 
         print(messages);
@@ -98,7 +98,7 @@ public class Duke {
     // but how else do you want to detect the first word if not for the space?
     private static void handleOnlyFirstArgGiven(String oneArg)
             throws MissingArgumentException, UnsupportedCommandException {
-        String errMsg = "";
+        String errMsg;
 
         switch (oneArg) {
         case "todo":
@@ -154,36 +154,12 @@ public class Duke {
         return errMsg;
     }
 
-    // parse done, todos, deadline or event commands
-    // make enums for supported commands?
-    private static void parseMultiArgCommand(String userInput) throws MissingArgumentException,
-            UnsupportedCommandException, InvalidArgumentException {
-
-        int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
-        String firstWord;
-
-        if (firstSpaceIndex == -1) {
-            // why is this needed - detect commands that are invalid before detecting missing arguments
-            firstWord = userInput.trim();
-        } else {
-            firstWord = userInput.substring(0, firstSpaceIndex);
-        }
-
-        // check for invalid commands on an empty task list
-        if (taskList.isEmpty() && (firstWord.equals("done") || firstWord.equals("delete"))) {
-            throw new InvalidArgumentException("Invalid command. The task list is empty.");
-        }
-
-        // if only one argument was provided
-        if (firstSpaceIndex == -1) {
-            handleOnlyFirstArgGiven(userInput); // seems like try catch block not necessary, because of throws
-            return;
-        }
-
+    private static void parseNextArgs(String firstWord, String userInput, int firstSpaceIndex)
+            throws MissingArgumentException, UnsupportedCommandException, InvalidArgumentException {
         // some variables declared upfront
         // todo declare these variables in if blocks below for readability
-        String desc = "";
-        String thirdArg = "";
+        String desc;
+        String thirdArg;
         int secondCmdIndex = 0;
 
         try {
@@ -195,8 +171,10 @@ public class Duke {
                 markDone(secondArg);
 
             } else if (firstWord.equals("todo")) {
+
                 desc = userInput.substring(firstSpaceIndex + 1).trim();
                 addTask(new Todo(desc));
+
             } else if (firstWord.equals("deadline")) {
 
                 secondCmdIndex = userInput.indexOf("/by"); // assuming valid
@@ -228,21 +206,53 @@ public class Duke {
             } else if (firstSpaceIndex + 1 > secondCmdIndex - 1) {
                 throw new MissingArgumentException(determineErrMsg(firstWord, 2), e);
             }
-        } catch (UnsupportedCommandException | InvalidArgumentException e) {
+        }
+    }
+
+    // parse done, todos, deadline or event commands
+    // make enums for supported commands?
+    private static void parseMultiArgCommand(String userInput) throws MissingArgumentException,
+            UnsupportedCommandException, InvalidArgumentException {
+
+        int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
+        String firstWord;
+
+        if (firstSpaceIndex == -1) {
+            // why is this needed - detect commands that are invalid before detecting missing arguments
+            firstWord = userInput.trim();
+        } else {
+            firstWord = userInput.substring(0, firstSpaceIndex);
+        }
+
+        // check for invalid commands on an empty task list
+        if (taskList.isEmpty() && (firstWord.equals("done") || firstWord.equals("delete"))) {
+            throw new InvalidArgumentException("Invalid command. The task list is empty.");
+        }
+
+        // if only one argument was provided when more are needed
+        if (firstSpaceIndex == -1) {
+            handleOnlyFirstArgGiven(userInput); // try catch block not necessary, because of throws
+            return;
+        }
+
+        try {
+            parseNextArgs(firstWord, userInput, firstSpaceIndex);
+        } catch (UnsupportedCommandException | InvalidArgumentException | MissingArgumentException e) {
+            // is it better to detect unsupported first command earlier?
+            // currently being detected at the end of many if blocks
             throw e;
         } catch (Exception e) {
-            String errMsg = "don't know " + e;
+            String errMsg = "didn't expect this exception " + e;
             print(new String[]{errMsg});
         }
 
         // catch exceptions where substring end is wrong i.e. extra arguments not found?
     }
 
+    // return value signals whether or not to close scanner
     public static boolean parseCommand(String userInput) {
         if (userInput.equals("bye")) {
             print("Bye. See you again soon!");
-//            sc.close();
-//            break;
             return false;
         } else if (userInput.equals("list")) {
             printTaskList();
@@ -258,18 +268,24 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void intro() {
         String logo =
                 " ______\n"
-                + "/______\\ Kiwi's\n"
-                + "|______|     Inn\n"
-                + "####################";
-
-        Scanner sc = new Scanner(System.in);
+                        + "/______\\ Kiwi's\n"
+                        + "|______|     Inn\n"
+                        + "####################";
 
         // intro message
         System.out.println(logo);
         print(new String[]{"Welcome, traveller. I'm Kiwi.", "What would you like to do today?"});
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        intro();
 
         // variables to reuse
         String userInput;
@@ -279,6 +295,7 @@ public class Duke {
             userInput = sc.nextLine().trim();
             remainOpen = parseCommand(userInput);
         }
+
         sc.close();
     }
 }
