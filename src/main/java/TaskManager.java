@@ -16,6 +16,10 @@ public class TaskManager {
         return taskList.get(taskNumber - 1);
     }
 
+    public int getNumOfTasks() {
+        return taskList.size();
+    }
+
     public List<Task> getTaskList() {
         return taskList;
     }

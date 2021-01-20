@@ -38,7 +38,9 @@ public class ToDoBeast {
                 if (command.equals("todo")) {
                     Task newTask = new Todo(taskDescription);
                     taskManager.addTask(newTask);
-                    System.out.println(line + "\tadded: " + newTask + "\n" + line);
+                    System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
+                } else if (command.equals("deadline")) {
+
                 }
             }
             command = sc.next();
