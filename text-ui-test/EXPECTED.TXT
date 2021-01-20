@@ -1,4 +1,4 @@
-____        _        
+ ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
@@ -29,7 +29,6 @@ Contents:
 1.[T][ ] todo borrow book
 2.[D][ ] return book (by: Sunday)
 3.[D][X] do homework (by: no idea :-p)
-bye
-Goodbye for now.
-Hope to see you soon!
-
+todo
+Exception in thread "main" DukeException: Oops!!! Incomplete command :(
+	at Duke.main(Duke.java:34)      
