@@ -25,7 +25,7 @@ public class Duke {
                 output.append("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
-                output.append("Here are the tasks in your list: \n")
+                output.append("Here are the tasks in your list: \n");
 
                 for (int i = 0; i < contentList.size(); i++) {
                     output.append(String.format("%d.%s%n", i + 1, contentList.get(i).toString()));
