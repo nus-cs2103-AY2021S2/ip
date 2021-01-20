@@ -22,11 +22,9 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
             String command = scan.nextLine();
+            dispatch(command);
             if (command.equals("bye")) {
-                dispatch(command);
                 break;
-            } else {
-                dispatch(command);
             }
         }
         scan.close();
