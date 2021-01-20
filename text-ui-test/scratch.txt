@@ -1,4 +1,8 @@
 list
+done
+done 1
+delete
+delete 2
 todo tea
 todo
 deadline coffee /by 4pm
@@ -11,5 +15,7 @@ event /at 4-6pm monday
 event read books
 event
 list
+delete
+delete 2
 bye
 

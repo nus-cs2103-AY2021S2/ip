@@ -9,9 +9,14 @@ public class Duke {
 
     /**
      * Mark specified task done
+     *
      * @param i off-by-one index of a task in array list
      */
-    private static void markDone(int i) {
+    private static void markDone(int i) throws InvalidArgumentException {
+        if (i < 1 || i > taskList.size()) {
+            throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskList.size()));
+        }
+
         taskList.get(i - 1).markAsDone();
         print(new String[]{"Good work! I've marked this task done:",
                 taskIndent + taskList.get(i - 1)});
@@ -42,7 +47,7 @@ public class Duke {
 
         System.out.println(lines);
     }
-    
+
     private static void addTask(Task t) {
         taskList.add(t);
         String[] messages = {
@@ -52,14 +57,33 @@ public class Duke {
         print(messages);
     }
 
+    private static String invalidNumErrMsg(int i, int min, int max) {
+        String errMsg = "Invalid list index given: " + i
+                + ". Number needs to be between " + min + " and " + max + " (inclusive). ";
+        return errMsg;
+    }
+
+    private static void deleteTask(int i) throws InvalidArgumentException {
+        if (i < 1 || i > taskList.size()) {
+            throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskList.size()));
+        }
+
+        print(new String[]{"Got you. I've deleted this task:",
+                taskIndent + taskList.get(i - 1)});
+
+        taskList.remove(i - 1);
+    }
+
+    // for every new command to support, need to add to cases here and if statements in parse method
+    // could simplify it somehow
+    // todo definitely need to simplify, too much duplication?
+    // e.g. delete and done shouldn't be inputted when list is empty, whether or not numArgs is correct
+    // but how else do you want to detect the first word if not for the space?
     private static void handleOnlyFirstArgGiven(String oneArg)
             throws MissingArgumentException, UnsupportedCommandException {
         String errMsg = "";
 
-        switch (oneArg){
-        case "done":
-            errMsg = "Please include the list item number of the task to mark done.";
-            break;
+        switch (oneArg) {
         case "todo":
             errMsg = "Please include a description for your todo.";
             break;
@@ -69,12 +93,17 @@ public class Duke {
         case "deadline":
             errMsg = "Please include a description and a /by argument for your deadline.";
             break;
+        case "done":
+            errMsg = "Please include the list item number of the task to mark done.";
+            break;
+        case "delete":
+            errMsg = "Please include the list item number of the task to delete.";
+            break;
         default:
             throw new UnsupportedCommandException();
         }
 
         throw new MissingArgumentException(errMsg);
-//        print(new String[]{errMsg});
     }
 
 
@@ -83,7 +112,7 @@ public class Duke {
     private static String determineErrMsg(String taskType, int positionMissing) {
         String errMsg = "";
 
-        switch (taskType){
+        switch (taskType) {
         case "todo":
             errMsg = "Missing argument " + positionMissing + ". Please include a todo description.";
             break;
@@ -110,19 +139,32 @@ public class Duke {
 
     // parse done, todos, deadline or event commands
     // make enums for supported commands?
-    private static void parseCommand(String userInput) throws MissingArgumentException, UnsupportedCommandException {
+    private static void parseMultiWordCommand(String userInput) throws MissingArgumentException,
+            UnsupportedCommandException, InvalidArgumentException {
+
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
+        String firstWord;
+
+        if (firstSpaceIndex == -1) {
+            // why is this needed - detect commands that are invalid before detecting missing arguments
+            firstWord = userInput.trim();
+        } else {
+            firstWord = userInput.substring(0, firstSpaceIndex);
+        }
+
+        // check for invalid commands on an empty task list
+        if (taskList.isEmpty() && (firstWord.equals("done") || firstWord.equals("delete"))) {
+            throw new InvalidArgumentException("Invalid command. The task list is empty.");
+        }
 
         // only one word was provided
-
         if (firstSpaceIndex == -1) {
             handleOnlyFirstArgGiven(userInput); // seems like try catch block not necessary, because of throws
             return;
         }
 
-        String firstWord = userInput.substring(0, firstSpaceIndex); // don't include the space
-
-        // declare variables here to help with exception checking
+        // some variables declared upfront
+        // todo declare these variables in if blocks below for readability
         String desc = "";
         String thirdArg = "";
         int secondCmdIndex = 0;
@@ -152,6 +194,10 @@ public class Duke {
                 thirdArg = userInput.substring(atIndex + 3).trim();
 
                 addTask(new Event(desc, thirdArg));
+            } else if (firstWord.equals("delete")) {
+                desc = userInput.substring(firstSpaceIndex + 1).trim();
+                int secondArg = Integer.parseInt(desc);
+                deleteTask(secondArg);
             } else {
                 throw new UnsupportedCommandException();
             }
@@ -163,6 +209,8 @@ public class Duke {
             }
         } catch (UnsupportedCommandException e) {
             throw e;
+        } catch (InvalidArgumentException e) {
+            throw e;
         } catch (Exception e) {
             String errMsg = "don't know " + e;
             print(new String[]{errMsg});
@@ -173,10 +221,10 @@ public class Duke {
 
     public static void main(String[] args) {
         String logo =
-            " ______\n"
-            + "/______\\ Kiwi's\n"
-            + "|______|     Inn\n"
-            + "####################";
+                " ______\n"
+                        + "/______\\ Kiwi's\n"
+                        + "|______|     Inn\n"
+                        + "####################";
 
         Scanner sc = new Scanner(System.in);
 
@@ -201,8 +249,8 @@ public class Duke {
             } else {
                 // assumed to be a valid command and have space
                 try {
-                    parseCommand(userInput.trim());
-                } catch (MissingArgumentException | UnsupportedCommandException e) {
+                    parseMultiWordCommand(userInput.trim());
+                } catch (MissingArgumentException | UnsupportedCommandException | InvalidArgumentException e) {
                     print(new String[]{e.toString()});
                 }
             }

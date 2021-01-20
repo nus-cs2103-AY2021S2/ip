@@ -111,5 +111,15 @@
       UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
+      MissingArgumentException: Please include the list item number of the task to delete.
+    ______________________________________________
+    ______________________________________________
+      InvalidArgumentException: Invalid list index given: 0. Number needs to be between 1 and 7 (inclusive). 
+    ______________________________________________
+    ______________________________________________
+      Got you. I've deleted this task:
+        [T][/] tea
+    ______________________________________________
+    ______________________________________________
       Bye. See you again soon!
     ______________________________________________
