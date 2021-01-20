@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -56,31 +57,53 @@ public class Duke {
         formatInChatBox("Bye. Hope to see you again soon!\n");
     }
 
-    public void add(String task, String description) {
-        if (task.equals("TODO")) {
-            Task newToDo = new ToDo(description);
-            taskList.add(newToDo);
-            String output = "Got it. I've added this task:\n  " + newToDo + "\n Now you have "
-                    + taskList.size() + " tasks in the list.";
-            formatInChatBox(output);
-        } else if (task.equals("DEADLINE")) {
-            int endIndexOfDescription = description.indexOf("/by ");
-            String deadlineDescription = description.substring(0, endIndexOfDescription);
-            String deadline = description.substring(endIndexOfDescription + 4);
-            Task newDeadline = new Deadline(deadlineDescription, deadline);
-            taskList.add(newDeadline);
-            String output = "Got it. I've added this task:\n  " + newDeadline + "\n Now you have "
-                    + taskList.size() + " tasks in the list.";
-            formatInChatBox(output);
-        } else if (task.equals("EVENT")) {
-            int endIndexOfDescription = description.indexOf("/at ");
-            String eventDescription = description.substring(0, endIndexOfDescription);
-            String eventTime = description.substring(endIndexOfDescription + 4);
-            Task newEvent = new Event(eventDescription, eventTime);
-            taskList.add(newEvent);
-            String output = "Got it. I've added this task:\n  " + newEvent + "\n Now you have "
-                    + taskList.size() + " tasks in the list.";
-            formatInChatBox(output);
+    public void add(String task, String description) throws TextException {
+        try {
+            if (description.equals(" ") || description.isEmpty()) {
+                throw new TextException("OOPS!!! The description of a " + task.toLowerCase(Locale.ROOT) + " cannot be empty.");
+            }
+            if (task.equals("TODO")) {
+                try {
+                    if (description.isEmpty() || description.equals(" ")) {
+                        throw new TextException("OOPS!!! The description of a todo cannot be empty.");
+                    }
+                    Task newToDo = new ToDo(description);
+                    taskList.add(newToDo);
+                    String output = "Got it. I've added this task:\n  " + newToDo + "\n Now you have "
+                            + taskList.size() + " tasks in the list.";
+                    formatInChatBox(output);
+                } catch (TextException e) {
+                    formatInChatBox(e.getMessage());
+                }
+            } else if (task.equals("DEADLINE")) {
+                int endIndexOfDescription = description.indexOf("/by ");
+                String deadlineDescription = description.substring(0, endIndexOfDescription);
+                String deadline = description.substring(endIndexOfDescription + 4);
+                Task newDeadline = new Deadline(deadlineDescription, deadline);
+                taskList.add(newDeadline);
+                String output = "Got it. I've added this task:\n  " + newDeadline + "\n Now you have "
+                        + taskList.size() + " tasks in the list.";
+                formatInChatBox(output);
+            } else if (task.equals("EVENT")) {
+                int endIndexOfDescription = description.indexOf("/at ");
+                String eventDescription = description.substring(0, endIndexOfDescription);
+                String eventTime = description.substring(endIndexOfDescription + 4);
+                Task newEvent = new Event(eventDescription, eventTime);
+                taskList.add(newEvent);
+                String output = "Got it. I've added this task:\n  " + newEvent + "\n Now you have "
+                        + taskList.size() + " tasks in the list.";
+                formatInChatBox(output);
+            }
+        } catch (TextException e) {
+            formatInChatBox(e.getMessage());
+        }
+    }
+
+    public void error() throws TextException {
+        try {
+            throw new TextException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (TextException e) {
+            formatInChatBox(e.getMessage());
         }
     }
 
@@ -89,35 +112,40 @@ public class Duke {
         mike.init();
         Scanner sc = new Scanner(System.in);
         Boolean isChatting = true;
-
-        while (isChatting) {
+        do {
             String input = sc.next();
-            Command c = Command.valueOf(input.toUpperCase());
-            switch (c) {
-                case BYE:
-                    mike.exit();
-                    return;
-                case LIST:
-                    mike.list();
-                    break;
-                case DONE:
-                    int i = sc.nextInt();
-                    mike.mark(i);
-                    break;
-                case TODO:
-                    String toDoDescription = sc.nextLine();
-                    mike.add("TODO", toDoDescription);
-                    break;
-                case DEADLINE:
-                    String deadlineDescription = sc.nextLine();
-                    mike.add("DEADLINE", deadlineDescription);
-                    break;
-                case EVENT:
-                    String eventDescription = sc.nextLine();
-                    mike.add("EVENT", eventDescription);
-                    break;
+            try {
+                Command c = Command.valueOf(input.toUpperCase());
+                switch (c) {
+                    case BYE:
+                        mike.exit();
+                        return;
+                    case LIST:
+                        mike.list();
+                        break;
+                    case DONE:
+                        int i = sc.nextInt();
+                        mike.mark(i);
+                        break;
+                    case TODO:
+                        String toDoDescription = sc.nextLine();
+                        mike.add("TODO", toDoDescription);
+                        break;
+                    case DEADLINE:
+                        String deadlineDescription = sc.nextLine();
+                        mike.add("DEADLINE", deadlineDescription);
+                        break;
+                    case EVENT:
+                        String eventDescription = sc.nextLine();
+                        mike.add("EVENT", eventDescription);
+                        break;
+                    default:
+                        mike.error();
+                }
+            } catch (IllegalArgumentException e) {
+                mike.error();
             }
-        }
+        } while (isChatting);
         sc.close();
     }
 }
