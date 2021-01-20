@@ -29,6 +29,10 @@ public abstract class Task {
         isDone = done;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void markAsDone() {
         setDone(true);
     }

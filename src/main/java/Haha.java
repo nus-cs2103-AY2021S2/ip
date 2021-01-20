@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,9 +17,30 @@ public class Haha {
             + "What can I do for you?\n"
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
+    private static final String[] LEGITCOMMANDS = new String[]{
+            "todo", "deadline", "event", "list", "done", "bye"
+    };
 
-    private static int taskNumber(String command) { // for "done" command
-        return Integer.parseInt("" + command.charAt(command.length() - 1));
+    private enum TaskType {
+        TODO("todo"), DEADLINE("deadline"), EVENT("event");
+        private final String rep;
+
+        TaskType(String rep) {
+            this.rep = rep;
+        }
+
+        String getRep() {
+            return rep;
+        }
+    }
+
+    private static int taskNumber(String command) throws HahaTaskNumberNotIntException {
+        try {
+            return Integer.parseInt("" + command.charAt(command.length() - 1));
+        } catch (NumberFormatException ex) {
+            throw new HahaTaskNumberNotIntException(command);
+        }
+
     }
 
     private static void tellAdd() {
@@ -37,6 +59,22 @@ public class Haha {
         tellSize(database);
     }
 
+    private static void handleCommand(String command) throws HahaException {
+        // Check input starts with specified command words
+        if (Arrays.stream(LEGITCOMMANDS).noneMatch(command::startsWith)) {
+            throw new HahaWrongCommandException(command);
+        }
+        // Check input has description following task command words
+        if (Arrays.stream(TaskType.values()).anyMatch(x -> command.startsWith(x.getRep()))) {
+            boolean bad = Arrays.stream(TaskType.values())
+                    .filter(x -> command.startsWith(x.getRep()))
+                    .anyMatch(x -> x.getRep().length() == command.length());
+            if (bad) {
+                throw new HahaEmptyDescriptionException(command);
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -48,10 +86,24 @@ public class Haha {
             String command = sc.nextLine();
             System.out.println(LINE_BREAK);
 
+            // Safety checks
+            try {
+                handleCommand(command);
+            } catch (HahaEmptyDescriptionException | HahaWrongCommandException ex) {
+                System.out.println(ex);
+                continue;
+            } catch (HahaException ex) {
+                System.out.println("Last layer of defense");
+                System.out.println("SOMETHING IS WRONG!");
+                continue;
+            } finally {
+                System.out.println(LINE_BREAK);
+            }
+
             if (command.equals("bye")) {
                 System.out.println("Bye now!");
                 break;
-            } else if (command.equals("list") || command.equals("ls") ) {
+            } else if (command.equals("list") || command.equals("ls")) {
                 if (database.size() == 0) {
                     System.out.println("You have nothing going on!");
                 } else {
@@ -63,15 +115,23 @@ public class Haha {
                     }
                 }
             } else if (command.startsWith("done")) {
-                // might blow up, solve at Level-5
-                // done when it is already done,
-                // task number out of bound
-                // undone and done ?
-                Task currentTask = database.get(taskNumber(command) - 1);
-                System.out.println("Nice! I've marked this task as done:");
-                currentTask.setDone(true);
-                System.out.println(currentTask);
-
+                try {
+                    int givenIndex = taskNumber(command) - 1;
+                    if (givenIndex < 0 || givenIndex > database.size()) {
+                        System.out.println("OOPS! Wrong number!\n Try specify the right task number");
+                    } else {
+                        Task currentTask = database.get(givenIndex);
+                        if (currentTask.getIsDone()) {
+                            System.out.println("OOPS! I've marked this task as done ALREADY");
+                        } else {
+                            System.out.println("Nice! I've marked this task as done:");
+                            currentTask.setDone(true);
+                            System.out.println(currentTask);
+                        }
+                    }
+                } catch (HahaTaskNumberNotIntException ex) {
+                    System.out.println(ex);
+                }
             } else if (command.startsWith("todo")) {
                 addToDB(database, new Todo(false, command.substring(5)));
 
@@ -80,7 +140,6 @@ public class Haha {
 
             } else if (command.startsWith("event")) {
                 addToDB(database, new Event(false, command.substring(6)));
-
             } else {
                 System.out.println("Command not recognized!");
             }
