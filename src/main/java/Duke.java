@@ -2,8 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
-        String TEXT_INDENT = "     ";
-        String DIVIDER = "    ____________________________________________________________";
+        String DIVIDER = "____________________________________________________________";
 
         ArrayList<Task> tasks = new ArrayList<Task>();
 
@@ -12,8 +11,8 @@ public class Duke {
 
         // welcome sequence
         System.out.println(DIVIDER);
-        System.out.println(TEXT_INDENT + "Welcome to Duke!");
-        System.out.println(TEXT_INDENT + "What can I do for you?");
+        System.out.println("Welcome to Duke!");
+        System.out.println("What can I do for you?");
         System.out.println(DIVIDER);
 
         // get user input
@@ -26,22 +25,22 @@ public class Duke {
             if (userInput.toLowerCase().equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
                     String item = String.valueOf(i + 1) + ". " + tasks.get(i).toString();
-                    System.out.println(TEXT_INDENT + item);
+                    System.out.println(item);
                 }
             // finish a task
             } else if (userInput.toLowerCase().matches("^(done|finish|completed?) \\d+$")) {
                 String[] bits = userInput.split(" ");
-                int idx = Integer.valueOf(bits[1]) - 1; // zero-indexed task index
+                int idx = Integer.parseInt(bits[1]) - 1; // zero-indexed task index
                 if (idx >= 0 && idx < tasks.size()) {
                     tasks.get(idx).finish();
                 } else {
-                    System.out.println(TEXT_INDENT + "That doesn't appear to be a valid task ID!");
+                    System.out.println("That doesn't appear to be a valid task ID!");
                 }
             // add task to list
             } else {
                 Task newTask = new Task(userInput);
                 tasks.add(newTask);
-                System.out.println(TEXT_INDENT + "added: " + userInput);
+                System.out.println("added: " + userInput);
             }
             System.out.println(DIVIDER);
 
@@ -51,7 +50,7 @@ public class Duke {
 
         // exit sequence
         System.out.println(DIVIDER);
-        System.out.println(TEXT_INDENT + "Bye! Hope you see you again :)");
+        System.out.println("Bye! Hope you see you again :)");
         System.out.println(DIVIDER);
     }
 }

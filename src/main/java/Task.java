@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Task {
-    private static final String TEXT_INDENT = "     ";
     private final String description;
     private boolean done;
 
@@ -14,11 +13,11 @@ public class Task {
 
     public void finish() {
         if (this.done) {
-            System.out.println(TEXT_INDENT + "That task's already done!");
+            System.out.println("That task's already done!");
         } else {
             this.done = true;
-            System.out.println(TEXT_INDENT + "Congrats! The following task has been marked as done:");
-            System.out.println(TEXT_INDENT + " " + this.toString());
+            System.out.println("Congrats! The following task has been marked as done:");
+            System.out.println("  " + this.toString());
         }
     }
 
