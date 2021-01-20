@@ -7,23 +7,23 @@ ____________________________________________________________
 ____________________________________________________________
 >> Hey, hello there! I'm Duke, your personal chat bot.
 >> Is there anything I can do for you today?
-<< >> Got it, I have added the task "read book" to your collection.
-<< >> Got it, I have added the task "return book" to your collection.
-<< >> Got it, I have added the task "project meeting" to your collection.
-<< >> Got it, I have added the task "join sports club" to your collection.
-<< >> Task "read book" is marked as done.
-<< >> Task "join sports club" is marked as done.
-<< >> Got it, I have added the task "borrow book" to your collection.
-<< >> Got it, I have added the task "return book" to your collection.
-<< >> Got it, I have added the task "project meeting" to your collection.
-<< >> Got it, I have added the task "do homework" to your collection.
+<< >> Got it, I have added the task 'read book' to your collection.
+<< >> Got it, I have added the task 'return book' to your collection.
+<< >> Got it, I have added the task 'project meeting' to your collection.
+<< >> Got it, I have added the task 'join sports club' to your collection.
+<< >> Task 'read book' is marked as done.
+<< >> Task 'join sports club' is marked as done.
+<< >> Got it, I have added the task 'borrow book' to your collection.
+<< >> Got it, I have added the task 'return book' to your collection.
+<< >> Got it, I have added the task 'project meeting' to your collection.
+<< >> Got it, I have added the task 'do homework' to your collection.
 << >> You got a total of 8 task(s).
-	1. [T][*] read book
-	2. [D][ ] return book (by: June 6th)
-	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
-	4. [T][*] join sports club
-	5. [T][ ] borrow book
-	6. [D][ ] return book (by: Sunday)
-	7. [E][ ] project meeting (at: Mon 2-4pm)
-	8. [D][ ] do homework (by: no idea :-p)
+>> 	1. [T][*] read book
+>> 	2. [D][ ] return book (by: June 6th)
+>> 	3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+>> 	4. [T][*] join sports club
+>> 	5. [T][ ] borrow book
+>> 	6. [D][ ] return book (by: Sunday)
+>> 	7. [E][ ] project meeting (at: Mon 2-4pm)
+>> 	8. [D][ ] do homework (by: no idea :-p)
 << >> Alright, take care. I hope to see you again soon!

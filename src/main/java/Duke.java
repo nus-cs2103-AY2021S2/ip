@@ -96,7 +96,7 @@ public class Duke {
     public static void list(ArrayList<Task> collection) {
         Duke.say("You got a total of " + collection.size() + " task(s).");
         for (int i = 0; i < collection.size(); i++) {
-            System.out.println(String.format("\t%d. %s", i + 1, collection.get(i)));
+            Duke.say(String.format("\t%d. %s", i + 1, collection.get(i)));
         }
     }
 
@@ -111,14 +111,14 @@ public class Duke {
             collection.add(new Deadline(parsedInputArr[1], parsedInputArr[2]));
         else if (parsedInputArr[0].toLowerCase().equals("event"))
             collection.add(new Event(parsedInputArr[1], parsedInputArr[2]));
-        Duke.say("Got it, I have added the task \"" + parsedInputArr[1] + "\" to your collection.");
+        Duke.say("Got it, I have added the task '" + parsedInputArr[1] + "' to your collection.");
     }
 
     public static void done(ArrayList<Task> collection, String input) throws DukeException {
         try {
             int itemIdx = Integer.parseInt(input.split(" ")[1]) - 1;
             collection.get(itemIdx).markAsDone();
-            Duke.say("Task \"" + collection.get(itemIdx).getDescription() + "\" is marked as done.");
+            Duke.say("Task '" + collection.get(itemIdx).getDescription() + "' is marked as done.");
         } catch (NumberFormatException e) {
             throw new DukeException("I need a task number...");
         } catch (IndexOutOfBoundsException e) {
