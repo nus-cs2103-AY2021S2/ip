@@ -19,12 +19,16 @@ public class Task {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        if (this.type == TaskType.TODO) {
-            output.append("[T]");
-        } else if (this.type == TaskType.DEADLINE) {
-            output.append("[D]");
-        } else {
-            output.append("[E]");
+        switch (this.type) {
+            case TODO:
+                output.append("[T]");
+                break;
+            case EVENT:
+                output.append("[E]");
+                break;
+            case DEADLINE:
+                output.append("[D]");
+                break;
         }
         output.append(this.isComplete() ? "[X] " : "[ ] ");
         output.append(this.description);
@@ -32,13 +36,22 @@ public class Task {
     }
 
     public static Task parseTask(String userInput) throws DukeException {
-        // TODO: 17/1/21 Modify function to throw error if input does not match any of the three task types
-        if (userInput.startsWith("todo")) {
-            return Todo.parseTodo(userInput.substring(4).strip());
-        } else if (userInput.startsWith("event")) {
-            return Event.parseEvent(userInput.substring(5).strip());
-        } else {
-            return Deadline.parseDeadline(userInput.substring(8).strip());
+        try {
+            String[] inputSplit = userInput.split(" ",2);
+            String entryType = inputSplit[0];
+            String description = inputSplit[1].strip();
+            switch (entryType) {
+                case "todo":
+                    return Todo.parseTodo(description);
+                case "event":
+                    return Event.parseEvent(description);
+                case "deadline":
+                    return Deadline.parseDeadline(description);
+                default:
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I the description of the task cannot be empty :-(");
         }
     }
 }
