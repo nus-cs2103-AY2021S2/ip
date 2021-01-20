@@ -1,3 +1,5 @@
+package Duke;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -8,7 +10,7 @@ public class Duke {
     private static final String divider = "\t____________________________________________________________\n";
 
     /**
-     * Entry point for Duke
+     * Entry point for Duke.Duke
      * @param args
      * @throws IOException
      */
@@ -17,7 +19,7 @@ public class Duke {
              BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
             String[] greeting = {
-                "Hello! I'm Duke",
+                "Hello! I'm Duke.Duke",
                 "What can I do for you?"
             };
             write(out, greeting);
