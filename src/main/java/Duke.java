@@ -30,6 +30,7 @@ public class Duke {
                     System.out.println(command + ". Hope to see you again soon!\n" + HORIZONTAL_RULE);
                     sc.close();
                     isBye = true;
+                    break;
                 case listCommand:
                     Duke.printUserList();
                     System.out.println(HORIZONTAL_RULE);
@@ -79,7 +80,7 @@ public class Duke {
     private static void printAddedTask(Task task){
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + Task.totalTasks + " in the list.");
+        System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
         System.out.println(HORIZONTAL_RULE);
     }
 
