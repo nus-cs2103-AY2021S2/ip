@@ -1,0 +1,15 @@
+todo draft resume
+event internship briefing /at 2-3pm on Tuesday
+deadline submit assignment /by Thursday
+list
+done 1
+list
+done 3
+list
+deadline complete homework /by friday morning
+list
+done 4
+list
+todo clean room
+list
+bye
