@@ -2,8 +2,9 @@ import java.util.Scanner;
 import java.util.List;
 
 public class ToDoBeast {
+    static String line = "\t________________________________________________________________\n";
+
     public static void main(String[] args) {
-        String line = "\t________________________________________________________________\n";
         String logo = "                                                     \n" +
                 "\t88                                                   \n" +
                 "\t88                                            ,d     \n" +
@@ -27,10 +28,11 @@ public class ToDoBeast {
             if (userInput.equals("list")) {
                 printTaskList(taskManager.getTaskList());
             } else {
-
-                System.out.println(line + "\t" + userInput + "\n" + line);
-                userInput = sc.nextLine();
+                Task newTask = new Task(userInput);
+                taskManager.addTask(newTask);
+                System.out.println(line + "\tadded: " + newTask + "\n" + line);
             }
+            userInput = sc.nextLine();
 
         }
 
@@ -41,8 +43,10 @@ public class ToDoBeast {
 
     public static void printTaskList(List<Task> taskList) {
         int count = 1;
+        System.out.print(line);
         for (Task task : taskList) {
-            System.out.println(count++ + ". " + task);
+            System.out.println("\t" + count++ + ". " + task);
         }
+        System.out.println(line);
     }
 }
