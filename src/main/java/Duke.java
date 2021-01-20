@@ -1,7 +1,7 @@
 import java.util.*;
 
 enum Call {
-    DELETE, TODO, EVENT, DEADLINE, LIST, DONE;
+    DELETE, TODO, EVENT, DEADLINE, LIST, DONE
 }
 
 public class Duke {
@@ -22,7 +22,7 @@ public class Duke {
         System.out.println(sc.hasNext());
         input = sc.nextLine();
         cleanInput();
-        Call call = Call.DONE;
+        Call call;
         while (!input.contains("bye")) {
 
             if(input.contains("list")) {
@@ -46,24 +46,12 @@ public class Duke {
                 continue;
             }
             switch (call) {
-                case LIST:
-                    commandList();
-                    break;
-                case DONE:
-                    commandDone();
-                    break;
-                case TODO:
-                    commandTodo();
-                    break;
-                case DEADLINE:
-                    commandDeadline();
-                    break;
-                case EVENT:
-                    commandEvent();
-                    break;
-                case DELETE:
-                    commandDelete();
-                    break;
+                case LIST -> commandList();
+                case DONE -> commandDone();
+                case TODO -> commandTodo();
+                case DEADLINE -> commandDeadline();
+                case EVENT -> commandEvent();
+                case DELETE -> commandDelete();
             }
 
             System.out.println(sc.hasNext());
@@ -79,7 +67,7 @@ public class Duke {
         sc.close();
     }
 
-    static void commandDone() throws Exception {
+    static void commandDone() {
         try {
             String value = input.split(" ")[1];
             System.out.println(value);
@@ -146,7 +134,7 @@ public class Duke {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < list.size(); i++) {
             Task current = list.get(i);
-            System.out.println(i+1 + ". " + list.get(i));
+            System.out.println(i+1 + ". " + current);
         }
     }
 
@@ -167,10 +155,6 @@ class Task {
 
     public void isCompleted() {
         this.completed = true;
-    }
-
-    public boolean completed() {
-        return this.completed;
     }
 
     public String completedBox() {
