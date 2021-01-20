@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private boolean isActive;
     private final Scanner scanner;
     private final ArrayList<Task> tasks;
 
@@ -19,7 +18,6 @@ public class Duke {
     }
 
     public Duke() {
-        isActive = true;
         scanner = new Scanner(System.in);
         tasks = new ArrayList<>();
 
@@ -32,11 +30,7 @@ public class Duke {
     }
 
     private void listen() {
-        while (isActive) {
-            System.out.println("Let me know what to do!");
-//            String input = scanner.nextLine();
-//            String[] split = input.split(" ");
-//            String command = split[0];
+        while (scanner.hasNext()) {
             String command = scanner.next();
 
             switch (command) {
@@ -69,9 +63,11 @@ public class Duke {
                 addToList(new ToDo(scanner.nextLine().substring(1)));
                 break;
             default:
-                System.out.println("Invalid input");
+                System.out.println("Invalid input\n");
                 break;
             }
+
+            System.out.println("Let me know what to do!");
         }
     }
 
@@ -81,7 +77,7 @@ public class Duke {
     }
 
     private void printList() {
-        System.out.println("Here are the tasks to complete!");
+        System.out.println("You have " + tasks.size() + " task(s) in the list.");
 
         int i = 1;
         for (Task t : tasks) {
@@ -100,7 +96,7 @@ public class Duke {
     }
 
     private void shutDown() {
-        isActive = false;
         System.out.println("Bye bye, see you soon!\n");
+        System.exit(0);
     }
 }
