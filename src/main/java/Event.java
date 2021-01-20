@@ -16,6 +16,6 @@ public class Event extends Task{
                 date = date + " ";
             }
         }
-        return super.toString() + " (at: " + date + ")";
+        return super.toString() + "(at: " + date + ")";
     }
 }

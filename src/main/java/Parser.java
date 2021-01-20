@@ -11,7 +11,7 @@ public class Parser {
     }
 
     public void processInput(String userInput, Duke bot) throws InvalidCommandException, InvalidArgumentException{
-        String[] starr = userInput.split(" ");
+        String[] starr = userInput.split(" ", 2);
         if (starr.length == 1) {
             if(!(starr[0].equals("bye") || starr[0].equals("list"))) {
                 if(starr[0].equals("todo") || starr[0].equals("done") ||
@@ -40,39 +40,23 @@ public class Parser {
                     this.description = starr[1];
                     break;
                 case "todo":
-                    String m = "";
-                    for (int i = 1; i < starr.length; i++) {
-                        m = m.concat(starr[i]);
-                        if (i != starr.length - 1) {
-                            m = m.concat(" ");
-                        }
-                    }
-                    this.description = m;
+                    this.description = starr[1];
                     break;
                 case "deadline":
                 case "event":
-                    String[] arr = userInput.split("/");
+                    String[] arr = starr[1].split("/");
                     if(arr.length == 1) {
                         throw new InvalidArgumentException("Please input task due date!");
                     }
 
-                    String[] s = arr[0].split(" ");
+                    String[] s = arr[0].split(" ", 2);
 
                     if(s.length == 1) {
                         throw new InvalidArgumentException("Please input task description!");
                     }
 
                     this.deadline = arr[1];
-                    String message = "";
-
-                    for (int i = 1; i < s.length; i++) {
-                        message = message.concat(s[i]);
-                        if (i != s.length - 1) {
-                            message = message.concat(" ");
-                        }
-
-                    }
-                    this.description = message;
+                    this.description = arr[0];
                     break;
             }
         }

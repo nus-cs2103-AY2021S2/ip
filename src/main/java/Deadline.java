@@ -16,6 +16,6 @@ public class Deadline extends Task{
                 date = date + " ";
             }
         }
-        return super.toString() + " (by: " + date + ")";
+        return super.toString() + "(by: " + date + ")";
     }
 }
