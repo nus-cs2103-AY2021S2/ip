@@ -17,11 +17,16 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        Command command = InputHandler.parse(input);
-        isRunning = !command.shouldExit();
-        taskList = command.execute(taskList);
-        String output = command.getResponse();
-        return output;
+        Command command;
+        try {
+            command = InputHandler.parse(input);
+            isRunning = !command.shouldExit();
+            taskList = command.execute(taskList);
+            String output = command.getResponse();
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     public void displayWelcomeMessage() {

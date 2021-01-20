@@ -1,6 +1,6 @@
 public class InputHandler {
 
-    public static Command parse(String input) {
+    public static Command parse(String input) throws DukeException {
 
         String[] processedInput = input.split(" ");
         String command = processedInput[0];
@@ -11,16 +11,21 @@ public class InputHandler {
         case "bye":
             return new ByeCommand();
         case "done":
+            if (processedInput.length == 1) {
+                throw new DukeException("Please enter a number to mark done");
+            }
             int id = Integer.parseInt(processedInput[1]);
             return new DoneCommand(id);
         case "todo":
         case "event":
         case "deadline":
+            if (processedInput.length == 1) {
+                throw new DukeException("Descriptions cannot be empty, you need to type something.");
+            }
             String description = processDescription(processedInput);
             return new AddCommand(command, description);
         default:
-            System.out.println("Invalid command. Please enter a valid one");
-            return new ByeCommand();
+            throw new DukeException("Invalid command. Please enter a valid one");
         }
         
     }
