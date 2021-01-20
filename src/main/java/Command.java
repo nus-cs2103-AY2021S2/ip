@@ -1,3 +1,3 @@
 public interface Command {
-    String execute();
+    String execute(TaskList taskList);
 }

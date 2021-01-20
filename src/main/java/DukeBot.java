@@ -3,10 +3,12 @@ import java.util.Scanner;
 public class DukeBot {
     private final Scanner scanner;
     private final Parser parser;
+    private final TaskList taskList;
 
     public DukeBot(final Scanner sc) {
         this.scanner = sc;
         this.parser = new Parser();
+        this.taskList = new TaskList();
     }
 
     public void printOut(final String msg) {
@@ -21,7 +23,7 @@ public class DukeBot {
 
         while (!parser.isBye()) {
             command = parser.parseInput(scanner.nextLine());
-            printOut(command.execute());
+            printOut(command.execute(taskList));
         }
     }
 }
