@@ -20,11 +20,8 @@ public class Duke {
 
   public void addList(Task input) {
     this.tasklist.add(input);
-    System.out.println(" ___________________________________________");
-    System.out.println("added: " + input.getDescription());
-    System.out.println(" ___________________________________________");
-  }
 
+  }
 
 
   public static void main(String[] args) {
@@ -57,10 +54,35 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(duke.tasklist.get((Integer.parseInt(input.split(" ")[1]) - 1)));
         System.out.println(" ___________________________________________");
+      } else if (input.split(" ")[0].equals("todo")) {
+        Todo task  = new Todo(input.split(" ")[1] + " " + input.split(" ")[2]);
+        System.out.println(" ___________________________________________");
+        System.out.println("Got it. I've added this task: ");
+        duke.addList(task);
+        System.out.println(task);
+        System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
+
+      } else if (input.split(" ")[0].equals("deadline")) {
+        Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
+                input.split("/")[1]);
+        System.out.println("Got it. I've added this task: ");
+        duke.addList(task);
+        System.out.println(task);
+        System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
+      } else if (input.split(" ")[0].equals("event")) {
+        Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
+                input.split("/")[1]);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println(task);
+        System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
+
+
       } else {
         Task task = new Task(input);
         duke.addList(task);
-
+        System.out.println(" ___________________________________________");
+        System.out.println("added: " + task.getDescription());
+        System.out.println(" ___________________________________________");
       }
 
     }

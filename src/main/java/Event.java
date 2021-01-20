@@ -1,6 +1,13 @@
 public class Event extends Task{
 
-    public Event(String Description, String by) {
-        super(Description);
-    }
+  protected String by;
+
+  public Event(String description, String by) {
+    super(description);
+  }
+
+  @Override
+  public String toString() {
+    return "[E]" + super.toString() + " (by: " + by + ")";
+  }
 }
