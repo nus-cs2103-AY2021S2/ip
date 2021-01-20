@@ -310,4 +310,8 @@
      An error occurred:
      You have entered "2", which is an unrecognised command. Please try again!
     ____________________________________________________________
+    ____________________________________________________________
+     An error occurred:
+     You have entered "BLAH", which is an unrecognised command. Please try again!
+    ____________________________________________________________
      Bye. Hope to see you again soon!
