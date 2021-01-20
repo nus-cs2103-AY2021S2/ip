@@ -1,15 +1,23 @@
-import java.lang.reflect.Array;
+package prev;
+//prev here refers to codes for level 1,2,3
+
+import java.util.Scanner;
 import java.util.*;
 
-
-public class test{
-
+public class Duke {
     public static void main(String[] args) {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
 
         //task 1
         //greeting line
         /*
-        System.out.println("Hello my name is Duke\n" + "What can i do for you");
+        System.out.println("Hello my name is prev.Duke\n" + "What can i do for you");
         Scanner sc = new Scanner(System.in); // takes in input
         while(sc.hasNext()){ //while there is an input
             String s = sc.next();// put the input into string
@@ -25,7 +33,7 @@ public class test{
         //task 2
         //add list
         /*
-        System.out.println("Hello! I am Duke\n" + "What can I do for you");
+        System.out.println("Hello! I am prev.Duke\n" + "What can I do for you");
         Scanner sc = new Scanner(System.in);
         ArrayList xs = new ArrayList();
         while(sc.hasNextLine()){
@@ -42,7 +50,9 @@ public class test{
         }
         */
 
-        System.out.println("Hello! I am Duke\n" + "What can I do for you");
+        //task 3
+        // mark as done
+        System.out.println("Hello! I am prev.Duke\n" + "What can I do for you");
         Scanner sc = new Scanner(System.in);
         ArrayList<String> xsString = new ArrayList<>();
         ArrayList<Task>   xsTask   = new ArrayList<>();
@@ -70,7 +80,6 @@ public class test{
                 System.out.println(xsTask.get(end-1).getDecs() + xsTask.get(end-1).getStatusIcon());
             }
         }
-
     }
-
 }
+
