@@ -22,7 +22,7 @@ public class Duke {
                 break;
             }
 
-            if (input.equals("")) { // empty string
+            if (input.strip().equals("")) { // empty string
                 System.out.println("\t...");
             } else if (input.equals("list")) { // list tasks
                 listTasks(counter, store);
@@ -51,7 +51,7 @@ public class Duke {
             final int index = input.indexOf(" /by ");
             final String[] splitOnBy = input.split(" /by ", 2);
 
-            if (index == -1 || splitOnBy.length < 2) {
+            if (index == -1 || splitOnBy.length < 2 || splitOnBy[1].strip().equals("")) {
                 System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
             } else {
                 final String task = splitOnBy[0].split("deadline ", 2)[1];
@@ -63,7 +63,7 @@ public class Duke {
             final int index = input.indexOf(" /at ");
             final String[] splitOnAt = input.split(" /at ", 2);
 
-            if (index == -1 || splitOnAt.length < 2) {
+            if (index == -1 || splitOnAt.length < 2 || splitOnAt[1].strip().equals("")) {
                 System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
             } else {
                 final String task = splitOnAt[0].split("event ", 2)[1];
