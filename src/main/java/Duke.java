@@ -4,7 +4,8 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         String input;
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<Task> arrayList = new ArrayList<Task>();
+        int listNumber = 1;
 
         System.out.println("--------------------------");
         System.out.println("Hello! I'm Duke");
@@ -14,25 +15,41 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             input = scanner.nextLine();
-            int listNumber = 1;
+
 
             if (input.equals("bye")) {
                 System.out.println("--------------------------");
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("--------------------------");
-            } else if (input.equals("list")){
+
+            } else if (input.equals("list")) {
                 System.out.println("--------------------------");
-                for (String s : arrayList) {
-                    System.out.print(listNumber+". "+ s);
+                System.out.println("Here are the tasks in your list:");
+                for (Task s : arrayList) {
+                    System.out.print(s.index + ". " + s.printTask());
                     System.out.print("\n");
-                    listNumber++;
                 }
                 System.out.println("--------------------------");
+
+            } else if (input.contains("done")) {
+                int x = Integer.parseInt(input.substring(5));
+                System.out.println("--------------------------");
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(arrayList.get(x-1).getStatusIcon()+ " " + arrayList.get(x-1).description);
+                arrayList.set(x-1, arrayList.get(x-1).markAsDone());
+                System.out.println("--------------------------");
+
             } else {
-                arrayList.add(input);
+                Task task = new Task(input);
+                task.index = listNumber;
+                listNumber++;
+                arrayList.add(task);
                 System.out.println("added: "+ input);
                 System.out.println("--------------------------");
             }
+
         }
     }
 }
+
+
