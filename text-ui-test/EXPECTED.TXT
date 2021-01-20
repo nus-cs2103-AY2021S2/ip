@@ -3,95 +3,110 @@
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [T][X] eat cake
+    [T][ ] eat cake
     The size of your task list is now: 1
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][X] eat cake
+    1.[T][ ] eat cake
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
 Great~! Task completed:
-    [T][Y] eat cake
+    [T][?] eat cake
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [D][X] shoot pancakes  (by:  Tuesday)
+    [D][ ] shoot pancakes (by: Tuesday)
     The size of your task list is now: 2
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][Y] eat cake
-    2.[D][X] shoot pancakes  (by:  Tuesday)
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][Y] eat cake
-    2.[D][X] shoot pancakes  (by:  Tuesday)
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [T][X] go to school
+    [T][ ] go to school
     The size of your task list is now: 3
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [D][X] return book  (by:  Sunday)
+    [D][ ] return book (by: Sunday)
     The size of your task list is now: 4
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][Y] eat cake
-    2.[D][X] shoot pancakes  (by:  Tuesday)
-    3.[T][X] go to school
-    4.[D][X] return book  (by:  Sunday)
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][ ] return book (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [E][X] project meeting  (at:  Mon 2-4pm)
+    [E][ ] project meeting (at: Mon 2-4pm)
     The size of your task list is now: 5
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][Y] eat cake
-    2.[D][X] shoot pancakes  (by:  Tuesday)
-    3.[T][X] go to school
-    4.[D][X] return book  (by:  Sunday)
-    5.[E][X] project meeting  (at:  Mon 2-4pm)
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][ ] return book (by: Sunday)
+    5.[E][ ] project meeting (at: Mon 2-4pm)
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
 Great~! Task completed:
-    [D][Y] return book  (by:  Sunday)
+    [D][?] return book (by: Sunday)
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
+~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
+    Your input format doesn't seem to be valid for this command! Please try it again :c
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [T][X] play cards against humanity
+    [T][ ] play cards against humanity
     The size of your task list is now: 6
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [D][X] submit cs2103 assignment  (by:  tomorrow)
+    [D][ ] submit cs2103 assignment (by: tomorrow)
     The size of your task list is now: 7
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Wakarimashita! Task added to list:
-      [E][X] nomination of hawker culture  (at:  Sunday wholeday)
+    [E][ ] nomination of hawker culture (at: Sunday wholeday)
     The size of your task list is now: 8
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
 Great~! Task completed:
-    [D][Y] submit cs2103 assignment  (by:  tomorrow)
+    [D][?] submit cs2103 assignment (by: tomorrow)
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Tasks in your list are~: 
-    1.[T][Y] eat cake
-    2.[D][X] shoot pancakes  (by:  Tuesday)
-    3.[T][X] go to school
-    4.[D][Y] return book  (by:  Sunday)
-    5.[E][X] project meeting  (at:  Mon 2-4pm)
-    6.[T][X] play cards against humanity
-    7.[D][Y] submit cs2103 assignment  (by:  tomorrow)
-    8.[E][X] nomination of hawker culture  (at:  Sunday wholeday)
+    1.[T][?] eat cake
+    2.[D][ ] shoot pancakes (by: Tuesday)
+    3.[T][ ] go to school
+    4.[D][?] return book (by: Sunday)
+    5.[E][ ] project meeting (at: Mon 2-4pm)
+    6.[T][ ] play cards against humanity
+    7.[D][?] submit cs2103 assignment (by: tomorrow)
+    8.[E][ ] nomination of hawker culture (at: Sunday wholeday)
 ~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~
     Hope you had an enjoyable experience! Good-bye~
