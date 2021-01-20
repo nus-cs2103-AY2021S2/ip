@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 public class ToDoBeast {
     public static void main(String[] args) {
-        String line = "\t____________________________________________________________\n";
+        String line = "\t________________________________________________________________\n";
         String logo = "                                                     \n" +
                 "\t88                                                   \n" +
                 "\t88                                            ,d     \n" +
@@ -15,6 +17,14 @@ public class ToDoBeast {
         String greeting = line + logo + "\tWelcome to ToDoBeast, your best productivity task tracker tool!\n"
                 + "\tLet's get this bread! How would you like to be productive today?\n" + line;
         System.out.println(greeting);
+
+        Scanner sc = new Scanner(System.in);
+        String userInput = sc.nextLine();
+
+        while (!userInput.equals("bye")) {
+            System.out.println(line + "\t" + userInput + "\n" + line);
+            userInput = sc.nextLine();
+        }
 
     }
 }
