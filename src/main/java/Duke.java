@@ -64,6 +64,21 @@ public class Duke {
     }
 
     /**
+     * Delete the specified task from the list.
+     * @param inputString User input string.
+     */
+    public static void deleteTask(String inputString) {
+        try {
+            int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
+            Task deletedTask = taskList.remove(taskId);
+            System.out.println("    Okie! I've deleted the task from your list:");
+            System.out.println("    " + deletedTask + "\n    The size of your task list is now: " + taskList.size());
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskException();
+        }
+    }
+    
+    /**
      * Listens to the user's input, and passes it to the input handler.
      */
     public static void listenInput() {
