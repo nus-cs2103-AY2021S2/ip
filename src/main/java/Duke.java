@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
     public static void main(String[] args) {
@@ -13,23 +14,37 @@ public class Duke {
 
         System.out.println("---------------------------------------" );
 
-//        Level 1: Echo
+//        Initialize Task container of space 100
+        String[] tasks = new String[100];
+        int taskNumber = 0;
+
         while(true) {
             Scanner scan = new Scanner(System.in);
             String input;
             input = scan.nextLine();
 
             if (input.equals("bye")) {
-//            Terminate
                 System.out.println("\n---------------------------------------" );
                 System.out.println("Bye. Sayonara and goodbye!");
                 System.out.println("---------------------------------------" );
                 break;
+            } else if (input.equals("list")) {
+//                Display list
+//                Numbers should change accordingly when deleted (For future Ref.)
+                System.out.println("\n---------------------------------------" );
+                for (int i = 0; i < taskNumber; i++) {
+                    System.out.println(tasks[i]);
+                }
+                System.out.println("---------------------------------------" );
+            } else {
+//            Add to list
+                tasks[taskNumber] = String.valueOf(taskNumber+1) + ". " + input;
+                taskNumber++;
+                System.out.println("\n---------------------------------------" );
+                System.out.println("added: " + input);
+                System.out.println("---------------------------------------" );
+
             }
-//            Echo:
-            System.out.println("\n---------------------------------------" );
-            System.out.println(input);
-            System.out.println("---------------------------------------" );
         }
     }
 }
