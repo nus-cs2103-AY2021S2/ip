@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
 
@@ -73,6 +71,48 @@ public class Duke {
         }
     }
 
+    static void level4() {
+        List<Task> lst = new ArrayList<>();
+        lst.add(new ToDoTask("read book"));
+        lst.add(new DeadlineTask("return book", "June 6th"));
+        lst.add(new EventTask("project meeting", "Aug 6th"));
+        lst.add(new ToDoTask("join sports club"));
+        lst.get(0).markAsDone();
+        lst.get(3).markAsDone();
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String[] inputArray = input.split(" ");
+
+        while (true) {
+            if (inputArray[0].equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 1; i <= lst.size(); i++) {
+                    System.out.println(i + "." + lst.get(i - 1));
+                }
+            } else { //adding a task
+                Task task = new Task("");
+                String[] inputArr;
+                if (inputArray[0].equals("todo")) {
+                    task = new ToDoTask(input);
+                } else if (inputArray[0].equals("deadline")) {
+                    inputArr = input.split(" /by ");
+                    task = new DeadlineTask(inputArr[0], inputArr[1]);
+                } else if (inputArray[0].equals("event")) {
+                    inputArr = input.split(" /at ");
+                    task = new EventTask(inputArr[0], inputArr[1]);
+                }
+                lst.add(task);
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + task);
+                System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            }
+            input = sc.nextLine();
+            inputArray = input.split(" ");
+        }
+
+
+    }
 
 
     public static void main(String[] args) {
@@ -85,7 +125,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
          */
 
-        level3();
+        level4();
 
     }
 }
