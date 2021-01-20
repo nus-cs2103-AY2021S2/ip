@@ -1,8 +1,8 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
     }
 
@@ -21,4 +21,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract String getType();
+
+    public abstract String toString();
 }
