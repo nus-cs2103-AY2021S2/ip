@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
@@ -35,4 +34,5 @@ then
 else
     echo "Test result: FAILED"
     exit 1
+then
 fi

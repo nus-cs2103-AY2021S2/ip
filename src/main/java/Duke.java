@@ -32,7 +32,7 @@ public class Duke {
 
         public String getStatusIcon() {
 //            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-            return (isDone ? "\u2713" : " "); //return tick or X symbols
+            return (isDone ? "X" : " "); //return tick or X symbols
         }
 
 //        public String getTypeIcon () {
@@ -70,7 +70,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[D]" + super.toString() + "(by: " + by + ")";
+            return "[D]" + super.toString() + " (by: " + by + ")";
         }
     }
 
@@ -84,7 +84,7 @@ public class Duke {
 
         @Override
         public String toString() {
-            return "[E]" + super.toString() + "(at: " + at + ")";
+            return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
 
@@ -123,10 +123,10 @@ public class Duke {
                     newTask = new TodoTask(input.substring(5));
                 } else if (input.startsWith("deadline")) {
                     String[] inputSplit = input.split("/");
-                    newTask = new DeadlineTask(inputSplit[0].substring(9), inputSplit[1].substring(3));
+                    newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1), inputSplit[1].substring(3));
                 } else {
                     String[] inputSplit = input.split("/");
-                    newTask = new EventTask(inputSplit[0].substring(6), inputSplit[1].substring(3));
+                    newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1), inputSplit[1].substring(3));
                 }
 //                list.add(new Task(input));
                 list.add(newTask);

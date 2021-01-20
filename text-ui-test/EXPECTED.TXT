@@ -5,3 +5,20 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! How can I help you?
+Added: [T][ ] read book
+Added: [D][ ] return book (by: June 6th)
+Added: [E][ ] project meeting (at: Aug 6th 2-4pm)
+Good job! You got return book done!
+Added: [T][ ] join sports club
+Good job! You got join sports club done!
+Added: [T][ ] borrow book
+Added: [D][ ] return book (by: Sunday)
+Added: [E][ ] project meeting (at: Mon 2-4pm)
+1. [T][ ] read book
+2. [D][X] return book (by: June 6th)
+3. [E][ ] project meeting (at: Aug 6th 2-4pm)
+4. [T][X] join sports club
+5. [T][ ] borrow book
+6. [D][ ] return book (by: Sunday)
+7. [E][ ] project meeting (at: Mon 2-4pm)
