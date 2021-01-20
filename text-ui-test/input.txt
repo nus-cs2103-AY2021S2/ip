@@ -1,0 +1,11 @@
+todo buy eggs
+todo buy milk
+deadline bake cake /by 23rd Jan
+deadline deliver cake /by 24th Jan 2359
+event birthday party! /at 24th Jan
+event celebrate /at always!
+list
+done 1
+done 2
+list
+bye
