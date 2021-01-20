@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> list = new ArrayList<>();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -36,7 +36,23 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
                     }
-
+                } else if (arr[0].equals("delete")) {
+                    if (arr.length < 2) {
+                        throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
+                    }
+                    try {
+                        int index = Integer.parseInt(arr[1]);
+                        if (index < 1 || index > list.size()) {
+                            throw new DukeException("OOPS!!! The numbered task does not exist.");
+                        }
+                        Task t = list.get(index - 1);
+                        list.remove(index - 1);
+                        System.out.println("Noted! I've removed this task:\n" + t
+                                + "\nNow you have " + list.size()
+                                + (list.size() == 1 ? " task " : " tasks ") + "in the list.");
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
+                    }
                 } else if (s.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
