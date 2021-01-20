@@ -1,8 +1,8 @@
 public class Format {
 
-    public static final String SPACE = "\n";
-    public static final String UPPER = SPACE + "^".repeat(90) + SPACE.repeat(2);
-    public static final String LOWER = SPACE.repeat(1) + "_".repeat(90) + SPACE;
+    public static final String LINEBREAK = "\n";
+    public static final String UPPER = LINEBREAK + "^".repeat(90) + LINEBREAK.repeat(2);
+    public static final String LOWER = LINEBREAK.repeat(1) + "_".repeat(90) + LINEBREAK;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -27,7 +27,7 @@ public class Format {
 
     public static final String biggerBox(Task t) {
         return Format.UPPER + "Added liao: "
-                + t.toString() + Format.SPACE
+                + t.toString() + Format.LINEBREAK
                 + "You have " + Task.getCapacity() + " tasks in the list!"
                 + Format.LOWER;
     }
