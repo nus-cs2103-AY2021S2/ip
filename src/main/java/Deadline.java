@@ -7,7 +7,10 @@ public class Deadline extends Task {
     }
 
     static public Deadline parse(String input) throws DukeException {
-        String body = input.split("deadline")[1].strip();
+        String[] arr = input.split("deadline");
+        if (arr.length < 2) throw new DukeException("Deadline description cannot be empty");
+
+        String body = arr[1].strip();
         if(!body.trim().isEmpty()) {
             String[] parts = body.split("/by");
             String desc = parts[0].strip();

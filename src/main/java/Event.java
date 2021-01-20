@@ -7,7 +7,10 @@ public class Event extends Task {
     }
 
     static public Event parse(String input) throws DukeException {
-        String body = input.split("event")[1].strip();
+        String[] arr = input.split("event");
+        if (arr.length < 2) throw new DukeException("Event description cannot be empty");
+
+        String body = arr[1].strip();
         if(!body.trim().isEmpty()) {
             String[] parts = body.split("/at");
             String desc = parts[0].strip();
