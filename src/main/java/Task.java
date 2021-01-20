@@ -11,14 +11,16 @@ public class Task {
     }
 
     private static void add(Task t) {
-        taskList[capacity - 1] = t;
+        if (t.taskName.length() <= 38) {
+            taskList[capacity - 1] = t;
+        }
     }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public Task[] getTaskList() {
+    public static final Task[] getTaskList() {
         return Task.taskList;
     }
 

@@ -5,8 +5,10 @@ public class Duke {
         String temp = s.toLowerCase();
         if (s.equals("bye")) {
             return 0;
-        } else {
+        } else if (s.equals("list")) {
             return 1;
+        } else {
+            return 2;
         }
     }
 
@@ -18,11 +20,14 @@ public class Duke {
 
         while(sc.hasNext()) {
             String message = sc.nextLine();
-            Task t = new Task(message);
+
             int type = inputHandler(message);
             if (type == 0) {
                 break;
-            } else {
+            } else if (type == 1) {
+                Format.LISTING();
+            }else {
+                Task t = new Task(message);
                 System.out.println(Format.chatBox("Added: " + message));
             }
 
