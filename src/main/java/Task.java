@@ -1,18 +1,29 @@
 public class Task {
-    private static String[] tasks = new String[100];
-    private String task;
+    private static Task[] taskList = new Task[100];
+    private String taskName;
     private static int capacity = 0;
-    Task(String task) {
-        this.task = task;
+    private int index;
+    Task(String taskName) {
+        this.taskName = taskName;
+        this.index = capacity + 1;
         capacity++;
-        add(task);
+        add(this);
     }
 
-    private static void add(String s) {
-        tasks[capacity - 1] = s;
+    private static void add(Task t) {
+        taskList[capacity - 1] = t;
     }
 
-    public static String[] getTasks() {
-        return tasks;
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public Task[] getTaskList() {
+        return Task.taskList;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d. %s", index, taskName);
     }
 }
