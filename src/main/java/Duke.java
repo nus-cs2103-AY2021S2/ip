@@ -11,7 +11,7 @@ public class Duke {
         // + "|____/ \\__,_|_|\\_\\___|\n";
         // System.out.println("Hello from\n" + logo);
 
-        List<String> contentList = new ArrayList<String>();
+        List<Task> contentList = new ArrayList<>();
 
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
@@ -19,22 +19,30 @@ public class Duke {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
+            StringBuilder output = new StringBuilder();
 
             if (input.equals("bye")) {
-                textWarper("Bye. Hope to see you again soon!");
+                output.append("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
-                int num = 1;
-                StringBuilder output = new StringBuilder();
-                for (String i : contentList) {
-                    output.append(String.format("%d. %s%n", num, i));
-                    num++;
+                output.append("Here are the tasks in your list: \n")
+
+                for (int i = 0; i < contentList.size(); i++) {
+                    output.append(String.format("%d.%s%n", i + 1, contentList.get(i).toString()));
                 }
-                textWarper(output.toString());
+            } else if (input.startsWith("done")) {
+                output.append("Nice! I've marked this task as done: \n");
+
+                int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
+                contentList.get(index).setCompleted();
+
+                output.append(contentList.get(index));
             } else {
-                contentList.add(input);
-                textWarper("added: " + input);
+                contentList.add(new Task(input));
+                output.append("added: " + input);
             }
+
+            textWarper(output.toString());
         }
 
     }
