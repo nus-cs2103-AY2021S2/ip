@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -10,8 +11,7 @@ public class Duke {
         System.out.println("   Hello there! I'm Duke, always here for you!");
         System.out.println("   How can I help you today?");
 
-        Task[] arr = new Task[100];
-        int counter = 0;
+        ArrayList<Task> arrL = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -28,47 +28,52 @@ public class Duke {
             String date;
             System.out.println("___");
             try {
-                obj.checkCommand(input, command, first, counter);
+                obj.checkCommand(input, command, first, arrL.size());
                 switch (command) {
                     case "list":
-                        for (int i = 0; i < counter; i++) {
-                            System.out.println("   " + (i + 1) + ". " + arr[i]);
+                        for (int i = 0; i < arrL.size(); i++) {
+                            System.out.println("   " + (i + 1) + ". " + arrL.get(i));
                         }
                         break;
 
                     case "done":
                         int task_No = Integer.parseInt(input.substring(first + 1));
-                        arr[task_No - 1].doTask();
+                        arrL.get(task_No - 1).doTask();
                         System.out.println("   Nice! I've marked this task as done:");
-                        System.out.println("      " + arr[task_No - 1]);
+                        System.out.println("      " + arrL.get(task_No - 1));
                         break;
 
                     case "todo":
                         ToDo todo = new ToDo(input.substring(first).strip());
-                        arr[counter] = todo;
-                        counter++;
+                        arrL.add(todo);
                         System.out.println("   Got it! I've added this task:\n      " + todo);
-                        System.out.println("   Now you have " + counter + " tasks in the list");
+                        System.out.println("   Now you have " + arrL.size() + " tasks in the list");
                         break;
 
                     case "deadline":
                         int byDate = input.lastIndexOf("/by ");
                         date = input.substring(byDate + 4);
                         Deadline deadline = new Deadline(input.substring(first, byDate).strip(), date);
-                        arr[counter] = deadline;
-                        counter++;
+                        arrL.add(deadline);
                         System.out.println("   Got it! I've added this task:\n      " + deadline);
-                        System.out.println("   Now you have " + counter + " tasks in the list");
+                        System.out.println("   Now you have " + arrL.size() + " tasks in the list");
                         break;
 
                     case "event":
                         int atDate = input.lastIndexOf("/at ");
                         date = input.substring(atDate + 4);
                         Event event = new Event(input.substring(first, atDate).strip(), date);
-                        arr[counter] = event;
-                        counter++;
+                        arrL.add(event);
                         System.out.println("   Got it! I've added this task:\n      " + event);
-                        System.out.println("   Now you have " + counter + " tasks in the list");
+                        System.out.println("   Now you have " + arrL.size() + " tasks in the list");
+                        break;
+
+                    case "remove":
+                        int remove_No = Integer.parseInt(input.substring(first + 1));
+                        Task task= arrL.remove(remove_No - 1);
+                        System.out.println("   Okay! I've removed this task:");
+                        System.out.println("      " + task);
+                        System.out.println("   Now you have " + arrL.size() + " tasks in the list");
                         break;
                 }
                 System.out.println("___");
@@ -121,8 +126,9 @@ public class Duke {
             case "list":
                 break;
             case "done":
+            case "remove":
                 if (test) {
-                    throw new DukeException(" Which task is done? :(");
+                    throw new DukeException(" Which task? :(");
                 } else {
                     int no = Integer.parseInt(input.substring(index + 1));
                     if (no > counter || no < 1) {

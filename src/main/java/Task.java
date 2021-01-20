@@ -7,8 +7,9 @@ public class Task {
         this.state = Task_State.NOTDONE;
     }
 
-    public void doTask() {
+    public Task doTask() {
         this.state = Task_State.DONE;
+        return this;
     }
 
     public String getInput() {
