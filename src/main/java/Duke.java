@@ -12,8 +12,8 @@ public class Duke {
         int counter = 0;
         final Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
-            final String input = scan.nextLine();
-            final String[] tokens = input.split(" ");
+            final String input = scan.nextLine().strip();
+            final String command = input.split(" ")[0];
             horizontalLine();
 
             if (input.toLowerCase().equals("bye")) {
@@ -22,13 +22,13 @@ public class Duke {
                 break;
             }
 
-            if (input.strip().equals("")) { // empty string
+            if (input.equals("")) { // empty string
                 System.out.println("\t...");
             } else if (input.equals("list")) { // list tasks
                 listTasks(counter, store);
-            } else if (tokens[0].equals("done")) { // mark task as done
-                markTaskAsDone(counter, store, tokens);
-            } else if (addTaskToList(counter, store, tokens, input)) { // add task to list
+            } else if (command.equals("done")) { // mark task as done
+                markTaskAsDone(counter, store, input);
+            } else if (addTaskToList(counter, store, command, input)) { // add task to list
                 ++counter;
             }
             horizontalLine();
@@ -36,38 +36,41 @@ public class Duke {
         scan.close();
     }
 
-    private static boolean addTaskToList(int counter, Task[] store, String[] tokens, String input) {
+    private static boolean addTaskToList(int counter, Task[] store, String command, String input) {
         boolean isInsert = false;
         if (counter >= 100) {
             System.out.println("\tSorry. The database is full!");
-        } else if (tokens[0].equals("todo")) {
-            if (tokens.length < 2) {
+        } else if (command.equals("todo")) {
+            final String[] splitOnSpace = input.split(" ", 2);
+
+            if (splitOnSpace.length < 2 || splitOnSpace[1].strip().equals("")) {
                 System.out.println("\tPlease follow this format \"todo <task>\".");
             } else {
-                store[counter] = new ToDo(input.split(" ", 2)[1]);
+                final String task = splitOnSpace[1].strip();
+                store[counter] = new ToDo(task);
                 isInsert = true;
             }
-        } else if (tokens[0].equals("deadline")) {
+        } else if (command.equals("deadline")) {
             final int index = input.indexOf(" /by ");
             final String[] splitOnBy = input.split(" /by ", 2);
 
             if (index == -1 || splitOnBy.length < 2 || splitOnBy[1].strip().equals("")) {
                 System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
             } else {
-                final String task = splitOnBy[0].split("deadline ", 2)[1];
-                final String datetime = splitOnBy[1];
+                final String task = splitOnBy[0].split("deadline ", 2)[1].strip();
+                final String datetime = splitOnBy[1].strip();
                 store[counter] = new Deadline(task, datetime);
                 isInsert = true;
             }
-        } else if (tokens[0].equals("event")) {
+        } else if (command.equals("event")) {
             final int index = input.indexOf(" /at ");
             final String[] splitOnAt = input.split(" /at ", 2);
 
             if (index == -1 || splitOnAt.length < 2 || splitOnAt[1].strip().equals("")) {
                 System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
             } else {
-                final String task = splitOnAt[0].split("event ", 2)[1];
-                final String datetime = splitOnAt[1];
+                final String task = splitOnAt[0].split("event ", 2)[1].strip();
+                final String datetime = splitOnAt[1].strip();
                 store[counter] = new Event(task, datetime);
                 isInsert = true;
             }
@@ -84,10 +87,12 @@ public class Duke {
         return isInsert;
     }
 
-    private static void markTaskAsDone(int counter, Task[] store, String[] tokens) {
-        if (tokens.length == 2) {
+    private static void markTaskAsDone(int counter, Task[] store, String input) {
+        final String[] splitOnSpace = input.split(" ", 2);
+
+        if (splitOnSpace.length == 2 && !splitOnSpace[1].strip().equals("")) {
             try {
-                final int index = Integer.parseInt(tokens[1]) - 1;
+                final int index = Integer.parseInt(splitOnSpace[1].strip()) - 1;
                 if (0 <= index && index < counter) {
                     store[index].markAsDone();
                     System.out.println("\tNice! I've marked this task as done:");
