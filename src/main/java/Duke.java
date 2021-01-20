@@ -41,7 +41,7 @@ public class Duke {
         s.close();
     }
 
-    public void manageTask(String description) throws DukeException{
+    public void manageTask(String description) throws DukeException {
         System.out.println("     --------------------------------");
         if (description.equals("list")) {
             System.out.println("     Here are the tasks in your list:");
@@ -49,8 +49,17 @@ public class Duke {
                 String rank = String.valueOf(i + 1);
                 System.out.println("     " + rank + "." + tasks.get(i));
             }
-        } else if (description.equals("bye")){
+        } else if (description.equals("bye")) {
             System.out.println("     Bye.Cya");
+        } else if(description.contains("delete")) {
+            String taskLocation = description.substring(7);
+            int taskNumber = Integer.parseInt(taskLocation);
+            Task deleteTask = tasks.get(taskNumber - 1);
+            tasks.remove(taskNumber - 1);
+            System.out.println("     Noted. I've removed this task:");
+            System.out.println("       " + deleteTask);
+            String listLength = Integer.toString(tasks.size());
+            System.out.println("     Now you have " + listLength + " tasks in the list!");
         } else if (description.contains("done")) {
             String taskLocation = description.substring(5);
             int taskNumber = Integer.parseInt(taskLocation);
