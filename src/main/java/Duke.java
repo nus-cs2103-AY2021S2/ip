@@ -28,11 +28,15 @@ public class Duke {
         print(greeting);
 
         while(isActive) {
-            listen();
+            try {
+                listen();
+            } catch (DukeException e) {
+                print(e.getMessage());
+            }
         }
     }
 
-    private void listen() {
+    private void listen() throws DukeException {
         String input = scanner.nextLine();
         if(input.equals("list")) {
             printList();
@@ -40,21 +44,16 @@ public class Duke {
             int itemNo = Integer.parseInt(input.split(" ")[1]);
             markAsDone(itemNo);
         } else if (input.startsWith("todo")) {
-            addTask(new Todo(input));
+            addTask(Todo.parse(input));
         } else if (input.startsWith("deadline")) {
-            String[] parts = input.split("/by");
-            String desc = parts[0].strip();
-            String by = parts[1].strip();
-            addTask(new Deadline(desc, by));
+            addTask(Deadline.parse(input));
         } else if (input.startsWith("event")) {
-            String[] parts = input.split("/at");
-            String desc = parts[0].strip();
-            String at = parts[1].strip();
-            addTask(new Event(desc, at));
+            addTask(Event.parse(input));
         } else if (input.equals("bye")) {
             bye();
         } else {
-
+            String error = "Sorry! I don't know what that means.";
+            throw new DukeException(error);
         }
     }
 

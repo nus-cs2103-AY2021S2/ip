@@ -5,46 +5,46 @@ ____________________________________________________________
 
 ____________________________________________________________
 I've added this task: 
-[T][ ] todo buy tomato
+[T][ ] buy tomato
  There are now 1 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 I've added this task: 
-[D][ ] deadline return book
+[D][ ] return book
  There are now 2 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 I've added this task: 
-[T][ ] todo eat fruits
+[T][ ] eat fruits
  There are now 3 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
 I've added this task: 
-[E][ ] event sing a song
+[E][ ] sing a song
  There are now 4 tasks in the list.
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][ ] todo buy tomato
-2. [D][ ] deadline return book
-3. [T][ ] todo eat fruits
-4. [E][ ] event sing a song
+1. [T][ ] buy tomato
+2. [D][ ] return book
+3. [T][ ] eat fruits
+4. [E][ ] sing a song
 
 ____________________________________________________________
 
 ____________________________________________________________
 Marked as done: 
-[T][X] todo eat fruits
+[T][X] eat fruits
 ____________________________________________________________
 
 ____________________________________________________________
-1. [T][ ] todo buy tomato
-2. [D][ ] deadline return book
-3. [T][X] todo eat fruits
-4. [E][ ] event sing a song
+1. [T][ ] buy tomato
+2. [D][ ] return book
+3. [T][X] eat fruits
+4. [E][ ] sing a song
 
 ____________________________________________________________
 
