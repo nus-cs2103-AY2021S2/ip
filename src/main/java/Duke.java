@@ -99,13 +99,13 @@ public class Duke {
             } else {
                 System.out.println(border + "\n  Hmm I don't understand :(" +
                         "\n  Please use the following to update me!\n");
-                System.out.println("    todo <task description>\n      ^ adds a task to be done");
-                System.out.println("    deadline <task description> /by <DD-MM-YYYY>\n      ^ adds a deadline");
+                System.out.println("    todo <task description>\n      \\_ adds a task to be done");
+                System.out.println("    deadline <task description> /by <DD-MM-YYYY>\n      \\_ adds a deadline");
                 System.out.println("    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>" +
-                        "\n      ^ adds an event");
-                System.out.println("    list\n      ^ lists all tasks, deadlines and events");
-                System.out.println("    done <task number>\n      ^ marks a task as done");
-                System.out.println("    bye\n      ^ exists this application\n" + border);
+                        "\n      \\_ adds an event");
+                System.out.println("    list\n      \\_ lists all tasks, deadlines and events");
+                System.out.println("    done <task number>\n      \\_ marks a task as done");
+                System.out.println("    bye\n      \\_ exists this application\n" + border);
             }
         }
     }

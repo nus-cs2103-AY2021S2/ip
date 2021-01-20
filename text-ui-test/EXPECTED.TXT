@@ -8,28 +8,99 @@
   Hey there, Olaf here!
   What will we be doing today?
  --*---*---*---*---*---*---*---*---*---*--
-  added: hi
+  Hmm I don't understand :(
+  Please use the following to update me!
+
+    todo <task description>
+      \_ adds a task to be done
+    deadline <task description> /by <DD-MM-YYYY>
+      \_ adds a deadline
+    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
+      \_ adds an event
+    list
+      \_ lists all tasks, deadlines and events
+    done <task number>
+      \_ marks a task as done
+    bye
+      \_ exists this application
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
-  added: test
+  Oops! Please add a task description as follows:
+
+  todo <task description>
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please add a deadline using
+  the 24-hour time format as follows:
+
+  deadline <task description> /by <DD-MM-YYYY HHMM>
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please add an event using
+  the 24-hour time format as follows:
+
+  event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Here are your pending tasks:
-  1. [ ] hi
-  2. [ ] test
+
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
-  added: OOhh
+  Okie added new task:
+
+  1. [T][ ] hi
+
+  Total 1 tasks, only 1 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  2. [E][ ] test  (at:  idk...)
+
+  Total 2 tasks, only 2 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  3. [D][ ] submit  (by:  ytd!)
+
+  Total 3 tasks, only 3 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Here are your pending tasks:
+
+  1. [T][ ] hi
+  2. [E][ ] test  (at:  idk...)
+  3. [D][ ] submit  (by:  ytd!)
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Great job! You're done with:
-  2. [X] test
+
+  2. [E][X] test  (at:  idk...)
+
+  Now 2 tasks are left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Okie added new task:
+
+  4. [T][ ] tutorial
+
+  Total 4 tasks, only 3 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Great job! You're done with:
+
+  3. [D][X] submit  (by:  ytd!)
+
+  Now 2 tasks are left to be done!
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Here are your pending tasks:
-  1. [ ] hi
-  2. [X] test
-  3. [ ] OOhh
+
+  1. [T][ ] hi
+  2. [E][X] test  (at:  idk...)
+  3. [D][X] submit  (by:  ytd!)
+  4. [T][ ] tutorial
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Aww hope to see you soon, goodbye!

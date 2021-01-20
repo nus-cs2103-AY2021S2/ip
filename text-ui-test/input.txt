@@ -1,7 +1,14 @@
 hi
-test
-liSt
-OOhh
-done 2
+todo
+deadline now
+events test
+liST
+todo hi
+event test /at idk...
+deadline submit /by ytd!
 List
-bYe
+done 2
+todo tutorial
+done 3
+LIST
+bYE
