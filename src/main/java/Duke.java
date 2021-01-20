@@ -49,6 +49,7 @@ public class Duke {
                     Todo todo = new Todo(input.split(" ", 2)[1]);
                     list.add(todo);
                     System.out.println("added: " + todo);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Oops, your todo requires at least a description.");
                 }
@@ -60,6 +61,7 @@ public class Duke {
                     Deadline deadline = new Deadline(task, date);
                     list.add(deadline);
                     System.out.println("added: " + deadline);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Oops, your deadline requires both a description and date.");
                 }
@@ -71,8 +73,22 @@ public class Duke {
                     Event event = new Event(task, date);
                     list.add(event);
                     System.out.println("added: " + event);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("Oops, your Event requires both a description and date");
+                }
+            } else if (input.split(" ")[0].equals("delete")) {
+                try {
+                    int index = Integer.valueOf(input.split(" ", 2)[1]);
+                    System.out.println("Noted. I've removed the task:\n" + list.get(index - 1) +
+                            "\nNow you have " + (list.size() - 1) + " tasks in the list.");
+                    list.remove(index - 1);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Delete requires a number");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(e);
+                } catch (NumberFormatException e) {
+                    System.out.println(e);
                 }
             } else {
                 System.out.println("Oops, I'm sorry but that command is not valid.");
