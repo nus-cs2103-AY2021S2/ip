@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * This class is mainly for the input
+ */
 public class UI {
     Scanner ui;
 

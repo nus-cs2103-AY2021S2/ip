@@ -21,6 +21,9 @@ deadline do homework /by Monday
 Got it! Added: 
 [D][ ] do homework (by: Monday)
 Now you have 3 items in your list
+done 3
+Task 3 is complete:
+[D][X] do homework (by: Monday)
 event attend meeting /at 6:45pm
 Got it! Added: 
 [E][ ] attend meeting (at: 6:45pm)
@@ -40,7 +43,7 @@ list
 Contents: 
 1.[T][ ] todo borrow book
 2.[D][ ] return book (by: Sunday)
-3.[D][ ] do homework (by: Monday)
+3.[D][X] do homework (by: Monday)
 4.[E][ ] attend meeting (at: 6:45pm)
 5.[T][X] todo make coffee
 6.[T][ ] todo clean room
@@ -52,7 +55,7 @@ list
 Contents: 
 1.[T][ ] todo borrow book
 2.[D][ ] return book (by: Sunday)
-3.[D][ ] do homework (by: Monday)
+3.[D][X] do homework (by: Monday)
 4.[E][ ] attend meeting (at: 6:45pm)
 5.[T][ ] todo clean room
 bye

@@ -1,13 +1,16 @@
 public class Duke {
-    //Main method where the classes are initialized
-    public static void main(String[] args) throws DukeException {
-        UI ui = new UI();
+    UI ui;
+    Tasks taskList;
 
-        String command;
-        Tasks taskList = new Tasks();
-
+    public Duke(){
+        ui = new UI();
+        taskList = new Tasks();
         ui.greetings();
+    }
 
+    //Uses the UI and runs against variuos conditions
+    public void process () throws DukeException {
+        String command;
         while (true) {
             command = ui.getCommand();
             String[] executable = new String[100];
@@ -40,5 +43,10 @@ public class Duke {
             }
 
         }
+    }
+    //Main method where duke is initialized
+    public static void main(String[] args) throws DukeException {
+        Duke duke = new Duke();
+        duke.process();
     }
 }

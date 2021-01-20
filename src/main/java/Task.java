@@ -1,3 +1,6 @@
+/**
+ * Basic task class from which the specific tasks are formed
+ */
 public class Task {
     String task;
     boolean done = false;
