@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -26,8 +25,7 @@ public class Duke {
                 list(collection);
             else if (input.toLowerCase().equals("bye"))
                 exit = exit();
-        }
-        while (!exit);
+        } while (!exit || sc.hasNextLine());
     }
 
     public static void greeting() {
