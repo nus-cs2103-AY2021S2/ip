@@ -50,7 +50,7 @@ public class Duke {
                     break;
                 case "event":
                     tokens = tokens[1].split(" /at ",2);
-                    store.add(new Deadline(tokens[0],tokens[1]));
+                    store.add(new Event(tokens[0],tokens[1]));
                     System.out.println("The following event item has been added:\n" +
                             formatOrderedPrint(store,-1));
                     break;
