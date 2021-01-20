@@ -23,7 +23,5 @@ public class DukeBot {
             command = parser.parseInput(scanner.nextLine());
             printOut(command.execute());
         }
-
-        printOut(DukeStrings.GOODBYE);
     }
 }
