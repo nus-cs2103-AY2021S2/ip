@@ -43,6 +43,9 @@ public class Duke {
         } else if (input.startsWith("done")) {
             int itemNo = Integer.parseInt(input.split(" ")[1]);
             markAsDone(itemNo);
+        } else if (input.startsWith("delete")) {
+            int itemNo = Integer.parseInt(input.split(" ")[1]);
+            deleteFromList(itemNo);
         } else if (input.startsWith("todo")) {
             addTask(Todo.parse(input));
         } else if (input.startsWith("deadline")) {
@@ -61,6 +64,13 @@ public class Duke {
         Task selected = taskList.get(itemNo - 1);
         selected.markAsDone();
         String output = "Marked as done: \n" + selected;
+        print(output);
+    }
+
+    private void deleteFromList(int itemNo) {
+        Task selected = taskList.get(itemNo - 1);
+        taskList.remove(itemNo - 1);
+        String output = "I removed this task: \n" + selected;
         print(output);
     }
 
