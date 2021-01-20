@@ -21,8 +21,28 @@ public class TaskList {
      * @return Copy of the task list with the new task added.
      */
     public TaskList addTask(String task) {
+        String[] taskSplit = task.split(" ", 2);
+        String taskType = taskSplit[0];
+        String taskArgs = taskSplit[1];
+
+        Task newTask;
+
+        switch (taskType) {
+        case "todo":
+            newTask = new TodoTask(taskArgs);
+            break;
+        case "event":
+            newTask = new EventTask(taskArgs);
+            break;
+        case "deadline":
+            newTask = new DeadlineTask(taskArgs);
+            break;
+        default:
+            newTask = null;
+        }
+
         List<Task> newTaskList = new ArrayList<>(this.taskList);
-        newTaskList.add(new Task(task));
+        newTaskList.add(newTask);
         return new TaskList(newTaskList);
     }
 
