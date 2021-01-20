@@ -30,25 +30,28 @@ public class Duke {
             this.listTask();
         } else if (commandWord.equals("done")) {
             this.doneTask(Integer.valueOf(command.split(" ")[1]));
-        } else {
-            this.addTask(command);
+        } else if (commandWord.equals("todo")){
+            this.addToDo(command.substring(5));
         }
     }
 
-    public void addTask(String taskName) {
-        this.storedTasks.add(new Task(taskName));
-        System.out.println("added: " + taskName);
+    public void addToDo(String taskName) {
+        ToDo newTask = new ToDo((taskName));
+        this.storedTasks.add(newTask);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + newTask);
+        if (this.storedTasks.size() == 1) {
+            System.out.println("Now you have " + this.storedTasks.size() + " task in the list");
+        } else {
+            System.out.println("Now you have " + this.storedTasks.size() + " tasks in the list");
+        }
     }
 
     public void listTask() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < storedTasks.size(); i++) {
             Task currTask = storedTasks.get(i);
-            String doneCross = " ";
-            if (currTask.isComplete()) {
-                doneCross = "X";
-            }
-            System.out.println(i + 1 + ".[" + doneCross + "] " + currTask);
+            System.out.println(i + 1 + "." + currTask);
         }
     }
 
@@ -56,7 +59,7 @@ public class Duke {
         Task currTask = this.storedTasks.get(index - 1);
         currTask.completeTask();
         System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  [X] " + currTask);
+        System.out.println("  " + currTask);
     }
 
 }
