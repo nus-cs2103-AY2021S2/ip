@@ -2,6 +2,7 @@ hi
 list
 done
 done 1
+delete
 todo hustle
 todo
 event grinding
@@ -18,6 +19,10 @@ done 3
 done 4
 list
 done 1
+done ah
+delete
+delete ah
+delete 2
 list
 can i yolo
 bye

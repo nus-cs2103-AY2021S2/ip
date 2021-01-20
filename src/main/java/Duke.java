@@ -50,6 +50,9 @@ public class Duke {
                 case "done":
                     handleDone(command);
                     break;
+                case "delete":
+                    handleDelete(command);
+                    break;
                 case "todo":
                     Task toDoTask = createToDo(command);
                     addTask(toDoTask);
@@ -100,18 +103,25 @@ public class Duke {
             Task currTask = tasks.get(Integer.parseInt(command.split(" ")[1]) - 1);
             currTask.markTask();
             System.out.println("Swee chai. It's done.\n" + currTask);
-        } catch (IndexOutOfBoundsException e) {
-            if (tasks.size() == 0) {
-                System.out.println("Your list is empty!");
-            } else {
-                System.out.println("The task number provided does not exist. :/");
-            }
         } catch (Exception e) {
             if (tasks.size() == 0) {
                 System.out.println("Your list is empty!");
             } else {
-                System.out.println("Expected argument after \"done\"\n" +
-                        "Please enter a number from 1 to " + tasks.size());
+                System.out.println("Please enter a number from 1 to " + tasks.size() + " after done!");
+            }
+        }
+    }
+
+    private static void handleDelete(String command) {
+        try {
+            Task currTask = tasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+            System.out.println("See la. It's deleted.\n" + currTask +
+                    "\nYou currently have " + tasks.size() + " task(s) in the list.");
+        } catch (Exception e) {
+            if (tasks.size() == 0) {
+                System.out.println("Your list is empty!");
+            } else {
+                System.out.println("Please enter a number from 1 to " + tasks.size() + " after delete!");
             }
         }
     }

@@ -22,6 +22,9 @@ Your list is empty!
 Your list is empty!
 ------------------------------
 ------------------------------
+Your list is empty!
+------------------------------
+------------------------------
 Your task has been added: [T][ ] hustle
 You currently have 1 task(s) in the list.
 ------------------------------
@@ -69,7 +72,7 @@ Swee chai. It's done.
 [D][X] profit (by: 2022)
 ------------------------------
 ------------------------------
-The task number provided does not exist. :/
+Please enter a number from 1 to 3 after done!
 ------------------------------
 ------------------------------
 Here are the tasks in your list:
@@ -82,10 +85,23 @@ Swee chai. It's done.
 [T][X] hustle
 ------------------------------
 ------------------------------
+Please enter a number from 1 to 3 after done!
+------------------------------
+------------------------------
+Please enter a number from 1 to 3 after delete!
+------------------------------
+------------------------------
+Please enter a number from 1 to 3 after delete!
+------------------------------
+------------------------------
+See la. It's deleted.
+[E][X] grinding (at: all day err day)
+You currently have 2 task(s) in the list.
+------------------------------
+------------------------------
 Here are the tasks in your list:
 1.[T][X] hustle
-2.[E][X] grinding (at: all day err day)
-3.[D][X] profit (by: 2022)
+2.[D][X] profit (by: 2022)
 ------------------------------
 ------------------------------
 That is not a valid command!
