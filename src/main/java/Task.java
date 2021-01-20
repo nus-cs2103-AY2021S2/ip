@@ -24,6 +24,12 @@ public class Task {
         }
     }
 
+    private static void deadline(Deadlines t) {
+        if (t.getTaskName().length() <= 38) {
+            taskList[capacity - 1] = t;
+        }
+    }
+
     public static final void done(int i) {
         if (taskList[i - 1] != null) {
             taskList[i - 1].done = "X";

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -40,8 +41,31 @@ public class Duke {
                     System.out.println("Wrong format liao");
                 }
             } else if (command.equals("todo")) {
-                Todo todo = new Todo(message);
-                System.out.println(Format.chatBox("Added liao: " + todo.toString()));
+                if (line.length > 1) {
+                    String msg = message.replaceAll(command, "")
+                            .trim();
+                    Todo todo = new Todo(msg);
+                    System.out.println(Format.UPPER + "Added liao: "
+                            + todo.toString() + Format.LOWER);
+                } else {
+                    System.out.println("Wrong format liao");
+                }
+            } else if (command.equals("deadline")) {
+                if (line.length > 2) {
+                    String[] comments = message.toLowerCase().split("/");
+                    String msg = comments[0].replaceAll(command, "").trim();
+                    if (comments.length == 2) {
+                        String comment = comments[1];
+                        Deadlines deadline = new Deadlines(msg, comment);
+                        System.out.println(Format.UPPER + "Added liao: "
+                                + deadline.toString() + Format.LOWER);
+                    } else {
+                        System.out.println("Wrong format liao, add / at the end for date");
+                    }
+
+                } else {
+                    System.out.println("Wrong format liao");
+                }
             } else {
                 Task task = new Task(message);
                 System.out.println(Format.chatBox("Added: " + message));

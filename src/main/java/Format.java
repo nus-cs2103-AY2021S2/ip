@@ -1,8 +1,8 @@
 public class Format {
 
     public static final String SPACE = "\n";
-    public static final String UPPER = SPACE + "^".repeat(80) + SPACE.repeat(2);
-    public static final String LOWER = SPACE.repeat(1) + "_".repeat(80) + SPACE;
+    public static final String UPPER = SPACE + "^".repeat(90) + SPACE.repeat(2);
+    public static final String LOWER = SPACE.repeat(1) + "_".repeat(90) + SPACE;
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
