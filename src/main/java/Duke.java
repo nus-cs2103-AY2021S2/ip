@@ -22,52 +22,55 @@ public class Duke {
         tasks = new ArrayList<>();
 
         greet();
-        listen();
+
+        while (scanner.hasNext()) {
+            try {
+                String command = scanner.next();
+                listen(command);
+                System.out.println("Let me know what to do!");
+            } catch (Exception pokemon) {
+                System.out.println("Please key in valid input\n");
+            }
+        }
     }
 
     private void greet() {
         System.out.println("Hello, I'm Duke!\n" + "What can I do for you?\n");
     }
 
-    private void listen() {
-        while (scanner.hasNext()) {
-            String command = scanner.next();
-
-            switch (command) {
-            case "bye":
-                shutDown();
-                break;
-            case "deadline":
-                String[] splitD = scanner.nextLine().split(" /by ");
-                // substring from index=1 to ignore the whitespace following "deadline", at index = 0.
-                String deadline = splitD[0].substring(1);
-                String deadlineTime = splitD[1];
-                addToList(new Deadline(deadline, deadlineTime));
-                break;
-            case "done":
-                int index = scanner.nextInt();
-                taskDone(index);
-                break;
-            case "event":
-                String[] splitE = scanner.nextLine().split(" /at ");
-                // substring from index=1 to ignore the whitespace following "event", at index = 0.
-                String event = splitE[0].substring(1);
-                String eventTime = splitE[1];
-                addToList(new Event(event, eventTime));
-                break;
-            case "list":
-                printList();
-                break;
-            case "todo":
-                // substring from index=1 to ignore the whitespace at index = 0.
-                addToList(new ToDo(scanner.nextLine().substring(1)));
-                break;
-            default:
-                System.out.println("Invalid input\n");
-                break;
-            }
-
-            System.out.println("Let me know what to do!");
+    private void listen(String command) {
+        switch (command) {
+        case "bye":
+            shutDown();
+            break;
+        case "deadline":
+            String[] splitD = scanner.nextLine().split(" /by ");
+            // substring from index=1 to ignore the whitespace following "deadline", at index = 0.
+            String deadline = splitD[0].substring(1);
+            String deadlineTime = splitD[1];
+            addToList(new Deadline(deadline, deadlineTime));
+            break;
+        case "done":
+            int index = scanner.nextInt();
+            taskDone(index);
+            break;
+        case "event":
+            String[] splitE = scanner.nextLine().split(" /at ");
+            // substring from index=1 to ignore the whitespace following "event", at index = 0.
+            String event = splitE[0].substring(1);
+            String eventTime = splitE[1];
+            addToList(new Event(event, eventTime));
+            break;
+        case "list":
+            printList();
+            break;
+        case "todo":
+            // substring from index=1 to ignore the whitespace at index = 0.
+            addToList(new ToDo(scanner.nextLine().substring(1)));
+            break;
+        default:
+            System.out.println("Invalid input\n");
+            break;
         }
     }
 
