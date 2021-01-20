@@ -55,6 +55,10 @@ public class Task {
     public int getIndex() {
         return index;
     }
+
+    public static final int getCapacity() {
+        return Task.capacity;
+    }
     @Override
     public String toString() {
         return String.format("[%s] %d. %s", done, index, taskName);

@@ -46,7 +46,9 @@ public class Duke {
                             .trim();
                     Todo todo = new Todo(msg);
                     System.out.println(Format.UPPER + "Added liao: "
-                            + todo.toString() + Format.LOWER);
+                            + todo.toString() + Format.SPACE
+                            + "You have " + Task.getCapacity() + " tasks in the list!"
+                            + Format.LOWER);
                 } else {
                     System.out.println("Wrong format liao");
                 }
@@ -58,7 +60,9 @@ public class Duke {
                         String comment = comments[1];
                         Deadlines deadline = new Deadlines(msg, comment);
                         System.out.println(Format.UPPER + "Added liao: "
-                                + deadline.toString() + Format.LOWER);
+                                + deadline.toString() + Format.SPACE
+                                + "You have " + Task.getCapacity() + " tasks in the list!"
+                                + Format.LOWER);
                     } else {
                         System.out.println("Wrong format liao, add / at the end for date");
                     }
