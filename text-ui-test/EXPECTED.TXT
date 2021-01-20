@@ -16,14 +16,59 @@
 	___________________________________
 
 	___________________________________
+	 Got it. I've added this task: 
+	  [E][ ] project meeting  (at: Mon 2-4pm)
+	 Now you have 3 tasks in the list.
+	___________________________________
+
+	___________________________________
+	 Got it. I've added this task: 
+	  [D][ ] do homework  (by: June 6th)
+	 Now you have 4 tasks in the list.
+	___________________________________
+
+	___________________________________
+	 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+	___________________________________
+
+	___________________________________
 	 Nice! I've marked this task as done:
-	  [D][X] sell book  (by: Sunday)
+	  [D][✘] sell book  (by: Sunday)
 	___________________________________
 
 	___________________________________
 	 Here are the tasks in your list:
 	 1.[T][ ] buy book 
-	 2.[D][X] sell book  (by: Sunday)
+	 2.[D][✘] sell book  (by: Sunday)
+	 3.[E][ ] project meeting  (at: Mon 2-4pm)
+	 4.[D][ ] do homework  (by: June 6th)
+	___________________________________
+
+	___________________________________
+	 Nice! I've marked this task as done:
+	  [D][✘] do homework  (by: June 6th)
+	___________________________________
+
+	___________________________________
+	 Here are the tasks in your list:
+	 1.[T][ ] buy book 
+	 2.[D][✘] sell book  (by: Sunday)
+	 3.[E][ ] project meeting  (at: Mon 2-4pm)
+	 4.[D][✘] do homework  (by: June 6th)
+	___________________________________
+
+	___________________________________
+	 ☹ OOPS!!! The integer value is invalid (negative or out of task list range)!!!
+	___________________________________
+
+	___________________________________
+	Noted. I've removed this task: 
+	  [T][ ] buy book 
+	 Now you have 3 tasks in the list.
+	___________________________________
+
+	___________________________________
+	 ☹ OOPS!!! The integer value is invalid (negative or out of task list range)!!!
 	___________________________________
 
 	___________________________________
