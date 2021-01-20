@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("---------------------------------------" );
 
 //        Initialize Task container of space 100
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         int taskNumber = 0;
 
         while(true) {
@@ -33,13 +33,23 @@ public class Duke {
 //                Numbers should change accordingly when deleted (For future Ref.)
                 System.out.println("\n---------------------------------------" );
                 for (int i = 0; i < taskNumber; i++) {
-                    System.out.println(tasks[i]);
+                    System.out.println(String.valueOf(i+1) + " [" + tasks[i].getStatusIcon() + "] " + tasks[i].name);
                 }
+                System.out.println("---------------------------------------" );
+            } else if (input.split(" ")[0].equals("done")) {
+//                Checks if first word is "done"
+                int index = Integer.parseInt(input.split(" ")[1]) - 1;
+                tasks[index].markDone();
+
+                System.out.println("\n---------------------------------------" );
+                System.out.println("Nice! I've marked this task as done:\n");
+                System.out.println("[" + tasks[index].getStatusIcon() + "] " + tasks[index].name);
                 System.out.println("---------------------------------------" );
             } else {
 //            Add to list
-                tasks[taskNumber] = String.valueOf(taskNumber+1) + ". " + input;
+                tasks[taskNumber] = new Task(input);
                 taskNumber++;
+
                 System.out.println("\n---------------------------------------" );
                 System.out.println("added: " + input);
                 System.out.println("---------------------------------------" );
