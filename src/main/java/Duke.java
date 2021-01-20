@@ -1,3 +1,6 @@
+import exceptions.DukeException;
+import exceptions.InvalidOptionException;
+import exceptions.UnrecognisedCommandException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -11,14 +14,6 @@ public class Duke {
     public static String BOT_NAME = "Apollo the Robot";
     public static String INDENTATION = "    ";
     public static ArrayList<Task> taskList = new ArrayList<>();
-    public enum Command {
-        LIST,
-        DONE,
-        BYE,
-        TODO,
-        DEADLINE,
-        EVENT
-    }
 
     public static void printlnWithIndentation(String s) {
         System.out.println(INDENTATION + " " + s);
@@ -39,7 +34,7 @@ public class Duke {
         printHorizontalLine();
     }
 
-    public static void addTask(Command command, String input, ArrayList<Task> taskList) {
+    public static void addTask(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
         int numberOfTasks = taskList.size();
 
         switch (command) {
@@ -53,7 +48,12 @@ public class Duke {
                 );
                 break;
             case DEADLINE:
-                int indexOfBy = input.indexOf("/by");
+                int indexOfBy = input.trim().indexOf("/by");
+
+                if (indexOfBy == 0) {
+                    throw new InvalidOptionException("DEADLINE");
+                }
+
                 String deadlineMessage = input.substring(0, indexOfBy);
                 String by = input.substring(indexOfBy + 4);
                 Task deadline = new Deadline(deadlineMessage, by);
@@ -65,7 +65,12 @@ public class Duke {
                 );
                 break;
             case EVENT:
-                int indexOfAt = input.indexOf("/at");
+                int indexOfAt = input.trim().indexOf("/at");
+
+                if (indexOfAt == 0) {
+                    throw new InvalidOptionException("EVENT");
+                }
+
                 String eventMessage = input.substring(0, indexOfAt);
                 String at = input.substring(indexOfAt + 4);
                 Task event = new Event(eventMessage, at);
@@ -82,12 +87,80 @@ public class Duke {
     public static void listTasks(ArrayList<Task> taskList) {
         printHorizontalLine();
 
+        if (taskList.isEmpty()) {
+            printlnWithIndentation("You have not added any tasks yet.");
+        }
+
         for(int i = 0; i < taskList.size(); i++ ) {
             int index = i + 1;
             printlnWithIndentation(index + ". " + taskList.get(i).toString());
         }
 
         printHorizontalLine();
+    }
+
+    public static void doneTask(String input) {
+        int index = Integer.parseInt(input) - 1;
+        Task task = taskList.get(index);
+        task.markAsDone();
+        printBetweenLines("Nice! I've marked this task as done:", task.toString());
+    }
+
+    public static void handleInput(String s) throws DukeException {
+        String input = s.trim();
+        Commands command;
+
+        if(input.equals("")) {
+            return;
+        }
+
+        String[] inputArr = input.split(" ", 2);
+
+        try {
+            command = Commands.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            throw new UnrecognisedCommandException(inputArr[0].toUpperCase(Locale.ROOT));
+        }
+
+        switch (command) {
+            case LIST:
+                listTasks(taskList);
+                break;
+            case DONE:
+                try {
+                    doneTask(inputArr[1]);
+                    break;
+                } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                    throw new InvalidOptionException(command.name());
+                }
+            case BYE:
+                printlnWithIndentation("Bye. Hope to see you again soon!");
+                System.exit(0);
+                break;
+            case TODO:
+                try {
+                    addTask(command, inputArr[1], taskList);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidOptionException(command.name());
+                }
+                break;
+            case DEADLINE:
+                try {
+                    addTask(command, inputArr[1], taskList);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidOptionException(command.name());
+                }
+                break;
+            case EVENT:
+                try {
+                    addTask(command, inputArr[1], taskList);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidOptionException(command.name());
+                }
+                break;
+            default:
+                printBetweenLines("Invalid command, please try again!");
+        }
     }
 
     public static void main(String[] args) {
@@ -97,34 +170,11 @@ public class Duke {
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
-            String[] inputArr = input.split(" ", 2);
 
-            Command command = Command.valueOf(inputArr[0].toUpperCase(Locale.ROOT));
-
-            switch (command) {
-                case LIST:
-                    listTasks(taskList);
-                    break;
-                case DONE:
-                    int index = Integer.parseInt(inputArr[1]) - 1;
-                    Task task = taskList.get(index);
-                    task.markAsDone();
-                    printBetweenLines("Nice! I've marked this task as done:", task.toString());
-                    break;
-                case BYE:
-                    addTask(command, inputArr[1], taskList);
-                    break;
-                case TODO:
-                    addTask(command, inputArr[1], taskList);
-                    break;
-                case DEADLINE:
-                    addTask(command, inputArr[1], taskList);
-                    break;
-                case EVENT:
-                    addTask(command, inputArr[1], taskList);
-                    break;
-                default:
-                    printBetweenLines("Invalid command, please try again!");
+            try {
+                handleInput(input);
+            } catch(Exception e) {
+                printBetweenLines("An error occurred:", e.getMessage());
             }
         }
     }
