@@ -30,8 +30,8 @@ public class ToDoBeast {
                 // handle exception for empty description
                  if (userInput.length == 1) {
                      try {
-                         throw new WrongCommandException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
-                     } catch (WrongCommandException e) {
+                         throw new ToDoBeastException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                     } catch (ToDoBeastException e) {
                          System.out.println(line + "\t" + e.getMessage() + "\n" + line);
                      }
                  } else {
