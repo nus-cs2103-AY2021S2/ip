@@ -29,7 +29,9 @@ public class DukeBot {
             case "done":
                 output = markDoneTask(Integer.parseInt(commandStr[1]));
                 break;
-            case "todo": case "deadline": case "event":
+            case "todo":
+            case "deadline":
+            case "event":
                 this.numTasks++;
                 output = handleNewTask(taskAction, commandStr);
                 break;
@@ -38,7 +40,7 @@ public class DukeBot {
                 output = handleDeleteTask(Integer.parseInt(commandStr[1]));
                 break;
             default:
-                output = handleInvalidTask();
+                output = handleInvalidInput();
                 break;
         }
         System.out.println(output);
@@ -46,13 +48,13 @@ public class DukeBot {
     }
 
     public String markDoneTask(int index) {
-        if(index <= 0 || index > this.numTasks) {
+        if (index <= 0 || index > this.numTasks) {
             return handleInvalidValue();
         } else {
-            Task doneTask = this.taskList.get(index-1);
+            Task doneTask = this.taskList.get(index - 1);
             doneTask.markAsDone();
-            return BORDER +  "\t" + " Nice! I've marked this task as done:\n" +  "\t  "
-                    + doneTask.toString() + "\n" + BORDER;
+            return BORDER + "\t" + " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString() + "\n"
+                    + BORDER;
         }
     }
 
@@ -60,7 +62,7 @@ public class DukeBot {
         StringBuilder currText = new StringBuilder(BORDER + "\t" + " Here are the tasks in your list:\n");
 
         for (int num = 1; num <= this.taskList.size(); num++) {
-            Task currentTask = this.taskList.get(num-1);
+            Task currentTask = this.taskList.get(num - 1);
             currText.append("\t ").append(num).append(".").append(currentTask.toString()).append("\n");
         }
         currText.append(BORDER);
@@ -70,32 +72,31 @@ public class DukeBot {
     public String handleNewTask(String taskAction, String[] commandStr) {
         Task newTask;
         StringBuilder description = new StringBuilder();
-        List<String> taskDetails =  Arrays.asList(commandStr);
+        List<String> taskDetails = Arrays.asList(commandStr);
         String currText = BORDER + "\t" + " Got it. I've added this task: \n";
 
-        if(!taskAction.equals("todo")) {
+        if (!taskAction.equals("todo")) {
             String[] result = handleEventDeadLine(taskDetails);
 
-            if(taskAction.equals("event")) {
+            if (taskAction.equals("event")) {
                 newTask = new Event(result[0], result[1]);
             } else {
                 newTask = new Deadline(result[0], result[1]);
             }
         } else {
-            for(int num = 1; num < taskDetails.size(); num++) {
+            for (int num = 1; num < taskDetails.size(); num++) {
                 String curr = taskDetails.get(num);
                 description.append(curr).append(" ");
             }
             newTask = new ToDo(description.toString());
         }
 
-        if(newTask.getDescription().equals("")) {
-            DukeException exception = new DukeException("empty", taskAction);
-            return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
+        if (newTask.getDescription().equals("")) {
+            return handleBlankDescription(taskAction);
         } else {
             this.taskList.add(newTask);
-            return currText +  "\t  " + newTask.toString() + "\n\t Now you have "
-                    + this.numTasks + " tasks in the list.\n" + BORDER;
+            return currText + "\t  " + newTask.toString() + "\n\t Now you have " + this.numTasks
+                    + " tasks in the list.\n" + BORDER;
         }
     }
 
@@ -105,16 +106,16 @@ public class DukeBot {
         StringBuilder dateTime = new StringBuilder();
         String[] result = new String[2];
 
-        for(num = 1; num < taskDetails.size(); num++) {
+        for (num = 1; num < taskDetails.size(); num++) {
             String curr = taskDetails.get(num);
-            if(curr.contains("/")) {
+            if (curr.contains("/")) {
                 break;
             }
             description.append(curr).append(" ");
         }
-        for(int i = num + 1; i < taskDetails.size(); i++) {
+        for (int i = num + 1; i < taskDetails.size(); i++) {
             dateTime.append(taskDetails.get(i));
-            if(i < taskDetails.size() - 1) {
+            if (i < taskDetails.size() - 1) {
                 dateTime.append(" ");
             }
         }
@@ -124,24 +125,28 @@ public class DukeBot {
     }
 
     public String handleDeleteTask(int index) {
-        if(index <= 0 || index > this.numTasks) {
+        if (index <= 0 || index > this.numTasks) {
             return handleInvalidValue();
         } else {
             Task deleteTask = this.taskList.get(index - 1);
             this.taskList.remove(deleteTask);
-            return BORDER + "\t" + "Noted. I've removed this task: \n" +
-                    "\t  " + deleteTask.toString() + "\n\t Now you have "
-                    + this.numTasks + " tasks in the list.\n" + BORDER;
+            return BORDER + "\t" + "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
+                    + "\n\t Now you have " + this.numTasks + " tasks in the list.\n" + BORDER;
         }
     }
 
-    public String handleInvalidTask() {
-        DukeException exception = new DukeException("invalid task", "");
+    public String handleInvalidInput() {
+        DukeException exception = new DukeException(ExceptionType.INVALID_INPUT, "");
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 
     public String handleInvalidValue() {
-        DukeException exception = new DukeException("invalid integer value", "");
+        DukeException exception = new DukeException(ExceptionType.INVALID_INTEGER, "");
+        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
+    }
+
+    public String handleBlankDescription(String taskAction) {
+        DukeException exception = new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
         return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 }

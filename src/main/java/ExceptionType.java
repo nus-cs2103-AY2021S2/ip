@@ -1,0 +1,3 @@
+public enum ExceptionType {
+    BLANK_DESCRIPTION, INVALID_INTEGER, INVALID_INPUT
+}

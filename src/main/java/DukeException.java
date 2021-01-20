@@ -1,26 +1,27 @@
 public class DukeException extends Exception {
-    protected final String typeException;
+    protected final ExceptionType typeException;
     protected final String taskName;
 
-    DukeException(String typeException, String taskName) {
+    public DukeException(ExceptionType typeException, String taskName) {
+        super();
         this.typeException = typeException;
         this.taskName = taskName;
     }
 
     @Override
     public String getMessage() {
-        String errorMsg = "";
+        String errorMsg;
 
         switch (this.typeException) {
-            case "invalid input":
+            case INVALID_INPUT:
                 errorMsg = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
                 break;
-            case "invalid integer value":
-                errorMsg = "☹ OOPS!!! The integer value is invalid!!!";
+            case INVALID_INTEGER:
+                errorMsg = "☹ OOPS!!! The integer value is invalid (negative or out of list range)!!!";
                 break;
             default:
                 errorMsg = "☹ OOPS!!! The description of a " + this.taskName +
-                        " cannot be " + this.typeException + ".";
+                        " cannot be empty.";
                 break;
         }
         return errorMsg;
