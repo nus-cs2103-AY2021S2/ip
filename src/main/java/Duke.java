@@ -5,7 +5,7 @@ public class Duke {
         String TEXT_INDENT = "     ";
         String DIVIDER = "    ____________________________________________________________";
 
-        ArrayList<String> tasks = new ArrayList<String>();
+        ArrayList<Task> tasks = new ArrayList<Task>();
 
         // initialize scanner
         Scanner sc = new Scanner(System.in);
@@ -18,19 +18,34 @@ public class Duke {
 
         // get user input
         String userInput = sc.nextLine();
+
+        // loop until the user exits
         while (!userInput.toLowerCase().equals("bye")) {
             System.out.println(DIVIDER);
             // display list
             if (userInput.toLowerCase().equals("list")) {
                 for (int i = 0; i < tasks.size(); i++) {
-                    String item = TEXT_INDENT + String.valueOf(i + 1) + ". " + tasks.get(i);
-                    System.out.println(item);
+                    String item = String.valueOf(i + 1) + ". " + tasks.get(i).toString();
+                    System.out.println(TEXT_INDENT + item);
                 }
-            } else { // add task to list
-                tasks.add(userInput);
+            // finish a task
+            } else if (userInput.toLowerCase().matches("^(done|finish|completed?) \\d+$")) {
+                String[] bits = userInput.split(" ");
+                int idx = Integer.valueOf(bits[1]) - 1; // zero-indexed task index
+                if (idx >= 0 && idx < tasks.size()) {
+                    tasks.get(idx).finish();
+                } else {
+                    System.out.println(TEXT_INDENT + "That doesn't appear to be a valid task ID!");
+                }
+            // add task to list
+            } else {
+                Task newTask = new Task(userInput);
+                tasks.add(newTask);
                 System.out.println(TEXT_INDENT + "added: " + userInput);
             }
             System.out.println(DIVIDER);
+
+            // get next input
             userInput = sc.nextLine();
         }
 
