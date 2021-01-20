@@ -16,6 +16,14 @@ public class TaskList {
     }
 
     /**
+     * Gets number of tasks in task list.
+     * @return Number of tasks in task list.
+     */
+    public int getNumTasks() {
+        return this.taskList.size();
+    }
+
+    /**
      * Adds a task to the task list.
      * @param task Task to add to the list.
      * @return Copy of the task list with the new task added.

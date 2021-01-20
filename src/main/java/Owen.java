@@ -70,8 +70,13 @@ public class Owen implements Chatbot {
             return this.shutdown();
         default:
             TaskList addedTaskList = this.taskList.addTask(command);
-            String addedFormat = "added: %s";
-            Response addResponse = new DefaultResponse(String.format(addedFormat, command));
+            int numTasks = addedTaskList.getNumTasks();
+            String addedFormat = ""
+                    + "Got it. I've added this task:\n"
+                    + "    %s\n"
+                    + "Now you have %d tasks in the list.";
+            Response addResponse = new DefaultResponse(String.format(
+                    addedFormat, addedTaskList.getTask(numTasks), numTasks));
             return new Owen(this.isRunning, addResponse, addedTaskList);
         }
     }
