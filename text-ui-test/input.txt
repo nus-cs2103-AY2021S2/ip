@@ -14,5 +14,8 @@ event
 event 
 deadline
 deadline 
+list
+delete 2
+delet 3
 vasdyi
 bye

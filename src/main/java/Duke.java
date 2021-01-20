@@ -20,9 +20,18 @@ public class Duke {
             try {
                 if (input.equals("list")) {
                     listTasks();
-                } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
+                } else if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
+                    if (input.length() <= 5) {
+                        throw new DukeException("☹ OOPS!!! Please enter a task id to complete!");
+                    }
                     int id = Integer.valueOf(input.substring(5));
                     completeTask(id);
+                } else if (input.length() >= 6 && input.substring(0, 6).equals("delete")) {
+                    if (input.length() <= 7) {
+                        throw new DukeException("☹ OOPS!!! Please enter a task id to delete!");
+                    }
+                    int id = Integer.valueOf(input.substring(7));
+                    deleteTask(id);
                 } else if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
                     addTask(Task.createTask(input));
                 } else if (input.length() >= 5 && input.substring(0, 5).equals("event")) {
@@ -65,11 +74,25 @@ public class Duke {
             + task + String.format("\nNow you have %d tasks in the list.", this.taskList.size())));
     }
 
-    public void completeTask(int id) {
+    public void completeTask(int id) throws DukeException {
         int realId = id - 1;
+        if (realId < 0 || realId >= this.taskList.size()) {
+            throw new DukeException("☹ OOPS!!! You have selected an incorrect task id! You can view task ids via \"list\"");
+        }
         this.taskList.set(realId, this.taskList.get(realId).completeTask());
         System.out.println(makeOutput("Nice! I've marked this item as done:\n\t" 
             + this.taskList.get(realId)));
+    }
+
+    public void deleteTask(int id) throws DukeException {
+        int realId = id - 1;
+        if (realId < 0 || realId >= this.taskList.size()) {
+            throw new DukeException("☹ OOPS!!! You have selected an incorrect task id! You can view task ids via \"list\"");
+        }
+        Task task = this.taskList.get(realId);
+        this.taskList.remove(realId);
+        System.out.println(makeOutput("Noted. I've removed this task:\n\t"
+            + task + String.format("\nNow you have %d tasks in the list.", this.taskList.size())));
     }
 
 }
