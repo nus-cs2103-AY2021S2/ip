@@ -1,0 +1,8 @@
+todo buy tomato
+deadline return book /by june 6th
+todo eat fruits
+event sing a song /at 5oclock
+list
+done 3
+list
+bye
