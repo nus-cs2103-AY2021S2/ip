@@ -38,6 +38,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();
+
         for (int i = 1; i <= numTasks; i++) {
             buffer.append(i);
             buffer.append(". ");

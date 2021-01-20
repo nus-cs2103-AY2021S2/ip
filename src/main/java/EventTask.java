@@ -5,14 +5,15 @@ public class EventTask extends Task {
     public EventTask(String taskDescription, String timeWindow) {
         this.taskDescription = taskDescription;
         this.timeWindow = timeWindow;
+        this.taskType = 'E';
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return String.format("[E] [X] %s (at: %s)",this.taskDescription, this.timeWindow);
+            return String.format("[%c] [X] %s (at: %s)", this.taskType, this.taskDescription, this.timeWindow);
         } else {
-            return String.format("[E] [ ] %s (at: %s)",this.taskDescription, this.timeWindow);
+            return String.format("[%c] [ ] %s (at: %s)", this.taskType, this.taskDescription, this.timeWindow);
         }
     }
 }

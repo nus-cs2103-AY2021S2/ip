@@ -9,6 +9,7 @@ public class InputHandler {
     private static final String LIST_COMMAND = "list";
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
+    private static final String DEADLINE_COMMAND = "deadline";
 
     /**
      * Reads user input and parses it
@@ -51,6 +52,18 @@ public class InputHandler {
 
                     m.find();
                     return new EventCommand(m.group(1), m.group(2));
+
+                } catch(IllegalStateException e) {
+                    return new ExceptionCommand("Please enter an event description and timing to add to the list!!");
+                }
+
+            case DEADLINE_COMMAND:
+                try {
+                    Pattern p = Pattern.compile("(?i)deadline (.+) /by (.+)");
+                    Matcher m = p.matcher(userInput);
+
+                    m.find();
+                    return new DeadlineCommand(m.group(1), m.group(2));
 
                 } catch(IllegalStateException e) {
                     return new ExceptionCommand("Please enter an event description and timing to add to the list!!");
