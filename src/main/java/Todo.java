@@ -1,6 +1,6 @@
-public class ToDo extends Task {
+public class Todo extends Task {
 
-    public ToDo(String taskDescription) {
+    public Todo(String taskDescription) {
         this.taskDescription = taskDescription;
         this.taskType = 'T';
     }

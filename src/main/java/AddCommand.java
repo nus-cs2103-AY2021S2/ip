@@ -2,6 +2,7 @@ public abstract class AddCommand implements Command{
     protected boolean isExitCommand = false;
     protected String taskDescription;
     protected TaskList taskList;
+    protected Task taskToAdd;
 
     public AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;
@@ -14,7 +15,8 @@ public abstract class AddCommand implements Command{
 
     @Override
     public TaskList runCommand(TaskList taskList) {
-        Task taskToAdd = new ToDo(this.taskDescription);
+        this.taskList = taskList;
+        this.taskToAdd = new Todo(this.taskDescription);
         taskList.addTaskToList(taskToAdd);
         return taskList;
     }

@@ -4,6 +4,7 @@ public interface Command {
      * @return value of isExitCommand in Command objects
      */
     boolean isExitCommand();
+
     /**
      * Executes the command on the taskList
      * @return resultant tasklist after command is run

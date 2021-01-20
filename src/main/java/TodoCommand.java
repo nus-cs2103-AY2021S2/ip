@@ -5,19 +5,9 @@ public class TodoCommand extends AddCommand {
     }
 
     @Override
-    public boolean isExitCommand() {
-        return super.isExitCommand;
-    }
-
-    @Override
-    public TaskList runCommand(TaskList taskList) {
-        Task taskToAdd = new ToDo(super.taskDescription);
-        taskList.addTaskToList(taskToAdd);
-        return taskList;
-    }
-
-    @Override
     public String getResponse() {
-        return "added: " + this.taskDescription;
+        return String.format(" Got it. I've added this task: \n" +
+                "       %s\n" +
+                " Now you have %d tasks in the list.", this.taskToAdd.taskDescription, this.taskList.getNumTasks());
     }
 }
