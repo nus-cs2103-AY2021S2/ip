@@ -53,8 +53,21 @@ public class Duke {
         pw.flush();
     }
 
+    public void markAsDone(String id) {
+        int n = Integer.parseInt(id) - 1;
+        list.doneTask(n);
+        pw.println("Nice! I've marked this task as done:");
+        pw.printf(" %s%n", list.lst.get(n));
+        pw.flush();
+
+    }
+
     public void exit() {
         pw.println("Bye. Hope to see you again soon!");
         pw.flush();
+    }
+
+    public void showTasks() {
+        list.printList();
     }
 }

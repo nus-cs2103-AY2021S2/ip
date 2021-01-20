@@ -18,9 +18,10 @@ public class Tasklist {
 
     public void removeItem(int id) { this.lst.remove(id); }
 
+    public void doneTask(int id) { this.lst.get(id).done(); }
+
     public void printList() {
         for(int i = 0; i < lst.size(); i++) {
-            //pw.printf("%d.%s %s %s%n", i + 1, lst.get(i).getType(), lst.get(i).getStatusIcon(), lst.get(i).description);
             pw.printf("%d.%s%n", i + 1, lst.get(i));
         }
         pw.flush();

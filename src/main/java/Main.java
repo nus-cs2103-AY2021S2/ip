@@ -19,14 +19,10 @@ public class Main {
             }
 
             if(!(parser.isEquals("bye"))) {
-                String[] starr = string.split(" ");
                 if(parser.isEquals("list")) {
-                    bot.list.printList();
+                    bot.showTasks();
                 } else if(parser.isEquals("done")){
-                    bot.list.lst.get(Integer.parseInt(starr[1]) - 1).done();
-                    pw.println("Nice! I've marked this task as done:");
-                    pw.printf(" %s%n", bot.list.lst.get(Integer.parseInt(starr[1]) - 1));
-                    pw.flush();
+                    bot.markAsDone(parser.description);
                 } else if(parser.isEquals("todo")) {
                     bot.addTask(parser.description, parser.command, null);
                 } else if(parser.isEquals("deadline") || parser.isEquals("event")) {
