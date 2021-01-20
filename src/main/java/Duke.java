@@ -39,7 +39,8 @@ public class Duke {
         Task currentTask = new Task(echoedText, type);
         tasks.add(currentTask);
         System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
-                 currentTask + "\n" + line);
+                 currentTask);
+        System.out.println(ind + "Kobe sees that you have " + tasks.size() + " task(s) in the list.\n" + line);
     }
 
     public static void goodbye() {
@@ -57,7 +58,7 @@ public class Duke {
     public static void completeTask(int taskNumber) {
         tasks.get(taskNumber).markAsDone();
         System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
-        System.out.print(tasks.get(taskNumber) + "\n");
+        System.out.println(ind + tasks.get(taskNumber));
         System.out.println(line);
     }
 }
