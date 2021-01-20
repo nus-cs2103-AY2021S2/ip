@@ -126,7 +126,28 @@ public class Duke {
                     if (taskNumber <= tasks.size()) {
                         tasks.get(taskNumber - 1).setIsDone(true);
                         printLine("Nice! I've marked this task as done:");
-                        printLine(String.format("  [X] %s", tasks.get(Integer.parseInt(tokens[1]) - 1).getName()));
+                        printLine(String.format("  %s", tasks.get(Integer.parseInt(tokens[1]) - 1)));
+                    } else {
+                        throw new Exception("Task does not exist!");
+                    }
+                } catch (NumberFormatException e) {
+                    throw new Exception("Please provide a valid task number!");
+                }
+            } else if (tokens[0].equals("delete")) {
+                if (tokens.length < 2) {
+                    throw new Exception("Please provide a valid task number!");
+                }
+                try {
+                    int taskNumber = Integer.parseInt(tokens[1]);
+                    if (taskNumber < 1) {
+                        throw new Exception("Please provide a valid task number!");
+                    }
+                    if (taskNumber <= tasks.size()) {
+                        Task task = tasks.get(taskNumber - 1);
+                        tasks.remove(taskNumber - 1);
+                        printLine("Noted. I've removed this task:");
+                        printLine(String.format("  %s", task));
+                        printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
