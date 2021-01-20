@@ -28,7 +28,7 @@ public class Duke {
                     System.out.println(item);
                 }
             // finish a task
-            } else if (userInput.toLowerCase().matches("^(done|finish|completed?) \\d+$")) {
+            } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
                 String[] bits = userInput.split(" ");
                 int idx = Integer.parseInt(bits[1]) - 1; // zero-indexed task index
                 if (idx >= 0 && idx < tasks.size()) {
@@ -37,10 +37,32 @@ public class Duke {
                     System.out.println("That doesn't appear to be a valid task ID!");
                 }
             // add task to list
-            } else {
-                Task newTask = new Task(userInput);
+            } else if (userInput.toLowerCase().matches("^(todo|deadline|event) .+$")) {
+                String[] bits = userInput.split(" ");
+
+                // format entry
+                StringBuilder descBuilder = new StringBuilder();
+                for (int i = 1; i < bits.length; i++) {
+                    descBuilder.append(bits[i]);
+                    descBuilder.append(" ");
+                }
+                String desc = descBuilder.toString().trim();
+
+                Task newTask = new Task(desc.toString()); // placeholder
+                if (bits[0].toLowerCase().equals("todo")) {
+                    newTask = new Todo(desc.toString());
+                } else if (bits[0].toLowerCase().equals("event")) {
+                    String[] taskParts = desc.toString().split(" /on ");
+                    newTask = new Event(taskParts[0], taskParts[1]);
+                } else if (bits[0].toLowerCase().equals("deadline")) {
+                    String[] taskParts = desc.toString().split(" /by ");
+                    newTask = new Deadline(taskParts[0], taskParts[1]);
+                }
                 tasks.add(newTask);
-                System.out.println("added: " + userInput);
+                System.out.println("I've added this task: " + newTask.toString());
+                System.out.printf("You now have %d items on your todo list.\n", tasks.size());
+            } else {
+                System.out.println("Unknown command!");
             }
             System.out.println(DIVIDER);
 
@@ -50,7 +72,7 @@ public class Duke {
 
         // exit sequence
         System.out.println(DIVIDER);
-        System.out.println("Bye! Hope you see you again :)");
+        System.out.println("Bye! Hope to see you again :)");
         System.out.println(DIVIDER);
     }
 }

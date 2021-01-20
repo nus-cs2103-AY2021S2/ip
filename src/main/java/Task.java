@@ -1,8 +1,6 @@
-import java.util.*;
-
 public class Task {
-    private final String description;
-    private boolean done;
+    protected final String description;
+    protected boolean done;
 
     public Task(String description) {
         this.description = description;
@@ -21,16 +19,11 @@ public class Task {
         }
     }
 
-    private String getStatus() {
+    protected String getStatus() {
         if (this.done) {
             return "X";
         } else {
             return " ";
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatus(), description);
     }
 }
