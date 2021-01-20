@@ -11,6 +11,8 @@ import java.util.Set;
  *       - w/o number
  *       - number out of range
  *   - help command
+ *   - Task as abstract class with 3 subclasses (T/D/E)
+ *   - TaskList as a class
  */
 
 public class Duke {
@@ -96,8 +98,8 @@ public class Duke {
             printLine(line);
         }
         printEmptyLine();
-        printLine("Hello! I'm Duke");
-        printLine("What can I do for you?");
+        printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
+        printLine("そう、私です！");
         printHorizontalLine();
         printEmptyLine();
         while (processCommand(sc.nextLine())) ;
