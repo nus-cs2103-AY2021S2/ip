@@ -24,7 +24,7 @@ public class Duke {
             }
 
             if (input.equals("")) { // empty string
-
+                System.out.println("\t...");
             } else if (input.equals("list")) { // list tasks
                 if (counter == 0) {
                     System.out.println("\tHmm... You do not have any tasks!");
@@ -86,7 +86,7 @@ public class Duke {
                         isInsert = true;
                     }
                 } else {
-                    System.out.println("\tOpps! Try inputting \"todo|deadline|event <task> (/by|/at <datetime>)\".");
+                    System.out.println("\tOpps! Try inputting \"todo|deadline|event <task> (</by|/at> <datetime>)\".");
                 }
 
                 if (isInsert) {
