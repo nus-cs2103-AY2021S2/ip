@@ -14,7 +14,12 @@ public class Duke {
 
         while(sc.hasNext()){
             String out = sc.next();
-            System.out.println(out);
+            if(out.equals("bye")){
+                System.out.println("Bye. Hope to see you again");
+                break;
+            }else {
+                System.out.println(out);
+            }
         }
     }
 }
