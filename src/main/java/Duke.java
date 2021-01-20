@@ -18,6 +18,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
         Scanner input = new Scanner(System.in);
+        ArrayList<String> myList = new ArrayList<>();
 
         while(input.hasNextLine()){
             String s = input.nextLine();
@@ -26,12 +27,22 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("---------------------------------------------");
                 break;
-            } else{
+            } else if (s.equals("list")) {
                 System.out.println("---------------------------------------------");
-                System.out.println(s);
+                int len = myList.size();
+                for (int i=1; i<len+1;i++){
+                    System.out.println(i+". "+myList.get(i-1));
+                }
+                System.out.println("---------------------------------------------");
+            } else {
+                myList.add(s);
+                System.out.println("---------------------------------------------");
+                System.out.println("added: "+ s);
                 System.out.println("---------------------------------------------");
             }
         }
     }
+
+
 
 }
