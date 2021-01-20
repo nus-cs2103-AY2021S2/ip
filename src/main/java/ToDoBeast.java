@@ -38,11 +38,14 @@ public class ToDoBeast {
                 Task newTask = null;
                 if (command.equals("todo")) {
                     newTask = new Todo(userInput[1]);
-                    taskManager.addTask(newTask);
                 } else if (command.equals("deadline")) {
                     String[] deadlineParams = userInput[1].split(" /");
                     newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                } else if (command.equals("event")) {
+                    String[] deadlineParams = userInput[1].split(" /");
+                    newTask = new Event(deadlineParams[0], deadlineParams[1]);
                 }
+                taskManager.addTask(newTask);
                 System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
 
             }
