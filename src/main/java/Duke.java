@@ -37,7 +37,7 @@ public class Duke {
                     System.out.println("The following task is now marked as done:\n" + t.toString());
                     break;
                 default:
-                    store.add(new Task(line,store.size()));
+                    store.add(new Task(line));
                     System.out.println("Added: " + line);
             }
         }while(!tokens[0].equals("bye"));

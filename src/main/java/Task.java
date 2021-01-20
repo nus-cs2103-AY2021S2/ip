@@ -1,12 +1,13 @@
 public class Task {
-    protected String description;
+    private final String description;
     protected boolean isDone;
-    protected int number;
+    private final int number;
+    private static int counter = 0;
 
-    public Task(String description, int number) {
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.number = number;
+        this.number = Task.counter++;
     }
 
     public String getStatusIcon() {
