@@ -2,17 +2,29 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        String greeting = "Hey yo, I'm Echo.\nI'll echo your words for now. \n";
+        String greeting = "Hey yo, I'm List.\nI store your words. \n";
         String goodbye = "    Bye bye, catch you soon.";
         Scanner sc = new Scanner(System.in);
-        String echo;
+        String input = "";
+        String[] storedTexts = new String[100];
+        int textIndex = 0;
 
         System.out.println(greeting);
+        input = sc.nextLine();
+        while(!input.equals("bye")) {
 
-        echo = sc.nextLine();
-        while(!echo.equals("bye")) {
-            System.out.println("    " + echo + '\n');
-            echo = sc.nextLine();
+            if(input.equals("list")) {
+                for(int i = 1; i <= textIndex; i++) {
+                    System.out.println("    " + i + ". " + storedTexts[i - 1]);
+                }
+                System.out.println();
+            } else {
+                storedTexts[textIndex] = input;
+                System.out.println("    added: " + input + "\n");
+                textIndex++;
+            }
+
+            input = sc.nextLine();
         }
 
         System.out.println(goodbye);
