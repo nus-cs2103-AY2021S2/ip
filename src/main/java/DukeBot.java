@@ -15,7 +15,11 @@ public class DukeBot {
     public void addTask(Task task) {
         this.list.add(task);
         System.out.println("\t\tOkay I have added this task:\n\t\t\t" + task);
-        System.out.println("\t\tNow you have " + list.size() + " tasks in the list\n");
+        System.out.println("\t\tNow you have " + getNoOfTasks() + " tasks in the list\n");
+    }
+
+    public int getNoOfTasks() {
+        return list.size();
     }
 
     public void displayTasks() {
@@ -36,8 +40,8 @@ public class DukeBot {
     }
 
     //TODO consider throwing an exception (eg. DukeException)
-    public void complain() {
-        System.out.println("\t\tSorry I do not understand that!");
+    public void complain() throws DukeException {
+        throw new DukeException("\t\tSorry I do not understand that!");
     }
 
     public void exit() {
@@ -45,10 +49,18 @@ public class DukeBot {
         this.isAlive = false;
     }
 
-    public void markAsDone(int num) {
-        //TODO consider adding assertion here(to prevent indexing issues)
-        list.get(num-1).markAsDone();
-        System.out.println("\t\tOkay! I've marked this task as done:\n\t\t" + list.get(num-1) + "\n");
+    public void markAsDone(int num) throws DukeException{
+        //TODO consider adding assertion/exception here(to prevent indexing issues)
+        if (getNoOfTasks() == 0) {
+            System.out.println("\t\tThere are no tasks in the list to mark as done!");
+        } else {
+            try {
+                list.get(num - 1).markAsDone();
+                System.out.println("\t\tOkay! I've marked this task as done:\n\t\t" + list.get(num - 1) + "\n");
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("\t\tOnly Enter natural numbers (i.e. 1,2,3..) not more than " + getNoOfTasks());
+            }
+        }
     }
 
     @Override

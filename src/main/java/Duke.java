@@ -10,7 +10,11 @@ public class Duke {
 
         while (sc.hasNext()) {
             command = sc.nextLine();
-            exec.executeCommand(command);
+            try {
+                exec.executeCommand(command);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+            }
             if (!bot.isAlive) {
                 sc.close();
                 break;
