@@ -13,9 +13,9 @@ public class Duke {
     private final String BYE = "See you next time :)";
 
     private final String currentMessage;
-    private final List<String> store;
+    private final List<Task> store;
 
-    private Duke(String currentMessage, List<String> newStore, boolean done) {
+    private Duke(String currentMessage, List<Task> newStore, boolean done) {
         this.currentMessage = currentMessage;
         this.store = newStore;
         this.done = done;
@@ -38,15 +38,28 @@ public class Duke {
                     .mapToObj(i -> (i + 1) + ". " + this.store.get(i))
                     .collect(Collectors.joining("\n"));
             newAgent = new Duke(response, this.store, false);
-        }
-        else if (tokens[0].equals("add")) {
-            List<String> newStore = new ArrayList<>(this.store);
-            String content = input.substring(4);
-            newStore.add(content);
-            String response = "added: " + content;
+        } else if (tokens[0].equals("add")) {
+            List<Task> newStore = new ArrayList<>();
+            for (Task t : this.store) {
+                newStore.add(t.clone());
+            }
+            Task t = new Task(input.substring(4), false);
+            newStore.add(t);
+            String response = "added: " + input.substring(4);
             newAgent = new Duke(response, newStore, false);
-        }
-        else {
+        } else if (tokens[0].equals("done")) {
+            List<Task> newStore = new ArrayList<>();
+            String response = "";
+            for (int i = 0; i <  this.store.size(); i++) {
+                if (i + 1 == Integer.parseInt(tokens[1])) {
+                    newStore.add(this.store.get(i).setDone(true));
+                    response = String.format("Nice! I've marked this task as done:\n%s", newStore.get(i));
+                } else {
+                    newStore.add(this.store.get(i).clone());
+                }
+            }
+            newAgent = new Duke(response, newStore, false);
+        } else {
             newAgent = new Duke(input, this.store, false);
         }
         return newAgent;
@@ -62,7 +75,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Duke agent = new Duke("", new ArrayList<String>(), false);
+        Duke agent = new Duke("", new ArrayList<Task>(), false);
         System.out.println(agent.getGreeting());
         while (!agent.done) {
             System.out.print(getPrompt());
