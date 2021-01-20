@@ -9,17 +9,17 @@ public class Duke {
     }
     
     // Constants
-    private static final String line = "____________________________________________________________";
+    private static final String LINE = "____________________________________________________________";
 
     // Attributes
     private Scanner scanner;
     private boolean isActive;
-    private ArrayList<Todo> todoList;
+    private ArrayList<Task> taskList;
 
     public Duke() {
         this.scanner = new Scanner(System.in);
         this.isActive = true;
-        this.todoList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public void start() {
@@ -34,36 +34,38 @@ public class Duke {
 
     private void listen() {
         String input = scanner.nextLine();
-        switch(input) {
-            case "list":
-                printList();
-                break;
-            case "bye":
-                isActive = false;
-                String output = "Bye. Hope to see you again soon!";
-                print(output);
-                break;
-            default:
-                addToList(new Todo(input));
-                print("Added: " + input);
-                break;
+        if(input.equals("list")) {
+            printList();
+        } else if (input.startsWith("done")) {
+            int itemNo = Integer.parseInt(input.split(" ")[1]);
+            Task selected = taskList.get(itemNo - 1);
+            selected.markAsDone();
+            String output = "Marked as done: \n" + selected;
+            print(output);
+        } else if (input.equals("bye")) {
+            isActive = false;
+            String output = "Bye. Hope to see you again soon!";
+            print(output);
+        } else {
+            addToList(new Task(input));
+            print("Added: " + input);
         }
     }
 
     private void printList() {
         String output = "";
-        for(int i = 0; i < todoList.size(); i++) {
-            output += (i + 1) + ". " + todoList.get(i).toString() + "\n";
+        for(int i = 0; i < taskList.size(); i++) {
+            output += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
         print(output);
     }
 
-    private void addToList(Todo todo) {
-        this.todoList.add(todo);
+    private void addToList(Task task) {
+        this.taskList.add(task);
     }
 
     private void print(String input) {
-        System.out.println(line + "\n" + input + "\n" + line + "\n");
+        System.out.println(LINE + "\n" + input + "\n" + LINE + "\n");
     }
 }
 
