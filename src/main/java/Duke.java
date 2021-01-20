@@ -37,6 +37,15 @@ public class Duke {
                     } else {
                         tasks.get(idx).finish();
                     }
+                } else if (userInput.toLowerCase().matches("^(delete|remove) \\d+$")) {
+                    String[] bits = userInput.split(" ");
+                    int idx = Integer.parseInt(bits[1]) - 1; // zero-indexed task index
+                    if (idx < 0 || idx >= tasks.size()) {
+                        throw new Exception("Oops! That doesn't appear to be a valid task number.");
+                    } else {
+                        System.out.println("Removed task: " + tasks.remove(idx).toString());
+                        System.out.printf("You now have %d items on your todo list.\n", tasks.size());
+                    }
                 // add task to list
                 } else if (userInput.toLowerCase().matches("^(todo|deadline|event)( .+)?$")) {
                     String[] bits = userInput.split(" ");
