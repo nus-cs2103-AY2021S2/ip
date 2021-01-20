@@ -117,6 +117,9 @@ public class Duke {
                     }
                     addTask(new Deadline(description, by));
                     break;
+                case DELETE:
+                    deleteTask(otherInfo);
+                    break;
             }
         }
         catch (IllegalArgumentException e) {
@@ -167,36 +170,29 @@ public class Duke {
         System.out.print(res.toString());
     }
 
+
+    private static void addTask(Task newTask) {
+        tasks.add(newTask);
+
+        String res = indent + "Roger that! Added new task:\n" +
+                indent + " " + newTask.toString() + "\n" +
+                indent + "Now you have " + tasks.size() + " " +
+                (tasks.size() > 1 ? "tasks" : "task") +
+                " in the list.";
+        System.out.println(res);
+    }
+
     /**
      * Complete the task with the given index and print the confirmation message.
      *
-     * Four possible errors are handled. Namely, they are:
-     *      1. no taskIndex;
-     *      2. taskIndex is not an integer;
-     *      3. taskIndex is out of bound;
-     *      4. task has been completed;
+     * One possible error is handled. Namely, it is:
+     *      1. the task has been completed;
      * @param taskIndex taskIndex from user input, in String.
      * @throws DukeException when an invalid taskIndex is entered
      */
     private static void completeTask(String taskIndex) throws DukeException {
-        int index;
-        Task task;
-        if (taskIndex == null) {
-            throw new DukeException("Please enter a task index.");
-        }
-
-        try{
-            index = Integer.parseInt(taskIndex) - 1;
-        }
-        catch (NumberFormatException e) {
-            throw new DukeException("Task index entered is not valid.");
-        }
-
-        try {
-            task = tasks.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task with the given index does not exist.");
-        }
+        int index = verifyTaskIndex(taskIndex);
+        Task task = tasks.get(index);
 
         if (!task.markAsDone()) {
             throw new DukeException("Task with the given index has been completed.");
@@ -208,12 +204,52 @@ public class Duke {
         System.out.println(res);
     }
 
-    private static void addTask(Task newTask) {
-        tasks.add(newTask);
+    /**
+     * Remove the task with the given index and print the confirmation message.
+     * @param taskIndex taskIndex from user input, in String.
+     * @throws DukeException when an invalid taskIndex is entered
+     */
+    private static void deleteTask(String taskIndex) throws DukeException {
+        int index = verifyTaskIndex(taskIndex);
+        Task task = tasks.remove(index);
 
-        String res = indent + "Roger that! Added new task:\n" +
-                indent + " " + newTask.toString() + "\n" +
-                indent + "Now you have " + tasks.size() + " tasks in the list.";
+        String res = indent +
+                "On your command! I have removed this task:\n" +
+                indent + "  " + task.toString() + "\n" +
+                indent + "Now you have " + tasks.size() + " " +
+                (tasks.size() > 1 ? "tasks" : "task") +
+                " in the list.";
         System.out.println(res);
     }
+
+    /**
+     * Verify if the given taskIndex is valid.
+     * Three possible errors are handled. Namely, they are:
+     *      1. no taskIndex;
+     *      2. taskIndex is not an integer;
+     *      3. taskIndex is out of bound;
+     * @param taskIndex taskIndex from user input, in String.
+     * @return index in int if it is valid
+     * @throws DukeException if invalid index is provided
+     */
+    private static int verifyTaskIndex(String taskIndex) throws DukeException {
+        int index;
+        if (taskIndex == null) {
+            throw new DukeException("Please enter a task index.");
+        }
+
+        try{
+            index = Integer.parseInt(taskIndex) - 1;
+        }
+        catch (NumberFormatException e) {
+            throw new DukeException("Task index entered is not an integer.");
+        }
+
+        if (index >= tasks.size()) {
+            throw new DukeException("Task with the given index does not exist.");
+        }
+
+        return index;
+    }
+
 }
