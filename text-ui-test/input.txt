@@ -1,0 +1,17 @@
+deadline /SundayAfternoon 3-4 pm
+todo read book
+todo
+deadline study
+deadline
+deadline study /SundayAfternoon 3-4 pm
+deadline /SundayAfternoon 3-4 pm
+done 1
+done 10
+list
+event team project
+event
+list
+event team project /Friday 3-4 pm ..
+done 3
+list
+bye
