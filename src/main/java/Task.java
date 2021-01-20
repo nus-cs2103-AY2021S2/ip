@@ -2,7 +2,10 @@ public class Task {
     private String name;
     private boolean done;
 
-    Task(String name) {
+    Task(String name) throws DukeException {
+        if (name == null) {
+            throw new DukeException("I'm sorry, but I don't know what that means.");
+        }
         this.name = name;
         this.done = false;
     }

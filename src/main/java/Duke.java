@@ -20,35 +20,39 @@ public class Duke {
         command = sc.next();
 
         while(!command.equals("bye")) {
-            switch (command) {
-                case "list" :
-                    printTasks();
-                    System.out.println(partition);
-                    break;
-                case "done" :
-                    int num = sc.nextInt();
-                    markAsDone(num);
-                    System.out.println(partition);
-                    break;
-                case "todo" :
-                    addTask(new Todo(sc.nextLine()));
-                    System.out.println(partition);
-                    break;
-                case "deadline" :
-                    String inst1 = sc.nextLine();
-                    String[] part1 = inst1.split("/by");
-                    addTask(new Deadline(part1[0], part1[1]));
-                    System.out.println(partition);
-                    break;
-                case "event" :
-                    String inst2 = sc.nextLine();
-                    String[] part2 = inst2.split("/at");
-                    addTask(new Event(part2[0], part2[1]));
-                    System.out.println(partition);
-                    break;
-                default :
-                    addTask(new Task(command));
-                    System.out.println(partition);
+            try {
+                switch (command) {
+                    case "list":
+                        printTasks();
+                        System.out.println(partition);
+                        break;
+                    case "done":
+                        int num = sc.nextInt();
+                        markAsDone(num);
+                        System.out.println(partition);
+                        break;
+                    case "todo":
+                        addTask(new Todo(sc.nextLine()));
+                        System.out.println(partition);
+                        break;
+                    case "deadline":
+                        String inst1 = sc.nextLine();
+                        String[] part1 = inst1.split("/by");
+                        addTask(new Deadline(part1[0], part1[1]));
+                        System.out.println(partition);
+                        break;
+                    case "event":
+                        String inst2 = sc.nextLine();
+                        String[] part2 = inst2.split("/at");
+                        addTask(new Event(part2[0], part2[1]));
+                        System.out.println(partition);
+                        break;
+                    default:
+                        addTask(new Task(null));
+                        System.out.println(partition);
+                }
+            } catch (DukeException de) {
+                System.out.println(de.getMessage() + "\n" + partition);
             }
 
             command = sc.next();
