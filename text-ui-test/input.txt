@@ -1,0 +1,34 @@
+list
+done 1
+todo
+todobuy groceries
+todo
+todo buy groceries
+deadline
+deadlineeat an apple
+deadline
+deadline eat an apple
+deadline eat an apple /by
+deadline eat an apple /by night
+event
+eventfinal exam
+event
+event final exam
+event final exam /at
+event final exam /at Mon
+event final exam /at Mon 2
+event final exam /at Mon 2-
+event final exam /at Mon 2-5
+list
+done
+done1
+done 9
+done str
+done 1
+list
+done 2
+list
+done 3
+list
+done 1
+bye

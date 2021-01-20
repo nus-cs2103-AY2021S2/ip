@@ -4,11 +4,16 @@ import java.util.ArrayList;
 public class Duke {
 
     private static ArrayList<Task> taskArr = new ArrayList<>();
-    private static String greetingCat = " ฅ(=^・ω・^=ฅ)";
-    private static String goodByeCat = "（=^・ω・^=❁）";
-    private static String goCat = "(^・ω・^=)~~✧✧";
-    private static String errorCat = "┌(=^>ω<^=)┘";
-    private static String gdJobCat = "ヽ(=^・ω・^=)丿";
+//    private static String greetingCat = " ฅ(=^・ω・^=ฅ)";
+//    private static String goodByeCat = "（=^・ω・^=\u2055）";
+//    private static String goCat = "(^・ω・^=)~~✧✧";
+//    private static String errorCat = "┌(=^>ω<^=)┘";
+//    private static String gdJobCat = "ヽ(=^・ω・^=)丿";
+    private static String greetingCat = "(=^. .^=)";
+    private static String goodByeCat = "(=^. .^=*)";
+    private static String goCat = "(=^. .^=)~~";
+    private static String errorCat = "(=^> <^=)'''";
+    private static String gdJobCat = "\\(=^> <^=)/";
 
     public static void lines() {
         System.out.println("__________________________" +
@@ -26,14 +31,16 @@ public class Duke {
     }
 
     public static void goodbye() {
-        System.out.println("✧･ﾟ:* Goodbye *:･ﾟ✧" + goodByeCat);
+//        System.out.println("✧･ﾟ:* Goodbye *:･ﾟ✧" + goodByeCat);
+        System.out.println("*** Goodbye *** " + goodByeCat);
     }
 
     public static void printAddedSuccess(Task task) {
-        System.out.println(gdJobCat);
+        System.out.println(goCat);
         System.out.println("Mew! I've added this task:");
         System.out.println(task);
-        System.out.println(String.format("\n✧･ﾟNow you have %d tasks in the list･ﾟ✧", taskArr.size()));
+//        System.out.println(String.format("\n✧･ﾟNow you have %d tasks in the list･ﾟ✧", taskArr.size()));
+        System.out.println(String.format("\n** Now you have %d tasks in the list **", taskArr.size()));
     }
 
     public static void addTodo(String s) {
@@ -72,7 +79,8 @@ public class Duke {
 
     public static void list() {
         int i = 0;
-        System.out.println(" ฅ list ฅ ");
+//        System.out.println(" ฅ list ฅ ");
+        System.out.println(" * list *");
         while (i < taskArr.size()) {
             System.out.println(Integer.toString(i + 1) + ". " + taskArr.get(i));
             i++;
@@ -86,11 +94,12 @@ public class Duke {
             System.out.println(gdJobCat);
             System.out.println("Mew! I've marked this task as done:");
             System.out.println(taskArr.get(i));
-            System.out.println("\nฅ Good job, you deserve a kit-kat ฅ");
+//            System.out.println("\nฅ Good job, you deserve a kit-kat ฅ");
+            System.out.println("\n* Good job, you deserve a kit-kat *");
         } catch (IndexOutOfBoundsException e1) {
             //list is empty, hence i results in index out of bounds
             //or when i >= taskArr.size()
-            System.out.println("┌(=^>ω<^=)┘");
+            System.out.println(errorCat);
             System.out.println("Error: List is empty or index is out of bounds");
         } catch (Exception e){
             //all other errors
