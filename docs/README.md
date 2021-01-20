@@ -2,19 +2,18 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### List
+Feature that enables user to add items to a list and retrieve the list
 
 ## Usage
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+### 'list' - displays all items currently in the list
+			 Example: list
+	Expected outcome: 1. apples
+					  2. oranges
+					 
+### <any item> - adds the item to the back of the list
+			 Example: bananas
+	Expected outcome: 1. apples
+					  2. oranges
+					  3. bananas
