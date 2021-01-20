@@ -22,13 +22,14 @@ public class Task {
     }
 
     public Task markAsDone(){
+
         String description = this.getDescription();
 
         return new Task(description,true);
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "V" : "X"); //return tick or X symbols
     }
 
 
