@@ -4,13 +4,13 @@ public class Task {
     String name;
     Boolean status;
 
-    Task(String name, Boolean status) {
+    Task(String name) {
         this.name = name;
-        this.status = status;
+        this.status = false;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setDone() {
+        this.status = true;
     }
 
     @Override

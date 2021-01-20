@@ -1,46 +1,81 @@
 package main.java;
 
 import main.java.Task;
+
+import java.util.*;
 import java.util.Scanner;
 
 public class Duke {
+
+    public static void ollySpeak(String message) {
+        System.out.println("Olly: " + message);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String welcomeMsg = "Olly: Hey! Welcome to the chatbot. What can I do for you today?";
-        System.out.println(welcomeMsg);
+        ollySpeak("Hey! Welcome to the chatbot. What can I do for you today?");
+        List<Task> tasks = new ArrayList<Task>();
 
-        Task[] tasks = new Task[100];
-
-        int textCounter = 0;
 
         while (sc.hasNext()) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
-                System.out.println("Olly: Goodbye for now, we will meet again.");
+                ollySpeak("Goodbye for now, we will meet again.");
                 break;
             }
 
             if (input.equals("list")) {
-                System.out.println("Olly: Here you go! Your list of items:");
-                for (int i = 0; i < textCounter; i++) {
-                    System.out.println(i+1 + ". " + tasks[i]);
+                ollySpeak("Here you go! Your list of items:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i+1 + ". " + tasks.get(i));
                 }
-            } else if (input.contains("done")) {
+            } else if (input.startsWith("todo")) {
+                String[] command = input.split("todo ");
+                Todo todo = new Todo(command[1]);
+                tasks.add(todo);
+
+                ollySpeak("Make sure you do this task! I've added:");
+                System.out.println(todo);
+                ollySpeak("You now have " + tasks.size() + " tasks at hand.");
+            } else if (input.startsWith("deadline")) {
+                String[] command = input.split("deadline ");
+                String deadlineArg = command[1];
+                String[] byArgs = deadlineArg.split(" /by ");
+
+                Deadline deadline = new Deadline(byArgs[0], byArgs[1]);
+                tasks.add(deadline);
+
+                ollySpeak("Make sure you meet this deadline! I've added:");
+                System.out.println(deadline);
+                ollySpeak("You now have " + tasks.size() + " tasks at hand.");
+            } else if (input.startsWith("event")) {
+                String[] command = input.split("event ");
+                String eventArg = command[1];
+                String[] atArgs = eventArg.split(" /at ");
+
+                Event event = new Event(atArgs[0], atArgs[1]);
+                tasks.add(event);
+
+                ollySpeak("Event coming right up! I've added:");
+                System.out.println(event);
+                ollySpeak("You now have " + tasks.size() + " tasks at hand.");
+            } else if (input.startsWith("done")) {
                 String[] command = input.split(" ");
                 Integer index = Integer.parseInt(command[1]);
-                if (index > 0 && index <= textCounter) {
-                    Task doneTask = tasks[index - 1];
-                    doneTask.setStatus(true);
-                    System.out.println("Olly: Swee! This task is done:");
+                if (index > 0 && index <= tasks.size()) {
+                    Task doneTask = tasks.get(index - 1);
+                    doneTask.setDone();
+                    ollySpeak("Swee! This task is done:");
                     System.out.println(doneTask);
                 } else {
-                    System.out.println("Olly: The task number does not work, try again?");
+                    ollySpeak("The task number does not work, try again?");
                 }
             } else {
-                Task newTask = new Task(input, false);
-                tasks[textCounter] = newTask;
-                textCounter++;
-                System.out.println("[Added to list] " + input);
+                Task newTask = new Task(input);
+                tasks.add(newTask);
+                ollySpeak("Task have been added:");
+                System.out.println(newTask);
+                ollySpeak("You now have " + tasks.size() + " tasks at hand.");
             }
         }
     }
