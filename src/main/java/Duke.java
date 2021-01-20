@@ -77,7 +77,7 @@ public class Duke {
             throw new InvalidTaskException();
         }
     }
-    
+
     /**
      * Listens to the user's input, and passes it to the input handler.
      */
@@ -108,6 +108,8 @@ public class Duke {
             quit();
         } else if (inputString.startsWith("done")) {
             completeTask(inputString);
+        } else if (inputString.startsWith("delete")) {
+            deleteTask(inputString);
         } else if (inputString.startsWith("todo")) {
             try {
                 Todo newTodo = new Todo(inputString.substring(5));

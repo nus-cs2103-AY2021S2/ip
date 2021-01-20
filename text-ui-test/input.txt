@@ -18,6 +18,9 @@ todo
 todo play cards against humanity
 deadline submit cs2103 assignment /by tomorrow
 event nomination of hawker culture /at Sunday wholeday
+list
+delete 5
+delete 2
 done 7
 list
 bye
