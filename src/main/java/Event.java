@@ -1,8 +1,8 @@
 public class Event extends Task {
     String dateTime;
 
-    public Event(boolean markAsDone, String taskName, String dateTime) {
-        super(markAsDone, taskName);
+    public Event(String taskName, String dateTime) {
+        super(taskName);
         this.dateTime = dateTime;
     }
 

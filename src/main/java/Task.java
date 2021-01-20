@@ -2,8 +2,8 @@ public class Task {
     private boolean markAsDone;
     private String taskName;
 
-    public Task(boolean markAsDone, String taskName) {
-        this.markAsDone = markAsDone;
+    public Task(String taskName) {
+        this.markAsDone = false;
         this.taskName = taskName;
     }
 
