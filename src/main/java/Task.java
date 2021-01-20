@@ -1,6 +1,6 @@
 public class Task {
-    private final String description;
-    private boolean isDone;
+    protected final String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatus() {
-        String isDoneSymbol =  isDone ? "[X] " : "[ ] ";
+        String isDoneSymbol = isDone ? "[X] " : "[ ] ";
         return isDoneSymbol + this.description;
     }
 }
