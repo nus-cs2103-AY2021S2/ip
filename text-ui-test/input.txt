@@ -1,14 +1,37 @@
 list
 todo borrow book
+list
 deadline math assignment /by Sunday
 event project meeting /at 27 Jan
 list
 done 1
-todo return book
-done 2
 list
+done 2
+done 3
 done 4
 list
-done 3
+todo
+deadline
+event
+todo todo
+list list
+bye bye
+deadline physics homework
+event dinner with Jen
+deadline programming assignment /by
+event class gathering /at
+list
+deadline         physics homework       /by     Monday      
+   event      dinner with Jen  /at      28 Jan
+list
+deadline chemistry assignment /by /by /by Tuesday
+event tea with Wilson /at /by /at 30 Jan
+list
+done       4
+done    5
+   done 6  
+done asdf
+done 7
+done 8
 list
 bye
