@@ -5,7 +5,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input;
-        ArrayList<String> collection = new ArrayList<String>();
+        ArrayList<Task> collection = new ArrayList<Task>();
         boolean exit = false;
 
         // Welcomes user
@@ -16,7 +16,9 @@ public class Duke {
             System.out.print("<< ");
             input = sc.nextLine().toLowerCase();
 
-            if (input.equals("list"))
+            if (input.startsWith("done"))
+                done(collection, input);
+            else if (input.equals("list"))
                 list(collection);
             else if (input.equals("bye"))
                 exit = exit();
@@ -41,10 +43,10 @@ public class Duke {
         System.out.println(">> Is there anything I can do for you today?");
     }
 
-    public static void list(ArrayList<String> collection) {
+    public static void list(ArrayList<Task> collection) {
         System.out.println(">> Got it, this is your list.");
         for (int i = 0; i < collection.size(); i++) {
-            String formattedString = String.format("\t%d. %s", i + 1, collection.get(i));
+            String formattedString = String.format("\t[%s] %d. %s", collection.get(i).getStatusIcon(), i + 1, collection.get(i));
             System.out.println(formattedString);
         }
     }
@@ -54,8 +56,20 @@ public class Duke {
         return true;
     }
 
-    public static void add(ArrayList<String> collection, String input) {
-        collection.add(input);
+    public static void add(ArrayList<Task> collection, String input) {
+        collection.add(new Task(input));
         System.out.println(">> Added: " + input);
+    }
+
+    public static void done(ArrayList<Task> collection, String input) {
+        int itemIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+
+        // Check if the item index is in range
+        if (itemIdx >= 0 && itemIdx < collection.size()) {
+            collection.get(itemIdx).markAsDone();
+            System.out.println(">> Task \"" + collection.get(itemIdx) + "\" is marked as done.");
+        } else {
+            System.out.println(">> I don't think there is such an item...");
+        }
     }
 }
