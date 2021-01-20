@@ -2,7 +2,11 @@ public abstract class Task {
     private final String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description) throws EmptyArgument {
+        description = description.trim();
+        if (description.isEmpty()){
+            throw new EmptyArgument();
+        }
         this.description = description;
         this.isDone = false;
     }

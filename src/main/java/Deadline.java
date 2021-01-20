@@ -1,8 +1,12 @@
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws EmptyArgument {
         super(description);
+        by = by.trim();
+        if (by.isEmpty()){
+            throw new EmptyArgument();
+        }
         this.by = by;
     }
 

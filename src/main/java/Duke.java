@@ -64,6 +64,8 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (InvalidCommandException e){
                 System.out.println(e.getMessage());
+            } catch(EmptyArgument e){
+                System.out.println("Cannot have empty argument");
             }
         }while(!tokens[0].equals("bye"));
         in.close();
