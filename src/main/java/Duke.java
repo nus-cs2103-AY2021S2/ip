@@ -73,6 +73,9 @@ public class Duke {
             case "done":
                 handleDone(rest);
                 break;
+            case "delete":
+                handleDelete(rest);
+                break;
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -162,6 +165,25 @@ public class Duke {
         printDivider();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
+        printDivider();
+    }
+
+    public static void handleDelete(String strIdx) throws DukeException {
+        if (strIdx != null) {
+            int idx = Integer.parseInt(strIdx) - 1;
+            Task task = taskList.get(idx);
+            taskList.remove(idx);
+            printDeletedTask(task);
+        } else {
+            throw new DukeException("☹t OOPS!!! The id of a delete command cannot be empty.");
+        }
+    }
+
+    public static void printDeletedTask(Task task) {
+        printDivider();
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(task);
+        System.out.printf("Now you have %d tasks in the list%n", taskList.size());
         printDivider();
     }
 
