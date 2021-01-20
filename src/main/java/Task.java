@@ -12,8 +12,9 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public Task markAsDone() {
-        return new Task(this.description, true);
+    public boolean markAsDone() {
+        this.isDone = true;
+        return true;
     }
 
     public String getDescription() {

@@ -3,9 +3,9 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Task[] list = new Task[100];
+        List<Task> list = new ArrayList<Task>();
         int counter = 0;
-        int elem = 0;
+        int total = 0;
         Duke.printHorizontalLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -27,7 +27,7 @@ public class Duke {
                         if (array.length == 1) {
                             throw new DukeException("☹ OOPS!!! I don't know which task to mark as done.");
                         }
-                        if(elem <= 0) {
+                        if(total <= 0) {
                             throw new DukeException("☹ OOPS!!! There are no tasks to be marked as done.");
                         }
                         if(Integer.parseInt(array[1]) > counter) {
@@ -35,7 +35,7 @@ public class Duke {
                         } else {
                             doneCommand(list, array);
                         }
-                        elem--;
+                        total--;
                     } else if (s.contains("todo")) {
                         if (s.length() <= 5) {
                             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -43,7 +43,7 @@ public class Duke {
                         String st = s.substring(5);
                         toDoCommand(counter, st, list);
                         counter++;
-                        elem++;
+                        total++;
                         continue;
                     } else if (s.contains("deadline")) {
                         if (s.length() <= 9 || !s.contains("/by")) {
@@ -54,7 +54,7 @@ public class Duke {
                         String by = strArr[1];
                         deadlineCommand(counter, description, by, list);
                         counter++;
-                        elem++;
+                        total++;
                         continue;
 
                     } else if (s.contains("event")) {
@@ -66,8 +66,20 @@ public class Duke {
                         String date = strArr[1];
                         eventCommand(counter, description, date, list);
                         counter++;
-                        elem++;
+                        total++;
                         continue;
+                    } else if (s.contains("delete")) {
+                        String[] strArr = s.split(" ");
+                        if(strArr.length == 1) {
+                            throw new DukeException("☹ OOPS!!! I don't know which task to delete.");
+                        }
+                        int idx = Integer.parseInt(strArr[1]) - 1;
+                        deleteCommand(counter, idx, list);
+                        counter--;
+                        total--;
+
+
+
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -88,20 +100,19 @@ public class Duke {
         Duke.printHorizontalLine();
     }
 
-    public static void listCommand(Task[] list, int counter) {
+    public static void listCommand(List<Task> list, int counter) {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < counter; i++) {
             int j = i + 1;
-            Task t = list[i];
-            System.out.printf((j) + "." + t);
+            Task t = list.get(i);
+            System.out.println((j) + "." + t);
         }
     }
 
-    public static void doneCommand(Task[] list, String[] array) {
+    public static void doneCommand(List<Task> list, String[] array) {
         int m = Integer.valueOf(array[1]) - 1;
-        Task t  = list[m];
-        list[m] = t.markAsDone();
-        t = list[m];
+        Task t  = list.get(m);
+        t.markAsDone();
         Duke.printHorizontalLine();
         System.out.println("Nice! I've marked this task as done:");
         System.out.printf("[%s] %s%n", t.getStatusIcon(), t.getDescription());
@@ -114,11 +125,11 @@ public class Duke {
         Duke.printHorizontalLine();
     }*/
 
-    public static void toDoCommand(int counter, String s, Task[] list) {
+    public static void toDoCommand(int counter, String s, List<Task> list) {
         Duke.printHorizontalLine();
         System.out.println("Got it. I've added this task:");
         ToDo td = new ToDo(s);
-        list[counter] = td;
+        list.add(td);
         System.out.println(" " + td.toString());
         if(counter == 0) {
             System.out.printf("Now you have %d task in the list.%n", counter + 1);
@@ -128,11 +139,11 @@ public class Duke {
         Duke.printHorizontalLine();
     }
 
-    public static void deadlineCommand(int counter, String description, String by, Task[] list) {
+    public static void deadlineCommand(int counter, String description, String by, List<Task> list) {
         Duke.printHorizontalLine();
         System.out.println("Got it. I've added this task:");
         Deadline d = new Deadline(description, by);
-        list[counter] = d;
+        list.add(d);
         System.out.println(" " + d.toString());
         if(counter == 0) {
             System.out.printf("Now you have %d task in the list.%n", counter + 1);
@@ -142,10 +153,10 @@ public class Duke {
         Duke.printHorizontalLine();
     }
 
-    public static void eventCommand(int counter, String description, String date, Task[] list) {
+    public static void eventCommand(int counter, String description, String date, List<Task> list) {
         System.out.println("Got it. I've added this task:");
         Event e = new Event(description, date);
-        list[counter] = e;
+        list.add(e);
         System.out.println(" " + e.toString());
         if(counter == 0) {
             System.out.printf("Now you have %d task in the list.%n", counter + 1);
@@ -153,5 +164,12 @@ public class Duke {
             System.out.printf("Now you have %d tasks in the list.%n", counter + 1);
         }
         Duke.printHorizontalLine();
+    }
+
+    public static void deleteCommand(int counter, int index, List<Task> list) {
+        Task t = list.get(index);
+        list.remove(index);
+        System.out.println("Noted. I've removed this task:\n" + t + "\nNow you have "
+                + (counter - 1) + " tasks in the list.");
     }
 }
