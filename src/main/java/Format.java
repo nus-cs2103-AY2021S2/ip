@@ -9,6 +9,10 @@ public class Format {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    public static final void WRONGFORMAT() {
+        System.out.println("Wrong Format Liao");
+    }
+
     public static final String farewell = UPPER
             + "I zao liao, don't miss me."
             + LOWER;
@@ -22,6 +26,13 @@ public class Format {
         } else {
             return UPPER + " ".repeat(36 - s.length() / 2) + s + LOWER;
         }
+    }
+
+    public static final String biggerBox(Task t) {
+        return Format.UPPER + "Added liao: "
+                + t.toString() + Format.SPACE
+                + "You have " + Task.getCapacity() + " tasks in the list!"
+                + Format.LOWER;
     }
 
     public static final void LISTING() {

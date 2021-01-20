@@ -20,8 +20,63 @@ public class Duke {
         System.out.println(Format.farewell);
     }
 
+    public static void handleDone(String[] line) {
+        if (line.length == 2) {
+            String arg = line[1].replaceAll("[^0-9]", "");
+            try {
+                int num = Integer.parseInt(arg);
+                Task.done(num);
+            } catch (NumberFormatException e) {
+                System.out.println("Please lah, key in number");
+            }
+        } else {
+            Format.WRONGFORMAT();
+        }
+    }
+
+    public static void handleToDo(String[] line, String message) {
+        if (line.length > 1) {
+            String msg = message.replaceAll(line[0], "")
+                    .trim();
+            Todo todo = new Todo(msg);
+            System.out.println(Format.biggerBox(todo));
+        } else {
+            Format.WRONGFORMAT();
+        }
+    }
+    public static void handleDeadline(String[] line, String message) {
+        if (line.length > 2) {
+            String[] comments = message.trim().toLowerCase().split("/");
+            String msg = comments[0].replaceAll(line[0], "").trim();
+            if (comments.length == 2) {
+                Deadlines deadline = new Deadlines(msg, comments[1]);
+                System.out.println(Format.biggerBox(deadline));
+            } else {
+                Format.WRONGFORMAT();
+            }
+
+        } else {
+            Format.WRONGFORMAT();
+        }
+    }
+
+    public static void handleEvent(String[] line, String message) {
+        if (line.length > 2) {
+            String[] comments = message.trim().toLowerCase().split("/");
+            String msg = comments[0].replaceAll(line[0], "").trim();
+            if (comments.length == 2) {
+                Event event = new Event(msg, comments[1]);
+                System.out.println(Format.biggerBox(event));
+            } else {
+                Format.WRONGFORMAT();
+            }
+        } else {
+            Format.WRONGFORMAT();
+        }
+    }
+
     public static boolean inputHandler(String message) {
-        String[] line = message.toLowerCase().split(" ");
+        String[] line = message.trim().toLowerCase().split(" ");
         String command = line[0];
         if (command.equals("bye")) {
             return true;
@@ -29,47 +84,13 @@ public class Duke {
             if (command.equals("list")) {
                 Format.LISTING();
             } else if (command.equals("done")) {
-                if (line.length == 2) {
-                    String arg = line[1].replaceAll("[^0-9]", "");
-                    try {
-                        int num = Integer.parseInt(arg);
-                        Task.done(num);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please lah, key in number");
-                    }
-                } else {
-                    System.out.println("Wrong format liao");
-                }
+                handleDone(line);
             } else if (command.equals("todo")) {
-                if (line.length > 1) {
-                    String msg = message.replaceAll(command, "")
-                            .trim();
-                    Todo todo = new Todo(msg);
-                    System.out.println(Format.UPPER + "Added liao: "
-                            + todo.toString() + Format.SPACE
-                            + "You have " + Task.getCapacity() + " tasks in the list!"
-                            + Format.LOWER);
-                } else {
-                    System.out.println("Wrong format liao");
-                }
+                handleToDo(line, message);
             } else if (command.equals("deadline")) {
-                if (line.length > 2) {
-                    String[] comments = message.toLowerCase().split("/");
-                    String msg = comments[0].replaceAll(command, "").trim();
-                    if (comments.length == 2) {
-                        String comment = comments[1];
-                        Deadlines deadline = new Deadlines(msg, comment);
-                        System.out.println(Format.UPPER + "Added liao: "
-                                + deadline.toString() + Format.SPACE
-                                + "You have " + Task.getCapacity() + " tasks in the list!"
-                                + Format.LOWER);
-                    } else {
-                        System.out.println("Wrong format liao, add / at the end for date");
-                    }
-
-                } else {
-                    System.out.println("Wrong format liao");
-                }
+                handleDeadline(line, message);
+            } else if (command.equals("event")){
+                handleEvent(line, message);
             } else {
                 Task task = new Task(message);
                 System.out.println(Format.chatBox("Added: " + message));
