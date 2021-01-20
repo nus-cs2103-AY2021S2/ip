@@ -15,4 +15,8 @@ event
 deadline submit_assignment /by
 event lecture /at
 excuseme
+delete 2
+list
+delete 1
+list
 quit
