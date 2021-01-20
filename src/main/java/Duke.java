@@ -5,6 +5,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         Task[] list = new Task[100];
         int counter = 0;
+        int elem = 0;
         Duke.printHorizontalLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -12,44 +13,70 @@ public class Duke {
 
         while(true) {
             String s = sc.nextLine();
-            if(s.equals("bye")) {
+            if (s.equals("bye")) {
                 Duke.byeCommand();
                 break;
-            } else if(s.equals("list")) {
+            } else if (s.equals("list")) {
                 Duke.printHorizontalLine();
                 Duke.listCommand(list, counter);
                 Duke.printHorizontalLine();
             } else {
-                if(s.contains("done")) {
-                    String[] array = s.split(" ");
-                    doneCommand(list,array);
-                } else if(s.contains("todo")) {
-                    String st = s.substring(5);
-                    toDoCommand(counter, st, list);
-                    counter++;
-                    continue;
-                } else if(s.contains("deadline")) {
-                    String[] strArr = s.split("/by ");
-                    String description = strArr[0].substring(9).trim();
-                    String by = strArr[1];
-                    deadlineCommand(counter, description, by, list);
-                    counter++;
-                    continue;
+                try {
+                    if (s.contains("done")) {
+                        String[] array = s.split(" ");
+                        if (array.length == 1) {
+                            throw new DukeException("☹ OOPS!!! I don't know which task to mark as done.");
+                        }
+                        if(elem <= 0) {
+                            throw new DukeException("☹ OOPS!!! There are no tasks to be marked as done.");
+                        }
+                        if(Integer.parseInt(array[1]) > counter) {
+                            throw new DukeException("☹ OOPS!!! There is no such task to be marked as done.");
+                        } else {
+                            doneCommand(list, array);
+                        }
+                        elem--;
+                    } else if (s.contains("todo")) {
+                        if (s.length() <= 5) {
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        String st = s.substring(5);
+                        toDoCommand(counter, st, list);
+                        counter++;
+                        elem++;
+                        continue;
+                    } else if (s.contains("deadline")) {
+                        if (s.length() <= 9 || !s.contains("/by")) {
+                            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                        }
+                        String[] strArr = s.split("/by ");
+                        String description = strArr[0].substring(9).trim();
+                        String by = strArr[1];
+                        deadlineCommand(counter, description, by, list);
+                        counter++;
+                        elem++;
+                        continue;
 
-                } else if(s.contains("event")) {
-                    String[] strArr = s.split("/at ");
-                    String description = strArr[0].substring(6).trim();
-                    String date = strArr[1];
-                    eventCommand(counter, description, date, list);
-                    counter++;
-                    continue;
-                } else {
-                    //do nothing
-                    continue;
+                    } else if (s.contains("event")) {
+                        if (s.length() <= 6 || !s.contains("/at")) {
+                            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                        }
+                        String[] strArr = s.split("/at ");
+                        String description = strArr[0].substring(6).trim();
+                        String date = strArr[1];
+                        eventCommand(counter, description, date, list);
+                        counter++;
+                        elem++;
+                        continue;
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                } catch (DukeException ex) {
+                    System.out.println(ex);
                 }
             }
         }
-    }
+     }
 
     public static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
@@ -66,7 +93,7 @@ public class Duke {
         for(int i = 0; i < counter; i++) {
             int j = i + 1;
             Task t = list[i];
-            System.out.println((j) + "." + t);
+            System.out.printf((j) + "." + t);
         }
     }
 
