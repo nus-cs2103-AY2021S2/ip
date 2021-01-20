@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  * Owen is a personal assistant chatbot.
  * 
@@ -10,7 +7,7 @@ import java.util.ArrayList;
 public class Owen implements Chatbot {
     private final boolean isRunning;
     private final Response latestResponse;
-    private final List<String> items;
+    private final TaskList taskList;
 
     /**
      * Creates an Owen chatbot with a hello response.
@@ -28,19 +25,19 @@ public class Owen implements Chatbot {
         stringBuilder.append("\nHello I am Owen the Owl!");
         this.latestResponse = new DefaultResponse(stringBuilder.toString());
 
-        this.items = new ArrayList<>();
+        this.taskList = new TaskList();
     }
 
-    private Owen(boolean isRunning, Response latestResponse, List<String> items) {
+    private Owen(boolean isRunning, Response latestResponse, TaskList taskList) {
         this.isRunning = isRunning;
         this.latestResponse = latestResponse;
-        this.items = items;
+        this.taskList = taskList;
     }
 
     @Override
     public Owen shutdown() {
         Response shutdownResponse = new DefaultResponse("Bye. Hope to see you again soon!");
-        return new Owen(false, shutdownResponse, this.items);
+        return new Owen(false, shutdownResponse, this.taskList);
     }
 
     @Override
@@ -55,27 +52,27 @@ public class Owen implements Chatbot {
 
     @Override
     public Owen parseCommand(String command) {
-        switch (command) {
+        String[] splitCommand = command.split(" ", 2);
+        String parsedCommand = splitCommand[0];
+
+        switch (parsedCommand) {
         case "list":
-            Response listResponse = new DefaultResponse(this.getItemsListAsString());
-            return new Owen(this.isRunning, listResponse, this.items);
+            Response listResponse = new DefaultResponse(this.taskList.toString());
+            return new Owen(this.isRunning, listResponse, this.taskList);
+        case "done":
+            int taskNumber = Integer.parseInt(splitCommand[1]);
+            TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
+            String doneFormat = "Nice! I've marked this task as done:\n    %s";
+            Response doneResponse = new DefaultResponse(String.format(
+                    doneFormat, doneTaskList.getTask(taskNumber).toString()));
+            return new Owen(this.isRunning, doneResponse, doneTaskList);
         case "bye":
             return this.shutdown();
         default:
-            List<String> itemsCopy = new ArrayList<>(this.items);
-            itemsCopy.add(command);
+            TaskList addedTaskList = this.taskList.addTask(command);
             String addedFormat = "added: %s";
             Response addResponse = new DefaultResponse(String.format(addedFormat, command));
-            return new Owen(this.isRunning, addResponse, itemsCopy);
+            return new Owen(this.isRunning, addResponse, addedTaskList);
         }
-    }
-
-    private String getItemsListAsString() {
-        String[] listItemStrings = new String[this.items.size()];
-        String listItemFormat = "%d. %s";
-        for (int i = 0; i < this.items.size(); i++) {
-            listItemStrings[i] = String.format(listItemFormat, i + 1, this.items.get(i));
-        }
-        return String.join("\n", listItemStrings);
     }
 }
