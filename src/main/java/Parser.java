@@ -16,6 +16,8 @@ public class Parser {
             case DukeStrings.COMMAND_BYE:
                 this.bye = true;
                 return new ExitCommand();
+            case DukeStrings.COMMAND_LIST:
+                return new ListCommand();
             default:
                 return new AddCommand(input);
         }
