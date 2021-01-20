@@ -1,0 +1,4 @@
+T | 1 | readbook
+D | 0 | finish ip week 3 | next Friday
+E | 1 | team meeting | 4pm today
+T | 0 | go shopping
