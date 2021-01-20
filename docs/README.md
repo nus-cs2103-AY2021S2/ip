@@ -2,18 +2,36 @@
 
 ## Features 
 
-### List
-Feature that enables user to add items to a list and retrieve the list
+### Feature 1 - Add item to list
+Enables the user to add items into the list
 
 ## Usage
 
-### 'list' - displays all items currently in the list
-			 Example: list
-	Expected outcome: 1. apples
-					  2. oranges
-					 
-### <any item> - adds the item to the back of the list
-			 Example: bananas
-	Expected outcome: 1. apples
-					  2. oranges
-					  3. bananas
+### `<any item to add to list>` - Type out the item to be added
+
+The item given will be added to the list.
+
+Example of usage: 
+
+`apples`
+
+Expected outcome:
+
+`added: apples`
+
+### Feature 2 - View list
+Enables the user to view all the items in the list
+
+## Usage
+
+### `list` - Use the list keyword
+
+The list will be displayed with all the current items.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+`1. apples`
