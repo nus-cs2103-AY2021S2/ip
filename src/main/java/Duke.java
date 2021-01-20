@@ -1,16 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static int inputHandler(String s) {
-        String temp = s.toLowerCase();
-        if (s.equals("bye")) {
-            return 0;
-        } else if (s.equals("list")) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
+
 
     public static void main(String[] args) {
 
@@ -20,19 +11,39 @@ public class Duke {
 
         while(sc.hasNext()) {
             String message = sc.nextLine();
-
-            int type = inputHandler(message);
-            if (type == 0) {
+            boolean bye = inputHandler(message);
+            if (bye) {
                 break;
-            } else if (type == 1) {
+            }
+        }
+        System.out.println(Format.farewell);
+    }
+
+    public static boolean inputHandler(String message) {
+        String[] line = message.toLowerCase().split(" ");
+        String command = line[0];
+        if (command.equals("bye")) {
+            return true;
+        } else {
+            if (command.equals("list")) {
                 Format.LISTING();
-            }else {
-                Task t = new Task(message);
+            } else if (command.equals("done")) {
+                if (line.length == 2) {
+                    String arg = line[1].replaceAll("[^0-9]", "");
+                    try {
+                        int num = Integer.parseInt(arg);
+                        Task.done(num);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please lah, key in number");
+                    }
+                } else {
+                    System.out.println("Wrong format liao");
+                }
+            } else {
+                Task task = new Task(message);
                 System.out.println(Format.chatBox("Added: " + message));
             }
-
+            return false;
         }
-        
-        System.out.println(Format.farewell);
     }
 }
