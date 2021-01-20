@@ -3,15 +3,15 @@ import java.util.Scanner;
 public class UI {
     Scanner ui;
 
-    UI(){
+    UI() {
         ui = new Scanner(System.in);
     }
 
-    public String getCommand(){
+    public String getCommand() {
         return ui.nextLine();
     }
 
-    public void greetings(){
+    public void greetings() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -20,7 +20,7 @@ public class UI {
         System.out.println(logo + "\nHello this is Duke\nHow may I help you?");
     }
 
-    public void goodbye(){
+    public void goodbye() {
         System.out.println("Goodbye for now.\nHope to see you soon!");
     }
 }

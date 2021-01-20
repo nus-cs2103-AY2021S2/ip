@@ -1,13 +1,13 @@
-public class TodoTask extends Task{
+public class TodoTask extends Task {
     TodoTask(String task) {
         super(task);
     }
 
     @Override
-    public String toString(){
-        if(this.getStatus()){
+    public String toString() {
+        if (this.getStatus()) {
             return "[T][X] " + task;
-        }else{
+        } else {
             return "[T][ ] " + task;
         }
     }
