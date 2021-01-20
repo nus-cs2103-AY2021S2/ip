@@ -44,6 +44,37 @@ public class Duke {
     }
 
 
+    static void level3() {
+        List<Task> lst = new ArrayList<>();
+        lst.add(new Task("read book"));
+        lst.add(new Task("return book"));
+        lst.add(new Task("buy bread"));
+        lst.get(0).markAsDone();
+
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        String[] inputArray = input.split(" ");
+
+        while (true) {
+            if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+
+                for (int i = 1; i <= lst.size(); i++) {
+                    System.out.println(i + "." + lst.get(i - 1));
+                }
+            } else if (inputArray[0].equals("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                lst.get(Integer.parseInt(inputArray[1]) - 1).markAsDone();
+                System.out.println("  " + lst.get(Integer.parseInt(inputArray[1]) - 1));
+            }
+
+            input = sc.nextLine();
+            inputArray = input.split(" ");
+        }
+    }
+
+
+
     public static void main(String[] args) {
         /*
         String logo = " ____        _        \n"
@@ -54,7 +85,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
          */
 
-        level2();
+        level3();
 
     }
 }
