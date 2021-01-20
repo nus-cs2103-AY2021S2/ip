@@ -47,6 +47,11 @@ public class Duke {
                         addTask(new Event(part2[0], part2[1]));
                         System.out.println(partition);
                         break;
+                    case "delete":
+                        int del = sc.nextInt();
+                        deleteTask(del);
+                        System.out.println(partition);
+                        break;
                     default:
                         addTask(new Task(null));
                         System.out.println(partition);
@@ -66,7 +71,7 @@ public class Duke {
     public static void addTask(Task task) {
         ls.add(task);
         System.out.println("Got it. I've added this task:\n" + task.getStatus());
-        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+        printNumTasks();
     }
 
     public static void printTasks() {
@@ -78,5 +83,15 @@ public class Duke {
     public static void markAsDone(int taskNum) {
         ls.get(taskNum - 1).markDone();
         System.out.println("This task is marked as done:\n" + ls.get(taskNum - 1).getStatus());
+    }
+
+    public static void deleteTask(int taskNum) {
+        System.out.println("Noted. This task has been removed:\n" + ls.get(taskNum - 1).getStatus());
+        ls.remove(taskNum - 1);
+        printNumTasks();
+    }
+
+    public static void printNumTasks() {
+        System.out.println("Now you have " + ls.size() + " tasks in the list.");
     }
 }

@@ -8,6 +8,6 @@ public class Event extends Task {
 
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: " + at + ")";
+        return "[E]" + super.getStatus() + " (at:" + at + ")";
     }
 }
