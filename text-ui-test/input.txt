@@ -1,0 +1,10 @@
+todo read book
+deadline submit assignment /by Monday
+event project meeting /at Mon 2-4pm
+list
+done 2
+deadline do this /by Wednesday
+event attend that /at Sun 3pm
+done 4
+list
+done 3
