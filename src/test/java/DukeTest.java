@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.*;
@@ -8,9 +9,97 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import exception.DukeException;
+import exception.DukeInvalidArgumentsException;
+
 public class DukeTest {
+
     @Test
-    public void parseInputNewDeadlineTask() {
+    public void parseInputTodoNoArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("todo");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("todo", ex.getCommand());
+        assertEquals("The description of a todo cannot be empty", ex.getError());
+    }
+
+    @Test
+    public void parseInputDeadlineNoArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("deadline");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("deadline", ex.getCommand());
+        assertEquals("The description of a deadline cannot be empty", ex.getError());
+    }
+
+    @Test
+    public void parseInputDeadlineInsufficientArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("deadline test event no date");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("deadline", ex.getCommand());
+        assertEquals("The date for a deadline cannot be empty", ex.getError());
+    }
+
+    @Test
+    public void parseInputDeadlineTooManyArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("deadline test event /by too many /by dates");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("deadline", ex.getCommand());
+        assertEquals("There are too many date arguments", ex.getError());
+    }
+
+    @Test
+    public void parseInputEventNoArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("event");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("event", ex.getCommand());
+        assertEquals("The description of an event cannot be empty", ex.getError());
+    }
+
+    @Test
+    public void parseInputEventInsufficientArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("event test event no date");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("event", ex.getCommand());
+        assertEquals("The date for an event cannot be empty", ex.getError());
+    }
+
+    @Test
+    public void parseInputEventTooManyArgumentsThrowException() {
+        Exception exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
+            Duke.parseInput("event test event /at too many /at dates");
+        });
+
+        assertTrue(exception instanceof DukeInvalidArgumentsException, "Incorrect exception type was thrown");
+        DukeInvalidArgumentsException ex = (DukeInvalidArgumentsException) exception;
+        assertEquals("event", ex.getCommand());
+        assertEquals("There are too many date arguments", ex.getError());
+    }
+
+    @Test
+    public void parseInputNewDeadlineTask() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>(100);
 
@@ -25,7 +114,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputNewEventTask() {
+    public void parseInputNewEventTask() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>(100);
 
@@ -40,7 +129,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputNewTodoTask() {
+    public void parseInputNewTodoTask() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>(100);
 
@@ -134,7 +223,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputDoneSetsTaskAsDone() {
+    public void parseInputDoneSetsTaskAsDone() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>(100);
         Duke.parseInput("help people");
@@ -153,7 +242,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputAddToList() {
+    public void parseInputAddToList() throws DukeException {
         int tasksStateLength = Duke.tasks.size();
 
         Duke.parseInput("help people");
@@ -166,7 +255,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputAddToListMaintainsOrder() {
+    public void parseInputAddToListMaintainsOrder() throws DukeException {
         int tasksStateLength = Duke.tasks.size();
 
         Duke.parseInput("help people");
@@ -181,7 +270,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputListOutputTasksState() {
+    public void parseInputListOutputTasksState() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>(100);
         Duke.parseInput("help people");
@@ -195,7 +284,7 @@ public class DukeTest {
     }
 
     @Test
-    public void parseInputByeOutputFarewell() {
+    public void parseInputByeOutputFarewell() throws DukeException {
         assertEquals("Bye. Hope to see you again soon!", Duke.parseInput("bye"));
     }
 

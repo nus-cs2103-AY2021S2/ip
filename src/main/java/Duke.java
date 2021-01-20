@@ -7,6 +7,9 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
+import exception.DukeException;
+import exception.DukeInvalidArgumentsException;
+
 public class Duke {
 
     protected static ArrayList<Task> tasks;
@@ -31,7 +34,11 @@ public class Duke {
         PrintStream writer = getWriter(out);
         String line = reader.readLine();
         while (line != null) {
-            writer.println(parseInput(line));
+            try {
+                writer.println(parseInput(line));
+            } catch (Exception e) {
+                handleException(e, writer);
+            }
             if (line.equals("bye")) {
                 break;
             }
@@ -39,7 +46,11 @@ public class Duke {
         }
     }
 
-    public static String parseInput(String input) {
+    private static void handleException(Exception e, PrintStream writer) {
+
+    }
+
+    public static String parseInput(String input) throws DukeException {
         String[] tokenizedInput = input.split(" ");
         switch (tokenizedInput[0]) {
         case "bye":
@@ -59,17 +70,38 @@ public class Duke {
         }
     }
 
-    private static String executeEvent(String input) {
+    private static String executeEvent(String input) throws DukeInvalidArgumentsException {
+        if (input.trim().equals("event")) {
+            throw new DukeInvalidArgumentsException("event", "The description of an event cannot be empty");
+        }
         String[] data = input.substring(6).split("/at");
+        if (data.length < 2) {
+            throw new DukeInvalidArgumentsException("event", "The date for an event cannot be empty");
+        }
+        if (data.length > 2) {
+            throw new DukeInvalidArgumentsException("event", "There are too many date arguments");
+        }
         return addTaskAndReturnMessage(new EventTask(data[0].trim(), data[1].trim()));
     }
 
-    private static String executeDeadline(String input) {
+    private static String executeDeadline(String input) throws DukeInvalidArgumentsException {
+        if (input.trim().equals("deadline")) {
+            throw new DukeInvalidArgumentsException("deadline", "The description of a deadline cannot be empty");
+        }
         String[] data = input.substring(9).split("/by");
+        if (data.length < 2) {
+            throw new DukeInvalidArgumentsException("deadline", "The date for a deadline cannot be empty");
+        }
+        if (data.length > 2) {
+            throw new DukeInvalidArgumentsException("deadline", "There are too many date arguments");
+        }
         return addTaskAndReturnMessage(new DeadlineTask(data[0].trim(), data[1].trim()));
     }
 
-    private static String executeTodo(String input) {
+    private static String executeTodo(String input) throws DukeInvalidArgumentsException {
+        if (input.trim().equals("todo")) {
+            throw new DukeInvalidArgumentsException("todo", "The description of a todo cannot be empty");
+        }
         String info = input.substring(5);
         return addTaskAndReturnMessage(new TodoTask(info));
     }
