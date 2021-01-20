@@ -11,7 +11,7 @@ public class AddCommand implements Command {
     }
 
     public TaskList execute(TaskList taskList) {
-        taskList.addTask(new Task(description));
+        taskList.addTask(description);
         return taskList;
     }
 
