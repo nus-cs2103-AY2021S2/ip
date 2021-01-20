@@ -11,13 +11,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
 
+        InputHandler io = new InputHandler();
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
                 System.out.println(">>> Bye. Hope to see you again soon!");
                 break;
             } else {
-                System.out.println(">>> " + input);
+                io = io.processInput(input);
             }
 
         }
