@@ -1,10 +1,19 @@
+import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        Scanner input = new Scanner(System.in);
+        //Duke starts up with an introduction
+        System.out.println("Hey, I'm Duke!\n" + "How can I help you?");
+        while (input.hasNext()) {
+            String command = input.next();
+            if (command.equals("bye")) {
+                //If user inputs 'bye' command, Duke exits
+                System.out.println("Aw. It was nice chatting with you! Don't forget me! :)");
+                break;
+            } else {
+                System.out.println(command);
+            }
+        }
     }
 }
