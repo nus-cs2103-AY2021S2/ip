@@ -12,9 +12,12 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public Task getTask(int taskNumber) {
+        return taskList.get(taskNumber - 1);
+    }
+
     public List<Task> getTaskList() {
         return taskList;
     }
-
 
 }
