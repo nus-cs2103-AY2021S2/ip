@@ -16,19 +16,22 @@ public class TaskManager {
             }
         }
         System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("");
     }
 
     public void delete(int taskId){
         Task deletedTask = list.get(taskId);
         list.remove(taskId);
-        System.out.println("Noted. I've removed this task:\n" + deletedTask +"\n Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task:\n" + deletedTask +"\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("");
     }
 
     public void done(int taskId) {
         if (taskId < list.size()) {
             Task completedTask = list.get(taskId);
             completedTask.markComplete();
-            System.out.println("Nice! I've marked this task as done:\n" + completedTask + "\n");
+            System.out.println("Nice! I've marked this task as done:\n" + completedTask);
+            System.out.println("");
         }
     }
 

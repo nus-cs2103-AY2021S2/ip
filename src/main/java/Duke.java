@@ -7,7 +7,8 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n" + "What can I do for you? \n");
+        System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
+        System.out.println("");
         TaskManager taskManager = new TaskManager();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -40,16 +41,23 @@ public class Duke {
                             throw new DukeException("Missing argument. Please key in task description to add. ");
                         }
                     } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
+                    System.out.println("");
                 }
             }
-            input = sc.nextLine();
-            inputLength = input.split(" ").length;
-            command = input.split(" ")[0];
+            if(sc.hasNextLine()) {
+                input = sc.nextLine();
+                inputLength = input.split(" ").length;
+                command = input.split(" ")[0];
+            } else {
+                break;
+            }
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
+//test level
+// Fixing bugs - the while loop 
