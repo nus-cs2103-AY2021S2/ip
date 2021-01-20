@@ -1,48 +1,70 @@
 import java.util.*;
 
 public class Duke {
-    static String CHECKED = "[X] ";
-    static String UNCHECKED = "[ ] ";
     public static void main(String[] args) {
         System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println("How can I help you sir/maam?");
         Scanner sc = new Scanner(System.in);
         Task[] tasks = new Task[100];
         int index = 0;
         boolean exit = false;
         while (!exit) {
-            String input = sc.nextLine();
-            String[] cmd = input.split(" ");
-            if (cmd[0].equals("bye")) {
-                exit = true;
-            } else if (cmd[0].equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < index; i++) {
-                    System.out.println(tasks[i].listTask());
+            try {
+                String input = sc.nextLine();
+                String[] cmd = input.split(" ");
+                if (cmd[0].equals("bye")) {
+                    System.out.println("Farewell sir/maam. Hope to see you again soon.");
+                    exit = true;
+                } else if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                    throw new DukeException("Please describe the nature of your task sir/maam.");
+                } else if (input.equals("list")) {
+                    System.out.println("Here are the tasks you requested to see sir/maam:");
+                    for (int i = 0; i < index; i++) {
+                        System.out.println(tasks[i].listTask());
+                    }
+                } else if (input.equals("done")) {
+                    throw new DukeException("I apologise but I must ask you to specify the task you have conquered.");
+                } else if (cmd[0].equals("done")) {
+                    int taskNum = Integer.parseInt(cmd[1]) - 1;
+                    if (taskNum >= index || taskNum < 0) {
+                        throw new DukeException("I apologise but there is no such index in your list of tasks sir/maam.");
+                    } else {
+                        String str = tasks[taskNum].checkTask();
+                        System.out.println("Well done. I have checked off this task. You are one step closer to victory after conquering:");
+                        System.out.println(str);
+                    }
+                } else if (cmd[0].equals("todo") || cmd[0].equals("deadline") || cmd[0].equals("event")) {
+                    if (cmd[0].equals("todo")) {
+                        System.out.println("Understood. I have added this task to the list:");
+                        Todo task = new Todo(index + 1, input);
+                        tasks[index] = task;
+                    } else if (cmd[0].equals("deadline")) {
+                        Deadline task = new Deadline(index + 1, input);
+                        if (task.isValidDeadline()) {
+                            System.out.println("Understood. I have added this task to the list:");
+                            tasks[index] = task;
+                        } else {
+                            throw new DukeException("Please specify the deadline for this task using /by.");
+                        }
+                    } else if (cmd[0].equals("event")) {
+                        Event task = new Event(index + 1, input);
+                        if (task.isValidDate()) {
+                            System.out.println("Understood. I have added this task to the list:");
+                            tasks[index] = task;
+                        } else {
+                            throw new DukeException("Please specify the date of this event using /at.");
+                        }
+                    }
+                    System.out.println("  " + tasks[index]);
+                    index++;
+                    System.out.println(String.format("Now you have %d tasks in the list.", index));
+                } else {
+                    throw new DukeException("I am unable to comprehend what you have just said. I deeply regret my insufficiency.");
                 }
-            } else if (cmd[0].equals("done")) {
-                int taskNum = Integer.parseInt(cmd[1]) - 1;
-                String str = tasks[taskNum].checkTask();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(str);
-            } else {
-                System.out.println("Got it. I've added this task:");
-                if (cmd[0].equals("todo")) {
-                    Todo task = new Todo(index + 1, input);
-                    tasks[index] = task;
-                } else if (cmd[0].equals("deadline")) {
-                    Deadline task = new Deadline(index + 1, input);
-                    tasks[index] = task;
-                } else if (cmd[0].equals("event")) {
-                    Event task = new Event(index + 1, input);
-                    tasks[index] = task;
-                }
-                System.out.println("  " + tasks[index]);
-                index++;
-                System.out.println(String.format("Now you have %d tasks in the list.", index));
+            } catch (DukeException e) {
+                System.out.println(e);
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
     }
 }
 
@@ -111,7 +133,7 @@ class Deadline extends Task {
         String[] str = command.split(" ");
         boolean found = false;
         int index = 0;
-        while (!found) {
+        while (!found && index < str.length) {
             if (str[index].equals("/by")) {
                 found = true;
             } else {
@@ -119,6 +141,15 @@ class Deadline extends Task {
             }
         }
         return index;
+    }
+
+    public boolean isValidDeadline() {
+        String[] str = command.split(" ");
+        if (this.findDeadline() == str.length) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public String toString() {
@@ -151,7 +182,7 @@ class Event extends Task {
         String[] str = command.split(" ");
         boolean found = false;
         int index = 0;
-        while (!found) {
+        while (!found && index < str.length) {
             if (str[index].equals("/at")) {
                 found = true;
             } else {
@@ -159,6 +190,15 @@ class Event extends Task {
             }
         }
         return index;
+    }
+
+    public boolean isValidDate() {
+        String[] str = command.split(" ");
+        if (this.findDate() == str.length) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public String toString() {
@@ -179,5 +219,11 @@ class Event extends Task {
         }
         str += ")";
         return str;
+    }
+}
+
+class DukeException extends Exception {
+    DukeException(String message) {
+        super(message);
     }
 }

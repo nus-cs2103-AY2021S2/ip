@@ -1,34 +1,30 @@
 Hello! I'm Duke
-What can I do for you?
-Got it. I've added this task:
+How can I help you sir/maam?
+DukeException: Please describe the nature of your task sir/maam.
+Understood. I have added this task to the list:
   [T][ ] read book
 Now you have 1 tasks in the list.
-Got it. I've added this task:
+DukeException: Please describe the nature of your task sir/maam.
+DukeException: Please specify the deadline for this task using /by.
+Understood. I have added this task to the list:
   [D][ ] return book (by: Sunday)
 Now you have 2 tasks in the list.
-Got it. I've added this task:
+DukeException: Please describe the nature of your task sir/maam.
+DukeException: Please specify the date of this event using /at.
+Understood. I have added this task to the list:
   [E][ ] project meeting (at: 6th August 2pm - 4pm)
 Now you have 3 tasks in the list.
-Here are the tasks in your list:
+Here are the tasks you requested to see sir/maam:
 1.[T][ ] read book
 2.[D][ ] return book (by: Sunday)
 3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
-Nice! I've marked this task as done:
-  [T][X] read book
-Here are the tasks in your list:
-1.[T][X] read book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
-Nice! I've marked this task as done:
+DukeException: I apologise but I must ask you to specify the task you have conquered.
+DukeException: I apologise but there is no such index in your list of tasks sir/maam.
+Well done. I have checked off this task. You are one step closer to victory after conquering:
   [D][X] return book (by: Sunday)
-Here are the tasks in your list:
-1.[T][X] read book
+Here are the tasks you requested to see sir/maam:
+1.[T][ ] read book
 2.[D][X] return book (by: Sunday)
 3.[E][ ] project meeting (at: 6th August 2pm - 4pm)
-Nice! I've marked this task as done:
-  [E][X] project meeting (at: 6th August 2pm - 4pm)
-Here are the tasks in your list:
-1.[T][X] read book
-2.[D][X] return book (by: Sunday)
-3.[E][X] project meeting (at: 6th August 2pm - 4pm)
-Bye. Hope to see you again soon!
+DukeException: I am unable to comprehend what you have just said. I deeply regret my insufficiency.
+Farewell sir/maam. Hope to see you again soon.
