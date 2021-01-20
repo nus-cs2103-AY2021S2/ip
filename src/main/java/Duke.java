@@ -107,6 +107,14 @@ public class Duke {
         }
     }
 
+    public void delete(int index) {
+        int numOfBooksLeft = taskList.size() - 1;
+        String output = "Noted. I've removed this task:\n  " + taskList.get(index - 1)
+                + "\nNow you have " + numOfBooksLeft + " tasks in the list.";
+        formatInChatBox(output);
+        taskList.remove(index - 1);
+    }
+
     public static void main(String[] args) {
         Duke mike = new Duke();
         mike.init();
@@ -126,6 +134,10 @@ public class Duke {
                     case DONE:
                         int i = sc.nextInt();
                         mike.mark(i);
+                        break;
+                    case DELETE:
+                        int index = sc.nextInt();
+                        mike.delete(index);
                         break;
                     case TODO:
                         String toDoDescription = sc.nextLine();
