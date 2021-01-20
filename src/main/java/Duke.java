@@ -15,7 +15,7 @@ public class Duke {
     /** Allows for easy change of the bot name in future. **/
     final private static String BOTNAME = "DukeNukem";
     final private static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
-    static private List<Task> taskList = new ArrayList<>();
+    final private static List<Task> taskList = new ArrayList<>();
     public static void main(String[] args) {
         greetUser();
         listenInput();
@@ -39,54 +39,93 @@ public class Duke {
     }
 
     /**
-     * Listens to the user's input, adds to list or prints appropriately.
+     * Prints the task added and the total size of the list.
+     * @param addedTask Task that was added to the list.
+     */
+    public static void addedTaskReply(Task addedTask) {
+        String out = "    Wakarimashita! Task added to list:\n    " + addedTask +
+                "\n    The size of your task list is now: " + taskList.size();
+        System.out.println(out);
+    }
+
+    /**
+     * Mark the task passed to the method as complete.
+     * @param inputString User input string.
+     */
+    public static void completeTask(String inputString) {
+        try {
+            int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
+            Task doneTask = taskList.get(taskId).setDone();
+            System.out.println("Great~! Task completed:");
+            System.out.println("    " + doneTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskException();
+        }
+    }
+
+    /**
+     * Listens to the user's input, and passes it to the input handler.
      */
     public static void listenInput() {
         Scanner scannerObject = new Scanner(System.in);
         boolean stillListening = true;
-        String inputString;
         while (stillListening) {
             printSeparators();
-            inputString = scannerObject.nextLine().trim();
+            String inputString = scannerObject.nextLine().trim();;
             printSeparators();
-            if (inputString.equals("list")) {
-                printList();
-            } else if (inputString.equals("bye")) {
-                quit();
-            } else if (inputString.startsWith("done")) {
-                try {
-                    int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
-                    Task doneTask = taskList.get(taskId).setDone();
-                    System.out.println("Great~! Task completed:");
-                    System.out.println("    " + doneTask);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Hey!!! You made an error in the number >:(");
-                    System.out.println("Check and try it again!");
-                }
-            } else if (inputString.startsWith("todo")) {
-                    taskList.add(new Todo(inputString.substring(5)));
-                    System.out.println("    Wakarimashita! Task added to list:");
-                    System.out.println("      " + taskList.get(taskList.size() - 1));
-                    System.out.println("    The size of your task list is now: " + taskList.size());
-                } else if (inputString.startsWith("event")) {
-                    String[] eventString = inputString.split("/at");
-                    String taskString = eventString[0].substring(6);
-                    String eventTime = eventString[1];
-                    taskList.add(new Event(taskString, eventTime));
-                    System.out.println("    Wakarimashita! Task added to list:");
-                    System.out.println("      " + taskList.get(taskList.size() - 1));
-                    System.out.println("    The size of your task list is now: " + taskList.size());
-                } else if (inputString.startsWith("deadline")) {
-                    String[] eventString = inputString.split("/by");
-                    String taskString = eventString[0].substring(9);
-                    String deadlineTime = eventString[1];
-                    taskList.add(new Deadline(taskString, deadlineTime));
-                    System.out.println("    Wakarimashita! Task added to list:");
-                    System.out.println("      " + taskList.get(taskList.size() - 1));
-                    System.out.println("    The size of your task list is now: " + taskList.size());
-                }
-
+            try {
+                handleInput(inputString);
+            } catch (InvalidCommandException | InvalidInputException | InvalidTaskException e) {
+                System.out.println(e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Handle the input and passes to the relevant methods.
+     * @param inputString User input string to be handled.
+     */
+    public static void handleInput(String inputString) {
+
+        if (inputString.equals("list")) {
+            printList();
+        } else if (inputString.equals("bye")) {
+            quit();
+        } else if (inputString.startsWith("done")) {
+            completeTask(inputString);
+        } else if (inputString.startsWith("todo")) {
+            try {
+                Todo newTodo = new Todo(inputString.substring(5));
+                taskList.add(newTodo);
+                addedTaskReply(newTodo);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new InvalidInputException();
+            }
+        } else if (inputString.startsWith("event")) {
+            try {
+                String[] eventString = inputString.split("/at");
+                String taskString = eventString[0].substring(6).trim();
+                String eventTime = eventString[1].trim();
+                Event newEvent = new Event(taskString, eventTime);
+                taskList.add(newEvent);
+                addedTaskReply(newEvent);
+            } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+                throw new InvalidInputException();
+            }
+        } else if (inputString.startsWith("deadline")) {
+            try {
+                String[] eventString = inputString.split("/by");
+                String taskString = eventString[0].substring(9).trim();
+                String deadlineTime = eventString[1].trim();
+                Deadline newDeadline = new Deadline(taskString, deadlineTime);
+                taskList.add(newDeadline);
+                addedTaskReply(newDeadline);
+            } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+                throw new InvalidInputException();
+            }
+        } else {
+            throw new InvalidCommandException();
+        }
     }
 
     /**
