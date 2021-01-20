@@ -9,6 +9,10 @@ class Task {
         this.taskName = taskName;
     }
 
+    public void markAsDone() {
+        this.done = true;
+    }
+
     @Override
     public String toString() {
         if (done) {

@@ -22,8 +22,11 @@ public class Duke {
             if (text.equals("bye")) {
                 goodbye();
                 break;
-            } else if(text.equals("list")) {
+            } else if (text.equals("list")) {
                 showList();
+            } else if (text.equals("done")) {
+                int taskNumber = Integer.parseInt(sc.next()) - 1;
+                completeTask(taskNumber);
             } else {
                 addItem(text);
             }
@@ -45,6 +48,13 @@ public class Duke {
         for(int i = 0; i < tasks.size(); i++) {
             System.out.print(ind + (i+1) + ". " + tasks.get(i) + "\n");
         }
+        System.out.println(line);
+    }
+
+    public static void completeTask(int taskNumber) {
+        tasks.get(taskNumber).markAsDone();
+        System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
+        System.out.print(tasks.get(taskNumber) + "\n");
         System.out.println(line);
     }
 }
