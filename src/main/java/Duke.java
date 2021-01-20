@@ -14,6 +14,7 @@ public class Duke {
         while (true) {
             final String input = scan.nextLine();
             final String[] tokens = input.split(" ");
+            boolean isInsert = false;
             horizontalLine();
 
             if (input.toLowerCase().equals("bye")) {
@@ -58,9 +59,7 @@ public class Duke {
                         System.out.println("\tPlease follow this format \"todo <task>\".");
                     } else {
                         store[counter] = new ToDo(input.split(" ", 2)[1]);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.printf("\tTask added: %s\n", store[counter++]);
-                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                        isInsert = true;
                     }
                 } else if (tokens[0].equals("deadline")) {
                     final int index = input.indexOf(" /by ");
@@ -72,9 +71,7 @@ public class Duke {
                         final String task = splitOnBy[0].split("deadline ", 2)[1];
                         final String datetime = splitOnBy[1];
                         store[counter] = new Deadline(task, datetime);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.printf("\tTask added: %s\n", store[counter++]);
-                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                        isInsert = true;
                     }
                 } else if (tokens[0].equals("event")) {
                     final int index = input.indexOf(" /at ");
@@ -86,13 +83,18 @@ public class Duke {
                         final String task = splitOnAt[0].split("event ", 2)[1];
                         final String datetime = splitOnAt[1];
                         store[counter] = new Event(task, datetime);
-                        System.out.println("\tGot it. I've added this task: ");
-                        System.out.printf("\tTask added: %s\n", store[counter++]);
-                        System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                        isInsert = true;
                     }
                 } else {
                     System.out.println("\tOpps! Try inputting \"todo|deadline|event <task> (/by|/at <datetime>)\".");
                 }
+
+                if (isInsert) {
+                    System.out.println("\tGot it. I've added this task: ");
+                    System.out.printf("\tTask added: %s\n", store[counter++]);
+                    System.out.printf("\tNow you have %d task%s in the list.\n", counter, counter == 1 ? "" : "s");
+                }
+
             }
             horizontalLine();
         }
