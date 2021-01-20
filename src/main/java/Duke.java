@@ -31,6 +31,15 @@ public class Duke {
     return output;
   }
 
+  private void delete(int num) {
+    Task task = this.tasklist.remove(num - 1);
+    System.out.println("Noted. I've removed this task: ");
+    System.out.println(task);
+    System.out.println("Now you have " + this.tasklist.size() + " tasks in the list.");
+
+
+  }
+
   public static void main(String[] args) throws DescriptionError, UnknownInputError {
     Duke duke = new Duke();
     String logo = " ____        _        \n"
@@ -130,12 +139,43 @@ public class Duke {
           System.out.println(e.getMessage());
           continue;
         }
-        Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
+        Event task = new Event(input.split(" ")[1] + " " + input.split(" ")[2],
                 input.split("/")[1]);
         System.out.println("Got it. I've added this task: ");
+        duke.addList(task);
         System.out.println(task);
         System.out.println("Now you have " + duke.tasklist.size()  + " tasks in the list.");
 
+      } else if (input.split(" ")[0].equals("delete")) {
+        try {
+          if (input.length() == 4) {
+            throw new DescriptionError("☹ OOPS!!! The description of "
+                    + "a delete task cannot be empty.");
+          }
+          if (input.split(" ").length > 2) {
+            throw new UnknownInputError("☹ OOPS!!! I'm sorry,"
+                    + " but I don't know what that means :-(");
+          }
+          if (Integer.parseInt(input.split(" ")[1])
+                  / Integer.parseInt(input.split(" ")[1]) != 1) {
+            throw new NumberFormatException();
+          }
+          if (Integer.parseInt(input.split(" ")[1]) > duke.tasklist.size()) {
+            throw new DescriptionError("☹ OOPS!!! The task is not in the list.");
+          }
+          if (input.split(" ").length == 2 && Integer.parseInt(input.split(" ")[1])
+                  / Integer.parseInt(input.split(" ")[1]) == 1) {
+            duke.delete(Integer.parseInt(input.split(" ")[1]));
+          }
+        } catch (DescriptionError | UnknownInputError | NumberFormatException e) {
+          if (e instanceof  NumberFormatException) {
+            System.out.println("☹ OOPS!!! The description of a done task needs to be an integer.");
+            continue;
+          } else {
+            System.out.println(e.getMessage());
+            continue;
+          }
+        }
       } else {
         try {
           throw new UnknownInputError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
