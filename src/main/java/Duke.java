@@ -40,8 +40,8 @@ public class Duke {
                 description = promptDescription;
                 newTask = new ToDo(description);
                 tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" +  "  " + newTask + "\n"
-                                        + "Now you have " + counter + " tasks in the list.";
+                systemMessage = "Got it. I've added this task:\n" +  "  " + newTask + "\n" + "Now you have "
+                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                 break;
 
             case DEADLINE:
@@ -51,8 +51,8 @@ public class Duke {
                 period = strings[1];
                 newTask = new Deadline(description, period);
                 tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n"
-                                        + "Now you have " + counter + " tasks in the list.";
+                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
+                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                 break;
 
             case EVENT:
@@ -62,15 +62,15 @@ public class Duke {
                 period = strings[1];
                 newTask = new Event(description, period);
                 tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n"
-                                        + "Now you have " + counter + " tasks in the list.";
+                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
+                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
                 break;
 
             default:
                 systemMessage = "Task type not recognised. List of recognised task types:\n"
-                                    + "1. todo (E.g. todo borrow book)\n"
-                                        + "2. deadline (E.g. deadline return book /by Sunday\n"
-                                            + "3. event (E.g. event project meeting /at Mon 2-4pm";
+                                    + "  1. todo (E.g. todo borrow book)\n"
+                                        + "  2. deadline (E.g. deadline return book /by Sunday\n"
+                                            + "  3. event (E.g. event project meeting /at Mon 2-4pm";
                 break;
         }
 
