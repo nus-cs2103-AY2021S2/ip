@@ -1,6 +1,6 @@
 public class Task {
-    private String desc;
-    private boolean isDone;
+    protected String desc;
+    protected boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[x]" : "[ ]"); 
+        return (isDone ? "[X]" : "[ ]"); 
     }
 
     @Override
