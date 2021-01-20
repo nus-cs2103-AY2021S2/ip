@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,26 +10,26 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String seperator = "------------------\n";
+        String separator = "------------------\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Parrot mode engaged");
         Scanner in = new Scanner(System.in);
-        String command = "";
-        List<String> store = new ArrayList<>();
+        String command;
+        List<Task> store = new ArrayList<>();
         do{
-            System.out.print(seperator + "Listening to your input: ");
+            System.out.print(separator + "Listening to your input: ");
             command = in.nextLine();
             switch(command){
                 case "bye":
-                    System.out.println(seperator + "Goodbye from\n" + logo);
+                    System.out.println(separator + "Goodbye from\n" + logo);
                     break;
                 case "list":
-                    for (int i = 0; i < store.size(); i++) {
-                        System.out.println("Entry " + String.valueOf(i+1) + ": " + store.get(i));
+                    for (Task t: store) {
+                        System.out.println(t.toString());
                     }
                     break;
                 default:
-                    store.add(command);
+                    store.add(new Task(command,store.size()));
                     System.out.println("Added: " + command);
             }
         }while(!command.equals("bye"));
