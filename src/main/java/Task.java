@@ -1,6 +1,6 @@
 public class Task {
     private boolean isDone;
-    private String name;
+    private final String name;
     public Task(String name) {
         this.name = name;
         this.isDone = false;
@@ -13,5 +13,10 @@ public class Task {
     }
     public void setIsDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.getIsDone()? "X" : " ", this.getName());
     }
 }

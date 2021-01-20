@@ -4,15 +4,15 @@ import java.util.Set;
 
 /**
  * Todo:
- *   - exceptions yet to be handled:
- *     - number of tasks > 100
- *     - multiple spaces in between tokens
- *     - done command
- *       - w/o number
- *       - number out of range
- *   - help command
- *   - Task as abstract class with 3 subclasses (T/D/E)
- *   - TaskList as a class
+ * - exceptions yet to be handled:
+ * - number of tasks > 100
+ * - multiple spaces in between tokens
+ * - done command
+ * - w/o number
+ * - number out of range
+ * - help command
+ * - Task as abstract class with 3 subclasses (T/D/E)
+ * - TaskList as a class
  */
 
 public class Duke {
@@ -31,6 +31,7 @@ public class Duke {
 
     /**
      * Print one line with spaces in front
+     *
      * @param line the line to print
      */
     public static void printLine(String line) {
@@ -53,6 +54,7 @@ public class Duke {
 
     /**
      * Process a command
+     *
      * @param command the command to process
      * @return whether the program should continue (<code>true</code> if not an exit command)
      */
@@ -66,7 +68,7 @@ public class Duke {
                 printLine("Here are the tasks in your list:");
                 int index = 0;
                 for (Task task : tasks) {
-                    printLine(String.format("%d.[%s] %s", ++index, task.getIsDone() ? "X" : " ", task.getName()));
+                    printLine(String.format("%d.%s", ++index, task.toString()));
                 }
             } else if (tokens[0].equals("done")) {
                 if (Integer.parseInt(tokens[1]) <= tasks.size()) {
@@ -74,9 +76,71 @@ public class Duke {
                     printLine("Nice! I've marked this task as done:");
                     printLine(String.format("  [X] %s", tasks.get(Integer.parseInt(tokens[1]) - 1).getName()));
                 }
+            } else if (tokens[0].equals("todo")) {
+                if (tokens.length < 2) {
+                    printLine("Please provide a task name!");
+                }
+                Task task = new TodoTask(tokens[1]);
+                tasks.add(task);
+                printLine("Got it! I've added this task:");
+                printLine("  " + task);
+                printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+            } else if (tokens[0].equals("deadline")) {
+                if (tokens.length < 2) {
+                    printLine("Please provide a task name!");
+                }
+                boolean dueTimeNotProvided = true;
+                for (int index = 2; index < tokens.length; index++) {
+                    if (tokens[index].equals("/by")) {
+                        dueTimeNotProvided = false;
+                        if (index + 1 < tokens.length) {
+                            Task task = new DeadlineTask(tokens[1], tokens[index + 1]);
+                            tasks.add(task);
+                            printLine("Got it! I've added this task:");
+                            printLine("  " + task);
+                            printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        } else {
+                            printLine("Please provide a valid due time!");
+                        }
+                        break;
+                    }
+                }
+                if (dueTimeNotProvided) {
+                    Task task = new DeadlineTask(tokens[1]);
+                    tasks.add(task);
+                    printLine("Got it! I've added this task:");
+                    printLine("  " + task);
+                    printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                }
+            } else if (tokens[0].equals("event")) {
+                if (tokens.length < 2) {
+                    printLine("Please provide a task name!");
+                }
+                boolean eventTimeNotProvided = true;
+                for (int index = 2; index < tokens.length; index++) {
+                    if (tokens[index].equals("/at")) {
+                        eventTimeNotProvided = false;
+                        if (index + 1 < tokens.length) {
+                            Task task = new EventTask(tokens[1], tokens[index + 1]);
+                            tasks.add(task);
+                            printLine("Got it! I've added this task:");
+                            printLine("  " + task);
+                            printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        } else {
+                            printLine("Please provide a valid event time!");
+                        }
+                        break;
+                    }
+                }
+                if (eventTimeNotProvided) {
+                    Task task = new EventTask(tokens[1]);
+                    tasks.add(task);
+                    printLine("Got it! I've added this task:");
+                    printLine("  " + task);
+                    printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                }
             } else {
-                tasks.add(new Task(command));
-                printLine(String.format("added: %s", command));
+                printLine("Unknown command!");
             }
         }
         printHorizontalLine();
