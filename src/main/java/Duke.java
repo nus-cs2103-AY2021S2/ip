@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws StringIndexOutOfBoundsException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -70,6 +70,18 @@ public class Duke {
                         System.out.println("☹ OOPS!!! The format for an event task should be 'event (task)" +
                                 " /at (time)'");
                     }
+                } else if (input.substring(0, 6).equals("delete")) {
+                    try {
+                        int pointer = Integer.parseInt(input.substring(7)) - 1;
+                        Task task = list.get(pointer);
+                        list.remove(pointer);
+                        System.out.println("Noted. I've removed this task:\n" + task.toString());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Number format exception, enter a number from 1-100!");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Array index is out of bounds, the current number of elements in the list " +
+                                "is " + list.size() + ".");
+                    }
                 } else if (input.substring(0, 8).equals("deadline")) {
                     try {
                         String[] split = input.split("/");
@@ -86,7 +98,7 @@ public class Duke {
                                 " /by (time)'");
                     }
                 } else {
-                    throw new UnknownCommandException(input);
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what '" + input + "' means :-(");
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what '" + input + "' means :-(");
