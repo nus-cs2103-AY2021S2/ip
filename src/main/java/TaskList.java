@@ -8,7 +8,7 @@ public class TaskList {
     }
     public void add(Task task) {
         this.list.add(task);
-        Duke.printWithStyle(new String[] {
+        Printer.printWithStyle(new String[] {
                 "Got it. I've added this task:",
                 "    " + task.toString(),
                 "Now you have " + this.list.size() + " tasks in the list."
@@ -21,7 +21,7 @@ public class TaskList {
 
     public void remove(int taskNumber) {
 
-        Duke.printWithStyle(new String[] {
+        Printer.printWithStyle(new String[] {
                 "Noted. I've removed this task:",
                 this.list.get(taskNumber - 1).toString(),
                 "Now you have " + (this.list.size() - 1) + " tasks in the list."
@@ -37,6 +37,6 @@ public class TaskList {
                     this.list.get(i).toString();
             printedArray[i + 1] = listEntry;
         }
-        Duke.printWithStyle(printedArray);
+        Printer.printWithStyle(printedArray);
     }
 }

@@ -9,7 +9,7 @@ public class Task {
 
     void done() {
         this.isDone = true;
-        Duke.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
+        Printer.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
     @Override

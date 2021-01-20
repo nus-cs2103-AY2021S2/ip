@@ -1,7 +1,4 @@
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     TaskList list;
@@ -9,20 +6,6 @@ public class Duke {
     public Duke() {
         greet();
         this.list = new TaskList();
-    }
-
-    public static void printWithStyle(String[] output) {
-        System.out.println("    ________________________________________________________________");
-        for (String str : output) {
-            System.out.println("    " + str);
-        }
-        System.out.println("    ________________________________________________________________");
-    }
-
-    public static void printWithStyle(String output) {
-        System.out.println("    ________________________________________________________________");
-        System.out.println("    " + output );
-        System.out.println("    ________________________________________________________________");
     }
 
     /**
@@ -46,7 +29,7 @@ public class Duke {
 
 
     void greet() {
-        printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+        Printer.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
 
@@ -122,7 +105,7 @@ public class Duke {
     }
 
     void bye() {
-        printWithStyle("Bye. Hope to see you again soon!");
+        Printer.printWithStyle("Bye. Hope to see you again soon!");
     }
 
 
@@ -161,7 +144,7 @@ public class Duke {
             try {
                 duke.handleInput(input);
             } catch (DukeException e) {
-                printWithStyle(e.getMessage());
+                Printer.printWithStyle(e.getMessage());
             }
             input = scanner.nextLine();
         }
