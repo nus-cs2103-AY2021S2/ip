@@ -39,9 +39,39 @@ public class Duke {
                 tasks.get(idx-1).markAsDone();
                 System.out.printf("  %s. %s\n",String.valueOf(idx), tasks.get(idx-1));
                 System.out.println(border);
-            } else if(){
-                tasks.add(new Task(command));
-                System.out.println(border + "\n  added: " + command + "\n" + border);
+            } else if(command.toLowerCase().startsWith("todo")){
+                try {
+                    String expression = command.split(" ", 2)[1];
+                    tasks.add(new Todo(expression));
+                    int total = tasks.size();
+                    int undone = tasks.stream()
+                            .mapToInt(Task::isNotDone)
+                            .reduce(0, Integer::sum);
+                    System.out.println(border + "\n  Okie added new task:");
+                    System.out.printf("  %o. %s\n", total, tasks.get(total-1));
+                    System.out.printf("Total %o tasks, only %o left to be done!\n", total, undone);
+                    System.out.println(border);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(border + "\n  Oops! Please add a task description as follows:");
+                    System.out.println("  todo <task description>\n" + border);
+                }
+            } else if(command.toLowerCase().startsWith("deadline")){
+                try {
+                    String expression = command.split(" ", 2)[1];
+                    String[] parts = expression.split("/by", 2);
+                    tasks.add(new Deadline(parts[0], parts[1]));
+                    int total = tasks.size();
+                    int undone = tasks.stream()
+                            .mapToInt(name -> name.isNotDone())
+                            .reduce(0, (a, b) -> a+b);
+                    System.out.println(border + "\n  Okie added new task:");
+                    System.out.printf("  %o. %s\n", total, tasks.get(total-1));
+                    System.out.printf("Total %o tasks, only %o left to be done!\n", total, undone);
+                    System.out.println(border);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(border + "\n  Oops! Please add a deadline as follows:");
+                    System.out.println("  deadline <task description> /by <DD-MM-YYYY>\n" + border);
+                }
             }
         }
     }
