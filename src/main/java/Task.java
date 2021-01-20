@@ -1,7 +1,7 @@
 /**
  * Represents a task listed in Duke and can be marked as done.
  */
-public class Task {
+public class DukeTask {
     protected boolean isDone;
     protected String description;
 
@@ -10,7 +10,7 @@ public class Task {
      *
      * @param description The task's description.
      */
-    public Task(String description) {
+    public DukeTask(String description) {
         this.description = description;
         this.isDone = false;
     }
