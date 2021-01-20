@@ -102,7 +102,7 @@ public class Duke {
      * @param command the command to process
      * @return whether the program should continue (<code>true</code> if not an exit command)
      */
-    public static boolean processCommand(String command) {
+    public static boolean processCommand(String command) throws Exception {
         String[] tokens = command.split(" ");
         printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
@@ -119,10 +119,12 @@ public class Duke {
                     tasks.get(Integer.parseInt(tokens[1]) - 1).setIsDone(true);
                     printLine("Nice! I've marked this task as done:");
                     printLine(String.format("  [X] %s", tasks.get(Integer.parseInt(tokens[1]) - 1).getName()));
+                } else {
+                    throw new Exception("Task does not exist!");
                 }
             } else if (tokens[0].equals("todo")) {
                 if (tokens.length < 2) {
-                    printLine("Please provide a task name!");
+                    throw new Exception("Please provide a task name!");
                 }
                 Task task = new TodoTask(tokens[1]);
                 tasks.add(task);
@@ -131,7 +133,7 @@ public class Duke {
                 printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
             } else if (tokens[0].equals("deadline")) {
                 if (tokens.length < 2) {
-                    printLine("Please provide a task name!");
+                    throw new Exception("Please provide a task name!");
                 }
                 boolean dueTimeNotProvided = true;
                 for (int index = 2; index < tokens.length; index++) {
@@ -144,7 +146,7 @@ public class Duke {
                             printLine("  " + task);
                             printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                         } else {
-                            printLine("Please provide a valid due time!");
+                            throw new Exception("Please provide a valid due time!");
                         }
                         break;
                     }
@@ -158,7 +160,7 @@ public class Duke {
                 }
             } else if (tokens[0].equals("event")) {
                 if (tokens.length < 2) {
-                    printLine("Please provide a task name!");
+                    throw new Exception("Please provide a task name!");
                 }
                 boolean eventTimeNotProvided = true;
                 for (int index = 2; index < tokens.length; index++) {
@@ -171,7 +173,7 @@ public class Duke {
                             printLine("  " + task);
                             printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                         } else {
-                            printLine("Please provide a valid event time!");
+                            throw new Exception("Please provide a valid event time!");
                         }
                         break;
                     }
@@ -184,7 +186,7 @@ public class Duke {
                     printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                 }
             } else {
-                printLine("Unknown command!");
+                throw new Exception("Unknown command!");
             }
         }
         printHorizontalLine();
@@ -209,6 +211,14 @@ public class Duke {
         printLine("Sou, watashi desu!");
         printHorizontalLine();
         printEmptyLine();
-        while (processCommand(sc.nextLine())) ;
+        for (;;) {
+            try {
+                if (!processCommand(sc.nextLine())) {
+                    break;
+                }
+            } catch (Exception e) {
+                printLine("Error: " + e.getMessage());
+            }
+        }
     }
 }
