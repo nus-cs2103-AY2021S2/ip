@@ -12,13 +12,14 @@ public class Duke {
             command = ui.getCommand();
             String[] executable = new String[100];
             executable = command.split(" ");
-            try {
-                if (command.equals("bye")) {
-                    ui.goodbye();
-                    break;
-                } else if (command.equals("list")) {
-                    taskList.printTasks();
-                } else if (executable[0].equals("done")) {
+
+            if (command.equals("bye")) {
+                ui.goodbye();
+                break;
+            } else if (command.equals("list")) {
+                taskList.printTasks();
+            } else if (executable.length > 1) {
+                if (executable[0].equals("done")) {
                     taskList.markAsDone(Integer.parseInt(executable[1]));
                 } else if (executable[0].equals("todo")) {
                     taskList.addTask(new TodoTask(command));
@@ -26,12 +27,16 @@ public class Duke {
                     taskList.addTask(new DeadlineTask(command));
                 } else if (executable[0].equals("event")) {
                     taskList.addTask(new EventTask(command));
-                } else {
-                    taskList.addTask(new Task(command));
                 }
-            }catch(Exception e){
-                throw new DukeException("Oops! Invalid input!");
+            } else {
+                if (executable[0].equals("todo") || executable[0].equals("deadline")
+                        || executable[0].equals("event")) {
+                    throw new DukeException("Oops!!! Incomplete command :(");
+                } else {
+                    throw new DukeException("Oops!!! Invalid Input :(");
+                }
             }
+
         }
     }
 }
