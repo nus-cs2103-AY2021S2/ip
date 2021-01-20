@@ -74,41 +74,64 @@ public class Duke {
         }
     }
 
-    public static void done(String str) throws ChatException {
-        if (str.strip().equals("done")) {
-            throw new ChatException("Missing index\n" +
+    public static Task checkCommandIndex(String command, String str) throws ChatException { 
+        //for commands with format: [command] [index]
+        //returns valid index if index is correct
+        if (str.strip().equals(command)) {
+            throw new ChatException(String.format("Missing index\n" +
                     "Please input with this format:\n" +
-                    "done [index]");
+                    "%s [index]", command));
         } else if (!str.contains(" ")) {
-            throw new ChatException("Missing space before index\n" +
+            throw new ChatException(String.format("Missing space before index\n" +
                     "Please input with this format:\n" +
-                    "done [index]");
+                    "%s [index]", command));
         }
-
         try {
             int i = Integer.parseInt(str.split(" ")[1]) - 1;
-            if (taskArr.get(i).getDone()) {
-                throw new ChatException(String.format("Task already completed\n%s", taskArr.get(i)));
-            } else {
-                taskArr.get(i).completed();
-                System.out.println(gdJobCat);
-                System.out.println("Mew! I've marked this task as done:");
-                System.out.println(taskArr.get(i));
-                System.out.println("\n* Good job, you deserve a kit-kat *");
-            }
+            return taskArr.get(i);
         } catch (IndexOutOfBoundsException e1) {
             //list is empty, hence i results in index out of bounds
             //or when i >= taskArr.size()
             throw new ChatException("List is empty or index is out of bounds");
-        } catch (ChatException e2){
-            throw e2;
         } catch (NumberFormatException e3){
-            //i.e. "done string"
-            throw new ChatException("Index should be an integer\n" +
+            //i.e. [command] string
+            throw new ChatException(String.format("Index should be an integer\n" +
                     "Please input with this format:\n" +
-                    "done [index]");
+                    "%s [index]", command));
         }
     }
+    
+    public static void done(String str) throws ChatException {
+        try {
+            Task task = checkCommandIndex("done", str);
+            if (task.getDone()) {
+                throw new ChatException(String.format("Task already completed\n%s", task));
+            } else {
+                task.completed();
+                System.out.println(gdJobCat);
+                System.out.println("Mew! I've marked this task as done:");
+                System.out.println(task);
+                System.out.println("\n* Good job, you deserve a kit-kat *");
+            }
+        } catch (ChatException e) {
+            throw e;
+        }
+    }
+    
+    
+    public static void deleteTask(String s) throws ChatException{
+        try {
+            Task task = checkCommandIndex("delete", s);
+            taskArr.remove(task);
+            System.out.println(goCat);
+            System.out.println("Mew! I've removed this task:");
+            System.out.println(task);
+            System.out.println(String.format("\n** Now you have %d tasks in the list **", taskArr.size()));
+        } catch (ChatException e) {
+            throw e;
+        }
+    }
+    
 
     public static void main(String[] args) {
         //only add lines in here
@@ -131,6 +154,8 @@ public class Duke {
                     addDeadline(str);
                 } else if (str.startsWith("event")) {
                     addEvent(str);
+                } else if (str.startsWith("delete")) { 
+                    deleteTask(str);
                 } else {
                     ChatException error = new ChatException("Sorry this instruction does not exist!\n" +
                             "Please choose from the following: " +

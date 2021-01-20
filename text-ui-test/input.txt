@@ -54,4 +54,17 @@ list
 done 3
 list
 done 1
+delete
+delete1
+delete -1 
+delete 9
+list
+delete 1
+list
+todo finish hw
+list
+delete 2
+list
+delete 2
+list
 bye
