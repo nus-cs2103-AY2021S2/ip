@@ -5,3 +5,26 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+****************************
+
+Got it. Now I have added this task:
+  [ ] buy book
+Now you have 1 tasks in the list.
+****************************
+
+Got it. Now I have added this task:
+  [ ] read book
+Now you have 2 tasks in the list.
+****************************
+
+Got it. Now I have added this task:
+  [ ] return book
+Now you have 3 tasks in the list.
+****************************
+
+1.[ ] buy book
+2.[ ] read book
+3.[ ] return book
+****************************
+
+Bye. Hope to see you again soon!
