@@ -1,8 +1,8 @@
 public class Task {
 
-    private final int id;
-    private final String description;
-    private final boolean isDone;
+    protected int id;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description, int id) {
         this.description = description;
@@ -10,14 +10,8 @@ public class Task {
         this.isDone = false;
     }
 
-    private Task(String description, int id, boolean isDone) {
-        this.description = description;
-        this.id = id;
-        this.isDone = isDone;
-    }
-
-    public Task markDone() {
-        return new Task(description, id, true);
+    public void markDone() {
+        isDone = true;
     }
 
     public int getID() {
@@ -28,16 +22,17 @@ public class Task {
         return isDone;
     }
 
+    protected String checkBoxToString() {
+        if (isDone) {
+            return "[X] ";
+        } else {
+            return "[] ";
+        }
+    }
+
     @Override
     public String toString() {
 
-        String checkBox;
-        if (isDone) {
-            checkBox = "[X] " ;
-        } else {
-            checkBox = "[] " ;
-        }
-
-        return id + ". " + checkBox + description;
+        return id + ". ";
     }
 }

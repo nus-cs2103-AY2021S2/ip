@@ -13,16 +13,19 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    public void addTask(String description) {
-        int taskID = tasks.size() + 1;
-        Task newTask = new Task(description, taskID);
-        tasks.add(newTask);
+    public int getSize() {
+        return tasks.size();
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
     public void markDone(int id) {
         int index = id - 1;
         Task task = tasks.remove(index);
-        tasks.add(index, task.markDone());
+        task.markDone();
+        tasks.add(index, task);
     }
 
     @Override

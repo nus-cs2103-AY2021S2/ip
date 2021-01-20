@@ -13,9 +13,23 @@ public class InputHandler {
         case "done":
             int id = Integer.parseInt(processedInput[1]);
             return new DoneCommand(id);
+        case "todo":
+        case "event":
+        case "deadline":
+            String description = processDescription(processedInput);
+            return new AddCommand(command, description);
         default:
-            return new AddCommand(input);
+            System.out.println("Invalid command. Please enter a valid one");
+            return new ByeCommand();
         }
         
+    }
+
+    public static String processDescription(String[] processedInput) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < processedInput.length; i++) {
+            sb.append(processedInput[i] + " ");
+        }
+        return sb.toString();
     }
 }
