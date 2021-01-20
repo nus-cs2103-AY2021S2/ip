@@ -17,7 +17,7 @@ public class DukeBot {
 
     public void run() {
         Command command;
-        printOut(DukeStrings.WELCOME_MESSGAGE);
+        printOut(DukeStrings.MESSGAGE_WELCOME);
 
         while (!parser.isBye()) {
             command = parser.parseInput(scanner.nextLine());

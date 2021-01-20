@@ -13,11 +13,11 @@ public class Parser {
 
     public Command parseInput(final String input) {
         switch (input.toLowerCase(Locale.ROOT)) {
-            case "bye":
+            case DukeStrings.COMMAND_BYE:
                 this.bye = true;
                 return new ExitCommand();
             default:
-                return new Echo(input);
+                return new AddCommand(input);
         }
     }
 }

@@ -1,7 +1,7 @@
-public class Echo implements Command {
+public class AddCommand implements Command {
     private final String input;
 
-    public Echo(String input) {
+    public AddCommand(String input) {
         this.input = input;
     }
 
