@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class Duke {
 
 
+
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -33,6 +34,8 @@ public class Duke {
 
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
+//            System.out.println("params: " + Arrays.toString(params));
+//            System.out.println(params.length);
 
             try {
 
@@ -41,6 +44,28 @@ public class Duke {
                     System.out.println(horizSep + "\n" + farewell + horizSep + "\n");
                     sc.close();
                     return;
+
+                } else if (params[0].equals("delete")) {
+
+                    try {
+                        Integer index = Integer.parseInt(params[1]) - 1;
+
+                        if (index >= taskList.size()) {
+                            throw new DukeException("No such task in the list");
+                        }
+
+                        Task removedTask = taskList.remove(Integer.parseInt(params[1]) - 1);
+                        System.out.println(horizSep + "\n" +  indent + " Noted. I've removed this task ");
+                        System.out.println(indent + "   " + removedTask);
+                        System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
+                        System.out.println(horizSep + "\n");
+
+                    } catch (Exception err) {
+                        throw new DukeException(err.getMessage());
+                    }
+
+
+
                 } else if (next.equals("list")) {
                     ListIterator<Task> taskIter = taskList.listIterator();
 
@@ -59,7 +84,7 @@ public class Duke {
                     Integer index = Integer.parseInt(params[1]) - 1;
 
                     if (index >= taskList.size()) {
-                        throw new IllegalArgumentException("No such task in the list");
+                        throw new DukeException("No such task in the list");
                     }
 
                     taskList.set(index, taskList.get(index).markAsDone());
@@ -139,14 +164,13 @@ public class Duke {
                 }
 
 
-            } catch(Exception exp) {
+            } catch(DukeException exp) {
                 System.out.println(horizSep);
                 System.out.println(indent + " " + exp);
                 System.out.println(horizSep + "\n");
             }
 
-
-
+            
         }
 
     }
