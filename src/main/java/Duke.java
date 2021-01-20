@@ -1,15 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class Duke {
-    /**
-     * Number of tasks added by the user.
-     */
+    /** Number of tasks added by the user */
     private static int count;
 
-    /**
-     * List of tasks added by the user.
-     */
+    /** List of tasks added by the user */
     private static List<Task> tasks = new ArrayList<>();
 
     /**
@@ -29,9 +26,7 @@ public class Duke {
     }
 
     /**
-     * Lists out all the tasks that have been input by the user
-     * along with the task type (deadline, todo or event) and
-     * whether the task has been completed.
+     * Lists all the tasks that have been input by the user.
      */
     public static void printList() {
         int listCount = 1;
@@ -46,7 +41,8 @@ public class Duke {
 
     /**
      * Marks the task at a particular index as done.
-     * @param index index of the task to be removed.
+     *
+     * @param index Index of the task to be removed.
      */
     public static void markDone(int index) {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -58,11 +54,12 @@ public class Duke {
 
     /**
      * Adds a todo task to the list.
-     * @param command command input by the user
+     *
+     * @param command Command input by the user
      *                which contains the name of
      *                the task.
-     * @throws InvalidTodoException If Todo task does not
-     *                              have a description
+     * @throws InvalidTodoException If Todo does not
+     *                              have a description.
      */
     public static void addTodo(String command) throws InvalidTodoException {
         if(command.length() < 6) {
@@ -73,47 +70,58 @@ public class Duke {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count + (count == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + count
+                + (count == 1 ? " task" : " tasks")
+                + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
     /**
      * Adds a deadline to the list.
-     * @param command command input by the user
+     *
+     * @param command Command input by the user
      *                which contains the name of
      *                the task and the deadline
      *                to submit it by.
      */
     public static void addDeadline(String command) {
-        tasks.add(new Deadline(command.substring(9).split("/")[0], command.substring(9).split("/")[1].substring(3)));
+        tasks.add(new Deadline(command.substring(9).split("/")[0],
+                command.substring(9).split("/")[1].substring(3)));
         count++;
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count + (count == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + count
+                + (count == 1 ? " task" : " tasks")
+                + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
     /**
      * Adds a deadline to the list.
-     * @param command command input by the user
+     *
+     * @param command Command input by the user
      *                which contains the name of
      *                the event and the date and time.
      */
     public static void addEvent(String command) {
-        tasks.add(new Event(command.substring(6).split("/")[0], command.substring(6).split("/")[1].substring(3)));
+        tasks.add(new Event(command.substring(6).split("/")[0],
+                command.substring(6).split("/")[1].substring(3)));
         count++;
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
-        System.out.println("Now you have " + count + (count == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + count
+                + (count == 1 ? " task" : " tasks")
+                + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
     /**
+     * Performs the specified action.
      *
-     * @param command command input by the user.
-     * @throws InvalidCommandException if the command cannot be recognised.
+     * @param command Command input by the user.
+     * @throws InvalidCommandException If the command cannot be recognised.
      */
     public static void runCommand(String command) throws InvalidCommandException{
         if (command.equals("list")) {
@@ -143,7 +151,7 @@ public class Duke {
         while (!command.equals("bye")) {
             try {
                 runCommand(command);
-            } catch(InvalidCommandException e) {
+            } catch (InvalidCommandException e) {
                 System.out.println("\nI'm sorry, but I don't know what that means :-(\n");
             }
             command = scanner.nextLine();
