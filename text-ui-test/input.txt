@@ -6,4 +6,5 @@ list
 blah
 todo
 list
+delete 3
 bye
