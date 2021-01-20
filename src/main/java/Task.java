@@ -1,10 +1,6 @@
-public class Task {
+public abstract class Task {
     protected boolean isDone;
     protected final String description;
-
-    public static Task create(final String description) {
-        return new Task(false, description);
-    }
 
     protected Task(final boolean isDone, final String description) {
         this.isDone = isDone;
