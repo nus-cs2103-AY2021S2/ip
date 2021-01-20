@@ -3,4 +3,6 @@ deadline assignment /by thursday
 event movie /at tonight
 done 2
 list
+delete 3
+list
 bye

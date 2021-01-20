@@ -22,83 +22,102 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<Task> list = new ArrayList<>();
+        Command currentCommand;
+        try {
+            currentCommand = Command.valueOf(input.split(" ")[0].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            currentCommand = Command.ERROR;
+        }
 
-        while (!input.equals("bye")) {
+        while (currentCommand != Command.BYE) {
             System.out.println("____________________________________________________________");
-            if (input.equals("list")) {
-                // Check if the command is list and display the list of tasks.
-                String temp = "";
+            switch (currentCommand) {
+                case LIST:
+                    // Check if the command is list and display the list of tasks.
+                    String temp = "";
 
-                for (int i = 0; i < list.size(); i++) {
-                    temp += String.format("%d. %s", i + 1, list.get(i));
-                    if (i != list.size() - 1) {
-                        temp += "\n";
+                    for (int i = 0; i < list.size(); i++) {
+                        temp += String.format("%d. %s", i + 1, list.get(i));
+                        if (i != list.size() - 1) {
+                            temp += "\n";
+                        }
                     }
-                }
-                System.out.println(temp);
-            } else if (input.split(" ")[0].equals("done")) {
-                int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
+                    System.out.println(temp);
+                    break;
+                case DONE:
+                    int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
 
-                list.get(itemNumber).toggleIsDone();
-                System.out.println(
-                    "Nice! I've marked this task as done:\n" +
-                    list.get(itemNumber)
-                );
-            } else if (input.split(" ")[0].equals("todo")) {
-                try {
-                    Todo todo = new Todo(input.split(" ", 2)[1]);
-                    list.add(todo);
-                    System.out.println("added: " + todo);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Oops, your todo requires at least a description.");
-                }
-            } else if (input.split(" ")[0].equals("deadline")) {
-                try {
-                    String taskAndDate = input.split(" ", 2)[1];
-                    String task = taskAndDate.split(" /by ")[0];
-                    String date = taskAndDate.split(" /by ")[1];
-                    Deadline deadline = new Deadline(task, date);
-                    list.add(deadline);
-                    System.out.println("added: " + deadline);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Oops, your deadline requires both a description and date.");
-                }
-            } else if (input.split(" ")[0].equals("event")) {
-                try {
-                    String taskAndDate = input.split(" ", 2)[1];
-                    String task = taskAndDate.split(" /at ")[0];
-                    String date = taskAndDate.split(" /at ")[1];
-                    Event event = new Event(task, date);
-                    list.add(event);
-                    System.out.println("added: " + event);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Oops, your Event requires both a description and date");
-                }
-            } else if (input.split(" ")[0].equals("delete")) {
-                try {
-                    int index = Integer.valueOf(input.split(" ", 2)[1]);
-                    System.out.println("Noted. I've removed the task:\n" + list.get(index - 1) +
-                            "\nNow you have " + (list.size() - 1) + " tasks in the list.");
-                    list.remove(index - 1);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Delete requires a number");
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(e);
-                } catch (NumberFormatException e) {
-                    System.out.println(e);
-                }
-            } else {
-                System.out.println("Oops, I'm sorry but that command is not valid.");
+                    list.get(itemNumber).toggleIsDone();
+                    System.out.println(
+                            "Nice! I've marked this task as done:\n" +
+                                    list.get(itemNumber)
+                    );
+                    break;
+                case TODO:
+                    try {
+                        Todo todo = new Todo(input.split(" ", 2)[1]);
+                        list.add(todo);
+                        System.out.println("added: " + todo);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Oops, your todo requires at least a description.");
+                    }
+                    break;
+                case DEADLINE:
+                    try {
+                        String taskAndDate = input.split(" ", 2)[1];
+                        String task = taskAndDate.split(" /by ")[0];
+                        String date = taskAndDate.split(" /by ")[1];
+                        Deadline deadline = new Deadline(task, date);
+                        list.add(deadline);
+                        System.out.println("added: " + deadline);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Oops, your deadline requires both a description and date.");
+                    }
+                    break;
+                case EVENT:
+                    try {
+                        String taskAndDate = input.split(" ", 2)[1];
+                        String task = taskAndDate.split(" /at ")[0];
+                        String date = taskAndDate.split(" /at ")[1];
+                        Event event = new Event(task, date);
+                        list.add(event);
+                        System.out.println("added: " + event);
+                        System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Oops, your Event requires both a description and date");
+                    }
+                    break;
+                case DELETE:
+                    try {
+                        int index = Integer.valueOf(input.split(" ", 2)[1]);
+                        System.out.println("Noted. I've removed the task:\n" + list.get(index - 1) +
+                                "\nNow you have " + (list.size() - 1) + " tasks in the list.");
+                        list.remove(index - 1);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("Delete requires a number");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e);
+                    } catch (NumberFormatException e) {
+                        System.out.println(e);
+                    }
+                    break;
+                case ERROR:
+                    System.out.println("Oops, that is not a command I support.");
             }
 
             System.out.println("____________________________________________________________");
             input = sc.nextLine();
+            try {
+                currentCommand = Command.valueOf(input.split(" ")[0].toUpperCase());
+            } catch (IllegalArgumentException e) {
+                currentCommand = Command.ERROR;
+            }
         }
 
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
+
 
