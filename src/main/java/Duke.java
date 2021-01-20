@@ -15,8 +15,8 @@ public class Duke {
         String line = "    ____________________________________________________________\n";
         //initialising greeting to be printed and print greeting.
         String greeting = line
-                + "    Hello! I'm Duke\n"
-                + "    What can I do for you?\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
                 + line;
         System.out.print(greeting);
 
@@ -34,7 +34,7 @@ public class Duke {
                 int index = 1;
                 System.out.print(line);
                 for(Task t : taskList) {
-                    System.out.print(String.format("    %d. %s\n",
+                    System.out.print(String.format("     %d. %s\n",
                             index++, t.toString()));
 
                 }
