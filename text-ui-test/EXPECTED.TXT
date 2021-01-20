@@ -1,7 +1,53 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello :)
+>hello
+>How are you?
+>Got it. I've added this task:
+[T][✘] buy groceries
+Now you have 1 task(s) in the list
+>1. [T][✘] buy groceries
+>Nice! I've marked this task as done:
+[T][✓] buy groceries
+>1. [T][✓] buy groceries
+>Got it. I've added this task:
+[D][✘] 01 (by: 12-jan-2020)
+Now you have 2 task(s) in the list
+>Got it. I've added this task:
+[D][✘] 02 (by: 12-jan-2020)
+Now you have 3 task(s) in the list
+>Got it. I've added this task:
+[D][✘] 03 (by: 12-jan-2020)
+Now you have 4 task(s) in the list
+>Got it. I've added this task:
+[D][✘] 04 (by: 12-jan-2020)
+Now you have 5 task(s) in the list
+>Got it. I've added this task:
+[D][✘] 05 (by: 12-jan-2020)
+Now you have 6 task(s) in the list
+>Invalid command. Are you missing some arguments?
+>Invalid command. Are you missing some arguments?
+>Index 999 out of bounds for list of size 6
+>Nice! I've marked this task as done:
+[D][✓] 03 (by: 12-jan-2020)
+>Nice! I've marked this task as done:
+[D][✓] 01 (by: 12-jan-2020)
+>Nice! I've marked this task as done:
+[D][✓] 02 (by: 12-jan-2020)
+>1. [T][✓] buy groceries
+2. [D][✓] 01 (by: 12-jan-2020)
+3. [D][✓] 02 (by: 12-jan-2020)
+4. [D][✓] 03 (by: 12-jan-2020)
+5. [D][✘] 04 (by: 12-jan-2020)
+6. [D][✘] 05 (by: 12-jan-2020)
+>Got it. I've added this task:
+[E][✘] attend lecture (at: tomorrow noon)
+Now you have 7 task(s) in the list
+>Nice! I've marked this task as done:
+[E][✓] attend lecture (at: tomorrow noon)
+>1. [T][✓] buy groceries
+2. [D][✓] 01 (by: 12-jan-2020)
+3. [D][✓] 02 (by: 12-jan-2020)
+4. [D][✓] 03 (by: 12-jan-2020)
+5. [D][✘] 04 (by: 12-jan-2020)
+6. [D][✘] 05 (by: 12-jan-2020)
+7. [E][✓] attend lecture (at: tomorrow noon)
+>EOF
