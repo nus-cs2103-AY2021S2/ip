@@ -22,7 +22,7 @@ public class Duke {
             StringBuilder output = new StringBuilder();
 
             if (input.equals("bye")) {
-                output.append("Bye. Hope to see you again soon!");
+                textWarper("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
                 output.append("Here are the tasks in your list: \n");
