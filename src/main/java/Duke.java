@@ -3,18 +3,21 @@ public class Duke {
         UI ui = new UI();
 
         String command;
-        String echo;
+        Tasks taskList = new Tasks();
 
         ui.greetings();
 
         while(true){
             command = ui.getCommand();
-            echo = command;
             if(command.equals("bye")){
                 ui.goodbye();
                 break;
             }
-            System.out.println(echo);
+            if(command.equals("list")){
+                taskList.printTasks();
+            }else {
+                taskList.addTask(command);
+            }
         }
     }
 }
