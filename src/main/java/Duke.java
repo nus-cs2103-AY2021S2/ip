@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
         ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
@@ -20,8 +21,12 @@ public class Duke {
 
         while(sc.hasNext()) {
             String str = sc.nextLine();
+            str = str.trim();
             if (str.equals("bye")) {
                 break;
+            } else if(str.length()==0) {//if just enter spaces
+                System.out.println(line + " Please enter a task\n"
+                        + line);
             } else if (str.equals("list")) {
                 System.out.println(line);
                 if (tasks.size() > 0) {
@@ -35,15 +40,16 @@ public class Duke {
             } else {
                 String[] split = str.split(" ");
                 if(split.length==2 && split[0].equals("done")) {
-                    int num = Integer.parseInt(split[1]);
                     try {
+                        int num = Integer.parseInt(split[1]);
                         System.out.println(line + tasks.get(num-1).doneTask()
                                 + "\n" + line);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(line + " Enter a number between " +
+                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                        System.out.println(line + " Enter 'done' followed by a number between " +
                                 "1 and " + tasks.size() +"\n" + line);
                     }
                 } else {
+                    //System.out.println(split.length);
                     tasks.add(new Task(str));
                     System.out.println(line + " added: " + str + "\n" + line);
                 }
