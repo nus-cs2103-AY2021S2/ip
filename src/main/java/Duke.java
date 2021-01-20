@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,15 +18,22 @@ public class Duke {
         commands.add("deadline", new CommandDecorator(new AddCommand(taskManager,new DeadlineFactory())));
 
         printCommand.execute(getIntro());
-        while (!taskManager.hasExited()) {
-            String input = scanner.nextLine();
-            String[] inputArray = input.split(" ",2);
-            if (inputArray.length == 2) {
-                commands.get(inputArray[0]).execute(inputArray[1]);
-            } else if (inputArray.length == 1) {
-                //for commands with only one word, anything we pass in to execute will not matter.
-                commands.get(inputArray[0]).execute(inputArray[0]);
+        try {
+            while (!taskManager.hasExited()) {
+                String input = scanner.nextLine();
+                String[] inputArray = input.split(" ", 2);
+                if (inputArray.length == 2) {
+                    commands.get(inputArray[0]).execute(inputArray[1]);
+                } else if (inputArray.length == 1) {
+                    //for commands with only one word, will give error msg if command requires more than 1.
+                    commands.get(inputArray[0]).execute(" ");
+                }
             }
+        } catch (NoSuchElementException e) {
+            printCommand.execute("Error. No more lines detected. Exiting...");
+        }
+        finally {
+            scanner.close();
         }
     }
 

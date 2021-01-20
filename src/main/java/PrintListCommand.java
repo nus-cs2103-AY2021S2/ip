@@ -19,6 +19,6 @@ public class PrintListCommand implements ICommand {
             content += "\n";
             count++;
         }
-        return content;
+        return content.trim();
     }
 }

@@ -12,9 +12,12 @@ public class AddCommand implements ICommand {
 
     @Override
     public void execute(String parameters) {
-        Task newTask = taskFactory.getTask(parameters);
-        this.tasks.addTask(newTask);
-
-        System.out.println(newTask.toString());
+        try {
+            Task newTask = taskFactory.getTask(parameters);
+            this.tasks.addTask(newTask);
+            System.out.println(newTask.toString());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
