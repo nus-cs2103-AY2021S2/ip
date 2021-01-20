@@ -20,6 +20,8 @@ public class Duke {
                     add(collection, input);
                 else if (command.equals("done"))
                     done(collection, input);
+                else if (command.equals("delete"))
+                    delete(collection, input);
                 else if (command.equals("list"))
                     list(collection);
                 else if (command.equals("bye"))
@@ -128,6 +130,18 @@ public class Duke {
             throw new DukeException("I don't think there is such a task...");
         } catch (IllegalArgumentException e) {
             throw new DukeException("Task had already been marked as done...");
+        }
+    }
+
+    public static void delete(ArrayList<Task> collection, String input) throws DukeException {
+        try {
+            int itemIdx = Integer.parseInt(input.split(" ")[1]) - 1;
+            Task task = collection.remove(itemIdx);
+            Duke.say("Task '" + task.getDescription() + "' has been deleted.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("I need a task number...");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("I don't think there is such a task...");
         }
     }
 
