@@ -20,24 +20,43 @@ public class Duke {
             "Greetings! I'm Your Personal Assistant Duke:)",
             "What can I do for you today?"
     };
+
     private static final String[] exit = {
             "Bye. Nice to meet you and hope to see you again soon!"
     };
+
     private static final String border =
-            "    ____________________________________________________________\n";
+            "    ____________________________________________________________" +
+                    "________________________________________________________\n";
+
     private static final String indent = "     ";
 
     private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
-        System.out.println(parseMessage(greet));
+        System.out.println(formatMessage(greet));
         Scanner sc = new Scanner(System.in);
         String message = sc.nextLine();
         while(!message.equalsIgnoreCase("bye")) {
             printReply(message);
             message = sc.nextLine();
         }
-        System.out.println(parseMessage(exit));
+        System.out.println(formatMessage(exit));
+    }
+
+    /**
+     * Print the corresponding reply based on user input.
+     * @param message first (String) word from user input
+     */
+    private static void printReply(String message) {
+        System.out.print(border);
+        try {
+            parseMessage(message);
+        }
+        catch (DukeException dukeExp) {
+            System.out.println(indent + dukeExp.getMessage());
+        }
+        System.out.println(border);
     }
 
     /**
@@ -50,9 +69,12 @@ public class Duke {
      * 4. Disclaimer: the idea of using .valueOf and convert to UpperCase is inspired
      *      based on discussion of #Issue 14 in forum.
      *      Credit to @samuelfangjw who mentioned it first.
-     * @param message first (String) word from user input
+     * @param message user input
+     * @throws IllegalArgumentException thrown if user enters an invalid command
+     * @throws DukeException thrown if user enters a valid command but invalid related information
      */
-    private static void printReply(String message) {
+    private static void parseMessage(String message)
+            throws DukeException{
         String[] msgArray = message.split(" ", 2);
         String commandWord = msgArray[0];
         String otherInfo = null;
@@ -60,7 +82,6 @@ public class Duke {
             otherInfo = msgArray[1];
         }
 
-        System.out.print(border);
         try {
             CommandOption command = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
             switch (command) {
@@ -71,26 +92,44 @@ public class Duke {
                     completeTask(otherInfo);
                     break;
                 case TODO:
+                    if (otherInfo == null) {
+                        throw new DukeException("Please provide a description when creating todo.");
+                    }
                     addTask(new Todo(otherInfo));
                     break;
                 case EVENT:
-                    String[] temp = otherInfo.split("/at",2);
+                    String[] temp = otherInfo.split("/at", 2);
                     String description = temp[0].trim();
                     String at = temp[1].trim();
+                    if (description.equals("") || at.equals("")) {
+                        throw new DukeException("Please provide a description or an at period" +
+                                " when creating event.");
+                    }
                     addTask(new Event(description, at));
                     break;
                 case DEADLINE:
-                    temp = otherInfo.split("/by",2);
+                    temp = otherInfo.split("/by", 2);
                     description = temp[0].trim();
                     String by = temp[1].trim();
+                    if (description.equals("") || by.equals("")) {
+                        throw new DukeException("Please provide a description or a by date " +
+                                "when creating deadline.");
+                    }
                     addTask(new Deadline(description, by));
                     break;
             }
         }
         catch (IllegalArgumentException e) {
-            addTask(message);
+            throw new DukeException("I do not understand this command.");
         }
-        System.out.println(border);
+        catch (NullPointerException e) {
+            throw new DukeException("Please provide the relevant information " +
+                    "when creating a task.");
+        }
+        catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please use /by when creating deadline or " +
+                    "/at when creating event.");
+        }
     }
 
     /**
@@ -98,7 +137,7 @@ public class Duke {
      * @param messages an array of strings, main body of the message to be formatted.
      * @return the formatted message (specifically, greet and bye) to be printed.
      */
-    private static String parseMessage(String[] messages) {
+    private static String formatMessage(String[] messages) {
         StringBuilder res = new StringBuilder(border);
         for (String message : messages) {
             res.append(indent).append(message).append("\n");
@@ -109,15 +148,21 @@ public class Duke {
 
     private static void printList() {
         StringBuilder res = new StringBuilder();
-        res.append(indent)
-                .append("Hi! This is your todo list:\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        if (tasks.isEmpty()) {
             res.append(indent)
-                    .append(i+1)
-                    .append(".")
-                    .append(task.toString())
-                    .append("\n");
+                    .append("Hi! Your todo list is currently empty.");
+        } else {
+            res.append(indent)
+                    .append("Hi! This is your todo list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                res.append(indent)
+                        .append(" ")
+                        .append(i + 1)
+                        .append(".")
+                        .append(task.toString())
+                        .append("\n");
+            }
         }
         System.out.print(res.toString());
     }
@@ -125,43 +170,41 @@ public class Duke {
     /**
      * Complete the task with the given index and print the confirmation message.
      *
-     * Two possible errors are handled. Namely, they are:
-     *      1. taskIndex is not an integer;
-     *      2. taskIndex is out of bound.
+     * Four possible errors are handled. Namely, they are:
+     *      1. no taskIndex;
+     *      2. taskIndex is not an integer;
+     *      3. taskIndex is out of bound;
+     *      4. task has been completed;
      * @param taskIndex taskIndex from user input, in String.
+     * @throws DukeException when an invalid taskIndex is entered
      */
-    private static void completeTask(String taskIndex) {
+    private static void completeTask(String taskIndex) throws DukeException {
         int index;
         Task task;
+        if (taskIndex == null) {
+            throw new DukeException("Please enter a task index.");
+        }
+
         try{
             index = Integer.parseInt(taskIndex) - 1;
         }
         catch (NumberFormatException e) {
-            System.out.println("Task index entered is not an integer");
-            return;
+            throw new DukeException("Task index entered is not valid.");
         }
 
         try {
             task = tasks.get(index);
-            task.markAsDone();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Task index is out of bound");
-            return;
+            throw new DukeException("Task with the given index does not exist.");
+        }
+
+        if (!task.markAsDone()) {
+            throw new DukeException("Task with the given index has been completed.");
         }
 
         String res = indent +
                 "Wonderful! You have completed this task:\n" +
                 indent + "  " + task.toString();
-        System.out.println(res);
-    }
-
-    private static void addTask(String taskDescription) {
-        Task task = new Task(taskDescription);
-        tasks.add(task);
-
-        String res = indent +
-                "Added: " +
-                taskDescription;
         System.out.println(res);
     }
 

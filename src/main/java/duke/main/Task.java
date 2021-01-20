@@ -22,9 +22,16 @@ public class Task {
 
     /**
      * Updates the isDone status of the current task to be true.
+     * @return if isDone is currently false, set it to true and return true;
+     *              otherwise, return false;
      */
-    public void markAsDone() {
-        isDone = true;
+    public boolean markAsDone() {
+        if (isDone) {
+            return false;
+        } else {
+            isDone = true;
+            return true;
+        }
     }
 
     @Override
