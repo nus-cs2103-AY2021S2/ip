@@ -23,14 +23,15 @@ public class  Duke {
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list!");
                 for (int i = 0; i < numitems; i++) {
-                    System.out.println(i+1 + "." + list[i].getStatusIcon() + list[i].description);
+                    System.out.println(i+1 + "." + list[i]);
+
                 }
 
             } else if (m.find()) {
                     System.out.println("Good job, I've marked the task as done!");
                     int n = Integer.parseInt(m.group(2)) - 1;
                     list[n].markAsDone();
-                    System.out.println(list[n].getStatusIcon() + list[n].description);
+                    System.out.println(list[n]);
             } else {
                 System.out.println("added: " + str);
                 list[numitems] = new Task(str);
