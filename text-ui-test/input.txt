@@ -6,9 +6,9 @@ event project meeting /at 27 Jan
 list
 done 1
 list
+delete 2
 done 2
-done 3
-done 4
+delete 4
 list
 todo
 deadline
@@ -27,11 +27,12 @@ list
 deadline chemistry assignment /by /by /by Tuesday
 event tea with Wilson /at /by /at 30 Jan
 list
-done       4
-done    5
-   done 6  
+delete       4
+done    4
+   delete 6  
 done asdf
-done 7
+delete 13edewq11 2 r2
+delete 7
 done 8
 list
 bye
