@@ -16,8 +16,11 @@ public class Task {
         return (isDone ? "*" : " ");
     }
 
-    public void markAsDone() {
+    public Boolean markAsDone() {
+        if (this.isDone)
+            return false;
         this.isDone = true;
+        return true;
     }
 
     @Override

@@ -6,25 +6,26 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> collection = new ArrayList<Task>();
-        Boolean exit = false;
-        String input;
+        boolean exit = false;
 
         // Welcomes user
         greeting();
-
         // Receive action
         do {
             try {
-                input = Duke.ask(sc);
+                String input = Duke.ask(sc);
+                String command = input.split(" ")[0].toLowerCase();
 
-                if (input.toLowerCase().startsWith("todo") || input.toLowerCase().startsWith("deadline") || input.toLowerCase().startsWith("event"))
+                if (command.equals("todo") || command.equals("deadline") || command.equals("event"))
                     add(collection, input);
-                else if (input.toLowerCase().startsWith("done"))
+                else if (command.equals("done"))
                     done(collection, input);
-                else if (input.toLowerCase().equals("list"))
+                else if (command.equals("list"))
                     list(collection);
-                else if (input.toLowerCase().equals("bye"))
-                    exit = exit();
+                else if (command.equals("bye"))
+                    exit = bye();
+                else if (command.equals(""))
+                    continue;
                 else
                     invalid();
             } catch (DukeException e) {
@@ -57,12 +58,12 @@ public class Duke {
         // Get description
         int i;
         for (i = 1; i < inputArr.length; i++) {
-            if (inputArr[i].toLowerCase().equals("/by") || inputArr[i].toLowerCase().equals("/at")) {
-                break;
-            } else {
+            if (taskType.toLowerCase().equals("todo") || (!inputArr[i].toLowerCase().equals("/by") && !inputArr[i].toLowerCase().equals("/at"))) {
                 if (!taskDesc.equals(""))
                     taskDesc += " ";
                 taskDesc += inputArr[i];
+            } else {
+                break;
             }
         }
 
@@ -88,7 +89,7 @@ public class Duke {
         Duke.say("Is there anything I can do for you today?");
     }
 
-    public static boolean exit() {
+    public static boolean bye() {
         Duke.say("Alright, take care. I hope to see you again soon!");
         return true;
     }
@@ -117,12 +118,16 @@ public class Duke {
     public static void done(ArrayList<Task> collection, String input) throws DukeException {
         try {
             int itemIdx = Integer.parseInt(input.split(" ")[1]) - 1;
-            collection.get(itemIdx).markAsDone();
+            boolean status = collection.get(itemIdx).markAsDone();
+            if (!status)
+                throw new IllegalArgumentException();
             Duke.say("Task '" + collection.get(itemIdx).getDescription() + "' is marked as done.");
         } catch (NumberFormatException e) {
             throw new DukeException("I need a task number...");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I don't think there is such a task...");
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Task had already been marked as done...");
         }
     }
 
