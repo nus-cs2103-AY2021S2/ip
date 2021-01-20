@@ -9,10 +9,21 @@ public class Duke {
 
     private static List<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Returns message with additional header 'Olly', the chat bot name
+     * @param message: Message to be made by Olly
+     */
     public static void ollySpeak(String message) {
         System.out.println("Olly: " + message);
     }
 
+    /**
+     * Main engine which handles the input from the user
+     * Currently supported inputs: list, todo, deadline, event, done, delete.
+     * Throws DukeException upon incorrect command from user
+     * @param input: Input message from user
+     * @throws DukeException
+     */
     private static void inputHandler(String input) throws DukeException {
         if (input.equals("bye")) {
             ollySpeak("Goodbye for now, we will meet again.");
@@ -60,11 +71,8 @@ public class Duke {
             String[] command = input.split(" ");
             int index = Integer.parseInt(command[1]);
             if (index > 0 && index <= tasks.size()) {
-                Task doneTask = tasks.get(index - 1);
-                tasks.remove(doneTask);
-                ollySpeak("Aww man.. I've removed this task:");
-                System.out.println(doneTask);
-                ollySpeak("Now you have " + getTaskCount() + " tasks left.");
+                Task  deletedTask = tasks.get(index - 1);
+                deleteTask(deletedTask);
             } else {
                 ollySpeak("The task number does not work, try again?");
             }
@@ -73,10 +81,18 @@ public class Duke {
         }
     }
 
+    /**
+     * Wrapper for getting the total task count of Olly (Duke)
+     * @return number of tasks
+     */
     private static int getTaskCount() {
         return tasks.size();
     }
 
+    /**
+     * Add task to the current list of tasks that Olly is handling
+     * @param task: Supports Event, Todo, Deadline tasks (any child class inheriting from Task)
+     */
     private static void addTask(Task task) {
         tasks.add(task);
         ollySpeak(task.addMessage + (task.addMessage == null ? "" : " ") + "I've added:");
@@ -84,6 +100,21 @@ public class Duke {
         ollySpeak("You now have " + getTaskCount() + " tasks at hand.");
     }
 
+    /**
+     * Deletes task from task list and informs user of the task that has been removed
+     * @param task: Task to be removed
+     */
+    private static void deleteTask(Task task) {
+        tasks.remove(task);
+        ollySpeak("Aww man.. I've removed this task:");
+        System.out.println(task);
+        ollySpeak("Now you have " + getTaskCount() + " tasks left.");
+    }
+
+    /**
+     * Prints out the list of task that the user currently has. The tasks are ordered numerically in the sequence
+     * in which it was inserted.
+     */
     private static void printTasks() {
         if (getTaskCount() == 0) {
             ollySpeak("You currently have no tasks! Use todo, deadline or event.");
