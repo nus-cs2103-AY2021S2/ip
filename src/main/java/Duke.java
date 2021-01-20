@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,10 +14,13 @@ public class Duke {
     public static Scanner sc;
 
     public static void main(String[] args) {
+        File fileName = new File("data/duke.txt");
         sc = new Scanner(System.in);
-        list = new ArrayList<>();
+        ArrayList<Task> tasks = readDataFromFile(fileName);
+        list = new ArrayList<>(tasks);
         printWelcome();
         handleInput();
+        writeToFile(fileName);
         sc.close();
     }
 
@@ -142,10 +149,14 @@ public class Duke {
 
     public static void listingTasks(ArrayList<Task> list) {
         System.out.println(LINES);
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            System.out.println((i + 1) + ". " + task);
+        if (list.isEmpty()){
+            System.out.println("There is no task in your list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                Task task = list.get(i);
+                System.out.println((i + 1) + ". " + task);
+            }
         }
         System.out.println(LINES);
         System.out.println();
@@ -175,5 +186,56 @@ public class Duke {
         System.out.println(type + " command should be followed by a number between 1 and " + list.size() + ".");
         System.out.println(LINES);
         System.out.println();
+    }
+
+    public static ArrayList<Task> readDataFromFile(File f){
+        try {
+            Scanner sc = new Scanner(f);
+            ArrayList<Task> tasks = new ArrayList<>();
+            while (sc.hasNextLine()){
+                String currLine = sc.nextLine();
+                String[] information = currLine.split("\\|");
+                switch (information[0].charAt(0)) {
+                    case 'T': {
+                        System.out.println("in todo");
+                        Task newTask = new Todo(information[2]);
+                        if (information[1].trim().equals("1")) newTask.markAsDone();
+                        tasks.add(newTask);
+                        break;
+                    }
+                    case 'D': {
+                        System.out.println("in deadline");
+                        Task newTask = new Deadline(information[2], information[3]);
+                        if (information[1].trim().equals("1")) newTask.markAsDone();
+                        tasks.add(newTask);
+                        break;
+                    }
+                    case 'E': {
+                        System.out.println("in event");
+                        Task newTask = new Event(information[2], information[3]);
+                        if (information[1].trim().equals("1")) newTask.markAsDone();
+                        tasks.add(newTask);
+                        break;
+                    }
+                }
+            }
+            return tasks;
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    public static void writeToFile(File f){
+        try {
+            FileWriter fw = new FileWriter(f);
+            for (Task task : list){
+                String content = task.getType() + " | " + task.getStatusNumber() + " | " + task.getDescription() + task.getTime();
+                fw.write(content + '\n');
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Unable to write to file " + e.getMessage());
+        }
     }
 }
