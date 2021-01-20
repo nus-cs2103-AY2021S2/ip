@@ -26,9 +26,8 @@ public class Duke {
      * Greets user with a message on the screen when the function is called.
      */
     public static void greetUser() {
-        String greetingString = "   Henlooooo~! My name is " + BOTNAME + "!\n" +
-                "   What can I do for you today? :)";
-        System.out.println(greetingString);
+        printMessage("Henlooooo~! My name is " + BOTNAME);
+        printMessage("What can I do for you today? :)");
     }
 
     /**
@@ -39,13 +38,21 @@ public class Duke {
     }
 
     /**
+     * Print the requested message in the bot's formatting
+     * @param message The message to be printed
+     */
+    public static void printMessage(String message) {
+        System.out.println("    " + message);
+    }
+
+    /**
      * Prints the task added and the total size of the list.
      * @param addedTask Task that was added to the list.
      */
     public static void addedTaskReply(Task addedTask) {
-        String out = "    Wakarimashita! Task added to list:\n    " + addedTask +
-                "\n    The size of your task list is now: " + taskList.size();
-        System.out.println(out);
+        printMessage("Wakarimashita! Task added to list:");
+        printMessage(addedTask.toString());
+        printMessage("The size of your task list is now: " + taskList.size());
     }
 
     /**
@@ -56,8 +63,8 @@ public class Duke {
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task doneTask = taskList.get(taskId).setDone();
-            System.out.println("Great~! Task completed:");
-            System.out.println("    " + doneTask);
+            printMessage("Great~! Task completed:");
+            printMessage(doneTask.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskException();
         }
@@ -71,8 +78,9 @@ public class Duke {
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task deletedTask = taskList.remove(taskId);
-            System.out.println("    Okie! I've deleted the task from your list:");
-            System.out.println("    " + deletedTask + "\n    The size of your task list is now: " + taskList.size());
+            printMessage("Okie! I've deleted the task from your list:");
+            printMessage(deletedTask.toString());
+            printMessage("The size of your task list is now: " + taskList.size());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskException();
         }
@@ -150,7 +158,7 @@ public class Duke {
      */
     public static void printList() {
         if (taskList.size() < 1) {
-            System.out.println("    There are no tasks in your list! :c");
+            printMessage("There are no tasks in your list! :c");
             return;
         }
         System.out.println("    Tasks in your list are~: ");
@@ -164,7 +172,7 @@ public class Duke {
      * Quits the program and provides provisions for clean-up.
      */
     public static void quit() {
-        System.out.println("    Hope you had an enjoyable experience! Good-bye~");
+        printMessage("Hope you had an enjoyable experience! Good-bye~");
         System.exit(0);
     }
 }
