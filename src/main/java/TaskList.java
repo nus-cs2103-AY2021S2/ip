@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<String> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    public void addTask(final String task) {
+    public void addTask(final Task task) {
         taskList.add(task);
     }
 
@@ -17,7 +17,7 @@ public class TaskList {
         StringBuilder out = new StringBuilder();
 
         for (int i = 0; i < taskList.size(); i++) {
-            out.append(i);
+            out.append(i + 1);
             out.append(". ");
             out.append(taskList.get(i));
 

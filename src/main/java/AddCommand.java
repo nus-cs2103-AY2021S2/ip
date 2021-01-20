@@ -7,7 +7,7 @@ public class AddCommand implements Command {
 
     @Override
     public String execute(TaskList taskList) {
-        taskList.addTask(input);
+        taskList.addTask(new Task(input));
         return "added: " + input;
     }
 }
