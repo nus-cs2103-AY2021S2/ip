@@ -35,14 +35,16 @@ public class ToDoBeast {
                 System.out.println(line + "\tGood job! You've just completed this task:\n" + "\t\t" + currentTask + "\n" + line);
             }
             else {
-                String taskDescription = sc.nextLine();
+                Task newTask = null;
                 if (command.equals("todo")) {
-                    Task newTask = new Todo(taskDescription);
+                    newTask = new Todo(userInput[1]);
                     taskManager.addTask(newTask);
-                    System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
                 } else if (command.equals("deadline")) {
-
+                    String[] deadlineParams = userInput[1].split(" /");
+                    newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
                 }
+                System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
+
             }
             userInput = sc.nextLine().split(" ", 2);
             command = userInput[0];
