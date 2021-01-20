@@ -36,7 +36,7 @@ public class Duke {
             } catch (DukeDeadlineException e) {
                 System.out.println("Deadline command must follow the format: description /by time\n");
             } finally {
-                System.out.println("Let me know what to do!");
+                System.out.println("Hit me up boss.");
             }
         }
     }
@@ -55,9 +55,11 @@ public class Duke {
             // substring from index=1 to ignore the whitespace following "deadline", at index = 0.
             addToList(new Deadline(scanner.nextLine().substring(1)));
             break;
+        case "delete":
+            deleteTask(scanner.nextInt());
+            break;
         case "done":
-            int index = scanner.nextInt();
-            taskDone(index);
+            taskDone(scanner.nextInt());
             break;
         case "event":
             // substring from index=1 to ignore the whitespace following "event", at index = 0.
@@ -77,7 +79,7 @@ public class Duke {
 
     private void addToList(Task task) {
         tasks.add(task);
-        System.out.println("added: " + task + "\n");
+        System.out.println("A new challenger has appeared: " + task + "\n");
     }
 
     private void printList() {
@@ -94,13 +96,21 @@ public class Duke {
     private void taskDone(int index) {
         Task task = tasks.get(index - 1);
         task.markAsDone();
-        System.out.println("Nice! I shall mark this task as done: \n"
+        System.out.println("Impressive, yet another task has been done: \n"
                 + task
-                + "\nOne step closer to freedom :D\n");
+                + "\nOne step closer to freedom now boss.\n");
+    }
+
+    private void deleteTask(int index) {
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        System.out.println("Alrighty bossman. I shall wipe this task off the face of the earth: \n"
+                + task
+                + "\nGood riddance.\n");
     }
 
     private void shutDown() {
-        System.out.println("Bye bye, see you soon!\n");
+        System.out.println("See you soon boss!\n");
         System.exit(0);
     }
 }
