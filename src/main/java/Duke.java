@@ -10,9 +10,9 @@ public class Duke {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Hey there! This is Kums");
         System.out.println("How can i help?");
-        System.out.println("---------------------------------------");
         ArrayList<Task> list = new ArrayList<>();
         int listLength = 0;
+        System.out.println("---------------------------------------");
         String command = br.readLine();
         String[] arr = command.split(" ");
         System.out.println("---------------------------------------");

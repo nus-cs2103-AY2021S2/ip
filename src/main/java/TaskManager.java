@@ -20,7 +20,7 @@ public class TaskManager {
             }
             Task tobeDone = list.get(Integer.parseInt(info[1]) - 1);
             tobeDone.completed();
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println("    " + tobeDone);
         }  else if (info[0].equals("list")) {
             System.out.println("Here are the tasks in your list:");
@@ -32,7 +32,7 @@ public class TaskManager {
             if (taskIndex > listLength || taskIndex < 0) {
                 throw new DukeException("OOPS!!! There is no task in that line to delete");
             }
-            System.out.println(" Noted. I've removed this task: ");
+            System.out.println(" Noted. I've removed this task:");
             System.out.println(list.remove(taskIndex));
             listLength--;
             System.out.println("Now you have " + listLength + " tasks in the list.");
@@ -83,7 +83,7 @@ public class TaskManager {
             }
             list.add(task);
             listLength++;
-            System.out.println("Got it. I've added this task: ");
+            System.out.println("Got it. I've added this task:");
             System.out.println("    " + task);
             System.out.println("Now you have " + (listLength) + " tasks in the list.");
         }
