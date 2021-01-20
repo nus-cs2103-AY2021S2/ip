@@ -14,12 +14,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Parrot mode engaged");
         Scanner in = new Scanner(System.in);
-        String command;
+        String line;
         List<Task> store = new ArrayList<>();
+        String tokens[];
         do{
             System.out.print(separator + "Listening to your input: ");
-            command = in.nextLine();
-            switch(command){
+            line = in.nextLine();
+            tokens = line.split(" ");
+            switch(tokens[0]){
                 case "bye":
                     System.out.println(separator + "Goodbye from\n" + logo);
                     break;
@@ -28,10 +30,16 @@ public class Duke {
                         System.out.println(t.toString());
                     }
                     break;
+                case "done":
+                    int index = Integer.valueOf(tokens[1]) - 1;
+                    Task t = store.get(index);
+                    t.isDone = true;
+                    System.out.println("The following task is now marked as done:\n" + t.toString());
+                    break;
                 default:
-                    store.add(new Task(command,store.size()));
-                    System.out.println("Added: " + command);
+                    store.add(new Task(line,store.size()));
+                    System.out.println("Added: " + line);
             }
-        }while(!command.equals("bye"));
+        }while(!tokens[0].equals("bye"));
     }
 }
