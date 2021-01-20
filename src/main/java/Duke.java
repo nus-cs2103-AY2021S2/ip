@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
-        ArrayList<String> listOfText = new ArrayList<>();
+        ArrayList<Task> listOfTasks = new ArrayList<>();
 
         System.out.println("\t_____________________________________________________________");
         System.out.println("\t Hello! I'm Duke\n\t What can I do for you");
@@ -20,13 +20,29 @@ public class Duke {
             if (textInput.toLowerCase().equals("list")) {
                 int i = 1;
                 System.out.println("\t_____________________________________________________________");
-                for (String s : listOfText) {
-                    System.out.println("\t " + i + ". " + s);
+                for (Task task : listOfTasks) {
+                    System.out.println("\t " + i + "." + task);
                     i++;
                 }
                 System.out.println("\t_____________________________________________________________");
+            } else if (textInput.contains("done")) {
+                try {
+                    int i = Integer.parseInt(textInput.substring(5));
+                    Task task = listOfTasks.get(i - 1);
+                    task.completed();
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t Nice! I've marked this task as done:");
+                    System.out.println("\t   " + task);
+                    System.out.println("\t_____________________________________________________________");
+                } catch (NumberFormatException e) {
+                    System.out.println("INVALID COMMAND!");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("INVALID COMMAND!");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("INVALID COMMAND!");
+                }
             } else {
-                listOfText.add(textInput);
+                listOfTasks.add(new Task(textInput));
                 System.out.println("\t_____________________________________________________________");
                 System.out.println("\t added: " + textInput);
                 System.out.println("\t_____________________________________________________________");
