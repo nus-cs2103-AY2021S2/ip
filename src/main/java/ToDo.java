@@ -2,14 +2,15 @@ public class ToDo extends Task {
 
     public ToDo(String taskDescription) {
         this.taskDescription = taskDescription;
+        this.taskType = 'T';
     }
 
     @Override
     public String toString() {
         if (isDone) {
-            return "[X] " + this.taskDescription;
+            return String.format("[%c] [X] %s", this.taskType, this.taskDescription);
         } else {
-            return "[ ] " + this.taskDescription;
+            return String.format("[%c] [ ] %s", this.taskType, this.taskDescription);
         }
     }
 }

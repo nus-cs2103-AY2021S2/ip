@@ -1,7 +1,7 @@
-public class AddCommand implements Command{
-    private boolean isExitCommand = false;
-    private String taskDescription;
-    private TaskList taskList;
+public abstract class AddCommand implements Command{
+    protected boolean isExitCommand = false;
+    protected String taskDescription;
+    protected TaskList taskList;
 
     public AddCommand(String taskDescription) {
         this.taskDescription = taskDescription;

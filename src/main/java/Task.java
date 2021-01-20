@@ -1,6 +1,7 @@
 public abstract class Task {
     protected String taskDescription;
     protected boolean isDone;
+    protected char taskType;
 
     /**
      * Gets the task description

@@ -31,7 +31,7 @@ public class InputHandler {
                 }
 
             default:
-                return new AddCommand(userInput);
+                return new TodoCommand(userInput);
         }
     }
 }
