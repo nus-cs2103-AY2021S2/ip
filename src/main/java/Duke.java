@@ -33,7 +33,7 @@ public class Duke {
 
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
-            // System.out.println(params);
+
             try {
 
                 if (next.equals("bye")) {
@@ -103,13 +103,13 @@ public class Duke {
                     System.out.println(horizSep + "\n");
 
                 } else if (params[0].equals("event")) {
-                    System.out.println("params: " + Arrays.toString(params));
+
                     if (params.length == 1) {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
                     }
 
                     String[] eventParams = params[1].split(" /at ");
-                    System.out.println("eventParams: " + Arrays.toString(eventParams));
+
                     if (eventParams.length == 1) {
                         throw new DukeException("no date and time given for this Event!");
                     }
