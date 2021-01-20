@@ -1,10 +1,39 @@
 list
-todo read book
-todo read a very very very long book
+todo
+todo
+todo read long book
 list
-deadline finish report /by 23rd Jan
+deadline
+deadline
+deadline   /by
+deadline   /by
+deadline finish book /by
+deadline finish book /by
+deadline finish book /by tomorrow
 list
-event running competition /at Monday 2pm
-event lifting competition /at Tuesday 4pm
+event
+event
+event   /at
+event   /at
+event competition /at
+event competition /at
+event competition /at monday
 list
+todo go fishing
+deadline finish tutorial /by wednesday
+event play soccer /at thursday
+todo go to the gym
 list
+done 8
+list
+done 7
+list
+done 1
+list
+deadline eat dinner /by tonight
+list
+done 8
+list
+done 9
+list
+bye
