@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void list(ArrayList<Task> tasks) {
-        System.out.println("     Here are the tasks in your list");
+        System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println("     " + (i + 1) + "." + tasks.get(i));
         }
@@ -15,32 +15,41 @@ public class Duke {
 
     public static void bye() {
         System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("     _______________________________________\n");
     }
 
-    public static void done(Task task) {
-        task.completeTask();
-        System.out.println("     Nice! I've marked this task as done:\n     " + task);
+    public static void done(ArrayList<Task> tasks, String taskDescription) throws InvalidDescriptionException {
+        // add exception NumberFormatException and IndexOutOfBoundsException
+        try {
+            int index = Integer.parseInt(taskDescription.substring(1, 2)) - 1;
+            Task task = tasks.get(index);
+            task.completeTask();
+            System.out.println("     Nice! I've marked this task as done:\n     " + task);
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The number you entered is either too big " +
+                    "or smaller than 0. There are currently " + tasks.size() + " tasks");
+        }
     }
 
-    public static void addTask(String type, ArrayList<Task> tasks, Scanner sc) throws InvalidDescriptionException {
-        String taskDescription = sc.nextLine();
+    public static void addTask(String type, ArrayList<Task> tasks, String taskDescription) throws InvalidDescriptionException {
         Task task;
         if (taskDescription.equals("")) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+            throw new InvalidDescriptionException("☹ OOPS!!! The description of " + type + " cannot be empty.");
         } else if (type.equals("todo")) {
-            task = new ToDo(false, taskDescription);
-        } else if (!taskDescription.contains("/by") && !taskDescription.contains("/at")) {
-            throw new InvalidDescriptionException("☹ OOPS!!! The description format " + type + " is wrong.");
+            task = new ToDo(taskDescription);
+        } else if ((type.equals("deadline") && !taskDescription.contains("/by"))
+                || (type.equals("event")) && !taskDescription.contains("/at")) {
+            throw new InvalidDescriptionException("☹ OOPS!!! The description format of " + type + " is wrong.");
         } else {
             int index = type.equals("deadline") ? taskDescription.indexOf("/by") : taskDescription.indexOf("/at");
             String taskName = taskDescription.substring(0, index);
-            String dateTime = taskDescription.substring(index + 4, taskDescription.length());
+            String dateTime = taskDescription.substring(index + 4);
 
             if (type.equals("deadline")) {
-                task = new Deadline(false, taskName, dateTime);
+                task = new Deadline(taskName, dateTime);
             } else {
-                task = new Event(false, taskName, dateTime);
+                task = new Event(taskName, dateTime);
             }
         }
         tasks.add(task);
@@ -52,6 +61,7 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String userInput;
+        String taskDescription;
         ArrayList<Task> userTasks = new ArrayList<>();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -64,30 +74,27 @@ public class Duke {
         System.out.println("     _______________________________________\n");
 
         while (sc.hasNext()) {
-            userInput = sc.next();
-            System.out.println("     _______________________________________");
-            if (userInput.equals("list")) {
-                list(userTasks);
-            } else if (userInput.equals("bye")) {
-                bye();
-                break;
-            } else if (userInput.equals("done")) {
-                done(userTasks.get(sc.nextInt() - 1));
-            } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event") ) {
-                try{
-                    addTask(userInput, userTasks, sc);
-                } catch (InvalidDescriptionException ex) {
-                    System.out.println("     " + ex.getMessage());
-                }
-            } else {
-                // Could have just printed the exception message. But doing it to satisfy the minimal requirement.
-                try {
+            try {
+                userInput = sc.next();
+                taskDescription = sc.nextLine();
+                System.out.println("     _______________________________________");
+                if (userInput.equals("list")) {
+                    list(userTasks);
+                } else if (userInput.equals("bye")) {
+                    bye();
+                    break;
+                } else if (userInput.equals("done")) {
+                    done(userTasks, taskDescription);
+                } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event")) {
+                    addTask(userInput, userTasks, taskDescription);
+                } else {
                     blah();
-                } catch (InvalidInputException ex) {
-                    System.out.println("     " + ex.getMessage());
                 }
+            } catch (InvalidDescriptionException | InvalidInputException ex) {
+                System.out.println("     " + ex.getMessage());
+            } finally {
+                System.out.println("     _______________________________________\n");
             }
-            System.out.println("     _______________________________________\n");
         }
         sc.close();
     }
