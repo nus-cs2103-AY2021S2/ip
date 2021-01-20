@@ -16,65 +16,77 @@
 
     ____________________________________________________________
      Got it! I've added this task:
-       [T][ ] borrow
+       [T][ ] borrow_book
      Now you have 1 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it! I've added this task:
-       [D][ ] return (by: Sunday)
+       [D][ ] return_book (by: Sunday)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Got it! I've added this task:
-       [E][ ] project (at: Mon_2-4pm)
+       [E][ ] project_meeting (at: Mon_2-4pm)
      Now you have 3 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][ ] borrow
-     2.[D][ ] return (by: Sunday)
-     3.[E][ ] project (at: Mon_2-4pm)
+     1.[T][ ] borrow_book
+     2.[D][ ] return_book (by: Sunday)
+     3.[E][ ] project_meeting (at: Mon_2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [X] borrow
+       [X] borrow_book
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][X] borrow
-     2.[D][ ] return (by: Sunday)
-     3.[E][ ] project (at: Mon_2-4pm)
+     1.[T][X] borrow_book
+     2.[D][ ] return_book (by: Sunday)
+     3.[E][ ] project_meeting (at: Mon_2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [X] return
+       [X] return_book
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][X] borrow
-     2.[D][X] return (by: Sunday)
-     3.[E][ ] project (at: Mon_2-4pm)
+     1.[T][X] borrow_book
+     2.[D][X] return_book (by: Sunday)
+     3.[E][ ] project_meeting (at: Mon_2-4pm)
     ____________________________________________________________
 
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [X] project
+       [X] project_meeting
     ____________________________________________________________
 
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][X] borrow
-     2.[D][X] return (by: Sunday)
-     3.[E][X] project (at: Mon_2-4pm)
+     1.[T][X] borrow_book
+     2.[D][X] return_book (by: Sunday)
+     3.[E][X] project_meeting (at: Mon_2-4pm)
     ____________________________________________________________
 
+    ____________________________________________________________
+     Error: Please provide a task name!
+    ____________________________________________________________
+     Error: Please provide a task name!
+    ____________________________________________________________
+     Error: Please provide a task name!
+    ____________________________________________________________
+     Error: Please provide a valid due time!
+    ____________________________________________________________
+     Error: Please provide a valid event time!
+    ____________________________________________________________
+     Error: Unknown command!
     ____________________________________________________________
      Bye. Hope to see you again soon!
     ____________________________________________________________

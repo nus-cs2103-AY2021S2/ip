@@ -1,7 +1,7 @@
 list
-todo borrow book
-deadline return book /by Sunday
-event project meeting /at Mon_2-4pm
+todo borrow_book
+deadline return_book /by Sunday
+event project_meeting /at Mon_2-4pm
 list
 done 1
 list
@@ -9,4 +9,10 @@ done 2
 list
 done 3
 list
+deadline
+todo
+event
+deadline submit_assignment /by
+event lecture /at
+excuseme
 quit
