@@ -66,6 +66,7 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }while(!tokens[0].equals("bye"));
+        in.close();
     }
     private static String formatOrderedPrint(List<Task> tasks, int i){
         final int size = tasks.size();
