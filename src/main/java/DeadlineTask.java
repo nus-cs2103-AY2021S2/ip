@@ -8,7 +8,7 @@ public class DeadlineTask extends Task{
     @Override
     public String toString(){
         String taskRepresent = divideCommand[1] + " " + divideCommand[2]
-                + " (" + divideCommand[3].substring(1) + " " + divideCommand[4] + ")";
+                + " (" + divideCommand[3].substring(1) + ": " + divideCommand[4] + ")";
         if(this.getStatus()){
             return "[D][X] " + taskRepresent;
         }else{

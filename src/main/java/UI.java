@@ -23,5 +23,4 @@ public class UI {
     public void goodbye(){
         System.out.println("Goodbye for now.\nHope to see you soon!");
     }
-
 }

@@ -2,24 +2,28 @@ public class Task {
     String task;
     boolean done = false;
 
-    Task(String task){
+    Task(String task) {
         this.task = task;
     }
 
-    public void markDone(){
+    public void markDone() {
         this.done = true;
     }
 
-    public boolean getStatus(){
+    public boolean getStatus() {
         return this.done;
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.task;
     }
 
     @Override
-    public String toString(){
-        return this.task;
+    public String toString() {
+        if (this.getStatus()) {
+            return "[X] " + this.task;
+        } else {
+            return "[ ] " + this.task;
+        }
     }
 }

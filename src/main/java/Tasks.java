@@ -11,13 +11,14 @@ public class Tasks {
     //Adds a task to the task list.
     public void addTask(Task task) {
         Tasks.add(task);
-        System.out.println("added: " + task);
+        System.out.println("Got it! Added: \n" + task);
+        System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 
     //Marks a task as done
     public void markAsDone(int idx) {
         Tasks.get(idx - 1).markDone();
-        System.out.println("Task " + idx + " is complete:\n" + "[X] " + Tasks.get(idx - 1));
+        System.out.println("Task " + idx + " is complete:\n" + Tasks.get(idx - 1));
     }
 
     //Retrieves the number of tasks
@@ -29,12 +30,15 @@ public class Tasks {
     public void printTasks() {
         System.out.println("Contents: ");
         for (int j = 0; j < Tasks.size(); j++) {
-            if (Tasks.get(j).getStatus()) {
-                System.out.println(j + 1 + ".[X] " + Tasks.get(j));
+            if (Tasks.get(j) instanceof TodoTask) {
+                System.out.println(j + 1 + "." + Tasks.get(j));
+            } else if (Tasks.get(j) instanceof DeadlineTask) {
+                System.out.println(j + 1 + "." + Tasks.get(j));
+            } else if (Tasks.get(j) instanceof EventTask) {
+                System.out.println(j + 1 + "." + Tasks.get(j));
             } else {
-                System.out.println(j + 1 + ".[ ] " + Tasks.get(j));
+                System.out.println(j + 1 + "." + Tasks.get(j));
             }
         }
-        System.out.println("Now you have " + numOfTasks() + " items in your list");
     }
 }
