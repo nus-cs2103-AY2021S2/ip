@@ -10,7 +10,7 @@ public class Task {
     Task(String taskName) {
         this.taskName = taskName;
         this.index = capacity + 1;
-        this.done = "";
+        this.done = " ";
         capacity++;
         add(this);
     }
@@ -20,16 +20,18 @@ public class Task {
     }
 
 
-    public static final void done(int i) throws DukeException {
+    public static final void done(int i) {
         try {
             Task t = taskList.get(i - 1);
             taskList.get(i - 1).done = "X";
             System.out.println(Format.UPPER + "Wah~ You done the task: "
                     + " " + t.toString() + Format.LOWER);
-        } catch (IndexOutOfBoundsException err) {
-            throw new DukeException(Format.chatBox("Walao!No such task!"));
+        } catch (IndexOutOfBoundsException e) {
+            DukeException.taskErrorException();
         }
     }
+
+
 
     public String getTaskName() {
         return taskName;
