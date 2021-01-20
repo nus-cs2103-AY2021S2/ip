@@ -41,22 +41,22 @@ Now you have 5 tasks in the list.
 
 ---------------------------------------
 Nice! I 've marked this task as done
-[T][X] read book
+[T][?] read book
 
 ---------------------------------------
 
 ---------------------------------------
 Nice! I 've marked this task as done
-[T][X] join sports club
+[T][?] join sports club
 
 ---------------------------------------
 
 ---------------------------------------
 Here are the tasks in your list:
-1.[T][X] read book
+1.[T][?] read book
 2.[D][ ] return book (by: June 6th)
 3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-4.[T][X] join sports club
+4.[T][?] join sports club
 5.[T][ ] borrow book
 
 ---------------------------------------
