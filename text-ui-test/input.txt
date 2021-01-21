@@ -15,4 +15,14 @@ todo
 deadline /by tomorrow
 event /by now
 list
+delete
+delete1
+delete 1
+delete 4
+delete 9
+list
+delete 1
+delete 1
+delete 1
+delete 1
 bye

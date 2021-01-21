@@ -52,5 +52,31 @@ How may I help you?
 3. [E][X] bro's wedding (at: summer vacation)
 4. [T][X] drink coffee
 
+>>> Sorry! 'delete' requires typing the list number of the task.
+
+>>> Sorry! The command's format is invalid.
+
+>>> Acknowledged. Task deleted:
+   [T][X] make coffee
+
+>>> Sorry! The command's format is invalid.
+
+>>> Sorry! The command's format is invalid.
+
+>>> 1. [D][X] this project (by: midnight)
+2. [E][X] bro's wedding (at: summer vacation)
+3. [T][X] drink coffee
+
+>>> Acknowledged. Task deleted:
+   [D][X] this project (by: midnight)
+
+>>> Acknowledged. Task deleted:
+   [E][X] bro's wedding (at: summer vacation)
+
+>>> Acknowledged. Task deleted:
+   [T][X] drink coffee
+
+>>> Sorry! The command's format is invalid.
+
 >>> Bye. See you soon!
 
