@@ -3,11 +3,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeDateParserException {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         String userInput = "";
-
         printSegment();
         System.out.println("\tHello! I'm Duke");
         System.out.println("\tWhat can I do for you?");
@@ -48,7 +47,7 @@ public class Duke {
                 case "bye":
                     break;
                 default: {
-                    Task newTask = null;
+                    Task newTask;
                     try {
                         newTask = parseTask(userInputArray);
                         tasks.add(newTask);
@@ -71,7 +70,7 @@ public class Duke {
         printSegment();
     }
 
-    static Task parseTask(String[] userInputArray) throws DukeException {
+    static Task parseTask(String[] userInputArray) throws DukeException, DukeDateParserException {
         Task newTask;
         switch (userInputArray[0]) {
             case "todo": {
@@ -83,12 +82,12 @@ public class Duke {
             }
             case "deadline": {
                 String[] deadlineInputs = userInputArray[1].split("(\\s/by\\s)+");
-                newTask = new Deadline(deadlineInputs[0].trim(), deadlineInputs[1].trim());
+                newTask = new Deadline(deadlineInputs[0].trim(), DateParser.parseDateTime(deadlineInputs[1].trim()));
                 break;
             }
             case "event": {
                 String[] eventInputs = userInputArray[1].split("(\\s\\/at\\s)+");
-                newTask = new Event(eventInputs[0].trim(), eventInputs[1].trim());
+                newTask = new Event(eventInputs[0].trim(), DateParser.parseDateTime(eventInputs[1].trim()));
                 break;
             }
             default:
