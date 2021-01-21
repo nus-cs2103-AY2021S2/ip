@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,13 +13,32 @@ public class Duke {
         formatBox(introduction);
 
         Scanner sc = new Scanner(System.in);
+        String[] itemArr = new String[100];
+        for (int i = 0; i < 100; i++) itemArr[i] = "";
+        String list;
         String input;
+        int j = 0;
 
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye"))
                 break;
-            formatBox(input);
+            else if (input.equals("list")) {
+                System.out.println("------------------------------------");
+                for (int i = 0; i < itemArr.length; i++) {
+                    if (itemArr[i].equals("")) break;
+                    System.out.println(Integer.toString(i) + ". " + itemArr[i]);
+                }
+                System.out.println("------------------------------------");
+            } else {
+                // add to list
+                itemArr[j] = input;
+                j++;
+                // print output
+                String formattedInput = "added: ";
+                formattedInput = formattedInput.concat(input);
+                formatBox(formattedInput);
+            }
         }
         String bye = "Bye. Hope to see you again soon!";
         formatBox(bye);
@@ -29,8 +49,8 @@ public class Duke {
      * @param str input string within chat boxes
      */
     public static void formatBox(String str) {
-        System.out.println("------------------------------------\n");
+        System.out.println("------------------------------------");
         System.out.println(str);
-        System.out.println("------------------------------------\n");
+        System.out.println("------------------------------------");
     }
 }
