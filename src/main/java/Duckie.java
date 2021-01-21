@@ -3,9 +3,27 @@ package main.java;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class DukeIncrements {
+/**
+ * Duckie is an interactive chatbot that helps with user's tasks.
+ *
+ * It supports todos, events, and deadlines.
+ *      todo: adds task to list
+ *      event: adds task to list and specifies a time for the event with "/at"
+ *      deadline: adds task to list and specifies a time for the deadline with "/by"
+ *
+ * It checks off a task as done with "done" followed by task number.
+ *
+ * It also supports deletion of tasks with "delete" followed by task number.
+ *
+ * Exceptions are thrown for invalid inputs.
+ *
+ * @author Wei Yutong
+ * @version CS2103T AY20/21 Semester 2, Individual Project
+ */
+
+public class Duckie {
     public static void main(String[] args) {
-        System.out.println("yo im Duke!");
+        System.out.println("yo im Duckie! quack quack");
         System.out.println("what can i do for ya ;)");
 
         String line = ":) :) :) :) :) :) :) :) :) :) :) :) :) :) :) :)";
@@ -24,7 +42,7 @@ public class DukeIncrements {
                 if (input.equalsIgnoreCase("todo") ||
                         input.equalsIgnoreCase("event") ||
                             input.equalsIgnoreCase("deadline")) {
-                    throw new DukeException("there is nothing to do!");
+                    throw new DuckieException("there is nothing to do!");
                 }
 
                 if (input.equalsIgnoreCase("bye")) {
@@ -73,7 +91,7 @@ public class DukeIncrements {
 
                 } else if (str[0].equalsIgnoreCase("event")) {
                     if (!str[1].contains("/at")) {
-                        throw new DukeException("oops! please specify time using '/at'");
+                        throw new DuckieException("oops! please specify the time of your event using '/at'");
                     }
                     System.out.println(line);
                     String[] strE = str[1].split("/at", 2);
@@ -93,7 +111,7 @@ public class DukeIncrements {
 
                 } else if (str[0].equalsIgnoreCase("deadline")) {
                     if (!str[1].contains("/by")) {
-                        throw new DukeException("oops! please specify time using '/by'");
+                        throw new DuckieException("oops! please specify deadline using '/by'");
                     }
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
@@ -126,9 +144,10 @@ public class DukeIncrements {
                         System.out.println("yay! you have " + count + " tasks left to do!");
                     }
                 } else {
-                    throw new DukeException("invalid input! start with todo/event/deadline");
+                    throw new DuckieException("invalid input! please start with the word 'todo', 'event' or 'deadline',"
+                            + " followed by your task.");
                 }
-            } catch (DukeException e) {
+            } catch (DuckieException e) {
                 System.out.println(e.toString());
             }
         }
@@ -136,18 +155,34 @@ public class DukeIncrements {
     }
 }
 
+/**
+ * Task encapsulates a task with String description and boolean isDone.
+ * It supports getting the status of the task and marking it as done.
+ */
 class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Construct a Task object with a given description and isDone set to false.
+     * @param description The description of this task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
+
+    /**
+     * Get the current status of the task.
+     * @return Returns a cross if done, otherwise whitespace.
+     */
     public String getStatus() {
         return (isDone ? "\u2718" : " ");
     }
 
+    /**
+     * Sets the status of the task to true.
+     */
     public void markDone() {
         isDone = true;
     }
@@ -157,6 +192,11 @@ class Task {
         return "[" + getStatus() + "] " + description;
     }
 }
+
+/**
+ * Deadline inherits from Task. It encapsulates a deadline with an additional String by.
+ * Deadline is specified by [D].
+ */
 
 class Deadline extends Task {
     protected String by;
@@ -171,17 +211,27 @@ class Deadline extends Task {
     }
 }
 
+/**
+ * ToDo inherits from Task.
+ * ToDo is specified by [T].
+ */
 class ToDo extends Task {
     public ToDo(String description) {
+
         super(description);
     }
 
     @Override
     public String toString() {
+
         return "[T]" + super.toString();
     }
 }
 
+/**
+ * Event inherits from Task. It encapsulates an event with an additional String at.
+ * Event is specified by [E].
+ */
 class Event extends Task {
     protected String at;
     public Event (String description, String at) {
@@ -195,8 +245,11 @@ class Event extends Task {
     }
 }
 
-class DukeException extends Exception {
-    public DukeException(String message) {
+/**
+ * DuckieException inherits from Exception.
+ */
+class DuckieException extends Exception {
+    public DuckieException(String message) {
         super(message);
     }
 }
