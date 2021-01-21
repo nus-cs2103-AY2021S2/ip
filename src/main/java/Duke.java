@@ -119,11 +119,6 @@ public class Duke {
 
                     Output.printDeleteMsg(deleteTask.getStatusIcon(), deleteTask.getDescription(), n);
                     break;
-                default:
-                    inputArr.set(n, new Task(taskDesc, ""));
-                    n++;
-                    Output.printAddedMsg(input);
-                    break;
             }
             if(input.equals("bye")) break;
 
