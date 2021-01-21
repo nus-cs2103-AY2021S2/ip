@@ -92,11 +92,15 @@ public class Duke {
                         } else {
                             System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
                         }
-
                         input = sc.nextLine();
+                    } else {
+                        throw new NoKeywordException("No such action.");
                     }
                 } catch (MissingArgumentException error) {
-                    System.out.println("Missing arguments");
+                    System.out.println("Master, I'm afraid you're missing the task number.");
+                    input = sc.nextLine();
+                } catch (NoKeywordException error) {
+                    System.out.println("Sorry Master but I don't understand what you mean.");
                     input = sc.nextLine();
                 }
             }
