@@ -1,5 +1,5 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 public class DukeList {
     private ArrayList<String> list;
@@ -12,6 +12,9 @@ public class DukeList {
         list.add(item);
     }
 
+    /**
+     * Prints DukeList object
+     */
     public void print() {
         int size = list.size();
         for (int i = 0; i < size; i++) {
