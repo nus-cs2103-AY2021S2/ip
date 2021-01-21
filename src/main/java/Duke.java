@@ -162,6 +162,20 @@ public class Duke {
 
                     input = reader.nextLine();
 
+                // user wants to delete a task from the list
+                } else if (input.startsWith("delete")) {
+                    String[] split = input.split(" ");
+                    int index = Integer.parseInt(split[1]) - 1;
+
+                    Task to_remove = taskArrayList.get(index);
+                    taskArrayList.remove(index);
+
+                    System.out.println("Noted. I have removed this task:");
+                    System.out.println(to_remove.taskStatus());
+                    System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+
+                    input = reader.nextLine();
+
                 // user input is unknown
                 } else {
                     throw new DukeException("unknown");
