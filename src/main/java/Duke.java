@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         greet();
 
@@ -20,55 +20,67 @@ public class Duke {
             Integer subcommand;
 
             System.out.println("    ____________________________________________________________");
-            switch (command) {
-                case "bye":     // exit
-                    byebye();
-                    break user_active;
+            try {
+                switch (command) {
+                    case "bye":     // exit
+                        byebye();
+                        break user_active;
 
-                case "list":    // regurgitate tasks
-                    for (int t = 0; t < Tasks.size(); t ++) {
-                        System.out.println("     " + (t + 1) +  "." + 
-                                Tasks.get(t).TaskInformation());
-                    }
-                    break;
+                    case "list":    // regurgitate tasks
+                        for (int t = 0; t < Tasks.size(); t ++) {
+                            System.out.println("     " + (t + 1) +  "." + 
+                                    Tasks.get(t).TaskInformation());
+                        }
+                        break;
 
-                case "done":
-                    Integer taskNumber = scanner.nextInt();
-                    Tasks.get(taskNumber - 1).markDone();
-                    break;
+                    case "done":
+                        Integer taskNumber = scanner.nextInt();
+                        Tasks.get(taskNumber - 1).markDone();
+                        break;
 
-                case "todo":
-                    commandcont = scanner.nextLine();
-                    Tasks.add(new ToDo(commandcont.substring(1)));
-                    updateTasks(Tasks);
-                    break;
+                    case "todo":
+                        commandcont = scanner.nextLine();
+                        if (commandcont.isEmpty()) { throw new Exception ("     missing task description!"); }
 
-                case "deadline":
-                    commandcont = scanner.nextLine();
-                    subcommand = commandcont.indexOf("/by");
-                    if (subcommand < 0) {
-                        System.out.println("     deadline command requires /by subcommand!");
-                    } else {
-                        Tasks.add(new Deadline(commandcont.substring(1, subcommand - 1), 
-                            commandcont.substring(subcommand + 4, commandcont.length())));
+                        Tasks.add(new ToDo(commandcont.trim()));
                         updateTasks(Tasks);
-                    }
-                    break;
+                        break;
 
-                case "event":
-                    commandcont = scanner.nextLine();
-                    subcommand = commandcont.indexOf("/at");
-                    if (subcommand < 0) {
-                        System.out.println("     event command requires /by subcommand!");
-                    } else {
-                        Tasks.add(new Event(commandcont.substring(1, subcommand - 1), 
-                            commandcont.substring(subcommand + 4, commandcont.length())));
+                    case "deadline":
+                        commandcont = scanner.nextLine().trim();
+                        subcommand = commandcont.indexOf("/by");
+                        if (subcommand < 0) { throw new Exception ("     missing /by subcommand!"); }
+
+                        String By = commandcont.substring(subcommand + 3).trim();
+                        if (By.isEmpty()) { throw new Exception ("     missing /by description!"); }
+
+                        commandcont = commandcont.substring(0, subcommand - 1).trim();
+                        if (commandcont.isEmpty()) { throw new Exception ("     missing task description!"); }
+
+                        Tasks.add(new Deadline(commandcont, By));
                         updateTasks(Tasks);
-                    }
-                    break;
-                    
-                default:    // appends to list
-                    break;
+                        break;
+
+                    case "event":
+                        commandcont = scanner.nextLine().trim();
+                        subcommand = commandcont.indexOf("/at");
+                        if (subcommand < 0) { throw new Exception ("     missing /at subcommand!"); }
+
+                        String At = commandcont.substring(subcommand + 3).trim();
+                        if (At.isEmpty()) { throw new Exception ("     missing /at description!"); }
+
+                        commandcont = commandcont.substring(0, subcommand - 1).trim();
+                        if (commandcont.isEmpty()) { throw new Exception ("     missing task description!"); }
+
+                        Tasks.add(new Event(commandcont, At));
+                        updateTasks(Tasks);
+                        break;
+                        
+                    default:    // appends to list
+                        System.out.println("     D: what do you mean...");
+                }
+            } catch (Exception E) {
+                System.out.println(E.getMessage());
             }
             System.out.println("    ____________________________________________________________\n");
         }
