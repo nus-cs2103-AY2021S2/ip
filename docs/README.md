@@ -3,21 +3,43 @@
 ## Features 
 
 ### Feature 1 - Add task to list
-Enables the user to add tasks into the list
+Enables the user to add tasks(ToDos, Deadlines, Events) into the list
 
 ## Usage
 
-### `<any task to add to list>` - Type out the task to be added
+### `todo/deadline/event` - Use one of the three keywords
 
-The task will be added to the list.
+The appropriate task will be added to the list.
 
 Example of usage: 
 
-`apples`
+`todo buy bread`
 
 Expected outcome:
 
-`added: apples`
+`Got it. I've added this task: 
+       [T][ ] buy bread
+     Now you have 5 tasks in the list.`
+
+Example of usage: 
+
+`deadline complete assignment /By tmr 2359`
+
+Expected outcome:
+
+`Got it. I've added this task: 
+       [D][ ] complete assignment (By tmr 2359)
+     Now you have 6 tasks in the list.`
+	 
+Example of usage: 
+
+`event attend meeting /Fri 2pm-3pm`
+
+Expected outcome:
+
+`Got it. I've added this task: 
+       [E][ ] attend meeting (Fri 2pm-3pm)
+     Now you have 7 tasks in the list.`
 
 ### Feature 2 - View list
 Enables the user to view all the tasks in the list
@@ -34,7 +56,8 @@ Example of usage:
 
 Expected outcome:
 
-`1. apples`
+`Here are the tasks in your list:
+     1.[T][X] read book`
 
 ### Feature 3 - Mark Task as Done
 Enables the user to mark a task as done
@@ -52,4 +75,4 @@ Example of usage:
 Expected outcome:
 
 `Nice! I've marked this task as done: 
-       [X] Second Task`
+       [T][X] Second Task`
