@@ -1,11 +1,9 @@
 public class Task {
-    public static int totalTasks = 0;
     private boolean isDone;
     private String taskDetail;
     Task(String taskDetail){
         this.taskDetail = taskDetail;
         this.isDone = false;
-        Task.totalTasks++;
     }
 
     public boolean getTaskStatus(){

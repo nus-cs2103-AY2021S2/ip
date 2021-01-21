@@ -13,6 +13,7 @@ public class Duke {
         final String exitCommand = "bye";
         final String listCommand = "list";
         final String doneCommand = "done";
+        final String deleteCommand = "delete";
         final String addTodoCommand = "todo";
         final String addDeadlineCommand = "deadline";
         final String addEventCommand = "event";
@@ -47,7 +48,7 @@ public class Duke {
                         else {
                             newTask = new ToDo(command.split("todo ")[1]);
                             Duke.printAddedTask(newTask);
-                            userList.add(newTask);
+//                            userList.add(newTask);
                         }
                         break;
                     case addDeadlineCommand:
@@ -55,14 +56,17 @@ public class Duke {
                         //offset of 9 to remove the "deadline " from the statement
                         newTask = new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
                         Duke.printAddedTask(newTask);
-                        userList.add(newTask);
                         break;
                     case addEventCommand:
                         String[] eventTimeAndTask = command.split("/at");
                         //offset of 6 to remove "event " frm statement
                         newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
                         Duke.printAddedTask(newTask);
-                        userList.add(newTask);
+//                        userList.add(newTask);
+                        break;
+                    case deleteCommand:
+                        int taskNumToBeDeleted = Integer.parseInt(commandArr[1]);
+                        Duke.printDeletedTask(taskNumToBeDeleted);
                         break;
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -90,7 +94,16 @@ public class Duke {
     private static void printAddedTask(Task task){
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + Task.totalTasks + " tasks in the list.");
+        userList.add(task);
+        System.out.println("Now you have " + (userList.size()) + " tasks in the list.");
+        System.out.println(HORIZONTAL_RULE);
+    }
+
+    private static void printDeletedTask(int taskNumber){
+        Task taskToBeDeleted = userList.remove(taskNumber - 1);
+        System.out.println("Noted. I've removed this task");
+        System.out.println(taskToBeDeleted);
+        System.out.println("Now you have " + (userList.size()) + " tasks in the list.");
         System.out.println(HORIZONTAL_RULE);
     }
 
