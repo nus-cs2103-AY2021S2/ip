@@ -31,6 +31,9 @@ public class Duke {
                 case EVENT:
                     addThisTask(Parser.getEvent(input));
                     break;
+                case DELETE:
+                    removeTask(Parser.getDeleteIndex(input));
+                    break;
                 case BYE:
                     isOver = true;
                     farewell();
@@ -74,6 +77,18 @@ public class Duke {
             completedTask.complete();
             System.out.println(" Marked. How cool is that?");
             System.out.println("  " + completedTask);
+        } else {
+            throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
+        }
+    }
+
+    public static void removeTask(int index) throws TaskIndexOutOfBoundException {
+        if (index < tasks.size()) {
+            Task removingTask = tasks.get(index);
+            tasks.remove(index);
+            System.out.println(" Following task is removed:");
+            System.out.println("  " + removingTask);
+            System.out.println(" Now you have " + tasks.size() + " tasks.");
         } else {
             throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
         }
