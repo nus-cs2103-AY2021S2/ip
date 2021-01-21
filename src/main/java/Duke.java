@@ -42,7 +42,7 @@ public class Duke {
                     case "done":
                         Task task = itemList.get(Integer.parseInt(input[1]) - 1);
                         task.markDone();
-                        System.out.println("Alright, I will mark this as done. \n" + input[1] + ". " + task.toString());
+                        System.out.println("Alright, I will mark this as done.\n" + input[1] + ". " + task.toString());
                         break;
                     case "todo":
                         for (int i = 1; i < input.length; i++) {
@@ -50,7 +50,7 @@ public class Duke {
                         }
                         itemList.add(new Todo(joined));
                         count++;
-                        System.out.println("Added " + raw_in + "\nYou now have " + count + " items in your list. ");
+                        System.out.println("Added " + raw_in + "\nYou now have " + count + " items in your list.");
                         break;
                     case "deadline":
                         int seq = 0;
@@ -65,7 +65,7 @@ public class Duke {
 
                         itemList.add(new Deadline(joined, timing.trim()));
                         count++;
-                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list. ");
+                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
                         break;
                     case "event":
                         int seq2 = 0;
@@ -78,7 +78,7 @@ public class Duke {
                         }
                         itemList.add(new Event(joined, timing.trim()));
                         count++;
-                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list. ");
+                        System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
                         break;
                 }
             }
