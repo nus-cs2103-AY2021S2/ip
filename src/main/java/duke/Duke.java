@@ -52,6 +52,9 @@ public class Duke {
                 case "event":
                     addEvent(input, tokens);
                     break;
+                case "delete":
+                    delete(input, tokens);
+                    break;
                 default:
                     throw new UnsupportedOperationException();
                 }
@@ -149,6 +152,26 @@ public class Duke {
         write("  [" + task.getStatusIcon() + "] " + task.getDescription());
     }
 
+    static void delete(String input, String[] tokens) throws IOException {
+        if (tokens.length < 2) {
+            throw new DukeException("Please specify a number");
+        }
+
+        int selection;
+        try {
+            selection = Integer.parseInt(tokens[1]);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Invalid number");
+        }
+
+        if (selection < 1 || selection > tasks.size()) {
+            throw new DukeException("Invalid number");
+        }
+        Task task = tasks.get(selection - 1);
+        tasks.remove(selection - 1);
+        writeDeleteTask(task);
+    }
+
     static void write(String line) throws IOException {
         out.write(divider);
         out.write('\t');
@@ -172,6 +195,14 @@ public class Duke {
     static void writeAddTask(Task task) throws IOException {
         write(new String[]{
             "Got it. I've added this task:",
+            "  " + task,
+            "Now you have " + tasks.size() + " tasks in the list."
+        });
+    }
+
+    static void writeDeleteTask(Task task) throws IOException {
+        write(new String[]{
+            "Noted. I've removed this task:",
             "  " + task,
             "Now you have " + tasks.size() + " tasks in the list."
         });
