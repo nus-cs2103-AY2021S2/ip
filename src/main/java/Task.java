@@ -1,10 +1,12 @@
-public class Task {
-    private String message;
+public abstract class Task {
+    private String tag;
     private boolean complete;
+    private String message;
 
-    public Task(String message) {
+    protected Task(String tag, String message) {
+        this.tag = tag;
+        this.complete = false;
         this.message = message;
-        complete = false;
     }
 
     public void setCompletion(boolean complete) {
@@ -14,6 +16,6 @@ public class Task {
     @Override
     public String toString() {
         String status = complete ? "[X] " : "[ ] ";
-        return status + message;
+        return "[" + tag + "]" + status + message;
     }
 }

@@ -7,7 +7,7 @@ public class Duke {
         ArrayList<Task> ls = new ArrayList<>();
 
         // greet
-        System.out.println(formatMessage("Hello! I'm Duke\nWhat can I do for you?"));
+        printMessage("Hello! I'm Duke\nWhat can I do for you?");
 
         // setup scanner for inputs
         Scanner sc = new Scanner(System.in);
@@ -19,29 +19,46 @@ public class Duke {
                 // list
                 printList(ls);
             } else {
-                String[] splitInput = input.split(" ");
-                if (splitInput.length == 2 && splitInput[0].equals("done")) {
+                String[] splitInput = input.split(" ", 2);
+                if (splitInput[0].equals("done")) {
                     // done
                     int taskNum = Integer.parseInt(splitInput[1]);
                     Task finishedTask = ls.get(taskNum - 1);
                     finishedTask.setCompletion(true);
-                    System.out.println(formatMessage("Nice! I've marked this task as done:\n   " + finishedTask));
+                    printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
                 } else {
-                    // add
-                    System.out.println(formatMessage("added: " + input));
-                    ls.add(new Task(input));
+                    if (splitInput[0].equals("todo")) {
+                        // add todo
+                        addTask(ls, new ToDo(splitInput[1]));
+                    } else if (splitInput[0].equals("deadline")) {
+                        // add deadline
+                        String[] details = splitInput[1].split(" /by ");
+                        addTask(ls, new Deadline(details[0], details[1]));
+                    } else if (splitInput[0].equals("event")) {
+                        // add event
+                        String[] details = splitInput[1].split(" /at ");
+                        addTask(ls, new Deadline(details[0], details[1]));
+                    }
                 }
             }
             input = sc.nextLine();
         }
 
         // exit
-        System.out.println(formatMessage("Bye. Hope to see you again soon!"));
+        printMessage("Bye. Hope to see you again soon!");
         sc.close();
     }
 
+    // add task function
+    private static void addTask(ArrayList<Task> ls, Task addedTask) {
+        ls.add(addedTask);
+        String numOfTasks = ls.size() + (ls.size() > 1 ? " tasks" : " task");
+        printMessage(
+                "Got it. I've added this task:\n  " + addedTask + "\nNow you have " + numOfTasks + " in the list.");
+    }
+
     // prints list item number and string
-    public static void printList(ArrayList<Task> ls) {
+    private static void printList(ArrayList<Task> ls) {
         System.out.println("    ____________________________________________________________");
         for (int i = 0; i < ls.size(); i++) {
             System.out.println("     " + (i + 1) + "." + ls.get(i).toString());
@@ -50,9 +67,9 @@ public class Duke {
     }
 
     // format for greeting, echo and exit
-    public static String formatMessage(String message) {
+    private static void printMessage(String message) {
         String newMessage = message.replaceAll("\n", "\n     ");
-        return ("    ____________________________________________________________\n" + "     " + newMessage + "\n"
-                + "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n" + "     " + newMessage
+                + "\n" + "    ____________________________________________________________\n");
     }
 }
