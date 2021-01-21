@@ -64,9 +64,12 @@ public class DukeSimulator {
 
     private void addTask(String command) throws DukeException {
         String[] parsedCommand = command.split(" ", 2);
+        if(parsedCommand.length == 1) {
+            throw new DukeMissingDescriptionException(parsedCommand[0]);
+        }
         Task t;
         if (parsedCommand[0].equals("todo")) {
-            t = new ToDo(parsedCommand[1]);
+            t = toDoMaker(parsedCommand[1]);
         } else if (parsedCommand[0].equals("deadline")) {
             String[] ppCmd = parsedCommand[1].split(" /by ", 2);
             t = new Deadline(ppCmd[0], ppCmd[1]);
@@ -84,6 +87,18 @@ public class DukeSimulator {
                 + "\t" + t.toString() + "\n" + taskCount + line;
         System.out.print(addTask);
     }
+
+    private Task toDoMaker(String command) throws DukeMissingDescriptionException {
+        if(command.equals("")) {
+            throw new DukeMissingDescriptionException("todo");
+        } else {
+            return new ToDo(command);
+        }
+    }
+
+//    private Task deadlineMaker(String command) {
+//
+//    }
 
     private void printList() {
         int index = 1;
