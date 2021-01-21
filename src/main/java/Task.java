@@ -17,7 +17,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskName;
-        //return "["+this.getStatus()+"] " + this.taskName;
+        return "["+this.getStatus()+"] " + this.taskName;
     }
 }

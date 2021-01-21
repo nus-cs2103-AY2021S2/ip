@@ -24,12 +24,12 @@ public class Duke {
                 System.out.println("     Ganbatte ne!");
                 command = sc.nextLine();
 
-//            } else if(command.startsWith("done")){
-//                int taskNum = Integer.valueOf(command.substring(5));
-//                tasks.get(taskNum-1).setCompleted();
-//                System.out.println("     Otsukare! I've marked this task as done:");
-//                System.out.println("       " + tasks.get(taskNum - 1).toString());
-//                command = sc.nextLine();
+            } else if(command.startsWith("done")){
+                int taskNum = Integer.valueOf(command.substring(5));
+                tasks.get(taskNum-1).setCompleted();
+                System.out.println("     Otsukare! I've marked this task as done:");
+                System.out.println("       " + tasks.get(taskNum - 1).toString());
+                command = sc.nextLine();
 
             } else {
                 System.out.println("     Hai, added: " + command);
