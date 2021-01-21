@@ -32,19 +32,6 @@ public class Duke {
             }
             else if(str.equals("list")){
 
-                /*
-                if(count == 0){
-                    System.out.println("    No items in the list");
-                    System.out.println("    ____________________________________________________________\n");
-                }
-                else{
-                    for(int i = 0; i < count; i++){
-                        int num = i + 1;
-                        System.out.println("    " + num + ". " + strArr[i]);
-                    }
-                    System.out.println("    ____________________________________________________________\n");
-                }
-                */
 
                 if(TaskList.isEmpty()){
                     System.out.println("    No tasks in the list");
@@ -67,7 +54,7 @@ public class Duke {
                     if(!TaskList.isEmpty() && tNum <= TaskList.size() && tNum > 0){
                         System.out.println("    Nice! I've marked this task as done:");
                         TaskList.get(tNum - 1).markAsDone();
-                        System.out.println("       " + TaskList.get(tNum - 1));
+                        System.out.println("       " + TaskList.get(tNum - 1) + "\n");
                         System.out.println("    ____________________________________________________________\n");
                     }
                     else{
@@ -81,16 +68,52 @@ public class Duke {
                     }
 
                 }
-                else {
-                    strArr[count] = str;
-                    System.out.println("    added: " + strArr[count]);
-                    System.out.println("    ____________________________________________________________\n");
-                    count++;
 
+                else if(str.contains("todo")){
+                    String newStr = str.substring(5);
+                    strArr[count] = newStr;
+                    count++;
                     //create task
-                    Task t = new Task(str);
                     //add task to taskList;
-                    TaskList.add(t);
+                    //TaskList.add(new Todo(newStr));
+                    Todo tdtask = new Todo(newStr);
+                    TaskList.add(tdtask);
+                    System.out.println("     Got it. I've added this task:\n" +
+                            "       " + TaskList.get(count - 1) + "" +
+                            "     Now you have " + count + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
+                }
+                else if(str.contains("deadline") && str.contains("/")){
+                    //task description
+                    String tdStr = str.substring(9, str.indexOf('/') - 1);
+                    strArr[count] = tdStr;
+                    count++;
+                    //task by
+                    String tbyStr = str.substring(str.indexOf('/') + 1, str.length());
+                    Deadlines dlTask = new Deadlines(tdStr, tbyStr);
+                    TaskList.add(dlTask);
+                    System.out.println("     Got it. I've added this task:\n" +
+                            "       " + TaskList.get(count - 1) +
+                            "\n     Now you have " + count + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
+                }
+                else if(str.contains("event") && str.contains("/")){
+                    //task description
+                    String tdStr = str.substring(6, str.indexOf('/') - 1);
+                    strArr[count] = tdStr;
+                    count++;
+                    //task at
+                    String tatStr = str.substring(str.indexOf('/') + 1, str.length());
+                    Events evTask = new Events(tdStr, tatStr);
+                    TaskList.add(evTask);
+                    System.out.println("     Got it. I've added this task:\n" +
+                            "       " + TaskList.get(count - 1) +
+                            "\n     Now you have " + count + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________\n");
+                }
+                else{
+                    System.out.println("default case");
+                    System.out.println("    ____________________________________________________________\n");
                 }
             }
         }
