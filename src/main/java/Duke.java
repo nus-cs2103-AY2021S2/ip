@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
 
 
@@ -17,13 +16,20 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public void add(String input){
-        Task t = new Task(input);
-        this.list.add(t);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(t.toString());
+    public void add(String input) throws DukeEmptyCommandException{
+        if(input.equals("todo")){
+            throw new DukeEmptyCommandException("OOPS!!! The description of a todo cannot be empty.");
+        } else if (input.equals("deadline")){
+            throw new DukeEmptyCommandException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (input.equals("event")){
+            throw new DukeEmptyCommandException("OOPS!!! The description of an event cannot be empty.");
+        } else {
+            Task t = new Task(input);
+            this.list.add(t);
+            System.out.println("Got it. I've added this task: ");
+            System.out.println(t.toString());
 
-
+        }
     }
 
     public void display(){
@@ -68,7 +74,7 @@ public class Duke {
         duke.greeting();
 
         Scanner sc = new Scanner(System.in);
-
+        try{
         while (sc.hasNext()) {
             String input = sc.nextLine();
 
@@ -84,11 +90,17 @@ public class Duke {
                 int index = Integer.parseInt(lastPart) - 1;
                 duke.markDone(index);
 
-            }
-            else {
+            } else if(input.startsWith("todo")||input.startsWith("deadline")||input.startsWith("event")){
                 duke.add(input);
                 System.out.println("Now you have " + duke.list.size() + " tasks in the list." );
+            } else{
+                throw new DukeWrongCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-    }
+    } catch (DukeEmptyCommandException e){
+            System.out.println(e.toString());
+        } catch (DukeWrongCommandException w){
+            System.out.println(w.toString());
+        }
+}
 }
