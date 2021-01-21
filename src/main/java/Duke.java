@@ -33,6 +33,9 @@ public class Duke {
             Pattern pev = Pattern.compile("^([Ee]vent )([a-zA-Z_0-9 ]*+)(\\/at )([a-zA-Z_0-9 ]*+)");
             Matcher mev = pev.matcher(str);
 
+            Pattern pdel = Pattern.compile("^(delete )([0-9]+)");
+            Matcher mdel = pdel.matcher(str);
+
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list!");
                 for (int i = 0; i < numitems; i++) {
@@ -72,6 +75,13 @@ public class Duke {
                 System.out.println("Got it!. I have added the following task:");
                 System.out.println(list.get(numitems));
                 numitems += 1;
+                System.out.println("Now you have " + numitems + " tasks in the list.");
+            } else if (mdel.find()) {
+                System.out.println("Okay I have removed this task!");
+                int n = Integer.parseInt(mdel.group(2)) - 1;
+                System.out.println(list.get(n));
+                list.remove(n);
+                numitems -= 1;
                 System.out.println("Now you have " + numitems + " tasks in the list.");
             } else {
                 throw new DukeException("I don't know what that means!!!!");
