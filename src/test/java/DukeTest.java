@@ -16,6 +16,22 @@ import exception.DukeInvalidInputException;
 public class DukeTest {
 
     @Test
+    public void parseInputDeleteRemovesTaskFromList() throws DukeException {
+        // Setup
+        Duke.tasks = new ArrayList<>();
+
+        // Test
+        Duke.parseInput("todo task 1");
+        Duke.parseInput("todo task 2");
+        Duke.parseInput("todo task 3");
+        Duke.parseInput("delete 2");
+
+        assertEquals(2, Duke.tasks.size());
+        assertEquals(Duke.tasks.get(0).getTaskInfo(), "task 1");
+        assertEquals(Duke.tasks.get(1).getTaskInfo(), "task 3");
+    }
+
+    @Test
     public void chatLoopExceptionThrownPrintsMessageToOutput() throws IOException {
         // Setup
         Duke.tasks = new ArrayList<>(100);

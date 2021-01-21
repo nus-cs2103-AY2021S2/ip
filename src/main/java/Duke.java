@@ -60,6 +60,8 @@ public class Duke {
             return executeList();
         case "done":
             return executeDone(tokenizedInput);
+        case "delete":
+            return executeDelete(tokenizedInput);
         case "todo":
             return executeTodo(input);
         case "deadline":
@@ -121,7 +123,15 @@ public class Duke {
         return output.substring(0, output.length() - 1);
     }
 
+    private static String executeDelete(String[] tokenizedInput) {
+        // TODO: Add Exception for out of range deletion
+        Task t = tasks.remove(Integer.parseInt(tokenizedInput[1]) - 1);
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
+                tasks.size());
+    }
+
     private static String executeDone(String[] tokenizedInput) {
+        // TODO: Add Exception for out of range done
         Task t = tasks.get(Integer.parseInt(tokenizedInput[1]) - 1);
         t.setTaskAsDone();
         return "Nice! I've marked this task as done:\n  " + t.toString();
