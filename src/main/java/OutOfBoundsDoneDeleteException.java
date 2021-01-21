@@ -1,5 +1,5 @@
-public class OutOfBoundsDoneException extends IndexOutOfBoundsException {
-    OutOfBoundsDoneException(String message) {
+public class OutOfBoundsDoneDeleteException extends IndexOutOfBoundsException {
+    OutOfBoundsDoneDeleteException(String message) {
         super(message);
     }
 

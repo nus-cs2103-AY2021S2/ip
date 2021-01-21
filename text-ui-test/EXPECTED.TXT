@@ -22,3 +22,26 @@ Added: [E][ ] project meeting (at: Mon 2-4pm)
 5. [T][ ] borrow book
 6. [D][ ] return book (by: Sunday)
 7. [E][ ] project meeting (at: Mon 2-4pm)
+Deleted: [E][ ] project meeting (at: Aug 6th 2-4pm)
+Added: [E][ ] project meeting (at: Aug 8th 7-9pm)
+Deleted: [T][ ] borrow book
+1. [T][ ] read book
+2. [D][X] return book (by: June 6th)
+3. [T][X] join sports club
+4. [D][ ] return book (by: Sunday)
+5. [E][ ] project meeting (at: Mon 2-4pm)
+6. [E][ ] project meeting (at: Aug 8th 7-9pm)
+You forgot to enter the description of the todo! Please re-enter!
+You forgot to enter the description of the todo! Please re-enter!
+You forgot to enter the description of the deadline! Please re-enter!
+You forgot to enter the description of the deadline! Please re-enter!
+You forgot to enter the description of the event! Please re-enter!
+You forgot to enter the description of the event! Please re-enter!
+You forgot to enter the task to mark as done! Please re-enter!
+You forgot to enter the task to mark as done! Please re-enter!
+The task you entered does not exist! Please re-enter!
+You forgot to enter the task to delete! Please re-enter!
+You forgot to enter the task to delete! Please re-enter!
+The task you entered does not exist! Please re-enter!
+I don't understand what you just entered >.< Please re-enter!
+I don't understand what you just entered >.< Please re-enter!

@@ -8,3 +8,21 @@ todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+delete 3
+event project meeting /at Aug 8th 7-9pm
+delete 4
+list
+todo
+todo 
+deadline
+deadline 
+event
+event 
+done
+done 
+done 8
+delete
+delete 
+delete 7
+random
+non a valid action

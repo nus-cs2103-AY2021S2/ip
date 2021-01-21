@@ -15,9 +15,11 @@ public class TaskManager {
             listEvents();
             return;
         } else if (e.check()) {
-            System.out.println("pass check");
+//            System.out.println("pass check");
             if (input.startsWith("done")) {
                 markDone(input);
+            } else if (input.startsWith("delete")) {
+                deleteTask(input);
             } else {
                 addNewTask(input);
             }
@@ -49,7 +51,7 @@ public class TaskManager {
     }
 
     public void markDone(String input) {
-        Task task = list.get(Character.getNumericValue(input.charAt(5)) - 1);
+        Task task = list.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
         System.out.println("Good job! You got " + task.description + " done!");
     }
@@ -67,6 +69,15 @@ public class TaskManager {
         }
         list.add(newTask);
         System.out.println("Added: " + newTask.toString());
+    }
+
+    public void deleteTask(String input) {
+//        Task task = list.get(Character.getNumericValue(input.charAt(5)) - 1);
+//        task.markAsDone();
+//        System.out.println("Good job! You got " + task.description + " done!");
+        Task task = list.get(Integer.parseInt(input.substring(7)) - 1);
+        list.remove(Integer.parseInt(input.substring(7)) - 1);
+        System.out.println("Deleted: " + task.toString());
     }
 
     public void listEvents() {

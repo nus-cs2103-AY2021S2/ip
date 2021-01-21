@@ -43,7 +43,7 @@ public class CheckErrors {
     public boolean check() {
         String taskType = "";
 
-        if (!input.startsWith("done") && !input.startsWith("todo") && !input.startsWith("deadline")
+        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo") && !input.startsWith("deadline")
         && !input.startsWith("event")) {
 //            throw new IllegalInputException("");
             System.out.println(new IllegalInputException("").toString());
@@ -56,28 +56,35 @@ public class CheckErrors {
         try {
             if (input.startsWith("done")) {
 //                System.out.println("current array length: " + list.size() + "\nArray: " + list.toString());
+                taskType = "done";
                 input.substring(6);
 //                System.out.println("task to delete: " + input.substring(5));
-                String taskToDelete = input.substring(5);
+                String taskToMark = input.substring(5);
+                int taskToMarkInt = Integer.parseInt(taskToMark);
+                list.get(taskToMarkInt - 1);
+//                System.out.println(Integer.parseInt(input.substring(5)));
+            } else if (input.startsWith("delete")) {
+                taskType = "delete";
+                input.substring(8);
+                String taskToDelete = input.substring(7);
                 int taskToDeleteInt = Integer.parseInt(taskToDelete);
                 list.get(taskToDeleteInt - 1);
-//                System.out.println(Integer.parseInt(input.substring(5)));
             } else if (input.startsWith("todo")) {
                 taskType = "todo";
                 input.substring(6);
             } else if (input.startsWith("deadline")) {
                 taskType = "deadline";
-                input.substring(9);
+                input.substring(10);
             } else if (input.startsWith("event")) {
                 taskType = "event";
                 input.substring(7);
             }
 //            System.out.println("task type: " + taskType);
         } catch (StringIndexOutOfBoundsException ex) {
-            if (input.startsWith("done")) {
+            if (input.startsWith("done") || input.startsWith("delete")) {
 //                System.out.println("string index out of bounds done");
 //                throw new IllegalDoneException(ex.getMessage());
-                System.out.println(new IllegalDoneException(ex.getMessage()).toString());
+                System.out.println(new IllegalDoneDeleteException(ex.getMessage(), taskType).toString());
                 return false;
             } else {
 //                System.out.println("string index out of bounds not done");
@@ -87,7 +94,7 @@ public class CheckErrors {
             }
         } catch (IndexOutOfBoundsException ex) {
 //            throw new OutOfBoundsDoneException(ex.getMessage());
-            System.out.println(new OutOfBoundsDoneException(ex.getMessage()).toString());
+            System.out.println(new OutOfBoundsDoneDeleteException(ex.getMessage()).toString());
             return false;
         }
 
