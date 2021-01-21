@@ -188,6 +188,9 @@ public class Duke {
         if(parts.length == 1) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
+            if (parts[1].isBlank()){
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            }
             ToDo newTask = new ToDo(parts[1]);
             myList.add(newTask);
             System.out.println("---------------------------------------------");
@@ -203,21 +206,24 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
             String task = parts[1];
+            if (task.isBlank()){
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            }
+
             String[] details = task.split(" /by ", 2);
             if (details.length == 1){
                 throw new DukeException("OOPS!!! The time of a deadline is invalid.");
-            } else {
-                String description = details[0];
-                String by = details[1];
-                Deadline newTask = new Deadline(description, by);
-
-                myList.add(newTask);
-                System.out.println("---------------------------------------------");
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + newTask);
-                System.out.println("Now you have " + myList.size() + " tasks in the list.");
-                System.out.println("---------------------------------------------");
             }
+            String description = details[0];
+            String by = details[1];
+            Deadline newTask = new Deadline(description, by);
+
+            myList.add(newTask);
+            System.out.println("---------------------------------------------");
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + newTask);
+            System.out.println("Now you have " + myList.size() + " tasks in the list.");
+            System.out.println("---------------------------------------------");
         }
     }
 
@@ -226,21 +232,24 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else {
             String task = parts[1];
+            if (task.isBlank()){
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+            }
+
             String[] details = task.split(" /at ", 2);
             if (details.length == 1) {
                 throw new DukeException("OOPS!!! The time of an event is invalid.");
-            } else {
-                String description = details[0];
-                String time = details[1];
-                Event newTask = new Event(description, time);
-
-                myList.add(newTask);
-                System.out.println("---------------------------------------------");
-                System.out.println("Got it. I've added this task:");
-                System.out.println("  " + newTask);
-                System.out.println("Now you have " + myList.size() + " tasks in the list.");
-                System.out.println("---------------------------------------------");
             }
+            String description = details[0];
+            String time = details[1];
+            Event newTask = new Event(description, time);
+
+            myList.add(newTask);
+            System.out.println("---------------------------------------------");
+            System.out.println("Got it. I've added this task:");
+            System.out.println("  " + newTask);
+            System.out.println("Now you have " + myList.size() + " tasks in the list.");
+            System.out.println("---------------------------------------------");
         }
     }
 }
