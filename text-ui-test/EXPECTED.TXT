@@ -29,3 +29,11 @@ Oops! I don't know what this means! :(
 Oops! The description of todo cannot be empty!
 Oops! The description of deadline cannot be empty!
 Oops! The description of event cannot be empty!
+Gotcha. I've removed this task:
+[D][ ] return book (by June 6th)
+Now you have 4 task(s) in the list.
+Here are the tasks in your list:
+1.[T][?] read book
+2.[T][?] join sports club
+3.[E][ ] project meeting (at Aug 6th 2-4pm)
+4.[D][ ] do homework (by no idea :-p)
