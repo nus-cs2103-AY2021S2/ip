@@ -7,6 +7,8 @@ public class Duke {
     }
 
     public void doTask (int taskNum){
+        if(list.size()<1 ) throw new ArrayIndexOutOfBoundsException("You have no tasks to do!");
+        if(taskNum < 1 || taskNum > list.size() ) throw new ArrayIndexOutOfBoundsException("That task does not exist");
         Task curr = list.get(taskNum - 1);
         curr.done = true;
         System.out.format(Duke.line + "\n Nice! I've marked this task as done: " +
@@ -14,7 +16,17 @@ public class Duke {
                 "\n" + Duke.line,curr.type(),curr.status(),curr.toString());
     }
 
-    public void printTasks(){
+    public void delete(int num) throws ArrayIndexOutOfBoundsException{
+        if(list.size()<1) throw new ArrayIndexOutOfBoundsException("You have no tasks to delete!");
+        if(num < 1 || num > list.size() ) throw new ArrayIndexOutOfBoundsException("That task does not exist");
+        Task curr = list.get(num-1);
+        list.remove(num-1);
+        String deleted = "["+ curr.type() +"]"+"[" + curr.status() +"] "+curr.toString();
+        System.out.format("%s\nNoted. I've removed this task: \n %s\nNow you have %d tasks in the list\n%s", line, deleted ,list.size(),line);
+    }
+
+    public void printTasks() throws ArrayIndexOutOfBoundsException {
+        if(list.size()<1) throw new ArrayIndexOutOfBoundsException("You have no tasks!");
         System.out.println(line);
         int i = 1;
         for(Task s: this.list){
@@ -29,15 +41,17 @@ public class Duke {
     }
 
     public void handleTask(String[] currLine) throws Exception {
-        if (currLine[0].equals("list")) this.printTasks();
-        else if(currLine[0].equals("done")) this.doTask(Integer.parseInt(currLine[1]));
+        String command = currLine[0];
+        if (command.equals("list")) this.printTasks();
+        else if (command.equals("delete")) this.delete(Integer.parseInt(currLine[1]));
+        else if(command.equals("done")) this.doTask(Integer.parseInt(currLine[1]));
         else{
             String output = "";
             output += line + "\n" + " Got it. I've added this task: \n";
             Task t;
-            if (currLine[0].equals("todo")) t = new Todo(currLine);
-            else if (currLine[0].equals("deadline")) t = new Deadline(currLine);
-            else if(currLine[0].equals("event"))t = new Event(currLine);
+            if (command.equals("todo")) t = new Todo(currLine);
+            else if (command.equals("deadline")) t = new Deadline(currLine);
+            else if(command.equals("event"))t = new Event(currLine);
             else{
                 throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
