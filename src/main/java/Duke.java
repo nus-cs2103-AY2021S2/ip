@@ -52,7 +52,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println(PARTING_LINE);
         System.out.println("Sup. I am Duke.");
-        System.out.println("What do you want?");
+        System.out.println("How can I help you?");
         System.out.println(PARTING_LINE);
     }
 
@@ -68,12 +68,14 @@ public class Duke {
         }
     }
 
-    public static void markAsComplete(int index) {
+    public static void markAsComplete(int index) throws TaskIndexOutOfBoundException {
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
             completedTask.complete();
             System.out.println(" Marked. How cool is that?");
             System.out.println("  " + completedTask);
+        } else {
+            throw new TaskIndexOutOfBoundException("There is no task numbered " + (index + 1) + "!");
         }
     }
 

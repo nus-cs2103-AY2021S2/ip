@@ -21,7 +21,7 @@ public class Parser {
         } else if (potentialCommand.toUpperCase().equals("BYE")) {
             command = Command.BYE;
         } else {
-            throw new CommandNotFoundException("What do you mean? ");
+            throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
         return command;
     }
