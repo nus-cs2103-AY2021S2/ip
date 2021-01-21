@@ -41,9 +41,16 @@ Expected format: event <DESCRIPTION> /at <PERIOD>
 The description of an event cannot be empty!
 Expected format: event <DESCRIPTION> /at <PERIOD>
 An event must have a period!
-Expected format: deadline <DESCRIPTION> /by <PERIOD>
+Expected format: event <DESCRIPTION> /at <PERIOD>
 An event must have a period!
-Expected format: deadline <DESCRIPTION> /by <PERIOD>
+Expected format: event <DESCRIPTION> /at <PERIOD>
+Task 10 does not exist!
+Valid task numbers are 1 to 5.
+1.[T][ ] buy milo
+2.[T][ ] buy milk
+3.[T][ ] a
+4.[D][ ] drink milo (by: Thursday)
+5.[E][ ] milo party (at: 2pm - 6pm)
 Nice! I've marked this task as done:
 [T][✓] a
 1.[T][ ] buy milo
@@ -53,52 +60,56 @@ Nice! I've marked this task as done:
 5.[E][ ] milo party (at: 2pm - 6pm)
 Nice! I've marked this task as done:
 [T][✓] buy milo
-1.[T][✓] buy milo
-2.[T][ ] buy milk
-3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
-5.[E][ ] milo party (at: 2pm - 6pm)
-Nice! I've marked this task as done:
-[E][✓] milo party (at: 2pm - 6pm)
-1.[T][✓] buy milo
-2.[T][ ] buy milk
-3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
-5.[E][✓] milo party (at: 2pm - 6pm)
-Nice! I've marked this task as done:
-[T][✓] buy milk
-1.[T][✓] buy milo
-2.[T][✓] buy milk
-3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
-5.[E][✓] milo party (at: 2pm - 6pm)
-A done command must specify a task number.
+A delete command must specify a task number.
 Valid task numbers are 1 to 5.
+Expected format: delete <TASK NUMBER>
+Noted. I've removed this task:
+[T][✓] buy milo
+Now you have 4 task(s) in the list.
+A delete command must specify a task number.
+Valid task numbers are 1 to 4.
+Expected format: delete <TASK NUMBER>
+1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Thursday)
+4.[E][ ] milo party (at: 2pm - 6pm)
+Task 5 does not exist!
+Valid task numbers are 1 to 4.
+1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Thursday)
+4.[E][ ] milo party (at: 2pm - 6pm)
+Nice! I've marked this task as done:
+[T][✓] a
+1.[T][ ] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Thursday)
+4.[E][ ] milo party (at: 2pm - 6pm)
+A done command must specify a task number.
+Valid task numbers are 1 to 4.
 Expected format: done <TASK NUMBER>
 Task 10 does not exist!
-Valid task numbers are 1 to 5.
+Valid task numbers are 1 to 4.
 Got it. I've added this task:
 [T][ ] something
-Now you have 6 task(s) in the list.
+Now you have 5 task(s) in the list.
 Task 10 does not exist!
-Valid task numbers are 1 to 6.
+Valid task numbers are 1 to 5.
 A done command must specify a task number.
-Valid task numbers are 1 to 6.
+Valid task numbers are 1 to 5.
 Expected format: done <TASK NUMBER>
 Nice! I've marked this task as done:
-[T][✓] buy milo
-1.[T][✓] buy milo
-2.[T][✓] buy milk
-3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
-5.[E][✓] milo party (at: 2pm - 6pm)
-6.[T][ ] something
-1.[T][✓] buy milo
-2.[T][✓] buy milk
-3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
-5.[E][✓] milo party (at: 2pm - 6pm)
-6.[T][ ] something
+[T][✓] buy milk
+1.[T][✓] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Thursday)
+4.[E][ ] milo party (at: 2pm - 6pm)
+5.[T][ ] something
+1.[T][✓] buy milk
+2.[T][✓] a
+3.[D][ ] drink milo (by: Thursday)
+4.[E][ ] milo party (at: 2pm - 6pm)
+5.[T][ ] something
 Please do not include any arguments after the list command.
 Expected format: list
 Goodbye, cruel world!

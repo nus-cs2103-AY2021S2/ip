@@ -62,6 +62,8 @@ public class Duke {
                         handleListCmd(cmd);
                     } else if (isDoneCmd(cmd)) {
                         handleDoneCmd(cmd);
+                    } else if (isDeleteCmd(cmd)) {
+                        handleDeleteCmd(cmd);
                     } else {
                         // default: unrecognized command
                         printer.println(String.format("Sorry, I don't know what '%s' means", cmd));
@@ -220,6 +222,44 @@ public class Duke {
                 t.markAsDone();
                 printer.println("Nice! I've marked this task as done:");
                 printer.println(String.format("%s", t.toString()));
+            }
+        } catch (NumberFormatException nfe) {
+            // Argument of wrong type
+            throw new DukeException(String.format("Illegal argument: '%s'. Expected integer.\n"
+                    + "Valid task numbers are 1 to %d.", argStr, tasks.size()));
+        }
+    }
+
+    private boolean isDeleteCmd(String cmd) {
+        Pattern deletePattern = Pattern.compile("(?i)delete\\b");
+        Matcher cmdMatcher = deletePattern.matcher(cmd);
+        return cmdMatcher.find();
+    }
+
+    private void handleDeleteCmd(String cmd) throws DukeException {
+        Pattern deletePattern = Pattern.compile("(?i)delete\\s+(\\d+)$");
+        Matcher deleteMatcher = deletePattern.matcher(cmd);
+        if (!deleteMatcher.find()) {
+            throw new DukeException(String.format("A delete command must specify a task number.\n"
+                    + "Valid task numbers are 1 to %d.\n"
+                    + "Expected format: delete <TASK NUMBER>", tasks.size()));
+        }
+
+        String argStr = deleteMatcher.group(1);
+        try {
+            int arg = Integer.parseInt(argStr);
+            if (arg < 1 || arg > tasks.size()) {
+                // Argument out of range
+                throw new DukeException(String.format("Task %d does not exist!\n"
+                        + "Valid task numbers are 1 to %d.", arg, tasks.size()));
+            } else {
+                // Valid argument in range
+                int index = arg - 1;
+                Task t = tasks.get(index);
+                tasks.remove(index);
+                printer.println("Noted. I've removed this task:");
+                printer.println(String.format("%s", t.toString()));
+                printer.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
             }
         } catch (NumberFormatException nfe) {
             // Argument of wrong type

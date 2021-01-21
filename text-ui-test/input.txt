@@ -13,9 +13,14 @@ event
 event
 event birthday
 event birthday /at
+delete 10
+list
 done 3
 list
 done 1
+delete
+delete 1
+delete -1
 list
 done 5
 list
