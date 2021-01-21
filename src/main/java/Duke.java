@@ -161,7 +161,6 @@ public class Duke {
                 if (arg < 1 || arg > tasks.size()) {
                     // Argument out of range
                     printer.println(String.format("Task %d does not exist!", arg));
-                    return false;
                 } else {
                     // Valid argument in range
                     int index = arg - 1;
@@ -169,12 +168,12 @@ public class Duke {
                     t.markAsDone();
                     printer.println("Nice! I've marked this task as done:");
                     printer.println(String.format("%s", t.toString()));
-                    return true;
                 }
+                return true;
             } catch (NumberFormatException nfe) {
                 // Argument of wrong type
                 printer.println(String.format("Illegal argument: '%s'. Expected integer", argStr));
-                return false;
+                return true;
             }
         }
 
