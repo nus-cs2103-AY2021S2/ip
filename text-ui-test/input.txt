@@ -2,4 +2,13 @@ todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
+done 2
+delete 3
+delete 1
+list
+done 1
+blah
+todo
+deadline
+hellooo
 bye
