@@ -222,7 +222,7 @@ public class Duke {
 
     private static void checkInvalidOnEmptyList(String command) throws InvalidArgumentException {
         if (taskList.isEmpty() && (command.equals("done") || command.equals("delete"))) {
-            throw new InvalidArgumentException("Invalid command. The task list is empty.");
+            throw new InvalidArgumentException("This command cannot be done on an empty task list.");
         }
     }
 
@@ -243,6 +243,11 @@ public class Duke {
         return true;
     }
 
+
+    // format your exception printing here
+    private static void printException(String errMsg) {
+        print(new String[]{"Oops, Kiwi couldn't process that.", taskIndent + errMsg});
+    }
 
     // parse done, todos, deadline, event, delete commands
     // make enums for supported commands?
@@ -281,11 +286,13 @@ public class Duke {
         } catch (UnsupportedCommandException | InvalidArgumentException | MissingArgumentException e) {
             // is it better to detect unsupported first command earlier?
             // currently being detected at the end of many if blocks
-            print(new String[]{e.toString()});
+//            print(new String[]{e.getMessage()});
+            printException(e.getMessage());
             return true;
         } catch (Exception e) {
             String errMsg = "didn't expect this exception " + e;
-            print(new String[]{errMsg});
+//            print(new String[]{errMsg});
+            printException(errMsg);
             return true;
         }
 

@@ -49,7 +49,8 @@
       You have 4 tasks. 
     ______________________________________________
     ______________________________________________
-      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+      Oops, Kiwi couldn't process that.
+        I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
       Your tasks:
@@ -65,36 +66,44 @@
         [T][ ] tea
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Please include a description for your todo.
+      Oops, Kiwi couldn't process that.
+        Please include a description for your todo.
     ______________________________________________
     ______________________________________________
       Success. I've added this task:
         [D][ ] coffee (by: 4pm)
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Missing argument 2. Please include a description of the deadline.
+      Oops, Kiwi couldn't process that.
+        Missing argument 2. Please include a description of the deadline.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Missing a /by argument. Please include a deadline.
+      Oops, Kiwi couldn't process that.
+        Missing a /by argument. Please include a deadline.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Please include a description and a /by argument for your deadline.
+      Oops, Kiwi couldn't process that.
+        Please include a description and a /by argument for your deadline.
     ______________________________________________
     ______________________________________________
-      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+      Oops, Kiwi couldn't process that.
+        I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
       Success. I've added this task:
         [E][ ] read books (at: 4-6pm monday)
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Missing argument 2. Please include an event description.
+      Oops, Kiwi couldn't process that.
+        Missing argument 2. Please include an event description.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Missing an /at argument. Please include an event timing.
+      Oops, Kiwi couldn't process that.
+        Missing an /at argument. Please include an event timing.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Please include a description and an /at argument for your event.
+      Oops, Kiwi couldn't process that.
+        Please include a description and an /at argument for your event.
     ______________________________________________
     ______________________________________________
       Your tasks:
@@ -109,26 +118,36 @@
       You have 7 tasks. 
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Please include the list item number of the task to mark done.
+      Oops, Kiwi couldn't process that.
+        Please include the list item number of the task to mark done.
     ______________________________________________
     ______________________________________________
-      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+      Oops, Kiwi couldn't process that.
+        I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
-      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+      Oops, Kiwi couldn't process that.
+        I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
-      UnsupportedCommandException: Uh oh, I don't recognise this command. Please try something else.
+      Oops, Kiwi couldn't process that.
+        I don't recognise this command. Please try something else.
     ______________________________________________
     ______________________________________________
-      MissingArgumentException: Please include the list item number of the task to delete.
+      Oops, Kiwi couldn't process that.
+        Please include the list item number of the task to delete.
     ______________________________________________
     ______________________________________________
-      InvalidArgumentException: Invalid list index given: 0. Number needs to be between 1 and 7 (inclusive). 
+      Oops, Kiwi couldn't process that.
+        Invalid list index given: 0. Number needs to be between 1 and 7 (inclusive). 
     ______________________________________________
     ______________________________________________
       Got you. I've deleted this task:
         [T][ ] tea
+    ______________________________________________
+    ______________________________________________
+      Oops, Kiwi couldn't process that.
+        Invalid list index given: 19. Number needs to be between 1 and 6 (inclusive). 
     ______________________________________________
     ______________________________________________
       Bye. See you again soon!

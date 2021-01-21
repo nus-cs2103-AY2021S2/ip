@@ -9,7 +9,7 @@ public class UnsupportedCommandException extends Exception {
     }
 
     public UnsupportedCommandException() {
-        super("Uh oh, I don't recognise this command. Please try something else.");
+        super("I don't recognise this command. Please try something else.");
     }
 }
 
