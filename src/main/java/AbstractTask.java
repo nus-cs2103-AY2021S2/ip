@@ -2,7 +2,10 @@ public abstract class AbstractTask {
     protected String description;
     protected boolean isDone;
 
-    public AbstractTask(String description) {
+    public AbstractTask(String description) throws DukeEmptyDescriptionException {
+        if (description.isEmpty()) {
+            throw new DukeEmptyDescriptionException();
+        }
         this.description = description;
         this.isDone = false;
     }

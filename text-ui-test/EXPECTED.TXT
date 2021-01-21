@@ -31,18 +31,12 @@ What can I do for you?
 	   [X] task2
 	Duke: Marked task 2 as done:
 	   [X] task3
-	Duke: Marked task 3 as done:
-	[T][X] task4
-	Duke: Marked task 4 as done:
-	[E][X] task5 (at: task5time)
-	Duke: Marked task 5 as done:
-	[D][X] task6 (by: task6time)
 	Duke:
 	1.    [X] task1
 	2.    [X] task2
 	3.    [X] task3
-	4. [T][X] task4
-	5. [E][X] task5 (at: task5time)
-	6. [D][X] task6 (by: task6time)
+	4. [T][ ] task4
+	5. [E][ ] task5 (at: task5time)
+	6. [D][ ] task6 (by: task6time)
 	Duke:
 	Bye!

@@ -1,6 +1,6 @@
 public class Todo extends AbstractTask {
 
-    public Todo(String description) {
+    public Todo(String description) throws DukeEmptyDescriptionException {
         super(description);
     }
 
