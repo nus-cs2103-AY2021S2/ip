@@ -1,4 +1,5 @@
 public class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -11,8 +12,16 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
+    public String getTypeIcon() {
+        return "";
+    }
+
     public void markAsDone() {
-         this.isDone = true;
+        this.isDone = true;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
