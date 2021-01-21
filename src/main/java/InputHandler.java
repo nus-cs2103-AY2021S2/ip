@@ -16,7 +16,7 @@ public class InputHandler {
      *
      * @return Command type object with parameters entered by user
      */
-    public static Command parseInput(Scanner scanner) {
+    public static Command parseInput(Scanner scanner) throws MikeInvalidInputException {
         String userInput = scanner.nextLine();
         String[] userInputArr = userInput.split(" ");
 
@@ -31,7 +31,8 @@ public class InputHandler {
                 try {
                     return new DoneCommand(Integer.parseInt(userInputArr[1]));
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    return new ExceptionCommand("Please enter a task index to mark as completed!!");
+                    throw new MikeInvalidInputException("☹ OOPS!!! The task to be completed cannot be empty and must " +
+                            "be a number.");
                 }
 
             case TODO_COMMAND:
@@ -41,7 +42,7 @@ public class InputHandler {
                     m.find();
                     return new TodoCommand(m.group(1));
                 } catch (IllegalStateException e) {
-                    return new ExceptionCommand("Please enter a task description to add to the list!!");
+                    throw new MikeInvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
 
             case EVENT_COMMAND:
@@ -50,9 +51,9 @@ public class InputHandler {
                     Matcher m = p.matcher(userInput);
                     m.find();
                     return new EventCommand(m.group(1), m.group(2));
-
                 } catch (IllegalStateException e) {
-                    return new ExceptionCommand("Please enter an event description and timing to add to the list!!");
+                    throw new MikeInvalidInputException("Please enter an event description and timing to add to the " +
+                        "list!!");
                 }
 
             case DEADLINE_COMMAND:
@@ -61,13 +62,13 @@ public class InputHandler {
                     Matcher m = p.matcher(userInput);
                     m.find();
                     return new DeadlineCommand(m.group(1), m.group(2));
-
                 } catch (IllegalStateException e) {
-                    return new ExceptionCommand("Please enter an event description and deadline to add to the list!!");
+                    throw new MikeInvalidInputException("Please enter an event description and deadline to add to " +
+                            "the list!!");
                 }
 
             default:
-                return new ExceptionCommand(" OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new MikeInvalidInputException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

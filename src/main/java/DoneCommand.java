@@ -14,16 +14,20 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public TaskList runCommand(TaskList taskList) {
+    public TaskList runCommand(TaskList taskList) throws MikeInvalidInputException {
         this.taskList = taskList;
-
-        for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
-            if (i == taskIndexToDone) {
-                this.taskList.getNthTask(i).completeTask();
-                this.taskToDone = this.taskList.getNthTask(i);
+        try {
+            for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
+                if (i == taskIndexToDone) {
+                    this.taskToDone = this.taskList.getNthTask(i);
+                }
             }
+            this.taskToDone.completeTask();
+            return this.taskList;
+        } catch (NullPointerException e) {
+            throw new MikeInvalidInputException("OOPS!! The task is not in the list");
         }
-        return this.taskList;
+
     }
 
     @Override

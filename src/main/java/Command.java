@@ -11,7 +11,7 @@ public interface Command {
      *
      * @return resultant tasklist after command is run
      */
-    TaskList runCommand(TaskList taskList);
+    TaskList runCommand(TaskList taskList) throws MikeInvalidInputException;
 
     /**
      * Gets the response of the command
