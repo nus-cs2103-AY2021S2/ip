@@ -15,6 +15,9 @@ public class Parser {
     public Command parseInput(final String input) throws InvalidCommandException {
         Scanner scanner = new Scanner(input);
 
+        if (!scanner.hasNext()) {
+            throw new InvalidCommandException();
+        }
         switch (scanner.next().toLowerCase(Locale.ROOT)) {
             case DukeStrings.COMMAND_BYE:
                 this.bye = true;
