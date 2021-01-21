@@ -2,7 +2,7 @@ public class Task {
     private boolean done;
     private String name;
 
-    public Task(String name) {
+    Task(String name) {
         this.name = name;
         this.done = false;
     }
@@ -14,6 +14,6 @@ public class Task {
     @Override
     public String toString() {
         String check = done ? "X" : " ";
-        return String.format(". [%s] %s", check, name);
+        return String.format("[%s] %s", check, name);
     }
 }

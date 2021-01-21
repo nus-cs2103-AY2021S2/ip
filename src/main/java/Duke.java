@@ -32,14 +32,14 @@ public class Duke {
                     case "list":
                         int i = 1;
                         for (Task s : itemList) {
-                            System.out.println(i + s.toString());
+                            System.out.println(i + ". " + s.toString());
                             i++;
                         }
                         break;
                     case "done":
                         Task task = itemList.get(Integer.parseInt(input[1]) - 1);
                         task.markDone();
-                        System.out.println("Alright, I will mark this as done. \n" + input[1] + task.toString());
+                        System.out.println("Alright, I will mark this as done. \n" + input[1] + ". " + task.toString());
                         break;
                     default:
                         itemList.add(new Task(raw_in));
