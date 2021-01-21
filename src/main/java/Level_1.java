@@ -13,6 +13,6 @@ public class Level_1 {
             input = sc.next();
         }
 
-        System.out.println("Bye. Hope to se you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
     }
 }
