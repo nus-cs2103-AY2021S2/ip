@@ -2,6 +2,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    public static int toInteger(String toCheck) {
+        try {
+            int i = Integer.parseInt(toCheck);
+            return i;
+        }
+        catch(Exception e) {
+            return 0;
+        }
+    }
     public static void main(String[] args){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -9,15 +18,14 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        //test push, it doesnt work!
+
         //starts by greeting the user
         System.out.println("Hello! I'm Duke.\nWhat can I do for you?\n");
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<Task>();
+        ArrayList<Task> list = new ArrayList<>();
         int count = 0;
-
 
         //commands entered by the user
         while(!str.equals("bye")) {
@@ -31,7 +39,7 @@ public class Duke {
                 } else if (!strs[0].equals("list")&& !strs[0].equals("done") && !strs[0].equals("delete")
                         && strs.length < 2) {
                     throw new DukeException("The description of "+ strs[0] + " cannot be empty.\n");
-                } else if (strs[0].equals("done") || strs[0].equals("delete") && strs.length < 2){
+                } else if ((strs[0].equals("done") || strs[0].equals("delete")) && strs.length < 2){
                     throw new DukeException("The task index is missing.\n");
                 }
             } catch (DukeException ex) {
@@ -56,10 +64,9 @@ public class Duke {
                 String detail = str.substring(str.indexOf(' ') + 1);
                 if (type.equals("done")) {
                     //mark tasks as done
-                    int number = Integer.parseInt(detail);
-
+                    int number = toInteger(detail);
                     try {
-                        if(number < 1){
+                        if(number < 1 || number > count){
                             throw new DukeException("The task index is invalid.\n");
                         }
                     } catch (DukeException ex) {
@@ -72,10 +79,10 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done: \n" + list.get(number - 1) + "\n");
                     str = sc.nextLine();
                 } else if(type.equals("delete")){
-                    int number = Integer.parseInt(detail);
 
+                    int number = toInteger(detail);
                     try {
-                        if(number < 1){
+                        if(number < 1 || number > count){
                             throw new DukeException("The task index is invalid.\n");
                         }
                     } catch (DukeException ex) {
@@ -110,7 +117,7 @@ public class Duke {
                     }
                     count++;
                     if (count == 1) {
-                        System.out.println("Got it. I've added this task:\n  " + list.get(count-1) + "\nNow you have " + count + " task in the list.\n");
+                        System.out.println("Got it. I've added this task:\n  " + list.get(0) + "\nNow you have " + count + " task in the list.\n");
                     } else {
                         System.out.println("Got it. I've added this task:\n  " + list.get(count-1) + "\nNow you have " + count + " tasks in the list.\n");
                     }

@@ -1,5 +1,6 @@
 public class DukeException extends Exception{
     protected String message;
+
     DukeException(String message){
         this.message =message;
     }
