@@ -30,7 +30,7 @@ public class Task {
 
     @Override
     public String toString() {
-        output = "[" + checkIcon() + "] " + info;
+        output = "[" + checkIcon() + "]" + this.info;
         return output;
     }
 
