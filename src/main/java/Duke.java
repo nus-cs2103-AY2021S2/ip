@@ -3,16 +3,30 @@ import java.lang.*;
 
 public class Duke {
 
+    enum Type {
+        TODO,
+        DEADLINE,
+        EVENT
+    }
+
     /**
-     * Task class with names and a boolean variable checking if they are done or not
+     * Task class
      */
     static class Task {
+
         String taskName;
         boolean isDone;
+        Type type;
+        String time;
 
-        public Task(String taskName, boolean isDone) {
+        /**
+         * Task class constructor
+         */
+        public Task(String taskName, boolean isDone, Type type, String time) {
             this.taskName = taskName;
             this.isDone = isDone;
+            this.type = type;
+            this.time = time;
         }
 
         public void markDone() {
@@ -20,8 +34,16 @@ public class Duke {
         }
 
         public String toString() {
-            if (isDone) return "[X] " + taskName;
-            else return "[ ] " + taskName;
+            if (type == Type.TODO) {
+                if (isDone) return "[T][X] " + taskName;
+                return "[T][ ] " + taskName;
+            } else if (type == Type.DEADLINE) {
+                if (isDone) return "[D][X] " + taskName + " (by: " + time + ")";
+                return "[D][ ] " + taskName + " (by: " + time + ")";
+            } else if (type == Type.EVENT) {
+                if (isDone) return "[E][X] " + taskName + " (at: " + time + ")";
+                return "[E][ ] " + taskName + " (at: " + time + ")";
+            } else return "O_o How did you input other types?";
         }
     }
 
@@ -60,11 +82,20 @@ public class Duke {
             }
             else {
                 // add to list
-                taskArr[j] = new Task(input, false);
+                String[] inputArrTasks = input.split("/");
+                String[] firstHalf = inputArrTasks[0].split(" ", 2);
+
+                if (inputArrTasks.length != 1) {
+                    String[] secondHalf = inputArrTasks[1].split(" ", 2);
+                    taskArr[j] = new Task(firstHalf[1], false, Type.valueOf(firstHalf[0].toUpperCase()), secondHalf[1]);
+                } else
+                    taskArr[j] = new Task(firstHalf[1], false, Type.valueOf(firstHalf[0].toUpperCase()), "");
+
                 j++;
                 // print output
-                String formattedInput = "added Task: ";
-                formattedInput = formattedInput.concat(input);
+                String formattedInput = "Got it. I've added this task:\n  ";
+                formattedInput = formattedInput.concat(taskArr[j - 1].toString()).concat("\n");
+                formattedInput = formattedInput.concat("Now you have " + Integer.toString(j) + " tasks in the list.");
                 formatBox(formattedInput);
             }
         }
