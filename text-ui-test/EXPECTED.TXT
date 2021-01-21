@@ -1,7 +1,7 @@
 ---------------------------------------
 
-Hello! I'm Duke
-What can I do for you?
+What's up! I'm Duke
+Please feed be commands :)
 ---------------------------------------
 
 ---------------------------------------
@@ -23,6 +23,11 @@ Now you have 3 tasks in the list
 ---------------------------------------
 
 ---------------------------------------
+Nice! I've marked this task as done:
+[?] read book
+---------------------------------------
+
+---------------------------------------
 Here are the tasks in your list:
 1.[T][?] read book
 2.[D][?] return book (by: Sunday)
@@ -35,10 +40,15 @@ Nice! I've marked this task as done:
 ---------------------------------------
 
 ---------------------------------------
+Noted. I've removed this task:
+[D][?] return book (by: Sunday)
+Now you have 2 tasks in the list
+---------------------------------------
+
+---------------------------------------
 Here are the tasks in your list:
 1.[T][?] read book
-2.[D][?] return book (by: Sunday)
-3.[E][?] go to library (at: Sunday)
+2.[E][?] go to library (at: Sunday)
 ---------------------------------------
 
 ---------------------------------------
