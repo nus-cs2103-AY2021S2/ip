@@ -43,20 +43,34 @@ public class Parser {
                     this.description = starr[1];
                     break;
                 case "deadline":
-                case "event":
-                    String[] arr = starr[1].split("/");
+                    String[] arr = starr[1].split("/by");
                     if(arr.length == 1) {
-                        throw new InvalidArgumentException("Please input task due date!");
+                        throw new InvalidArgumentException("Please input task due date using '/by (date)'!");
                     }
 
-                    String[] s = arr[0].split(" ", 2);
+                    String[] str = arr[0].split(" ", 2);
 
-                    if(s.length == 1) {
+                    if(str.length == 1) {
                         throw new InvalidArgumentException("Please input task description!");
                     }
 
                     this.deadline = arr[1];
                     this.description = arr[0];
+                    break;
+                case "event":
+                    String[] a = starr[1].split("/at");
+                    if(a.length == 1) {
+                        throw new InvalidArgumentException("Please input task due date using '/at (date)'!");
+                    }
+
+                    String[] s = a[0].split(" ", 2);
+
+                    if(s.length == 1) {
+                        throw new InvalidArgumentException("Please input task description!");
+                    }
+
+                    this.deadline = a[1];
+                    this.description = a[0];
                     break;
             }
         }
