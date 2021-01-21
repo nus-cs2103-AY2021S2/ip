@@ -17,6 +17,10 @@ public class TaskList {
         return taskList.get(idx - 1).toString();
     }
 
+    public String deleteTask(final int idx) {
+        return taskList.remove(idx - 1).toString();
+    }
+
     public int size() {
         return taskList.size();
     }

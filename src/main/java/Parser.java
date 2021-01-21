@@ -29,6 +29,11 @@ public class Parser {
                     throw new DukeException.InvalidTask();
                 }
                 return new DoneCommand(scanner.nextInt());
+            case DukeString.COMMAND_DELETE:
+                if (!scanner.hasNextInt()) {
+                    throw new DukeException.InvalidTask();
+                }
+                return new DeleteCommand(scanner.nextInt());
             case DukeString.COMMAND_DEADLINE:
                 if (!scanner.hasNext()) {
                     throw new DukeException.EmptyDescription(DukeString.COMMAND_DEADLINE);
