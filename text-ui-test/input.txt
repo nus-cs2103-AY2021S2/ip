@@ -15,4 +15,10 @@ deadline sdf /
 event
 event sdf
 event sdf /
+delete 1
+delete 1
+delete 1
+delete 1
+delete 0
+done 0
 bye
