@@ -24,7 +24,7 @@ public class Task {
 
     public String markCompleted() {
         isDone = true;
-        System.out.println("Well done, keep it up! I've marked this task as done:");
+        System.out.println("Well done, Master! I've marked this task as done:");
         return toString();
     }
 
