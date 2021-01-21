@@ -14,7 +14,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
-        System.out.println("Hello from\n" + logo);
+        //System.out.println("Hello from\n" + logo);
 
         Scanner sc = new Scanner(System.in);
 
@@ -113,20 +113,23 @@ public class Duke {
     }
 
     static void greet() {
-        System.out.println(LINE + SPACE + "Hello! I am Duke\n" + SPACE + "What can I do for you?" + LINE);
+        System.out.println(LINE + SPACE + "Heyyoo!! I am Luna :D\n" + SPACE + "What can I do for you today?" + LINE);
     }
 
     static void is_int(String s, String task) throws InvalidNumberException {
         try {
-            Integer.parseInt(s);
+            int x = Integer.parseInt(s);
+            if (x > count) {
+                throw new InvalidNumberException(LINE + SPACE + "ERROR! D: The number should be smaller than the total number of tasks in the following task: " + task + LINE);
+            }
         } catch (NumberFormatException e){
-            throw new InvalidNumberException(LINE + SPACE + "A number should be added for the following task: " + task + LINE);
+            throw new InvalidNumberException(LINE + SPACE + "ERROR! D: A number should be added for the following task: " + task + LINE);
         }
     }
 
     static void check_spl_length(String[] spl, int x, String task) throws InvalidTaskFormatException {
         if (spl.length != x)
-            throw new InvalidTaskFormatException(LINE + SPACE + "The format for the following task is wrong: " + task + LINE);
+            throw new InvalidTaskFormatException(LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task + LINE);
     }
 
     static void wrong_keyword() throws InvalidKeywordException {
@@ -154,14 +157,16 @@ public class Duke {
         int number = Integer.parseInt(spl[1]);
         Task current = storage.get(number - 1);
         current.finished();
-        storage.add(number - 1, current);
+        //storage.add(number - 1, current);
         System.out.println(LINE + SPACE + "Good job! Another Task completed! I have marked it as done:\n" + SPACE + current + LINE);
     }
 
     static void process_list() {
+        System.out.println(LINE);
         for (int i = 1; i <= count; i++) {
             System.out.println(SPACE + i + ". " + storage.get(i-1));
         }
+        System.out.println(LINE);
     }
     static void process_delete(String[] spl) {
         int num = Integer.parseInt(spl[1]);
@@ -170,7 +175,7 @@ public class Duke {
         count--;
     }
     static void process_bye() {
-        System.out.println(LINE + SPACE + "Bye. Hope to see you again soon!" + LINE);
+        System.out.println(LINE + SPACE + "Byee, hope to see you again soon!" + LINE);
     }
 
 
