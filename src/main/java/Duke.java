@@ -26,15 +26,19 @@ public class Duke {
                 case "list":
                     System.out.println("    ____________________________________________________________");
                     for (int taskNum = 0; taskNum < taskList.size(); taskNum++) {
-                        System.out.println((taskNum + 1) + ". " + taskList.get(taskNum));
+                        System.out.println((taskNum + 1) + "." + taskList.get(taskNum));
                     }
                     System.out.println("    ____________________________________________________________");
                     break;
 
-                case "blah":
-                    System.out.println("    ____________________________________________________________\n " +
-                            "    blah\n" +
-                            "    ____________________________________________________________");
+                case "todo":
+                    ToDo nextToDo = new ToDo(sc.nextLine());
+                    taskList.add(nextToDo);
+                    System.out.println("    ____________________________________________________________\n" +
+                            "    Got it. I've added this task: \n");
+                    System.out.println("       " + nextToDo + "\n" +
+                            "     Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println("    ____________________________________________________________");
                     break;
 
                 case "done":
@@ -51,6 +55,12 @@ public class Duke {
                             "    Bye. Hope to see you again soon!\n" +
                             "    ____________________________________________________________");
                     Done = true;
+                    break;
+
+                case "blah":
+                    System.out.println("    ____________________________________________________________\n " +
+                            "    blah\n" +
+                            "    ____________________________________________________________");
                     break;
 
                 default:
