@@ -30,6 +30,11 @@ public class Duke {
                         Task finishedTask = ls.get(taskNum - 1);
                         finishedTask.setCompletion(true);
                         printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
+                    } else if (splitInput[0].equals("delete")) {
+                        int taskNum = Integer.parseInt(splitInput[1]);
+                        Task deletedTask = ls.remove(taskNum - 1);
+                        printMessage("Noted. I've removed this task:\n" + "  " + deletedTask + "Now you have "
+                                + ls.size() + " tasks in the list.");
                     } else {
                         if (splitInput[0].equals("todo")) {
                             // check for empty task
