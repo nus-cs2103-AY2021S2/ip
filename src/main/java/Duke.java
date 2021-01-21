@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,18 +10,27 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
+        ArrayList<String> list = new ArrayList<String>();
         System.out.println("____________________________________________________________\n" +
                 "Hello! I'm Duke\n" +
                 "How can I assist you?\n" +
                 "____________________________________________________________");
         while (true) {
-            String command = sc.nextLine();
-            if (command.equals("bye")) {
+            String text = sc.nextLine();
+            if (text.equals("bye")) {
                 System.out.println("Bye. Till next time!");
                 break;
             }
+            else if (text.equals("list")) {
+                int num = 1;
+                for (String task: list) {
+                    System.out.println(String.format("%d. %s", num, task));
+                    num++;
+                }
+            }
             else {
-                System.out.println("___\n"+command+"\n___");
+                list.add(text);
+                System.out.println(String.format("added: %s", text));
             }
         }
         sc.close();
