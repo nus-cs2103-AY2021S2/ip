@@ -30,7 +30,13 @@ public class Duke {
         while(true) {
             String[] msg = sc.nextLine().split("/");
             String[] msg0 = msg[0].split(" ", 2);
-            Command cmd = Command.valueOf(msg0[0]);
+            Command cmd;
+            try {
+                cmd = Command.valueOf(msg0[0]);
+            } catch(IllegalArgumentException e) {
+                print((new DukeException("I can't understand the message")).toString());
+                continue;
+            }
             switch(cmd) {
 
                 case list:
@@ -121,9 +127,6 @@ public class Duke {
                 case bye:
                     print("Bye. Hope to see you again!");
                     return;
-
-                default:
-                    print((new DukeException("I can't understand the message")).toString());
             }
         }
     }
