@@ -8,41 +8,33 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        boolean runDuke = true;
+        boolean continueDuke = true;
 
         greet();
 
-        while (runDuke) {
+        while (continueDuke) {
             String input = scanner.nextLine().trim();
-            String[] tokenizedInput = input.split(" ", 2);
-
-            switch (tokenizedInput[0]) {
-                case "list": StringBuilder builder = new StringBuilder();
-                    builder.append("Here are the tasks in your list:\n");
-                    for (int i = 0; i < tasks.size(); i++) {
-                        int numbering = i + 1;
-                        builder.append(numbering);
-                        builder.append(". ");
-                        builder.append(tasks.get(i));
-
-                        if (numbering != tasks.size()) {
-                            builder.append("\n");
-                        }
-                    }
-                    echo(builder.toString());
-                    break;
-                case "done":
-                    int taskIndex = Integer.parseInt(tokenizedInput[1]) - 1;
-                    tasks.get(taskIndex).markAsDone();
-                    echo("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
-                    break;
-                case "bye": echo("Bye. Hope to see you again soon!");
-                    runDuke = false;
-                    break;
-                default:
-                    addTask(tokenizedInput);
-            }
+            continueDuke = processInput(input);
         }
+    }
+
+    public static boolean processInput(String input) {
+        String[] tokenizedInput = input.split(" ", 2);
+
+        switch (tokenizedInput[0]) {
+            case "list": listTask();
+                break;
+            case "done":
+                int taskIndex = Integer.parseInt(tokenizedInput[1]) - 1;
+                doneTask(taskIndex);
+                break;
+            case "bye": exit();
+                return false;
+            default:
+                addTask(tokenizedInput);
+                break;
+        }
+        return true;
     }
 
     public static void addTask(String[] tokenizedInput) {
@@ -65,6 +57,27 @@ public class Duke {
         echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list", newTask, tasks.size()));
     }
 
+    public static void doneTask(int taskIndex) {
+        tasks.get(taskIndex).markAsDone();
+        echo("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
+    }
+
+    public static void listTask() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            int numbering = i + 1;
+            builder.append(numbering);
+            builder.append(". ");
+            builder.append(tasks.get(i));
+
+            if (numbering != tasks.size()) {
+                builder.append("\n");
+            }
+        }
+        echo(builder.toString());
+    }
+
     public static void greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _ ___ \n"
@@ -73,6 +86,10 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         echo("Hello! I'm Duke.\nWhat can I do for you?");
+    }
+
+    public static void exit() {
+        echo("Bye. Hope to see you again soon!");
     }
 
     public static void echo(String input) {
