@@ -1,5 +1,14 @@
-todo borrow book
+todo go work
+deadline project /by Thurs
+event dinner at mcdonalds /at Sun 8-10
+todo
+deadline
+deadline homework
+event
+event sleep
 list
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+done 1
+done 4
+done a
+don
 bye

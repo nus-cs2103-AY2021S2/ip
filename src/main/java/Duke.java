@@ -28,33 +28,71 @@ public class Duke {
                 list.printAll();
                 System.out.println(topBound);
             } else if (arr[0].startsWith("done")) {
-                String[] doneArr = arr[0].split(" ");
-                int x = Integer.parseInt(doneArr[1]) - 1;
-                list.done(x);
-                System.out.println(topBound + "Good job! I've marked this task as done:\n" + "  " + list.get(x)
+                try {
+                    String[] doneArr = arr[0].split(" ");
+                    int x = Integer.parseInt(doneArr[1]) - 1;
+                    list.done(x);
+                    System.out.println(topBound + "Good job! I've marked this task as done:\n" + "  " + list.get(x)
+                            + bottomBound);
+                } catch (IndexOutOfBoundsException e) {
+                    // Task number x does not exist
+                    System.out.println(topBound + "Task does not exist and can not be completed!" + bottomBound);
+                } catch (NumberFormatException e) {
+                    // parameter for done is not an Integer
+                    System.out.println(topBound + "done command must be followed by an Integer ie. done 1. Try again!"
                         + bottomBound);
+                }
             } else if (arr[0].startsWith("todo")) {
-                String taskName = input.replaceFirst("todo", "").stripLeading();
-                ToDos curr = new ToDos(taskName);
-                list.add(curr);
-                System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                        + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                try {
+                    String taskName = input.replaceFirst("todo", "").stripLeading();
+                    if (taskName.equals("")) {
+                        throw new DukeException("todo");
+                    }
+                    ToDos curr = new ToDos(taskName);
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                }
             } else if (arr[0].startsWith("deadline")) {
-                String taskName = arr[0].replaceFirst("deadline", "").stripLeading().stripTrailing();
-                Deadlines curr = new Deadlines(taskName, arr[1].replaceFirst("by", "").stripLeading());
-                list.add(curr);
-                System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                        + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                try {
+                    String taskName = arr[0].replaceFirst("deadline", "").stripLeading()
+                            .stripTrailing();
+                    if (taskName.equals("")) {
+                        throw new DukeException("deadline");
+                    }
+                    Deadlines curr = new Deadlines(taskName, arr[1].replaceFirst("by", "")
+                            .stripLeading());
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(topBound + "deadline must include '/by time'. Try again!" + bottomBound);
+                }
             } else if (arr[0].startsWith("event")) {
-                String taskName = arr[0].replaceFirst("event", "").stripLeading().stripTrailing();
-                Events curr = new Events(taskName, arr[1].replaceFirst("at", "").stripLeading());
-                list.add(curr);
-                System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
-                        + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                try {
+                    String taskName = arr[0].replaceFirst("event", "").stripLeading().stripTrailing();
+                    if (taskName.equals("")) {
+                        throw new DukeException("event");
+                    }
+                    Events curr = new Events(taskName, arr[1].replaceFirst("at", "").stripLeading());
+                    list.add(curr);
+                    System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
+                            + "\nNow you have " + list.noOfTasks() + " tasks in the list." + bottomBound);
+                } catch (DukeException e) {
+                    // command came without a description
+                    System.out.println(topBound + e.getMessage() + bottomBound);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(topBound + "event must include '/at duration'. Try again!" + bottomBound);
+                }
             } else {
-                Task curr = new Task(input);
-                list.add(curr);
-                System.out.println(topBound + "added: " + input + bottomBound);
+                // unknown command
+                System.out.println(topBound + "OOPS!!! I'm sorry, but I don't know what that means :-(" + bottomBound);
             }
         }
     }
