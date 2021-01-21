@@ -26,3 +26,4 @@ delete
 delete 7
 random
 non a valid action
+bye

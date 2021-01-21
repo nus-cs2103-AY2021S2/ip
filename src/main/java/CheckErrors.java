@@ -9,44 +9,14 @@ public class CheckErrors {
         this.list = list;
     }
 
-//    public boolean check() {
-//        if (input.startsWith("todo")) {
-//            return (input.length() > 5) && (input.charAt(4) == ' ');
-//        } else if (input.startsWith("deadline")) {
-//            return (input.length() > 9) && (input.charAt(8) == ' ');
-//        } else if (input.startsWith("event")) {
-//            return (input.length() > 6) && (input.charAt(5) == ' ');
-//        } else if (input.startsWith("done")) {
-//            if (input.length() <= 5) {
-//                return false;
-//            } else {
-////            return (input.length() > 5) && (input.charAt(8) == ' ');
-//                try {
-//                    int i = Integer.parseInt(input.substring(5));
-//                } catch (NumberFormatException nfe) {
-//                    return false;
-//                }
-//                return Integer.parseInt(input.substring(5)) <= noOfTasks;
-//            }
-//        } else if (input.equals("list")) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-////        try {
-////            new Task(input);
-////        } catch (IllegalArgumentException ex) {
-////            throw new IllegalTaskException(ex.getMessage(), "todo");
-////        }
-//    }
-
     public boolean check() {
         String taskType = "";
 
-        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo") && !input.startsWith("deadline")
-        && !input.startsWith("event")) {
+        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo")
+                && !input.startsWith("deadline") && !input.startsWith("event")) {
 //            throw new IllegalInputException("");
-            System.out.println(new IllegalInputException("").toString());
+            System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + new IllegalInputException("").toString()
+                    + "\n" + Duke.line);
             return false;
         }
 
@@ -84,17 +54,20 @@ public class CheckErrors {
             if (input.startsWith("done") || input.startsWith("delete")) {
 //                System.out.println("string index out of bounds done");
 //                throw new IllegalDoneException(ex.getMessage());
-                System.out.println(new IllegalDoneDeleteException(ex.getMessage(), taskType).toString());
+                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+                        + new IllegalDoneDeleteException(ex.getMessage(), taskType).toString() + "\n" + Duke.line);
                 return false;
             } else {
 //                System.out.println("string index out of bounds not done");
 //                throw new IllegalTaskException(ex.getMessage(), taskType);
-                System.out.println(new IllegalTaskException(ex.getMessage(), taskType).toString());
+                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+                        + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" +  Duke.line);
                 return false;
             }
         } catch (IndexOutOfBoundsException ex) {
 //            throw new OutOfBoundsDoneException(ex.getMessage());
-            System.out.println(new OutOfBoundsDoneDeleteException(ex.getMessage()).toString());
+            System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+                    + new OutOfBoundsDoneDeleteException(ex.getMessage()).toString() + "\n" +  Duke.line);
             return false;
         }
 

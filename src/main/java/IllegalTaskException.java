@@ -12,6 +12,7 @@ class IllegalTaskException extends StringIndexOutOfBoundsException {
 
     @Override
     public String toString() {
-        return "You forgot to enter the description of the " + taskType + "! Please re-enter!";
+        return "You forgot to enter the description of the " + taskType + "!\n"
+                + (char) 9 + (char) 9 + "Please re-enter!";
     }
 }

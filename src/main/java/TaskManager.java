@@ -25,35 +25,13 @@ public class TaskManager {
             }
         }
 
-
-
-
-//        } else if (input.startsWith("done") && (input.length() == 6)) {
-//            Task task = list.get(Character.getNumericValue(input.charAt(5)) - 1);
-//            task.markAsDone();
-//            System.out.println("Good job! You got " + task.description + " done!");
-//        } else {
-////                String[] inputSplit = input.split(" ");
-//            Task newTask;
-//            if (input.startsWith("todo")) {
-//                newTask = new TodoTask(input.substring(5));
-//            } else if (input.startsWith("deadline")) {
-//                String[] inputSplit = input.split("/");
-//                newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1), inputSplit[1].substring(3));
-//            } else {
-//                String[] inputSplit = input.split("/");
-//                newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1), inputSplit[1].substring(3));
-//            }
-////                list.add(new Task(input));
-//            list.add(newTask);
-//            System.out.println("Added: " + newTask.toString());
-//        }
     }
 
     public void markDone(String input) {
         Task task = list.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
-        System.out.println("Good job! You got " + task.description + " done!");
+        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Good job! You got " + task.description
+                + " done!\n" + Duke.line);
     }
 
     public void addNewTask(String input) {
@@ -62,13 +40,15 @@ public class TaskManager {
             newTask = new TodoTask(input.substring(5));
         } else if (input.startsWith("deadline")) {
             String[] inputSplit = input.split("/");
-            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1), inputSplit[1].substring(3));
+            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
+                    inputSplit[1].substring(3));
         } else {
             String[] inputSplit = input.split("/");
-            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1), inputSplit[1].substring(3));
+            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
+                    inputSplit[1].substring(3));
         }
         list.add(newTask);
-        System.out.println("Added: " + newTask.toString());
+        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.line);
     }
 
     public void deleteTask(String input) {
@@ -77,12 +57,14 @@ public class TaskManager {
 //        System.out.println("Good job! You got " + task.description + " done!");
         Task task = list.get(Integer.parseInt(input.substring(7)) - 1);
         list.remove(Integer.parseInt(input.substring(7)) - 1);
-        System.out.println("Deleted: " + task.toString());
+        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.line);
     }
 
     public void listEvents() {
+        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i).toString());
+            System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + list.get(i).toString());
         }
+        System.out.println(Duke.line);
     }
 }

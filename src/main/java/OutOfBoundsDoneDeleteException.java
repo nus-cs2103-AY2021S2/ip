@@ -5,6 +5,6 @@ public class OutOfBoundsDoneDeleteException extends IndexOutOfBoundsException {
 
     @Override
     public String toString() {
-        return "The task you entered does not exist! Please re-enter!";
+        return "The task you entered does not exist!\n" + (char) 9 + (char) 9 + "Please re-enter!";
     }
 }
