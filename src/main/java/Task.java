@@ -7,7 +7,7 @@ public class Task {
         this.isDone = false;
     }
 
-    private Task(String task, boolean isCompleted) {
+    protected Task(String task, boolean isCompleted) {
         this.description = task;
         this.isDone = isCompleted;
     }

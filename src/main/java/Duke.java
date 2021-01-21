@@ -129,6 +129,7 @@ public class Duke {
                 System.out.println("     " + event);
                 System.out.println("     Now you have " + store.size() + " tasks in the list.");
             } else {
+                store.add(new Task(input));
                 System.out.println("     added: " + input);
             }
             System.out.println("    ____________________________________________________________");
