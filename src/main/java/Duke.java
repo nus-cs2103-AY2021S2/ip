@@ -1,8 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
-    private static Task[] tasks = new Task[100];
-    private static int counter = 0;
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -33,7 +33,24 @@ public class Duke {
     }
 
     /**
-     * @param command a string which needs to be parsed
+     * @param command the input of user
+     * @throws DukeException exception specific to Duke
+     */
+    public static void deleteTask(String command) throws DukeException {
+        try {
+            int idx = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task task = tasks.get(idx);
+            task.done();
+            printMsg("Nice! I've marked this task as done: ");
+            printMsg("  " + task);
+        } catch (Exception e) {
+            throw new DukeException();
+        }
+    }
+
+    /**
+     * @param command the input of user
+     * @throws DukeException exception specific to Duke
      */
     public static void addTask(String command) throws DukeException {
         String type = command.split(" ")[0];
@@ -47,7 +64,7 @@ public class Duke {
             case "todo":
                 title = substr;
                 newTask = new ToDo(title);
-                tasks[counter] = newTask;
+                tasks.add(newTask);
                 break;
             case "deadline":
                 int idxOfBy = substr.indexOf("/by");
@@ -57,7 +74,7 @@ public class Duke {
                     title = substr.substring(0, idxOfBy - 1);
                     String deadline = substr.substring(idxOfBy + 4);
                     newTask = new Deadline(title, deadline);
-                    tasks[counter] = newTask;
+                    tasks.add(newTask);
                 }
                 break;
             case "event":
@@ -68,25 +85,31 @@ public class Duke {
                     title = substr.substring(0, idxOfAt - 1);
                     String time = substr.substring(idxOfAt + 4);
                     newTask = new Event(title, time);
-                    tasks[counter] = newTask;
+                    tasks.add(newTask);
                 }
                 break;
             default:
                 throw new DukeException();
         }
-        counter++;
         printMsg("Got it. I've added this task: ");
         printMsg("  " + newTask);
-        printMsg("Now you have " + counter + " tasks in the list.");
+        printMsg("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
-     * @param task the task that is marked done
+     * @param command the input of user
+     * @throws DukeException exception specific to Duke
      */
-    public static void doneTask(Task task) {
-        task.done();
-        printMsg("Nice! I've marked this task as done: ");
-        printMsg("  " + task);
+    public static void doneTask(String command) throws DukeException {
+        try {
+            int idx = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task task = tasks.get(idx);
+            task.done();
+            printMsg("Nice! I've marked this task as done: ");
+            printMsg("  " + task);
+        } catch (Exception e) {
+            throw new DukeException();
+        }
     }
 
     public static void printLine() {
@@ -129,12 +152,10 @@ public class Duke {
                     addTask(command);
                     break;
                 case "done":
-                    try {
-                        int idx = Integer.parseInt(substrs[1]) - 1;
-                        doneTask(tasks[idx]);
-                    } catch (Exception e) {
-                        throw new DukeException();
-                    }
+                    doneTask(command);
+                    break;
+                case "delete":
+                    deleteTask(command);
                     break;
                 default:
                     throw new UnknownCommandException();
@@ -151,8 +172,8 @@ public class Duke {
      * print task list as well as their status
      */
     public static void printTasks() {
-        for (int i = 0; i < counter; i++) {
-            printMsg((i + 1) + "." + tasks[i].toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            printMsg((i + 1) + "." + tasks.get(i).toString());
         }
     }
 }

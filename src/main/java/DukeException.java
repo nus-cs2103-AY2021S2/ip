@@ -1,3 +1,6 @@
+/**
+ * exceptions specific to Duke
+ */
 public class DukeException extends Exception {
     private static final String ERROR_MESSAGE = "☹ OOPS!!! unknown command or incorrect input format";
 
