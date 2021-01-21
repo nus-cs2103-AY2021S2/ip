@@ -1,5 +1,7 @@
 # Duke project template
 
+![Text UI Test](https://github.com/lirc572/ip/workflows/Text%20UI%20Test/badge.svg)
+
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
 ## Setting up in Intellij
