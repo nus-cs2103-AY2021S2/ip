@@ -3,6 +3,7 @@ public class Task {
     public boolean isDone;
 
     public Task(String task) {
+        task = task.strip();
         this.task = task;
         this.isDone = false;
     }

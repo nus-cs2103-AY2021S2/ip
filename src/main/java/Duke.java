@@ -42,7 +42,7 @@ public class Duke {
                 String[] split = str.split(" ");
                 String rest ="";
                 for(int i=1; i<split.length; i++) {
-                    rest+=split[i];
+                    rest = rest+ " " + split[i];
                 }
                 if (split.length == 2 && split[0].equals("done")) {
                     try {
@@ -53,8 +53,12 @@ public class Duke {
                         System.out.println(line + " Enter 'done' followed by a number between " +
                                 "1 and " + tasks.size() + "\n" + line);
                     }
-                } else if (split[0].equals("todo")) {
-                    tasks.add(new Todo(rest));
+                } else if (split[0].equals("todo") || split[0].equals("deadline")) {
+                    if(split[0].equals("todo")) {
+                        tasks.add(new Todo(rest));
+                    } else {
+                        tasks.add(new Deadline(rest));
+                    }
                     System.out.println(line + " Got it. I've added this task:\n" +
                             " " +tasks.get(tasks.size()-1) + "\n" + " Now you have "
                             + tasks.size() + " tasks in the list\n" + line);
