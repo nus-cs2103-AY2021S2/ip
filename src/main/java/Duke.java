@@ -41,8 +41,12 @@ public class Duke {
                 int taskNo = Integer.parseInt(taskname);
                 markdone(lst, taskNo);
             } else if(request.equals("todo")) {
-                lst.add(new Task("T", taskname));
-                printadded(lst);
+                try {
+                    trytodo(lst, taskname);
+                    printadded(lst);
+                } catch (DukeException ex) {
+                    dprint(ex.getMessage());
+                }
             } else if(request.equals("deadline")) {
                 String[] deadStr = format(taskname);
                 lst.add(new Task("D", deadStr[0], deadStr[1]));
@@ -51,10 +55,27 @@ public class Duke {
                 String[] eventStr = format(taskname);
                 lst.add(new Task("E", eventStr[0], eventStr[1]));
                 printadded(lst);
+            } else {
+                try {
+                    throwDK();
+                } catch (DukeException ex) {
+                    dprint(ex.getMessage());
+                }
             }
         }
     }
     
+    public static void trytodo(List<Task> lst, String taskname) throws DukeException {
+        if (taskname.equals("")) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        lst.add(new Task("T", taskname));
+    }
+
+    public static void throwDK() throws DukeException {
+        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
     public static String[] format(String n) {
         String[] arr = new String[3];
         arr[0] = n.split("/")[0];
