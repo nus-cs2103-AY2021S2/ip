@@ -6,6 +6,27 @@ public class Duke {
         System.out.println("    ☹ OOPS!!! " + message);
     }
 
+    // public static void deleteTask(int i) {
+    // try {
+    // Tasl task =
+    // } catch (Exception e) {
+    // //TODO: handle exception
+    // }
+    // }
+    public static Task[] removeTheElement(Task[] arr, int index) {
+        if (arr == null || index < 0 || index >= arr.length) {
+            return arr;
+        }
+        Task[] anotherArray = new Task[arr.length - 1];
+        for (int i = 0, k = 0; i < arr.length; i++) {
+            if (i == index) {
+                continue;
+            }
+            anotherArray[k++] = arr[i];
+        }
+        return anotherArray;
+    }
+
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -13,6 +34,7 @@ public class Duke {
         String terminate_input = "bye";
         String show_list = "list";
         String done = "done";
+        String delete = "delete";
         String indentation = "    ";
         Scanner sc = new Scanner(System.in);
         System.out.println(line);
@@ -46,6 +68,22 @@ public class Duke {
                     todo[job_done - 1] = job;
                     System.out.println(indentation + "Nice! I've marked this task as done:");
                     System.out.println(indentation + job);
+                } catch (DukeException e) {
+                    // TODO: handle exception
+                    printErrorMessage(e.getMessage());
+                }
+            } else if (input.length() > 4 && input.substring(0, 6).equals(delete)) {
+                try {
+                    int index = Integer.valueOf(input.substring(7));
+                    if (index > position + 1) {
+                        throw new DukeException("Seems like you do not have so many tasks in your list");
+                    }
+                    Task temp = todo[index - 1];
+                    todo = removeTheElement(todo, index - 1);
+                    position -= 1;
+                    System.out.println(indentation + "Noted, I've removed this task: ");
+                    System.out.println(indentation + temp);
+                    System.out.println(indentation + "Now you have " + position + " tasks in the list.");
                 } catch (DukeException e) {
                     // TODO: handle exception
                     printErrorMessage(e.getMessage());
