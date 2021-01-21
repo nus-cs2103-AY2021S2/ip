@@ -1,12 +1,12 @@
 public class DoneCommand implements Command {
-    public final int index;
+    private final int index;
 
-    public DoneCommand(int idx) {
+    public DoneCommand(final int idx) {
         this.index = idx;
     }
 
     @Override
-    public String execute(TaskList taskList) {
+    public String execute(final TaskList taskList) {
         if (index > taskList.size()) {
             throw new DukeException.InvalidTask();
         }

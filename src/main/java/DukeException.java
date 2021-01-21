@@ -6,7 +6,7 @@ public class DukeException {
     }
 
     public static class EmptyDescription extends IllegalArgumentException {
-        public EmptyDescription(String type) {
+        public EmptyDescription(final String type) {
             super(String.format(DukeString.EXCEPTION_EMPTY_DESCRIPTION, type));
         }
     }

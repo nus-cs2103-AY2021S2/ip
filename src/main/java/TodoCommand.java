@@ -1,5 +1,5 @@
 public class TodoCommand extends AddCommand {
-    public TodoCommand(String content) {
+    public TodoCommand(final String content) {
         super(new TodoTask(content));
     }
 }

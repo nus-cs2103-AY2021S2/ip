@@ -1,6 +1,7 @@
 public class EventTask extends Task {
     private final String event;
-    public EventTask(String desc, String date) {
+
+    public EventTask(final String desc, final String date) {
         super(desc);
         this.event = date;
     }

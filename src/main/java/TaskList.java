@@ -12,7 +12,7 @@ public class TaskList {
         taskList.add(task);
     }
 
-    public String doneTask(int idx) {
+    public String doneTask(final int idx) {
         taskList.get(idx - 1).markDone();
         return taskList.get(idx - 1).toString();
     }

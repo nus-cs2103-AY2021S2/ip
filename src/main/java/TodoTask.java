@@ -1,5 +1,5 @@
 public class TodoTask extends Task {
-    public TodoTask(String desc) {
+    public TodoTask(final String desc) {
         super(desc);
     }
 
