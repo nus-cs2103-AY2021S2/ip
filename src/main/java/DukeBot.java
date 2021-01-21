@@ -18,12 +18,24 @@ public class DukeBot {
     }
 
     // Static methods
-    public static String getCommand(String input) {
-        return String.valueOf(input).split("\\\\s", 2)[0];
+
+    /**
+     * Returns the first word present in a given line of input text.
+     *
+     * @param input The user input text of String type
+     * @return A lowercase String
+     */
+    public static String getFirstWord(String input) {
+        return String.valueOf(input).split("\\\\s", 2)[0].toLowerCase();
     }
 
 
     // Instance methods
+
+    /**
+     * Activates the chat-bot so that it keeps taking inputs from the user via System.in
+     * until the "bye" input is given.
+     */
     public void run() {
         while (true) {
             String input = scanner.nextLine();
@@ -45,7 +57,7 @@ public class DukeBot {
      * @return true if the programme should end and false otherwise
      */
     public boolean processInput(String input) {
-        String first = DukeBot.getCommand(input).toLowerCase();
+        String first = DukeBot.getFirstWord(input);
         Command command = Command.get(first);
         if (command == null) {
             this.add(input);
@@ -61,6 +73,11 @@ public class DukeBot {
         return false;
     }
 
+    /**
+     * Adds a new item to the chat-bots list.
+     *
+     * @param input A String of text that should be added as an entry to the list
+     */
     public void add(String input) {
         this.list.add(input);
         System.out.println(UNDERLINES);
@@ -68,6 +85,9 @@ public class DukeBot {
         System.out.println(UNDERLINES);
     }
 
+    /**
+     * Prints all the existing list items that this current chat-bot was made to track.
+     */
     public void printList() {
         System.out.println(UNDERLINES);
         int count = 1;
@@ -78,3 +98,4 @@ public class DukeBot {
         System.out.println(UNDERLINES);
     }
 }
+
