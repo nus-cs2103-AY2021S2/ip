@@ -77,8 +77,8 @@ public class Duke {
     }
 
     public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _ ___ \n"
+        String logo = " ____        _\n"
+                + "|  _ \\ _   _| | _ ___\n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
