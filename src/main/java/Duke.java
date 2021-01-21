@@ -18,122 +18,148 @@ public class Duke {
         List<Task> store = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            String[] parts = input.split(" ");
-            System.out.println("    ____________________________________________________________");
-            if (parts[0].equals("bye")) {
-                System.out.println("     Bye. Hope to see you again soon!");
+            try {
+                String input = sc.nextLine();
+                String[] parts = input.split(" ");
                 System.out.println("    ____________________________________________________________");
-                break;
-            } else if (parts[0].equals("list")) {
-                System.out.println("     Here are the tasks in your list:");
-                int count = 1;
-                for (Task t: store) {
-                    System.out.println("     " + count + "." + t);
-                    count++;
-                }
-            } else if (parts[0].equals("done")) {
-                int taskDone = Integer.parseInt(parts[1]);
-                int count = 1;
-                for (Task t: store) {
-                    if (count == taskDone) {
-                        System.out.println("     Nice! I've marked this task as done:");
-                        store.set(count-1, store.get(count-1).markAsDone());
-                        System.out.println("     " + store.get(count-1));
+                if (parts[0].equals("bye")) {
+                    System.out.println("     Bye. Hope to see you again soon!");
+                    System.out.println("    ____________________________________________________________");
+                    break;
+                } else if (parts[0].equals("list")) {
+                    System.out.println("     Here are the tasks in your list:");
+                    int count = 1;
+                    for (Task t : store) {
+                        System.out.println("     " + count + "." + t);
+                        count++;
                     }
-                    count++;
-                }
-            } else if (parts[0].equals("todo")){
-                System.out.println("     Got it. I've added this task:");
-                String taskDescription = "";
-                boolean first = true;
-                for (int i = 1; i < parts.length; ++i) {
-                    if (!first) {
-                        taskDescription += " " + parts[i];
-                    } else {
-                        taskDescription += parts[i];
+                } else if (parts[0].equals("done")) {
+                    if (parts.length == 1) {
+                        System.out.println("     ☹ OOPS!!! The " +
+                                "description of done cannot be empty.");
+                        throw new InsufficientArgumentsException();
                     }
-                    first = false;
-                }
-                Todo todo = new Todo(taskDescription);
-                store.add(todo);
-                System.out.println("     " + todo);
-                System.out.println("     Now you have " + store.size() + " tasks in the list.");
-            } else if (parts[0].equals("deadline")){
-                System.out.println("     Got it. I've added this task:");
-                boolean flag = false, first = true;
-                String dueDate = "";
-                for (String s: parts) {
-                    if (flag) {
-                        if (!first) {
-                            dueDate += ' ' + s;
-                        } else {
-                            dueDate += s;
+                    int taskDone = Integer.parseInt(parts[1]);
+                    int count = 1;
+                    for (Task t : store) {
+                        if (count == taskDone) {
+                            System.out.println("     Nice! I've marked this task as done:");
+                            store.set(count - 1, store.get(count - 1).markAsDone());
+                            System.out.println("     " + store.get(count - 1));
                         }
-                        first = false;
+                        count++;
                     }
-                    if (s.equals("/by")) {
-                        flag = true;
+                } else if (parts[0].equals("todo")) {
+                    if (parts.length == 1) {
+                        System.out.println("     ☹ OOPS!!! The " +
+                                "description of a todo cannot be empty.");
+                        throw new InsufficientArgumentsException();
                     }
-                }
-                String taskDescription = "";
-                first = true;
-                for (int i = 1; i < parts.length; ++i) {
-                    if (!parts[i].equals("/by")) {
+                    System.out.println("     Got it. I've added this task:");
+                    String taskDescription = "";
+                    boolean first = true;
+                    for (int i = 1; i < parts.length; ++i) {
                         if (!first) {
                             taskDescription += " " + parts[i];
                         } else {
                             taskDescription += parts[i];
                         }
                         first = false;
-                    } else {
-                        break;
                     }
-                }
-                Deadline deadline = new Deadline(taskDescription, dueDate);
-                store.add(deadline);
-                System.out.println("     " + deadline);
-                System.out.println("     Now you have " + store.size() + " tasks in the list.");
-            } else if (parts[0].equals("event")){
-                System.out.println("     Got it. I've added this task:");
-                boolean flag = false, first = true;
-                String eventDate = "";
-                for (String s: parts) {
-                    if (flag) {
-                        if (!first) {
-                            eventDate += ' ' + s;
-                        } else {
-                            eventDate += s;
+                    Todo todo = new Todo(taskDescription);
+                    store.add(todo);
+                    System.out.println("     " + todo);
+                    System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                } else if (parts[0].equals("deadline")) {
+                    if (parts.length == 1) {
+                        System.out.println("     ☹ OOPS!!! The " +
+                                "description of a deadline cannot be empty.");
+                        throw new InsufficientArgumentsException();
+                    }
+                    System.out.println("     Got it. I've added this task:");
+                    boolean flag = false, first = true;
+                    String dueDate = "";
+                    for (String s : parts) {
+                        if (flag) {
+                            if (!first) {
+                                dueDate += ' ' + s;
+                            } else {
+                                dueDate += s;
+                            }
+                            first = false;
                         }
-                        first = false;
-                    }
-                    if (s.equals("/at")) {
-                        flag = true;
-                    }
-                }
-                String eventDescription = "";
-                first = true;
-                for (int i = 1; i < parts.length; ++i) {
-                    if (!parts[i].equals("/at")) {
-                        if (!first) {
-                            eventDescription += " " + parts[i];
-                        } else {
-                            eventDescription += parts[i];
+                        if (s.equals("/by")) {
+                            flag = true;
                         }
-                        first = false;
-                    } else {
-                        break;
                     }
+                    String taskDescription = "";
+                    first = true;
+                    for (int i = 1; i < parts.length; ++i) {
+                        if (!parts[i].equals("/by")) {
+                            if (!first) {
+                                taskDescription += " " + parts[i];
+                            } else {
+                                taskDescription += parts[i];
+                            }
+                            first = false;
+                        } else {
+                            break;
+                        }
+                    }
+                    Deadline deadline = new Deadline(taskDescription, dueDate);
+                    store.add(deadline);
+                    System.out.println("     " + deadline);
+                    System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                } else if (parts[0].equals("event")) {
+                    if (parts.length == 1) {
+                        System.out.println("     ☹ OOPS!!! The " +
+                                "description of an event cannot be empty.");
+                        throw new InsufficientArgumentsException();
+                    }
+                    System.out.println("     Got it. I've added this task:");
+                    boolean flag = false, first = true;
+                    String eventDate = "";
+                    for (String s : parts) {
+                        if (flag) {
+                            if (!first) {
+                                eventDate += ' ' + s;
+                            } else {
+                                eventDate += s;
+                            }
+                            first = false;
+                        }
+                        if (s.equals("/at")) {
+                            flag = true;
+                        }
+                    }
+                    String eventDescription = "";
+                    first = true;
+                    for (int i = 1; i < parts.length; ++i) {
+                        if (!parts[i].equals("/at")) {
+                            if (!first) {
+                                eventDescription += " " + parts[i];
+                            } else {
+                                eventDescription += parts[i];
+                            }
+                            first = false;
+                        } else {
+                            break;
+                        }
+                    }
+                    Event event = new Event(eventDescription, eventDate);
+                    store.add(event);
+                    System.out.println("     " + event);
+                    System.out.println("     Now you have " + store.size() + " tasks in the list.");
+                } else {
+                    System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new WrongArgumentException();
                 }
-                Event event = new Event(eventDescription, eventDate);
-                store.add(event);
-                System.out.println("     " + event);
-                System.out.println("     Now you have " + store.size() + " tasks in the list.");
-            } else {
-                store.add(new Task(input));
-                System.out.println("     added: " + input);
+                System.out.println("    ____________________________________________________________");
+            } catch(WrongArgumentException e) {
+                System.out.println("    ____________________________________________________________");
+            } catch (InsufficientArgumentsException e) {
+                System.out.println("    ____________________________________________________________");
             }
-            System.out.println("    ____________________________________________________________");
         }
     }
 }
