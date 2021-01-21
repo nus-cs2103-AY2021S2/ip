@@ -22,6 +22,8 @@ public class Parser {
                 return new DoneCommand(this.getTaskNumber());
             case "list":
                 return new ListCommand();
+            case "delete":
+                return new DeleteCommand(this.getTaskNumber());
             default:
                 return new UnknownCommand();
         }

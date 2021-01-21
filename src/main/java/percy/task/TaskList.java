@@ -44,4 +44,8 @@ public class TaskList {
     public void addTaskToList(Task task) {
         list.add(task);
     }
+
+    public void deleteTaskFromList(Task task) {
+        list.remove(task);
+    }
 }

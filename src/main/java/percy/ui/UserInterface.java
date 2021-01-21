@@ -82,6 +82,12 @@ public class UserInterface {
                 + INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n"
                 + DIVIDER;
     }
+    public static String makeDeleteMsg(Task t, TaskList list) {
+        return DIVIDER + INDENT + "Noted. I've removed this task:\n"
+                + INDENT + INDENT + t.toString() + "\n"
+                + INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n"
+                + DIVIDER;
+    }
 
     public void makeEchoMsg(String command) {
         System.out.println(DIVIDER);
