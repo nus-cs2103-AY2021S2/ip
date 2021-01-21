@@ -4,7 +4,8 @@ class ToDoTask extends Task {
         super(description, id);
     }
 
-    @Override public String toString() {
-        return super.toString() + " [T]" + super.checkBoxToString() + description;
+    @Override
+    public String toString() {
+        return "[T]" + super.checkBoxToString() + description;
     }
 }

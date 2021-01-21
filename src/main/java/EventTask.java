@@ -8,8 +8,8 @@ public class EventTask extends Task {
         this.description = description.split("/at")[0];
     }
     
-    @Override public String toString() {
-        return super.toString() + " [E]" + super.checkBoxToString()
-        + description + "(at:" + duration + ")";
+    @Override
+    public String toString() {
+        return "[E]" + super.checkBoxToString() + description + "(at:" + duration + ")";
     }
 }

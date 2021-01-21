@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 public class DeadlineTask extends Task {
 
     private String deadline;
@@ -9,7 +12,6 @@ public class DeadlineTask extends Task {
     }
 
     @Override public String toString() {
-        return super.toString() + " [D]" + super.checkBoxToString()
-        + description + "(by:" + deadline + ")";
+        return "[D]" + super.checkBoxToString() + description + "(by:" + deadline + ")";
     }
 }

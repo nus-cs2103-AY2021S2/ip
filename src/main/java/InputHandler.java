@@ -12,10 +12,9 @@ public class InputHandler {
             return new ByeCommand();
         case "done":
             if (processedInput.length == 1) {
-                throw new DukeException("Please enter a number to mark done");
+                throw new DukeException("Please enter a task number to mark done");
             }
-            int id = Integer.parseInt(processedInput[1]);
-            return new DoneCommand(id);
+            return new DoneCommand(Integer.parseInt(processedInput[1]));
         case "todo":
         case "event":
         case "deadline":
@@ -24,6 +23,11 @@ public class InputHandler {
             }
             String description = processDescription(processedInput);
             return new AddCommand(command, description);
+        case "delete":
+            if (processedInput.length == 1) {
+                throw new DukeException("Please enter a task number to delete");
+            }
+            return new DeleteCommand(Integer.parseInt(processedInput[1]));
         default:
             throw new DukeException("Invalid command. Please enter a valid one");
         }

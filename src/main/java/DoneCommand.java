@@ -7,17 +7,14 @@ public class DoneCommand implements Command {
         this.id = id;
     }
 
-    @Override
     public boolean shouldExit() {
         return false;
     }
 
-    @Override
     public String getResponse() {
-        return "Nice! I've marked this task as done:\n" + response;
+        return "Nice! I've marked this task as done:\n  " + response;
     }
 
-    @Override
     public TaskList execute(TaskList taskList) {
         taskList.markDone(id);
         response = taskList.getTask(id).toString();
