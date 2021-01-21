@@ -118,6 +118,26 @@ public class Duke {
     }
 
     /**
+     * Deletes the specified task.
+     *
+     * @param command Command input by the user
+     *                which contains the index of
+     *                the task to be deleted.
+     */
+    public static void deleteTask(String command) {
+        int deleteIndex = Integer.parseInt(command.split(" ")[1]) - 1;
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("I've removed the task:");
+        System.out.println(tasks.get(deleteIndex));
+        tasks.remove(deleteIndex);
+        count--;
+        System.out.println("Now you have " + count
+                + (count == 1 ? " task" : " tasks")
+                + " in the list.");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+
+    /**
      * Performs the specified action.
      *
      * @param command Command input by the user.
@@ -139,6 +159,8 @@ public class Duke {
             addDeadline(command);
         } else if (command.split(" ")[0].equals("event")) {
             addEvent(command);
+        } else if (command.split(" ")[0].equals("delete")) {
+            deleteTask(command);
         } else {
             throw new InvalidCommandException();
         }
