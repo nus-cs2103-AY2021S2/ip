@@ -31,7 +31,7 @@ public class Parser {
             case DukeStrings.COMMAND_EVENT:
                 return new EventCommand(scanner.nextLine());
             case DukeStrings.COMMAND_TODO:
-                return new TodoCommand(scanner.nextLine());
+                return new TodoCommand(scanner.nextLine().trim());
             default:
                 throw new InvalidCommandException();
 

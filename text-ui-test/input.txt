@@ -6,8 +6,10 @@ done 2
 todo borrow other book
 list
 booga booga
-
-
+ 
+	
+/by
+list
 done 4
 list
 bye
