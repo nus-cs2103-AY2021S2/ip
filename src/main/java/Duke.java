@@ -24,11 +24,11 @@ public class Duke {
                     }
                     System.out.println("     Ganbatte ne!");
 
-                } else if(command.startsWith("done ")){
+                } else if(command.startsWith("done")){
                     try {
                         int taskNum = Integer.valueOf(command.substring(5));
                     } catch (Exception e){
-                        throw new DukeException(":( Task number not detected! Please recheck format of commad.");
+                        throw new DukeException(":( Task number not detected! Please recheck format of command.");
                     }
                     int taskNum = Integer.valueOf(command.substring(5));
                     if(taskNum <= 0 || taskNum > tasks.size()){
@@ -37,6 +37,22 @@ public class Duke {
                     tasks.get(taskNum - 1).setCompleted();
                     System.out.println("     Otsukare! I've marked this task as done:");
                     System.out.println("       " + tasks.get(taskNum - 1).toString());
+
+                } else if(command.startsWith("delete")){
+                    try {
+                        int taskNum = Integer.valueOf(command.substring(7));
+                    } catch (Exception e){
+                        throw new DukeException(":( Task number not detected! Please recheck format of command.");
+                    }
+                    int taskNum = Integer.valueOf(command.substring(7));
+                    if(taskNum <= 0 || taskNum > tasks.size()){
+                        throw new DukeException(":( Invalid task number! Please try again.");
+                    }
+                    System.out.println("     Otsukare! I've removed the task:");
+                    System.out.println("       " + tasks.get(taskNum - 1).toString());
+                    tasks.remove(taskNum - 1);
+                    System.out.println("     Now you have " + tasks.size() + " tasks in the list.list");
+
 
                 } else if(command.startsWith("todo")){
                     if(command.length()< 5){
