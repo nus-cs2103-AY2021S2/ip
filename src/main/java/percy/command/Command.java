@@ -1,25 +1,17 @@
 package percy.command;
+import java.io.IOException;
 
-public class Command {
-    public String fullCmd;
+import percy.task.TaskList;
+public abstract class Command {
+    private boolean isExit;
 
-    public Command(String fullCmd) {
-        this.fullCmd =  fullCmd.trim().strip();
+    public Command(boolean isExit) {
+        this.isExit = isExit;
     }
 
-    private String[] splitCmd() {
-        String[] splitCmd = this.fullCmd.trim().split(" ", 2); // split into 2 chunks
-        if (splitCmd.length != 2) { // 1 length only
-            splitCmd = new String[]{splitCmd[0], ""};
-        }
-        return splitCmd;
+    public boolean isExit() {
+        return this.isExit;
     }
 
-    public String getVerbCmd() {
-        return this.splitCmd()[0];
-    }
-
-    public String getItem() {
-        return this.splitCmd()[1];
-    }
+    abstract public String execute(TaskList list) throws IOException;
 }

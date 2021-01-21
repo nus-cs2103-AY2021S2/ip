@@ -1,22 +1,84 @@
 package percy.command;
 
-import java.util.ArrayList;
+import percy.exception.TodoException;
 
 public class Parser {
-    /*
-    public static Command parse(String command) {
-        command = command.trim();
-        ArrayList<String> lib = new ArrayList<String>();
+    public static String fullCmd;
 
+    public Parser(String fullCmd) {
+        this.fullCmd =  fullCmd.trim().strip();
+    }
+
+    public Command getCommand() {
+        String command = this.fullCmd.split(" ", 2)[0];
         switch (command) {
-            case "bye":
-                Command cmd = new ByeCommand().execute();
+            case "todo":
+                return new TodoCommand(this.getTodoDescription());
+            case "event":
+                return new EventCommand(this.getEventDescription(), this.getEventDate());
+            case "deadline":
+                return new DeadlineCommand(this.getDeadlineDescription(), this.getDeadlineDate());
+            case "done":
+                return new DoneCommand(this.getTaskNumber());
             case "list":
-                int i = 1;
-                lib.stream().forEach(s -> System.out.println(i.toString() + s));
+                return new ListCommand();
             default:
-                lib.add(command);
+                return new UnknownCommand();
         }
     }
-    */
+
+    public static int getTaskNumber() {
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String TaskNumber = splitCommand[1].trim();
+        return Integer.valueOf(TaskNumber);
+    }
+
+    public static String getTodoDescription()  {
+
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String description = splitCommand[1].trim();
+        try {
+            if (description.isEmpty()) {
+                throw new TodoException();
+            }
+            return description;
+        }
+        catch(TodoException e) {
+            e.toString();
+        }
+        return description;
+        // return (description.isEmpty()) ? new TodoException().toString() : description;
+    }
+
+    public static String getEventDescription() {
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String description = splitCommand[1]
+                                .substring(0, splitCommand[1].indexOf("/"))
+                                .trim();
+        return description;
+    }
+
+    public static String getEventDate() {
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String date = splitCommand[1]
+                .substring(splitCommand[1].indexOf("/") + 4, splitCommand[1].length())
+                .trim();
+        return date;
+    }
+
+    public static String getDeadlineDescription() { // same as EventDescription
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String description = splitCommand[1]
+                .substring(0, splitCommand[1].indexOf("/"))
+                .trim();
+        return description;
+    }
+
+    public static String getDeadlineDate() { // same as getEventDate
+        String[] splitCommand = fullCmd.split(" ", 2);
+        String date = splitCommand[1]
+                .substring(splitCommand[1].indexOf("/") + 4, splitCommand[1].length())
+                .trim();
+        return date;
+    }
 }

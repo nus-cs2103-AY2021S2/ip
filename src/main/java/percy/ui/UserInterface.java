@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.io.PrintStream;
 import java.io.InputStream;
 
+import percy.task.TaskList;
 import static percy.messages.Messages.*;
-import percy.Task;
+import percy.task.Task;
 
 public class UserInterface {
-    private Scanner in;
-    private PrintStream out;
+    private static Scanner in;
+    private static PrintStream out;
 
     private static final String INDENT = "    ";
-    public static final String DIVIDER = "    ____________________________________________________________";
-
+    public static final String DIVIDER = "    ____________________________________________________________\n";
 
     public UserInterface(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
@@ -25,67 +25,70 @@ public class UserInterface {
         this(System.in, System.out);
     }
 
-    public String readCommand() {
+    public static String readCommand() {
         String command = in.nextLine();
+        while(command.trim().isEmpty()) {
+            command = in.nextLine();
+        }
         return command;
     }
 
-    public void showDivider() {
+    /*
+    public void Divider() {
         out.println(DIVIDER); // PrintStream class triggers println method
     }
+    */
 
-    public void showStartUp() {
-        out.println(MESSAGE_LOGO);
-        out.println(DIVIDER);
-        out.println(MESSAGE_WELCOME);
-        out.println(DIVIDER);
-        showBlankLine();
+    public static void printStartUpMsg() {
+        System.out.println(MESSAGE_LOGO + "\n" + DIVIDER
+                + MESSAGE_WELCOME + "\n"
+                + DIVIDER);
     }
 
-    public void showBye() {
-        System.out.println(DIVIDER);
-        out.println(INDENT + MESSAGE_GOODBYE);
-        System.out.println(DIVIDER);
+    public static String makeStartUpMsg() {
+        return MESSAGE_LOGO + "\n" + DIVIDER
+                + MESSAGE_WELCOME + "\n"
+                + DIVIDER;
+    }
+
+    public static String makeByeMsg() {
+        return DIVIDER + INDENT + MESSAGE_GOODBYE + "\n" + DIVIDER;
     }
 
     public void showBlankLine() {
         out.println();
     }
 
-    public void list(ArrayList<Task> list) {
+    public static String makeListMsg(TaskList list) {
+        String response;
+        response =  DIVIDER + INDENT + "Here are the tasks in your list:\n";
         int i = 1;
-        showDivider();
-        for (Task t : list) {
-            System.out.println(INDENT
-                    + String.valueOf(i++)
-                    + ". " + "["
-                    + t.getStatusIcon() + "] "
-                    + t.getDescription());
+        for (Task t : list.getTaskList()) {
+            response += INDENT
+                    + String.valueOf(i++) + ". "
+                    +  t.toString() + "\n";
         }
-        showDivider();
-        showBlankLine();
+        response += INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n" + DIVIDER;
+        return response;
     }
 
-    public void add(String item) {
-        System.out.println(DIVIDER);
-        System.out.println(INDENT + "added " + item);
-        System.out.println(DIVIDER);
-        showBlankLine();
+    public static String makeAddMsg(Task t, TaskList list) {
+        return DIVIDER + INDENT + "Got it. I've added this task:\n"
+                + INDENT + INDENT + t.toString() + "\n"
+                + INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n"
+                + DIVIDER;
     }
 
-    public void showEcho(String command) {
+    public void makeEchoMsg(String command) {
         System.out.println(DIVIDER);
         out.println(INDENT + command);
         System.out.println(DIVIDER);
         showBlankLine();
     }
 
-    public void checkOff(Task t) {
-        System.out.println(DIVIDER);
-        System.out.println(INDENT + "Nice! I've marked this task as done:");
-        System.out.println(INDENT + INDENT + "[" + t.getStatusIcon() + "] " + t.getDescription());
-        System.out.println(DIVIDER);
-        showBlankLine();
+    public static String makeDoneMsg(Task t) {
+        return DIVIDER + INDENT + "Nice! I've marked this task as done:\n"
+                + INDENT + INDENT + t.toString() + "\n"
+                + DIVIDER;
     }
-
 }

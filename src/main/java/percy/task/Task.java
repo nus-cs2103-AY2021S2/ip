@@ -1,7 +1,6 @@
-package percy;
+package percy.task;
 
 public class Task {
-
     protected String description;
     protected boolean isDone;
 
@@ -15,10 +14,16 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public void doTask() {
+        this.isDone = true;
+    }
 
-    public Task doTask() {
+    /*
+     public Task doTask() {
         return new Task(this.description, true);
     }
+     */
+
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick or X symbols
@@ -26,6 +31,11 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
     //...
 }
