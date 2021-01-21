@@ -6,3 +6,7 @@ done 1
 done 2
 deadline do homework /by no idea :-p
 list
+blah
+todo
+deadline
+event

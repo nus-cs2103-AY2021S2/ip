@@ -25,3 +25,7 @@ Here are the tasks in your list:
 3.[D][ ] return book (by June 6th)
 4.[E][ ] project meeting (at Aug 6th 2-4pm)
 5.[D][ ] do homework (by no idea :-p)
+Oops! I don't know what this means! :(
+Oops! The description of todo cannot be empty!
+Oops! The description of deadline cannot be empty!
+Oops! The description of event cannot be empty!
