@@ -40,14 +40,15 @@ public class Duke {
     public static void handleInput() {
         while (sc.hasNextLine()){
             String command = sc.nextLine();
-            if (command.equals(Command.BYE.getAction())){
+            if (command.equalsIgnoreCase(Command.BYE.getAction())){
                 printBye();
                 break;
-            } else if (command.equals(Command.LIST.getAction())){
+            } else if (command.equalsIgnoreCase(Command.LIST.getAction())){
                 listingTasks(list);
-            } else if (command.equals(Command.DONE.getAction()) || command.equals(Command.DELETE.getAction())){
+            } else if (command.equalsIgnoreCase(Command.DONE.getAction()) ||
+                    command.equalsIgnoreCase(Command.DELETE.getAction())){
                 handleIndexOutOfBoundTask(command);
-            } else if (command.startsWith(Command.DONE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DONE.getAction() + " ")){
                 try{
                     int doneIndex = Integer.parseInt(command.substring(5));
                     if (doneIndex > list.size() || doneIndex <= 0){
@@ -59,7 +60,7 @@ public class Duke {
                 } catch (NumberFormatException e){
                     handleIndexOutOfBoundTask("done");
                 }
-            } else if (command.startsWith(Command.DELETE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction() + " ")){
                 try{
                     int deleteIndex = Integer.parseInt(command.substring(7));
                     if (deleteIndex > list.size() || deleteIndex <= 0){
@@ -96,9 +97,11 @@ public class Duke {
 
     public static void addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
         System.out.println(LINES);
-        if (command.equals(Command.TODO.getAction()) || command.equals(Command.DEADLINE.getAction()) || command.equals(Command.EVENT.getAction())){
+        if (command.equalsIgnoreCase(Command.TODO.getAction()) ||
+                command.equalsIgnoreCase(Command.DEADLINE.getAction()) ||
+                command.equalsIgnoreCase(Command.EVENT.getAction())){
             throw new EmptyTaskException(command);
-        } else if (command.startsWith(Command.TODO.getAction() + " ")){
+        } else if (command.toLowerCase().startsWith(Command.TODO.getAction() + " ")){
             String description = command.substring(5);
             if (description.isEmpty()){
                 throw new EmptyTaskException("todo");
@@ -108,7 +111,7 @@ public class Duke {
             System.out.println("Got it. I've added this task: ");
             System.out.println("  " + task);
             System.out.println("Now you have " + list.size() + " tasks in the list.");
-        } else if (command.startsWith(Command.DEADLINE.getAction() + " ")){
+        } else if (command.toLowerCase().startsWith(Command.DEADLINE.getAction() + " ")){
             String content = command.substring(9);
             if (content.isEmpty()){
                 throw new EmptyTaskException("deadline");
@@ -119,13 +122,21 @@ public class Duke {
             } else {
                 String description = content.substring(0, byIndex - 1);
                 String by = content.substring(byIndex + 4);
-                Task task = new Deadline(description, by);
-                list.add(task);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                DateTimeProcessor processor = new DateTimeProcessor(by);
+                String time = processor.getFullDateTime();
+                if (time.equals("Invalid format for date and time.")){
+                    System.out.println(time);
+                    System.out.println("Your date (and time) should have format yyyy-mm-dd (HH-MM)");
+                    System.out.println("For example: 2019-10-15 or 2019-10-15 1800");
+                } else {
+                    Task task = new Deadline(description, time);
+                    list.add(task);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                }
             }
-        } else if (command.startsWith(Command.EVENT.getAction() + " ")){
+        } else if (command.toLowerCase().startsWith(Command.EVENT.getAction() + " ")){
             String content = command.substring(6);
             if (content.isEmpty()){
                 throw new EmptyTaskException("event");
@@ -136,11 +147,19 @@ public class Duke {
             } else {
                 String description = content.substring(0, atIndex - 1);
                 String at = content.substring(atIndex + 4);
-                Task task = new Event(description, at);
-                list.add(task);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("  " + task);
-                System.out.println("Now you have " + list.size() + " tasks in the list.");
+                DateTimeProcessor processor = new DateTimeProcessor(at);
+                String time = processor.getFullDateTime();
+                if (time.equals("Invalid format for date and time.")){
+                    System.out.println(time);
+                    System.out.println("Your date (and time) should have format yyyy-mm-dd (HH-MM)");
+                    System.out.println("For example: 2019-10-15 or 2019-10-15 1800");
+                } else {
+                    Task task = new Event(description, time);
+                    list.add(task);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("  " + task);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                }
             }
         } else {
             throw new NoSuchCommandException();
@@ -197,21 +216,18 @@ public class Duke {
                 String[] information = currLine.split("\\|");
                 switch (information[0].charAt(0)) {
                     case 'T': {
-                        System.out.println("in todo");
                         Task newTask = new Todo(information[2]);
                         if (information[1].trim().equals("1")) newTask.markAsDone();
                         tasks.add(newTask);
                         break;
                     }
                     case 'D': {
-                        System.out.println("in deadline");
                         Task newTask = new Deadline(information[2], information[3]);
                         if (information[1].trim().equals("1")) newTask.markAsDone();
                         tasks.add(newTask);
                         break;
                     }
                     case 'E': {
-                        System.out.println("in event");
                         Task newTask = new Event(information[2], information[3]);
                         if (information[1].trim().equals("1")) newTask.markAsDone();
                         tasks.add(newTask);

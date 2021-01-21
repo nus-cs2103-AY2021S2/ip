@@ -1,6 +1,4 @@
-T | 0 |  read book
-D | 1 |  abc   |   Friday
-E | 1 |  project meeting  |  4pm
-E | 0 |  supper  |  tonight
-T | 1 |  eat
-E | 0 | birthday party | Tuesday night
+T | 1 | read a book
+D | 1 | ip week 3 | Jan 28 2020
+E | 0 | supper night | Jan 23 2020 9:30pm
+T | 1 | eat breakfast
