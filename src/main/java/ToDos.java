@@ -1,6 +1,4 @@
 public class ToDos extends Task {
-    protected String description;
-    protected boolean isDone;
 
     public ToDos(String description) {
         super(description);
@@ -9,5 +7,10 @@ public class ToDos extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String getEmptyDescError() {
+        return "Oops! Description of todo " + super.getEmptyDescError();
     }
 }

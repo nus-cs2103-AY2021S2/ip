@@ -1,6 +1,4 @@
 public class Events extends Task {
-    protected String description;
-    protected boolean isDone;
     String at;
 
     public Events(String description, String at) {
@@ -11,5 +9,10 @@ public class Events extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + at + ")";
+    }
+
+    @Override
+    public String getEmptyDescError() {
+        return "Oops! Description of event " + super.getEmptyDescError();
     }
 }

@@ -12,7 +12,7 @@ public class Duke {
 
         loop:
         while (scan.hasNextLine()) {
-            String input = scan.next();
+            String input = scan.nextLine();
 
             System.out.println(line);
 
@@ -30,34 +30,54 @@ public class Duke {
                     printDone(taskIndex);
                     break;
                 default:
-                    String scannedInput = scan.nextLine();
-                    String description, date;
+                    try {
+                        String[] inputArr = input.split(" ", 2);
+                        String task = inputArr[0];
 
-                    switch (input) {
-                        case "todo":
-                            description = scannedInput;
-                            ToDos todo = new ToDos(description);
-                            tasks[numTasks] = todo;
-                            break;
-                        case "deadline":
-                            String[] arrOfInputD = scannedInput.split("/by");
-                            description = arrOfInputD[0];
-                            date = arrOfInputD[1];
-                            Deadlines deadline = new Deadlines(description, date);
-                            tasks[numTasks] = deadline;
-                            break;
-                        case "event":
-                            String[] arrOfInputE = scannedInput.split("/at");
-                            description = arrOfInputE[0];
-                            date = arrOfInputE[1];
-                            Events event = new Events(description, date);
-                            tasks[numTasks] = event;
-                            break;
+                        String scannedInput = inputArr[1];
+                        String description, date;
+
+                        switch (task) {
+                            case "todo":
+                                description = scannedInput;
+                                ToDos todo = new ToDos(description);
+                                tasks[numTasks] = todo;
+                                printAdd(numTasks);
+
+                                numTasks++;
+                                break;
+                            case "deadline":
+                                String[] arrOfInputD = scannedInput.split("/by");
+                                description = arrOfInputD[0];
+                                date = arrOfInputD[1];
+                                Deadlines deadline = new Deadlines(description, date);
+                                tasks[numTasks] = deadline;
+                                printAdd(numTasks);
+
+                                numTasks++;
+                                break;
+                            case "event":
+                                String[] arrOfInputE = scannedInput.split("/at");
+                                description = arrOfInputE[0];
+                                date = arrOfInputE[1];
+                                Events event = new Events(description, date);
+                                tasks[numTasks] = event;
+                                printAdd(numTasks);
+
+                                numTasks++;
+                                break;
+                            default:
+                                printIdkError();
+                                break;
+                        }
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                            printEmptyDescError(input);
+                        } else {
+                            printIdkError();
+                        }
                     }
-                    printAdd(numTasks);
-
-                    numTasks++;
-                    break;
             }
             System.out.println(line);
         }
@@ -105,6 +125,14 @@ public class Duke {
     public static void printBye() {
         System.out.println(tab + "Goodbye, can't wait to see you again!");
         System.out.println(line);
+    }
+
+    public static void printEmptyDescError(String task) {
+        System.out.println(tab + "Oops! Description of " + task + " cannot be empty.");
+    }
+
+    public static void printIdkError() {
+        System.out.println(tab + "I'm sorry, I'm not sure what that means.");
     }
 
 }
