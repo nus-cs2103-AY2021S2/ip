@@ -1,3 +1,6 @@
+/**
+ * tasks with a deadline (need to be done before a date/time)
+ */
 public class Deadline extends Task {
     private String deadline;
 

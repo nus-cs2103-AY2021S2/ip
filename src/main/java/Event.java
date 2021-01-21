@@ -1,3 +1,6 @@
+/**
+ * tasks that happen in a specific time for a duration (e.g. a meeting on 2/10/2019 2-4pm)
+ */
 public class Event extends Task {
     private String time;
 
