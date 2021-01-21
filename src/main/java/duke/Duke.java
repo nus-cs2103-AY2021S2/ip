@@ -25,9 +25,8 @@ public class Duke {
         in = new BufferedReader(new InputStreamReader(System.in));
         out = new BufferedWriter(new OutputStreamWriter(System.out));
 
-
         String[] greeting = {
-            "Hello! I'm Duke.Duke",
+            "Hello! I'm Duke",
             "What can I do for you?"
         };
         write(greeting);
@@ -43,8 +42,17 @@ public class Duke {
             case "done":
                 done(Integer.parseInt(tokens[1]));
                 break;
+            case "todo":
+                addTodo(input);
+                break;
+            case "deadline":
+                addDeadline(input);
+                break;
+            case "event":
+                addEvent(input);
+                break;
             default:
-                add(input);
+                // handle in level 5
             }
             input = in.readLine();
         }
@@ -55,9 +63,28 @@ public class Duke {
         out.close();
     }
 
-    static void add(String taskDescription) throws IOException {
-        tasks.add(new Task(taskDescription));
-        write("added: " + taskDescription);
+    static void addTodo(String input) throws IOException {
+        Todo todo = new Todo(input.substring(5));
+        tasks.add(todo);
+        writeAddTask(todo);
+    }
+
+    static void addDeadline(String input) throws IOException {
+        int bySwitchIndex = input.indexOf("/by");
+        String description = input.substring(9, bySwitchIndex);
+        String by = input.substring(bySwitchIndex + 4);
+        Deadline deadline = new Deadline(description, by);
+        tasks.add(deadline);
+        writeAddTask(deadline);
+    }
+
+    static void addEvent(String input) throws IOException {
+        int atSwitchIndex = input.indexOf("/at");
+        String description = input.substring(6, atSwitchIndex);
+        String at = input.substring(atSwitchIndex + 4);
+        Event event = new Event(description, at);
+        tasks.add(event);
+        writeAddTask(event);
     }
 
     static void list() throws IOException {
@@ -65,11 +92,8 @@ public class Duke {
         int lineNum = 1;
         for (Task task : tasks) {
             out.write('\t');
-            out.write(lineNum++ + ". ");
-            out.write('[');
-            out.write(task.getStatusIcon());
-            out.write("] ");
-            out.write(task.getDescription());
+            out.write(lineNum++ + ".");
+            out.write(task.toString());
             out.newLine();
         }
         out.write(divider);
@@ -100,5 +124,13 @@ public class Duke {
         }
         out.write(divider);
         out.flush();
+    }
+
+    static void writeAddTask(Task task) throws IOException {
+        write(new String[]{
+            "Got it. I've added this task:",
+            "  " + task,
+            "Now you have " + tasks.size() + " tasks in the list."
+        });
     }
 }

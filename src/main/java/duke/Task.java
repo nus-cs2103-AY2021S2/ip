@@ -1,8 +1,8 @@
 package duke;
 
 public class Task {
-    private boolean isDone;
-    private String description;
+    protected boolean isDone;
+    protected String description;
 
     /**
      * Task constructor
@@ -31,5 +31,10 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 }
