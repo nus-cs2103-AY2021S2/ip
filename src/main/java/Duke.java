@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import enums.DukeCommand;
 import exceptions.*;
 
 public class Duke {
@@ -22,92 +24,44 @@ public class Duke {
                 "What can I do for you?",
         });
 
-        // REPLu
+        // REPL
         ArrayList<Task> userData = new ArrayList<>();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in));
-        while (true) {
+        boolean stopProgram = false;
+        while (!stopProgram) {
             try {
                 String s = in.readLine();
-                if (s.equals("bye")) {
-                    Duke.respond("Bye. Hope to see you again soon!");
-                    break;
-
-                } else if (s.equals("list")) {
-                    Duke.respondList(userData);
-
-                } else if (s.startsWith("done")) {
-                    int idx;
-                    try {
-                        idx = Integer.parseInt(s.substring(5)) - 1;
-                    } catch (Exception e) {
-                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
-                    }
-                    if (userData.size() <= idx || idx < 0) {
-                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
-                    }
-                    Task t = userData.get(idx);
-                    t.setDone();
-                    Duke.respondDone(t);
-
-                } else if (s.startsWith("delete")) {
-                    int idx;
-                    try {
-                        idx = Integer.parseInt(s.substring(7)) - 1;
-                    } catch (Exception e) {
-                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
-                    }
-                    if (userData.size() <= idx || idx < 0) {
-                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
-                    }
-                    Task t = userData.get(idx);
-                    userData.remove(idx);
-                    Duke.respondDelete(t, userData);
-
-                } else {
-                    // Task addition
-                    Task t; // default empty
-                    if (s.startsWith("todo")) {
-                        s = s.substring(5);
-                        if (s.equals("")) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        t = new ToDo(s);
-
-                    } else if (s.startsWith("deadline")) {
-                        s = s.substring(9);
-                        if (s.equals("")) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        String[] tokens = s.split(" /by ");
-                        if (tokens[0].equals("")) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a deadline cannot be empty.");
-                        }
-                        if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline must have a due date.");
-                        }
-                        t = new Deadline(tokens[0], tokens[1]);
-
-                    } else if (s.startsWith("event")) {
-                        s = s.substring(6);
-                        if (s.equals("")) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of an event cannot be empty.");
-                        }
-                        String[] tokens = s.split(" /at ");
-                        if (tokens[0].equals("")) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of an event cannot be empty.");
-                        }
-                        if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
-                            throw new DukeExceptionIllegalArgument("☹ OOPS!!! An event must have a time.");
-                        }
-                        t = new Deadline(tokens[0], tokens[1]);
-
-                    } else {
-                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-
-                    userData.add(t);
-                    Duke.respondAdd(t, userData);
+                DukeCommand cmd = DukeCommand.getCommand(s);
+                String arg;
+                switch (cmd) {
+                    case BYE:
+                        Duke.respond("Bye. Hope to see you again soon!");
+                        stopProgram = true;
+                        break;
+                    case LIST:
+                        Duke.respondList(userData);
+                        break;
+                    case DONE:
+                        arg = DukeCommand.getArgument(s);
+                        Duke.processDone(arg, userData);
+                        break;
+                    case DELETE:
+                        arg = DukeCommand.getArgument(s);
+                        Duke.processDelete(arg, userData);
+                        break;
+                    case TODO:
+                        arg = DukeCommand.getArgument(s);
+                        Duke.processTodo(arg, userData);
+                        break;
+                    case DEADLINE:
+                        arg = DukeCommand.getArgument(s);
+                        Duke.processDeadline(arg, userData);
+                        break;
+                    case EVENT:
+                        arg = DukeCommand.getArgument(s);
+                        Duke.processEvent(arg, userData);
+                        break;
                 }
             } catch (DukeException e) {
                 Duke.respond(e.toString());
@@ -115,6 +69,77 @@ public class Duke {
                 Duke.respond(e.toString());
             }
         }
+    }
+
+    private static void processDone(String s, ArrayList<Task> tasklist) throws DukeExceptionIllegalArgument {
+        int idx;
+        try {
+            idx = Integer.parseInt(s) - 1;
+        } catch (Exception e) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
+        }
+        if (tasklist.size() <= idx || idx < 0) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
+        }
+        Task t = tasklist.get(idx);
+        t.setDone();
+        Duke.respondDone(t);
+    }
+
+    private static void processDelete(String s, ArrayList<Task> tasklist) throws DukeExceptionIllegalArgument {
+        int idx;
+        try {
+            idx = Integer.parseInt(s) - 1;
+        } catch (Exception e) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
+        }
+        if (tasklist.size() <= idx || idx < 0) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
+        }
+        Task t = tasklist.get(idx);
+        tasklist.remove(idx);
+        Duke.respondDelete(t, tasklist);
+    }
+
+    private static void processTodo(String s, ArrayList<Task> tasklist) throws DukeExceptionIllegalArgument {
+        if (s.equals("")) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        Task t = new ToDo(s);
+        tasklist.add(t);
+        Duke.respondAdd(t, tasklist);
+    }
+
+    private static void processDeadline(String s, ArrayList<Task> tasklist) throws DukeExceptionIllegalArgument {
+        if (s.equals("")) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        String[] tokens = s.split(" /by ");
+        if (tokens[0].equals("")) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline must have a due date.");
+        }
+        Task t = new Deadline(tokens[0], tokens[1]);
+        tasklist.add(t);
+        Duke.respondAdd(t, tasklist);
+    }
+
+    private static void processEvent(String s, ArrayList<Task> tasklist) throws DukeExceptionIllegalArgument {
+        if (s.equals("")) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        String[] tokens = s.split(" /at ");
+        if (tokens[0].equals("")) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! An event must have a time.");
+        }
+        Task t = new Event(tokens[0], tokens[1]);
+        tasklist.add(t);
+        Duke.respondAdd(t, tasklist);
     }
 
     private static void respondDone(Task t) {
