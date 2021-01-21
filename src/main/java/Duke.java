@@ -23,14 +23,13 @@ public class Duke {
                 try {
                     String indexString = userInput.substring(5);
                     int index = Integer.parseInt(indexString);
-                    if (index < taskList.size()) {
-                        Task updatedTask = taskList.get(index - 1);
-                        updatedTask.status(true);
-                        System.out.println("Good job! This task has been marked as done :)\n" +
-                                updatedTask);
-                    }
+                    Task updatedTask = taskList.get(index - 1);
+                    updatedTask.status(true);
+                    System.out.println("Good job! This task has been marked as done :)\n" + updatedTask);
+
                 } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("Remember to specify which task you are done with.", e);
+                    throw new DukeException("Remember to specify which task you are done with " +
+                            "using a valid number", e);
                 } catch (NumberFormatException e) {
                     throw new DukeException("Invalid format, please try again using numbers only.", e);
                 }
@@ -82,6 +81,20 @@ public class Duke {
 
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("The description of a deadline cannot be empty.", e);
+                }
+            } else if (userInput.length() >= 6 && userInput.startsWith("delete")) {
+                try {
+                    String indexString = userInput.substring(7);
+                    int index = Integer.parseInt(indexString);
+                    Task deletedTask = taskList.remove(index - 1);
+                    System.out.println("Alright, this task has been removed.\n" +
+                            deletedTask + "\nThere are " + taskList.size() + " tasks left.");
+
+                } catch (IndexOutOfBoundsException e) {
+                    throw new DukeException("Remember to specify which task you want to remove" +
+                            "using a valid number", e);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Invalid format, please try again using numbers only.", e);
                 }
             } else {
                 System.out.println("Sorry, I have no idea what that means :( Please try again!");
