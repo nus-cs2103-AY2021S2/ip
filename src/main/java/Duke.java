@@ -1,5 +1,20 @@
 import java.util.*;
 
+/**
+ *  Juke is a chatbot that helps users keep track of tasks.
+ *
+ *  The chatbot supports, todos, events and deadlines,
+ *      todos: add to do task to a list
+ *      events: adds task to a list with a specific time for the event with "/at"
+ *      deadlines: adds task to a list with a specific deadline with "/by"
+ *
+ *      The done command followed by an integer x checks off  task x.
+ *      The chatbot supports deletion of tasks with the "delete" command
+ *
+ *      The chatbot will throw exceptions for invalid inputs.
+ * @author branzuelajohn
+ * @version CS2103T AY20/21 Semester 2, Individual Project
+ */
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -7,7 +22,7 @@ public class Duke {
         int counter = 0;
         int total = 0;
         Duke.printHorizontalLine();
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm Juke");
         System.out.println("What can I do for you?");
         Duke.printHorizontalLine();
 
@@ -90,16 +105,27 @@ public class Duke {
         }
      }
 
+    /**
+     * prints horizontal line
+     */
     public static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     *  Prints bye message in between two horizontal lines.
+     */
     public static void byeCommand() {
         Duke.printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
         Duke.printHorizontalLine();
     }
 
+    /**
+     *
+     * @param list the list of tasks
+     * @param counter the number of tasks in the list
+     */
     public static void listCommand(List<Task> list, int counter) {
         System.out.println("Here are the tasks in your list:");
         for(int i = 0; i < counter; i++) {
@@ -109,6 +135,11 @@ public class Duke {
         }
     }
 
+    /**
+     *
+     * @param list the list of tasks
+     * @param array String array 
+     */
     public static void doneCommand(List<Task> list, String[] array) {
         int m = Integer.valueOf(array[1]) - 1;
         Task t  = list.get(m);
