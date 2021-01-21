@@ -20,7 +20,7 @@ public class Duke {
 		} else if (!input.contains("done")) {
 			Task t;
 			if (input.contains("todo")) {
-				t = new Todo(input.split(" ")[1]);
+				t = new Todo(input.split("todo ")[1]);
 			} else if (input.contains("deadline")) {
 				String trimmed = input.replaceAll("deadline ", "");
 				t = new Deadline(trimmed.split(" by ")[0], trimmed.split(" by ")[1]);
