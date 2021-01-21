@@ -1,8 +1,12 @@
 public class Todo extends Task{
     private String info;
-    public Todo(String[] taskDetails) {
+    public Todo(String[] taskDetails) throws ArrayIndexOutOfBoundsException{
         super(taskDetails);
+        checkTask();
         buildInfo();
+    }
+    private void checkTask() throws  ArrayIndexOutOfBoundsException{
+        if (this.taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a todo cannot be empty.");
     }
     private void buildInfo(){
         String output = "";

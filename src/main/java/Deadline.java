@@ -1,7 +1,8 @@
 public class Deadline extends Task{
     private String info;
-    public Deadline(String[] taskDetails) {
+    public Deadline(String[] taskDetails) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
         super(taskDetails);
+        checkTask();
         buildInfo();
     }
 
@@ -20,6 +21,16 @@ public class Deadline extends Task{
         }
         info = output + ")";
     }
+    private void checkTask() throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+        if (taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
+        else{
+            for(String s: taskDetails){
+                if (s.equals("/by")) return;
+            }
+            throw new IllegalArgumentException("☹ OOPS!!! The Deadline needs an '/by' time.");
+        }
+    }
+
     public String printNew(){
         return "[D][ ] " + info;
     }

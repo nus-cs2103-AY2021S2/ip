@@ -1,7 +1,8 @@
 public class Event extends Task{
     private String info;
-    public Event(String[] taskDetails) {
+    public Event(String[] taskDetails) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
         super(taskDetails);
+        checkTask();
         buildInfo();
     }
     private void buildInfo(){
@@ -18,6 +19,15 @@ public class Event extends Task{
             i++;
         }
         info = output + ")";
+    }
+    private void checkTask() throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+        if (taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Event cannot be empty.");
+        else{
+            for(String s: taskDetails){
+                if (s.equals("/at")) return;
+            }
+            throw new IllegalArgumentException("☹ OOPS!!! The Event needs an '/at' time.");
+        }
     }
     public String printNew(){
         return "[E][ ] " + info;

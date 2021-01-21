@@ -28,7 +28,7 @@ public class Duke {
         list.add(t);
     }
 
-    public void handleTask(String[] currLine){
+    public void handleTask(String[] currLine) throws Exception {
         if (currLine[0].equals("list")) this.printTasks();
         else if(currLine[0].equals("done")) this.doTask(Integer.parseInt(currLine[1]));
         else{
@@ -39,8 +39,7 @@ public class Duke {
             else if (currLine[0].equals("deadline")) t = new Deadline(currLine);
             else if(currLine[0].equals("event"))t = new Event(currLine);
             else{
-                System.out.println("oops please try again");
-                return;
+                throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             list.add(t);
             output += "  "+t.printNew();
@@ -59,12 +58,18 @@ public class Duke {
         String scannedLine = sc.nextLine();
         String[] lineList = scannedLine.split(" ");
         String currString = lineList[0];
-
-        while(!currString.equals("bye")){
-            D.handleTask(lineList);
-            scannedLine = sc.nextLine();
-            lineList = scannedLine.split(" ");
-            currString = lineList[0];
+        while (!currString.equals("bye")) {
+            try{
+                D.handleTask(lineList);
+            }
+            catch (Exception e){
+                    System.out.format("%s\n☹ %s\n%s",Duke.line,e.getMessage(),Duke.line);
+            }
+            finally{
+                scannedLine = sc.nextLine();
+                lineList = scannedLine.split(" ");
+                currString = lineList[0];
+            }
         }
         System.out.println(line + "\n" + " Bye. Hope to see you again soon!"+"\n" + line);
 
