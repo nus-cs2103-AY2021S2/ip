@@ -13,8 +13,7 @@ public class Main {
         duke.init();
 
         while(duke.isRunning()) {
-            while(!sc.hasNext());
-            if (sc.hasNext()) input = sc.nextLine();
+            input = sc.nextLine();
             System.out.println("____________________________________________________________");
             output = duke.getResponse(input);
             System.out.println(output);
