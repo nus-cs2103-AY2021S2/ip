@@ -1,5 +1,6 @@
 public enum Queries {
-    ECHO,
+    ADD,
+    LIST,
     BYE;
 
     public static boolean containsValue(String value) {

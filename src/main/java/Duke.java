@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ public class Duke {
             + rightIndent + "                                        \\|\n";
     private static Scanner sc = new Scanner(System.in);
     private static boolean exit = false;
+    private static Tasks tasks = new Tasks();
 
     public static void main(String[] args) {
         displayIntro();
@@ -22,7 +24,8 @@ public class Duke {
 
     private static void processInput(String userInput) {
         String userInput_UC = userInput.toUpperCase();
-        Queries query = Queries.ECHO;
+        Queries query = Queries.ADD;
+        String response ="";
 
         if (Queries.containsValue(userInput_UC)) {
             query = Queries.valueOf(userInput_UC);
@@ -30,12 +33,25 @@ public class Duke {
 
         switch (query) {
             case BYE:
-                String response = "Bye. Hope to see you again soon!";
+                response = "Bye. Hope to see you again soon!";
                 respond(response);
                 exit = true;
                 break;
+            case ADD:
+                tasks.addTask(userInput);
+                response = "added: " + userInput;
+                respond(response);
+                break;
+            case LIST:
+                List<String> listOfTasks = tasks.getListOfTasks();
+                for (int i = 0; i < listOfTasks.size(); i++) {
+                    response+= Integer.toString(i+1) +". " + listOfTasks.get(i) + "\n";
+                }
+                respond(response);
+                break;
             default:
-                respond(userInput);
+                respond(response);
+                break;
         }
     }
 
