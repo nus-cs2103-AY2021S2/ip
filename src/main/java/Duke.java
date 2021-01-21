@@ -20,12 +20,20 @@ public class Duke {
                         + "\n____________________________________________________________\n");
                 sc.close();
                 break;
-            } else if (input.equals("list")){
+            } else if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
-                list.print();
+                list.printAll();
                 System.out.println("____________________________________________________________\n");
+            } else if (input.contains("done")) {
+                String[] arr = input.split(" ");
+                int x = Integer.parseInt(arr[1]) - 1;
+                list.done(x);
+                System.out.println("____________________________________________________________\n"
+                        + "Good job! I've marked this task as done:\n" + "  " + list.get(x)
+                        + "\n____________________________________________________________\n");
             } else {
-                list.add(input);
+                Task curr = new Task(input);
+                list.add(curr);
                 System.out.println("____________________________________________________________\n"
                         + "added: "
                         + input
