@@ -49,6 +49,19 @@ public class Duke {
                 System.out.printf("\t%s\n", currentTask);
             } catch (NumberFormatException e){
                 System.out.println("Task index must be a number!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Task index must be in range!");
+            }
+        } else if (line.startsWith("delete ")) {
+            // Done command, set the task as done.
+            String indexStr = line.substring(5);
+            try {
+                int index = Integer.parseInt(indexStr) - 1;
+                tasks.remove(index);
+            } catch (NumberFormatException e){
+                System.out.println("Task index must be a number!");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Task index must be in range!");
             }
         } else {
             // No command, add the line task based on the prefix inside.
