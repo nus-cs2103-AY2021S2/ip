@@ -29,43 +29,45 @@ public class Duke {
                 d.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(d);
-            } else if (input.equals("delete")) {
-                int tag = sc.nextInt() - 1;
-                int len = lst.size() - 1;
-                System.out.println("Noted. I've removed this task:");
-                System.out.println("\t" + lst.get(tag));
-                System.out.println("Now you have " + len + " tasks in the list.");
-                lst.remove(tag);
             } else if (input.equals("todo")) {
                 String task = sc.nextLine();
-                Todo todo = new Todo(task);
-                lst.add(todo);
-                int len = lst.size();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + todo);
-                System.out.println("Now you have " + len + " tasks in the list.");
+                try {
+                    Todo td = Todo.makeTodo(task);
+                    lst.add(td);
+                    int len = lst.size();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + td);
+                    System.out.println("Now you have " + len + " tasks in the list.");
+                } catch (DukeException ex){
+                    System.err.print("☹ OOPS!!!The description of a todo cannot be empty.\n");
+                }
             } else if (input.equals("deadline")) {
                 String line = sc.nextLine();
-                String[] split = line.split("/by");
-                String task = split[0];
-                String date = split[1];
-                Deadline dl = new Deadline(task, date);
-                lst.add(dl);
-                int len = lst.size();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + dl);
-                System.out.println("Now you have " + len + " tasks in the list.");
+                try {
+                    Deadline dl = Deadline.makeDeadline(line);
+                    lst.add(dl);
+                    int len = lst.size();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + dl);
+                    System.out.println("Now you have " + len + " tasks in the list.");
+                } catch (DukeException ex){
+                    System.err.print("☹ OOPS!!!The description of a deadline cannot be empty.\n");
+                }
             } else if (input.equals("event")) {
                 String line = sc.nextLine();
-                String[] split = line.split("/at");
-                String task = split[0];
-                String date = split[1];
-                Event event = new Event(task, date);
-                lst.add(event);
-                int len = lst.size();
-                System.out.println("Got it. I've added this task:");
-                System.out.println("\t" + event);
-                System.out.println("Now you have " + len + " tasks in the list.");
+                try {
+                    Event event = Event.makeEvent(line);
+                    lst.add(event);
+                    int len = lst.size();
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println("\t" + event);
+                    System.out.println("Now you have " + len + " tasks in the list.");
+                } catch (DukeException ex){
+                    System.err.print("☹ OOPS!!!The description of an event cannot be empty.\n");
+                }
+
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
