@@ -10,8 +10,12 @@ public class Duke {
 		this.store.add(t);
 	}
 
+	public void deleteTask(int n) {
+		this.store.remove(n -1);
+	}
+
 	public void printTask(String input) throws DukeException {
-		if (input.contains("todo") || input.contains("deadline") || input.contains("event)")) {
+		if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
        		if (input.split(" ").length == 1) {
        			throw new EmptyException();
        		}
@@ -42,6 +46,9 @@ public class Duke {
 		} else if (input.contains("done")) {
 			int num = Integer.valueOf(input.split(" ")[1]);
 			this.store.get(num -1).markAsDone();
+		} else if (input.contains("delete")) {
+			int deleteat = Integer.valueOf(input.split(" ")[1]);
+			this.deleteTask(deleteat);
 		} else {
 			throw new KeywordException();
 		}
