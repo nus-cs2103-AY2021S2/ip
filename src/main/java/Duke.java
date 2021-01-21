@@ -111,7 +111,7 @@ public class Duke {
             List<Task> newStore = this.store.stream().map(t -> t.clone()).collect(Collectors.toList());
             newStore.set(index - 1, newStore.get(index - 1).setDone(true));
             String response = String.format(TASK_DONE, this.store.get(index - 1));
-            newAgent = new Duke(TASK_DONE, newStore, this.done);
+            newAgent = new Duke(response, newStore, this.done);
         }
         catch (NumberFormatException numberFormatException) {
             newAgent = new Duke("Invalid number", this.store, this.done);
