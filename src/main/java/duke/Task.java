@@ -1,6 +1,7 @@
 package duke;
 
 public class Task {
+    private static String taskType = "Task";
     private String description;
     private boolean isDone;
 
@@ -16,6 +17,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getTaskType() {
+        return taskType;
     }
 
     public Task setIsDone(boolean done) {
