@@ -25,28 +25,37 @@ public class Duke {
                 }
             } else if ((commandArr[0]).equals("done")) {
                 //If user enters an invalid task number, prompt a message
-                if (Integer.valueOf(commandArr[1]) > currList.size()) {
+                if (Integer.parseInt(commandArr[1]) > currList.size()) {
                     System.out.println("Did you miscount your tasks? "
                             + "This task number isn't valid. Add it into my list!");
                     continue;
                 }
                 //If valid, change status of task and output done task
-                Task item = currList.get(Integer.valueOf(commandArr[1]) - 1);
+                Task item = currList.get(Integer.parseInt(commandArr[1]) - 1);
                 item.markAsDone();
                 System.out.println("Nice job! I've marked this task as done:\n"
                         + item.toString());
             } else {
                 String taskType = commandArr[0];
                 String wholeTask = commandArr[1];
-                Task item = null;
-                if (taskType.equals("todo")) {
-                    item = new Todo(wholeTask);
-                } else if (taskType.equals("deadline")) {
-                    String[] taskArr = wholeTask.split("/");
-                    item = new Deadline(taskArr[0], taskArr[1]);
-                } else {
-                    String[] taskArr = wholeTask.split("/");
-                    item = new Event(taskArr[0], taskArr[1]);
+                Task item;
+                switch (taskType) {
+                    case "todo":
+                            item = new Todo(wholeTask);
+                        break;
+                    case "deadline": {
+                        String[] taskArr = wholeTask.split("/");
+                        item = new Deadline(taskArr[0], taskArr[1]);
+                        break;
+                    }
+                    case "event": {
+                        String[] taskArr = wholeTask.split("/");
+                        item = new Event(taskArr[0], taskArr[1]);
+                        break;
+                    }
+                    default:
+                        System.out.println("Oops! I don't know what this means! :(");
+                        continue;
                 }
                 currList.add(item);
                 System.out.println("Got it. I've added this task:\n"
