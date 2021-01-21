@@ -26,23 +26,44 @@ public class Duke {
                 System.out.println("    Nice! I've marked this task as done: \n" + "      "
                         + listOfTasks[taskNumber - 1].getStatus());
             } else {
-                System.out.println("    Got it. I've added this task: ");
-                if (command.equals("todo")) {
-                    listOfTasks[numberOfTasks] = new ToDo(input.substring(5));
-                } else if (command.equals("deadline")) {
-                    String description = input.split("/")[0].substring(9);
-                    String deadlineTime = input.split("/")[1].substring(3);
-                    listOfTasks[numberOfTasks] = new Deadlines(description, deadlineTime);
-                } else if (command.equals("event")) {
-                    String description = input.split("/")[0].substring(6);
-                    String eventTime = input.split("/")[1].substring(3);
-                    listOfTasks[numberOfTasks] = new Event(description, eventTime);
-                } else {
-                    listOfTasks[numberOfTasks] = new Task(input);
+                try {
+                    if (!command.equals("todo") && !command.equals("event") && !command.equals("deadline")) {
+                        throw new TaskException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    }
+
+                    String[] taskInformation = input.split(" ", 2);
+                    if (taskInformation.length < 2) {
+                        throw new TaskException(
+                                "    ☹ OOPS!!! The description of a " + taskInformation[0] + " cannot be empty.\n");
+                    }
+
+                    if (command.equals("todo")) {
+                        listOfTasks[numberOfTasks] = new ToDo(taskInformation[1]);
+                    } else {
+                        String[] descriptionAndTime = taskInformation[1].split("/");
+                        if (descriptionAndTime.length < 2) {
+                            throw new TaskException(
+                                    "    ☹ OOPS!!! The time of a " + taskInformation[0] + " cannot be empty.\n");
+                        }
+                        String description = descriptionAndTime[0];
+                        String time = descriptionAndTime[1].split(" ", 2)[1];
+                        if (command.equals("deadline")) {
+
+                            listOfTasks[numberOfTasks] = new Deadlines(description, time);
+                        } else if (command.equals("event")) {
+
+                            listOfTasks[numberOfTasks] = new Event(description, time);
+                        }
+                    }
+
+                    System.out.println("    Got it. I've added this task: ");
+                    System.out.println("      " + listOfTasks[numberOfTasks].getStatus());
+                    numberOfTasks++;
+                    System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
+                } catch (TaskException e) {
+                    System.out.println(e.getMessage());
                 }
-                System.out.println("      " + listOfTasks[numberOfTasks].getStatus());
-                numberOfTasks++;
-                System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
+
             }
 
             input = sc.nextLine();
