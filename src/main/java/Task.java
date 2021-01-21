@@ -11,7 +11,33 @@ public class Task {
         done = false;
     }
 
+    // private constructor to maintain Immutability
+    private Task(String details, boolean indicator){
+        task_details = details;
+        done = true;
+    }
+
+    // returns task details
     public String getTask_details() {
         return task_details;
+    }
+
+    // checks if task is done
+    public boolean isDone() {
+        return done;
+    }
+
+    // completes the task
+    public Task completeTask() {
+        return new Task(task_details, true);
+    }
+
+    // states if task is completed or not
+    public String taskStatus() {
+        if (done) {
+           return "[X] " + task_details;
+        } else {
+            return "[ ] " + task_details;
+        }
     }
 }

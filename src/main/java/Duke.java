@@ -24,11 +24,24 @@ public class Duke {
 
             // user wants to see list of tasks
             } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int counter = 1;
-                for (Task t: taskArrayList) {
-                    System.out.println(counter + ". " + t.getTask_details());
+                for (Task t : taskArrayList) {
+                    System.out.println(counter + ". " + t.taskStatus());
                     counter++;
                 }
+                input = reader.nextLine();
+
+            // user completes a task
+            } else if (input.startsWith("done")) {
+                String[] split = input.split("\\s+");
+                int index = Integer.parseInt(split[1]) - 1;
+                Task to_complete = taskArrayList.get(index);
+                taskArrayList.set(index, to_complete.completeTask());
+
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println(to_complete.completeTask().taskStatus());
+
                 input = reader.nextLine();
 
             // user adds new tasks
