@@ -22,7 +22,7 @@ public class Duke {
         outtro.add("Bye. Hope to see you again soon!");
 
         // REPL
-        ArrayList<String> userData = new ArrayList<>();
+        ArrayList<Task> userData = new ArrayList<>();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in));
         while (true) {
@@ -33,32 +33,43 @@ public class Duke {
             } else if (s.equals("list")) {
                 Duke.respondList(userData);
             } else {
-                ArrayList<String> line = new ArrayList<>();
-                line.add("added: " + s);
-                Duke.respond(line);
-                userData.add(s);
+                Duke.respond("added: " + s);
+                userData.add(new Task(s));
             }
         }
     }
 
-    private static void respondList(ArrayList<String> lines) {
-        ArrayList<String> copy = new ArrayList<>(lines);
-        for (int i = 0; i < copy.size(); i++) {
-            copy.set(i, (i+1) + ". " + copy.get(i));
+    private static void respondList(ArrayList<Task> tasklist) {
+        ArrayList<String> lines = new ArrayList<>();
+        for (int i = 0; i < tasklist.size(); i++) {
+            Task t = tasklist.get(i);
+            lines.add((i+1) + ".[" + t.getStatusIcon() + "] " + t.getDescription());
         }
-        Duke.respond(copy);
+        Duke.respond("Here are the tasks in your list:", lines);
     }
 
-    private static void respond(ArrayList<String> lines) {
+    private static void respond(String comment, ArrayList<String> lines) {
         String border = "    ____________________________________________________________";
         String indent = "     ";
 
         System.out.println(border);
+        if (!comment.isEmpty()) {
+            System.out.print(indent);
+            System.out.println(comment);
+        }
         for (String line: lines) {
             System.out.print(indent);
             System.out.println(line);
         }
         System.out.println(border);
         System.out.println();
+    }
+
+    private static void respond(ArrayList<String> lines) {
+        Duke.respond("", lines);
+    }
+
+    private static void respond(String line) {
+        Duke.respond(line, new ArrayList<String>());
     }
 }
