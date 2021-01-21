@@ -31,6 +31,12 @@ public class Duke {
                 Task updated = list.get(taskNum - 1).setDone();
                 list.set(taskNum - 1, updated);
                 System.out.println("Nice! I've marked this task as done: \n" + updated);
+            } else if (curr.startsWith("delete ")) {
+                String num = curr.substring(7);
+                int taskNum = Integer.parseInt(num);
+                Task toRemove = list.remove(taskNum - 1);
+                System.out.println("Noted. I have removed " + toRemove);
+                System.out.println("You now have " + list.size() + " items in the list");
             } else {
                 if (curr.startsWith("todo ")) {
                     String taskName = curr.substring(5);
