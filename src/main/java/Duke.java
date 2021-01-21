@@ -19,7 +19,7 @@ public class Duke {
 
             } else if (tokens[0].equals("list")) {
                 for (int i = 0; i < taskList.size() ; i++ ) {
-                    System.out.println(i + 1 + ". " + taskList.get(i).getStatusIcon() + " " + taskList.get(i));
+                    System.out.println(i + 1 + "." + taskList.get(i).getStatusIcon() + " " + taskList.get(i));
                 }
 
             } else if(tokens[0].equals("done")) {
