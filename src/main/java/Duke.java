@@ -16,27 +16,34 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        String input;
-        ArrayList<String> itemList = new ArrayList<String>();
+        String raw_in;
+        String[] input;
+        List<Task> itemList = new ArrayList<>();
 
         while (true) {
-            input = sc.nextLine().trim();
+            raw_in = sc.nextLine().trim();
+            input = raw_in.split(" ");
             System.out.println(h_rule);
-            if (input.equals("bye")) {
+            if (raw_in.equals("bye")) {
                 System.out.println("Goodbye! Have a nice day!\n");
                 break;
             } else {
-                switch (input) {
+                switch (input[0]) {
                     case "list":
                         int i = 1;
-                        for (String s : itemList) {
-                            System.out.println(i + ". " + s);
+                        for (Task s : itemList) {
+                            System.out.println(i + s.toString());
+                            i++;
                         }
-                        i++;
+                        break;
+                    case "done":
+                        Task task = itemList.get(Integer.parseInt(input[1]) - 1);
+                        task.markDone();
+                        System.out.println("Alright, I will mark this as done. \n" + input[1] + task.toString());
                         break;
                     default:
-                        itemList.add(input);
-                        System.out.println("Added " + input);
+                        itemList.add(new Task(raw_in));
+                        System.out.println("Added " + raw_in);
                 }
             }
             System.out.println(h_rule);
