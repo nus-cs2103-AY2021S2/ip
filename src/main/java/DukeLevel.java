@@ -128,16 +128,14 @@ public class DukeLevel {
  * whereby each Task has a boolean to indicate whether it has been done
  */
 class Task {
-    /**
-     * String description that determines what kind of task the input is
-     */
     protected String description;
-
-    /**
-     * boolean isDone that indicates whether the task has been done
-     */
     protected boolean isDone;
 
+    /**
+     * The Task applies to inputs with sufficient information to classify as a todo, deadline
+     * or event task.
+     * @param description describes the details of a task supplied to the chat bot
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
