@@ -1,9 +1,8 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,9 +11,21 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
 
+        ArrayList<String> lst = new ArrayList<>();
         while (sc.hasNext()) {
-            input = sc.nextLine();
-            System.out.println(input);
+            String input = sc.nextLine();
+            if (input.equals("list")) {
+                for (int i = 0; i < lst.size(); i++) {
+                    int count = i + 1;
+                    System.out.println(count + ". " + lst.get(i));
+                }
+            } else if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again!");
+                break;
+            } else {
+                lst.add(input);
+                System.out.println("added: " + input);
+            }
         }
     }
 }
