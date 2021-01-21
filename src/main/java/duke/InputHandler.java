@@ -23,8 +23,8 @@ public class InputHandler {
             System.out.println(">>> Here are your tasks:");
             int i = 1;
             for( Task t : taskList) {
-                System.out.printf("    %d: [%s] %s\n", i,
-                        t.getStatusIcon(), t.getDescription());
+                System.out.printf("    %d: [%s] [%s] %s\n", i,
+                        t.getTaskType(), t.getStatusIcon(), t.getDescription());
                 i++;
             }
             return this;
@@ -33,8 +33,17 @@ public class InputHandler {
             Task newTask = this.taskList.get(idxDone).setIsDone(true);
             ArrayList<Task> newList = new ArrayList<>(this.taskList);
             newList.set(idxDone, newTask);
-            System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s \n",
+            System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
                     newTask.getTaskType(), newTask.getStatusIcon(), newTask.getDescription());
+            return new InputHandler(newList);
+        } else if (command.equals("delete")){
+            int idxDel = Integer.parseInt(splitInput[1]) - 1;
+            ArrayList<Task> newList = new ArrayList<>(this.taskList);
+            Task deleteTask = newList.get(idxDel);
+            newList.remove(idxDel);
+            System.out.printf(">>> Task deleted successfully:\n  [%s] [%s] %s\n ",
+                    deleteTask.getTaskType(), deleteTask.getStatusIcon(),
+                    deleteTask.getDescription());
             return new InputHandler(newList);
         } else {
             ArrayList<Task> newList = new ArrayList<>(this.taskList);
@@ -47,7 +56,8 @@ public class InputHandler {
                 Task newTask = new ToDo(splitInput[1]);
                 newList.add(newTask);
                 System.out.printf(">>> added:\n   [%s] [%s] %s\n",
-                        newTask.getTaskType(), newTask.getStatusIcon(), newTask.getDescription());
+                        newTask.getTaskType(), newTask.getStatusIcon(),
+                        newTask.getDescription());
                 System.out.printf("You have %d tasks in the list\n", newList.size());
                 return new InputHandler(newList);
             } else if (command.equals("deadline")) {
@@ -72,8 +82,9 @@ public class InputHandler {
                 // create Event Task
                 Event newEvent = new Event(taskDescription, eventTime);
                 newList.add(newEvent);
-                System.out.printf(">>> added:\n   [%s] [%s] %s\n",
-                        newEvent.getTaskType(), newEvent.getStatusIcon(), newEvent.getDescription());
+                System.out.printf(">>> added:\n   [%s] [%s] %s (at: %s)\n",
+                        newEvent.getTaskType(), newEvent.getStatusIcon(),
+                        newEvent.getDescription(), newEvent.getEventTime());
                 System.out.printf("You have %d tasks in the list\n", newList.size());
                 return new InputHandler(newList);
             } else {

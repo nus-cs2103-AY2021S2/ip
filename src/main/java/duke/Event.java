@@ -15,4 +15,7 @@ public class Event extends Task{
         return taskType;
     }
 
+    public String getEventTime() {
+        return eventTime;
+    }
 }
