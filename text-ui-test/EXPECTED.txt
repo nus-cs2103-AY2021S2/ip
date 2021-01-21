@@ -106,12 +106,53 @@ Now you have 5 tasks in the list.
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I've removed the task:
+[T][ ] clean room
+Now you have 4 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Here are the tasks in your list:
   1.[T][X] draft resume
   2.[E][ ] internship briefing  (at: 2-3pm on Tuesday)
   3.[D][X] submit assignment  (by: Thursday)
   4.[D][X] complete homework  (by: friday morning)
-  5.[T][ ] clean room
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I've removed the task:
+[D][X] complete homework  (by: friday morning)
+Now you have 3 tasks in the list.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here are the tasks in your list:
+  1.[T][X] draft resume
+  2.[E][ ] internship briefing  (at: 2-3pm on Tuesday)
+  3.[D][X] submit assignment  (by: Thursday)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+OOPS!!! The description of a todo cannot be empty.
+
+
+I'm sorry, but I don't know what that means :-(
+
+
+I'm sorry, but I don't know what that means :-(
+
+
+I'm sorry, but I don't know what that means :-(
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here are the tasks in your list:
+  1.[T][X] draft resume
+  2.[E][ ] internship briefing  (at: 2-3pm on Tuesday)
+  3.[D][X] submit assignment  (by: Thursday)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

@@ -11,5 +11,13 @@ list
 done 4
 list
 todo clean room
+delete 5
+list
+delete 4
+list
+todo
+tood eat lunch
+blah
+blah
 list
 bye
