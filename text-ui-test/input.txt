@@ -8,6 +8,9 @@ done 4
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+list
+delete 3
+list
 blah
 todo
 deadline
