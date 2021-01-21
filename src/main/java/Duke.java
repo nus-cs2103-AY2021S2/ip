@@ -2,7 +2,11 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void printErrorMessage(String message) {
+        System.out.println("    ☹ OOPS!!! " + message);
+    }
+
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         String line = "    ____________________________________________________________";
@@ -32,42 +36,64 @@ public class Duke {
                     System.out.println(indentation + i + ". " + todo[i - 1]);
                 }
             } else if (input.length() > 4 && input.substring(0, 4).equals(done)) {
-                int job_done = Integer.valueOf(input.substring(5));
-                Task job = todo[job_done - 1];
-                job.markAsDone();
-                todo[job_done - 1] = job;
-                System.out.println(indentation + "Nice! I've marked this task as done:");
-                System.out.println(indentation + job);
-            } else {
-                char caseType = input.charAt(0);
-                switch (caseType) {
-                    case 'd':
-                        int i1 = input.indexOf("/");
-                        String by = input.substring(i1 + 3);
-                        String d1 = input.substring(8, i1 - 1);
-                        Deadline ddl = new Deadline(d1, by);
-                        todo[position] = ddl;
-                        break;
-                    case 'e':
-                        int i2 = input.indexOf("/");
-                        String at = input.substring(i2 + 3);
-                        String d2 = input.substring(5, i2 - 1);
-                        Event event = new Event(d2, at);
-                        todo[position] = event;
-                        break;
-                    case 't':
-                        String d3 = input.substring(4, input.length());
-                        Todo t = new Todo(d3);
-                        todo[position] = t;
-                        break;
-                    default:
-                        break;
+                try {
+                    if (input.length() <= 5) {
+                        throw new DukeException("It seems you forget to tell me which task you have done.");
+                    }
+                    int job_done = Integer.valueOf(input.substring(5));
+                    Task job = todo[job_done - 1];
+                    job.markAsDone();
+                    todo[job_done - 1] = job;
+                    System.out.println(indentation + "Nice! I've marked this task as done:");
+                    System.out.println(indentation + job);
+                } catch (DukeException e) {
+                    // TODO: handle exception
+                    printErrorMessage(e.getMessage());
                 }
-                int total = position + 1;
-                System.out.println(indentation + "Got it. I've added this task:");
-                System.out.println(indentation + todo[position]);
-                System.out.println(indentation + "Now you have " + total + " tasks in the list.");
-                position += 1;
+            } else {
+                try {
+                    char caseType = input.charAt(0);
+                    switch (caseType) {
+                        case 'd':
+                            if (input.length() <= 9) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                            int i1 = input.indexOf("/");
+                            String by = input.substring(i1 + 3);
+                            String d1 = input.substring(8, i1 - 1);
+                            Deadline ddl = new Deadline(d1, by);
+                            todo[position] = ddl;
+                            break;
+                        case 'e':
+                            if (input.length() <= 6) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                            int i2 = input.indexOf("/");
+                            String at = input.substring(i2 + 3);
+                            String d2 = input.substring(5, i2 - 1);
+                            Event event = new Event(d2, at);
+                            todo[position] = event;
+                            break;
+                        case 't':
+                            if (input.length() <= 5) {
+                                throw new DukeException("The description of a todo cannot be empty.");
+                            }
+                            String d3 = input.substring(4, input.length());
+                            Todo t = new Todo(d3);
+                            todo[position] = t;
+                            break;
+                        default:
+                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                    }
+                    int total = position + 1;
+                    System.out.println(indentation + "Got it. I've added this task:");
+                    System.out.println(indentation + todo[position]);
+                    System.out.println(indentation + "Now you have " + total + " tasks in the list.");
+                    position += 1;
+                } catch (DukeException e) {
+                    // TODO: handle exception
+                    printErrorMessage(e.getMessage());
+                }
             }
             System.out.println(line);
             System.out.println();
