@@ -4,6 +4,10 @@ import java.lang.StringBuilder;
 
 public class Duke {
 
+    protected enum Command {
+        LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE
+    }
+
     protected static ArrayList<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
@@ -22,35 +26,35 @@ public class Duke {
         String[] tokenizedInput = input.split(" ", 2);
 
         try {
-            switch (tokenizedInput[0]) {
-                case "list":
+            switch (Command.valueOf(tokenizedInput[0].toUpperCase())) {
+                case LIST:
                     listTask();
                     break;
-                case "done":
+                case DONE:
                     doneTask(tokenizedInput);
                     break;
-                case "bye":
+                case BYE:
                     exit();
                     return false;
-                case "todo":
+                case TODO:
                     addTodo(tokenizedInput);
                     break;
-                case "deadline":
+                case DEADLINE:
                     addDeadline(tokenizedInput);
                     break;
-                case "event":
+                case EVENT:
                     addEvent(tokenizedInput);
                     break;
-                case "delete":
+                case DELETE:
                     deleteTask(tokenizedInput);
                     break;
-                default:
-                    throw new DukeException("☹ Sorry, please enter a valid command.\n\tCommands available:\n\t\t- list\n\t\t" +
-                            "- done [task number]\n\t\t- todo [description]\n\t\t- deadline [description] /by [deadline]\n\t\t" +
-                            "- event [description] /at [datetime]\n\t\t- delete [task number]\n\t\t- bye");
             }
 
             return true;
+        } catch (IllegalArgumentException e) {
+            echo("☹ Sorry, please enter a valid command.\n\tCommands available:\n\t\t- list\n\t\t" +
+                    "- done [task number]\n\t\t- todo [description]\n\t\t- deadline [description] /by [deadline]\n\t\t" +
+                    "- event [description] /at [datetime]\n\t\t- delete [task number]\n\t\t- bye");
         } catch (DukeException e) {
             echo(e.getMessage());
         }
