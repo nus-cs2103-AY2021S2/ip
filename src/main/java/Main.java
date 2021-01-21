@@ -14,7 +14,7 @@ public class Main {
             try {
                 parser.processInput(string, bot);
             } catch (InvalidCommandException | InvalidArgumentException ex){
-                ex.printStackTrace();
+                System.out.println(ex.getMessage());
                 continue;
             }
 
