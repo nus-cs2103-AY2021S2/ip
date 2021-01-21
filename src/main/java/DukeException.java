@@ -1,7 +1,13 @@
 
+/**
+ * Encapsulates information of potential exceptions in Duke.
+ */
 public class DukeException extends Exception {
 
-	public DukeException(String message) {
-		super(message);
-	}
+    /**
+     * Initialises a new exception specific to Duke chatbot.
+     */
+    public DukeException(String message) {
+        super(message);
+    }
 }
