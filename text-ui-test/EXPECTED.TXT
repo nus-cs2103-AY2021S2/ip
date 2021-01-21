@@ -62,6 +62,26 @@ What do you want?
     _______________________________________
     
     _______________________________________
+    The description of a todo cannot be empty.
+    _______________________________________
+    
+    _______________________________________
+    Command not recognised.
+    _______________________________________
+    
+    _______________________________________
+    Noted. I have removed this task:
+    [E][N] project meeting (at: Mon 2-4pm)
+    Now you have 2 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    Here are the tasks in your list:
+    1: [T][N] borrow book
+    2: [D][Y] return book (by: Sunday)
+    _______________________________________
+    
+    _______________________________________
     BYE AND HAVE A GOOD DAY. Beep boop.
     _______________________________________
     

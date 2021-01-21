@@ -16,18 +16,26 @@ public class Duke {
         System.out.println("Hello! I'm a bot called Duke. Beep boop. \nWhat do you want?\n");
 
         final String ADD_TASK_TEXT = "Got it. I've added this task:\n    ";
+        final String DELETE_TASK_TEXT = "Noted. I have removed this task:\n    ";
 
         String command = sc.nextLine();
         while (!command.equals("bye")) {
             String[] commandList = command.split(" ", 2);
             String[] params;
+
             Task newTask;
             switch (commandList[0]) {
                 case "list":
                     print("Here are the tasks in your list:\n    " + listToString(tasks));
                     break;
+                case "delete":
+                    // TODO handle NumberFormatException for Integer.valueOf
+                    // TODO handle out of bounds exception for array indexing in commandList, tasks
+                    Task deletedTask = tasks.remove(Integer.valueOf(commandList[1]) - 1);
+                    print(DELETE_TASK_TEXT + deletedTask + "\n    Now you have " + tasks.size() + " tasks in the list.");
+                    break;
                 case "done":
-                    // TODO handle out of bounds exception for array indexing in commandList, list
+                    // TODO handle out of bounds exception for array indexing in commandList, tasks
                     // TODO handle NumberFormatException for Integer.valueOf
                     Task task = tasks.get(Integer.valueOf(commandList[1]) - 1);
                     task.markAsDone();
