@@ -1,0 +1,7 @@
+todo clean my room
+deadline submit project /tonight 2359
+list
+done 1
+event attend meeting /Fri 2pm-3pm
+list
+bye
