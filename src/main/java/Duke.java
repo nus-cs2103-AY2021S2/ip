@@ -30,35 +30,29 @@ public class Duke {
                     printDone(taskIndex);
                     break;
                 default:
-                    StringBuilder description = new StringBuilder();
-                    String str;
+                    String scannedInput = scan.nextLine();
+                    String description, date;
 
-                    if ("todo".equals(input)) {
-                        description = new StringBuilder(scan.nextLine());
-                        ToDos todo = new ToDos(description.toString());
-                        tasks[numTasks] = todo;
-                    } else {
-                        String date = "";
-                        while (scan.hasNext()) {
-                            str = scan.next();
-                            if (str.charAt(0) == '/') {
-                                date = scan.nextLine();
-                                break;
-                            } else {
-                                description.append(str).append(" ");
-                            }
-                        }
-
-                        switch (input) {
-                            case "deadline":
-                                Deadlines deadline = new Deadlines(description.toString(), date);
-                                tasks[numTasks] = deadline;
-                                break;
-                            case "event":
-                                Events event = new Events(description.toString(), date);
-                                tasks[numTasks] = event;
-                                break;
-                        }
+                    switch (input) {
+                        case "todo":
+                            description = scannedInput;
+                            ToDos todo = new ToDos(description);
+                            tasks[numTasks] = todo;
+                            break;
+                        case "deadline":
+                            String[] arrOfInputD = scannedInput.split("/by");
+                            description = arrOfInputD[0];
+                            date = arrOfInputD[1];
+                            Deadlines deadline = new Deadlines(description, date);
+                            tasks[numTasks] = deadline;
+                            break;
+                        case "event":
+                            String[] arrOfInputE = scannedInput.split("/at");
+                            description = arrOfInputE[0];
+                            date = arrOfInputE[1];
+                            Events event = new Events(description, date);
+                            tasks[numTasks] = event;
+                            break;
                     }
                     printAdd(numTasks);
 
