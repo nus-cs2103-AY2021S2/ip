@@ -81,10 +81,12 @@ public class Duke {
         lst.get(3).markAsDone();
 
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        String[] inputArray = input.split(" ");
+        String input;
+        String[] inputArray;
 
-        while (true) {
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            inputArray = input.split(" ");
             if (inputArray[0].equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= lst.size(); i++) {
@@ -111,8 +113,9 @@ public class Duke {
                 System.out.println("  " + task);
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
             }
-            input = sc.nextLine();
-            inputArray = input.split(" ");
+
+            //input = sc.nextLine();
+            //inputArray = input.split(" ");
         }
 
 
@@ -127,7 +130,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        //level4();
+        level4();
 
     }
 }
