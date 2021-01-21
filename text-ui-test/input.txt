@@ -10,4 +10,7 @@ done 8
 list
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
+delete
+delete 10
+delete 1
 bye

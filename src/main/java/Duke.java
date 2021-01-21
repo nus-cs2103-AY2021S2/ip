@@ -35,6 +35,15 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(divider + "OOPS!!! Selected item does not exist.\n" + divider);
                 }
+            } else if(check[0].equals("delete")) {
+                try {
+                    checkEmptyInput(check);
+                    System.out.println(divider + "Noted. I've removed this task:\n  " + list.remove(Integer.parseInt(check[1])-1) + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                } catch (DukeException e) {
+                    System.out.println(divider + "OOPS!!! Please select an item to delete.\n" + divider);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(divider + "OOPS!!! Selected item does not exist.\n" + divider);
+                }
             } else if(check[0].equals("todo")) {
                 try {
                     checkEmptyInput(check);
