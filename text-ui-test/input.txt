@@ -8,9 +8,17 @@ todo CS2103 IP Level-6
 todo CS2103 IP A-Enums
 deadline CS2103 /by Thursday 23:59
 event cry /at home
+list
 done 1
-done 2
-done 3
-done 4
-done 5
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
+done 1
+delete 1
 list

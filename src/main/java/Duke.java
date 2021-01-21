@@ -34,8 +34,12 @@ public class Duke {
                         break;
 
                     case "done":
-                        Integer taskNumber = scanner.nextInt();
-                        Tasks.get(taskNumber - 1).markDone();
+                        try { 
+                            Integer taskNumber = scanner.nextInt();
+                            Tasks.get(taskNumber - 1).markDone(); 
+                        } catch (Exception NonNumberE) {
+                            System.out.println("     tasks must be marked with integers!");
+                        }
                         break;
 
                     case "todo":
@@ -74,6 +78,18 @@ public class Duke {
 
                         Tasks.add(new Event(commandcont, At));
                         updateTasks(Tasks);
+                        break;
+
+                    case "delete":
+                        try { 
+                            Task dead = Tasks.remove(scanner.nextInt() - 1);
+                            System.out.println("     Got it. I've removed this task:");
+                            System.out.println("     " + dead.TaskInformation());
+                            System.out.println("     Now you have " + Tasks.size() + " tasks in the list.");
+
+                        } catch (Exception NonNumberE) {
+                            System.out.println("     task does not exist or must be marked with integers!");
+                        }
                         break;
                         
                     default:    // appends to list
