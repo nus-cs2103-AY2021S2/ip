@@ -37,18 +37,33 @@ public class Duke {
                         + item.toString());
             } else {
                 String taskType = commandArr[0];
-                String wholeTask = commandArr[1];
+                String wholeTask = "";
                 Task item;
                 switch (taskType) {
                     case "todo":
-                            item = new Todo(wholeTask);
+                        if (commandArr.length == 1) {
+                            System.out.println("Oops! The description of todo cannot be empty!");
+                            continue;
+                        }
+                        wholeTask = commandArr[1];
+                        item = new Todo(wholeTask);
                         break;
                     case "deadline": {
+                        if (commandArr.length == 1) {
+                            System.out.println("Oops! The description of deadline cannot be empty!");
+                            continue;
+                        }
+                        wholeTask = commandArr[1];
                         String[] taskArr = wholeTask.split("/");
                         item = new Deadline(taskArr[0], taskArr[1]);
                         break;
                     }
                     case "event": {
+                        if (commandArr.length == 1) {
+                            System.out.println("Oops! The description of event cannot be empty!");
+                            continue;
+                        }
+                        wholeTask = commandArr[1];
                         String[] taskArr = wholeTask.split("/");
                         item = new Event(taskArr[0], taskArr[1]);
                         break;
