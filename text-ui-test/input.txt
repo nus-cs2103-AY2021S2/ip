@@ -1,10 +1,33 @@
 todo buy milo
 todo buy milk
+todo
+todo
+todo          a
 deadline drink milo /by Thursday
+deadline
+deadline
+deadline   asd
+deadline homework /by
 event milo party /at 2pm - 6pm
+event
+event
+event birthday
+event birthday /at
 done 3
+list
 done 1
+list
 done 5
+list
 done 2
 list
+done
+done 10
+todo something
+done 10
+done asd
+done         1
+list
+list
+list e80righj
 bye
