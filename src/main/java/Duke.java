@@ -3,11 +3,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public enum Tasktype {
-        DEADLINE,
-        EVENT,
-        TODO
-    }
     public static void main(String[] args) {
         System.out.println("Hello from Gambit, how may I assist you today?");
         Scanner sc = new Scanner(System.in);
@@ -27,38 +22,31 @@ public class Duke {
             } else if (word.contains("done")) {
                 String strArray[] = word.split(" ");
                 int value =Integer.parseInt(strArray[1]);
-                list.get(value - 1).markAsDone();
+                Task complete = list.get(value - 1);
+                complete.markAsDone();
+                System.out.println(" Nice! I've marked this task as done: ");
+                System.out.println(complete.toString());
             } else {
-                Tasktype newTask = null;
-                if (word.contains("deadline")) {
-                    newTask = Tasktype.DEADLINE;
-                } else if (word.contains("todo")) {
-                    newTask = Tasktype.TODO;
+                System.out.println("Got it. I've added this task: ");
+                if (word.contains("todo")) {
+                    String save = word.replaceAll("todo","");
+                    ToDo t = new ToDo(save);
+                    list.add(t);
+                    System.out.println(t.toString());
                 } else if (word.contains("event")) {
-                    newTask = Tasktype.EVENT;
+                    String[] info = word.split("/at");
+                    info[0] = info[0].replaceAll("event","");
+                    Event e = new Event(info[0],info[1]);
+                    list.add(e);
+                    System.out.println(e.toString());
+                } else if (word.contains("deadline")) {
+                    String[] input = word.split("/by");
+                    input[0] = input[0].replaceAll("deadline", "");
+                    Deadline d = new Deadline(input[0], input[1]);
+                    list.add(d);
+                    System.out.println(d.toString());
                 }
-                System.out.println("Got it. I've added this task:");
-                switch (newTask)
-                {
-                    case(DEADLINE) :
-                        String[] input = word.split("/by");
-                        input[0] = input[0].replaceAll("deadline","");
-                        Deadline d = new Deadline(input[0],input[1]);
-                        System.out.println(d.toString());
-                        break;
-                    case(EVENT) :
-                        String[] info = word.split("/at");
-                        input[0] = input[0].replaceAll("event","");
-                        Event e = new Event(input[0],input[1]);
-                        System.out.println(e.toString());
-                        break;
-                    case(TODO) :
-                        word.replaceAll("todo","");
-                        ToDo t = new ToDo(word);
-                        System.out.println(t.toString());
-                        break;
-                }
-                System.out.println("Now you have " + list.size() + "tasks in the list");
+                System.out.println("Now you have " + list.size() + " tasks in the list");
             }
         }
     }
