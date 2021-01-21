@@ -31,7 +31,20 @@ public class Duke {
         int len = this.list.size();
                 for(int i = 0; i < len; i++){
                     int index = i + 1;
-                    System.out.println(index + "." + this.list.get(i).toString());
+                    Task t = this.list.get(i);
+                    if(t instanceof Todo){
+                        Todo todo = (Todo) t;
+                        System.out.println(index + "." + todo.toString());
+                    } else if ( t instanceof Event){
+                        Event event = (Event) t;
+                        System.out.println(index + "." + event.toString());
+                    } else if ( t instanceof Deadline){
+                        Deadline deadline = (Deadline) t;
+                        System.out.println(index + "." + deadline.toString());
+                    } else {
+                        System.out.println(index + "." + t.toString());
+                    }
+
                 }
     }
 
