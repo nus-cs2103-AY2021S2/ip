@@ -21,20 +21,53 @@ public class Duke {
 
         while (!request.equals("bye")) {
             request = sc.nextLine();
+            String[] tk = request.split(" ");
+            request = tk[0];
+            String taskname = "";
+            // System.out.println(request);
+            for (int i = 1; i < tk.length; i++) {
+                taskname += tk[i];
+                if (i < tk.length - 1) {
+                    taskname += " ";
+                }
+            }
+
             if (request.equals("bye")) {
                 dprint("Bye. Hope to see you again soon!");
                 break;
             } else if(request.equals("list")) {
                 printlist(lst);
-            } else if(request.substring(0, 4).equals("done")) {
-                String[] tk = request.split(" ");
-                int taskNo = Integer.parseInt(tk[1]);
+            } else if(request.equals("done")) {
+                int taskNo = Integer.parseInt(taskname);
                 markdone(lst, taskNo);
-            } else {
-                lst.add(new Task(request));
-                dprint("added: " + request);
+            } else if(request.equals("todo")) {
+                lst.add(new Task("T", taskname));
+                printadded(lst);
+            } else if(request.equals("deadline")) {
+                String[] deadStr = format(taskname);
+                lst.add(new Task("D", deadStr[0], deadStr[1]));
+                printadded(lst);
+            } else if(request.equals("event")) {
+                String[] eventStr = format(taskname);
+                lst.add(new Task("E", eventStr[0], eventStr[1]));
+                printadded(lst);
             }
         }
+    }
+    
+    public static String[] format(String n) {
+        String[] arr = new String[3];
+        arr[0] = n.split("/")[0];
+        arr[1] = "(" + n.split("/")[1].split(" ")[0] + ":" +
+            n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length(), n.split("/")[1].length()) + ")";
+        return arr;
+    }
+    
+    public static void printadded(List<Task> lst) {
+        String msg = "Got it. I've added this task:\n";
+        msg += "  " + lst.get(lst.size() - 1);
+        msg += "\nNow you have " + lst.size() + " tasks in the list.";
+        dprint(msg);
     }
 
     public static void dprint(String msg) {
