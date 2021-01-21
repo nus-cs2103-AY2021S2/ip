@@ -1,0 +1,13 @@
+todo make coffee
+deadline this project /by midnight
+event bro's wedding /at summer vacation
+list
+done 1
+list
+todo drink coffee
+done 2
+done 3
+list
+done 4
+list
+bye
