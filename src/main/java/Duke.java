@@ -52,21 +52,21 @@ public class Duke {
                     if (!matcher.find()) {
                         throw new DukeException("todo Usage: todo [activity]");
                     }
-                    task = new TaskTodo(matcher.group(1), false);
+                    task = new TaskTodo(matcher.group(1).trim(), false);
                     break;
                 case "deadline":
                     matcher = DEADLINE_REGEX.matcher(command);
                     if (!matcher.find()) {
                         throw new DukeException("deadline Usage: deadline [activity] /by [deadline]");
                     }
-                    task = new TaskDeadline(matcher.group(1), false, matcher.group(2));
+                    task = new TaskDeadline(matcher.group(1).trim(), false, matcher.group(2).trim());
                     break;
                 case "event":
                     matcher = EVENT_REGEX.matcher(command);
                     if (!matcher.find()) {
                         throw new DukeException("event Usage: event [activity] /at [time]");
                     }
-                    task = new TaskEvent(matcher.group(1), false, matcher.group(2));
+                    task = new TaskEvent(matcher.group(1).trim(), false, matcher.group(2).trim());
                     break;
                 default: throw new IllegalStateException();
             }
