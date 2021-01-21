@@ -1,6 +1,6 @@
 import java.util.*;
 public class Duke {
-    List<String> list;
+    List<Task> list;
 
     public Duke(){
         this.list = new ArrayList<>();
@@ -15,19 +15,36 @@ public class Duke {
 
     }
 
-    public void addToList(String message){
-        this.list.add(message);
-        System.out.println("added: " + message);
+    public void addToList(Task task){
+        this.list.add(task);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("    " + task);
+        System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
     }
 
     public void printList(){
         int counter = 1;
-        for(String element:this.list){
-            System.out.println(counter + ". " + element);
+        for(Task element:this.list){
+            System.out.println(String.valueOf(counter) + element);
             counter++;
         }
     }
 
+    public void markTaskAsDone(int id){
+        Task task = this.list.get(id-1);
+        task.markDone();
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("  [X] "+ task.content);
+    }
+
+    public void deleteTask(int id){
+        Task task = this.list.get(id-1);
+        this.list.remove(id-1);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println("    " + task);
+        System.out.println("Now you have " + String.valueOf(this.list.size()) + " tasks in the list.");
+
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"

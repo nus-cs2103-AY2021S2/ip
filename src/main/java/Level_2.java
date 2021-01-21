@@ -7,12 +7,15 @@ public class Level_2 {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         Duke bot = new Duke();
+        //int counter = 1;
 
         while(!(input.equals("bye"))) {
             if (input.equals("list")) {
                 bot.printList();
             }else{
-                bot.addToList(input);
+                Task newTask = new Task(input);
+                bot.addToList(newTask);
+                //counter++;
             }
             input = sc.nextLine();
         }
