@@ -22,20 +22,40 @@ public class Duke {
                     System.out.println("       " + i + ". " + tasks.get(i - 1).toString());
                 }
                 System.out.println("     Ganbatte ne!");
-                command = sc.nextLine();
 
             } else if(command.startsWith("done")){
                 int taskNum = Integer.valueOf(command.substring(5));
                 tasks.get(taskNum-1).setCompleted();
                 System.out.println("     Otsukare! I've marked this task as done:");
                 System.out.println("       " + tasks.get(taskNum - 1).toString());
-                command = sc.nextLine();
+
+            } else if(command.startsWith("todo")){
+                Todo curr = new Todo(command.substring(5));
+                tasks.add(curr);
+                System.out.println("     Hai, I've added this task:\n       " + curr.toString() +
+                        "\n     Now you have " + tasks.size() + " tasks in the list.");
+
+
+            } else if(command.startsWith("deadline")){
+                int cut = command.indexOf("/");
+                Deadline curr = new Deadline(command.substring(9, cut-1), command.substring(cut+4));
+                tasks.add(curr);
+                System.out.println("     Hai, I've added this task:\n       " + curr.toString() +
+                        "\n     Now you have " + tasks.size() + " tasks in the list.");
+
+            } else if(command.startsWith("event")){
+                int cut = command.indexOf("/");
+                Event curr = new Event(command.substring(6, cut-1), command.substring(cut+4));
+                tasks.add(curr);
+                System.out.println("     Hai, I've added this task:\n       " + curr.toString() +
+                        "\n     Now you have " + tasks.size() + " tasks in the list.");
+
 
             } else {
-                System.out.println("     Hai, added: " + command);
-                tasks.add(new Task(command));
-                command = sc.nextLine();
+                System.out.println("     Etto, was there an mistake with [" + command + "] ?");
             }
+
+            command = sc.nextLine();
         }
 
         System.out.println("     Sayonara! Mata ne~ ;)");
