@@ -43,23 +43,23 @@ public class Duke {
         switch (tokenizedInput[0]) {
             case "deadline":
                 String[] deadlineDetails = tokenizedInput[1].split("/by");
-                newTask = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+                newTask = new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim());
                 break;
             case "event":
                 String[] eventDetails = tokenizedInput[1].split("/at");
-                newTask = new Event(eventDetails[0], eventDetails[1]);
+                newTask = new Event(eventDetails[0].trim(), eventDetails[1].trim());
                 break;
             default:
-                newTask = new ToDo(tokenizedInput[1]);
+                newTask = new ToDo(tokenizedInput[1].trim());
                 break;
         }
         tasks.add(newTask);
-        echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list", newTask, tasks.size()));
+        echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", newTask, tasks.size()));
     }
 
     public static void doneTask(int taskIndex) {
         tasks.get(taskIndex).markAsDone();
-        echo("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
+        echo("Nice! I've marked this task as done:\n\t" + tasks.get(taskIndex));
     }
 
     public static void listTask() {
@@ -67,9 +67,7 @@ public class Duke {
         builder.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int numbering = i + 1;
-            builder.append(numbering);
-            builder.append(". ");
-            builder.append(tasks.get(i));
+            builder.append(String.format("\t%d. %s", numbering, tasks.get(i)));
 
             if (numbering != tasks.size()) {
                 builder.append("\n");
