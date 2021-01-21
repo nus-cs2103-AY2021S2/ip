@@ -26,7 +26,7 @@ public class Duke {
                 complete.markAsDone();
                 System.out.println(" Nice! I've marked this task as done: ");
                 System.out.println(complete.toString());
-            } else {
+            } else if ((word.contains("todo")) || (word.contains("event")) || (word.contains("deadline"))) {
                 System.out.println("Got it. I've added this task: ");
                 if (word.contains("todo")) {
                     String save = word.replaceAll("todo","");
