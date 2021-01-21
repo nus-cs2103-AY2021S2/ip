@@ -1,6 +1,18 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The DukeLevel class is an interactive chat bot that can:
+ * - add items to a list
+ * - display a list of items which were previously added
+ * - mark items in the list as done
+ * - remove items from the list
+ * - throw exceptions if the input is incorrect
+ *
+ * @author Shaelyn
+ * @version CS2103T 20/21 Semester 2, Individual Project
+ */
+
 public class DukeLevel {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -16,7 +28,6 @@ public class DukeLevel {
 
         while (sc.hasNext()) {
             try {
-
                 String input = sc.nextLine().trim();
                 String[] strArray = input.split(" ", 2);
                 String cmd = strArray[0];
@@ -111,8 +122,20 @@ public class DukeLevel {
     }
 }
 
+
+/**
+ * The Task class is a parent class for ToDo, Deadline and Event
+ * whereby each Task has a boolean to indicate whether it has been done
+ */
 class Task {
+    /**
+     * String description that determines what kind of task the input is
+     */
     protected String description;
+
+    /**
+     * boolean isDone that indicates whether the task has been done
+     */
     protected boolean isDone;
 
     public Task(String description) {
@@ -120,10 +143,17 @@ class Task {
         this.isDone = false;
     }
 
+    /**
+     * For a given task, indicate whether it has been done using a space or a tick
+     * @return if the task has been done, return a tick, else return a space
+     */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
+        return (isDone ? "\u2713" : " "); //return tick symbol
     }
 
+    /**
+     * For a given task, if it is done, mark it as done by changing the boolean isDone to true
+     */
     public void markAsDone() {
         isDone = true;
     }
@@ -132,6 +162,10 @@ class Task {
     public String toString() { return "[" + getStatusIcon() + "] " + description; }
 }
 
+/**
+ * The ToDo class is a child class of the Task Class,
+ * it specifies the task as a ToDo using [T]
+ */
 class ToDo extends Task {
     public ToDo(String description) {
         super(description);
@@ -143,6 +177,10 @@ class ToDo extends Task {
     }
 }
 
+/**
+ * The Deadline class is a child class of the Task Class,
+ * it specifies the task as a Deadline using [D]
+ */
 class Deadline extends Task {
     protected String by;
 
@@ -157,6 +195,10 @@ class Deadline extends Task {
     }
 }
 
+/**
+ * The Event class is a child class of the Task Class,
+ * it specifies the task as an Event using [E]
+ */
 class Event extends Task {
     protected String at;
 
@@ -171,6 +213,11 @@ class Event extends Task {
     }
 }
 
+/**
+ * The DukeException is a child class of the Java Exception class
+ * which throws an exception message when an invalid input is given to the chat bot
+ * either a wrong message (unidentified input) or an unclear message (not specific enough)
+ */
 class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
