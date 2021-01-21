@@ -15,50 +15,50 @@ What do you want?
     
     _______________________________________
     Got it. I've added this task:
-    [T][N] borrow book
+    [T][ ] borrow book
     Now you have 1 tasks in the list.
     _______________________________________
     
     _______________________________________
     Here are the tasks in your list:
-    1: [T][N] borrow book
+    1: [T][ ] borrow book
     _______________________________________
     
     _______________________________________
     Got it. I've added this task:
-    [D][N] return book (by: Sunday)
+    [D][ ] return book (by: Sunday)
     Now you have 2 tasks in the list.
     _______________________________________
     
     _______________________________________
     Here are the tasks in your list:
-    1: [T][N] borrow book
-    2: [D][N] return book (by: Sunday)
+    1: [T][ ] borrow book
+    2: [D][ ] return book (by: Sunday)
     _______________________________________
     
     _______________________________________
     Got it. I've added this task:
-    [E][N] project meeting (at: Mon 2-4pm)
+    [E][ ] project meeting (at: Mon 2-4pm)
     Now you have 3 tasks in the list.
     _______________________________________
     
     _______________________________________
     Here are the tasks in your list:
-    1: [T][N] borrow book
-    2: [D][N] return book (by: Sunday)
-    3: [E][N] project meeting (at: Mon 2-4pm)
+    1: [T][ ] borrow book
+    2: [D][ ] return book (by: Sunday)
+    3: [E][ ] project meeting (at: Mon 2-4pm)
     _______________________________________
     
     _______________________________________
     Nice! I've marked this task as done:
-      [D][Y] return book (by: Sunday)
+      [D][X] return book (by: Sunday)
     _______________________________________
     
     _______________________________________
     Here are the tasks in your list:
-    1: [T][N] borrow book
-    2: [D][Y] return book (by: Sunday)
-    3: [E][N] project meeting (at: Mon 2-4pm)
+    1: [T][ ] borrow book
+    2: [D][X] return book (by: Sunday)
+    3: [E][ ] project meeting (at: Mon 2-4pm)
     _______________________________________
     
     _______________________________________
@@ -71,14 +71,14 @@ What do you want?
     
     _______________________________________
     Noted. I have removed this task:
-    [E][N] project meeting (at: Mon 2-4pm)
+    [E][ ] project meeting (at: Mon 2-4pm)
     Now you have 2 tasks in the list.
     _______________________________________
     
     _______________________________________
     Here are the tasks in your list:
-    1: [T][N] borrow book
-    2: [D][Y] return book (by: Sunday)
+    1: [T][ ] borrow book
+    2: [D][X] return book (by: Sunday)
     _______________________________________
     
     _______________________________________
