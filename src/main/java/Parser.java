@@ -12,11 +12,11 @@ public class Parser {
         return this.bye;
     }
 
-    public Command parseInput(final String input) throws InvalidCommandException {
+    public Command parseInput(final String input) throws DukeException.InvalidCommand {
         Scanner scanner = new Scanner(input);
 
         if (!scanner.hasNext()) {
-            throw new InvalidCommandException();
+            throw new DukeException.InvalidCommand();
         }
         switch (scanner.next().toLowerCase(Locale.ROOT)) {
             case DukeString.COMMAND_BYE:
@@ -33,7 +33,7 @@ public class Parser {
             case DukeString.COMMAND_TODO:
                 return new TodoCommand(scanner.nextLine().trim());
             default:
-                throw new InvalidCommandException();
+                throw new DukeException.InvalidCommand();
 
         }
     }
