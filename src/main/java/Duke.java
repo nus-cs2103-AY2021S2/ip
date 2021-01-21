@@ -10,7 +10,7 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<Task> list = new ArrayList<Task>();
         System.out.println("____________________________________________________________\n" +
                 "Hello! I'm Duke\n" +
                 "How can I assist you?\n" +
@@ -23,13 +23,17 @@ public class Duke {
             }
             else if (text.equals("list")) {
                 int num = 1;
-                for (String task: list) {
+                for (Task task: list) {
                     System.out.println(String.format("%d. %s", num, task));
                     num++;
                 }
             }
+            else if (text.split(" ")[0].equals("done")) {
+                int num = Integer.parseInt(text.split(" ")[1]);
+                list.get(num-1).done();
+            }
             else {
-                list.add(text);
+                list.add(new Task(text));
                 System.out.println(String.format("added: %s", text));
             }
         }
