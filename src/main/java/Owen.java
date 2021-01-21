@@ -89,6 +89,17 @@ public class Owen implements Chatbot {
                 Response doneResponse = new DefaultResponse(String.format(
                         doneFormat, doneTaskList.getTask(taskNumber).toString()));
                 return new Owen(this.isRunning, doneResponse, doneTaskList);
+            case "delete":
+                taskNumber = Integer.parseInt(splitCommand[1]);
+                TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
+                String deleteFormat = ""
+                + "Noted. I've removed this task:\n"
+                + "    %s\n"
+                + "Now you have %d tasks in the list.";
+                int newNumTasks = deleteTaskList.getNumTasks();
+                Response deleteResponse = new DefaultResponse(String.format(
+                        deleteFormat, this.taskList.getTask(taskNumber), newNumTasks));
+                return new Owen(this.isRunning, deleteResponse, deleteTaskList);
             case "bye":
                 return this.shutdown();
             default:

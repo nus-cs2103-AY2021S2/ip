@@ -86,6 +86,18 @@ public class TaskList {
         return new TaskList(newTaskList);
     }
 
+    /**
+     * Deletes the nth task from the task list.
+     * @param taskNumber The number of the task to delete.
+     * @return Copy of the task list with the nth task deleted.
+     */
+    public TaskList deleteTask(int taskNumber) {
+        taskNumber -= 1;
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+        newTaskList.remove(taskNumber);
+        return new TaskList(newTaskList);
+    }
+
     @Override
     public String toString() {
         String[] taskListStrings = new String[this.taskList.size()];
