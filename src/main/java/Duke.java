@@ -38,7 +38,23 @@ public class Duke {
                 t.setDone();
                 Duke.respondDone(t);
             } else {
-                Task t = new Task(s);
+                // Task addition
+                Task t = new Task(""); // default empty
+                if (s.startsWith("todo")) {
+                    s = s.substring(5);
+                    t = new ToDo(s);
+                } else if (s.startsWith("deadline")) {
+                    s = s.substring(9);
+                    String[] tokens = s.split(" /by ");
+                    t = new Deadline(tokens[0], tokens[1]);
+                } else if (s.startsWith("event")) {
+                    s = s.substring(6);
+                    String[] tokens = s.split(" /at ");
+                    t = new Deadline(tokens[0], tokens[1]);
+                } else {
+                    ; // unattended case
+                }
+
                 userData.add(t);
                 Duke.respondAdd(t, userData);
             }
