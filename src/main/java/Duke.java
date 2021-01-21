@@ -3,10 +3,10 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public enum CommandsEnum {
+    public enum Commands {
+        USAGE, LIST,
         TODO, DEADLINE, EVENT,
-        DONE, DELETE, LIST,
-        BYE, USAGE
+        DONE, DELETE, BYE
     }
 
     public static void main(String[] args) {
@@ -25,8 +25,14 @@ public class Duke {
                     continue;
 
                 // Process input
-                CommandsEnum command = CommandsEnum.valueOf(input.split(" ")[0].toUpperCase());
+                Commands command = Commands.valueOf(input.split(" ")[0].toUpperCase());
                 switch (command) {
+                    case USAGE:
+                        usage();
+                        break;
+                    case LIST:
+                        list(collection);
+                        break;
                     case TODO:
                     case DEADLINE:
                     case EVENT:
@@ -38,17 +44,11 @@ public class Duke {
                     case DELETE:
                         delete(collection, input);
                         break;
-                    case LIST:
-                        list(collection);
-                        break;
                     case BYE:
                         exit = bye();
-                        break;
-                    case USAGE:
-                        usage();
                 }
             } catch (IllegalArgumentException e) {
-                invalid(); // Invalid enum value (i.e. no such command)
+                Duke.say("Oh no... I'm not trained with these commands yet...");
             } catch (DukeException e) {
                 Duke.say("Oh no... " + e.getMessage());
             }
@@ -117,9 +117,16 @@ public class Duke {
         Duke.say("Sooooo... Is there anything I can do for you today?");
     }
 
-    public static boolean bye() {
-        Duke.say("Alright, take care. I hope to see you again soon!");
-        return true;
+    public static void usage() {
+        Duke.say("Hey! These are commands available:");
+        Duke.say("\t1. usage");
+        Duke.say("\t2. list");
+        Duke.say("\t3. todo <task_description>");
+        Duke.say("\t4. deadline <task_description> /by <date_time>");
+        Duke.say("\t5. event <task_description> /at <date_time>");
+        Duke.say("\t6. done <task_number>");
+        Duke.say("\t7. delete <task_number>");
+        Duke.say("\t8. bye");
     }
 
     public static void list(ArrayList<Task> collection) {
@@ -181,19 +188,8 @@ public class Duke {
         }
     }
 
-    public static void invalid() {
-        Duke.say("I'm not trained with these commands yet...");
-    }
-
-    public static void usage() {
-        Duke.say("Hey! These are commands available:");
-        Duke.say("\t1. todo <task_description>");
-        Duke.say("\t2. deadline <task_description> /by <date_time>");
-        Duke.say("\t3. event <task_description> /at <date_time>");
-        Duke.say("\t4. done <task_number>");
-        Duke.say("\t5. delete <task_number>");
-        Duke.say("\t6. list");
-        Duke.say("\t7. bye");
-        Duke.say("\t8. usage");
+    public static boolean bye() {
+        Duke.say("Alright, take care. I hope to see you again soon!");
+        return true;
     }
 }

@@ -9,14 +9,14 @@ ____________________________________________________________
 >> To know more about what I can do, type 'usage'.
 >> Sooooo... Is there anything I can do for you today?
 << >> Hey! These are commands available:
->> 	1. todo <task_description>
->> 	2. deadline <task_description> /by <date_time>
->> 	3. event <task_description> /at <date_time>
->> 	4. done <task_number>
->> 	5. delete <task_number>
->> 	6. list
->> 	7. bye
->> 	8. usage
+>> 	1. usage
+>> 	2. list
+>> 	3. todo <task_description>
+>> 	4. deadline <task_description> /by <date_time>
+>> 	5. event <task_description> /at <date_time>
+>> 	6. done <task_number>
+>> 	7. delete <task_number>
+>> 	8. bye
 << >> Got it, I have added the task 'read book' to your collection.
 << >> Got it, I have added the task 'return book' to your collection.
 << >> Got it, I have added the task 'project meeting' to your collection.
