@@ -34,28 +34,36 @@ public class Duke {
         String input = in.readLine();
 
         while (!input.equals("bye")) {
-            String[] tokens = input.split(" ");
-            switch (tokens[0]) {
-            case "list":
-                list();
-                break;
-            case "done":
-                done(Integer.parseInt(tokens[1]));
-                break;
-            case "todo":
-                addTodo(input);
-                break;
-            case "deadline":
-                addDeadline(input);
-                break;
-            case "event":
-                addEvent(input);
-                break;
-            default:
-                // handle in level 5
+            try {
+                String[] tokens = input.split(" ");
+                switch (tokens[0]) {
+                case "list":
+                    list();
+                    break;
+                case "done":
+                    done(input, tokens);
+                    break;
+                case "todo":
+                    addTodo(input, tokens);
+                    break;
+                case "deadline":
+                    addDeadline(input, tokens);
+                    break;
+                case "event":
+                    addEvent(input, tokens);
+                    break;
+                default:
+                    throw new UnsupportedOperationException();
+                }
+            } catch (DukeException de) {
+                write(de.toString());
+            } catch (UnsupportedOperationException noe) {
+                write("Unknown command.");
             }
+
             input = in.readLine();
         }
+
 
         write("Bye. Hope to see you again soon!");
 
@@ -63,25 +71,46 @@ public class Duke {
         out.close();
     }
 
-    static void addTodo(String input) throws IOException {
+    static void addTodo(String input, String[] tokens) throws IOException {
+        if (tokens.length < 2) {
+            throw new DukeException("Todo requires a description.");
+        }
         Todo todo = new Todo(input.substring(5));
         tasks.add(todo);
         writeAddTask(todo);
     }
 
-    static void addDeadline(String input) throws IOException {
+    static void addDeadline(String input, String[] tokens) throws IOException {
         int bySwitchIndex = input.indexOf("/by");
+        if (bySwitchIndex == -1 || bySwitchIndex + 4 > input.length()) {
+            throw new DukeException("Deadline requires '/by' to be specified.");
+        }
         String description = input.substring(9, bySwitchIndex);
+        if (description.trim().equals("")) {
+            throw new DukeException("Deadline requires a description.");
+        }
         String by = input.substring(bySwitchIndex + 4);
+        if (by.trim().equals("")) {
+            throw new DukeException("Deadline requires '/by' to be specified.");
+        }
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
         writeAddTask(deadline);
     }
 
-    static void addEvent(String input) throws IOException {
+    static void addEvent(String input, String[] tokens) throws IOException {
         int atSwitchIndex = input.indexOf("/at");
+        if (atSwitchIndex == -1 || atSwitchIndex + 4 > input.length()) {
+            throw new DukeException("Event requires '/at' to be specified.");
+        }
         String description = input.substring(6, atSwitchIndex);
+        if (description.trim().equals("")) {
+            throw new DukeException("Event requires a description.");
+        }
         String at = input.substring(atSwitchIndex + 4);
+        if (at.trim().equals("")) {
+            throw new DukeException("Event requires '/at' to be specified.");
+        }
         Event event = new Event(description, at);
         tasks.add(event);
         writeAddTask(event);
@@ -100,7 +129,21 @@ public class Duke {
         out.flush();
     }
 
-    static void done(int selection) throws IOException {
+    static void done(String input, String[] tokens) throws IOException {
+        if (tokens.length < 2) {
+            throw new DukeException("Please specify a number");
+        }
+
+        int selection;
+        try {
+            selection = Integer.parseInt(tokens[1]);
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("Invalid number");
+        }
+
+        if (selection < 1 || selection > tasks.size()) {
+            throw new DukeException("Invalid number");
+        }
         Task task = tasks.get(selection - 1);
         task.markAsDone();
         write("  [" + task.getStatusIcon() + "] " + task.getDescription());
