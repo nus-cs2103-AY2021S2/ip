@@ -7,8 +7,8 @@ Hello from
 
 What can I do for you?
 ------------------------------------
-Sorry, I do not recognise the following instruction:
-come and catch me
+------------------------------------
+Invalid action, type 'help' for more options
 ------------------------------------
 ------------------------------------
 Got it! I have added this task:
