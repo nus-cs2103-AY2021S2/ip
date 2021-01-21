@@ -9,7 +9,7 @@ public class Duke {
     private static TaskType taskType;
 
     public enum TaskType {
-        TODO, DEADLINE, EVENT, OTHER;
+        TODO, DEADLINE, EVENT;
     }
 
     private static void replyFormat(String reply) {
@@ -26,66 +26,107 @@ public class Duke {
         replyFormat(byeMessage);
     }
 
+    private static void displayPrompts() {
+        String promptMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                                + "List of recognised user prompts:\n"
+                                    + "  1. todo - adds a todo (E.g. todo borrow book)\n"
+                                        + "  2. deadline - adds a deadline (E.g. deadline return book /by Sunday\n"
+                                            + "  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)\n"
+                                                + "  4. list - displays the list of tasks\n" + "  5. bye - terminates Duke ☹";
+        replyFormat(promptMessage);
+    }
+
     // Adds a task to tasksList
-    private static void addTask(String promptDescription) {
+    private static void addTask(String promptDescription) throws DukeException {
         String[] strings;
         String systemMessage;
         String description;
         String period;
         Task newTask;
 
+        // Checks if string is null or empty or contains only spaces
+        boolean isDescriptionFilled = (promptDescription != null && !promptDescription.trim().isEmpty());
+
         switch (taskType) {
             case TODO:
-                counter++;
-                description = promptDescription;
-                newTask = new ToDo(description);
-                tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" +  "  " + newTask + "\n" + "Now you have "
-                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                if (isDescriptionFilled) {
+                    counter++;
+                    newTask = new ToDo(promptDescription);
+                    tasksList.add(newTask);
+                    systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
+                                                + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                    replyFormat(systemMessage);
+                } else {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
                 break;
 
             case DEADLINE:
-                counter++;
-                strings = promptDescription.split(" /by ");
-                description = strings[0];
-                period = strings[1];
-                newTask = new Deadline(description, period);
-                tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
-                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                if (isDescriptionFilled) {
+                    try {
+                        strings = promptDescription.split(" /by");
+                        description = strings[0];
+                        period = (strings.length > 1 ? strings[1].split(" ",2)[1] : "");
+
+                        if (period != null && !period.trim().isEmpty()) {
+                            newTask = new Deadline(description, period);
+                            tasksList.add(newTask);
+                            counter++;
+                            systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
+                                                        + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                            replyFormat(systemMessage);
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
+                                                            + "  deadline [task description] /by [date and/or time]");
+                    }
+                } else {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
                 break;
 
             case EVENT:
-                counter++;
-                strings = promptDescription.split(" /at ");
-                description = strings[0];
-                period = strings[1];
-                newTask = new Event(description, period);
-                tasksList.add(newTask);
-                systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
-                                            + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                if (isDescriptionFilled) {
+                    try {
+                        strings = promptDescription.split(" /at");
+                        description = strings[0];
+                        period = (strings.length > 1 ? strings[1].split(" ", 2)[1] : "");
+
+                        if (period != null && !period.trim().isEmpty()) {
+                            newTask = new Event(description, period);
+                            tasksList.add(newTask);
+                            counter++;
+                            systemMessage = "Got it. I've added this task:\n" + "  " + newTask + "\n" + "Now you have "
+                                                        + counter + (counter <= 1 ? " task" : " tasks") + " in the list.";
+                            replyFormat(systemMessage);
+                        } else {
+                            throw new DukeException("☹ OOPS!!! The date and/or time cannot be empty.");
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! Please specify the date and/or time in this format:\n"
+                                                            + "  event [task description] /at [date and/or time]");
+                    }
+                } else {
+                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                }
                 break;
 
             default:
-                systemMessage = "Task type not recognised. List of recognised task types:\n"
-                                    + "  1. todo (E.g. todo borrow book)\n"
-                                        + "  2. deadline (E.g. deadline return book /by Sunday\n"
-                                            + "  3. event (E.g. event project meeting /at Mon 2-4pm";
-                break;
+                displayPrompts();
         }
-
-        replyFormat(systemMessage);
     }
 
     // Marks a task as done and informs the user about it
-    private static void completeTask(int taskNo) {
+    private static void completeTask(int taskNo) throws DukeException {
         if (taskNo > 0 & taskNo <= tasksList.size()) {
             Task taskToComplete = tasksList.get(taskNo - 1);
             taskToComplete.markAsDone();
             String doneMessage = "Nice! I've marked this task as done:\n" + "  " + taskToComplete;
             replyFormat(doneMessage);
         } else {
-            replyFormat("Task " + taskNo + " is not in the task list!");
+            throw new DukeException("Task " + taskNo + " is not in the task list!");
         }
     }
 
@@ -123,25 +164,27 @@ public class Duke {
                 promptDescription = inputArray[1];
             }
 
-            if (prompt.equals("list")) {
-                displayTasks(tasksList);
-            } else if (prompt.equals("done")) {
-                completeTask(Integer.valueOf(inputArray[1]));
-            } else {
-                if (prompt.equals("todo")) {
+            try {
+                if (prompt.equals("list")) {
+                    displayTasks(tasksList);
+                } else if (prompt.equals("done")) {
+                    completeTask(Integer.valueOf(inputArray[1]));
+                } else if (prompt.equals("todo")) {
                     taskType = TaskType.TODO;
+                    addTask(promptDescription);
                 } else if (prompt.equals("deadline")) {
                     taskType = TaskType.DEADLINE;
+                    addTask(promptDescription);
                 } else if (prompt.equals("event")) {
                     taskType = TaskType.EVENT;
+                    addTask(promptDescription);
                 } else {
-                    taskType = TaskType.OTHER;
+                    displayPrompts();
                 }
-
-                addTask(promptDescription);
+            } catch (DukeException e){
+                replyFormat(e.getMessage());
             }
 
-            taskType = TaskType.OTHER;
             userInput = sc.nextLine();
         }
 
