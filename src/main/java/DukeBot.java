@@ -108,7 +108,15 @@ public class DukeBot {
     public void run() {
         while (true) {
             String input = scanner.nextLine();
-            if (DukeBot.isTerminateCommand(input)) {
+            if (input.startsWith("delete")) {
+                int deleteId = Integer.parseInt(input.split("\\s")[1]) -1;
+                Task task = list.get(deleteId);
+                list.remove(deleteId);
+                System.out.println("Noted ive removed this task:");
+                System.out.println(task);
+                System.out.println("Now you have " + list.size() + " tasks in the list");
+            }
+            else if (DukeBot.isTerminateCommand(input)) {
                 System.out.println(UNDERLINES);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(UNDERLINES);
