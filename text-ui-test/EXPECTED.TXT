@@ -22,6 +22,8 @@
       \_ lists all tasks, deadlines and events
     done <task number>
       \_ marks a task as done
+    delete <task number>
+      \_ deletes a task from the list
     bye
       \_ exists this application
  --*---*---*---*---*---*---*---*---*---*--
@@ -51,6 +53,14 @@
   and their respective numbers
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
+  Oops! Please state the task number to delete:
+
+  delete <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
   You don't have any tasks yet :)
   Type 'help' to see how you can add a task
  --*---*---*---*---*---*---*---*---*---*--
@@ -64,6 +74,15 @@
  --*---*---*---*---*---*---*---*---*---*--
   Oops! No such task found...
   Please state the task number to mark as done:
+
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+  Please state the task number to delete:
 
   done <task number>
 
@@ -113,6 +132,11 @@
   Total 4 tasks, only 3 left to be done!
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+
+  There are only 4 tasks in your list.
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
   Great job! You're done with:
 
   3. [D][X] submit  (by:  ytd!)
@@ -142,6 +166,8 @@
       \_ lists all tasks, deadlines and events
     done <task number>
       \_ marks a task as done
+    delete <task number>
+      \_ deletes a task from the list
     bye
       \_ exists this application
  --*---*---*---*---*---*---*---*---*---*--

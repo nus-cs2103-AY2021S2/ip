@@ -24,6 +24,7 @@ public class Duke {
                 "\n      \\_ adds an event\n" +
                 "    list\n      \\_ lists all tasks, deadlines and events\n" +
                 "    done <task number>\n      \\_ marks a task as done\n" +
+                "    delete <task number>\n      \\_ deletes a task from the list\n" +
                 "    bye\n      \\_ exists this application\n";
 
         System.out.println(logo + "\n" + border + "\n  Hey there, Olaf here!" +
@@ -74,6 +75,30 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     System.out.println(border + "\n  Oops! No such task found...");
                     System.out.println("  Please state the task number to mark as done:\n");
+                    System.out.println("  done <task number>\n");
+                    System.out.println("  Type 'list' to view all tasks\n" +
+                            "  and their respective numbers\n" + border);
+                }
+            } else if(command.toLowerCase().startsWith("delete")){
+                try {
+                    int idx = Integer.parseInt(command.split(" ")[1]);
+                    Task deleted = tasks.remove(idx - 1);
+                    System.out.println(border + "\n  Got it, this task is now deleted:\n");
+                    System.out.printf("  %s. %s\n", idx, deleted);
+                    System.out.printf("\n  You now have %s tasks left if your list.\n", tasks.size());
+                    System.out.println(border);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(border + "\n  Oops! Please state the task number to delete:\n");
+                    System.out.println("  delete <task number>\n");
+                    System.out.println("  Type 'list' to view all tasks\n" +
+                            "  and their respective numbers\n" + border);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(border + "\n  Oops! No such task found...\n");
+                    System.out.printf("  There are only %s tasks in your list.\n", tasks.size());
+                    System.out.println(border);
+                } catch (NumberFormatException e) {
+                    System.out.println(border + "\n  Oops! No such task found...");
+                    System.out.println("  Please state the task number to delete:\n");
                     System.out.println("  done <task number>\n");
                     System.out.println("  Type 'list' to view all tasks\n" +
                             "  and their respective numbers\n" + border);
