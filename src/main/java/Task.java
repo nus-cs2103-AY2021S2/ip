@@ -12,7 +12,7 @@ public class Task {
     }
 
     // private constructor to maintain Immutability
-    private Task(String details, boolean indicator){
+    protected Task(String details, boolean indicator){
         task_details = details;
         done = true;
     }

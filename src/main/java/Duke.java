@@ -44,6 +44,26 @@ public class Duke {
 
                 input = reader.nextLine();
 
+            } else if (input.startsWith("todo")) {
+                String[] split = input.split(" ");
+                String task = "";
+                for (int counter = 1; counter < split.length; counter++) {
+                    if (counter == 1) {
+                        task = task + split[counter];
+                    } else {
+                        task = task + " " + split[counter];
+                    }
+                }
+
+                ToDo toAdd = new ToDo(task);
+                taskArrayList.add(toAdd);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(toAdd.taskStatus());
+                System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+
+                input = reader.nextLine();
+
             // user adds new tasks
             } else {
                 taskArrayList.add(new Task(input));
