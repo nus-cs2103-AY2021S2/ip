@@ -71,7 +71,7 @@ public class Duke {
         }
     }
 
-    static void level4() {
+    static void level4() throws DukeException {
         List<Task> lst = new ArrayList<>();
         lst.add(new ToDoTask("read book"));
         lst.add(new DeadlineTask("return book", "June 6th"));
@@ -92,18 +92,27 @@ public class Duke {
                 for (int i = 1; i <= lst.size(); i++) {
                     System.out.println(i + "." + lst.get(i - 1));
                 }
-            } else { //adding a task
+            } else if (inputArray[0].equals("todo") || inputArray[0].equals("deadline") || inputArray[0].equals("event")) { //adding a task
                 Task task = new Task("");
                 String[] inputArr1;
                 String[] inputArr2;
                 if (inputArray[0].equals("todo")) {
+                    if (inputArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     inputArr1 = input.split("todo ");
                     task = new ToDoTask(inputArr1[1]);
                 } else if (inputArray[0].equals("deadline")) {
+                    if (inputArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
                     inputArr1 = input.split("deadline ");
                     inputArr2 = inputArr1[1].split(" /by ");
                     task = new DeadlineTask(inputArr2[0], inputArr2[1]);
                 } else if (inputArray[0].equals("event")) {
+                    if (inputArray.length == 1) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
                     inputArr1 = input.split("event ");
                     inputArr2 = inputArr1[1].split(" /at ");
                     task = new EventTask(inputArr2[0], inputArr2[1]);
@@ -112,25 +121,32 @@ public class Duke {
                 System.out.println("Got it. I've added this task: ");
                 System.out.println("  " + task);
                 System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            } else {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
-            //input = sc.nextLine();
-            //inputArray = input.split(" ");
         }
 
 
     }
 
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        level4();
+
+    public static void main(String[] args) {
+
+        try {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+
+            level4();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
 
     }
 }
