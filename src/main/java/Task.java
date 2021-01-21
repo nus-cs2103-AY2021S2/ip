@@ -5,6 +5,7 @@ public abstract class Task {
 
     /**
      * Gets the task description
+     *
      * @return String description of the task
      */
     public String getTaskDescription() {
@@ -13,6 +14,7 @@ public abstract class Task {
 
     /**
      * Checks if task has been marked completed
+     *
      * @return value of isDone in task object
      */
     public boolean isDone() {

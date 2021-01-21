@@ -11,6 +11,7 @@ public class TaskList {
 
     /**
      * Add task to list of tasks then increment number of tasks stored
+     *
      * @param task task to be added to list
      */
     public void addTaskToList(Task task) {
@@ -20,6 +21,7 @@ public class TaskList {
 
     /**
      * Get number of tasks stored in task list
+     *
      * @return num of tasks in list
      */
     public int getNumTasks() {
@@ -28,11 +30,12 @@ public class TaskList {
 
     /**
      * return nth task starting at index 1
+     *
      * @param i the index of the task to be retrieved
      * @return the Task object
      */
-    public Task getNthTask(int i){
-        return this.taskList.get(i-1);
+    public Task getNthTask(int i) {
+        return this.taskList.get(i - 1);
     }
 
     @Override
@@ -42,7 +45,7 @@ public class TaskList {
         for (int i = 1; i <= numTasks; i++) {
             buffer.append(i);
             buffer.append(". ");
-            buffer.append(taskList.get(i-1).toString());
+            buffer.append(taskList.get(i - 1).toString());
             buffer.append("\n");
         }
         return buffer.toString();

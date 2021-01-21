@@ -1,13 +1,11 @@
 public class ByeCommand implements Command {
 
-    private boolean isExitCommand = true;
-
     public ByeCommand() {
     }
 
     @Override
     public boolean isExitCommand() {
-        return isExitCommand;
+        return true;
     }
 
     @Override
@@ -17,6 +15,8 @@ public class ByeCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "Bye. Hope to see you again soon!";
+        return "____________________________________________________________\n " +
+                "  Bye. Hope to see you again soon!\n" +
+                "____________________________________________________________\n";
     }
 }

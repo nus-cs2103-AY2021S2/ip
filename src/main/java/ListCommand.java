@@ -1,4 +1,4 @@
-public class ListCommand implements Command{
+public class ListCommand implements Command {
     private boolean isExitCommand = false;
     private TaskList taskList;
 
@@ -18,6 +18,9 @@ public class ListCommand implements Command{
 
     @Override
     public String getResponse() {
-        return this.taskList.toString();
+        return "____________________________________________________________\n" +
+                "Here are the tasks in your list:\n" +
+                this.taskList.toString() +
+                "____________________________________________________________\n";
     }
 }

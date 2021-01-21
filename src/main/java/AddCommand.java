@@ -1,4 +1,4 @@
-public abstract class AddCommand implements Command{
+public abstract class AddCommand implements Command {
     protected boolean isExitCommand = false;
     protected String taskDescription;
     protected TaskList taskList;
@@ -10,7 +10,7 @@ public abstract class AddCommand implements Command{
 
     @Override
     public boolean isExitCommand() {
-        return isExitCommand;
+        return false;
     }
 
     @Override
@@ -23,8 +23,12 @@ public abstract class AddCommand implements Command{
 
     @Override
     public String getResponse() {
-        return String.format(" Got it. I've added this task: \n" +
+        return String.format(
+                "____________________________________________________________\n" +
+                " Got it. I've added this task: \n" +
                 "       %s\n" +
-                " Now you have %d tasks in the list.", this.taskToAdd.taskDescription, this.taskList.getNumTasks());
+                " Now you have %d tasks in the list.\n" +
+                "____________________________________________________________\n",
+                this.taskToAdd.toString(), this.taskList.getNumTasks());
     }
 }

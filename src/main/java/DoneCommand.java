@@ -1,10 +1,11 @@
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
 
-    int taskToDone;
+    int taskIndexToDone;
+    Task taskToDone;
     TaskList taskList;
 
-    public DoneCommand(int taskToDone) {
-        this.taskToDone = taskToDone;
+    public DoneCommand(int taskIndexToDone) {
+        this.taskIndexToDone = taskIndexToDone;
     }
 
     @Override
@@ -17,8 +18,9 @@ public class DoneCommand implements Command{
         this.taskList = taskList;
 
         for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
-            if (i == taskToDone) {
+            if (i == taskIndexToDone) {
                 this.taskList.getNthTask(i).completeTask();
+                this.taskToDone = this.taskList.getNthTask(i);
             }
         }
         return this.taskList;
@@ -26,6 +28,9 @@ public class DoneCommand implements Command{
 
     @Override
     public String getResponse() {
-        return this.taskList.toString();
+        return "____________________________________________________________\n" +
+                "Nice! I've marked this task as done: \n  " +
+                this.taskToDone.toString() +
+                "\n____________________________________________________________\n";
     }
 }
