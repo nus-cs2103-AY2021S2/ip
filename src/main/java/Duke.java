@@ -2,6 +2,29 @@ import java.util.*;
 import java.lang.*;
 
 public class Duke {
+
+    /**
+     * Task class with names and a boolean variable checking if they are done or not
+     */
+    static class Task {
+        String taskName;
+        boolean isDone;
+
+        public Task(String taskName, boolean isDone) {
+            this.taskName = taskName;
+            this.isDone = isDone;
+        }
+
+        public void markDone() {
+            this.isDone = true;
+        }
+
+        public String toString() {
+            if (isDone) return "[X] " + taskName;
+            else return "[ ] " + taskName;
+        }
+    }
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,29 +36,34 @@ public class Duke {
         formatBox(introduction);
 
         Scanner sc = new Scanner(System.in);
-        String[] itemArr = new String[100];
-        for (int i = 0; i < 100; i++) itemArr[i] = "";
-        String list;
+        Task[] taskArr = new Task[100];
         String input;
         int j = 0;
 
         while (true) {
             input = sc.nextLine();
+            String inputArr[] = input.split(" ");
             if (input.equals("bye"))
                 break;
             else if (input.equals("list")) {
                 System.out.println("------------------------------------");
-                for (int i = 0; i < itemArr.length; i++) {
-                    if (itemArr[i].equals("")) break;
-                    System.out.println(Integer.toString(i) + ". " + itemArr[i]);
+                System.out.println("Here are the tasks in your list: ");
+                for (Task t : taskArr) {
+                    if (t == null) break;
+                    System.out.println(t.toString());
                 }
                 System.out.println("------------------------------------");
-            } else {
+            } else if (inputArr[0].equals("done")) {
+                int taskNum = Integer.parseInt(inputArr[1]) - 1;
+                taskArr[taskNum].markDone();
+                formatBox("Nice! I've marked this task as done:\n" + taskArr[taskNum].toString());
+            }
+            else {
                 // add to list
-                itemArr[j] = input;
+                taskArr[j] = new Task(input, false);
                 j++;
                 // print output
-                String formattedInput = "added: ";
+                String formattedInput = "added Task: ";
                 formattedInput = formattedInput.concat(input);
                 formatBox(formattedInput);
             }
