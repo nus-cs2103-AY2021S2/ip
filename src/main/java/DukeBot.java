@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Duke is a CLI chat-bot that handles task tracking.
@@ -9,28 +10,54 @@ import java.util.LinkedList;
  */
 public class DukeBot {
     private Scanner scanner;
-    private LinkedList<String> list;
+    private List<Task> list;
     private static final String UNDERLINES = "____________________________________________________________";
 
     public DukeBot(Scanner scanner) {
         this.scanner = scanner;
-        this.list = new LinkedList<String>();
+        this.list = new ArrayList<Task>(100);
     }
 
-    // Static methods
+    // ########## Static methods ##########
 
     /**
-     * Returns the first word present in a given line of input text.
+     * Returns the n-th word present in a given line of input text.
+     *
+     * If n > the number of words present or n < 1, throws ArrayIndexOutOfBoundsException.
      *
      * @param input The user input text of String type
      * @return A lowercase String
      */
-    public static String getFirstWord(String input) {
-        return String.valueOf(input).split("\\\\s", 2)[0].toLowerCase();
+    public static String getNthWord(String input, int n) {
+        return String.valueOf(input).split("\\s", 2)[n-1].toLowerCase();
     }
 
+    /**
+     * Returns true if the user input String should be treated as a command
+     * instead of a new task.
+     *
+     * @param input User input String
+     * @return true if input is to be treated as a command and false otherwise
+     */
+    public static boolean isCommand(String input) {
+        String firstWord = DukeBot.getNthWord(input, 1);
+        Command command = Command.get(firstWord);
+        return command != null;
+    }
 
-    // Instance methods
+    /**
+     * Returns true if the user input String should be treated as a terminate command.
+     *
+     * @param input User input String
+     * @return true if input is a terminate command
+     */
+    public static boolean isTerminateCommand(String input) {
+        String firstWord = DukeBot.getNthWord(input, 1);
+        Command command = Command.get(firstWord);
+        return command == Command.END;
+    }
+
+    // ########## Instance methods ##########
 
     /**
      * Activates the chat-bot so that it keeps taking inputs from the user via System.in
@@ -39,50 +66,43 @@ public class DukeBot {
     public void run() {
         while (true) {
             String input = scanner.nextLine();
-            boolean endFlag = this.processInput(input);
-            if (endFlag) {
+            if (DukeBot.isTerminateCommand(input)) {
                 System.out.println(UNDERLINES);
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println(UNDERLINES);
                 break;
+            } else if (DukeBot.isCommand(input)) {
+                this.handleCommand(input);
+            } else {
+                // Not a command at all -> Add new task
+                this.list.add(new Task(input));
             }
         }
         this.scanner.close();
     }
 
     /**
-     * Parses user input and returns a boolean flag indicating whether to terminate.
+     * Handles commands given in the user input string appropriately.
      *
-     * @param input The user input string
-     * @return true if the programme should end and false otherwise
+     * Each command will invoke different behaviour from the DukeBot chat-bot.
+     *
+     * @param input The user input that contains the command its first word
      */
-    public boolean processInput(String input) {
-        String first = DukeBot.getFirstWord(input);
-        Command command = Command.get(first);
-        if (command == null) {
-            this.add(input);
-        } else {
-            switch (command) {
-                case LIST:
-                    this.printList();
-                    break;
-                case END:
-                    return true;
-            }
-        }
-        return false;
-    }
+    public void handleCommand(String input) {
+        String firstWord = DukeBot.getNthWord(input, 1);
+        Command command = Command.get(firstWord);
 
-    /**
-     * Adds a new item to the chat-bots list.
-     *
-     * @param input A String of text that should be added as an entry to the list
-     */
-    public void add(String input) {
-        this.list.add(input);
-        System.out.println(UNDERLINES);
-        System.out.println("added: " + input);
-        System.out.println(UNDERLINES);
+        switch (command) {
+            case LIST:
+                this.printList();
+                break;
+            case DONE:
+                int taskIndex = Integer.parseInt(DukeBot.getNthWord(input, 2));
+                list.get(taskIndex - 1).markAsDone();
+                break;
+            default:
+                throw new IllegalArgumentException("An inappropriate command was given.");
+        }
     }
 
     /**
@@ -91,8 +111,8 @@ public class DukeBot {
     public void printList() {
         System.out.println(UNDERLINES);
         int count = 1;
-        for (String task : this.list) {
-            System.out.println(" " + count + ": " + task);
+        for (Task task : this.list) {
+            System.out.println(" " + count + ". " + task);
             count++;
         }
         System.out.println(UNDERLINES);
