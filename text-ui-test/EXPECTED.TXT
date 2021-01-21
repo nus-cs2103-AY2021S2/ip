@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+              $$$@@@@@@@
+         ##########$$$$$$@@$
+       #**!!!!!!!!**####$$$$$$#
+     **!!==!=;;=;;!!!**###$$$$$$#
+    **!!==;::~~::;;;;=!!*####$$$$##
+   !!!!=;::~-,,,,--:;;=!!**########*
+  !!!!=;:~,........-~:==!!**#######**
+ =!*!!=;:~,.........-:;=!!***######**
+ !***!!=:~,...     .-:;=!!****####***=
+ !*###**=;=..       -:;=!!**********!=
+:!*###$##*=:       -:;=!!!********!!!=
+:!##$$$$$$#*~     :;===!!*********!!=;
+~=*#$$@@@@$$#*! ====!!!!!*****!!*!!==
+ ;!*#$$@@@$$##**!!!!!!!!!!*!*!!!!!==:
+ :;!*#$$$$$$###******!!!!!!!!!!!==;:
+  ;!=!*#######******!!!!!!!!!===;;:,
+   :;==!!********!!!!!!!!====;;;:~
+    -:;!====!=!!!!!!!======;;::~,
+      -~:;===;======;=;;;:::~-,
+        .-~~::::;:::::~:~--.
 
+Greetings Neo, what can the Oracle do for you?
+1. [T][ ] borrow book
+2. [D][ ] return book (by Sunday)
+3. [E][ ] project meeting (at Mon 2-4pm)
+You have forgotten quickly, but the Oracle Remembers
+1. [T][ ] borrow book
+2. [D][ ] return book (by Sunday)
+3. [E][ ] project meeting (at Mon 2-4pm)
+Your words are unclear, Neo
+Your words are unclear, Neo
+1. [T][X] borrow book
+3. [E][X] project meeting (at Mon 2-4pm)
+You have forgotten quickly, but the Oracle Remembers
+1. [T][X] borrow book
+2. [D][ ] return book (by Sunday)
+3. [E][X] project meeting (at Mon 2-4pm)
