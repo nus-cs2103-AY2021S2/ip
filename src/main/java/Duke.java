@@ -49,6 +49,17 @@ public class Duke {
                         }
                         count++;
                     }
+                } else if (parts[0].equals("delete")) {
+                    if (parts.length == 1) {
+                        System.out.println("     ☹ OOPS!!! The " +
+                                "description of delete cannot be empty.");
+                        throw new InsufficientArgumentsException();
+                    }
+                    int taskToDelete = Integer.parseInt(parts[1]);
+                    System.out.println("     Noted. I've removed this task: ");
+                    System.out.println("     " + store.get(taskToDelete - 1));
+                    store.remove(taskToDelete - 1);
+                    System.out.println("     Now you have " + store.size() + " tasks in the list.");
                 } else if (parts[0].equals("todo")) {
                     if (parts.length == 1) {
                         System.out.println("     ☹ OOPS!!! The " +
