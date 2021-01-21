@@ -8,11 +8,13 @@ public class Duke {
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
         System.out.println("    ____________________________________________________________");
+        System.out.print("Enter a command: ");
         String commands = in.next();
         while(!commands.equals("bye")) {
             System.out.println("    ____________________________________________________________");
             System.out.println("    " + commands);
             System.out.println("    ____________________________________________________________");
+            System.out.print("Enter a command: ");
             commands = in.next();
         }
         System.out.println("    ____________________________________________________________");
