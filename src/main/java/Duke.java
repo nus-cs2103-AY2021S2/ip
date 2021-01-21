@@ -143,28 +143,6 @@ public class Duke {
         System.out.println("---------------------------------------------");
     }
 
-
-
-
-        // task number must be provided
-//        try {
-//            int taskNo = Integer.valueOf(parts[1]);
-//            // task number must exist in list
-////            if(taskNo > myList.size()){
-////                throw new DukeException("task not found");
-////            } else {
-//            Task curTask = myList.get(taskNo - 1);
-//            curTask.markAsDone();
-//            System.out.println("---------------------------------------------");
-//            System.out.println("Nice! I've marked this task as done: ");
-//            System.out.println(curTask);
-//            System.out.println("---------------------------------------------");
-//        } catch (DukeException e){
-//        System.out.println("---------------------------------------------");
-//        System.out.println("OOPS!!! The task cannot be found.");
-//        System.out.println("---------------------------------------------");
-//        }
-
     private void deleteTask(String[] parts, ArrayList<Task> myList){
         int taskNo = Integer.valueOf(parts[1]);
         Task curTask = myList.get(taskNo - 1);
@@ -196,16 +174,20 @@ public class Duke {
         } else {
             String task = parts[1];
             String[] details = task.split(" /by ", 2);
-            String description = details[0];
-            String by = details[1];
-            Deadline newTask = new Deadline(description, by);
+            if (details.length == 1){
+                throw new DukeException("empty time");
+            } else {
+                String description = details[0];
+                String by = details[1];
+                Deadline newTask = new Deadline(description, by);
 
-            myList.add(newTask);
-            System.out.println("---------------------------------------------");
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("  " + newTask);
-            System.out.println("Now you have " + myList.size() + " tasks in the list.");
-            System.out.println("---------------------------------------------");
+                myList.add(newTask);
+                System.out.println("---------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + newTask);
+                System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                System.out.println("---------------------------------------------");
+            }
         }
     }
 
@@ -215,16 +197,20 @@ public class Duke {
         } else {
             String task = parts[1];
             String[] details = task.split(" /at ", 2);
-            String description = details[0];
-            String time = details[1];
-            Event newTask = new Event(description, time);
+            if (details.length == 1) {
+                throw new DukeException("empty time");
+            } else {
+                String description = details[0];
+                String time = details[1];
+                Event newTask = new Event(description, time);
 
-            myList.add(newTask);
-            System.out.println("---------------------------------------------");
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("  " + newTask);
-            System.out.println("Now you have " + myList.size() + " tasks in the list.");
-            System.out.println("---------------------------------------------");
+                myList.add(newTask);
+                System.out.println("---------------------------------------------");
+                System.out.println("Got it. I've added this task: ");
+                System.out.println("  " + newTask);
+                System.out.println("Now you have " + myList.size() + " tasks in the list.");
+                System.out.println("---------------------------------------------");
+            }
         }
     }
 }
