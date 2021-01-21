@@ -14,7 +14,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo);
-        System.out.println("Hello Master. Nice to meet you, my name is " + name);
+        System.out.println("Hello Master. Nice to meet you, my name is " + name + ".");
         System.out.println("How may I be of service, Master?");
 
         Scanner sc = new Scanner(System.in);
@@ -40,10 +40,54 @@ public class Duke {
                         int idx = Integer.parseInt(inputWords[1]);
                         System.out.println(taskList.get(idx - 1).markCompleted());
                         input = sc.nextLine();
-                    } else {
-                        Task newTask = new Task(input);
-                        taskList.add(newTask);
-                        System.out.println("added: " + newTask.getInfo());
+                    } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")){
+                        if (inputWords.length < 2) {
+                            throw new MissingArgumentException("Wrong number of arguments");
+                        }
+                        System.out.println("Master, I've added this task as requested:");
+                        StringBuilder sb = new StringBuilder();
+                        String taskItem;
+
+                        if (action.equals("todo")) {
+                            for (int i = 1; i < inputWords.length; i++) {
+                                sb.append(" ");
+                                sb.append(inputWords[i]);
+                            }
+                            taskItem = sb.toString();
+                            ToDo toDoItem = new ToDo(taskItem);
+                            taskList.add(toDoItem);
+                            System.out.println(toDoItem.toString());
+                        } else {
+                            int slashIdx = 0;
+
+                            for (int i = 0; i < inputWords.length; i++) {
+                                if (inputWords[i].contains(Character.toString('/'))) {
+                                    slashIdx = i;
+                                }
+                            }
+                            for (int j = 0; j < slashIdx; j++) {
+                                sb.append(" ");
+                                sb.append(inputWords[j]);
+                            }
+                            taskItem = sb.toString();
+                            StringBuilder sbSlash = new StringBuilder();
+
+                            for (int k = slashIdx + 1; k < inputWords.length; k++) {
+                                sbSlash.append(" ");
+                                sbSlash.append(inputWords[k]);
+                            }
+
+                            if (action.equals("deadline")) {
+                                Deadline deadlineItem = new Deadline(taskItem, sbSlash.toString());
+                                taskList.add(deadlineItem);
+                                System.out.println(deadlineItem.toString());
+                            } else {
+                                Event eventItem = new Event(taskItem, sbSlash.toString());
+                                taskList.add(eventItem);
+                                System.out.println(eventItem.toString());
+                            }
+                        }
+                        System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
                         input = sc.nextLine();
                     }
                 } catch (MissingArgumentException error) {
@@ -51,7 +95,7 @@ public class Duke {
                     input = sc.nextLine();
                 }
             }
-            System.out.println("Have a good day Master.");
+            System.out.println("Have a good day, Master.");
             break;
         }
         System.exit(1);
