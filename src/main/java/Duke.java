@@ -30,7 +30,14 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: " + "\n" + task.toString());
     }
 
-    public static void main(String[] args) {
+    public static void deleteTask(int i) {
+        Task task = taskList.get(i-1);
+        taskList.remove(i-1);
+        System.out.println("Noted. I've removed this task:" + "\n" + task.toString() +
+                "\n" + "Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -41,10 +48,19 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
+            if(input.equals(""))
+                throw new EmptyArgument("☹ OOPS!!! The description of a todo cannot be empty.");
             if(input.startsWith("done")) {
                 String[] spiltInput = input.split("\\s+");
                 int taskNumber = Integer.parseInt(spiltInput[1]);
                 markDone(taskNumber);
+<<<<<<< HEAD
+            } else if (input.startsWith("delete")) {
+                String[] spiltInput = input.split("\\s+");
+                int taskNumber = Integer.parseInt(spiltInput[1]);
+                deleteTask(taskNumber);
+=======
+>>>>>>> 2835f6e5335c3a96edc50fb9a237ba12e064823c
             } else if (input.startsWith("event")) {
                 String[] spiltInput = input.split("\\s+");
                 String time = "";
@@ -114,8 +130,12 @@ public class Duke {
             } else if (input.equals("list")) {
                 listTask();
             } else {
+<<<<<<< HEAD
+                throw new InvalidArgument("Your input is invalid, Please try again");
+=======
                 //addTask(input);
                 System.out.println("End");
+>>>>>>> 2835f6e5335c3a96edc50fb9a237ba12e064823c
             }
         }
     }
