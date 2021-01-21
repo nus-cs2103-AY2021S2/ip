@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,12 +18,17 @@ public class Duke {
                 "    ____________________________________________________________\n");
 
         boolean Done = false;
+        ArrayList<String> taskList = new ArrayList<>();
+
         while (!Done) {
-            switch (sc.next()) {
+            String nextCommand = sc.nextLine();
+            switch (nextCommand) {
                 case "list":
-                    System.out.println("    ____________________________________________________________\n " +
-                            "    list\n" +
-                            "    ____________________________________________________________");
+                    System.out.println("    ____________________________________________________________");
+                    for (int taskNum = 0; taskNum < taskList.size(); taskNum++) {
+                        System.out.println((taskNum + 1) + ". " + taskList.get(taskNum));
+                    }
+                    System.out.println("    ____________________________________________________________");
                     break;
 
                 case "blah":
@@ -39,7 +45,10 @@ public class Duke {
                     break;
 
                 default:
-                    System.out.println("What have you done...");
+                    System.out.println("    ____________________________________________________________");
+                    taskList.add(nextCommand);
+                    System.out.println("    added: " + nextCommand);
+                    System.out.println("    ____________________________________________________________");
                     break;
             }
         }
