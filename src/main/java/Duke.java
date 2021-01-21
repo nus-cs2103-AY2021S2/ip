@@ -50,7 +50,7 @@ public class Duke {
                 newTask = new Event(eventDetails[0], eventDetails[1]);
                 break;
             default:
-                newTask = new ToDo(tokenizedInput[0]);
+                newTask = new ToDo(tokenizedInput[1]);
                 break;
         }
         tasks.add(newTask);
