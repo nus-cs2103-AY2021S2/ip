@@ -1,9 +1,7 @@
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,13 +40,6 @@ public class Duke {
     public void loop() {
         final String exitCmd = "bye";
 
-        List<Predicate<String>> handlers = new ArrayList<>();
-        handlers.add(this::tryAddToDo);
-        handlers.add(this::tryListCmd);
-        handlers.add(this::tryDoneCmd);
-        handlers.add(this::tryAddDeadline);
-        handlers.add(this::tryAddEvent);
-
         while (true) {
             String cmd = input.nextLine();
 
@@ -56,18 +47,27 @@ public class Duke {
                 // Exit command
                 break;
             } else {
-                // Try each registered command one by one until one is found or all are tried
-                boolean isCmdFound = false;
-                for (Predicate<String> handler : handlers) {
-                    if (handler.test(cmd)) {
-                        isCmdFound = true;
-                        break;
+                /*
+                Try each registered command one by one until one is found or all are tried.
+                A loop cannot be used because the methods throw exceptions
+                 */
+                try {
+                    if (isAddToDoCmd(cmd)) {
+                        handleAddToDoCmd(cmd);
+                    } else if (isAddDeadlineCmd(cmd)) {
+                        handleAddDeadlineCmd(cmd);
+                    } else if (isAddEventCmd(cmd)) {
+                        handleAddEventCmd(cmd);
+                    } else if (isListCmd(cmd)) {
+                        handleListCmd(cmd);
+                    } else if (isDoneCmd(cmd)) {
+                        handleDoneCmd(cmd);
+                    } else {
+                        // default: unrecognized command
+                        printer.println(String.format("Sorry, I don't know what '%s' means", cmd));
                     }
-                }
-
-                if (!isCmdFound) {
-                    // default: unrecognized command
-                    printer.println(String.format("Unrecognized command: '%s'", cmd));
+                } catch (DukeException ex) {
+                    printer.println(ex.getMessage());
                 }
             }
         }
@@ -77,57 +77,90 @@ public class Duke {
         printer.println("Goodbye, cruel world!");
     }
 
-    private boolean tryAddToDo(String cmd) {
-        Pattern toDoPattern = Pattern.compile("(?i)todo (.+)");
-        Matcher m = toDoPattern.matcher(cmd);
-        if (m.find()) {
-            String taskDesc = m.group(1);
+    private boolean isAddToDoCmd(String cmd) {
+        Pattern toDoCmd = Pattern.compile("(?i)todo\\b");
+        Matcher cmdMatcher = toDoCmd.matcher(cmd);
+        return cmdMatcher.find();
+    }
+
+    private void handleAddToDoCmd(String cmd) throws DukeException {
+        Pattern toDoPattern = Pattern.compile("(?i)todo\\s+(\\w.*)");
+        Matcher toDoMatcher = toDoPattern.matcher(cmd);
+
+        if (toDoMatcher.find()) {
+            String taskDesc = toDoMatcher.group(1);
 
             ToDo toDo = new ToDo(taskDesc);
             tasks.add(toDo);
 
             printAddTaskAck(toDo);
-
-            return true;
+        } else {
+            // Matched command but invalid argument
+            throw new DukeException("The description of a todo cannot be empty!\n"
+                    + "Expected format: todo <DESCRIPTION>");
         }
-
-        return false;
     }
 
-    private boolean tryAddDeadline(String cmd) {
-        Pattern deadlinePattern = Pattern.compile("(?i)deadline (.+) \\/by (.+)");
-        Matcher m = deadlinePattern.matcher(cmd);
-        if (m.find()) {
-            String taskDesc = m.group(1);
-            String time = m.group(2);
-
-            Deadline deadline = new Deadline(taskDesc, time);
-            tasks.add(deadline);
-
-            printAddTaskAck(deadline);
-
-            return true;
-        }
-
-        return false;
+    private boolean isAddDeadlineCmd(String cmd) {
+        Pattern deadlineCmd = Pattern.compile("(?i)deadline\\b");
+        Matcher cmdMatcher = deadlineCmd.matcher(cmd);
+        return cmdMatcher.find();
     }
 
-    private boolean tryAddEvent(String cmd) {
-        Pattern eventPattern = Pattern.compile("(?i)event (.+) \\/at (.+)");
-        Matcher m = eventPattern.matcher(cmd);
-        if (m.find()) {
-            String taskDesc = m.group(1);
-            String period = m.group(2);
-
-            Event event = new Event(taskDesc, period);
-            tasks.add(event);
-
-            printAddTaskAck(event);
-
-            return true;
+    private void handleAddDeadlineCmd(String cmd) throws DukeException {
+        Pattern descPattern = Pattern.compile("(?i)deadline\\s+(\\w.*)");
+        Matcher descMatcher = descPattern.matcher(cmd);
+        if (!descMatcher.find()) {
+            throw new DukeException("The description of a deadline cannot be empty!\n"
+                    + "Expected format: deadline <DESCRIPTION> /by <TIME>");
         }
 
-        return false;
+        Pattern timePattern = Pattern.compile("(?i)deadline\\s+(\\w.*)\\s+\\/by\\s+(\\w.*)");
+        Matcher timeMatcher = timePattern.matcher(cmd);
+
+        if (!timeMatcher.find()) {
+            throw new DukeException("A deadline must have a time!\n"
+                    + "Expected format: deadline <DESCRIPTION> /by <TIME>");
+        }
+
+        String taskDesc = timeMatcher.group(1);
+        String time = timeMatcher.group(2);
+
+        Deadline deadline = new Deadline(taskDesc, time);
+        tasks.add(deadline);
+
+        printAddTaskAck(deadline);
+    }
+
+    private boolean isAddEventCmd(String cmd) {
+        Pattern eventCmd = Pattern.compile("(?i)event\\b");
+        Matcher cmdMatcher = eventCmd.matcher(cmd);
+        return cmdMatcher.find();
+    }
+
+    private void handleAddEventCmd(String cmd) throws DukeException {
+        Pattern descPattern = Pattern.compile("(?i)event\\s+(\\w.*)");
+        Matcher descMatcher = descPattern.matcher(cmd);
+        if (!descMatcher.find()) {
+            throw new DukeException("The description of an event cannot be empty!\n"
+                    + "Expected format: event <DESCRIPTION> /at <PERIOD>");
+        }
+
+        Pattern periodPattern = Pattern.compile("(?i)event\\s+(\\w.*)\\s+\\/at\\s+(\\w.*)");
+        Matcher periodMatcher = periodPattern.matcher(cmd);
+
+        if (!periodMatcher.find()) {
+            throw new DukeException("An event must have a period!\n"
+                    + "Expected format: deadline <DESCRIPTION> /by <PERIOD>");
+        }
+
+        String taskDesc = periodMatcher.group(1);
+        String period = periodMatcher.group(2);
+
+        Event event = new Event(taskDesc, period);
+        tasks.add(event);
+
+        printAddTaskAck(event);
     }
 
     private void printAddTaskAck(Task task) {
@@ -136,47 +169,59 @@ public class Duke {
         printer.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
     }
 
-    private boolean tryListCmd(String cmd) {
-        Pattern listPattern = Pattern.compile("(?i)list");
-        Matcher m = listPattern.matcher(cmd);
-        if (m.find()) {
-            for (int i = 0; i < tasks.size(); i++) {
-                Task t = tasks.get(i);
-                int index = i + 1;
-                printer.println(String.format("%d.%s", index, t));
-            }
-            return true;
-        }
-
-        return false;
+    private boolean isListCmd(String cmd) {
+        Pattern listCmd = Pattern.compile("(?i)list\\b");
+        Matcher cmdMatcher = listCmd.matcher(cmd);
+        return cmdMatcher.find();
     }
 
-    private boolean tryDoneCmd(String cmd) {
-        Pattern donePattern = Pattern.compile("(?i)done (\\d+)");
-        Matcher m = donePattern.matcher(cmd);
-        if (m.find()) {
-            String argStr = m.group(1);
-            try {
-                int arg = Integer.parseInt(argStr);
-                if (arg < 1 || arg > tasks.size()) {
-                    // Argument out of range
-                    printer.println(String.format("Task %d does not exist!", arg));
-                } else {
-                    // Valid argument in range
-                    int index = arg - 1;
-                    Task t = tasks.get(index);
-                    t.markAsDone();
-                    printer.println("Nice! I've marked this task as done:");
-                    printer.println(String.format("%s", t.toString()));
-                }
-                return true;
-            } catch (NumberFormatException nfe) {
-                // Argument of wrong type
-                printer.println(String.format("Illegal argument: '%s'. Expected integer", argStr));
-                return true;
-            }
+    private void handleListCmd(String cmd) throws DukeException {
+        Pattern listPattern = Pattern.compile("(?i)list(\\s*)$");
+        Matcher listMatcher = listPattern.matcher(cmd);
+        if (!listMatcher.find()) {
+            throw new DukeException("Please do not include any arguments after the list command.\n"
+                    + "Expected format: list");
         }
 
-        return false;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            int index = i + 1;
+            printer.println(String.format("%d.%s", index, t));
+        }
+    }
+
+    private boolean isDoneCmd(String cmd) {
+        Pattern donePattern = Pattern.compile("(?i)done\\b");
+        Matcher cmdMatcher = donePattern.matcher(cmd);
+        return cmdMatcher.find();
+    }
+
+    private void handleDoneCmd(String cmd) throws DukeException {
+        Pattern donePattern = Pattern.compile("(?i)done (\\d+)");
+        Matcher doneMatcher = donePattern.matcher(cmd);
+        if (!doneMatcher.find()) {
+            throw new DukeException(String.format("A done command must specify a task number.\n"
+                    + "Valid task numbers are 1 to %d.\n"
+                    + "Expected format: done <TASK NUMBER>", tasks.size()));
+        }
+
+        String argStr = doneMatcher.group(1);
+        try {
+            int arg = Integer.parseInt(argStr);
+            if (arg < 1 || arg > tasks.size()) {
+                // Argument out of range
+                throw new DukeException(String.format("Task %d does not exist!", arg));
+            } else {
+                // Valid argument in range
+                int index = arg - 1;
+                Task t = tasks.get(index);
+                t.markAsDone();
+                printer.println("Nice! I've marked this task as done:");
+                printer.println(String.format("%s", t.toString()));
+            }
+        } catch (NumberFormatException nfe) {
+            // Argument of wrong type
+            throw new DukeException(String.format("Illegal argument: '%s'. Expected integer", argStr));
+        }
     }
 }
