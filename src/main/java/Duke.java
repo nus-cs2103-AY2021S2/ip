@@ -17,11 +17,12 @@ public class Duke {
 
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                break;
 
             } else if (command.equals("list")) {
                 System.out.println("Here are the tasks in your task list:");
                 for (int i = 0; i < taskList.size() ; i++ ) {
-                    System.out.println((i + 1) + ". "
+                    System.out.println((i + 1) + "."
                             + taskList.get(i).getTypeIcon()
                             + taskList.get(i).getStatusIcon() + " "
                             + taskList.get(i).getDescription()
@@ -71,7 +72,7 @@ public class Duke {
                 System.out.println("Got it. I've added this task:");
                 System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                         + task.getDescription());
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println("Now you have " + taskList.size() + " tasks in the list");
 
             } else if (command.equals("deadline")) {
                 if (tokens.length < 2) {
@@ -83,7 +84,7 @@ public class Duke {
                 Task task = new Deadlines(split[0], split[1]);
                 taskList.add(task);
 
-                System.out.println("Got it. I've added this task:");
+                System.out.println("Got it. I have added this task:");
                 System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                         + task.getDescription());
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
@@ -101,7 +102,33 @@ public class Duke {
                 System.out.println("Got it. I have added this task:");
                 System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                         + task.getDescription());
-                System.out.println("Now you have " + taskList.size() + " tasks in the list");
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+
+            } else if (command.equals("delete")) {
+                if (tokens.length < 2) {
+                    System.out.println("☹ OOPS!!! The description of a delete cannot be empty.");
+                    continue;
+                }
+
+                int taskId;
+                try {
+                    taskId = Integer.parseInt(tokens[1]) - 1;
+                } catch (NumberFormatException e) {
+                    System.out.println("☹ OOPS!!! The id of a delete must be an integer.");
+                    continue;
+                }
+
+                if (taskId >= taskList.size() || taskId < 0) {
+                    System.out.println("☹ OOPS!!! That is an invalid task id.");
+                    continue;
+                }
+
+                Task task = taskList.remove(taskId - 1);
+
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
+                        + task.getDescription());
+                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
 
             } else {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
