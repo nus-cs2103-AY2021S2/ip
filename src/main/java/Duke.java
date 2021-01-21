@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,6 +17,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         String input;
+        ArrayList<String> itemList = new ArrayList<String>();
 
         while (true) {
             input = sc.nextLine().trim();
@@ -23,7 +26,18 @@ public class Duke {
                 System.out.println("Goodbye! Have a nice day!\n");
                 break;
             } else {
-                System.out.println(input);
+                switch (input) {
+                    case "list":
+                        int i = 1;
+                        for (String s : itemList) {
+                            System.out.println(i + ". " + s);
+                        }
+                        i++;
+                        break;
+                    default:
+                        itemList.add(input);
+                        System.out.println("Added " + input);
+                }
             }
             System.out.println(h_rule);
         }
