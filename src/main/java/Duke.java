@@ -19,7 +19,7 @@ public class Duke {
         int currIndex = 0;
 
         while (sc.hasNext()) {
-            String command = sc.nextLine();
+            String command = sc.next();
             System.out.println("    ____________________________________");
 
             if (command.equals("bye")) {
@@ -27,19 +27,38 @@ public class Duke {
                 System.out.println("    ____________________________________");
                 break;
             } else if (command.equals("list")) {
+                System.out.println("    Here are the tasks in your list:");
                 for (int i = 1; i <= currIndex; i++) {
                     System.out.printf("    %d.%s\n", i, list[i - 1]);
                 }
-            } else if (command.matches(".*done.*")) {
+            } else if (command.equals("done")) {
                 // To get the index 
-                int index = command.charAt(5) - 48;
+                int index = sc.nextInt();
                 list[index - 1].markAsDone();
+
                 System.out.println("    Nice! I've marked this task as done:");
                 System.out.println("        " + list[index - 1]);
             } else {
-                list[currIndex] = new Task(command);
-                System.out.println("    added: " + command);
+                if (command.equals("todo")) {
+                    String name = sc.nextLine();
+                    list[currIndex] = new Todo(name);
+                   
+                } else if (command.equals("deadline")) {
+                    String name = sc.nextLine();
+                    String[] split = name.split("/by", 2);
+                    list[currIndex] = new Deadline(split[0], split[1]);
+                } else {
+                    String name = sc.nextLine();
+                    String[] split = name.split("/at", 2);
+                    list[currIndex] = new Event(split[0], split[1]);
+                }
+                
                 currIndex++;
+
+                System.out.println("    Got it. I've added this task: ");
+                System.out.println("        " + list[currIndex - 1]);
+                System.out.printf("    Now you have %d tasks in the list.\n", currIndex);
+
             }
 
             System.out.println("    ____________________________________");
