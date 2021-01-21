@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
+        String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
@@ -15,27 +15,36 @@ public class Duke {
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
-            if(input.equals("bye")) {
+            String[] check = input.split(" ");
+            if(check[0].equals("bye")) {
                 System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
                 break;
-            } else if(input.equals("list")) {
-                System.out.print(divider);
+            } else if(check[0].equals("list")) {
+                System.out.println(divider + "Here are the tasks in your list:");
                 for(int i = 1; i <= list.size(); i++) {
-                    Task curr = list.get(i-1);
-                    System.out.println(i + ".[" + curr.getStatusIcon() + "] " + curr.description);
+                    System.out.println("  " + i + ". " + list.get(i-1));
                 }
                 System.out.println(divider);
+            } else if(check[0].equals("done")) {
+                list.get(Integer.parseInt(check[1])-1).markAsDone();
+                System.out.println(divider + "Nice! I've marked this task as done:\n  " + list.get(Integer.parseInt(check[1])-1) + "\n" + divider);
+            } else if(check[0].equals("todo")) {
+                Todo curr = new Todo(input.substring(5,input.length()));
+                list.add(curr);
+                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+            } else if(check[0].equals("deadline")) {
+                String[] temp = input.substring(9, input.length()).split(" /by ");
+                Deadline curr = new Deadline(temp[0], temp[1]);
+                list.add(curr);
+                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+            } else if(check[0].equals("event")) {
+                String[] temp = input.substring(6, input.length()).split(" /at ");
+                Event curr = new Event(temp[0], temp[1]);
+                list.add(curr);
+                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
             } else {
-                String[] check = input.split(" ");
-                if(check[0].equals("done")) {
-                    Task curr = list.get(Integer.parseInt(check[1])-1);
-                    curr.markAsDone();
-                    System.out.println(divider + "Nice! I've marked this task as done:\n[\u2713] " + curr.description + "\n" + divider);
-
-                } else {
-                    list.add(new Task(input));
-                    System.out.println(divider + "Added: " + input + "\n" + divider);
-                }
+                list.add(new Task(input));
+                System.out.println(divider + "Added: " + input + "\n" + divider);
             }
         }
     }
