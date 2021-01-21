@@ -37,13 +37,32 @@ public class Duke {
                     Duke.respondList(userData);
 
                 } else if (s.startsWith("done")) {
-                    int idx = Integer.parseInt(s.substring(5)) - 1;
+                    int idx;
+                    try {
+                        idx = Integer.parseInt(s.substring(5)) - 1;
+                    } catch (Exception e) {
+                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
+                    }
                     if (userData.size() <= idx || idx < 0) {
                         throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
                     }
                     Task t = userData.get(idx);
                     t.setDone();
                     Duke.respondDone(t);
+
+                } else if (s.startsWith("delete")) {
+                    int idx;
+                    try {
+                        idx = Integer.parseInt(s.substring(7)) - 1;
+                    } catch (Exception e) {
+                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
+                    }
+                    if (userData.size() <= idx || idx < 0) {
+                        throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
+                    }
+                    Task t = userData.get(idx);
+                    userData.remove(idx);
+                    Duke.respondDelete(t, userData);
 
                 } else {
                     // Task addition
@@ -112,6 +131,14 @@ public class Duke {
             lines.add((i+1) + "." + t);
         }
         Duke.respond("Here are the tasks in your list:", lines);
+    }
+
+    private static void respondDelete(Task t, ArrayList<Task> tasklist) {
+        Duke.respond(
+                "Noted. I've removed this task:",
+                Arrays.asList(new String[]{"  "+String.valueOf(t)}),
+                "Now you have " + tasklist.size() + " tasks in the list."
+        );
     }
 
     private static void respondAdd(Task t, ArrayList<Task> tasklist) {
