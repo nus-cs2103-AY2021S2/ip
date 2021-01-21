@@ -11,37 +11,61 @@ public class Duke {
 
         // setup scanner for inputs
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        String input = sc.nextLine().strip();
 
         // input loop
         while (!input.equals("bye")) {
-            if (input.equals("list")) {
-                // list
-                printList(ls);
-            } else {
-                String[] splitInput = input.split(" ", 2);
-                if (splitInput[0].equals("done")) {
-                    // done
-                    int taskNum = Integer.parseInt(splitInput[1]);
-                    Task finishedTask = ls.get(taskNum - 1);
-                    finishedTask.setCompletion(true);
-                    printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
+            try {
+                if (input.equals("list")) {
+                    // list
+                    printList(ls);
                 } else {
-                    if (splitInput[0].equals("todo")) {
-                        // add todo
-                        addTask(ls, new ToDo(splitInput[1]));
-                    } else if (splitInput[0].equals("deadline")) {
-                        // add deadline
-                        String[] details = splitInput[1].split(" /by ");
-                        addTask(ls, new Deadline(details[0], details[1]));
-                    } else if (splitInput[0].equals("event")) {
-                        // add event
-                        String[] details = splitInput[1].split(" /at ");
-                        addTask(ls, new Deadline(details[0], details[1]));
+                    String[] splitInput = input.split(" ", 2);
+
+                    // check that field is not empty
+
+                    if (splitInput[0].equals("done")) {
+                        // done
+                        int taskNum = Integer.parseInt(splitInput[1]);
+                        Task finishedTask = ls.get(taskNum - 1);
+                        finishedTask.setCompletion(true);
+                        printMessage("Nice! I've marked this task as done:\n   " + finishedTask);
+                    } else {
+                        if (splitInput[0].equals("todo")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("todo");
+                            }
+
+                            // add todo
+                            addTask(ls, new ToDo(splitInput[1]));
+                        } else if (splitInput[0].equals("deadline")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("deadline");
+                            }
+
+                            // add deadline
+                            String[] details = splitInput[1].split(" /by ");
+                            addTask(ls, new Deadline(details[0], details[1]));
+                        } else if (splitInput[0].equals("event")) {
+                            // check for empty task
+                            if (splitInput.length < 2) {
+                                throw new EmptyTaskException("event");
+                            }
+                            // add event
+                            String[] details = splitInput[1].split(" /at ");
+                            addTask(ls, new Deadline(details[0], details[1]));
+                        } else {
+                            throw new NotDukeCommandException();
+                        }
                     }
                 }
+                input = sc.nextLine().strip();
+            } catch (DukeException e) {
+                printMessage(e.getMessage());
+                input = sc.nextLine().strip();
             }
-            input = sc.nextLine();
         }
 
         // exit
