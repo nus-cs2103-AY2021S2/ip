@@ -21,11 +21,19 @@ public class Duke {
                 }
             } else if (word.contains("done")) {
                 String strArray[] = word.split(" ");
-                int value =Integer.parseInt(strArray[1]);
+                int value = Integer.parseInt(strArray[1]);
                 Task complete = list.get(value - 1);
                 complete.markAsDone();
                 System.out.println(" Nice! I've marked this task as done: ");
                 System.out.println(complete.toString());
+            } else if (word.contains("delete")) {
+                String arr[] = word.split(" ");
+                int value = Integer.parseInt(arr[1]);
+                Task remove = list.get(value - 1);
+                list.remove(value - 1);
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println(remove.toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list");
             } else if ((word.contains("todo")) || (word.contains("event")) || (word.contains("deadline"))) {
                 if (word.contains("todo")) {
                     String save = word.replaceAll("todo","");
