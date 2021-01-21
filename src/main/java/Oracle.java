@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,28 +42,58 @@ public class Oracle {
                     System.out.println((i+1) + ". " + db.get(i));
                 }
             }
-            else if (split[0].equals("done") && split.length > 1){
-                int i = Integer.parseInt(split[1]) - 1;
+            else if (split[0].equals("done")){
                 try {
+                    int i = Integer.parseInt(split[1]) - 1;
                     db.get(i).markDone();
+                    System.out.println((i+1) + ". " + db.get(i));
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("The Oracle cannot work with an invalid index");
+                    System.out.println("The Oracle recalls you only have " + db.size() + " tasks. Give a valid index");
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Give The Oracle the index of the done task");
+                }
+            }
+            else if (split[0].equals("delete")){
+                try {
+                    int i = Integer.parseInt(split[1]) - 1;
+                    Task t = db.get(i);
+                    db.remove(i);
+                    System.out.println("Erased: " + (i+1) + ". " + t);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("The Oracle recalls you only have " + db.size() + " tasks. Give a valid index");
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("Give The Oracle the index of the delete task");
+                }
+            }
+            else if (split[0].equals("todo")){
+                try {
+                    db.add(new Todo(split[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Give The Oracle a the description of the todo");
                     continue;
                 }
-                System.out.println((i+1) + ". " + db.get(i));
-            }
-            else if (split[0].equals("todo") && split.length > 1){
-                db.add(new Todo(split[1]));
                 System.out.println(db.size() + ". " + db.get(db.size()-1));
             }
             else if (split[0].equals("event") && split.length > 1){
-                String[] params = split[1].split("/", 2);
-                db.add(new Event(params[0], params[1]));
+                try {
+                    String[] params = split[1].split("/", 2);
+                    db.add(new Event(params[0], params[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Give The Oracle both the description/time of the event");
+                    continue;
+                }
                 System.out.println(db.size() + ". " + db.get(db.size()-1));
             }
-            else if (split[0].equals("deadline") && split.length > 1){
-                String[] params = split[1].split("/", 2);
-                db.add(new Deadline(params[0], params[1]));
+            else if (split[0].equals("deadline")){
+                try {
+                    String[] params = split[1].split("/", 2);
+                    db.add(new Deadline(params[0], params[1]));
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Give The Oracle both the description/deadline of the deadline");
+                    continue;
+                }
                 System.out.println(db.size() + ". " + db.get(db.size()-1));
             }
             else {

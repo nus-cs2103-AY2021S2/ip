@@ -3,7 +3,15 @@ deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 list
 todo
+deadline 3293jof
+event pqehg
 blah
 done 1
 done 3
+done
+done 13208
+list
+delete 19248
+delete
+delete 2
 list
