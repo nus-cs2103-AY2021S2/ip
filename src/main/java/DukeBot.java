@@ -22,8 +22,13 @@ public class DukeBot {
         printOut(DukeStrings.MESSAGE_WELCOME);
 
         while (!parser.isBye()) {
-            command = parser.parseInput(scanner.nextLine());
-            printOut(command.execute(taskList));
+            try {
+                command = parser.parseInput(scanner.nextLine());
+                printOut(command.execute(taskList));
+            } catch (InvalidCommandException e) {
+                printOut(e.getMessage());
+            }
+
         }
     }
 }

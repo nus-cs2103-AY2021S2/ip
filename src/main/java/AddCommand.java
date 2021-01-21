@@ -1,13 +1,13 @@
-public class AddCommand implements Command {
-    private final String input;
+public abstract class AddCommand implements Command {
+    private final Task task;
 
-    public AddCommand(String input) {
-        this.input = input;
+    public AddCommand(Task task) {
+        this.task = task;
     }
 
     @Override
     public String execute(TaskList taskList) {
-        taskList.addTask(new Task(input));
-        return "added: " + input;
+        taskList.addTask(task);
+        return String.format(DukeStrings.MESSAGE_ADDED, task.toString(), taskList.size());
     }
 }

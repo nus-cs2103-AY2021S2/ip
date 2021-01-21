@@ -12,7 +12,7 @@ public class Parser {
         return this.bye;
     }
 
-    public Command parseInput(final String input) {
+    public Command parseInput(final String input) throws InvalidCommandException {
         Scanner scanner = new Scanner(input);
 
         switch (scanner.next().toLowerCase(Locale.ROOT)) {
@@ -23,8 +23,15 @@ public class Parser {
                 return new ListCommand();
             case DukeStrings.COMMAND_DONE:
                 return new DoneCommand(scanner.nextInt());
+            case DukeStrings.COMMAND_DEADLINE:
+                return new DeadlineCommand(scanner.nextLine());
+            case DukeStrings.COMMAND_EVENT:
+                return new EventCommand(scanner.nextLine());
+            case DukeStrings.COMMAND_TODO:
+                return new TodoCommand(scanner.nextLine());
             default:
-                return new AddCommand(input);
+                throw new InvalidCommandException();
+
         }
     }
 }

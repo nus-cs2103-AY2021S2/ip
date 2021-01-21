@@ -17,6 +17,10 @@ public class TaskList {
         return taskList.get(idx - 1).toString();
     }
 
+    public int size() {
+        return taskList.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
