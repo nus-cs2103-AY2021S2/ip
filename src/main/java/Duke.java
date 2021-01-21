@@ -54,7 +54,7 @@ public class Duke {
                         break;
                     case(TODO) :
                         word.replaceAll("todo","");
-                        ToDo t = new ToDo(word);
+                        ToDo t = new Todo(word);
                         System.out.println(t.toString());
                         break;
                 }
