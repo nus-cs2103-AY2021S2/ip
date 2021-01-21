@@ -5,36 +5,55 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
-What can I do for you?
+Hello! I'm Duke :) What can I do for you?
+----------------------------------------------------------
 Got it. I've added this task:
 [T][ ] wakeup
 Now you have 1 tasks in the list.
+----------------------------------------------------------
 :( OOPS! i'm sorry but i don't know what that means.
+----------------------------------------------------------
 Got it. I've added this task:
 [E][ ] field trip (at: 7am)
 Now you have 2 tasks in the list.
+----------------------------------------------------------
 Got it. I've added this task:
 [T][ ] bring bread
 Now you have 3 tasks in the list.
+----------------------------------------------------------
 Got it. I've added this task:
 [D][ ] project (by: thursday 2359)
 Now you have 4 tasks in the list.
+----------------------------------------------------------
+Wahoo you completed one task!
+----------------------------------------------------------
+Wahoo you completed one task!
+----------------------------------------------------------
 1. [T][✓] wakeup
 2. [E][ ] field trip (at: 7am)
 3. [T][✓] bring bread
 4. [D][ ] project (by: thursday 2359)
+----------------------------------------------------------
 :( OOPS! the description of a task cannot be empty.
+----------------------------------------------------------
 Got it. I've added this task:
 [D][ ] lab excel (by: wednesday 9pm)
 Now you have 5 tasks in the list.
+----------------------------------------------------------
+Wahoo you completed one task!
+----------------------------------------------------------
 1. [T][✓] wakeup
 2. [E][ ] field trip (at: 7am)
 3. [T][✓] bring bread
 4. [D][✓] project (by: thursday 2359)
 5. [D][ ] lab excel (by: wednesday 9pm)
+----------------------------------------------------------
+Task deleted.
+----------------------------------------------------------
 1. [T][✓] wakeup
 2. [E][ ] field trip (at: 7am)
 3. [T][✓] bring bread
 4. [D][✓] project (by: thursday 2359)
-Bye. Hope to see you again soon!
+----------------------------------------------------------
+Byebye~ Hope to see you again soon!
+----------------------------------------------------------

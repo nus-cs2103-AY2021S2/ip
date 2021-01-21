@@ -33,7 +33,7 @@ public class Duke {
             }
         }
         if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
+            System.out.println("Byebye~ Hope to see you again soon!");
         } else if (input.equals("list")) {
             int counter = 1;
             for (Task elem: this.store) {
@@ -60,9 +60,11 @@ public class Duke {
         } else if (input.contains("done")) {
             int num = Integer.valueOf(input.split(" ")[1]);
             this.store.get(num - 1).markAsDone();
+            System.out.println("Wahoo you completed one task!");
         } else if (input.contains("delete")) {
             int deleteat = Integer.valueOf(input.split(" ")[1]);
             this.deleteTask(deleteat);
+            System.out.println("Task deleted.");
         } else {
             throw new KeywordException();
         }
@@ -78,7 +80,8 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke :) What can I do for you?");
+        System.out.println("----------------------------------------------------------");
     }
 
     /**
@@ -90,18 +93,18 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        //while (!(input.equals("bye"))) {
         while (sc.hasNextLine()) {
             try {
                 this.process(input);
             } catch (DukeException err) {
                 System.out.println(err.getMessage());
             }
-            //sc = new Scanner(System.in);
+            System.out.println("----------------------------------------------------------");
             input = sc.nextLine();
         }
         if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
+            System.out.println("Byebye~ Hope to see you again soon!");
+            System.out.println("----------------------------------------------------------");
         }
     }
 }
