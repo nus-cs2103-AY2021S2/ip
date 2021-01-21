@@ -35,9 +35,14 @@ public class Duke {
                 item.markAsDone();
                 System.out.println("Nice job! I've marked this task as done:\n"
                         + item.toString());
+            } else if ((commandArr[0]).equals("delete")){
+                Task item = currList.remove(Integer.parseInt(commandArr[1]) - 1);
+                System.out.println("Gotcha. I've removed this task:\n"
+                        + item.toString()
+                        + "\nNow you have " + currList.size() + " task(s) in the list.");
             } else {
                 String taskType = commandArr[0];
-                String wholeTask = "";
+                String wholeTask;
                 Task item;
                 switch (taskType) {
                     case "todo":
