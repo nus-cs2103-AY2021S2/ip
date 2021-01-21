@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
+    static ArrayList<Task> list = new ArrayList<Task>();
+
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -10,7 +12,6 @@ public class Duke {
 //                + "|____/ \\__,_|_|\\_\\___|\n";
 //        System.out.println("Hello from\n" + logo);
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<Task>();
         System.out.println("____________________________________________________________\n" +
                 "Hello! I'm Duke\n" +
                 "How can I assist you?\n" +
@@ -22,6 +23,7 @@ public class Duke {
                 break;
             }
             else if (text.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int num = 1;
                 for (Task task: list) {
                     System.out.println(String.format("%d. %s", num, task));
@@ -32,11 +34,27 @@ public class Duke {
                 int num = Integer.parseInt(text.split(" ")[1]);
                 list.get(num-1).done();
             }
-            else {
-                list.add(new Task(text));
-                System.out.println(String.format("added: %s", text));
+            else if (text.split(" ")[0].equals("todo")) {
+                Task todo = new Todo(text.substring(text.indexOf(" ")+1));
+                addAndPrintTask(todo);
             }
+            else if (text.split(" ")[0].equals("deadline")) {
+                Task deadline = new Deadline(text.substring(text.indexOf(" ")+1, text.indexOf("/")-1), text.substring(text.indexOf("/")+4));
+                addAndPrintTask(deadline);
+            }
+            else if (text.split(" ")[0].equals("event")) {
+                Task event = new Event(text.substring(text.indexOf(" ")+1, text.indexOf("/")-1), text.substring(text.indexOf("/")+4));
+                addAndPrintTask(event);
+            }
+            else {}
         }
         sc.close();
+    }
+
+    public static void addAndPrintTask(Task task) {
+        list.add(task);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(task);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
     }
 }
