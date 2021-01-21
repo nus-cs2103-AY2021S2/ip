@@ -23,6 +23,9 @@ public class Duke {
         }
     }
 
+    /*
+     * Handle each line
+     */
     public static void processLine(String line) {
         if (line.compareTo("bye") == 0) {
             // Bye command, print and exit immediately.
@@ -52,8 +55,10 @@ public class Duke {
             try {
                 processNewTask(line);
             } catch (DukeUnknownCommandException e) {
+                //Handle Unknown Command Exception
                 System.out.println("Unknown command detected, ignoring!");
             } catch (DukeEmptyDescriptionException e) {
+                //Handle Empty Description Exception
                 System.out.println("Task description cannot be empty, ignoring!");
             } catch (DukeException e) {
                 System.out.println("Reached an error!");
@@ -61,6 +66,9 @@ public class Duke {
         }
     }
 
+    /*
+     * Handle a new task
+     */
     public static void processNewTask(String line) throws DukeException {
         if (line.startsWith("todo ")) {
             // Todo command, add a Todo class
