@@ -71,6 +71,9 @@ public class Duke {
 
     public static String listToString(List<Task> tasks) {
         String str = "";
+        if (tasks.size() == 0) {
+            return str;
+        }
         for (int i = 0; i < tasks.size(); i++) {
             str += String.valueOf(i+1) + ": " + tasks.get(i) + "\n    ";
         }

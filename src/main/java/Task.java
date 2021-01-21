@@ -14,7 +14,9 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        // return (isDone ? "✓" : "✘");
+        // return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "Y" : "N");
     }
     
     public String getDescription() {
@@ -23,7 +25,6 @@ public class Task {
 
     @Override
     public String toString() {
-        System.out.println(this.isDone);
         return "["+ this.taskType.toString() + "][" + this.getStatusIcon() + "] " + this.description;
     }
 
