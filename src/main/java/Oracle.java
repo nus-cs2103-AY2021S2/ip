@@ -36,16 +36,15 @@ public class Oracle {
                 break;
             }
 
-//            else if (input.equals("list")){
-//                System.out.println("You have forgotten quickly, but the Oracle Remembers");
-//                for (int i=0; i<theOracleRemembers.size(); i++){
-//                    System.out.println((i+1) + ". " + theOracleRemembers.get(i));
-//                }
-//            }
+            else if (input.equals("list")){
+                System.out.println("You have forgotten quickly, but the Oracle Remembers");
+                for (int i=0; i<theOracleRemembers.size(); i++){
+                    System.out.println((i+1) + ". " + theOracleRemembers.get(i).description);
+                }
+            }
             else {
-//                theOracleRemembers.add(new Task(input));
-//                System.out.println("I will keep " + "\"" + input + "\" in mind");
-                System.out.println(input);
+                theOracleRemembers.add(new Task(input));
+                System.out.println("I will keep " + "\"" + input + "\" in mind");
             }
         }
     }
