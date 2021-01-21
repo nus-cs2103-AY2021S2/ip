@@ -4,9 +4,38 @@ public class Duke {
 
 	private ArrayList<Task> store = new ArrayList<>();
 
-	public void addText (String text) {
-		Task t = new Task(text);
+	public void addTask(Task t) {
 		this.store.add(t);
+	}
+
+	public void printTask(String input) {
+		if (input.equals("bye")) {
+            System.out.println("Bye. Hope to see you again soon!");
+        } else if (input.equals("list")) {
+        	int counter = 1;
+        	for (Task elem: this.store) {
+       			System.out.println(counter + ". " + elem.toString());
+      			counter += 1;
+       		}
+		} else if (!input.contains("done")) {
+			Task t;
+			if (input.contains("todo")) {
+				t = new Todo(input.split(" ")[1]);
+			} else if (input.contains("deadline")) {
+				String trimmed = input.replaceAll("deadline ", "");
+				t = new Deadline(trimmed.split(" by ")[0], trimmed.split(" by ")[1]);
+			} else /*(if (input.contains("event"))*/ {
+				String trimmed = input.replaceAll("event ", "");
+				t = new Event(trimmed.split(" at ")[0], trimmed.split(" at ")[1]);
+			}
+			this.addTask(t);
+			System.out.println("Got it. I've added this task:");
+			System.out.println(t.toString());
+			System.out.println(String.format("Now you have %s tasks in the list.", this.store.size()));
+		} else if (input.contains("done")) {
+			int num = Integer.valueOf(input.split(" ")[1]);
+			this.store.get(num -1).markAsDone();
+		}
 	}
 
 	void greet() {
@@ -23,23 +52,9 @@ public class Duke {
         this.greet();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
+        
         while (!(input.equals("bye"))) {
-        	if (input.equals("list")) {
-        		System.out.println("Here are the tasks in your list:");
-        		int counter = 1;
-        		for (Task elem: this.store) {
-        			System.out.println(counter + ". " + "[" + elem.getStatusIcon() + "] " + elem.toString());
-        			counter += 1;
-        		}
-        	} else if (input.split(" ")[0].equals("done")) {
-        		int tasknumber = Integer.valueOf(input.split(" ")[1]);
-        		this.store.get(tasknumber -1).markAsDone();
-        		System.out.println("Nice! I've marked this task as done:");
-        		System.out.println("[" + this.store.get(tasknumber -1).getStatusIcon() + "] " + this.store.get(tasknumber -1).toString());
-        	} else {
-	            this.addText(input);
-	            System.out.println("added: " + input);
-	        }
+        	this.printTask(input);
 	        sc = new Scanner(System.in);
 	        input = sc.nextLine();
         }
