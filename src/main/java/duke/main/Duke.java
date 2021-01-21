@@ -27,7 +27,7 @@ public class Duke {
 
     private static final String border =
             "    ____________________________________________________________" +
-                    "________________________________________________________\n";
+                    "_______________\n";
 
     private static final String indent = "     ";
 
@@ -153,7 +153,7 @@ public class Duke {
         StringBuilder res = new StringBuilder();
         if (tasks.isEmpty()) {
             res.append(indent)
-                    .append("Hi! Your todo list is currently empty.");
+                    .append("Hi! Your todo list is currently empty.\n");
         } else {
             res.append(indent)
                     .append("Hi! This is your todo list:\n");
