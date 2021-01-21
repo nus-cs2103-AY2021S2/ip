@@ -25,7 +25,7 @@ public class DukeBot {
             try {
                 command = parser.parseInput(scanner.nextLine());
                 printOut(command.execute(taskList));
-            } catch (DukeException.InvalidCommand e) {
+            } catch (DukeException.InvalidCommand | DukeException.EmptyDescription | DukeException.InvalidTask e) {
                 printOut(e.getMessage());
             }
 
