@@ -26,7 +26,7 @@ public class UserInterface {
     }
 
     public static String readCommand() {
-        String command = in.nextLine();
+        String command = "";
         while(command.trim().isEmpty()) {
             command = in.nextLine();
         }
