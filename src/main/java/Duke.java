@@ -52,6 +52,10 @@ public class Duke {
                     System.out.println(dash);
                     System.out.println("Pai Kia Bot: ok i added this task chop chop: " + c.toString().substring(1));
                     System.out.println(dash);
+                } else {
+                    System.out.println(dash);
+                    System.out.println("Pai Kia Bot: no description leh, try again");
+                    System.out.println(dash);
                 }
             } else if (input.length() > 5 && input.substring(0, 6).equals("event ")) {
                 if (!input.equals("event ")) {
@@ -60,6 +64,10 @@ public class Duke {
                     inputList.add(c);
                     System.out.println(dash);
                     System.out.println("Pai Kia Bot: ok i added this task chop chop: " + c.toString().substring(1));
+                    System.out.println(dash);
+                } else {
+                    System.out.println(dash);
+                    System.out.println("Pai Kia Bot: no description leh, try again");
                     System.out.println(dash);
                 }
             } else if (input.length() > 8 && input.substring(0, 9).equals("deadline ")) {
@@ -70,11 +78,20 @@ public class Duke {
                     System.out.println(dash);
                     System.out.println("Pai Kia Bot: ok i added this task chop chop: " + c.toString().substring(1));
                     System.out.println(dash);
+                } else {
+                    System.out.println(dash);
+                    System.out.println("Pai Kia Bot: no description leh, try again");
+                    System.out.println(dash);
                 }
             } else {
                 System.out.println(dash);
                 System.out.println("You: " + input);
-                System.out.println("Pai Kia Bot: invalid response leh");
+                if (input.equals("todo") || input.equals("event") || input.equals("deadline")) {
+                    System.out.println("Pai Kia Bot: no description leh, try again");
+                } else {
+                    System.out.println("Pai Kia Bot: invalid response leh");
+                }
+
                 System.out.println(dash);
             }
 
