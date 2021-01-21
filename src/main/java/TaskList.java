@@ -91,7 +91,11 @@ public class TaskList {
      * @param taskNumber The number of the task to delete.
      * @return Copy of the task list with the nth task deleted.
      */
-    public TaskList deleteTask(int taskNumber) {
+    public TaskList deleteTask(int taskNumber) throws OwenException {
+        if (this.taskList.size() < taskNumber || taskNumber <= 0) {
+            throw new OwenException("Task " + taskNumber + " does not exist...");
+        }
+
         taskNumber -= 1;
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         newTaskList.remove(taskNumber);

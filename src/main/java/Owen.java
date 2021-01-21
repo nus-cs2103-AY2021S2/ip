@@ -90,7 +90,16 @@ public class Owen implements Chatbot {
                         doneFormat, doneTaskList.getTask(taskNumber).toString()));
                 return new Owen(this.isRunning, doneResponse, doneTaskList);
             case "delete":
-                taskNumber = Integer.parseInt(splitCommand[1]);
+                if (splitCommand.length < 2) {
+                    throw new OwenException("Task number must be specified...");
+                }
+
+                try {
+                    taskNumber = Integer.parseInt(splitCommand[1]);
+                } catch (NumberFormatException exception) {
+                    throw new OwenException("Task number must be specified...");
+                }
+
                 TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
                 String deleteFormat = ""
                 + "Noted. I've removed this task:\n"
