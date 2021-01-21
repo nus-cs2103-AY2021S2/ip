@@ -6,43 +6,32 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What can I do for you?
+Unknown command detected, ignoring!
+Unknown command detected, ignoring!
+Unknown command detected, ignoring!
 	Duke: Now you have 1 tasks.
-	added:    [ ] task1
-	Duke: Now you have 2 tasks.
-	added:    [ ] task2
-	Duke: Now you have 3 tasks.
-	added:    [ ] task3
-	Duke: Now you have 4 tasks.
 	added: [T][ ] task4
-	Duke: Now you have 5 tasks.
+	Duke: Now you have 2 tasks.
 	added: [E][ ] task5 (at: task5time)
-	Duke: Now you have 6 tasks.
+	Duke: Now you have 3 tasks.
 	added: [D][ ] task6 (by: task6time)
 	Duke:
-	1.    [ ] task1
-	2.    [ ] task2
-	3.    [ ] task3
-	4. [T][ ] task4
-	5. [E][ ] task5 (at: task5time)
-	6. [D][ ] task6 (by: task6time)
+	1. [T][ ] task4
+	2. [E][ ] task5 (at: task5time)
+	3. [D][ ] task6 (by: task6time)
 	Duke: Marked task 0 as done:
-	   [X] task1
-	Duke: Marked task 1 as done:
-	   [X] task2
-	Duke: Marked task 2 as done:
-	   [X] task3
-	Duke: Marked task 3 as done:
 	[T][X] task4
-	Duke: Marked task 4 as done:
+	Duke: Marked task 1 as done:
 	[E][X] task5 (at: task5time)
-	Duke: Marked task 5 as done:
+	Duke: Marked task 2 as done:
 	[D][X] task6 (by: task6time)
 	Duke:
-	1.    [X] task1
-	2.    [X] task2
-	3.    [X] task3
-	4. [T][X] task4
-	5. [E][X] task5 (at: task5time)
-	6. [D][X] task6 (by: task6time)
+	1. [T][X] task4
+	2. [E][X] task5 (at: task5time)
+	3. [D][X] task6 (by: task6time)
+	Duke: Deleted task 2: [D][X] task6 (by: task6time)
+	Duke: Deleted task 1: [E][X] task5 (at: task5time)
+	Duke: Deleted task 0: [T][X] task4
+	Duke:
 	Duke:
 	Bye!

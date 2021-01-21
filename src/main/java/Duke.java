@@ -11,6 +11,8 @@ public class Duke {
 
     /*
      * Main class to handle the input
+     *
+     * @param args the arguments to the program
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -25,6 +27,8 @@ public class Duke {
 
     /*
      * Handle each line
+     *
+     * @param line the current line to process
      */
     public static void processLine(String line) {
         if (line.compareTo("bye") == 0) {
@@ -54,9 +58,10 @@ public class Duke {
             }
         } else if (line.startsWith("delete ")) {
             // Done command, set the task as done.
-            String indexStr = line.substring(5);
+            String indexStr = line.substring(7);
             try {
                 int index = Integer.parseInt(indexStr) - 1;
+                System.out.printf("\tDuke: Deleted task %d: %s\n", index, tasks.get(index));
                 tasks.remove(index);
             } catch (NumberFormatException e){
                 System.out.println("Task index must be a number!");
@@ -81,6 +86,8 @@ public class Duke {
 
     /*
      * Handle a new task
+     *
+     * @param line the current task to process
      */
     public static void processNewTask(String line) throws DukeException {
         if (line.startsWith("todo ")) {
