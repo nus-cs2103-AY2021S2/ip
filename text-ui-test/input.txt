@@ -1,0 +1,11 @@
+todo wakeup
+event field trip at 7am
+todo bring bread
+deadline project by thursday 2359
+done 1
+done 3
+list
+deadline lab excel by wednesday 9pm
+done 5
+list
+bye
