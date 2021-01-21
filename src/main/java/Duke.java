@@ -39,7 +39,7 @@ public class Duke {
                     System.out.println(topBound + "Task does not exist and can not be completed!" + bottomBound);
                 } catch (NumberFormatException e) {
                     // parameter for done is not an Integer
-                    System.out.println(topBound + "done command must be followed by an Integer ie. done 1. Try again!"
+                    System.out.println(topBound + "done must be followed by an Integer ie. done 1. Try again!"
                         + bottomBound);
                 }
             } else if (arr[0].startsWith("todo")) {
@@ -89,6 +89,22 @@ public class Duke {
                     System.out.println(topBound + e.getMessage() + bottomBound);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(topBound + "event must include '/at duration'. Try again!" + bottomBound);
+                }
+            } else if (arr[0].startsWith("delete")) {
+                try {
+                    String str = arr[0].replaceFirst("delete", "").stripLeading();
+                    int x = Integer.parseInt(str) - 1;
+                    Task curr = list.get(x);
+                    list.delete(x);
+                    System.out.println(topBound + "Got it! I've removed this task:\n" + " " + curr + "\n" + "You have "
+                            + list.noOfTasks() + " tasks left in the list." + bottomBound);
+                } catch (IndexOutOfBoundsException e) {
+                    // task number x does not exist
+                    System.out.println(topBound + "Task does not exist and cannot be deleted!" + bottomBound);
+                } catch (NumberFormatException e) {
+                    // parameter for delete is not an Integer
+                    System.out.println(topBound + "delete must be followed by an Integer, ie. delete 1. Try again!"
+                        + bottomBound);
                 }
             } else {
                 // unknown command

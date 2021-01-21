@@ -20,6 +20,16 @@ public class DukeList {
     }
 
     /**
+     *
+     * @param x Task number to be removed
+     * deletes the stated task
+     */
+
+    public void delete(int x) {
+        list.remove(x);
+    }
+
+    /**
      * DukeList getter
      * @param x Task number x
      * @return Task x
