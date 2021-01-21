@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    private static String[] tasks = new String[100];
+    private static Task[] tasks = new Task[100];
     private static int counter = 0;
 
     public static void main(String[] args) {
@@ -24,9 +24,22 @@ public class Duke {
         System.out.println("     " + msg);
     }
 
-    public static void addTask(String task) {
+    /**
+     * @param task a new task that is added to the task list
+     */
+    public static void addTask(Task task) {
         tasks[counter] = task;
         counter++;
+        printMsg("added: " + task.getTitle());
+    }
+
+    /**
+     * @param task the task that is marked done
+     */
+    public static void doneTask(Task task) {
+        task.done();
+        printMsg("Nice! I've marked this task as done: ");
+        printMsg("  " + task);
     }
 
     public static void printLine() {
@@ -60,32 +73,37 @@ public class Duke {
             sayBye();
             printLine();
             return false;
-        } else {
-            switch (command) {
-                case "list":
-                    printTasks();
-                    break;
-                default:
-                    addTask(command);
-                    echo(command);
-                    break;
-            }
-            printLine();
-            return true;
         }
+        
+        if (command.equals("list")) {
+            printTasks();
+        } else {
+            String[] substrs = command.split(" ");
+            if (substrs[0].equals("done")) {
+                try {
+                    int idx = Integer.parseInt(substrs[1]);
+                    doneTask(tasks[idx]);
+                } catch (Exception e) {
+                    addTask(new Task(command));
+                }
+            } else {
+                addTask(new Task(command));
+            }
+        }
+        printLine();
+        return true;
     }
 
     public static void sayBye() {
         printMsg("Bye. Hope to see you again soon!");
     }
 
-    public static void echo(String msg) {
-        printMsg("added: " + msg);
-    }
-
+    /**
+     * print task list as well as their status
+     */
     public static void printTasks() {
         for (int i = 0; i < counter; i++) {
-            printMsg(i + ". " + tasks[i]);
+            printMsg(i + "." + tasks[i].toString());
         }
     }
 }
