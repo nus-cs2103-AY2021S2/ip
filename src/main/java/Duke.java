@@ -33,7 +33,7 @@ public class Duke {
                 //If valid, change status of task and output done task
                 Task item = currList.get(Integer.valueOf(commandArr[1]) - 1);
                 item.markAsDone();
-                System.out.println("Nice job! I've marked this task as done: \n"
+                System.out.println("Nice job! I've marked this task as done:\n"
                         + item.toString());
             } else {
                 String taskType = commandArr[0];
@@ -49,9 +49,9 @@ public class Duke {
                     item = new Event(taskArr[0], taskArr[1]);
                 }
                 currList.add(item);
-                System.out.println("Got it. I've added this task: \n"
+                System.out.println("Got it. I've added this task:\n"
                         + item.toString()
-                        + "\nNow you have " + currList.size() + " tasks in the list.");
+                        + "\nNow you have " + currList.size() + " task(s) in the list.");
             }
         }
     }
