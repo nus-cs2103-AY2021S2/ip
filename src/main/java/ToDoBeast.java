@@ -17,41 +17,38 @@ public class ToDoBeast {
         String command = userInput[0];
 
         while (!command.equals("bye")) {
-            if (command.equals("list")) {
-                printTaskList(taskManager.getTaskList());
-            }
-            else if (command.equals("done")){
-                Task currentTask = taskManager.getTask(sc.nextInt());
-                currentTask.setDone();
-                System.out.println(line + "\tGood job! You've just completed this task:\n" + "\t\t" + currentTask + "\n" + line);
-            }
-            else {
-                Task newTask = null;
-                // handle exception for empty description
-                 if (userInput.length == 1) {
-                     try {
-                         throw new ToDoBeastException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
-                     } catch (ToDoBeastException e) {
-                         System.out.println(line + "\t" + e.getMessage() + "\n" + line);
-                     }
-                 } else {
-                     if (command.equals("todo")) {
-                         newTask = new Todo(userInput[1]);
-                     } else if (command.equals("deadline")) {
-                         String[] deadlineParams = userInput[1].split(" /");
-                         newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
-                     } else if (command.equals("event")) {
-                         String[] deadlineParams = userInput[1].split(" /");
-                         newTask = new Event(deadlineParams[0], deadlineParams[1]);
-                     }
-                     taskManager.addTask(newTask);
-                     System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
-                 }
+            try {
+                checkUserInput(userInput);
+                if (command.equals("list")) {
+                    printTaskList(taskManager.getTaskList());
+                }
+                else if (command.equals("done")){
+                    Task currentTask = taskManager.getTask(sc.nextInt());
+                    currentTask.setDone();
+                    System.out.println(line + "\tGood job! You've just completed this task:\n" + "\t\t" + currentTask + "\n" + line);
+                }
+                else {
+                    Task newTask = null;
 
-            }
-            userInput = sc.nextLine().split(" ", 2);
-            command = userInput[0];
+                    if (command.equals("todo")) {
+                        newTask = new Todo(userInput[1]);
+                    } else if (command.equals("deadline")) {
+                        String[] deadlineParams = userInput[1].split(" /");
+                        newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                    } else if (command.equals("event")) {
+                        String[] deadlineParams = userInput[1].split(" /");
+                        newTask = new Event(deadlineParams[0], deadlineParams[1]);
+                    }
+                    taskManager.addTask(newTask);
+                    System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
+                    }
 
+            } catch (ToDoBeastException e) {
+                System.out.println(line + "\t" + e.getMessage() + "\n" + line);
+            } finally {
+                userInput = sc.nextLine().split(" ", 2);
+                command = userInput[0];
+            }
         }
         exit();
     }
@@ -59,7 +56,15 @@ public class ToDoBeast {
     public static void main(String[] args) {
         ToDoBeast toDoBeast = new ToDoBeast();
         toDoBeast.runApplication();
+    }
 
+    public void checkUserInput(String[] userInput) throws ToDoBeastException {
+        String command = userInput[0];
+        if (command.equals("todo") || command.equals("deadline") || command.equals("event") && userInput.length == 1) {
+            throw new ToDoBeastException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
+        } else if (!command.equals("bye") && !command.equals("list") && !command.equals("done")) {
+            throw new ToDoBeastException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     public void greetUser() {
