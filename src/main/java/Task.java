@@ -14,14 +14,14 @@ public class Task {
     public void markDone () {
         switch (this.State) {
             case done:
-                System.out.println("Again? This task has already been marked done!\n  " +
-                    TaskInformation() + "\n");
+                System.out.println("     Again? This task has already been marked done!\n     " +
+                    TaskInformation());
                 break;
 
             case undone:
                 this.State = TaskState.done;
-                System.out.println("Woohoo! I've marked this task as done\n  " +
-                    TaskInformation() + "\n");
+                System.out.println("     Woohoo! I've marked this task as done\n     " +
+                    TaskInformation());
         }
     }
 
