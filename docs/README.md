@@ -76,3 +76,22 @@ Expected outcome:
 
 `Nice! I've marked this task as done: 
        [T][X] Second Task`
+	   
+### Feature 4 - Delete Task from list
+Enables the user to remove a task from the task list
+
+## Usage
+
+### `delete` - Use the delete keyword
+
+The specified task on the list will be deleted.
+
+Example of usage: 
+
+`delete 2`
+
+Expected outcome:
+
+`Noted. I've removed this task: 
+       [T][X] Second Task
+     Now you have 4 tasks in the list.`

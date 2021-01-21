@@ -42,6 +42,23 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("INVALID COMMAND!");
                 }
+            } else if (textInput.startsWith("delete ")) {
+                try {
+                    int i = Integer.parseInt(textInput.substring(7));
+                    Task task = listOfTasks.get(i - 1);
+                    listOfTasks.remove(i - 1);
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t Noted. I've removed this task:");
+                    System.out.println("\t   " + task);
+                    System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println("\t_____________________________________________________________");
+                } catch (NumberFormatException e) {
+                    System.out.println("INVALID COMMAND!");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("INVALID COMMAND!");
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("INVALID COMMAND!");
+                }
             } else if (textInput.startsWith("todo")) {
                 try {
                     textInput = textInput.substring(5);
