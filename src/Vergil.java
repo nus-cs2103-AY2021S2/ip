@@ -37,6 +37,14 @@ public class Vergil {
                         System.out.println("Sweet! Task completed:");
                         System.out.printf("   %s\n", task);
                     }
+                } else if (command.startsWith("delete")) {
+                    if (command.equals("delete")) {
+                        throw new VergilException(
+                                "Sorry! 'delete' requires typing the list number of the task.");
+                    }
+                    Task task = tasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+                        System.out.println("Acknowledged. Task deleted:");
+                        System.out.printf("   %s\n", task);
                 } else if (command.startsWith("todo")) {
                     if (command.equals("todo")) {
                         throw new VergilException(
@@ -79,7 +87,7 @@ public class Vergil {
                 }
             } catch (VergilException e) {
                 System.out.println(e.getMessage());
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Sorry! The command's format is invalid.");
             }
             System.out.println();
