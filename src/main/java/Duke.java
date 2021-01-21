@@ -38,25 +38,41 @@ public class Duke {
                 System.out.println("Noted. I have removed " + toRemove);
                 System.out.println("You now have " + list.size() + " items in the list");
             } else {
-                if (curr.startsWith("todo ")) {
-                    String taskName = curr.substring(5);
-                    Todo newTask = new Todo(taskName);
-                    list.add(newTask);
-                    System.out.println("Added " + newTask + " to the task list!");
-                } else if (curr.startsWith("deadline ")) {
-                    String taskName = curr.substring(9);
-                    String by = curr.substring(curr.indexOf("/by") + 4);
-                    Deadline newTask = new Deadline(taskName, by);
-                    list.add(newTask);
-                    System.out.println("Added " + newTask + " to the task list!");
-                } else if (curr.startsWith("event ")) {
-                    String taskName = curr.substring(6);
-                    String at = curr.substring(curr.indexOf("/at") + 4);
-                    Event newTask = new Event(taskName, at);
-                    list.add(newTask);
-                    System.out.println("Added " + newTask + " to the task list!");
+                if (curr.startsWith("todo")) {
+                    String taskName = curr.substring(4).stripLeading();
+                    if (taskName.equals("")) {
+                        System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+                    } else {
+                        Todo newTask = new Todo(taskName);
+                        list.add(newTask);
+                        System.out.println("Added " + newTask + " to the task list!");
+                        System.out.println("You now have " + list.size() + " items in the list");
+                    }
+                } else if (curr.startsWith("deadline")) {
+                    String taskName = curr.substring(8).stripLeading();
+                    if (taskName.equals("")) {
+                        System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+                    } else {
+                        String by = curr.substring(curr.indexOf("/by") + 4);
+                        Deadline newTask = new Deadline(taskName, by);
+                        list.add(newTask);
+                        System.out.println("Added " + newTask + " to the task list!");
+                        System.out.println("You now have " + list.size() + " items in the list");
+                    }
+                } else if (curr.startsWith("event")) {
+                    String taskName = curr.substring(5).stripLeading();
+                    if (taskName.equals("")) {
+                        System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
+                    } else {
+                        String at = curr.substring(curr.indexOf("/at") + 4);
+                        Event newTask = new Event(taskName, at);
+                        list.add(newTask);
+                        System.out.println("Added " + newTask + " to the task list!");
+                        System.out.println("You now have " + list.size() + " items in the list");
+                    }
+                } else {
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                System.out.println("You now have " + list.size() + " items in the list");
             }
         }
     }
