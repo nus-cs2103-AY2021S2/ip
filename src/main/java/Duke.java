@@ -28,9 +28,9 @@ public class Duke {
                     String action = inputWords[0];
 
                     if (input.equals("list")) {
-                        System.out.println("Here is a list of your tasks:");
+                        System.out.println("Here is a list of your tasks, Master:");
                         for (int i = 0; i < taskList.size(); i++) {
-                            System.out.println(i + 1 + "." + taskList.get(i).toString());
+                            System.out.println(i + 1 + ". " + taskList.get(i).toString());
                         }
                         input = sc.nextLine();
                     } else if (action.equals("done")) {
@@ -87,7 +87,12 @@ public class Duke {
                                 System.out.println(eventItem.toString());
                             }
                         }
-                        System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
+                        if (taskList.size() == 1) {
+                            System.out.println("\nYou have " + taskList.size() + " task in the list now, Master.");
+                        } else {
+                            System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
+                        }
+
                         input = sc.nextLine();
                     }
                 } catch (MissingArgumentException error) {
