@@ -1,0 +1,24 @@
+public class Task {
+    protected String description;
+    protected boolean isDone;
+    public static int count = 0;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+        count++;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2718" : " "); //return tick or X symbols
+    }
+
+    public void markAsDone(){
+        this.isDone = true;
+    }
+
+    @Override
+    public String toString(){
+        return "[" + this.getStatusIcon() + "] " + description + "\n";
+    }
+}

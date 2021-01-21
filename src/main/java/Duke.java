@@ -15,8 +15,12 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                             "    Hello! I'm Duke\n" + "    What can I do for you?\n" +
                             "    ____________________________________________________________\n");
+        //overall stringList
         String[] strArr = new String[100];
+        //overall Task count
         int count = 0;
+        //overall TaskList
+        ArrayList<Task> TaskList = new ArrayList<>();
 
         while(sc.hasNextLine()){
             System.out.println("    ____________________________________________________________");
@@ -27,6 +31,8 @@ public class Duke {
                 break;
             }
             else if(str.equals("list")){
+
+                /*
                 if(count == 0){
                     System.out.println("    No items in the list");
                     System.out.println("    ____________________________________________________________\n");
@@ -38,12 +44,54 @@ public class Duke {
                     }
                     System.out.println("    ____________________________________________________________\n");
                 }
+                */
+
+                if(TaskList.isEmpty()){
+                    System.out.println("    No tasks in the list");
+                    System.out.println("    ____________________________________________________________\n");
+                }
+                else{
+                    System.out.println("    Here are the tasks in your list:");
+                    for(int i = 0; i < TaskList.size(); i++){
+                        int num = i + 1;
+                        System.out.println("     " + num + "." + TaskList.get(i));
+                    }
+                    System.out.println("    ____________________________________________________________\n");
+                }
+
             }
+
             else{
-                strArr[count] = str;
-                System.out.println("    added: " + strArr[count]);
-                System.out.println("    ____________________________________________________________\n");
-                count++;
+                if(str.contains("done")) {
+                    int tNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
+                    if(!TaskList.isEmpty() && tNum <= TaskList.size() && tNum > 0){
+                        System.out.println("    Nice! I've marked this task as done:");
+                        TaskList.get(tNum - 1).markAsDone();
+                        System.out.println("       " + TaskList.get(tNum - 1));
+                        System.out.println("    ____________________________________________________________\n");
+                    }
+                    else{
+                        if(TaskList.isEmpty()){
+                            System.out.println("    No tasks in the list");
+                        }
+                        else{
+                            System.out.println("    Invalid task number");
+                        }
+                        System.out.println("    ____________________________________________________________\n");
+                    }
+
+                }
+                else {
+                    strArr[count] = str;
+                    System.out.println("    added: " + strArr[count]);
+                    System.out.println("    ____________________________________________________________\n");
+                    count++;
+
+                    //create task
+                    Task t = new Task(str);
+                    //add task to taskList;
+                    TaskList.add(t);
+                }
             }
         }
 
