@@ -82,5 +82,29 @@ Here are the tasks in your list:
 4. [T][?] borrow other book
 --------------------------------------
 --------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [T][X] borrow book
+2. [D][?] return book (by: Sunday)
+3. [E][X] project meeting (at: Mon 2-4pm)
+4. [T][?] borrow other book
+--------------------------------------
+--------------------------------------
+Got it. I've removed this task:
+	[T][X] borrow book
+Now you have 3 tasks.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [D][?] return book (by: Sunday)
+2. [E][X] project meeting (at: Mon 2-4pm)
+3. [T][?] borrow other book
+--------------------------------------
+--------------------------------------
 Goodbye!
 --------------------------------------
