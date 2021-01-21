@@ -24,11 +24,9 @@ public abstract class AddCommand implements Command {
     @Override
     public String getResponse() {
         return String.format(
-                "____________________________________________________________\n" +
-                " Got it. I've added this task: \n" +
+                "Got it. I've added this task: \n" +
                 "       %s\n" +
-                " Now you have %d tasks in the list.\n" +
-                "____________________________________________________________\n",
+                "Now you have %d tasks in the list.",
                 this.taskToAdd.toString(), this.taskList.getNumTasks());
     }
 }

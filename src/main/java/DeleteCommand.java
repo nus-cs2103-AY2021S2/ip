@@ -1,10 +1,10 @@
 public class DeleteCommand implements Command {
-    int taskIndexToDone;
-    Task taskToDone;
+    int taskIndexToDelete;
+    Task taskToDelete;
     TaskList taskList;
 
-    public DeleteCommand(int taskIndexToDone) {
-        this.taskIndexToDone = taskIndexToDone;
+    public DeleteCommand(int taskIndexToDelete) {
+        this.taskIndexToDelete = taskIndexToDelete;
     }
 
     @Override
@@ -17,11 +17,11 @@ public class DeleteCommand implements Command {
         this.taskList = taskList;
         try {
             for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
-                if (i == taskIndexToDone) {
-                    this.taskToDone = this.taskList.getNthTask(i);
+                if (i == taskIndexToDelete) {
+                    this.taskToDelete = this.taskList.getNthTask(i);
                 }
             }
-            this.taskToDone.completeTask();
+            this.taskList.deleteNthTask(taskIndexToDelete);
             return this.taskList;
         } catch (NullPointerException e) {
             throw new MikeInvalidInputException("OOPS!! The task is not in the list");
@@ -31,11 +31,10 @@ public class DeleteCommand implements Command {
 
     @Override
     public String getResponse() {
-        return String.format("____________________________________________________________\n" +
-                        " Noted. I've removed this task:  \n  " +
+        return String.format(
+                        "Noted. I've removed this task:  \n  " +
                         "%s\n" +
-                        " Now you have %d tasks in the list." +
-                        "____________________________________________________________\n",
-                        this.taskToDone.toString(), this.taskList.getNumTasks());
+                        "Now you have %d tasks in the list.\n",
+                        this.taskToDelete.toString(), this.taskList.getNumTasks());
     }
 }

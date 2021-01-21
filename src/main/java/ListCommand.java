@@ -18,9 +18,9 @@ public class ListCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "____________________________________________________________\n" +
+        return String.format(
                 "Here are the tasks in your list:\n" +
-                this.taskList.toString() +
-                "____________________________________________________________\n";
+                "%s",
+                this.taskList.toString());
     }
 }

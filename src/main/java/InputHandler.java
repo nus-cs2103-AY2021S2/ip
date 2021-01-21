@@ -10,6 +10,7 @@ public class InputHandler {
     private static final String TODO_COMMAND = "todo";
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
+    private static final String DELETE_COMMAND = "delete";
 
     /**
      * Reads user input and parses it
@@ -31,8 +32,9 @@ public class InputHandler {
                 try {
                     return new DoneCommand(Integer.parseInt(userInputArr[1]));
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                    throw new MikeInvalidInputException("☹ OOPS!!! The task to be completed cannot be empty and must " +
-                            "be a number.");
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Done command format. eg.\n" +
+                            "   Done <index of task to mark completed>");
                 }
 
             case TODO_COMMAND:
@@ -42,7 +44,9 @@ public class InputHandler {
                     m.find();
                     return new TodoCommand(m.group(1));
                 } catch (IllegalStateException e) {
-                    throw new MikeInvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Todo command format. eg.\n" +
+                            "   todo <description>");
                 }
 
             case EVENT_COMMAND:
@@ -52,8 +56,9 @@ public class InputHandler {
                     m.find();
                     return new EventCommand(m.group(1), m.group(2));
                 } catch (IllegalStateException e) {
-                    throw new MikeInvalidInputException("Please enter an event description and timing to add to the " +
-                        "list!!");
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Event command format. eg.\n" +
+                            "   event <description> /at <deadline>");
                 }
 
             case DEADLINE_COMMAND:
@@ -63,8 +68,18 @@ public class InputHandler {
                     m.find();
                     return new DeadlineCommand(m.group(1), m.group(2));
                 } catch (IllegalStateException e) {
-                    throw new MikeInvalidInputException("Please enter an event description and deadline to add to " +
-                            "the list!!");
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Deadline command format. eg.\n" +
+                            "   deadline <description> /by <deadline>");
+                }
+
+            case DELETE_COMMAND:
+                try {
+                    return new DeleteCommand(Integer.parseInt(userInputArr[1]));
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Delete command format. eg.\n" +
+                            "   Delete <index of task to delete>");
                 }
 
             default:

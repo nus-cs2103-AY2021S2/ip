@@ -38,6 +38,15 @@ public class TaskList {
         return this.taskList.get(i - 1);
     }
 
+    /**
+     * deleted the nth task starting at index 1
+     *
+     * @param i the index of the task to be deleted
+     */
+    public void deleteNthTask(int i) {
+        this.taskList.remove(i - 1);
+    }
+
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();

@@ -15,8 +15,6 @@ public class ByeCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "____________________________________________________________\n " +
-                "  Bye. Hope to see you again soon!\n" +
-                "____________________________________________________________\n";
+        return "Bye. Hope to see you again soon!";
     }
 }

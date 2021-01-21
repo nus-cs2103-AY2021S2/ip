@@ -32,9 +32,10 @@ public class DoneCommand implements Command {
 
     @Override
     public String getResponse() {
-        return "____________________________________________________________\n" +
-                "Nice! I've marked this task as done: \n  " +
-                this.taskToDone.toString() +
-                "\n____________________________________________________________\n";
+        return String.format(
+                "Nice! I've marked this task as done: \n" +
+                "  %s",
+                this.taskToDone.toString());
+
     }
 }
