@@ -15,18 +15,35 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n" +
                             "    Hello! I'm Duke\n" + "    What can I do for you?\n" +
                             "    ____________________________________________________________\n");
+        String[] strArr = new String[100];
+        int count = 0;
 
-        while(sc.hasNext()){
+        while(sc.hasNextLine()){
             System.out.println("    ____________________________________________________________");
-            String str = sc.next();
+            String str = sc.nextLine();
             if(str.equals("bye")){
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println("    ____________________________________________________________\n");
                 break;
             }
+            else if(str.equals("list")){
+                if(count == 0){
+                    System.out.println("    No items in the list");
+                    System.out.println("    ____________________________________________________________\n");
+                }
+                else{
+                    for(int i = 0; i < count; i++){
+                        int num = i + 1;
+                        System.out.println("    " + num + ". " + strArr[i]);
+                    }
+                    System.out.println("    ____________________________________________________________\n");
+                }
+            }
             else{
-                System.out.println("    " + str);
+                strArr[count] = str;
+                System.out.println("    added: " + strArr[count]);
                 System.out.println("    ____________________________________________________________\n");
+                count++;
             }
         }
 
