@@ -27,7 +27,7 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 int counter = 1;
                 for (Task t : taskArrayList) {
-                    System.out.println(counter + ". " + t.taskStatus());
+                    System.out.println(counter + "." + t.taskStatus());
                     counter++;
                 }
                 input = reader.nextLine();
