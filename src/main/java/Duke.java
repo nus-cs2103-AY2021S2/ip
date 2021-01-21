@@ -4,16 +4,17 @@ import java.lang.StringBuilder;
 
 public class Duke {
 
+    private static ArrayList<Task> tasks = new ArrayList<>(100);
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>(100);
         boolean runDuke = true;
 
         greet();
 
         while (runDuke) {
-            String input = scanner.nextLine();
-            String[] tokenizedInput = input.split(" ");
+            String input = scanner.nextLine().trim();
+            String[] tokenizedInput = input.split(" ", 2);
 
             switch (tokenizedInput[0]) {
                 case "list": StringBuilder builder = new StringBuilder();
@@ -39,10 +40,29 @@ public class Duke {
                     runDuke = false;
                     break;
                 default:
-                    tasks.add(new Task(input));
-                    echo("added: " + input);
+                    addTask(tokenizedInput);
             }
         }
+    }
+
+    public static void addTask(String[] tokenizedInput) {
+        Task newTask;
+
+        switch (tokenizedInput[0]) {
+            case "deadline":
+                String[] deadlineDetails = tokenizedInput[1].split("/by");
+                newTask = new Deadline(deadlineDetails[0], deadlineDetails[1]);
+                break;
+            case "event":
+                String[] eventDetails = tokenizedInput[1].split("/at");
+                newTask = new Event(eventDetails[0], eventDetails[1]);
+                break;
+            default:
+                newTask = new ToDo(tokenizedInput[0]);
+                break;
+        }
+        tasks.add(newTask);
+        echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list", newTask, tasks.size()));
     }
 
     public static void greet() {
