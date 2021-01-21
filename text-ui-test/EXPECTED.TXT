@@ -5,8 +5,7 @@ Hello :)
 [T][?] buy groceries
 Now you have 1 task(s) in the list
 >1.[T][?] buy groceries
->true
-Nice! I've marked this task as done:
+>Nice! I've marked this task as done:
 [T][?] buy groceries
 >1.[T][?] buy groceries
 >Got it. I've added this task:
@@ -29,14 +28,11 @@ Now you have 6 task(s) in the list
 >event Usage: event [activity] /at [time]
 >todo Usage: todo [activity]
 >Index 999 out of bounds for schedule of size 6.
->true
-Nice! I've marked this task as done:
+>Nice! I've marked this task as done:
 [D][?] 03 (by: 12-jan-2020)
->true
-Nice! I've marked this task as done:
+>Nice! I've marked this task as done:
 [D][?] 01 (by: 12-jan-2020)
->true
-Nice! I've marked this task as done:
+>Nice! I've marked this task as done:
 [D][?] 02 (by: 12-jan-2020)
 >1.[T][?] buy groceries
 2.[D][?] 01 (by: 12-jan-2020)
@@ -47,8 +43,7 @@ Nice! I've marked this task as done:
 >Got it. I've added this task:
 [E][?] attend lecture (at: tomorrow noon)
 Now you have 7 task(s) in the list
->true
-Nice! I've marked this task as done:
+>Nice! I've marked this task as done:
 [E][?] attend lecture (at: tomorrow noon)
 >1.[T][?] buy groceries
 2.[D][?] 01 (by: 12-jan-2020)
