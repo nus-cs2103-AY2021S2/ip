@@ -1,0 +1,10 @@
+todo buy milo
+todo buy milk
+deadline drink milo /by Thursday
+event milo party /at 2pm - 6pm
+done 3
+done 1
+done 5
+done 2
+list
+bye
