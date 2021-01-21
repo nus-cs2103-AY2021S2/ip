@@ -27,7 +27,7 @@ public class Duke {
                     listTask();
                     break;
                 case "done":
-                    doneTask(tokenizedInput[1]);
+                    doneTask(tokenizedInput);
                     break;
                 case "bye":
                     exit();
@@ -40,6 +40,9 @@ public class Duke {
                     break;
                 case "event":
                     addEvent(tokenizedInput);
+                    break;
+                case "delete":
+                    deleteTask(tokenizedInput);
                     break;
                 default:
                     throw new DukeException("☹ OPPS!!! I'm sorry, but I don't know what that means :-(");
@@ -93,9 +96,9 @@ public class Duke {
         echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", newTask, tasks.size()));
     }
 
-    public static void doneTask(String input) throws DukeException {
+    public static void doneTask(String[] input) throws DukeException {
         try {
-            int taskIndex = Integer.parseInt(input) - 1;
+            int taskIndex = Integer.parseInt(input[1]) - 1;
             tasks.get(taskIndex).markAsDone();
             echo("Nice! I've marked this task as done:\n\t" + tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException e) {
@@ -117,6 +120,19 @@ public class Duke {
             }
         }
         echo(builder.toString());
+    }
+
+    public static void deleteTask(String[] input) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(input[1]) - 1;
+            Task deletedTask = tasks.get(taskIndex);
+            tasks.remove(taskIndex);
+            echo("Noted! I've removed this task:\n\t" + deletedTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OPPS!!! Invalid task number entered.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OPPS!!! Invalid task number entered.");
+        }
     }
 
     public static void greet() {
