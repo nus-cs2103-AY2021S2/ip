@@ -25,41 +25,51 @@ public class Duke {
             String[] commandArr = command.split(" ");
             Task newTask;
             System.out.println(HORIZONTAL_RULE);
-            switch (commandArr[0]) {
-                case exitCommand:
-                    System.out.println(command + ". Hope to see you again soon!\n" + HORIZONTAL_RULE);
-                    sc.close();
-                    isBye = true;
-                    break;
-                case listCommand:
-                    Duke.printUserList();
-                    System.out.println(HORIZONTAL_RULE);
-                    break;
-                case doneCommand:
-                    int taskNumber = Integer.parseInt(commandArr[1]);
-                    Duke.printDoneTask(taskNumber);
-                    break;
-                case addTodoCommand:
-                    newTask = new ToDo(command.split("todo ")[1]);
-                    Duke.printAddedTask(newTask);
-                    userList.add(newTask);
-                    break;
-                case addDeadlineCommand:
-                    String[] deadlineAndTask = command.split("/by ");
-                    //offset of 9 to remove the "deadline " from the statement
-                    newTask = new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
-                    Duke.printAddedTask(newTask);
-                    userList.add(newTask);
-                    break;
-                case addEventCommand:
-                    String[] eventTimeAndTask = command.split("/at");
-                    //offset of 6 to remove "event " frm statement
-                    newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
-                    Duke.printAddedTask(newTask);
-                    userList.add(newTask);
-                    break;
-                default:
-                    System.out.println("invalid command. please try again.");
+            try {
+                switch (commandArr[0]) {
+                    case exitCommand:
+                        System.out.println(command + ". Hope to see you again soon!\n" + HORIZONTAL_RULE);
+                        sc.close();
+                        isBye = true;
+                        break;
+                    case listCommand:
+                        Duke.printUserList();
+                        System.out.println(HORIZONTAL_RULE);
+                        break;
+                    case doneCommand:
+                        int taskNumber = Integer.parseInt(commandArr[1]);
+                        Duke.printDoneTask(taskNumber);
+                        break;
+                    case addTodoCommand:
+                        if(commandArr.length == 1){
+                            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                        }
+                        else {
+                            newTask = new ToDo(command.split("todo ")[1]);
+                            Duke.printAddedTask(newTask);
+                            userList.add(newTask);
+                        }
+                        break;
+                    case addDeadlineCommand:
+                        String[] deadlineAndTask = command.split("/by ");
+                        //offset of 9 to remove the "deadline " from the statement
+                        newTask = new Deadline(deadlineAndTask[1], deadlineAndTask[0].substring(9));
+                        Duke.printAddedTask(newTask);
+                        userList.add(newTask);
+                        break;
+                    case addEventCommand:
+                        String[] eventTimeAndTask = command.split("/at");
+                        //offset of 6 to remove "event " frm statement
+                        newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
+                        Duke.printAddedTask(newTask);
+                        userList.add(newTask);
+                        break;
+                    default:
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            catch(DukeException ex){
+                System.err.println(ex.getMessage());
             }
         }
     }
