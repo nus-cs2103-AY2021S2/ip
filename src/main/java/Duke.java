@@ -93,6 +93,25 @@ public class Duke {
                             System.out.println("\nYou have " + taskList.size() + " tasks in the list now, Master.");
                         }
                         input = sc.nextLine();
+                    } else if (action.equals("delete")) {
+                        if (inputWords.length < 2) {
+                            throw new MissingArgumentException("Wrong number of arguments");
+                        }
+                        int deleteIdx = Integer.parseInt(inputWords[1]);
+                        System.out.println("Understood Master. I've removed this task from the list:");
+                        System.out.println(taskList.get(deleteIdx - 1));
+                        taskList.remove(deleteIdx);
+                        if (taskList.size() == 1) {
+                            System.out.println("\nNow you have "
+                                                + taskList.size()
+                                                + " task in the list, Master.");
+                        } else {
+                            System.out.println("\nNow you have "
+                                                + taskList.size()
+                                                + " tasks in the list, Master.");
+                        }
+
+                        input = sc.nextLine();
                     } else {
                         throw new NoKeywordException("No such action.");
                     }
