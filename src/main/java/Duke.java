@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -8,6 +9,7 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void main(String[] args) {
+        ArrayList<String> lines = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello from\n" + Duke.logo);
         System.out.println("What can I do for you?");
@@ -18,9 +20,16 @@ public class Duke {
                 System.out.println("\tDuke:");
                 System.out.println("\tBye!");
                 return;
+            } else if (line.compareTo("list") == 0) {
+                System.out.println("\tDuke:");
+                for(int i = 0;i < lines.size();i++) {
+                    System.out.printf("\t%d. %s\n", i + 1, lines.get(i));
+                }
+            } else {
+                lines.add(line);
+                System.out.println("\tDuke:");
+                System.out.println("\tadded: " + line);
             }
-            System.out.println("\tDuke:");
-            System.out.println("\t" + line);
         }
     }
 }
