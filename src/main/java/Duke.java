@@ -87,6 +87,10 @@ public class Duke {
                         count++;
                         System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
                         break;
+                    case "delete":
+                        count--;
+                        itemList.remove(Integer.parseInt(input[1]));
+                        System.out.println("I have removed item " + input[1] + ".");
                     default:
                         throw new DukeNotFoundException();
                 }
