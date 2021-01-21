@@ -131,6 +131,43 @@ public class Duke {
     }
 
 
+    static void level6() throws DukeException {
+        List<Task> lst = new ArrayList<>();
+        lst.add(new ToDoTask("read book"));
+        lst.add(new DeadlineTask("return book", "June 6th"));
+        lst.add(new EventTask("project meeting", "Aug 6th 2-4pm"));
+        lst.add(new ToDoTask("join sports club"));
+        lst.add(new ToDoTask("borrow book"));
+        lst.get(0).markAsDone();
+        lst.get(1).markAsDone();
+        lst.get(3).markAsDone();
+
+        Scanner sc = new Scanner(System.in);
+        String input;
+        String[] inputArray;
+
+        while (sc.hasNextLine()) {
+            input = sc.nextLine();
+            inputArray = input.split(" ");
+            if (inputArray[0].equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 1; i <= lst.size(); i++) {
+                    System.out.println(i + "." + lst.get(i - 1));
+                }
+            } else if (inputArray[0].equals("delete")) { //deleting a task
+                if (inputArray.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The task number has not been specified.");
+                } else if (Integer.parseInt(inputArray[1]) > lst.size()) {
+                    throw new DukeException("☹ OOPS!!! This task number does not exist.");
+                }
+
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("  " + lst.get(Integer.parseInt(inputArray[1]) - 1));
+                lst.remove(Integer.parseInt(inputArray[1]) - 1);
+                System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            }
+        }
+    }
 
 
     public static void main(String[] args) {
@@ -143,7 +180,7 @@ public class Duke {
                     + "|____/ \\__,_|_|\\_\\___|\n";
             System.out.println("Hello from\n" + logo);
 
-            level4();
+            level6();
         } catch (DukeException e) {
             System.out.println(e);
         }
