@@ -1,83 +1,71 @@
+/**
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static List<Task> taskList;
-    private final static String PRINT_FORMAT = "\t%s%n";
-    
+    /**
+     * This methods prints horizontal line whenever it's called.
+     */
     private static void printHorizontalLine() {
         System.out.println("____________________________________________________________");
     }
 
-    private static void greetUser() {
+    /**
+     * This method greets the user upon execution.
+     */
+    private static void greetCommand() {
         printHorizontalLine();
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         printHorizontalLine();
     }
 
-    private static void echoCommand(String inputLine) throws DukeException {
+    /**
+     * This is the execution method, where the user's inputs are split up into arrays and processed accordingly.
+     * @param inputLine the inputs that user have typed in
+     * @param taskList the task list to be maintained
+     * @throws DukeException whenever the user typed in invalid command.
+     */
+    private static void echoCommand(String inputLine, List<Task> taskList) throws DukeException {
         String[] inputs = inputLine.split(" ");
         String command = inputs[0].toUpperCase();
         if (!DukeCommand.isContains(command)) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else {
-            DukeCommand inputDukeCommand = DukeCommand.valueOf(command);
+            DukeCommand dukeCommand = DukeCommand.valueOf(command);
             String[] actions = Arrays.copyOfRange(inputs, 1, inputs.length);
             String actionString = String.join(" ", actions);
-            inputDukeCommand.runCommand(actionString);
+            dukeCommand.runCommand(actionString, taskList);
         }
     }
 
-    public static void addCommand(Task newTask) {
-        taskList.add(newTask);
-
-        System.out.println("Got it. I've added this task:");
-        System.out.printf(PRINT_FORMAT, newTask.toString());
-        System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
-    }
-
-    public static void doneCommand(int index) {
-        Task selectedTask = taskList.get(index);
-        selectedTask.setDone();
-
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf(PRINT_FORMAT, selectedTask.toString());
-    }
-
-    public static void listCommand() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d.%s%n", i + 1, taskList.get(i).toString());
-        }
-    }
-
-    public static void deleteCommand(int index) {
-        Task selectedTask = taskList.get(index);
-        taskList.remove(selectedTask);
-
-        System.out.println("Noted. I've removed this task:");
-        System.out.printf(PRINT_FORMAT, selectedTask.toString());
-        System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
-    }
-
+    /**
+     * This method bids farewell to the user whenever the "bye" command is inputted.
+     */
     private static void exitCommand() {
         printHorizontalLine();
         System.out.println("Bye. Hope to see you again soon!");
         printHorizontalLine();
     }
 
+    /**
+     * This method automatically greets the user upon execution of the programme. It maintains the list of tasks and handles the capturing of inputs from users.
+     * It also handles the error handling.
+     */
     public static void main(String[] args) {
-        greetUser();
-        taskList = new ArrayList<>();
+        greetCommand();
+        List<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String command;
         while (!(command = sc.nextLine()).equals("bye")) {
             printHorizontalLine();
             try {
-                echoCommand(command);
+                echoCommand(command, taskList);
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             }
