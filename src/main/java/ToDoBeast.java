@@ -75,6 +75,18 @@ public class ToDoBeast {
         if ((command.equals("todo") || command.equals("deadline") || command.equals("event")) && userInput.length == 1) {
             throw new ToDoBeastException("OOPS :( !!! The description of a " + command + " cannot be empty.");
         }
+        else if (command.equals("deadline") || command.equals("event")) {
+            String[] testParams = userInput[1].split(" /");
+            if (testParams.length == 1) {
+                throw new ToDoBeastException("OOPS :( !!! Invalid format for time/date input.");
+            } else {
+                if (!testParams[1].startsWith("by") && command.equals("deadline")) {
+                    throw new ToDoBeastException("OOPS :( !!! Time/date input for deadlines should start with /by.");
+                } else if (!testParams[1].startsWith("at") && command.equals("event")) {
+                    throw new ToDoBeastException("OOPS :( !!! Time/date input for events should start with /at.");
+                }
+            }
+        }
         else if (command.equals("done") || command.equals("delete")) {
             if (userInput.length == 1) {
                 throw new ToDoBeastException("OOPS :( !!! The " + command + " command requires the index of the task to be processed.");
