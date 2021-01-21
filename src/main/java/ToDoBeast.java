@@ -23,21 +23,33 @@ public class ToDoBeast {
                     printTaskList(taskManager.getTaskList());
                 }
                 else if (command.equals("done")){
-                    Task currentTask = taskManager.getTask(sc.nextInt());
+                    Task currentTask = taskManager.getTask(Integer.parseInt(userInput[1]));
                     currentTask.setDone();
                     System.out.println(line + "\tGood job! You've just completed this task:\n" + "\t\t" + currentTask + "\n" + line);
+                }
+                else if (command.equals("delete")){
+                    int taskNumber = Integer.parseInt(userInput[1]);
+                    Task deletedTask = taskManager.getTask(taskNumber);
+                    taskManager.deleteTask(taskNumber);
+                    System.out.println(line + "\tGot it! I've removed this task for you:\n\t\t" + deletedTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
                 }
                 else {
                     Task newTask = null;
 
-                    if (command.equals("todo")) {
-                        newTask = new Todo(userInput[1]);
-                    } else if (command.equals("deadline")) {
-                        String[] deadlineParams = userInput[1].split(" /");
-                        newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
-                    } else if (command.equals("event")) {
-                        String[] deadlineParams = userInput[1].split(" /");
-                        newTask = new Event(deadlineParams[0], deadlineParams[1]);
+                    switch (command) {
+                        case "todo":
+                            newTask = new Todo(userInput[1]);
+                            break;
+                        case "deadline": {
+                            String[] deadlineParams = userInput[1].split(" /");
+                            newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                            break;
+                        }
+                        case "event": {
+                            String[] deadlineParams = userInput[1].split(" /");
+                            newTask = new Event(deadlineParams[0], deadlineParams[1]);
+                            break;
+                        }
                     }
                     taskManager.addTask(newTask);
                     System.out.println(line + "\tOne more task added to the hustle:\n\t\t" + newTask + "\n" + "\tYou now have " + taskManager.getNumOfTasks() + " tasks in total.\n" + line);
@@ -60,9 +72,9 @@ public class ToDoBeast {
 
     public void checkUserInput(String[] userInput) throws ToDoBeastException {
         String command = userInput[0];
-        if (command.equals("todo") || command.equals("deadline") || command.equals("event") && userInput.length == 1) {
+        if ((command.equals("todo") || command.equals("deadline") || command.equals("event")) && userInput.length == 1) {
             throw new ToDoBeastException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
-        } else if (!command.equals("bye") && !command.equals("list") && !command.equals("done")) {
+        } else if (!command.equals("bye") && !command.equals("list") && !command.equals("done") && !command.equals("todo") && !command.equals("deadline") && !command.equals("event") && !command.equals("delete")) {
             throw new ToDoBeastException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

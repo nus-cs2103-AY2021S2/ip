@@ -20,6 +20,10 @@ public class TaskManager {
         return taskList.size();
     }
 
+    public void deleteTask(int taskNumber) {
+        taskList.remove(taskNumber - 1);
+    }
+
     public List<Task> getTaskList() {
         return taskList;
     }
