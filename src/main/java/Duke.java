@@ -42,16 +42,22 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("INVALID COMMAND!");
                 }
-            } else if (textInput.startsWith("todo ")) {
-                textInput = textInput.substring(5);
-                Task task = new ToDo(textInput);
-                listOfTasks.add(task);
-                System.out.println("\t_____________________________________________________________");
-                System.out.println("\t Got it. I've added this task:");
-                System.out.println("\t   " + task);
-                System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                System.out.println("\t_____________________________________________________________");
-            } else if (textInput.startsWith("deadline ")) {
+            } else if (textInput.startsWith("todo")) {
+                try {
+                    textInput = textInput.substring(5);
+                    Task task = new ToDo(textInput);
+                    listOfTasks.add(task);
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t Got it. I've added this task:");
+                    System.out.println("\t   " + task);
+                    System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
+                    System.out.println("\t_____________________________________________________________");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t ☹ OOPS!!! The description of a todo cannot be empty.");
+                    System.out.println("\t_____________________________________________________________");
+                }
+            } else if (textInput.startsWith("deadline")) {
                 try {
                     textInput = textInput.substring(9);
                     int index = textInput.indexOf("/");
@@ -67,9 +73,11 @@ public class Duke {
                         System.out.println("INVALID COMMAND!");
                     }
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("INVALID COMMAND!");
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t ☹ OOPS!!! The description of a deadline cannot be empty.");
+                    System.out.println("\t_____________________________________________________________");
                 }
-            } else if (textInput.startsWith("event ")) {
+            } else if (textInput.startsWith("event")) {
                 try {
                     textInput = textInput.substring(6);
                     int index = textInput.indexOf("/");
@@ -85,10 +93,14 @@ public class Duke {
                         System.out.println("INVALID COMMAND!");
                     }
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("INVALID COMMAND!");
+                    System.out.println("\t_____________________________________________________________");
+                    System.out.println("\t ☹ OOPS!!! The description of a event cannot be empty.");
+                    System.out.println("\t_____________________________________________________________");
                 }
             } else {
-                System.out.println("INVALID COMMAND!");
+                System.out.println("\t_____________________________________________________________");
+                System.out.println("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("\t_____________________________________________________________");
             }
 
             textInput = read.nextLine();
