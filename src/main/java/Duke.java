@@ -54,7 +54,11 @@ public class Duke {
                         list[count] = new Deadline(name, time);
                     }
                     count++;
-                    System.out.println("Got it. I've added this task:\n  " + list[count-1] +"\nNow you have "+ count +" tasks in the list.\n");
+                    if(count == 1){
+                        System.out.println("Got it. I've added this task:\n  " + list[count - 1] + "\nNow you have " + count + " task in the list.\n");
+                    }else {
+                        System.out.println("Got it. I've added this task:\n  " + list[count - 1] + "\nNow you have " + count + " tasks in the list.\n");
+                    }
                     str = sc.nextLine();
                 }
             }
