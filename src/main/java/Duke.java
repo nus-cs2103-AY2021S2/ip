@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
-        Task[] list = new Task[100];
+        List<Task> list = new ArrayList<>();
+        //Task[] list = new Task[100];
         int numitems = 0;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -33,41 +36,41 @@ public class Duke {
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list!");
                 for (int i = 0; i < numitems; i++) {
-                    System.out.println(i+1 + "." + list[i]);
+                    System.out.println(i+1 + "." + list.get(i));
 
                 }
 
             } else if (mdone.find()) {
                 System.out.println("Good job, I've marked the task as done!");
                 int n = Integer.parseInt(mdone.group(2)) - 1;
-                list[n].markAsDone();
-                System.out.println(list[n]);
+                list.get(n).markAsDone();
+                System.out.println(list.get(n));
             } else if (mtodo.find()) {
                 System.out.println(mtodo.group(2));
                 if (mtodo.group(2).equals("")) {
                     throw new DukeException("The description of a Todo cannot be empty!");
                 }
-                list[numitems] = new Todo(mtodo.group(2));
+                list.add(numitems, new Todo(mtodo.group(2)));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list[numitems]);
+                System.out.println(list.get(numitems));
                 numitems += 1;
                 System.out.println("Now you have " + numitems + " tasks in the list.");
             } else if (mdl.find()) {
                 if (mdl.group(2).equals("")) {
                     throw new DukeException("The description of a Deadline cannot be empty!");
                 }
-                list[numitems] = new Deadline(mdl.group(2), mdl.group(4));
+                list.add(numitems, new Deadline(mdl.group(2), mdl.group(4)));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list[numitems]);
+                System.out.println(list.get(numitems));
                 numitems += 1;
                 System.out.println("Now you have " + numitems + " tasks in the list.");
             } else if (mev.find()) {
                 if (mev.group(2).equals("")) {
                     throw new DukeException("The description of an Event cannot be empty!");
                 }
-                list[numitems] = new Event(mev.group(2), mev.group(4));
+                list.add(numitems, new Event(mev.group(2), mev.group(4)));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list[numitems]);
+                System.out.println(list.get(numitems));
                 numitems += 1;
                 System.out.println("Now you have " + numitems + " tasks in the list.");
             } else {
