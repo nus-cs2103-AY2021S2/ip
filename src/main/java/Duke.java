@@ -15,7 +15,11 @@ public class Duke {
         loop();
     }
 
-
+    private static class DukeException extends Exception {
+        public DukeException(String errorMessage) {
+            super(errorMessage);
+        }
+    }
 
 
     public static void dukePrint(String s) {
@@ -57,25 +61,36 @@ public class Duke {
                 }
             } else if (s.matches("deadline .+?( /by ).*")) {
                 s = s.replaceAll("deadline ","");
-                String[] deadlineInfo = s.split(" /by ",-1);
-                Deadline t = new Deadline(deadlineInfo[0],deadlineInfo[1]);
-                myList.add(t);
-                dukePrint("added new deadline: " + t);
+                String[] deadlineInfo = s.split(" /by ");
+                try {
+                    Deadline t = new Deadline(deadlineInfo[0],deadlineInfo[1]);
+                    myList.add(t);
+                    dukePrint("added new deadline: " + t);
+                }
+                catch (Exception e) {
+                    dukePrint("Deadline must have something after \" /by \"!");
+                }
             } else if (s.matches("event .+?( /at ).*")) {
                 s = s.replaceAll("event ","");
-                String[] eventInfo = s.split(" /at ",-1);
-                Event t = new Event(eventInfo[0],eventInfo[1]);
-                myList.add(t);
-                dukePrint("added new event: " + t);
+                String[] eventInfo = s.split(" /at ");
+                try {
+                    Event t = new Event(eventInfo[0],eventInfo[1]);
+                    myList.add(t);
+                    dukePrint("added new event: " + t);
+                }
+                catch (Exception e) {
+                    dukePrint("Event must have something after \" /at \"!");
+                }
             } else if (s.matches("todo .*")) {
                 s = s.replaceAll("todo ","");
                 Todo t = new Todo(s);
                 myList.add(t);
                 dukePrint("added new todo: " + t);
             } else {
-                Task t = new Task(s);
-                myList.add(t);
-                dukePrint("added task: " + t);
+//                throw new DukeException("I don't get it");
+//                Task t = new Task(s);
+//                myList.add(t);
+                dukePrint("Please use todo, deadline, or event!");
             }
         }
     }
