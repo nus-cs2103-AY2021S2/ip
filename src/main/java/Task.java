@@ -7,10 +7,6 @@ public class Task {
         this.status = "undone";
     }
 
-    public String getTitle() {
-        return this.title;
-    }
-
     public boolean isDone() {
         return status.equals("done");
     }
