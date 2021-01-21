@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Duke {
     public static void main(String[] args) {
-        String[] tasks = new String[100];
+        Task[] tasks = new Task[100];
         Scanner in = new Scanner(System.in);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Hello! I'm Duke");
@@ -15,10 +15,11 @@ public class Duke {
         while(!commands.equals("bye")) {
             if(commands.equals("list")) {
                 System.out.println("    ____________________________________________________________");
+                System.out.println("    Here are the tasks in your list:");
                 int count = 1;
-                for(String s : tasks) {
+                for(Task s : tasks) {
                     if(s != null) {
-                        System.out.println(count + ". " + s);
+                        System.out.println("    " + count + ". " + s.toString());
                         count++;
                     } else {
                         break;
@@ -26,10 +27,17 @@ public class Duke {
 
                 }
                 System.out.println("    ____________________________________________________________");
+            } else if(commands.split(" ")[0].equals("done")) {
+                int n = Integer.parseInt(commands.split(" ")[1]);
+                tasks[n-1].markAsDone();
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     Nice! I've marked this task as done: ");
+                System.out.println("    " + tasks[n-1].toString());
+                System.out.println("    ____________________________________________________________");
             } else {
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     added: " +commands);
-                tasks[taskCount] = commands;
+                tasks[taskCount] = new Task(taskCount+1, false, commands);
                 taskCount++;
                 System.out.println("    ____________________________________________________________");
             }
@@ -42,3 +50,5 @@ public class Duke {
 
     }
 }
+
+
