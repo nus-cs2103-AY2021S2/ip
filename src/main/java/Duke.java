@@ -29,6 +29,13 @@ public class Duke {
                 d.markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(d);
+            } else if (input.equals("delete")) {
+                int tag = sc.nextInt() - 1;
+                int len = lst.size() - 1;
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("\t" + lst.get(tag));
+                System.out.println("Now you have " + len + " tasks in the list.");
+                lst.remove(tag);
             } else if (input.equals("todo")) {
                 String task = sc.nextLine();
                 try {
