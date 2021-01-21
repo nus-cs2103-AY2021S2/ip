@@ -10,4 +10,9 @@ done 3
 list
 done 4
 list
+done 9
+todo
+deadline /by tomorrow
+event /by now
+list
 bye

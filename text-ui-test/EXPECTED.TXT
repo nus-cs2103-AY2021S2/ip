@@ -39,5 +39,18 @@ How may I help you?
 3. [E][X] bro's wedding (at: summer vacation)
 4. [T][X] drink coffee
 
+>>> Sorry! The command's format is invalid.
+
+>>> Sorry! 'todo' requires typing a description of the task.
+
+>>> Sorry! The command's format is invalid.
+
+>>> Sorry! The command's format is invalid.
+
+>>> 1. [T][X] make coffee
+2. [D][X] this project (by: midnight)
+3. [E][X] bro's wedding (at: summer vacation)
+4. [T][X] drink coffee
+
 >>> Bye. See you soon!
 
