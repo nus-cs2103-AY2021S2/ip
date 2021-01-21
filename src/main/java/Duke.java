@@ -6,20 +6,33 @@ import java.util.regex.Pattern;
 
 public class Duke {
 
+    private static final String indent = "         ";
+    private static final String horizSep = indent + "________________________________________________";
 
+    private static void logMessage(DukeCommand command, String message, Integer numTasks, Task relevantTask) {
+        if (command == DukeCommand.BYE || command == DukeCommand.WELCOME) {
+            System.out.println(horizSep + "\n" + message + horizSep + "\n");
+        } else if (command == DukeCommand.ADD_TASK) {
+            System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
+            System.out.println(indent + "   " + relevantTask);
+            System.out.println(indent + " Now you have " + numTasks + " tasks in the list.");
+            System.out.println(horizSep + "\n");
+        } else if (command == DukeCommand.DELETE_TASK) {
+            System.out.println(horizSep + "\n" +  indent + " Noted. I've removed this task ");
+            System.out.println(indent + "   " + relevantTask);
+            System.out.println(indent + " Now you have " + numTasks + " tasks in the list.");
+            System.out.println(horizSep + "\n");
+        } else if (command == DukeCommand.DONE) {
+            System.out.println(horizSep + "\n" + indent + " Nice! I've marked this task as done:");
+            System.out.println(indent + "   " + relevantTask);
+            System.out.println(horizSep + "\n");
+        }
+    }
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+
         List<Task> taskList = new ArrayList<>();
 
-
-        String indent = "         ";
-        String horizSep = indent + "________________________________________________";
 
         String greeting = indent + " Hello! I'm Duke\n" + indent + " What can I do for you?\n";
         String farewell = indent + " Bye. Hope to see you again soon!\n";
@@ -27,21 +40,20 @@ public class Duke {
 
 
 
-        System.out.println(horizSep + "\n" + greeting + horizSep + "\n");
 
+        logMessage(DukeCommand.WELCOME, greeting, 0, null);
 
         while (sc.hasNextLine()) {
 
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
-//            System.out.println("params: " + Arrays.toString(params));
-//            System.out.println(params.length);
+
 
             try {
 
                 if (next.equals("bye")) {
 
-                    System.out.println(horizSep + "\n" + farewell + horizSep + "\n");
+                    logMessage(DukeCommand.BYE, farewell, 0, null);
                     sc.close();
                     return;
 
@@ -55,10 +67,7 @@ public class Duke {
                         }
 
                         Task removedTask = taskList.remove(Integer.parseInt(params[1]) - 1);
-                        System.out.println(horizSep + "\n" +  indent + " Noted. I've removed this task ");
-                        System.out.println(indent + "   " + removedTask);
-                        System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
-                        System.out.println(horizSep + "\n");
+                        logMessage(DukeCommand.DELETE_TASK, "", taskList.size(), removedTask);
 
                     } catch (Exception err) {
                         throw new DukeException(err.getMessage());
@@ -88,10 +97,10 @@ public class Duke {
                     }
 
                     taskList.set(index, taskList.get(index).markAsDone());
-                    System.out.println(horizSep + "\n" + indent + " Nice! I've marked this task as done:");
+
                     Task curr = taskList.get(index);
-                    System.out.println(indent + "   " + curr);
-                    System.out.println(horizSep + "\n");
+                    logMessage(DukeCommand.DONE, "", 0, curr);
+
 
                 } else if (params[0].equals("todo")) {
                     if (params.length == 1) {
@@ -100,10 +109,7 @@ public class Duke {
 
                     Todo newTask = new Todo(params[1]);
                     taskList.add(newTask);
-                    System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
-                    System.out.println(indent + "   " + newTask);
-                    System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
-                    System.out.println(horizSep + "\n");
+                    logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
 
                 } else if (params[0].equals("deadline")) {
@@ -122,10 +128,7 @@ public class Duke {
 
                     Deadline newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
                     taskList.add(newTask);
-                    System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
-                    System.out.println(indent + "   " + newTask);
-                    System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
-                    System.out.println(horizSep + "\n");
+                    logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
                 } else if (params[0].equals("event")) {
 
@@ -154,10 +157,7 @@ public class Duke {
 
                     Event newTask = new Event(eventParams[0], eventParams[1]);
                     taskList.add(newTask);
-                    System.out.println(horizSep + "\n" +  indent + " Got it. I've added this task: ");
-                    System.out.println(indent + "   " + newTask);
-                    System.out.println(indent + " Now you have " + taskList.size() + " tasks in the list.");
-                    System.out.println(horizSep + "\n");
+                    logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
@@ -170,7 +170,7 @@ public class Duke {
                 System.out.println(horizSep + "\n");
             }
 
-            
+
         }
 
     }
