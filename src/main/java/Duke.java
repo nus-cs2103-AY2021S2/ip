@@ -13,7 +13,14 @@ public class Duke {
         // Print greeting
         printGreeting();
 
-        // Get user input
+        // Run infinite loop asking for user command until user enter exit command
+        runLoop();
+
+        // Print exit message
+        printExitMessage();
+    }
+    
+    private void runLoop() {
         while (isOnline()) {
             try {
                 printHorizontalLine();
@@ -25,9 +32,6 @@ public class Duke {
                 System.out.println(ex.getMessage());
             }
         }
-
-        // Print exit message
-        printExitMessage();
     }
     
     private boolean isOnline() {
@@ -82,6 +86,9 @@ public class Duke {
                     break;
                 case DELETE:
                     deleteTask(arguments);
+                    break;
+                case HELP:
+                    printHelp();
                     break;
             }
         } catch (NoDescriptionException | InvalidDescriptionException ex) {
@@ -193,5 +200,24 @@ public class Duke {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.toString());
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
+    }
+    
+    private void printHelp() {
+        System.out.println("Here are the list of available commands:");
+        System.out.println("BYE:\nExit the program\nUsage: 'bye'");
+        System.out.println();
+        System.out.println("LIST:\nPrint the list of current tasks\nUsage: 'list'");
+        System.out.println();
+        System.out.println("DONE:\nMark a task as completed\nUsage: 'done <task_number>'");
+        System.out.println();
+        System.out.println("DELETE:\nDelete a task\nUsage: 'delete <task_number>'");
+        System.out.println();
+        System.out.println("TODO:\nAdd a todo task\nUsage: 'todo <task_description>'");
+        System.out.println();
+        System.out.println("DEADLINE:\nAdd a deadline task\nUsage: 'deadline <task_description> /by <deadline>'");
+        System.out.println();
+        System.out.println("EVENT:\nAdd an event task\nUsage: 'event <task_description> /at <event_time>'");
+        System.out.println();
+        System.out.println("HELP:\nPrint available commands\nUsage: 'help'");
     }
 }
