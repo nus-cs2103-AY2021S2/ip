@@ -54,13 +54,10 @@ public class Duke {
                 String[] spiltInput = input.split("\\s+");
                 int taskNumber = Integer.parseInt(spiltInput[1]);
                 markDone(taskNumber);
-<<<<<<< HEAD
             } else if (input.startsWith("delete")) {
                 String[] spiltInput = input.split("\\s+");
                 int taskNumber = Integer.parseInt(spiltInput[1]);
                 deleteTask(taskNumber);
-=======
->>>>>>> 2835f6e5335c3a96edc50fb9a237ba12e064823c
             } else if (input.startsWith("event")) {
                 String[] spiltInput = input.split("\\s+");
                 String time = "";
@@ -130,12 +127,7 @@ public class Duke {
             } else if (input.equals("list")) {
                 listTask();
             } else {
-<<<<<<< HEAD
                 throw new InvalidArgument("Your input is invalid, Please try again");
-=======
-                //addTask(input);
-                System.out.println("End");
->>>>>>> 2835f6e5335c3a96edc50fb9a237ba12e064823c
             }
         }
     }
