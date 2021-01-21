@@ -53,11 +53,14 @@ public class Duke {
                         System.out.println(line + " Enter 'done' followed by a number between " +
                                 "1 and " + tasks.size() + "\n" + line);
                     }
-                } else if (split[0].equals("todo") || split[0].equals("deadline")) {
+                } else if (split[0].equals("todo") || split[0].equals("deadline")
+                        || split[0].equals("event")) {
                     if(split[0].equals("todo")) {
                         tasks.add(new Todo(rest));
-                    } else {
+                    } else if (split[0].equals("deadline")) {
                         tasks.add(new Deadline(rest));
+                    } else {
+                        tasks.add(new Event(rest));
                     }
                     System.out.println(line + " Got it. I've added this task:\n" +
                             " " +tasks.get(tasks.size()-1) + "\n" + " Now you have "
