@@ -5,6 +5,16 @@
  * with updated internal state.
  */
 public class Owen implements Chatbot {
+    private enum Command {
+        TODO,
+        EVENT,
+        DEADLINE,
+        LIST,
+        DONE,
+        DELETE,
+        BYE,
+    }
+
     private final boolean isRunning;
     private final Response latestResponse;
     private final TaskList taskList;
@@ -53,27 +63,35 @@ public class Owen implements Chatbot {
     @Override
     public Owen parseCommand(String command) {
         String[] splitCommand = command.split(" ", 2);
-        String parsedCommand = splitCommand[0];
+        String parsedCommandString = splitCommand[0];
 
         try {
+            // Try converting command to enum
+            Command parsedCommand;
+            try {
+                parsedCommand = Command.valueOf(parsedCommandString.toUpperCase());
+            } catch (IllegalArgumentException exception) {
+                throw new OwenException("I'm sorry, but I don't know what that means...");
+            }
+
             switch (parsedCommand) {
-            case "todo":
-            case "event":
-            case "deadline":
+            case TODO:
+            case EVENT:
+            case DEADLINE:
                 return this.addTask(command);
-            case "list":
+            case LIST:
                 return this.listTasks();
-            case "done":
+            case DONE:
                 if (splitCommand.length < 2) {
                     throw new OwenException("Task number must be specified...");
                 }
                 return this.doneTask(this.parseTaskNumber(splitCommand[1]));
-            case "delete":
+            case DELETE:
                 if (splitCommand.length < 2) {
                     throw new OwenException("Task number must be specified...");
                 }
                 return this.deleteTask(this.parseTaskNumber(splitCommand[1]));
-            case "bye":
+            case BYE:
                 return this.shutdown();
             default:
                 throw new OwenException("I'm sorry, but I don't know what that means...");

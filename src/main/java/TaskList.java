@@ -5,6 +5,12 @@ import java.util.ArrayList;
  * A list that keeps track of tasks.
  */
 public class TaskList {
+    private enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE,
+    }
+
     private final List<Task> taskList;
 
     public TaskList() {
@@ -30,8 +36,15 @@ public class TaskList {
      */
     public TaskList addTask(String task) throws OwenException {
         String[] taskSplit = task.split(" ", 2);
-        String taskType = taskSplit[0];
-        
+        String taskTypeString = taskSplit[0];
+
+        TaskType taskType;
+        try {
+            taskType = TaskType.valueOf(taskTypeString.toUpperCase());
+        } catch (IllegalArgumentException exception) {
+            throw new OwenException("Unknown task type...");
+        }
+
         String taskArgs;
         if (taskSplit.length > 1) {
             taskArgs = taskSplit[1];
@@ -40,15 +53,14 @@ public class TaskList {
         }
 
         Task newTask;
-
         switch (taskType) {
-        case "todo":
+        case TODO:
             newTask = new TodoTask(taskArgs);
             break;
-        case "event":
+        case EVENT:
             newTask = new EventTask(taskArgs);
             break;
-        case "deadline":
+        case DEADLINE:
             newTask = new DeadlineTask(taskArgs);
             break;
         default:
