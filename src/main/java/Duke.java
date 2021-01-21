@@ -2,7 +2,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    static ArrayList<Task> list = new ArrayList<Task>();
+    private static ArrayList<Task> list = new ArrayList<Task>();
+    private static final String horizontalLine = "____________________________________________________________";
 
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
@@ -20,6 +21,7 @@ public class Duke {
             String text = sc.nextLine();
             if (text.equals("bye")) {
                 System.out.println("Bye. Till next time!");
+                System.out.println(horizontalLine);
                 break;
             }
             else if (text.equals("list")) {
@@ -29,10 +31,12 @@ public class Duke {
                     System.out.println(String.format("%d. %s", num, task));
                     num++;
                 }
+                System.out.println(horizontalLine);
             }
             else if (text.split(" ")[0].equals("done")) {
                 int num = Integer.parseInt(text.split(" ")[1]);
                 list.get(num-1).done();
+                System.out.println(horizontalLine);
             }
             else if (text.split(" ")[0].equals("todo")) {
                 Task todo = new Todo(text.substring(text.indexOf(" ")+1));
@@ -56,5 +60,6 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println(horizontalLine);
     }
 }
