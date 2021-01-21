@@ -15,7 +15,7 @@ public class Duke {
 
         System.out.println(topBound + logo + "\nHello! I'm Duke\n" + "What can I do for you?\n" + bottomBound);
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] arr = input.split("/");
             if (input.equals("bye")) {
