@@ -19,6 +19,7 @@ public class Duke {
                 "____________________________________________________________");
         while (true) {
             String text = sc.nextLine();
+            String[] words = text.split(" ");
             if (text.equals("bye")) {
                 System.out.println("Bye. Till next time!");
                 System.out.println(horizontalLine);
@@ -33,33 +34,64 @@ public class Duke {
                 }
                 System.out.println(horizontalLine);
             }
-            else if (text.split(" ")[0].equals("done")) {
+            else if (words[0].equals("done")) {
                 int num = Integer.parseInt(text.split(" ")[1]);
                 list.get(num-1).done();
                 System.out.println(horizontalLine);
             }
-            else if (text.split(" ")[0].equals("todo")) {
-                Task todo = new Todo(text.substring(text.indexOf(" ")+1));
-                addAndPrintTask(todo);
+            else if (words[0].equals("todo")) {
+                try {
+                    emptyDesc(words);
+                    Task todo = new Todo(text.substring(text.indexOf(" ") + 1));
+                    addAndPrintTask(todo);
+                }
+                catch (DukeException e){
+                    System.err.println("☹ OOPS!!! The description of a todo cannot be empty.\n" + horizontalLine);
+                }
             }
-            else if (text.split(" ")[0].equals("deadline")) {
-                Task deadline = new Deadline(text.substring(text.indexOf(" ")+1, text.indexOf("/")-1), text.substring(text.indexOf("/")+4));
-                addAndPrintTask(deadline);
+            else if (words[0].equals("deadline")) {
+                try {
+                    emptyDesc(words);
+                    Task deadline = new Deadline(text.substring(text.indexOf(" ") + 1, text.indexOf("/") - 1), text.substring(text.indexOf("/") + 4));
+                    addAndPrintTask(deadline);
+                }
+                catch (DukeException e){
+                    System.err.println("☹ OOPS!!! The description of a deadline cannot be empty.\n" + horizontalLine);
+                }
             }
-            else if (text.split(" ")[0].equals("event")) {
-                Task event = new Event(text.substring(text.indexOf(" ")+1, text.indexOf("/")-1), text.substring(text.indexOf("/")+4));
-                addAndPrintTask(event);
+            else if (words[0].equals("event")) {
+                try {
+                    emptyDesc(words);
+                    Task event = new Event(text.substring(text.indexOf(" ") + 1, text.indexOf("/") - 1), text.substring(text.indexOf("/") + 4));
+                    addAndPrintTask(event);
+                }
+                catch (DukeException e){
+                    System.err.println("☹ OOPS!!! The description of an event cannot be empty.\n" + horizontalLine);
+                }
             }
-            else {}
+            else {
+                try {
+                    throw new DukeException();
+                }
+                catch (DukeException e){
+                    System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + horizontalLine);
+                }
+            }
         }
         sc.close();
     }
 
-    public static void addAndPrintTask(Task task) {
+    private static void addAndPrintTask(Task task) {
         list.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
         System.out.println(horizontalLine);
+    }
+
+    private static void emptyDesc(String[] words) throws DukeException {
+        if (words.length == 1) {
+            throw new DukeException();
+        }
     }
 }
