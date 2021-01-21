@@ -3,17 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public static String h_rule = "────────────────────────────────────────────────────────────────────";
 
-        String h_rule = "────────────────────────────────────────────────────────────────────";
-        System.out.println("Greetings! I am Duke! How may I assist you?\n" + h_rule);
-
+    public static int dukeRunner() throws DukeNotFoundException, DukeDescriptionException, DukeTimingException {
         Scanner sc = new Scanner(System.in);
 
         String raw_in;
@@ -57,6 +49,13 @@ public class Duke {
                         while (!input[seq].equals("/by")) {
                             joined = joined + " " + input[seq];
                             seq++;
+                            if (seq == input.length) {
+                                throw new DukeDescriptionException(input[0]);
+                            }
+                        }
+
+                        if (seq + 1 == input.length) {
+                            throw new DukeTimingException(input[0]);
                         }
 
                         for (int i = seq + 1; i < input.length; i++) {
@@ -72,7 +71,15 @@ public class Duke {
                         while (!input[seq2].equals("/at")) {
                             joined = joined + " " + input[seq2];
                             seq2++;
+                            if (seq2 == input.length) {
+                                throw new DukeDescriptionException(input[0]);
+                            }
                         }
+
+                        if (seq2 + 1 == input.length) {
+                            throw new DukeTimingException(input[0]);
+                        }
+
                         for (int i = seq2 + 1; i < input.length; i++) {
                             timing = timing + " " + input[i];
                         }
@@ -80,10 +87,34 @@ public class Duke {
                         count++;
                         System.out.println("Added " + joined + "\nYou now have " + count + " items in your list.");
                         break;
+                    default:
+                        throw new DukeNotFoundException();
                 }
             }
             System.out.println(h_rule);
         }
         sc.close();
+        return 0;
+    }
+
+    public static void main(String[] args) {
+
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
+        System.out.println("Greetings! I am Duke! How may I assist you?\n" + h_rule);
+        int res = -1;
+
+        while (res != 0) {
+            try {
+                res = dukeRunner();
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
+        }
     }
 }
