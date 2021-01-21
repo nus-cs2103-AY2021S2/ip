@@ -7,9 +7,19 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Duke bot = new Duke();
         bot.greet();
+        for (int i = 0; i < 50; i++) {
+            pw.print('\u2500');
+        }
+        pw.println();
+        pw.flush();
         Parser parser = new Parser();
+        int count = 0;
 
         while(true) {
+            if(count > 0) {
+                pw.println("Anything else?");
+                pw.flush();
+            }
             String string = br.readLine();
             try {
                 parser.processInput(string, bot);
@@ -34,6 +44,9 @@ public class Main {
                 bot.exit();
                 break;
             }
+            count++;
+            pw.println();
+            pw.flush();
         }
         pw.close();
     }
