@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 public class Duke {
 
@@ -8,7 +10,12 @@ public class Duke {
 		this.store.add(t);
 	}
 
-	public void printTask(String input) {
+	public void printTask(String input) throws DukeException {
+		if (input.contains("todo") || input.contains("deadline") || input.contains("event)")) {
+       		if (input.split(" ").length == 1) {
+       			throw new EmptyException();
+       		}
+       	}
 		if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
         } else if (input.equals("list")) {
@@ -17,7 +24,7 @@ public class Duke {
        			System.out.println(counter + ". " + elem.toString());
       			counter += 1;
        		}
-		} else if (!input.contains("done")) {
+       	} else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
 			Task t;
 			if (input.contains("todo")) {
 				t = new Todo(input.split("todo ")[1]);
@@ -35,6 +42,8 @@ public class Duke {
 		} else if (input.contains("done")) {
 			int num = Integer.valueOf(input.split(" ")[1]);
 			this.store.get(num -1).markAsDone();
+		} else {
+			throw new KeywordException();
 		}
 	}
 
@@ -54,7 +63,12 @@ public class Duke {
         String input = sc.nextLine();
         
         while (!(input.equals("bye"))) {
-        	this.printTask(input);
+        	//this.printTask(input);
+        	try {
+        		this.printTask(input);
+        	} catch (DukeException err) {
+        		System.out.println(err.getMessage());
+        	}
 	        sc = new Scanner(System.in);
 	        input = sc.nextLine();
         }
