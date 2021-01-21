@@ -29,10 +29,13 @@ public class Duke {
     private static void displayPrompts() {
         String promptMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                                 + "List of recognised user prompts:\n"
-                                    + "  1. todo - adds a todo (E.g. todo borrow book)\n"
-                                        + "  2. deadline - adds a deadline (E.g. deadline return book /by Sunday\n"
-                                            + "  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)\n"
-                                                + "  4. list - displays the list of tasks\n" + "  5. bye - terminates Duke ☹";
+                                + "  1. todo - adds a todo (E.g. todo borrow book)\n"
+                                + "  2. deadline - adds a deadline (E.g. deadline return book /by Sunday\n"
+                                + "  3. event - adds an event (E.g. event project meeting /at Mon 2-4pm)\n"
+                                + "  4. delete - removes a task from the lists of task\n"
+                                + "  5. list - displays the list of tasks\n"
+                                + "  6. bye - terminates Duke ☹";
+
         replyFormat(promptMessage);
     }
 
@@ -119,14 +122,38 @@ public class Duke {
     }
 
     // Marks a task as done and informs the user about it
-    private static void completeTask(int taskNo) throws DukeException {
-        if (taskNo > 0 & taskNo <= tasksList.size()) {
-            Task taskToComplete = tasksList.get(taskNo - 1);
-            taskToComplete.markAsDone();
-            String doneMessage = "Nice! I've marked this task as done:\n" + "  " + taskToComplete;
-            replyFormat(doneMessage);
-        } else {
-            throw new DukeException("Task " + taskNo + " is not in the task list!");
+    private static void completeTask(String promptDescription) throws DukeException {
+        try {
+            int taskNo = Integer.valueOf(promptDescription);
+            if (taskNo > 0 && taskNo <= tasksList.size()) {
+                Task taskToComplete = tasksList.get(taskNo - 1);
+                taskToComplete.markAsDone();
+                String doneMessage = "Nice! I've marked this task as done:\n" + "  " + taskToComplete;
+                replyFormat(doneMessage);
+            } else {
+                throw new DukeException("Task " + taskNo + " is not in the task list!");
+            }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Please specify a task number. (E.g. done 2)");
+        }
+    }
+
+    // Deletes a task from the taskList
+    private static void deleteTask(String promptDescription) throws DukeException {
+        try {
+            int taskNo = Integer.valueOf(promptDescription);
+            if (taskNo > 0 && taskNo <= tasksList.size()) {
+                counter--;
+                Task taskToDelete = tasksList.get(taskNo - 1);
+                String deletedMessage = "Noted. I've removed this task:\n" + "  " + taskToDelete + "\n"
+                                                        + "Now you have " + counter + " tasks in the list";
+                tasksList.remove(taskNo - 1);
+                replyFormat(deletedMessage);
+            } else {
+                throw new DukeException("Task " + taskNo + " is not in the task list!");
+            }
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("☹ OOPS!!! Please specify a task number. (E.g. delete 2)");
         }
     }
 
@@ -140,7 +167,7 @@ public class Duke {
 
             for (int i = 1; i <= tasksList.size(); i++) {
                 Task currentTask = tasksList.get(i - 1);
-                System.out.println(i + ". " + currentTask);
+                System.out.println("  " + i + ". " + currentTask);
             }
 
             System.out.println(separator + "\n");
@@ -168,7 +195,9 @@ public class Duke {
                 if (prompt.equals("list")) {
                     displayTasks(tasksList);
                 } else if (prompt.equals("done")) {
-                    completeTask(Integer.valueOf(inputArray[1]));
+                    completeTask(promptDescription);
+                } else if (prompt.equals("delete")) {
+                    deleteTask(promptDescription);
                 } else if (prompt.equals("todo")) {
                     taskType = TaskType.TODO;
                     addTask(promptDescription);
