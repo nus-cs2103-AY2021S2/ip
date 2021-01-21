@@ -11,5 +11,10 @@ booga booga
 /by
 list
 done 4
+done 6
+done
+todo 
+deadline
+event 
 list
 bye
