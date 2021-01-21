@@ -57,11 +57,48 @@ public class DukeBot {
         return command == Command.END;
     }
 
+    /**
+     * Identifies the appropriate Task for a given user input and returns an instance.
+     *
+     * @param input User input string
+     * @return A Task corresponding to an appropriate subclass instance of task
+     */
+    public static Task identifyAndCreateTask(String input) {
+        String[] inputArr = input.split("\\s", 2);
+        String taskType = inputArr[0].toLowerCase();
+        String restOfInput = inputArr.length > 1 ? inputArr[1] : null;
+
+        Task task;
+
+        switch (taskType) {
+            case "todo":
+                task = new ToDo(restOfInput);
+                break;
+            case "deadline":
+                String[] deadlineArr = restOfInput.split("\\s+/by\\s+", 2);
+                task = new Deadline(deadlineArr[0], deadlineArr[1]);
+                break;
+            case "event":
+                String[] eventArr = restOfInput.split("\\s+/at\\s+", 2);
+                task = new Event(eventArr[0], eventArr[1]);
+                break;
+            default:
+                task = new Task(input);
+        }
+        task.printInstantiationText();
+        return task;
+    }
+
     // ########## Instance methods ##########
 
     /**
      * Activates the chat-bot so that it keeps taking inputs from the user via System.in
      * until the "bye" input is given.
+     *
+     * Additionally, dispatches the user input into one of three channels:
+     * 1. Terminate command
+     * 2. Non-terminate command
+     * 3. New tasking
      */
     public void run() {
         while (true) {
@@ -75,7 +112,7 @@ public class DukeBot {
                 this.handleCommand(input);
             } else {
                 // Not a command at all -> Add new task
-                this.list.add(new Task(input));
+                this.list.add(DukeBot.identifyAndCreateTask(input));
             }
         }
         this.scanner.close();
