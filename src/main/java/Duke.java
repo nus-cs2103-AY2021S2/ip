@@ -15,6 +15,8 @@ public class Duke {
         System.out.println("    ____________________________________");
 
         Scanner sc = new Scanner(System.in);
+        String[] list = new String[100];
+        int currIndex = 0;
 
         while (sc.hasNext()) {
             String command = sc.nextLine();
@@ -25,10 +27,17 @@ public class Duke {
                 System.out.println("    Bye. Hope to see you again soon!");
                 System.out.println("    ____________________________________");
                 break;
+            } else if (command.equals("list")) {
+                for (int i = 1; i <= currIndex; i++) {
+                    System.out.printf("    %d. %s\n",i, list[i - 1]);
+                }
             } else {
-                System.out.println("    " + command);
-                System.out.println("    ____________________________________");
+                list[currIndex] = command;
+                System.out.println("    added: " + command);
+                currIndex++;
             }
+
+            System.out.println("    ____________________________________");
         }
         
         sc.close();
