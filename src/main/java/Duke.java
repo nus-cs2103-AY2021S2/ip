@@ -35,7 +35,7 @@ public class Duke {
                     ToDo nextToDo = new ToDo(sc.nextLine());
                     taskList.add(nextToDo);
                     System.out.println("    ____________________________________________________________\n" +
-                            "     Got it. I've added this task: \n");
+                            "     Got it. I've added this task:\n");
                     System.out.println("       " + nextToDo + "\n" +
                             "     Now you have " + taskList.size() + " tasks in the list.");
                     System.out.println("    ____________________________________________________________");
@@ -48,7 +48,7 @@ public class Duke {
                         Deadline nextDeadLine = new Deadline(deadLineArgs[0], deadLineArgs[1]);
                         taskList.add(nextDeadLine);
                         System.out.println("    ____________________________________________________________\n" +
-                                "     Got it. I've added this task: \n");
+                                "     Got it. I've added this task:\n");
                         System.out.println("       " + nextDeadLine + "\n" +
                                 "     Now you have " + taskList.size() + " tasks in the list.");
                         System.out.println("    ____________________________________________________________");
@@ -66,7 +66,7 @@ public class Duke {
                         Event nextEvent = new Event(eventArgs[0], eventArgs[1]);
                         taskList.add(nextEvent);
                         System.out.println("    ____________________________________________________________\n" +
-                                "     Got it. I've added this task: \n");
+                                "     Got it. I've added this task:\n");
                         System.out.println("       " + nextEvent + "\n" +
                                 "     Now you have " + taskList.size() + " tasks in the list.");
                         System.out.println("    ____________________________________________________________");
