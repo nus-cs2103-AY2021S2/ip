@@ -44,6 +44,7 @@ public class Duke {
 
                 input = reader.nextLine();
 
+            // user wants to add a ToDo task
             } else if (input.startsWith("todo")) {
                 String[] split = input.split(" ");
                 String task = "";
@@ -56,6 +57,84 @@ public class Duke {
                 }
 
                 ToDo toAdd = new ToDo(task);
+                taskArrayList.add(toAdd);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(toAdd.taskStatus());
+                System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+
+                input = reader.nextLine();
+
+            // user wants to add a Deadline
+            } else if (input.startsWith("deadline")) {
+                String[] split = input.split(" ");
+                String task = "";
+                String deadline = "";
+
+                int counter;
+                outerloop:
+                for (counter = 1; counter < split.length; counter++) {
+                    if (split[counter].startsWith("/")) {
+                        break outerloop;
+                    } else {
+                        if (counter == 1) {
+                            task = task + split[counter];
+                        } else {
+                            task = task + " " + split[counter];
+                        }
+                    }
+                }
+
+                boolean first = true;
+                for (counter = counter + 1; counter < split.length; counter++) {
+                    if (first) {
+                        deadline = deadline + split[counter];
+                        first = false;
+                    } else {
+                        deadline = deadline + " " + split[counter];
+                    }
+                }
+
+                Deadline toAdd = new Deadline(task, deadline);
+                taskArrayList.add(toAdd);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println(toAdd.taskStatus());
+                System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
+
+                input = reader.nextLine();
+
+            // user wants to add an Event
+            } else if (input.startsWith("event")) {
+                String[] split = input.split(" ");
+                String task = "";
+                String date = "";
+
+                int counter;
+                outerloop:
+                for (counter = 1; counter < split.length; counter++) {
+                    if (split[counter].startsWith("/")) {
+                        break outerloop;
+                    } else {
+                        if (counter == 1) {
+                            task = task + split[counter];
+                        } else {
+                            task = task + " " + split[counter];
+                        }
+                    }
+                }
+
+                boolean first = true;
+                for (counter = counter + 1; counter < split.length; counter++) {
+                    if (first) {
+                        date = date + split[counter];
+                        first = false;
+                    } else {
+                        date = date + " " + split[counter];
+                    }
+                }
+
+                Event toAdd = new Event(task, date);
                 taskArrayList.add(toAdd);
 
                 System.out.println("Got it. I've added this task:");
