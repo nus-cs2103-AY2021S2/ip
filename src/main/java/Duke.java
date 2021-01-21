@@ -110,7 +110,8 @@ public class Duke {
             }
             List<Task> newStore = this.store.stream().map(t -> t.clone()).collect(Collectors.toList());
             newStore.set(index - 1, newStore.get(index - 1).setDone(true));
-            String response = String.format(TASK_DONE, this.store.get(index - 1));
+            System.out.println(newStore.get(index - 1).done);
+            String response = String.format(TASK_DONE, newStore.get(index - 1));
             newAgent = new Duke(response, newStore, this.done);
         }
         catch (NumberFormatException numberFormatException) {
