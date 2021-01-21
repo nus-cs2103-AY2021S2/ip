@@ -17,7 +17,7 @@ public class Duke {
         String request = "";
         dprint("Hello! I'm Duke\nWhat can I do for you?");
 
-        LinkedList<String> lst = new LinkedList<>();
+        LinkedList<Task> lst = new LinkedList<>();
 
         while (!request.equals("bye")) {
             request = sc.nextLine();
@@ -26,8 +26,12 @@ public class Duke {
                 break;
             } else if(request.equals("list")) {
                 printlist(lst);
+            } else if(request.substring(0, 4).equals("done")) {
+                String[] tk = request.split(" ");
+                int taskNo = Integer.parseInt(tk[1]);
+                markdone(lst, taskNo);
             } else {
-                lst.add(request);
+                lst.add(new Task(request));
                 dprint("added: " + request);
             }
         }
@@ -39,14 +43,21 @@ public class Duke {
         System.out.println(appendMsg);
     }
 
-    public static void printlist(List lst) {
-        String msg = "";
+    public static void printlist(List<Task> lst) {
+        String msg = "Here are the tasks in your list:\n";
         for (int i = 1; i <= lst.size(); i++) {
             msg += i + ". " + lst.get(i - 1);
             if (i < lst.size()) {
                 msg += "\n";
             }
         }
+        dprint(msg);
+    }
+
+    public static void markdone(List<Task> lst, int taskNo) {
+        lst.get(taskNo - 1).setDone();
+        String msg = "Nice! I've marked this task as done:\n";
+        msg += "  " + lst.get(taskNo - 1);
         dprint(msg);
     }
 }
