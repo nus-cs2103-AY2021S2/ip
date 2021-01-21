@@ -60,6 +60,16 @@ public class Duke {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(t.toString());
         this.list.set(index, t.markAsDone());
+
+    }
+
+    public void delete(int index){
+
+        Task t = this.list.get(index);
+        System.out.println("Noted. I've removed this task: ");
+        System.out.println(t.toString());
+        this.list.remove(index);
+
     }
     public void bye(){
         System.out.println("Bye. Hope to see you again soon!");
@@ -90,7 +100,13 @@ public class Duke {
                 int index = Integer.parseInt(lastPart) - 1;
                 duke.markDone(index);
 
-            } else if(input.startsWith("todo")||input.startsWith("deadline")||input.startsWith("event")){
+            } else if(input.startsWith("delete")){
+                String lastPart = input.substring(7);
+                int index = Integer.parseInt(lastPart) - 1;
+                duke.delete(index);
+                System.out.println("Now you have " + duke.list.size() + " tasks in the list." );
+            }
+            else if(input.startsWith("todo")||input.startsWith("deadline")||input.startsWith("event")){
                 duke.add(input);
                 System.out.println("Now you have " + duke.list.size() + " tasks in the list." );
             } else{
