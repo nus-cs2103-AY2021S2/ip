@@ -17,6 +17,10 @@ public class Task {
         return description;
     }
 
+    public String getDescriptionCheckbox() {
+        return "[" + getStatusIcon() + "] " + getDescription();
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2713": "\u2718");
     }

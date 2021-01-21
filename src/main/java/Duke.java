@@ -32,6 +32,11 @@ public class Duke {
                 break;
             } else if (s.equals("list")) {
                 Duke.respondList(userData);
+            } else if (s.startsWith("done")) {
+                int idx = Integer.parseInt(s.substring(5)) - 1;
+                Task t = userData.get(idx);
+                t.setDone();
+                Duke.respondDone(t);
             } else {
                 Duke.respond("added: " + s);
                 userData.add(new Task(s));
@@ -39,11 +44,18 @@ public class Duke {
         }
     }
 
+    private static void respondDone(Task t) {
+        ArrayList<String> lines = new ArrayList<>();
+        lines.add("Nice! I've marked this task as done:");
+        lines.add("  " + t.getDescriptionCheckbox());
+        Duke.respond(lines);
+    }
+
     private static void respondList(ArrayList<Task> tasklist) {
         ArrayList<String> lines = new ArrayList<>();
         for (int i = 0; i < tasklist.size(); i++) {
             Task t = tasklist.get(i);
-            lines.add((i+1) + ".[" + t.getStatusIcon() + "] " + t.getDescription());
+            lines.add((i+1) + "." + t.getDescriptionCheckbox());
         }
         Duke.respond("Here are the tasks in your list:", lines);
     }
@@ -70,6 +82,6 @@ public class Duke {
     }
 
     private static void respond(String line) {
-        Duke.respond(line, new ArrayList<String>());
+        Duke.respond(line, new ArrayList<>());
     }
 }
