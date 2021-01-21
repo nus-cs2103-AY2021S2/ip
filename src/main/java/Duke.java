@@ -53,11 +53,22 @@ public class Duke {
             } else if (s.matches("done \\d+")) {
                 s = s.replaceAll("done ","");
                 int index = Integer.parseInt(s) - 1;
-                if (index < 0) {
-                    dukePrint("Uhhh.... Our list starts at 1...");
-                } else {
+                try {
                     myList.get(index).isDone = true;
                     dukePrint("Good! We finished task: " + s + ". " + myList.get(index));
+                } catch (Exception e) {
+                    dukePrint("Uhhh.... Our list starts at 1..." +
+                            " and ends at " + (myList.size() + 1));
+                }
+            } else if (s.matches("delete \\d+")) {
+                s = s.replaceAll("delete ","");
+                int index = Integer.parseInt(s) - 1;
+                try {
+                    dukePrint("OK! We removed task: " + s + ". " + myList.get(index));
+                    myList.remove(index);
+                } catch (Exception e) {
+                    dukePrint("Uhhh.... Our list starts at 1..." +
+                            " and ends at " + (myList.size() + 1));
                 }
             } else if (s.matches("deadline .+?( /by ).*")) {
                 s = s.replaceAll("deadline ","");
