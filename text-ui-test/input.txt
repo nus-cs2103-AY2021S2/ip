@@ -1,0 +1,19 @@
+todo
+todo read book
+deadline
+deadline return book
+deadline return book /by Sunday
+Event event e at/ sometime
+event
+event project meeting
+event project meeting /at 6th August 2pm - 4pm
+list
+done
+done 4
+done 2
+list
+rubbish
+delete 0
+delete 1
+list
+bye

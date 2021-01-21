@@ -1,7 +1,80 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+____________________________________
+Hello! I'm Duke
+What can I do for you?
+____________________________________
+____________________________________
+Enter a valid todo
+____________________________________
+____________________________________
+Got it. I've added this todo:
+ [T][?] read book
+Now you have 1 tasks in the list.
+____________________________________
+____________________________________
+Enter valid deadline task.
+____________________________________
+____________________________________
+Please adhere to convention:
+(task /by deadline timing)
+____________________________________
+____________________________________
+Got it. I've added this deadline:
+ [D][?] return book (by: Sunday)
+Now you have 2 tasks in the list.
+____________________________________
+____________________________________
+Please insert valid command
+____________________________________
+____________________________________
+Enter valid Event.
+____________________________________
+____________________________________
+Please adhere to convention:
+(Event /at event details)
+____________________________________
+____________________________________
+Got it. I've added this Event:
+ [E][?] project meeting (at: 6th August 2pm - 4pm)
+Now you have 3 tasks in the list.
+____________________________________
+____________________________________
+Here are the tasks in your list:
+1. [T][?] read book
+2. [D][?] return book (by: Sunday)
+3. [E][?] project meeting (at: 6th August 2pm - 4pm)
+____________________________________
+____________________________________
+Please specify what task is done
+____________________________________
+____________________________________
+Please enter a valid index
+____________________________________
+____________________________________
+Nice! I've marked this task as done
+[D][?] return book (by: Sunday)
+____________________________________
+____________________________________
+Here are the tasks in your list:
+1. [T][?] read book
+2. [D][?] return book (by: Sunday)
+3. [E][?] project meeting (at: 6th August 2pm - 4pm)
+____________________________________
+____________________________________
+Please insert valid command
+____________________________________
+____________________________________
+Please enter a valid index
+____________________________________
+____________________________________
+Noted i have removed this task
+[T][?] read book
+Now you have 2 tasks in the list
+____________________________________
+____________________________________
+Here are the tasks in your list:
+1. [D][?] return book (by: Sunday)
+2. [E][?] project meeting (at: 6th August 2pm - 4pm)
+____________________________________
+____________________________________
+ Bye. Hope to see you again soon!
+____________________________________
