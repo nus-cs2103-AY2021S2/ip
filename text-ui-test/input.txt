@@ -6,4 +6,7 @@ list
 event gathering /at Sunday afternoon
 done 1
 list
+delete 2
+delete 1
+list
 bye

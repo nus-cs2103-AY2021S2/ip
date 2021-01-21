@@ -35,9 +35,13 @@ public class Duke {
                 System.out.println(horizontalLine);
             }
             else if (words[0].equals("done")) {
-                int num = Integer.parseInt(text.split(" ")[1]);
+                int num = Integer.parseInt(words[1]);
                 list.get(num-1).done();
                 System.out.println(horizontalLine);
+            }
+            else if (words[0].equals("delete")) {
+                int num = Integer.parseInt(words[1]);
+                deleteAndPrintTask(num);
             }
             else if (words[0].equals("todo")) {
                 try {
@@ -46,7 +50,7 @@ public class Duke {
                     addAndPrintTask(todo);
                 }
                 catch (DukeException e){
-                    System.err.println("☹ OOPS!!! The description of a todo cannot be empty.\n" + horizontalLine);
+                    System.err.println("OOPS!!! The description of a todo cannot be empty.\n" + horizontalLine);
                 }
             }
             else if (words[0].equals("deadline")) {
@@ -56,7 +60,7 @@ public class Duke {
                     addAndPrintTask(deadline);
                 }
                 catch (DukeException e){
-                    System.err.println("☹ OOPS!!! The description of a deadline cannot be empty.\n" + horizontalLine);
+                    System.err.println("OOPS!!! The description of a deadline cannot be empty.\n" + horizontalLine);
                 }
             }
             else if (words[0].equals("event")) {
@@ -66,7 +70,7 @@ public class Duke {
                     addAndPrintTask(event);
                 }
                 catch (DukeException e){
-                    System.err.println("☹ OOPS!!! The description of an event cannot be empty.\n" + horizontalLine);
+                    System.err.println("OOPS!!! The description of an event cannot be empty.\n" + horizontalLine);
                 }
             }
             else {
@@ -74,7 +78,7 @@ public class Duke {
                     throw new DukeException();
                 }
                 catch (DukeException e){
-                    System.err.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" + horizontalLine);
+                    System.err.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + horizontalLine);
                 }
             }
         }
@@ -93,5 +97,13 @@ public class Duke {
         if (words.length == 1) {
             throw new DukeException();
         }
+    }
+
+    private static void deleteAndPrintTask(int num) {
+        Task removedTask = list.remove(num-1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(removedTask);
+        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println(horizontalLine);
     }
 }
