@@ -45,7 +45,7 @@ public class Duke {
                         delete(collection, input);
                         break;
                     case BYE:
-                        exit = bye();
+                        exit = bye(sc);
                 }
             } catch (IllegalArgumentException e) {
                 Duke.say("Oh no... I'm not trained with these commands yet...");
@@ -118,15 +118,15 @@ public class Duke {
     }
 
     public static void usage() {
-        Duke.say("Hey! These are commands available:");
-        Duke.say("\t1. usage");
-        Duke.say("\t2. list");
-        Duke.say("\t3. todo <task_description>");
-        Duke.say("\t4. deadline <task_description> /by <date_time>");
-        Duke.say("\t5. event <task_description> /at <date_time>");
-        Duke.say("\t6. done <task_number>");
-        Duke.say("\t7. delete <task_number>");
-        Duke.say("\t8. bye");
+        Duke.say("Hey! These are the commands available:");
+        Duke.say("\t- usage");
+        Duke.say("\t- list");
+        Duke.say("\t- todo <task_description>");
+        Duke.say("\t- deadline <task_description> /by <date_time>");
+        Duke.say("\t- event <task_description> /at <date_time>");
+        Duke.say("\t- done <task_number>");
+        Duke.say("\t- delete <task_number>");
+        Duke.say("\t- bye");
     }
 
     public static void list(ArrayList<Task> collection) {
@@ -188,8 +188,14 @@ public class Duke {
         }
     }
 
-    public static boolean bye() {
-        Duke.say("Alright, take care. I hope to see you again soon!");
-        return true;
+    public static boolean bye(Scanner sc) {
+        Duke.say("Are you sure? (Y/N)");
+        String confirmation = Duke.ask(sc);
+        if (confirmation.toLowerCase().equals("y") || confirmation.toLowerCase().equals("yes")) {
+            Duke.say("Alright, take care. I hope to see you again soon!");
+            return true;
+        }
+        Duke.say("Hmm... alright I'll stay.");
+        return false;
     }
 }
