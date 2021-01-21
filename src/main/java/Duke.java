@@ -197,7 +197,7 @@ public class Duke {
     }
 
     private void handleDoneCmd(String cmd) throws DukeException {
-        Pattern donePattern = Pattern.compile("(?i)done (\\d+)");
+        Pattern donePattern = Pattern.compile("(?i)done\\s+(\\d+)$");
         Matcher doneMatcher = donePattern.matcher(cmd);
         if (!doneMatcher.find()) {
             throw new DukeException(String.format("A done command must specify a task number.\n"
@@ -210,7 +210,8 @@ public class Duke {
             int arg = Integer.parseInt(argStr);
             if (arg < 1 || arg > tasks.size()) {
                 // Argument out of range
-                throw new DukeException(String.format("Task %d does not exist!", arg));
+                throw new DukeException(String.format("Task %d does not exist!\n"
+                        + "Valid task numbers are 1 to %d.", arg, tasks.size()));
             } else {
                 // Valid argument in range
                 int index = arg - 1;
