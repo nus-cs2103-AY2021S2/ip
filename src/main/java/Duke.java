@@ -2,8 +2,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Duke {
+
     public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,13 +16,10 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         // Print introduction
-        ArrayList<String> intro = new ArrayList<>();
-        intro.add("Hello! I'm a customized Duke");
-        intro.add("What can I do for you?");
-        Duke.respond(intro);
-
-        ArrayList<String> outtro = new ArrayList<>();
-        outtro.add("Bye. Hope to see you again soon!");
+        Duke.respond(new String[]{
+                "Hello! I'm a customized Duke",
+                "What can I do for you?",
+        });
 
         // REPL
         ArrayList<Task> userData = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Duke {
         while (true) {
             String s = in.readLine();
             if (s.equals("bye")) {
-                Duke.respond(outtro);
+                Duke.respond("Bye. Hope to see you again soon!");
                 break;
             } else if (s.equals("list")) {
                 Duke.respondList(userData);
@@ -38,8 +38,9 @@ public class Duke {
                 t.setDone();
                 Duke.respondDone(t);
             } else {
-                Duke.respond("added: " + s);
-                userData.add(new Task(s));
+                Task t = new Task(s);
+                userData.add(t);
+                Duke.respondAdd(t, userData);
             }
         }
     }
@@ -60,28 +61,48 @@ public class Duke {
         Duke.respond("Here are the tasks in your list:", lines);
     }
 
-    private static void respond(String comment, ArrayList<String> lines) {
+    private static void respondAdd(Task t, ArrayList<Task> tasklist) {
+        Duke.respond(
+                "Got it. I've added this task:",
+                Arrays.asList(new String[]{"  "+String.valueOf(t)}),
+                "Now you have " + tasklist.size() + " tasks in the list.");
+    }
+
+    // General method
+    private static void respond(String pre, List<String> lines, String post) {
         String border = "    ____________________________________________________________";
         String indent = "     ";
 
         System.out.println(border);
-        if (!comment.isEmpty()) {
+        if (!pre.isEmpty()) {
             System.out.print(indent);
-            System.out.println(comment);
+            System.out.println(pre);
         }
         for (String line: lines) {
             System.out.print(indent);
             System.out.println(line);
         }
+        if (!post.isEmpty()) {
+            System.out.print(indent);
+            System.out.println(post);
+        }
         System.out.println(border);
         System.out.println();
     }
 
-    private static void respond(ArrayList<String> lines) {
-        Duke.respond("", lines);
+    private static void respond(String pre, List<String> lines) {
+        Duke.respond(pre, lines, "");
     }
 
     private static void respond(String line) {
         Duke.respond(line, new ArrayList<>());
+    }
+
+    private static void respond(String lines[]) {
+        Duke.respond("", Arrays.asList(lines));
+    }
+
+    private static void respond(ArrayList<String> lines) {
+        Duke.respond("", lines);
     }
 }
