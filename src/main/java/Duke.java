@@ -1,9 +1,10 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static String tab = "     ";
     public static String line = "     ............................................................";
-    public static Task[] tasks = new Task[100];
+    public static ArrayList<Task> tasks = new ArrayList<>();
     public static int numTasks = 0;
 
     public static void main(String[] args) {
@@ -23,12 +24,6 @@ public class Duke {
                 case "list":
                     printList();
                     break;
-                case "done":
-                    int taskIndex = scan.nextInt() - 1;
-                    tasks[taskIndex].markAsDone();
-
-                    printDone(taskIndex);
-                    break;
                 default:
                     try {
                         String[] inputArr = input.split(" ", 2);
@@ -36,35 +31,54 @@ public class Duke {
 
                         String scannedInput = inputArr[1];
                         String description, date;
+                        int taskIndex;
 
                         switch (task) {
+                            case "done":
+                                taskIndex = Integer.parseInt(scannedInput) - 1;
+                                tasks.get(taskIndex).markAsDone();
+
+                                printDone(taskIndex);
+                                break;
+                            case "delete":
+                                taskIndex = Integer.parseInt(scannedInput) - 1;
+                                Task deletedTask = tasks.get(taskIndex);
+                                tasks.remove(taskIndex);
+                                printDelete(deletedTask.toString());
+
+                                numTasks--;
+                                printNumTasks();
+                                break;
                             case "todo":
                                 description = scannedInput;
                                 ToDos todo = new ToDos(description);
-                                tasks[numTasks] = todo;
+                                tasks.add(todo);
                                 printAdd(numTasks);
 
                                 numTasks++;
+                                printNumTasks();
                                 break;
                             case "deadline":
                                 String[] arrOfInputD = scannedInput.split("/by");
                                 description = arrOfInputD[0];
                                 date = arrOfInputD[1];
                                 Deadlines deadline = new Deadlines(description, date);
-                                tasks[numTasks] = deadline;
+                                tasks.add(deadline);
                                 printAdd(numTasks);
 
                                 numTasks++;
+                                printNumTasks();
                                 break;
                             case "event":
                                 String[] arrOfInputE = scannedInput.split("/at");
                                 description = arrOfInputE[0];
                                 date = arrOfInputE[1];
                                 Events event = new Events(description, date);
-                                tasks[numTasks] = event;
+                                tasks.add(event);
                                 printAdd(numTasks);
 
                                 numTasks++;
+                                printNumTasks();
                                 break;
                             default:
                                 printIdkError();
@@ -72,7 +86,8 @@ public class Duke {
                         }
                         break;
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        if (input.equals("todo") || input.equals("deadline") || input.equals("event")) {
+                        if (input.equals("todo") || input.equals("deadline") || input.equals("event")
+                                || input.equals("done") || input.equals("delete")) {
                             printEmptyDescError(input);
                         } else {
                             printIdkError();
@@ -105,7 +120,7 @@ public class Duke {
         System.out.println(tab + "Here are the tasks in your list:");
         for (int i = 0; i < numTasks; i++) {
             int num = i + 1;
-            Task task = tasks[i];
+            Task task = tasks.get(i);
             System.out.println(
                     tab + num + "." + task.toString());
         }
@@ -113,13 +128,21 @@ public class Duke {
 
     public static void printDone(int index) {
         System.out.println(tab + "Nice! I've marked this task as done:");
-        System.out.println(tab + tasks[index].toString());
+        System.out.println(tab + tasks.get(index).toString());
+    }
+
+    public static void printDelete(String string) {
+        System.out.println(tab + "Noted. I've removed this task:");
+        System.out.println(tab + string);
     }
 
     public static void printAdd(int index) {
         System.out.println(tab + "Got it. I've added this task: ");
-        System.out.println(tab + tasks[index].toString());
-        System.out.println(tab + "Now you have " + (index + 1) + " tasks in the list.");
+        System.out.println(tab + tasks.get(index).toString());
+    }
+
+    public static void printNumTasks() {
+        System.out.println(tab + "Now you have " + numTasks + " tasks in the list.");
     }
 
     public static void printBye() {
