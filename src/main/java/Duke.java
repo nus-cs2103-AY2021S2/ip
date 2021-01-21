@@ -39,35 +39,43 @@ public class Duke {
                 }
                 System.out.println(line);
             } else {
-                String[] split = str.split(" ");
-                String rest ="";
-                for(int i=1; i<split.length; i++) {
-                    rest = rest+ " " + split[i];
-                }
-                if (split.length == 2 && split[0].equals("done")) {
-                    try {
-                        int num = Integer.parseInt(split[1]);
-                        System.out.println(line + tasks.get(num - 1).doneTask()
-                                + "\n" + line);
-                    } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                        System.out.println(line + " Enter 'done' followed by a number between " +
-                                "1 and " + tasks.size() + "\n" + line);
+                try {
+                    String[] split = str.split(" ");
+                    String rest = "";
+                    for (int i = 1; i < split.length; i++) {
+                        rest = rest + " " + split[i];
                     }
-                } else if (split[0].equals("todo") || split[0].equals("deadline")
-                        || split[0].equals("event")) {
-                    if(split[0].equals("todo")) {
-                        tasks.add(new Todo(rest));
-                    } else if (split[0].equals("deadline")) {
-                        tasks.add(new Deadline(rest));
+                    if (split[0].equals("done")) {
+                        try {
+                            int num = Integer.parseInt(split[1]);
+                            System.out.println(line + tasks.get(num - 1).doneTask()
+                                    + "\n" + line);
+                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                            System.out.println(line + " Enter 'done' followed by a number between " +
+                                    "1 and " + tasks.size() + "\n" + line);
+                        }
+                    } else if (split[0].equals("todo") || split[0].equals("deadline")
+                            || split[0].equals("event")) {
+                        if (split[0].equals("todo")) {
+                            tasks.add(new Todo(rest));
+                        } else if (split[0].equals("deadline")) {
+                            tasks.add(new Deadline(rest));
+                        } else {
+                            tasks.add(new Event(rest));
+                        }
+                        System.out.println(line + " Got it. I've added this task:\n" +
+                                " " + tasks.get(tasks.size() - 1) + "\n" + " Now you have "
+                                + tasks.size() + " tasks in the list\n" + line);
                     } else {
-                        tasks.add(new Event(rest));
+                        throw new IllegalArgumentException();
                     }
-                    System.out.println(line + " Got it. I've added this task:\n" +
-                            " " +tasks.get(tasks.size()-1) + "\n" + " Now you have "
-                            + tasks.size() + " tasks in the list\n" + line);
-                } else {
-                    tasks.add(new Task(str));
-                    System.out.println(line + " added: " + str + "\n" + line);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(line + " Please enter 'todo (your task)', " +
+                            "or 'deadline (your task) / (deadline date timing)',\n or " +
+                            "'event (event name) / (event date timing' to add tasks.\n " +
+                            "To see your tasks enter 'list'.\n To complete a task enter" +
+                            "'done (number of the task in the list)'.\n And to close Duke " +
+                            "enter 'bye'.\n"+ line);
                 }
             }
         }
