@@ -39,9 +39,34 @@ public class Duke {
                 System.out.println(indentation + "Nice! I've marked this task as done:");
                 System.out.println(indentation + job);
             } else {
-                Task job = new Task(input);
-                System.out.println(indentation + "added: " + input);
-                todo[position] = job;
+                char caseType = input.charAt(0);
+                switch (caseType) {
+                    case 'd':
+                        int i1 = input.indexOf("/");
+                        String by = input.substring(i1 + 3);
+                        String d1 = input.substring(8, i1 - 1);
+                        Deadline ddl = new Deadline(d1, by);
+                        todo[position] = ddl;
+                        break;
+                    case 'e':
+                        int i2 = input.indexOf("/");
+                        String at = input.substring(i2 + 3);
+                        String d2 = input.substring(5, i2 - 1);
+                        Event event = new Event(d2, at);
+                        todo[position] = event;
+                        break;
+                    case 't':
+                        String d3 = input.substring(4, input.length());
+                        Todo t = new Todo(d3);
+                        todo[position] = t;
+                        break;
+                    default:
+                        break;
+                }
+                int total = position + 1;
+                System.out.println(indentation + "Got it. I've added this task:");
+                System.out.println(indentation + todo[position]);
+                System.out.println(indentation + "Now you have " + total + " tasks in the list.");
                 position += 1;
             }
             System.out.println(line);
