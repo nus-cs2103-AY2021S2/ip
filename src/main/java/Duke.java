@@ -3,34 +3,35 @@ import java.util.*;
 public class Duke {
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        List<String> ls = new ArrayList<>();
-        List<Task> tsk = new ArrayList<>();
 
-        String s = "";
+        List<Task> taskList = new ArrayList<>();
 
-        while (!(s = sc.nextLine()).equals("bye")) {
+        while(sc.hasNextLine()) {
+            String input = sc.nextLine();
 
-            String[] split = s.split(" ");
+            String[] tokens = input.split(" ");
 
-            if (split[0].equals("done")) {
-                Task tk = tsk.get(Integer.parseInt(split[1]) - 1);
-                tk.markAsDone();
-                System.out.println("Nice! I've marked this task as done: \n" + tk.getStatusIcon() + " " + tk.toString());
+            if (tokens[0].equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
 
-            } else if (split[0].equals("list")) {
-                for (int i = 0; i < tsk.size() ; i++ ) {
-                    System.out.println(i + 1 + ". " + tsk.get(i).getStatusIcon() + " " + tsk.get(i));
+            } else if (tokens[0].equals("list")) {
+                for (int i = 0; i < taskList.size() ; i++ ) {
+                    System.out.println(i + 1 + ". " + taskList.get(i).getStatusIcon() + " " + taskList.get(i));
                 }
-            } else { //add task
-                Task taskadd = new Task(s);
-                ls.add(s);
-                tsk.add(taskadd);
-                System.out.println("added: " + taskadd.toString());
+
+            } else if(tokens[0].equals("done")) {
+                Task task = taskList.get(Integer.parseInt(tokens[1]) - 1);
+                task.markAsDone();
+                System.out.println("Nice! I've marked this task as done: \n" + task.getStatusIcon() + " " + task.toString());
+
+            } else {
+                Task task = new Task(input);
+                taskList.add(task);
+                System.out.println("added: " + task.toString());
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
     }
 }
-
