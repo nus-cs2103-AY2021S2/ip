@@ -73,10 +73,28 @@ public class ToDoBeast {
     public void checkUserInput(String[] userInput) throws ToDoBeastException {
         String command = userInput[0];
         if ((command.equals("todo") || command.equals("deadline") || command.equals("event")) && userInput.length == 1) {
-            throw new ToDoBeastException(" ☹ OOPS!!! The description of a " + command + " cannot be empty.");
-        } else if (!command.equals("bye") && !command.equals("list") && !command.equals("done") && !command.equals("todo") && !command.equals("deadline") && !command.equals("event") && !command.equals("delete")) {
-            throw new ToDoBeastException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new ToDoBeastException("OOPS :( !!! The description of a " + command + " cannot be empty.");
         }
+        else if (command.equals("done") || command.equals("delete")) {
+            if (userInput.length == 1) {
+                throw new ToDoBeastException("OOPS :( !!! The " + command + " command requires the index of the task to be processed.");
+            }
+            try {
+                int taskNumber = Integer.parseInt(userInput[1]);
+                if (taskNumber > taskManager.getNumOfTasks() || taskNumber <= 0) {
+                    throw new ToDoBeastException("OOPS :( !!! Task index provided is not present in the list.");
+                }
+            } catch (NumberFormatException e) {
+                throw new ToDoBeastException("OOPS :( !!! Task index provided is not a number.");
+            }
+        }
+        else if (!isValidCommand(command)) {
+            throw new ToDoBeastException("OOPS :( !!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    public boolean isValidCommand(String command) {
+        return command.equals("bye") || command.equals("list") || command.equals("done") || command.equals("todo") || command.equals("deadline") || command.equals("event") || command.equals("delete");
     }
 
     public void greetUser() {
