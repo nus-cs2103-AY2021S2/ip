@@ -34,13 +34,23 @@ public class Duke {
             } else if (input.length() > 4 && input.substring(0, 5).equals("done ")) {
                 int index = -1;
                 if (!input.equals("done ")) {
-                    System.out.println("Pai Kia Bot: which entry u wan to check as done ah?");
                     index = Integer.parseInt(input.substring(5));
                 }
                 if (index >= 0 && index <= inputList.size()) {
                     inputList.set(index - 1, inputList.get(index - 1).makeDone());
                     System.out.println(dash);
                     System.out.println("Pai Kia Bot: ok i give this task a done chop: " + inputList.get(index - 1).toString().substring(1));
+                    System.out.println(dash);
+                }
+
+            } else if (input.length() > 6 && input.substring(0, 7).equals("delete ")) {
+                int index = -1;
+                if (!input.equals("delete ")) {
+                    index = Integer.parseInt(input.substring(7));
+                }
+                if (index > 0 && index <= inputList.size()) {
+                    System.out.println(dash);
+                    System.out.println("Pai Kia Bot: ok i delete this task chop chop: " + inputList.remove(index - 1).toString().substring(1));
                     System.out.println(dash);
                 }
 
