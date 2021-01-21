@@ -34,10 +34,13 @@ public class Duke {
                     print("Nice! I've marked this task as done:\n      " + task.toString());
                     break;
                 case "todo":
-                    // TODO handle out of bounds for commandList
-                    newTask = new Todo(commandList[1], TaskType.TODO);
-                    tasks.add(newTask);
-                    print(ADD_TASK_TEXT + newTask.toString() + "\n    Now you have " + tasks.size() + " tasks in the list.");
+                    try {
+                        newTask = new Todo(commandList[1], TaskType.TODO);
+                        tasks.add(newTask);
+                        print(ADD_TASK_TEXT + newTask.toString() + "\n    Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        print("The description of a todo cannot be empty.");
+                    }
                     break;
                 case "deadline":
                     // TODO handle out of bounds for commandList
@@ -54,7 +57,6 @@ public class Duke {
                     print(ADD_TASK_TEXT + newTask.toString() + "\n    Now you have " + tasks.size() + " tasks in the list.");
                     break;
                 default:
-                    // TODO handle illegal command
                     print("Command not recognised.");
             }
             command = sc.nextLine();
