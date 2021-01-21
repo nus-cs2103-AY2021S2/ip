@@ -2,8 +2,12 @@
  * Todo task without any date/time attached to it.
  */
 public class TodoTask extends Task {
-    public TodoTask(String taskArgs) {
+    public TodoTask(String taskArgs) throws OwenException {
         super(taskArgs);
+
+        if (taskArgs.equals("")) {
+            throw new OwenException("The description of a todo cannot be empty...");
+        }
     }
 
     private TodoTask(String description, boolean isDone) {

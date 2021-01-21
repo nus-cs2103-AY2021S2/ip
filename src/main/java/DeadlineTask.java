@@ -4,10 +4,15 @@
 public class DeadlineTask extends Task {
     private final String deadline;
 
-    public DeadlineTask(String taskArgs) {
+    public DeadlineTask(String taskArgs) throws OwenException {
         super();
 
         String[] taskArgsSplit = taskArgs.split(" /by ", 2);
+
+        if (taskArgsSplit.length < 2) {
+            throw new OwenException("Deadline task must have a description and due date/time...");
+        }
+
         this.description = taskArgsSplit[0];
         this.deadline = taskArgsSplit[1];
     }

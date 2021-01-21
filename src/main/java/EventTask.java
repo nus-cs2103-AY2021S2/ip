@@ -4,10 +4,15 @@
 public class EventTask extends Task {
     private final String startEndTime;
 
-    public EventTask(String taskArgs) {
+    public EventTask(String taskArgs) throws OwenException {
         super();
 
         String[] taskArgsSplit = taskArgs.split(" /at ", 2);
+
+        if (taskArgsSplit.length < 2) {
+            throw new OwenException("Event task must have a description and start/end time...");
+        }
+
         this.description = taskArgsSplit[0];
         this.startEndTime = taskArgsSplit[1];
     }

@@ -28,10 +28,16 @@ public class TaskList {
      * @param task Task to add to the list.
      * @return Copy of the task list with the new task added.
      */
-    public TaskList addTask(String task) {
+    public TaskList addTask(String task) throws OwenException {
         String[] taskSplit = task.split(" ", 2);
         String taskType = taskSplit[0];
-        String taskArgs = taskSplit[1];
+        
+        String taskArgs;
+        if (taskSplit.length > 1) {
+            taskArgs = taskSplit[1];
+        } else {
+            taskArgs = "";
+        }
 
         Task newTask;
 
