@@ -10,6 +10,7 @@ What can I do for you?
 Got it. I've added this task:
 [T][ ] wakeup
 Now you have 1 tasks in the list.
+:( OOPS! i'm sorry but i don't know what that means.
 Got it. I've added this task:
 [E][ ] field trip (at: 7am)
 Now you have 2 tasks in the list.
@@ -23,6 +24,7 @@ Now you have 4 tasks in the list.
 2. [E][ ] field trip (at: 7am)
 3. [T][✓] bring bread
 4. [D][ ] project (by: thursday 2359)
+:( OOPS! the description of a task cannot be empty.
 Got it. I've added this task:
 [D][ ] lab excel (by: wednesday 9pm)
 Now you have 5 tasks in the list.
