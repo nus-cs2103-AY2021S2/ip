@@ -20,6 +20,8 @@ public class Parser {
             command = Command.DONE;
         } else if (potentialCommand.toUpperCase().equals("BYE")) {
             command = Command.BYE;
+        } else if (potentialCommand.toUpperCase().equals("DELETE")) {
+            command = Command.DELETE;
         } else {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
@@ -31,6 +33,14 @@ public class Parser {
             throw new DescriptionMissingException("The index of the task done?");
         } else {
             return Character.getNumericValue(input.charAt(5)) - 1;
+        }
+    }
+
+    public static int getDeleteIndex(String input) throws DescriptionMissingException {
+        if (input.length() < 8 || !Character.isDigit(input.charAt(7))) {
+            throw new DescriptionMissingException("The index of the deleting task?");
+        } else {
+            return Character.getNumericValue(input.charAt(7)) - 1;
         }
     }
 
