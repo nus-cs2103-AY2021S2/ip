@@ -30,19 +30,33 @@ public class Duke {
                 }
                 System.out.println();
                 str = sc.nextLine();
-            }else if(str.length() > 4 && str.substring(0,5).equals("done ")) {
-                //mark tasks as done
-                String[] strs = str.split(" ");
-                int number = Integer.parseInt(strs[1]);
-                list[number-1].markAsDone();
-                System.out.println("Nice! I've marked this task as done: \n" + list[number-1] +"\n");
-                str = sc.nextLine();
-            }else {
-                //store whatever text entered by the user
-                list[count] = new Task(str);
-                count++;
-                System.out.println("added: " + str +"\n");
-                str = sc.nextLine();
+            }else{
+                String type = str.substring(0, str.indexOf(' '));
+                String detail = str.substring(str.indexOf(' ') + 1);
+                if(type.equals("done")) {
+                    //mark tasks as done
+                    int number = Integer.parseInt(detail);
+                    list[number-1].markAsDone();
+                    System.out.println("Nice! I've marked this task as done: \n" + list[number-1] +"\n");
+                    str = sc.nextLine();
+                }else {
+                    //store task entered by the user
+
+                    if(type.equals("todo")){
+                        list[count] = new Todo(detail);
+                    }else if(type.equals("event")){
+                        String name=detail.substring(0,detail.indexOf(" /at"));
+                        String time=detail.substring(detail.indexOf(" /at") + 5);
+                        list[count] = new Event(name, time);
+                    }else if(type.equals("deadline")){
+                        String name = detail.substring(0,detail.indexOf(" /by"));
+                        String time = detail.substring(detail.indexOf(" /by") + 5);
+                        list[count] = new Deadline(name, time);
+                    }
+                    count++;
+                    System.out.println("Got it. I've added this task:\n  " + list[count-1] +"\nNow you have "+ count +" tasks in the list.\n");
+                    str = sc.nextLine();
+                }
             }
 
         //exits when the user types bye
