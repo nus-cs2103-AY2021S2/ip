@@ -10,7 +10,6 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
         ArrayList<Task> lst = new ArrayList<>();
         while (sc.hasNext()) {
             String input = sc.next();
@@ -18,8 +17,8 @@ public class Duke {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < lst.size(); i++) {
                     int count = i + 1;
-                    String stats = lst.get(i).getStatus();
-                    System.out.println(count + ". " + stats + " " + lst.get(i).des);
+                    Task a = lst.get(i);
+                    System.out.println(count + ". " + a);
                 }
             } else if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again!");
@@ -28,14 +27,45 @@ public class Duke {
                 int tag = sc.nextInt() - 1;
                 Task d = lst.get(tag);
                 d.markAsDone();
-                String stat = d.getStatus();
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(stat + " " + d.des);
-            } else {
-                String ninput = input + sc.nextLine();
-                Task t = new Task(ninput);
-                lst.add(t);
-                System.out.println("added: " + t.des);
+                System.out.println(d);
+            } else if (input.equals("delete")) {
+                int tag = sc.nextInt() - 1;
+                int len = lst.size() - 1;
+                System.out.println("Noted. I've removed this task:");
+                System.out.println("\t" + lst.get(tag));
+                System.out.println("Now you have " + len + " tasks in the list.");
+                lst.remove(tag);
+            } else if (input.equals("todo")) {
+                String task = sc.nextLine();
+                Todo todo = new Todo(task);
+                lst.add(todo);
+                int len = lst.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + todo);
+                System.out.println("Now you have " + len + " tasks in the list.");
+            } else if (input.equals("deadline")) {
+                String line = sc.nextLine();
+                String[] split = line.split("/by");
+                String task = split[0];
+                String date = split[1];
+                Deadline dl = new Deadline(task, date);
+                lst.add(dl);
+                int len = lst.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + dl);
+                System.out.println("Now you have " + len + " tasks in the list.");
+            } else if (input.equals("event")) {
+                String line = sc.nextLine();
+                String[] split = line.split("/at");
+                String task = split[0];
+                String date = split[1];
+                Event event = new Event(task, date);
+                lst.add(event);
+                int len = lst.size();
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + event);
+                System.out.println("Now you have " + len + " tasks in the list.");
             }
         }
     }
