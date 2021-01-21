@@ -1,20 +1,28 @@
 package duke;
 
 public class Task {
-    private String taskName;
+    private String description;
+    private boolean isDone;
 
-    public Task(String taskName) {
-        this.taskName = taskName;
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
     }
 
-    public String getTaskName() {
-        return this.taskName;
+    private Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "taskName='" + taskName + '\'' +
-                '}';
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Task setIsDone(boolean done) {
+        return new Task(this.description, done);
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 }
