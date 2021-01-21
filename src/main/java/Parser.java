@@ -19,18 +19,18 @@ public class Parser {
             throw new InvalidCommandException();
         }
         switch (scanner.next().toLowerCase(Locale.ROOT)) {
-            case DukeStrings.COMMAND_BYE:
+            case DukeString.COMMAND_BYE:
                 this.bye = true;
                 return new ExitCommand();
-            case DukeStrings.COMMAND_LIST:
+            case DukeString.COMMAND_LIST:
                 return new ListCommand();
-            case DukeStrings.COMMAND_DONE:
+            case DukeString.COMMAND_DONE:
                 return new DoneCommand(scanner.nextInt());
-            case DukeStrings.COMMAND_DEADLINE:
+            case DukeString.COMMAND_DEADLINE:
                 return new DeadlineCommand(scanner.nextLine());
-            case DukeStrings.COMMAND_EVENT:
+            case DukeString.COMMAND_EVENT:
                 return new EventCommand(scanner.nextLine());
-            case DukeStrings.COMMAND_TODO:
+            case DukeString.COMMAND_TODO:
                 return new TodoCommand(scanner.nextLine().trim());
             default:
                 throw new InvalidCommandException();

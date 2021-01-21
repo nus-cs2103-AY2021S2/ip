@@ -1,4 +1,4 @@
-public class DukeStrings {
+public class DukeString {
     public static final String SEPARATOR = "--------------------------------------";
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_BYE = "Goodbye!";

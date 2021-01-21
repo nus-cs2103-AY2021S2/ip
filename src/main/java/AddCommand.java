@@ -8,6 +8,6 @@ public abstract class AddCommand implements Command {
     @Override
     public String execute(TaskList taskList) {
         taskList.addTask(task);
-        return String.format(DukeStrings.MESSAGE_ADDED, task.toString(), taskList.size());
+        return String.format(DukeString.MESSAGE_ADDED, task.toString(), taskList.size());
     }
 }
