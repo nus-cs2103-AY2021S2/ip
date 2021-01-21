@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import exception.DukeException;
 import exception.DukeInvalidArgumentsException;
+import exception.DukeInvalidInputException;
 
 public class Duke {
 
@@ -36,7 +37,7 @@ public class Duke {
         while (line != null) {
             try {
                 writer.println(parseInput(line));
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 handleException(e, writer);
             }
             if (line.equals("bye")) {
@@ -46,8 +47,8 @@ public class Duke {
         }
     }
 
-    private static void handleException(Exception e, PrintStream writer) {
-
+    private static void handleException(DukeException e, PrintStream writer) {
+        writer.println(e.getMessage());
     }
 
     public static String parseInput(String input) throws DukeException {
@@ -66,7 +67,7 @@ public class Duke {
         case "event":
             return executeEvent(input);
         default:
-            return addTaskAndReturnMessage(new Task(input));
+            throw new DukeInvalidInputException(input);
         }
     }
 
