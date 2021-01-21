@@ -47,7 +47,7 @@ public class Duke {
     private static void respondDone(Task t) {
         ArrayList<String> lines = new ArrayList<>();
         lines.add("Nice! I've marked this task as done:");
-        lines.add("  " + t.getDescriptionCheckbox());
+        lines.add("  " + t);
         Duke.respond(lines);
     }
 
@@ -55,7 +55,7 @@ public class Duke {
         ArrayList<String> lines = new ArrayList<>();
         for (int i = 0; i < tasklist.size(); i++) {
             Task t = tasklist.get(i);
-            lines.add((i+1) + "." + t.getDescriptionCheckbox());
+            lines.add((i+1) + "." + t);
         }
         Duke.respond("Here are the tasks in your list:", lines);
     }
