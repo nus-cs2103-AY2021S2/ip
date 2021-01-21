@@ -10,4 +10,5 @@ list
 done -3
 delete 1
 delete 0
+list
 bye

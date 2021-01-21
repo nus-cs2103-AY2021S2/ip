@@ -28,7 +28,7 @@
 	___________________________________
 
 	___________________________________
-	 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+	☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 	___________________________________
 
 	___________________________________
@@ -58,7 +58,7 @@
 	___________________________________
 
 	___________________________________
-	 ☹ OOPS!!! The integer value is invalid (negative or out of task list range)!!!
+	☹ OOPS!!! The integer value is invalid (negative, 0 or out of task list range)!!!
 	___________________________________
 
 	___________________________________
@@ -68,7 +68,14 @@
 	___________________________________
 
 	___________________________________
-	 ☹ OOPS!!! The integer value is invalid (negative or out of task list range)!!!
+	☹ OOPS!!! The integer value is invalid (negative, 0 or out of task list range)!!!
+	___________________________________
+
+	___________________________________
+	 Here are the tasks in your list:
+	 1.[D][✘] sell book  (by: Sunday)
+	 2.[E][ ] project meeting  (at: Mon 2-4pm)
+	 3.[D][✘] do homework  (by: June 6th)
 	___________________________________
 
 	___________________________________

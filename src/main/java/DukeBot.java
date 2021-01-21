@@ -11,68 +11,78 @@ public class DukeBot {
     private final ArrayList<Task> taskList = new ArrayList<>();
     private int numTasks;
     private String output;
+    private boolean continueInput;
 
     /**
      * Constructor for DukeBot class
      * Configuration for DukeBot to welcome the user
      */
     public DukeBot() {
-        output = BORDER + "\t Hello! I'm Duke\n" + "\t What can I do for you?\n" + BORDER;
-        System.out.println(output);
+        this.continueInput = true;
+        this.output = " Hello! I'm Duke\n" + "\t What can I do for you?";
+        outputMessage(this.output);
     }
 
     /**
      * Bot will carry out the different process depending on the user input
      * @param input provided by the user
-     * @return boolean when the user enters bye command to terminate the DukeBot
+     * @throws DukeException if the user enters an invalid input
      */
-    public boolean echo(String input) {
+    public void echo(String input) throws DukeException {
         String[] commandStr = input.trim().split("\\s+");
         String taskAction = commandStr[0];
-        boolean continueInput = true;
 
         switch (taskAction) {
             case "bye":
-                output = BORDER + "\t" + " Bye. Hope to see you again soon!\n" + BORDER;
-                continueInput = false;
+                this.output = " Bye. Hope to see you again soon!";
+                this.continueInput = false;
                 break;
             case "list":
-                output = retrieveList();
+                this.output = retrieveList();
                 break;
             case "done":
-                output = markDoneTask(Integer.parseInt(commandStr[1]));
+                markDoneTask(Integer.parseInt(commandStr[1]));
                 break;
             case "todo":
             case "deadline":
             case "event":
                 this.numTasks++;
-                output = handleNewTask(taskAction, commandStr);
+                handleNewTask(taskAction, commandStr);
                 break;
             case "delete":
                 this.numTasks--;
-                output = handleDeleteTask(Integer.parseInt(commandStr[1]));
+                handleDeleteTask(Integer.parseInt(commandStr[1]));
                 break;
             default:
-                output = handleInvalidInput();
-                break;
+                throw new DukeException(ExceptionType.INVALID_INPUT, "");
         }
-        System.out.println(output);
-        return continueInput;
+        outputMessage(this.output);
+    }
+
+    /**
+     * Return a response from the input of user
+     * @param message consists of the return output to be displayed to the user
+     */
+    public void outputMessage(String message) {
+        System.out.println(BORDER + "\t" + message + "\n" + BORDER);
+
+        if(!this.continueInput) {
+            System.exit(0);
+        }
     }
 
     /**
      * Indicated a given task as done among the list of tasks
      * @param index provided when user enters an input like "done 2" to mark 2nd task on the list as done
-     * @return the output string to be displayed in return of the user input
+     * @throws DukeException if the integer value entered by user is negative, 0 or out of list range
      */
-    public String markDoneTask(int index) {
+    public void markDoneTask(int index) throws DukeException{
         if (index <= 0 || index > this.numTasks) {
-            return handleInvalidValue();
+            throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         } else {
             Task doneTask = this.taskList.get(index - 1);
             doneTask.markAsDone();
-            return BORDER + "\t" + " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString() + "\n"
-                    + BORDER;
+            this.output = " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();
         }
     }
 
@@ -81,25 +91,24 @@ public class DukeBot {
      * @return the list of tasks formatted in String
      */
     public String retrieveList() {
-        StringBuilder currText = new StringBuilder(BORDER + "\t" + " Here are the tasks in your list:\n");
+        StringBuilder currText = new StringBuilder(" Here are the tasks in your list:");
 
         for (int num = 1; num <= this.taskList.size(); num++) {
             Task currentTask = this.taskList.get(num - 1);
-            currText.append("\t ").append(num).append(".").append(currentTask.toString()).append("\n");
+            currText.append("\n\t ").append(num).append(".").append(currentTask.toString());
         }
-        currText.append(BORDER);
         return currText.toString();
     }
 
     /**
      * Manage the new task of todo, event or deadline types
-     * @return the output string to be displayed in return of the user input
+     * @throws DukeException if the task description is empty
      */
-    public String handleNewTask(String taskAction, String[] commandStr) {
+    public void handleNewTask(String taskAction, String[] commandStr) throws DukeException {
         Task newTask;
         StringBuilder description = new StringBuilder();
         List<String> taskDetails = Arrays.asList(commandStr);
-        String currText = BORDER + "\t" + " Got it. I've added this task: \n";
+        this.output = " Got it. I've added this task: \n";
 
         if (!taskAction.equals("todo")) {
             String[] result = handleEventDeadLine(taskDetails);
@@ -118,11 +127,11 @@ public class DukeBot {
         }
 
         if (newTask.getDescription().equals("")) {
-            return handleBlankDescription(taskAction);
+            throw new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
         } else {
             this.taskList.add(newTask);
-            return currText + "\t  " + newTask.toString() + "\n\t Now you have " + this.numTasks
-                    + " tasks in the list.\n" + BORDER;
+            this.output += "\t  " + newTask.toString() + "\n\t Now you have "
+                    + this.numTasks + " tasks in the list.";
         }
     }
 
@@ -156,43 +165,16 @@ public class DukeBot {
 
     /**
      * Delete the task as entered by the user input by removing the task from the list of tasks
-     * @return the output string to be displayed in return of the user input
+     * @throws DukeException if the integer value entered by user is negative, 0 or out of list range
      */
-    public String handleDeleteTask(int index) {
+    public void handleDeleteTask(int index) throws DukeException {
         if (index <= 0 || index > this.numTasks) {
-            return handleInvalidValue();
+            throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         } else {
             Task deleteTask = this.taskList.get(index - 1);
             this.taskList.remove(deleteTask);
-            return BORDER + "\t" + "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
-                    + "\n\t Now you have " + this.numTasks + " tasks in the list.\n" + BORDER;
+            this.output = "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
+                    + "\n\t Now you have " + this.numTasks + " tasks in the list.";
         }
-    }
-
-    /**
-     * Manage the invalid input (Unrecognised commands) exception entered by the user
-     * @return the output string to be displayed in return of the user input
-     */
-    public String handleInvalidInput() {
-        DukeException exception = new DukeException(ExceptionType.INVALID_INPUT, "");
-        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
-    }
-
-    /**
-     * Manage the invalid integer value (negative or out of list range) exception entered by the user
-     * @return the output string to be displayed in return of the user input
-     */
-    public String handleInvalidValue() {
-        DukeException exception = new DukeException(ExceptionType.INVALID_INTEGER, "");
-        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
-    }
-
-    /**
-     * Manage the blank description exception entered by the user
-     * @return the output string to be displayed in return of the user input
-     */
-    public String handleBlankDescription(String taskAction) {
-        DukeException exception = new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
-        return BORDER + "\t " + exception.getMessage() + "\n" + BORDER;
     }
 }
