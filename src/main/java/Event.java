@@ -7,8 +7,12 @@ public class Event extends Task{
     }
 
     @Override
-    public void addTask(int count) {
-        super.addTask(count);
+    public void addTask(int count) throws DukeException {
+        if(this.name.equals("")) {
+            throw new DukeException("     ☹ OOPS!!! The description of an event cannot be empty.");
+        } else {
+            super.addTask(count);
+        }
     }
 
     @Override

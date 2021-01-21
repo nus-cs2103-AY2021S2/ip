@@ -22,7 +22,6 @@ public class Duke {
                     } else {
                         break;
                     }
-
                 }
                 System.out.println("    ____________________________________________________________");
             } else if(commands.split(" ")[0].equals("done")) {
@@ -30,29 +29,62 @@ public class Duke {
                 tasks[n-1].markAsDone();
                 System.out.println("    ____________________________________________________________");
                 System.out.println("     Nice! I've marked this task as done:");
-                System.out.println("       "+tasks[n-1].toString());
+                System.out.println("       " + tasks[n-1].toString());
                 System.out.println("    ____________________________________________________________");
             } else if(commands.split(" ")[0].equals("todo")) {
                 int iend = commands.indexOf(" ");
                 tasks[taskCount] = new ToDo(taskCount+1, commands.substring(iend+1));
-                tasks[taskCount].addTask(taskCount+1);
-                taskCount++;
+                try{
+                    tasks[taskCount].addTask(taskCount+1);
+                    taskCount++;
+                } catch(DukeException e){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println(e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                }
             } else if(commands.split(" ")[0].equals("deadline")) {
-                int iend1 = commands.indexOf(" ");
-                int iend = commands.indexOf("/");
-                String subString1= commands.substring(iend1+1 , iend);
-                String subString2= commands.substring(iend+4);
-                tasks[taskCount] = new Deadline(taskCount+1, subString1, subString2);
-                tasks[taskCount].addTask(taskCount+1);
-                taskCount++;
+                try{
+                    int iend1 = commands.indexOf(" ");
+                    int iend = commands.indexOf("/");
+                    String subString1= commands.substring(iend1+1 , iend);
+                    String subString2= commands.substring(iend+4);
+                    tasks[taskCount] = new Deadline(taskCount+1, subString1, subString2);
+                    tasks[taskCount].addTask(taskCount+1);
+                    taskCount++;
+                }
+                catch(DukeException e){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println(e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                }
+                catch(StringIndexOutOfBoundsException e){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     ☹ OOPS!!! The due date of a deadline cannot be empty. (Format: /by + date)");
+                    System.out.println("    ____________________________________________________________");
+                }
             } else if(commands.split(" ")[0].equals("event")) {
-                int iend1 = commands.indexOf(" ");
-                int iend = commands.indexOf("/");
-                String subString1= commands.substring(iend1+1 , iend);
-                String subString2= commands.substring(iend+4);
-                tasks[taskCount] = new Event(taskCount+1, subString1, subString2);
-                tasks[taskCount].addTask(taskCount+1);
-                taskCount++;
+                try{
+                    int iend1 = commands.indexOf(" ");
+                    int iend = commands.indexOf("/");
+                    String subString1= commands.substring(iend1+1 , iend);
+                    String subString2= commands.substring(iend+4);
+                    tasks[taskCount] = new Event(taskCount+1, subString1, subString2);
+                    tasks[taskCount].addTask(taskCount+1);
+                    taskCount++;
+                } catch(DukeException e){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println(e.getMessage());
+                    System.out.println("    ____________________________________________________________");
+                }
+                catch(StringIndexOutOfBoundsException e){
+                    System.out.println("    ____________________________________________________________");
+                    System.out.println("     ☹ OOPS!!! The start and end date of an event cannot be empty.(Format: /at + duration)");
+                    System.out.println("    ____________________________________________________________");
+                }
+            } else {
+                System.out.println("    ____________________________________________________________");
+                System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("    ____________________________________________________________");
             }
             System.out.println("Enter a command:");
             commands = in.nextLine();

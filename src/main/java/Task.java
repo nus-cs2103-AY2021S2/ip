@@ -13,17 +13,22 @@ public class Task {
         this.done = true;
     }
 
-    public void addTask(int count) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       "+this.toString());
-        if(count == 1) {
-            System.out.println("     Now you have " + count + " task in the list.");
+    public void addTask(int count) throws DukeException{
+        if(this.name.equals("todo")) {
+            throw new DukeException("     ☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
-            System.out.println("     Now you have " + count + " tasks in the list.");
+            System.out.println("    ____________________________________________________________");
+            System.out.println("     Got it. I've added this task:");
+            System.out.println("       " + this.toString());
+            if (count == 1) {
+                System.out.println("     Now you have " + count + " task in the list.");
+            } else {
+                System.out.println("     Now you have " + count + " tasks in the list.");
+            }
+
+            System.out.println("    ____________________________________________________________");
         }
 
-        System.out.println("    ____________________________________________________________");
     }
 
     @Override
