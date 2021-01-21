@@ -11,14 +11,14 @@ public class Duke {
         System.out.println("Hey there! This is Kums");
         System.out.println("How can i help?");
         ArrayList<Task> list = new ArrayList<>();
-        int listLength = 0;
+        TaskManager manager = new TaskManager(list, 0);
         System.out.println("---------------------------------------");
         String command = br.readLine();
         String[] arr = command.split(" ");
         System.out.println("---------------------------------------");
         while (!command.equals("bye")) {
             try {
-                TaskManager.manage(list, arr);
+                manager.manage(arr);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
