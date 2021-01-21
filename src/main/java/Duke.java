@@ -1,14 +1,14 @@
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
-    private PrintStream printer;
-    private Scanner input;
-    private ArrayList<Task> tasks;
+    private final PrintStream printer;
+    private final Scanner input;
+    private final ArrayList<Task> tasks;
 
     public Duke(PrintStream printer, InputStream inputStream) {
         this.printer = printer;
@@ -43,7 +43,7 @@ public class Duke {
         while (true) {
             String cmd = input.nextLine();
 
-            if (cmd.toLowerCase().equals(exitCmd)) {
+            if (cmd.equalsIgnoreCase(exitCmd)) {
                 // Exit command
                 break;
             } else {
@@ -66,6 +66,7 @@ public class Duke {
                         // default: unrecognized command
                         printer.println(String.format("Sorry, I don't know what '%s' means", cmd));
                     }
+
                 } catch (DukeException ex) {
                     printer.println(ex.getMessage());
                 }
@@ -151,7 +152,7 @@ public class Duke {
 
         if (!periodMatcher.find()) {
             throw new DukeException("An event must have a period!\n"
-                    + "Expected format: deadline <DESCRIPTION> /by <PERIOD>");
+                    + "Expected format: event <DESCRIPTION> /at <PERIOD>");
         }
 
         String taskDesc = periodMatcher.group(1);
@@ -222,7 +223,8 @@ public class Duke {
             }
         } catch (NumberFormatException nfe) {
             // Argument of wrong type
-            throw new DukeException(String.format("Illegal argument: '%s'. Expected integer", argStr));
+            throw new DukeException(String.format("Illegal argument: '%s'. Expected integer.\n"
+                    + "Valid task numbers are 1 to %d.", argStr, tasks.size()));
         }
     }
 }
