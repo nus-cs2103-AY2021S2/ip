@@ -1,5 +1,7 @@
-
-
+/*
+Task is the general case for Todo, Deadline, and Event. In future we might change this to interface or smt,
+I dont know... depends on future requirements.
+ */
 public class Task {
     public Task(String description) {
         this.description = description;
@@ -7,7 +9,7 @@ public class Task {
     }
 
     protected String getStatusIcon() {
-        return (isDone ? "X" : " "); //return tick or X symbols
+        return (isDone ? "X" : " "); //return X symbol or empty string
     }
 
     public void markDone() {
