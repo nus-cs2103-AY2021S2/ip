@@ -70,10 +70,18 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Command method when the user types in "bye".
+     */
     public static void byeCommand(){
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Command method when the user types in "done X"
+     * @param tasks List of tasks.
+     * @param inputArr Command input.
+     */
     public static void doneCommand(List<Task>tasks, String[] inputArr ){
         System.out.println("Nice! I've marked this task as done:");
         Task doneTask = tasks.get(Integer.parseInt(inputArr[1]) - 1);
@@ -81,6 +89,14 @@ public class Duke {
         System.out.println(tasks.get(Integer.parseInt(inputArr[1]) - 1).toString());
     }
 
+    /**
+     * Command method when the user types in "todo".
+     * @param inputArr Command input in array form.
+     * @param tasks List of tasks.
+     * @param numOfItems Number of items in the list.
+     * @param input Original input
+     * @throws DukeMissingInputException
+     */
     public static void toDoCommand(String[] inputArr, List<Task> tasks, int numOfItems, String input)
             throws DukeMissingInputException {
         String description = "";
@@ -96,6 +112,14 @@ public class Duke {
         tasks.get(numOfItems).toString();
     }
 
+    /**
+     * Command method when the user types in "deadline".
+     * @param inputArr Command input in array form.
+     * @param tasks List of tasks.
+     * @param numOfItems Number of items in the list.
+     * @param input Original input.
+     * @throws DukeMissingInputException Throws Missing Input Exception when missing input.
+     */
     public static void deadlineCommand(String[] inputArr, List<Task> tasks, int numOfItems, String input)
             throws DukeMissingInputException {
         String description = "";
@@ -120,6 +144,14 @@ public class Duke {
         tasks.add(new Deadline(description, deadline));
     }
 
+    /**
+     * Command method when the user types in "event".
+     * @param inputArr Command input in array form.
+     * @param tasks List of tasks.
+     * @param numOfItems Number of items in the list.
+     * @param input Original input.
+     * @throws DukeMissingInputException
+     */
     public static void eventCommand(String[] inputArr, List<Task> tasks, int numOfItems, String input)
             throws DukeMissingInputException {
         String description = "";
@@ -144,6 +176,11 @@ public class Duke {
         tasks.add(new Event(description, time));
     }
 
+    /**
+     * Command method when the user types in "event".
+     * @param inputArr Command input in array form.
+     * @param tasks List of tasks.
+     */
     public static void deleteCommand(String[] inputArr, List<Task> tasks){
         tasks.remove(Integer.parseInt(inputArr[1]) - 1);
     }
