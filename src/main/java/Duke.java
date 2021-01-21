@@ -9,7 +9,15 @@ public class Duke {
         greeting();
         while(true) {
             String command = sc.nextLine();
-            if (!processCommand(command)) {
+            printLine();
+            boolean canContinue = true;
+            try {
+                canContinue = processCommand(command);
+            } catch (DukeException e) {
+                printMsg(e.getMessage());
+            }
+            printLine();
+            if (!canContinue) {
                 break;
             }
         }
@@ -18,7 +26,7 @@ public class Duke {
 
     /**
      * print message with proper indentations
-     * @param msg
+     * @param msg the message without indentation
      */
     public static void printMsg(String msg) {
         System.out.println("     " + msg);
@@ -27,11 +35,14 @@ public class Duke {
     /**
      * @param command a string which needs to be parsed
      */
-    public static void addTask(String command) {
+    public static void addTask(String command) throws DukeException {
         String type = command.split(" ")[0];
+        if (command.split(" ").length < 2 && type.equals("todo")) {
+            throw new EmptyTodoDescriptionException();
+        }
         String substr = command.replaceFirst(type + " ", "");
         Task newTask;
-        String title = "";
+        String title;
         switch (type) {
             case "todo":
                 title = substr;
@@ -41,8 +52,7 @@ public class Duke {
             case "deadline":
                 int idxOfBy = substr.indexOf("/by");
                 if (idxOfBy == -1) {
-                    ifError();
-                    return;
+                    throw new DukeException();
                 } else {
                     title = substr.substring(0, idxOfBy - 1);
                     String deadline = substr.substring(idxOfBy + 4);
@@ -53,8 +63,7 @@ public class Duke {
             case "event":
                 int idxOfAt = substr.indexOf("/at");
                 if (idxOfAt == -1) {
-                    ifError();
-                    return;
+                    throw new DukeException();
                 } else {
                     title = substr.substring(0, idxOfAt - 1);
                     String time = substr.substring(idxOfAt + 4);
@@ -63,8 +72,7 @@ public class Duke {
                 }
                 break;
             default:
-                ifError();
-                return;
+                throw new DukeException();
         }
         counter++;
         printMsg("Got it. I've added this task: ");
@@ -103,14 +111,12 @@ public class Duke {
 
     /**
      * map commands to actions
-     * @param command
+     * @param command the input of user
      * @return false if command entered is "bye" else true
      */
-    public static boolean processCommand(String command) {
-        printLine();
+    public static boolean processCommand(String command) throws DukeException {
         if (command.equals("bye")) {
             sayBye();
-            printLine();
             return false;
         }
         
@@ -124,17 +130,16 @@ public class Duke {
                     break;
                 case "done":
                     try {
-                        int idx = Integer.parseInt(substrs[1]);
+                        int idx = Integer.parseInt(substrs[1]) - 1;
                         doneTask(tasks[idx]);
                     } catch (Exception e) {
-                        ifError();
+                        throw new DukeException();
                     }
                     break;
                 default:
-                    ifError();
+                    throw new UnknownCommandException();
             }
         }
-        printLine();
         return true;
     }
 
@@ -143,18 +148,11 @@ public class Duke {
     }
 
     /**
-     * print error message if the input cannot be parsed
-     */
-    public static void ifError() {
-        printMsg("unknown command or incorrect input format");
-    }
-
-    /**
      * print task list as well as their status
      */
     public static void printTasks() {
         for (int i = 0; i < counter; i++) {
-            printMsg(i + "." + tasks[i].toString());
+            printMsg((i + 1) + "." + tasks[i].toString());
         }
     }
 }
