@@ -16,7 +16,6 @@ public class Vergil {
             System.out.print(">>> ");
             command = scan.nextLine();
 
-            // List the current tasks.
             if (command.matches("bye")) {
                 System.out.println("Bye. See you soon!");
             } else if (command.matches("list")) {
@@ -31,14 +30,36 @@ public class Vergil {
                                 task);
                     } else {
                         task.doTask();
-                        System.out.printf("Sweet! Task completed: %s\n", task);
+                        System.out.println("Sweet! Task completed:");
+                        System.out.printf("   %s\n", task);
                     }
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Sorry! There is no task with that list number.");
                 }
+            } else if (command.matches("todo .+")) {
+                String desc = command.split(" ", 2)[1];
+                tasks.add(new Todo(desc));
+                System.out.printf("Added '%s' as a ToDo task.\n", desc);
+            } else if (command.matches("deadline .+ /by .+")) {
+                String[] bySplit = command.split(" /by ");
+                String desc = bySplit[0].split(" ", 2)[1];
+                String time = bySplit[1];
+
+                tasks.add(new Deadline(desc, time));
+                System.out.printf("Added '%s' as a deadline task by '%s'.\n",
+                        desc,
+                        time);
+            } else if (command.matches("event .+ /at .+")) {
+                String[] atSplit = command.split(" /at ");
+                String desc = atSplit[0].split(" ", 2)[1];
+                String time = atSplit[1];
+
+                tasks.add(new Event(desc, time));
+                System.out.printf("Added '%s' as an event task by '%s'.\n",
+                        desc,
+                        time);
             } else {
-                tasks.add(new Task(command));
-                System.out.printf("Added '%s'.\n", command);
+                System.out.println("Sorry! This command is unrecognizable.");
             }
             System.out.println();
         } while (!command.equals("bye"));
