@@ -30,7 +30,7 @@ public class Oracle {
         Scanner S = new Scanner(System.in);
         while(true) {
             String input = S.nextLine();  // Read user input
-            String[] split = input.split(" ", 2);
+            String[] split = input.split(" ", 2); // Split user input
             if (input.equals("bye")){
                 System.out.println("Very well, we shall meet again");
                 break;
@@ -38,7 +38,7 @@ public class Oracle {
             else if (input.equals("list")){
                 System.out.println("You have forgotten quickly, but the Oracle Remembers");
                 for (int i = 0; i< db.size(); i++){
-                   printTask(i);
+                    System.out.println((i+1) + ". " + db.get(i));
                 }
             }
             else if (split[0].equals("done") && split.length > 1){
@@ -46,21 +46,28 @@ public class Oracle {
                 try {
                     db.get(i).markDone();
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Invalid index of task, please try again");
+                    System.out.println("The Oracle cannot work with an invalid index");
                     continue;
                 }
-                printTask(i);
+                System.out.println((i+1) + ". " + db.get(i));
+            }
+            else if (split[0].equals("todo") && split.length > 1){
+                db.add(new Todo(split[1]));
+                System.out.println(db.size() + ". " + db.get(db.size()-1));
+            }
+            else if (split[0].equals("event") && split.length > 1){
+                String[] params = split[1].split("/", 2);
+                db.add(new Event(params[0], params[1]));
+                System.out.println(db.size() + ". " + db.get(db.size()-1));
+            }
+            else if (split[0].equals("deadline") && split.length > 1){
+                String[] params = split[1].split("/", 2);
+                db.add(new Deadline(params[0], params[1]));
+                System.out.println(db.size() + ". " + db.get(db.size()-1));
             }
             else {
-                db.add(new Task(input));
-                System.out.println("I will keep " + "\"" + input + "\" in mind");
+                System.out.println("Your words are unclear, Neo");
             }
         }
-    }
-
-    private static void printTask(int i){
-        String index = (i+1) + ". ";
-        String doneStatus = "[" + db.get(i).getStatusIcon() + "] ";
-        System.out.println(index + doneStatus + db.get(i).description);
     }
 }
