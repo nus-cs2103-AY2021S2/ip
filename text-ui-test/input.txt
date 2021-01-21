@@ -1,0 +1,15 @@
+task1
+task2
+task3
+todo task4
+event task5 /at task5time
+deadline task6 /by task6time
+list
+done 1
+done 2
+done 3
+done 4
+done 5
+done 6
+list
+bye
