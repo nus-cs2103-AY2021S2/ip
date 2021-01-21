@@ -90,13 +90,14 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (!(input.equals("bye"))) {
+        //while (!(input.equals("bye"))) {
+        while (sc.hasNextLine()) {
             try {
                 this.process(input);
             } catch (DukeException err) {
                 System.out.println(err.getMessage());
             }
-            sc = new Scanner(System.in);
+            //sc = new Scanner(System.in);
             input = sc.nextLine();
         }
         if (input.equals("bye")) {
