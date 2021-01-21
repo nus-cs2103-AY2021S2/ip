@@ -5,3 +5,63 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+Hello! I'm a bot called Duke. Beep boop. 
+What do you want?
+
+    _______________________________________
+    Here are the tasks in your list:
+    
+    _______________________________________
+    
+    _______________________________________
+    Got it. I've added this task:
+    [T][N] borrow book
+    Now you have 1 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    Here are the tasks in your list:
+    1: [T][N] borrow book
+    _______________________________________
+    
+    _______________________________________
+    Got it. I've added this task:
+    [D][N] return book (by: Sunday)
+    Now you have 2 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    Here are the tasks in your list:
+    1: [T][N] borrow book
+    2: [D][N] return book (by: Sunday)
+    _______________________________________
+    
+    _______________________________________
+    Got it. I've added this task:
+    [E][N] project meeting (at: Mon 2-4pm)
+    Now you have 3 tasks in the list.
+    _______________________________________
+    
+    _______________________________________
+    Here are the tasks in your list:
+    1: [T][N] borrow book
+    2: [D][N] return book (by: Sunday)
+    3: [E][N] project meeting (at: Mon 2-4pm)
+    _______________________________________
+    
+    _______________________________________
+    Nice! I've marked this task as done:
+      [D][Y] return book (by: Sunday)
+    _______________________________________
+    
+    _______________________________________
+    Here are the tasks in your list:
+    1: [T][N] borrow book
+    2: [D][Y] return book (by: Sunday)
+    3: [E][N] project meeting (at: Mon 2-4pm)
+    _______________________________________
+    
+    _______________________________________
+    BYE AND HAVE A GOOD DAY. Beep boop.
+    _______________________________________
+    
