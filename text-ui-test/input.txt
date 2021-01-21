@@ -1,0 +1,12 @@
+todo have lunch
+todo borrow a book
+deadline submit homework /by Sunday
+list
+event project meeting /at Mon 2-4pm
+deadline return book /by Sat 12pm
+done 2
+done 5
+delete 4
+delete 5
+list
+bye

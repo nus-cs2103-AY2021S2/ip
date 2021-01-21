@@ -28,6 +28,7 @@ public class Duke {
         taskList.add("event");
         taskList.add("done");
         taskList.add("delete");
+        String line = "---------------------------------------------";
 
         while (input.hasNextLine()) {
             String s = input.nextLine();
@@ -41,7 +42,7 @@ public class Duke {
                     executeTask(s, taskList, myList);
                 } catch (DukeException e) {
                     System.out.println("---------------------------------------------");
-                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    System.out.println(e.getMessage());
                     System.out.println("---------------------------------------------");
                 }
             }
@@ -52,27 +53,33 @@ public class Duke {
         String[] parts = s.split(" ", 2);
         String taskType = parts[0];
 
-        if (!taskList.contains(taskType)) {
-            throw new DukeException("invalid input");
+        if (!taskList.contains(taskType.toLowerCase())) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else {
             if (taskType.toLowerCase().equals("done")) {
                 try {
                     markTask(parts, myList);
                 } catch (DukeException e){
                     System.out.println("---------------------------------------------");
-                    System.out.println("OOPS!!! Please specify the task number.");
+                    System.out.println(e.getMessage());
                     System.out.println("---------------------------------------------");
                 }
             } else {
                 if (taskType.toLowerCase().equals("delete")) {
-                    deleteTask(parts, myList);
+                    try {
+                        deleteTask(parts, myList);
+                    } catch (DukeException e){
+                        System.out.println("---------------------------------------------");
+                        System.out.println(e.getMessage());
+                        System.out.println("---------------------------------------------");
+                    }
                 } else {
                     if (taskType.toLowerCase().equals("todo")) {
                         try {
                             addToDo(parts, myList);
                         } catch (DukeException e) {
                             System.out.println("---------------------------------------------");
-                            System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                            System.out.println(e.getMessage());
                             System.out.println("---------------------------------------------");
                         }
                     } else {
@@ -81,7 +88,7 @@ public class Duke {
                                 addDeadline(parts, myList);
                             } catch (DukeException e) {
                                 System.out.println("---------------------------------------------");
-                                System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                                System.out.println(e.getMessage());
                                 System.out.println("---------------------------------------------");
                             }
                         }else{
@@ -90,7 +97,7 @@ public class Duke {
                                     addEvent(parts, myList);
                                 } catch (DukeException e) {
                                     System.out.println("---------------------------------------------");
-                                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                                    System.out.println(e.getMessage());
                                     System.out.println("---------------------------------------------");
                                 }
                             }
@@ -121,42 +128,65 @@ public class Duke {
     private void markTask(String[] parts, ArrayList<Task> myList) throws DukeException{
         // task to be done is empty
         if (parts.length == 1){
-            throw new DukeException("empty task");
+            throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
             try {
                 completeTask(parts, myList);
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 System.out.println("---------------------------------------------");
-                System.out.println("OOPS!!! The task cannot be found.");
+                System.out.println(e.getMessage());
                 System.out.println("---------------------------------------------");
             }
         }
     }
 
-    private void completeTask(String[] parts, ArrayList<Task> myList) {
-        int taskNo = Integer.valueOf(parts[1]);
-        Task curTask = myList.get(taskNo - 1);
-        curTask.markAsDone();
-        System.out.println("---------------------------------------------");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(curTask);
-        System.out.println("---------------------------------------------");
+    private void completeTask(String[] parts, ArrayList<Task> myList) throws DukeException{
+        try {
+            int taskNo = Integer.valueOf(parts[1]);
+            Task curTask = myList.get(taskNo - 1);
+            curTask.markAsDone();
+            System.out.println("---------------------------------------------");
+            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println(curTask);
+            System.out.println("---------------------------------------------");
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! The task cannot be found.");
+        }
     }
 
-    private void deleteTask(String[] parts, ArrayList<Task> myList){
-        int taskNo = Integer.valueOf(parts[1]);
-        Task curTask = myList.get(taskNo - 1);
-        myList.remove(taskNo-1);
-        System.out.println("---------------------------------------------");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(curTask);
-        System.out.println("Now you have " + myList.size() + " tasks in the list.");
-        System.out.println("---------------------------------------------");
+    private void deleteTask(String[] parts, ArrayList<Task> myList) throws DukeException {
+        // task to be done is empty
+        if (parts.length == 1) {
+            throw new DukeException("OOPS!!! The task cannot be found.");
+        } else {
+            try {
+                removeTask(parts, myList);
+            } catch (DukeException e){
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
+            }
+        }
+    }
+
+    private void removeTask(String[] parts, ArrayList<Task> myList) throws DukeException {
+        try {
+            int taskNo = Integer.valueOf(parts[1]);
+            Task curTask = myList.get(taskNo - 1);
+            myList.remove(taskNo - 1);
+            System.out.println("---------------------------------------------");
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(curTask);
+            System.out.println("Now you have " + myList.size() + " tasks in the list.");
+            System.out.println("---------------------------------------------");
+        } catch (Exception e){
+            throw new DukeException("OOPS!!! The task cannot be found.");
+        }
     }
 
     private void addToDo(String[] parts, ArrayList<Task> myList) throws DukeException{
         if(parts.length == 1) {
-            throw new DukeException("empty task");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
             ToDo newTask = new ToDo(parts[1]);
             myList.add(newTask);
@@ -170,12 +200,12 @@ public class Duke {
 
     private void addDeadline(String[] parts, ArrayList<Task> myList) throws DukeException{
         if (parts.length == 1) {
-            throw new DukeException("empty task");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
             String task = parts[1];
             String[] details = task.split(" /by ", 2);
             if (details.length == 1){
-                throw new DukeException("empty time");
+                throw new DukeException("OOPS!!! The time of a deadline is invalid.");
             } else {
                 String description = details[0];
                 String by = details[1];
@@ -193,12 +223,12 @@ public class Duke {
 
     private void addEvent(String[] parts, ArrayList<Task> myList) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("empty task");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else {
             String task = parts[1];
             String[] details = task.split(" /at ", 2);
             if (details.length == 1) {
-                throw new DukeException("empty time");
+                throw new DukeException("OOPS!!! The time of an event is invalid.");
             } else {
                 String description = details[0];
                 String time = details[1];
