@@ -8,8 +8,9 @@
   Hey there, Olaf here!
   What will we be doing today?
  --*---*---*---*---*---*---*---*---*---*--
-  Hmm I don't understand :(
-  Please use the following to update me!
+  Hmm sorry I don't understand :(
+
+  Please use the following to update me:
 
     todo <task description>
       \_ adds a task to be done
@@ -42,8 +43,16 @@
   event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
-  Here are your pending tasks:
+  Oops! Please state the task number to mark as done:
 
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  You don't have any tasks yet :)
+  Type 'help' to see how you can add a task
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Okie added new task:
@@ -51,6 +60,15 @@
   1. [T][ ] hi
 
   Total 1 tasks, only 1 left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+  Please state the task number to mark as done:
+
+  done <task number>
+
+  Type 'list' to view all tasks
+  and their respective numbers
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Okie added new task:
@@ -67,11 +85,13 @@
   Total 3 tasks, only 3 left to be done!
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
-  Here are your pending tasks:
+  Here are all the tasks in your list:
 
   1. [T][ ] hi
   2. [E][ ] test  (at:  idk...)
   3. [D][ ] submit  (by:  ytd!)
+
+  Only 3 tasks left to be done!
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Great job! You're done with:
@@ -79,6 +99,11 @@
   2. [E][X] test  (at:  idk...)
 
   Now 2 tasks are left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Oops! No such task found...
+
+  There are only 3 tasks in your list.
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Okie added new task:
@@ -95,12 +120,30 @@
   Now 2 tasks are left to be done!
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
-  Here are your pending tasks:
+  Here are all the tasks in your list:
 
   1. [T][ ] hi
   2. [E][X] test  (at:  idk...)
   3. [D][X] submit  (by:  ytd!)
   4. [T][ ] tutorial
+
+  Only 2 tasks left to be done!
+ --*---*---*---*---*---*---*---*---*---*--
+ --*---*---*---*---*---*---*---*---*---*--
+  Please use the following to update me:
+
+    todo <task description>
+      \_ adds a task to be done
+    deadline <task description> /by <DD-MM-YYYY>
+      \_ adds a deadline
+    event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>
+      \_ adds an event
+    list
+      \_ lists all tasks, deadlines and events
+    done <task number>
+      \_ marks a task as done
+    bye
+      \_ exists this application
  --*---*---*---*---*---*---*---*---*---*--
  --*---*---*---*---*---*---*---*---*---*--
   Aww hope to see you soon, goodbye!
