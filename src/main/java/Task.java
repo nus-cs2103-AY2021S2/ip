@@ -1,16 +1,10 @@
 public class Task {
     protected final String description;
     protected boolean isDone;
-    protected final int id;
 
-    Task(String description, int id) {
+    Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.id = id;
-    }
-
-    int getID() {
-        return this.id;
     }
 
     void markAsDone() {
