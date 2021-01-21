@@ -19,9 +19,9 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
 
             } else if (command.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
+                System.out.println("Here are the tasks in your task list:");
                 for (int i = 0; i < taskList.size() ; i++ ) {
-                    System.out.println((i + 1) + "."
+                    System.out.println((i + 1) + ". "
                             + taskList.get(i).getTypeIcon()
                             + taskList.get(i).getStatusIcon() + " "
                             + taskList.get(i).getDescription()
@@ -29,7 +29,29 @@ public class Duke {
                 }
 
             } else if(command.equals("done")) {
-                Task task = taskList.get(Integer.parseInt(tokens[1]) - 1);
+
+                // check for correct number of arguments
+                if (tokens.length < 2) {
+                    System.out.println("☹ OOPS!!! The description of a done cannot be empty.");
+                    continue;
+                }
+
+                // check if argument is an integer
+                int taskId;
+                try {
+                    taskId = Integer.parseInt(tokens[1]) - 1;
+                } catch (NumberFormatException e) {
+                    System.out.println("☹ OOPS!!! The id of a done must be an integer.");
+                    continue;
+                }
+
+                // check if integer is within bounds
+                if (taskId >= taskList.size() || taskId < 0) {
+                    System.out.println("☹ OOPS!!! That is an invalid task id.");
+                    continue;
+                }
+
+                Task task = taskList.get(taskId);
                 task.markAsDone();
 
                 System.out.println("Nice! I've marked this task as done: \n"
@@ -38,6 +60,11 @@ public class Duke {
                 );
 
             } else if (command.equals("todo")) {
+                if (tokens.length < 2) {
+                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                    continue;
+                }
+
                 Task task = new Todo(tokens[1]);
                 taskList.add(task);
 
@@ -47,6 +74,11 @@ public class Duke {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
 
             } else if (command.equals("deadline")) {
+                if (tokens.length < 2) {
+                    System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    continue;
+                }
+
                 String[] split = tokens[1].split("/by", 2);
                 Task task = new Deadlines(split[0], split[1]);
                 taskList.add(task);
@@ -57,6 +89,11 @@ public class Duke {
                 System.out.println("Now you have " + taskList.size() + " tasks in the list.");
 
             } else if (command.equals("event")) {
+                if (tokens.length < 2) {
+                    System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+                    continue;
+                }
+
                 String[] split = tokens[1].split("/at", 2);
                 Task task = new Events(split[0], split[1]);
                 taskList.add(task);
@@ -64,12 +101,10 @@ public class Duke {
                 System.out.println("Got it. I have added this task:");
                 System.out.println("  " + task.getTypeIcon() + task.getStatusIcon() + " "
                         + task.getDescription());
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println("Now you have " + taskList.size() + " tasks in the list");
 
             } else {
-                Task task = new Task(input);
-                taskList.add(task);
-                System.out.println("added: " + task.getDescription());
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
