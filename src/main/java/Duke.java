@@ -15,26 +15,7 @@ public class Duke {
         loop();
     }
 
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
 
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        @Override
-        public String toString() {
-            return (getStatusIcon() + " "+ description);
-        }
-
-
-
-        public String getStatusIcon() {
-            return (isDone ? "[X]" : "[ ]"); //return tick or X symbols
-        }
-    }
 
 
     public static void dukePrint(String s) {
@@ -72,13 +53,29 @@ public class Duke {
                     dukePrint("Uhhh.... Our list starts at 1...");
                 } else {
                     myList.get(index).isDone = true;
-
                     dukePrint("Good! We finished task: " + s + ". " + myList.get(index));
                 }
+            } else if (s.matches("deadline .+?( /by ).*")) {
+                s = s.replaceAll("deadline ","");
+                String[] deadlineInfo = s.split(" /by ",-1);
+                Deadline t = new Deadline(deadlineInfo[0],deadlineInfo[1]);
+                myList.add(t);
+                dukePrint("added new deadline: " + t);
+            } else if (s.matches("event .+?( /at ).*")) {
+                s = s.replaceAll("event ","");
+                String[] eventInfo = s.split(" /at ",-1);
+                Event t = new Event(eventInfo[0],eventInfo[1]);
+                myList.add(t);
+                dukePrint("added new event: " + t);
+            } else if (s.matches("todo .*")) {
+                s = s.replaceAll("todo ","");
+                Todo t = new Todo(s);
+                myList.add(t);
+                dukePrint("added new todo: " + t);
             } else {
                 Task t = new Task(s);
                 myList.add(t);
-                dukePrint("added: " + s);
+                dukePrint("added task: " + t);
             }
         }
     }
