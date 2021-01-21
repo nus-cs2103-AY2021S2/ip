@@ -16,36 +16,64 @@ public class Duke {
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] check = input.split(" ");
-            if(check[0].equals("bye")) {
+            if(input.equals("bye")) {
                 System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
                 break;
-            } else if(check[0].equals("list")) {
+            } else if(input.equals("list")) {
                 System.out.println(divider + "Here are the tasks in your list:");
                 for(int i = 1; i <= list.size(); i++) {
                     System.out.println("  " + i + ". " + list.get(i-1));
                 }
                 System.out.println(divider);
             } else if(check[0].equals("done")) {
-                list.get(Integer.parseInt(check[1])-1).markAsDone();
-                System.out.println(divider + "Nice! I've marked this task as done:\n  " + list.get(Integer.parseInt(check[1])-1) + "\n" + divider);
+                try {
+                    checkEmptyInput(check);
+                    list.get(Integer.parseInt(check[1])-1).markAsDone();
+                    System.out.println(divider + "Nice! I've marked this task as done:\n  " + list.get(Integer.parseInt(check[1])-1) + "\n" + divider);
+                } catch (DukeException e) {
+                    System.out.println(divider + "OOPS!!! Please select an item to mark as done.\n" + divider);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(divider + "OOPS!!! Selected item does not exist.\n" + divider);
+                }
             } else if(check[0].equals("todo")) {
-                Todo curr = new Todo(input.substring(5,input.length()));
-                list.add(curr);
-                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                try {
+                    checkEmptyInput(check);
+                    Todo curr = new Todo(input.substring(5,input.length()));
+                    list.add(curr);
+                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                } catch (DukeException e) {
+                    System.out.println(divider + "OOPS!!! The description of a todo cannot be empty.\n" + divider);
+                }
             } else if(check[0].equals("deadline")) {
-                String[] temp = input.substring(9, input.length()).split(" /by ");
-                Deadline curr = new Deadline(temp[0], temp[1]);
-                list.add(curr);
-                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                try {
+                    checkEmptyInput(check);
+                    String[] temp = input.substring(9, input.length()).split(" /by ");
+                    Deadline curr = new Deadline(temp[0], temp[1]);
+                    list.add(curr);
+                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                } catch (DukeException e) {
+                    System.out.println(divider + "OOPS!!! The description of a deadline cannot be empty\n" + divider);
+                }
             } else if(check[0].equals("event")) {
-                String[] temp = input.substring(6, input.length()).split(" /at ");
-                Event curr = new Event(temp[0], temp[1]);
-                list.add(curr);
-                System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                try {
+                    checkEmptyInput(check);
+                    String[] temp = input.substring(6, input.length()).split(" /at ");
+                    Event curr = new Event(temp[0], temp[1]);
+                    list.add(curr);
+                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
+                } catch (DukeException e) {
+                    System.out.println(divider + "OOPS!!! The description of an event cannot be empty\n" + divider);
+                }
             } else {
-                list.add(new Task(input));
-                System.out.println(divider + "Added: " + input + "\n" + divider);
+                System.out.println(divider + "OOPS!!! I'm sorry, but I don't know what that means :-(\n" + divider);
             }
         }
+    }
+
+    private static boolean checkEmptyInput(String[] input) throws DukeException {
+        if(input.length <= 1) {
+            throw new DukeException();
+        }
+        return true;
     }
 }
