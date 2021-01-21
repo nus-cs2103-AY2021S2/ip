@@ -51,8 +51,28 @@ public class Duke {
                             System.out.println(line + tasks.get(num - 1).doneTask()
                                     + "\n" + line);
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                            System.out.println(line + " Enter 'done' followed by a number between " +
-                                    "1 and " + tasks.size() + "\n" + line);
+                            if (tasks.size()==0){
+                                System.out.println(line+" No tasks to complete!\n"+line);
+                            } else {
+                                System.out.println(line + " Enter 'done' followed by a number between " +
+                                        "1 and " + tasks.size() + "\n" + line);
+                            }
+                        }
+                    } else if (split[0].equals("delete")) {
+                        try {
+                            int num = Integer.parseInt(split[1]);
+                            System.out.println(line + " I've removed the following task:\n"
+                                    + " " +tasks.get(num - 1));
+                            tasks.remove(num-1);
+                            System.out.println(" You now have "+ tasks.size() + " tasks" +
+                                    " in the list\n" + line);
+                        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                            if (tasks.size()==0){
+                                System.out.println(line+" No tasks to delete!\n" + line);
+                            } else {
+                                System.out.println(line + " Enter 'delete' followed by a number between " +
+                                        "1 and " + tasks.size() + "\n" + line);
+                            }
                         }
                     } else if (split[0].equals("todo") || split[0].equals("deadline")
                             || split[0].equals("event")) {
