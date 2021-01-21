@@ -1,6 +1,6 @@
 public class Task extends AbstractTask{
 
-    public Task(String description) {
+    public Task(String description) throws DukeEmptyDescriptionException {
         super(description);
     }
 
