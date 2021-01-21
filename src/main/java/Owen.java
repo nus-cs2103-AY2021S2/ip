@@ -60,55 +60,19 @@ public class Owen implements Chatbot {
             case "todo":
             case "event":
             case "deadline":
-                TaskList addedTaskList = this.taskList.addTask(command);
-                int numTasks = addedTaskList.getNumTasks();
-                String addedFormat = ""
-                        + "Got it. I've added this task:\n"
-                        + "    %s\n"
-                        + "Now you have %d tasks in the list.";
-                Response addResponse = new DefaultResponse(String.format(
-                        addedFormat, addedTaskList.getTask(numTasks), numTasks));
-                return new Owen(this.isRunning, addResponse, addedTaskList);
+                return this.addTask(command);
             case "list":
-                Response listResponse = new DefaultResponse(this.taskList.toString());
-                return new Owen(this.isRunning, listResponse, this.taskList);
+                return this.listTasks();
             case "done":
                 if (splitCommand.length < 2) {
                     throw new OwenException("Task number must be specified...");
                 }
-
-                int taskNumber;
-                try {
-                    taskNumber = Integer.parseInt(splitCommand[1]);
-                } catch (NumberFormatException exception) {
-                    throw new OwenException("Task number must be specified...");
-                }
-
-                TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
-                String doneFormat = "Nice! I've marked this task as done:\n    %s";
-                Response doneResponse = new DefaultResponse(String.format(
-                        doneFormat, doneTaskList.getTask(taskNumber).toString()));
-                return new Owen(this.isRunning, doneResponse, doneTaskList);
+                return this.doneTask(this.parseTaskNumber(splitCommand[1]));
             case "delete":
                 if (splitCommand.length < 2) {
                     throw new OwenException("Task number must be specified...");
                 }
-
-                try {
-                    taskNumber = Integer.parseInt(splitCommand[1]);
-                } catch (NumberFormatException exception) {
-                    throw new OwenException("Task number must be specified...");
-                }
-
-                TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
-                String deleteFormat = ""
-                + "Noted. I've removed this task:\n"
-                + "    %s\n"
-                + "Now you have %d tasks in the list.";
-                int newNumTasks = deleteTaskList.getNumTasks();
-                Response deleteResponse = new DefaultResponse(String.format(
-                        deleteFormat, this.taskList.getTask(taskNumber), newNumTasks));
-                return new Owen(this.isRunning, deleteResponse, deleteTaskList);
+                return this.deleteTask(this.parseTaskNumber(splitCommand[1]));
             case "bye":
                 return this.shutdown();
             default:
@@ -118,5 +82,50 @@ public class Owen implements Chatbot {
             Response exceptionResponse = new DefaultResponse(exception.getMessage());
             return new Owen(this.isRunning, exceptionResponse, this.taskList);
         }
+    }
+
+    private int parseTaskNumber(String taskNumber) throws OwenException {
+        try {
+            return Integer.parseInt(taskNumber);
+        } catch (NumberFormatException exception) {
+            throw new OwenException("Task number must be specified...");
+        }
+    }
+
+    private Owen addTask(String task) throws OwenException {
+        TaskList addedTaskList = this.taskList.addTask(task);
+        int numTasks = addedTaskList.getNumTasks();
+        String addedFormat = ""
+                + "Got it. I've added this task:\n"
+                + "    %s\n"
+                + "Now you have %d tasks in the list.";
+        Response addResponse = new DefaultResponse(String.format(
+                addedFormat, addedTaskList.getTask(numTasks), numTasks));
+        return new Owen(this.isRunning, addResponse, addedTaskList);
+    }
+
+    private Owen listTasks() {
+        Response listResponse = new DefaultResponse(this.taskList.toString());
+        return new Owen(this.isRunning, listResponse, this.taskList);
+    }
+
+    private Owen doneTask(int taskNumber) throws OwenException {
+        TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
+        String doneFormat = "Nice! I've marked this task as done:\n    %s";
+        Response doneResponse = new DefaultResponse(String.format(
+                doneFormat, doneTaskList.getTask(taskNumber).toString()));
+        return new Owen(this.isRunning, doneResponse, doneTaskList);
+    }
+
+    private Owen deleteTask(int taskNumber) throws OwenException {
+        TaskList deleteTaskList = this.taskList.deleteTask(taskNumber);
+        String deleteFormat = ""
+                + "Noted. I've removed this task:\n"
+                + "    %s\n"
+                + "Now you have %d tasks in the list.";
+        int newNumTasks = deleteTaskList.getNumTasks();
+        Response deleteResponse = new DefaultResponse(String.format(
+                deleteFormat, this.taskList.getTask(taskNumber), newNumTasks));
+        return new Owen(this.isRunning, deleteResponse, deleteTaskList);
     }
 }
