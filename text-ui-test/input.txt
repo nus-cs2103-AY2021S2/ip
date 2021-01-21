@@ -9,6 +9,10 @@ list
 done 3
 blah
 todo
+deadline
+event
+done whatever
+blah blah
 delete 1
 done 2
 done 10

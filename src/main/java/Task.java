@@ -17,13 +17,6 @@ public abstract class Task {
         return "[" + type + "]";
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getType() {
-        return type;
-    }
 
     public void setDone(boolean done) {
         isDone = done;
@@ -33,7 +26,4 @@ public abstract class Task {
         return isDone;
     }
 
-    public void markAsDone() {
-        setDone(true);
-    }
 }
