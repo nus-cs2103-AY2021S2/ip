@@ -73,7 +73,7 @@ public class Duke {
                     System.out.println(line + " Please enter 'todo (your task)', " +
                             "or 'deadline (your task) / (deadline date timing)',\n or " +
                             "'event (event name) / (event date timing' to add tasks.\n " +
-                            "To see your tasks enter 'list'.\n To complete a task enter" +
+                            "To see your tasks enter 'list'.\n To complete a task enter " +
                             "'done (number of the task in the list)'.\n And to close Duke " +
                             "enter 'bye'.\n"+ line);
                 }

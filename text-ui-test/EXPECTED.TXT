@@ -66,6 +66,62 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
+ or 'event (event name) / (event date timing' to add tasks.
+ To see your tasks enter 'list'.
+ To complete a task enter 'done (number of the task in the list)'.
+ And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
  Bye, see you again!
 ____________________________________________________________
 

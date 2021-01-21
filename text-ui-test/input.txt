@@ -8,4 +8,11 @@ done 3
 list
 done 4
 done sdfs
+todo
+deadline
+deadline sdf
+deadline sdf /
+event
+event sdf
+event sdf /
 bye
