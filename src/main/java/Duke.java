@@ -23,18 +23,34 @@ public class Duke {
             } else if (curr.equals("list")) {
                 for (int i = 1; i <= list.size(); i++) {
                     Task t = list.get(i - 1);
-                    System.out.println(i + ". [" + t.getStatusIcon() + "] " + t.name);
+                    System.out.println(i + ". " + t);
                 }
             } else if (curr.startsWith("done ")) {
                 String num = curr.substring(5);
                 int taskNum = Integer.parseInt(num);
                 Task updated = list.get(taskNum - 1).setDone();
                 list.set(taskNum - 1, updated);
-                System.out.println("Nice! I've marked this task as done: \n" + "[" + updated.getStatusIcon() + "] " + updated.name);
+                System.out.println("Nice! I've marked this task as done: \n" + updated);
             } else {
-                Task newTask = new Task(curr);
-                list.add(newTask);
-                System.out.println("added " + curr + " to the task list!");
+                if (curr.startsWith("todo ")) {
+                    String taskName = curr.substring(5);
+                    Todo newTask = new Todo(taskName);
+                    list.add(newTask);
+                    System.out.println("Added " + newTask + " to the task list!");
+                } else if (curr.startsWith("deadline ")) {
+                    String taskName = curr.substring(9);
+                    String by = curr.substring(curr.indexOf("/by") + 4);
+                    Deadline newTask = new Deadline(taskName, by);
+                    list.add(newTask);
+                    System.out.println("Added " + newTask + " to the task list!");
+                } else if (curr.startsWith("event ")) {
+                    String taskName = curr.substring(6);
+                    String at = curr.substring(curr.indexOf("/at") + 4);
+                    Event newTask = new Event(taskName, at);
+                    list.add(newTask);
+                    System.out.println("Added " + newTask + " to the task list!");
+                }
+                System.out.println("You now have " + list.size() + " items in the list");
             }
         }
     }
