@@ -21,45 +21,88 @@ public class Duke {
     public static boolean processInput(String input) {
         String[] tokenizedInput = input.split(" ", 2);
 
-        switch (tokenizedInput[0]) {
-            case "list": listTask();
-                break;
-            case "done":
-                int taskIndex = Integer.parseInt(tokenizedInput[1]) - 1;
-                doneTask(taskIndex);
-                break;
-            case "bye": exit();
-                return false;
-            default:
-                addTask(tokenizedInput);
-                break;
+        try {
+            switch (tokenizedInput[0]) {
+                case "list":
+                    listTask();
+                    break;
+                case "done":
+                    doneTask(tokenizedInput[1]);
+                    break;
+                case "bye":
+                    exit();
+                    return false;
+                case "todo":
+                    addTodo(tokenizedInput);
+                    break;
+                case "deadline":
+                    addDeadline(tokenizedInput);
+                    break;
+                case "event":
+                    addEvent(tokenizedInput);
+                    break;
+                default:
+                    throw new DukeException("☹ OPPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+
+            return true;
+        } catch (DukeException e) {
+            echo(e.getMessage());
         }
+
         return true;
     }
 
-    public static void addTask(String[] tokenizedInput) {
-        Task newTask;
-
-        switch (tokenizedInput[0]) {
-            case "deadline":
-                String[] deadlineDetails = tokenizedInput[1].split("/by");
-                newTask = new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim());
-                break;
-            case "event":
-                String[] eventDetails = tokenizedInput[1].split("/at");
-                newTask = new Event(eventDetails[0].trim(), eventDetails[1].trim());
-                break;
-            default:
-                newTask = new ToDo(tokenizedInput[1].trim());
-                break;
+    public static void addTodo(String[] tokenizedInput) throws DukeException {
+        if (tokenizedInput.length != 2) {
+            throw new DukeException("☹ OPPS!!! The description of a todo cannot be empty.");
         }
+
+        Task newTask = new ToDo(tokenizedInput[1].trim());
         tasks.add(newTask);
         echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", newTask, tasks.size()));
     }
 
-    public static void doneTask(int taskIndex) {
-        tasks.get(taskIndex).markAsDone();
-        echo("Nice! I've marked this task as done:\n\t" + tasks.get(taskIndex));
+    public static void addDeadline(String[] tokenizedInput) throws DukeException {
+        if (tokenizedInput.length != 2) {
+            throw new DukeException("☹ OPPS!!! The description of a deadline cannot be empty.");
+        }
+
+        String[] deadlineDetails = tokenizedInput[1].split("/by");
+        if (deadlineDetails.length != 2) {
+            throw new DukeException("☹ OPPS!!! Deadline should be in the following format: deadline [description] /by [deadline]");
+        }
+
+        Task newTask = new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim());
+        tasks.add(newTask);
+        echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", newTask, tasks.size()));
+    }
+
+    public static void addEvent(String[] tokenizedInput) throws DukeException {
+        if (tokenizedInput.length != 2) {
+            throw new DukeException("☹ OPPS!!! The description of a event cannot be empty.");
+        }
+
+        String[] eventDetails = tokenizedInput[1].split("/at");
+        if (eventDetails.length != 2) {
+            throw new DukeException("☹ OPPS!!! Event should be in the following format: event [description] /at [datetime]");
+        }
+
+        Task newTask = new Event(eventDetails[0].trim(), eventDetails[1].trim());
+        tasks.add(newTask);
+        echo(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.", newTask, tasks.size()));
+    }
+
+    public static void doneTask(String input) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(input) - 1;
+            tasks.get(taskIndex).markAsDone();
+            echo("Nice! I've marked this task as done:\n\t" + tasks.get(taskIndex));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OPPS!!! Invalid task number entered.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("☹ OPPS!!! Invalid task number entered.");
+        }
     }
 
     public static void listTask() {
