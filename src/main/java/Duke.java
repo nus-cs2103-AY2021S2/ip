@@ -43,6 +43,7 @@ public class Duke {
                 }
             }
             System.out.println("Goodbye! Have a nice day!");
+            break;
         }
         System.exit(1);
     }
