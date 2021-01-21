@@ -15,12 +15,11 @@ public class Duke {
         System.out.println("    ____________________________________");
 
         Scanner sc = new Scanner(System.in);
-        String[] list = new String[100];
+        Task[] list = new Task[100];
         int currIndex = 0;
 
         while (sc.hasNext()) {
             String command = sc.nextLine();
-          
             System.out.println("    ____________________________________");
 
             if (command.equals("bye")) {
@@ -29,10 +28,16 @@ public class Duke {
                 break;
             } else if (command.equals("list")) {
                 for (int i = 1; i <= currIndex; i++) {
-                    System.out.printf("    %d. %s\n",i, list[i - 1]);
+                    System.out.printf("    %d.%s\n", i, list[i - 1]);
                 }
+            } else if (command.matches(".*done.*")) {
+                // To get the index 
+                int index = command.charAt(5) - 48;
+                list[index - 1].markAsDone();
+                System.out.println("    Nice! I've marked this task as done:");
+                System.out.println("        " + list[index - 1]);
             } else {
-                list[currIndex] = command;
+                list[currIndex] = new Task(command);
                 System.out.println("    added: " + command);
                 currIndex++;
             }
