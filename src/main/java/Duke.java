@@ -14,7 +14,7 @@ public class Duke {
 
     public static void start() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
         while (true) {
             String curr = sc.nextLine();
             if (curr.equals("bye")) {
@@ -22,11 +22,19 @@ public class Duke {
                 break;
             } else if (curr.equals("list")) {
                 for (int i = 1; i <= list.size(); i++) {
-                    System.out.println(i + ". " + list.get(i - 1));
+                    Task t = list.get(i - 1);
+                    System.out.println(i + ". [" + t.getStatusIcon() + "] " + t.name);
                 }
+            } else if (curr.startsWith("done ")) {
+                String num = curr.substring(5);
+                int taskNum = Integer.parseInt(num);
+                Task updated = list.get(taskNum - 1).setDone();
+                list.set(taskNum - 1, updated);
+                System.out.println("Nice! I've marked this task as done: \n" + "[" + updated.getStatusIcon() + "] " + updated.name);
             } else {
-                list.add(curr);
-                System.out.println("added " + curr + " to the list!");
+                Task newTask = new Task(curr);
+                list.add(newTask);
+                System.out.println("added " + curr + " to the task list!");
             }
         }
     }
