@@ -6,17 +6,19 @@ public class Duke {
     public Duke(){
     }
 
-    public String doTask (int taskNum){
+    public void doTask (int taskNum){
         Task curr = list.get(taskNum - 1);
         curr.done = true;
-        return Duke.line + "\n Nice! I've marked this task as done: \n  [" +curr.status()+"] return "+curr.taskName+"\n" + Duke.line;
+        System.out.format(Duke.line + "\n Nice! I've marked this task as done: " +
+                "\n [%s] [%s] %s" +
+                "\n" + Duke.line,curr.type(),curr.status(),curr.toString());
     }
 
     public void printTasks(){
         System.out.println(line);
         int i = 1;
         for(Task s: this.list){
-            System.out.format("%d. [%s] %s \n", i, s.status() ,s.taskName);
+            System.out.format("%d. [%s] [%s] %s \n", i, s.type(), s.status() ,s.toString());
             i++;
         }
         System.out.println(line);
@@ -24,6 +26,27 @@ public class Duke {
 
     public void addTask(Task t){
         list.add(t);
+    }
+
+    public void handleTask(String[] currLine){
+        if (currLine[0].equals("list")) this.printTasks();
+        else if(currLine[0].equals("done")) this.doTask(Integer.parseInt(currLine[1]));
+        else{
+            String output = "";
+            output += line + "\n" + " Got it. I've added this task: \n";
+            Task t;
+            if (currLine[0].equals("todo")) t = new Todo(currLine);
+            else if (currLine[0].equals("deadline")) t = new Deadline(currLine);
+            else if(currLine[0].equals("event"))t = new Event(currLine);
+            else{
+                System.out.println("oops please try again");
+                return;
+            }
+            list.add(t);
+            output += "  "+t.printNew();
+            output += "\n Now you have "+list.size() + " tasks in the list" + "\n" + line;
+            System.out.println(output);
+        }
     }
 
     public static void main(String[] args) {
@@ -34,23 +57,14 @@ public class Duke {
         Duke D = new Duke();
         Scanner sc = new Scanner(System.in);
         String scannedLine = sc.nextLine();
-        String[] currStringLine = scannedLine.split(" ");
-        String currString = currStringLine[0];
+        String[] lineList = scannedLine.split(" ");
+        String currString = lineList[0];
 
         while(!currString.equals("bye")){
-            if(currString.equals("list")){
-                D.printTasks();
-            }
-            else if(currString.equals("done")) {
-                System.out.format(D.doTask(Integer.parseInt(currStringLine[1])));
-            }
-            else {
-                D.addTask(new Task(scannedLine));
-                System.out.println(line + "\n" + "added: " + scannedLine + "\n" + line);
-            }
+            D.handleTask(lineList);
             scannedLine = sc.nextLine();
-            currStringLine = scannedLine.split(" ");
-            currString = currStringLine[0];
+            lineList = scannedLine.split(" ");
+            currString = lineList[0];
         }
         System.out.println(line + "\n" + " Bye. Hope to see you again soon!"+"\n" + line);
 
