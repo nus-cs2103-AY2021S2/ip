@@ -36,8 +36,22 @@ public class Duke {
                 System.out.println("Nice job! I've marked this task as done: \n"
                         + item.toString());
             } else {
-                currList.add(new Task(command));
-                System.out.println("Got it. I've added this task: " + command);
+                String taskType = commandArr[0];
+                String wholeTask = commandArr[1];
+                Task item = null;
+                if (taskType.equals("todo")) {
+                    item = new Todo(wholeTask);
+                } else if (taskType.equals("deadline")) {
+                    String[] taskArr = wholeTask.split("/");
+                    item = new Deadline(taskArr[0], taskArr[1]);
+                } else {
+                    String[] taskArr = wholeTask.split("/");
+                    item = new Event(taskArr[0], taskArr[1]);
+                }
+                currList.add(item);
+                System.out.println("Got it. I've added this task: \n"
+                        + item.toString()
+                        + "\nNow you have " + currList.size() + " tasks in the list.");
             }
         }
     }
