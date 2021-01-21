@@ -23,6 +23,7 @@ public class Duke {
             System.out.println("    ____________________________________________________________");
             if (parts[0].equals("bye")) {
                 System.out.println("     Bye. Hope to see you again soon!");
+                System.out.println("    ____________________________________________________________");
                 break;
             } else if (parts[0].equals("list")) {
                 System.out.println("     Here are the tasks in your list:");
