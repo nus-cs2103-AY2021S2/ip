@@ -6,7 +6,7 @@ public class Duke {
         System.out.println("Hello! I'm Bob :D\n" + "What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         while (true) {
             String userInput = scanner.nextLine();
@@ -16,11 +16,24 @@ public class Duke {
             } else if (userInput.equals("list")) {
                 for (int i = 0; i < list.size(); i++) {
                     int index = i + 1;
-                    System.out.println(index + ". " + list.get(i));
+                    System.out.println("This is your list of tasks: \n "+
+                            index + "." + list.get(i));
                 }
-            }
-            else {
-                list.add(userInput);
+            } else if (userInput.length() >= 4 && userInput.substring(0,4).equals("done")) {
+                try {
+                    int index = Integer.parseInt(userInput.substring(5));
+                    if (index < list.size()) {
+                        Task updatedTask = list.get(index - 1);
+                        updatedTask.status(true);
+                        System.out.println("Good job! This task has been marked as done :)\n" +
+                                updatedTask);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid format, please try again using numbers only.");
+                }
+
+            } else {
+                list.add(new Task(userInput, false));
                 System.out.println("added: " + userInput);
             }
         }
