@@ -33,7 +33,7 @@ public class Duke {
 
                 case "todo":
                     String scanTest = sc.nextLine();
-                    if (scanTest.equals("") || scanTest.equals(" ")) {
+                    if (scanTest.strip().equals("")) {
                         System.out.println("    ____________________________________________________________\n" +
                                 "     Error: ToDo entry format incorrect.\n" +
                                 "    ____________________________________________________________");
@@ -85,12 +85,39 @@ public class Duke {
                     break;
 
                 case "done":
-                    System.out.println("    ____________________________________________________________\n" +
-                            "     task.done = true:");
-                    Task targetTask = taskList.get(sc.nextInt() - 1);
-                    targetTask.MarkAsDone();
-                    System.out.println("       " + targetTask);
-                    System.out.println("    ____________________________________________________________");
+                    try {
+//                        int doneTarget = Integer.parseInt(sc.nextLine().split("\n")[0]);
+                        int doneTarget = sc.nextInt();
+                        System.out.println("    ____________________________________________________________\n" +
+                                "     task.done = true:");
+                        Task targetTask = taskList.get(doneTarget - 1);
+                        targetTask.MarkAsDone();
+                        System.out.println("       " + targetTask);
+                        System.out.println("    ____________________________________________________________");
+
+                    } catch (Exception e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     Error: done command format incorrect.");
+                        System.out.println("    ____________________________________________________________");
+                    }
+                    break;
+
+                case "delete":
+                    try {
+                        int removeTarget = sc.nextInt();
+                        System.out.println("    ____________________________________________________________\n" +
+                                "     task.remove :");
+                        Task targetTask = taskList.get(removeTarget - 1);
+                        System.out.println("       " + targetTask);
+                        System.out.println("    ____________________________________________________________");
+
+                        taskList.remove(removeTarget - 1);
+                    } catch (Exception e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     Error: delete command format incorrect.");
+                        System.out.println("    ____________________________________________________________");
+
+                    }
                     break;
 
                 case "bye":
