@@ -16,10 +16,10 @@ public class Duke {
             } else if (userInput.equals("list")) {
                 for (int i = 0; i < taskList.size(); i++) {
                     int index = i + 1;
-                    System.out.println("This is your list of tasks: \n "+
+                    System.out.println("This is your list of tasks:\n"+
                             index + "." + taskList.get(i));
                 }
-            } else if (userInput.length() >= 4 && userInput.startsWith("done")) {
+            } else if (userInput.length() > 4 && userInput.startsWith("done ")) {
                 try {
                     int index = Integer.parseInt(userInput.substring(5));
                     if (index < taskList.size()) {
@@ -32,7 +32,7 @@ public class Duke {
                     System.out.println("Invalid format, please try again using numbers only.");
                 }
 
-            } else if (userInput.length() >= 4 && userInput.startsWith("todo")) {
+            } else if (userInput.length() > 4 && userInput.startsWith("todo ")) {
                 try {
                     String taskName = userInput.substring(5);
                     Todo newTodo = new Todo(taskName);
@@ -45,10 +45,10 @@ public class Duke {
                     System.out.println("Please indicate the new todo in the correct format.");
 
                 }
-            } else if (userInput.length() >= 5 && userInput.startsWith("event")) {
+            } else if (userInput.length() > 5 && userInput.startsWith("event ")) {
                 try {
                     int taskIndex = userInput.indexOf("/at");
-                    String taskName = userInput.substring(6, taskIndex);
+                    String taskName = userInput.substring(6, taskIndex - 1);
                     String time = userInput.substring(taskIndex + 4);
                     Event newEvent = new Event(taskName, time);
                     taskList.add(newEvent);
@@ -59,10 +59,10 @@ public class Duke {
                 } catch (Exception e) {
                     System.out.println("Please indicate the new event in the correct format.");
                 }
-            } else if (userInput.length() >= 8 && userInput.startsWith("deadline")) {
+            } else if (userInput.length() > 8 && userInput.startsWith("deadline ")) {
                 try {
                     int deadlineIndex = userInput.indexOf("/by");
-                    String taskName = userInput.substring(9, deadlineIndex);
+                    String taskName = userInput.substring(9, deadlineIndex - 1);
                     String deadline = userInput.substring(deadlineIndex + 4);
                     Deadline newDeadline = new Deadline(taskName, deadline);
                     taskList.add(newDeadline);
@@ -73,6 +73,8 @@ public class Duke {
                 } catch (Exception e) {
                     System.out.println("Please indicate the new deadline in the correct format.");
                 }
+            } else {
+                System.out.println("Please try again with the correct format.");
             }
         }
     }

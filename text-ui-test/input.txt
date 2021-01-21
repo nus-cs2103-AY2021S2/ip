@@ -1,0 +1,25 @@
+e
+eat and sleep
+todo eat
+todo
+todoeat and sleep
+event sleep /at 2am
+event sleep /by 2am
+event sleep well
+eventsleep well /at 2am
+event
+deadline code /by today
+deadline code /at today
+deadline code and sleep
+deadlinecode and sleep /by today
+deadline
+list
+done
+done
+done 2
+done 3
+done2
+done abcde
+doneabcde
+list
+bye
