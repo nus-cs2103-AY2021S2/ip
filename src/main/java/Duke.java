@@ -18,10 +18,10 @@ public class Duke {
                 "    ____________________________________________________________\n");
 
         boolean Done = false;
-        ArrayList<String> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
 
         while (!Done) {
-            String nextCommand = sc.nextLine();
+            String nextCommand = sc.next();
             switch (nextCommand) {
                 case "list":
                     System.out.println("    ____________________________________________________________");
@@ -37,6 +37,15 @@ public class Duke {
                             "    ____________________________________________________________");
                     break;
 
+                case "done":
+                    System.out.println("    ____________________________________________________________\n" +
+                            "    Nice! I've marked this task as done:");
+                    Task targetTask = taskList.get(sc.nextInt() - 1);
+                    targetTask.MarkAsDone();
+                    System.out.println("    " + targetTask);
+                    System.out.println("    ____________________________________________________________");
+                    break;
+
                 case "bye":
                     System.out.println("    ____________________________________________________________\n " +
                             "    Bye. Hope to see you again soon!\n" +
@@ -45,9 +54,10 @@ public class Duke {
                     break;
 
                 default:
+                    String nextTask = nextCommand + sc.nextLine();
                     System.out.println("    ____________________________________________________________");
-                    taskList.add(nextCommand);
-                    System.out.println("    added: " + nextCommand);
+                    taskList.add(new Task(nextTask));
+                    System.out.println("    added: " + nextTask);
                     System.out.println("    ____________________________________________________________");
                     break;
             }
