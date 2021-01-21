@@ -9,7 +9,7 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void main(String[] args) {
-        ArrayList<String> lines = new ArrayList<>();
+        ArrayList<Task> lines = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello from\n" + Duke.logo);
         System.out.println("What can I do for you?");
@@ -26,7 +26,7 @@ public class Duke {
                     System.out.printf("\t%d. %s\n", i + 1, lines.get(i));
                 }
             } else {
-                lines.add(line);
+                lines.add(new Task(line));
                 System.out.println("\tDuke:");
                 System.out.println("\tadded: " + line);
             }
