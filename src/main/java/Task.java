@@ -15,12 +15,12 @@ public class Task {
 
     public void addTask(int count) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Got it. I've added this task: ");
-        System.out.println(this.toString());
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("       "+this.toString());
         if(count == 1) {
-            System.out.println("    Now you have " + count + " task in the list.");
+            System.out.println("     Now you have " + count + " task in the list.");
         } else {
-            System.out.println("    Now you have " + count + " tasks in the list.");
+            System.out.println("     Now you have " + count + " tasks in the list.");
         }
 
         System.out.println("    ____________________________________________________________");

@@ -9,16 +9,16 @@ public class Duke {
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
         System.out.println("    ____________________________________________________________");
-        System.out.print("Enter a command: ");
+        System.out.println("Enter a command:");
         String commands = in.nextLine();
         int taskCount = 0;
         while(!commands.equals("bye")) {
             if(commands.equals("list")) {
                 System.out.println("    ____________________________________________________________");
-                System.out.println("    Here are the tasks in your list:");
+                System.out.println("     Here are the tasks in your list:");
                 for(Task s : tasks) {
                     if(s != null) {
-                        System.out.println("    " + s.number + ". " + s.toString());
+                        System.out.println("     " + s.number + "." + s.toString());
                     } else {
                         break;
                     }
@@ -29,8 +29,8 @@ public class Duke {
                 int n = Integer.parseInt(commands.split(" ")[1]);
                 tasks[n-1].markAsDone();
                 System.out.println("    ____________________________________________________________");
-                System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("    " + tasks[n-1].toString());
+                System.out.println("     Nice! I've marked this task as done:");
+                System.out.println("       "+tasks[n-1].toString());
                 System.out.println("    ____________________________________________________________");
             } else if(commands.split(" ")[0].equals("todo")) {
                 int iend = commands.indexOf(" ");
@@ -54,11 +54,11 @@ public class Duke {
                 tasks[taskCount].addTask(taskCount+1);
                 taskCount++;
             }
-            System.out.print("Enter a command: ");
+            System.out.println("Enter a command:");
             commands = in.nextLine();
         }
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Bye. Hope to see you again soon!");
+        System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
 
     }
