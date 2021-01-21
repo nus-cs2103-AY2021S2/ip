@@ -150,7 +150,7 @@ public class Duke {
                 throw new DescriptionNotFoundException();
             }
             if (check[0].equals("todo")) {
-                description = input.substring(5);
+                description = input.substring(5).trim();
                 temp = new TodoTask(description);
             } else if (check[0].equals("deadline")) {
                 int index = input.lastIndexOf("/by");
@@ -158,7 +158,7 @@ public class Duke {
                     throw new DateNotFoundException();
                 }
                 description = input.substring(9, index - 1);
-                date = input.substring(index + 3).stripLeading().stripTrailing();
+                date = input.substring(index + 3).trim();
                 if (date.isEmpty()) {
                     throw new DateNotFoundException();
                 }
@@ -169,7 +169,7 @@ public class Duke {
                     throw new DateNotFoundException();
                 }
                 description = input.substring(6, index - 1);
-                date = input.substring(index + 3).stripLeading().stripTrailing();
+                date = input.substring(index + 3).trim();
                 if (date.isEmpty()) {
                     throw new DateNotFoundException();
                 }
