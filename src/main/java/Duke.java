@@ -40,6 +40,9 @@ public class Duke {
             } else if(request.equals("done")) {
                 int taskNo = Integer.parseInt(taskname);
                 markdone(lst, taskNo);
+            } else if(request.equals("delete")) {
+                int taskNo = Integer.parseInt(taskname);
+                delete(lst, taskNo);
             } else if(request.equals("todo")) {
                 try {
                     trytodo(lst, taskname);
@@ -65,6 +68,14 @@ public class Duke {
         }
     }
     
+    public static void delete(List<Task> lst, int taskNo) {
+        Task task = lst.remove(taskNo - 1);
+        String msg = "Noted. I've removed this task:\n" +
+            "  " + task +
+            "\n Now you have " + lst.size() + " tasks in the list.";
+        dprint(msg);
+    }
+
     public static void trytodo(List<Task> lst, String taskname) throws DukeException {
         if (taskname.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
