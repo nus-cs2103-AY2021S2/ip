@@ -1,4 +1,4 @@
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.*;
 
 public class Duke {
@@ -146,7 +146,7 @@ public class Duke {
             Task curTask = myList.get(taskNo - 1);
             curTask.markAsDone();
             System.out.println("---------------------------------------------");
-            System.out.println("Nice! I've marked this task as done: ");
+            System.out.println("Nice! I've marked this task as done:");
             System.out.println(curTask);
             System.out.println("---------------------------------------------");
         } catch (Exception e) {
@@ -191,7 +191,7 @@ public class Duke {
             ToDo newTask = new ToDo(parts[1]);
             myList.add(newTask);
             System.out.println("---------------------------------------------");
-            System.out.println("Got it. I've added this task: ");
+            System.out.println("Got it. I've added this task:");
             System.out.println("  " + newTask);
             System.out.println("Now you have " + myList.size() + " tasks in the list.");
             System.out.println("---------------------------------------------");
@@ -213,7 +213,7 @@ public class Duke {
 
                 myList.add(newTask);
                 System.out.println("---------------------------------------------");
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 System.out.println("  " + newTask);
                 System.out.println("Now you have " + myList.size() + " tasks in the list.");
                 System.out.println("---------------------------------------------");
@@ -236,7 +236,7 @@ public class Duke {
 
                 myList.add(newTask);
                 System.out.println("---------------------------------------------");
-                System.out.println("Got it. I've added this task: ");
+                System.out.println("Got it. I've added this task:");
                 System.out.println("  " + newTask);
                 System.out.println("Now you have " + myList.size() + " tasks in the list.");
                 System.out.println("---------------------------------------------");
