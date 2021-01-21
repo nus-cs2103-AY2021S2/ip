@@ -14,5 +14,7 @@ public class DukeString {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_TODO = "todo";
 
-    public static final String EXCEPTION_INVALID = "Sorry, I did not understand that.";
+    public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
+    public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
+    public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
 }
