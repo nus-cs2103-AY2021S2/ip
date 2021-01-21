@@ -63,13 +63,18 @@ public class DukeBot {
      * @param input User input string
      * @return A Task corresponding to an appropriate subclass instance of task
      */
-    public static Task identifyAndCreateTask(String input) {
+    public static Task identifyAndCreateTask(String input) throws DukeException {
         String[] inputArr = input.split("\\s", 2);
         String taskType = inputArr[0].toLowerCase();
-        String restOfInput = inputArr.length > 1 ? inputArr[1] : null;
+
+        String restOfInput;
+        if (inputArr.length > 1) {
+            restOfInput = inputArr[1];
+        } else {
+            throw new DukeException("Oops, The description of cannot be empty.");
+        }
 
         Task task;
-
         switch (taskType) {
             case "todo":
                 task = new ToDo(restOfInput);
@@ -83,7 +88,7 @@ public class DukeBot {
                 task = new Event(eventArr[0], eventArr[1]);
                 break;
             default:
-                task = new Task(input);
+                throw new DukeException("Invalid command was passed");
         }
         task.printInstantiationText();
         return task;
@@ -109,10 +114,18 @@ public class DukeBot {
                 System.out.println(UNDERLINES);
                 break;
             } else if (DukeBot.isCommand(input)) {
-                this.handleCommand(input);
+                try {
+                    this.handleCommand(input);
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
             } else {
                 // Not a command at all -> Add new task
-                this.list.add(DukeBot.identifyAndCreateTask(input));
+                try {
+                    this.list.add(DukeBot.identifyAndCreateTask(input));
+                } catch (DukeException e) {
+                    System.out.println(e);
+                }
             }
         }
         this.scanner.close();
@@ -125,7 +138,7 @@ public class DukeBot {
      *
      * @param input The user input that contains the command its first word
      */
-    public void handleCommand(String input) {
+    public void handleCommand(String input) throws DukeException {
         String firstWord = DukeBot.getNthWord(input, 1);
         Command command = Command.get(firstWord);
 
@@ -138,7 +151,7 @@ public class DukeBot {
                 list.get(taskIndex - 1).markAsDone();
                 break;
             default:
-                throw new IllegalArgumentException("An inappropriate command was given.");
+                throw new DukeException("An inappropriate command was given.");
         }
     }
 
