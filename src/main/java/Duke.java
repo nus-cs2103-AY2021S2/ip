@@ -28,8 +28,9 @@ public class Duke {
                 System.out.println(line + " Please enter a task\n"
                         + line);
             } else if (str.equals("list")) {
-                System.out.println(line);
+                System.out.print(line);
                 if (tasks.size() > 0) {
+                    System.out.println(" Here are the tasks in your list:");
                     for (int j = 1; j <= tasks.size(); j++) {
                         System.out.println(" " + j + ". " + tasks.get(j - 1));
                     }
@@ -39,17 +40,25 @@ public class Duke {
                 System.out.println(line);
             } else {
                 String[] split = str.split(" ");
-                if(split.length==2 && split[0].equals("done")) {
+                String rest ="";
+                for(int i=1; i<split.length; i++) {
+                    rest+=split[i];
+                }
+                if (split.length == 2 && split[0].equals("done")) {
                     try {
                         int num = Integer.parseInt(split[1]);
-                        System.out.println(line + tasks.get(num-1).doneTask()
+                        System.out.println(line + tasks.get(num - 1).doneTask()
                                 + "\n" + line);
                     } catch (NumberFormatException | IndexOutOfBoundsException e) {
                         System.out.println(line + " Enter 'done' followed by a number between " +
-                                "1 and " + tasks.size() +"\n" + line);
+                                "1 and " + tasks.size() + "\n" + line);
                     }
+                } else if (split[0].equals("todo")) {
+                    tasks.add(new Todo(rest));
+                    System.out.println(line + " Got it. I've added this task:\n" +
+                            " " +tasks.get(tasks.size()-1) + "\n" + " Now you have "
+                            + tasks.size() + " tasks in the list\n" + line);
                 } else {
-                    //System.out.println(split.length);
                     tasks.add(new Task(str));
                     System.out.println(line + " added: " + str + "\n" + line);
                 }

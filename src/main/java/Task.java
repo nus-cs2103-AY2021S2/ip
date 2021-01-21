@@ -22,6 +22,6 @@ public class Task {
 
     public String doneTask() {
         isDone = true;
-        return "Good job on completing this task!\n" + toString();
+        return " Good job on completing this task!\n" + " " +toString();
     }
 }
