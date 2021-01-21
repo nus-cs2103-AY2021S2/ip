@@ -18,6 +18,14 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Returns the task's current state.
+     * @return true if the task is done; false otherwise.
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s",
