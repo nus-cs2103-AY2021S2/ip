@@ -55,29 +55,38 @@ public class Owen implements Chatbot {
         String[] splitCommand = command.split(" ", 2);
         String parsedCommand = splitCommand[0];
 
-        switch (parsedCommand) {
-        case "list":
-            Response listResponse = new DefaultResponse(this.taskList.toString());
-            return new Owen(this.isRunning, listResponse, this.taskList);
-        case "done":
-            int taskNumber = Integer.parseInt(splitCommand[1]);
-            TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
-            String doneFormat = "Nice! I've marked this task as done:\n    %s";
-            Response doneResponse = new DefaultResponse(String.format(
-                    doneFormat, doneTaskList.getTask(taskNumber).toString()));
-            return new Owen(this.isRunning, doneResponse, doneTaskList);
-        case "bye":
-            return this.shutdown();
-        default:
-            TaskList addedTaskList = this.taskList.addTask(command);
-            int numTasks = addedTaskList.getNumTasks();
-            String addedFormat = ""
-                    + "Got it. I've added this task:\n"
-                    + "    %s\n"
-                    + "Now you have %d tasks in the list.";
-            Response addResponse = new DefaultResponse(String.format(
-                    addedFormat, addedTaskList.getTask(numTasks), numTasks));
-            return new Owen(this.isRunning, addResponse, addedTaskList);
+        try {
+            switch (parsedCommand) {
+            case "todo":
+            case "event":
+            case "deadline":
+                TaskList addedTaskList = this.taskList.addTask(command);
+                int numTasks = addedTaskList.getNumTasks();
+                String addedFormat = ""
+                        + "Got it. I've added this task:\n"
+                        + "    %s\n"
+                        + "Now you have %d tasks in the list.";
+                Response addResponse = new DefaultResponse(String.format(
+                        addedFormat, addedTaskList.getTask(numTasks), numTasks));
+                return new Owen(this.isRunning, addResponse, addedTaskList);
+            case "list":
+                Response listResponse = new DefaultResponse(this.taskList.toString());
+                return new Owen(this.isRunning, listResponse, this.taskList);
+            case "done":
+                int taskNumber = Integer.parseInt(splitCommand[1]);
+                TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
+                String doneFormat = "Nice! I've marked this task as done:\n    %s";
+                Response doneResponse = new DefaultResponse(String.format(
+                        doneFormat, doneTaskList.getTask(taskNumber).toString()));
+                return new Owen(this.isRunning, doneResponse, doneTaskList);
+            case "bye":
+                return this.shutdown();
+            default:
+                throw new OwenException("I'm sorry, but I don't know what that means...");
+            }
+        } catch (OwenException exception) {
+            Response exceptionResponse = new DefaultResponse(exception.getMessage());
+            return new Owen(this.isRunning, exceptionResponse, this.taskList);
         }
     }
 }
