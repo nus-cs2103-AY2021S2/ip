@@ -1,0 +1,11 @@
+todo     eat later
+deadline     eat     mee siam   /  2.30pm on Jan 2
+event    go to buffet   /    when hungry
+list
+done 1
+done 2
+done 3
+list
+done 4
+done sdfs
+bye
