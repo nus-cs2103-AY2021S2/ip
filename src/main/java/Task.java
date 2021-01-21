@@ -1,10 +1,9 @@
 public class Task {
-    String name;
-    boolean done;
+    protected String name;
+    protected boolean done = false;
 
-    public Task(String name, boolean done) {
+    public Task(String name) {
         this.name = name;
-        this.done = done;
     }
 
     public void status(boolean done) {
@@ -13,10 +12,10 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
-            return "[X] " + name;
+        if (this.done) {
+            return "[X] " + this.name;
         } else {
-            return "[ ] " + name;
+            return "[ ] " + this.name;
         }
     }
 }
