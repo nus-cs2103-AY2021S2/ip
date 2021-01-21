@@ -72,8 +72,8 @@ public class Duke {
                 } catch (DukeException ex){
                     System.err.print("☹ OOPS!!!The description of an event cannot be empty.\n");
                 }
-
             } else {
+                sc.nextLine();
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
