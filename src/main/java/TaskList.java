@@ -75,7 +75,11 @@ public class TaskList {
      * @param taskNumber The number of the task to mark as done.
      * @return Copy of the task list with the nth task marked as done.
      */
-    public TaskList markAsDone(int taskNumber) {
+    public TaskList markAsDone(int taskNumber) throws OwenException {
+        if (this.taskList.size() < taskNumber || taskNumber <= 0) {
+            throw new OwenException("Task " + taskNumber + " does not exist...");
+        }
+
         taskNumber -= 1;
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         newTaskList.set(taskNumber, newTaskList.get(taskNumber).markAsDone());

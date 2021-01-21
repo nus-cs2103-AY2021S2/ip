@@ -73,7 +73,17 @@ public class Owen implements Chatbot {
                 Response listResponse = new DefaultResponse(this.taskList.toString());
                 return new Owen(this.isRunning, listResponse, this.taskList);
             case "done":
-                int taskNumber = Integer.parseInt(splitCommand[1]);
+                if (splitCommand.length < 2) {
+                    throw new OwenException("Task number must be specified...");
+                }
+
+                int taskNumber;
+                try {
+                    taskNumber = Integer.parseInt(splitCommand[1]);
+                } catch (NumberFormatException exception) {
+                    throw new OwenException("Task number must be specified...");
+                }
+
                 TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
                 String doneFormat = "Nice! I've marked this task as done:\n    %s";
                 Response doneResponse = new DefaultResponse(String.format(
