@@ -15,6 +15,10 @@ public class DukeList {
         list.get(x).markAsDone();
     }
 
+    public int noOfTasks() {
+        return list.size();
+    }
+
     /**
      * DukeList getter
      * @param x Task number x
