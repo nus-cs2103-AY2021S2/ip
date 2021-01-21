@@ -35,7 +35,7 @@ public class TodoCommand extends Command {
                 throw new TodoException();
             }
         } catch(TodoException ex){
-            return ex.toString();
+            return UserInterface.makeMsg(ex.toString());
         }
         Task todo = new Todo(todoDescription);
         taskList.addTaskToList(todo);

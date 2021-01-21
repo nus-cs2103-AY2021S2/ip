@@ -34,20 +34,12 @@ public class Parser {
     }
 
     public static String getTodoDescription()  {
-
         String[] splitCommand = fullCmd.split(" ", 2);
-        String description = splitCommand[1].trim();
-        try {
-            if (description.isEmpty()) {
-                throw new TodoException();
-            }
-            return description;
-        }
-        catch(TodoException e) {
-            e.toString();
+        String description = "";
+        if (splitCommand.length == 2) {
+            description = splitCommand[1].trim();
         }
         return description;
-        // return (description.isEmpty()) ? new TodoException().toString() : description;
     }
 
     public static String getEventDescription() {

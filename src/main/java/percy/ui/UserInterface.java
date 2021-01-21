@@ -55,6 +55,10 @@ public class UserInterface {
         return DIVIDER + INDENT + MESSAGE_GOODBYE + "\n" + DIVIDER;
     }
 
+    public static String makeMsg(String s) {
+        return DIVIDER + INDENT + s.toString() + "\n" + DIVIDER;
+    }
+
     public void showBlankLine() {
         out.println();
     }

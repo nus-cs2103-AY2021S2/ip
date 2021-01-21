@@ -2,6 +2,7 @@ package percy.command;
 
 import percy.exception.UnknownCommandException;
 import percy.task.TaskList;
+import percy.ui.UserInterface;
 
 /**
  * A Command meant to handle the event in which an unknown command is given by the user.
@@ -19,6 +20,7 @@ public class UnknownCommand extends Command {
      * @param taskList The TaskList from the main Duke object.
      */
     public String execute(TaskList taskList) {
-        return new UnknownCommandException().toString();
+        Exception ex = new UnknownCommandException();
+        return UserInterface.makeMsg(ex.toString());
     }
 }
