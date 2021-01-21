@@ -11,7 +11,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    1. If there are any further prompts, accept the defaults.
 1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
 1. After that, locate the `src/main/java/Oracle.java` file, right-click it, and choose `Run Oracle.main()`. If the setup is correct, you should see something like the below:
-`
+'''
               $$$@@@@@@@
          ##########$$$$$$@@$
        #**!!!!!!!!**####$$$$$$#
@@ -34,4 +34,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
         .-~~::::;:::::~:~--.
 
 Greetings Neo, what can the Oracle do for you?
-` 
+'''
