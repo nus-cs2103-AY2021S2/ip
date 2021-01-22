@@ -2,7 +2,9 @@
  * A class that store all the possible display of errorsException in Duke.
  */
 public class DukeException{
-
+    public static final void DATEFORMATEXCEPTION() {
+        System.out.println(Format.WRONGDATEFORMAT);
+    }
     public static final void NumberFormatException() {
         System.out.println(Format.KEYINNUMBER);
     }

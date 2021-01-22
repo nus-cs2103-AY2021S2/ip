@@ -41,6 +41,12 @@ public class Task {
         this.date = date;
         capacity++;
         add(this);
+        if (DateAndTime.converter(date).equals("")) {
+            DukeException.DATEFORMATEXCEPTION();
+            this.date = date;
+        } else {
+            this.date = DateAndTime.converter(date);
+        }
     }
 
     Task(String taskName, String date, String done) {
@@ -82,7 +88,7 @@ public class Task {
             Task t = taskList.get(i - 1);
             taskList.remove(i - 1);
             System.out.println(Format.UPPER + "Awww~ You've deleted the task: "
-                + " " + t.toString() + Format.LOWER);
+                    + " " + t.toString() + Format.LOWER);
             for (Task task : taskList) {
                 if (task.index > i) {
                     task.index--;
