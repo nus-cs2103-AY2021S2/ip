@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Duke {
 
@@ -7,29 +9,29 @@ public class Duke {
     // Formatting display content
 
     public static void partition() {
-        System.out.println("    ---------------------------");
+        System.out.println("\t---------------------------");
     }
 
     public static void greeting() {
         partition();
-        String logo = "    __  _____ _  ___   ___   _ ___\n" +
-                "    \\ \\/ /_ _| \\| \\ \\ / / | | | __|\n" +
-                "     >  < | || .` |\\ V /| |_| | _|\n" +
-                "    /_/\\_\\___|_|\\_| |_|  \\___/|___|\n";
-        System.out.println("    Hi there! Welcome to\n" + logo);
-        System.out.println("    What can I do for you today?");
+        String logo = "\t__  _____ _  ___   ___   _ ___\n" +
+                "\t\\ \\/ /_ _| \\| \\ \\ / / | | | __|\n" +
+                "\t >  < | || .` |\\V / | |_ | |_ |\n " +
+                "\t/_/\\_\\___|_|\\_| |_|  \\___/|___|\n";
+        System.out.println("\tHi there! Welcome to\n" + logo);
+        System.out.println("\tWhat can I do for you today?");
         partition();
     }
 
     public static void farewell() {
         partition();
-        System.out.println("    Goodbye. Have a nice day!!");
+        System.out.println("\tGoodbye. Have a nice day!!");
         partition();
     }
 
     public static void printErrorMessage(String message) {
         partition();
-        System.out.println("    ☹ OOPS!!! " + message);
+        System.out.println("\t☹ OOPS!!! " + message);
         partition();
     }
 
@@ -65,14 +67,14 @@ public class Duke {
 
     public static void addTaskReport(Task task) {
         partition();
-        System.out.println("    Got it. I've added this task");
-        System.out.println("        " + task.toString());
+        System.out.println("\tGot it. I've added this task");
+        System.out.println("\t    " + task.toString());
         displayTaskCount();
         partition();
     }
 
     public static void displayTaskCount() {
-        System.out.println("    Now you have " + tasks.size() + " in the list.");
+        System.out.println("\tNow you have " + tasks.size() + " in the list.");
     }
 
     public static void markTaskAsDone(int taskIndex) {
@@ -80,12 +82,12 @@ public class Duke {
             Task task = tasks.get(taskIndex - 1);
             partition();
             if (task.isDone()) {
-                System.out.println("    You have already completed this task:");
+                System.out.println("\tYou have already completed this task:");
             } else {
                 task.markAsDone();
-                System.out.println("    Congratulations! You have completed this task:");
+                System.out.println("\tCongratulations! You have completed this task:");
             }
-            System.out.println("        " + task.toString());
+            System.out.println("\t    " + task.toString());
             partition();
         } catch (IndexOutOfBoundsException e) {
             printErrorMessage("I cannot find the task you are referring to.");
@@ -97,8 +99,8 @@ public class Duke {
             Task task = tasks.get(taskIndex - 1);
             tasks.remove(taskIndex - 1);
             partition();
-            System.out.println("    Noted. This task has been removed:");
-            System.out.println("        " + task.toString());
+            System.out.println("\tNoted. This task has been removed:");
+            System.out.println("\t    " + task.toString());
             displayTaskCount();
             partition();
         } catch (IndexOutOfBoundsException e) {
@@ -109,11 +111,11 @@ public class Duke {
     public static void listTasks() {
         partition();
         if (tasks.isEmpty()) {
-            System.out.println("    It seems like there is nothing in your list.");
+            System.out.println("\tIt seems like there is nothing in your list.");
         } else {
-            System.out.println("    Here are the tasks in your list:");
+            System.out.println("\tHere are the tasks in your list:");
             for (int i = 1; i <= tasks.size(); ++i) {
-                System.out.println("    " + i + "." + tasks.get(i - 1).toString());
+                System.out.println("\t" + i + "." + tasks.get(i - 1).toString());
             }
         }
         partition();
