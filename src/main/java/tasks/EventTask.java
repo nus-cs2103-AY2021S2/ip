@@ -1,5 +1,8 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *  Event tasks.Task.
  *
@@ -8,7 +11,7 @@ package tasks;
 
 
 public class EventTask extends Task {
-    protected String duration;
+    protected LocalDate duration;
 
     /**
      *  tasks.EventsTask constructor.
@@ -16,7 +19,7 @@ public class EventTask extends Task {
      *  @param name Name of tasks.EventsTask.
      *  @param duration Specified duration of task.
      */
-    public EventTask(String name, String duration) {
+    public EventTask(String name, LocalDate duration) {
         super(name);
         this.duration = duration;
     }
@@ -39,9 +42,10 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("[E][%s] %s (by: %s)",
                 done == Status.DONE ? "X" : " ",
                 name,
-                duration);
+                duration.format(formatter));
     }
 }

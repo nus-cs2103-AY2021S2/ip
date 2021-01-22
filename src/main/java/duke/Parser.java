@@ -3,6 +3,10 @@ package duke;
 import commands.*;
 import exceptions.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
     public static String[] acceptedCommands = {
             "todo", "deadline", "event", "bye", "list", "done", "delete"
@@ -18,6 +22,15 @@ public class Parser {
         }
         if (!found) {
             throw new DukeUnknownCommandException();
+        }
+    }
+
+    public static LocalDate processDate(String dateString) throws DukeInvalidDateFormatException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidDateFormatException();
         }
     }
 
@@ -49,6 +62,9 @@ public class Parser {
 
         //non-zero-param commands
         try {
+            String[] args;
+            LocalDate date;
+
             switch (params[0]) {
                 case "done":
                     return new DoneCommand(Integer.parseInt(params[1]));
@@ -57,9 +73,13 @@ public class Parser {
                 case "todo":
                     return new ToDoCommand(params[1]);
                 case "deadline":
-                    return new DeadlineCommand(extractFlag(params[0], params[1], "/by"));
+                    args = extractFlag(params[0], params[1], "/by");
+                    date = processDate(args[1]);
+                    return new DeadlineCommand(args[0], date);
                 case "event":
-                    return new EventCommand(extractFlag(params[0], params[1], "/at"));
+                    args = extractFlag(params[0], params[1], "/at");
+                    date = processDate(args[1]);
+                    return new EventCommand(args[0], date);
             }
         } catch (DukeException e) {
             throw e;
