@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 import exceptions.DukeException;
+import tasks.Task;
 
 public class DoneCommand extends Command {
     private int taskIndex;
@@ -13,7 +14,10 @@ public class DoneCommand extends Command {
     }
 
     public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
-        tm.markTaskAsDone(taskIndex);
+        Task t = tm.markTaskAsDone(taskIndex);
         st.save(tm);
+
+        ui.println("    Marked as Done: ");
+        ui.println("      " + t.toString());
     }
 }

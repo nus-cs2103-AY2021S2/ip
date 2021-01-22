@@ -12,7 +12,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        tm = new TaskManager(ui);
+        tm = new TaskManager();
         st = new Storage(filePath);
         try {
             tm.loadArray(st.load());

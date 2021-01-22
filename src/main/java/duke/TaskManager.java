@@ -19,13 +19,11 @@ import java.util.ArrayList;
  */
 public class TaskManager {
     protected ArrayList<Task> tasks;
-    protected Ui ui;
 
     /**
      *  Constructor initialises task list.
      */
-    public TaskManager(Ui ui) {
-        this.ui = ui;
+    public TaskManager() {
         this.tasks = new ArrayList<>();
     }
 
@@ -66,25 +64,20 @@ public class TaskManager {
         return tasks;
     }
 
+    public int getSize() {
+        return tasks.size();
+    }
+
     public void addToDoTask(String name) {
         tasks.add(new ToDoTask(name));
-        ui.println("    added: " + name);
-        ui.println(String.format("    Now you have %d task(s)",
-                tasks.size()));
     }
 
     public void addDeadlineTask(String name, LocalDate date) {
         tasks.add(new DeadlineTask(name, date));
-        ui.println("    added: " + name);
-        ui.println(String.format("    Now you have %d task(s)",
-                tasks.size()));
     }
 
     public void addEventTask(String name, LocalDate date) {
         tasks.add(new EventTask(name, date));
-        ui.println("    added: " + name);
-        ui.println(String.format("    Now you have %d task(s)",
-                tasks.size()));
     }
 
     /**
@@ -93,12 +86,11 @@ public class TaskManager {
      *	@param x tasks.Task index.
      *
      */
-    public void markTaskAsDone(int x) throws DukeIndexOutOfRangeException, DukeTaskAlreadyDoneException {
+    public Task markTaskAsDone(int x) throws DukeIndexOutOfRangeException, DukeTaskAlreadyDoneException {
         try {
             Task t = tasks.get(x - 1);
             if (t.markAsDone()) {
-                ui.println("    Marked as Done: ");
-                ui.println("      " + t.toString());
+                return t;
             } else {
                 throw new DukeTaskAlreadyDoneException();
             }
@@ -113,14 +105,11 @@ public class TaskManager {
      *	@param x tasks.Task index.
      *
      */
-    public void deleteTask(int x) throws DukeIndexOutOfRangeException{
+    public Task deleteTask(int x) throws DukeIndexOutOfRangeException{
         try {
             Task t = tasks.get(x - 1);
             tasks.remove(x - 1);
-            ui.println("    The following task has been removed: ");
-            ui.println("       " + t.toString());
-            ui.println(String.format("    Now you have %d task(s)%n",
-                    tasks.size()));
+            return t;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeIndexOutOfRangeException();
         }
