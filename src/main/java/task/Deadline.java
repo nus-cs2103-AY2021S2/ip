@@ -20,4 +20,8 @@ public class Deadline extends Task{
         String formattedDate = this.deadLine.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
+
+    public String parseToCSVRow() {
+        return "D," + super.isDone() + "," + super.getTaskName() + "," + this.deadLine;
+    }
 }

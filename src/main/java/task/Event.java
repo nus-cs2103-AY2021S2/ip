@@ -20,4 +20,9 @@ public class Event extends Task{
         String formattedDate = this.eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
+
+
+    public String parseToCSVRow() {
+        return "E," + super.isDone() + "," + super.getTaskName() + "," + this.eventTime;
+    }
 }

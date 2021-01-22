@@ -1,6 +1,7 @@
 package task;
 
-public class ToDo extends Task{
+
+public class ToDo extends Task {
 
     public ToDo(String taskName) {
         super(taskName);
@@ -10,7 +11,11 @@ public class ToDo extends Task{
         super(taskName, done);
     }
 
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
+    }
+
+    public String parseToCSVRow() {
+        return "T," + super.isDone() + "," + super.getTaskName();
     }
 }

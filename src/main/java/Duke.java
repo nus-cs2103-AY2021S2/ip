@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,6 +17,8 @@ import task.Event;
 import task.Task;
 
 public class Duke {
+    private static final String FILENAME = "duke.csv";
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,7 +36,7 @@ public class Duke {
     }
 
     public static void run() {
-        ArrayList<Task> listOfTasks = new ArrayList<>(100);
+        ArrayList<Task> listOfTasks = handleLoad();
 
         Scanner sc = new Scanner(System.in);
         System.out.print(">>> ");
@@ -60,6 +69,8 @@ public class Duke {
                         break;
                 }
             }
+            handleSave(listOfTasks);
+
             System.out.print(">>> ");
             input = sc.nextLine();
         }
@@ -104,7 +115,7 @@ public class Duke {
 
     public static void handleTasksWithTime(String command, String input, ArrayList<Task> listOfTasks) {
         try {
-            String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/"));
+            String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
             Task temp;
             String timing = input.substring(input.indexOf("/") + 4);
             LocalDate date = LocalDate.parse(timing);
@@ -134,6 +145,60 @@ public class Duke {
             System.out.println("You have " + listOfTasks.size() + " tasks in your list. Please check your input.");
         } catch (NumberFormatException e) {
             System.out.println("The input must be a positive integer!");
+        }
+    }
+
+    public static void handleSave(ArrayList<Task> data) {
+        try {
+            FileWriter csvWriter = new FileWriter("duke.csv");
+            for (Task task : data) {
+                csvWriter.append(task.parseToCSVRow());
+                csvWriter.append("\n");
+            }
+            csvWriter.flush();
+            csvWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving your changes. Please try again later.");
+        }
+    }
+
+    public static ArrayList<Task> handleLoad() {
+        try {
+            ArrayList<Task> listOfTasks =  new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(FILENAME));
+            String line = reader.readLine();
+            while(line != null) {
+                String[] details = line.split(",");
+                switch (details[0]){
+                    case "T":
+                        listOfTasks.add(new ToDo(details[2], Boolean.parseBoolean(details[1])));
+                        break;
+                    case "D":
+                        listOfTasks.add(new Deadline(details[2], Boolean.parseBoolean(details[1]), details[3]));
+                        break;
+                    case "E":
+                        listOfTasks.add(new Event(details[2], Boolean.parseBoolean(details[1]), details[3]));
+                        break;
+                }
+                line = reader.readLine();
+            }
+            return listOfTasks;
+        } catch (FileNotFoundException e) {
+            System.out.println("It seems like you do not have a save file. A new one will be created.");
+            makeNewFile();
+            return new ArrayList<>();
+        } catch (IOException e) {
+            System.out.println("An error occurred while loading. Please try again later.");
+            System.exit(1);
+            return null;
+        }
+    }
+
+    public static void makeNewFile() {
+        try{
+            new File(FILENAME).createNewFile();
+        } catch (IOException e) {
+            System.out.println("An error occurred while loading. Please try again later.");
         }
     }
 }
