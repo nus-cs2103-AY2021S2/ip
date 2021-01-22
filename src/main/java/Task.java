@@ -20,7 +20,7 @@ public class Task {
 
     /**
      * Provide the description of the task
-     * @return
+     * @return Task's description
      */
     public String getDesc() {
         return this.desc;
@@ -28,7 +28,7 @@ public class Task {
 
     /**
      * Provide the task's typing
-     * @return
+     * @return Symbol of task's type
      */
     public String getTypeSymbol() {
         return " ";
@@ -36,12 +36,16 @@ public class Task {
 
     /**
      * Provide the completion status of the task
-     * @return
+     * @return Completion status of task
      */
     public String getStatusSymbol() {
         return this.isDone ? "X" : " ";
     }
 
+    /**
+     * Returns task's details in a format to be saved into the hard disk
+     * @return Task's detail in a savable format
+     */
     public String toSaveInfoString() {
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
     }
