@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static List<Task> tasks = new ArrayList<>();
+    public static Scanner sc = new Scanner(System.in);
 
     // Formatting display content
 
@@ -37,32 +38,46 @@ public class Duke {
 
     // Adding, Editing & Displaying Tasks
 
-    public static void addTodo(String userInput) {
-        Todo todo = new Todo(userInput);
+    public static void addTask(String[] userInputArr) throws DukeException {
+        switch (userInputArr[0]) {
+            case "todo":
+                addTodo(userInputArr[1]);
+                break;
+            case "deadline":
+                String[] detailsArr = userInputArr[1].split(" /by ", 2);
+                if (detailsArr.length != 2) {
+                    throw new DukeException("You can't add a deadline without a deadline!");
+                }
+                addDeadline(detailsArr);
+                break;
+            case "event":
+                detailsArr = userInputArr[1].split(" /at ", 2);
+                if (detailsArr.length != 2) {
+                    throw new DukeException("You can't add an event without an event time.");
+                }
+                addEvent(detailsArr);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void addTodo(String details) {
+        Todo todo = new Todo(details);
         tasks.add(todo);
         addTaskReport(todo);
     }
 
-    public static void addDeadline(String userInput) throws DukeException {
-        String[] userInputArr = userInput.split(" /by ", 2);
-        if (userInputArr.length != 2) {
-            throw new DukeException("You can't add a deadline without a deadline!");
-        } else {
-            Deadline deadline = new Deadline(userInputArr[0], userInputArr[1]);
-            tasks.add(deadline);
-            addTaskReport(deadline);
-        }
+    public static void addDeadline(String[] detailsArr) {
+        Deadline deadline = new Deadline(detailsArr[0], detailsArr[1]);
+        tasks.add(deadline);
+        addTaskReport(deadline);
     }
 
-    public static void addEvent(String userInput) throws DukeException {
-        String[] userInputArr = userInput.split(" /at ", 2);
-        if (userInputArr.length != 2) {
-            throw new DukeException("You can't add an event without an event time.");
-        } else {
-            Event event = new Event(userInputArr[0], userInputArr[1]);
-            tasks.add(event);
-            addTaskReport(event);
-        }
+    public static void addEvent(String[] detailsArr) {
+        Event event = new Event(detailsArr[0], detailsArr[1]);
+        tasks.add(event);
+        addTaskReport(event);
     }
 
     public static void addTaskReport(Task task) {
@@ -77,8 +92,9 @@ public class Duke {
         System.out.println("\tNow you have " + tasks.size() + " in the list.");
     }
 
-    public static void markTaskAsDone(int taskIndex) {
+    public static void markTaskAsDone(String index) {
         try {
+            int taskIndex = Integer.parseInt(index.trim());
             Task task = tasks.get(taskIndex - 1);
             partition();
             if (task.isDone()) {
@@ -91,11 +107,14 @@ public class Duke {
             partition();
         } catch (IndexOutOfBoundsException e) {
             printErrorMessage("I cannot find the task you are referring to.");
+        } catch (NumberFormatException e) {
+            printErrorMessage("I can only find a task with its index number.");
         }
     }
 
-    public static void deleteTask(int taskIndex) {
+    public static void deleteTask(String index) {
         try {
+            int taskIndex = Integer.parseInt(index.trim());
             Task task = tasks.get(taskIndex - 1);
             tasks.remove(taskIndex - 1);
             partition();
@@ -105,6 +124,8 @@ public class Duke {
             partition();
         } catch (IndexOutOfBoundsException e) {
             printErrorMessage("I cannot find the task you are referring to.");
+        } catch (NumberFormatException e) {
+            printErrorMessage("I can only find a task with its index number.");
         }
     }
 
@@ -123,69 +144,53 @@ public class Duke {
 
     // Handling user inputs
 
-    public static void handleUserInput(String userInput) {
-        String[] userInputArr = userInput.split(" ", 2);
+    public static void handleUserInput() {
 
-        try {
-            switch (userInputArr[0]) {
-                case "done":
-                    if (userInputArr.length != 2) {
-                        throw new DukeException("I'm not sure which task you want to mark as done!");
-                    }
-                    int taskIndex = Integer.parseInt(userInputArr[1]);
-                    markTaskAsDone(taskIndex);
-                    break;
-                case "delete":
-                    if (userInputArr.length != 2) {
-                        throw new DukeException("I'm not sure which task you want to delete!");
-                    }
-                    taskIndex = Integer.parseInt(userInputArr[1]);
-                    deleteTask(taskIndex);
-                    break;
-                case "todo":
-                    if (userInputArr.length != 2) {
-                        throw new DukeException("The description of a todo cannot be empty!");
-                    }
-                    addTodo(userInputArr[1]);
-                    break;
-                case "deadline":
-                    if (userInputArr.length != 2) {
-                        throw new DukeException("The description of a deadline cannot be empty!");
-                    }
-                    addDeadline(userInputArr[1]);
-                    break;
-                case "event":
-                    if (userInputArr.length != 2) {
-                        throw new DukeException("The description of an event cannot be empty!");
-                    }
-                    addEvent(userInputArr[1]);
-                    break;
-                default:
-                    throw new DukeException("Sorry, I dont understand what that means :-(");
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String userInput = sc.nextLine();
+                String[] userInputArr = userInput.split(" ", 2);
+                switch (userInputArr[0]) {
+                    case "todo":
+                    case "deadline":
+                    case "event":
+                        if (userInputArr.length != 2) {
+                            throw new DukeException("The description of your " + userInputArr[0] + " cannot be empty!");
+                        }
+                        addTask(userInputArr);
+                        break;
+                    case "done":
+                        if (userInputArr.length != 2) {
+                            throw new DukeException("I'm not sure which task you want to mark as done!");
+                        }
+                        markTaskAsDone(userInputArr[1]);
+                        break;
+                    case "delete":
+                        if (userInputArr.length != 2) {
+                            throw new DukeException("I'm not sure which task you want to delete!");
+                        }
+                        deleteTask(userInputArr[1]);
+                        break;
+                    case "list":
+                        listTasks();
+                        break;
+                    case "bye":
+                        farewell();
+                        isRunning = false;
+                        break;
+                    default:
+                        throw new DukeException("Sorry, I dont understand what that means :-(");
+                }
+            } catch (DukeException e) {
+                printErrorMessage(e.getMessage());
             }
-        } catch (NumberFormatException e) {
-            printErrorMessage("I can only find a task with its index number.");
-        } catch (DukeException e) {
-            printErrorMessage(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         greeting();
-
-        while (sc.hasNext()) {
-            String userInput = sc.nextLine();
-            if (userInput.equals("bye")) {
-                break;
-            } else if (userInput.equals("list")) {
-                listTasks();
-                continue;
-            }
-            handleUserInput(userInput);
-        }
-
-        farewell();
+        handleUserInput();
         sc.close();
     }
 }
