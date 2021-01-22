@@ -1,3 +1,5 @@
+package com.nus.duke.data;
+
 /**
  * An abstract class Task in added by the user.
  */
@@ -5,7 +7,7 @@ public abstract class Task {
     /**
      * Description of the task.
      */
-    protected String description;
+    protected final String description;
 
     /**
      * Indicates if the task is completed.
@@ -36,7 +38,7 @@ public abstract class Task {
      * @return
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
+        return (isDone ? "\u2713" : " "); //return tick or empty
     }
 
     @Override
