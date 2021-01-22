@@ -77,5 +77,7 @@ public abstract class Task {
      *
      * @return Time of the Task.
      */
-    public abstract LocalDate getTaskTime();
+    public LocalDate getTaskTime(){
+        return null;
+    }
 }

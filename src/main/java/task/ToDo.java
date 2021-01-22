@@ -43,14 +43,4 @@ public class ToDo extends Task {
     public String parseToCSVRow() {
         return "T," + super.isDone() + "," + super.getTaskName();
     }
-
-    /**
-     * Returns the deadline of the task. Inapplicable for ToDo tasks.
-     *
-     * @return Null.
-     */
-    @Override
-    public LocalDate getTaskTime() {
-        return null;
-    }
 }
