@@ -1,3 +1,14 @@
+/**
+ * An implementation of the Task class that represents Deadline Tasks.
+ *
+ * Deadline tasks are tasks that take a description, track whether they are done or not,
+ * and take a /by parameter, specifying the Deadline time of the Deadline.
+ *
+ * The Deadline class is visually represented with the prefix: [D]
+ *
+ * @author Douglas Wei Jing Allwood
+ * @author douglas_allwood@u.nus.edu
+ */
 public class Deadline extends Task {
     protected String by;
 

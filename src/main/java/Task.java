@@ -1,5 +1,5 @@
 /**
- * A base abstract class whose instances represent a unique Task that a user wishes to track.
+ * A base abstract class whose instances represent a unique Task.
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu

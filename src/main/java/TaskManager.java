@@ -59,10 +59,13 @@ public class TaskManager {
                     this.end(description);
                     break;
                 default:
+                    // If this error is reached that means that a valid Command Enum was created and has not been
+                    // included in the switch statements above
                     String errorStr = "The Command given was not recognised. Try updating the version";
                     throw new DukeException(errorStr);
             }
         } catch (DukeException e) {
+            // Print any errors encountered in the user input string
             System.out.println(e);
             System.out.println("\n");
         }
@@ -70,7 +73,7 @@ public class TaskManager {
 
     /**
      * Returns true if the TaskManager is active.
-     * The TaskManager becomes irreversibly inactive once a user sends the END Command.
+     * The TaskManager becomes inactive once a user sends the END Command.
      *
      * @return true if the TaskManager is active and false otherwise
      */
@@ -78,8 +81,18 @@ public class TaskManager {
         return this.isActive == true;
     }
 
-    protected void setInactive() {
+    /**
+     * Sets the current TaskManager to be inactive, effectively switching it off.
+     */
+    public void setInactive() {
         this.isActive = false;
+    }
+
+    /**
+     * Sets the current TaskManager to be active, effectively switching it on.
+     */
+    public void setActive() {
+        this.isActive = true;
     }
 
     protected void listAll(String description) throws DukeException {
@@ -100,6 +113,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a Todo Task to the task list.
+     *
+     * @param description The description of the Todo Task
+     * @throws DukeException If the description string is empty
+     */
     protected void addTodo(String description) throws DukeException {
         if (description.equals("")) {
             String errorStr = "The description of a 'todo' cannot be empty.";
@@ -113,6 +132,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds an Event Task to the task list.
+     *
+     * @param description The description of the Event Task
+     * @throws DukeException If the description string does not follow the correct format for specifying an Event
+     */
     protected void addEvent(String description) throws DukeException {
         String errorStr = "";
         String descriptor = description.split("/at", 2)[0];
@@ -137,6 +162,12 @@ public class TaskManager {
         System.out.println("\n");
     }
 
+    /**
+     * Adds a Deadline Task to the task list.
+     *
+     * @param description The description of the Deadline Task
+     * @throws DukeException If the description string does not follow the correct format for specifying a Deadline
+     */
     protected void addDeadline(String description) throws DukeException {
         String errorStr = "";
         String descriptor = description.split("/by", 2)[0];
@@ -161,6 +192,12 @@ public class TaskManager {
         System.out.println("\n");
     }
 
+    /**
+     * Marks an existing Task as done.
+     *
+     * @param description A String containing the (1-indexed) list index of the target task
+     * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
+     */
     protected void markAsDone(String description) throws DukeException {
         int doneIndex;
         try {
@@ -189,6 +226,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Deletes an existing Task and removes it from the task list.
+     *
+     * @param description A String containing the (1-indexed) list index of the target task
+     * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
+     */
     protected void delete(String description) throws DukeException {
         int deleteIndex;
         try {
@@ -218,6 +261,13 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Deactivates the TaskManager effectively shutting it down.
+     *
+     * @param description The remainder of the user input String (after removing the command) which should be empty
+     * @throws DukeException If the user input String contains a non-empty description of if the TaskManager is already
+     * inactive.
+     */
     protected void end(String description) throws DukeException {
         String errorStr = "";
         if (!description.equals("")) {
@@ -225,7 +275,7 @@ public class TaskManager {
                     "called without any further descriptor. However, it " +
                     "received the following descriptor: " + description;
         } else if (!this.isActive) {
-            errorStr = "The DukeBot is currently inactive, please activate a new DukeBot.";
+            errorStr = "The DukeBot is currently inactive.";
         }
         if (!errorStr.equals("")) throw new DukeException(errorStr);
 

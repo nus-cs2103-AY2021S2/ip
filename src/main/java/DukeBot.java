@@ -20,6 +20,9 @@ public class DukeBot {
     /**
      * Activates the chat-bot so that it keeps taking inputs from the user via System.in
      * until the "bye" input is given.
+     *
+     * The run method ensures that the user has provided a valid command, otherwise it
+     * prints out a warning message.
      */
     public void run() {
         while (taskManager.isActive()) {
