@@ -49,6 +49,9 @@ public class Duke {
                     case "event":
                         parser.handleTasksWithTime(command, input, listOfTasks);
                         break;
+                    case "find":
+                        parser.handleFind(input, listOfTasks);
+                        break;
                     default:
                         System.out.println("I have no idea what that means, what do you want?");
                         break;

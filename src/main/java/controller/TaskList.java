@@ -3,6 +3,7 @@ package controller;
 import task.Task;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> listOfTasks;
@@ -31,12 +32,8 @@ public class TaskList {
         return this.listOfTasks.get(number - 1);
     }
 
-    public int getNumberOfTasks(){
+    public int getNumberOfTasks() {
         return this.listOfTasks.size();
-    }
-
-    public ArrayList<Task> getTasks() {
-        return this.listOfTasks;
     }
 
     public String toString() {
@@ -45,5 +42,17 @@ public class TaskList {
             result.append(i + 1).append(". ").append(listOfTasks.get(i)).append("\n");
         }
         return result.toString();
+    }
+
+    /**
+     * Find the Tasks which names contain the keyword.
+     * @param keyword Keyword to be searched against.
+     * @return New TaskList containing filtered results.
+     */
+    public TaskList find(String keyword) {
+        return new TaskList(this.listOfTasks.stream()
+                .filter((task) -> task.getTaskName().
+                        toLowerCase().contains(keyword.toLowerCase()))
+                .collect(Collectors.toCollection(ArrayList::new)));
     }
 }

@@ -85,4 +85,13 @@ public class Parser {
             throw new DukeException("The input must be a positive integer!");
         }
     }
+
+    public void handleFind(String input, TaskList taskList) throws DukeException {
+        if(input.split(" ").length < 2) {
+            throw new DukeException("Please provide a keyword.");
+        }
+        String keyword = input.substring(input.indexOf(" "));
+        System.out.println("Here are the tasks that I can find:");
+        System.out.println(taskList.find(keyword).toString());
+    }
 }
