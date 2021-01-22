@@ -1,3 +1,5 @@
+package Duke.Exception;
+
 public class EmptyTaskException extends Exception{
     String type;
 

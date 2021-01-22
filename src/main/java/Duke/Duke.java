@@ -1,10 +1,13 @@
+package Duke;
+
+import Duke.Exception.*;
+import Duke.Command.*;
+import Duke.Constant.*;
+import Duke.Helper.*;
+
 import java.util.Scanner;
 
 public class Duke {
-    public static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final String BYE = "Bye. Hope to see you again soon!";
-    public static final String FILE_PATH = "data/duke.txt";
-
     private final Scanner sc;
     private final Ui ui;
     private final Storage storage;
@@ -18,26 +21,17 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke(FILE_PATH);
+        Duke duke = new Duke(Constants.FILE_PATH);
         duke.run();
     }
 
-    public void printWelcome(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        ui.printResponse(GREETING);
-    }
-
     public void run() {
-        printWelcome();
+        System.out.println(Constants.START);
+        ui.printResponse(Constants.GREETING);
         while (sc.hasNextLine()){
             String command = sc.nextLine().trim();
             if (command.equalsIgnoreCase(Command.BYE.getAction())){
-                ui.printResponse(BYE);
+                ui.printResponse(Constants.BYE);
                 break;
             } else if (command.equalsIgnoreCase(Command.LIST.getAction())){
                 ui.printAllTask(taskList.getList());

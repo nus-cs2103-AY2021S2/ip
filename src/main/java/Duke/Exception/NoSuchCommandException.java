@@ -1,3 +1,4 @@
+package Duke.Exception;
 public class NoSuchCommandException extends Exception{
 
     @Override

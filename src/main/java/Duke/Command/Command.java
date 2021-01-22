@@ -1,3 +1,5 @@
+package Duke.Command;
+
 public enum Command {
     LIST("list"), BYE("bye"),
     DONE("done"), DELETE("delete"),

@@ -1,3 +1,4 @@
+package Duke.Exception;
 public class InvalidIndex extends IndexOutOfBoundsException{
     String type;
     int listSize;
