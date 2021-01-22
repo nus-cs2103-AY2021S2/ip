@@ -1,6 +1,0 @@
-todo Watch CS2103T lecture
-deadline Do CS2103T lecture quiz /by this Saturday
-list
-delete 1
-list
-bye

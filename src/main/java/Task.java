@@ -1,11 +1,36 @@
+import java.util.InputMismatchException;
+
 //Below solution adapted from partial solution in: https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 public class Task {
     protected String description;
+    protected String type;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String type, int isDone) {
         this.description = description;
-        this.isDone = false;
+        this.type = type;
+        switch(isDone) {
+            case 0:
+                this.isDone = false;
+                break;
+            case 1:
+                this.isDone = true;
+                break;
+            default:
+                throw new InputMismatchException("isDone has to be 0 or 1");
+        }
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public int getStatusInt() {
+        if (this.isDone) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     public String getStatusIcon() {
@@ -33,9 +58,13 @@ public class Task {
             throw new UnsupportedOperationException("This task is already not done. Not stonks anyway!");
         }
     }
+    
+    public String saveTask() {
+        return String.format("%s/split/%s/split/%s", this.getType(), this.getStatusInt(), this.getDescription());
+    }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.getDescription());
+        return String.format("[%s][%s] %s", this.getType(), this.getStatusIcon(), this.getDescription());
     }
 }
