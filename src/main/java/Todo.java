@@ -4,6 +4,16 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
+    public String getSaveTime() {
+        return "";
+    }
+
+    @Override
+    public String getSaveType() {
+        return "T";
+    }
+
     static Todo getTodo(String description) {
         return new Todo(description);
     }

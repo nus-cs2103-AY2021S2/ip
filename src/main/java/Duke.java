@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Duke {
@@ -39,6 +43,38 @@ public class Duke {
         JobList list = new JobList(LENGTH_OF_LINE);
         Scanner sc = new Scanner(System.in);
 
+        // Create data.txt if it does not exist.
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File data = new File("data" + File.separatorChar + "data.txt");
+        if (!data.exists()) {
+            try {
+                data.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Load from data.txt.
+        Scanner scFile = null;
+        FileWriter writer = null;
+        try {
+            scFile = new Scanner(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while (Objects.requireNonNull(scFile).hasNextLine()) {
+            list.addJob(Command.loadData(scFile.nextLine()));
+        }
+
+        try {
+            writer = new FileWriter(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(welcome);
 
         while (true) {
@@ -53,7 +89,18 @@ public class Duke {
                 continue;
             }
             if (type == CommandType.BYE) {
+                String saveData = "";
                 loop = false;
+                for (int i = 0; i < list.getSize(); i++) {
+                    saveData = saveData.concat(Command.saveData(list.getJob(i)));
+                }
+                try {
+                    assert writer != null;
+                    writer.write(saveData);
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else if (type == CommandType.LIST) {
                 message = list.toString();
             } else if (type == CommandType.DONE) {

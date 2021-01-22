@@ -1,5 +1,40 @@
 public class Command {
-    
+
+    public static Task loadData(String command) {
+        if (command.charAt(0) == 'T') {
+            Todo result = new Todo(command.substring(8));
+            if (command.charAt(4) != '0') {
+                result.markAsDone();
+            }
+            return result;
+        } else if (command.charAt(0) == 'D') {
+            int position = command.indexOf("@@@");
+            Deadline result = new Deadline(command.substring(8, position - 1), command.substring(position + 3));
+            if (command.charAt(4) != '0') {
+                result.markAsDone();
+            }
+            return result;
+        } else {
+            int position = command.indexOf("@@@");
+            Event result = new Event(command.substring(8, position - 1), command.substring(position + 3));
+            if (command.charAt(4) != '0') {
+                result.markAsDone();
+            }
+            return result;
+        }
+    }
+
+    public static String saveData(Task task) {
+        if (task.getSaveType() == "T") {
+            return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
+                    + " | " + task.getDescription() + "\n";
+        } else {
+            return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
+                    + " | " + task.getDescription() + " @@@" + task.getSaveTime() + "\n";
+        }
+
+    }
+
     public static CommandType getType(String str) throws DukeException {
         int strLength = str.length();
         if (str.equalsIgnoreCase("bye")) {

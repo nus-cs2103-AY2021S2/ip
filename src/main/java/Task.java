@@ -7,6 +7,18 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getStatus() {
+        return isDone;
+    }
+
+    public abstract String getSaveTime();
+
+    public abstract String getSaveType();
+
     public void markAsDone() {
         this.isDone = true;
     }
