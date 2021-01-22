@@ -1,3 +1,5 @@
+package com.nus.duke.data;
+
 /**
  * Event is a type of Task that includes a time.
  * Note: Date/time are treated as Strings, so any formats are accepted.
@@ -7,7 +9,7 @@ public class Event extends Task {
     /**
      * Indicates the time of the event.
      */
-    protected String at;
+    protected final String at;
 
     public Event(String description, String at) {
         super(description);
