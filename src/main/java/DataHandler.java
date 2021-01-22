@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DataHandler {
 
@@ -83,10 +84,14 @@ public class DataHandler {
         taskDetails.put("status", status);
         taskDetails.put("type", type);
 
-        if (type.equals("D")) {
-            taskDetails.put("endDate", dueDate);
-        } else if (type.equals("E")) {
-            taskDetails.put("startEndDate", dueDate);
+        //convert datetime to string
+        if (dueDate != null) {
+            String dueDateStr = dueDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if (type.equals("D")) {
+                taskDetails.put("endDate", dueDateStr);
+            } else if (type.equals("E")) {
+                taskDetails.put("startEndDate", dueDateStr);
+            }
         }
 
         JSONObject taskGroup = new JSONObject();

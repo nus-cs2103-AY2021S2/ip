@@ -68,6 +68,7 @@ public class Command {
      */
     public void exit() {
         System.out.println("Bye! See you later :D");
+        System.exit(0);
     }
 
     /**
@@ -113,7 +114,6 @@ public class Command {
                     String endDate = parsedTaskDetails[1].trim();
                     task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
                     DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(endDate));
-                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
                     break;
                 case EVENT:
                     parsedTaskDetails = taskDetails.split("/at");
@@ -121,7 +121,6 @@ public class Command {
                     String startEndDate = parsedTaskDetails[1].trim();
                     task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
                     DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(startEndDate));
-                    task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
                     break;
                 default:
                     throw new IndexOutOfBoundsException();
