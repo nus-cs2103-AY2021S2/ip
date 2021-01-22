@@ -20,9 +20,16 @@ public class Duke {
     private static final Pattern TODO_REGEX = Pattern.compile("todo\\s+(.*)");
     private static final Pattern DEADLINE_REGEX = Pattern.compile("deadline\\s+(.*)\\s+/by\\s+(.*)");
     private static final Pattern EVENT_REGEX = Pattern.compile("event\\s+(.*)\\s+/at\\s+(.*)");
+    private static final Pattern DONE_REGEX = Pattern.compile("done\\s+(\\d+)");
 
     private final String currentMessage;
     private final List<Task> store;
+
+    private Duke() {
+        this.currentMessage = getGreeting();
+        this.store = new ArrayList<>();
+        this.done = false;
+    }
 
     private Duke(String currentMessage, List<Task> newStore, boolean done) {
         this.currentMessage = currentMessage;
@@ -95,8 +102,13 @@ public class Duke {
 
     private Duke processDone(String command) {
         Duke newAgent;
+        Matcher matcher;
         String[] tokens = command.split("\\s+");
         try {
+            matcher = DONE_REGEX.matcher(command);
+            if (!matcher.find()) {
+                throw new DukeException("done Usage: done [index]");
+            }
             int index = Integer.parseInt(tokens[1]);
             if (index < 0 || index > this.store.size()) {
                 throw new DukeException(
@@ -173,8 +185,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Duke agent = new Duke("", new ArrayList<Task>(), false);
-        System.out.println(agent.getGreeting());
+        Duke agent = new Duke();
+        System.out.println(agent.getCurrentMessage());
         while (!agent.done) {
             System.out.print(getPrompt());
             try {
