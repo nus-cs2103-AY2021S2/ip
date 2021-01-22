@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     }
 
     public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
-        tm.addDeadlineTask(name, flag);
+        tm.addDeadlineTask(name, date);
         st.save(tm);
     }
 }

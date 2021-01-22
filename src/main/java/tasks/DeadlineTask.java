@@ -24,7 +24,7 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
-    public DeadlineTask(String name, String deadline, boolean isCompleted) {
+    public DeadlineTask(String name, LocalDate deadline, boolean isCompleted) {
         super(name);
         this.deadline = deadline;
         if (isCompleted) {
@@ -33,11 +33,12 @@ public class DeadlineTask extends Task {
     }
 
     public String toFileFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",
                 "D",
                 done == Status.DONE ? "1" : "0",
                 name,
-                deadline);
+                deadline.format(formatter));
     }
 
     @Override

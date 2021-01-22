@@ -9,6 +9,7 @@ import tasks.Task;
 import tasks.ToDoTask;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -29,24 +30,31 @@ public class TaskManager {
     }
 
     public void loadArray(ArrayList<String> arr) throws DukeCorruptFileException {
-        for (String line: arr) {
-            String[] params = line.split("\\|");
-            String type = params[0];
-            boolean isCompleted = params[1].equals("1");
-            String name = params[2];
-            System.out.println(params[2]);
+        try {
+            for (String line : arr) {
+                String[] params = line.split("\\|");
+                String type = params[0];
+                boolean isCompleted = params[1].equals("1");
+                String name = params[2];
 
-            Task t;
-            if (type.equals("T")) {
-                t = new ToDoTask(name, isCompleted);
-            } else if (type.equals("D")) {
-                t = new DeadlineTask(name, params[3], isCompleted);
-            } else if (type.equals("E")) {
-                t = new EventTask(name, params[3], isCompleted);
-            } else {
-                throw new DukeCorruptFileException();
+                Task t;
+                LocalDate d;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
+                if (type.equals("T")) {
+                    t = new ToDoTask(name, isCompleted);
+                } else if (type.equals("D")) {
+                    d = LocalDate.parse(params[3], formatter);
+                    t = new DeadlineTask(name, d, isCompleted);
+                } else if (type.equals("E")) {
+                    d = LocalDate.parse(params[3], formatter);
+                    t = new EventTask(name, d, isCompleted);
+                } else {
+                    throw new DukeCorruptFileException();
+                }
+                this.tasks.add(t);
             }
-            this.tasks.add(t);
+        } catch (Exception e) {
+            throw new DukeCorruptFileException();
         }
     }
 

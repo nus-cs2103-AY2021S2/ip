@@ -24,7 +24,7 @@ public class EventTask extends Task {
         this.duration = duration;
     }
 
-    public EventTask(String name, String duration, boolean isCompleted) {
+    public EventTask(String name, LocalDate duration, boolean isCompleted) {
         super(name);
         this.duration = duration;
         if (isCompleted) {
@@ -33,11 +33,12 @@ public class EventTask extends Task {
     }
 
     public String toFileFormat() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",
                 "E",
                 done == Status.DONE ? "1" : "0",
                 name,
-                duration);
+                duration.format(formatter));
     }
 
     @Override

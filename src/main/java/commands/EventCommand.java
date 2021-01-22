@@ -17,7 +17,7 @@ public class EventCommand extends Command {
     }
 
     public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
-        tm.addEventTask(name, flag);
+        tm.addEventTask(name, date);
         st.save(tm);
     }
 }
