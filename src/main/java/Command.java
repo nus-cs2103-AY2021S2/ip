@@ -104,18 +104,21 @@ public class Command {
                 case TODO:
                     taskName = taskDetails.trim();
                     task = new ToDo(Task.numTasks + 1, taskName, "incomplete");
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), "");
                     break;
                 case DEADLINE:
                     parsedTaskDetails = taskDetails.split("/by");
                     taskName = parsedTaskDetails[0].trim();
                     String endDate = parsedTaskDetails[1].trim();
                     task = new Deadline(Task.numTasks + 1, taskName, "incomplete", endDate);
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), endDate);
                     break;
                 case EVENT:
                     parsedTaskDetails = taskDetails.split("/at");
                     taskName = parsedTaskDetails[0].trim();
                     String startEndDate = parsedTaskDetails[1].trim();
                     task = new Event(Task.numTasks + 1, taskName, "incomplete", startEndDate);
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), startEndDate);
                     break;
                 default:
                     throw new IndexOutOfBoundsException();
