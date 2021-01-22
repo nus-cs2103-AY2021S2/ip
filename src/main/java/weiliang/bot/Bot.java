@@ -1,5 +1,11 @@
+package weiliang.bot;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import weiliang.bot.task.Deadline;
+import weiliang.bot.task.Event;
+import weiliang.bot.task.Task;
 
 public class Bot {
 
@@ -47,7 +53,7 @@ public class Bot {
         if (input.equals("list")) {
             String message = formatMessage("Printing list!");
             for (int i = 0; i < memory.size(); i++) {
-                message += "\n" + (i+1) + "." + memory.get(i);
+                message += "\n" + (i + 1) + "." + memory.get(i);
             }
             return message;
         }
@@ -67,10 +73,47 @@ public class Bot {
             message += "\n" + task;
             return message;
         }
+        if (input.startsWith("todo")) {
+            if (input.matches("^todo .+$")) {
+                Task task = new Task(input.replaceFirst("todo ", ""));
+                memory.add(task);
+                
+                String message = formatMessage("Got it! I've added this task.");
+                message += "\n" + task;
+                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                return message;
+            } else {
+                // Reserved for later part
+                // throw new BotException(this, message);
+            }
+        }
+        if (input.startsWith("deadline")) {
+            if (input.matches("^deadline .+ \\/by .+$")) {
+                String[] inputs = input.replaceFirst("deadline ", "").split("/by");
+                Task task = new Deadline(inputs[0], inputs[1]);
+                memory.add(task);
+                
+                String message = formatMessage("Got it! I've added this task.");
+                message += "\n" + task;
+                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                return message;
+            }
+        }
+        if (input.startsWith("event")) {
+            if (input.matches("^event .+ \\/at .+$")) {
+                String[] inputs = input.replaceFirst("event ", "").split("/at");
+                Task task = new Event(inputs[0], inputs[1]);
+                memory.add(task);
+                
+                String message = formatMessage("Got it! I've added this task.");
+                message += "\n" + task;
+                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                return message;
+            }
+        }
 
         // Default
-        memory.add(new Task(input));
-        return formatMessage("I've added '" + input + "'.");
+        return formatMessage("Sorry! I don't understand you.");
     }
 
 }

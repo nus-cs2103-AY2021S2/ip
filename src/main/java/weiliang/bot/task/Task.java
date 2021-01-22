@@ -1,7 +1,9 @@
+package weiliang.bot.task;
+
 public class Task {
     
-    private String task;
-    private boolean completed;
+    protected String task;
+    protected boolean completed;
 
     public Task(String task) {
         this.task = task;
@@ -13,7 +15,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + (completed ? "X" : " ") + "] " + task;
+        return "[T][" + (completed ? "X" : " ") + "] " + task;
     }
     
 }

@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import weiliang.bot.Bot;
+
 public class Duke {
     public static void main(String[] args) {
         // Init bot
