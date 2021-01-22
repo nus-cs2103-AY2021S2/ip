@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone = false;
@@ -21,5 +23,12 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%c] %s", isDone ? 'X' : ' ', description);
+    }
+
+    public LinkedList<String> export() {
+        LinkedList<String> list = new LinkedList<>();
+        list.add(String.valueOf(isDone));
+        list.add(description);
+        return list;
     }
 }
