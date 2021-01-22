@@ -1,12 +1,19 @@
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String CHATBOT_NAME = "Mantaro";
+    private static final String TASKSLIST_PATH = "data/duke.txt";
+
     private static boolean isActive = true;
 
-    private static List<Task> tasks = new ArrayList<>();
+    private static final List<Task> tasks = new ArrayList<>();
 
     /**
      * Print an adding message corresponding to the added Task's type
@@ -147,6 +154,60 @@ public class Duke {
         System.out.println("___________________________________________________________\n");
     }
 
+    private static void loadTasks() throws DukeLoadException, IOException {
+        File file = new File(TASKSLIST_PATH);
+
+        if(!file.createNewFile()) {
+            System.out.println("Save file found, loading from the save...");
+
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNextLine()) {
+                String[] splits = scanner.nextLine().split(" | ");
+                boolean isDone = splits[1].equals("1");
+
+                switch (splits[0]) {
+                case "T":
+                    ToDo toDo = new ToDo(splits[2], isDone);
+                    tasks.add(toDo);
+                case "D":
+                    Deadline deadline = new Deadline(splits[2], splits[3], isDone);
+                    tasks.add(deadline);
+                case "E":
+                    Event event = new Event(splits[2], splits[3], isDone);
+                    tasks.add(event);
+                default:
+                    throw new DukeLoadException("Invalid task type found: " + splits[0]);
+                }
+            }
+        } else {
+            System.out.println("No save data found, create a new blank save");
+        }
+
+    }
+
+    private static void saveTasks() throws DukeSaveException {
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File file = new File(TASKSLIST_PATH);
+        try {
+            // Erase any existing list in the file
+            new PrintWriter(TASKSLIST_PATH).close();
+
+            // Save each task as a row in the file
+            FileWriter writer = new FileWriter(TASKSLIST_PATH);
+            for (Task task : tasks) {
+                writer.write(task.toSaveInfoString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            throw new DukeSaveException("Issue with IO while saving tasks");
+        }
+    }
+
     /**
      * Lifecycle of the chatbot
      * @param args
@@ -168,14 +229,19 @@ public class Duke {
             try {
                 if(command.matches("^todo($|.+$)")) {
                     addToDo(command.substring(4).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^deadline($|.+$)")) {
                     addDeadline(command.substring(8).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^event($|.+$)")) {
                     addEvent(command.substring(5).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^done($|.+$)")) {
                     doneTask(command.substring(4).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^delete($|.+$)")) {
                     deleteTask(command.substring(6).stripLeading());
+                    saveTasks();
                 } else if(command.equals("list")) {
                     listTasks();
                 } else if(command.equals("bye")) {
@@ -185,7 +251,7 @@ public class Duke {
                     System.out.println("No such command, Please try again with another command meow.");
                     System.out.println("___________________________________________________________\n");
                 }
-            } catch(DukeCommandException e) {
+            } catch(DukeException e) {
                 System.out.println("___________________________________________________________");
                 System.out.printf("ERROR MEOW! %s\n", e.getMessage());
                 System.out.println("___________________________________________________________\n");
