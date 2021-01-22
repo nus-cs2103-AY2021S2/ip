@@ -18,12 +18,45 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
-
+		
+		InList il = new InList(in);
+		
+		System.out.println("added: "+in);
+		
         while (!in.equals("bye")) {
-            System.out.println(in);
             in = sc.nextLine();
+			
+			if (in.equals("list")) {
+				il.printList();
+			} else {
+				il.add(in);
+				System.out.println("added: "+in);
+			}
+			
         }
 
         System.out.println("Bye. Hope to see you again soon!");
     }
+	
+}
+
+class InList {
+	
+	private List<String> objList;
+	
+	public InList(String obj){
+		objList = new ArrayList<String>();
+		objList.add(obj);
+	}
+	
+	public void printList() {
+		for (int i = 0; i < objList.size(); i++) {
+			System.out.println(""+(i+1)+". "+objList.get(i));
+		}
+	}
+	
+	public void add(String obj) {
+		objList.add(obj);
+	}
+	
 }
