@@ -1,4 +1,5 @@
-public class Events extends Task{
+//Event Class with Date and Duration
+ public class Events extends Task{
     protected String timing;
     public Events(String name, String timing) {
         super(name);

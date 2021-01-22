@@ -35,9 +35,9 @@ public class Duke {
     public static void main(String[] args) {
         io = new IO();
         printHelloMessage();
-
+        boolean continueProgram = true;
         List<Task> tasks = new ArrayList<Task>();
-        loop: while (true) {
+        while (continueProgram) {
             String reply = io.readLine();
             Command command;
             try {
@@ -46,44 +46,11 @@ public class Duke {
                 io.printBotMessage(e.getMessage());
                 continue;
             }
-            switch(command.getCommand()) {
-                case BYE:
-                    break loop;
-                case LIST:
-                    io.printTasks(tasks);
-                    break;
-                case DONE:
-                    int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-                    tasks.get(doneIndex).markCompleted();
-                    printDoneMessage(tasks.get(doneIndex));
-                    break;
-                case TODO:
-                    ToDos todoTask = new ToDos(command.getDescription());
-                    tasks.add(todoTask);
-                    printAddedTaskMessage(todoTask, tasks.size());
-                    break;
-                case DEADLINE:
-                    String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
-                    Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], deadlineDetalis[1]);
-                    tasks.add(deadlineTask);
-                    printAddedTaskMessage(deadlineTask, tasks.size());
-                    break;
-                case EVENT:
-                    String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
-                    Events eventTask = new Events(eventDetails[0], eventDetails[1]);
-                    tasks.add(eventTask);
-                    printAddedTaskMessage(eventTask, tasks.size());
-                    break;
-                case DELETE:
-                    int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
-                    Task deletedTask = tasks.get(deleteIndex);
-                    tasks.remove(deleteIndex);
-                    printDeleteMessage(deletedTask, tasks.size());
-                    break;
-            }
+            continueProgram = processCommand(tasks,command);
         }
         io.printBotMessage("Bye. Hope to see you again soon!");
     }
+
 
     public static void printHelloMessage() {
         io.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
@@ -101,6 +68,47 @@ public class Duke {
         io.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
     }
 
+    //Process Command given by user
+    public static boolean processCommand(List<Task> tasks, Command command) {
+        switch(command.getCommand()) {
+            case BYE:
+                return false;
+            case LIST:
+                io.printTasks(tasks);
+                break;
+            case DONE:
+                int doneIndex = Integer.parseInt(command.getDescription()) - 1;
+                tasks.get(doneIndex).markCompleted();
+                printDoneMessage(tasks.get(doneIndex));
+                break;
+            case TODO:
+                ToDos todoTask = new ToDos(command.getDescription());
+                tasks.add(todoTask);
+                printAddedTaskMessage(todoTask, tasks.size());
+                break;
+            case DEADLINE:
+                String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
+                Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], deadlineDetalis[1]);
+                tasks.add(deadlineTask);
+                printAddedTaskMessage(deadlineTask, tasks.size());
+                break;
+            case EVENT:
+                String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
+                Events eventTask = new Events(eventDetails[0], eventDetails[1]);
+                tasks.add(eventTask);
+                printAddedTaskMessage(eventTask, tasks.size());
+                break;
+            case DELETE:
+                int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
+                Task deletedTask = tasks.get(deleteIndex);
+                tasks.remove(deleteIndex);
+                printDeleteMessage(deletedTask, tasks.size());
+                break;
+        }
+        return true;
+    }
+
+    //Validate User Input
     public static Command validateCommand(String command, int taskCount) throws CommandException {
         if (command.equals(EXITCOMMAND)) {
             return new Command(CommandType.BYE);

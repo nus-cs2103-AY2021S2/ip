@@ -1,3 +1,4 @@
+//Tasks Class that is parent of deadline, Events and Todo
 public abstract class Task {
     protected String taskName;
     protected boolean completed;
