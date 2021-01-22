@@ -11,9 +11,13 @@ import java.util.Map;
  * @author douglas_allwood@u.nus.edu
  */
 public enum Command {
-    END("bye"),
-    LIST("list"),
-    DONE("done");
+    LIST("list"),           // To list all Tasks
+    TODO("todo"),           // For todo tasks
+    EVENT("event"),         // For /at events
+    DEADLINE("deadline"),   // For /by tasks
+    DONE("done"),           // For marking a Task as complete
+    END("bye");             // For terminating the DukeBot
+
 
     private final String command;
 
