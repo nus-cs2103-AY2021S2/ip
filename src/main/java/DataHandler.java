@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class DataHandler {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
-    public static JSONArray taskList;
+    public static JSONArray taskList = new JSONArray();
 
     //Solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     @SuppressWarnings("unchecked")
