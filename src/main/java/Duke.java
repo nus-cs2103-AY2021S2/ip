@@ -34,30 +34,46 @@ public class Duke {
                 respond(response);
                 exit = true;
                 break;
+
             case ADD:
-                tasks.add(new Task(userInput));
-                response = "added: " + userInput;
+                Task toAdd;
+                if (keyword_UC.equals("TODO")) {
+                    toAdd = new Todo(userInput.split(" ", 2)[1]);
+                } else if (keyword_UC.equals("DEADLINE")) {
+                    String[] info = userInput.split(" ", 2)[1].split("/by");
+                    toAdd = new Deadline(info[0], info[1]);
+                } else if (keyword_UC.equals("EVENT")) {
+                    String[] info = userInput.split(" ", 2)[1].split("/at");
+                    toAdd = new Event(info[0], info[1]);
+                } else {
+                    toAdd = new Task("");
+                }
+                tasks.add(toAdd);
+                response = "Got it. I've added this task:\n"
+                        + " " + toAdd + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.\n";
                 respond(response);
                 break;
+
             case DONE:
                 int taskNum = Integer.parseInt(userInput.split(" ")[1]);
                 Task task = tasks.get(taskNum - 1);
                 Task updatedTask = task.markDone();
                 tasks.set(taskNum - 1, updatedTask);
                 response = "Nice! I've marked this task as done: \n"
-                        + "  [" + updatedTask.getStatusIcon() + "] "
-                        + updatedTask;
+                        + " " + updatedTask + "\n";
                 respond(response);
                 break;
+
             case LIST:
                 for (int i = 0; i < tasks.size(); i++) {
                     Task t = tasks.get(i);
-                    response += Integer.toString(i + 1) + ".["
-                            + t.getStatusIcon() + "] "
+                    response += Integer.toString(i + 1) + "."
                             + t + "\n";
                 }
                 respond(response);
                 break;
+
             default:
                 respond(response);
                 break;
