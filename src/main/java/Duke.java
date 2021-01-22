@@ -36,22 +36,22 @@ public class Duke {
                     String command = input.substring(0, cutOffPoint);
 
                     switch (command) {
-                        case "done":
-                            parser.handleDone(input, listOfTasks);
-                            break;
-                        case "todo":
-                            parser.handleTodo(input, listOfTasks);
-                            break;
-                        case "delete":
-                            parser.handleDelete(input, listOfTasks);
-                            break;
-                        case "deadline":
-                        case "event":
-                            parser.handleTasksWithTime(command, input, listOfTasks);
-                            break;
-                        default:
-                            System.out.println("I have no idea what that means, what do you want?");
-                            break;
+                    case "done":
+                        parser.handleDone(input, listOfTasks);
+                        break;
+                    case "todo":
+                        parser.handleTodo(input, listOfTasks);
+                        break;
+                    case "delete":
+                        parser.handleDelete(input, listOfTasks);
+                        break;
+                    case "deadline":
+                    case "event":
+                        parser.handleTasksWithTime(command, input, listOfTasks);
+                        break;
+                    default:
+                        System.out.println("I have no idea what that means, what do you want?");
+                        break;
                     }
                 }
                 storage.handleSave(listOfTasks);
