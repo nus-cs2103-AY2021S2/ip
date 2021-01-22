@@ -1,3 +1,7 @@
+package task;
+
+import simulator.DukeException;
+
 public class Event extends Task {
     protected String type = "E";
     protected StringBuilder date = new StringBuilder();

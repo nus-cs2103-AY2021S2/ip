@@ -1,3 +1,7 @@
+package task;
+
+import simulator.DukeException;
+
 public class Deadline extends Task {
     protected String type = "D";
     protected StringBuilder date = new StringBuilder();

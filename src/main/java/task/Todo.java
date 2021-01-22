@@ -1,4 +1,8 @@
-public class Todo extends Task{
+package task;
+
+import simulator.DukeException;
+
+public class Todo extends Task {
 
     protected String type = "T";
 

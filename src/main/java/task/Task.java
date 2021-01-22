@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected StringBuilder description = new StringBuilder();
     protected boolean isDone;
