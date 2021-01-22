@@ -45,4 +45,6 @@ public class DukeException{
      *
      */
     public static final void taskErrorException() { System.out.println(Format.TASKERROR); }
+
+    public static final void saveToFileError() { System.out.println(Format.SAVETOFILEERROR);}
 }

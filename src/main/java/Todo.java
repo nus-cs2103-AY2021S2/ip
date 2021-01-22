@@ -12,6 +12,16 @@ public class Todo extends Task{
 
     }
 
+    public Todo(String taskName, String done) {
+        super(taskName, done, true);
+
+    }
+
+    @Override
+    public int getType() {
+        return 1;
+    }
+
 
     @Override
     public String toString() {

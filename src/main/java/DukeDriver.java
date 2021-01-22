@@ -14,6 +14,12 @@ public class DukeDriver {
         System.out.println(Format.LOGO);
         System.out.println(Format.GREETING);
 
+        System.out.println(Format.LOADFILE);
+
+        Format.SLEEP();
+
+        TaskStorage.loadFiles();
+
         while(sc.hasNext()) {
             String message = sc.nextLine();
             boolean bye = inputHandler(message);
@@ -151,6 +157,7 @@ public class DukeDriver {
         switch (command) {
         case "bye":
             end = handleBye(message);
+            TaskStorage.writeToFiles(Task.getTaskList());
             break;
         case "list":
             Format.LISTING();

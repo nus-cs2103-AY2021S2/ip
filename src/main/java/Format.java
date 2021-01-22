@@ -18,12 +18,19 @@ public class Format {
     public static final String MISSINGDATE = "Fill ur date lah";
     public static final String COMMANDERROR = "I DON'T KNOW WHAT U SAYING BRO";
     public static final String TASKERROR = "Walao, no such task";
+    public static final String SAVETOFILEERROR = "Huh? Where your file?";
     public static final String FAREWELL = UPPER
-            + "I zao liao, don't miss me."
+            + "~~~~~~~~ I Zao Liao. Don't Miss Meeeeeee ~~~~~~~~."
             + LOWER;
     public static final String GREETING = UPPER
-            + "Awww, need help ah?"
+            + "*************** Awww, need help ah? ***************"
             + LOWER;
+
+    public static final String NODIRECTORY = "******* Cannot find your directory eh, "
+            + "first time ah? Create one for you *******";
+    public static final String LOADFILE = "******* Wait ah~ Loading file for you *******";
+    public static final String NOFILE = "******* File also don't have ah, nvm I make one for you *******";
+    public static final String EMPTYFILE = "******* Awwww~ You don't have any history of tasks *******";
 
     /**
      * make a chatBox that wrap a given String.
@@ -64,6 +71,22 @@ public class Format {
         System.out.println(LOWER);
     }
 
+    public static final void DONELOADING() {
+        System.out.println(UPPER);
+        for (Task task : Task.getTaskList()) {
+            if (task == null) break;
+            System.out.println(task);
+        }
+        System.out.println("Sir, here is your past history");
+        System.out.println(LOWER);
+    }
 
+    public static final void SLEEP() {
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
