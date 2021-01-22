@@ -1,4 +1,5 @@
 public class Command {
+    
     public static CommandType getType(String str) throws DukeException {
         int strLength = str.length();
         if (str.equalsIgnoreCase("bye")) {

@@ -30,6 +30,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
+
         boolean loop = true;
         String message = "";
         String command;
