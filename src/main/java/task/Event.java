@@ -3,7 +3,6 @@ package task;
 public class Event extends Task{
     String eventTime;
 
-
     public Event(String taskName, String eventTime) {
         super(taskName);
         this.eventTime = eventTime;
@@ -16,5 +15,10 @@ public class Event extends Task{
 
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.eventTime + ")";
+    }
+
+
+    public String parseToCSVRow() {
+        return "E," + super.isDone() + "," + super.getTaskName() + "," + this.eventTime;
     }
 }

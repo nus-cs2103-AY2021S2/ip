@@ -1,6 +1,6 @@
 package task;
 
-public class Task {
+public abstract class Task {
     private String taskName;
     private boolean done;
 
@@ -33,4 +33,6 @@ public class Task {
         String checkBox = this.done ? "[X]" : "[ ]";
         return checkBox + " " + this.taskName;
     }
+
+    public abstract String parseToCSVRow();
 }

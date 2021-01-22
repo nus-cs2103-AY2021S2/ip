@@ -16,4 +16,8 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.deadLine + ")";
     }
+
+    public String parseToCSVRow() {
+        return "D," + super.isDone() + "," + super.getTaskName() + "," + this.deadLine;
+    }
 }
