@@ -36,20 +36,6 @@ public class Duke {
         System.out.println("\t " + line);
     }
 
-    private static void processDescription(String full, String sep, String[] descriptions) throws IncompleteDetailException {
-        int i = full.indexOf(" " + sep);
-        if (i == -1)
-            throw new IncompleteDetailException(sep);
-
-        descriptions[0] = full.substring(0, i).trim();
-        if (descriptions[0].isEmpty() || i == 0)
-            throw new IncompleteDetailException((sep.equals("/by") ? "deadline" : "event") + " description");
-
-        descriptions[1] = full.substring(i + sep.length() + 1).trim();
-        if (descriptions[1].isEmpty())
-            throw new IncompleteDetailException("time");
-    }
-
     private static String getTasksLeftString(Vector<Task> tasks) {
         return String.format("Eh you got %d task%s in total leh", tasks.size(), tasks.size() == 1 ? "" : "s");
     }
