@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class DataHandler {
 
@@ -65,16 +66,16 @@ public class DataHandler {
             tasks.add(new ToDo(id, taskName, status));
         } else if (type.equals("D")) {
             String endDate = (String) taskDetails.get("endDate");
-            tasks.add(new Deadline(id, taskName, status, endDate));
+            tasks.add(new Deadline(id, taskName, status, LocalDate.parse(endDate)));
         } else {
             String startEndDate = (String) taskDetails.get("startEndDate");
-            tasks.add(new Event(id, taskName, status, startEndDate));
+            tasks.add(new Event(id, taskName, status, LocalDate.parse(startEndDate)));
         }
     }
 
     //Solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     @SuppressWarnings("unchecked")
-    public static void saveData(String id, String taskName, String status, String type, String dueDate) {
+    public static void saveData(String id, String taskName, String status, String type, LocalDate dueDate) {
 
         JSONObject taskDetails = new JSONObject();
         taskDetails.put("id", id);

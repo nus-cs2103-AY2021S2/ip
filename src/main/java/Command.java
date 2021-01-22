@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.LocalDate;
 
 /**
  * The Command class handles the logic of all allowed user commands for Duke.
@@ -104,21 +105,23 @@ public class Command {
                 case TODO:
                     taskName = taskDetails.trim();
                     task = new ToDo(Task.numTasks + 1, taskName, "incomplete");
-                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), "");
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), null);
                     break;
                 case DEADLINE:
                     parsedTaskDetails = taskDetails.split("/by");
                     taskName = parsedTaskDetails[0].trim();
                     String endDate = parsedTaskDetails[1].trim();
-                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", endDate);
-                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), endDate);
+                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(endDate));
+                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
                     break;
                 case EVENT:
                     parsedTaskDetails = taskDetails.split("/at");
                     taskName = parsedTaskDetails[0].trim();
                     String startEndDate = parsedTaskDetails[1].trim();
-                    task = new Event(Task.numTasks + 1, taskName, "incomplete", startEndDate);
-                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), startEndDate);
+                    task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
+                    DataHandler.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(startEndDate));
+                    task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
                     break;
                 default:
                     throw new IndexOutOfBoundsException();
