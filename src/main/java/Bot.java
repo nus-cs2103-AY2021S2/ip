@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bot {
 
     private String name;
     private String logo;
 
     private boolean active;
+    private List<String> memory;
 
     public Bot(String name) {
         this.name = name;
@@ -11,6 +15,7 @@ public class Bot {
                 + " \\__ \\ | '  \\| '_ \\ / -_) _ \\/ _ \\  _|\n" + " |___/_|_|_|_| .__/_\\___|___/\\___/\\__|\n"
                 + "             |_|                      \n\n";
         this.active = true;
+        this.memory = new ArrayList<>();
     }
 
     private String formatMessage(String message) {
@@ -18,7 +23,7 @@ public class Bot {
     }
 
     public String getInitMessage() {
-        return logo + formatMessage("Hi my name is " + name);
+        return logo + formatMessage("Hi, my name is {{bot:name}}!");
     }
 
     public boolean isActive() {
@@ -37,7 +42,16 @@ public class Bot {
             return formatMessage("Bye. Hope to see you again soon!");
         }
 
-        return formatMessage("Sorry, I didn't understand you!");
+        if (input.equalsIgnoreCase("list")) {
+            String message = formatMessage("Printing list!");
+            for (int i = 0; i < memory.size(); i++) {
+                message += "\n" + memory.get(i);
+            }
+            return message;
+        }
+
+        memory.add(input);
+        return formatMessage("I've added '" + input + "'.");
     }
 
 }
