@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Constructs a parser given the application.
+     *
      * @param ui Application.
      */
     public Parser(Ui ui) {
@@ -23,6 +24,7 @@ public class Parser {
 
     /**
      * Prints out the current list of Tasks.
+     *
      * @param taskList List of Tasks.
      */
     public void handleList(TaskList taskList) {
@@ -33,6 +35,7 @@ public class Parser {
      * Marks a Task as done given the command. It is assumed that the command is correct,
      * in the sense that the command the method will receive is 'done' and not something
      * else.
+     *
      * @param input User input.
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
@@ -54,6 +57,7 @@ public class Parser {
 
     /**
      * Adds a ToDo Task into the list.
+     *
      * @param input User input
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.
@@ -73,6 +77,7 @@ public class Parser {
 
     /**
      * Adds either a Deadline Task or Event Task based on the command.
+     *
      * @param command Command.
      * @param input User input.
      * @param taskList List of Tasks.
@@ -103,6 +108,7 @@ public class Parser {
 
     /**
      * Deletes the Task at the specified index (indexed from 1).
+     *
      * @param input User input.
      * @param taskList List of Tasks.
      * @throws DukeException If the user input is incorrect.

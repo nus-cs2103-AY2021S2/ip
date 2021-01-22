@@ -11,6 +11,7 @@ public class Event extends Task{
 
     /**
      * Constructs an undone Event with a name and time.
+     *
      * @param taskName Name of the Event.
      * @param eventTime Time of the Event.
      */
@@ -21,6 +22,7 @@ public class Event extends Task{
 
     /**
      * Constructs an Event with a name, time and status.
+     *
      * @param taskName Name of the Event.
      * @param done Status of the Event, done or not done.
      * @param eventTime Time of the Event.
@@ -32,6 +34,7 @@ public class Event extends Task{
 
     /**
      * Returns a string representation of Event.
+     *
      * @return A string representation of Event.
      */
     public String toString() {
@@ -41,6 +44,7 @@ public class Event extends Task{
 
     /**
      * Parse the task to comply with CSV format.
+     *
      * @return A string that complies with CSV format.
      */
     public String parseToCSVRow() {
@@ -49,6 +53,7 @@ public class Event extends Task{
 
     /**
      * Returns the deadline of the Event.
+     *
      * @return Time of the Event.
      */
     public LocalDate getTaskTime(){

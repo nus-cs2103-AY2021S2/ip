@@ -25,6 +25,7 @@ public class Ui {
 
     /**
      * Prints the current status of the list of Tasks.
+     * 
      * @param preMessage Response when user's requested action is successful.
      * @param t Task involved in the action.
      * @param size Number of Tasks in the list.

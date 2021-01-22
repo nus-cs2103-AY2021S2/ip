@@ -9,6 +9,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs an undone ToDo task with a name.
+     *
      * @param taskName Name of the task.
      */
     public ToDo(String taskName) {
@@ -17,6 +18,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a ToDo task with a name with status.
+     *
      * @param taskName Name of the task.
      * @param done Status of the task, done or not done.
      */
@@ -26,6 +28,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of the ToDo task.
+     *
      * @return String representation of the ToDo task.
      */
     public String toString() {
@@ -34,6 +37,7 @@ public class ToDo extends Task {
 
     /**
      * Parse the task to comply with CSV format.
+     *
      * @return A string that complies with CSV format.
      */
     public String parseToCSVRow() {
@@ -42,6 +46,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the deadline of the task. Inapplicable for ToDo tasks.
+     *
      * @return Null.
      */
     @Override

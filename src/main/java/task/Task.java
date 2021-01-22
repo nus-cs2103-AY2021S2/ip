@@ -11,6 +11,7 @@ public abstract class Task {
 
     /**
      * Constructs an undone Task with a name.
+     *
      * @param taskName Name of the Task.
      */
     Task (String taskName){
@@ -19,6 +20,7 @@ public abstract class Task {
 
     /**
      * Constructs a Task with a name and status.
+     *
      * @param taskName Name of the Task.
      * @param done Status of the Task, done or not done.
      */
@@ -29,6 +31,7 @@ public abstract class Task {
 
     /**
      * Returns the name of the Task.
+     *
      * @return The name of the Task.
      */
     public String getTaskName() {
@@ -37,6 +40,7 @@ public abstract class Task {
 
     /**
      * Returns status of the Task.
+     *
      * @return Status of the Task.
      */
     public boolean isDone() {
@@ -45,6 +49,7 @@ public abstract class Task {
 
     /**
      * Sets status of the Task.
+     *
      * @param done Status of the Task.
      */
     public void setDone(boolean done) {
@@ -53,6 +58,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of the Task.
+     *
      * @return A string representation of the Task.
      */
     public String toString() {
@@ -61,12 +67,14 @@ public abstract class Task {
     }
     /**
      * Parse the task to comply with CSV format.
+     *
      * @return A string that complies with CSV format.
      */
     public abstract String parseToCSVRow();
 
     /**
      * Returns the time of the Task.
+     *
      * @return Time of the Task.
      */
     public abstract LocalDate getTaskTime();

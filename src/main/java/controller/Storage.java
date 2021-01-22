@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Constructs a Storage class with a file name.
+     *
      * @param fileName Name of the file.
      */
     public Storage(String fileName){
@@ -29,6 +30,7 @@ public class Storage {
 
     /**
      * Saves data into the file.
+     *
      * @param taskList List of Tasks.
      * @throws DukeException If an error occurs while saving data.
      */
@@ -48,6 +50,7 @@ public class Storage {
 
     /**
      * Loads the data into a TaskList object.
+     *
      * @return A list of Tasks based on the file.
      * @throws DukeException If an error occurs while loading the data.
      */
@@ -85,6 +88,7 @@ public class Storage {
 
     /**
      * Makes a new CSV file if there is no file initially.
+     *
      * @throws DukeException If an error occurs while making a new file.
      */
     private void makeNewFile() throws DukeException {

@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * Creates a list of Tasks based on the collection of Tasks inputted.
+     *
      * @param listOfTasks List of Tasks.
      */
     public TaskList(ArrayList<Task> listOfTasks) {
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Adds a Task into the current list.
+     *
      * @param t New Task.
      */
     public void addTask(Task t) {
@@ -35,6 +37,7 @@ public class TaskList {
 
     /**
      * Removes Task from the specified index (indexed from 1).
+     *
      * @param number Index of the Task to be removed.
      * @return The removed Task.
      */
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Marks a Task as done based on the specified index (indexed from 1).
+     *
      * @param number Index of the Task to be marked.
      */
     public void markAsDone(int number) {
@@ -52,6 +56,7 @@ public class TaskList {
 
     /**
      * Obtains the Task from the specified index (indexed from 1).
+     *
      * @param number Index of the Task to be obtained.
      * @return The Task at the index.
      */
@@ -61,6 +66,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the current list.
+     *
      * @return The number of tasks in the current list.
      */
     public int getNumberOfTasks(){
@@ -69,6 +75,7 @@ public class TaskList {
 
     /**
      * Returns a string representation of the current list of Tasks.
+     *
      * @return A string representation of the current list of Tasks.
      */
     public String toString() {
