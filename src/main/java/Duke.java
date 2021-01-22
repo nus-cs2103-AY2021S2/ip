@@ -11,7 +11,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         greetUser();
         echo();
-        byeUser();
     }
     private static void greetUser() {
         System.out.println("Hello, Im Duke. What do you want me to do???");
