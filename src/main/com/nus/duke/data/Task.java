@@ -1,9 +1,11 @@
 package com.nus.duke.data;
 
+import java.io.Serializable;
+
 /**
  * An abstract class Task in added by the user.
  */
-public abstract class Task {
+public abstract class Task implements Serializable {
     /**
      * Description of the task.
      */

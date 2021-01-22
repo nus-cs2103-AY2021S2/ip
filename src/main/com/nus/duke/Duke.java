@@ -2,8 +2,10 @@ package com.nus.duke;
 
 import com.nus.duke.command.Command;
 import com.nus.duke.command.ExitCommand;
+import com.nus.duke.common.DukeStorageException;
 import com.nus.duke.data.*;
 import com.nus.duke.parser.CommandParser;
+import com.nus.duke.storage.TaskListStorage;
 import com.nus.duke.ui.TextUi;
 
 public class Duke {
@@ -11,6 +13,7 @@ public class Duke {
     private TextUi ui;
     private TaskList taskList;
     private CommandParser parser;
+    private TaskListStorage storage;
 
     public static void main(String[] args) {
         new Duke().run();
@@ -25,9 +28,13 @@ public class Duke {
 
     private void init() {
         this.ui = new TextUi();
-        // TODO: Read/write to file on disk
-        this.taskList = new TaskList();
+        this.storage = new TaskListStorage();
         this.parser = new CommandParser();
+        try {
+            this.taskList = this.storage.load();
+        } catch (DukeStorageException e) {
+            this.ui.printToUser(e.getLocalizedMessage());
+        }
     }
 
     private void mainLoop() {
@@ -37,6 +44,11 @@ public class Duke {
             command = this.parser.parseCommand(userInput);
             command.setContext(this.taskList);
             String result = command.execute();
+            try {
+                this.storage.save(this.taskList);
+            } catch (DukeStorageException e) {
+                this.ui.printToUser(e.getLocalizedMessage());
+            }
             this.ui.printToUser(result);
         } while (!(command instanceof ExitCommand));
     }

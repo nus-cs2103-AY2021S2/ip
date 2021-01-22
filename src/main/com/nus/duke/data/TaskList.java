@@ -1,13 +1,16 @@
 package com.nus.duke.data;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList {
-    private final List<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public int addTask(Task task) {
@@ -29,7 +32,7 @@ public class TaskList {
         return doneTask;
     }
 
-    public List<? extends Task> getList() {
+    public ArrayList<Task> getList() {
         return this.tasks;
     }
 }
