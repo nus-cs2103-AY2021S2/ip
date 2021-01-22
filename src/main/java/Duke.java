@@ -47,12 +47,17 @@ public class Duke {
                 Task task = tasks.getListOfTasks().get(taskNum - 1);
                 Task updatedTask = task.markDone();
                 tasks.editTask(taskNum, updatedTask);
+                response = "Nice! I've marked this task as done: \n"
+                        + "  [" + updatedTask.getStatusIcon() + "] "
+                        + updatedTask;
+                respond(response);
+                break;
             case LIST:
                 List<Task> listOfTasks = tasks.getListOfTasks();
                 for (int i = 0; i < listOfTasks.size(); i++) {
                     Task t = listOfTasks.get(i);
                     response += Integer.toString(i + 1) + ".["
-                            + t.getStatusIcon() + "]"
+                            + t.getStatusIcon() + "] "
                             + t + "\n";
                 }
                 respond(response);
