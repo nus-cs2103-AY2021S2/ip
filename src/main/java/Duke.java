@@ -3,19 +3,33 @@ import java.util.*;
 public class Duke {
     public static void main(String[] args) {
 
-        //***VANILLA ip-master CODE***
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        /*
+        * Justin is a chatbot that help users plan and organise tasks
+        * Justin stands for JUSt a TImetable (New) : JUSTIN
+        *
+        * Justin is able to create and manage new tasks
+        *   1) Mark tasks off as done
+        *   2) Set tasks as To Do's - <keyword> <name>
+        *   3) Set tasks as Deadline's - keyword  : <keyword> <name> /by <day>
+        *   4) Set tasks as Event's - keyword : <keyword> <name> /at <day time>
+        *   5) Supports deletion of completed tasks with command delete <int>
+        *
+        * Justin also supports viewing the entire tasks list with the command list - keyword : <keyword>
+        * To end off the session user can input bye to terminate program - keyword : <keyword>
+        *
+        * @author Goh Wei Kiat aka github : mrweikiat
+        * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
+        */
+
 
         Scanner sc = new Scanner(System.in);
 
         // Starting line for UI
-        System.out.println(logo);
-        System.out.println("Hello I'm Duke");
+        printLineBreaker();
+        System.out.println("Hello I'm Justin");
         System.out.println("What can I do for you?");
+        printLineBreaker();
 
         // Condition for Duke to stop
         boolean terminate = false;
@@ -26,34 +40,37 @@ public class Duke {
         //Duke will keep repeating until command given "Bye"
         while (!terminate) {
             String text = sc.nextLine();
-
-            // ***** level 5 *****
             try {
-                validate(text);
-                // ******* LEVEL 1 *****
+
+
+
+                validate(text); // throw current text to test for exceptions
+
+
+
                 if (text.equals("bye")) {
                     System.out.println("Bye. Hope to see you again soon!");
                     terminate = true; // terminates Duke
                 } else if (text.equals("list")) {
                     // print all the tasks stored currently in the list
+
+                    System.out.println("Here are the tasks in your list");
+
                     for (int i = 0; i < tasks.size(); i++) {
                         System.out.println(i+1 + ". " + tasks.get(i).toString());
                     }
+
                 } else if (text.contains("done")) {
-                    // ***** LEVEL 3 ******
                     String num = text.substring(5); // take out the int value of the task to be completed
                     int listNum = Integer.parseInt(num); // changes to int
                     Task hold = tasks.get(listNum-1);
                     hold.markAsDone();
 
-
                     // format
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(tasks.get(listNum-1).toString());
-                    // ***** LEVEL 1 *****
 
                 } else if (text.contains("deadline")) {
-                    // ****** LEVEL 4 *****
                     // insert code for deadline
                     String newText = text.substring(9); // remove deadline from the string text
                     //System.out.println(newText); // for debugging
@@ -129,7 +146,6 @@ public class Duke {
                     }
                 }
                 else if (text.contains("delete")) {
-                    // ***** level 6 *****
 
                 }
                 // adding of tasks
@@ -148,7 +164,6 @@ public class Duke {
 
     }
 
-    //  ***** level 5 *****
     static void validate(String text) throws DukeException {
         if (text.length() < 5 && text.contains("todo") ) { // case 1
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -160,6 +175,14 @@ public class Duke {
         } else if (text.length() < 6 && text.contains("event")) { // case 4
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
+    }
+
+    static void printLineBreaker() {
+        for (int i = 0; i < 50; i++) {
+            System.out.print("-");
+        }
+
+        System.out.println();
     }
 
 
