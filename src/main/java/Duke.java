@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.IOException;
+
 
 public class Duke {
     static Scanner sc = new Scanner(System.in);
@@ -13,6 +16,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         List<Task> list = new ArrayList<>();
+        createSaveFile();
 
         greet();
         commandList(list);
@@ -204,6 +208,19 @@ public class Duke {
 
         } else {
             throw new TaskNotFoundException();
+        }
+    }
+
+    //Creates directory and file if it doesn't exists.
+    public static void createSaveFile() {
+        try {
+            File file = new File("../ip/data");
+            System.out.println(file.mkdir());
+
+            file = new File("../ip/data/Duke.txt");
+            System.out.println(file.createNewFile());
+        } catch (IOException e) {
+            System.out.println("Error happened while trying to create save file");
         }
     }
 }
