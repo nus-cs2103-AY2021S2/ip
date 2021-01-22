@@ -11,4 +11,9 @@ public class ToDo extends Task {
     public String getTypeSymbol() {
         return "T";
     }
+
+    @Override
+    public String toSaveInfoString() {
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
+    }
 }

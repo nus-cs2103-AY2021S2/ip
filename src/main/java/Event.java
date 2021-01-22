@@ -23,6 +23,6 @@ public class Event extends Task {
 
     @Override
     public String toSaveInfoString() {
-        return super.toSaveInfoString() + " | " + this.dateTimeRange;
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " + this.dateTimeRange;
     }
 }

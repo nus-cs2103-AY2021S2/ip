@@ -23,6 +23,6 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveInfoString() {
-        return super.toSaveInfoString() + " | " + this.dateTime;
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " + this.dateTime;
     }
 }

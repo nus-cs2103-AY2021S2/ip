@@ -43,6 +43,6 @@ public class Task {
     }
 
     public String toSaveInfoString() {
-        return getStatusSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
     }
 }
