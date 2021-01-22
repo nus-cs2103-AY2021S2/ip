@@ -24,4 +24,8 @@ public class Deadline extends Task{
     public String parseToCSVRow() {
         return "D," + super.isDone() + "," + super.getTaskName() + "," + this.deadLine;
     }
+
+    public LocalDate getTaskTime(){
+        return deadLine;
+    }
 }

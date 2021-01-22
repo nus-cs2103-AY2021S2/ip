@@ -65,7 +65,7 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("The timing of the task is not included. Please check your input.");
         } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException("Please input a date with correct format (yyyy-mm-dd)");
+            throw new DukeException("Please input a date with correct format (yyyy-mm-dd).");
         }
     }
 

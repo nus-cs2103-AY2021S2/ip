@@ -1,5 +1,7 @@
 package task;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     private String taskName;
     private boolean done;
@@ -35,4 +37,6 @@ public abstract class Task {
     }
 
     public abstract String parseToCSVRow();
+
+    public abstract LocalDate getTaskTime();
 }

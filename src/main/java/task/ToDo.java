@@ -1,6 +1,8 @@
 package task;
 
 
+import java.time.LocalDate;
+
 public class ToDo extends Task {
 
     public ToDo(String taskName) {
@@ -17,5 +19,10 @@ public class ToDo extends Task {
 
     public String parseToCSVRow() {
         return "T," + super.isDone() + "," + super.getTaskName();
+    }
+
+    @Override
+    public LocalDate getTaskTime() {
+        return null;
     }
 }

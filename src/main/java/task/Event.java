@@ -21,8 +21,11 @@ public class Event extends Task{
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
-
     public String parseToCSVRow() {
         return "E," + super.isDone() + "," + super.getTaskName() + "," + this.eventTime;
+    }
+
+    public LocalDate getTaskTime(){
+        return eventTime;
     }
 }
