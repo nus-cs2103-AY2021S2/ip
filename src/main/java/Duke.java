@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Duke {
 
     //tracks all tasks
-    public static ArrayList<Task> tasks = DataHandler.loadData();
+    public static ArrayList<Task> tasks = Storage.loadData();
 
     /**
      * Entry point of the program, first greets then listens for input from user.
@@ -15,39 +15,26 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        Command command = new Command();
-        greet();
-        listenInput(command);
+        Parser parser = new Parser();
+        Ui.showWelcome();
+        listenInput(parser);
     }
 
     /**
      * Listens for input from the user.
-     * @param command command class that handles parsing of input
+     * @param parser command class that handles parsing of input
      */
-    public static void listenInput(Command command) {
+    public static void listenInput(Parser parser) {
         Scanner sc = new Scanner(System.in);
-        String input;
-        System.out.println("------------------------------------");
+        Ui.showDivider();
 
         while (sc.hasNextLine()) {
-            System.out.println("------------------------------------");
+            Ui.showDivider();
 
-            input = sc.nextLine();
-            command.parseInput(input, tasks);
+            String input = Ui.readCommand();
+            parser.parseInput(input, tasks);
 
-            System.out.println("------------------------------------");
+            Ui.showDivider();
         }
-    }
-
-    /**
-     * Greets the user upon program launch.
-     */
-    public static void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
     }
 }

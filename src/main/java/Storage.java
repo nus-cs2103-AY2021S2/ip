@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DataHandler {
+public class Storage {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static JSONArray taskList = new JSONArray();
 
     //Solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     @SuppressWarnings("unchecked")
-    public static ArrayList<Task>  loadData() {
+    public static ArrayList<Task> loadData() {
 
         File tasksFile = new File("./data/tasks.json");
         if (!tasksFile.exists()) {
