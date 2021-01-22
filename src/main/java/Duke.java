@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Duke {
@@ -27,11 +28,19 @@ public class Duke {
     }
 
     private static void addItems(String firstWord) {
+        if(firstWord.isEmpty()) {
+            System.out.println("sorry come again?");
+            return;
+        }
         StringBuilder item = new StringBuilder(sc.nextLine());
         items[numOfItems] = item.toString();
         if(firstWord.charAt(0) == 'd' || firstWord.charAt(0) == 'D') typeOfItems[numOfItems] = 'D';
         else if(firstWord.charAt(0) == 'e' || firstWord.charAt(0) == 'E') typeOfItems[numOfItems] = 'E';
         else if(firstWord.charAt(0) == 't' || firstWord.charAt(0) == 'T') typeOfItems[numOfItems] = 'T';
+        else {
+            System.out.println("please specify the type of item");
+            return;
+        }
         numOfItems++;
         System.out.println("added: "+item);
         System.out.println("Now you have "+numOfItems+" tasks in your list");
@@ -44,7 +53,17 @@ public class Duke {
          }
     }
     private static void doneItem() {
-        int itemNo = sc.nextInt();
+        int itemNo = -1;
+        try {
+            itemNo = sc.nextInt();
+        }
+        catch(InputMismatchException e) {
+            System.out.println("enter the item number correctly");
+        }
+        if(itemNo > numOfItems) {
+            System.out.println("oops theres an error!");
+            return;
+        }
         doneItems[itemNo-1] = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.print("  "+"[X] "+ items[itemNo-1]);
