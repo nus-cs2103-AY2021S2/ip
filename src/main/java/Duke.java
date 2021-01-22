@@ -8,8 +8,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        chatBot();
-
+        
+		chatBot();
     }
 
     public static void chatBot(){
@@ -22,55 +22,95 @@ public class Duke {
 		TaskList tl = new TaskList();
 		
         while (!in.equals("bye")) {
-            String[] split = in.split("\\s");
 			
-			String cmd = split[0];
+			try {
+				
+				String[] split = in.split("\\s");
+				
+				String cmd = split[0];
+				
+				switch(cmd) {
+					case "bye":
+						break;
+					case "list":
+						tl.printList();
+						break;
+					case "done":
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! A number needs to be specified.");
+						}
+						
+						try {
+							Task t = tl.markDone(Integer.parseInt(split[1]));
+							
+							System.out.println("Nice! I've marked this task as done:");
+							System.out.println(t);
+						} catch(NumberFormatException ne) {
+							throw new DukeException("OOPS!!! A number needs to be specified.");
+						}
+						
+						break;
+					case "todo":
+						split = in.split("todo\\s");
+						
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+						}
+						
+						Task td = new Task(split[1]);
+						tl.add(td);
+						
+						System.out.println("Got it. I've added this task:");
+						System.out.println(td);
+						System.out.println("Now you have "+tl.count()+" tasks in the list.");
+						break;
+					case "deadline":
+						split = in.split("deadline\\s");
+						
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+						}
+						
+						split = split[1].split("\\s/by\\s");
+						
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! A date and time is needed.");
+						}
+						
+						Task dl = new Task(split[0], 'D', split[1]);
+						tl.add(dl);
+						
+						System.out.println("Got it. I've added this task:");
+						System.out.println(dl);
+						System.out.println("Now you have "+tl.count()+" tasks in the list.");
+						break;
+					case "event":
+						split = in.split("event\\s");
+						
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+						}
+						
+						split = split[1].split("\\s/at\\s");
+						
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! A date and time is needed.");
+						}
+						
+						Task ev = new Task(split[0], 'E', split[1]);
+						tl.add(ev);
+						
+						System.out.println("Got it. I've added this task:");
+						System.out.println(ev);
+						System.out.println("Now you have "+tl.count()+" tasks in the list.");
+						break;
+					default:
+						throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+						
+				}
 			
-			switch(cmd) {
-				case "bye":
-					break;
-				case "list":
-					tl.printList();
-					break;
-				case "done":		
-					Task t = tl.markDone(Integer.parseInt(split[1]));
-					
-					System.out.println("Nice! I've marked this task as done:");
-					System.out.println(t);
-					break;
-				case "todo":
-					split = in.split("todo\\s");
-					
-					Task td = new Task(split[1]);
-					tl.add(td);
-					
-					System.out.println("Got it. I've added this task:");
-					System.out.println(td);
-					System.out.println("Now you have "+tl.count()+" tasks in the list.");
-					break;
-				case "deadline":
-					split = in.split("deadline\\s");
-					split = split[1].split("\\s/by\\s");
-					
-					Task dl = new Task(split[0], 'D', split[1]);
-					tl.add(dl);
-					
-					System.out.println("Got it. I've added this task:");
-					System.out.println(dl);
-					System.out.println("Now you have "+tl.count()+" tasks in the list.");
-					break;
-				case "event":
-					split = in.split("event\\s");
-					split = split[1].split("\\s/at\\s");
-					
-					Task ev = new Task(split[0], 'E', split[1]);
-					tl.add(ev);
-					
-					System.out.println("Got it. I've added this task:");
-					System.out.println(ev);
-					System.out.println("Now you have "+tl.count()+" tasks in the list.");
-					break;
-					
+			} catch(DukeException de) {
+				System.out.println(de.getMessage());
 			}
 			
 			in = sc.nextLine();
@@ -148,7 +188,11 @@ class TaskList {
 		taskList.add(t);
 	}
 	
-	public Task markDone(int i) {
+	public Task markDone(int i) throws DukeException{
+		if (i <= 0 || i > taskList.size()) {
+			throw new DukeException("OOPS!!! There is no item at that position.");
+		}
+		
 		Task t = taskList.get(i-1);
 		t.mark();
 		
