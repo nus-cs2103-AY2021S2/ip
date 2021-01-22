@@ -19,31 +19,20 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String in = sc.nextLine();
 		
-		TaskList tl = new TaskList();
+		InList il = new InList(in);
+		
+		System.out.println("added: "+in);
 		
         while (!in.equals("bye")) {
             in = sc.nextLine();
 			
-			String[] split = in.split("\\s");
-			
-			String cmd = split[0];
-			
-			switch(cmd) {
-				case "list":
-					tl.printList();
-					break;
-				case "done":		
-					Task t = tl.markDone(Integer.parseInt(split[1]));
-					
-					System.out.println("Nice! I've marked this task as done:");
-					System.out.println(t);
-					break;
-				default:
-					tl.add(in);
-					System.out.println("added: "+in);
-					break;
+			if (in.equals("list")) {
+				il.printList();
+			} else {
+				il.add(in);
+				System.out.println("added: "+in);
 			}
-				
+			
         }
 
         System.out.println("Bye. Hope to see you again soon!");
@@ -51,50 +40,23 @@ public class Duke {
 	
 }
 
-class Task {
-	private String name;
-	private boolean done;
+class InList {
 	
-	public Task(String n) {
-		name = n;
-		done = false;
-	}
+	private List<String> objList;
 	
-	public void mark() {
-		done = true;
-	}
-	
-	public String toString() {
-		if (done)
-			return "[X] "+name;
-		else
-			return "[ ] "+name;
-	}
-	
-}
-
-class TaskList {
-	
-	private List<Task> taskList;
-	
-	public TaskList(){
-		taskList = new ArrayList<Task>();
+	public InList(String obj){
+		objList = new ArrayList<String>();
+		objList.add(obj);
 	}
 	
 	public void printList() {
-		for (int i = 0; i < taskList.size(); i++) {
-			System.out.println(""+(i+1)+". "+taskList.get(i));
+		for (int i = 0; i < objList.size(); i++) {
+			System.out.println(""+(i+1)+". "+objList.get(i));
 		}
 	}
 	
 	public void add(String obj) {
-		taskList.add(new Task(obj));
+		objList.add(obj);
 	}
 	
-	public Task markDone(int i) {
-		Task t = taskList.get(i-1);
-		t.mark();
-		
-		return t;
-	}
 }
