@@ -8,24 +8,23 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         greetUser();
         echo();
     }
     private static void greetUser() {
-        System.out.println("Hello, Im Duke. What do you want me to do???");
+        System.out.println("Hello, Im Duke. What do you want me to do?");
     }
     private static void byeUser() {
         System.out.println("Bye. Hope to see you again soon!");
     }
     private static void echo() {
-        while(sc.hasNext()) {
+        while(true) {
             String cmd = sc.next();
             if(cmd.equals("bye")) {
                 byeUser();
                 break;
             }
-            System.out.println(cmd);
+            System.out.print(cmd+" ");
         }
     }
 }
