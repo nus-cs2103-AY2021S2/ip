@@ -1,3 +1,5 @@
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,6 +35,32 @@ public class Duke {
         printLine("Go do work! You need finish these things:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("\t %d. %s%n", i + 1, tasks.get(i).toString());
+        }
+    }
+
+    private static void printTasks(Vector<Task> tasks, String dateString) throws DukeException {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateString.trim(), DateTimeFormatter.ofPattern("d/M/yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format, input d/M/yyyy");
+        }
+
+        Vector<TaskWithDateTime> toPrint = new Vector<>();
+        for (Task task : tasks) {
+            if (task instanceof TaskWithDateTime) {
+                TaskWithDateTime t = (TaskWithDateTime) task;
+                if (t.getDateTime().toLocalDate().equals(date))
+                    toPrint.add(t);
+            }
+        }
+        if (toPrint.isEmpty()) {
+            printLine("You're free for the day!");
+        } else {
+            printLine("You have these deadlines/events:");
+            for (int i = 0; i < toPrint.size(); i++) {
+                System.out.printf("\t %d. %s%n", i + 1, toPrint.get(i).toString());
+            }
         }
     }
 
@@ -91,8 +119,10 @@ public class Duke {
             case LIST:  // list all stored tasks
                 if (tasks.isEmpty())
                     throw new NoTasksException();
-                else
+                else if (details.isBlank())
                     printTasks(tasks);
+                else
+                    printTasks(tasks, details);
                 break;
             case DONE:  // mark a single task as done
                 try {
