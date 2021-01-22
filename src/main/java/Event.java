@@ -17,6 +17,15 @@ public class Event extends Task {
     }
 
     /**
+     * Converts {@code Deadline} into string format to be stored in file.
+     *
+     * @return String format to be stored in file.
+     */
+    public String encode() {
+        return String.format("E / %s / %s", super.encode(), at);
+    }
+
+    /**
      * String representation of the Event.
      *
      * @return Event in check list form.

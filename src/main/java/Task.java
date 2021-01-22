@@ -27,6 +27,15 @@ public class Task {
     }
 
     /**
+     * Converts {@code Task} into string format to be stored in file.
+     *
+     * @return String format to be stored in file.
+     */
+    public String encode() {
+        return String.format("%d / %s", isDone ? 1 : 0, description);
+    }
+
+    /**
      * String representation of the Task.
      *
      * @return Task in check list form.

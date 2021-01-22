@@ -14,6 +14,15 @@ public class ToDo extends Task {
     }
 
     /**
+     * Converts {@code Todo} into string format to be stored in file.
+     *
+     * @return String format to be stored in file.
+     */
+    public String encode() {
+        return String.format("T / %s", super.encode());
+    }
+
+    /**
      * String representation of the ToDo.
      *
      * @return ToDo in check list form.
