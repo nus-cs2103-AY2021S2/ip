@@ -9,12 +9,6 @@ import java.util.stream.IntStream;
 
 public class Duke {
 
-    private class DukeException extends Exception {
-        public DukeException(String message) {
-            super(message);
-        }
-    }
-
     private final boolean done;
 
     private final String GREETING = "Hello :)";
