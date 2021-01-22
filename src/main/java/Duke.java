@@ -24,13 +24,26 @@ public class Duke {
 		System.out.println("added: "+in);
 		
         while (!in.equals("bye")) {
-            in = sc.nextLine();
+            String[] split = in.split("\\s");
 			
-			if (in.equals("list")) {
-				il.printList();
-			} else {
-				il.add(in);
-				System.out.println("added: "+in);
+			String cmd = split[0];
+			
+			switch(cmd) {
+				case "bye":
+					break;
+				case "list":
+					tl.printList();
+					break;
+				case "done":		
+					Task t = tl.markDone(Integer.parseInt(split[1]));
+					
+					System.out.println("Nice! I've marked this task as done:");
+					System.out.println(t);
+					break;
+				default:
+					tl.add(in);
+					System.out.println("added: "+in);
+					break;
 			}
 			
         }
