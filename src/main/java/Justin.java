@@ -21,17 +21,17 @@ public class Justin {
          * @version CS2103T AY20/21 Semester 2, Individual Project 'IP'
          */
 
-        // new logo coming soon , changing soon
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logoNew = "     ,--.                    ,--.   ,--.          \n" +
+                "     |  | ,--.,--.  ,---.  ,-'  '-. `--' ,--,--,  \n" +
+                ",--. |  | |  ||  | (  .-'  '-.  .-' ,--. |      \\ \n" +
+                "|  '-'  / '  ''  ' .-'  `)   |  |   |  | |  ||  |  \n" +
+                " `-----'   `----'  `----'    `--'   `--' `--''--'  \n";
+
 
         Scanner sc = new Scanner(System.in);
 
         // Starting line for UI
-        System.out.println(logo);
+        System.out.println(logoNew);
         printLineBreaker();
         System.out.println("Hello I'm Justin");
         System.out.println("What can I do for you?");
@@ -164,6 +164,18 @@ public class Justin {
                     }
                 }
                 else if (text.contains("delete")) {
+                    String num = text.substring(7); // take out the int value of the task to be completed
+                    int listNum = Integer.parseInt(num); // changes to int
+                    System.out.println(listNum);
+
+                    Task newTask = tasks.remove(listNum-1); // delete the entry of choice
+
+                    //format
+                    printLineBreaker();
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(" " + newTask.toString());
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list");
+                    printLineBreaker();
 
                 }
                 // adding of tasks
