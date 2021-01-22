@@ -31,6 +31,19 @@ public class Duke {
                         System.out.println("Nice, I have set this task as done!");
                         System.out.println(list.get(value - 1).toString());
                         break;
+                    case "delete":
+                        if (inputSplit.length < 2){
+                            System.out.println("You have entered too little arguments, please include the task number");
+                            break;
+                        }
+                        counter--;
+                        int valueToDelete = Integer.valueOf(inputSplit[1]);
+                        Task task = list.get(valueToDelete - 1);
+                        list.remove(valueToDelete - 1);
+                        System.out.println("Noted. I have deleted this task:");
+                        System.out.println(task.toString());
+                        System.out.println("You now have " + counter + " task(s) in the list!");
+                        break;
                     case "todo":
                         if (inputSplit.length < 2){
                             System.out.println("You have entered too little arguments, please include the task description");
