@@ -1,23 +1,21 @@
 import java.util.LinkedList;
+import java.time.LocalDateTime;
 
-public class EventTask extends Task {
-    protected String at;
-
-    public EventTask(String description, String at) {
-        super(description);
-        this.at = at;
+public class EventTask extends TaskWithDateTime {
+    public EventTask(String description, LocalDateTime at) {
+        super(description, at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + dateTime.format(DATE_TIME_FORMAT) + ")";
     }
 
     @Override
     public LinkedList<String> export() {
         LinkedList<String> list = super.export();
         list.addFirst("E");
-        list.addLast(at);
+        list.addLast(dateTime.toString());
         return list;
     }
 }

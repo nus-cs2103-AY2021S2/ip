@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Vector;
@@ -34,10 +35,10 @@ public class TaskSaver {
                     ret.add(new ToDo(data[2]));
                     break;
                 case "D":
-                    ret.add(new Deadline(data[2], data[3]));
+                    ret.add(new Deadline(data[2], LocalDateTime.parse(data[3])));
                     break;
                 case "E":
-                    ret.add(new EventTask(data[2], data[3]));
+                    ret.add(new EventTask(data[2], LocalDateTime.parse(data[3])));
                     break;
                 default:
                     throw new DukeException("Unknown task type");

@@ -1,4 +1,11 @@
-import java.util.*;
+import javax.swing.text.DateFormatter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Vector;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
@@ -31,22 +38,34 @@ public class Duke {
         }
     }
 
-    private static void printLine(String line) {
-        System.out.println("\t " + line);
+    private static void printTasks(Vector<Task> tasks, String dateString) throws DukeException {
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateString.trim(), DateTimeFormatter.ofPattern("d/M/yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format, input d/M/yyyy");
+        }
+
+        Vector<TaskWithDateTime> toPrint = new Vector<>();
+        for (Task task : tasks) {
+            if (task instanceof TaskWithDateTime) {
+                TaskWithDateTime t = (TaskWithDateTime) task;
+                if (t.getDateTime().toLocalDate().equals(date))
+                    toPrint.add(t);
+            }
+        }
+        if (toPrint.isEmpty()) {
+            printLine("You're free for the day!");
+        } else {
+            printLine("You have these deadlines/events:");
+            for (int i = 0; i < toPrint.size(); i++) {
+                System.out.printf("\t %d. %s%n", i + 1, toPrint.get(i).toString());
+            }
+        }
     }
 
-    private static void processDescription(String full, String sep, String[] descriptions) throws IncompleteDetailException {
-        int i = full.indexOf(" " + sep);
-        if (i == -1)
-            throw new IncompleteDetailException(sep);
-
-        descriptions[0] = full.substring(0, i).trim();
-        if (descriptions[0].isEmpty() || i == 0)
-            throw new IncompleteDetailException((sep.equals("/by") ? "deadline" : "event") + " description");
-
-        descriptions[1] = full.substring(i + sep.length() + 1).trim();
-        if (descriptions[1].isEmpty())
-            throw new IncompleteDetailException("time");
+    private static void printLine(String line) {
+        System.out.println("\t " + line);
     }
 
     private static String getTasksLeftString(Vector<Task> tasks) {
@@ -59,19 +78,51 @@ public class Duke {
         printLine(getTasksLeftString(tasks));
     }
 
-    private static boolean processInput(Vector<Task> tasks, Function func, String details)
-            throws NoTasksException,
-                   InvalidTaskIndexException,
-                   NoTaskDescriptionException,
-                   IncompleteDetailException,
-                   InvalidCommandException {
+    private static Task createTask(Function type, String details) throws DukeException {
+        if (details.isBlank())
+            throw new NoTaskDescriptionException();
+
+        Task ret;
+        if (type == Function.TODO) {
+            ret = new ToDo(details.trim());
+        } else {
+            boolean isDeadline = type == Function.DEADLINE;
+            String sep = isDeadline ? "/by" : "/at";
+            int i = details.indexOf(" " + sep);
+            if (i == -1)
+                throw new IncompleteDetailException(sep);
+
+            String description = details.substring(0, i).trim();
+            if (description.isEmpty() || i == 0)
+                throw new IncompleteDetailException((sep.equals("/by") ? "deadline" : "event") + " description");
+
+            String dateTimeString = details.substring(i + sep.length() + 1).trim();
+            if (dateTimeString.isEmpty())
+                throw new IncompleteDetailException("date and time");
+
+            LocalDateTime localDateTime;
+            try {
+                localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date and time format, input d/M/yyyy HHmm");
+            }
+
+            ret = isDeadline ? new Deadline(description, localDateTime) : new EventTask(description, localDateTime);
+        }
+
+        return ret;
+    }
+
+    private static boolean processInput(Vector<Task> tasks, Function func, String details) throws DukeException {
         boolean active = true;
         switch (func) {
             case LIST:  // list all stored tasks
                 if (tasks.isEmpty())
                     throw new NoTasksException();
-                else
+                else if (details.isBlank())
                     printTasks(tasks);
+                else
+                    printTasks(tasks, details);
                 break;
             case DONE:  // mark a single task as done
                 try {
@@ -101,27 +152,11 @@ public class Duke {
                 active = false;
                 break;
             case TODO:
-                if (details.isBlank())
-                    throw new NoTaskDescriptionException();
-                else {
-                    tasks.add(new ToDo(details.trim()));
-                    postAddTaskSummary(tasks);
-                }
-                break;
-            case DEADLINE: {
-                String[] descriptions = new String[2];
-                processDescription(details, "/by", descriptions);
-                tasks.add(new Deadline(descriptions[0], descriptions[1]));
+            case DEADLINE:
+            case EVENT:
+                tasks.add(createTask(func, details));
                 postAddTaskSummary(tasks);
                 break;
-            }
-            case EVENT: {
-                String[] descriptions = new String[2];
-                processDescription(details, "/at", descriptions);
-                tasks.add(new EventTask(descriptions[0], descriptions[1]));
-                postAddTaskSummary(tasks);
-                break;
-            }
             default:
                 throw new InvalidCommandException();
         }
