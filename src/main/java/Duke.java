@@ -22,12 +22,20 @@ public class Duke {
                 String[] inputSplit = input.split(" ");
                 switch (inputSplit[0]){
                     case "done":
+                        if (inputSplit.length < 2){
+                            System.out.println("You have entered too little arguments, please include the task number");
+                            break;
+                        }
                         int value = Integer.valueOf(inputSplit[1]);
                         list.get(value - 1).setDone();
                         System.out.println("Nice, I have set this task as done!");
                         System.out.println(list.get(value - 1).toString());
                         break;
                     case "todo":
+                        if (inputSplit.length < 2){
+                            System.out.println("You have entered too little arguments, please include the task description");
+                            break;
+                        }
                         counter++;
                         String name = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
                         list.add(new ToDos(name));
@@ -36,6 +44,10 @@ public class Duke {
                         System.out.println("You now have " + counter + " task(s) in the list!");
                         break;
                     case "deadline":
+                        if (inputSplit.length < 2){
+                            System.out.println("You have entered too little arguments, please include the task description");
+                            break;
+                        }
                         counter++;
                         String deadlineName = String.join(" ", Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
                         String[] deadlineSplit = deadlineName.split("/by ");
@@ -45,6 +57,10 @@ public class Duke {
                         System.out.println("You now have " + counter + " task(s) in the list!");
                         break;
                     case "event":
+                        if (inputSplit.length < 2){
+                            System.out.println("You have entered too little arguments, please include the task description");
+                            break;
+                        }
                         counter++;
                         String event = String.join(" ",Arrays.copyOfRange(inputSplit, 1, inputSplit.length));
                         String[] eventSplit = event.split("/at ");
