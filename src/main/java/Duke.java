@@ -35,7 +35,6 @@ public class Duke {
     public static void run() {
         ArrayList<Task> listOfTasks = handleLoad();
 
-
         Scanner sc = new Scanner(System.in);
         System.out.print(">>> ");
         String input = sc.nextLine();
@@ -68,6 +67,7 @@ public class Duke {
                 }
             }
             handleSave(listOfTasks);
+
             System.out.print(">>> ");
             input = sc.nextLine();
         }
