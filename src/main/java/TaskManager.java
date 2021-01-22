@@ -1,9 +1,48 @@
+import javax.imageio.IIOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskManager {
     List<Task> lst = new ArrayList<>();
     final String seperatorLine = "-----------------------------";
+    File file;
+    TaskManager() {
+        try {
+            this.file = new File("duke.txt");
+            if (file.createNewFile()) {
+                System.out.println("Created file: " + file.getName());
+            }
+            Scanner sc = new Scanner(this.file);
+            while (sc.hasNextLine()) {
+                String str = sc.nextLine();
+                char type = str.charAt(1);
+                char status = str.charAt(3);
+                String desc = str.substring(7);
+                if (type == 'T') {
+                    lst.add(new ToDo(desc));
+                } else if (type == 'D') {
+                    int index = desc.indexOf('(');
+                    lst.add(new Deadline(desc.substring(0, index), desc.substring(index + 5)));
+                } else if (type == 'E') {
+                    int index = desc.indexOf('(');
+                    lst.add(new Event(desc.substring(0, index), desc.substring(index + 5)));
+                }
+                if (status == 'X') {
+                    lst.get(lst.size() - 1).markDone();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred.");
+        }
+
+    }
 
     private void addToDo(String desc) throws DukeException {
         desc = desc.trim();
@@ -46,6 +85,8 @@ public class TaskManager {
                 "task:\n" + "  " + lst.get(lst.size() - 1) + "\n" +
                 "Now you have " + lst.size() + " tasks in the list.");
         System.out.println(seperatorLine);
+
+
     }
 
     public void markDone(String position) {
@@ -77,4 +118,18 @@ public class TaskManager {
         }
         System.out.println(seperatorLine);
     }
+
+    public void writeFile() throws DukeException {
+        try {
+//            File file = new File(String.valueOf(path));
+            FileWriter fileWriter = new FileWriter(this.file);
+            for (Task task: lst) {
+                fileWriter.write(task.toString() + '\n');
+            }
+            fileWriter.close();
+        } catch (IOException err) {
+            throw new DukeException("Error during file writing.");
+        }
+    }
+
 }
