@@ -9,6 +9,9 @@ public class Duke {
         run();
     }
 
+    /**
+     * Runs the application.
+     */
     public static void run() {
         Ui ui = new Ui();
         ui.initialize();
