@@ -47,4 +47,6 @@ public abstract class Task {
         this.done = Status.DONE;
         return true;
     }
+
+    public abstract String toFileFormat();
 }

@@ -1,5 +1,6 @@
 package commands;
 
+import duke.Storage;
 import duke.Ui;
 import duke.TaskManager;
 
@@ -8,7 +9,7 @@ public class ListCommand extends Command {
         //do nothing
     }
 
-    public void execute(Ui ui, TaskManager tm) {
+    public void execute(Ui ui, TaskManager tm, Storage st) {
         ui.showTasks(tm.getTasks());
     }
 }
