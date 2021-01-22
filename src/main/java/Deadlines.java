@@ -3,23 +3,30 @@
  */
 public class Deadlines extends Task{
 
-    private String comments;
+
 
     /**
      * create a deadline task object with given task name and given dates/comments.
      *
      * @param taskName String representation of the name of the task.
-     * @param comments String representation of the comments/dates.
+     * @param date String representation of the comments/dates.
      */
-    public Deadlines(String taskName, String comments) {
-        super(taskName);
-        this.comments = comments;
+    public Deadlines(String taskName, String date) {
+        super(taskName, date);
     }
 
+    public Deadlines(String taskName, String date, String done) {
+        super(taskName, date, done);
+    }
+
+    @Override
+    public int getType() {
+        return 2;
+    }
 
     @Override
     public String toString() {
         return String.format("[D][%s] %d. %s ( %s )", super.isDone(), super.getIndex(),
-                super.getTaskName(), this.comments);
+                super.getTaskName(), super.getDate());
     }
 }

@@ -10,7 +10,7 @@ public class Task {
     private static int capacity = 0;
     private int index;
     private String done;
-
+    private String date;
     /**
      * Construct a task object with taskname attached and its index label in the taskList.
      * @param taskName name of the task.
@@ -20,6 +20,39 @@ public class Task {
         this.taskName = taskName;
         this.index = capacity + 1;
         this.done = " ";
+        this.date = "";
+        capacity++;
+        add(this);
+    }
+
+    Task(String taskName, String done, boolean check) {
+        this.taskName = taskName;
+        this.index = capacity + 1;
+        this.done = done;
+        this.date = "";
+        capacity++;
+        add(this);
+    }
+
+    Task(String taskName, String date) {
+        this.taskName = taskName;
+        this.index = capacity + 1;
+        this.done = " ";
+        if (DateAndTime.converter(date).equals("")) {
+            DukeException.DATEFORMATEXCEPTION();
+            this.date = date;
+        } else {
+            this.date = DateAndTime.converter(date);
+        }
+        capacity++;
+        add(this);
+    }
+
+    Task(String taskName, String date, String done) {
+        this.taskName = taskName;
+        this.index = capacity + 1;
+        this.done = done;
+        this.date = date;
         capacity++;
         add(this);
     }
@@ -54,7 +87,7 @@ public class Task {
             Task t = taskList.get(i - 1);
             taskList.remove(i - 1);
             System.out.println(Format.UPPER + "Awww~ You've deleted the task: "
-                + " " + t.toString() + Format.LOWER);
+                    + " " + t.toString() + Format.LOWER);
             for (Task task : taskList) {
                 if (task.index > i) {
                     task.index--;
@@ -100,6 +133,14 @@ public class Task {
      */
     public int getIndex() {
         return index;
+    }
+
+    public int getType() {
+        return 0;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     /**

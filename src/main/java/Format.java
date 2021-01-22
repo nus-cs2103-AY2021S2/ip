@@ -11,7 +11,7 @@ public class Format {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
+    public static final String WRONGDATEFORMAT = "Err, wrong date format..";
     public static final String KEYINNUMBER = "PLease Lah! Key in number!";
     public static final String EMPTYTASK = "Walao!NO TASK!";
     public static final String TOOMANYARGUMENTS = "You put so many/few ARGUMENTS for what";
