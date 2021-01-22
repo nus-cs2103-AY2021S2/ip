@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Task implements Cloneable {
+public abstract class Task implements Cloneable, java.io.Serializable {
 
     protected final String name;
     protected final boolean done;
