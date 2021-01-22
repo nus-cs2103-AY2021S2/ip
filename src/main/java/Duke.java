@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Duke {
 
     //tracks all tasks
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static ArrayList<Task> tasks = DataHandler.loadData();
 
     /**
      * Entry point of the program, first greets then listens for input from user.
