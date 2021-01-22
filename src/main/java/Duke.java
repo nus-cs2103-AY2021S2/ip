@@ -60,32 +60,32 @@ public class Duke {
                 } else {
                     Task task;
                     switch (input.split(" ")[0]) {
-                        case "todo":
-                            if (input.split(" ").length <= 1) {
-                                throw new DukeException("  Please describe the task.");
-                            }
-                            task = new Todo(input.substring(5));
-                            break;
-                        case "deadline": {
-                            if (input.split(" ").length <= 1) {
-                                throw new DukeException("  Please describe the task.");
-                            }
-                            String[] inputs = input.substring(9).split("/by");
-                            String name = inputs[0] + "(by:" + inputs[1] + ")";
-                            task = new Deadline(name);
-                            break;
+                    case "todo":
+                        if (input.split(" ").length <= 1) {
+                            throw new DukeException("  Please describe the task.");
                         }
-                        case "event": {
-                            if (input.split(" ").length <= 1) {
-                                throw new DukeException("  Please describe the task.");
-                            }
-                            String[] inputs = input.substring(6).split("/at");
-                            String name = inputs[0] + "(at:" + inputs[1] + ")";
-                            task = new Event(name);
-                            break;
+                        task = new Todo(input.substring(5));
+                        break;
+                    case "deadline": {
+                        if (input.split(" ").length <= 1) {
+                            throw new DukeException("  Please describe the task.");
                         }
-                        default:
-                            throw new DukeException("  That command is invalid.");
+                        String[] inputs = input.substring(9).split("/by");
+                        String name = inputs[0] + "(by:" + inputs[1] + ")";
+                        task = new Deadline(name);
+                        break;
+                    }
+                    case "event": {
+                        if (input.split(" ").length <= 1) {
+                            throw new DukeException("  Please describe the task.");
+                        }
+                        String[] inputs = input.substring(6).split("/at");
+                        String name = inputs[0] + "(at:" + inputs[1] + ")";
+                        task = new Event(name);
+                        break;
+                    }
+                    default:
+                        throw new DukeException("  That command is invalid.");
                     }
                     tasks.add(task);
                     System.out.println("  Task added:");
