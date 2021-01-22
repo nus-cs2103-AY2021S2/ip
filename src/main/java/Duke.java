@@ -6,12 +6,6 @@ import java.util.Scanner;
 public class Duke {
     public static String line = "------------------------------------------------------";
 
-    public static void greeting(){
-        System.out.println(line);
-        System.out.println("I am Donald Trump, the Greatest American President ever\nWhat can I do for you?");
-        System.out.println(line);
-
-    }
     public static void main(String[] args) {
         List<Task> ls = new ArrayList<>();
         Manager manager = new Manager();
