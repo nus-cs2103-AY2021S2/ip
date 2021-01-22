@@ -5,23 +5,26 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DataHandler {
-    ArrayList<Task> l;
+    String l;
 
-    public DataHandler(ArrayList<Task> list) {
-        this.l = list;
+    public DataHandler(String filePath) {
+        this.l = filePath;
     }
 
-    public static void saveData(ArrayList<Task> li) {
+    public static void saveData(TaskList li) {
         //potential problem: saveData doesnt update .txt file when i change done status of item to done
         try {
             Path currPath = Paths.get("");
             FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString() + "/duke.txt");
-            for (int i = 0; i < li.size(); i++) {
-                String write = li.get(i) + "\n";
+            for (int i = 0; i < li.getSize(); i++) {
+                String write = li.getInd(i) + "\n";
                 fw.write(write);
             } fw.close();
         } catch (IOException e) {
@@ -29,11 +32,10 @@ public class DataHandler {
         }
     }
 
-    public static ArrayList<Task> loadData() throws FileNotFoundException {
+    public static TaskList loadData() throws FileNotFoundException {
         Path currPath = Paths.get("");
         Path dukePath = Paths.get(currPath.toAbsolutePath().toString() + "/duke.txt");
-        ArrayList<Task> list = new ArrayList<Task>();
-        int counter = 0;
+        TaskList list = new TaskList();
 
         if (Files.exists(dukePath)) { //load list data
             File info = new File(String.valueOf(dukePath));
@@ -55,7 +57,7 @@ public class DataHandler {
                     if (done) {
                         t.setDone();
                     }
-                    list.add(counter, t);
+                    list.addToDo(t);
                 } else if (arr[1].equals("D")) {
                     String taskDetails = "";
                     Boolean done = false;
@@ -66,20 +68,29 @@ public class DataHandler {
                         taskDetails += arr[j];
                     }
                     arr = taskDetails.split("[(]");
-                    String description = arr[0];
+                    String[] deets = arr[0].split("");
+                    String description = "";
+                    for (int t = 0; t < arr[0].length() - 1; t++) {
+                        description += deets[t];
+                    }
                     taskDetails = arr[1];
-                    arr = taskDetails.split(" by: ");
+                    System.out.println(Arrays.toString(description.toCharArray()));
+                    System.out.println(Arrays.toString(taskDetails.toCharArray()));
+                    arr = taskDetails.split(" by:" , 2);
+                    System.out.println(Arrays.toString(arr));
                     String by = "";
                     String details = arr[0];
                     arr = details.split("");
-                    for (int k = 0; k < arr.length - 1; k++) {
+                    for (int k = 4; k < arr.length - 1; k++) {
                         by += arr[k];
                     }
-                    Task t = new Deadline(description, by);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+                    LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+                    Task t = new Deadline(description, dateTime);
                     if (done) {
                         t.setDone();
                     }
-                    list.add(counter, t);
+                    list.addDeadline(t);
                 } else if (arr[1].equals("E")) {
                     String taskDetails = "";
                     Boolean done = false;
@@ -90,22 +101,27 @@ public class DataHandler {
                         taskDetails += arr[j];
                     }
                     arr = taskDetails.split("[(]");
-                    String description = arr[0];
+                    String[] deets = arr[0].split("");
+                    String description = "";
+                    for (int t = 0; t < arr[0].length() - 1; t++) {
+                        description += deets[t];
+                    }
                     taskDetails = arr[1];
                     arr = taskDetails.split(" at: ");
                     String at = "";
                     String details = arr[0];
                     arr = details.split("");
-                    for (int k = 0; k < arr.length - 1; k++) {
+                    for (int k = 4; k < arr.length - 1; k++) {
                         at += arr[k];
                     }
-                    Task t = new Deadline(description, at);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+                    LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+                    Task t = new Event(description, dateTime);
                     if (done) {
                         t.setDone();
                     }
-                    list.add(counter, t);
+                    list.addEvent(t);
                 }
-                counter++;
             }
         } else { //create new file in folder
 //            String folderPath = System.getProperty("user.dir") + "/data";
