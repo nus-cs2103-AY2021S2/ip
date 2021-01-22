@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input6.txt file and redirect the standard output to the ACTUAL_OK_6.TXT
-java -classpath ../../bin Duke < input6.txt > ACTUAL_OK_6.TXT
+java -classpath ../../bin SurrealChat < input6.txt > ACTUAL_OK_6.TXT
 
 # convert to UNIX format
 cp EXPECTED_OK_6.TXT EXPECTED-UNIX_OK_6.TXT

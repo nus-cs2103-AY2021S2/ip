@@ -50,24 +50,25 @@ Meme Man is now adding to-do task: [T][✘] Watch CS2103T lecture
 Total number of tasks: 1
 ```
 
-### `deadline (insert task description) /by (insert deadline)` - Add Deadline task command
+### `deadline (insert task description) /by (insert date)` - Add Deadline task command
 
-Key this command in along with task description and deadline to cause Meme Man to add a Deadline task.
+Key this command in along with task description and deadline date to cause Meme Man to add a Deadline task.
+Deadline date must be in this format: YYYY-MM-DD.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
 ```
-deadline Do CS2103T lecture quiz /by this Saturday
-deadline Do CS2103T ip /by next Monday
+deadline Do CS2103T lecture quiz /by 2021-01-12
+deadline Do CS2103T ip /by 2021-01-13
 ```
 
 Expected outcome:
 
 ```
-Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz (by: this Saturday)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T lecture quiz (by: 2021-01-12)
 Total number of tasks: 2
-Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: next Monday)
+Meme Man is now adding deadline task: [D][✘] Do CS2103T ip (by: 2021-01-13)
 Total number of tasks: 3
 ```
 
@@ -76,19 +77,20 @@ Outcome if "/by" is missing:
 Wrong formatting. Did you forget to put '/by'? Not stonks!
 ```
 
-### `event (insert task description) /at (insert time)` - Add Event task command
+### `event (insert task description) /at (insert date)` - Add Event task command
 
-Key this command in along with task description and event time to cause Meme Man to add a Event task.
+Key this command in along with task description and event date to cause Meme Man to add a Event task.
+Event date must be in this format: YYYY-MM-DD.
 Everytime a task is added, the new total number of tasks is displayed.
 
 Example of usage:
 
-`event Attend CS2101 class /at next Tuesday`
+`event Attend CS2101 class /at 2021-01-14`
 
 Expected outcome:
 
 ```
-Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: next Tuesday)
+Meme Man is now adding event task: [E][✘] Attend CS2101 class (at: 2021-01-14)
 Total number of tasks: 4
 ```
 Outcome if "/at" is missing:
@@ -236,9 +238,9 @@ Expected outcome:
 ```
 I print the tasks:
 1. [T][✓] Watch CS2103T lecture
-2. [D][✓] Do CS2103T lecture quiz (by: this Saturday)
-3. [D][✘] Do CS2103T ip (by: next Monday)
-4. [E][✘] Attend CS2101 class (at: next Tuesday)
+2. [D][✓] Do CS2103T lecture quiz (by: 2021-01-12)
+3. [D][✘] Do CS2103T ip (by: 2021-01-13)
+4. [E][✘] Attend CS2101 class (at: 2021-01-14)
 Hmmst've... Stonks
 ```
 

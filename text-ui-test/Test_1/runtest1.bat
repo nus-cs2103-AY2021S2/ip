@@ -15,7 +15,7 @@ IF ERRORLEVEL 1 (
 REM no error here, errorlevel == 0
 
 REM run the program, feed commands from input1.txt file and redirect the standard output to the ACTUAL_OK_1.TXT
-java -classpath ..\..\bin Duke < input1.txt > ACTUAL_OK_1.TXT
+java -classpath ..\..\bin SurrealChat < input1.txt > ACTUAL_OK_1.TXT
 
 REM compare the output to the expected output
 FC ACTUAL_OK_1.TXT EXPECTED_OK_1.TXT

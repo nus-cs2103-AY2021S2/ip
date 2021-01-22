@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.time.LocalDate;
 
 public class TaskManagement {
     public List<Task> taskList;
@@ -24,7 +25,8 @@ public class TaskManagement {
         } else {
             String[] descriptionSplitArray = taskDescription.split("/by");
             try {
-                DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(), descriptionSplitArray[1].trim());
+                DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
+                        LocalDate.parse(descriptionSplitArray[1].trim()));
                 System.out.printf("Meme Man is now adding deadline task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -39,7 +41,8 @@ public class TaskManagement {
         } else {
             String[] descriptionSplitArray = taskDescription.split("/at");
             try {
-                EventTask newTask = new EventTask(descriptionSplitArray[0].trim(), descriptionSplitArray[1].trim());
+                EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
+                        LocalDate.parse(descriptionSplitArray[1].trim()));
                 System.out.printf("Meme Man is now adding event task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur

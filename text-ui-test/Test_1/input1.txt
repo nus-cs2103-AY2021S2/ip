@@ -1,8 +1,8 @@
 todo Watch CS2103T lecture
 list
-deadline Do CS2103T lecture quiz /by this Saturday
-deadline Do CS2103T ip /by next Monday
-event Attend CS2101 class /at next Tuesday
+deadline Do CS2103T lecture quiz /by 2021-01-01
+deadline Do CS2103T ip /by 2021-01-01
+event Attend CS2101 class /at 2021-01-01
 list
 done 1
 done 2

@@ -23,7 +23,7 @@ then
 fi
 
 # run the program, feed commands from input5.txt file and redirect the standard output to the ACTUAL_OK_5.TXT and error output to ACTUAL_ERR_5.TXT
-java -classpath ../../bin Duke < input5.txt > ACTUAL_OK_5.TXT 2>ACTUAL_ERR_5.TXT
+java -classpath ../../bin SurrealChat < input5.txt > ACTUAL_OK_5.TXT 2>ACTUAL_ERR_5.TXT
 
 # convert to UNIX format
 cp EXPECTED_OK_5.TXT EXPECTED-UNIX_OK_5.TXT
