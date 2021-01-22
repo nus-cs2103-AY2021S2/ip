@@ -1,19 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * {@code Deadline} is a Task that has to be done before a specific date/time.
  *
  * @see Task
  */
 public class Deadline extends Task {
-    private final String by;
+    private final LocalDate by;
 
     /**
      * Constructs a new uncompleted {@code Deadline}.
      *
      * @param description The name of the task.
+     * @throws DateTimeParseException User inputs date in wrong style.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     /**
@@ -23,6 +28,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy GG")) + ")";
     }
 }

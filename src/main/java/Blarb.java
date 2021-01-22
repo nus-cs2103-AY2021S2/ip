@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -136,6 +137,8 @@ public class Blarb {
                     add(task);
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     blurt("Type the deadline, then give the time using \"/by\".");
+                } catch (DateTimeParseException ex) {
+                    blurt("Deadline time must be in the format of yyyy-mm-dd.");
                 }
             } catch (ArrayIndexOutOfBoundsException ex) {
                 blurt("Someone's having trouble with deadlines.");
