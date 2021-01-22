@@ -1,5 +1,5 @@
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Command is an Enum class that handles valid commands to the DukeBot chat-bot.
@@ -11,11 +11,12 @@ import java.util.Map;
  * @author douglas_allwood@u.nus.edu
  */
 public enum Command {
-    LIST("list"),           // To list all Tasks
-    TODO("todo"),           // For todo tasks
-    EVENT("event"),         // For /at events
-    DEADLINE("deadline"),   // For /by tasks
+    LIST("list"),           // For listing all Tasks
+    TODO("todo"),           // For Todo Tasks
+    EVENT("event"),         // For /at Events
+    DEADLINE("deadline"),   // For /by Deadlines
     DONE("done"),           // For marking a Task as complete
+    DELETE("delete"),       // For deleting a Task
     END("bye");             // For terminating the DukeBot
 
 
@@ -48,11 +49,13 @@ public enum Command {
     /**
      * Searches for the relevant Enum that matches the String command.
      *
-     * @param command The String command whose Enum is to be returned
+     * @param commandStr The String command whose Enum is to be returned
      * @return Command Enum that matches the given String command or null
      */
-    public static Command get(String command) {
-        return lookup.get(command);
+    public static Command get(String commandStr) throws DukeException {
+        Command command = lookup.get(commandStr);
+        if (command == null) throw new DukeException("Not a valid command string");
+        return command;
     }
     //@@author
 

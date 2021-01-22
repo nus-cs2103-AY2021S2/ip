@@ -1,27 +1,16 @@
 /**
- * A helper class that represents each unique Task that a user might wish to track.
+ * A base abstract class whose instances represent a unique Task that a user wishes to track.
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
-    protected static int numTasks = 0;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
-        numTasks++;
-    }
-
-    /**
-     * Prints feedback text to the user that the Task has been instantiated.
-     */
-    public void printInstantiationText() {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(this.toString());
-        System.out.println("Now you have " + numTasks + " tasks in the list.");
     }
 
     /**
@@ -39,8 +28,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(this);
     }
 
     /**
