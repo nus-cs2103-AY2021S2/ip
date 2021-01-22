@@ -1,5 +1,8 @@
 package tasks;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *  Deadline tasks.Task.
  *
@@ -8,7 +11,7 @@ package tasks;
 
 
 public class DeadlineTask extends Task {
-    protected String deadline;
+    protected LocalDate deadline;
 
     /**
      *  tasks.DeadlineTask constructor.
@@ -16,16 +19,17 @@ public class DeadlineTask extends Task {
      *  @param name Name of tasks.DeadlineTask.
      *  @param deadline Specified deadline of task.
      */
-    public DeadlineTask(String name, String deadline) {
+    public DeadlineTask(String name, LocalDate deadline) {
         super(name);
         this.deadline = deadline;
     }
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("[D][%s] %s (by: %s)",
                 done == Status.DONE ? "X" : " ",
                 name,
-                deadline);
+                deadline.format(formatter));
     }
 }

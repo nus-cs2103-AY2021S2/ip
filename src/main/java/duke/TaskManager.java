@@ -7,6 +7,7 @@ import tasks.EventTask;
 import tasks.Task;
 import tasks.ToDoTask;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -37,15 +38,15 @@ public class TaskManager {
                 tasks.size()));
     }
 
-    public void addDeadlineTask(String name, String flag) {
-        tasks.add(new DeadlineTask(name, flag));
+    public void addDeadlineTask(String name, LocalDate date) {
+        tasks.add(new DeadlineTask(name, date));
         ui.println("    added: " + name);
         ui.println(String.format("    Now you have %d task(s)",
                 tasks.size()));
     }
 
-    public void addEventTask(String name, String flag) {
-        tasks.add(new EventTask(name, flag));
+    public void addEventTask(String name, LocalDate date) {
+        tasks.add(new EventTask(name, date));
         ui.println("    added: " + name);
         ui.println(String.format("    Now you have %d task(s)",
                 tasks.size()));
