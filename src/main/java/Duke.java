@@ -23,12 +23,12 @@ public class Duke {
     }
 
     private static void processInput(String userInput) {
-        String userInput_UC = userInput.toUpperCase();
+        String keyword_UC = userInput.toUpperCase().split(" ", -1)[0];
         Queries query = Queries.ADD;
         String response ="";
 
-        if (Queries.containsValue(userInput_UC)) {
-            query = Queries.valueOf(userInput_UC);
+        if (Queries.containsValue(keyword_UC)) {
+            query = Queries.valueOf(keyword_UC);
         }
 
         switch (query) {
@@ -42,10 +42,18 @@ public class Duke {
                 response = "added: " + userInput;
                 respond(response);
                 break;
+            case DONE:
+                int taskNum = Integer.parseInt(userInput.split(" ")[1]);
+                Task task = tasks.getListOfTasks().get(taskNum - 1);
+                Task updatedTask = task.markDone();
+                tasks.editTask(taskNum, updatedTask);
             case LIST:
-                List<String> listOfTasks = tasks.getListOfTasks();
+                List<Task> listOfTasks = tasks.getListOfTasks();
                 for (int i = 0; i < listOfTasks.size(); i++) {
-                    response+= Integer.toString(i+1) +". " + listOfTasks.get(i) + "\n";
+                    Task t = listOfTasks.get(i);
+                    response += Integer.toString(i + 1) + ".["
+                            + t.getStatusIcon() + "]"
+                            + t + "\n";
                 }
                 respond(response);
                 break;
