@@ -1,7 +1,4 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Duke {
@@ -12,7 +9,7 @@ public class Duke {
             + rightIndent + "                                        \\|\n";
     private static Scanner sc = new Scanner(System.in);
     private static boolean exit = false;
-    private static Tasks tasks = new Tasks();
+    private static List<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
         displayIntro();
@@ -38,24 +35,23 @@ public class Duke {
                 exit = true;
                 break;
             case ADD:
-                tasks.addTask(userInput);
+                tasks.add(new Task(userInput));
                 response = "added: " + userInput;
                 respond(response);
                 break;
             case DONE:
                 int taskNum = Integer.parseInt(userInput.split(" ")[1]);
-                Task task = tasks.getListOfTasks().get(taskNum - 1);
+                Task task = tasks.get(taskNum - 1);
                 Task updatedTask = task.markDone();
-                tasks.editTask(taskNum, updatedTask);
+                tasks.set(taskNum - 1, updatedTask);
                 response = "Nice! I've marked this task as done: \n"
                         + "  [" + updatedTask.getStatusIcon() + "] "
                         + updatedTask;
                 respond(response);
                 break;
             case LIST:
-                List<Task> listOfTasks = tasks.getListOfTasks();
-                for (int i = 0; i < listOfTasks.size(); i++) {
-                    Task t = listOfTasks.get(i);
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task t = tasks.get(i);
                     response += Integer.toString(i + 1) + ".["
                             + t.getStatusIcon() + "] "
                             + t + "\n";
