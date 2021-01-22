@@ -23,6 +23,10 @@ If you feel that keeping them on the list is not necessary, Meme Man will delete
 ### List tasks
 You can key in "list" and Meme Man will display the tasks in the order that you have keyed them in.
 
+### Save tasks
+You can now save the tasks on your computer and Meme Man will load them upon starting up. 
+It's automatic. No user input required!
+
 ### Mark tasks as done
 You can key in "done" along with a task number and Meme Man will tick that task for you.
 

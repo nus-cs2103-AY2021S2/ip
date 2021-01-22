@@ -1,30 +1,34 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TaskManagement {
+    public static final String TASK_FILE_PATH = "tasks.txt";
     public List<Task> taskList;
 
     public TaskManagement(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public void addToDo(String taskDescription) {
+    public void addToDo(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty todo task description. Not stonks!");
         } else {
-            ToDoTask newTask = new ToDoTask(taskDescription.trim());
+            ToDoTask newTask = new ToDoTask(taskDescription.trim(), isDone);
             System.out.printf("Meme Man is now adding to-do task: %s\n", newTask);
             this.addTask(newTask);
         }
     }
 
-    public void addDeadline(String taskDescription) {
+    public void addDeadline(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty deadline task description. Not stonks!");
         } else {
             String[] descriptionSplitArray = taskDescription.split("/by");
             try {
-                DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(), descriptionSplitArray[1].trim());
+                DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
+                        descriptionSplitArray[1].trim(), isDone);
                 System.out.printf("Meme Man is now adding deadline task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -33,13 +37,14 @@ public class TaskManagement {
         }
     }
 
-    public void addEvent(String taskDescription) {
+    public void addEvent(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty event task description. Not stonks!");
         } else {
             String[] descriptionSplitArray = taskDescription.split("/at");
             try {
-                EventTask newTask = new EventTask(descriptionSplitArray[0].trim(), descriptionSplitArray[1].trim());
+                EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
+                        descriptionSplitArray[1].trim(), isDone);
                 System.out.printf("Meme Man is now adding event task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -101,6 +106,18 @@ public class TaskManagement {
                 System.out.println(i + ". " + this.taskList.get(i - 1));
             }
             System.out.println("Hmmst've... Stonks\n");
+        }
+    }
+
+    public void saveTasksToFile() {
+        try {
+            FileWriter fw = new FileWriter(TaskManagement.TASK_FILE_PATH);
+            for (int i = 0; i < this.taskList.size(); i++) {
+                fw.write(String.format("%s\n", this.taskList.get(i).saveTask()));
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.err.println("Something went wrong! Not stonks!\n");
         }
     }
 }
