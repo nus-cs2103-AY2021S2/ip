@@ -144,38 +144,45 @@ public class Duke {
 
     // Handling user inputs
 
-    public static void handleUserInput() {
+    private static UserInputType getUserInputType(String userInput) throws DukeException {
+        try {
+            return UserInputType.valueOf(userInput.toUpperCase());
+        } catch (IllegalArgumentException error) {
+            throw new DukeException("Sorry, I dont understand what that means :-(");
+        }
+    }
 
+    public static void handleUserInput() {
         boolean isRunning = true;
         while (isRunning) {
             try {
                 String userInput = sc.nextLine();
                 String[] userInputArr = userInput.split(" ", 2);
-                switch (userInputArr[0]) {
-                    case "todo":
-                    case "deadline":
-                    case "event":
+                switch (getUserInputType(userInputArr[0])) {
+                    case TODO:
+                    case DEADLINE:
+                    case EVENT:
                         if (userInputArr.length != 2) {
                             throw new DukeException("The description of your " + userInputArr[0] + " cannot be empty!");
                         }
                         addTask(userInputArr);
                         break;
-                    case "done":
+                    case DONE:
                         if (userInputArr.length != 2) {
                             throw new DukeException("I'm not sure which task you want to mark as done!");
                         }
                         markTaskAsDone(userInputArr[1]);
                         break;
-                    case "delete":
+                    case DELETE:
                         if (userInputArr.length != 2) {
                             throw new DukeException("I'm not sure which task you want to delete!");
                         }
                         deleteTask(userInputArr[1]);
                         break;
-                    case "list":
+                    case LIST:
                         listTasks();
                         break;
-                    case "bye":
+                    case BYE:
                         farewell();
                         isRunning = false;
                         break;
