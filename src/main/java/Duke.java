@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.IOException;
-//import java.io.FileWriter;
-//import java.io.FileReader;
-import java.io.FileNotFoundException;
 
 
 public class Duke {
@@ -18,8 +15,8 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        List<Task> list = new ArrayList<>();
         createSaveFile();
-        List<Task> list = readSaveFile();
 
         greet();
         commandList(list);
@@ -91,10 +88,6 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n"
                                     + "\tPlease enter task number after command.\n"
                                     + "\t____________________________________________________________\n");
-                } catch (IOException e) {
-                    System.out.println("\t____________________________________________________________\n"
-                            + "\tError happened while trying to edit save file.\n"
-                            + "\t____________________________________________________________\n");
                 }
             }
             input = sc.nextLine();
@@ -151,12 +144,10 @@ public class Duke {
 
     //Add different type of tasks in list.
     public static void addToList(List<Task> list, String input, String[] check)
-            throws CommandNotValidException, DescriptionNotFoundException,
-                    DateNotFoundException, IOException {
+            throws CommandNotValidException, DescriptionNotFoundException, DateNotFoundException {
         Task temp;
         String description;
         String date;
-        //FileWriter fileWriter = new FileWriter("../ip/data/Duke.txt");
 
         if (check[0].equals("todo") || check[0].equals("deadline") || check[0].equals("event")) {
             if (check.length == 1) {
@@ -224,79 +215,12 @@ public class Duke {
     public static void createSaveFile() {
         try {
             File file = new File("../ip/data");
-            file.mkdir();
+            System.out.println(file.mkdir());
 
             file = new File("../ip/data/Duke.txt");
-            file.createNewFile();
+            System.out.println(file.createNewFile());
         } catch (IOException e) {
             System.out.println("Error happened while trying to create save file");
         }
-    }
-
-    public static List<Task> readSaveFile() {
-        List<Task> taskList = new ArrayList<>();
-
-        try {
-            File file = new File("../ip/data/Duke.txt");
-            Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()) {
-                String taskString = reader.nextLine();
-                if (taskString.length() < 9) {
-                    throw new InvalidSaveFileFormatException();
-                }
-                Task task;
-                char taskType = taskString.charAt(0);
-                char taskCompletion = taskString.charAt(4);
-                String taskDescription;
-                String taskDate;
-
-                if (taskCompletion != '1' && taskCompletion != '0') {
-                    throw new InvalidSaveFileFormatException();
-                }
-
-                if (taskType == 'T') {
-                    taskDescription = taskString.substring(8);
-                    task = new TodoTask(taskDescription);
-                } else if (taskType == 'D') {
-                    int dateIndex = taskString.substring(8).indexOf('|');
-                    if (dateIndex == -1) {
-                        throw new InvalidSaveFileFormatException();
-                    }
-                    taskDescription = taskString.substring(8, dateIndex + 8).trim();
-                    taskDate = taskString.substring(dateIndex + 9).trim();
-                    if (taskDate.isEmpty()) {
-                        throw new InvalidSaveFileFormatException();
-                    }
-                    task = new DeadlineTask(taskDescription, taskDate);
-                } else if (taskType == 'E') {
-                    int dateIndex = taskString.substring(8).indexOf('|');
-                    if (dateIndex == -1) {
-                        throw new InvalidSaveFileFormatException();
-                    }
-                    taskDescription = taskString.substring(8, dateIndex + 8).trim();
-                    taskDate = taskString.substring(dateIndex + 9).trim();
-                    if (taskDate.isEmpty()) {
-                        throw new InvalidSaveFileFormatException();
-                    }
-                    task = new EventTask(taskDescription, taskDate);
-                } else {
-                    throw new InvalidSaveFileFormatException();
-                }
-
-                if (taskCompletion == '1') {
-                    task.markAsDone();
-                }
-
-                taskList.add(task);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File does not exists.");
-            System.exit(1);
-        } catch (InvalidSaveFileFormatException e) {
-            System.out.println("Error: Invalid content format in save file");
-            System.exit(1);
-        }
-
-        return taskList;
     }
 }
