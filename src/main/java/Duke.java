@@ -174,10 +174,12 @@ public class Duke {
                         listOfTasks.add(new ToDo(details[2], Boolean.parseBoolean(details[1])));
                         break;
                     case "D":
-                        listOfTasks.add(new Deadline(details[2], Boolean.parseBoolean(details[1]), details[3]));
+                        LocalDate dateD = LocalDate.parse(details[3]);
+                        listOfTasks.add(new Deadline(details[2], Boolean.parseBoolean(details[1]), dateD));
                         break;
                     case "E":
-                        listOfTasks.add(new Event(details[2], Boolean.parseBoolean(details[1]), details[3]));
+                        LocalDate dateE = LocalDate.parse(details[3]);
+                        listOfTasks.add(new Event(details[2], Boolean.parseBoolean(details[1]), dateE));
                         break;
                 }
                 line = reader.readLine();
