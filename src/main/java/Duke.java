@@ -137,7 +137,14 @@ public class Duke {
 
         // store whatever is given until bye is detected
         Scanner input = new Scanner(System.in);
-        Vector<Task> tasks = new Vector<>();
+        TaskSaver saver = new TaskSaver("tasks.txt");
+        Vector<Task> tasks;
+        try {
+            tasks = saver.restore();
+        } catch (DukeException e) {
+            printLine(e.toString());
+            return;
+        }
         boolean active = true;
 
         // process input and act accordingly until bye is encountered
@@ -148,6 +155,7 @@ public class Duke {
             System.out.println(HORIZONTAL_LINE);
             try {
                 active = processInput(tasks, function, details);
+                saver.save(tasks);
             } catch (DukeException e) {
                 printLine(e.toString());
             }
