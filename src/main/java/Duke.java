@@ -1,5 +1,9 @@
-import java.time.LocalDate;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Vector;
 
 public class Duke {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
@@ -46,7 +50,7 @@ public class Duke {
         printLine(getTasksLeftString(tasks));
     }
 
-    private static Task createTask(Function type, String details) throws NoTaskDescriptionException, IncompleteDetailException {
+    private static Task createTask(Function type, String details) throws DukeException {
         if (details.isBlank())
             throw new NoTaskDescriptionException();
 
@@ -64,22 +68,24 @@ public class Duke {
             if (description.isEmpty() || i == 0)
                 throw new IncompleteDetailException((sep.equals("/by") ? "deadline" : "event") + " description");
 
-            String dateTime = details.substring(i + sep.length() + 1).trim();
-            if (dateTime.isEmpty())
-                throw new IncompleteDetailException("dateTime");
+            String dateTimeString = details.substring(i + sep.length() + 1).trim();
+            if (dateTimeString.isEmpty())
+                throw new IncompleteDetailException("date and time");
 
-            ret = isDeadline ? new Deadline(description, dateTime) : new EventTask(description, dateTime);
+            LocalDateTime localDateTime;
+            try {
+                localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date and time format, input d/M/yyyy HHmm");
+            }
+
+            ret = isDeadline ? new Deadline(description, localDateTime) : new EventTask(description, localDateTime);
         }
 
         return ret;
     }
 
-    private static boolean processInput(Vector<Task> tasks, Function func, String details)
-            throws NoTasksException,
-                   InvalidTaskIndexException,
-                   NoTaskDescriptionException,
-                   IncompleteDetailException,
-                   InvalidCommandException {
+    private static boolean processInput(Vector<Task> tasks, Function func, String details) throws DukeException {
         boolean active = true;
         switch (func) {
             case LIST:  // list all stored tasks
