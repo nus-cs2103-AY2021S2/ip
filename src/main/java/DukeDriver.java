@@ -119,6 +119,12 @@ public class DukeDriver {
         }
     }
 
+    /**
+     * handle delete command key in by user by removing the task from the list if there is any.
+     *
+     * @param input user input.
+     * @param command user command.
+     */
     private static final void handleDelete(String input, String command) {
         String task = extractTask(input, command);
         if (task.length() > 0) {
