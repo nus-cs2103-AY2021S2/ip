@@ -33,6 +33,7 @@ public class Duke {
 					case "bye":
 						break;
 					case "list":
+						System.out.println("Here are the tasks in your list:");
 						tl.printList();
 						break;
 					case "done":
@@ -103,6 +104,22 @@ public class Duke {
 						System.out.println("Got it. I've added this task:");
 						System.out.println(ev);
 						System.out.println("Now you have "+tl.count()+" tasks in the list.");
+						break;
+					case "delete":
+						if (split.length <= 1) {
+							throw new DukeException("OOPS!!! A number needs to be specified.");
+						}
+						
+						try {
+							Task t = tl.remove(Integer.parseInt(split[1]));
+							
+							System.out.println("Noted. I've removed this task");
+							System.out.println(t);
+							System.out.println("Now you have "+tl.count()+" tasks in the list.");
+						} catch(NumberFormatException ne) {
+							throw new DukeException("OOPS!!! A number needs to be specified.");
+						}
+						
 						break;
 					default:
 						throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -186,6 +203,16 @@ class TaskList {
 	
 	public void add(Task t) {
 		taskList.add(t);
+	}
+	
+	public Task remove(int i) throws DukeException{
+		if (i <= 0 || i > taskList.size()) {
+			throw new DukeException("OOPS!!! There is no item at that position.");
+		}
+		
+		Task t = taskList.remove(i-1);
+		
+		return t;
 	}
 	
 	public Task markDone(int i) throws DukeException{
