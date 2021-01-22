@@ -13,13 +13,27 @@ import java.io.IOException;
 
 import java.time.LocalDate;
 
+/**
+ * A class to handle storing data into an external CSV file.
+ */
 public class Storage {
     private final String fileName;
 
+    /**
+     * Constructs a Storage class with a file name.
+     *
+     * @param fileName Name of the file.
+     */
     public Storage(String fileName){
         this.fileName = fileName;
     }
 
+    /**
+     * Saves data into the file.
+     *
+     * @param taskList List of Tasks.
+     * @throws DukeException If an error occurs while saving data.
+     */
     public void handleSave(TaskList taskList) throws DukeException {
         try {
             FileWriter csvWriter = new FileWriter(fileName);
@@ -34,6 +48,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data into a TaskList object.
+     *
+     * @return A list of Tasks based on the file.
+     * @throws DukeException If an error occurs while loading the data.
+     */
     public TaskList handleLoad() throws DukeException {
         try {
             TaskList listOfTasks = new TaskList();
@@ -66,6 +86,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Makes a new CSV file if there is no file initially.
+     *
+     * @throws DukeException If an error occurs while making a new file.
+     */
     private void makeNewFile() throws DukeException {
         try{
             new File(fileName).createNewFile();
