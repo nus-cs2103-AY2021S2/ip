@@ -20,7 +20,7 @@ public class Storage {
         this.fileName = fileName;
     }
 
-    public void handleSave(TaskList taskList) {
+    public void handleSave(TaskList taskList) throws DukeException {
         try {
             FileWriter csvWriter = new FileWriter(fileName);
             for (int i = 1; i <= taskList.getNumberOfTasks(); i++) {
@@ -30,11 +30,11 @@ public class Storage {
             csvWriter.flush();
             csvWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred while saving your changes. Please try again later.");
+            throw new DukeException("An error occurred while saving your changes. Please try again later.");
         }
     }
 
-    public TaskList handleLoad() {
+    public TaskList handleLoad() throws DukeException {
         try {
             TaskList listOfTasks = new TaskList();
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -62,17 +62,15 @@ public class Storage {
             makeNewFile();
             return new TaskList();
         } catch (IOException e) {
-            System.out.println("An error occurred while loading. Please try again later.");
-            System.exit(1);
-            return null;
+            throw new DukeException( "An error occurred while loading. Please try again later.");
         }
     }
 
-    private void makeNewFile() {
+    private void makeNewFile() throws DukeException {
         try{
             new File(fileName).createNewFile();
         } catch (IOException e) {
-            System.out.println("An error occurred while loading. Please try again later.");
+            throw new DukeException("An error occurred while loading. Please try again later.");
         }
     }
 }
