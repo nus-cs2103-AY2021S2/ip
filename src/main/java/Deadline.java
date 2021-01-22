@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Includes task type and deadline
+     * Returns task type, status icon, task name and due date
      * @return String format specific to deadline task
      */
     @Override

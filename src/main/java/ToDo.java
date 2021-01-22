@@ -5,6 +5,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo
+     *
      * @param description Task name
      */
     public ToDo(String description) {
@@ -12,7 +13,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Includes task type
+     * Returns task type, status icon and task name
+     *
      * @return String format specific to ToDo task
      */
     @Override

@@ -25,6 +25,7 @@ public class DukeBot {
 
     /**
      * Executes processes depending on command given by user
+     *
      * @param text Text provided by user
      * @throws DukeException If task description is empty, task selection is invalid, task selection is empty
      */
@@ -57,29 +58,29 @@ public class DukeBot {
 
         // Sets up process to be done for specific commands
         switch (command) {
-            case "list":
-                listProcess();
-                break;
-            case "bye":
-                byeProcess();
-                break;
-            case "done":
-                doneProcess(taskInfo);
-                break;
-            case "delete":
-                deleteProcess(taskInfo);
-                break;
-            case "event":
-                eventProcess(taskInfo);
-                break;
-            case "deadline":
-                deadlineProcess(taskInfo);
-                break;
-            case "todo":
-                todoProcess(taskInfo);
-                break;
-            default:
-                throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
+        case "list":
+            listProcess();
+            break;
+        case "bye":
+            byeProcess();
+            break;
+        case "done":
+            doneProcess(taskInfo);
+            break;
+        case "delete":
+            deleteProcess(taskInfo);
+            break;
+        case "event":
+            eventProcess(taskInfo);
+            break;
+        case "deadline":
+            deadlineProcess(taskInfo);
+            break;
+        case "todo":
+            todoProcess(taskInfo);
+            break;
+        default:
+            throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
         }
 
         respondToCommand(commandOutput);

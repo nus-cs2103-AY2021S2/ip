@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Constructor for Task
+     *
      * @param description Task Name
      */
     public Task(String description) {
@@ -23,6 +24,7 @@ public class Task {
 
     /**
      * Gets a task status
+     *
      * @return Tick if marked as done, empty string if not done
      */
     public String getStatusIcon() {
@@ -30,7 +32,8 @@ public class Task {
     }
 
     /**
-     * Retrieves task name
+     * Returns task name
+     *
      * @return Task name
      */
     public String getDescription() {
@@ -39,6 +42,7 @@ public class Task {
 
     /**
      * Returns status icon and task name
+     *
      * @return Status icon and task name
      */
     @Override

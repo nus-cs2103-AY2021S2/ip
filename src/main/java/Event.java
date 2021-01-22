@@ -6,6 +6,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event
+     *
      * @param description Task name
      * @param at Start at a specific time and ends at a specific time
      */
@@ -15,7 +16,8 @@ public class Event extends Task {
     }
 
     /**
-     * Includes task type and specific start and end time
+     * Returns task type, status icon, task name and specific start and end time
+     *
      * @return String format specific to event task
      */
     @Override
