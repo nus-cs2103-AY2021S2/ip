@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.LocalDate;
 
 /**
  * The Command class handles the logic of all allowed user commands for Duke.
@@ -109,13 +110,13 @@ public class Command {
                     parsedTaskDetails = taskDetails.split("/by");
                     taskName = parsedTaskDetails[0].trim();
                     String endDate = parsedTaskDetails[1].trim();
-                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", endDate);
+                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
                     break;
                 case EVENT:
                     parsedTaskDetails = taskDetails.split("/at");
                     taskName = parsedTaskDetails[0].trim();
                     String startEndDate = parsedTaskDetails[1].trim();
-                    task = new Event(Task.numTasks + 1, taskName, "incomplete", startEndDate);
+                    task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
                     break;
                 default:
                     throw new IndexOutOfBoundsException();
