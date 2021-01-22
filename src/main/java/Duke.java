@@ -1,8 +1,15 @@
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws Exception {
+        ArrayList<Task> list = DataHandler.loadData();
+
         String line = "------------------------------------------";
 
         //introduction
@@ -14,7 +21,6 @@ public class Duke {
         //start reading data from user
         Scanner sc = new Scanner(System.in);
         boolean flagger = true;
-        ArrayList<Task> list = new ArrayList<Task>();
 
         while (flagger) {
             String input = sc.nextLine();
@@ -40,6 +46,7 @@ public class Duke {
                 list.get(index).setDone();
                 System.out.println(list.get(index));
                 System.out.println(line);
+                DataHandler.saveData(list);
 
             } else if (action.equals("todo")) {
                 String[] temp = input.split(" ", 2);
@@ -56,6 +63,7 @@ public class Duke {
                 System.out.println(t);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
                 System.out.println(line);
+                DataHandler.saveData(list);
 
             } else if (action.equals("deadline")) {
                 String[] temp = input.split(" ", 2);
@@ -76,6 +84,7 @@ public class Duke {
                 System.out.println(t);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
                 System.out.println(line);
+                DataHandler.saveData(list);
 
             } else if (action.equals("event")) {
                 String[] temp = input.split(" ", 2);
@@ -96,6 +105,7 @@ public class Duke {
                 System.out.println(t);
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
                 System.out.println(line);
+                DataHandler.saveData(list);
 
             } else if (action.equals("delete")) {
                 String[] temp = input.split(" ", 2);
