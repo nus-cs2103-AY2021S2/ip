@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected char type;
 
-    public Task(String description) {
+    public Task(String description, char type) {
         this.description = description;
         this.isDone = false;
+        this.type = type;
     }
 
     //Return tick or X symbols according to task completion status.
@@ -17,9 +19,18 @@ public class Task {
         this.isDone = true;
     }
 
-    //Change the completion status of a task to not done.
-    public void markAsNotDone() {
-        this.isDone = false;
+    //Return type of task
+    public char getType() {
+        return this.type;
+    }
+
+    //Return completion status
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
