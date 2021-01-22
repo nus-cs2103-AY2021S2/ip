@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.IOException;
-//import java.io.FileWriter;
-//import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
 
 
@@ -132,7 +131,7 @@ public class Duke {
 
     //Mark numbered task in list as done.
     public static void markTaskDone(List<Task> list, String[] check)
-            throws TaskNotFoundException, InvalidTaskSelectionException {
+            throws TaskNotFoundException, InvalidTaskSelectionException, IOException {
         if (check.length == 1 || !isNumber(check[1])) {
             throw new InvalidTaskSelectionException();
         }
@@ -147,6 +146,7 @@ public class Duke {
         } else {
             throw new TaskNotFoundException();
         }
+        saveToSaveFile(list);
     }
 
     //Add different type of tasks in list.
@@ -156,7 +156,6 @@ public class Duke {
         Task temp;
         String description;
         String date;
-        //FileWriter fileWriter = new FileWriter("../ip/data/Duke.txt");
 
         if (check[0].equals("todo") || check[0].equals("deadline") || check[0].equals("event")) {
             if (check.length == 1) {
@@ -197,11 +196,12 @@ public class Duke {
                 + "\t   " + temp.toString() + "\n"
                 + "\tNow you have " + list.size() + " tasks in the list.\n"
                 + "\t____________________________________________________________\n");
+        saveToSaveFile(list);
     }
 
     //Delete task from list
     public static void deleteFromList(List<Task> list, String[] check)
-            throws InvalidTaskSelectionException, TaskNotFoundException{
+            throws InvalidTaskSelectionException, TaskNotFoundException, IOException {
         if (check.length == 1 || !isNumber(check[1])) {
             throw new InvalidTaskSelectionException();
         }
@@ -218,6 +218,7 @@ public class Duke {
         } else {
             throw new TaskNotFoundException();
         }
+        saveToSaveFile(list);
     }
 
     //Creates directory and file if it doesn't exists.
@@ -298,5 +299,25 @@ public class Duke {
         }
 
         return taskList;
+    }
+
+    //Save task list to save file
+    public static void saveToSaveFile(List<Task> taskList) throws IOException {
+        FileWriter fileWriter = new FileWriter("../ip/data/Duke.txt");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String saveLine = "";
+            saveLine += task.getType() + " | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
+            if (task.getType() == 'D') {
+                DeadlineTask dateTask = (DeadlineTask) taskList.get(i);
+                saveLine += " | " + dateTask.getDate();
+            } else if (task.getType() == 'E') {
+                EventTask dateTask = (EventTask) taskList.get(i);
+                saveLine += " | " + dateTask.getDate();
+            }
+            saveLine += '\n';
+            fileWriter.write(saveLine);
+        }
+        fileWriter.close();
     }
 }
