@@ -1,5 +1,6 @@
 package duke;
 
+import exceptions.DukeCorruptFileException;
 import exceptions.DukeIndexOutOfRangeException;
 import exceptions.DukeTaskAlreadyDoneException;
 import tasks.DeadlineTask;
@@ -23,6 +24,32 @@ public class TaskManager {
      */
     public TaskManager(Ui ui) {
         this.ui = ui;
+        this.tasks = new ArrayList<>();
+    }
+
+    public void loadArray(ArrayList<String> arr) throws DukeCorruptFileException {
+        for (String line: arr) {
+            String[] params = line.split("\\|");
+            String type = params[0];
+            boolean isCompleted = params[1].equals("1");
+            String name = params[2];
+            System.out.println(params[2]);
+
+            Task t;
+            if (type.equals("T")) {
+                t = new ToDoTask(name, isCompleted);
+            } else if (type.equals("D")) {
+                t = new DeadlineTask(name, params[3], isCompleted);
+            } else if (type.equals("E")) {
+                t = new EventTask(name, params[3], isCompleted);
+            } else {
+                throw new DukeCorruptFileException();
+            }
+            this.tasks.add(t);
+        }
+    }
+
+    public void clear() {
         this.tasks = new ArrayList<>();
     }
 
@@ -50,7 +77,6 @@ public class TaskManager {
         ui.println(String.format("    Now you have %d task(s)",
                 tasks.size()));
     }
-
 
     /**
      *  Method to mark specified task done.

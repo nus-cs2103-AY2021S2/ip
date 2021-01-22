@@ -1,5 +1,6 @@
 package commands;
 
+import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 
@@ -9,7 +10,7 @@ public class ExitCommand extends Command {
         //do nothing
     }
 
-    public void execute(Ui ui, TaskManager tm) {
+    public void execute(Ui ui, TaskManager tm, Storage st) {
         ui.showByeBye();
     }
 

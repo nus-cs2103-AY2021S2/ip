@@ -17,6 +17,20 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+    public ToDoTask (String name, boolean isCompleted) {
+        super(name);
+        if (isCompleted) {
+            this.markAsDone();
+        }
+    }
+
+    public String toFileFormat() {
+        return String.format("%s|%s|%s",
+                "T",
+                done == Status.DONE ? "1" : "0",
+                name);
+    }
+
     @Override
     public String toString() {
         if (done == Status.DONE) {

@@ -1,5 +1,6 @@
 import commands.Command;
 import duke.Parser;
+import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
 import exceptions.DukeException;
@@ -7,10 +8,18 @@ import exceptions.DukeException;
 public class Duke {
     private TaskManager tm;
     private Ui ui;
+    private Storage st;
 
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
         tm = new TaskManager(ui);
+        st = new Storage(filePath);
+        try {
+            tm.loadArray(st.load());
+        } catch (DukeException e) {
+            tm.clear(); //clear tm if error loading file;
+            ui.showError(e.getMessage());
+        }
     }
 
     public void run() {
@@ -22,7 +31,7 @@ public class Duke {
                 String command = ui.nextCommand();
                 ui.showLine();
                 Command c = Parser.parse(command);
-                c.execute(ui, tm);
+                c.execute(ui, tm, st);
                 done = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -33,6 +42,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("./data/tasks.txt").run();
     }
 }

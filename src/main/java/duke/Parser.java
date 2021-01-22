@@ -22,7 +22,7 @@ public class Parser {
     }
 
     public static String[] extractFlag (String c, String s, String flag) throws DukeMissingFlagException {
-        String[] output = s.split(flag);
+        String[] output = s.split(" " + flag + " ");
         if (output.length < 2) {
             throw new DukeMissingFlagException(c, flag);
         }
