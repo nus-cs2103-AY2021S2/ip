@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Duke {
@@ -59,6 +60,34 @@ public class Duke {
         printLine(getTasksLeftString(tasks));
     }
 
+    private static Task createTask(Function type, String details) throws NoTaskDescriptionException, IncompleteDetailException {
+        if (details.isBlank())
+            throw new NoTaskDescriptionException();
+
+        Task ret;
+        if (type == Function.TODO) {
+            ret = new ToDo(details.trim());
+        } else {
+            boolean isDeadline = type == Function.DEADLINE;
+            String sep = isDeadline ? "/by" : "/at";
+            int i = details.indexOf(" " + sep);
+            if (i == -1)
+                throw new IncompleteDetailException(sep);
+
+            String description = details.substring(0, i).trim();
+            if (description.isEmpty() || i == 0)
+                throw new IncompleteDetailException((sep.equals("/by") ? "deadline" : "event") + " description");
+
+            String dateTime = details.substring(i + sep.length() + 1).trim();
+            if (dateTime.isEmpty())
+                throw new IncompleteDetailException("dateTime");
+
+            ret = isDeadline ? new Deadline(description, dateTime) : new EventTask(description, dateTime);
+        }
+
+        return ret;
+    }
+
     private static boolean processInput(Vector<Task> tasks, Function func, String details)
             throws NoTasksException,
                    InvalidTaskIndexException,
@@ -101,27 +130,11 @@ public class Duke {
                 active = false;
                 break;
             case TODO:
-                if (details.isBlank())
-                    throw new NoTaskDescriptionException();
-                else {
-                    tasks.add(new ToDo(details.trim()));
-                    postAddTaskSummary(tasks);
-                }
-                break;
-            case DEADLINE: {
-                String[] descriptions = new String[2];
-                processDescription(details, "/by", descriptions);
-                tasks.add(new Deadline(descriptions[0], descriptions[1]));
+            case DEADLINE:
+            case EVENT:
+                tasks.add(createTask(func, details));
                 postAddTaskSummary(tasks);
                 break;
-            }
-            case EVENT: {
-                String[] descriptions = new String[2];
-                processDescription(details, "/at", descriptions);
-                tasks.add(new EventTask(descriptions[0], descriptions[1]));
-                postAddTaskSummary(tasks);
-                break;
-            }
             default:
                 throw new InvalidCommandException();
         }
