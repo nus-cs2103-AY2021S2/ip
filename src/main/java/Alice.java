@@ -1,6 +1,4 @@
-import javax.xml.crypto.Data;
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,28 +21,27 @@ public class Alice {
     private static final Pattern DONE_REGEX = Pattern.compile("done\\s+(\\d+)");
 
     private final boolean done;
+    private final boolean hasDelta;
     private final String currentMessage;
-    private final List<Task> store;
+    private final AgentData data;
 
-    private Alice() {
-        this.currentMessage = getGreeting();
-        byte[] data = DataHandler.loadBytes(getDataPath());
-        if (data == null) {
-            DataHandler.InitSave(getDataPath());
-        }
-        this.store = (ArrayList<Task>)DataHandler.deserialize(data, ArrayList.class);
-        this.done = false;
+    private Alice(AgentData newData, boolean done) {
+        this.currentMessage = String.format("%s\nLoaded %d tasks from %s", GREETING, newData.count(), getDataPath());
+        this.data = newData;
+        this.done = done;
+        this.hasDelta = false;
     }
 
-    private Alice(String currentMessage, List<Task> newStore, boolean done) {
+    private Alice(String currentMessage, AgentData newData, boolean done, boolean hasDelta) {
         this.currentMessage = currentMessage;
-        this.store = newStore;
+        this.data = newData;
         this.done = done;
+        this.hasDelta = hasDelta;
     }
 
     private static String getDataPath() {
         if (OS.contains("win")) {
-            return String.join(File.separator, "%USERPROFILE%", ".alice_save", "data", "save_data");
+            return String.join(File.separator, System.getenv("USERPROFILE"), ".alice_save", "data", "save_data");
         } else {
             return String.join(File.separator, "~", ".alice_save", "data", "save_data");
         }
@@ -84,33 +81,33 @@ public class Alice {
                     break;
                 default: throw new IllegalStateException();
             }
-            List<Task> newStore = this.store.stream().map(Task::clone).collect(Collectors.toList());
-            newStore.add(task);
-            String response = String.format(TASK_ADD, task, newStore.size());
-            newAgent = new Alice(response, newStore, false);
+            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            dataList.add(task);
+            String response = String.format(TASK_ADD, task, dataList.size());
+            newAgent = new Alice(response, new AgentData(dataList), false, true);
         }
         catch (AliceException aliceException) {
-            newAgent = new Alice(aliceException.getMessage(), this.store, this.done);
+            newAgent = new Alice(aliceException.getMessage(), this.data, this.done, false);
         } catch (IllegalStateException illegalStateException) {
-            newAgent = new Alice("Something that was not supposed to happen happened", this.store, this.done);
+            newAgent = new Alice("Something that was not supposed to happen happened", this.data, this.done, false);
         }
         return newAgent;
     }
 
     private Alice processBye(String command) {
-        return new Alice(BYE, this.store, true);
+        return new Alice(BYE, this.data, true, false);
     }
 
     private Alice processList(String command) {
         String response;
-        if (this.store.size() <= 0) {
+        if (this.data.getData().size() <= 0) {
             response = "Your schedule is empty";
         } else {
-            response = IntStream.range(0, store.size())
-                    .mapToObj(i -> (i + 1) + "." + this.store.get(i))
+            response = IntStream.range(0, data.getData().size())
+                    .mapToObj(i -> (i + 1) + "." + this.data.getData().get(i))
                     .collect(Collectors.joining("\n"));
         }
-        return new Alice(response, this.store, false);
+        return new Alice(response, this.data, this.done, false);
     }
 
     private Alice processDone(String command) {
@@ -123,20 +120,20 @@ public class Alice {
                 throw new AliceException("done Usage: done [index]");
             }
             int index = Integer.parseInt(tokens[1]);
-            if (index < 0 || index > this.store.size()) {
-                throw new AliceException(
-                        String.format("Index %d out of bounds for schedule of size %d.", index, this.store.size()));
+            if (index < 0 || index > this.data.getData().size()) {
+                throw new AliceException(String.format("Index %d out of bounds for schedule of size %d.",
+                        index, this.data.getData().size()));
             }
-            List<Task> newStore = this.store.stream().map(Task::clone).collect(Collectors.toList());
-            newStore.set(index - 1, newStore.get(index - 1).setDone(true));
-            String response = String.format(TASK_DONE, newStore.get(index - 1));
-            newAgent = new Alice(response, newStore, this.done);
+            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            dataList.set(index - 1, dataList.get(index - 1).setDone(true));
+            String response = String.format(TASK_DONE, dataList.get(index - 1));
+            newAgent = new Alice(response, new AgentData(dataList), this.done, true);
         }
         catch (NumberFormatException numberFormatException) {
-            newAgent = new Alice("Invalid number", this.store, this.done);
+            newAgent = new Alice("Invalid number", this.data, this.done, false);
         }
         catch (AliceException aliceException) {
-            newAgent = new Alice(aliceException.getMessage(), this.store, this.done);
+            newAgent = new Alice(aliceException.getMessage(), this.data, this.done, false);
         }
         return newAgent;
     }
@@ -146,26 +143,26 @@ public class Alice {
         String[] tokens = command.split("\\s+");
         try {
             int index = Integer.parseInt(tokens[1]);
-            if (index < 0 || index > this.store.size()) {
-                throw new AliceException(
-                        String.format("Index %d out of bounds for schedule of size %d.", index, this.store.size()));
+            if (index < 0 || index > this.data.getData().size()) {
+                throw new AliceException(String.format("Index %d out of bounds for schedule of size %d.",
+                        index, this.data.getData().size()));
             }
-            List<Task> newStore = this.store.stream().map(t -> t.clone()).collect(Collectors.toList());
-            newStore.remove(index - 1);
-            String response = String.format(TASK_DELETE, this.store.get(index - 1));
-            newAgent = new Alice(response, newStore, this.done);
+            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            dataList.remove(index - 1);
+            String response = String.format(TASK_DELETE, this.data.getData().get(index - 1));
+            newAgent = new Alice(response, new AgentData(dataList), this.done, true);
         }
         catch (NumberFormatException numberFormatException) {
-            newAgent = new Alice("Invalid number", this.store, this.done);
+            newAgent = new Alice("Invalid number", this.data, this.done, false);
         }
         catch (AliceException aliceException) {
-            newAgent = new Alice(aliceException.getMessage(), this.store, this.done);
+            newAgent = new Alice(aliceException.getMessage(), this.data, this.done, false);
         }
         return newAgent;
     }
 
     private Alice processEcho(String command) {
-        return new Alice(command, this.store, this.done);
+        return new Alice(command, this.data, this.done, false);
     }
 
     private Alice process(String input) {
@@ -196,24 +193,31 @@ public class Alice {
         return ">";
     }
 
+    private static AgentData loadTasks() {
+        byte[] data = DataHandler.loadBytes(getDataPath());
+        if (data == null) {
+            return new AgentData(new ArrayList<>());
+        } else {
+            return DataHandler.deserialize(data, AgentData.class);
+        }
+    }
+
+    private static boolean saveTasks(AgentData agentData) {
+        byte[] data = DataHandler.serialize(agentData);
+        return DataHandler.saveBytes(getDataPath(), data);
+    }
+
     public static void main(String[] args) {
-        List<Task> list = new ArrayList<>();
-        list.add(new TaskDeadline("Hello", "a"));
-        list.add(new TaskEvent("Hello", "b"));
-        list.add(new TaskTodo("todo"));
-        @SuppressWarnings("unchecked")
-        List<Task> l = (ArrayList<Task>)DataHandler.deserialize(
-                DataHandler.serialize(list),
-                ArrayList.class
-        );
-        System.out.println(l);
         Scanner scanner = new Scanner(System.in);
-        Alice agent = new Alice();
+        Alice agent = new Alice(loadTasks(), false);
         System.out.println(agent.getCurrentMessage());
         while (!agent.done) {
             System.out.print(getPrompt());
             try {
                 agent = agent.process(scanner.nextLine());
+                if (agent.hasDelta) {
+                    saveTasks(agent.data);
+                }
             } catch (NoSuchElementException noSuchElementException) {
                 agent = agent.process("bye");
             }

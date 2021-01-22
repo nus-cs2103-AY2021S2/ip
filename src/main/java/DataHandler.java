@@ -1,9 +1,22 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DataHandler {
 
-    public static boolean saveBytes(String path, byte[] data) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
+    public static boolean saveBytes(String pathString, byte[] data) {
+        Path path = Paths.get(pathString);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+        try (FileOutputStream fileOutputStream = new FileOutputStream(pathString)) {
             fileOutputStream.write(data);
         } catch (IOException ioException) {
             return false;
