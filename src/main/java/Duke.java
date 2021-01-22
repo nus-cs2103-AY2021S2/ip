@@ -11,6 +11,8 @@ public class Duke {
             while (bot.isActive()) {
                 System.out.print("You: ");
                 String reply = bot.respond(scanner.nextLine());
+                // Additional line break
+                System.out.println();
                 System.out.println(reply);
             }
         }

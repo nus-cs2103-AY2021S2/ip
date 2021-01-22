@@ -7,7 +7,7 @@ public class Bot {
     private String logo;
 
     private boolean active;
-    private List<String> memory;
+    private List<Task> memory;
 
     public Bot(String name) {
         this.name = name;
@@ -34,6 +34,7 @@ public class Bot {
         // Clear leading and trailing whitespace
         input = input.strip();
 
+        // Greeting and exit
         if (input.equalsIgnoreCase("hello")) {
             return formatMessage("Hello! My name is {{bot:name}}!");
         }
@@ -42,15 +43,33 @@ public class Bot {
             return formatMessage("Bye. Hope to see you again soon!");
         }
 
-        if (input.equalsIgnoreCase("list")) {
+        // Task related
+        if (input.equals("list")) {
             String message = formatMessage("Printing list!");
             for (int i = 0; i < memory.size(); i++) {
-                message += "\n" + memory.get(i);
+                message += "\n" + (i+1) + "." + memory.get(i);
             }
             return message;
         }
+        if (input.matches("^done \\d+$")) {
+            int taskNo = Integer.parseInt(input.substring(5)) - 1;
 
-        memory.add(input);
+            // Check if in memory
+            if (taskNo > memory.size() - 1) {
+                return formatMessage("Unable to remove item!");
+            }
+
+            // Mark complete
+            Task task = memory.get(taskNo);
+            task.complete();
+
+            String message = formatMessage("Nice, I've marked the task as done!");
+            message += "\n" + task;
+            return message;
+        }
+
+        // Default
+        memory.add(new Task(input));
         return formatMessage("I've added '" + input + "'.");
     }
 
