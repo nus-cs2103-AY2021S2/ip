@@ -1,10 +1,10 @@
-package commands;
+package duke.command;
 
 import duke.Storage;
 import duke.TaskManager;
 import duke.Ui;
-import exceptions.DukeException;
-import tasks.Task;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class DoneCommand extends Command {
     private int taskIndex;

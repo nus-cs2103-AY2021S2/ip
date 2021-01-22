@@ -1,11 +1,11 @@
-package exceptions;
+package duke.exception;
 
-public class DukeIndexOutOfRangeException extends DukeException {
+public class DukeIndexRangeException extends DukeException {
 
     /**
      *  DukeIndexOutOfRangeException constructor.
      */
-    public DukeIndexOutOfRangeException() {
+    public DukeIndexRangeException() {
     }
 
     @Override

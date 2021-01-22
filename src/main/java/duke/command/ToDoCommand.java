@@ -1,24 +1,21 @@
-package commands;
+package duke.command;
 
 import duke.Storage;
 import duke.Ui;
 import duke.TaskManager;
-import exceptions.DukeException;
+import duke.exception.DukeException;
 
-import java.time.LocalDate;
-
-public class DeadlineCommand extends Command {
+public class ToDoCommand extends Command {
     private String name;
-    private LocalDate date;
 
-    public DeadlineCommand(String name, LocalDate date) {
+    public ToDoCommand(String name) {
         this.name = name;
-        this.date = date;
     }
 
     public void execute(Ui ui, TaskManager tm, Storage st) throws DukeException {
-        tm.addDeadlineTask(name, date);
+        tm.addToDoTask(name);
         st.save(tm);
+
         ui.println("    added: " + name);
         ui.println(String.format("    Now you have %d task(s)",
                 tm.getSize()));

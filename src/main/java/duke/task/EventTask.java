@@ -1,32 +1,32 @@
-package tasks;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- *  Deadline tasks.Task.
+ *  Event duke.tasks.Task.
  *
  *  @author Yap Jing Kang
  */
 
 
-public class DeadlineTask extends Task {
-    protected LocalDate deadline;
+public class EventTask extends Task {
+    protected LocalDate duration;
 
     /**
-     *  tasks.DeadlineTask constructor.
+     *  duke.tasks.EventsTask constructor.
      *
-     *  @param name Name of tasks.DeadlineTask.
-     *  @param deadline Specified deadline of task.
+     *  @param name Name of duke.tasks.EventsTask.
+     *  @param duration Specified duration of task.
      */
-    public DeadlineTask(String name, LocalDate deadline) {
+    public EventTask(String name, LocalDate duration) {
         super(name);
-        this.deadline = deadline;
+        this.duration = duration;
     }
 
-    public DeadlineTask(String name, LocalDate deadline, boolean isCompleted) {
+    public EventTask(String name, LocalDate duration, boolean isCompleted) {
         super(name);
-        this.deadline = deadline;
+        this.duration = duration;
         if (isCompleted) {
             this.markAsDone();
         }
@@ -35,18 +35,18 @@ public class DeadlineTask extends Task {
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",
-                "D",
+                "E",
                 done == Status.DONE ? "1" : "0",
                 name,
-                deadline.format(formatter));
+                duration.format(formatter));
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-        return String.format("[D][%s] %s (by: %s)",
+        return String.format("[E][%s] %s (by: %s)",
                 done == Status.DONE ? "X" : " ",
                 name,
-                deadline.format(formatter));
+                duration.format(formatter));
     }
 }

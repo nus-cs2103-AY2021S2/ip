@@ -1,6 +1,6 @@
 package duke;
 
-import tasks.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ public class Ui {
     }
 
     /**
-     *  Greeter for Duke
+     *  Greeter for duke.Duke
      */
     public void showWelcome() {
         String logo = "     ____        _        \n"
@@ -25,7 +25,7 @@ public class Ui {
         System.out.println("    ---------------------------------------");
         System.out.println(logo);
         System.out.println("    ---------------------------------------");
-        System.out.println("    Hello! This is Duke");
+        System.out.println("    Hello! This is duke.Duke");
         System.out.println("    What can I do for you?");
         System.out.println("    ---------------------------------------");
     }
@@ -34,7 +34,7 @@ public class Ui {
         System.out.println("      Thanks for using me!");
     }
     /**
-     *  LineBreak for Duke
+     *  LineBreak for duke.Duke
      */
     public void showLine() {
         System.out.println("    ---------------------------------------");
@@ -53,7 +53,7 @@ public class Ui {
     }
 
     public void showTasks(ArrayList<Task> tasks) {
-        System.out.println("    Listing all tasks: ");
+        System.out.println("    Listing all duke.tasks: ");
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             System.out.println("     " +

@@ -1,7 +1,7 @@
 package duke;
 
-import commands.*;
-import exceptions.*;
+import duke.command.*;
+import duke.exception.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,12 +25,12 @@ public class Parser {
         }
     }
 
-    public static LocalDate processDate(String dateString) throws DukeInvalidDateFormatException {
+    public static LocalDate processDate(String dateString) throws DukeInvalidDateException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
             return LocalDate.parse(dateString, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeInvalidDateFormatException();
+            throw new DukeInvalidDateException();
         }
     }
 
@@ -48,7 +48,7 @@ public class Parser {
         //command integrity verification
         verifyCommand(params[0]);
 
-        //zero-param commands
+        //zero-param duke.commands
         if (params[0].equals("bye")) {
             return new ExitCommand();
         } else if (params[0].equals("list")) {
@@ -60,7 +60,7 @@ public class Parser {
             throw new DukeInsufficientParametersException(params[0]);
         }
 
-        //non-zero-param commands
+        //non-zero-param duke.commands
         try {
             String[] args;
             LocalDate date;

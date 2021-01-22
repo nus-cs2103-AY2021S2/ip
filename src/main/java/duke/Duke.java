@@ -1,9 +1,7 @@
-import commands.Command;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskManager;
-import duke.Ui;
-import exceptions.DukeException;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 public class Duke {
     private TaskManager tm;

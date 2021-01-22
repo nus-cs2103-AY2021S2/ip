@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exception;
 
 /**
  *  InsufficientParametersException.

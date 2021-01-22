@@ -1,19 +1,19 @@
 package duke;
 
-import exceptions.DukeCorruptFileException;
-import exceptions.DukeIndexOutOfRangeException;
-import exceptions.DukeTaskAlreadyDoneException;
-import tasks.DeadlineTask;
-import tasks.EventTask;
-import tasks.Task;
-import tasks.ToDoTask;
+import duke.exception.DukeCorruptFileException;
+import duke.exception.DukeIndexRangeException;
+import duke.exception.DukeTaskAlreadyDoneException;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- *  duke.TaskManager manages all tasks given to Duke.
+ *  duke.TaskManager manages all duke.tasks given to duke.Duke.
  *
  *  @author Yap Jing Kang
  */
@@ -83,10 +83,10 @@ public class TaskManager {
     /**
      *  Method to mark specified task done.
      *
-     *	@param x tasks.Task index.
+     *	@param x duke.tasks.Task index.
      *
      */
-    public Task markTaskAsDone(int x) throws DukeIndexOutOfRangeException, DukeTaskAlreadyDoneException {
+    public Task markTaskAsDone(int x) throws DukeIndexRangeException, DukeTaskAlreadyDoneException {
         try {
             Task t = tasks.get(x - 1);
             if (t.markAsDone()) {
@@ -95,23 +95,23 @@ public class TaskManager {
                 throw new DukeTaskAlreadyDoneException();
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeIndexOutOfRangeException();
+            throw new DukeIndexRangeException();
         }
     }
 
     /**
      *  Method to remove specified.
      *
-     *	@param x tasks.Task index.
+     *	@param x duke.tasks.Task index.
      *
      */
-    public Task deleteTask(int x) throws DukeIndexOutOfRangeException{
+    public Task deleteTask(int x) throws DukeIndexRangeException {
         try {
             Task t = tasks.get(x - 1);
             tasks.remove(x - 1);
             return t;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeIndexOutOfRangeException();
+            throw new DukeIndexRangeException();
         }
     }
 }

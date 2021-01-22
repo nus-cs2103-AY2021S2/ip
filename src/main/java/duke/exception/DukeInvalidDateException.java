@@ -1,10 +1,10 @@
-package exceptions;
+package duke.exception;
 
-public class DukeInvalidDateFormatException extends DukeException {
+public class DukeInvalidDateException extends DukeException {
     /**
      *  DukeInvalidDateFormatException constructor.
      */
-    public DukeInvalidDateFormatException() {
+    public DukeInvalidDateException() {
     }
 
     @Override

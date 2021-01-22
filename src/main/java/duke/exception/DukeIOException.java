@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exception;
 
 public class DukeIOException extends DukeException {
     /**

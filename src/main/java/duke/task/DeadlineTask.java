@@ -1,32 +1,32 @@
-package tasks;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- *  Event tasks.Task.
+ *  Deadline duke.tasks.Task.
  *
  *  @author Yap Jing Kang
  */
 
 
-public class EventTask extends Task {
-    protected LocalDate duration;
+public class DeadlineTask extends Task {
+    protected LocalDate deadline;
 
     /**
-     *  tasks.EventsTask constructor.
+     *  duke.tasks.DeadlineTask constructor.
      *
-     *  @param name Name of tasks.EventsTask.
-     *  @param duration Specified duration of task.
+     *  @param name Name of duke.tasks.DeadlineTask.
+     *  @param deadline Specified deadline of task.
      */
-    public EventTask(String name, LocalDate duration) {
+    public DeadlineTask(String name, LocalDate deadline) {
         super(name);
-        this.duration = duration;
+        this.deadline = deadline;
     }
 
-    public EventTask(String name, LocalDate duration, boolean isCompleted) {
+    public DeadlineTask(String name, LocalDate deadline, boolean isCompleted) {
         super(name);
-        this.duration = duration;
+        this.deadline = deadline;
         if (isCompleted) {
             this.markAsDone();
         }
@@ -35,18 +35,18 @@ public class EventTask extends Task {
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",
-                "E",
+                "D",
                 done == Status.DONE ? "1" : "0",
                 name,
-                duration.format(formatter));
+                deadline.format(formatter));
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
-        return String.format("[E][%s] %s (by: %s)",
+        return String.format("[D][%s] %s (by: %s)",
                 done == Status.DONE ? "X" : " ",
                 name,
-                duration.format(formatter));
+                deadline.format(formatter));
     }
 }

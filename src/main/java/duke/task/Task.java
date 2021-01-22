@@ -1,4 +1,4 @@
-package tasks;
+package duke.task;
 
 enum Status {
     DONE,
@@ -6,7 +6,7 @@ enum Status {
 }
 
 /**
- *  Generic tasks.Task for inheritance.
+ *  Generic duke.tasks.Task for inheritance.
  *
  *  @author Yap Jing Kang
  */
@@ -16,9 +16,9 @@ public abstract class Task {
     protected Status done;
 
     /**
-     *  Generic tasks.Task constructor.
+     *  Generic duke.tasks.Task constructor.
      *
-     *  @param name Name of tasks.Task.
+     *  @param name Name of duke.tasks.Task.
      */
     public Task(String name) {
         this.name = name;
@@ -26,19 +26,19 @@ public abstract class Task {
     }
 
     /**
-     *  tasks.Task name getter.
+     *  duke.tasks.Task name getter.
      *
-     *  @return Name of tasks.Task.
+     *  @return Name of duke.tasks.Task.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     *  Marks tasks.Task to be completed.
+     *  Marks duke.tasks.Task to be completed.
      *  Returns true if successful, false if unsuccessful.
      *
-     *  @return Name of tasks.Task.
+     *  @return Name of duke.tasks.Task.
      */
     public boolean markAsDone() {
         if (this.done == Status.DONE) {

@@ -1,8 +1,8 @@
-package exceptions;
+package duke.exception;
 
 /**
  *  Generic DukeException.
- *  Occurs when Duke-related exceptions happens.
+ *  Occurs when duke.Duke-related duke.exceptions happens.
  *
  *  @author Yap Jing Kang
  */

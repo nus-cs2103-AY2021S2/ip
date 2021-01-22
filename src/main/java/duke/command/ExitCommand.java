@@ -1,4 +1,4 @@
-package commands;
+package duke.command;
 
 import duke.Storage;
 import duke.TaskManager;
