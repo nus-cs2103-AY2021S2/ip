@@ -18,29 +18,34 @@ public class TaskSaver {
 
     public Vector<Task> restore() throws DukeException {
         Vector<Task> ret = new Vector<>();
-        try (Scanner s = new Scanner(file)) {
-            while (s.hasNextLine()) {
-                String line = s.nextLine();
-                String[] data;
-                data = line.split(deliminator, 0);
-                switch (data[0]) {
-                    case "T":
-                        ret.add(new ToDo(data[2]));
-                        break;
-                    case "D":
-                        ret.add(new Deadline(data[2], data[3]));
-                        break;
-                    case "E":
-                        ret.add(new EventTask(data[2], data[3]));
-                        break;
-                    default:
-                        throw new DukeException("Unknown task type");
-                }
-                if (Boolean.parseBoolean(data[1]))
-                    ret.lastElement().markAsDone();
-            }
+        Scanner s;
+        try {
+            s = new Scanner(file);
         } catch (FileNotFoundException e) {
-            // do nothing
+            return ret;
+        }
+
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            String[] data;
+            data = line.split(deliminator, 0);
+            switch (data[0]) {
+                case "T":
+                    ret.add(new ToDo(data[2]));
+                    break;
+                case "D":
+                    ret.add(new Deadline(data[2], data[3]));
+                    break;
+                case "E":
+                    ret.add(new EventTask(data[2], data[3]));
+                    break;
+                default:
+                    throw new DukeException("Unknown task type");
+            }
+
+            // mark as read accordingly
+            if (Boolean.parseBoolean(data[1]))
+                ret.lastElement().markAsDone();
         }
         return ret;
     }
