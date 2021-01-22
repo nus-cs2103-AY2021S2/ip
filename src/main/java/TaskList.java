@@ -60,8 +60,6 @@ public class TaskList {
         String by = data.split(" /by ", 2)[1];
         System.out.println(line);
         System.out.println("Got it. I've added this task:");
-        String formattedBy = by.replace(' ', 'T');
-        System.out.println(by);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
         Task t = new Deadline(description, dateTime);
@@ -87,7 +85,6 @@ public class TaskList {
         String data = temp[1];
         String description = data.split(" /at ", 2)[0];
         String at = data.split(" /at ", 2)[1];
-
         System.out.println(line);
         System.out.println("Got it. I've added this task:");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
@@ -97,7 +94,6 @@ public class TaskList {
         System.out.println(t);
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         System.out.println(line);
-//        DataHandler.saveData(this.taskList);
     }
 
     public void addEvent(Task input) { //when loading fr data [E][ ] abc

@@ -74,10 +74,7 @@ public class DataHandler {
                         description += deets[t];
                     }
                     taskDetails = arr[1];
-                    System.out.println(Arrays.toString(description.toCharArray()));
-                    System.out.println(Arrays.toString(taskDetails.toCharArray()));
                     arr = taskDetails.split(" by:" , 2);
-                    System.out.println(Arrays.toString(arr));
                     String by = "";
                     String details = arr[0];
                     arr = details.split("");
@@ -124,63 +121,9 @@ public class DataHandler {
                 }
             }
         } else { //create new file in folder
-//            String folderPath = System.getProperty("user.dir") + "/data";
-//            File folder = new File(folderPath);
             File f = new File(currPath.toAbsolutePath().toString() + "/duke.txt");
         }
         return list;
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import java.io.FileWriter;
-//import java.io.IOException;
-//import java.nio.file.Path;
-//import java.nio.file.Paths;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//
-//public class WriteToFile {
-//    String f;
-//    ArrayList<Task> l;
-//
-//    public WriteToFile(String f, ArrayList<Task> li) {
-//        this.f = f;
-//        this.l = li;
-//    }
-//
-//    private static void write(String filePath, ArrayList<Task> list) throws IOException {
-//        FileWriter fw = new FileWriter(filePath);
-//        fw.write(Arrays.toString(list.toArray()));
-//        fw.close();
-//    }
-//
-//    public static void main(String[] args) {
-//        Path currPath = Paths.get("");
-//        String dukePath = currPath.toAbsolutePath().toString() + "/duke.txt";
-//        try {
-//            write(dukePath, this.l);
-//        } catch (IOException e) {
-//            System.out.println("Something went wrong: " + e.getMessage());
-//        }
-//    }
-//}
