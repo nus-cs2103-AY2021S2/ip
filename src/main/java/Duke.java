@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -9,7 +7,6 @@ import task.Deadline;
 import task.Event;
 import task.Task;
 
->>>>>>> Stashed changes
 public class Duke {
     private static final String FILENAME = "duke.csv";
 
@@ -20,8 +17,6 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-<<<<<<< Updated upstream
-=======
         System.out.println("------------------------");
         System.out.println("Hello! I'm Duke's friend, Ekud." +
                 "\nDuke's dead, so I'm here to take his job." +
@@ -139,7 +134,6 @@ public class Duke {
         } catch (NumberFormatException e) {
             System.out.println("The input must be a positive integer!");
         }
->>>>>>> Stashed changes
     }
 
     public static void handleSave(ArrayList<Task> data) {
