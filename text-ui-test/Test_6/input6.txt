@@ -1,0 +1,6 @@
+todo Watch CS2103T lecture
+deadline Do CS2103T lecture quiz /by 2021-01-01
+list
+delete 1
+list
+bye

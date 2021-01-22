@@ -1,7 +1,8 @@
-public class EventTask extends Task {
-    private String event;
+import java.time.LocalDate;
 
-    public EventTask(String taskDescription, String event, int isDone) {
+public class EventTask extends Task {
+    private LocalDate event;
+    public EventTask(String taskDescription, LocalDate event, int isDone) {
         super(taskDescription, "E", isDone);
         this.event = event;
     }

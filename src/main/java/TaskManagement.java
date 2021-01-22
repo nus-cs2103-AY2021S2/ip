@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.time.LocalDate;
 
 public class TaskManagement {
     public static final String TASK_FILE_PATH = "tasks.txt";
@@ -28,7 +29,7 @@ public class TaskManagement {
             String[] descriptionSplitArray = taskDescription.split("/by");
             try {
                 DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
-                        descriptionSplitArray[1].trim(), isDone);
+                        LocalDate.parse(descriptionSplitArray[1].trim()), isDone);
                 System.out.printf("Meme Man is now adding deadline task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -44,7 +45,7 @@ public class TaskManagement {
             String[] descriptionSplitArray = taskDescription.split("/at");
             try {
                 EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
-                        descriptionSplitArray[1].trim(), isDone);
+                        LocalDate.parse(descriptionSplitArray[1].trim()), isDone);
                 System.out.printf("Meme Man is now adding event task: %s\n", newTask);
                 this.addTask(newTask);
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
