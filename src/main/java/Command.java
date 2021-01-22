@@ -74,6 +74,7 @@ public class Command {
     }
 
     public static Task convertToTask(String command, CommandType type) throws DukeException {
+
         if (type == CommandType.TODO) {
                 String subStr = command.substring(5);
                 if (StringParser.isBlank(subStr)) {
