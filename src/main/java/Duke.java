@@ -1,10 +1,18 @@
+import java.util.Scanner;
+
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        // Init bot
+        Bot bot = new Bot("SimpleBot");
+        System.out.println(bot.getInitMessage());
+        
+        // Perform main logic loop
+        try (Scanner scanner = new Scanner(System.in)) {
+            while (bot.isActive()) {
+                System.out.print("You: ");
+                String reply = bot.respond(scanner.nextLine());
+                System.out.println(reply);
+            }
+        }
     }
 }
