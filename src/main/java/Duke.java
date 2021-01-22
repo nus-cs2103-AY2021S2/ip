@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Duke {
     private static Scanner sc = new Scanner(System.in);
+    private static int numOfItems = 0;
+    private static String[] items = new String[100];
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _ \n"
@@ -9,8 +11,33 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         greetUser();
+        while(true) {
+            String firstWord = sc.next();
+            if(firstWord.equals("list")) listItems();
+            else if(firstWord.equals("bye")) {
+                byeUser();
+                break;
+            }
+            else addItems(firstWord);
+        }
         echo();
     }
+
+    private static void addItems(String firstWord) {
+        StringBuilder item = new StringBuilder();
+        item.append(firstWord);
+        item.append(sc.nextLine());
+        items[numOfItems] = item.toString();
+        numOfItems++;
+        System.out.println("added: "+item);
+    }
+
+    private static void listItems() {
+         for(int itemNo=1;itemNo<=numOfItems;itemNo++) {
+             System.out.println(itemNo+". "+items[itemNo-1]);
+         }
+    }
+
     private static void greetUser() {
         System.out.println("Hello, Im Duke. What do you want me to do?");
     }
