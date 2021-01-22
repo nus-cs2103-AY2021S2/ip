@@ -3,36 +3,33 @@
  */
 public class DukeException{
 
+    public static final void NumberFormatException() {
+        System.out.println(Format.KEYINNUMBER);
+    }
+
     /**
      * display the error message for empty body error.
      *
      */
-    public static final void emptyBodyException() {
-        System.out.println("Walao!Description empty!");
+    public static final void emptyTaskException() {
+        System.out.println(Format.EMPTYTASK);
     }
 
-    /**
-     * display the error message for slash error.
-     *
-     */
-    public static final void slashErrorException() {
-        System.out.println("??? Too many / or no /, only 1 / allow for dates and time");
-    }
 
     /**
      * display the error message for too many argument error.
      *
      */
     public static final void argumentErrorException() {
-        System.out.println("You put so many/few ARGUMENTS for what");
+        System.out.println(Format.TOOMANYARGUMENTS);
     }
 
     /**
      * display the error message for missing argument error.
      *
      */
-    public static final void missingArgumentErrorException() {
-        System.out.println("Fill ur description or date lah");
+    public static final void missingDateErrorException() {
+        System.out.println(Format.MISSINGDATE);
     }
 
     /**
@@ -40,14 +37,13 @@ public class DukeException{
      *
      */
     public static final void commandErrorException() {
-        System.out.println("I DON'T KNOW WHAT U SAYING BRO");
+        System.out.println(Format.COMMANDERROR);
     }
 
     /**
      * display the error message for missing task error.
      *
      */
-    public static final void taskErrorException() {
-        System.out.println("Walao, no such task");
+    public static final void taskErrorException() { System.out.println(Format.TASKERROR);
     }
 }

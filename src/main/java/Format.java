@@ -12,11 +12,16 @@ public class Format {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-
-    public static final String farewell = UPPER
+    public static final String KEYINNUMBER = "PLease Lah! Key in number!";
+    public static final String EMPTYTASK = "Walao!NO TASK!";
+    public static final String TOOMANYARGUMENTS = "You put so many/few ARGUMENTS for what";
+    public static final String MISSINGDATE = "Fill ur date lah";
+    public static final String COMMANDERROR = "I DON'T KNOW WHAT U SAYING BRO";
+    public static final String TASKERROR = "Walao, no such task";
+    public static final String FAREWELL = UPPER
             + "I zao liao, don't miss me."
             + LOWER;
-    public static final String greeting = UPPER
+    public static final String GREETING = UPPER
             + "Awww, need help ah?"
             + LOWER;
 
