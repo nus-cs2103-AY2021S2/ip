@@ -17,6 +17,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Converts {@code Deadline} into string format to be stored in file.
+     *
+     * @return String format to be stored in file.
+     */
+    public String encode() {
+        return String.format("D / %s / %s", super.encode(), by);
+    }
+
+    /**
      * String representation of the Deadline.
      *
      * @return Deadline in check list form.

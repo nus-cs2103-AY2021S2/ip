@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Main Class of Execution for IP.
  */
-public class Duke {
+public class Main {
     /**
      * Main method for execution.
      *
