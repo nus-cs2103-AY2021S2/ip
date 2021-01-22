@@ -1,3 +1,8 @@
+import controller.Parser;
+import controller.Storage;
+import controller.TaskList;
+import controller.Ui;
+
 import java.util.Scanner;
 
 public class Duke {

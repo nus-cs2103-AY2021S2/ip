@@ -1,6 +1,7 @@
+package controller;
+
 import task.Deadline;
 import task.Event;
-import task.Task;
 import task.ToDo;
 
 import java.io.BufferedReader;
@@ -11,7 +12,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Storage {
     private final String fileName;

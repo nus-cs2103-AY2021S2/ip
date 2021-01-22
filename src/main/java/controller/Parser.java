@@ -1,3 +1,5 @@
+package controller;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -8,7 +10,7 @@ import java.time.LocalDate;
 public class Parser {
     Ui ui;
 
-    Parser(Ui ui) {
+    public Parser(Ui ui) {
         this.ui = ui;
     }
 
