@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import task.ToDo;
 import task.Deadline;
 import task.Event;
@@ -115,15 +118,18 @@ public class Duke {
             String taskName = input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1);
             Task temp;
             String timing = input.substring(input.indexOf("/") + 4);
+            LocalDate date = LocalDate.parse(timing);
             if (command.startsWith("deadline")) {
-                temp = new Deadline(taskName, timing);
+                temp = new Deadline(taskName, date);
             } else {
-                temp = new Event(taskName, timing);
+                temp = new Event(taskName, date);
             }
             listOfTasks.add(temp);
             printUpdate("Got it. I have added the following task:", temp, listOfTasks.size());
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("The timing of the task is not included. Please check your input.");
+        } catch (java.time.format.DateTimeParseException e) {
+            System.out.println("Please input a date with correct format (yyyy-mm-dd)");
         }
     }
 
