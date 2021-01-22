@@ -8,9 +8,9 @@ import java.util.ArrayList;
  * by multiple users by separating static-level Task members that should
  * not be shared by all Users of the Task class.
  *
- * Note, this class assumes that it has been called correctly by the DukeBot
+ * Note, this class assumes that it has been correctly called by the DukeBot
  * and that the only possible source of errors are in the User description
- * String.
+ * String. (I.e. Assumes the Commands provided are correct or appropriate)
  *
  * Functionality:
  * 1. Create, store, and delete Tasks

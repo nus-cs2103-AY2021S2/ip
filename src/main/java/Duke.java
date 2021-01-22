@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 /**
- * Duke is the controller for the CLI chat-bot DukeBot that handles task tracking.
+ * Duke is a CLI chat-bot that handles task tracking.
+ *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu
  */
