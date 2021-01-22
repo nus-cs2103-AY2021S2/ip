@@ -119,6 +119,20 @@ public class DukeDriver {
         }
     }
 
+    private static final void handleDelete(String input, String command) {
+        String task = extractTask(input, command);
+        if (task.length() > 0) {
+            try {
+                int num = Integer.parseInt(task);
+                Task.delete(num);
+            } catch (NumberFormatException e) {
+                DukeException.NumberFormatException();
+            }
+        } else {
+            DukeException.argumentErrorException();
+        }
+    }
+
     /**
      * The main handler of all the command.
      *
@@ -146,6 +160,9 @@ public class DukeDriver {
             break;
         case "event":
             handleEvent(message, command);
+	        break;
+        case "delete":
+            handleDelete(message, command);
             break;
         default:
             DukeException.commandErrorException();
@@ -173,7 +190,7 @@ public class DukeDriver {
      */
     private static final String extractTask(String input, String command) {
         String body = input.replaceAll(command, "").trim();
-        if (command.equals("todo")) {
+        if (command.equals("todo") || command.equals("delete")) {
             return body;
         } else if (command.equals("done")) {
             return body.replaceAll("[^0-9]", "");

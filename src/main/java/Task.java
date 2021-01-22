@@ -49,7 +49,21 @@ public class Task {
         }
     }
 
-    
+    public static final void delete(int i) {
+        try {
+            Task t = taskList.get(i - 1);
+            taskList.remove(i - 1);
+            System.out.println(Format.UPPER + "Awww~ You've deleted the task: "
+                + " " + t.toString() + Format.LOWER);
+            for (Task task : taskList) {
+                if (task.index > i) {
+                    task.index--;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            DukeException.taskErrorException();
+        }
+    }
 
     /**
      * Get the name of the task.

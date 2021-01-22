@@ -44,6 +44,5 @@ public class DukeException{
      * display the error message for missing task error.
      *
      */
-    public static final void taskErrorException() { System.out.println(Format.TASKERROR);
-    }
+    public static final void taskErrorException() { System.out.println(Format.TASKERROR); }
 }
