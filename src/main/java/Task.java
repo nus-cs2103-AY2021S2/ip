@@ -6,9 +6,9 @@ public class Task {
      * Constructor for a task
      * @param desc Description of a Task
      */
-    public Task(String desc) {
+    public Task(String desc, boolean isDone) {
         this.desc = desc;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -40,5 +40,9 @@ public class Task {
      */
     public String getStatusSymbol() {
         return this.isDone ? "X" : " ";
+    }
+
+    public String toSaveInfoString() {
+        return getStatusSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc;
     }
 }
