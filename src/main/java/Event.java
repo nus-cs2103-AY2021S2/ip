@@ -1,9 +1,9 @@
 public class Event extends Task {
     public String date;
 
-    Event(String description) {
-        super(description.substring(6).split(" /at ")[0]);
-        this.date = description.substring(6).split(" /at ")[1];
+    Event(String description, String date) {
+        super(description);
+        this.date = date;
         isDone = false;
     }
     @Override
