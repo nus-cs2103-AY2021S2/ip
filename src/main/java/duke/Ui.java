@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.DukeIOException;
 import duke.task.Task;
 
 public class Ui {
@@ -53,6 +54,11 @@ public class Ui {
         System.out.println("      Error: " + message);
     }
 
+    /**
+     *  Prints Tasks.
+     *
+     *  @param tasks ArrayList of tasks to be printed to console.
+     */
     public void showTasks(ArrayList<Task> tasks) {
         System.out.println("    Listing all duke.tasks: ");
         for (int i = 0; i < tasks.size(); i++) {

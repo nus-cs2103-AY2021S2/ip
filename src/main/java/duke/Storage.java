@@ -17,6 +17,11 @@ public class Storage {
         this.filePath = fp;
     }
 
+    /**
+     *  Task Loader.
+     *
+     *  @throws DukeIOException If information given is corrupt in any way.
+     */
     public ArrayList<String> load() throws DukeIOException {
         try {
             File file = new File(this.filePath);
@@ -41,6 +46,12 @@ public class Storage {
         }
     }
 
+    /**
+     *  Task Saver.
+     *
+     *  @param tm TaskManager Object containing Task information
+     *  @throws DukeIOException If there is issue in file writing.
+     */
     public void save(TaskManager tm) throws DukeIOException {
         try {
             ArrayList<Task> tasks = tm.getTasks();

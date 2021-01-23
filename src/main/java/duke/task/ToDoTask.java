@@ -17,6 +17,12 @@ public class ToDoTask extends Task {
         super(name);
     }
 
+    /**
+     *  ToDoTask constructor. For use with persistent storage.
+     *
+     *  @param name Name of ToDoTask.
+     *  @param isCompleted Whether ToDoTask is completed, or not.
+     */
     public ToDoTask (String name, boolean isCompleted) {
         super(name);
         if (isCompleted) {
@@ -24,6 +30,11 @@ public class ToDoTask extends Task {
         }
     }
 
+    /**
+     *  Converts ToDoTask object to String suitable for storage.
+     *
+     * @return String ToDoTask information in a file-friendly format
+     */
     public String toFileFormat() {
         return String.format("%s|%s|%s",
                 "T",

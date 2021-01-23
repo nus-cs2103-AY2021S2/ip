@@ -52,6 +52,13 @@ public class Parser {
         return output;
     }
 
+    /**
+     *  Command parser.
+     *
+     *  @param c Command to be parsed.
+     *  @return Command object.
+     *  @throws DukeException Exception depending on error.
+     */
     public static Command parse(String c) throws DukeException {
         String[] params = c.strip().split(" ", 2);
 
