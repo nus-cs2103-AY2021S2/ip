@@ -162,6 +162,17 @@ public class TaskList {
         updatedTaskList.remove(taskNumber - 1);
     }
 
+    public static ArrayList<String> findMatchingTasks(String keyword) {
+        ArrayList<String> matchedTasks = new ArrayList<>();
+        for (int i = 0; i < loadedList.size(); i++) {
+            String currentTask = loadedList.get(i);
+            if (currentTask.indexOf(keyword) != -1) {
+                matchedTasks.add(currentTask);
+            }
+        }
+        return matchedTasks;
+    }
+
 }
 
 

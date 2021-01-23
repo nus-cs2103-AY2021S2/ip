@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Makes sense of the user command
@@ -18,6 +19,12 @@ public class Parser {
                 Duke.isFinished = true;
             } else if (input.equals("list")) {
                 ui.showTaskList();
+            } else if (input.startsWith("find")) {
+                String keyword = getKeyword(input);
+
+                ArrayList<String> matchedTasks = TaskList.findMatchingTasks(keyword);
+
+                ui.showMatchingTasks(matchedTasks);
             } else if (input.startsWith("done ")) {
                 Task finishedTask = getFinishedTask(input);
 
@@ -61,6 +68,10 @@ public class Parser {
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+    }
+
+    public static String getKeyword(String input) {
+        return input.substring(6);
     }
 
     /**

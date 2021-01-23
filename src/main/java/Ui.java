@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import java.util.ArrayList;
+
 /**
  * In charge of interactions with the user
  */
@@ -42,6 +44,16 @@ public class Ui {
     }
 
     /**
+     * Prints out the list of tasks that match the given keyword
+     */
+    public void showMatchingTasks(ArrayList<String> matchedTasks) {
+        for (int i = 0; i < matchedTasks.size(); i++) {
+            System.out.println(matchedTasks.get(i));
+        }
+        System.out.println();
+    }
+
+    /**
      * Prints out the message that the specified task has been added to the task list
      */
     public void showTaskAdded() {
@@ -79,7 +91,7 @@ public class Ui {
     public void showTaskList() {
         System.out.println("Here are your tasks!");
 
-        for(int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
+        for (int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
             Task task = TaskList.updatedTaskList.get(i-1);
             System.out.print(i + ".");
             System.out.println(task);

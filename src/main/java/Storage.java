@@ -43,7 +43,7 @@ public class Storage {
     public static void store(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for(int i = 0; i < TaskList.updatedTaskList.size(); i++) {
+            for (int i = 0; i < TaskList.updatedTaskList.size(); i++) {
                 fw.write(TaskList.updatedTaskList.get(i).toString() + " \r\n");
             }
             fw.close();
