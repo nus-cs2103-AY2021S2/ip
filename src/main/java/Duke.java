@@ -1,6 +1,13 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
+
+import java.io.BufferedWriter;
 
 public class Duke {
     private final StringBuffer boundOfChatBox = new StringBuffer();
@@ -120,6 +127,30 @@ public class Duke {
                 + "Now you have " + tasks.size() + " tasks in the list.\n");
     }
 
+    public void save() {
+        try {
+            Path directoryPath = Paths.get( "data");
+            Path filePath = Paths.get( "data", "duke.txt");
+            boolean directoryExists = Files.exists(directoryPath);
+            boolean fileExists = Files.exists(filePath);
+            if (!directoryExists) {
+                Files.createDirectory(directoryPath);
+            }
+            if (!fileExists) {
+                Files.createFile(filePath);
+            }
+            BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath);
+            for (Task task : tasks) {
+                bufferedWriter.write(task.toString() + "\n");
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void exit() {
         String goodbye = "Bye. Hope to see you again soon!\n";
         formatInChatBox(goodbye);
@@ -148,18 +179,22 @@ public class Duke {
                     case DELETE:
                         int j = sc.nextInt();
                         momo.delete(j);
+                        momo.save();
                         break;
                     case TODO:
                         String toDoDes = sc.nextLine();
                         momo.addToDo(toDoDes);
+                        momo.save();
                         break;
                     case DEADLINE:
                         String deadlineDes = sc.nextLine();
                         momo.addDeadline(deadlineDes);
+                        momo.save();
                         break;
                     case EVENT:
                         String eventDes = sc.nextLine();
                         momo.addEvent(eventDes);
+                        momo.save();
                         break;
                     default:
                         momo.error();
