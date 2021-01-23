@@ -29,6 +29,14 @@ public class Ui {
         System.out.println(BORDER + "\n");
     }
 
+    public void printDoneMsg(int index, Task task) {
+        System.out.println(BORDER);
+        System.out.println("Good job meow, I've marked this task as done:");
+        System.out.printf("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
+                task.getDesc());
+        System.out.println(BORDER);
+    }
+
     public void printTaskList(List<Task> tasks) {
         System.out.println(BORDER);
         System.out.println("Meow, here are the tasks in your list:");

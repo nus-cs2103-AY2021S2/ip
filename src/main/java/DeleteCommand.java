@@ -7,10 +7,17 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute() throws DukeCommandException {
-        try {
-            taskManager.deleteTask(index);
-        } catch(DukeTaskException e) {
-            throw new DukeCommandException("delete", String.valueOf(index), e.getMessage());
+        if(taskManager.getTasksSize() == 0){
+            throw new DukeCommandException("delete", String.valueOf(index), "There are no task to be deleted.");
+        } else if(index < 0 || index >= taskManager.getTasksSize()) {
+            throw new DukeCommandException("delete", String.valueOf(index), "Please enter a valid task index ranging " +
+                    "from 1 to " + taskManager.getTasksSize() + " (inclusive).");
+        } else {
+            try {
+                taskManager.deleteTask(index);
+            } catch(DukeTaskException e) {
+                throw new DukeCommandException("delete", String.valueOf(index), e.getMessage());
+            }
         }
     }
 }
