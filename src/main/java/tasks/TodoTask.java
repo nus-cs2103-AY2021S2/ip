@@ -1,4 +1,4 @@
-package Task;
+package tasks;
 
 public class TodoTask extends Task {
     private String type;

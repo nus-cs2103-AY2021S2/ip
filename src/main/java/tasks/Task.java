@@ -1,6 +1,4 @@
-package Task;
-
-import java.util.*;
+package tasks;
 
 public class Task {
     protected boolean isDone;
