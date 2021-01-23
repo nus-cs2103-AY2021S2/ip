@@ -1,0 +1,3 @@
+T|0|hello world
+D|0|homework|tmr
+E|0|say hello|10pm tmr

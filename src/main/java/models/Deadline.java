@@ -29,6 +29,15 @@ public class Deadline extends Todo {
         this.deadline = deadline;
     }
 
+    /**
+     * Getter method for deadline of a Deadline object
+     * 
+     * @return String containing deadline of the Deadline
+     */
+    public String getDeadline() {
+        return this.deadline;
+    }
+
     @Override
     /**
      * Method overriden from Todo's getMessage method to return Deadline type and

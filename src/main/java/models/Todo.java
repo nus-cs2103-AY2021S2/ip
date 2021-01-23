@@ -54,6 +54,15 @@ public class Todo {
     }
 
     /**
+     * Getter method for getting raw message without formatting of a Todo
+     * 
+     * @return String containing raw message of Todo
+     */
+    public String getRawMessage() {
+        return this.message;
+    }
+
+    /**
      * Marks a Todo as done by returning a new Todo
      * 
      * @return Todo that is marked as done
