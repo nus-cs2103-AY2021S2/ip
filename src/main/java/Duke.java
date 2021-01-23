@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a Personal Assistant Chatbot named Duke that
@@ -135,9 +138,9 @@ public class Duke {
      * @param input supplied from user's command-line input to add a deadline task
      */
     public static void createDeadlineTask(String input) {
-        String[] taskAndDate = input.substring(9).split("/");
+        String[] taskAndDate = input.substring(9).split("/",2);
         String deadlineTask = taskAndDate[0];
-        String deadline = taskAndDate[1].substring(3);
+        LocalDate deadline = LocalDate.parse(taskAndDate[1].substring(3).replaceAll("/","-"));
         Task task = new Deadline(deadlineTask, deadline);
         addTaskToList(task);
         updateTaskList();
