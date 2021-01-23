@@ -31,53 +31,31 @@ public class Duke {
                 String task = command[0].toUpperCase();
                 Command c = Command.valueOf(task);
                 switch(c) {
-                    case LIST:
-                        listTasks(col);
-                        break;
-                    case DONE:
-                        int index = Integer.parseInt(command[1]);
-                        markTaskDone(col, index);
-                        break;
-                    case DELETE:
-                        int i = Integer.parseInt(command[1]);
-                        deleteTask(col, i);
-                        break;
-
-                    case TODO:
-                        createTodo(col, command);
-                        break;
-
-                    case DEADLINE:
-                        createDeadline(col, command);
-                        break;
-                    case EVENT:
-                        createEvent(col, command);
-                        break;
-                    default:
-                        throw(new DukeException(x));
+                case LIST:
+                    listTasks(col);
+                    break;
+                case DONE:
+                    int index = Integer.parseInt(command[1]);
+                    markTaskDone(col, index);
+                    break;
+                case DELETE:
+                    int i = Integer.parseInt(command[1]);
+                    deleteTask(col, i);
+                    break;
+                case TODO:
+                    createTodo(col, command);
+                    break;
+                case DEADLINE:
+                    createDeadline(col, command);
+                    break;
+                case EVENT:
+                     createEvent(col, command);
+                     break;
+                default:
+                     throw(new DukeException(x));
                 }
                 x = sc.nextLine();
                 command = x.split(" ");
-
-//                if (x.equals("list")) {
-//                    listTasks(col);
-//                } else if (command[0].equals("done")) {
-//                    int index = Integer.parseInt(command[1]);
-//                    markTaskDone(col, index);
-//                } else if (command[0].equals("delete")) {
-//                    int index = Integer.parseInt(command[1]);
-//                    deleteTask(col, index);
-//                } else if (command[0].equals("todo")) {
-//                    createTodo(col, command);
-//                } else if (command[0].equals("deadline")) {
-//                    createDeadline(col, command);
-//                } else if (command[0].equals("event")) {
-//                    createEvent(col, command);
-//                } else { //must be weird words
-//                    throw(new DukeException(x));
-//                }
-//                x = sc.nextLine();
-//                command = x.split(" ");
             }
             System.out.println("----------------------------------------------");
             System.out.println("Bye. Hope to see you again soon!");
