@@ -1,5 +1,5 @@
 public class ToDoTask extends Task {
-    private static final String IDENTIFIER = "T";
+    public static final String IDENTIFIER = "T";
 
     public ToDoTask(String name) {
         super(IDENTIFIER, name);
