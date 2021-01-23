@@ -43,6 +43,8 @@ public class Parser {
 
         } else if (parsedAction[0].equals("check") && parsedAction.length <= 1) {
             throw new DukeIncompleteInputException("check not completed");
+        } else if (parsedAction[0].equals("find") && parsedAction.length <= 1) {
+            throw new DukeIncompleteInputException("find not completed");
         }
 
     }

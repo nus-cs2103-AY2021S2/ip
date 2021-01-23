@@ -8,6 +8,8 @@ import duke.tasks.Task;
 import duke.tasks.EventTask;
 import duke.tasks.DeadlineTask;
 
+import java.util.List;
+
 public class Duke {
 
     /** Storage instance that is used by Duke during run for loading and writing of file*/
@@ -109,14 +111,17 @@ public class Duke {
 
                     ui.print(result);
                     ui.printDivider();
+
                     break;
 
                 case "bye":
                     carryOn = false;
+
                     break;
 
                 case "delete":
                     int index = Integer.valueOf(parsedAction[1]);
+
                     ui.printDivider();
                     ui.printRemoved();
 
@@ -126,6 +131,19 @@ public class Duke {
                     ui.countTasks(tasks);
 
                     ui.printDivider();
+                    break;
+
+                case "find":
+                    String keyword = parsedAction[1];
+
+                    ui.printDivider();
+                    ui.printMatching();
+
+                    List<Task> matches = tasks.getMatch(keyword);
+
+                    ui.printList(matches);
+                    ui.printDivider();
+
                     break;
 
                 default:
