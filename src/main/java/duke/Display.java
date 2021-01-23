@@ -64,7 +64,6 @@ public class Display {
     }
 
     protected static void displayAddedTask(Task task) {
-
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
                 + "\nYou now have "
@@ -83,6 +82,6 @@ public class Display {
     }
 
     public static void displayError(String msg) {
-        display(msg);
+        display("Oops!\n" + msg);
     }
 }

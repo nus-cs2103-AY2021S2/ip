@@ -56,7 +56,7 @@ public class Data {
             }
             return task;
         } catch (Exception e) {
-            throw new DukeException("There seems to be something wrong with the menu file...");
+            throw new DukeException("There seems to be something wrong with the menu and we can't start up...");
         }
     }
 
