@@ -16,7 +16,8 @@ public class DeleteCommand extends Command {
             try {
                 Task task = taskManager.deleteTask(index);
                 ui.printDeleteMsg(task, taskManager.getTasksSize());
-            } catch(DukeTaskException e) {
+                Storage.saveTasks(taskManager.getTasks());
+            } catch(DukeException e) {
                 throw new DukeCommandException("delete", String.valueOf(index), e.getMessage());
             }
         }

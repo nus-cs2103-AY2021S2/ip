@@ -16,7 +16,8 @@ public class EventCommand extends Command{
         try {
             Event event = taskManager.addEvent(this.desc, this.start, this.end);
             ui.printAddMsg(event, taskManager.getTasksSize());
-        } catch (DukeTaskException e) {
+            Storage.saveTasks(taskManager.getTasks());
+        } catch (DukeException e) {
             throw new DukeCommandException("event", desc, e.getMessage());
         }
     }

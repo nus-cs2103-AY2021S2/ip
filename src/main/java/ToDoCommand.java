@@ -10,7 +10,8 @@ public class ToDoCommand extends Command {
         try {
             ToDo toDo = taskManager.addToDo(this.desc);
             ui.printAddMsg(toDo, taskManager.getTasksSize());
-        } catch(DukeTaskException e) {
+            Storage.saveTasks(taskManager.getTasks());
+        } catch(DukeException e) {
             throw new DukeCommandException("todo", desc, e.getMessage());
         }
     }

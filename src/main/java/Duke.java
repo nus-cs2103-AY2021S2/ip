@@ -67,13 +67,13 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-        try {
-            loadTasks();
-        } catch (DukeLoadException e) {
-            System.out.println("___________________________________________________________");
-            System.out.printf("There is a problem while loading your past tasks meow! %s\n", e.getMessage());
-            System.out.println("___________________________________________________________\n");
-        }
+//        try {
+//            loadTasks();
+//        } catch (DukeLoadException e) {
+//            System.out.println("___________________________________________________________");
+//            System.out.printf("There is a problem while loading your past tasks meow! %s\n", e.getMessage());
+//            System.out.println("___________________________________________________________\n");
+//        }
 
         Ui ui = new Ui();
         TaskManager taskManager = new TaskManager();

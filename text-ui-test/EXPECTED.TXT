@@ -4,89 +4,61 @@ What can I do for you today?
 ___________________________________________________________
 
 ___________________________________________________________
-No such command, Please try again with another command meow.
-___________________________________________________________
-
-___________________________________________________________
 Got it meow. I've added this task:
-  [T][ ] eat
+  [T][ ] sleep
 Now you have 1 tasks in the list.
 ___________________________________________________________
 
 ___________________________________________________________
+ERROR MEOW! Date time format is incorrect, try to follow the format of dd-mm-yyyy hAM/PM.
+___________________________________________________________
+
+___________________________________________________________
 Got it meow. I've added this task:
-  [D][ ] sleep (by: 10pm Sunday)
+  [D][ ] eat (by: 12 Dec, Tue 12PM)
 Now you have 2 tasks in the list.
 ___________________________________________________________
 
 ___________________________________________________________
 Got it meow. I've added this task:
-  [E][ ] play (at: 11am Saturday)
+  [E][ ] play (Start: 12 Dec, Tue 12AM | End: 12 Dec, Tue 12PM)
 Now you have 3 tasks in the list.
 ___________________________________________________________
 
 ___________________________________________________________
 Meow, here are the tasks in your list:
-1.[T][ ] eat
-2.[D][ ] sleep (by: 10pm Sunday)
-3.[E][ ] play (at: 11am Saturday)
+1.[T][ ] sleep
+2.[D][ ] eat (by: 12 Dec, Tue 12PM)
+3.[E][ ] play (Start: 12 Dec, Tue 12AM | End: 12 Dec, Tue 12PM)
 ___________________________________________________________
 
 ___________________________________________________________
 Good job meow, I've marked this task as done:
-3.[E][X] play (at: 11am Saturday)
+1.[T][X] sleep
 ___________________________________________________________
-
-___________________________________________________________
-Good job meow, I've marked this task as done:
-1.[T][X] eat
-___________________________________________________________
-
-___________________________________________________________
-Meow, here are the tasks in your list:
-1.[T][X] eat
-2.[D][ ] sleep (by: 10pm Sunday)
-3.[E][X] play (at: 11am Saturday)
-___________________________________________________________
-
 ___________________________________________________________
 Good job meow, I've marked this task as done:
-2.[D][X] sleep (by: 10pm Sunday)
+2.[D][X] eat (by: 12 Dec, Tue 12PM)
 ___________________________________________________________
-
 ___________________________________________________________
-Meow, here are the tasks in your list:
-1.[T][X] eat
-2.[D][X] sleep (by: 10pm Sunday)
-3.[E][X] play (at: 11am Saturday)
+Good job meow, I've marked this task as done:
+3.[E][X] play (Start: 12 Dec, Tue 12AM | End: 12 Dec, Tue 12PM)
 ___________________________________________________________
-
-___________________________________________________________
-ERROR MEOW! Please enter a valid task index ranging from 1 to 3 (inclusive).
-___________________________________________________________
-
-___________________________________________________________
-Meow, here are the tasks in your list:
-1.[T][X] eat
-2.[D][X] sleep (by: 10pm Sunday)
-3.[E][X] play (at: 11am Saturday)
-___________________________________________________________
-
 ___________________________________________________________
 Noted meow. I've removed this task:
-  [E][X] play (at: 11am Saturday)
+  [E][X] play (Start: 12 Dec, Tue 12AM | End: 12 Dec, Tue 12PM)
 Now you have 2 tasks in the list.
 ___________________________________________________________
 
 ___________________________________________________________
 Noted meow. I've removed this task:
-  [D][X] sleep (by: 10pm Sunday)
+  [D][X] eat (by: 12 Dec, Tue 12PM)
 Now you have 1 tasks in the list.
 ___________________________________________________________
 
 ___________________________________________________________
 Noted meow. I've removed this task:
-  [T][X] eat
+  [T][X] sleep
 Now you have 0 tasks in the list.
 ___________________________________________________________
 
@@ -97,3 +69,4 @@ ___________________________________________________________
 ___________________________________________________________
 Meow. Hope to see you again soon!
 ___________________________________________________________
+

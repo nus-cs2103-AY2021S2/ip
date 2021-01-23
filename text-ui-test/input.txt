@@ -1,15 +1,11 @@
-test
-todo eat
-deadline sleep /by 10pm Sunday
-event play /at 11am Saturday
+todo sleep
+deadline eat /by 12-12-1234 12pm
+deadline eat /by 12-12-1234 12PM
+event play /start 12-12-1234 12AM /end 12-12-1234 12PM
 list
-done 3
 done 1
-list
 done 2
-list
-done 0
-list
+done 3
 delete 3
 delete 2
 delete 1
