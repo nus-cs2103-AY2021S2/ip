@@ -1,3 +1,7 @@
+package alice.command;
+
+import alice.Alice;
+
 public class CommandEcho extends Command {
 	public CommandEcho(String[] tokens) {
 		super(tokens);

@@ -1,3 +1,7 @@
+package alice.command;
+
+import alice.Alice;
+
 public abstract class Command {
 
 	protected String[] tokens;

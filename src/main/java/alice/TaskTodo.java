@@ -1,3 +1,5 @@
+package alice;
+
 public class TaskTodo extends Task {
 
 	public TaskTodo(String name) {
@@ -13,7 +15,7 @@ public class TaskTodo extends Task {
 	}
 
 	@Override
-	protected TaskTodo clone() {
+	public TaskTodo clone() {
 		return new TaskTodo(this.name, this.done);
 	}
 

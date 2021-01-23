@@ -1,3 +1,5 @@
+package alice;
+
 import java.time.LocalDate;
 
 public class TaskDeadline extends Task {
@@ -19,7 +21,7 @@ public class TaskDeadline extends Task {
 	}
 
 	@Override
-	protected TaskDeadline clone() {
+	public TaskDeadline clone() {
 		return new TaskDeadline(this.name, this.done, this.deadline);
 	}
 

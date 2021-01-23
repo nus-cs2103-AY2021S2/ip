@@ -1,3 +1,5 @@
+package alice;
+
 import java.time.LocalDate;
 
 public class TaskEvent extends Task {
@@ -19,7 +21,7 @@ public class TaskEvent extends Task {
 	}
 
 	@Override
-	protected TaskEvent clone() {
+	public TaskEvent clone() {
 		return new TaskEvent(this.name, this.done, this.time);
 	}
 

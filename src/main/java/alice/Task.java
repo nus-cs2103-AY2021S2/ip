@@ -1,3 +1,5 @@
+package alice;
+
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task implements Cloneable, java.io.Serializable {
@@ -28,7 +30,7 @@ public abstract class Task implements Cloneable, java.io.Serializable {
 	public abstract Task setDone(boolean done);
 
 	@Override
-	protected abstract Task clone();
+    public abstract Task clone();
 
 	@Override
 	public String toString() {

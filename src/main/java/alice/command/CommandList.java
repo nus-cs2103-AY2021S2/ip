@@ -1,3 +1,7 @@
+package alice.command;
+
+import alice.Alice;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 

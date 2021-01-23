@@ -1,3 +1,7 @@
+package alice.command;
+
+import alice.Alice;
+
 public class CommandBye extends Command {
 
 	public CommandBye() {
