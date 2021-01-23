@@ -3,9 +3,17 @@ import java.util.Scanner;
 
 public class Duke {
 
+
+
     private DataHandler storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * Main class for programme to run.
+     *
+     * @param filePath path of file storage data
+     */
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -16,6 +24,10 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Tries to run Duke after filePath, taskList, storage and ui is given
+     */
 
     public void run() throws DukeException {
         ui.showWelcome();
@@ -30,6 +42,13 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Main method to run whole programme
+     *
+     * @param args takes in arguments from user
+     * @throws Exception of Duke (ie EmptyEventException)
+     */
 
     public static void main(String[] args) throws Exception {
         new Duke("data/tasks.txt").run();

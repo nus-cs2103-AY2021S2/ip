@@ -9,27 +9,49 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Stores and Retrieves data from a given .txt file and loads it into TaskList.
+ */
 public class DataHandler {
-    String l;
+    String str;
 
+    /**
+     * Stores filePath.
+     *
+     * @param filePath path where files are stored and retrieved
+     */
     public DataHandler(String filePath) {
-        this.l = filePath;
+        this.str = filePath;
     }
 
+    /**
+     * Saves data back in file in designated filePath.
+     *
+     * @param li TaskList of data to be saved
+     * @throws IOException  If file is corrupt
+     */
     public static void saveData(TaskList li) {
-        //potential problem: saveData doesnt update .txt file when i change done status of item to done
+        //potential problem: saveData doesnt update .txt file
+        // when i change done status of item to done
         try {
             Path currPath = Paths.get("");
             FileWriter fw = new FileWriter(currPath.toAbsolutePath().toString() + "/duke.txt");
             for (int i = 0; i < li.getSize(); i++) {
                 String write = li.getInd(i) + "\n";
                 fw.write(write);
-            } fw.close();
+            }
+            fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
+    /**
+     * Loads data from designated file and converts it to a TaskList.
+     *
+     * @return list TaskList of all loaded data
+     * @throws FileNotFoundException  If file cannot be found in path
+     */
     public static TaskList loadData() throws FileNotFoundException {
         Path currPath = Paths.get("");
         Path dukePath = Paths.get(currPath.toAbsolutePath().toString() + "/duke.txt");
@@ -72,7 +94,7 @@ public class DataHandler {
                         description += deets[t];
                     }
                     taskDetails = arr[1];
-                    arr = taskDetails.split(" by:" , 2);
+                    arr = taskDetails.split(" by:", 2);
                     String by = "";
                     String details = arr[0];
                     arr = details.split("");

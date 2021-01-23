@@ -1,4 +1,16 @@
+/**
+ * Parser class to handle all commands and create the correct command.
+ */
+
 public class Parser {
+
+    /**
+     * Returns command corresponding to input.
+     *
+     * @param input user's input to determine which type of command
+     * @return c Command of the input
+     * @throws InvalidInstructionException If user keys in an invalid input
+     */
     public static Command parse(String input) {
         String type = input.split(" ")[0];
         Command c = null;
@@ -19,9 +31,6 @@ public class Parser {
         } else {
             new InvalidInstructionException();
         }
-
         return c;
-
-
     }
 }

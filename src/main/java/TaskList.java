@@ -2,21 +2,43 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+/**
+ * TaskList class which stores all the tasks user keyed in.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
+
+    /**
+     * Creates TaskList which is essentially an ArrayList<Task>.
+     */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Retrieves the information in the TaskList
+     *
+     * @return taskList ArrayList of task inputs
+     */
     public ArrayList<Task> getList() {
         return this.taskList;
     }
 
+    /**
+     * Returns number of items in taskList.
+     *
+     * @return taskList.size() Number of items in the taskList
+     */
     public int getSize() {
         return this.taskList.size();
     }
 
+    /**
+     * Returns item at a given index.
+     *
+     * @param i Index of item to be retrieved
+     * @return string Details of item retrieved
+     */
     public String getInd(int i) {
         ArrayList<Task> arr = this.getList();
         return arr.get(i).toString();
@@ -24,6 +46,12 @@ public class TaskList {
 
     String line = "------------------------------------------";
 
+    /**
+     * Create new Todo task and add it to taskList.
+     *
+     * @param input Details of Todo task
+     * @throws ArrayIndexOutOfBoundsException If task has no details
+     */
     public void addToDo(String input) { //when user keys in todo abc
         String[] temp = input.split(" ", 2);
         try {
@@ -39,13 +67,23 @@ public class TaskList {
         System.out.println(t);
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         System.out.println(line);
-//        DataHandler.saveData(this.taskList);
     }
 
+    /**
+     * Adds given task to taskList.
+     *
+     * @param input Task to be added
+     */
     public void addToDo(Task input) { //when loading fr data [T][ ] abc
         this.taskList.add(input);
     }
 
+    /**
+     * Create new Deadline task and add it to taskList.
+     *
+     * @param input Details of Deadline task
+     * @throws ArrayIndexOutOfBoundsException If task has no details
+     */
     public void addDeadline(String input) { //when user keys in deadline abc
         String[] temp = input.split(" ", 2);
         try {
@@ -66,13 +104,23 @@ public class TaskList {
         System.out.println(t);
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         System.out.println(line);
-//        DataHandler.saveData(this.taskList);
     }
 
+    /**
+     * Adds given task to taskList.
+     *
+     * @param input Task to be added
+     */
     public void addDeadline(Task input) { //when loading fr data [D][ ] abc
         this.taskList.add(input);
     }
 
+    /**
+     * Create new Event task and add it to taskList.
+     *
+     * @param input Details of Event task
+     * @throws ArrayIndexOutOfBoundsException If task has no details
+     */
     public void addEvent(String input) { ////when user keys in event abc
         String[] temp = input.split(" ", 2);
         try {
@@ -95,6 +143,11 @@ public class TaskList {
         System.out.println(line);
     }
 
+    /**
+     * Adds given task to taskList.
+     *
+     * @param input Task to be added
+     */
     public void addEvent(Task input) { //when loading fr data [E][ ] abc
         this.taskList.add(input);
     }
@@ -106,9 +159,16 @@ public class TaskList {
         this.taskList.get(index).setDone();
         System.out.println(this.taskList.get(index));
         System.out.println(line);
-//        DataHandler.saveData(this.taskList);
     }
 
+    /**
+     * Deletes given task from taskList.
+     *
+     * @param input Task to be deleted
+     * @throws ArrayIndexOutOfBoundsException If event has no details
+     * @throws NumberFormatException If alphabets were given instead of numbers
+     * @throws IndexOutOfBoundsException If task has nothing to be deleted
+     */
     public void delete(String input) {
         String[] temp = input.split(" ", 2);
 
@@ -141,6 +201,10 @@ public class TaskList {
         System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
         System.out.println(line);
     }
+
+    /**
+     * List all items in taskList.
+     */
     public void list() {
         System.out.println(line);
         System.out.println("Here are the tasks in your list:");
