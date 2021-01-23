@@ -57,7 +57,7 @@ public class Controller {
                 addTask(input);
                 break;
             }
-            System.out.println(tasks());
+            update();
         } catch (DukeException e) {
             String output = String.format(INDENT + " %s", e);
             System.out.println(output);
