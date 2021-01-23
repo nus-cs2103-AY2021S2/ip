@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
 
@@ -10,8 +13,15 @@ public class Duke {
 
         Scanner scan = new Scanner(System.in);
         String string = scan.nextLine();
+
         ArrayList<Task> tasks = new ArrayList<>();
         int size = 0;
+
+        try {
+            getDuke(tasks);
+        } catch (DukeException  e) {
+            System.out.println(e);
+        }
 
         while (true) {
 
@@ -60,10 +70,15 @@ public class Duke {
                             throw new DukeException("☹ OOPS!!! There is no such task number.");
                         } else {
                             goneTask(action, num - 1, tasks);
+                            updateDuke(tasks);
                         }
 
                     } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
                         addTask(action, info, tasks);
+                        System.out.println("Got it. I've added this task:\n"
+                                + "  " + tasks.get(size).toString()
+                                + "\nNow you have " + (size + 1) + " tasks in the list.");
+                        updateDuke(tasks);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -131,9 +146,63 @@ public class Duke {
             }
         }
 
-        System.out.println("Got it. I've added this task:\n"
-                    + "  " + tasks.get(size).toString()
-                    + "\nNow you have " + (size + 1) + " tasks in the list.");
+    }
+
+    public static void updateDuke(ArrayList<Task> tasks) throws DukeException {
+
+        try {
+
+            FileWriter fw = new FileWriter("Duke.txt");
+            int size = tasks.size();
+            String string = "", task = "", time = "";
+
+            for (int i = 0; i < size; i++) {
+                string = tasks.get(i).toString();
+                if (string.contains("(")) {
+                    String[] str = string.split("\\(", 2);
+                    task = str[0];
+                    str = str[1].split("\\)", 2);
+                    time = str[0];
+                    fw.write(task + "/" + time + "\n");
+                } else {
+                    fw.write(string + "\n");
+                }
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+        }
+
+    }
+
+    public static void getDuke(ArrayList<Task> tasks) throws DukeException {
+
+        try {
+
+            File f = new File("Duke.txt");
+            Scanner scan = new Scanner(f);
+            String string, info;
+            char action, done;
+
+            while (scan.hasNext()) {
+                string = scan.nextLine();
+                action = string.charAt(1);
+                done = string.charAt(5);
+                String[] str = string.split("] ", 2);
+                info = str[1];
+                if (action == 'T') {
+                    addTask("todo", info, tasks);
+                } else if (action == 'D') {
+                    addTask("deadline", info, tasks);
+                } else if (action == 'E') {
+                    addTask("event", info, tasks);
+                }
+            }
+
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+        }
 
     }
 
