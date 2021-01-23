@@ -1,4 +1,3 @@
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Duke {
+public class Ekud {
     private static final String HORIZONTAL_LINE = "\t____________________________________________________________";
 
     private enum Function {
