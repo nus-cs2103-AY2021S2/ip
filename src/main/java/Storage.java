@@ -52,9 +52,10 @@ public class Storage {
         return ret;
     }
 
-    public void save(final List<Task> tasks) throws DukeException {
+    public void save(final TaskList tasks) throws DukeException {
+        List<Task> list = tasks.export();
         try (FileWriter fw = new FileWriter(filePath, false)) {
-            writeToFile(fw, tasks);
+            writeToFile(fw, list);
         } catch (IOException e) {
             throw new DukeException("TaskSaver.save: IOException encountered");
         }

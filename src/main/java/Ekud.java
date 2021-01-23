@@ -189,7 +189,7 @@ public class Ekud {
             System.out.println(HORIZONTAL_LINE);
             try {
                 active = processInput(tasks, function, details);
-                storage.save(tasks.export());
+                storage.save(tasks);
             } catch (DukeException e) {
                 printLine(e.toString());
             }
