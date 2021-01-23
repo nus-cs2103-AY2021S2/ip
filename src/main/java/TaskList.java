@@ -20,11 +20,7 @@ public class TaskList {
         fw.close();
     }
 
-    public void greeting(){
-        System.out.println(line);
-        System.out.println("I am Donald Trump, the Greatest American President ever\nWhat can I do for you?");
-        System.out.println(line);
-    }
+
 
     public void addTask(Task task) throws IOException {
         String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";

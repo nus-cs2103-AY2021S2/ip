@@ -53,7 +53,13 @@ public class Parser {
         while(scanner.hasNext()){
             try{
                 String input = scanner.nextLine();
-                this.parseUserCommand(input);
+                if(input.equals("bye")){
+                    System.out.println("\t" + Ui.line + "\n\tBye. Need to go now since I am impeached twice\n\t" + Ui.line);
+                    break;
+                }
+                else{
+                    this.parseUserCommand(input);
+                }
 
             } catch (DukeException  | IOException e) {
                 System.out.println(e.getMessage());

@@ -4,8 +4,12 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
-    public static String line = "------------------------------------------------------";
+
+
+
     public static void main(String[] args) throws IOException {
+        Ui ui = new Ui();
+        ui.greeting();
         if (!Files.exists(Paths.get("data"))) {
             Files.createDirectory(Paths.get("data"));
         }
