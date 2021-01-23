@@ -78,6 +78,9 @@ public class Parser {
                 return;
             }
             LocalDate taskDate = parseTaskDate(input);
+            if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDate == null) {
+                return;
+            }
             AddCommand.execute(taskType, taskName, taskDate);
 
         //program informs user of invalid input
@@ -170,14 +173,20 @@ public class Parser {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
-        LocalDate taskDate;
+        LocalDate taskDate = null;
 
-        if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
-            taskDate = LocalDate.parse(taskDetails.split("/by", 2)[1].trim());
-        } else if (taskType.toUpperCase().equals(Cmd.EVENT.toString())) {
-            taskDate = LocalDate.parse(taskDetails.split("/at", 2)[1].trim());
-        } else {
-            taskDate = null;
+        try {
+            if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
+                taskDate = LocalDate.parse(taskDetails.split("/by", 2)[1].trim());
+            } else if (taskType.toUpperCase().equals(Cmd.EVENT.toString())) {
+                taskDate = LocalDate.parse(taskDetails.split("/at", 2)[1].trim());
+            }
+        } catch (IndexOutOfBoundsException e) {
+            if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
+                Ui.showError("Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
+            } else {
+                Ui.showError("Invalid date specified, please adhere to the format: /at YYYY-MM-DD");
+            }
         }
         return taskDate;
     }
