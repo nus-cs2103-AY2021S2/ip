@@ -24,7 +24,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    
 ## Message regarding the ordering of tags
 
-Hi Prof ,TAs and friends,
+Hi Prof, TAs and friends,
 
 If you happen to be wandering why are the ordering of tags for the first 10 tags (speciafically level-2, level-4, A-textUI-test) messy and not at an incremental way, please let me explain.
 
