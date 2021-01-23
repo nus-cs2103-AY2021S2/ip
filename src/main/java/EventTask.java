@@ -2,8 +2,12 @@ public class EventTask extends Task {
     protected String date;
 
     public EventTask(String description, String date) {
-        super(description);
+        super(description, 'E');
         this.date = date;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
     @Override
