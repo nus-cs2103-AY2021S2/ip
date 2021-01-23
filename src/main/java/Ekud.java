@@ -30,14 +30,14 @@ public class Ekud {
             Map.entry("event", Function.EVENT)
     );
 
-    private static void printTasks(Vector<Task> tasks) {
+    private static void printTasks(TaskList tasks) throws InvalidTaskIndexException {
         printLine("Go do work! You need finish these things:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("\t %d. %s%n", i + 1, tasks.get(i).toString());
         }
     }
 
-    private static void printTasks(Vector<Task> tasks, String dateString) throws DukeException {
+    private static void printTasks(TaskList tasks, String dateString) throws DukeException {
         LocalDate date;
         try {
             date = LocalDate.parse(dateString.trim(), DateTimeFormatter.ofPattern("d/M/yyyy"));
@@ -67,13 +67,13 @@ public class Ekud {
         System.out.println("\t " + line);
     }
 
-    private static String getTasksLeftString(Vector<Task> tasks) {
+    private static String getTasksLeftString(TaskList tasks) {
         return String.format("Eh you got %d task%s in total leh", tasks.size(), tasks.size() == 1 ? "" : "s");
     }
 
-    private static void postAddTaskSummary(Vector<Task> tasks) {
+    private static void postAddTaskSummary(TaskList tasks) {
         printLine("Okay I remember for you liao:");
-        printLine("\t" + tasks.lastElement());
+        printLine("\t" + tasks.last());
         printLine(getTasksLeftString(tasks));
     }
 
@@ -112,7 +112,7 @@ public class Ekud {
         return ret;
     }
 
-    private static boolean processInput(Vector<Task> tasks, Function func, String details) throws DukeException {
+    private static boolean processInput(TaskList tasks, Function func, String details) throws DukeException {
         boolean active = true;
         switch (func) {
             case LIST:  // list all stored tasks
@@ -171,10 +171,10 @@ public class Ekud {
 
         // store whatever is given until bye is detected
         Scanner input = new Scanner(System.in);
-        Storage saver = new Storage("tasks.txt");
-        Vector<Task> tasks;
+        Storage storage = new Storage("tasks.txt");
+        TaskList tasks;
         try {
-            tasks = saver.restore();
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             printLine(e.toString());
             return;
@@ -189,7 +189,7 @@ public class Ekud {
             System.out.println(HORIZONTAL_LINE);
             try {
                 active = processInput(tasks, function, details);
-                saver.save(tasks);
+                storage.save(tasks.export());
             } catch (DukeException e) {
                 printLine(e.toString());
             }

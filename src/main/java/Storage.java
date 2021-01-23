@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -17,7 +18,7 @@ public class Storage {
         file = new File(filePath);
     }
 
-    public Vector<Task> restore() throws DukeException {
+    public Vector<Task> load() throws DukeException {
         Vector<Task> ret = new Vector<>();
         Scanner s;
         try {
@@ -51,7 +52,7 @@ public class Storage {
         return ret;
     }
 
-    public void save(final Vector<Task> tasks) throws DukeException {
+    public void save(final List<Task> tasks) throws DukeException {
         try (FileWriter fw = new FileWriter(filePath, false)) {
             writeToFile(fw, tasks);
         } catch (IOException e) {
@@ -59,7 +60,7 @@ public class Storage {
         }
     }
 
-    private void writeToFile(FileWriter fw, Vector<Task> tasks) throws IOException {
+    private void writeToFile(FileWriter fw, List<Task> tasks) throws IOException {
         for (Task task : tasks) {
             LinkedList<String> list = task.export();
             fw.write(String.join("|", list) + System.lineSeparator());
