@@ -32,77 +32,7 @@ public class UI {
     static TaskList list = new TaskList();
 
     static void printError(DukeException e) {
-        System.out.print(horizontalLine);
         System.out.print(e.getMessage() + "\n");
-        System.out.println(horizontalLine);
-    }
-
-    static void printTask(String command, CommandType type) {
-        System.out.print(horizontalLine);
-        try {
-            Task t = CommandParser.convertToTask(command, type);
-            list.addJob(t);
-            System.out.print("Task added:\n" + StringParser.newLiner(t.toString(), LENGTH_OF_LINE)
-                    + "Now you have " + list.getSize()
-                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
-        } catch (DukeException e) {
-            System.out.print(e.getMessage() + "\n");
-        }
-        System.out.print(horizontalLine);
-    }
-
-    static void doneTask(String command) {
-        System.out.print(horizontalLine);
-        int index;
-        index = Integer.parseInt(command.substring(5)) - 1;
-        if (index < list.getSize() && index >= 0) {
-            Task currTask = list.getJob(index);
-            currTask.markAsDone();
-            list.replaceJob(index, currTask);
-            System.out.print("This task is marked as done: \n"
-                    + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE));
-        } else {
-            System.out.print("No such task in the list\n");
-        }
-        System.out.print(horizontalLine);
-    }
-
-    static void deleteTask(String command) {
-        System.out.print(horizontalLine);
-        int index;
-        index = Integer.parseInt(command.substring(7)) - 1;
-        if (index < list.getSize() && index >= 0) {
-            Task currTask = list.getJob(index);
-            list.deleteJob(index);
-            System.out.print("This task is deleted: \n"
-                    + StringParser.newLiner(currTask.toString(), LENGTH_OF_LINE)
-                    + "Now you have " + list.getSize()
-                    + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
-        } else {
-            System.out.print("No such task in the list\n");
-        }
-        System.out.print(horizontalLine);
-    }
-
-    static void printList() {
-        System.out.print(horizontalLine);
-        StringBuilder resultStr = new StringBuilder();
-        for (int i = 0; i < list.getSize(); i++) {
-            resultStr.append(StringParser.newLiner((i + 1) + "."
-                    + list.getJob(i).toString(), LENGTH_OF_LINE));
-        }
-        if (list.getSize() == 0) {
-            System.out.print("List is empty\n");
-        } else {
-            System.out.print(resultStr.toString());
-        }
-        System.out.print(horizontalLine);
-    }
-
-    static void printInvalid() {
-        System.out.print(horizontalLine);
-        System.out.print("Invalid command\n");
-        System.out.print(horizontalLine);
     }
 
     static void loadAndSayHello() {
@@ -116,9 +46,9 @@ public class UI {
     }
 
     public static void mainLoop() {
-        boolean loop = true;
+        boolean isExit = false;
         String commandStr;
-        CommandType command;
+        Command command;
 
         try {
             Storage.init();
@@ -128,41 +58,23 @@ public class UI {
 
         loadAndSayHello();
 
-        while (loop) {
+        while (!isExit) {
             commandStr = sc.nextLine();
 
+            System.out.print(horizontalLine);
             try {
-                command = CommandParser.getType(commandStr);
+                command = StringParser.parseCommand(commandStr, list);
+                command.executeAndPrint(list, LENGTH_OF_LINE);
+                isExit = command.isExit();
+                if (!isExit) {
+                    System.out.print(horizontalLine);
+                }
             } catch (DukeException e) {
                 printError(e);
-                continue;
-            }
-
-
-
-            switch (command) {
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                printTask(commandStr, command);
-                break;
-            case LIST:
-                printList();
-                break;
-            case DONE:
-                doneTask(commandStr);
-                break;
-            case DELETE:
-                deleteTask(commandStr);
-                break;
-            case BYE:
-                loop = false;
-                saveAndGoodBye();
-                break;
-            case OTHER:
-                printInvalid();
+                System.out.print(horizontalLine);
             }
         }
+        saveAndGoodBye();
     }
 
 }

@@ -1,3 +1,4 @@
 public abstract class Command {
-    abstract void execute();
+    abstract void executeAndPrint(TaskList list, int length) throws DukeException;
+    abstract boolean isExit();
 }

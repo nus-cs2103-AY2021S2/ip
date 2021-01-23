@@ -22,9 +22,9 @@ public class Storage {
     }
 
     public static TaskList loadToList() {
-        TaskList list = new TaskList(0);
+        TaskList list = new TaskList();
         while (Objects.requireNonNull(sc).hasNextLine()) {
-            list.addJob(CommandParser.loadData(sc.nextLine()));
+            list.addJob(StringParser.loadData(sc.nextLine()));
         }
         return list;
     }
@@ -32,7 +32,7 @@ public class Storage {
     public static void writeToData(TaskList list) {
         String saveData = "";
         for (int i = 0; i < list.getSize(); i++) {
-            saveData = saveData.concat(CommandParser.saveData(list.getJob(i)));
+            saveData = saveData.concat(StringParser.saveData(list.getJob(i)));
         }
         try {
             writer = new FileWriter(file);
