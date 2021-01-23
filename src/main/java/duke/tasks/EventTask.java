@@ -7,16 +7,19 @@ public class EventTask extends Task{
 
     public EventTask(String description, String timing) {
         super(description, "[E]");
+
         this.timing = LocalDate.parse(timing);
     }
 
     public String getTiming() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         return "(at: " + this.timing.format(format) + ")";
     }
 
     public String getUnformattedTiming() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         return this.timing.format(format);
     }
 
@@ -35,7 +38,6 @@ public class EventTask extends Task{
 
     @Override
     public String toString() {
-
         return "       " + this.type + super.toString().trim() + " " + getTiming();
     }
 }

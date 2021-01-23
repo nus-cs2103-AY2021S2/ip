@@ -12,11 +12,13 @@ public class DeadlineTask extends Task{
 
     public String getDeadline() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         return "(by: " + this.deadline.format(format) + ")";
     }
 
     public String getUnformattedDeadline() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         return this.deadline.format(format);
     }
     public LocalDate getDeadlineAsLocalDate() {

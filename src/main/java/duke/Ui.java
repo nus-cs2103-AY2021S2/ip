@@ -5,14 +5,13 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Ui {
-    Scanner sc;
 
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+    public Ui() {}
 
     public String read() {
+        Scanner sc = new Scanner(System.in);
         String action = sc.nextLine();
+
         return action;
     }
 
@@ -59,7 +58,9 @@ public class Ui {
 
     public void printStored(TaskList list) {
         List<Task> taskList = list.getList();
+
         System.out.println("     Here are the tasks in your list:");
+
         for (int i = 0; i < list.getList().size(); i++) {
             Task task = taskList.get(i);
             System.out.println("      " + (i + 1) + "." + task.toString().trim());

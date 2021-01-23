@@ -4,7 +4,7 @@ import duke.exceptions.AddMissingInputException;
 import duke.exceptions.DukeIncompleteInputException;
 
 public class Parser {
-    String [] parsedAction;
+    private String [] parsedAction = null;
 
     public Parser() {
         parsedAction = null;

@@ -9,15 +9,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
-    private FileWriter writer;
-    private File file;
-    private Scanner sc;
+    private FileWriter writer = null;
+    private File file = null;
+    private Scanner sc = null;
 
     public Storage(String filepath) throws DukeOnlyIOException {
 
         try {
             this.file = new File(filepath);
             sc = new Scanner(this.file);
+
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
@@ -30,6 +31,7 @@ public class Storage {
 
     public ArrayList<String> load() {
         ArrayList<String> list = new ArrayList<>();
+
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
             list.add(nextLine);
@@ -40,9 +42,12 @@ public class Storage {
 
     public void write(TaskList list) throws DukeOnlyIOException {
         try {
+
             this.writer = new FileWriter(file, false);
             this.writer.write(list.getListToWrite());
+
             this.writer.close();
+
         } catch (IOException err) {
             throw new DukeOnlyIOException();
         }
