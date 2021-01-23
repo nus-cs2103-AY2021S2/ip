@@ -56,13 +56,13 @@ public class Ui {
     public void showTasks(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
-            System.out.println("     " +
-                    num + ": " + tasks.get(i));
+            System.out.println("     "
+                    + num + ": " + tasks.get(i));
         }
 
         if (tasks.size() == 0) {
-            System.out.println("     " +
-                    "--- No Tasks Found ---");
+            System.out.println("     "
+                     + "--- No Tasks Found ---");
         }
     }
 }
