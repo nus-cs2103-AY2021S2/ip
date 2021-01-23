@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
 /**
- * {@code blarb.Blarb} is the chat bot in used in the {@code Main} program.
+ * {@code Blarb} is the chat bot in used in the {@code Main} program.
  */
 public class Blarb {
     private final Tasklist tasklist;
@@ -14,7 +14,9 @@ public class Blarb {
     private final Storage storage;
 
     /**
-     * Initializes blarb.Blarb.
+     * Initializes Blarb with a given storage path.
+     *
+     * @param filePath The storage file path
      */
     public Blarb(String filePath) {
         this.filePath = filePath;
@@ -33,6 +35,9 @@ public class Blarb {
         }
     }
 
+    /**
+     * Initializes Blarb.
+     */
     public Blarb() {
         this("data/tasklist.txt");
     }
@@ -46,7 +51,7 @@ public class Blarb {
     }
 
     /**
-     * Parses and determines course of action for Blurb.
+     * Determines course of action for Blurb.
      *
      * @param input The inputted command.
      * @return A boolean value that shows the availability for the next command intake.

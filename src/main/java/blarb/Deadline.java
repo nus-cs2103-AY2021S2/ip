@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * {@code blarb.Deadline} is a blarb.Task that has to be done before a specific date/time.
+ * {@code Deadline} is a Task that has to be done before a specific date/time.
  *
  * @see Task
  */
@@ -13,7 +13,7 @@ class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Constructs a new uncompleted {@code blarb.Deadline}.
+     * Constructs a new uncompleted {@code Deadline}.
      *
      * @param description The name of the task.
      * @throws DateTimeParseException User inputs date in wrong style.
@@ -24,7 +24,7 @@ class Deadline extends Task {
     }
 
     /**
-     * Converts {@code blarb.Deadline} into string format to be stored in file.
+     * Converts {@code Deadline} into string format to be stored in file.
      *
      * @return String format to be stored in file.
      */
@@ -33,9 +33,9 @@ class Deadline extends Task {
     }
 
     /**
-     * String representation of the blarb.Deadline.
+     * String representation of the Deadline.
      *
-     * @return blarb.Deadline in check list form.
+     * @return Deadline in check list form.
      */
     @Override
     public String toString() {

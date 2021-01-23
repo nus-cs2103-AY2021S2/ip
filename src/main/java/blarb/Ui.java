@@ -2,23 +2,42 @@ package blarb;
 
 import java.util.Scanner;
 
+/**
+ * {@code Ui} is the user interface.
+ */
 class Ui {
     private final Scanner sc;
     private final boolean active;
 
+    /**
+     * Initializes a new User Interface.
+     */
     Ui() {
         sc = new Scanner(System.in);
         active = true;
     }
 
+    /**
+     * Reads in the user input.
+     *
+     * @return String interpretation of the user input.
+     */
     public String read() {
         return sc.nextLine();
     }
 
+    /**
+     * Checks if the UI is available.
+     *
+     * @return The availability of the UI.
+     */
     public boolean isAvailable() {
         return active && sc.hasNextLine();
     }
 
+    /**
+     * Prints the logo of the chatbot.
+     */
     public void rollCredits() {
         String logo = " ____            _      ____   ____\n" +
                 "|    \\ |        / \\    |    \\ |    \\\n" +
@@ -28,6 +47,9 @@ class Ui {
         System.out.println("You are now in the presence of\n" + logo);
     }
 
+    /**
+     * Bids goodbye to the user.
+     */
     public void adios() {
         System.out.println("Hasta la vida, baby.");
     }

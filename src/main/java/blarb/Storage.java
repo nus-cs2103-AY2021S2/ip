@@ -8,6 +8,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * {@code Storage} reads and writes the storage file for the task list.
+ */
 class Storage {
     private final String filePath;
 
@@ -42,6 +45,12 @@ class Storage {
         fw.close();
     }
 
+    /**
+     * Reads the storage file and loads the tasks into a list.
+     *
+     * @return A {@code List} of the converted {@code Task}s.
+     * @throws IOException Issues with accessing the file.
+     */
     public List<Task> load() throws IOException {
         List<Task> list = new ArrayList<>(100);
         File file = new File(filePath);

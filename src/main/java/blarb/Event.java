@@ -9,7 +9,7 @@ class Event extends Task {
     private final String at;
 
     /**
-     * Constructs a new uncompleted {@code blarb.Event}.
+     * Constructs a new uncompleted {@code Event}.
      *
      * @param description The name of the task.
      */
@@ -19,7 +19,7 @@ class Event extends Task {
     }
 
     /**
-     * Converts {@code blarb.Deadline} into string format to be stored in file.
+     * Converts {@code Event} into string format to be stored in file.
      *
      * @return String format to be stored in file.
      */
@@ -28,9 +28,9 @@ class Event extends Task {
     }
 
     /**
-     * String representation of the blarb.Event.
+     * String representation of the Event.
      *
-     * @return blarb.Event in check list form.
+     * @return Event in check list form.
      */
     @Override
     public String toString() {

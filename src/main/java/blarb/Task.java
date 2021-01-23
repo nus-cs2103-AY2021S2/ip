@@ -1,14 +1,14 @@
 package blarb;
 
 /**
- * {@code blarb.Task} contains an action and its completion status.
+ * {@code Task} contains an action and its completion status.
  */
 class Task {
     private final String description;
     private boolean isDone;
 
     /**
-     * Constructs a new uncompleted  {@code blarb.Task}.
+     * Constructs a new uncompleted  {@code Task}.
      *
      * @param description The name of the task.
      */
@@ -29,7 +29,7 @@ class Task {
     }
 
     /**
-     * Converts {@code blarb.Task} into string format to be stored in file.
+     * Converts {@code Task} into string format to be stored in file.
      *
      * @return String format to be stored in file.
      */

@@ -1,7 +1,7 @@
 package blarb;
 
 /**
- * {@code blarb.Command} is an enumeration of the possible commands.
+ * {@code Command} is an enumeration of the possible commands.
  */
 enum Command {
     DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
