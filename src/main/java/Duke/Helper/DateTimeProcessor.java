@@ -15,15 +15,28 @@ public class DateTimeProcessor {
             if (time.isEmpty()) return "";
             else if (time.length() != 3 && time.length() != 4) return null;
             int timeInt = Integer.parseInt(time);
+            if (timeInt < 0) {
+                return null;
+            }
             int hour = timeInt / 100;
             int minute = timeInt % 100;
-            String type;
-            if (hour >= 12) type = "pm";
-            else type = "am";
-            hour = hour % 12;
-            if (hour == 0) hour = 12;
-            String padding = (minute < 10) ? "0" : "";
-            return hour + ":" + padding + minute + type;
+            if (hour == 24){
+                if (minute == 0){
+                    return "12:00am";
+                } else {
+                    return null;
+                }
+            } else if (hour > 24 || minute > 59){
+                return null;
+            } else {
+                String type;
+                if (hour >= 12) type = "pm";
+                else type = "am";
+                hour = hour % 12;
+                if (hour == 0) hour = 12;
+                String padding = (minute < 10) ? "0" : "";
+                return hour + ":" + padding + minute + type;
+            }
         } catch (NumberFormatException e){
             return null;
         }
@@ -63,5 +76,10 @@ public class DateTimeProcessor {
         String time = processTime(array[1]);
         if (date == null || time == null) return "Invalid format for date and time.";
         return (time.isEmpty()) ? date : date + " " + time;
+    }
+
+    public static void main(String[] args) {
+        DateTimeProcessor processor = new DateTimeProcessor("");
+        System.out.println(processor.getFullDateTime());
     }
 }

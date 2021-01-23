@@ -8,8 +8,7 @@ public class Parser {
         if (description.isEmpty()){
             throw new EmptyTaskException("todo");
         }
-        Todo todo = new Todo(description);
-        return todo;
+        return new Todo(description);
     }
 
     public Deadline parseDeadline(String command) throws InvalidTask, EmptyTaskException {
