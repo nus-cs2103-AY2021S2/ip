@@ -1,5 +1,3 @@
-import jdk.jfr.Event;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +76,7 @@ public class Duke {
                 break;
             case DONE:
                 int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-                tasks.get(doneIndex).markCompleted();
+                tasks.get(doneIndex).markComplete();
                 printDoneMessage(tasks.get(doneIndex));
                 break;
             case TODO:
