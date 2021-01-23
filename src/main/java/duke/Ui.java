@@ -62,7 +62,7 @@ public class Ui {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
-            formatInChatBox("There is no duke.task yet\n");
+            formatInChatBox("There is no task\n");
             return ;
         }
         StringBuffer buf = new StringBuffer();
@@ -78,8 +78,28 @@ public class Ui {
      * @param taskList the list of tasks.
      * @param task the task that is added.
      */
+    public static void showMatchingResult(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getTasks();
+        int n = tasks.size();
+        if (n == 0) {
+            formatInChatBox("There is no matching task\n");
+            return ;
+        }
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < n; i++)
+            buf.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        String res = new String(buf);
+        formatInChatBox("Here are the matching tasks in your list:\n" + res);
+    }
+
+    /**
+     * Informs the user the addition is successful.
+     *
+     * @param taskList the list of the tasks.
+     * @param task the task to be added.
+     */
     public static void showSuccessfulAdd(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've added this duke.task:" + '\n'
+        formatInChatBox("Got it. I've added this task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }

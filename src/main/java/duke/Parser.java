@@ -55,6 +55,7 @@ public class Parser {
     private static ToDo parseToDo(String input) throws ParseException {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.\n");
+        if (input.charAt(0) == ' ') input = input.substring(1);
         return new ToDo(input);
     }
 
@@ -72,6 +73,7 @@ public class Parser {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of a deadline cannot be empty.\n");
         if (input.contains("/by ")) {
+            if (input.charAt(0) == ' ') input = input.substring(1);
             int endOfDescription = input.indexOf("/by ");
             String description = input.substring(0, endOfDescription);
             String deadline = input.substring(endOfDescription + 4);
@@ -96,6 +98,7 @@ public class Parser {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of an event cannot be empty.\n");
         if (input.contains("/at ")) {
+            if (input.charAt(0) == ' ') input = input.substring(1);
             int endOfDescription = input.indexOf("/at ");
             String description = input.substring(0, endOfDescription);
             String time = input.substring(endOfDescription + 4);

@@ -38,42 +38,45 @@ public class Momo {
             try {
                 Command command = Parser.parseCommand(input);
                 switch (command) {
-                    case BYE:
-                        Ui.showExitUi();
-                        return;
-                    case LIST:
-                        Ui.showList(this.tasks);
-                        break;
-                    case DONE:
-                        int i = sc.nextInt();
-                        try {
-                            Ui.showSuccessfulMark(tasks.mark(i));
-                        } catch (IndexOutOfBoundsException e) {
-                            Ui.showIndexOutOfBoundsError(tasks);
-                        }
-                        break;
-                    case DELETE:
-                        int j = sc.nextInt();
-                        try {
-                            Task taskToBeDeleted = tasks.delete(j);
-                            Ui.showSuccessfulDelete(tasks, taskToBeDeleted);
-                        } catch (IndexOutOfBoundsException e) {
-                            Ui.showIndexOutOfBoundsError(tasks);
-                        }
+                case BYE:
+                    Ui.showExitUi();
+                    return;
+                case LIST:
+                    Ui.showList(this.tasks);
+                    break;
+                case DONE:
+                    int i = sc.nextInt();
+                    try {
+                        Ui.showSuccessfulMark(tasks.mark(i));
+                    } catch (IndexOutOfBoundsException e) {
+                        Ui.showIndexOutOfBoundsError(tasks);
+                    }
+                    break;
+                case DELETE:
+                    int j = sc.nextInt();
+                    try {
+                        Task taskToBeDeleted = tasks.delete(j);
+                        Ui.showSuccessfulDelete(tasks, taskToBeDeleted);
+                    } catch (IndexOutOfBoundsException e) {
+                        Ui.showIndexOutOfBoundsError(tasks);
+                    }
+                    storage.save(tasks);
+                    break;
+                case FIND:
+                    String keyword = sc.next();
+                    Ui.showMatchingResult(tasks.find(keyword));
+                default:
+                    String nextInput = sc.nextLine();
+                    try {
+                        Task taskToBeAdded = Parser.parseDescription(command, nextInput);
+                        tasks.add(taskToBeAdded);
+                        Ui.showSuccessfulAdd(tasks, taskToBeAdded);
                         storage.save(tasks);
-                        break;
-                    default:
-                        String nextInput = sc.nextLine();
-                        try {
-                            Task taskToBeAdded = Parser.parseDescription(command, nextInput);
-                            tasks.add(taskToBeAdded);
-                            Ui.showSuccessfulAdd(tasks, taskToBeAdded);
-                            storage.save(tasks);
-                        } catch (ParseException e) {
-                            Ui.formatInChatBox(e.getMsgDes());
-                        } catch (DateTimeParseException e) {
-                            Ui.showDateParseError();
-                        }
+                    } catch (ParseException e) {
+                        Ui.formatInChatBox(e.getMsgDes());
+                    } catch (DateTimeParseException e) {
+                        Ui.showDateParseError();
+                    }
                 }
             } catch (IllegalArgumentException e) {
                 Ui.showGeneralError();
