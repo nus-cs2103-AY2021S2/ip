@@ -60,11 +60,15 @@ public class Ui {
      *  @param tasks ArrayList of tasks to be printed to console.
      */
     public void showTasks(ArrayList<Task> tasks) {
-        System.out.println("    Listing all duke.tasks: ");
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
             System.out.println("     "
                     + num + ": " + tasks.get(i));
+        }
+
+        if (tasks.size() == 0) {
+            System.out.println("     "
+                     + "--- No Tasks Found ---");
         }
     }
 }

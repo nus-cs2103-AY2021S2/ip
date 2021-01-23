@@ -21,6 +21,7 @@ public class ListCommand extends Command {
      *  @param st Storage Object from Duke.
      */
     public void execute(Ui ui, TaskManager tm, Storage st) {
+        ui.println("Listing all tasks: ");
         ui.showTasks(tm.getTasks());
     }
 }

@@ -71,6 +71,16 @@ public class TaskManager {
         return tasks;
     }
 
+    public ArrayList<Task> findTasks(String s) {
+        ArrayList<Task> output = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getName().contains(s)) {
+                output.add(task);
+            }
+        }
+        return output;
+    }
+
     public int getSize() {
         return tasks.size();
     }

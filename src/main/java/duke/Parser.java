@@ -10,6 +10,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeException;
@@ -21,7 +22,7 @@ import duke.exception.DukeUnknownCommandException;
 
 public class Parser {
     private static String[] acceptedCommands = {
-        "todo", "deadline", "event", "bye", "list", "done", "delete"
+        "todo", "deadline", "event", "bye", "list", "done", "delete", "find"
     };
 
     private static boolean verifyCommand(String c) {
@@ -99,6 +100,8 @@ public class Parser {
                 args = extractFlag(params[0], params[1], "/at");
                 date = processDate(args[1]);
                 return new EventCommand(args[0], date);
+            case "find":
+                return new FindCommand(params[1]);
             default:
                 throw new DukeUnknownCommandException();
             }
