@@ -1,9 +1,9 @@
 list
 todo read book
 event
-event project meeting /at Mon 2-4pm
+event project meeting /at 2021-02-02T12:30
 deadline return book
-deadline return book /by Sunday
+deadline return book /by 2021-03-01
 list
 done 1
 done 4

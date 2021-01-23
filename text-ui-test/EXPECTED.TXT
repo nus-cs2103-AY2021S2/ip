@@ -14,7 +14,7 @@ error: not enough information to create task!
 
 
 okay, added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Feb 2 2021 12:30)
 you now have a total of 2 tasks.
 
 
@@ -22,13 +22,13 @@ error: not enough information to create task!
 
 
 okay, added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Mar 1 2021)
 you now have a total of 3 tasks.
 
 
 1. [T][ ] read book
-2. [E][ ] project meeting (at: Mon 2-4pm)
-3. [D][ ] return book (by: Sunday)
+2. [E][ ] project meeting (at: Feb 2 2021 12:30)
+3. [D][ ] return book (by: Mar 1 2021)
 
 
 okay, this task has been marked as done:
@@ -39,21 +39,21 @@ error: task does not exist!
 
 
 okay, this task has been marked as done:
-3. [D][X] return book (by: Sunday)
+3. [D][X] return book (by: Mar 1 2021)
 
 
 1. [T][X] read book
-2. [E][ ] project meeting (at: Mon 2-4pm)
-3. [D][X] return book (by: Sunday)
+2. [E][ ] project meeting (at: Feb 2 2021 12:30)
+3. [D][X] return book (by: Mar 1 2021)
 
 
 okay, deleted this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Feb 2 2021 12:30)
 you now have a total of 2 tasks.
 
 
 okay, deleted this task:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Mar 1 2021)
 you now have a total of 1 tasks.
 
 

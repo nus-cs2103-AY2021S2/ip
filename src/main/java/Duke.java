@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Duke {
@@ -30,7 +32,7 @@ public class Duke {
             }
             int temp = userInput.indexOf('/') - 1;
             Task currentTask = new Deadline(userInput.substring(9, temp),
-                    userInput.substring(temp + 4));
+                    LocalDate.parse(userInput.substring(temp + 5)));
             Response.addTask(currentTask);
         } else if (userInput.contains("event")) {
             if (userInput.length() <= 5 || !userInput.contains("/")) {
@@ -38,7 +40,7 @@ public class Duke {
             }
             int temp = userInput.indexOf('/') - 1;
             Task currentTask = new Event(userInput.substring(6, temp),
-                    userInput.substring(temp + 4));
+                    LocalDateTime.parse(userInput.substring(temp + 5)));
             Response.addTask(currentTask);
         } else if (userInput.contains("delete")) {
             int taskNumber = Integer.parseInt(userInput.substring(7));
