@@ -40,17 +40,23 @@ public class Chatbot {
                         break;
                     case DONE:
                         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
-                            throw new DukeException("The description of done cannot be empty.\n");
+                            throw new DukeException("The description of done cannot be empty.");
                         }
                         tempOrder = Integer.parseInt(taskTypeSplit[1]);
                         taskList.markDone(tempOrder - 1);
                         break;
                     case DELETE:
                         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
-                            throw new DukeException("The description of delete cannot be empty.\n");
+                            throw new DukeException("The description of delete cannot be empty.");
                         }
                         tempOrder = Integer.parseInt(taskTypeSplit[1]);
                         taskList.delete(tempOrder - 1);
+                        break;
+                    case FIND:
+                        if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
+                            throw new DukeException("The description of find cannot be empty.");
+                        }
+                        taskList.findTask(taskTypeSplit[1]);
                         break;
                     case TODO:
                         if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {

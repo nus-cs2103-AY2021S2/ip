@@ -8,6 +8,8 @@ public class Parser {
             return Command.DONE;
         } else if (taskString[0].toLowerCase().contains("delete")) {
             return Command.DELETE;
+        } else if (taskString[0].toLowerCase().equals("find")) {
+            return Command.FIND;
         } else if (taskString[0].toLowerCase().equals("todo")) {
             return Command.TODO;
         } else if (taskString[0].toLowerCase().equals("deadline")) {

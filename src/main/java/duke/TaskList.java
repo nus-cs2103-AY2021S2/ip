@@ -65,7 +65,7 @@ public class TaskList {
     public void printTaskList() {
         try {
             if (taskList.size() == 0) {
-                throw new DukeException("There's currently no any taskList.");
+                throw new DukeException("There's currently no task in the list.");
             }
             String taskString = "";
             taskString += "\t  " + (1) + "." + taskList.get(0).toString();
@@ -73,6 +73,40 @@ public class TaskList {
                 taskString += "\n\t  " + (i + 1) + "." + taskList.get(i).toString();
             }
             ui.printFormatMessage(taskString);
+        } catch (DukeException ex) {
+            ui.printFormatMessage(ex.toString());
+        }
+
+    }
+
+    public void printSpecifiedTasks(List<Task> list) {
+        if (list.size() == 0) {
+            return;
+        }
+        String taskString = "";
+        taskString += "\t  " + (1) + "." + list.get(0).toString();
+        for (int i = 1; i < list.size(); i++) {
+            taskString += "\n\t  " + (i + 1) + "." + list.get(i).toString();
+        }
+        ui.printFormatMessage(taskString);
+    }
+
+    public void findTask(String target) {
+        try {
+            if (taskList.size() == 0) {
+                throw new DukeException("There's currently no task in the list.");
+            }
+            List<Task> targetTasks = new ArrayList<>();
+            for (Task t : taskList) {
+                if (t.getName().contains(target)) {
+                    targetTasks.add(t);
+                }
+            }
+            if (targetTasks.size() != 0) {
+                printSpecifiedTasks(targetTasks);
+            } else {
+                throw new DukeException("There's currently no task name with \"" + target + "\".");
+            }
         } catch (DukeException ex) {
             ui.printFormatMessage(ex.toString());
         }
