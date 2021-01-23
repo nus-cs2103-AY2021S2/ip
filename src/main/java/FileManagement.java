@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Handles file save/load operations.
  */
 public class FileManagement {
-    public File file;
+    protected File file;
 
     /**
      * Creates a new FileManagement instance.
@@ -27,8 +27,11 @@ public class FileManagement {
      * @throws IOException If error arises during file creation process.
      */
     public List<String> loadTaskFile() throws IOException {
+        //Create file if not available and scan the file
         this.file.createNewFile();
         Scanner fileScanner = new Scanner(this.file);
+
+        //Obtain task lines
         List<String> fileLines = new ArrayList<String>();
         while (fileScanner.hasNext()) {
             String nextTask = fileScanner.nextLine();
@@ -43,6 +46,7 @@ public class FileManagement {
      */
     public void saveTasksToFile(List<String> fileTaskList) {
         try {
+            //Write the tasks to file
             FileWriter fw = new FileWriter(this.file);
             for (int i = 0; i < fileTaskList.size(); i++) {
                 fw.write(String.format("%s\n", fileTaskList.get(i)));

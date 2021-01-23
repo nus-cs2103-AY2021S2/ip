@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Processes inputs given by the user.
  */
 public class UserInput {
-    public Scanner sc;
+    protected Scanner sc;
 
     /**
      * Creates a new UserInput instance.

@@ -13,8 +13,8 @@ import java.time.LocalDate;
  * Handles intermediary operations between TaskManagement and other classes.
  */
 public class TaskParser {
-    public TaskManagement taskManagement;
-    public static final int TASK_UNDONE = 0;
+    protected TaskManagement taskManagement;
+    protected static final int TASK_UNDONE = 0;
 
     /**
      * Creates new TaskParser object.
@@ -30,12 +30,12 @@ public class TaskParser {
      */
     public boolean parseIsDoneInt(int isDone) {
         switch(isDone) {
-            case 0:
-                return false;
-            case 1:
-                return true;
-            default:
-                throw new InputMismatchException("Int has to be 0 or 1. Not stonks!");
+        case 0:
+            return false;
+        case 1:
+            return true;
+        default:
+            throw new InputMismatchException("Int has to be 0 or 1. Not stonks!");
         }
     }
 
@@ -46,24 +46,28 @@ public class TaskParser {
      */
     public Pair<String, List<Task>> parseFileLines(List<String> fileLines) {
         for (int i = 0; i < fileLines.size(); i++) {
+            //Parse strings
             String[] taskComponents = fileLines.get(i).split("/split/");
             String taskType = taskComponents[0];
             int taskDone = Integer.valueOf(taskComponents[1]);
             String description = taskComponents[2];
+
+            //Convert to Task objects
             switch(taskType) {
-                case "T":
-                    this.addToDo(description, taskDone);
-                    break;
-                case "D":
-                    this.addDeadline(description, taskDone);
-                    break;
-                case "E":
-                    this.addEvent(description, taskDone);
-                    break;
-                default:
-                    throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!");
+            case "T":
+                this.addToDo(description, taskDone);
+                break;
+            case "D":
+                this.addDeadline(description, taskDone);
+                break;
+            case "E":
+                this.addEvent(description, taskDone);
+                break;
+            default:
+                throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!");
             }
         }
+        //Obtain list for printing
         List<Task> taskList = this.taskManagement.getTaskList();
         return new Pair<String, List<Task>>("fileTasksAdded", taskList);
     }
@@ -87,20 +91,24 @@ public class TaskParser {
             throw new InputMismatchException("Empty " + command + " task description. Not stonks!");
         } else {
             Task addedTask;
+
+            //Convert to Task object
             switch(command) {
-                case "todo":
-                    addedTask = this.addToDo(taskDescription, this.TASK_UNDONE);
-                    break;
-                case "deadline":
-                    addedTask = this.addDeadline(taskDescription, this.TASK_UNDONE);
-                    break;
-                case "event":
-                    addedTask = this.addEvent(taskDescription, this.TASK_UNDONE);
-                    break;
-                default:
-                    throw new InputMismatchException("Somehow, a wrong command was entered. " +
-                            "Command has to be task type. Not stonks!");
+            case "todo":
+                addedTask = this.addToDo(taskDescription, this.TASK_UNDONE);
+                break;
+            case "deadline":
+                addedTask = this.addDeadline(taskDescription, this.TASK_UNDONE);
+                break;
+            case "event":
+                addedTask = this.addEvent(taskDescription, this.TASK_UNDONE);
+                break;
+            default:
+                throw new InputMismatchException("Somehow, a wrong command was entered. " +
+                        "Command has to be task type. Not stonks!");
             }
+
+            //Output pair for printing
             int numberOfTasks = this.getNumberOfTasks();
             return new Pair<String, Pair<Task, Integer>>("userTaskAdded",
                     new Pair<Task, Integer>(addedTask, numberOfTasks));
@@ -122,7 +130,10 @@ public class TaskParser {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty deadline task description. Not stonks!");
         } else {
+            //Split the description into description and deadline
             String[] descriptionSplitArray = taskDescription.split("/by");
+
+            //Create Deadline task
             try {
                 DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
                         LocalDate.parse(descriptionSplitArray[1].trim()), this.parseIsDoneInt(isDone));
@@ -138,7 +149,10 @@ public class TaskParser {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty event task description. Not stonks!");
         } else {
+            //Split the description into description and event
             String[] descriptionSplitArray = taskDescription.split("/at");
+
+            //Create Event task
             try {
                 EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
                         LocalDate.parse(descriptionSplitArray[1].trim()), this.parseIsDoneInt(isDone));

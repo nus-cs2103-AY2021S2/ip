@@ -6,8 +6,8 @@ package surrealchat;
  * @param <U> Generic type for second object.
  */
 public class Pair<T,U> {
-    public final T firstItem;
-    public final U secondItem;
+    protected final T firstItem;
+    protected final U secondItem;
 
     /**
      * Creates a new Pair instance.

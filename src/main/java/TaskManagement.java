@@ -6,7 +6,7 @@ import java.util.List;
  * Handles storing of tasks.
  */
 public class TaskManagement {
-    public List<Task> taskList;
+    protected List<Task> taskList;
 
     /**
      * Creates instance of TaskManagement object.

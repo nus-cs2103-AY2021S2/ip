@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * Handles printing of output.
  */
 public class UserOutput {
-    public boolean verboseFlag;
+    protected boolean verboseFlag;
 
     /**
      * Creates new UserOutput instance.
@@ -28,14 +28,14 @@ public class UserOutput {
      */
     public String spellTaskType(String taskType) {
         switch(taskType) {
-            case "T":
-                return "todo";
-            case "D":
-                return "deadline";
-            case "E":
-                return "event";
-            default:
-                throw new InputMismatchException("The task type in task is invalid. Not Stonks!");
+        case "T":
+            return "todo";
+        case "D":
+            return "deadline";
+        case "E":
+            return "event";
+        default:
+            throw new InputMismatchException("The task type in task is invalid. Not Stonks!");
         }
     }
 
@@ -47,57 +47,57 @@ public class UserOutput {
     public <U> void printOutput(Pair<String, U> pair) {
         String printType = pair.getFirstItem();
         switch(printType) {
-            case "userTaskAdded":
-                Pair<Task, Integer> intermediatePair;
-                if (pair.getSecondItem() instanceof Pair) {
-                    intermediatePair = (Pair)pair.getSecondItem();
-                    this.printUserTaskAdded(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
-            case "fileTasksAdded":
-                List<Task> taskList;
-                if (pair.getSecondItem() instanceof List) {
-                    taskList = (List)pair.getSecondItem();
-                    this.printFileTasksAdded(taskList);
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
-            case "markDone":
-                Task task;
-                if (pair.getSecondItem() instanceof Task) {
-                    task = (Task)pair.getSecondItem();
-                    this.printTaskDone(task);
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
-            case "markUndone":
-                if (pair.getSecondItem() instanceof Task) {
-                    task = (Task)pair.getSecondItem();
-                    this.printTaskUndone(task);
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
-            case "deleteTask":
-                if (pair.getSecondItem() instanceof Pair) {
-                    intermediatePair = (Pair)pair.getSecondItem();
-                    this.printTaskDelete(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
-            case "printTaskList":
-                if (pair.getSecondItem() instanceof List) {
-                    taskList = (List)pair.getSecondItem();
-                    this.printTaskList(taskList);
-                    break;
-                } else {
-                    throw new ClassCastException("Invalid class casting. Not stonks!");
-                }
+        case "userTaskAdded":
+            Pair<Task, Integer> intermediatePair;
+            if (pair.getSecondItem() instanceof Pair) {
+                intermediatePair = (Pair)pair.getSecondItem();
+                this.printUserTaskAdded(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "fileTasksAdded":
+            List<Task> taskList;
+            if (pair.getSecondItem() instanceof List) {
+                taskList = (List)pair.getSecondItem();
+                this.printFileTasksAdded(taskList);
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "markDone":
+            Task task;
+            if (pair.getSecondItem() instanceof Task) {
+                task = (Task)pair.getSecondItem();
+                this.printTaskDone(task);
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "markUndone":
+            if (pair.getSecondItem() instanceof Task) {
+                task = (Task)pair.getSecondItem();
+                this.printTaskUndone(task);
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "deleteTask":
+            if (pair.getSecondItem() instanceof Pair) {
+                intermediatePair = (Pair)pair.getSecondItem();
+                this.printTaskDelete(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "printTaskList":
+            if (pair.getSecondItem() instanceof List) {
+                taskList = (List)pair.getSecondItem();
+                this.printTaskList(taskList);
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
         }
     }
 
@@ -107,14 +107,14 @@ public class UserOutput {
      */
     public void printEasterEggOutput(String easterEgg) {
         switch(easterEgg){
-            case "orang":
-                this.printOrang();
-                break;
-            case "vegetal":
-                this.printVegetal();
-                break;
-            default:
-                throw new InputMismatchException("Somehow, the easter egg input does not match. Not stonks!");
+        case "orang":
+            this.printOrang();
+            break;
+        case "vegetal":
+            this.printVegetal();
+            break;
+        default:
+            throw new InputMismatchException("Somehow, the easter egg input does not match. Not stonks!");
         }
     }
 
