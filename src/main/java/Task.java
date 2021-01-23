@@ -1,4 +1,5 @@
-import org.apache.commons.lang3.ArrayUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Skeleton class for all tasks.
@@ -12,57 +13,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    enum TaskTypes  {
-        TODO("T"), EVENT("E"), DEADLINE("D");
-        private final String shortForm;
-
-        private TaskTypes(String shortForm) {
-            this.shortForm = shortForm;
-        }
-
-        public String getShortForm() {
-            return this.shortForm;
-        }
-    };
-
     private static String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
 
     private static String DEADLINE_REGEX = "^\\[D\\] \\[(?: |X)\\] ..* \\(by: ..*\\)$";
 
     private static String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
-
-    private static boolean isValidTaskType(String input) {
-        if (input.length() != 3) {
-            return false;
-        }
-        boolean isValidTaskType = false;
-        try {
-            //Check if brackets exist
-            if (String.valueOf(input.charAt(0)).equals("[")
-                    && String.valueOf(input.charAt(2)).equals("]")) {
-                //Check if task type is either E, T, D
-                for (TaskTypes type : TaskTypes.values()) {
-                    isValidTaskType = isValidTaskType || type.getShortForm().equals(String.valueOf(input.charAt(1)));
-                }
-            } else {
-                return false;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
-        return isValidTaskType;
-    }
-
-    private static boolean isProperDoneBrackets(String input) {
-        try {
-            return String.valueOf(input.charAt(0)).equals("[")
-                    && String.valueOf(input.charAt(2)).equals("]")
-                    && (String.valueOf(input.charAt(1)).equals(" ")
-                    || String.valueOf(input.charAt(1)).equals("X"));
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
-    }
 
     /**
      * Parses input string as a Task.
@@ -70,45 +25,39 @@ public abstract class Task {
      * @return Task object corresponding to input string.
      */
     public static Task stringToTask(String input) throws TaskException {
-        String[] inputSplitBySpace = input.trim().split("\\s+");
-        if (inputSplitBySpace.length < 3) {
-            throw new TaskException("Too few fields provided in input.");
+        //Check if it is a valid task first
+        Pattern toDoPattern = Pattern.compile(TODO_REGEX);
+        Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
+        Pattern eventPattern = Pattern.compile(EVENT_REGEX);
+        if (toDoPattern.matcher(input).find()) {
+            String[] inputSplitBySpaces = input.trim().split("\\s+");
+            String taskDescription = Helper.join(inputSplitBySpaces, 1, inputSplitBySpaces.length - 1);
+            return new ToDo(taskDescription);
         } else {
-            if (isValidTaskType(inputSplitBySpace[0])) {
-                if (isProperDoneBrackets(inputSplitBySpace[1])) {
-                    String taskType = String.valueOf(inputSplitBySpace[0].charAt(1));
-                    String taskDescription;
-                    String dueDate;
-                    if (!taskType.equals("T")) {
-                        //Check if task description exists.
-                        int byIndex = Helper.arrayIndexOf(inputSplitBySpace, "/by");
-                        int atIndex = Helper.arrayIndexOf(inputSplitBySpace, "/at");
-                        if (!(byIndex == 2 || atIndex == 2)) {
-                            int byOrAtIndex = byIndex == -1 ? atIndex - 1: byIndex - 1;
-                            if (atIndex == -2) {
-                                throw new TaskException("Missing /at or /by");
-                            }
-                            if (byOrAtIndex == inputSplitBySpace.length - 1) {
-                                throw new TaskException("Missing date for Deadline/Event");
-                            }
-                            taskDescription = Helper.join(inputSplitBySpace, 2, byOrAtIndex);
-
-
-                        } else {
-                            throw new TaskException("Task description is empty");
-                        }
-                    } else {
-
-                    }
-
+            boolean matchDeadline = deadlinePattern.matcher(input).find();
+            boolean matchEvent = eventPattern.matcher(input).find();
+            if (matchDeadline || matchEvent) {
+                String[] inputSplitBySpaces = input.trim().split("\\s+");
+                if (matchDeadline) {
+                    //Index of /by
+                    int byIndex = Helper.arrayIndexOf(inputSplitBySpaces, "/by");
+                    String taskDescription = Helper.join(inputSplitBySpaces, 2, byIndex - 1);
+                    String dueDate = Helper.join(inputSplitBySpaces, byIndex + 1,
+                            inputSplitBySpaces.length - 1);
+                    return new Deadline(taskDescription, dueDate);
                 } else {
-                    throw new TaskException("Invalid done brackets");
+                    //Index of /at
+                    int atIndex = Helper.arrayIndexOf(inputSplitBySpaces, "/at");
+                    String taskDescription = Helper.join(inputSplitBySpaces, 2, atIndex - 1);
+                    String eventDate = Helper.join(inputSplitBySpaces, atIndex + 1,
+                            inputSplitBySpaces.length - 1);
+                    return new Event(taskDescription, eventDate);
                 }
             } else {
-                throw new TaskException("Invalid task type.");
+                throw new TaskException("Invalid task entry.");
             }
         }
-    }
+     }
 
     void done() {
         this.isDone = true;
