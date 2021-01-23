@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * contains the task list e.g., it has operations to add/delete tasks in the list.
+ */
 public class TaskList {
     private final List<Task> taskList;
     private final Ui ui = new Ui();
@@ -16,9 +19,8 @@ public class TaskList {
     }
 
     /**
-     * Add more task.
-     *
-     * @param newTask Append the newTask to the end of the task list.
+     * Add new task in the task list.
+     * @param newTask the new task to be added
      */
     public void addTask(Task newTask) {
         taskList.add(newTask);
@@ -26,9 +28,8 @@ public class TaskList {
     }
 
     /**
-     * Delete the task.
-     *
-     * @param order the order of the task
+     * Delete a task in the task list.
+     * @param order the order of the task to be deleted
      */
     public void delete(int order) {
         try {
@@ -43,9 +44,8 @@ public class TaskList {
     }
 
     /**
-     * Mark the task as done.
-     *
-     * @param order the order of the task
+     * Mark a task in the task list as done.
+     * @param order the order of the task to be marked as done
      */
     public void markDone(int order) {
         try {
@@ -62,6 +62,9 @@ public class TaskList {
 
     }
 
+    /**
+     * Print out all the tasks in task list currently.
+     */
     public void printTaskList() {
         try {
             if (taskList.size() == 0) {

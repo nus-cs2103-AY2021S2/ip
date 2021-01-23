@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private final String filePath;
 
@@ -16,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Read the data of tasks from previous session's file as TaskList.
+     * If there's no file yet, create an empty file, and return empty list.
+     * @return the list of tasks from previous session
+     */
     public TaskList readFile() {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -54,9 +61,13 @@ public class Storage {
         return new TaskList(taskList);
     }
 
-    public void updateFile(List<Task> taskList) {
+    /**
+     * Update the file with newest task data, write the updated tasks into the file.
+     * @param taskList the updated task list
+     */
+    public void updateFile(TaskList taskList) {
         String updatedString = "";
-        for (Task t : taskList) {
+        for (Task t : taskList.getTaskList()) {
             updatedString += t.getType();
             updatedString += " | ";
             updatedString += (t.getDone() ? 1 : 0);

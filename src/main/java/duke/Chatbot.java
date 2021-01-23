@@ -2,11 +2,10 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 /**
- * A duke.Chatbot that provides todo-list function for users.
+ * A Duke chatbot that provides todo-list function for users.
  */
 public class Chatbot {
     private final TaskList taskList;
@@ -21,7 +20,8 @@ public class Chatbot {
 
 
     /**
-     * Execute the chat bot.
+     * Execute the chat bot. Keep looping and asking for user input.
+     * The function will be terminated once hit "bye".
      */
     public void execute() {
         Scanner sc = new Scanner(System.in);
@@ -95,7 +95,7 @@ public class Chatbot {
 
     }
 
-    public List<Task> getTaskList() {
-        return taskList.getTaskList();
+    public TaskList getTaskList() {
+        return taskList;
     }
 }

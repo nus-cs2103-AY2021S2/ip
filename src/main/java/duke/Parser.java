@@ -1,6 +1,14 @@
 package duke;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parse user input into the corresponding command.
+     * @param taskString user input
+     * @return corresponding command (enum)
+     */
     public Command parse(String[] taskString) {
         if (taskString[0].toLowerCase().equals("list")) {
             return Command.LIST;
