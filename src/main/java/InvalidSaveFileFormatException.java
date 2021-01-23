@@ -1,5 +1,6 @@
-public class InvalidSaveFileFormatException extends Exception {
+//public class InvalidSaveFileFormatException extends Exception {
+public class InvalidSaveFileFormatException extends DukeException {
     public InvalidSaveFileFormatException() {
-        super("Invalid content format in save file.");
+        super("\tInvalid content format in save file.\t");
     }
 }
