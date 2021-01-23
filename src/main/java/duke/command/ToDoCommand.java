@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.TaskManager;
+import duke.Ui;
 import duke.exception.DukeException;
 
 public class ToDoCommand extends Command {

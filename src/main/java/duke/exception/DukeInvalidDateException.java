@@ -2,15 +2,15 @@ package duke.exception;
 
 public class DukeInvalidDateException extends DukeException {
     /**
-     *  DukeInvalidDateFormatException constructor.
+     * DukeInvalidDateFormatException constructor.
      */
     public DukeInvalidDateException() {
     }
 
     @Override
     public String getMessage() {
-        return "Invalid date format provided. " +
-                "Accepted format: ddmmyyyy.";
+        return "Invalid date format provided. "
+                + "Accepted format: ddmmyyyy.";
     }
 
     @Override

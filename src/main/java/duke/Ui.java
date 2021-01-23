@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
     private Scanner sc;
@@ -13,7 +13,7 @@ public class Ui {
     }
 
     /**
-     *  Greeter for duke.Duke
+     * Greeter for duke.Duke
      */
     public void showWelcome() {
         String logo = "     ____        _        \n"
@@ -33,8 +33,9 @@ public class Ui {
     public void showByeBye() {
         System.out.println("      Thanks for using me!");
     }
+
     /**
-     *  LineBreak for duke.Duke
+     * LineBreak for duke.Duke
      */
     public void showLine() {
         System.out.println("    ---------------------------------------");

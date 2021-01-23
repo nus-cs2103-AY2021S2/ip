@@ -1,5 +1,9 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import duke.exception.DukeCorruptFileException;
 import duke.exception.DukeIndexRangeException;
 import duke.exception.DukeTaskAlreadyDoneException;
@@ -7,10 +11,6 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 /**
  *  duke.TaskManager manages all duke.tasks given to duke.Duke.
@@ -81,9 +81,9 @@ public class TaskManager {
     }
 
     /**
-     *  Method to mark specified task done.
+     * Method to mark specified task done.
      *
-     *	@param x duke.tasks.Task index.
+     * @param x duke.tasks.Task index.
      *
      */
     public Task markTaskAsDone(int x) throws DukeIndexRangeException, DukeTaskAlreadyDoneException {
