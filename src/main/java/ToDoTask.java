@@ -1,7 +1,12 @@
 public class ToDoTask extends Task {
+    private static final String IDENTIFIER = "T";
 
     public ToDoTask(String name) {
-        super(name);
+        super(IDENTIFIER, name);
+    }
+
+    public ToDoTask(String name, boolean isCompleted) {
+        super(IDENTIFIER, name, isCompleted);
     }
 
     @Override

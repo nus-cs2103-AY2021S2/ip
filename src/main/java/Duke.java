@@ -4,11 +4,11 @@ public class Duke {
     private final Scanner sc = new Scanner(System.in);
     private final List<Task> database = new ArrayList<>();
     private State state;
-    
+
     public Duke() {
         this.state = State.ONLINE;
     }
-    
+
     public void run() {
         // Print greeting
         printGreeting();
@@ -19,7 +19,7 @@ public class Duke {
         // Print exit message
         printExitMessage();
     }
-    
+
     private void runLoop() {
         while (isOnline()) {
             try {
@@ -33,11 +33,11 @@ public class Duke {
             }
         }
     }
-    
+
     private boolean isOnline() {
         return this.state == State.ONLINE;
     }
-    
+
     private void off() {
         this.state = State.OFF;
     }
@@ -65,31 +65,31 @@ public class Duke {
         }
         System.out.println();
     }
-    
+
     private void executeCommand(Command command, String arguments) {
         try {
             printHorizontalLine();
             switch (command) {
-                case BYE:
-                    off();
-                    break;
-                case LIST:
-                    printAllTasks();
-                    break;
-                case DONE:
-                    markTaskAsDone(arguments);
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    createTask(command, arguments);
-                    break;
-                case DELETE:
-                    deleteTask(arguments);
-                    break;
-                case HELP:
-                    printHelp();
-                    break;
+            case BYE:
+                off();
+                break;
+            case LIST:
+                printAllTasks();
+                break;
+            case DONE:
+                markTaskAsDone(arguments);
+                break;
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                createTask(command, arguments);
+                break;
+            case DELETE:
+                deleteTask(arguments);
+                break;
+            case HELP:
+                printHelp();
+                break;
             }
         } catch (NoDescriptionException | InvalidDescriptionException ex) {
             System.out.println(ex.getMessage());
@@ -113,15 +113,15 @@ public class Duke {
         }
         Task task = null;
         switch (taskType) {
-            case TODO:
-                task = createToDoTask(taskDescription.strip());
-                break;
-            case DEADLINE:
-                task = createDeadlineTask(taskDescription.strip());
-                break;
-            case EVENT:
-                task = createEventTask(taskDescription.strip());
-                break;
+        case TODO:
+            task = createToDoTask(taskDescription.strip());
+            break;
+        case DEADLINE:
+            task = createDeadlineTask(taskDescription.strip());
+            break;
+        case EVENT:
+            task = createEventTask(taskDescription.strip());
+            break;
         }
         if (task != null) {
             addTask(task);
@@ -146,7 +146,7 @@ public class Duke {
         return new EventTask(eventTaskName, eventTime);
     }
 
-    private void markTaskAsDone(String arguments) throws NoDescriptionException, 
+    private void markTaskAsDone(String arguments) throws NoDescriptionException,
             InvalidDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("Please indicate a task number to be marked as done.");
@@ -179,7 +179,7 @@ public class Duke {
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
 
-    private void deleteTask(String arguments) throws NoDescriptionException, 
+    private void deleteTask(String arguments) throws NoDescriptionException,
             InvalidDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("Please indicate a task number to be deleted.");
@@ -201,7 +201,7 @@ public class Duke {
         System.out.println("  " + task.toString());
         System.out.printf("Now you have %d tasks in your list.\n", database.size());
     }
-    
+
     private void printHelp() {
         System.out.println("Here are the list of available commands:");
         System.out.println("BYE:\nExit the program\nUsage: 'bye'");
