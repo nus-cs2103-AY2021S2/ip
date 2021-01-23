@@ -1,13 +1,15 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     public static String line = "------------------------------------------------------";
 
-    public static void handleInput(Manager manager) {
+    public static void main(String[] args) {
+        List<Task> ls = new ArrayList<>();
+        Manager manager = new Manager();
+        manager.greeting();
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             try{
@@ -64,20 +66,6 @@ public class Duke {
 
 
         }
-
-    }
-
-    public static void main(String[] args) throws IOException {
-        Manager manager = new Manager();
-        manager.greeting();
-        handleInput(manager);
-        if (!Files.exists(Paths.get("data"))) {
-            Files.createDirectory(Paths.get("data"));
-        }
-        else if (!Files.exists(Paths.get("data/Duke.txt"))) {
-            Files.createFile(Paths.get("data/Duke.txt"));
-        }
-
 
     }
 }
