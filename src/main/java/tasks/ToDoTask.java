@@ -1,11 +1,9 @@
 package tasks;
 
 public class ToDoTask extends Task{
-    private String type;
 
     public ToDoTask(String description) {
-        super(description);
-        this.type = "[T]";
+        super(description, "[T]");
     }
 
     @Override

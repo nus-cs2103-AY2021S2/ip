@@ -100,7 +100,29 @@ public class TaskHandler {
         String result = "";
         for (int i = 0; i < inputList.size(); i++) {
             Task task = inputList.get(i);
-            result += "      " + (i + 1) + "." + task.toString().trim() + "\n";
+            char type = task.getType();
+            String status = task.getStatusIcon().equals(" ") ? "0" : "1";
+            String description = task.getDescription();
+            String date = "";
+
+            if (type == 'D') {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+                date = deadlineTask.getDeadline();
+                int separator = date.indexOf(":");
+                date = date.substring(separator + 1, date.length() - 1);
+            } else if (type == 'E') {
+                EventTask eventTask = (EventTask) task;
+                date = eventTask.getTiming();
+                int separator = date.indexOf(":");
+                date = date.substring(separator + 1, date.length() - 1);
+            }
+
+            result += type + " | " + status +  " | " + description;
+            if (date.equals("")) {
+                result += "\n";
+            } else {
+                result += " |" + date + "\n";
+            }
         }
 
         return result;

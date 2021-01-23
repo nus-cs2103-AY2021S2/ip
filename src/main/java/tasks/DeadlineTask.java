@@ -1,12 +1,10 @@
 package tasks;
 
 public class DeadlineTask extends Task{
-    private String type;
     private String deadline;
 
     public DeadlineTask(String description, String deadline) {
-        super(description);
-        this.type = "[D]";
+        super(description, "[D]");
         this.deadline = deadline;
     }
 

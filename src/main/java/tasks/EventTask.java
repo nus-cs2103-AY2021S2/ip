@@ -1,12 +1,10 @@
 package tasks;
 
 public class EventTask extends Task{
-    private String type;
     private String timing;
 
     public EventTask(String description, String timing) {
-        super(description);
-        this.type = "[E]";
+        super(description, "[E]");
         this.timing = timing;
     }
 
@@ -15,6 +13,10 @@ public class EventTask extends Task{
         String at = this.timing.substring(0, splitIndex);
         String time = this.timing.substring(splitIndex);
         return "(" + at + ":" + time + ")";
+    }
+
+    public char getType() {
+        return type.charAt(1);
     }
 
     @Override
