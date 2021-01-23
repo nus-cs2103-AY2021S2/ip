@@ -1,5 +1,6 @@
-public class InvalidTimeDurationException extends Exception {
+//public class InvalidTimeDurationException extends Exception {
+public class InvalidTimeDurationException extends DukeException {
     public InvalidTimeDurationException() {
-        super("Please enter a valid start and end time duration (start time < end time).");
+        super("\tPlease enter a valid start and end time duration\n\t(start time < end time).\n");
     }
 }
