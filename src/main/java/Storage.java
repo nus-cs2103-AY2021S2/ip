@@ -14,20 +14,21 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public static void loadTaskList(String filePath) throws FileNotFoundException {
+    public ArrayList<String> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String task = s.nextLine();
             storedList.add(task);
         }
+        return storedList;
     }
 
-    public static void storeTaskList(String filePath) {
+    public static void store(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for(int i = 0; i < Duke.taskList.size(); i++) {
-                fw.write(Duke.taskList.get(i) + " \r\n");
+            for(int i = 0; i < TaskList.taskList.size(); i++) {
+                fw.write(TaskList.taskList.get(i) + " \r\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -36,3 +37,4 @@ public class Storage {
     }
 
 }
+
