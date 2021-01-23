@@ -3,6 +3,12 @@ public class Task {
     protected boolean isDone;
     protected char type;
 
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+        this.type = ' ';
+    }
+
     public Task(String description, char type) {
         this.description = description;
         this.isDone = false;
@@ -19,18 +25,8 @@ public class Task {
         this.isDone = true;
     }
 
-    //Return type of task
-    public char getType() {
-        return this.type;
-    }
-
-    //Return completion status
-    public boolean isDone() {
-        return this.isDone;
-    }
-
-    public String getDescription() {
-        return this.description;
+    public String getSaveString() {
+        return this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.description;
     }
 
     @Override

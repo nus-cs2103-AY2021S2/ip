@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     static Scanner sc = new Scanner(System.in);
@@ -81,10 +85,12 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n"
                                     + "\tPlease provide description for your task.\n"
                                     + "\t____________________________________________________________\n");
-                } catch (DateNotFoundException e) {
+                } catch (DateTimeNotFoundException | StringIndexOutOfBoundsException e) {
                     System.out.println("\t____________________________________________________________\n"
-                                    + "\tPlease enter a valid deadline (after \"/by\") for Deadline Tasks\n"
-                                    + "\tor time (after \"/at\") for Event Tasks.\n"
+                                    + "\tPlease enter the date (DD/MM/YYYY) with optional\n"
+                                    + "\ttime (in 24 hours format) after \"/by\" for Deadline Tasks\n"
+                                    + "\tor date with optional start and end time after \"/at\" \n"
+                                    + "\tfor Event Tasks.\n"
                                     + "\t____________________________________________________________\n");
                 } catch (InvalidTaskSelectionException e) {
                     System.out.println("\t____________________________________________________________\n"
@@ -93,6 +99,15 @@ public class Duke {
                 } catch (IOException e) {
                     System.out.println("\t____________________________________________________________\n"
                             + "\tError happened while trying to edit save file.\n"
+                            + "\t____________________________________________________________\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                            + "\tPlease enter in DD/MM/YYYY format (eg. 02/04/2000) for dates\n"
+                            + "\tand in 24 hour format (eg. 1830) for times.\n"
+                            + "\t____________________________________________________________\n");
+                } catch (InvalidTimeDurationException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                            + "\tPlease enter a valid start and end time duration\n\t(start time < end time).\n"
                             + "\t____________________________________________________________\n");
                 }
             }
@@ -152,10 +167,11 @@ public class Duke {
     //Add different type of tasks in list.
     public static void addToList(List<Task> list, String input, String[] check)
             throws CommandNotValidException, DescriptionNotFoundException,
-                    DateNotFoundException, IOException {
+                DateTimeNotFoundException, DateTimeParseException, IOException,
+                    StringIndexOutOfBoundsException, InvalidTimeDurationException {
         Task temp;
         String description;
-        String date;
+        String dateTime;
 
         if (check[0].equals("todo") || check[0].equals("deadline") || check[0].equals("event")) {
             if (check.length == 1) {
@@ -165,27 +181,72 @@ public class Duke {
                 description = input.substring(5).trim();
                 temp = new TodoTask(description);
             } else if (check[0].equals("deadline")) {
-                int index = input.lastIndexOf("/by");
+                int index = input.indexOf("/by");
                 if (index == -1) {
-                    throw new DateNotFoundException();
+                    throw new DateTimeNotFoundException();
                 }
-                description = input.substring(9, index - 1);
-                date = input.substring(index + 3).trim();
-                if (date.isEmpty()) {
-                    throw new DateNotFoundException();
+
+                description = input.substring(9, index).trim();
+                if (description.isEmpty()) {
+                    throw new DescriptionNotFoundException();
                 }
-                temp = new DeadlineTask(description, date);
+
+                dateTime = input.substring(index + 3).trim();
+                if (dateTime.isEmpty()) {
+                    throw new DateTimeNotFoundException();
+                }
+
+                String dateString = dateTime.substring(0, 10);
+                LocalDate date = LocalDate.
+                        parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String timeString = dateTime.substring(10).trim();
+                if (timeString.isEmpty()) {
+                    temp = new DeadlineTask(description, date);
+                } else {
+                    LocalTime time = LocalTime.
+                            parse(dateTime.substring(10).trim(), DateTimeFormatter.ofPattern("HHmm"));
+                    temp = new DeadlineTask(description, date, time);
+                }
+                //System.out.println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                //System.out.println(time.format(DateTimeFormatter.ofPattern("hh:mm a")));
             } else {
-                int index = input.lastIndexOf("/at");
+                int index = input.indexOf("/at");
                 if (index == -1) {
-                    throw new DateNotFoundException();
+                    throw new DateTimeNotFoundException();
                 }
-                description = input.substring(6, index - 1);
-                date = input.substring(index + 3).trim();
-                if (date.isEmpty()) {
-                    throw new DateNotFoundException();
+
+                description = input.substring(6, index).trim();
+                if (description.isEmpty()) {
+                    throw new DescriptionNotFoundException();
                 }
-                temp = new EventTask(description, date);
+
+                dateTime = input.substring(index + 3).trim();
+                if (dateTime.isEmpty()) {
+                    throw new DateTimeNotFoundException();
+                }
+
+                String dateString = dateTime.substring(0, 10);
+                LocalDate date = LocalDate.
+                        parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String timeString = dateTime.substring(10).trim();
+                if (timeString.isEmpty()) {
+                    temp = new EventTask(description, date);
+                } else {
+                    String startTimeString = timeString.substring(0, 4);
+                    LocalTime startTime = LocalTime.
+                            parse(startTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                    String endTimeString = timeString.substring(4).trim();
+                    if (endTimeString.isEmpty()) {
+                        temp = new EventTask(description, date, startTime);
+                    } else {
+                        LocalTime endTime = LocalTime.
+                                parse(endTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        if (endTime.compareTo(startTime) < 0) {
+                            throw new InvalidTimeDurationException();
+                        }
+                        temp = new EventTask(description, date, startTime, endTime);
+                    }
+                }
             }
         } else {
             throw new CommandNotValidException();
@@ -245,11 +306,12 @@ public class Duke {
                 if (taskString.length() < 9) {
                     throw new InvalidSaveFileFormatException();
                 }
+
                 Task task;
                 char taskType = taskString.charAt(0);
                 char taskCompletion = taskString.charAt(4);
                 String taskDescription;
-                String taskDate;
+                String taskDateTime;
 
                 if (taskCompletion != '1' && taskCompletion != '0') {
                     throw new InvalidSaveFileFormatException();
@@ -259,27 +321,65 @@ public class Duke {
                     taskDescription = taskString.substring(8);
                     task = new TodoTask(taskDescription);
                 } else if (taskType == 'D') {
-                    int dateIndex = taskString.substring(8).indexOf('|');
-                    if (dateIndex == -1) {
+                    int dateTimeIndex = taskString.substring(8).indexOf('|');
+                    if (dateTimeIndex == -1) {
                         throw new InvalidSaveFileFormatException();
                     }
-                    taskDescription = taskString.substring(8, dateIndex + 8).trim();
-                    taskDate = taskString.substring(dateIndex + 9).trim();
-                    if (taskDate.isEmpty()) {
+
+                    taskDescription = taskString.substring(8, dateTimeIndex + 8).trim();
+                    taskDateTime = taskString.substring(dateTimeIndex + 9).trim();
+                    if (taskDateTime.isEmpty()) {
                         throw new InvalidSaveFileFormatException();
                     }
-                    task = new DeadlineTask(taskDescription, taskDate);
+
+                    int timeIndex = taskDateTime.indexOf('|');
+                    if (timeIndex == -1) {
+                        LocalDate taskDate = LocalDate.parse(taskDateTime);
+                        task = new DeadlineTask(taskDescription, taskDate);
+                    } else {
+                        String taskDateString = taskDateTime.substring(0, timeIndex).trim();
+                        LocalDate taskDate = LocalDate.parse(taskDateString);
+                        String taskTimeString = taskDateTime.substring(timeIndex + 1).trim();
+                        LocalTime taskTime = LocalTime.
+                                parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        task = new DeadlineTask(taskDescription, taskDate, taskTime);
+                    }
                 } else if (taskType == 'E') {
                     int dateIndex = taskString.substring(8).indexOf('|');
                     if (dateIndex == -1) {
                         throw new InvalidSaveFileFormatException();
                     }
+
                     taskDescription = taskString.substring(8, dateIndex + 8).trim();
-                    taskDate = taskString.substring(dateIndex + 9).trim();
-                    if (taskDate.isEmpty()) {
+                    taskDateTime = taskString.substring(dateIndex + 9).trim();
+                    if (taskDateTime.isEmpty()) {
                         throw new InvalidSaveFileFormatException();
                     }
-                    task = new EventTask(taskDescription, taskDate);
+
+                    int timeIndex = taskDateTime.indexOf('|');
+                    if (timeIndex == -1) {
+                        LocalDate taskDate = LocalDate.parse(taskDateTime);
+                        task = new EventTask(taskDescription, taskDate);
+                    } else {
+                        String taskDateString = taskDateTime.substring(0, timeIndex).trim();
+                        LocalDate taskDate = LocalDate.parse(taskDateString);
+                        String taskTimeString = taskDateTime.substring(timeIndex + 1).trim();
+
+                        int endTimeIndex = taskTimeString.indexOf('|');
+                        if (endTimeIndex == -1) {
+                            LocalTime taskStartTime = LocalTime.
+                                    parse(taskTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                            task = new EventTask(taskDescription, taskDate, taskStartTime);
+                        } else {
+                            String taskStartTimeString = taskTimeString.substring(0, endTimeIndex).trim();
+                            LocalTime taskStartTime = LocalTime.
+                                    parse(taskStartTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                            String taskEndTimeString = taskTimeString.substring(endTimeIndex + 1).trim();
+                            LocalTime taskEndTime = LocalTime.
+                                    parse(taskEndTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                            task = new EventTask(taskDescription, taskDate, taskStartTime, taskEndTime);
+                        }
+                    }
                 } else {
                     throw new InvalidSaveFileFormatException();
                 }
@@ -296,6 +396,9 @@ public class Duke {
         } catch (InvalidSaveFileFormatException e) {
             System.out.println("Error: Invalid content format in save file");
             System.exit(1);
+        } catch (DateTimeParseException e) {
+            System.out.println("Error: Invalid date time format in save file or no date time stated");
+            System.exit(1);
         }
 
         return taskList;
@@ -304,18 +407,8 @@ public class Duke {
     //Save task list to save file
     public static void saveToSaveFile(List<Task> taskList) throws IOException {
         FileWriter fileWriter = new FileWriter("../ip/data/Duke.txt");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            String saveLine = "";
-            saveLine += task.getType() + " | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
-            if (task.getType() == 'D') {
-                DeadlineTask dateTask = (DeadlineTask) taskList.get(i);
-                saveLine += " | " + dateTask.getDate();
-            } else if (task.getType() == 'E') {
-                EventTask dateTask = (EventTask) taskList.get(i);
-                saveLine += " | " + dateTask.getDate();
-            }
-            saveLine += '\n';
+        for (Task task : taskList) {
+            String saveLine = task.getSaveString() + '\n';
             fileWriter.write(saveLine);
         }
         fileWriter.close();
