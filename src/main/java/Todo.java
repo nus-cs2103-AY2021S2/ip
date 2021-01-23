@@ -42,7 +42,7 @@ public class Todo extends Task {
     }
 
     public static Todo importData(String[] args) {
-        boolean isDone = args[1] == "1";
+        boolean isDone = args[1].equals("1");
         return new Todo(isDone, args[2]);
     }
 }

@@ -50,7 +50,7 @@ public class Deadline extends Task {
     }
 
     public static Deadline importData(String[] args) {
-        boolean isDone = args[1] == "1";
+        boolean isDone = args[1].equals("1");
         return new Deadline(isDone, args[2], args[3]);
     }
 }
