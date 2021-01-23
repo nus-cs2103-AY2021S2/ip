@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 public class Parser {
+
     public static Command parseCommand(String input) {
         return Command.valueOf(input.toUpperCase(Locale.ROOT));
     }

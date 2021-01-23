@@ -1,6 +1,7 @@
 package duke;
 
 public class ParseException extends RuntimeException {
+
     private final String msgDes;
 
     public ParseException(String message) {

@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class Ui {
+
     private static final StringBuffer boundOfChatBox = new StringBuffer();
 
     public static void setBoundOfChatBox() {

@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 
 public class Event extends Task {
+
     private final LocalDate date;
 
     public Event(String description, LocalDate date) {
