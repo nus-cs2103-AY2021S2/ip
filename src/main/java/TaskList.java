@@ -3,12 +3,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Manager {
+public class TaskList {
     public static String line = "------------------------------------------------------";
     private final List<Task> ls;
     private static String FILE_PATH = "data/Duke.txt";
 
-    Manager() {
+    TaskList() {
         this.ls = new ArrayList<>();
     }
 

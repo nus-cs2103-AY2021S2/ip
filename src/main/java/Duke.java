@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Duke {
     public static String line = "------------------------------------------------------";
 
-    public static void handleInput(Manager manager) {
+    public static void handleInput(TaskList manager) {
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             try{
@@ -74,9 +74,9 @@ public class Duke {
             Files.createFile(Paths.get("data/Duke.txt"));
         }
 
-        Manager manager = new Manager();
-        manager.greeting();
-        handleInput(manager);
+        TaskList tasklist = new TaskList();
+        tasklist.greeting();
+        handleInput(tasklist);
 
 
     }
