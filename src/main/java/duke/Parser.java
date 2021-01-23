@@ -24,7 +24,7 @@ public class Parser {
         "todo", "deadline", "event", "bye", "list", "done", "delete"
     };
 
-    public static void verifyCommand(String c) throws DukeUnknownCommandException {
+    private static boolean verifyCommand(String c) {
         boolean found = false;
         for (String cmd : acceptedCommands) {
             if (c.equals(cmd)) {
@@ -32,12 +32,10 @@ public class Parser {
                 break;
             }
         }
-        if (!found) {
-            throw new DukeUnknownCommandException();
-        }
+        return found;
     }
 
-    public static LocalDate processDate(String dateString) throws DukeInvalidDateException {
+    private static LocalDate processDate(String dateString) throws DukeInvalidDateException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy");
             return LocalDate.parse(dateString, formatter);
@@ -46,7 +44,7 @@ public class Parser {
         }
     }
 
-    public static String[] extractFlag(String c, String s, String flag) throws DukeMissingFlagException {
+    private static String[] extractFlag(String c, String s, String flag) throws DukeMissingFlagException {
         String[] output = s.split(" " + flag + " ");
         if (output.length < 2) {
             throw new DukeMissingFlagException(c, flag);
@@ -58,9 +56,11 @@ public class Parser {
         String[] params = c.strip().split(" ", 2);
 
         //command integrity verification
-        verifyCommand(params[0]);
+        if (!verifyCommand(params[0])) {
+            throw new DukeUnknownCommandException();
+        }
 
-        //zero-param duke.commands
+        //zero-param commands
         if (params[0].equals("bye")) {
             return new ExitCommand();
         } else if (params[0].equals("list")) {
@@ -72,7 +72,7 @@ public class Parser {
             throw new DukeInsufficientParametersException(params[0]);
         }
 
-        //non-zero-param duke.commands
+        //non-zero-param commands
         try {
             String[] args;
             LocalDate date;

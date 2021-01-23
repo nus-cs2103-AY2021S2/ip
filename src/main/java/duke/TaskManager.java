@@ -13,15 +13,15 @@ import duke.task.Task;
 import duke.task.ToDoTask;
 
 /**
- *  duke.TaskManager manages all duke.tasks given to duke.Duke.
+ * duke.TaskManager manages all duke.tasks given to duke.Duke.
  *
- *  @author Yap Jing Kang
+ * @author Yap Jing Kang
  */
 public class TaskManager {
-    protected ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
-     *  Constructor initialises task list.
+     * Constructor initialises task list.
      */
     public TaskManager() {
         this.tasks = new ArrayList<>();
@@ -84,7 +84,6 @@ public class TaskManager {
      * Method to mark specified task done.
      *
      * @param x duke.tasks.Task index.
-     *
      */
     public Task markTaskAsDone(int x) throws DukeIndexRangeException, DukeTaskAlreadyDoneException {
         try {
@@ -100,10 +99,9 @@ public class TaskManager {
     }
 
     /**
-     *  Method to remove specified.
+     * Method to remove specified.
      *
-     *	@param x duke.tasks.Task index.
-     *
+     * @param x duke.tasks.Task index.
      */
     public Task deleteTask(int x) throws DukeIndexRangeException {
         try {
