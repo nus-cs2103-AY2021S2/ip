@@ -1,13 +1,32 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+    private static final String FILE_PATH = "./data/duke.txt";
+
     public static void main(String[] args) {
         ArrayList<Task> tasksList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         String dateTime = "", taskDesc = "", input = "";
         boolean exitFlag = false;
         Output.printWelcomeMsg();
+
+        DataManager dataManager = new DataManager(FILE_PATH);
+        Path path = Paths.get(FILE_PATH);
+        if(Files.exists(path)) {
+            tasksList = dataManager.readFromFile();
+        } else {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         while(sc.hasNextLine()) {
             String[] numArgs;
@@ -46,6 +65,7 @@ public class Duke {
                         done.toggleStatus();
 
                         Output.printDoneMsg(done);
+                        dataManager.writeToFile(tasksList);
                         break;
                     case TODO:
                         numArgs = input.split(" ");
@@ -57,6 +77,7 @@ public class Duke {
 
                         tasksList.add(todo);
                         Output.printAddedTask(todo, tasksList.size());
+                        dataManager.writeToFile(tasksList);
                         break;
                     case DEADLINE:
                         numArgs = input.split(" ");
@@ -71,6 +92,7 @@ public class Duke {
 
                         tasksList.add(deadline);
                         Output.printAddedTask(deadline, tasksList.size());
+                        dataManager.writeToFile(tasksList);
                         break;
                     case EVENT:
                         numArgs = input.split(" ");
@@ -85,6 +107,7 @@ public class Duke {
 
                         tasksList.add(event);
                         Output.printAddedTask(event, tasksList.size());
+                        dataManager.writeToFile(tasksList);
                         break;
                     case DELETE:
                         numArgs = input.split(" ");
@@ -97,6 +120,7 @@ public class Duke {
                         Task delete = tasksList.remove(Integer.parseInt(numArgs[1]) - 1);
 
                         Output.printDeleteMsg(delete, tasksList.size());
+                        dataManager.writeToFile(tasksList);
                         break;
                 }
             } catch (IllegalArgumentException e) {
