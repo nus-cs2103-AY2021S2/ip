@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.exception.DukeIOException;
 import duke.task.Task;
 
 public class Ui {

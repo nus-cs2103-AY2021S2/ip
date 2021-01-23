@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.exception.DukeCorruptFileException;
-import duke.exception.DukeIOException;
 import duke.exception.DukeIndexRangeException;
 import duke.exception.DukeTaskAlreadyDoneException;
 import duke.task.DeadlineTask;
@@ -71,6 +70,11 @@ public class TaskManager {
         return tasks;
     }
 
+    /**
+     *  Given text, finds tasks with name comtaining text.
+     *
+     *  @param s Search term
+     */
     public ArrayList<Task> findTasks(String s) {
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : tasks) {

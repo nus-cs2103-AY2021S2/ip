@@ -1,12 +1,15 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.ToDoCommand;
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeCorruptFileException;
 import duke.exception.DukeException;
 import duke.exception.DukeIndexRangeException;
@@ -15,12 +18,8 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class TaskManagerTest {
 
@@ -151,8 +150,7 @@ public class TaskManagerTest {
         //to simulate input from Storage
         ArrayList<String> input = new ArrayList<>();
         input.add("X|1|test1");
-        assertThrows(DukeCorruptFileException.class,
-                () -> tm.loadArray(input));
+        assertThrows(DukeCorruptFileException.class, () -> tm.loadArray(input));
     }
 
     @Test
@@ -161,8 +159,7 @@ public class TaskManagerTest {
         //to simulate input from Storage
         ArrayList<String> input = new ArrayList<>();
         input.add("D|1|test1");
-        assertThrows(DukeCorruptFileException.class,
-                () -> tm.loadArray(input));
+        assertThrows(DukeCorruptFileException.class, () -> tm.loadArray(input));
     }
 
     @Test
@@ -171,8 +168,7 @@ public class TaskManagerTest {
         //to simulate input from Storage
         ArrayList<String> input = new ArrayList<>();
         input.add("D|V|test1");
-        assertThrows(DukeCorruptFileException.class,
-                () -> tm.loadArray(input));
+        assertThrows(DukeCorruptFileException.class, () -> tm.loadArray(input));
     }
 
     @Test
@@ -181,8 +177,7 @@ public class TaskManagerTest {
         //to simulate input from Storage
         ArrayList<String> input = new ArrayList<>();
         input.add("D|1|test1|123");
-        assertThrows(DukeCorruptFileException.class,
-                () -> tm.loadArray(input));
+        assertThrows(DukeCorruptFileException.class, () -> tm.loadArray(input));
     }
 
     @Test
@@ -192,21 +187,18 @@ public class TaskManagerTest {
         ArrayList<String> input = new ArrayList<>();
         input.add("T|1|test1");
         tm.loadArray(input);
-        assertThrows(DukeTaskAlreadyDoneException.class,
-                () -> tm.markTaskAsDone(1));
+        assertThrows(DukeTaskAlreadyDoneException.class, () -> tm.markTaskAsDone(1));
     }
 
     @Test
     public void testMarkTaskOutOfRange() {
         TaskManager tm = new TaskManager();
-        assertThrows(DukeIndexRangeException.class,
-                () -> tm.markTaskAsDone(1));
+        assertThrows(DukeIndexRangeException.class, () -> tm.markTaskAsDone(1));
     }
 
     @Test
     public void testDeleteOutOfRange() {
         TaskManager tm = new TaskManager();
-        assertThrows(DukeIndexRangeException.class,
-                () -> tm.deleteTask(1));
+        assertThrows(DukeIndexRangeException.class, () -> tm.deleteTask(1));
     }
 }
