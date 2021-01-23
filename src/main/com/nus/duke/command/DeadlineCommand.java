@@ -1,6 +1,8 @@
 package com.nus.duke.command;
 
+import com.nus.duke.common.DukeDateParserException;
 import com.nus.duke.data.Deadline;
+import com.nus.duke.parser.DateParser;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +14,9 @@ public class DeadlineCommand extends Command {
     public static final String IMPROPER_USAGE_FORMAT = "Improper deadline format";
     public static final String USAGE_MESSAGE = COMMAND + ": Adds a new deadline to the task list\n"
             + "Usage: deadline [description] /by [date]\n"
-            + "Example: deadline read books /by 13-13-2021 7 PM";
+            + "Example: deadline read books /by 13-13-2021 7 PM\n"
+            + "Date formats available: dd-MM-yyyy or dd/MM/yyyy or Sunday\n"
+            + "Time formats available: 24 Hour Format [HH:mm][HHmm] or 12 Hour Format [hh:mm am/pm][hhmm am/pm]";
     public static final String SUCCESS_MESSAGE_TEMPLATE = "Added a new Deadline:\n%s\nNow you have %d tasks in the list.";
 
     private final Deadline deadline;
@@ -36,7 +40,11 @@ public class DeadlineCommand extends Command {
         final String description = matcher.group("description");
         final String date = matcher.group("date");
 
-        Deadline deadline = new Deadline(description, date);
-        return new DeadlineCommand(deadline);
+        try {
+            Deadline deadline = new Deadline(description, DateParser.parseDateTime(date));
+            return new DeadlineCommand(deadline);
+        } catch (DukeDateParserException e) {
+            return new IncorrectCommand(IMPROPER_USAGE_FORMAT + "\n" + USAGE_MESSAGE);
+        }
     }
 }

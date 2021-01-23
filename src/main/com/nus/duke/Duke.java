@@ -3,7 +3,7 @@ package com.nus.duke;
 import com.nus.duke.command.Command;
 import com.nus.duke.command.ExitCommand;
 import com.nus.duke.common.DukeStorageException;
-import com.nus.duke.data.*;
+import com.nus.duke.data.TaskList;
 import com.nus.duke.parser.CommandParser;
 import com.nus.duke.storage.TaskListStorage;
 import com.nus.duke.ui.TextUi;
@@ -34,6 +34,7 @@ public class Duke {
             this.taskList = this.storage.load();
         } catch (DukeStorageException e) {
             this.ui.printToUser(e.getLocalizedMessage());
+            this.taskList = new TaskList();
         }
     }
 

@@ -4,38 +4,167 @@
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[T][✘] borrow book
+		[T][ ] borrow book
 	Now you have 1 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[D][✘] return book (by: Sunday)
+		[D][ ] return book (by: 13 Dec 2021 03:15 PM)
 	Now you have 2 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[E][✘] project meeting (at: Mon 2-4pm)
+		[D][ ] return book (by: 13 Dec 2021 04:16 PM)
 	Now you have 3 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[D][✘] do homework (by: no idea :-p)
+		[D][ ] return book (by: 13 Dec 2021 03:15 PM)
 	Now you have 4 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	Nice! I've marked this task as done:
-	[D][✓] return book (by: Sunday)
+	Got it. I've added this task:
+		[D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	Now you have 5 tasks in the list.
 	____________________________________________________________
 	____________________________________________________________
-	Noted. I've removed this task:
-		[D][✓] return book (by: Sunday)
-	Now you have 3 tasks in the list.
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	Now you have 6 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	Now you have 7 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 03:15 PM)
+	Now you have 8 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 9 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 10 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 11 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 12 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 13 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 14 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 15 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	Now you have 16 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	Now you have 17 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	Now you have 18 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] buy book (by: 24 Jan 2021 09:15 AM)
+	Now you have 19 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] buy cakes (by: 25 Jan 2021 04:15 PM)
+	Now you have 20 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[D][ ] conference (by: 25 Jan 2021 10:00 AM)
+	Now you have 21 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	☹ OOPS!!! Improper date format
 	____________________________________________________________
 	____________________________________________________________
 	Here are the tasks in your list:
-	1. [T][✘] borrow book
-	2. [E][✘] project meeting (at: Mon 2-4pm)
-	3. [D][✘] do homework (by: no idea :-p)
+	1. [T][ ] borrow book
+	2. [D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	3. [D][ ] return book (by: 13 Dec 2021 04:16 PM)
+	4. [D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	5. [D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	6. [D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	7. [D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	8. [D][ ] return book (by: 24 Jan 2021 03:15 PM)
+	9. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	10. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	11. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	12. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	13. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	14. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	15. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	16. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	17. [D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	18. [D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	19. [D][ ] buy book (by: 24 Jan 2021 09:15 AM)
+	20. [D][ ] buy cakes (by: 25 Jan 2021 04:15 PM)
+	21. [D][ ] conference (by: 25 Jan 2021 10:00 AM)
+	____________________________________________________________
+	____________________________________________________________
+	Nice! I've marked this task as done:
+	[D][✓] return book (by: 13 Dec 2021 03:15 PM)
+	____________________________________________________________
+	____________________________________________________________
+	Noted. I've removed this task:
+		[D][✓] return book (by: 13 Dec 2021 03:15 PM)
+	Now you have 20 tasks in the list.
+	____________________________________________________________
+	____________________________________________________________
+	Here are the tasks in your list:
+	1. [T][ ] borrow book
+	2. [D][ ] return book (by: 13 Dec 2021 04:16 PM)
+	3. [D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	4. [D][ ] return book (by: 13 Dec 2021 03:15 PM)
+	5. [D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	6. [D][ ] return book (by: 24 Jan 2021 11:59 PM)
+	7. [D][ ] return book (by: 24 Jan 2021 03:15 PM)
+	8. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	9. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	10. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	11. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	12. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	13. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	14. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	15. [D][ ] return book (by: 24 Jan 2021 06:15 PM)
+	16. [D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	17. [D][ ] return book (by: 24 Jan 2021 06:00 PM)
+	18. [D][ ] buy book (by: 24 Jan 2021 09:15 AM)
+	19. [D][ ] buy cakes (by: 25 Jan 2021 04:15 PM)
+	20. [D][ ] conference (by: 25 Jan 2021 10:00 AM)
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
