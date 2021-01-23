@@ -7,14 +7,12 @@ import java.util.Scanner;
  */
 class Ui {
     private final Scanner sc;
-    private final boolean active;
 
     /**
      * Initializes a new User Interface.
      */
     Ui() {
         sc = new Scanner(System.in);
-        active = true;
     }
 
     /**
@@ -32,7 +30,7 @@ class Ui {
      * @return The availability of the UI.
      */
     public boolean isAvailable() {
-        return active && sc.hasNextLine();
+        return sc.hasNextLine();
     }
 
     /**

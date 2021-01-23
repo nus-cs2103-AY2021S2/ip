@@ -24,6 +24,7 @@ public class Blarb {
         storage = new Storage(filePath);
         tasklist = new Tasklist();
         ui.rollCredits();
+
         try {
             tasklist.addAll(storage.load());
         } catch (IOException ex) {
@@ -154,8 +155,9 @@ public class Blarb {
             }
             break;
         case LIST:
-            String output = cml.isSingleCommand() ? tasklist.list() :
-                    "Listing is simple, so typing \"list\" would suffice.";
+            String output = cml.isSingleCommand()
+                    ? tasklist.list()
+                    : "Listing is simple, so typing \"list\" would suffice.";
             ui.blurt(output);
             break;
         case BYE:
