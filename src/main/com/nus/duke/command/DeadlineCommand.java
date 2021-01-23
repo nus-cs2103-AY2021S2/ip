@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 public class DeadlineCommand extends Command {
 
     public static final String COMMAND = "deadline";
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<description>.*)\\s/by\\s(?<date>.*)");
+    public static final Pattern COMMAND_FORMAT = Pattern
+            .compile("(?<description>.*)\\s/by\\s(?<date>.*)");
     public static final String IMPROPER_USAGE_FORMAT = "Improper deadline format";
     public static final String USAGE_MESSAGE = COMMAND + ": Adds a new deadline to the task list\n"
             + "Usage: deadline [description] /by [date]\n"

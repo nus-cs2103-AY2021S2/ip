@@ -4,6 +4,7 @@ import com.nus.duke.data.Task;
 import com.nus.duke.ui.TextUi;
 
 public class DoneCommand extends Command {
+
     public static final String COMMAND = "done";
     public static final String IMPROPER_USAGE_FORMAT = "Improper command format";
     public static final String USAGE_MESSAGE = COMMAND + ": Marks a task as done\n"

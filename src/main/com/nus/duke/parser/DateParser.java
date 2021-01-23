@@ -15,10 +15,12 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 
 public class DateParser {
+
     public static final String DEFAULT_DATE_PATTERN = "[dd-MM-yyyy][dd/MM/yyyy][EEEE]";
     public static final String DEFAULT_TIME_PATTERN = "[h:mm a][h:mma][hmma][hmm a][ha][h a][HHmm][HH:mm][Hmm]";
     public static final String DEFAULT_OUTPUT_PATTERN = "dd MMM yyyy[ hh:mm a]";
-    public static final DateTimeFormatter DEFAULT_OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(DEFAULT_OUTPUT_PATTERN);
+    public static final DateTimeFormatter DEFAULT_OUTPUT_FORMATTER = DateTimeFormatter
+            .ofPattern(DEFAULT_OUTPUT_PATTERN);
 
     public static final DateTimeFormatter DEFAULT_FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()

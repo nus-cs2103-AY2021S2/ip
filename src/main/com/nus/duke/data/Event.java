@@ -5,8 +5,8 @@ import com.nus.duke.parser.DateParser;
 import java.time.LocalDateTime;
 
 /**
- * Event is a type of Task that includes a time.
- * Note: Date/time are treated as Strings, so any formats are accepted.
+ * Event is a type of Task that includes a time. Note: Date/time are treated as Strings, so any
+ * formats are accepted.
  */
 public class Event extends Task {
 
@@ -22,6 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + DateParser.DEFAULT_OUTPUT_FORMATTER.format(this.at) + ")";
+        return "[E]" + super.toString() + " (at: " + DateParser.DEFAULT_OUTPUT_FORMATTER
+                .format(this.at) + ")";
     }
 }

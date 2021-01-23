@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 public class EventCommand extends Command {
 
     public static final String COMMAND = "event";
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<description>.*)\\s/at\\s(?<date>.*)");
+    public static final Pattern COMMAND_FORMAT = Pattern
+            .compile("(?<description>.*)\\s/at\\s(?<date>.*)");
 
     public static final String IMPROPER_USAGE_FORMAT = "Improper event format";
     public static final String USAGE_MESSAGE = COMMAND + ": Adds a new event to the task list\n"

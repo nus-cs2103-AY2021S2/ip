@@ -6,6 +6,7 @@ import java.io.Serializable;
  * An abstract class Task in added by the user.
  */
 public abstract class Task implements Serializable {
+
     /**
      * Description of the task.
      */
@@ -34,8 +35,8 @@ public abstract class Task implements Serializable {
     }
 
     /**
-     * Returns the status icon for the task.
-     * If done, returns a tick (unicode character), else it will return space
+     * Returns the status icon for the task. If done, returns a tick (unicode character), else it
+     * will return space
      *
      * @return
      */
