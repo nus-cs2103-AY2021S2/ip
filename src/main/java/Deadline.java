@@ -1,19 +1,23 @@
-public class Deadline extends Task {
-    public String dateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String desc, String dateTime) {
+public class Deadline extends Task {
+    public LocalDateTime dateTime;
+
+    public Deadline(String desc, LocalDateTime dateTime) {
         super(desc, false);
         this.dateTime = dateTime;
     }
 
-    public Deadline(String desc, String dateTime, boolean isDone) {
+    public Deadline(String desc, LocalDateTime dateTime, boolean isDone) {
         super(desc, isDone);
         this.dateTime = dateTime;
     }
 
     @Override
     public String getDesc() {
-        return this.desc + " (by: " + this.dateTime + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        return this.desc + " (by: " + this.dateTime.format(formatter) + ")";
     }
 
     @Override
@@ -23,6 +27,8 @@ public class Deadline extends Task {
 
     @Override
     public String toSaveInfoString() {
-        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " + this.dateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
+                this.dateTime.format(formatter);
     }
 }

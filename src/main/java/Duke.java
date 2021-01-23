@@ -1,8 +1,9 @@
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -43,19 +44,26 @@ public class Duke {
 
     /**
      * Add a Deadline into the internal list
-     * @param params Parameters of Deadline (Description, Date/Time) in String form that will be processed
-     * @throws DukeCommandException if no parameters were given or parameters were invalid
+     * @param params Parameters of Deadline in String form that will be processed
+     * @throws DukeCommandException if one or more parameters are missing or date time form was not followed
      */
     private static void addDeadline(String params) throws DukeCommandException {
         if(params.length() == 0) {
             throw new DukeCommandException("deadline", params, "The details of a Deadline cannot be empty.");
         } else if(!params.contains("/by") || params.split(" /by ").length != 2) {
-            throw new DukeCommandException("deadline", params, "Proper description and date/time must be given for a " +
+            throw new DukeCommandException("deadline", params, "Description and date/time must be given for a " +
                     "Deadline.");
+        } else if(!params.split(" /by ")[1].matches("^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
+                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)")) {
+            throw new DukeCommandException("deadline", params, "Date time format is incorrect, try to follow the " +
+                    "format of dd-mm-yyyy hAM/PM.");
         } else {
             String[] splits = params.split(" /by ");
 
-            Deadline newDeadline = new Deadline(splits[0], splits[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+            LocalDateTime dateTime = LocalDateTime.parse(splits[1], formatter);
+
+            Deadline newDeadline = new Deadline(splits[0], dateTime);
             tasks.add(newDeadline);
 
             printTaskAdding(newDeadline);
@@ -65,18 +73,33 @@ public class Duke {
     /**
      * Add an Event into the internal list
      * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
+<<<<<<< HEAD
      * @throws DukeCommandException if no parameters were given or parameters were invalid
+=======
+     * @throws DukeCommandException if one or more parameters are missing or date time form was not followed
+>>>>>>> branch-Level-8
      */
     private static void addEvent(String params) throws DukeCommandException {
+        String startEndPattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
+                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
+
         if(params.length() == 0) {
             throw new DukeCommandException("event", params, "The details of a Event cannot be empty.");
-        } else if(!params.contains("/at") || params.split(" /at ").length != 2) {
-            throw new DukeCommandException("event", params, "Proper description and date/time range must be given for" +
-                    " a Event.");
+        } else if(!params.contains("/start") || !params.contains("/end") || params.split(" /start | /end ").length != 3) {
+            throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
+                    "must be given for an Event.");
+        } else if(!params.split(" /start | /end ")[1].matches(startEndPattern)
+                || !params.split(" /start | /end ")[2].matches(startEndPattern)) {
+            throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
+                    "follow the format of dd-mm-yyyy hAM/PM.");
         } else {
-            String[] splits = params.split(" /at ");
+            String[] splits = params.split(" /start | /end ");
 
-            Event newEvent = new Event(splits[0], splits[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+            LocalDateTime start = LocalDateTime.parse(splits[1], formatter);
+            LocalDateTime end = LocalDateTime.parse(splits[2], formatter);
+
+            Event newEvent = new Event(splits[0], start, end);
             tasks.add(newEvent);
 
             printTaskAdding(newEvent);
@@ -169,6 +192,8 @@ public class Duke {
 
         // Load the save file or create one if missing
         File file = new File(TASKSLIST_PATH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+
         try {
             // If the save file already exists, load its tasks
             if(!file.createNewFile()) {
@@ -183,11 +208,14 @@ public class Duke {
                         tasks.add(toDo);
                         break;
                     case "D":
-                        Deadline deadline = new Deadline(splits[2], splits[3], isDone);
+                        LocalDateTime dateTime = LocalDateTime.parse(splits[3], formatter);
+                        Deadline deadline = new Deadline(splits[2], dateTime, isDone);
                         tasks.add(deadline);
                         break;
                     case "E":
-                        Event event = new Event(splits[2], splits[3], isDone);
+                        LocalDateTime start = LocalDateTime.parse(splits[3], formatter);
+                        LocalDateTime end = LocalDateTime.parse(splits[4], formatter);
+                        Event event = new Event(splits[2], start, end, isDone);
                         tasks.add(event);
                         break;
                     default:

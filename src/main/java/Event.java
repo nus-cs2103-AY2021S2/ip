@@ -1,19 +1,26 @@
-public class Event extends Task {
-    public String dateTimeRange;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String desc, String dateTimeRange) {
+public class Event extends Task {
+    public LocalDateTime start;
+    public LocalDateTime end;
+
+    public Event(String desc, LocalDateTime start, LocalDateTime end) {
         super(desc, false);
-        this.dateTimeRange = dateTimeRange;
+        this.start = start;
+        this.end = end;
     }
 
-    public Event(String desc, String dateTimeRange, boolean isDone) {
+    public Event(String desc, LocalDateTime start, LocalDateTime end, boolean isDone) {
         super(desc, isDone);
-        this.dateTimeRange = dateTimeRange;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String getDesc() {
-        return this.desc + " (at: " + this.dateTimeRange + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        return this.desc + " (Start: " + this.start.format(formatter) + " | End: " + this.end.format(formatter) + ")";
     }
 
     @Override
@@ -23,6 +30,8 @@ public class Event extends Task {
 
     @Override
     public String toSaveInfoString() {
-        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " + this.dateTimeRange;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
+                this.start.format(formatter) + " | " + this.end.format(formatter);
     }
 }
