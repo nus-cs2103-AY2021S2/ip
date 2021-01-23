@@ -2,21 +2,33 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Deals with User Interaction jobs.
+ */
 public class Ui {
     protected static final String seperatorLine = "-----------------------------";
 
+    /**
+     * Greet user.
+     */
     public static void greet() {
         String welcome = "Hi, I'm Duke and I'm gonna be your assistant. Enjoy!!!";
         System.out.println(welcome);
         System.out.println();
     }
 
+    /**
+     * Say goodbye to user when exit.
+     */
     public static void exit() {
         System.out.println(seperatorLine);
         System.out.println("Bye! Hope to see you again soon!");
         System.out.println(seperatorLine);
     }
 
+    /**
+     * Print feedback after an addition of a task.
+     */
     public static void addTask(List<Task> lst) {
         System.out.println(seperatorLine);
         System.out.println("Got it. Now I have added this " +
@@ -25,6 +37,9 @@ public class Ui {
         System.out.println(seperatorLine);
     }
 
+    /**
+     * Print feedback after marking a task as done.
+     */
     public static void markDone(Task task) {
         System.out.println(seperatorLine);
         System.out.println("Nice! I've marked this task as done:\n" +
@@ -32,6 +47,9 @@ public class Ui {
         System.out.println(seperatorLine);
     }
 
+    /**
+     * Print feedback after deleting a task.
+     */
     public static void delete(List<Task> lst, Task task) {
         System.out.println(seperatorLine);
         System.out.println("Noted. I've removed this " +
@@ -40,6 +58,9 @@ public class Ui {
         System.out.println(seperatorLine);
     }
 
+    /**
+     * List all the tasks stored.
+     */
     public static void list(List<Task> lst) {
         System.out.println(seperatorLine);
         for (int i = 0; i < lst.size(); i++) {
@@ -48,6 +69,9 @@ public class Ui {
         System.out.println(seperatorLine);
     }
 
+    /**
+     * Print error message.
+     */
     public static void printException(DukeException err) {
         System.out.println(seperatorLine);
         System.out.println(err.getMessage());

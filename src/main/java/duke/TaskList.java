@@ -2,10 +2,16 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Handle all actions regarding tasks.
+ */
 public class TaskList {
     List<Task> lst;
     Storage storage;
 
+    /**
+     * Construct a list of tasks.
+     */
     TaskList() {
         this.storage = new Storage("duke.txt");
         this.lst = storage.read();
@@ -38,6 +44,10 @@ public class TaskList {
         lst.add(new Event(desc.substring(0, index - 1), desc.substring(index + 4)));
     }
 
+    /**
+     * Add a tasks to the list.
+     * @param command the task description
+     */
     public void addTask(String command) {
         try {
             if (command.startsWith("todo")) {
@@ -47,7 +57,7 @@ public class TaskList {
             } else if (command.startsWith("event")) {
                 addEvent(command.substring(5));
             } else {
-                throw new DukeException("Oops! I have no idea.");
+                throw new DukeException("I have no idea.");
             }
             Ui.addTask(lst);
             storage.write(lst);
@@ -57,6 +67,10 @@ public class TaskList {
 
     }
 
+    /**
+     * Mark a task at the specified index as done.
+     * @param position the task index
+     */
     public void markDone(String position) {
         int index = Integer.parseInt(position) - 1;
         lst.get(index).markDone();
@@ -64,6 +78,10 @@ public class TaskList {
         storage.write(lst);
     }
 
+    /**
+     * Deleting a task at the specified index.
+     * @param position the task index
+     */
     public void deleteTask(String position) {
         int index = Integer.parseInt(position) - 1;
         Task task = lst.remove(index);
@@ -71,6 +89,9 @@ public class TaskList {
         storage.write(lst);
     }
 
+    /**
+     * List the tasks.
+     */
     public void listTask() {
         Ui.list(lst);
     }

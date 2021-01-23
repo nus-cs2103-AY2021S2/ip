@@ -1,12 +1,22 @@
 package duke;
 
+/**
+ * This class translate the user input into commands understandable by Duke.
+ */
 public class Parser {
     TaskList taskList;
-    
+
+    /**
+     * Construct a Parser from the specified list of task.
+     */
     Parser(TaskList taskList) {
         this.taskList = taskList;
     }
-    
+
+    /**
+     * Parse the user input.
+     * @param command input entered by user
+     */
     void parse(String command) {
         if (command.equals("bye")) {
             Ui.exit();
