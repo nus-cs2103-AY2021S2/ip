@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -114,6 +116,8 @@ public class Duke {
             if (str[1].contains(" ")) {
                 str = str[1].split(" ", 2);
                 time = str[1];
+                LocalDate date = LocalDate.parse(time);
+                time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             }
         } else {
             task = info;
