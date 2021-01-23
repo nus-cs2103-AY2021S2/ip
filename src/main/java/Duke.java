@@ -1,15 +1,12 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
     public static String line = "------------------------------------------------------";
 
-    public static void main(String[] args) {
-        List<Task> ls = new ArrayList<>();
-        Manager manager = new Manager();
-        manager.greeting();
+    public static void handleInput(Manager manager) {
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNext()){
             try{
@@ -59,13 +56,28 @@ public class Duke {
                 else{
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            } catch (DukeException e) {
+            } catch (DukeException  | IOException e) {
                 System.out.println(e.getMessage());
                 break;
             }
 
 
         }
+
+    }
+
+    public static void main(String[] args) throws IOException {
+        if (!Files.exists(Paths.get("data"))) {
+            Files.createDirectory(Paths.get("data"));
+        }
+        else if (!Files.exists(Paths.get("data/Duke.txt"))) {
+            Files.createFile(Paths.get("data/Duke.txt"));
+        }
+
+        Manager manager = new Manager();
+        manager.greeting();
+        handleInput(manager);
+
 
     }
 }
