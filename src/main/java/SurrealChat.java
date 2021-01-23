@@ -90,6 +90,11 @@ public class SurrealChat {
             Pair<String, Pair<Task, Integer>> deletePair = this.taskParser.deleteTask(taskNumber);
             this.userOutput.printOutput(deletePair);
             break;
+        case "find":
+            String keyword = this.userInput.getInputDescription();
+            Pair<String, List<Task>> searchPair = this.taskParser.searchTasks(keyword);
+            this.userOutput.printOutput(searchPair);
+            break;
         case "orang", "vegetal":
             this.userInput.checkExcessArguments();
             this.printEasterEgg(userCommand);

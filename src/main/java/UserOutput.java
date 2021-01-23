@@ -50,7 +50,7 @@ public class UserOutput {
         case "userTaskAdded":
             Pair<Task, Integer> intermediatePair;
             if (pair.getSecondItem() instanceof Pair) {
-                intermediatePair = (Pair)pair.getSecondItem();
+                intermediatePair = (Pair<Task, Integer>)pair.getSecondItem();
                 this.printUserTaskAdded(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
                 break;
             } else {
@@ -59,7 +59,7 @@ public class UserOutput {
         case "fileTasksAdded":
             List<Task> taskList;
             if (pair.getSecondItem() instanceof List) {
-                taskList = (List)pair.getSecondItem();
+                taskList = (List<Task>)pair.getSecondItem();
                 this.printFileTasksAdded(taskList);
                 break;
             } else {
@@ -84,20 +84,30 @@ public class UserOutput {
             }
         case "deleteTask":
             if (pair.getSecondItem() instanceof Pair) {
-                intermediatePair = (Pair)pair.getSecondItem();
+                intermediatePair = (Pair<Task, Integer>)pair.getSecondItem();
                 this.printTaskDelete(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "searchTasks":
+            if (pair.getSecondItem() instanceof List) {
+                List<Task> searchResults = (List<Task>)pair.getSecondItem();
+                this.printSearchResults(searchResults);
                 break;
             } else {
                 throw new ClassCastException("Invalid class casting. Not stonks!");
             }
         case "printTaskList":
             if (pair.getSecondItem() instanceof List) {
-                taskList = (List)pair.getSecondItem();
+                taskList = (List<Task>)pair.getSecondItem();
                 this.printTaskList(taskList);
                 break;
             } else {
                 throw new ClassCastException("Invalid class casting. Not stonks!");
             }
+        default:
+            throw new UnsupportedOperationException("Somehow I got an invalid tag. Not stonks!");
         }
     }
 
@@ -172,6 +182,18 @@ public class UserOutput {
             System.out.println("I print the tasks:");
             for (int i = 1; i <= taskList.size(); i++) {
                 System.out.println(i + ". " + taskList.get(i - 1));
+            }
+            System.out.println("Hmmst've... Stonks\n");
+        }
+    }
+
+    private void printSearchResults(List<Task> searchResults) {
+        if (searchResults.isEmpty()) {
+            throw new NoSuchElementException("My search returned nothing. Not stonks!");
+        } else {
+            System.out.println("Here are my search results:");
+            for (int i = 1; i <= searchResults.size(); i++) {
+                System.out.println(i + ". " + searchResults.get(i - 1));
             }
             System.out.println("Hmmst've... Stonks\n");
         }
