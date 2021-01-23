@@ -20,13 +20,17 @@ public class Parser {
     }
 
     /**
-     * Checks the parsed action to see if the input is valid.
-     * If the input is valid, an exception is thrown based on the incorrect input
+     * Returns lateral location of the specified position.
      * If the position is unset, NaN is returned.
+     *
+     * @param x  X coordinate of position.
+     * @param y Y coordinate of position.
+     * @param zone Zone of position.
+     * @return Lateral location.
      * @throws IllegalArgumentException  If zone is <= 0.
      */
     public void check() throws AddMissingInputException, DukeIncompleteInputException, UnknownInputException {
-        if (parsedAction[0].equals("todo") || parsedAction[0].equals("") ||
+        if (parsedAction[0].equals("todo") || parsedAction[0].equals("deadline") ||
                 parsedAction[0].equals("event")) {
 
             if (parsedAction.length <= 1)

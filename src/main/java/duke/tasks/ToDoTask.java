@@ -7,11 +7,6 @@ public class ToDoTask extends Task{
     }
 
     @Override
-    public void getStatusAndTask() {
-        System.out.println("      " + this.type + this.getStatus() + this.description);
-    }
-
-    @Override
     public String toString() {
         return "       " + this.type + super.toString().trim();
     }

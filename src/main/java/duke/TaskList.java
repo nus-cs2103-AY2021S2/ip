@@ -10,6 +10,8 @@ import duke.tasks.ToDoTask;
 import java.time.LocalDate;
 
 public class TaskList {
+
+    /** The list of tasks */
     public List<Task> inputList = new ArrayList<>();
 
     public TaskList() {
@@ -55,18 +57,40 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns The list of tasks.
+     *
+     * @return The task list
+     */
     public List<Task> getList() {
         return this.inputList;
     }
 
+    /**
+     * Adds a task to the task list
+     *
+     * @param task A task
+     */
     public void add(Task task) {
         this.inputList.add(task);
     }
 
+    /**
+     * Returns The task inside the task list at the index specified
+     *
+     * @param index index of task inside the tasklist
+     * @return A task
+     */
     public Task get(int index) {
         return this.inputList.get(index);
     }
 
+    /**
+     * Returns a ToDoTask based on the user input and adds it to the list
+     *
+     * @param action  The string action input by the user
+     * @return A ToDoTask
+     */
     public ToDoTask handleToDoTask(String action) {
         int index = action.indexOf(" ");
         String description = action.substring(index + 1);
@@ -76,7 +100,12 @@ public class TaskList {
 
         return toDoTask;
     }
-
+    /**
+     * Returns a EventTask based on the user input and adds it to the list
+     *
+     * @param action  The string action input by the user
+     * @return A EventTask
+     */
     public EventTask handleEventTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
@@ -90,6 +119,12 @@ public class TaskList {
         return eventTask;
     }
 
+    /**
+     * Returns a DeadLineTask based on the user input and adds it to the list
+     *
+     * @param action  The string action input by the user
+     * @return A DeadLineTask
+     */
     public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
@@ -103,7 +138,14 @@ public class TaskList {
         return deadlineTask;
     }
 
-
+    /**
+     * Returns A task that is mark as done
+     * The task at the specified index is
+     * marked as done before being returned
+     *
+     * @param index index of task in list
+     * @return Task that is marked
+     */
     public Task handleDone(int index) {
         Task markDone = this.inputList.get(index - 1);
 
@@ -112,6 +154,12 @@ public class TaskList {
         return markDone;
     }
 
+    /**
+     * Returns the task that was at specified index is now removed.
+     *
+     * @param index index of Task in list
+     * @return The task that is removed
+     */
     public Task handleDelete(int index) {
         Task task = this.inputList.remove(index - 1);
 
@@ -119,6 +167,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns The String that will be used to write into the file.
+     *
+     * @return A string to be written into the file.
+     */
     public String getListToWrite() {
         String result = "";
         for (int i = 0; i < inputList.size(); i++) {
@@ -147,6 +200,12 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns a String containing the tasks that have this date
+     *
+     * @param date the date to search for
+     * @return A string of tasks to be printed
+     */
     public String findOnDateTasks(String date) {
         LocalDate toSearch = LocalDate.parse(date);
         String result = "";

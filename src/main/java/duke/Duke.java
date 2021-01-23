@@ -32,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke Program.
+     */
     public void run() {
         ui.printDivider();
         ui.welcome();

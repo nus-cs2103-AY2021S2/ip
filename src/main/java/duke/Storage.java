@@ -9,8 +9,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
+    /** Filewriter instance used to write into the file */
     private FileWriter writer;
+
+    /** File instance that will be used to load file */
     private File file;
+
+    /** Scanner instance that will be used to load file contents into Duke */
     private Scanner sc;
 
     public Storage(String filepath) throws DukeOnlyIOException {
@@ -28,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a arraylist of String objects that will be used to load the TaskList
+     *
+     * @return An ArrayList of String
+     */
     public ArrayList<String> load() {
         ArrayList<String> list = new ArrayList<>();
         while (sc.hasNext()) {
@@ -38,6 +48,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes into the current TaskList into file
+     *
+     * @param list the TaskList
+     * @throws DukeOnlyIOException when there is a IOException
+     */
     public void write(TaskList list) throws DukeOnlyIOException {
         try {
             this.writer = new FileWriter(file, false);
