@@ -1,12 +1,16 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Manager {
     public static String line = "------------------------------------------------------";
     private final List<Task> ls;
+    private final File file;
 
     Manager() {
         this.ls = new ArrayList<>();
+        this.file = new File("data/Duke.txt");
     }
 
     public void greeting(){
