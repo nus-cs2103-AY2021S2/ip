@@ -22,7 +22,9 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         taskList.add(newTask);
-        ui.printFormatMessage("\t  Got it. I've added this task:\n\t\t" + newTask.toString() + "\n\t  Now you have " + taskList.size() + " taskList in the list.");
+        ui.printFormatMessage("\t  Got it. I've added this task:\n\t\t" +
+                newTask.toString() + "\n\t  Now you have " + taskList.size() +
+                " taskList in the list.");
     }
 
     /**
@@ -33,9 +35,11 @@ public class TaskList {
     public void delete(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
-                throw new DukeException("There's no task " + (order + 1) + " in the list.");
+                throw new DukeException("There's no task " +
+                        (order + 1) + " in the list.");
             }
-            ui.printFormatMessage("\t  Noted. I've removed this task:\n" + "\t\t " + taskList.get(order).toString());
+            ui.printFormatMessage("\t  Noted. I've removed this task:\n" +
+                    "\t\t " + taskList.get(order).toString());
             taskList.remove(order);
         } catch (DukeException ex) {
             ui.printFormatMessage(ex.toString());
@@ -50,12 +54,14 @@ public class TaskList {
     public void markDone(int order) {
         try {
             if (order < 0 || order >= taskList.size()) {
-                throw new DukeException("There's no task " + (order + 1) + " in the list.");
+                throw new DukeException("There's no task " +
+                        (order + 1) + " in the list.");
             } else if (taskList.get(order).getDone()) {
                 throw new DukeException("This task has been finished before.");
             }
             taskList.get(order).markDone();
-            ui.printFormatMessage("\t  Nice! I've marked this task as done:\n\t\t " + taskList.get(order).toString());
+            ui.printFormatMessage("\t  Nice! I've marked this task as done:\n\t\t " +
+                    taskList.get(order).toString());
         } catch (DukeException ex) {
             ui.printFormatMessage(ex.toString());
         }
