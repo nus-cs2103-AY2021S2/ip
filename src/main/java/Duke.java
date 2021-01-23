@@ -8,25 +8,6 @@ public class Duke {
         this.list = new TaskList();
     }
 
-    /**
-     * Joins a sub-array of strings into 1 string where each element in sub-array is separate by a space.
-     *
-     * @param arr array containing sub-array to join
-     * @param start start index of sub-array to join
-     * @param end end index of sub-array to join
-     * @return string of sub-array joined with space
-     */
-    private String join(String[] arr, int start, int end) {
-        StringBuilder output = new StringBuilder();
-        for (int i = start; i <= end; i++) {
-            output.append(arr[i]);
-            if (i < end) {
-                output.append(" ");
-            }
-        }
-        return output.toString();
-    }
-
 
     void greet() {
         Printer.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
@@ -37,7 +18,7 @@ public class Duke {
         if (userInputSplit.length <= 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        String task = join(userInputSplit, 1, userInputSplit.length - 1);
+        String task = Helper.join(userInputSplit, 1, userInputSplit.length - 1);
         list.add(new ToDo(task));
     }
 
@@ -58,8 +39,8 @@ public class Duke {
         if (byIndex == userInputSplit.length - 1) {
             throw new DukeException("Missing date of the deadline.");
         }
-        String task = join(userInputSplit, 1, byIndex - 1);
-        String date = join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
+        String task = Helper.join(userInputSplit, 1, byIndex - 1);
+        String date = Helper.join(userInputSplit, byIndex + 1, userInputSplit.length - 1);
         list.add(new Deadline(task, date));
     }
 
@@ -80,8 +61,8 @@ public class Duke {
         if (atIndex == userInputSplit.length - 1) {
             throw new DukeException("Missing date of the Event.");
         }
-        String task = join(userInputSplit, 1, atIndex - 1);
-        String date = join(userInputSplit, atIndex + 1, userInputSplit.length - 1);
+        String task = Helper.join(userInputSplit, 1, atIndex - 1);
+        String date = Helper.join(userInputSplit, atIndex + 1, userInputSplit.length - 1);
         list.add(new Event(task, date));
     }
 
@@ -131,24 +112,20 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
         Duke duke = new Duke();
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                duke.handleInput(input);
-            } catch (DukeException e) {
-                Printer.printWithStyle(e.getMessage());
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if (!input.equals("bye")) {
+                try {
+                    duke.handleInput(input);
+                } catch (DukeException e) {
+                    Printer.printWithStyle(e.getMessage());
+                }
+            } else {
+                duke.bye();
+                break;
             }
-            input = scanner.nextLine();
         }
-        duke.bye();
-
     }
 }

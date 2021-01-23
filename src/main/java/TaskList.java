@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TaskList {
     ArrayList<Task> list;
@@ -6,6 +8,11 @@ public class TaskList {
     public TaskList() {
         this.list = new ArrayList<>();
     }
+
+    private void writeTaskToFile(Task task) {
+
+    }
+
     public void add(Task task) {
         this.list.add(task);
         Printer.printWithStyle(new String[] {
