@@ -38,7 +38,7 @@ public class Ui {
         System.out.println("Good job meow, I've marked this task as done:");
         System.out.printf("%d.[%s][%s] %s\n", index + 1, task.getTypeSymbol(), task.getStatusSymbol(),
                 task.getDesc());
-        System.out.println(BORDER);
+        System.out.println(BORDER + "\n");
     }
 
     public void printDeleteMsg(Task task, int tasksSize) {
