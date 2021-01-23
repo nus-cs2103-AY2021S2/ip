@@ -7,7 +7,10 @@ public class Task {
         this.isDone = false;
     }
 
-    void done() {
+    /**
+     * Marks the task as done and prints out to console that task is done.
+     */
+    private void done() {
         this.isDone = true;
         Printer.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }

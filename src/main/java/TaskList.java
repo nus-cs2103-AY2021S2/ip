@@ -6,6 +6,11 @@ public class TaskList {
     public TaskList() {
         this.list = new ArrayList<>();
     }
+
+    /**
+     * Adds a task to the list of tasks and prints to console the number of tasks in the list.
+     * @param task
+     */
     public void add(Task task) {
         this.list.add(task);
         Printer.printWithStyle(new String[] {
@@ -19,6 +24,10 @@ public class TaskList {
         this.list.get(taskNumber - 1).done();
     }
 
+    /**
+     * Removes a task from the list and prints to console number of tasks left in the list.
+     * @param taskNumber
+     */
     public void remove(int taskNumber) {
 
         Printer.printWithStyle(new String[] {
@@ -29,6 +38,9 @@ public class TaskList {
         this.list.remove(taskNumber - 1);
     }
 
+    /**
+     * Prints to console all tasks that are present in the list.
+     */
     public void printList() {
         String[] printedArray = new String[this.list.size() + 1];
         printedArray[0] = "Here are the tasks in your list:";

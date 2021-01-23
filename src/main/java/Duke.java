@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
+    /** Stores list of tasks */
     TaskList list;
 
     public Duke() {
@@ -8,14 +9,6 @@ public class Duke {
         this.list = new TaskList();
     }
 
-    /**
-     * Joins a sub-array of strings into 1 string where each element in sub-array is separate by a space.
-     *
-     * @param arr array containing sub-array to join
-     * @param start start index of sub-array to join
-     * @param end end index of sub-array to join
-     * @return string of sub-array joined with space
-     */
     private String join(String[] arr, int start, int end) {
         StringBuilder output = new StringBuilder();
         for (int i = start; i <= end; i++) {
@@ -28,12 +21,12 @@ public class Duke {
     }
 
 
-    void greet() {
+    private void greet() {
         Printer.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
 
-    void addToDo(String[] userInputSplit) throws DukeException {
+    private void addToDo(String[] userInputSplit) throws DukeException {
         if (userInputSplit.length <= 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
@@ -42,7 +35,7 @@ public class Duke {
     }
 
 
-    void addDeadline(String[] userInputSplit) throws DukeException {
+    private void addDeadline(String[] userInputSplit) throws DukeException {
         //Index of /by keyword
         int byIndex = 0;
         for (int i = 0; i < userInputSplit.length; i++) {
@@ -64,7 +57,7 @@ public class Duke {
     }
 
 
-    void addEvent(String[] userInputSplit) throws DukeException {
+    private void addEvent(String[] userInputSplit) throws DukeException {
         //Index of /at keyword
         int atIndex = 0;
         for (int i = 0; i < userInputSplit.length; i++) {
@@ -86,7 +79,7 @@ public class Duke {
     }
 
 
-    void doneTask(String[] userInputSplit) throws DukeException {
+    private void doneTask(String[] userInputSplit) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(userInputSplit[1]);
             this.list.done(taskNumber);
@@ -95,7 +88,7 @@ public class Duke {
         }
     }
 
-    void deleteTask(String[] userInputSplit) throws DukeException {
+    private void deleteTask(String[] userInputSplit) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(userInputSplit[1]);
             this.list.remove(taskNumber);
@@ -104,12 +97,16 @@ public class Duke {
         }
     }
 
-    void bye() {
+    public void bye() {
         Printer.printWithStyle("Bye. Hope to see you again soon!");
     }
 
-
-    void handleInput(String userInput) throws DukeException {
+    /**
+     * Parses the user input to find and handle commands containing keywords.
+     * @param userInput
+     * @throws DukeException if command is in an incorrect format.
+     */
+    public void handleInput(String userInput) throws DukeException {
         String[] splitBySpaces = userInput.trim().split("\\s+");
         String keyword = splitBySpaces[0];
         if (keyword.equals("list")) {
