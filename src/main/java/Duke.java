@@ -1,11 +1,5 @@
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
 import exceptions.DukeException;
-import exceptions.MissingInputException;
+import exceptions.AddMissingInputException;
 import exceptions.UnknownInputException;
 
 import tasks.ToDoTask;
@@ -15,137 +9,131 @@ import tasks.DeadlineTask;
 
 public class Duke {
 
-    public static void printDivider() {
-        String divider = "    ___________________________________________";
-        System.out.println(divider);
-    }
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public static void welcome() {
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-    }
+    public Duke(String filePath) {
 
-    public static void bye() {
-        System.out.println("     Bye. Hope to see you again soon!");
-    }
-
-    public static void main(String[] args) {
-        printDivider();
-        welcome();
-        printDivider();
-
-        Scanner sc = new Scanner(System.in);
-        File file = new File("./data/duke.txt");
+        ui = new Ui();
 
         try {
-            if (!file.exists()) {
-                file.getParentFile().mkdir();
-                file.createNewFile();
-            }
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
-            FileWriter writer = new FileWriter(file, false);
-            Scanner readInput = new Scanner(file);
+    public void run() {
+        ui.printDivider();
+        ui.welcome();
+        ui.printDivider();
 
+        try {
             boolean carryOn = true;
-            TaskHandler handler = new TaskHandler();
 
             while (carryOn) {
-                String action = sc.nextLine();
-                String[] arr = action.split(" ");
-                    switch(arr[0]) {
+
+                String action = ui.read();
+                Parser parser = new Parser(action);
+                parser.check();
+                String[] parsedAction = parser.getParsedAction();
+
+                switch (parsedAction[0]) {
                     case "todo":
-                        if (arr.length <= 1)
-                            throw new MissingInputException(arr[0]);
-                        printDivider();
+                        ui.printDivider();
+                        ui.addPrint();
 
-                        handler.addPrint();
-                        ToDoTask todo = handler.handleToDoTask(action);
-                        System.out.println(todo);
-                        handler.countTasks();
+                        ToDoTask todo = tasks.handleToDoTask(action);
 
-                        printDivider();
+                        ui.printTask(todo);
+                        ui.countTasks(tasks);
+                        ui.printDivider();
                         break;
+
                     case "deadline":
-                        if (arr.length <= 1)
-                            throw new MissingInputException(arr[0]);
-                        printDivider();
+                        ui.printDivider();
+                        ui.addPrint();
 
-                        handler.addPrint();
-                        DeadlineTask deadlineTask = handler.handleDeadlineTask(action);
-                        System.out.println(deadlineTask);
-                        handler.countTasks();
+                        DeadlineTask deadlineTask = tasks.handleDeadlineTask(action);
 
-                        printDivider();
+                        ui.printTask(deadlineTask);
+                        ui.countTasks(tasks);
+                        ui.printDivider();
                         break;
+
                     case "event":
-                        if (arr.length <= 1)
-                            throw new MissingInputException(arr[0]);
-                        printDivider();
+                        ui.printDivider();
 
-                        handler.addPrint();
-                        EventTask eventTask  = handler.handleEventTask(action);
-                        System.out.println(eventTask);
-                        handler.countTasks();
+                        ui.addPrint();
 
-                        printDivider();
+                        EventTask eventTask = tasks.handleEventTask(action);
+
+                        ui.printTask(eventTask);
+                        ui.countTasks(tasks);
+                        ui.printDivider();
                         break;
+
                     case "list":
-                        printDivider();
-                        handler.printStored();
-                        printDivider();
+                        ui.printDivider();
+                        ui.printStored(tasks);
+                        ui.printDivider();
                         break;
+
                     case "done":
-                        if (arr.length <= 1)
-                            throw new MissingInputException("No task number to mark done");
-                        int number = Integer.valueOf(arr[1]);
-                        printDivider();
-                        Task completed = handler.handleDone(number);
-                        System.out.println(completed);
-                        printDivider();
+                        int number = Integer.valueOf(parsedAction[1]);
+                        ui.printDivider();
+                        ui.printMarked();
+
+                        Task completed = tasks.handleDone(number);
+
+                        ui.printTask(completed);
+                        ui.printDivider();
                         break;
-                        case "check":
-                            if (arr.length <= 1)
-                                throw new MissingInputException("No date to check");
-                            handler.printOnDateTasks((arr[1]));
-                            break;
+
+                    case "check":
+                        ui.printDivider();
+                        String result = tasks.findOnDateTasks((parsedAction[1]));
+                        ui.print(result);
+                        ui.printDivider();
+                        break;
+
                     case "bye":
                         carryOn = false;
                         break;
+
                     case "delete":
-                        if (arr.length <= 1)
-                            throw new MissingInputException("No task number input");
-                        int index = Integer.valueOf(arr[1]);
-                        printDivider();
+                        int index = Integer.valueOf(parsedAction[1]);
+                        ui.printDivider();
+                        ui.printRemoved();
 
-                        Task task = handler.handleDelete(index);
-                        System.out.println(task);
-                        handler.countTasks();
+                        Task task = tasks.handleDelete(index);
+                        ui.printTask(task);
+                        ui.countTasks(tasks);
 
-                        printDivider();
+                        ui.printDivider();
                         break;
+
                     default:
                         throw new UnknownInputException();
-                    }
+                }
             }
 
-            printDivider();
-            bye();
-            printDivider();
+            ui.printDivider();
+            ui.bye();
+            ui.printDivider();
 
-            writer.write(handler.getList());
-            writer.close();
-            readInput.close();
-
+            storage.write(tasks);
         } catch (DukeException e) {
-            printDivider();
-            System.out.println(e.getMessage());
-            printDivider();
-        } catch (FileNotFoundException err) {
-            System.out.println(err.getMessage());
-        } catch (IOException err) {
-            System.out.println(err.getMessage());
+            ui.printDivider();
+            ui.print(e.getMessage());
+            ui.printDivider();
         }
+    }
 
-        sc.close();
+    public static void main(String[] args) {
+        new Duke("./data/tasks.txt").run();
     }
 }
