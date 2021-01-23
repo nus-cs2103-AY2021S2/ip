@@ -10,4 +10,8 @@ abstract class Command {
     }
 
     public abstract void execute() throws DukeCommandException;
+
+    public boolean isToExit() {
+        return false;
+    }
 }
