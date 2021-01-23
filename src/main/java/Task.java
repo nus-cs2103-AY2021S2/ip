@@ -7,12 +7,8 @@ public class Task {
         this.isDone = false;
     }
 
-    public String status() {
-        return (isDone ? "X" : " ");
-    }
-
     public String toString() {
-        return "[" + status() + "] " + this.name;
+        return "[" + (isDone ? "X" : " ") + "] " + this.name;
     }
 
     public String markAsDone() {
