@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * A Duke.Chatbot that provides todo-list function for users.
+ * A duke.Chatbot that provides todo-list function for users.
  */
 public class Chatbot {
     private final TaskList taskList;

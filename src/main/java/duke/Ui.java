@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Ui {
     static String horizontalLine = "\t--------------------------------\n";

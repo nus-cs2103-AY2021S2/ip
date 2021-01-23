@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Parser {
     public Command parse(String[] taskString) {

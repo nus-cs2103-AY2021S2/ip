@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,8 +9,6 @@ public class Deadline extends Task {
     Deadline(String name, TaskType type, LocalDate time) {
         super(name, type);
         this.time = time;
-
-
     }
 
     Deadline(String name, TaskType type, LocalDate time, boolean done) {

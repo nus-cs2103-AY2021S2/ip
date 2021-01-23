@@ -1,4 +1,6 @@
-import Duke.*;
+import duke.Chatbot;
+import duke.Storage;
+import duke.Ui;
 
 public class Duke {
     private final Ui ui;
