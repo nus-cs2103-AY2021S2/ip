@@ -12,9 +12,6 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    /**
-     * Method to change and show that the task is done.
-     */
     public void markAsDone() {
         this.isDone = true;
     }

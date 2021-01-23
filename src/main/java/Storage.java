@@ -1,0 +1,98 @@
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+
+public class Storage {
+
+    protected String filepath;
+
+    public Storage(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public void store(ArrayList<Task> tasks) throws DukeException {
+
+        try {
+
+            FileWriter fw = new FileWriter(filepath);
+            int size = tasks.size();
+            String string = "", task = "", time = "";
+
+            for (int i = 0; i < size; i++) {
+                string = tasks.get(i).toString();
+                if (string.contains("(")) {
+                    String[] str = string.split("\\(", 2);
+                    task = str[0];
+                    str = str[1].split("\\)", 2);
+                    time = str[0];
+                    fw.write(task + "/" + time + "\n");
+                } else {
+                    fw.write(string + "\n");
+                }
+            }
+            fw.close();
+
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+        }
+
+    }
+
+    public ArrayList<Task> load() throws DukeException {
+
+        try {
+
+            File f = new File(filepath);
+            Scanner scan = new Scanner(f);
+            ArrayList<Task> list = new ArrayList<>();
+            String string, info, temp, time;
+            char action, done;
+            Task task;
+
+            while (scan.hasNext()) {
+
+                string = scan.nextLine();
+                action = string.charAt(1);
+                done = string.charAt(4);
+                String[] str = string.split("] ", 2);
+                temp = str[1];
+
+                if (temp.contains(" /")) {
+                    str = temp.split(" /", 2);
+                    info = str[0];
+                    str = str[1].split(" ", 2);
+                    time = str[1];
+                } else {
+                    info = temp;
+                    time = "";
+                }
+
+                if (action == 'T') {
+                    task = new Todo(info);
+                } else if (action == 'D') {
+                    task = new Deadline(info, time);
+                } else if (action == 'E') {
+                    task = new Event(info, time);
+                } else {
+                    task = null;
+                }
+
+                if (done == 'X') {
+                    task.markAsDone();
+                }
+
+                list.add(task);
+            }
+            return list;
+
+        } catch (FileNotFoundException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+        }
+
+    }
+
+
+}
