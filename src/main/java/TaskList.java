@@ -1,7 +1,8 @@
 import java.util.*;
 
 public class TaskList implements Iterable<Task> {
-    private Vector<Task> taskArray;
+    private final Vector<Task> taskArray;
+    private int doneCount;
 
     /**
      * Construct a new TaskList from existing tasks.
@@ -9,6 +10,19 @@ public class TaskList implements Iterable<Task> {
      */
     public TaskList(Collection<Task> taskArray) {
         this.taskArray = new Vector<>(taskArray);
+        for (Task task : taskArray) {
+            if (task.isDone) {
+                ++doneCount;
+            }
+        }
+    }
+
+    /**
+     * Construct a new TaskList with no existing tasks
+     */
+    public TaskList() {
+        this.taskArray = new Vector<>();
+        this.doneCount = 0;
     }
 
     /**
@@ -27,7 +41,11 @@ public class TaskList implements Iterable<Task> {
      */
     public Task remove(int index) throws InvalidTaskIndexException {
         try {
-            return taskArray.remove(index);
+            Task deletedTask =  taskArray.remove(index);
+            if (deletedTask.isDone) {
+                --doneCount;
+            }
+            return deletedTask;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException();
         }
@@ -53,6 +71,31 @@ public class TaskList implements Iterable<Task> {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException();
         }
+    }
+
+    /**
+     * Mark the task at index as done.
+     * @param index index of the task to be marked as done
+     * @return the task marked as done
+     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
+     */
+    public Task markDone(int index) throws InvalidTaskIndexException {
+        try {
+            Task doneTask = taskArray.get(index);
+            doneTask.markAsDone();
+            ++doneCount;
+            return doneTask;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidTaskIndexException();
+        }
+    }
+
+    /**
+     * Get the number of incomplete tasks.
+     * @return number of incomplete tasks
+     */
+    public int getIncompleteRemaining() {
+        return taskArray.size() - doneCount;
     }
 
     /**

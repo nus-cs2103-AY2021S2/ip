@@ -7,15 +7,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Storage {
-    private final String filePath;
-    private final File file;
-    private static final String deliminator = "\\|";
+    final private String filePath;
+    final private File file;
+    final private static String deliminator = "\\|";
+    final private static Pattern PARENT_DIRECTORY = Pattern.compile("(?<parentDirectory>^.*/).*$");
+
+    private boolean canSave;
 
     public Storage(String path) {
         this.filePath = path;
-        file = new File(filePath);
+        Matcher matcher = PARENT_DIRECTORY.matcher(this.filePath);
+        if (matcher.matches()) {
+            String parentDirectory = matcher.group("parentDirectory") == null ? "./" : matcher.group("parentDirectory");
+            File folder = new File(parentDirectory);
+            if (!folder.exists()) {
+                this.canSave = folder.mkdirs();
+            }
+        }
+
+        this.file = new File(filePath);
     }
 
     public Vector<Task> load() throws DukeException {
@@ -52,19 +66,23 @@ public class Storage {
         return ret;
     }
 
-    public void save(final TaskList tasks) throws DukeException {
-        List<Task> list = tasks.export();
-        try (FileWriter fw = new FileWriter(filePath, false)) {
-            writeToFile(fw, list);
-        } catch (IOException e) {
-            throw new DukeException("TaskSaver.save: IOException encountered");
-        }
-    }
-
     private void writeToFile(FileWriter fw, List<Task> tasks) throws IOException {
         for (Task task : tasks) {
             LinkedList<String> list = task.export();
             fw.write(String.join("|", list) + System.lineSeparator());
+        }
+    }
+
+    public void save(final TaskList tasks) throws DukeException {
+        if (!canSave) {
+            return;
+        }
+
+        List<Task> list = tasks.export();
+        try (FileWriter fw = new FileWriter(filePath, false)) {
+            writeToFile(fw, list);
+        } catch (IOException e) {
+            throw new DukeException("Storage: IOException encountered");
         }
     }
 }
