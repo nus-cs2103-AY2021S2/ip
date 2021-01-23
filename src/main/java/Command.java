@@ -1,5 +1,14 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Command {
-    
+
+    public static LocalDateTime parseTime(String str) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return LocalDateTime.from(formatter.parse(str));
+    }
+
     public static CommandType getType(String str) throws DukeException {
         int strLength = str.length();
         if (str.equalsIgnoreCase("bye")) {
@@ -91,7 +100,11 @@ public class Command {
                 } else if (StringParser.isBlank(subStrTime)) {
                     throw new DukeException("Void argument: Time field is blank");
                 } else {
-                    return new Deadline(subStrContent, subStrTime);
+                    try {
+                        return new Deadline(subStrContent, parseTime(subStrTime));
+                    } catch (DateTimeException e) {
+                        throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    }
                 }
             } else if (type == CommandType.EVENT) {
                 int indexOfAt = command.toLowerCase().indexOf("/at");
@@ -102,7 +115,11 @@ public class Command {
                 } else if (StringParser.isBlank(subStrTime)) {
                     throw new DukeException("Void argument: Time field is blank");
                 } else {
-                    return new Event(subStrContent, subStrTime);
+                    try {
+                        return new Event(subStrContent, parseTime(subStrTime));
+                    } catch (DateTimeException e) {
+                        throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    }
                 }
             } else {
                 throw new DukeException("Invalid command: Unknown reason");
