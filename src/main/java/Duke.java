@@ -1,6 +1,11 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     private final StringBuffer boundOfChatBox = new StringBuffer();
@@ -50,7 +55,7 @@ public class Duke {
         }
     }
 
-    public void addDeadline(String des) throws TextException {
+    public void addDeadline(String des) throws TextException, DateTimeParseException {
         try {
             if (des.isEmpty() || des.equals(" "))
                 throw new TextException("OOPS!!! The description of a deadline cannot be empty.\n");
@@ -58,17 +63,20 @@ public class Duke {
                 int endOfDescription = des.indexOf("/by ");
                 String description = des.substring(0, endOfDescription);
                 String deadline = des.substring(endOfDescription + 4);
-                Deadline ddl = new Deadline(description, deadline);
+                LocalDate date = LocalDate.parse(deadline);
+                Deadline ddl = new Deadline(description, date);
                 add(ddl);
             } else {
-                throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
+                throw new TextException("OOPS!!! Please enter '/by YYYY-MM-DD' after description.\n");
             }
-        } catch (TextException e) {
-            formatInChatBox(e.getMsgDes());
+        } catch (TextException textException) {
+            formatInChatBox(textException.getMsgDes());
+        } catch (DateTimeParseException dateException) {
+            formatInChatBox("OOPS!!! Please use '/by YYYY-MM-DD' after description.\n");
         }
     }
 
-    public void addEvent(String des) throws TextException {
+    public void addEvent(String des) throws TextException, DateTimeParseException {
         try {
             if (des.isEmpty() || des.equals(" "))
                 throw new TextException("OOPS!!! The description of a event cannot be empty.\n");
@@ -76,13 +84,16 @@ public class Duke {
                 int endOfDescription = des.indexOf("/at ");
                 String description = des.substring(0, endOfDescription);
                 String time = des.substring(endOfDescription + 4);
-                Event event = new Event(description, time);
+                LocalDate date = LocalDate.parse(time);
+                Event event = new Event(description, date);
                 add(event);
             } else {
-                throw new TextException("OOPS!!! Please enter '/by deadline' after description\n");
+                throw new TextException("OOPS!!! Please enter '/at YYYY-MM-DD' after description\n");
             }
         } catch (TextException e) {
             formatInChatBox(e.getMsgDes());
+        } catch (DateTimeParseException dateException) {
+            formatInChatBox("OOPS!!! Please use '/at YYYY-MM-DD' after description.\n");
         }
     }
 
