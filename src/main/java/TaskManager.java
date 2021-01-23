@@ -95,6 +95,12 @@ public class TaskManager {
         this.isActive = true;
     }
 
+    /**
+     * Prints out all existing Tasks that are being stored in the task list.
+     *
+     * @param description The user input which should be an empty String
+     * @throws DukeException If the description is not an empty String
+     */
     protected void listAll(String description) throws DukeException {
         if (!description.equals("")) {
             String errorStr = "The list command should be called without " +
