@@ -4,10 +4,9 @@ import duke.*;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import static duke.Duke.convertStringToDate;
 
 public class Data {
     private static final String PATHNAME = "./src/main/java/duke/data/data.txt";
@@ -45,21 +44,17 @@ public class Data {
                 task = new Todo(desc);
                 break;
             case DEADLINE:
-                task = new Deadline(desc, convertStringToDate(taskArgs[3]));
+                task = new Deadline(desc, LocalDateTime.parse(taskArgs[3]));
                 break;
             case EVENT:
-                task = new Event(desc, convertStringToDate(taskArgs[3]));
+                task = new Event(desc, LocalDateTime.parse(taskArgs[3]));
                 break;
-            default:
-                System.out.println("There was an error in getting the task object for " + taskString);
             }
             if (isDone) {
                 assert task != null;
                 task.markDone();
             }
             return task;
-        } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
         } catch (Exception e) {
             throw new DukeException("There seems to be something wrong with the menu file...");
         }
