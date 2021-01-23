@@ -10,6 +10,7 @@ public class ListCommand extends Command {
     }
 
     public void execute(Ui ui, TaskManager tm, Storage st) {
+        ui.println("Listing all tasks: ");
         ui.showTasks(tm.getTasks());
     }
 }
