@@ -99,23 +99,29 @@ public class Duke {
     }
 
     private static void addDeadline(String desc) throws DukeException {
-        if (!desc.contains("/by"))
-            throw new DukeException("Hmm.. When do you want this order to be served by?\nTry again!");
-        String description = desc.split(" /by ", 2)[0];
-        String date = desc.split(" /by ", 2)[1];
-        Task task = new Deadline(description, date);
-        tasks.add(task);
-        displayAddedTask(task);
+        String[] args = desc.split(" /by ", 2);
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty())
+            throw new DukeException("Looks like your order isn't complete...");
+        try {
+            Task task = new Deadline(args[0], args[1]);
+            tasks.add(task);
+            displayAddedTask(task);
+        } catch (Exception e) {
+            throw new DukeException("It seems like your order isn't complete...");
+        }
     }
 
     private static void addEvent(String desc) throws DukeException {
-        if (!desc.contains("/at"))
-            throw new DukeException("Hmm.. When do you want this order to be served?\nTry again!");
-        String description = desc.split(" /at ", 2)[0];
-        String date = desc.split(" /at ", 2)[1];
-        Task task = new Event(description, date);
-        tasks.add(task);
-        displayAddedTask(task);
+        String[] args = desc.split(" /at ", 2);
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty())
+            throw new DukeException("Looks like your order isn't complete...");
+        try {
+            Task task = new Event(args[0], args[1]);
+            tasks.add(task);
+            displayAddedTask(task);
+        } catch (Exception e) {
+            throw new DukeException("It seems like your order isn't complete...");
+        }
     }
 
     private static void markDone(String[] command) throws DukeException {
