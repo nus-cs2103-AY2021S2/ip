@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -75,4 +76,13 @@ public class TaskList {
         Ui.list(lst);
     }
 
+    public void findTask(String keyword) {
+        List<Task> res = new ArrayList<>();
+        for (Task t: lst) {
+            if (t.getTask().contains(keyword)) {
+                res.add(t);
+            }
+        }
+        Ui.list(res);
+    }
 }

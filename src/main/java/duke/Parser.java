@@ -16,6 +16,8 @@ public class Parser {
             taskList.markDone(command.substring(5));
         } else if (command.startsWith("delete")) {
             taskList.deleteTask(command.substring(7));
+        } else if (command.startsWith("find")){
+            taskList.findTask(command.substring(5));
         } else {
             taskList.addTask(command);
         }
