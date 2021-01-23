@@ -10,8 +10,13 @@ import duke.tasks.DeadlineTask;
 
 public class Duke {
 
+    /** Storage instance that is used by Duke during run for loading and writing of file*/
     private Storage storage;
+
+    /** TaskList instance used by Duke during run that manages the tasks */
     private TaskList tasks;
+
+    /** Ui instance used by Duke during run to interact with User */
     private Ui ui;
 
     public Duke(String filePath) {
@@ -117,8 +122,6 @@ public class Duke {
                         ui.printDivider();
                         break;
 
-                    default:
-                        throw new UnknownInputException();
                 }
             }
 
