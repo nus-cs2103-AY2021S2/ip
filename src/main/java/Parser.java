@@ -56,17 +56,19 @@ public class Parser {
         String startEndPattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
                 "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
 
-        if(text.length() == 0) {
-            throw new DukeCommandException("event", text, "The details of a Event cannot be empty.");
-        } else if(!text.contains("/start") || !text.contains("/end") || text.split(" /start | /end ").length != 3) {
-            throw new DukeCommandException("event", text, "Description, start datetime, and end datetime " +
+        String params = text.substring(5).stripLeading();
+
+        if(params.length() == 0) {
+            throw new DukeCommandException("event", params, "The details of a Event cannot be empty.");
+        } else if(!params.contains("/start") || !params.contains("/end") || params.split(" /start | /end ").length != 3) {
+            throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
                     "must be given for an Event.");
-        } else if(!text.split(" /start | /end ")[1].matches(startEndPattern)
-                || !text.split(" /start | /end ")[2].matches(startEndPattern)) {
-            throw new DukeCommandException("deadline", text, "Start or end date has incorrect format, try to " +
+        } else if(!params.split(" /start | /end ")[1].matches(startEndPattern)
+                || !params.split(" /start | /end ")[2].matches(startEndPattern)) {
+            throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
                     "follow the format of dd-mm-yyyy hAM/PM.");
         } else {
-            String[] splits = text.split(" /start | /end ");
+            String[] splits = params.split(" /start | /end ");
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
             LocalDateTime start = LocalDateTime.parse(splits[1], formatter);
@@ -77,20 +79,24 @@ public class Parser {
     }
 
     public static DoneCommand parseDone(String text) throws DukeCommandException {
-        if(!text.matches("-?(0|[1-9]\\d*)")) {
-            throw new DukeCommandException("done", text, "Please provide an actual number for the task you are done " +
+        String params = text.substring(4).stripLeading();
+
+        if(!params.matches("-?(0|[1-9]\\d*)")) {
+            throw new DukeCommandException("done", params, "Please provide an actual number for the task you are done " +
                     "with.");
         } else {
-            return new DoneCommand(Integer.parseInt(text) - 1);
+            return new DoneCommand(Integer.parseInt(params) - 1);
         }
     }
 
     public static DeleteCommand parseDelete(String text) throws DukeCommandException {
-        if(!text.matches("-?(0|[1-9]\\d*)")) {
-            throw new DukeCommandException("delete", text, "Please provide an actual number for the task you are " +
+        String params = text.substring(6).stripLeading();
+
+        if(!params.matches("-?(0|[1-9]\\d*)")) {
+            throw new DukeCommandException("delete", params, "Please provide an actual number for the task you are " +
                     "deleting.");
         } else {
-            return new DeleteCommand(Integer.parseInt(text) - 1);
+            return new DeleteCommand(Integer.parseInt(params) - 1);
         }
     }
 

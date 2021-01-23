@@ -39,22 +39,18 @@ public class TaskManager {
         }
     }
 
-    public void deleteTask(int index) throws DukeTaskException {
-        index -= 1;
-
+    public Task deleteTask(int index) throws DukeTaskException {
         if(tasks.size() == 0){
             throw new DukeTaskException("There are no task to be deleted.");
         } else if(index < 0 || index >= tasks.size()) {
             throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size() +
                     " (inclusive).");
         } else {
-            tasks.remove(index);
+            return tasks.remove(index);
         }
     }
 
     public void completeTask(int index) throws DukeTaskException {
-        index -= 1;
-
         if(tasks.size() == 0){
             throw new DukeTaskException("There are no task to be completed.");
         } else if(index < 0 || index >= tasks.size()) {

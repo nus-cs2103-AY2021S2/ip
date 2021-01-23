@@ -37,6 +37,15 @@ public class Ui {
         System.out.println(BORDER);
     }
 
+    public void printDeleteMsg(Task task, int tasksSize) {
+        System.out.println("___________________________________________________________");
+        System.out.println("Noted meow. I've removed this task:");
+        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(),
+                task.getDesc());
+        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
+        System.out.println("___________________________________________________________\n");
+    }
+
     public void printTaskList(List<Task> tasks) {
         System.out.println(BORDER);
         System.out.println("Meow, here are the tasks in your list:");
