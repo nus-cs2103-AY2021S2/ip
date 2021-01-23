@@ -5,7 +5,11 @@ public class Duke {
 
     public Duke() {
         greet();
-        this.list = new TaskList();
+        try {
+            this.list = new TaskList();
+        } catch (DukeException e) {
+            System.err.println(e);
+        }
     }
 
 
