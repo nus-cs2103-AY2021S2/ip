@@ -14,7 +14,7 @@ public class DeadlineTask extends Task {
     protected LocalDate deadline;
 
     /**
-     *  duke.tasks.DeadlineTask constructor.
+     *  DeadlineTask constructor.
      *
      *  @param name Name of duke.tasks.DeadlineTask.
      *  @param deadline Specified deadline of task.
@@ -24,6 +24,13 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     *  DeadlineTask constructor. For use with persistent storage.
+     *
+     *  @param name Name of DeadlineTask.
+     *  @param deadline Specified deadline of task.
+     *  @param isCompleted Whether DeadlineTask is completed, or not.
+     */
     public DeadlineTask(String name, LocalDate deadline, boolean isCompleted) {
         super(name);
         this.deadline = deadline;
@@ -32,6 +39,11 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     *  Converts DeadlineTask object to String suitable for storage.
+     *
+     * @return String DeadlineTask information in a file-friendly format
+     */
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",

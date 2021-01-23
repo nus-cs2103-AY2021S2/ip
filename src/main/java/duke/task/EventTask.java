@@ -16,7 +16,7 @@ public class EventTask extends Task {
     /**
      *  duke.tasks.EventsTask constructor.
      *
-     *  @param name Name of duke.tasks.EventsTask.
+     *  @param name Name of EventsTask.
      *  @param duration Specified duration of task.
      */
     public EventTask(String name, LocalDate duration) {
@@ -24,6 +24,13 @@ public class EventTask extends Task {
         this.duration = duration;
     }
 
+    /**
+     *  EventTask constructor. For use with persistent storage.
+     *
+     *  @param name Name of EventTask.
+     *  @param duration Specified duration of task.
+     *  @param isCompleted Whether EventTask is completed, or not.
+     */
     public EventTask(String name, LocalDate duration, boolean isCompleted) {
         super(name);
         this.duration = duration;
@@ -32,6 +39,11 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     *  Converts EventTask object to String suitable for storage.
+     *
+     * @return String EventTask information in a file-friendly format
+     */
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");
         return String.format("%s|%s|%s|%s",

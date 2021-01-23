@@ -8,6 +8,11 @@ public class Duke {
     private Ui ui;
     private Storage st;
 
+    /**
+     *  Duke constructor.
+     *
+     *  @param filePath Relative filepath to persistent storage.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         tm = new TaskManager();
@@ -20,7 +25,7 @@ public class Duke {
         }
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcome();
 
         boolean done = false;

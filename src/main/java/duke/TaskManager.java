@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import duke.exception.DukeCorruptFileException;
+import duke.exception.DukeIOException;
 import duke.exception.DukeIndexRangeException;
 import duke.exception.DukeTaskAlreadyDoneException;
 import duke.task.DeadlineTask;
@@ -27,6 +28,12 @@ public class TaskManager {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     *  Loads pre-existing tasks, from String ArrayList directly from file.
+     *
+     *  @param arr ArrayList of Task information
+     *  @throws DukeCorruptFileException If information given is corrupt in any way.
+     */
     public void loadArray(ArrayList<String> arr) throws DukeCorruptFileException {
         try {
             for (String line : arr) {
