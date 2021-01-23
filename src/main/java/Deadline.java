@@ -9,7 +9,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveTime() {
-        return "by";
+        return by;
     }
 
     @Override
