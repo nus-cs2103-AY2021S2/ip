@@ -74,6 +74,9 @@ public class Parser {
         ) {
             String taskType = parseTaskType(input);
             String taskName = parseTaskName(input);
+            if (taskName == null) {
+                return;
+            }
             LocalDate taskDate = parseTaskDate(input);
             AddCommand.execute(taskType, taskName, taskDate);
 
@@ -132,18 +135,31 @@ public class Parser {
     public static String parseTaskName(String input) {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
-        String taskDetails = parsedString[1];
+        String taskDetails;
         String taskName;
 
-        if (taskType.toUpperCase().equals(Cmd.TODO.toString())) {
-            taskName = taskDetails.trim();
-        } else if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
-            taskName = taskDetails.split("/by", 2)[0].trim();
-        } else {
-            taskName = taskDetails.split("/at", 2)[0].trim();
+        try {
+            taskDetails = parsedString[1];
+            if (taskType.toUpperCase().equals(Cmd.TODO.toString())) {
+                taskName = taskDetails.trim();
+            } else if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
+                taskName = taskDetails.split("/by", 2)[0].trim();
+            } else {
+                taskName = taskDetails.split("/at", 2)[0].trim();
+            }
+            return taskName;
+        } catch (IndexOutOfBoundsException e) {
+            if (taskType.equalsIgnoreCase("TODO")) {
+                Ui.showError("Usage for todo: " + cmdInfo.get(Cmd.TODO.toString()));
+            } else if (taskType.equalsIgnoreCase("DEADLINE")) {
+                Ui.showError("Usage for deadline: " + cmdInfo.get(Cmd.DEADLINE.toString()));
+            } else if (taskType.equalsIgnoreCase("EVENT")) {
+                Ui.showError("Usage for event: " + cmdInfo.get(Cmd.EVENT.toString()));
+            } else {
+                Ui.showError("Invalid instruction, perhaps you meant todo, deadline or event?");
+            }
+            return null;
         }
-
-        return taskName;
     }
 
     /**
