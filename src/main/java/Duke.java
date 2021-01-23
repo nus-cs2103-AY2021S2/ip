@@ -95,16 +95,25 @@ public class Duke {
                         printDivider();
                         break;
                     case "done":
+                        if (arr.length <= 1)
+                            throw new MissingInputException("No task number to mark done");
                         int number = Integer.valueOf(arr[1]);
                         printDivider();
                         Task completed = handler.handleDone(number);
                         System.out.println(completed);
                         printDivider();
                         break;
+                        case "check":
+                            if (arr.length <= 1)
+                                throw new MissingInputException("No date to check");
+                            handler.printOnDateTasks((arr[1]));
+                            break;
                     case "bye":
                         carryOn = false;
                         break;
                     case "delete":
+                        if (arr.length <= 1)
+                            throw new MissingInputException("No task number input");
                         int index = Integer.valueOf(arr[1]);
                         printDivider();
 

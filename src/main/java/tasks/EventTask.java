@@ -1,18 +1,27 @@
 package tasks;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task{
-    private String timing;
+    private LocalDate timing;
 
     public EventTask(String description, String timing) {
         super(description, "[E]");
-        this.timing = timing;
+        this.timing = LocalDate.parse(timing);
     }
 
     public String getTiming() {
-        int splitIndex = this.timing.indexOf(" ");
-        String at = this.timing.substring(0, splitIndex);
-        String time = this.timing.substring(splitIndex);
-        return "(" + at + ":" + time + ")";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return "(at: " + this.timing.format(format) + ")";
+    }
+
+    public String getUnformattedTiming() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return this.timing.format(format);
+    }
+
+    public LocalDate getTimingAsLocalDate() {
+        return this.timing;
     }
 
     public char getType() {

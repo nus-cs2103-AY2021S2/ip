@@ -5,6 +5,8 @@ import tasks.DeadlineTask;
 import tasks.EventTask;
 import tasks.Task;
 import tasks.ToDoTask;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class TaskHandler {
     public List<Task> inputList;
@@ -57,7 +59,7 @@ public class TaskHandler {
         int descriptionIndex = action.indexOf("/");
 
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
-        String event =  action.substring(descriptionIndex + 1);
+        String event =  action.substring(descriptionIndex + 4);
         EventTask eventTask= new EventTask(description, event);
 
         this.add(eventTask);
@@ -70,7 +72,7 @@ public class TaskHandler {
         int descriptionIndex = action.indexOf("/");
 
         String description = action.substring(actionIndex + 1, descriptionIndex - 1);
-        String deadline =  action.substring(descriptionIndex + 1);
+        String deadline =  action.substring(descriptionIndex + 4);
         DeadlineTask deadlineTask= new DeadlineTask(description, deadline);
 
         this.add(deadlineTask);
@@ -107,25 +109,39 @@ public class TaskHandler {
 
             if (type == 'D') {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
-                date = deadlineTask.getDeadline();
-                int separator = date.indexOf(":");
-                date = date.substring(separator + 1, date.length() - 1);
+                date = deadlineTask.getUnformattedDeadline();
             } else if (type == 'E') {
                 EventTask eventTask = (EventTask) task;
-                date = eventTask.getTiming();
-                int separator = date.indexOf(":");
-                date = date.substring(separator + 1, date.length() - 1);
+                date = eventTask.getUnformattedTiming();;
             }
 
             result += type + " | " + status +  " | " + description;
             if (date.equals("")) {
                 result += "\n";
             } else {
-                result += " |" + date + "\n";
+                result += " | " + date + "\n";
             }
         }
 
         return result;
+    }
+
+    public void printOnDateTasks(String date) {
+        LocalDate toSearch = LocalDate.parse(date);
+
+        for (Task task: inputList) {
+            if (task.getType() == 'D') {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+                if (deadlineTask.getDeadlineAsLocalDate().equals(toSearch))
+                    System.out.println(deadlineTask);
+
+            } else if (task.getType() == 'E') {
+                EventTask eventTask = (EventTask) task;
+                if (eventTask.getTimingAsLocalDate().equals(toSearch))
+                    System.out.println(eventTask);
+            }
+
+        }
     }
 
     public void countTasks() {

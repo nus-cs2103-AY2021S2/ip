@@ -1,17 +1,28 @@
 package tasks;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task{
-    private String deadline;
+    private LocalDate deadline;
 
     public DeadlineTask(String description, String deadline) {
         super(description, "[D]");
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     public String getDeadline() {
-        int index = deadline.indexOf(" ");
-        return "(" + this.deadline.substring(0, index) + ":" + this.deadline.substring(index) + ")";
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return "(by: " + this.deadline.format(format) + ")";
     }
+
+    public String getUnformattedDeadline() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return this.deadline.format(format);
+    }
+    public LocalDate getDeadlineAsLocalDate() {
+        return this.deadline;
+    }
+
 
     @Override
     public void getStatusAndTask() {
