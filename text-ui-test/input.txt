@@ -14,4 +14,8 @@ done 1
 delete 3
 delete 2
 delete 1
+todo check errors
+done
+done a
+delete
 bye
