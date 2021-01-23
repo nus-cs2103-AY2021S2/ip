@@ -32,7 +32,7 @@ public class Event extends Task {
 
     @Override
     public String toSaveInfoString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
                 this.start.format(formatter) + " | " + this.end.format(formatter);
     }
