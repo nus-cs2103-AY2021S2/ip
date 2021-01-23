@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,12 +44,19 @@ public class Duke {
         if(params.length() == 0) {
             throw new DukeCommandException("deadline", params, "The details of a Deadline cannot be empty.");
         } else if(!params.contains("/by") || params.split(" /by ").length != 2) {
-            throw new DukeCommandException("deadline", params, "Proper description and date/time must be given for a " +
+            throw new DukeCommandException("deadline", params, "Description and date/time must be given for a " +
                     "Deadline.");
+        } else if(!params.split(" /by ")[1].matches("^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
+                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)")) {
+            throw new DukeCommandException("deadline", params, "Date time format is incorrect, try to follow the " +
+                    "format of dd-mm-yyyy hAM/PM.");
         } else {
             String[] splits = params.split(" /by ");
 
-            Deadline newDeadline = new Deadline(splits[0], splits[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+            LocalDateTime dateTime = LocalDateTime.parse(splits[1], formatter);
+
+            Deadline newDeadline = new Deadline(splits[0], dateTime);
             tasks.add(newDeadline);
 
             printTaskAdding(newDeadline);

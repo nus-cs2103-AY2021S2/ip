@@ -1,14 +1,18 @@
-public class Deadline extends Task {
-    public String dateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String desc, String dateTime) {
+public class Deadline extends Task {
+    public LocalDateTime dateTime;
+
+    public Deadline(String desc, LocalDateTime dateTime) {
         super(desc);
         this.dateTime = dateTime;
     }
 
     @Override
     public String getDesc() {
-        return this.desc + " (by: " + this.dateTime + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        return this.desc + " (by: " + this.dateTime.format(formatter) + ")";
     }
 
     @Override
