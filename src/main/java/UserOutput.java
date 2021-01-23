@@ -1,3 +1,8 @@
+package surrealchat.user;
+
+import surrealchat.Pair;
+import surrealchat.task.Task;
+
 import java.util.List;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -28,7 +33,7 @@ public class UserOutput {
             case "userTaskAdded":
                 Pair<Task, Integer> intermediatePair;
                 if (pair.getSecondItem() instanceof Pair) {
-                    intermediatePair = (Pair<Task, Integer>)pair.getSecondItem();
+                    intermediatePair = (Pair)pair.getSecondItem();
                     this.printUserTaskAdded(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
                     break;
                 } else {
@@ -37,7 +42,7 @@ public class UserOutput {
             case "fileTasksAdded":
                 List<Task> taskList;
                 if (pair.getSecondItem() instanceof List) {
-                    taskList = (List<Task>)pair.getSecondItem();
+                    taskList = (List)pair.getSecondItem();
                     this.printFileTasksAdded(taskList);
                     break;
                 } else {
@@ -62,7 +67,7 @@ public class UserOutput {
                 }
             case "deleteTask":
                 if (pair.getSecondItem() instanceof Pair) {
-                    intermediatePair = (Pair<Task, Integer>)pair.getSecondItem();
+                    intermediatePair = (Pair)pair.getSecondItem();
                     this.printTaskDelete(intermediatePair.getFirstItem(), intermediatePair.getSecondItem());
                     break;
                 } else {
@@ -70,7 +75,7 @@ public class UserOutput {
                 }
             case "printTaskList":
                 if (pair.getSecondItem() instanceof List) {
-                    taskList = (List<Task>)pair.getSecondItem();
+                    taskList = (List)pair.getSecondItem();
                     this.printTaskList(taskList);
                     break;
                 } else {

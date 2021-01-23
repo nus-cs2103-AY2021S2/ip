@@ -1,3 +1,5 @@
+package surrealchat;
+
 public class Pair<T,U> {
     public final T firstItem;
     public final U secondItem;

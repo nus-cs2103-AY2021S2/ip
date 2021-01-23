@@ -1,3 +1,5 @@
+package surrealchat.task;
+
 import java.time.LocalDate;
 
 public class DeadlineTask extends Task {
