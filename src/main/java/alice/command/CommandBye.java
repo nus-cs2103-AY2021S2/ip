@@ -16,4 +16,9 @@ public class CommandBye extends Command {
 	public Alice execute(Alice agent) {
 		return new Alice(Alice.BYE, agent.getData(), true, false);
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		return super.equals(object);
+	}
 }

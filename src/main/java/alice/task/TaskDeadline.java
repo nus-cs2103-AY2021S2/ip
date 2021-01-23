@@ -1,4 +1,4 @@
-package alice;
+package alice.task;
 
 import java.time.LocalDate;
 
@@ -28,5 +28,20 @@ public class TaskDeadline extends Task {
 	@Override
 	public String toString() {
 		return String.format("[D]%s (by: %s)", super.toString(), this.deadline.format(Task.formatter));
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof TaskDeadline)) {
+			return false;
+		}
+		if (!super.equals(object)) {
+			return false;
+		}
+		TaskDeadline taskDeadline = (TaskDeadline) object;
+		if (!taskDeadline.deadline.equals(this.deadline)) {
+			return false;
+		}
+		return true;
 	}
 }

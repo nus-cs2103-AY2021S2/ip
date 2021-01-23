@@ -1,8 +1,15 @@
 import alice.*;
 import alice.command.CommandBye;
+import alice.command.Parser;
+import alice.task.Task;
+import alice.task.TaskDeadline;
+import alice.task.TaskList;
+import alice.task.TaskTodo;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -34,7 +41,19 @@ public class Ui {
 	}
 
 	public static void main(String[] args) {
+
+		List<Task> tl1 = new ArrayList<Task>();
+		List<Task> tl2 = new ArrayList<Task>();
+		tl1.add(new TaskTodo("a", false));
+		tl1.add(new TaskDeadline("b", false, LocalDate.of(2020, 1, 8)));
+		tl1.add(new TaskTodo("c", true));
+		tl2.add(new TaskTodo("a", false));
+		tl2.add(new TaskDeadline("b", false, LocalDate.of(2020, 1, 8)));
+		tl2.add(new TaskTodo("c", true));
+		System.out.println(new TaskList(tl1).equals(new TaskList(tl2)));
+
 		Alice agent = new Alice(loadTasks(), false);
+
 		System.out.println(agent.getCurrentMessage());
 		while (!agent.getDone()) {
 			System.out.print(Alice.getPrompt());

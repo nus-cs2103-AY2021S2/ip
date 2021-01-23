@@ -1,4 +1,6 @@
-package alice;
+package alice.task;
+
+import alice.AliceException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,13 +9,9 @@ import java.util.regex.Pattern;
 
 public class TaskBuilder {
 
-	private static final Pattern TODO_REGEX = Pattern.compile("todo\\s+(.*)");
-	private static final Pattern DEADLINE_REGEX = Pattern.compile("deadline\\s+(.*)\\s+/by\\s+(.*)");
-	private static final Pattern EVENT_REGEX = Pattern.compile("event\\s+(.*)\\s+/at\\s+(.*)");
-
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
 
-	public static LocalDate parseDate(String dateString) throws AliceException {
+	private static LocalDate parseDate(String dateString) throws AliceException {
 		try {
 			return LocalDate.parse(dateString, formatter);
 		} catch (DateTimeParseException dateTimeParseException) {
@@ -23,10 +21,10 @@ public class TaskBuilder {
 
 	public static Task buildTask(String[] tokens) throws AliceException, IllegalArgumentException {
 		Task task;
-		if (tokens[1].trim().length() == 0) {
+		if (tokens.length < 2 || tokens[1].trim().length() == 0) {
 			throw new IllegalArgumentException();
 		}
-		switch (tokens[0]) {
+		switch (tokens[0].trim()) {
 		case "todo":
 			task = new TaskTodo(tokens[1], false);
 			break;

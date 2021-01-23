@@ -1,6 +1,9 @@
 package alice.command;
 
 import alice.*;
+import alice.task.Task;
+import alice.task.TaskBuilder;
+import alice.task.TaskList;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,5 +47,10 @@ public class CommandAdd extends Command {
 			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false);
 		}
 		return newAgent;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		return super.equals(object);
 	}
 }

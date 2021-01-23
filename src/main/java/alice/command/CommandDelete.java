@@ -2,8 +2,8 @@ package alice.command;
 
 import alice.Alice;
 import alice.AliceException;
-import alice.Task;
-import alice.TaskList;
+import alice.task.Task;
+import alice.task.TaskList;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +37,10 @@ public class CommandDelete extends Command {
 			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false);
 		}
 		return newAgent;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		return super.equals(object);
 	}
 }

@@ -1,4 +1,4 @@
-package alice;
+package alice.task;
 
 public class TaskTodo extends Task {
 
@@ -22,5 +22,10 @@ public class TaskTodo extends Task {
 	@Override
 	public String toString() {
 		return String.format("[T]%s", super.toString());
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		return super.equals(object);
 	}
 }

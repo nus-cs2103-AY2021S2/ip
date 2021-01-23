@@ -1,4 +1,4 @@
-package alice;
+package alice.task;
 
 import java.time.LocalDate;
 
@@ -28,5 +28,19 @@ public class TaskEvent extends Task {
 	@Override
 	public String toString() {
 		return String.format("[E]%s (at: %s)", super.toString(), this.time.format(Task.formatter));
+	}
+
+	public boolean equals(Object object) {
+		if (!(object instanceof TaskEvent)) {
+			return false;
+		}
+		if (!super.equals(object)) {
+			return false;
+		}
+		TaskEvent taskDeadline = (TaskEvent) object;
+		if (!taskDeadline.time.equals(this.time)) {
+			return false;
+		}
+		return true;
 	}
 }

@@ -1,5 +1,7 @@
 package alice;
 
+import alice.task.TaskList;
+
 public class Alice {
 
 	public static final String GREETING = "Hello!";
@@ -29,10 +31,6 @@ public class Alice {
 
 	public static String getPrompt() {
 		return ">";
-	}
-
-	public static void main(String[] args) {
-
 	}
 
 	public boolean getDone() {

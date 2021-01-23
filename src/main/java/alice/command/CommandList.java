@@ -23,4 +23,9 @@ public class CommandList extends Command {
 		}
 		return new Alice(response, agent.getData(), agent.getDone(), false);
 	}
+
+	@Override
+	public boolean equals(Object object) {
+		return super.equals(object);
+	}
 }
