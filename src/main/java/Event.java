@@ -1,13 +1,15 @@
-public class Event extends Task {
-    private final String time;
+import java.time.LocalDate;
 
-    public Event(String description, String deadline) {
+public class Event extends Task {
+    private final LocalDate date;
+
+    public Event(String description, LocalDate date) {
         super(description);
-        this.time = deadline;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.time + ")";
+        return "[E]" + super.toString() + "(at: " + this.date + ")";
     }
 }
