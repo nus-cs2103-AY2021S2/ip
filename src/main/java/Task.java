@@ -9,9 +9,19 @@ public class Task {
         this.type = type;
     }
 
+    Task(String name, TaskType type, boolean done) {
+        this.name = name;
+        this.done = done;
+        this.type = type;
+    }
+
 
     public String getName() {
         return name;
+    }
+
+    public TaskType getType() {
+        return type;
     }
 
     public void markDone() {

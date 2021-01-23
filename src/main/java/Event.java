@@ -9,6 +9,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    Event(String name, TaskType type, LocalDate time, boolean done) {
+        super(name, type, done);
+        this.time = time;
+    }
+
     public LocalDate getTime() {
         return time;
     }

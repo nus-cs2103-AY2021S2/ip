@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,8 +9,8 @@ import java.util.Scanner;
 public class Chatbot {
     private final List<Task> taskList;
 
-    Chatbot() {
-        taskList = new ArrayList<>();
+    Chatbot(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -32,6 +31,7 @@ public class Chatbot {
 
     /**
      * Mark the task as done.
+     *
      * @param order the order of the task
      * @throws DukeException if there's no such task or the task had been finished
      */
@@ -51,6 +51,7 @@ public class Chatbot {
 
     /**
      * Delete the task.
+     *
      * @param order the order of the task
      * @throws DukeException if there's no such task
      */
@@ -67,6 +68,7 @@ public class Chatbot {
 
     /**
      * Add more task.
+     *
      * @param newTask Append the newTask to the end of the task list.
      */
     public void addTask(Task newTask) {
@@ -142,6 +144,10 @@ public class Chatbot {
             input = sc.nextLine();
         }
 
+
     }
 
+    public List<Task> getTaskList() {
+        return taskList;
+    }
 }
