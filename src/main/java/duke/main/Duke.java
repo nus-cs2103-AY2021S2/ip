@@ -115,7 +115,8 @@ public class Duke {
                         throw new DukeException("Please provide a description or a by date " +
                                 "when creating deadline.");
                     }
-                    addTask(new Deadline(description, by));
+                    Task deadline = new Deadline(description, by);
+                    addTask(deadline);
                     break;
                 case DELETE:
                     deleteTask(otherInfo);
