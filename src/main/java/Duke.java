@@ -38,7 +38,8 @@ public class Duke {
 
     /**
      * Add a Deadline into the internal list
-     * @param params Parameters of Deadline (Description, Date/Time) in String form that will be processed
+     * @param params Parameters of Deadline in String form that will be processed
+     * @throws DukeCommandException if one or more parameters are missing or date time form was not followed
      */
     private static void addDeadline(String params) throws DukeCommandException {
         if(params.length() == 0) {
@@ -66,6 +67,7 @@ public class Duke {
     /**
      * Add an Event into the internal list
      * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
+     * @throws DukeCommandException if one or more parameters are missing or date time form was not followed
      */
     private static void addEvent(String params) throws DukeCommandException {
         String startEndPattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
@@ -88,7 +90,7 @@ public class Duke {
             LocalDateTime end = LocalDateTime.parse(splits[2], formatter);
 
             Event newEvent = new Event(splits[0], start, end);
-            tasks.add(newEvent); 
+            tasks.add(newEvent);
 
             printTaskAdding(newEvent);
         }
