@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Task;
 
 public class Storage {
@@ -20,9 +20,9 @@ public class Storage {
     /**
      *  Task Loader.
      *
-     *  @throws DukeIOException If information given is corrupt in any way.
+     *  @throws DukeIoException If information given is corrupt in any way.
      */
-    public ArrayList<String> load() throws DukeIOException {
+    public ArrayList<String> load() throws DukeIoException {
         try {
             File file = new File(this.filePath);
             if (!file.exists()) {
@@ -42,7 +42,7 @@ public class Storage {
             fr.close();
             return output;
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 
@@ -50,9 +50,9 @@ public class Storage {
      *  Task Saver.
      *
      *  @param tm TaskManager Object containing Task information
-     *  @throws DukeIOException If there is issue in file writing.
+     *  @throws DukeIoException If there is issue in file writing.
      */
-    public void save(TaskManager tm) throws DukeIOException {
+    public void save(TaskManager tm) throws DukeIoException {
         try {
             ArrayList<Task> tasks = tm.getTasks();
             FileWriter fw = new FileWriter(this.filePath);
@@ -62,7 +62,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 
