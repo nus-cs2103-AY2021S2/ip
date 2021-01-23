@@ -7,10 +7,10 @@ public class Controller {
     private final static String NEWLINE = System.lineSeparator();
     private final static String LINE = INDENT + "__________________________________________________"
             + "______________" + NEWLINE;
-    private final static String GREETING = INDENT + " Hello! I'm Duke\n\t What can I do for you?"
-            + NEWLINE;
-    private final static String ENDDUKE = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
-    private final static String ENDCOMMAND = "bye";
+    private final static String GREETING = INDENT + " Hello! I'm Duke" + NEWLINE + INDENT + "What" +
+            " can I do for you?" + NEWLINE;
+    private final static String BYE_MSG = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
+    private final static String END_COMMAND = "bye";
     private final List<Task> list;
 
     public Controller() {
@@ -23,30 +23,48 @@ public class Controller {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while(!input.equals(ENDCOMMAND)) {
+        while(!input.equals(END_COMMAND)) {
             System.out.print(LINE);
             handleInput(input);
             System.out.print(LINE);
             input = sc.nextLine();
         }
 
-        System.out.println(LINE + ENDDUKE + LINE);
+        System.out.println(LINE + BYE_MSG + LINE);
     }
 
     private void handleInput(String input) {
         try {
-            if (input.startsWith("done")) {
+            CommandType type = parseCommand(input);
+            switch (type) {
+            case DONE:
                 doneTask(input);
-            } else if (input.equals("list")) {
+                break;
+            case LIST:
                 printList();
-            } else if (input.startsWith("delete")) {
+                break;
+            case DELETE:
                 deleteTask(input);
-            } else {
+                break;
+            case ADD:
                 addTask(input);
+                break;
             }
         } catch (DukeException e) {
             String output = String.format(INDENT + " %s", e);
             System.out.println(output);
+        }
+    }
+
+    private CommandType parseCommand(String input) {
+        if (input.startsWith("done")) {
+            return CommandType.DONE;
+        } else if (input.startsWith("list")) {
+            return CommandType.LIST;
+        } else if (input.startsWith("delete")) {
+            return CommandType.DELETE;
+        } else {
+            return CommandType.ADD;
         }
     }
 
