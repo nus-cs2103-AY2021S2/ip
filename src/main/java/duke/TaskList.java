@@ -166,4 +166,15 @@ public class TaskList {
 
         return result;
     }
+
+    public List<Task> getMatch(String keyword) {
+        List<Task> matchList = new ArrayList<>();
+        for (Task task: inputList) {
+            if (task.getDescription().contains(keyword)) {
+                matchList.add(task);
+            }
+        }
+
+        return matchList;
+    }
 }

@@ -65,4 +65,16 @@ public class Ui {
             System.out.println("      " + (i + 1) + "." + task.toString().trim());
         }
     }
+
+    public void printMatching() {
+        System.out.println("     Here are the matching tasks in your list: ");
+    }
+
+    public void printList(List<Task> list) {
+        System.out.println("     Here are the matching tasks in your list: ");
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            System.out.println("      " + (i + 1) + "." + task.toString().trim());
+        }
+    }
 }
