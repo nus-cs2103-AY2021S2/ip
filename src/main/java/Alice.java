@@ -15,9 +15,6 @@ public class Alice {
     private static final String TASK_DONE = "Nice! I've marked this task as done:\n%s";
     private static final String TASK_DELETE = "I've deleted this task:\n%s";
 
-    private static final Pattern TODO_REGEX = Pattern.compile("todo\\s+(.*)");
-    private static final Pattern DEADLINE_REGEX = Pattern.compile("deadline\\s+(.*)\\s+/by\\s+(.*)");
-    private static final Pattern EVENT_REGEX = Pattern.compile("event\\s+(.*)\\s+/at\\s+(.*)");
     private static final Pattern DONE_REGEX = Pattern.compile("done\\s+(\\d+)");
 
     private final boolean done;
@@ -53,38 +50,12 @@ public class Alice {
 
     private Alice processAdd(String command) {
         Alice newAgent;
-        Matcher matcher;
-        String[] tokens = command.split("\\s+");
         try {
-            Task task;
-            switch (tokens[0]) {
-                case "todo":
-                    matcher = TODO_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new AliceException("todo Usage: todo [activity]");
-                    }
-                    task = new TaskTodo(matcher.group(1).trim(), false);
-                    break;
-                case "deadline":
-                    matcher = DEADLINE_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new AliceException("deadline Usage: deadline [activity] /by [deadline]");
-                    }
-                    task = new TaskDeadline(matcher.group(1).trim(), false, matcher.group(2).trim());
-                    break;
-                case "event":
-                    matcher = EVENT_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new AliceException("event Usage: event [activity] /at [time]");
-                    }
-                    task = new TaskEvent(matcher.group(1).trim(), false, matcher.group(2).trim());
-                    break;
-                default: throw new IllegalStateException();
-            }
-            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
-            dataList.add(task);
-            String response = String.format(TASK_ADD, task, dataList.size());
-            newAgent = new Alice(response, new AgentData(dataList), false, true);
+            Task task = TaskBuilder.buildTask(command);
+            List<Task> newStore = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            newStore.add(task);
+            String response = String.format(TASK_ADD, task, newStore.size());
+            newAgent = new Alice(response, new AgentData(newStore), false, true);
         }
         catch (AliceException aliceException) {
             newAgent = new Alice(aliceException.getMessage(), this.data, this.done, false);
@@ -215,8 +186,8 @@ public class Alice {
             System.out.print(getPrompt());
             try {
                 agent = agent.process(scanner.nextLine());
-                if (agent.hasDelta) {
-                    saveTasks(agent.data);
+                if (agent.hasDelta && !saveTasks(agent.data)) {
+                    System.out.println("Error saving tasks to " + getDataPath());
                 }
             } catch (NoSuchElementException noSuchElementException) {
                 agent = agent.process("bye");
