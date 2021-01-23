@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Self-defined DukeException to be thrown during execution.
+ */
 public class DukeException extends Exception {
     String errorMessage;
 

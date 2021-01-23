@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * An enum with all possible types of tasks.
+ */
 public enum TaskType {
     TODO("T"), DEADLINE("D"), EVENT("E");
 

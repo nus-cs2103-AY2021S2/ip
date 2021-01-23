@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * The parent class for all types of tasks.
+ */
 public class Task {
     protected final String name;
     protected final TaskType type;
@@ -17,9 +20,12 @@ public class Task {
         this.type = type;
     }
 
-
     public String getName() {
         return name;
+    }
+
+    public boolean getDone() {
+        return done;
     }
 
     public TaskType getType() {
@@ -28,10 +34,6 @@ public class Task {
 
     public void markDone() {
         done = true;
-    }
-
-    public boolean getDone() {
-        return done;
     }
 
     @Override
