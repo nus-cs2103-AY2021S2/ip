@@ -1,3 +1,5 @@
+package Duke;
+
 public class Parser {
     public Command parse(String[] taskString) {
         if (taskString[0].toLowerCase().equals("list")) {
