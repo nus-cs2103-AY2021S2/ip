@@ -315,7 +315,7 @@ public class Duke {
         return res;
     }
 
-    private static Task stringToTask(String taskInfo) {
+    private static Task stringToTask(String taskInfo) throws DukeException {
         String[] taskInfoArr = taskInfo.split("\\|");
         String type = taskInfoArr[0].strip();
         boolean isDone = taskInfoArr[1].strip().equals("1");

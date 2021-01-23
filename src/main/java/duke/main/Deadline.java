@@ -29,9 +29,13 @@ public class Deadline extends Task{
         }
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description);
-        this.by = by;
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("invalid deadline date given.");
+        }
         this.isDone = isDone;
     }
 
