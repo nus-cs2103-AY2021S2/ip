@@ -10,14 +10,28 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used to store to or load from the task lists into the disk
+ */
 public class Storage {
 
     Path filePath;
 
+    /**
+     * Creates a storage corresponding to the path.
+     *
+     * @param path the location of file in the disk.
+     */
     public Storage(String path) {
         this.filePath = Paths.get(path);
     }
 
+    /**
+     * Loads the task list file from filePath.
+     *
+     * @return a list of task corresponding to the file.
+     * @throws IOException if such filePath does not exist.
+     */
     public List<Task> load() throws IOException {
         List<Task> tasks = new ArrayList<>();
         List<String> strings = Files.readAllLines(filePath);
@@ -28,6 +42,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the task list into the file in the disk corresponding to the filePath.
+     *
+     * @param taskList the task list that users input.
+     */
     public void save(TaskList taskList) {
         try {
             Path directoryPath = filePath.getParent();

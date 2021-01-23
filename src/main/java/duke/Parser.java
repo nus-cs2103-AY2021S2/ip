@@ -7,14 +7,29 @@ import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.Locale;
 
 public class Parser {
 
+    /**
+     * Returns a Command with enum type by parsing the string of command that the user inputs.
+     *
+     * @param input the string represents command that the user inputs.
+     * @return a Command of the enum type.
+     */
     public static Command parseCommand(String input) {
         return Command.valueOf(input.toUpperCase(Locale.ROOT));
     }
 
+    /**
+     * Returns a task by parsing description under instruction of command.
+     *
+     * @param command the Command enum type.
+     * @param input input of user.
+     * @return the task corresponding to the input.
+     * @throws ParseException if parsing fails.
+     */
     public static Task parseDescription(Command command, String input) throws ParseException {
         switch (command) {
             case TODO:
@@ -28,13 +43,32 @@ public class Parser {
         }
     }
 
-    public static ToDo parseToDo(String input) throws ParseException {
+    /**
+     * Returns a ToDo by parsing the input behind the command.
+     * Used when the command is todo.
+     * Works when the input is not empty.
+     *
+     * @param input input of users.
+     * @return a task of ToDo corresponding to the input.
+     * @throws ParseException if the description is empty.
+     */
+    private static ToDo parseToDo(String input) throws ParseException {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.\n");
         return new ToDo(input);
     }
 
-    public static Deadline parseDeadline(String input) throws ParseException, DateTimeParseException {
+    /**
+     * Returns a Deadline by parsing the input behind the command.
+     * Used when the command is deadline.
+     * Works when the input is "{description} /by YYYY-MM-DD".
+     *
+     * @param input input of users.
+     * @return a task of Deadline corresponding to the input.
+     * @throws ParseException if the description is empty.
+     * @throws DateTimeParseException if the format of data time is not correct.
+     */
+    private static Deadline parseDeadline(String input) throws ParseException, DateTimeParseException {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of a deadline cannot be empty.\n");
         if (input.contains("/by ")) {
@@ -48,7 +82,17 @@ public class Parser {
         }
     }
 
-    public static Event parseEvent(String input) throws ParseException, DateTimeParseException {
+    /**
+     * Returns an Event by parsing the input behind the command.
+     * Used when the command is event.
+     * Works when the input is "{description} /at YYYY-MM-DD".
+     *
+     * @param input input of users.
+     * @return a task of Event corresponding to the input.
+     * @throws ParseException if the description is empty.
+     * @throws DateTimeParseException if the format of data time is not correct.
+     */
+    private static Event parseEvent(String input) throws ParseException, DateTimeParseException {
         if (input.isEmpty() || input.equals(" "))
             throw new ParseException("OOPS!!! The description of an event cannot be empty.\n");
         if (input.contains("/at ")) {
@@ -62,6 +106,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a task corresponding to the line of file stored in the disk.
+     *
+     * @param line line of the file stored in the disk.
+     * @return a task corresponding to the line.
+     */
     public static Task parseInFile(String line) {
         Task task;
         if (line.charAt(1) == 'T') {

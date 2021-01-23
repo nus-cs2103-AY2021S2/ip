@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeadlineTest {
+
     @Test
     public void deadlineConstructorTest() {
         LocalDate date = LocalDate.parse("2020-01-20");
