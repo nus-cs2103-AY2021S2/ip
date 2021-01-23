@@ -1,7 +1,5 @@
 public class Parser {
-
     public static Command parse(String input) {
-        String line = "------------------------------------------";
         String type = input.split(" ")[0];
         Command c = null;
         if (type.equals("todo")) {
