@@ -19,7 +19,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         greet();
-
+        // hello
         boolean exit_now = false;
 
         while (!exit_now) {
