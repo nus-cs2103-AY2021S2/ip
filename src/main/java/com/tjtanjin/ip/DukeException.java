@@ -1,3 +1,5 @@
+package com.tjtanjin.ip;
+
 /**
  * Class for custom exception handling.
  */

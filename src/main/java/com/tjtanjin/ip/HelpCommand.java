@@ -1,3 +1,5 @@
+package com.tjtanjin.ip;
+
 import java.util.HashMap;
 
 /**
