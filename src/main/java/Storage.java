@@ -2,8 +2,11 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
 
-public class DataHandler {
+public class Storage {
+
+    public static final String OS = System.getProperty("os.name").toLowerCase(Locale.ROOT);
 
     public static boolean saveBytes(String pathString, byte[] data) {
         Path path = Paths.get(pathString);
@@ -37,8 +40,8 @@ public class DataHandler {
         try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(data)) {
             try (ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)) {
                 object = objectInputStream.readObject();
-            } catch (ClassNotFoundException classNotFoundException) {
-                classNotFoundException.printStackTrace();
+            } catch (ClassNotFoundException | InvalidClassException classException) {
+                return null;
             }
         } catch (IOException ioException) {
             ioException.printStackTrace();

@@ -7,8 +7,6 @@ import java.util.stream.IntStream;
 
 public class Alice {
 
-    private static final String OS = System.getProperty("os.name").toLowerCase(Locale.ROOT);
-
     private static final String GREETING = "Hello!";
     private static final String BYE = "See you next time!";
     private static final String TASK_ADD = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
@@ -20,31 +18,35 @@ public class Alice {
     private final boolean done;
     private final boolean hasDelta;
     private final String currentMessage;
-    private final AgentData data;
+    private final TaskList data;
 
-    private Alice(AgentData newData, boolean done) {
-        this.currentMessage = String.format("%s\nLoaded %d tasks from %s", GREETING, newData.count(), getDataPath());
+    public Alice(TaskList newData, boolean done) {
+        this.currentMessage = String.format("Initialized with %d tasks", newData.count());
         this.data = newData;
         this.done = done;
         this.hasDelta = false;
     }
 
-    private Alice(String currentMessage, AgentData newData, boolean done, boolean hasDelta) {
+    public Alice(String currentMessage, TaskList newData, boolean done, boolean hasDelta) {
         this.currentMessage = currentMessage;
         this.data = newData;
         this.done = done;
         this.hasDelta = hasDelta;
     }
 
-    private static String getDataPath() {
-        if (OS.contains("win")) {
-            return String.join(File.separator, System.getenv("USERPROFILE"), ".alice_save", "data", "save_data");
-        } else {
-            return String.join(File.separator, "~", ".alice_save", "data", "save_data");
-        }
+    public boolean isDone() {
+        return done;
     }
 
-    private String getGreeting() {
+    public boolean hasDelta() {
+        return hasDelta;
+    }
+
+    public TaskList getData() {
+        return this.data;
+    }
+
+    public String getGreeting() {
         return GREETING;
     }
 
@@ -52,10 +54,10 @@ public class Alice {
         Alice newAgent;
         try {
             Task task = TaskBuilder.buildTask(command);
-            List<Task> newStore = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            List<Task> newStore = this.data.getTasks().stream().map(Task::clone).collect(Collectors.toList());
             newStore.add(task);
             String response = String.format(TASK_ADD, task, newStore.size());
-            newAgent = new Alice(response, new AgentData(newStore), false, true);
+            newAgent = new Alice(response, new TaskList(newStore), false, true);
         }
         catch (AliceException aliceException) {
             newAgent = new Alice(aliceException.getMessage(), this.data, this.done, false);
@@ -71,11 +73,11 @@ public class Alice {
 
     private Alice processList(String command) {
         String response;
-        if (this.data.getData().size() <= 0) {
+        if (this.data.getTasks().size() <= 0) {
             response = "Your schedule is empty";
         } else {
-            response = IntStream.range(0, data.getData().size())
-                    .mapToObj(i -> (i + 1) + "." + this.data.getData().get(i))
+            response = IntStream.range(0, data.getTasks().size())
+                    .mapToObj(i -> (i + 1) + "." + this.data.getTasks().get(i))
                     .collect(Collectors.joining("\n"));
         }
         return new Alice(response, this.data, this.done, false);
@@ -91,14 +93,14 @@ public class Alice {
                 throw new AliceException("done Usage: done [index]");
             }
             int index = Integer.parseInt(tokens[1]);
-            if (index < 0 || index > this.data.getData().size()) {
+            if (index < 0 || index > this.data.getTasks().size()) {
                 throw new AliceException(String.format("Index %d out of bounds for schedule of size %d.",
-                        index, this.data.getData().size()));
+                        index, this.data.getTasks().size()));
             }
-            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            List<Task> dataList = this.data.getTasks().stream().map(Task::clone).collect(Collectors.toList());
             dataList.set(index - 1, dataList.get(index - 1).setDone(true));
             String response = String.format(TASK_DONE, dataList.get(index - 1));
-            newAgent = new Alice(response, new AgentData(dataList), this.done, true);
+            newAgent = new Alice(response, new TaskList(dataList), this.done, true);
         }
         catch (NumberFormatException numberFormatException) {
             newAgent = new Alice("Invalid number", this.data, this.done, false);
@@ -114,14 +116,14 @@ public class Alice {
         String[] tokens = command.split("\\s+");
         try {
             int index = Integer.parseInt(tokens[1]);
-            if (index < 0 || index > this.data.getData().size()) {
+            if (index < 0 || index > this.data.getTasks().size()) {
                 throw new AliceException(String.format("Index %d out of bounds for schedule of size %d.",
-                        index, this.data.getData().size()));
+                        index, this.data.getTasks().size()));
             }
-            List<Task> dataList = this.data.getData().stream().map(Task::clone).collect(Collectors.toList());
+            List<Task> dataList = this.data.getTasks().stream().map(Task::clone).collect(Collectors.toList());
             dataList.remove(index - 1);
-            String response = String.format(TASK_DELETE, this.data.getData().get(index - 1));
-            newAgent = new Alice(response, new AgentData(dataList), this.done, true);
+            String response = String.format(TASK_DELETE, this.data.getTasks().get(index - 1));
+            newAgent = new Alice(response, new TaskList(dataList), this.done, true);
         }
         catch (NumberFormatException numberFormatException) {
             newAgent = new Alice("Invalid number", this.data, this.done, false);
@@ -136,7 +138,7 @@ public class Alice {
         return new Alice(command, this.data, this.done, false);
     }
 
-    private Alice process(String input) {
+    public Alice process(String input) {
         String[] tokens = input.split("\\s+");
         switch (tokens[0]) {
             case "todo":
@@ -156,43 +158,15 @@ public class Alice {
         }
     }
 
-    private String getCurrentMessage() {
+    public String getCurrentMessage() {
         return currentMessage;
     }
 
-    private static String getPrompt() {
+    public static String getPrompt() {
         return ">";
     }
 
-    private static AgentData loadTasks() {
-        byte[] data = DataHandler.loadBytes(getDataPath());
-        if (data == null) {
-            return new AgentData(new ArrayList<>());
-        } else {
-            return DataHandler.deserialize(data, AgentData.class);
-        }
-    }
-
-    private static boolean saveTasks(AgentData agentData) {
-        byte[] data = DataHandler.serialize(agentData);
-        return DataHandler.saveBytes(getDataPath(), data);
-    }
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Alice agent = new Alice(loadTasks(), false);
-        System.out.println(agent.getCurrentMessage());
-        while (!agent.done) {
-            System.out.print(getPrompt());
-            try {
-                agent = agent.process(scanner.nextLine());
-                if (agent.hasDelta && !saveTasks(agent.data)) {
-                    System.out.println("Error saving tasks to " + getDataPath());
-                }
-            } catch (NoSuchElementException noSuchElementException) {
-                agent = agent.process("bye");
-            }
-            System.out.println(agent.getCurrentMessage());
-        }
+
     }
 }
