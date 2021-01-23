@@ -45,11 +45,12 @@ public class Duke {
 
     protected static ArrayList<Task> tasks = new ArrayList<>();
 
+    protected static String rootProject = System.getProperty("user.dir");
     protected static Path dataFilePath =
-            Paths.get("src", "main", "java", "duke", "data", "duke.txt");
+            Paths.get(rootProject,"src", "main", "java", "duke", "data", "duke.txt");
 
     protected static Path dataFolderPath =
-            Paths.get("src", "main", "java", "duke", "data");
+            Paths.get(rootProject,"src", "main", "java", "duke", "data");
 
 
     public static void main(String[] args) {
