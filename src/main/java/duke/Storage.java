@@ -9,9 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handle file I/O.
+ */
 public class Storage {
     File file;
 
+    /**
+     * Construct a Storage from a specified filename.
+     * @param name the filename
+     */
     Storage(String name) {
         try {
             this.file = new File(name);
@@ -24,6 +31,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Read tasks stored in the file.
+     * @return the list of tasks read
+     */
     public List<Task> read() {
         List<Task> lst = new ArrayList<>();
         try {
@@ -56,6 +67,10 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Write all tasks to given file.
+     * @param lst list of tasks to be written
+     */
     public void write(List<Task> lst) {
         try {
 //            File file = new File(String.valueOf(path));
