@@ -1,38 +1,57 @@
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private Storage storage;
     private Scanner sc;
     private List<Task> taskList;
     private State state;
-    
+
     public static void main(String[] args) {
         new Main().run(args);
     }
-    
+
     public void run(String[] args) {
         // Initialize the required components
         initialize(args);
-        
+
         // Run infinite loop asking for user command until user enter exit command
         runLoop();
-        
+
         // Exit the program
         exit();
     }
-    
+
     private void initialize(String[] args) {
-        this.sc = new Scanner(System.in);
-        this.taskList = new ArrayList<>();
-        this.state = State.ONLINE;
-        // Print greeting
-        printGreeting();
+        try {
+            this.storage = initializeStorage(args);
+            this.sc = new Scanner(System.in);
+            this.taskList = storage.loadTasks();
+            this.state = State.ONLINE;
+
+            // Print greeting
+            printGreeting();
+        } catch (InvalidStorageFilePathException ex) {
+            System.out.println("Failed to initialize storage. Exiting...");
+        } catch (IOException ex) {
+            System.out.println("Failed to load storage file. Exiting...");
+        }
     }
-    
+
     private void exit() {
         // Print exit message
         printExitMessage();
+    }
+
+    private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
+        if (args.length > 0) {
+            // User has specified a file path for the storage
+            return new Storage(args[0]);
+        } else {
+            // Using the default file path as user did not specify a file path
+            return new Storage();
+        }
     }
 
     private void runLoop() {
@@ -93,20 +112,23 @@ public class Main {
                 break;
             case DONE:
                 markTaskAsDone(arguments);
+                storage.saveTasks(taskList);
                 break;
             case TODO:
             case DEADLINE:
             case EVENT:
                 createTask(command, arguments);
+                storage.saveTasks(taskList);
                 break;
             case DELETE:
                 deleteTask(arguments);
+                storage.saveTasks(taskList);
                 break;
             case HELP:
                 printHelp();
                 break;
             }
-        } catch (NoDescriptionException | InvalidDescriptionException ex) {
+        } catch (NoDescriptionException | InvalidDescriptionException | StorageException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -236,4 +258,3 @@ public class Main {
         System.out.println("HELP:\nPrint available commands\nUsage: 'help'");
     }
 }
-
