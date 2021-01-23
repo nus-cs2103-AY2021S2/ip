@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+## NOTE THIS FILE MUST BE RUN IN THE text-ui-test DIRECTORY
+## THE FILE PATHS ARE RELATIVE TO THE DIRECTORY FROM WHICH
+## IT IS RUN, AND NOT WHERE THE FILE IS LOCATED
+
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
 then
