@@ -32,4 +32,9 @@ public class DoneCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Test usage: this is a DONE command";
+    }
 }

@@ -102,4 +102,18 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        switch (this.cmdType) {
+        case TODO:
+            return "Test usage: this is a TODO command";
+        case DEADLINE:
+            return "Test usage: this is a DEADLINE command";
+        case EVENT:
+            return "Test usage: this is an EVENT command";
+        default:
+            return "Error: this will never happen";
+        }
+    }
 }
