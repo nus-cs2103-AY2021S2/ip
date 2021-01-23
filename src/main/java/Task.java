@@ -1,7 +1,11 @@
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Task implements Cloneable {
+
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy L dd, E");
 
     protected final String name;
     protected final boolean done;

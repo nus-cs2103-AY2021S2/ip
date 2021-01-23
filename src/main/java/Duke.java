@@ -17,9 +17,6 @@ public class Duke {
     private final String TASK_DONE = "Nice! I've marked this task as done:\n%s";
     private final String TASK_DELETE = "I've deleted this task:\n%s";
 
-    private static final Pattern TODO_REGEX = Pattern.compile("todo\\s+(.*)");
-    private static final Pattern DEADLINE_REGEX = Pattern.compile("deadline\\s+(.*)\\s+/by\\s+(.*)");
-    private static final Pattern EVENT_REGEX = Pattern.compile("event\\s+(.*)\\s+/at\\s+(.*)");
     private static final Pattern DONE_REGEX = Pattern.compile("done\\s+(\\d+)");
 
     private final String currentMessage;
@@ -43,34 +40,8 @@ public class Duke {
 
     private Duke processAdd(String command) {
         Duke newAgent;
-        Matcher matcher;
-        String[] tokens = command.split("\\s+");
         try {
-            Task task;
-            switch (tokens[0]) {
-                case "todo":
-                    matcher = TODO_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new DukeException("todo Usage: todo [activity]");
-                    }
-                    task = new TaskTodo(matcher.group(1).trim(), false);
-                    break;
-                case "deadline":
-                    matcher = DEADLINE_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new DukeException("deadline Usage: deadline [activity] /by [deadline]");
-                    }
-                    task = new TaskDeadline(matcher.group(1).trim(), false, matcher.group(2).trim());
-                    break;
-                case "event":
-                    matcher = EVENT_REGEX.matcher(command);
-                    if (!matcher.find()) {
-                        throw new DukeException("event Usage: event [activity] /at [time]");
-                    }
-                    task = new TaskEvent(matcher.group(1).trim(), false, matcher.group(2).trim());
-                    break;
-                default: throw new IllegalStateException();
-            }
+            Task task = TaskBuilder.buildTask(command);
             List<Task> newStore = this.store.stream().map(t -> t.clone()).collect(Collectors.toList());
             newStore.add(task);
             String response = String.format(TASK_ADD, task, newStore.size());
