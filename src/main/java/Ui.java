@@ -19,6 +19,14 @@ public class Ui {
         printMsg("Meow. Hope to see you again soon!");
     }
 
+    public void printAddMsg(Task task, int tasksSize) {
+        System.out.println(BORDER);
+        System.out.println("Got it meow. I've added this task:");
+        System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+        System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
+        System.out.println(BORDER + "\n");
+    }
+
     public void printError(String msg) {
         printMsg(String.format("ERROR MEOW! %s", msg));
     }

@@ -73,4 +73,8 @@ public class TaskManager {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
+    public int getTasksSize() {
+        return this.tasks.size();
+    }
 }
