@@ -1,4 +1,12 @@
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Command {
+    private static final DateTimeFormatter PRINT_FORMAT =
+            DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+    private static final DateTimeFormatter SCAN_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static Task loadData(String command) {
         if (command.charAt(0) == 'T') {
@@ -9,14 +17,16 @@ public class Command {
             return result;
         } else if (command.charAt(0) == 'D') {
             int position = command.indexOf("@@@");
-            Deadline result = new Deadline(command.substring(8, position - 1), command.substring(position + 3));
+            Deadline result = new Deadline(command.substring(8, position - 1),
+                    LocalDateTime.from(PRINT_FORMAT.parse(command.substring(position + 3))));
             if (command.charAt(4) != '0') {
                 result.markAsDone();
             }
             return result;
         } else {
             int position = command.indexOf("@@@");
-            Event result = new Event(command.substring(8, position - 1), command.substring(position + 3));
+            Event result = new Event(command.substring(8, position - 1),
+                    LocalDateTime.from(PRINT_FORMAT.parse(command.substring(position + 3))));
             if (command.charAt(4) != '0') {
                 result.markAsDone();
             }
@@ -32,7 +42,11 @@ public class Command {
             return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
                     + " | " + task.getDescription() + " @@@" + task.getSaveTime() + "\n";
         }
+    }
 
+
+    public static LocalDateTime parseTime(String str) {
+        return LocalDateTime.from(SCAN_FORMAT.parse(str));
     }
 
     public static CommandType getType(String str) throws DukeException {
@@ -126,7 +140,11 @@ public class Command {
                 } else if (StringParser.isBlank(subStrTime)) {
                     throw new DukeException("Void argument: Time field is blank");
                 } else {
-                    return new Deadline(subStrContent, subStrTime);
+                    try {
+                        return new Deadline(subStrContent, parseTime(subStrTime));
+                    } catch (DateTimeException e) {
+                        throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    }
                 }
             } else if (type == CommandType.EVENT) {
                 int indexOfAt = command.toLowerCase().indexOf("/at");
@@ -137,7 +155,11 @@ public class Command {
                 } else if (StringParser.isBlank(subStrTime)) {
                     throw new DukeException("Void argument: Time field is blank");
                 } else {
-                    return new Event(subStrContent, subStrTime);
+                    try {
+                        return new Event(subStrContent, parseTime(subStrTime));
+                    } catch (DateTimeException e) {
+                        throw new DukeException("Incorrect time format: Correct format is yyyy-MM-dd HHmm");
+                    }
                 }
             } else {
                 throw new DukeException("Invalid command: Unknown reason");
