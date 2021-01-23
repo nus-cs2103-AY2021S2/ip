@@ -3,7 +3,7 @@
  */
 public enum Command {
     DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
-    LIST("list"), DELETE("delete"), UNKNOWN("");
+    LIST("list"), DELETE("delete"), BYE("bye"), UNKNOWN("");
 
     private final String command;
 
