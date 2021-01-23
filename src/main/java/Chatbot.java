@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -116,7 +118,7 @@ public class Chatbot {
                     if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
                         throw new DukeException("The time of a deadline cannot be empty.\n");
                     }
-                    newTask = new Deadline(taskTimeSplit[0].substring(9), TaskType.DEADLINE, taskTimeSplit[1]);
+                    newTask = new Deadline(taskTimeSplit[0].substring(9), TaskType.DEADLINE, LocalDate.parse(taskTimeSplit[1]));
                     addTask(newTask);
                 } else if (taskTypeSplit[0].toLowerCase().equals("event")) {
                     if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
@@ -126,13 +128,16 @@ public class Chatbot {
                     if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
                         throw new DukeException("The time of an event cannot be empty.\n");
                     }
-                    newTask = new Event(taskTimeSplit[0].substring(6), TaskType.EVENT, taskTimeSplit[1]);
+                    newTask = new Event(taskTimeSplit[0].substring(6), TaskType.EVENT, LocalDate.parse(taskTimeSplit[1]));
                     addTask(newTask);
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
                 }
             } catch (DukeException ex) {
                 System.out.println(ex.toString());
+            } catch (DateTimeParseException ex) {
+                String returnString = "\t  OOPS!!! " + "The format of date is wrong! (yyyy-mm-dd)\n";
+                System.out.println(Duke.horizontalLine + returnString + Duke.horizontalLine);
             }
             input = sc.nextLine();
         }
