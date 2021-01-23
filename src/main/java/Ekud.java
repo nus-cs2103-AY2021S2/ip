@@ -171,7 +171,7 @@ public class Ekud {
 
         // store whatever is given until bye is detected
         Scanner input = new Scanner(System.in);
-        TaskSaver saver = new TaskSaver("tasks.txt");
+        Storage saver = new Storage("tasks.txt");
         Vector<Task> tasks;
         try {
             tasks = saver.restore();

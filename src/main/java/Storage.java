@@ -7,12 +7,12 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class TaskSaver {
+public class Storage {
     private final String filePath;
     private final File file;
     private static final String deliminator = "\\|";
 
-    public TaskSaver(String path) {
+    public Storage(String path) {
         this.filePath = path;
         file = new File(filePath);
     }
