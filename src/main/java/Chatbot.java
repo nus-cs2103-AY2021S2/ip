@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,10 +5,10 @@ import java.util.Scanner;
  * A Chatbot that provides todo-list function for users.
  */
 public class Chatbot {
-    private final List<Task> todo;
+    private final List<Task> taskList;
 
-    Chatbot() {
-        todo = new ArrayList<>();
+    Chatbot(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -17,62 +16,65 @@ public class Chatbot {
      *
      * @param todo The list of things to do.
      */
-    public static void printTodo(List<Task> todo) throws DukeException {
-        if (todo.size() == 0) {
+    public static void printTaskList(List<Task> taskList) throws DukeException {
+        if (taskList.size() == 0) {
             throw new DukeException("There's currently no any tasks.\n");
         }
         System.out.print(Duke.horizontalLine);
-        for (int i = 0; i < todo.size(); i++) {
-            System.out.println("\t  " + (i + 1) + "." + todo.get(i).toString());
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("\t  " + (i + 1) + "." + taskList.get(i).toString());
         }
         System.out.println(Duke.horizontalLine);
     }
 
     /**
      * Mark the task as done.
+     *
      * @param order the order of the task
      * @throws DukeException if there's no such task or the task had been finished
      */
     public void markDone(int order) throws DukeException {
-        if (order < 0 || order >= todo.size()) {
+        if (order < 0 || order >= taskList.size()) {
             throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
-        } else if (todo.get(order).getDone()) {
+        } else if (taskList.get(order).getDone()) {
             throw new DukeException("This task has been finished before.\n");
         }
-        todo.get(order).markDone();
+        taskList.get(order).markDone();
         System.out.print(Duke.horizontalLine);
         System.out.println("\t  Nice! I've marked this task as done:");
-        System.out.println("\t\t " + todo.get(order).toString());
+        System.out.println("\t\t " + taskList.get(order).toString());
         System.out.println(Duke.horizontalLine);
 
     }
 
     /**
      * Delete the task.
+     *
      * @param order the order of the task
      * @throws DukeException if there's no such task
      */
     public void delete(int order) throws DukeException {
-        if (order < 0 || order >= todo.size()) {
+        if (order < 0 || order >= taskList.size()) {
             throw new DukeException("There's no task " + (order + 1) + " in the list.\n");
         }
         System.out.print(Duke.horizontalLine);
         System.out.println("\t  Noted. I've removed this task:");
-        System.out.println("\t\t " + todo.get(order).toString());
+        System.out.println("\t\t " + taskList.get(order).toString());
         System.out.println(Duke.horizontalLine);
-        todo.remove(order);
+        taskList.remove(order);
     }
 
     /**
      * Add more task.
+     *
      * @param newTask Append the newTask to the end of the task list.
      */
     public void addTask(Task newTask) {
-        todo.add(newTask);
+        taskList.add(newTask);
         System.out.print(Duke.horizontalLine);
         System.out.println("\t  Got it. I've added this task:");
         System.out.println("\t\t" + newTask.toString());
-        System.out.println("\t  Now you have " + todo.size() + " tasks in the list.");
+        System.out.println("\t  Now you have " + taskList.size() + " tasks in the list.");
         System.out.println(Duke.horizontalLine);
     }
 
@@ -89,7 +91,7 @@ public class Chatbot {
             try {
                 String[] taskTypeSplit = input.split(" ");
                 if (input.toLowerCase().equals("list")) {
-                    printTodo(todo);
+                    printTaskList(taskList);
                 } else if (taskTypeSplit[0].toLowerCase().contains("done")) {
                     if (taskTypeSplit.length <= 1 || taskTypeSplit[1].isBlank()) {
                         throw new DukeException("The description of done cannot be empty.\n");
@@ -137,6 +139,10 @@ public class Chatbot {
             input = sc.nextLine();
         }
 
+
     }
 
+    public List<Task> getTaskList() {
+        return taskList;
+    }
 }
