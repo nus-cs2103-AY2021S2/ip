@@ -12,11 +12,15 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2718" : " "); // return tick or X symbols
+        return (isDone ? "\u2718" : " ");
     }
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String toSaveFormat() {
+        return getStatusIcon() + " | " + this.description;
     }
 
     @Override

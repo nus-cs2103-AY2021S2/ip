@@ -6,6 +6,7 @@ public class Duke {
 
     public static List<Task> tasks = new ArrayList<>();
     public static Scanner sc = new Scanner(System.in);
+    public static DataManager dataManager = new DataManager();
 
     // Formatting display content
 
@@ -189,15 +190,25 @@ public class Duke {
                     default:
                         throw new DukeException("Sorry, I dont understand what that means :-(");
                 }
+                dataManager.saveTasksToFile(tasks);
             } catch (DukeException e) {
                 printErrorMessage(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         greeting();
+        try {
+            dataManager.loadTasksFromFile(tasks);
+        } catch (DukeException e) {
+            printErrorMessage(e.getMessage());
+        }
         handleUserInput();
         sc.close();
+    }
+
+    public static void main(String[] args) {
+        run();
     }
 }
