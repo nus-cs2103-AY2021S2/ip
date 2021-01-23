@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 /**
  * Duke is a task manager.
  * 
@@ -45,7 +50,7 @@ public class Duke {
     public void start() {
         Scanner sc = new Scanner(System.in);
 
-        echo(List.of("Hello! I'm Duke","What can I do for you?"));
+        echo(List.of("Hello! I'm Duke","What can I do for you?","Enter \"load\" to restore previously saved checklist."));
 
         for (;;) {
             String command = sc.next();
@@ -76,6 +81,12 @@ public class Duke {
                     break;
                 case "delete":
                     deleteTask(input);
+                    break;
+                case "save":
+                    saveCheckList();
+                    break;
+                case "load":
+                    checkList = loadCheckList();
                     break;
                 default: 
                     echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -151,5 +162,62 @@ public class Duke {
         echo(List.of("Noted. I've removed this task:",
                 t.toString(),
                 "Now you have " + checkList.size() + " tasks in the list."));
+    }
+
+    private List<Task> loadCheckList() {
+        
+        List<Task> lst = new ArrayList<>();
+        File f = new File("data/dukeData.txt");
+        Scanner sc;
+        try {
+            sc = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            echo(List.of("No save found!", "Creating new list.."));
+            return lst;
+        }
+
+        while (sc.hasNextLine()) {  
+            String[] s = sc.nextLine().split(";");
+            switch (s[0]) {
+            case "T":
+                lst.add(Todo.importData(s));
+                break;
+            case "D":
+                lst.add(Deadline.importData(s));
+                break;
+            case "E":
+                lst.add(Event.importData(s));
+                break;
+            default:
+                echo(List.of("File corrupted and unable to load", "Creating new list.."));
+                return new ArrayList<>();
+            }
+        }
+        echo("Checklist loaded successfully!");
+        return lst;
+
+    } 
+    
+    private void saveCheckList() {
+        String path = "data/dukeData.txt";
+
+        File f = new File(path);
+        if (!f.getParentFile().exists()) {
+            f.getParentFile().mkdir();
+        }
+
+        FileWriter fw;
+        try {
+            fw = new FileWriter(path);
+            for (Task t : checkList) {
+                fw.write(String.join(";", t.exportData()) + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            echo("Please delete \"data/dukeData.txt\" file and run this command again!");
+            return;
+        }
+
+        echo("Checklist saved!");
     }
 }

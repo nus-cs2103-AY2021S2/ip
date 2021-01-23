@@ -14,4 +14,7 @@ todo
 deadline
 event
 done 100
+load
+save
+load
 bye

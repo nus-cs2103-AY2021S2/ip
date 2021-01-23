@@ -1,7 +1,11 @@
+import java.util.List;
+
 /**
  * Represents a Todo task.
  */
 public class Todo extends Task {
+
+    private static final String TYPE = "T";
 
     /**
      * Factory method for creating Todo task.
@@ -19,9 +23,26 @@ public class Todo extends Task {
     private Todo(String description) {
         super(description);
     }
+
+    private Todo(boolean isDone, String description) {
+        super(description);
+        this.isDone = isDone;
+    }
     
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[%s]%s", TYPE, super.toString());
+    }
+
+    @Override
+    public List<String> exportData() {
+        return List.of(TYPE,
+                isDone ? "1" : "0",
+                description);
+    }
+
+    public static Todo importData(String[] args) {
+        boolean isDone = args[1].equals("1");
+        return new Todo(isDone, args[2]);
     }
 }
