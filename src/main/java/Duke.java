@@ -2,15 +2,16 @@ import java.util.Scanner;
 
 public class Duke {
     private static final String CHATBOT_NAME = "Mantaro";
-    private static boolean isActive = true;
 
-    /**
-     * Lifecycle of the chatbot
-     * @param args Command line arguments
-     */
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        TaskManager taskManager = new TaskManager();
+    private boolean isActive;
+    private TaskManager taskManager;
+    private Ui ui;
+
+    public Duke() {
+        isActive = true;
+
+        ui = new Ui();
+        taskManager = new TaskManager();
         Command.setup(ui, taskManager);
 
         try {
@@ -18,7 +19,9 @@ public class Duke {
         } catch (DukeLoadException e) {
             ui.printError(e.getMessage());
         }
+    }
 
+    public void run() {
         // Opening message
         ui.printWelcomeMsg(CHATBOT_NAME);
 
@@ -41,5 +44,10 @@ public class Duke {
 
         // Closing message
         ui.printGoodbyeMsg();
+    }
+
+    public static void main(String[] args) {
+        Duke bot = new Duke();
+        bot.run();
     }
 }
