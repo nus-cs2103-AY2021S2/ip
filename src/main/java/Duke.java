@@ -227,33 +227,6 @@ public class Duke {
     }
 
     /**
-     * Save tasks from current session into the hard disk
-     * @throws DukeSaveException if there is an IO issue writing the save file
-     */
-    private static void saveTasks() throws DukeSaveException {
-        // Create the 'data' folder if missing
-        File dir = new File("data");
-        if(!dir.exists()) {
-            dir.mkdir();
-        }
-
-        File file = new File(TASKSLIST_PATH);
-        try {
-            // Erase any existing list in the file
-            new PrintWriter(TASKSLIST_PATH).close();
-
-            // Save each task as a row in the file
-            FileWriter writer = new FileWriter(TASKSLIST_PATH);
-            for (Task task : tasks) {
-                writer.write(task.toSaveInfoString() + "\n");
-            }
-            writer.close();
-        } catch (IOException e) {
-            throw new DukeSaveException("Issue with IO while saving tasks");
-        }
-    }
-
-    /**
      * Lifecycle of the chatbot
      * @param args Command line arguments
      */
@@ -280,19 +253,19 @@ public class Duke {
             try {
                 if(command.matches("^todo($|.+$)")) {
                     addToDo(command.substring(4).stripLeading());
-                    saveTasks();
+                    Storage.saveTasks(tasks);
                 } else if(command.matches("^deadline($|.+$)")) {
                     addDeadline(command.substring(8).stripLeading());
-                    saveTasks();
+                    Storage.saveTasks(tasks);
                 } else if(command.matches("^event($|.+$)")) {
                     addEvent(command.substring(5).stripLeading());
-                    saveTasks();
+                    Storage.saveTasks(tasks);
                 } else if(command.matches("^done($|.+$)")) {
                     doneTask(command.substring(4).stripLeading());
-                    saveTasks();
+                    Storage.saveTasks(tasks);
                 } else if(command.matches("^delete($|.+$)")) {
                     deleteTask(command.substring(6).stripLeading());
-                    saveTasks();
+                    Storage.saveTasks(tasks);
                 } else if(command.equals("list")) {
                     listTasks();
                 } else if(command.equals("bye")) {
