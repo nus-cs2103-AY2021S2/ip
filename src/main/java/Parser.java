@@ -96,7 +96,7 @@ public class Parser {
             if (index < TaskList.tasks.size() && index >= 0) {
                 return index;
             } else {
-                throw new NumberFormatException();
+                throw new IndexOutOfBoundsException();
             }
         } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
@@ -107,9 +107,9 @@ public class Parser {
             return -1;
         } catch (NumberFormatException e) {
             if (cmd.equals("done")) {
-                Ui.showError("Specify a valid task index to mark as done!");
+                Ui.showError("Index of task to mark as done must be a number!");
             } else {
-                Ui.showError("Specify a valid task index to delete!");
+                Ui.showError("Index of task to delete must be a number!");
             }
             return -1;
         }
