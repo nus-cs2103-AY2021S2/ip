@@ -1,6 +1,10 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -37,6 +41,11 @@ public class Duke {
         partition();
     }
 
+    public static LocalDateTime parseDateTime(String dateTimeString) {
+        DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
+    }
+
     // Adding, Editing & Displaying Tasks
 
     public static void addTask(String[] userInputArr) throws DukeException {
@@ -69,16 +78,26 @@ public class Duke {
         addTaskReport(todo);
     }
 
-    public static void addDeadline(String[] detailsArr) {
-        Deadline deadline = new Deadline(detailsArr[0], detailsArr[1]);
-        tasks.add(deadline);
-        addTaskReport(deadline);
+    public static void addDeadline(String[] detailsArr) throws DukeException {
+        try {
+            LocalDateTime date = parseDateTime(detailsArr[1]);
+            Deadline deadline = new Deadline(detailsArr[0], date);
+            tasks.add(deadline);
+            addTaskReport(deadline);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please follow the datetime format of dd/mm/yyyy hhmm.");
+        }
     }
 
-    public static void addEvent(String[] detailsArr) {
-        Event event = new Event(detailsArr[0], detailsArr[1]);
-        tasks.add(event);
-        addTaskReport(event);
+    public static void addEvent(String[] detailsArr) throws DukeException {
+        try {
+            LocalDateTime date = parseDateTime(detailsArr[1]);
+            Event event = new Event(detailsArr[0], date);
+            tasks.add(event);
+            addTaskReport(event);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please follow the datetime format of dd/mm/yyyy hhmm.");
+        }
     }
 
     public static void addTaskReport(Task task) {
