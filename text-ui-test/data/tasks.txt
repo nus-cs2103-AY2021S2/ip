@@ -1,0 +1,4 @@
+[T][ ]  read book
+[D][X]  return book (by: 2021-06-20)
+[E][ ]  project meeting (at: 2020-04-20)
+[T][ ]  borrow book
