@@ -16,4 +16,8 @@ public class Task {
         return "Nice! I've marked this task as done:\n" + toString();
     }
 
+    public void setIsDone() {
+        this.isDone = true;
+    }
+
 }
