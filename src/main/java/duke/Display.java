@@ -82,7 +82,7 @@ public class Display {
         display("Tada! Your order has been served!\n\n  " + task);
     }
 
-    protected static void displayError(String msg) {
+    public static void displayError(String msg) {
         display(msg);
     }
 }

@@ -1,5 +1,9 @@
 package duke;
 
+import duke.data.Data;
+
+import static duke.data.Data.*;
+
 import static duke.Display.*;
 
 import java.util.ArrayList;
@@ -7,7 +11,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    protected final static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> tasks;
     private final static Scanner sc = new Scanner(System.in);
 
     private static void addTask(CommandType type, String[] command) throws DukeException {
@@ -120,13 +124,17 @@ public class Duke {
                 default:
                     throw new DukeException("Hmm... That doesn't seem to be an item in our menu...\nTry again!");
                 }
+
+                updateDataFile(tasks);
+
             } catch (DukeException e) {
                 displayError(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
+        tasks = initialiseList();
         displayWelcome();
         handleInput();
         displayFarewell();

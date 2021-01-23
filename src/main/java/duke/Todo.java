@@ -1,8 +1,12 @@
 package duke;
 
 public class Todo extends Task {
-    Todo(String description) {
+    public Todo(String description) {
         super(description);
+    }
+
+    public String getFormattedString() {
+        return "TODO::" + (isDone? "1::" : "0::") + description + "\n";
     }
 
     @Override

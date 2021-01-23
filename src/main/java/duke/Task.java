@@ -1,11 +1,11 @@
 package duke;
 
-public class Task {
+public abstract class Task {
 
     String description;
     boolean isDone;
 
-    Task(String description) {
+    public Task(String description) {
         this.description = description;
         isDone = false;
     }
@@ -21,6 +21,8 @@ public class Task {
     public void markDone() {
         isDone = true;
     }
+
+    public abstract String getFormattedString();
 
     @Override
     public String toString() {
