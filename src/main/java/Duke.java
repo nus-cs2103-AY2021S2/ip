@@ -1,5 +1,6 @@
 import core.IOManager;
 import core.InputHandler;
+import core.TaskManager;
 
 public class Duke {
     public static void main(String[] args) {
@@ -10,9 +11,11 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        InputHandler inputHandler = new InputHandler();
+        TaskManager tm = new TaskManager();
+        InputHandler inputHandler = new InputHandler(tm);
         IOManager ioManager = new IOManager();
         ioManager.setListener(inputHandler);
         ioManager.run();
+        tm.save();
     }
 }

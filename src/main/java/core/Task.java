@@ -1,6 +1,8 @@
 package core;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     protected String taskDescription;
     protected boolean isDone;
     private final int taskUID;
