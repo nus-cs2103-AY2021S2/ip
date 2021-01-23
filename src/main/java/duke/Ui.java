@@ -39,7 +39,7 @@ public class Ui {
         ArrayList<Task> tasks = taskList.getTasks();
         int n = tasks.size();
         if (n == 0) {
-            formatInChatBox("There is no task yet\n");
+            formatInChatBox("There is no duke.task yet\n");
             return ;
         }
         StringBuffer buf = new StringBuffer();
@@ -50,17 +50,17 @@ public class Ui {
     }
 
     public static void showSuccessfulAdd(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've added this task:" + '\n'
+        formatInChatBox("Got it. I've added this duke.task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }
 
     public static void showSuccessfulMark(Task task) {
-        formatInChatBox("Nice! I've marked this task as done:\n" + task + "\n");
+        formatInChatBox("Nice! I've marked this duke.task as done:\n" + task + "\n");
     }
 
     public static void showSuccessfulDelete(TaskList taskList, Task task) {
-        formatInChatBox("Got it. I've removed this task:" + '\n'
+        formatInChatBox("Got it. I've removed this duke.task:" + '\n'
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size() + " tasks in the list.\n");
     }
