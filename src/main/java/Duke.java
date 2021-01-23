@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +9,7 @@ import java.util.Scanner;
  */
 public class Duke {
     public static ArrayList<Task> taskList = new ArrayList<>();
+    public static final String FILE_PATH_SAVED_TASKS = "./savedTasks.txt";
 
     /**
      * Greets the user and begins listening to user commands
@@ -15,7 +17,48 @@ public class Duke {
      */
     public static void main(String[] args) throws DukeException {
         greetUser();
+        try {
+            Storage.loadTaskList(FILE_PATH_SAVED_TASKS);
+            prepareTaskList(Storage.storedList);
+        } catch (IOException e) {
+            System.out.println(e);
+            System.out.println("Creating file at ./savedTasks.txt\n");
+        }
         listenToUserCommand();
+    }
+
+    public static void prepareTaskList(ArrayList<String> list) throws DukeException {
+        for(int i = 0; i < list.size(); i++) {
+            String taskInList = list.get(i);
+            if (taskInList.startsWith("[T]")) {
+               String task = taskInList.substring(16);
+               Task createTask = new Todo(task);
+                if(taskInList.substring(4).startsWith("C")) {
+                    createTask.isDone = true;
+                }
+               taskList.add(createTask);
+            } else if (taskInList.startsWith("[D]")) {
+                int date = taskInList.indexOf("(by: ");
+                String task = taskInList.substring(16, date);
+                String by = taskInList.substring(date);
+                Task createTask = new Deadline(task, by);
+                if(taskInList.substring(4).startsWith("C")) {
+                    createTask.isDone = true;
+                }
+                taskList.add(createTask);
+            } else if (taskInList.startsWith("[E]")) {
+                int date = taskInList.indexOf("(at: ");
+                String task = taskInList.substring(16, date);
+                String at = taskInList.substring(date);
+                Task createTask = new Deadline(task, at);
+                if(taskInList.substring(4).startsWith("C")) {
+                    createTask.isDone = true;
+                }
+                taskList.add(createTask);
+            } else {
+                throw new DukeException("Invalid task.");
+            }
+        }
     }
 
     public static void greetUser() {
@@ -47,15 +90,19 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
                 createTodoTask(input);
+                updateTaskList();
             } else if (input.startsWith("event ")) {
                 createEventTask(input);
+                updateTaskList();
             } else if (input.startsWith("deadline ")) {
                 createDeadlineTask(input);
+                updateTaskList();
             } else if (input.startsWith("delete ")) {
                 deleteTask(input);
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            Storage.storeTaskList(FILE_PATH_SAVED_TASKS);
         }
     }
 
@@ -114,7 +161,6 @@ public class Duke {
         String todoTask = input.substring(5);
         Task task = new Todo(todoTask);
         addTaskToList(task);
-        updateTaskList();
     }
 
     /**
@@ -127,7 +173,6 @@ public class Duke {
         String date = taskAndDate[1].substring(3);
         Task task = new Event(eventTask, date);
         addTaskToList(task);
-        updateTaskList();
     }
 
     /**
@@ -140,7 +185,6 @@ public class Duke {
         String deadline = taskAndDate[1].substring(3);
         Task task = new Deadline(deadlineTask, deadline);
         addTaskToList(task);
-        updateTaskList();
     }
 
     /**

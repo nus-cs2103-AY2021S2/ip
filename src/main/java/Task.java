@@ -12,7 +12,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "COMPLETED" : "NOTCOMPLETED");
+        return (isDone ? "COMPLETED!" : "INPROGRESS");
     }
 
     @Override
