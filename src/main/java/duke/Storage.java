@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Deadline;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,7 +44,7 @@ public class Storage {
                     int index = desc.indexOf('(');
                     String name = desc.substring(0, index);
                     String time = desc.substring(index + 5, desc.length() - 1);
-                    lst.add(new Deadline(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
+                    lst.add(new Event(name, LocalDate.parse(time, DateTimeFormatter.ofPattern("MMM dd yyyy"))));
                 }
                 if (status == 'X') {
                     lst.get(lst.size() - 1).markDone();

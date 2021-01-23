@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Parser {
     TaskList taskList;
     

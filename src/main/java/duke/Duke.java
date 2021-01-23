@@ -1,9 +1,6 @@
 package duke;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.Scanner;
 public class Duke {
 
     static void run(Parser parser, Scanner sc) {
@@ -19,6 +16,7 @@ public class Duke {
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(System.in);
+        Ui.greet();
         run(new Parser(taskList), sc);
     }
 }

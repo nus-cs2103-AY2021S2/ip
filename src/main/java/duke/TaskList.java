@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Deadline;
-
 import java.util.List;
 
 public class TaskList {
