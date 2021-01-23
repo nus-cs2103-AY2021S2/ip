@@ -63,6 +63,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../ip/data/Duke.txt").run();
+        String dir = System.getProperty("user.dir");
+        new Duke(dir + "/data/Duke.txt").run();
     }
 }
