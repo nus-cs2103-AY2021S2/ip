@@ -5,7 +5,7 @@ package blarb;
  */
 enum Command {
     DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
-    LIST("list"), DELETE("delete"), BYE("bye"), UNKNOWN("");
+    LIST("list"), DELETE("delete"), BYE("bye"), FIND("find"), UNKNOWN("");
 
     private final String command;
 

@@ -102,6 +102,9 @@ public class Blarb {
             break;
         case TODO:
             try {
+                if (cml.isSingleCommand()) {
+                    throw new InputMismatchException();
+                }
                 Task task = new ToDo(cml.description);
                 String output = tasklist.add(task);
                 try {
@@ -110,12 +113,15 @@ public class Blarb {
                     ui.warn("Cannot access storage.");
                 }
                 ui.blurt(output);
-            } catch (ArrayIndexOutOfBoundsException ex) {
+            } catch (InputMismatchException ex) {
                 ui.blurt("Todo what?");
             }
             break;
         case DEADLINE:
             try {
+                if (cml.isSingleCommand()) {
+                    throw new InputMismatchException();
+                }
                 String[] fragments = cml.description.split(" /by ");
                 try {
                     Task task = new Deadline(fragments[0], fragments[1]);
@@ -131,12 +137,15 @@ public class Blarb {
                 } catch (DateTimeParseException ex) {
                     ui.blurt("blarb.Deadline time must be in the format of yyyy-mm-dd.");
                 }
-            } catch (ArrayIndexOutOfBoundsException ex) {
+            } catch (InputMismatchException ex) {
                 ui.blurt("Someone's having trouble with deadlines.");
             }
             break;
         case EVENT:
             try {
+                if (cml.isSingleCommand()) {
+                    throw new InputMismatchException();
+                }
                 String[] fragments = cml.description.split(" /at ");
                 try {
                     Task task = new Event(fragments[0], fragments[1]);
@@ -150,8 +159,18 @@ public class Blarb {
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     ui.blurt("Type the event, then give the time using \"/at\".");
                 }
-            } catch (ArrayIndexOutOfBoundsException ex) {
+            } catch (InputMismatchException ex) {
                 ui.blurt("Tell me the event!");
+            }
+            break;
+        case FIND:
+            try {
+                if (cml.isSingleCommand()) {
+                    throw new InputMismatchException();
+                }
+                ui.blurt(tasklist.find(cml.description));
+            } catch (InputMismatchException ex) {
+                ui.blurt("I need a clue to find stuff!");
             }
             break;
         case LIST:
