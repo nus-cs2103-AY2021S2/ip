@@ -93,7 +93,7 @@ public class AddCommand extends Command {
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         list.addJob(task);
-        System.out.print("Duke.Task added:\n" + StringParser.newLiner(task.toString(), length)
+        System.out.print("Task added:\n" + StringParser.newLiner(task.toString(), length)
                 + "Now you have " + list.getSize()
                 + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
     }
