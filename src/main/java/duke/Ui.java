@@ -57,8 +57,8 @@ public class Ui {
         System.out.println("    Listing all duke.tasks: ");
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
-            System.out.println("     " +
-                    num + ": " + tasks.get(i));
+            System.out.println("     "
+                    + num + ": " + tasks.get(i));
         }
     }
 }

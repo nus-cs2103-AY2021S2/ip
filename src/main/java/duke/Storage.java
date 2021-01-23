@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Task;
 
 public class Storage {
@@ -17,7 +17,7 @@ public class Storage {
         this.filePath = fp;
     }
 
-    public ArrayList<String> load() throws DukeIOException {
+    public ArrayList<String> load() throws DukeIoException {
         try {
             File file = new File(this.filePath);
             if (!file.exists()) {
@@ -37,11 +37,11 @@ public class Storage {
             fr.close();
             return output;
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 
-    public void save(TaskManager tm) throws DukeIOException {
+    public void save(TaskManager tm) throws DukeIoException {
         try {
             ArrayList<Task> tasks = tm.getTasks();
             FileWriter fw = new FileWriter(this.filePath);
@@ -51,7 +51,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 

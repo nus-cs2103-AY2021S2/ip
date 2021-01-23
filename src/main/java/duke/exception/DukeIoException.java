@@ -1,10 +1,10 @@
 package duke.exception;
 
-public class DukeIOException extends DukeException {
+public class DukeIoException extends DukeException {
     /**
      *  DukeIOException constructor.
      */
-    public DukeIOException() {
+    public DukeIoException() {
     }
 
     @Override
