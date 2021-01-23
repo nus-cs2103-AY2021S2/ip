@@ -1,12 +1,18 @@
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String CHATBOT_NAME = "Mantaro";
-    private static boolean isActive = true;
+    private static final String TASKSLIST_PATH = "data/duke.txt";
 
-    private static List<Task> tasks = new ArrayList<>();
+    private static boolean isActive = true;
+    private static final List<Task> tasks = new ArrayList<>();
 
     /**
      * Print an adding message corresponding to the added Task's type
@@ -23,10 +29,11 @@ public class Duke {
     /**
      * Add a ToDo into the internal list
      * @param desc Description of the ToDo
+     * @throws DukeCommandException if no description is given
      */
     private static void addToDo(String desc) throws DukeCommandException {
         if(desc.length() == 0) {
-            throw new DukeCommandException("todo", desc, "The details of a ToDo cannot be empty.");
+            throw new DukeCommandException("todo", desc, "The description of a ToDo cannot be empty.");
         } else {
             ToDo newToDo = new ToDo(desc);
             tasks.add(newToDo);
@@ -37,6 +44,7 @@ public class Duke {
     /**
      * Add a Deadline into the internal list
      * @param params Parameters of Deadline (Description, Date/Time) in String form that will be processed
+     * @throws DukeCommandException if no parameters were given or parameters were invalid
      */
     private static void addDeadline(String params) throws DukeCommandException {
         if(params.length() == 0) {
@@ -57,6 +65,7 @@ public class Duke {
     /**
      * Add an Event into the internal list
      * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
+     * @throws DukeCommandException if no parameters were given or parameters were invalid
      */
     private static void addEvent(String params) throws DukeCommandException {
         if(params.length() == 0) {
@@ -76,8 +85,8 @@ public class Duke {
 
     /**
      * Mark a task as completed
-     * @param param Parameter in String form to complete a task (Index)
-     * @throws DukeCommandException
+     * @param param Parameter in String form to complete a task
+     * @throws DukeCommandException if there is no tasks, index <= 0, index >= number of tasks
      */
     private static void doneTask(String param) throws DukeCommandException {
         if(!param.matches("-?(0|[1-9]\\d*)")) {
@@ -85,13 +94,13 @@ public class Duke {
                     "with.");
         }
 
-        int index = Integer.valueOf(param) - 1;
+        int index = Integer.parseInt(param) - 1;
 
         if(tasks.size() == 0){
             throw new DukeCommandException("done", param, "There are no task to be completed.");
         } else if(index < 0 || index >= tasks.size()) {
             throw new DukeCommandException("done", param, "Please enter a valid task index ranging " +
-                    "from 1 to " + String.valueOf(tasks.size()) + " (inclusive).");
+                    "from 1 to " + tasks.size() + " (inclusive).");
         } else {
             Task task = tasks.get(index);
             task.markAsDone();
@@ -107,7 +116,7 @@ public class Duke {
     /**
      * Delete a task from the internal list
      * @param param Parameter in String form to identify a task for deletion (Index)
-     * @throws DukeCommandException
+     * @throws DukeCommandException if there is no tasks, index <= 0, index >= number of tasks
      */
     private static void deleteTask(String param) throws DukeCommandException {
         if(!param.matches("-?(0|[1-9]\\d*)")) {
@@ -115,13 +124,13 @@ public class Duke {
                     "deleting.");
         }
 
-        int index = Integer.valueOf(param) - 1;
+        int index = Integer.parseInt(param) - 1;
 
         if(tasks.size() == 0){
             throw new DukeCommandException("delete", param, "There are no task to be deleted.");
         } else if(index < 0 || index >= tasks.size()) {
             throw new DukeCommandException("delete", param, "Please enter a valid task index ranging " +
-                    "from 1 to " + String.valueOf(tasks.size()) + " (inclusive).");
+                    "from 1 to " + tasks.size() + " (inclusive).");
         } else {
             Task deletedTask = tasks.remove(index);
 
@@ -148,10 +157,89 @@ public class Duke {
     }
 
     /**
+     * Load tasks from previous session that was saved into hard disk
+     * @throws DukeLoadException if there is an IO issue reading the save file or invalid task type was found
+     */
+    private static void loadTasks() throws DukeLoadException {
+        // Create the 'data' folder if missing
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+
+        // Load the save file or create one if missing
+        File file = new File(TASKSLIST_PATH);
+        try {
+            // If the save file already exists, load its tasks
+            if(!file.createNewFile()) {
+                Scanner scanner = new Scanner(file);
+                while(scanner.hasNextLine()) {
+                    String[] splits = scanner.nextLine().split(" \\| ");
+                    boolean isDone = splits[1].equals("1");
+
+                    switch (splits[0]) {
+                    case "T":
+                        ToDo toDo = new ToDo(splits[2], isDone);
+                        tasks.add(toDo);
+                        break;
+                    case "D":
+                        Deadline deadline = new Deadline(splits[2], splits[3], isDone);
+                        tasks.add(deadline);
+                        break;
+                    case "E":
+                        Event event = new Event(splits[2], splits[3], isDone);
+                        tasks.add(event);
+                        break;
+                    default:
+                        throw new DukeLoadException("Invalid task type found: " + splits[0]);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new DukeLoadException("Issue with IO while loading tasks");
+        }
+    }
+
+    /**
+     * Save tasks from current session into the hard disk
+     * @throws DukeSaveException if there is an IO issue writing the save file
+     */
+    private static void saveTasks() throws DukeSaveException {
+        // Create the 'data' folder if missing
+        File dir = new File("data");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File file = new File(TASKSLIST_PATH);
+        try {
+            // Erase any existing list in the file
+            new PrintWriter(TASKSLIST_PATH).close();
+
+            // Save each task as a row in the file
+            FileWriter writer = new FileWriter(TASKSLIST_PATH);
+            for (Task task : tasks) {
+                writer.write(task.toSaveInfoString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeSaveException("Issue with IO while saving tasks");
+        }
+    }
+
+    /**
      * Lifecycle of the chatbot
-     * @param args
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
+        try {
+            loadTasks();
+        } catch (DukeLoadException e) {
+            System.out.println("___________________________________________________________");
+            System.out.printf("There is a problem while loading your past tasks meow! %s\n", e.getMessage());
+            System.out.println("___________________________________________________________\n");
+        }
+
         // Opening message
         System.out.println("___________________________________________________________");
         System.out.printf("Meow, I'm %s\nWhat can I do for you today?\n", CHATBOT_NAME);
@@ -168,14 +256,19 @@ public class Duke {
             try {
                 if(command.matches("^todo($|.+$)")) {
                     addToDo(command.substring(4).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^deadline($|.+$)")) {
                     addDeadline(command.substring(8).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^event($|.+$)")) {
                     addEvent(command.substring(5).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^done($|.+$)")) {
                     doneTask(command.substring(4).stripLeading());
+                    saveTasks();
                 } else if(command.matches("^delete($|.+$)")) {
                     deleteTask(command.substring(6).stripLeading());
+                    saveTasks();
                 } else if(command.equals("list")) {
                     listTasks();
                 } else if(command.equals("bye")) {
@@ -185,7 +278,7 @@ public class Duke {
                     System.out.println("No such command, Please try again with another command meow.");
                     System.out.println("___________________________________________________________\n");
                 }
-            } catch(DukeCommandException e) {
+            } catch(DukeException e) {
                 System.out.println("___________________________________________________________");
                 System.out.printf("ERROR MEOW! %s\n", e.getMessage());
                 System.out.println("___________________________________________________________\n");
