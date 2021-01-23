@@ -46,6 +46,8 @@ public class TaskList {
                 addDeadline(command.substring(8));
             } else if (command.startsWith("event")) {
                 addEvent(command.substring(5));
+            } else {
+                throw new DukeException("Oops! I have no idea.");
             }
             Ui.addTask(lst);
             storage.write(lst);
