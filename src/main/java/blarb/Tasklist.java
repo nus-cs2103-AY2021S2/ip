@@ -4,13 +4,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * {@code Tasklist} stores and operates on the list of {@code Tasks}.
+ *
+ * @see java.lang.Iterable
+ */
 class Tasklist implements Iterable<Task> {
     private final List<Task> list;
 
+    /**
+     * Initializes a {@code Tasklist}.
+     */
     public Tasklist() {
         list = new ArrayList<>(100);
     }
 
+    /**
+     * Lists everything in the task list.
+     * @return String interpretation of the task list.
+     */
     public String list() {
         if (list.size() < 1) {
             return "You have nothing on your list.";
@@ -25,9 +37,10 @@ class Tasklist implements Iterable<Task> {
     }
 
     /**
-     * Adds a new blarb.Task to the task list.
+     * Adds a new Task to the task list.
      *
-     * @param task blarb.Task to be added.
+     * @param task Task to be added.
+     * @return String interpretation of added task.
      */
     public String add(Task task) {
         String addTask = "Affirmative. I've added this task:\n %s\n"
@@ -45,6 +58,7 @@ class Tasklist implements Iterable<Task> {
      * Changes the indexed task to a completed state.
      *
      * @param index The index of the task.
+     * @return String interpretation of finished task
      */
     public String done(int index) throws IndexOutOfBoundsException {
         list.get(index).markAsDone();
@@ -56,6 +70,8 @@ class Tasklist implements Iterable<Task> {
      * Delete the indexed task.
      *
      * @param index The index of the task.
+     * @return String interpretation of deleted task.
+     * @throws IndexOutOfBoundsException The inputted index does not exist in the list.
      */
     public String delete(int index) throws IndexOutOfBoundsException {
         String delete = "The task is terminated:\n%s";
@@ -64,6 +80,11 @@ class Tasklist implements Iterable<Task> {
         return String.format(delete, output);
     }
 
+    /**
+     * A iteration of all the tasks in the task list.
+     *
+     * @return A iterator of the task list.
+     */
     @Override
     public Iterator<Task> iterator() {
         return list.iterator();

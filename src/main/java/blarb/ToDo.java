@@ -1,13 +1,13 @@
 package blarb;
 
 /**
- * {@code blarb.ToDo} is a {@code blarb.Task} that does not have further details attached.
+ * {@code ToDo} is a {@code Task} that does not have further details attached.
  *
  * @see Task
  */
 class ToDo extends Task {
     /**
-     * Constructs a new uncompleted {@code blarb.ToDo}.
+     * Constructs a new uncompleted {@code ToDo}.
      *
      * @param description The name of the task.
      */
@@ -25,9 +25,9 @@ class ToDo extends Task {
     }
 
     /**
-     * String representation of the blarb.ToDo.
+     * String representation of the ToDo.
      *
-     * @return blarb.ToDo in check list form.
+     * @return ToDo in check list form.
      */
     @Override
     public String toString() {
