@@ -15,6 +15,8 @@ public class Duke {
     private static boolean isActive = true;
     private static final List<Task> tasks = new ArrayList<>();
 
+    private static final Ui ui = new Ui();
+
     /**
      * Print an adding message corresponding to the added Task's type
      * @param task Task that was added
@@ -265,9 +267,7 @@ public class Duke {
         }
 
         // Opening message
-        System.out.println("___________________________________________________________");
-        System.out.printf("Meow, I'm %s\nWhat can I do for you today?\n", CHATBOT_NAME);
-        System.out.println("___________________________________________________________\n");
+        ui.printWelcomeMsg(CHATBOT_NAME);
 
         // Scan user input as a command
         Scanner scanner = new Scanner(System.in);
@@ -303,15 +303,11 @@ public class Duke {
                     System.out.println("___________________________________________________________\n");
                 }
             } catch(DukeException e) {
-                System.out.println("___________________________________________________________");
-                System.out.printf("ERROR MEOW! %s\n", e.getMessage());
-                System.out.println("___________________________________________________________\n");
+                ui.printError(e.getMessage());
             }
         }
 
         // Closing message
-        System.out.println("___________________________________________________________");
-        System.out.println("Meow. Hope to see you again soon!");
-        System.out.println("___________________________________________________________");
+        ui.printGoodbyeMsg();
     }
 }
