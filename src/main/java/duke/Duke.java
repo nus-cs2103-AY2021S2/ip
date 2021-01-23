@@ -1,5 +1,17 @@
-package duke.main;
+package duke;
 
+import duke.main.Deadline;
+import duke.main.DukeException;
+import duke.main.Task;
+import duke.main.Todo;
+import duke.main.Event;
+import duke.main.Deadline;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -11,7 +23,7 @@ import duke.command.CommandOption;
  * Takes in an user command (within the exclusive list) and react accordingly.
  */
 public class Duke {
-    private static final String[] greet = {
+    protected static final String[] greet = {
             " ____        _        ",
             "|  _ \\ _   _| | _____ ",
             "| | | | | | | |/ / _ \\",
@@ -21,20 +33,28 @@ public class Duke {
             "What can I do for you today?"
     };
 
-    private static final String[] exit = {
+    protected static final String[] exit = {
             "Bye. Nice to meet you and hope to see you again soon!"
     };
 
-    private static final String border =
+    protected static final String border =
             "    ____________________________________________________________" +
                     "_______________\n";
 
-    private static final String indent = "     ";
+    protected static final String indent = "     ";
 
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> tasks = new ArrayList<>();
+
+    protected static String rootProject = System.getProperty("user.dir");
+    protected static Path dataFilePath =
+            Paths.get(rootProject,"src", "main", "java", "duke", "data", "duke.txt");
+
+    protected static Path dataFolderPath =
+            Paths.get(rootProject,"src", "main", "java", "duke", "data");
+
 
     public static void main(String[] args) {
-        System.out.println(formatMessage(greet));
+        init();
         Scanner sc = new Scanner(System.in);
         String message = sc.nextLine();
         while(!message.equalsIgnoreCase("bye")) {
@@ -42,6 +62,17 @@ public class Duke {
             message = sc.nextLine();
         }
         System.out.println(formatMessage(exit));
+    }
+
+    private static void init() {
+        System.out.println(formatMessage(greet));
+        try {
+            storageExistOrCreate();
+            tasks = loadData(dataFilePath);
+        } catch (DukeException e) {
+            System.out.println(formatMessage(new String[] {e.getMessage()}));
+            System.exit(-1);
+        }
     }
 
     /**
@@ -85,41 +116,46 @@ public class Duke {
         try {
             CommandOption command = CommandOption.valueOf(commandWord.toUpperCase(Locale.ROOT));
             switch (command) {
-                case LIST:
-                    printList();
-                    break;
-                case DONE:
-                    completeTask(otherInfo);
-                    break;
-                case TODO:
-                    if (otherInfo == null) {
-                        throw new DukeException("Please provide a description when creating todo.");
-                    }
-                    addTask(new Todo(otherInfo));
-                    break;
-                case EVENT:
-                    String[] temp = otherInfo.split("/at", 2);
-                    String description = temp[0].trim();
-                    String at = temp[1].trim();
-                    if (description.equals("") || at.equals("")) {
-                        throw new DukeException("Please provide a description or an at period" +
-                                " when creating event.");
-                    }
-                    addTask(new Event(description, at));
-                    break;
-                case DEADLINE:
-                    temp = otherInfo.split("/by", 2);
-                    description = temp[0].trim();
-                    String by = temp[1].trim();
-                    if (description.equals("") || by.equals("")) {
-                        throw new DukeException("Please provide a description or a by date " +
-                                "when creating deadline.");
-                    }
-                    addTask(new Deadline(description, by));
-                    break;
-                case DELETE:
-                    deleteTask(otherInfo);
-                    break;
+            case LIST:
+                printList();
+                break;
+            case DONE:
+                completeTask(otherInfo);
+                saveData(dataFilePath, tasks);
+                break;
+            case TODO:
+                if (otherInfo == null) {
+                    throw new DukeException("Please provide a description when creating todo.");
+                }
+                addTask(new Todo(otherInfo));
+                saveData(dataFilePath, tasks);
+                break;
+            case EVENT:
+                String[] temp = otherInfo.split("/at", 2);
+                String description = temp[0].strip();
+                String at = temp[1].strip();
+                if (description.equals("") || at.equals("")) {
+                    throw new DukeException("Please provide a description or an at period" +
+                            " when creating event.");
+                }
+                addTask(new Event(description, at));
+                saveData(dataFilePath, tasks);
+                break;
+            case DEADLINE:
+                temp = otherInfo.split("/by", 2);
+                description = temp[0].strip();
+                String by = temp[1].strip();
+                if (description.equals("") || by.equals("")) {
+                    throw new DukeException("Please provide a description or a by date " +
+                            "when creating deadline.");
+                }
+                addTask(new Deadline(description, by));
+                saveData(dataFilePath, tasks);
+                break;
+            case DELETE:
+                deleteTask(otherInfo);
+                saveData(dataFilePath, tasks);
+                break;
             }
         }
         catch (IllegalArgumentException e) {
@@ -252,4 +288,79 @@ public class Duke {
         return index;
     }
 
+    /**
+     *
+     * Note: may need to check if task is null.
+     * @param filePath
+     * @return
+     * @throws DukeException
+     */
+    protected static ArrayList<Task> loadData(Path filePath) throws DukeException {
+        ArrayList<Task> res = new ArrayList<>();
+        try {
+            BufferedReader br = Files.newBufferedReader(filePath);
+            String line;
+            while((line = br.readLine()) != null) {
+                Task task = stringToTask(line);
+                if(task != null) {
+                    res.add(task);
+                }
+            }
+        } catch (IOException e) {
+            throw new DukeException("error when loading Data."
+                    + System.lineSeparator()
+                    + indent + " " + e);
+        }
+        return res;
+    }
+
+    private static Task stringToTask(String taskInfo) {
+        String[] taskInfoArr = taskInfo.split("\\|");
+        String type = taskInfoArr[0].strip();
+        boolean isDone = taskInfoArr[1].strip().equals("1");
+        String description = taskInfoArr[2].strip();
+        Task res = null;
+        switch(type) {
+        case "T":
+            res = new Todo(description, isDone);
+            break;
+        case "E":
+            String at = taskInfoArr[3].strip();
+            res = new Event(description, isDone, at);
+        case "D":
+            String by = taskInfoArr[3].strip();
+            res = new Deadline(description, isDone, by);
+        }
+        return res;
+    }
+
+    protected static void saveData(Path filePath, ArrayList<Task> tasks) throws DukeException {
+        try {
+            ArrayList<String> tasksInfoToStore = new ArrayList<>();
+            for(Task task : tasks) {
+                tasksInfoToStore.add(task.infoToStore());
+            }
+            Files.write(filePath, tasksInfoToStore);
+        } catch (IOException e) {
+            throw new DukeException("error in saving data."
+                    + System.lineSeparator()
+                    + indent + " " + e);
+        }
+    }
+
+    protected static void storageExistOrCreate()
+            throws DukeException{
+        try {
+            if (Files.notExists(dataFilePath)) {
+                if (Files.notExists(dataFolderPath)) {
+                    dataFolderPath = Files.createDirectories(dataFolderPath);
+                }
+                dataFilePath = Files.createFile(dataFilePath);
+            }
+        } catch (IOException e) {
+            throw new DukeException("Unable to access data stored, access rights issue."
+                    + System.lineSeparator()
+                    + indent + " " + e);
+        }
+    }
 }
