@@ -1,5 +1,5 @@
 public class EventTask extends Task {
-    private static final String IDENTIFIER = "E";
+    public static final String IDENTIFIER = "E";
 
     private String eventTime;
 

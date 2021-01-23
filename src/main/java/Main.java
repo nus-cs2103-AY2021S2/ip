@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -144,7 +146,8 @@ public class Main {
         }
     }
 
-    private void createTask(Command taskType, String taskDescription) throws NoDescriptionException {
+    private void createTask(Command taskType, String taskDescription) throws NoDescriptionException, 
+            InvalidDescriptionException {
         if (taskDescription.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
         }
@@ -169,11 +172,21 @@ public class Main {
         return new ToDoTask(taskDescription);
     }
 
-    private Task createDeadlineTask(String taskDescription) {
+    private Task createDeadlineTask(String taskDescription) throws InvalidDescriptionException {
         String[] deadlineInputArr = taskDescription.split("/by");
         String deadlineTaskName = deadlineInputArr[0].strip();
-        String deadline = deadlineInputArr[1].strip();
+        String userInputDateTime = deadlineInputArr[1].strip();
+        LocalDateTime deadline = parseDateTime(userInputDateTime);
         return new DeadlineTask(deadlineTaskName, deadline);
+    }
+    
+    private static LocalDateTime parseDateTime(String dateString) throws InvalidDescriptionException {
+        try {
+            return LocalDateTime.parse(dateString, Formatter.INPUT_DATE_FORMATTER);
+        } catch (DateTimeParseException ex) {
+            throw new InvalidDescriptionException("Please enter a valid date and time for a deadline task " +
+                    "using this format:\ndeadline task_name /by dd/mm/yyyy HHHH");
+        }
     }
 
     private Task createEventTask(String taskDescription) {
@@ -202,7 +215,7 @@ public class Main {
 
     private void printMarkedAsDoneMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("  [X] %s\n", task.getName());
+        System.out.println(task.toString());
     }
 
     private void addTask(Task task) {
@@ -241,20 +254,20 @@ public class Main {
 
     private void printHelp() {
         System.out.println("Here are the list of available commands:");
-        System.out.println("BYE:\nExit the program\nUsage: 'bye'");
+        System.out.println("BYE:\nExit the program\nUsage: bye");
         System.out.println();
-        System.out.println("LIST:\nPrint the list of current tasks\nUsage: 'list'");
+        System.out.println("LIST:\nPrint the list of current tasks\nUsage: list");
         System.out.println();
-        System.out.println("DONE:\nMark a task as completed\nUsage: 'done <task_number>'");
+        System.out.println("DONE:\nMark a task as completed\nUsage: done <task_number>");
         System.out.println();
-        System.out.println("DELETE:\nDelete a task\nUsage: 'delete <task_number>'");
+        System.out.println("DELETE:\nDelete a task\nUsage: delete <task_number>");
         System.out.println();
-        System.out.println("TODO:\nAdd a todo task\nUsage: 'todo <task_description>'");
+        System.out.println("TODO:\nAdd a todo task\nUsage: todo <task_description>");
         System.out.println();
-        System.out.println("DEADLINE:\nAdd a deadline task\nUsage: 'deadline <task_description> /by <deadline>'");
+        System.out.println("DEADLINE:\nAdd a deadline task\nUsage: deadline <task_description> /by dd/mm/yyyy HHHH");
         System.out.println();
-        System.out.println("EVENT:\nAdd an event task\nUsage: 'event <task_description> /at <event_time>'");
+        System.out.println("EVENT:\nAdd an event task\nUsage: event <task_description> /at <event_time>");
         System.out.println();
-        System.out.println("HELP:\nPrint available commands\nUsage: 'help'");
+        System.out.println("HELP:\nPrint available commands\nUsage: help");
     }
 }
