@@ -35,4 +35,12 @@ public class TaskList {
         taskToBeMarked.markedAsDone();
         return taskToBeMarked;
     }
+
+    public TaskList find(String keyword) {
+        List<Task> res = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) res.add(task);
+        }
+        return new TaskList(res);
+    }
 }
