@@ -1,5 +1,6 @@
 package tasks;
 
+
 public class Task {
     protected boolean isDone;
     protected String taskName;
