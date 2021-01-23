@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class DateTimeNotFoundException extends DukeException {
     public DateTimeNotFoundException() {

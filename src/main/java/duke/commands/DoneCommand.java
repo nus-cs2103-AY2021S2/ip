@@ -1,33 +1,31 @@
-package commands;
+package duke.commands;
 
-import exceptions.*;
+import duke.storage.Storage;
 
-import tasks.TaskList;
-import tasks.Task;
+import duke.ui.Ui;
 
-import ui.Ui;
+import duke.exceptions.*;
 
-import storage.Storage;
+import duke.tasks.TaskList;
 
 import java.io.IOException;
 
-public class DeleteCommand extends Command {
+public class DoneCommand extends Command {
     private String[] checkCommands;
-    public DeleteCommand(String[] checkCommands) {
+    public DoneCommand(String[] checkCommands) {
         this.checkCommands = checkCommands;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws
-            DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (checkCommands.length == 1 || !isNumber(checkCommands[1])) {
             throw new InvalidTaskSelectionException();
         }
         int num = Integer.parseInt(checkCommands[1]);
         if (num > 0 && num <= tasks.size()) {
-            Task deleted = tasks.get(num - 1);
-            tasks.remove(num - 1);
-            ui.showDeleteTask(tasks, deleted);
+            tasks.get(num - 1).markAsDone();
+            ui.showDoneTask(tasks, num);
+
         } else {
             throw new TaskNotFoundException();
         }

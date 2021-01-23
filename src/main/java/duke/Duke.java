@@ -1,15 +1,18 @@
-import commands.*;
+package duke;
 
-import parser.Parser;
+import duke.commands.*;
 
-import exceptions.*;
+import duke.parser.Parser;
 
-import storage.Storage;
+import duke.exceptions.*;
 
-import tasks.TaskList;
+import duke.storage.Storage;
 
-import ui.Ui;
+import duke.tasks.TaskList;
 
+import duke.ui.Ui;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
@@ -20,10 +23,21 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        storage.initialize();
-        tasks = new TaskList(storage.load());
+        try {
+            ui = new Ui();
+            storage = new Storage(filePath);
+            storage.initialize();
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File does not exists.");
+            System.exit(1);
+        } catch (InvalidSaveFileFormatException e) {
+            System.out.println("Error: Invalid content format in save file");
+            System.exit(1);
+        } catch (DateTimeParseException e) {
+            System.out.println("Error: Invalid date time format in save file or no date time stated");
+            System.exit(1);
+        }
     }
 
     public void run() {

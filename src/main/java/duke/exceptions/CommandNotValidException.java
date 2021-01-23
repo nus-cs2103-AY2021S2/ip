@@ -1,4 +1,4 @@
-package exceptions;
+package duke.exceptions;
 
 public class CommandNotValidException extends DukeException {
     public CommandNotValidException() {
