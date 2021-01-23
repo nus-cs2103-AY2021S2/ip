@@ -2,13 +2,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Contains the task list and takes charge of operations involving tasks and the task list
+ */
 public class TaskList {
     public static ArrayList<Task> taskList;
     public static ArrayList<String> storedList;
 
+    /**
+     * Initalizes a TaskList object in the situation where the specified
+     * file from which tasks are supposed to be loaded from is not found
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
+
 
     public TaskList(ArrayList<String> storedList) throws DukeException {
         taskList = new ArrayList<>();
@@ -50,7 +58,7 @@ public class TaskList {
     }
 
     /**
-     * adds task into the task list
+     * Adds task into the task list
      * @param task to be added into the task list
      */
     private static void addTaskToList(Task task) {
@@ -58,18 +66,20 @@ public class TaskList {
     }
 
     /**
-     * creates an event task and adds it to the task list
-     * @param eventTask supplied from user's command-line input to add an event task
-     * @param date
+     * Creates an event task and adds it to the task list
+     * @param eventTask event task description
+     * @param date of which the event occurs
      */
     public static void createEventTask(String eventTask, String date) {
         Task task = new Event(eventTask, date);
         addTaskToList(task);
     }
 
+
     /**
-     * creates a deadline task and adds it to the task list
-     * @param deadline supplied from user's command-line input to add a deadline task
+     * Creates an deadline task and adds it to the task list
+     * @param deadlineTask deadline task description
+     * @param deadline of which the task is supposed to be completed by
      */
     public static void createDeadlineTask(String deadlineTask, LocalDate deadline) {
         Task task = new Deadline(deadlineTask, deadline);
@@ -77,8 +87,8 @@ public class TaskList {
     }
 
     /**
-     * creates a todo task and adds it to the task list
-     * @param todoTask supplied from user's command-line input to add a todo task
+     * Creates a todo task and adds it to the task list
+     * @param todoTask todo task description
      */
     public static void createTodoTask(String todoTask) {
         Task task = new Todo(todoTask);
@@ -86,16 +96,16 @@ public class TaskList {
     }
 
     /**
-     * Mark task as done and notify user of that change
-     * @param task supplied from the user's command-line input to mark a task as done
+     * Mark task as done
+     * @param task to be marked as done
      */
     public static void markTaskDone(Task task) {
         task.isDone = true;
     }
 
     /**
-     * Chatbot deletes the task from the task list
-     * @param taskNumber referring to the delete command-line input supplied by the user
+     * Deletes the task from the task list
+     * @param taskNumber of the task (in the task list) that is to be deleted
      */
     public static void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);

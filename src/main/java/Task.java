@@ -6,18 +6,26 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initalizes a task object
+     * @param description the task description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
+    /**
+     * Indicates if a task is completed or still in progress
+     * @return the task status
+     */
+    public String getStatus() {
         return (isDone ? "COMPLETED!" : "INPROGRESS");
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatus() + "] " + this.description;
     }
 
 }

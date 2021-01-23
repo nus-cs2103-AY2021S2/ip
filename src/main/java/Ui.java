@@ -1,12 +1,21 @@
 import java.util.Scanner;
 
+/**
+ * In charge of interactions with the user
+ */
 public class Ui {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Initalizes a Ui object and greets the user
+     */
     public Ui() {
         greetUser();
     }
 
+    /**
+     * Greets the user with a message
+     */
     public static void greetUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,30 +25,48 @@ public class Ui {
         System.out.println("Hello from\n" + logo + "\nHow can I help?\n");
     }
 
+    /**
+     * Prints out the message that the specified task has been deleted
+     * @param task  to be deleted
+     */
     public void showTaskDeleted(Task task) {
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
     }
 
+    /**
+     * Prints out the message that the specified file does not exist
+     */
     public void showLoadingError() {
         System.out.println("File ./savedTasks.txt not found! Creating one...\n");
     }
 
+    /**
+     * Prints out the message that the specified task has been added to the task list
+     */
     public void showTaskAdded() {
         System.out.println("added!");
     }
 
+    /**
+     * Reads the next command-line input supplied by the user
+     * @return the command-line input supplied by the user
+     */
     public String readUserCommand() {
        return sc.nextLine();
     }
 
     /**
-     * Chatbot prints out a farewell message before ending the session
+     * Prints out a farewell message
      */
     public void showGoodbyeMessage() {
        System.out.println("Bye. Hope to see you soon!\n");
     }
 
+    /**
+     * Prints out the message that the specified task has been marked as done
+     * @param task  that had been marked as done
+     */
     public void showTaskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task);
@@ -47,8 +74,7 @@ public class Ui {
     }
 
     /**
-     * Chatbot prints out line-by-line all of the user's tasks
-     * stored in the task list in that given session.
+     * Prints out line-by-line all of the tasks in the task list
      */
     public void showTaskList() {
         System.out.println("Here are your tasks!");
@@ -61,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * prints out the number of current tasks in the task list
+     * Prints out the number of tasks in the task list
      */
     public void showNumberOfTasks() {
         int numTasks = TaskList.taskList.size();
