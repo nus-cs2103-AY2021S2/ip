@@ -41,21 +41,18 @@ public class TaskHandler {
         System.out.println("     Noted. I've removed this task: ");
     }
 
-    public void handleToDoTask(String action) {
+    public ToDoTask handleToDoTask(String action) {
         int index = action.indexOf(" ");
         String description = action.substring(index + 1);
 
         ToDoTask toDoTask = new ToDoTask(description);
 
         this.add(toDoTask);
-        this.addPrint();
 
-        System.out.println(toDoTask);
-
-        this.countTasks();
+        return toDoTask;
     }
 
-    public void handleEventTask(String action) {
+    public EventTask handleEventTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
 
@@ -64,14 +61,11 @@ public class TaskHandler {
         EventTask eventTask= new EventTask(description, event);
 
         this.add(eventTask);
-        addPrint();
 
-        System.out.println(eventTask);
-
-        this.countTasks();
+        return eventTask;
     }
 
-    public void handleDeadlineTask(String action) {
+    public DeadlineTask handleDeadlineTask(String action) {
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
 
@@ -80,27 +74,36 @@ public class TaskHandler {
         DeadlineTask deadlineTask= new DeadlineTask(description, deadline);
 
         this.add(deadlineTask);
-        addPrint();
 
-        System.out.println(deadlineTask);
-        this.countTasks();
+        return deadlineTask;
     }
 
 
-    public void handleDone(int index) {
+    public Task handleDone(int index) {
         printMarked();
         Task markDone = this.inputList.get(index - 1);
 
         markDone.markAsDone();
-        markDone.getStatusAndTask();
+
+        return markDone;
     }
 
-    public void handleDelete(int index) {
+    public Task handleDelete(int index) {
         printMarked();
         Task task = this.inputList.remove(index - 1);
-        System.out.println(task);
 
-        this.countTasks();
+        return task;
+
+    }
+
+    public String getList() {
+        String result = "";
+        for (int i = 0; i < inputList.size(); i++) {
+            Task task = inputList.get(i);
+            result += "      " + (i + 1) + "." + task.toString().trim() + "\n";
+        }
+
+        return result;
     }
 
     public void countTasks() {
