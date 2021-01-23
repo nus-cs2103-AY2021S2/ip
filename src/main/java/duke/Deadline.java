@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
@@ -14,11 +15,7 @@ public class Deadline extends Task {
 
     @Override
     public String getDate() {
-        return " (by: "
-                + date.getDayOfMonth() + " "
-                + date.getMonth().toString().substring(0, 3) + " "
-                + date.getYear() + ", " + date.getHour() + ":"
-                + date.getMinute() + ")";
+        return " (by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + ")";
     }
 
     @Override

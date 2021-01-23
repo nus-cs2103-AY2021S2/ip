@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     public LocalDateTime date;
@@ -10,13 +11,10 @@ public class Event extends Task {
         this.date = date;
         isDone = false;
     }
+
     @Override
     public String getDate() {
-        return " (at: "
-                + date.getDayOfMonth() + " "
-                + date.getMonth().toString().substring(0, 3) + " "
-                + date.getYear() + ", " + date.getHour() + ":"
-                + date.getMinute() + ")";
+        return " (at: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + ")";
     }
 
     @Override
