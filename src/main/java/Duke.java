@@ -37,6 +37,7 @@ public class Duke {
     }
 
     private List<Task> checkList = new ArrayList<>();
+    private static String BORDER_LINE = "____________________________________________________________";
 
     /**
      * Starts the Duke bot
@@ -52,32 +53,32 @@ public class Duke {
 
             try {
                 switch(command) { 
-                    case "bye": 
-                        echo("Bye. Hope to see you again soon!");  
-                        return; 
-                    case "list": 
-                        displayList(checkList);
-                        break; 
-                    case "done":
-                        completeTask(input);
-                        break;
-                    case "todo":
-                        checkList.add(Todo.createTodo(input));
-                        taskAdded();
-                        break;
-                    case "deadline":
-                        checkList.add(Deadline.createDeadline(input));
-                        taskAdded();
-                        break;
-                    case "event":
-                        checkList.add(Event.createEvent(input));
-                        taskAdded();
-                        break;
-                    case "delete":
-                        deleteTask(input);
-                        break;
-                    default: 
-                        echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "bye": 
+                    echo("Bye. Hope to see you again soon!");  
+                    return; 
+                case "list": 
+                    displayList(checkList);
+                    break; 
+                case "done":
+                    completeTask(input);
+                    break;
+                case "todo":
+                    checkList.add(Todo.createTodo(input));
+                    taskAdded();
+                    break;
+                case "deadline":
+                    checkList.add(Deadline.createDeadline(input));
+                    taskAdded();
+                    break;
+                case "event":
+                    checkList.add(Event.createEvent(input));
+                    taskAdded();
+                    break;
+                case "delete":
+                    deleteTask(input);
+                    break;
+                default: 
+                    echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } 
             } catch (DukeException e) {
                 echo(e.getMessage());
@@ -86,28 +87,28 @@ public class Duke {
     }
 
     private void echo(String s) {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t" + BORDER_LINE);
         System.out.println("\t  " + s);
-        System.out.println("\t____________________________________________________________\n");
+        System.out.println("\t" + BORDER_LINE + "\n");
     }
 
     private void echo(List<String> lst) {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t" + BORDER_LINE);
         for (String s : lst) {
             System.out.println("\t  " + s);
         }
-        System.out.println("\t____________________________________________________________\n");
+        System.out.println("\t" + BORDER_LINE + "\n");
     }
 
     private void displayList(List<Task> lst) {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("\t" + BORDER_LINE);
         System.out.println("\tHere are the tasks in your list:");
 
         int num = 1;
         for (Task t : lst) {
             System.out.printf("\t  %d. %s\n", num++, t);
         }
-        System.out.println("\t____________________________________________________________\n");
+        System.out.println("\t" + BORDER_LINE + "\n");
     }
 
     private void completeTask(String num) throws DukeException {
@@ -130,7 +131,7 @@ public class Duke {
     private void taskAdded() {
         echo(List.of("Got it. I've added this task:",
                 checkList.get(checkList.size()-1).toString(),
-                "Now you have "+checkList.size()+" tasks in the list."));
+                "Now you have " + checkList.size() + " tasks in the list."));
     }
 
     private void deleteTask(String num) throws DukeException {
@@ -149,6 +150,6 @@ public class Duke {
         
         echo(List.of("Noted. I've removed this task:",
                 t.toString(),
-                "Now you have "+checkList.size()+" tasks in the list."));
+                "Now you have " + checkList.size() + " tasks in the list."));
     }
 }
