@@ -7,7 +7,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initalizes a task object
+     * Initializes a task object
      * @param description the task description
      */
     public Task(String description) {
@@ -20,7 +20,7 @@ public class Task {
      * @return the task status
      */
     public String getStatus() {
-        return (isDone ? "COMPLETED!" : "INPROGRESS");
+        return (isDone) ? "COMPLETED!" : "INPROGRESS";
     }
 
     @Override

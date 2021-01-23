@@ -1,59 +1,110 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
  * Contains the task list and takes charge of operations involving tasks and the task list
  */
 public class TaskList {
-    public static ArrayList<Task> taskList;
-    public static ArrayList<String> storedList;
+    protected static ArrayList<Task> updatedTaskList;
+    protected static ArrayList<String> loadedList;
 
     /**
-     * Initalizes a TaskList object in the situation where the specified
+     * Initializes a TaskList object in the situation where the specified
      * file from which tasks are supposed to be loaded from is not found
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        updatedTaskList = new ArrayList<>();
     }
 
-
-    public TaskList(ArrayList<String> storedList) throws DukeException {
-        taskList = new ArrayList<>();
-        TaskList.storedList = storedList;
-        loadInTaskList();
+    public TaskList(ArrayList<String> loadedList) throws DukeException {
+        updatedTaskList = new ArrayList<>();
+        TaskList.loadedList = loadedList;
+        updateTaskList();
     }
 
-    public static void loadInTaskList() throws DukeException {
-        for (int i = 0; i < storedList.size(); i++) {
-            String storedTaskString = storedList.get(i);
+    public static void updateTaskList() throws DukeException {
+        for (int i = 0; i < loadedList.size(); i++) {
+            String storedTaskString = loadedList.get(i);
             if (storedTaskString.startsWith("[T]")) {
-                String task = storedTaskString.substring(16);
+                String task = getTodoTask(storedTaskString);
+
                 createTodoTask(task);
-                checkIfTaskDone(storedTaskString, new Todo(task));
+                checkIfTaskDone(storedTaskString);
             } else if (storedTaskString.startsWith("[D]")) {
-                int dateIndex = storedTaskString.indexOf("(by: ");
-                String task = storedTaskString.substring(16, dateIndex - 1);
-                String date = storedTaskString.substring(dateIndex + 5, dateIndex + 15);
+                String task = getDeadlineTask(storedTaskString);
+                String date = getDeadlineDate(storedTaskString);
+
                 DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy");
                 LocalDate by = LocalDate.parse(date, format);
+
                 createDeadlineTask(task, by);
-                checkIfTaskDone(storedTaskString, new Deadline(task, by));
+                checkIfTaskDone(storedTaskString);
             } else if (storedTaskString.startsWith("[E]")) {
-                int dateIndex = storedTaskString.indexOf("(at: ");
-                String task = storedTaskString.substring(16, dateIndex - 1);
-                String at = storedTaskString.substring(dateIndex + 5, storedTaskString.length() - 2);
+                String task = getEventTask(storedTaskString);
+                String at = getEventDate(storedTaskString);
+
                 createEventTask(task, at);
-                checkIfTaskDone(storedTaskString, new Event(task, at));
+                checkIfTaskDone(storedTaskString);
             } else {
                 throw new DukeException("Invalid task.");
             }
         }
     }
 
-    private static void checkIfTaskDone(String storedTaskString, Task task) {
+    /**
+     * Returns todo task description from filtering the input
+     * @param input the task line previously loaded into the file
+     * @return the todo task description
+     */
+    public static String getTodoTask(String input) {
+        return input.substring(16);
+    }
+
+    /**
+     * Returns deadline task description from filtering the input
+     * @param input the task line previously loaded into the file
+     * @return the deadline task description
+     */
+    public static String getDeadlineTask(String input) {
+        int dateIndex = input.indexOf("(by: ");
+        return input.substring(16, dateIndex - 1);
+    }
+
+    /**
+     * Returns deadline task date from filtering the input
+     * @param input the task line previously loaded into the file
+     * @return the deadline task date
+     */
+    public static String getDeadlineDate(String input) {
+        int dateIndex = input.indexOf("(by: ");
+        return input.substring(dateIndex + 5, dateIndex + 15);
+    }
+
+    /**
+     * Returns event task description from filtering the input
+     * @param input the task line previously loaded into the file
+     * @return the event task description
+     */
+    public static String getEventTask(String input) {
+        int dateIndex = input.indexOf("(at: ");
+        return input.substring(16, dateIndex - 1);
+    }
+
+    /**
+     * Returns event task date from filtering the input
+     * @param input the task line previously loaded into the file
+     * @return the event task date
+     */
+    public static String getEventDate(String input) {
+        int dateIndex = input.indexOf("(at: ");
+        return input.substring(dateIndex + 5, input.length() - 2);
+    }
+
+    public static void checkIfTaskDone(String storedTaskString) {
         if (storedTaskString.substring(4).startsWith("C")) {
-            markTaskDone(task);
+            setDone(updatedTaskList.get(updatedTaskList.size()-1));
         }
     }
 
@@ -61,8 +112,8 @@ public class TaskList {
      * Adds task into the task list
      * @param task to be added into the task list
      */
-    private static void addTaskToList(Task task) {
-        taskList.add(task);
+    public static void addTaskToList(Task task) {
+        updatedTaskList.add(task);
     }
 
     /**
@@ -99,7 +150,7 @@ public class TaskList {
      * Mark task as done
      * @param task to be marked as done
      */
-    public static void markTaskDone(Task task) {
+    public static void setDone(Task task) {
         task.isDone = true;
     }
 
@@ -108,7 +159,7 @@ public class TaskList {
      * @param taskNumber of the task (in the task list) that is to be deleted
      */
     public static void deleteTask(int taskNumber) {
-        taskList.remove(taskNumber - 1);
+        updatedTaskList.remove(taskNumber - 1);
     }
 
 }

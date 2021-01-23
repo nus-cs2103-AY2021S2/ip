@@ -7,7 +7,7 @@ public class Ui {
     Scanner sc = new Scanner(System.in);
 
     /**
-     * Initalizes a Ui object and greets the user
+     * Initializes a Ui object and greets the user
      */
     public Ui() {
         greetUser();
@@ -27,7 +27,7 @@ public class Ui {
 
     /**
      * Prints out the message that the specified task has been deleted
-     * @param task  to be deleted
+     * @param task to be deleted
      */
     public void showTaskDeleted(Task task) {
         System.out.println("Noted. I've removed this task: ");
@@ -65,7 +65,7 @@ public class Ui {
 
     /**
      * Prints out the message that the specified task has been marked as done
-     * @param task  that had been marked as done
+     * @param task that had been marked as done
      */
     public void showTaskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
@@ -78,8 +78,9 @@ public class Ui {
      */
     public void showTaskList() {
         System.out.println("Here are your tasks!");
-        for(int i = 1; i <= TaskList.taskList.size(); i++) {
-            Task task = TaskList.taskList.get(i-1);
+
+        for(int i = 1; i <= TaskList.updatedTaskList.size(); i++) {
+            Task task = TaskList.updatedTaskList.get(i-1);
             System.out.print(i + ".");
             System.out.println(task);
         }
@@ -90,7 +91,8 @@ public class Ui {
      * Prints out the number of tasks in the task list
      */
     public void showNumberOfTasks() {
-        int numTasks = TaskList.taskList.size();
+        int numTasks = TaskList.updatedTaskList.size();
+
         System.out.println("you have " + numTasks + " tasks in your list");
         System.out.println();
     }

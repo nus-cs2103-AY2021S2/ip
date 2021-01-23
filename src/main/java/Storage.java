@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,13 +10,12 @@ import java.util.Scanner;
  * Loads and saves tasks from and into the specified file
  */
 public class Storage {
-
     protected String filePath;
-    public static ArrayList<String> storedList = new ArrayList<>();
+    protected static ArrayList<String> tasksLoaded = new ArrayList<>();
 
     /**
-     * Initalizes a Storage object
-     * @param filePath  the file path in which tasks are loaded from or saved into
+     * Initializes a Storage object
+     * @param filePath the file path in which tasks are loaded from or saved into
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -24,16 +24,16 @@ public class Storage {
     /**
      * Loads tasks from the file
      * @return the lists of tasks loaded from the file
-     * @throws FileNotFoundException  if the file at the specified filepath does not exist
+     * @throws FileNotFoundException if the file at the specified filepath does not exist
      */
     public ArrayList<String> load() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String task = s.nextLine();
-            storedList.add(task);
+            tasksLoaded.add(task);
         }
-        return storedList;
+        return tasksLoaded;
     }
 
     /**
@@ -43,8 +43,8 @@ public class Storage {
     public static void store(String filePath) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for(int i = 0; i < TaskList.taskList.size(); i++) {
-                fw.write(TaskList.taskList.get(i) + " \r\n");
+            for(int i = 0; i < TaskList.updatedTaskList.size(); i++) {
+                fw.write(TaskList.updatedTaskList.get(i).toString() + " \r\n");
             }
             fw.close();
         } catch (IOException e) {

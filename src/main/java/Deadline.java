@@ -10,8 +10,8 @@ public class Deadline extends Task {
 
     /**
      * Initializes a Deadline task object
-     * @param description  refers to the task description
-     * @param by  refers to the deadline as to which the task has to be completed
+     * @param description the task description
+     * @param by          the deadline as to which the task has to be completed
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -20,6 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
