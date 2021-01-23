@@ -1,5 +1,6 @@
-public class DescriptionNotFoundException extends Exception {
+//public class DescriptionNotFoundException extends Exception {
+public class DescriptionNotFoundException extends DukeException {
     public DescriptionNotFoundException() {
-        super("Please provide description for your task.");
+        super("\tPlease provide description for your task.\n");
     }
 }
