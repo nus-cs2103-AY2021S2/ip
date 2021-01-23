@@ -26,17 +26,17 @@ public class ListManager extends Manager {
     public String addTask(String userInput) throws DukeException{
         Task newTask;
 
-        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("todo")){
+        if(checkStringStartingEquals(userInput, "todo")){
 
-            if (userInput.equals("todo") || userInput.equals("todo ")){
+            if (checkStringEquals(userInput, "todo")){
                 throw new DukeException(defaultFormatting("Error! The description of a todo cannot be empty!"));
             }else{
                 newTask = new ToDo(userInput.substring(5));
             }
 
-        }else if(userInput.length() >= 5 && userInput.substring(0,5).equals("event")) {
+        }else if(checkStringStartingEquals(userInput, "event")) {
 
-            if (userInput.equals("event") || userInput.equals("event ")){
+            if (checkStringEquals(userInput, "event")){
                 throw new DukeException(defaultFormatting("Error! The description of a event cannot be empty!"));
             }else {
                 if (userInput.contains(" /at ")) {
@@ -49,9 +49,9 @@ public class ListManager extends Manager {
                             " event will take place after /at."));
                 }
             }
-        }else if(userInput.length() >= 8 && userInput.substring(0, 8).equals("deadline")){
+        }else if(checkStringStartingEquals(userInput, "deadline")){
 
-            if (userInput.equals("deadline") || userInput.equals("deadline ")){
+            if (checkStringEquals(userInput, "deadline")){
                 throw new DukeException(defaultFormatting("Error! The description of a deadline cannot be empty!"));
             }else {
                 if (userInput.contains(" /by ")) {
@@ -106,9 +106,9 @@ public class ListManager extends Manager {
 
     public String handleTaskRelatedUserInput(String userInput) throws DukeException{
 
-        if(userInput.length() >= 4 && userInput.substring(0, 4).equals("done")){
+        if(checkStringStartingEquals(userInput, "done")){
             // done block
-            if (userInput.equals("done") || userInput.equals("done ")){
+            if (checkStringEquals(userInput, "done")){
                 throw new DukeException(defaultFormatting("Error! Please indicate the task " +
                         "which is done by its number on the list"));
             }else {
@@ -119,13 +119,13 @@ public class ListManager extends Manager {
                 } catch (NumberFormatException e) {
                     throw new DukeException(defaultFormatting("Error! You must give a number " +
                             "corresponding to a task on the list to check as done"));
-                } catch (DukeException e) {
-                    throw e;
+                } catch (DukeException dukeException) {
+                    throw dukeException;
                 }
             }
-        }else if(userInput.length() >= 6 && userInput.substring(0,6).equals("delete")){
+        }else if(checkStringStartingEquals(userInput, "delete")){
             // delete block
-            if (userInput.equals("delete") || userInput.equals("delete ")){
+            if (checkStringEquals(userInput, "delete")){
                 throw new DukeException(defaultFormatting("Error! Please indicate the task " +
                         "which want to delete by its number on the list"));
             }else {
@@ -136,8 +136,8 @@ public class ListManager extends Manager {
                 } catch (NumberFormatException e) {
                     throw new DukeException(defaultFormatting("Error! You must give a number " +
                             "corresponding to a task on the list to delete"));
-                } catch (DukeException e) {
-                    throw e;
+                } catch (DukeException dukeException) {
+                    throw dukeException;
                 }
             }
         }else{
@@ -145,8 +145,8 @@ public class ListManager extends Manager {
             try{
                 String outputString = this.addTask(userInput);
                 return outputString;
-            }catch (DukeException e){
-                throw e;
+            }catch (DukeException dukeException){
+                throw dukeException;
             }
         }
     }
@@ -165,6 +165,14 @@ public class ListManager extends Manager {
             throw new DukeException(defaultFormatting("Error! Please make sure the " +
                     "number given has a corresponding task!"));
         }
+    }
 
+    private static boolean checkStringStartingEquals(String userInput, String stringToCheck){
+        return userInput.length() >= stringToCheck.length() &&
+                userInput.substring(0, stringToCheck.length()).equals(stringToCheck);
+    }
+
+    private static boolean checkStringEquals(String userInput, String stringToCheck){
+        return userInput.equals(stringToCheck) || userInput.equals(stringToCheck + " ");
     }
 }
