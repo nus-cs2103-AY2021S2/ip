@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.Storage;
+import duke.exception.DukeException;
+import duke.exception.DukeCommandException;
+
 public class DoneCommand extends Command {
     private int index;
 

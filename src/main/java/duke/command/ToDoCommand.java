@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.task.ToDo;
+import duke.exception.DukeException;
+import duke.exception.DukeCommandException;
+
 public class ToDoCommand extends Command {
     private String desc = "";
 

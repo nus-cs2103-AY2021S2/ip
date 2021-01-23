@@ -1,3 +1,13 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.exception.DukeTaskException;
+import duke.exception.DukeSaveException;
+import duke.exception.DukeLoadException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +20,7 @@ import java.util.Scanner;
 public class Storage {
     private static final String PATH = "data/duke.txt";
 
-    public static void saveTasks(List<Task> tasks) throws DukeSaveException{
+    public static void saveTasks(List<Task> tasks) throws DukeSaveException {
         // Create the 'data' folder if missing
         File dir = new File("data");
         if(!dir.exists()) {

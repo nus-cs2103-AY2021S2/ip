@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeCommandException extends DukeException{
     /**
      * Type of command that throws the exception

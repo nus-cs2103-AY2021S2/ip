@@ -1,4 +1,10 @@
-abstract class Command {
+package duke.command;
+
+import duke.Ui;
+import duke.TaskManager;
+import duke.exception.DukeCommandException;
+
+public abstract class Command {
     protected static Ui ui;
     protected static TaskManager taskManager;
 

@@ -1,6 +1,14 @@
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DukeTaskException;
+
 import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class TaskManager {
     private List<Task> tasks = new ArrayList<>();
