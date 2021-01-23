@@ -157,6 +157,27 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Searches for tasks based on whether task contains keyword. Is case-insensitive.
+     * @param keyword Keyword to search for tasks.
+     * @return A pair of "searchTasks" string and a list of tasks containing keyword.
+     */
+    public Pair<String, List<Task>> searchTasks(String keyword) {
+        if (keyword.isEmpty()) {
+            throw new IllegalArgumentException("No keyword given! Not stonks!");
+        } else {
+            List<Task> searchResults = new ArrayList<Task>();
+            List<Task> allTasks = this.taskManagement.getTaskList();
+            for (int i = 0; i < allTasks.size(); i++) {
+                Task task = allTasks.get(i);
+                if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
+                    searchResults.add(task);
+                }
+            }
+            return new Pair<String, List<Task>>("searchTasks", searchResults);
+        }
+    }
+
     public List<String> convertTasksForFile() {
         List<Task> rawTaskList = this.taskManagement.getTaskList();
         List<String> fileTaskList = new ArrayList<String>();

@@ -48,46 +48,51 @@ public class SurrealChat {
 
     private boolean commandLogic(boolean maintainLoop, String userCommand) {
         switch(userCommand) {
-            case "bye":
-                this.userInput.checkExcessArguments();
-                maintainLoop = false; //Break out of infinite loop
-                break;
-            case"list":
-                this.userInput.checkExcessArguments();
-                Pair<String, List<Task>> listPair = this.taskParser.sendListToPrint();
-                this.userOutput.printOutput(listPair);
-                break;
-            case "todo", "deadline", "event":
-                String description = this.userInput.getInputDescription();
-                Pair<String, Pair<Task, Integer>> taskPair =
-                        this.taskParser.parseUserTaskInput(userCommand, description);
-                this.userOutput.printOutput(taskPair);
-                break;
-            case "done":
-                description = this.userInput.getInputDescription(); //Get raw form
-                int taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-                Pair<String, Task> donePair = this.taskParser.markAsDone(taskNumber);
-                this.userOutput.printOutput(donePair);
-                break;
-            case "undone":
-                description = this.userInput.getInputDescription(); //Get raw form
-                taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-                Pair<String, Task> undonePair = this.taskParser.markAsUndone(taskNumber);
-                this.userOutput.printOutput(undonePair);
-                break;
-            case "delete":
-                description = this.userInput.getInputDescription(); //Get raw form
-                taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-                Pair<String, Pair<Task, Integer>> deletePair = this.taskParser.deleteTask(taskNumber);
-                this.userOutput.printOutput(deletePair);
-                break;
-            case "orang", "vegetal":
-                this.userInput.checkExcessArguments();
-                this.printEasterEgg(userCommand);
-                break;
-            default:
-                this.userInput.scannerNextLine(); //Clear input line
-                throw new UnsupportedOperationException("Command not recognised. Not stonks!");
+        case "bye":
+            this.userInput.checkExcessArguments();
+            maintainLoop = false; //Break out of infinite loop
+            break;
+        case"list":
+            this.userInput.checkExcessArguments();
+            Pair<String, List<Task>> listPair = this.taskParser.sendListToPrint();
+            this.userOutput.printOutput(listPair);
+            break;
+        case "todo", "deadline", "event":
+            String description = this.userInput.getInputDescription();
+            Pair<String, Pair<Task, Integer>> taskPair =
+                    this.taskParser.parseUserTaskInput(userCommand, description);
+            this.userOutput.printOutput(taskPair);
+            break;
+        case "done":
+            description = this.userInput.getInputDescription(); //Get raw form
+            int taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+            Pair<String, Task> donePair = this.taskParser.markAsDone(taskNumber);
+            this.userOutput.printOutput(donePair);
+            break;
+        case "undone":
+            description = this.userInput.getInputDescription(); //Get raw form
+            taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+            Pair<String, Task> undonePair = this.taskParser.markAsUndone(taskNumber);
+            this.userOutput.printOutput(undonePair);
+            break;
+        case "delete":
+            description = this.userInput.getInputDescription(); //Get raw form
+            taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+            Pair<String, Pair<Task, Integer>> deletePair = this.taskParser.deleteTask(taskNumber);
+            this.userOutput.printOutput(deletePair);
+            break;
+        case "find":
+            String keyword = this.userInput.getInputDescription();
+            Pair<String, List<Task>> searchPair = this.taskParser.searchTasks(keyword);
+            this.userOutput.printOutput(searchPair);
+            break;
+        case "orang", "vegetal":
+            this.userInput.checkExcessArguments();
+            this.printEasterEgg(userCommand);
+            break;
+        default:
+            this.userInput.scannerNextLine(); //Clear input line
+            throw new UnsupportedOperationException("Command not recognised. Not stonks!");
         }
         return maintainLoop;
     }

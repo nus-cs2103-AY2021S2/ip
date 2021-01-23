@@ -33,6 +33,9 @@ You can key in "done" along with a task number and Meme Man will tick that task 
 ### Mark tasks as undone
 You can key in "done" along with a task number and Meme Man will cross that task for you.
 
+### Find tasks
+You can key in a single keyword and get a narrowed list of tasks. 
+
 ### Surreal Memes easter eggs
 Keep scrolling to find them.
 
@@ -214,6 +217,31 @@ Did you put something other than a number or did you put a number incorrectly? N
 Outcome if task number is invalid:
 ```
 Invalid task number. Not stonks!
+```
+### `find (insert keyword)` - Find tasks command
+Key this command in along with a single keyword to find tasks that contain that keyword.
+Case-insensitive.
+
+Example usage:
+`find CS2103T` 
+
+Expected outcome:
+```
+Here are my search results:
+1. [T][✘] Watch CS2103T lecture
+2. [D][✘] Do CS2103T lecture quiz (by: 2021-01-12)
+3. [D][✘] Do CS2103T ip (by: 2021-01-13)
+Hmmst've... Stonks
+```
+
+Outcome if keyword field is empty:
+```
+No keyword given! Not stonks!
+```
+
+Outcome if no tasks are returned:
+```
+My search returned nothing. Not stonks!
 ```
 
 ## Other commands
