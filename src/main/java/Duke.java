@@ -68,16 +68,27 @@ public class Duke {
      * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
      */
     private static void addEvent(String params) throws DukeCommandException {
+        String startEndPattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
+                "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
+
         if(params.length() == 0) {
             throw new DukeCommandException("event", params, "The details of a Event cannot be empty.");
-        } else if(!params.contains("/at") || params.split(" /at ").length != 2) {
-            throw new DukeCommandException("event", params, "Proper description and date/time range must be given for" +
-                    " a Event.");
+        } else if(!params.contains("/start") || !params.contains("/end") || params.split(" /start | /end ").length != 3) {
+            throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
+                    "must be given for an Event.");
+        } else if(!params.split(" /start | /end ")[1].matches(startEndPattern)
+                || !params.split(" /start | /end ")[2].matches(startEndPattern)) {
+            throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
+                    "follow the format of dd-mm-yyyy hAM/PM.");
         } else {
-            String[] splits = params.split(" /at ");
+            String[] splits = params.split(" /start | /end ");
 
-            Event newEvent = new Event(splits[0], splits[1]);
-            tasks.add(newEvent);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
+            LocalDateTime start = LocalDateTime.parse(splits[1], formatter);
+            LocalDateTime end = LocalDateTime.parse(splits[2], formatter);
+
+            Event newEvent = new Event(splits[0], start, end);
+            tasks.add(newEvent); 
 
             printTaskAdding(newEvent);
         }
