@@ -7,13 +7,25 @@ import java.util.List;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
+/**
+ * Handles printing of output.
+ */
 public class UserOutput {
     public boolean verboseFlag;
 
+    /**
+     * Creates new UserOutput instance.
+     * @param verboseFlag Flag for whether additional output should be printed.
+     */
     public UserOutput(boolean verboseFlag) {
         this.verboseFlag = verboseFlag;
     }
 
+    /**
+     * Converts task type from one capital letter to full lowercase spelling.
+     * @param taskType Type of task in one capital letter.
+     * @return Type of task in full lowercase spelling.
+     */
     public String spellTaskType(String taskType) {
         switch(taskType) {
             case "T":
@@ -27,6 +39,11 @@ public class UserOutput {
         }
     }
 
+    /**
+     * Calls the appropriate print methods based on string tag of pair.
+     * @param pair Pair consisting of a string tag and a generic object.
+     * @param <U> Generic type of second item in pair.
+     */
     public <U> void printOutput(Pair<String, U> pair) {
         String printType = pair.getFirstItem();
         switch(printType) {
@@ -84,6 +101,10 @@ public class UserOutput {
         }
     }
 
+    /**
+     * Calls the appropriate print methods based on what easter egg user has activated.
+     * @param easterEgg Command for the appropriate easter egg.
+     */
     public void printEasterEggOutput(String easterEgg) {
         switch(easterEgg){
             case "orang":
@@ -97,6 +118,9 @@ public class UserOutput {
         }
     }
 
+    /**
+     * Prints out a greeting upon start up.
+     */
     public void printInitialGreeting() {
         System.out.println("I am Meme Man. Whoms't be entering the VIMension?");
         if (this.verboseFlag) {
@@ -106,7 +130,7 @@ public class UserOutput {
         }
     }
 
-    public void printFileTasksAdded(List<Task> taskList) {
+    private void printFileTasksAdded(List<Task> taskList) {
         if (this.verboseFlag) {
             int total = taskList.size();
             for (int i = 0; i < total; i++) {
@@ -118,30 +142,30 @@ public class UserOutput {
         }
     }
 
-    public void printUserTaskAdded(Task task, int total) {
+    private void printUserTaskAdded(Task task, int total) {
         String taskType = task.getType();
         String printTaskType = this.spellTaskType(taskType);
         System.out.printf("Meme Man has added %s task: %s\n", printTaskType, task);
         System.out.printf("Total number of tasks: %d\n\n", total);
     }
 
-    public void printTaskDone(Task doneTask) {
+    private void printTaskDone(Task doneTask) {
         System.out.println("Stonks! You've done this task:");
         System.out.println(doneTask.getDescription() + "\n");
     }
 
-    public void printTaskUndone(Task undoneTask) {
+    private void printTaskUndone(Task undoneTask) {
         System.out.println("Not stonks! This task has been marked as undone:");
         System.out.println(undoneTask.getDescription() + "\n");
     }
 
-    public void printTaskDelete(Task deletedTask, int numberOfTasks) {
+    private void printTaskDelete(Task deletedTask, int numberOfTasks) {
         System.out.println("This task has been deleted:");
         System.out.println(deletedTask);
         System.out.printf("Total number of tasks: %d\n\n", numberOfTasks);
     }
 
-    public void printTaskList(List<Task> taskList) {
+    private void printTaskList(List<Task> taskList) {
         if (taskList.isEmpty()) {
             throw new NoSuchElementException("I have nothing to print. Not stonks!");
         } else {
@@ -153,6 +177,9 @@ public class UserOutput {
         }
     }
 
+    /**
+     * Prints out the farewell message upon program exiting normally.
+     */
     public void printExitProgram() {
         if (this.verboseFlag) {
             System.out.println("Saving tasks now...");
@@ -160,17 +187,21 @@ public class UserOutput {
         System.out.println("You have been EJECTED!");
     }
 
-    public void printOrang() {
+    private void printOrang() {
         System.err.println("Meme Man: ORANG! IT S U...");
         System.err.println("Orang: No you can't SU");
         System.err.println("Meme Man: ANGERY!\n");
     }
 
-    public void printVegetal() {
+    private void printVegetal() {
         System.err.println("Vegetal: Did someone said... NO VEGETALS?");
         System.err.println("Meme Man: I taste a vegetal... ANGERY!\n");
     }
 
+    /**
+     * Prints out exception message.
+     * @param e Any caught exception.
+     */
     public void printException(Exception e) {
         System.err.println(e.getMessage() + "\n");
     }

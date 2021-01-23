@@ -4,24 +4,37 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Processes inputs given by the user.
+ */
 public class UserInput {
     public Scanner sc;
 
+    /**
+     * Creates a new UserInput instance.
+     * @param sc Scanner object used for input processing.
+     */
     public UserInput(Scanner sc) {
         this.sc = sc;
     }
 
+    /**
+     * Advances scanner to next line.
+     */
     public void scannerNextLine() {
         this.sc.nextLine();
     }
 
+    /**
+     * Closes the scanner at the end of code execution.
+     */
     public void closeScanner() {
         this.sc.close();
     }
 
     /**
-     * Used to obtain the first one-word command from input line.
-     * @return command - command for Meme Man
+     * Obtains the first one-word command from input line.
+     * @return Command for Meme Man.
      */
     public String getInputCommand() {
         String command = this.sc.next();
@@ -29,8 +42,8 @@ public class UserInput {
     }
 
     /**
-     * Used to obtain the task description from remainder of input line
-     * @return taskDescription - Description used to create task
+     * Obtains the task description from remainder of input line.
+     * @return Description used to create task.
      */
     public String getInputDescription() {
         String taskDescription = this.sc.nextLine();
@@ -38,9 +51,9 @@ public class UserInput {
     }
 
     /**
-     * Used to obtain number from a given description
-     * @param description - The raw description
-     * @return taskNumber - The number to find task in the array
+     * Obtains number from a given description.
+     * @param description - The raw description.
+     * @return The number to find task in the list.
      */
     public int getInputNumber(String description) {
         description = description.trim();
@@ -56,6 +69,9 @@ public class UserInput {
         }
     }
 
+    /**
+     * Checks for any excess arguments in commands that should not have arguments.
+     */
     public void checkExcessArguments() {
         String excess = this.sc.nextLine();
         if (!excess.isEmpty()) {

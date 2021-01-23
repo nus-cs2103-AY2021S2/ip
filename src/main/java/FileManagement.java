@@ -7,12 +7,25 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Handles file save/load operations.
+ */
 public class FileManagement {
     public File file;
 
+    /**
+     * Creates a new FileManagement instance.
+     * @param file File object with specified file path for save/load.
+     */
     public FileManagement(File file) {
         this.file = file;
     }
+
+    /**
+     * Scans a file to generate list of tasks in the file.
+     * @return List of tasks as taken from file.
+     * @throws IOException If error arises during file creation process.
+     */
     public List<String> loadTaskFile() throws IOException {
         this.file.createNewFile();
         Scanner fileScanner = new Scanner(this.file);
@@ -24,6 +37,10 @@ public class FileManagement {
         return fileLines;
     }
 
+    /**
+     * Writes tasks into file to be saved.
+     * @param fileTaskList List of tasks to be keyed into the file.
+     */
     public void saveTasksToFile(List<String> fileTaskList) {
         try {
             FileWriter fw = new FileWriter(this.file);

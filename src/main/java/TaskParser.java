@@ -9,14 +9,25 @@ import java.util.NoSuchElementException;
 
 import java.time.LocalDate;
 
+/**
+ * Handles intermediary operations between TaskManagement and other classes.
+ */
 public class TaskParser {
     public TaskManagement taskManagement;
     public static final int TASK_UNDONE = 0;
 
+    /**
+     * Creates new TaskParser object.
+     */
     public TaskParser() {
         this.taskManagement = new TaskManagement(new ArrayList<Task>());
     }
 
+    /**
+     * Parses isDone int into boolean.
+     * @param isDone Integer indicating whether task is completed or not.
+     * @return true if isDone == 1, false if isDone == 0.
+     */
     public boolean parseIsDoneInt(int isDone) {
         switch(isDone) {
             case 0:
@@ -28,6 +39,11 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Converts tasks in file string format to Task objects.
+     * @param fileLines List of tasks in file string format.
+     * @return Pair of a "fileTasksAdded" string and a list of Task objects.
+     */
     public Pair<String, List<Task>> parseFileLines(List<String> fileLines) {
         for (int i = 0; i < fileLines.size(); i++) {
             String[] taskComponents = fileLines.get(i).split("/split/");
@@ -52,10 +68,20 @@ public class TaskParser {
         return new Pair<String, List<Task>>("fileTasksAdded", taskList);
     }
 
+    /**
+     * Returns total number of tasks.
+     * @return Total number of tasks.
+     */
     public int getNumberOfTasks() {
         return this.taskManagement.getTaskList().size();
     }
 
+    /**
+     * Converts a task from user input into Task objects.
+     * @param command Type of task.
+     * @param taskDescription
+     * @return Pair consisting of a "userTaskAdded" string and another pair of the added Task object and total number of tasks.
+     */
     public Pair<String, Pair<Task, Integer>> parseUserTaskInput(String command, String taskDescription) {
         if (taskDescription.isEmpty()) {
             throw new InputMismatchException("Empty " + command + " task description. Not stonks!");
@@ -82,7 +108,7 @@ public class TaskParser {
 
     }
 
-    public ToDoTask addToDo(String taskDescription, int isDone) {
+    private ToDoTask addToDo(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty todo task description. Not stonks!");
         } else {
@@ -92,7 +118,7 @@ public class TaskParser {
         }
     }
 
-    public DeadlineTask addDeadline(String taskDescription, int isDone) {
+    private DeadlineTask addDeadline(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty deadline task description. Not stonks!");
         } else {
@@ -108,7 +134,7 @@ public class TaskParser {
         }
     }
 
-    public EventTask addEvent(String taskDescription, int isDone) {
+    private EventTask addEvent(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty event task description. Not stonks!");
         } else {
@@ -124,10 +150,15 @@ public class TaskParser {
         }
     }
 
-    public boolean checkInvalidTaskNumber(int taskNumber) {
+    private boolean checkInvalidTaskNumber(int taskNumber) {
         return ((taskNumber <= 0) || (taskNumber > this.taskManagement.getTaskList().size()));
     }
 
+    /**
+     * Marks a task designated by number as done.
+     * @param taskNumber Position number of task (starting from 1) to be marked as done.
+     * @return Pair of "markDone" string and the task marked as done.
+     */
     public Pair<String, Task> markAsDone(int taskNumber) {
         if (this.checkInvalidTaskNumber(taskNumber)) {
             throw new IllegalArgumentException("Invalid task number. Not stonks!");
@@ -137,6 +168,11 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Marks a task designated by number as undone.
+     * @param taskNumber Position number of task (starting from 1) to be marked as undone.
+     * @return Pair of "markunDone" string and the task marked as undone.
+     */
     public Pair<String, Task> markAsUndone(int taskNumber) {
         if (this.checkInvalidTaskNumber(taskNumber)) {
             throw new IllegalArgumentException("Invalid task number. Not stonks!");
@@ -146,6 +182,11 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Deletes a task from the list.
+     * @param taskNumber Position number of task (starting from 1) to be deleted.
+     * @return Pair of "deleteTask" string and another pair of the deleted Task and total number of tasks remaining.
+     */
     public Pair<String, Pair<Task, Integer>> deleteTask(int taskNumber) {
         if (this.checkInvalidTaskNumber(taskNumber)) {
             throw new IllegalArgumentException("Invalid task number. Not stonks!");
@@ -157,6 +198,10 @@ public class TaskParser {
         }
     }
 
+    /**
+     * Generates list of tasks for saving into a file.
+     * @return List of tasks in file string format.
+     */
     public List<String> convertTasksForFile() {
         List<Task> rawTaskList = this.taskManagement.getTaskList();
         List<String> fileTaskList = new ArrayList<String>();
@@ -166,6 +211,10 @@ public class TaskParser {
         return fileTaskList;
     }
 
+    /**
+     * Generates list of tasks with tag for print by UserOutput.
+     * @return Pair of "printTaskList" string and list of tasks.
+     */
     public Pair<String, List<Task>> sendListToPrint() {
         List<Task> rawTaskList = this.taskManagement.getTaskList();
         return new Pair<String, List<Task>>("printTaskList", rawTaskList);
