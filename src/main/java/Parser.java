@@ -92,7 +92,12 @@ public class Parser {
         String[] parsedString = input.split("\\s+");
 
         try {
-            return Integer.parseInt(parsedString[1]) - 1;
+            int index = Integer.parseInt(parsedString[1]) - 1;
+            if (index < TaskList.tasks.size() && index >= 0) {
+                return index;
+            } else {
+                throw new NumberFormatException();
+            }
         } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
                 Ui.showError("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
