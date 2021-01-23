@@ -1,6 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -24,39 +24,38 @@ public class Duke {
                 String resp = "";
 
                 switch (cmd) {
-                    case "bye":
-                        ByeCmd byeCmd = new ByeCmd();
-                        resp = byeCmd.process(cmdArgs);
-                        isExited = true;
-                        break;
-                    case "list":
-                        ListCmd listCmd = new ListCmd(taskLst);
-                        resp = listCmd.process(cmdArgs);
-                        break;
-                    case "done":
-                        DoneCmd doneCmd = new DoneCmd(taskLst);
-                        resp = doneCmd.process(cmdArgs);
-                        break;
-                    case "todo":
-                    case "deadline":
-                    case "event":
-                        AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
-                        resp = addCmd.process(cmdArgs);
-                        break;
-                    case "delete":
-                        DeleteCmd delCmd = new DeleteCmd(taskLst);
-                        resp = delCmd.process(cmdArgs);
-                        break;
-                    default:
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
+                case "bye":
+                    ByeCmd byeCmd = new ByeCmd();
+                    resp = byeCmd.process(cmdArgs);
+                    isExited = true;
+                    break;
+                case "list":
+                    ListCmd listCmd = new ListCmd(taskLst);
+                    resp = listCmd.process(cmdArgs);
+                    break;
+                case "done":
+                    DoneCmd doneCmd = new DoneCmd(taskLst);
+                    resp = doneCmd.process(cmdArgs);
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    AddCmd addCmd = new AddCmd(taskLst, TaskType.valueOf(cmd.toUpperCase()));
+                    resp = addCmd.process(cmdArgs);
+                    break;
+                case "delete":
+                    DeleteCmd delCmd = new DeleteCmd(taskLst);
+                    resp = delCmd.process(cmdArgs);
+                    break;
+                default:
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
                 }
 
                 printResponse(resp);
                 if (isExited) {
                     break;
                 }
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 printResponse(e.getMessage());
             }
         }

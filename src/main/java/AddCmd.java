@@ -31,22 +31,22 @@ public class AddCmd implements Command {
         validateNotEmpty(input, "OOPS!!! The description of a task cannot be empty");
 
         switch (taskType) {
-            case TODO:
-                task = new Todo(input);
-                break;
-            case EVENT:
-                words = input.split("/at");
-                trimStrArr(words);
-                task = new Event(words[0], words[1]);
-                break;
-            case DEADLINE:
-                words = input.split("/by");
-                trimStrArr(words);
-                task = new Deadline(words[0], words[1]);
-                break;
-            default:
-                task = new Task("placeholder task");
-                break;
+        case TODO:
+            task = new Todo(input);
+            break;
+        case EVENT:
+            words = input.split("/at");
+            trimStrArr(words);
+            task = new Event(words[0], words[1]);
+            break;
+        case DEADLINE:
+            words = input.split("/by");
+            trimStrArr(words);
+            task = new Deadline(words[0], words[1]);
+            break;
+        default:
+            task = new Task("placeholder task");
+            break;
         }
 
         this.lst.add(task);
