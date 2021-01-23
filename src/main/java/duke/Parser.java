@@ -9,7 +9,7 @@ import java.rmi.activation.UnknownObjectException;
 public class Parser {
 
     /** Action input from user that is parsed into an array for checking */
-    String [] parsedAction;
+    private String [] parsedAction = null;
 
     public Parser() {
         parsedAction = null;
@@ -20,14 +20,11 @@ public class Parser {
     }
 
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Checks the input and validates it
      *
-     * @param x  X coordinate of position.
-     * @param y Y coordinate of position.
-     * @param zone Zone of position.
-     * @return Lateral location.
-     * @throws IllegalArgumentException  If zone is <= 0.
+     * @throws AddMissingInputException if adding task command has missing input
+     * @throws DukeIncompleteInputException if command has incomplete input
+     * @throws UnknownInputException if input is not recognized by duke
      */
     public void check() throws AddMissingInputException, DukeIncompleteInputException, UnknownInputException {
         if (parsedAction[0].equals("todo") || parsedAction[0].equals("deadline") ||
@@ -46,8 +43,6 @@ public class Parser {
 
         } else if (parsedAction[0].equals("check") && parsedAction.length <= 1) {
             throw new DukeIncompleteInputException("check not completed");
-        } else {
-            throw new UnknownInputException();
         }
 
     }

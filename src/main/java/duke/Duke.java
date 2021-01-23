@@ -51,80 +51,85 @@ public class Duke {
                 String[] parsedAction = parser.getParsedAction();
 
                 switch (parsedAction[0]) {
-                    case "todo":
-                        ui.printDivider();
-                        ui.addPrint();
+                case "todo":
+                    ui.printDivider();
+                    ui.addPrint();
 
-                        ToDoTask todo = tasks.handleToDoTask(action);
+                    ToDoTask todo = tasks.handleToDoTask(action);
 
-                        ui.printTask(todo);
-                        ui.countTasks(tasks);
-                        ui.printDivider();
-                        break;
+                    ui.printTask(todo);
+                    ui.countTasks(tasks);
+                    ui.printDivider();
+                    break;
 
-                    case "deadline":
-                        ui.printDivider();
-                        ui.addPrint();
+                case "deadline":
+                    ui.printDivider();
+                    ui.addPrint();
 
-                        DeadlineTask deadlineTask = tasks.handleDeadlineTask(action);
+                    DeadlineTask deadlineTask = tasks.handleDeadlineTask(action);
 
-                        ui.printTask(deadlineTask);
-                        ui.countTasks(tasks);
-                        ui.printDivider();
-                        break;
+                    ui.printTask(deadlineTask);
+                    ui.countTasks(tasks);
+                    ui.printDivider();
+                    break;
 
-                    case "event":
-                        ui.printDivider();
+                case "event":
+                    ui.printDivider();
 
-                        ui.addPrint();
+                    ui.addPrint();
 
-                        EventTask eventTask = tasks.handleEventTask(action);
+                    EventTask eventTask = tasks.handleEventTask(action);
 
-                        ui.printTask(eventTask);
-                        ui.countTasks(tasks);
-                        ui.printDivider();
-                        break;
+                    ui.printTask(eventTask);
+                    ui.countTasks(tasks);
+                    ui.printDivider();
+                    break;
 
-                    case "list":
-                        ui.printDivider();
-                        ui.printStored(tasks);
-                        ui.printDivider();
-                        break;
+                case "list":
+                    ui.printDivider();
+                    ui.printStored(tasks);
+                    ui.printDivider();
+                    break;
 
-                    case "done":
-                        int number = Integer.valueOf(parsedAction[1]);
-                        ui.printDivider();
-                        ui.printMarked();
+                case "done":
+                    int number = Integer.valueOf(parsedAction[1]);
+                    ui.printDivider();
+                    ui.printMarked();
 
-                        Task completed = tasks.handleDone(number);
+                    Task completed = tasks.handleDone(number);
 
-                        ui.printTask(completed);
-                        ui.printDivider();
-                        break;
+                    ui.printTask(completed);
+                    ui.printDivider();
+                    break;
 
-                    case "check":
-                        ui.printDivider();
-                        String result = tasks.findOnDateTasks((parsedAction[1]));
-                        ui.print(result);
-                        ui.printDivider();
-                        break;
+                case "check":
+                    ui.printDivider();
 
-                    case "bye":
-                        carryOn = false;
-                        break;
+                    String result = tasks.findOnDateTasks((parsedAction[1]));
 
-                    case "delete":
-                        int index = Integer.valueOf(parsedAction[1]);
-                        ui.printDivider();
-                        ui.printRemoved();
+                    ui.print(result);
+                    ui.printDivider();
+                    break;
 
-                        Task task = tasks.handleDelete(index);
-                        ui.printTask(task);
-                        ui.countTasks(tasks);
+                case "bye":
+                    carryOn = false;
+                    break;
 
-                        ui.printDivider();
-                        break;
+                case "delete":
+                    int index = Integer.valueOf(parsedAction[1]);
+                    ui.printDivider();
+                    ui.printRemoved();
 
+                    Task task = tasks.handleDelete(index);
+
+                    ui.printTask(task);
+                    ui.countTasks(tasks);
+
+                    ui.printDivider();
+                    break;
+
+                default:
+                    throw new UnknownInputException();
                 }
             }
 
@@ -133,6 +138,7 @@ public class Duke {
             ui.printDivider();
 
             storage.write(tasks);
+
         } catch (DukeException e) {
             ui.printDivider();
             ui.print(e.getMessage());

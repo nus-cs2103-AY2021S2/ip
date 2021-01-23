@@ -9,20 +9,22 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
+
     /** Filewriter instance used to write into the file */
-    private FileWriter writer;
+    private FileWriter writer = null;
 
     /** File instance that will be used to load file */
-    private File file;
+    private File file = null;
 
     /** Scanner instance that will be used to load file contents into Duke */
-    private Scanner sc;
+    private Scanner sc = null;
 
     public Storage(String filepath) throws DukeOnlyIOException {
 
         try {
             this.file = new File(filepath);
             sc = new Scanner(this.file);
+
             if (!this.file.exists()) {
                 this.file.getParentFile().mkdir();
                 this.file.createNewFile();
@@ -40,6 +42,7 @@ public class Storage {
      */
     public ArrayList<String> load() {
         ArrayList<String> list = new ArrayList<>();
+
         while (sc.hasNext()) {
             String nextLine = sc.nextLine();
             list.add(nextLine);
@@ -56,9 +59,12 @@ public class Storage {
      */
     public void write(TaskList list) throws DukeOnlyIOException {
         try {
+
             this.writer = new FileWriter(file, false);
             this.writer.write(list.getListToWrite());
+
             this.writer.close();
+
         } catch (IOException err) {
             throw new DukeOnlyIOException();
         }
