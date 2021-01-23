@@ -14,7 +14,7 @@ public class EventTask extends Task {
     protected LocalDate duration;
 
     /**
-     *  duke.tasks.EventsTask constructor.
+     *  EventsTask constructor.
      *
      *  @param name Name of EventsTask.
      *  @param duration Specified duration of task.
@@ -42,7 +42,7 @@ public class EventTask extends Task {
     /**
      *  Converts EventTask object to String suitable for storage.
      *
-     * @return String EventTask information in a file-friendly format
+     *  @return String EventTask information in a file-friendly format
      */
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");

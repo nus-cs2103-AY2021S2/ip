@@ -2,7 +2,7 @@ package duke.exception;
 
 public class DukeInvalidDateException extends DukeException {
     /**
-     * DukeInvalidDateFormatException constructor.
+     * DukeInvalidDateException constructor.
      */
     public DukeInvalidDateException() {
     }

@@ -13,7 +13,7 @@ public class Ui {
     }
 
     /**
-     * Greeter for duke.Duke
+     * Greeter for Duke
      */
     public void showWelcome() {
         String logo = "     ____        _        \n"
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     /**
-     * LineBreak for duke.Duke
+     * LineBreak for Duke
      */
     public void showLine() {
         System.out.println("    ---------------------------------------");

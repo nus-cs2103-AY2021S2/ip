@@ -9,7 +9,7 @@ package duke.exception;
 public class DukeUnknownCommandException extends DukeException {
 
     /**
-     *  InsufficientParametersException constructor.
+     *  DukeUnknownCommandException constructor.
      */
     public DukeUnknownCommandException() {}
 
@@ -17,6 +17,7 @@ public class DukeUnknownCommandException extends DukeException {
     public String getMessage() {
         return "I do not know what you are trying to do here..";
     }
+
     @Override
     public String toString() {
         return "    I do not know what you are trying to do here..";

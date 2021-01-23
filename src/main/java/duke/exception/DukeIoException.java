@@ -2,7 +2,7 @@ package duke.exception;
 
 public class DukeIoException extends DukeException {
     /**
-     *  DukeIOException constructor.
+     *  DukeIoException constructor.
      */
     public DukeIoException() {
     }

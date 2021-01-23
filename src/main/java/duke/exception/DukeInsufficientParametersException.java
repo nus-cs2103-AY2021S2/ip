@@ -10,7 +10,7 @@ public class DukeInsufficientParametersException extends DukeException {
     protected String command;
 
     /**
-     *  InsufficientParametersException constructor.
+     *  DukeInsufficientParametersException constructor.
      *
      *  @param cmd Name of command in question.
      */

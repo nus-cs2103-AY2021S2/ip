@@ -3,7 +3,7 @@ package duke.exception;
 public class DukeIndexRangeException extends DukeException {
 
     /**
-     *  DukeIndexOutOfRangeException constructor.
+     *  DukeIndexRangeException constructor.
      */
     public DukeIndexRangeException() {
     }

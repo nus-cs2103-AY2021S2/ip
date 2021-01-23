@@ -71,7 +71,7 @@ public class TaskManager {
     }
 
     /**
-     *  Given text, finds tasks with name comtaining text.
+     *  Given text, finds tasks with name containing text.
      *
      *  @param s Search term
      */
@@ -104,7 +104,7 @@ public class TaskManager {
     /**
      * Method to mark specified task done.
      *
-     * @param x duke.tasks.Task index.
+     * @param x Task index.
      */
     public Task markTaskAsDone(int x) throws DukeIndexRangeException, DukeTaskAlreadyDoneException {
         try {
@@ -122,7 +122,7 @@ public class TaskManager {
     /**
      * Method to remove specified.
      *
-     * @param x duke.tasks.Task index.
+     * @param x Task index.
      */
     public Task deleteTask(int x) throws DukeIndexRangeException {
         try {

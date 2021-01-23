@@ -16,9 +16,9 @@ public abstract class Task {
     protected Status done;
 
     /**
-     *  Generic duke.tasks.Task constructor.
+     *  Generic Task constructor.
      *
-     *  @param name Name of duke.tasks.Task.
+     *  @param name Name of Task.
      */
     public Task(String name) {
         this.name = name;
@@ -28,17 +28,17 @@ public abstract class Task {
     /**
      *  duke.tasks.Task name getter.
      *
-     *  @return Name of duke.tasks.Task.
+     *  @return Name of Task.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     *  Marks duke.tasks.Task to be completed.
+     *  Marks Task to be completed.
      *  Returns true if successful, false if unsuccessful.
      *
-     *  @return Name of duke.tasks.Task.
+     *  @return Name of Task.
      */
     public boolean markAsDone() {
         if (this.done == Status.DONE) {

@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- *  Deadline duke.tasks.Task.
+ *  DeadlineTask.
  *
  *  @author Yap Jing Kang
  */
-
 
 public class DeadlineTask extends Task {
     protected LocalDate deadline;
@@ -42,7 +41,7 @@ public class DeadlineTask extends Task {
     /**
      *  Converts DeadlineTask object to String suitable for storage.
      *
-     * @return String DeadlineTask information in a file-friendly format
+     *  @return String DeadlineTask information in a file-friendly format
      */
     public String toFileFormat() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMM.yyyy");

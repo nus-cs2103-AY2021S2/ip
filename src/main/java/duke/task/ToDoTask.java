@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- *  ToDo duke.tasks.Task.
+ *  ToDo Task.
  *
  *  @author Yap Jing Kang
  */
@@ -9,7 +9,7 @@ package duke.task;
 public class ToDoTask extends Task {
 
     /**
-     *  duke.tasks.ToDoTask constructor.
+     *  ToDoTask constructor.
      *
      *  @param name Name of duke.tasks.ToDoTask.
      */
@@ -33,7 +33,7 @@ public class ToDoTask extends Task {
     /**
      *  Converts ToDoTask object to String suitable for storage.
      *
-     * @return String ToDoTask information in a file-friendly format
+     *  @return String ToDoTask information in a file-friendly format
      */
     public String toFileFormat() {
         return String.format("%s|%s|%s",
