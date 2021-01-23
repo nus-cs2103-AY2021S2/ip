@@ -38,4 +38,10 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public String infoToStore() {
+        String divider = " | ";
+        return (isDone ? "1" : "0") + divider
+                + description;
+    }
 }

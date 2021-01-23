@@ -18,8 +18,23 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description);
+        this.by = by;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String infoToStore() {
+        String divider = " | ";
+        return "D" +  divider
+                + (isDone ? "1" : "0") + divider
+                + description + divider
+                + by;
     }
 }
