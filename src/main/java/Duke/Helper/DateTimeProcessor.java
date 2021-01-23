@@ -77,9 +77,4 @@ public class DateTimeProcessor {
         if (date == null || time == null) return "Invalid format for date and time.";
         return (time.isEmpty()) ? date : date + " " + time;
     }
-
-    public static void main(String[] args) {
-        DateTimeProcessor processor = new DateTimeProcessor("");
-        System.out.println(processor.getFullDateTime());
-    }
 }
