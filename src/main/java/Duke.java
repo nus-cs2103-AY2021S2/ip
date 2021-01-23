@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
 public class Duke {
+
     public static Scanner sc = new Scanner(System.in);
 
     // Checks the user input and throws exceptions
     public static void startResponse(String userInput) throws Exception {
+
         if (userInput.equals("list")) {
             if (Response.numTasks == 0) {
                 throw new NullPointerException();
@@ -56,6 +58,7 @@ public class Duke {
             try {
                 String userInput = sc.nextLine();
                 if (userInput.equals("bye")) {
+                    Save.saveData(); // Save data when user says bye
                     Response.bye();
                     break;
                 }

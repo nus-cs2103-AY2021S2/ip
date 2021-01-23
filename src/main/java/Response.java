@@ -1,8 +1,18 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Response {
+
     public static int numTasks = 0;
     public static ArrayList<Task> tasks = new ArrayList<>();
+    static {
+        try {
+            tasks = Save.loadData();
+            numTasks = tasks.size();
+        } catch (FileNotFoundException e) {
+            System.out.println("\nerror: cannot load the save data!");
+        }
+    }
 
     public static void hello() {
         System.out.println("\nwhat's up? :)\n");
@@ -27,6 +37,7 @@ public class Response {
         tasks.add(numTasks, task);
         numTasks++;
         System.out.println(task.toString());
+        //saveTaskString = task.saveTask();
         System.out.println("you now have a total of " + numTasks + " tasks.\n");
     }
 
