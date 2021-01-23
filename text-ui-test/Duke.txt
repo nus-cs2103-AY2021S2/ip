@@ -1,3 +1,3 @@
 [T][X] borrow book
-[E][X] project meeting /at: Mon 2-4pm
-[D][ ] read book /by: tomorrow
+[E][X] project meeting /at: Oct 14 2021
+[D][ ] read book /by: May 2 2021
