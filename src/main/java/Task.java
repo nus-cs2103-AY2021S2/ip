@@ -1,24 +1,13 @@
-import java.util.InputMismatchException;
-
 //Below solution adapted from partial solution in: https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
-public class Task {
+public abstract class Task {
     protected String description;
     protected String type;
     protected boolean isDone;
 
-    public Task(String description, String type, int isDone) {
+    public Task(String description, String type, boolean isDone) {
         this.description = description;
         this.type = type;
-        switch(isDone) {
-            case 0:
-                this.isDone = false;
-                break;
-            case 1:
-                this.isDone = true;
-                break;
-            default:
-                throw new InputMismatchException("isDone has to be 0 or 1");
-        }
+        this.isDone = isDone;
     }
 
     public String getType() {

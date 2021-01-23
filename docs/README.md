@@ -23,7 +23,7 @@ If you feel that keeping them on the list is not necessary, Meme Man will delete
 ### List tasks
 You can key in "list" and Meme Man will display the tasks in the order that you have keyed them in.
 
-### Save tasks
+### Save and load tasks
 You can now save the tasks on your computer and Meme Man will load them upon starting up. 
 It's automatic. No user input required!
 
@@ -220,7 +220,7 @@ Invalid task number. Not stonks!
 
 ### `bye` - Exit command
 
-Key this command in to cause Meme Man to EJECT you... er... I mean leave...
+Key this command in to cause Meme Man to save your tasks and EJECT you... er... I mean leave...
 
 ### `list` - List command
 
@@ -264,4 +264,9 @@ Did someone said... NO VEGETALS?
 If you key in an unrecognised command, this is what Meme Man has to say:
 ```
 Command not recognised. Not stonks!
+```
+### Excess inputs
+If you key in additional inputs next to a no-input command such as `list`, this is what Meme Man has to say:
+```
+Excessive inputs for a no-input command. Not stonks!
 ```

@@ -1,106 +1,85 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import java.io.File;
 import java.io.IOException;
 
 public class SurrealChat {
-    public static final int TASK_UNDONE = 0;
     public static final String TASK_FILE_PATH = "tasks.txt";
-    public static InputManagement inputManagement = new InputManagement(new Scanner(System.in));
-    public static TaskManagement taskManagement = new TaskManagement(new ArrayList<Task>());
+    public UserInput userInput;
+    public TaskParser taskParser;
+    public FileManagement fileManagement;
+    public UserOutput userOutput;
 
-    private static void loadTaskFile() throws IOException {
-        File f = new File(SurrealChat.TASK_FILE_PATH);
-        f.createNewFile();
-        Scanner fileScanner = new Scanner(f);
-        while (fileScanner.hasNext()) {
-            String nextTask = fileScanner.nextLine();
-            String[] taskComponents = nextTask.split("/split/");
-            String taskType = taskComponents[0];
-            int taskDone = Integer.valueOf(taskComponents[1]);
-            String description = taskComponents[2];
-            switch(taskType) {
-                case "T":
-                    SurrealChat.taskManagement.addToDo(description, taskDone);
-                    break;
-                case "D":
-                    SurrealChat.taskManagement.addDeadline(description, taskDone);
-                    break;
-                case "E":
-                    SurrealChat.taskManagement.addEvent(description, taskDone);
-                    break;
-                default:
-                    throw new InputMismatchException("The task type scanned from file is invalid. Not Stonks!");
-            }
-        }
+    private SurrealChat(UserInput userInput, TaskParser taskParser,
+                        FileManagement fileManagement, UserOutput userOutput) {
+        this.userInput = userInput;
+        this.taskParser = taskParser;
+        this.fileManagement = fileManagement;
+        this.userOutput = userOutput;
     }
 
-    private static void initialGreeting() {
-        System.out.println("I am Meme Man. Whoms't be entering the VIMension?\n");
+    public static SurrealChat initSurrealChat(File filePath, boolean verboseFlag) {
+        UserInput userInput = new UserInput(new Scanner(System.in));
+        TaskParser taskParser = new TaskParser();
+        FileManagement fileManagement = new FileManagement(filePath);
+        UserOutput userOutput = new UserOutput(verboseFlag);
+        return new SurrealChat(userInput, taskParser, fileManagement, userOutput);
     }
 
-    private static void exitProgram() {
-        System.out.println("You have been EJECTED!");
+    private void initialGreeting() {
+        this.userOutput.printInitialGreeting();
     }
 
-    private static void orangEasterEgg() {
-        System.err.println("Meme Man: ORANG! IT S U...");
-        System.err.println("Orang: No you can't SU");
-        System.err.println("Meme Man: ANGERY!\n");
+    private void exitProgram() {
+        this.userOutput.printExitProgram();
     }
 
-    private static void vegetalEasterEgg() {
-        System.err.println("Vegetal: Did someone said... NO VEGETALS?");
-        System.err.println("Meme Man: I taste a vegetal... ANGERY!\n");
+    private void printEasterEgg(String easterEgg) {
+        this.userOutput.printEasterEggOutput(easterEgg);
     }
 
-    private static boolean commandLogic(boolean maintainLoop, String userCommand) {
+    private boolean commandLogic(boolean maintainLoop, String userCommand) {
         switch(userCommand) {
             case "bye":
+                this.userInput.checkExcessArguments();
                 maintainLoop = false; //Break out of infinite loop
                 break;
             case"list":
-                SurrealChat.taskManagement.printList();
+                this.userInput.checkExcessArguments();
+                Pair<String, List<Task>> listPair = this.taskParser.sendListToPrint();
+                this.userOutput.printOutput(listPair);
                 break;
-            case "todo":
-                String description = SurrealChat.inputManagement.getInputDescription();
-                SurrealChat.taskManagement.addToDo(description, SurrealChat.TASK_UNDONE);
-                break;
-            case "deadline":
-                description = SurrealChat.inputManagement.getInputDescription();
-                SurrealChat.taskManagement.addDeadline(description, SurrealChat.TASK_UNDONE);
-                break;
-            case "event":
-                description = SurrealChat.inputManagement.getInputDescription();
-                SurrealChat.taskManagement.addEvent(description, SurrealChat.TASK_UNDONE);
+            case "todo", "deadline", "event":
+                String description = this.userInput.getInputDescription();
+                Pair<String, Pair<Task, Integer>> taskPair =
+                        this.taskParser.parseUserTaskInput(userCommand, description);
+                this.userOutput.printOutput(taskPair);
                 break;
             case "done":
-                description = SurrealChat.inputManagement.getInputDescription(); //Get raw form
-                int taskNumber = SurrealChat.inputManagement.getInputNumber(description); //Process to obtain int
-                SurrealChat.taskManagement.markAsDone(taskNumber);
+                description = this.userInput.getInputDescription(); //Get raw form
+                int taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+                Pair<String, Task> donePair = this.taskParser.markAsDone(taskNumber);
+                this.userOutput.printOutput(donePair);
                 break;
             case "undone":
-                description = SurrealChat.inputManagement.getInputDescription(); //Get raw form
-                taskNumber = SurrealChat.inputManagement.getInputNumber(description); //Process to obtain int
-                SurrealChat.taskManagement.markAsUndone(taskNumber);
+                description = this.userInput.getInputDescription(); //Get raw form
+                taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+                Pair<String, Task> undonePair = this.taskParser.markAsUndone(taskNumber);
+                this.userOutput.printOutput(undonePair);
                 break;
             case "delete":
-                description = SurrealChat.inputManagement.getInputDescription(); //Get raw form
-                taskNumber = SurrealChat.inputManagement.getInputNumber(description); //Process to obtain int
-                SurrealChat.taskManagement.deleteTask(taskNumber);
+                description = this.userInput.getInputDescription(); //Get raw form
+                taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
+                Pair<String, Pair<Task, Integer>> deletePair = this.taskParser.deleteTask(taskNumber);
+                this.userOutput.printOutput(deletePair);
                 break;
-            case "orang":
-                SurrealChat.inputManagement.scannerNextLine(); //Clear input line
-                SurrealChat.orangEasterEgg();
-                break;
-            case "vegetal":
-                SurrealChat.inputManagement.scannerNextLine(); //Clear input line
-                SurrealChat.vegetalEasterEgg();
+            case "orang", "vegetal":
+                this.userInput.checkExcessArguments();
+                this.printEasterEgg(userCommand);
                 break;
             default:
-                SurrealChat.inputManagement.scannerNextLine(); //Clear input line
+                this.userInput.scannerNextLine(); //Clear input line
                 throw new UnsupportedOperationException("Command not recognised. Not stonks!");
         }
         return maintainLoop;
@@ -111,24 +90,29 @@ public class SurrealChat {
      * @param args - Optional argument
      */
     public static void main(String[] args) {
-        SurrealChat.initialGreeting();
+        boolean verboseFlag = true;
+        SurrealChat surrealChat = SurrealChat.initSurrealChat(new File(SurrealChat.TASK_FILE_PATH), verboseFlag);
+        surrealChat.initialGreeting();
         try {
-            SurrealChat.loadTaskFile();
+            List<String> fileLines = surrealChat.fileManagement.loadTaskFile();
+            Pair<String, List<Task>> filePair = surrealChat.taskParser.parseFileLines(fileLines);
+            surrealChat.userOutput.printOutput(filePair);
         } catch (IOException e) {
-            System.err.println(e + "\n");
+            surrealChat.userOutput.printException(e);
         }
         String userCommand;
         boolean maintainLoop = true;
         while (maintainLoop) {
-            userCommand = SurrealChat.inputManagement.getInputCommand();
+            userCommand = surrealChat.userInput.getInputCommand();
             try {
-                maintainLoop = SurrealChat.commandLogic(maintainLoop, userCommand);
+                maintainLoop = surrealChat.commandLogic(maintainLoop, userCommand);
             } catch (Exception e) {
-                System.err.println(e.getMessage() + "\n");
+                surrealChat.userOutput.printException(e);
             }
         }
-        SurrealChat.taskManagement.saveTasksToFile();
-        SurrealChat.inputManagement.closeScanner();
-        SurrealChat.exitProgram();
+        List<String> fileTaskList = surrealChat.taskParser.convertTasksForFile();
+        surrealChat.fileManagement.saveTasksToFile(fileTaskList);
+        surrealChat.userInput.closeScanner();
+        surrealChat.exitProgram();
     }
 }

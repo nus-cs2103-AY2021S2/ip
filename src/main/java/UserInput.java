@@ -1,10 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class InputManagement {
+public class UserInput {
     public Scanner sc;
 
-    public InputManagement(Scanner sc) {
+    public UserInput(Scanner sc) {
         this.sc = sc;
     }
 
@@ -45,11 +46,18 @@ public class InputManagement {
             throw new NoSuchElementException("Did you forget to put a number for the command you just typed in? Not stonks!");
         } else {
             try {
-                Integer taskNumber = Integer.valueOf(description);
+                int taskNumber = Integer.valueOf(description);
                 return taskNumber;
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("Did you put something other than a number or did you put a number incorrectly? Not stonks!");
             }
+        }
+    }
+
+    public void checkExcessArguments() {
+        String excess = this.sc.nextLine();
+        if (!excess.isEmpty()) {
+            throw new InputMismatchException("Excessive inputs for a no-input command. Not stonks!");
         }
     }
 }

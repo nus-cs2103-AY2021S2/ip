@@ -1,5 +1,5 @@
 public class ToDoTask extends Task {
-    public ToDoTask(String taskDescription, int isDone) {
+    public ToDoTask(String taskDescription, boolean isDone) {
         super(taskDescription, "T", isDone);
     }
 
