@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UserInput {
-    public Scanner sc;
+    protected Scanner sc;
 
     public UserInput(Scanner sc) {
         this.sc = sc;

@@ -1,8 +1,8 @@
 package surrealchat;
 
 public class Pair<T,U> {
-    public final T firstItem;
-    public final U secondItem;
+    protected final T firstItem;
+    protected final U secondItem;
 
     public Pair(T firstItem, U secondItem) {
         this.firstItem = firstItem;

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class EventTask extends Task {
     private LocalDate event;
+
     public EventTask(String taskDescription, LocalDate event, boolean isDone) {
         super(taskDescription, "E", isDone);
         this.event = event;

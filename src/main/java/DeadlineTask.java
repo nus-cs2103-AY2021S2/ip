@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class DeadlineTask extends Task {
     private LocalDate deadline;
+
     public DeadlineTask(String taskDescription, LocalDate deadline, boolean isDone) {
         super(taskDescription, "D", isDone);
         this.deadline = deadline;

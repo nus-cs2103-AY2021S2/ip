@@ -3,7 +3,7 @@ package surrealchat.task;
 import java.util.List;
 
 public class TaskManagement {
-    public List<Task> taskList;
+    protected List<Task> taskList;
 
     public TaskManagement(List<Task> taskList) {
         this.taskList = taskList;
