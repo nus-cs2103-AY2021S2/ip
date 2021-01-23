@@ -1,9 +1,9 @@
-import Task.Task;
+import tasks.Task;
 
 import java.util.*;
-import Task.TodoTask;
-import Task.DeadlineTask;
-import Task.EventTask;
+import tasks.TodoTask;
+import tasks.DeadlineTask;
+import tasks.EventTask;
 
 import exceptions.ChatBotException;
 import exceptions.MissingDescriptionException;

@@ -1,4 +1,4 @@
-package Task;
+package tasks;
 
 public class EventTask extends Task{
     private String type;
