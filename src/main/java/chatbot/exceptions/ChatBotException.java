@@ -1,4 +1,4 @@
-package exceptions;
+package chatbot.exceptions;
 import java.lang.Exception;
 
 public class ChatBotException extends Exception {

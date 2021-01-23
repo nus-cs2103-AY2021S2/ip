@@ -1,4 +1,4 @@
-package exceptions;
+package chatbot.exceptions;
 
 public class InvalidDateFormatException extends ChatBotException {
     public InvalidDateFormatException() {

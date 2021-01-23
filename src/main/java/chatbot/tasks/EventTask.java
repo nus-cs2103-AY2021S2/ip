@@ -1,4 +1,4 @@
-package tasks;
+package chatbot.tasks;
 
 public class EventTask extends Task{
     private String type;
@@ -8,6 +8,14 @@ public class EventTask extends Task{
         super(taskName);
         this.type = "[E]";
         this.time = time;
+    }
+
+    public String writeToFileFormat() {
+        return String.format("%s|%s|%s|%s",
+                "T",
+                isDone == true ? "1" : "0",
+                taskName,
+                time);
     }
 
     @Override

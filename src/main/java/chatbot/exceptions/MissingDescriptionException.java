@@ -1,4 +1,4 @@
-package exceptions;
+package chatbot.exceptions;
 
 public class MissingDescriptionException extends ChatBotException {
     public MissingDescriptionException(String type) {

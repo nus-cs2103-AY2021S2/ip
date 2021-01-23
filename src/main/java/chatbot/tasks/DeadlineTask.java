@@ -1,4 +1,4 @@
-package tasks;
+package chatbot.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +11,16 @@ public class DeadlineTask extends Task {
         super(taskName);
         this.type = "[D]";
         this.deadline = deadline;
+    }
+
+    public String writeToFileFormat() {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return String.format("%s|%s|%s|%s",
+                "D",
+                isDone == true ? "1" : "0",
+                taskName,
+                deadline.format(dateFormat));
+
     }
 
     @Override

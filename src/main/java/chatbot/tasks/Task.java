@@ -1,4 +1,4 @@
-package tasks;
+package chatbot.tasks;
 
 
 public class Task {
@@ -13,6 +13,14 @@ public class Task {
     //when task is done change the isDone to true
     public void taskDone() {
         this.isDone = true;
+    }
+
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
 
