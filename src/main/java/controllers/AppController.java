@@ -27,6 +27,9 @@ public class AppController {
         // init TodosController
         TodosController todosController = new TodosController();
 
+        // retrieve local save db
+        todosController = todosController.retrieveLocalDatabase();
+
         // loop will be broken only by 'bye'
         while (true) {
             // list has structure [command, ... command related args]
@@ -95,6 +98,9 @@ public class AppController {
                     case BYE:
                         // break out of main function
                         greeting.bye();
+
+                        // save current todosController tasks to local db before exit
+                        todosController.saveTasksToLocalDatabase();
 
                         // close scanner preventing mem leak
                         sc.close();

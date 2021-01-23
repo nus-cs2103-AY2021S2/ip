@@ -29,6 +29,15 @@ public class Event extends Todo {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Getter method for event time of an Event object
+     * 
+     * @return String containing event time of the Event
+     */
+    public String getEventTime() {
+        return this.eventTime;
+    }
+
     @Override
     /**
      * Method overriden from Todo's getMessage method to return event type and
