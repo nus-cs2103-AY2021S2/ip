@@ -11,6 +11,29 @@ class Tasklist implements Iterable<Task> {
         list = new ArrayList<>(100);
     }
 
+    /**
+     * Finds and prints the relevant tasks by the inputted keywords.
+     *
+     * @param input Keywords for the search.
+     */
+    public String find(String input) {
+        int i = 1;
+        int counter = 0;
+        CharSequence target = input.subSequence(0, input.length());
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        for (Task task : list) {
+            if (task.getDescription().contains(target)) {
+                sb.append(String.format("\n%d. %s", i, task.toString()));
+                counter++;
+            }
+            i++;
+        }
+        if (counter == 0) {
+            return "There are no matching tasks in your list.";
+        }
+        return sb.substring(0);
+    }
+
     public String list() {
         if (list.size() < 1) {
             return "You have nothing on your list.";
