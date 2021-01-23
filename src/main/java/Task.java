@@ -10,11 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or X symbols
-    }
-
-    public String getDescription() {
-        return this.description;
+        return (isDone ? "\u2713" : " ");
     }
 
     public void toggleStatus() {
@@ -25,4 +21,8 @@ public class Task {
         return this.type;
     }
 
+    @Override
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
+    }
 }

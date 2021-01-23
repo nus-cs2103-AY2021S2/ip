@@ -1,10 +1,10 @@
 public class Output {
-    public static void addLine() {
-        System.out.println("    ----------------------------------------------------------------------------------------------------------------------------------------------");
+    public static String addLine() {
+        return "    ----------------------------------------------------------------------------------------------------------------------------------------------";
     }
 
     public static void printWelcomeMsg() {
-        addLine();
+        System.out.println(addLine());
         System.out.println("    Hello! I'm Duke, your friendly chatbot.\n    What can I do for you today?\n");
         System.out.println("    1. list                                   Lists out all existing tasks                       (e.g. list)");
         System.out.println("    2. done <task number>                     Marks the specified task number as done/undone     (e.g. done 2)");
@@ -13,81 +13,40 @@ public class Output {
         System.out.println("    5. event <event message> <date>           Adds the specified event to the list               (e.g. event project meeting /at Mon 2-4pm");
         System.out.println("    6. delete <task number>                   Deletes the specified task number from the list    (e.g. delete 2");
         System.out.println("    7. bye                                    Terminate Duke                                     (e.g. bye)");
-        addLine();
+        System.out.println(addLine());
         System.out.println();
     }
 
-    public static void printDoneMsg(String icon, String desc) {
-        addLine();
-        if(icon.equals("\u2713"))
+    public static void printAddedTask(Task task, int numTasks) {
+        System.out.println(addLine());
+        System.out.println("    Got it. I've added this task:");
+        System.out.println("      " + task);
+        System.out.println("    Now you have " + numTasks + " tasks in the list.");
+        System.out.println(addLine());
+        System.out.println();
+    }
+
+    public static void printDoneMsg(Task task) {
+        System.out.println(addLine());
+        if(task.getStatusIcon().equals("\u2713"))
             System.out.println("    Nice! I've marked this task as done:");
         else
             System.out.println("    Noted. I've marked this task as undone:");
-        System.out.println("      " + "[" + icon + "] " + desc);
-        addLine();
+        System.out.println("      " + task);
+        System.out.println(addLine());
         System.out.println();
     }
 
-    public static void printTodoMsg(String icon, String desc, int numTasks) {
-        addLine();
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + "[T]" + "[" + icon + "] " + desc);
-        System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        addLine();
-        System.out.println();
-    }
-
-    public static void printDeadlineMsg(String icon, String desc, int numTasks) {
-        addLine();
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + "[D]" + "[" + icon + "] " + desc);
-        System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        addLine();
-        System.out.println();
-    }
-
-    public static void printEventMsg(String icon, String desc, int numTasks) {
-        addLine();
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + "[E]" + "[" + icon + "] " + desc);
-        System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        addLine();
-        System.out.println();
-    }
-
-    public static void printAddedMsg(String input) {
-        addLine();
-        System.out.println("    added: " + input);
-        addLine();
-        System.out.println();
-    }
-
-    public static void printDeleteMsg(String icon, String desc, int numTasks) {
-        addLine();
+    public static void printDeleteMsg(Task task, int numTasks) {
+        System.out.println(addLine());
         System.out.println("    Noted. I've removed this task:");
-        System.out.println("      " + "[E]" + "[" + icon + "] " + desc);
+        System.out.println("      " + task);
         System.out.println("    Now you have " + numTasks + " tasks in the list.");
-        addLine();
+        System.out.println(addLine());
         System.out.println();
     }
 
     public static void printByeMsg() {
-        addLine();
-        System.out.println("    Bye. Hope to see you again soon!");
-        addLine();
-    }
-
-    public static void printErrorMsg(DukeException e) {
-        addLine();
-        System.out.println("    " + e.getMessage());
-        addLine();
-        System.out.println();
-    }
-
-    public static void printErrorMsg(Exception e) {
-        addLine();
-        System.out.println("    " + e.getMessage());
-        addLine();
-        System.out.println();
+        System.out.println(addLine() + "\n    Bye. Hope to see you again soon!\n" + addLine());
     }
 }
