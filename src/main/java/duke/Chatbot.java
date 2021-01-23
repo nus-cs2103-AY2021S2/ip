@@ -73,7 +73,8 @@ public class Chatbot {
                         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
                             throw new DukeException("The time of a deadline cannot be empty.");
                         }
-                        newTask = new Deadline(taskTimeSplit[0].substring(9), TaskType.DEADLINE, LocalDate.parse(taskTimeSplit[1]));
+                        newTask = new Deadline(taskTimeSplit[0].substring(9),
+                                TaskType.DEADLINE, LocalDate.parse(taskTimeSplit[1]));
                         taskList.addTask(newTask);
                         break;
                     case EVENT:
@@ -84,7 +85,8 @@ public class Chatbot {
                         if (taskTimeSplit.length <= 1 || taskTimeSplit[1].isBlank()) {
                             throw new DukeException("The time of an event cannot be empty.");
                         }
-                        newTask = new Event(taskTimeSplit[0].substring(6), TaskType.EVENT, LocalDate.parse(taskTimeSplit[1]));
+                        newTask = new Event(taskTimeSplit[0].substring(6),
+                                TaskType.EVENT, LocalDate.parse(taskTimeSplit[1]));
                         taskList.addTask(newTask);
                         break;
                     default:
