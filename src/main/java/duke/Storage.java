@@ -1,8 +1,8 @@
-import exceptions.DukeFileNotFoundException;
-import exceptions.DukeOnlyIOException;
+package duke;
+
+import duke.exceptions.DukeOnlyIOException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;

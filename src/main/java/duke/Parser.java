@@ -1,5 +1,7 @@
-import exceptions.AddMissingInputException;
-import exceptions.DukeIncompleteInputException;
+package duke;
+
+import duke.exceptions.AddMissingInputException;
+import duke.exceptions.DukeIncompleteInputException;
 
 public class Parser {
     String [] parsedAction;

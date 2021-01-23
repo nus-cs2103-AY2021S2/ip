@@ -1,11 +1,12 @@
-import exceptions.DukeException;
-import exceptions.AddMissingInputException;
-import exceptions.UnknownInputException;
+package duke;
 
-import tasks.ToDoTask;
-import tasks.Task;
-import tasks.EventTask;
-import tasks.DeadlineTask;
+import duke.exceptions.DukeException;
+import duke.exceptions.UnknownInputException;
+
+import duke.tasks.ToDoTask;
+import duke.tasks.Task;
+import duke.tasks.EventTask;
+import duke.tasks.DeadlineTask;
 
 public class Duke {
 
