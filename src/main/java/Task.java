@@ -1,7 +1,7 @@
 /**
  * Task created by user
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -38,6 +38,10 @@ public class Task {
      */
     public String getDescription() {
         return String.format("%s", description);
+    }
+
+    public String writeContentFormat() {
+        return String.format("%d | %s", isDone ? 1 : 0, getDescription());
     }
 
     /**

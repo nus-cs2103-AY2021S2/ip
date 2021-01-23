@@ -12,6 +12,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    @Override
+    public String writeContentFormat() {
+        return String.format("T | %s\n", super.writeContentFormat());
+    }
+
     /**
      * Returns task type, status icon and task name
      *

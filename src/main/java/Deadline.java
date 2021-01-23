@@ -14,6 +14,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public String writeContentFormat() {
+        return String.format("D | %s | %s\n", super.writeContentFormat(), by);
+    }
+
     /**
      * Returns task type, status icon, task name and due date
      * @return String format specific to deadline task

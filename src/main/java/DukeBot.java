@@ -1,5 +1,10 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.nio.file.Files;
 
 /**
  * Bot that handles user inputs, identifies specific commands and respond accordingly
@@ -29,7 +34,7 @@ public class DukeBot {
      * @param text Text provided by user
      * @throws DukeException If task description is empty, task selection is invalid, task selection is empty
      */
-    public void handleCommand(String text) throws DukeException {
+    public void handleCommand(String text) throws DukeException, IOException {
         commandOutput = "";
         String[] commandLine = text.split(" ");
         String command = commandLine[0];
@@ -72,12 +77,15 @@ public class DukeBot {
             break;
         case "event":
             eventProcess(taskInfo);
+            saveProcess();
             break;
         case "deadline":
             deadlineProcess(taskInfo);
+            saveProcess();
             break;
         case "todo":
             todoProcess(taskInfo);
+            saveProcess();
             break;
         default:
             throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
@@ -149,6 +157,30 @@ public class DukeBot {
         taskList.add(task);
         commandOutput = "Got it. I've added this task: \n\t  "
                 + task.toString() + getRemainingTasks();
+    }
+
+    private void saveProcess() throws IOException {
+        String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+        String dirPath = System.getProperty("user.dir") + "/data";
+        File file = new File(filePath);
+        File dir = new File(dirPath);
+
+        if (!Files.isDirectory(Paths.get(dirPath))) {
+            // Create data folder and duke.txt if do not exist
+            dir.mkdir();
+            file.createNewFile();
+        } else if (!file.exists()) {
+            // Create duke.txt if do not exist
+            file.createNewFile();
+        }
+
+        FileWriter fileWriter = new FileWriter(file);
+        for (int i = 1; i < taskList.size(); i++) {
+            //System.lineSeparator()
+            Task task = taskList.get(i);
+            fileWriter.write(task.writeContentFormat());
+        }
+        fileWriter.close();
     }
 
     /**

@@ -15,6 +15,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    @Override
+    public String writeContentFormat() {
+        return String.format("E | %s | %s\n", super.writeContentFormat(), at);
+    }
+
     /**
      * Returns task type, status icon, task name and specific start and end time
      *

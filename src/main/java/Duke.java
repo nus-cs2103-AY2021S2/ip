@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,9 +13,11 @@ public class Duke {
             String command = sc.nextLine();
             try {
                 dukeBot.handleCommand(command);
-            } catch(DukeException ex) {
+            } catch(DukeException dukeEx) {
                 // Echoes out reason for invalid inputs
-                dukeBot.respondToCommand(ex.toString());
+                dukeBot.respondToCommand(dukeEx.toString());
+            } catch(IOException ioEx) {
+                System.out.println(ioEx);
             }
         }
     }
