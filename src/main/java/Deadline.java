@@ -1,12 +1,16 @@
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an deadline task.
  * Has a due date.
  */
 public class Deadline extends Task {
 
-    private String dueDate;
+    private LocalDate dueDate;
     private static final String TYPE = "D";
 
     /**
@@ -22,15 +26,22 @@ public class Deadline extends Task {
             throw new DukeException("Due date is missing!");
         }
 
-        return new Deadline(details[0], details[1]);
+        LocalDate date;
+        try {
+            date = LocalDate.parse(details[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date format! Please use YYYY-MM-DD");
+        }
+
+        return new Deadline(details[0], date);
     }
 
-    private Deadline(String description, String dueDate) {
+    private Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
-    private Deadline(boolean isDone, String description, String dueDate) {
+    private Deadline(boolean isDone, String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
         this.isDone = isDone;
@@ -38,7 +49,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", TYPE, super.toString(), dueDate);
+        return String.format("[%s]%s (by: %s)",
+                TYPE,
+                super.toString(),
+                dueDate.format(DateTimeFormatter.ofPattern("d MMM")));
     }
     
     @Override
@@ -46,11 +60,11 @@ public class Deadline extends Task {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description,
-                dueDate);
+                dueDate.toString());
     }
 
     public static Deadline importData(String[] args) {
         boolean isDone = args[1].equals("1");
-        return new Deadline(isDone, args[2], args[3]);
+        return new Deadline(isDone, args[2], LocalDate.parse(args[3]));
     }
 }

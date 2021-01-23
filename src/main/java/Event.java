@@ -1,12 +1,16 @@
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event task.
  * Has a date.
  */
 public class Event extends Task {
 
-    private String date;
+    private LocalDate date;
     private static final String TYPE = "E";
 
     /**
@@ -22,15 +26,22 @@ public class Event extends Task {
             throw new DukeException("Please include a date for the event!");
         }
 
-        return new Event(details[0], details[1]);
+        LocalDate date;
+        try {
+            date = LocalDate.parse(details[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date format! Please use YYYY-MM-DD");
+        }
+
+        return new Event(details[0], date);
     }
 
-    private Event(String description, String date) {
+    private Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
-    private Event(boolean isDone, String description, String date) {
+    private Event(boolean isDone, String description, LocalDate date) {
         super(description);
         this.date = date;
         this.isDone = isDone;
@@ -38,7 +49,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (at: %s)", TYPE, super.toString(), date);
+        return String.format("[%s]%s (at: %s)",
+                TYPE,
+                super.toString(),
+                date.format(DateTimeFormatter.ofPattern("d MMM")));
     }
     
     @Override
@@ -46,11 +60,11 @@ public class Event extends Task {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description,
-                date);
+                date.toString());
     }
 
     public static Event importData(String[] args) {
         boolean isDone = args[1].equals("1");
-        return new Event(isDone, args[2], args[3]);
+        return new Event(isDone, args[2], LocalDate.parse(args[3]));
     }
 }
