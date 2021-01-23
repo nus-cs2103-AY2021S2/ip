@@ -1,20 +1,25 @@
 public class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected final String description;
 
     public Task(String description) {
         this.description = description;
-        done = false;
+        isDone = false;
     }
 
     public void done() {
-        done = true;
+        isDone = true;
+    }
+
+    public String data() {
+        String done = isDone ? "1" : "0";
+        return String.format("%s | %s", done, description);
     }
 
     @Override
     public String toString() {
         String output;
-        if (done) {
+        if (isDone) {
             output = String.format("[X] %s", description);
         } else {
             output = String.format("[ ] %s", description);
