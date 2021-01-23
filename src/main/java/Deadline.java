@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an deadline task.
  * Has a due date.
  */
 public class Deadline extends Task {
-    private String dueDate;
+    private LocalDate dueDate;
 
     /**
      * Factory method for creating deadline task.
@@ -18,16 +22,25 @@ public class Deadline extends Task {
             throw new DukeException("Due date is missing!");
         }
 
-        return new Deadline(details[0], details[1]);
+        LocalDate date;
+        try {
+            date = LocalDate.parse(details[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date format! Please use YYYY-MM-DD");
+        }
+
+        return new Deadline(details[0], date);
     }
 
-    private Deadline(String description, String dueDate) {
+    private Deadline(String description, LocalDate dueDate) {
         super(description);
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dueDate);
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                dueDate.format(DateTimeFormatter.ofPattern("d MMM")));
     }
 }
