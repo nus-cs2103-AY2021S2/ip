@@ -1,26 +1,33 @@
+import java.util.List;
+
 /**
  * Represents a Task.
  * Includes description of the task and an indicator of whether it is completed.
  */
-public class Task {
-    private String description;
-    private boolean done;
+public abstract class Task {
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        done = false;
+        isDone = false;
     }
 
     /**
      * Set task as completed.
      */
     public void completed() {
-        done = true;
+        isDone = true;
+    }
+
+    private String getStatus() {
+        return isDone ? "X" : " ";
     }
 
     @Override
     public String toString() {
-        String status = done ? "X" : " ";
-        return String.format("[%s] %s", status, description);
+        return String.format("[%s] %s", getStatus(), description);
     }
+
+    public abstract List<String> exportData();
 }

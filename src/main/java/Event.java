@@ -1,9 +1,13 @@
+import java.util.List;
+
 /**
  * Represents an Event task.
  * Has a date.
  */
 public class Event extends Task {
+
     private String date;
+    private static final String TYPE = "E";
 
     /**
      * Factory method for creating Event task.
@@ -21,13 +25,32 @@ public class Event extends Task {
         return new Event(details[0], details[1]);
     }
 
-    private Event (String description, String date) {
+    private Event(String description, String date) {
         super(description);
         this.date = date;
     }
 
+    private Event(boolean isDone, String description, String date) {
+        super(description);
+        this.date = date;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), date);
+        return String.format("[%s]%s (at: %s)", TYPE, super.toString(), date);
+    }
+    
+    @Override
+    public List<String> exportData() {
+        return List.of(TYPE,
+                isDone ? "1" : "0",
+                description,
+                date);
+    }
+
+    public static Event importData(String[] args) {
+        boolean isDone = args[1] == "1";
+        return new Event(isDone, args[2], args[3]);
     }
 }

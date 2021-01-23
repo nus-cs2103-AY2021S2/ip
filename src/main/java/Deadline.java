@@ -1,9 +1,13 @@
+import java.util.List;
+
 /**
  * Represents an deadline task.
  * Has a due date.
  */
 public class Deadline extends Task {
+
     private String dueDate;
+    private static final String TYPE = "D";
 
     /**
      * Factory method for creating deadline task.
@@ -26,8 +30,27 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
     }
 
+    private Deadline(boolean isDone, String description, String dueDate) {
+        super(description);
+        this.dueDate = dueDate;
+        this.isDone = isDone;
+    }
+
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), dueDate);
+        return String.format("[%s]%s (by: %s)", TYPE, super.toString(), dueDate);
+    }
+    
+    @Override
+    public List<String> exportData() {
+        return List.of(TYPE,
+                isDone ? "1" : "0",
+                description,
+                dueDate);
+    }
+
+    public static Deadline importData(String[] args) {
+        boolean isDone = args[1] == "1";
+        return new Deadline(isDone, args[2], args[3]);
     }
 }
