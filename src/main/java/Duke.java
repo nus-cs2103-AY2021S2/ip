@@ -2,6 +2,11 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 
 public class Duke {
     static Scanner sc = new Scanner(System.in);
@@ -75,15 +80,26 @@ public class Duke {
                     System.out.println("\t____________________________________________________________\n"
                                     + "\tPlease provide description for your task.\n"
                                     + "\t____________________________________________________________\n");
-                } catch (DateNotFoundException e) {
+                } catch (DateTimeNotFoundException | StringIndexOutOfBoundsException e) {
                     System.out.println("\t____________________________________________________________\n"
-                                    + "\tPlease enter a valid deadline (after \"/by\") for Deadline Tasks\n"
-                                    + "\tor time (after \"/at\") for Event Tasks.\n"
+                                    + "\tPlease enter the date (DD/MM/YYYY) with optional\n"
+                                    + "\ttime (in 24 hours format) after \"/by\" for Deadline Tasks\n"
+                                    + "\tor date with optional start and end time after \"/at\" \n"
+                                    + "\tfor Event Tasks.\n"
                                     + "\t____________________________________________________________\n");
                 } catch (InvalidTaskSelectionException e) {
                     System.out.println("\t____________________________________________________________\n"
                                     + "\tPlease enter task number after command.\n"
                                     + "\t____________________________________________________________\n");
+                } catch (DateTimeParseException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                            + "\tPlease enter in DD/MM/YYYY format (eg. 02/04/2000) for dates\n"
+                            + "\tand in 24 hour format (eg. 1830) for times.\n"
+                            + "\t____________________________________________________________\n");
+                } catch (InvalidTimeDurationException e) {
+                    System.out.println("\t____________________________________________________________\n"
+                            + "\tPlease enter a valid start and end time duration\n\t(start time < end time).\n"
+                            + "\t____________________________________________________________\n");
                 }
             }
             input = sc.nextLine();
@@ -140,10 +156,12 @@ public class Duke {
 
     //Add different type of tasks in list.
     public static void addToList(List<Task> list, String input, String[] check)
-            throws CommandNotValidException, DescriptionNotFoundException, DateNotFoundException {
+            throws CommandNotValidException, DescriptionNotFoundException,
+                DateTimeNotFoundException, DateTimeParseException,
+                    StringIndexOutOfBoundsException, InvalidTimeDurationException {
         Task temp;
         String description;
-        String date;
+        String dateTime;
 
         if (check[0].equals("todo") || check[0].equals("deadline") || check[0].equals("event")) {
             if (check.length == 1) {
@@ -153,27 +171,72 @@ public class Duke {
                 description = input.substring(5).trim();
                 temp = new TodoTask(description);
             } else if (check[0].equals("deadline")) {
-                int index = input.lastIndexOf("/by");
+                int index = input.indexOf("/by");
                 if (index == -1) {
-                    throw new DateNotFoundException();
+                    throw new DateTimeNotFoundException();
                 }
-                description = input.substring(9, index - 1);
-                date = input.substring(index + 3).trim();
-                if (date.isEmpty()) {
-                    throw new DateNotFoundException();
+
+                description = input.substring(9, index).trim();
+                if (description.isEmpty()) {
+                    throw new DescriptionNotFoundException();
                 }
-                temp = new DeadlineTask(description, date);
+
+                dateTime = input.substring(index + 3).trim();
+                if (dateTime.isEmpty()) {
+                    throw new DateTimeNotFoundException();
+                }
+
+                String dateString = dateTime.substring(0, 10);
+                LocalDate date = LocalDate.
+                        parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String timeString = dateTime.substring(10).trim();
+                if (timeString.isEmpty()) {
+                    temp = new DeadlineTask(description, date);
+                } else {
+                    LocalTime time = LocalTime.
+                            parse(dateTime.substring(10).trim(), DateTimeFormatter.ofPattern("HHmm"));
+                    temp = new DeadlineTask(description, date, time);
+                }
+                //System.out.println(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                //System.out.println(time.format(DateTimeFormatter.ofPattern("hh:mm a")));
             } else {
-                int index = input.lastIndexOf("/at");
+                int index = input.indexOf("/at");
                 if (index == -1) {
-                    throw new DateNotFoundException();
+                    throw new DateTimeNotFoundException();
                 }
-                description = input.substring(6, index - 1);
-                date = input.substring(index + 3).trim();
-                if (date.isEmpty()) {
-                    throw new DateNotFoundException();
+
+                description = input.substring(6, index).trim();
+                if (description.isEmpty()) {
+                    throw new DescriptionNotFoundException();
                 }
-                temp = new EventTask(description, date);
+
+                dateTime = input.substring(index + 3).trim();
+                if (dateTime.isEmpty()) {
+                    throw new DateTimeNotFoundException();
+                }
+
+                String dateString = dateTime.substring(0, 10);
+                LocalDate date = LocalDate.
+                        parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                String timeString = dateTime.substring(10).trim();
+                if (timeString.isEmpty()) {
+                    temp = new EventTask(description, date);
+                } else {
+                    String startTimeString = timeString.substring(0, 4);
+                    LocalTime startTime = LocalTime.
+                            parse(startTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                    String endTimeString = timeString.substring(4).trim();
+                    if (endTimeString.isEmpty()) {
+                        temp = new EventTask(description, date, startTime);
+                    } else {
+                        LocalTime endTime = LocalTime.
+                                parse(endTimeString, DateTimeFormatter.ofPattern("HHmm"));
+                        if (endTime.compareTo(startTime) < 0) {
+                            throw new InvalidTimeDurationException();
+                        }
+                        temp = new EventTask(description, date, startTime, endTime);
+                    }
+                }
             }
         } else {
             throw new CommandNotValidException();
