@@ -1,7 +1,9 @@
+package blarb;
+
 /**
- * {@code Command} is an enumeration of the possible commands.
+ * {@code blarb.Command} is an enumeration of the possible commands.
  */
-public enum Command {
+enum Command {
     DONE("done"), TODO("todo"), DEADLINE("deadline"), EVENT("event"),
     LIST("list"), DELETE("delete"), BYE("bye"), UNKNOWN("");
 

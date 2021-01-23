@@ -1,8 +1,10 @@
+package blarb;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Tasklist implements Iterable<Task> {
+class Tasklist implements Iterable<Task> {
     private final List<Task> list;
 
     public Tasklist() {
@@ -23,9 +25,9 @@ public class Tasklist implements Iterable<Task> {
     }
 
     /**
-     * Adds a new Task to the task list.
+     * Adds a new blarb.Task to the task list.
      *
-     * @param task Task to be added.
+     * @param task blarb.Task to be added.
      */
     public String add(Task task) {
         String addTask = "Affirmative. I've added this task:\n %s\n"

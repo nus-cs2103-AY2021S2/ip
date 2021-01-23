@@ -1,4 +1,6 @@
-public class CommandLine {
+package blarb;
+
+class CommandLine {
     final Command command;
     final String description;
 

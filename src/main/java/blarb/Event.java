@@ -1,13 +1,15 @@
+package blarb;
+
 /**
- * {@code Event} is a {@code Task} that has a specific time of occurrence.
+ * {@code blarb.Event} is a {@code blarb.Task} that has a specific time of occurrence.
  *
  * @see Task
  */
-public class Event extends Task {
+class Event extends Task {
     private final String at;
 
     /**
-     * Constructs a new uncompleted {@code Event}.
+     * Constructs a new uncompleted {@code blarb.Event}.
      *
      * @param description The name of the task.
      */
@@ -17,7 +19,7 @@ public class Event extends Task {
     }
 
     /**
-     * Converts {@code Deadline} into string format to be stored in file.
+     * Converts {@code blarb.Deadline} into string format to be stored in file.
      *
      * @return String format to be stored in file.
      */
@@ -26,9 +28,9 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of the Event.
+     * String representation of the blarb.Event.
      *
-     * @return Event in check list form.
+     * @return blarb.Event in check list form.
      */
     @Override
     public String toString() {

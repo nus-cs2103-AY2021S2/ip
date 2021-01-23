@@ -1,6 +1,8 @@
+package blarb;
+
 import java.util.Scanner;
 
-public class Ui {
+class Ui {
     private final Scanner sc;
     private final boolean active;
 

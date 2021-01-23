@@ -1,12 +1,14 @@
+package blarb;
+
 /**
- * {@code Task} contains an action and its completion status.
+ * {@code blarb.Task} contains an action and its completion status.
  */
-public class Task {
+class Task {
     private final String description;
     private boolean isDone;
 
     /**
-     * Constructs a new uncompleted  {@code Task}.
+     * Constructs a new uncompleted  {@code blarb.Task}.
      *
      * @param description The name of the task.
      */
@@ -27,7 +29,7 @@ public class Task {
     }
 
     /**
-     * Converts {@code Task} into string format to be stored in file.
+     * Converts {@code blarb.Task} into string format to be stored in file.
      *
      * @return String format to be stored in file.
      */
@@ -36,9 +38,9 @@ public class Task {
     }
 
     /**
-     * String representation of the Task.
+     * String representation of the blarb.Task.
      *
-     * @return Task in check list form.
+     * @return blarb.Task in check list form.
      */
     @Override
     public String toString() {

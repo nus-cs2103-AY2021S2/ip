@@ -1,9 +1,11 @@
+package blarb;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
 /**
- * {@code Blarb} is the chat bot in used in the {@code Main} program.
+ * {@code blarb.Blarb} is the chat bot in used in the {@code Main} program.
  */
 public class Blarb {
     private final Tasklist tasklist;
@@ -12,7 +14,7 @@ public class Blarb {
     private final Storage storage;
 
     /**
-     * Initializes Blarb.
+     * Initializes blarb.Blarb.
      */
     public Blarb(String filePath) {
         this.filePath = filePath;
@@ -121,7 +123,7 @@ public class Blarb {
                 } catch (ArrayIndexOutOfBoundsException ex) {
                     ui.blurt("Type the deadline, then give the time using \"/by\".");
                 } catch (DateTimeParseException ex) {
-                    ui.blurt("Deadline time must be in the format of yyyy-mm-dd.");
+                    ui.blurt("blarb.Deadline time must be in the format of yyyy-mm-dd.");
                 }
             } catch (ArrayIndexOutOfBoundsException ex) {
                 ui.blurt("Someone's having trouble with deadlines.");
