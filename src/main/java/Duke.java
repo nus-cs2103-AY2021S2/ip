@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Duke {
 
     private static List<Task> list;
+    private static TaskStorage storage;
 
     /**
      * An application that serves as a to-do list.
@@ -13,7 +14,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        list = new ArrayList<>();
+        storage = new TaskStorage();
+        list = storage.retrieveData();
         System.out.println("POWERED BY JARVIS\n");
         greet();
         String userInput = "";
@@ -50,6 +52,7 @@ public class Duke {
                 default:
                     handleInvalidCommand();
             }
+            storage.storeData(list);
         }
         exit();
     }
