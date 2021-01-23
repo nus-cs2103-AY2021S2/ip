@@ -7,13 +7,19 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class FileHandler {
-    public List<Task> readFile(String pathname) {
+public class Storage {
+    private final String filePath;
+
+    Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public TaskList readFile() {
         List<Task> taskList = new ArrayList<>();
         try {
-            File file = new File(pathname);
+            File file = new File(filePath);
             if (!file.createNewFile()) {
-                File myObj = new File(pathname);
+                File myObj = new File(filePath);
                 Scanner myReader = new Scanner(myObj);
                 while (myReader.hasNextLine()) {
                     String[] data = myReader.nextLine().split(" \\| ");
@@ -31,7 +37,7 @@ public class FileHandler {
                             taskList.add(new Event(data[2], TaskType.EVENT, LocalDate.parse(data[3]), data[1].equals("1")));
                             break;
                         default:
-                            return taskList;
+                            return new TaskList(taskList);
                     }
 
                 }
@@ -42,11 +48,11 @@ public class FileHandler {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        System.out.println("\t  Your tasks from previous session has been successfully loaded.");
-        return taskList;
+        System.out.println("(Your tasks from previous session has been successfully loaded.)");
+        return new TaskList(taskList);
     }
 
-    public String updateFile(List<Task> taskList, String pathname) {
+    public void updateFile(List<Task> taskList) {
         String updatedString = "";
         for (Task t : taskList) {
             updatedString += t.getType();
@@ -64,12 +70,12 @@ public class FileHandler {
             updatedString += "\n";
         }
         try {
-            FileWriter file = new FileWriter(pathname);
+            FileWriter file = new FileWriter(filePath);
             file.write(updatedString);
             file.close();
-            return "\t  Your tasks are successfully saved to the file.\n";
+            System.out.println("(Your tasks are successfully saved to the file.)\n");
         } catch (IOException e) {
-            return "\t  Your tasks fail to saved to the file.\n";
+            System.out.println("(Your tasks fail to saved to the file.)\n");
         }
 
     }

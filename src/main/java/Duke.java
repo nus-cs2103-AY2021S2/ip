@@ -1,18 +1,23 @@
 public class Duke {
-    static String horizontalLine = "\t--------------------------------\n";
+    private final Ui ui;
+    private final Storage storage;
+    private final Chatbot chatbot;
+
+    Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        chatbot = new Chatbot(storage.readFile());
+    }
 
     public static void main(String[] args) {
-        FileHandler fileHandler = new FileHandler();
-        String greeting = "\t  Hello! I'm Duke\n" + "\t  What can I do for you?\n";
-        String byeMessage = "\t  Bye. Hope to see you again soon!\n";
+        new Duke("./data.txt").execute();
+    }
 
-        System.out.print(horizontalLine + greeting);
-        Chatbot chatbot = new Chatbot(fileHandler.readFile("./data.txt"));
-        System.out.println(horizontalLine);
+    public void execute() {
+        ui.welcome();
         chatbot.execute();
-        String saveMessage = fileHandler.updateFile(chatbot.getTaskList(), "./data.txt");
-        System.out.println(horizontalLine + saveMessage + byeMessage + horizontalLine);
-
+        ui.welfare();
+        storage.updateFile(chatbot.getTaskList());
     }
 
 }

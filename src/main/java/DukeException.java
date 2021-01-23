@@ -6,7 +6,6 @@ public class DukeException extends Exception {
     }
 
     public String toString() {
-        String returnString = "\t  OOPS!!! " + errorMessage;
-        return Duke.horizontalLine + returnString + Duke.horizontalLine + "\n";
+        return "\t  OOPS!!! " + errorMessage;
     }
 }
