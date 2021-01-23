@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Add new task in the task list.
+     *
      * @param newTask the new task to be added
      */
     public void addTask(Task newTask) {
@@ -31,6 +32,7 @@ public class TaskList {
 
     /**
      * Delete a task in the task list.
+     *
      * @param order the order of the task to be deleted
      */
     public void delete(int order) {
@@ -49,6 +51,7 @@ public class TaskList {
 
     /**
      * Mark a task in the task list as done.
+     *
      * @param order the order of the task to be marked as done
      */
     public void markDone(int order) {
@@ -88,6 +91,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Print out tasks in the given list.
+     *
+     * @param list the list given to be print out
+     */
     public void printSpecifiedTasks(List<Task> list) {
         if (list.size() == 0) {
             return;
@@ -100,6 +108,11 @@ public class TaskList {
         ui.printFormatMessage(taskString);
     }
 
+    /**
+     * Find the tasks contain target keyword, and print them out.
+     *
+     * @param target the target keyword
+     */
     public void findTask(String target) {
         try {
             if (taskList.size() == 0) {

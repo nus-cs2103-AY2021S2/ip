@@ -8,6 +8,7 @@ public class Ui {
 
     /**
      * Print the message in the Duke user interface format.
+     *
      * @param str the string to be printed out
      */
     public void printFormatMessage(String str) {

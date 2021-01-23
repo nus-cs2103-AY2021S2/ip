@@ -21,6 +21,7 @@ public class Storage {
     /**
      * Read the data of tasks from previous session's file as TaskList.
      * If there's no file yet, create an empty file, and return empty list.
+     *
      * @return the list of tasks from previous session
      */
     public TaskList readFile() {
@@ -66,6 +67,7 @@ public class Storage {
 
     /**
      * Update the file with newest task data, write the updated tasks into the file.
+     *
      * @param taskList the updated task list
      */
     public void updateFile(TaskList taskList) {
