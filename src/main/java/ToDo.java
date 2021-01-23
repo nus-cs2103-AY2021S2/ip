@@ -6,11 +6,10 @@ public class ToDo extends Task {
 
     /**
      * Constructor for ToDo class.
-     * @param id id of task
      * @param taskName name of task
      * @param status task completion status
      */
-    public ToDo(int id, String taskName, String status) {
-        super(id, taskName, status, "T");
+    public ToDo(String taskName, String status) {
+        super(taskName, status, "TODO");
     }
 }

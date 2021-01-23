@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public static Scanner sc = new Scanner(System.in);
-
     /**
      * Greets the user upon program launch.
      */
@@ -16,19 +14,35 @@ public class Ui {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
     }
 
+    /**
+     * Prints line divider between commands for clarity.
+     */
     public static void showDivider() {
         System.out.println("------------------------------------");
     }
 
-    public static void showSuccess() {
-
+    /**
+     * Prints information to the user
+     * @param info information to print
+     */
+    public static void showInfo(String info) {
+        System.out.println(info);
     }
 
-    public static void showError() {
-
+    /**
+     * Prints error message to the yser
+     * @param msg error message to print
+     */
+    public static void showError(String msg) {
+        System.out.println("Error: " + msg);
     }
 
-    public static String readCommand() {
+    /**
+     * Read and return input from the user.
+     * @param sc scanner to read next line
+     * @return input from user
+     */
+    public static String readCommand(Scanner sc) {
         return sc.nextLine();
     }
 }

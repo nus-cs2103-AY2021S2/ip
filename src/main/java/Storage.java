@@ -10,23 +10,29 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Storage class handles the saving/loading of tasks from hard disk.
+ */
 public class Storage {
 
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static JSONArray taskList = new JSONArray();
 
-    //Solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
+    //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
+    /**
+     * Loads saved tasks from hard disk.
+     */
     @SuppressWarnings("unchecked")
-    public static ArrayList<Task> loadData() {
+    public static ArrayList<Task> loadTasks() {
 
         File tasksFile = new File("./data/tasks.json");
         if (!tasksFile.exists()) {
             try {
                 if (!tasksFile.createNewFile()) {
-                    throw new DukeException("Error");
+                    throw new DukeException("Unable to generate task file.");
                 }
             } catch (IOException | DukeException e) {
-                System.out.println("Error");
+                System.out.println("IO Operation failed.");
             }
         }
 
@@ -35,11 +41,10 @@ public class Storage {
 
         try (FileReader reader = new FileReader("./data/tasks.json"))
         {
-            //Read JSON file
+            //read JSON file
             Object obj = jsonParser.parse(reader);
 
             taskList = (JSONArray) obj;
-            System.out.println(taskList);
 
             //load each task
             taskList.forEach( emp -> parseTaskGroup( (JSONObject) emp ) );
@@ -51,11 +56,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Retrieve individual task information and repopulate them into taskList.
+     * @param task task to retrieve information for
+     */
     private static void parseTaskGroup(JSONObject task)
     {
         JSONObject taskDetails = (JSONObject) task.get("task");
-
-        int id = Integer.parseInt((String) taskDetails.get("id"));
 
         String taskName = (String) taskDetails.get("taskName");
 
@@ -63,23 +70,31 @@ public class Storage {
 
         String type = (String) taskDetails.get("type");
 
-        if (type.equals("T")) {
-            tasks.add(new ToDo(id, taskName, status));
-        } else if (type.equals("D")) {
+        if (type.equals("TODO")) {
+            tasks.add(new ToDo(taskName, status));
+        } else if (type.equals("DEADLINE")) {
             String endDate = (String) taskDetails.get("endDate");
-            tasks.add(new Deadline(id, taskName, status, LocalDate.parse(endDate)));
+            tasks.add(new Deadline(taskName, status, LocalDate.parse(endDate)));
         } else {
             String startEndDate = (String) taskDetails.get("startEndDate");
-            tasks.add(new Event(id, taskName, status, LocalDate.parse(startEndDate)));
+            tasks.add(new Event(taskName, status, LocalDate.parse(startEndDate)));
         }
     }
 
-    //Solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
+    //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
+    /**
+     * Saves task into hard disk.
+     * @param index index of task being saved
+     * @param saveType type of save operation (new task, modify existing task or deleting task)
+     * @param taskName name of task
+     * @param status status of task (incomplete or complete)
+     * @param type type of task (todo, deadline or event)
+     * @param dueDate due date for task (null for todo)
+     */
     @SuppressWarnings("unchecked")
-    public static void saveData(String id, String taskName, String status, String type, LocalDate dueDate) {
+    public static void saveTask(int index, String saveType, String taskName, String status, String type, LocalDate dueDate) {
 
         JSONObject taskDetails = new JSONObject();
-        taskDetails.put("id", id);
         taskDetails.put("taskName", taskName);
         taskDetails.put("status", status);
         taskDetails.put("type", type);
@@ -87,9 +102,9 @@ public class Storage {
         //convert datetime to string
         if (dueDate != null) {
             String dueDateStr = dueDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            if (type.equals("D")) {
+            if (type.equals("DEADLINE")) {
                 taskDetails.put("endDate", dueDateStr);
-            } else if (type.equals("E")) {
+            } else if (type.equals("EVENT")) {
                 taskDetails.put("startEndDate", dueDateStr);
             }
         }
@@ -97,10 +112,16 @@ public class Storage {
         JSONObject taskGroup = new JSONObject();
         taskGroup.put("task", taskDetails);
 
-        //Add each task to list
-        taskList.add(taskGroup);
+        //add each task to list
+        if (saveType.equals("NEW")) {
+            taskList.add(taskGroup);
+        } else if (saveType.equals("DONE")) {
+            taskList.set(index, taskGroup);
+        } else {
+            taskList.remove(index);
+        }
 
-        //Write JSON file
+        //write JSON file
         try (FileWriter file = new FileWriter("./data/tasks.json")) {
 
             file.write(taskList.toJSONString());

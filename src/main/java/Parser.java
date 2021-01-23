@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.LocalDate;
 
 /**
- * The Command class handles the logic of all allowed user commands for Duke.
+ * The Parser class parses user input before calling the appropriate command classes for execution.
  */
 public class Parser {
 
@@ -23,7 +22,7 @@ public class Parser {
     private final static HashMap<String, String> cmdInfo = new HashMap<>();
 
     /**
-     * Constructor for Command class that initialises all valid commands.
+     * Constructor for Parser class that initialises all valid commands.
      */
     public Parser() {
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
@@ -39,181 +38,126 @@ public class Parser {
     /**
      * Parses input from user to determine action to take.
      * @param input input provided by user
-     * @param tasks list of tasks entered by user
      */
-    public void parseInput(String input, ArrayList<Task> tasks) {
+    public void parseInput(String input) {
+
         //program exits on bye
         if (input.toUpperCase().equals(Cmd.BYE.toString())) {
-            exit();
-            //program shows entered tasks on list
+            ByeCommand.execute();
+
+        //program shows entered tasks on list
         } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
-            list(tasks);
-            //program marks task as complete on done
+            ListCommand.execute();
+
+        //program marks task as complete on done
         } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
-            done(input, tasks);
-            //program removes task on delete
+            int index = parseIndex("done", input);
+            if (index != -1) {
+                DoneCommand.execute(index);
+            }
+
+        //program removes task on delete
         } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
-            delete(input, tasks);
-            //program list help commands
+            int index = parseIndex("delete", input);
+            if (index != -1) {
+                DeleteCommand.execute(index);
+            }
+
+        //program list help commands
         } else if (input.toUpperCase().equals(Cmd.HELP.toString())) {
-            help();
-            //program tries to add task otherwise
+            HelpCommand.execute(cmdInfo);
+
+        //program adds task on todo, deadline or event
+        } else if (input.toUpperCase().startsWith(Cmd.TODO.toString())
+        || input.toUpperCase().startsWith(Cmd.DEADLINE.toString())
+        || input.toUpperCase().startsWith(Cmd.EVENT.toString())
+        ) {
+            String taskType = parseTaskType(input);
+            String taskName = parseTaskName(input);
+            LocalDate taskDate = parseTaskDate(input);
+            AddCommand.execute(taskType, taskName, taskDate);
+
+        //program informs user of invalid input
         } else {
-            add(input, tasks);
+            Ui.showError("Invalid instruction, type 'help' for more options.");
         }
     }
 
     /**
-     * Exits the program.
+     * Parses index from user for done and delete command.
+     * @param cmd cmd from user (done or delete)
+     * @param input input provided by user
      */
-    public void exit() {
-        System.out.println("Bye! See you later :D");
-        System.exit(0);
+    public static int parseIndex(String cmd, String input) {
+        String[] parsedString = input.split("\\s+");
+
+        try {
+            return Integer.parseInt(parsedString[1]) - 1;
+        } catch (IndexOutOfBoundsException e) {
+            if (cmd.equals("done")) {
+                Ui.showError("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
+            } else {
+                Ui.showError("Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
+            }
+            return -1;
+        } catch (NumberFormatException e) {
+            if (cmd.equals("done")) {
+                Ui.showError("Specify a valid task index to mark as done!");
+            } else {
+                Ui.showError("Specify a valid task index to delete!");
+            }
+            return -1;
+        }
     }
 
     /**
-     * Parses, adds and prints the input from user as task.
+     * Parses task type from user input
      * @param input input provided by user
-      * @param tasks list of tasks entered by user
      */
-    public void add(String input, ArrayList<Task> tasks) {
+    public static String parseTaskType(String input) {
         //split input on first space to retrieve task type
         String[] parsedString = input.split("\\s+", 2);
-        Task task;
-        String taskType;
-        String taskDetails;
+        return parsedString[0];
+    }
 
-        //attempt to create a task, inform user if input is invalid
-        try {
-            taskType = parsedString[0];
-            if (!taskType.toUpperCase().equals(Cmd.TODO.toString())
-                && !taskType.toUpperCase().equals(Cmd.DEADLINE.toString())
-                && !taskType.toUpperCase().equals(Cmd.EVENT.toString()))
-            {
-                throw new DukeException("Invalid action, type 'help' for more options");
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-
+    /**
+     * Parses task name from user input
+     * @param input input provided by user
+     */
+    public static String parseTaskName(String input) {
+        String[] parsedString = input.split("\\s+", 2);
+        String taskType = parsedString[0];
+        String taskDetails = parsedString[1];
         String taskName;
-        String[] parsedTaskDetails;
 
-        try {
-            taskDetails = parsedString[1];
-            switch (Cmd.valueOf(taskType.toUpperCase())) {
-                case TODO:
-                    taskName = taskDetails.trim();
-                    task = new ToDo(Task.numTasks + 1, taskName, "incomplete");
-                    Storage.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), null);
-                    break;
-                case DEADLINE:
-                    parsedTaskDetails = taskDetails.split("/by");
-                    taskName = parsedTaskDetails[0].trim();
-                    String endDate = parsedTaskDetails[1].trim();
-                    task = new Deadline(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(endDate));
-                    Storage.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(endDate));
-                    break;
-                case EVENT:
-                    parsedTaskDetails = taskDetails.split("/at");
-                    taskName = parsedTaskDetails[0].trim();
-                    String startEndDate = parsedTaskDetails[1].trim();
-                    task = new Event(Task.numTasks + 1, taskName, "incomplete", LocalDate.parse(startEndDate));
-                    Storage.saveData(String.valueOf(task.getId()), task.getTaskName(), task.getStatus(), task.getType(), LocalDate.parse(startEndDate));
-                    break;
-                default:
-                    throw new IndexOutOfBoundsException();
-            }
-            tasks.add(task);
-            System.out.print("Got it! I have added this task:\n" + task + "\nYou have " + Task.numTasks + " task(s) now!\n");
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for " + taskType + ": " + cmdInfo.get(taskType.toUpperCase()));
-        }
-    }
-
-    /**
-     * List all tasks entered by user.
-     * @param tasks list of tasks entered by user
-     */
-    public void list(ArrayList<Task> tasks) {
-        if (tasks.size() == 0) {
-            System.out.println("You have no task at the moment!");
+        if (taskType.toUpperCase().equals(Cmd.TODO.toString())) {
+            taskName = taskDetails.trim();
+        } else if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
+            taskName = taskDetails.split("/by", 2)[0].trim();
         } else {
-            for (int i = 1; i <= tasks.size(); i++) {
-                Task task = tasks.get(i - 1);
-                System.out.println(i + "." + task);
-            }
+            taskName = taskDetails.split("/at", 2)[0].trim();
         }
+
+        return taskName;
     }
 
     /**
-     * Checks and marks given task as done and informs user of success/failure.
+     * Parses task due date from user input
      * @param input input provided by user
-     * @param tasks list of tasks entered by user
      */
-    public void done(String input, ArrayList<Task> tasks) {
-        String[] parsedString = input.split("\\s+");
-        int taskId;
+    public static LocalDate parseTaskDate(String input) {
+        String[] parsedString = input.split("\\s+", 2);
+        String taskType = parsedString[0];
+        String taskDetails = parsedString[1];
+        LocalDate taskDate;
 
-        try {
-            taskId = Integer.parseInt(parsedString[1]);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
-            return;
-        } catch (NumberFormatException e) {
-            System.out.println("Specify a valid task number to mark as complete!");
-            return;
+        if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
+            taskDate = LocalDate.parse(taskDetails.split("/by", 2)[1].trim());
+        } else if (taskType.toUpperCase().equals(Cmd.EVENT.toString())) {
+            taskDate = LocalDate.parse(taskDetails.split("/at", 2)[1].trim());
+        } else {
+            taskDate = null;
         }
-
-        try {
-            Task task = tasks.get(taskId - 1);
-            if (task.getStatus().equals("complete")) {
-                System.out.println("Task is already completed!");
-            } else {
-                task.markCompleted();
-                System.out.println("Yay your task is done! :D");
-            }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("The specified task index does not exist!");
-        }
-    }
-
-    /**
-     * Deletes given task as done and informs user of success/failure.
-     * @param input input provided by user
-     * @param tasks list of tasks entered by user
-     */
-    public void delete(String input, ArrayList<Task> tasks) {
-        String[] parsedString = input.split("\\s+");
-        int taskId;
-
-        try {
-            taskId = Integer.parseInt(parsedString[1]);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
-            return;
-        } catch (NumberFormatException e) {
-            System.out.println("Specify a valid task number to delete!");
-            return;
-        }
-
-        try {
-            Task task = tasks.get(taskId - 1);
-            tasks.remove(task);
-            System.out.println("The following task has been deleted:\n" + task);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("The specified task index does not exist!");
-        }
-    }
-
-    /**
-     * List all available command usage and descriptions.
-     */
-    public void help() {
-        System.out.println("The available commands are as listed below:");
-        for (String info : cmdInfo.values()) {
-            System.out.println(info);
-        }
+        return taskDate;
     }
 }

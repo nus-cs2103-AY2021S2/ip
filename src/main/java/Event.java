@@ -10,14 +10,18 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class.
-     * @param id id of task
      * @param taskName name of task
      * @param status task completion status
      * @param startEndDate start to end datetime for given task
      */
-    public Event(int id, String taskName, String status, LocalDate startEndDate) {
-        super(id, taskName, status, "E");
+    public Event(String taskName, String status, LocalDate startEndDate) {
+        super(taskName, status, "EVENT");
         this.startEndDate = startEndDate;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return this.startEndDate;
     }
 
     @Override

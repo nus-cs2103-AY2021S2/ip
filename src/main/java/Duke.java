@@ -1,13 +1,9 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * Duke is a project that eventually builds into a personal assistant chat bot.
  */
 public class Duke {
-
-    //tracks all tasks
-    public static ArrayList<Task> tasks = Storage.loadData();
 
     /**
      * Entry point of the program, first greets then listens for input from user.
@@ -22,7 +18,7 @@ public class Duke {
 
     /**
      * Listens for input from the user.
-     * @param parser command class that handles parsing of input
+     * @param parser class that handles parsing of input
      */
     public static void listenInput(Parser parser) {
         Scanner sc = new Scanner(System.in);
@@ -31,8 +27,9 @@ public class Duke {
         while (sc.hasNextLine()) {
             Ui.showDivider();
 
-            String input = Ui.readCommand();
-            parser.parseInput(input, tasks);
+            String input = Ui.readCommand(sc);
+
+            parser.parseInput(input);
 
             Ui.showDivider();
         }
