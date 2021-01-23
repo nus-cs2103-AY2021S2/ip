@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Handles logic of SurrealChat.
+ */
 public class SurrealChat {
     public static final String TASK_FILE_PATH = "tasks.txt";
     public UserInput userInput;
@@ -26,6 +29,12 @@ public class SurrealChat {
         this.userOutput = userOutput;
     }
 
+    /**
+     * Creates new SurrealChat instance.
+     * @param filePath Path of file for save/load.
+     * @param verboseFlag Flag to determine whether to print verbose output.
+     * @return SurrealChat instance.
+     */
     public static SurrealChat initSurrealChat(File filePath, boolean verboseFlag) {
         UserInput userInput = new UserInput(new Scanner(System.in));
         TaskParser taskParser = new TaskParser();
