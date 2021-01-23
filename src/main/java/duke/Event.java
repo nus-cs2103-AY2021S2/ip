@@ -1,16 +1,22 @@
 package duke;
 
-public class Event extends Task {
-    public String date;
+import java.time.LocalDateTime;
 
-    Event(String description, String date) {
+public class Event extends Task {
+    public LocalDateTime date;
+
+    public Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;
         isDone = false;
     }
     @Override
     public String getDate() {
-        return " (at: " + date + ")";
+        return " (at: "
+                + date.getDayOfMonth() + " "
+                + date.getMonth().toString().substring(0, 3) + " "
+                + date.getYear() + ", " + date.getHour() + ":"
+                + date.getMinute() + ")";
     }
 
     @Override

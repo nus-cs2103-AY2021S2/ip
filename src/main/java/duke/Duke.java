@@ -2,6 +2,9 @@ package duke;
 
 import static duke.Display.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,29 +38,29 @@ public class Duke {
 
     private static void addDeadline(String desc) throws DukeException {
         String[] args = desc.split(" /by ", 2);
-        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()){
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
             throw new DukeException("Looks like your order isn't complete...");
         }
         try {
-            Task task = new Deadline(args[0], args[1]);
+            Task task = new Deadline(args[0], convertStringToDate(args[1]));
             tasks.add(task);
             displayAddedTask(task);
         } catch (Exception e) {
-            throw new DukeException("It seems like your order isn't complete...");
+            throw new DukeException(e.getMessage());
         }
     }
 
     private static void addEvent(String desc) throws DukeException {
         String[] args = desc.split(" /at ", 2);
-        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()){
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
             throw new DukeException("Looks like your order isn't complete...");
         }
         try {
-            Task task = new Event(args[0], args[1]);
+            Task task = new Event(args[0], convertStringToDate(args[1]));
             tasks.add(task);
             displayAddedTask(task);
         } catch (Exception e) {
-            throw new DukeException("It seems like your order isn't complete...");
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -123,6 +126,17 @@ public class Duke {
             } catch (DukeException e) {
                 displayError(e.getMessage());
             }
+        }
+    }
+
+    private static LocalDateTime convertStringToDate(String date) throws DukeException {
+        // assume that date is in dd/mm/yyyy
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            return LocalDateTime.parse(date, formatter);
+        } catch (Exception e) {
+            throw new DukeException("There was something wrong with the format of your date and/or time!\n" +
+                    "Make sure it's in the format <dd/MM/yyyy HHmm>!");
         }
     }
 

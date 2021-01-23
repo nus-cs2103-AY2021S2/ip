@@ -46,9 +46,9 @@ public class Display {
                     "If you would like to add a TODO, type\n" +
                     "    todo <orderName>\n\n" +
                     "If you would like to add a DEADLINE, type\n" +
-                    "    deadline <orderName> /by <date/time>\n\n" +
+                    "    deadline <orderName> /by <dd/MM/yyyy HHmm>\n\n" +
                     "If you would like to add an EVENT, type\n" +
-                    "    event <orderName> /at <date/time>\n\n");
+                    "    event <orderName> /at <dd/MM/yyyy HHmm>\n\n");
         } else {
             sb.append("Here's what you've ordered so far:\n\n");
             for (int i = 1; i <= tasks.size(); i++) {
