@@ -3,8 +3,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.List;
-import java.util.Arrays;
 
 import java.util.Scanner;
 
@@ -57,16 +59,21 @@ public class DataManager {
                 addToTasks(tasks, todo, taskStringArr[1]);
                 break;
             case "D":
-                Deadline deadline = new Deadline(taskStringArr[2], taskStringArr[3]);
+                Deadline deadline = new Deadline(taskStringArr[2], parseDateTime(taskStringArr[3]));
                 addToTasks(tasks, deadline, taskStringArr[1]);
                 break;
             case "E":
-                Event event = new Event(taskStringArr[2], taskStringArr[3]);
+                Event event = new Event(taskStringArr[2], parseDateTime(taskStringArr[3]));
                 addToTasks(tasks, event, taskStringArr[1]);
                 break;
             default:
                 break;
         }
+    }
+
+    public static LocalDateTime parseDateTime(String dateTimeString) {
+        DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
     }
 
     public void addToTasks(List<Task> tasks, Task task, String status) {

@@ -17,7 +17,7 @@ public class Event extends Task {
     @Override
     public String toSaveFormat() {
         return "E | " + (isDone ? "1" : "0") +
-                " | " + description + " | " + at;
+                " | " + description + " | " + parseDate();
     }
 
     @Override
