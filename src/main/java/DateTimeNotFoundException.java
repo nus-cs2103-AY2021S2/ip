@@ -1,7 +1,9 @@
-public class DateTimeNotFoundException extends Exception {
+//public class DateTimeNotFoundException extends Exception {
+public class DateTimeNotFoundException extends DukeException {
     public DateTimeNotFoundException() {
-        super("Please enter the date (DD/MM/YYYY) with optional time (in 24 hours format)"
-                + "after \"/by\" for Deadline Tasks"
-                + "or date with optional start and end time after \"/at\" for Event Tasks.");
+        super("\tPlease enter the date (DD/MM/YYYY) with optional\n"
+                + "\ttime (in 24 hours format) after \"/by\" for Deadline Tasks\n"
+                + "\tor date with optional start and end time after \"/at\"\n"
+                + "\tfor Event Tasks.\n");
     }
 }
