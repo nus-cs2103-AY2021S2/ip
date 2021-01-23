@@ -4,11 +4,9 @@ import java.util.Scanner;
 
 class Ui {
     private final Scanner sc;
-    private final boolean active;
 
     Ui() {
         sc = new Scanner(System.in);
-        active = true;
     }
 
     public String read() {
@@ -16,7 +14,7 @@ class Ui {
     }
 
     public boolean isAvailable() {
-        return active && sc.hasNextLine();
+        return sc.hasNextLine();
     }
 
     public void rollCredits() {
