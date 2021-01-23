@@ -1,3 +1,6 @@
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +15,11 @@ public class UserInput {
         this.sc = sc;
     }
 
+    public UserInput(Scanner sc, List<Task> initialisedStorage) {
+        this.newStorage = initialisedStorage;
+        this.sc = sc;
+    }
+
     public void executeInput() {
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine();
@@ -21,13 +29,14 @@ public class UserInput {
                 String[] inputBreakdown = userInput.split(" ");
                 if (inputBreakdown[0].equals("bye")) {
                     indentInput("Bye. Hope to see you again!");
+                    updateHardDrive();
                     break;
                 } else if (inputBreakdown[0].equals("list")) {
                     System.out.println("Here are the tasks in your list:");
                     for (int i = 0; i < this.newStorage.size(); i++) {
                         printTask(i, this.newStorage.get(i));
                     }
-                } else if (inputBreakdown[0].equals("done") && Integer.valueOf(inputBreakdown[1]) > 0 && Integer.valueOf(inputBreakdown[1]) <= this.newStorage.size() + 1) {
+                } else if (inputBreakdown[0].equals("done")) {
                     System.out.println("Nice! I've marked this task as done:");
                     int selectedIndex = Integer.valueOf(inputBreakdown[1]) - 1;
                     this.newStorage.get(selectedIndex).setDone(true);
@@ -85,6 +94,43 @@ public class UserInput {
         printTaskWithNoNum(task);
         System.out.println("Now you have " + this.newStorage.size() + " tasks in the list.");
     }
+
+    private void updateHardDrive() {
+        try {
+            Files.delete(Paths.get("./data/duke.txt"));
+            FileInput fileInput = new FileInput();
+            fileInput.loadFile("./data", "./data/duke.txt");
+            FileWriter fileWriter = new FileWriter("./data/duke.txt");
+            for (int i = 0; i < this.newStorage.size(); i++) {
+                fileWriter.write(printInHardDrive(this.newStorage.get(i)));
+            }
+            fileWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private String printInHardDrive(Task task) {
+        if (task.getDate() != null) {
+            if (task.getDone()) {
+                return task.getType() + " | 1 | " + task.getDescription() + " | " + task.getDate() + "\n";
+            } else {
+                return task.getType() + " | 0 | " + task.getDescription() + " | " + task.getDate() + "\n";
+            }
+        } else {
+            if (task.getDone()) {
+                return task.getType() + " | 1 | " + task.getDescription() + "\n";
+            } else {
+                return task.getType() + " | 0 | " + task.getDescription() + "\n";
+            }
+        }
+
+
+    }
+
+
+
+
 
     public void deleteTask(String userInput) {
         String[] inputBreakdown = userInput.split(" ");
