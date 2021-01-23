@@ -23,11 +23,15 @@ import java.time.LocalDate;
  * <p>todo [description]
  *   - Add a todo task
  * <p>deadline [description] /by [due date]
- *   - Add a deadline task with a due date
+ *   - Add a deadline task with a due date (YYYY-MM-DD)
  * <p>event [description] /at [date]
- *   - Add a event task with a date
+ *   - Add a event task with a date (YYYY-MM-DD)
  * <p>delete [number]
  *   - Delete a task
+ * <p>save
+ *   - save checklist to "data/dukeData.txt"
+ * <p>load
+ *   - Load previously saved checklist
  */
 public class Duke {
     public static void main(String[] args) {

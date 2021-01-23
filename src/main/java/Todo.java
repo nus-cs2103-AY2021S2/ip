@@ -34,14 +34,20 @@ public class Todo extends Task {
         return String.format("[%s]%s", TYPE, super.toString());
     }
 
+    /**
+     * Export data into a standardised format.
+     */
     @Override
-    public List<String> exportData() {
+    protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description);
     }
 
-    public static Todo importData(String[] args) {
+    /**
+     * Import data from standardised format.
+     */
+    protected static Todo importData(String[] args) {
         boolean isDone = args[1].equals("1");
         return new Todo(isDone, args[2]);
     }

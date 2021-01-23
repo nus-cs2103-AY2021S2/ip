@@ -54,16 +54,22 @@ public class Event extends Task {
                 super.toString(),
                 date.format(DateTimeFormatter.ofPattern("d MMM")));
     }
-    
+
+    /**
+     * Export data into a standardised format.
+     */
     @Override
-    public List<String> exportData() {
+    protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description,
                 date.toString());
     }
 
-    public static Event importData(String[] args) {
+    /**
+     * Import data from standardised format.
+     */
+    protected static Event importData(String[] args) {
         boolean isDone = args[1].equals("1");
         return new Event(isDone, args[2], LocalDate.parse(args[3]));
     }

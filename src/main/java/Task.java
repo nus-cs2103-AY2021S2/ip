@@ -29,5 +29,8 @@ public abstract class Task {
         return String.format("[%s] %s", getStatus(), description);
     }
 
-    public abstract List<String> exportData();
+    /**
+     * Export data into a standardised format.
+     */
+    protected abstract List<String> exportData();
 }

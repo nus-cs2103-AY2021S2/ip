@@ -54,16 +54,22 @@ public class Deadline extends Task {
                 super.toString(),
                 dueDate.format(DateTimeFormatter.ofPattern("d MMM")));
     }
-    
+
+    /**
+     * Export data into a standardised format.
+     */
     @Override
-    public List<String> exportData() {
+    protected List<String> exportData() {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description,
                 dueDate.toString());
     }
 
-    public static Deadline importData(String[] args) {
+    /**
+     * Import data from standardised format.
+     */
+    protected static Deadline importData(String[] args) {
         boolean isDone = args[1].equals("1");
         return new Deadline(isDone, args[2], LocalDate.parse(args[3]));
     }
