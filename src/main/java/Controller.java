@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Controller {
     private final static String INDENT = "\t";
@@ -58,9 +60,9 @@ public class Controller {
                 break;
             }
             update();
-        } catch (DukeException e) {
-            String output = String.format(INDENT + " %s", e);
-            System.out.println(output);
+        } catch (DukeUnknownArgumentsException e) {
+            String errorMsg = String.format(INDENT + " %s", e);
+            System.out.println(errorMsg);
         }
     }
 
@@ -106,6 +108,8 @@ public class Controller {
         } catch (DukeNoDescriptionException e) {
             String output = String.format(INDENT + " %s", e);
             System.out.println(output);
+        } catch (DateTimeParseException e) {
+            System.out.println(INDENT + "Date is not input correctly.");
         }
     }
 
@@ -117,12 +121,17 @@ public class Controller {
         }
     }
 
-    private Deadline createDeadline(String task) throws DukeNoDescriptionException {
+    private Deadline createDeadline(String task) throws DukeNoDescriptionException,
+            DateTimeParseException {
         if (task.length() < 10 || task.substring(9).isBlank()) {
             throw new DukeNoDescriptionException("deadline");
         } else {
             task = task.substring(9);
-            return new Deadline(task.split("/"));
+            String[] inputs = task.split("/");
+            String description = inputs[0];
+            String deadline = inputs[1].substring(3);
+            LocalDate deadlineDate = LocalDate.parse(deadline);
+            return new Deadline(description, deadlineDate);
         }
     }
 
@@ -131,7 +140,11 @@ public class Controller {
             throw new DukeNoDescriptionException("event");
         } else {
             task = task.substring(6);
-            return new Event(task.split("/"));
+            String[] inputs = task.split("/");
+            String description = inputs[0];
+            String eventTime = inputs[1].substring(3);
+            LocalDate eventTimeDate = LocalDate.parse(eventTime);
+            return new Event(description, eventTimeDate);
         }
     }
 

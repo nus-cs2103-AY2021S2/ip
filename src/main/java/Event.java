@@ -1,9 +1,11 @@
-public class Event extends Task {
-    private final String eventTime;
+import java.time.LocalDate;
 
-    public Event(String[] input) {
-        super(input[0]);
-        eventTime = input[1].substring(3);
+public class Event extends Task {
+    private final LocalDate eventTime;
+
+    public Event(String description, LocalDate eventTime) {
+        super(description);
+        this.eventTime = eventTime;
     }
 
     @Override
@@ -13,6 +15,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), eventTime);
+        return String.format("[E]%s (at: %s)", super.toString(), Parser.localDateToString(eventTime));
     }
 }
