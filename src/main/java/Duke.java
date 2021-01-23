@@ -73,11 +73,7 @@ public class Duke {
     /**
      * Add an Event into the internal list
      * @param params Parameters of Event (Description, Date/Time range) in String form that will be processed
-<<<<<<< HEAD
-     * @throws DukeCommandException if no parameters were given or parameters were invalid
-=======
      * @throws DukeCommandException if one or more parameters are missing or date time form was not followed
->>>>>>> branch-Level-8
      */
     private static void addEvent(String params) throws DukeCommandException {
         String startEndPattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
