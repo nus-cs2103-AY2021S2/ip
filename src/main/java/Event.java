@@ -9,6 +9,10 @@ public class Event extends Task {
             throw new InvalidFormatException("Please specify both task description and date/time using /at");
     }
 
+    public String fileFormat() {
+        return "E | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " + this.date;
+    }
+
     @Override
     public String toString() {
         return "[" + super.getType() + "]" + super.toString() + " (by: " + this.date + ")";
