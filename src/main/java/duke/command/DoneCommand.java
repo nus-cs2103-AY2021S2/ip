@@ -1,13 +1,20 @@
-public class DoneCommand extends Command {
-    String command;
+package duke.command;
 
-    DoneCommand(String command) {
+import duke.DukeException;
+import duke.StringParser;
+import duke.task.Task;
+import duke.TaskList;
+
+public class DoneCommand extends Command {
+    private final String command;
+
+    public DoneCommand(String command) {
         this.command = command;
     }
 
 
     @Override
-    void executeAndPrint(TaskList list, int length) throws DukeException {
+    public void executeAndPrint(TaskList list, int length) throws DukeException {
         int index;
         index = Integer.parseInt(command.substring(5)) - 1;
         if (index < list.getSize() && index >= 0) {
@@ -22,7 +29,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

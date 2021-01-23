@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -7,24 +11,24 @@ public class TaskList {
          this.list = new ArrayList<>();
     }
 
-    void addJob(Task t) {
+    public void addJob(Task t) {
         this.list.add(t);
     }
 
-    Task getJob(int index) {
+    public Task getJob(int index) {
         return this.list.get(index);
     }
 
-    int getSize() {
+    public int getSize() {
         return this.list.size();
     }
 
-    void replaceJob(int index, Task newTask) {
+    public void replaceJob(int index, Task newTask) {
         this.list.remove(index);
         this.list.add(index, newTask);
     }
 
-    void deleteJob(int index) {
+    public void deleteJob(int index) {
         this.list.remove(index);
     }
 }

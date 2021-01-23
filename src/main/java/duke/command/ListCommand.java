@@ -1,12 +1,18 @@
-public class ListCommand extends Command {
-    TaskList list;
+package duke.command;
 
-    ListCommand(TaskList list) {
+import duke.DukeException;
+import duke.StringParser;
+import duke.TaskList;
+
+public class ListCommand extends Command {
+    private final TaskList list;
+
+    public ListCommand(TaskList list) {
         this.list = list;
     }
 
     @Override
-    void executeAndPrint(TaskList list, int length) throws DukeException {
+    public void executeAndPrint(TaskList list, int length) throws DukeException {
         StringBuilder resultStr = new StringBuilder();
         for (int i = 0; i < list.getSize(); i++) {
             resultStr.append(StringParser.newLiner((i + 1) + "."
@@ -20,7 +26,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

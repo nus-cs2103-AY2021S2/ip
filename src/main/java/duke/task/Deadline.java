@@ -1,10 +1,12 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
-    protected DateTimeFormatter formatter =
+    private final LocalDateTime by;
+    private final DateTimeFormatter formatter =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
     public Deadline(String description, LocalDateTime by) {

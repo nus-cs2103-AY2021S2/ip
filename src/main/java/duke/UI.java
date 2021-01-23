@@ -1,10 +1,14 @@
+package duke;
+
+import duke.command.Command;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
     static final int LENGTH_OF_LINE = 80;
 
-    static String welcome = " __________________________ \n"
+    private static final String welcome = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
             + "|   ____        _          |\n"
             + "|  |  _ \\ _   _| | _____   |\n"
@@ -15,7 +19,7 @@ public class UI {
             + "|  What can I do for you?  |\n"
             + "|__________________________|\n";
 
-    static String bye = " __________________________ \n"
+    private static final String bye = " __________________________ \n"
             + "|  GOOD BYE!               |\n"
             + "|   ____        _          |\n"
             + "|  |  _ \\ _   _| | _____   |\n"
@@ -26,21 +30,21 @@ public class UI {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    static String horizontalLine = StringParser.underlineGenerator(LENGTH_OF_LINE);
+    private static final String horizontalLine = StringParser.underlineGenerator(LENGTH_OF_LINE);
 
-    static Scanner sc = new Scanner(System.in);
-    static TaskList list = new TaskList();
+    private static final Scanner sc = new Scanner(System.in);
+    private static TaskList list = new TaskList();
 
-    static void printError(DukeException e) {
+    private static void printError(DukeException e) {
         System.out.print(e.getMessage() + "\n");
     }
 
-    static void loadAndSayHello() {
+    private static void loadAndSayHello() {
         list = Storage.loadToList();
         System.out.println(welcome);
     }
 
-    static void saveAndGoodBye() {
+    private static void saveAndGoodBye() {
         Storage.writeToData(list);
         System.out.println(bye);
     }
@@ -63,7 +67,7 @@ public class UI {
 
             System.out.print(horizontalLine);
             try {
-                command = StringParser.parseCommand(commandStr, list);
+                command = Parser.parseCommand(commandStr, list);
                 command.executeAndPrint(list, LENGTH_OF_LINE);
                 isExit = command.isExit();
                 if (!isExit) {

@@ -1,15 +1,26 @@
+package duke.command;
+
+import duke.CommandType;
+import duke.DukeException;
+import duke.StringParser;
+import duke.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.DateTimeException;
 
 public class AddCommand extends Command {
-    String command;
-    CommandType cmdType;
+    private final String command;
+    private final CommandType cmdType;
 
-    AddCommand(String command, CommandType cmdType) {
+    public AddCommand(String command, CommandType cmdType) {
         this.command = command;
         this.cmdType = cmdType;
     }
 
-    Task convertToTodo() throws DukeException {
+    private Task convertToTodo() throws DukeException {
         if (command.length() <= 5) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
@@ -22,7 +33,7 @@ public class AddCommand extends Command {
         }
     }
 
-    Task convertToEvent() throws DukeException {
+    private Task convertToEvent() throws DukeException {
         if (command.length() <= 9) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
@@ -43,7 +54,7 @@ public class AddCommand extends Command {
         }
     }
 
-    Task convertToDeadline() throws DukeException {
+    private Task convertToDeadline() throws DukeException {
         if (command.length() <= 6) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
@@ -66,7 +77,7 @@ public class AddCommand extends Command {
 
 
     @Override
-    void executeAndPrint(TaskList list, int length) throws DukeException {
+    public void executeAndPrint(TaskList list, int length) throws DukeException {
         Task task;
         switch (this.cmdType) {
         case TODO:
@@ -82,13 +93,13 @@ public class AddCommand extends Command {
             throw new DukeException("Unexpected value: " + this.cmdType);
         }
         list.addJob(task);
-        System.out.print("Task added:\n" + StringParser.newLiner(task.toString(), length)
+        System.out.print("Duke.Task added:\n" + StringParser.newLiner(task.toString(), length)
                 + "Now you have " + list.getSize()
                 + (list.getSize() == 1 ? " task in the list\n" : " tasks in the list\n"));
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

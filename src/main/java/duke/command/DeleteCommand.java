@@ -1,13 +1,20 @@
-public class DeleteCommand extends Command {
-    String command;
+package duke.command;
 
-    DeleteCommand(String command) {
+import duke.DukeException;
+import duke.StringParser;
+import duke.task.Task;
+import duke.TaskList;
+
+public class DeleteCommand extends Command {
+    private final String command;
+
+    public DeleteCommand(String command) {
         this.command = command;
     }
 
 
     @Override
-    void executeAndPrint(TaskList list, int length) throws DukeException {
+    public void executeAndPrint(TaskList list, int length) throws DukeException {
         int index;
         index = Integer.parseInt(command.substring(7)) - 1;
         if (index < list.getSize() && index >= 0) {
@@ -23,7 +30,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

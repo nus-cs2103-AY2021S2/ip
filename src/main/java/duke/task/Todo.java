@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -12,10 +14,6 @@ public class Todo extends Task {
     @Override
     public String getSaveType() {
         return "T";
-    }
-
-    static Todo getTodo(String description) {
-        return new Todo(description);
     }
 
     @Override
