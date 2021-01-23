@@ -1,7 +1,12 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import Exception.*;
@@ -75,6 +80,8 @@ public class UserInput {
     }
 
     public void addTask(String userInput) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("Hmm");
         Task task;
         String[] input = userInput.split(" ");
         if (input[0].equals("todo")) {
@@ -82,12 +89,18 @@ public class UserInput {
             task = new Todo(description);
         } else if (input[0].equals("deadline")) {
             String description = userInput.substring(userInput.indexOf("deadline") + 9, userInput.indexOf("/by"));
-            String deadline = userInput.substring(userInput.indexOf("/by") + 4);
-            task = new Deadline(description, deadline);
+            String deadlineDate = userInput.substring(userInput.indexOf("/by") + 4, userInput.indexOf("/by") + 14);
+            LocalDate date = LocalDate.parse(deadlineDate, formatter);
+            String deadLineTime = userInput.substring(userInput.indexOf("/by") + 15);
+            LocalTime time = LocalTime.parse(deadLineTime, timeFormatter);
+            task = new Deadline(description, date, time);
         } else {
             String description = userInput.substring(userInput.indexOf("event") + 6, userInput.indexOf("/at"));
-            String eventDate = userInput.substring(userInput.indexOf("/at") + 4);
-            task = new Event(description, eventDate);
+            String eventDate = userInput.substring(userInput.indexOf("/at") + 4, userInput.indexOf("/at") + 14);
+            LocalDate date = LocalDate.parse(eventDate, formatter);
+            String deadLineTime = userInput.substring(userInput.indexOf("/at") + 15);
+            LocalTime time = LocalTime.parse(deadLineTime, timeFormatter);
+            task = new Event(description, date, time);
         }
         newStorage.add(task);
         System.out.println("Got it. I've added this task: ");
@@ -111,11 +124,11 @@ public class UserInput {
     }
 
     private String printInHardDrive(Task task) {
-        if (task.getDate() != null) {
+        if (task.getDate() != null || task.getTime() != null) {
             if (task.getDone()) {
-                return task.getType() + " | 1 | " + task.getDescription() + " | " + task.getDate() + "\n";
+                return task.getType() + " | 1 | " + task.getOnlyDescription() + " | " + task.getDate() + " " + task.getTime() + "\n";
             } else {
-                return task.getType() + " | 0 | " + task.getDescription() + " | " + task.getDate() + "\n";
+                return task.getType() + " | 0 | " + task.getOnlyDescription() + " | " + task.getDate() + " " + task.getTime() + "\n";
             }
         } else {
             if (task.getDone()) {
