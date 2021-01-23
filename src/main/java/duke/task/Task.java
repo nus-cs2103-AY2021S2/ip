@@ -4,6 +4,11 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task with description.
+     *
+     * @param description description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -17,6 +22,10 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Marks itself done.
+     *
+     */
     public void markedAsDone() {
         this.isDone = true;
     }

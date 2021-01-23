@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
+
     @Test
     public void parseCommandForByeTest() {
         Command c = Parser.parseCommand("bye");
@@ -41,12 +42,12 @@ class ParserTest {
     }
     @Test
     public void parseDeadlineTest() {
-        Deadline deadline = Parser.parseDeadline("nothing /by 2021-01-20");
+        Deadline deadline = (Deadline) Parser.parseDescription(Command.DEADLINE, "nothing /by 2021-01-20");
         assertEquals(deadline.toString(), new Deadline("nothing ", LocalDate.parse("2021-01-20")).toString());
     }
     @Test
     public void parseEventTest() {
-        Event event = Parser.parseEvent("nothing /at 2021-01-20");
+        Event event = (Event) Parser.parseDescription(Command.EVENT, "nothing /at 2021-01-20");
         assertEquals(event.toString(), new Event("nothing ", LocalDate.parse("2021-01-20")).toString());
     }
 }

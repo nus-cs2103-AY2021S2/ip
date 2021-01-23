@@ -11,6 +11,12 @@ public class Momo {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Create a Momo with an original task list if file path exists.
+     * Create a Momo with empty task list else.
+     *
+     * @param filePath the path of the *.txt file including information of existing tasks.
+     */
     public Momo(String filePath) {
         storage = new Storage(filePath);
         try {
