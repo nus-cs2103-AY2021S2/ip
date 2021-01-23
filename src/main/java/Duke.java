@@ -15,8 +15,8 @@ public class Duke {
                         " | |  | | (__| |__| | (_) | | | | (_| | | (_| \\__ \\\n" +
                         " |_|  |_|\\___|_____/ \\___/|_| |_|\\__,_|_|\\__,_|___/\n" +
                         "                                                   \n"
-                        + "BALAPALAPA~ Welcome to McDonalds!\n"
-                        + "I'm McSpicy, the best burger ever!\n"
+                        + "Welcome to McDonalds!\n"
+                        + "I'm Ronald, the best McSpicy ever!\n"
                         + "What can I do for you today?");
     }
 
@@ -27,11 +27,17 @@ public class Duke {
     private static void display(String str) {
         int longest = 0;
         String[] strings = str.split("\n");
-        for (String s : strings) if (s.length() > longest) longest = s.length();
+        for (String s : strings) {
+            if (s.length() > longest) {
+                longest = s.length();
+            }
+        }
         String topBorder = "    ╭" + "-".repeat(longest + 2) + "╮\n";
         String botBorder = "    ╰" + "-".repeat(longest + 2) + "╯\n";
         StringBuilder mainText = new StringBuilder();
-        for (String s : strings) mainText.append("    | " + s + " ".repeat(longest - s.length() + 1) + "|\n");
+        for (String s : strings) {
+            mainText.append("    | " + s + " ".repeat(longest - s.length() + 1) + "|\n");
+        }
         System.out.println(topBorder + mainText + botBorder);
     }
 
@@ -68,7 +74,7 @@ public class Duke {
     }
 
     private static void displayRemovedTask(Task task) {
-        display("Aw man... I told Ronald that was a bad item to put on the menu.\n"
+        display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
                 "\nYou have " + tasks.size() + " order(s) left!");
     }
@@ -78,17 +84,19 @@ public class Duke {
     }
 
     private static void addTask(CommandType type, String[] command) throws DukeException {
-        if (command.length == 1) throw new DukeException("I can't add an empty menu item!");
+        if (command.length == 1) {
+            throw new DukeException("I can't add an empty menu item!");
+        }
         switch (type) {
-            case TODO:
-                addTodo(command[1]);
-                break;
-            case DEADLINE:
-                addDeadline(command[1]);
-                break;
-            case EVENT:
-                addEvent(command[1]);
-                break;
+        case TODO:
+            addTodo(command[1]);
+            break;
+        case DEADLINE:
+            addDeadline(command[1]);
+            break;
+        case EVENT:
+            addEvent(command[1]);
+            break;
         }
     }
 
@@ -100,8 +108,9 @@ public class Duke {
 
     private static void addDeadline(String desc) throws DukeException {
         String[] args = desc.split(" /by ", 2);
-        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty())
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()){
             throw new DukeException("Looks like your order isn't complete...");
+        }
         try {
             Task task = new Deadline(args[0], args[1]);
             tasks.add(task);
@@ -113,8 +122,9 @@ public class Duke {
 
     private static void addEvent(String desc) throws DukeException {
         String[] args = desc.split(" /at ", 2);
-        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty())
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()){
             throw new DukeException("Looks like your order isn't complete...");
+        }
         try {
             Task task = new Event(args[0], args[1]);
             tasks.add(task);
@@ -125,7 +135,9 @@ public class Duke {
     }
 
     private static void markDone(String[] command) throws DukeException {
-        if (command.length > 2) throw new DukeException("We can't serve more than 1 order at a time...\nTry again!");
+        if (command.length > 2) {
+            throw new DukeException("We can't serve more than 1 order at a time...\nTry again!");
+        }
         try {
             Task toMarkDone = tasks.get(Integer.parseInt(command[1]) - 1);
             toMarkDone.markDone();
@@ -155,28 +167,32 @@ public class Duke {
     public static void handleInput() {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            if (input.equals("bye")) break;
+            if (input.equals("bye")) {
+                break;
+            }
             String[] command = input.split(" ", 2);
 
             try {
                 CommandType type = getCommandType(command[0]);
                 switch (type) {
-                    case LIST:
-                        displayAllTasks();
-                        break;
-                    case DONE:
-                        markDone(command);
-                        break;
-                    case TODO:
-                    case EVENT:
-                    case DEADLINE:
-                        addTask(type, command);
-                        break;
-                    case DELETE:
-                        deleteTask(command);
-                        break;
-                    default:
-                        throw new DukeException("Hmm... That doesn't seem to be an item in our menu...\nTry again!");
+                case LIST:
+                    displayAllTasks();
+                    break;
+                case DONE:
+                    markDone(command);
+                    break;
+                case TODO:
+                    // Fallthrough
+                case EVENT:
+                    // Fallthrough
+                case DEADLINE:
+                    addTask(type, command);
+                    break;
+                case DELETE:
+                    deleteTask(command);
+                    break;
+                default:
+                    throw new DukeException("Hmm... That doesn't seem to be an item in our menu...\nTry again!");
                 }
             } catch (DukeException e) {
                 display(e.getMessage());
