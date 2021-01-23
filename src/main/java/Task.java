@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 public class Task {
     protected String description;
     protected boolean done;
     protected TaskEnum type;
-    protected String date;
+    protected LocalDate date;
+    protected LocalTime time;
 
     public Task() {
 
@@ -14,6 +19,10 @@ public class Task {
     }
 
     public String getDescription() {
+        return this.description;
+    }
+
+    protected String getOnlyDescription() {
         return this.description;
     }
 
@@ -41,11 +50,19 @@ public class Task {
         this.type = type;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

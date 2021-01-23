@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,17 +64,26 @@ public class FileInput {
 
     }
 
-    private Task setUpTask(String type, String done, String description, String date) {
+    private Task setUpTask(String type, String done, String description, String dateString) {
+        LocalDate date = LocalDate.of(0,1,1);
+        LocalTime time = LocalTime.of(0,0,0);
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
+        if (dateString != null) {
+            String[] dateTime = dateString.split(" ");
+            date = LocalDate.parse(dateTime[0], dateFormatter);
+            time = LocalTime.parse(dateTime[1], timeFormatter);
+        }
         Task task = new Task();
         switch(type) {
             case "T":
                 task = new Todo(description);
                 break;
             case "E":
-                task = new Event(description, date);
+                task = new Event(description, date, time);
                 break;
             case "D":
-                task = new Deadline(description, date);
+                task = new Deadline(description, date, time);
                 break;
         }
 
