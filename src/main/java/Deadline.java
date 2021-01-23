@@ -1,12 +1,15 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    private String dueDates;
+    private LocalDate dueDates;
     public Deadline(String task, String dueDates) {
         super(task);
-        this.dueDates = dueDates;
+        this.dueDates = LocalDate.parse(dueDates);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + dueDates + ")";
+        return "[D]" + super.toString() + "(by: " + dueDates.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }
