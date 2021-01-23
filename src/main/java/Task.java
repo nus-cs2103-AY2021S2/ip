@@ -1,4 +1,4 @@
-public class Task {
+public class Task{
     protected String description;
     protected boolean isCompleted;
 
@@ -12,7 +12,7 @@ public class Task {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String status = isCompleted ? "X" : "";
         return "[" + status + "] " + description;
     }

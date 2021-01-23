@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskManager{
     private ArrayList<Task> list = new ArrayList<>(100);
 
-    public void add(String type, String task) throws DukeException{
+    public void add(String type, String task) throws DukeException {
         if (type.equals("todo")) {
             list.add(new ToDo(task));
         } else {
@@ -15,24 +15,26 @@ public class TaskManager {
                 list.add(new Event(description, deadline));
             }
         }
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) + "\nNow you have " + list.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) +
+                "\nNow you have " + list.size() + " tasks in the list.");
         System.out.println("");
     }
 
-    public void delete(int taskId) throws DukeException{
-        if (taskId < list.size() && taskId >= 0) {
-            Task deletedTask = list.get(taskId);
-            list.remove(taskId);
-            System.out.println("Noted. I've removed this task:\n" + deletedTask + "\nNow you have " + list.size() + " tasks in the list.");
+    public void delete(int taskId) throws DukeException {
+        if (taskId <= list.size() && taskId >= 1) {
+            Task deletedTask = list.get(taskId - 1);
+            list.remove(taskId - 1);
+            System.out.println("Noted. I've removed this task:\n" + deletedTask +
+                    "\nNow you have " + list.size() + " tasks in the list.");
             System.out.println("");
         } else {
             throw new DukeException("Invalid task number. You only have " + list.size() + " tasks in the list.");
         }
     }
 
-    public void done(int taskId) throws DukeException{
-        if (taskId < list.size() && taskId >= 0) {
-            Task completedTask = list.get(taskId);
+    public void done(int taskId) throws DukeException {
+        if (taskId <= list.size() && taskId >= 1) {
+            Task completedTask = list.get(taskId - 1);
             completedTask.markComplete();
             System.out.println("Nice! I've marked this task as done:\n" + completedTask);
             System.out.println("");
@@ -41,7 +43,7 @@ public class TaskManager {
         }
     }
 
-    public void printList(){
+    public void printList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println((i + 1) + "." + list.get(i));
