@@ -18,31 +18,47 @@ public class Duke {
 
     static void displayAllTasks() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here's what you've ordered so far:\n");
-        for (int i = 1; i <= tasks.size(); i++) {
-            String formattedTask = i + ". " + tasks.get(i - 1).toString();
-            sb.append(formattedTask);
+        if (tasks.size() == 0) {
+            sb.append("You don't have anything on your menu at the moment!\n\n" +
+                    "If you would like to add a TODO, type\n" +
+                    "    todo <orderName>\n\n" +
+                    "If you would like to add a DEADLINE, type\n" +
+                    "    deadline <orderName> /by <date/time>\n\n" +
+                    "If you would like to add an EVENT, type\n" +
+                    "    event <orderName> /at <date/time>\n\n");
+        } else {
+            sb.append("Here's what you've ordered so far:\n\n");
+            for (int i = 1; i <= tasks.size(); i++) {
+                String formattedTask = i + ". " + tasks.get(i - 1).toString();
+                sb.append(formattedTask);
+            }
+            sb.append("\nIf you would like to remove an item from your menu, type\n" +
+                    "    delete <orderNumber>\n\n" +
+                    "If you would like to mark an order as complete, type\n" +
+                    "    done <orderNumber>");
         }
         display(sb.toString());
     }
 
     static void displayAddedTask(Task task) {
-        display("Cool! I've added the following item to your order list.\n  "
+        display("Cool! I've added the following item to your order list.\n\n    "
                 + task
-                + "You now have "
+                + "\nYou now have "
                 + tasks.size()
                 + " order(s)!");
     }
 
     static void displayRemovedTask(Task task) {
         display("Aw man... I told Ronald that was a bad item to put on the menu.\n"
-                + "Here you go, I've removed this item from your order list!\n" + task +
-                "You have " + tasks.size() + " order(s) left!");
+                + "Here you go, I've removed this item from your order list!\n\n    " + task +
+                "\nYou have " + tasks.size() + " order(s) left!");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    private static void displayDone(Task task) {
+        display("Tada! Your order has been served!\n\n  " + task);
+    }
 
+    private static void displayWelcome() {
         display(
                 "  __  __      _____                    _     _     \n" +
                         " |  \\/  |    |  __ \\                  | |   | |    \n" +
@@ -54,6 +70,15 @@ public class Duke {
                         + "BALAPALAPA~ Welcome to McDonalds!\n"
                         + "I'm McSpicy, the best burger ever!\n"
                         + "What can I do for you today?");
+    }
+
+    private static void displayFarewell() {
+        display("Thanks for patronising McDonalds!\nWe hope to see you again soon!");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        displayWelcome();
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             if (input.equals("bye")) break;
@@ -63,7 +88,7 @@ public class Duke {
                 display(e.getMessage());
             }
         }
-        display("Thanks for patronising McDonalds!\nWe hope to see you again soon!");
+        displayFarewell();
         sc.close();
     }
 
@@ -78,7 +103,7 @@ public class Duke {
             try {
                 Task toMarkDone = tasks.get(Integer.parseInt(command[1]) - 1);
                 toMarkDone.markDone();
-                display("Tada! Your order has been served:\n  " + toMarkDone);
+                displayDone(toMarkDone);
             } catch (Exception e) {
                 throw new DukeException("Oops! That doesn't seem like a valid order number...\nTry again!");
             }
