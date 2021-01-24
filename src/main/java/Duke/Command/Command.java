@@ -5,7 +5,7 @@ package Duke.Command;
  */
 public enum Command {
     LIST("list"), BYE("bye"),
-    DONE("done"), DELETE("delete"),
+    DONE("done"), DELETE("delete"), FIND("find"),
     EVENT("event"), DEADLINE("deadline"), TODO("todo");
 
     /**

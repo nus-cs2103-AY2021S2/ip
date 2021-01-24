@@ -13,6 +13,10 @@ import Duke.Helper.Storage;
 import Duke.Helper.TaskList;
 import Duke.Helper.Ui;
 
+import Duke.Exception.*;
+import Duke.Task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -77,7 +81,18 @@ public class Duke {
                 } catch (NumberFormatException | InvalidIndex e){
                     ui.printResponse(e.getMessage());
                 }
-            } else {
+            } else if (command.equalsIgnoreCase(Command.FIND.getAction())){
+                try {
+                    throw new EmptyFindContent();
+                } catch (EmptyFindContent e) {
+                    ui.printResponse(e.getMessage());
+                }
+            } else if (command.toLowerCase().startsWith(Command.FIND.getAction())){
+                String keyword = command.substring(5);
+                ArrayList<Task> filter = taskList.findTask(keyword);
+                ui.printMatchedTask(filter);
+            }
+            else {
                 try {
                     String status = taskList.addTask(command);
                     ui.printResponse(status);

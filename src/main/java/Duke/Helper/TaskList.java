@@ -20,8 +20,8 @@ import java.util.ArrayList;
  * A wrapper class that contains all available tasks.
  */
 public class TaskList {
-    private ArrayList<Task> list;
-    private Parser parser;
+    private final ArrayList<Task> list;
+    private final Parser parser;
 
     /**
      * This class constructor has 1 parameter: a list containing all available tasks.
@@ -114,5 +114,17 @@ public class TaskList {
         } else {
             throw new NoSuchCommandException();
         }
+    }
+
+    public ArrayList<Task> findTask(String keyword){
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : list){
+            String description = task.getDescription();
+            String time = task.getTime();
+            if (description.contains(keyword) || time.contains(keyword)){
+                result.add(task);
+            }
+        }
+        return result;
     }
 }
