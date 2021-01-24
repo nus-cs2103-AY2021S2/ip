@@ -1,10 +1,13 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,6 +18,9 @@ public class Duke {
         List<Task> tasks = new ArrayList<Task>();
         Scanner scan = new Scanner(System.in);
         Validation validate = new Validation();
+        Storage storage = new Storage("data/tasks.txt");
+        storage.checkFileExistence();
+        tasks = storage.loadTasks();
         int number;
 
         while (true) {
@@ -30,6 +36,7 @@ public class Duke {
                         String descriptionTask = command.substring(index + 1);
                         ToDo newToDo = new ToDo(descriptionTask);
                         tasks.add(newToDo);
+                        storage.addTask(newToDo);
                         System.out.println("Done! One new task:\n" + newToDo.toString() + "\nNow you have " +
                                 tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
                                 " in the list");
@@ -41,6 +48,7 @@ public class Duke {
                             String date = command.substring(findSlash + 4);
                             Deadline newDeadline = new Deadline(descriptionDeadline, date);
                             tasks.add(newDeadline);
+                            storage.addTask(newDeadline);
                             System.out.println("Done! One new task:\n" + newDeadline.toString() +
                                     "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
                                     " in the list");
@@ -56,6 +64,7 @@ public class Duke {
                             String time = command.substring(findSlash + 4);
                             Event newEvent = new Event(descriptionEvent, time);
                             tasks.add(newEvent);
+                            storage.addTask(newEvent);
                             System.out.println("Done! One new task:\n" + newEvent.toString() +
                                     "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
                                     " in the list");
@@ -67,13 +76,14 @@ public class Duke {
                     case "done":
                         number = Integer.parseInt(command.substring(index + 1));
                         Task toMark = tasks.get(number - 1);
-                        String response = toMark.markAsDone();
+                        String response = storage.markTask(toMark);
                         System.out.println(response);
                         break;
                     case "delete":
                         number = Integer.parseInt(command.substring(index + 1));
                         Task selected = tasks.get(number - 1);
                         tasks.remove(number - 1);
+                        storage.deleteTask(selected);
                         System.out.println("Noted, I've removed this task:\n" + selected.toString() +
                                 "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
                                         " in the list");
@@ -91,7 +101,7 @@ public class Duke {
                         break;
                     }
                 }
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println(e);
             }
             if (command.equals("bye")) {
