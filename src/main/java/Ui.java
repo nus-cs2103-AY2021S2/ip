@@ -3,9 +3,9 @@ import java.util.List;
 import java.util.Scanner;
 
 //Handle all Input and Output of Duke
-public class IO {
+public class Ui {
     private Scanner scanf;
-    public IO(){
+    public Ui(){
         scanf = new Scanner(System.in);
     }
     private static String DIVIDER = "____________________________________________________________\n";

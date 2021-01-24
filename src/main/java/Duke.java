@@ -31,27 +31,27 @@ public class Duke {
 
     private static String saveFilePath = "/data/";
     private static String saveFileName = "savedHistory.txt";
-    private static IO io;
+    private static Ui ui;
     private static Storage storage;
 
     public static void main(String[] args) {
-        io = new IO();
+        ui = new Ui();
         storage = new Storage(saveFileName, saveFilePath);
         printHelloMessage();
         boolean continueProgram = true;
         TaskList taskList = new TaskList(storage.tryReadTaskFile());
         while (continueProgram) {
-            String reply = io.readLine();
+            String reply = ui.readLine();
             Command command;
             try {
                 command = validateCommand(reply, taskList.getSize());
             } catch (CommandException e) {
-                io.printBotMessage(e.getMessage());
+                ui.printBotMessage(e.getMessage());
                 continue;
             }
             continueProgram = processCommand(taskList,command);
         }
-        io.printBotMessage("Bye. Hope to see you again soon!");
+        ui.printBotMessage("Bye. Hope to see you again soon!");
     }
 
     public static void saveHistory(TaskList task) {
@@ -59,19 +59,19 @@ public class Duke {
     }
 
     public static void printHelloMessage() {
-        io.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
+        ui.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
     }
 
     public static void printDoneMessage(Task task) {
-        io.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
+        ui.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
     }
 
     public static void printDeleteMessage(Task task, int count) {
-        io.printBotMessage("Noted. I've removed this task:\n " + task.toString()+ "\nNow you have " + count + " tasks in the list.");
+        ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()+ "\nNow you have " + count + " tasks in the list.");
     }
 
     public static void printAddedTaskMessage(Task task, int count) {
-        io.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
+        ui.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
     }
 
     //Process Command given by user
@@ -80,7 +80,7 @@ public class Duke {
             case BYE:
                 return false;
             case LIST:
-                io.printTasks(taskList);
+                ui.printTasks(taskList);
                 break;
             case DONE:
                 int doneIndex = Integer.parseInt(command.getDescription()) - 1;
