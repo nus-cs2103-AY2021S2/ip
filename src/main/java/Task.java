@@ -19,7 +19,7 @@ public class Task {
      * @return Cross if task is marked as completed, empty string if incomplete
      */
     public String getStatusIcon() {
-        return (this.isDone ?"\u2718" : " ");
+        return (this.isDone ? "\u2718" : " ");
     }
 
     /**
@@ -35,6 +35,13 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Format the task into custom format before saving into data file
+     */
+    public String formatTask() {
+        return String.format("%s | %s", this.isDone ? "1" : "0", this.description);
     }
 
     /**

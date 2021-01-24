@@ -1,9 +1,16 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.util.Scanner;
+import java.io.FileWriter;
 
 /**
  * DukeBot that manages user input, recognise and response to inputs accordingly
  * Commands that are available: list, bye, done, delete, todo, delete, event, deadline
  */
+@SuppressWarnings("ALL")
 public class DukeBot {
     private static final String BORDER = "\t___________________________________\n";
     private final ArrayList<Task> taskList = new ArrayList<>();
@@ -15,10 +22,64 @@ public class DukeBot {
      * Constructor for DukeBot class
      * Configuration for DukeBot to welcome the user
      */
-    public DukeBot() {
+    public DukeBot() throws IOException {
         this.continueInput = true;
         this.output = " Hello! I'm Duke\n" + "\t What can I do for you?";
         outputMessage(this.output);
+        loadData();
+    }
+
+    public void saveData() throws IOException {
+        String pathDirectory = System.getProperty("user.dir") + "/data";
+        String fileDirectory = pathDirectory + "/Duke.txt";
+        File dataDirectory = new File(pathDirectory);
+        File dataFile = new File(fileDirectory);
+
+        if(!(Files.isDirectory(Paths.get(pathDirectory)))) {
+            // Handles folder does not exist case
+            dataDirectory.mkdir();
+        } if(!dataFile.exists()) {
+            // Handles file does not exist
+            dataFile.createNewFile();
+        }
+        FileWriter fileWriter = new FileWriter(dataFile, false);
+        for (Task task : taskList) {
+            fileWriter.write(task.formatTask() + System.lineSeparator());
+        }
+        fileWriter.close();
+
+    }
+
+    public void loadData() throws IOException {
+        String fileDirectory = System.getProperty("user.dir");
+        System.out.println(fileDirectory);
+        File dataFile = new File(fileDirectory + "/data/Duke.txt");
+        Scanner sc = new Scanner(dataFile);
+        Task newTask = new Task("");
+
+        while (sc.hasNext()) {
+            String[] taskDetails = sc.nextLine().split("[|]");
+            String taskType = taskDetails[0];
+
+            switch (taskType) {
+            case "T":
+                newTask = new ToDo(taskDetails[2]);
+                break;
+            case "E":
+                newTask = new Event(taskDetails[2], taskDetails[3]);
+                break;
+            case "D":
+                newTask = new Deadline(taskDetails[2], taskDetails[3]);
+                break;
+            default:
+                break;
+            }
+
+            if(taskDetails[1].equals("1")) {
+                newTask.markAsDone();
+            }
+            this.taskList.add(newTask);
+        }
     }
 
     /**
@@ -26,7 +87,7 @@ public class DukeBot {
      * @param input provided by the user
      * @throws DukeException if the user enters an invalid input
      */
-    public void echo(String input) throws DukeException {
+    public void echo(String input) throws DukeException, IOException {
         String[] commandStr = input.trim().split("\\s+");
         String taskAction = commandStr[0];
 
@@ -36,24 +97,24 @@ public class DukeBot {
             this.continueInput = false;
             break;
         case "list":
-            this.output = retrieveList();
+            retrieveList();
             break;
         case "done":
             markDoneTask(Integer.parseInt(commandStr[1]));
+            saveData();
             break;
         case "todo":
         case "deadline":
         case "event":
-            this.numTasks++;
             handleNewTask(taskAction, input.replaceFirst(taskAction, ""));
+            saveData();
             break;
         case "delete":
-            this.numTasks--;
             handleDeleteTask(Integer.parseInt(commandStr[1]));
+            saveData();
             break;
         default:
             throw new DukeException(ExceptionType.INVALID_INPUT, "");
-
         }
         outputMessage(this.output);
     }
@@ -87,16 +148,16 @@ public class DukeBot {
 
     /**
      * Iterating through the list of tasks and numbering the tasks
-     * @return the list of tasks formatted in String
+     * Output will be the list of tasks formatted in String
      */
-    public String retrieveList() {
+    public void retrieveList() {
         StringBuilder currText = new StringBuilder(" Here are the tasks in your list:");
 
         for (int num = 1; num <= this.taskList.size(); num++) {
             Task currentTask = this.taskList.get(num - 1);
             currText.append("\n\t ").append(num).append(".").append(currentTask.toString());
         }
-        return currText.toString();
+        this.output = currText.toString();
     }
 
     /**
@@ -125,6 +186,7 @@ public class DukeBot {
             throw new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
         } else {
             this.taskList.add(newTask);
+            this.numTasks++;
             this.output += "\t  " + newTask.toString() + "\n\t Now you have "
                     + this.numTasks + " tasks in the list.";
         }
@@ -140,6 +202,7 @@ public class DukeBot {
         } else {
             Task deleteTask = this.taskList.get(index - 1);
             this.taskList.remove(deleteTask);
+            this.numTasks--;
             this.output = "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
                     + "\n\t Now you have " + this.numTasks + " tasks in the list.";
         }
