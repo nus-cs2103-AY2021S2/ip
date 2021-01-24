@@ -1,7 +1,11 @@
 package duke.storage;
 
+import duke.exceptions.DukeCreateDirectoryException;
+import duke.exceptions.DukeCreateFileException;
+import duke.exceptions.DukeSaveFileException;
 import duke.tasks.Task;
 import duke.exceptions.DukeCorruptedStorageException;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,8 +18,9 @@ import java.util.Scanner;
 
 public class Storage {
     private final static String DATA_DIR = new File("data").getAbsolutePath();
-    private File saveFile = new File(DATA_DIR + "/save.txt");
-    private static Storage INSTANCE = null;
+    private final File saveFile = new File(DATA_DIR + "/save.txt");
+    private static Storage INSTANCE;
+    private final static Ui ui = new Ui();
 
     private Storage() {
         createDirectory();
@@ -34,7 +39,7 @@ public class Storage {
             fw.write(StorageEncoder.encodeTasks(tasks));
             fw.close();
         } catch (IOException e) {
-            System.out.println("Failed to write into save file." + e.getMessage());
+            ui.printErrorMsg(new DukeSaveFileException());
         }
     }
 
@@ -50,9 +55,9 @@ public class Storage {
                 tasks = StorageDecoder.decodeSave(inputs);
             }
         } catch (IOException e) {
-            System.out.println("Failed to create new file" + e.getMessage()) ;
+            ui.printErrorMsg(new DukeCreateFileException());
         } catch (DukeCorruptedStorageException e) {
-            System.out.println(e);
+            ui.printErrorMsg(e);
         }
         return tasks;
     }
@@ -62,7 +67,7 @@ public class Storage {
         try {
             Files.createDirectories(dataPath);
         } catch (IOException e) {
-            System.out.println("Failed to create new directory." + e.getMessage());
+            ui.printErrorMsg(new DukeCreateDirectoryException(DATA_DIR));
         }
     }
 }
