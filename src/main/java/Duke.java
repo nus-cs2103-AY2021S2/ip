@@ -1,6 +1,4 @@
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import java.time.LocalDateTime;
@@ -8,9 +6,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
-    public static List<Task> tasks = new ArrayList<>();
-    public static Scanner sc = new Scanner(System.in);
-    public static Storage storage = new Storage();
+    private TaskList tasks;
+    private Scanner sc;
+    private Storage storage;
+
+    public Duke() {
+        this.tasks = new TaskList();
+        this.sc = new Scanner(System.in);
+        this.storage = new Storage();
+    }
 
     // Formatting display content
 
@@ -48,7 +52,7 @@ public class Duke {
 
     // Adding, Editing & Displaying Tasks
 
-    public static void addTask(String[] userInputArr) throws DukeException {
+    public void addTask(String[] userInputArr) throws DukeException {
         switch (userInputArr[0]) {
             case "todo":
                 addTodo(userInputArr[1]);
@@ -72,35 +76,35 @@ public class Duke {
         }
     }
 
-    public static void addTodo(String details) {
+    public void addTodo(String details) {
         Todo todo = new Todo(details);
-        tasks.add(todo);
+        tasks.addTask(todo);
         addTaskReport(todo);
     }
 
-    public static void addDeadline(String[] detailsArr) throws DukeException {
+    public void addDeadline(String[] detailsArr) throws DukeException {
         try {
             LocalDateTime date = parseDateTime(detailsArr[1]);
             Deadline deadline = new Deadline(detailsArr[0], date);
-            tasks.add(deadline);
+            tasks.addTask(deadline);
             addTaskReport(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please follow the datetime format of dd/mm/yyyy hhmm.");
         }
     }
 
-    public static void addEvent(String[] detailsArr) throws DukeException {
+    public void addEvent(String[] detailsArr) throws DukeException {
         try {
             LocalDateTime date = parseDateTime(detailsArr[1]);
             Event event = new Event(detailsArr[0], date);
-            tasks.add(event);
+            tasks.addTask(event);
             addTaskReport(event);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please follow the datetime format of dd/mm/yyyy hhmm.");
         }
     }
 
-    public static void addTaskReport(Task task) {
+    public void addTaskReport(Task task) {
         partition();
         System.out.println("    Got it. I've added this task");
         System.out.println("        " + task.toString());
@@ -108,14 +112,14 @@ public class Duke {
         partition();
     }
 
-    public static void displayTaskCount() {
-        System.out.println("    Now you have " + tasks.size() + " in the list.");
+    public void displayTaskCount() {
+        System.out.println("    Now you have " + tasks.getTaskCount() + " in the list.");
     }
 
-    public static void markTaskAsDone(String index) {
+    public void markTaskAsDone(String index) {
         try {
             int taskIndex = Integer.parseInt(index.trim());
-            Task task = tasks.get(taskIndex - 1);
+            Task task = tasks.getTask(taskIndex - 1);
             partition();
             if (task.isDone()) {
                 System.out.println("    You have already completed this task:");
@@ -132,11 +136,11 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String index) {
+    public void deleteTask(String index) {
         try {
             int taskIndex = Integer.parseInt(index.trim());
-            Task task = tasks.get(taskIndex - 1);
-            tasks.remove(taskIndex - 1);
+            Task task = tasks.getTask(taskIndex - 1);
+            tasks.deleteTask(taskIndex - 1);
             partition();
             System.out.println("    Noted. This task has been removed:");
             System.out.println("        " + task.toString());
@@ -149,14 +153,14 @@ public class Duke {
         }
     }
 
-    public static void listTasks() {
+    public void listTasks() {
         partition();
         if (tasks.isEmpty()) {
             System.out.println("    It seems like there is nothing in your list.");
         } else {
             System.out.println("    Here are the tasks in your list:");
-            for (int i = 1; i <= tasks.size(); ++i) {
-                System.out.println("    " + i + "." + tasks.get(i - 1).toString());
+            for (int i = 1; i <= tasks.getTaskCount(); ++i) {
+                System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
             }
         }
         partition();
@@ -172,7 +176,7 @@ public class Duke {
         }
     }
 
-    public static void handleUserInput() {
+    public void handleUserInput() {
         boolean isRunning = true;
         while (isRunning) {
             try {
@@ -216,7 +220,7 @@ public class Duke {
         }
     }
 
-    public static void run() {
+    public void run() {
         greeting();
         try {
             storage.loadTasksFromFile(tasks);
@@ -228,6 +232,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        run();
+        new Duke().run();
     }
 }

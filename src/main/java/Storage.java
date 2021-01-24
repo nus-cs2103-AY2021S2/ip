@@ -35,7 +35,7 @@ public class Storage {
         }
     }
 
-    public void loadTasksFromFile(List<Task> tasks) throws DukeException {
+    public void loadTasksFromFile(TaskList tasks) throws DukeException {
         createFile();
         try {
             Scanner sc = new Scanner(file);
@@ -51,7 +51,7 @@ public class Storage {
         }
     }
 
-    public void parseTasksFromFile(List<Task> tasks, String taskString) throws IndexOutOfBoundsException {
+    public void parseTasksFromFile(TaskList tasks, String taskString) throws IndexOutOfBoundsException {
         String[] taskStringArr = taskString.split(SAVE_FORMAT_DELIMITER);
         switch (taskStringArr[0].trim()) {
             case "T":
@@ -76,17 +76,17 @@ public class Storage {
         return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
     }
 
-    public void addToTasks(List<Task> tasks, Task task, String status) {
+    public void addToTasks(TaskList tasks, Task task, String status) {
         if (status.trim().equals("1")) {
             task.markAsDone();
         }
-        tasks.add(task);
+        tasks.addTask(task);
     }
 
-    public void saveTasksToFile(List<Task> tasks) throws DukeException {
+    public void saveTasksToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);
-            for (Task task : tasks) {
+            for (Task task : tasks.getAllTasks()) {
                 fw.write(task.toSaveFormat() + System.lineSeparator());
             }
             fw.close();
