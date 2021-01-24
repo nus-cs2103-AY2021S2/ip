@@ -1,4 +1,6 @@
-public class inputCommand {
+import java.util.Arrays;
+
+public class InputCommand {
     private final String command;
     private final String argument;
     private final String date;
@@ -16,13 +18,13 @@ public class inputCommand {
         delete
     }
 
-    public inputCommand() {
+    public InputCommand() {
         this.command = "";
         this.date = null;
         this.argument = "";
     }
 
-    public inputCommand(String in) {
+    public InputCommand(String in) {
         String tempDate = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
@@ -30,7 +32,11 @@ public class inputCommand {
         try {
             if (result[0].equals("done")) {
                 tempCommand = result[0];
-                tempArg = result[1];
+                if(result.length <= 1) {
+                    throw new DukeException.NoDescriptionException(result[0]);
+                }else{
+                    tempArg = result[1];
+                }
             } else if (result[0].equals("todo") || result[0].equals("delete")) {
                 String temp = in.substring(in.indexOf(" ") + 1);
                 tempArg = temp;
@@ -49,18 +55,23 @@ public class inputCommand {
                         throw new DukeException.NoDescriptionException(result[0]);
                     } else {
                         tempCommand = result[0];
-                        tempDate = firstParam.substring(dateIndex + 1);
+                        tempDate = firstParam.substring(dateIndex + 3);
                         firstParam = in.substring(in.indexOf(" ") + 1);
                         tempArg = firstParam.substring(0, firstParam.indexOf("/") - 1);
                     }
                 }
             } else {
-                throw new DukeException.UnknownCommandException();
+//                System.out.println(Arrays.toString(result));
+//                System.out.println(predefinedCommand.valueOf(result[0]));
+                if(predefinedCommand.valueOf(result[0]) != null) {
+                    tempCommand = result[0];
+                }else{
+                    throw new DukeException.UnknownCommandException();
+                }
             }
         }catch(DukeException ex){
             tempCommand = "error";
             tempArg = ex.getMessage();
-//            System.out.println(tempArg);
         }
         this.command = tempCommand;
         this.argument = tempArg;
@@ -79,7 +90,7 @@ public class inputCommand {
         return this.argument;
     }
 
-    public String print(lists inputList) {
+    public String print(Lists inputList) {
         predefinedCommand switchVal = predefinedCommand.valueOf(this.command);
         switch (switchVal) {
             case bye:
@@ -94,29 +105,29 @@ public class inputCommand {
                 inputList.updateItemMutable(Integer.parseInt(this.argument));
                 return "Nice! I've marked this task as done: \n" + inputList.getDukeList().get(Integer.parseInt(this.argument) - 1) + line;
             case event:
-                event newEvent = new event(this.argument, this.date);
+                Event newEvent = new Event(this.argument, this.date);
                 inputList.addCommandMutable(newEvent);
                 return printPredefinedMessage(newEvent.toString(), inputList);
             case deadline:
-                deadline newDeadline = new deadline(this.argument, this.date);
+                Deadline newDeadline = new Deadline(this.argument, this.date);
                 inputList.addCommandMutable(newDeadline);
                 return printPredefinedMessage(newDeadline.toString(), inputList);
             case todo:
-                todo newTodo = new todo(this.argument);
+                Todo newTodo = new Todo(this.argument);
                 inputList.addCommandMutable(newTodo);
                 return printPredefinedMessage(newTodo.toString(), inputList);
             case error:
                 return this.argument;
             case delete:
                 int index = Integer.parseInt(this.argument);
-                listItem tempItem = inputList.getDukeList().get(index - 1);
+                ListItem tempItem = inputList.getDukeList().get(index - 1);
                 inputList.deleteCommandMutable(index);
                 return "Noted. I've removed this task: " + tempItem + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
         }
         return "";
     }
 
-    public String printPredefinedMessage(String typeOfTask, lists inputList) {
+    public String printPredefinedMessage(String typeOfTask, Lists inputList) {
         return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
     }
 }

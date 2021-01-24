@@ -1,19 +1,20 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException.NoDescriptionException {
+    public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         System.out.println(
         "____________________________________________________________ \n" +
         "Hello! I'm Duke \nWhat can I do for you? \n" +
         "____________________________________________________________");
 
-        inputCommand in = new inputCommand();
-        lists programList = new lists();
+        InputCommand in = new InputCommand();
+        Lists programList = new Lists(FileProcess.importData());
+//        System.out.println(programList.getDukeList());
         while(!in.getCommand().equals("bye")){
-            in = new inputCommand(sc.nextLine());
+            in = new InputCommand(sc.nextLine());
             System.out.println(in.print(programList));
+            System.out.println(FileProcess.writeData(programList.toString()));
         }
-
     }
 }

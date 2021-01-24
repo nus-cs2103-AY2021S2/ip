@@ -18,4 +18,9 @@ public abstract class DukeException extends Exception{
         }
     }
 
+    public static class IOErrorException extends DukeException {
+        public IOErrorException(){
+            super("IO Error!");
+        }
+    }
 }
