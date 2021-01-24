@@ -27,6 +27,15 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns the description of task.
+     *
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getSaveString() {
         return this.type + " | " + (this.isDone ? "1" : "0") + " | " + this.description;
     }

@@ -98,4 +98,27 @@ public class Ui {
                 + "\tBye. Hope to see you again soon!\n"
                 + "\t____________________________________________________________\n");
     }
+
+    /**
+     * Prints the list of tasks matching specified input.
+     *
+     * @param tasks List of task that contains the matched input.
+     */
+    public void showMatchList(TaskList tasks) {
+        System.out.println("\t____________________________________________________________\n"
+                + "\tHere are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("\t" + (i + 1) + "." + tasks.get(i).toString());
+        }
+        System.out.println("\t____________________________________________________________\n");
+    }
+
+    /**
+     * Prints a message indicating no match in TaskList.
+     */
+    public void showNoMatch() {
+        System.out.println("\t____________________________________________________________\n"
+                + "\tNo tasks matched your word.\n"
+                + "\t____________________________________________________________\n");
+    }
 }
