@@ -1,3 +1,4 @@
+import exceptions.DukeEmptyListException;
 import exceptions.DukeNoDescriptionException;
 import exceptions.DukeUnknownArgumentsException;
 
@@ -18,7 +19,7 @@ public class Controller {
     private final static String NEWLINE = System.lineSeparator();
     private final static String LINE = INDENT + "__________________________________________________"
             + "______________" + NEWLINE;
-    private final static String GREETING = INDENT + " Hello! I'm Duke" + NEWLINE + INDENT + "What" +
+    private final static String GREETING = INDENT + "Hello! I'm Duke" + NEWLINE + INDENT + "What" +
             " can I do for you?" + NEWLINE;
     private final static String BYE_MSG = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
     private final static String END_COMMAND = "bye";
@@ -26,8 +27,8 @@ public class Controller {
     private final Storage storage;
 
     public Controller() {
-        list = new ArrayList<>();
         storage = Storage.getInstance();
+        list = storage.load();
     }
 
     public void run() {
@@ -71,6 +72,13 @@ public class Controller {
         } catch (DukeUnknownArgumentsException e) {
             String errorMsg = String.format(INDENT + " %s", e);
             System.out.println(errorMsg);
+        } catch (NumberFormatException e) {
+            System.out.println(INDENT + "Please enter an integer as argument. " + e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(String.format(INDENT + "Please enter an integer within your tasks " +
+                    "size: %d.", list.size()));
+        } catch (DukeEmptyListException e) {
+            System.out.println(INDENT + e);
         }
     }
 
@@ -110,7 +118,7 @@ public class Controller {
             String output = String.format(INDENT + " %s", e);
             System.out.println(output);
         } catch (DateTimeParseException e) {
-            System.out.println(INDENT + "Date is not input correctly.");
+            System.out.println(INDENT + "Date is not input correctly. " + e.getMessage());
         }
     }
 
@@ -143,13 +151,16 @@ public class Controller {
         }
     }
 
-    private void deleteTask(String input) {
+    private void deleteTask(String input) throws DukeEmptyListException {
         int index = Parser.stringToIndex(input, 7);
+        if (list.isEmpty()) {
+            throw new DukeEmptyListException();
+        }
         Task t = list.get(index);
         list.remove(index);
         String output =
                 String.format(INDENT + " Noted. I've removed this task:" + NEWLINE + INDENT + INDENT
-                        + t + NEWLINE + INDENT + " Now you have %d tasks in the list.",
+                                + t + NEWLINE + INDENT + " Now you have %d tasks in the list.",
                         list.size());
         System.out.println(output);
     }
