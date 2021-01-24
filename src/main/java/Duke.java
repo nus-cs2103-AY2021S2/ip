@@ -106,40 +106,45 @@ public class Duke {
         printMessage(deleteTaskMessage);
     }
 
+    public static void parseUserInput(String userInput) {
+
+        SplitString parsedUserInput = new SplitString(userInput, " ");
+        String userCommand = parsedUserInput.getFirstString().toLowerCase();
+        String userDescription = parsedUserInput.getSecondString();
+
+
+        switch (userCommand) {
+            case "list":
+                listTasks();
+                break;
+            case "done":
+                doTask(userDescription);
+                break;
+            case "delete":
+                deleteTask(userDescription);
+                break;
+            case "todo": //Fallthrough
+            case "deadline": //Fallthrough
+            case "event":
+                addTask(userCommand, userDescription);
+                break;
+            default:
+                printMessage("Oops, the command '" + userCommand + "' is not recognised.");
+        }
+    }
+
     public static void main(String[] args) {
         printWelcomeMessage();
 
-        String userInput, userCommand, userDescription;
-        SplitString parsedUserInput;
+        String userInput;
         Scanner scan = new Scanner(System.in);
 
         while (true) {
             userInput = scan.nextLine();
-            parsedUserInput = new SplitString(userInput, " ");
-            userCommand = parsedUserInput.getFirstString().toLowerCase();
-            userDescription = parsedUserInput.getSecondString();
-
-            if (String.valueOf(userCommand).equals("bye") == true) {
+            if (String.valueOf(userInput).equals("bye") == true) {
                 break;
             }
-            switch (userCommand) {
-                case "list":
-                    listTasks();
-                    break;
-                case "done":
-                    doTask(userDescription);
-                    break;
-                case "delete":
-                    deleteTask(userDescription);
-                    break;
-                case "todo": //Fallthrough
-                case "deadline": //Fallthrough
-                case "event":
-                    addTask(userCommand, userDescription);
-                    break;
-                default:
-                    printMessage("Oops, the command '" + userCommand + "' is not recognised.");
-            }
+            parseUserInput(userInput);
         }
 
         scan.close();
