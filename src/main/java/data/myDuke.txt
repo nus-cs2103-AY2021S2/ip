@@ -1,0 +1,3 @@
+D / 0 / hw / tmr
+T / 1 / eat medicine
+E / 0 / marathon / ecp

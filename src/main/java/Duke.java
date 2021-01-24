@@ -1,9 +1,11 @@
 import Exceptions.*;
 
+import java.io.File;
 import java.util.*;
 
 public class Duke {
     public static ArrayList<Task> myTasks = new ArrayList<>();
+    public static Scanner sc = new Scanner(System.in);
 
     public static void printExceptions(String message) {
         System.err.println(message);
@@ -13,12 +15,11 @@ public class Duke {
     public static void taskManager(String task) {
         String[] line = task.split(" ", 2); // split type of task from description
         String type = line[0]; // type of task
-        
+
         try {
             if (task.isBlank()) {
                 throw new EmptyLineException(" ");
-            }
-            else if (type.equals("done")) {
+            } else if (type.equals("done")) {
                 markAsDone(line[1]);
             } else if (type.equals("delete")) {
                 deleteTask(line[1]);
@@ -44,6 +45,7 @@ public class Duke {
                 int numOfTasks = myTasks.size();
                 System.out.println("Now you have " + numOfTasks + " tasks in the list.");
             }
+            FileManager.saveTasks(myTasks);
         } catch (UnknownInputException e) {
             printExceptions(e.getMessage());
         } catch (IncorrectTypeException e) {
@@ -54,21 +56,23 @@ public class Duke {
             printExceptions(e.getMessage());
         } catch (IncorrectNumberException e) {
             printExceptions(e.getMessage());
+        } catch (DukeException e) {
+            printExceptions(e.getMessage());
         }
     }
 
     public static void deleteTask(String taskNum) throws IncorrectNumberException {
-            int num = Integer.parseInt(taskNum);
+        int num = Integer.parseInt(taskNum);
 
-            if (num < 1 || num > myTasks.size()) {
-                throw new IncorrectNumberException(num);
-            }
+        if (num < 1 || num > myTasks.size()) {
+            throw new IncorrectNumberException(num);
+        }
 
-            Task t = myTasks.get(num - 1);
-            myTasks.remove(num - 1); // removing task from list
-            System.out.println("☺ Noted. I've removed this task:");
-            System.out.println(t);
-            System.out.println("Now you have " + myTasks.size() + " tasks in the list.");
+        Task t = myTasks.get(num - 1);
+        myTasks.remove(num - 1); // removing task from list
+        System.out.println("☺ Noted. I've removed this task:");
+        System.out.println(t);
+        System.out.println("Now you have " + myTasks.size() + " tasks in the list.");
 
     }
 
@@ -139,9 +143,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        welcomeMessage();
+    public static void scanner() {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             System.out.println();
@@ -154,6 +156,17 @@ public class Duke {
             input = sc.nextLine();
 
         }
+    }
+
+
+    public static void main(String[] args) throws DukeException {
+        welcomeMessage();
+        try {
+            myTasks = FileManager.displayTasks();
+        } catch (Exception e) {
+            printExceptions(e.getMessage());
+        }
+        scanner();
         System.out.println();
         System.out.println("Bye. Hope to see you again soon! ☺");
         sc.close();

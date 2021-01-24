@@ -5,6 +5,10 @@ public class Deadline extends Task {
         super(taskName);
         this.by = by;
     }
+    @Override
+    public String toSave() {
+        return "D / " + super.isDoneString + super.taskName + " / " + by;
+    }
 
     @Override
     public String toString() {
