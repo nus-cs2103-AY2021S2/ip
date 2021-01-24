@@ -17,8 +17,6 @@ public class Duke {
             char taskType = str[0].charAt(0);
             boolean isCompleted = Integer.parseInt(str[1].substring(0, 1)) == 1;
             String taskName = str[2].strip();
-            String dateTime = str[3].strip();
-            System.out.println();
 
             if (taskType == 'T') {
                 task = new ToDo(isCompleted, taskName);
@@ -157,7 +155,6 @@ public class Duke {
                     bye();
                     break;
                 } else if (userInput.equals("done")) {
-                    done(f, userTasks, taskDescription);
                     done(f, userTasks, taskDescription);
                 } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event")) {
                     addTask(f, userInput, userTasks, taskDescription);
