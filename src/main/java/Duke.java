@@ -51,11 +51,11 @@ public class Duke {
             }
             if (cat == 'E') {
                 Event event = (Event) task;
-                String date = event.getTime();
+                String date = event.getFormattedTime();
                 res += cat + " : " + checked + " : " + name + " : " + date + "\n";
             } else if (cat == 'D') {
                 Deadline deadline = (Deadline) task;
-                String date = deadline.getDeadline();
+                String date = deadline.getFormattedDeadline();
                 res += cat + " : " + checked + " : " + name + " : " + date + "\n";
             } else {
                 res += cat + " : " + checked + " : " + name + "\n";
