@@ -1,14 +1,12 @@
-import java.io.IOException;
-
 /**
  * Represents a command that adds tasks.
  */
-public class AddCommand implements Command {
+abstract class AddCommand implements Command {
 
-    private final String commandType;
-    private final String description;
-    private Task newTask;
-    private int numTasks;
+    protected String commandType;
+    protected String description;
+    protected Task newTask;
+    protected int numTasks;
 
     /**
      * Constructor for AddCommand class command name and description.
@@ -28,35 +26,10 @@ public class AddCommand implements Command {
         return false;
     }
 
-    /**
-     * 
-     */
-    public TaskList execute(TaskList taskList) {
-
-        int taskID = taskList.getSize() + 1;
-        switch (commandType) {
-            case "todo":
-                newTask = new ToDoTask(description, taskID);
-                break;
-            case "event":
-                newTask = new EventTask(description, taskID);
-                break;
-            case "deadline":
-                newTask = new DeadlineTask(description, taskID);
-                break;
-            default:
-                newTask = new ToDoTask(description, taskID);
-                break;
-        }
-        taskList.addTask(newTask);
-        numTasks = taskList.getSize();
-
-        return taskList;
-    }
+    public abstract TaskList execute(TaskList taskList);
 
     public String getResponse() {
-        return "Got it. I've added this task:\n  " + newTask.toString()
-        + "\nNow you have " + numTasks + " tasks in the list.\n";
+        return "Got it. I've added this task:\n  ";
     }
 
 }
