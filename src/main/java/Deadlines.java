@@ -15,4 +15,15 @@ public class Deadlines extends DukeTask {
     public String toString() {
         return super.toString() + String.format(" (by: %s)", this.deadline);
     }
+
+    @Override
+    public String formatDuke() {
+        return super.formatDuke() + " | " + this.deadline;
+    }
+
+    @Override
+    public DukeTask markDone() {
+        return new Deadlines(this.name, true, this.deadline);
+    }
 }
+

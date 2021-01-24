@@ -1,8 +1,17 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class DukeController {
 
     private DukeList list;
+    private Path data = Paths.get(System.getProperty("user.dir"), "data");
+    private Path duke = Paths.get(System.getProperty("user.dir"), "data", "duke.txt");
 
     DukeController() {
         this.list = new DukeList();
@@ -15,6 +24,12 @@ public class DukeController {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public void run() throws DukeException {
+
+        try {
+            this.loadTasks();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.introduction();
 
         Scanner sc = new Scanner(System.in);
@@ -91,6 +106,12 @@ public class DukeController {
                     System.out.println(e.getMessage() + "\n");
                 }
 
+                try {
+                    this.saveTasks();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 line = sc.nextLine();
             }
         }
@@ -105,6 +126,31 @@ public class DukeController {
 
     public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void loadTasks() throws FileNotFoundException {
+        System.out.println("--Booting up Application--");
+        System.out.println("Checking if loading data exist...\n");
+
+        if (!Files.exists(data)) {
+            System.out.println("Oops! You don't seem to have a load file!");
+            System.out.println("Creating one now!!");
+        }
+        try {
+            Files.createDirectory(data);
+            Files.createFile(duke);
+        } catch (IOException e) {
+            System.out.println("Nice! We found your load file!");
+            System.out.println("Loading...\n");
+        }
+
+        File loadData = duke.toFile();
+        this.list.load(loadData);
+        System.out.println("--- LOADING COMPLETE! ---\n");
+    }
+
+    public void saveTasks() throws IOException {
+        this.list.save(duke);
     }
 }
 

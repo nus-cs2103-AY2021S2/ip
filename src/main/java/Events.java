@@ -15,5 +15,15 @@ public class Events extends DukeTask {
     public String toString() {
         return super.toString() + String.format(" (at: %s)", this.time);
     }
+
+    @Override
+    public String formatDuke() {
+        return super.formatDuke() + " | " + this.time;
+    }
+
+    @Override
+    public DukeTask markDone() {
+        return new Events(this.name, true, this.time);
+    }
 }
 

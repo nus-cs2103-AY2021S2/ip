@@ -14,9 +14,14 @@ public class DukeTask {
         TaskType(String code){
             this.type = code;
         }
+
         @Override
         public String toString(){
             return this.type;
+        }
+
+        public Character toType() {
+            return this.toString().charAt(1);
         }
     }
 
@@ -40,6 +45,12 @@ public class DukeTask {
 
     public String getStatusIcon() {
         return isDone ? "[X]" : "[ ]";
+    }
+
+    public String formatDuke() {
+        Character task = this.type.toType();
+        int done = isDone ? 1 : 0;
+        return String.format("%s | %d | %s", task, done, this.name);
     }
 
     @Override
