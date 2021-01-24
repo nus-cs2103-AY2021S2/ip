@@ -2,6 +2,8 @@ package main.java;
 
 import main.java.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.Scanner;
 
@@ -45,8 +47,15 @@ public class Duke {
             String[] byArgs = deadlineArg.split(" /by ");
             if (byArgs.length < 2) throw new DukeException("There must be a date for deadline.");
 
-            Deadline deadline = new Deadline(byArgs[0], byArgs[1]);
-            addTask(deadline);
+            try {
+                String dateString = byArgs[1];
+                LocalDate date = LocalDate.parse(dateString);
+                Deadline deadline = new Deadline(byArgs[0], date);
+                addTask(deadline);
+            } catch (DateTimeParseException dtEx) {
+                ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+            }
+
         } else if (input.startsWith("event")) {
             String[] command = input.split("event ");
             if (command.length == 1) throw new DukeException("The description of a event cannot be empty.");
@@ -54,8 +63,15 @@ public class Duke {
 
             String[] atArgs = eventArg.split(" /at ");
             if (atArgs.length < 2) throw new DukeException("There must be a date for event.");
-            Event event = new Event(atArgs[0], atArgs[1]);
-            addTask(event);
+
+            try {
+                String dateString = atArgs[1];
+                LocalDate date = LocalDate.parse(dateString);
+                Event event = new Event(atArgs[0], date);
+                addTask(event);
+            } catch (DateTimeParseException dtEx) {
+                ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+            }
         } else if (input.startsWith("done")) {
             String[] command = input.split(" ");
             int index = Integer.parseInt(command[1]);
