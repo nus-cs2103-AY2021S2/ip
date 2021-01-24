@@ -32,6 +32,7 @@ public class FakeBot {
     private static String EVENTCOMMAND = "event";
     private static String EVENTSPLITREGEX = " /at ";
     private static String DELETECOMMAND = "delete";
+    private static String FIND_COMMAND = "find";
 
     private static String saveFilePath = "/data/";
     private static String saveFileName = "savedHistory.txt";
@@ -127,6 +128,9 @@ public class FakeBot {
                 printDeleteMessage(deletedTask, taskList.getSize());
                 saveHistory(taskList);
                 break;
+        case FIND:
+            ui.printTasks(new TaskList(taskList.find(command.getDescription())));
+            break;
         }
 
         return true;
@@ -144,7 +148,7 @@ public class FakeBot {
             throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
 
-        if (command.equals(TODOCOMMAND) || command.equals(DEADLINECOMMAND) || command.equals(EVENTCOMMAND)) {
+        if (command.equals(TODOCOMMAND) || command.equals(DEADLINECOMMAND) || command.equals(EVENTCOMMAND) || command.equals(FIND_COMMAND)) {
             throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
@@ -156,7 +160,8 @@ public class FakeBot {
         String commandName = command.substring(0, firstSplit);
         String description = command.substring(firstSplit + 1);
 
-        if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND) || commandName.equals(TODOCOMMAND) || commandName.equals(EVENTCOMMAND) || commandName.equals(DEADLINECOMMAND)) {
+        if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND) || commandName.equals(TODOCOMMAND)
+                || commandName.equals(EVENTCOMMAND) || commandName.equals(DEADLINECOMMAND) || commandName.equals(FIND_COMMAND)) {
             if (description.isEmpty()) {
                 throw new CommandException("☹ OOPS!!! The description of a " + commandName + " cannot be empty.");
             } else if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND)) {
@@ -174,7 +179,9 @@ public class FakeBot {
                 } else if (commandName.equals(DELETECOMMAND)) {
                     return new Command(CommandType.DELETE, description);
                 }
-            } else if (commandName.equals(TODOCOMMAND)) {
+            } else if (commandName.equals(FIND_COMMAND)) {
+                return new Command(CommandType.FIND, description);
+            }else if (commandName.equals(TODOCOMMAND)) {
                 return new Command(CommandType.TODO, description);
             } else if (commandName.equals(DEADLINECOMMAND)) {
                 if (!description.contains(DEADLINESPLITREGEX))

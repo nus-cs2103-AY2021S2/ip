@@ -63,7 +63,7 @@ class TaskListTest {
         taskList.addTask(test2);
         taskList.addTask(test1);
         taskList.addTask(test1);
-        assertEquals(4, taskList.find("tion_1").size(), "Task size found does not match");
-        assertEquals(6, taskList.find("tion_2").size(), "Task size found does not match");
+        assertEquals(6, taskList.find("est1").size(), "Task size found does not match");
+        assertEquals(4, taskList.find("est2").size(), "Task size found does not match");
     }
 }

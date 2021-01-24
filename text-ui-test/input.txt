@@ -43,4 +43,6 @@ delete 4
 list
 deadline return book /by 2020-01 01:02
 event project meeting /at 2020-01 01:02 2020-01-01 20:02
+find book
+find helloworld
 bye
