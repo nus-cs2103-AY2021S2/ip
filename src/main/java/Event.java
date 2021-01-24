@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * An Event task that inherits Task.
  */
@@ -8,7 +11,8 @@ public class Event extends Task{
 
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        LocalDate date = LocalDate.parse(at);
+        this.at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
