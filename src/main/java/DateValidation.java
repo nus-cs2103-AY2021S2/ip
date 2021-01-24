@@ -8,7 +8,6 @@ public class DateValidation {
         boolean isCorrect = false;
         try {
             verifiedDate = LocalDate.parse(date);
-            System.out.println(verifiedDate);
             isCorrect = true;
         } catch (DateTimeParseException e) {
             System.out.println(e);
