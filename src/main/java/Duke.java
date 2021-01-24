@@ -218,7 +218,7 @@ public class Duke {
             scannerInput.close();
         } catch (FileNotFoundException e) {
             System.err.println("Please create a 'tasks.txt' file in the current directory to store your tasks before "
-                    + "running the program!");
+                    + "running the program again!");
         }
     }
 
