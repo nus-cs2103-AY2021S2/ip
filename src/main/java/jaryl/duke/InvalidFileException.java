@@ -9,6 +9,6 @@ public class InvalidFileException extends DukeException {
      * Constructor to instantiate a new InvalidFileException
      */
     public InvalidFileException() {
-        super("Error while attempting to read file from disk");
+        super("");
     }
 }
