@@ -7,12 +7,16 @@ import duke.exception.DukeLoadException;
 import java.util.Scanner;
 
 public class Duke {
+    /** Name of the chat bot */
     private static final String CHATBOT_NAME = "Mantaro";
-
+    /** Determine whether the chat bot continue to run */
     private boolean isActive;
+    /** Manages a task list in the chat bot */
     private TaskManager taskManager;
+    /** Provide different way of printing messages for the chat bot */
     private Ui ui;
 
+    /** Constructor of Duke */
     public Duke() {
         isActive = true;
 
@@ -27,18 +31,15 @@ public class Duke {
         }
     }
 
+    /** Lifecycle of Duke */
     public void run() {
-        // Opening message
         ui.printWelcomeMsg(CHATBOT_NAME);
 
-        // Scan user input as a command
         Scanner scanner = new Scanner(System.in);
         String line = "";
 
-        // Respond to user's commands and exit when user enters bye
         while(isActive) {
             line = scanner.nextLine();
-
             try {
                 Command command = Parser.parse(line);
                 command.execute();
@@ -48,10 +49,13 @@ public class Duke {
             }
         }
 
-        // Closing message
         ui.printGoodbyeMsg();
     }
 
+    /**
+     * Lifecycle of the program
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.run();
