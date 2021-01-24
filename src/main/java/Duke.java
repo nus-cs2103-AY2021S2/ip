@@ -1,7 +1,3 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Duke {
 
     private TaskList tasks;
@@ -12,13 +8,17 @@ public class Duke {
         this.tasks = new TaskList();
         this.ui = new Ui();
         this.storage = new Storage();
+        try {
+            storage.loadTasksFromFile(tasks);
+        } catch (DukeException e) {
+            ui.printErrorMessage(e.getMessage());
+        }
     }
 
     public void handleUserInput() {
         boolean isRunning = true;
         while (isRunning) {
             try {
-
                 String userInput = ui.nextUserInput();
                 Command command = Parser.parse(userInput);
                 command.execute(tasks, ui, storage);
@@ -31,11 +31,6 @@ public class Duke {
 
     public void run() {
         ui.printGreeting();
-        try {
-            storage.loadTasksFromFile(tasks);
-        } catch (DukeException e) {
-            ui.printErrorMessage(e.getMessage());
-        }
         handleUserInput();
         ui.close();
     }
