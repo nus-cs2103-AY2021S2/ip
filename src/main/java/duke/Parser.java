@@ -2,9 +2,20 @@ package duke;
 
 import duke.command.*;
 
-
+/**
+ * A class that identify the keyword of given string.
+ */
 public class Parser {
 
+    /**
+     * Returns the command according to the first word.
+     * Arguments are not parsed in this method.
+     *
+     * @param str Input string.
+     * @param list TaskList that stores commands.
+     * @return Commands.
+     * @throws DukeException If the first word is not any known command type.
+     */
     public static Command parseCommand(String str, TaskList list) throws DukeException {
         int strLength = str.length();
         if (str.equalsIgnoreCase("bye")) {

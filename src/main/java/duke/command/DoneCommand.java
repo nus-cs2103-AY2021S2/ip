@@ -5,15 +5,29 @@ import duke.StringParser;
 import duke.task.Task;
 import duke.TaskList;
 
+/**
+ * Command type done.
+ */
 public class DoneCommand extends Command {
 
     private final String command;
 
+    /**
+     * Done command builder.
+     *
+     * @param command Input string.
+     */
     public DoneCommand(String command) {
         this.command = command;
     }
 
-
+    /**
+     * Execute and print a done command.
+     *
+     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param length For printer to call newLiner, make Duke looks nice.
+     * @throws DukeException When encounter an error in command argument.
+     */
     @Override
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         int index;

@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task type event.
+ */
 public class Event extends Task {
 
     private final LocalDateTime at;
