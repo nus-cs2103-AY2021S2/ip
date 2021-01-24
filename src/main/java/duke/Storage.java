@@ -24,7 +24,6 @@ public class Storage {
 
     private static File file;
     private static Scanner sc;
-    private static FileWriter writer;
 
     /**
      * Converts data that saved in data.txt to Task object.
@@ -116,7 +115,7 @@ public class Storage {
             saveData = saveData.concat(saveData(list.getJob(i)));
         }
         try {
-            writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file);
             writer.write(saveData);
             writer.close();
         } catch (IOException e) {

@@ -12,11 +12,10 @@ public class Parser {
      * Arguments are not parsed in this method.
      *
      * @param str Input string.
-     * @param list TaskList that stores commands.
      * @return Commands.
      * @throws DukeException If the first word is not any known command type.
      */
-    public static Command parseCommand(String str, TaskList list) throws DukeException {
+    public static Command parseCommand(String str) throws DukeException {
         int strLength = str.length();
         if (str.equalsIgnoreCase("bye")) {
             return new ExitCommand();

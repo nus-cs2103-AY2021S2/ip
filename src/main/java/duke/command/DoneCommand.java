@@ -31,7 +31,11 @@ public class DoneCommand extends Command {
     @Override
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         int index;
-        index = Integer.parseInt(command.substring(5)) - 1;
+        try {
+            index = Integer.parseInt(command.substring(5)) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid Argument: Input must to be integer");
+        }
         if (index < list.getSize() && index >= 0) {
             Task currTask = list.getJob(index);
             currTask.markAsDone();

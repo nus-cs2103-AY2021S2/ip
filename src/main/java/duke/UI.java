@@ -89,7 +89,7 @@ public class UI {
 
             System.out.print(horizontalLine);
             try {
-                command = Parser.parseCommand(commandStr, list);
+                command = Parser.parseCommand(commandStr);
                 command.executeAndPrint(list, LENGTH_OF_LINE);
                 isExit = command.isExit();
                 if (!isExit) {

@@ -4,14 +4,29 @@ import duke.DukeException;
 import duke.StringParser;
 import duke.TaskList;
 
+/**
+ * Command type find.
+ */
 public class FindCommand extends Command {
 
     private final String command;
 
+    /**
+     * Find command builder.
+     *
+     * @param command Input string.
+     */
     public FindCommand(String command) {
         this.command = command;
     }
 
+    /**
+     * Execute and print a find command.
+     *
+     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param length For printer to call newLiner, make Duke looks nice.
+     * @throws DukeException When encounter an error in command argument.
+     */
     @Override
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         if (command.length() <= 5) {
@@ -27,15 +42,11 @@ public class FindCommand extends Command {
                         tempList.addJob(list.getJob(i));
                     }
                 }
-                StringBuilder resultStr = new StringBuilder();
-                for (int i = 0; i < tempList.getSize(); i++) {
-                    resultStr.append(StringParser.newLiner((i + 1) + "."
-                            + tempList.getJob(i).toString(), length));
-                }
-                if (list.getSize() == 0) {
+                if (tempList.getSize() == 0) {
                     System.out.print("No result found\n");
                 } else {
-                    System.out.print(resultStr.toString());
+                    System.out.print("Here are the matching tasks in the list:\n"
+                            + tempList.formatList(length));
                 }
             }
         }
