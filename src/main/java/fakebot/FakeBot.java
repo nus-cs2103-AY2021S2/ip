@@ -1,3 +1,7 @@
+package fakebot;
+
+import fakebot.command.*;
+import fakebot.task.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

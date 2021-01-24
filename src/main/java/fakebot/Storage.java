@@ -1,3 +1,8 @@
+package fakebot;
+
+import fakebot.task.Task;
+import fakebot.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

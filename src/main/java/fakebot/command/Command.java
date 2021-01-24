@@ -1,3 +1,5 @@
+package fakebot.command;
+
 import java.util.Locale;
 
 
