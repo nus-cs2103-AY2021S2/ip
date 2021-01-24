@@ -1,15 +1,24 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
- * The Duke project
+ * The Duke project.
  */
 public class Duke {
 
+    /** The number of tasks at the start of the program. */
     static int totalTasks = 0;
+
+    /** A boolean function to check if the user decides to terminate the program. */
     static boolean endOfCycle = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         greet();
 
         Scanner sc = new Scanner(System.in);
@@ -17,7 +26,10 @@ public class Duke {
         String username = sc.nextLine();
         nextGreet(username);
 
+        FileOutputStream fos = new FileOutputStream("duke.txt", true);
         ArrayList<Task> tasks = new ArrayList<>();
+        readFileIntoList("duke.txt", tasks);
+        fos.close();
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
@@ -35,12 +47,57 @@ public class Duke {
                     default -> wrongCommand();
                 }
             } catch (DukeException e) {
-                //noinspection ThrowablePrintedToSystemOut
                 System.out.println(e);
             }
         }
-
         sc.close();
+
+        PrintWriter writer = new PrintWriter("duke.txt");
+        for (Task item: tasks) {
+            writer.println(item.toString());
+        }
+        writer.close();
+    }
+
+    /**
+     * Read the existing task file and create the list of tasks when the program is run.
+     * @param file The name of the file.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     */
+    public static void readFileIntoList(String file, ArrayList<Task> tasks) {
+        List<String> lines = Collections.emptyList();
+
+        try {
+            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (String object: lines) {
+            if (object.charAt(1) == 'T') {
+                if (object.charAt(4) == '-') {
+                    tasks.add(new Todo(object.substring(7), true));
+                } else {
+                    tasks.add(new Todo(object.substring(7), false));
+                }
+            } else {
+                String dateInfo = object.substring(object.indexOf("(") + 5, object.indexOf(")"));
+                if (object.charAt(1) == 'D') {
+                    if (object.charAt(4) == '-') {
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                    } else {
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                    }
+                } else if (object.charAt(1) == 'E') {
+                    if (object.charAt(4) == '-') {
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                    } else {
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                    }
+                }
+            }
+                taskAdded();
+        }
     }
 
     /**
@@ -95,7 +152,7 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String command = nextInput.substring(5);
-        tasks.add(new Todo(command));
+        tasks.add(new Todo(command, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
@@ -117,7 +174,7 @@ public class Duke {
         }
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Deadline(command, dateInfo));
+        tasks.add(new Deadline(command, dateInfo, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
@@ -139,7 +196,7 @@ public class Duke {
         }
         String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Event(command, dateInfo));
+        tasks.add(new Event(command, dateInfo, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();

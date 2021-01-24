@@ -2,6 +2,7 @@
  * Represent a task added by a user.
  */
 public class Task {
+
     /**
      * The content of the task.
      */
@@ -16,11 +17,12 @@ public class Task {
     /**
      * Creates a new task with a given input by the user.
      * Task is initially not done at creation.
-     * @param description The input given by the user.
+     * @param description The input description for the task.
+     * @param isDone The input to see if the task has been completed.
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -44,6 +46,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+            return "[" + getStatusIcon() + "] " + description;
     }
 }
