@@ -9,14 +9,18 @@ import duke.ui.Ui;
 public class DeleteTaskCommand extends Command {
     private int taskIndex;
 
+    private static final String NO_TASK_INDEX_ERROR_MESSAGE = "I'm not sure which task you want to delete!";
+    private static final String INDEX_NOT_NUMBER_ERROR_MESSAGE = "I can only find a task with its index number.";
+    private static final String INDEX_OOB_ERROR_MESSAGE = "I cannot find the task you are referring to.";
+
     public DeleteTaskCommand(String taskIndex) throws DukeException {
         if (taskIndex.isBlank()) {
-            throw new DukeException("I'm not sure which task you want to delete!");
+            throw new DukeException(NO_TASK_INDEX_ERROR_MESSAGE);
         }
         try {
             this.taskIndex = Integer.parseInt(taskIndex.trim());
         } catch (NumberFormatException e) {
-            throw new DukeException("I can only find a task with its index number.");
+            throw new DukeException(INDEX_NOT_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -28,7 +32,7 @@ public class DeleteTaskCommand extends Command {
             ui.printDeleteTaskMessage(task, tasks);
             storage.saveTasksToFile(tasks);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("I cannot find the task you are referring to.");
+            throw new DukeException(INDEX_OOB_ERROR_MESSAGE);
         }
     }
 

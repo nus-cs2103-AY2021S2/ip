@@ -7,9 +7,12 @@ import duke.ui.Ui;
 
 public class ByeCommand extends Command {
 
+    private static final String ERROR_MESSAGE = "Wait, you want to leave or what?";
+
+
     public ByeCommand(String details) throws DukeException {
         if (!details.isBlank()) {
-            throw new DukeException("Wait, you want to leave or what?");
+            throw new DukeException(ERROR_MESSAGE);
         }
     }
 
