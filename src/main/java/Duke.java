@@ -1,10 +1,14 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Task> taskList = new ArrayList<>();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
 
     private static void introduction() {
         String logo = " ____        _        \n"
@@ -55,9 +59,9 @@ public class Duke {
             } else if (command.equals(TaskTypes.TODO.getType())) {
                 return new ToDo(taskInputAndDate[0]);
             } else if (command.equals(TaskTypes.DEADLINE.getType())) {
-                return new Deadline(taskInputAndDate[0], taskInputAndDate[1]);
+                return new Deadline(taskInputAndDate[0], LocalDate.parse(taskInputAndDate[1], formatter));
             } else {
-                return new Event(taskInputAndDate[0], taskInputAndDate[1]);
+                return new Event(taskInputAndDate[0], LocalDate.parse(taskInputAndDate[1], formatter));
             }
         } else {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" +
@@ -115,8 +119,10 @@ public class Duke {
                 printList();
             } else {
                 String taskInput = scanner.nextLine();
-                String[] taskInputAndDate = taskInput.split("/");
-                String taskDescription = taskInputAndDate[0].trim();
+                String[] taskInputAndDate = taskInput.split("/", 2);
+                taskInputAndDate[0] = taskInputAndDate[0].trim();
+                taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
+                String taskDescription = taskInputAndDate[0];
                 if (isDoneCommand(command) || isDeleteCommand(command)) {
                     try {
                         if (isDoneCommand(command)) {
