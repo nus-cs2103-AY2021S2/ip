@@ -21,6 +21,8 @@ public class DeadlineTask extends Task {
     }
 
     @Override public String toString() {
-        return "[D]" + super.checkBoxToString() + description + " (by:" + deadline + ")";
+        return "[D]" + super.checkBoxToString() + description + " (by: "
+                + deadline.getMonth() + " " + deadline.getDayOfMonth()
+                + " " + deadline.getYear() + " " + time + "HRS)";
     }
 }

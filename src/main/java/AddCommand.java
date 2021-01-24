@@ -30,8 +30,6 @@ abstract class AddCommand implements Command {
 
     public String getResponse() {
         return "Got it. I've added this task:\n  ";
-//                + newTask.toString()
-//        + "\nNow you have " + numTasks + " tasks in the list.\n";
     }
 
 }

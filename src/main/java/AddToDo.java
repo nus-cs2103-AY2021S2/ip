@@ -18,4 +18,9 @@ public class AddToDo extends AddCommand {
         numTasks = taskList.getSize();
         return taskList;
     }
+
+    @Override
+    public String getResponse() {
+        return super.getResponse() + super.newTask.toString();
+    }
 }
