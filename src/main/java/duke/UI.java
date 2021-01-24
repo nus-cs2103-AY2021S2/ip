@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
-    static final int LENGTH_OF_LINE = 80;
+
+    private static final int LENGTH_OF_LINE = 80;
 
     private static final String welcome = " __________________________ \n"
             + "|  HI! THIS IS             |\n"
@@ -30,7 +31,7 @@ public class UI {
             + "|  Always be with you.     |\n"
             + "|__________________________|\n";
 
-    private static final String horizontalLine = StringParser.underlineGenerator(LENGTH_OF_LINE);
+    private static final String horizontalLine = StringParser.generateUnderline(LENGTH_OF_LINE);
 
     private static final Scanner sc = new Scanner(System.in);
     private static TaskList list = new TaskList();
