@@ -26,10 +26,15 @@ public class Duke {
         String username = sc.nextLine();
         nextGreet(username);
 
-        FileOutputStream fos = new FileOutputStream("duke.txt", true);
         ArrayList<Task> tasks = new ArrayList<>();
-        readFileIntoList("duke.txt", tasks);
-        fos.close();
+        File newFile = new File("duke.txt");
+        if (newFile.exists()) {
+            FileOutputStream fos = new FileOutputStream("duke.txt", true);
+            readFileIntoList("duke.txt", tasks);
+            fos.close();
+        } else {
+            newFile.createNewFile();
+        }
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
