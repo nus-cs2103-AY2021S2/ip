@@ -1,67 +1,39 @@
 
-what's up? :)
+Hello! I'm Flamingo. What's on your to-do list?
 
 
-error: there is nothing in the list!
+Oh no Flamingo! I need more information to create the task.
 
 
-okay, added this task:
+Okay, I've added this task:
 [T][ ] read book
-you now have a total of 1 tasks.
+You now have a total of 1 tasks.
 
 
-error: not enough information to create task!
+Okay, I've added this task:
+[D][ ] return book (by: Feb 22 2021)
+You now have a total of 2 tasks.
 
 
-okay, added this task:
-[E][ ] project meeting (at: Feb 2 2021 12:30)
-you now have a total of 2 tasks.
+Oh no Flamingo! I didn't understand that.
 
 
-error: not enough information to create task!
-
-
-okay, added this task:
-[D][ ] return book (by: Mar 1 2021)
-you now have a total of 3 tasks.
+Okay, I've added this task:
+[E][ ] meeting (at: Feb 15 2021 12:30)
+You now have a total of 3 tasks.
 
 
 1. [T][ ] read book
-2. [E][ ] project meeting (at: Feb 2 2021 12:30)
-3. [D][ ] return book (by: Mar 1 2021)
+2. [D][ ] return book (by: Feb 22 2021)
+3. [E][ ] meeting (at: Feb 15 2021 12:30)
 
 
-okay, this task has been marked as done:
+Okay, this task has been marked as done:
 1. [T][X] read book
 
 
-error: task does not exist!
+Okay, this task has been marked as done:
+2. [D][X] return book (by: Feb 22 2021)
 
 
-okay, this task has been marked as done:
-3. [D][X] return book (by: Mar 1 2021)
-
-
-1. [T][X] read book
-2. [E][ ] project meeting (at: Feb 2 2021 12:30)
-3. [D][X] return book (by: Mar 1 2021)
-
-
-okay, deleted this task:
-[E][ ] project meeting (at: Feb 2 2021 12:30)
-you now have a total of 2 tasks.
-
-
-okay, deleted this task:
-[D][X] return book (by: Mar 1 2021)
-you now have a total of 1 tasks.
-
-
-1. [T][X] read book
-
-
-error: task does not exist!
-
-
-bye, have a good day! :)
-
+Bye-o Flamingo!

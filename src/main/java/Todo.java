@@ -1,3 +1,6 @@
+/**
+ * Creates a Todo Task with a description.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
