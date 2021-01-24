@@ -39,7 +39,7 @@ delete -1
 delete 7
 delete 1
 list
-delete 5
+delete 4
 list
 deadline return book /by 2020-01 01:02
 event project meeting /at 2020-01 01:02 2020-01-01 20:02

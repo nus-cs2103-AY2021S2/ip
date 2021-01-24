@@ -2,7 +2,6 @@ package fakebot.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 //Deadline class with Date
 public class Deadlines extends Task {
@@ -30,3 +29,4 @@ public class Deadlines extends Task {
                 + printDateFormat.format(deadlineDate) + " " + printTimeFormat.format(deadlineTime) + ")";
     }
 }
+

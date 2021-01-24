@@ -3,7 +3,7 @@ package fakebot.task;
 import java.time.format.DateTimeFormatter;
 
 //Tasks Class that is parent of deadline, Events and Todo
-public abstract class Task {
+public abstract class  Task {
     protected String taskName;
     protected boolean isComplete;
 
