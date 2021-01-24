@@ -18,6 +18,10 @@ public class Task {
         return id;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public boolean isDone() {
         return isDone;
     }

@@ -23,5 +23,4 @@ public class DeleteCommand implements Command {
         numTasks = taskList.getSize();
         return taskList;
     }
-    
 }
