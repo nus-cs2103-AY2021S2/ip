@@ -3,15 +3,10 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo + "Hello! I'm Duke. What can I do for you?\n");
-        ArrayList<Task> inputs = new ArrayList<Task>();
+        System.out.println("Hello! I'm Duke. What can I do for you?\n");
+        Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
-        duke.chat(inputs, 0);
+        duke.chat(scanner);
     }
 
     abstract class Task {
@@ -96,45 +91,40 @@ public class Duke {
         }
     }
 
-    public void chat(ArrayList<Task> inputs, int taskno) {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.equals("bye")) {
-            System.out.println("Bye. Hope to see you again soon!");
-            scanner.close();
-        } else if (input.equals("list")) {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < inputs.size(); i++) {
-                System.out.println(i + 1 + "." + inputs.get(i).toString());
+    public void chat(Scanner scanner) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if (input.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                break;
+            } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println(i + 1 + "." + tasks.get(i).toString());
+                }
+            } else if (input.substring(0, 4).equals("done")) {
+                System.out.println("Nice! I've marked this task as done:");
+                int tasknum = Integer.parseInt(input.substring(5));
+                Task newtask = tasks.get(tasknum - 1).done();
+                System.out.println(newtask.toString());
+                tasks.set(tasknum - 1, newtask);
+            } else {
+                Task newtask;
+                if (input.substring(0, 4).equals("todo")) {
+                    newtask = new ToDo(input.substring(5));
+                    tasks.add(newtask);
+                } else if (input.substring(0, 5).equals("event")) {
+                    int index = input.indexOf("/at");
+                    newtask = new Event(input.substring(6, index - 1), input.substring(index + 3));
+                    tasks.add(newtask);
+                } else {
+                    int index = input.indexOf("/by");
+                    newtask = new Deadline(input.substring(9, index - 1), input.substring(index + 3));
+                    tasks.add(newtask);
+                }
+                System.out.println(String.format("Got it. I've added this task:\n%s\nNow you have %s tasks in the list.", newtask.toString(), tasks.size()));
             }
-            chat(inputs, inputs.size() - 1);
-        } else if (input.substring(0, 4).equals("done")) {
-            System.out.println("Nice! I've marked this task as done:");
-            int tasknum = Integer.parseInt(input.substring(5));
-            Task newtask = inputs.get(tasknum - 1).done();
-            System.out.println(newtask.toString());
-            ArrayList<Task> newinputs = new ArrayList<Task>(inputs);
-            newinputs.set(tasknum - 1, newtask);
-            chat(newinputs, inputs.size() - 1);
-        } else {
-            ArrayList<Task> newinputs = new ArrayList<Task>(inputs);
-            Task newtask;
-            if (input.substring(0, 4).equals("todo")) {
-                newtask = new ToDo(input.substring(5));
-                newinputs.add(newtask);
-            }
-            else if (input.substring(0,5).equals("event")) {
-                int index = input.indexOf("/at");
-                newtask = new Event(input.substring(6, index), input.substring(index + 3));
-                newinputs.add(newtask);
-            }
-            else {
-                int index = input.indexOf("/by");
-                newtask = new Deadline(input.substring(9, index), input.substring(index + 3));
-                newinputs.add(newtask);
-            }
-            System.out.println(String.format("Got it. I've added this task:\n%s\nNow you have %s tasks in the list.", newtask.toString(), newinputs.size()));
-            chat(newinputs, newinputs.size() - 1);
         }
     }
 }
