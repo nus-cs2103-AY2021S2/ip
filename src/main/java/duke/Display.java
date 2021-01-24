@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Display {
@@ -38,7 +40,7 @@ public class Display {
         display("Thanks for patronising McDonalds!\nWe hope to see you again soon!");
     }
 
-    protected static void displayAllTasks() {
+    public static void displayAllTasks() {
         ArrayList<Task> tasks = Duke.tasks;
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
@@ -63,7 +65,7 @@ public class Display {
         display(sb.toString());
     }
 
-    protected static void displayAddedTask(Task task) {
+    public static void displayAddedTask(Task task) {
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
                 + "\nYou now have "
@@ -71,13 +73,13 @@ public class Display {
                 + " order(s)!");
     }
 
-    protected static void displayRemovedTask(Task task) {
+    public static void displayRemovedTask(Task task) {
         display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
                 "\nYou have " + Duke.tasks.size() + " order(s) left!");
     }
 
-    protected static void displayDone(Task task) {
+    public static void displayDone(Task task) {
         display("Tada! Your order has been served!\n\n  " + task);
     }
 

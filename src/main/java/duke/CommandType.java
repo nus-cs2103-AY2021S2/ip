@@ -6,5 +6,6 @@ public enum CommandType {
     DEADLINE,
     DONE,
     LIST,
-    DELETE
+    DELETE,
+    INVALID
 }
