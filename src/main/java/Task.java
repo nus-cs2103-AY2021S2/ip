@@ -56,7 +56,11 @@ public abstract class Task {
         }
      }
 
-    void done() {
+
+    /**
+     * Marks the task as done and prints out to console that task is done.
+     */
+     void done() {
         this.isDone = true;
         Printer.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
