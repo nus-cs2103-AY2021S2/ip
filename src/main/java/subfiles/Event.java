@@ -25,6 +25,10 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     /**
      * Returns a description of the event, formatted with its
      * type, followed by an "X" if it has been marked as done.
