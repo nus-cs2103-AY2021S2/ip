@@ -1,3 +1,4 @@
 T : 1 : Buy acai
-E : 0 : meeting : Monday 2-4pm
-D : 0 : homework : sunday
+E : 1 : meeting : Jan 29 2021
+D : 0 : homework : Feb 3 2021
+D : 0 : Application : Feb 11 2021
