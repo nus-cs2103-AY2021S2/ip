@@ -4,36 +4,29 @@ import exceptions.DukeUnknownArgumentsException;
 import java.util.Scanner;
 
 public class Controller {
-    private final static String INDENT = "\t";
-    private final static String NEWLINE = System.lineSeparator();
-    private final static String LINE = INDENT + "__________________________________________________"
-            + "______________" + NEWLINE;
-    private final static String GREETING = INDENT + "Hello! I'm Duke" + NEWLINE + INDENT + "What" +
-            " can I do for you?" + NEWLINE;
-    private final static String BYE_MSG = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
     private final static String END_COMMAND = "bye";
     private final TaskList taskList;
     private final Storage storage;
+    private final Ui ui;
 
     public Controller() {
         storage = Storage.getInstance();
-        taskList = new TaskList(storage);
+        this.ui = new Ui();
+        taskList = new TaskList(storage, ui);
     }
 
     public void run() {
-        String startMsg = LINE + GREETING + LINE;
-        System.out.println(startMsg);
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+        ui.printStartMsg();
+        String input = ui.getUserCommand();
 
         while(!input.equals(END_COMMAND)) {
-            System.out.print(LINE);
+            ui.printDivider();
             handleInput(input);
-            System.out.print(LINE);
-            input = sc.nextLine();
+            ui.printDivider();
+            input = ui.getUserCommand();
         }
 
-        System.out.println(LINE + BYE_MSG + LINE);
+        ui.printByeMsg();
     }
 
     private void handleInput(String input) {
@@ -59,15 +52,13 @@ public class Controller {
             }
            taskList.updateSave(storage);
         } catch (DukeUnknownArgumentsException e) {
-            String errorMsg = String.format(INDENT + " %s", e);
-            System.out.println(errorMsg);
+            ui.printErrorMsg(e);
         } catch (NumberFormatException e) {
-            System.out.println(INDENT + "Please enter an integer as argument. " + e.getMessage());
+            ui.printErrorMsg(e);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf(INDENT + "Please enter an integer within your tasks " +
-                    "size: %d.%n", taskList.size());
+            ui.printErrorMsg(e, taskList);
         } catch (DukeEmptyListException e) {
-            System.out.println(INDENT + e);
+            ui.printErrorMsg(e);
         }
     }
 

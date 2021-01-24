@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
+    private final Ui ui;
 
-    public TaskList(Storage storage) {
+    public TaskList(Storage storage, Ui ui) {
         tasks = storage.load();
+        this.ui = ui;
     }
 
     public int size() {
@@ -25,9 +27,7 @@ public class TaskList {
         int index = Parser.stringToIndex(input, 5);
         Task task = tasks.get(index);
         task.done();
-        String output = String.format("\t" + " Nice! I've marked this task as done:" + "\n"
-                + "\t" + "\t" + " %s", task);
-        System.out.println(output);
+        ui.printDoneMsg(task);
     }
 
     Todo createTodo(String input) throws DukeNoDescriptionException {
@@ -53,53 +53,38 @@ public class TaskList {
         if (tasks.isEmpty()) {
             throw new DukeEmptyListException();
         }
-        Task t = tasks.get(index);
+        Task task = tasks.get(index);
         tasks.remove(index);
-        String output =
-                String.format("\t" + " Noted. I've removed this task:" + "\n" + "\t" + "\t"
-                                + t + "\n" + "\t" + " Now you have %d tasks in the list.",
-                        tasks.size());
-        System.out.println(output);
+        ui.printDeleteMsg(task, tasks.size());
     }
 
     void add(String input) throws DukeUnknownArgumentsException {
         try {
-            Task t;
+            Task task;
             AddCommandType command = Parser.inputToAddCommand(input);
             switch (command) {
             case TODO:
-                t = createTodo(input);
+                task = createTodo(input);
                 break;
             case DEADLINE:
-                t = createDeadline(input);
+                task = createDeadline(input);
                 break;
             case EVENT:
-                t = createEvent(input);
+                task = createEvent(input);
                 break;
             default:
                 throw new DukeUnknownArgumentsException();
             }
-            tasks.add(t);
-            String output = String.format("\t" + " Got it. I've added this task:" + "\n"
-                            + "\t" + "\t" + " %s" + "\n" + "\t" + " Now you have %d tasks "
-                            + "in the list."
-                    , t, tasks.size());
-            System.out.println(output);
+            tasks.add(task);
+            ui.printAddMsg(task, tasks.size());
         } catch (DukeNoDescriptionException e) {
-            String output = String.format("\t" + " %s", e);
-            System.out.println(output);
+            ui.printErrorMsg(e);
         } catch (DateTimeParseException e) {
-            System.out.println("\t" + "Date is not input correctly. " + e.getMessage());
+            ui.printErrorMsg(e);
         }
     }
 
     void print() {
-        System.out.println("\t" + " Here are the tasks in your list:");
-        int num = 1;
-        for (Task task : tasks) {
-            String output = String.format("\t" + " %d.%s", num, task);
-            System.out.println(output);
-            num++;
-        }
+        ui.printTaskList(tasks);
     }
 }

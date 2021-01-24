@@ -4,6 +4,7 @@ import exceptions.DukeUnknownArgumentsException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static final String DEADLINE_COMMAND = "deadline";
@@ -120,9 +121,13 @@ public class Parser {
         }
     }
 
-    static LocalDate obtainEncodedDate(String input) {
+    static LocalDate obtainEncodedDate(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String date = separatedInput[ENCODE_DATE_PARAM];
-        return LocalDate.parse(date);
+        try {
+            return LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeCorruptedStorageException();
+        }
     }
 }
