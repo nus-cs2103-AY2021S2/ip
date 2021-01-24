@@ -1,28 +1,39 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private final LocalDateTime deadline;
+
+    public Deadline(String description, LocalDateTime deadline) {
         super(description, "0");
-        this.by = by;
+        this.deadline = deadline;
     }
 
     /**
      * Constructor of the Deadline class
      * @param description A brief description of the deadline.
-     * @param by The time/date that the task must be completed by.
      */
 
-    public Deadline(String description, String isDone, String by) {
+    public Deadline(String description, String isDone, LocalDateTime deadline) {
         super(description, isDone);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     public String getDetails() {
-        return by;
+        return deadline.toLocalDate().toString()
+                + " " + deadline.toLocalTime().format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        int dayOfMonth = deadline.getDayOfMonth();
+        Month month = deadline.getMonth();
+        int year = deadline.getYear();
+        LocalTime time = deadline.toLocalTime();
+        String twelveHrTime = time.format(DateTimeFormatter.ofPattern("h:mm a"));
+        return "[D]" + super.toString() + " (by: " + month.toString()
+                + " " + dayOfMonth + " " + year + " " + twelveHrTime + ")";
     }
 }

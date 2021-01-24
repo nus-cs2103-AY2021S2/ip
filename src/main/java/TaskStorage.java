@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,6 +50,7 @@ public class TaskStorage {
 
     public List<Task> retrieveData() {
         List<Task> retrievedTasks = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
@@ -62,11 +65,13 @@ public class TaskStorage {
                         break;
                     case "D":
                         String deadlineDetails = taskInfo[3];
-                        retrievedTasks.add(new Deadline(description, isDone, deadlineDetails));
+                        LocalDateTime deadline = LocalDateTime.parse(deadlineDetails, formatter);
+                        retrievedTasks.add(new Deadline(description, isDone, deadline));
                         break;
                     case "E":
                         String eventDetails = taskInfo[3];
-                        retrievedTasks.add(new Event(description, isDone, eventDetails));
+                        LocalDateTime eventTime = LocalDateTime.parse(eventDetails, formatter);
+                        retrievedTasks.add(new Event(description, isDone, eventTime));
                         break;
                     default:
                 }

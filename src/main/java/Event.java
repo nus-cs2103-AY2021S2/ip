@@ -1,28 +1,39 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String at) {
+public class Event extends Task {
+    private final LocalDateTime eventTime;
+
+    public Event(String description, LocalDateTime eventTime) {
         super(description, "0");
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     /**
      * Constructor of the Event class.
      * @param description A brief description of the event.
-     * @param at The date/time of the event.
      */
 
-    public Event(String description, String isDone, String at) {
+    public Event(String description, String isDone, LocalDateTime eventTime) {
         super(description, isDone);
-        this.at = at;
+        this.eventTime = eventTime;
     }
 
     public String getDetails() {
-        return at;
+        return eventTime.toLocalDate().toString()
+                + " " + eventTime.toLocalTime().format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        int dayOfMonth = eventTime.getDayOfMonth();
+        Month month = eventTime.getMonth();
+        int year = eventTime.getYear();
+        LocalTime time = eventTime.toLocalTime();
+        String twelveHrTime = time.format(DateTimeFormatter.ofPattern("h:mm a"));
+        return "[E]" + super.toString() + " (at: " + month.toString()
+                + " " + dayOfMonth + " " + year + " " + twelveHrTime + ")";
     }
 }

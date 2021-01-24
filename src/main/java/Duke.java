@@ -1,9 +1,10 @@
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-
+    private static DateTimeFormatter formatter;
     private static List<Task> list;
     private static TaskStorage storage;
 
@@ -16,6 +17,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         storage = new TaskStorage();
         list = storage.retrieveData();
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         System.out.println("POWERED BY JARVIS\n");
         greet();
         String userInput = "";
@@ -118,7 +120,8 @@ public class Duke {
             if (deadlineDetails.length < 2 || deadlineDetails[1].isBlank()) {
                 throw new DukeDeadlineException("You have not entered a deadline for this task!");
             }
-            addTask(new Deadline(deadlineDetails[0], deadlineDetails[1]));
+            LocalDateTime dateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
+            addTask(new Deadline(deadlineDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
             print(e.getMessage());
         } catch (DukeDeadlineException e) {
@@ -141,7 +144,8 @@ public class Duke {
             if (eventDetails.length < 2 || eventDetails[1].isBlank()) {
                 throw new DukeEventException("You have not entered the date/time for this event!");
             }
-            addTask(new Event(eventDetails[0], eventDetails[1]));
+            LocalDateTime dateTime = LocalDateTime.parse(eventDetails[1], formatter);
+            addTask(new Event(eventDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
             print(e.getMessage());
         } catch (DukeEventException e) {
