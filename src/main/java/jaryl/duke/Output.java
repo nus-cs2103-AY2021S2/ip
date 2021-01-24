@@ -9,7 +9,7 @@ public class Output {
 
     public void printWelcomeMsg() {
         System.out.println(addLine());
-        System.out.println("    Hello! I'm Cimori, your friendly chatbot.\n    What can I do for you today?\n");
+        System.out.println("    Hello! I'm Duke, your friendly chatbot.\n    What can I do for you today?\n");
         System.out.println("    1. list                                   Lists out all existing tasks                       (e.g. list)");
         System.out.println("    2. done <task number>                     Marks the specified task number as done/undone     (e.g. done 2)");
         System.out.println("    3. todo <todo message>                    Adds the specified todo to the list                (e.g. todo homework)");
