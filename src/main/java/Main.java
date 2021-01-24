@@ -1,11 +1,10 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 public class Main {
     private Storage storage;
-    private Scanner sc;
+    private Ui ui;
     private State state;
     private TaskList taskList;
 
@@ -26,13 +25,13 @@ public class Main {
 
     private void initialize(String[] args) {
         try {
+            this.ui = new Ui();
             this.storage = initializeStorage(args);
-            this.sc = new Scanner(System.in);
             this.taskList = storage.loadTasks();
             this.state = State.ONLINE;
 
             // Print greeting
-            printGreeting();
+            ui.printGreeting();
         } catch (InvalidStorageFilePathException ex) {
             System.out.println("Failed to initialize storage. Exiting...");
         } catch (IOException ex) {
@@ -42,7 +41,7 @@ public class Main {
 
     private void exit() {
         // Print exit message
-        printExitMessage();
+        ui.printExitMessage();
     }
 
     private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
@@ -58,12 +57,12 @@ public class Main {
     private void runLoop() {
         while (isOnline()) {
             try {
-                printHorizontalLine();
-                Command command = Parser.parseCommand(sc.next());
-                String arguments = sc.nextLine();
+                ui.printDivider();
+                Command command = Parser.parseCommand(ui.getUserCommand());
+                String arguments = ui.getUserCommandArguments();
                 executeCommand(command, arguments);
             } catch (InvalidCommandException ex) {
-                printHorizontalLine();
+                ui.printDivider();
                 System.out.println(ex.getMessage());
             }
         }
@@ -77,39 +76,17 @@ public class Main {
         this.state = State.OFF;
     }
 
-    private void printGreeting() {
-        printHorizontalLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm");
-        System.out.println(logo);
-        System.out.println("What can I do for you?");
-    }
-
-    private void printExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-        printHorizontalLine();
-    }
-
-    private void printHorizontalLine() {
-        for (int i = 0; i < 60; i++) {
-            System.out.print('-');
-        }
-        System.out.println();
-    }
+    
 
     private void executeCommand(Command command, String arguments) {
         try {
-            printHorizontalLine();
+            ui.printDivider();
             switch (command) {
             case BYE:
                 off();
                 break;
             case LIST:
-                printAllTasks();
+                ui.printAllTasks(taskList);
                 break;
             case DONE:
                 markTaskAsDone(arguments);
@@ -126,22 +103,11 @@ public class Main {
                 storage.saveTasks(taskList);
                 break;
             case HELP:
-                printHelp();
+                ui.printHelp();
                 break;
             }
         } catch (NoDescriptionException | InvalidDescriptionException | StorageException ex) {
             System.out.println(ex.getMessage());
-        }
-    }
-
-    public void printAllTasks() {
-        if (taskList.isEmpty()) {
-            System.out.println("You do not have anything to do at the moment!");
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            for (int i = 1; i <= taskList.size(); i++) {
-                System.out.printf("%d.%s\n", i, taskList.getTask(i - 1).toString());
-            }
         }
     }
 
@@ -164,7 +130,8 @@ public class Main {
         }
         if (task != null) {
             taskList.addTask(task);
-            printAddedMessage(task);
+            ui.printAddedMessage(task);
+            ui.printTaskListSize(taskList);
         }
     }
 
@@ -205,7 +172,8 @@ public class Main {
             int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
             Task task = taskList.getTask(index);
             taskList.deleteTask(index);
-            printDeletedMessage(task);
+            ui.printDeletedMessage(task);
+            ui.printTaskListSize(taskList);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
         } catch (IndexOutOfBoundsException ex) {
@@ -222,47 +190,11 @@ public class Main {
             int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
             Task task = taskList.getTask(index);
             task.completeTask();
-            printMarkedAsDoneMessage(task);
+            ui.printMarkedAsDoneMessage(task);
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
         } catch (IndexOutOfBoundsException ex) {
             throw new InvalidDescriptionException("Please enter a valid index!");
         }
-    }
-
-    private void printMarkedAsDoneMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
-    }
-
-    private void printAddedMessage(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task.toString());
-        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
-    }
-    
-    private void printDeletedMessage(Task task) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + task.toString());
-        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
-    }
-
-    private void printHelp() {
-        System.out.println("Here are the list of available commands:");
-        System.out.println("BYE:\nExit the program\nUsage: bye");
-        System.out.println();
-        System.out.println("LIST:\nPrint the list of current tasks\nUsage: list");
-        System.out.println();
-        System.out.println("DONE:\nMark a task as completed\nUsage: done <task_number>");
-        System.out.println();
-        System.out.println("DELETE:\nDelete a task\nUsage: delete <task_number>");
-        System.out.println();
-        System.out.println("TODO:\nAdd a todo task\nUsage: todo <task_description>");
-        System.out.println();
-        System.out.println("DEADLINE:\nAdd a deadline task\nUsage: deadline <task_description> /by dd/mm/yyyy HHHH");
-        System.out.println();
-        System.out.println("EVENT:\nAdd an event task\nUsage: event <task_description> /at <event_time>");
-        System.out.println();
-        System.out.println("HELP:\nPrint available commands\nUsage: help");
     }
 }

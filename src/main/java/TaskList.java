@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskList {
@@ -27,5 +28,10 @@ public class TaskList {
     
     public Task getTask(int index) {
         return taskList.get(index);
+    }
+    
+    // Returns an unmodifiable view collection
+    public List<Task> getAsImmutableList() {
+        return Collections.unmodifiableList(taskList);
     }
 }
