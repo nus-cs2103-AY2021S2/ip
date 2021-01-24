@@ -24,8 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 public class StorageTest {
+    /** Directory path of the save file */
     private static final String PATH = "data/duke.txt";
 
+    /** Tests for saving tasks without any previously existing save file */
     @Test
     public void saveTasks_NoExisting() {
         File file = new File(PATH);
@@ -36,13 +38,13 @@ public class StorageTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy ha");
         LocalDateTime dateTime = LocalDateTime.now();
 
-        List<Task> list = new ArrayList<>();
-        list.add(new ToDo("DESCRIPTION 1"));
-        list.add(new Deadline("DESCRIPTION 2", dateTime, true));
-        list.add(new Event("DESCRIPTION 3", dateTime, dateTime));
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new ToDo("DESCRIPTION 1"));
+        tasks.add(new Deadline("DESCRIPTION 2", dateTime, true));
+        tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         try {
-            Storage.saveTasks(list);
+            Storage.saveTasks(tasks);
         } catch(DukeSaveException e) {
             assumeFalse(true, "Failed to save tasks");
         }
@@ -51,7 +53,7 @@ public class StorageTest {
             Scanner scanner = new Scanner(file);
 
             String content = "";
-            while(scanner.hasNextLine()) {
+            while (scanner.hasNextLine()) {
                 content += scanner.nextLine() + "\n";
             }
 
@@ -64,6 +66,7 @@ public class StorageTest {
         }
     }
 
+    /** Tests for loading tasks from a save file when there is no previously existing save file */
     @Test
     public void loadTasksTo_NoExisting() {
         // Create the 'data' folder if missing
