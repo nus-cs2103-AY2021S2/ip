@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class Duke {
     List<Task> tasks;
+    private Storage storage;
 
-    public Duke() {
-        this.tasks = new ArrayList<>();
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
     }
 
     public void runDuke() {
@@ -17,6 +18,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("How can I help you?");
+        this.tasks = storage.load();
         scan();
     }
 
@@ -118,7 +120,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        String home = System.getProperty("user.home");
+        String filePath = home+"/dukeTasks.txt";
+        Duke duke = new Duke(filePath);
         duke.runDuke();
     }
 }

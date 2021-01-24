@@ -12,13 +12,18 @@ public class Storage {
     public List<Task> load() {
         //Dukedata/tasklist.txt
         File tasks = new File(filePath);
+        System.out.println("1");
         ArrayList<Task> taskList = new ArrayList<>();
         boolean newFile = false;
         try {
+            System.out.println("Location: " + tasks.getAbsolutePath());
+            System.out.println("Created new file " + tasks.getName());
             if (tasks.createNewFile()) {
                 System.out.println("Created new file " + tasks.getName());
+                System.out.println("Location: " + tasks.getAbsolutePath());
                 newFile = true;
-
+            } else {
+                System.out.println("2");
             }
         } catch (IOException e) {
             System.out.println("An error occured when trying to create the file");
