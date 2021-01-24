@@ -11,7 +11,8 @@ public class Parser {
 
 
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
-    private enum TaskType { TODO, EVENT, DEADLINE }
+
+    private enum TaskType {TODO, EVENT, DEADLINE}
 
     public static String convertStringsToString(List<String> stringList) {
         StringBuilder builder = new StringBuilder();
@@ -30,7 +31,7 @@ public class Parser {
             currentString.append(currentTask.isComplete());
             currentString.append(SPLIT_REGEX);
             currentString.append(currentTask.getTaskName());
-        }else if (currentTask instanceof Events) {
+        } else if (currentTask instanceof Events) {
             Events events = (Events) currentTask;
             currentString.append(TaskType.EVENT.name());
             currentString.append(SPLIT_REGEX);
@@ -45,7 +46,7 @@ public class Parser {
             currentString.append(events.getEndDate());
             currentString.append(SPLIT_REGEX);
             currentString.append(events.getEndTime());
-        }else if (currentTask instanceof Deadlines) {
+        } else if (currentTask instanceof Deadlines) {
             Deadlines deadlines = (Deadlines) currentTask;
             currentString.append(TaskType.DEADLINE.name());
             currentString.append(SPLIT_REGEX);
@@ -59,10 +60,11 @@ public class Parser {
         }
         return currentString.toString();
     }
+
     public static List<String> convertTasksToStrings(TaskList taskList) {
         List<String> strings = new ArrayList<String>();
 
-        for(int i = 0; i < taskList.getSize() ; i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTask(i);
             strings.add(convertTaskTOString(currentTask));
         }
@@ -77,19 +79,20 @@ public class Parser {
             currentTask = new ToDos(parts[2]);
             break;
         case EVENT:
-            currentTask = new Events(parts[2], LocalDate.parse(parts[3]) , LocalTime.parse(parts[4])
-                    , LocalDate.parse(parts[5]) , LocalTime.parse(parts[6]));
+            currentTask = new Events(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4])
+                    , LocalDate.parse(parts[5]), LocalTime.parse(parts[6]));
             break;
         case DEADLINE:
-            currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]) , LocalTime.parse(parts[4]) );
+            currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
         }
 
-        if(Boolean.parseBoolean(parts[1]))
+        if (Boolean.parseBoolean(parts[1]))
             currentTask.markComplete();
 
         return currentTask;
     }
+
     public static List<Task> parseStringsToTasks(List<String> stringList) {
         List<Task> tasks = new ArrayList<Task>();
 

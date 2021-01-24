@@ -3,7 +3,7 @@ package fakebot.task;
 import java.time.format.DateTimeFormatter;
 
 //Tasks Class that is parent of deadline, Events and Todo
-public abstract class  Task {
+public abstract class Task {
     protected String taskName;
     protected boolean isComplete;
 
@@ -12,6 +12,7 @@ public abstract class  Task {
 
     protected DateTimeFormatter saveDateFormat;
     protected DateTimeFormatter saveTimeFormat;
+
     public Task(String taskName) {
         this.taskName = taskName;
         isComplete = false;
@@ -27,17 +28,17 @@ public abstract class  Task {
         return taskName;
     }
 
-    public void markComplete(){
+    public void markComplete() {
         isComplete = true;
     }
 
 
-    public boolean isComplete(){
+    public boolean isComplete() {
         return isComplete;
     }
 
     @Override
     public String toString() {
-        return (isComplete ? "[X] "+taskName : "[ ] "+taskName);
+        return (isComplete ? "[X] " + taskName : "[ ] " + taskName);
     }
 }

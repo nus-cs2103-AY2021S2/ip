@@ -21,7 +21,6 @@ public class Events extends Task {
     public String getTiming() {
         return saveDateFormat.format(startDate) + " " + saveDateFormat.format(startTime) + " " +
                 saveDateFormat.format(endDate) + " " + saveDateFormat.format(endTime);
-
     }
 
     public String getStartDate() {

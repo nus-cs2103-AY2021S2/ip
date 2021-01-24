@@ -7,9 +7,11 @@ import java.util.Locale;
 public class Command {
     private CommandType type;
     private String description;
+
     public Command(CommandType type) {
         this.type = type;
     }
+
     public Command(CommandType type, String description) {
         this.type = type;
         this.description = description;
