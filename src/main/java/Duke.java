@@ -1,9 +1,6 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,15 +13,15 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" + "What can I help you with today! :-)");
-        List<Task> tasks = new ArrayList<Task>();
+
         Scanner scan = new Scanner(System.in);
         Validation validate = new Validation();
         DateValidation dateValidation = new DateValidation();
 
         Storage storage = new Storage("data/tasks.txt");
         storage.checkFileExistence();
-        tasks = storage.loadTasks();
-        
+        TaskList tasks = new TaskList(storage.loadTasks());
+
         int number;
 
         while (true) {
@@ -42,7 +39,7 @@ public class Duke {
                         tasks.add(newToDo);
                         storage.addTask(newToDo);
                         System.out.println("Done! One new task:\n" + newToDo.toString() + "\nNow you have " +
-                                tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
+                                tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
                                 " in the list");
                         break;
                     case "deadline":
@@ -54,7 +51,7 @@ public class Duke {
                             tasks.add(newDeadline);
                             storage.addTask(newDeadline);
                             System.out.println("Done! One new task:\n" + newDeadline.toString() +
-                                    "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
+                                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
                                     " in the list");
                             break;
                         } catch (DukeException e) {
@@ -70,7 +67,7 @@ public class Duke {
                             tasks.add(newEvent);
                             storage.addTask(newEvent);
                             System.out.println("Done! One new task:\n" + newEvent.toString() +
-                                    "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
+                                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
                                     " in the list");
                             break;
                         } catch (DukeException e) {
@@ -78,19 +75,32 @@ public class Duke {
                             break;
                         }
                     case "done":
-                        number = Integer.parseInt(command.substring(index + 1));
-                        Task toMark = tasks.get(number - 1);
-                        String response = storage.markTask(toMark);
-                        System.out.println(response);
-                        break;
+                        // todo: if number out of bounds, throw exception
+                        try {
+                            number = Integer.parseInt(command.substring(index + 1));
+                            validate.checkValidRange(tasks.getSize(), number);
+                            Task toMark = tasks.find(number - 1);
+                            String response = storage.markTask(toMark);
+                            System.out.println(response);
+                            break;
+                        } catch (DukeException e) {
+                            System.out.println(e);
+                            break;
+                        }
                     case "delete":
-                        number = Integer.parseInt(command.substring(index + 1));
-                        Task selected = tasks.get(number - 1);
-                        tasks.remove(number - 1);
-                        storage.deleteTask(selected);
-                        System.out.println("Noted, I've removed this task:\n" + selected.toString() +
-                                "\nNow you have " + tasks.size() + ((tasks.size() == 1) ? " task" : " tasks") +
-                                        " in the list");
+                        try {
+                            number = Integer.parseInt(command.substring(index + 1));
+                            validate.checkValidRange(tasks.getSize(), number);
+                            Task selected = tasks.find(number - 1);
+                            tasks.delete(number - 1);
+                            storage.deleteTask(selected);
+                            System.out.println("Noted, I've removed this task:\n" + selected.toString() +
+                                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
+                                    " in the list");
+                        } catch (DukeException e) {
+                            System.out.println(e);
+                            break;
+                        }
                     }
                 } else {
                     switch (command) {
@@ -99,9 +109,7 @@ public class Duke {
                         break;
                     case "list":
                         System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < tasks.size(); i++) {
-                            System.out.println((i + 1) + "." + tasks.get(i).toString());
-                        }
+                        tasks.list();
                         break;
                     }
                 }

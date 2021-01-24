@@ -7,11 +7,13 @@ public class Storage {
     protected String path;
     protected File localFile;
     protected boolean fileOriginallyPresent;
+    protected DateValidation validate;
 
     public Storage(String path) {
         this.path = path;
         this.localFile = new File(path);
         this.fileOriginallyPresent = true;
+        this.validate = new DateValidation();
     }
 
     public void checkFileExistence() {
@@ -57,7 +59,7 @@ public class Storage {
                 case 'D':
                     String deadlineDescription = data.substring(7, startingIndex - 1);
                     String by = data.substring(startingIndex + 5, endingIndex);
-                    Deadline deadline = new Deadline(deadlineDescription, by);
+                    Deadline deadline = new Deadline(deadlineDescription, validate.convertDate(by));
                     if (isDone == 'X') {
                         deadline.setIsDone();
                     }

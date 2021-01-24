@@ -32,4 +32,10 @@ public class Validation {
             throw new DukeException(":( OOPS! Please input a valid time/date");
         }
     }
+
+    public void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
+        if(chosenNumber > taskSize) {
+            throw new DukeException(":( OOPS! This task does not exist! Use 'list' to check your task numbers!");
+        }
+    }
 }
