@@ -7,12 +7,19 @@ import Duke.Helper.*;
 
 import java.util.Scanner;
 
+/**
+ * The main driver class for this application
+ */
 public class Duke {
     private final Scanner sc;
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * The Duke class constructor has 1 parameter: a path to the destination for reading and writing data.
+     * @param path the destination for reading and writing data.
+     */
     public Duke(String path){
         this.sc = new Scanner(System.in);
         this.storage = new Storage(path);
@@ -20,12 +27,16 @@ public class Duke {
         this.ui = new Ui();
     }
 
+    /**
+     * Main method for running this application.
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke(Constants.FILE_PATH);
         duke.run();
     }
 
-    public void run() {
+    private void run() {
         System.out.println(Constants.START);
         ui.printResponse(Constants.GREETING);
         while (sc.hasNextLine()){
