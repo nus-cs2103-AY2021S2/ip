@@ -168,7 +168,7 @@ public class Duke {
             } catch (IOException ex) {
                 System.out.println("Something went wrong: " + ex.getMessage());
             } catch (DateTimeParseException ex) {
-                System.out.println("Your DateTime format is wrong! The correct format is yyyy-MM-dd");
+                System.out.println("Your DateTime format is wrong! The correct format is yyyy-MM-dd or yyyy/MM/dd");
             } finally {
                 System.out.println("     _______________________________________\n");
             }
