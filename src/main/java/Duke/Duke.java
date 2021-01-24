@@ -1,5 +1,9 @@
 package Duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,6 +49,7 @@ public class Duke {
 
                     ToDo newToDoTask = new ToDo(userInput.substring(5));
                     taskList.add(newToDoTask);
+                    updateFile(taskList);
 
                     // Print a success message
                     System.out.println(newToDoTask.successMessage(taskList.size()));
@@ -52,6 +57,8 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException ex) {
                     // Description is empty
                     System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("OOPS!!! The file could not be found.");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from todo");
                 }
@@ -71,12 +78,15 @@ public class Duke {
                     // Add a deadline task
                     Deadline newDeadlineTask = new Deadline(description, by);
                     taskList.add(newDeadlineTask);
+                    updateFile(taskList);
                     
                     // Print a success message
                     System.out.println(newDeadlineTask.successMessage(taskList.size()));
                 } catch (StringIndexOutOfBoundsException ex) {
                     // Description is empty
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("OOPS!!! The file could not be found.");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from deadline");
                 }
@@ -96,12 +106,15 @@ public class Duke {
                     // Add a deadline task
                     Event newEventTask = new Event(description, at);
                     taskList.add(newEventTask);
+                    updateFile(taskList);
                     
                     // Print a success message
                     System.out.println(newEventTask.successMessage(taskList.size()));
                 } catch (StringIndexOutOfBoundsException ex) {
                     // Description is empty
                     System.out.println("OOPS!!! The description of an event cannot be empty.");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("OOPS!!! The file could not be found.");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from event");
                 }
@@ -113,6 +126,7 @@ public class Duke {
 
                     // Mark the task as done
                     taskList.get(taskIndex - 1).markAsDone();
+                    updateFile(taskList);
 
                     // Print success message that the task was marked as done
                     System.out.println("Nice! I've marked this task as done:\n "
@@ -120,6 +134,8 @@ public class Duke {
                 } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                     // Task number is empty
                     System.out.println("Please enter a valid task number.");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("OOPS!!! The file could not be found.");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from done");
                 }
@@ -132,19 +148,50 @@ public class Duke {
 
                     // Remove the appropriate task away from the list of task
                     taskList.remove(taskIndex);
+                    updateFile(taskList);
                     System.out.println(taskToBeRemoved.deleteMessage(taskList.size()));
                 } catch (NumberFormatException | IndexOutOfBoundsException ex) {
                     // Task number is empty
                     System.out.println("Please enter a valid task number.");
+                } catch (FileNotFoundException ex) {
+                    System.out.println("OOPS!!! The file could not be found.");
                 }  
                 
-
             } else {
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
         }
-
         sc.close();
+    }
+
+    private static void updateFile (ArrayList<Task> taskList) throws FileNotFoundException {
+        String FILE_PATH = "data/duke.txt"; // Hardcoded file path
+        File file = new File(FILE_PATH); // create a File for the given file path
+
+        if (!file.exists() && !file.isFile()) {
+            // Create a new file
+            try {
+                file.createNewFile();
+                System.out.println("File has been created");
+            } catch (IOException ex) {
+                System.out.println("An IOException has occured while creating the file");
+            }   
+        }
+
+        // Push the file content to the page
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(FILE_PATH);
+
+            // Rewrite the file with the entire list of text
+            for (int index = 0; index < taskList.size(); index++) {
+                fileWriter.write(taskList.get(index).toString() + "\n");
+            }
+            
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An IOException has occured while writing to the file");
+        }
     }
 }
