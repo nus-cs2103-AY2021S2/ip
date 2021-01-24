@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Implementation for the Tasks that the chat-bot stores.
  * @author Soon Keat Neo
