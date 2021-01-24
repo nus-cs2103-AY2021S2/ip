@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    public static List<ListItem> importData() {
+    private final String filePath;
+    public Storage(String path){
+        this.filePath = path;
+    }
+    public List<ListItem> load() throws DukeException.IOErrorException {
         List<ListItem> importedList;
         importedList = new ArrayList<>();
         try {
-            File f = new File("data/duke.txt");
+            File f = new File(this.filePath);
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             while (s.hasNext()) {
                 String[] result = s.nextLine().split("\\|");
@@ -30,18 +34,18 @@ public class Storage {
             s.close();
             return importedList;
         }catch(FileNotFoundException ex){
-            return new ArrayList<>();
+            throw new DukeException.IOErrorException();
         }
     }
 
-    public static String writeData(String input){
+    public void writeData(String input) throws DukeException.IOErrorException{
+        String statusCode = "";
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
             fw.write(input);
             fw.close();
-            return "";
         }catch(IOException ex){
-            return "IO error";
+            throw new DukeException.IOErrorException();
         }
     }
 }

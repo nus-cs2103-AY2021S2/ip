@@ -60,9 +60,9 @@ public class Parser {
             } else {
 //                System.out.println(Arrays.toString(result));
 //                System.out.println(predefinedCommand.valueOf(result[0]));
-                if(predefinedCommand.valueOf(result[0]) != null) {
-                    tempCommand = result[0];
-                }else{
+                try {
+                    tempCommand = String.valueOf(predefinedCommand.valueOf(result[0]));
+                }catch(IllegalArgumentException ex){
                     throw new DukeException.UnknownCommandException();
                 }
             }

@@ -25,7 +25,6 @@ public class Deadline extends ListItem {
 
     @Override
     public String toString() {
-        System.out.println( parsedDate == null);
         return "[D]" + (super.getDoneStatus() == true ? "[X] " : "[ ] ") + super.getTask() + " (by: " + (parsedDate == null ? this.date : parsedDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))+ ")";
     }
 
