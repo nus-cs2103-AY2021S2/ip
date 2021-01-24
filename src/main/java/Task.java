@@ -7,9 +7,9 @@ public class Task {
      * @param description A brief description of the task.
      */
 
-    protected Task(String description) {
+    protected Task(String description, String isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone.equals("1") ? true : false;
     }
 
     /**
@@ -19,6 +19,14 @@ public class Task {
 
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**
