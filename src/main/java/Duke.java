@@ -1,3 +1,8 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.*;
 
@@ -75,6 +80,10 @@ public class Duke {
             this.done = true;
         }
 
+        public String dateFormat(LocalDateTime date) {
+            return(date.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")));
+        }
+
         @Override
         public String toString() {
             if (!this.done) {
@@ -87,37 +96,48 @@ public class Duke {
     }
 
     public static class Deadline extends Task {
-        private String doneBy;
+        private LocalDateTime doneBy;
 
         public Deadline(String s, String doneBy) {
             super(s);
-            this.doneBy = doneBy;
+            String[] split = doneBy.split("\\s+");
+            if (split.length == 1) {
+                this.doneBy = LocalDate.parse(doneBy).atTime(0,0);
+            } else if (split.length == 2) {
+                this.doneBy = LocalDate.parse(split[0]).atTime(LocalTime.parse(split[1]));
+            }
+
         }
 
         @Override
         public String toString() {
             if (!this.done) {
-                return ("[D][ ] " + this.todo + " (by:" + this.doneBy + ")");
+                return ("[D][ ] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");
             } else {
-                return ("[D][X] " + this.todo + " (by:" + this.doneBy + ")");
+                return ("[D][X] " + this.todo + " (by:" + dateFormat(this.doneBy) + ")");
             }
         }
     }
 
     public static class Event extends Task {
-        private String time;
+        private LocalDateTime time;
 
         public Event(String s, String time) {
             super(s);
-            this.time = time;
+            String[] split = time.split("\\s+");
+            if (split.length == 1) {
+                this.time = LocalDate.parse(time).atTime(0,0);
+            } else if (split.length == 2) {
+                this.time = LocalDate.parse(split[0]).atTime(LocalTime.parse(split[1]));
+            }
         }
 
         @Override
         public String toString() {
             if (!this.done) {
-                return ("[E][ ] " + this.todo + " (at:" + this.time + ")");
+                return ("[E][ ] " + this.todo + " (at:" + dateFormat(this.time) + ")");
             } else {
-                return ("[E][X] " + this.todo + " (at:" + this.time + ")");
+                return ("[E][X] " + this.todo + " (at:" + dateFormat(this.time) + ")");
             }
         }
     }
@@ -182,10 +202,13 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] splitagain = input.substring(9).split("/by");
-                        leest.add(new Deadline(splitagain[0], splitagain[1]));
+                        leest.add(new Deadline(splitagain[0], splitagain[1].substring(1)));
                         System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task:");
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                    } catch (DateTimeParseException de) {
+                        System.out.println("☹ OOPS!!! Please define your todo date/time in the " +
+                                "YYYY-MM-DD HH:MM format uwu.");
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
                     }
@@ -197,6 +220,9 @@ public class Duke {
                         System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task:");
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                    } catch (DateTimeParseException de) {
+                        System.out.println("☹ OOPS!!! Please define your todo date/time in the " +
+                                "YYYY-MM-DD HH:MM format uwu.");
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your event properly uwu.");
                     }
