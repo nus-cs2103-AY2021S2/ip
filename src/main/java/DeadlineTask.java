@@ -28,6 +28,26 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String serialize() {
+        String serializeFormat = "DEADLINE | %b | %s | %s";
+        return String.format(serializeFormat, this.isDone, this.description, this.deadline);
+    }
+
+    /**
+     * Deserialize string into a DeadlineTask.
+     * @param string String to deserialize.
+     * @return DeadlineTask deserialized from string.
+     */
+    public static DeadlineTask deserialize(String string) {
+        String[] fields = string.split(" \\| ");
+        System.out.println(fields);
+        boolean isDone = Boolean.valueOf(fields[1]);
+        String description = fields[2];
+        String deadline = fields[3];
+        return new DeadlineTask(description, isDone, deadline);
+    }
+
+    @Override
     public String toString() {
         String taskFormat = "[%s][%s] %s (by: %s)";
         return String.format(
