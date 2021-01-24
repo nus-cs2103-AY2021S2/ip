@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Command {
     TODO("todo"),
     DEADLINE("deadline"),
@@ -8,6 +11,13 @@ public enum Command {
     DELETE("delete");
 
     private final String label;
+    private static final Map<String, Command> BY_LABEL = new HashMap<>();
+
+    static {
+        for (Command command : values()) {
+            BY_LABEL.put(command.label, command);
+        }
+    }
 
     private Command(String label) {
         this.label = label;
@@ -18,11 +28,6 @@ public enum Command {
     }
 
     public static Command valueOfLabel(String label) {
-        for (Command c : values()) {
-            if (c.label.equals(label)) {
-                return c;
-            }
-        }
-        return null;
+        return BY_LABEL.get(label);
     }
 }
