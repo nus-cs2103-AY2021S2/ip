@@ -1,9 +1,15 @@
 package main.java;
 
+<<<<<<< HEAD
 import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+=======
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+>>>>>>> branch-Level-8
 
 import java.util.Scanner;
 import java.util.List;
@@ -35,8 +41,26 @@ public class Duke {
             System.exit(0);
         }
 
-        if (input.equals("list")) {
-            printTasks();
+        if (input.contains("list")) {
+            String[] args = input.split(" ");
+
+            if (args.length == 1) {
+                printTasks();
+            } else if (args.length == 2) {
+                String criteria = args[1];
+                if (criteria.equals("today")) {
+                    printTasks(LocalDate.now());
+                } else if (criteria.equals("tomorrow") || criteria.equals("tmr")) {
+                    printTasks(LocalDate.now().plus(1, ChronoUnit.DAYS));
+                } else {
+                    try {
+                        LocalDate date = LocalDate.parse(criteria);
+                        printTasks(date);
+                    } catch (DateTimeParseException dtEx) {
+                        ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                    }
+                }
+            }
         } else if (input.startsWith("todo")) {
             String[] command = input.split("todo ");
             if (command.length == 1) throw new DukeException("The description of a todo cannot be empty.");
@@ -50,8 +74,15 @@ public class Duke {
             String[] byArgs = deadlineArg.split(" /by ");
             if (byArgs.length < 2) throw new DukeException("There must be a date for deadline.");
 
-            Deadline deadline = new Deadline(byArgs[0], byArgs[1]);
-            addTask(deadline);
+            try {
+                String dateString = byArgs[1];
+                LocalDate date = LocalDate.parse(dateString);
+                Deadline deadline = new Deadline(byArgs[0], date);
+                addTask(deadline);
+            } catch (DateTimeParseException dtEx) {
+                ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+            }
+
         } else if (input.startsWith("event")) {
             String[] command = input.split("event ");
             if (command.length == 1) throw new DukeException("The description of a event cannot be empty.");
@@ -59,8 +90,15 @@ public class Duke {
 
             String[] atArgs = eventArg.split(" /at ");
             if (atArgs.length < 2) throw new DukeException("There must be a date for event.");
-            Event event = new Event(atArgs[0], atArgs[1]);
-            addTask(event);
+
+            try {
+                String dateString = atArgs[1];
+                LocalDate date = LocalDate.parse(dateString);
+                Event event = new Event(atArgs[0], date);
+                addTask(event);
+            } catch (DateTimeParseException dtEx) {
+                ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+            }
         } else if (input.startsWith("done")) {
             String[] command = input.split(" ");
             int index = Integer.parseInt(command[1]);
@@ -136,6 +174,7 @@ public class Duke {
         }
     }
 
+<<<<<<< HEAD
     private static String parseTasksToString(List<Task> tasks) {
         String content = "";
         for (Task task : tasks) {
@@ -213,6 +252,18 @@ public class Duke {
             bw.close();
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
+=======
+    private static void printTasks(LocalDate date) {
+        if (getTaskCount() == 0) {
+            ollySpeak("You currently have no tasks! Use todo, deadline or event.");
+        } else {
+            ollySpeak("Here you go! Your list of items:");
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).date != null && tasks.get(i).date.isEqual(date)) {
+                    System.out.println(i+1 + ". " + tasks.get(i));
+                }
+            }
+>>>>>>> branch-Level-8
         }
     }
 

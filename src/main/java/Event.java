@@ -1,11 +1,13 @@
 package main.java;
 
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    Event(String name, String at) {
+public class Event extends Task {
+
+    Event(String name, LocalDate date) {
         super(name, "Event coming right up!");
-        this.at = at;
+        this.date = date;
     }
 
     Event(String name, String at, Boolean status) {
@@ -19,6 +21,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

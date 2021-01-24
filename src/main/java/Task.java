@@ -1,9 +1,12 @@
 package main.java;
 
+import java.time.LocalDate;
+
 public class Task {
     String name;
     Boolean status;
     String addMessage;
+    LocalDate date;
 
     Task(String name) {
         this.name = name;
