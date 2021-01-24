@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    private static List<Task> tasks = new ArrayList<Task>();
+    private Storage storage;
+    private TaskList tasks;
     private static final String taskFilePath = "data/task.txt";
 
     /**
@@ -125,94 +126,12 @@ public class Duke {
         }
     }
 
-    /**
-     * Wrapper for getting the total task count of Olly (Duke)
-     * @return number of tasks
-     */
-    private static int getTaskCount() {
-        return tasks.size();
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList(this.storage.load(), this.storage);
     }
 
-    /**
-     * Add task to the current list of tasks that Olly is handling
-     * @param task: Supports Event, Todo, Deadline tasks (any child class inheriting from Task)
-     */
-    private static void addTask(Task task) {
-        tasks.add(task);
-        ollySpeak(task.addMessage + (task.addMessage == null ? "" : " ") + "I've added:");
-        System.out.println(task);
-        ollySpeak("You now have " + getTaskCount() + " tasks at hand.");
-
-        writeToFile(parseTasksToString(Duke.tasks));
-    }
-
-    /**
-     * Deletes task from task list and informs user of the task that has been removed
-     * @param task: Task to be removed
-     */
-    private static void deleteTask(Task task) {
-        tasks.remove(task);
-        ollySpeak("Aww man.. I've removed this task:");
-        System.out.println(task);
-        ollySpeak("Now you have " + getTaskCount() + " tasks left.");
-
-        writeToFile(parseTasksToString(Duke.tasks));
-    }
-
-    /**
-     * Prints out the list of task that the user currently has. The tasks are ordered numerically in the sequence
-     * in which it was inserted.
-     */
-    private static void printTasks() {
-        if (getTaskCount() == 0) {
-            ollySpeak("You currently have no tasks! Use todo, deadline or event.");
-        } else {
-            ollySpeak("Here you go! Your list of items:");
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(i+1 + ". " + tasks.get(i));
-            }
-        }
-    }
-
-    private static String parseTasksToString(List<Task> tasks) {
-        String content = "";
-        for (Task task : tasks) {
-            content += task.toFileString() + "|";
-        }
-        return content;
-    }
-
-    private static void writeToFile(String content) {
-        try {
-            File file = new File(Duke.taskFilePath);
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(content);
-            bw.close();
-        } catch (IOException ioEx) {
-            ioEx.printStackTrace();
-        }
-    }
-
-    private static void printTasks(LocalDate date) {
-        if (getTaskCount() == 0) {
-            ollySpeak("You currently have no tasks! Use todo, deadline or event.");
-        } else {
-            ollySpeak("Here you go! Your list of items:");
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).date != null && tasks.get(i).date.isEqual(date)) {
-                    System.out.println(i+1 + ". " + tasks.get(i));
-                }
-            }
-
-        }
-    }
-
-    public static void main(String[] args) {
-
-        Storage storage = new Storage(Duke.taskFilePath);
-        Duke.tasks = storage.load();
-
+    public void run() {
         Scanner sc = new Scanner(System.in);
         ollySpeak("Hey! Welcome to the chatbot. What can I do for you today?");
 
@@ -224,5 +143,9 @@ public class Duke {
                 dukeEx.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/task.txt").run();
     }
 }

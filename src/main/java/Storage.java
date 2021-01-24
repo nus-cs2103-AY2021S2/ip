@@ -1,8 +1,6 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -38,6 +36,19 @@ public class Storage {
             Duke.ollySpeak("Your task data file is corrupted, please check!");
         }
         return null;
+    }
+
+    public void writeToFile(List<Task> tasks) {
+        try {
+            String content = parseTasksToString(tasks);
+            File file = new File(this.filePath);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
     }
 
     private String fileHandler() throws FileNotFoundException {
@@ -91,5 +102,13 @@ public class Storage {
         }
 
         return tempTask;
+    }
+
+    private String parseTasksToString(List<Task> tasks) {
+        String content = "";
+        for (Task task : tasks) {
+            content += task.toFileString() + "|";
+        }
+        return content;
     }
 }
