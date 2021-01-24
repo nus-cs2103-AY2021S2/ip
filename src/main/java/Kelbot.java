@@ -1,10 +1,36 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.List;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 
 public class Kelbot {
   public static void main(String[] args) throws KelbotException {
     Scanner sc = new Scanner(System.in);
     System.out.println("Hello! I'm Kelbot\n" + "What can I do for you?");
     List<Task> taskList = new ArrayList<>();
+  
+    java.nio.file.Path path = java.nio.file.Paths.get("data", "Kelbot.txt");
+    boolean fileExists = java.nio.file.Files.exists(path);
+    if (fileExists) {
+      try {
+        FileInputStream fis = new FileInputStream(path.toString());
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        taskList = (List<Task>) ois.readObject();
+        ois.close();
+        System.out.println("Here is your task list from your previous Kelbot usage");
+        for (int i = 1; i <= taskList.size(); i++) {
+          System.out.println(i + "." + taskList.get(i - 1));
+        }
+      } catch(Exception ex) {
+        ex.printStackTrace();
+      }
+    }
     String input = sc.nextLine();
     String[] commands = input.split(" ");
     while (true) {
@@ -129,7 +155,15 @@ public class Kelbot {
       } catch (KelbotException e) {
         System.out.println(e.getMessage());
       }
-
+      File file = new File("data");
+      try {
+        FileOutputStream fos = new FileOutputStream(path.toString());
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(taskList);
+        oos.close();
+      } catch(Exception ex) {
+        ex.printStackTrace();
+      }
       input = sc.nextLine();
       commands = input.split(" ");
     }
