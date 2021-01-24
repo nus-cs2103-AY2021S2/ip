@@ -1,4 +1,4 @@
-public class Task {
+abstract class Task {
   protected String description;
   protected boolean isDone;
 
@@ -15,4 +15,6 @@ public class Task {
   public void setDone() {
     isDone = true;
   }
+
+  public abstract String toSavedString();
 }
