@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected LocalDate at;
 
-    Event(String name, LocalDate at) {
+    Event(String name, LocalDate date) {
         super(name, "Event coming right up!");
-        this.at = at;
+        this.date = date;
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

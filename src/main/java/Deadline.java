@@ -5,15 +5,13 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDate by;
-
-    Deadline(String name, LocalDate by) {
+    Deadline(String name, LocalDate date) {
         super(name, "Make sure you meet this deadline!");
-        this.by = by;
+        this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

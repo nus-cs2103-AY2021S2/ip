@@ -1,9 +1,9 @@
 package main.java;
 
-import main.java.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 import java.util.*;
 import java.util.Scanner;
 
@@ -32,8 +32,26 @@ public class Duke {
             System.exit(0);
         }
 
-        if (input.equals("list")) {
-            printTasks();
+        if (input.contains("list")) {
+            String[] args = input.split(" ");
+
+            if (args.length == 1) {
+                printTasks();
+            } else if (args.length == 2) {
+                String criteria = args[1];
+                if (criteria.equals("today")) {
+                    printTasks(LocalDate.now());
+                } else if (criteria.equals("tomorrow") || criteria.equals("tmr")) {
+                    printTasks(LocalDate.now().plus(1, ChronoUnit.DAYS));
+                } else {
+                    try {
+                        LocalDate date = LocalDate.parse(criteria);
+                        printTasks(date);
+                    } catch (DateTimeParseException dtEx) {
+                        ollySpeak("Your date/time must be in the yyyy-mm-dd format. Please try again!");
+                    }
+                }
+            }
         } else if (input.startsWith("todo")) {
             String[] command = input.split("todo ");
             if (command.length == 1) throw new DukeException("The description of a todo cannot be empty.");
@@ -138,6 +156,19 @@ public class Duke {
             ollySpeak("Here you go! Your list of items:");
             for (int i = 0; i < tasks.size(); i++) {
                 System.out.println(i+1 + ". " + tasks.get(i));
+            }
+        }
+    }
+
+    private static void printTasks(LocalDate date) {
+        if (getTaskCount() == 0) {
+            ollySpeak("You currently have no tasks! Use todo, deadline or event.");
+        } else {
+            ollySpeak("Here you go! Your list of items:");
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).date != null && tasks.get(i).date.isEqual(date)) {
+                    System.out.println(i+1 + ". " + tasks.get(i));
+                }
             }
         }
     }
