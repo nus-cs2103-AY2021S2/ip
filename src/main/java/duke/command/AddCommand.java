@@ -11,15 +11,30 @@ import duke.task.Todo;
 
 import java.time.DateTimeException;
 
+/**
+ * Command type add.
+ */
 public class AddCommand extends Command {
     private final String command;
     private final CommandType cmdType;
 
+    /**
+     * Add command builder.
+     *
+     * @param command Input string.
+     * @param cmdType Determine whether this command is TODO, EVENT or DEADLINE.
+     */
     public AddCommand(String command, CommandType cmdType) {
         this.command = command;
         this.cmdType = cmdType;
     }
 
+    /**
+     * Check the validity of this command and build a todo task.
+     *
+     * @return Todo task.
+     * @throws DukeException When command argument is invalid.
+     */
     private Task convertToTodo() throws DukeException {
         if (command.length() <= 5) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
@@ -33,6 +48,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Check the validity of this command and build a event task.
+     *
+     * @return Event task.
+     * @throws DukeException When command argument is invalid.
+     */
     private Task convertToEvent() throws DukeException {
         if (command.length() <= 9) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
@@ -54,6 +75,12 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Check the validity of this command and build a deadline task.
+     *
+     * @return Deadline task.
+     * @throws DukeException When command argument is invalid.
+     */
     private Task convertToDeadline() throws DukeException {
         if (command.length() <= 6) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
@@ -75,7 +102,13 @@ public class AddCommand extends Command {
         }
     }
 
-
+    /**
+     * Execute and print command according to its command type.
+     *
+     * @param list Passes TaskList in case of reading and writing to the list.
+     * @param length For printer to call newLiner, make Duke looks nice.
+     * @throws DukeException When encounter an error in command argument.
+     */
     @Override
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         Task task;

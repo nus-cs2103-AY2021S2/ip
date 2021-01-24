@@ -13,7 +13,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * A class that handles all I/O related matter.
+ */
 public class Storage {
+    // Prints date and time in this form.
     private static final DateTimeFormatter PRINT_FORMAT =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
@@ -21,6 +25,12 @@ public class Storage {
     static Scanner sc;
     static FileWriter writer;
 
+    /**
+     * Converts data that saved in data.txt to Task object.
+     *
+     * @param command Strings in the format of my own design.
+     * @return Tasks to be stored in the TaskList.
+     */
     public static Task loadData(String command) {
         if (command.charAt(0) == 'T') {
             Todo result = new Todo(command.substring(8));
@@ -47,6 +57,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts Task to string in a designed manner.
+     *
+     * @param task Task that need to be saved.
+     * @return Output string that need to be written into save data.
+     */
     public static String saveData(Task task) {
         if (task.getSaveType() == "T") {
             return task.getSaveType() + " | " + (task.getStatus() ? "1" : "0")
@@ -57,6 +73,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Initialize the save data file and scanner of that file.
+     *
+     * @throws IOException When unable to create a file due to any security reason.
+     */
     public static void init() throws IOException {
         File dir = new File("data");
         if (!dir.exists()) {
@@ -69,6 +90,11 @@ public class Storage {
         sc = new Scanner(file);
     }
 
+    /**
+     * Loads the entire save data to a TaskList by calling multiple loadData.
+     *
+     * @return TaskList that presents the initial state of Duke robot.
+     */
     public static TaskList loadToList() {
         TaskList list = new TaskList();
         while (Objects.requireNonNull(sc).hasNextLine()) {
@@ -77,6 +103,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Initialises the writer and writes to save data file by calling multiple saveData.
+     *
+     * @param list Data need to be converted and written.
+     */
     public static void writeToData(TaskList list) {
         String saveData = "";
         for (int i = 0; i < list.getSize(); i++) {
@@ -87,7 +118,7 @@ public class Storage {
             writer.write(saveData);
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Unable to save file.");
         }
     }
 }
