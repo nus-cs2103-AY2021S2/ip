@@ -1,16 +1,29 @@
+import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.File;
+import java.io.IOException;
 
 public class Pason {
     private static List<Task> tasks = new ArrayList<>();
+    private static String FILE_DIRECTORY = "data";
+    private static String FILE_NAME = "tasks.txt";
     public static void main(String[] args) {
         String input;
         String splitInput[];
         Scanner scanner = new Scanner(System.in);
-        
+        try {
+            loadTasks();
+        } catch(IOException e) {
+            printMessage("Oops! " + e.getMessage());
+        } catch(Exception e) {
+            printMessage("Oops! " + e.getMessage());
+        }
+
         printMessage("Hey! It's PAson, ready to help :)\nHow can I help you today?");
         while(scanner.hasNext()) {
             try {
@@ -114,13 +127,13 @@ public class Pason {
         try {
             String[] splitInput;
             splitInput = input.substring(8).trim().split(" /by ");
-            if(splitInput.length == 2) {
+            if (splitInput.length == 2) {
                 Deadline newDeadline = new Deadline(splitInput[0], splitInput[1]);
                 tasks.add(newDeadline);
                 printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
-            } else if(splitInput.length == 1) {
+            } else if (splitInput.length == 1) {
                 throw new PasonException("Please enter a by date for '" + splitInput[0] + "'");
-            } else if(splitInput.length == 0) {
+            } else if (splitInput.length == 0) {
                 throw new PasonException("Please enter a description followed by the date in the format: deadline <description> /by <when>");
             } else {
                 throw new PasonException("You've entered an invalid format. Please use: deadline <description> /by <when>");
@@ -134,20 +147,76 @@ public class Pason {
         try {
             String[] splitInput;
             splitInput = input.substring(5).trim().split(" /at ");
-            if(splitInput.length == 2) {
+            if (splitInput.length == 2) {
                 Event newEvent = new Event(splitInput[0], splitInput[1]);
                 tasks.add(newEvent);
                 printMessage("Done! I've added a new event:\n\t" + newEvent + "\nNow there are " + tasks.size() + " tasks in your list.");
-            } else if(splitInput.length == 1) {
+            } else if (splitInput.length == 1) {
                 System.out.println(splitInput[0]);
                 throw new PasonException("Please enter a by date for '" + splitInput[0] + "'");
-            } else if(splitInput.length == 0) {
+            } else if (splitInput.length == 0) {
                 throw new PasonException("Please enter a description followed by the date in the format: event <description> /at <when>");
             } else {
                 throw new PasonException("You've entered an invalid format. Please use: event <description> /at <when>");
             }
         } catch(PasonException e) {
             printMessage("Oops! " + e.getMessage());
+        }
+    }
+
+    public static void loadTasks() throws FileNotFoundException {
+        File directory = new File(FILE_DIRECTORY);
+        File file = new File(FILE_DIRECTORY + "/" + FILE_NAME);
+        if(!directory.exists()) {
+            directory.mkdir();
+        }
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+                printMessage("Just a heads up!\nPAson stores your tasks locally for your convenience.\nWe've created a new file here: " + FILE_DIRECTORY + "/" + FILE_NAME);
+            } catch(IOException e) {
+                printMessage("Oops! " + e.getMessage());
+            }
+        }
+
+        Scanner s = new Scanner(file);
+        Task task;
+        int failedImports = 0;
+        while (s.hasNext()) {
+            task = parseFileEntry(s.nextLine());
+            if(task != null) {
+                tasks.add(task);
+            } else {
+                failedImports++;
+            }
+        }
+        if(failedImports > 0) {
+            printMessage("There was a problem parsing " + failedImports + " task(s) from the file.");
+        }
+    }
+
+    public static Task parseFileEntry(String text) {
+        String[] splitString = text.split(" \\| ");
+        if(splitString[0].equals("T") && splitString.length == 3) {
+            ToDo newToDo = new ToDo(splitString[2]);
+            if(splitString[1].equals("1")) {
+                newToDo.markAsDone();
+            }
+            return newToDo;
+        } else if(splitString[0].equals("E") && splitString.length == 4) {
+            Event newEvent = new Event(splitString[2], splitString[3]);
+            if(splitString[1].equals("1")) {
+                newEvent.markAsDone();
+            }
+            return newEvent;
+        } else if(splitString[0].equals("D") && splitString.length == 4) {
+            Deadline newDeadline = new Deadline(splitString[2], splitString[3]);
+            if(splitString[1].equals("1")) {
+                newDeadline.markAsDone();
+            }
+            return newDeadline;
+        } else {
+            return null;
         }
     }
 }
