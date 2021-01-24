@@ -35,6 +35,8 @@ public class Parser {
                 return new AddEventCommand(details);
             case DONE:
                 return new MarkTaskAsDoneCommand(details);
+            case FIND:
+                return new FindTaskCommand(details);
             case DELETE:
                 return new DeleteTaskCommand(details);
             case LIST:

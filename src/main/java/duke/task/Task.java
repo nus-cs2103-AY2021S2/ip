@@ -13,6 +13,15 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Returns the description of the task
+     *
+     * @return Description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "\u2718" : " ");
     }

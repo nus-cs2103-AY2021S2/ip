@@ -8,6 +8,11 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
+    private static final String INDENTATION = "    ";
+    private static final String NO_FOUND_TASK_MESSAGE =
+            INDENTATION + "It seems like there is no task matching your keyword:";
+    private static final String PRINT_FOUND_TASKS_MESSAGE = INDENTATION + "Here are the matching tasks in your list:";
+
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -84,11 +89,36 @@ public class Ui {
             System.out.println("    It seems like there is nothing in your list.");
         } else {
             System.out.println("    Here are the tasks in your list:");
-            for (int i = 1; i <= tasks.getTaskCount(); ++i) {
-                System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
-            }
+            printTasks(tasks);
         }
         printPartitionLine();
+    }
+
+    /**
+     * Prints all the tasks found by a keyword after formatting.
+     *
+     * @param tasks List of found tasks.
+     */
+    public void printAllFoundTasks(TaskList tasks) {
+        printPartitionLine();
+        if (tasks.isEmpty()) {
+            System.out.println(NO_FOUND_TASK_MESSAGE);
+        } else {
+            System.out.println(PRINT_FOUND_TASKS_MESSAGE);
+            printTasks(tasks);
+        }
+        printPartitionLine();
+    }
+
+    /**
+     * Prints all the tasks in the given TaskList.
+     *
+     * @param tasks TaskList to be printed.
+     */
+    public void printTasks(TaskList tasks) {
+        for (int i = 1; i <= tasks.getTaskCount(); ++i) {
+            System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
+        }
     }
 
 }
