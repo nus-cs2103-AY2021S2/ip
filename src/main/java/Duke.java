@@ -93,7 +93,7 @@ public class Duke {
      */
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
-        TaskList taskList = new TaskList("tasks.txt");
+        TaskList taskList = new TaskList("../../../data/tasks.txt");
         BufferedReader input = new
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
@@ -106,11 +106,14 @@ public class Duke {
             } else if (cmd.contains("done")) {
                 int index = Integer.parseInt(cmd.substring(5));
                 taskList.setTaskDone(index);
+                taskList.writeFile();
             } else if (cmd.contains("delete")){
                 int index = Integer.parseInt(cmd.substring(7));
                 taskList.removeTask(index );
+                taskList.writeFile();
             } else {
                 taskList = performChildTask(taskList, cmd);
+                taskList.writeFile();
             }
             System.out.println(printLine());
         }

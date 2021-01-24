@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class TaskList {
 
@@ -21,7 +23,8 @@ public class TaskList {
                 System.out.println("New file created: " 
                     + fileObject.getName());
             } else {
-                System.out.println("The file exists.");
+                System.out.println("The file exists. Reading file...");
+                readFile();
             }
         } catch (IOException e) {
             System.out.println("An error has occurred.");
@@ -30,13 +33,53 @@ public class TaskList {
         return fileObject;
     }
 
-    public void writeFile(String text) {
+    public void readFile() {
         try {
-            FileWriter fileWriter = new FileWriter(fileObject.getName());
-            fileWriter.write(text);
+            File fileObject = new File("../../../data/tasks.txt");
+            Scanner reader = new Scanner(fileObject);
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                processInputData(data);
+            }
+            System.out.println("Reading done.");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+            e.printStackTrace();
+        }
+    }
+
+    public void processInputData(String data) {
+        char taskType = data.charAt(1);
+        String task = new String();
+        String time = new String();
+        int secondSeg = data.indexOf("(");
+        int endSeg = data.indexOf(")");
+        task = data.substring(7);
+        if(secondSeg != -1 && endSeg != -1) {
+            task = data.substring(7, secondSeg);
+            time = data.substring(secondSeg + 5, endSeg);
+        }
+        if (taskType == 'T') {
+            tasksList.add(new ToDo(task));
+        } else if (taskType == 'D') {
+            tasksList.add(new Deadline(task, time));
+        } else {
+            tasksList.add(new Event(task, time));
+        }
+        if(data.charAt(4) == 'X') {
+            tasksList.get(tasksList.size() - 1).setCompleted();
+        }
+    }
+
+    public void writeFile() {
+        try {
+            FileWriter fileWriter = new FileWriter("../../../data/tasks.txt");
+            for (int i = 0; i < this.tasksList.size(); i++) {
+                fileWriter.write(this.tasksList.get(i).toString() + "\n");
+            }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("An error has occurred.");
+            System.out.println("An IOException has occurred.");
             e.printStackTrace();
         }
     }
