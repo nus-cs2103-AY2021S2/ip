@@ -22,6 +22,14 @@ public class Task {
     }
 
     /**
+     * Retrieves the description of the task
+     * @return  Task description
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Retrieves the status icon of the task depending whether it is done
      * @return  Task status icon
      */

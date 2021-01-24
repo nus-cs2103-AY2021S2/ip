@@ -69,6 +69,9 @@ public class Duke {
                     case DELETE:
                         output.deleteAction(tasksList, input, dataManager);
                         break;
+                    case FIND:
+                        output.findAction(tasksList, input);
+                        break;
                 }
             } catch (IllegalArgumentException e) {
                 output.printIllegalArgumentError();
