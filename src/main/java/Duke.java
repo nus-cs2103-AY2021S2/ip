@@ -78,7 +78,6 @@ public class Duke {
         addTaskMessage += numTasks == 1 ? "" : "s";
         addTaskMessage += " in the list.";
         printMessage(addTaskMessage);
-
     }
 
     public static void doTask(String userDescription) {
@@ -87,6 +86,24 @@ public class Duke {
         t.markAsDone();
         String doTaskMessage = "Nice! I've marked this task as done: \n" + "   " + t.toString();
         printMessage(doTaskMessage);
+    }
+
+    public static void deleteTask(String userDescription) {
+        int taskNum = Integer.parseInt(userDescription);
+        Task t = tasks[taskNum - 1];
+        String deleteTaskMessage = "Noted, I've removed this task: \n" + "   " + t.toString() + "\n";
+
+        int i = taskNum;
+        while (i < 99) {
+            tasks[i - 1] = tasks[i];
+            i++;
+        }
+
+        numTasks--;
+        deleteTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
+        deleteTaskMessage += numTasks == 1 ? "" : "s";
+        deleteTaskMessage += " in the list.";
+        printMessage(deleteTaskMessage);
     }
 
     public static void main(String[] args) {
@@ -111,6 +128,9 @@ public class Duke {
                     break;
                 case "done":
                     doTask(userDescription);
+                    break;
+                case "delete":
+                    deleteTask(userDescription);
                     break;
                 case "todo": //Fallthrough
                 case "deadline": //Fallthrough

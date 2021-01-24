@@ -5,4 +5,11 @@ list
 done 2
 unknown command
 list
+done 3
+todo task four
+deadline task 5 /by some time
+delete 4
+list
+delete 1
+list
 bye
