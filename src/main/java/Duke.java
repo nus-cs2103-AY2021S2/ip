@@ -201,8 +201,8 @@ public class Duke {
                                 deleteTask(taskDescription);
                             }
                         } catch (NumberFormatException numEx) {
-                            System.err.println("'" + command + "' is command word; please pass a numerical index or start your task"
-                                    + " with another word!");
+                            System.err.println("'" + command + "' is command word; please pass a numerical index or "
+                                    + "start your task with another word!");
                         } catch (IndexOutOfBoundsException arrEx) {
                             System.err.println("Please pass a valid index!");
                         }
@@ -217,7 +217,8 @@ public class Duke {
             }
             scannerInput.close();
         } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Please create a 'tasks.txt' file in the current directory to store your tasks before "
+                    + "running the program!");
         }
     }
 
