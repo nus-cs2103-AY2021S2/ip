@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -83,6 +84,7 @@ public class TaskList {
      *
      * @param input Details of Deadline task
      * @throws ArrayIndexOutOfBoundsException If task has no details
+     * @throws DateTimeParseException If task has no date or time
      */
     public void addDeadline(String input) { //when user keys in deadline abc
         String[] temp = input.split(" ", 2);
@@ -95,9 +97,16 @@ public class TaskList {
         String data = temp[1];
         String description = data.split(" /by ", 2)[0];
         String by = data.split(" /by ", 2)[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
+
+        } catch (DateTimeParseException e) {
+            new EmptyDateTimeException();
+            return;
+        }
         System.out.println(line);
         System.out.println("Got it. I've added this task:");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(by, formatter);
         Task t = new Deadline(description, dateTime);
         this.taskList.add(t);
@@ -120,6 +129,7 @@ public class TaskList {
      *
      * @param input Details of Event task
      * @throws ArrayIndexOutOfBoundsException If task has no details
+     * @throws DateTimeParseException If task has no date or time
      */
     public void addEvent(String input) { ////when user keys in event abc
         String[] temp = input.split(" ", 2);
@@ -132,9 +142,16 @@ public class TaskList {
         String data = temp[1];
         String description = data.split(" /at ", 2)[0];
         String at = data.split(" /at ", 2)[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
+
+        } catch (DateTimeParseException e) {
+            new EmptyDateTimeException();
+            return;
+        }
         System.out.println(line);
         System.out.println("Got it. I've added this task:");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse(at, formatter);
         Task t = new Event(description, dateTime);
         this.taskList.add(t);

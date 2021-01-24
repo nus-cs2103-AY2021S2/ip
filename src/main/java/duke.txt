@@ -1,7 +1,6 @@
-[T][ ] this
-[D][ ] that (by: Dec 22 2019 18:00)
-[T][ ] this
-[D][ ] this (by: Dec 22 2019 18:00)
-[E][ ] this thing (at: Dec 22 2019 18:00)
-[T][ ] this
-[T][ ] thing
+[T][X] buy bread
+[D][ ] go to work (by: Jan 25 2021 10:00)
+[D][ ] go to work (by: Jan 25 2021 14:00)
+[E][ ] go and sleep (at: Dec 23 2019 23:59)
+[E][ ] go and sleep (at: Dec 23 2019 23:59)
+[E][ ] go and sleep (at: Dec 23 2019 23:59)
