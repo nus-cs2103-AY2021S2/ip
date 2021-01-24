@@ -1,3 +1,5 @@
+package duke.system;
+
 public abstract class DukeException extends Exception{
 
     private static final long serialVersionUID = 1L;

@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class ListItem {
     private final boolean doneStatus;
     private final String task;

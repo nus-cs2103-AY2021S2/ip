@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Todo extends ListItem {
     public Todo(String task){
         super(task);
