@@ -1,13 +1,10 @@
 package duke;
 
 import duke.command.*;
-import duke.task.Deadline;
 
 import java.util.Scanner;
 
-import static duke.Ui.displayAllTasks;
 import static duke.Ui.displayError;
-import static duke.task.TaskList.*;
 import static duke.data.Data.updateDataFile;
 
 public class Parser {
@@ -54,7 +51,7 @@ public class Parser {
                     command = new InvalidCommand();
                 }
                 command.process();
-                updateDataFile(Duke.tasks);
+                updateDataFile();
             } catch (DukeException e) {
                 displayError(e.getMessage());
             }

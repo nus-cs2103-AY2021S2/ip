@@ -15,10 +15,11 @@ import java.util.Scanner;
 
 public class Data {
 
+    public static ArrayList<Task> tasks;
     private static final String PATHNAME = "./src/main/java/duke/data/data.txt";
 
-    public static ArrayList<Task> initialiseList() throws DukeException {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public static void initialiseList() throws DukeException {
+        tasks = new ArrayList<>();
         File f = new File(PATHNAME);
         try {
             boolean isEmptyFile = f.createNewFile();
@@ -32,12 +33,10 @@ public class Data {
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
-        return tasks;
     }
 
     private static Task getTaskFromString(String taskString) throws DukeException {
         String[] taskArgs = taskString.split("::", 4);
-
         try {
             CommandType type = CommandType.valueOf(taskArgs[0]);
             boolean isDone = Integer.parseInt(taskArgs[1]) == 1;
@@ -66,7 +65,7 @@ public class Data {
         }
     }
 
-    public static void updateDataFile(ArrayList<Task> tasks) throws DukeException {
+    public static void updateDataFile() throws DukeException {
         try {
             FileWriter fw = new FileWriter(PATHNAME);
             StringBuilder sb = new StringBuilder();

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.data.Data;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class Ui {
         String botBorder = "    ╰" + "-".repeat(longest + 2) + "╯\n";
         StringBuilder mainText = new StringBuilder();
         for (String s : strings) {
-            mainText.append("    | " + s + " ".repeat(longest - s.length() + 1) + "|\n");
+            String toAppend = "    | " + s + " ".repeat(longest - s.length() + 1) + "|\n";
+            mainText.append(toAppend);
         }
         System.out.println(topBorder + mainText + botBorder);
     }
@@ -41,7 +43,7 @@ public class Ui {
     }
 
     public static void displayAllTasks() {
-        ArrayList<Task> tasks = Duke.tasks;
+        ArrayList<Task> tasks = Data.tasks;
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
             sb.append("You don't have anything on your menu at the moment!\n\n" +
@@ -69,18 +71,18 @@ public class Ui {
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
                 + "\nYou now have "
-                + Duke.tasks.size()
+                + Data.tasks.size()
                 + " order(s)!");
     }
 
     public static void displayRemovedTask(Task task) {
         display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
-                "\nYou have " + Duke.tasks.size() + " order(s) left!");
+                "\nYou have " + Data.tasks.size() + " order(s) left!");
     }
 
     public static void displayDone(Task task) {
-        display("Tada! Your order has been served!\n\n  " + task);
+        display("Your order has been served!\n\n  " + task);
     }
 
     public static void displayError(String msg) {
