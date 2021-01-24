@@ -64,10 +64,18 @@ public class Event extends Task {
                 this.start.format(formatter) + " | " + this.end.format(formatter);
     }
 
+    /**
+     * Returns the date and time when the Event starts
+     * @return Starting date and time of the Event
+     */
     public LocalDateTime getStartDateTime() {
         return this.start;
     }
 
+    /**
+     * Returns the date and time when the Event ends
+     * @return Ending date and time of the Event
+     */
     public LocalDateTime getEndDateTime() {
         return this.end;
     }

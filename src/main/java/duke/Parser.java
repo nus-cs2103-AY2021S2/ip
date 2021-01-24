@@ -171,7 +171,13 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(params) - 1);
         }
     }
-    
+
+    /**
+     * Parses a command string into a Find command
+     * @param text A command String
+     * @return A Find command
+     * @throws DukeCommandException if the parameters are empty or in invalid format
+     */
     public static FindCommand parseFind(String text) throws DukeCommandException {
         String validDatePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
                 "([1-9][0-9][0-9][0-9])";

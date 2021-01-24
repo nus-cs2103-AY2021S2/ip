@@ -71,6 +71,10 @@ public class Ui {
         System.out.println(BORDER + "\n");
     }
 
+    /**
+     * Display the tasks from the search result
+     * @param tasks A list of tasks as search results
+     */
     public void printFoundMsg(List<Task> tasks) {
         System.out.println(BORDER);
         System.out.println("Meow, here are the matching tasks in your list:");

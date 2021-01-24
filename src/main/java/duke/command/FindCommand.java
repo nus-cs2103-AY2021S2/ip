@@ -1,28 +1,42 @@
 package duke.command;
 
-import duke.exception.DukeCommandException;
+import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
+import duke.exception.DukeCommandException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
+    /** Keyword to search tasks with */
     private String keyword = "";
+    /** Date to search tasks with */
     private LocalDate targetDate = null;
 
+    /**
+     * Constructor for a FindCommand
+     * @param keyword A String to check against task's description
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Constructor for a FindCommand
+     * @param keyword A String to check against task's description
+     * @param date A date to filter the tasks with
+     */
     public FindCommand(String keyword, LocalDate date) {
         this.keyword = keyword;
         this.targetDate = date;
     }
 
+    /**
+     * Executes the Find command to search tasks that matches the keyword and occurs on the target date
+     * @throws DukeCommandException if tasks cannot be retrieved
+     */
     @Override
     public void execute() throws DukeCommandException {
         List<Task> tasksFound = taskManager.getTasks().stream()

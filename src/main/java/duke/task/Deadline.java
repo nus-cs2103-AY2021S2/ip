@@ -58,6 +58,10 @@ public class Deadline extends Task {
                 this.dateTime.format(formatter);
     }
 
+    /**
+     * Returns the date and time at which the Deadline is due
+     * @return Due date and time for the Deadline
+     */
     public LocalDateTime getDateTime() {
         return this.dateTime;
     }
