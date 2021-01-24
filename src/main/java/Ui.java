@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -25,14 +24,14 @@ public class Ui {
 
     /**
      * Print all tasks.
-     * @param list A list of tasks entered by the user.
+     * @param tasks A list of tasks entered by the user.
      */
 
-    public void print(List<Task> list) {
+    public void print(TaskList tasks) {
         System.out.println("\t____________________________________________________________\n");
         System.out.println("\t  Your tasks:");
         int listCounter = 1;
-        for (Task task : list) {
+        for (Task task : tasks.getTasks()) {
             System.out.println("  \t  " + listCounter + "." + task);
             listCounter++;
         }

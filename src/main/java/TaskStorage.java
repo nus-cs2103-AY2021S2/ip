@@ -21,10 +21,10 @@ public class TaskStorage {
         }
     }
 
-    public void storeData(List<Task> tasks) {
+    public void storeData(TaskList tasks) {
         try {
             writer = new FileWriter(file);
-            for (Task task : tasks) {
+            for (Task task : tasks.getTasks()) {
                 char taskType = task.toString().charAt(1);
                 int done = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
@@ -50,7 +50,7 @@ public class TaskStorage {
         }
     }
 
-    public List<Task> retrieveData() {
+    public TaskList retrieveData() {
         List<Task> retrievedTasks = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         try {
@@ -81,6 +81,6 @@ public class TaskStorage {
         } catch (Exception e){
             ui.print(e.getMessage());
         }
-        return retrievedTasks;
+        return new TaskList(retrievedTasks);
     }
 }

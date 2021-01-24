@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Duke {
     private static DateTimeFormatter formatter;
-    private static List<Task> list;
+    private static TaskList tasks;
     private static TaskStorage storage;
     private static Ui ui;
 
@@ -17,7 +17,7 @@ public class Duke {
     public static void main(String[] args) {
         ui = new Ui();
         storage = new TaskStorage();
-        list = storage.retrieveData();
+        tasks = storage.retrieveData();
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         System.out.println("POWERED BY JARVIS\n");
         greet();
@@ -33,7 +33,7 @@ public class Duke {
             command = parseInput[0];
             switch (command) {
                 case "list":
-                    ui.print(list);
+                    ui.print(tasks);
                     break;
                 case "todo":
                     handleToDo(userInput, parseInput);
@@ -55,7 +55,7 @@ public class Duke {
                 default:
                     handleInvalidCommand();
             }
-            storage.storeData(list);
+            storage.storeData(tasks);
         }
         exit();
     }
@@ -100,7 +100,7 @@ public class Duke {
                 throw new DukeDescriptionException("You have not entered a description!");
             }
             String description = userInput.substring(5);
-            addTask(new ToDo(description));
+            tasks.addTask(new ToDo(description));
         } catch (DukeDescriptionException e) {
             ui.print(e.getMessage());
         }
@@ -122,7 +122,7 @@ public class Duke {
                 throw new DukeDeadlineException("You have not entered a deadline for this task!");
             }
             LocalDateTime dateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
-            addTask(new Deadline(deadlineDetails[0], dateTime));
+            tasks.addTask(new Deadline(deadlineDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
             ui.print(e.getMessage());
         } catch (DukeDeadlineException e) {
@@ -146,7 +146,7 @@ public class Duke {
                 throw new DukeEventException("You have not entered the date/time for this event!");
             }
             LocalDateTime dateTime = LocalDateTime.parse(eventDetails[1], formatter);
-            addTask(new Event(eventDetails[0], dateTime));
+            tasks.addTask(new Event(eventDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
             ui.print(e.getMessage());
         } catch (DukeEventException e) {
@@ -165,7 +165,7 @@ public class Duke {
                 throw new NumberFormatException();
             }
             int taskIndex = Integer.parseInt(parseInput[1])-1;
-            markTaskAsDone(list.get(taskIndex));
+            markTaskAsDone(tasks.getTasks().get(taskIndex));
         } catch (NumberFormatException e) {
             ui.print("Please enter a numerical value as the list index!");
         } catch (IndexOutOfBoundsException e) {
@@ -188,7 +188,7 @@ public class Duke {
                 throw new NumberFormatException();
             }
             int taskIndex = Integer.parseInt(parseInput[1])-1;
-            deleteTask(taskIndex);
+            tasks.deleteTask(taskIndex);
         } catch (NumberFormatException e) {
             ui.print("Please enter a numerical value as the list index!");
         } catch (IndexOutOfBoundsException e) {
@@ -198,32 +198,6 @@ public class Duke {
                 ui.print("Please enter a valid list index!");
             }
         }
-    }
-
-    /**
-     * Add task to the list.
-     * @param task Task entered by the user.
-     */
-
-    private static void addTask(Task task) {
-        list.add(task);
-        ui.print("Got it. I've added this task:\n\t\t" + task +
-                "\n\n\t  You have " +
-                list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
-    }
-
-    /**
-     * Remove task from the list.
-     * @param taskIndex The index of the task to remove.
-     */
-
-    private static void deleteTask(int taskIndex) {
-        Task toRemove = list.get(taskIndex);
-        toRemove.markIncomplete();
-        list.remove(taskIndex);
-        ui.print("I've removed this task:\n\t\t" + toRemove +
-                "\n\n\t  You have " +
-                list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
     }
 
     /**
