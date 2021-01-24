@@ -1,5 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.nio.file.Files;
+import java.util.Scanner;
 
 /**
  * Bot that handles user inputs, identifies specific commands and respond accordingly
@@ -14,13 +20,14 @@ public class DukeBot {
      * Constructor for DukeBot
      * Sets up duke bot to welcome user
      */
-    public DukeBot() {
+    public DukeBot() throws IOException {
         taskList = new ArrayList<>();
         taskList.add(null);
         isExit = false;
         commandOutput = "Hello! I'm Duke\n"
                 + "\tWhat can I do for you?";
         respondToCommand(commandOutput);
+        loadData();
     }
 
     /**
@@ -29,7 +36,7 @@ public class DukeBot {
      * @param text Text provided by user
      * @throws DukeException If task description is empty, task selection is invalid, task selection is empty
      */
-    public void handleCommand(String text) throws DukeException {
+    public void handleCommand(String text) throws DukeException, IOException {
         commandOutput = "";
         String[] commandLine = text.split(" ");
         String command = commandLine[0];
@@ -66,18 +73,23 @@ public class DukeBot {
             break;
         case "done":
             doneProcess(taskInfo);
+            saveData();
             break;
         case "delete":
             deleteProcess(taskInfo);
+            saveData();
             break;
         case "event":
             eventProcess(taskInfo);
+            saveData();
             break;
         case "deadline":
             deadlineProcess(taskInfo);
+            saveData();
             break;
         case "todo":
             todoProcess(taskInfo);
+            saveData();
             break;
         default:
             throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
@@ -149,6 +161,62 @@ public class DukeBot {
         taskList.add(task);
         commandOutput = "Got it. I've added this task: \n\t  "
                 + task.toString() + getRemainingTasks();
+    }
+
+    private void saveData() throws IOException {
+        String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+        String dirPath = System.getProperty("user.dir") + "/data";
+        File file = new File(filePath);
+        File dir = new File(dirPath);
+
+        if (!Files.isDirectory(Paths.get(dirPath))) {
+            // Create data folder and duke.txt if do not exist
+            dir.mkdir();
+            file.createNewFile();
+        } else if (!file.exists()) {
+            // Create duke.txt if do not exist
+            file.createNewFile();
+        }
+
+        FileWriter fileWriter = new FileWriter(file, false);
+        for (int i = 1; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            fileWriter.write(task.writeContentFormat() + System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    private void loadData() throws IOException {
+        String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String[] taskInfo = sc.nextLine().split("[ | ]+");
+            Task task = new Task("");
+            switch(taskInfo.length) {
+            case 3:
+                // ToDo task
+                task = new ToDo(taskInfo[2]);
+                break;
+            case 4:
+                if (taskInfo[0].equals('D')) {
+                    // Deadline task
+                    task = new Deadline(taskInfo[2], taskInfo[3]);
+                } else {
+                    //Event task
+                    task = new Event(taskInfo[2], taskInfo[3]);
+                }
+                break;
+            default:
+                break;
+            }
+
+            // Previously marked as done
+            if (Integer.parseInt(taskInfo[1]) == 1) {
+                task.markAsDone();
+            }
+            taskList.add(task);
+        }
     }
 
     /**

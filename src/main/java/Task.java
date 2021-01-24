@@ -40,6 +40,10 @@ public class Task {
         return String.format("%s", description);
     }
 
+    public String writeContentFormat() {
+        return String.format("%d | %s", isDone ? 1 : 0, getDescription());
+    }
+
     /**
      * Returns status icon and task name
      *
