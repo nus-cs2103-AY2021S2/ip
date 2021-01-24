@@ -1,9 +1,11 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Duke {
     public static void readDataFromFile(File f, ArrayList<Task> tasks) throws FileNotFoundException {
@@ -15,12 +17,15 @@ public class Duke {
             char taskType = str[0].charAt(0);
             boolean isCompleted = Integer.parseInt(str[1].substring(0, 1)) == 1;
             String taskName = str[2].strip();
+            String dateTime = str[3].strip();
+            System.out.println();
+
             if (taskType == 'T') {
                 task = new ToDo(isCompleted, taskName);
             } else if (taskType == 'D') {
-                task = new Deadline(isCompleted, taskName, str[3].strip());
+                task = new Deadline(isCompleted, taskName, LocalDate.parse(str[3].strip()));
             } else {
-                task = new Event(isCompleted, taskName, str[3].strip());
+                task = new Event(isCompleted, taskName, LocalDate.parse(str[3].strip()));
             }
             tasks.add(task);
         }
@@ -37,8 +42,9 @@ public class Duke {
         throw new InvalidInputException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+
     public static void addTask(File f, String type, ArrayList<Task> tasks, String taskDescription)
-            throws InvalidDescriptionException, IOException {
+            throws InvalidDescriptionException, IOException, DateTimeParseException {
         Task task;
         FileWriter fw = new FileWriter(f, true);
         if (taskDescription.equals("")) {
@@ -50,8 +56,9 @@ public class Duke {
             throw new InvalidDescriptionException("☹ OOPS!!! The description format of " + type + " is wrong.");
         } else {
             int index = type.equals("deadline") ? taskDescription.indexOf("/by") : taskDescription.indexOf("/at");
-            String taskName = taskDescription.substring(0, index).strip();
-            String dateTime = taskDescription.substring(index + 4);
+            String taskName = taskDescription.substring(0, index);
+            String dateTimeString = taskDescription.substring(index + 4).strip().replace("/", "-");
+            LocalDate dateTime = LocalDate.parse(dateTimeString);
 
             if (type.equals("deadline")) {
                 task = new Deadline(false, taskName, dateTime);
@@ -151,6 +158,7 @@ public class Duke {
                     break;
                 } else if (userInput.equals("done")) {
                     done(f, userTasks, taskDescription);
+                    done(f, userTasks, taskDescription);
                 } else if (userInput.equals("todo") || userInput.equals("deadline") || userInput.equals("event")) {
                     addTask(f, userInput, userTasks, taskDescription);
                 } else if (userInput.equals("delete")) {
@@ -162,6 +170,8 @@ public class Duke {
                 System.out.println("     " + ex.getMessage());
             } catch (IOException ex) {
                 System.out.println("Something went wrong: " + ex.getMessage());
+            } catch (DateTimeParseException ex) {
+                System.out.println("Your DateTime format is wrong! The correct format is yyyy-MM-dd");
             } finally {
                 System.out.println("     _______________________________________\n");
             }
