@@ -1,9 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class InputHandler {
 
     public static Command parse(String input) throws DukeException {
 
         String[] processedInput = input.split(" ");
         String command = processedInput[0];
+        String description = processDescription(processedInput);
 
         switch (command) {
         case "list":
@@ -16,13 +21,22 @@ public class InputHandler {
             }
             return new DoneCommand(Integer.parseInt(processedInput[1]));
         case "todo":
+            return new AddToDo(command, description);
         case "event":
+            return new AddEvent(command, description);
         case "deadline":
-            if (processedInput.length == 1) {
-                throw new DukeException("Descriptions cannot be empty, you need to type something.");
+            try {
+                String preProcessedData = input.split(" /by ")[1];
+                String[] dateTime = preProcessedData.split(" ");
+                String[] date = dateTime[0].split("/");
+                int time = Integer.parseInt(dateTime[1]);
+                LocalDate deadline = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
+                description = input.split(" /by ")[0].split("deadline ")[1];
+                return new AddDeadline(command, description, deadline, time);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new DukeException("Please enter a valid format YYYY/MM/DD");
             }
-            String description = processDescription(processedInput);
-            return new AddCommand(command, description);
         case "delete":
             if (processedInput.length == 1) {
                 throw new DukeException("Please enter a task number to delete");
