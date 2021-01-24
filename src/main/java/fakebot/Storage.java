@@ -17,11 +17,21 @@ public class Storage {
 
     private String fileToEdit;
 
+    /**
+     * Constructor of storage class.
+     * @param fileName name of file.
+     * @param filePath path of file.
+     */
     public Storage(String fileName, String filePath) {
         filePath = createDirectory(filePath);
         fileToEdit = filePath+fileName;
     }
 
+    /**
+     * Create Directory if file path doesn't exist.
+     * @param filePath path of file.
+     * @return Return path created, return empty path if path is invalid.
+     */
     private String createDirectory(String filePath) {
         File file = new File(filePath);
 
@@ -34,6 +44,10 @@ public class Storage {
         return filePath;
     }
 
+    /**
+     * Write Tasks to File.
+     * @param taskList Tasks to write to file.
+     */
     public void writeTasksToFIle(TaskList taskList) {
         String textToAdd = Parser.convertStringsToString(Parser.convertTasksToStrings(taskList));
         try {
@@ -42,13 +56,19 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
-
+    /**
+     * Write String to File.
+     * @param textToAdd write text to file.
+     */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(fileToEdit);
         fw.write(textToAdd);
         fw.close();
     }
-
+    /**
+     * Read Task from File.
+     * @return Return list of task read from File.
+     */
     public List<Task> tryReadTaskFile() {
         List<Task> taskList = new ArrayList<Task>();
         try {
@@ -59,7 +79,10 @@ public class Storage {
         }
         return taskList;
     }
-
+    /**
+     * Read String from File.
+     * @return Return list of string read from File.
+     */
     private List<String> readFile() throws FileNotFoundException {
         List<String> stringList = new ArrayList<String>();
 

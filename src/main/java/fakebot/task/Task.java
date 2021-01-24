@@ -23,15 +23,25 @@ public abstract class  Task {
         this.saveTimeFormat = DateTimeFormatter.ofPattern("HH:mm");
     }
 
+    /**
+     * Get Task Name.
+     * @return Task Name.
+     */
     public String getTaskName() {
         return taskName;
     }
 
+    /**
+     * Mark Task as Complete.
+     */
     public void markComplete(){
         isComplete = true;
     }
 
-
+    /**
+     * Get if Task is Complete.
+     * @return If Task is Complete.
+     */
     public boolean isComplete(){
         return isComplete;
     }

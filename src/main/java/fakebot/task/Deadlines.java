@@ -15,10 +15,18 @@ public class Deadlines extends Task {
         this.deadlineTime = deadlineTime;
 
     }
-
+    /**
+     * Get Task Deadline Date.
+     * @return Return Deadline Date as String.
+     */
     public String getDeadlineDate() {
         return saveDateFormat.format(deadlineDate);
     }
+
+    /**
+     * Get Task Deadline Time.
+     * @return Return Deadline Time as String.
+     */
     public String getDeadlineTime() {
         return saveTimeFormat.format(deadlineTime);
     }

@@ -18,24 +18,34 @@ public class Events extends Task {
         this.endTime = endTime;
     }
 
-    public String getTiming() {
-        return saveDateFormat.format(startDate) + " " + saveDateFormat.format(startTime) + " " +
-                saveDateFormat.format(endDate) + " " + saveDateFormat.format(endTime);
-
-    }
-
+    /**
+     * Get Task Start Date.
+     * @return Return Start Date as String.
+     */
     public String getStartDate() {
         return saveDateFormat.format(startDate);
     }
 
+    /**
+     * Get Task Start Time.
+     * @return Return Start Time as String.
+     */
     public String getStartTime() {
         return saveTimeFormat.format(startTime);
     }
 
+    /**
+     * Get Task End Date.
+     * @return Return End Date as String.
+     */
     public String getEndDate() {
         return saveDateFormat.format(endDate);
     }
 
+    /**
+     * Get Task End Time.
+     * @return Return End Time as String.
+     */
     public String getEndTime() {
         return saveTimeFormat.format(endTime);
     }
