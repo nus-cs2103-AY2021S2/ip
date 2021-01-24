@@ -7,10 +7,16 @@ import java.util.stream.IntStream;
 
 public class CommandList extends Command {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public CommandList(String[] tokens) {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		String response;
@@ -24,6 +30,9 @@ public class CommandList extends Command {
 		return new Alice(response, agent.getData(), agent.getDone(), false);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);

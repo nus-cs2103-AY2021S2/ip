@@ -10,12 +10,19 @@ import java.util.stream.Collectors;
 
 public class CommandDelete extends Command {
 
+	/** Usage details. **/
 	private static final String usage = "delete Usage: delete [index]";
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public CommandDelete(String[] tokens) {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		Alice newAgent;
@@ -39,6 +46,9 @@ public class CommandDelete extends Command {
 		return newAgent;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);

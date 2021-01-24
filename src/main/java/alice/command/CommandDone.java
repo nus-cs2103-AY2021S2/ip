@@ -10,12 +10,19 @@ import java.util.stream.Collectors;
 
 public class CommandDone extends Command {
 
+	/** Usage details. **/
 	private static final String usage = "done Usage: done [index]";
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public CommandDone(String[] tokens) {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		Alice newAgent;
@@ -39,6 +46,9 @@ public class CommandDone extends Command {
 		return newAgent;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);

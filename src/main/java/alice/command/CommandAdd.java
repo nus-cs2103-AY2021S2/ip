@@ -1,6 +1,7 @@
 package alice.command;
 
-import alice.*;
+import alice.Alice;
+import alice.AliceException;
 import alice.task.Task;
 import alice.task.TaskBuilder;
 import alice.task.TaskList;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class CommandAdd extends Command {
 
+	/** Usage details. **/
 	private static final String todoUsage = "todo usage: todo [activity]";
 	private static final String deadlineUsage = "deadline usage: deadline [activity] /by [deadline yyyy/MM/dd]";
 	private static final String eventUsage = "todo usage: event [activity] /at [time yyyy/MM/dd]";
@@ -18,6 +20,9 @@ public class CommandAdd extends Command {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		Alice newAgent;
@@ -49,6 +54,9 @@ public class CommandAdd extends Command {
 		return newAgent;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);
