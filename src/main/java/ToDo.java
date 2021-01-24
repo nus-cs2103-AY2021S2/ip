@@ -3,6 +3,10 @@ public class ToDo extends Task{
         super(name);
     }
 
+    /**
+     * Return the saved Format of ToDo task
+     * @return
+     */
     @Override
     public String toSaveFormat(){
         return "T | " + (isDone() ? "1" : "0") +

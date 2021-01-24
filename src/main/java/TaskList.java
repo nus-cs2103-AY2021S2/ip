@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Manager to manage a list of tasks
+ */
 public class TaskList {
     public static String line = "------------------------------------------------------";
     private final List<Task> ls = new ArrayList<>();
@@ -27,6 +30,11 @@ public class TaskList {
         return this.ls;
     }
 
+
+    /**
+     * Adds a given task to the list.
+     * @param task given task
+     */
     public void addTask(Task task) {
         String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
         this.ls.add(task);
@@ -34,6 +42,10 @@ public class TaskList {
         res += "\tNow you have " + numOfTasks + " tasks in the list\n\t" + line;
         System.out.println(res);
     }
+    /**
+     * Mark a certain task as done
+     * @param index index of a certain task
+     */
 
     public void  find(String keyword) {
         String res = "";
@@ -65,6 +77,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Delete a certain task
+     * @param index index of a certain task
+     */
+
     public void deleteTask(int index) {
         Task task = this.ls.get(index - 1);
         this.ls.remove(index-1);
@@ -74,6 +91,10 @@ public class TaskList {
         System.out.println(res);
 
     }
+
+    /**
+     * List all the tasks in taskList
+     */
 
     public void  listTask() {
         String res = "";

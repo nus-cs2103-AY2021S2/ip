@@ -12,23 +12,34 @@ public class Storage {
         this.file = new File("data", "duke.txt");
     }
 
-    public void createFile() throws IOException{
+    /**
+     * Creates a file if the given file is not available
+     */
+    public void createFile() {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
             System.out.println("Directory created");
         }
 
         if (!file.exists()) {
-            file.createNewFile();
             System.out.println("New file created");
         }
 
     }
 
+    /**
+     * Return file
+     */
+
     public File getFile() throws IOException {
         createFile();
         return this.file;
     }
+
+    /**
+     * Update all the task in taskList to file before exiting
+     * @param taskList
+     */
 
     public void update(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.file);
@@ -40,12 +51,4 @@ public class Storage {
 
     }
 
-    public void setUpFile() throws IOException {
-        if (!Files.exists(Paths.get("data"))) {
-            Files.createDirectory(Paths.get("data"));
-        }
-        else if (!Files.exists(Paths.get("data/Duke.txt"))) {
-            Files.createFile(Paths.get("data/Duke.txt"));
-        }
-    }
 }

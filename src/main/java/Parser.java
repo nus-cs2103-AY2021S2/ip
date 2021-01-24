@@ -9,6 +9,12 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parse input from file and return the corresponding task
+     * @param taskString
+     * @return Task
+     */
+
     public static Task parseFileInput(String taskString){
         String[] split = taskString.split(SAVED_FORMAT_DELIMITER);
         String type = split[0];
@@ -44,6 +50,10 @@ public class Parser {
 
     }
 
+    /**
+     * Parse input from user and add the task to taskList
+     * @param commandFromUser
+     */
     public void parseUserCommand(String commandFromUser) throws IOException, DukeException {
         if(commandFromUser.equals("list")){
             this.taskList.listTask();
