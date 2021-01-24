@@ -10,8 +10,6 @@ public class Main {
         String input = "";
         String output = "";
 
-        duke.init();
-
         while(duke.isRunning()) {
             input = sc.nextLine();
             System.out.println("____________________________________________________________");

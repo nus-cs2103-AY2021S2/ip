@@ -7,6 +7,16 @@ public class EventTask extends Task {
         this.duration = description.split("/at")[1];
         this.description = description.split("/at")[0];
     }
+
+    public EventTask(String description, int id, int status, String duration) {
+        super(description, id);
+        super.isDone = status > 0;
+        this.duration = duration;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
     
     @Override
     public String toString() {
