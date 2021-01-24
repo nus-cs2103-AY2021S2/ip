@@ -40,147 +40,147 @@ public class Duke {
         String[] fullCmdStrArray = fullCmd.split(" ");
         String cmd = fullCmdStrArray[0];
         switch(cmd) {
-            case "list":
-                if (fullCmdStrArray.length > 1) { // handle commands such as "list abc", "list 1 2 3"
-                    String errorMsg = "Sorry human, I do not understand your command." +
-                            "\n" +
-                            PADDING +
-                            "To access your list, enter 'list' with no additional descriptions.";
-                    throw new DukeException(errorMsg);
-                }
-                displayList();
-                break;
-            case "done":
-                if (fullCmdStrArray.length > 2) { // too many parameters (>1)
-                    String errorMsg = "Sorry human, please enter only one task for me to mark as complete." +
-                            "\n" +
-                            PADDING +
-                            "I am unable to process more than one task at one time.";
-                    throw new DukeException(errorMsg);
-                }
-
-                if (fullCmdStrArray.length < 2) { // no parameter
-                    String errorMsg = "Sorry human, please enter a task number.";
-                    throw new DukeException(errorMsg);
-                }
-
-                if (!isNumber(fullCmdStrArray[1])) { // handle commands such as 'done a', 'done hello'
-                    String errorMsg = "Sorry human, please enter the number of the task you want me to" +
-                            "\n" +
-                            PADDING +
-                            "mark as complete.";
-                    throw new DukeException(errorMsg);
-                }
-
-                if (fullCmd.length() > 5) {
-                    int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
-                    if (taskIndex > taskList.size() - 1 || taskIndex < 0) {
-                        throw new DukeException("Sorry human, that task does not seem to exist.");
-                    }
-                    Task doneTask = taskList.get(taskIndex);
-                    doneTask.markDone();
-                    displayDoneMessage(doneTask);
-                }
-                break;
-            case "todo":
-                if (fullCmdStrArray.length == 1) { // handle todo without parameters
-                    throw new DukeException("Sorry human, please enter a name for this task.");
-                }
-                String taskName = fullCmd.substring(5); // remove "todo "
-                TodoTask newTodoTask = new TodoTask(taskName);
-
-                taskList.add(newTodoTask);
-                displayAddToList(newTodoTask);
-                break;
-            case "event":
-                String eErrorMsg = "Invalid format. Please enter as such:" +
+        case "list":
+            if (fullCmdStrArray.length > 1) { // handle commands such as "list abc", "list 1 2 3"
+                String errorMsg = "Sorry human, I do not understand your command." +
                         "\n" +
                         PADDING +
-                        "event <EVENT_NAME> /at <EVENT_TIME>";
-                String eDateErrorMsg = "Invalid date format. Please enter as such:" +
+                        "To access your list, enter 'list' with no additional descriptions.";
+                throw new DukeException(errorMsg);
+            }
+            displayList();
+            break;
+        case "done":
+            if (fullCmdStrArray.length > 2) { // too many parameters (>1)
+                String errorMsg = "Sorry human, please enter only one task for me to mark as complete." +
                         "\n" +
                         PADDING +
-                        "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
-                if (fullCmdStrArray.length == 1) { // handle event without parameters
-                    throw new DukeException(eErrorMsg);
-                }
-                try {
-                    String eTaskDetails = fullCmd.substring(6); // remove "event "
-                    String[] eTaskDetailsArray = eTaskDetails.split(" /at ");
-                    String eTaskName = eTaskDetailsArray[0];
-                    String eTaskDate = eTaskDetailsArray[1];
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
-                    EventTask newEventTask = new EventTask(eTaskName, ldt);
-                    taskList.add(newEventTask);
-                    displayAddToList(newEventTask);
-                } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
-                    throw new DukeException(eErrorMsg);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(eDateErrorMsg);
-                }
-                break;
-            case "deadline":
-                String dErrorMsg = "Invalid format. Please enter as such:" +
+                        "I am unable to process more than one task at one time.";
+                throw new DukeException(errorMsg);
+            }
+
+            if (fullCmdStrArray.length < 2) { // no parameter
+                String errorMsg = "Sorry human, please enter a task number.";
+                throw new DukeException(errorMsg);
+            }
+
+            if (!isNumber(fullCmdStrArray[1])) { // handle commands such as 'done a', 'done hello'
+                String errorMsg = "Sorry human, please enter the number of the task you want me to" +
                         "\n" +
                         PADDING +
-                        "deadline <TASK_NAME> /by <DEADLINE_TIME>";
-                String dDateErrorMsg = "Invalid date format. Please enter as such:" +
-                        "\n" +
-                        PADDING +
-                        "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
-                if (fullCmdStrArray.length == 1) { // handle deadline without parameters
-                    throw new DukeException(dErrorMsg);
-                }
-                try {
-                    String dTaskDetails = fullCmd.substring(9); // remove "deadline "
-                    String[] dTaskDetailsArray = dTaskDetails.split(" /by ");
-                    String dTaskName = dTaskDetailsArray[0];
-                    String dTaskDate = dTaskDetailsArray[1];
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    LocalDateTime ldt = LocalDateTime.parse(dTaskDate, dtf);
-                    DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, ldt);
+                        "mark as complete.";
+                throw new DukeException(errorMsg);
+            }
 
-                    taskList.add(newDeadlineTask);
-                    displayAddToList(newDeadlineTask);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException(dErrorMsg);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException(dDateErrorMsg);
-                }
-                break;
-            case "delete":
-                if (fullCmdStrArray.length > 2) { // too many parameters (>1)
-                    String errorMsg = "Sorry human, please enter only one task for me to delete." +
-                            "\n" +
-                            PADDING +
-                            "I am unable to process more than one task at one time.";
-                    throw new DukeException(errorMsg);
-                }
-
-                if (fullCmdStrArray.length < 2) { // no parameter
-                    String errorMsg = "Sorry human, please enter a task number.";
-                    throw new DukeException(errorMsg);
-                }
-
-                if (!isNumber(fullCmdStrArray[1])) { // handle commands such as 'delete a', 'delete hello'
-                    String errorMsg = "Sorry human, please enter the number of the task you want me to" +
-                            "\n" +
-                            PADDING +
-                            "delete.";
-                    throw new DukeException(errorMsg);
-                }
-
+            if (fullCmd.length() > 5) {
                 int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
                 if (taskIndex > taskList.size() - 1 || taskIndex < 0) {
                     throw new DukeException("Sorry human, that task does not seem to exist.");
                 }
-                Task deletedTask = taskList.get(taskIndex);
-                taskList.remove(taskIndex);
-                displayDeletedMessage(deletedTask);
-                break;
-            default:
-                throw new DukeException("Sorry human, I have not been trained to process that command.");
+                Task doneTask = taskList.get(taskIndex);
+                doneTask.markDone();
+                displayDoneMessage(doneTask);
+            }
+            break;
+        case "todo":
+            if (fullCmdStrArray.length == 1) { // handle todo without parameters
+                throw new DukeException("Sorry human, please enter a name for this task.");
+            }
+            String taskName = fullCmd.substring(5); // remove "todo "
+            TodoTask newTodoTask = new TodoTask(taskName);
+
+            taskList.add(newTodoTask);
+            displayAddToList(newTodoTask);
+            break;
+        case "event":
+            String eErrorMsg = "Invalid format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "event <EVENT_NAME> /at <EVENT_TIME>";
+            String eDateErrorMsg = "Invalid date format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
+            if (fullCmdStrArray.length == 1) { // handle event without parameters
+                throw new DukeException(eErrorMsg);
+            }
+            try {
+                String eTaskDetails = fullCmd.substring(6); // remove "event "
+                String[] eTaskDetailsArray = eTaskDetails.split(" /at ");
+                String eTaskName = eTaskDetailsArray[0];
+                String eTaskDate = eTaskDetailsArray[1];
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
+                EventTask newEventTask = new EventTask(eTaskName, ldt);
+                taskList.add(newEventTask);
+                displayAddToList(newEventTask);
+            } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
+                throw new DukeException(eErrorMsg);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(eDateErrorMsg);
+            }
+            break;
+        case "deadline":
+            String dErrorMsg = "Invalid format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "deadline <TASK_NAME> /by <DEADLINE_TIME>";
+            String dDateErrorMsg = "Invalid date format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
+            if (fullCmdStrArray.length == 1) { // handle deadline without parameters
+                throw new DukeException(dErrorMsg);
+            }
+            try {
+                String dTaskDetails = fullCmd.substring(9); // remove "deadline "
+                String[] dTaskDetailsArray = dTaskDetails.split(" /by ");
+                String dTaskName = dTaskDetailsArray[0];
+                String dTaskDate = dTaskDetailsArray[1];
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime ldt = LocalDateTime.parse(dTaskDate, dtf);
+                DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, ldt);
+
+                taskList.add(newDeadlineTask);
+                displayAddToList(newDeadlineTask);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(dErrorMsg);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(dDateErrorMsg);
+            }
+            break;
+        case "delete":
+            if (fullCmdStrArray.length > 2) { // too many parameters (>1)
+                String errorMsg = "Sorry human, please enter only one task for me to delete." +
+                        "\n" +
+                        PADDING +
+                        "I am unable to process more than one task at one time.";
+                throw new DukeException(errorMsg);
+            }
+
+            if (fullCmdStrArray.length < 2) { // no parameter
+                String errorMsg = "Sorry human, please enter a task number.";
+                throw new DukeException(errorMsg);
+            }
+
+            if (!isNumber(fullCmdStrArray[1])) { // handle commands such as 'delete a', 'delete hello'
+                String errorMsg = "Sorry human, please enter the number of the task you want me to" +
+                        "\n" +
+                        PADDING +
+                        "delete.";
+                throw new DukeException(errorMsg);
+            }
+
+            int taskIndex = Integer.parseInt(fullCmdStrArray[1]) - 1;
+            if (taskIndex > taskList.size() - 1 || taskIndex < 0) {
+                throw new DukeException("Sorry human, that task does not seem to exist.");
+            }
+            Task deletedTask = taskList.get(taskIndex);
+            taskList.remove(taskIndex);
+            displayDeletedMessage(deletedTask);
+            break;
+        default:
+            throw new DukeException("Sorry human, I have not been trained to process that command.");
         }
     }
 
