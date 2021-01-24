@@ -54,6 +54,17 @@ public class Output {
         System.out.println(addLine() + "\n    Bye. Hope to see you again soon!\n" + addLine());
     }
 
+    public void printFind(ArrayList<Task> foundTasks, String query) {
+        System.out.println(addLine());
+        if (foundTasks.size() == 0) {
+            System.out.println("    ☹ OOPS! No tasks found for the query: " + query);
+        }
+        for (Task t : foundTasks) {
+            System.out.println("    " + t);
+        }
+        System.out.println(addLine());
+    }
+
     public void printIllegalArgumentError() {
         System.out.println(addLine() + "\n    ☹ OOPS! I'm sorry, but I don't know what that means :(" + "\n" + addLine());
     }
@@ -72,14 +83,14 @@ public class Output {
     }
 
     public void doneAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
-        String[] numArgs = input.split(" ");
+        String[] params = input.split(" ");
 
-        if (numArgs.length < 2) {
+        if (params.length < 2) {
             throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to mark done");
-        } else if (Integer.parseInt(numArgs[1]) <= 0 || Integer.parseInt(numArgs[1]) > tasksList.size()) {
+        } else if (Integer.parseInt(params[1]) <= 0 || Integer.parseInt(params[1]) > tasksList.size()) {
             throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to mark done");
         }
-        Task done = tasksList.get(Integer.parseInt(numArgs[1]) - 1);
+        Task done = tasksList.get(Integer.parseInt(params[1]) - 1);
         done.toggleStatus();
 
         printDoneMsg(done);
@@ -89,9 +100,9 @@ public class Output {
     public void addAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String taskDesc = "", dateTime = "";
         String[] checkFormat;
-        String[] numArgs = input.split(" ");
-        if(numArgs[0].equals("todo")) {
-            if(numArgs.length > 1) {
+        String[] params = input.split(" ");
+        if(params[0].equals("todo")) {
+            if(params.length > 1) {
                 taskDesc = input.split("todo ")[1];
             }
 
@@ -100,10 +111,10 @@ public class Output {
             tasksList.add(todo);
             printAddedTask(todo, tasksList.size());
             dataManager.writeToFile(tasksList);
-        } else if(numArgs[0].equals("deadline")) {
+        } else if(params[0].equals("deadline")) {
             checkFormat = input.split(" /by ");
 
-            if(numArgs.length >= 4 && checkFormat.length > 1) {
+            if(params.length >= 4 && checkFormat.length > 1) {
                 taskDesc = input.split("deadline ")[1].split(" /by ")[0];
                 dateTime = input.split(" /by ")[1];
             }
@@ -113,10 +124,10 @@ public class Output {
             tasksList.add(deadline);
             printAddedTask(deadline, tasksList.size());
             dataManager.writeToFile(tasksList);
-        } else if(numArgs[0].equals("event")) {
+        } else if(params[0].equals("event")) {
             checkFormat = input.split(" /at ");
 
-            if(numArgs.length >= 4 && checkFormat.length > 1) {
+            if(params.length >= 4 && checkFormat.length > 1) {
                 taskDesc = input.split("event ")[1].split(" /at ")[0];
                 dateTime = input.split(" /at ")[1];
             }
@@ -130,18 +141,35 @@ public class Output {
     }
 
     public void deleteAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
-        String[] numArgs = input.split(" ");
+        String[] params = input.split(" ");
 
-        if (numArgs.length < 2) {
-            throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to delete");
-        } else if (Integer.parseInt(numArgs[1]) <= 0 || Integer.parseInt(numArgs[1]) > tasksList.size()) {
-            throw new InvalidFormatException("Invalid event number. Please specify a valid event you would like to delete");
+        if (params.length < 2) {
+            throw new InvalidFormatException("Please specify a valid event you would like to delete");
+        } else if (Integer.parseInt(params[1]) <= 0 || Integer.parseInt(params[1]) > tasksList.size()) {
+            throw new InvalidFormatException("Please specify a valid event you would like to delete");
         }
-        Task delete = tasksList.remove(Integer.parseInt(numArgs[1]) - 1);
+        Task delete = tasksList.remove(Integer.parseInt(params[1]) - 1);
 
         printDeleteMsg(delete, tasksList.size());
         dataManager.writeToFile(tasksList);
     }
 
+    public void findAction(ArrayList<Task> tasksList, String input) throws DukeException {
+        String[] params = input.split(" ");
+        String toFind = "";
+        ArrayList<Task> foundTasks = new ArrayList<>();
 
+        if (params.length < 2) {
+            throw new InvalidFormatException("Please specify a valid query.");
+        } else {
+            toFind = input.split("find ")[1];
+            for (Task t : tasksList) {
+                if(t.getDescription().contains(toFind)) {
+                    foundTasks.add(t);
+                }
+            }
+        }
+
+        printFind(foundTasks, toFind);
+    }
 }
