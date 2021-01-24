@@ -10,10 +10,19 @@ public class Deadlines extends Task{
         this.savedBefore = savedBefore;
     }
 
+    /**
+     * Parse string to LocalDateTime
+     * @param dateTimeString
+     */
     public LocalDateTime parse(String dateTimeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(dateTimeString, formatter);
     }
+
+    /**
+     * Return the saved Format of Deadline task
+     * @return
+     */
 
     @Override
     public String toSaveFormat(){

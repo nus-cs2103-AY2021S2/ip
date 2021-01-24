@@ -5,6 +5,10 @@ public class Events extends Task{
         this.by = by;
     }
 
+    /**
+     * Return the saved Format of Events task
+     * @return
+     */
     @Override
     public String toSaveFormat(){
         return "E | " + (isDone() ? "1" : "0") +

@@ -19,7 +19,7 @@ public class Duke {
     }
 
     public void run() throws IOException{
-        this.storage.setUpFile();
+        this.storage.createFile();
         this.ui.greeting();
         Scanner scanner = new Scanner(System.in);
         this.taskList.addTaskFromFile();
