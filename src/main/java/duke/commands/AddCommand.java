@@ -14,15 +14,35 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Responsible for dealing with the addition of tasks.
+ */
 public class AddCommand extends Command {
     private String fullCommand;
     private String[] checkCommands;
 
-    public AddCommand(String fullCommand, String[] checkCommands) {
+    /**
+     * Constructs a AddCommand with the given full command line.
+     *
+     * @param fullCommand Full command line input.
+     */
+    public AddCommand(String fullCommand) {
         this.fullCommand = fullCommand;
-        this.checkCommands = checkCommands;
+        this.checkCommands = fullCommand.split(" ");
     }
 
+    /**
+     * Adds the specified task into the TaskList given by command line
+     * and save changes into the save file.
+     *
+     * @param tasks TaskList to add task into.
+     * @param ui Ui for system outputs.
+     * @param storage Storage for saving contents into file.
+     * @throws DukeException If error happens while adding task.
+     * @throws DateTimeParseException If date and time format in command is incorrect.
+     * @throws StringIndexOutOfBoundsException If format in command is incorrect.
+     * @throws IOException If error happens while saving contents into file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws
             DukeException, DateTimeParseException, StringIndexOutOfBoundsException, IOException {
@@ -111,6 +131,11 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Returns if program should exit after this command.
+     *
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;
