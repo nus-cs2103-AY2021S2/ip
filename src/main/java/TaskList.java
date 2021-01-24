@@ -18,22 +18,22 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public List<Task> get() {
+        return this.tasks;
+    }
+
     public void add(Task task) {
         tasks.add(task);
-        Duke.ollySpeak(task.addMessage + (task.addMessage == null ? "" : " ") + "I've added:");
-        System.out.println(task);
-        Duke.ollySpeak("You now have " + this.size() + " tasks at hand.");
-
-        storage.writeToFile(this.tasks);
+        storage.writeToFile(this);
     }
 
     public void delete(Task task) {
         tasks.remove(task);
-        Duke.ollySpeak("Aww man.. I've removed this task:");
-        System.out.println(task);
-        Duke.ollySpeak("Now you have " + this.size() + " tasks left.");
+        storage.writeToFile(this);
+    }
 
-        storage.writeToFile(this.tasks);
+    public Task find(int i) {
+        return tasks.get(i);
     }
 
     public List<Task> getByDate(LocalDate date) {
@@ -56,6 +56,6 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             tasksContent += (i+1 + ". " + tasks.get(i) + "\n");
         }
-        return tasksContent;
+        return tasksContent.trim();
     }
 }

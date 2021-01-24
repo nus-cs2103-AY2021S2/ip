@@ -20,27 +20,25 @@ public class Storage {
     public List<Task> load() {
         try {
             String taskFileContent = fileHandler();
-            if (!taskFileContent.equals("")) {
-                return parseTaskFileContent(taskFileContent);
-            }
+            return parseTaskFileContent(taskFileContent);
         } catch (FileNotFoundException ex) {
             // create new file for task data
             try {
                 createFile();
+                return parseTaskFileContent("");
             } catch (IOException ioEx) {
                 ioEx.printStackTrace();
             }
         } catch (ArrayIndexOutOfBoundsException arrayEx) {
             // nothing to catch, empty file
             arrayEx.printStackTrace();
-            Duke.ollySpeak("Your task data file is corrupted, please check!");
         }
         return null;
     }
 
-    public void writeToFile(List<Task> tasks) {
+    public void writeToFile(TaskList tasks) {
         try {
-            String content = parseTasksToString(tasks);
+            String content = parseTasksToString(tasks.get());
             File file = new File(this.filePath);
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
@@ -70,6 +68,11 @@ public class Storage {
 
     private List<Task> parseTaskFileContent(String fileContent) {
         // convert to tasks array
+
+        if (fileContent.isEmpty()) {
+            return new ArrayList<Task>();
+        }
+
         List<Task> tempTask = new ArrayList<Task>();
         String[] tasks = fileContent.split("\\|");
         for (String task: tasks) {
