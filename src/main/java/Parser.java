@@ -11,14 +11,15 @@ public class Parser {
         String description = "";
 
         switch (command) {
+        case "delete":
+        case "todo":
+            description = text;
+            break;
         case "event":
             description = text.split(" /at")[0].replaceFirst("event ", "");
             break;
         case "deadline":
             description = text.split(" /by")[0].replaceFirst("deadline ", "");
-            break;
-        case "todo":
-            description = text;
             break;
         default:
             break;

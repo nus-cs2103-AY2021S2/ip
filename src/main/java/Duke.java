@@ -24,9 +24,10 @@ public class Duke {
     public void run(){
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.nextLine();
+            String input = sc.nextLine();
             try {
-                ui.handleCommand(command);
+                ui.handleCommand(input, tasks);
+                storage.save(tasks);
             } catch(DukeException dukeEx) {
                 // Echoes out reason for invalid inputs
                 ui.respondToCommand(dukeEx.toString());

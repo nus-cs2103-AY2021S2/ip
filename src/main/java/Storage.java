@@ -19,10 +19,12 @@ public class Storage {
 
     public List<Task> load() throws DukeException {
         try {
-            File file = new File(filePath);
-            Scanner sc = new Scanner(file);
             List<Task> taskList = new ArrayList<>();
             taskList.add(null);
+            File file = new File(filePath);
+            File dir = new File(dirPath);
+            handleNonExistentFiles(file, dir);
+            Scanner sc = new Scanner(file);
 
             while (sc.hasNext()) {
                 String[] taskInfo = sc.nextLine().split("[ | ]+");
@@ -56,25 +58,28 @@ public class Storage {
         }
     }
 
-//    private void save() throws IOException {
-//        File file = new File(filePath);
-//        File dir = new File(dirPath);
-//
-//        if (!Files.isDirectory(Paths.get(dirPath))) {
-//            // Create data folder and duke.txt if do not exist
-//            dir.mkdir();
-//            file.createNewFile();
-//        } else if (!file.exists()) {
-//            // Create duke.txt if do not exist
-//            file.createNewFile();
-//        }
-//
-//        FileWriter fileWriter = new FileWriter(file, false);
-//        for (int i = 1; i < taskList.size(); i++) {
-//            Task task = taskList.get(i);
-//            fileWriter.write(task.writeContentFormat() + System.lineSeparator());
-//        }
-//        fileWriter.close();
-//    }
+    public void save(TaskList tasks) throws IOException {
+        File file = new File(filePath);
+        File dir = new File(dirPath);
+        handleNonExistentFiles(file, dir);
+        FileWriter fileWriter = new FileWriter(file, false);
+
+        for (int i = 1; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            fileWriter.write(task.writeContentFormat() + System.lineSeparator());
+        }
+        fileWriter.close();
+    }
+
+    private void handleNonExistentFiles(File file, File dir) throws IOException {
+        if (!Files.isDirectory(Paths.get(dirPath))) {
+            // Create data folder and duke.txt if do not exist
+            dir.mkdir();
+            file.createNewFile();
+        } else if (!file.exists()) {
+            // Create duke.txt if do not exist
+            file.createNewFile();
+        }
+    }
 
 }
