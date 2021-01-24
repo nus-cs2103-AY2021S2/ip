@@ -125,7 +125,11 @@ public class Kelbot {
       } catch (KelbotException e) {
         System.out.println(e.getMessage());
       }
+<<<<<<< Updated upstream
 
+=======
+      
+>>>>>>> Stashed changes
       input = sc.nextLine();
       commands = input.split(" ");
     }
