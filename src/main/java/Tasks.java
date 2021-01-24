@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -149,6 +150,33 @@ public class Tasks {
     public void reportTotalNumberOfTasks() {
         String noun = tasks.size() <= 1? "task": "tasks";
         System.out.println(String.format("Now you have %d %s in total. Good Luck.", tasks.size(), noun));
+    }
+
+    /**
+     *
+     * @param userInput Second argument of userInput is assumed to be of 'yyyy-mm-dd'
+     */
+    public void printTasksOnDate(String userInput) {
+        LocalDate date = LocalDate.parse(userInput.split(" ")[1]);
+        boolean hasTask = false;
+        for (Task t : tasks) {
+            if (t instanceof ToDo) {
+                continue;
+            }
+            // t is either deadline or event
+            if (date.equals(t.getDate())) {
+                if (!hasTask) {
+                    hasTask = true;
+                    System.out.println(String.format("You have the following tasks on %s.",
+                            date.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"))));
+                }
+                System.out.println(t);
+            }
+        }
+        if (!hasTask) {
+            System.out.println(String.format("You do not have any task on %s. :')",
+                    date.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"))));
+        }
     }
 
     /**

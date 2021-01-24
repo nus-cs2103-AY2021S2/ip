@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Provide methods for checking input format
  */
@@ -26,6 +28,21 @@ public class FormatChecker {
      */
     public static boolean isPrintingList(String userInput) {
         return userInput.equals("list");
+    }
+
+    public static boolean isTryingToPrintTasksOnOneDay(String userInput) {
+        String[] splited = userInput.split(" ");
+        boolean isListing = splited[0].equals("list");
+        if (!isListing) {
+            return false;
+        }
+
+        try {
+            LocalDate.parse(splited[1]);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

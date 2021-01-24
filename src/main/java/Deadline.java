@@ -17,6 +17,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public LocalDate getDate() {
+        return by;
+    }
+
     /**
      * toString method overriding the one in class Task
      * @return a user-friendly String representation of the Deadline item

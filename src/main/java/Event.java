@@ -17,6 +17,10 @@ public class Event extends Task {
         this.period = period;
     }
 
+    public LocalDate getDate() {
+        return period;
+    }
+
     /**
      * toString method overriding the one in class Task
      * @return a user-friendly String representation of the Event item
