@@ -43,11 +43,11 @@ public class TaskStorage {
                 switch (taskType) {
                     case 'D':
                         Deadline deadline = (Deadline) task;
-                        details = deadline.getDetails();
+                        details = deadline.getDateTime();
                         break;
                     case 'E':
                         Event event = (Event) task;
-                        details = event.getDetails();
+                        details = event.getDateTime();
                         break;
                     default:
                 }

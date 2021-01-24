@@ -23,7 +23,7 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
-    public String getDetails() {
+    public String getDateTime() {
         return eventTime.toLocalDate().toString()
                 + " " + eventTime.toLocalTime().format(DateTimeFormatter.ofPattern("HHmm"));
     }
