@@ -191,17 +191,18 @@ public class Tasks {
                 String type = (String)jsonObject.get("type");
                 String description = (String)jsonObject.get("description");
                 boolean isDone = (boolean)jsonObject.get("isDone");
-                LocalDate time = LocalDate.parse((String)jsonObject.get("time"),
-                        DateTimeFormatter.ofPattern("mm/MM/YYYY"));
                 Task t = null;
                 // either one of the cases will be entered
                 // <-> t will not be null
                 if (type.equals("todo")) {
                     t = new ToDo(description);
-                } else if (type.equals("deadline")) {
-                    t = new Deadline(description, time);
-                } else if (type.equals("event")) {
-                    t = new Event(description, time);
+                } else {
+                    LocalDate time = LocalDate.parse((String)jsonObject.get("time"));
+                    if (type.equals("deadline")) {
+                        t = new Deadline(description, time);
+                    } else if (type.equals("event")) {
+                        t = new Event(description, time);
+                    }
                 }
                 t.setDone(isDone);
                 tasks.add(t);

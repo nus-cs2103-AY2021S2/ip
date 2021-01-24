@@ -41,7 +41,7 @@ public class Deadline extends Task {
         jsonObject.put("type", "deadline");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);
-        jsonObject.put("time", by);
+        jsonObject.put("time", by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         return jsonObject;
     }
 }

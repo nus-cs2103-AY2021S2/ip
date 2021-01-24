@@ -40,7 +40,7 @@ public class Event extends Task {
         jsonObject.put("type", "event");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);
-        jsonObject.put("time", period);
+        jsonObject.put("time", period.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         return jsonObject;
     }
 }
