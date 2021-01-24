@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 /**
@@ -209,7 +210,8 @@ public class Duke {
             try {
                 String[] eventString = inputString.split("/at");
                 String taskString = eventString[0].substring(6).trim();
-                String eventTime = eventString[1].trim();
+                String dateTime = eventString[1].trim();
+                LocalDate eventTime = LocalDate.parse(dateTime);
                 Event newEvent = new Event(taskString, eventTime);
                 taskList.add(newEvent);
                 String saveToDisk = "E | 0 | " + taskString + " | " + eventTime;
@@ -222,7 +224,7 @@ public class Duke {
             try {
                 String[] eventString = inputString.split("/by");
                 String taskString = eventString[0].substring(9).trim();
-                String deadlineTime = eventString[1].trim();
+                LocalDate deadlineTime = LocalDate.parse(eventString[1].trim());
                 Deadline newDeadline = new Deadline(taskString, deadlineTime);
                 taskList.add(newDeadline);
                 String saveToDisk = "D | 0 | " + taskString + " | " + deadlineTime;

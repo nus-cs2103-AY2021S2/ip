@@ -1,16 +1,21 @@
+import java.time.format.DateTimeFormatter;
+
 /**
  * Implementation for tasks with a given start-time and end-time.
  */
 
 public class Event extends Task {
-    private final String startAndEnd;
-    public Event(String taskName, String startAndEnd) {
-        super(taskName, "E");
+    private final java.time.LocalDate startAndEnd;
+    public Event(String taskName, java.time.LocalDate startAndEnd) {
+        super(taskName);
         this.startAndEnd = startAndEnd;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.startAndEnd + ")";
+        String dayOfWeek = this.startAndEnd.getDayOfWeek().toString().toLowerCase();
+        dayOfWeek = dayOfWeek.substring(0, 1).toUpperCase() + dayOfWeek.substring(1);
+        String date = this.startAndEnd.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[E]" + super.toString() + " (at: " + dayOfWeek + ", " + date + ")";
     }
 }

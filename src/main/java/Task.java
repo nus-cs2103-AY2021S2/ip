@@ -14,6 +14,9 @@ public class Task {
         this.type = type;
     }
 
+    public Task(String taskName) {
+    }
+
     public String getDescription() {
         return this.description;
     }
