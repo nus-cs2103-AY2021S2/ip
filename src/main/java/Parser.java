@@ -30,7 +30,7 @@ public class Parser {
                 }
                 Parser.startResponse(userInput, tasks);
             } catch (IllegalArgumentException e) {
-                System.out.println("\nOh no Flamingo! I need more information to create the task.\n");
+                System.out.println("\nOh no Flamingo! I need more information to do that.\n");
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("\nOh no Flamingo! The task does not exist.\n");
             } catch (NullPointerException e) {
@@ -90,6 +90,12 @@ public class Parser {
                 throw new IndexOutOfBoundsException();
             }
             tasks.deleteTask(taskNumber);
+        } else if (userInput.contains("find")) {
+            if (userInput.length() <= 5) {
+                throw new IllegalArgumentException();
+            }
+            String keyword = userInput.substring(5);
+            tasks.findString(keyword);
         } else {
             throw new Exception();
         }

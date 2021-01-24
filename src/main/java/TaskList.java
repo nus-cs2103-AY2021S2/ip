@@ -67,4 +67,37 @@ public class TaskList {
         numTasks--;
         System.out.println("You now have a total of " + numTasks + " tasks.\n");
     }
+
+    /**
+     * Finds matching results from a given keyword.
+     *
+     * @param keyword Keyword from user input.
+     */
+    public void findString(String keyword) {
+        boolean hasMatch = false;
+        ArrayList<Task> matches = new ArrayList<>();
+        ArrayList<Integer> taskNumber = new ArrayList<>();
+        int num = 1;
+
+        for (Task t : tasks) {
+            String temp = t.toString();
+
+            if (temp.contains(keyword)) {
+                hasMatch = true;
+                matches.add(t);
+                taskNumber.add(num);
+            }
+            num++;
+        }
+
+        if (hasMatch) {
+            System.out.println("\nBingo Flamingo! I've found these matching results:");
+            for (int j = 0; j < matches.size(); j++) {
+                System.out.println(taskNumber.get(j) + ". " + matches.get(j));
+            }
+            System.out.println("");
+        } else {
+            System.out.println("\nOh no Flamingo! No matches were found.\n");
+        }
+    }
 }
