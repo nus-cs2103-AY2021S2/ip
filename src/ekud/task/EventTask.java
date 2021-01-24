@@ -17,7 +17,6 @@ public class EventTask extends TaskWithDateTime {
     public LinkedList<String> export() {
         LinkedList<String> list = super.export();
         list.addFirst("E");
-        list.addLast(dateTime.toString());
         return list;
     }
 }

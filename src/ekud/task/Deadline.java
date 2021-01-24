@@ -17,7 +17,6 @@ public class Deadline extends TaskWithDateTime {
     public LinkedList<String> export() {
         LinkedList<String> list = super.export();
         list.addFirst("D");
-        list.addLast(dateTime.toString());
         return list;
     }
 }
