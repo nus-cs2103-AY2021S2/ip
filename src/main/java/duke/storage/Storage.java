@@ -18,25 +18,41 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Responsible for reading and editing save file contents.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a Storage with the given save file location.
+     *
+     * @param filePath File path of the save file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    public void initialize() {
-        try {
-            File file = new File(filePath);
-            File directory = new File(file.getParent());
-            directory.mkdirs();
-            file.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Error happened while trying to create save file");
-            System.exit(1);
-        }
+    /**
+     * Creates the directory and save file if it does not exist.
+     *
+     * @throws IOException If there is error while creating directory or file.
+     */
+    public void initialize() throws IOException {
+        File file = new File(filePath);
+        File directory = new File(file.getParent());
+        directory.mkdirs();
+        file.createNewFile();
     }
 
+    /**
+     * Returns the List of Task saved in the save file.
+     *
+     * @return List of Task saved in the save file.
+     * @throws InvalidSaveFileFormatException If format of save file is invalid.
+     * @throws FileNotFoundException If save file is not found.
+     * @throws DateTimeParseException If format of date and time is invalid.
+     */
     public List<Task> load() throws
             InvalidSaveFileFormatException, FileNotFoundException, DateTimeParseException {
         List<Task> taskList = new ArrayList<>();
@@ -134,6 +150,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the contents of TaskList into save file in the valid format.
+     *
+     * @param tasks TaskList to be saved.
+     * @throws IOException If there is error while saving the contents.
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         List<Task> taskList = tasks.getTasks();

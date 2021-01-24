@@ -17,11 +17,19 @@ import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class processes command line inputs and edit list of task.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke with specified save file location.
+     *
+     * @param filePath File path of the save file.
+     */
     public Duke(String filePath) {
         try {
             ui = new Ui();
@@ -37,12 +45,17 @@ public class Duke {
         } catch (DateTimeParseException e) {
             System.out.println("Error: Invalid date time format in save file or no date time stated");
             System.exit(1);
+        } catch (IOException e) {
+            System.out.println("Error happened while trying to create save file");
+            System.exit(1);
         }
     }
 
+    /**
+     * Start the program of Duke that edits a lists of task.
+     */
     public void run() {
         ui.showWelcome();
-        ui.showGreeting();
         boolean isExit = false;
         while (!isExit) {
             try {
