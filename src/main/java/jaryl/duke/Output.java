@@ -2,14 +2,24 @@ package jaryl.duke;
 
 import java.util.ArrayList;
 
+/**
+ * Output handles I/O, interactions with user
+ */
 public class Output {
+    /**
+     * Prints a line as a separator
+     * @return returns the line as a String
+     */
     public String addLine() {
         return "    ----------------------------------------------------------------------------------------------------------------------------------------------";
     }
 
+    /**
+     * Prints welcome message
+     */
     public void printWelcomeMsg() {
         System.out.println(addLine());
-        System.out.println("    Hello! I'm Cimori, your friendly chatbot.\n    What can I do for you today?\n");
+        System.out.println("    Hello! I'm Duke, your friendly chatbot.\n    What can I do for you today?\n");
         System.out.println("    1. list                                   Lists out all existing tasks                       (e.g. list)");
         System.out.println("    2. done <task number>                     Marks the specified task number as done/undone     (e.g. done 2)");
         System.out.println("    3. todo <todo message>                    Adds the specified todo to the list                (e.g. todo homework)");
@@ -21,6 +31,11 @@ public class Output {
         System.out.println();
     }
 
+    /**
+     * Prints message upon successfully adding task
+     * @param task      the task to be added
+     * @param numTasks  total number of existing tasks
+     */
     public void printAddedTask(Task task, int numTasks) {
         System.out.println(addLine());
         System.out.println("    Got it. I've added this task:");
@@ -30,6 +45,10 @@ public class Output {
         System.out.println();
     }
 
+    /**
+     * Prints message upon successfully marking a task done
+     * @param task  the task to be marked done
+     */
     public void printDoneMsg(Task task) {
         System.out.println(addLine());
         if(task.getStatusIcon().equals("\u2713"))
@@ -41,6 +60,11 @@ public class Output {
         System.out.println();
     }
 
+    /**
+     * Prints message upon successfully deleting a task
+     * @param task      the task to be deleted
+     * @param numTasks  total number of existing tasks
+     */
     public void printDeleteMsg(Task task, int numTasks) {
         System.out.println(addLine());
         System.out.println("    Noted. I've removed this task:");
@@ -50,14 +74,24 @@ public class Output {
         System.out.println();
     }
 
+    /**
+     * Prints message upon terminating the program
+     */
     public void printByeMsg() {
         System.out.println(addLine() + "\n    Bye. Hope to see you again soon!\n" + addLine());
     }
 
+    /**
+     * Prints message when user inputs an illegal argument
+     */
     public void printIllegalArgumentError() {
         System.out.println(addLine() + "\n    ☹ OOPS! I'm sorry, but I don't know what that means :(" + "\n" + addLine());
     }
 
+    /**
+     * Handles list command
+     * @param tasksList list of tasks
+     */
     public void listAction(ArrayList<Task> tasksList) throws DukeException {
         if(tasksList.size() == 0) {
             throw new EmptyListException();
@@ -71,6 +105,12 @@ public class Output {
         System.out.println(addLine() + "\n");
     }
 
+    /**
+     * Handles done command
+     * @param tasksList     list of tasks
+     * @param input         user input
+     * @param dataManager   data manager which handles reading/writing data
+     */
     public void doneAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] numArgs = input.split(" ");
 
@@ -86,6 +126,12 @@ public class Output {
         dataManager.writeToFile(tasksList);
     }
 
+    /**
+     * Handles todo, deadline and event commands
+     * @param tasksList     list of tasks
+     * @param input         user input
+     * @param dataManager   data manager which handles reading/writing data
+     */
     public void addAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String taskDesc = "", dateTime = "";
         String[] checkFormat;
@@ -129,6 +175,12 @@ public class Output {
         }
     }
 
+    /**
+     * Handles delete command
+     * @param tasksList     list of tasks
+     * @param input         user input
+     * @param dataManager   data manager which handles reading/writing data
+     */
     public void deleteAction(ArrayList<Task> tasksList, String input, DataManager dataManager) throws DukeException {
         String[] numArgs = input.split(" ");
 
@@ -142,6 +194,4 @@ public class Output {
         printDeleteMsg(delete, tasksList.size());
         dataManager.writeToFile(tasksList);
     }
-
-
 }

@@ -3,12 +3,19 @@ package jaryl.duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Duke chatbot for CS2103T Individual Project
+ * @author LOH FAH YAO, JARYL
+ */
 public class Duke {
     private static final String FILE_PATH = "./data/duke.txt";
     private DataManager dataManager;
     private ArrayList<Task> tasksList;
     private Output output;
 
+    /**
+     * Constructor to instantiate a new Duke object
+     */
     public Duke() {
         this.output = new Output();
         dataManager = new DataManager(FILE_PATH);
@@ -21,10 +28,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point of application
+     * @params args input arguments
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Entry point into Duke chatbot
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
