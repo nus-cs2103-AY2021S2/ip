@@ -1,0 +1,95 @@
+package main.java;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Storage {
+
+    private String filePath;
+
+    Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public List<Task> load() {
+        try {
+            String taskFileContent = fileHandler();
+            if (!taskFileContent.equals("")) {
+                return parseTaskFileContent(taskFileContent);
+            }
+        } catch (FileNotFoundException ex) {
+            // create new file for task data
+            try {
+                createFile();
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
+        } catch (ArrayIndexOutOfBoundsException arrayEx) {
+            // nothing to catch, empty file
+            arrayEx.printStackTrace();
+            Duke.ollySpeak("Your task data file is corrupted, please check!");
+        }
+        return null;
+    }
+
+    private String fileHandler() throws FileNotFoundException {
+        // example file: T,1,read book|D,0,return book,June 6th|
+        File f = new File(this.filePath);
+        Scanner s = new Scanner(f);
+        String fileContent = "";
+        while (s.hasNext()) {
+            fileContent += s.nextLine();
+        }
+        return fileContent;
+    }
+
+    private void createFile() throws IOException {
+        File f = new File(this.filePath);
+        Files.createDirectories(Paths.get(this.filePath).getParent());
+        Boolean success = f.createNewFile();
+    }
+
+    private List<Task> parseTaskFileContent(String fileContent) {
+        // convert to tasks array
+        List<Task> tempTask = new ArrayList<Task>();
+        String[] tasks = fileContent.split("\\|");
+        for (String task: tasks) {
+            String[] taskInfo = task.split(",");
+
+            String taskType = taskInfo[0];
+            Boolean taskStatus = taskInfo[1].equals("1");
+
+            String taskName = taskInfo[2];
+
+            Task newTask = new Task(taskName);
+            switch (taskType) {
+                case "T":
+                    newTask = new Todo(taskName, taskStatus);
+                    break;
+                case "E":
+                    newTask = new Event(
+                            taskInfo[2],
+                            LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                            taskStatus);
+                    break;
+                case "D":
+                    newTask = new Deadline(
+                            taskInfo[2],
+                            LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                            taskStatus);
+                    break;
+            }
+            tempTask.add(newTask);
+        }
+
+        return tempTask;
+    }
+}

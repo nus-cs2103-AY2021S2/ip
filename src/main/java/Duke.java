@@ -182,72 +182,6 @@ public class Duke {
         return content;
     }
 
-    private static List<Task> parseTaskFileContent(String fileContent) {
-        // convert to tasks array
-        List<Task> tempTask = new ArrayList<Task>();
-        String[] tasks = fileContent.split("\\|");
-        for (String task: tasks) {
-            String[] taskInfo = task.split(",");
-            String taskType = taskInfo[0];
-            Boolean taskStatus = taskInfo[1].equals("1");
-
-            Task newTask = new Task(taskInfo[2]);
-            if (taskType.equals("T")) {
-                newTask = new Todo(taskInfo[2], taskStatus);
-            } else if (taskType.equals("E")) {
-                newTask = new Event(
-                        taskInfo[2],
-                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
-                        taskStatus);
-            } else if (taskType.equals("D")) {
-                newTask = new Deadline(
-                        taskInfo[2],
-                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
-                        taskStatus);
-            }
-            tempTask.add(newTask);
-        }
-
-        return tempTask;
-    }
-
-    private static void createFile() throws IOException {
-        File f = new File(Duke.taskFilePath);
-        Files.createDirectories(Paths.get(Duke.taskFilePath).getParent());
-        Boolean success = f.createNewFile();
-    }
-
-    private static String fileHandler() throws FileNotFoundException {
-        // example file: T,1,read book|D,0,return book,June 6th|
-
-        File f = new File(Duke.taskFilePath);
-        Scanner s = new Scanner(f);
-        String fileContent = "";
-        while (s.hasNext()) {
-            fileContent += s.nextLine();
-        }
-        return fileContent;
-    }
-
-    private static void initFile() {
-        try {
-            String taskFileContent = fileHandler();
-            if (!taskFileContent.equals("")) {
-                Duke.tasks = parseTaskFileContent(taskFileContent);
-            }
-        } catch (FileNotFoundException ex) {
-            // create new file for task data
-            try {
-                createFile();
-            } catch (IOException ioEx) {
-                ioEx.printStackTrace();
-            }
-        } catch (ArrayIndexOutOfBoundsException arrayEx) {
-            // nothing to catch, empty file
-            ollySpeak("Your task data file is corrupted, please check!");
-        }
-    }
-
     private static void writeToFile(String content) {
         try {
             File file = new File(Duke.taskFilePath);
@@ -276,7 +210,8 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        initFile();
+        Storage storage = new Storage(Duke.taskFilePath);
+        Duke.tasks = storage.load();
 
         Scanner sc = new Scanner(System.in);
         ollySpeak("Hey! Welcome to the chatbot. What can I do for you today?");
