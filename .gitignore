@@ -17,4 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 # class files, can be gotten on compile
-.class
+*.class
