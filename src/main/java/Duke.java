@@ -1,7 +1,11 @@
 import Exceptions.*;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.*;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;;
 
 public class Duke {
     public static ArrayList<Task> myTasks = new ArrayList<>();
@@ -103,7 +107,9 @@ public class Duke {
             throw new MissingDateException("");
         }
 
-        Task task = new Deadline(description[0], description[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(description[1], formatter);
+        Task task = new Deadline(description[0], dateTime);
         myTasks.add(task);
         System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);
@@ -116,7 +122,9 @@ public class Duke {
             throw new MissingDateException("");
         }
 
-        Task task = new Event(description[0], description[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+        LocalDateTime dateTime = LocalDateTime.parse(description[1], formatter);
+        Task task = new Event(description[0], dateTime);
         myTasks.add(task);
         System.out.println("☺ Got it. I've added this task:");
         System.out.println(task);

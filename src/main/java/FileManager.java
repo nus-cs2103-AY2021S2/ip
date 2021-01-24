@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 public class FileManager {
     private static File f;
 
@@ -42,25 +45,28 @@ public class FileManager {
     }
 
     public static Task parseTasks(String task) throws DukeException {
-        String[] myTasks = task.split(" / ", 4);
+        String[] description = task.split(" / ", 4);
         Task t = null;
         try {
-            String type = myTasks[0];
+            LocalDateTime dateTime;
+            String type = description[0];
             switch (type) {
                 case "T":
-                    t = new ToDos(myTasks[2]);
+                    t = new ToDos(description[2]);
                     break;
 
                 case "D":
-                    t = new Deadline(myTasks[2], myTasks[3]);
+                    dateTime = LocalDateTime.parse(description[3]);
+                    t = new Deadline(description[2], dateTime);
                     break;
 
                 case "E":
-                    t = new Event(myTasks[2], myTasks[3]);
+                    dateTime = LocalDateTime.parse(description[3]);
+                    t = new Event(description[2], dateTime);
                     break;
             }
 
-            if (myTasks[1].equals("1")) {
+            if (description[1].equals("1")) {
                 t.markAsDone();
             }
 

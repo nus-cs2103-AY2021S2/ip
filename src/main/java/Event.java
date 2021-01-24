@@ -1,19 +1,25 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected String at;
+    protected LocalDateTime dateTime;
 
-    public Event(String taskName, String at) {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
-        this.at = at;
+        this.dateTime = dateTime;
+    }
+
+    public String getDateTime() {
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }
 
     @Override
     public String toSave() {
-        return "E / " + super.isDoneString + super.taskName + " / " + at;
+        return "E / " + super.isDoneString + super.taskName + " / " + dateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + getDateTime() + ")";
     }
 }
