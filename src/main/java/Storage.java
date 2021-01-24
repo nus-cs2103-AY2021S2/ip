@@ -10,12 +10,12 @@ import java.util.List;
 
 import java.util.Scanner;
 
-public class DataManager {
+public class Storage {
     private File file;
 
     private final String SAVE_FORMAT_DELIMITER = " \\| ";
 
-    DataManager() {
+    Storage() {
         file = new File("data", "duke.txt");
     }
 
