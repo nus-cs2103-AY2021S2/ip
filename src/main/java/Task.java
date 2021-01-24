@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     String task;
     boolean isDone;
 

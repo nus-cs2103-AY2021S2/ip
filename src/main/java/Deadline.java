@@ -1,14 +1,11 @@
-public class Deadline extends Task {
+public class Deadline extends DatedTask {
 
-    String date;
-
-    public Deadline(String task, String date) {
-        super(task);
-        this.date = date;
+    public Deadline(String task, String date) throws DukeException {
+        super(task, date);
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + "(by: " + this.date + ")";
+        return "[D] " + super.toString();
     }
 }
