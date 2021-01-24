@@ -1,5 +1,8 @@
 package Duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,7 +69,10 @@ public class Duke {
                     // Deadline task values
                     String[] userInputValues = userInput.substring(9).split("/by ");
                     String description = userInputValues[0];
-                    String by = userInputValues[1];
+                    
+                    // Specific the date format that our system will accept and save it in the by variable
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime by = LocalDateTime.parse(userInputValues[1], dateFormatter);
 
                     // Add a deadline task
                     Deadline newDeadlineTask = new Deadline(description, by);
@@ -77,6 +83,9 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException ex) {
                     // Description is empty
                     System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                } catch (DateTimeParseException ex) {
+                    // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
+                    System.out.println("OOPS!! Please input a value date time format of yyyy-MM-dd HHmm");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from deadline");
                 }
@@ -91,7 +100,10 @@ public class Duke {
                     // Event task values
                     String[] userInputValues = userInput.substring(6).split("/at ");
                     String description = userInputValues[0];
-                    String at = userInputValues[1];
+                    
+                    // Specific the date format that our system will accept and save it in the by variable
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    LocalDateTime at = LocalDateTime.parse(userInputValues[1], dateFormatter);
 
                     // Add a deadline task
                     Event newEventTask = new Event(description, at);
@@ -102,6 +114,9 @@ public class Duke {
                 } catch (StringIndexOutOfBoundsException ex) {
                     // Description is empty
                     System.out.println("OOPS!!! The description of an event cannot be empty.");
+                } catch (DateTimeParseException ex) {
+                    // Datetime value parsed is not of format "yyyy-MM-dd HHmm"
+                    System.out.println("OOPS!! Please input a value date time format of yyyy-MM-dd HHmm");
                 } catch (Exception e) {
                     throw new DukeException("Unknown Exception from event");
                 }
