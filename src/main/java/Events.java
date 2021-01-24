@@ -5,6 +5,9 @@
         super(name);
         this.timing = timing;
     }
+    public String getTiming() {
+        return timing;
+    }
 
     @Override
     public String toString() {
