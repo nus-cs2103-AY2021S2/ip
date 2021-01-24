@@ -18,8 +18,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    /** Directory path of the save file */
     private static final String PATH = "data/duke.txt";
 
+    /**
+     * Saves all tasks in the current session into the hard disk
+     * @param tasks A list of tasks
+     * @throws DukeSaveException if there is an issue writing into the hard disk
+     */
     public static void saveTasks(List<Task> tasks) throws DukeSaveException {
         // Create the 'data' folder if missing
         File dir = new File("data");
@@ -43,6 +49,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from the hard disk into current session's task list
+     * @param taskManager TaskManager that contains the current session's task list
+     * @throws DukeLoadException if there is an issue reading tasks from the hard disk
+     */
     public static void loadTasksTo(TaskManager taskManager) throws DukeLoadException {
         // Create the 'data' folder if missing
         File dir = new File("data");
@@ -58,7 +69,7 @@ public class Storage {
             // If the save file already exists, load its tasks
             if(!file.createNewFile()) {
                 Scanner scanner = new Scanner(file);
-                while(scanner.hasNextLine()) {
+                while (scanner.hasNextLine()) {
                     String[] splits = scanner.nextLine().split(" \\| ");
                     boolean isDone = splits[1].equals("1");
 

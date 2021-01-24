@@ -1,12 +1,15 @@
 package duke.task;
 
 public class Task {
+    /** Description of a task */
     protected String desc;
+    /** Indicate completion of a task */
     protected boolean isDone;
 
     /**
-     * Constructor for a task
-     * @param desc Description of a Task
+     * Constructor for a Task
+     * @param desc Description of a task
+     * @param isDone Completion of a task
      */
     public Task(String desc, boolean isDone) {
         this.desc = desc;
@@ -14,38 +17,38 @@ public class Task {
     }
 
     /**
-     * Set the task as completed
+     * Sets the task as completed
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Provide the description of the task
-     * @return Task's description
+     * Provides the description of the task
+     * @return Description of the task
      */
     public String getDesc() {
         return this.desc;
     }
 
     /**
-     * Provide the task's typing
-     * @return Symbol of task's type
+     * Provides the symbol for the task type
+     * @return Symbol for the task type
      */
     public String getTypeSymbol() {
         return " ";
     }
 
     /**
-     * Provide the completion status of the task
-     * @return Completion status of task
+     * Provides the completion status of the task
+     * @return Completion status of the task
      */
     public String getStatusSymbol() {
         return this.isDone ? "X" : " ";
     }
 
     /**
-     * Returns task's details in a format to be saved into the hard disk
+     * Returns the task's details in a format to be saved into the hard disk
      * @return Task's detail in a savable format
      */
     public String toSaveInfoString() {
