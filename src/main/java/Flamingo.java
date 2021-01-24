@@ -1,11 +1,14 @@
 import java.io.FileNotFoundException;
 
+/**
+ * Represents the chat bot.
+ */
 public class Flamingo {
 
-    private Storage storage = new Storage();
-    private TaskList tasks;
-
     public Flamingo() {
+        Storage storage = new Storage();
+        TaskList tasks;
+
         try {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {

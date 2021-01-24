@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
  * Creates a Deadline task with a date.
  */
 public class Deadline extends Task {
-
     protected LocalDate by;
 
     public Deadline(String description, LocalDate by) {

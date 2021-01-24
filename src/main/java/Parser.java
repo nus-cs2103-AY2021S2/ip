@@ -1,25 +1,30 @@
 import java.io.FileNotFoundException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import java.util.Scanner;
 
 /**
  * Deals with user commands.
  */
 public class Parser {
-    public static Scanner sc = new Scanner(System.in);
+    protected static Scanner sc = new Scanner(System.in);
 
     /**
      * Checks user input and catches exceptions.
-     * @param storage
-     * @param tasks
+     *
+     * @param storage Storage of data.
+     * @param tasks TaskList of tasks.
      */
     public static void run(Storage storage, TaskList tasks) {
         while (true) {
             try {
                 String userInput = sc.nextLine();
+
+                // Save data when user says bye
                 if (userInput.equals("bye")) {
-                    storage.saveData(tasks); // Save data when user says bye
+                    storage.saveData(tasks);
                     Ui.sayBye();
                     break;
                 }
@@ -40,12 +45,12 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
-     * @param userInput
-     * @param tasks
-     * @throws Exception
+     *
+     * @param userInput User input.
+     * @param tasks TaskList of tasks.
+     * @throws Exception If user input is unknown.
      */
     public static void startResponse(String userInput, TaskList tasks) throws Exception {
-
         if (userInput.equals("list")) {
             if (TaskList.numTasks == 0) {
                 throw new NullPointerException();

@@ -1,5 +1,5 @@
 /**
- * Creates a new Task.
+ * Represents a Task.
  */
 public class Task {
     protected String description;
@@ -22,10 +22,20 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Represents task when it is saved to data.txt.
+     *
+     * @return String with task status and description.
+     */
     public String saveTask() {
         return " " + this.getStatusAsNumber() + " " + this.description;
     }
 
+    /**
+     * Represents task when it is printed in list.
+     *
+     * @return String with task status and description.
+     */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }

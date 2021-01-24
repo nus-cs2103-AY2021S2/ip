@@ -4,7 +4,6 @@ import java.util.ArrayList;
  * Contains the task list.
  */
 public class TaskList {
-
     protected ArrayList<Task> tasks;
     protected static int numTasks;
 
@@ -18,7 +17,10 @@ public class TaskList {
         numTasks = 0;
     }
 
-    public void listTasks() { // Prints out the tasks in the list
+    /**
+     * Prints out the tasks in the ArrayList.
+     */
+    public void listTasks() {
         System.out.println("");
 
         for (int i = 1; i < numTasks + 1; i++) {
@@ -28,7 +30,12 @@ public class TaskList {
         System.out.println("");
     }
 
-    public void addTask(Task task) { // Add a task to the list
+    /**
+     * Adds a tasks to the ArrayList.
+     *
+     * @param task Task from user input.
+     */
+    public void addTask(Task task) {
         System.out.println("\nOkay, I've added this task:");
         tasks.add(numTasks, task);
         numTasks++;
@@ -36,19 +43,28 @@ public class TaskList {
         System.out.println("You now have a total of " + numTasks + " tasks.\n");
     }
 
-    public void markAsDone(int num) { // Marks a task as done
+    /**
+     * Marks a task as done.
+     *
+     * @param num Number representing task in the list.
+     */
+    public void markAsDone(int num) {
         System.out.println("\nOkay, this task has been marked as done:");
         Task currentTask = tasks.get(num - 1);
         currentTask.markAsDone();
         System.out.println(num + ". " + currentTask.toString() + "\n");
     }
 
-    public void deleteTask(int num) { // Delete a task from the list
+    /**
+     * Deletes a task from the list.
+     *
+     * @param num Number representing task in the list.
+     */
+    public void deleteTask(int num) {
         System.out.println("\nOkay, I've deleted this task:");
         System.out.println(tasks.get(num - 1).toString());
         tasks.remove(num - 1);
         numTasks--;
         System.out.println("You now have a total of " + numTasks + " tasks.\n");
     }
-
 }

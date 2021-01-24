@@ -1,10 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,8 +28,9 @@ public class Storage {
     /**
      * Transfers contents from tasks ArrayList to data.txt file.
      * If data.txt file exists, the previous content is cleared.
-     * @param tasks
-     * @throws IOException
+     *
+     * @param tasks TaskList of tasks.
+     * @throws IOException If data cannot be saved into file.
      */
     public void saveData(TaskList tasks) throws IOException {
         try {
@@ -50,9 +54,11 @@ public class Storage {
     }
 
     /**
-     * Loads data from data.txt into tasks ArrayList.
-     * @return
-     * @throws FileNotFoundException
+     * Loads data from data.txt into tasks ArrayList if the file exists.
+     * Else, it creates a new ArrayList.
+     *
+     * @return ArrayList of tasks.
+     * @throws FileNotFoundException If data.txt file cannot be found.
      */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         if (pathExists) {

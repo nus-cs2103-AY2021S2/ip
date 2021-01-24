@@ -11,6 +11,9 @@ public class Ui {
         System.out.println("\nBye-o Flamingo!\n");
     }
 
+    /**
+     * Shows error if file with save data cannot be found.
+     */
     public static void showLoadingError() {
         System.out.println("\nOh No Flamingo! The save data could not be loaded.\n");
     }
