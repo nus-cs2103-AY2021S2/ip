@@ -18,21 +18,26 @@ public class Duke {
     /** A boolean function to check if the user decides to terminate the program. */
     static boolean endOfCycle = false;
 
+    private static final Ui ui = new Ui();
+
     public static void main(String[] args) throws IOException {
-        greet();
+        ui.welcomeMsg();
+        ui.nameMsg();
+
+        ArrayList<Task> tasks = new ArrayList<>();
+        File myObj = new File("duke.txt");
+        if (myObj.exists()) {
+            FileOutputStream fos = new FileOutputStream("duke.txt", true);
+            readFileIntoList("duke.txt", tasks);
+            fos.close();
+        } else {
+            myObj.createNewFile();
+        }
+
 
         Scanner sc = new Scanner(System.in);
-
-        String username = sc.nextLine();
-        nextGreet(username);
-
-        FileOutputStream fos = new FileOutputStream("duke.txt", true);
-        ArrayList<Task> tasks = new ArrayList<>();
-        readFileIntoList("duke.txt", tasks);
-        fos.close();
-
         while(!endOfCycle) {
-            System.out.print(username + ": ");
+//            System.out.print(username + ": ");
             String nextInput = sc.nextLine();
             String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
             try {
@@ -43,10 +48,11 @@ public class Duke {
                     case "done" -> done(nextInput, tasks, totalTasks);
                     case "delete" -> delete(nextInput, tasks, totalTasks);
                     case "list" -> list(tasks, totalTasks);
-                    case "bye" -> bye(username);
+                    case "bye" -> bye("Gordon");
                     default -> wrongCommand();
                 }
             } catch (DukeException e) {
+                //noinspection ThrowablePrintedToSystemOut
                 System.out.println(e);
             }
         }
@@ -119,26 +125,6 @@ public class Duke {
      */
     public static void taskDeleted() {
         totalTasks--;
-    }
-
-    /**
-     * Greets the user when the Duke is launched.
-     */
-    public static void greet() {
-        System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Hello! I'm Jay!\n" + "What is your name!");
-        System.out.println("----------------------------------------------------------------------------------------");
-    }
-
-    /**
-     * Greets the user again after knowing the user's name.
-     * @param username The name of the user.
-     */
-    public static void nextGreet(String username) {
-        System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Hi " + username + "!");
-        System.out.println("What can I do for you?");
-        System.out.println("----------------------------------------------------------------------------------------");
     }
 
     /**
