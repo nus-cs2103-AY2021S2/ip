@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * DukeBot that manages user input, recognise and response to inputs accordingly
@@ -33,28 +31,29 @@ public class DukeBot {
         String taskAction = commandStr[0];
 
         switch (taskAction) {
-            case "bye":
-                this.output = " Bye. Hope to see you again soon!";
-                this.continueInput = false;
-                break;
-            case "list":
-                this.output = retrieveList();
-                break;
-            case "done":
-                markDoneTask(Integer.parseInt(commandStr[1]));
-                break;
-            case "todo":
-            case "deadline":
-            case "event":
-                this.numTasks++;
-                handleNewTask(taskAction, commandStr);
-                break;
-            case "delete":
-                this.numTasks--;
-                handleDeleteTask(Integer.parseInt(commandStr[1]));
-                break;
-            default:
-                throw new DukeException(ExceptionType.INVALID_INPUT, "");
+        case "bye":
+            this.output = " Bye. Hope to see you again soon!";
+            this.continueInput = false;
+            break;
+        case "list":
+            this.output = retrieveList();
+            break;
+        case "done":
+            markDoneTask(Integer.parseInt(commandStr[1]));
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
+            this.numTasks++;
+            handleNewTask(taskAction, input.replaceFirst(taskAction, ""));
+            break;
+        case "delete":
+            this.numTasks--;
+            handleDeleteTask(Integer.parseInt(commandStr[1]));
+            break;
+        default:
+            throw new DukeException(ExceptionType.INVALID_INPUT, "");
+
         }
         outputMessage(this.output);
     }
@@ -104,26 +103,22 @@ public class DukeBot {
      * Manage the new task of todo, event or deadline types
      * @throws DukeException if the task description is empty
      */
-    public void handleNewTask(String taskAction, String[] commandStr) throws DukeException {
+    public void handleNewTask(String taskAction, String taskDescription) throws DukeException {
         Task newTask;
-        StringBuilder description = new StringBuilder();
-        List<String> taskDetails = Arrays.asList(commandStr);
         this.output = " Got it. I've added this task: \n";
 
         if (!taskAction.equals("todo")) {
-            String[] result = handleEventDeadLine(taskDetails);
+            String[] result;
 
             if (taskAction.equals("event")) {
+                result = taskDescription.split("/at");
                 newTask = new Event(result[0], result[1]);
             } else {
+                result = taskDescription.split("/by");
                 newTask = new Deadline(result[0], result[1]);
             }
         } else {
-            for (int num = 1; num < taskDetails.size(); num++) {
-                String curr = taskDetails.get(num);
-                description.append(curr).append(" ");
-            }
-            newTask = new ToDo(description.toString());
+            newTask = new ToDo(taskDescription);
         }
 
         if (newTask.getDescription().equals("")) {
@@ -133,34 +128,6 @@ public class DukeBot {
             this.output += "\t  " + newTask.toString() + "\n\t Now you have "
                     + this.numTasks + " tasks in the list.";
         }
-    }
-
-    /**
-     * Sub-function to manage the new task of event or deadline types only
-     * @return the output string array of description and date/time as required
-     */
-    public String[] handleEventDeadLine(List<String> taskDetails) {
-        int num;
-        StringBuilder description = new StringBuilder();
-        StringBuilder dateTime = new StringBuilder();
-        String[] result = new String[2];
-
-        for (num = 1; num < taskDetails.size(); num++) {
-            String curr = taskDetails.get(num);
-            if (curr.contains("/")) {
-                break;
-            }
-            description.append(curr).append(" ");
-        }
-        for (int i = num + 1; i < taskDetails.size(); i++) {
-            dateTime.append(taskDetails.get(i));
-            if (i < taskDetails.size() - 1) {
-                dateTime.append(" ");
-            }
-        }
-        result[0] = description.toString();
-        result[1] = dateTime.toString();
-        return result;
     }
 
     /**
