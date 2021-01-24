@@ -18,10 +18,10 @@ public class TaskStorage {
     private File file;
     private FileWriter writer;
     private Ui ui;
-    public TaskStorage() {
+    public TaskStorage(String path) {
         try {
             Ui ui = new Ui();
-            file = new File("data/tasks.txt");
+            file = new File(path);
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (Exception e) {

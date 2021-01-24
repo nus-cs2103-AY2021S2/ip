@@ -11,7 +11,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        storage = new TaskStorage();
+        storage = new TaskStorage("data/tasks.txt");
         tasks = storage.retrieveData();
         toExit = false;
     }
