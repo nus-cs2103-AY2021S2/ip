@@ -21,24 +21,24 @@ public class Parser {
         String isDone = split[1];
         switch (type){
             case "T":
-                String descriptionT = split[2];
-                ToDo taskT = new ToDo(descriptionT);
+                String descriptionToDo = split[2];
+                ToDo taskT = new ToDo(descriptionToDo);
                 if(isDone.equals("X")){
                     taskT.markAsDone();
                 }
                 return taskT;
             case "D":
-                String descriptionD = split[2];
-                String byD= split[3];
-                Deadlines taskD = new Deadlines(descriptionD, byD, true);
+                String descriptionDeadlines = split[2];
+                String byDeadlines= split[3];
+                Deadlines taskD = new Deadlines(descriptionDeadlines, byDeadlines, true);
                 if(isDone.equals("X")){
                     taskD.markAsDone();
                 }
                 return taskD;
             case "E":
-                String descriptionE = split[2];
-                String byE= split[3];
-                Deadlines taskE = new Deadlines(descriptionE, byE, true);
+                String descriptionEvents = split[2];
+                String byEvents= split[3];
+                Deadlines taskE = new Deadlines(descriptionEvents, byEvents, true);
                 if(isDone.equals("X")){
                     taskE.markAsDone();
                 }
