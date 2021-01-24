@@ -1,8 +1,6 @@
-import jdk.jfr.Event;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Duke {
@@ -32,13 +30,17 @@ public class Duke {
     private static String EVENTSPLITREGEX = " /at ";
     private static String DELETECOMMAND = "delete";
 
+    private static String saveFilePath = "/data/";
+    private static String saveFileName = "savedHistory.txt";
     private static IO io;
+    private static FileIO fileIO;
 
     public static void main(String[] args) {
         io = new IO();
+        fileIO = new FileIO(saveFileName, saveFilePath);
         printHelloMessage();
         boolean continueProgram = true;
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = fileIO.tryReadTaskFile();
         while (continueProgram) {
             String reply = io.readLine();
             Command command;
@@ -53,6 +55,9 @@ public class Duke {
         io.printBotMessage("Bye. Hope to see you again soon!");
     }
 
+    public static void saveHistory(List<Task> task) {
+        fileIO.writeTasksToFIle(task);
+    }
 
     public static void printHelloMessage() {
         io.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
@@ -80,13 +85,15 @@ public class Duke {
                 break;
             case DONE:
                 int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-                tasks.get(doneIndex).markCompleted();
+                tasks.get(doneIndex).markComplete();
                 printDoneMessage(tasks.get(doneIndex));
+                saveHistory(tasks);
                 break;
             case TODO:
                 ToDos todoTask = new ToDos(command.getDescription());
                 tasks.add(todoTask);
                 printAddedTaskMessage(todoTask, tasks.size());
+                saveHistory(tasks);
                 break;
             case DEADLINE:
                 String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
@@ -96,6 +103,7 @@ public class Duke {
                 Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date,time);
                 tasks.add(deadlineTask);
                 printAddedTaskMessage(deadlineTask, tasks.size());
+                saveHistory(tasks);
                 break;
             case EVENT:
                 String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
@@ -107,14 +115,17 @@ public class Duke {
                 Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
                 tasks.add(eventTask);
                 printAddedTaskMessage(eventTask, tasks.size());
+                saveHistory(tasks);
                 break;
             case DELETE:
                 int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
                 Task deletedTask = tasks.get(deleteIndex);
                 tasks.remove(deleteIndex);
                 printDeleteMessage(deletedTask, tasks.size());
+                saveHistory(tasks);
                 break;
         }
+
         return true;
     }
 

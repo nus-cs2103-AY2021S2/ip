@@ -16,6 +16,29 @@ public class Events extends Task {
         this.endTime = endTime;
     }
 
+    public String getTiming() {
+        return saveDateFormat.format(startDate) + " " + saveDateFormat.format(startTime) + " " +
+                saveDateFormat.format(endDate) + " " + saveDateFormat.format(endTime);
+
+    }
+
+    public String getStartDate() {
+        return saveDateFormat.format(startDate);
+    }
+
+    public String getStartTime() {
+        return saveTimeFormat.format(startTime);
+    }
+
+    public String getEndDate() {
+        return saveDateFormat.format(endDate);
+    }
+
+    public String getEndTime() {
+        return saveTimeFormat.format(endTime);
+    }
+
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "

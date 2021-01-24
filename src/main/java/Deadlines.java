@@ -15,6 +15,13 @@ public class Deadlines extends Task {
 
     }
 
+    public String getDeadlineDate() {
+        return saveDateFormat.format(deadlineDate);
+    }
+    public String getDeadlineTime() {
+        return saveTimeFormat.format(deadlineTime);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
