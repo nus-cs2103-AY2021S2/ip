@@ -1,6 +1,10 @@
-import exceptions.DukeCorruptedStorageException;
-import exceptions.DukeNoDescriptionException;
-import exceptions.DukeUnknownArgumentsException;
+package duke;
+
+import duke.commands.AddCommandType;
+import duke.commands.CommandType;
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeUnknownArgumentsException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -49,11 +53,11 @@ public class Parser {
         }
     }
 
-    static int stringToIndex(String input, int i) {
+    public static int stringToIndex(String input, int i) {
         return Integer.parseInt(input.substring(i)) - INDEX_PADDING;
     }
 
-    static AddCommandType inputToAddCommand(String input) throws DukeUnknownArgumentsException {
+    public static AddCommandType inputToAddCommand(String input) throws DukeUnknownArgumentsException {
         if (input.startsWith(TODO_COMMAND)) {
             return AddCommandType.TODO;
         } else if (input.startsWith(DEADLINE_COMMAND)) {
@@ -65,7 +69,7 @@ public class Parser {
         }
     }
 
-    static String parseTodoInput(String input) throws DukeNoDescriptionException {
+    public static String parseTodoInput(String input) throws DukeNoDescriptionException {
         if (input.split(" ").length < TODO_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(TODO_COMMAND);
         } else {
@@ -73,13 +77,13 @@ public class Parser {
         }
     }
 
-    static LocalDate obtainDate(String input, AddCommandType command) {
+    public static LocalDate obtainDate(String input, AddCommandType command) {
         input = input.substring(command.getPostfix());
         String[] inputs = input.split(DATE_SEPARATOR);
         return LocalDate.parse(inputs[DATE_PARAM].substring(DATE_POSTFIX));
     }
 
-    static String obtainDescription(String input, AddCommandType command) throws DukeNoDescriptionException {
+    public static String obtainDescription(String input, AddCommandType command) throws DukeNoDescriptionException {
         if (input.split(" ").length < DATE_INPUT_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(command.getName());
         } else {
@@ -89,7 +93,7 @@ public class Parser {
         }
     }
 
-    static AddCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
+    public static AddCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String command = separatedInput[TODO_COMMAND_TYPE_PARAM];
         switch (command) {
@@ -104,12 +108,12 @@ public class Parser {
         }
     }
 
-    static String obtainDescription(String input) {
+    public static String obtainDescription(String input) {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         return separatedInput[TODO_DESCRIPTION_PARAM];
     }
 
-    static boolean isEncodedTaskDone(String input) throws DukeCorruptedStorageException {
+    public static boolean isEncodedTaskDone(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String isDone = separatedInput[IS_DONE_PARAM];
         if (isDone.equals(DONE_ENCODING)) {
@@ -121,7 +125,7 @@ public class Parser {
         }
     }
 
-    static LocalDate obtainEncodedDate(String input) throws DukeCorruptedStorageException {
+    public static LocalDate obtainEncodedDate(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String date = separatedInput[ENCODE_DATE_PARAM];
         try {

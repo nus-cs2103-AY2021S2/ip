@@ -1,7 +1,11 @@
-import exceptions.DukeEmptyListException;
-import exceptions.DukeUnknownArgumentsException;
+package duke;
 
-import java.util.Scanner;
+import duke.commands.CommandType;
+import duke.exceptions.DukeEmptyListException;
+import duke.exceptions.DukeUnknownArgumentsException;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class Controller {
     private final static String END_COMMAND = "bye";
@@ -10,8 +14,8 @@ public class Controller {
     private final Ui ui;
 
     public Controller() {
-        storage = Storage.getInstance();
         this.ui = new Ui();
+        storage = Storage.getInstance();
         taskList = new TaskList(storage, ui);
     }
 

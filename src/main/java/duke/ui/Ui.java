@@ -1,10 +1,8 @@
 package duke.ui;
 
+import duke.exceptions.*;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.exceptions.DukeEmptyListException;
-import duke.exceptions.DukeNoDescriptionException;
-import duke.exceptions.DukeUnknownArgumentsException;
 
 import java.io.PrintStream;
 import java.time.format.DateTimeParseException;
@@ -74,5 +72,21 @@ public class Ui {
 
     public void printErrorMsg(DateTimeParseException e) {
         out.println(Message.getErrorMsg(e));
+    }
+
+    public void printErrorMsg(DukeSaveFileException e) {
+        out.println(e);
+    }
+
+    public void printErrorMsg(DukeCreateFileException e) {
+        out.println(e);
+    }
+
+    public void printErrorMsg(DukeCorruptedStorageException e) {
+        out.println(e);
+    }
+
+    public void printErrorMsg(DukeCreateDirectoryException e) {
+        out.println(e);
     }
 }

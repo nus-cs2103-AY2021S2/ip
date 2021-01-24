@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.exceptions.DukeSaveFileException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.exceptions.DukeException;
@@ -60,6 +61,10 @@ public class Message {
 
     public static String getErrorMsg(DateTimeParseException e) {
         return INDENT + "Date is not input correctly. Ensure input date is: YYYY-MM-DD.";
+    }
+
+    public static String getErrorMsg(DukeSaveFileException e) {
+        return e.toString();
     }
 
     public static String getTasksMsg(ArrayList<Task> taskList) {
