@@ -12,6 +12,10 @@ public class Chatbot {
     private final Ui ui;
     private final Parser parser;
 
+    /**
+     * Constructs the chat bot.
+     * @param taskList the task list given to chat bot
+     */
     public Chatbot(TaskList taskList) {
         this.taskList = taskList;
         ui = new Ui();
@@ -20,7 +24,7 @@ public class Chatbot {
 
 
     /**
-     * Execute the chat bot. Keep looping and asking for user input.
+     * Executes the chat bot. Keep looping and asking for user input.
      * The function will be terminated once hit "bye".
      */
     public void execute() {
@@ -103,6 +107,10 @@ public class Chatbot {
 
     }
 
+    /**
+     * Returns the task list in the chat bot.
+     * @return the task list to be returned
+     */
     public TaskList getTaskList() {
         return taskList;
     }

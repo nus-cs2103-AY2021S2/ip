@@ -17,7 +17,7 @@ public class Duke {
     }
 
     /**
-     * Trigger the execution of Duke.
+     * Triggers the execution of Duke.
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Execute all the functions needed for Duke, including welcome,
+     * Executes all the functions needed for Duke, including welcome,
      * chat bot execution, welfare, and update of file.
      */
     public void execute() {

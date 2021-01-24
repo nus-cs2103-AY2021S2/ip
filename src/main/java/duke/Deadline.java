@@ -19,6 +19,10 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns the time of the deadline.
+     * @return the deadline time to be returned
+     */
     public LocalDate getTime() {
         return time;
     }

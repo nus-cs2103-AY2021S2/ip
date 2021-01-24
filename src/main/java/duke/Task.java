@@ -20,18 +20,33 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Returns the name of the task.
+     * @return the task name to be returned
+     */
     public String getName() {
         return name;
     }
 
-    public boolean getDone() {
+    /**
+     * Returns whether or not the task is done.
+     * @return whether or not the task is done
+     */
+    public boolean isDone() {
         return done;
     }
 
+    /**
+     * Returns the type of the task.
+     * @return the task type to be returned
+     */
     public TaskType getType() {
         return type;
     }
 
+    /**
+     * Marks the task as done.
+     */
     public void markDone() {
         done = true;
     }

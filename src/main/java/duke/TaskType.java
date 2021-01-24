@@ -12,6 +12,10 @@ public enum TaskType {
         this.type = type;
     }
 
+    /**
+     * Returns the type of the task.
+     * @return the task type to be returned
+     */
     public String getType() {
         return type;
     }

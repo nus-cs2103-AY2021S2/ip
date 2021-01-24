@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * contains the task list e.g., it has operations to add/delete tasks in the list.
+ * Contains the task list e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
     private final List<Task> taskList;
@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     /**
-     * Add new task in the task list.
+     * Adds new task in the task list.
      *
      * @param newTask the new task to be added
      */
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the task list.
+     * Deletes a task in the task list.
      *
      * @param order the order of the task to be deleted
      */
@@ -50,7 +50,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task in the task list as done.
+     * Marks a task in the task list as done.
      *
      * @param order the order of the task to be marked as done
      */
@@ -59,7 +59,7 @@ public class TaskList {
             if (order < 0 || order >= taskList.size()) {
                 throw new DukeException("There's no task " +
                         (order + 1) + " in the list.");
-            } else if (taskList.get(order).getDone()) {
+            } else if (taskList.get(order).isDone()) {
                 throw new DukeException("This task has been finished before.");
             }
             taskList.get(order).markDone();
@@ -72,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Print out all the tasks in task list currently.
+     * Prints out all the tasks in task list currently.
      */
     public void printTaskList() {
         try {
@@ -92,7 +92,7 @@ public class TaskList {
     }
 
     /**
-     * Print out tasks in the given list.
+     * Prints out tasks in the given list.
      *
      * @param list the list given to be print out
      */
@@ -109,7 +109,7 @@ public class TaskList {
     }
 
     /**
-     * Find the tasks contain target keyword, and print them out.
+     * Finds the tasks contain target keyword, and print them out.
      *
      * @param target the target keyword
      */

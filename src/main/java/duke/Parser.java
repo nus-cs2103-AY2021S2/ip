@@ -5,7 +5,7 @@ package duke;
  */
 public class Parser {
     /**
-     * Parse user input into the corresponding command.
+     * Parses user input into the corresponding command.
      *
      * @param taskString user input
      * @return corresponding command (enum)

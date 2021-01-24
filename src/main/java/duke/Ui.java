@@ -7,7 +7,7 @@ public class Ui {
     static String horizontalLine = "\t--------------------------------\n";
 
     /**
-     * Print the message in the Duke user interface format.
+     * Prints out the message in the Duke user interface format.
      *
      * @param str the string to be printed out
      */
@@ -18,14 +18,14 @@ public class Ui {
     }
 
     /**
-     * Print out welcome message in the beginning.
+     * Prints out welcome message in the beginning.
      */
     public void welcome() {
         printFormatMessage("\t  Hello! I'm Duke\n" + "\t  What can I do for you?");
     }
 
     /**
-     * Print out welfare message in the end.
+     * Prints out welfare message in the end.
      */
     public void welfare() {
         printFormatMessage("\t  Bye. Hope to see you again soon!");

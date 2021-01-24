@@ -14,12 +14,16 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructs the storage.
+     * @param filePath the filepath of the storage file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Read the data of tasks from previous session's file as TaskList.
+     * Reads the data of tasks from previous session's file as TaskList.
      * If there's no file yet, create an empty file, and return empty list.
      *
      * @return the list of tasks from previous session
@@ -66,7 +70,7 @@ public class Storage {
     }
 
     /**
-     * Update the file with newest task data, write the updated tasks into the file.
+     * Updates the file with newest task data, write the updated tasks into the file.
      *
      * @param taskList the updated task list
      */
@@ -75,7 +79,7 @@ public class Storage {
         for (Task t : taskList.getTaskList()) {
             updatedString += t.getType();
             updatedString += " | ";
-            updatedString += (t.getDone() ? 1 : 0);
+            updatedString += (t.isDone() ? 1 : 0);
             updatedString += " | ";
             updatedString += t.getName();
             if (t.getType().equals(TaskType.DEADLINE)) {
