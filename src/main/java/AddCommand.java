@@ -1,0 +1,15 @@
+public class AddCommand extends Command {
+    private Task toAdd;
+
+    public AddCommand(Task toAdd) {
+        this.toAdd = toAdd;
+    }
+
+    public void execute(TaskList tasks, Ui ui, TaskStorage storage) {
+        tasks.addTask(toAdd);
+        storage.storeData(tasks);
+        ui.print("Got it. I've added this task:\n\t\t" + toAdd +
+                "\n\n\t  You have " +
+                tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
+    }
+}
