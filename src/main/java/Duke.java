@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static final String s = "     ";
-    public static final String line = "    _______________________________________________________________________\n";
-    public static String[] tasks = new String[100];
+
+    public static Task[] tasks = new Task[100];
     public static int numTasks;
 
     public static void printMessage(String message) {
+        String s = "     ";
+        String line = "    _____________________________________"
+                + "__________________________________\n";
         System.out.println(line);
         message = message.replace("\n", "\n" + s);
         System.out.println(s + message);
@@ -30,32 +32,46 @@ public class Duke {
 
     public static void listTasks() {
         int i = 0;
-        String tasksMessage = "";
+        String listTasksMessage = "Here are the tasks in your list: \n";
         while (i < numTasks) {
-            tasksMessage = tasksMessage + String.valueOf(i + 1) + ". " + tasks[i] + "\n";
+            Task t = tasks[i];
+            listTasksMessage += String.valueOf(i + 1) + ". ";
+            listTasksMessage += "[" + t.getStatusIcon() + "] ";
+            listTasksMessage += t.getDescription() + "\n";
             i++;
         }
-        printMessage(tasksMessage);
+        printMessage(listTasksMessage);
     }
 
-    public static void addTask(String taskString) {
-        tasks[numTasks] = taskString;
+    public static void addTask(String taskDescription) {
+        tasks[numTasks] = new Task(taskDescription);
         numTasks++;
+    }
+
+    public static void doTask(int taskNum) {
+        Task t = tasks[taskNum - 1];
+        t.markAsDone();
+        String doTaskMessage = "Nice! I've marked this task as done: \n";
+        doTaskMessage += "   [" + t.getStatusIcon() + "] " + t.getDescription();
+        printMessage(doTaskMessage);
     }
 
     public static void main(String[] args) {
         printWelcomeMessage();
 
-        String userInput;
         Scanner scan = new Scanner(System.in);
-        userInput = scan.nextLine();
+        String userInput = scan.nextLine();
 
         while (String.valueOf(userInput).toLowerCase().equals("bye") == false) {
             if (String.valueOf(userInput).toLowerCase().equals("list") == true) {
                 listTasks();
+            } else if (userInput.length() >= 6 &&
+                    String.valueOf(userInput.substring(0, 4)).toLowerCase().equals("done") == true) {
+                int taskNum = Integer.parseInt(userInput.substring(5));
+                doTask(taskNum);
             } else {
-                addTask(userInput);
-                printMessage("added: " + userInput);
+                    addTask(userInput);
+                    printMessage("added: " + userInput);
             }
             userInput = scan.nextLine();
         }
