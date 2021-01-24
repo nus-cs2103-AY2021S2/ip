@@ -60,7 +60,7 @@ public class UiTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
         LocalDateTime dateTime = LocalDateTime.now();
         String expected = BORDER + "\r\nMeow, here are the tasks in your list:\r\n" +
-                "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (by: " + dateTime.format(formatter) + ")\n" +
+                "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" +
                 "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
                 + ")\n" + BORDER;
 
@@ -82,7 +82,7 @@ public class UiTest {
 
         String expectedToDo = BORDER + "\r\nGot it meow. I've added this task:\r\n  [T][ ] DESCRIPTION 1\nNow you " +
                 "have 99 tasks in the list.\n" + BORDER;
-        String expectedDeadline = BORDER + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (by: " +
+        String expectedDeadline = BORDER + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (By: " +
                 dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
         String expectedEvent = BORDER + "\r\nGot it meow. I've added this task:\r\n  [E][ ] DESCRIPTION 3 (Start: " +
                 dateTime.format(formatter) + " | End: " + dateTime.format(formatter) + ")\n" +
@@ -114,7 +114,7 @@ public class UiTest {
         String expectedToDo = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[T][ ] DESCRIPTION" +
                 " 1\n" + BORDER;
         String expectedDeadline = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[D][ ] " +
-                "DESCRIPTION 2 (by: " + dateTime.format(formatter) + ")\n" + BORDER;
+                "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" + BORDER;
         String expectedEvent = BORDER + "\r\nGood job meow, I've marked this task as done:\r\n100.[E][ ] " +
                 "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter) +
                 ")\n" + BORDER;
@@ -145,7 +145,7 @@ public class UiTest {
         String expectedToDo = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [T][ ] DESCRIPTION" +
                 " 1\nNow you have 99 tasks in the list.\n" + BORDER;
         String expectedDeadline = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [D][ ] " +
-                "DESCRIPTION 2 (by: " + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
+                "DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
         String expectedEvent = BORDER + "\r\nNoted meow. I've removed this task:\r\n  [E][ ] " +
                 "DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter) +
                 ")\nNow you have 99 tasks in the list.\n" + BORDER;
@@ -165,6 +165,26 @@ public class UiTest {
         outputStream.reset();
         ui.printDeleteMsg(event, 99);
         assertEquals(expectedEvent, outputStream.toString().trim());
+    }
+
+    @Test
+    public void printFoundMsg_taskTypesAll_tasksSize3() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
+        LocalDateTime dateTime = LocalDateTime.now();
+
+        String expected = BORDER + "\r\nMeow, here are the matching tasks in your list:\r\n" +
+                "1.[T][ ] DESCRIPTION 1\n" + "2.[D][ ] DESCRIPTION 2 (By: " + dateTime.format(formatter) + ")\n" +
+                "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
+                + ")\n" + BORDER;
+
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new ToDo("DESCRIPTION 1"));
+        tasks.add(new Deadline("DESCRIPTION 2", dateTime));
+        tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
+
+        Ui ui = new Ui();
+        ui.printFoundMsg(tasks);
+        assertEquals(expected, outputStream.toString().trim());
     }
 
     /** Reset the system's output stream with system.out */
