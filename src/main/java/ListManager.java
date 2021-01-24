@@ -10,7 +10,7 @@ public class ListManager {
         this.listSize = 0;
     }
 
-    public ListManager(ArrayList<Task> list) {
+    public ListManager(List<Task> list) {
         this.list = list;
         this.listSize = list.size();
     }

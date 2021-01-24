@@ -8,7 +8,7 @@ public class Duke {
         FileManager file = new FileManager("data/duke.txt");
         try {
             file.getList();
-        } catch (FileNotFoundException e) {
+        } catch (UnknownCommandException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
             System.out.println(e.getMessage());
