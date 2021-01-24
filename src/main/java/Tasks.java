@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class Tasks {
                 task = new ToDo(content);
             } else if (FormatChecker.likeAddingDeadline(userInput)) {
                 String content = InputInformationExtractor.getDeadlineContent(userInput);
-                String by = InputInformationExtractor.getDeadlineTime(userInput);
+                LocalDate by = InputInformationExtractor.getDeadlineTime(userInput);
                 task = new Deadline(content, by);
             } else if (FormatChecker.likeAddingEvent(userInput)) {
                 String content = InputInformationExtractor.getEventContent(userInput);

@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Provide methods for extracting information from user input string
  */
@@ -47,12 +49,12 @@ public class InputInformationExtractor {
     /**
      * Get the time of the deadline item from user input
      * @param userInput User input is assumed to be in deadline format
-     * @return Time of the deadline item
+     * @return Local date of the deadline item
      * @throws DeadlineException
      */
-    public static String getDeadlineTime(String userInput) throws DeadlineException {
+    public static LocalDate getDeadlineTime(String userInput) throws DeadlineException {
         try {
-            return userInput.split(" /by ")[1];
+            return LocalDate.parse(userInput.split(" /by ")[1]);
         } catch (Exception e) {
             throw new DeadlineException();
         }
