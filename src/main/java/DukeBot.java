@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.nio.file.Files;
+import java.util.Scanner;
 
 /**
  * Bot that handles user inputs, identifies specific commands and respond accordingly
@@ -19,13 +20,14 @@ public class DukeBot {
      * Constructor for DukeBot
      * Sets up duke bot to welcome user
      */
-    public DukeBot() {
+    public DukeBot() throws IOException {
         taskList = new ArrayList<>();
         taskList.add(null);
         isExit = false;
         commandOutput = "Hello! I'm Duke\n"
                 + "\tWhat can I do for you?";
         respondToCommand(commandOutput);
+        loadData();
     }
 
     /**
@@ -71,21 +73,23 @@ public class DukeBot {
             break;
         case "done":
             doneProcess(taskInfo);
+            saveData();
             break;
         case "delete":
             deleteProcess(taskInfo);
+            saveData();
             break;
         case "event":
             eventProcess(taskInfo);
-            saveProcess();
+            saveData();
             break;
         case "deadline":
             deadlineProcess(taskInfo);
-            saveProcess();
+            saveData();
             break;
         case "todo":
             todoProcess(taskInfo);
-            saveProcess();
+            saveData();
             break;
         default:
             throw new DukeException(command, DukeExceptionType.UNKNOWN_INPUT);
@@ -159,7 +163,7 @@ public class DukeBot {
                 + task.toString() + getRemainingTasks();
     }
 
-    private void saveProcess() throws IOException {
+    private void saveData() throws IOException {
         String filePath = System.getProperty("user.dir") + "/data/duke.txt";
         String dirPath = System.getProperty("user.dir") + "/data";
         File file = new File(filePath);
@@ -174,13 +178,45 @@ public class DukeBot {
             file.createNewFile();
         }
 
-        FileWriter fileWriter = new FileWriter(file);
+        FileWriter fileWriter = new FileWriter(file, false);
         for (int i = 1; i < taskList.size(); i++) {
-            //System.lineSeparator()
             Task task = taskList.get(i);
-            fileWriter.write(task.writeContentFormat());
+            fileWriter.write(task.writeContentFormat() + System.lineSeparator());
         }
         fileWriter.close();
+    }
+
+    private void loadData() throws IOException {
+        String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+        File file = new File(filePath);
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String[] taskInfo = sc.nextLine().split("[ | ]+");
+            Task task = new Task("");
+            switch(taskInfo.length) {
+            case 3:
+                // ToDo task
+                task = new ToDo(taskInfo[2]);
+                break;
+            case 4:
+                if (taskInfo[0].equals('D')) {
+                    // Deadline task
+                    task = new Deadline(taskInfo[2], taskInfo[3]);
+                } else {
+                    //Event task
+                    task = new Event(taskInfo[2], taskInfo[3]);
+                }
+                break;
+            default:
+                break;
+            }
+
+            // Previously marked as done
+            if (Integer.parseInt(taskInfo[1]) == 1) {
+                task.markAsDone();
+            }
+            taskList.add(task);
+        }
     }
 
     /**

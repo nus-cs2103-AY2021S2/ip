@@ -14,7 +14,7 @@ public class ToDo extends Task {
 
     @Override
     public String writeContentFormat() {
-        return String.format("T | %s\n", super.writeContentFormat());
+        return String.format("T | %s", super.writeContentFormat());
     }
 
     /**

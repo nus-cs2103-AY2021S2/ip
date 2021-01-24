@@ -1,7 +1,7 @@
 /**
  * Task created by user
  */
-public abstract class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 

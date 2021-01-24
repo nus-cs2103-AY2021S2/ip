@@ -17,7 +17,7 @@ public class Event extends Task {
 
     @Override
     public String writeContentFormat() {
-        return String.format("E | %s | %s\n", super.writeContentFormat(), at);
+        return String.format("E | %s | %s", super.writeContentFormat(), at);
     }
 
     /**

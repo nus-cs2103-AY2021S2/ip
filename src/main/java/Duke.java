@@ -5,9 +5,9 @@ import java.util.Scanner;
  * Driver class for Duke program
  */
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        DukeBot dukeBot = new DukeBot();
+       DukeBot dukeBot = new DukeBot();
 
         while (true) {
             String command = sc.nextLine();
@@ -19,6 +19,7 @@ public class Duke {
             } catch(IOException ioEx) {
                 System.out.println(ioEx);
             }
+
         }
     }
 }
