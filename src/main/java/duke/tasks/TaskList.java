@@ -1,6 +1,12 @@
-import exceptions.DukeEmptyListException;
-import exceptions.DukeNoDescriptionException;
-import exceptions.DukeUnknownArgumentsException;
+package duke.tasks;
+
+import duke.Parser;
+import duke.commands.AddCommandType;
+import duke.exceptions.DukeEmptyListException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeUnknownArgumentsException;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -23,7 +29,7 @@ public class TaskList {
         storage.update(tasks);
     }
 
-    void done(String input) {
+    public void done(String input) {
         int index = Parser.stringToIndex(input, 5);
         Task task = tasks.get(index);
         task.done();
@@ -48,7 +54,7 @@ public class TaskList {
         return new Event(description, eventTime);
     }
 
-    void deleteTask(String input) throws DukeEmptyListException {
+    public void deleteTask(String input) throws DukeEmptyListException {
         int index = Parser.stringToIndex(input, 7);
         if (tasks.isEmpty()) {
             throw new DukeEmptyListException();
@@ -58,7 +64,7 @@ public class TaskList {
         ui.printDeleteMsg(task, tasks.size());
     }
 
-    void add(String input) throws DukeUnknownArgumentsException {
+    public void add(String input) throws DukeUnknownArgumentsException {
         try {
             Task task;
             AddCommandType command = Parser.inputToAddCommand(input);
@@ -84,7 +90,7 @@ public class TaskList {
         }
     }
 
-    void print() {
+    public void print() {
         ui.printTaskList(tasks);
     }
 }
