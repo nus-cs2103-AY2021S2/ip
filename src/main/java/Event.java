@@ -1,9 +1,14 @@
 public class Event extends Task {
     String dateTime;
 
-    public Event(String taskName, String dateTime) {
-        super(taskName);
+    public Event(boolean markAsDone, String taskName, String dateTime) {
+        super('E', markAsDone, taskName);
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public String generateFileFormatString() {
+        return super.generateFileFormatString() + " // " + this.dateTime;
     }
 
     @Override
