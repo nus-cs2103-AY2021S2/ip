@@ -1,14 +1,9 @@
 package controllers;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,10 +25,6 @@ public class TodosController {
     private List<Optional<? extends Todo>> todosList;
     /** TodosView initialised to render view of Todos */
     private TodosView todosView = new TodosView();
-    /** Constant to store the database path for Duke's commands */
-    private static final String DATABASE_FILE_PATH = "data/duke.txt";
-    /** Constant storing database directory path */
-    private static final String DATABASE_DIRECTORY_PATH = "data/";
 
     /**
      * Constructor of TodosController without any arguments initialises a new
@@ -62,114 +53,13 @@ public class TodosController {
     }
 
     /**
-     * Attempt to retrieve a local save of the user's tasks on their pc, if not
-     * found, return the existing TodosController
+     * Getter for todosList attr in TodosController
      * 
-     * @return TodosController either empty or containing saved tasks
+     * @return List<Optional<? extends Todo>> list of all todos contained in
+     *         TodosController
      */
-    public TodosController retrieveLocalDatabase() {
-        try {
-            // get local file
-            File localFile = new File(DATABASE_FILE_PATH);
-            Scanner sc = new Scanner(localFile);
-            List<Optional<? extends Todo>> existingTodosList = new ArrayList<>();
-            while (sc.hasNextLine()) {
-                // get line, splitting by special character delimiter |
-                List<String> line = Arrays.asList(sc.nextLine().split("\\|"));
-
-                // line = [type, isDone, message, extraMessage (event / deadline)]
-                String type = line.get(0);
-                boolean isDone = line.get(1) == "1";
-                String message = line.get(2);
-
-                switch (type) {
-
-                    case "T":
-                        // create new todo
-                        existingTodosList.add(Optional.ofNullable(new Todo(message, isDone)));
-                        break;
-
-                    case "D":
-                        // create new deadline
-                        existingTodosList.add(Optional.ofNullable(new Deadline(message, isDone, line.get(3))));
-                        break;
-
-                    case "E":
-                        // create new event
-                        existingTodosList.add(Optional.ofNullable(new Event(message, isDone, line.get(3))));
-                        break;
-
-                }
-            }
-            sc.close();
-            return new TodosController(existingTodosList);
-        } catch (Exception e) {
-            // exception will be caught if no existing data file is found
-            // e.printStackTrace();
-            return this;
-        }
-    }
-
-    /**
-     * Saves all tasks in the todosController into the local database
-     */
-    public void saveTasksToLocalDatabase() {
-        try {
-            // check if directory exists, if not, create it
-            // else, delete file's current contents
-            File databaseDirectory = new File(DATABASE_DIRECTORY_PATH);
-            if (!databaseDirectory.exists()) {
-                // create directory if it doesn't exist
-                databaseDirectory.mkdir();
-            } else {
-                // delete existing file if it exists in directory
-                File existingDatabase = new File(DATABASE_FILE_PATH);
-                if (existingDatabase.exists())
-                    existingDatabase.delete();
-            }
-
-            // Init to write file in append mode
-            FileWriter writer = new FileWriter(new File(DATABASE_FILE_PATH), true);
-
-            // loop through list and write to file
-            todosList.stream().forEach(optTodo -> {
-                // lineToWrite will be written at the end
-                String lineToWrite;
-
-                // Check if Todo is an Event or Deadline
-                if (optTodo.map(todo -> todo instanceof Event).orElse(false)) {
-                    lineToWrite = optTodo.map(todo -> {
-                        Event event = (Event) todo;
-                        return String.format("E|%s|%s|%s", event.isTodoDone() ? "1" : "0", event.getRawMessage(),
-                                event.getEventTime());
-                    }).orElse("");
-                } else if (optTodo.map(todo -> todo instanceof Deadline).orElse(false)) {
-                    lineToWrite = optTodo.map(todo -> {
-                        Deadline deadline = (Deadline) todo;
-                        return String.format("D|%s|%s|%s", deadline.isTodoDone() ? "1" : "0", deadline.getRawMessage(),
-                                deadline.getDeadline());
-                    }).orElse("");
-                } else {
-                    lineToWrite = optTodo
-                            .map(todo -> String.format("T|%s|%s", todo.isTodoDone() ? "1" : "0", todo.getRawMessage()))
-                            .orElse("");
-                }
-
-                // Write todo to line in database
-                try {
-                    writer.write(String.format("%s\n", lineToWrite));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            });
-
-            // close writer on complete
-            writer.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public List<Optional<? extends Todo>> getTodosList() {
+        return this.todosList;
     }
 
     /**

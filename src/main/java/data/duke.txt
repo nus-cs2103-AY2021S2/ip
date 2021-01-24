@@ -1,3 +1,2 @@
-E|0|hello|12/12/2020 1800
-D|0|submit hello world|02/12/2020 1900
-E|0|hello world|24/01/2020 1700
+E|0|hello world|21/12/2020 1000
+D|0|hello world|21/12/2020 1200

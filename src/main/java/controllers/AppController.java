@@ -2,14 +2,24 @@ package controllers;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.List;
+import java.util.Optional;
 
 import exceptions.DukeBlankTaskException;
 import exceptions.DukeCommandNotFoundException;
 import exceptions.DukeTaskIndexOutOfRangeException;
 import models.Command;
 import views.Greeting;
+import models.Storage;
+import models.Todo;
 
 public class AppController {
+    private Storage storage;
+
+    public AppController(Storage storage) {
+        this.storage = storage;
+    }
+
     /**
      * AppController starts to listen to commands from the user and performs actions
      * as required by user's commands
@@ -24,11 +34,11 @@ public class AppController {
         // initialise scanner
         Scanner sc = new Scanner(System.in);
 
-        // init TodosController
-        TodosController todosController = new TodosController();
+        // get existing list of Todos if any
+        List<Optional<? extends Todo>> existingTodosList = storage.retrieveLocalDatabase();
 
-        // retrieve local save db
-        todosController = todosController.retrieveLocalDatabase();
+        // init TodosController
+        TodosController todosController = new TodosController(existingTodosList);
 
         // loop will be broken only by 'bye'
         while (true) {
@@ -100,7 +110,7 @@ public class AppController {
                         greeting.bye();
 
                         // save current todosController tasks to local db before exit
-                        todosController.saveTasksToLocalDatabase();
+                        storage.saveTasksToLocalDatabase(todosController.getTodosList());
 
                         // close scanner preventing mem leak
                         sc.close();
