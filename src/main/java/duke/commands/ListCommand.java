@@ -6,9 +6,22 @@ import duke.ui.Ui;
 
 import duke.storage.Storage;
 
+/**
+ * Responsible for listing the contents of TaskList.
+ */
 public class ListCommand extends Command {
+    /**
+     * Constructs a ListCommand object.
+     */
     public ListCommand() {}
 
+    /**
+     * Lists the tasks in TaskList, shows the overview of all tasks.
+     *
+     * @param tasks TaskList to be listed.
+     * @param ui Ui for system outputs.
+     * @param storage Storage for saving contents into file.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
@@ -18,6 +31,11 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Returns if program should exit after this command.
+     *
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;
