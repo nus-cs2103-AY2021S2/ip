@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 
+import java.time.LocalDate;
+
 public class Kelbot {
   public static void main(String[] args) throws KelbotException {
     Scanner sc = new Scanner(System.in);
@@ -96,23 +98,20 @@ public class Kelbot {
         } else if (commands[0].equals("deadline")) {
           // Add deadline task to list
           String name = "";
-          String by = "";
           try {
             for (int i = 1; i < commands.length; i++) {
               if (commands[i].equals("/by")) {
-                for (int j = i + 1; j < commands.length; j++) {
-                  by += " " + commands[j];
-                }
                 break;
               }
               name += " " + commands[i];
             }
+            LocalDate date = LocalDate.parse(commands[commands.length - 1]);
             if (name.equals("")) {
               throw new KelbotException("Deadline name cannot be empty!");
-            } else if (by.equals("")) {
-              throw new KelbotException("Deadline by cannot be empty!");
+            } else if (date == null) {
+              throw new KelbotException("Deadline cannot be empty!");
             } else {
-              DeadlineTask newDeadlineTask = new DeadlineTask(name, by);
+              DeadlineTask newDeadlineTask = new DeadlineTask(name, date);
               taskList.add(newDeadlineTask);
               System.out.println("Okay! I have added:");
               System.out.println(newDeadlineTask);
@@ -124,23 +123,20 @@ public class Kelbot {
         } else if (commands[0].equals("event")) {
           // Add event task to list
           String name = "";
-          String at = "";
           try {
             for (int i = 1; i < commands.length; i++) {
               if (commands[i].equals("/at")) {
-                for (int j = i + 1; j < commands.length; j++) {
-                  at += " " + commands[j];
-                }
                 break;
               }
               name += " " + commands[i];
             }
+            LocalDate date = LocalDate.parse(commands[commands.length - 1]);
             if (name.equals("")) {
               throw new KelbotException("Event name cannot be empty!");
-            } else if (at.equals("")) {
+            } else if (date == null) {
               throw new KelbotException("Event at cannot be empty!");
             } else {
-              EventTask newEventTask = new EventTask(name, at);
+              EventTask newEventTask = new EventTask(name, date);
               taskList.add(newEventTask);
               System.out.println("Okay! I have added:");
               System.out.println(newEventTask);
