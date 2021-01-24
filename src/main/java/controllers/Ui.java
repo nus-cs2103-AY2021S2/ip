@@ -13,10 +13,10 @@ import views.Greeting;
 import models.Storage;
 import models.Todo;
 
-public class AppController {
+public class Ui {
     private Storage storage;
 
-    public AppController(Storage storage) {
+    public Ui(Storage storage) {
         this.storage = storage;
     }
 

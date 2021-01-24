@@ -1,4 +1,4 @@
-import controllers.AppController;
+import controllers.Ui;
 
 import models.Storage;
 
@@ -19,7 +19,7 @@ public class Duke {
     }
 
     public void run() {
-        AppController appController = new AppController(this.storage);
+        Ui appController = new Ui(this.storage);
         // start app logic
         appController.start();
 
