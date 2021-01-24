@@ -32,7 +32,7 @@ public class TaskList {
                 tasks.createNewFile();
                 s = new Scanner(tasks);
             } catch (IOException e2) {
-                throw new DukeException("Error reading file " + e2.getMessage());
+                throw new DukeException("Error reading task list file. " + e2.getMessage());
             }
         }
         try {

@@ -13,12 +13,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    private static String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
-
-    private static String DEADLINE_REGEX = "^\\[D\\] \\[(?: |X)\\] ..* \\(by: ..*\\)$";
-
-    private static String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
-
     /**
      * Parses input string as a Task.
      * @param input input string to be parsed.
@@ -26,8 +20,11 @@ public abstract class Task {
      */
     public static Task stringToTask(String input) throws TaskException {
         //Check if it is a valid task first
+        String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
         Pattern toDoPattern = Pattern.compile(TODO_REGEX);
+        String DEADLINE_REGEX = "^\\[D\\] \\[(?: |X)\\] ..* \\(by: ..*\\)$";
         Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
+        String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
         Pattern eventPattern = Pattern.compile(EVENT_REGEX);
         if (toDoPattern.matcher(input).find()) {
             String[] inputSplitBySpaces = input.trim().split("\\s+");
