@@ -1,3 +1,6 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
 
@@ -75,6 +78,14 @@ public class Duke {
             this.done = true;
         }
 
+        public String saveToData() {
+            if (this.done) {
+                return ("T | 1 | " + todo);
+            } else {
+                return ("T | 0 | " + todo);
+            }
+        }
+
         @Override
         public String toString() {
             if (!this.done) {
@@ -92,6 +103,14 @@ public class Duke {
         public Deadline(String s, String doneBy) {
             super(s);
             this.doneBy = doneBy;
+        }
+
+        public String saveToData() {
+            if (this.done) {
+                return ("D | 1 | " + todo + " | " + doneBy);
+            } else {
+                return ("D | 0 | " + todo + " | " + doneBy);
+            }
         }
 
         @Override
@@ -112,12 +131,55 @@ public class Duke {
             this.time = time;
         }
 
+        public String saveToData() {
+            if (this.done) {
+                return ("E | 1 | " + todo + " | " + time);
+            } else {
+                return ("E | 0 | " + todo + " | " + time);
+            }
+        }
+
         @Override
         public String toString() {
             if (!this.done) {
                 return ("[E][ ] " + this.todo + " (at:" + this.time + ")");
             } else {
                 return ("[E][X] " + this.todo + " (at:" + this.time + ")");
+            }
+        }
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd + "\n");
+        fw.close();
+    }
+
+    private static void appendToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath,true);
+        fw.write(textToAdd + "\n");
+        fw.close();
+    }
+
+    private static void saveAsFile(String filePath, List<Task> l) {
+        boolean isFirst = true;
+        if (l.isEmpty()) {
+            try {
+                writeToFile(filePath, " ");
+            } catch (IOException e) {
+                System.out.println("Something went wrong uwu: " + e.getMessage());
+            }
+        }
+        for (Task t : l) {
+            try {
+                if (isFirst) {
+                    writeToFile(filePath, t.saveToData());
+                    isFirst = false;
+                } else {
+                    appendToFile(filePath, t.saveToData());
+                }
+            } catch (IOException e) {
+                System.out.println("Something went wrong uwu: " + e.getMessage());
             }
         }
     }
@@ -138,7 +200,55 @@ public class Duke {
         List<Task> leest = new ArrayList<>();
         //int leestCounter = 0;
 
-        while(true) {
+        String dataFile = "test/duke.txt";
+        File taskData = new File(dataFile);
+
+        //opens the duke.txt file to read from, creates file if not found
+        try {
+            Scanner s = new Scanner(taskData);
+            while (s.hasNext()) {
+                String[] line = s.nextLine().split(" \\| ");
+                switch (line[0]) {
+                    case "T" :
+                        Task task = new Task(line[2]);
+                        if (line[1].equals("1")) {
+                            task.setDone();
+                        }
+                        leest.add(task);
+                        break;
+                    case "D" :
+                        Deadline deadline = new Deadline(line[2], line[3]);
+                        if (line[1].equals("1")) {
+                            deadline.setDone();
+                        }
+                        leest.add(deadline);
+                        break;
+                    case "E" :
+                        Event event = new Event(line[2], line[3]);
+                        if (line[1].equals("1")) {
+                            event.setDone();
+                        }
+                        leest.add(event);
+                        break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                taskData.createNewFile();
+            } catch (IOException f) {
+                try {
+                    Path path = Paths.get("test/");
+                    Files.createDirectories(path);
+                    taskData.createNewFile();
+                } catch (IOException g) {
+                    System.err.println("Failed to create directory uwu");
+                }
+
+            }
+        }
+
+
+        while (true) {
 
             String input = fio.nextLine();
             String[] split = input.split("\\s+");
@@ -162,6 +272,7 @@ public class Duke {
                         leest.get(done).setDone();
                         System.out.println("Sugoi! I've marked this task as done uwu:");
                         System.out.println(leest.get(done));
+                        saveAsFile(dataFile, leest);
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
                     }
@@ -175,6 +286,7 @@ public class Duke {
                         System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task uwu:");
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                        saveAsFile(dataFile, leest);
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
                     }
@@ -186,6 +298,7 @@ public class Duke {
                         System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Hai. I've added this task:");
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                        saveAsFile(dataFile, leest);
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
                     }
@@ -193,10 +306,11 @@ public class Duke {
                 case "event":
                     try {
                         String[] splitagain2 = input.substring(6).split("/at");
-                        leest.add(new Deadline(splitagain2[0], splitagain2[1]));
-                        System.out.println("    " + leest.get(leest.size() - 1));
+                        leest.add(new Event(splitagain2[0], splitagain2[1]));
                         System.out.println("Hai. I've added this task:");
+                        System.out.println("    " + leest.get(leest.size() - 1));
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                        saveAsFile(dataFile, leest);
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please define your event properly uwu.");
                     }
@@ -208,6 +322,7 @@ public class Duke {
                         System.out.println(toDelete);
                         leest.remove(toDelete);
                         System.out.println("Now you have " + leest.size() + " task(s) in the list uwu");
+                        saveAsFile(dataFile, leest);
                     } catch (Exception e) {
                         System.out.println("☹ OOPS!!! Please indicate a valid task to delete uwu");
                     }
