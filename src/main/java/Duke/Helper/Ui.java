@@ -1,7 +1,8 @@
 package Duke.Helper;
 
+import Duke.Task.Task;
+
 import java.util.ArrayList;
-import Duke.Task.*;
 
 /**
  * A class handles interactions with the user.

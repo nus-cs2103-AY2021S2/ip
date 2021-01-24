@@ -1,11 +1,21 @@
 package Duke.Helper;
 
+<<<<<<< HEAD
 import Duke.Task.*;
 import Duke.Exception.*;
 
 /**
  * A class deals with making sense of the user command.
  */
+=======
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Todo;
+
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidTask;
+
+>>>>>>> branch-A-CodingStandard
 public class Parser {
     /**
      * Parses the input string into a ToDo command so that it can be added to the task list.

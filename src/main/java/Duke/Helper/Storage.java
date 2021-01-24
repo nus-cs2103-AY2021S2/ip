@@ -1,18 +1,23 @@
 package Duke.Helper;
 
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import Duke.Task.*;
 
 /**
  * A class handles tasks on saving tasks to file and loading tasks from file.
  */
 public class Storage {
-    private String path;
+    private final String path;
 
     /**
      * This class constructor has 1 parameter: a string path to the destination file for reading and writing the data.

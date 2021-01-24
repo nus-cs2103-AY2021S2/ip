@@ -1,9 +1,19 @@
 package Duke.Helper;
 
-import Duke.Exception.*;
-import Duke.Task.*;
-import Duke.Command.*;
-import Duke.Constant.*;
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidIndex;
+import Duke.Exception.InvalidTask;
+import Duke.Exception.NoSuchCommandException;
+
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
+import Duke.Command.Command;
+
+import Duke.Constant.Constants;
+
 import java.util.ArrayList;
 
 /**
@@ -62,6 +72,7 @@ public class TaskList {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Adds a new task to the list and the command must be a Deadline, Event or Todo.
      * @param command A string that contain the information about the task that needs to be added.
@@ -71,6 +82,9 @@ public class TaskList {
      * @throws InvalidTask A Deadline or Event command without its signature word ("/by" and "/at" respectively).
      */
     public String addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
+=======
+    public String addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask {
+>>>>>>> branch-A-CodingStandard
         if (command.equalsIgnoreCase(Command.TODO.getAction()) ||
                 command.equalsIgnoreCase(Command.DEADLINE.getAction()) ||
                 command.equalsIgnoreCase(Command.EVENT.getAction())){

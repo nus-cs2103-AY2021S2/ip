@@ -1,8 +1,11 @@
 package Duke.Exception;
 
+<<<<<<< HEAD
 /**
  * An exception that handle commands that are not available in the command list.
  */
+=======
+>>>>>>> branch-A-CodingStandard
 public class NoSuchCommandException extends Exception{
 
     /**
