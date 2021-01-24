@@ -1,12 +1,13 @@
+package duke.storage;
+
+import duke.parser.Parser;
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.List;
 
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ public class Storage {
 
     private final String SAVE_FORMAT_DELIMITER = " \\| ";
 
-    Storage() {
+    public Storage() {
         file = new File("data", "duke.txt");
     }
 

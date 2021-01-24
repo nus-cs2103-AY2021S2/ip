@@ -1,20 +1,29 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-public class AddDeadlineCommand extends Command {
-    private Deadline deadline;
+public class AddEventCommand extends Command {
+    private Event event;
 
-    public AddDeadlineCommand(String details) throws DukeException {
+    public AddEventCommand(String details) throws DukeException {
         try {
             if (details.isEmpty()) {
-                throw new DukeException("You can't create an empty deadline!");
+                throw new DukeException("You can't create an empty event!");
             }
-            String[] detailsArr = details.split(" /by ", 2);
+            String[] detailsArr = details.split(" /at ", 2);
             if (detailsArr.length != 2) {
-                throw new DukeException("You can't add a deadline without a datetime!");
+                throw new DukeException("You can't add an event without a datetime!");
             }
             LocalDateTime date = Parser.parseDateTimeFromInput(detailsArr[1]);
-            this.deadline = new Deadline(detailsArr[0], date);
+            this.event = new Event(detailsArr[0], date);
         } catch (DateTimeParseException e) {
             throw new DukeException("Please follow the datetime format of dd/mm/yyyy hhmm.");
         } catch (DukeException e) {
@@ -24,8 +33,8 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(deadline);
-        ui.printAddTaskReport(deadline, tasks);
+        tasks.addTask(event);
+        ui.printAddTaskReport(event, tasks);
         storage.saveTasksToFile(tasks);
     }
 

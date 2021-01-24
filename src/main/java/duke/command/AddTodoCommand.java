@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+
 public class AddTodoCommand extends Command {
     private Todo todo;
 
