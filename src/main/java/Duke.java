@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The Duke project.
@@ -10,47 +9,30 @@ public class Duke {
     /** The number of tasks at the start of the program. */
     static int totalTasks = 0;
 
-    /** A boolean function to check if the user decides to terminate the program. */
-    static boolean endOfCycle = false;
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
 
-    private static final Ui ui = new Ui();
-    private static final Storage storage = new Storage();
-    private static final Parser parser = new Parser();
-//    public Duke(String filePath) {
-//        ui = new Ui();
-//        storage = new Storage(filePath);
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
-//    }
-//
-//    public void run() {
-//        //...
-//    }
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        parser = new Parser();
+    }
 
-    public static void main(String[] args) throws IOException {
+    public void run() throws IOException {
         ui.welcomeMsg();
         ui.nameMsg();
-
         ArrayList<Task> tasks = new ArrayList<>();
         storage.readOrCreateFile(tasks);
-
-        while(!endOfCycle) {
+        while(parser.canContinue) {
             ui.prompt();
             parser.processInput(tasks, totalTasks, ui);
         }
-
         storage.writeListIntoFile(tasks);
     }
 
-    /**
-     * Signal termination of the conversation.
-     */
-    public static void setEndOfCycle() {
-        endOfCycle = true;
+    public static void main(String[] args) throws IOException {
+        new Duke().run();
     }
 
     /**
@@ -190,25 +172,6 @@ public class Duke {
             System.out.println(listNum + ". " + tasks.get(i).toString());
         }
         System.out.println("----------------------------------------------------------------------------------------");
-    }
-
-    /**
-     * Tells the user that the input given is invalid.
-     * @throws DukeException Exception thrown if the user input is invalid.
-     */
-    public static void wrongCommand() throws  DukeException{
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
-
-    /**
-     * Saying bye to the user when the user decides to quit.
-     * @param username The name of the user.
-     */
-    public static void bye(String username) {
-        System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("Bye " + username + "! Hope to see you again soon!");
-        System.out.println("----------------------------------------------------------------------------------------");
-        setEndOfCycle();
     }
 }
 

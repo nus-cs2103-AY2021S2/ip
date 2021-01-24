@@ -7,6 +7,8 @@ public class Parser {
 
     private final Scanner in;
     private final PrintStream out;
+    /** A boolean function to check if the user decides to terminate the program. */
+    public boolean canContinue = true;
 
     public Parser() {
         this(System.in, System.out);
@@ -28,11 +30,34 @@ public class Parser {
                 case "done" -> Duke.done(nextInput, tasks, totalTasks);
                 case "delete" -> Duke.delete(nextInput, tasks, totalTasks);
                 case "list" -> Duke.list(tasks, totalTasks);
-                case "bye" -> Duke.bye(ui.username);
-                default -> Duke.wrongCommand();
+                case "bye" -> byeCommand(ui);
+                default -> wrongCommand();
             }
         } catch (DukeException e) {
             out.println(e);
         }
+    }
+
+    /**
+     * Signal termination of the program.
+     */
+    public void terminate() {
+        this.canContinue = false;
+    }
+
+    /**
+     * Tells the user that the input given is invalid.
+     * @throws DukeException Exception thrown if the user input is invalid.
+     */
+    public void wrongCommand() throws DukeException {
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    /**
+     * Saying bye to the user when the user decides to quit.
+     */
+    public void byeCommand(Ui ui) {
+        ui.byeMsg();
+        terminate();
     }
 }

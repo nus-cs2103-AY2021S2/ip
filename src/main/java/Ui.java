@@ -31,14 +31,20 @@ public class Ui {
      * Greets the user again after knowing the user's name.
      */
     public void nameMsg() {
-        username = in.nextLine();
+        this.username = in.nextLine();
         out.println(DIVIDER);
-        out.println("Hi " + username + "!");
+        out.println("Hi " + this.username + "!");
         out.println("What can I do for you?");
         out.println(DIVIDER);
     }
 
     public void prompt() {
-        System.out.print(username + ": ");
+        out.print(this.username + ": ");
+    }
+
+    public void byeMsg() {
+        out.println(DIVIDER);
+        out.println("Bye " + this.username + "! Hope to see you again soon!");
+        out.println(DIVIDER);
     }
 }
