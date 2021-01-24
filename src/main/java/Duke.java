@@ -7,6 +7,7 @@ public class Duke {
     private static DateTimeFormatter formatter;
     private static List<Task> list;
     private static TaskStorage storage;
+    private static Ui ui;
 
     /**
      * An application that serves as a to-do list.
@@ -14,7 +15,7 @@ public class Duke {
      */
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        ui = new Ui();
         storage = new TaskStorage();
         list = storage.retrieveData();
         formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -24,7 +25,7 @@ public class Duke {
         String[] parseInput;
         String command;
         while (!userInput.equals("bye")) {
-            userInput = sc.nextLine();
+            userInput = ui.readInput();
             if (userInput.isBlank()) {
                 continue;
             }
@@ -32,7 +33,7 @@ public class Duke {
             command = parseInput[0];
             switch (command) {
                 case "list":
-                    print(list);
+                    ui.print(list);
                     break;
                 case "todo":
                     handleToDo(userInput, parseInput);
@@ -64,7 +65,7 @@ public class Duke {
      */
 
     private static void greet() {
-        print("Hello! I'm Jarvis.\n\t  How may I help you?");
+        ui.print("Hello! I'm Jarvis.\n\t  How may I help you?");
     }
 
     /**
@@ -72,7 +73,7 @@ public class Duke {
      */
 
     private static void exit() {
-        print("Goodbye. See you later!");
+        ui.print("Goodbye. See you later!");
     }
 
     /**
@@ -83,7 +84,7 @@ public class Duke {
         try {
             throw new DukeInvalidCommandException("Invalid Command!");
         } catch (DukeInvalidCommandException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -101,7 +102,7 @@ public class Duke {
             String description = userInput.substring(5);
             addTask(new ToDo(description));
         } catch (DukeDescriptionException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -123,9 +124,9 @@ public class Duke {
             LocalDateTime dateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
             addTask(new Deadline(deadlineDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         } catch (DukeDeadlineException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -147,9 +148,9 @@ public class Duke {
             LocalDateTime dateTime = LocalDateTime.parse(eventDetails[1], formatter);
             addTask(new Event(eventDetails[0], dateTime));
         } catch (DukeDescriptionException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         } catch (DukeEventException e) {
-            print(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -166,12 +167,12 @@ public class Duke {
             int taskIndex = Integer.parseInt(parseInput[1])-1;
             markTaskAsDone(list.get(taskIndex));
         } catch (NumberFormatException e) {
-            print("Please enter a numerical value as the list index!");
+            ui.print("Please enter a numerical value as the list index!");
         } catch (IndexOutOfBoundsException e) {
             if (parseInput.length == 1) {
-                print("You have not entered a list index!");
+                ui.print("You have not entered a list index!");
             } else {
-                print("Please enter a valid list index!");
+                ui.print("Please enter a valid list index!");
             }
         }
     }
@@ -189,12 +190,12 @@ public class Duke {
             int taskIndex = Integer.parseInt(parseInput[1])-1;
             deleteTask(taskIndex);
         } catch (NumberFormatException e) {
-            print("Please enter a numerical value as the list index!");
+            ui.print("Please enter a numerical value as the list index!");
         } catch (IndexOutOfBoundsException e) {
             if (parseInput.length == 1) {
-                print("You have not entered a list index!");
+                ui.print("You have not entered a list index!");
             } else {
-                print("Please enter a valid list index!");
+                ui.print("Please enter a valid list index!");
             }
         }
     }
@@ -206,7 +207,7 @@ public class Duke {
 
     private static void addTask(Task task) {
         list.add(task);
-        print("Got it. I've added this task:\n\t\t" + task +
+        ui.print("Got it. I've added this task:\n\t\t" + task +
                 "\n\n\t  You have " +
                 list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
     }
@@ -220,7 +221,7 @@ public class Duke {
         Task toRemove = list.get(taskIndex);
         toRemove.markIncomplete();
         list.remove(taskIndex);
-        print("I've removed this task:\n\t\t" + toRemove +
+        ui.print("I've removed this task:\n\t\t" + toRemove +
                 "\n\n\t  You have " +
                 list.size() + (list.size() == 1 ? " task" : " tasks") + " in your list");
     }
@@ -232,33 +233,6 @@ public class Duke {
 
     private static void markTaskAsDone(Task task) {
         task.markDone();
-        print("Nice! I have marked this task as done:\n\t\t " + task);
-    }
-
-    /**
-     * Print message to user.
-     * @param message Welcome/Goodbye message or a description of the task added.
-     */
-
-    private static void print(String message) {
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\n\t  " + message);
-        System.out.println("\n\t____________________________________________________________\n");
-    }
-
-    /**
-     * Print all tasks.
-     * @param list A list of tasks entered by the user.
-     */
-
-    private static void print(List<Task> list) {
-        System.out.println("\t____________________________________________________________\n");
-        System.out.println("\t  Your tasks:");
-        int listCounter = 1;
-        for (Task task : list) {
-            System.out.println("  \t  " + listCounter + "." + task);
-            listCounter++;
-        }
-        System.out.println("\n\t____________________________________________________________\n");
+        ui.print("Nice! I have marked this task as done:\n\t\t " + task);
     }
 }

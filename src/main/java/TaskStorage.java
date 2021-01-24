@@ -7,15 +7,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskStorage {
-    File file;
-    FileWriter writer;
+    private File file;
+    private FileWriter writer;
+    private Ui ui;
     public TaskStorage() {
         try {
+            Ui ui = new Ui();
             file = new File("data/tasks.txt");
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -44,7 +46,7 @@ public class TaskStorage {
             }
             writer.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ui.print(e.getMessage());
         }
     }
 
@@ -77,7 +79,7 @@ public class TaskStorage {
                 }
             }
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            ui.print(e.getMessage());
         }
         return retrievedTasks;
     }
