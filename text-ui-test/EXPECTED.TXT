@@ -36,7 +36,7 @@ Here are the tasks in your list:
 3. [E][X] project meeting  (at: 28 Jan 2020 - 0800)
 4. [T][ ] buy item
 
-OOPS!!! The description of a todo cannot be empty.
+OOPS!!! The description cannot be empty
 OOPS!!! I'm sorry, but I don't know what that means :-(
 Here are the tasks in your list:
 1. [T][X] borrow book

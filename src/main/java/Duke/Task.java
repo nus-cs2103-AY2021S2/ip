@@ -9,6 +9,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     // Mark the task as done and return a success message from getTask()
     public void markAsDone() {
         this.isDone = true;
