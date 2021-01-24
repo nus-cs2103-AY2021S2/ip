@@ -39,9 +39,6 @@ public class TaskDeadline extends Task {
 			return false;
 		}
 		TaskDeadline taskDeadline = (TaskDeadline) object;
-		if (!taskDeadline.deadline.equals(this.deadline)) {
-			return false;
-		}
-		return true;
+		return taskDeadline.deadline.equals(this.deadline);
 	}
 }

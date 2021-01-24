@@ -1,6 +1,7 @@
 package alice.command;
 
-import alice.*;
+import alice.Alice;
+import alice.AliceException;
 import alice.task.Task;
 import alice.task.TaskBuilder;
 import alice.task.TaskList;
