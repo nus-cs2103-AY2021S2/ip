@@ -6,6 +6,10 @@ public class Event extends Task{
         this.at = at;
     }
 
+    public Event(String description, String at, boolean status){
+        super(description,status);
+        this.at = at;
+    }
     @Override
     public String getTaskName() {
         return "[E]" + super.getTaskName() + " (at: " + at + ")";

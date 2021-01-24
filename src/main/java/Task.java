@@ -22,9 +22,20 @@ public class Task {
         Tasks.add(this);
     }
 
+    public Task(String taskName, boolean status){
+        this.taskName = taskName;
+        isDone = status;
+        numOfTasks += 1;
+        Tasks.add(this);
+    }
+
     // Getter
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    public boolean getStatus(){
+        return isDone;
     }
 
     public String getTaskName(){

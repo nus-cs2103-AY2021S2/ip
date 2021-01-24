@@ -109,7 +109,7 @@ public class Chatbot {
             if (dateIndex == -1) throw new DukeException("OOPS!!! I can't find your deadline time.");
             if (spaceIndex == -1 || dateIndex - spaceIndex == 1) throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
 
-            String deadlineName = userMessage.substring(spaceIndex+1,dateIndex);
+            String deadlineName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
             String by = userMessage.substring(dateIndex + 4);
             Deadline deadline = new Deadline(deadlineName,by);
 
@@ -125,7 +125,7 @@ public class Chatbot {
             int dateIndex = userMessage.indexOf('/');
             if (dateIndex == -1) throw new DukeException("OOPS!!! I can't find your event time.");
             if (spaceIndex == -1 || dateIndex - spaceIndex == 1) throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            String eventName = userMessage.substring(spaceIndex+1,dateIndex);
+            String eventName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
             String at = userMessage.substring(dateIndex + 4);
             Event event = new Event(eventName,at);
 
