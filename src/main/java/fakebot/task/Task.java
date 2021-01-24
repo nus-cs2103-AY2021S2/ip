@@ -26,6 +26,7 @@ public abstract class Task {
 
     /**
      * Get Task Name.
+     *
      * @return Task Name.
      */
     public String getTaskName() {
@@ -35,15 +36,16 @@ public abstract class Task {
     /**
      * Mark Task as Complete.
      */
-    public void markComplete(){
+    public void markComplete() {
         isComplete = true;
     }
 
     /**
      * Get if Task is Complete.
+     *
      * @return If Task is Complete.
      */
-    public boolean isComplete(){
+    public boolean isComplete() {
         return isComplete;
     }
 

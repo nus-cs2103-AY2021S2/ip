@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +17,7 @@ public class Storage {
 
     /**
      * Constructor of storage class.
+     *
      * @param fileName name of file.
      * @param filePath path of file.
      */
@@ -29,6 +28,7 @@ public class Storage {
 
     /**
      * Create Directory if file path doesn't exist.
+     *
      * @param filePath path of file.
      * @return Return path created, return empty path if path is invalid.
      */
@@ -46,6 +46,7 @@ public class Storage {
 
     /**
      * Write Tasks to File.
+     *
      * @param taskList Tasks to write to file.
      */
     public void writeTasksToFIle(TaskList taskList) {
@@ -56,8 +57,10 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
     /**
      * Write String to File.
+     *
      * @param textToAdd write text to file.
      */
     private void writeToFile(String textToAdd) throws IOException {
@@ -65,8 +68,10 @@ public class Storage {
         fw.write(textToAdd);
         fw.close();
     }
+
     /**
      * Read Task from File.
+     *
      * @return Return list of task read from File.
      */
     public List<Task> tryReadTaskFile() {
@@ -79,8 +84,10 @@ public class Storage {
         }
         return taskList;
     }
+
     /**
      * Read String from File.
+     *
      * @return Return list of string read from File.
      */
     private List<String> readFile() throws FileNotFoundException {

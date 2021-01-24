@@ -17,19 +17,21 @@ public class Ui {
 
     /**
      * Print Standard Message.
+     *
      * @param message Message to print.
      */
-    public void printBotMessage(String message){
-        String printMessage = DIVIDER + message + "\n"+DIVIDER;
+    public void printBotMessage(String message) {
+        String printMessage = DIVIDER + message + "\n" + DIVIDER;
         print(printMessage);
     }
 
     /**
      * Print List of String.
+     *
      * @param startingMessage Starting message to print before the list.
-     * @param messages List of String to print.
+     * @param messages        List of String to print.
      */
-    public void printList(String startingMessage, List<String> messages){
+    public void printList(String startingMessage, List<String> messages) {
         StringBuilder printMessage = new StringBuilder(DIVIDER);
         printMessage.append(startingMessage);
         for (int i = 1; i <= messages.size(); i++) {
@@ -44,17 +46,20 @@ public class Ui {
 
     /**
      * Print List of Task.
+     *
      * @param taskList List of Task to print.
      */
-    public void printTasks(TaskList taskList){
+    public void printTasks(TaskList taskList) {
         List<String> messages = new ArrayList<>();
         for (int i = 0; i < taskList.getSize(); i++) {
             messages.add(taskList.getTask(i).toString());
         }
         printList("Here are the tasks in your list:\n", messages);
     }
+
     /**
      * Print Message.
+     *
      * @param message message to print.
      */
     private void print(String message) {
@@ -63,9 +68,10 @@ public class Ui {
 
     /**
      * Read Line from IO.
+     *
      * @return Return String read from input.
      */
-    public String readLine(){
+    public String readLine() {
         String input = scanf.nextLine();
         return input;
     }

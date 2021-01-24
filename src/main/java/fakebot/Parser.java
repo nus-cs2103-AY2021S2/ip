@@ -15,6 +15,7 @@ public class Parser {
 
     /**
      * Convert Task to String.
+     *
      * @param stringList List of string to be converted to string.
      * @return Return string.
      */
@@ -29,6 +30,7 @@ public class Parser {
 
     /**
      * Convert Task to String.
+     *
      * @param task Task to be parsed to string.
      * @return Return parsed Task.
      */
@@ -40,7 +42,7 @@ public class Parser {
             currentString.append(task.isComplete());
             currentString.append(SPLIT_REGEX);
             currentString.append(task.getTaskName());
-        }else if (task instanceof Events) {
+        } else if (task instanceof Events) {
             Events events = (Events) task;
             currentString.append(TaskType.EVENT.name());
             currentString.append(SPLIT_REGEX);
@@ -55,7 +57,7 @@ public class Parser {
             currentString.append(events.getEndDate());
             currentString.append(SPLIT_REGEX);
             currentString.append(events.getEndTime());
-        }else if (task instanceof Deadlines) {
+        } else if (task instanceof Deadlines) {
             Deadlines deadlines = (Deadlines) task;
             currentString.append(TaskType.DEADLINE.name());
             currentString.append(SPLIT_REGEX);
@@ -72,6 +74,7 @@ public class Parser {
 
     /**
      * Convert List of Task to List of String.
+     *
      * @param taskList string of list.
      * @return Return list of String parsed from list of Task.
      */
@@ -87,6 +90,7 @@ public class Parser {
 
     /**
      * Convert String to Task.
+     *
      * @param string Parsed Task.
      * @return Return task parsed from string.
      */
@@ -114,6 +118,7 @@ public class Parser {
 
     /**
      * Convert List of String to List of Task.
+     *
      * @param stringList string of list.
      * @return Return list of Task parsed from list of string.
      */

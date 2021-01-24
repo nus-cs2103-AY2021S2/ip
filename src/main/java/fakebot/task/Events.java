@@ -20,6 +20,7 @@ public class Events extends Task {
 
     /**
      * Get Task Start Date.
+     *
      * @return Return Start Date as String.
      */
     public String getStartDate() {
@@ -28,6 +29,7 @@ public class Events extends Task {
 
     /**
      * Get Task Start Time.
+     *
      * @return Return Start Time as String.
      */
     public String getStartTime() {
@@ -36,6 +38,7 @@ public class Events extends Task {
 
     /**
      * Get Task End Date.
+     *
      * @return Return End Date as String.
      */
     public String getEndDate() {
@@ -44,6 +47,7 @@ public class Events extends Task {
 
     /**
      * Get Task End Time.
+     *
      * @return Return End Time as String.
      */
     public String getEndTime() {

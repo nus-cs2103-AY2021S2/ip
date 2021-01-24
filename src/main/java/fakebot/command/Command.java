@@ -1,8 +1,5 @@
 package fakebot.command;
 
-import java.util.Locale;
-
-
 //Store Command Entered by user
 public class Command {
     private CommandType type;
@@ -19,6 +16,7 @@ public class Command {
 
     /**
      * Get Command Type.
+     *
      * @return CommandType of the Command.
      */
     public CommandType getCommand() {
@@ -27,6 +25,7 @@ public class Command {
 
     /**
      * Get Command Description Type.
+     *
      * @return Description of the Command.
      */
     public String getDescription() {

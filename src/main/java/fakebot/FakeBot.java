@@ -1,6 +1,8 @@
 package fakebot;
 
-import fakebot.command.*;
+import fakebot.command.Command;
+import fakebot.command.CommandException;
+import fakebot.command.CommandType;
 import fakebot.task.*;
 
 import java.time.LocalDate;
@@ -30,6 +32,7 @@ public class FakeBot {
     private static String EVENT_COMMAND = "event";
     private static String EVENT_SPLIT_REGEX = " /at ";
     private static String DELETE_COMMAND = "delete";
+    private static String FIND_COMMAND = "find";
 
     private static String saveFilePath = "/data/";
     private static String saveFileName = "savedHistory.txt";
@@ -55,8 +58,10 @@ public class FakeBot {
         }
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
+
     /**
      * Save History to Storage.
+     *
      * @param task List of Task to be saved.
      */
     public static void saveHistory(TaskList task) {
@@ -72,6 +77,7 @@ public class FakeBot {
 
     /**
      * Print message to show that the task is done.
+     *
      * @param task Task to print.
      */
     public static void printDoneMessage(Task task) {
@@ -81,16 +87,19 @@ public class FakeBot {
 
     /**
      * Print message to show that the task is deleted and print the remaining number of task left.
-     * @param task Deleted Task.
+     *
+     * @param task  Deleted Task.
      * @param count Total number of Task Left.
      */
     public static void printDeleteMessage(Task task, int count) {
         ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()
                 + "\nNow you have " + count + " tasks in the list.");
     }
+
     /**
      * Print message to show that the task is deleted and print the remaining number of task left.
-     * @param task Added Task.
+     *
+     * @param task  Added Task.
      * @param count Total number of Task Left.
      */
     public static void printAddedTaskMessage(Task task, int count) {
@@ -100,8 +109,9 @@ public class FakeBot {
 
     /**
      * Process Command given by user.
+     *
      * @param taskList Tasks List to Edit.
-     * @param command Total number of Task Left.
+     * @param command  Total number of Task Left.
      */
     public static boolean processCommand(TaskList taskList, Command command) {
         switch (command.getCommand()) {
@@ -150,6 +160,8 @@ public class FakeBot {
             taskList.removeTask(deleteIndex);
             printDeleteMessage(deletedTask, taskList.getSize());
             saveHistory(taskList);
+        case FIND:
+            ui.printTasks(new TaskList(taskList.find(command.getDescription())));
             break;
         }
 
@@ -158,7 +170,8 @@ public class FakeBot {
 
     /**
      * Validate User Input.
-     * @param command Command String that is yet to be parsed.
+     *
+     * @param command   Command String that is yet to be parsed.
      * @param taskCount Total number of Task Left.
      */
     public static Command validateCommand(String command, int taskCount) throws CommandException {
@@ -171,8 +184,8 @@ public class FakeBot {
         if (command.equals(DONE_COMMAND) || command.equals(DELETE_COMMAND)) {
             throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
-
-        if (command.equals(TODO_COMMAND) || command.equals(DEADLINE_COMMAND) || command.equals(EVENT_COMMAND)) {
+        if (command.equals(TODO_COMMAND) || command.equals(DEADLINE_COMMAND)
+                || command.equals(EVENT_COMMAND) || command.equals(FIND_COMMAND)) {
             throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
@@ -185,7 +198,8 @@ public class FakeBot {
         String description = command.substring(firstSplit + 1);
 
         if (commandName.equals(DONE_COMMAND) || commandName.equals(DELETE_COMMAND) || commandName.equals(TODO_COMMAND)
-                || commandName.equals(EVENT_COMMAND) || commandName.equals(DEADLINE_COMMAND)) {
+                || commandName.equals(EVENT_COMMAND) || commandName.equals(DEADLINE_COMMAND)
+                || commandName.equals(FIND_COMMAND)) {
             if (description.isEmpty()) {
                 throw new CommandException("☹ OOPS!!! The description of a " + commandName + " cannot be empty.");
             } else if (commandName.equals(DONE_COMMAND) || commandName.equals(DELETE_COMMAND)) {
@@ -203,6 +217,8 @@ public class FakeBot {
                 } else if (commandName.equals(DELETE_COMMAND)) {
                     return new Command(CommandType.DELETE, description);
                 }
+            } else if (commandName.equals(FIND_COMMAND)) {
+                return new Command(CommandType.FIND, description);
             } else if (commandName.equals(TODO_COMMAND)) {
                 return new Command(CommandType.TODO, description);
             } else if (commandName.equals(DEADLINE_COMMAND)) {

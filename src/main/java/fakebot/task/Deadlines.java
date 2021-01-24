@@ -14,8 +14,10 @@ public class Deadlines extends Task {
         this.deadlineTime = deadlineTime;
 
     }
+
     /**
      * Get Task Deadline Date.
+     *
      * @return Return Deadline Date as String.
      */
     public String getDeadlineDate() {
@@ -24,6 +26,7 @@ public class Deadlines extends Task {
 
     /**
      * Get Task Deadline Time.
+     *
      * @return Return Deadline Time as String.
      */
     public String getDeadlineTime() {
