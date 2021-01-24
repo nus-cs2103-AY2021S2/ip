@@ -57,4 +57,8 @@ public class Deadline extends Task {
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
                 this.dateTime.format(formatter);
     }
+
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
+    }
 }

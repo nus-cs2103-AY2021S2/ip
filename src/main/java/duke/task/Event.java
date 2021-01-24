@@ -63,4 +63,12 @@ public class Event extends Task {
         return this.getTypeSymbol() + " | " + (this.isDone ? "1" : "0") + " | " + this.desc + " | " +
                 this.start.format(formatter) + " | " + this.end.format(formatter);
     }
+
+    public LocalDateTime getStartDateTime() {
+        return this.start;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return this.end;
+    }
 }

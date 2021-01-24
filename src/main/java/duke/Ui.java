@@ -63,12 +63,22 @@ public class Ui {
      * @param tasksSize Number of total tasks left after deleting that task
      */
     public void printDeleteMsg(Task task, int tasksSize) {
-        System.out.println("___________________________________________________________");
+        System.out.println(BORDER);
         System.out.println("Noted meow. I've removed this task:");
         System.out.printf("  [%s][%s] %s\n", task.getTypeSymbol(), task.getStatusSymbol(),
                 task.getDesc());
         System.out.printf("Now you have %d tasks in the list.\n", tasksSize);
-        System.out.println("___________________________________________________________\n");
+        System.out.println(BORDER + "\n");
+    }
+
+    public void printFoundMsg(List<Task> tasks) {
+        System.out.println(BORDER);
+        System.out.println("Meow, here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
+        }
+        System.out.println(BORDER + "\n");
     }
 
     /**
