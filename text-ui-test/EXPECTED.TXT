@@ -22,12 +22,12 @@ Got it. I've added this task:
 [D][] 2103 project (by: Sunday)
 Now you have 3 tasks in the list.
 
-Invalid deadline command. Please try again!
+Invalid command! Please try again.
 
 Nice! I've marked this task as done:
 [E][X] dance (at: Kallang CC from 2-4pm)
 
-Invalid done command. Please try again!
+Missing argument! Please key in the command followed by the task number.
 
 Noted. I've removed this task:
 [D][] 2103 project (by: Sunday)

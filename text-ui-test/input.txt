@@ -8,3 +8,4 @@ done
 delete 3
 list
 delete 3
+bye

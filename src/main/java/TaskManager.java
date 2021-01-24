@@ -2,16 +2,22 @@ import java.util.ArrayList;
 
 public class TaskManager{
     private ArrayList<Task> list = new ArrayList<>(100);
+    private final static String TODO = "todo";
+    private final static String DELETE = "delete";
+    private final static String DONE = "done";
+    private final static String EVENT = "event";
+    private final static String DEADLINE = "deadline";
+    private final static String LIST = "list";
 
     public void add(String type, String task) throws DukeException {
-        if (type.equals("todo")) {
+        if (type.equals(TODO)) {
             list.add(new ToDo(task));
         } else {
             String description = task.split("/")[0];
             String deadline = task.split("/")[1].split(" ", 2)[1];
-            if (type.equals("deadline")) {
+            if (type.equals(DEADLINE)) {
                 list.add(new Deadline(description, deadline));
-            } else if (type.equals("event")) {
+            } else if (type.equals(EVENT)) {
                 list.add(new Event(description, deadline));
             }
         }
@@ -49,5 +55,19 @@ public class TaskManager{
             System.out.println((i + 1) + "." + list.get(i));
         }
         System.out.println("");
+    }
+
+
+    public void manage(String[] parsedAction) throws DukeException {
+        String command = parsedAction[0];
+        if (command.equals(DEADLINE) || command.equals(EVENT) || command.equals(TODO)) {
+            add(command, parsedAction[1]);
+        } else if (command.equals(LIST)) {
+            printList();
+        } else if (command.equals(DONE)) {
+            done(Integer.parseInt(parsedAction[1]));
+        } else {
+            delete(Integer.parseInt(parsedAction[1]));
+        }
     }
 }
