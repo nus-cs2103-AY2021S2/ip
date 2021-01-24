@@ -1,9 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
-    private static final Scanner scanner = new Scanner(System.in);
     private static final List<Task> taskList = new ArrayList<>();
 
     private static void introduction() {
@@ -68,7 +69,6 @@ public class Duke {
     private static void endProgram() {
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
-        scanner.close();
     }
 
     private static void setTaskDone(int pos) {
@@ -106,39 +106,47 @@ public class Duke {
 
     private static void run() {
         introduction();
-        while (scanner.hasNextLine()) {
-            String command = scanner.next();
-            if (isByeCommand(command)) {
-                endProgram();
-                break;
-            } else if (isListCommand(command)) {
-                printList();
-            } else {
-                String taskInput = scanner.nextLine();
-                String[] taskInputAndDate = taskInput.split("/");
-                String taskDescription = taskInputAndDate[0].trim();
-                if (isDoneCommand(command) || isDeleteCommand(command)) {
-                    try {
-                        if (isDoneCommand(command)) {
-                            doneTask(taskDescription);
-                        } else {
-                            deleteTask(taskDescription);
-                        }
-                    } catch (NumberFormatException numEx) {
-                        System.err.println("'" + command + "' is command word; please pass a numerical index or start your task"
-                                + " with another word!");
-                    } catch (IndexOutOfBoundsException arrEx) {
-                        System.err.println("Please pass a valid index!");
-                    }
+        File file = new File("./src/main/java/tasks.txt");
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String command = scanner.next();
+                if (isByeCommand(command)) {
+                    endProgram();
+                    break;
+                } else if (isListCommand(command)) {
+                    printList();
                 } else {
-                    try {
-                        addTask(command, taskInputAndDate);
-                    } catch (InvalidCommandException | EmptyDescriptionException e) {
-                        System.err.println(e.getMessage());
+                    String taskInput = scanner.nextLine();
+                    String[] taskInputAndDate = taskInput.split("/");
+                    String taskDescription = taskInputAndDate[0].trim();
+                    if (isDoneCommand(command) || isDeleteCommand(command)) {
+                        try {
+                            if (isDoneCommand(command)) {
+                                doneTask(taskDescription);
+                            } else {
+                                deleteTask(taskDescription);
+                            }
+                        } catch (NumberFormatException numEx) {
+                            System.err.println("'" + command + "' is command word; please pass a numerical index or start your task"
+                                    + " with another word!");
+                        } catch (IndexOutOfBoundsException arrEx) {
+                            System.err.println("Please pass a valid index!");
+                        }
+                    } else {
+                        try {
+                            addTask(command, taskInputAndDate);
+                        } catch (InvalidCommandException | EmptyDescriptionException e) {
+                            System.err.println(e.getMessage());
+                        }
                     }
                 }
             }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
         }
+
     }
 
     public static void main(String[] args) {
