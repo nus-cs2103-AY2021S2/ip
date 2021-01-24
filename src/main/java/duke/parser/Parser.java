@@ -9,16 +9,45 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
+    /**
+     * Parses String from user input into a LocalDateTime object.
+     *
+     * @param dateTimeString String input entered by user.
+     * @return LocalDateTime object of a task.
+     */
     public static LocalDateTime parseDateTimeFromInput(String dateTimeString) {
         DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
     }
 
+    /**
+     * Parses String from file into a LocalDateTime object.
+     *
+     * @param dateTimeString String from file.
+     * @return LocalDateTime object of a task.
+     */
     public static LocalDateTime parseDateTimeFromFile(String dateTimeString) {
         DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
         return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
     }
 
+    /**
+     * Parses LocalDateTime object into a formatted string.
+     *
+     * @param dateTime LocalDateTime object for parsing.
+     * @return Formatted string representing the time of a task.
+     */
+    public static String parseDateTimeToString(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+    }
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param userInput Input entered by user.
+     * @return Command object based on user input.
+     * @throws DukeException Unrecognized input by user.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] userInputArr = userInput.split(" ", 2);
         if (userInputArr.length != 2) {
@@ -46,6 +75,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns in the type of input entered by user.
+     *
+     * @param userInput Input entered by user.
+     * @return UserInputType object based on user input.
+     * @throws DukeException Unrecognized input by user.
+     */
     public static UserInputType parseUserInputType(String userInput) throws DukeException {
         try {
             return UserInputType.valueOf(userInput.toUpperCase());

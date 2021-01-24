@@ -8,22 +8,39 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
+    /**
+     * Initializes the required object for an Ui object.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads a line of input entered by user.
+     *
+     * @return String containing user input
+     */
     public String nextUserInput() {
         return sc.nextLine().trim();
     }
 
+    /**
+     * Terminates the functioning Ui Object.
+     */
     public void close() {
         sc.close();
     }
 
+    /**
+     * Prints a partition line.
+     */
     public void printPartitionLine() {
         System.out.println("    ---------------------------");
     }
 
+    /**
+     * Prints the greeting message.
+     */
     public void printGreeting() {
         printPartitionLine();
         String logo = "    __  _____ _  ___   ___   _ ___\n" +
@@ -35,18 +52,32 @@ public class Ui {
         printPartitionLine();
     }
 
+    /**
+     * Prints the farewell message.
+     */
     public void printFarewell() {
         printPartitionLine();
         System.out.println("    Goodbye. Have a nice day!!");
         printPartitionLine();
     }
 
+    /**
+     * Prints a error message after formatting.
+     *
+     * @param message Content of the error message.
+     */
     public void printErrorMessage(String message) {
         printPartitionLine();
         System.out.println("    OOPS!!! " + message);
         printPartitionLine();
     }
 
+    /**
+     * Prints a feedback message after user adds a task.
+     *
+     * @param task  Task added by user.
+     * @param tasks List of tasks the task was added to.
+     */
     public void printAddTaskReport(Task task, TaskList tasks) {
         printPartitionLine();
         System.out.println("    Got it. I've added this task");
@@ -55,10 +86,21 @@ public class Ui {
         printPartitionLine();
     }
 
+    /**
+     * Prints a message containing the total number of tasks.
+     *
+     * @param tasks List of all the tasks.
+     */
     public void printTaskCount(TaskList tasks) {
         System.out.println("    Now you have " + tasks.getTaskCount() + " in the list.");
     }
 
+    /**
+     * Prints a feedback message after user marks a task as done.
+     *
+     * @param task    Task marked as done.
+     * @param wasDone If the task was already marked as done.
+     */
     public void printMarkTaskAsDoneMessage(Task task, boolean wasDone) {
         printPartitionLine();
         if (wasDone) {
@@ -70,6 +112,12 @@ public class Ui {
         printPartitionLine();
     }
 
+    /**
+     * Prints a feedback message after user deletes a task.
+     *
+     * @param task  Task deleted by user.
+     * @param tasks List of tasks the task was deleted from.
+     */
     public void printDeleteTaskMessage(Task task, TaskList tasks) {
         printPartitionLine();
         System.out.println("    Noted. This task has been removed:");
@@ -78,6 +126,11 @@ public class Ui {
         printPartitionLine();
     }
 
+    /**
+     * Prints all the tasks after formatting.
+     *
+     * @param tasks List of all the tasks.
+     */
     public void printAllTasks(TaskList tasks) {
         printPartitionLine();
         if (tasks.isEmpty()) {
