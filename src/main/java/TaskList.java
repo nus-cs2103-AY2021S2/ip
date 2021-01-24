@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Lists {
+public class TaskList {
     List<ListItem> dukeList;
 
-    public Lists(){
+    public TaskList(){
         this.dukeList = new ArrayList<>();
     }
 
@@ -13,14 +13,14 @@ public class Lists {
 //        dukeList.add(new listItem(task));
 //    }
 
-    public Lists(List<ListItem> inputList){
+    public TaskList(List<ListItem> inputList){
         this.dukeList = new ArrayList<ListItem>(inputList);
     }
 
-    public Lists addCommand(ListItem task){
+    public TaskList addCommand(ListItem task){
         List<ListItem> tempList = new ArrayList<>(this.dukeList);
         tempList.add(task);
-        return new Lists(tempList);
+        return new TaskList(tempList);
     }
 
     public void addCommandMutable(ListItem task){

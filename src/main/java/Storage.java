@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileProcess {
+public class Storage {
     public static List<ListItem> importData() {
         List<ListItem> importedList;
         importedList = new ArrayList<>();

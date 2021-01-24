@@ -8,13 +8,13 @@ public class Duke {
         "Hello! I'm Duke \nWhat can I do for you? \n" +
         "____________________________________________________________");
 
-        InputCommand in = new InputCommand();
-        Lists programList = new Lists(FileProcess.importData());
+        Parser in = new Parser();
+        TaskList programList = new TaskList(Storage.importData());
 //        System.out.println(programList.getDukeList());
         while(!in.getCommand().equals("bye")){
-            in = new InputCommand(sc.nextLine());
+            in = new Parser(sc.nextLine());
             System.out.println(in.print(programList));
-            System.out.println(FileProcess.writeData(programList.toString()));
+            System.out.println(Storage.writeData(programList.toString()));
         }
     }
 }

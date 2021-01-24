@@ -1,6 +1,4 @@
-import java.util.Arrays;
-
-public class InputCommand {
+public class Parser {
     private final String command;
     private final String argument;
     private final String date;
@@ -17,13 +15,13 @@ public class InputCommand {
         delete
     }
 
-    public InputCommand() {
+    public Parser() {
         this.command = "";
         this.date = null;
         this.argument = "";
     }
 
-    public InputCommand(String in) {
+    public Parser(String in) {
         String tempDate = null;
         String tempCommand = "";
         String[] result = in.split("\\s");
@@ -89,7 +87,7 @@ public class InputCommand {
         return this.argument;
     }
 
-    public String print(Lists inputList) {
+    public String print(TaskList inputList) {
         predefinedCommand switchVal = predefinedCommand.valueOf(this.command);
         switch (switchVal) {
             case bye:
@@ -126,7 +124,7 @@ public class InputCommand {
         return "";
     }
 
-    public String printPredefinedMessage(String typeOfTask, Lists inputList) {
+    public String printPredefinedMessage(String typeOfTask, TaskList inputList) {
         return "Got it. I've added this task: \n" + typeOfTask + "\nNow you have " + inputList.getDukeList().size() + " tasks in the list" + line;
     }
 }
