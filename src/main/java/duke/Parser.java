@@ -24,28 +24,28 @@ public class Parser {
      * @throws DukeException if the command string cannot be parsed
      */
     public static Command parse(String text) throws DukeException {
-        if(text.matches("^todo($|.+$)")) {
+        if (text.matches("^todo($|.+$)")) {
             return parseToDo(text);
 
-        } else if(text.matches("^deadline($|.+$)")) {
+        } else if (text.matches("^deadline($|.+$)")) {
             return parseDeadline(text);
 
-        } else if(text.matches("^event($|.+$)")) {
+        } else if (text.matches("^event($|.+$)")) {
             return parseEvent(text);
 
-        } else if(text.matches("^done($|.+$)")) {
+        } else if (text.matches("^done($|.+$)")) {
             return parseDone(text);
 
-        } else if(text.matches("^delete($|.+$)")) {
+        } else if (text.matches("^delete($|.+$)")) {
             return parseDelete(text);
 
-        } else if(text.matches("^find($|.+$)")) {
+        } else if (text.matches("^find($|.+$)")) {
             return parseFind(text);
 
-        } else if(text.equals("list")) {
+        } else if (text.equals("list")) {
             return parseList(text);
 
-        } else if(text.equals("bye")) {
+        } else if (text.equals("bye")) {
             return parseExit(text);
 
         } else {
@@ -61,7 +61,7 @@ public class Parser {
      */
     public static ToDoCommand parseToDo(String text) throws DukeCommandException {
         String desc = text.substring(4).stripLeading();
-        if(desc.length() == 0) {
+        if (desc.length() == 0) {
             throw new DukeCommandException("todo", desc, "Description of ToDo cannot be empty");
         } else {
             return new ToDoCommand(desc);
@@ -80,14 +80,14 @@ public class Parser {
 
         String params = text.substring(8).stripLeading();
 
-        if(params.length() == 0) {
+        if (params.length() == 0) {
             throw new DukeCommandException("deadline", params, "The details of a Deadline cannot be empty.");
 
-        } else if(!params.contains("/by") || params.split(" /by ").length != 2) {
+        } else if (!params.contains("/by") || params.split(" /by ").length != 2) {
             throw new DukeCommandException("deadline", params, "Description and date/time must be given for a " +
                     "Deadline.");
 
-        } else if(!params.split(" /by ")[1].matches(validDateTimePattern)) {
+        } else if (!params.split(" /by ")[1].matches(validDateTimePattern)) {
             throw new DukeCommandException("deadline", params, "Date time format is incorrect, try to follow the " +
                     "format of dd-mm-yyyy hAM/PM.");
 
@@ -114,15 +114,15 @@ public class Parser {
 
         String params = text.substring(5).stripLeading();
 
-        if(params.length() == 0) {
+        if (params.length() == 0) {
             throw new DukeCommandException("event", params, "The details of a Event cannot be empty.");
 
-        } else if(!params.contains("/start") || !params.contains("/end")
+        } else if (!params.contains("/start") || !params.contains("/end")
                 || params.split(" /start | /end ").length != 3) {
             throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
                     "must be given for an Event.");
 
-        } else if(!params.split(" /start | /end ")[1].matches(pattern)
+        } else if (!params.split(" /start | /end ")[1].matches(pattern)
                 || !params.split(" /start | /end ")[2].matches(pattern)) {
             throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
                     "follow the format of dd-mm-yyyy hAM/PM.");
@@ -147,7 +147,7 @@ public class Parser {
     public static DoneCommand parseDone(String text) throws DukeCommandException {
         String params = text.substring(4).stripLeading();
 
-        if(!params.matches("-?(0|[1-9]\\d*)")) {
+        if (!params.matches("-?(0|[1-9]\\d*)")) {
             throw new DukeCommandException("done", params, "Please provide an actual number for the task you are done" +
                     " with.");
         } else {
@@ -164,7 +164,7 @@ public class Parser {
     public static DeleteCommand parseDelete(String text) throws DukeCommandException {
         String params = text.substring(6).stripLeading();
 
-        if(!params.matches("-?(0|[1-9]\\d*)")) {
+        if (!params.matches("-?(0|[1-9]\\d*)")) {
             throw new DukeCommandException("delete", params, "Please provide an actual number for the task you are " +
                     "deleting.");
         } else {
@@ -184,30 +184,30 @@ public class Parser {
 
         String params = text.substring(4).stripLeading();
 
-        if(params.length() == 0) {
+        if (params.length() == 0) {
             throw new DukeCommandException("find", params, "Find command cannot have empty parameter.");
 
-        } else if(params.startsWith("/on") && params.substring(3).trim().length() == 0) {
+        } else if (params.startsWith("/on") && params.substring(3).trim().length() == 0) {
             throw new DukeCommandException("find", params, "Cannot find by an empty date.");
 
-        } else if(params.startsWith("/on") && !params.substring(3).trim().matches(validDatePattern)) {
+        } else if (params.startsWith("/on") && !params.substring(3).trim().matches(validDatePattern)) {
             throw new DukeCommandException("find", params, "Date has invalid format, try to " +
                     "follow the format of dd-mm-yyyy.");
 
-        } else if(params.contains(" /on ") && params.split(" /on ").length != 2) {
+        } else if (params.contains(" /on ") && params.split(" /on ").length != 2) {
             throw new DukeCommandException("find", params, "Either the query or the search date is missing.");
 
-        } else if(params.contains(" /on ") && params.split(" /on ").length == 2
+        } else if (params.contains(" /on ") && params.split(" /on ").length == 2
                 && !params.split(" /on ")[1].matches(validDatePattern)) {
             throw new DukeCommandException("find", params, "Date has invalid format, try to " +
                     "follow the format of dd-mm-yyyy.");
 
-        } else if(params.startsWith("/on")) {
+        } else if (params.startsWith("/on")) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate targetDate = LocalDate.parse(params.substring(4), formatter);
             return new FindCommand("", targetDate);
 
-        } else if(params.contains(" /on ")) {
+        } else if (params.contains(" /on ")) {
             String[] splits = params.split(" /on ");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate targetDate = LocalDate.parse(splits[1], formatter);

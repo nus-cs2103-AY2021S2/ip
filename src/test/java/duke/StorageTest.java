@@ -31,7 +31,7 @@ public class StorageTest {
     @Test
     public void saveTasks_NoExisting() {
         File file = new File(PATH);
-        if(file.exists()) {
+        if (file.exists()) {
             file.delete();
         }
 
@@ -71,7 +71,7 @@ public class StorageTest {
     public void loadTasksTo_NoExisting() {
         // Create the 'data' folder if missing
         File dir = new File("data");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
 

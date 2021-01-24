@@ -21,7 +21,7 @@ public class TaskManager {
      * @throws DukeTaskException if description provided is empty
      */
     public ToDo addToDo(String desc) throws DukeTaskException {
-        if(desc.length() == 0) {
+        if (desc.length() == 0) {
             throw new DukeTaskException("The description of a ToDo cannot be empty.");
         } else {
             ToDo toDo = new ToDo(desc);
@@ -38,7 +38,7 @@ public class TaskManager {
      * @throws DukeTaskException if description provided is empty
      */
     public Deadline addDeadline(String desc, LocalDateTime dateTime) throws DukeTaskException {
-        if(desc.length() == 0) {
+        if (desc.length() == 0) {
             throw new DukeTaskException("The description of a Deadline cannot be empty.");
         } else {
             Deadline deadline = new Deadline(desc, dateTime);
@@ -56,7 +56,7 @@ public class TaskManager {
      * @throws DukeTaskException if description provided is empty
      */
     public Event addEvent(String desc, LocalDateTime start, LocalDateTime end) throws DukeTaskException {
-        if(desc.length() == 0) {
+        if (desc.length() == 0) {
             throw new DukeTaskException("The description of an Event cannot be empty.");
         } else {
             Event event = new Event(desc, start, end);
@@ -72,9 +72,9 @@ public class TaskManager {
      * @throws DukeTaskException if there is no task in the list or the index is out of range
      */
     public Task deleteTask(int index) throws DukeTaskException {
-        if(tasks.size() == 0){
+        if (tasks.size() == 0){
             throw new DukeTaskException("There are no task to be deleted.");
-        } else if(index < 0 || index >= tasks.size()) {
+        } else if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size() +
                     " (inclusive).");
         } else {
@@ -88,9 +88,9 @@ public class TaskManager {
      * @throws DukeTaskException if there is no task in the list or the index is out of range
      */
     public void completeTask(int index) throws DukeTaskException {
-        if(tasks.size() == 0){
+        if (tasks.size() == 0){
             throw new DukeTaskException("There are no task to be completed.");
-        } else if(index < 0 || index >= tasks.size()) {
+        } else if (index < 0 || index >= tasks.size()) {
             throw new DukeTaskException("Please enter a valid task index ranging from 1 to " + tasks.size() +
                     " (inclusive).");
         } else {

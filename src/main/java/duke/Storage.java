@@ -29,7 +29,7 @@ public class Storage {
     public static void saveTasks(List<Task> tasks) throws DukeSaveException {
         // Create the 'data' folder if missing
         File dir = new File("data");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
 
@@ -57,7 +57,7 @@ public class Storage {
     public static void loadTasksTo(TaskManager taskManager) throws DukeLoadException {
         // Create the 'data' folder if missing
         File dir = new File("data");
-        if(!dir.exists()) {
+        if (!dir.exists()) {
             dir.mkdir();
         }
 
@@ -67,7 +67,7 @@ public class Storage {
 
         try {
             // If the save file already exists, load its tasks
-            if(!file.createNewFile()) {
+            if (!file.createNewFile()) {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String[] splits = scanner.nextLine().split(" \\| ");
@@ -76,14 +76,14 @@ public class Storage {
                     switch (splits[0]) {
                     case "T":
                         ToDo toDo = taskManager.addToDo(splits[2]);
-                        if(isDone) {
+                        if (isDone) {
                             toDo.markAsDone();
                         }
                         break;
                     case "D":
                         LocalDateTime dateTime = LocalDateTime.parse(splits[3], formatter);
                         Deadline deadline = taskManager.addDeadline(splits[2], dateTime);
-                        if(isDone) {
+                        if (isDone) {
                             deadline.markAsDone();
                         }
                         break;
@@ -91,7 +91,7 @@ public class Storage {
                         LocalDateTime start = LocalDateTime.parse(splits[3], formatter);
                         LocalDateTime end = LocalDateTime.parse(splits[4], formatter);
                         Event event = taskManager.addEvent(splits[2], start, end);
-                        if(isDone) {
+                        if (isDone) {
                             event.markAsDone();
                         }
                         break;

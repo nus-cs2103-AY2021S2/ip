@@ -23,9 +23,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute() throws DukeCommandException {
-        if(taskManager.getTasksSize() == 0) {
+        if (taskManager.getTasksSize() == 0) {
             throw new DukeCommandException("done", String.valueOf(this.index), "There are no task to be completed.");
-        } else if(index < 0 || index >= taskManager.getTasksSize()) {
+        } else if (index < 0 || index >= taskManager.getTasksSize()) {
             throw new DukeCommandException("done", String.valueOf(this.index), "Please enter a valid task index " +
                     "ranging from 1 to " + taskManager.getTasksSize() + " (inclusive).");
         } else {

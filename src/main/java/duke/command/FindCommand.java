@@ -41,8 +41,8 @@ public class FindCommand extends Command {
     public void execute() throws DukeCommandException {
         List<Task> tasksFound = taskManager.getTasks().stream()
                 .filter(task -> {
-                    if(task.getDesc().contains(keyword)) {
-                        if(targetDate != null) {
+                    if (task.getDesc().contains(keyword)) {
+                        if (targetDate != null) {
                             switch (task.getTypeSymbol()) {
                             case "D":
                                 LocalDate due = ((Deadline) task).getDateTime().toLocalDate();
