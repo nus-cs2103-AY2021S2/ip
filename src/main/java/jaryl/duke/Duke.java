@@ -41,7 +41,7 @@ public class Duke {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        boolean exitFlag = false;
+        boolean isExit = false;
         output.printWelcomeMsg();
 
         while(sc.hasNextLine()) {
@@ -51,9 +51,8 @@ public class Duke {
                 Command cmd = Command.valueOf(input.split(" ")[0].toUpperCase());
 
                 switch (cmd) {
-                    case BYE:
-                        output.printByeMsg();
-                        exitFlag = true;
+                    case EXIT:
+                        isExit = output.printByeMsg();
                         break;
                     case LIST:
                         output.listAction(tasksList);
@@ -72,6 +71,9 @@ public class Duke {
                     case FIND:
                         output.findAction(tasksList, input);
                         break;
+                    case HELP:
+                        output.sendHelp();
+                        break;
                 }
             } catch (IllegalArgumentException e) {
                 output.printIllegalArgumentError();
@@ -79,7 +81,7 @@ public class Duke {
                 System.out.println(e1);
             }
 
-            if(exitFlag) break;
+            if(isExit) break;
         }
     }
 }
