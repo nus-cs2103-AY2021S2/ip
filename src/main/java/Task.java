@@ -5,16 +5,31 @@
  */
 public class Task {
     protected String description;
+    protected String type;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(String description, String type) {
         this.description = description;
         this.isDone = false;
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public Task setDone() {
         this.isDone = true;
         return this;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+
+    public boolean getDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
