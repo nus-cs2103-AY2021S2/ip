@@ -1,18 +1,30 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 //Deadline class with Date
-public class Deadlines extends Task{
-    protected String deadline;
-    public Deadlines(String name, String deadline) {
+public class Deadlines extends Task {
+    private LocalDate deadlineDate;
+    private LocalTime deadlineTime;
+
+    public Deadlines(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
 
         super(name);
-        this.deadline = deadline;
+        this.deadlineDate = deadlineDate;
+        this.deadlineTime = deadlineTime;
+
     }
 
-    public String getDeadline() {
-        return deadline;
+    public String getDeadlineDate() {
+        return saveDateFormat.format(deadlineDate);
     }
+    public String getDeadlineTime() {
+        return saveTimeFormat.format(deadlineTime);
+    }
+
     @Override
     public String toString() {
-        return "[D]"+super.toString()+" (by: "+deadline+")";
+        return "[D]" + super.toString() + " (by: "
+                + printDateFormat.format(deadlineDate) + " " + printTimeFormat.format(deadlineTime) + ")";
     }
 }
