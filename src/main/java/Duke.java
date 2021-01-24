@@ -1,15 +1,14 @@
 package main.java;
 
-<<<<<<< HEAD
 import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-=======
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
->>>>>>> branch-Level-8
+
 
 import java.util.Scanner;
 import java.util.List;
@@ -174,7 +173,6 @@ public class Duke {
         }
     }
 
-<<<<<<< HEAD
     private static String parseTasksToString(List<Task> tasks) {
         String content = "";
         for (Task task : tasks) {
@@ -252,7 +250,9 @@ public class Duke {
             bw.close();
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
-=======
+        }
+    }
+
     private static void printTasks(LocalDate date) {
         if (getTaskCount() == 0) {
             ollySpeak("You currently have no tasks! Use todo, deadline or event.");
@@ -263,7 +263,7 @@ public class Duke {
                     System.out.println(i+1 + ". " + tasks.get(i));
                 }
             }
->>>>>>> branch-Level-8
+
         }
     }
 
