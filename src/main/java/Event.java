@@ -9,6 +9,11 @@ public class Event extends Task {
     this.time = LocalDate.parse(time);
   }
 
+  public Event(String description, boolean isDone, String time) {
+    super(description, isDone);
+    this.time = LocalDate.parse(time);
+  }
+
   @Override
   public String toString() {
     return String.format("[E]%s (at: %s)", super.toString(), time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
