@@ -4,7 +4,6 @@ public class InputCommand {
     private final String command;
     private final String argument;
     private final String date;
-
     private final String line = "\n____________________________________________________________";
 
     enum predefinedCommand {
