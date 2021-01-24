@@ -5,6 +5,7 @@ public enum UserInputType {
     DEADLINE,
     EVENT,
     DONE,
+    FIND,
     DELETE,
     LIST,
     BYE

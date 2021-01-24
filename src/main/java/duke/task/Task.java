@@ -24,6 +24,15 @@ public class Task {
     }
 
     /**
+     * Returns the description of the task
+     *
+     * @return Description of the task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns an icon representing the completion status of the task.
      * If the task is done, a cross is returned.
      *

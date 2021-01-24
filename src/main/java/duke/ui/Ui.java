@@ -25,6 +25,9 @@ public class Ui {
     private static final String TASK_REMOVED_MESSAGE = INDENTATION + "Noted. This task has been removed:";
     private static final String EMPTY_LIST_MESSAGE = INDENTATION + "It seems like there is nothing in your list.";
     private static final String PRINT_LIST_MESSAGE = INDENTATION + "Here are the tasks in your list:";
+    private static final String NO_FOUND_TASK_MESSAGE =
+            INDENTATION + "It seems like there is no task matching your keyword:";
+    private static final String PRINT_FOUND_TASKS_MESSAGE = INDENTATION + "Here are the matching tasks in your list:";
 
     /**
      * Initializes the required object for an Ui object.
@@ -159,11 +162,36 @@ public class Ui {
             System.out.println(EMPTY_LIST_MESSAGE);
         } else {
             System.out.println(PRINT_LIST_MESSAGE);
-            for (int i = 1; i <= tasks.getTaskCount(); ++i) {
-                System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
-            }
+            printTasks(tasks);
         }
         printPartitionLine();
+    }
+
+    /**
+     * Prints all the tasks found by a keyword after formatting.
+     *
+     * @param tasks List of found tasks.
+     */
+    public void printAllFoundTasks(TaskList tasks) {
+        printPartitionLine();
+        if (tasks.isEmpty()) {
+            System.out.println(NO_FOUND_TASK_MESSAGE);
+        } else {
+            System.out.println(PRINT_FOUND_TASKS_MESSAGE);
+            printTasks(tasks);
+        }
+        printPartitionLine();
+    }
+
+    /**
+     * Prints all the tasks in the given TaskList.
+     *
+     * @param tasks TaskList to be printed.
+     */
+    public void printTasks(TaskList tasks) {
+        for (int i = 1; i <= tasks.getTaskCount(); ++i) {
+            System.out.println("    " + i + "." + tasks.getTask(i - 1).toString());
+        }
     }
 
 }
