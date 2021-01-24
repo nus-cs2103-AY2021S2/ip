@@ -8,20 +8,59 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    private static final String SPLIT_REGEX = "|";
+    private static final String SPLIT_REGEX = "-'@,-@,1'-";
 
     private enum TaskType { TODO, EVENT, DEADLINE }
 
-    public static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
+    private String fileToEdit;
+
+    public FileIO(String fileName, String filePath) {
+        filePath = createDirectory(filePath);
+        fileToEdit = filePath+fileName;
+    }
+
+    private String createDirectory(String filePath) {
+        File file = new File(filePath);
+
+        file.mkdirs();
+
+        //Remove directory and use root instead since it invalid
+        if(!file.isDirectory()) {
+            return "";
+        }
+        return filePath;
+    }
+
+    public void writeTasksToFIle(List<Task> taskList) {
+        String textToAdd = convertStringsToString(convertTasksToStrings(taskList));
+        try {
+            writeToFile(textToAdd);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void writeToFile(String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(fileToEdit);
         fw.write(textToAdd);
         fw.close();
     }
 
-    private List<String> readFile(String filePath) throws FileNotFoundException {
+    public List<Task> tryReadTaskFile() {
+        List<Task> taskList = new ArrayList<Task>();
+        try {
+            List<String> stringList = readFile();
+            taskList = parseStringsToTasks(stringList);
+        }catch (FileNotFoundException e) {
+            //Do nothing, return empty list.
+        }
+        return taskList;
+    }
+
+    private List<String> readFile() throws FileNotFoundException {
         List<String> stringList = new ArrayList<String>();
 
-        File f = new File(filePath);
+        File f = new File(fileToEdit);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
             stringList.add(s.nextLine());
