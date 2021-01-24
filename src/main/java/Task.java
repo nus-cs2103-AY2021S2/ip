@@ -18,9 +18,9 @@ public class Task {
      * Task is initially not done at creation.
      * @param description The input given by the user.
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -44,6 +44,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+            return "[" + getStatusIcon() + "] " + description;
     }
 }

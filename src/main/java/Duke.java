@@ -1,4 +1,10 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,15 +15,18 @@ public class Duke {
     static int totalTasks = 0;
     static boolean endOfCycle = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         greet();
 
         Scanner sc = new Scanner(System.in);
+        FileOutputStream fos = new FileOutputStream("duke.txt", true);
 
         String username = sc.nextLine();
         nextGreet(username);
 
         ArrayList<Task> tasks = new ArrayList<>();
+        readFileIntoList("duke.txt", tasks);
+        fos.close();
 
         while(!endOfCycle) {
             System.out.print(username + ": ");
@@ -39,8 +48,52 @@ public class Duke {
                 System.out.println(e);
             }
         }
-
         sc.close();
+
+        PrintWriter writer = new PrintWriter("duke.txt");
+        for (Task item:
+             tasks) {
+            writer.println(item.toString());
+        }
+        writer.close();
+
+
+    }
+
+    public static void readFileIntoList(String file, ArrayList<Task> tasks) {
+        List<String> lines = Collections.emptyList();
+        try {
+            lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        for (String object: lines) {
+            if (object.charAt(1) == 'T') {
+                if (object.charAt(4) == '-') {
+                    tasks.add(new Todo(object.substring(7), true));
+                } else {
+                    tasks.add(new Todo(object.substring(7), false));
+                }
+            } else {
+                String dateInfo = object.substring(object.indexOf("(") + 5, object.indexOf(")"));
+                if (object.charAt(1) == 'D') {
+                    if (object.charAt(4) == '-') {
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                    } else {
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                    }
+                } else if (object.charAt(1) == 'E') {
+                    if (object.charAt(4) == '-') {
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                    } else {
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                    }
+                }
+            }
+                taskAdded();
+        }
     }
 
     /**
@@ -95,7 +148,7 @@ public class Duke {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String command = nextInput.substring(5);
-        tasks.add(new Todo(command));
+        tasks.add(new Todo(command, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
@@ -117,7 +170,7 @@ public class Duke {
         }
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Deadline(command, dateInfo));
+        tasks.add(new Deadline(command, dateInfo, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
@@ -139,7 +192,7 @@ public class Duke {
         }
         String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Event(command, dateInfo));
+        tasks.add(new Event(command, dateInfo, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
