@@ -19,7 +19,6 @@ public class TaskList {
 
     public void addTask(Task task) {
         taskList.add(task);
-//        printAddedMessage(task);
     }
     
     public void deleteTask(int index) {
@@ -28,6 +27,10 @@ public class TaskList {
     
     public Task getTask(int index) {
         return taskList.get(index);
+    }
+    
+    public void completeTask(int index) {
+        taskList.get(index).completeTask();
     }
     
     // Returns an unmodifiable view collection

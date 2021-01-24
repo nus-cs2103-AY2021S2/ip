@@ -25,7 +25,10 @@ public class Storage {
         return filePath.endsWith(".txt");
     }
 
-    public void saveTasks(TaskList taskList) throws StorageException {
+    public void saveTasksIfPresent(TaskList taskList) throws StorageException {
+        if (taskList == null) {
+            return;
+        }
         try {
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
             Files.write(path, taskStrings);
