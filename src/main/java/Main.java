@@ -1,14 +1,13 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     private Storage storage;
     private Scanner sc;
-    private List<Task> taskList;
     private State state;
+    private TaskList taskList;
 
     public static void main(String[] args) {
         new Main().run(args);
@@ -135,13 +134,13 @@ public class Main {
         }
     }
 
-    private void printAllTasks() {
+    public void printAllTasks() {
         if (taskList.isEmpty()) {
             System.out.println("You do not have anything to do at the moment!");
         } else {
             System.out.println("Here are the tasks in your list:");
             for (int i = 1; i <= taskList.size(); i++) {
-                System.out.printf("%d.%s\n", i, taskList.get(i - 1).toString());
+                System.out.printf("%d.%s\n", i, taskList.getTask(i - 1).toString());
             }
         }
     }
@@ -164,7 +163,8 @@ public class Main {
             break;
         }
         if (task != null) {
-            addTask(task);
+            taskList.addTask(task);
+            printAddedMessage(task);
         }
     }
 
@@ -196,6 +196,23 @@ public class Main {
         return new EventTask(eventTaskName, eventTime);
     }
 
+    private void deleteTask(String arguments) throws NoDescriptionException,
+            InvalidDescriptionException, IndexOutOfBoundsException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException("Please indicate a task number to be deleted.");
+        }
+        try {
+            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
+            Task task = taskList.getTask(index);
+            taskList.deleteTask(index);
+            printDeletedMessage(task);
+        } catch (NumberFormatException ex) {
+            throw new InvalidDescriptionException("Please enter a valid task number");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new InvalidDescriptionException("Please enter a valid index!");
+        }
+    }
+
     private void markTaskAsDone(String arguments) throws NoDescriptionException,
             InvalidDescriptionException, IndexOutOfBoundsException {
         if (arguments.isBlank()) {
@@ -203,7 +220,7 @@ public class Main {
         }
         try {
             int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
-            Task task = taskList.get(index);
+            Task task = taskList.getTask(index);
             task.completeTask();
             printMarkedAsDoneMessage(task);
         } catch (NumberFormatException ex) {
@@ -218,34 +235,12 @@ public class Main {
         System.out.println(task.toString());
     }
 
-    private void addTask(Task task) {
-        taskList.add(task);
-        printAddedMessage(task);
-    }
-
     private void printAddedMessage(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task.toString());
         System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
     }
-
-    private void deleteTask(String arguments) throws NoDescriptionException,
-            InvalidDescriptionException, IndexOutOfBoundsException {
-        if (arguments.isBlank()) {
-            throw new NoDescriptionException("Please indicate a task number to be deleted.");
-        }
-        try {
-            int index = Integer.parseInt(arguments.strip()) - 1;  // Account for 0-based indexing
-            Task task = taskList.get(index);
-            taskList.remove(index);
-            printDeletedMessage(task);
-        } catch (NumberFormatException ex) {
-            throw new InvalidDescriptionException("Please enter a valid task number");
-        } catch (IndexOutOfBoundsException ex) {
-            throw new InvalidDescriptionException("Please enter a valid index!");
-        }
-    }
-
+    
     private void printDeletedMessage(Task task) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task.toString());

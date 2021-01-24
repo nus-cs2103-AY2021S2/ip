@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Storage {
         return filePath.endsWith(".txt");
     }
 
-    public void saveTasks(List<Task> taskList) throws StorageException {
+    public void saveTasks(TaskList taskList) throws StorageException {
         try {
             List<String> taskStrings = Storage.convertAllTasksToString(taskList);
             Files.write(path, taskStrings);
@@ -33,15 +34,14 @@ public class Storage {
         }
     }
 
-    public List<Task> loadTasks() throws IOException {
+    public TaskList loadTasks() throws IOException {
+        TaskList taskList = new TaskList();
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
-            return new ArrayList<>();
+            return taskList;
         }
-        List<String> taskStrings = Files.readAllLines(path);  // need to handle SecurityException?
-        List<Task> taskList = new ArrayList<>();
+        List<String> taskStrings = Files.readAllLines(path);  
         for (String s : taskStrings) {
-            System.out.println("String s: " + s);
-            taskList.add(Storage.convertStringToTask(s));
+            taskList.addTask(Storage.convertStringToTask(s));
         }
         return taskList;
     }
@@ -53,21 +53,23 @@ public class Storage {
         String taskStatus = arr[1];
         String taskName = arr[2];
         boolean isTaskCompleted = taskStatus.equals("1");
-        if (taskType.equals("T")) {
+        if (taskType.equals(ToDoTask.IDENTIFIER)) {
             task = new ToDoTask(taskName, isTaskCompleted);
-        } else if (taskType.equals("D")) {
+        } else if (taskType.equals(DeadlineTask.IDENTIFIER)) {
             String taskDescription = arr[3];
-            task = new DeadlineTask(taskName, isTaskCompleted, taskDescription);
-        } else if (taskType.equals("E")) {
+            LocalDateTime deadline = LocalDateTime.parse(taskDescription, Formatter.OUTPUT_DATE_FORMATTER);
+            task = new DeadlineTask(taskName, isTaskCompleted, deadline);
+        } else if (taskType.equals(EventTask.IDENTIFIER)) {
             String taskDescription = arr[3];
             task = new EventTask(taskName, isTaskCompleted, taskDescription);
         }
         return task;
     }
 
-    public static List<String> convertAllTasksToString(List<Task> taskList) {
+    public static List<String> convertAllTasksToString(TaskList taskList) {
         List<String> taskStrings = new ArrayList<>();
-        for (Task task : taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.getTask(i);
             taskStrings.add(Storage.convertTaskToString(task));
         }
         return taskStrings;
