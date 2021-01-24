@@ -19,13 +19,12 @@ public class Ui {
     }
     
     public String getUserInput() {
-        return in.nextLine();
+        show(DIVIDER);
+        String userInput = in.nextLine();
+        show(DIVIDER);
+        return userInput;
     }
     
-    public void printDivider() {
-        show(DIVIDER);
-    }
-
     public void printGreeting() {
         String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO);
         show(DIVIDER, welcomeMsg);

@@ -36,9 +36,10 @@ public class Parser {
             return parseArgumentsForDelete(arguments);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-        case HelpCommand.COMMAND_WORD:  // Fallthrough
-        default:
+        case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        default:
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -100,14 +101,4 @@ public class Parser {
             throw new InvalidDescriptionException("Please enter a valid task number");
         }
     }
-
-//    public static Command parseCommand(String userInputCommand) throws InvalidCommandException {
-//        try {
-//            return Command.valueOf(userInputCommand.toUpperCase());
-//        } catch (IllegalArgumentException e) {
-//            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-//        }
-//        
-//        
-//    }
 }

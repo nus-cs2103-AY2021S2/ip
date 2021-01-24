@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,7 +19,11 @@ public class Storage {
         if (!isValidFilePath(path)) {
             throw new InvalidStorageFilePathException("The file path of a storage file should end with '.txt'");
         }
-        this.path = Path.of(path); // may throw InvalidPathException here?
+        try {
+            this.path = Path.of(path);
+        } catch (InvalidPathException ex) {
+            throw new InvalidStorageFilePathException("Invalid path detected.");
+        }
     }
 
     private static boolean isValidFilePath(String filePath) {
