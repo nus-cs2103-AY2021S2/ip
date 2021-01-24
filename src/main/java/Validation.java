@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Validation {
 
-    public void checkValidCommand(String command) throws DukeException {
+    public static void checkValidCommand(String command) throws DukeException {
         String[] validCommands = new String[]{"todo", "deadline", "event", "list", "bye", "done", "delete"};
         List<String> commands = Arrays.asList(validCommands);
         int index = command.indexOf(' ');
@@ -27,13 +27,13 @@ public class Validation {
         }
     }
 
-    public void checkForSchedule(String command, int findSlash) throws DukeException {
+    public static void checkForSchedule(String command, int findSlash) throws DukeException {
         if ((findSlash <= -1) || command.endsWith("/") || command.substring(findSlash + 1).isBlank()) {
             throw new DukeException(":( OOPS! Please input a valid time/date");
         }
     }
 
-    public void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
+    public static void checkValidRange(int taskSize, int chosenNumber) throws DukeException {
         if(chosenNumber > taskSize) {
             throw new DukeException(":( OOPS! This task does not exist! Use 'list' to check your task numbers!");
         }

@@ -4,7 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class DateValidation {
 
-    public LocalDate handleDate(String date) throws DukeException {
+    public static LocalDate handleDate(String date) throws DukeException {
         LocalDate verifiedDate = null;
         try {
             verifiedDate = LocalDate.parse(date);
