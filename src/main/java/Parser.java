@@ -5,14 +5,16 @@ public class Parser {
 
     protected Storage storage;
     protected TaskList tasks;
+    protected Ui ui;
     protected String command;
     protected int index;
     protected int findSlash;
     protected int taskIdentifier;
 
-    public Parser(Storage storage, TaskList tasks) {
+    public Parser(Storage storage, TaskList tasks, Ui ui) {
         this.storage = storage;
         this.tasks = tasks;
+        this.ui = ui;
     }
 
     public void handleToDo() throws IOException {
@@ -20,9 +22,7 @@ public class Parser {
         ToDo newToDo = new ToDo(descriptionTask);
         tasks.add(newToDo);
         storage.addTask(newToDo);
-        System.out.println("Done! One new task:\n" + newToDo.toString() + "\nNow you have " +
-                tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
-                " in the list");
+        ui.responseToAddTask(newToDo,tasks.getSize());
     }
 
     public void handleDeadline() {
@@ -33,9 +33,7 @@ public class Parser {
             Deadline newDeadline = new Deadline(descriptionDeadline, date);
             tasks.add(newDeadline);
             storage.addTask(newDeadline);
-            System.out.println("Done! One new task:\n" + newDeadline.toString() +
-                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
-                    " in the list");
+            ui.responseToAddTask(newDeadline,tasks.getSize());
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -49,9 +47,7 @@ public class Parser {
             Event newEvent = new Event(descriptionEvent, time);
             tasks.add(newEvent);
             storage.addTask(newEvent);
-            System.out.println("Done! One new task:\n" + newEvent.toString() +
-                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
-                    " in the list");
+            ui.responseToAddTask(newEvent,tasks.getSize());
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -62,8 +58,8 @@ public class Parser {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
             Task toMark = tasks.find(taskIdentifier - 1);
-            String response = storage.markTask(toMark);
-            System.out.println(response);
+            storage.markTask(toMark);
+            ui.responseToDone(toMark);
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -76,9 +72,7 @@ public class Parser {
             Task selected = tasks.find(taskIdentifier - 1);
             tasks.delete(taskIdentifier - 1);
             storage.deleteTask(selected);
-            System.out.println("Noted, I've removed this task:\n" + selected.toString() +
-                    "\nNow you have " + tasks.getSize() + ((tasks.getSize() == 1) ? " task" : " tasks") +
-                    " in the list");
+            ui.responseToDelete(selected,tasks.getSize());
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -112,10 +106,10 @@ public class Parser {
             } else {
                 switch (command) {
                 case "bye":
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.responseToBye();
                     break;
                 case "list":
-                    System.out.println("Here are the tasks in your list:");
+                    ui.responseToList(tasks.getSize());
                     tasks.list();
                     break;
                 }

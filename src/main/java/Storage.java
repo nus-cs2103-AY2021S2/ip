@@ -37,10 +37,15 @@ public class Storage {
         fw.close();
     }
 
-    public List<Task> loadTasks() throws FileNotFoundException {
+    public List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<Task>();
         if (this.fileOriginallyPresent) {
-            Scanner contents = new Scanner((this.localFile));
+            Scanner contents = null;
+            try {
+                contents = new Scanner((this.localFile));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             while (contents.hasNext()) {
                 String data = contents.nextLine();
                 Character type = data.charAt(1);
@@ -96,7 +101,7 @@ public class Storage {
         temp.delete();
     }
 
-    public String markTask(Task task) throws IOException {
+    public void markTask(Task task) throws IOException {
         File temp = new File("data/temp.txt");
         temp.createNewFile();
         FileWriter tempFile = new FileWriter(temp, true);
@@ -108,14 +113,13 @@ public class Storage {
             if (!data.equals(task.toString())) {
                 tempFile.write(data + "\n");
             } else {
-                response = task.markAsDone();
+                task.markAsDone();
                 tempFile.write(task.toString() + "\n");
             }
         }
         tempFile.close();
         copyFile(temp, localFile);
         temp.delete();
-        return response;
     }
 
     public void copyFile(File input, File output) throws IOException {
