@@ -9,13 +9,13 @@ public class Event extends Task{
         this.time = LocalDate.parse(time);
     }
 
-    public String getTime() {
+    public String getFormattedTime() {
         return this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
 
     @Override
     public String toString() {
-        return "[E] " + super.toString() + " (at: " + this.getTime() + ")" ;
+        return "[E] " + super.toString() + " (at: " + this.getFormattedTime() + ")" ;
     }
 }

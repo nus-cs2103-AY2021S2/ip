@@ -9,13 +9,13 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
-    public String getDeadline() {
+    public String getFormattedDeadline() {
         return this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.getDeadline() + ")";
+        return "[D] " + super.toString() + " (by: " + this.getFormattedDeadline() + ")";
     }
 
 }
