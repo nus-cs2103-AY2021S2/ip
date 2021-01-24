@@ -124,51 +124,91 @@ public class FakeBot {
             ui.printTasks(taskList);
             break;
         case DONE:
-            int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-            taskList.getTask(doneIndex).markComplete();
-            printDoneMessage(taskList.getTask(doneIndex));
-            saveHistory();
+            processDoneCommand(command);
             break;
         case TODO:
-            ToDos todoTask = new ToDos(command.getDescription());
-            taskList.addTask(todoTask);
-            printAddedTaskMessage(todoTask);
-            saveHistory();
+            processTodoCommand(command);
             break;
         case DEADLINE:
-            String[] deadlineDetalis = command.getDescription().split(DEADLINE_SPLIT_REGEX);
-            String[] dates = deadlineDetalis[1].split(" ");
-            LocalDate date = LocalDate.parse(dates[0]);
-            LocalTime time = LocalTime.parse(dates[1]);
-            Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date, time);
-            taskList.addTask(deadlineTask);
-            printAddedTaskMessage(deadlineTask);
-            saveHistory();
+            processDeadlineCommand(command);
             break;
         case EVENT:
-            String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
-            String[] eventDates = eventDetails[1].split(" ");
-            LocalDate startDate = LocalDate.parse(eventDates[0]);
-            LocalTime startTime = LocalTime.parse(eventDates[1]);
-            LocalDate endDate = LocalDate.parse(eventDates[2]);
-            LocalTime endTime = LocalTime.parse(eventDates[3]);
-            Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
-            taskList.addTask(eventTask);
-            printAddedTaskMessage(eventTask);
-            saveHistory();
+            processEventCommand(command);
             break;
         case DELETE:
-            int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
-            Task deletedTask = taskList.getTask(deleteIndex);
-            taskList.removeTask(deleteIndex);
-            printDeleteMessage(deletedTask);
-            saveHistory();
+            processDeleteCommand(command);
         case FIND:
             ui.printTasks(new TaskList(taskList.find(command.getDescription())));
             break;
         }
 
         return true;
+    }
+
+    /**
+     * Process Done Command
+     * @param command Command to Process
+     */
+    private void processDoneCommand(Command command) {
+        int doneIndex = Integer.parseInt(command.getDescription()) - 1;
+        taskList.getTask(doneIndex).markComplete();
+        printDoneMessage(taskList.getTask(doneIndex));
+        saveHistory();
+    }
+
+    /**
+     * Process Todos Command
+     * @param command Command to Process
+     */
+    private void processTodoCommand(Command command) {
+        ToDos todoTask = new ToDos(command.getDescription());
+        taskList.addTask(todoTask);
+        printAddedTaskMessage(todoTask);
+        saveHistory();
+    }
+
+    /**
+     * Process Deadline Command
+     * @param command Command to Process
+     */
+    private void processDeadlineCommand(Command command) {
+        String[] deadlineDetalis = command.getDescription().split(DEADLINE_SPLIT_REGEX);
+        String[] dates = deadlineDetalis[1].split(" ");
+        LocalDate date = LocalDate.parse(dates[0]);
+        LocalTime time = LocalTime.parse(dates[1]);
+        Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date, time);
+        taskList.addTask(deadlineTask);
+        printAddedTaskMessage(deadlineTask);
+        saveHistory();
+    }
+
+    /**
+     * Process Event Command
+     * @param command Command to Process
+     */
+    private void processEventCommand(Command command) {
+        String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
+        String[] eventDates = eventDetails[1].split(" ");
+        LocalDate startDate = LocalDate.parse(eventDates[0]);
+        LocalTime startTime = LocalTime.parse(eventDates[1]);
+        LocalDate endDate = LocalDate.parse(eventDates[2]);
+        LocalTime endTime = LocalTime.parse(eventDates[3]);
+        Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
+        taskList.addTask(eventTask);
+        printAddedTaskMessage(eventTask);
+        saveHistory();
+    }
+
+    /**
+     * Process Delete Command
+     * @param command Command to Process
+     */
+    private void processDeleteCommand(Command command) {
+        int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
+        Task deletedTask = taskList.getTask(deleteIndex);
+        taskList.removeTask(deleteIndex);
+        printDeleteMessage(deletedTask);
+        saveHistory();
     }
 
     /**
