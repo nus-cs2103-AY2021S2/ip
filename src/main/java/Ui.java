@@ -12,6 +12,6 @@ public class Ui {
     }
 
     public static void showLoadingError() {
-        System.out.println("Oh No Flamingo! The save data could not be loaded.");
+        System.out.println("\nOh No Flamingo! The save data could not be loaded.\n");
     }
 }

@@ -9,6 +9,11 @@ import java.util.Scanner;
 public class Parser {
     public static Scanner sc = new Scanner(System.in);
 
+    /**
+     * Checks user input and catches exceptions.
+     * @param storage
+     * @param tasks
+     */
     public static void run(Storage storage, TaskList tasks) {
         while (true) {
             try {
@@ -33,7 +38,12 @@ public class Parser {
         }
     }
 
-    // Checks the user input and throws exceptions
+    /**
+     * Makes sense of the user input.
+     * @param userInput
+     * @param tasks
+     * @throws Exception
+     */
     public static void startResponse(String userInput, TaskList tasks) throws Exception {
 
         if (userInput.equals("list")) {

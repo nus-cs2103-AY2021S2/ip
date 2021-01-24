@@ -2,11 +2,10 @@ import java.io.FileNotFoundException;
 
 public class Flamingo {
 
-    private Storage storage;
+    private Storage storage = new Storage();
     private TaskList tasks;
 
-    public Flamingo() throws FileNotFoundException {
-        storage = new Storage();
+    public Flamingo() {
         try {
             tasks = new TaskList(storage.loadData());
         } catch (FileNotFoundException e) {
@@ -18,7 +17,7 @@ public class Flamingo {
         Parser.run(storage, tasks);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         new Flamingo();
     }
 }

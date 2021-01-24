@@ -22,14 +22,19 @@ public class Storage {
         this.pathExists = java.nio.file.Files.exists(path);
     }
 
+    /**
+     * Transfers contents from tasks ArrayList to data.txt file.
+     * If data.txt file exists, the previous content is cleared.
+     * @param tasks
+     * @throws IOException
+     */
     public void saveData(TaskList tasks) throws IOException {
         try {
             if (pathExists) {
                 java.nio.file.Files.write(path, "".getBytes(),
-                        StandardOpenOption.TRUNCATE_EXISTING); // Clear previous contents
+                        StandardOpenOption.TRUNCATE_EXISTING);
             }
 
-            // Transfer contents from tasks ArrayList to data.txt
             for (Task t : tasks.tasks) {
                 byte[] bytes = t.saveTask().getBytes();
                 if (!pathExists) {
@@ -40,10 +45,15 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Oh no Flamingo! I cannot save the data!");
+            System.out.println("\nOh no Flamingo! I cannot save the data!\n");
         }
     }
 
+    /**
+     * Loads data from data.txt into tasks ArrayList.
+     * @return
+     * @throws FileNotFoundException
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException {
         if (pathExists) {
             Scanner taskList = new Scanner(new File(String.valueOf(path)));
@@ -71,7 +81,7 @@ public class Storage {
             }
             return tasks;
         } else {
-            return new ArrayList<Task>();
+            return new ArrayList<>();
         }
     }
 }
