@@ -8,13 +8,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Duke.Task.*;
 
+/**
+ * A class handles tasks on saving tasks to file and loading tasks from file.
+ */
 public class Storage {
     private String path;
 
+    /**
+     * This class constructor has 1 parameter: a string path to the destination file for reading and writing the data.
+     * @param path The destination file for reading and writing the data.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Loads the data from the file when the application starts running.
+     * @return A list containing all the tasks stored in the file.
+     */
     public ArrayList<Task> readDataFromFile(){
         try {
             File f = new File(path);
@@ -51,6 +62,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the data to the file after every update (adding or deleting a task)
+     * @param list A list containing all the tasks that needs to be saved.
+     */
     public void writeDataToFile(ArrayList<Task> list){
         try {
             File f = new File(path);

@@ -6,19 +6,35 @@ import Duke.Command.*;
 import Duke.Constant.*;
 import java.util.ArrayList;
 
+/**
+ * A wrapper class that contains all available tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private Parser parser;
 
+    /**
+     * This class constructor has 1 parameter: a list containing all available tasks.
+     * @param list A list of all available tasks.
+     */
     public TaskList(ArrayList<Task> list) {
         this.list = list;
         this.parser = new Parser();
     }
 
+    /**
+     * Returns a list containing all available tasks.
+     * @return A list containing all available tasks.
+     */
     public ArrayList<Task> getList() {
         return list;
     }
 
+    /**
+     * Marks a task in the list, which is specified by an index (1-based), as done.
+     * @param index A number between 1 and the number of tasks in the list.
+     * @return The status of this command whether it succeeds or fails.
+     */
     public String finishTask(int index){
         try{
           Task task = list.get(index - 1);
@@ -29,6 +45,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the list, which is specified by an index (1-based).
+     * @param index A number between 1 and the number of tasks in the list.
+     * @return The status of the deletion whether it succeeds or fails and update the number of tasks in the list
+     *          after a successful deletion.
+     */
     public String deleteTask(int index){
         try{
             Task task = list.remove(index - 1);
@@ -40,6 +62,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a new task to the list and the command must be a Deadline, Event or Todo.
+     * @param command A string that contain the information about the task that needs to be added.
+     * @return The status of this command it succeeds or fails and update the number of tasks in the list.
+     * @throws NoSuchCommandException The command is not of type Deadline, Event or Todo.
+     * @throws EmptyTaskException A task with no description.
+     * @throws InvalidTask A Deadline or Event command without its signature word ("/by" and "/at" respectively).
+     */
     public String addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
         if (command.equalsIgnoreCase(Command.TODO.getAction()) ||
                 command.equalsIgnoreCase(Command.DEADLINE.getAction()) ||

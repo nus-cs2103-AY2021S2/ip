@@ -1,5 +1,8 @@
 package Duke.Constant;
 
+/**
+ * A class containing all the constants used for this application.
+ */
 public class Constants {
     public static final String GREETING = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String BYE = "Bye. Hope to see you again soon!";
