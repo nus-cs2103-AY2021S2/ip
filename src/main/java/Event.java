@@ -10,7 +10,7 @@ public class Event extends Task {
 
     @Override
     public String data() {
-        return String.format("E | %s| %s", super.data(), eventTime);
+        return String.format("E | %s | %s", super.data(), eventTime);
     }
 
     @Override

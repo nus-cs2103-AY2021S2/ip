@@ -1,18 +1,7 @@
 import exceptions.DukeEmptyListException;
-import exceptions.DukeNoDescriptionException;
 import exceptions.DukeUnknownArgumentsException;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Controller {
     private final static String INDENT = "\t";
@@ -23,12 +12,12 @@ public class Controller {
             " can I do for you?" + NEWLINE;
     private final static String BYE_MSG = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
     private final static String END_COMMAND = "bye";
-    private final ArrayList<Task> list;
+    private final TaskList taskList;
     private final Storage storage;
 
     public Controller() {
         storage = Storage.getInstance();
-        list = storage.load();
+        taskList = new TaskList(storage);
     }
 
     public void run() {
@@ -62,106 +51,37 @@ public class Controller {
                 printList();
                 break;
             case DELETE:
-                deleteTask(input);
+                taskList.deleteTask(input);
                 break;
             case ADD:
                 addTask(input);
                 break;
             }
-            storage.update(list);
+           taskList.updateSave(storage);
         } catch (DukeUnknownArgumentsException e) {
             String errorMsg = String.format(INDENT + " %s", e);
             System.out.println(errorMsg);
         } catch (NumberFormatException e) {
             System.out.println(INDENT + "Please enter an integer as argument. " + e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(String.format(INDENT + "Please enter an integer within your tasks " +
-                    "size: %d.", list.size()));
+            System.out.printf(INDENT + "Please enter an integer within your tasks " +
+                    "size: %d.%n", taskList.size());
         } catch (DukeEmptyListException e) {
             System.out.println(INDENT + e);
         }
     }
 
     private void doneTask(String input) {
-        int index = Parser.stringToIndex(input, 5);
-        Task task = list.get(index);
-        task.done();
-        String output = String.format(INDENT + " Nice! I've marked this task as done:" + NEWLINE
-                + INDENT + INDENT + " %s", task);
-        System.out.println(output);
+        taskList.done(input);
     }
 
     private void addTask(String input) throws DukeUnknownArgumentsException {
-        try {
-            Task t;
-            AddCommandType command = Parser.inputToAddCommand(input);
-            switch (command) {
-            case TODO:
-                t = createTodo(input);
-                break;
-            case DEADLINE:
-                t = createDeadline(input);
-                break;
-            case EVENT:
-                t = createEvent(input);
-                break;
-            default:
-                throw new DukeUnknownArgumentsException();
-            }
-            list.add(t);
-            String output = String.format(INDENT + " Got it. I've added this task:" + NEWLINE
-                            + INDENT + INDENT + " %s" + NEWLINE + INDENT + " Now you have %d tasks "
-                            + "in the list."
-                    , t, list.size());
-            System.out.println(output);
-        } catch (DukeNoDescriptionException e) {
-            String output = String.format(INDENT + " %s", e);
-            System.out.println(output);
-        } catch (DateTimeParseException e) {
-            System.out.println(INDENT + "Date is not input correctly. " + e.getMessage());
-        }
+        taskList.add(input);
     }
 
-    private Todo createTodo(String input) throws DukeNoDescriptionException {
-        input = Parser.parseTodoInput(input);
-        return new Todo(input);
-    }
-
-
-    private Deadline createDeadline(String input) throws DukeNoDescriptionException,
-            DateTimeParseException {
-        String description = Parser.obtainDescription(input, AddCommandType.DEADLINE);
-        LocalDate deadline = Parser.obtainDate(input, AddCommandType.DEADLINE);
-        return new Deadline(description, deadline);
-    }
-
-    private Event createEvent(String input) throws DukeNoDescriptionException {
-        String description = Parser.obtainDescription(input, AddCommandType.EVENT);
-        LocalDate eventTime = Parser.obtainDate(input, AddCommandType.EVENT);
-        return new Event(description, eventTime);
-    }
 
     private void printList() {
-        System.out.println(INDENT + " Here are the tasks in your list:");
-        int num = 1;
-        for (Task task : list) {
-            String output = String.format(INDENT + " %d.%s", num, task);
-            System.out.println(output);
-            num++;
-        }
+        taskList.print();
     }
 
-    private void deleteTask(String input) throws DukeEmptyListException {
-        int index = Parser.stringToIndex(input, 7);
-        if (list.isEmpty()) {
-            throw new DukeEmptyListException();
-        }
-        Task t = list.get(index);
-        list.remove(index);
-        String output =
-                String.format(INDENT + " Noted. I've removed this task:" + NEWLINE + INDENT + INDENT
-                                + t + NEWLINE + INDENT + " Now you have %d tasks in the list.",
-                        list.size());
-        System.out.println(output);
-    }
 }
