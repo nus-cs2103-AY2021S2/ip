@@ -1,13 +1,18 @@
 package main.java;
 
-import main.java.Task;
+import java.io.*;
 
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Duke {
 
     private static List<Task> tasks = new ArrayList<Task>();
+    private static final String taskFilePath = "data/task.txt";
 
     /**
      * Returns message with additional header 'Olly', the chat bot name
@@ -64,6 +69,7 @@ public class Duke {
                 doneTask.setDone();
                 ollySpeak("Swee! This task is done:");
                 System.out.println(doneTask);
+                writeToFile(parseTasksToString(Duke.tasks));
             } else {
                 ollySpeak("The task number does not work, try again?");
             }
@@ -98,6 +104,8 @@ public class Duke {
         ollySpeak(task.addMessage + (task.addMessage == null ? "" : " ") + "I've added:");
         System.out.println(task);
         ollySpeak("You now have " + getTaskCount() + " tasks at hand.");
+
+        writeToFile(parseTasksToString(Duke.tasks));
     }
 
     /**
@@ -109,6 +117,8 @@ public class Duke {
         ollySpeak("Aww man.. I've removed this task:");
         System.out.println(task);
         ollySpeak("Now you have " + getTaskCount() + " tasks left.");
+
+        writeToFile(parseTasksToString(Duke.tasks));
     }
 
     /**
@@ -126,7 +136,90 @@ public class Duke {
         }
     }
 
+    private static String parseTasksToString(List<Task> tasks) {
+        String content = "";
+        for (Task task : tasks) {
+            content += task.toFileString() + "|";
+        }
+        return content;
+    }
+
+    private static List<Task> parseTaskFileContent(String fileContent) {
+        // convert to tasks array
+        List<Task> tempTask = new ArrayList<Task>();
+        String[] tasks = fileContent.split("\\|");
+        for (String task: tasks) {
+            String[] taskInfo = task.split(",");
+            String taskType = taskInfo[0];
+            Boolean taskStatus = taskInfo[1].equals("1");
+
+            Task newTask = new Task(taskInfo[2]);
+            if (taskType.equals("T")) {
+                newTask = new Todo(taskInfo[2], taskStatus);
+            } else if (taskType.equals("E")) {
+                newTask = new Event(taskInfo[2], taskInfo[3], taskStatus);
+            } else if (taskType.equals("D")) {
+                newTask = new Deadline(taskInfo[2], taskInfo[3], taskStatus);
+            }
+            tempTask.add(newTask);
+        }
+
+        return tempTask;
+    }
+
+    private static void createFile() throws IOException {
+        File f = new File(Duke.taskFilePath);
+        Files.createDirectories(Paths.get(Duke.taskFilePath).getParent());
+        Boolean success = f.createNewFile();
+    }
+
+    private static String fileHandler() throws FileNotFoundException {
+        // example file: T,1,read book|D,0,return book,June 6th|
+
+        File f = new File(Duke.taskFilePath);
+        Scanner s = new Scanner(f);
+        String fileContent = "";
+        while (s.hasNext()) {
+            fileContent += s.nextLine();
+        }
+        return fileContent;
+    }
+
+    private static void initFile() {
+        try {
+            String taskFileContent = fileHandler();
+            if (!taskFileContent.equals("")) {
+                Duke.tasks = parseTaskFileContent(taskFileContent);
+            }
+        } catch (FileNotFoundException ex) {
+            // create new file for task data
+            try {
+                createFile();
+            } catch (IOException ioEx) {
+                ioEx.printStackTrace();
+            }
+        } catch (ArrayIndexOutOfBoundsException arrayEx) {
+            // nothing to catch, empty file
+            ollySpeak("Your task data file is corrupted, please check!");
+        }
+    }
+
+    private static void writeToFile(String content) {
+        try {
+            File file = new File(Duke.taskFilePath);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+        } catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+
+        initFile();
+
         Scanner sc = new Scanner(System.in);
         ollySpeak("Hey! Welcome to the chatbot. What can I do for you today?");
 
@@ -135,7 +228,7 @@ public class Duke {
             try {
                 inputHandler(input);
             } catch (DukeException dukeEx) {
-                System.out.println(dukeEx);
+                dukeEx.printStackTrace();
             }
         }
     }

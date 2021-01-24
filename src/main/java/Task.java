@@ -19,6 +19,10 @@ public class Task {
         this.status = true;
     }
 
+    public String toFileString() {
+        return "";
+    }
+
     @Override
     public String toString() {
         String statusText;
