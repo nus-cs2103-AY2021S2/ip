@@ -6,10 +6,11 @@ then
     mkdir ../bin
 fi
 
-# delete output from previous run
+# delete output and data file from previous run
 if [ -e "./ACTUAL.TXT" ]
 then
     rm ACTUAL.TXT
+    rm -rf data
 fi
 
 # compile the code into the bin folder, terminates if error occurred

@@ -1,8 +1,15 @@
 package models;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Todo {
     /** String denoting eventTime fo an Event object */
-    protected String eventTime;
+    protected String eventStringDateTime;
+    protected LocalDateTime eventDateTime;
+    private static final DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static final DateTimeFormatter outputDateFormat = DateTimeFormatter.ofPattern("EEE dd MMM yyyy HH:mm");
 
     /**
      * Constructor to allow setting of the eventTime in an Event object
@@ -11,9 +18,10 @@ public class Event extends Todo {
      * @param eventTime String specific to events denoting when the event will be
      *                  occurring
      */
-    public Event(String message, String eventTime) {
+    public Event(String message, String eventStringDateTime) {
         super(message);
-        this.eventTime = eventTime;
+        this.eventStringDateTime = eventStringDateTime;
+        this.eventDateTime = parseStringToLocalDateTime(eventStringDateTime);
     }
 
     /**
@@ -24,18 +32,43 @@ public class Event extends Todo {
      * @param eventTime String specific to events denoting when the event will be
      *                  occurring
      */
-    public Event(String message, boolean isDone, String eventTime) {
+    public Event(String message, boolean isDone, String eventStringDateTime) {
         super(message, isDone);
-        this.eventTime = eventTime;
+        this.eventStringDateTime = eventStringDateTime;
+        this.eventDateTime = parseStringToLocalDateTime(eventStringDateTime);
     }
 
     /**
-     * Getter method for event time of an Event object
+     * Expects String in the format dd/MM/yyyy HHMM and returns LocalDateTime object
      * 
-     * @return String containing event time of the Event
+     * @param eventDateString String passed in with the format dd/MM/yyyy HHMM
+     * @return LocalDateTime object from String eventTimeString passed in
+     * @throws DateTimeParseException when the date time is in the wrong format
+     */
+    private LocalDateTime parseStringToLocalDateTime(String eventDateTimeString) throws DateTimeParseException {
+        return LocalDateTime.parse(
+                eventDateTimeString.length() == 15 ? eventStringDateTime : String.format("0%s", eventStringDateTime),
+                inputDateFormat);
+    }
+
+    /**
+     * Getter method for event time from LocalDateTime of an Event object
+     * 
+     * @return String containing event time of the Event, parsed from LocalDateTime
+     *         object
      */
     public String getEventTime() {
-        return this.eventTime;
+        return this.eventDateTime.format(inputDateFormat).toString();
+    }
+
+    /**
+     * Getter method for event time from LocalDateTime of an Event object
+     * 
+     * @return String containing event time of the Event, parsed from LocalDateTime
+     *         object in a prettier format
+     */
+    public String getPrettierEventTime() {
+        return String.format("%s hrs", this.eventDateTime.format(outputDateFormat).toString());
     }
 
     @Override
@@ -46,7 +79,7 @@ public class Event extends Todo {
      * @return String to be rendered to give information on the Event
      */
     public String getMessage() {
-        return String.format("[E][%s] %s (at:%s)", this.getIsDoneIcon(), this.message, this.eventTime);
+        return String.format("[E][%s] %s (at:%s)", this.getIsDoneIcon(), this.message, this.getPrettierEventTime());
     }
 
     @Override
@@ -57,6 +90,6 @@ public class Event extends Todo {
      * @return Event that is marked as done
      */
     public Event markAsDone() {
-        return new Event(this.message, true, this.eventTime);
+        return new Event(this.message, true, this.getEventTime());
     }
 }
