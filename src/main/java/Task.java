@@ -1,10 +1,22 @@
 public class Task {
+    private char taskType;
     private boolean markAsDone;
     private String taskName;
 
-    public Task(String taskName) {
-        this.markAsDone = false;
+    public Task(boolean markAsDone, String taskName) {
+        this.taskType = 'T';
+        this.markAsDone = markAsDone;
         this.taskName = taskName;
+    }
+
+    public Task(char taskType, boolean markAsDone, String taskName) {
+        this.taskType = taskType;
+        this.markAsDone = markAsDone;
+        this.taskName = taskName;
+    }
+
+    public String generateFileFormatString() {
+        return String.format("%c // %d // %s", taskType, markAsDone ? 1 : 0, taskName);
     }
 
     public void completeTask() {

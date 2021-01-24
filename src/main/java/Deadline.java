@@ -1,9 +1,14 @@
 public class Deadline extends Task{
     String dateTime;
 
-    public Deadline(String taskName, String dateTime) {
-        super(taskName);
+    public Deadline(boolean markAsDone, String taskName, String dateTime) {
+        super('D', markAsDone, taskName);
         this.dateTime = dateTime;
+    }
+
+    @Override
+    public String generateFileFormatString() {
+        return super.generateFileFormatString() + " // " + this.dateTime;
     }
 
     @Override
