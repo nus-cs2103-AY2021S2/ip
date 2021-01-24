@@ -4,7 +4,7 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class Display {
+public class Ui {
     private static void display(String str) {
         int longest = 0;
         String[] strings = str.split("\n");

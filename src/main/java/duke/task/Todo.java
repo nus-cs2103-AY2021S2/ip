@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import duke.task.Task;
 
 public class Todo extends Task {
@@ -7,6 +8,12 @@ public class Todo extends Task {
         super(description);
     }
 
+    public static Task createTodo(String[] command) throws DukeException {
+        if (command.length == 1) {
+            throw new DukeException("There's not enough information about your Todo order!");
+        }
+        return new Todo(command[1]);
+    }
     public String getFormattedString() {
         return "TODO::" + (isDone? "1::" : "0::") + description + "\n";
     }

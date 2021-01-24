@@ -1,6 +1,7 @@
 package duke.data;
 
 import duke.*;
+import duke.command.CommandType;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
+
     private static final String PATHNAME = "./src/main/java/duke/data/data.txt";
 
     public static ArrayList<Task> initialiseList() throws DukeException {

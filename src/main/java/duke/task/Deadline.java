@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,6 +13,17 @@ public class Deadline extends Task {
         super(description);
         this.date = date;
         isDone = false;
+    }
+
+    public static Task createDeadline(String[] command) throws DukeException {
+        if (command.length == 1) {
+            throw new DukeException("There's not enough information about your Deadline order!");
+        }
+        String[] args = command[1].split(" /by ", 2);
+        if (args.length == 1 || args[0].isEmpty() || args[1].isEmpty()) {
+            throw new DukeException("Looks like your Deadline order isn't complete...");
+        }
+        return new Deadline(args[0], TaskList.convertStringToDate(args[1]));
     }
 
     @Override

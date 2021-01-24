@@ -1,10 +1,13 @@
 package duke;
 
+import duke.command.*;
+import duke.task.Deadline;
+
 import java.util.Scanner;
 
-import static duke.Display.displayAllTasks;
-import static duke.Display.displayError;
-import static duke.Duke.*;
+import static duke.Ui.displayAllTasks;
+import static duke.Ui.displayError;
+import static duke.task.TaskList.*;
 import static duke.data.Data.updateDataFile;
 
 public class Parser {
@@ -13,39 +16,45 @@ public class Parser {
         try {
             return CommandType.valueOf(command.toUpperCase());
         } catch (Exception e) {
-//            return CommandType.INVALID;
-            throw new DukeException("That doesn't seem to be an item on our menu...");
+            return CommandType.INVALID;
         }
     }
 
-    public static void handleInput(Scanner sc) {
+    public static void parseAndProcessInput() {
+        Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             if (input.equals("bye")) {
                 break;
             }
-            String[] command = input.split(" ", 2);
+            String[] args = input.split(" ", 2);
+            Command command;
             try {
-                CommandType type = getCommandType(command[0]);
+                CommandType type = getCommandType(args[0]);
                 switch (type) {
                 case LIST:
-                    displayAllTasks();
+                    command = new ListCommand();
                     break;
                 case DONE:
-                    markDone(command);
+                    command = new DoneCommand(args);
                     break;
                 case TODO:
-                    // Fallthrough
+                    command = new TodoCommand(args);
+                    break;
                 case EVENT:
-                    // Fallthrough
+                    command = new EventCommand(args);
+                    break;
                 case DEADLINE:
-                    addTask(type, command);
+                    command = new DeadlineCommand(args);
                     break;
                 case DELETE:
-                    deleteTask(command);
+                    command = new DeleteCommand(args);
                     break;
+                case INVALID: default:
+                    command = new InvalidCommand();
                 }
-                updateDataFile(tasks);
+                command.process();
+                updateDataFile(Duke.tasks);
             } catch (DukeException e) {
                 displayError(e.getMessage());
             }
