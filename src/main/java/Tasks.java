@@ -1,10 +1,18 @@
+import java.io.*;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Store all the tasks in a list DS
  */
 public class Tasks {
+    private static final String DATA_PATH = "data/lihua.json";
     private List<Task> tasks;
 
     /**
@@ -128,6 +136,10 @@ public class Tasks {
      * Print out the list in a user-friendly format
      */
     public void printList() {
+        if (tasks.size() == 0) {
+            reportNoTaskRightNow();
+            return;
+        }
         System.out.println("These are the tasks in your list so far:");
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(String.format("%d.%s", i, tasks.get(i - 1)));
@@ -148,6 +160,71 @@ public class Tasks {
     public void reportTotalNumberOfTasks() {
         String noun = tasks.size() <= 1? "task": "tasks";
         System.out.println(String.format("Now you have %d %s in total. Good Luck.", tasks.size(), noun));
+    }
+
+    /**
+     * Load all tasks in the current list to hard disk as Json objects
+     */
+    public void loadTasks() {
+        try {
+            // will create a file in the path, in case the file does not exist
+            File fileChecker = new File(DATA_PATH);
+            if (!fileChecker.exists()) {
+                fileChecker.getParentFile().mkdir();
+                fileChecker.createNewFile();
+                return;
+            }
+
+            JSONParser parser = new JSONParser();
+            Reader reader = new FileReader(DATA_PATH);
+            JSONArray jsonArray = (JSONArray)parser.parse(reader);
+
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                String type = (String)jsonObject.get("type");
+                String description = (String)jsonObject.get("description");
+                boolean isDone = (boolean)jsonObject.get("isDone");
+                String time = (String)jsonObject.get("time");
+                Task t = null;
+                // either one of the cases will be entered
+                // <-> t will not be null
+                if (type.equals("todo")) {
+                    t = new ToDo(description);
+                } else if (type.equals("deadline")) {
+                    t = new Deadline(description, time);
+                } else if (type.equals("event")) {
+                    t = new Event(description, time);
+                }
+                t.setDone(isDone);
+                tasks.add(t);
+            }
+            // System.out.println("Successfully loaded task data :D");
+        } catch (IOException e) {
+            System.out.println("Something bad happens, cannot load data. :')");
+        } catch (ParseException e) {
+            System.out.println("Something bad happens, cannot load data. :')");
+        }
+    }
+
+    /**
+     * Save all tasks in the current list to hard disk as Json objects
+     */
+    public void saveTasks() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            jsonArray.add(tasks.get(i).toJsonObject());
+        }
+        try {
+            File fileToCreate = new File(DATA_PATH);
+            fileToCreate.getParentFile().mkdir();
+            fileToCreate.createNewFile();
+            FileWriter fileWriter = new FileWriter(DATA_PATH);
+            fileWriter.write(jsonArray.toJSONString());
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Sorry, this task cannot be saved right now. :')");
+        }
     }
 
     /**

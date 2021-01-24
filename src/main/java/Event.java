@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Represent an Event item, which is a child of Task
  */
@@ -22,5 +24,15 @@ public class Event extends Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[E][%s] %s (at: %s)", doneMark, name, period);
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", "event");
+        jsonObject.put("isDone", isDone);
+        jsonObject.put("description", name);
+        jsonObject.put("time", period);
+        return jsonObject;
     }
 }

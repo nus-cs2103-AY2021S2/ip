@@ -11,8 +11,12 @@ public class Lihua {
         // Initialization phase
         Scanner sc = new Scanner(System.in);
 
+        // Load tasks
+        tasks.loadTasks();
+
         // Print out welcome message
         printHello();
+
 
         // Get user input, perform operations on it
         // If the input received is the exit signal, the application exits
@@ -39,10 +43,13 @@ public class Lihua {
             tasks.printList();
         } else if (FormatChecker.isTryingToGetTaskDone(userInput)) {
             tasks.getTaskDone(userInput);
+            tasks.saveTasks();
         } else if (FormatChecker.isTryingToAddTask(userInput)) {
             tasks.addTask(userInput);
+            tasks.saveTasks();
         } else if (FormatChecker.isTryingToDeleteTask(userInput)) {
             tasks.deleteTask(userInput);
+            tasks.saveTasks();
         } else if (FormatChecker.isTryingToGetHelp(userInput)) {
             OperationTypes.printInstructions();
         } else {

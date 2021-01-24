@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Represent a task in the task list
  */
@@ -38,5 +40,9 @@ public class Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[%s] %s", doneMark, name);
+    }
+
+    public JSONObject toJsonObject() {
+        return null;
     }
 }
