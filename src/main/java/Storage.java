@@ -25,7 +25,8 @@ public class Storage {
 
     }
 
-    public File getFile()  {
+    public File getFile() throws IOException {
+        createFile();
         return this.file;
     }
 
