@@ -44,36 +44,36 @@ public class Duke {
         if (inputArr.length == 0) {
             throw new DukeException("Please enter a command!");
         } else if (inputArr.length == 1) {
-            String command = inputArr[0];
+            Command command = Command.valueOfLabel(inputArr[0]);
             handleCommand(command, null);
         } else {
-            String command = inputArr[0];
+            Command command = Command.valueOfLabel(inputArr[0]);
             String rest = inputArr[1];
             handleCommand(command, rest);
         }
     }
 
-    public static void handleCommand(String command, String rest) throws DukeException {
+    public static void handleCommand(Command command, String rest) throws DukeException {
         switch (command) {
-        case "todo":
+        case TODO:
             handleTodo(rest);
             break;
-        case "deadline":
+        case DEADLINE:
             handleDeadline(rest);
             break;
-        case "event":
+        case EVENT:
             handleEvent(rest);
             break;
-        case "bye":
+        case BYE:
             handleBye();
             break;
-        case "list":
+        case LIST:
             handleList();
             break;
-        case "done":
+        case DONE:
             handleDone(rest);
             break;
-        case "delete":
+        case DELETE:
             handleDelete(rest);
             break;
         default:
