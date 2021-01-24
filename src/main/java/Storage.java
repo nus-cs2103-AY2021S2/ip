@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileIO {
+public class Storage {
 
     private String fileToEdit;
 
-    public FileIO(String fileName, String filePath) {
+    public Storage(String fileName, String filePath) {
         filePath = createDirectory(filePath);
         fileToEdit = filePath+fileName;
     }

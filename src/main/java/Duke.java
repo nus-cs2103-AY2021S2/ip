@@ -1,7 +1,6 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 public class Duke {
     private static String OLDLOGO =
@@ -33,14 +32,14 @@ public class Duke {
     private static String saveFilePath = "/data/";
     private static String saveFileName = "savedHistory.txt";
     private static IO io;
-    private static FileIO fileIO;
+    private static Storage storage;
 
     public static void main(String[] args) {
         io = new IO();
-        fileIO = new FileIO(saveFileName, saveFilePath);
+        storage = new Storage(saveFileName, saveFilePath);
         printHelloMessage();
         boolean continueProgram = true;
-        TaskList taskList = new TaskList(fileIO.tryReadTaskFile());
+        TaskList taskList = new TaskList(storage.tryReadTaskFile());
         while (continueProgram) {
             String reply = io.readLine();
             Command command;
@@ -56,7 +55,7 @@ public class Duke {
     }
 
     public static void saveHistory(TaskList task) {
-        fileIO.writeTasksToFIle(task);
+        storage.writeTasksToFIle(task);
     }
 
     public static void printHelloMessage() {
