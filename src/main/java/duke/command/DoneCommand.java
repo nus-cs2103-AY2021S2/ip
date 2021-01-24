@@ -28,6 +28,8 @@ public class DoneCommand extends Command {
         } else if (index < 0 || index >= taskManager.getTasksSize()) {
             throw new DukeCommandException("done", String.valueOf(this.index), "Please enter a valid task index " +
                     "ranging from 1 to " + taskManager.getTasksSize() + " (inclusive).");
+        } else if (taskManager.getTask(this.index).getStatusSymbol().equals("X")) {
+            throw new DukeCommandException("done", String.valueOf(this.index), "This task is already completed.");
         } else {
             try {
                 taskManager.completeTask(this.index);
