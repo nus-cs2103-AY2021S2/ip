@@ -23,4 +23,14 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: "
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
+
+    /**
+     * Returns details of the event task.
+     *
+     * @return details of the task
+     */
+    @Override
+    public String getTaskDetails() {
+        return super.toString();
+    }
 }

@@ -26,6 +26,8 @@ public class Parser {
             c = new DoneCommand(input);
         } else if (type.equals("list")) {
             c = new ListCommand(input);
+        } else if (type.equals("find")) {
+            c = new FindCommand(input);
         } else if (type.equals("bye")) {
             c = new ExitCommand(input);
         } else {

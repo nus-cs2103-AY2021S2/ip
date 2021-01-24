@@ -18,4 +18,14 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Returns details of the todo task.
+     *
+     * @return details of the task
+     */
+    @Override
+    public String getTaskDetails() {
+        return super.toString();
+    }
 }

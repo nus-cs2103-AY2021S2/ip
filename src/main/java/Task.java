@@ -31,4 +31,13 @@ public class Task {
     public void setDone() {
         this.done = true;
     }
+
+    /**
+     * Returns details of the task.
+     *
+     * @return details of the task
+     */
+    public String getTaskDetails() {
+        return this.name;
+    }
 }

@@ -9,14 +9,14 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     /**
-     * Creates TaskList which is essentially an ArrayList<Task>.
+     * Creates TaskList which is essentially an ArrayList of Task.
      */
     public TaskList() {
         this.taskList = new ArrayList<Task>();
     }
 
     /**
-     * Retrieves the information in the TaskList
+     * Retrieves the information in the TaskList.
      *
      * @return taskList ArrayList of task inputs
      */
@@ -152,6 +152,9 @@ public class TaskList {
         this.taskList.add(input);
     }
 
+    /**
+     * Mark an item as done in taskList.
+     */
     public void markDone(String input) {
         System.out.println(line);
         int index = Integer.parseInt(input.split(" ")[1]) - 1;
@@ -210,6 +213,34 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < this.taskList.size() + 1; i++) {
             System.out.println(i + "." + this.taskList.get(i - 1));
+        }
+        System.out.println(line);
+    }
+
+    /**
+     * Finds and lists all relevant items in taskList.
+     *
+     * @param input input of the item to be found
+     * @throws ArrayIndexOutOfBoundsException If user does not input what to find
+     */
+    public void find(String input) {
+        try {
+            String[] arr = input.split(" ", 2);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            new EmptyDeleteException();
+            return;
+        }
+        String item = input.split(" ", 2)[1];
+        System.out.println(line);
+        System.out.println("Here are the matching tasks in your list:");
+        int counter = 1;
+        ArrayList<Task> list = this.taskList;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            String deets = list.get(i).getTaskDetails().split("]" + " ", 2)[1];
+            if (deets.contains(item)) {
+                System.out.println(counter + "." + list.get(i));
+                counter++;
+            }
         }
         System.out.println(line);
     }

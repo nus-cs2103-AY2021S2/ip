@@ -24,4 +24,13 @@ public class Deadline extends Task {
                 + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 
+    /**
+     * Returns details of the deadline task.
+     *
+     * @return details of the task
+     */
+    @Override
+    public String getTaskDetails() {
+        return super.toString();
+    }
 }
