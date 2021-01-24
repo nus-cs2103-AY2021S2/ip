@@ -12,6 +12,7 @@ import duke.task.Todo;
 import java.time.DateTimeException;
 
 public class AddCommand extends Command {
+
     private final String command;
     private final CommandType cmdType;
 

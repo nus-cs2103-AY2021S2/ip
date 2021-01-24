@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
+import duke.command.*;
 
 
 public class Parser {
@@ -25,6 +20,8 @@ public class Parser {
             return new AddCommand(str, CommandType.TODO);
         } else if (strLength >= 5 && str.substring(0, 5).equalsIgnoreCase("done ")) {
             return new DoneCommand(str);
+        } else if (strLength >= 5 && str.substring(0, 5).equalsIgnoreCase("find ")) {
+            return new FindCommand(str);
         } else {
             throw new DukeException("Invalid command");
         }
