@@ -109,7 +109,7 @@ public class Kelbot {
             } else if (date == null) {
               throw new KelbotException("Deadline by cannot be empty!");
             } else {
-              DeadlineTask newDeadlineTask = new DeadlineTask(name, by);
+              DeadlineTask newDeadlineTask = new DeadlineTask(name, date);
               taskList.add(newDeadlineTask);
               System.out.println("Okay! I have added:");
               System.out.println(newDeadlineTask);
@@ -134,7 +134,7 @@ public class Kelbot {
             } else if (date == null) {
               throw new KelbotException("Event at cannot be empty!");
             } else {
-              EventTask newEventTask = new EventTask(name, at);
+              EventTask newEventTask = new EventTask(name, date);
               taskList.add(newEventTask);
               System.out.println("Okay! I have added:");
               System.out.println(newEventTask);
