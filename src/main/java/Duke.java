@@ -18,6 +18,7 @@ public class Duke {
             String firstWord = sc.next();
             if(firstWord.equals("list")) listItems();
             else if(firstWord.equals("done")) doneItem();
+            else if(firstWord.equals("delete")) delete();
             else if(firstWord.equals("bye")) {
                 byeUser();
                 break;
@@ -59,6 +60,7 @@ public class Duke {
         }
         catch(InputMismatchException e) {
             System.out.println("enter the item number correctly");
+            return;
         }
         if(itemNo > numOfItems) {
             System.out.println("oops theres an error!");
@@ -74,6 +76,24 @@ public class Duke {
     }
     private static void byeUser() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+    private static void delete() {
+        int num = sc.nextInt();
+        if(num > numOfItems) {
+            System.out.println("please enter the correct item id to delete");
+            return;
+        }
+        System.out.println(" Noted. I've removed this task: ");
+        System.out.print("  ");
+        System.out.println("["+ typeOfItems[num-1]+"]"+"["+(doneItems[num-1]?'X':"")+"] "+items[num-1]);
+        numOfItems--;
+        System.out.println(" Now you have "+ numOfItems + " tasks in the list.");
+        for(int currIdx=num-1;currIdx<numOfItems;currIdx++) {
+            int nxtIdx = currIdx+1;
+            items[currIdx] = items[nxtIdx];
+            typeOfItems[currIdx] = typeOfItems[nxtIdx];
+            doneItems[currIdx] = doneItems[nxtIdx];
+        }
     }
     private static void echo() {
         while(true) {
