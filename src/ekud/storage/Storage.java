@@ -31,6 +31,8 @@ public class Storage {
             File folder = new File(parentDirectory);
             if (!folder.exists()) {
                 this.canSave = folder.mkdirs();
+            } else {
+                this.canSave = true;
             }
         }
 

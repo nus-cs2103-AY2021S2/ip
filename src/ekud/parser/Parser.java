@@ -74,7 +74,12 @@ public class Parser {
         final String commandWord = matcher.group("command");
         final String arguments = matcher.group("arguments") == null ? "" : matcher.group("arguments").trim();
 
-        CommandType func = CommandType.valueOf(commandWord.toUpperCase());
+        CommandType func;
+        try {
+            func = CommandType.valueOf(commandWord.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCommandException();
+        }
 
         switch (func) {
             case LIST:
