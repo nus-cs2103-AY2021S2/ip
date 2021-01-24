@@ -1,4 +1,4 @@
-# User Guide
+# SurrealChat User Guide
 
 ## Introduction
 Introducing... a custom chatbot based on Meme Man and the Surreal Memes.
@@ -84,6 +84,11 @@ Outcome if "/by" is missing:
 Wrong formatting. Did you forget to put '/by'? Not stonks!
 ```
 
+Outcome for incorrect date format:
+```
+"Input date format is incorrect. Not stonks!"
+```
+
 ### `event (insert task description) /at (insert date)` - Add Event task command
 
 Key this command in along with task description and event date to cause Meme Man to add a Event task.
@@ -105,6 +110,10 @@ Outcome if "/at" is missing:
 Wrong formatting. Did you forget to put '/at'? Not stonks!
 ```
 
+Outcome for incorrect date format:
+```
+"Input date format is incorrect. Not stonks!"
+```
 
 ### What happens if task description is empty?
 This applies to all 3 types of tasks:

@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Handles intermediary operations between TaskManagement and other classes.
@@ -126,17 +127,26 @@ public class TaskParser {
         }
     }
 
+    private LocalDate parseDate(String dateString) {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Input date format is incorrect. Not stonks!");
+        }
+    }
+
     private DeadlineTask addDeadline(String taskDescription, int isDone) {
         if (taskDescription.isEmpty()) {
             throw new NoSuchElementException("Empty deadline task description. Not stonks!");
         } else {
             //Split the description into description and deadline
             String[] descriptionSplitArray = taskDescription.split("/by");
+            LocalDate deadlineDate = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Deadline task
             try {
                 DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
-                        LocalDate.parse(descriptionSplitArray[1].trim()), this.parseIsDoneInt(isDone));
+                        deadlineDate, this.parseIsDoneInt(isDone));
                 this.taskManagement.addTask(newTask);
                 return newTask;
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
@@ -151,11 +161,12 @@ public class TaskParser {
         } else {
             //Split the description into description and event
             String[] descriptionSplitArray = taskDescription.split("/at");
+            LocalDate eventDate = this.parseDate(descriptionSplitArray[1].trim());
 
             //Create Event task
             try {
                 EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
-                        LocalDate.parse(descriptionSplitArray[1].trim()), this.parseIsDoneInt(isDone));
+                        eventDate, this.parseIsDoneInt(isDone));
                 this.taskManagement.addTask(newTask);
                 return newTask;
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
