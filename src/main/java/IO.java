@@ -29,10 +29,10 @@ public class IO {
         print(printMessage.toString());
     }
     //Print List of Tasks
-    public void printTasks(List<Task> tasks){
+    public void printTasks(TaskList taskList){
         List<String> messages = new ArrayList<>();
-        for (Task task: tasks) {
-            messages.add(task.toString());
+        for (int i = 0; i < taskList.getSize(); i++) {
+            messages.add(taskList.getTask(i).toString());
         }
         printList("Here are the tasks in your list:\n", messages);
     }

@@ -40,22 +40,22 @@ public class Duke {
         fileIO = new FileIO(saveFileName, saveFilePath);
         printHelloMessage();
         boolean continueProgram = true;
-        List<Task> tasks = fileIO.tryReadTaskFile();
+        TaskList taskList = new TaskList(fileIO.tryReadTaskFile());
         while (continueProgram) {
             String reply = io.readLine();
             Command command;
             try {
-                command = validateCommand(reply, tasks.size());
+                command = validateCommand(reply, taskList.getSize());
             } catch (CommandException e) {
                 io.printBotMessage(e.getMessage());
                 continue;
             }
-            continueProgram = processCommand(tasks,command);
+            continueProgram = processCommand(taskList,command);
         }
         io.printBotMessage("Bye. Hope to see you again soon!");
     }
 
-    public static void saveHistory(List<Task> task) {
+    public static void saveHistory(TaskList task) {
         fileIO.writeTasksToFIle(task);
     }
 
@@ -76,24 +76,24 @@ public class Duke {
     }
 
     //Process Command given by user
-    public static boolean processCommand(List<Task> tasks, Command command) {
+    public static boolean processCommand(TaskList taskList, Command command) {
         switch(command.getCommand()) {
             case BYE:
                 return false;
             case LIST:
-                io.printTasks(tasks);
+                io.printTasks(taskList);
                 break;
             case DONE:
                 int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-                tasks.get(doneIndex).markComplete();
-                printDoneMessage(tasks.get(doneIndex));
-                saveHistory(tasks);
+                taskList.getTask(doneIndex).markComplete();
+                printDoneMessage(taskList.getTask(doneIndex));
+                saveHistory(taskList);
                 break;
             case TODO:
                 ToDos todoTask = new ToDos(command.getDescription());
-                tasks.add(todoTask);
-                printAddedTaskMessage(todoTask, tasks.size());
-                saveHistory(tasks);
+                taskList.addTask(todoTask);
+                printAddedTaskMessage(todoTask, taskList.getSize());
+                saveHistory(taskList);
                 break;
             case DEADLINE:
                 String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
@@ -101,9 +101,9 @@ public class Duke {
                 LocalDate date = LocalDate.parse(dates[0]);
                 LocalTime time = LocalTime.parse(dates[1]);
                 Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date,time);
-                tasks.add(deadlineTask);
-                printAddedTaskMessage(deadlineTask, tasks.size());
-                saveHistory(tasks);
+                taskList.addTask(deadlineTask);
+                printAddedTaskMessage(deadlineTask, taskList.getSize());
+                saveHistory(taskList);
                 break;
             case EVENT:
                 String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
@@ -113,16 +113,16 @@ public class Duke {
                 LocalDate endDate = LocalDate.parse(eventDates[2]);
                 LocalTime endTime = LocalTime.parse(eventDates[3]);
                 Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
-                tasks.add(eventTask);
-                printAddedTaskMessage(eventTask, tasks.size());
-                saveHistory(tasks);
+                taskList.addTask(eventTask);
+                printAddedTaskMessage(eventTask, taskList.getSize());
+                saveHistory(taskList);
                 break;
             case DELETE:
                 int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
-                Task deletedTask = tasks.get(deleteIndex);
-                tasks.remove(deleteIndex);
-                printDeleteMessage(deletedTask, tasks.size());
-                saveHistory(tasks);
+                Task deletedTask = taskList.getTask(deleteIndex);
+                taskList.removeTask(deleteIndex);
+                printDeleteMessage(deletedTask, taskList.getSize());
+                saveHistory(taskList);
                 break;
         }
 

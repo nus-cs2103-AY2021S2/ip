@@ -18,11 +18,11 @@ public class Parser {
         return builder.toString();
     }
 
-    public static List<String> convertTasksToStrings(List<Task> taskList) {
+    public static List<String> convertTasksToStrings(TaskList taskList) {
         List<String> strings = new ArrayList<String>();
 
-        for(int i = 0; i < taskList.size() ; i++) {
-            Task currentTask = taskList.get(i);
+        for(int i = 0; i < taskList.getSize() ; i++) {
+            Task currentTask = taskList.getTask(i);
             StringBuilder currentString = new StringBuilder();
             if (currentTask instanceof ToDos) {
                 currentString.append(TaskType.TODO.name());

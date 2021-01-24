@@ -29,7 +29,7 @@ public class FileIO {
         return filePath;
     }
 
-    public void writeTasksToFIle(List<Task> taskList) {
+    public void writeTasksToFIle(TaskList taskList) {
         String textToAdd = Parser.convertStringsToString(Parser.convertTasksToStrings(taskList));
         try {
             writeToFile(textToAdd);
