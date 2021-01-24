@@ -1,28 +1,27 @@
-Konnichiwa! watashi wa Duke desu
-Dou shi mashi taka?
+HELLO! I AM YOUR ROBOT
+WHAT DO YOU WANT?
 ***********
-Wagata. Mou added shi mashita.
-[T][?]  borrow book
+ALRIGHT. I HAVE ALREADY ADDED THE TASK
+[T][✘]  borrow book
 Now you have 1 tasks in the list.
 
 HERE ARE THE TASKS
-1. [T][?]  borrow book
+1. [T][✘]  borrow book
 
-Wagata. Mou added shi mashita.
-[D][?]  return book (by: Sunday)
+ALRIGHT. I HAVE ALREADY ADDED THE TASK
+[D][✘]  return book (by: Sunday)
 Now you have 2 tasks in the list.
 
-Wagata. Mou added shi mashita.
-[E][?]  project meeting (at: Mon 2-4pm)
+ALRIGHT. I HAVE ALREADY ADDED THE TASK
+[E][✘]  project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 
-YOSHA! KONNO TASK GA OWARIMASHITA! GANBARE
-[D][?]  return book (by: Sunday)
+ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE
+[D][✓]  return book (by: Sunday)
 
 HERE ARE THE TASKS
-1. [T][?]  borrow book
-2. [D][?]  return book (by: Sunday)
-3. [E][?]  project meeting (at: Mon 2-4pm)
+1. [T][✘]  borrow book
+2. [D][✓]  return book (by: Sunday)
+3. [E][✘]  project meeting (at: Mon 2-4pm)
 
-Sayonara, mata ne!
-
+GOOD BYE SEE YOU AGAIN!

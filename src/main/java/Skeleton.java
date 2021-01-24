@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,67 +6,62 @@ import static java.lang.System.exit;
 /**
  * Skeleton class for the Duke chatbox.
  */
+
 public class Skeleton {
 
     static Scanner sc = new Scanner(System.in);
-    static String cmd;
     static ArrayList<Task> storage = new ArrayList<>();
     static int current  = 0;
+    
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String word = "";
-        String rest = "";
         greet();
+        Scanner sc = new Scanner(System.in);
+        String cmd = sc.next();
         while (true) {
             try {
-                cmd = sc.nextLine();
-                int i = cmd.indexOf(' ');
-                if (i >= 0) {
-                    word = cmd.substring(0, i);
-                    rest = cmd.substring(i);
+                switch (cmd) {
+                    case "bye":
+                        terminate();
+                        break;
+                    case "list":
+                        listItems();
+                        break;
+                    case "todo":
+                        add(new Todo(sc.nextLine()));
+                        break;
+                    case "deadline":
+                        String rest = sc.nextLine();
+                        String[] parts = rest.split("/by");
+                        add(new Deadline(parts[0], parts[1]));
+                        break;
+                    case "event":
+                        String rest1 = sc.nextLine();
+                        String[] parts1 = rest1.split("/at");
+                        add(new Event(parts1[0], parts1[1]));
+                        break;
+                    case "done":
+                        int done = sc.nextInt();
+                        done(2);
+                        break;
+                    case "delete":
+                        int no = sc.nextInt();
+                        delete(no);
+                        break;
+                    default:
+                        break;
                 }
-                if (cmd.equals("bye")) {
-                    terminate();
-                } else if (cmd.equals("list")) {
-                    listItems();
-                } else if (word.equals("done")) {
-                    int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
-                    done(value);
-                } else if (word.equals("delete")) {
-                    int value = Integer.parseInt(rest.replaceAll("[^0-9]", ""));
-                    delete(value);
-                } else {
-                    add(word, rest);
-                }
-            }
-            catch (DukeException E) {
+            } catch (DukeException E) {
                 //System.out.println("Caught DukeException.");
                 System.out.println(E);
             }
+            cmd = sc.next();
         }
     }
 
     /** function that adds to a storage list the type of task the user has input. */
-    static void add(String type, String rest) throws DukeException {
-        if (type.equals("todo") && rest.equals("")) {
-            throw new DukeException("Description cannot be empty");
-        }
-        if (type.equals("todo")) {
-            storage.add(new Todo(rest));
-        } else if (type.equals("deadline")) {
-            int i = rest.indexOf("/") + 3;
-            String by = rest.substring(i);
-            rest = rest.substring(0, i - 3);
-            storage.add(new Deadline(rest, by));
-        } else if (type.equals("event")) {
-            int i = rest.indexOf("/") + 3;
-            String by = rest.substring(i);
-            rest = rest.substring(0, i - 3);
-            storage.add(new Event(rest, by));
-        } else {
-            throw new DukeException("Command UNKNOWN");
-        }
-        System.out.println("Wagata. Mou added shi mashita.");
+    static void add(Task task) throws DukeException {
+        storage.add(task);
+        System.out.println("ALRIGHT. I HAVE ALREADY ADDED THE TASK");
         System.out.println(storage.get(current));
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
         System.out.println();
@@ -85,7 +79,10 @@ public class Skeleton {
     }
 
     /** function that deletes en entry in the list*/
-    static void delete(int value) {
+    static void delete(int value) throws DukeException{
+        if (value <= 0 || value > storage.size()) {
+            throw new DukeException("No such list item.");
+        }
         System.out.println("OK. TASK REMOVED.");
         System.out.println(storage.get(value - 1));
         storage.remove(value - 1);
@@ -97,7 +94,6 @@ public class Skeleton {
         if (storage.isEmpty()) {
             System.out.println("Empty list");
             System.out.println();
-            cmd = sc.nextLine();
         } else {
             System.out.println("HERE ARE THE TASKS");
             for (int j = 0; j < storage.size(); j++) {
@@ -107,7 +103,7 @@ public class Skeleton {
         }
     }
     /** function that exits the program when the user types bye*/
-    static void terminate(){
+    static void terminate() {
         System.out.println("GOOD BYE SEE YOU AGAIN!");
         System.out.println();
         sc.close();
@@ -115,7 +111,7 @@ public class Skeleton {
     }
 
     /** function that greets the user*/
-    static void greet(){
+    static void greet() {
         System.out.println("HELLO! I AM YOUR ROBOT");
         System.out.println("WHAT DO YOU WANT?");
         System.out.println("***********");
