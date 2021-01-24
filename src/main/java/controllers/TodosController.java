@@ -3,6 +3,7 @@ package controllers;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.IntStream;
 
 import exceptions.DukeBlankDetailsException;
 import exceptions.DukeBlankTaskException;
+import exceptions.DukeDateTimeParseException;
 import exceptions.DukeTaskIndexOutOfRangeException;
 
 import models.Deadline;
@@ -83,14 +85,17 @@ public class TodosController {
                 switch (type) {
 
                     case "T":
+                        // create new todo
                         existingTodosList.add(Optional.ofNullable(new Todo(message, isDone)));
                         break;
 
                     case "D":
+                        // create new deadline
                         existingTodosList.add(Optional.ofNullable(new Deadline(message, isDone, line.get(3))));
                         break;
 
                     case "E":
+                        // create new event
                         existingTodosList.add(Optional.ofNullable(new Event(message, isDone, line.get(3))));
                         break;
 
@@ -99,6 +104,8 @@ public class TodosController {
             sc.close();
             return new TodosController(existingTodosList);
         } catch (Exception e) {
+            // exception will be caught if no existing data file is found
+            // e.printStackTrace();
             return this;
         }
     }
@@ -231,15 +238,17 @@ public class TodosController {
      * @param newDeadlineList takes in list of arguments provided to the command for
      *                        processing into a Deadline object
      * @return new TodosController with the new Deadline object added into it
-     * @throws DukeBlankTaskException    Exception is thrown when user does not add
-     *                                   in any details after typing the 'deadline'
-     *                                   command
-     * @throws DukeBlankDetailsException Exception is thrown when user tries to
-     *                                   define an deadline, without adding /by
-     *                                   <details> for the event
+     * @throws DukeBlankTaskException     Exception is thrown when user does not add
+     *                                    in any details after typing the 'deadline'
+     *                                    command
+     * @throws DukeBlankDetailsException  Exception is thrown when user tries to
+     *                                    define an deadline, without adding /by
+     *                                    <details> for the event
+     * @throws DukeDateTimeParseException Exception is thrown when date time passed
+     *                                    into CLI is of the wrong format
      */
     public TodosController addDeadline(List<String> newDeadlineList)
-            throws DukeBlankTaskException, DukeBlankDetailsException {
+            throws DukeBlankTaskException, DukeBlankDetailsException, DukeDateTimeParseException {
         if (newDeadlineList.size() == 0) {
             throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
         }
@@ -266,14 +275,21 @@ public class TodosController {
 
         // if no deadline input or /by without any deadline, throw exception
         if (deadline.size() <= 1) {
-            throw new DukeBlankDetailsException(
-                    "Please add a /by followed by the deadline to specify a deadline for the Deadline task");
+            String exceptionMessage = "Please add a /by followed by the deadline time and date in DD/MM/YYYY HHMM to specify a time and date for the Deadline task. If there is no time for this event, perhaps consider creating a todo instead.";
+            throw new DukeBlankDetailsException(exceptionMessage);
         }
 
         // Create new Deadline object, slicing deadline array from index 1 since we
         // added the '/by' which shouldn't be in the actual Deadline object
-        Optional<Deadline> newDeadline = Optional.ofNullable(
-                new Deadline(String.join(" ", message), String.join(" ", deadline.subList(1, deadline.size()))));
+        // creating a new deadline might throw an exception if the date time is in the
+        // wrong format
+        Optional<Deadline> newDeadline;
+        try {
+            newDeadline = Optional.ofNullable(
+                    new Deadline(String.join(" ", message), String.join(" ", deadline.subList(1, deadline.size()))));
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException("Please format your date after /by to be DD/MM/YYYY HHMM");
+        }
 
         // render added view
         this.todosView.added(newDeadline, this.todosList.size() + 1);
@@ -290,15 +306,17 @@ public class TodosController {
      * @param newEventList takes in list of arguments provided to the command for
      *                     processing into a Event object
      * @return new TodosController with the new Event object added into it
-     * @throws DukeBlankTaskException    Exception is thrown when user does not add
-     *                                   in any details after typing the 'event'
-     *                                   command
-     * @throws DukeBlankDetailsException Exception is thrown when user tries to
-     *                                   define an event, without adding /at
-     *                                   <details> for the event
+     * @throws DukeBlankTaskException     Exception is thrown when user does not add
+     *                                    in any details after typing the 'event'
+     *                                    command
+     * @throws DukeBlankDetailsException  Exception is thrown when user tries to
+     *                                    define an event, without adding /at
+     *                                    <details> for the event
+     * @throws DukeDateTimeParseException Exception is thrown when date time passed
+     *                                    into CLI is of the wrong format
      */
     public TodosController addEvent(List<String> newEventList)
-            throws DukeBlankDetailsException, DukeBlankTaskException {
+            throws DukeBlankDetailsException, DukeBlankTaskException, DukeDateTimeParseException {
         // if list is empty, throw error
         if (newEventList.size() == 0) {
             throw new DukeBlankTaskException("The Event you are trying to add cannot be blank!");
@@ -326,14 +344,21 @@ public class TodosController {
 
         // if no deadline input or /by without any deadline, throw exception
         if (eventTime.size() <= 1) {
-            throw new DukeBlankDetailsException(
-                    "Please add a /at followed by the event time and date to specify a time and date for the Event task");
+            String exceptionMessage = "Please add a /at followed by the event time and date in DD/MM/YYYY HHMM to specify a time and date for the Event task. If there is no time for this event, perhaps consider creating a todo instead.";
+            throw new DukeBlankDetailsException(exceptionMessage);
         }
 
         // Create new Event object, slicing eventTime array from index 1 since we
         // added the '/at' which shouldn't be in the actual Event object
-        Optional<Event> newEvent = Optional.ofNullable(
-                new Event(String.join(" ", message), String.join(" ", eventTime.subList(1, eventTime.size()))));
+        // Creating an event might throw an exception if the date is in the wrong format
+        Optional<Event> newEvent;
+        try {
+            newEvent = Optional.ofNullable(
+                    new Event(String.join(" ", message), String.join(" ", eventTime.subList(1, eventTime.size()))));
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException("Please format your date after /at to be DD/MM/YYYY HHMM");
+        }
+
         try {
             this.todosView.added(newEvent, this.todosList.size() + 1);
         } catch (Exception e) {
