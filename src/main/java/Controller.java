@@ -1,3 +1,6 @@
+import exceptions.DukeNoDescriptionException;
+import exceptions.DukeUnknownArgumentsException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -43,9 +46,13 @@ public class Controller {
     }
 
     private void handleInput(String input) {
+        CommandType command = Parser.parseCommand(input);
+        executeCommand(input, command);
+    }
+
+    private void executeCommand(String input, CommandType command) {
         try {
-            CommandType type = parseCommand(input);
-            switch (type) {
+            switch (command) {
             case DONE:
                 doneTask(input);
                 break;
@@ -66,20 +73,8 @@ public class Controller {
         }
     }
 
-    private CommandType parseCommand(String input) {
-        if (input.startsWith("done")) {
-            return CommandType.DONE;
-        } else if (input.startsWith("list")) {
-            return CommandType.LIST;
-        } else if (input.startsWith("delete")) {
-            return CommandType.DELETE;
-        } else {
-            return CommandType.ADD;
-        }
-    }
-
     private void doneTask(String input) {
-        int index = Integer.parseInt(input.substring(5)) - 1;
+        int index = Parser.stringToIndex(input, 5);
         Task task = list.get(index);
         task.done();
         String output = String.format(INDENT + " Nice! I've marked this task as done:" + NEWLINE
@@ -87,16 +82,21 @@ public class Controller {
         System.out.println(output);
     }
 
-    private void addTask(String task) throws DukeUnknownArgumentsException {
+    private void addTask(String input) throws DukeUnknownArgumentsException {
         try {
             Task t;
-            if (task.startsWith("todo")) {
-                t = createTodo(task);
-            } else if (task.startsWith("deadline")) {
-                t = createDeadline(task);
-            } else if (task.startsWith("event")) {
-                t = createEvent(task);
-            } else {
+            AddCommandType command = Parser.inputToAddCommand(input);
+            switch (command) {
+            case TODO:
+                t = createTodo(input);
+                break;
+            case DEADLINE:
+                t = createDeadline(input);
+                break;
+            case EVENT:
+                t = createEvent(input);
+                break;
+            default:
                 throw new DukeUnknownArgumentsException();
             }
             list.add(t);
@@ -113,39 +113,23 @@ public class Controller {
         }
     }
 
-    private Todo createTodo(String task) throws DukeNoDescriptionException {
-        if (task.length() < 6 || task.substring(5).isBlank()) {
-            throw new DukeNoDescriptionException("todo");
-        } else {
-            return new Todo(task.substring(5));
-        }
+    private Todo createTodo(String input) throws DukeNoDescriptionException {
+        input = Parser.parseTodoInput(input);
+        return new Todo(input);
     }
 
-    private Deadline createDeadline(String task) throws DukeNoDescriptionException,
+
+    private Deadline createDeadline(String input) throws DukeNoDescriptionException,
             DateTimeParseException {
-        if (task.length() < 10 || task.substring(9).isBlank()) {
-            throw new DukeNoDescriptionException("deadline");
-        } else {
-            task = task.substring(9);
-            String[] inputs = task.split("/");
-            String description = inputs[0];
-            String deadline = inputs[1].substring(3);
-            LocalDate deadlineDate = LocalDate.parse(deadline);
-            return new Deadline(description, deadlineDate);
-        }
+        String description = Parser.obtainDescription(input, AddCommandType.DEADLINE);
+        LocalDate deadline = Parser.obtainDate(input, AddCommandType.DEADLINE);
+        return new Deadline(description, deadline);
     }
 
-    private Event createEvent(String task) throws DukeNoDescriptionException {
-        if (task.length() < 7 || task.substring(6).isBlank()) {
-            throw new DukeNoDescriptionException("event");
-        } else {
-            task = task.substring(6);
-            String[] inputs = task.split("/");
-            String description = inputs[0];
-            String eventTime = inputs[1].substring(3);
-            LocalDate eventTimeDate = LocalDate.parse(eventTime);
-            return new Event(description, eventTimeDate);
-        }
+    private Event createEvent(String input) throws DukeNoDescriptionException {
+        String description = Parser.obtainDescription(input, AddCommandType.EVENT);
+        LocalDate eventTime = Parser.obtainDate(input, AddCommandType.EVENT);
+        return new Event(description, eventTime);
     }
 
     private void printList() {
@@ -159,7 +143,7 @@ public class Controller {
     }
 
     private void deleteTask(String input) {
-        int index = Integer.parseInt(input.substring(7)) - 1;
+        int index = Parser.stringToIndex(input, 7);
         Task t = list.get(index);
         list.remove(index);
         String output =
