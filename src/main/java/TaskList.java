@@ -35,6 +35,28 @@ public class TaskList {
         System.out.println(res);
     }
 
+    public void  find(String keyword) {
+        String res = "";
+        if(ls.isEmpty()){
+            res = "\t" + line + "No task to find!\n";
+        }
+        else{
+            res = "\t" + line + "\n\tHere are the matching tasks in your list:\n";
+            List<Task> newList = new ArrayList<>();
+            for(Task task : this.ls){
+                if(task.toString().contains(keyword)){
+                    newList.add(task);
+                }
+            }
+            for (int i = 0; i < newList.size(); i++) {
+                res += "\t" + (i + 1) + "." + newList.get(i) + "\n";
+            }
+        }
+
+        res += "\t" + line;
+        System.out.println(res);
+    }
+
     public void finishTask(int index) {
         Task task = this.ls.get(index - 1);
         task.markAsDone();

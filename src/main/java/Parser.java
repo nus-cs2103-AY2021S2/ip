@@ -81,6 +81,11 @@ public class Parser {
             this.taskList.addTask(new Events(description, by));
         }
 
+        else if(commandFromUser.split(" ")[0].equals("find")){
+            String keyword = commandFromUser.split(" ")[1];
+            this.taskList.find(keyword);
+        }
+
         else{
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
