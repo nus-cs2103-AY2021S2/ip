@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
@@ -194,9 +195,15 @@ public class Duke {
             if (taskType.equals("T")) {
                 newTask = new Todo(taskInfo[2], taskStatus);
             } else if (taskType.equals("E")) {
-                newTask = new Event(taskInfo[2], taskInfo[3], taskStatus);
+                newTask = new Event(
+                        taskInfo[2],
+                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        taskStatus);
             } else if (taskType.equals("D")) {
-                newTask = new Deadline(taskInfo[2], taskInfo[3], taskStatus);
+                newTask = new Deadline(
+                        taskInfo[2],
+                        LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("MMM dd yyyy")),
+                        taskStatus);
             }
             tempTask.add(newTask);
         }
