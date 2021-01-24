@@ -1,13 +1,30 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    String by;
-    public DeadlineTask(String description, boolean isDone, String by) {
+    private LocalDate byDate;
+    private String time;
+//    public DeadlineTask(String description, boolean isDone, LocalDate byDate) {
+//        super(description);
+//        super.isDone = isDone;
+//        this.byDate = byDate;
+//        this.time = null;
+//    }
+    public DeadlineTask(String description, boolean isDone, LocalDate byDate, String time) {
         super(description);
         super.isDone = isDone;
-        this.by = by;
+        this.time = time;
+        this.byDate = byDate;
     }
+
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + this.by + ")";
+        if (this.byDate != null) {
+            return "[D] " + super.toString() + " (by: "
+                    + this.byDate.format(DateTimeFormatter.ofPattern("yyyy/MM/dd")) + ", time: " + time + ")";
+        }
+        //error prone line below
+        return "[D] " + super.toString() + " (by: " + this.byDate + " time: " + time + ")";
     }
     @Override
     public String getTaskDetails() {
@@ -15,6 +32,6 @@ public class DeadlineTask extends Task {
         return "D" +  divider
                 + (isDone ? "1" : "0") + divider
                 + description + divider
-                + by;
+                + byDate + divider + time;
     }
 }
