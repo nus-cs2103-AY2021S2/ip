@@ -57,28 +57,52 @@ public class FakeBot {
         }
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
-
+    /**
+     * Save History to Storage.
+     * @param task List of Task to be saved.
+     */
     public static void saveHistory(TaskList task) {
         storage.writeTasksToFIle(task);
     }
 
+    /**
+     * Print Hello Message used at the start of the project.
+     */
     public static void printHelloMessage() {
         ui.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
     }
 
+    /**
+     * Print message to show that the task is done.
+     * @param task Task to print.
+     */
     public static void printDoneMessage(Task task) {
         ui.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
     }
 
+
+    /**
+     * Print message to show that the task is deleted and print the remaining number of task left.
+     * @param task Deleted Task.
+     * @param count Total number of Task Left.
+     */
     public static void printDeleteMessage(Task task, int count) {
         ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()+ "\nNow you have " + count + " tasks in the list.");
     }
-
+    /**
+     * Print message to show that the task is deleted and print the remaining number of task left.
+     * @param task Added Task.
+     * @param count Total number of Task Left.
+     */
     public static void printAddedTaskMessage(Task task, int count) {
         ui.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
     }
 
-    //Process Command given by user
+    /**
+     * Process Command given by user.
+     * @param taskList Tasks List to Edit.
+     * @param command Total number of Task Left.
+     */
     public static boolean processCommand(TaskList taskList, Command command) {
         switch(command.getCommand()) {
             case BYE:
@@ -132,8 +156,13 @@ public class FakeBot {
         return true;
     }
 
-    //Validate User Input
+    /**
+     * Validate User Input.
+     * @param command Command String that is yet to be parsed.
+     * @param taskCount Total number of Task Left.
+     */
     public static Command validateCommand(String command, int taskCount) throws CommandException {
+
         if (command.equals(EXITCOMMAND)) {
             return new Command(CommandType.BYE);
         } else if (command.equals(LISTCOMMAND)) {

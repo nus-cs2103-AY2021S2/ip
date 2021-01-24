@@ -9,10 +9,14 @@ import java.util.List;
 
 public class Parser {
 
-
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
     private enum TaskType { TODO, EVENT, DEADLINE }
 
+    /**
+     * Convert Task to String.
+     * @param stringList List of string to be converted to string.
+     * @return Return string.
+     */
     public static String convertStringsToString(List<String> stringList) {
         StringBuilder builder = new StringBuilder();
         for (String s : stringList) {
@@ -22,19 +26,24 @@ public class Parser {
         return builder.toString();
     }
 
-    public static String convertTaskTOString(Task currentTask) {
+    /**
+     * Convert Task to String.
+     * @param task Task to be parsed to string.
+     * @return Return parsed Task.
+     */
+    public static String convertTaskTOString(Task task) {
         StringBuilder currentString = new StringBuilder();
-        if (currentTask instanceof ToDos) {
+        if (task instanceof ToDos) {
             currentString.append(TaskType.TODO.name());
             currentString.append(SPLIT_REGEX);
-            currentString.append(currentTask.isComplete());
+            currentString.append(task.isComplete());
             currentString.append(SPLIT_REGEX);
-            currentString.append(currentTask.getTaskName());
-        }else if (currentTask instanceof Events) {
-            Events events = (Events) currentTask;
+            currentString.append(task.getTaskName());
+        }else if (task instanceof Events) {
+            Events events = (Events) task;
             currentString.append(TaskType.EVENT.name());
             currentString.append(SPLIT_REGEX);
-            currentString.append(currentTask.isComplete());
+            currentString.append(task.isComplete());
             currentString.append(SPLIT_REGEX);
             currentString.append(events.getTaskName());
             currentString.append(SPLIT_REGEX);
@@ -45,11 +54,11 @@ public class Parser {
             currentString.append(events.getEndDate());
             currentString.append(SPLIT_REGEX);
             currentString.append(events.getEndTime());
-        }else if (currentTask instanceof Deadlines) {
-            Deadlines deadlines = (Deadlines) currentTask;
+        }else if (task instanceof Deadlines) {
+            Deadlines deadlines = (Deadlines) task;
             currentString.append(TaskType.DEADLINE.name());
             currentString.append(SPLIT_REGEX);
-            currentString.append(currentTask.isComplete());
+            currentString.append(task.isComplete());
             currentString.append(SPLIT_REGEX);
             currentString.append(deadlines.getTaskName());
             currentString.append(SPLIT_REGEX);
@@ -59,6 +68,13 @@ public class Parser {
         }
         return currentString.toString();
     }
+
+
+    /**
+     * Convert List of Task to List of String.
+     * @param taskList string of list.
+     * @return Return list of String parsed from list of Task.
+     */
     public static List<String> convertTasksToStrings(TaskList taskList) {
         List<String> strings = new ArrayList<String>();
 
@@ -69,6 +85,11 @@ public class Parser {
         return strings;
     }
 
+    /**
+     * Convert String to Task.
+     * @param string Parsed Task.
+     * @return Return task parsed from string.
+     */
     public static Task parseStringToTask(String string) {
         String[] parts = string.split(SPLIT_REGEX);
         Task currentTask = null;
@@ -90,6 +111,13 @@ public class Parser {
 
         return currentTask;
     }
+
+
+    /**
+     * Convert List of String to List of Task.
+     * @param stringList string of list.
+     * @return Return list of Task parsed from list of string.
+     */
     public static List<Task> parseStringsToTasks(List<String> stringList) {
         List<Task> tasks = new ArrayList<Task>();
 

@@ -15,18 +15,20 @@ public class Command {
         this.description = description;
     }
 
-    //Get Command Type
+    /**
+     * Get Command Type.
+     * @return CommandType of the Command.
+     */
     public CommandType getCommand() {
         return type;
     }
 
-    //Get Command DDescription
+    /**
+     * Get Command Description Type.
+     * @return Description of the Command.
+     */
     public String getDescription() {
         return description;
     }
 
-    //Get Command Name mainly for Printing
-    public String getCommandName() {
-        return type.toString().toLowerCase(Locale.ROOT);
-    }
 }
