@@ -16,9 +16,9 @@ public class FindCommand extends Command {
     private String fullCommand;
 
     /**
+     * Constructs a FindCommand with given full command line.
      *
-     *
-     * @param fullCommand
+     * @param fullCommand Full command line input.
      */
     public FindCommand(String fullCommand) {
         this.fullCommand = fullCommand;
@@ -27,9 +27,9 @@ public class FindCommand extends Command {
     /**
      * Prints a list of tasks that matches given word in command line.
      *
-     * @param tasks
-     * @param ui 
-     * @param storage
+     * @param tasks TasksList to find from.
+     * @param ui Ui for system outputs.
+     * @param storage Storage for saving contents into file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
