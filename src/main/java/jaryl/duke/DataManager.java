@@ -34,7 +34,7 @@ public class DataManager {
     public ArrayList<Task> readFromFile() throws DukeException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         ArrayList<Task> tasksList = new ArrayList<>();
-        LocalDateTime date;
+        LocalDateTime date = null;
 
         Path path = Paths.get(filePath);
         if(!Files.exists(path)) {
@@ -53,7 +53,9 @@ public class DataManager {
             String input = br.readLine();
             while(input != null) {
                 String[] inputArr = input.split(DELIMITER);
-                date = LocalDateTime.parse(inputArr[3], DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+                if(inputArr.length == 4) {
+                    date = LocalDateTime.parse(inputArr[3], DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
+                }
 
                 try {
                     switch (inputArr[0]) {
