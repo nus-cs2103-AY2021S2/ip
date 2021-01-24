@@ -25,4 +25,9 @@ public class TaskList {
         return tasks.size();
     }
 
+    public List<Task> find(String search) {
+        List<Task> foundTask = new ArrayList<>();
+        
+        return foundTask;
+    }
 }
