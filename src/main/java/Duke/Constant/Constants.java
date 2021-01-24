@@ -16,4 +16,8 @@ public class Constants {
     public static final String MARK_DONE_TASK = "Nice! I've marked this task as done:\n  ";
     public static final String DELETE_TASK_SUCCESS = "Noted. I've removed this task: \n";
     public static final String ADD_TASK_SUCCESS = "Got it. I've added this task: \n";
+    public static final String EMPTY_TASK_LIST = "There is no task in your list.";
+    public static final String START_LISTING = "Here are the tasks in your list:";
+    public static final String FIND_SUCCESS = "Here are the matching tasks in your list:";
+    public static final String FIND_FAIL = "There are no matching tasks";
 }

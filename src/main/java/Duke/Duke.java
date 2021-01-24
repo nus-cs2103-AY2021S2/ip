@@ -4,7 +4,9 @@ import Duke.Exception.*;
 import Duke.Command.*;
 import Duke.Constant.*;
 import Duke.Helper.*;
+import Duke.Task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -42,7 +44,7 @@ public class Duke {
                 } catch (InvalidIndex e){
                     ui.printResponse(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DONE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DONE.getAction())){
                 try{
                     int doneIndex = Integer.parseInt(command.substring(5));
                     String result = taskList.finishTask(doneIndex);
@@ -50,7 +52,7 @@ public class Duke {
                 } catch (NumberFormatException | InvalidIndex e){
                     System.out.println(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())){
                 try{
                     int deleteIndex = Integer.parseInt(command.substring(7));
                     String result = taskList.deleteTask(deleteIndex);
@@ -58,7 +60,18 @@ public class Duke {
                 } catch (NumberFormatException | InvalidIndex e){
                     ui.printResponse(e.getMessage());
                 }
-            } else {
+            } else if (command.equalsIgnoreCase(Command.FIND.getAction())){
+                try {
+                    throw new EmptyFindContent();
+                } catch (EmptyFindContent e) {
+                    ui.printResponse(e.getMessage());
+                }
+            } else if (command.toLowerCase().startsWith(Command.FIND.getAction())){
+                String keyword = command.substring(5);
+                ArrayList<Task> filter = taskList.findTask(keyword);
+                ui.printMatchedTask(filter);
+            }
+            else {
                 try {
                     String status = taskList.addTask(command);
                     ui.printResponse(status);
