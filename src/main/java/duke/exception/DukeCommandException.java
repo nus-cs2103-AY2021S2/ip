@@ -1,36 +1,32 @@
 package duke.exception;
 
 public class DukeCommandException extends DukeException{
-    /**
-     * Type of command that throws the exception
-     */
+    /** Type of command that throws the exception */
     private String commandType;
-    /**
-     * Parameters that the command was processing
-     */
+    /** Parameters that the command was using */
     private String params;
 
     /**
      * Constructor for DukeCommandException
-     * @param commandType Type of command
-     * @param params Parameters processed by that command
-     * @param msg Message to display for this exception
+     * @param commandType Type of the command
+     * @param params Parameters processed by the command
+     * @param msg Error message that can be recalled
      */
     public DukeCommandException(String commandType, String params, String msg) {
         super(msg);
     }
 
     /**
-     * Return the type of command
-     * @return
+     * Return the type of the command
+     * @return Type of the command
      */
     public String getCommandType() {
         return this.commandType;
     }
 
     /**
-     * Return the parameters of the command
-     * @return
+     * Return a string containing the parameters of the command
+     * @return Parameters of the command
      */
     public String getParams() {
         return this.params;

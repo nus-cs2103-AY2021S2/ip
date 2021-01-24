@@ -5,12 +5,22 @@ import duke.exception.DukeException;
 import duke.exception.DukeCommandException;
 
 public class DoneCommand extends Command {
+    /** Index of the task that is going to be completed */
     private int index;
 
+    /**
+     * Constructor of a DoneCommand
+     * @param index Index of a task that will be completed
+     */
     public DoneCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Execute the Done command to complete the task that existed in the list
+     * @throws DukeCommandException if there is no tasks to be completed, invalid task index, an issue with saving the
+     * task's completion or an issue with updating the task's completion status
+     */
     @Override
     public void execute() throws DukeCommandException {
         if(taskManager.getTasksSize() == 0) {

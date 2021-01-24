@@ -8,14 +8,26 @@ import duke.exception.DukeCommandException;
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command{
+    /** Description of a Deadline to be created */
     private String desc = "";
+    /** Date and time when a Deadline to be created is ending */
     private LocalDateTime dateTime;
 
+    /**
+     * Constructor of a DeadlineCommand
+     * @param desc Description of a Deadline to be created
+     * @param dateTime Date and time of when a Deadline to be created is ending
+     */
     public DeadlineCommand(String desc, LocalDateTime dateTime) {
         this.desc = desc;
         this.dateTime = dateTime;
     }
 
+    /**
+     * Execute the Deadline command to create a Deadline task in the list
+     * @throws DukeCommandException if there is an issue adding the Deadline into the task list or saving the tasks into
+     * hard disk
+     */
     @Override
     public void execute() throws DukeCommandException {
         try {
