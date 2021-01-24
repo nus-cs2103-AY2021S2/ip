@@ -1,19 +1,27 @@
 import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 /**
  * Represent a Deadline item, which is a child of Task
  */
 public class Deadline extends Task {
-    private String by;
+    private LocalDate by;
 
     /**
      * Initialize a Deadline item with a given end time
      * @param name The name of the deadline
-     * @param by The end time of the item
+     * @param by The end time of the item, assumed to be 'yyyy-mm-dd'
      */
-    public Deadline(String name, String by) {
+    public Deadline(String name, LocalDate by) {
         super(name);
         this.by = by;
+    }
+
+    public LocalDate getDate() {
+        return by;
     }
 
     /**
@@ -23,7 +31,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String doneMark = isDone? "X": " ";
-        return String.format("[D][%s] %s (by: %s)", doneMark, name, by);
+        return String.format("[D][%s] %s (by: %s)", doneMark, name,
+                by.format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
     }
 
     @Override

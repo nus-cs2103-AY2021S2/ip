@@ -1,5 +1,7 @@
 import org.json.simple.JSONObject;
 
+import java.time.LocalDate;
+
 /**
  * Represent a task in the task list
  */
@@ -30,6 +32,10 @@ public class Task {
      */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
     /**

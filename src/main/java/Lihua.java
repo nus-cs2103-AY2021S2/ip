@@ -52,6 +52,8 @@ public class Lihua {
             tasks.saveTasks();
         } else if (FormatChecker.isTryingToGetHelp(userInput)) {
             OperationTypes.printInstructions();
+        } else if (FormatChecker.isTryingToPrintTasksOnOneDay(userInput)) {
+            tasks.printTasksOnDate(userInput);
         } else {
             printGetHelpMessage();
         }

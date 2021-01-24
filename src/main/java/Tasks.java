@@ -1,5 +1,12 @@
-import java.io.*;
-import java.util.Date;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.FileWriter;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -38,11 +45,11 @@ public class Tasks {
                 task = new ToDo(content);
             } else if (FormatChecker.likeAddingDeadline(userInput)) {
                 String content = InputInformationExtractor.getDeadlineContent(userInput);
-                String by = InputInformationExtractor.getDeadlineTime(userInput);
+                LocalDate by = InputInformationExtractor.getDeadlineTime(userInput);
                 task = new Deadline(content, by);
             } else if (FormatChecker.likeAddingEvent(userInput)) {
                 String content = InputInformationExtractor.getEventContent(userInput);
-                String time = InputInformationExtractor.getEventTime(userInput);
+                LocalDate time = InputInformationExtractor.getEventTime(userInput);
                 task = new Event(content, time);
             }
             tasks.add(task);
@@ -184,7 +191,8 @@ public class Tasks {
                 String type = (String)jsonObject.get("type");
                 String description = (String)jsonObject.get("description");
                 boolean isDone = (boolean)jsonObject.get("isDone");
-                String time = (String)jsonObject.get("time");
+                LocalDate time = LocalDate.parse((String)jsonObject.get("time"),
+                        DateTimeFormatter.ofPattern("mm/MM/YYYY"));
                 Task t = null;
                 // either one of the cases will be entered
                 // <-> t will not be null
@@ -224,6 +232,31 @@ public class Tasks {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Sorry, this task cannot be saved right now. :')");
+        }
+    }
+    /**
+     * @param userInput Second argument of userInput is assumed to be of 'yyyy-mm-dd'
+     */
+    public void printTasksOnDate(String userInput) {
+        LocalDate date = LocalDate.parse(userInput.split(" ")[1]);
+        boolean hasTask = false;
+        for (Task t : tasks) {
+            if (t instanceof ToDo) {
+                continue;
+            }
+            // t is either deadline or event
+            if (date.equals(t.getDate())) {
+                if (!hasTask) {
+                    hasTask = true;
+                    System.out.println(String.format("You have the following tasks on %s.",
+                            date.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"))));
+                }
+                System.out.println(t);
+            }
+        }
+        if (!hasTask) {
+            System.out.println(String.format("You do not have any task on %s. :')",
+                    date.format(DateTimeFormatter.ofPattern("dd/MM/YYYY"))));
         }
     }
 
