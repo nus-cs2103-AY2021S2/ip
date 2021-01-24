@@ -8,22 +8,25 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * The Duke project
+ * The Duke project.
  */
 public class Duke {
 
+    /** The number of tasks at the start of the program. */
     static int totalTasks = 0;
+
+    /** A boolean function to check if the user decides to terminate the program. */
     static boolean endOfCycle = false;
 
     public static void main(String[] args) throws IOException {
         greet();
 
         Scanner sc = new Scanner(System.in);
-        FileOutputStream fos = new FileOutputStream("duke.txt", true);
 
         String username = sc.nextLine();
         nextGreet(username);
 
+        FileOutputStream fos = new FileOutputStream("duke.txt", true);
         ArrayList<Task> tasks = new ArrayList<>();
         readFileIntoList("duke.txt", tasks);
         fos.close();
@@ -44,28 +47,29 @@ public class Duke {
                     default -> wrongCommand();
                 }
             } catch (DukeException e) {
-                //noinspection ThrowablePrintedToSystemOut
                 System.out.println(e);
             }
         }
         sc.close();
 
         PrintWriter writer = new PrintWriter("duke.txt");
-        for (Task item:
-             tasks) {
+        for (Task item: tasks) {
             writer.println(item.toString());
         }
         writer.close();
-
-
     }
 
+    /**
+     * Read the existing task file and create the list of tasks when the program is run.
+     * @param file The name of the file.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     */
     public static void readFileIntoList(String file, ArrayList<Task> tasks) {
         List<String> lines = Collections.emptyList();
+
         try {
             lines = Files.readAllLines(Paths.get(file), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

@@ -1,3 +1,6 @@
+/**
+ * Enum for command, not in use.
+ */
 public enum CommandEnum {
     TODO ("todo"),
     DEADLINE ("deadline"),
