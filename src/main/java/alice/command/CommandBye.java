@@ -4,6 +4,8 @@ import alice.Alice;
 
 public class CommandBye extends Command {
 
+	private static final String SUCCESS_MESSAGE = "See you next time!";
+
 	public CommandBye() {
 		this.tokens = new String[]{};
 	}
@@ -14,7 +16,7 @@ public class CommandBye extends Command {
 
 	@Override
 	public Alice execute(Alice agent) {
-		return new Alice(Alice.BYE, agent.getData(), true, false);
+		return new Alice(SUCCESS_MESSAGE, agent.getData(), true, false);
 	}
 
 	@Override

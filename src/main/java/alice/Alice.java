@@ -5,10 +5,6 @@ import alice.task.TaskList;
 public class Alice {
 
 	public static final String GREETING = "Hello!";
-	public static final String BYE = "See you next time!";
-	public static final String TASK_ADD = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
-	public static final String TASK_DONE = "Nice! I've marked this task as done:\n%s";
-	public static final String TASK_DELETE = "I've deleted this task:\n%s";
 
 	private final boolean done;
 	private final boolean hasDelta;

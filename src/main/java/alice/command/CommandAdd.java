@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class CommandAdd extends Command {
 
+	private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
+
 	private static final String todoUsage = "todo usage: todo [activity]";
 	private static final String deadlineUsage = "deadline usage: deadline [activity] /by [deadline yyyy/MM/dd]";
 	private static final String eventUsage = "todo usage: event [activity] /at [time yyyy/MM/dd]";
@@ -25,7 +27,7 @@ public class CommandAdd extends Command {
 			Task task = TaskBuilder.buildTask(tokens);
 			List<Task> newStore = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
 			newStore.add(task);
-			String response = String.format(Alice.TASK_ADD, task, newStore.size());
+			String response = String.format(SUCCESS_MESSAGE, task, newStore.size());
 			newAgent = new Alice(response, new TaskList(newStore), false, true);
 		} catch (AliceException aliceException) {
 			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false);

@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 
 public class CommandDone extends Command {
 
-	private static final String usage = "done Usage: done [index]";
+	private static final String SUCCESS_MESSAGE = "Nice! I've marked this task as done:\n%s";
+
+	private static final String USAGE = "done Usage: done [index]";
 
 	public CommandDone(String[] tokens) {
 		super(tokens);
@@ -27,14 +29,14 @@ public class CommandDone extends Command {
 			}
 			List<Task> dataList = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
 			dataList.set(index - 1, dataList.get(index - 1).setDone(true));
-			String response = String.format(Alice.TASK_DONE, dataList.get(index - 1));
+			String response = String.format(SUCCESS_MESSAGE, dataList.get(index - 1));
 			newAgent = new Alice(response, new TaskList(dataList), agent.getDone(), true);
 		} catch (NumberFormatException numberFormatException) {
 			newAgent = new Alice("Invalid number", agent.getData(), agent.getDone(), false);
 		} catch (AliceException aliceException) {
 			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false);
 		} catch (ArrayIndexOutOfBoundsException | IllegalArgumentException exception) {
-			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false);
+			newAgent = new Alice(USAGE, agent.getData(), agent.getDone(), false);
 		}
 		return newAgent;
 	}

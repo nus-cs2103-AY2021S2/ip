@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 public class CommandDelete extends Command {
 
-	private static final String usage = "delete Usage: delete [index]";
+	private static final String SUCCESS_MESSAGE = "I've deleted this task:\n%s";
+	private static final String USAGE = "delete Usage: delete [index]";
 
 	public CommandDelete(String[] tokens) {
 		super(tokens);
@@ -27,14 +28,14 @@ public class CommandDelete extends Command {
 			}
 			List<Task> dataList = agent.getData().getTasks().stream().map(Task::clone).collect(Collectors.toList());
 			dataList.remove(index - 1);
-			String response = String.format(Alice.TASK_DELETE, agent.getData().getTasks().get(index - 1));
+			String response = String.format(SUCCESS_MESSAGE, agent.getData().getTasks().get(index - 1));
 			newAgent = new Alice(response, new TaskList(dataList), agent.getDone(), true);
 		} catch (NumberFormatException numberFormatException) {
 			newAgent = new Alice("Invalid number", agent.getData(), agent.getDone(), false);
 		} catch (AliceException aliceException) {
 			newAgent = new Alice(aliceException.getMessage(), agent.getData(), agent.getDone(), false);
 		} catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false);
+			newAgent = new Alice(USAGE, agent.getData(), agent.getDone(), false);
 		}
 		return newAgent;
 	}

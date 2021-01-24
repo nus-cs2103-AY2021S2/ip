@@ -20,6 +20,7 @@ public class Parser {
 		regexMap.put("delete", Pattern.compile("^delete\\s+(\\d+)"));
 		regexMap.put("list", Pattern.compile("^list$"));
 		regexMap.put("bye", Pattern.compile("^bye$"));
+		regexMap.put("find", Pattern.compile("^find\\s+(.*)"));
 	}
 
 	static {
@@ -30,6 +31,7 @@ public class Parser {
 		functionMap.put("delete", CommandDelete::new);
 		functionMap.put("list", CommandList::new);
 		functionMap.put("bye", CommandBye::new);
+		functionMap.put("find", CommandFind::new);
 	}
 
 	public static Command parse(String input) {
