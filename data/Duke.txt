@@ -1,0 +1,3 @@
+D | 1 |  sell book 
+E | 0 |  project meeting 
+D | 1 |  do homework 
