@@ -1,12 +1,15 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
+    private static final String FILE_PATH = "./src/main/java/tasks.txt";
 
     private static void introduction() {
         String logo = " ____        _        \n"
@@ -52,6 +55,7 @@ public class Duke {
     private static Task defineTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
             EmptyDescriptionException {
         if (checkValidCommand(command)) {
+            System.out.println(Arrays.toString(taskInputAndDate));
             if (taskInputAndDate[0].length() == 0) {
                 throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
             } else if (command.equals(TaskTypes.TODO.getType())) {
@@ -67,7 +71,29 @@ public class Duke {
         }
     }
 
-    private static void endProgram() {
+    private static void saveToFile() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        String text = "";
+        for (Task task : taskList) {
+            text += taskToTxt(task) + "\n";
+        }
+        fw.write(text);
+        fw.close();
+    }
+
+    private static String taskToTxt(Task task) {
+        String done = task.isDone() ? "1" : "0";
+        if (task instanceof ToDo) {
+            return "T | " + done + " | " + task.getDescription();
+        } else if (task instanceof Event) {
+            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDate();
+        } else {
+            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDate();
+        }
+    }
+
+    private static void endProgram() throws IOException {
+        saveToFile();
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
     }
@@ -133,7 +159,7 @@ public class Duke {
 
     private static void run() {
         introduction();
-        File file = new File("./src/main/java/tasks.txt");
+        File file = new File(FILE_PATH);
         try {
             Scanner scannerFile = new Scanner(file);
             if (scannerFile.hasNextLine()) {
@@ -152,14 +178,21 @@ public class Duke {
             while (scannerInput.hasNextLine()) {
                 String command = scannerInput.next();
                 if (isByeCommand(command)) {
-                    endProgram();
+                    try {
+                        endProgram();
+                    } catch (IOException e) {
+                        System.err.println("There was an error writing to the file.");
+                        System.err.println(e.getMessage());
+                    }
                     break;
                 } else if (isListCommand(command)) {
                     printList();
                 } else {
                     String taskInput = scannerInput.nextLine();
                     String[] taskInputAndDate = taskInput.split("/");
-                    String taskDescription = taskInputAndDate[0].trim();
+                    taskInputAndDate[0] = taskInputAndDate[0].trim();
+                    taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
+                    String taskDescription = taskInputAndDate[0];
                     if (isDoneCommand(command) || isDeleteCommand(command)) {
                         try {
                             if (isDoneCommand(command)) {
