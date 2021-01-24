@@ -1,9 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static String PARTING_LINE = "____________________________________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
 
     public static void main(String[] args) {
         printGreeting();
@@ -75,6 +78,7 @@ public class Duke {
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
             completedTask.complete();
+            updateTasks();
             System.out.println(" Marked. How cool is that?");
             System.out.println("  " + completedTask);
         } else {
@@ -86,6 +90,7 @@ public class Duke {
         if (index < tasks.size()) {
             Task removingTask = tasks.get(index);
             tasks.remove(index);
+            updateTasks();
             System.out.println(" Following task is removed:");
             System.out.println("  " + removingTask);
             System.out.println(" Now you have " + tasks.size() + " tasks.");
@@ -97,8 +102,20 @@ public class Duke {
     public static void addThisTask(Task task) {
         System.out.println(" Added: ");
         tasks.add(task);
+        updateTasks();
         System.out.println("  " + task);
         System.out.println(" Now you have " + tasks.size() + " tasks.");
     }
-    
+
+    public static void updateTasks() {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            for (Task task : tasks) {
+                fw.write(task.toFileString() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("error occurred when opening:" + e.getMessage());
+        }
+    }
 }
