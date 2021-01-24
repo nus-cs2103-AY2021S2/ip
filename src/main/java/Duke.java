@@ -28,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot by listening to the user commands and responding accordingly
+     * Runs the chatbot and starts taking in user command until user ends session
      * @throws DukeException if user command is invalid
      */
     public void run() throws DukeException {
