@@ -94,9 +94,9 @@ public class InputInformationExtractor {
      * @return Time of the deadline item
      * @throws EventException
      */
-    public static String getEventTime(String userInput) throws EventException {
+    public static LocalDate getEventTime(String userInput) throws EventException {
         try {
-            return userInput.split(" /at ")[1];
+            return LocalDate.parse(userInput.split(" /at ")[1]);
         } catch (Exception e) {
             throw new EventException();
         }

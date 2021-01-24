@@ -35,7 +35,7 @@ public class Tasks {
                 task = new Deadline(content, by);
             } else if (FormatChecker.likeAddingEvent(userInput)) {
                 String content = InputInformationExtractor.getEventContent(userInput);
-                String time = InputInformationExtractor.getEventTime(userInput);
+                LocalDate time = InputInformationExtractor.getEventTime(userInput);
                 task = new Event(content, time);
             }
             tasks.add(task);
