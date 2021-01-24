@@ -34,44 +34,50 @@ public class FakeBot {
     private static String DELETE_COMMAND = "delete";
     private static String FIND_COMMAND = "find";
 
-    private static String saveFilePath = "/data/";
-    private static String saveFileName = "savedHistory.txt";
+    private static String SAVE_FILE_PATH = "/data/";
+    private static String SAVE_FILE_NAME = "savedHistory.txt";
+
     private static Ui ui;
-    private static Storage storage;
+
+    private TaskList taskList;
+    private Storage storage;
 
     public static void main(String[] args) {
         ui = new Ui();
-        storage = new Storage(saveFileName, saveFilePath);
-        printHelloMessage();
+        FakeBot fakeBot = new FakeBot(SAVE_FILE_NAME, SAVE_FILE_PATH);
+        fakeBot.printHelloMessage();
+
         boolean continueProgram = true;
-        TaskList taskList = new TaskList(storage.tryReadTaskFile());
         while (continueProgram) {
             String reply = ui.readLine();
             Command command;
             try {
-                command = validateCommand(reply, taskList.getSize());
+                command = fakeBot.validateCommand(reply);
             } catch (CommandException e) {
                 ui.printBotMessage(e.getMessage());
                 continue;
             }
-            continueProgram = processCommand(taskList, command);
+            continueProgram = fakeBot.processCommand(command);
         }
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
 
+    public FakeBot(String saveFileName, String saveFilePath) {
+        storage = new Storage(SAVE_FILE_NAME, SAVE_FILE_PATH);
+        taskList = new TaskList(storage.tryReadTaskFile());
+    }
+
     /**
      * Save History to Storage.
-     *
-     * @param task List of Task to be saved.
      */
-    public static void saveHistory(TaskList task) {
-        storage.writeTasksToFIle(task);
+    public void saveHistory() {
+        storage.writeTasksToFIle(taskList);
     }
 
     /**
      * Print Hello Message used at the start of the project.
      */
-    public static void printHelloMessage() {
+    public void printHelloMessage() {
         ui.printBotMessage("Hello from\n" + LOGO + "What can I do for you?");
     }
 
@@ -80,7 +86,7 @@ public class FakeBot {
      *
      * @param task Task to print.
      */
-    public static void printDoneMessage(Task task) {
+    public void printDoneMessage(Task task) {
         ui.printBotMessage("Nice! I've marked this task as done:\n " + task.toString());
     }
 
@@ -88,32 +94,29 @@ public class FakeBot {
     /**
      * Print message to show that the task is deleted and print the remaining number of task left.
      *
-     * @param task  Deleted Task.
-     * @param count Total number of Task Left.
+     * @param task Deleted Task.
      */
-    public static void printDeleteMessage(Task task, int count) {
+    public void printDeleteMessage(Task task) {
         ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()
-                + "\nNow you have " + count + " tasks in the list.");
+                + "\nNow you have " + taskList.getSize() + " tasks in the list.");
     }
 
     /**
      * Print message to show that the task is deleted and print the remaining number of task left.
      *
-     * @param task  Added Task.
-     * @param count Total number of Task Left.
+     * @param task Added Task.
      */
-    public static void printAddedTaskMessage(Task task, int count) {
+    public void printAddedTaskMessage(Task task) {
         ui.printBotMessage("Got it. I've added this task: \n  " + task.toString()
-                + "\nNow you have " + count + " tasks in the list.");
+                + "\nNow you have " + taskList.getSize() + " tasks in the list.");
     }
 
     /**
      * Process Command given by user.
      *
-     * @param taskList Tasks List to Edit.
-     * @param command  Total number of Task Left.
+     * @param command Total number of Task Left.
      */
-    public static boolean processCommand(TaskList taskList, Command command) {
+    public boolean processCommand(Command command) {
         switch (command.getCommand()) {
         case BYE:
             return false;
@@ -124,13 +127,13 @@ public class FakeBot {
             int doneIndex = Integer.parseInt(command.getDescription()) - 1;
             taskList.getTask(doneIndex).markComplete();
             printDoneMessage(taskList.getTask(doneIndex));
-            saveHistory(taskList);
+            saveHistory();
             break;
         case TODO:
             ToDos todoTask = new ToDos(command.getDescription());
             taskList.addTask(todoTask);
-            printAddedTaskMessage(todoTask, taskList.getSize());
-            saveHistory(taskList);
+            printAddedTaskMessage(todoTask);
+            saveHistory();
             break;
         case DEADLINE:
             String[] deadlineDetalis = command.getDescription().split(DEADLINE_SPLIT_REGEX);
@@ -139,8 +142,8 @@ public class FakeBot {
             LocalTime time = LocalTime.parse(dates[1]);
             Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date, time);
             taskList.addTask(deadlineTask);
-            printAddedTaskMessage(deadlineTask, taskList.getSize());
-            saveHistory(taskList);
+            printAddedTaskMessage(deadlineTask);
+            saveHistory();
             break;
         case EVENT:
             String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
@@ -151,15 +154,15 @@ public class FakeBot {
             LocalTime endTime = LocalTime.parse(eventDates[3]);
             Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
             taskList.addTask(eventTask);
-            printAddedTaskMessage(eventTask, taskList.getSize());
-            saveHistory(taskList);
+            printAddedTaskMessage(eventTask);
+            saveHistory();
             break;
         case DELETE:
             int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
             Task deletedTask = taskList.getTask(deleteIndex);
             taskList.removeTask(deleteIndex);
-            printDeleteMessage(deletedTask, taskList.getSize());
-            saveHistory(taskList);
+            printDeleteMessage(deletedTask);
+            saveHistory();
         case FIND:
             ui.printTasks(new TaskList(taskList.find(command.getDescription())));
             break;
@@ -171,10 +174,9 @@ public class FakeBot {
     /**
      * Validate User Input.
      *
-     * @param command   Command String that is yet to be parsed.
-     * @param taskCount Total number of Task Left.
+     * @param command Command String that is yet to be parsed.
      */
-    public static Command validateCommand(String command, int taskCount) throws CommandException {
+    public Command validateCommand(String command) throws CommandException {
         if (command.equals(EXIT_COMMAND)) {
             return new Command(CommandType.BYE);
         } else if (command.equals(LIST_COMMAND)) {
@@ -205,7 +207,7 @@ public class FakeBot {
             } else if (commandName.equals(DONE_COMMAND) || commandName.equals(DELETE_COMMAND)) {
                 try {
                     int index = Integer.parseInt(description);
-                    if (index > taskCount || index < 1) {
+                    if (index > taskList.getSize() || index < 1) {
                         throw new CommandException("☹ OOPS!!! Task number out of range.");
                     }
                 } catch (NumberFormatException e) {
@@ -254,13 +256,10 @@ public class FakeBot {
                 } catch (Exception e) {
                     throw new CommandException("☹ OOPS!!! The Date format of a "
                             + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
-
                 }
-
                 return new Command(CommandType.EVENT, description);
             }
         }
-
         throw new CommandException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
