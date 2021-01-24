@@ -92,7 +92,7 @@ public class Output {
         String[] numArgs = input.split(" ");
         if(numArgs[0].equals("todo")) {
             if(numArgs.length > 1) {
-                taskDesc = numArgs[1]; //need to rehandle this, can only take in a 1 word todo
+                taskDesc = input.split("todo ")[1];
             }
 
             Todo todo = new Todo(taskDesc);
