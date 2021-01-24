@@ -1,7 +1,6 @@
 package alice.task;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public abstract class Task implements Cloneable, java.io.Serializable {
 
@@ -50,10 +49,7 @@ public abstract class Task implements Cloneable, java.io.Serializable {
 		if (!this.name.equals(task.name)) {
 			return false;
 		}
-		if (this.done != task.done) {
-			return false;
-		}
-		return true;
+		return this.done == task.done;
 	}
 
 	@Override

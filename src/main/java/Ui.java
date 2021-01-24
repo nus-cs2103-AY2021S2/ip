@@ -1,4 +1,4 @@
-import alice.*;
+import alice.Alice;
 import alice.command.CommandBye;
 import alice.command.Parser;
 import alice.task.Task;
