@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +29,7 @@ public class TaskList {
 
     /**
      * Add task to the list.
-     * @param task Task entered by the user.
+     * @param task duke.Tasks.Task entered by the user.
      */
 
     public void addTask(Task task) {

@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
@@ -12,7 +14,7 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor of the Event class.
+     * Constructor of the duke.Tasks.Event class.
      * @param description A brief description of the event.
      */
 

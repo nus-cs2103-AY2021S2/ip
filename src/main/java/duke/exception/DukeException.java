@@ -1,7 +1,9 @@
+package duke.exception;
+
 public class DukeException extends Exception {
 
     /**
-     * Constructor for DukeException.
+     * Constructor for duke.DukeExceptions.DukeException.
      * @param errorMsg Error message to prompt user of error.
      */
 

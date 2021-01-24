@@ -1,9 +1,11 @@
+package duke.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor of the Task class.
+     * Constructor of the duke.Tasks.Task class.
      * @param description A brief description of the task.
      */
 
