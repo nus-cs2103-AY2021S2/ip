@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import exceptions.DukeCommandNotFoundException;
 
-public class Command {
+public class Parser {
     Optional<String> command;
     Optional<List<String>> commandArgs;
     Optional<List<String>> fullCommand;
@@ -15,7 +15,7 @@ public class Command {
      * and the rest of the itemms of the string gets taken as the command arguments
      * Null safety is enforced through use of Optionals
      */
-    public Command(List<String> fullCommand) {
+    public Parser(List<String> fullCommand) {
         this.command = Optional.ofNullable(fullCommand.get(0));
         this.commandArgs = Optional.ofNullable(fullCommand.subList(1, fullCommand.size()));
         this.fullCommand = Optional.ofNullable(fullCommand);

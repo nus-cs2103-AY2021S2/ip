@@ -20,7 +20,7 @@ import models.Todo;
 
 import views.TodosView;
 
-public class TodosController {
+public class TaskList {
     /** todosList contains the state of the todos */
     private List<Optional<? extends Todo>> todosList;
     /** TodosView initialised to render view of Todos */
@@ -30,7 +30,7 @@ public class TodosController {
      * Constructor of TodosController without any arguments initialises a new
      * TodosView and an empty list of Optional Todo objects
      */
-    public TodosController() {
+    public TaskList() {
         this.todosList = new ArrayList<>();
     }
 
@@ -40,7 +40,7 @@ public class TodosController {
      * 
      * @param todosList is an existing List of Optional Todos
      */
-    public TodosController(List<Optional<? extends Todo>> todosList) {
+    public TaskList(List<Optional<? extends Todo>> todosList) {
         this.todosList = todosList;
     }
 
@@ -71,7 +71,7 @@ public class TodosController {
      *                                afterwards
      * @return TodosController with todosList containing the new Todo added
      */
-    public TodosController addTodos(List<String> newTodoList) throws DukeBlankTaskException {
+    public TaskList addTodos(List<String> newTodoList) throws DukeBlankTaskException {
         if (newTodoList.size() == 0) {
             throw new DukeBlankTaskException("The Todo you are trying to add cannot be blank!");
         }
@@ -81,7 +81,7 @@ public class TodosController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new TodosController(
+        return new TaskList(
                 Stream.concat(this.todosList.stream(), Stream.of(newTodoObject)).collect(Collectors.toList()));
     }
 
@@ -99,7 +99,7 @@ public class TodosController {
      *                                          out of the range of the list size of
      *                                          todos in the controller
      */
-    public TodosController deleteTodo(List<String> deleteTodoArgs)
+    public TaskList deleteTodo(List<String> deleteTodoArgs)
             throws DukeBlankTaskException, DukeTaskIndexOutOfRangeException {
         // check if args is empty
         if (deleteTodoArgs.size() == 0) {
@@ -117,7 +117,7 @@ public class TodosController {
         todosView.deleted(this.todosList.get(idxDelete), this.todosList.size() - 1);
 
         // remove from stream
-        return new TodosController(IntStream.range(0, this.todosList.size()).filter(idx -> idx != idxDelete)
+        return new TaskList(IntStream.range(0, this.todosList.size()).filter(idx -> idx != idxDelete)
                 .mapToObj(idx -> this.todosList.get(idx)).collect(Collectors.toList()));
     }
 
@@ -137,7 +137,7 @@ public class TodosController {
      * @throws DukeDateTimeParseException Exception is thrown when date time passed
      *                                    into CLI is of the wrong format
      */
-    public TodosController addDeadline(List<String> newDeadlineList)
+    public TaskList addDeadline(List<String> newDeadlineList)
             throws DukeBlankTaskException, DukeBlankDetailsException, DukeDateTimeParseException {
         if (newDeadlineList.size() == 0) {
             throw new DukeBlankTaskException("The Deadline you are trying to add cannot be blank!");
@@ -185,7 +185,7 @@ public class TodosController {
         this.todosView.added(newDeadline, this.todosList.size() + 1);
 
         // return new controller
-        return new TodosController(
+        return new TaskList(
                 Stream.concat(this.todosList.stream(), Stream.of(newDeadline)).collect(Collectors.toList()));
     }
 
@@ -205,7 +205,7 @@ public class TodosController {
      * @throws DukeDateTimeParseException Exception is thrown when date time passed
      *                                    into CLI is of the wrong format
      */
-    public TodosController addEvent(List<String> newEventList)
+    public TaskList addEvent(List<String> newEventList)
             throws DukeBlankDetailsException, DukeBlankTaskException, DukeDateTimeParseException {
         // if list is empty, throw error
         if (newEventList.size() == 0) {
@@ -256,8 +256,7 @@ public class TodosController {
         }
 
         // return new controller
-        return new TodosController(
-                Stream.concat(this.todosList.stream(), Stream.of(newEvent)).collect(Collectors.toList()));
+        return new TaskList(Stream.concat(this.todosList.stream(), Stream.of(newEvent)).collect(Collectors.toList()));
     }
 
     /**
@@ -272,13 +271,13 @@ public class TodosController {
      *                                          specifies a task index that is out
      *                                          of range.
      */
-    public TodosController markAsDone(List<String> doneArgs) throws DukeTaskIndexOutOfRangeException {
+    public TaskList markAsDone(List<String> doneArgs) throws DukeTaskIndexOutOfRangeException {
         int idxIsDone = Integer.parseInt(doneArgs.get(0)) - 1;
         if (idxIsDone >= this.todosList.size()) {
             throw new DukeTaskIndexOutOfRangeException(
                     "The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.");
         }
-        return new TodosController(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
+        return new TaskList(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
             if (idx == idxIsDone) {
                 Optional<? extends Todo> doneTodo = this.todosList.get(idx).map(todo -> todo.markAsDone());
                 try {

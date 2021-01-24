@@ -8,7 +8,7 @@ import java.util.Optional;
 import exceptions.DukeBlankTaskException;
 import exceptions.DukeCommandNotFoundException;
 import exceptions.DukeTaskIndexOutOfRangeException;
-import models.Command;
+import models.Parser;
 import views.Greeting;
 import models.Storage;
 import models.Todo;
@@ -38,12 +38,12 @@ public class AppController {
         List<Optional<? extends Todo>> existingTodosList = storage.retrieveLocalDatabase();
 
         // init TodosController
-        TodosController todosController = new TodosController(existingTodosList);
+        TaskList todosController = new TaskList(existingTodosList);
 
         // loop will be broken only by 'bye'
         while (true) {
             // list has structure [command, ... command related args]
-            Command command = new Command(Arrays.asList((sc.nextLine().split(" "))));
+            Parser command = new Parser(Arrays.asList((sc.nextLine().split(" "))));
 
             // try catch statement wraps around getCommand which may throw an error if
             // command input does not adhere to command format
