@@ -11,12 +11,20 @@ import java.util.stream.Collectors;
 public class CommandDelete extends Command {
 
 	private static final String SUCCESS_MESSAGE = "I've deleted this task:\n%s";
+
+	/** Usage details. **/
 	private static final String USAGE = "delete Usage: delete [index]";
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public CommandDelete(String[] tokens) {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		Alice newAgent;
@@ -40,6 +48,9 @@ public class CommandDelete extends Command {
 		return newAgent;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);

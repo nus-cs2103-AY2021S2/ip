@@ -34,26 +34,10 @@ public class ParseTest {
 	}
 
 	@Test
-	public void parseList_listExcess_failure() {
-		assertNotEquals(
-				new CommandList(new String[]{"list"}),
-				Parser.parse("list abc def ghi"));
-	}
-
-	@Test
 	public void parse_list_success() {
 		assertEquals(
 				new CommandList(new String[]{"list"}),
 				Parser.parse("list")
-				);
-	}
-
-	@Test
-	public void parseEvent_listExcess_success() {
-		String input = "list abc def ghi";
-		assertEquals(
-				new CommandEcho(new String[]{input}),
-				Parser.parse(input)
 				);
 	}
 

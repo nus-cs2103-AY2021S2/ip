@@ -13,14 +13,18 @@ public class CommandAdd extends Command {
 
 	private static final String SUCCESS_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d task(s) in the list";
 
-	private static final String todoUsage = "todo usage: todo [activity]";
-	private static final String deadlineUsage = "deadline usage: deadline [activity] /by [deadline yyyy/MM/dd]";
-	private static final String eventUsage = "todo usage: event [activity] /at [time yyyy/MM/dd]";
+	/** Usage details. **/
+	private static final String USAGE_TODO = "todo usage: todo [activity]";
+	private static final String USAGE_DEADLINE = "deadline usage: deadline [activity] /by [deadline yyyy/MM/dd]";
+	private static final String USAGE_EVENT = "todo usage: event [activity] /at [time yyyy/MM/dd]";
 
 	public CommandAdd(String[] tokens) {
 		super(tokens);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Alice execute(Alice agent) {
 		Alice newAgent;
@@ -39,19 +43,22 @@ public class CommandAdd extends Command {
 			String usage;
 			switch (tokens[0]) {
 			case "todo":
-				usage = todoUsage;
+				usage = USAGE_TODO;
 				break;
 			case "deadline":
-				usage = deadlineUsage;
+				usage = USAGE_DEADLINE;
 				break;
 			default:
-				usage = eventUsage;
+				usage = USAGE_EVENT;
 			}
 			newAgent = new Alice(usage, agent.getData(), agent.getDone(), false);
 		}
 		return newAgent;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object object) {
 		return super.equals(object);
