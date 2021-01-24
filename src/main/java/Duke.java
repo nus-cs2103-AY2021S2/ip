@@ -115,7 +115,7 @@ public class Duke {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("error occurred when opening:" + e.getMessage());
+            System.out.println("Has no targeted file in: " + e.getMessage());
         }
     }
 }
