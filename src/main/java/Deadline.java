@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A Deadline task that inherits Task.
  */
@@ -6,7 +9,8 @@ public class Deadline extends Task{
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        LocalDate date = LocalDate.parse(by);
+        this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -15,6 +19,6 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by + ")";
     }
 }

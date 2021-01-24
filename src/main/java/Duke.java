@@ -155,6 +155,9 @@ public class Duke {
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public static void done(String command, ArrayList<Task> tasks, int count) throws DukeException{
+        if (command.length() < 6) {
+            throw new DukeException("OOPS!!! The item number cannot be empty.");
+        }
         String[] commandToWords = command.split(" ");
         int itemNum = Integer.parseInt(commandToWords[1]);
         if (itemNum > count || itemNum < 1) {
@@ -174,6 +177,9 @@ public class Duke {
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public static void delete(String command, ArrayList<Task> tasks, int count) throws DukeException {
+        if (command.length() < 8) {
+            throw new DukeException("OOPS!!! The item number cannot be empty.");
+        }
         String[] commandToWords = command.split(" ");
         int itemNum = Integer.parseInt(commandToWords[1]);
         if (itemNum > count || itemNum < 1) {
