@@ -15,7 +15,7 @@ public class TaskList {
     }
 
     public void deleteTask(int taskIndex) {
-        tasks.remove(taskIndex - 1);
+        tasks.remove(taskIndex);
     }
 
     public Task getTask(int taskIndex) {
