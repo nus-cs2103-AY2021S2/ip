@@ -22,11 +22,12 @@ public class Controller {
             " can I do for you?" + NEWLINE;
     private final static String BYE_MSG = INDENT + " Bye. Hope to see you again soon!" + NEWLINE;
     private final static String END_COMMAND = "bye";
-    private final static String DATA_DIR = "./data";
-    private final List<Task> list;
+    private final ArrayList<Task> list;
+    private final Storage storage;
 
     public Controller() {
         list = new ArrayList<>();
+        storage = Storage.getInstance();
     }
 
     public void run() {
@@ -66,7 +67,7 @@ public class Controller {
                 addTask(input);
                 break;
             }
-            update();
+            storage.update(list);
         } catch (DukeUnknownArgumentsException e) {
             String errorMsg = String.format(INDENT + " %s", e);
             System.out.println(errorMsg);
@@ -151,26 +152,5 @@ public class Controller {
                         + t + NEWLINE + INDENT + " Now you have %d tasks in the list.",
                         list.size());
         System.out.println(output);
-    }
-
-    private void update() {
-        try {
-            Path dataPath = Paths.get(DATA_DIR);
-            Files.createDirectories(dataPath);
-            File saveFile = new File("./data/save.txt");
-            FileWriter fw = new FileWriter(saveFile);
-            fw.write(tasks());
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Failed to create data directory" + e.getMessage());
-        }
-    }
-
-    private String tasks() {
-        String res = "";
-        for (Task task : list) {
-            res = res.concat(task.data() + NEWLINE);
-        }
-        return res;
     }
 }
