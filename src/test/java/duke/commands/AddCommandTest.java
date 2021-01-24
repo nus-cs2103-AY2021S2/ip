@@ -17,33 +17,30 @@ public class AddCommandTest {
     @Test
     public void testAddCommand_noDescriptionGiven_throwsDescriptionNotFoundException() {
         String testCommand = "deadline /by";
-        String[] splitTestCommand = testCommand.split(" ");
         TaskList tasks = new TaskList(new ArrayList<Task>());
         Storage storage = new Storage("AddCommandTest.txt");
         Ui ui = new Ui();
-        AddCommand addCommand = new AddCommand(testCommand, splitTestCommand);
+        AddCommand addCommand = new AddCommand(testCommand);
         assertThrows(DescriptionNotFoundException.class, () -> addCommand.execute(tasks, ui, storage));
     }
 
     @Test
     public void testAddCommand_noDateGiven_throwsDateTimeNotFoundException() {
         String testCommand = "deadline testing /by";
-        String[] splitTestCommand = testCommand.split(" ");
         TaskList tasks = new TaskList(new ArrayList<Task>());
         Storage storage = new Storage("AddCommandTest.txt");
         Ui ui = new Ui();
-        AddCommand addCommand = new AddCommand(testCommand, splitTestCommand);
+        AddCommand addCommand = new AddCommand(testCommand);
         assertThrows(DateTimeNotFoundException.class, () -> addCommand.execute(tasks, ui, storage));
     }
 
     @Test
     public void testAddCommand_invalidDateTimeFormatGiven_throwsDateTimeParseException() {
         String testCommand = "deadline testing /by 20/20/2020";
-        String[] splitTestCommand = testCommand.split(" ");
         TaskList tasks = new TaskList(new ArrayList<Task>());
         Storage storage = new Storage("AddCommandTest.txt");
         Ui ui = new Ui();
-        AddCommand addCommand = new AddCommand(testCommand, splitTestCommand);
+        AddCommand addCommand = new AddCommand(testCommand);
         assertThrows(DateTimeParseException.class, () -> addCommand.execute(tasks, ui, storage));
     }
 }
