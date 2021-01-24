@@ -1,0 +1,3 @@
+T : 1 : Buy acai
+E : 0 : meeting : Monday 2-4pm
+D : 0 : homework : sunday

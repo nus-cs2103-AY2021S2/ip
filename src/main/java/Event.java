@@ -4,6 +4,10 @@ public class Event extends Task{
     public Event(String name, String time) {
         super(name);
         this.time = time;
+        this.cat = 'E';
+    }
+    public String getTime() {
+        return this.time;
     }
 
     @Override

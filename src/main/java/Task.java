@@ -1,13 +1,20 @@
 public class Task {
     protected String name;
     protected boolean completed;
+    protected char cat;
 
-//    public Task() {
-//        this.completed = false;
-//    }
     public Task(String name) {
         this.name = name;
         this.completed = false;
+    }
+    public char getCat() {
+        return this.cat;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public boolean getCompleted() {
+        return this.completed;
     }
     public void checkTask() {
         this.completed = true;

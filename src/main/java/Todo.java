@@ -2,6 +2,7 @@ public class Todo extends Task{
 
     public Todo(String name) {
         super(name);
+        this.cat = 'T';
     }
 
     @Override
