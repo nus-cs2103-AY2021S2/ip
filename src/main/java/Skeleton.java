@@ -79,7 +79,7 @@ public class Skeleton {
             throw new DukeException("No such list item.");
         }
         storage.get(value-1).markAsDone();
-        System.out.println("YOSHA! KONNO TASK GA OWARIMASHITA! GANBARE");
+        System.out.println("ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE");
         System.out.println(storage.get(value - 1));
         System.out.println();
     }
@@ -108,7 +108,7 @@ public class Skeleton {
     }
     /** function that exits the program when the user types bye*/
     static void terminate(){
-        System.out.println("Sayonara, mata ne!");
+        System.out.println("GOOD BYE SEE YOU AGAIN!");
         System.out.println();
         sc.close();
         exit(0);
@@ -116,8 +116,8 @@ public class Skeleton {
 
     /** function that greets the user*/
     static void greet(){
-        System.out.println("Konnichiwa! watashi wa Duke desu");
-        System.out.println("Dou shi mashi taka?");
+        System.out.println("HELLO! I AM YOUR ROBOT");
+        System.out.println("WHAT DO YOU WANT?");
         System.out.println("***********");
     }
 }
