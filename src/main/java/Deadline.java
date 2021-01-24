@@ -1,19 +1,29 @@
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    protected String by;
+    private LocalDateTime deadline;
 
     /**
      * Constructor of the Deadline class
      * @param description A brief description of the deadline.
-     * @param by The time/date that the task must be completed by.
      */
 
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        int dayOfMonth = deadline.getDayOfMonth();
+        Month month = deadline.getMonth();
+        int year = deadline.getYear();
+        LocalTime time = deadline.toLocalTime();
+        String twelveHrTime = time.format(DateTimeFormatter.ofPattern("h:mm a"));
+        return "[D]" + super.toString() + " (by: " + month.toString()
+                + " " + dayOfMonth + " " + year + " " + twelveHrTime + ")";
     }
 }
