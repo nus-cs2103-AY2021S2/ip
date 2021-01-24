@@ -17,6 +17,8 @@ public class Parser {
                 command = new DoneCommand(check);
             } else if (check[0].equals("delete")) {
                 command = new DeleteCommand(check);
+            } else if (check[0].equals("find")) {
+                command = new FindCommand(fullCommand);
             } else {
                 command = new AddCommand(fullCommand, check);
             }
