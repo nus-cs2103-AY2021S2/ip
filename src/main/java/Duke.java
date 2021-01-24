@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class Duke {
         List<Task> tasks = new ArrayList<Task>();
         Scanner scan = new Scanner(System.in);
         Validation validate = new Validation();
+        DateValidation dateValidation = new DateValidation();
         int number;
 
         while (true) {
@@ -38,7 +40,7 @@ public class Duke {
                         try {
                             validate.checkForSchedule(command, findSlash);
                             String descriptionDeadline = command.substring(index + 1, findSlash - 1);
-                            String date = command.substring(findSlash + 4);
+                            LocalDate date = dateValidation.handleDate(command.substring(findSlash + 4));
                             Deadline newDeadline = new Deadline(descriptionDeadline, date);
                             tasks.add(newDeadline);
                             System.out.println("Done! One new task:\n" + newDeadline.toString() +
