@@ -1,5 +1,9 @@
-import exceptions.DukeException;
-import exceptions.DukeNoDescriptionException;
+package duke.ui;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.exceptions.DukeException;
+import duke.exceptions.DukeNoDescriptionException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -55,7 +59,7 @@ public class Message {
     }
 
     public static String getErrorMsg(DateTimeParseException e) {
-        return INDENT + "Date is not input correctly. " + e.getMessage();
+        return INDENT + "Date is not input correctly. Ensure input date is: YYYY-MM-DD.";
     }
 
     public static String getTasksMsg(ArrayList<Task> taskList) {

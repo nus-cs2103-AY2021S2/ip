@@ -1,6 +1,10 @@
-import exceptions.DukeEmptyListException;
-import exceptions.DukeNoDescriptionException;
-import exceptions.DukeUnknownArgumentsException;
+package duke.ui;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.exceptions.DukeEmptyListException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeUnknownArgumentsException;
 
 import java.io.PrintStream;
 import java.time.format.DateTimeParseException;
