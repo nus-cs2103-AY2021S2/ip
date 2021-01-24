@@ -14,4 +14,9 @@ public abstract class Task {
     public String getTaskName(){
         return this.taskName;
     }
+    public boolean isDone(){
+        return this.done;
+    }
+
+   abstract String toSaveFormat();
 }

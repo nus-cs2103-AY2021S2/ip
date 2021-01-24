@@ -1,53 +1,55 @@
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskList {
     public static String line = "------------------------------------------------------";
-    private final List<Task> ls;
-    private static String FILE_PATH = "data/Duke.txt";
+    private final List<Task> ls = new ArrayList<>();
+    private final Storage storage;
 
-    TaskList() {
-        this.ls = new ArrayList<>();
+    TaskList(Storage storage){
+        this.storage = storage;
     }
 
-    private void writeToFile() throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH);
-        for(Task task : this.ls){
-            fw.write(task.toString() + "\n");
+    public void addTaskFromFile() throws IOException{
+        File file = this.storage.getFile();
+        Scanner sc = new Scanner(file);
+        while(sc.hasNext()){
+            String str = sc.nextLine();
+            Task task = Parser.parseFileInput(str);
+            this.ls.add(task);
         }
-        fw.close();
     }
 
+    public List<Task> getList(){
+        return this.ls;
+    }
 
-
-    public void addTask(Task task) throws IOException {
+    public void addTask(Task task) {
         String res = "\t" + line + "\n\tGot it. I've added this task:\n\t\t" + task.toString() + "\n";
         this.ls.add(task);
         int numOfTasks = ls.size();
         res += "\tNow you have " + numOfTasks + " tasks in the list\n\t" + line;
         System.out.println(res);
-        writeToFile();
     }
 
-    public void finishTask(int index) throws IOException {
+    public void finishTask(int index) {
         Task task = this.ls.get(index - 1);
         task.markAsDone();
         String res = "\t" + line + "\n\t" + "Nice! I've marked this task as done: \n\t\t" + task + "\n\t" + line;
         System.out.println(res);
-        writeToFile();
 
     }
 
-    public void deleteTask(int index) throws IOException{
+    public void deleteTask(int index) {
         Task task = this.ls.get(index - 1);
         this.ls.remove(index-1);
         int len = this.ls.size();
         String res = "\t" + line + "\n\t" + " Noted. I've removed this task:\n\t\t" + task +
                 "\n\tNow you have " + len +" tasks in the list.\n\t" + line;
         System.out.println(res);
-        writeToFile();
 
     }
 

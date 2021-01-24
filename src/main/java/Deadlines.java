@@ -1,17 +1,24 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task{
     private final String by;
-    Deadlines(String name, String by){
+    private boolean savedBefore;
+    Deadlines(String name, String by, boolean savedBefore){
         super(name);
         this.by = by;
+        this.savedBefore = savedBefore;
     }
 
     public LocalDateTime parse(String dateTimeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(dateTimeString, formatter);
+    }
+
+    @Override
+    public String toSaveFormat(){
+        return "D | " + (isDone() ? "1" : "0") +
+                " | " + this.getTaskName() + " | " + (this.savedBefore ? this.by : this.parseDate());
     }
 
     public String parseDate() {
@@ -20,7 +27,8 @@ public class Deadlines extends Task{
 
     @Override
     public String toString(){
-        return "[D]" + (this.done ? "[X] " : "[ ]") + this.getTaskName() +  " (by: " +
-                parseDate() + ")";
+
+        return "[D]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() +  " (by: " +
+                (savedBefore ?  this.by : parseDate())  + ")";
     }
 }

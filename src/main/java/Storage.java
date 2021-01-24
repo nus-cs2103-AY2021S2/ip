@@ -1,24 +1,50 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 public class Storage {
-    private final String filePath;
+    private File file;
 
-    Storage(String filePath){
-        this.filePath = filePath;
+    Storage() {
+        this.file = new File("data", "duke.txt");
     }
 
-    public Scanner loadFile() throws FileNotFoundException {
-        File file = new File(this.filePath);
-        return new Scanner(file);
+    public void createFile() throws IOException{
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+            System.out.println("Directory created");
+        }
+
+        if (!file.exists()) {
+            file.createNewFile();
+            System.out.println("New file created");
+        }
+
     }
 
-    public void writeTasksToFile(Task task) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath, true);
-        fw.write(task.toString());
+    public File getFile()  {
+        return this.file;
+    }
+
+    public void update(TaskList taskList) throws IOException {
+        FileWriter fw = new FileWriter(this.file);
+        for(Task task : taskList.getList()){
+            fw.write(task.toSaveFormat() + "\n");
+
+        }
         fw.close();
+
+    }
+
+    public void setUpFile() throws IOException {
+        if (!Files.exists(Paths.get("data"))) {
+            Files.createDirectory(Paths.get("data"));
+        }
+        else if (!Files.exists(Paths.get("data/Duke.txt"))) {
+            Files.createFile(Paths.get("data/Duke.txt"));
+        }
     }
 }

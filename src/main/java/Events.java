@@ -5,9 +5,14 @@ public class Events extends Task{
         this.by = by;
     }
 
+    @Override
+    public String toSaveFormat(){
+        return "E | " + (isDone() ? "1" : "0") +
+                " | " + this.getTaskName() + " | " + this.by;
+    }
 
     @Override
     public String toString(){
-        return "[E]" + (this.done ? "[X] " : "[ ]") + this.getTaskName() +  " (by: " + this.by + ")";
+        return "[E]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName() +  " (at: " + this.by + ")";
     }
 }

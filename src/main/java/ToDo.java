@@ -3,9 +3,15 @@ public class ToDo extends Task{
         super(name);
     }
 
+    @Override
+    public String toSaveFormat(){
+        return "T | " + (isDone() ? "1" : "0") +
+                " | " + this.getTaskName();
+    }
+
 
     @Override
     public String toString(){
-        return "[T]" + (this.done ? "[X]" : "[ ]") + this.getTaskName();
+        return "[T]" + (this.done ? "[X] " : "[ ] ") + this.getTaskName();
     }
 }
