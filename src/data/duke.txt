@@ -1,0 +1,5 @@
+T | 1 | SD
+T | 0 | DW
+T | 0 | LL
+D | 0 |  wooo |  12pm
+E | 0 |  opp |  123pm

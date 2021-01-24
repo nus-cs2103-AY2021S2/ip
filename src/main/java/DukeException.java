@@ -1,10 +1,9 @@
 public class DukeException extends Exception {
-    String id;
 
-    public DukeException(String x) {
-        id = x;
+    public DukeException(String e) {
+        super("Oops! " + e);
     }
-    public String toString() {
-        return "Please enter a proper instruction [" + id + "]";
-    }
+//    public String toString() {
+//        return "Please enter a proper instruction [" + id + "]";
+//    }
 }
