@@ -1,18 +1,14 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-
 public class EventTask extends Task {
 
-  protected LocalDate date;
+  protected String at;
 
-  public EventTask(String name, LocalDate date) {
+  public EventTask(String name, String at) {
     super(name);
-    this.date = date;
+    this.at = at;
   }
 
   @Override
   public String toString() {
-    return "[E]" + super.toString() + " (at:" + this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+    return "[E]" + super.toString() + " (at:" + this.at + ")";
   }
 }
