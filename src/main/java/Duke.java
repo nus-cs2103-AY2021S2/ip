@@ -1,7 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,6 +86,7 @@ public class Duke {
         String taskName;
         String taskDate;
         Task taskToReturn = null;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         switch (cmd) {
         case TODO:
             taskStatus = Integer.parseInt(taskStringArr[1]);
@@ -94,13 +97,23 @@ public class Duke {
             taskStatus = Integer.parseInt(taskStringArr[1]);
             taskName = taskStringArr[2];
             taskDate = taskStringArr[3];
-            taskToReturn = new EventTask(taskName, taskDate);
+            try {
+                LocalDateTime ldtEvent = LocalDateTime.parse(taskDate, dtf);
+                taskToReturn = new EventTask(taskName, ldtEvent);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Save data file corrupted");
+            }
             break;
         case DEADLINE:
             taskStatus = Integer.parseInt(taskStringArr[1]);
             taskName = taskStringArr[2];
             taskDate = taskStringArr[3];
-            taskToReturn = new DeadlineTask(taskName, taskDate);
+            try {
+                LocalDateTime ldtDeadline = LocalDateTime.parse(taskDate, dtf);
+                taskToReturn = new DeadlineTask(taskName, ldtDeadline);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Save data file corrupted");
+            }
             break;
         }
         if (taskStatus == -1 || taskToReturn == null) {
@@ -173,6 +186,10 @@ public class Duke {
                     "\n" +
                     PADDING +
                     "event <EVENT_NAME> /at <EVENT_TIME>";
+            String eDateErrorMsg = "Invalid date format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
             if (fullCmdStrArray.length == 1) { // handle event without parameters
                 throw new DukeException(eErrorMsg);
             }
@@ -181,12 +198,15 @@ public class Duke {
                 String[] eTaskDetailsArray = eTaskDetails.split(" /at ");
                 String eTaskName = eTaskDetailsArray[0];
                 String eTaskDate = eTaskDetailsArray[1];
-                EventTask newEventTask = new EventTask(eTaskName, eTaskDate);
-
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
+                EventTask newEventTask = new EventTask(eTaskName, ldt);
                 taskList.add(newEventTask);
                 displayAddToList(newEventTask);
             } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
                 throw new DukeException(eErrorMsg);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(eDateErrorMsg);
             }
             break;
         case "deadline":
@@ -194,6 +214,10 @@ public class Duke {
                     "\n" +
                     PADDING +
                     "deadline <TASK_NAME> /by <DEADLINE_TIME>";
+            String dDateErrorMsg = "Invalid date format. Please enter as such:" +
+                    "\n" +
+                    PADDING +
+                    "yyyy-MM-dd HHmm (e.g. 2019-10-15 1800)";
             if (fullCmdStrArray.length == 1) { // handle deadline without parameters
                 throw new DukeException(dErrorMsg);
             }
@@ -202,12 +226,16 @@ public class Duke {
                 String[] dTaskDetailsArray = dTaskDetails.split(" /by ");
                 String dTaskName = dTaskDetailsArray[0];
                 String dTaskDate = dTaskDetailsArray[1];
-                DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, dTaskDate);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                LocalDateTime ldt = LocalDateTime.parse(dTaskDate, dtf);
+                DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, ldt);
 
                 taskList.add(newDeadlineTask);
                 displayAddToList(newDeadlineTask);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(dErrorMsg);
+            } catch (DateTimeParseException e) {
+                throw new DukeException(dDateErrorMsg);
             }
             break;
         case "delete":

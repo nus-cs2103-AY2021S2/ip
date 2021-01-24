@@ -1,2 +1,3 @@
-DEADLINE|0|abas|adjfsa
-TODO|1|hello world 
+TODO|1|hello world
+EVENT|1|a|2020-10-09 1824
+DEADLINE|0|a b c|2021-01-03 1234
