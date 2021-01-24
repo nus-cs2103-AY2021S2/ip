@@ -167,6 +167,7 @@ public class UiTest {
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
+    /** Tests printing of search results when there are 3 tasks of different types */
     @Test
     public void printFoundMsg_taskTypesAll_tasksSize3() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
