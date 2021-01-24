@@ -1,9 +1,19 @@
 package Duke.Helper;
 
-import Duke.Exception.*;
-import Duke.Task.*;
-import Duke.Command.*;
-import Duke.Constant.*;
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidIndex;
+import Duke.Exception.InvalidTask;
+import Duke.Exception.NoSuchCommandException;
+
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
+import Duke.Command.Command;
+
+import Duke.Constant.Constants;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -40,7 +50,7 @@ public class TaskList {
         }
     }
 
-    public String addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask{
+    public String addTask(String command) throws NoSuchCommandException, EmptyTaskException, InvalidTask {
         if (command.equalsIgnoreCase(Command.TODO.getAction()) ||
                 command.equalsIgnoreCase(Command.DEADLINE.getAction()) ||
                 command.equalsIgnoreCase(Command.EVENT.getAction())){

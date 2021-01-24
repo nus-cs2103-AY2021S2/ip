@@ -5,7 +5,8 @@ public enum Command {
     DONE("done"), DELETE("delete"),
     EVENT("event"), DEADLINE("deadline"), TODO("todo");
 
-    private String action;
+    private final String action;
+
     Command(String action) {
         this.action = action;
     }

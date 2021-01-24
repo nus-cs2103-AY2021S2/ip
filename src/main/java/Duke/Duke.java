@@ -1,9 +1,17 @@
 package Duke;
 
-import Duke.Exception.*;
-import Duke.Command.*;
-import Duke.Constant.*;
-import Duke.Helper.*;
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidTask;
+import Duke.Exception.NoSuchCommandException;
+import Duke.Exception.InvalidIndex;
+
+import Duke.Command.Command;
+
+import Duke.Constant.Constants;
+
+import Duke.Helper.Storage;
+import Duke.Helper.TaskList;
+import Duke.Helper.Ui;
 
 import java.util.Scanner;
 
@@ -42,7 +50,7 @@ public class Duke {
                 } catch (InvalidIndex e){
                     ui.printResponse(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DONE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DONE.getAction())){
                 try{
                     int doneIndex = Integer.parseInt(command.substring(5));
                     String result = taskList.finishTask(doneIndex);
@@ -50,7 +58,7 @@ public class Duke {
                 } catch (NumberFormatException | InvalidIndex e){
                     System.out.println(e.getMessage());
                 }
-            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction() + " ")){
+            } else if (command.toLowerCase().startsWith(Command.DELETE.getAction())){
                 try{
                     int deleteIndex = Integer.parseInt(command.substring(7));
                     String result = taskList.deleteTask(deleteIndex);

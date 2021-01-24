@@ -1,4 +1,5 @@
 package Duke.Exception;
+
 public class InvalidTask extends Exception{
     String type;
 

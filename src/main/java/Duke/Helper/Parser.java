@@ -1,7 +1,12 @@
 package Duke.Helper;
 
-import Duke.Task.*;
-import Duke.Exception.*;
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Todo;
+
+import Duke.Exception.EmptyTaskException;
+import Duke.Exception.InvalidTask;
+
 public class Parser {
     public Todo parseTodo(String command) throws EmptyTaskException {
         String description = command.substring(5);

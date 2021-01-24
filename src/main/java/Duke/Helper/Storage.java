@@ -1,15 +1,20 @@
 package Duke.Helper;
 
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import Duke.Task.*;
 
 public class Storage {
-    private String path;
+    private final String path;
 
     public Storage(String path) {
         this.path = path;
