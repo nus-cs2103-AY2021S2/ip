@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.List;
 
 public class TaskList {
@@ -19,8 +20,12 @@ public class TaskList {
         this.ui = new Ui();
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
+    public ListIterator<Task> listIterator() {
+        return this.tasks.listIterator();
+    }
+
+    public Task getTask(int taskIndex) {
+        return tasks.get(taskIndex);
     }
 
     public int getSize() {

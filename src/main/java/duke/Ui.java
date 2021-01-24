@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Ui {
@@ -35,7 +36,10 @@ public class Ui {
         System.out.println("\t____________________________________________________________\n");
         System.out.println("\t  Your tasks:");
         int listCounter = 1;
-        for (Task task : tasks.getTasks()) {
+        ListIterator<Task> iter = tasks.listIterator();
+        Task task;
+        while (iter.hasNext()) {
+            task = iter.next();
             System.out.println("  \t  " + listCounter + "." + task);
             listCounter++;
         }

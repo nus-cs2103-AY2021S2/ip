@@ -90,7 +90,7 @@ public class Parser {
         }
         try {
             int taskIndex = Integer.parseInt(split[1])-1;
-            tasks.getTasks().get(taskIndex);
+            tasks.getTask(taskIndex);
             return taskIndex;
         } catch (NumberFormatException e) {
             throw new DukeArgumentException("Please enter a numerical value for the task index!");

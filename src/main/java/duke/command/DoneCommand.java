@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, TaskStorage storage) {
-        Task completedTask = tasks.getTasks().get(completedTaskIdx);
+        Task completedTask = tasks.getTask(completedTaskIdx);
         completedTask.markDone();
         storage.storeData(tasks);
         ui.print("Nice! I have marked this task as done:\n\t\t " + completedTask);

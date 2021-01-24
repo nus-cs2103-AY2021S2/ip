@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class TaskStorage {
@@ -31,7 +32,10 @@ public class TaskStorage {
     public void storeData(TaskList tasks) {
         try {
             writer = new FileWriter(file);
-            for (Task task : tasks.getTasks()) {
+            ListIterator<Task> iter = tasks.listIterator();
+            Task task;
+            while (iter.hasNext()) {
+                task = iter.next();
                 char taskType = task.toString().charAt(1);
                 int done = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
