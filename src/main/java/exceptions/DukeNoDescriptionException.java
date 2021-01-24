@@ -1,3 +1,5 @@
+package exceptions;
+
 public class DukeNoDescriptionException extends DukeException {
     private final String typeOfTask;
 

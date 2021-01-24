@@ -1,3 +1,5 @@
+package exceptions;
+
 public class DukeUnknownArgumentsException extends DukeException {
 
     public String toString() {
