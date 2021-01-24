@@ -7,6 +7,7 @@ public class Ui {
 
     private final Scanner in;
     private final PrintStream out;
+    public String username;
 
     public Ui() {
         this(System.in, System.out);
@@ -21,19 +22,23 @@ public class Ui {
      * Greets the user when the Duke is launched.
      */
     public void welcomeMsg() {
-        System.out.println(DIVIDER);
-        System.out.println("Hello! I'm Jay!\n" + "What is your name!");
-        System.out.println(DIVIDER);
+        out.println(DIVIDER);
+        out.println("Hello! I'm Jay!\n" + "What is your name!");
+        out.println(DIVIDER);
     }
 
     /**
      * Greets the user again after knowing the user's name.
      */
     public void nameMsg() {
-        String username = in.nextLine();
-        System.out.println(DIVIDER);
-        System.out.println("Hi " + username + "!");
-        System.out.println("What can I do for you?");
-        System.out.println(DIVIDER);
+        username = in.nextLine();
+        out.println(DIVIDER);
+        out.println("Hi " + username + "!");
+        out.println("What can I do for you?");
+        out.println(DIVIDER);
+    }
+
+    public void prompt() {
+        System.out.print(username + ": ");
     }
 }
