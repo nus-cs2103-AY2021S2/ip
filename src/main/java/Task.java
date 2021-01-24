@@ -19,6 +19,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String toFileFormat() {
+        return (isDone ? "1" : "0") + " | " + this.description;
+    }
+
     public String toString() {
         return (this.isDone ? "[\u2713]" : "[\u2718]") + " " + this.description;
     }

@@ -6,6 +6,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String toFileFormat() {
+        return "E | " + super.toFileFormat() + " | " + this.at;
+    }
+
     public String toString() {
         return "[E]" + super.toString() + " " + "(at: " + this.at + ")";
     }
