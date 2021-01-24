@@ -6,4 +6,9 @@ list
 done 2
 done 4
 list
+todo
+done 7
+delete 7
+deadline washing
+event cleaning
 bye

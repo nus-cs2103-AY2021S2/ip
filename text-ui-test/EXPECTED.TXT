@@ -4,7 +4,8 @@ Hello from
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-  ------------------------------------------------------
+
+    ------------------------------------------------------
     Hello! I'm Duke Y(^_^)Y
     What can I do for you?
 
@@ -50,6 +51,23 @@ Hello from
     2.[T][✓]read book
     3.[D][✘]return book (by: June 6th)
     4.[E][✓]project meeting (at: Aug 6th 2-4pm)
+    ------------------------------------------------------
+    ------------------------------------------------------
+    OOPS!!! The description of a task cannot be empty. :-(
+    ------------------------------------------------------
+    ------------------------------------------------------
+    OOPS!!! the Task you choosing isn't existed :-(
+    ------------------------------------------------------
+    ------------------------------------------------------
+    OOPS!!! the Task you choosing isn't existed :-(
+    ------------------------------------------------------
+    ------------------------------------------------------
+    OOPS!!! The deadline of a deadline task cannot be empty. :-(
+    Please enter according to the format eg.description /by deadline
+    ------------------------------------------------------
+    ------------------------------------------------------
+    OOPS!!! The period of a event task cannot be empty. :-(
+    Please enter according to the format eg.description /at period
     ------------------------------------------------------
     ------------------------------------------------------
     Bye. (>_<) Hope to see you again soon!
