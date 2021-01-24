@@ -1,5 +1,7 @@
 import jdk.jfr.Event;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,13 +90,21 @@ public class Duke {
                 break;
             case DEADLINE:
                 String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
-                Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], deadlineDetalis[1]);
+                String[] dates = deadlineDetalis[1].split(" ");
+                LocalDate date = LocalDate.parse(dates[0]);
+                LocalTime time = LocalTime.parse(dates[1]);
+                Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date,time);
                 tasks.add(deadlineTask);
                 printAddedTaskMessage(deadlineTask, tasks.size());
                 break;
             case EVENT:
                 String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
-                Events eventTask = new Events(eventDetails[0], eventDetails[1]);
+                String[] eventDates = eventDetails[1].split(" ");
+                LocalDate startDate = LocalDate.parse(eventDates[0]);
+                LocalTime startTime = LocalTime.parse(eventDates[1]);
+                LocalDate endDate = LocalDate.parse(eventDates[2]);
+                LocalTime endTime = LocalTime.parse(eventDates[3]);
+                Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
                 tasks.add(eventTask);
                 printAddedTaskMessage(eventTask, tasks.size());
                 break;
@@ -156,11 +166,32 @@ public class Duke {
                 if (!description.contains(DEADLINESPLITREGEX))
                     throw new CommandException("☹ OOPS!!! The description of a " + DEADLINECOMMAND + " must contain Date indicated by \"" + DEADLINESPLITREGEX + "\".");
 
+                try {
+                    String[] deadlineDetails = description.split(DEADLINESPLITREGEX);
+                    String[] dates = deadlineDetails[1].split(" ");
+                    LocalDate date = LocalDate.parse(dates[0]);
+                    LocalTime time = LocalTime.parse(dates[1]);
+                }catch (Exception e) {
+                    throw new CommandException("☹ OOPS!!! The Date format of a " + DEADLINECOMMAND + " must be yyyy-mm-dd hh:ss.");
+
+                }
 
                 return new Command(CommandType.DEADLINE, description);
             } else if (commandName.equals(EVENTCOMMAND)) {
                 if (!description.contains(EVENTSPLITREGEX))
                     throw new CommandException("☹ OOPS!!! The description of a " + EVENTCOMMAND + " must contain Date and Duration indicated by \"" + EVENTSPLITREGEX + "\".");
+
+                try {
+                    String[] eventDetails = description.split(EVENTSPLITREGEX);
+                    String[] dates = eventDetails[1].split(" ");
+                    LocalDate startDate = LocalDate.parse(dates[0]);
+                    LocalTime startTime = LocalTime.parse(dates[1]);
+                    LocalDate endDate = LocalDate.parse(dates[2]);
+                    LocalTime endTime = LocalTime.parse(dates[3]);
+                }catch (Exception e) {
+                    throw new CommandException("☹ OOPS!!! The Date format of a " + EVENTCOMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
+
+                }
 
                 return new Command(CommandType.EVENT, description);
             }
