@@ -8,17 +8,12 @@ public enum Command {
     DONE("done"), DELETE("delete"),
     EVENT("event"), DEADLINE("deadline"), TODO("todo");
 
-<<<<<<< HEAD
-    private String action;
-
     /**
      * The Command e-num constructor has 1 parameter: The string representation for the command.
      * @param action A string that is associated with the command.
      */
-=======
     private final String action;
 
->>>>>>> branch-A-CodingStandard
     Command(String action) {
         this.action = action;
     }

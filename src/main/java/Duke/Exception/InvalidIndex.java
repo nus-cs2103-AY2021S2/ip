@@ -1,11 +1,8 @@
 package Duke.Exception;
 
-<<<<<<< HEAD
 /**
  * An exception for handling invalid index (negative or out of bound) for done and delete command.
  */
-=======
->>>>>>> branch-A-CodingStandard
 public class InvalidIndex extends IndexOutOfBoundsException{
     String type;
     int listSize;

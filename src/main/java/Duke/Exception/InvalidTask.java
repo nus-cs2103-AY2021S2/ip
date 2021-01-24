@@ -1,11 +1,8 @@
 package Duke.Exception;
 
-<<<<<<< HEAD
 /**
  * An exception that handle a command for Deadline command without the word "/by" and Event command without the word "/at".
  */
-=======
->>>>>>> branch-A-CodingStandard
 public class InvalidTask extends Exception{
     String type;
 
