@@ -55,29 +55,29 @@ public class Duke {
 
     public static void handleCommand(String command, String rest) throws DukeException {
         switch (command) {
-            case "todo":
-                handleTodo(rest);
-                break;
-            case "deadline":
-                handleDeadline(rest);
-                break;
-            case "event":
-                handleEvent(rest);
-                break;
-            case "bye":
-                handleBye();
-                break;
-            case "list":
-                handleList();
-                break;
-            case "done":
-                handleDone(rest);
-                break;
-            case "delete":
-                handleDelete(rest);
-                break;
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case "todo":
+            handleTodo(rest);
+            break;
+        case "deadline":
+            handleDeadline(rest);
+            break;
+        case "event":
+            handleEvent(rest);
+            break;
+        case "bye":
+            handleBye();
+            break;
+        case "list":
+            handleList();
+            break;
+        case "done":
+            handleDone(rest);
+            break;
+        case "delete":
+            handleDelete(rest);
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
