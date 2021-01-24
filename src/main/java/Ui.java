@@ -54,12 +54,11 @@ public class Ui {
         System.out.println("    Now you have " + tasks.getTaskCount() + " in the list.");
     }
 
-    public void printMarkTaskAsDoneMessage(Task task) {
+    public void printMarkTaskAsDoneMessage(Task task, boolean wasDone) {
         printPartitionLine();
-        if (task.isDone()) {
+        if (wasDone) {
             System.out.println("    You have already completed this task:");
         } else {
-            task.markAsDone();
             System.out.println("    Congratulations! You have completed this task:");
         }
         System.out.println("        " + task.toString());

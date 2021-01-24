@@ -23,11 +23,11 @@ public class Storage {
         try {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
-                System.out.println("CREATED_FOLDER");
+                System.out.println("Directory successfully created");
             }
             if (!file.exists()) {
                 file.createNewFile();
-                System.out.println("CREATED_SAVE_FILE");
+                System.out.println("File successfully created");
             }
         } catch (IOException e) {
             throw new DukeException(
@@ -59,21 +59,16 @@ public class Storage {
                 addToTasks(tasks, todo, taskStringArr[1]);
                 break;
             case "D":
-                Deadline deadline = new Deadline(taskStringArr[2], parseDateTime(taskStringArr[3]));
+                Deadline deadline = new Deadline(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
                 addToTasks(tasks, deadline, taskStringArr[1]);
                 break;
             case "E":
-                Event event = new Event(taskStringArr[2], parseDateTime(taskStringArr[3]));
+                Event event = new Event(taskStringArr[2], Parser.parseDateTimeFromFile(taskStringArr[3]));
                 addToTasks(tasks, event, taskStringArr[1]);
                 break;
             default:
                 break;
         }
-    }
-
-    public static LocalDateTime parseDateTime(String dateTimeString) {
-        DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
-        return LocalDateTime.parse(dateTimeString, inputDateTimeFormatter);
     }
 
     public void addToTasks(TaskList tasks, Task task, String status) {
