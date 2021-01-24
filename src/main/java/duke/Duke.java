@@ -38,7 +38,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String line = "";
 
-        while(isActive) {
+        while (isActive) {
             line = scanner.nextLine();
             try {
                 Command command = Parser.parse(line);

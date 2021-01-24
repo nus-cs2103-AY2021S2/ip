@@ -17,14 +17,14 @@ public class Task {
     }
 
     /**
-     * Set the task as completed
+     * Sets the task as completed
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Provide the description of the task
+     * Provides the description of the task
      * @return Description of the task
      */
     public String getDesc() {
@@ -32,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Provide the symbol for the task type
+     * Provides the symbol for the task type
      * @return Symbol for the task type
      */
     public String getTypeSymbol() {
@@ -40,7 +40,7 @@ public class Task {
     }
 
     /**
-     * Provide the completion status of the task
+     * Provides the completion status of the task
      * @return Completion status of the task
      */
     public String getStatusSymbol() {

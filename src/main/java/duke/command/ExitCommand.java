@@ -4,7 +4,7 @@ import duke.exception.DukeCommandException;
 
 public class ExitCommand extends Command {
     /**
-     * Execute the exit command to tell the Duke to exit
+     * Executes the exit command to tell the Duke to exit
      * @throws DukeCommandException
      */
     @Override

@@ -117,7 +117,7 @@ public class TaskManager {
     }
 
     /**
-     * Set the content of the task list
+     * Sets the content of the task list
      * @param tasks A task list to import the content from
      */
     public void setTasks(List<Task> tasks) {

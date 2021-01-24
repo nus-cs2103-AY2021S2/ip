@@ -9,7 +9,7 @@ public class Ui {
     private static final String BORDER = "___________________________________________________________";
 
     /**
-     * Display a message
+     * Displays a message
      * @param msg Message to be displayed
      */
     public void printMsg(String msg) {
@@ -19,20 +19,20 @@ public class Ui {
     }
 
     /**
-     * Display a default welcome message
+     * Displays a default welcome message
      * @param botName Name of the chat bot to greet with
      */
     public void printWelcomeMsg(String botName) {
         printMsg(String.format("Meow, I'm %s\nWhat can I do for you today?", botName));
     }
 
-    /** Display a default exit message */
+    /** Displays a default exit message */
     public void printGoodbyeMsg() {
         printMsg("Meow. Hope to see you again soon!");
     }
 
     /**
-     * Display a message to indicate the addition of a new task
+     * Displays a message to indicate the addition of a new task
      * @param task Task that was added
      * @param tasksSize Number of total tasks after adding that new task
      */
@@ -45,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Display a message to indicate the completion of a task
+     * Displays a message to indicate the completion of a task
      * @param index Index of the completed task in the list
      * @param task Task that was completed
      */
@@ -58,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Display a message to indicate the deletion of a task
+     * Displays a message to indicate the deletion of a task
      * @param task Task that was deleted
      * @param tasksSize Number of total tasks left after deleting that task
      */
@@ -72,13 +72,13 @@ public class Ui {
     }
 
     /**
-     * Display all tasks currently in the list
+     * Displays all tasks currently in the list
      * @param tasks List of tasks
      */
     public void printTaskList(List<Task> tasks) {
         System.out.println(BORDER);
         System.out.println("Meow, here are the tasks in your list:");
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             System.out.printf("%d.[%s][%s] %s\n", i + 1, task.getTypeSymbol(), task.getStatusSymbol(), task.getDesc());
         }
@@ -86,7 +86,7 @@ public class Ui {
     }
 
     /**
-     * Display an error message
+     * Displays an error message
      * @param msg Error message
      */
     public void printError(String msg) {

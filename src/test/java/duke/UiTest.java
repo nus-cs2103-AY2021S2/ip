@@ -19,10 +19,14 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
+    /** A reference to the default output stream */
     private final PrintStream standardOut = System.out;
+    /** A mock output stream to capture outputs from the Ui */
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    /** Borderlines to contain a display message*/
     private final String BORDER = "___________________________________________________________";
 
+    /** Replace the system's output stream with a custom stream to capture the output */
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStream));
@@ -38,17 +42,19 @@ public class UiTest {
         assertEquals(expected, outputStream.toString().trim());
     }
 
+    /** Tests printing of task list when the list is empty */
     @Test
     public void printTaskList_emptyList() {
         String expected = BORDER + "\r\n" + "Meow, here are the tasks in your list:\r\n" + BORDER;
 
-        List<Task> emptyList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         Ui ui = new Ui();
-        ui.printTaskList(emptyList);
+        ui.printTaskList(tasks);
         assertEquals(expected, outputStream.toString().trim());
     }
 
+    /** Tests printing of task list when the list has 3 items */
     @Test
     public void printTaskList_3Items() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
@@ -58,16 +64,17 @@ public class UiTest {
                 "3.[E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
                 + ")\n" + BORDER;
 
-        List<Task> list = new ArrayList<>();
-        list.add(new ToDo("DESCRIPTION 1"));
-        list.add(new Deadline("DESCRIPTION 2", dateTime));
-        list.add(new Event("DESCRIPTION 3", dateTime, dateTime));
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new ToDo("DESCRIPTION 1"));
+        tasks.add(new Deadline("DESCRIPTION 2", dateTime));
+        tasks.add(new Event("DESCRIPTION 3", dateTime, dateTime));
 
         Ui ui = new Ui();
-        ui.printTaskList(list);
+        ui.printTaskList(tasks);
         assertEquals(expected, outputStream.toString().trim());
     }
 
+    /** Tests printing of add message when the list has 3 items and each is an unique type */
     @Test
     public void printAddMsg_taskTypesAll_tasksSize3() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
@@ -75,10 +82,11 @@ public class UiTest {
 
         String expectedToDo = BORDER + "\r\nGot it meow. I've added this task:\r\n  [T][ ] DESCRIPTION 1\nNow you " +
                 "have 99 tasks in the list.\n" + BORDER;
-        String expectedDeadline = BORDER + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (by: " + dateTime.format(formatter) + ")\nNow " +
-                "you have 99 tasks in the list.\n" + BORDER;
-        String expectedEvent = BORDER + "\r\nGot it meow. I've added this task:\r\n  [E][ ] DESCRIPTION 3 (Start: " + dateTime.format(formatter) + " | End: " + dateTime.format(formatter)
-                + ")\nNow you have 99 tasks in the list.\n" + BORDER;
+        String expectedDeadline = BORDER + "\r\nGot it meow. I've added this task:\r\n  [D][ ] DESCRIPTION 2 (by: " +
+                dateTime.format(formatter) + ")\nNow you have 99 tasks in the list.\n" + BORDER;
+        String expectedEvent = BORDER + "\r\nGot it meow. I've added this task:\r\n  [E][ ] DESCRIPTION 3 (Start: " +
+                dateTime.format(formatter) + " | End: " + dateTime.format(formatter) + ")\n" +
+                "Now you have 99 tasks in the list.\n" + BORDER;
 
         ToDo toDo = new ToDo("DESCRIPTION 1");
         Deadline deadline = new Deadline("DESCRIPTION 2", dateTime);
@@ -97,6 +105,7 @@ public class UiTest {
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
+    /** Tests printing of done message when the list has 3 items and each is an unique type */
     @Test
     public void printDoneMsg_taskTypesAll_tasksSize3() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
@@ -127,6 +136,7 @@ public class UiTest {
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
+    /** Tests printing of delete message when the list has 3 items and each is an unique type */
     @Test
     public void printDeleteMsg_taskTypesAll_tasksSize3() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM, EEE ha");
@@ -157,6 +167,7 @@ public class UiTest {
         assertEquals(expectedEvent, outputStream.toString().trim());
     }
 
+    /** Reset the system's output stream with system.out */
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);

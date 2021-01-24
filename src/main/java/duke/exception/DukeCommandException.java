@@ -17,7 +17,7 @@ public class DukeCommandException extends DukeException{
     }
 
     /**
-     * Return the type of the command
+     * Returns the type of the command
      * @return Type of the command
      */
     public String getCommandType() {
@@ -25,7 +25,7 @@ public class DukeCommandException extends DukeException{
     }
 
     /**
-     * Return a string containing the parameters of the command
+     * Returns a string containing the parameters of the command
      * @return Parameters of the command
      */
     public String getParams() {

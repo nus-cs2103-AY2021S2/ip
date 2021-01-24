@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     /** Date and time when the Deadline task needs to be completed */
-    public LocalDateTime dateTime;
+    private LocalDateTime dateTime;
 
     /**
      * Constructor for a Deadline task
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return a letter symbol for the Deadline
+     * Returns a letter symbol for the Deadline
      * @return Letter symbol for the Deadline
      */
     @Override

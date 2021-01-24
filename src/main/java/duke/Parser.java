@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
     /**
-     * Parse a command string into an executable command
+     * Parses a command string into an executable command
      * @param text A command string
      * @return An executable Command
      * @throws DukeException if the command string cannot be parsed
@@ -42,7 +42,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into a ToDo command
+     * Parses a command string into a ToDo command
      * @param text A command string
      * @return A ToDo command
      * @throws DukeCommandException if the command string contains an empty description
@@ -57,7 +57,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into a Deadline command
+     * Parses a command string into a Deadline command
      * @param text A command string
      * @return A Deadline command
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
@@ -87,13 +87,14 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into an Event command
+     * Parses a command string into an Event command
      * @param text A command string
      * @return An Event command
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
      */
     public static EventCommand parseEvent(String text) throws DukeCommandException {
-        String validDateTimePattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
+        // Regex pattern matching date-month-year xAM/PM
+        String pattern = "^(0[1-9]|1[0-9]|2[0-9]|3[0-1])-(0[1-9]|1[0-2])-" +
                 "([1-9][0-9][0-9][0-9]) ([1-9]|1[0-2])(AM|PM)";
 
         String params = text.substring(5).stripLeading();
@@ -104,8 +105,8 @@ public class Parser {
                 || params.split(" /start | /end ").length != 3) {
             throw new DukeCommandException("event", params, "Description, start datetime, and end datetime " +
                     "must be given for an Event.");
-        } else if(!params.split(" /start | /end ")[1].matches(validDateTimePattern)
-                || !params.split(" /start | /end ")[2].matches(validDateTimePattern)) {
+        } else if(!params.split(" /start | /end ")[1].matches(pattern)
+                || !params.split(" /start | /end ")[2].matches(pattern)) {
             throw new DukeCommandException("deadline", params, "Start or end date has incorrect format, try to " +
                     "follow the format of dd-mm-yyyy hAM/PM.");
         } else {
@@ -120,7 +121,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into a Done command
+     * Parses a command string into a Done command
      * @param text A command string
      * @return A Done command
      * @throws DukeCommandException if the index in the command string is invalid
@@ -137,7 +138,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into a Delete command
+     * Parses a command string into a Delete command
      * @param text A command string
      * @return A Delete command
      * @throws DukeCommandException if the index in the command string is invalid
@@ -154,7 +155,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into a List command
+     * Parses a command string into a List command
      * @param text A command string
      * @return A List command
      */
@@ -163,7 +164,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command string into an Exit command
+     * Parses a command string into an Exit command
      * @param text A command string
      * @return An Exit command
      */

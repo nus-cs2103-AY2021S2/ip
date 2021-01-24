@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute the delete command to delete a task from the list
+     * Executes the delete command to delete a task from the list
      * @throws DukeCommandException if there is no tasks to delete, index is out of range, an issue with deleting task
      * from the task list or an issue with saving the deletion to the hard disk
      */
@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
         if(taskManager.getTasksSize() == 0){
             throw new DukeCommandException("delete", String.valueOf(index), "There are no task to be deleted.");
         } else if(index < 0 || index >= taskManager.getTasksSize()) {
-            throw new DukeCommandException("delete", String.valueOf(index), "Please enter a valid task index ranging " +
-                    "from 1 to " + taskManager.getTasksSize() + " (inclusive).");
+            throw new DukeCommandException("delete", String.valueOf(index), "Please enter a valid task index " +
+                    "ranging from 1 to " + taskManager.getTasksSize() + " (inclusive).");
         } else {
             try {
                 Task task = taskManager.deleteTask(index);

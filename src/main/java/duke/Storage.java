@@ -69,7 +69,7 @@ public class Storage {
             // If the save file already exists, load its tasks
             if(!file.createNewFile()) {
                 Scanner scanner = new Scanner(file);
-                while(scanner.hasNextLine()) {
+                while (scanner.hasNextLine()) {
                     String[] splits = scanner.nextLine().split(" \\| ");
                     boolean isDone = splits[1].equals("1");
 

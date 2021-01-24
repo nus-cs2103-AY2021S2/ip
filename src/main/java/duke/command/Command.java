@@ -11,7 +11,7 @@ public abstract class Command {
     protected static TaskManager taskManager;
 
     /**
-     * Setup the Ui and TaskManager instance
+     * Setups the Ui and TaskManager instance
      * @param ui Ui instance to be shared
      * @param taskManager TaskManager instance to be shared
      */
@@ -21,7 +21,7 @@ public abstract class Command {
     }
 
     /**
-     * Execute the command
+     * Executes the command
      * @throws DukeCommandException if any issue happened during the execution of the command
      */
     public abstract void execute() throws DukeCommandException;
