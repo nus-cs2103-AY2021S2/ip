@@ -42,6 +42,10 @@ public class Duke {
     }
 
     public static void addTask(String userCommand, String userDescription) {
+        if (String.valueOf(userDescription).equals("") == true) {
+            printMessage("Oops, the description of a '" + userCommand + "' cannot be empty.");
+            return;
+        }
         Task t;
         String taskDescription;
         SplitString parsedUserDescription;
@@ -114,7 +118,7 @@ public class Duke {
                     addTask(userCommand, userDescription);
                     break;
                 default:
-                    printMessage("Oops, not sure what you are asking for.");
+                    printMessage("Oops, the command '" + userCommand + "' is not recognised.");
             }
         }
 
