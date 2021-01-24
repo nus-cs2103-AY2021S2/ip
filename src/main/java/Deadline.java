@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Represent a Deadline item, which is a child of Task
  */
@@ -22,5 +24,15 @@ public class Deadline extends Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[D][%s] %s (by: %s)", doneMark, name, by);
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", "deadline");
+        jsonObject.put("isDone", isDone);
+        jsonObject.put("description", name);
+        jsonObject.put("time", by);
+        return jsonObject;
     }
 }

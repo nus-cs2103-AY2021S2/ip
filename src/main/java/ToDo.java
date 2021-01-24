@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Represent a ToDo item, which is a child of Task
  */
@@ -18,5 +20,15 @@ public class ToDo extends Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[T][%s] %s", doneMark, name);
+    }
+
+    @Override
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", "todo");
+        jsonObject.put("isDone", isDone);
+        jsonObject.put("description", name);
+        jsonObject.put("time", "");
+        return jsonObject;
     }
 }
