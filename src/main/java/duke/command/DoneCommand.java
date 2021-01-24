@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.TaskList;
 
 public class DoneCommand extends Command {
+
     private final String command;
 
     public DoneCommand(String command) {

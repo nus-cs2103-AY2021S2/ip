@@ -5,6 +5,7 @@ import duke.StringParser;
 import duke.TaskList;
 
 public class ListCommand extends Command {
+
     private final TaskList list;
 
     public ListCommand(TaskList list) {

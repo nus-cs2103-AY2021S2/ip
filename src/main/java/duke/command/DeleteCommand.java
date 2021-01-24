@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.TaskList;
 
 public class DeleteCommand extends Command {
+
     private final String command;
 
     public DeleteCommand(String command) {
