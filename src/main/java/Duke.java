@@ -2,8 +2,7 @@ import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.time.LocalDate;
 
 /**
  * Main implementation for the Duke chat-bot.
@@ -130,7 +129,8 @@ public class Duke {
             try {
                 String[] eventString = inputString.split("/at");
                 String taskString = eventString[0].substring(6).trim();
-                String eventTime = eventString[1].trim();
+                String dateTime = eventString[1].trim();
+                LocalDate eventTime = LocalDate.parse(dateTime);
                 Event newEvent = new Event(taskString, eventTime);
                 taskList.add(newEvent);
                 addedTaskReply(newEvent);
@@ -141,7 +141,7 @@ public class Duke {
             try {
                 String[] eventString = inputString.split("/by");
                 String taskString = eventString[0].substring(9).trim();
-                String deadlineTime = eventString[1].trim();
+                LocalDate deadlineTime = LocalDate.parse(eventString[1].trim());
                 Deadline newDeadline = new Deadline(taskString, deadlineTime);
                 taskList.add(newDeadline);
                 addedTaskReply(newDeadline);
