@@ -16,5 +16,5 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 
-# custom compile file
-.compile.sh
+# class files, can be gotten on compile
+.class
