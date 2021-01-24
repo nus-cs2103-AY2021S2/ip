@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -6,11 +7,16 @@ import java.util.Locale;
  */
 
 public class Deadline extends Task {
-    private final java.time.LocalDate lastDate;
-    public Deadline(String taskName, java.time.LocalDate lastDate) {
-        super(taskName);
+    private final LocalDate lastDate;
+    public Deadline(String taskName, LocalDate lastDate) {
+        super(taskName, "D");
         this.lastDate = lastDate;
     }
+
+    public LocalDate getDate() {
+        return this.lastDate;
+    }
+
     @Override
     public String toString() {
         String dayOfWeek = this.lastDate.getDayOfWeek().toString().toLowerCase();

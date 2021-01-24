@@ -67,14 +67,14 @@ public class Duke {
                     taskList.add(newTodo);
                 } else if (lineArray[0].strip().charAt(0) == 'D') {
                     // deadline
-                    Deadline newDeadline = new Deadline(lineArray[2].strip(), lineArray[3].strip());
+                    Deadline newDeadline = new Deadline(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
                     if (isDone) {
                         newDeadline.setDone();
                     }
                     taskList.add(newDeadline);
                 } else if (lineArray[0].strip().charAt(0) == 'E') {
                     // event
-                    Event newEvent = new Event(lineArray[2].strip(), lineArray[3].strip());
+                    Event newEvent = new Event(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
                     if (isDone) {
                         newEvent.setDone();
                     }
@@ -132,8 +132,18 @@ public class Duke {
             String typeOfTask = doneTask.getType();
             String completionOfTask = (doneTask.getDone() ? "1" : "0");
             String descriptionOfTask = doneTask.getDescription().strip();
+            LocalDate date = LocalDate.now();
+            if (doneTask instanceof Event) {
+                date = ((Event) doneTask).getDate();
+            } else if (doneTask instanceof Deadline) {
+                date = ((Deadline) doneTask).getDate();
+            }
             String oldString = typeOfTask + " | " + "0" + " | " + descriptionOfTask;
             String newString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask;
+            if (doneTask instanceof Event || doneTask instanceof Deadline) {
+                oldString += " | " + date.toString();
+                newString += " | " + date.toString();
+            }
             deleteReplaceTaskFromDisk(oldString, newString);
             printMessage("Great~! Task completed:");
             printMessage(doneTask.toString());
@@ -280,10 +290,10 @@ public class Duke {
             printMessage("There are no tasks in your list! :c");
             return;
         }
-        System.out.println("    Tasks in your list are~: ");
+        printMessage("Tasks in your list are~: ");
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            System.out.println("    " + (i + 1) + "." + task);
+            printMessage((i + 1) + "." + task);
         }
     }
 

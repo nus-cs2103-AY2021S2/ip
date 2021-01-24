@@ -14,9 +14,6 @@ public class Task {
         this.type = type;
     }
 
-    public Task(String taskName) {
-    }
-
     public String getDescription() {
         return this.description;
     }
@@ -30,7 +27,6 @@ public class Task {
         return this.type;
     }
 
-
     public boolean getDone() {
         return this.isDone;
     }
@@ -41,6 +37,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" +getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + this.getDescription();
     }
 }
