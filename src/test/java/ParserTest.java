@@ -14,7 +14,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_BYE() throws DukeException {
+    public void parseCommand_Bye() throws DukeException {
         assertEquals("Test usage: this is an EXIT command",
                 Parser.parseCommand("bye", new TaskList()).toString());
         assertEquals("Test usage: this is an EXIT command",
@@ -24,7 +24,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_LIST() throws DukeException {
+    public void parseCommand_List() throws DukeException {
         assertEquals("Test usage: this is a LIST command",
                 Parser.parseCommand("list", new TaskList()).toString());
         assertEquals("Test usage: this is a LIST command",
@@ -34,7 +34,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_DEADLINE() throws DukeException {
+    public void parseCommand_Deadline() throws DukeException {
         assertEquals("Test usage: this is a DEADLINE command",
                 Parser.parseCommand("deadline ", new TaskList()).toString());
         assertEquals("Test usage: this is a DEADLINE command",
@@ -44,7 +44,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_EVENT() throws DukeException {
+    public void parseCommand_Event() throws DukeException {
         assertEquals("Test usage: this is an EVENT command",
                 Parser.parseCommand("event ", new TaskList()).toString());
         assertEquals("Test usage: this is an EVENT command",
@@ -54,7 +54,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_TODO() throws DukeException {
+    public void parseCommand_Todo() throws DukeException {
         assertEquals("Test usage: this is a TODO command",
                 Parser.parseCommand("todo ", new TaskList()).toString());
         assertEquals("Test usage: this is a TODO command",
@@ -64,7 +64,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_DELETE() throws DukeException {
+    public void parseCommand_Delete() throws DukeException {
         assertEquals("Test usage: this is a DELETE command",
                 Parser.parseCommand("delete ", new TaskList()).toString());
         assertEquals("Test usage: this is a DELETE command",
@@ -74,7 +74,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_DONE() throws DukeException {
+    public void parseCommand_Done() throws DukeException {
         assertEquals("Test usage: this is a DONE command",
                 Parser.parseCommand("done ", new TaskList()).toString());
         assertEquals("Test usage: this is a DONE command",

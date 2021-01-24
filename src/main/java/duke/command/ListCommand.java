@@ -5,13 +5,7 @@ import duke.StringParser;
 import duke.TaskList;
 
 public class ListCommand extends Command {
-
-    private final TaskList list;
-
-    public ListCommand(TaskList list) {
-        this.list = list;
-    }
-
+    
     @Override
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         StringBuilder resultStr = new StringBuilder();

@@ -4,11 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class StringParser {
-    private static final DateTimeFormatter SCAN_FORMAT =
+
+    private static final DateTimeFormatter FORMAT_SCAN =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     public static LocalDateTime parseTime(String str) {
-        return LocalDateTime.from(SCAN_FORMAT.parse(str));
+        return LocalDateTime.from(FORMAT_SCAN.parse(str));
     }
 
     public static String newLiner(String str, int length) {
@@ -21,7 +22,7 @@ public class StringParser {
         return resultStr.toString() + str + "\n";
     }
 
-    public static String underlineGenerator(int i) {
+    public static String generateUnderline(int i) {
         return "_".repeat(i) + "\n";
     }
 

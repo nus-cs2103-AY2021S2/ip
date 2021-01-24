@@ -81,13 +81,13 @@ public class AddCommand extends Command {
     public void executeAndPrint(TaskList list, int length) throws DukeException {
         Task task;
         switch (this.cmdType) {
-        case TODO:
+        case Todo:
             task = convertToTodo();
             break;
-        case EVENT:
+        case Event:
             task = convertToEvent();
             break;
-        case DEADLINE:
+        case Deadline:
             task = convertToDeadline();
             break;
         default:
@@ -107,11 +107,11 @@ public class AddCommand extends Command {
     @Override
     public String toString() {
         switch (this.cmdType) {
-        case TODO:
+        case Todo:
             return "Test usage: this is a TODO command";
-        case DEADLINE:
+        case Deadline:
             return "Test usage: this is a DEADLINE command";
-        case EVENT:
+        case Event:
             return "Test usage: this is an EVENT command";
         default:
             return "Error: this will never happen";

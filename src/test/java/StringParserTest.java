@@ -1,7 +1,4 @@
-import duke.DukeException;
-import duke.Parser;
 import duke.StringParser;
-import duke.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +43,7 @@ public class StringParserTest {
     @Test
     public void underlineGenerator_zeroRepeat() {
         assertEquals("\n",
-                StringParser.underlineGenerator(0));
+                StringParser.generateUnderline(0));
     }
 
     @Test

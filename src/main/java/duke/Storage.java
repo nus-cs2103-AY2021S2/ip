@@ -14,14 +14,15 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Storage {
-    private static final DateTimeFormatter PRINT_FORMAT =
+    private static final DateTimeFormatter FORMAT_PRINT =
             DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
 
-    static File file;
-    static Scanner sc;
-    static FileWriter writer;
+    private static File file;
+    private static Scanner sc;
+    private static FileWriter writer;
 
     public static Task loadData(String command) {
+
         if (command.charAt(0) == 'T') {
             Todo result = new Todo(command.substring(8));
             if (command.charAt(4) != '0') {
@@ -31,7 +32,7 @@ public class Storage {
         } else if (command.charAt(0) == 'D') {
             int position = command.indexOf("@@@");
             Deadline result = new Deadline(command.substring(8, position - 1),
-                    LocalDateTime.from(PRINT_FORMAT.parse(command.substring(position + 3))));
+                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + 3))));
             if (command.charAt(4) != '0') {
                 result.markAsDone();
             }
@@ -39,7 +40,7 @@ public class Storage {
         } else {
             int position = command.indexOf("@@@");
             Event result = new Event(command.substring(8, position - 1),
-                    LocalDateTime.from(PRINT_FORMAT.parse(command.substring(position + 3))));
+                    LocalDateTime.from(FORMAT_PRINT.parse(command.substring(position + 3))));
             if (command.charAt(4) != '0') {
                 result.markAsDone();
             }
