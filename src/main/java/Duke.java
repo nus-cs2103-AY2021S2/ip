@@ -35,46 +35,89 @@ public class Duke {
         String listTasksMessage = "Here are the tasks in your list: \n";
         while (i < numTasks) {
             Task t = tasks[i];
-            listTasksMessage += String.valueOf(i + 1) + ". ";
-            listTasksMessage += "[" + t.getStatusIcon() + "] ";
-            listTasksMessage += t.getDescription() + "\n";
             i++;
+            listTasksMessage += String.valueOf(i) + ". " + t.toString() + "\n";
         }
         printMessage(listTasksMessage);
     }
 
-    public static void addTask(String taskDescription) {
-        tasks[numTasks] = new Task(taskDescription);
+    public static void addTask(String userCommand, String userDescription) {
+        Task t;
+        String taskDescription;
+        SplitString parsedUserDescription;
+        
+        switch (userCommand) {
+            case "todo":
+                taskDescription = userDescription;
+                t = new Task(taskDescription);
+                break;
+            case "deadline":
+                parsedUserDescription = new SplitString(userDescription, "/by ");
+                taskDescription = parsedUserDescription.getFirstString();
+                String taskBy = parsedUserDescription.getSecondString();
+                t = new Deadline(taskDescription, taskBy);
+                break;
+            case "event":
+                parsedUserDescription = new SplitString(userDescription, "/at ");
+                taskDescription = parsedUserDescription.getFirstString();
+                String taskAt = parsedUserDescription.getSecondString();
+                t = new Event(taskDescription, taskAt);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + userCommand);
+        }
+
+        tasks[numTasks] = t;
+        String addTaskMessage = "Got it. I've added this task: \n   " + tasks[numTasks].toString() + "\n";
         numTasks++;
+        addTaskMessage += "Now you have " + String.valueOf(numTasks) + " task";
+        addTaskMessage += numTasks == 1 ? "" : "s";
+        addTaskMessage += " in the list.";
+        printMessage(addTaskMessage);
+
     }
 
-    public static void doTask(int taskNum) {
+    public static void doTask(String userDescription) {
+        int taskNum = Integer.parseInt(userDescription);
         Task t = tasks[taskNum - 1];
         t.markAsDone();
-        String doTaskMessage = "Nice! I've marked this task as done: \n";
-        doTaskMessage += "   [" + t.getStatusIcon() + "] " + t.getDescription();
+        String doTaskMessage = "Nice! I've marked this task as done: \n" + "   " + t.toString();
         printMessage(doTaskMessage);
     }
 
     public static void main(String[] args) {
         printWelcomeMessage();
 
+        String userInput, userCommand, userDescription;
+        SplitString parsedUserInput;
         Scanner scan = new Scanner(System.in);
-        String userInput = scan.nextLine();
 
-        while (String.valueOf(userInput).toLowerCase().equals("bye") == false) {
-            if (String.valueOf(userInput).toLowerCase().equals("list") == true) {
-                listTasks();
-            } else if (userInput.length() >= 6 &&
-                    String.valueOf(userInput.substring(0, 4)).toLowerCase().equals("done") == true) {
-                int taskNum = Integer.parseInt(userInput.substring(5));
-                doTask(taskNum);
-            } else {
-                    addTask(userInput);
-                    printMessage("added: " + userInput);
-            }
+        while (true) {
             userInput = scan.nextLine();
+            parsedUserInput = new SplitString(userInput, " ");
+            userCommand = parsedUserInput.getFirstString().toLowerCase();
+            userDescription = parsedUserInput.getSecondString();
+
+            if (String.valueOf(userCommand).equals("bye") == true) {
+                break;
+            }
+            switch (userCommand) {
+                case "list":
+                    listTasks();
+                    break;
+                case "done":
+                    doTask(userDescription);
+                    break;
+                case "todo": //Fallthrough
+                case "deadline": //Fallthrough
+                case "event":
+                    addTask(userCommand, userDescription);
+                    break;
+                default:
+                    printMessage("Oops, not sure what you are asking for.");
+            }
         }
+
         scan.close();
         printGoodbyeMessage();
     }
