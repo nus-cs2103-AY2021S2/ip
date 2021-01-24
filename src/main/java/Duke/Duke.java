@@ -183,7 +183,18 @@ public class Duke {
     private static void updateFile (ArrayList<Task> taskList) throws FileNotFoundException {
         String FILE_PATH = "data/duke.txt"; // Hardcoded file path
         File file = new File(FILE_PATH); // create a File for the given file path
+        File folder = new File("data");
 
+        // Ensures that the data folder exists, if not create the folder
+        if (!folder.exists()) {
+            if (folder.mkdirs()) {
+                System.out.println("Folder has been created");
+            } else {
+                System.out.println("There was an error creating the folder");
+            };
+        }
+
+        // Ensures that the file is created, if not create the file
         if (!file.exists() && !file.isFile()) {
             // Create a new file
             try {
