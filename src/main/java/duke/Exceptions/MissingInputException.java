@@ -1,3 +1,5 @@
+package duke.Exceptions;
+
 public class MissingInputException extends DukeExceptions {
 
     public MissingInputException(String cat) {

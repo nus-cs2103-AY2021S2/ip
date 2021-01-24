@@ -1,3 +1,5 @@
+package duke.Exceptions;
+
 public class MissingTaskException extends DukeExceptions {
 
     public MissingTaskException () {

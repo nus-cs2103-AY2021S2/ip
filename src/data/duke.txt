@@ -1,4 +1,5 @@
-T : 1 : Buy acai
-E : 1 : meeting : Jan 29 2021
-D : 0 : homework : Feb 3 2021
-D : 0 : Application : Feb 11 2021
+T : 1 : Buy book
+E : 0 : meeting : 2021-01-29
+D : 1 : Homework : 2021-02-03
+T : 1 : return book
+D : 1 : Quiz : 2021-01-28

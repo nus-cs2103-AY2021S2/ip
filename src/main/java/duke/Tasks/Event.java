@@ -1,7 +1,9 @@
+package duke.Tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate time;
 
     public Event(String name, String time) {
@@ -9,8 +11,8 @@ public class Event extends Task{
         this.time = LocalDate.parse(time);
         this.cat = 'E';
     }
-    public LocalDate getTime() {
-        return this.time;
+    public String getTime() {
+        return this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String getFormattedTime() {

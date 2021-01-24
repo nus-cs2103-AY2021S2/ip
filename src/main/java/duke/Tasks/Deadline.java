@@ -1,3 +1,5 @@
+package duke.Tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,8 +12,8 @@ public class Deadline extends Task {
         this.cat = 'D';
     }
 
-    public LocalDate getDeadline() {
-        return this.by;
+    public String getDeadline() {
+        return this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String getFormattedDeadline() {
