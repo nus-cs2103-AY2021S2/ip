@@ -1,0 +1,8 @@
+todo task one
+deadline task two /by 8.30 pm
+event task three /at tomorrow or the day after
+list
+done 2
+unknown command
+list
+bye
