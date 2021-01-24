@@ -16,10 +16,16 @@ public class Storage {
 
     private final String SAVE_FORMAT_DELIMITER = " \\| ";
 
+    /**
+     * Initializes a Storage object with the default path.
+     */
     public Storage() {
         file = new File("data", "duke.txt");
     }
 
+    /**
+     * Creates directory and file if not found.
+     */
     public void createFile() throws DukeException {
         try {
             if (!file.getParentFile().exists()) {
@@ -36,6 +42,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from save file into Duke during startup.
+     *
+     * @param tasks TaskList object used to store Tasks
+     */
     public void loadTasksFromFile(TaskList tasks) throws DukeException {
         createFile();
         try {
@@ -52,6 +63,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a string of task and adds it to a TaskList object.
+     *
+     * @param tasks      TaskList containing all tasks currently in Duke.
+     * @param taskString String representing a task from file
+     */
     public void parseTasksFromFile(TaskList tasks, String taskString) throws IndexOutOfBoundsException {
         String[] taskStringArr = taskString.split(SAVE_FORMAT_DELIMITER);
         switch (taskStringArr[0].trim()) {
@@ -72,6 +89,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds to a task to TaskList and updates its completion status.
+     *
+     * @param tasks  TaskList containing all tasks currently in Duke.
+     * @param task   Task to be added to TaskList.
+     * @param status String representation of the completion status of the task.
+     */
     public void addToTasks(TaskList tasks, Task task, String status) {
         if (status.trim().equals("1")) {
             task.markAsDone();
@@ -79,6 +103,11 @@ public class Storage {
         tasks.addTask(task);
     }
 
+    /**
+     * Saves current list of tasks to file.
+     *
+     * @param tasks TaskList object containing all current tasks.
+     */
     public void saveTasksToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file);

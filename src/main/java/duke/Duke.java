@@ -13,6 +13,9 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Sets up the required objects.
+     */
     public Duke() {
         this.tasks = new TaskList();
         this.ui = new Ui();
@@ -24,6 +27,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the inputs entered by the user,
+     * until the user enters the exit command.
+     */
     public void handleUserInput() {
         boolean isRunning = true;
         while (isRunning) {
@@ -38,6 +45,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.printGreeting();
         handleUserInput();
