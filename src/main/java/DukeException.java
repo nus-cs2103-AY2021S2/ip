@@ -50,6 +50,9 @@ public class DukeException extends Exception {
             break;
         case INVALID_DATE_FORMAT:
             errMsg = "☹ OOPS!!! Please key in a valid date format (e.g. 2021-12-01) in yyyy-mm-dd format.";
+            break;
+        case LOAD_ERROR:
+            errMsg = "☹ OOPS!!! The contents of the loaded file is corrupted, a new file will be created.";
         default:
             break;
         }
