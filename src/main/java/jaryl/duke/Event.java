@@ -1,3 +1,5 @@
+package jaryl.duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,10 +9,11 @@ public class Event extends Task {
 
     public Event(String description, String date) throws InvalidFormatException, DateTimeParseException {
         super(description, "E");
-        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
 
-        if(date.isEmpty())
+        if(date.equals(""))
             throw new InvalidFormatException("Please specify both task description and date/time using /at");
+
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public String fileFormat() {

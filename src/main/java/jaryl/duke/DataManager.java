@@ -1,4 +1,9 @@
+package jaryl.duke;
+
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,10 +31,22 @@ public class DataManager {
         }
     }
 
-    public ArrayList<Task> readFromFile() {
+    public ArrayList<Task> readFromFile() throws DukeException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         ArrayList<Task> tasksList = new ArrayList<>();
         LocalDateTime date;
+
+        Path path = Paths.get(filePath);
+        if(!Files.exists(path)) {
+            try {
+                Files.createDirectories(path.getParent());
+                Files.createFile(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            throw new InvalidFileException();
+        }
+
         try {
             Task task = null;
             BufferedReader br = new BufferedReader(new FileReader(this.filePath));

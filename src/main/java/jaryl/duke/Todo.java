@@ -1,3 +1,5 @@
+package jaryl.duke;
+
 public class Todo extends Task {
     public Todo(String description) throws InvalidFormatException {
         super(description, "T");

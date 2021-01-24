@@ -1,7 +1,5 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+package jaryl.duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,29 +11,23 @@ public class Duke {
 
     public Duke() {
         this.output = new Output();
-        this.tasksList = new ArrayList<>();
         dataManager = new DataManager(FILE_PATH);
 
-        Path path = Paths.get(FILE_PATH);
-        if(Files.exists(path)) {
+        try {
             tasksList = dataManager.readFromFile();
-        } else {
-            try {
-                Files.createDirectories(path.getParent());
-                Files.createFile(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (DukeException e) {
+            tasksList = new ArrayList<>();
+            System.out.println(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         boolean exitFlag = false;
-        Duke duke = new Duke();
-        ArrayList<Task> tasksList = duke.tasksList;
-        DataManager dataManager = duke.dataManager;
-        Output output = duke.output;
         output.printWelcomeMsg();
 
         while(sc.hasNextLine()) {
@@ -65,7 +57,7 @@ public class Duke {
                         break;
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println(output.addLine() + "\n    ☹ OOPS! I'm sorry, but I don't know what that means :(" + "\n" + output.addLine());
+                output.printIllegalArgumentError();
             } catch (DukeException e1) {
                 System.out.println(e1);
             }

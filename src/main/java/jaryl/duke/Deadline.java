@@ -1,4 +1,5 @@
-import javax.swing.text.DateFormatter;
+package jaryl.duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,10 +9,10 @@ public class Deadline extends Task {
 
     public Deadline(String description, String date) throws InvalidFormatException, DateTimeParseException {
         super(description, "D");
-        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
 
-        if(date.isEmpty())
+        if(date.equals(""))
             throw new InvalidFormatException("Please specify both task description and date/time using /by");
+        this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public String fileFormat() {
