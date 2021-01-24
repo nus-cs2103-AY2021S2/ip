@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents a command that adds tasks.
  */
@@ -48,6 +50,7 @@ public class AddCommand implements Command {
         }
         taskList.addTask(newTask);
         numTasks = taskList.getSize();
+
         return taskList;
     }
 
