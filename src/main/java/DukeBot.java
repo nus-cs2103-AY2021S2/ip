@@ -1,6 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -54,7 +56,7 @@ public class DukeBot {
         if (command.equals("done") || command.equals("delete")) {
             if (taskInfo.equals(command)) {
                 throw new DukeException(command, DukeExceptionType.EMPTY_SELECTION);
-            } else if (!isNumeric(taskInfo)) {
+            } else if (!Utility.isNumeric(taskInfo)) {
                 // Selection not numeric
                 throw new DukeException(command, DukeExceptionType.INVALID_INTEGER);
             } else if (Integer.parseInt(taskInfo) > taskList.size() || Integer.parseInt(taskInfo) <= 0) {
@@ -141,10 +143,13 @@ public class DukeBot {
      * Adds event task to list of tasks
      * @param taskInfo Task information containing task name, specific start and end time
      */
-    private void eventProcess(String taskInfo) {
+    private void eventProcess(String taskInfo) throws DukeException {
         String taskName = taskInfo.split(" /at")[0].replaceFirst("event ", "");
         String date = taskInfo.split(" /at ")[1];
-        Task task = new Event(taskName, date);
+        if (!Utility.isValidDate(date)) {
+            throw new DukeException(DukeExceptionType.INVALID_DATE_FORMAT);
+        }
+        Task task = new Event(taskName, LocalDate.parse(date));
         taskList.add(task);
         commandOutput = "Got it. I've added this task: \n\t  "
                 + task.toString() + getRemainingTasks();
@@ -154,10 +159,13 @@ public class DukeBot {
      * Adds deadline task to list of tasks
      * @param taskInfo Task information containing task name, specific date/time to be done by
      */
-    private void deadlineProcess(String taskInfo) {
+    private void deadlineProcess(String taskInfo) throws DukeException {
         String taskName = taskInfo.split(" /by")[0].replaceFirst("deadline ", "");
         String date = taskInfo.split(" /by ")[1];
-        Task task = new Deadline(taskName, date);
+        if (!Utility.isValidDate(date)) {
+            throw new DukeException(DukeExceptionType.INVALID_DATE_FORMAT);
+        }
+        Task task = new Deadline(taskName, LocalDate.parse(date));
         taskList.add(task);
         commandOutput = "Got it. I've added this task: \n\t  "
                 + task.toString() + getRemainingTasks();
@@ -201,10 +209,10 @@ public class DukeBot {
             case 4:
                 if (taskInfo[0].equals('D')) {
                     // Deadline task
-                    task = new Deadline(taskInfo[2], taskInfo[3]);
+                    task = new Deadline(taskInfo[2], LocalDate.parse(taskInfo[3]));
                 } else {
                     //Event task
-                    task = new Event(taskInfo[2], taskInfo[3]);
+                    task = new Event(taskInfo[2], LocalDate.parse(taskInfo[3]));
                 }
                 break;
             default:
@@ -268,19 +276,4 @@ public class DukeBot {
             System.exit(0);
         }
     }
-
-    /**
-     * Used for DukeException handling, to check if user provides valid numeric selection when necessary
-     * @param text String to check for numeric value
-     * @return True if valid numeric, false if invalid
-     */
-    private boolean isNumeric(String text) {
-        try {
-            Integer.parseInt(text);
-        } catch (NumberFormatException ex) {
-            return false;
-        }
-        return true;
-    }
-
 }

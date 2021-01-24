@@ -5,6 +5,12 @@ public class DukeException extends Exception {
     private String command;
     private DukeExceptionType ExceptionType;
 
+    public DukeException(DukeExceptionType exceptionType) {
+        super();
+        this.command = "";
+        this.ExceptionType = exceptionType;
+    }
+
     /**
      * Constructor for DukeException
      *
@@ -42,6 +48,8 @@ public class DukeException extends Exception {
         case SELECTION_EXCEED_RANGE:
             errMsg = "☹ OOPS!!! The selection for " + command + " is not within the list's range.";
             break;
+        case INVALID_DATE_FORMAT:
+            errMsg = "☹ OOPS!!! Please key in a valid date format (e.g. 2021-12-01) in yyyy-mm-dd format.";
         default:
             break;
         }
