@@ -10,7 +10,8 @@ import java.util.List;
 public class Parser {
 
     private static final String SPLIT_REGEX = "-'@,-@,1'-";
-    private enum TaskType { TODO, EVENT, DEADLINE }
+
+    private enum TaskType {TODO, EVENT, DEADLINE}
 
     /**
      * Convert Task to String.
@@ -69,7 +70,6 @@ public class Parser {
         return currentString.toString();
     }
 
-
     /**
      * Convert List of Task to List of String.
      * @param taskList string of list.
@@ -78,7 +78,7 @@ public class Parser {
     public static List<String> convertTasksToStrings(TaskList taskList) {
         List<String> strings = new ArrayList<String>();
 
-        for(int i = 0; i < taskList.getSize() ; i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             Task currentTask = taskList.getTask(i);
             strings.add(convertTaskTOString(currentTask));
         }
@@ -98,20 +98,19 @@ public class Parser {
             currentTask = new ToDos(parts[2]);
             break;
         case EVENT:
-            currentTask = new Events(parts[2], LocalDate.parse(parts[3]) , LocalTime.parse(parts[4])
-                    , LocalDate.parse(parts[5]) , LocalTime.parse(parts[6]));
+            currentTask = new Events(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4])
+                    , LocalDate.parse(parts[5]), LocalTime.parse(parts[6]));
             break;
         case DEADLINE:
-            currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]) , LocalTime.parse(parts[4]) );
+            currentTask = new Deadlines(parts[2], LocalDate.parse(parts[3]), LocalTime.parse(parts[4]));
             break;
         }
 
-        if(Boolean.parseBoolean(parts[1]))
+        if (Boolean.parseBoolean(parts[1]))
             currentTask.markComplete();
 
         return currentTask;
     }
-
 
     /**
      * Convert List of String to List of Task.

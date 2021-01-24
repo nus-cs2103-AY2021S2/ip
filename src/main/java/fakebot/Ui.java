@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//Handle all Input and Output of Duke
 public class Ui {
     private Scanner scanf;
-    public Ui(){
+
+    public Ui() {
         scanf = new Scanner(System.in);
     }
+
     private static String DIVIDER = "____________________________________________________________\n";
 
     /**
@@ -31,7 +32,7 @@ public class Ui {
     public void printList(String startingMessage, List<String> messages){
         StringBuilder printMessage = new StringBuilder(DIVIDER);
         printMessage.append(startingMessage);
-        for(int i = 1; i <= messages.size();i++) {
+        for (int i = 1; i <= messages.size(); i++) {
             printMessage.append(i);
             printMessage.append(".");
             printMessage.append(messages.get(i - 1));

@@ -7,31 +7,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class FakeBot {
-    private static String OLDLOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String OLDLOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static String LOGO =
-            " ______      _  ________   ____   ____ _______ \n"
-                    + "|  ____/ \\  | |/ /  ____| |  _ \\ / __ \\__   __|\n"
-                    + "| |__ /  \\  | ' /| |__    | |_) | |  | | | |   \n"
-                    + "|  __/ /\\ \\ |  < |  __|   |  _ <| |  | | | |\n"
-                    + "| | / ____ \\| . \\| |____  | |_) | |__| | | |\n"
-                    + "|_|/_/    \\_\\_|\\_\\______| |____/ \\____/  |_|\n";
+    private static String LOGO = " ______      _  ________   ____   ____ _______ \n"
+            + "|  ____/ \\  | |/ /  ____| |  _ \\ / __ \\__   __|\n"
+            + "| |__ /  \\  | ' /| |__    | |_) | |  | | | |   \n"
+            + "|  __/ /\\ \\ |  < |  __|   |  _ <| |  | | | |\n"
+            + "| | / ____ \\| . \\| |____  | |_) | |__| | | |\n"
+            + "|_|/_/    \\_\\_|\\_\\______| |____/ \\____/  |_|\n";
 
 
-    private static String EXITCOMMAND = "bye";
-    private static String LISTCOMMAND = "list";
-    private static String DONECOMMAND = "done";
-    private static String TODOCOMMAND = "todo";
-    private static String DEADLINECOMMAND = "deadline";
-    private static String DEADLINESPLITREGEX = " /by ";
-    private static String EVENTCOMMAND = "event";
-    private static String EVENTSPLITREGEX = " /at ";
-    private static String DELETECOMMAND = "delete";
+    private static String EXIT_COMMAND = "bye";
+    private static String LIST_COMMAND = "list";
+    private static String DONE_COMMAND = "done";
+    private static String TODO_COMMAND = "todo";
+    private static String DEADLINE_COMMAND = "deadline";
+    private static String DEADLINE_SPLIT_REGEX = " /by ";
+    private static String EVENT_COMMAND = "event";
+    private static String EVENT_SPLIT_REGEX = " /at ";
+    private static String DELETE_COMMAND = "delete";
 
     private static String saveFilePath = "/data/";
     private static String saveFileName = "savedHistory.txt";
@@ -53,7 +51,7 @@ public class FakeBot {
                 ui.printBotMessage(e.getMessage());
                 continue;
             }
-            continueProgram = processCommand(taskList,command);
+            continueProgram = processCommand(taskList, command);
         }
         ui.printBotMessage("Bye. Hope to see you again soon!");
     }
@@ -87,7 +85,8 @@ public class FakeBot {
      * @param count Total number of Task Left.
      */
     public static void printDeleteMessage(Task task, int count) {
-        ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()+ "\nNow you have " + count + " tasks in the list.");
+        ui.printBotMessage("Noted. I've removed this task:\n " + task.toString()
+                + "\nNow you have " + count + " tasks in the list.");
     }
     /**
      * Print message to show that the task is deleted and print the remaining number of task left.
@@ -95,7 +94,8 @@ public class FakeBot {
      * @param count Total number of Task Left.
      */
     public static void printAddedTaskMessage(Task task, int count) {
-        ui.printBotMessage("Got it. I've added this task: \n  " + task.toString() + "\nNow you have " + count + " tasks in the list.");
+        ui.printBotMessage("Got it. I've added this task: \n  " + task.toString()
+                + "\nNow you have " + count + " tasks in the list.");
     }
 
     /**
@@ -104,53 +104,53 @@ public class FakeBot {
      * @param command Total number of Task Left.
      */
     public static boolean processCommand(TaskList taskList, Command command) {
-        switch(command.getCommand()) {
-            case BYE:
-                return false;
-            case LIST:
-                ui.printTasks(taskList);
-                break;
-            case DONE:
-                int doneIndex = Integer.parseInt(command.getDescription()) - 1;
-                taskList.getTask(doneIndex).markComplete();
-                printDoneMessage(taskList.getTask(doneIndex));
-                saveHistory(taskList);
-                break;
-            case TODO:
-                ToDos todoTask = new ToDos(command.getDescription());
-                taskList.addTask(todoTask);
-                printAddedTaskMessage(todoTask, taskList.getSize());
-                saveHistory(taskList);
-                break;
-            case DEADLINE:
-                String[] deadlineDetalis = command.getDescription().split(DEADLINESPLITREGEX);
-                String[] dates = deadlineDetalis[1].split(" ");
-                LocalDate date = LocalDate.parse(dates[0]);
-                LocalTime time = LocalTime.parse(dates[1]);
-                Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date,time);
-                taskList.addTask(deadlineTask);
-                printAddedTaskMessage(deadlineTask, taskList.getSize());
-                saveHistory(taskList);
-                break;
-            case EVENT:
-                String[] eventDetails = command.getDescription().split(EVENTSPLITREGEX);
-                String[] eventDates = eventDetails[1].split(" ");
-                LocalDate startDate = LocalDate.parse(eventDates[0]);
-                LocalTime startTime = LocalTime.parse(eventDates[1]);
-                LocalDate endDate = LocalDate.parse(eventDates[2]);
-                LocalTime endTime = LocalTime.parse(eventDates[3]);
-                Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
-                taskList.addTask(eventTask);
-                printAddedTaskMessage(eventTask, taskList.getSize());
-                saveHistory(taskList);
-                break;
-            case DELETE:
-                int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
-                Task deletedTask = taskList.getTask(deleteIndex);
-                taskList.removeTask(deleteIndex);
-                printDeleteMessage(deletedTask, taskList.getSize());
-                saveHistory(taskList);
-                break;
+        switch (command.getCommand()) {
+        case BYE:
+            return false;
+        case LIST:
+            ui.printTasks(taskList);
+            break;
+        case DONE:
+            int doneIndex = Integer.parseInt(command.getDescription()) - 1;
+            taskList.getTask(doneIndex).markComplete();
+            printDoneMessage(taskList.getTask(doneIndex));
+            saveHistory(taskList);
+            break;
+        case TODO:
+            ToDos todoTask = new ToDos(command.getDescription());
+            taskList.addTask(todoTask);
+            printAddedTaskMessage(todoTask, taskList.getSize());
+            saveHistory(taskList);
+            break;
+        case DEADLINE:
+            String[] deadlineDetalis = command.getDescription().split(DEADLINE_SPLIT_REGEX);
+            String[] dates = deadlineDetalis[1].split(" ");
+            LocalDate date = LocalDate.parse(dates[0]);
+            LocalTime time = LocalTime.parse(dates[1]);
+            Deadlines deadlineTask = new Deadlines(deadlineDetalis[0], date, time);
+            taskList.addTask(deadlineTask);
+            printAddedTaskMessage(deadlineTask, taskList.getSize());
+            saveHistory(taskList);
+            break;
+        case EVENT:
+            String[] eventDetails = command.getDescription().split(EVENT_SPLIT_REGEX);
+            String[] eventDates = eventDetails[1].split(" ");
+            LocalDate startDate = LocalDate.parse(eventDates[0]);
+            LocalTime startTime = LocalTime.parse(eventDates[1]);
+            LocalDate endDate = LocalDate.parse(eventDates[2]);
+            LocalTime endTime = LocalTime.parse(eventDates[3]);
+            Events eventTask = new Events(eventDetails[0], startDate, startTime, endDate, endTime);
+            taskList.addTask(eventTask);
+            printAddedTaskMessage(eventTask, taskList.getSize());
+            saveHistory(taskList);
+            break;
+        case DELETE:
+            int deleteIndex = Integer.parseInt(command.getDescription()) - 1;
+            Task deletedTask = taskList.getTask(deleteIndex);
+            taskList.removeTask(deleteIndex);
+            printDeleteMessage(deletedTask, taskList.getSize());
+            saveHistory(taskList);
+            break;
         }
 
         return true;
@@ -162,18 +162,17 @@ public class FakeBot {
      * @param taskCount Total number of Task Left.
      */
     public static Command validateCommand(String command, int taskCount) throws CommandException {
-
-        if (command.equals(EXITCOMMAND)) {
+        if (command.equals(EXIT_COMMAND)) {
             return new Command(CommandType.BYE);
-        } else if (command.equals(LISTCOMMAND)) {
+        } else if (command.equals(LIST_COMMAND)) {
             return new Command(CommandType.LIST);
         }
 
-        if (command.equals(DONECOMMAND) || command.equals(DELETECOMMAND)) {
+        if (command.equals(DONE_COMMAND) || command.equals(DELETE_COMMAND)) {
             throw new CommandException("☹ OOPS!!! You must indicate the index of the Tasks to be " + command + ".");
         }
 
-        if (command.equals(TODOCOMMAND) || command.equals(DEADLINECOMMAND) || command.equals(EVENTCOMMAND)) {
+        if (command.equals(TODO_COMMAND) || command.equals(DEADLINE_COMMAND) || command.equals(EVENT_COMMAND)) {
             throw new CommandException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
         }
 
@@ -185,10 +184,11 @@ public class FakeBot {
         String commandName = command.substring(0, firstSplit);
         String description = command.substring(firstSplit + 1);
 
-        if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND) || commandName.equals(TODOCOMMAND) || commandName.equals(EVENTCOMMAND) || commandName.equals(DEADLINECOMMAND)) {
+        if (commandName.equals(DONE_COMMAND) || commandName.equals(DELETE_COMMAND) || commandName.equals(TODO_COMMAND)
+                || commandName.equals(EVENT_COMMAND) || commandName.equals(DEADLINE_COMMAND)) {
             if (description.isEmpty()) {
                 throw new CommandException("☹ OOPS!!! The description of a " + commandName + " cannot be empty.");
-            } else if (commandName.equals(DONECOMMAND) || commandName.equals(DELETECOMMAND)) {
+            } else if (commandName.equals(DONE_COMMAND) || commandName.equals(DELETE_COMMAND)) {
                 try {
                     int index = Integer.parseInt(description);
                     if (index > taskCount || index < 1) {
@@ -197,42 +197,47 @@ public class FakeBot {
                 } catch (NumberFormatException e) {
                     throw new CommandException("☹ OOPS!!! Invalid Task Index Format.");
                 }
-                if (commandName.equals(DONECOMMAND)) {
+                if (commandName.equals(DONE_COMMAND)) {
                     return new Command(CommandType.DONE, description);
 
-                } else if (commandName.equals(DELETECOMMAND)) {
+                } else if (commandName.equals(DELETE_COMMAND)) {
                     return new Command(CommandType.DELETE, description);
                 }
-            } else if (commandName.equals(TODOCOMMAND)) {
+            } else if (commandName.equals(TODO_COMMAND)) {
                 return new Command(CommandType.TODO, description);
-            } else if (commandName.equals(DEADLINECOMMAND)) {
-                if (!description.contains(DEADLINESPLITREGEX))
-                    throw new CommandException("☹ OOPS!!! The description of a " + DEADLINECOMMAND + " must contain Date indicated by \"" + DEADLINESPLITREGEX + "\".");
+            } else if (commandName.equals(DEADLINE_COMMAND)) {
+                if (!description.contains(DEADLINE_SPLIT_REGEX))
+                    throw new CommandException("☹ OOPS!!! The description of a "
+                            + DEADLINE_COMMAND + " must contain Date indicated by \""
+                            + DEADLINE_SPLIT_REGEX + "\".");
 
                 try {
-                    String[] deadlineDetails = description.split(DEADLINESPLITREGEX);
+                    String[] deadlineDetails = description.split(DEADLINE_SPLIT_REGEX);
                     String[] dates = deadlineDetails[1].split(" ");
                     LocalDate date = LocalDate.parse(dates[0]);
                     LocalTime time = LocalTime.parse(dates[1]);
-                }catch (Exception e) {
-                    throw new CommandException("☹ OOPS!!! The Date format of a " + DEADLINECOMMAND + " must be yyyy-mm-dd hh:ss.");
+                } catch (Exception e) {
+                    throw new CommandException("☹ OOPS!!! The Date format of a "
+                            + DEADLINE_COMMAND + " must be yyyy-mm-dd hh:ss.");
 
                 }
 
                 return new Command(CommandType.DEADLINE, description);
-            } else if (commandName.equals(EVENTCOMMAND)) {
-                if (!description.contains(EVENTSPLITREGEX))
-                    throw new CommandException("☹ OOPS!!! The description of a " + EVENTCOMMAND + " must contain Date and Duration indicated by \"" + EVENTSPLITREGEX + "\".");
+            } else if (commandName.equals(EVENT_COMMAND)) {
+                if (!description.contains(EVENT_SPLIT_REGEX))
+                    throw new CommandException("☹ OOPS!!! The description of a " + EVENT_COMMAND
+                            + " must contain Date and Duration indicated by \"" + EVENT_SPLIT_REGEX + "\".");
 
                 try {
-                    String[] eventDetails = description.split(EVENTSPLITREGEX);
+                    String[] eventDetails = description.split(EVENT_SPLIT_REGEX);
                     String[] dates = eventDetails[1].split(" ");
                     LocalDate startDate = LocalDate.parse(dates[0]);
                     LocalTime startTime = LocalTime.parse(dates[1]);
                     LocalDate endDate = LocalDate.parse(dates[2]);
                     LocalTime endTime = LocalTime.parse(dates[3]);
-                }catch (Exception e) {
-                    throw new CommandException("☹ OOPS!!! The Date format of a " + EVENTCOMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
+                } catch (Exception e) {
+                    throw new CommandException("☹ OOPS!!! The Date format of a "
+                            + EVENT_COMMAND + " must be yyyy-mm-dd hh:ss yyyy-mm-dd hh:ss.");
 
                 }
 

@@ -9,7 +9,6 @@ public class Deadlines extends Task {
     private LocalTime deadlineTime;
 
     public Deadlines(String name, LocalDate deadlineDate, LocalTime deadlineTime) {
-
         super(name);
         this.deadlineDate = deadlineDate;
         this.deadlineTime = deadlineTime;

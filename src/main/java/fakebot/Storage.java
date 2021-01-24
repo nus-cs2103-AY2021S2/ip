@@ -24,7 +24,7 @@ public class Storage {
      */
     public Storage(String fileName, String filePath) {
         filePath = createDirectory(filePath);
-        fileToEdit = filePath+fileName;
+        fileToEdit = filePath + fileName;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Storage {
         file.mkdirs();
 
         //Remove directory and use root instead since it invalid
-        if(!file.isDirectory()) {
+        if (!file.isDirectory()) {
             return "";
         }
         return filePath;
@@ -52,7 +52,7 @@ public class Storage {
         String textToAdd = Parser.convertStringsToString(Parser.convertTasksToStrings(taskList));
         try {
             writeToFile(textToAdd);
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -74,7 +74,7 @@ public class Storage {
         try {
             List<String> stringList = readFile();
             taskList = Parser.parseStringsToTasks(stringList);
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             //Do nothing, return empty list.
         }
         return taskList;
