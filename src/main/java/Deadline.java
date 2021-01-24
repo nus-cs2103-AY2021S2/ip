@@ -9,10 +9,15 @@ public class Deadline extends Task{
     /** Date/Timing information for task to be completed by. */
     protected String by;
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone, boolean existing) {
         super(description, isDone);
-        LocalDate date = LocalDate.parse(by);
-        this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (existing) {
+            this.by = by;
+        } else {
+            LocalDate date = LocalDate.parse(by);
+            this.by = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+
     }
 
     /**

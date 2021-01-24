@@ -84,15 +84,15 @@ public class Duke {
                 String dateInfo = object.substring(object.indexOf("(") + 5, object.indexOf(")"));
                 if (object.charAt(1) == 'D') {
                     if (object.charAt(4) == '-') {
-                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, true, true));
                     } else {
-                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                        tasks.add(new Deadline(object.substring(7, object.indexOf("(") - 1), dateInfo, false, true));
                     }
                 } else if (object.charAt(1) == 'E') {
                     if (object.charAt(4) == '-') {
-                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, true));
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, true, true));
                     } else {
-                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, false));
+                        tasks.add(new Event(object.substring(7, object.indexOf("(") - 1), dateInfo, false, true));
                     }
                 }
             }
@@ -174,7 +174,7 @@ public class Duke {
         }
         String command = nextInput.substring(9, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Deadline(command, dateInfo, false));
+        tasks.add(new Deadline(command, dateInfo, false, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();
@@ -196,7 +196,7 @@ public class Duke {
         }
         String command = nextInput.substring(6, nextInput.indexOf("/") - 1);
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
-        tasks.add(new Event(command, dateInfo, false));
+        tasks.add(new Event(command, dateInfo, false, false));
         System.out.println("----------------------------------------------------------------------------------------");
         System.out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks).toString());
         taskAdded();

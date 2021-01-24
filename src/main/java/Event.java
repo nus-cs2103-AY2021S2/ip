@@ -9,10 +9,15 @@ public class Event extends Task{
     /** Date/Timing information for task to be carried out at. */
     protected String at;
 
-    public Event(String description, String at, boolean isDone) {
+    public Event(String description, String at, boolean isDone, boolean existing) {
         super(description, isDone);
-        LocalDate date = LocalDate.parse(at);
-        this.at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        if (existing) {
+            this.at = at;
+        } else {
+            LocalDate date = LocalDate.parse(at);
+            this.at = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        }
+
     }
 
     /**
