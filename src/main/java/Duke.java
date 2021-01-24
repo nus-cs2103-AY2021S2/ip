@@ -6,6 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.io.File;
 // potential exceptions to catch:
 // 1) deleting a non-existent task
@@ -103,6 +106,9 @@ public class Duke {
         catch(IllegalArgumentException e) {
             System.out.println("Enter a proper command :( " + e.getMessage());
         }
+        catch(IndexOutOfBoundsException e) {
+            System.out.println("No such task :( " + e.getMessage());
+        }
         catch(DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -176,11 +182,15 @@ public class Duke {
             break;
         case "D":
             String by = savedRecord[3].strip();
-            output = new DeadlineTask(description, isDone, by);
+            LocalDate byDate = LocalDate.parse(by);
+            String byTime = savedRecord[4].strip();
+            output = new DeadlineTask(description, isDone, byDate, byTime);
             break;
         case "E":
             String at = savedRecord[3].strip();
-            output = new EventTask(description, isDone, at);
+            LocalDate atDate = LocalDate.parse(at);
+            String atTime = savedRecord[4].strip();
+            output = new EventTask(description, isDone, atDate, atTime);
             break;
         default:
             throw new DukeException("Unexpected value: " + taskType);
@@ -211,7 +221,7 @@ public class Duke {
         }
         System.out.println("----------------------------------------------");
     }
-    public static void markTaskDone(ArrayList<Task> tasks, int index) {
+    public static void markTaskDone(ArrayList<Task> tasks, int index) throws IndexOutOfBoundsException{
         System.out.println("----------------------------------------------");
         Task t = tasks.get(index - 1);
         t.markAsDone();
@@ -244,16 +254,23 @@ public class Duke {
         System.out.println("----------------------------------------------");
         String description = "";
         String by = "";
+        String time = "";
         for (int i = 1; i < com.length; i++) {
             if (com[i].equals("/by")) {
                 for (int j = i + 1; j < com.length; j++) {
-                    by += " " + com[j];
+                    if (com[j].equals("time:")) {
+                        for (int k = j + 1; k < com.length; k++) {
+                            time += " " + com[k];
+                        }
+                        break;
+                    }
+                    by += com[j];
                 }
                 break;
             }
             description += " " + com[i];
         }
-        DeadlineTask deadLine = new DeadlineTask(description, false, by);
+        DeadlineTask deadLine = new DeadlineTask(description, false, LocalDate.parse(by), time);
         tasks.add(deadLine);
         System.out.println("Added this:");
         System.out.println(deadLine);
@@ -264,16 +281,23 @@ public class Duke {
         System.out.println("----------------------------------------------");
         String description = "";
         String at = "";
+        String time = "";
         for (int i = 1; i < com.length; i++) {
             if (com[i].equals("/at")) {
                 for (int j = i + 1; j < com.length; j++) {
-                    at += " " + com[j];
+                    if (com[j].equals("time:")) {
+                        for (int k = j + 1; k < com.length; k++) {
+                            time += " " + com[k];
+                        }
+                        break;
+                    }
+                    at += com[j];
                 }
                 break;
             }
-            description += " " + com[i];
+            description += com[i];
         }
-        EventTask event = new EventTask(description, false, at);
+        EventTask event = new EventTask(description, false, LocalDate.parse(at), time);
         tasks.add(event);
         System.out.println("Added this:");
         System.out.println(event);
