@@ -25,10 +25,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     *
+     * Prints a list of tasks that matches given word in command line.
      *
      * @param tasks
-     * @param ui
+     * @param ui 
      * @param storage
      */
     @Override
@@ -49,9 +49,9 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Returns if program should exit after this command.
      *
-     *
-     * @return false;
+     * @return false.
      */
     @Override
     public boolean isExit() {
