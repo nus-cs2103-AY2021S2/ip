@@ -10,7 +10,7 @@ public class Parser {
      * Responds to the user command accordingly
      * @param input command-line input supplied by the user
      * @param ui    user interface in charge of printing out responses to the user
-     * @throws DukeException  if user command is invalid
+     * @throws DukeException if user command is invalid
      */
     public static void handleUserCommand(String input, Ui ui) throws DukeException {
             if (input.equals("bye")) {
