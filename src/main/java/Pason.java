@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Pason {
@@ -73,6 +74,7 @@ public class Pason {
                 throw new PasonException("You've already marked this task as done.");
             }
             tasks.get(index - 1).markAsDone();
+            saveAllTasks();
             printMessage("Good job! I've marked this task as done:\n" + tasks.get(index - 1));
         } catch(IndexOutOfBoundsException e) {
             printMessage("Oops! We couldn't find this task. Please enter the correct task number.");
@@ -102,6 +104,7 @@ public class Pason {
             } else {
                 printMessage("Okay! I've removed this task:\n\t" + tasks.get(index) + "\nNow there are " + (tasks.size() - 1) + " tasks in your list.");
                 tasks.remove(index);
+                saveAllTasks();
             }
         } catch(Exception e) {
             printMessage("Oops! " + e.getMessage());
@@ -116,7 +119,7 @@ public class Pason {
                 throw new PasonException("Please include a description for your todo task.");
             }
             ToDo newToDo = new ToDo(m.group(2));
-            tasks.add(newToDo);
+            saveTask(newToDo);
             printMessage("Done! I've added a new todo:\n\t" + newToDo + "\nNow there are " + tasks.size() + " tasks in your list.");
         } catch(Exception e) {
             printMessage("Oops! " + e.getMessage());
@@ -129,7 +132,7 @@ public class Pason {
             splitInput = input.substring(8).trim().split(" /by ");
             if (splitInput.length == 2) {
                 Deadline newDeadline = new Deadline(splitInput[0], splitInput[1]);
-                tasks.add(newDeadline);
+                saveTask(newDeadline);
                 printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
             } else if (splitInput.length == 1) {
                 throw new PasonException("Please enter a by date for '" + splitInput[0] + "'");
@@ -149,7 +152,7 @@ public class Pason {
             splitInput = input.substring(5).trim().split(" /at ");
             if (splitInput.length == 2) {
                 Event newEvent = new Event(splitInput[0], splitInput[1]);
-                tasks.add(newEvent);
+                saveTask(newEvent);
                 printMessage("Done! I've added a new event:\n\t" + newEvent + "\nNow there are " + tasks.size() + " tasks in your list.");
             } else if (splitInput.length == 1) {
                 System.out.println(splitInput[0]);
@@ -192,6 +195,29 @@ public class Pason {
         }
         if(failedImports > 0) {
             printMessage("There was a problem parsing " + failedImports + " task(s) from the file.");
+        }
+    }
+
+    public static void saveTask(Task task) {
+        try {
+            tasks.add(task);
+            FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME, true);
+            fw.write(task.toFileFormat() + "\n");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Oops!: " + e.getMessage());
+        }
+    }
+
+    public static void saveAllTasks() {
+        try {
+            FileWriter fw = new FileWriter(FILE_DIRECTORY + "/" + FILE_NAME);
+            for(int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toFileFormat() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Oops!: " + e.getMessage());
         }
     }
 
