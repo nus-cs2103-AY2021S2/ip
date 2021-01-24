@@ -17,15 +17,17 @@ import java.time.LocalDate;
 public class Duke {
     /** Allows for easy change of the bot name in future. **/
     final protected static String BOT_NAME = "DukeNukem";
-    private static Ui ui;
+    private Ui ui;
     private static TaskList tasks;
-
+    private static Storage storage;
     public Duke(String filePath) {
         ui = new Ui();
+        storage = new Storage(filePath).load();
         try {
-            tasks = new TaskList();
+            tasks = new TaskList(storage);
         } catch (DukeException e) {
             Ui.printMessage(e.getMessage());
+            tasks = new TaskList();
         }
     }
 
@@ -67,16 +69,16 @@ public class Duke {
         } else if (inputString.equals("bye")) {
             quit();
         } else if (inputString.startsWith("done")) {
-            tasks.completeTask(inputString);
+            tasks.completeTask(inputString, storage);
         } else if (inputString.startsWith("delete")) {
-            tasks.deleteTask(inputString);
+            tasks.deleteTask(inputString, storage);
         } else if (inputString.startsWith("todo")) {
             try {
                 String taskString = inputString.substring(5);
                 Todo newTodo = new Todo(taskString);
                 tasks.addTask(newTodo);
                 String saveToDisk = "T | 0 | " + taskString;
-                saveTaskToDisk(saveToDisk);
+                storage.saveTaskToDisk(saveToDisk);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException();
             }
@@ -89,7 +91,7 @@ public class Duke {
                 Event newEvent = new Event(taskString, eventTime);
                 tasks.addTask(newEvent);
                 String saveToDisk = "E | 0 | " + taskString + " | " + eventTime;
-                saveTaskToDisk(saveToDisk);
+                storage.saveTaskToDisk(saveToDisk);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException();
             }
@@ -101,46 +103,12 @@ public class Duke {
                 Deadline newDeadline = new Deadline(taskString, deadlineTime);
                 tasks.addTask(newDeadline);
                 String saveToDisk = "D | 0 | " + taskString + " | " + deadlineTime;
-                saveTaskToDisk(saveToDisk);
+                storage.saveTaskToDisk(saveToDisk);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException();
             }
         } else {
             throw new InvalidCommandException();
-        }
-    }
-
-    /**
-     * Replaces a line in the file to facilitate deletion and replacement.
-     * @param oldString String of the old task.
-     * @param newString String of the new task.
-     */
-    public static void deleteReplaceTaskFromDisk(String oldString, String newString) {
-        File dataDirectory = new File("data");
-        File dataFile = new File(dataDirectory.getPath() + File.separator + "data.txt");
-        try {
-            List<String> fileContents = new ArrayList<>(Files.readAllLines(dataFile.toPath()));
-            for (int i = 0; i < fileContents.size(); i++) {
-                if (fileContents.get(i).equals(oldString)) {
-                    fileContents.set(i, newString);
-                    break;
-                }
-            }
-            Files.write(dataFile.toPath(), fileContents);
-        } catch (IOException e) {
-
-        }
-    }
-
-    public static void saveTaskToDisk(String string) {
-        File dataDirectory = new File("data");
-        File dataFile = new File(dataDirectory.getPath() + File.separator + "data.txt");
-        try {
-            FileWriter writer = new FileWriter(dataFile, true);
-            writer.write(string + System.lineSeparator());
-            writer.close();
-        } catch (IOException e) {
-            Ui.printMessage(e.getMessage());
         }
     }
 

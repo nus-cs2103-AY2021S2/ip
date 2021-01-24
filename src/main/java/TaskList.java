@@ -11,7 +11,10 @@ public class TaskList {
     private static List<Task> taskList;
     public TaskList() {
         taskList = new ArrayList<>();
-        initializeTasks();
+    }
+    public TaskList(Storage storage) {
+        taskList = new ArrayList<>();
+        initializeTasks(storage.read());
     }
 
     public void addTask(Task task) {
@@ -25,7 +28,7 @@ public class TaskList {
      * Mark the task passed to the method as complete.
      * @param inputString User input string.
      */
-    public void completeTask(String inputString) {
+    public void completeTask(String inputString, Storage storage) {
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task doneTask = taskList.get(taskId).setDone();
@@ -44,7 +47,7 @@ public class TaskList {
                 oldString += " | " + date.toString();
                 newString += " | " + date.toString();
             }
-            Duke.deleteReplaceTaskFromDisk(oldString, newString);
+            storage.deleteReplaceTaskFromDisk(oldString, newString);
             Ui.printMessage("Great~! Task completed:");
             Ui.printMessage(doneTask.toString());
         } catch (IndexOutOfBoundsException e) {
@@ -56,7 +59,7 @@ public class TaskList {
      * Delete the specified task from the list.
      * @param inputString User input string.
      */
-    public void deleteTask(String inputString) {
+    public void deleteTask(String inputString, Storage storage) {
         try {
             int taskId = Integer.parseInt(String.valueOf(inputString.split(" ")[1])) - 1;
             Task deletedTask = taskList.remove(taskId);
@@ -64,7 +67,7 @@ public class TaskList {
             String completionOfTask = (deletedTask.getDone() ? "1" : "0");
             String descriptionOfTask = deletedTask.getDescription().strip();
             String oldString = typeOfTask + " | " + completionOfTask + " | " + descriptionOfTask;
-            Duke.deleteReplaceTaskFromDisk(oldString, "");
+            storage.deleteReplaceTaskFromDisk(oldString, "");
             Ui.printMessage("Okie! I've deleted the task from your list:");
             Ui.printMessage(deletedTask.toString());
             Ui.printMessage("The size of your task list is now: " + taskList.size());
@@ -95,58 +98,40 @@ public class TaskList {
     /**
      * Initializes the task list from the data file.
      */
-    public void initializeTasks() {
-        List<String> fileContents;
-        File dataDirectory = new File("data");
-        if (!dataDirectory.exists()) {
-            // mkdirs does not throw any exception even when failing
-            dataDirectory.mkdirs();
-        }
-        File dataFile = new File(dataDirectory.getPath() + File.separator + "data.txt");
-        if (!dataFile.exists()) {
-            try {
-                dataFile.createNewFile();
-            } catch (IOException e) {
-                throw new DukeException();
+    public void initializeTasks(List<String> fileContents) {
+        for (int i = 0; i < fileContents.size(); i++) {
+            String line = fileContents.get(i);
+            if (line.length() < 1) {
+                continue;
+            }
+            String[] lineArray = line.split("\\|");
+            boolean isDone = false;
+            if (lineArray[1].strip().charAt(0) == '1') {
+                isDone = true;
+            }
+            if (lineArray[0].strip().charAt(0) == 'T') {
+                // todo
+                Todo newTodo = new Todo(lineArray[2].strip());
+                if (isDone) {
+                    newTodo.setDone();
+                }
+                taskList.add(newTodo);
+            } else if (lineArray[0].strip().charAt(0) == 'D') {
+                // deadline
+                Deadline newDeadline = new Deadline(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
+                if (isDone) {
+                    newDeadline.setDone();
+                }
+                taskList.add(newDeadline);
+            } else if (lineArray[0].strip().charAt(0) == 'E') {
+                // event
+                Event newEvent = new Event(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
+                if (isDone) {
+                    newEvent.setDone();
+                }
+                taskList.add(newEvent);
             }
         }
-        try {
-            fileContents = Files.readAllLines(dataFile.toPath());
-            for (int i = 0; i < fileContents.size(); i++) {
-                String line = fileContents.get(i);
-                if (line.length() < 1) {
-                    continue;
-                }
-                String[] lineArray = line.split("\\|");
-                boolean isDone = false;
-                if (lineArray[1].strip().charAt(0) == '1') {
-                    isDone = true;
-                }
-                if (lineArray[0].strip().charAt(0) == 'T') {
-                    // todo
-                    Todo newTodo = new Todo(lineArray[2].strip());
-                    if (isDone) {
-                        newTodo.setDone();
-                    }
-                    taskList.add(newTodo);
-                } else if (lineArray[0].strip().charAt(0) == 'D') {
-                    // deadline
-                    Deadline newDeadline = new Deadline(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
-                    if (isDone) {
-                        newDeadline.setDone();
-                    }
-                    taskList.add(newDeadline);
-                } else if (lineArray[0].strip().charAt(0) == 'E') {
-                    // event
-                    Event newEvent = new Event(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
-                    if (isDone) {
-                        newEvent.setDone();
-                    }
-                    taskList.add(newEvent);
-                }
-            }
-        } catch (IOException e) {
-            throw new DukeException();
-        }
+
     }
 }
