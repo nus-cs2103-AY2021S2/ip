@@ -1,4 +1,6 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DataManager {
@@ -25,13 +27,16 @@ public class DataManager {
     }
 
     public ArrayList<Task> readFromFile() {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         ArrayList<Task> tasksList = new ArrayList<>();
+        LocalDateTime date;
         try {
             Task task = null;
             BufferedReader br = new BufferedReader(new FileReader(this.filePath));
             String input = br.readLine();
             while(input != null) {
                 String[] inputArr = input.split(DELIMITER);
+                date = LocalDateTime.parse(inputArr[3], DateTimeFormatter.ofPattern("dd MMM yyyy HHmm"));
 
                 try {
                     switch (inputArr[0]) {
@@ -39,10 +44,10 @@ public class DataManager {
                             task = new Todo(inputArr[2]);
                             break;
                         case "D":
-                            task = new Deadline(inputArr[2], inputArr[3]);
+                            task = new Deadline(inputArr[2], df.format(date));
                             break;
                         case "E":
-                            task = new Event(inputArr[2], inputArr[3]);
+                            task = new Event(inputArr[2], df.format(date));
                             break;
                     }
                     if(Integer.parseInt(inputArr[1]) == 1) {
