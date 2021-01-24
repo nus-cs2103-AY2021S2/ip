@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Duke {
     private static String PARTING_LINE = "____________________________________________________________";
     private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
+    private static String FILE_PATH = System.getProperty("user.dir") + "/duke.txt";
 
     public static void main(String[] args) {
         printGreeting();
