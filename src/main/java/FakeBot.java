@@ -2,7 +2,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Duke {
+public class FakeBot {
     private static String OLDLOGO =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
