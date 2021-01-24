@@ -14,11 +14,13 @@ public class Ui {
                 longest = s.length();
             }
         }
-        String topBorder = "    ╭" + "-".repeat(longest + 2) + "╮\n";
-        String botBorder = "    ╰" + "-".repeat(longest + 2) + "╯\n";
+        String topBorder = "    ╭" + "-".repeat(longest + 4) + "╮\n"
+                + "    |" + " ".repeat(longest + 4) + "|\n";
+        String botBorder = "    |" + " ".repeat(longest + 4) + "|\n"
+                + "    ╰" + "-".repeat(longest + 4) + "╯\n";
         StringBuilder mainText = new StringBuilder();
         for (String s : strings) {
-            String toAppend = "    | " + s + " ".repeat(longest - s.length() + 1) + "|\n";
+            String toAppend = "    |  " + s + " ".repeat(longest - s.length() + 2) + "|\n";
             mainText.append(toAppend);
         }
         System.out.println(topBorder + mainText + botBorder);
@@ -26,20 +28,17 @@ public class Ui {
 
     protected static void displayWelcome() {
         display(
-                "  __  __      _____                    _     _     \n" +
-                        " |  \\/  |    |  __ \\                  | |   | |    \n" +
-                        " | \\  / | ___| |  | | ___  _ __   __ _| | __| |___ \n" +
-                        " | |\\/| |/ __| |  | |/ _ \\| '_ \\ / _` | |/ _` / __|\n" +
-                        " | |  | | (__| |__| | (_) | | | | (_| | | (_| \\__ \\\n" +
-                        " |_|  |_|\\___|_____/ \\___/|_| |_|\\__,_|_|\\__,_|___/\n" +
-                        "                                                   \n"
-                        + "Welcome to McDonalds!\n"
-                        + "I'm Ronald, the best McSpicy ever!\n"
+                "█▄ ▄█ ▄▀▀ █▀▄ ▄▀▄ █▄ █ ▄▀▄ █   █▀▄ ▄▀▀\n"
+                        +"█ ▀ █ ▀▄▄ █▄▀ ▀▄▀ █ ▀█ █▀█ █▄▄ █▄▀ ▄██\n\n"
+                        + "Welcome!\n"
+                        + "I'm Ronald, the best McSpicy ever.\n"
                         + "What can I do for you today?");
     }
 
     protected static void displayFarewell() {
-        display("Thanks for patronising McDonalds!\nWe hope to see you again soon!");
+        display("█▄ ▄█ ▄▀▀ █▀▄ ▄▀▄ █▄ █ ▄▀▄ █   █▀▄ ▄▀▀\n"
+                + "█ ▀ █ ▀▄▄ █▄▀ ▀▄▀ █ ▀█ █▀█ █▄▄ █▄▀ ▄██\n\n"
+                + "Thanks for coming!\nWe hope to see you again!");
     }
 
     public static void displayAllTasks() {
