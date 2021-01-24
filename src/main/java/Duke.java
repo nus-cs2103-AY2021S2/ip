@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+        String welcomeMessage = "Hello! I'm Duke.";
         System.out.println(welcomeMessage);
     }
 
@@ -104,20 +105,59 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    private static void storeLocally(String task) {
+        String[] separated = task.split(" \\| ");
+        char taskType = separated[0].charAt(0);
+        if (taskType == 'T') {
+            ToDo t = new ToDo(separated[2]);
+            if (separated[1].equals("1")) {
+                t.markAsDone();
+            }
+            taskList.add(t);
+        } else if (taskType == 'D') {
+            Deadline d = new Deadline(separated[2], separated[3]);
+            if (separated[1].equals("1")) {
+                d.markAsDone();
+            }
+            taskList.add(d);
+        } else if (taskType == 'E') {
+            Event e = new Event(separated[2], separated[3]);
+            if (separated[1].equals("1")) {
+                e.markAsDone();
+            }
+            taskList.add(e);
+        } else {
+            System.err.println("Invalid task type!");
+        }
+    }
+
     private static void run() {
         introduction();
         File file = new File("./src/main/java/tasks.txt");
         try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String command = scanner.next();
+            Scanner scannerFile = new Scanner(file);
+            if (scannerFile.hasNextLine()) {
+                System.out.println("You have existing tasks!");
+                while (scannerFile.hasNextLine()) {
+                    String task = scannerFile.nextLine();
+                    storeLocally(task);
+                }
+                printList();
+            } else {
+                System.out.println("You have no existing tasks!");
+            }
+            scannerFile.close();
+            Scanner scannerInput = new Scanner(System.in);
+            System.out.println("What can I do for you?");
+            while (scannerInput.hasNextLine()) {
+                String command = scannerInput.next();
                 if (isByeCommand(command)) {
                     endProgram();
                     break;
                 } else if (isListCommand(command)) {
                     printList();
                 } else {
-                    String taskInput = scanner.nextLine();
+                    String taskInput = scannerInput.nextLine();
                     String[] taskInputAndDate = taskInput.split("/");
                     String taskDescription = taskInputAndDate[0].trim();
                     if (isDoneCommand(command) || isDeleteCommand(command)) {
@@ -142,11 +182,10 @@ public class Duke {
                     }
                 }
             }
-            scanner.close();
+            scannerInput.close();
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
-
     }
 
     public static void main(String[] args) {
