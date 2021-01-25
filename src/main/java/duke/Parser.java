@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.command.*;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Todo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -11,7 +16,7 @@ public class Parser {
     private Optional<String> secondSpecifier;
     private Optional<String> thirdSpecifier;
 
-    Parser()  {
+    public Parser()  {
     }
 
     public Command parse(String input) throws DukeException {

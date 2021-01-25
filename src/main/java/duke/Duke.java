@@ -1,19 +1,8 @@
-package main.java;
+package main.java.duke;
 
-import java.io.*;
-
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
-
+import main.java.duke.command.Command;
 
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
 
@@ -21,7 +10,6 @@ public class Duke {
     private TaskList tasks;
     private Parser parser;
     private Ui ui;
-    private static final String taskFilePath = "data/task.txt";
 
     public Duke(String filePath) {
         this.storage = new Storage(filePath);

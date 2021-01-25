@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class Ui {
     private String botName;
     private Scanner scanner;
 
-    Ui(String botName) {
+    public Ui(String botName) {
         this.botName = botName;
         this.scanner = new Scanner(System.in);
     }

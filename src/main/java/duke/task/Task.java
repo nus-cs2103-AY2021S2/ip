@@ -1,4 +1,4 @@
-package main.java.duke;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ public class Task {
     String addMessage;
     LocalDate date;
 
-    Task(String name) {
+    public Task(String name) {
         this.name = name;
         this.status = false;
     }
@@ -20,6 +20,18 @@ public class Task {
 
     public void setDone() {
         this.status = true;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public boolean getStatus() {
+        return this.status;
+    }
+
+    public String getAddMessage() {
+        return this.addMessage;
     }
 
     public String toFileString() {

@@ -1,16 +1,16 @@
-package main.java.duke;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    Event(String name, LocalDate date) {
+    public Event(String name, LocalDate date) {
         super(name, "Event coming right up!");
         this.date = date;
     }
 
-    Event(String name, LocalDate date, Boolean status) {
+    public Event(String name, LocalDate date, Boolean status) {
         this(name, date);
         this.status = status;
     }

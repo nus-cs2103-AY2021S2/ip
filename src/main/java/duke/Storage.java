@@ -1,4 +1,9 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.Todo;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -13,7 +18,7 @@ public class Storage {
 
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -47,6 +52,11 @@ public class Storage {
         } catch (IOException ioEx) {
             ioEx.printStackTrace();
         }
+    }
+
+    public void clearFile() {
+        File file = new File(this.filePath);
+        file.delete();
     }
 
     private String fileHandler() throws FileNotFoundException {

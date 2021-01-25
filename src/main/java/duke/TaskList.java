@@ -1,4 +1,6 @@
-package main.java;
+package main.java.duke;
+
+import main.java.duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    TaskList(List<Task> tasks, Storage storage) {
+    public TaskList(List<Task> tasks, Storage storage) {
         this(storage);
         this.tasks = tasks;
     }
@@ -32,6 +34,11 @@ public class TaskList {
         storage.writeToFile(this);
     }
 
+    public void deleteAll() {
+        tasks.clear();
+        storage.writeToFile(this);
+    }
+
     public Task find(int i) {
         return tasks.get(i);
     }
@@ -39,7 +46,7 @@ public class TaskList {
     public List<Task> getByDate(LocalDate date) {
         List<Task> tempTask = new ArrayList<Task>();
         for (Task task: tasks) {
-            if (task.date != null && task.date.isEqual(date)) {
+            if (task.getDate() != null && task.getDate().isEqual(date)) {
                 tempTask.add(task);
             }
         }

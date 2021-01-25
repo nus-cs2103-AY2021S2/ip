@@ -1,16 +1,16 @@
-package main.java.duke;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    Deadline(String name, LocalDate date) {
+    public Deadline(String name, LocalDate date) {
         super(name, "Make sure you meet this deadline!");
         this.date = date;
     }
 
-    Deadline(String name, LocalDate date, Boolean status) {
+    public Deadline(String name, LocalDate date, Boolean status) {
         this(name, date);
         this.status = status;
     }

@@ -1,5 +1,8 @@
-package main.java.duke;
+package main.java.duke.command;
 
+import main.java.duke.Storage;
+import main.java.duke.TaskList;
+import main.java.duke.Ui;
 import main.java.duke.task.Task;
 
 import java.time.LocalDate;
@@ -15,18 +18,18 @@ public class ShowTaskCommand extends Command {
     private LocalDate date;
     private ShowTaskType taskType;
 
-    ShowTaskCommand() {
+    public ShowTaskCommand() {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ALL;
     }
 
-    ShowTaskCommand(LocalDate date) {
+    public ShowTaskCommand(LocalDate date) {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ONE;
         this.date = date;
     }
 
-    ShowTaskCommand(String date) {
+    public ShowTaskCommand(String date) {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ONE;
 

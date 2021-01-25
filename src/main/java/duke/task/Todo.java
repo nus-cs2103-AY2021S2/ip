@@ -1,11 +1,11 @@
-package main.java.duke;
+package main.java.duke.task;
 
 public class Todo extends Task {
-    Todo(String name) {
+    public Todo(String name) {
         super(name, "Make sure you do this task!");
     }
 
-    Todo(String name, Boolean status) {
+    public Todo(String name, Boolean status) {
         this(name);
         this.status = status;
     }
