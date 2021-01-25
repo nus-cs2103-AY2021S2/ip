@@ -14,13 +14,28 @@
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[D][✘] return book (by: Sunday)
+		[D][✘] return book (by: 12 Dec 2020)
 	Now you have 2 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
 	Got it. I've added this task:
-		[E][✘] project meeting (at: Mon 2-4pm)
+		[D][✘] submit project (by: 2359 21 Jan 2021)
 	Now you have 3 tasks in the list
+	____________________________________________________________
+	____________________________________________________________
+	1. [T][✘] borrow book
+	2. [D][✘] return book (by: 12 Dec 2020)
+	3. [D][✘] submit project (by: 2359 21 Jan 2021)
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[E][✘] project meeting (at: Mon 2-4pm)
+	Now you have 4 tasks in the list
+	____________________________________________________________
+	____________________________________________________________
+	Got it. I've added this task:
+		[T][✘] eat lunch
+	Now you have 5 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
 	OOPS!!! I'm sorry, but I don't know what that command means :-(
@@ -30,29 +45,35 @@
 	____________________________________________________________
 	____________________________________________________________
 	1. [T][✘] borrow book
-	2. [D][✘] return book (by: Sunday)
-	3. [E][✘] project meeting (at: Mon 2-4pm)
+	2. [D][✘] return book (by: 12 Dec 2020)
+	3. [D][✘] submit project (by: 2359 21 Jan 2021)
+	4. [E][✘] project meeting (at: Mon 2-4pm)
+	5. [T][✘] eat lunch
 	____________________________________________________________
 	____________________________________________________________
 	Nice! I've marked this task as done:
-	[D][✓] return book (by: Sunday)
+	[D][✓] return book (by: 12 Dec 2020)
 	____________________________________________________________
 	____________________________________________________________
 	Item no. 99 cannot be found in list
 	____________________________________________________________
 	____________________________________________________________
 	1. [T][✘] borrow book
-	2. [D][✓] return book (by: Sunday)
-	3. [E][✘] project meeting (at: Mon 2-4pm)
+	2. [D][✓] return book (by: 12 Dec 2020)
+	3. [D][✘] submit project (by: 2359 21 Jan 2021)
+	4. [E][✘] project meeting (at: Mon 2-4pm)
+	5. [T][✘] eat lunch
 	____________________________________________________________
 	____________________________________________________________
 	Noted. I've removed this task:
 		[T][✘] borrow book
-	Now you have 2 tasks in the list
+	Now you have 4 tasks in the list
 	____________________________________________________________
 	____________________________________________________________
-	1. [D][✓] return book (by: Sunday)
-	2. [E][✘] project meeting (at: Mon 2-4pm)
+	1. [D][✓] return book (by: 12 Dec 2020)
+	2. [D][✘] submit project (by: 2359 21 Jan 2021)
+	3. [E][✘] project meeting (at: Mon 2-4pm)
+	4. [T][✘] eat lunch
 	____________________________________________________________
 	____________________________________________________________
 	Bye. Hope to see you again soon!
