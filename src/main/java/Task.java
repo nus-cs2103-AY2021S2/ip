@@ -15,6 +15,10 @@ public class Task {
         return content;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     public void markDone() {
         isDone = true;
     }

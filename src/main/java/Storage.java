@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.List;
 
 public class Storage {
@@ -44,7 +42,7 @@ public class Storage {
     }
 
     public Task parseLine(String line) {
-        // need double backslashes to escape the literal "\|" or else it will be parsed as an escape sequence
+        // Need double backslashes to escape the literal "\|" or else it will be parsed as an escape sequence
         String[] words = line.split(" \\| ");
 
         String taskTypeStr = words[0];
@@ -73,5 +71,56 @@ public class Storage {
         }
 
         return t;
+    }
+
+    public void saveTaskLst(List<Task> taskLst) {
+        StringBuilder sb = new StringBuilder();
+
+        taskLst.forEach(t -> {
+            sb.append(serializeTask(t));
+            sb.append("\n");
+        });
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            bw.write(sb.toString());
+            bw.flush();
+            bw.close();
+        } catch (Exception e) {
+            throw new DukeException(String.format("Error with saveTaskLst: %s", e));
+        }
+    }
+
+    public String serializeTask(Task t) {
+        String contentStr = t.getContent();
+        String isDoneStr = t.getIsDone() ? "1" : "0";
+
+        String taskTypeStr;
+        String dateTimeStr = null;
+        String className = t.getClass().getSimpleName();
+        switch (className) {
+        case "Todo":
+            taskTypeStr = "T";
+            break;
+        case "Deadline":
+            taskTypeStr = "D";
+            dateTimeStr = ((Deadline)t).getBy();
+            break;
+        case "Event":
+            taskTypeStr = "E";
+            dateTimeStr = ((Event)t).getAt();
+            break;
+        default:
+            throw new DukeException("Unable to serialize found task type of " + className);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%s | %s | %s", taskTypeStr, isDoneStr, contentStr));
+
+        if (dateTimeStr != null) {
+            sb.append(String.format(" | %s", dateTimeStr));
+        }
+
+        return sb.toString();
     }
 }

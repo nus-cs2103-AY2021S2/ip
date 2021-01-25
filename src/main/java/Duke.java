@@ -8,10 +8,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskLst = new ArrayList<>();
         boolean isExited = false;
+        Storage storage = null;
 
         // Terminate if unable to read data file
         try {
-            Storage storage = new Storage();
+            storage = new Storage();
             storage.fillTaskLst(taskLst);
         } catch (DukeException e) {
             printResponse(e.getMessage());
@@ -29,7 +30,7 @@ public class Duke {
                 String[] remain = Arrays.copyOfRange(words, 1, words.length);
                 String cmdArgs = String.join(" ", remain);
 
-                String resp = "";
+                String resp;
 
                 switch (cmd) {
                 case "bye":
@@ -59,6 +60,7 @@ public class Duke {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
                 }
 
+                storage.saveTaskLst(taskLst);
                 printResponse(resp);
                 if (isExited) {
                     break;
