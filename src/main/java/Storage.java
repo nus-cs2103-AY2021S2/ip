@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-// DEALS WITH LOADING TASKS FROM FILE AND SAVING TASKS IN FILE
+// DEALS WITH LOADING TASKS FROM FILE & SAVING TASKS IN FILE
 public class Storage {
     protected String filePath;
 

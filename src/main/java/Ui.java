@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-// DEALS WITH INTERACTIONS WITH THE USER
+// DEALS WITH INTERACTION(S) WITH THE USER
 public class Ui {
 
     public void showGreetings() {

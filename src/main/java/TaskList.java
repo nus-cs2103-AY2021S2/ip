@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-// CONTAINS THE LIST, HAS ADD AND DELETE OPERATIONS
+// CONTAINS THE LIST, HAS ADD & DELETE OPERATIONS
 public class TaskList {
     ArrayList<Task> list;
 
