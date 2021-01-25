@@ -1,10 +1,15 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
     ArrayList<Task> list;
+    FileSaver fileSaver;
 
     public TaskManager() {
         list = new ArrayList<>();
+        fileSaver = new FileSaver();
     }
 
     public void takeEvent(String input, ArrayList<Task> list) {
@@ -48,7 +53,15 @@ public class TaskManager {
                     inputSplit[1].substring(3));
         }
         list.add(newTask);
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.line);
+
+        try {
+            fileSaver.saveToFile("DukeList.txt", list);
+        } catch (IOException e) {
+            System.out.println("File path not found: " + e.getMessage());
+        }
+
+        System.out.println(
+                Duke.line + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.line);
     }
 
     public void deleteTask(String input) {
@@ -57,7 +70,15 @@ public class TaskManager {
 //        System.out.println("Good job! You got " + task.description + " done!");
         Task task = list.get(Integer.parseInt(input.substring(7)) - 1);
         list.remove(Integer.parseInt(input.substring(7)) - 1);
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.line);
+
+        try {
+            fileSaver.saveToFile("DukeList.txt", list);
+        } catch (IOException e) {
+            System.out.println("File path not found: " + e.getMessage());
+        }
+
+        System.out.println(
+                Duke.line + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.line);
     }
 
     public void listEvents() {
