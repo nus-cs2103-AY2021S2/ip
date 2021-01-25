@@ -1,14 +1,6 @@
 package duke;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.time.LocalDate;
-
 
 /**
  * Main implementation for the Duke chat-bot.
