@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
@@ -9,9 +11,10 @@ public class Storage {
     public static void readTasks(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         while (s.hasNext()) {
             String info = s.nextLine();
-            boolean status = Integer.valueOf(info.substring(0,1)) == 1;
+            boolean status = Integer.parseInt(info.substring(0,1)) == 1;
             String type = info.substring(3,4);
 
             if (type.equals("T")){
@@ -23,14 +26,16 @@ public class Storage {
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
                 String by = info.substring(endNameIndex + 5, endTimeIndex);
-                new Deadline(name, by, status);
+                LocalDateTime byTime = LocalDateTime.parse(by,df);
+                new Deadline(name, byTime, status);
             }
             else if(type.equals("E")){
                 int endNameIndex = info.indexOf("(");
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
                 String at = info.substring(endNameIndex + 5, endTimeIndex);
-                new Event(name, at, status);
+                LocalDateTime atTime = LocalDateTime.parse(at,df);
+                new Event(name, atTime, status);
             }
 
         }

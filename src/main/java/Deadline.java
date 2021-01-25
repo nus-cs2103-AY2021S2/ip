@@ -22,6 +22,11 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by, boolean status){
         super(description,status);
+        this.by = stringToDatetime(by);
+    }
+
+    public Deadline(String description, LocalDateTime by, boolean status){
+        super(description,status);
         this.by = by;
     }
 

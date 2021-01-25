@@ -1,1 +1,3 @@
 1|[T]go to school
+1|[D]go fuck yourself (by: Jan 01 2020 19:00)
+0|[E]go sleep (at: Jan 01 2020 19:00)

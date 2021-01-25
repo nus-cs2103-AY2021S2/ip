@@ -22,8 +22,14 @@ public class Event extends Task{
 
     public Event(String description, String at, boolean status){
         super(description,status);
+        this.at = stringToDatetime(at);
+    }
+
+    public Event(String description, LocalDateTime at, boolean status){
+        super(description,status);
         this.at = at;
     }
+
     @Override
     public String getTaskName() {
         return "[E]" + super.getTaskName() + " (at: " + datetimeToString(at) + ")";
