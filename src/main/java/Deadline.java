@@ -7,12 +7,24 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String description, String date, Boolean completed) {
+        super(description, TaskType.DEADLINE, completed);
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(super.toString());
         output.append(" (by: ");
         output.append(this.date);
         output.append(")");
+        return output.toString();
+    }
+
+    public String storageEntry() {
+        StringBuilder output = new StringBuilder(super.storageEntry());
+        output.append("|");
+        output.append(this.date);
         return output.toString();
     }
 

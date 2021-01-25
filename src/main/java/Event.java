@@ -7,12 +7,24 @@ public class Event extends Task {
         this.timing = timing;
     }
 
+    public Event(String description, String timing, Boolean completed) {
+        super(description, TaskType.EVENT, completed);
+        this.timing = timing;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(super.toString());
         output.append(" (at: ");
         output.append(this.timing);
         output.append(")");
+        return output.toString();
+    }
+
+    public String storageEntry() {
+        StringBuilder output = new StringBuilder(super.storageEntry());
+        output.append("|");
+        output.append(this.timing);
         return output.toString();
     }
 

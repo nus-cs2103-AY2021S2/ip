@@ -1,6 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
     private static final String BORDER = "-------------------------------------";
@@ -10,7 +14,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        List<Task> tasks = new ArrayList<>(100);
+        List<Task> tasks = Duke.loadTasks();
 
         while (sc.hasNextLine()) {
             String userInput = sc.nextLine().strip();
@@ -19,6 +23,7 @@ public class Duke {
                 if (userInput.equals("bye")) {
                     response.append("Bye. Hope to see you soon!");
                     Duke.printWithBorders(response.toString());
+                    Duke.saveTasks(tasks);
                     return;
                 } else if (userInput.equals("list")) {
                     response.append("Here are the tasks in your list:\n");
@@ -32,7 +37,7 @@ public class Duke {
                         }
                     }
                 } else if (userInput.startsWith("done")) {
-                    int userChoice = Integer.valueOf(userInput.split(" ")[1]);
+                    int userChoice = Integer.parseInt(userInput.split(" ")[1]);
                     if (userChoice > tasks.size()) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
                     }
@@ -41,7 +46,7 @@ public class Duke {
                     response.append("Nice! I've marked this task as done:\n");
                     response.append(task);
                 } else if (userInput.startsWith("delete")) {
-                    int userChoice = Integer.valueOf(userInput.split(" ")[1]);
+                    int userChoice = Integer.parseInt(userInput.split(" ")[1]);
                     if (userChoice > tasks.size()) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
                     }
@@ -65,9 +70,52 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 Duke.printWithBorders(response.toString());
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 Duke.printWithBorders(e.getMessage());
             }
+        }
+    }
+
+    public static void saveTasks(List<Task> tasks) throws IOException {
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        File file = new File("data/tasks.txt");
+        if (file.exists()) {
+            file.delete();
+        }
+
+        FileWriter writer = new FileWriter("data/tasks.txt");
+        writer.flush();
+
+        for (Task task : tasks) {
+            writer.write(task.storageEntry());
+            writer.write(System.lineSeparator());
+        }
+
+        writer.flush();
+    }
+
+    public static List<Task> loadTasks() {
+        File file = new File("data/tasks.txt");
+        if (!file.exists()) {
+            return new ArrayList<>();
+        }
+
+        try {
+            File myObj = new File("data/tasks.txt");
+            Scanner myReader = new Scanner(myObj);
+            List<Task> taskList = new ArrayList<>();
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                taskList.add(Task.parseRecord(data));
+            }
+            myReader.close();
+            return taskList;
+        } catch (FileNotFoundException e) {
+            return new ArrayList<>();
         }
     }
 
