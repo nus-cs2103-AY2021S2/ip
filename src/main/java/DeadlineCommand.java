@@ -7,8 +7,6 @@ public class DeadlineCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
-    TaskList taskList = Duke.taskList;
-
     public DeadlineCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
@@ -16,7 +14,7 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public void run(Storage storage) throws DukeException {
+    public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle deadline without parameters
             throw new DukeException(ui.deadlineFormatError());
         }
@@ -30,8 +28,8 @@ public class DeadlineCommand implements Command {
             DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, ldt);
 
             taskList.add(newDeadlineTask);
-            storage.saveTaskList();
-            ui.printAddToList(newDeadlineTask);
+            storage.saveTaskList(taskList);
+            ui.printAddToList(newDeadlineTask, taskList);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.deadlineFormatError());
         } catch (DateTimeParseException e) {

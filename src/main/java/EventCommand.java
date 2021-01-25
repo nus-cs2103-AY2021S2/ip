@@ -7,8 +7,6 @@ public class EventCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
-    TaskList taskList = Duke.taskList;
-
     public EventCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
@@ -16,7 +14,7 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public void run(Storage storage) throws DukeException {
+    public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle event without parameters
             throw new DukeException(ui.eventFormatError());
         }
@@ -29,8 +27,8 @@ public class EventCommand implements Command {
             LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
             EventTask newEventTask = new EventTask(eTaskName, ldt);
             taskList.add(newEventTask);
-            storage.saveTaskList();
-            ui.printAddToList(newEventTask);
+            storage.saveTaskList(taskList);
+            ui.printAddToList(newEventTask, taskList);
         } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
             throw new DukeException(ui.eventFormatError());
         } catch (DateTimeParseException e) {

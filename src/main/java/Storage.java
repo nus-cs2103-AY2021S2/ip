@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Storage {
-    TaskList taskList = Duke.taskList;
 
     private String filePath;
 
@@ -15,7 +14,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void saveTaskList() throws DukeException {
+    public void saveTaskList(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             for (int i = 0; i < taskList.getSize(); i++) {
@@ -28,7 +27,7 @@ public class Storage {
         }
     }
 
-    public void initializeTaskList() throws DukeException {
+    public void initializeTaskList(TaskList taskList) throws DukeException {
         try {
             File savedTaskList = new File(filePath);
             savedTaskList.getParentFile().mkdirs();

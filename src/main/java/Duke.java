@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     private Ui ui;
     private Storage storage;
-    public static TaskList taskList = new TaskList();
+    private TaskList taskList = new TaskList();
     private Parser parser = new Parser();
 
     private static final String PATH_NAME = "./data/saved_task_list.txt";
@@ -14,7 +14,7 @@ public class Duke {
         ui.printGreeting();
 
         try {
-            storage.initializeTaskList();
+            storage.initializeTaskList(taskList);
         } catch (DukeException e) {
             ui.printDukeException(e);
         }
@@ -26,7 +26,7 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 Command toRun = parser.parse(input);
-                toRun.run(storage);
+                toRun.run(storage, taskList);
             } catch (DukeException e) {
                 ui.printDukeException(e);
             }

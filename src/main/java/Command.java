@@ -1,3 +1,3 @@
 public interface Command {
-    void run(Storage storage) throws DukeException;
+    void run(Storage storage, TaskList taskList) throws DukeException;
 }

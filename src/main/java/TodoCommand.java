@@ -3,8 +3,6 @@ public class TodoCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
-    TaskList taskList = Duke.taskList;
-
     public TodoCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
@@ -12,7 +10,7 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public void run(Storage storage) throws DukeException {
+    public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle todo without parameters
             throw new DukeException("Sorry human, please enter a name for this task.");
         }
@@ -20,8 +18,8 @@ public class TodoCommand implements Command {
         TodoTask newTodoTask = new TodoTask(taskName);
 
         taskList.add(newTodoTask);
-        storage.saveTaskList();
-        ui.printAddToList(newTodoTask);
+        storage.saveTaskList(taskList);
+        ui.printAddToList(newTodoTask, taskList);
     }
 
 }

@@ -3,8 +3,6 @@ public class Ui {
     private static final String BTM_BORDER = "╰|╱ ---------------------------------------------------╯";
     private static final String PADDING = "  ";
 
-    private static TaskList taskList = Duke.taskList;
-
     public static void printGreeting() {
         String logo = "              .--.    .-.         .-.   \n" +
                 "             : .-'    : :         : :   \n" +
@@ -85,7 +83,7 @@ public class Ui {
         System.out.println(e);
     }
 
-    public void printDeletedMessage(Task task) {
+    public void printDeletedMessage(Task task, TaskList taskList) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Task has been deleted.");
         System.out.println(PADDING + "Just like you will be deleted someday too.");
@@ -112,7 +110,7 @@ public class Ui {
         System.out.println(BTM_BORDER);
     }
 
-    public void printAddToList(Task task) {
+    public void printAddToList(Task task, TaskList taskList) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Got it: I've added this task:");
         System.out.println(PADDING + PADDING + task);
