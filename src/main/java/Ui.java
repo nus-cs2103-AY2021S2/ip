@@ -1,4 +1,4 @@
-public class Printer {
+public class Ui {
 
     /**
      * Prints each string in output array in a new line, using duke's style.

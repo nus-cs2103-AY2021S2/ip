@@ -1,4 +1,3 @@
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -62,7 +61,7 @@ public abstract class Task {
      */
      void done() {
         this.isDone = true;
-        Printer.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
+        Ui.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
     @Override

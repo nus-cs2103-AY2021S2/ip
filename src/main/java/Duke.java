@@ -15,7 +15,7 @@ public class Duke {
 
 
     private void greet() {
-        Printer.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+        Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
 
@@ -91,7 +91,7 @@ public class Duke {
     }
 
     public void bye() {
-        Printer.printWithStyle("Bye. Hope to see you again soon!");
+        Ui.printWithStyle("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -129,7 +129,7 @@ public class Duke {
                 try {
                     duke.handleInput(input);
                 } catch (DukeException e) {
-                    Printer.printWithStyle(e.getMessage());
+                    Ui.printWithStyle(e.getMessage());
                 }
             } else {
                 duke.bye();
