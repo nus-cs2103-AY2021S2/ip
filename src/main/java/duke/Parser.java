@@ -84,7 +84,8 @@ public class Parser {
      * @return SpecificCommandType based on input.
      * @throws DukeUnknownArgumentsException when the input contains an unknown command.
      */
-    public static SpecificCommandType inputToSpecificCommand(String input) throws DukeUnknownArgumentsException {
+    public static SpecificCommandType inputToSpecificCommand(String input)
+            throws DukeUnknownArgumentsException {
         if (input.startsWith(TODO_COMMAND)) {
             return SpecificCommandType.TODO;
         } else if (input.startsWith(DEADLINE_COMMAND)) {
@@ -113,10 +114,10 @@ public class Parser {
     }
 
     /**
-     * Return LocalDate based on input and AddCommandType's postfix.
-     * @param input user input to get Task date representation.
-     * @param command AddCommandType to be used to distinguish how to get the LocalDate.
-     * @return LocalDate based on the string representation of the date.
+     * Return description from the find input.
+     * @param input find input used to get the description.
+     * @return the description of the find input.
+     * @throws DukeNoDescriptionException if there is no description.
      */
     public static String parseFindInput(String input) throws DukeNoDescriptionException {
         if (input.split(" ").length < FIND_MIN_ARGUMENTS) {
@@ -126,6 +127,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Return LocalDate based on input and AddCommandType's postfix.
+     * @param input user input to get Task date representation.
+     * @param command AddCommandType to be used to distinguish how to get the LocalDate.
+     * @return LocalDate based on the string representation of the date.
+     */
     public static LocalDate obtainDate(String input, SpecificCommandType command) {
         input = input.substring(command.getPostfix());
         String[] inputs = input.split(DATE_SEPARATOR);
@@ -139,7 +146,8 @@ public class Parser {
      * @return description of either Event or Deadline.
      * @throws DukeNoDescriptionException when the description of the input is empty.
      */
-    public static String obtainDescription(String input, SpecificCommandType command) throws DukeNoDescriptionException {
+    public static String obtainDescription(String input, SpecificCommandType command)
+            throws DukeNoDescriptionException {
         if (input.split(" ").length < DATE_INPUT_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(command.getName());
         } else {
@@ -155,7 +163,8 @@ public class Parser {
      * @return TODO if "T", DEADLINE if "D", EVENT if "E".
      * @throws DukeCorruptedStorageException when the encoded command is unknown.
      */
-    public static SpecificCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
+    public static SpecificCommandType parseCommandType(String input)
+            throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String command = separatedInput[TODO_COMMAND_TYPE_PARAM];
         switch (command) {

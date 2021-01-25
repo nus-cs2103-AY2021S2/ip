@@ -22,7 +22,7 @@ public class StorageDecoder {
      * @param encodeTasks data representation of the TaskList from save file.
      * @return ArrayList of Task from the encodeTasks.
      * @throws DukeCorruptedStorageException when the encodedTasks does not conform with the
-     * proper save file format.
+     *     proper save file format.
      */
     public static ArrayList<Task> decodeSave(ArrayList<String> encodeTasks) throws DukeCorruptedStorageException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -68,7 +68,7 @@ public class StorageDecoder {
      * @param encodedTask data representation of the Event or Dateline from save file.
      * @return Event or Deadline based on the command using encodedTask.
      * @throws DukeCorruptedStorageException when the encodedTask does not fit the format for a
-     * Task with dates.
+     *     Task with dates.
      */
     private static Task decodeTaskWithDate(SpecificCommandType command, String encodedTask)
             throws DukeCorruptedStorageException {
