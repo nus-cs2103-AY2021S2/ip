@@ -128,11 +128,17 @@ public class Duke {
                     System.out.println(i + 1 + "." + tasks.get(i).toString());
                 }
             } else if (input.startsWith("done")) {
-                    System.out.println("Nice! I've marked this task as done:");
-                    int tasknum = Integer.parseInt(input.substring(5));
-                    Task newtask = tasks.get(tasknum - 1).done();
-                    System.out.println(newtask.toString());
-                    tasks.set(tasknum - 1, newtask);
+                System.out.println("Nice! I've marked this task as done:");
+                int tasknum = Integer.parseInt(input.substring(5));
+                Task newtask = tasks.get(tasknum - 1).done();
+                System.out.println(newtask.toString());
+                tasks.set(tasknum - 1, newtask);
+            } else if (input.startsWith("delete")) {
+                System.out.println("Noted. I've removed this task:");
+                int tasknum = Integer.parseInt(input.substring(7));
+                System.out.println(tasks.get(tasknum - 1).toString());
+                tasks.remove(tasknum - 1);
+                System.out.println(String.format("Now you have %s tasks in the list.", tasks.size()));
             } else if (input.startsWith("todo")) {
                 try {
                     Task newtask = new ToDo(input.substring(5));

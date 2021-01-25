@@ -15,4 +15,10 @@ Here are the tasks in your list:
 3.[E][ ] project meeting (at: Mon 2-4pm)
 Duke$IncompleteCommandException: The description cannot be empty.
 Duke$NoSuchCommandException: I'm sorry, but I don't know what that means :(
+Noted. I've removed this task:
+[D][ ] return book (by: Sunday)
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+1.[T][ ] borrow book
+2.[E][ ] project meeting (at: Mon 2-4pm)
 Bye. Hope to see you again soon!
