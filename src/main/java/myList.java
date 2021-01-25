@@ -23,8 +23,8 @@ public class myList {
         System.out.println("You now have " + taskList.size() + " tasks\n");
     }
 
-    public void addEvent(String description, String datetime) {
-        myEvent event = new myEvent(description, datetime);
+    public void addEvent(String description, String startDatetime, String endDatetime) {
+        myEvent event = new myEvent(description, startDatetime, endDatetime);
 
         taskList.add(event);
         System.out.println("Added to list:\n" + event.toString());
