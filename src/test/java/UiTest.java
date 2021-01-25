@@ -14,10 +14,8 @@ public class UiTest {
          System.setOut(new PrintStream(content));
          Ui ui = new Ui();
          ui.responseToList(0);
-
-         assertEquals("Your list is currently empty! Let's start adding tasks!", content.toString()
-                .trim());
-
+         assertEquals("Your list is currently empty! Let's start adding tasks!",
+                 content.toString().trim());
          System.setOut(out);
     }
     
