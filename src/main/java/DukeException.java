@@ -31,6 +31,9 @@ public class DukeException extends Exception {
         case INVALID_INTEGER:
             errorMsg = "☹ OOPS!!! The integer value is invalid (negative, 0 or out of task list range)!!!";
             break;
+        case INVALID_DATETIME:
+            errorMsg = "☹ OOPS!!! Invalid date/time has been detected :-(";
+            break;
         default:
             errorMsg = "☹ OOPS!!! The description of a " + this.taskType +
                     " cannot be empty.";

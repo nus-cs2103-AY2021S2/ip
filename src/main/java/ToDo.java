@@ -1,4 +1,4 @@
-/*
+/**
  * ToDo class to handle tasks without any deadline (no date /time)
  */
 public class ToDo extends Task {

@@ -5,6 +5,9 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * DukeBot that manages user input, recognise and response to inputs accordingly
@@ -83,10 +86,10 @@ public class DukeBot {
                 newTask = new ToDo(taskDetails[2]);
                 break;
             case "E":
-                newTask = new Event(taskDetails[2], taskDetails[3]);
+                newTask = new Event(taskDetails[2], LocalDate.parse(taskDetails[3]));
                 break;
             case "D":
-                newTask = new Deadline(taskDetails[2], taskDetails[3]);
+                newTask = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
                 break;
             default:
                 break;
@@ -187,30 +190,48 @@ public class DukeBot {
      */
     public void handleNewTask(String taskAction, String taskDescription) throws DukeException {
         Task newTask;
+        String[] description;
         this.output = " Got it. I've added this task: \n";
 
-        if (!taskAction.equals("todo")) {
-            String[] result;
-
-            if (taskAction.equals("event")) {
-                result = taskDescription.split("/at");
-                newTask = new Event(result[0], result[1]);
-            } else {
-                result = taskDescription.split("/by");
-                newTask = new Deadline(result[0], result[1]);
-            }
-        } else {
-            newTask = new ToDo(taskDescription);
-        }
-
-        if (newTask.getDescription().equals("")) {
+        if (taskDescription.equals("")) {
             throw new DukeException(ExceptionType.BLANK_DESCRIPTION, taskAction);
-        } else {
-            this.taskList.add(newTask);
-            this.numTasks++;
-            this.output += "\t  " + newTask.toString() + "\n\t Now you have "
-                    + this.numTasks + " tasks in the list.";
         }
+        switch (taskAction) {
+        case "event":
+            description = handleEventDeadline(taskAction, taskDescription);
+            newTask = new Event(description[0], LocalDate.parse(description[1],
+                    DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            break;
+        case "deadline":
+            description = handleEventDeadline(taskAction, taskDescription);
+            newTask = new Deadline(description[0], LocalDate.parse(description[1],
+                    DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            break;
+        default:
+            newTask = new ToDo(taskDescription);
+            break;
+        }
+        this.taskList.add(newTask);
+        this.numTasks++;
+        this.output += "\t  " + newTask.toString() + "\n\t Now you have " + this.numTasks + " tasks in the list.";
+    }
+
+    public String[] handleEventDeadline(String taskAction, String taskDescription) throws DukeException {
+        String[] result;
+        String dateTime;
+
+        if (taskAction.equals("event")) {
+            result = taskDescription.trim().split(" /at ");
+        } else {
+            result = taskDescription.trim().split(" /by ");
+        }
+
+        dateTime = result[1];
+
+        if (!validDateTime(dateTime)) {
+            throw new DukeException(ExceptionType.INVALID_DATETIME, "");
+        }
+        return result;
     }
 
     /**
@@ -228,5 +249,17 @@ public class DukeBot {
             this.output = "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()
                     + "\n\t Now you have " + this.numTasks + " tasks in the list.";
         }
+    }
+
+    public boolean validDateTime(String dateTime) {
+        try
+        {
+            LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        }
+        catch (DateTimeParseException ex)
+        {
+            return false;
+        }
+        return true;
     }
 }

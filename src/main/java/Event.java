@@ -1,16 +1,18 @@
-/*
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+/**
  * Event class to handle tasks that starts at a specific date/time and ends at a specific date/time
  */
-
 public class Event extends Task {
-    protected final String at;
+    protected final LocalDate at;
 
     /**
      * Constructor for Event class
      * @param description details of the task
      * @param at starts and ends at specific date/time to complete the task
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
@@ -30,6 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " +
+                this.at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + ")";
     }
 }
