@@ -31,7 +31,7 @@ public abstract class DukeCommand {
         case "bye":
             return new DukeCommandBye();
         case "list":
-            return new DukeCommandList();
+            return new DukeCommandList(arg);
         case "done":
             return new DukeCommandDone(arg);
         case "delete":
