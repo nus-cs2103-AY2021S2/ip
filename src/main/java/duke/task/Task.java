@@ -23,5 +23,9 @@ public abstract class Task {
     isDone = true;
   }
 
+  public boolean contains(String kw) {
+    return description.contains(kw);
+  }
+
   public abstract String toSavedString();
 }
