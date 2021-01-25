@@ -1,5 +1,2 @@
-T | 0 | Todo
-D | 0 | Deadline | 2021-09-24T12:00
-E | 0 | Event | 2021-09-24
-E | 0 | Event two | 2021-09-24
-E | 0 | Event three | 2021-09-24 6-8pm
+D | 1 | lol | 2020-09-24T11:00
+T | 0 | todo
