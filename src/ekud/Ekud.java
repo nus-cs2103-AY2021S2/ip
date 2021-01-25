@@ -8,9 +8,9 @@ import ekud.task.TaskList;
 import ekud.ui.Ui;
 
 public class Ekud {
-    private Storage storage;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Construct a new instance of the Ekud chatbot.
@@ -26,6 +26,11 @@ public class Ekud {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+
+    public static void main(String[] args) {
+        new Ekud("data/tasks.txt").run();
     }
 
     /**
@@ -48,9 +53,5 @@ public class Ekud {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Ekud("data/tasks.txt").run();
     }
 }

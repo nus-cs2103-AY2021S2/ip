@@ -21,7 +21,7 @@ public abstract class Task {
     /**
      * Check if the Task is marked as completed.
      *
-     * @return true if markAsDone() has been invoked previously, false otherwise
+     * @return true if markAsDone() has been invoked previously, false otherwise.
      */
     public boolean isDone() {
         return isDone;
@@ -37,7 +37,7 @@ public abstract class Task {
     /**
      * Retrieve the appropriate status icon based on the done status of the Task.
      *
-     * @return A tick symbol if Task is done, a cross symbol otherwise
+     * @return A tick symbol if Task is done, a cross symbol otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); // return tick or cross symbols
@@ -51,7 +51,7 @@ public abstract class Task {
     /**
      * Consolidate all information necessary to reconstruct the exact same Task.
      *
-     * @return String LinkedList containing {isDone, description}
+     * @return String LinkedList containing {isDone, description}.
      */
     public LinkedList<String> export() {
         LinkedList<String> list = new LinkedList<>();

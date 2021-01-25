@@ -1,8 +1,12 @@
 package ekud.task;
 
-import ekud.common.exception.InvalidTaskIndexException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
-import java.util.*;
+import ekud.common.exception.InvalidTaskIndexException;
 
 /**
  * Iterable for containing any task type
@@ -14,7 +18,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Construct a new TaskList from existing tasks.
      *
-     * @param taskArray The array containing existing tasks
+     * @param taskArray The array containing existing tasks.
      */
     public TaskList(Collection<Task> taskArray) {
         this.taskArray = new Vector<>(taskArray);
@@ -29,14 +33,14 @@ public class TaskList implements Iterable<Task> {
      * Construct a new TaskList with no existing tasks.
      */
     public TaskList() {
-        this.taskArray = new Vector<>();
-        this.doneCount = 0;
+        taskArray = new Vector<>();
+        doneCount = 0;
     }
 
     /**
      * Add a new task to the end of the existing list.
      *
-     * @param newTask The task to be added
+     * @param newTask The task to be added.
      */
     public void add(Task newTask) {
         taskArray.add(newTask);
@@ -45,13 +49,13 @@ public class TaskList implements Iterable<Task> {
     /**
      * Remove a task by index.
      *
-     * @param index The index of the task to be removed
-     * @return Task removed from list
-     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
+     * @param index The index of the task to be removed.
+     * @return Task removed from list.
+     * @throws InvalidTaskIndexException If the index is out of range (index < 0 || index >= size()).
      */
     public Task remove(int index) throws InvalidTaskIndexException {
         try {
-            Task deletedTask =  taskArray.remove(index);
+            Task deletedTask = taskArray.remove(index);
             if (deletedTask.isDone) {
                 --doneCount;
             }
@@ -64,7 +68,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Return the number of stored tasks.
      *
-     * @return The number of stored tasks
+     * @return The number of stored tasks.
      */
     public int size() {
         return taskArray.size();
@@ -73,9 +77,9 @@ public class TaskList implements Iterable<Task> {
     /**
      * Returns the task at the specified position in this TaskList.
      *
-     * @param index Index of the element to return
-     * @return Task at the specified index
-     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
+     * @param index Index of the element to return.
+     * @return Task at the specified index.
+     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size()).
      */
     public Task get(int index) throws InvalidTaskIndexException {
         try {
@@ -88,9 +92,9 @@ public class TaskList implements Iterable<Task> {
     /**
      * Mark the task at index as done.
      *
-     * @param index Index of the task to be marked as done
-     * @return The task marked as done
-     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
+     * @param index Index of the task to be marked as done.
+     * @return The task marked as done.
+     * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size()).
      */
     public Task markDone(int index) throws InvalidTaskIndexException {
         try {
@@ -106,7 +110,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Get the number of incomplete tasks.
      *
-     * @return Number of incomplete tasks
+     * @return Number of incomplete tasks.
      */
     public int getIncompleteRemaining() {
         return taskArray.size() - doneCount;
@@ -115,7 +119,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Returns the last task of the TaskList.
      *
-     * @return The last task of the TaskList, i.e., the component at index size() - 1
+     * @return The last task of the TaskList, i.e., the component at index size() - 1.
      */
     public Task last() {
         return taskArray.lastElement();
@@ -124,17 +128,16 @@ public class TaskList implements Iterable<Task> {
     /**
      * Tests if this TaskList has no tasks.
      *
-     * @return true if and only if this TaskList has no tasks, that is, its size is zero; false otherwise.
+     * @return True if and only if this TaskList has no tasks, that is, its size is zero; false otherwise.
      */
     public boolean isEmpty() {
         return taskArray.isEmpty();
     }
 
     /**
-     * Returns an iterator over the tasks in this list in proper sequence.
-     * The returned iterator is fail-fast.
+     * Returns an iterator over the tasks in this list in proper sequence. The returned iterator is fail-fast.
      *
-     * @return An iterator over the elements in this list in proper sequence
+     * @return An iterator over the elements in this list in proper sequence.
      */
     public Iterator<Task> iterator() {
         return taskArray.iterator();

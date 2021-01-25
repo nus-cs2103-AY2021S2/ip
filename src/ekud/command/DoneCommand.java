@@ -14,7 +14,8 @@ public class DoneCommand extends ModificationCommand {
 
     /**
      * Construct a command that marks a task as completed.
-     * @param index The index of the task as given by the "list" command
+     *
+     * @param index The index of the task as given by the "list" command.
      */
     public DoneCommand(int index) {
         this.index = index;
@@ -23,9 +24,9 @@ public class DoneCommand extends ModificationCommand {
     /**
      * Mark the task at index as done.
      *
-     * @param tasks The list of tasks
-     * @param ui The user interface
-     * @param storage The file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

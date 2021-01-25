@@ -12,17 +12,17 @@ public abstract class Command {
     /**
      * Execute the command and perform the necessary manipulations.
      *
-     * @param tasks the list of tasks
-     * @param ui the user interface
-     * @param storage the file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Return whether the current command is a signal to exit the application.
-     * Only the appropriate tasks should override this method
+     * Return whether the current command is a signal to exit the application. Only the appropriate tasks should
+     * override this method.
      *
-     * @return true if the task triggers the application to exit, false otherwise
+     * @return True if the task triggers the application to exit, false otherwise.
      */
     public boolean isExit() {
         return false;

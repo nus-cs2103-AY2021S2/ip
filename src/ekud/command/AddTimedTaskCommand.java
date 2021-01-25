@@ -11,8 +11,8 @@ public abstract class AddTimedTaskCommand extends AddCommand {
     /**
      * Construct a task with date and time information.
      *
-     * @param description The description of the task with date and time
-     * @param dateTime The date and time information of the task
+     * @param description The description of the task with date and time.
+     * @param dateTime    The date and time information of the task.
      */
     public AddTimedTaskCommand(String description, LocalDateTime dateTime) {
         super(description);

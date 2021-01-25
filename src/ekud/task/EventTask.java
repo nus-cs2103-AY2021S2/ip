@@ -10,8 +10,8 @@ public class EventTask extends TaskWithDateTime {
     /**
      * Construct an Event task.
      *
-     * @param description The description of the Event
-     * @param at The date and time that the Event occurs
+     * @param description The description of the Event.
+     * @param at          The date and time that the Event occurs.
      */
     public EventTask(String description, LocalDateTime at) {
         super(description, at);

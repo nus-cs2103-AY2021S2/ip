@@ -10,8 +10,8 @@ public class Deadline extends TaskWithDateTime {
     /**
      * Construct a Deadline task.
      *
-     * @param description The description of the Deadline
-     * @param by The completion date and time information
+     * @param description The description of the Deadline.
+     * @param by          The completion date and time information.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description, by);
@@ -23,7 +23,7 @@ public class Deadline extends TaskWithDateTime {
     }
 
     /**
-     * @return String LinkedList containing {"D", isDone, description, dateTime}
+     * @return String LinkedList containing {"D", isDone, description, dateTime}.
      */
     @Override
     public LinkedList<String> export() {

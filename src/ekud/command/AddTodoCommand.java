@@ -13,7 +13,7 @@ public class AddTodoCommand extends AddCommand {
     /**
      * Construct and todo-task-creating command.
      *
-     * @param description The description of the todo
+     * @param description The description of the todo.
      */
     public AddTodoCommand(String description) {
         super(description);
@@ -22,9 +22,9 @@ public class AddTodoCommand extends AddCommand {
     /**
      * Execute this command by adding a todo into the list, followed by common procedures of all add commands.
      *
-     * @param tasks The list of tasks
-     * @param ui The user interface
-     * @param storage The file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

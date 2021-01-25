@@ -1,14 +1,14 @@
 package ekud.command;
 
+import java.time.LocalDate;
+import java.util.Vector;
+
 import ekud.common.exception.DukeException;
 import ekud.storage.Storage;
 import ekud.task.Task;
 import ekud.task.TaskList;
 import ekud.task.TaskWithDateTime;
 import ekud.ui.Ui;
-
-import java.time.LocalDate;
-import java.util.Vector;
 
 /**
  * Command that lists all tasks, optionally filter by date if given.
@@ -23,7 +23,7 @@ public class ListCommand extends Command {
      * @param date The date to be used as the filter
      */
     public ListCommand(LocalDate date) {
-        this.filter = true;
+        filter = true;
         this.date = date;
     }
 
@@ -31,15 +31,15 @@ public class ListCommand extends Command {
      * Construct a command that lists all tasks.
      */
     public ListCommand() {
-        this.filter = false;
+        filter = false;
     }
 
     /**
      * Output all tasks if no date specified, tasks due on the day otherwise.
      *
-     * @param tasks   The list of tasks
-     * @param ui      The user interface
-     * @param storage The file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     @Override
     public void execute(final TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -62,8 +62,9 @@ public class ListCommand extends Command {
         for (Task task : tasks) {
             if (task instanceof TaskWithDateTime) {
                 TaskWithDateTime t = (TaskWithDateTime) task;
-                if (t.getDateTime().toLocalDate().equals(date))
+                if (t.getDateTime().toLocalDate().equals(date)) {
                     toPrint.add(t);
+                }
             }
         }
         if (toPrint.isEmpty()) {

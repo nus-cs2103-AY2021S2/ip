@@ -9,7 +9,7 @@ public class ToDo extends Task {
     /**
      * Construct a new ToDo Task with a given description.
      *
-     * @param description The description of the new ToDo
+     * @param description The description of the new ToDo.
      */
     public ToDo(String description) {
         super(description);
@@ -21,7 +21,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * @return String LinkedList containing {"T", isDone, description}
+     * @return String LinkedList containing {"T", isDone, description}.
      */
     @Override
     public LinkedList<String> export() {

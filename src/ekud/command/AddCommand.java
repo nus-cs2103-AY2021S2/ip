@@ -23,9 +23,9 @@ public abstract class AddCommand extends ModificationCommand {
     /**
      * Save all tasks to disk.
      *
-     * @param tasks   The list of tasks
-     * @param ui      The user interface
-     * @param storage The file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

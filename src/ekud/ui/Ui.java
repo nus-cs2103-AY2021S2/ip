@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 /**
  * The user interface class that handles all the interactions with the user
- *
  * All input and output from the user will go through this class for better abstraction
  */
 public class Ui {
@@ -19,8 +18,8 @@ public class Ui {
     /**
      * Construct a new Ui that will use the given InputStream and PrintStream as the input and output.
      *
-     * @param input The input stream
-     * @param output The output stream
+     * @param input  The input stream.
+     * @param output The output stream.
      */
     public Ui(InputStream input, PrintStream output) {
         this.input = new Scanner(input);
@@ -44,7 +43,7 @@ public class Ui {
     /**
      * Display any number of lines to the user.
      *
-     * @param lines Any String iterable that will all be displayed, each separated by line breaks
+     * @param lines Any String iterable that will all be displayed, each separated by line breaks.
      */
     public void printLines(String... lines) {
         for (String line : lines) {
@@ -64,7 +63,7 @@ public class Ui {
     /**
      * Read a single line of input from user.
      *
-     * @return The line of input entered by user
+     * @return The line of input entered by user.
      */
     public String readCommand() {
         String fullCommand = input.nextLine();
@@ -77,7 +76,7 @@ public class Ui {
     /**
      * Display any error message from exception.
      *
-     * @param errorMessage The String of the error message
+     * @param errorMessage The String of the error message.
      */
     public void showError(String errorMessage) {
         printLines(errorMessage);

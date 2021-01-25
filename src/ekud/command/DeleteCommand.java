@@ -14,7 +14,8 @@ public class DeleteCommand extends ModificationCommand {
 
     /**
      * Construct a command that deletes a particular task base on the index.
-     * @param index The index of the task as given by the "list" command
+     *
+     * @param index The index of the task as given by the "list" command.
      */
     public DeleteCommand(int index) {
         this.index = index;
@@ -23,9 +24,9 @@ public class DeleteCommand extends ModificationCommand {
     /**
      * Delete a task by its index.
      *
-     * @param tasks The list of tasks
-     * @param ui The user interface
-     * @param storage The file writer
+     * @param tasks   The list of tasks.
+     * @param ui      The user interface.
+     * @param storage The file writer.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
