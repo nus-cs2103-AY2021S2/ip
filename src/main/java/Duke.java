@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
         System.out.println("Hello! I'm Amanda :)\nWhat can I do for you?");
@@ -38,8 +40,9 @@ public class Duke {
                 } else  if (commandType.equals("deadline")) {
                     // ADD DEADLINE TASK
                     String description = command.substring(9);
-                    String[] deadlineSplit = description.split("/by");
-                    Task task = new Deadline(deadlineSplit[0], deadlineSplit[1]);
+                    String[] deadlineSplit = description.split(" /by ");
+                    LocalDate deadlineDate = LocalDate.parse(deadlineSplit[1]); // INPUT DATE IS YYYY-MM-DD
+                    Task task = new Deadline(deadlineSplit[0], deadlineDate);
                     list.add(task);
                     index++;
                     System.out.println("Got it. I've added this task:\n" + list.get(index - 1));
@@ -47,7 +50,7 @@ public class Duke {
                 } else if (commandType.equals("event")) {
                     // ADD EVENT TASK
                     String description = command.substring(6);
-                    String[] eventSplit = description.split("/at");
+                    String[] eventSplit = description.split(" /at ");
                     Task task = new Event(eventSplit[0], eventSplit[1]);
                     list.add(task);
                     index++;
