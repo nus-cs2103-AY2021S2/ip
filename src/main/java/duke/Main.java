@@ -1,3 +1,18 @@
+package duke;
+
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.commands.InvalidCommandException;
+import duke.commands.InvalidDescriptionException;
+import duke.commands.NoDescriptionException;
+import duke.parser.Parser;
+import duke.storage.InvalidStorageFilePathException;
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 public class Main {
@@ -68,12 +83,12 @@ public class Main {
             }
         } while (!ByeCommand.isByeCommand(command));
     }
-    
+
     private CommandResult executeCommand(Command command) {
         command.setTaskList(taskList);
         return command.execute();
     }
-    
+
     private void updateTaskListIfPresent(TaskList taskList) {
         if (taskList != null) {
             this.taskList = taskList;

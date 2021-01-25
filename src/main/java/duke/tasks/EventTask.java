@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class EventTask extends Task {
     public static final String IDENTIFIER = "E";
 

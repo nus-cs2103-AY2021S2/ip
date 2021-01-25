@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.tasks.Task;
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private static final String DELETED_TASK_MESSAGE = "Noted. I've removed this task:\n  ";

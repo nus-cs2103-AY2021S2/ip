@@ -1,3 +1,5 @@
+package duke.utils;
+
 import java.time.format.DateTimeFormatter;
 
 public class Formatter {

@@ -1,3 +1,12 @@
+package duke.storage;
+
+import duke.tasks.DeadlineTask;
+import duke.tasks.EventTask;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.ToDoTask;
+import duke.utils.Formatter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -47,7 +56,7 @@ public class Storage {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return taskList;
         }
-        List<String> taskStrings = Files.readAllLines(path);  
+        List<String> taskStrings = Files.readAllLines(path);
         for (String s : taskStrings) {
             taskList.addTask(Storage.convertStringToTask(s));
         }
@@ -82,7 +91,7 @@ public class Storage {
         }
         return taskStrings;
     }
-    
+
     public static String convertTaskToString(Task task) {
         // String format: "<taskType> | <taskStatus> | <taskName>", [" | <additionalInfo>]"]
         StringBuilder encodedTaskString = new StringBuilder();

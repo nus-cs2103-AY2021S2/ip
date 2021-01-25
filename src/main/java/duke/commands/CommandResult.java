@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+
 public class CommandResult {
     private String messageForUser;
     private TaskList updatedTaskList;
@@ -6,12 +10,12 @@ public class CommandResult {
         this.messageForUser = messageForUser;
         this.updatedTaskList = null;
     }
-    
+
     public CommandResult(String messageForUser, TaskList updatedTaskList) {
         this.messageForUser = messageForUser;
         this.updatedTaskList = updatedTaskList;
     }
-    
+
     public String getMessageForUser() {
         return messageForUser;
     }

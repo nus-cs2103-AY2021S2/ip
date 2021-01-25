@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class ToDoTask extends Task {
     public static final String IDENTIFIER = "T";
 

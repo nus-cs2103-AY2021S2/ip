@@ -1,3 +1,5 @@
+package duke.commands;
+
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     private static final String EXIT_MESSAGE = "Exiting...";
@@ -9,7 +11,7 @@ public class ByeCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(EXIT_MESSAGE);
     }
-    
+
     public static boolean isByeCommand(Command command) {
         return command instanceof ByeCommand;
     }

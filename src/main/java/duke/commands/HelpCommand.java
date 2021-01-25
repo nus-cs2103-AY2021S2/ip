@@ -1,3 +1,5 @@
+package duke.commands;
+
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     private static final String HELP_MESSAGE = "Here are the list of available commands:\n" +
