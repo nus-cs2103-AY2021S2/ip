@@ -1,11 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        FileManager file = new FileManager("data/duke.txt");
+        FileManager file = new FileManager(Paths.get("data/duke.txt").toString());
         ListManager list = new ListManager();
         try {
             list = file.getList();
