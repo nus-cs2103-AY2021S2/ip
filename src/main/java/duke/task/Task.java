@@ -3,17 +3,16 @@ package duke.task;
 import duke.Ui;
 
 import java.time.LocalDate;
-import java.util.regex.Pattern;
 
 /**
  * Skeleton class for all tasks.
  */
 public abstract class Task {
-    String task;
+    String description;
     boolean isDone;
 
-    public Task(String task) {
-        this.task = task;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
@@ -26,12 +25,16 @@ public abstract class Task {
         Ui.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
     }
 
+    public boolean isDescriptionContainsString(String input) {
+         return this.description.contains(input);
+    }
+
     public LocalDate getDate() {
          return LocalDate.MIN;
     }
 
     @Override
     public String toString() {
-        return isDone ? "[X] " + this.task : "[ ] " + this.task;
+        return isDone ? "[X] " + this.description : "[ ] " + this.description;
     }
 }
