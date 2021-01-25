@@ -13,6 +13,10 @@ public class Event extends Task {
         this.dateTime = dateTime;
     }
 
+    public String getTaskType() {
+        return "Event";
+    }
+
     public String getDateTime() {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }

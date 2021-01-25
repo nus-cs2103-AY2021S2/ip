@@ -9,6 +9,10 @@ public class ToDo extends Task {
         super(taskName);
     }
 
+    public String getTaskType() {
+        return "ToDo";
+    }
+
     @Override
     public String toSave() {
         return "T / " + super.isDoneString + super.taskName;
