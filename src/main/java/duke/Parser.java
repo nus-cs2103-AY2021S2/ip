@@ -6,6 +6,7 @@ import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
+import duke.command.FindCommand;
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -33,6 +34,8 @@ public class Parser {
             return new DeleteCommand(splitBySpaces);
         } else if (keyword.equals("bye")) {
             return new ByeCommand(splitBySpaces);
+        } else if (keyword.equals("find")) {
+            return new FindCommand(splitBySpaces);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
