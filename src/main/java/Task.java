@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task{
     protected String description;
     protected boolean isCompleted;
@@ -9,6 +11,10 @@ public class Task{
 
     public void markComplete(){
         this.isCompleted = true;
+    }
+
+    public LocalDate getTaskDate() {
+        return null;
     }
 
     @Override

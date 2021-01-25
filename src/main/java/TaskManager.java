@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskManager{
@@ -8,6 +9,7 @@ public class TaskManager{
     private final static String EVENT = "event";
     private final static String DEADLINE = "deadline";
     private final static String LIST = "list";
+    private final static String DUE = "due";
 
     public void add(String type, String task) throws DukeException {
         if (type.equals(TODO)) {
@@ -57,6 +59,16 @@ public class TaskManager{
         System.out.println("");
     }
 
+    public void getTasksOn(String date) {
+        LocalDate currentDate = LocalDate.parse(date);
+        System.out.println("Here are the tasks due on " + date + ": " );
+        int counter = 1;
+        for(Task task : list) {
+            if(task.getTaskDate().equals(currentDate)) {
+                System.out.println(counter + "." + task);
+            }
+        }
+    }
 
     public void manage(String[] parsedAction) throws DukeException {
         String command = parsedAction[0];
@@ -66,6 +78,8 @@ public class TaskManager{
             printList();
         } else if (command.equals(DONE)) {
             done(Integer.parseInt(parsedAction[1]));
+        } else if (command.equals(DUE)) {
+            getTasksOn(parsedAction[1]);
         } else {
             delete(Integer.parseInt(parsedAction[1]));
         }

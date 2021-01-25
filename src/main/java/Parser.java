@@ -5,6 +5,7 @@ public class Parser {
     private final static String EVENT = "event";
     private final static String DEADLINE = "deadline";
     private final static String LIST = "list";
+    private final static String DUE = "due";
 
     public static String[] check(String input) throws DukeException {
         if (input.equals("")) {
@@ -53,6 +54,11 @@ public class Parser {
                     }
                 }
             } else if (command.equals("bye")) {
+                return inputArray;
+            } else if (command.equals(DUE)) {
+                if (inputArray.length == 1) {
+                    throw new DukeException("Missing argument! Please key in a date.");
+                }
                 return inputArray;
             } else {
                 throw new DukeException("Invalid command! Please try again.");
