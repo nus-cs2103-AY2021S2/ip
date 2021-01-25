@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     private static String[] CommandTypeArray = {
-            "bye", "list", "todo", "deadline", "event", "done", "delete"
+            "bye", "list", "todo", "deadline", "event", "find", "done", "delete"
     };
     private static LocalDate formatDate(String date) throws InvalidDateFormatException {
         try {
@@ -77,6 +77,8 @@ public class Parser {
                 String date = startTime.substring(0, 10);
                 String endTime = date + timePeriod[1];
                 return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
+            case "find":
+                return new FindCommand(words[1]);
             case "done":
                 return new DoneCommand(Integer.parseInt(words[1]));
             case "delete":
