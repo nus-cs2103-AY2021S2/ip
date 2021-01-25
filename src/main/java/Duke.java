@@ -2,26 +2,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Duke {
-    private static final List<Task> taskList = new ArrayList<>();
     private static final String FILE_PATH = "./src/main/java/tasks.txt";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
     private static Ui ui;
     private static Storage storage;
-
-    private static void printList() {
-        System.out.println("Here are the tasks in your list:");
-        int counter = 1;
-        for (Task t : taskList) {
-            System.out.println(counter + ". " + t);
-            counter++;
-        }
-    }
+    private static TaskList taskList;
 
     private static boolean isByeCommand(String command) {
         return command.equals(Commands.BYE.getCommand());
@@ -65,13 +55,10 @@ public class Duke {
     }
 
     private static void endProgram() throws IOException {
+        List<String> converted = TaskStringConverter.allTaskToAllString(taskList.getList());
+        storage.writeToFile(converted);
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
-    }
-
-    private static void setTaskDone(int pos) {
-        taskList.get(pos).markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n" + taskList.get(pos));
     }
 
     private static int calcListPos(String taskIndex) throws NumberFormatException {
@@ -79,27 +66,29 @@ public class Duke {
     }
 
     private static void doneTask(String taskIndex) throws IndexOutOfBoundsException {
-        setTaskDone(calcListPos(taskIndex));
+        taskList.setTaskDone(calcListPos(taskIndex));
+        System.out.println("Nice! I've marked this task as done:");
+        taskList.printList();
     }
 
     private static void deleteTask(String taskIndex) throws IndexOutOfBoundsException {
         int pos = calcListPos(taskIndex);
         System.out.println("Noted. I've removed this task:");
-        System.out.println(taskList.get(pos));
-        taskList.remove(pos);
+        taskList.printTask(pos);
+        taskList.deleteTask(pos);
         printNumTasksInList();
     }
 
     private static void addTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
             EmptyDescriptionException, DateTimeParseException {
         Task task = defineTask(command, taskInputAndDate);
-        taskList.add(task);
+        taskList.addTask(task);
         System.out.println("Got it. I've added this task:\n" + task);
         printNumTasksInList();
     }
 
     private static void printNumTasksInList() {
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getList().size() + " tasks in the list.");
     }
 
     private static void run() {
@@ -115,8 +104,8 @@ public class Duke {
                 try {
                     ui.showMsg("You have existing tasks!");
                     List<Task> converted = TaskStringConverter.allStringToAllTask(input);
-                    taskList.addAll(converted);
-                    printList();
+                    taskList = new TaskList(converted);
+                    taskList.printList();
                 } catch (InvalidTaskTypeException e) {
                     ui.showError("Erroneous task type in file. Please check your file again!");
                 }
@@ -134,7 +123,7 @@ public class Duke {
                     }
                     break;
                 } else if (isListCommand(command)) {
-                    printList();
+                    taskList.printList();
                 } else {
                     String taskInput = scannerInput.nextLine();
                     String[] taskInputAndDate = taskInput.split("/", 2);
