@@ -19,5 +19,9 @@ public class DukeException {
         }
     }
 
-
+    public static class StorageError extends IllegalArgumentException {
+        public StorageError() {
+            super(DukeString.EXCEPTION_STORAGE_ERROR);
+        }
+    }
 }

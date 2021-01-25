@@ -21,5 +21,6 @@ public final class DukeString {
     public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
     public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
+    public static final String EXCEPTION_STORAGE_ERROR = "Sorry, there has been an error reading your tasks.";
     private DukeString() { }
 }

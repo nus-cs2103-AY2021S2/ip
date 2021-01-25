@@ -1,13 +1,45 @@
 package duke.task;
 
+import duke.common.DukeException;
+import duke.common.DukeString;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class TaskList {
     private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    private TaskList(List<Task> list) {
+        this.taskList = list;
+    }
+
+
+    public static TaskList deserialise(String input) throws DukeException.StorageError {
+        List<Task> list = new ArrayList<>();
+        Scanner scanner = new Scanner(input);
+
+        String line;
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+
+            switch (line.split("\255")[0]) {
+            case DukeString.COMMAND_DEADLINE :
+                list.add(DeadlineTask.deserialise(line));
+            case DukeString.COMMAND_EVENT :
+                list.add(EventTask.deserialise(line));
+            case DukeString.COMMAND_TODO :
+                list.add(TodoTask.deserialise(line));
+            default:
+                throw new DukeException.StorageError();
+            }
+        }
+
+        return new TaskList(list);
     }
 
     public void addTask(final Task task) {
@@ -25,6 +57,16 @@ public class TaskList {
 
     public int size() {
         return taskList.size();
+    }
+
+    public String serialise() {
+        StringBuilder out = new StringBuilder();
+        for (Task task : taskList) {
+            out.append(task.serialise());
+            out.append('\n');
+        }
+
+        return out.toString();
     }
 
     @Override
