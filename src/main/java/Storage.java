@@ -106,14 +106,13 @@ public class Storage {
         temp.createNewFile();
         FileWriter tempFile = new FileWriter(temp, true);
         Scanner contents = new Scanner(this.localFile);
-        String response = "";
 
         while (contents.hasNext()) {
             String data = contents.nextLine();
             if (!data.equals(task.toString())) {
                 tempFile.write(data + "\n");
             } else {
-                task.markAsDone();
+                task.setIsDone();
                 tempFile.write(task.toString() + "\n");
             }
         }

@@ -11,10 +11,6 @@ public class Task {
         return "[" + (isDone ? "X" : " ") + "] " + this.name;
     }
 
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
     public void setIsDone() {
         this.isDone = true;
     }
