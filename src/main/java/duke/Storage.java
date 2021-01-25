@@ -21,6 +21,7 @@ public class Storage {
   
   /** 
    * Returns a TaskList created from the data given in file
+   * 
    * @return TaskList
    * @throws DukeException
    */
@@ -54,6 +55,7 @@ public class Storage {
   
   /** 
    * Writes data to file
+   * 
    * @param text
    * @throws DukeException
    */

@@ -11,6 +11,7 @@ public class Ui {
   
   /** 
    * Returns the command string input by user
+   * 
    * @return String
    */
   public String readCommand() {
@@ -24,6 +25,7 @@ public class Ui {
   
   /** 
    * Prints to console the DukeException
+   * 
    * @param e
    */
   public void showError(DukeException e) {
@@ -37,6 +39,7 @@ public class Ui {
   
   /** 
    * Print to console text with indentation
+   * 
    * @param text
    */
   public void printIndented(String text) {

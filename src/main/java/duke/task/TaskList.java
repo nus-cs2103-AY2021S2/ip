@@ -13,6 +13,7 @@ public class TaskList {
   
   /** 
    * Returns task as index i
+   * 
    * @param i index of task to get
    * @return Task
    */
@@ -23,6 +24,7 @@ public class TaskList {
   
   /** 
    * Adds a new task to taskList
+   * 
    * @param task
    */
   public void add(Task task) {
@@ -32,6 +34,7 @@ public class TaskList {
   
   /** 
    * Removes task at index idx from taskList
+   * 
    * @param idx index of task to remove
    * @return Task
    */
@@ -42,6 +45,7 @@ public class TaskList {
   
   /** 
    * Marks task at index idx as done
+   * 
    * @param idx index of task to mark done
    */
   public void markDone(int idx) {
@@ -51,6 +55,7 @@ public class TaskList {
   
   /** 
    * Returns the size of current taskList
+   * 
    * @return int
    */
   public int size() {
@@ -60,6 +65,7 @@ public class TaskList {
   
   /** 
    * Returns the string representation of taskList to be saved in data file
+   * 
    * @return String
    */
   public String toDataString() {

@@ -15,6 +15,7 @@ public abstract class Command {
   
   /** 
    * Executes the command
+   * s
    * @param taskList
    * @param ui
    * @param isExit(
@@ -25,6 +26,7 @@ public abstract class Command {
   
   /** 
    * Returns whether the current command is going to exit the programme
+   * 
    * @return boolean
    */
   public boolean isExit() {

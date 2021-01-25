@@ -12,6 +12,7 @@ public class Todo extends Task {
   
   /** 
    * Returns a string representation of Todo
+   * 
    * @return String
    */
   @Override
@@ -22,6 +23,7 @@ public class Todo extends Task {
   
   /** 
    * Returns a string representation of Todo to be saved in data file
+   * 
    * @return String
    */
   public String toSavedString() {

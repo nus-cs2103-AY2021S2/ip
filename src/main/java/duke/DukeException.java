@@ -16,6 +16,7 @@ public class DukeException extends Exception {
   
   /** 
    * Returns the message string of the error
+   * 
    * @return String
    */
   @Override

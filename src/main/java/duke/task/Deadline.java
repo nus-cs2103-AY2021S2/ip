@@ -18,7 +18,8 @@ public class Deadline extends Task {
 
   
   /** 
-   * Returns a string representation of Todo
+   * Returns a string representation of Deadline
+   * 
    * @return String
    */
   @Override
@@ -29,6 +30,7 @@ public class Deadline extends Task {
   
   /** 
    * Returns a string representation of Deadline to be saved in data file
+   * 
    * @return String
    */
   public String toSavedString() {

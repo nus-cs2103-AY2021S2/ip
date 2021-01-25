@@ -17,6 +17,7 @@ public abstract class Task {
   
   /** 
    * Returns a string representation of task
+   * 
    * @return String
    */
   @Override
