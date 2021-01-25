@@ -34,4 +34,8 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public String fileString() {
+        return this.description;
+    }
 }

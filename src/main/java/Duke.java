@@ -1,122 +1,51 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 /**
  * A personal task managing chatbot project.
  */
 public class Duke {
-    static final String FORMAT_LINE = "....................................................";
+    public static ArrayList<Task> tasks;
+    public static Storage storage;
 
-    /**
-     * Greets the user
-     */
-    public static void greetUser() {
-        System.out.println(FORMAT_LINE + "\nHey, " +
-                "I am Duke.\nHow can I help you?\n" +
-                FORMAT_LINE);
-    }
-
-    /**
-     * Bids farewell to the user
-     */
-    public static void farewellUser() {
-        System.out.println(FORMAT_LINE +
-                "\nGoodbye and see you soon!\n" +
-                FORMAT_LINE);
-    }
-
-    /**
-     * Prints all the tasks in the task list
-     *
-     * @param tasks A list of Task objects
-     */
-    public static void listTasks(ArrayList<Task> tasks) {
-        System.out.println(FORMAT_LINE);
-        System.out.println("You have the following task(s) in your list.");
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            System.out.println(i + 1 + "." + task.toString());
-
+    Duke(){
+        storage = new Storage("data/duke.txt");
+        try{
+        tasks = storage.readTasksFromFile();
         }
-        System.out.println(FORMAT_LINE);
+        catch(FileNotFoundException fileException){
+            tasks = new ArrayList<Task>();
+        }
 
     }
-
-    /**
-     * Prints the newly added task details along with the new size of the task list
-     *
-     * @param tasks A list of Task objects
-     * @param task  An instance of Task representing the newly added task
-     */
-    public static void printAddedTask(ArrayList<Task> tasks, Task task) {
-        System.out.println(FORMAT_LINE);
-        System.out.println("Got it. I've added this task to your list:\n" +
-                "   " + task.toString());
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-        System.out.println(FORMAT_LINE);
-
-
-    }
-
-    /**
-     * Marks the indicated given task as done
-     *
-     * @param tasks A list of Task objects
-     * @param index An integer representing the index of the task to be marked as done
-     */
-    public static void markAsDone(ArrayList<Task> tasks, int index) {
-        Task task = tasks.get(index);
-        task.markAsDone();
-        System.out.println(FORMAT_LINE);
-        System.out.println(" Good job! I've marked this task as done:\n" +
-                "   " + task.toString());
-        System.out.println(FORMAT_LINE);
-
-    }
-
-    /**
-     * Deletes the indicated task from the task list
-     *
-     * @param tasks A list of Task objects
-     * @param index An integer representing the index of the task to be deleted
-     */
-    public static void deleteTask(ArrayList<Task> tasks, int index) {
-        Task task = tasks.get(index);
-        tasks.remove(index);
-        System.out.println(FORMAT_LINE);
-        System.out.println(" Noted. I've removed this task:\n" +
-                "   " + task.toString());
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-        System.out.println(FORMAT_LINE);
-
-    }
-
     /**
      * main method which runs the chatbot.
      *
      * @param args empty string array.
      */
     public static void main(String[] args) {
+        new Duke();
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        greetUser();
+        Commands.greetUser();
 
         while (sc.hasNext()) {
 
             String input = sc.nextLine();
 
             try {
+
                 System.out.println("\n>>> " + input);
                 if (input.equals("list")) {
-                    listTasks(tasks);
+                    Commands.listTasks(tasks);
                 } else if (input.startsWith("done")) {
                     int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
                     if (index > tasks.size() || index <= 0) {
                         throw new DukeException("The list item number provided is invalid");
                     }
-                    markAsDone(tasks, index - 1);
+                    Commands.markAsDone(tasks, index - 1);
+                    storage.writeTasksToFile(tasks);
                 } else if (input.startsWith("todo")) {
                     String description = input.replace("todo", "");
                     ToDo todo = new ToDo(description);
@@ -124,7 +53,8 @@ public class Duke {
                         throw new DukeException("todo description cannot be empty");
                     }
                     tasks.add(todo);
-                    printAddedTask(tasks, todo);
+                    Commands.printAddedTask(tasks, todo);
+                    storage.writeTasksToFile(tasks);
                 } else if (input.startsWith("deadline")) {
                     if (input.strip().equals("deadline")) {
                         throw new DukeException("deadline description cannot be empty");
@@ -139,7 +69,8 @@ public class Duke {
                     String date = input.split("/by", 2)[1].strip();
                     Deadline deadline = new Deadline(description, date);
                     tasks.add(deadline);
-                    printAddedTask(tasks, deadline);
+                    Commands.printAddedTask(tasks, deadline);
+                    storage.writeTasksToFile(tasks);
                 } else if (input.startsWith("event")) {
 
                     if (input.strip().equals("event")) {
@@ -156,17 +87,19 @@ public class Duke {
 
                     Event event = new Event(description, date);
                     tasks.add(event);
-                    printAddedTask(tasks, event);
+                    Commands.printAddedTask(tasks, event);
+                    storage.writeTasksToFile(tasks);
 
                 } else if (input.startsWith("delete")) {
                     int index = Integer.parseInt(input.replaceAll("[^-0-9]", ""));
                     if (index > tasks.size() || index <= 0) {
                         throw new DukeException("The list item number provided is invalid");
                     }
-                    deleteTask(tasks, index - 1);
+                    Commands.deleteTask(tasks, index - 1);
+                    storage.writeTasksToFile(tasks);
 
                 } else if (input.equals("bye")) {
-                    farewellUser();
+                    Commands.farewellUser();
                     break;
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
