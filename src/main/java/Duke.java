@@ -4,8 +4,27 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+
+/**
+ * An interactive chat bot made for CS2103 individual project.
+ */
 public class Duke {
     public static void main(String[] args) {
+        // Initialise Duke using saved tasks in text file
+        List<Task> tasks = new ArrayList<>();
+        try {
+            initialise(tasks);
+        } catch (IOException ex) {
+            System.out.println(ex);
+            return;
+        }
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +34,6 @@ public class Duke {
         System.out.println("Please input a command.");
 
         Scanner sc = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         while (true) {
             String input = sc.nextLine();
             System.out.println("  ~~~");
@@ -95,7 +113,75 @@ public class Duke {
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
+            try {
+                save(tasks);
+            } catch (IOException ex) {
+                System.out.println(ex);
+                return;
+            }
             System.out.println("  ~~~");
         }
+    }
+
+    /**
+     * Loads the list of tasks from pre-made text file.
+     * Creates the text file if it does not exist.
+     *
+     * @param tasks list of tasks.
+     */
+    public static void initialise(List<Task> tasks) throws IOException {
+        Path path = Paths.get("data/TaskList.txt");
+        Files.createDirectories(path.getParent());
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+            return;
+        }
+        BufferedReader br = Files.newBufferedReader(path);
+        String taskType = br.readLine();
+        while (taskType != null) {
+            Task newTask;
+            String taskName = br.readLine();
+            switch (taskType) {
+            case "T": {
+                newTask = new Todo(taskName);
+                break;
+            }
+            case "D": {
+                newTask = new Deadline(taskName);
+                break;
+            }
+            case "E": {
+                newTask = new Event(taskName);
+                break;
+            }
+            default:
+                return;
+            }
+            boolean isDone = Boolean.parseBoolean(br.readLine());
+            if (isDone) {
+                newTask.markAsDone();
+            }
+            tasks.add(newTask);
+            taskType = br.readLine();
+        }
+    }
+
+    /**
+     * Saves the list of tasks into existing text file.
+     *
+     * @param tasks list of tasks.
+     */
+    public static void save(List<Task> tasks) throws IOException {
+        Path path = Paths.get("data/TaskList.txt");
+        BufferedWriter bw = Files.newBufferedWriter(path);
+        for (Task task : tasks) {
+            bw.write(task.toString().charAt(1));
+            bw.newLine();
+            bw.write(task.name);
+            bw.newLine();
+            bw.write(Boolean.toString(task.isDone));
+            bw.newLine();
+        }
+        bw.flush();
     }
 }
