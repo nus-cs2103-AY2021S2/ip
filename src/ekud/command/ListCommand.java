@@ -10,15 +10,26 @@ import ekud.ui.Ui;
 import java.time.LocalDate;
 import java.util.Vector;
 
+/**
+ * Command that lists all tasks, optionally filter by date if given.
+ */
 public class ListCommand extends Command {
     private final boolean filter;
     private LocalDate date;
 
+    /**
+     * Construct a command that lists all tasks with a tagged date equal to supplied date.
+     *
+     * @param date The date to be used as the filter
+     */
     public ListCommand(LocalDate date) {
         this.filter = true;
         this.date = date;
     }
 
+    /**
+     * Construct a command that lists all tasks.
+     */
     public ListCommand() {
         this.filter = false;
     }
@@ -26,9 +37,9 @@ public class ListCommand extends Command {
     /**
      * Output all tasks if no date specified, tasks due on the day otherwise.
      *
-     * @param tasks   the list of tasks
-     * @param ui      the user interface
-     * @param storage the file writer
+     * @param tasks   The list of tasks
+     * @param ui      The user interface
+     * @param storage The file writer
      */
     @Override
     public void execute(final TaskList tasks, Ui ui, Storage storage) throws DukeException {

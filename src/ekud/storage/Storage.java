@@ -15,6 +15,9 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The file I/O class that handles all file operations
+ */
 public class Storage {
     final private String filePath;
     final private File file;
@@ -23,6 +26,11 @@ public class Storage {
 
     private boolean canSave;
 
+    /**
+     * Construct a new Storage instance that reads and writes to a given file.
+     * 
+     * @param path The path to the file
+     */
     public Storage(String path) {
         this.filePath = path;
         Matcher matcher = PARENT_DIRECTORY.matcher(this.filePath);
@@ -39,6 +47,12 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Read the file and reconstruct all tasks.
+     * 
+     * @return A Vector containing all reconstructed tasks
+     * @throws DukeException If any errors are encountered during I/O operations, or if the task is invalid
+     */
     public Vector<Task> load() throws DukeException {
         Vector<Task> ret = new Vector<>();
         Scanner s;
@@ -73,6 +87,13 @@ public class Storage {
         return ret;
     }
 
+    /**
+     * Save the given tasks to the file using specified FileWriter.
+     *
+     * @param fw The FileWriter to write to
+     * @param tasks The list of tasks to save
+     * @throws IOException If an I/O error occurs
+     */
     private void writeToFile(FileWriter fw, List<Task> tasks) throws IOException {
         for (Task task : tasks) {
             LinkedList<String> list = task.export();
@@ -80,6 +101,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save tasks to disk.
+     *
+     * @param tasks The list of tasks
+     * @throws DukeException If an I/O error occurs
+     */
     public void save(final TaskList tasks) throws DukeException {
         if (!canSave) {
             return;
