@@ -10,6 +10,16 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(boolean isDone, String description, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Event`" + this.isDone + "`" + this.description + "`" + this.at;
+    }
+
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (" + at + ")";
