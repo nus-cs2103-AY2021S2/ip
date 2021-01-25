@@ -11,8 +11,8 @@ public class Greeting {
    * Outputs the standard greeting with Duke Logo
    */
   public void greet() {
-    String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     System.out.println("Hello from\n" + logo);
   }
 
@@ -23,6 +23,11 @@ public class Greeting {
     printWithSpacing("Bye. Hope to see you again soon!");
   }
 
+  /**
+   * Prints message from exception
+   * 
+   * @param exception exception caught during runtime in Ui
+   */
   public void printErrorMessage(Exception exception) {
     printWithSpacing(exception.getMessage());
   }
