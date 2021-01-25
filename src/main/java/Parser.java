@@ -78,6 +78,11 @@ public class Parser {
         }
     }
 
+    public void handleFind(){
+        String keyword = command.substring(index + 1);
+        tasks.findWithKeyword(keyword);
+    }
+
     public void handleCommand(String command) {
         this.command = command;
         try {
@@ -101,6 +106,9 @@ public class Parser {
                     break;
                 case "delete":
                     handleDelete();
+                    break;
+                case "find":
+                    handleFind();
                     break;
                 }
             } else {

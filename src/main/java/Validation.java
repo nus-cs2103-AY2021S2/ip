@@ -4,7 +4,7 @@ import java.util.List;
 public class Validation {
 
     public static void checkValidCommand(String command) throws DukeException {
-        String[] validCommands = new String[]{"todo", "deadline", "event", "list", "bye", "done", "delete"};
+        String[] validCommands = new String[]{"todo", "deadline", "event", "list", "bye", "done", "delete", "find"};
         List<String> commands = Arrays.asList(validCommands);
         int index = command.indexOf(' ');
         String first;
@@ -16,11 +16,11 @@ public class Validation {
         if(!commands.contains(first.toLowerCase())){
             throw new DukeException(":( OOPS! I'm sorry, but I don't know what that means :-(");
         } else {
-            String[] secondValidation = new String[]{"todo", "deadline", "event", "done", "delete"};
+            String[] secondValidation = new String[]{"todo", "deadline", "event", "done", "delete", "find"};
             List<String> secondListOfCommands = Arrays.asList(secondValidation);
             if (secondListOfCommands.contains(first.toLowerCase())) {
                 if (index <= -1 || command.substring(index).isBlank()) {
-                    throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete " +
+                    throw new DukeException(":( OOPS! The description of a todo/deadline/event/done/delete/find " +
                             "cannot be empty!!");
                 }
             }
