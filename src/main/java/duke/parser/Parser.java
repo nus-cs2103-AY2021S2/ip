@@ -1,3 +1,7 @@
+package duke.parser;
+
+import duke.command.*;
+
 public class Parser {
     public static Command parse(String fullCommand) {
         String[] commandArr = fullCommand.split(" ", 2);

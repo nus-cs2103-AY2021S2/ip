@@ -1,13 +1,13 @@
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
-
-    public TaskList() {
-        this.tasks = new ArrayList<>();
-    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -26,7 +26,7 @@ public class TaskList {
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
                 throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (!isNumeric(inputArr[1])) {
+            } else if (isNotNumeric(inputArr[1])) {
                 throw new DukeException("       OOPS!!! The task number must be numeric.");
             } else {
                 int i = Integer.parseInt(inputArr[1]) - 1;
@@ -50,7 +50,7 @@ public class TaskList {
         if (inputArr.length < 3) {
             if (inputArr.length == 1) {
                 throw new DukeException("       OOPS!!! The task number cannot be empty.");
-            } else if (!isNumeric(inputArr[1])) {
+            } else if (isNotNumeric(inputArr[1])) {
                 throw new DukeException("       OOPS!!! The task number must be numeric.");
             } else {
                 int i = Integer.parseInt(inputArr[1]) - 1;
@@ -120,11 +120,11 @@ public class TaskList {
                 + "     Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
-    private static boolean isNumeric(String str) {
+    private static boolean isNotNumeric(String str) {
         if (str == null || str.length() == 0) {
-            return false;
+            return true;
         }
-        return str.chars().allMatch(Character::isDigit);
+        return !str.chars().allMatch(Character::isDigit);
     }
 
     public ArrayList<Task> getTaskList() {

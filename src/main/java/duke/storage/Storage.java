@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -33,7 +41,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
-        Scanner sc = null;
+        Scanner sc;
         try {
             sc = new Scanner(this.file);
         } catch (FileNotFoundException ex) {
