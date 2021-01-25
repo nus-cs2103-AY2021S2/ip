@@ -93,6 +93,10 @@ public class Duke {
             this.done = true;
         }
 
+        public String getTodo() {
+            return this.todo;
+        }
+
         /**
          * Returns a String form of the current Task to be saved onto the hard disk.
          *
@@ -443,6 +447,16 @@ public class Duke {
                     ui.errorMessage("invalidDelete");
                 }
                 break;
+            case "find":
+                String toFind = input.substring(5);
+                TaskList toReturn = new TaskList();
+                for (Task t : leest.getList()) {
+                    if (t.getTodo().contains(toFind)) {
+                        toReturn.add(t);
+                    }
+                }
+                ui.showSearchList(toReturn);
+                break;
             default:
                 ui.errorMessage("unknownInput");
                 break;
@@ -545,6 +559,20 @@ public class Duke {
             for (Task t : tl.getList()) {
                 System.out.println(counter + ". " + t);
                 counter++;
+            }
+        }
+
+        public void showSearchList(TaskList tl) {
+            if (tl.isEmpty()) {
+                System.out.println("There are no matching tasks uwu. " +
+                        "(just like how whoever wrote this has no friends.)");
+            } else {
+                System.out.println("Here are the matching tasks in your list uwu: ");
+                int counter = 1;
+                for (Task t : tl.getList()) {
+                    System.out.println(counter + ". " + t);
+                    counter++;
+                }
             }
         }
 
