@@ -1,3 +1,5 @@
+package duke.error;
+
 public class OutOfBoundsDoneDeleteException extends IndexOutOfBoundsException {
     OutOfBoundsDoneDeleteException(String message) {
         super(message);

@@ -1,3 +1,5 @@
+package duke.error;
+
 public class IllegalDoneDeleteException extends StringIndexOutOfBoundsException {
     protected String taskType;
 

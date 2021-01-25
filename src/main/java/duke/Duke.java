@@ -1,9 +1,14 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.TaskManager;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     protected static ArrayList<Task> list;
-    protected static final String line = (char) 9 + "--------------------------------------------------------------------";
+    public static final String line = (char) 9 + "--------------------------------------------------------------------";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"

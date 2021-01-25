@@ -1,6 +1,9 @@
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+package duke.error;
+
+import duke.Duke;
+import duke.datetime.DateTimeConverter;
+import duke.task.Task;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -46,9 +49,6 @@ public class ErrorChecker {
                 String[] inputSplit = input.split("/");
                 DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
                 dateTimeConverter.convertDate();
-//                String date = inputSplit[1].substring(3);
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                LocalDate.parse(date, formatter);
             } else if (input.startsWith("event")) {
                 taskType = "event";
                 input.substring(7);
@@ -58,14 +58,6 @@ public class ErrorChecker {
                 dateTimeConverter.convertDate();
                 dateTimeConverter.convertTime("from");
                 dateTimeConverter.convertTime("to");
-//                String date = inputSplit[1].substring(3, inputSplit[1].length() - 1);
-//                String from = inputSplit[2].substring(5, inputSplit[2].length() - 1).toUpperCase();
-//                String to = inputSplit[3].substring(3).toUpperCase();
-//                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh a");
-//                LocalDate.parse(date, dateFormatter);
-//                LocalTime.parse(from, timeFormatter);
-//                LocalTime.parse(to, timeFormatter);
             }
         } catch (StringIndexOutOfBoundsException ex) {
             if (input.startsWith("done") || input.startsWith("delete")) {

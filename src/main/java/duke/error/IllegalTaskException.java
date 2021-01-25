@@ -1,3 +1,5 @@
+package duke.error;
+
 class IllegalTaskException extends StringIndexOutOfBoundsException {
     protected String taskType;
 

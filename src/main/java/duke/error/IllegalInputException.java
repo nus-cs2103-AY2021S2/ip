@@ -1,3 +1,5 @@
+package duke.error;
+
 public class IllegalInputException extends IllegalArgumentException {
     IllegalInputException(String message) {
         super(message);
