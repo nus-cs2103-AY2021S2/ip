@@ -22,7 +22,7 @@ public class Ui {
 
     public void init() {
         setLengthOfChatBox();
-        formatInChatBox("Hello I'm mike.Mike\nWhat can I do for you?\n");
+        formatInChatBox("Hello I'm Mike.\nWhat can I do for you?\n");
     }
 
     public void exit() {
@@ -65,6 +65,20 @@ public class Ui {
 
     public void showLoadingError(ParseException e) {
         formatInChatBox(e.getMessage());
+    }
+
+    public void showMatchingResults(TaskList matchingResults) {
+        String output = "";
+        if (matchingResults.isEmpty()) {
+            output += "OOP!!! There are no matching tasks in your list";
+        } else {
+            output += "Here are the matching tasks in your list:\n";
+            for (int i = 0; i < matchingResults.size(); i++) {
+                output += (i + 1) + "." + matchingResults.get(i).toString() + "\n";
+            }
+        }
+
+        formatInChatBox(output);
     }
 
     public void showIndexOutOfBoundsError(TaskList taskList) {

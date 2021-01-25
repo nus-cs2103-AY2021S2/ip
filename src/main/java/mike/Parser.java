@@ -60,16 +60,16 @@ public class Parser {
     public static Task parseLineInFile(String line) {
         Task task;
         if (line.charAt(1) == 'T') {
-            task = new ToDo(line.substring(8));
+            task = new ToDo(line.substring(6));
         } else if (line.charAt(1) == 'D') {
-            int endIndexOfDescription = line.indexOf("/by ");
-            String deadlineDescription = line.substring(0, endIndexOfDescription);
-            String deadline = line.substring(endIndexOfDescription + 4);
+            int endIndexOfDescription = line.indexOf("by: ");
+            String deadlineDescription = line.substring(6, endIndexOfDescription - 3);
+            String deadline = line.substring(endIndexOfDescription + 4, line.length() - 1);
             task = new Deadline(deadlineDescription, deadline);
         } else if (line.charAt(1) == 'E') {
-            int endIndexOfDescription = line.indexOf("/at ");
-            String eventDescription = line.substring(0, endIndexOfDescription);
-            String eventTime = line.substring(endIndexOfDescription + 4);
+            int endIndexOfDescription = line.indexOf("at: ");
+            String eventDescription = line.substring(6, endIndexOfDescription - 3);
+            String eventTime = line.substring(endIndexOfDescription + 4, line.length() - 1);
             task = new Event(eventDescription, eventTime);
         } else {
             throw new ParseException("OOPS!!! It seems that the file might be corrupted.");
