@@ -32,7 +32,6 @@ public class Duke {
                         }
                     }
                 } else if (userInput.startsWith("done")) {
-                    // TODO: 17/1/21 Throw exception if no valid choice is entered
                     int userChoice = Integer.valueOf(userInput.split(" ")[1]);
                     if (userChoice > tasks.size()) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
@@ -42,7 +41,6 @@ public class Duke {
                     response.append("Nice! I've marked this task as done:\n");
                     response.append(task);
                 } else if (userInput.startsWith("delete")) {
-                    // TODO: 17/1/21 Throw exception if no valid choice is entered
                     int userChoice = Integer.valueOf(userInput.split(" ")[1]);
                     if (userChoice > tasks.size()) {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but there is no such task :-(");
