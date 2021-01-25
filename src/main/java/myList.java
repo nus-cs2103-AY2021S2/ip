@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class myList {
@@ -11,41 +13,65 @@ public class myList {
         Task task = new Task(taskDescription);
 
         taskList.add(task);
-        System.out.println("Added to list:\n" + task.toString());
-        System.out.println("You now have " + taskList.size() + " tasks\n");
+        Ui.addedTask(taskList);
+        this.save();
     }
 
     public void addDeadline(String description, String datetime) {
         Deadline deadline = new Deadline(description, datetime);
 
         taskList.add(deadline);
-        System.out.println("Added to list:\n" + deadline.toString());
-        System.out.println("You now have " + taskList.size() + " tasks\n");
+        Ui.addedTask(taskList);
+        this.save();
     }
 
     public void addEvent(String description, String datetime) {
         myEvent event = new myEvent(description, datetime);
 
         taskList.add(event);
-        System.out.println("Added to list:\n" + event.toString());
-        System.out.println("You now have " + taskList.size() + " tasks\n");
+        Ui.addedTask(taskList);
+        this.save();
     }
 
     public void markCompleted(int index) {
         taskList.get(index).markCompleted();
-        System.out.println("Good job! I've marked it as completed for you as well!\n");
+        Ui.completedTask();
+        this.save();
     }
 
     public void delete(int index) {
         taskList.remove(index);
-        System.out.println("Got it! I've removed the task for you\n");
-        System.out.println("You now have " + taskList.size() + " tasks\n");
+        Ui.removeTask(taskList);
+        this.save();
+    }
+
+    public void retrieve()  {
+        try {
+            String filepath = "./ip/data";
+            taskList = Storage.retrieve(filepath);
+            Ui.initRetrieveList(this);
+        } catch (FileNotFoundException e) {
+            Ui.fileNotFound();
+        }
+    }
+
+    public int getNumTasks() {
+        return taskList.size();
+    }
+
+    private void save() {
+        try {
+            String filepath = "./ip/data";
+            Storage.save(taskList, filepath);
+        } catch (IOException e) {
+            Ui.fileError();
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here's your list of tasks!");
+
 
         for (int i = 0; i < taskList.size(); i++) {
             sb.append("\n"

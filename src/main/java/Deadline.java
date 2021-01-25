@@ -3,7 +3,12 @@ public class Deadline extends Task{
 
     Deadline(String description, String datetime) {
         super(description);
-        this.datetime = datetime;
+        this.datetime = datetime.stripLeading().stripTrailing();
+    }
+
+    Deadline(String description, String datetime, Boolean completion) {
+        super(description, completion);
+        this.datetime = datetime.stripLeading().stripTrailing();
     }
 
     @Override

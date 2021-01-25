@@ -3,7 +3,12 @@ public class myEvent extends Task {
 
     myEvent(String description, String datetime) {
         super(description);
-        this.datetime = datetime;
+        this.datetime = datetime.stripLeading().stripTrailing();
+    }
+
+    myEvent(String description, String datetime, Boolean completion) {
+        super(description, completion);
+        this.datetime = datetime.stripLeading().stripTrailing();
     }
 
     @Override
