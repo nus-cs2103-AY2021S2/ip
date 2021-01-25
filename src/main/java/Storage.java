@@ -3,6 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
@@ -18,7 +19,29 @@ public class Storage {
         }
     }
 
-    public List<String> getLines() {
+    public List<Task> loadTasks() {
+        List<Task> tl = new ArrayList<>();
+        List<String> lines = getLines();
+        for (String line : lines) {
+            try {
+                Task task = parseLine(line);
+                tl.add(task);
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
+        }
+        return tl;
+    }
+
+    public void saveTasks(List<Task> list) {
+        List<String> lines = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            lines.add(list.get(i).toFileString());
+        }
+        writeLines(lines);
+    }
+
+    private List<String> getLines() {
         try {
             List<String> lines = Files.readAllLines(Paths.get(path));
             return lines;
@@ -28,7 +51,24 @@ public class Storage {
         }
     }
 
-    public void writeLines(List<String> lines) {
+    private Task parseLine(String line) throws DukeException {
+        String[] parts = line.split("\\|");
+        String type = parts[0];
+        boolean isDone = Boolean.valueOf(parts[1]);
+        String desc = parts[2];
+        switch (type) {
+        case "T":
+            return new Todo(desc, isDone);
+        case "D":
+            return new Deadline(desc, isDone, parts[3]);
+        case "E":
+            return new Event(desc, isDone, parts[3]);
+        default:
+            throw new DukeException("String parsing failed");
+        }
+    }
+
+    private void writeLines(List<String> lines) {
         try {
             FileWriter fw = new FileWriter(path);
             StringBuilder sb = new StringBuilder();
