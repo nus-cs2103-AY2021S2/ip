@@ -1,4 +1,8 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,44 +54,52 @@ public class Tasks {
      * @param input user input in command line
      */
     public void addTask(String input) {
-        String[] split = input.split(" ",2);
-        String command = split[0];
+        try {
+            String[] split = input.split(" ", 2);
+            String command = split[0];
 
-        Duke.formatText();
+            Duke.formatText();
 
-        if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
-                && !command.equals(ADD_EVENT_COMMAND)) {
-            // error: unknown command
-            System.out.println("Hey! What is this gibberish?");
-        } else if (split.length < 2) {
-            // error: command empty
-            System.out.println("You gotta give me a description to work with, buddy:\nCommand \""
-                    + command + "\" cannot be empty.");
-        } else if (command.equals("todo")) {
-            Todo todo = new Todo(split[1]);
-            lst.add(todo);
-            System.out.println("You got it! I added this task:\n   "
-                    + todo.toString());
-            countTasks();
-        } else {
-            String[] separateDetails = split[1].split("/");
-            String description = separateDetails[0];
-            String date = separateDetails[1];
-            if (command.equals(ADD_DEADLINE_COMMAND)) {
-                Deadline deadline = new Deadline(description, date);
-                lst.add(deadline);
+            if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
+                    && !command.equals(ADD_EVENT_COMMAND)) {
+                // error: unknown command
+                System.out.println("Hey! What is this gibberish?");
+            } else if (split.length < 2) {
+                // error: command empty
+                System.out.println("You gotta give me a description to work with, buddy:\nCommand \""
+                        + command + "\" cannot be empty.");
+            } else if (command.equals("todo")) {
+                Todo todo = new Todo(split[1]);
+                lst.add(todo);
                 System.out.println("You got it! I added this task:\n   "
-                        + deadline.toString());
+                        + todo.toString());
+                countTasks();
             } else {
-                // command is ADD_EVENT_COMMAND
-                Event event = new Event(description, date);
-                lst.add(event);
-                System.out.println("You got it! I added this task:\n   "
-                        + event.toString());
+                String[] separateDetails = split[1].split("/by |/at ");
+                String description = separateDetails[0];
+
+                String date = separateDetails[1];
+                LocalDate localDate = LocalDate.parse(date);
+
+                if (command.startsWith(ADD_DEADLINE_COMMAND)) {
+                    Deadline deadline = new Deadline(description, localDate);
+                    lst.add(deadline);
+                    System.out.println("You got it! I added this task:\n   "
+                            + deadline.toString());
+                } else {
+                    // command is ADD_EVENT_COMMAND
+                    Event event = new Event(description, localDate);
+                    lst.add(event);
+                    System.out.println("You got it! I added this task:\n   "
+                            + event.toString());
+                }
+                countTasks();
             }
-            countTasks();
+            Duke.formatText();
+        } catch (DateTimeParseException e) {
+            System.err.println("Your date formatting is invalid, use YYYY-MM-DD please...");
+            Duke.formatText();
         }
-        Duke.formatText();
     }
 
     /**
