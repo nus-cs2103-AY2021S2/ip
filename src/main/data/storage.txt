@@ -7,3 +7,7 @@ T|0|todo4
 E|1|cs2101 meeting|on|28th Jan
 E|1|watching drama|on|25th jan night
 D|1|homework2|by|26th Jan
+T|1|newtodo3
+E|1|my birthday|on|2020-04-02
+D|0|celebrate new year|by|2nd march
+D|1|celebrate whatever|by|2020-11-23

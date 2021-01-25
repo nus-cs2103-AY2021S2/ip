@@ -8,23 +8,22 @@ public class Event extends Task {
     String keyword;
     String time;
     LocalDate timeDate;
-    public Event(String name, String time, String keyword) {
+    public Event(String name, String keyword, String time) {
         super(name);
         this.keyword = keyword;
         this.time = time;
     }
 
-    public Event(String name, String time, String keyword, boolean isDone) {
+    public Event(String name, String keyword, String time, boolean isDone) {
         super(name, isDone);
         this.keyword = keyword;
         this.time = time;
     }
 
-    public Event(String name, String time, LocalDate timeDate, String keyword) {
+    public Event(String name, String keyword, LocalDate timeDate) {
         super(name);
         this.timeDate = timeDate;
         this.keyword = keyword;
-        this.time = time;
     }
 
     @Override

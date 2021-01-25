@@ -1,54 +1,37 @@
 package main.java;
 
-import main.java.entity.*;
-import main.java.exceptions.IllegalInputFormatException;
-import main.java.exceptions.TaskDoesNotExistException;
-import main.java.exceptions.UnrecognizableInputException;
-
-import java.util.ArrayList;
-import java.util.*;
+import main.java.command.Command;
 
 public class Duke {
-    public static void main(String[] args) throws Exception {
-        TaskManager tm = new TaskManager();
-        tm.greeting();
-        Scanner sc = new Scanner(System.in);
-        String input;
-        while (sc.hasNextLine()) {
-            input = sc.nextLine();
+    private Ui ui;
+    private TaskManager tm;
+    private Parser parser;
+
+    public Duke(String filepath) {
+        this.ui = new Ui();
+        this.tm = new TaskManager(filepath);
+        this.parser = new Parser();
+    }
+
+    public void run() {
+        ui.greeting();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                if (input.toLowerCase().equals("bye")) {
-                    break;
-                }
-                if (input.trim().toLowerCase().equals("list")) {
-                    tm.list();
-                    continue;
-                }
-                if (input.toLowerCase().split(" ")[0].equals("done")) {
-                    tm.done(input);
-                    continue;
-                }
-                if (input.toLowerCase().split(" ")[0].equals("delete")) {
-                    tm.deleteTask(input);
-                    continue;
-                }
-                if (input.toLowerCase().split(" ")[0].equals("todo")) {
-                    tm.addTodo(input);
-                    continue;
-                }
-                if (input.toLowerCase().split(" ")[0].equals("deadline")) {
-                    tm.addDeadline(input);
-                    continue;
-                }
-                if (input.toLowerCase().split(" ")[0].equals("event")) {
-                    tm.addEvent(input);
-                    continue;
-                }
-                throw new UnrecognizableInputException();
+                String fullCommand = ui.readCommand();
+                ui.displayLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tm, ui);
+                isExit = c.isExit();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                ui.displayError(e.getMessage());
+            } finally {
+                ui.displayLine();
             }
         }
-        System.out.println("Bye. Until next time!");
+    }
+
+    public static void main(String[] args) {
+        new Duke("src/main/data/storage.txt").run();
     }
 }

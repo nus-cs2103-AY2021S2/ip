@@ -8,24 +8,25 @@ public class Deadline extends Task {
     String keyword;
     String deadline;
     LocalDate deadlineDate;
-    public Deadline(String name, String deadline, String keyword) {
+    public Deadline(String name, String keyword, String deadline) {
         super(name);
         this.deadline = deadline;
         this.keyword = keyword;
     }
 
-    public Deadline(String name, String deadline, String keyword, boolean isDone) {
+    public Deadline(String name, String keyword, LocalDate deadlineDate) {
+        super(name);
+        this.deadlineDate = deadlineDate;
+        this.keyword = keyword;
+    }
+
+    public Deadline(String name, String keyword, String deadline, boolean isDone) {
         super(name, isDone);
         this.deadline = deadline;
         this.keyword = keyword;
     }
 
-    public Deadline(String name, String deadline, LocalDate deadlineDate, String keyword) {
-        super(name);
-        this.deadline = deadline;
-        this.deadlineDate = deadlineDate;
-        this.keyword = keyword;
-    }
+
 
     @Override
     public String toString() {
