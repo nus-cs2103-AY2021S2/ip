@@ -29,6 +29,10 @@ public class Ui {
         System.out.println(greetings);
     }
 
+    public void displayExit() {
+        System.out.println(prefix + "Bye, until next time!");
+    }
+
     public void displayLine() {
         System.out.println("________________________");
     }

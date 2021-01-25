@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskManager tm, Ui ui) {
-
+        ui.displayExit();
     }
 
     @Override
