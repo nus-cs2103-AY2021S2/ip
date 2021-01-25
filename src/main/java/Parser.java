@@ -1,4 +1,9 @@
-import java.util.Locale;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     Parser() {}
@@ -53,7 +58,8 @@ public class Parser {
         }
     }
 
-    public static Deadline getDeadline(String input) throws DescriptionMissingException {
+    public static Deadline getDeadline(String input)
+            throws DescriptionMissingException, InvalidDateTimeException {
         if (input.length() < 10) {
             throw new DescriptionMissingException("No description?");
         } else {
@@ -64,8 +70,9 @@ public class Parser {
             } else {
                 try {
                     String name = description.substring(0, index);
-                    String ddl = description.substring(index + 5);
-                    return new Deadline(name, ddl);
+                    String deadline = description.substring(index + 5);
+                    LocalDateTime cutOffTime = parseDateTime(deadline);
+                    return new Deadline(name, cutOffTime);
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DescriptionMissingException("Missing description?");
                 }
@@ -73,7 +80,7 @@ public class Parser {
         }
     }
 
-    public static Event getEvent(String input) throws DescriptionMissingException {
+    public static Event getEvent(String input) throws DescriptionMissingException, InvalidDateTimeException {
         if (input.length() < 7) {
             throw new DescriptionMissingException("No description?");
         } else {
@@ -85,11 +92,55 @@ public class Parser {
                 try {
                     String name = description.substring(0, index);
                     String time = description.substring(index + 5);
-                    return new Event(name, time);
+                    LocalDateTime startTime = parseDateTime(time);
+                    return new Event(name, startTime);
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DescriptionMissingException("Missing description?");
                 }
             }
+        }
+    }
+
+    public static LocalDateTime parseDateTime(String dateTime) throws InvalidDateTimeException {
+        String[] dateAndTime = dateTime.strip().split(" ");
+        LocalDateTime parsedDateTime;
+
+        if (dateAndTime.length != 2) {
+            throw new InvalidDateTimeException("Input date and time is not complete.");
+        }
+        String date = dateAndTime[0].strip();
+        String time = dateAndTime[1].strip();
+        parsedDateTime = LocalDateTime.of(parseDate(date), parseTime(time));
+        return parsedDateTime;
+
+    }
+
+    public static LocalDate parseDate(String date) throws InvalidDateTimeException {
+        String[] yearMonthDay = date.strip().split("-");
+        if (yearMonthDay.length != 3) {
+            throw new InvalidDateTimeException("Input date is not valid.");
+        }
+        String year = yearMonthDay[0].strip();
+        String month = yearMonthDay[1].strip();
+        String day = yearMonthDay[2].strip();
+        if (year.length() == 4 && month.length() == 2 && day.length() == 2) {
+            try {
+                return LocalDate.parse(date);
+            } catch (DateTimeException e) {
+                throw new InvalidDateTimeException("Input date is not valid.");
+            }
+        } else {
+            throw new InvalidDateTimeException("Input date is not valid.");
+        }
+    }
+
+    public static LocalTime parseTime(String time) throws InvalidDateTimeException {
+        String hour = time.strip().substring(0, 2);
+        String minute = time.strip().substring(2, 4);
+        try {
+            return LocalTime.parse(hour + ":" + minute);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeException("Input time is not valid.");
         }
     }
 }
