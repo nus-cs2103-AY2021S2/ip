@@ -4,7 +4,7 @@ import lihua.commons.Messages;
 import lihua.tasks.Task;
 
 public class AddCommand extends Command {
-    public static final String COMMAND_WORD = "todo/event/deadline";
+    public static final String COMMAND_WORD = "todo/deadline/event";
     public static final String MESSAGE_USAGE =
             String.format(
               "%s: add a task of a specific type to the task list.\n"
