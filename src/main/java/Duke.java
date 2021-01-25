@@ -18,7 +18,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.displayTasks());
         } catch (DukeException e) {
-            ui.printExceptions(e.getMessage());
+//            ui.printExceptions(e.getMessage());
             tasks = new TaskList();
         }
     }
