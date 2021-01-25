@@ -1,6 +1,6 @@
 todo read up on blockchain
 event dinner appointment /at Jewel
-deadline CS3244 Assignment 1 /by Saturday
+deadline CS3244 Assignment 1 /by 2021-03-18 08:00
 list
 done 3
 delete 1
