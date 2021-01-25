@@ -1,10 +1,16 @@
-package duke;
+package duke.command;
+
+import duke.TaskList.TaskList;
+import duke.UI.UI;
+import duke.data.DataStorage;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     public AddCommand(String input, TaskList taskList) {
         super(input,taskList);
@@ -12,7 +18,7 @@ public class AddCommand extends Command{
 
 
     public TaskList execute(TaskList tasklist, UI ui, DataStorage storage, String type,
-                        LocalDate dueDate, LocalTime startTime, LocalTime endTime) throws DukeException {
+                            LocalDate dueDate, LocalTime startTime, LocalTime endTime) throws DukeException {
 
         switch (type) {
         case ("todo"):

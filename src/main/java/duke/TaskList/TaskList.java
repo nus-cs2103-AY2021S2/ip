@@ -1,9 +1,13 @@
-package duke;
+package duke.TaskList;
 
-import java.io.IOException;
+import duke.UI.UI;
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -16,7 +20,7 @@ public class TaskList {
 
 
     public void addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
-        taskArraylist.add(new Deadlines (description,dueDate, endTime));
+        taskArraylist.add(new Deadlines(description,dueDate, endTime));
     }
 
     public void addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {

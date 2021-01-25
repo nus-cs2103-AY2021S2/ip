@@ -1,6 +1,11 @@
-package duke;
+package duke.command;
 
-public class DoneCommand extends Command{
+import duke.data.DataStorage;
+import duke.exception.DukeException;
+import duke.TaskList.TaskList;
+import duke.UI.UI;
+
+public class DoneCommand extends Command {
 
     public DoneCommand(String input, TaskList taskList) {
         super(input, taskList);

@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.TaskList.TaskList;
+import duke.UI.UI;
+import duke.data.DataStorage;
+import duke.exception.DukeException;
 
 public class Command {
 
@@ -19,7 +24,7 @@ public class Command {
 
     }
 
-    protected static boolean isExit(){
+    public static boolean isExit(){
         return isExit;
     }
 

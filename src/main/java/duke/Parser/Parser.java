@@ -1,9 +1,15 @@
-package duke;
+package duke.Parser;
+
+import duke.command.*;
+import duke.TaskList.TaskList;
+import duke.UI.UI;
+import duke.command.*;
+import duke.data.DataStorage;
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 public class Parser {
 
