@@ -27,15 +27,20 @@ public class Kobe {
         try (BufferedReader br = new BufferedReader(
                 new FileReader(home + "/ip/src/main/data/kobe.txt", StandardCharsets.US_ASCII))) {
 
+            boolean isFileEmpty = true;
             String readLine = br.readLine();
-            do {
+            while (readLine != null) {
+                isFileEmpty = false;
                 System.out.println(readLine);
                 addItemByString(readLine);
                 readLine = br.readLine();
             }
-            while (readLine != null);
 
-            System.out.println(line + "Here are tasks that Kobe has retireved!\n" + line);
+            if (!isFileEmpty) {
+                System.out.println(line + "Here are tasks that Kobe has retireved!\n" + line);
+            }
+
+
         } catch (IOException e) {
             //do nothing
         }
