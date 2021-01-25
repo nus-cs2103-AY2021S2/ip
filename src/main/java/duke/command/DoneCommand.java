@@ -1,8 +1,11 @@
 package duke.command;
 
-import duke.*;
-import duke.task.Task;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 public class DoneCommand implements Command {
     private String fullCmd;
