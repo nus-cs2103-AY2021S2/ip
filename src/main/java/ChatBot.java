@@ -8,6 +8,8 @@ import java.net.URISyntaxException;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.BufferedReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 class ChatBot {
 
@@ -49,6 +51,8 @@ class ChatBot {
 		this.initialize();
 		if (inputs.equals("list")) {
 			this.list();
+		} else if (inputs.equals("taskson")) {
+			this.tasksOnDay(sc.nextLine().stripLeading());
 		} else if (!this.checkValid(inputs)) {
 			System.out.println("    ____________________________________________________________");
 			System.out.println("");
@@ -136,6 +140,22 @@ class ChatBot {
 		System.out.println("      Noted. I've removed this task:");
 		System.out.println("      " + t);
 		System.out.println("      now you have " + this.mem.size() + " tasks in the list.");
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+	}
+
+	void tasksOnDay(String s) {
+		LocalDate day = LocalDate.parse(s);
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+		System.out.println("      Here are the tasks on " + day.toString() + ":");
+		for (int i = 1; i <= this.mem.size(); i += 1) {
+			Task t = this.mem.get(i - 1);
+			if (t.onDay(s)) {
+				System.out.println("      " + i + ".  " + this.mem.get(i - 1));
+			}
+		}
+		
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
 	}

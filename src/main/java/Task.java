@@ -7,9 +7,10 @@ class Task {
 		this.isDone = false;
 	}
 
-	Task(String s, boolean b) {
+
+	Task(String s, boolean c) {
 		this.name = s;
-		this.isDone = b;
+		this.isDone = c;
 	}
 
 	void finish() {
@@ -25,7 +26,15 @@ class Task {
 	}
 
 	String saveName() {
+<<<<<<< HEAD
 		return String.format("task | %s | %b", this.name, this.isDone);
+=======
+		return String.format("task1!1%s1!1%b", this.name, this.isDone);
+	}
+
+	boolean onDay(String s) {
+		return !this.isDone;
+>>>>>>> branch-Level-8
 	}
 
 	public String toString() {
