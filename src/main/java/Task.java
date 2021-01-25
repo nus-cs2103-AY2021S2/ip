@@ -7,19 +7,14 @@ class Task {
     private String condition;
 
     public Task(String taskName, String type, String condition) {
-        // Thought of incorporating errors into Task instead, but decided to put it in Kobe.
-//        System.out.println("taskName: " + taskName);
-//        if (taskName.equals("")) {
-//            String errMessage = "Oh no! Kobe doesn't want your " + type + " to be empty!";
-////            System.out.println("THROWING ERROR1");
-//            throw new CustomExceptions.IncompleteDecriptionException(errMessage);
-//        }
-//        if (!(type.equals("todo") || type.equals("deadline") || type.equals("event"))) {
-//            String errMessage = "Oh no! Kobe doesn't know what you mean!";
-////            System.out.println("THROWING ERROR2");
-//            throw new CustomExceptions.IncorrectDecriptionException(errMessage);
-//        }
         this.done = false;
+        this.taskName = taskName;
+        this.type = type;
+        this.condition = condition;
+    }
+
+    public Task(boolean done, String taskName, String type, String condition) {
+        this.done = done;
         this.taskName = taskName;
         this.type = type;
         this.condition = condition;
