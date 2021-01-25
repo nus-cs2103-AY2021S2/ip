@@ -51,4 +51,30 @@ public class TaskList {
 
     }
 
+    public void findTask(String task) {
+
+        int num = 1;
+
+        for (int i = 0; i < size; i++) {
+            String string = list.get(i).toString();
+            if (string.contains(task)) {
+                System.out.println(num++ + "." + string);
+            }
+        }
+
+    }
+
+    public void dateTask(String time) {
+
+        int num = 1;
+
+        for (int i = 0; i < size; i++) {
+            String string = list.get(i).toString();
+            if (string.contains(time)) {
+                System.out.println(num++ + "." + string);
+            }
+        }
+
+    }
+
 }
