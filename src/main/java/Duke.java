@@ -1,33 +1,31 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    
+
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();
     }
-    
+
     // Constants
     private static final String LINE = "____________________________________________________________";
 
     // Attributes
     private Scanner scanner;
     private boolean isActive;
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
 
     public Duke() {
         this.scanner = new Scanner(System.in);
         this.isActive = true;
-        this.taskList = new ArrayList<>();
+        this.taskList = TaskList.createFromStorage(new Storage());
     }
 
     public void start() {
-        String greeting = "Hello! I'm Duke" + "\n"
-        + "What can I do for you?";
+        String greeting = "Hello! I'm Duke" + "\n" + "What can I do for you?";
         print(greeting);
 
-        while(isActive) {
+        while (isActive) {
             try {
                 listen();
             } catch (DukeException e) {
@@ -38,8 +36,8 @@ public class Duke {
 
     private void listen() throws DukeException {
         String input = scanner.nextLine();
-        if(input.equals("list")) {
-            printList();
+        if (input.equals("list")) {
+            print(taskList.toString());
         } else if (input.startsWith("done")) {
             int itemNo = Integer.parseInt(input.split(" ")[1]);
             markAsDone(itemNo);
@@ -61,31 +59,21 @@ public class Duke {
     }
 
     private void markAsDone(int itemNo) {
-        Task selected = taskList.get(itemNo - 1);
-        selected.markAsDone();
+        Task selected = taskList.markAsDone(itemNo - 1);
         String output = "Marked as done: \n" + selected;
         print(output);
     }
 
     private void deleteFromList(int itemNo) {
-        Task selected = taskList.get(itemNo - 1);
-        taskList.remove(itemNo - 1);
+        Task selected = taskList.delete(itemNo - 1);
         String output = "I removed this task: \n" + selected;
-        print(output);
-    }
-
-    private void printList() {
-        String output = "";
-        for(int i = 0; i < taskList.size(); i++) {
-            output += (i + 1) + ". " + taskList.get(i).toString() + "\n";
-        }
         print(output);
     }
 
     private void addTask(Task task) {
         this.taskList.add(task);
-        String output = "I've added this task: \n" + task.toString()
-        + "\n There are now " + taskList.size() + " tasks in the list.";
+        String output = "I've added this task: \n" + task.toString() + "\n There are now " + taskList.size()
+                + " tasks in the list.";
         print(output);
     }
 
@@ -99,4 +87,3 @@ public class Duke {
         System.out.println(LINE + "\n" + input + "\n" + LINE + "\n");
     }
 }
-

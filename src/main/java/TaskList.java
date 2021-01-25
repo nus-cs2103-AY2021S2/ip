@@ -1,37 +1,38 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskList {
 
-    ArrayList<Task> list;
+    private ArrayList<Task> list;
+    private Storage storage;
 
-    public TaskList() {
-        this.list = new ArrayList<Task>();
+    private TaskList(ArrayList<Task> list, Storage storage) {
+        this.list = list;
+        this.storage = storage;
     }
 
-    public TaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
-    }
-
-    public static TaskList createWithFileStrings(List<String> list) {
-        TaskList tl =  new TaskList();
-        for(String s : list) {
+    public static TaskList createFromStorage(Storage storage) {
+        ArrayList<Task> list = new ArrayList<>();
+        List<String> lines = storage.getLines();
+        for (String line : lines) {
             try {
-                Task task = parseFileString(s);
-                tl.add(task);
+                Task task = parseLine(line);
+                list.add(task);
             } catch (DukeException e) {
                 e.printStackTrace();
             }
         }
-        return tl;
+        return new TaskList(list, storage);
     }
 
-    private static Task parseFileString(String fileString) throws DukeException {
-        String[] parts = fileString.split("|");
+    private static Task parseLine(String line) throws DukeException {
+        String[] parts = line.split("\\|");
+        System.out.println(Arrays.toString(parts));
         String type = parts[0];
         boolean isDone = Boolean.valueOf(parts[1]);
         String desc = parts[2];
-        switch(type) {
+        switch (type) {
         case "T":
             return new Todo(desc, isDone);
         case "D":
@@ -43,26 +44,50 @@ public class TaskList {
         }
     }
 
-    private void saveToStorage() {
+    public void update() {
+        storage.writeLines(toStorageLines());
     }
 
-    public void markAsDone(int itemNo) {
-        Task selected = list.get(itemNo - 1);
+    public List<String> toStorageLines() {
+        List<String> lines = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            lines.add(list.get(i).toFileString());
+        }
+        return lines;
+    }
+
+    public Task get(int index) {
+        Task selected = list.get(index);
+        return selected;
+    }
+
+    public int size() {
+        return list.size();
+    }
+
+    public Task markAsDone(int itemNo) {
+        Task selected = list.get(itemNo);
         selected.markAsDone();
+        update();
+        return selected;
     }
 
-    public void delete(int itemNo) {
-        list.remove(itemNo - 1);
+    public Task delete(int itemNo) {
+        Task selected = list.get(itemNo);
+        list.remove(itemNo);
+        update();
+        return selected;
     }
 
     public void add(Task task) {
         this.list.add(task);
+        update();
     }
 
     @Override
     public String toString() {
         String output = "";
-        for(int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             output += (i + 1) + ". " + list.get(i).toString() + "\n";
         }
         return output;

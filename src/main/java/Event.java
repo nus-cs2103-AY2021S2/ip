@@ -27,6 +27,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return String.format("%s|%b|%s|%s", "E", isDone, desc, at);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + getStatusIcon() + " " + desc + " (at: " + at + ")";
     }
