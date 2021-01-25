@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
     public void process() throws DukeException {
         try {
             Task task = Storage.getTasks().get(Integer.parseInt(command[1]) - 1);
-            TaskList.markDone(task);
+            task.markDone();
             Ui.displayDone(task);
             Storage.updateDataFile();
         } catch (Exception e) {
