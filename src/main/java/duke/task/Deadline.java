@@ -28,7 +28,6 @@ public class Deadline extends Task {
         this.date = date;
     }
 
-
     public String getDate() {
         return date.toString();
     }
