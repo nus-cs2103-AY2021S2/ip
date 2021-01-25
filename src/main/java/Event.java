@@ -12,7 +12,7 @@ public class Event extends Task {
 
     public static Event deserialize(String str) {
         String[] words = str.split(" \\| ");
-        boolean isDone = words[1].equals("1");
+        boolean isDone = Boolean.parseBoolean(words[1]);
         String content = words[2];
         String at = words[3];
 
@@ -26,7 +26,7 @@ public class Event extends Task {
 
     @Override
     public String getSerialized() {
-        return String.format("E | %s | %s | %s", getSerializedIsDone(), getContent(), at);
+        return String.format("E | %s | %s | %s", getIsDone(), getContent(), at);
     }
 
     @Override

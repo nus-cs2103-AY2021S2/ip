@@ -5,7 +5,7 @@ public class Todo extends Task {
 
     public static Todo deserialize(String str) {
         String[] words = str.split(" \\| ");
-        boolean isDone = words[1].equals("1");
+        boolean isDone = Boolean.parseBoolean(words[1]);
         String content = words[2];
 
         Todo todo = new Todo(content);
@@ -18,7 +18,7 @@ public class Todo extends Task {
 
     @Override
     public String getSerialized() {
-        return String.format("T | %s | %s", getSerializedIsDone(), getContent());
+        return String.format("T | %s | %s", getIsDone(), getContent());
     }
 
     @Override

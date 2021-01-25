@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     public static Deadline deserialize(String str) {
         String[] words = str.split(" \\| ");
-        boolean isDone = words[1].equals("1");
+        boolean isDone = Boolean.parseBoolean(words[1]);
         String content = words[2];
 
         boolean isDateOnly = Boolean.parseBoolean(words[3]);
@@ -33,7 +33,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSerialized() {
-        return String.format("D | %s | %s | %s | %s", getSerializedIsDone(), getContent(),
+        return String.format("D | %s | %s | %s | %s", getIsDone(), getContent(),
                 by.getDateOnly(), by.toISODateTime());
     }
 
