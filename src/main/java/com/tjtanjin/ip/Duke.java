@@ -22,7 +22,7 @@ public class Duke {
      * Listens for input from the user.
      * @param parser class that handles parsing of input
      */
-    public static void listenInput(Parser parser) {
+    private static void listenInput(Parser parser) {
         Scanner sc = new Scanner(System.in);
         Ui.showDivider();
 
