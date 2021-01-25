@@ -51,7 +51,6 @@ public class Parser {
                     command = new InvalidCommand();
                 }
                 command.process();
-                updateDataFile();
             } catch (DukeException e) {
                 displayError(e.getMessage());
             }

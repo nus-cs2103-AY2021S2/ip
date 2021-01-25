@@ -7,31 +7,34 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static duke.Ui.*;
+import static duke.data.Data.updateDataFile;
 
 public class TaskList {
 
     public static void addTask(Task task) throws DukeException {
         try {
             Data.tasks.add(task);
+            updateDataFile();
             displayAddedTask(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }
 
-    public static void markDone(String[] command) throws DukeException {
+    public static void markDone(Task task) throws DukeException {
         try {
-            Task toMarkDone = Data.tasks.get(Integer.parseInt(command[1]) - 1);
-            toMarkDone.markDone();
-            displayDone(toMarkDone);
+            task.markDone();
+            updateDataFile();
+            displayDone(task);
         } catch (Exception e) {
-            throw new DukeException("That doesn't seem like a valid order number...");
+            throw new DukeException(e.getMessage());
         }
     }
 
     public static void deleteTask(String[] command) throws DukeException {
         try {
             Task task = Data.tasks.remove(Integer.parseInt(command[1]) - 1);
+            updateDataFile();
             displayRemovedTask(task);
         } catch (Exception e) {
             throw new DukeException("That doesn't seem like a valid order number...");
