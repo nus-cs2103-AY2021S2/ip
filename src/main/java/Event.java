@@ -1,14 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    protected String by;
+    protected LocalDate at;
 
-    public Event(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return "[D]" + super.toString() + " (by: " + at.format(formatter) + ")";
     }
 }

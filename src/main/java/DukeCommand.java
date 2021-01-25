@@ -2,6 +2,10 @@
  * DukeCommand is an enum class that allows execution of methods based on the command that user have typed in.
  */
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public enum DukeCommand {
@@ -26,7 +30,14 @@ public enum DukeCommand {
                 throw new DukeException("☹ OOPS!!! You have entered an invalid format.");
             }
 
-            Deadline newDeadline = new Deadline(inputs[0].trim(), inputs[1].trim());
+            String description = inputs[0].trim();
+            String date = inputs[1].trim();
+
+            if(!checkIsValidDate(date)) {
+                throw new DukeException("☹ OOPS!!! You have entered an invalid date format.");
+            }
+
+            Deadline newDeadline = new Deadline(description, date);
             addCommand(newDeadline, taskList);
         }
     },
@@ -106,7 +117,13 @@ public enum DukeCommand {
                 throw new DukeException("☹ OOPS!!! You have entered an invalid format.");
             }
 
-            Event newEvent = new Event(inputs[0].trim(), inputs[1].trim());
+            String description = inputs[0].trim();
+            String date = inputs[1].trim();
+            if(!checkIsValidDate(date)) {
+                throw new DukeException("☹ OOPS!!! You have entered an invalid date format.");
+            }
+
+            Event newEvent = new Event(description, date);
             addCommand(newEvent, taskList);
         }
     },
@@ -119,18 +136,33 @@ public enum DukeCommand {
          */
         @Override
         public void runCommand(String actions, List<Task> taskList) throws DukeException {
-            if (!actions.isEmpty() || !actions.isBlank()) {
-                throw new DukeException("☹ OOPS!!! I don't understand your additional command!");
-            }
-
             int listSize = taskList.size();
             if (listSize <= 0) {
                 throw new DukeException("☹ OOPS!!! Your tasks list is empty.");
             }
 
-            System.out.printf("Here are the %s in your list:%n", taskList.size() >= 2 ? "tasks" : "task");
-            for (int i = 0; i < taskList.size(); i++) {
-                System.out.printf("%d.%s%n", i + 1, taskList.get(i).toString());
+            //Clone the task list for filtering
+            List<Task> printTaskList = new ArrayList<>(taskList);
+            //If there is date in the command, only display the events or deadlines on the particular date.
+            if (!actions.isEmpty() || !actions.isBlank()) {
+                LocalDate queryDate = LocalDate.parse(actions);
+                printTaskList.removeIf(t -> {
+                    if (t instanceof Deadline) {
+                        return !(((Deadline) t).by.isEqual(queryDate));
+                    } else if (t instanceof Event) {
+                        return !((Event) t).at.isEqual(queryDate);
+                    }
+                    return true;
+                });
+            }
+
+            if (printTaskList.size() <= 0) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                throw new DukeException(String.format("☹ OOPS!!! You have no task on %s.", formatter.format(LocalDate.parse(actions))));
+            }
+            System.out.printf("Here are the %s in your list:%n", printTaskList.size() >= 2 ? "tasks" : "task");
+            for (int i = 0; i < printTaskList.size(); i++) {
+                System.out.printf("%d.%s%n", i + 1, printTaskList.get(i).toString());
             }
         }
     },
@@ -181,4 +213,14 @@ public enum DukeCommand {
         }
         return false;
     }
+
+    public static boolean checkIsValidDate(String dateString) {
+        try {
+            LocalDate.parse(dateString);
+            return true;
+        } catch (DateTimeParseException ex) {
+            return false;
+        }
+    }
+
 }
