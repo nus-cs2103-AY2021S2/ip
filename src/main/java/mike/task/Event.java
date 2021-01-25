@@ -14,9 +14,9 @@ public class Event extends Task {
      * Creates an event with a description and time of the event
      *
      * @param description a description of the event
-     * @param time the time of the event
+     * @param time        the time of the event
      */
-    public Event (String description, String time) {
+    public Event(String description, String time) {
         super(description);
         this.time = time;
         date = LocalDate.parse(time);

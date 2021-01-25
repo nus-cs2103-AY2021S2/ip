@@ -3,7 +3,7 @@ package mike.task;
 /**
  * A Task with no time limit
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Creates a ToDo Task with description
