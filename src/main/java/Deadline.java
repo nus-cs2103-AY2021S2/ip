@@ -14,6 +14,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Displays simplified version of task type, description and deadline of tasks in Duke.txt
+     * @return String format regarding the task deadline information
+     */
     @Override
     public String formatTask() {
         return String.format("D | %s", super.formatTask());

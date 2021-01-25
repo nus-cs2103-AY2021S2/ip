@@ -30,6 +30,11 @@ public class DukeBot {
         loadData();
     }
 
+    /**
+     * Bot will check whether there is a folder named data and a file Duke.txt exist in project directory
+     * @return File called Duke.txt inside project root/data directory
+     * @throws IOException if the data folder or file Duke.txt does not exist
+     */
     public File fileConfiguration() throws IOException {
         String pathDirectory = System.getProperty("user.dir") + "/data";
         String fileDirectory = pathDirectory + "/Duke.txt";
@@ -47,6 +52,9 @@ public class DukeBot {
         return dataFile;
     }
 
+    /**
+     * Save data into directory whenever user perform certain tasks like delete, done or there is a new task created
+     */
     public void saveData() throws IOException {
         File dataFile = fileConfiguration();
         FileWriter fileWriter = new FileWriter(dataFile, false);
@@ -57,6 +65,9 @@ public class DukeBot {
         fileWriter.close();
     }
 
+    /**
+     * Load data from directory whenever user request the bot to list the tasks
+     */
     public void loadData() throws IOException {
         this.taskList = new ArrayList<>();
         File dataFile = fileConfiguration();
@@ -93,6 +104,7 @@ public class DukeBot {
      * Bot will carry out the different process depending on the user input
      * @param input provided by the user
      * @throws DukeException if the user enters an invalid input
+     * @throws IOException if the data folder or file Duke.txt does not exist
      */
     public void echo(String input) throws DukeException, IOException {
         String[] commandStr = input.trim().split("\\s+");
@@ -169,6 +181,8 @@ public class DukeBot {
 
     /**
      * Manage the new task of todo, event or deadline types
+     * @param taskAction type of task (todo, event or deadline)
+     * @param taskDescription details of the task
      * @throws DukeException if the task description is empty
      */
     public void handleNewTask(String taskAction, String taskDescription) throws DukeException {
@@ -201,6 +215,7 @@ public class DukeBot {
 
     /**
      * Delete the task as entered by the user input by removing the task from the list of tasks
+     * @param index provided when user enters an input like "delete 2" to delete 2nd task on the list
      * @throws DukeException if the integer value entered by user is negative, 0 or out of list range
      */
     public void handleDeleteTask(int index) throws DukeException {

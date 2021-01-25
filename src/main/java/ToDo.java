@@ -10,6 +10,10 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Displays simplified version of task type and description in Duke.txt
+     * @return String format regarding the ToDo task
+     */
     @Override
     public String formatTask() {
         return String.format("T | %s", super.formatTask());
