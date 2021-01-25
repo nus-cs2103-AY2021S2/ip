@@ -73,6 +73,9 @@ public class Duke {
                     tasks.deleteTask(Integer.parseInt(desc[1]));
                     ui.deletedTask(tasks.taskList, task);
                     break;
+                case "find":
+                    tasks.findTasks(desc[1]);
+                    break;
                 default:
                     throw new UnclearInputException();
                 }

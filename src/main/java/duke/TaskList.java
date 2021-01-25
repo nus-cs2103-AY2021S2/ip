@@ -2,6 +2,7 @@ package duke;
 
 import duke.Tasks.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -44,5 +45,24 @@ public class TaskList {
      * @return Chosen Task*/
     public Task getTask(int n) {
         return this.taskList.get(n - 1);
+    }
+
+    public void findTasks(String s) {
+        ArrayList<Task> matched = new ArrayList<>();
+        for(Task t : taskList) {
+            String name = t.getName();
+            if(name.contains(s)) {
+                matched.add(t);
+            }
+        }
+        if(matched.size() >= 1) {
+            String msg = "Duchess: Here are the matching tasks in your list:";
+            for(int i = 0; i < matched.size(); i++) {
+                msg+= "\n" +  (i + 1) + ". " + matched.get(i);
+            }
+            System.out.println(msg);
+        } else {
+            System.out.println("Duchess: No matching tasks found!");
+        }
     }
 }
