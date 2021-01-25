@@ -6,6 +6,11 @@ public class event extends Task {
         this.date = date;
     }
 
+    public String get_date() { return date; }
+
+    @Override
+    public String get_initial() { return "E"; }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date + ")";

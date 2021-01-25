@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean done = false;
 
@@ -18,6 +18,19 @@ public class Task {
         }
     }
 
+    public String get_done() {
+        if (done) {
+            return "1";
+        }
+        return "0";
+    }
+
+    public String get_description() {
+        return description;
+    }
+
+    public abstract String get_initial();
+    public abstract String get_date();
 
     @Override
     public String toString() {
