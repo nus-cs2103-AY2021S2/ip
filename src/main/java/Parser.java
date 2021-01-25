@@ -36,6 +36,10 @@ public class Parser {
             command = new ExitCommand(action, info);
         } else if (action.equals("list")) {
             command = new ListCommand(action, info);
+        } else if (action.equals("find")) {
+            command = new FindCommand(action, info);
+        } else if (action.equals("date")) {
+            command = new DateCommand(action, info);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

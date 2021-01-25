@@ -50,4 +50,12 @@ public class Ui {
                 + size + " tasks in the list.");
     }
 
+    public void showFind() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public void showDate(String time) {
+        System.out.println("Here are the tasks occurring on " + time + " in your list:");
+    }
+
 }
