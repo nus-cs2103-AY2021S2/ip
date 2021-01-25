@@ -13,7 +13,6 @@ import java.io.*;
 
 public class Duke {
 
-    //private static final String dataFile = "test/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -77,9 +76,10 @@ public class Duke {
     }
 
     public static class Task{
+        /** The task that needs to be done, as a String */
         protected String todo;
+        /** Whether or not the task is complete */
         protected boolean done;
-        protected int type;
 
         public Task(String s) {
             this.todo = s;
@@ -90,6 +90,11 @@ public class Duke {
             this.done = true;
         }
 
+        /**
+         * Returns a String form of the current Task to be saved onto the hard disk.
+         *
+         * @return the Task as a String to be saved.
+         */
         public String saveToData() {
             if (this.done) {
                 return ("T | 1 | " + todo);
@@ -98,6 +103,12 @@ public class Duke {
             }
         }
 
+        /**
+         * Returns a nicely formatted String from the given LocalDateTime.
+         *
+         * @param date Date to be formatted.
+         * @return inputted date as a String.
+         */
         public String dateFormat(LocalDateTime date) {
             return(date.format(DateTimeFormatter.ofPattern("MMM d yyyy hhmm a")));
         }
@@ -114,6 +125,7 @@ public class Duke {
     }
 
     public static class Deadline extends Task {
+        /** The date/time that the Deadline should be done by */
         private LocalDateTime doneBy;
 
         public Deadline(String s, String doneBy) {
@@ -129,6 +141,11 @@ public class Duke {
 
         }
 
+        /**
+         * Returns a String form of the current Deadline to be saved onto the hard disk.
+         *
+         * @return the Deadline as a String to be saved.
+         */
         public String saveToData() {
             if (this.done) {
                 return ("D | 1 | " + todo + " | " + doneBy.toString().replace("T", " "));
@@ -148,6 +165,7 @@ public class Duke {
     }
 
     public static class Event extends Task {
+        /** The time at which the Event happens */
         private LocalDateTime time;
 
         public Event(String s, String time) throws DateTimeParseException {
@@ -162,6 +180,11 @@ public class Duke {
             }
         }
 
+        /**
+         * Returns a String form of the current Event to be saved onto the hard disk.
+         *
+         * @return the Event as a String to be saved.
+         */
         public String saveToData() {
             if (this.done) {
                 return ("E | 1 | " + todo + " | " + time.toString().replace("T", " "));
@@ -180,30 +203,21 @@ public class Duke {
         }
     }
 
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd + "\n");
-        fw.close();
-    }
-
-    private static void appendToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath,true);
-        fw.write(textToAdd + "\n");
-        fw.close();
-    }
-
-    private static void saveAsFile(String filePath, List<Task> l) {
-
-    }
-
     public class Storage {
 
+        /** The path of the storage file where the TaskList is stored*/
         private String filePath;
 
         public Storage(String filePath) {
             this.filePath = filePath;
         }
 
+        /**
+         * Loads a TaskList from storage, if it exists.
+         * Else creates a new storage file.
+         *
+         * @return the TaskList stored on the hard disk.
+         */
         public TaskList load() {
             File taskData = new File(filePath);
 
@@ -254,6 +268,37 @@ public class Duke {
             return leest;
         }
 
+        /**
+         * Writes the task to a file, erasing any previous data.
+         *
+         * @param filePath The storage file to be written to.
+         * @param textToAdd The data to be written.
+         * @throws IOException If the file does not exist.
+         */
+        private void writeToFile(String filePath, String textToAdd) throws IOException {
+            FileWriter fw = new FileWriter(filePath);
+            fw.write(textToAdd + "\n");
+            fw.close();
+        }
+
+        /**
+         * Appends the task to a file.
+         *
+         * @param filePath The storage file to be written to.
+         * @param textToAdd The data to be written.
+         * @throws IOException If the file does not exist.
+         */
+        private void appendToFile(String filePath, String textToAdd) throws IOException {
+            FileWriter fw = new FileWriter(filePath,true);
+            fw.write(textToAdd + "\n");
+            fw.close();
+        }
+
+        /**
+         * Saves the given TaskList to a file.
+         *
+         * @param l The TaskList to be saved.
+         */
         public void saveAsFile(TaskList l) {
             boolean isFirst = true;
             if (l.isEmpty()) {
@@ -315,6 +360,13 @@ public class Duke {
 
     public class Parser {
 
+        /**
+         * Parses a given input and performs actions as necessary based on the input.
+         * The main driver of the Duke class.
+         *
+         * @param leest The current TaskList.
+         * @param input Input that is being read in.
+         */
         public void parse(TaskList leest, String input) {
 
             String[] split = input.split("\\s+");
@@ -401,6 +453,9 @@ public class Duke {
 
         }
 
+        /**
+         * Greets the user with a fancy image.
+         */
         public void greet() {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -425,6 +480,11 @@ public class Duke {
             System.out.println("Now you have " + listSize + " task(s) in the list uwu");
         }
 
+        /**
+         * Prints an error message as required.
+         *
+         * @param s The error message to be printed.
+         */
         public void errorMessage(String s) {
             switch (s) {
                 case "unknownInput":
@@ -471,6 +531,11 @@ public class Duke {
             System.out.println(t);
         }
 
+        /**
+         * Prints the given TaskList in a user-friendly format.
+         *
+         * @param tl The TaskList to be printed.
+         */
         public void showList(TaskList tl) {
             System.out.println("Here are the tasks in your list uwu:");
             int counter = 1;
@@ -499,10 +564,13 @@ public class Duke {
 
         ui.greet();
 
+        // Continuously read input and performs commands until the user enters "bye"
         while (true) {
             String input = fio.nextLine();
             parser.parse(taskList, input);
-
+            if (input.equals("bye")) {
+                break;
+            }
         }
     }
 
