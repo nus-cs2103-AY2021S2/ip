@@ -26,6 +26,7 @@ public class Duke {
 
         // REPL
         ArrayList<Task> userData = new ArrayList<>();
+        TaskList tasks = new TaskList();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in));
         boolean stopProgram = false;
@@ -40,27 +41,27 @@ public class Duke {
                     stopProgram = true;
                     break;
                 case LIST:
-                    Duke.respondList(userData);
+                    Duke.respondList(tasks);
                     break;
                 case DONE:
                     arg = DukeCommand.getArgument(s);
-                    Duke.processDone(arg, userData);
+                    Duke.processDone(arg, tasks);
                     break;
                 case DELETE:
                     arg = DukeCommand.getArgument(s);
-                    Duke.processDelete(arg, userData);
+                    Duke.processDelete(arg, tasks);
                         break;
                 case TODO:
                     arg = DukeCommand.getArgument(s);
-                    Duke.processTodo(arg, userData);
+                    Duke.processTodo(arg, tasks);
                     break;
                 case DEADLINE:
                     arg = DukeCommand.getArgument(s);
-                    Duke.processDeadline(arg, userData);
+                    Duke.processDeadline(arg, tasks);
                     break;
                 case EVENT:
                     arg = DukeCommand.getArgument(s);
-                    Duke.processEvent(arg, userData);
+                    Duke.processEvent(arg, tasks);
                     break;
                 }
             } catch (DukeException | IOException e) {
@@ -69,46 +70,45 @@ public class Duke {
         }
     }
 
-    private static void processDone(String s, ArrayList<Task> taskList) throws DukeExceptionIllegalArgument {
+    // TODO: Shift TaskList size checking to TaskList
+    private static void processDone(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         int idx;
         try {
             idx = Integer.parseInt(s) - 1;
         } catch (Exception e) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
         }
-        if (taskList.size() <= idx || idx < 0) {
+        if (tasks.size() <= idx || idx < 0) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
         }
-        Task t = taskList.get(idx);
-        t.setDone();
-        Duke.respondDone(t);
+        tasks.setDone(idx);
+        Duke.respondDone(tasks.getTask(idx));
     }
 
-    private static void processDelete(String s, ArrayList<Task> taskList) throws DukeExceptionIllegalArgument {
+    private static void processDelete(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         int idx;
         try {
             idx = Integer.parseInt(s) - 1;
         } catch (Exception e) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The integer cannot be parsed.");
         }
-        if (taskList.size() <= idx || idx < 0) {
+        if (tasks.size() <= idx || idx < 0) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
         }
-        Task t = taskList.get(idx);
-        taskList.remove(idx);
-        Duke.respondDelete(t, taskList);
+        Task t = tasks.getTask(idx);
+        tasks.deleteTask(idx);
+        Duke.respondDelete(t, tasks);
     }
 
-    private static void processTodo(String s, ArrayList<Task> taskList) throws DukeExceptionIllegalArgument {
+    private static void processTodo(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         if (s.equals("")) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        Task t = new ToDo(s);
-        taskList.add(t);
-        Duke.respondAdd(t, taskList);
+        Task t = tasks.addTodo(s);
+        Duke.respondAdd(t, tasks);
     }
 
-    private static void processDeadline(String s, ArrayList<Task> taskList) throws DukeExceptionIllegalArgument {
+    private static void processDeadline(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         if (s.equals("")) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
@@ -119,12 +119,11 @@ public class Duke {
         if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline must have a due date.");
         }
-        Task t = new Deadline(tokens[0], tokens[1]);
-        taskList.add(t);
-        Duke.respondAdd(t, taskList);
+        Task t = tasks.addDeadline(tokens[0], tokens[1]);
+        Duke.respondAdd(t, tasks);
     }
 
-    private static void processEvent(String s, ArrayList<Task> taskList) throws DukeExceptionIllegalArgument {
+    private static void processEvent(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         if (s.equals("")) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of an event cannot be empty.");
         }
@@ -135,9 +134,8 @@ public class Duke {
         if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! An event must have a time.");
         }
-        Task t = new Event(tokens[0], tokens[1]);
-        taskList.add(t);
-        Duke.respondAdd(t, taskList);
+        Task t = tasks.addEvent(tokens[0], tokens[1]);
+        Duke.respondAdd(t, tasks);
     }
 
     private static void respondDone(Task t) {
@@ -147,28 +145,27 @@ public class Duke {
         Duke.respond(lines);
     }
 
-    private static void respondList(ArrayList<Task> taskList) {
+    private static void respondList(TaskList tasks) {
         ArrayList<String> lines = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task t = taskList.get(i);
-            lines.add((i+1) + "." + t);
+        for (int i = 0; i < tasks.size(); i++) {
+            lines.add((i+1) + "." + tasks.getTask(i));
         }
         Duke.respond("Here are the tasks in your list:", lines);
     }
 
-    private static void respondDelete(Task t, ArrayList<Task> taskList) {
+    private static void respondDelete(Task t, TaskList tasks) {
         Duke.respond(
                 "Noted. I've removed this task:",
                 List.of("  " + t),
-                "Now you have " + taskList.size() + " tasks in the list."
+                "Now you have " + tasks.size() + " tasks in the list."
         );
     }
 
-    private static void respondAdd(Task t, ArrayList<Task> taskList) {
+    private static void respondAdd(Task t, TaskList tasks) {
         Duke.respond(
                 "Got it. I've added this task:",
                 List.of("  " + t),
-                "Now you have " + taskList.size() + " tasks in the list.");
+                "Now you have " + tasks.size() + " tasks in the list.");
     }
 
     // General method
