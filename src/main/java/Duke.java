@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -94,7 +96,7 @@ public class Duke {
                                     throw new DukeException("       OOPS!!! The due date of a deadline "
                                             + "cannot be empty.");
                                 } else {
-                                    tasks.add(new Deadline(details[0], details[1]));
+                                    tasks.add(new Deadline(details[0], LocalDate.parse(details[1])));
                                 }
                             }
                             break;
@@ -108,7 +110,7 @@ public class Duke {
                                     throw new DukeException("       OOPS!!! The time frame of an event "
                                             + "cannot be empty.");
                                 } else {
-                                    tasks.add(new Event(details[0], details[1]));
+                                    tasks.add(new Event(details[0], LocalDate.parse(details[1])));
                                 }
                             }
                             break;
@@ -124,6 +126,8 @@ public class Duke {
             System.out.println(ex.getMessage());
         } catch (IllegalArgumentException ex) {
             System.out.println("       OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } catch (DateTimeParseException ex) {
+            System.out.println("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
         } finally {
             System.out.println("    ____________________________________________________________\n");
             if (!input.equals("bye")) {
