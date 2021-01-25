@@ -27,6 +27,20 @@ public class TodosView {
     }
 
     /**
+     * Takes in a matching TodosList and returns a rendered view of the todos with a specified
+     * header
+     * 
+     * @param matchingTodosList List of Optional Todos that matches the keywords to be rendered
+     */
+    public void matchListTodos(List<Optional<? extends Todo>> matchingTodosList) {
+        printWithSpacing(String.format("Here are the matching tasks in your list:\n%s",
+                IntStream.range(0, matchingTodosList.size())
+                        .mapToObj(idx -> String.format("%d.%s", idx + 1,
+                                renderTodoLine(matchingTodosList.get(idx))))
+                        .collect(Collectors.joining("\n"))));
+    }
+
+    /**
      * Turns the todosList into a stream of messages from Todos and output them with a new line in
      * between each Todo
      * 

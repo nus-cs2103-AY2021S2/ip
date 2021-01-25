@@ -105,6 +105,11 @@ public class Ui {
                         greeting.printErrorMessage(e);
                     }
                     break;
+                    
+                case FIND:
+                    // find a todo with the relevant keyword
+                    todosController.findByKeyword(command.getCommandArgs());
+                    break;
 
                 case BYE:
                     // break out of main function

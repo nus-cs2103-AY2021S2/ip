@@ -77,7 +77,7 @@ public class Event extends Todo {
      * @return String to be rendered to give information on the Event
      */
     public String getMessage() {
-        return String.format("[E][%s] %s (at:%s)", this.getIsDoneIcon(), this.message,
+        return String.format("[E][%s] %s (at: %s)", this.getIsDoneIcon(), this.message,
                 this.getPrettierEventTime());
     }
 

@@ -78,7 +78,7 @@ public class Deadline extends Todo {
      * @return String to be rendered to give information on the Deadline
      */
     public String getMessage() {
-        return String.format("[D][%s] %s (by:%s)", this.getIsDoneIcon(), this.message,
+        return String.format("[D][%s] %s (by: %s)", this.getIsDoneIcon(), this.message,
                 this.getPrettierDeadlineDateTime());
     }
 
