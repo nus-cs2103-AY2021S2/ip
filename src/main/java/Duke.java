@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,8 +11,9 @@ public class Duke {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         int numberOfTasks = 0;
         String input, description = "", time = "";
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         String[] descriptionAndTime;
+        LocalDate date = null;
         System.out.println(greeting);
         Command taskType = Command.NONE;
 
@@ -54,18 +57,19 @@ public class Duke {
                                     "    ☹ OOPS!!! The description of a " + taskInformation[0] + " cannot be empty.\n");
                         }
                         if (!taskType.equals(Command.TODO)) {
-                            descriptionAndTime = taskInformation[1].split("/");
+                            descriptionAndTime = taskInformation[1].split("/", 2);
                             if (descriptionAndTime.length < 2) {
                                 throw new TaskException(
                                         "    ☹ OOPS!!! The time of a " + taskInformation[0] + " cannot be empty.\n");
                             }
                             description = descriptionAndTime[0];
                             time = descriptionAndTime[1].split(" ", 2)[1];
+                            date = LocalDate.parse(time, formatter);
                         }
 
-                        listOfTasks.add(taskType.equals(Command.EVENT) ? new Event(description, time)
+                        listOfTasks.add(taskType.equals(Command.EVENT) ? new Event(description, date)
                                 : taskType.equals(Command.TODO) ? new ToDo(taskInformation[1])
-                                        : new Deadlines(description, time));
+                                        : new Deadlines(description, date));
                         System.out.println("    Got it. I've added this task: ");
                         System.out.println("      " + listOfTasks.get(numberOfTasks).getStatus());
                         numberOfTasks++;
