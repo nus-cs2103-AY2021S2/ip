@@ -4,13 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String PARTING_LINE = "____________________________________________________________";
-    private static ArrayList<Task> tasks = new ArrayList<>();
-    private static String FILE_PATH = System.getProperty("user.dir") + "/duke.txt";
+    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final String FILE_PATH = System.getProperty("user.dir") + "/duke.txt";
+    private static final String PARTING_LINE = "____________________________________________________________";
 
     public static void main(String[] args) {
         printGreeting();
