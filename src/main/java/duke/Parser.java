@@ -59,6 +59,9 @@ public class Parser {
                 case DELETE:
                     command = new DeleteCommand(args);
                     break;
+                case FIND:
+                    command = new FindCommand(args);
+                    break;
                 case INVALID:
                 default:
                     command = new InvalidCommand();

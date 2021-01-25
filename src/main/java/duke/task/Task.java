@@ -2,8 +2,8 @@ package duke.task;
 
 public abstract class Task {
 
-    String description;
-    boolean isDone;
+    public String description;
+    public boolean isDone;
 
     public Task(String description) {
         this.description = description;

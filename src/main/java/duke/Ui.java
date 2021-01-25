@@ -83,6 +83,20 @@ public class Ui {
         display(sb.toString());
     }
 
+    public static void displayMatchingTasks(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        if (tasks.size() == 0) {
+            sb.append("I can't seem to find an order matching your keyword!");
+        } else {
+            sb.append("Here are the orders that match!\n\n");
+            for (int i = 1; i <= tasks.size(); i++) {
+                String formattedTask = i + ". " + tasks.get(i - 1).toString();
+                sb.append(formattedTask);
+            }
+        }
+        display(sb.toString());
+    }
+
     /**
      * Prints added task.
      *

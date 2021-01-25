@@ -11,5 +11,6 @@ public enum CommandType {
     DONE,
     LIST,
     DELETE,
+    FIND,
     INVALID
 }
