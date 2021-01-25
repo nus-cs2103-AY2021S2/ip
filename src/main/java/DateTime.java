@@ -26,7 +26,7 @@ public class DateTime {
                 .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
                 .toFormatter();
 
-        DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+        DATETIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm dd MMM yyyy");
         DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
     }
 
@@ -56,7 +56,7 @@ public class DateTime {
     @Override
     public String toString() {
         if (dateOnly) {
-            return  ldt.format(DATE_FORMATTER);
+            return ldt.format(DATE_FORMATTER);
         }
 
         return ldt.format(DATETIME_FORMATTER);
