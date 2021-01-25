@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 public class Ui {
     private static final String TOP_BORDER = "╭------------------------------------------------------╮";
     private static final String BTM_BORDER = "╰|╱ ---------------------------------------------------╯";

@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     private static final String TOP_BORDER = "_____________________________________________________________________";
     private static final String BTM_BORDER = "---------------------------------------------------------------------";

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Task;
+import duke.TaskList;
+
 public class DeleteCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;

@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.*;
+import duke.task.Task;
+import duke.TaskList;
+
 public class DoneCommand implements Command {
     private String fullCmd;
     private String[] fullCmdStrArray;

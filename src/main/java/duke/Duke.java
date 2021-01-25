@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -11,7 +15,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        ui.printGreeting();
 
         try {
             storage.initializeTaskList(taskList);
@@ -21,6 +24,7 @@ public class Duke {
     }
 
     public void run() {
+        ui.printGreeting();
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {
