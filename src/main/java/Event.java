@@ -15,6 +15,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Displays simplified version of task type, description and timeframe of tasks in Duke.txt
+     * @return String format regarding the Event details
+     */
     @Override
     public String formatTask() {
         return String.format("E | %s", super.formatTask());
