@@ -33,6 +33,6 @@ public class Event extends Task {
     }
 
     public String toFileString() {
-        return "E | " + ((isDone) ? 1 : 0) + " | " + description + " | " + at;
+        return "E | " + ((isDone) ? 1 : 0) + " | " + description + " | " + at.format(fmt);
     }
 }

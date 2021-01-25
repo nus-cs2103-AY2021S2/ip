@@ -22,7 +22,6 @@ public class FileLoader {
     public void write(TaskList t) {
         try (FileWriter writer = new FileWriter(f, false)){
             for (String s: t.asArrayList()) {
-                System.out.println(s);
                 writer.write(s+'\n');
             }
         } catch (IOException e) {
@@ -37,7 +36,6 @@ public class FileLoader {
             String line;
             ArrayList<String> tasks = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
                 tasks.add(line);
             }
             return new TaskList(tasks);
