@@ -75,7 +75,7 @@ public class Ui {
     }
 
     public void printErrorMsg(DukeSaveFileException e) {
-        out.println(e);
+        out.println(Message.getErrorMsg(e));
     }
 
     public void printErrorMsg(DukeCreateFileException e) {
