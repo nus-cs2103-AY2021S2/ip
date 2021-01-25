@@ -1,14 +1,14 @@
 package main.java;
 
 public class DukeException extends Exception {
-    private final String err;
+    // private final String err;
 
     public DukeException(String err) {
-        this.err = err;
+        super(err);
     }
 
     @Override
     public String toString() {
-        return err;
+        return this.getMessage();
     }
 }
