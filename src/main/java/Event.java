@@ -6,6 +6,7 @@ public class Event extends Task {
 
     private LocalDateTime at;
     private final String type = "E";
+    private String separator = " | ";
 
     public Event(String description, String at) throws DukeException{
         super(description);
@@ -34,6 +35,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String time = this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
-        return "[E]" + super.toString() + " (at: " + time + ")";
+//        return "[E]" + super.toString() + " (at: " + time + ")";
+        return type + separator + super.toString() + separator + time;
     }
 }

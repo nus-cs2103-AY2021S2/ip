@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     private LocalDateTime by;
     private final String type = "D";
+    private String separator = " | ";
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -39,6 +40,7 @@ public class Deadline extends Task {
     public String toString() {
         String time = this.getTime();
 //       this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
-        return "[D]" + super.toString() + " (by: " + time + ")";
+//        return "[D]" + super.toString() + " (by: " + time + ")";
+        return type + separator + super.toString() + separator + time;
     }
 }

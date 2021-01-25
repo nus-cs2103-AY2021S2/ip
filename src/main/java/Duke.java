@@ -76,7 +76,6 @@ public class Duke {
         taskList.add("event");
         taskList.add("done");
         taskList.add("delete");
-        String line = "---------------------------------------------";
 
         while (input.hasNextLine()) {
             String s = input.nextLine();
@@ -90,9 +89,7 @@ public class Duke {
                 try {
                     executeTask(s, taskList, tasks);
                 } catch (DukeException e) {
-                    System.out.println("---------------------------------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("---------------------------------------------");
+                    ui.showErrorMessage(e);
                 }
             }
         }
@@ -111,9 +108,7 @@ public class Duke {
                 markTask(parts, myList);
                 FileWriting.saveTaskList(myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
 
@@ -122,9 +117,7 @@ public class Duke {
                 deleteTask(parts, myList);
                 FileWriting.saveTaskList(myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
 
@@ -133,9 +126,7 @@ public class Duke {
                 addToDo(parts, myList);
                 FileWriting.saveTaskList(myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
 
@@ -144,9 +135,7 @@ public class Duke {
                 addDeadline(parts, myList);
                 FileWriting.saveTaskList(myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
         if (taskType.toLowerCase().equals("event")) {
@@ -154,9 +143,7 @@ public class Duke {
                 addEvent(parts, myList);
                 FileWriting.saveTaskList(myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
     }
@@ -185,9 +172,7 @@ public class Duke {
             try {
                 completeTask(parts, myList);
             } catch (DukeException e) {
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
     }
@@ -215,9 +200,7 @@ public class Duke {
             try {
                 removeTask(parts, myList);
             } catch (DukeException e){
-                System.out.println("---------------------------------------------");
-                System.out.println(e.getMessage());
-                System.out.println("---------------------------------------------");
+                ui.showErrorMessage(e);
             }
         }
     }

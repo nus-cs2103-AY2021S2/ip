@@ -61,4 +61,10 @@ public class Ui {
         System.out.println("OOPS!! Duke fails to load, please restart!");
         System.out.println("---------------------------------------------");
     }
+
+    public void showErrorMessage(DukeException e){
+        System.out.println("---------------------------------------------");
+        System.out.println(e.getMessage());
+        System.out.println("---------------------------------------------");
+    }
 }
