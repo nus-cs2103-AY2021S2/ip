@@ -1,7 +1,11 @@
 // Original definition from the webpage of course
 // https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 
+import java.time.format.DateTimeFormatter;
+
 public class Task {
+    protected static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected static DateTimeFormatter outfmt = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
     protected String description;
     protected boolean isDone;
 
