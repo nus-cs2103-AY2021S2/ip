@@ -19,10 +19,7 @@ public class Tasks {
         tasks = new ArrayList<Task>();
     }
 
-    /**
-     * Add the given task into the list, with necessary information printed
-     * @param userInput User input is assumed to be in the format of adding new tasks
-     */
+    /*
     public void addTask(String userInput) {
         try {
             Task task = null;
@@ -60,15 +57,51 @@ public class Tasks {
         }
     }
 
-    public void addTask(Task t) {
+     */
+
+    public void addTask(Task t) throws Exception {
         tasks.add(t);
+    }
+
+    public Task removeTask(int i) throws IndexOutOfBoundsException {
+        Task t = tasks.remove(i - 1);
+        return t;
+    }
+
+    public Task getTaskDone(int i) throws IndexOutOfBoundsException {
+        tasks.get(i).setDone(true);
+        Task t  = tasks.get(i - 1);
+        return t;
+    }
+
+    public String listTasks(LocalDate date) {
+        String message = "";
+        // tasks is not null, but maybe empty
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (date != null) {
+                // list on a specific date
+                // date is not null here
+                if (date.equals(tasks.get(i - 1).getDate())) {
+                    // getDate() is not null here
+                    message += String.format("%d. %s\n", i, tasks.get(i - 1));
+                }
+            } else {
+                message += String.format("%d. %s\n", i, tasks.get(i - 1));
+            }
+        }
+        if (message.equals("")) {
+            message = "You do not have any task right now. Please add one first. :')";
+        } else {
+            message = "Here are all your tasks:\n" + message + "Good luck. :D";
+        }
+        return message;
     }
 
     /**
      * Get the given task done, print out the result for reference
      * @param index 1-based index number referring to the specific task in the list
      */
-    private void getTaskDone(int index) {
+    /*private void getTaskDone(int index) {
         if (tasks.size() == 0) {
             reportNoTaskRightNow();
             return;
@@ -81,7 +114,7 @@ public class Tasks {
         } catch (IndexOutOfBoundsException e) {
             reportInvalidIndexNumber();
         }
-    }
+    }*/
 
     /**
      * Get the given task done, represented by the user input string
@@ -212,5 +245,9 @@ public class Tasks {
             jsonArray.add(tasks.get(i).toJsonObject());
         }
         return jsonArray;
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }

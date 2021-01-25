@@ -12,25 +12,28 @@ public class Ui {
     }
 
     public void printGetHelpMessage() {
-        System.out.println("Sorry, I do not understand your command :')");
-        System.out.println("If you are stuck, type 'help' to get a list of operations available");
+        System.out.println(Messages.MESSAGE_GET_HELP);
     }
 
     public void printHello() {
         printHorizontalLine();
-        String welcome = "Hello! My name is Lihua.\n"
-                + "What can I do for you today? (=~ω~=)";
-        System.out.println(welcome);
-        printHorizontalLine();
-    }
-
-    public void printGoodbye() {
-        printHorizontalLine();
-        System.out.println("Goodbye! Hope to see you again soon! (=~ω~=)");
+        System.out.println(Messages.MESSAGE_HELLO);
         printHorizontalLine();
     }
 
     public void printHorizontalLine() {
-        System.out.println("-------------------------------------------------");
+        System.out.println(Messages.MESSAGE_LINE);
+    }
+
+    public void showFeedbackToUser(CommandResult result) {
+        printHorizontalLine();
+        System.out.println(result.getFeedBack());
+        printHorizontalLine();
+    }
+
+    public void showFeedbackToUser(String feedback) {
+        printHorizontalLine();
+        System.out.println(feedback);
+        printHorizontalLine();
     }
 }

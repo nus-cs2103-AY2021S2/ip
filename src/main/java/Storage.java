@@ -49,9 +49,12 @@ public class Storage {
                 tasks.addTask(t);
             }
             // System.out.println("Successfully loaded task data :D");
-        } catch (IOException e) {
+        /*} catch (IOException e) {
             System.out.println("Something bad happens, cannot load data. :')");
         } catch (ParseException e) {
+            System.out.println("Something bad happens, cannot load data. :')");
+        */
+        } catch (Exception e) {
             System.out.println("Something bad happens, cannot load data. :')");
         }
         return tasks;
