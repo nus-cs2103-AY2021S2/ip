@@ -30,7 +30,8 @@ public class Task {
      * @return Tick if marked as done, empty string if not done
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick
+        // Return tick if done
+        return (isDone ? "\u2713" : " ");
     }
 
     /**
