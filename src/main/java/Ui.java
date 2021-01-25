@@ -39,10 +39,18 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Prompt for user to key in the next input.
+     */
     public void prompt() {
         out.print(this.username + ": ");
     }
 
+    /**
+     * Show the user that a todo task has been added.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks Total number of tasks in the list.
+     */
     public void todoMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
@@ -50,6 +58,11 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Show the user that a deadline task has been added.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks Total number of tasks in the list.
+     */
     public void deadlineMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
@@ -57,6 +70,11 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Show the user that a event task has been added.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks Total number of tasks in the list.
+     */
     public void eventMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
@@ -64,6 +82,11 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Show the user that a task of choice has been deleted.
+     * @param taskRemoved The description of the task deleted.
+     * @param totalTasks Total number of tasks in the list.
+     */
     public void deleteMsg(String taskRemoved, int totalTasks) {
         out.println(DIVIDER);
         out.println("Noted. I've removed this task:\n" + "    " + taskRemoved);
@@ -71,12 +94,22 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Show the user that a task has been marked done.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param itemNum The item number that is marked done.
+     */
     public void doneMsg(ArrayList<Task> tasks, int itemNum) {
         out.println(DIVIDER);
         out.println("Nice! I've marked this task as done:\n" + "    " + tasks.get(itemNum - 1).toString());
         out.println(DIVIDER);
     }
 
+    /**
+     * Show the user the list of tasks.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks Total number of tasks in the list.
+     */
     public void listMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Here are the tasks in your list:");
@@ -87,6 +120,9 @@ public class Ui {
         out.println(DIVIDER);
     }
 
+    /**
+     * Showing user bye message when user ends the program.
+     */
     public void byeMsg() {
         out.println(DIVIDER);
         out.println("Bye " + this.username + "! Hope to see you again soon!");

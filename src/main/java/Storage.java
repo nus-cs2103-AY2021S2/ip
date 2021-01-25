@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Storage {
+
+    /** Default path to store the user tasks. */
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
     public static ArrayList<Task> tasks;
 
@@ -17,6 +19,10 @@ public class Storage {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Read file if it exist, else will create a new file with the name.
+     * @throws IOException Throw IO exception.
+     */
     public void readOrCreateFile() throws IOException {
         File myObj = new File(DEFAULT_STORAGE_FILEPATH);
         if (myObj.exists()) {
@@ -68,6 +74,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Update the tasks into the file at the end of the program.
+     * @throws FileNotFoundException Throw exception if file does not exist, should not happen.
+     */
     public void writeListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
         for (Task item: tasks) {

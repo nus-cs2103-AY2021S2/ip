@@ -15,6 +15,10 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Main logic for the Duke project to run.
+     * @throws IOException Throws IO exception.
+     */
     public void run() throws IOException {
         ui.welcomeMsg();
         ui.nameMsg();

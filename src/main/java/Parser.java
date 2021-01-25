@@ -7,6 +7,7 @@ public class Parser {
 
     private final Scanner in;
     private final PrintStream out;
+
     /** The number of tasks at the start of the program. */
     public static int totalTasks = 0;
     /** A boolean function to check if the user decides to terminate the program. */
@@ -21,6 +22,11 @@ public class Parser {
         this.out = out;
     }
 
+    /**
+     * Process the user input to make sense for the system.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param ui UI structure to show the user correct display.
+     */
     public void processInput(ArrayList<Task> tasks, Ui ui) {
         String nextInput = in.nextLine();
         String command = nextInput.contains(" ") ? nextInput.split(" ")[0] : nextInput;
@@ -65,6 +71,7 @@ public class Parser {
      * Adds a Todo task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param ui UI structure to show the user correct display.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public void todo(String nextInput, ArrayList<Task> tasks, Ui ui) throws DukeException{
@@ -81,6 +88,7 @@ public class Parser {
      * Adds a Deadline task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param ui UI structure to show the user correct display.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public void deadline(String nextInput, ArrayList<Task> tasks, Ui ui) throws DukeException{
@@ -97,9 +105,10 @@ public class Parser {
     }
 
     /**
-     * Adds an Event task.
+     * Adds a Event task.
      * @param nextInput The description of the task.
      * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param ui UI structure to show the user correct display.
      * @throws DukeException Exception thrown if the command given is invalid.
      */
     public void event(String nextInput, ArrayList<Task> tasks, Ui ui) throws DukeException{
@@ -120,6 +129,7 @@ public class Parser {
      * @param command The command given by user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param count The current number of tasks stored inside the Task Arraylist.
+     * @param ui UI structure to show the user correct display.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public void done(String command, ArrayList<Task> tasks, int count, Ui ui) throws DukeException{
@@ -140,6 +150,7 @@ public class Parser {
      * @param command The command given by user input.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param count The current number of tasks stored inside the Task Arraylist.
+     * @param ui UI structure to show the user correct display.
      * @throws DukeException Exception thrown if the number given is out of range.
      */
     public void delete(String command, ArrayList<Task> tasks, int count, Ui ui) throws DukeException {
@@ -161,6 +172,7 @@ public class Parser {
      * List out all user inputs in sequence.
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param totalTasks The current number of tasks stored inside the Task Arraylist.
+     * @param ui UI structure to show the user correct display.
      */
     public void list(ArrayList<Task> tasks, int totalTasks, Ui ui) {
         ui.listMsg(tasks, totalTasks);
