@@ -6,7 +6,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
         int num, size;
         Task t;
 
@@ -26,7 +25,6 @@ public class DeleteCommand extends Command {
             ui.showDelete(t, size);
             storage.store(tasks.list);
         }
-
     }
 
     @Override

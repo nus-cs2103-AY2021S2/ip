@@ -5,7 +5,6 @@ import java.time.format.DateTimeParseException;
 public class Parser {
 
     public static Command parse(String string) throws DukeException {
-
         String action, info;
         Command command;
 
@@ -36,7 +35,6 @@ public class Parser {
     }
 
     public static String getTask(String info) throws DukeException {
-
         String task;
 
         if (info.equals("")) {
@@ -51,11 +49,9 @@ public class Parser {
         }
 
         return task;
-
     }
     
     public static String getTimeAt(String info) throws DukeException {
-        
         String time;
 
         if (info.contains(" /at ")) {
@@ -74,7 +70,6 @@ public class Parser {
     }
 
     public static String getTimeBy(String info) throws DukeException {
-
         String time;
 
         if (info.contains(" /by ")) {
@@ -91,4 +86,5 @@ public class Parser {
 
         return time;
     }
+
 }
