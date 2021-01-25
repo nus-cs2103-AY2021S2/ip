@@ -21,13 +21,16 @@ public class Duke {
         }
     }
 
-    public void run(){
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String input = sc.nextLine();
+    public void run() {
+        boolean isExit = false;
+        while (!isExit) {
+            String fullCommand = ui.fullCommand();
             try {
-                ui.handleCommand(input, tasks, storage);
-            } catch (DukeException dukeEx) {
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            }
+            catch (DukeException dukeEx) {
                 // Echoes out reason for invalid inputs
                 ui.response(dukeEx.toString());
             }

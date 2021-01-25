@@ -26,7 +26,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
 
             while (sc.hasNext()) {
-                String[] taskInfo = sc.nextLine().split("[ | ]+");
+                String[] taskInfo = sc.nextLine().split(" \\| ");
                 Task task = new Task("");
                 switch(taskInfo[0]) {
                 case "T":
@@ -38,7 +38,7 @@ public class Storage {
                     task = new Deadline(taskInfo[2], LocalDate.parse(taskInfo[3]));
                     break;
                 case "E":
-                    //Event task
+                    // Event task
                     task = new Event(taskInfo[2], LocalDate.parse(taskInfo[3]));
                     break;
                 default:
@@ -69,7 +69,7 @@ public class Storage {
                 fileWriter.write(task.writeContentFormat() + System.lineSeparator());
             }
             fileWriter.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new DukeException(DukeExceptionType.SAVE_ERROR);
         }
     }
@@ -84,7 +84,7 @@ public class Storage {
                 // Create duke.txt if do not exist
                 file.createNewFile();
             }
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             throw new DukeException(DukeExceptionType.FILE_CREATION_ERROR);
         }
     }
