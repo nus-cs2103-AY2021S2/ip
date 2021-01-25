@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String[] commandSplit) {
@@ -5,7 +10,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    void execute(TaskList list) throws DukeException {
+    public void execute(TaskList list) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(commandSplit[1]);
             list.done(taskNumber);

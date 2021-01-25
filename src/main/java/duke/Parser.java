@@ -1,3 +1,18 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.command.DeleteCommand;
+import duke.command.ByeCommand;
+import duke.task.Helper;
+import duke.task.Task;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+import duke.task.TaskException;
+
 import java.util.regex.Pattern;
 
 public class Parser {
@@ -25,9 +40,9 @@ public class Parser {
     }
 
     /**
-     * Parses input string as a Task.
+     * Parses input string as a duke.task.Task.
      * @param input input string to be parsed.
-     * @return Task object corresponding to input string.
+     * @return duke.task.Task object corresponding to input string.
      */
     public static Task stringToTask(String input) throws TaskException, DukeException {
         //Check if it is a valid task first
@@ -51,7 +66,9 @@ public class Parser {
                 if (matchDeadline) {
                     //Index of /by
                     int byIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(by:");
-                    String taskDescription = Helper.join(inputSplitBySpaces, 2, byIndex - 1);
+                    //E.g. [ ] sample_description
+                    String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, byIndex - 1);
+                    String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
                     String dueDateWithClosingBracket = Helper.join(inputSplitBySpaces, byIndex + 1,
                             inputSplitBySpaces.length - 1);
                     String dueDate = dueDateWithClosingBracket.substring(0, dueDateWithClosingBracket.length() - 1);
@@ -59,7 +76,9 @@ public class Parser {
                 } else {
                     //Index of /at
                     int atIndex = Helper.arrayIndexOf(inputSplitBySpaces, "(at:");
-                    String taskDescription = Helper.join(inputSplitBySpaces, 2, atIndex - 1);
+                    //E.g. [ ] sample_description
+                    String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1, atIndex - 1);
+                    String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
                     String eventDateWithClosingBracket = Helper.join(inputSplitBySpaces, atIndex + 1,
                             inputSplitBySpaces.length - 1);
                     String eventDate = eventDateWithClosingBracket.substring(0, eventDateWithClosingBracket.length() - 1);

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -8,6 +12,7 @@ public class TaskList {
 
     public TaskList() throws DukeException{
         this.storage = new Storage();
+        Ui.printWithStyle("Reading tasks from file...");
         this.list = storage.readTasksFromFile();
     }
 

@@ -1,10 +1,15 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] commandSplit) {
         super(commandSplit);
     }
 
     @Override
-    void execute(TaskList list) throws DukeException {
+    public void execute(TaskList list) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(commandSplit[1]);
             list.remove(taskNumber);

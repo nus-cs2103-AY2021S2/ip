@@ -1,10 +1,16 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.task.*;
+
 public class AddCommand extends Command {
     public AddCommand(String[] commandSplit) {
         super(commandSplit);
     }
 
     @Override
-    void execute(TaskList list) throws DukeException {
+    public void execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];
         if (keyword.equals("deadline")) {
             try {

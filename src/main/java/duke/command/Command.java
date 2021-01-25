@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+
 public abstract class Command {
     /** User command that is split by spaces */
     String[] commandSplit;
@@ -10,5 +15,5 @@ public abstract class Command {
         return this.commandSplit.length == 1 && this.commandSplit[0].equals("bye");
     }
 
-    abstract void execute(TaskList list) throws DukeException;
+    public abstract void execute(TaskList list) throws DukeException;
 }

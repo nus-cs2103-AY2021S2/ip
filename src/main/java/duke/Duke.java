@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -5,12 +9,12 @@ public class Duke {
     TaskList list;
 
     public Duke() {
-        greet();
         try {
             this.list = new TaskList();
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }
+        greet();
     }
 
     public void executeCommand(Command command) throws DukeException {
@@ -18,7 +22,7 @@ public class Duke {
     }
 
     private void greet() {
-        Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
+        Ui.printWithStyle(new String[]{"Hello! I'm duke.Duke", "What can I do for you?"});
     }
 
     public static void main(String[] args) {

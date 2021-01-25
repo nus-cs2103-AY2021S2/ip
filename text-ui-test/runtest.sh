@@ -20,7 +20,7 @@ then
 fi
 
 # run the program, feed commands from input file and redirect the output to the ACTUAL
-java -classpath ../bin Duke < input > ACTUAL
+java -classpath ../bin duke.Duke < input > ACTUAL
 
 # convert to UNIX format
 cp EXPECTED EXPECTED-UNIX

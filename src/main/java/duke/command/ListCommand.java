@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Helper;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,7 +19,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    void execute(TaskList list) throws DukeException {
+    public void execute(TaskList list) throws DukeException {
         //Check if command includes an optional date argument
         boolean hasDate = commandSplit.length > 1;
         if (hasDate) {
