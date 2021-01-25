@@ -1,10 +1,15 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Duke {
-    private static final Scanner scanner = new Scanner(System.in);
     private static final List<Task> taskList = new ArrayList<>();
+    private static final String FILE_PATH = "./src/main/java/tasks.txt";
 
     private static void introduction() {
         String logo = " ____        _        \n"
@@ -13,7 +18,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
-        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+        String welcomeMessage = "Hello! I'm Duke.";
         System.out.println(welcomeMessage);
     }
 
@@ -50,6 +55,7 @@ public class Duke {
     private static Task defineTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
             EmptyDescriptionException {
         if (checkValidCommand(command)) {
+            System.out.println(Arrays.toString(taskInputAndDate));
             if (taskInputAndDate[0].length() == 0) {
                 throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
             } else if (command.equals(TaskTypes.TODO.getType())) {
@@ -65,10 +71,31 @@ public class Duke {
         }
     }
 
-    private static void endProgram() {
+    private static void saveToFile() throws IOException {
+        FileWriter fw = new FileWriter(FILE_PATH);
+        String text = "";
+        for (Task task : taskList) {
+            text += taskToTxt(task) + "\n";
+        }
+        fw.write(text);
+        fw.close();
+    }
+
+    private static String taskToTxt(Task task) {
+        String done = task.isDone() ? "1" : "0";
+        if (task instanceof ToDo) {
+            return "T | " + done + " | " + task.getDescription();
+        } else if (task instanceof Event) {
+            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDate();
+        } else {
+            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDate();
+        }
+    }
+
+    private static void endProgram() throws IOException {
+        saveToFile();
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
-        scanner.close();
     }
 
     private static void setTaskDone(int pos) {
@@ -104,40 +131,94 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
+    private static void storeLocally(String task) {
+        String[] separated = task.split(" \\| ");
+        char taskType = separated[0].charAt(0);
+        if (taskType == 'T') {
+            ToDo t = new ToDo(separated[2]);
+            if (separated[1].equals("1")) {
+                t.markAsDone();
+            }
+            taskList.add(t);
+        } else if (taskType == 'D') {
+            Deadline d = new Deadline(separated[2], separated[3]);
+            if (separated[1].equals("1")) {
+                d.markAsDone();
+            }
+            taskList.add(d);
+        } else if (taskType == 'E') {
+            Event e = new Event(separated[2], separated[3]);
+            if (separated[1].equals("1")) {
+                e.markAsDone();
+            }
+            taskList.add(e);
+        } else {
+            System.err.println("Invalid task type!");
+        }
+    }
+
     private static void run() {
         introduction();
-        while (scanner.hasNextLine()) {
-            String command = scanner.next();
-            if (isByeCommand(command)) {
-                endProgram();
-                break;
-            } else if (isListCommand(command)) {
+        File file = new File(FILE_PATH);
+        try {
+            Scanner scannerFile = new Scanner(file);
+            if (scannerFile.hasNextLine()) {
+                System.out.println("You have existing tasks!");
+                while (scannerFile.hasNextLine()) {
+                    String task = scannerFile.nextLine();
+                    storeLocally(task);
+                }
                 printList();
             } else {
-                String taskInput = scanner.nextLine();
-                String[] taskInputAndDate = taskInput.split("/");
-                String taskDescription = taskInputAndDate[0].trim();
-                if (isDoneCommand(command) || isDeleteCommand(command)) {
+                System.out.println("You have no existing tasks!");
+            }
+            scannerFile.close();
+            Scanner scannerInput = new Scanner(System.in);
+            System.out.println("What can I do for you?");
+            while (scannerInput.hasNextLine()) {
+                String command = scannerInput.next();
+                if (isByeCommand(command)) {
                     try {
-                        if (isDoneCommand(command)) {
-                            doneTask(taskDescription);
-                        } else {
-                            deleteTask(taskDescription);
-                        }
-                    } catch (NumberFormatException numEx) {
-                        System.err.println("'" + command + "' is command word; please pass a numerical index or start your task"
-                                + " with another word!");
-                    } catch (IndexOutOfBoundsException arrEx) {
-                        System.err.println("Please pass a valid index!");
-                    }
-                } else {
-                    try {
-                        addTask(command, taskInputAndDate);
-                    } catch (InvalidCommandException | EmptyDescriptionException e) {
+                        endProgram();
+                    } catch (IOException e) {
+                        System.err.println("There was an error writing to the file.");
                         System.err.println(e.getMessage());
+                    }
+                    break;
+                } else if (isListCommand(command)) {
+                    printList();
+                } else {
+                    String taskInput = scannerInput.nextLine();
+                    String[] taskInputAndDate = taskInput.split("/");
+                    taskInputAndDate[0] = taskInputAndDate[0].trim();
+                    taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
+                    String taskDescription = taskInputAndDate[0];
+                    if (isDoneCommand(command) || isDeleteCommand(command)) {
+                        try {
+                            if (isDoneCommand(command)) {
+                                doneTask(taskDescription);
+                            } else {
+                                deleteTask(taskDescription);
+                            }
+                        } catch (NumberFormatException numEx) {
+                            System.err.println("'" + command + "' is command word; please pass a numerical index or "
+                                    + "start your task with another word!");
+                        } catch (IndexOutOfBoundsException arrEx) {
+                            System.err.println("Please pass a valid index!");
+                        }
+                    } else {
+                        try {
+                            addTask(command, taskInputAndDate);
+                        } catch (InvalidCommandException | EmptyDescriptionException e) {
+                            System.err.println(e.getMessage());
+                        }
                     }
                 }
             }
+            scannerInput.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("Please create a 'tasks.txt' file in the current directory to store your tasks before "
+                    + "running the program again!");
         }
     }
 
