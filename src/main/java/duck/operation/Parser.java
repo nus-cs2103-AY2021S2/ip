@@ -1,7 +1,5 @@
 package duck.operation;
 
-import duck.operation.Command;
-
 public class Parser {
     public static Command parse(String fullCommand) {
         String[] commandSplit = fullCommand.split(" ");

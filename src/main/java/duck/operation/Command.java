@@ -72,8 +72,6 @@ public class Command {
                 ui.showErrorReply("error_date_non_existed_task");
             }
             break;
-
-
         case "todo":
             try {
                 String test = description;
@@ -85,7 +83,6 @@ public class Command {
             storage.updateFile(tasks);
             ui.showCommandReply(description, tasks);
             break;
-
         case "deadline":
             try {
                 String test = description;
@@ -103,7 +100,6 @@ public class Command {
             } catch (DateTimeParseException e) {
                 ui.showErrorReply("error_deadline_by");
             }
-
             break;
         case "event":
             try {
@@ -122,7 +118,6 @@ public class Command {
             } catch (DateTimeParseException e) {
                 ui.showErrorReply("error_event_at");
             }
-
             break;
         default:
             ui.showErrorReply("error_no_meaning");

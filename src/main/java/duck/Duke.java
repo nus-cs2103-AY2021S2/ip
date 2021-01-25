@@ -9,7 +9,6 @@ import duck.task.TaskList;
 import java.io.*;
 
 public class Duke {
-    //private  String filePathOfData = ".\\data\\duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

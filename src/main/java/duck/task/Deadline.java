@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -27,10 +25,9 @@ public class Deadline extends Task {
         return "There are " + String.valueOf(now.until(by, ChronoUnit.DAYS)) + "day(s) before the deadline";
     }
 
-
     @Override
-    public String getTaskInfoOfFile(){
-        return "D | "+(super.isDone?"1":"0")+" | "+super.getDescription() +" | "+this.by;
+    public String getTaskInfoOfFile() {
+        return "D | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.by;
     }
 
 }
