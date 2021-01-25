@@ -100,15 +100,15 @@ public class Duke {
 
     public static void printIntro() {
         String logo =
-                          " _____   _   _ \n"
-                        + "| ____| | | | | \n"
-                        + "| |___  | | | | __   __ \n"
-                        + "|  ___| | | | | \\ \\ / / \n"
-                        + "| |___  | | | |  \\ v / \n"
-                        + "|_____| |_| |_|  /  / \n"
-                        + "                /__/  \n";
+                          " _____   _   _\n"
+                        + "| ____| | | | |\n"
+                        + "| |___  | | | | __   __\n"
+                        + "|  ___| | | | | \\ \\ / /\n"
+                        + "| |___  | | | |  \\ v /\n"
+                        + "|_____| |_| |_|  /  /\n"
+                        + "                /__/\n";
 
-        System.out.println("   C H A T   W I T H \n" + logo);
+        System.out.println("   C H A T   W I T H\n" + logo);
 
         System.out.println(line + "\n"
                 + tab + "Hi there! I'm Elly.\n"
@@ -137,7 +137,7 @@ public class Duke {
     }
 
     public static void printAdd(int index) {
-        System.out.println(tab + "Got it. I've added this task: ");
+        System.out.println(tab + "Got it. I've added this task:");
         System.out.println(tab + tasks.get(index).toString());
     }
 
