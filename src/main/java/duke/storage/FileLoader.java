@@ -6,42 +6,58 @@ import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.exceptions.DukeExceptionInvalidTaskString;
 import duke.tasks.TaskList;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.io.*;
 import java.util.ArrayList;
 
 
 public class FileLoader {
 
     protected File f;
+    public boolean isWritable;
+    public boolean isReadable;
 
     // Load file containing task list information
-    public FileLoader(String pathStr) {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public FileLoader(String pathStr) throws DukeExceptionFileNotAccessible {
         f = new File(pathStr);
+        isReadable = f.canRead();
+        isWritable = f.canWrite();
+        if (!isReadable) {
+            if (!f.getParentFile().mkdirs()) {
+                throw new DukeExceptionFileNotAccessible("Unable to create directory to file.");
+            }
+            try {
+                f.createNewFile();
+                isReadable = f.canRead();
+                isWritable = f.canWrite();
+            } catch (IOException e) {
+                throw new DukeExceptionFileNotAccessible("Unable to create file.");
+            }
+        }
+        if (!isReadable) {
+            throw new DukeExceptionFileNotAccessible("Unable to read file.");
+        }
     }
 
-    public void write(TaskList t) throws DukeExceptionFileNotWritable {
-        try (FileWriter writer = new FileWriter(f, false)){
-            for (String s: t.asArrayList()) {
-                writer.write(s+'\n');
-            }
-        } catch (IOException e) {
+    public void throwIfNotWritable() throws DukeExceptionFileNotWritable {
+        if (!isWritable) {
             throw new DukeExceptionFileNotWritable("Unable to write to file.");
         }
     }
 
-    public TaskList read() throws DukeExceptionFileNotAccessible, DukeExceptionIllegalArgument {
-        try {
-            // For initialization, does nothing if exists
-            f.getParentFile().mkdirs();
-            f.createNewFile();
-        } catch (IOException e) {
-            throw new DukeExceptionFileNotAccessible("Failed to read file");
+    public void write(TaskList t) throws DukeExceptionFileNotWritable {
+        if (isWritable) {
+            try (FileWriter writer = new FileWriter(f, false)){
+                for (String s: t.asArrayList()) {
+                    writer.write(s+'\n');
+                }
+            } catch (IOException e) {
+                throw new DukeExceptionFileNotWritable("Unable to write to file.");
+            }
         }
+    }
 
+    public TaskList read() throws DukeExceptionFileNotAccessible, DukeExceptionIllegalArgument {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             String line;
@@ -51,6 +67,7 @@ public class FileLoader {
             }
             return new TaskList(tasks);
         } catch (IOException e) {
+            // Can happen with directory change
             throw new DukeExceptionIllegalArgument("Error in reading file.");
         }
     }

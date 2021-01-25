@@ -50,17 +50,49 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-        showMessage("Hello! I'm a customized Duke", "What can I do for you?");
+        System.out.print(logo);
     }
 
-    public void showLoadingSuccess() {
-        System.out.println("Existing list found and imported successfully!");
+    public void showLoadingSuccess(int numTasks) {
+        if (numTasks == 0) {
+            showMessage(
+                    "Welcome to Duke!",
+                    "",
+                    "No existing tasks found.",
+                    "A new task list has been created to get you started :)");
+        } else {
+            showMessage(
+                    "Welcome to Duke!",
+                    "",
+                    "Existing task list loaded successfully.",
+                    "You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in your list.");
+        }
+    }
+
+    public void showFileWriteError(int numTasks) {
+        showMessage(
+                "Welcome to Duke!",
+                "",
+                "Warning: Destination file cannot be written to.",
+                "Existing task list loaded, but changes will not be saved.",
+                "",
+                "You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in your list.");
+    }
+
+    public void showFileLoadingError() {
+        showMessage(
+                "Welcome to Duke!",
+                "",
+                "Warning: Destination file cannot be created/read.",
+                "New task list created, but changes will not be saved.");
     }
 
     public void showLoadingError() {
-        System.out.println("Unable to find file, creating new task list.");
+        showMessage(
+                "Welcome to Duke!",
+                "",
+                "Warning: Existing task list cannot be loaded.",
+                "A new task list has been created.");
     }
 
     public void showMessage(String pre, List<String> lines, String post) {
