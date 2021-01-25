@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Task {
     private final String description;
     private final TaskType type;
@@ -93,7 +96,14 @@ public class Task {
                 output = new Todo(description, completed);
                 break;
             case "D":
-                output = new Deadline(description, recordSplit[3], completed);
+                String[] dateTimeSplit = recordSplit[3].split(" ");
+                if (dateTimeSplit.length == 2) {
+                    output = new Deadline(description, LocalDate.parse(dateTimeSplit[0]),
+                            LocalTime.parse(dateTimeSplit[1]), completed);
+                } else {
+                    output = new Deadline(description, LocalDate.parse(dateTimeSplit[0]),
+                            completed);
+                }
                 break;
             case "E":
                 output = new Event(description, recordSplit[3], completed);

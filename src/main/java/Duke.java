@@ -65,6 +65,8 @@ public class Duke {
                     response.append("\nNow you have ");
                     response.append(tasks.size());
                     response.append(" tasks in the list.");
+                } else if (userInput.startsWith("on")) {
+                    // TODO: Implement a command that fetches all deadlines on a given date
                 } else {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
