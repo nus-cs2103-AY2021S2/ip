@@ -29,10 +29,13 @@ public class Parser {
     public Parser() {
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
         cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
-        cmdInfo.put(Cmd.DONE.toString(), "done <task index> | Description: marks by index a given task as done");
+        cmdInfo.put(Cmd.DONE.toString(),
+                "done <task index> | Description: marks by index a given task as done");
         cmdInfo.put(Cmd.TODO.toString(), "todo <name> | Description: adds a new todo task");
-        cmdInfo.put(Cmd.DEADLINE.toString(), "deadline <name> /by <end date> | Description: adds a new deadline task");
-        cmdInfo.put(Cmd.EVENT.toString(), "event <name> /at <start date - end date> | Description: adds a new event task");
+        cmdInfo.put(Cmd.DEADLINE.toString(),
+                "deadline <name> /by <end date> | Description: adds a new deadline task");
+        cmdInfo.put(Cmd.EVENT.toString(),
+                "event <name> /at <start date - end date> | Description: adds a new event task");
         cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
     }
@@ -71,8 +74,8 @@ public class Parser {
 
         //program adds task on todo, deadline or event
         } else if (input.toUpperCase().startsWith(Cmd.TODO.toString())
-        || input.toUpperCase().startsWith(Cmd.DEADLINE.toString())
-        || input.toUpperCase().startsWith(Cmd.EVENT.toString())
+                || input.toUpperCase().startsWith(Cmd.DEADLINE.toString())
+                        || input.toUpperCase().startsWith(Cmd.EVENT.toString())
         ) {
             String taskType = parseTaskType(input);
             String taskName = parseTaskName(input);
