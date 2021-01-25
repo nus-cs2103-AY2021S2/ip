@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage handles the loading of tasks from the file and making changes
+ * to the file based on user commands.
+ */
 public class Storage {
     protected String path;
     protected File localFile;
@@ -16,6 +20,9 @@ public class Storage {
         this.validate = new DateValidation();
     }
 
+    /**
+     * Checks if directory and file exists and if they do not exist, create them.
+     */
     public void checkFileExistence() {
         File directory = new File("data");
         if (!directory.isDirectory()) {
@@ -31,12 +38,22 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a task to the file.
+     * @param task Task to be added.
+     * @throws IOException On file error.
+     */
     public void addTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(this.localFile, true);
         fw.write(task.toString() + "\n");
         fw.close();
     }
 
+    /**
+     * Load tasks into a list if the file exists on the hard disk.
+     * @return A list consisting of all the tasks if the file exists,
+     * if not an empty list is returned.
+     */
     public List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<Task>();
         if (this.fileOriginallyPresent) {
@@ -85,6 +102,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Deletes a task from the file.
+     * @param task Task to be deleted.
+     * @throws IOException On file error.
+     */
     public void deleteTask(Task task) throws IOException {
         Scanner contents = new Scanner(this.localFile);
         File temp = new File("data/temp.txt");
@@ -101,6 +123,11 @@ public class Storage {
         temp.delete();
     }
 
+    /**
+     * Marks a task in the file as completed.
+     * @param task Task to be marked as completed.
+     * @throws IOException On file error.
+     */
     public void markTask(Task task) throws IOException {
         File temp = new File("data/temp.txt");
         temp.createNewFile();
@@ -121,6 +148,12 @@ public class Storage {
         temp.delete();
     }
 
+    /**
+     * Copy the contents of one file into another.
+     * @param input File containing the contents to be copied.
+     * @param output File where the contents are to be copied into.
+     * @throws IOException On file error.
+     */
     public void copyFile(File input, File output) throws IOException {
         FileInputStream in = new FileInputStream(input);
         FileOutputStream out = new FileOutputStream(output);

@@ -2,8 +2,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles the validation of dates for Deadlines.
+ */
 public class DateValidation {
 
+    /**
+     * Checks if the input is in the correct format of "yyyy-mm-dd".
+     * @param date Input to be checked.
+     * @return A LocalDate object created from the input.
+     * @throws DukeException On invalid input. Input format is wrong.
+     */
     public static LocalDate handleDate(String date) throws DukeException {
         LocalDate verifiedDate = null;
         try {
@@ -14,6 +23,11 @@ public class DateValidation {
         }
     }
 
+    /**
+     * Creates a LocalDate object from a string.
+     * @param date String that is used to create a LocalDate object.
+     * @return A LocalDate object created.
+     */
     public LocalDate convertDate(String date) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
         LocalDate createDate = LocalDate.parse(date,format);

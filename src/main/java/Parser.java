@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * Parser handles the user commands.
+ */
 public class Parser {
 
     protected Storage storage;
@@ -17,6 +20,11 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Handles the ToDo command.
+     * @throws IOException On file error when adding the ToDo task
+     * to the file in the hard disk.
+     */
     public void handleToDo() throws IOException {
         String descriptionTask = command.substring(index + 1);
         ToDo newToDo = new ToDo(descriptionTask);
@@ -25,6 +33,9 @@ public class Parser {
         ui.responseToAddTask(newToDo,tasks.getSize());
     }
 
+    /**
+     * Handles the Deadline command.
+     */
     public void handleDeadline() {
         try {
             Validation.checkForSchedule(command, findSlash);
@@ -39,6 +50,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the Event command.
+     */
     public void handleEvent() {
         try {
             Validation.checkForSchedule(command, findSlash);
@@ -53,6 +67,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the Done command.
+     */
     public void handleDone() {
         try {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
@@ -65,6 +82,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles the Delete command.
+     */
     public void handleDelete() {
         try {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
@@ -78,6 +98,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Main method to make sense of the user command and to determine
+     * which command it is.
+     * @param command User's command input.
+     */
     public void handleCommand(String command) {
         this.command = command;
         try {
