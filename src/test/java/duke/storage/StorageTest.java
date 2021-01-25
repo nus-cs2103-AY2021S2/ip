@@ -20,7 +20,7 @@ class StorageTest {
 
     @Test
     void initialiseList_initialListLength_success() throws DukeException {
-        String pathName = "./src/main/java/duke/storage/test_data.txt";
+        String pathName = "./src/test/java/duke/storage/test_data.txt";
         Storage.initialisePath(pathName);
         String dummyTasksString = "DEADLINE /&/ 0 /&/ deadline title /&/ 2001-01-01T23:59\n"
                 + "EVENT /&/ 0 /&/ event title /&/ 2001-01-01T23:59\n"
@@ -41,7 +41,7 @@ class StorageTest {
 
     @Test
     void updateDataFile() throws DukeException {
-        String filePath = "./src/main/java/duke/storage/test_data.txt";
+        String filePath = "./src/test/java/duke/storage/test_data.txt";
         Task todo = new Todo("todo");
         Task deadline = new Deadline("deadline", LocalDateTime.now());
         Task event = new Event("event", LocalDateTime.now());
