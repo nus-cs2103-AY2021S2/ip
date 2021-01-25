@@ -21,6 +21,11 @@ public abstract class DatedTask extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return date;
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }

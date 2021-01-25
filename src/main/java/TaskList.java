@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class TaskList {
     ArrayList<Task> list;
@@ -65,5 +65,21 @@ public class TaskList {
         for (Task task : this.list) {
             storage.writeTaskToFile(task);
         }
+    }
+
+    public <T> void forEach(Function<Task, T> funct) {
+        for (Task task : list) {
+            funct.apply(task);
+        }
+    }
+
+    public ArrayList<Task> filter(Predicate<Task> predicate) {
+        ArrayList<Task> output = new ArrayList<>();
+        for (Task task : list) {
+            if (predicate.test(task)) {
+                output.add(task);
+            }
+        }
+        return output;
     }
 }

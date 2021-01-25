@@ -37,7 +37,6 @@ public class Parser {
         Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
         String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
         Pattern eventPattern = Pattern.compile(EVENT_REGEX);
-        System.out.println(input);
         //If it is a To Do command
         if (toDoPattern.matcher(input).find()) {
             String[] inputSplitBySpaces = input.trim().split("\\s+");
