@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -44,7 +42,7 @@ public class Event extends Task {
      * @return
      */
     @Override
-    public String getTaskInfoOfFile(){
-        return "E | "+(super.isDone?"1":"0")+" | "+super.getDescription() +" | "+this.at;
+    public String getTaskInfoOfFile() {
+        return "E | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.at;
     }
 }

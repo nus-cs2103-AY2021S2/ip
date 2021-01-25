@@ -1,7 +1,5 @@
 package duck.task;
 
-import duck.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -12,7 +10,7 @@ public class Deadline extends Task {
     /**
      * initialize Deadline object
      * @param description the description of task
-     * @param by the deadline of task (YYYY-MM-DD)
+     * @param by          the deadline of task (YYYY-MM-DD)
      */
     public Deadline(String description, String by) {
         super(description);
@@ -45,8 +43,8 @@ public class Deadline extends Task {
      * @return
      */
     @Override
-    public String getTaskInfoOfFile(){
-        return "D | "+(super.isDone?"1":"0")+" | "+super.getDescription() +" | "+this.by;
+    public String getTaskInfoOfFile() {
+        return "D | " + (super.isDone ? "1" : "0") + " | " + super.getDescription() + " | " + this.by;
     }
 
 }

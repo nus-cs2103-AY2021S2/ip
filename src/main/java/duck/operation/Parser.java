@@ -1,7 +1,5 @@
 package duck.operation;
 
-import duck.operation.Command;
-
 public class Parser {
     /**
      * Recognize the full command and divide it into command and descriptions

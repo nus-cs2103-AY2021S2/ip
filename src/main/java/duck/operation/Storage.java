@@ -10,6 +10,7 @@ public class Storage {
     /**
      * initialize Storage object, location file
      * if it does not exist, generate a new one
+     *
      * @param filePath the path of file
      * @throws IOException
      */
@@ -22,6 +23,7 @@ public class Storage {
 
     /**
      * Get the data in the file, and return a list of string
+     *
      * @return a list of data
      * @throws IOException
      */
@@ -41,9 +43,11 @@ public class Storage {
 
     /**
      * update the data of the file when task list changes.
+     *
      * @param tasks
      * @throws IOException
      */
+
     public void updateFile(TaskList tasks) throws IOException {
         FileOutputStream outStream = new FileOutputStream(fileOfData);
         OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");
