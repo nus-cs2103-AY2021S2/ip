@@ -1,14 +1,16 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    protected String at;
+    protected LocalDate at;
 
     public Event(String desc, String at) {
         super(desc);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     public Event(String desc, boolean isDone, String at) {
         super(desc, isDone);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     static public Event parse(String input) throws DukeException {

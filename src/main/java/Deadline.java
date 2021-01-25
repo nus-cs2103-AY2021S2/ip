@@ -1,14 +1,16 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     public Deadline(String desc, String by) {
         super(desc);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     public Deadline(String desc, boolean isDone, String by) {
         super(desc, isDone);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     static public Deadline parse(String input) throws DukeException {
