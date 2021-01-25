@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.DukeException;
+
 public class Todo extends Task {
     public Todo(String description, Boolean completed) { super(description, TaskType.TODO, completed); }
 

@@ -1,10 +1,9 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
+package duke;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
 
@@ -28,13 +27,16 @@ public class Duke {
     public void run() {
         this.ui.displayWelcomeMessage();
 
-        while (ui.hasNextCommand()) {
+        while (true) {
             String userCommand = this.ui.getUserCommand();
-            this.parser.parse(userCommand);
+            boolean exit = this.parser.parse(userCommand);
             try {
                 this.storage.save(this.tasks.getTaskList());
             } catch (DukeException e) {
                 ui.showSavingError();
+            }
+            if (exit) {
+                break;
             }
         }
     }

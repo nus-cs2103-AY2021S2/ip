@@ -1,3 +1,11 @@
+package duke.parser;
+
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.DukeException;
+import duke.ui.Ui;
+
 public class Parser {
 
     private final Ui ui;
@@ -10,13 +18,13 @@ public class Parser {
         this.tasks = tasks;
     }
 
-    public void parse(String fullCommand) {
+    public boolean parse(String fullCommand) {
         try {
             StringBuilder response = new StringBuilder();
             if (fullCommand.equals("bye")) {
                 response.append("Bye. Hope to see you soon!");
                 this.ui.displayMessage(response.toString());
-                return;
+                return true;
             } else if (fullCommand.equals("list")) {
                 response.append("Here are the tasks in your list:\n");
                 for (int i = 0; i < tasks.size(); i++) {
@@ -47,7 +55,7 @@ public class Parser {
                 response.append(task);
                 response.append("\nNow you have ");
                 response.append(tasks.size());
-                response.append(" tasks in the list.");
+                response.append(" duke.tasks in the list.");
             } else if (fullCommand.startsWith("event") ||
                     fullCommand.startsWith("todo") ||
                     fullCommand.startsWith("deadline")) {
@@ -57,7 +65,7 @@ public class Parser {
                 response.append(task);
                 response.append("\nNow you have ");
                 response.append(tasks.size());
-                response.append(" tasks in the list.");
+                response.append(" duke.tasks in the list.");
             } else if (fullCommand.startsWith("on")) {
                 // TODO: Implement a command that fetches all deadlines on a given date
             } else {
@@ -67,5 +75,6 @@ public class Parser {
         } catch (DukeException e) {
             this.ui.displayMessage(e.getMessage());
         }
+        return false;
     }
 }
