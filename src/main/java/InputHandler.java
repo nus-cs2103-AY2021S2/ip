@@ -1,6 +1,6 @@
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,30 +56,32 @@ public class InputHandler {
 
             case EVENT_COMMAND:
                 try {
-                    pattern = Pattern.compile("(?i)event (.+) /at (\\d\\d-\\d\\d-\\d\\d\\d\\d) ?(\\d\\d:\\d\\d)?");
+                    pattern = Pattern.compile("(?i)event (.+) /at (\\d\\d-\\d\\d-\\d\\d\\d\\d \\d\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
+                    LocalDateTime dateTimeObject;
+
                     matcher.find();
-                    Date dateObject;
-                    if (matcher.groupCount() == 4) {
-                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-                        dateObject = format.parse(matcher.group(2) + " " + matcher.group(3));
-                    } else {
-                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-                        dateObject = format.parse(matcher.group(2));
-                    }
-                    return new EventCommand(matcher.group(1), matcher.group(2));
-                } catch (IllegalStateException | ParseException e) {
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+
+                    return new EventCommand(matcher.group(1), dateTimeObject);
+                } catch (IllegalStateException e) {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Event command format. eg.\n" +
-                            "   event <description> /at <dd-MM-yyyy> (optional)<hh:mm>");
+                            "   event <description> /at <dd-MM-yyyy> <hh:mm>");
                 }
 
             case DEADLINE_COMMAND:
                 try {
-                    pattern = Pattern.compile("(?i)deadline (.+) /by (.+)");
+                    pattern = Pattern.compile("(?i)deadline (.+) /by (\\d\\d-\\d\\d-\\d\\d\\d\\d \\d\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
+                    LocalDateTime dateTimeObject;
+
                     matcher.find();
-                    return new DeadlineCommand(matcher.group(1), matcher.group(2));
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+
+                    return new DeadlineCommand(matcher.group(1), dateTimeObject);
                 } catch (IllegalStateException e) {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Deadline command format. eg.\n" +
