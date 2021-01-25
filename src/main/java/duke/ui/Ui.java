@@ -51,6 +51,10 @@ public class Ui {
         showMessage("Hello! I'm a customized Duke", "What can I do for you?");
     }
 
+    public void showLoadingSuccess() {
+        System.out.println("Existing list found and imported successfully!");
+    }
+
     public void showLoadingError() {
         System.out.println("Unable to find file, creating new task list.");
     }

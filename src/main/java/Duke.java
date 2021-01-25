@@ -15,6 +15,7 @@ public class Duke {
         try {
             loader = new FileLoader(filePath);
             tasks = loader.read();
+            ui.showLoadingSuccess();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
