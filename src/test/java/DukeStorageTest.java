@@ -1,3 +1,5 @@
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.storage.StorageDecoder;
 import duke.storage.StorageEncoder;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -10,10 +12,10 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DukeTest {
+public class DukeStorageTest {
 
     @Test
-    public void testStorage(){
+    public void testStorage() {
         ArrayList<String> encodedFile = new ArrayList<>();
         encodedFile.add("T | 0 | todo task not done");
         encodedFile.add("T | 1 | todo task done");
@@ -34,14 +36,18 @@ public class DukeTest {
         Event event2 = new Event("event task done", LocalDate.parse("2020-02-19"));
         event2.done();
         taskList.add(event2);
-        /*
+        ArrayList<Task> decodedTasks = new ArrayList<>();
+
         try {
-            assertEquals(StorageDecoder.decodeSave(encodedFile), taskList);
-        } catch (Exception e) {
+            decodedTasks = StorageDecoder.decodeSave(encodedFile);
+        } catch (DukeCorruptedStorageException e) {
             assert false;
         }
 
-         */
+        for (int i = 0; i < 6; i++) {
+            assertEquals(decodedTasks.get(i).toString(), taskList.get(i).toString());
+        }
+
         String encodedTaskList = "";
         for (String encode : encodedFile) {
             encodedTaskList = encodedTaskList.concat(encode + "\n");
@@ -50,22 +56,5 @@ public class DukeTest {
         assertEquals(StorageEncoder.encodeTasks(taskList), encodedTaskList);
     }
 
-    @Test
-    public void testTask() {
-        Task[] tasks = new Task[] {new Todo("a"), new Deadline("b",
-                LocalDate.parse("2020-01-01")), new Event("c", LocalDate.parse("2020-01-01"))};
-        String[] strTasksNotDone = new String[] {"[T][ ] a", "[D][ ] b (by: Jan 01 2020)",
-                "[E][ ] c (at: Jan 01 2020)"};
-        String[] strTasksDone = new String[] {"[T][X] a", "[D][X] b (by: Jan 01 2020)",
-                "[E][X] c (at: Jan 01 2020)"};
-        for (int i = 0; i < 3; i++) {
-            assertEquals(tasks[i].toString(), strTasksNotDone[i]);
-        }
-        for (Task task : tasks) {
-            task.done();
-        }
-        for (int i = 0; i < 3; i++) {
-            assertEquals(tasks[i].toString(), strTasksDone[i]);
-        }
-    }
+
 }
