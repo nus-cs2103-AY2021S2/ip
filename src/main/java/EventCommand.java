@@ -1,8 +1,10 @@
+import java.time.LocalDateTime;
+
 public class EventCommand extends AddCommand {
 
-    private String timeWindow;
+    private final LocalDateTime timeWindow;
 
-    public EventCommand(String taskDescription, String timeWindow) {
+    public EventCommand(String taskDescription, LocalDateTime timeWindow) {
         super(taskDescription);
         this.timeWindow = timeWindow;
     }
