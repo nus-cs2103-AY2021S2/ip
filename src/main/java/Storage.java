@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -67,11 +68,11 @@ public class Storage {
         if (task instanceof ToDoTask) {
             format = String.format("T | %d | %s", status, description);
         } else if (task instanceof DeadlineTask) {
-            String deadline = ((DeadlineTask) task).getDeadline();
+            String deadline = ((DeadlineTask) task).serializeDeadline();
             format = String.format("D | %d | %s | %s", status, description, deadline);
         } else if (task instanceof EventTask) {
-            String duration = ((EventTask) task).getDuration();
-            format = String.format("E | %d | %s | %s", status, description, duration);
+            String eventDateTime = ((EventTask) task).serializeEvent();
+            format = String.format("E | %d | %s | %s", status, description, eventDateTime);
         } else {
             throw new DukeException("Error in file writing: Unknown task type");
         }
@@ -88,9 +89,14 @@ public class Storage {
             case "T":
                 return new ToDoTask(description, taskID, status);
             case "D":
-                return new DeadlineTask(description, taskID, status, lineContents[3]);
+                String time = lineContents[4];
+                LocalDate deadline = LocalDate.parse(lineContents[3]);
+                return new DeadlineTask(description, taskID, status, deadline, time);
             case "E":
-                return new EventTask(description, taskID, status, lineContents[3]);
+                LocalDate eventDate = LocalDate.parse(lineContents[3]);
+                String startTime = lineContents[4];
+                String endTime = lineContents[5];
+                return new EventTask(description, taskID, status, eventDate, startTime, endTime);
             default:
                 throw new DukeException("Error in file reading: Unknown task type");
         }
