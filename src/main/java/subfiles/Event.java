@@ -1,5 +1,8 @@
 package main.java.subfiles;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Event class represents a single event created by the
  * user via user input to the Duke program. It contains
@@ -12,7 +15,7 @@ package main.java.subfiles;
  */
 public class Event extends Task {
     /** Date which the event is held on */
-    private String date;
+    private LocalDate date;
 
     /**
      * Default constructor for the Event class.
@@ -20,12 +23,16 @@ public class Event extends Task {
      * @param name Description of the event.
      * @param date Date which the event is held on.
      */
-    public Event(String name, String date) {
+    public Event(String name, LocalDate date) {
         super(name);
         this.date = date;
     }
 
     public String getDate() {
+        return date.toString();
+    }
+
+    public LocalDate getDateAsLocalDate() {
         return date;
     }
 
@@ -37,7 +44,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + (isDone ? "X" : " ") + "] " + name + " (at: " + date + ")";
+        return "[E][" + (isDone ? "X" : " ") + "] " + name +
+                " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }
