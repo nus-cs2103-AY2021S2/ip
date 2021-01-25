@@ -1,0 +1,9 @@
+T|1|todo1
+T|1|todo2
+E|1|lz bd|on|23rd Jan
+D|1|homework|by|24th Jan
+T|0|todo3
+T|0|todo4
+E|1|cs2101 meeting|on|28th Jan
+E|1|watching drama|on|25th jan night
+D|1|homework2|by|26th Jan

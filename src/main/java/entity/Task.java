@@ -8,6 +8,23 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String toFileString() {
+        return "";
+    }
+
     public boolean markAsDone() {
         this.isDone = true;
         return true;

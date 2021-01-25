@@ -9,7 +9,8 @@ import java.util.List;
 
 public class TaskManager {
     static private List<Task> list;
-    static final String filepath = "../data/duke.txt";
+    static private File file;
+    static final String filepath = "src/main/data/storage.txt";
     static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -22,29 +23,46 @@ public class TaskManager {
     static final String markAsDone = prefix + "Nice! I've mark this task as done:";
     static final String removeTask = prefix + "Noted, I've removed this task:";
 
-    public TaskManager() throws IOException {
+    public TaskManager() throws Exception {
         list = new ArrayList<>();
-        File file = new File(filepath);
+        file = new File(filepath);
         file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file, false);
-        FileInputStream fis = new FileInputStream(file);
+//        FileInputStream fis = new FileInputStream(file);
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
         String str;
-        BufferedReader bf = new BufferedReader(new InputStreamReader(fis));
-        while ((str = bf.readLine()) != "END") {
+        while ((str = br.readLine()) != null) {
+            readItem(str);
         }
     }
 
-    public void readItem(String str) {
+    public void updateFile() throws IOException {
+//        FileOutputStream fos = new FileOutputStream(file, false);
+        FileWriter fw = new FileWriter(file, false);
+        for (Task task : list) {
+            String output = task.toFileString();
+            fw.write(output);
+            fw.write("\n");
+            fw.flush();
+        }
+
+    }
+
+    public void readItem(String str) throws Exception {
         String[] strarr = str.split("\\|");
         String type = strarr[0];
-        boolean completed = strarr[1].equals("1");
+        boolean isDone = strarr[1].equals("1");
+        Task task = null;
         if (type.equals("T")) {
-            
+            task = new Todo(strarr[2], isDone);
         } else if (type.equals("E")) {
-
+            task = new Event(strarr[2], strarr[4], strarr[3], isDone);
         } else if (type.equals("D")) {
-
+            task = new Deadline(strarr[2], strarr[4], strarr[3], isDone);
+        } else {
+            throw new Exception("Item type not categorized when reading from file.");
         }
+        list.add(task);
 
     }
 
@@ -53,7 +71,7 @@ public class TaskManager {
         System.out.println(greetings);
     }
 
-    public void addTodo(String input) throws IllegalInputFormatException {
+    public void addTodo(String input) throws IllegalInputFormatException, IOException {
         String todoName = input.substring(5);
         if (todoName.trim().length() == 0) {
             throw new IllegalInputFormatException();
@@ -61,6 +79,7 @@ public class TaskManager {
         Task task = new Todo(todoName);
         list.add(task);
         printAfterAdd(task);
+        updateFile();
     }
 
     public void addEvent(String input) throws IllegalInputFormatException {
@@ -71,6 +90,7 @@ public class TaskManager {
             Task task = new Event(name, arr2[1], arr2[0]);
             list.add(task);
             printAfterAdd(task);
+            updateFile();
         } catch (Exception e) {
             throw new IllegalInputFormatException();
         }
@@ -78,12 +98,13 @@ public class TaskManager {
 
     public void addDeadline(String input) throws IllegalInputFormatException {
         try {
-        String[] arr = input.split(" /");
-        String name = arr[0].substring(9);
-        String[] arr2 = arr[1].split(" ", 2);
-        Task task = new Deadline(name, arr2[1], arr2[0]);
-        list.add(task);
-        printAfterAdd(task);
+            String[] arr = input.split(" /");
+            String name = arr[0].substring(9);
+            String[] arr2 = arr[1].split(" ", 2);
+            Task task = new Deadline(name, arr2[1], arr2[0]);
+            list.add(task);
+            printAfterAdd(task);
+            updateFile();
         } catch (Exception e) {
             throw new IllegalInputFormatException();
         }
@@ -113,6 +134,7 @@ public class TaskManager {
         task.markAsDone();
         System.out.println(markAsDone);
         System.out.println(prefix + task);
+        updateFile();
     }
 
     public void deleteTask(String input) throws Exception {
@@ -129,6 +151,7 @@ public class TaskManager {
         System.out.println(removeTask);
         System.out.println(prefix + task);
         printListSize();
+        updateFile();
     }
 
     public void list() {

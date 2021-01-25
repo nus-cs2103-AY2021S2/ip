@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         TaskManager tm = new TaskManager();
         tm.greeting();
         Scanner sc = new Scanner(System.in);
