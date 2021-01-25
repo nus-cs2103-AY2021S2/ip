@@ -1,8 +1,9 @@
-import exceptions.DukeExceptionIllegalDate;
+package duke.tasks;
 
-import java.time.LocalDate;
+import duke.exceptions.DukeExceptionIllegalDate;
+import duke.tasks.Task;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {

@@ -1,6 +1,6 @@
-package enums;
+package duke.commands;
 
-import exceptions.*;
+import duke.exceptions.*;
 
 public enum DukeCommand {
 

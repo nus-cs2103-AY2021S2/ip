@@ -1,7 +1,9 @@
-import enums.DukeCommand;
-import exceptions.DukeExceptionCommandNotFound;
-import exceptions.DukeExceptionIllegalDate;
-import exceptions.DukeExceptionInvalidTaskString;
+package duke.tasks;
+
+import duke.commands.DukeCommand;
+import duke.exceptions.DukeExceptionCommandNotFound;
+import duke.exceptions.DukeExceptionIllegalDate;
+import duke.exceptions.DukeExceptionInvalidTaskString;
 
 import java.util.ArrayList;
 

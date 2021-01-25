@@ -1,7 +1,8 @@
-import exceptions.DukeExceptionIllegalDate;
+package duke.tasks;
+
+import duke.exceptions.DukeExceptionIllegalDate;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
@@ -20,7 +21,7 @@ public class Deadline extends Task {
     // Enforce specific datetime
     public LocalDateTime parseDate(String by) throws DukeExceptionIllegalDate {
         try {
-            return LocalDateTime.parse(by, fmt);
+            return LocalDateTime.parse(by, Task.fmt);
         } catch (DateTimeParseException e) {
             throw new DukeExceptionIllegalDate("TODO: Wrong date.");
         }
@@ -28,10 +29,10 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(outfmt) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(Task.outfmt) + ")";
     }
 
     public String toFileString() {
-        return "D | " + ((isDone) ? 1 : 0) + " | " + description + " | " + by.format(fmt);
+        return "D | " + ((isDone) ? 1 : 0) + " | " + description + " | " + by.format(Task.fmt);
     }
 }

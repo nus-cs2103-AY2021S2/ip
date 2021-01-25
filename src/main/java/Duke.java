@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import enums.DukeCommand;
-import exceptions.*;
+import duke.commands.DukeCommand;
+import duke.exceptions.*;
+import duke.storage.FileLoader;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 public class Duke {
 
@@ -78,7 +81,7 @@ public class Duke {
         }
     }
 
-    // TODO: Shift TaskList size checking to TaskList
+    // TODO: Shift duke.tasks.TaskList size checking to duke.tasks.TaskList
     private static void processDone(String s, TaskList tasks) throws DukeExceptionIllegalArgument {
         int idx;
         try {

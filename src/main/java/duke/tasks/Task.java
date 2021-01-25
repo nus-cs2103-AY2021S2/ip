@@ -1,4 +1,4 @@
-// Original definition from the webpage of course
+package duke.tasks;// Original definition from the webpage of course
 // https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 import java.time.format.DateTimeFormatter;
 
