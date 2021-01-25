@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private String time;
+    private final String time;
 
     Deadline(String name, String time) {
         super(name);
@@ -10,8 +10,12 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    String getSymbol() {
+        return "D";
+    }
+
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.getTime());
+        return String.format("%s (by: %s)", super.toString(), this.getTime());
     }
 }

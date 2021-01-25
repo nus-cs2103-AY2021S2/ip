@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private final String name;
     private boolean isDone;
 
@@ -19,8 +19,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    abstract String getSymbol();
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatus(), this.getName());
+        return String.format("[%s][%s] %s", this.getSymbol(), this.getStatus(), this.getName());
     }
 }
