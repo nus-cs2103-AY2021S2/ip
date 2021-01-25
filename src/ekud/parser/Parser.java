@@ -2,6 +2,7 @@ package ekud.parser;
 
 import ekud.command.*;
 import ekud.common.exception.DukeException;
+import ekud.common.exception.IncompleteDetailException;
 import ekud.common.exception.InvalidCommandException;
 import ekud.common.exception.InvalidTaskIndexException;
 import ekud.common.exception.NoTaskDescriptionException;
@@ -28,7 +29,8 @@ public class Parser {
         BYE,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
 
     private static AddCommand createAddCommand(CommandType commandType, String arguments) throws DukeException {
@@ -121,6 +123,12 @@ public class Parser {
                     throw new NoTaskDescriptionException();
                 }
                 return createAddCommand(func, arguments);
+
+            case FIND:
+                if (arguments.isBlank()) {
+                    throw new IncompleteDetailException("keyword");
+                }
+                return new FindCommand(arguments);
 
             default:
                 throw new InvalidCommandException();
