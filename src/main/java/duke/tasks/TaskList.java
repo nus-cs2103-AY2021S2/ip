@@ -17,11 +17,11 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
-    public Task get(int index) {
+    public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
-    public List<Task> getTasks() {
+    public List<Task> getTaskList() {
         return this.tasks;
     }
 
