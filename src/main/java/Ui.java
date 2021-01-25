@@ -22,7 +22,7 @@ public class Ui {
     /**
      * Greets the user when the Duke is launched.
      */
-    public void welcomeMsg() {
+    public void showWelcomeMsg() {
         out.println(DIVIDER);
         out.println("Hello! I'm Jay!\n" + "What is your name!");
         out.println(DIVIDER);
@@ -31,7 +31,7 @@ public class Ui {
     /**
      * Greets the user again after knowing the user's name.
      */
-    public void nameMsg() {
+    public void showNameMsg() {
         this.username = in.nextLine();
         out.println(DIVIDER);
         out.println("Hi " + this.username + "!");
@@ -42,7 +42,7 @@ public class Ui {
     /**
      * Prompt for user to key in the next input.
      */
-    public void prompt() {
+    public void getPrompt() {
         out.print(this.username + ": ");
     }
 
@@ -51,7 +51,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
-    public void todoMsg(ArrayList<Task> tasks, int totalTasks) {
+    public void showTodoMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
         out.println("Now you have " + totalTasks + " tasks in the list.");
@@ -63,7 +63,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
-    public void deadlineMsg(ArrayList<Task> tasks, int totalTasks) {
+    public void showDeadlineMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
         out.println("Now you have " + totalTasks + " tasks in the list.");
@@ -75,7 +75,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
-    public void eventMsg(ArrayList<Task> tasks, int totalTasks) {
+    public void showEventMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
         out.println("Now you have " + totalTasks + " tasks in the list.");
@@ -87,7 +87,7 @@ public class Ui {
      * @param taskRemoved The description of the task deleted.
      * @param totalTasks Total number of tasks in the list.
      */
-    public void deleteMsg(String taskRemoved, int totalTasks) {
+    public void showDeleteMsg(String taskRemoved, int totalTasks) {
         out.println(DIVIDER);
         out.println("Noted. I've removed this task:\n" + "    " + taskRemoved);
         out.println("Now you have " + totalTasks + " tasks in the list.");
@@ -99,7 +99,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param itemNum The item number that is marked done.
      */
-    public void doneMsg(ArrayList<Task> tasks, int itemNum) {
+    public void showDoneMsg(ArrayList<Task> tasks, int itemNum) {
         out.println(DIVIDER);
         out.println("Nice! I've marked this task as done:\n" + "    " + tasks.get(itemNum - 1).toString());
         out.println(DIVIDER);
@@ -110,7 +110,7 @@ public class Ui {
      * @param tasks The Task Arraylist containing user tasks in sequence.
      * @param totalTasks Total number of tasks in the list.
      */
-    public void listMsg(ArrayList<Task> tasks, int totalTasks) {
+    public void showListMsg(ArrayList<Task> tasks, int totalTasks) {
         out.println(DIVIDER);
         out.println("Here are the tasks in your list:");
         for (int i = 0; i < totalTasks; i++){
@@ -123,7 +123,7 @@ public class Ui {
     /**
      * Showing user bye message when user ends the program.
      */
-    public void byeMsg() {
+    public void showByeMsg() {
         out.println(DIVIDER);
         out.println("Bye " + this.username + "! Hope to see you again soon!");
         out.println(DIVIDER);

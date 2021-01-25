@@ -20,11 +20,11 @@ public class Duke {
      * @throws IOException Throws IO exception.
      */
     public void run() throws IOException {
-        ui.welcomeMsg();
-        ui.nameMsg();
+        ui.showWelcomeMsg();
+        ui.showNameMsg();
         storage.readOrCreateFile();
         while(parser.canContinue) {
-            ui.prompt();
+            ui.getPrompt();
             parser.processInput(Storage.tasks, ui);
         }
         storage.writeListIntoFile();

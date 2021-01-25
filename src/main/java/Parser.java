@@ -81,7 +81,7 @@ public class Parser {
         String command = nextInput.substring(5);
         tasks.add(new Todo(command, false));
         taskAdded();
-        ui.todoMsg(tasks, totalTasks);
+        ui.showTodoMsg(tasks, totalTasks);
     }
 
     /**
@@ -101,7 +101,7 @@ public class Parser {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Deadline(command, dateInfo, false, false));
         taskAdded();
-        ui.deadlineMsg(tasks, totalTasks);
+        ui.showDeadlineMsg(tasks, totalTasks);
     }
 
     /**
@@ -121,7 +121,7 @@ public class Parser {
         String dateInfo = nextInput.substring(nextInput.indexOf("/") + 4);
         tasks.add(new Event(command, dateInfo, false, false));
         taskAdded();
-        ui.eventMsg(tasks, totalTasks);
+        ui.showEventMsg(tasks, totalTasks);
     }
 
     /**
@@ -142,7 +142,7 @@ public class Parser {
             throw new DukeException("Item number selected is out of range.");
         }
         tasks.get(itemNum - 1).makeDone();
-        ui.doneMsg(tasks, itemNum);
+        ui.showDoneMsg(tasks, itemNum);
     }
 
     /**
@@ -165,7 +165,7 @@ public class Parser {
         String taskRemoved = tasks.get(itemNum - 1).toString();
         tasks.remove(itemNum - 1);
         taskDeleted();
-        ui.deleteMsg(taskRemoved, totalTasks);
+        ui.showDeleteMsg(taskRemoved, totalTasks);
    }
 
     /**
@@ -175,7 +175,7 @@ public class Parser {
      * @param ui UI structure to show the user correct display.
      */
     public void list(ArrayList<Task> tasks, int totalTasks, Ui ui) {
-        ui.listMsg(tasks, totalTasks);
+        ui.showListMsg(tasks, totalTasks);
     }
 
     /**
@@ -190,7 +190,7 @@ public class Parser {
      * Saying bye to the user when the user decides to quit.
      */
     public void byeCommand(Ui ui) {
-        ui.byeMsg();
+        ui.showByeMsg();
         terminate();
     }
 }
