@@ -1,31 +1,34 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        FileInput fileInput = new FileInput();
-        fileInput.loadFile("./data", "./data/duke.txt");
-        File file = new File("./data/duke.txt");
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
+        storage.loadFile(filePath);
+        File file = new File(filePath);
         Scanner sc = new Scanner(System.in);
-        printStatements();
-        List<Task> loadedData = fileInput.initialiseStorage(file);
-        UserInput userInput = new UserInput(sc, loadedData);
-        userInput.executeInput();
+        this.taskList = new TaskList(storage.initialiseStorage(file));
+        this.parser = new Parser(this.taskList, storage);
+        this.ui = new Ui(sc, storage, parser);
+
+    }
+
+    public void run() {
+        this.ui.executeInput();
+    }
+
+
+    public static void main(String[] args) {
+
+        new Duke("./data/tasks.txt").run();
 
 
     }
 
-    private static void printStatements() {
-        String line = "";
-        for (int i = 0; i < 50; i++) {
-            line = line.concat("_");
-        }
-        System.out.println(line);
-        System.out.println("Hello! I'm Benny");
-        System.out.println("What can I do for you?");
-        System.out.println(line);
-    }
 
 }

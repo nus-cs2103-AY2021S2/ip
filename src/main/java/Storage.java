@@ -1,20 +1,27 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileInput {
-    public FileInput() {
+public class Storage {
+    private String filePath;
+
+    public Storage() {
 
     }
 
-    public void loadFile(String directoryPath, String path) {
-        loadDirectory(directoryPath);
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void loadFile(String path) {
+        int indexOfLastSlash = path.lastIndexOf('/');
+        String pathDirectory = path.substring(0, indexOfLastSlash);
+        loadDirectory(pathDirectory);
         File file = new File(path);
         try {
             file.createNewFile();
@@ -74,6 +81,7 @@ public class FileInput {
             date = LocalDate.parse(dateTime[0], dateFormatter);
             time = LocalTime.parse(dateTime[1], timeFormatter);
         }
+
         Task task = new Task();
         switch(type) {
             case "T":
@@ -87,7 +95,7 @@ public class FileInput {
                 break;
         }
 
-        if (done == "1") {
+        if (done.equals("1")) {
             task.setDone(true);
         } else {
             task.setDone(false);
@@ -96,4 +104,42 @@ public class FileInput {
         return task;
     }
 
+    public void updateHardDrive(String fileName, TaskList taskList) {
+        try {
+            Files.delete(Paths.get(fileName));
+            Storage storage = new Storage();
+            storage.loadFile(fileName);
+            FileWriter fileWriter = new FileWriter(fileName);
+            for (int i = 0; i < taskList.getNewStorage().size(); i++) {
+                fileWriter.write(printInHardDrive(taskList.getNewStorage().get(i)));
+            }
+            fileWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private String printInHardDrive(Task task) {
+        if (task.getDate() != null || task.getTime() != null) {
+            if (task.getDone()) {
+                return task.getType() + " | 1 | " + task.getOnlyDescription() + " | " + task.getDate() + " " + task.getTime() + "\n";
+            } else {
+                return task.getType() + " | 0 | " + task.getOnlyDescription() + " | " + task.getDate() + " " + task.getTime() + "\n";
+            }
+        } else {
+            if (task.getDone()) {
+                return task.getType() + " | 1 | " + task.getDescription() + "\n";
+            } else {
+                return task.getType() + " | 0 | " + task.getDescription() + "\n";
+            }
+        }
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 }

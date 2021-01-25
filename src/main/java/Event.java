@@ -8,7 +8,7 @@ public class Event extends Task{
 
 
     public Event(String description, LocalDate eventDate, LocalTime eventTime) {
-       super(description);
+        super(description);
         this.date = eventDate;
         this.type = TaskEnum.E;
         this.time = eventTime;
