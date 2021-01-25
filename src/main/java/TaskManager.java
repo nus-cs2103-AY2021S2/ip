@@ -4,12 +4,13 @@ import main.java.exceptions.IllegalInputFormatException;
 import main.java.exceptions.TaskDoesNotExistException;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManager {
     static private List<Task> list;
-    static final String filepath = "../data/duke.txt";
     static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -22,30 +23,8 @@ public class TaskManager {
     static final String markAsDone = prefix + "Nice! I've mark this task as done:";
     static final String removeTask = prefix + "Noted, I've removed this task:";
 
-    public TaskManager() throws IOException {
+    public TaskManager() {
         list = new ArrayList<>();
-        File file = new File(filepath);
-        file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file, false);
-        FileInputStream fis = new FileInputStream(file);
-        String str;
-        BufferedReader bf = new BufferedReader(new InputStreamReader(fis));
-        while ((str = bf.readLine()) != "END") {
-        }
-    }
-
-    public void readItem(String str) {
-        String[] strarr = str.split("\\|");
-        String type = strarr[0];
-        boolean completed = strarr[1].equals("1");
-        if (type.equals("T")) {
-            
-        } else if (type.equals("E")) {
-
-        } else if (type.equals("D")) {
-
-        }
-
     }
 
     public void greeting() {
@@ -68,7 +47,13 @@ public class TaskManager {
             String[] arr = input.split(" /");
             String name = arr[0].substring(6);
             String[] arr2 = arr[1].split(" ", 2);
-            Task task = new Event(name, arr2[1], arr2[0]);
+            Task task;
+            try {
+                LocalDate timeDate = LocalDate.parse(arr2[1]);
+                task = new Event(name, arr2[1], timeDate, arr2[0]);
+            } catch (DateTimeParseException e) {
+                task = new Event(name, arr2[1], arr2[0]);
+            }
             list.add(task);
             printAfterAdd(task);
         } catch (Exception e) {
@@ -78,12 +63,18 @@ public class TaskManager {
 
     public void addDeadline(String input) throws IllegalInputFormatException {
         try {
-        String[] arr = input.split(" /");
-        String name = arr[0].substring(9);
-        String[] arr2 = arr[1].split(" ", 2);
-        Task task = new Deadline(name, arr2[1], arr2[0]);
-        list.add(task);
-        printAfterAdd(task);
+            String[] arr = input.split(" /");
+            String name = arr[0].substring(9);
+            String[] arr2 = arr[1].split(" ", 2);
+            Task task;
+            try {
+                LocalDate deadlineDate = LocalDate.parse(arr2[1]);
+                task = new Deadline(name, arr2[1], deadlineDate, arr2[0]);
+            } catch (DateTimeParseException e) {
+                task = new Deadline(name, arr2[1], arr2[0]);
+            }
+            list.add(task);
+            printAfterAdd(task);
         } catch (Exception e) {
             throw new IllegalInputFormatException();
         }
