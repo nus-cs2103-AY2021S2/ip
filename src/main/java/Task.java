@@ -15,7 +15,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        if(isDone) {
+        if (isDone) {
             return "[X]";
         } else {
             return "[ ]";
@@ -24,6 +24,14 @@ public class Task {
 
     public String getType() {
         return this.type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getStatus() {
+        return this.isDone;
     }
 
     @Override
