@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     public Deadline(int done, String description, String by) {
         super(done, description);
-        this.by = by;
+        this.by = LocalDate.parse(by);;
     }
 
     @Override

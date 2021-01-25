@@ -11,19 +11,19 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
-    public Event(int done, String description, String by) {
+    public Event(int done, String description, String at) {
         super(done, description);
-        this.by = by;
+        this.at = LocalDate.parse(at);;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (by: " + at.format(formatter) + ")";
+        return "[D]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
 
     @Override
     public String toStorageString() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, by);
+        return String.format("E | %d | %s | %s", isDone ? 1 : 0, description, at);
     }
 }
