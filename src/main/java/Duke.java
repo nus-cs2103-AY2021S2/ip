@@ -5,12 +5,20 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
-        printResponse(getWelcomeMsg());
-
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> taskLst = new ArrayList<>();
         boolean isExited = false;
 
+        // Terminate if unable to read data file
+        try {
+            Storage storage = new Storage();
+            storage.fillTaskLst(taskLst);
+        } catch (DukeException e) {
+            printResponse(e.getMessage());
+            System.exit(1);
+        }
+
+        printResponse(getWelcomeMsg());
         while (true) {
             try {
                 String input = sc.nextLine();
