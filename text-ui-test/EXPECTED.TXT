@@ -7,11 +7,11 @@ Here's your list of tasks!
 1. [T] [ ] todo borrow book
 
 Added to list:
-[D] [ ] deadline return book  by:  Sunday
+[D] [ ] deadline return book by: Sunday
 You now have 2 tasks
 
 Added to list:
-[E] [ ] event project meeting  at:  Mon 2-4pm
+[E] [ ] event project meeting at: Mon 2-4pm
 You now have 3 tasks
 
 See you soon!

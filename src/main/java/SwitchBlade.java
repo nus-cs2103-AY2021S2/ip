@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class SwitchBlade {
 
         switch (command.toLowerCase(Locale.ROOT)) {
             case "list":
-                System.out.println(taskList.toString());
+                Ui.printList(taskList);
                 break;
             case "done":
                 if (input.split("\\s+").length == 2) {
@@ -80,8 +81,10 @@ public class SwitchBlade {
     }
 
     public static void main(String[] args) {
-        System.out.println("Hello! I'm SwitchBlade and I aim to do everything you want me to do!");
+
+        Ui.init();
         myList taskList = new myList();
+        taskList.retrieve();
 
         Scanner sc = new Scanner(System.in);
         String input = "bye";
@@ -96,6 +99,6 @@ public class SwitchBlade {
                 input = sc.nextLine();
         }
 
-        System.out.println("See you soon!");
+        Ui.shutdown();
     }
 }

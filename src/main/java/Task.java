@@ -1,5 +1,5 @@
 public class Task {
-    String description;
+    protected String description;
     protected boolean completed;
 
     Task() {
@@ -8,12 +8,25 @@ public class Task {
     }
 
     Task(String description) {
-        this.description = description;
+        this.description = description.stripLeading().stripTrailing();
         completed = false;
+    }
+
+    Task(String description, Boolean completion) {
+        this.description = description.stripLeading().stripTrailing();
+        this.completed = completion;
     }
 
     public void markCompleted() {
         completed = true;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getCompleted() {
+        return completed;
     }
 
     @Override
