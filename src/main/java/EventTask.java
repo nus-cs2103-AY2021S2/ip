@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class EventTask extends Task {
 
-    private LocalDateTime timeWindow;
+    private final LocalDateTime timeWindow;
 
     public EventTask(String taskDescription, LocalDateTime timeWindow) {
         this.taskDescription = taskDescription;

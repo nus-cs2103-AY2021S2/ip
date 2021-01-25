@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 
 public class DeadlineCommand extends AddCommand {
 
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
     public DeadlineCommand(String taskDescription, LocalDateTime deadline) {
         super(taskDescription);
