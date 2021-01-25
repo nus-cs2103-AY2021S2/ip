@@ -1,3 +1,0 @@
-E:false: project meeting :Mon 2-4pm
-D:false: return book : Sunday
-T:false: 123
