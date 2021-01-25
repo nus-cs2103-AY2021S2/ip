@@ -15,4 +15,5 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-src/main/java/duke/data/data.txt
+src/main/java/duke/storage/data.txt
+src/main/java/duke/storage/test_data.txt
