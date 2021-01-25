@@ -5,12 +5,12 @@ import java.time.format.DateTimeParseException;
 public abstract class DatedTask extends Task {
     LocalDate date;
 
-    public DatedTask(String task, String date) throws DukeException {
+    public DatedTask(String task, String date) throws TaskException {
         super(task);
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Incorrect date format. " + e.getMessage());
+            throw new TaskException("Incorrect date format. " + e.getMessage());
         }
     }
 

@@ -60,7 +60,7 @@ public class TaskList {
     }
 
 
-    private void rewriteTasks() throws DukeException {
+    public void rewriteTasks() throws DukeException {
         storage.clearFile();
         for (Task task : this.list) {
             storage.writeTaskToFile(task);

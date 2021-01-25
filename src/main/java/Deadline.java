@@ -1,6 +1,6 @@
 public class Deadline extends DatedTask {
 
-    public Deadline(String task, String date) throws DukeException {
+    public Deadline(String task, String date) throws TaskException {
         super(task, date);
     }
 

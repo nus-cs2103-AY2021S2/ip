@@ -1,6 +1,6 @@
 public class Event extends DatedTask {
 
-    public Event(String task, String date) throws DukeException {
+    public Event(String task, String date) throws TaskException {
         super(task, date);
     }
 

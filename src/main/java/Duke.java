@@ -13,43 +13,29 @@ public class Duke {
         }
     }
 
+    public void executeCommand(Command command) throws DukeException {
+        command.execute(this.list);
+    }
 
     private void greet() {
         Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void bye() {
-        Ui.printWithStyle("Bye. Hope to see you again soon!");
-    }
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if (!input.equals("bye")) {
-                try {
-                    duke.handleInput(input);
-                } catch (DukeException e) {
-                    Ui.printWithStyle(e.getMessage());
+            Command command;
+            try {
+                command = Parser.handleInput(input);
+                duke.executeCommand(command);
+                if (command.isExit()) {
+                    break;
                 }
-            } else {
-                duke.bye();
-                break;
+            } catch (DukeException e) {
+                Ui.printWithStyle(e.getMessage());
             }
         }
     }

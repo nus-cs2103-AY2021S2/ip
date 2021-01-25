@@ -4,7 +4,7 @@ public class Parser {
      * @param userInput
      * @throws DukeException if command is in an incorrect format.
      */
-    public Command handleInput(String userInput) throws DukeException {
+    public static Command handleInput(String userInput) throws DukeException {
         String[] splitBySpaces = userInput.trim().split("\\s+");
         String keyword = splitBySpaces[0];
         if (keyword.equals("list")) {
@@ -15,6 +15,8 @@ public class Parser {
             return new AddCommand(splitBySpaces);
         } else if (keyword.equals("delete")) {
             return new DeleteCommand(splitBySpaces);
+        } else if (keyword.equals("bye")) {
+            return new ByeCommand(splitBySpaces);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

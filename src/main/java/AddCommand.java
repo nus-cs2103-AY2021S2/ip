@@ -7,15 +7,23 @@ public class AddCommand extends Command {
     void execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];
         if (keyword.equals("deadline")) {
-            addDeadline(list);
+            try {
+                addDeadline(list);
+            } catch (TaskException e) {
+                throw new DukeException("Failed to add deadline to tasks. " + e.getMessage());
+            }
         } else if (keyword.equals("todo")) {
             addToDo(list);
         } else {
-            addEvent(list);
+            try {
+                addEvent(list);
+            } catch (TaskException e) {
+                throw new DukeException("Failed to add event to tasks. " + e.getMessage());
+            }
         }
     }
 
-    private void addDeadline(TaskList list) throws DukeException {
+    private void addDeadline(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /by keyword
         int byIndex = 0;
@@ -46,7 +54,7 @@ public class AddCommand extends Command {
         list.add(new ToDo(task));
     }
 
-    private void addEvent(TaskList list) throws DukeException {
+    private void addEvent(TaskList list) throws DukeException, TaskException {
         String[] userInputSplit = this.commandSplit;
         //Index of /at keyword
         int atIndex = 0;
