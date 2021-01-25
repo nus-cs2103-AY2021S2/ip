@@ -48,6 +48,8 @@ public class FileManager {
             }
         }
 
+        sc.close();
+        
         return list;
     }
 
