@@ -1,9 +1,14 @@
 public class Deadline extends Task {
     protected String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(int isDone, String description, String by) {
+        super('D', isDone, description);
         this.by = by;
+    }
+
+    @Override
+    public String getFileString() {
+        return super.getFileString() + " // " + this.by;
     }
 
     @Override

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +22,39 @@ public class Duke {
         System.out.println(greet);
 
         Scanner sc = new Scanner(System.in);
-        run(sc.nextLine(), sc);
+        try {
+            File dir = new File("src/main/java/data");
+            if(!dir.exists()) {
+                if(dir.mkdir()) {
+                    System.out.println("     Data directory created.");
+                }
+            }
+            File file = new File("src/main/java/data/duke.txt");
+            if(file.createNewFile()) {
+                System.out.println("     Data file created.\n");
+            } else {
+                System.out.println("     There is an existing data file.\n");
+            }
+            Scanner readData = new Scanner(file);
+            while(readData.hasNextLine()) {
+                String[] currTask = readData.nextLine().split(" // ");
+                String type = currTask[0];
+                switch (type) {
+                    case "T":
+                        tasks.add(new Todo(Integer.parseInt(currTask[1]), currTask[2]));
+                        break;
+                    case "D":
+                        tasks.add(new Deadline(Integer.parseInt(currTask[1]), currTask[2], currTask[3]));
+                        break;
+                    case "E":
+                        tasks.add(new Event(Integer.parseInt(currTask[1]), currTask[2], currTask[3]));
+                        break;
+                }
+            }
+            run(sc.nextLine(), sc);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
         sc.close();
     }
 
@@ -32,6 +67,18 @@ public class Duke {
                 case BYE:
                     if (inputArr.length == 1) {
                         System.out.println("     Bye. Hope to see you again soon!");
+                    }
+                    try {
+                        FileWriter cleaner = new FileWriter("src/main/java/data/duke.txt", false);
+                        cleaner.close();
+                        FileWriter fw = new FileWriter("src/main/java/data/duke.txt", true);
+                        for (Task curr : tasks) {
+                            fw.write(curr.getFileString());
+                            fw.write(System.lineSeparator());
+                        }
+                        fw.close();
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
                     }
                     break;
                 case LIST:
@@ -81,7 +128,7 @@ public class Duke {
                                 throw new DukeException("       OOPS!!! The description of a todo "
                                         + "cannot be empty.");
                             } else {
-                                tasks.add(new Todo(input.substring(5)));
+                                tasks.add(new Todo(0, input.substring(5)));
                             }
                             break;
                         case DEADLINE:
@@ -94,7 +141,7 @@ public class Duke {
                                     throw new DukeException("       OOPS!!! The due date of a deadline "
                                             + "cannot be empty.");
                                 } else {
-                                    tasks.add(new Deadline(details[0], details[1]));
+                                    tasks.add(new Deadline(0, details[0], details[1]));
                                 }
                             }
                             break;
@@ -108,7 +155,7 @@ public class Duke {
                                     throw new DukeException("       OOPS!!! The time frame of an event "
                                             + "cannot be empty.");
                                 } else {
-                                    tasks.add(new Event(details[0], details[1]));
+                                    tasks.add(new Event(0, details[0], details[1]));
                                 }
                             }
                             break;
