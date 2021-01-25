@@ -44,6 +44,8 @@ public class Parser {
                 return Commands.DEADLINE;
             case "delete":
                 return Commands.DELETE;
+            case "find":
+                return Commands.FIND;
             case "bye":
                 return Commands.BYE;
             default:

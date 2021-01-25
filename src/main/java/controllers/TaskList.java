@@ -2,6 +2,7 @@ package controllers;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,6 +56,24 @@ public class TaskList {
      */
     public List<Optional<? extends Todo>> getTodosList() {
         return this.todosList;
+    }
+
+    /**
+     * Takes in a list of keywords and prints todos with messages that contains any of the keywords
+     * passed in
+     * 
+     * @param keywordList String list of keywords to be matched
+     */
+    public void findByKeyword(List<String> keywordList) {
+        todosView.matchListTodos(this.todosList.stream().filter(optTodo -> {
+            // check if todo message contains keyword
+            return optTodo.map(Todo::getMessage).map(message -> {
+                // split message by space as delimiter
+                List<String> splitMessage = Arrays.asList(message.split(" "));
+                // if any part of split message is contained in keywordList, return true
+                return splitMessage.stream().filter(keywordList::contains).count() > 0;
+            }).orElse(false);
+        }).collect(Collectors.toList()));
     }
 
     /**
