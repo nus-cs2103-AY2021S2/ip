@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.logging.Storage;
+import duke.logging.TaskList;
+import duke.logging.Ui;
 import duke.exception.InvalidInputException;
 
 public class UnknownCommand extends Command {

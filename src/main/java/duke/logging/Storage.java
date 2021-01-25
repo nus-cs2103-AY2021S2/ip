@@ -1,4 +1,4 @@
-package duke;
+package duke.logging;
 
 import duke.model.Deadline;
 import duke.model.Event;

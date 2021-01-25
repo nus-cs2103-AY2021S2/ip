@@ -1,6 +1,10 @@
 package duke;
 
 import duke.command.Command;
+import duke.logging.Parser;
+import duke.logging.Storage;
+import duke.logging.TaskList;
+import duke.logging.Ui;
 
 import java.util.Scanner;
 import java.io.FileNotFoundException;

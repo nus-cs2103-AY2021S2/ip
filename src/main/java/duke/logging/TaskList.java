@@ -1,4 +1,4 @@
-package duke;
+package duke.logging;
 
 import duke.exception.InvalidDescriptionException;
 import duke.model.Deadline;

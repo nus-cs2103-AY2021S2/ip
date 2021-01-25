@@ -1,6 +1,5 @@
-package duke;
+package duke.logging;
 
-import duke.exception.InvalidDescriptionException;
 import duke.exception.InvalidInputException;
 import duke.model.Task;
 

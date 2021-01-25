@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.Storage;
+import duke.logging.Storage;
 import duke.model.Task;
-import duke.TaskList;
-import duke.Ui;
+import duke.logging.TaskList;
+import duke.logging.Ui;
 
 import java.time.format.DateTimeParseException;
 
