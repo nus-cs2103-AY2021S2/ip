@@ -1,7 +1,16 @@
 package com.nus.duke.parser;
 
-import com.nus.duke.command.*;
-
+import com.nus.duke.command.Command;
+import com.nus.duke.command.DeadlineCommand;
+import com.nus.duke.command.DeleteCommand;
+import com.nus.duke.command.DoneCommand;
+import com.nus.duke.command.EventCommand;
+import com.nus.duke.command.ExitCommand;
+import com.nus.duke.command.FindCommand;
+import com.nus.duke.command.HelpCommand;
+import com.nus.duke.command.IncorrectCommand;
+import com.nus.duke.command.ListCommand;
+import com.nus.duke.command.TodoCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,6 +47,8 @@ public class CommandParser {
             return DoneCommand.parseArguments(arguments);
         case DeleteCommand.COMMAND:
             return DeleteCommand.parseArguments(arguments);
+        case FindCommand.COMMAND:
+            return FindCommand.parseArguments(arguments);
         case HelpCommand.COMMAND:
             return new HelpCommand();
         default:

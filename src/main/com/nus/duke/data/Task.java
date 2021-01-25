@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * An abstract class Task in added by the user.
  */
-public abstract class Task implements Serializable {
+public abstract class Task implements Serializable, Searchable {
 
     /**
      * Description of the task.
@@ -42,6 +42,11 @@ public abstract class Task implements Serializable {
      */
     private String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick or empty
+    }
+
+    @Override
+    public boolean containsText(String text) {
+        return this.description.contains(text);
     }
 
     @Override

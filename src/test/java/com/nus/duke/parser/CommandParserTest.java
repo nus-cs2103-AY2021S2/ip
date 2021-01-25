@@ -5,12 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.nus.duke.command.Command;
 import com.nus.duke.command.DeleteCommand;
 import com.nus.duke.command.DoneCommand;
+import com.nus.duke.command.FindCommand;
 import com.nus.duke.command.HelpCommand;
 import com.nus.duke.command.IncorrectCommand;
 import com.nus.duke.command.ListCommand;
 import com.nus.duke.command.TodoCommand;
-import com.nus.duke.data.Todo;
-import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -86,19 +85,20 @@ class CommandParserTest {
     }
 
     /*
-     * Tests for Event Command Parser
+     * Tests for Find Command Parser
      */
-//    @Test
-//    public void parse_eventCommandValidDateArgs_parsedCorrectly() {
-//        final String prefix = "event read books /by ";
-//        parseAndAssertCommandType(TodoCommand.class, inputs);
-//    }
-//
-//    @Test
-//    public void parse_eventCommandInvalidDateArgs_parsedCorrectly() {
-//        final String[] inputs = {"event", "event ", "event    "};
-//        parseAndAssertCommandType(IncorrectCommand.class, inputs);
-//    }
+    @Test
+    public void parse_findCommandValidArgs_parsedCorrectly() {
+        final String[] inputs = {"find books", "find 1", "find find", "find     find"};
+        parseAndAssertCommandType(FindCommand.class, inputs);
+    }
+
+    @Test
+    public void parse_findCommandInvalidArgs_parsedCorrectly() {
+        final String[] inputs = {"find", "find ", "find    "};
+        parseAndAssertCommandType(IncorrectCommand.class, inputs);
+    }
+
 
     /*
      * Utility methods
