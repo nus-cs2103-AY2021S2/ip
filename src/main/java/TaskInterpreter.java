@@ -9,8 +9,13 @@ public class TaskInterpreter {
     public static void saveTasks (ArrayList<Task> Tasks, String Username) {        
         String fpath = Paths.get("").toAbsolutePath().toString() +
             File.separator + "src" + File.separator + "main" + 
-            File.separator + "data" + File.separator + Username + ".txt";
-    
+            File.separator + "data";
+
+        // create dir at end of DukeRun only.
+        File directory = new File(fpath);
+        if (! directory.exists()) { directory.mkdir(); }
+        fpath += File.separator + Username + ".txt";
+
         try {
             FileWriter writer = new FileWriter(fpath);
             for (Task task: Tasks) {
