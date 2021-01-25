@@ -4,13 +4,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage handles reading and writing task list to file on disk.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Create storage backed by a file on disk.
+     * @param path Path to file on disk.
+     */
     public Storage(String path) {
         this.file = new File(path);
     }
 
+    /**
+     * Read TaskList from disk.
+     * @return TaskList read from disk.
+     */
     public TaskList readTaskList() {
         try {
             TaskList taskList = new TaskList();
@@ -28,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write TaskList to disk.
+     * @param taskList TaskList to write.
+     * @return this Storage.
+     * @throws OwenException Error writing to disk.
+     */
     public Storage writeTaskList(TaskList taskList) throws OwenException {
         try {
             this.file.getParentFile().mkdirs();
