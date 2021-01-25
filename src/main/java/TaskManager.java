@@ -1,7 +1,12 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskManager {
-    ArrayList<Task> list;
+    protected ArrayList<Task> list;
 
     public TaskManager() {
         list = new ArrayList<>();
@@ -9,13 +14,12 @@ public class TaskManager {
 
     public void takeEvent(String input, ArrayList<Task> list) {
         this.list = list;
-        CheckErrors e = new CheckErrors(input, list);
+        ErrorChecker e = new ErrorChecker(input, list);
 
         if (input.equals("list")) {
             listEvents();
             return;
         } else if (e.check()) {
-//            System.out.println("pass check");
             if (input.startsWith("done")) {
                 markDone(input);
             } else if (input.startsWith("delete")) {
@@ -40,12 +44,45 @@ public class TaskManager {
             newTask = new TodoTask(input.substring(5));
         } else if (input.startsWith("deadline")) {
             String[] inputSplit = input.split("/");
+//            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
+//                    inputSplit[1].substring(3));
+
+//            String date = inputSplit[1].substring(3);
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD/MM/YYYY");
+
+//            try {
+//                LocalDate.parse(date, formatter);
+//            } catch (DateTimeParseException e) {
+//                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+//                        + "Oops, I don't understand that date format!\n"  + (char) 9 + (char) 9
+//                        + "Please re-enter in DD/MM/YYYY\n" + Duke.line);
+//            }
+
+//            LocalDate formattedDate = LocalDate.parse(date, formatter);
+//            newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
+//                    formattedDate);
+            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             newTask = new DeadlineTask(inputSplit[0].substring(9, inputSplit[0].length() - 1),
-                    inputSplit[1].substring(3));
+                    dateTimeConverter.convertDate());
         } else {
             String[] inputSplit = input.split("/");
+//            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
+//                    inputSplit[1].substring(3));
+
+//            String date = inputSplit[1].substring(3, inputSplit[1].length() - 1);
+//            String from = inputSplit[2].substring(5, inputSplit[2].length() - 1).toUpperCase();
+//            String to = inputSplit[3].substring(3).toUpperCase();
+//            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM d yyyy");
+//            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h a");
+//            LocalDate formattedDate = LocalDate.parse(date, dateFormatter);
+//            LocalTime formattedFrom = LocalTime.parse(from, timeFormatter);
+//            LocalTime formattedTo = LocalTime.parse(to, timeFormatter);
+//            newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
+//                    formattedDate, formattedFrom, formattedTo);
+            DateTimeConverter dateTimeConverter = new DateTimeConverter(inputSplit);
             newTask = new EventTask(inputSplit[0].substring(6, inputSplit[0].length() - 1),
-                    inputSplit[1].substring(3));
+                    dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
+                    dateTimeConverter.convertTime("to"));
         }
         list.add(newTask);
         System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.line);

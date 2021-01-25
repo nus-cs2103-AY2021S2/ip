@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static ArrayList<Task> list;
+    protected static ArrayList<Task> list;
     protected static final String line = (char) 9 + "--------------------------------------------------------------------";
 
     public static void main(String[] args) {

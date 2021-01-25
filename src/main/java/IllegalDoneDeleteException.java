@@ -1,5 +1,5 @@
 public class IllegalDoneDeleteException extends StringIndexOutOfBoundsException {
-    String taskType;
+    protected String taskType;
 
     IllegalDoneDeleteException(String message) {
         super(message);

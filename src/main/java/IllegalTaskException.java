@@ -1,5 +1,5 @@
 class IllegalTaskException extends StringIndexOutOfBoundsException {
-    String taskType;
+    protected String taskType;
 
     IllegalTaskException(String message) {
         super(message);
