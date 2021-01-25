@@ -14,15 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Handles storing and retrieving of TaskList contents
+ */
 public class Storage {
     private final String filePath;
     private final String dirPath;
 
+    /**
+     * Constructor for storage
+     *
+     * @param filePath Path of where data will be stored at
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         dirPath = filePath.replace("/duke.txt", "");
     }
 
+    /**
+     * Loads file content from storage file
+     *
+     * @return List of Task from storage file
+     * @throws DukeException If unable to load file
+     */
     public List<Task> load() throws DukeException {
         try {
             List<Task> taskList = new ArrayList<>();
@@ -63,6 +77,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save specified tasks into storage file
+     *
+     * @param tasks List of tasks to save
+     * @throws DukeException If unable to save to file
+     */
     public void save(TaskList tasks) throws DukeException {
         File file = new File(filePath);
         File dir = new File(dirPath);

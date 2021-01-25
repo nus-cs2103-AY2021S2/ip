@@ -1,19 +1,24 @@
 package duke.task;
 
 /**
- * A task for Duke.Tasks.ToDo
+ * A task for ToDo
  */
 public class ToDo extends Task {
 
     /**
-     * Constructor for Duke.Tasks.ToDo
+     * Constructor for ToDo
      *
-     * @param description Duke.Tasks.Task name
+     * @param description Task name
      */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Content to write into storage file
+     *
+     * @return String format for task information
+     */
     @Override
     public String writeContentFormat() {
         return String.format("T | %s", super.writeContentFormat());
@@ -22,7 +27,7 @@ public class ToDo extends Task {
     /**
      * Returns task type, status icon and task name
      *
-     * @return String format specific to Duke.Tasks.ToDo task
+     * @return String format specific to ToDo task
      */
     @Override
     public String toString() {

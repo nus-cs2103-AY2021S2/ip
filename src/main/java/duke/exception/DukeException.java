@@ -7,6 +7,11 @@ public class DukeException extends Exception {
     private String command;
     private DukeExceptionType ExceptionType;
 
+    /**
+     * Constructor for DukeException
+     *
+     * @param exceptionType Type of exception
+     */
     public DukeException(DukeExceptionType exceptionType) {
         super();
         this.command = "";
@@ -14,9 +19,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Constructor for Duke.Exceptions.DukeException
+     * Constructor for DukeException
      *
-     * @param command Duke.Commands.Command given by user
+     * @param command Command given by user
      * @param exceptionType Type of exception that is caught
      */
     public DukeException(String command, DukeExceptionType exceptionType) {

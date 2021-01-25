@@ -7,8 +7,17 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Handles marking a task as done
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Constructor for DoneCommand
+     *
+     * @param command Done command
+     * @param description Task name
+     */
     public DoneCommand(String command, String description) {
         this.command = command;
         this.description = description;
@@ -23,6 +32,14 @@ public class DoneCommand extends Command {
                 + task.toString();
     }
 
+    /**
+     * Marks task as done TaskList, saves to storage file and outputs response to terminal
+     *
+     * @param tasks TaskList
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException If invalid selection given
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
@@ -34,6 +51,11 @@ public class DoneCommand extends Command {
         ui.response(output);
     }
 
+    /**
+     * Determines if Exit is called by user
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

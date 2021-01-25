@@ -7,8 +7,17 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Handles deletion of task
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Constructor for DeleteCommand
+     *
+     * @param command Delete command
+     * @param description Task name
+     */
     public DeleteCommand(String command, String description) {
         this.command = command;
         this.description = description;
@@ -27,6 +36,14 @@ public class DeleteCommand extends Command {
         return "\n\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
+    /**
+     * Deletes task from TaskList, saves to storage file and outputs response to terminal
+     *
+     * @param tasks TaskList
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException If invalid selection given
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (Integer.parseInt(description) > tasks.size() || Integer.parseInt(description) <= 0) {
@@ -38,6 +55,11 @@ public class DeleteCommand extends Command {
         ui.response(output);
     }
 
+    /**
+     * Determines if Exit is called by user
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

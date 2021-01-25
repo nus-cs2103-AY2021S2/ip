@@ -5,8 +5,15 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Handles listing of tasks in TaskList
+ */
 public class ListCommand extends Command {
 
+    /**
+     * Constructor for ListCommand
+     * @param command List command
+     */
     public ListCommand(String command) {
         super.command = command;
         super.description = "";
@@ -24,12 +31,24 @@ public class ListCommand extends Command {
         return contents;
     }
 
+    /**
+     * Outputs list of tasks to terminal
+     *
+     * @param tasks TaskList
+     * @param ui Ui instance
+     * @param storage Storage instance
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         output = getTaskListContents(tasks);
         ui.response(output);
     }
 
+    /**
+     * Determines if Exit is called by user
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -12,7 +12,7 @@ public class Event extends Task {
     /**
      * Constructor for event
      *
-     * @param description Duke.Tasks.Task name
+     * @param description Task name
      * @param at Start at a specific time and ends at a specific time
      */
     public Event(String description, LocalDate at) {
@@ -20,6 +20,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Content to write into storage file
+     *
+     * @return String format for task information
+     */
     @Override
     public String writeContentFormat() {
         return String.format("E | %s | %s", super.writeContentFormat(), at);
