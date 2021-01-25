@@ -1,12 +1,10 @@
-import java.util.Scanner;
-
 /**
  * Driver class for Duke project
  */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -15,7 +13,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadData());
         } catch (DukeException ex) {
-            ui.outputMessage(ex.toString());
+            ui.display(ex.toString());
             tasks = new TaskList();
         }
     }
@@ -30,7 +28,7 @@ public class Duke {
                 continueInput = command.continueInput();
             }
             catch (DukeException ex) {
-                ui.outputMessage(ex.toString());
+                ui.display(ex.toString());
             }
         }
     }

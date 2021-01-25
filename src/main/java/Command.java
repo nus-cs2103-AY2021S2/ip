@@ -1,6 +1,7 @@
 public abstract class Command {
     protected String commandType;
     protected String commandDetails;
+    protected int index;
     protected String dateTime;
     protected String outputMessage;
 

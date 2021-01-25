@@ -16,11 +16,6 @@ public class Storage {
         this.pathDirectory = fileDirectory.replaceFirst("/Duke.txt", "");
     }
 
-    /**
-     * Bot will check whether there is a folder named data and a file Duke.txt exist in project directory
-     * @return File called Duke.txt inside project root/data directory
-     * @throws IOException if the data folder or file Duke.txt does not exist
-     */
     public File fileConfiguration() throws DukeException {
         File dataDirectory = new File(this.pathDirectory);
         File dataFile = new File(this.fileDirectory);
@@ -40,10 +35,8 @@ public class Storage {
         }
     }
 
-    /**
-     * Save data into directory whenever user perform certain tasks like delete, done or there is a new task created
-     */
     public void saveData(TaskList taskList) throws DukeException {
+        System.out.println(taskList.get(0));
         try {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
@@ -58,9 +51,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Load data from directory whenever user request the bot to list the tasks
-     */
     public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
 

@@ -23,14 +23,6 @@ public class Task {
     }
 
     /**
-     * Retrieve the details of task
-     * @return details of the task in String format
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Set state of task as done once the task is completed
      */
     public void markAsDone() {
