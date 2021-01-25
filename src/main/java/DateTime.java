@@ -13,7 +13,9 @@ public class DateTime {
     private final static DateTimeFormatter DATE_FORMATTER;
 
     static {
-        String[] patterns = new String[]{"dd/MM/yy", "dd/MM/yyyy", "dd/MM/yyyy HHmm"};
+        // Put the pattern with more info in front as
+        // longer datetime strings are unable to be parsed by shorter formatters
+        String[] patterns = new String[]{"dd/MM/yyyy HHmm", "dd/MM/yyyy"};
         DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
         Arrays.stream(patterns).map(DateTimeFormatter::ofPattern).forEach(builder::appendOptional);
 
