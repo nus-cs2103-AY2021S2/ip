@@ -3,8 +3,6 @@ package duke;
 public class Events extends Task {
 
     private String date;
-  //  private String startTime;
- //   private String endTime;
 
     public Events(String title, Boolean b, String data) {
         super(title, b);
