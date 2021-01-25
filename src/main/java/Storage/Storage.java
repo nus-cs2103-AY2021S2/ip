@@ -6,6 +6,7 @@ import Task.Todo;
 import Task.Event;
 import Task.Deadline;
 import Utils.Command;
+import Utils.DateTime;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -37,10 +38,10 @@ public class Storage {
 
                 switch(taskType) {
                     case EVENT:
-                        task = new Event(tokens[2], tokens[3]);
+                        task = new Event(tokens[2], DateTime.parseDate(tokens[3]));
                         break;
                     case DEADLINE:
-                        task = new Deadline(tokens[2], tokens[3]);
+                        task = new Deadline(tokens[2], DateTime.parseDate(tokens[3]));
                         break;
                     case TODO:
                         task = new Todo(tokens[2]);

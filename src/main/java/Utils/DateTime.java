@@ -12,4 +12,8 @@ public class DateTime {
     public static String getDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
+
+    public static String serialiseDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 }

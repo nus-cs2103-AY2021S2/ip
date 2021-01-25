@@ -16,7 +16,7 @@ public class Event extends Task {
     public String serialise() {
         String type = "EVENT";
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(at);
+        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(DateTime.serialiseDate(at));
 
         return sb.toString();
     }

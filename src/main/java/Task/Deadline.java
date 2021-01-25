@@ -16,7 +16,7 @@ public class Deadline extends Task {
     public String serialise() {
         String type = "DEADLINE";
         StringBuilder sb = new StringBuilder();
-        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(by);
+        sb.append(type).append('|').append(isDone).append('|').append(description).append('|').append(DateTime.serialiseDate(by));
 
         return sb.toString();
     }
