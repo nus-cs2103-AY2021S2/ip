@@ -1,12 +1,7 @@
-public class ListCmd implements Command {
-    private final TaskList lst;
-
-    public ListCmd(TaskList lst) {
-        this.lst = lst;
-    }
+public class ListCmd extends Command {
 
     @Override
-    public String process(String cmdArgs) {
+    public String execute(TaskList lst) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < lst.size(); i++) {
             Task task = lst.get(i);

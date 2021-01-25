@@ -1,11 +1,9 @@
-import java.util.List;
-
-public class AddCmd implements Command {
-    private final TaskList lst;
+public class AddCmd extends Command {
+    private final String cmdArgs;
     private final TaskType taskType;
 
-    public AddCmd(TaskList lst, TaskType taskType) {
-        this.lst = lst;
+    public AddCmd(String cmdArgs, TaskType taskType) {
+        this.cmdArgs = cmdArgs;
         this.taskType = taskType;
     }
 
@@ -24,23 +22,23 @@ public class AddCmd implements Command {
     }
 
     @Override
-    public String process(String input) {
+    public String execute(TaskList lst) {
         Task task;
         String[] words;
 
-        validateNotEmpty(input, "OOPS!!! The description of a task cannot be empty");
+        validateNotEmpty(cmdArgs, "OOPS!!! The description of a task cannot be empty");
 
         switch (taskType) {
         case TODO:
-            task = new Todo(input);
+            task = new Todo(cmdArgs);
             break;
         case EVENT:
-            words = input.split("/at");
+            words = cmdArgs.split("/at");
             trimStrArr(words);
             task = new Event(words[0], words[1]);
             break;
         case DEADLINE:
-            words = input.split("/by");
+            words = cmdArgs.split("/by");
             trimStrArr(words);
             task = new Deadline(words[0], words[1]);
             break;
@@ -49,11 +47,11 @@ public class AddCmd implements Command {
             break;
         }
 
-        this.lst.add(task);
+        lst.add(task);
 
         String resp = "Got it. I've added this task:\n";
         resp += String.format("\t%s\n", task.toString());
-        resp += String.format("Now you have %d tasks in the list\n", this.lst.size());
+        resp += String.format("Now you have %d tasks in the list\n", lst.size());
         return resp;
     }
 }

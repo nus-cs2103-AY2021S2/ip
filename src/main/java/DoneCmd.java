@@ -1,12 +1,12 @@
-public class DoneCmd implements Command {
-    private final TaskList lst;
+public class DoneCmd extends Command {
+    private final String cmdArgs;
 
-    public DoneCmd(TaskList lst) {
-        this.lst = lst;
+    public DoneCmd(String cmdArgs) {
+        this.cmdArgs = cmdArgs;
     }
 
     @Override
-    public String process(String cmdArgs) {
+    public String execute(TaskList lst) {
         int idx = Integer.parseInt(cmdArgs) - 1;
         if (idx < 0 || idx >= lst.size()) {
             throw new DukeException(String.format("Item no. %d cannot be found in list", idx + 1));
@@ -15,8 +15,7 @@ public class DoneCmd implements Command {
         Task t = lst.get(idx);
         t.markDone();
 
-        String resp = "Nice! I've marked this task as done:\n";
-        resp += String.format("%s\n", t.toString());
-        return resp;
+        return "Nice! I've marked this task as done:\n"
+                + String.format("%s\n", t.toString());
     }
 }
