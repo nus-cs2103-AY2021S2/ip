@@ -6,6 +6,7 @@ import java.io.*;
 
 public class Storage {
     private File fileOfData;
+
     public Storage(String filePath) throws IOException {
         this.fileOfData = new File(filePath);
         if (!fileOfData.isFile()) {
@@ -26,6 +27,7 @@ public class Storage {
         br.close();
         return data;
     }
+
     public void updateFile(TaskList tasks) throws IOException {
         FileOutputStream outStream = new FileOutputStream(fileOfData);
         OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");

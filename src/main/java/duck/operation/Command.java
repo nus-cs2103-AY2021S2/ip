@@ -124,6 +124,14 @@ public class Command {
             }
 
             break;
+        case "find":
+            try {
+                String[] result = tasks.findTask(description);
+                ui.showFindReply(result);
+            } catch (NullPointerException e) {
+                ui.showErrorReply("find_empty");
+            }
+            break;
         default:
             ui.showErrorReply("error_no_meaning");
         }

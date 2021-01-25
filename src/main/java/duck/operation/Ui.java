@@ -85,6 +85,8 @@ public class Ui {
             System.out.println(INDENTATION + "OOPS!!! The period of a event task should be meaningful. :-(");
             System.out.println(INDENTATION + "Please enter according to the format eg.description /at YYYY-MM-DD");
             break;
+        case "find_empty":
+            System.out.println(INDENTATION + "OOPS!!! The enter the keyword of task. :-(");
         }
         System.out.println(INDENTATION + HORIZON);
     }
@@ -107,6 +109,17 @@ public class Ui {
     public void showDateReply(int number, TaskList tasks) {
         System.out.println(INDENTATION + HORIZON);
         System.out.println(tasks.getTask(number).getPeriodDays());
+        System.out.println(INDENTATION + HORIZON);
+    }
+
+    public void showFindReply(String[] result) {
+        System.out.println(INDENTATION + HORIZON);
+        if (result[0] == null) {
+            System.out.println(INDENTATION + "Sorry, I don't find the task");
+        }
+        for (int i = 0; result[i] != null; i++) {
+            System.out.println(INDENTATION + result[i]);
+        }
         System.out.println(INDENTATION + HORIZON);
     }
 }
