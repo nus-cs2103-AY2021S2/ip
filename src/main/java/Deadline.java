@@ -1,10 +1,10 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private final LocalDate date;
+    private final LocalDateTime date;
 
-    Deadline(String description, LocalDate date) {
+    Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
@@ -15,6 +15,6 @@ public class Deadline extends Task {
     }
 
     public String getDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a"));
     }
 }

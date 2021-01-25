@@ -1,10 +1,10 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private final LocalDate date;
+    private final LocalDateTime date;
 
-    Event(String description, LocalDate date) {
+    Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
