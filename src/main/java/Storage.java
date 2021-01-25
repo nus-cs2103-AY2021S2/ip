@@ -13,6 +13,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Store the list of task into the file stated by the filepath.
+     *
+     * @param tasks
+     * @throws DukeException
+     */
     public void store(ArrayList<Task> tasks) throws DukeException {
 
         try {
@@ -41,6 +47,12 @@ public class Storage {
 
     }
 
+    /**
+     * Load the list of tasks from the file stated by the filepath.
+     *
+     * @return
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
 
         try {

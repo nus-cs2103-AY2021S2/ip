@@ -4,6 +4,14 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+
+    /**
+     * Parse the input string into recognisable command.
+     *
+     * @param string
+     * @return
+     * @throws DukeException
+     */
     public static Command parse(String string) throws DukeException {
 
         String action, info;
@@ -35,6 +43,13 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parse the information string to get the task required.
+     *
+     * @param info
+     * @return
+     * @throws DukeException
+     */
     public static String getTask(String info) throws DukeException {
 
         String task;
@@ -53,7 +68,14 @@ public class Parser {
         return task;
 
     }
-    
+
+    /**
+     * Parse the information string to get the timing for event.
+     *
+     * @param info
+     * @return
+     * @throws DukeException
+     */
     public static String getTimeAt(String info) throws DukeException {
         
         String time;
@@ -73,6 +95,14 @@ public class Parser {
         return time;
     }
 
+
+    /**
+     * Parse the information string to get the timing for deadline.
+     *
+     * @param info
+     * @return
+     * @throws DukeException
+     */
     public static String getTimeBy(String info) throws DukeException {
 
         String time;
@@ -91,4 +121,5 @@ public class Parser {
 
         return time;
     }
+
 }
