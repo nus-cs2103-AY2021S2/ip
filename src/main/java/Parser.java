@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class InputHandler {
+public class Parser {
 
     public static Command parse(String input) throws DukeException {
 

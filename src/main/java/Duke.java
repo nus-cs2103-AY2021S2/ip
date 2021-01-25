@@ -4,12 +4,12 @@ public class Duke {
 
     private boolean isRunning;
     private TaskList taskList;
-    private final StorageHandler storageHandler;
+    private final Storage storageHandler;
     private final String path = "ip/src/main/java/data/TaskListData.txt";
 
     public Duke() {
         isRunning = true;
-        storageHandler = new StorageHandler(path);
+        storageHandler = new Storage(path);
         displayWelcomeMessage();
         try {
             taskList = storageHandler.open();
@@ -26,7 +26,7 @@ public class Duke {
     public String getResponse(String input) {
         Command command;
         try {
-            command = InputHandler.parse(input);
+            command = Parser.parse(input);
             isRunning = !command.shouldExit();
             taskList = command.execute(taskList);
             storageHandler.write(taskList);

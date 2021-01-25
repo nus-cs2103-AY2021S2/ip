@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class StorageHandler {
+public class Storage {
 
     private final String path;
 
-    StorageHandler(String path) {
+    Storage(String path) {
         this.path = path;
     }
 
