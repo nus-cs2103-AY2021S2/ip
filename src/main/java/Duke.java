@@ -13,17 +13,7 @@ public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
     private static final String FILE_PATH = "./src/main/java/tasks.txt";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
-
-    private static void introduction() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        String welcomeMessage = "Hello! I'm Duke.";
-        System.out.println(welcomeMessage);
-    }
+    private static Ui ui;
 
     private static void printList() {
         System.out.println("Here are the tasks in your list:");
@@ -162,32 +152,32 @@ public class Duke {
     }
 
     private static void run() {
-        introduction();
+        ui = new Ui();
+        ui.introduction();
         File file = new File(FILE_PATH);
         try {
             Scanner scannerFile = new Scanner(file);
             if (scannerFile.hasNextLine()) {
-                System.out.println("You have existing tasks!");
+                ui.showMsg("You have existing tasks!");
                 while (scannerFile.hasNextLine()) {
                     String task = scannerFile.nextLine();
                     storeToProgram(task);
                 }
                 printList();
             } else {
-                System.out.println("You have no existing tasks!");
+                ui.showMsg("You have no existing tasks!");
             }
             scannerFile.close();
 
             Scanner scannerInput = new Scanner(System.in);
-            System.out.println("What can I do for you?");
+            ui.showMsg("What can I do for you?");
             while (scannerInput.hasNextLine()) {
                 String command = scannerInput.next();
                 if (isByeCommand(command)) {
                     try {
                         endProgram();
                     } catch (IOException e) {
-                        System.err.println("There was an error writing to the file.");
-                        System.err.println(e.getMessage());
+                        ui.showError("There was an error writing to the file.\n" + e.getMessage());
                     }
                     break;
                 } else if (isListCommand(command)) {
@@ -205,10 +195,10 @@ public class Duke {
                                 deleteTask(taskDescription);
                             }
                         } catch (NumberFormatException numEx) {
-                            System.err.println("'" + command + "' is command word; please pass a numerical index or "
+                            ui.showError("'" + command + "' is command word; please pass a numerical index or "
                                     + "start your task with another word!");
                         } catch (IndexOutOfBoundsException arrEx) {
-                            System.err.println("Please pass a valid index!");
+                            ui.showError("Please pass a valid index!");
                         }
                     } else {
                         try {
@@ -216,15 +206,15 @@ public class Duke {
                         } catch (InvalidCommandException | EmptyDescriptionException e) {
                             System.err.println(e.getMessage());
                         } catch (DateTimeParseException e) {
-                            System.err.println("Please enter your date in one of the following formats:");
-                            System.err.println("d/M/yyyy HHmm OR d MMM yy HHmm OR dd-MM-yy HHmm");
+                            ui.showError("Please enter your date in one of the following formats:\n" +
+                                    "d/M/yyyy HHmm OR d MMM yy HHmm OR dd-MM-yy HHmm");
                         }
                     }
                 }
             }
             scannerInput.close();
         } catch (FileNotFoundException e) {
-            System.err.println("Please create a 'tasks.txt' file in the current directory to store your tasks before "
+            ui.showError("Please create a 'tasks.txt' file in the current directory to store your tasks before "
                     + "running the program again!");
         }
     }
