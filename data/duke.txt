@@ -1,5 +1,4 @@
 T | 0 | borrow book
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 1 | project meeting | Aug 6th 2-4pm
-T | 1 | hcjan
+D | 0 | return book | 2021-02-10
+E | 0 | project meeting | 2021-05-12

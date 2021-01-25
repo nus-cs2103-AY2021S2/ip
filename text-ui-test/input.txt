@@ -1,7 +1,7 @@
 todo borrow book
 todo read book
-deadline return book /by June 6th
-event project meeting /at Aug 6th 2-4pm
+deadline return book /by 2021-02-10
+event project meeting /at 2021-05-12
 list
 done 2
 done 4
@@ -11,4 +11,6 @@ done 7
 delete 7
 deadline washing
 event cleaning
+date 2
+date 4
 bye
