@@ -12,7 +12,7 @@ public class ListCommand extends Command {
 
     @Override
     public TaskList execute(TaskList tasks, UI ui, DataStorage storage){
-        tasks.showAllTask();
+        tasks.showAllTask("list");
         return null;
     }
 

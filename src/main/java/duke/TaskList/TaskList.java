@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class TaskList {
     private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
+    private static ArrayList<Task> findTaskArraylist = new ArrayList<Task>();
+
     private static UI ui = new UI();
 
     public void addToDo(String description)  {
@@ -26,10 +28,18 @@ public class TaskList {
         taskArraylist.add(new Events(description,false,dueDate, startTime, endTime));
     }
 
-    public void showAllTask(){
-        ui.printListHeader();
-        for (int i = 0; i < taskArraylist.size(); i++) {
-            ui.printTask(i,taskArraylist.get(i) );
+    public void showAllTask(String type){
+        ArrayList<Task> taskList;
+
+        if(type.equals("search")){
+            ui.printSearchHeader();
+            taskList = findTaskArraylist;
+        }else{
+            ui.printListHeader();
+            taskList = taskArraylist;
+        }
+        for (int i = 0; i <taskList.size(); i++) {
+            ui.printTask(i,taskList.get(i) );
         }
         ui.displayLines();
     }
@@ -43,6 +53,19 @@ public class TaskList {
     public void deleteTask(int index){
         ui.displayDeletedTaskMessage(taskArraylist.get(index));
         taskArraylist.remove(index);
+    }
+
+    public void findTask(String searchValue){
+        for (int i=0; i< taskArraylist.size(); i++){
+            if(taskArraylist.get(i).getTaskName().contains(searchValue)){
+                findTaskArraylist.add(taskArraylist.get(i));
+            }
+        }
+        if(findTaskArraylist.size() >0) {
+            showAllTask("search");
+        }else{
+            ui.displayNoItemFoundMessage();
+        }
     }
 
     public ArrayList<Task> getTaskListArray(){

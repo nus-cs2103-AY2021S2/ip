@@ -1,5 +1,6 @@
 package duke.UI;
 
+import duke.command.SearchCommand;
 import duke.task.Task;
 
 import java.util.Scanner;
@@ -36,6 +37,9 @@ public class UI {
         System.out.println( "\nHere are the tasks in your list:");
     }
 
+    public void printSearchHeader(){
+        System.out.println( "\nHere are the matching tasks in your list:\n");
+    }
     public void displayLines(){
         System.out.println(lines);
     }
@@ -51,6 +55,10 @@ public class UI {
 
     public void displayDoneTaskMessage(Task t){
         System.out.println(lines + "\nNice! I'll make this task as done: \n" + t.toString() + "\n" + lines);
+    }
+
+    public static void displayNoItemFoundMessage(){
+        System.out.println("There are no task found");
     }
 
     public void showError(String e){

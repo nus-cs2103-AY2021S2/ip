@@ -3,7 +3,6 @@ package duke.Parser;
 import duke.command.*;
 import duke.TaskList.TaskList;
 import duke.UI.UI;
-import duke.command.*;
 import duke.data.DataStorage;
 import duke.exception.DukeException;
 
@@ -32,17 +31,27 @@ public class Parser {
             firstLaunch =false;
         }
 
-
         if(input.equals("bye")){
             ExitCommand ec = new ExitCommand();
             return ec.isExit();
         }
-
         String commandArray[] = input.split("\\s+");
+
+        String [] userInputArray = separateUserInput(input);
+        String type = userInputArray[0];
+        String userInput = input.replace(type, " ");
 
         int size =  taskList.getTaskListArray().size();
 
-        if(commandArray[0].equals("list") && isValidTaskNumber(0, "list",size)){
+        if(commandArray[0].equals("find")){
+            if(userInput.isBlank()){
+                throw new DukeException("Please input task description to be searched.");
+            }else {
+                SearchCommand sc = new SearchCommand(userInput, taskList);
+                sc.execute(taskList, ui, null);
+            }
+        }
+        else if(commandArray[0].equals("list") && isValidTaskNumber(0, "list",size)){
             ListCommand lc = new ListCommand(null, taskList);
             lc.execute(taskList, ui, null);
         } else if(commandArray[0].equals("delete") &&
@@ -54,13 +63,6 @@ public class Parser {
             DoneCommand doneCommand = new DoneCommand(commandArray[1], taskList);
             taskList = doneCommand.execute(taskList, ui, storage);
         }else{
-
-            String [] userInputArray = separateUserInput(input);
-            String type = userInputArray[0];
-            String userInput = input.replace(type, " ");
-
-
-
             AddCommand ac = new AddCommand(userInput, taskList);
 
             switch (type) {
@@ -71,7 +73,7 @@ public class Parser {
                 taskList = ac.execute(taskList, ui, storage,"todo", null, null,null);
                 break;
             case ("deadline"):
-                String dateTime[] = seperateDueDate(input, "deadline");
+                String dateTime[] = separateDueDate(input, "deadline");
 
                 LocalDate date = LocalDate.parse(dateTime[0], dateFormatter);
                 LocalTime time;
@@ -81,15 +83,13 @@ public class Parser {
                      time = LocalTime.parse(dateTime[1], timeFormatter);
                 }
 
-                System.out.println("time is " +time);
-
                 ac = new AddCommand(TaskName, taskList);
                 taskList = ac.execute(taskList, ui, storage,"deadlines", date, time,null);
                 break;
             case ("event"):
 
-                String dateTimeArray[] = seperateDueDate(input, "event");
-                String timeArray[] = seperateStartEndTime(dateTimeArray);
+                String dateTimeArray[] = separateDueDate(input, "event");
+                String timeArray[] = separateStartEndTime(dateTimeArray);
 
                 LocalDate startDate = LocalDate.parse(dateTimeArray[0], dateFormatter);
                 LocalTime startTime = LocalTime.parse(timeArray[0], timeFormatter);
@@ -104,7 +104,6 @@ public class Parser {
         }
         return false;
     }
-
 
     public static boolean isValidTaskNumber(int no, String type, int arraySize) {
         try {
@@ -135,7 +134,7 @@ public class Parser {
         }
     }
 
-    public static String[] seperateDueDate (String input, String type) throws DukeException {
+    public static String[] separateDueDate(String input, String type) throws DukeException {
 
         if(input.contains("/by") && type.equals("deadline")) {
             String dueBy[] = input.split("/by ");
@@ -164,8 +163,7 @@ public class Parser {
         return false;
     }
 
-
-    public static String[] seperateStartEndTime (String[] dateTime) throws DukeException {
+    public static String[] separateStartEndTime(String[] dateTime) throws DukeException {
         String[] timeArr;
         if(dateTime[1].contains("-")) {
             timeArr = dateTime[1].split("-");
