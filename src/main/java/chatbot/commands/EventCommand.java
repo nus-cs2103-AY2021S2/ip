@@ -5,9 +5,11 @@ import chatbot.TaskHandler;
 import chatbot.Ui;
 import chatbot.exceptions.ChatBotException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a event task command line
+ */
 public class EventCommand extends ChatBotCommand {
     private String taskName;
     private LocalDateTime startTime;
@@ -18,6 +20,15 @@ public class EventCommand extends ChatBotCommand {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    /**
+     * Returns message for adding an event task.
+     *
+     * @param ui Ui object.
+     * @param th TaskHandler.
+     * @param storage Storage to write and read file.
+     * @throws ChatBotException if encounters error.
+     */
 
     public void runTask(Ui ui, TaskHandler th, Storage storage) throws ChatBotException {
         th.addEventTask(taskName, startTime, endTime);

@@ -3,6 +3,9 @@ package chatbot.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *  Represents a DeadlineTask.
+ */
 public class DeadlineTask extends Task {
     private String type;
     private LocalDate deadline;

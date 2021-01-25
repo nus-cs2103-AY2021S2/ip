@@ -9,6 +9,9 @@ import java.util.Scanner;
 import chatbot.tasks.Task;
 import chatbot.exceptions.FileIoException;
 
+/**
+ * Represents the storage of the task data file.
+ */
 public class Storage {
     private String filePath;
 
@@ -16,6 +19,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns an arraylist of String command lines
+     *
+     * @return An ArrayList of String
+     */
     public ArrayList<String> loadTaskList() throws FileIoException {
         try {
             ArrayList<String> storedTaskList = new ArrayList<>();
@@ -33,7 +41,12 @@ public class Storage {
             throw new FileIoException();
         }
     }
-
+    /**
+     * Writes into the current TaskList into file.
+     *
+     * @param taskHandler which handles the tasks.
+     * @throws FileIoException when there is a IOException
+     */
     public void writeToFile(TaskHandler taskHandler) throws FileIoException {
         try {
             ArrayList<Task> taskList = taskHandler.getTaskList();

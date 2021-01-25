@@ -8,6 +8,11 @@ public class ChatBot {
     private TaskHandler th;
     private Ui ui;
 
+    /**
+     *  ChatBot constructor.
+     *
+     *  @param filePath Relative filepath to persistent storage.
+     */
     public ChatBot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +25,9 @@ public class ChatBot {
         }
     }
 
+    /**
+     * Runs the ChatBot Program.
+     */
     private void run() {
         ui.greeting();
 

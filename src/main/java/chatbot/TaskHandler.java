@@ -12,6 +12,9 @@ import chatbot.tasks.EventTask;
 import chatbot.tasks.Task;
 import chatbot.tasks.TodoTask;
 
+/**
+ * Represents a task handler that handles the tasks
+ */
 public class TaskHandler {
     private ArrayList<Task> taskList;
 
@@ -67,6 +70,12 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Reads from the task data file.
+     *
+     * @param storedTaskList an ArrayList of tasks in file format.
+     */
+
     public void loadTaskList(ArrayList<String> storedTaskList) {
         for (String eachTask : storedTaskList) {
             String[] words = eachTask.split("\\|");
@@ -108,7 +117,4 @@ public class TaskHandler {
 
         }
     }
-
-
-
 }

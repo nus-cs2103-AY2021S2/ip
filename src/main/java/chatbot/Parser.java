@@ -33,6 +33,14 @@ public class Parser {
         }
     }
 
+    /**
+     *  Parses the string input to a command line
+     *
+     *  @param command command input.
+     *  @return ChatBotCommand object.
+     *  @throws ChatBotException when encounters an error.
+     */
+
     public static ChatBotCommand parse(String command) throws ChatBotException {
         String[] words = command.strip().split(" ", 2);
         String commandType = words[0];
