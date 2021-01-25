@@ -54,7 +54,7 @@ public class Sweh {
                 case "bye":
                     return "Bye. See ya again soon!";
                 default:
-                    return "Error: Sorry, I didn\'t understand that";
+                    return "Error: Sorry, I didn't understand that";
             }
         } catch (NoSuchElementException | IndexOutOfBoundsException e) {
             return e.getMessage();
