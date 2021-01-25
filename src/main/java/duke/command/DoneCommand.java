@@ -16,11 +16,11 @@ public class DoneCommand extends Command {
      * Constructor for DoneCommand
      *
      * @param command Done command
-     * @param description Task name
+     * @param selection Selected task
      */
-    public DoneCommand(String command, String description) {
+    public DoneCommand(String command, String selection) {
         this.command = command;
-        this.description = description;
+        this.description = selection;
         this.date = "";
     }
 

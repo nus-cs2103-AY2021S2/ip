@@ -21,11 +21,19 @@ public class Parser {
         String description = description(text);
         Command commandType = null;
 
-        // Throws exception for Duke.Tasks.ToDo, Duke.Tasks.Event and Duke.Tasks.Deadline tasks
+        // Throws exception for ToDo, find, Event and Deadline commands
         if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
             if (description.equals(command)) {
                 //Empty description
                 throw new DukeException(command, DukeExceptionType.EMPTY_DESCRIPTION);
+            }
+        }
+
+        // Throws exception for find command
+        if (command.equals("find")) {
+            if (description.equals(command)) {
+                //Empty keyword
+                throw new DukeException(command, DukeExceptionType.EMPTY_KEYWORD);
             }
         }
 
@@ -40,6 +48,9 @@ public class Parser {
         }
 
         switch (command) {
+        case "find":
+            commandType = new FindCommand(command, description);
+            break;
         case "list":
             commandType = new ListCommand(command);
             break;
@@ -77,6 +88,7 @@ public class Parser {
         String description = "";
 
         switch (command) {
+        case "find":
         case "delete":
         case "done":
         case "todo":

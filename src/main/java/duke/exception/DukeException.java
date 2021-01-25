@@ -46,6 +46,9 @@ public class DukeException extends Exception {
         case EMPTY_DESCRIPTION:
             errMsg = "☹ OOPS!!! The description of a " + command + " cannot be empty.";
             break;
+        case EMPTY_KEYWORD:
+            errMsg = "☹ OOPS!!! The keyword for " + command + " cannot be empty.";
+            break;
         case INVALID_INTEGER:
             errMsg = "☹ OOPS!!! The selection for " + command + " should be a valid Integer.";
             break;
