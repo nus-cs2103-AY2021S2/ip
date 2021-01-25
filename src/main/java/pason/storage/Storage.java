@@ -1,3 +1,11 @@
+package pason.storage;
+
+import pason.exceptions.PasonException;
+import pason.tasks.Deadline;
+import pason.tasks.Event;
+import pason.tasks.Task;
+import pason.tasks.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

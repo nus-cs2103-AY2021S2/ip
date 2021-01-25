@@ -1,3 +1,10 @@
+package pason.commands;
+
+import pason.storage.Storage;
+import pason.tasks.Task;
+import pason.tasks.TaskList;
+import pason.ui.Ui;
+
 public class AddCommand extends Command {
     protected Task task;
     public AddCommand(String command, Task task) {

@@ -1,3 +1,5 @@
+package pason.ui;
+
 import java.util.Scanner;
 import java.io.InputStream;
 

@@ -1,5 +1,11 @@
-abstract class Command {
-    protected String command;
+package pason.commands;
+
+import pason.storage.Storage;
+import pason.tasks.TaskList;
+import pason.ui.Ui;
+
+public abstract class Command {
+    public String command;
     public Command(String command) {
         this.command = command;
     }
