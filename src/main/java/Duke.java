@@ -15,7 +15,7 @@ public class Duke {
     public static void start() {
         Scanner sc = new Scanner(System.in);
         String request = "";
-        dprint("Hello! I'm Duke\nWhat can I do for you?");
+        printFormatted("Hello! I'm Duke\nWhat can I do for you?");
 
         LinkedList<Task> lst = new LinkedList<>();
 
@@ -33,50 +33,74 @@ public class Duke {
             }
 
             if (request.equals("bye")) {
-                dprint("Bye. Hope to see you again soon!");
+                printFormatted("Bye. Hope to see you again soon!");
                 break;
-            } else if(request.equals("list")) {
-                printlist(lst);
-            } else if(request.equals("done")) {
-                int taskNo = Integer.parseInt(taskname);
-                markdone(lst, taskNo);
-            } else if(request.equals("delete")) {
-                int taskNo = Integer.parseInt(taskname);
-                delete(lst, taskNo);
-            } else if(request.equals("todo")) {
+            } else if (request.equals("list")) {
+                printList(lst);
+            } else if (request.equals("done")) {
                 try {
-                    trytodo(lst, taskname);
-                    printadded(lst);
+                    int taskNo = Integer.parseInt(taskname);
+                    markDone(lst, taskNo);
                 } catch (DukeException ex) {
-                    dprint(ex.getMessage());
+                    printFormatted(ex.getMessage());
+                } catch (NumberFormatException ex) {
+                    printFormatted("Please enter integer values..");
                 }
-            } else if(request.equals("deadline")) {
-                String[] deadStr = format(taskname);
-                lst.add(new Task("D", deadStr[0], deadStr[1]));
-                printadded(lst);
-            } else if(request.equals("event")) {
-                String[] eventStr = format(taskname);
-                lst.add(new Task("E", eventStr[0], eventStr[1]));
-                printadded(lst);
+            } else if (request.equals("delete")) {
+                try {
+                    int taskNo = Integer.parseInt(taskname);
+                    delete(lst, taskNo);
+                } catch (DukeException ex) {
+                    printFormatted(ex.getMessage());
+                } catch (NumberFormatException ex) {
+                    printFormatted("Please enter integer values..");
+                }
+            } else if (request.equals("todo")) {
+                try {
+                    addTodo(lst, taskname);
+                    printAdded(lst);
+                } catch (DukeException ex) {
+                    printFormatted(ex.getMessage());
+                }
+            } else if (request.equals("deadline")) {
+                try {
+                    String[] deadStr = formatCommand(taskname);
+                    lst.add(new Task("D", deadStr[0], deadStr[1]));
+                    printAdded(lst);
+                } catch (DukeException ex) {
+                    printFormatted(ex.getMessage());
+                }
+            } else if (request.equals("event")) {
+                try {
+                    String[] eventStr = formatCommand(taskname);
+                    lst.add(new Task("E", eventStr[0], eventStr[1]));
+                    printAdded(lst);
+                } catch (DukeException ex) {
+                    printFormatted(ex.getMessage());
+                }
             } else {
                 try {
                     throwDK();
                 } catch (DukeException ex) {
-                    dprint(ex.getMessage());
+                    printFormatted(ex.getMessage());
                 }
             }
         }
     }
     
-    public static void delete(List<Task> lst, int taskNo) {
+    public static void delete(List<Task> lst, int taskNo) throws DukeException {
+        if (taskNo >= lst.size() || taskNo < 0) {
+            throw new DukeException(
+                    String.format("Tried to delete nothing ????. (Size: %d | Task No: %d)", lst.size(), taskNo));
+        }
         Task task = lst.remove(taskNo - 1);
         String msg = "Noted. I've removed this task:\n" +
-            "  " + task +
-            "\n Now you have " + lst.size() + " tasks in the list.";
-        dprint(msg);
+                "  " + task +
+                "\n Now you have " + lst.size() + " tasks in the list.";
+        printFormatted(msg);
     }
 
-    public static void trytodo(List<Task> lst, String taskname) throws DukeException {
+    public static void addTodo(List<Task> lst, String taskname) throws DukeException {
         if (taskname.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
@@ -87,28 +111,33 @@ public class Duke {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
-    public static String[] format(String n) {
-        String[] arr = new String[3];
-        arr[0] = n.split("/")[0];
-        arr[1] = "(" + n.split("/")[1].split(" ")[0] + ":" +
-            n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length(), n.split("/")[1].length()) + ")";
-        return arr;
+    public static String[] formatCommand(String n) throws DukeException {
+        try {
+            String[] arr = new String[3];
+            arr[0] = n.split("/")[0];
+            arr[1] = "(" + n.split("/")[1].split(" ")[0] + ":" +
+                    n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length(), n.split("/")[1].length()) + ")";
+            return arr;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! The format you have entered is wrong.");
+        }
     }
     
-    public static void printadded(List<Task> lst) {
-        String msg = "Got it. I've added this task:\n";
-        msg += "  " + lst.get(lst.size() - 1);
-        msg += "\nNow you have " + lst.size() + " tasks in the list.";
-        dprint(msg);
+    public static void printAdded(List<Task> lst) {
+        String msg = "Got it. I've added this task:\n"
+                + "  " + lst.get(lst.size() - 1)
+                + "\nNow you have " + lst.size() + " tasks in the list.";
+        printFormatted(msg);
     }
 
-    public static void dprint(String msg) {
+    public static void printFormatted(String msg) {
         String appendMsg = "____________________________________________________________\n"
-            + msg + "\n____________________________________________________________";
+                + msg
+                + "\n____________________________________________________________";
         System.out.println(appendMsg);
     }
 
-    public static void printlist(List<Task> lst) {
+    public static void printList(List<Task> lst) {
         String msg = "Here are the tasks in your list:\n";
         for (int i = 1; i <= lst.size(); i++) {
             msg += i + ". " + lst.get(i - 1);
@@ -116,13 +145,17 @@ public class Duke {
                 msg += "\n";
             }
         }
-        dprint(msg);
+        printFormatted(msg);
     }
 
-    public static void markdone(List<Task> lst, int taskNo) {
+    public static void markDone(List<Task> lst, int taskNo) throws DukeException{
+        if (taskNo >= lst.size() || taskNo < 0) {
+            throw new DukeException(
+                    String.format("Tried to mark nothing ????. (Size: %d | Task No: %d)", lst.size(), taskNo));
+        }
         lst.get(taskNo - 1).setDone();
         String msg = "Nice! I've marked this task as done:\n";
         msg += "  " + lst.get(taskNo - 1);
-        dprint(msg);
+        printFormatted(msg);
     }
 }
