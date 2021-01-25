@@ -4,7 +4,6 @@ import chatbot.Storage;
 import chatbot.TaskHandler;
 import chatbot.Ui;
 import chatbot.exceptions.ChatBotException;
-import chatbot.tasks.Task;
 
 public class ByeCommand extends ChatBotCommand {
     public ByeCommand() {
