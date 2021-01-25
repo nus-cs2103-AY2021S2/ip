@@ -1,7 +1,18 @@
+package duke;
+
 public class ToDos extends Task {
+
+    public ToDos(String title, Boolean b) {
+        super(title, b);
+    }
 
     public ToDos(String title) {
         super(title);
+    }
+
+    @Override
+    public String changeFormat(){
+        return "T" + super.changeFormat();
     }
 
     @Override
