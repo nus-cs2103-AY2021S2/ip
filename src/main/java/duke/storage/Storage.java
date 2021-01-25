@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private final static String DATA_DIR = new File("data").getAbsolutePath();
+    private static final String DATA_DIR = new File("data").getAbsolutePath();
     private final File saveFile = new File(DATA_DIR + "/save.txt");
     private static Storage INSTANCE;
-    private final static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     private Storage() {
         createDirectory();

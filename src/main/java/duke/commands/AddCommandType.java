@@ -1,10 +1,10 @@
 package duke.commands;
 
 public enum AddCommandType {
-    TODO("todo", 2), DEADLINE("deadline", 9), EVENT( "event", 6);
+    TODO("todo", 2), DEADLINE("deadline", 9), EVENT("event", 6);
 
-    private String name;
-    private int addCommandPostfix;
+    private final String name;
+    private final int addCommandPostfix;
 
     AddCommandType(String name, int addCommandPostfix) {
         this.name = name;

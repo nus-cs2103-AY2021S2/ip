@@ -48,7 +48,7 @@ public class TaskList {
         return new Deadline(description, deadline);
     }
 
-    Event createEvent(String input) throws DukeNoDescriptionException {
+    Event createEvent(String input) throws DukeNoDescriptionException, DateTimeParseException {
         String description = Parser.obtainDescription(input, AddCommandType.EVENT);
         LocalDate eventTime = Parser.obtainDate(input, AddCommandType.EVENT);
         return new Event(description, eventTime);

@@ -1,6 +1,12 @@
 package duke.ui;
 
-import duke.exceptions.*;
+import duke.exceptions.DukeCorruptedStorageException;
+import duke.exceptions.DukeCreateDirectoryException;
+import duke.exceptions.DukeCreateFileException;
+import duke.exceptions.DukeEmptyListException;
+import duke.exceptions.DukeNoDescriptionException;
+import duke.exceptions.DukeSaveFileException;
+import duke.exceptions.DukeUnknownArgumentsException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -75,7 +81,7 @@ public class Ui {
     }
 
     public void printErrorMsg(DukeSaveFileException e) {
-        out.println(e);
+        out.println(Message.getErrorMsg(e));
     }
 
     public void printErrorMsg(DukeCreateFileException e) {

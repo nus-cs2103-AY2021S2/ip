@@ -10,20 +10,21 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Message {
-    private final static String INDENT = "\t";
-    private final static String NEWLINE = System.lineSeparator();
-    private final static String LOGO =
+    private static final String INDENT = "\t";
+    private static final String NEWLINE = System.lineSeparator();
+    private static final String LOGO =
             " ____        _        " + NEWLINE
-            + "|  _ \\ _   _| | _____ " + NEWLINE
-            + "| | | | | | | |/ / _ \\" + NEWLINE
-            + "| |_| | |_| |   <  __/" + NEWLINE
-            + "|____/ \\__,_|_|\\_\\___|" + NEWLINE;
-    public final static String LINE = INDENT + "__________________________________________________"
+                    + "|  _ \\ _   _| | _____ " + NEWLINE
+                    + "| | | | | | | |/ / _ \\" + NEWLINE
+                    + "| |_| | |_| |   <  __/" + NEWLINE
+                    + "|____/ \\__,_|_|\\_\\___|" + NEWLINE;
+    public static final String LINE = INDENT
+            + "__________________________________________________"
             + "______________" + NEWLINE;
-    public final static String START_MSG =
-            "Hello from" + NEWLINE + LOGO + LINE + INDENT + "Hello! I'm Duke" + NEWLINE + INDENT +
-            "What can I do for you?" + NEWLINE + LINE;
-    public final static String BYE_MSG =
+    public static final String START_MSG =
+            "Hello from" + NEWLINE + LOGO + LINE + INDENT + "Hello! I'm Duke" + NEWLINE + INDENT
+                    + "What can I do for you?" + NEWLINE + LINE;
+    public static final String BYE_MSG =
             LINE + INDENT + " Bye. Hope to see you again soon!" + NEWLINE + LINE;
 
     public static String getErrorMsg(DukeException e) {
@@ -39,22 +40,6 @@ public class Message {
                 taskList.size());
     }
 
-    public static String getDoneMsg(Task task) {
-        return String.format(INDENT + " Nice! I've marked this task as done:" + NEWLINE
-                + INDENT + INDENT + " %s", task);
-    }
-    public static String getDeleteMsg(Task task, int numTasks) {
-        return String.format(INDENT + " Noted. I've removed this task:" + NEWLINE + INDENT + INDENT
-                        + task + NEWLINE + INDENT + " Now you have %d tasks in the list.",
-                numTasks);
-    }
-
-    public static String getAddMsg(Task t, int taskSize) {
-        return String.format(INDENT + " Got it. I've added this task:" + NEWLINE
-                        + INDENT + INDENT + " %s" + NEWLINE + INDENT + " Now you have %d tasks "
-                        + "in the list." , t, taskSize);
-    }
-
     public static String getErrorMsg(DukeNoDescriptionException e) {
         return String.format(INDENT + " %s", e);
     }
@@ -65,6 +50,23 @@ public class Message {
 
     public static String getErrorMsg(DukeSaveFileException e) {
         return e.toString();
+    }
+
+    public static String getDoneMsg(Task task) {
+        return String.format(INDENT + " Nice! I've marked this task as done:" + NEWLINE
+                + INDENT + INDENT + " %s", task);
+    }
+
+    public static String getDeleteMsg(Task task, int numTasks) {
+        return String.format(INDENT + " Noted. I've removed this task:" + NEWLINE + INDENT + INDENT
+                        + task + NEWLINE + INDENT + " Now you have %d tasks in the list.",
+                numTasks);
+    }
+
+    public static String getAddMsg(Task t, int taskSize) {
+        return String.format(INDENT + " Got it. I've added this task:" + NEWLINE
+                + INDENT + INDENT + " %s" + NEWLINE + INDENT + " Now you have %d tasks "
+                + "in the list.", t, taskSize);
     }
 
     public static String getTasksMsg(ArrayList<Task> taskList) {

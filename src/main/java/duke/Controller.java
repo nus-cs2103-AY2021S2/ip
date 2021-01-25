@@ -8,7 +8,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class Controller {
-    private final static String END_COMMAND = "bye";
+    private static final String END_COMMAND = "bye";
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
@@ -23,7 +23,7 @@ public class Controller {
         ui.printStartMsg();
         String input = ui.getUserCommand();
 
-        while(!input.equals(END_COMMAND)) {
+        while (!input.equals(END_COMMAND)) {
             ui.printDivider();
             handleInput(input);
             ui.printDivider();
@@ -53,8 +53,10 @@ public class Controller {
             case ADD:
                 addTask(input);
                 break;
+            default:
+                throw new DukeUnknownArgumentsException();
             }
-           taskList.updateSave(storage);
+            taskList.updateSave(storage);
         } catch (DukeUnknownArgumentsException e) {
             ui.printErrorMsg(e);
         } catch (NumberFormatException e) {
@@ -73,7 +75,6 @@ public class Controller {
     private void addTask(String input) throws DukeUnknownArgumentsException {
         taskList.add(input);
     }
-
 
     private void printList() {
         taskList.print();

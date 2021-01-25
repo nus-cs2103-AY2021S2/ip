@@ -36,7 +36,7 @@ public class StorageDecoder {
 
     private static Task decodeTodo(String encodedTask) throws DukeCorruptedStorageException {
         boolean isDone = Parser.isEncodedTaskDone(encodedTask);
-        String description = Parser.obtainDescription(encodedTask);
+        String description = Parser.obtainEncodedDescription(encodedTask);
         Task t = new Todo(description);
         if (isDone) {
             t.done();
@@ -44,9 +44,10 @@ public class StorageDecoder {
         return t;
     }
 
-    private static Task decodeTaskWithDate(AddCommandType command, String encodedTask) throws DukeCorruptedStorageException {
+    private static Task decodeTaskWithDate(AddCommandType command, String encodedTask)
+            throws DukeCorruptedStorageException {
         boolean isDone = Parser.isEncodedTaskDone(encodedTask);
-        String description = Parser.obtainDescription(encodedTask);
+        String description = Parser.obtainEncodedDescription(encodedTask);
         LocalDate date = Parser.obtainEncodedDate(encodedTask);
         Task t;
         switch (command) {
