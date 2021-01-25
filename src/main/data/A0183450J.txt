@@ -1,4 +1,0 @@
-T :: 1 :: hey
-E :: 1 :: me :: noon
-D :: 0 :: now :: now
-T :: 0 :: bye

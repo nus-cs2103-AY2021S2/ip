@@ -1,62 +1,65 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Scanner;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.nio.file.Paths;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class TaskInterpreter {
-    public static void saveTasks (ArrayList<Task> Tasks, String Username) {        
-        String fpath = Paths.get("").toAbsolutePath().toString() +
-            File.separator + "src" + File.separator + "main" + 
-            File.separator + "data";
+    public static void saveTasks (ArrayList<Task> tasks, String username) throws IOException {
 
-        // create dir at end of DukeRun only.
-        File directory = new File(fpath);
-        if (! directory.exists()) { directory.mkdir(); }
-        fpath += File.separator + Username + ".txt";
+        String dataDirpath = Paths.get("").toAbsolutePath().toString() 
+                + File.separator + "src" + File.separator + "main" 
+                + File.separator + "data";
 
-        try {
-            FileWriter writer = new FileWriter(fpath);
-            for (Task task: Tasks) {
-                writer.write(task.creationCommand() + "\n");
-            }
-            writer.close();
-        } catch (IOException E) {
-            System.out.println("Unable to save Tasks.");
-            E.printStackTrace();
+        File dataDirectory = new File(dataDirpath);
+        if (! dataDirectory.exists()) {
+            dataDirectory.mkdir();
         }
+
+        String dataFilepath = dataDirpath + File.separator + username + ".txt";
+
+        FileWriter writer = new FileWriter(dataFilepath);
+        for (Task task: tasks) {
+            writer.write(task.taskParseCommand() + "\n");
+        }
+
+        writer.close();
     }
 
-    public static ArrayList<Task> readTasks (String Username) {
-        String fpath = Paths.get("").toAbsolutePath().toString() +
-            File.separator + "src" + File.separator + "main" + 
-            File.separator + "data" + File.separator + Username + ".txt";
+    public static ArrayList<Task> readTasks (String username) {
+
+        String dataFilepath = Paths.get("").toAbsolutePath().toString() 
+                + File.separator + "src" + File.separator + "main" 
+                + File.separator + "data" + File.separator + username + ".txt";
 
         ArrayList<Task> Tasks = new ArrayList<Task>();
+
         try {
-            File f = new File(fpath);
-            Scanner scanner = new Scanner(f);
+            File dataFile = new File(dataFilepath);
+            Scanner scanner = new Scanner(dataFile);
 
             while (scanner.hasNextLine()) {
-                String[] creationCommand = scanner.nextLine().split(" :: ");
-              
-                switch (creationCommand[0]) {
-                    case "T":
-                        Tasks.add(new ToDo(creationCommand));
-                        break;
-                    case "D":
-                        Tasks.add(new Deadline(creationCommand));
-                        break;
-                    case "E":
-                        Tasks.add(new Event(creationCommand));
-                        break;
+                String[] parsedCommand = scanner.nextLine().split(" :: ");
+
+                switch (parsedCommand [0]) {
+                case "T":
+                    Tasks.add(new ToDo(parsedCommand));
+                    break;
+                case "D":
+                    Tasks.add(new Deadline(parsedCommand));
+                    break;
+                case "E":
+                    Tasks.add(new Event(parsedCommand));
+                    break;
                 }
             }
 
             scanner.close();
-        } catch (IOException E) {}
-
+        } catch (IOException E) {
+            // pass
+        }
+        
         return Tasks;
     }
 }
