@@ -9,48 +9,19 @@ public class Duke {
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
+    public static Ui display = new Ui();
 
     /**
      * Starts the program.
      */
     public static void main(String[] args) throws IOException {
-        printGreeting();
+        System.out.println(display.printGreeting());
+        System.out.println(display.printPrompt());
         selectAction();
-    }
-
-    /**
-     * Returns a line of ---- for organization.
-     * <p>
-     * This method always returns immediately upon launch.
-     *
-     * @return      a number of - to simulate a line.
-     */
-    public static String printLine() {
-        return "---------------------------";
-    }
-
-
-    /**
-     * Prints out a greeting format.
-     */
-    public static void printGreeting() {
-        String greet = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(printLine());
-        System.out.println(greet);
-        System.out.println(printLine());
-    }
-
-    public static void printBye() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(printLine());
+        System.out.println(display.printBye());
     }
 
     public static void selectAction() throws IOException{
-        String prompt = "We have 2 functions in this bot, namely\n";
-        prompt = prompt + "1. Echo Bot\n2. Task List Bot\n";
-        String instruct = "Please key in 1 or 2 to select the bot.\n";
-        System.out.println(prompt);
-        System.out.println(instruct);
         BufferedReader input = new
             BufferedReader(new InputStreamReader(System.in));
         String cmd = input.readLine();
@@ -77,15 +48,15 @@ public class Duke {
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
-            System.out.println(printLine());
+            System.out.println(display.printLine());
             if (cmd.equals("bye")) {
                 break;
             }
             System.out.println(cmd);
-            System.out.println(printLine());
+            System.out.println(display.printLine());
         }
         System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(printLine());
+        System.out.println(display.printLine());
     }
 
     /**
@@ -96,38 +67,37 @@ public class Duke {
      */
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
-        TaskList taskList = new TaskList("../../../data/tasks.txt");
+        Storage storage = new Storage("../../../data/tasks.txt");
         BufferedReader input = new
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
             cmd = input.readLine();
-            System.out.println(printLine());
+            System.out.println(display.printLine());
             if (cmd.equals("list")) {
-                taskList.displayTasks();
+                storage.taskList.displayTasks();
             } else if (cmd.equals("bye")) {
                 break;
             } else if (cmd.contains("done")) {
                 int index = Integer.parseInt(cmd.substring(5));
-                taskList.setTaskDone(index);
-                taskList.writeFile();
-            } else if (cmd.contains("delete")){
+                storage.taskList.setTaskDone(index);
+                storage.writeFile();
+            } else if (cmd.contains("delete")) {
                 int index = Integer.parseInt(cmd.substring(7));
-                taskList.removeTask(index );
-                taskList.writeFile();
+                storage.taskList.removeTask(index);
+                storage.writeFile();
             } else {
-                taskList = performChildTask(taskList, cmd);
-                taskList.writeFile();
+                storage.taskList = performChildTask(storage.taskList, cmd);
+                storage.writeFile();
             }
-            System.out.println(printLine());
+            System.out.println(display.printLine());
         }
-        printBye();
         input.close();
-        return taskList;
+        return storage.taskList;
     }
 
 
     public static TaskList performChildTask(TaskList taskList, String cmd) {
-        InputChecker checker = new InputChecker();
+        Parser checker = new Parser();
         int taskType = checker.checkTaskType(cmd);
         String task = checker.checkFrontInput(cmd, taskType);
         if(!task.isEmpty()) {
@@ -150,7 +120,7 @@ public class Duke {
                             performAddTask(taskList, newEvent);
                         }
                     }
-                    printTotalTasks(taskList);
+                    System.out.println(display.printTotalTasks(taskList));
                 }
             } catch (DukeException de) {
                 System.out.println(de.getMessage());
@@ -163,11 +133,5 @@ public class Duke {
         taskList.addTask(task);
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
-    }
-
-    public static void printTotalTasks(TaskList tasklist) {
-        System.out.println("Now you have "
-                + tasklist.getSize()
-                + " tasks in the list.");
     }
 }

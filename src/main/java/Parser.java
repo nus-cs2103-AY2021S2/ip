@@ -2,12 +2,12 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-public class InputChecker {
+public class Parser {
     public static final int TODO = 1;
     public static final int DEADLINE = 2;
     public static final int EVENT = 3;
 
-    public InputChecker() {
+    public Parser() {
 
     }
 
