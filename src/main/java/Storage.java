@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 
 class Storage {
 
-	//private final Path path;
 	private File data;
 
 	Storage() {
@@ -35,8 +34,28 @@ class Storage {
 		}
 	}
 
-	File load() {
-		return this.data;
+	ArrayList<Task> load() {
+		ArrayList<Task> list = new ArrayList<Task>();
+		try {
+			BufferedReader br = Files.newBufferedReader(this.data.toPath());
+			String line;
+
+			while ((line = br.readLine()) != null) {
+				String[] info = line.split("1!1");
+
+				if (info[0].equals("todo")) {
+					System.out.println(info[1]);
+					list.add(new ToDo(info[1], Boolean.parseBoolean(info[2])));
+				} else if (info[0].equals("deadline")) {
+					list.add(new Deadline(info[1], info[2], Boolean.parseBoolean(info[3])));
+				} else if (info[0].equals("event")) {
+					list.add(new Event(info[1], info[2], Boolean.parseBoolean(info[3])));
+				}
+			}
+		} catch (IOException e) {
+
+		}
+		return list;
 	}
 
 	void save(ArrayList<Task> mem) {

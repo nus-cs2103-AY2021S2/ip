@@ -23,35 +23,9 @@ class ChatBot {
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
 
-		this.mem = new ArrayList<Task>();
+		
 		this.storage = new Storage();
-
-		try {
-			BufferedReader br = Files.newBufferedReader(this.storage.load().toPath());
-			String line;
-
-			while ((line = br.readLine()) != null) {
-				String[] info = line.split("1!1");
-
-				System.out.println(line);
-				System.out.println(info[0]);
-				System.out.println(info[1]);
-				System.out.println(info[2]);
-
-				if (info[0].equals("todo")) {
-					System.out.println(info[1]);
-					this.mem.add(new ToDo(info[1], Boolean.parseBoolean(info[2])));
-				} else if (info[0].equals("deadline")) {
-					this.mem.add(new Deadline(info[1], info[2], Boolean.parseBoolean(info[3])));
-				} else if (info[0].equals("event")) {
-					this.mem.add(new Event(info[1], info[2], Boolean.parseBoolean(info[3])));
-				}
-			}
-
-			System.out.println(this.mem);
-		} catch (IOException e) {
-
-		}
+		this.mem = this.storage.load();
 	}
 
 	void initialize() {
@@ -169,43 +143,4 @@ class ChatBot {
 	boolean checkValid(String s) {
 		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
 	}
-/*
-	void save() {
-		try {
-			Path location = Path.of(Duke.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-			Path dir = location.resolve("data");
-			Path file = dir.resolve("list.txt");
-
-			Files.createDirectories(dir);
-
-			boolean fileExists = java.nio.file.Files.exists(file);
-			if (!fileExists) {
-				Files.createFile(file);
-			}
-		
-		ArrayList<String> list = new ArrayList<String>();
-
-		for (Task t : this.mem) {
-			list.add(t.saveName());
-		}
-		
-		Files.write(file, list);
-
-		} catch (URISyntaxException e) {
-
-		} catch (IOException e) {
-
-		}
-		/*
-		boolean directoryExists = java.nio.file.Files.exists(dir);
-
-		if (directoryExists) {
-			//dir.resolve("list.txt");
-			boolean fileExists = java.nio.file.Files.exists(file);
-		} else {
-
-		}
-		
-	}
-	*/
 }
