@@ -1,6 +1,8 @@
 package Task;
 
-public class Task {
+import Utils.Command;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -16,6 +18,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract String serialise();
 
     @Override
     public String toString() {

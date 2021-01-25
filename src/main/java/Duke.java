@@ -1,9 +1,12 @@
 import Exceptions.DukeException;
 import Exceptions.IncompleteInputException;
 import Exceptions.UnknownCommandException;
+import Storage.Storage;
 import Task.*;
 import Utils.Command;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static Utils.Print.printWithIndentation;
@@ -11,6 +14,29 @@ import static Utils.Print.printWithIndentation;
 public class Duke {
     private static final String BOT_NAME = "Chip the Squirrel";
     private static final TaskList taskList = new TaskList();
+    private static final Storage storage = new Storage("data/tasks.txt");
+
+    public static void loadData() {
+        try {
+            ArrayList<Task> tasks = storage.load();
+            taskList.setTaskList(tasks);
+        } catch (IOException e) {
+            printWithIndentation("Sorry something when wrong loading your safe file :(");
+            System.exit(0);
+        } catch (DukeException e) {
+            printWithIndentation(e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public static void saveData() {
+        try {
+            storage.save(taskList.getTaskList());
+        } catch (DukeException e) {
+            printWithIndentation(e.getMessage());
+            System.exit(0);
+        }
+    }
 
     public static void processInput(String input) throws DukeException {
         String[] tokens = input.split(" ", 2);
@@ -51,9 +77,13 @@ public class Duke {
                     throw new IncompleteInputException(command);
                 }
         }
+
+        saveData();
     }
 
     public static void main(String[] args) {
+        loadData();
+
         printWithIndentation("Hello! I'm " + BOT_NAME + "!", "What can I do for you today?");
 
         Scanner sc = new Scanner(System.in);
