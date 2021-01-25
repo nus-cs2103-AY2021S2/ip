@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Helper;
 import duke.TaskList;
 import duke.task.*;
 
@@ -9,6 +10,12 @@ public class AddCommand extends Command {
         super(commandSplit);
     }
 
+    /**
+     * Checks what type of add command it is (event, to do, deadline) then call the respective functions
+     * e.g. addDeadline to add a new task.
+     * @param list the task list.
+     * @throws DukeException if adding a task failed.
+     */
     @Override
     public void execute(TaskList list) throws DukeException {
         String keyword = commandSplit[0];

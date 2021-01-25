@@ -8,6 +8,11 @@ public class DeleteCommand extends Command {
         super(commandSplit);
     }
 
+    /**
+     * Deletes the user specified task from the task list.
+     * @param list the task list.
+     * @throws DukeException if failed to remove task from task list.
+     */
     @Override
     public void execute(TaskList list) throws DukeException {
         try {

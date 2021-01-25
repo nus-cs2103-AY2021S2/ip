@@ -6,7 +6,6 @@ import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
-import duke.task.Helper;
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;

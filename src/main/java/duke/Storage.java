@@ -27,6 +27,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a FileWriter object to allow for writing to file. If clearFile is not selected, FileWriter object
+     * will be in append mode so that file will not be overwritten.
+     * @param clearFile determines whether to overwrite file.
+     * @return FileWriter object to write to file.
+     * @throws DukeException if failed to access the file.
+     */
     private FileWriter getFileWriter(boolean clearFile) throws DukeException {
         try {
             File file = new File(LIST_FILE);
@@ -46,6 +53,12 @@ public class Storage {
         return getFileWriter(false);
     }
 
+    /**
+     * Reads tasks line by line from the storage and stores and returns new Task object in an ArrayList
+     * after parsing the lines.
+     * @return an ArrayList of task objects of tasks that are read from the storage.
+     * @throws DukeException if a task from storage is incorrectly formatted or failed to read storage file.
+     */
     public ArrayList<Task> readTasksFromFile() throws DukeException {
         File tasks = new File(LIST_FILE);
         Scanner s;
@@ -62,6 +75,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends the task to the end of the storage file.
+     * @param task task to be appended.
+     * @throws DukeException if failed to write task to storage.
+     */
     public void writeTaskToFile(Task task) throws DukeException {
         FileWriter fw = getFileWriter();
         try {
@@ -69,10 +87,14 @@ public class Storage {
             fw.append(System.getProperty("line.separator"));
             fw.close();
         } catch (IOException | NullPointerException e) {
-            throw new DukeException("Error writing task to storage/list " + e.getMessage());
+            throw new DukeException("Error writing task to storage/list.txt " + e.getMessage());
         }
     }
 
+    /**
+     * Clears the storage file of its contents.
+     * @throws DukeException if failed to read or write to storage file..
+     */
     public void clearFile() throws DukeException {
         FileWriter fw = getFileWriter(true);
         try {

@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Helper;
+import duke.Helper;
 import duke.task.Task;
 
 import java.time.LocalDate;
@@ -18,6 +18,12 @@ public class ListCommand extends Command {
         super(commandSplit);
     }
 
+    /**
+     * Lists out all tasks in the task list if user did not provide a date.
+     * Else, lists out only tasks that are marked with the given date.
+     * @param list the task list.
+     * @throws DukeException if an incorrect date format is provided.
+     */
     @Override
     public void execute(TaskList list) throws DukeException {
         //Check if command includes an optional date argument

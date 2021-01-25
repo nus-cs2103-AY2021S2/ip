@@ -3,7 +3,7 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.function.Function;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class TaskList {
@@ -30,6 +30,11 @@ public class TaskList {
         });
     }
 
+    /**
+     * Marks a task as done and also rewrite all tasks in the storage to reflect this change.
+     * @param taskNumber task number of the task to be marked as done.
+     * @throws DukeException if failed to rewrite tasks to storage.
+     */
     public void done(int taskNumber) throws DukeException {
         this.list.get(taskNumber - 1).done();
         rewriteTasks();
@@ -64,7 +69,10 @@ public class TaskList {
         Ui.printWithStyle(printedArray);
     }
 
-
+    /**
+     * Clears storage file of its contents and rewrites all tasks to storage file.
+     * @throws DukeException if failed to clear storage file or failed to write a task to storage file.
+     */
     public void rewriteTasks() throws DukeException {
         storage.clearFile();
         for (Task task : this.list) {
@@ -72,12 +80,22 @@ public class TaskList {
         }
     }
 
-    public <T> void forEach(Function<Task, T> funct) {
+    /**
+     * Applies a function to all tasks in the list.
+     * @param funct function to be applied.
+     * @param <T> the output type
+     */
+    public void forEach(Consumer<Task> funct) {
         for (Task task : list) {
-            funct.apply(task);
+            funct.accept(task);
         }
     }
 
+    /**
+     * Returns an ArrayList of tasks in which all tasks satisfy the predicate.
+     * @param predicate the function used to filter tasks.
+     * @return ArrayList of filtered tasks.
+     */
     public ArrayList<Task> filter(Predicate<Task> predicate) {
         ArrayList<Task> output = new ArrayList<>();
         for (Task task : list) {

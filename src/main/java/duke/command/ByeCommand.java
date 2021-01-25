@@ -9,8 +9,13 @@ public class ByeCommand extends Command {
         super(commandSplit);
     }
 
-    public void execute(TaskList task) throws DukeException {
-        task.rewriteTasks();
+    /**
+     * Rewrites all Tasks in the list to the storage before saying bidding user goodbye.
+     * @param list the task list.
+     * @throws DukeException if failed to rewrite tasks.
+     */
+    public void execute(TaskList list) throws DukeException {
+        list.rewriteTasks();
         Ui.printWithStyle("Bye. Hope to see you again soon!");
     }
 }

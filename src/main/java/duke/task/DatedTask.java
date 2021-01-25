@@ -7,6 +7,13 @@ import java.time.format.DateTimeParseException;
 public abstract class DatedTask extends Task {
     LocalDate date;
 
+    /**
+     * Checks if the provided date is of correct format then creates a new DatedTask with the specified
+     * task description and due date.
+     * @param task the task description
+     * @param date due date
+     * @throws TaskException if user provides incorrect date format for date.
+     */
     public DatedTask(String task, String date) throws TaskException {
         super(task);
         try {
