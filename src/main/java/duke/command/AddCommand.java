@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.common.DukeString;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public abstract class AddCommand implements Command {
     private final Task task;
 

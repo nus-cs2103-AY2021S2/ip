@@ -1,5 +1,6 @@
+package duke.common;
+
 public final class DukeString {
-    private DukeString() { }
     public static final String SEPARATOR = "--------------------------------------";
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_BYE = "Goodbye!";
@@ -20,4 +21,5 @@ public final class DukeString {
     public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
     public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
+    private DukeString() { }
 }

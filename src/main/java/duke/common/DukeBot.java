@@ -1,4 +1,10 @@
+package duke.common;
+
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.interaction.Parser;
+import duke.task.TaskList;
 
 public class DukeBot {
     private final Scanner scanner;

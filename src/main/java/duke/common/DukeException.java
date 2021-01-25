@@ -1,3 +1,5 @@
+package duke.common;
+
 public class DukeException {
     public static class InvalidCommand extends IllegalArgumentException {
         public InvalidCommand() {
