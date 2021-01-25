@@ -4,8 +4,8 @@ public class UnknownCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        System.out.println("     Unable to figure out this command");
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.unknownCommandInteraction();
     }
 
     public boolean isExit() {

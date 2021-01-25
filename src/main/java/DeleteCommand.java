@@ -6,9 +6,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            storage.overwrite(taskList.delete(taskDescription));
+            storage.overwrite(taskList.delete(taskDescription, ui));
         } catch (Exception ex) {
             System.out.println("     " + ex.getMessage());
         }

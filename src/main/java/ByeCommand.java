@@ -4,8 +4,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        System.out.println("     Bye. Hope to see you again soon!");
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.byeCommandInteraction();
     }
 
     public boolean isExit() {

@@ -5,7 +5,7 @@ public abstract class Command {
         this.taskDescription = taskDescription;
     }
 
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 
     public abstract boolean isExit();
 }

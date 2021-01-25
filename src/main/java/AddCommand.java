@@ -8,15 +8,15 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task;
             if (type.equals("deadline")) {
-                storage.append(taskList.addTask("deadline", taskDescription));
+                storage.append(taskList.addTask("deadline", taskDescription, ui));
             } else if (type.equals("event")) {
-                storage.append(taskList.addTask("event", taskDescription));
+                storage.append(taskList.addTask("event", taskDescription, ui));
             } else if (type.equals("todo")) {
-                storage.append(taskList.addTask("todo", taskDescription));
+                storage.append(taskList.addTask("todo", taskDescription, ui));
             }
         } catch (DateTimeParseException e) {
             System.out.println("     The date time format is wrong. It supposed to be yyyy-MM-dd or yyyy/MM/dd");

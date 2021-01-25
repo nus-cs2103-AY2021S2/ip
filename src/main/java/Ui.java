@@ -25,4 +25,32 @@ public class Ui {
         userInput[1] = sc.nextLine().strip();
         return userInput;
     }
+
+    public void addCommandInteraction(Task task, ArrayList<Task> tasks) {
+        System.out.println("     Got it. I've added this task:");
+        System.out.println("     " + task);
+        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+    }
+
+    public void deleteCommandInteraction(Task task, ArrayList<Task> tasks) {
+        System.out.println("     Noted. I've removed this task: ");
+        System.out.println("     " + task);
+        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+    }
+
+    public void doneCommandInteraction(Task task) {
+        System.out.println("     Nice! I've marked this task as done:\n     " + task);
+    }
+
+    public void listCommandInteraction(TaskList task) {
+        task.list();
+    }
+
+    public void byeCommandInteraction() {
+        System.out.println("     Bye. Hope to see you again soon!");
+    }
+
+    public void unknownCommandInteraction() {
+        System.out.println("     Unable to figure out this command");
+    }
 }

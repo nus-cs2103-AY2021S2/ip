@@ -17,7 +17,7 @@ public class TaskList {
         }
     }
 
-    public Task addTask(String type, String taskDescription)
+    public Task addTask(String type, String taskDescription, Ui ui)
             throws InvalidDescriptionException, DateTimeParseException {
         Task task;
         if (taskDescription.length() == 0) {
@@ -40,20 +40,16 @@ public class TaskList {
             }
         }
         tasks.add(task);
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("     " + task);
-        System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+        ui.addCommandInteraction(task, tasks);
         return task;
     }
 
-    public ArrayList<Task> delete(String taskDescription) throws InvalidDescriptionException{
+    public ArrayList<Task> delete(String taskDescription, Ui ui) throws InvalidDescriptionException{
         try {
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
             Task task = tasks.get(index);
             tasks.remove(index);
-            System.out.println("     Noted. I've removed this task: ");
-            System.out.println("     " + task);
-            System.out.println("     Now you have " + tasks.size() + " task(s) in the list");
+            ui.deleteCommandInteraction(task, tasks);
             return tasks;
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");
@@ -63,12 +59,12 @@ public class TaskList {
         }
     }
 
-    public ArrayList<Task> done(String taskDescription) throws InvalidDescriptionException {
+    public ArrayList<Task> done(String taskDescription, Ui ui) throws InvalidDescriptionException {
         try {
             int index = Integer.parseInt(taskDescription.substring(0, 1)) - 1;
             Task task = tasks.get(index);
             task.completeTask();
-            System.out.println("     Nice! I've marked this task as done:\n     " + task);
+            ui.doneCommandInteraction(task);
             return tasks;
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("☹ OOPS!!! The task description is wrong");

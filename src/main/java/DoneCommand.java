@@ -6,9 +6,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            storage.overwrite(taskList.done(taskDescription));
+            storage.overwrite(taskList.done(taskDescription, ui));
         } catch (Exception ex) {
             System.out.println("     " + ex.getMessage());
         }
