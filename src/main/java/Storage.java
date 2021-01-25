@@ -7,9 +7,33 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
+    private boolean existFile;
+    private String filePath;
+    private boolean existDir;
+    private String dirPath;
 
-    public static void readTasks(String filePath) throws FileNotFoundException {
-        File f = new File(filePath);
+    public Storage(String filePath, String dirPath){
+        this.filePath = filePath;
+        this.dirPath = dirPath;
+    }
+
+    public TaskList readTasks(TaskList taskList) throws FileNotFoundException {
+        File f = new File(dirPath);
+        if (!f.exists()){
+            existDir = f.mkdir();
+        }
+
+        try{
+            f = new File(filePath);
+            if (!f.exists()){
+                existFile = f.createNewFile();
+            }
+        }
+        catch (IOException e){
+            throw new FileNotFoundException();
+        }
+
+
         Scanner s = new Scanner(f);
         DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         while (s.hasNext()) {
@@ -19,7 +43,8 @@ public class Storage {
 
             if (type.equals("T")){
                 String name = info.substring(5);
-                new ToDo(name,status);
+                ToDo todo = new ToDo(name,status);
+                taskList.addTasks(todo);
             }
             else if(type.equals("D")){
                 int endNameIndex = info.indexOf("(");
@@ -27,7 +52,8 @@ public class Storage {
                 String name = info.substring(5 , endNameIndex - 1);
                 String by = info.substring(endNameIndex + 5, endTimeIndex);
                 LocalDateTime byTime = LocalDateTime.parse(by,df);
-                new Deadline(name, byTime, status);
+                Deadline deadline = new Deadline(name, byTime, status);
+                taskList.addTasks(deadline);
             }
             else if(type.equals("E")){
                 int endNameIndex = info.indexOf("(");
@@ -35,22 +61,25 @@ public class Storage {
                 String name = info.substring(5 , endNameIndex - 1);
                 String at = info.substring(endNameIndex + 5, endTimeIndex);
                 LocalDateTime atTime = LocalDateTime.parse(at,df);
-                new Event(name, atTime, status);
+                Event event = new Event(name, atTime, status);
+                taskList.addTasks(event);
             }
 
         }
+        return taskList;
     }
 
-    public static void saveTasks(String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath, false); // create a FileWriter in append mode
+    public void saveTasks(TaskList taskList) throws IOException {
+        FileWriter fw = new FileWriter(filePath, false);
+
         StringBuilder builder = new StringBuilder();
-        if (Task.getNumOfTasks() == 0) {
+        if (taskList.getNumOfTasks() == 0) {
             String textToAppend = builder.toString();
             fw.write(textToAppend);
             fw.close();
         }
         else{
-            for (Task task:Task.getTasks()){
+            for (Task task:taskList.getTasks()){
                 int status = task.getStatus() ? 1 : 0;
                 builder.append(status);
                 builder.append("|");
