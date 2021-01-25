@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.MatchStringNotFoundException;
+
 import duke.ui.Ui;
 
 import duke.storage.Storage;
@@ -32,9 +35,12 @@ public class FindCommand extends Command {
      * @param storage Storage for saving contents into file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList matchList = new TaskList(new ArrayList<Task>());
         String matchString = fullCommand.substring(4).trim();
+        if (matchString.isEmpty()) {
+            throw new MatchStringNotFoundException();
+        }
         for (int i = 0; i < tasks.size(); i++) {
             Task temp = tasks.getTask(i);
             if (temp.getDescription().contains(matchString)) {
