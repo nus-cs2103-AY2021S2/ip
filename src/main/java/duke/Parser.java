@@ -164,7 +164,8 @@ public class Parser {
      * @return description of task.
      * @throws DukeCorruptedStorageException when the encoded input is not of the right format.
      */
-    public static String obtainDescription(String input) throws DukeCorruptedStorageException{
+    public static String obtainEncodedDescription(String input)
+            throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         if (separatedInput[TODO_DESCRIPTION_PARAM].isBlank()) {
             throw new DukeCorruptedStorageException();
@@ -183,7 +184,7 @@ public class Parser {
         String isDone = separatedInput[IS_DONE_PARAM];
         if (isDone.equals(DONE_ENCODING)) {
             return true;
-        } else if (isDone.equals(NOT_DONE_ENCODING)){
+        } else if (isDone.equals(NOT_DONE_ENCODING)) {
             return false;
         } else {
             throw new DukeCorruptedStorageException();

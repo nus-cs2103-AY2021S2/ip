@@ -3,7 +3,7 @@ package duke.exceptions;
 /**
  * Represent the exception when the TaskList is empty but user wants to delete a task.
  */
-public class DukeEmptyListException extends DukeException{
+public class DukeEmptyListException extends DukeException {
 
     /**
      * Return string representation for the cause of the DukeEmptyListException.

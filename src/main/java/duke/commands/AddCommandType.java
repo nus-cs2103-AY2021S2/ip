@@ -4,7 +4,7 @@ package duke.commands;
  * AddCommandType contains command type for adding command types.
  */
 public enum AddCommandType {
-    TODO("todo", 2), DEADLINE("deadline", 9), EVENT( "event", 6);
+    TODO("todo", 2), DEADLINE("deadline", 9), EVENT("event", 6);
 
     private final String name;
     private final int addCommandPostfix;
