@@ -61,9 +61,14 @@ public class Parser {
     private static final DateTimeFormatter READABLE_DATETIME_YEAR_FORMAT =
             DateTimeFormatter.ofPattern("E h:mm a, d MMM yyyy");
 
+
     public static LocalDateTime parseDate(String input) throws DukeExceptionIllegalArgument {
+        return parseDate(input, LocalDateTime.now());
+    }
+    // Additional now param for mocking
+    public static LocalDateTime parseDate(String input, LocalDateTime now) throws DukeExceptionIllegalArgument {
         input = input.strip();
-        LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
+        now = now.withSecond(0).withNano(0);
         String inputAddYear = input+"_"+now.getYear();
 
         for (int i = 0; i < DATE_FORMATS.length; i++) {
