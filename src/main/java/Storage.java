@@ -11,8 +11,13 @@ import java.util.List;
 
 public class Storage {
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
+    public static ArrayList<Task> tasks;
 
-    public void readOrCreateFile(ArrayList<Task> tasks) throws IOException {
+    public Storage() {
+        tasks = new ArrayList<>();
+    }
+
+    public void readOrCreateFile() throws IOException {
         File myObj = new File(DEFAULT_STORAGE_FILEPATH);
         if (myObj.exists()) {
             readFileIntoList(DEFAULT_STORAGE_FILEPATH, tasks);
@@ -59,11 +64,11 @@ public class Storage {
                     }
                 }
             }
-            Duke.taskAdded();
+            Parser.taskAdded();
         }
     }
 
-    public void writeListIntoFile(ArrayList<Task> tasks) throws FileNotFoundException {
+    public void writeListIntoFile() throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(DEFAULT_STORAGE_FILEPATH);
         for (Task item: tasks) {
             writer.println(item.toString());

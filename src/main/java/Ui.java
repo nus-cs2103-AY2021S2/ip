@@ -1,5 +1,6 @@
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -40,6 +41,50 @@ public class Ui {
 
     public void prompt() {
         out.print(this.username + ": ");
+    }
+
+    public void todoMsg(ArrayList<Task> tasks, int totalTasks) {
+        out.println(DIVIDER);
+        out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
+        out.println("Now you have " + totalTasks + " tasks in the list.");
+        out.println(DIVIDER);
+    }
+
+    public void deadlineMsg(ArrayList<Task> tasks, int totalTasks) {
+        out.println(DIVIDER);
+        out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
+        out.println("Now you have " + totalTasks + " tasks in the list.");
+        out.println(DIVIDER);
+    }
+
+    public void eventMsg(ArrayList<Task> tasks, int totalTasks) {
+        out.println(DIVIDER);
+        out.println("Got it. I've added this task:\n" + "    " + tasks.get(totalTasks - 1).toString());
+        out.println("Now you have " + totalTasks + " tasks in the list.");
+        out.println(DIVIDER);
+    }
+
+    public void deleteMsg(String taskRemoved, int totalTasks) {
+        out.println(DIVIDER);
+        out.println("Noted. I've removed this task:\n" + "    " + taskRemoved);
+        out.println("Now you have " + totalTasks + " tasks in the list.");
+        out.println(DIVIDER);
+    }
+
+    public void doneMsg(ArrayList<Task> tasks, int itemNum) {
+        out.println(DIVIDER);
+        out.println("Nice! I've marked this task as done:\n" + "    " + tasks.get(itemNum - 1).toString());
+        out.println(DIVIDER);
+    }
+
+    public void listMsg(ArrayList<Task> tasks, int totalTasks) {
+        out.println(DIVIDER);
+        out.println("Here are the tasks in your list:");
+        for (int i = 0; i < totalTasks; i++){
+            int listNum = i + 1;
+            out.println(listNum + ". " + tasks.get(i).toString());
+        }
+        out.println(DIVIDER);
     }
 
     public void byeMsg() {

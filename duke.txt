@@ -1,3 +1,1 @@
-[T][ ] read book
-[D][ ] return book (by: Oct 12 2020)
-[T][ ] haha
+[T][-] read book
