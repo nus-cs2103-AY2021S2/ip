@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Duke {
 
     public static void main(String[] args) {
+        Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
         TaskList taskLst = new TaskList();
         boolean isExited = false;
@@ -14,11 +15,11 @@ public class Duke {
             storage = new Storage();
             storage.fillTaskLst(taskLst);
         } catch (DukeException e) {
-            printResponse(e.getMessage());
+            ui.print(e.getMessage());
             System.exit(1);
         }
 
-        printResponse(getWelcomeMsg());
+        ui.printWelcomeMsg();
         while (true) {
             try {
                 String input = sc.nextLine();
@@ -60,12 +61,12 @@ public class Duke {
                 }
 
                 storage.saveTaskLst(taskLst);
-                printResponse(resp);
+                ui.print(resp);
                 if (isExited) {
                     break;
                 }
             } catch (DukeException e) {
-                printResponse(e.getMessage());
+                ui.print(e.getMessage());
             }
         }
     }
@@ -79,11 +80,5 @@ public class Duke {
         return logo +
                 "Hello! I am duke\n" +
                 "What can I do for you?\n";
-    }
-
-    public static void printResponse(String resp) {
-        System.out.println("\t____________________________________________________________");
-        resp.lines().forEach(line -> System.out.printf("\t%s\n", line));
-        System.out.println("\t____________________________________________________________");
     }
 }
