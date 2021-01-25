@@ -1,4 +1,4 @@
-package main.java.exceptions;
+package main.java.duke.exceptions;
 
 /**
  * The ListOutOfBoundsException class is an exception thrown

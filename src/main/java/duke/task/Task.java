@@ -1,4 +1,4 @@
-package main.java.subfiles;
+package main.java.duke.task;
 
 /**
  * The Task class represents a single task created by the

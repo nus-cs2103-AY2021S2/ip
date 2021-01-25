@@ -1,7 +1,7 @@
-package main.java.command;
+package main.java.duke.command;
 
-import main.java.subfiles.TaskList;
-import main.java.subfiles.Ui;
+import main.java.duke.subfiles.TaskList;
+import main.java.duke.subfiles.Ui;
 
 public class ExitCommand extends Command {
 
@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui) {
-        return;
+
     }
 
     @Override

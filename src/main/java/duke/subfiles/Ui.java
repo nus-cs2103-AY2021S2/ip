@@ -1,4 +1,4 @@
-package main.java.subfiles;
+package main.java.duke.subfiles;
 
 import java.util.Scanner;
 

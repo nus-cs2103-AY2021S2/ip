@@ -1,12 +1,12 @@
-package main.java.command;
+package main.java.duke.command;
 
-import main.java.exceptions.DateFormatException;
-import main.java.exceptions.EmptyDescriptionException;
-import main.java.exceptions.EmptyTimeException;
-import main.java.exceptions.InvalidInputException;
+import main.java.duke.exceptions.DateFormatException;
+import main.java.duke.exceptions.EmptyDescriptionException;
+import main.java.duke.exceptions.EmptyTimeException;
+import main.java.duke.exceptions.InvalidInputException;
 
-import main.java.subfiles.TaskList;
-import main.java.subfiles.Ui;
+import main.java.duke.subfiles.TaskList;
+import main.java.duke.subfiles.Ui;
 
 public class AddCommand extends Command {
 

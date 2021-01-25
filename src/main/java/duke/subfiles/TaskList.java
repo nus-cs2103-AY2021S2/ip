@@ -1,15 +1,19 @@
-package main.java.subfiles;
+package main.java.duke.subfiles;
 
 import java.util.ArrayList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import main.java.exceptions.DateFormatException;
-import main.java.exceptions.EmptyDescriptionException;
-import main.java.exceptions.EmptyTimeException;
-import main.java.exceptions.InvalidInputException;
-import main.java.exceptions.ListOutOfBoundsException;
+import main.java.duke.exceptions.DateFormatException;
+import main.java.duke.exceptions.EmptyDescriptionException;
+import main.java.duke.exceptions.EmptyTimeException;
+import main.java.duke.exceptions.InvalidInputException;
+import main.java.duke.exceptions.ListOutOfBoundsException;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
 
 /**
  * The TaskManager class contains a list of tasks created by

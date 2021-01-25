@@ -1,12 +1,10 @@
-package main.java;
+package main.java.duke;
 
-import main.java.command.Command;
-import main.java.subfiles.Storage;
-import main.java.subfiles.TaskList;
-import main.java.subfiles.Ui;
-import main.java.subfiles.Parser;
-
-import java.util.Scanner;
+import main.java.duke.command.Command;
+import main.java.duke.subfiles.Parser;
+import main.java.duke.subfiles.Storage;
+import main.java.duke.subfiles.TaskList;
+import main.java.duke.subfiles.Ui;
 
 /**
  * The Duke program is an interactive application which

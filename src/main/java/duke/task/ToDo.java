@@ -1,4 +1,4 @@
-package main.java.subfiles;
+package main.java.duke.task;
 
 /**
  * The ToDo class represents a single to-do item created by the

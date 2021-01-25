@@ -1,11 +1,11 @@
-package main.java.subfiles;
+package main.java.duke.subfiles;
 
-import main.java.command.AddCommand;
-import main.java.command.Command;
-import main.java.command.DeleteCommand;
-import main.java.command.DoneCommand;
-import main.java.command.ExitCommand;
-import main.java.command.PrintCommand;
+import main.java.duke.command.AddCommand;
+import main.java.duke.command.Command;
+import main.java.duke.command.DeleteCommand;
+import main.java.duke.command.DoneCommand;
+import main.java.duke.command.ExitCommand;
+import main.java.duke.command.PrintCommand;
 
 public class Parser {
 
