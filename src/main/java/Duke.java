@@ -1,12 +1,16 @@
 //import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
     public static void main(String[] args) throws Exception {
         initialisation();
+        FileReading.printTaskList();
         Duke myDuke = new Duke();
         myDuke.run();
     }
+
     private static void initialisation(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,6 +22,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
     }
+
     private void run() throws DukeException {
         Scanner input = new Scanner(System.in);
         ArrayList<Task> myList = new ArrayList<>();
@@ -30,12 +35,16 @@ public class Duke {
         taskList.add("delete");
         String line = "---------------------------------------------";
 
+//        String home = System.getProperty("user.home");
+//        String filePath = home + File.separator + "CS2103_iP" + File.separator + "data" + File.separator + "duke.txt";
+
         while (input.hasNextLine()) {
             String s = input.nextLine();
             if (s.toLowerCase().equals("bye")) {
                 exit();
                 break;
-            } else if (s.toLowerCase().equals("list")) {
+            }
+            if (s.toLowerCase().equals("list")) {
                 displayList(myList);
             } else {
                 try {
@@ -55,55 +64,59 @@ public class Duke {
 
         if (!taskList.contains(taskType.toLowerCase())) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else {
-            if (taskType.toLowerCase().equals("done")) {
-                try {
-                    markTask(parts, myList);
-                } catch (DukeException e){
-                    System.out.println("---------------------------------------------");
-                    System.out.println(e.getMessage());
-                    System.out.println("---------------------------------------------");
-                }
-            } else {
-                if (taskType.toLowerCase().equals("delete")) {
-                    try {
-                        deleteTask(parts, myList);
-                    } catch (DukeException e){
-                        System.out.println("---------------------------------------------");
-                        System.out.println(e.getMessage());
-                        System.out.println("---------------------------------------------");
-                    }
-                } else {
-                    if (taskType.toLowerCase().equals("todo")) {
-                        try {
-                            addToDo(parts, myList);
-                        } catch (DukeException e) {
-                            System.out.println("---------------------------------------------");
-                            System.out.println(e.getMessage());
-                            System.out.println("---------------------------------------------");
-                        }
-                    } else {
-                        if (taskType.toLowerCase().equals("deadline")) {
-                            try {
-                                addDeadline(parts, myList);
-                            } catch (DukeException e) {
-                                System.out.println("---------------------------------------------");
-                                System.out.println(e.getMessage());
-                                System.out.println("---------------------------------------------");
-                            }
-                        }else{
-                            if (taskType.toLowerCase().equals("event")) {
-                                try {
-                                    addEvent(parts, myList);
-                                } catch (DukeException e) {
-                                    System.out.println("---------------------------------------------");
-                                    System.out.println(e.getMessage());
-                                    System.out.println("---------------------------------------------");
-                                }
-                            }
-                        }
-                    }
-                }
+        }
+
+        if (taskType.toLowerCase().equals("done")) {
+            try {
+                markTask(parts, myList);
+                FileWriting.saveTaskList(myList);
+            } catch (DukeException e) {
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
+            }
+        }
+
+        if (taskType.toLowerCase().equals("delete")) {
+            try {
+                deleteTask(parts, myList);
+                FileWriting.saveTaskList(myList);
+            } catch (DukeException e) {
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
+            }
+        }
+
+        if (taskType.toLowerCase().equals("todo")) {
+            try {
+                addToDo(parts, myList);
+                FileWriting.saveTaskList(myList);
+            } catch (DukeException e) {
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
+            }
+        }
+
+        if (taskType.toLowerCase().equals("deadline")) {
+            try {
+                addDeadline(parts, myList);
+                FileWriting.saveTaskList(myList);
+            } catch (DukeException e) {
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
+            }
+        }
+        if (taskType.toLowerCase().equals("event")) {
+            try {
+                addEvent(parts, myList);
+                FileWriting.saveTaskList(myList);
+            } catch (DukeException e) {
+                System.out.println("---------------------------------------------");
+                System.out.println(e.getMessage());
+                System.out.println("---------------------------------------------");
             }
         }
     }
