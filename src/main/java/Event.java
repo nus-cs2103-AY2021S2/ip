@@ -8,6 +8,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+//    public String archiveEvent() {
+//        String s = type + " | " + (this.isDone ? "1" : "0") + " | " + this.description;
+//        return s;
+//    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
