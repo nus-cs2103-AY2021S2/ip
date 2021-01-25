@@ -13,15 +13,11 @@ public class Ui {
   }
 
   public void showLoadFileError() {
-    printLineBreak();
     printIndented("Unable to load task list from file. A new task list is created.");
-    printLineBreak();
   }
 
   public void showError(DukeException e) {
-    printLineBreak();
     printIndented(e.toString());
-    printLineBreak();
   }
 
   public void printLineBreak() {
