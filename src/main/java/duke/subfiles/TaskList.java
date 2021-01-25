@@ -246,13 +246,18 @@ public class TaskList {
      */
     public void markDone(String s)
             throws InvalidInputException, ListOutOfBoundsException {
+        int index;
         try {
-            int index = Integer.parseInt(s) - 1;
+            String[] sArray = s.split(" ");
+            index = Integer.parseInt(sArray[1]) - 1;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException();
+        }
+
+        try {
             tasks.get(index).setDone();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(tasks.get(index).toString());
-        } catch (NumberFormatException e) {
-            throw new InvalidInputException();
         } catch (IndexOutOfBoundsException e) {
             throw new ListOutOfBoundsException(tasks.size());
         }
@@ -271,14 +276,19 @@ public class TaskList {
      *                                  not in the list.
      */
     public void deleteTask(String s) throws InvalidInputException, ListOutOfBoundsException {
+        int index;
         try {
-            int index = Integer.parseInt(s) - 1;
+            String[] sArray = s.split(" ");
+            index = Integer.parseInt(sArray[1]) - 1;
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw new InvalidInputException();
+        }
+
+        try {
             Task t = tasks.remove(index);
             System.out.println("Noted. I've removed this task:");
             System.out.println(t.toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        } catch (NumberFormatException e) {
-            throw new InvalidInputException();
         } catch (IndexOutOfBoundsException e) {
             throw new ListOutOfBoundsException(tasks.size());
         }

@@ -28,9 +28,9 @@ public class Parser {
         case "list":
             return new PrintCommand(s);
         case "done":
-            return new DoneCommand(sArray[1]);
+            return new DoneCommand(s);
         case "delete":
-            return new DeleteCommand(sArray[1]);
+            return new DeleteCommand(s);
         default:
             return new AddCommand(s);
         }
