@@ -1,20 +1,7 @@
 package chatbot;
 
-import chatbot.tasks.Task;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
-import java.io.File;
-
-import chatbot.tasks.TodoTask;
-import chatbot.tasks.DeadlineTask;
-import chatbot.tasks.EventTask;
-import java.time.LocalDate;
-
+import chatbot.commands.ChatBotCommand;
 import chatbot.exceptions.ChatBotException;
-import chatbot.exceptions.MissingDescriptionException;
-import chatbot.exceptions.UnknownInputException;
 
 public class ChatBot {
     private Storage storage;
@@ -38,17 +25,20 @@ public class ChatBot {
 
         boolean isExit = false;
         while (!isExit) {
-            /**
+
             try {
                 String command = ui.nextCommand();
                 ui.linkBreaker();
+                ChatBotCommand c = Parser.parse(command);
+                c.runTask(ui, th, storage);
+                isExit = c.isTerminated();
 
             } catch (ChatBotException e) {
                 ui.errorLine(e.getMessage());
             } finally {
                 ui.linkBreaker();
             }
-             */
+
         }
     }
     public static void main(String[] args) {

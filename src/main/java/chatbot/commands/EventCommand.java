@@ -20,7 +20,7 @@ public class EventCommand extends ChatBotCommand {
         th.addEventTask(taskName, time);
         storage.writeToFile(th);
         ui.printLine("Got it. I've added this task:");
-        ui.printLine(th.getTaskList().get(th.getLength()).toString());
+        ui.printLine(th.getTaskList().get(th.getLength() - 1).toString());
         ui.printLine(String.format("Now you have %d task(s) in the list",
                 th.getLength()));
     }

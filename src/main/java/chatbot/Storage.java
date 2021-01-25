@@ -40,12 +40,14 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filePath);
 
             for (int i = 0; i < taskList.size(); i++) {
-                fw.write(taskList.get(i).toString());
-                fw.close();
+                fw.write(taskList.get(i).writeToFileFormat() + "\n");
             }
+            fw.close();
 
         } catch (IOException e) {
+
             throw new FileIoException();
+
         }
     }
 }

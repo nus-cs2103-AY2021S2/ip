@@ -69,9 +69,9 @@ public class TaskHandler {
     public void loadTaskList(ArrayList<String> storedTaskList) {
         for (String eachTask : storedTaskList) {
             String[] words = eachTask.split("\\|");
-            String type = words[0];
-            boolean isDone = words[1].equals("1");
-            String taskName = words[2];
+            String type = words[0].strip();
+            boolean isDone = words[1].strip().equals("1");
+            String taskName = words[2].strip();
 
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             switch (type) {
@@ -84,7 +84,7 @@ public class TaskHandler {
                     break;
                 }
                 case "D": {
-                    LocalDate deadline = LocalDate.parse(words[3], dateFormat);
+                    LocalDate deadline = LocalDate.parse(words[3].strip(), dateFormat);
                     Task task = new DeadlineTask(taskName, deadline);
                     if (isDone) {
                         task.taskDone();

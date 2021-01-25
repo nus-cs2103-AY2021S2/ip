@@ -1,7 +1,7 @@
 package chatbot.tasks;
 
 
-public class Task {
+public abstract class Task {
     protected boolean isDone;
     protected String taskName;
 
@@ -22,6 +22,7 @@ public class Task {
     public boolean getIsDone() {
         return this.isDone;
     }
+    public abstract String writeToFileFormat();
 
 
     //format how task is printed out
