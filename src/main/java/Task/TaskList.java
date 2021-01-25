@@ -1,8 +1,11 @@
 package Task;
 
+import Exceptions.InvalidDateException;
 import Exceptions.InvalidInputException;
 import Utils.Command;
+import Utils.DateTime;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import static Utils.Print.printWithIndentation;
@@ -28,7 +31,7 @@ public class TaskList {
         }
     }
 
-    public void addTask(Command command, String input) throws ArrayIndexOutOfBoundsException {
+    public void addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException {
         String[] tokens;
         Task task;
 
@@ -39,12 +42,20 @@ public class TaskList {
             case DEADLINE:
                 tokens = input.split(" /by ", 2);
                 input = tokens[0];
-                task = new Deadline(input, tokens[1]);
+                try {
+                    task = new Deadline(input, DateTime.parseDate(tokens[1]));
+                } catch (DateTimeParseException e) {
+                    throw new InvalidDateException(tokens[1]);
+                }
                 break;
             case EVENT:
                 tokens = input.split(" /at ", 2);
                 input = tokens[0];
-                task = new Event(input, tokens[1]);
+                try {
+                    task = new Event(input, DateTime.parseDate(tokens[1]));
+                } catch (DateTimeParseException e) {
+                    throw new InvalidDateException(tokens[1]);
+                }
                 break;
             default:
                 printWithIndentation("I do not understand.");

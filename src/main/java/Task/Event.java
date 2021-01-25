@@ -1,15 +1,19 @@
 package Task;
 
-public class Event extends Task {
-    protected String at;
+import Utils.DateTime;
 
-    public Event(String description, String at) {
+import java.time.LocalDate;
+
+public class Event extends Task {
+    protected LocalDate at;
+
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + DateTime.getDate(at) + ")";
     }
 }
