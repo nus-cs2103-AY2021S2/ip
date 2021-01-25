@@ -4,6 +4,10 @@ public class Todo extends Task {
         super(desc);
     }
 
+    public Todo(String desc, boolean isDone) {
+        super(desc, isDone);
+    }
+
     static public Todo parse(String input) throws DukeException {
         String[] arr = input.split("todo");
         if (arr.length < 2) throw new DukeException("Todo description cannot be empty");

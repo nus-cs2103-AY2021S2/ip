@@ -7,12 +7,21 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
+        this.isDone = isDone;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }
 
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]");
+    }
+
+    public String toFileString() {
+        return String.format("%s|%b|%s", "X", isDone, desc);
     }
 
     @Override

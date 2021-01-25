@@ -6,6 +6,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public Event(String desc, boolean isDone, String at) {
+        super(desc, isDone);
+        this.at = at;
+    }
+
     static public Event parse(String input) throws DukeException {
         String[] arr = input.split("event");
         if (arr.length < 2) throw new DukeException("Event description cannot be empty");
