@@ -3,24 +3,61 @@ What can I do for you?
 Got it. I've added this task:
 [T][ ] borrow book
 Now you have 1 tasks in the list.
+
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Nov 11 2011)
 Now you have 2 tasks in the list.
+
 Got it. I've added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[D][ ] return book (by: Jan 1 2019)
 Now you have 3 tasks in the list.
+
+Got it. I've added this task:
+[D][ ] return book (by: Feb 28 2034)
+Now you have 4 tasks in the list.
+
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+
+Got it. I've added this task:
+[E][ ] project meeting (at: Feb 28 2034)
+Now you have 5 tasks in the list.
+
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][ ] return book (by: Sunday)
-3. [E][ ] project meeting (at: Mon 2-4pm)
+2. [D][ ] return book (by: Nov 11 2011)
+3. [D][ ] return book (by: Jan 1 2019)
+4. [D][ ] return book (by: Feb 28 2034)
+5. [E][ ] project meeting (at: Feb 28 2034)
+
 Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
-OOPS!!! The list currently only has 3 elements.
+[D][X] return book (by: Nov 11 2011)
+
+Nice! I've marked this task as done:
+[D][X] return book (by: Feb 28 2034)
+
 Noted. I've removed this task:
-[E][ ] project meeting (at: Mon 2-4pm)
-Now you have 2 tasks in the list.
-OOPS!!! The list currently only has 2 elements.
+[D][ ] return book (by: Jan 1 2019)
+Now you have 4 tasks in the list.
+
+Noted. I've removed this task:
+[D][X] return book (by: Feb 28 2034)
+Now you have 3 tasks in the list.
+
 Here are the tasks in your list:
 1. [T][ ] borrow book
-2. [D][X] return book (by: Sunday)
+2. [D][X] return book (by: Nov 11 2011)
+3. [E][ ] project meeting (at: Feb 28 2034)
+
+OOPS!!! Please give your date in the format YYYY-MM-DD.
+
+You have no deadlines due on 1111-11-11.
+You have no events due on 1111-11-11.
+
+You have no deadlines due on 2034-02-28.
+Here are the events due on 2034-02-28:
+1. [E][ ] project meeting (at: Feb 28 2034)
+
+
 Bye. Hope to see you again soon!

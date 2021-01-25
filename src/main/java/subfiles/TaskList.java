@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import main.java.exceptions.*;
+import main.java.exceptions.DateFormatException;
+import main.java.exceptions.EmptyDescriptionException;
+import main.java.exceptions.EmptyTimeException;
+import main.java.exceptions.InvalidInputException;
+import main.java.exceptions.ListOutOfBoundsException;
 
 /**
  * The TaskManager class contains a list of tasks created by
@@ -16,14 +20,14 @@ import main.java.exceptions.*;
  * @version 1.0
  * @since   2021-01-19
  */
-public class TaskManager {
+public class TaskList {
     /** List of tasks created by user input */
     private ArrayList<Task> tasks;
 
     /**
      * Default constructor for the TaskManager class.
      */
-    public TaskManager() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
@@ -136,19 +140,23 @@ public class TaskManager {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    public void addTaskFromData(String s) {
+    public void addTaskFromData(String s) throws DateFormatException {
         String[] sArray = s.split(" \\| ");
 
-        if (sArray[0].equals("T")) {
-            tasks.add(new ToDo(sArray[2]));
-        } else if (sArray[0].equals("D")) {
-            tasks.add(new Deadline(sArray[2], sArray[3]));
-        } else {
-            tasks.add(new Event(sArray[2], sArray[3]));
-        }
+        try {
+            if (sArray[0].equals("T")) {
+                tasks.add(new ToDo(sArray[2]));
+            } else if (sArray[0].equals("D")) {
+                tasks.add(new Deadline(sArray[2], LocalDate.parse(sArray[3])));
+            } else {
+                tasks.add(new Event(sArray[2], LocalDate.parse(sArray[3])));
+            }
 
-        if (sArray[1].equals("1")) {
-            tasks.get(tasks.size() - 1).setDone();
+            if (sArray[1].equals("1")) {
+                tasks.get(tasks.size() - 1).setDone();
+            }
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
         }
     }
 
