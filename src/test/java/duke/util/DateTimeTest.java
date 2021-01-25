@@ -16,7 +16,7 @@ public class DateTimeTest {
 
     @Test
     void toString_acceptedInputs_printsCorrectly() {
-        assertEquals(new DateTime("12/12/2020").toString(), "12 Dec 2020");
-        assertEquals(new DateTime("06/08/2021 2359").toString(), "2359 06 Aug 2021");
+        assertEquals("12 Dec 2020", new DateTime("12/12/2020").toString());
+        assertEquals("2359 06 Aug 2021", new DateTime("06/08/2021 2359").toString());
     }
 }
