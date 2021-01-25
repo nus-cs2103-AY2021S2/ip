@@ -1,14 +1,16 @@
+package duke.task;
+
 /**
- * Task created by user
+ * Duke.Tasks.Task created by user
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * Constructor for Task
+     * Constructor for Duke.Tasks.Task
      *
-     * @param description Task Name
+     * @param description Duke.Tasks.Task Name
      */
     public Task(String description) {
         this.description = description;
@@ -34,7 +36,7 @@ public class Task {
     /**
      * Returns task name
      *
-     * @return Task name
+     * @return Duke.Tasks.Task name
      */
     public String getDescription() {
         return String.format("%s", description);

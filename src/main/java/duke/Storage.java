@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,15 +36,15 @@ public class Storage {
                 Task task = new Task("");
                 switch(taskInfo[0]) {
                 case "T":
-                    // ToDo task
+                    // Duke.Tasks.ToDo task
                     task = new ToDo(taskInfo[2]);
                     break;
                 case "D":
-                    // Deadline task
+                    // Duke.Tasks.Deadline task
                     task = new Deadline(taskInfo[2], LocalDate.parse(taskInfo[3]));
                     break;
                 case "E":
-                    // Event task
+                    // Duke.Tasks.Event task
                     task = new Event(taskInfo[2], LocalDate.parse(taskInfo[3]));
                     break;
                 default:

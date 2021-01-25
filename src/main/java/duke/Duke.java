@@ -1,8 +1,11 @@
-import java.io.IOException;
-import java.util.Scanner;
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
- * Driver class for Duke program
+ * Driver class for Duke.Duke program
  */
 public class Duke {
     private Storage storage;

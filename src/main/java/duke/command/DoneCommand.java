@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.Ui;
+
 public class DoneCommand extends Command {
 
     public DoneCommand(String command, String description) {

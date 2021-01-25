@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+import duke.Storage;
+import duke.task.*;
+import duke.Ui;
+import duke.Utility;
+
 import java.time.LocalDate;
 
 public class AddCommand extends Command {

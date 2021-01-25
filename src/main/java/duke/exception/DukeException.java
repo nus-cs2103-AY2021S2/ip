@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Custom Exception handling for DukeBot when handling commands
  */
@@ -12,9 +14,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Constructor for DukeException
+     * Constructor for Duke.Exceptions.DukeException
      *
-     * @param command Command given by user
+     * @param command Duke.Commands.Command given by user
      * @param exceptionType Type of exception that is caught
      */
     public DukeException(String command, DukeExceptionType exceptionType) {
@@ -55,7 +57,7 @@ public class DukeException extends Exception {
             errMsg = "☹ OOPS!!! The contents of the loaded file is corrupted, a new file will be created.";
             break;
         case SAVE_ERROR:
-            errMsg = "☹ OOPS!!! Unable to write to Duke.txt, please try again.";
+            errMsg = "☹ OOPS!!! Unable to write to Duke.Duke.txt, please try again.";
             break;
         case FILE_CREATION_ERROR:
             errMsg = "☹ OOPS!!! Unable to create file, please restart the program.";

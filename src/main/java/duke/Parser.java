@@ -1,3 +1,9 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.exception.DukeExceptionType;
+
 public class Parser {
 
     public static Command parse(String text) throws DukeException {
@@ -5,7 +11,7 @@ public class Parser {
         String description = description(text);
         Command commandType = null;
 
-        // Throws exception for ToDo, Event and Deadline tasks
+        // Throws exception for Duke.Tasks.ToDo, Duke.Tasks.Event and Duke.Tasks.Deadline tasks
         if (command.equals("todo") || command.equals("event") || command.equals("deadline")) {
             if (description.equals(command)) {
                 //Empty description

@@ -1,12 +1,14 @@
+package duke.task;
+
 /**
- * A task for ToDo
+ * A task for Duke.Tasks.ToDo
  */
 public class ToDo extends Task {
 
     /**
-     * Constructor for ToDo
+     * Constructor for Duke.Tasks.ToDo
      *
-     * @param description Task name
+     * @param description Duke.Tasks.Task name
      */
     public ToDo(String description) {
         super(description);
@@ -20,7 +22,7 @@ public class ToDo extends Task {
     /**
      * Returns task type, status icon and task name
      *
-     * @return String format specific to ToDo task
+     * @return String format specific to Duke.Tasks.ToDo task
      */
     @Override
     public String toString() {

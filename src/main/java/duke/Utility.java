@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -5,7 +7,7 @@ import java.time.format.DateTimeParseException;
 public class Utility {
 
     /**
-     * Used for DukeException handling, to check if user provides valid numeric selection when necessary
+     * Used for Duke.Exceptions.DukeException handling, to check if user provides valid numeric selection when necessary
      * @param text String to check for numeric value
      * @return True if valid numeric, false if invalid
      */
