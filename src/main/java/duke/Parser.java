@@ -4,17 +4,26 @@ import duke.command.*;
 import duke.exception.CommandException;
 import duke.task.Task;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
 
-    // takes care of parsing the input, then calls Command with appropriate arguements;
+    // takes care of parsing the input, then calls Command with appropriate arguments;
     public Parser(){
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<>();
         Command cmd = new HelloCommand();
+        Storage s = new Storage();
+        ArrayList<Task> list = new ArrayList<>();
+        try{
+            list = s.loadData();
+        } catch (IOException e){
+
+        }
         while(sc.hasNextLine()){
+            System.out.println(list.size());
             String line = sc.nextLine();
             String command = line.split(" ")[0];
             try {
@@ -77,6 +86,11 @@ public class Parser {
                 cmd = new ExceptionCommand("Please enter a valid value");
             } catch (CommandException e){
                 cmd = new ExceptionCommand(e.getMessage());
+            }
+            try {
+                s.storeData(list);
+            } catch (IOException e) {
+
             }
         }
         sc.close();

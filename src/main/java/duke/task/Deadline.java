@@ -7,6 +7,11 @@ public class Deadline extends Task{
     public Deadline(String description, String by){
         super(description);
         this.by = by;
+        this.type = "deadline";
+    }
+
+    public String getBy(){
+        return this.by;
     }
 
     @Override
