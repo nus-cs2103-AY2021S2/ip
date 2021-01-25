@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task{
     protected String description;
     protected boolean isCompleted;
@@ -13,7 +15,11 @@ public class Task{
 
     public String getFormattedData() {
         String status = isCompleted ? "1" : "0";
-        return  status + " | " + description;
+        return status + " | " + description;
+    }
+
+    public LocalDate getTaskDate() {
+        return null;
     }
 
     @Override
