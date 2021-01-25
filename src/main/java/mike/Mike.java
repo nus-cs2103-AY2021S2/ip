@@ -65,6 +65,10 @@ public class Mike {
                         ui.showIndexOutOfBoundsError(taskList);
                     }
                     break;
+                case FIND:
+                    String keyword = sc.next();
+                    ui.showMatchingResults(taskList.find(keyword));
+                    break;
                 default:
                     String description = sc.nextLine();
                     try {

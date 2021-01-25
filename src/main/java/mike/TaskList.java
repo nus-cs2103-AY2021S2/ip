@@ -59,6 +59,16 @@ public class TaskList {
         return taskToMark;
     }
 
+    public TaskList find(String keyword) {
+        TaskList matchingResults = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).toString().contains(keyword)) {
+                matchingResults.add(taskList.get(i));
+            }
+        }
+        return matchingResults;
+    }
+
     public Task get(int index) {
         return this.taskList.get(index);
     }
