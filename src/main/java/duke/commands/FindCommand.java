@@ -36,7 +36,7 @@ public class FindCommand extends Command {
         TaskList matchList = new TaskList(new ArrayList<Task>());
         String matchString = fullCommand.substring(4).trim();
         for (int i = 0; i < tasks.size(); i++) {
-            Task temp = tasks.get(i);
+            Task temp = tasks.getTask(i);
             if (temp.getDescription().contains(matchString)) {
                 matchList.add(temp);
             }

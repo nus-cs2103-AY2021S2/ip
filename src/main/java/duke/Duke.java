@@ -39,7 +39,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("Error: File does not exists.");
             System.exit(1);
-        } catch (InvalidSaveFileFormatException e) {
+        } catch (SaveFileInvalidFormatException e) {
             System.out.println("Error: Invalid content format in save file");
             System.exit(1);
         } catch (DateTimeParseException e) {
@@ -60,9 +60,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (IOException e) {

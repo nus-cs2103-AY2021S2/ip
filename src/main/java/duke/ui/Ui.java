@@ -56,7 +56,7 @@ public class Ui {
         System.out.println("\t____________________________________________________________\n"
                 + "\tHere are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks.get(i).toString());
+            System.out.println("\t" + (i + 1) + "." + tasks.getTask(i).toString());
         }
         System.out.println("\t____________________________________________________________\n");
     }
@@ -138,7 +138,7 @@ public class Ui {
     public void showDoneTask(TaskList tasks, int index) {
         System.out.println("\t____________________________________________________________\n"
                 + "\tNice! I've marked this task as done:\n\t\t"
-                + tasks.get(index - 1).toString() + "\n"
+                + tasks.getTask(index - 1).toString() + "\n"
                 + "\t____________________________________________________________\n");
     }
 
@@ -160,7 +160,7 @@ public class Ui {
         System.out.println("\t____________________________________________________________\n"
                 + "\tHere are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + "." + tasks.get(i).toString());
+            System.out.println("\t" + (i + 1) + "." + tasks.getTask(i).toString());
         }
         System.out.println("\t____________________________________________________________\n");
     }

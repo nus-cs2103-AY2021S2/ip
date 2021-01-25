@@ -3,12 +3,12 @@ package duke.exceptions;
 /**
  * Error class for invalid start and end time of task.
  */
-public class InvalidTimeDurationException extends DukeException {
+public class TimeDurationInvalidException extends DukeException {
     /**
-     * Constructs a CommandNotValidException with specific message
+     * Constructs a TimeDurationInvalidException with specific message
      * for invalid start and end time of task.
      */
-    public InvalidTimeDurationException() {
+    public TimeDurationInvalidException() {
         super("\tPlease enter a valid start and end time duration\n\t(start time < end time).\n");
     }
 }

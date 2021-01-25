@@ -4,13 +4,13 @@ import duke.exceptions.*;
 
 import duke.tasks.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 
 import java.time.LocalDate;
@@ -49,19 +49,19 @@ public class Storage {
      * Returns the List of Task saved in the save file.
      *
      * @return List of Task saved in the save file.
-     * @throws InvalidSaveFileFormatException If format of save file is invalid.
+     * @throws SaveFileInvalidFormatException If format of save file is invalid.
      * @throws FileNotFoundException If save file is not found.
      * @throws DateTimeParseException If format of date and time is invalid.
      */
-    public List<Task> load() throws
-            InvalidSaveFileFormatException, FileNotFoundException, DateTimeParseException {
+    public List<Task> load() throws SaveFileInvalidFormatException,
+            FileNotFoundException, DateTimeParseException {
         List<Task> taskList = new ArrayList<>();
         File file = new File(filePath);
         Scanner reader = new Scanner(file);
         while (reader.hasNextLine()) {
             String taskString = reader.nextLine();
             if (taskString.length() < 9) {
-                throw new InvalidSaveFileFormatException();
+                throw new SaveFileInvalidFormatException();
             }
 
             Task task;
@@ -71,7 +71,7 @@ public class Storage {
             String taskDateTime;
 
             if (taskCompletion != '1' && taskCompletion != '0') {
-                throw new InvalidSaveFileFormatException();
+                throw new SaveFileInvalidFormatException();
             }
 
             if (taskType == 'T') {
@@ -80,13 +80,13 @@ public class Storage {
             } else if (taskType == 'D') {
                 int dateTimeIndex = taskString.substring(8).indexOf('|');
                 if (dateTimeIndex == -1) {
-                    throw new InvalidSaveFileFormatException();
+                    throw new SaveFileInvalidFormatException();
                 }
 
                 taskDescription = taskString.substring(8, dateTimeIndex + 8).trim();
                 taskDateTime = taskString.substring(dateTimeIndex + 9).trim();
                 if (taskDateTime.isEmpty()) {
-                    throw new InvalidSaveFileFormatException();
+                    throw new SaveFileInvalidFormatException();
                 }
 
                 int timeIndex = taskDateTime.indexOf('|');
@@ -104,13 +104,13 @@ public class Storage {
             } else if (taskType == 'E') {
                 int dateIndex = taskString.substring(8).indexOf('|');
                 if (dateIndex == -1) {
-                    throw new InvalidSaveFileFormatException();
+                    throw new SaveFileInvalidFormatException();
                 }
 
                 taskDescription = taskString.substring(8, dateIndex + 8).trim();
                 taskDateTime = taskString.substring(dateIndex + 9).trim();
                 if (taskDateTime.isEmpty()) {
-                    throw new InvalidSaveFileFormatException();
+                    throw new SaveFileInvalidFormatException();
                 }
 
                 int timeIndex = taskDateTime.indexOf('|');
@@ -138,7 +138,7 @@ public class Storage {
                     }
                 }
             } else {
-                throw new InvalidSaveFileFormatException();
+                throw new SaveFileInvalidFormatException();
             }
 
             if (taskCompletion == '1') {
@@ -158,7 +158,7 @@ public class Storage {
      */
     public void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
-        List<Task> taskList = tasks.getTasks();
+        List<Task> taskList = tasks.getTaskList();
         for (Task task : taskList) {
             String saveLine = task.getSaveString() + '\n';
             fileWriter.write(saveLine);

@@ -41,7 +41,7 @@ public class TaskList {
      * @param index Index of the Task to be returned.
      * @return Task indicated.
      */
-    public Task get(int index) {
+    public Task getTask(int index) {
         return this.tasks.get(index);
     }
 
@@ -50,7 +50,7 @@ public class TaskList {
      *
      * @return List of Task.
      */
-    public List<Task> getTasks() {
+    public List<Task> getTaskList() {
         return this.tasks;
     }
 
