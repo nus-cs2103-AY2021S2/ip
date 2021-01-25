@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +40,6 @@ public class Store {
       Scanner fileReader = new Scanner(this.file);
       while (fileReader.hasNextLine()) {
         String line = fileReader.nextLine();
-        System.out.println(line);
         String[] stringArr = line.split(",");
         String taskType = stringArr[0];
         String taskIcon = stringArr[1];
@@ -58,7 +59,11 @@ public class Store {
           tasks.add(task);
         }
         if (taskType.equals("D")) {
-          Deadline task = new Deadline(taskDesc, stringArr[3]);
+          DateTimeFormatter informat = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+          DateTimeFormatter outformat = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+          LocalDateTime date = LocalDateTime.parse(stringArr[3], informat);
+          String formattedDate = outformat.format(date);
+          Deadline task = new Deadline(taskDesc, formattedDate);
           if (taskIcon.equals("\u2718")) {
             task.taskDone();
           }

@@ -134,10 +134,14 @@ public class Duke {
     if (input.length() != 8) {
       Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
               input.split("/by ")[1]);
-      System.out.println("Got it. I've added this task: ");
-      this.addList(task);
-      System.out.println(task);
-      System.out.println("Now you have " + this.tasklist.size() + " tasks in the list.");
+      if (task.dateError) {
+        return;
+      } else {
+        System.out.println("Got it. I've added this task: ");
+        this.addList(task);
+        System.out.println(task);
+        System.out.println("Now you have " + this.tasklist.size() + " tasks in the list.");
+      }
     }
   }
 
