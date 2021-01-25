@@ -18,7 +18,7 @@ public class TaskList {
     /**
      * Mark the numbered task as done.
      *
-     * @param num
+     * @param num task number.
      */
     public void doneTask(int num) {
         list.get(num).markAsDone();
@@ -27,7 +27,7 @@ public class TaskList {
     /**
      * Delete the numbered task from the list of tasks.
      *
-     * @param num
+     * @param num task number.
      */
     public void deleteTask(int num) {
         size = size - 1;
@@ -38,9 +38,9 @@ public class TaskList {
     /**
      * Add the required task into the list of tasks.
      *
-     * @param action
-     * @param task
-     * @param time
+     * @param action command.
+     * @param task description.
+     * @param time required for deadline and event.
      */
     public void addTask(String action, String task, String time) {
         size = size + 1;
@@ -63,8 +63,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find the tasks which has similar name to the string.
+     *
+     * @param task string to be searched.
+     */
     public void findTask(String task) {
-
         int num = 1;
 
         for (int i = 0; i < size; i++) {
@@ -73,11 +77,14 @@ public class TaskList {
                 System.out.println(num++ + "." + string);
             }
         }
-
     }
 
+    /**
+     * Search for tasks which take place at that timing.
+     *
+     * @param time string to be searched.
+     */
     public void dateTask(String time) {
-
         int num = 1;
 
         for (int i = 0; i < size; i++) {
@@ -86,7 +93,6 @@ public class TaskList {
                 System.out.println(num++ + "." + string);
             }
         }
-
     }
 
 }

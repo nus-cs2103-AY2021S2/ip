@@ -16,11 +16,10 @@ public class Storage {
     /**
      * Store the list of task into the file stated by the filepath.
      *
-     * @param tasks
-     * @throws DukeException
+     * @param tasks list of tasks.
+     * @throws DukeException if filepath is incorrect.
      */
     public void store(ArrayList<Task> tasks) throws DukeException {
-
         try {
             FileWriter fw = new FileWriter(filepath);
             int size = tasks.size();
@@ -48,11 +47,10 @@ public class Storage {
     /**
      * Load the list of tasks from the file stated by the filepath.
      *
-     * @return
-     * @throws DukeException
+     * @return list of tasks.
+     * @throws DukeException if file not found or corrupted.
      */
     public ArrayList<Task> load() throws DukeException {
-
         try {
             File f = new File(filepath);
             Scanner scan = new Scanner(f);
@@ -91,11 +89,10 @@ public class Storage {
                 if (done == 'X') {
                     task.markAsDone();
                 }
-
                 list.add(task);
             }
-            return list;
 
+            return list;
         } catch (FileNotFoundException e) {
             throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
         }

@@ -10,7 +10,6 @@ public class DateCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
         String time;
 
         if (info.equals("")) {
@@ -25,11 +24,11 @@ public class DateCommand extends Command {
             ui.showDate(time);
             tasks.dateTask(time);
         }
-
     }
 
     @Override
     public boolean isExit() {
         return false;
     }
+
 }
