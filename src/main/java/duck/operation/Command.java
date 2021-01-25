@@ -1,3 +1,10 @@
+package duck.operation;
+
+import duck.task.Deadline;
+import duck.task.Event;
+import duck.task.TaskList;
+import duck.task.Todo;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 

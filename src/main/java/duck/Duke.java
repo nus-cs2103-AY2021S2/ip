@@ -1,3 +1,11 @@
+package duck;
+
+import duck.operation.Command;
+import duck.operation.Parser;
+import duck.operation.Storage;
+import duck.operation.Ui;
+import duck.task.TaskList;
+
 import java.io.*;
 
 public class Duke {

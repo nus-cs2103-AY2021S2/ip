@@ -1,3 +1,7 @@
+package duck.task;
+
+import duck.task.Task;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

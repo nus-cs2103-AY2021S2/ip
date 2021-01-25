@@ -6,7 +6,7 @@ Hello from
 |____/ \__,_|_|\_\___|
 
     ------------------------------------------------------
-    Hello! I'm Duke Y(^_^)Y
+    Hello! I'm duck.Duke Y(^_^)Y
     What can I do for you?
 
     ------------------------------------------------------
@@ -56,10 +56,10 @@ Hello from
     OOPS!!! The description of a task cannot be empty. :-(
     ------------------------------------------------------
     ------------------------------------------------------
-    OOPS!!! the Task you choosing isn't existed :-(
+    OOPS!!! the duck.task.Task you choosing isn't existed :-(
     ------------------------------------------------------
     ------------------------------------------------------
-    OOPS!!! the Task you choosing isn't existed :-(
+    OOPS!!! the duck.task.Task you choosing isn't existed :-(
     ------------------------------------------------------
     ------------------------------------------------------
     OOPS!!! The deadline of a deadline task should be meaningful. :-(

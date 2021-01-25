@@ -1,3 +1,7 @@
+package duck.operation;
+
+import duck.task.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -12,7 +16,7 @@ public class Ui {
     public void showWelcome() {
         System.out.println("Hello from\n" + logo);
         System.out.println(INDENTATION + HORIZON);
-        System.out.println(INDENTATION + "Hello! I'm Duke Y(^_^)Y");
+        System.out.println(INDENTATION + "Hello! I'm duck.Duke Y(^_^)Y");
         System.out.println(INDENTATION + "What can I do for you?\n");
         System.out.println(INDENTATION + HORIZON);
     }
@@ -26,7 +30,7 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
         switch (command) {
         case "hello":
-            System.out.println(INDENTATION + "Hello! I'm Duke Y(^_^)Y");
+            System.out.println(INDENTATION + "Hello! I'm duck.Duke Y(^_^)Y");
             System.out.println(INDENTATION + "What can I do for you?\n");
             break;
         case "bye":
@@ -61,12 +65,12 @@ public class Ui {
         case "error_done_no_meaning":
         case "error_delete_no_meaning":
         case "error_date_no_meaning":
-            System.out.println(INDENTATION + "OOPS!!! Please input the number of the Task :-(");
+            System.out.println(INDENTATION + "OOPS!!! Please input the number of the duck.task.Task :-(");
             break;
         case "error_done_non_existed_task":
         case "error_delete_non_existed_task":
         case "error_date_non_existed_task":
-            System.out.println(INDENTATION + "OOPS!!! the Task you choosing isn't existed :-(");
+            System.out.println(INDENTATION + "OOPS!!! the duck.task.Task you choosing isn't existed :-(");
             break;
         case "error_todo_empty":
         case "error_deadline_empty":

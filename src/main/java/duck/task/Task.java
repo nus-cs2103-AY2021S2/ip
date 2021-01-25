@@ -1,3 +1,5 @@
+package duck.task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -30,4 +32,5 @@ public class Task {
     public String getPeriodDays() {
         return "";
     }
+
 }
