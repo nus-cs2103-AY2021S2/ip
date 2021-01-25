@@ -1,8 +1,8 @@
 todo todo one
-event event /at Mon 12-4pm
-event event one /at Tues 4-6pm
-deadline deadline /by Mon 12-4pm
-deadline deadline one /by Tues 4-6pm
+event event /at 2020-12-01
+event event one /at 2020-12-01
+deadline deadline /by 2020-12-01
+deadline deadline one /by 2020-12-01
 list
 done 1
 done 2
