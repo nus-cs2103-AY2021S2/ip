@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.TaskList;
 /**
  * An interface for commands that the user inputs.
