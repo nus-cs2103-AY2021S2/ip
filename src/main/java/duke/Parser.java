@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Parser class to parse input to specified outputs based on inputs.
+ */
 public class Parser {
     public static final String DEADLINE_COMMAND = "deadline";
     private static final String DONE_COMMAND = "done";
@@ -36,11 +39,21 @@ public class Parser {
     public static final int DATE_PARAM = 1;
     public static final int DATE_POSTFIX = 3;
 
+    /**
+     * Return a string representation based on LocalDate.
+     * @param date date used to create the string representation.
+     * @return the date with "MMM dd yyyy".
+     */
     public static String localDateToString(LocalDate date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return date.format(dtf);
     }
 
+    /**
+     * Return CommandType based on input.
+     * @param input user input used to return a CommandType.
+     * @return CommandType.
+     */
     static CommandType parseCommand(String input) {
         if (input.startsWith(DONE_COMMAND)) {
             return CommandType.DONE;
@@ -53,10 +66,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Return index based on string input.
+     * @param input input used to get index.
+     * @param i when the string representation of the index starts.
+     * @return index based on the input.
+     */
     public static int stringToIndex(String input, int i) {
         return Integer.parseInt(input.substring(i)) - INDEX_PADDING;
     }
 
+    /**
+     * Return AddCommandType based on input: TODO, DEADLINE, EVENT.
+     * @param input user input used to get AddCommandType.
+     * @return AddCommandType based on input.
+     * @throws DukeUnknownArgumentsException when the input contains an unknown command.
+     */
     public static AddCommandType inputToAddCommand(String input) throws DukeUnknownArgumentsException {
         if (input.startsWith(TODO_COMMAND)) {
             return AddCommandType.TODO;
@@ -69,6 +94,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Return description of the Todo based on input.
+     * @param input user input to get description of Todo.
+     * @return description of Todo based on input.
+     * @throws DukeNoDescriptionException when the description is empty.
+     */
     public static String parseTodoInput(String input) throws DukeNoDescriptionException {
         if (input.split(" ").length < TODO_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(TODO_COMMAND);
@@ -77,12 +108,25 @@ public class Parser {
         }
     }
 
+    /**
+     * Return LocalDate based on input and AddCommandType's postfix.
+     * @param input user input to get Task date representation.
+     * @param command AddCommandType to be used to distinguish how to get the LocalDate.
+     * @return LocalDate based on the string representation of the date.
+     */
     public static LocalDate obtainDate(String input, AddCommandType command) {
         input = input.substring(command.getPostfix());
         String[] inputs = input.split(DATE_SEPARATOR);
         return LocalDate.parse(inputs[DATE_PARAM].substring(DATE_POSTFIX));
     }
 
+    /**
+     * Return description of the Event and Deadline Task, depending on the command.
+     * @param input user input to get the description of the Event or Deadline.
+     * @param command AddCommandType used to differentiate the Event and Deadline.
+     * @return description of either Event or Deadline.
+     * @throws DukeNoDescriptionException when the description of the input is empty.
+     */
     public static String obtainDescription(String input, AddCommandType command) throws DukeNoDescriptionException {
         if (input.split(" ").length < DATE_INPUT_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(command.getName());
@@ -93,6 +137,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Return AddCommandType based on encoded input.
+     * @param input used to get encoded representation to get the AddCommandType.
+     * @return TODO if "T", DEADLINE if "D", EVENT if "E".
+     * @throws DukeCorruptedStorageException when the encoded command is unknown.
+     */
     public static AddCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String command = separatedInput[TODO_COMMAND_TYPE_PARAM];
@@ -108,8 +158,16 @@ public class Parser {
         }
     }
 
-    public static String obtainDescription(String input) {
+    /**
+     * Return description of task based on enccoded input.
+     * @param input encoded input from save file.
+     * @return description of task.
+     */
+    public static String obtainDescription(String input) throws DukeCorruptedStorageException{
         String[] separatedInput = input.split(DATA_SEPARATOR);
+        if (separatedInput[TODO_DESCRIPTION_PARAM].isBlank()) {
+            throw new DukeCorruptedStorageException();
+        }
         return separatedInput[TODO_DESCRIPTION_PARAM];
     }
 

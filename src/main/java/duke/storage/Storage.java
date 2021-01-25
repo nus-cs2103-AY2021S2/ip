@@ -16,6 +16,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the Storage file that is used to store and update the save file.
+ */
 public class Storage {
     private final static String DATA_DIR = new File("data").getAbsolutePath();
     private final File saveFile = new File(DATA_DIR + "/save.txt");
@@ -26,6 +29,10 @@ public class Storage {
         createDirectory();
     }
 
+    /**
+     * Return a new Storage or an existing one.
+     * @return a new or existing Storage class.
+     */
     public static Storage getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Storage();
@@ -33,6 +40,10 @@ public class Storage {
         return INSTANCE;
     }
 
+    /**
+     * Update the save file in the hardware with the new TaskList.
+     * @param tasks The TaskList used to update the save file.
+     */
     public void update(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(saveFile);
@@ -43,6 +54,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Return an ArrayList of Task from the save file.
+     * @return an ArrayList of Task from the save file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -62,6 +77,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Create a data directory from source unless it already exists.
+     */
     private void createDirectory() {
         Path dataPath = Paths.get(DATA_DIR);
         try {
