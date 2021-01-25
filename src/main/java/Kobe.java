@@ -5,9 +5,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+//import time.temporal.ChronoUnit;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
+
 
 public class Kobe {
     public static String ind = "    ";
@@ -37,7 +45,7 @@ public class Kobe {
             }
 
             if (!isFileEmpty) {
-                System.out.println(line + "Here are tasks that Kobe has retireved!\n" + line);
+                System.out.println(line + "Here are tasks that Kobe has retrieved!\n" + line);
             }
 
 
@@ -98,7 +106,8 @@ public class Kobe {
 
                     //If the array is in 2 parts, there is a condition, add that
                     if (commandArrSecond2Parts.length > 1) {
-                        condition = commandArrSecond2Parts[1];
+                        condition = commandArrSecond2Parts[1].substring(3);
+                        //no "/by"
                     }
 
                     addItem(taskName, type, condition);
@@ -109,19 +118,34 @@ public class Kobe {
         } catch (CustomExceptions.IncorrectDecriptionException e) {
             System.out.println(e);
         }
-//        } catch (KobeException e) {
-//            System.out.println(e);
-//        }
 
         sc.close();
     }
 
     public static void addItem(String echoedText, String type, String condition) {
-        Task currentTask = new Task(echoedText, type, condition);
-        tasks.add(currentTask);
-        System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
-                 currentTask);
+        //Recognise if condition is time
+        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+        df1.setLenient(false);
+        Task currentTask;
+        try {
+            df1.parse(condition);
+            LocalDate d1 = LocalDate.parse(condition);
+            currentTask = new Task(false, echoedText, type, d1);
+            tasks.add(currentTask);
+            System.out.print(line + "Got it! Kobe marked down this date!\n");
+            System.out.println(ind + "Kobe added this task:\n" + ind + ind +
+                    currentTask);
+        } catch (ParseException | NullPointerException e) { //not in the format
+//            tasks.add(new Task(echoedText, type, condition));
+            currentTask = new Task(echoedText, type, condition);
+            tasks.add(currentTask);
+            System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
+                    currentTask);
+        }
+
         System.out.println(ind + "Kobe sees that you have " + tasks.size() + " task(s) in the list.\n" + line);
+
+
     }
 
     public static void addItemByString(String text) {
@@ -146,7 +170,8 @@ public class Kobe {
         if (intoParts3[1].split(":", 2).length != 1) { //There is a condition, cos it can be split even more
             //Task without the condition
             intoParts3 = intoParts3[1].substring(1).split("\\(", 2);
-            taskName = intoParts3[0].substring(0);
+            String taskNameStr = intoParts3[0].substring(0);
+            taskName = taskNameStr.substring(0, taskNameStr.length()-1); //to fix extra space formed at the end
 //            System.out.println("NewTask: " + taskName);
 
             //Getting the condition
@@ -171,7 +196,20 @@ public class Kobe {
         if (isItDone.equals("X")) {
             isItDoneBoolean = true;
         }
-        tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
+
+        //Recognise time
+        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
+        df1.setLenient(false);
+        try {
+            df1.parse(condition);
+            LocalDate d1 = LocalDate.parse(condition);
+            tasks.add(new Task(isItDoneBoolean, taskName, type, d1));
+//            System.out.print(ind + "Kobe marked down this date!\n");
+        } catch (ParseException | NullPointerException e) { //not in the format
+            tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
+        }
+
+
     }
 
     public static void goodbye() {
@@ -183,7 +221,7 @@ public class Kobe {
     public static void showList() {
         System.out.print(line + "Here are the tasks in your list:\n");
         for(int i = 0; i < tasks.size(); i++) {
-            System.out.print(ind + (i+1) + ". " + tasks.get(i) + "\n");
+            System.out.print(ind + (i+1) + ". " + tasks.get(i).toString() + "\n");
         }
         System.out.println(line);
     }
