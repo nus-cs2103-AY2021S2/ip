@@ -13,14 +13,13 @@ import java.util.Scanner;
 public class DataStorage {
     private static final String filePath = "./src/main/java/duke/data/data.txt";
 
-    public static File getFile() throws IOException, DukeException {
+    public static File getFile() throws DukeException {
 
         File file = new File(filePath);
         if(!file.exists()){
             try {
                 file.createNewFile();
             }catch (Exception e){
-                e.printStackTrace();
                 throw new DukeException("Error creating file");
             }
         }
