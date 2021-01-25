@@ -19,23 +19,27 @@ public class TaskList {
     }
 
 
-    public static TaskList deserialise(String input) throws DukeException.StorageError {
+    public static TaskList deserialise(Scanner input) throws DukeException.StorageReadError {
         List<Task> list = new ArrayList<>();
-        Scanner scanner = new Scanner(input);
 
         String line;
-        while (scanner.hasNextLine()) {
-            line = scanner.nextLine();
-
+        while (input.hasNextLine()) {
+            line = input.nextLine();
+            if (line.equals("\n")) {
+                break;
+            }
             switch (line.split("\255")[0]) {
             case DukeString.COMMAND_DEADLINE :
                 list.add(DeadlineTask.deserialise(line));
+                break;
             case DukeString.COMMAND_EVENT :
                 list.add(EventTask.deserialise(line));
+                break;
             case DukeString.COMMAND_TODO :
                 list.add(TodoTask.deserialise(line));
+                break;
             default:
-                throw new DukeException.StorageError();
+                throw new DukeException.StorageReadError();
             }
         }
 

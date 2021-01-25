@@ -16,7 +16,7 @@ public class TodoTask extends Task {
     public String serialise() {
         return String.format(
                 "%s\255%b\255%s",
-                DukeString.COMMAND_EVENT,
+                DukeString.COMMAND_TODO,
                 super.isDone,
                 super.description
         );
