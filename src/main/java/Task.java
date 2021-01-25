@@ -18,7 +18,7 @@ public abstract class Task {
      * @param input input string to be parsed.
      * @return Task object corresponding to input string.
      */
-    public static Task stringToTask(String input) throws TaskException {
+    public static Task stringToTask(String input) throws TaskException, DukeException {
         //Check if it is a valid task first
         String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
         Pattern toDoPattern = Pattern.compile(TODO_REGEX);

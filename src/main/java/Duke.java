@@ -9,7 +9,7 @@ public class Duke {
         try {
             this.list = new TaskList();
         } catch (DukeException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
 

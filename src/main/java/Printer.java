@@ -2,7 +2,7 @@ public class Printer {
 
     /**
      * Prints each string in output array in a new line, using duke's style.
-     * @param output
+     * @param output array of strings to be printed out
      */
     public static void printWithStyle(String[] output) {
         System.out.println("    ________________________________________________________________");
@@ -14,7 +14,7 @@ public class Printer {
 
     /**
      * Prints the output string using duke's style.
-     * @param output
+     * @param output string to be printed out
      */
     public static void printWithStyle(String output) {
         System.out.println("    ________________________________________________________________");
