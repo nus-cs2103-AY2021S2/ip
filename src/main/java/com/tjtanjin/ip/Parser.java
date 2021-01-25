@@ -93,9 +93,7 @@ public class Parser {
         //program finds task by name on find
         } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
             String taskName = parseTaskName(input);
-            if (taskName == null) {
-                return;
-            } else {
+            if (taskName != null) {
                 FindCommand.execute(taskName);
             }
 
@@ -174,6 +172,8 @@ public class Parser {
                 Ui.showError("Usage for deadline: " + cmdInfo.get(Cmd.DEADLINE.toString()));
             } else if (taskType.equalsIgnoreCase("EVENT")) {
                 Ui.showError("Usage for event: " + cmdInfo.get(Cmd.EVENT.toString()));
+            } else if (taskType.equalsIgnoreCase("FIND")) {
+                Ui.showError("Usage for find: " + cmdInfo.get(Cmd.FIND.toString()));
             } else {
                 Ui.showError("Invalid instruction, perhaps you meant todo, deadline or event?");
             }
