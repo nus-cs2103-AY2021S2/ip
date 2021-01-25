@@ -72,7 +72,8 @@ public class UserInterface {
                     + String.valueOf(i++) + ". "
                     +  t.toString() + "\n";
         }
-        response += INDENT + "Now you have " + list.getTaskList().size() + " tasks in the list.\n" + DIVIDER;
+        String taskString = (list.getTaskList().size() == 1) ? "task" : "tasks";
+        response += INDENT + "Now you have " + list.getTaskList().size() + " " + taskString + " in the list.\n" + DIVIDER;
         return response;
     }
 

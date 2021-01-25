@@ -1,7 +1,5 @@
 package percy.command;
 
-import percy.exception.TodoException;
-
 public class Parser {
     public static String fullCmd;
 
@@ -12,20 +10,20 @@ public class Parser {
     public Command getCommand() {
         String command = this.fullCmd.split(" ", 2)[0];
         switch (command) {
-            case "todo":
-                return new TodoCommand(this.getTodoDescription());
-            case "event":
-                return new EventCommand(this.getEventDescription(), this.getEventDate());
-            case "deadline":
-                return new DeadlineCommand(this.getDeadlineDescription(), this.getDeadlineDate());
-            case "done":
-                return new DoneCommand(this.getTaskNumber());
-            case "list":
-                return new ListCommand();
-            case "delete":
-                return new DeleteCommand(this.getTaskNumber());
-            default:
-                return new UnknownCommand();
+        case "todo":
+            return new TodoCommand(this.getTodoDescription());
+        case "event":
+            return new EventCommand(this.getEventDescription(), this.getEventDate());
+        case "deadline":
+            return new DeadlineCommand(this.getDeadlineDescription(), this.getDeadlineDate());
+        case "done":
+            return new DoneCommand(this.getTaskNumber());
+        case "list":
+            return new ListCommand();
+        case "delete":
+            return new DeleteCommand(this.getTaskNumber());
+        default:
+            return new UnknownCommand();
         }
     }
 
