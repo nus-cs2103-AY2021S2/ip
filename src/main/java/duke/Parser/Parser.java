@@ -3,7 +3,6 @@ package duke.Parser;
 import duke.command.*;
 import duke.TaskList.TaskList;
 import duke.UI.UI;
-import duke.command.*;
 import duke.data.DataStorage;
 import duke.exception.DukeException;
 
@@ -11,6 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class to handle all user input
+ */
 public class Parser {
 
     private static UI ui = new UI();
@@ -25,6 +27,12 @@ public class Parser {
     private static boolean firstLaunch = true;
 
 
+    /** Call onto the respective command classes to handle different cases of command
+     * @param list
+     * @param input
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean parse(TaskList list, String input) throws DukeException {
 
         if(firstLaunch){
@@ -71,7 +79,7 @@ public class Parser {
                 taskList = ac.execute(taskList, ui, storage,"todo", null, null,null);
                 break;
             case ("deadline"):
-                String dateTime[] = seperateDueDate(input, "deadline");
+                String dateTime[] = separateDueDate(input, "deadline");
 
                 LocalDate date = LocalDate.parse(dateTime[0], dateFormatter);
                 LocalTime time;
@@ -88,8 +96,8 @@ public class Parser {
                 break;
             case ("event"):
 
-                String dateTimeArray[] = seperateDueDate(input, "event");
-                String timeArray[] = seperateStartEndTime(dateTimeArray);
+                String dateTimeArray[] = separateDueDate(input, "event");
+                String timeArray[] = separateStartEndTime(dateTimeArray);
 
                 LocalDate startDate = LocalDate.parse(dateTimeArray[0], dateFormatter);
                 LocalTime startTime = LocalTime.parse(timeArray[0], timeFormatter);
@@ -106,6 +114,12 @@ public class Parser {
     }
 
 
+    /** Check if index is valid in array list
+     * @param no index in arraylist
+     * @param type event type
+     * @param arraySize
+     * @return boolean
+     */
     public static boolean isValidTaskNumber(int no, String type, int arraySize) {
         try {
             if (no < 0 || no >= arraySize && !type.equals("done")) {
@@ -123,6 +137,11 @@ public class Parser {
         }
     }
 
+    /** Return array of string separated by space
+     * @param userInput
+     * @return array of string
+     * @throws DukeException
+     */
     public static String[] separateUserInput(String userInput) throws DukeException {
 
         String[] inputArray  = userInput.split(" ");
@@ -135,7 +154,13 @@ public class Parser {
         }
     }
 
-    public static String[] seperateDueDate (String input, String type) throws DukeException {
+    /** Return array of string separated into due dates
+     * @param input
+     * @param type
+     * @return array of string
+     * @throws DukeException
+     */
+    public static String[] separateDueDate(String input, String type) throws DukeException {
 
         if(input.contains("/by") && type.equals("deadline")) {
             String dueBy[] = input.split("/by ");
@@ -151,9 +176,30 @@ public class Parser {
             throw new DukeException("OOPS!!! Wrong command to add deadlines or start/end time. " +
                     "Use /by for deadline and /at for event");
         }
-
     }
 
+    /** Return array of string separated into start and end time
+     * @param dateTime
+     * @return array of string
+     * @throws DukeException
+     */
+
+    public static String[] separateStartEndTime(String[] dateTime) throws DukeException {
+        String[] timeArr;
+        if(dateTime[1].contains("-")) {
+            timeArr = dateTime[1].split("-");
+        }else{
+            throw new DukeException("Please seperate the time with '-'. For ie, 1800-2000 or include start/end date");
+        }
+        return timeArr;
+    }
+
+    /** Check if user passed in enugh parameters for deadline and event task
+     * @param dateTime
+     * @param type
+     * @return boolean
+     * @throws DukeException
+     */
     public static boolean dateTimeParse(String[] dateTime, String type) throws DukeException {
 
         if(dateTime.length < 2 && type.equals("deadline")){
@@ -165,14 +211,6 @@ public class Parser {
     }
 
 
-    public static String[] seperateStartEndTime (String[] dateTime) throws DukeException {
-        String[] timeArr;
-        if(dateTime[1].contains("-")) {
-            timeArr = dateTime[1].split("-");
-        }else{
-            throw new DukeException("Please seperate the time with '-'. For ie, 1800-2000 or include start/end date");
-        }
-        return timeArr;
-    }
+
 
 }

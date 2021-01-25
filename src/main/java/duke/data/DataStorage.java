@@ -13,9 +13,16 @@ import java.util.Scanner;
 public class DataStorage {
     private static final String filePath = "./src/main/java/duke/data/data.txt";
 
+    /** Retrieve data file if present
+     * Else create new data file
+     * @return file
+     * @throws DukeException
+     */
     public static File getFile() throws DukeException {
 
         File file = new File(filePath);
+        file.getParentFile().mkdirs();
+
         if(!file.exists()){
             try {
                 file.createNewFile();
@@ -26,6 +33,11 @@ public class DataStorage {
         return file;
     }
 
+
+    /** Save task into data file
+     * @param taskAL array list of task
+     * @throws DukeException
+     */
     public static void save(ArrayList<Task> taskAL) throws DukeException {
         try {
             File file = getFile();
@@ -41,6 +53,12 @@ public class DataStorage {
 
     }
 
+
+    /** Load data in file when program starts
+     * @return array lise of task
+     * @throws DukeException
+     * @throws IOException
+     */
     public static ArrayList<Task> loadFile() throws DukeException, IOException {
         File file = getFile();
         Task t = new Task();
