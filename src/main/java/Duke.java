@@ -1,5 +1,6 @@
 import models.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,7 +32,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
+        Storage storage = new Storage();
+        ArrayList<Task> tasks;
+        try {
+            tasks = storage.readTasks();
+        } catch(IOException e) {
+            System.err.println("Unable to create file");
+            tasks = new ArrayList<>();
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -121,6 +129,13 @@ public class Duke {
                     }
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                }
+                if (storage != null) {
+                    try {
+                        storage.writeTasks(tasks);
+                    } catch (IOException e) {
+                        System.err.println("Unable to write to file");
+                    }
                 }
             } catch (DukeException e) {
                 printIndentOutput("OOPSIE!! " + e.getMessage());
