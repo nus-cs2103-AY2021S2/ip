@@ -1,10 +1,28 @@
-import models.*;
+import models.Deadline;
+import models.Event;
+import models.Task;
+import models.Todo;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
+    public static final DateTimeFormatter formatter = new DateTimeFormatterBuilder().
+            appendPattern("[d/M/yyyy HHmm]").
+            appendPattern("[d/M/yyyy]").
+            appendPattern("[yyyy-M-d]").
+            appendPattern("[yyyy-M-d HH:mm]").
+            appendPattern("[MMM d yyyy]").
+            parseDefaulting(ChronoField.HOUR_OF_DAY, 0).
+            parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).
+            toFormatter(Locale.ENGLISH);
+
     private static void printIndentOutput(String output) {
         System.out.println('\t' + output);
     }
@@ -14,7 +32,7 @@ public class Duke {
     }
 
     private static boolean checkMatchString(String line, String match) {
-        return line.length() >= match.length() && line.substring(0, match.length()).equals(match);
+        return line.length() >= match.length() && line.startsWith(match);
     }
 
     private static void printTaskListStatus(ArrayList<Task> tasks, Task curTask) {
@@ -98,7 +116,7 @@ public class Duke {
                         throw new DukeException("The deadline needs to have a date specified with \"/by\".");
                     }
                     String taskName = deadlineArgs[0];
-                    String deadline = deadlineArgs[1];
+                    LocalDateTime deadline = LocalDateTime.parse(deadlineArgs[1], formatter);
                     Task curTask = new Deadline(taskName, deadline);
                     tasks.add(curTask);
                     printTaskListStatus(tasks, curTask);
@@ -109,8 +127,8 @@ public class Duke {
                         throw new DukeException("The event needs to have a date specified with \"/at\".");
                     }
                     String taskName = eventArgs[0];
-                    String date = eventArgs[1];
-                    Task curTask = new Event(taskName, date);
+                    LocalDateTime datetime = LocalDateTime.parse(eventArgs[1], formatter);
+                    Task curTask = new Event(taskName, datetime);
                     tasks.add(curTask);
                     printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "delete ")) {

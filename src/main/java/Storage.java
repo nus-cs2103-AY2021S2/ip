@@ -6,6 +6,7 @@ import models.Todo;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -51,18 +52,16 @@ public class Storage {
 
     public static Task parseTask(String taskString) {
         String[] taskStringArray = taskString.split("\\|");
-        System.out.println(Arrays.toString(taskStringArray));
         String type = taskStringArray[0];
         Task task = null;
 
         if (type.equals("T")) {
             task = new Todo(taskStringArray[2]);
         } else if (type.equals("D")) {
-            task = new Deadline(taskStringArray[2], taskStringArray[3]);
+            task = new Deadline(taskStringArray[2], LocalDateTime.parse(taskStringArray[3]));
         } else if (type.equals("E")) {
-            task = new Event(taskStringArray[2], taskStringArray[3]);
+            task = new Event(taskStringArray[2], LocalDateTime.parse(taskStringArray[3]));
         }
-        System.out.println(task);
 
         if (taskStringArray[1].equals('1') && task != null) {
             task.markAsDone();
@@ -89,7 +88,6 @@ public class Storage {
         String line;
 
         while ((line = reader.readLine()) != null) {
-            System.out.println("line: " + line);
             taskList.add(parseTask(line));
         }
 
