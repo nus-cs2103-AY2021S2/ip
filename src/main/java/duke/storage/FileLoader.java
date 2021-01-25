@@ -1,5 +1,9 @@
 package duke.storage;
 
+import duke.exceptions.DukeExceptionFileNotAccessible;
+import duke.exceptions.DukeExceptionFileNotWritable;
+import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.exceptions.DukeExceptionInvalidTaskString;
 import duke.tasks.TaskList;
 
 import java.io.File;
@@ -15,26 +19,29 @@ public class FileLoader {
     protected File f;
 
     // Load file containing task list information
-    public FileLoader(String pathStr) throws IOException {
-
-        File f = new File(pathStr);
-        f.getParentFile().mkdirs();
-        f.createNewFile();
-        this.f = f;
+    public FileLoader(String pathStr) {
+        f = new File(pathStr);
     }
 
-    public void write(TaskList t) {
+    public void write(TaskList t) throws DukeExceptionFileNotWritable {
         try (FileWriter writer = new FileWriter(f, false)){
             for (String s: t.asArrayList()) {
                 writer.write(s+'\n');
             }
         } catch (IOException e) {
-            // Should raise error here
-            System.out.println("ERROR");
+            throw new DukeExceptionFileNotWritable("Unable to write to file.");
         }
     }
 
-    public TaskList read() {
+    public TaskList read() throws DukeExceptionFileNotAccessible, DukeExceptionIllegalArgument {
+        try {
+            // For initialization, does nothing if exists
+            f.getParentFile().mkdirs();
+            f.createNewFile();
+        } catch (IOException e) {
+            throw new DukeExceptionFileNotAccessible("Failed to read file");
+        }
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader(f));
             String line;
@@ -43,11 +50,8 @@ public class FileLoader {
                 tasks.add(line);
             }
             return new TaskList(tasks);
-
         } catch (IOException e) {
-            // Should raise error here
-            System.out.println("ERROR");
-            return new TaskList();
+            throw new DukeExceptionIllegalArgument("Error in reading file.");
         }
     }
 }

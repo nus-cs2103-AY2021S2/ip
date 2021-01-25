@@ -1,38 +1,45 @@
 package duke.tasks;
 
-import duke.exceptions.DukeExceptionIllegalDate;
+import duke.exceptions.DukeExceptionIllegalArgument;
+import duke.parser.Parser;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
     protected LocalDateTime by;
 
-    public Deadline(String description, String by) throws DukeExceptionIllegalDate {
-        this(description, by, false);
+    public Deadline(String description, LocalDateTime dt) {
+        this(description, dt, false);
     }
-
-    public Deadline(String description, String by, boolean isDone) throws DukeExceptionIllegalDate {
+    public Deadline(String description, LocalDateTime dt, boolean isDone)  {
         super(description, isDone);
-        this.by = parseDate(by);
+        this.by = dt;
     }
 
-    // Enforce specific datetime
-    public LocalDateTime parseDate(String by) throws DukeExceptionIllegalDate {
-        try {
-            return LocalDateTime.parse(by, Task.fmt);
-        } catch (DateTimeParseException e) {
-            throw new DukeExceptionIllegalDate("TODO: Wrong date.");
+    public static Deadline parse(String s) throws DukeExceptionIllegalArgument {
+        if (s.equals("")) {
+            throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
         }
+
+        String[] tokens = s.split(" /by ");
+        if (tokens[0].equals("")) {
+            throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
+        }
+        if (tokens.length == 1 || tokens[1].equals("")) {
+            throw new DukeExceptionIllegalArgument("An deadline must have both description and time.");
+        }
+
+        LocalDateTime dt = Parser.parseDate(tokens[1]);
+        return new Deadline(tokens[0], dt);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(Task.outfmt) + ")";
+        return "[D]" + super.toString() + " (by: " + Parser.formatDate(by) + ")";
     }
 
     public String toFileString() {
-        return "D | " + ((isDone) ? 1 : 0) + " | " + description + " | " + by.format(Task.fmt);
+        return "D | " + ((isDone) ? 1 : 0) + " | " + description + " | " + Parser.formatDateISO(by);
     }
 }
