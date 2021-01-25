@@ -29,68 +29,67 @@ public class Duke {
     public void run() {
         ui.greetUser();
         Parser commandparser = new Parser();
-        try {
-            boolean readOn = true;
-            while(readOn) {
+        boolean readOn = true;
+        while (readOn) {
+            try {
                 String command = ui.getCommand();
                 commandparser.parse(command);
                 String[] desc = commandparser.getDesc(command);
                 String action = desc[0];
                 switch (action) {
-                case "bye":
-                    readOn = false;
-                    break;
-                case "list":
-                    ui.printList(tasks.taskList);
-                    break;
-                case "done":
-                    int n = Integer.parseInt(desc[1]);
-                    Task t = tasks.getTask(n);
-                    tasks.markComplete(n);
-                    ui.checkedTask(t);
-                    break;
-                case "todo":
-                    Task todo = new Todo(desc[1]);
-                    tasks.storeTask(todo);
-                    ui.addedTask(tasks.taskList, todo);
-                    break;
-                case "event":
-                    ui.requestDate();
-                    String date = ui.getDate();
-                    Task event = new Event(desc[1], date);
-                    tasks.storeTask(event);
-                    ui.addedTask(tasks.taskList, event);
-                    break;
-                case "deadline":
-                    ui.requestDeadline();
-                    String due = ui.getDate();
-                    Task deadline = new Deadline(desc[1], due);
-                    tasks.storeTask(deadline);
-                    ui.addedTask(tasks.taskList, deadline);
-                    break;
-                case "delete":
-                    Task task = tasks.getTask(Integer.parseInt(desc[1]));
-                    tasks.deleteTask(Integer.parseInt(desc[1]));
-                    ui.deletedTask(tasks.taskList, task);
-                    break;
-                case "find":
-                    tasks.findTasks(desc[1]);
-                    break;
-                default:
-                    throw new UnclearInputException();
+                    case "bye":
+                        readOn = false;
+                        break;
+                    case "list":
+                        ui.printList(tasks.taskList);
+                        break;
+                    case "done":
+                        int n = Integer.parseInt(desc[1]);
+                        Task t = tasks.getTask(n);
+                        tasks.markComplete(n);
+                        ui.checkedTask(t);
+                        break;
+                    case "todo":
+                        Task todo = new Todo(desc[1]);
+                        tasks.storeTask(todo);
+                        ui.addedTask(tasks.taskList, todo);
+                        break;
+                    case "event":
+                        ui.requestDate();
+                        String date = ui.getDate();
+                        Task event = new Event(desc[1], date);
+                        tasks.storeTask(event);
+                        ui.addedTask(tasks.taskList, event);
+                        break;
+                    case "deadline":
+                        ui.requestDeadline();
+                        String due = ui.getDate();
+                        Task deadline = new Deadline(desc[1], due);
+                        tasks.storeTask(deadline);
+                        ui.addedTask(tasks.taskList, deadline);
+                        break;
+                    case "delete":
+                        Task task = tasks.getTask(Integer.parseInt(desc[1]));
+                        tasks.deleteTask(Integer.parseInt(desc[1]));
+                        ui.deletedTask(tasks.taskList, task);
+                        break;
+                    case "find":
+                        tasks.findTasks(desc[1]);
+                        break;
+                    default:
+                        throw new UnclearInputException();
                 }
+            } catch (MissingInputException e) {
+                System.out.println((e.getMessage()));
+            } catch (UnclearInputException e) {
+                System.out.println((e.getMessage()));
+            } catch (DukeExceptions e) {
+                System.out.println((e.getMessage()));
             }
-            ui.sayGoodbye();
-            storage.write(tasks);
-        } catch (MissingInputException e) {
-            System.out.println((e.getMessage()));
-        } catch (UnclearInputException e) {
-            System.out.println((e.getMessage()));
-        } catch (DukeExceptions e) {
-            System.out.println((e.getMessage()));
         }
+        ui.sayGoodbye();
+        storage.write(tasks);
     }
-
     public static void main(String[] args) {
         new Duke("src/data/duke.txt").run();
     }

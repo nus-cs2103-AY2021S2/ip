@@ -2,6 +2,7 @@ package duke;
 
 import duke.Exceptions.MissingInputException;
 import duke.Exceptions.MissingTaskException;
+import duke.Exceptions.UnclearInputException;
 
 public class Parser {
 
