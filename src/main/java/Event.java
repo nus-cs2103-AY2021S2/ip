@@ -1,9 +1,23 @@
+import java.time.LocalDateTime;
+
 public class Event extends Task{
-    protected String at;
+    protected LocalDateTime at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = stringToDatetime(at);
+    }
+
+    private LocalDateTime stringToDatetime(String at){
+        return LocalDateTime.parse(at,DF1);
+    }
+
+    private String datetimeToString(LocalDateTime at){
+        return DF2.format(at);
+    }
+
+    public LocalDateTime getAt(){
+        return at;
     }
 
     public Event(String description, String at, boolean status){
@@ -12,7 +26,8 @@ public class Event extends Task{
     }
     @Override
     public String getTaskName() {
-        return "[E]" + super.getTaskName() + " (at: " + at + ")";
+        return "[E]" + super.getTaskName() + " (at: " + datetimeToString(at) + ")";
     }
-
 }
+
+
