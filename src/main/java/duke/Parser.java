@@ -6,8 +6,18 @@ import java.util.Scanner;
 
 import static duke.Ui.displayError;
 
+/**
+ * Parses and processes user input.
+ */
 public class Parser {
 
+    /**
+     * Returns a CommandType object which identifies the type of command was passed by the user.
+     *
+     * @param command a string which when valid, should correspond to one of the CommandType objects
+     * @return CommandType object
+     * @throws DukeException if the command string does not correspond to any of the valid CommandType objects
+     */
     private static CommandType getCommandType(String command) throws DukeException {
         try {
             return CommandType.valueOf(command.toUpperCase());
@@ -16,6 +26,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input line-by-line and processes user input accordingly.
+     */
     public static void parseAndProcessInput() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {

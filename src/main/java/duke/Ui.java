@@ -4,7 +4,15 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Responsible for methods printing to CLI.
+ */
 public class Ui {
+    /**
+     * Prints str into a pre-defined text box display.
+     *
+     * @param str String which is to be printed onto CLI
+     */
     private static void display(String str) {
         int longest = 0;
         String[] strings = str.split("\n");
@@ -25,6 +33,9 @@ public class Ui {
         System.out.println(topBorder + mainText + botBorder);
     }
 
+    /**
+     * Prints welcome message.
+     */
     protected static void displayWelcome() {
         display(
                 "█▄ ▄█ ▄▀▀ █▀▄ ▄▀▄ █▄ █ ▄▀▄ █   █▀▄ ▄▀▀\n"
@@ -34,12 +45,20 @@ public class Ui {
                         + "What can I do for you today?");
     }
 
+    /**
+     * Prints farewell message.
+     */
     protected static void displayFarewell() {
         display("█▄ ▄█ ▄▀▀ █▀▄ ▄▀▄ █▄ █ ▄▀▄ █   █▀▄ ▄▀▀\n"
                 + "█ ▀ █ ▀▄▄ █▄▀ ▀▄▀ █ ▀█ █▀█ █▄▄ █▄▀ ▄██\n\n"
                 + "Thanks for coming!\nWe hope to see you again!");
     }
 
+    /**
+     * Prints all tasks.
+     *
+     * @param tasks tasks to be printed
+     */
     public static void displayAllTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
@@ -64,6 +83,12 @@ public class Ui {
         display(sb.toString());
     }
 
+    /**
+     * Prints added task.
+     *
+     * @param task  task that was added to the list of tasks
+     * @param tasks all existing tasks
+     */
     public static void displayAddedTask(Task task, ArrayList<Task> tasks) {
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
@@ -72,16 +97,32 @@ public class Ui {
                 + " order(s)!");
     }
 
-    public static void displayRemovedTask(Task task, ArrayList<Task> tasks) {
+    /**
+     * Prints deleted task.
+     *
+     * @param task  task that was deleted
+     * @param tasks all existing tasks
+     */
+    public static void displayDeletedTask(Task task, ArrayList<Task> tasks) {
         display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
                 "\nYou have " + tasks.size() + " order(s) left!");
     }
 
+    /**
+     * Prints task that was marked as done.
+     *
+     * @param task task that was marked as done
+     */
     public static void displayDone(Task task) {
         display("Your order has been served!\n\n  " + task);
     }
 
+    /**
+     * Prints errors.
+     *
+     * @param msg error message
+     */
     public static void displayError(String msg) {
         display("Oops!\n" + msg);
     }

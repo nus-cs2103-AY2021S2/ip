@@ -6,12 +6,20 @@ import duke.task.TaskList;
 import duke.DukeException;
 import duke.storage.Storage;
 
+/**
+ * Class containing data and methods specific to a Done command
+ */
 public class DoneCommand extends Command {
 
     public DoneCommand(String[] command) {
         super.command = command;
     }
 
+    /**
+     * Obtains task to be marked as done from the arguments from initialisation and marks it as done.
+     *
+     * @throws DukeException if argument passed does not correspond to a valid task number
+     */
     @Override
     public void process() throws DukeException {
         try {

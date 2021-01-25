@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class which contains methods to initialise and update a data text file in a pre-determined path.
+ */
 public class Storage {
     public static final String splitter = " /&/ ";
     private static ArrayList<Task> tasks;
@@ -22,10 +25,20 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Initialises the path name of the data file
+     *
+     * @param newPathName path where the data file should be created or should be accessed from
+     */
     public static void initialisePath(String newPathName) {
         pathName = newPathName;
     }
 
+    /**
+     * Processes the tasks stored in the data file and loads them to the program.
+     *
+     * @throws DukeException if the Strings saved in the data file are unable to be processed
+     */
     public static void initialiseList() throws DukeException {
         tasks = new ArrayList<>();
         File f = new File(pathName);
@@ -43,6 +56,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns Task object after converting a String object in the data file.
+     *
+     * @param taskString formatted String containing all necessary information of a Task
+     * @return Task object that was represented by the taskString
+     * @throws DukeException if the formatting of Strings in the data file is incorrect
+     */
     private static Task convertStringToTask(String taskString) throws DukeException {
         String[] taskArgs = taskString.split(splitter, 4);
         try {
@@ -73,8 +93,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the data file with the tasks saved into the program.
+     *
+     * @throws DukeException if the data file cannot be written into or has been shifted
+     */
     public static void updateDataFile() throws DukeException {
         try {
+//            new File(pathName).createNewFile();
             FileWriter fw = new FileWriter(pathName);
             StringBuilder sb = new StringBuilder();
             for (Task task : tasks) {
