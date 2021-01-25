@@ -15,13 +15,13 @@
 
     ____________________________________________________________
     Got it. I've added this task:
-        [D][ ] return book (by: Sunday)
+        [D][ ] return book (by: January 25 2021 5:00 PM)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
     ____________________________________________________________
     Got it. I've added this task:
-        [E][ ] project meeting (at: Mon 2-4pm)
+        [E][ ] project meeting (at: January 26 2021 3:00 PM - January 26 2021 5:00 PM)
     Now you have 3 tasks in the list.
     ____________________________________________________________
 
@@ -42,13 +42,13 @@
 
     ____________________________________________________________
     1. [T][ ] borrow book
-    2. [D][ ] return book (by: Sunday)
-    3. [E][ ] project meeting (at: Mon 2-4pm)
+    2. [D][ ] return book (by: January 25 2021 5:00 PM)
+    3. [E][ ] project meeting (at: January 26 2021 3:00 PM - January 26 2021 5:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
     Nice! I've marked this task as done:
-        [D][X] return book (by: Sunday)
+        [D][X] return book (by: January 25 2021 5:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
@@ -63,13 +63,13 @@
 
     ____________________________________________________________
     1. [T][ ] borrow book
-    2. [D][X] return book (by: Sunday)
-    3. [E][ ] project meeting (at: Mon 2-4pm)
+    2. [D][X] return book (by: January 25 2021 5:00 PM)
+    3. [E][ ] project meeting (at: January 26 2021 3:00 PM - January 26 2021 5:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
     Noted. I've removed this task:
-        [E][ ] project meeting (at: Mon 2-4pm)
+        [E][ ] project meeting (at: January 26 2021 3:00 PM - January 26 2021 5:00 PM)
     Now you have 2 tasks in the list.
     ____________________________________________________________
 
@@ -85,7 +85,7 @@
 
     ____________________________________________________________
     1. [T][ ] borrow book
-    2. [D][X] return book (by: Sunday)
+    2. [D][X] return book (by: January 25 2021 5:00 PM)
     ____________________________________________________________
 
     ____________________________________________________________
