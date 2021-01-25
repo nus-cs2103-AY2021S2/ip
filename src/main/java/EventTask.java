@@ -20,7 +20,8 @@ public class EventTask extends Task {
     
     @Override
     public String toString() {
-        return "[E]" + super.checkBoxToString() + description + " (at: "
-                + eventDate + " " + startTime + " to " + endTime + " HRS" + ")";
+        return "[E]" + super.checkBoxToString() + description + " (at: " + eventDate.getDayOfMonth()
+                + " " + eventDate.getMonth() + " " + eventDate.getYear() + " "
+                + startTime + "HRS to " + endTime + "HRS" + ")";
     }
 }

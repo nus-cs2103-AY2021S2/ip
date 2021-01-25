@@ -12,9 +12,7 @@ public class Main {
 
         while(duke.isRunning()) {
             input = sc.nextLine();
-            System.out.println("____________________________________________________________");
-            output = duke.getResponse(input);
-            System.out.println(output);
+            duke.getResponse(input);
         }
 
         sc.close();

@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Parser {
 
@@ -11,6 +9,8 @@ public class Parser {
         String description = processDescription(processedInput);
 
         switch (command) {
+        case "help":
+            return new HelpCommand();
         case "list":
             return new ListCommand();
         case "bye":

@@ -6,16 +6,18 @@ public class Duke {
     private TaskList taskList;
     private final Storage storageHandler;
     private final String path = "ip/src/main/java/data/TaskListData.txt";
+    private Ui ui;
 
     public Duke() {
         isRunning = true;
         storageHandler = new Storage(path);
-        displayWelcomeMessage();
+        ui = new Ui();
         try {
             taskList = storageHandler.open();
         } catch (DukeException e) {
             taskList = new TaskList();
         }
+        ui.displayWelcomeMessage();
     }
 
 
@@ -25,18 +27,18 @@ public class Duke {
 
     public String getResponse(String input) {
         Command command;
+        ui.printLine();
         try {
             command = Parser.parse(input);
             isRunning = !command.shouldExit();
             taskList = command.execute(taskList);
             storageHandler.write(taskList);
+            ui.printResponse(command.getResponse());
+            ui.printLine();
             return command.getResponse();
         } catch (DukeException | IOException e) {
             return e.getMessage();
         }
     }
 
-    private void displayWelcomeMessage() {
-        System.out.println("v2    Hello! I'm Duke\n    What can I do for you?");
-    }
 }

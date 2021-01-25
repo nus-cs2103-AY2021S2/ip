@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class DeadlineTask extends Task {
 
@@ -12,12 +10,6 @@ public class DeadlineTask extends Task {
         super.isDone = status > 0;
         this.deadline = deadline;
         this.time = time;
-    }
-
-    public DeadlineTask(String description, int id, int status, LocalDate deadline) {
-        super(description, id);
-        super.isDone = status > 0;
-        this.deadline = deadline;
     }
 
     public String serializeDeadline() {
