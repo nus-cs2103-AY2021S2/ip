@@ -22,7 +22,7 @@ public class Duke {
     }
 
     private void greet() {
-        Ui.printWithStyle(new String[]{"Hello! I'm duke.Duke", "What can I do for you?"});
+        Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
     public static void main(String[] args) {
