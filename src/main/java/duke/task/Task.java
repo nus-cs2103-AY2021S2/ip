@@ -1,10 +1,9 @@
 package duke.task;
 
 public class Task {
+    private static final String SEPARATOR = "|";
     protected String taskName;
     protected boolean isDone;
-
-    private static final String SEPARATOR = "|";
 
     public Task (String taskName) {
         this.taskName = taskName;

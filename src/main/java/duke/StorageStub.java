@@ -3,7 +3,7 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 
-public class StorageStub extends Storage{
+public class StorageStub extends Storage {
     private static final String PATH_NAME = "./data/storage_test.txt";
 
     public StorageStub() throws IOException {

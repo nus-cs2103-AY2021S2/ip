@@ -15,10 +15,12 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh.mm a")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh.mm a")) + ")";
     }
 
     public String getSavingString() {
-        return "DEADLINE" + super.getSavingString() + SEPARATOR + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
+        return "DEADLINE" + super.getSavingString() + SEPARATOR
+                + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }
