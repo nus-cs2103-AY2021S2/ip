@@ -6,7 +6,6 @@ import duke.exceptions.DukeExceptionIllegalArgument;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +17,9 @@ import java.util.stream.Collectors;
  */
 public class Ui {
 
-    private BufferedReader in;
+    private final BufferedReader in;
+    private static final String BORDER = "    ____________________________________________________________";
+    private static final String INDENT = "     ";
 
     /**
      * Creates reader for stdin
@@ -170,23 +171,21 @@ public class Ui {
      * @param post Postfix message.
      */
     public void showMessage(String pre, List<String> lines, String post) {
-        String border = "    ____________________________________________________________";
-        String indent = "     ";
 
-        System.out.println(border);
+        System.out.println(BORDER);
         if (!pre.isEmpty()) {
-            System.out.print(indent);
+            System.out.print(INDENT);
             System.out.println(pre);
         }
         for (String line: lines) {
-            System.out.print(indent);
+            System.out.print(INDENT);
             System.out.println(line);
         }
         if (!post.isEmpty()) {
-            System.out.print(indent);
+            System.out.print(INDENT);
             System.out.println(post);
         }
-        System.out.println(border);
+        System.out.println(BORDER);
         System.out.println();
     }
 
