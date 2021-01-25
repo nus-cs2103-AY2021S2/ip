@@ -13,6 +13,11 @@ public class DukeException extends Exception {
     super(msg);
   }
 
+  
+  /** 
+   * Returns the message string of the error
+   * @return String
+   */
   @Override
   public String toString() {
     return String.format("☹ OOPS!!! %s", super.getMessage());

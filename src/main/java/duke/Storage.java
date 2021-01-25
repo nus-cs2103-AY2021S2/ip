@@ -18,6 +18,12 @@ public class Storage {
     file.getParentFile().mkdirs();
   }
 
+  
+  /** 
+   * Returns a TaskList created from the data given in file
+   * @return TaskList
+   * @throws DukeException
+   */
   public TaskList load() throws DukeException {
     try {
       Scanner sc = new Scanner(file);
@@ -45,6 +51,12 @@ public class Storage {
     }
   }
 
+  
+  /** 
+   * Writes data to file
+   * @param text
+   * @throws DukeException
+   */
   public void write(String text) throws DukeException {
     try {
       FileWriter fw = new FileWriter(file);

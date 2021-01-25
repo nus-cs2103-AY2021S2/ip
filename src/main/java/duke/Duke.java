@@ -39,6 +39,12 @@ public class Duke {
     }
   }
 
+  
+  /** 
+   * Runs Duke programm with data file at data/duke.txt
+   * @param args
+   * @throws IOException
+   */
   public static void main(String[] args) throws IOException {
     new Duke("data/duke.txt").run();
   }

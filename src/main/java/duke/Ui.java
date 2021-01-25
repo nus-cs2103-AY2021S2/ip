@@ -8,6 +8,11 @@ public class Ui {
   public Ui() {
     sc = new Scanner(System.in);
   }
+  
+  /** 
+   * Returns the command string input by user
+   * @return String
+   */
   public String readCommand() {
     return sc.nextLine();
   }
@@ -16,6 +21,11 @@ public class Ui {
     printIndented("Unable to load task list from file. A new task list is created.");
   }
 
+  
+  /** 
+   * Prints to console the DukeException
+   * @param e
+   */
   public void showError(DukeException e) {
     printIndented(e.toString());
   }
@@ -24,6 +34,11 @@ public class Ui {
     System.out.println("  ____________________________________________________________");
   }
 
+  
+  /** 
+   * Print to console text with indentation
+   * @param text
+   */
   public void printIndented(String text) {
     System.out.println(String.format("    %s", text));
   }

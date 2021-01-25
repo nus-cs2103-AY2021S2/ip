@@ -14,7 +14,14 @@ public class DeleteCommand extends Command {
     this.idx = idx - 1;
   }
 
-  @Override
+  
+  /** 
+   * Deletes task at index idx from taskList
+   * @param taskList
+   * @param ui
+   * @param storage
+   * @throws DukeException
+   */
   public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     Task deleted = taskList.remove(idx - 1);
     ui.printIndented("Noted. I've removed this task:");
