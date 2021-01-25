@@ -5,6 +5,12 @@ public class Event extends Task {
         super(description, taskType);
         this.at = at;
     }
+    
+    @Override
+    public String saveTaskString() {
+        String delimiter = " ~ ";
+        return super.saveTaskString() + delimiter + this.at;
+    }
 
     @Override
     public String toString() {

@@ -23,6 +23,15 @@ public class Task {
         return this.description;
     }
 
+    public String saveTaskString() {
+        String delimiter = " ~ ";
+        return this.taskType.toString() 
+                + delimiter 
+                + ((this.isDone) ? 1 : 0)
+                + delimiter
+                + this.description;
+    }
+
     @Override
     public String toString() {
         return "["+ this.taskType.toString() + "][" + this.getStatusIcon() + "] " + this.description;
@@ -31,17 +40,31 @@ public class Task {
 }
 
 enum TaskType {
-    TODO,
-    EVENT,
-    DEADLINE;
+    TODO("T"),
+    EVENT("E"),
+    DEADLINE("D");
+
+    private String type;
+
+    private TaskType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public static TaskType fromString(String type) {
+        for (TaskType t: TaskType.values()) {
+            if (t.toString().equals(type)) {
+                return t;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 
     @Override
     public String toString() {
-        switch (this) {
-            case TODO: return "T";
-            case EVENT: return "E";
-            case DEADLINE: return "D";
-            default: throw new IllegalArgumentException();
-        }
+        return this.type;
     }
 }
