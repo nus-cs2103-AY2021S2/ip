@@ -2,19 +2,19 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Events extends Task {
+public class Event extends Task {
 
     private LocalDate date;
     private LocalTime startTime;
     private LocalTime endTime;
 
-    public Events(String title, Boolean b, LocalDate data) {
-        super(title, b);
+    public Event(String title, Boolean isCompleted, LocalDate data) {
+        super(title, isCompleted);
         this.date = data;
     }
 
-    public Events(String title,Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        super(title,b);
+    public Event(String title, Boolean isCompleted, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        super(title,isCompleted);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;

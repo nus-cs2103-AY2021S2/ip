@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Task {
     protected String description;
-    protected boolean status;
+    protected boolean isCompleted;
 
     private static DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -17,20 +17,20 @@ public class Task {
 
     public Task(String title){
         this.description = title;
-        this.status = false;
+        this.isCompleted = false;
     }
 
     public Task(String title, boolean b){
         this.description = title;
-         this.status = b;
+         this.isCompleted = b;
     }
 
     public void setCompleted(){
-        this.status = true;
+        this.isCompleted = true;
     }
 
-    public String isCompleted(){
-        return (this.status ? "\u2718" : " ");
+    public String getIsCompleted(){
+        return (this.isCompleted ? "\u2718" : " ");
     }
 
     public String getTaskName(){
@@ -38,23 +38,21 @@ public class Task {
     }
 
     public String changeFormat(){
-        return "," +  this.status + "," + this.getTaskName();
+        return "," +  this.isCompleted + "," + this.getTaskName();
     }
 
     public Task changeToTaskFormat(String string_task) {
 
         if(string_task.charAt(0) == 'T'){
             String[] tasks = string_task.split(",");
-            return new ToDos(tasks[2], Boolean.parseBoolean(tasks[1]));
-
+            return new ToDo(tasks[2], Boolean.parseBoolean(tasks[1]));
         } else if(string_task.charAt(0) == 'D'){
             String[] tasks = string_task.split(",");
 
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
 
-            return new Deadlines(tasks[2], Boolean.parseBoolean(tasks[1]),date, startTime);
-
+            return new Deadline(tasks[2], Boolean.parseBoolean(tasks[1]),date, startTime);
         }else if(string_task.charAt(0) == 'E'){
             String[] tasks = string_task.split(",");
 
@@ -62,15 +60,14 @@ public class Task {
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
             LocalTime endTime = LocalTime.parse(tasks[5], timeFormatter);
 
-            return new Events(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime,endTime);
-        }
-        else{
+            return new Event(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime,endTime);
+        } else{
             return new Task();
         }
     }
 
     @Override
     public String toString() {
-        return "[" + this.isCompleted() + "] " + this.getTaskName();
+        return "[" + this.getIsCompleted() + "] " + this.getTaskName();
     }
 }

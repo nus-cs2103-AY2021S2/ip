@@ -2,13 +2,13 @@ package duke.task;
 
 import duke.task.Task;
 
-public class ToDos extends Task {
+public class ToDo extends Task {
 
-    public ToDos(String title, Boolean b) {
+    public ToDo(String title, Boolean b) {
         super(title, b);
     }
 
-    public ToDos(String title) {
+    public ToDo(String title) {
         super(title);
     }
 

@@ -16,10 +16,8 @@ public class AddCommand extends Command {
         super(input,taskList);
     }
 
-
     public TaskList execute(TaskList tasklist, UI ui, DataStorage storage, String type,
                             LocalDate dueDate, LocalTime startTime, LocalTime endTime) throws DukeException {
-
         switch (type) {
         case ("todo"):
             tasklist.addToDo(this.input);
@@ -35,8 +33,10 @@ public class AddCommand extends Command {
 
         ArrayList<Task> taskArrayList = tasklist.getTaskListArray();
         int curr_size = taskArrayList.size();
+
         ui.displayAddedTaskMessage(tasklist.getTask(curr_size-1), curr_size);
        storage.save(tasklist.getTaskListArray());
+
        return tasklist;
     }
 

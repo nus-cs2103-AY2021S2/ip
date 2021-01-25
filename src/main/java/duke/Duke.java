@@ -15,6 +15,7 @@ public class Duke {
     private static TaskList tasks = new TaskList();
 
     public static void run() {
+
         ui.displayWelcomeMessage();
         boolean isExit = false;
         while (!isExit) {
@@ -23,7 +24,6 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.displayLines();
                 isExit = Parser.parse(tasks, fullCommand);
-
             } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -33,7 +33,6 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-
         run();
     }
 }

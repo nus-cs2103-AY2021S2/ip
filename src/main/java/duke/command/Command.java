@@ -21,7 +21,6 @@ public class Command {
             ec.execute(tasklist,ui,storage);
         }
         return tasklist;
-
     }
 
     public static boolean isExit(){

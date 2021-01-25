@@ -2,20 +2,20 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
     private LocalDate dueDate;
     private LocalTime dueTime;
 
 
-    public Deadlines(String title, LocalDate dueBy, LocalTime time) {
+    public Deadline(String title, LocalDate dueBy, LocalTime time) {
         super(title);
         this.dueDate = dueBy;
         this.dueTime = time;
     }
 
-    public Deadlines(String title, Boolean b, LocalDate dueBy, LocalTime time) {
-        super(title, b);
+    public Deadline(String title, Boolean isCompleted, LocalDate dueBy, LocalTime time) {
+        super(title, isCompleted);
         this.dueDate = dueBy;
         this.dueTime = time;
     }
