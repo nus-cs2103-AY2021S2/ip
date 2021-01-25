@@ -1,4 +1,8 @@
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
+D | 0 | return book | 6/6/2021 2359
+E | 0 | project meeting | 15/12/2020 0911
 T | 1 | join sports club
+T | 0 | homework
+D | 0 | CS2105 assignment 1 | 31/1/2021 2359
+E | 0 | meet friends | 25/1/2021 1830
+T | 0 | CS2103T IP

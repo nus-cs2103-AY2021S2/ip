@@ -1,4 +1,4 @@
-public class InvalidTaskTypeException extends Exception {
+public class InvalidTaskTypeException extends DukeException {
     public InvalidTaskTypeException() {
         super("Invalid task type!");
     }

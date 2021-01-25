@@ -4,6 +4,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDateTime date;
 
+    Event(String description, String date) {
+        super(description);
+        this.date = LocalDateTime.parse(date, formatter);
+    }
+
     Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;

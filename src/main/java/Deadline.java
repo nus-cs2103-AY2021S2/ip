@@ -4,6 +4,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDateTime date;
 
+    Deadline(String description, String date) {
+        super(description);
+        this.date = LocalDateTime.parse(date, formatter);
+    }
+
     Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;

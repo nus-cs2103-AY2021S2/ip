@@ -38,5 +38,7 @@ public class TaskList {
         this.taskList.remove(pos);
     }
 
-
+    public void printNumTasksInList() {
+        System.out.println("Now you have " + this.taskList.size() + " tasks in the list.");
+    }
 }
