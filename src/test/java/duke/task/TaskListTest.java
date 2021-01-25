@@ -25,21 +25,6 @@ class TaskListTest {
     }
 
     @Test
-    void markDone_allTypesOfTask_success() throws DukeException {
-        Task todo = new Todo("todo");
-        Task deadline = new Deadline("deadline", LocalDateTime.now());
-        Task event = new Event("event", LocalDateTime.now());
-
-        TaskList.markDone(todo);
-        TaskList.markDone(deadline);
-        TaskList.markDone(event);
-
-        assertTrue(todo.isDone, "todo marked done");
-        assertTrue(deadline.isDone, "deadline marked done");
-        assertTrue(event.isDone, "event marked done");
-    }
-
-    @Test
     void deleteTask_validId_success() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         Task todo = new Todo("todo");

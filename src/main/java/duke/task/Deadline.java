@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class containing data and methods specific to a Deadline task.
+ */
 public class Deadline extends Task {
 
     public LocalDateTime date;
@@ -16,6 +19,13 @@ public class Deadline extends Task {
         isDone = false;
     }
 
+    /**
+     * Returns Deadline task created from arguments representing the user input.
+     *
+     * @param command user input
+     * @return Deadline task
+     * @throws DukeException if insufficient or invalid arguments are passed
+     */
     public static Task createDeadline(String[] command) throws DukeException {
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Deadline order!");

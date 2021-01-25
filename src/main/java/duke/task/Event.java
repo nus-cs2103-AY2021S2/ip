@@ -6,6 +6,9 @@ import duke.storage.Storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class containing data and methods specific to a Event task.
+ */
 public class Event extends Task {
     public LocalDateTime date;
 
@@ -15,6 +18,13 @@ public class Event extends Task {
         isDone = false;
     }
 
+    /**
+     * Returns Event task created from arguments representing the user input.
+     *
+     * @param command user input
+     * @return Event task
+     * @throws DukeException if insufficient or invalid arguments are passed
+     */
     public static Task createEvent(String[] command) throws DukeException {
         if (command.length == 1) {
             throw new DukeException("There's not enough information about your Event order!");
