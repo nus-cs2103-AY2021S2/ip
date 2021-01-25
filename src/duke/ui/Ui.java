@@ -1,3 +1,5 @@
+package duke.ui;
+
 public class Ui {
     private void printLine() {
         System.out.println("\t____________________________________________________________");

@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.task.TaskType;
+
 import java.util.Arrays;
 
 public class Parser {

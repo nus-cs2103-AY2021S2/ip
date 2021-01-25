@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 public class AddCmd extends Command {
     private final String cmdArgs;
     private final TaskType taskType;

@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.exception.DukeException;
+import duke.task.*;
+
 import java.io.*;
 
 public class Storage {

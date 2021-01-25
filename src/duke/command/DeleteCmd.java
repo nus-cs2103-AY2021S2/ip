@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCmd extends Command {
     private final String cmdArgs;
 

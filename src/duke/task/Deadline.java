@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.DateTime;
+
 public class Deadline extends Task {
     private final DateTime by;
 

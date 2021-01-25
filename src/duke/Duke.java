@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -16,7 +25,7 @@ public class Duke {
             storage = new Storage();
             storage.fillTaskLst(taskLst);
         } catch (IOException e) {
-            ui.print(String.format("Unable to initialise Storage: %s", e));
+            ui.print(String.format("Unable to initialise duke.storage.Storage: %s", e));
             System.exit(1);
         }
     }
