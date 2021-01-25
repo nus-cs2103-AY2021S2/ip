@@ -38,6 +38,7 @@ public class Parser {
                 case "done" -> done(nextInput, tasks, totalTasks, ui);
                 case "delete" -> delete(nextInput, tasks, totalTasks, ui);
                 case "list" -> list(tasks, totalTasks, ui);
+                case "find" -> find(nextInput, tasks, totalTasks, ui);
                 case "bye" -> byeCommand(ui);
                 default -> wrongCommand();
             }
@@ -176,6 +177,22 @@ public class Parser {
      */
     public void list(ArrayList<Task> tasks, int totalTasks, Ui ui) {
         ui.listMsg(tasks, totalTasks);
+    }
+
+    /**
+     * Find tasks matching the keyword in the command given by the user.
+     * @param command The command given by user input.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks The current number of tasks stored inside the Task Arraylist.
+     * @param ui UI structure to show the user correct display.
+     * @throws DukeException
+     */
+    public void find(String command, ArrayList<Task> tasks, int totalTasks, Ui ui) throws DukeException {
+        if (command.length() < 6) {
+            throw new DukeException("OOPS!!! The keyword cannot be empty.");
+        }
+        String keyword = command.split(" ")[1];
+        ui.showFindMsg(keyword, tasks, totalTasks);
     }
 
     /**

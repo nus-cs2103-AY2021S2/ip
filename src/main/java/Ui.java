@@ -121,6 +121,25 @@ public class Ui {
     }
 
     /**
+     * Show the user the list of tasks with matching keyword.
+     * @param keyword The keyword to search for match.
+     * @param tasks The Task Arraylist containing user tasks in sequence.
+     * @param totalTasks Total number of tasks in the list.
+     */
+    public void showFindMsg(String keyword, ArrayList<Task> tasks, int totalTasks) {
+        int listNum = 1;
+        out.println(DIVIDER);
+        out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < totalTasks; i++){
+            if (tasks.get(i).toString().contains(keyword)) {
+                out.println(listNum + ". " + tasks.get(i).toString());
+                listNum++;
+            }
+        }
+        out.println(DIVIDER);
+    }
+
+    /**
      * Showing user bye message when user ends the program.
      */
     public void byeMsg() {
