@@ -2,6 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,6 +24,13 @@ public class Timmy {
     void greet() {
         System.out.println("------------------------------------------------");
         System.out.println("Hi! I'm Timmy!\nWhat can Timmy note down for you today?");
+        System.out.println("Please type in any of these format!");
+        System.out.println("todo [title]");
+        System.out.println("event [title] /at [yyyy-mm-dd] [HH:MM]");
+        System.out.println("deadline [title] /by [yyyy-mm-dd] [HH:MM]");
+        System.out.println("list");
+        System.out.println("delete [index]");
+        System.out.println("done [index]");
         System.out.println("------------------------------------------------");
     }
 
@@ -65,7 +77,11 @@ public class Timmy {
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("");
             }
-            task = new Deadline(taskInfoArr[0], taskInfoArr[1]);
+            String[] dateAndTime = taskInfoArr[1].split(" ");
+            String date = parseDate(dateAndTime[0]);
+            String time = parseTime(dateAndTime[1]);
+            String by = date + " " + time;
+            task = new Deadline(taskInfoArr[0], by);
             break;
         }
         case "event":
@@ -77,7 +93,11 @@ public class Timmy {
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("");
             }
-            task = new Event(taskInfoArr[0], taskInfoArr[1]);
+            String[] dateAndTime = taskInfoArr[1].split(" ");
+            String date = parseDate(dateAndTime[0]);
+            String time = parseTime(dateAndTime[1]);
+            String by = date + " " + time;
+            task = new Event(taskInfoArr[0], by);
             break;
         }
         default:
@@ -184,6 +204,17 @@ public class Timmy {
         }
     }
 
+    public String parseDate(String date) {
+        LocalDate d1 = LocalDate.parse(date);
+        System.out.println(d1);
+        return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String parseTime(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"))
+                .format(DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
     void takeCommands() {
         Scanner sc = new Scanner(System.in);
         String input;
@@ -261,15 +292,9 @@ public class Timmy {
                 System.out.println("------------------------------------------------");
 
                 isExceptionCaught = true;
-            } catch (NumberFormatException e) {
-                System.out.println("------------------------------------------------");
-                System.out.println("Sorry, I do not understand...");
-                System.out.println("------------------------------------------------");
-
-                isExceptionCaught = true;
             } catch (Exception e) {
                 System.out.println("------------------------------------------------");
-                System.out.println("Sorry, an error occurred!");
+                System.out.println("Sorry, I am unable to process");
                 System.out.println("------------------------------------------------");
 
                 isExceptionCaught = true;
