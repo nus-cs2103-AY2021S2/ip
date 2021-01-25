@@ -2,7 +2,7 @@
  * Deadline task that need to be done before a specific date/time.
  */
 public class DeadlineTask extends Task {
-    private final String deadline;
+    private final DateTime deadline;
 
     public DeadlineTask(String taskArgs) throws OwenException {
         super();
@@ -14,10 +14,10 @@ public class DeadlineTask extends Task {
         }
 
         this.description = taskArgsSplit[0];
-        this.deadline = taskArgsSplit[1];
+        this.deadline = DateTime.parse(taskArgsSplit[1]);
     }
 
-    private DeadlineTask(String description, boolean isDone, String deadline) {
+    private DeadlineTask(String description, boolean isDone, DateTime deadline) {
         super(description, isDone);
         this.deadline = deadline;
     }
