@@ -9,19 +9,13 @@ import java.util.List;
 
 public class Storage {
     private String filePath;
-    private String folderDirectory;
-    private File dataDirectory;
     private File dataFile;
     public Storage(String filePath) {
         this.filePath = filePath;
     }
     public Storage load() {
-        this.dataDirectory = new File("data");
-        if (!dataDirectory.exists()) {
-            // mkdirs does not throw any exception even when failing
-            this.dataDirectory.mkdirs();
-        }
-        this.dataFile = new File(this.dataDirectory.getPath() + File.separator + "data.txt");
+        this.dataFile = new File(this.filePath);
+        this.dataFile.getParentFile().mkdirs();
         if (!dataFile.exists()) {
             try {
                 this.dataFile.createNewFile();
@@ -29,6 +23,14 @@ public class Storage {
                 throw new DukeException();
             }
         }
+        /*
+        this.dataDirectory = new File("data");
+        if (!this.dataDirectory.exists()) {
+            // mkdirs does not throw any exception even when failing
+            this.dataDirectory.mkdirs();
+        }
+        this.dataFile = new File(this.dataDirectory.getPath() + File.separator + "data.txt");
+        */
         return this;
     }
     public List<String> read() {
