@@ -7,6 +7,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String saveTaskString() {
+        String delimiter = " ~ ";
+        return super.saveTaskString() + delimiter + this.by;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " (by: " + this.by + ")";
     }

@@ -4,6 +4,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String saveTaskString() {
+        return super.saveTaskString();
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
