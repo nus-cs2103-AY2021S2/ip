@@ -1,8 +1,3 @@
-public enum Command {
-    LIST,
-    DONE,
-    TODO,
-    EVENT,
-    DEADLINE,
-    DELETE
+public interface Command {
+    void run() throws DukeException;
 }
