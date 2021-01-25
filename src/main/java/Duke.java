@@ -13,7 +13,7 @@ public class Duke {
         }
         System.out.println(BORDER + "\n");
     }
-
+    
     public static String getNumTasks() {
         return "\nNow you have " + tasks.size() + " tasks in the list.";
     }
@@ -39,94 +39,94 @@ public class Duke {
             }
             switch(cmd) {
 
-                case list:
-                    if (tasks.size() == 0) {
-                        print("No tasks right now");
-                    } else {
-                        String toPrint = "";
-                        for (int i = 0; i < tasks.size(); i++) {
-                            toPrint += (i + 1) + "." + tasks.get(i) + "\n";
-                        }
-                        print(toPrint);
+            case list:
+                if (tasks.size() == 0) {
+                    print("No tasks right now");
+                } else {
+                    String toPrint = "";
+                    for (int i = 0; i < tasks.size(); i++) {
+                        toPrint += (i + 1) + "." + tasks.get(i) + "\n";
                     }
-                    break;
-                    
-                case todo:
-                    if (msg0.length < 2) {
-                        print((new DukeException("please provide a description for todo")).toString());
-                        break;
-                    }
-                    Task todo = new ToDo(msg0[1]);
-                    tasks.add(todo);
-                    print("Got it. I've added this task:\n" + todo + getNumTasks());
-                    break;
+                    print(toPrint);
+                }
+                break;
 
-                case deadline:
-                    if (msg0.length < 2) {
-                        print((new DukeException("please provide a description for deadline")).toString());
-                        break;
-                    }
-                    try {
-                        String time = msg[1].split(" ", 2)[1];
-                        Task deadline = new Deadline(msg0[1], time);
-                        tasks.add(deadline);
-                        print("Got it. I've added this task:\n" + deadline + getNumTasks());
-                    } catch(ArrayIndexOutOfBoundsException e) {
-                        print((new DukeException("please provide a time for deadline")).toString());
-                    }
+            case todo:
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for todo")).toString());
                     break;
+                }
+                Task todo = new ToDo(msg0[1]);
+                tasks.add(todo);
+                print("Got it. I've added this task:\n" + todo + getNumTasks());
+                break;
 
-                case event:
-                    if (msg0.length < 2) {
-                        print((new DukeException("please provide a description for event")).toString());
-                        break;
-                    }
-                    try {
-                        String time = msg[1].split(" ", 2)[1];
-                        Task event = new Event(msg0[1], time);
-                        tasks.add(event);
-                        print("Got it. I've added this task:\n" + event + getNumTasks());
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        print((new DukeException("please provide a time for event")).toString());
-                    }
+            case deadline:
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for deadline")).toString());
                     break;
+                }
+                try {
+                    String time = msg[1].split(" ", 2)[1];
+                    Task deadline = new Deadline(msg0[1], time);
+                    tasks.add(deadline);
+                    print("Got it. I've added this task:\n" + deadline + getNumTasks());
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    print((new DukeException("please provide a time for deadline")).toString());
+                }
+                break;
 
-                case done:
-                    if(msg0.length != 2) {
-                        print((new DukeException("wrong number of arguments for done")).toString());
-                        break;
-                    }
-                    try {
-                        int taskIndex = Integer.parseInt(msg0[1]) - 1;
-                        tasks.get(taskIndex).setDone();
-                        print("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
-                    } catch(IndexOutOfBoundsException e) {
-                        print((new DukeException("task number does not exist")).toString());
-                    } catch(NumberFormatException e) {
-                        print((new DukeException("indicate task number as an integer")).toString());
-                    }
+            case event:
+                if (msg0.length < 2) {
+                    print((new DukeException("please provide a description for event")).toString());
                     break;
+                }
+                try {
+                    String time = msg[1].split(" ", 2)[1];
+                    Task event = new Event(msg0[1], time);
+                    tasks.add(event);
+                    print("Got it. I've added this task:\n" + event + getNumTasks());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    print((new DukeException("please provide a time for event")).toString());
+                }
+                break;
 
-                case delete:
-                    if(msg0.length != 2) {
-                        print((new DukeException("wrong number of arguments for delete")).toString());
-                        break;
-                    }
-                    try {
-                        int taskIndex = Integer.parseInt(msg0[1]) - 1;
-                        Task toRemove = tasks.get(taskIndex);
-                        tasks.remove(taskIndex);
-                        print("Noted. I've removed this task:\n" + toRemove + getNumTasks());
-                    } catch(IndexOutOfBoundsException e) {
-                        print((new DukeException("task number does not exist")).toString());
-                    } catch(NumberFormatException e) {
-                        print((new DukeException("indicate task number as an integer")).toString());
-                    }
+            case done:
+                if(msg0.length != 2) {
+                    print((new DukeException("wrong number of arguments for done")).toString());
                     break;
+                }
+                try {
+                    int taskIndex = Integer.parseInt(msg0[1]) - 1;
+                    tasks.get(taskIndex).setDone();
+                    print("Nice! I've marked this task as done:\n" + tasks.get(taskIndex));
+                } catch(IndexOutOfBoundsException e) {
+                    print((new DukeException("task number does not exist")).toString());
+                } catch(NumberFormatException e) {
+                    print((new DukeException("indicate task number as an integer")).toString());
+                }
+                break;
 
-                case bye:
-                    print("Bye. Hope to see you again!");
-                    return;
+            case delete:
+                if(msg0.length != 2) {
+                    print((new DukeException("wrong number of arguments for delete")).toString());
+                    break;
+                }
+                try {
+                    int taskIndex = Integer.parseInt(msg0[1]) - 1;
+                    Task toRemove = tasks.get(taskIndex);
+                    tasks.remove(taskIndex);
+                    print("Noted. I've removed this task:\n" + toRemove + getNumTasks());
+                } catch(IndexOutOfBoundsException e) {
+                    print((new DukeException("task number does not exist")).toString());
+                } catch(NumberFormatException e) {
+                    print((new DukeException("indicate task number as an integer")).toString());
+                }
+                break;
+
+            case bye:
+                print("Bye. Hope to see you again!");
+                return;
             }
         }
     }
