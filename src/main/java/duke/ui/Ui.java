@@ -47,7 +47,11 @@ public class Ui {
     }
 
     public void printTaskList(ArrayList<Task> taskList) {
-        out.println(Message.getTasksMsg(taskList));
+        out.println(Message.getTaskListMsg(taskList));
+    }
+
+    public void printFindMsg(ArrayList<Task> taskList) {
+        out.println(Message.getFindMsg(taskList));
     }
 
     public void printErrorMsg(DukeUnknownArgumentsException e) {

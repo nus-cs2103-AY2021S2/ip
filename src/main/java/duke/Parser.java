@@ -1,7 +1,7 @@
 package duke;
 
-import duke.commands.AddCommandType;
-import duke.commands.CommandType;
+import duke.commands.SpecificCommandType;
+import duke.commands.BasicCommandType;
 import duke.exceptions.DukeCorruptedStorageException;
 import duke.exceptions.DukeNoDescriptionException;
 import duke.exceptions.DukeUnknownArgumentsException;
@@ -17,6 +17,7 @@ public class Parser {
     public static final String DELETE_COMMAND = "delete";
     public static final String TODO_COMMAND = "todo";
     public static final String EVENT_COMMAND = "event";
+    public static final String FIND_COMMAND = "find";
     public static final int TODO_MIN_ARGUMENTS = 2;
     public static final int TODO_DESCRIPTION = 5;
     public static final int ENCODE_DATE_PARAM = 3;
@@ -35,21 +36,22 @@ public class Parser {
     public static final String NOT_DONE_ENCODING = "0";
     public static final int DATE_PARAM = 1;
     public static final int DATE_POSTFIX = 3;
+    public static final int FIND_MIN_ARGUMENTS = 2;
 
     public static String localDateToString(LocalDate date) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return date.format(dtf);
     }
 
-    static CommandType parseCommand(String input) {
+    static BasicCommandType parseCommand(String input) {
         if (input.startsWith(DONE_COMMAND)) {
-            return CommandType.DONE;
+            return BasicCommandType.DONE;
         } else if (input.startsWith(LIST_COMMAND)) {
-            return CommandType.LIST;
+            return BasicCommandType.LIST;
         } else if (input.startsWith(DELETE_COMMAND)) {
-            return CommandType.DELETE;
+            return BasicCommandType.DELETE;
         } else {
-            return CommandType.ADD;
+            return BasicCommandType.ADD;
         }
     }
 
@@ -57,13 +59,15 @@ public class Parser {
         return Integer.parseInt(input.substring(i)) - INDEX_PADDING;
     }
 
-    public static AddCommandType inputToAddCommand(String input) throws DukeUnknownArgumentsException {
+    public static SpecificCommandType inputToSpecificCommand(String input) throws DukeUnknownArgumentsException {
         if (input.startsWith(TODO_COMMAND)) {
-            return AddCommandType.TODO;
+            return SpecificCommandType.TODO;
         } else if (input.startsWith(DEADLINE_COMMAND)) {
-            return AddCommandType.DEADLINE;
+            return SpecificCommandType.DEADLINE;
         } else if (input.startsWith(EVENT_COMMAND)) {
-            return AddCommandType.EVENT;
+            return SpecificCommandType.EVENT;
+        } else if (input.startsWith(FIND_COMMAND)) {
+            return SpecificCommandType.FIND;
         } else {
             throw new DukeUnknownArgumentsException();
         }
@@ -77,13 +81,21 @@ public class Parser {
         }
     }
 
-    public static LocalDate obtainDate(String input, AddCommandType command) {
+    public static String parseFindInput(String input) throws DukeNoDescriptionException {
+        if (input.split(" ").length < FIND_MIN_ARGUMENTS) {
+            throw new DukeNoDescriptionException(SpecificCommandType.FIND.getName());
+        } else {
+            return input.substring(SpecificCommandType.FIND.getPostfix());
+        }
+    }
+
+    public static LocalDate obtainDate(String input, SpecificCommandType command) {
         input = input.substring(command.getPostfix());
         String[] inputs = input.split(DATE_SEPARATOR);
         return LocalDate.parse(inputs[DATE_PARAM].substring(DATE_POSTFIX));
     }
 
-    public static String obtainDescription(String input, AddCommandType command) throws DukeNoDescriptionException {
+    public static String obtainDescription(String input, SpecificCommandType command) throws DukeNoDescriptionException {
         if (input.split(" ").length < DATE_INPUT_MIN_ARGUMENTS) {
             throw new DukeNoDescriptionException(command.getName());
         } else {
@@ -93,16 +105,16 @@ public class Parser {
         }
     }
 
-    public static AddCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
+    public static SpecificCommandType parseCommandType(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String command = separatedInput[TODO_COMMAND_TYPE_PARAM];
         switch (command) {
         case TODO_COMMAND_TYPE:
-            return AddCommandType.TODO;
+            return SpecificCommandType.TODO;
         case DEADLINE_COMMAND_TYPE:
-            return AddCommandType.DEADLINE;
+            return SpecificCommandType.DEADLINE;
         case EVENT_COMMAND_TYPE:
-            return AddCommandType.EVENT;
+            return SpecificCommandType.EVENT;
         default:
             throw new DukeCorruptedStorageException();
         }

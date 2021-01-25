@@ -1,6 +1,6 @@
 package duke;
 
-import duke.commands.CommandType;
+import duke.commands.BasicCommandType;
 import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
@@ -34,11 +34,11 @@ public class Controller {
     }
 
     private void handleInput(String input) {
-        CommandType command = Parser.parseCommand(input);
+        BasicCommandType command = Parser.parseCommand(input);
         executeCommand(input, command);
     }
 
-    private void executeCommand(String input, CommandType command) {
+    private void executeCommand(String input, BasicCommandType command) {
         try {
             switch (command) {
             case DONE:
@@ -51,7 +51,7 @@ public class Controller {
                 taskList.deleteTask(input);
                 break;
             case ADD:
-                addTask(input);
+                specificTask(input);
                 break;
             }
            taskList.updateSave(storage);
@@ -70,8 +70,8 @@ public class Controller {
         taskList.done(input);
     }
 
-    private void addTask(String input) throws DukeUnknownArgumentsException {
-        taskList.add(input);
+    private void specificTask(String input) throws DukeUnknownArgumentsException {
+        taskList.run(input);
     }
 
 

@@ -67,8 +67,25 @@ public class Message {
         return e.toString();
     }
 
-    public static String getTasksMsg(ArrayList<Task> taskList) {
+    public static String getTaskListMsg(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return INDENT + "You have no tasks in the list.";
+        }
         String msg = INDENT + "Here are the tasks in your list:";
+        msg = getTaskListDetailMsg(taskList, msg);
+        return msg;
+    }
+
+    public static String getFindMsg(ArrayList<Task> taskList) {
+        if (taskList.isEmpty()) {
+            return INDENT + "You have no matching tasks in the list.";
+        }
+        String msg = INDENT + "Here are the matching tasks in your list:";
+        msg = getTaskListDetailMsg(taskList, msg);
+        return msg;
+    }
+
+    public static String getTaskListDetailMsg(ArrayList<Task> taskList, String msg) {
         int index = 1;
         for (Task task : taskList) {
             msg = msg.concat(String.format(NEWLINE + INDENT + "%d.%s", index, task));

@@ -5,7 +5,7 @@ import duke.tasks.Event;
 import duke.Parser;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import duke.commands.AddCommandType;
+import duke.commands.SpecificCommandType;
 import duke.exceptions.DukeCorruptedStorageException;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ public class StorageDecoder {
     public static ArrayList<Task> decodeSave(ArrayList<String> encodeTasks) throws DukeCorruptedStorageException {
         ArrayList<Task> tasks = new ArrayList<>();
         for (String encodedTask : encodeTasks) {
-            AddCommandType command = Parser.parseCommandType(encodedTask);
+            SpecificCommandType command = Parser.parseCommandType(encodedTask);
             Task task;
             switch (command) {
             case TODO:
@@ -44,7 +44,7 @@ public class StorageDecoder {
         return t;
     }
 
-    private static Task decodeTaskWithDate(AddCommandType command, String encodedTask) throws DukeCorruptedStorageException {
+    private static Task decodeTaskWithDate(SpecificCommandType command, String encodedTask) throws DukeCorruptedStorageException {
         boolean isDone = Parser.isEncodedTaskDone(encodedTask);
         String description = Parser.obtainDescription(encodedTask);
         LocalDate date = Parser.obtainEncodedDate(encodedTask);
