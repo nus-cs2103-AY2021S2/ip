@@ -67,6 +67,16 @@ public class TaskHandler {
         }
     }
 
+    public ArrayList<Task> findTask(String keyWord) {
+        ArrayList<Task> matchTasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getTaskName().contains(keyWord)) {
+                matchTasks.add(task);
+            }
+        }
+        return matchTasks;
+    }
+
     public void loadTaskList(ArrayList<String> storedTaskList) {
         for (String eachTask : storedTaskList) {
             String[] words = eachTask.split("\\|");

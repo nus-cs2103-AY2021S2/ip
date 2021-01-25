@@ -22,7 +22,7 @@ public class EventTask extends Task{
     public String writeToFileFormat() {
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
         return String.format("%s|%s|%s|%s|%s",
-                "T",
+                "E",
                 isDone == true ? "1" : "0",
                 taskName,
                 startTime.format(timeFormat),
