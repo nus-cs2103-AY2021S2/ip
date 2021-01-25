@@ -7,6 +7,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String[] deadlineArr) {
+        super(deadlineArr[0]);
+        this.by = deadlineArr[1];
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

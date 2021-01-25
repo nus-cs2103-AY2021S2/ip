@@ -1,141 +1,195 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Duke {
-    public static void printErrorMessage(String message) {
-        System.out.println("    ☹ OOPS!!! " + message);
+    // output strings
+    public static String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+    public static String line = "    ____________________________________________________________";
+    public static String indentation = "    ";
+    public static String terminate_input = "bye";
+    public static String show_list = "list";
+    public static String done = "done";
+    public static String delete = "delete";
+
+    // task list
+    public static List<Task> task = new ArrayList<>();
+
+    // scanner
+    public static Scanner sc = new Scanner(System.in);
+
+    public static void greeting() {
+        System.out.println(logo);
+        System.out.println(line);
+        System.out.println(indentation + "Hello! I'm Duke");
+        System.out.println(indentation + "What I can do for you?");
+        System.out.println(line);
     }
 
-    // public static void deleteTask(int i) {
+    public static void bye() {
+        System.out.println(line);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(line);
+        sc.close();
+    }
+
+    // public static String getUserInput() {
     // try {
-    // Tasl task =
-    // } catch (Exception e) {
-    // //TODO: handle exception
+    // String userInput = sc.nextLine();
+    // String[] input = userInput.split(" ", 2);
+    // return input[0];
+    // } catch (ArrayIndexOutOfBoundsException e) {
+    // // TODO: handle exception
+    // System.out.println(line);
+    // System.out.println(indentation + "Invalid input, please enter another one");
+    // System.out.println(line);
     // }
     // }
-    public static Task[] removeTheElement(Task[] arr, int index) {
-        if (arr == null || index < 0 || index >= arr.length) {
-            return arr;
+
+    public static void add(String[] userInput) throws DukeException {
+        switch (userInput[0]) {
+            case "todo":
+                Todo t = new Todo(userInput[1]);
+                task.add(t);
+                reportTask(t);
+                break;
+
+            case "deadline":
+                String[] deadlineArr = userInput[1].split(" /by ", 2);
+                if (deadlineArr.length != 2) {
+                    throw new DukeException("Missing component: due date");
+                }
+                Deadline d = new Deadline(deadlineArr);
+                task.add(d);
+                reportTask(d);
+                break;
+
+            case "event":
+                String eventArr[] = userInput[1].split(" /at ", 2);
+                if (eventArr.length != 2) {
+                    throw new DukeException("Missing component: event date and time");
+                }
+                Event e = new Event(eventArr);
+                task.add(e);
+                reportTask(e);
+                break;
+
+            default:
+                break;
         }
-        Task[] anotherArray = new Task[arr.length - 1];
-        for (int i = 0, k = 0; i < arr.length; i++) {
-            if (i == index) {
-                continue;
-            }
-            anotherArray[k++] = arr[i];
-        }
-        return anotherArray;
     }
 
-    public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "    ____________________________________________________________";
-        String terminate_input = "bye";
-        String show_list = "list";
-        String done = "done";
-        String delete = "delete";
-        String indentation = "    ";
-        Scanner sc = new Scanner(System.in);
+    public static void reportTask(Task t) {
+        int count = task.size();
         System.out.println(line);
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What I can do for you?");
+        System.out.println(indentation + "Got it, I've added this task to the list:");
+        System.out.println(indentation + t.toString());
+        System.out.printf(indentation + "You now have %d task in the list.%n", count);
         System.out.println(line);
-        System.out.println();
+    }
 
-        Task[] todo = new Task[100];
-        int position = 0;
-
-        while (true) {
-            String input = sc.nextLine();
+    public static void doneTask(String inputIndex) {
+        try {
             System.out.println(line);
-            if (input.equals(terminate_input)) {
-                System.out.println(indentation + "Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equals(show_list)) {
-                System.out.println("    Here are the tasks in your list: ");
-                for (int i = 1; i < position + 1; i++) {
-                    System.out.println(indentation + i + ". " + todo[i - 1]);
-                }
-            } else if (input.length() > 4 && input.substring(0, 4).equals(done)) {
-                try {
-                    if (input.length() <= 5) {
-                        throw new DukeException("It seems you forget to tell me which task you have done.");
-                    }
-                    int job_done = Integer.valueOf(input.substring(5));
-                    Task job = todo[job_done - 1];
-                    job.markAsDone();
-                    todo[job_done - 1] = job;
-                    System.out.println(indentation + "Nice! I've marked this task as done:");
-                    System.out.println(indentation + job);
-                } catch (DukeException e) {
-                    // TODO: handle exception
-                    printErrorMessage(e.getMessage());
-                }
-            } else if (input.length() > 4 && input.substring(0, 6).equals(delete)) {
-                try {
-                    int index = Integer.valueOf(input.substring(7));
-                    if (index > position + 1) {
-                        throw new DukeException("Seems like you do not have so many tasks in your list");
-                    }
-                    Task temp = todo[index - 1];
-                    todo = removeTheElement(todo, index - 1);
-                    position -= 1;
-                    System.out.println(indentation + "Noted, I've removed this task: ");
-                    System.out.println(indentation + temp);
-                    System.out.println(indentation + "Now you have " + position + " tasks in the list.");
-                } catch (DukeException e) {
-                    // TODO: handle exception
-                    printErrorMessage(e.getMessage());
-                }
+            int index = Integer.parseInt(inputIndex.trim());
+            Task t = task.get(index - 1);
+            if (t.isDone()) {
+                System.out.println(indentation + "This task was marked as done before");
             } else {
-                try {
-                    char caseType = input.charAt(0);
-                    switch (caseType) {
-                        case 'd':
-                            if (input.length() <= 9) {
-                                throw new DukeException("The description of a todo cannot be empty.");
-                            }
-                            int i1 = input.indexOf("/");
-                            String by = input.substring(i1 + 3);
-                            String d1 = input.substring(8, i1 - 1);
-                            Deadline ddl = new Deadline(d1, by);
-                            todo[position] = ddl;
-                            break;
-                        case 'e':
-                            if (input.length() <= 6) {
-                                throw new DukeException("The description of a todo cannot be empty.");
-                            }
-                            int i2 = input.indexOf("/");
-                            String at = input.substring(i2 + 3);
-                            String d2 = input.substring(5, i2 - 1);
-                            Event event = new Event(d2, at);
-                            todo[position] = event;
-                            break;
-                        case 't':
-                            if (input.length() <= 5) {
-                                throw new DukeException("The description of a todo cannot be empty.");
-                            }
-                            String d3 = input.substring(4, input.length());
-                            Todo t = new Todo(d3);
-                            todo[position] = t;
-                            break;
-                        default:
-                            throw new DukeException("I'm sorry, but I don't know what that means :-(");
-                    }
-                    int total = position + 1;
-                    System.out.println(indentation + "Got it. I've added this task:");
-                    System.out.println(indentation + todo[position]);
-                    System.out.println(indentation + "Now you have " + total + " tasks in the list.");
-                    position += 1;
-                } catch (DukeException e) {
-                    // TODO: handle exception
-                    printErrorMessage(e.getMessage());
-                }
+                t.markAsDone();
+                System.out.println(indentation + "You have done the following task:");
+                System.out.println(indentation + t.toString());
             }
             System.out.println(line);
-            System.out.println();
+        } catch (IndexOutOfBoundsException e) {
+            // TODO: handle exception
+            printErrorMessage(indentation + "Sorry, I cannot find this task, please check your list again");
+        } catch (NumberFormatException e) {
+            printErrorMessage(indentation + "Sorry, number not recognized");
+        }
+    }
+
+    public static void deleteTask(String inputIndex) {
+        try {
+            System.out.println(line);
+            int index = Integer.parseInt(inputIndex.trim());
+            Task t = task.get(index - 1);
+            task.remove(t);
+            System.out.println(indentation + "The following task has been deleted:");
+            System.out.println(indentation + t.toString());
+            System.out.printf(indentation + "You now have %d task in your list %n", task.size());
+        } catch (IndexOutOfBoundsException e) {
+            // TODO: handle exception
+            printErrorMessage(indentation + "Sorry, I cannot find this task, please check your list again");
+        } catch (NumberFormatException e) {
+            printErrorMessage(indentation + "Sorry, number not recognized");
+        }
+    }
+
+    public static void printTask() {
+        System.out.println(line);
+        System.out.println(indentation + "Here is your current tasks");
+        for (int i = 1; i <= task.size(); ++i) {
+            System.out.println(indentation + i + "." + task.get(i - 1).toString());
         }
         System.out.println(line);
+    }
+
+    private static Command getUserInputType(String userInput) throws DukeException {
+        try {
+            return Command.valueOf(userInput.toUpperCase());
+        } catch (IllegalArgumentException error) {
+            throw new DukeException("Sorry, I dont understand what that means :-(");
+        }
+    }
+
+    public static void run() {
+        boolean run = true;
+        while (run) {
+            try {
+                String temp = sc.nextLine();
+                String[] input = temp.split(" ", 2);
+                Command command = getUserInputType(input[0]);
+                switch (command) {
+                    case DEADLINE:
+                    case TODO:
+                    case EVENT:
+                        add(input);
+                        break;
+                    case DELETE:
+                        deleteTask(input[1]);
+                        break;
+                    case LIST:
+                        printTask();
+                        break;
+                    case DONE:
+                        doneTask(input[1]);
+                        break;
+                    case BYE:
+                        bye();
+                        run = false;
+                        break;
+                    default:
+                        throw new DukeException("Sorry, I dont understand that");
+                }
+            } catch (DukeException e) {
+                // TODO: handle exception
+                printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    public static void printErrorMessage(String message) {
+        System.out.println(line);
+        System.out.println(indentation + "☹ OOPS!!! " + message);
+        System.out.println(line);
+    }
+
+    public static void main(String[] args) {
+        greeting();
+        run();
+        sc.close();
     }
 }
