@@ -1,7 +1,7 @@
-public class TextException extends RuntimeException {
+public class ParseException extends RuntimeException {
     private final String description;
 
-    public TextException(String message) {
+    public ParseException(String message) {
         super(message);
         this.description = message;
     }
