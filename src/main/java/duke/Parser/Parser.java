@@ -24,7 +24,7 @@ public class Parser {
 
     //Global Variable
     private static String TaskName;
-    private static boolean firstLaunch = true;
+    private static boolean IsFirstLaunch = true;
 
 
     /** Call onto the respective command classes to handle different cases of command
@@ -34,12 +34,10 @@ public class Parser {
      * @throws DukeException
      */
     public static boolean parse(TaskList list, String input) throws DukeException {
-
-        if(firstLaunch){
+        if(IsFirstLaunch){
             taskList = list;
-            firstLaunch =false;
+            IsFirstLaunch =false;
         }
-
 
         if(input.equals("bye")){
             ExitCommand ec = new ExitCommand();
@@ -47,7 +45,6 @@ public class Parser {
         }
 
         String commandArray[] = input.split("\\s+");
-
         int size =  taskList.getTaskListArray().size();
 
         if(commandArray[0].equals("list") && isValidTaskNumber(0, "list",size)){
@@ -62,12 +59,9 @@ public class Parser {
             DoneCommand doneCommand = new DoneCommand(commandArray[1], taskList);
             taskList = doneCommand.execute(taskList, ui, storage);
         }else{
-
             String [] userInputArray = separateUserInput(input);
             String type = userInputArray[0];
             String userInput = input.replace(type, " ");
-
-
 
             AddCommand ac = new AddCommand(userInput, taskList);
 
@@ -88,8 +82,6 @@ public class Parser {
                 }else {
                      time = LocalTime.parse(dateTime[1], timeFormatter);
                 }
-
-                System.out.println("time is " +time);
 
                 ac = new AddCommand(TaskName, taskList);
                 taskList = ac.execute(taskList, ui, storage,"deadlines", date, time,null);
@@ -143,7 +135,6 @@ public class Parser {
      * @throws DukeException
      */
     public static String[] separateUserInput(String userInput) throws DukeException {
-
         String[] inputArray  = userInput.split(" ");
         String taskName = inputArray[0];
 
@@ -160,8 +151,7 @@ public class Parser {
      * @return array of string
      * @throws DukeException
      */
-    public static String[] separateDueDate(String input, String type) throws DukeException {
-
+    public static String[] seperateDueDate (String input, String type) throws DukeException {
         if(input.contains("/by") && type.equals("deadline")) {
             String dueBy[] = input.split("/by ");
             TaskName = dueBy[0].replace(type, "");
@@ -201,7 +191,6 @@ public class Parser {
      * @throws DukeException
      */
     public static boolean dateTimeParse(String[] dateTime, String type) throws DukeException {
-
         if(dateTime.length < 2 && type.equals("deadline")){
             return true;
         } else if(dateTime.length >2 && type.equals("deadline")){
@@ -209,8 +198,4 @@ public class Parser {
         }
         return false;
     }
-
-
-
-
 }

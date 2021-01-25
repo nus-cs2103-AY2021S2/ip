@@ -1,10 +1,10 @@
 package duke.TaskList;
 
 import duke.UI.UI;
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDos;
+import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Interact with task class to facilitate the creation, update, deletion of task
  */
 public class TaskList {
+
     private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
     private static UI ui = new UI();
 
@@ -22,7 +23,7 @@ public class TaskList {
      * @param description
      */
     public void addToDo(String description)  {
-        taskArraylist.add(new ToDos(description));
+        taskArraylist.add(new ToDo(description));
     }
 
     /**Add a deadline task to arraylist
@@ -31,7 +32,7 @@ public class TaskList {
      * @param endTime
      */
     public void addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
-        taskArraylist.add(new Deadlines(description,dueDate, endTime));
+        taskArraylist.add(new Deadline(description,dueDate, endTime));
     }
 
     /**Add an event task to arraylist
@@ -41,7 +42,7 @@ public class TaskList {
      * @param endTime
      */
     public void addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
-        taskArraylist.add(new Events(description,false,dueDate, startTime, endTime));
+        taskArraylist.add(new Event(description,false,dueDate, startTime, endTime));
     }
 
     /**

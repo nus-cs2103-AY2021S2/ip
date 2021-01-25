@@ -18,6 +18,13 @@ public class ToDos extends Task {
      * @param title
      */
     public ToDos(String title) {
+public class ToDo extends Task {
+
+    public ToDo(String title, Boolean b) {
+        super(title, b);
+    }
+
+    public ToDo(String title) {
         super(title);
     }
 

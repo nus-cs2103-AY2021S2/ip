@@ -35,7 +35,6 @@ public class Command {
             ec.execute(tasklist,ui,storage);
         }
         return tasklist;
-
     }
 
     /** Return boolean to terminate/continue the program

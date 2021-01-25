@@ -18,7 +18,6 @@ public class ExitCommand extends Command {
         this.isExit = true;
     }
 
-
     /** Terminate the whole program
      * @param tasklist
      * @param ui

@@ -2,14 +2,13 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/** Create a deadline class
+/** Create a Deadline class
  *
  */
 public class Deadlines extends Task {
 
     private LocalDate dueDate;
     private LocalTime dueTime;
-
 
     /**Constructor to create deadline object
      * @param title

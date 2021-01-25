@@ -2,11 +2,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/** Create an event class
+/** Create a Event class
  *
  */
-
-public class Events extends Task {
+public class Event extends Task {
 
     private LocalDate date;
     private LocalTime startTime;
