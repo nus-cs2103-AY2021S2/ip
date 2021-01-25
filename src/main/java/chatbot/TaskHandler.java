@@ -86,33 +86,33 @@ public class TaskHandler {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
             switch (type) {
-                case "T": {
-                    Task task = new TodoTask(taskName);
-                    if (isDone) {
-                        task.taskDone();
-                    }
-                    this.taskList.add(task);
-                    break;
+            case "T": {
+                Task task = new TodoTask(taskName);
+                if (isDone) {
+                    task.taskDone();
                 }
-                case "D": {
-                    LocalDate deadline = LocalDate.parse(words[3].strip(), dateFormat);
-                    Task task = new DeadlineTask(taskName, deadline);
-                    if (isDone) {
-                        task.taskDone();
-                    }
-                    this.taskList.add(task);
-                    break;
+                this.taskList.add(task);
+                break;
+            }
+            case "D": {
+                LocalDate deadline = LocalDate.parse(words[3].strip(), dateFormat);
+                Task task = new DeadlineTask(taskName, deadline);
+                if (isDone) {
+                    task.taskDone();
                 }
-                case "E": {
-                    LocalDateTime startTime = LocalDateTime.parse(words[3].strip(), timeFormat);
-                    LocalDateTime endTime = LocalDateTime.parse(words[4].strip(), timeFormat);
-                    Task task = new EventTask(taskName,startTime, endTime);
-                    if (isDone) {
-                        task.taskDone();
-                    }
-                    this.taskList.add(task);
-                    break;
+                this.taskList.add(task);
+                break;
+            }
+            case "E": {
+                LocalDateTime startTime = LocalDateTime.parse(words[3].strip(), timeFormat);
+                LocalDateTime endTime = LocalDateTime.parse(words[4].strip(), timeFormat);
+                Task task = new EventTask(taskName,startTime, endTime);
+                if (isDone) {
+                    task.taskDone();
                 }
+                this.taskList.add(task);
+                break;
+            }
             }
 
         }

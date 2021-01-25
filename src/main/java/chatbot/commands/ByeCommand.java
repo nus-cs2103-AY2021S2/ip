@@ -8,7 +8,6 @@ import chatbot.exceptions.ChatBotException;
 /**
  * Represents a terminating command line
  */
-
 public class ByeCommand extends ChatBotCommand {
     public ByeCommand() {
     }

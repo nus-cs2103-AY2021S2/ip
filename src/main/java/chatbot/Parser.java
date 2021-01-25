@@ -57,30 +57,30 @@ public class Parser {
 
         try {
             switch (commandType) {
-                case "bye":
-                    return new ByeCommand();
-                case "list":
-                    return new ListCommand();
-                case "todo":
-                    return new TodoCommand(words[1]);
-                case "deadline":
-                    String[] deadlineArray = words[1].split(" /by ");
-                    String ddlName = deadlineArray[0].strip();
-                    String deadline = deadlineArray[1].strip();
-                    return new DeadlineCommand(ddlName, formatDate(deadline));
-                case "event":
-                    String[] timeArray = words[1].split(" /at ");
-                    String eventName = timeArray[0].strip();
-                    String time = timeArray[1];
-                    String[] timePeriod = time.split("-");
-                    String startTime = timePeriod[0];
-                    String date = startTime.substring(0, 10);
-                    String endTime = date + timePeriod[1];
-                    return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
-                case "done":
-                    return new DoneCommand(Integer.parseInt(words[1]));
-                case "delete":
-                    return new DeleteCommand(Integer.parseInt(words[1]));
+            case "bye":
+                return new ByeCommand();
+            case "list":
+                return new ListCommand();
+            case "todo":
+                return new TodoCommand(words[1]);
+            case "deadline":
+                String[] deadlineArray = words[1].split(" /by ");
+                String ddlName = deadlineArray[0].strip();
+                String deadline = deadlineArray[1].strip();
+                return new DeadlineCommand(ddlName, formatDate(deadline));
+            case "event":
+                String[] timeArray = words[1].split(" /at ");
+                String eventName = timeArray[0].strip();
+                String time = timeArray[1];
+                String[] timePeriod = time.split("-");
+                String startTime = timePeriod[0];
+                String date = startTime.substring(0, 10);
+                String endTime = date + timePeriod[1];
+                return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
+            case "done":
+                return new DoneCommand(Integer.parseInt(words[1]));
+            case "delete":
+                return new DeleteCommand(Integer.parseInt(words[1]));
             }
         } catch (ChatBotException e) {
             throw e;
