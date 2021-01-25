@@ -52,8 +52,21 @@ public class FileManager {
     }
 
     void createFile() throws IOException {
+        // Create directory and file
         file.getParentFile().mkdirs();
         file.createNewFile();
+    }
+
+    void writeToFile(List<Task> list) throws IOException {
+        FileWriter fw = new FileWriter(file.getAbsolutePath());
+
+        StringBuffer sb = new StringBuffer();
+        for (Task task : list) {
+            sb.append(this.translateTask(task));
+        }
+
+        fw.write(sb.toString());
+        fw.close();
     }
 
     void appendToFile(Task task) throws IOException {

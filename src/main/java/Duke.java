@@ -43,6 +43,7 @@ public class Duke {
                         // To get the index 
                         int index = sc.nextInt();
                         list.markTaskAsDone(index);
+                        file.writeToFile(list.list);
                         break;
                     case "todo":
                         String name = sc.nextLine();
@@ -80,6 +81,7 @@ public class Duke {
                         // To get the index 
                         int i = sc.nextInt();
                         list.removeTask(i);
+                        file.writeToFile(list.list);
                         break;
                     default:
                         throw new UnknownCommandException();
