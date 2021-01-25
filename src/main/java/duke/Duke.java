@@ -279,7 +279,7 @@ public class Duke {
 
     }
 
-    public class TaskList {
+    public static class TaskList {
 
         private List<Task> leest;
 
@@ -395,7 +395,7 @@ public class Duke {
         }
     }
 
-    public class Ui {
+    public static class Ui {
 
         public Ui() {
 
