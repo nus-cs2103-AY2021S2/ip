@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -6,6 +6,12 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public Task(int done, String description) {
+        this.isDone = done == 1 ? true : false;
+        this.description = description;
+    }
+
 
     public String getStatusIcon() {
         return isDone ? "\u2718" : " ";
@@ -23,4 +29,6 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
     }
+
+    public abstract String toStorageString();
 }

@@ -2,6 +2,9 @@
  * DukeCommand is an enum class that allows execution of methods based on the command that user have typed in.
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 public enum DukeCommand {
@@ -13,7 +16,7 @@ public enum DukeCommand {
          * @throws DukeException whenever the user's input parameter is empty or entered an invalid format.
          */
         @Override
-        public void runCommand(String actions, List<Task> taskList) throws DukeException {
+        public void runCommand(String actions, List<Task> taskList) throws DukeException, IOException {
             if (actions.isEmpty() || actions.isBlank()) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -38,7 +41,7 @@ public enum DukeCommand {
          * @throws DukeException whenever the user keyed in an invalid index.
          */
         @Override
-        public void runCommand(String actions, List<Task> taskList) throws DukeException {
+        public void runCommand(String actions, List<Task> taskList) throws DukeException, IOException {
             int index = Integer.parseInt(actions) - 1;
             int listSize = taskList.size();
             if (listSize <= 0) {
@@ -54,6 +57,7 @@ public enum DukeCommand {
             System.out.println("Noted. I've removed this task:");
             System.out.printf(PRINT_FORMAT, selectedTask.toString());
             System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
+            saveFile(taskList);
         }
     },
     DONE {
@@ -64,7 +68,7 @@ public enum DukeCommand {
          * @throws DukeException whenever the user keyed in an invalid index or trying to complete a completed task.
          */
         @Override
-        public void runCommand(String actions, List<Task> taskList) throws DukeException {
+        public void runCommand(String actions, List<Task> taskList) throws DukeException, IOException {
             int index = Integer.parseInt(actions) - 1;
             int listSize = taskList.size();
 
@@ -83,6 +87,7 @@ public enum DukeCommand {
 
             System.out.println("Nice! I've marked this task as done:");
             System.out.printf(PRINT_FORMAT, selectedTask.toString());
+            saveFile(taskList);
         }
     },
     EVENT {
@@ -93,7 +98,7 @@ public enum DukeCommand {
          * @throws DukeException whenever the user's input parameter is empty or entered an invalid format.
          */
         @Override
-        public void runCommand(String actions, List<Task> taskList) throws DukeException {
+        public void runCommand(String actions, List<Task> taskList) throws DukeException, IOException {
             if (actions.isEmpty() || actions.isBlank()) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -142,7 +147,7 @@ public enum DukeCommand {
          * @throws DukeException whenever the user's input parameter is empty.
          */
         @Override
-        public void runCommand(String actions, List<Task> taskList) throws DukeException {
+        public void runCommand(String actions, List<Task> taskList) throws DukeException, IOException {
             if (actions.isEmpty() || actions.isBlank()) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
@@ -154,18 +159,19 @@ public enum DukeCommand {
 
     protected final static String PRINT_FORMAT = "\t%s%n";
 
-    public abstract void runCommand(String actions, List<Task> taskList) throws DukeException;
+    public abstract void runCommand(String actions, List<Task> taskList) throws DukeException, IOException;
 
     /**
      * This method handles the adding of Event, Deadline or ToDo into the list of tasks.
      * @param newTask new Event, Deadline or ToDo.
      * @param taskList list of tasks to be maintained.
      */
-    protected void addCommand(Task newTask, List<Task> taskList) {
+    protected void addCommand(Task newTask, List<Task> taskList) throws IOException {
         taskList.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.printf(PRINT_FORMAT, newTask.toString());
         System.out.printf("Now you have %d %s in the list.%n", taskList.size(), taskList.size() >= 2 ? "tasks" : "task");
+        saveFile(taskList);
     }
 
     /**
@@ -181,4 +187,23 @@ public enum DukeCommand {
         }
         return false;
     }
+
+    protected static void saveFile(List<Task> taskList) throws IOException {
+        String folderPath = "./data/";
+        String filePath = "duke.txt";
+        String dirPath = folderPath.concat(filePath);
+
+        //Check if folder exists
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+
+        FileWriter fileWriter = new FileWriter(dirPath);
+        for(Task t : taskList) {
+            fileWriter.write(String.format("%s%n", t.toStorageString()));
+        }
+        fileWriter.close();
+    }
 }
+
