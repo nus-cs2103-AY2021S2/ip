@@ -1,13 +1,27 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDateTime by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = stringToDatetime(by);
+    }
+
+    private LocalDateTime stringToDatetime(String by){
+        return LocalDateTime.parse(by,DF1);
+    }
+
+    private String datetimeToString(LocalDateTime by){
+        return DF2.format(by);
+    }
+
+    public LocalDateTime getBy(){
+        return by;
     }
 
     @Override
     public String getTaskName() {
-        return "[D]" + super.getTaskName() + " (by: " + by + ")";
+        return "[D]" + super.getTaskName() + " (by: " + datetimeToString(by) + ")";
     }
 }

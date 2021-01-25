@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 public class Chatbot {
@@ -13,7 +15,7 @@ public class Chatbot {
 
         // Level-2: when user calls 'list' :
         if (userMessage.equals("list")) {
-            doList(userMessage);
+            doList();
         }
 
         // Level-3 : When user want a task done:
@@ -31,12 +33,14 @@ public class Chatbot {
 
         else if (userMessage.startsWith("delete")) doDelete(userMessage);
 
+        else if (userMessage.startsWith("search time")) doSearchByTime(userMessage);
+
         else throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         }
 
     // These will only be used in the response methods.
-    private void doList(String userMessage){
+    private void doList(){
         int numOfTasks = Task.getNumOfTasks();
         // Exception case
         if (numOfTasks == 0) Chatbox.chatbotDisplay("No Tasks right now!");
@@ -161,6 +165,57 @@ public class Chatbot {
         catch (IndexOutOfBoundsException e){
             throw new DukeException("OOPS!!! The event index of a delete is wrong.");
         }
+    }
+
+    // Sample input: "search time 2020-01-01 18:00", this is an exact search, the next step would be add vague search.
+    private void doSearchByTime(String userMessage) throws DukeException{
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String[] info;
+        LocalDateTime time;
+
+        // prevent input mistakes.
+        try{
+            info = userMessage.split(" ",3);
+            time = LocalDateTime.parse(info[2],df);
+        }
+        catch (Exception e){
+            throw new DukeException("The search input format is wrong, the format should be yyyy-MM-dd HH:mm!");
+        }
+
+        LinkedList<Task> tasks = Task.getTasks();
+        StringBuilder builder = new StringBuilder();
+        builder.append("Here are the search results: \n");
+        int numOfTasksFound = 0;
+
+        // Search by loop
+        for (Task single : tasks) {
+            if (single instanceof ToDo){
+                continue;
+            }
+            else if (single instanceof Event){
+                LocalDateTime eventTime = ((Event) single).getAt();
+                if (eventTime.isEqual(time)){
+                    builder.append("[" + single.getStatusIcon() + "]" + single.getTaskName() + "\n");
+                    numOfTasksFound++;
+                }
+            }
+            else if (single instanceof Deadline){
+                LocalDateTime deadlineTime = ((Deadline) single).getBy();
+                if (deadlineTime.isEqual(time)){
+                    builder.append("[" + single.getStatusIcon() + "]" + single.getTaskName() + "\n");
+                    numOfTasksFound++;
+                }
+            }
+        }
+
+
+        if (numOfTasksFound == 0){
+            throw new DukeException("OOPS! There is no task that matches the time.");
+        }
+
+        String botMessage = builder.toString();
+        Chatbox.chatbotDisplay(botMessage);
+
     }
 
     public boolean wantExit(String userMessage){

@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
 public class Task {
@@ -5,6 +6,8 @@ public class Task {
     protected static int numOfTasks = 0;
     protected String taskName;
     protected boolean isDone;
+    protected final static DateTimeFormatter DF1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected final static DateTimeFormatter DF2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     // Initializer
     public Task(){
@@ -12,7 +15,6 @@ public class Task {
         isDone = false;
         numOfTasks += 1;
         Tasks.add(this);
-
     }
 
     public Task(String taskName){
