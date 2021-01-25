@@ -2,10 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
 import java.util.function.Consumer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.net.URISyntaxException;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 class ChatBot {
 
 	private final ArrayList<Task> mem;
+	private final Storage storage;
 	private static Hashtable<String, Consumer<String>> functions;
 
 	ChatBot() {
@@ -15,7 +24,10 @@ class ChatBot {
 		System.out.println("      What can I do for you?");
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
-		this.mem = new ArrayList<Task>();
+
+		
+		this.storage = new Storage();
+		this.mem = this.storage.load();
 	}
 
 	void initialize() {
@@ -39,6 +51,8 @@ class ChatBot {
 		this.initialize();
 		if (inputs.equals("list")) {
 			this.list();
+		} else if (inputs.equals("taskson")) {
+			this.tasksOnDay(sc.nextLine().stripLeading());
 		} else if (!this.checkValid(inputs)) {
 			System.out.println("    ____________________________________________________________");
 			System.out.println("");
@@ -54,6 +68,7 @@ class ChatBot {
 			System.out.println("    ____________________________________________________________");
 			System.out.println("");
 		}
+		this.storage.save(this.mem);
 	}
 
 	void store(String s) {
@@ -125,6 +140,22 @@ class ChatBot {
 		System.out.println("      Noted. I've removed this task:");
 		System.out.println("      " + t);
 		System.out.println("      now you have " + this.mem.size() + " tasks in the list.");
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+	}
+
+	void tasksOnDay(String s) {
+		LocalDate day = LocalDate.parse(s);
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+		System.out.println("      Here are the tasks on " + day.toString() + ":");
+		for (int i = 1; i <= this.mem.size(); i += 1) {
+			Task t = this.mem.get(i - 1);
+			if (t.onDay(s)) {
+				System.out.println("      " + i + ".  " + this.mem.get(i - 1));
+			}
+		}
+		
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
 	}
