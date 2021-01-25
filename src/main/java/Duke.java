@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,13 +74,56 @@ public class Duke {
         System.out.println(INDENTATION + HORIZON);
     }
 
-    public static void main(String[] args) {
+    public static final void initTaskList(File file) throws IOException {
+        FileInputStream inStream = new FileInputStream(file);
+        InputStreamReader reader = new InputStreamReader(inStream);
+        BufferedReader br = new BufferedReader(reader);
+        for (String line = br.readLine(); line != null; line = br.readLine()) {
+            String[] lineSplit = line.split("\\|");
+            switch (lineSplit[0].trim()) {
+            case "T":
+                taskList.add(new Todo(lineSplit[2].trim()));
+                break;
+            case "D":
+                taskList.add(new Deadline(lineSplit[2].trim(),lineSplit[3].trim()));
+                break;
+            case "E":
+                taskList.add(new Event(lineSplit[2].trim(),lineSplit[3].trim()));
+                break;
+            }
+            if(lineSplit[1].trim().equals("1")) {
+                taskList.get(taskList.size() - 1).markAsDone();
+            }
+        }
+        br.close();
+    }
+
+    private static void updateFile(File file) throws IOException {
+        FileOutputStream outStream = new FileOutputStream(file);
+        OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");
+        writer.write("");
+        writer.flush();
+        for (int i = 0; i < taskList.size(); i++) {
+            writer.write(taskList.get(i).getTaskInfoOfFile() + "\n");
+        }
+        writer.flush();
+
+    }
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         String command = "";
+
+        File fileOfData = new File(".\\data\\duke.txt");
+        if (!fileOfData.isFile()) {
+            fileOfData.createNewFile();
+        }
+        initTaskList(fileOfData);
+        //readF1(".\\data\\duke.txt");
 
         System.out.println("Hello from\n" + logo);
         printReply("hello");
@@ -97,6 +141,7 @@ public class Duke {
                 try {
                     taskList.get(Integer.parseInt(commandSplit[1]) - 1).markAsDone();
                     printDoneReply(Integer.parseInt(commandSplit[1]) - 1);
+                    updateFile(fileOfData);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printReply("error_done_empty");
                 } catch (NumberFormatException e) {
@@ -110,6 +155,7 @@ public class Duke {
                     taskList.get(Integer.parseInt(commandSplit[1]) - 1);
                     printDeleteReply(Integer.parseInt(commandSplit[1]) - 1);
                     taskList.remove(Integer.parseInt(commandSplit[1]) - 1);
+                    updateFile(fileOfData);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printReply("error_delete_empty");
                 } catch (NumberFormatException e) {
@@ -129,6 +175,7 @@ public class Duke {
                 }
                 command = command.replaceAll("todo", " ").trim();
                 taskList.add(new Todo(command));
+                updateFile(fileOfData);
                 printReply(command);
                 break;
 
@@ -143,6 +190,7 @@ public class Duke {
                 commandSplit = command.split("/by");
                 try {
                     taskList.add(new Deadline(commandSplit[0].trim(), commandSplit[1].trim()));
+                    updateFile(fileOfData);
                     printReply(command);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printReply("error_deadline_by");
@@ -159,6 +207,7 @@ public class Duke {
                 commandSplit = command.split("/at");
                 try {
                     taskList.add(new Event(commandSplit[0].trim(), commandSplit[1].trim()));
+                    updateFile(fileOfData);
                     printReply(command);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printReply("error_event_at");

@@ -19,6 +19,10 @@ public class Task {
         return getStatusIcon() + getDescription();
     }
 
+    public String getTaskInfoOfFile() {
+        return getStatusIcon() + getDescription();
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

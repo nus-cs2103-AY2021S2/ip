@@ -9,4 +9,9 @@ public class Deadline extends Task{
     public String getTaskInfo() {
         return "[D]" + super.getTaskInfo() + " (by: " + by + ")";
     }
+
+    @Override
+    public String getTaskInfoOfFile(){
+        return "D | "+(super.isDone?"1":"0")+" | "+super.getDescription() +" | "+this.by;
+    }
 }

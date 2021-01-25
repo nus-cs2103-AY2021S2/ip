@@ -9,4 +9,9 @@ public class Event extends Task{
     public String getTaskInfo() {
         return "[E]" + super.getTaskInfo() + " (at: " + at + ")";
     }
+
+    @Override
+    public String getTaskInfoOfFile(){
+        return "E | "+(super.isDone?"1":"0")+" | "+super.getDescription() +" | "+this.at;
+    }
 }
