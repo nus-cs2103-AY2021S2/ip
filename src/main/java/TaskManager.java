@@ -9,21 +9,23 @@ public class TaskManager{
     private final static String DEADLINE = "deadline";
     private final static String LIST = "list";
 
-    public void add(String type, String task) throws DukeException {
+    public void add(String type, String task, boolean isCompleted, boolean isOldData) throws DukeException {
         if (type.equals(TODO)) {
-            list.add(new ToDo(task));
+            list.add(new ToDo(task, isCompleted));
         } else {
             String description = task.split("/")[0];
-            String deadline = task.split("/")[1].split(" ", 2)[1];
+            String deadline = task.split("/", 2)[1].split(" ", 2)[1];
             if (type.equals(DEADLINE)) {
-                list.add(new Deadline(description, deadline));
+                list.add(new Deadline(description, isCompleted, deadline));
             } else if (type.equals(EVENT)) {
-                list.add(new Event(description, deadline));
+                list.add(new Event(description, isCompleted, deadline));
             }
         }
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) +
-                "\nNow you have " + list.size() + " tasks in the list.");
-        System.out.println("");
+        if (!isOldData) {
+            System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1) +
+                    "\nNow you have " + list.size() + " tasks in the list.");
+            System.out.println("");
+        }
     }
 
     public void delete(int taskId) throws DukeException {
@@ -50,9 +52,13 @@ public class TaskManager{
     }
 
     public void printList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + "." + list.get(i));
+        if (list.size() == 0) {
+            System.out.println("There are no tasks in your list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println((i + 1) + "." + list.get(i));
+            }
         }
         System.out.println("");
     }
@@ -61,7 +67,7 @@ public class TaskManager{
     public void manage(String[] parsedAction) throws DukeException {
         String command = parsedAction[0];
         if (command.equals(DEADLINE) || command.equals(EVENT) || command.equals(TODO)) {
-            add(command, parsedAction[1]);
+            add(command, parsedAction[1], false, false);
         } else if (command.equals(LIST)) {
             printList();
         } else if (command.equals(DONE)) {
@@ -69,5 +75,22 @@ public class TaskManager{
         } else {
             delete(Integer.parseInt(parsedAction[1]));
         }
+    }
+
+    public void upload(ArrayList<String> storedData) throws DukeException{
+        for (String task : storedData) {
+            String[] arr = task.split(" ", 3);
+            String type = arr[0];
+            boolean isCompleted = arr[1].equals("1");
+            add(arr[0], arr[2], isCompleted, true);
+        }
+    }
+
+    public ArrayList<String> retrieveTasksforStorage() {
+        ArrayList<String> taskList = new ArrayList<>();
+        for (Task task : list) {
+            taskList.add(task.getFormattedData());
+        }
+        return taskList;
     }
 }

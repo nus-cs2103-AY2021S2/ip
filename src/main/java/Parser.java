@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Parser {
     private final static String TODO = "todo";
     private final static String DELETE = "delete";
@@ -5,6 +7,31 @@ public class Parser {
     private final static String EVENT = "event";
     private final static String DEADLINE = "deadline";
     private final static String LIST = "list";
+
+    public static ArrayList<String> arrangeForStart(ArrayList<String> oldData) {
+        ArrayList<String> parsedData = new ArrayList<>();
+        for(String s : oldData) {
+            String[] array = s.split(" \\| ");
+            if (s.contains("T")) {
+                array[0] = "todo";
+            } else if (s.contains("D")) {
+                array[0] = "deadline";
+            } else {
+                array[0] = "event";
+            }
+            String parsedString = array[0];
+            for(int i = 1; i < array.length; i++) {
+                if(i == 3) {
+                    parsedString = array[0].equals("deadline") ? parsedString + " /by " + array[i] : parsedString
+                            + " /at " + array[i];
+                } else {
+                    parsedString = parsedString + " " + array[i];
+                }
+            }
+            parsedData.add(parsedString);
+        }
+        return parsedData;
+    }
 
     public static String[] check(String input) throws DukeException {
         if (input.equals("")) {
