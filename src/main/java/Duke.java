@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    List<Task> tasks;
+    private List<Task> tasks;
     private Storage storage;
 
     public Duke(String filePath) {
@@ -35,6 +35,7 @@ public class Duke {
                 description = s.nextLine();
             }
         }
+        storage.write(tasks);
         try {
             manageTask(description);
         } catch (DukeException e) {
