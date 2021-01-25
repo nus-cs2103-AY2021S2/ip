@@ -1,7 +1,7 @@
 package duke.tasks;
 
 import duke.Parser;
-import duke.commands.AddCommandType;
+import duke.commands.SpecificCommandType;
 import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeNoDescriptionException;
 import duke.exceptions.DukeUnknownArgumentsException;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * class that show output from functions.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private final ArrayList<Task> taskList;
     private final Ui ui;
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param ui Ui to be used to output the results from input.
      */
     public TaskList(Storage storage, Ui ui) {
-        tasks = storage.load();
+        taskList = storage.load();
         this.ui = ui;
     }
 
@@ -35,7 +35,7 @@ public class TaskList {
      * @return number of tasks in the TaskList.
      */
     public int size() {
-        return tasks.size();
+        return taskList.size();
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      * @param storage Storage class used for storage in the hardware.
      */
     public void updateSave(Storage storage) {
-        storage.update(tasks);
+        storage.update(taskList);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public void done(String input) {
         int index = Parser.stringToIndex(input, 5);
-        Task task = tasks.get(index);
+        Task task = taskList.get(index);
         task.done();
         ui.printDoneMsg(task);
     }
@@ -77,8 +77,8 @@ public class TaskList {
      */
     Deadline createDeadline(String input) throws DukeNoDescriptionException,
             DateTimeParseException {
-        String description = Parser.obtainDescription(input, AddCommandType.DEADLINE);
-        LocalDate deadline = Parser.obtainDate(input, AddCommandType.DEADLINE);
+        String description = Parser.obtainDescription(input, SpecificCommandType.DEADLINE);
+        LocalDate deadline = Parser.obtainDate(input, SpecificCommandType.DEADLINE);
         return new Deadline(description, deadline);
     }
 
@@ -89,9 +89,9 @@ public class TaskList {
      * @throws DukeNoDescriptionException when the description of the Event is empty.
      * @throws  DateTimeParseException when the event time is not of format: YYYY-MM-DD.
      */
-    Event createEvent(String input) throws DukeNoDescriptionException, DateTimeParseException {
-        String description = Parser.obtainDescription(input, AddCommandType.EVENT);
-        LocalDate eventTime = Parser.obtainDate(input, AddCommandType.EVENT);
+    Event createEvent(String input) throws DukeNoDescriptionException {
+        String description = Parser.obtainDescription(input, SpecificCommandType.EVENT);
+        LocalDate eventTime = Parser.obtainDate(input, SpecificCommandType.EVENT);
         return new Event(description, eventTime);
     }
 
@@ -102,12 +102,12 @@ public class TaskList {
      */
     public void deleteTask(String input) throws DukeEmptyListException {
         int index = Parser.stringToIndex(input, 7);
-        if (tasks.isEmpty()) {
+        if (taskList.isEmpty()) {
             throw new DukeEmptyListException();
         }
-        Task task = tasks.get(index);
-        tasks.remove(index);
-        ui.printDeleteMsg(task, tasks.size());
+        Task task = taskList.get(index);
+        taskList.remove(index);
+        ui.printDeleteMsg(task, taskList.size());
     }
 
     /**
@@ -116,25 +116,21 @@ public class TaskList {
      * @throws DukeUnknownArgumentsException when the input arguments for the creation of the
      * Task is unknown.
      */
-    public void add(String input) throws DukeUnknownArgumentsException {
+    public void run(String input) throws DukeUnknownArgumentsException {
         try {
-            Task task;
-            AddCommandType command = Parser.inputToAddCommand(input);
+            SpecificCommandType command = Parser.inputToSpecificCommand(input);
             switch (command) {
             case TODO:
-                task = createTodo(input);
-                break;
-            case DEADLINE:
-                task = createDeadline(input);
-                break;
             case EVENT:
-                task = createEvent(input);
+            case DEADLINE:
+                add(input, command);
+                break;
+            case FIND:
+                find(input);
                 break;
             default:
                 throw new DukeUnknownArgumentsException();
             }
-            tasks.add(task);
-            ui.printAddMsg(task, tasks.size());
         } catch (DukeNoDescriptionException e) {
             ui.printErrorMsg(e);
         } catch (DateTimeParseException e) {
@@ -142,10 +138,49 @@ public class TaskList {
         }
     }
 
+    private void add(String input, SpecificCommandType command) throws DukeNoDescriptionException,
+            DateTimeParseException, DukeUnknownArgumentsException {
+        Task task;
+        switch (command) {
+        case TODO:
+            task = createTodo(input);
+            break;
+        case DEADLINE:
+            task = createDeadline(input);
+            break;
+        case EVENT:
+            task = createEvent(input);
+            break;
+        default:
+            throw new DukeUnknownArgumentsException();
+        }
+        taskList.add(task);
+        ui.printAddMsg(task, taskList.size());
+    }
+
     /**
      * Print String representation of the TaskList for the user.
      */
     public void print() {
+        this.print(taskList);
+    }
+
+    /**
+     * Print the task in the specified tasklist.
+     * @param tasks the tasklist used for printing.
+     */
+    private void print(ArrayList<Task> tasks) {
         ui.printTaskList(tasks);
+    }
+
+    public void find(String input) throws DukeNoDescriptionException {
+        String description = Parser.parseFindInput(input);
+        ArrayList<Task> selectedTask = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.description.contains(description)) {
+                selectedTask.add(task);
+            }
+        }
+        ui.printFindMsg(selectedTask);
     }
 }

@@ -3,13 +3,13 @@ package duke.commands;
 /**
  * AddCommandType contains command type for adding command types.
  */
-public enum AddCommandType {
-    TODO("todo", 2), DEADLINE("deadline", 9), EVENT("event", 6);
+public enum SpecificCommandType {
+    TODO("todo", 2), DEADLINE("deadline", 9), EVENT( "event", 6), FIND("find", 5);
 
     private final String name;
     private final int addCommandPostfix;
 
-    AddCommandType(String name, int addCommandPostfix) {
+    SpecificCommandType(String name, int addCommandPostfix) {
         this.name = name;
         this.addCommandPostfix = addCommandPostfix;
     }

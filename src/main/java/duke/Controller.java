@@ -1,6 +1,6 @@
 package duke;
 
-import duke.commands.CommandType;
+import duke.commands.BasicCommandType;
 import duke.exceptions.DukeEmptyListException;
 import duke.exceptions.DukeUnknownArgumentsException;
 import duke.storage.Storage;
@@ -50,7 +50,7 @@ public class Controller {
      * @param input User inputs.
      */
     private void handleInput(String input) {
-        CommandType command = Parser.parseCommand(input);
+        BasicCommandType command = Parser.parseCommand(input);
         executeCommand(input, command);
     }
 
@@ -59,7 +59,7 @@ public class Controller {
      * @param input user input used based on commandType.
      * @param command commandType used to differentiate how input is used.
      */
-    private void executeCommand(String input, CommandType command) {
+    private void executeCommand(String input, BasicCommandType command) {
         try {
             switch (command) {
             case DONE:
@@ -72,7 +72,7 @@ public class Controller {
                 taskList.deleteTask(input);
                 break;
             case ADD:
-                addTask(input);
+                specificTask(input);
                 break;
             default:
                 throw new DukeUnknownArgumentsException();
@@ -102,8 +102,8 @@ public class Controller {
      * @param input input used to get specific information of the task to be added.
      * @throws DukeUnknownArgumentsException if the input contains an unknown command.
      */
-    private void addTask(String input) throws DukeUnknownArgumentsException {
-        taskList.add(input);
+    private void specificTask(String input) throws DukeUnknownArgumentsException {
+        taskList.run(input);
     }
 
     /**

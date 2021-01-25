@@ -1,5 +1,5 @@
 package duke.commands;
 
-public enum CommandType {
+public enum BasicCommandType {
     DONE, LIST, DELETE, ADD
 }
