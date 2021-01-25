@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +9,7 @@ public class Main {
         Duke duke = new Duke();
         Scanner sc = new Scanner(System.in);
         
-        String input = "";
+        String input;
         String output = "";
 
         while(duke.isRunning()) {

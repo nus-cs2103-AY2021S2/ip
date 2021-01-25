@@ -1,4 +1,8 @@
+package duke.command;
+
 import java.time.LocalDate;
+import duke.TaskList;
+import duke.task.EventTask;
 
 public class AddEvent extends AddCommand {
 
@@ -7,10 +11,10 @@ public class AddEvent extends AddCommand {
     private String endTime;
 
     /**
-     * Constructor for AddCommand class command name and description.
+     * Constructor for commands.AddCommand class duke.command name and description.
      *
-     * @param commandType
-     * @param description Description of the command.
+     * @param commandType Type of command
+     * @param description Description of the duke.command.
      */
     public AddEvent(String commandType, String description, LocalDate eventDate, String startTime, String endTime) {
         super(commandType, description);

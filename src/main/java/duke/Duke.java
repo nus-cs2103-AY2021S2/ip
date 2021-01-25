@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.io.IOException;
 
 public class Duke {
@@ -5,7 +9,7 @@ public class Duke {
     private boolean isRunning;
     private TaskList taskList;
     private final Storage storageHandler;
-    private final String path = "ip/src/main/java/data/TaskListData.txt";
+    private final String path = "ip/src/main/java/duke/data/TaskListData.txt";
     private Ui ui;
 
     public Duke() {

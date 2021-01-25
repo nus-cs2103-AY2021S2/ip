@@ -1,10 +1,15 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.task.ToDoTask;
+
 public class AddToDo extends AddCommand {
 
     /**
-     * Constructor for AddCommand class command name and description.
+     * Constructor for commands.AddCommand class duke.command name and description.
      *
-     * @param commandType
-     * @param description Description of the command.
+     * @param commandType Type of the command
+     * @param description Description of the duke.command.
      */
     public AddToDo(String commandType, String description) {
         super(commandType, description);

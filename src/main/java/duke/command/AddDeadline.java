@@ -1,4 +1,8 @@
+package duke.command;
+
 import java.time.LocalDate;
+import duke.TaskList;
+import duke.task.DeadlineTask;
 
 public class AddDeadline extends AddCommand {
 
@@ -6,10 +10,10 @@ public class AddDeadline extends AddCommand {
     private String time;
 
     /**
-     * Constructor for AddCommand class command name and description.
+     * Constructor for commands.AddCommand class duke.command name and description.
      *
-     * @param commandType
-     * @param description Description of the command.
+     * @param commandType Type of command
+     * @param description Description of the duke.command.
      */
     public AddDeadline(String commandType, String description, LocalDate deadline, String time) {
         super(commandType, description);

@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ByeCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddToDo;
+import duke.command.AddDeadline;
+import duke.command.AddEvent;
+
 import java.time.LocalDate;
 
 public class Parser {
@@ -17,7 +29,7 @@ public class Parser {
             return new ByeCommand();
         case "done":
             if (processedInput.length == 1) {
-                throw new DukeException("Please enter a task number to mark done");
+                throw new DukeException("Please enter a duke.task number to mark done");
             }
             return new DoneCommand(Integer.parseInt(processedInput[1]));
         case "todo":
@@ -38,11 +50,11 @@ public class Parser {
             }
         case "delete":
             if (processedInput.length == 1) {
-                throw new DukeException("Please enter a task number to delete");
+                throw new DukeException("Please enter a duke.task number to delete");
             }
             return new DeleteCommand(Integer.parseInt(processedInput[1]));
         default:
-            throw new DukeException("Invalid command. Please enter a valid one");
+            throw new DukeException("Invalid duke.command. Please enter a valid one");
         }
         
     }

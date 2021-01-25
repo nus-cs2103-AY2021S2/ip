@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.TaskList;
+
 public class ListCommand implements Command {
 
     private TaskList currentList;

@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.TaskList;
+
 public class DeleteCommand implements Command {
 
     private int deletedID;
@@ -13,7 +18,7 @@ public class DeleteCommand implements Command {
     }
 
     public String getResponse() {
-        return "Noted. I've removed this task:\n  " + deletedTask
+        return "Noted. I've removed this duke.task:\n  " + deletedTask
         + "\nNow you have " + numTasks + " tasks in the list.\n";
     }
 

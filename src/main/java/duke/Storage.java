@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -74,7 +81,7 @@ public class Storage {
             String eventDateTime = ((EventTask) task).serializeEvent();
             format = String.format("E | %d | %s | %s", status, description, eventDateTime);
         } else {
-            throw new DukeException("Error in file writing: Unknown task type");
+            throw new DukeException("Error in file writing: Unknown duke.task type");
         }
         return format;
     }
@@ -98,7 +105,7 @@ public class Storage {
                 String endTime = lineContents[5];
                 return new EventTask(description, taskID, status, eventDate, startTime, endTime);
             default:
-                throw new DukeException("Error in file reading: Unknown task type");
+                throw new DukeException("Error in file reading: Unknown duke.task type");
         }
     }
 
