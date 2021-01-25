@@ -6,7 +6,7 @@ public class Event extends DatedTask {
 
     @Override
     public String toString() {
-        return "[E] " + super.toString();
+        return "[E] " + super.toString() + " (at: " + formatDate(this.date) + ")";
     }
 }
 

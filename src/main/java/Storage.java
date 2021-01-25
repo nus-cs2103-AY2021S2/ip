@@ -48,7 +48,7 @@ public class Storage {
         try {
             s = new Scanner(tasks);
             while (s.hasNext()) {
-                newList.add(Task.stringToTask(s.nextLine()));
+                newList.add(Parser.stringToTask(s.nextLine()));
             }
             s.close();
             return newList;
@@ -69,7 +69,7 @@ public class Storage {
     }
 
     public void clearFile() throws DukeException {
-        FileWriter fw = getFileWriter();
+        FileWriter fw = getFileWriter(true);
         try {
             fw.close();
         } catch (IOException e) {

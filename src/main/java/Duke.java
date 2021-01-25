@@ -21,7 +21,6 @@ public class Duke {
         Ui.printWithStyle(new String[]{"Hello! I'm Duke", "What can I do for you?"});
     }
 
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         Scanner scanner = new Scanner(System.in);
