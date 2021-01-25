@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -114,9 +118,77 @@ public class Timmy {
         }
     }
 
+    void checkFile() {
+        boolean doesTaskListExist;
+        try {
+            doesTaskListExist = createFile();
+            if (doesTaskListExist) {
+                scanTaskList();
+            }
+        }  catch (Exception e) {
+            System.out.println("------------------------------------------------");
+            System.out.println("Sorry, an error occurred!");
+            System.out.println("------------------------------------------------");
+
+            isExceptionCaught = true;
+        }
+    }
+
+    void scanTaskList() throws FileNotFoundException, InvalidDescriptionException {
+        File f = new File("src\\main\\java\\taskList.txt");
+        Scanner sc = new Scanner(f);
+        int taskIndex = 0;
+
+        while (sc.hasNext()) {
+            String input = sc.nextLine();
+            if (input.contains("[T]")) {
+                String[] tokens = input.split("] ", 2);
+                String taskInfo = tokens[1];
+                addTask("todo", taskInfo);
+            } else if (input.contains("[D]")) {
+                String[] tokens = input.split("] ", 2);
+                String[] nextTokens = tokens[1].split(" ", 2);
+                String taskInfo = nextTokens[0] + " /by"
+                        + nextTokens[1].substring(nextTokens[1].indexOf(':') + 1, nextTokens[1].indexOf(')'));
+                addTask("deadline", taskInfo);
+            } else {
+                String[] tokens = input.split("] ", 2);
+                String[] nextTokens = tokens[1].split(" ", 2);
+                String taskInfo = nextTokens[0] + " /at"
+                        + nextTokens[1].substring(nextTokens[1].indexOf(':') + 1, nextTokens[1].indexOf(')'));
+                addTask("event", taskInfo);
+            }
+            if (input.contains("\u2713")) {
+                markTask(taskIndex);
+            }
+            taskIndex++;
+        }
+    }
+
+    void writeToFile() throws IOException {
+        FileWriter fw = new FileWriter("src\\main\\java\\taskList.txt");
+        for (Task t : tasks) {
+            fw.write(t + "\n");
+        }
+        fw.close();
+    }
+
+    boolean createFile() throws IOException {
+        File myFile = new File("src\\main\\java\\taskList.txt");
+        if (myFile.createNewFile()) {
+            System.out.println("I have created a file that stores your tasks in the repository! File: "
+                    + myFile.getName());
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     void takeCommands() {
         Scanner sc = new Scanner(System.in);
         String input;
+
+        checkFile();
 
         do {
             try {
@@ -168,6 +240,7 @@ public class Timmy {
                         break;
                     }
                     }
+                    writeToFile();
                 }
                 isExceptionCaught = false;
             } catch (InvalidCommandException e) {
