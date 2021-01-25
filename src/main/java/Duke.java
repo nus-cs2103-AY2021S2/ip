@@ -7,11 +7,13 @@ import java.util.Scanner;
  * @author Damith C. Rajapakse, Wu Weiming
  */
 public class Duke {
-    Tasks tasks;
-    Storage storage;
+    private Tasks tasks;
+    private Storage storage;
+    private Ui ui;
 
     public Duke(String filePath) throws IOException {
         this.tasks = new Tasks();
+        this.ui = new Ui();
         this.storage = new Storage(filePath);
         storage.retrieveTasks(tasks);
     }
@@ -26,7 +28,7 @@ public class Duke {
     }
 
     public void run() throws IOException {
-        printHello();
+        ui.printHello();
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage("duke.txt");
         Parser parser = new Parser();
@@ -42,21 +44,4 @@ public class Duke {
         storage.storeTasks(tasks);
     }
 
-    /**
-     * Prints a horizontal line to format text.
-     */
-    public static void formatText() {
-        System.out.println("******************************************************");
-    }
-
-    public void printHello() {
-        String logo = ".------..------..------..------.\n"
-                + "|D.--. ||U.--. ||K.--. ||E.--. |\n"
-                + "| :/\\: || (\\/) || :/\\: || (\\/) |\n"
-                + "| (__) || :\\/: || :\\/: || :\\/: |\n"
-                + "| '--'D|| '--'U|| '--'K|| '--'E|\n"
-                + "`------'`------'`------'`------'";
-
-        System.out.println("Hello, this is\n" + logo);
-    }
 }

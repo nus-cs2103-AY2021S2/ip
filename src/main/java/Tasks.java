@@ -40,10 +40,10 @@ public class Tasks {
             Task task = lst.get(index);
             task.markAsDone();
 
-            Duke.formatText();
+            Ui.formatText();
             System.out.println("Sweet! I have marked the following task as done:\n"
                     + task.toString());
-            Duke.formatText();
+            Ui.formatText();
         } catch (final NumberFormatException e) {
             System.err.println("Oof, did you type a valid number or not?");
         } catch (IndexOutOfBoundsException exception) {
@@ -60,7 +60,7 @@ public class Tasks {
             String[] split = input.split(" ", 2);
             String command = split[0];
 
-            Duke.formatText();
+            Ui.formatText();
 
             if (!command.equals(ADD_TODO_COMMAND) && !command.equals(ADD_DEADLINE_COMMAND)
                     && !command.equals(ADD_EVENT_COMMAND)) {
@@ -103,10 +103,10 @@ public class Tasks {
                             "This is getting old.");
                 }
             }
-            Duke.formatText();
+            Ui.formatText();
         } catch (DateTimeParseException e) {
             System.err.println("Your date formatting is invalid, use YYYY-MM-DD please...");
-            Duke.formatText();
+            Ui.formatText();
         }
     }
 
@@ -120,11 +120,11 @@ public class Tasks {
             Task task = lst.get(index);
             lst.remove(index);
 
-            Duke.formatText();
+            Ui.formatText();
             System.out.println("Sweet! I have deleted the following task:\n"
                     + task.toString());
             countTasks();
-            Duke.formatText();
+            Ui.formatText();
         } catch (final NumberFormatException e) {
             System.err.println("Oof, did you type a valid number or not?");
         } catch (IndexOutOfBoundsException exception) {

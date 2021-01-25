@@ -4,15 +4,15 @@ public class Parser {
     public boolean parse(String input, Tasks tasks) {
         if (input.equals(EXIT_COMMAND)) {
             // close program
-            Duke.formatText();
-            System.out.println("Bye, see you soon! Don't miss me too much.");
-            Duke.formatText();
+            Ui.formatText();
+            Ui.sayGoodbye();
+            Ui.formatText();
             return true;
         } else if (input.equals("list")) {
             // show everything in the list
-            Duke.formatText();
+            Ui.formatText();
             tasks.iterateList();
-            Duke.formatText();
+            Ui.formatText();
         } else if (input.split(" ", 2)[0].equals("done")) {
             // mark task with the given index as completed
             tasks.markAsDone(input.split(" ", 2)[1]);
