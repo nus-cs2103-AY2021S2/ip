@@ -56,7 +56,7 @@ public class TaskList {
         Pattern pattern = Pattern.compile("(\\d)\\. \\[([TDE])\\] \\[([X ])\\] (.+)");
         Matcher matcher = pattern.matcher(strTask);
         Matcher descriptionMatcher;
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm:ss a");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
         LocalDateTime dateTimeObject;
 
         matcher.find();
@@ -68,7 +68,7 @@ public class TaskList {
                 break;
 
             case "E":
-                pattern = Pattern.compile("(.+) (?=\\(at: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d:\\d\\d " +
+                pattern = Pattern.compile("(.+) (?=\\(at: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d " +
                         "\\w\\w)\\))");
                 descriptionMatcher = pattern.matcher(matcher.group(4));
                 descriptionMatcher.find();
@@ -77,7 +77,7 @@ public class TaskList {
                 break;
 
             case "D":
-                pattern = Pattern.compile("(.+) (?=\\(by: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d:\\d\\d " +
+                pattern = Pattern.compile("(.+) (?=\\(by: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d " +
                         "\\w\\w)\\))");
                 descriptionMatcher = pattern.matcher(matcher.group(4));
                 descriptionMatcher.find();

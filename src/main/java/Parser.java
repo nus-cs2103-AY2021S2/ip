@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputHandler {
+public class Parser {
 
     private static final String BYE_COMMAND = "bye";
     private static final String DONE_COMMAND = "done";
@@ -55,7 +55,7 @@ public class InputHandler {
 
             case EVENT_COMMAND:
                 try {
-                    pattern = Pattern.compile("(?i)event (.+) /at (\\d\\d-\\d\\d-\\d\\d\\d\\d \\d\\d:\\d\\d)");
+                    pattern = Pattern.compile("(?i)event (.+) /at (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
                     LocalDateTime dateTimeObject;
 
@@ -72,7 +72,7 @@ public class InputHandler {
 
             case DEADLINE_COMMAND:
                 try {
-                    pattern = Pattern.compile("(?i)deadline (.+) /by (\\d\\d-\\d\\d-\\d\\d\\d\\d \\d\\d:\\d\\d)");
+                    pattern = Pattern.compile("(?i)deadline (.+) /by (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
                     LocalDateTime dateTimeObject;
 

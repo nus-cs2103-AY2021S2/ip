@@ -9,11 +9,11 @@ public class Main {
         mike.mikeInit();
         while(mike.isRunning) {
             try {
-                Command inputCommand = InputHandler.parseInput(scanner);
+                Command inputCommand = Parser.parseInput(scanner);
                 mikeResponse = mike.getResponse(inputCommand);
-                OutputHandler.printResponse(mikeResponse);
+                UI.printResponse(mikeResponse);
             } catch (MikeInvalidInputException | MikeCommandExecutionException e) {
-                OutputHandler.printResponse(e.getMessage());
+                UI.printResponse(e.getMessage());
             }
         }
     }

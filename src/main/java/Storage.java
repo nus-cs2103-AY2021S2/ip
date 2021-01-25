@@ -4,10 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ReadWriteHandler {
+public class Storage {
     private File listFile;
 
-    public ReadWriteHandler(String filePath) {
+    public Storage(String filePath) {
         this.listFile = new File(filePath);
     }
 
@@ -34,7 +34,7 @@ public class ReadWriteHandler {
                 taskList.strToTask(scanner.nextLine());
             }
         } catch (FileNotFoundException | MikeInvalidInputException e) {
-            OutputHandler.printResponse(e.getMessage());
+            UI.printResponse(e.getMessage());
         }
         return taskList;
     }

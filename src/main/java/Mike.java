@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class Mike {
 
     private final String logo =
@@ -21,7 +19,7 @@ public class Mike {
     private final String filePath = "data/TodoList.txt";
     public boolean isRunning;
     public TaskList taskList;
-    ReadWriteHandler rwHandler;
+    Storage storage;
 
     /**
      * Mike chatbot constructor
@@ -36,8 +34,8 @@ public class Mike {
      */
     public void mikeInit() {
         System.out.println("Hello from\n" + this.logo);
-        this.rwHandler = new ReadWriteHandler(filePath);
-        this.taskList = rwHandler.readListFromFile(filePath);
+        this.storage = new Storage(filePath);
+        this.taskList = storage.readListFromFile(filePath);
     }
 
     /**
@@ -49,7 +47,7 @@ public class Mike {
         try {
             this.isRunning = !inputCommand.isExitCommand();
             this.taskList = inputCommand.runCommand(this.taskList);
-            this.rwHandler.updateListFile(this.taskList);
+            this.storage.updateListFile(this.taskList);
             return inputCommand.getResponse();
         } catch (MikeInvalidInputException e) {
             throw new MikeCommandExecutionException(e.getMessage());

@@ -24,6 +24,6 @@ public class EventTask extends Task {
     }
 
     private String dateToString(LocalDateTime dateObject) {
-        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(dateObject);
+        return DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a").format(dateObject);
     }
 }
