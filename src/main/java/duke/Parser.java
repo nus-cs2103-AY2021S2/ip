@@ -55,7 +55,9 @@ public class Parser {
         //If it is a To Do command
         if (toDoPattern.matcher(input).find()) {
             String[] inputSplitBySpaces = input.trim().split("\\s+");
-            String taskDescription = Helper.join(inputSplitBySpaces, 2, inputSplitBySpaces.length - 1);
+            //[ ] Task description
+            String taskDescriptionWithDoneBrackets = Helper.join(inputSplitBySpaces, 1);
+            String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
             return new ToDo(taskDescription);
         } else {
             boolean matchDeadline = deadlinePattern.matcher(input).find();

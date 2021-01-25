@@ -25,6 +25,10 @@ public class Helper {
         return output.toString();
     }
 
+    public static String join(String[] arr, int start) {
+        return join(arr, start, arr.length - 1);
+    }
+
     public static <T> int arrayIndexOf(T[] arr, T value) {
         return IntStream.range(0, arr.length).filter(i -> arr[i].equals(value)).findFirst().orElse(-1);
     }
