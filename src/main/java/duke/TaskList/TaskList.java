@@ -18,7 +18,6 @@ public class TaskList {
         taskArraylist.add(new ToDos(description));
     }
 
-
     public void addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
         taskArraylist.add(new Deadlines(description,dueDate, endTime));
     }

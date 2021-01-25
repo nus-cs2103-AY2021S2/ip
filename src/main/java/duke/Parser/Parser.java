@@ -106,8 +106,6 @@ public class Parser {
     }
 
 
-
-
     public static boolean isValidTaskNumber(int no, String type, int arraySize) {
         try {
             if (no < 0 || no >= arraySize && !type.equals("done")) {
