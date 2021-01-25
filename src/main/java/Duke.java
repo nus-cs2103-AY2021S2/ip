@@ -72,14 +72,7 @@ public class Duke {
     }
 
 
-    private void doneTask(String[] userInputSplit) throws DukeException {
-        try {
-            int taskNumber = Integer.parseInt(userInputSplit[1]);
-            this.list.done(taskNumber);
-        } catch (Exception e) {
-            throw new DukeException("Please enter a valid task number to mark a task as done.");
-        }
-    }
+
 
     private void deleteTask(String[] userInputSplit) throws DukeException {
         try {
@@ -93,32 +86,6 @@ public class Duke {
     public void bye() {
         Ui.printWithStyle("Bye. Hope to see you again soon!");
     }
-
-    /**
-     * Parses the user input to find and handle commands containing keywords.
-     * @param userInput
-     * @throws DukeException if command is in an incorrect format.
-     */
-    public void handleInput(String userInput) throws DukeException {
-        String[] splitBySpaces = userInput.trim().split("\\s+");
-        String keyword = splitBySpaces[0];
-        if (keyword.equals("list")) {
-            this.list.printList();
-        } else if (keyword.equals("done")) {
-            doneTask(splitBySpaces);
-        } else if (keyword.equals("deadline")) {
-            addDeadline(splitBySpaces);
-        } else if (keyword.equals("todo")) {
-            addToDo(splitBySpaces);
-        } else if (keyword.equals("event")) {
-            addEvent(splitBySpaces);
-        } else if (keyword.equals("delete")) {
-            deleteTask(splitBySpaces);
-        } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-    }
-
 
     public static void main(String[] args) {
         Duke duke = new Duke();
