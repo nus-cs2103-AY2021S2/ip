@@ -6,6 +6,12 @@ public class Deadlines extends Task{
         this.by = by;
     }
 
+    public Deadlines(String description, String by, boolean isDone) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + by + ")";
@@ -14,5 +20,10 @@ public class Deadlines extends Task{
     @Override
     public String getEmptyDescError() {
         return "Oops! Description of deadline " + super.getEmptyDescError();
+    }
+
+    @Override
+    public String formatData() {
+        return "D | " + super.formatData() + " | " + by;
     }
 }

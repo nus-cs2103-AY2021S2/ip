@@ -1,15 +1,36 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
     public static String tab = "     ";
     public static String line = "     ............................................................";
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int numTasks = 0;
+//    public static Scanner scanFile;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         printIntro();
         Scanner scan = new Scanner(System.in);
+
+        String home = System.getProperty("user.home");
+        String pathString = home + "/ip/data/duke.txt";
+        Path filepath = Paths.get(pathString);
+
+        try {
+            loadFileContents(pathString);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            Path dirPath = Paths.get(home + "/ip/data");
+            Files.createDirectories(dirPath);
+            Files.createFile(filepath);
+        }
 
         loop:
         while (scan.hasNextLine()) {
@@ -54,6 +75,7 @@ public class Duke {
                                 ToDos todo = new ToDos(description);
                                 tasks.add(todo);
                                 printAdd(numTasks);
+                                writeToFile(pathString, todo.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -65,6 +87,7 @@ public class Duke {
                                 Deadlines deadline = new Deadlines(description, date);
                                 tasks.add(deadline);
                                 printAdd(numTasks);
+                                writeToFile(pathString, deadline.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -76,6 +99,7 @@ public class Duke {
                                 Events event = new Events(description, date);
                                 tasks.add(event);
                                 printAdd(numTasks);
+                                writeToFile(pathString, event.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -158,4 +182,39 @@ public class Duke {
         System.out.println(tab + "I'm sorry, I'm not sure what that means.");
     }
 
+    private static void loadFileContents(String pathString) throws FileNotFoundException {
+        File file = new File(pathString);
+        Scanner scanFile = new Scanner(file);
+
+        while (scanFile.hasNext()) {
+            String fileData = scanFile.nextLine();
+            String[] dataArr = fileData.split(" |", 4);
+            String taskType = dataArr[0];
+            String isDone = dataArr[1];
+            String desc = dataArr[2];
+
+            switch (taskType) {
+                case "T":
+                    ToDos newTodo = new ToDos(desc, isDone.equals("1"));
+                    tasks.add(newTodo);
+                    numTasks++;
+                case "D":
+                    String by = dataArr[3];
+                    Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
+                    tasks.add(newDeadline);
+                    numTasks++;
+                case "E":
+                    String at = dataArr[3];
+                    Events newEvent = new Events(desc, at, isDone.equals("1"));
+                    tasks.add(newEvent);
+                    numTasks++;
+            }
+        }
+    }
+
+    private static void writeToFile(String pathString, String data) throws IOException {
+        FileWriter fw = new FileWriter(pathString);
+        fw.write(data);
+        fw.close();
+    }
 }

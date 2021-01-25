@@ -7,6 +7,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public String getDescription() {
         return this.description;
     }
@@ -25,5 +30,9 @@ public class Task {
 
     public String getEmptyDescError() {
         return "cannot be empty.";
+    }
+
+    public String formatData() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 }

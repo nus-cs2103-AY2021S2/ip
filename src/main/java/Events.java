@@ -6,6 +6,11 @@ public class Events extends Task {
         this.at = at;
     }
 
+    public Events(String description, String at, boolean isDone) {
+        super(description, isDone);
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at:" + at + ")";
@@ -14,5 +19,10 @@ public class Events extends Task {
     @Override
     public String getEmptyDescError() {
         return "Oops! Description of event " + super.getEmptyDescError();
+    }
+
+    @Override
+    public String formatData() {
+        return "E | " + super.formatData() + " | " + at;
     }
 }
