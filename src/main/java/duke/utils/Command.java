@@ -7,5 +7,6 @@ public enum Command {
     DONE,
     EVENT,
     LIST,
-    TODO
+    TODO,
+    SKIP
 }

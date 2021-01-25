@@ -1,78 +1,79 @@
 import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
-import duke.exceptions.UnknownCommandException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.*;
+import duke.ui.Ui;
 import duke.utils.Command;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
-import static duke.utils.Print.printWithIndentation;
 
 public class Duke {
-    private static final String BOT_NAME = "Chip the Squirrel";
-    private static final TaskList taskList = new TaskList();
-    private static final Storage storage = new Storage("data/tasks.txt");
+    private final TaskList taskList;
+    private final Storage storage;
+    private final Ui ui;
 
-    public static void loadData() {
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        taskList = new TaskList();
+        ui = new Ui();
+        loadData();
+    }
+
+    public void loadData() {
         try {
             ArrayList<Task> tasks = storage.load();
             taskList.setTaskList(tasks);
         } catch (IOException e) {
-            printWithIndentation("Sorry something when wrong loading your safe file :(");
+            ui.showErrorMessage("Sorry something when wrong loading your safe file :(");
             System.exit(0);
         } catch (DukeException e) {
-            printWithIndentation(e.getMessage());
+            ui.showErrorMessage(e.getMessage());
             System.exit(0);
         }
     }
 
-    public static void saveData() {
+    public void saveData() {
         try {
             storage.save(taskList.getTaskList());
         } catch (DukeException e) {
-            printWithIndentation(e.getMessage());
+            ui.showErrorMessage(e.getMessage());
             System.exit(0);
         }
     }
 
-    public static void processInput(String input) throws DukeException {
-        String[] tokens = input.split(" ", 2);
-        Command command;
-
-        try {
-            command = Command.valueOf(tokens[0].trim().toUpperCase());
-        } catch (IllegalArgumentException e){
-            throw new UnknownCommandException(tokens[0].trim());
-        }
-
+    public void processInput(Command command, String[] tokens) throws DukeException {
         switch(command) {
+            case SKIP:
+                break;
             case BYE:
-                printWithIndentation("Bye! Hope to see you again soon!");
+                ui.showGoodbyeMessage();
                 System.exit(0);
                 break;
             case DONE:
                 try {
-                    taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+                    Task task = taskList.markAsDone(Integer.parseInt(tokens[1]) - 1);
+                    ui.showSuccessfulDoneMessage(task);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new IncompleteInputException(command);
                 }
                 break;
             case DELETE:
                 try {
-                    taskList.delete(Integer.parseInt(tokens[1]) - 1);
+                    Task task = taskList.delete(Integer.parseInt(tokens[1]) - 1);
+                    ui.showSuccessfulDeleteMessage(taskList.getSize(), task);
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new IncompleteInputException(command);
                 }
                 break;
             case LIST:
-                taskList.printTasks();
+                ui.showTasks(taskList.getTaskList());
                 break;
             default:
                 try {
-                    taskList.addTask(command, tokens[1].trim());
+                    Task task = taskList.addTask(command, tokens[1].trim());
+                    ui.showAddTaskMessage(taskList.getSize(), task);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new IncompleteInputException(command);
                 }
@@ -81,25 +82,23 @@ public class Duke {
         saveData();
     }
 
-    public static void main(String[] args) {
-        loadData();
+    public void run() {
+        ui.showWelcomeMessage();
 
-        printWithIndentation("Hello! I'm " + BOT_NAME + "!", "What can I do for you today?");
-
-        Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNext()) {
-            String input = sc.nextLine().trim();
-
-            if (input.equals("")) {
-                continue;
-            }
+        while (ui.hasMoreTokens()) {
+            String input = ui.getUserCommand();
 
             try {
-                processInput(input);
+                String[] tokens = Parser.splitIntoTokens(input);
+                Command command = Parser.parseCommand(tokens);
+                processInput(command, tokens);
             } catch (DukeException e) {
-                printWithIndentation(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

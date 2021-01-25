@@ -2,13 +2,12 @@ package duke.task;
 
 import duke.exceptions.InvalidDateException;
 import duke.exceptions.InvalidInputException;
+import duke.exceptions.UnknownCommandException;
 import duke.utils.Command;
 import duke.utils.DateTime;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-
-import static duke.utils.Print.printWithIndentation;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -25,21 +24,7 @@ public class TaskList {
         return taskList;
     }
 
-    public void printTasks() {
-        if (taskList.size() == 0) {
-            printWithIndentation("You have not added any tasks.");
-        } else {
-            String[] tasksArr = new String[taskList.size()];
-
-            for (int i = 0; i < taskList.size(); i++) {
-                tasksArr[i] = (i + 1) + "." + taskList.get(i).toString();
-            }
-
-            printWithIndentation(tasksArr);
-        }
-    }
-
-    public void addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException {
+    public Task addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
         String[] tokens;
         Task task;
 
@@ -66,19 +51,15 @@ public class TaskList {
                 }
                 break;
             default:
-                printWithIndentation("I do not understand.");
-                return;
+                throw new UnknownCommandException(command.name());
         }
 
         taskList.add(task);
-        int numTasks =  taskList.size();
-        String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
-        printWithIndentation("Got it! I've added this task:",
-                "  " + task.toString(),
-                "Now you have " + formattedTasksCount + " in the list.");
+
+        return task;
     }
 
-    public void markAsDone(int idx) throws InvalidInputException {
+    public Task markAsDone(int idx) throws InvalidInputException {
         Task task;
         try {
             task = taskList.get(idx);
@@ -87,10 +68,11 @@ public class TaskList {
         }
 
         task.markAsDone();
-        printWithIndentation("Good Job! I've marked this task as done!", task.toString());
+
+        return task;
     }
 
-    public void delete(int idx) throws InvalidInputException {
+    public Task delete(int idx) throws InvalidInputException {
         Task task;
         try {
             task = taskList.get(idx);
@@ -104,10 +86,10 @@ public class TaskList {
 
         taskList.remove(idx);
 
-        int numTasks =  taskList.size();
-        String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
-        printWithIndentation("Got it! I've removed this task:",
-                "  " + task.toString(),
-                "Now you have " + formattedTasksCount + " in the list.");
+        return task;
+    }
+
+    public int getSize() {
+        return taskList.size();
     }
 }

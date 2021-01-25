@@ -1,3 +1,0 @@
-TODO|true|todo one
-EVENT|true|event one|2020-12-01
-DEADLINE|true|deadline one|2020-12-01
