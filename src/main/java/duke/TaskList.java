@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exception.InvalidDescriptionException;
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.Task;
+import duke.model.ToDo;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

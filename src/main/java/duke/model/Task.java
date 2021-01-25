@@ -1,3 +1,5 @@
+package duke.model;
+
 public class Task {
     private final char taskType;
     private boolean markAsDone;

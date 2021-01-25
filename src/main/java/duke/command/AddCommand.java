@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.model.Task;
+import duke.TaskList;
+import duke.Ui;
+
 import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {

@@ -1,3 +1,10 @@
+package duke;
+
+import duke.model.Deadline;
+import duke.model.Event;
+import duke.model.Task;
+import duke.model.ToDo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;

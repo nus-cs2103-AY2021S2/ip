@@ -1,3 +1,9 @@
+package duke;
+
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidInputException;
+import duke.model.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -50,7 +56,7 @@ public class Ui {
         System.out.println("     Bye. Hope to see you again soon!");
     }
 
-    public void unknownCommandInteraction() {
-        System.out.println("     Unable to figure out this command");
+    public void unknownCommandInteraction() throws InvalidInputException {
+        throw new InvalidInputException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

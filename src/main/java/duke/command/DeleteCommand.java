@@ -1,14 +1,18 @@
-import java.io.IOException;
+package duke.command;
 
-public class DoneCommand extends Command {
-    public DoneCommand(String taskDescription) {
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public class DeleteCommand extends Command {
+    public DeleteCommand(String taskDescription) {
         super(taskDescription);
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            storage.overwrite(taskList.done(taskDescription, ui));
+            storage.overwrite(taskList.delete(taskDescription, ui));
         } catch (Exception ex) {
             System.out.println("     " + ex.getMessage());
         }
