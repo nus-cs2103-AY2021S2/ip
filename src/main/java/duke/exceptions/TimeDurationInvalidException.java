@@ -1,7 +1,7 @@
 package duke.exceptions;
 
-public class InvalidTimeDurationException extends DukeException {
-    public InvalidTimeDurationException() {
+public class TimeDurationInvalidException extends DukeException {
+    public TimeDurationInvalidException() {
         super("\tPlease enter a valid start and end time duration\n\t(start time < end time).\n");
     }
 }
