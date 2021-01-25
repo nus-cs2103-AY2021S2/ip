@@ -16,15 +16,19 @@ import java.util.Scanner;
 public class Storage {
     public static final String splitter = " /&/ ";
     private static ArrayList<Task> tasks;
-    private static final String PATHNAME = "./src/main/java/duke/storage/data.txt";
+    private static String pathName;
 
     public static ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    public static void initialisePath(String newPathName) {
+        pathName = newPathName;
+    }
+
     public static void initialiseList() throws DukeException {
         tasks = new ArrayList<>();
-        File f = new File(PATHNAME);
+        File f = new File(pathName);
         try {
             boolean isEmptyFile = f.createNewFile();
             if (!isEmptyFile) {
@@ -71,7 +75,7 @@ public class Storage {
 
     public static void updateDataFile() throws DukeException {
         try {
-            FileWriter fw = new FileWriter(PATHNAME);
+            FileWriter fw = new FileWriter(pathName);
             StringBuilder sb = new StringBuilder();
             for (Task task : tasks) {
                 sb.append(task.getFormattedString());
