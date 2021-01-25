@@ -5,27 +5,35 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
-What can I do for you?
+____________________________
+	Hello! I'm Duke
+	What can I do for you?
+____________________________
 Got it. I've added this task:
 	[T][ ]  read book
 Now you have 1 tasks in the list.
+
 Got it. I've added this task:
 	[D][ ]  Homework (by: 12am)
 Now you have 2 tasks in the list.
+
 Got it. I've added this task:
 	[E][ ]  picnic (at: garden)
 Now you have 3 tasks in the list.
 Got it. I've added this task:
 	[T][ ]  return book
 Now you have 4 tasks in the list.
+
 Got it. I've added this task:
 	[T][ ]  feed the cat
 Now you have 5 tasks in the list.
+
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
 Got it. I've added this task:
 	[T][ ]  water the plants
 Now you have 6 tasks in the list.
+
 Here are the tasks in your list:
 1. [T][ ]  read book
 2. [D][ ]  Homework (by: 12am)
@@ -33,10 +41,13 @@ Here are the tasks in your list:
 4. [T][ ]  return book
 5. [T][ ]  feed the cat
 6. [T][ ]  water the plants
+
 Nice! I've marked this task as done:
 [D][X]  Homework (by: 12am)
+
 Nice! I've marked this task as done:
 [E][X]  picnic (at: garden)
+
 Here are the tasks in your list:
 1. [T][ ]  read book
 2. [D][X]  Homework (by: 12am)
@@ -44,13 +55,19 @@ Here are the tasks in your list:
 4. [T][ ]  return book
 5. [T][ ]  feed the cat
 6. [T][ ]  water the plants
+
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
 Noted. I've removed this task:
 	[D][X]  Homework (by: 12am)
 Now you have 5 tasks in the list.
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+
 Here are the tasks in your list:
 1. [T][ ]  read book
 2. [E][X]  picnic (at: garden)
 3. [T][ ]  return book
 4. [T][ ]  feed the cat
 5. [T][ ]  water the plants
+
