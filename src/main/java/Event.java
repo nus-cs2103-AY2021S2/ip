@@ -13,11 +13,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + startTime.format(DateTimeFormatter.ofPattern("MMM dd yyy HH : mm")) + ")";
+                + startTime.format(DateTimeFormatter.ofPattern("MMM dd yyy HH:mm")) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "E " + super.toFileString() + " | " + at;
+        return "E " + super.toFileString() + " | "
+                + startTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
     }
 }

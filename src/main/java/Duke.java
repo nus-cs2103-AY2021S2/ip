@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -128,12 +129,12 @@ public class Duke {
                     thisTask = new Todo(taskName);
                 } else if (taskType.equals("D")) {
                     taskName = keyWords[2];
-                    String deadline = keyWords[3];
-                    thisTask = new Deadline(taskName, deadline);
+                    LocalDateTime cutOffDate = Parser.parseDateTime(keyWords[3]);
+                    thisTask = new Deadline(taskName, cutOffDate);
                 } else {
                     taskName = keyWords[2];
-                    String date = keyWords[3];
-                    thisTask = new Event(taskName, date);
+                    LocalDateTime startDate = Parser.parseDateTime(keyWords[3]);
+                    thisTask = new Event(taskName, startDate);
                 }
                 taskStatus = keyWords[1].strip();
                 if (taskStatus.equals("1")) {
@@ -142,6 +143,8 @@ public class Duke {
                 tasks.add(thisTask);
             }
         } catch (FileNotFoundException e) {
+            System.out.println("File not found:" + e.getMessage());
+        } catch (InvalidDateTimeException e) {
             System.out.println(e.getMessage());
         }
     }
