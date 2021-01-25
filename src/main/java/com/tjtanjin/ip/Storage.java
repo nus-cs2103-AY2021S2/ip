@@ -103,7 +103,8 @@ public class Storage {
      * @param dueDate due date for task (null for todo)
      */
     @SuppressWarnings("unchecked")
-    public static void saveTask(int index, String saveType, String taskName, String status, String type, LocalDate dueDate) {
+    public static void saveTask(int index, String saveType, String taskName,
+            String status, String type, LocalDate dueDate) {
 
         JSONObject taskDetails = new JSONObject();
         taskDetails.put("taskName", taskName);

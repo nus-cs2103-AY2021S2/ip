@@ -15,6 +15,7 @@ public class AddCommand {
      */
     public static void execute(String taskType, String taskName, LocalDate taskDate) {
         TaskList.addTask(taskType, taskName, taskDate);
-        Storage.saveTask(TaskList.tasks.size(), "NEW", taskName, "incomplete", taskType.toUpperCase(), taskDate);
+        Storage.saveTask(TaskList.tasks.size(), "NEW",
+                taskName, "incomplete", taskType.toUpperCase(), taskDate);
     }
 }
