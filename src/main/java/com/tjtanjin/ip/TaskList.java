@@ -55,4 +55,20 @@ public class TaskList {
             }
         }
     }
+
+    public static void findTask(String taskName) {
+        if (tasks.size() == 0) {
+            Ui.showInfo("You have no task at the moment!");
+        } else {
+            int counter = 0;
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task task = tasks.get(i - 1);
+                if (task.getTaskName().contains(taskName)) {
+                    counter += 1;
+                    Ui.showInfo(counter + "." + task);
+                }
+            }
+            Ui.showInfo("A total of " + counter + " task(s) were found.");
+        }
+    }
 }
