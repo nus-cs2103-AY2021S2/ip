@@ -9,17 +9,25 @@ import duck.task.TaskList;
 import java.io.*;
 
 public class Duke {
-    //private  String filePathOfData = ".\\data\\duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * initialize Duck object
+     * @param filePath the path of the file containing data of tasks
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
         ui = new Ui();
     }
 
+    /**
+     * Realize the duck program, record and change the list of tasks
+     * @throws IOException
+     */
     public void run() throws IOException {
         ui.showWelcome();
         String fullCommand = "";

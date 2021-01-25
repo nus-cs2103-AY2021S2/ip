@@ -12,11 +12,24 @@ public class Command {
     private String command;
     private String description;
 
+    /**
+     * Initialize the Command object
+     * @param command the command getting from ui.
+     * @param description the description of command,includes things to do, time and so on.
+     * @return Lateral location.
+     */
     public Command(String command, String description) {
         this.command = command;
         this.description = description;
     }
 
+    /**
+     * execute the command
+     * @param tasks the task list used to  record various tasks
+     * @param ui deals with interactions with the user
+     * @param storage deals with loading tasks from the file and saving tasks in the file
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] descriptionSplit;
         switch (command) {
@@ -72,8 +85,6 @@ public class Command {
                 ui.showErrorReply("error_date_non_existed_task");
             }
             break;
-
-
         case "todo":
             try {
                 String test = description;
@@ -103,7 +114,6 @@ public class Command {
             } catch (DateTimeParseException e) {
                 ui.showErrorReply("error_deadline_by");
             }
-
             break;
         case "event":
             try {
@@ -122,7 +132,6 @@ public class Command {
             } catch (DateTimeParseException e) {
                 ui.showErrorReply("error_event_at");
             }
-
             break;
         default:
             ui.showErrorReply("error_no_meaning");

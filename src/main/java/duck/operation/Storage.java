@@ -6,6 +6,13 @@ import java.io.*;
 
 public class Storage {
     private File fileOfData;
+
+    /**
+     * initialize Storage object, location file
+     * if it does not exist, generate a new one
+     * @param filePath the path of file
+     * @throws IOException
+     */
     public Storage(String filePath) throws IOException {
         this.fileOfData = new File(filePath);
         if (!fileOfData.isFile()) {
@@ -13,6 +20,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Get the data in the file, and return a list of string
+     * @return a list of data
+     * @throws IOException
+     */
     public String[] load() throws IOException {
         FileInputStream inStream = new FileInputStream(fileOfData);
         InputStreamReader reader = new InputStreamReader(inStream);
@@ -26,6 +38,12 @@ public class Storage {
         br.close();
         return data;
     }
+
+    /**
+     * update the data of the file when task list changes.
+     * @param tasks
+     * @throws IOException
+     */
     public void updateFile(TaskList tasks) throws IOException {
         FileOutputStream outStream = new FileOutputStream(fileOfData);
         OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");

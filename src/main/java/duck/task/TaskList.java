@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<Task>();
 
+    /**
+     * initialize  the TaskLisk object
+     * @param data use data to form task list
+     */
     public TaskList(String[] data) {
         for (int i = 0; data[i] != null; i++) {
             String datas = data[i];
@@ -26,18 +30,35 @@ public class TaskList {
         }
     }
 
+    /**
+     * get size of task list
+     * @return number of tasks
+     */
     public int getSizeOfTasks() {
         return taskList.size();
     }
 
+    /**
+     * get a task from task list
+     * @param number the number of task
+     * @return task
+     */
     public Task getTask(Integer number) {
         return taskList.get(number);
     }
 
+    /**
+     * remove task from task list
+     * @param number the number of the choosing task
+     */
     public void removeTask(Integer number) {
         taskList.remove(taskList.get(number));
     }
 
+    /**
+     * add a new task to task list
+     * @param task
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }

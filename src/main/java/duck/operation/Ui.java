@@ -13,6 +13,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * show a welcome logo and ask for command
+     */
     public void showWelcome() {
         System.out.println("Hello from\n" + logo);
         System.out.println(INDENTATION + HORIZON);
@@ -21,11 +24,20 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * read command from input
+     * @return a full command
+     */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine().trim();
     }
 
+    /**
+     * show the reply for command including hello,bye,list and so on
+     * @param command different kind of command
+     * @param tasks
+     */
     public void showCommandReply(String command, TaskList tasks) {
         System.out.println(INDENTATION + HORIZON);
         switch (command) {
@@ -51,6 +63,10 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * show the reply for error
+     * @param reply the kind of error
+     */
     public void showErrorReply(String reply) {
         System.out.println(INDENTATION + HORIZON);
         switch (reply) {
@@ -89,6 +105,11 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * show the reply for done command
+     * @param number the number of task in task list
+     * @param tasks task list
+     */
     public void showDoneReply(int number, TaskList tasks) {
         System.out.println(INDENTATION + HORIZON);
         System.out.println(INDENTATION + "Nice! I've marked this task as done:");
@@ -96,6 +117,11 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * show the reply for delete command
+     * @param number the number of task in task list
+     * @param tasks task list
+     */
     public void showDeleteReply(int number, TaskList tasks) {
         System.out.println(INDENTATION + HORIZON);
         System.out.println(INDENTATION + "Noted. I've removed this task: ");
@@ -104,6 +130,11 @@ public class Ui {
         System.out.println(INDENTATION + HORIZON);
     }
 
+    /**
+     * show the reply for date command
+     * @param number the number of task in task list
+     * @param tasks task list
+     */
     public void showDateReply(int number, TaskList tasks) {
         System.out.println(INDENTATION + HORIZON);
         System.out.println(tasks.getTask(number).getPeriodDays());
