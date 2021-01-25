@@ -28,13 +28,22 @@ public class Storage {
     public static ArrayList<Task> loadTasks() {
 
         File tasksFile = new File("./data/tasks.json");
+        if (!tasksFile.getParentFile().isDirectory()) {
+            try {
+                if (!tasksFile.getParentFile().mkdirs()) {
+                    throw new IOException();
+                }
+            } catch (IOException e) {
+                Ui.showError("Unable to create storage directory.");
+            }
+        }
         if (!tasksFile.exists()) {
             try {
                 if (!tasksFile.createNewFile()) {
-                    throw new DukeException("Unable to generate task file.");
+                    throw new IOException();
                 }
-            } catch (IOException | DukeException e) {
-                System.out.println("IO Operation failed.");
+            } catch (IOException e) {
+                Ui.showError("Unable to create storage file.");
             }
         }
 
