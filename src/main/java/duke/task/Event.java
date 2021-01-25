@@ -17,7 +17,7 @@ public class Event extends Task {
      * @param data duedate
      */
 
-    public Events(String title, Boolean b, LocalDate data) {
+    public Event(String title, Boolean b, LocalDate data) {
         super(title, b);
         this.date = data;
     }
@@ -30,7 +30,7 @@ public class Event extends Task {
      * @param  endTime
      */
 
-    public Events(String title,Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String title,Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(title,b);
         this.date = date;
         this.startTime = startTime;

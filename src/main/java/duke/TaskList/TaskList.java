@@ -1,10 +1,9 @@
 package duke.TaskList;
 
 import duke.UI.UI;
-import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -49,11 +48,20 @@ public class TaskList {
 
     /**
      * Print out all task in array list
+     * @param type
      */
-    public void showAllTask(){
-        ui.printListHeader();
-        for (int i = 0; i < taskArraylist.size(); i++) {
-            ui.printTask(i,taskArraylist.get(i) );
+    public void showAllTask(String type){
+        ArrayList<Task> taskList;
+
+        if(type.equals("find")){
+            ui.printFindHeader();
+            taskList = findTaskArraylist;
+        }else {
+            ui.printListHeader();
+            taskList = taskArraylist;
+        }
+        for (int i = 0; i < taskList.size(); i++) {
+            ui.printTask(i,taskList.get(i) );
         }
         ui.displayLines();
     }
@@ -87,6 +95,15 @@ public class TaskList {
      */
     public void setTaskArraylist (ArrayList<Task> al){
        this.taskArraylist = al;
+    }
+
+    public void findTask(String input){
+        for(int i=0; i<taskArraylist.size();i++){
+            if(taskArraylist.get(i).getTaskName().contains(input)){
+                findTaskArraylist.add(taskArraylist.get(i));
+            }
+        }
+        showAllTask("find");
     }
 
     /** Return specific task given the index of task in array list

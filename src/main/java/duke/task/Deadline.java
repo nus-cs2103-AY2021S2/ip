@@ -5,7 +5,7 @@ import java.time.LocalTime;
 /** Create a Deadline class
  *
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
     private LocalDate dueDate;
     private LocalTime dueTime;
@@ -15,7 +15,7 @@ public class Deadlines extends Task {
      * @param dueBy
      * @param time
      */
-    public Deadlines(String title, LocalDate dueBy, LocalTime time) {
+    public Deadline(String title, LocalDate dueBy, LocalTime time) {
         super(title);
         this.dueDate = dueBy;
         this.dueTime = time;
@@ -27,7 +27,7 @@ public class Deadlines extends Task {
      * @param dueBy
      * @param time
      */
-    public Deadlines(String title, Boolean b, LocalDate dueBy, LocalTime time) {
+    public Deadline(String title, Boolean b, LocalDate dueBy, LocalTime time) {
         super(title, b);
         this.dueDate = dueBy;
         this.dueTime = time;

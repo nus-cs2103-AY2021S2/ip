@@ -46,6 +46,10 @@ public class Parser {
         String commandArray[] = input.split("\\s+");
         int size =  taskList.getTaskListArray().size();
 
+        String [] userInputArray = separateUserInput(input);
+        String type = userInputArray[0];
+        String userInput = input.replace(type, " ");
+
         if(commandArray[0].equals("find")){
             if(userInput.isBlank()){
                 throw new DukeException("Please input task description to be searched.");
@@ -66,9 +70,6 @@ public class Parser {
             DoneCommand doneCommand = new DoneCommand(commandArray[1], taskList);
             taskList = doneCommand.execute(taskList, ui, storage);
         }else{
-            String [] userInputArray = separateUserInput(input);
-            String type = userInputArray[0];
-            String userInput = input.replace(type, " ");
 
             AddCommand ac = new AddCommand(userInput, taskList);
 
@@ -158,7 +159,7 @@ public class Parser {
      * @return array of string
      * @throws DukeException
      */
-    public static String[] seperateDueDate (String input, String type) throws DukeException {
+    public static String[] separateDueDate (String input, String type) throws DukeException {
         if(input.contains("/by") && type.equals("deadline")) {
             String dueBy[] = input.split("/by ");
             TaskName = dueBy[0].replace(type, "");

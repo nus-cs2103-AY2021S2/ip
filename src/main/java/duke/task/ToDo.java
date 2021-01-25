@@ -4,20 +4,7 @@ package duke.task;
 /**
  *  Create a todo class
  */
-public class ToDos extends Task {
 
-    /**Constructor to create todo object for retrieval of task from data file
-     * @param title
-     * @param b boolean
-     */
-    public ToDos(String title, Boolean b) {
-        super(title, b);
-    }
-
-    /**Constructor to create todo object
-     * @param title
-     */
-    public ToDos(String title) {
 public class ToDo extends Task {
 
     public ToDo(String title, Boolean b) {

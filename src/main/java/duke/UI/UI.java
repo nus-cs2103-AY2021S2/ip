@@ -12,7 +12,6 @@ public class UI {
     static final String lines = "----------------------------------------";
     private static Scanner sc = new Scanner(System.in);
 
-
     /**
      * Print out welcome message to user
      */
@@ -54,6 +53,10 @@ public class UI {
      */
     public void printListHeader(){
         System.out.println( "\nHere are the tasks in your list:");
+    }
+
+    public void printFindHeader(){
+        System.out.println( "\n     Here are the matching tasks in your list:");
     }
 
     /**
