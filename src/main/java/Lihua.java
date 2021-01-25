@@ -1,3 +1,11 @@
+import lihua.commands.Command;
+import lihua.commands.CommandResult;
+import lihua.commands.ExitCommand;
+import lihua.parser.Parser;
+import lihua.storage.Storage;
+import lihua.tasks.Tasks;
+import lihua.ui.Ui;
+
 // Design idea adapted from https://github.com/se-edu/addressbook-level2
 public class Lihua {
     private Tasks tasks;

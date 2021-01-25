@@ -1,3 +1,7 @@
+package lihua.commands;
+
+import lihua.commons.Messages;
+
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exit the application. Data will be auto-saved.\n"

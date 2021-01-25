@@ -1,3 +1,10 @@
+package lihua.parser;
+
+import lihua.commands.*;
+import lihua.tasks.Deadline;
+import lihua.tasks.Event;
+import lihua.tasks.ToDo;
+
 import java.time.LocalDate;
 
 public class Parser {

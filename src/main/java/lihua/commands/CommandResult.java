@@ -1,3 +1,5 @@
+package lihua.commands;
+
 public class CommandResult {
     private final String feedbackToUser;
 

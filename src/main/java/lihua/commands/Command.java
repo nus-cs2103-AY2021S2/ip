@@ -1,4 +1,8 @@
-abstract class Command {
+package lihua.commands;
+
+import lihua.tasks.Tasks;
+
+abstract public class Command {
     protected Tasks tasks;
     protected int targetIndex = -1;
 
@@ -13,5 +17,5 @@ abstract class Command {
         this.tasks = tasks;
     }
 
-    abstract CommandResult execute();
+    abstract public CommandResult execute();
 }

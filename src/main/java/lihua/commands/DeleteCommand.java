@@ -1,3 +1,8 @@
+package lihua.commands;
+
+import lihua.tasks.Task;
+import lihua.commons.Messages;
+
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Remove a specific task from the list.\n"

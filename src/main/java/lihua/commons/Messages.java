@@ -1,3 +1,7 @@
+package lihua.commons;
+
+import lihua.commands.*;
+
 public class Messages {
     public static final String MESSAGE_HELLO =
             "Hello! My name is Lihua.\n" +

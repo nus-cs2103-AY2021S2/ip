@@ -1,3 +1,8 @@
+package lihua.ui;
+
+import lihua.commands.CommandResult;
+import lihua.commons.Messages;
+
 import java.util.Scanner;
 
 public class Ui {

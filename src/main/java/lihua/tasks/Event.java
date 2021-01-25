@@ -1,16 +1,18 @@
+package lihua.tasks;
+
 import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represent an Event item, which is a child of Task
+ * Represent an lihua.tasks.Event item, which is a child of lihua.tasks.Task
  */
 public class Event extends Task {
     private final LocalDate period;
 
     /**
-     * Initialize an Event with a time period
+     * Initialize an lihua.tasks.Event with a time period
      * @param name The name of the event
      * @param period The date of the event, assumed to be 'yyyy-mm-dd'
      */
@@ -24,8 +26,8 @@ public class Event extends Task {
     }
 
     /**
-     * toString method overriding the one in class Task
-     * @return a user-friendly String representation of the Event item
+     * toString method overriding the one in class lihua.tasks.Task
+     * @return a user-friendly String representation of the lihua.tasks.Event item
      */
     @Override
     public String toString() {

@@ -1,3 +1,8 @@
+package lihua.commands;
+
+import lihua.commons.Messages;
+import lihua.tasks.Task;
+
 public class AddCommand extends Command {
     public static final String COMMAND_WORD = "todo/event/deadline";
     public static final String MESSAGE_USAGE =

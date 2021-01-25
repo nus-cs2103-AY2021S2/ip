@@ -1,3 +1,5 @@
+package lihua.commands;
+
 import java.time.LocalDate;
 
 public class ListCommand extends Command {
@@ -20,7 +22,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        // Let Tasks check if it is null or not, then perform relevant operations.
+        // Let lihua.tasks.Tasks check if it is null or not, then perform relevant operations.
         String message = tasks.listTasks(date);
         return new CommandResult(message);
     }

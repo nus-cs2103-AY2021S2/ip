@@ -1,11 +1,13 @@
+package lihua.tasks;
+
 import org.json.simple.JSONObject;
 
 /**
- * Represent a ToDo item, which is a child of Task
+ * Represent a lihua.tasks.ToDo item, which is a child of lihua.tasks.Task
  */
 public class ToDo extends Task {
     /**
-     * Initialize a ToDo item
+     * Initialize a lihua.tasks.ToDo item
      * @param name The name of the item
      */
     public ToDo(String name) {
@@ -13,8 +15,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * toString method overriding the one in class Task
-     * @return a user-friendly String representation of the ToDo item
+     * toString method overriding the one in class lihua.tasks.Task
+     * @return a user-friendly String representation of the lihua.tasks.ToDo item
      */
     @Override
     public String toString() {
