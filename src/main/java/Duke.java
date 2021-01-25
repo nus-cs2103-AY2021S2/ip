@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
     private static final String FILE_PATH = "./src/main/java/tasks.txt";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
 
     private static void introduction() {
         String logo = " ____        _        \n"
