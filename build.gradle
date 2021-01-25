@@ -1,10 +1,10 @@
 plugins {
-  id 'com.github.johnrengelman.shadow' version '6.1.0'
-  id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'java'
 }
 
 jar {
-	manifest {
+    manifest {
 		attributes(
 			'Main-Class': 'duke.Duke'
 		)
