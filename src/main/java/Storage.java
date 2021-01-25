@@ -45,15 +45,10 @@ public class Storage {
                         t = new Event(description, time);
                     }
                 }
+                // t will not result in NPE
                 t.setDone(isDone);
                 tasks.addTask(t);
             }
-            // System.out.println("Successfully loaded task data :D");
-        /*} catch (IOException e) {
-            System.out.println("Something bad happens, cannot load data. :')");
-        } catch (ParseException e) {
-            System.out.println("Something bad happens, cannot load data. :')");
-        */
         } catch (Exception e) {
             System.out.println("Something bad happens, cannot load data. :')");
         }

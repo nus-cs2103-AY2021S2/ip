@@ -25,8 +25,4 @@ public class AddCommand extends Command {
             return new CommandResult(Messages.MESSAGE_REPORTING_ADDING_FAILURE);
         }
     }
-
-    public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
-    }
 }

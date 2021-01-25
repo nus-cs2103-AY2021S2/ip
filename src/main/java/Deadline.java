@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Represent a Deadline item, which is a child of Task
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Initialize a Deadline item with a given end time
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[D][%s] %s (by: %s)", doneMark, name,
-                by.format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+                by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     @Override

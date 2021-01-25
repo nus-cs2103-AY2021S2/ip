@@ -9,7 +9,7 @@ public class Parser {
         // first argument, center argument(s), and last argument.
         String[] split = userInput.split("\\s+"); // Split by one or more white spaces.
         String firstArgument = split[0].toLowerCase();
-        Command command = null;
+        Command command;
         try {
             switch (firstArgument) {
             case "bye":
@@ -70,8 +70,7 @@ public class Parser {
             index++;
         }
         String content = userInput.substring(index);
-        Deadline deadline = new Deadline(content, LocalDate.parse(date));
-        return deadline;
+        return new Deadline(content, LocalDate.parse(date));
     }
 
     private Event getEvent(String userInput) throws Exception {
@@ -83,8 +82,7 @@ public class Parser {
             index++;
         }
         String content = userInput.substring(index);
-        Event event = new Event(content, LocalDate.parse(date));
-        return event;
+        return new Event(content, LocalDate.parse(date));
     }
 
     private ToDo getToDo(String userInput) throws Exception {
@@ -92,7 +90,6 @@ public class Parser {
         while (userInput.charAt(index) == ' ') {
             index++;
         }
-        ToDo todo = new ToDo(userInput.substring(index));
-        return todo;
+        return new ToDo(userInput.substring(index));
     }
 }

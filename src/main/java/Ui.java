@@ -11,10 +11,6 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void printGetHelpMessage() {
-        System.out.println(Messages.MESSAGE_GET_HELP);
-    }
-
     public void printHello() {
         printHorizontalLine();
         System.out.println(Messages.MESSAGE_HELLO);

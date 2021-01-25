@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Represent an Event item, which is a child of Task
  */
 public class Event extends Task {
-    private LocalDate period;
+    private final LocalDate period;
 
     /**
      * Initialize an Event with a time period
@@ -31,7 +31,7 @@ public class Event extends Task {
     public String toString() {
         String doneMark = isDone? "X": " ";
         return String.format("[E][%s] %s (at: %s)", doneMark, name,
-                period.format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+                period.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     @Override

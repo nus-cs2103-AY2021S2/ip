@@ -19,14 +19,6 @@ public class Task {
     }
 
     /**
-     * Check whether the task is done or not
-     * @return true if the task is done, false otherwise
-     */
-    public boolean isDone() {
-        return isDone;
-    }
-
-    /**
      * Set the status of the task; e.g. done or not done
      * @param isDone the status to set to the task
      */
