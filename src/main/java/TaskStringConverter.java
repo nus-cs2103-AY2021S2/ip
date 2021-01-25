@@ -1,8 +1,11 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskStringConverter {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
+
     public static List<String> allTaskToAllString(List<Task> list) {
         List<String> result = new ArrayList<>();
         for (Task t : list) {

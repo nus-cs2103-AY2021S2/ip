@@ -1,19 +1,18 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class Duke {
     private static final List<Task> taskList = new ArrayList<>();
     private static final String FILE_PATH = "./src/main/java/tasks.txt";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
     private static Ui ui;
+    private static Storage storage;
 
     private static void printList() {
         System.out.println("Here are the tasks in your list:");
@@ -65,29 +64,7 @@ public class Duke {
         }
     }
 
-    private static void saveToFile() throws IOException {
-        FileWriter fw = new FileWriter(FILE_PATH);
-        String text = "";
-        for (Task task : taskList) {
-            text += taskToTxt(task) + "\n";
-        }
-        fw.write(text);
-        fw.close();
-    }
-
-    private static String taskToTxt(Task task) {
-        String done = task.isDone() ? "1" : "0";
-        if (task instanceof ToDo) {
-            return "T | " + done + " | " + task.getDescription();
-        } else if (task instanceof Event) {
-            return "E | " + done + " | " + task.getDescription() + " | " + ((Event) task).getDateToStore();
-        } else {
-            return "D | " + done + " | " + task.getDescription() + " | " + ((Deadline) task).getDateToStore();
-        }
-    }
-
     private static void endProgram() throws IOException {
-        saveToFile();
         String endMessage = "Bye. Hope to see you again soon!";
         System.out.println(endMessage);
     }
@@ -125,49 +102,25 @@ public class Duke {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    private static void storeToProgram(String task) {
-        String[] separated = task.split(" \\| ");
-        char taskType = separated[0].charAt(0);
-        if (taskType == 'T') {
-            ToDo t = new ToDo(separated[2]);
-            if (separated[1].equals("1")) {
-                t.markAsDone();
-            }
-            taskList.add(t);
-        } else if (taskType == 'D') {
-            Deadline d = new Deadline(separated[2], LocalDateTime.parse(separated[3], formatter));
-            if (separated[1].equals("1")) {
-                d.markAsDone();
-            }
-            taskList.add(d);
-        } else if (taskType == 'E') {
-            Event e = new Event(separated[2], LocalDateTime.parse(separated[3], formatter));
-            if (separated[1].equals("1")) {
-                e.markAsDone();
-            }
-            taskList.add(e);
-        } else {
-            System.err.println("Invalid task type!");
-        }
-    }
-
     private static void run() {
         ui = new Ui();
         ui.introduction();
-        File file = new File(FILE_PATH);
+        storage = new Storage(FILE_PATH);
+
         try {
-            Scanner scannerFile = new Scanner(file);
-            if (scannerFile.hasNextLine()) {
-                ui.showMsg("You have existing tasks!");
-                while (scannerFile.hasNextLine()) {
-                    String task = scannerFile.nextLine();
-                    storeToProgram(task);
-                }
-                printList();
-            } else {
+            List<String> input = storage.loadFromFile();
+            if (input.size() == 0) {
                 ui.showMsg("You have no existing tasks!");
+            } else {
+                try {
+                    ui.showMsg("You have existing tasks!");
+                    List<Task> converted = TaskStringConverter.allStringToAllTask(input);
+                    taskList.addAll(converted);
+                    printList();
+                } catch (InvalidTaskTypeException e) {
+                    ui.showError("Erroneous task type in file. Please check your file again!");
+                }
             }
-            scannerFile.close();
 
             Scanner scannerInput = new Scanner(System.in);
             ui.showMsg("What can I do for you?");

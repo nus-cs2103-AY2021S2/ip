@@ -21,6 +21,7 @@ public class Storage {
         while (this.scannerFile.hasNextLine()) {
             txt.add(this.scannerFile.nextLine());
         }
+        this.scannerFile.close();
         return txt;
     }
 
