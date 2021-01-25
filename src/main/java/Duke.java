@@ -47,7 +47,7 @@ public class Duke {
                         String desc = sc.nextLine();
                         if (!desc.equals("")) {
                             String[] split = desc.split("/by", 2);
-                            list.addTask(new Deadline(split[0], split[1]));
+                            list.addTask(new Deadline(split[0], split[1].trim()));
                         } else {
                             throw new NoSuchElementException("    ☹ OOPS!!! The description of a deadline cannot be empty.");
                         }
@@ -56,7 +56,7 @@ public class Duke {
                         String description = sc.nextLine();
                         if (!description.equals("")) {
                             String[] split = description.split("/at", 2);
-                            list.addTask(new Event(split[0], split[1]));
+                            list.addTask(new Event(split[0], split[1].trim()));
                         } else {
                             throw new NoSuchElementException("    ☹ OOPS!!! The description of an event cannot be empty.");
                         }
