@@ -1,3 +1,5 @@
+import util.Formatter;
+
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class Sweh {
             "\\____/  \\/  \\/\\____/\\_| |_/ \n";
 
         String greeting = "Hello, I am\n" 
-            + logo 
+            + logo
             + "\nYour Simple Word-Executed Helper!"
             + "\nWhat shall we do today?\n";
                                   

@@ -1,3 +1,5 @@
+package util;
+
 import java.util.List;
 
 public abstract class Formatter {
@@ -17,7 +19,7 @@ public abstract class Formatter {
 
     public static String formatList(String[] strArray) {
         for (int i = 0; i < strArray.length; i++) {
-            strArray[i] = String.valueOf(i + 1) + ". " + strArray[i];
+            strArray[i] = (i + 1) + ". " + strArray[i];
         }
         return String.join("\n", strArray);
     }
