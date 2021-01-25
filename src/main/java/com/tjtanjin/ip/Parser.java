@@ -17,7 +17,8 @@ public class Parser {
         DEADLINE,
         EVENT,
         DELETE,
-        HELP
+        HELP,
+        FIND
     }
 
     //list storing commands/descriptions, ideally store in json file
@@ -38,6 +39,7 @@ public class Parser {
                 "event <name> /at <start date - end date> | Description: adds a new event task");
         cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
+        cmdInfo.put(Cmd.FIND.toString(), "find <name> | Description: finds task by name");
     }
 
     /**
@@ -87,6 +89,15 @@ public class Parser {
                 return;
             }
             AddCommand.execute(taskType, taskName, taskDate);
+
+        //program finds task by name on find
+        } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
+            String taskName = parseTaskName(input);
+            if (taskName == null) {
+                return;
+            } else {
+                FindCommand.execute(taskName);
+            }
 
         //program informs user of invalid input
         } else {
