@@ -6,20 +6,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.List;
+import java.nio.file.Paths;
 
-public class FileManager {
+public class Storage {
     File file;
 
-    public FileManager(String pathname) {
-        file = new File(pathname);
+    public Storage(String pathname) {
+        file = new File(Paths.get(pathname).toString());
     }
 
-    ListManager getList() throws IOException, UnknownCommandException {
+    TaskList load() throws IOException, UnknownCommandException {
         if (file.exists()) {
-            return new ListManager(this.convertFileToList());
+            return new TaskList(this.convertFileToList());
         } else {
             this.createFile();
-            return new ListManager();
+            return new TaskList();
         }
     }
 
@@ -32,7 +33,7 @@ public class FileManager {
         while (sc.hasNext()) {
             String item = sc.nextLine();
             String[] split = item.split(" : ", 0);
-            System.out.println(Arrays.toString(split));
+
             switch (split[0]) {
             case "T":
                 list.add(new Todo(split[2], split[1].equals("1")));

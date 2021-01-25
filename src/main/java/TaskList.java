@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListManager {
+public class TaskList {
     List<Task> list;
     int listSize;
 
-    public ListManager() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
         this.listSize = 0;
     }
 
-    public ListManager(List<Task> list) {
+    public TaskList(List<Task> list) {
         this.list = list;
         this.listSize = list.size();
     }
