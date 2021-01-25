@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -5,6 +11,8 @@ import java.util.Scanner;
 public class Duke {
     private final StringBuilder lengthOfChatBox = new StringBuilder();
     private final ArrayList<Task> taskList = new ArrayList<>();
+    private final Path filePath = Paths.get("data/tasks.txt");
+    private final String taskPath = "data/tasks.txt";
 
     private void setLengthOfChatBox() {
         lengthOfChatBox.append("\n");
@@ -31,7 +39,6 @@ public class Duke {
         if (taskList.isEmpty()) {
             output.append("No tasks saved\n");
         } else {
-            int n = 1;
             output.append("Here are the tasks in your list: \n");
             for (int i = 0; i < taskList.size(); i++) {
                 Task currentTask = taskList.get(i);
@@ -51,6 +58,12 @@ public class Duke {
         Task taskToBeMarked = taskList.get(index - 1);
         taskToBeMarked.markAsDone();
         formatInChatBox("Nice! I've marked this task as done: \n" + taskToBeMarked);
+
+        try {
+            save();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 
     public void exit() {
@@ -94,6 +107,12 @@ public class Duke {
                         + taskList.size() + " tasks in the list.";
                 formatInChatBox(output);
             }
+
+            try {
+                save();
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
         } catch (TextException e) {
             formatInChatBox(e.getMessage());
         }
@@ -113,6 +132,31 @@ public class Duke {
                 + "\nNow you have " + numOfBooksLeft + " tasks in the list.";
         formatInChatBox(output);
         taskList.remove(index - 1);
+
+        try {
+            save();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    private void save() throws IOException {
+        Path dirPath = filePath.getParent();
+        if (!Files.exists(dirPath)) {
+            Files.createDirectory(dirPath);
+        }
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
+        }
+        FileWriter fw = new FileWriter(taskPath);
+
+        String textToAdd = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            textToAdd += (i + 1) + ". " + currentTask + "\n";
+        }
+        fw.write(textToAdd);
+        fw.close();
     }
 
     public static void main(String[] args) {
@@ -125,34 +169,34 @@ public class Duke {
             try {
                 Command c = Command.valueOf(input.toUpperCase());
                 switch (c) {
-                    case BYE:
-                        mike.exit();
-                        return;
-                    case LIST:
-                        mike.list();
-                        break;
-                    case DONE:
-                        int i = sc.nextInt();
-                        mike.mark(i);
-                        break;
-                    case DELETE:
-                        int index = sc.nextInt();
-                        mike.delete(index);
-                        break;
-                    case TODO:
-                        String toDoDescription = sc.nextLine();
-                        mike.add("TODO", toDoDescription);
-                        break;
-                    case DEADLINE:
-                        String deadlineDescription = sc.nextLine();
-                        mike.add("DEADLINE", deadlineDescription);
-                        break;
-                    case EVENT:
-                        String eventDescription = sc.nextLine();
-                        mike.add("EVENT", eventDescription);
-                        break;
-                    default:
-                        mike.error();
+                case BYE:
+                    mike.exit();
+                    return;
+                case LIST:
+                    mike.list();
+                    break;
+                case DONE:
+                    int i = sc.nextInt();
+                    mike.mark(i);
+                    break;
+                case DELETE:
+                    int index = sc.nextInt();
+                    mike.delete(index);
+                    break;
+                case TODO:
+                    String toDoDescription = sc.nextLine();
+                    mike.add("TODO", toDoDescription);
+                    break;
+                case DEADLINE:
+                    String deadlineDescription = sc.nextLine();
+                    mike.add("DEADLINE", deadlineDescription);
+                    break;
+                case EVENT:
+                    String eventDescription = sc.nextLine();
+                    mike.add("EVENT", eventDescription);
+                    break;
+                default:
+                    mike.error();
                 }
             } catch (IllegalArgumentException e) {
                 mike.error();
