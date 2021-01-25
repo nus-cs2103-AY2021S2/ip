@@ -14,8 +14,13 @@ public class TaskManager {
     private Path savePath;
     private TaskStorage taskStorage;
 
-    public TaskManager() {
+    public TaskManager(boolean loadFromStore) {
         taskStorage = new TaskStorageFile();
+        if(!loadFromStore) {
+            allTasks = new ArrayList<>();
+            return;
+        }
+
         savePath = Paths.get("data", "taskstore");
         try {
             allTasks = taskStorage.retrieveTaskList(savePath);
@@ -23,6 +28,8 @@ public class TaskManager {
             e.printStackTrace();
         }
     }
+
+    public TaskManager() {this(true);}
 
     public void addTask(Task task) {
         allTasks.add(task);

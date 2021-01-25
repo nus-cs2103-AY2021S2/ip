@@ -29,7 +29,6 @@ public class TaskStorageFile implements TaskStorage {
                         return null;
                     }
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
                     return null;
                 }
             }
