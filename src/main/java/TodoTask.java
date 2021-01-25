@@ -20,6 +20,24 @@ public class TodoTask extends Task {
     }
 
     @Override
+    public String serialize() {
+        String serializeFormat = "TODO | %b | %s";
+        return String.format(serializeFormat, this.isDone, this.description);
+    }
+
+    /**
+     * Deserialize string into a TodoTask.
+     * @param string String to deserialize.
+     * @return TodoTask deserialized from string.
+     */
+    public static TodoTask deserialize(String string) {
+        String[] fields = string.split(" \\| ");
+        boolean isDone = Boolean.valueOf(fields[1]);
+        String description = fields[2];
+        return new TodoTask(description, isDone);
+    }
+
+    @Override
     public String toString() {
         String taskFormat = "[%s][%s] %s";
         return String.format(

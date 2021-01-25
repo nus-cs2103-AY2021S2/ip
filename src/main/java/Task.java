@@ -26,6 +26,12 @@ public abstract class Task {
      */
     public abstract Task markAsDone();
 
+    /**
+     * Serialize task into a String.
+     * @return Serialized version of task as string.
+     */
+    public abstract String serialize();
+
     protected abstract String getTypeIcon();
 
     protected String getStatusIcon() {

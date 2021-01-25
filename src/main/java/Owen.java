@@ -15,9 +15,12 @@ public class Owen implements Chatbot {
         BYE,
     }
 
+    private static final String STORAGE_PATH = "data/owen.txt";
+
     private final boolean isRunning;
     private final Response latestResponse;
     private final TaskList taskList;
+    private final Storage storage;
 
     /**
      * Creates an Owen chatbot with a hello response.
@@ -35,19 +38,21 @@ public class Owen implements Chatbot {
         stringBuilder.append("\nHello I am Owen the Owl!");
         this.latestResponse = new DefaultResponse(stringBuilder.toString());
 
-        this.taskList = new TaskList();
+        this.storage = new Storage(STORAGE_PATH);
+        this.taskList = this.storage.readTaskList();
     }
 
-    private Owen(boolean isRunning, Response latestResponse, TaskList taskList) {
+    private Owen(boolean isRunning, Response latestResponse, TaskList taskList, Storage storage) {
         this.isRunning = isRunning;
         this.latestResponse = latestResponse;
         this.taskList = taskList;
+        this.storage = storage;
     }
 
     @Override
     public Owen shutdown() {
         Response shutdownResponse = new DefaultResponse("Bye. Hope to see you again soon!");
-        return new Owen(false, shutdownResponse, this.taskList);
+        return new Owen(false, shutdownResponse, this.taskList, this.storage);
     }
 
     @Override
@@ -98,7 +103,7 @@ public class Owen implements Chatbot {
             }
         } catch (OwenException exception) {
             Response exceptionResponse = new DefaultResponse(exception.getMessage());
-            return new Owen(this.isRunning, exceptionResponse, this.taskList);
+            return new Owen(this.isRunning, exceptionResponse, this.taskList, this.storage);
         }
     }
 
@@ -119,12 +124,13 @@ public class Owen implements Chatbot {
                 + "Now you have %d tasks in the list.";
         Response addResponse = new DefaultResponse(String.format(
                 addedFormat, addedTaskList.getTask(numTasks), numTasks));
-        return new Owen(this.isRunning, addResponse, addedTaskList);
+        Storage addStorage = this.storage.writeTaskList(addedTaskList);
+        return new Owen(this.isRunning, addResponse, addedTaskList, addStorage);
     }
 
     private Owen listTasks() {
         Response listResponse = new DefaultResponse(this.taskList.toString());
-        return new Owen(this.isRunning, listResponse, this.taskList);
+        return new Owen(this.isRunning, listResponse, this.taskList, this.storage);
     }
 
     private Owen doneTask(int taskNumber) throws OwenException {
@@ -132,7 +138,8 @@ public class Owen implements Chatbot {
         String doneFormat = "Nice! I've marked this task as done:\n    %s";
         Response doneResponse = new DefaultResponse(String.format(
                 doneFormat, doneTaskList.getTask(taskNumber).toString()));
-        return new Owen(this.isRunning, doneResponse, doneTaskList);
+        Storage doneStorage = this.storage.writeTaskList(doneTaskList);
+        return new Owen(this.isRunning, doneResponse, doneTaskList, doneStorage);
     }
 
     private Owen deleteTask(int taskNumber) throws OwenException {
@@ -144,6 +151,7 @@ public class Owen implements Chatbot {
         int newNumTasks = deleteTaskList.getNumTasks();
         Response deleteResponse = new DefaultResponse(String.format(
                 deleteFormat, this.taskList.getTask(taskNumber), newNumTasks));
-        return new Owen(this.isRunning, deleteResponse, deleteTaskList);
+        Storage deleteStorage = this.storage.writeTaskList(deleteTaskList);
+        return new Owen(this.isRunning, deleteResponse, deleteTaskList, deleteStorage);
     }
 }

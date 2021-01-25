@@ -114,6 +114,48 @@ public class TaskList {
         return new TaskList(newTaskList);
     }
 
+    /**
+     * Serialize TaskList into a String.
+     * @return Serialized version of TaskList as a String.
+     */
+    public String serialize() {
+        String[] taskStrings = new String[this.taskList.size()];
+        for (int i = 0; i < this.taskList.size(); i++) {
+            taskStrings[i] = this.taskList.get(i).serialize();
+        }
+        return String.join("\n", taskStrings);
+    }
+
+    /**
+     * Deserialize Task and add it to TaskList.
+     * @param taskString Task string to deserialize.
+     * @return Updated TaskList with deserialized task added.
+     */
+    public TaskList deserializeTask(String taskString) {
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+
+        String taskTypeString = taskString.split(" | ", 2)[0];
+        TaskType taskType = TaskType.valueOf(taskTypeString);
+
+        Task newTask;
+        switch (taskType) {
+        case TODO:
+            newTask = TodoTask.deserialize(taskString);
+            break;
+        case EVENT:
+            newTask = EventTask.deserialize(taskString);
+            break;
+        case DEADLINE:
+            newTask = DeadlineTask.deserialize(taskString);
+            break;
+        default:
+            newTask = null;
+        }
+
+        newTaskList.add(newTask);
+        return new TaskList(newTaskList);
+    }
+
     @Override
     public String toString() {
         String[] taskListStrings = new String[this.taskList.size()];

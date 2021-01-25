@@ -28,6 +28,25 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String serialize() {
+        String serializeFormat = "EVENT | %b | %s | %s";
+        return String.format(serializeFormat, this.isDone, this.description, this.startEndTime);
+    }
+
+    /**
+     * Deserialize string into a EventTask.
+     * @param string String to deserialize.
+     * @return EventTask deserialized from string.
+     */
+    public static EventTask deserialize(String string) {
+        String[] fields = string.split(" \\| ");
+        boolean isDone = Boolean.valueOf(fields[1]);
+        String description = fields[2];
+        String startEndTime = fields[3];
+        return new EventTask(description, isDone, startEndTime);
+    }
+
+    @Override
     public String toString() {
         String taskFormat = "[%s][%s] %s (at: %s)";
         return String.format(
