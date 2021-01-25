@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Scanner;
@@ -14,7 +16,7 @@ class Storage {
 
 	Storage() {
 		try {
-			Path location = Path.of(Duke.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+			Path location = Path.of(Parser.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 			Path dir = location.resolve("data");
 			Path file = dir.resolve("list.txt");
 

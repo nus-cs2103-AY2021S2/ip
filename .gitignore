@@ -20,3 +20,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 /src/main/java/*.class
 /src/main/java/data/list.txt
 /text-ui-test/ACTUAL.TXT
+/src/main/java/duke/*.class

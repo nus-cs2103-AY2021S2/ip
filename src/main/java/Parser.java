@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
@@ -11,13 +13,13 @@ import java.io.BufferedReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-class Parser {
+public class Parser {
 
 	private final TaskList mem;
 	private final Storage storage;
 	private static Hashtable<String, Consumer<String>> functions;
 
-	Parser() {		
+	public Parser() {		
 		this.storage = new Storage();
 		this.mem = this.storage.load();
 		Ui.welcome();
@@ -38,7 +40,7 @@ class Parser {
 		functions.put("delete", x -> this.delete(x));
     }
 
-	void parser(String s) {
+	public void parser(String s) {
 		Scanner sc = new Scanner(s);
 		String inputs = sc.next();
 		this.initialize();
