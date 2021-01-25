@@ -1,4 +1,10 @@
+package storage;
+
 import Exceptions.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,19 +14,22 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-public class FileManager {
-    private static File f;
+public class Storage {
+    private File f;
 
-    private static final String path = "src/main/java/data/myDuke.txt";
+    private final String path = "src/main/java/data/myDuke.txt";
 
-    public static void createFile() throws DukeException {
+    public Storage() throws DukeException {
+        createFile();
+    }
+
+    public void createFile() throws DukeException {
         try {
-            f = new File(path);
+            this.f = new File(path);
             if (!f.createNewFile()) {
-                System.out.println("File is loaded!");
+                System.out.println("File is loading...");
             } else {
                 System.out.println("File already exists!");
             }
@@ -29,8 +38,7 @@ public class FileManager {
         }
     }
 
-    public static ArrayList<Task> displayTasks() throws DukeException {
-        createFile();
+    public ArrayList<Task> displayTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
@@ -44,7 +52,7 @@ public class FileManager {
         return tasks;
     }
 
-    public static Task parseTasks(String task) throws DukeException {
+    public Task parseTasks(String task) throws DukeException {
         String[] description = task.split(" / ", 4);
         Task t = null;
         try {
@@ -52,7 +60,7 @@ public class FileManager {
             String type = description[0];
             switch (type) {
                 case "T":
-                    t = new ToDos(description[2]);
+                    t = new ToDo(description[2]);
                     break;
 
                 case "D":
@@ -77,7 +85,7 @@ public class FileManager {
         return t;
     }
 
-    public static void saveTasks(ArrayList<Task> tasks) throws DukeException {
+    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(path);
             for (Task t : tasks) {

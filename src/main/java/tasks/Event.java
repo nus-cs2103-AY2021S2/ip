@@ -1,10 +1,14 @@
+package tasks;
+
+import tasks.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     protected LocalDateTime dateTime;
 
-    public Deadline(String taskName, LocalDateTime dateTime) {
+    public Event(String taskName, LocalDateTime dateTime) {
         super(taskName);
         this.dateTime = dateTime;
     }
@@ -15,11 +19,11 @@ public class Deadline extends Task {
 
     @Override
     public String toSave() {
-        return "D / " + super.isDoneString + super.taskName + " / " + dateTime;
+        return "E / " + super.isDoneString + super.taskName + " / " + dateTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDateTime() + ")";
+        return "[E]" + super.toString() + " (at: " + getDateTime() + ")";
     }
 }

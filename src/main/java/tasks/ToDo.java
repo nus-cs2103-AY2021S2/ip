@@ -1,7 +1,11 @@
-public class ToDos extends Task{
+package tasks;
+
+import tasks.Task;
+
+public class ToDo extends Task {
     protected String taskName;
 
-    public ToDos(String taskName) {
+    public ToDo(String taskName) {
         super(taskName);
     }
 
