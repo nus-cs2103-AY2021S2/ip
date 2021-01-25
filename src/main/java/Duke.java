@@ -1,25 +1,33 @@
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
-        Ui ui = new Ui();
-        Scanner sc = new Scanner(System.in);
-        TaskList taskLst = new TaskList();
-        boolean isExited = false;
-        Storage storage = null;
+    private final Ui ui;
+    private final TaskList taskLst;
+    private Storage storage;
 
-        // Terminate if unable to read data file
+    public Duke() {
+        ui = new Ui();
+        taskLst = new TaskList();
+
+        // Terminate if unable to initialise storage
         try {
             storage = new Storage();
             storage.fillTaskLst(taskLst);
-        } catch (DukeException e) {
-            ui.print(e.getMessage());
+        } catch (IOException e) {
+            ui.print(String.format("Unable to initialise Storage: %s", e));
             System.exit(1);
         }
+    }
+
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+        boolean isExited = false;
 
         ui.printWelcomeMsg();
+
         while (true) {
             try {
                 String input = sc.nextLine();
@@ -71,14 +79,7 @@ public class Duke {
         }
     }
 
-    public static String getWelcomeMsg() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return logo +
-                "Hello! I am duke\n" +
-                "What can I do for you?\n";
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }

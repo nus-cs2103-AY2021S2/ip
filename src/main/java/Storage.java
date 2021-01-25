@@ -6,22 +6,17 @@ public class Storage {
 
     private final File file;
 
-    public Storage() {
-        try {
-            File dir = new File(DIR_NAME);
-            file = new File(FILE_NAME);
+    public Storage() throws IOException {
+        File dir = new File(DIR_NAME);
+        file = new File(FILE_NAME);
 
-            //noinspection ResultOfMethodCallIgnored
-            dir.mkdir();
-            //noinspection ResultOfMethodCallIgnored
-            file.createNewFile();
-
-        } catch (Exception e) {
-            throw new DukeException(String.format("Error with initialising Storage: %s", e));
-        }
+        //noinspection ResultOfMethodCallIgnored
+        dir.mkdir();
+        //noinspection ResultOfMethodCallIgnored
+        file.createNewFile();
     }
 
-    public TaskList fillTaskLst(TaskList taskLst) {
+    public TaskList fillTaskLst(TaskList taskLst) throws IOException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -33,8 +28,7 @@ public class Storage {
 
             br.close();
 
-        } catch (Exception e) {
-            throw new DukeException(String.format("Error with fillTaskLst: %s", e));
+        } catch (FileNotFoundException ignored) {
         }
 
         return taskLst;
