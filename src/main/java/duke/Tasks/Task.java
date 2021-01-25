@@ -5,14 +5,14 @@ public class Task {
     protected String name;
 
     /** Boolean to mark whether task is completed */
-    protected boolean completed;
+    protected boolean isCompleted;
 
     /** Label the category of the task */
     protected char cat;
 
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /** Returns the category of task
@@ -36,7 +36,12 @@ public class Task {
      * @return Boolean
      * */
     public boolean getCompleted() {
-        return this.completed;
+        return this.isCompleted;
+    }
+
+    /** Marks task as completed */
+    public void checkTask() {
+        this.isCompleted = true;
     }
 
     /** Returns an icon to mark whether task has been completed
@@ -44,7 +49,7 @@ public class Task {
      * @return Icon as string
      * */
     public String getStatusIcon() {
-        return (completed ? "X" : " "); //return tick or blank
+        return (isCompleted ? "X" : " "); //return tick or blank
     }
 
     public String toString() {

@@ -37,44 +37,44 @@ public class Duke {
                 String[] desc = commandparser.getDesc(command);
                 String action = desc[0];
                 switch (action) {
-                    case "bye":
-                        readOn = false;
-                        break;
-                    case "list":
-                        ui.printList(tasks.taskList);
-                        break;
-                    case "done":
-                        int n = Integer.parseInt(desc[1]);
-                        Task t = tasks.getTask(n);
-                        tasks.markComplete(n);
-                        ui.checkedTask(t);
-                        break;
-                    case "todo":
-                        Task todo = new Todo(desc[1]);
-                        tasks.storeTask(todo);
-                        ui.addedTask(tasks.taskList, todo);
-                        break;
-                    case "event":
-                        ui.requestDate();
-                        String date = ui.getDate();
-                        Task event = new Event(desc[1], date);
-                        tasks.storeTask(event);
-                        ui.addedTask(tasks.taskList, event);
-                        break;
-                    case "deadline":
-                        ui.requestDeadline();
-                        String due = ui.getDate();
-                        Task deadline = new Deadline(desc[1], due);
-                        tasks.storeTask(deadline);
-                        ui.addedTask(tasks.taskList, deadline);
-                        break;
-                    case "delete":
-                        Task task = tasks.getTask(Integer.parseInt(desc[1]));
-                        tasks.deleteTask(Integer.parseInt(desc[1]));
-                        ui.deletedTask(tasks.taskList, task);
-                        break;
-                    default:
-                        throw new UnclearInputException();
+                case "bye":
+                    readOn = false;
+                    break;
+                case "list":
+                    ui.printList(tasks.taskList);
+                    break;
+                case "done":
+                    int n = Integer.parseInt(desc[1]);
+                    Task t = tasks.getTask(n);
+                    tasks.markComplete(n);
+                    ui.checkedTask(t);
+                    break;
+                case "todo":
+                    Task todo = new Todo(desc[1]);
+                    tasks.storeTask(todo);
+                    ui.addedTask(tasks.taskList, todo);
+                    break;
+                case "event":
+                    ui.requestDate();
+                    String date = ui.getDate();
+                    Task event = new Event(desc[1], date);
+                    tasks.storeTask(event);
+                    ui.addedTask(tasks.taskList, event);
+                    break;
+                case "deadline":
+                    ui.requestDeadline();
+                    String due = ui.getDate();
+                    Task deadline = new Deadline(desc[1], due);
+                    tasks.storeTask(deadline);
+                    ui.addedTask(tasks.taskList, deadline);
+                    break;
+                case "delete":
+                    Task task = tasks.getTask(Integer.parseInt(desc[1]));
+                    tasks.deleteTask(Integer.parseInt(desc[1]));
+                    ui.deletedTask(tasks.taskList, task);
+                    break;
+                default:
+                    throw new UnclearInputException();
                 }
             }
             ui.sayGoodbye();
