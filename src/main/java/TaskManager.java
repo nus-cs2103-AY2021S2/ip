@@ -4,6 +4,8 @@ import main.java.exceptions.IllegalInputFormatException;
 import main.java.exceptions.TaskDoesNotExistException;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +65,6 @@ public class TaskManager {
             throw new Exception("Item type not categorized when reading from file.");
         }
         list.add(task);
-
     }
 
     public void greeting() {
@@ -87,7 +88,13 @@ public class TaskManager {
             String[] arr = input.split(" /");
             String name = arr[0].substring(6);
             String[] arr2 = arr[1].split(" ", 2);
-            Task task = new Event(name, arr2[1], arr2[0]);
+            Task task;
+            try {
+                LocalDate timeDate = LocalDate.parse(arr2[1]);
+                task = new Event(name, arr2[1], timeDate, arr2[0]);
+            } catch (DateTimeParseException e) {
+                task = new Event(name, arr2[1], arr2[0]);
+            }
             list.add(task);
             printAfterAdd(task);
             updateFile();
@@ -101,10 +108,15 @@ public class TaskManager {
             String[] arr = input.split(" /");
             String name = arr[0].substring(9);
             String[] arr2 = arr[1].split(" ", 2);
-            Task task = new Deadline(name, arr2[1], arr2[0]);
+            Task task;
+            try {
+                LocalDate deadlineDate = LocalDate.parse(arr2[1]);
+                task = new Deadline(name, arr2[1], deadlineDate, arr2[0]);
+            } catch (DateTimeParseException e) {
+                task = new Deadline(name, arr2[1], arr2[0]);
+            }
             list.add(task);
             printAfterAdd(task);
-            updateFile();
         } catch (Exception e) {
             throw new IllegalInputFormatException();
         }
