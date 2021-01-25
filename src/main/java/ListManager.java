@@ -10,10 +10,16 @@ public class ListManager {
         this.listSize = 0;
     }
 
+    public ListManager(List<Task> list) {
+        this.list = list;
+        this.listSize = list.size();
+    }
+
     /**
      * Adds the task argument into the task list.
      * Prints out a response to indicate successful adding of task.
      * Prints out the current number of tasks in the list.
+     *
      * @param task
      * @return void
      */
