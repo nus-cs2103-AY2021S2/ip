@@ -10,8 +10,8 @@ public class Storage {
 
     public Storage() {
         try {
+            new File("data").mkdir();
             File file = new File(path);
-            file.mkdirs();
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
