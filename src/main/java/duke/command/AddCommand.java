@@ -20,6 +20,5 @@ public class AddCommand extends Command {
     ui.printIndented(String.format("  %s", task));
     ui.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
     storage.write(taskList.toDataString());
-    throw new DukeException("Unable to write task list to file.");
   }
 }
