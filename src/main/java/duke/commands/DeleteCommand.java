@@ -18,14 +18,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws
-            DukeException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (checkCommands.length == 1 || !isNumber(checkCommands[1])) {
-            throw new InvalidTaskSelectionException();
+            throw new TaskSelectionInvalidException();
         }
         int num = Integer.parseInt(checkCommands[1]);
         if (num > 0 && num <= tasks.size()) {
-            Task deleted = tasks.get(num - 1);
+            Task deleted = tasks.getTask(num - 1);
             tasks.remove(num - 1);
             ui.showDeleteTask(tasks, deleted);
         } else {
