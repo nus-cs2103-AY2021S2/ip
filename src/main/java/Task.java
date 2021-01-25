@@ -1,14 +1,18 @@
-public class Task {
-    private enum TaskState {
+public abstract class Task {
+    protected enum TaskState {
         done, undone;
     }
 
     private String Description;
     private TaskState State;
 
-    public Task (String Description) {
+    public Task (int state, String Description) {
+        this.State = (state > 0 ? TaskState.done : TaskState.undone);
         this.Description = Description;
-        this.State = TaskState.undone;
+    }
+
+    public Task (String Description) {
+        this(0, Description);
     }
 
     public void markDone () {
@@ -28,5 +32,14 @@ public class Task {
     public String TaskInformation () {
         return "[" + (this.State == TaskState.done ? "X" : " ") + 
             "] " + this.Description;
+    }
+
+    public String creationCommand () {
+        return (this.State == TaskState.done ? "1" : "0") + " :: " +
+            this.Description;
+    }
+
+    public boolean outstanding () {
+        return (this.State == TaskState.undone);
     }
 }

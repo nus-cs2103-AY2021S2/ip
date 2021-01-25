@@ -9,11 +9,13 @@ public class Duke {
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Reading saved Tasks under User A0183450J");
+        ArrayList<Task> Tasks = TaskInterpreter.readTasks("A0183450J");
         greet();
+        System.out.println("    ____________________________________________________________\n");
 
-        Scanner scanner = new Scanner(System.in);     
-        ArrayList<Task> Tasks = new ArrayList<Task>();
-
+        Scanner scanner = new Scanner(System.in);
         user_active: while (true) {
             String command = scanner.next();
             String commandcont;
@@ -23,14 +25,22 @@ public class Duke {
             try {
                 switch (command) {
                     case "bye":     // exit
+                        System.out.println("     Saving Tasks under User A0183450J");
+                        TaskInterpreter.saveTasks(Tasks, "A0183450J");
                         byebye();
                         break user_active;
 
                     case "list":    // regurgitate tasks
+                        int outstanding = 0;
+
                         for (int t = 0; t < Tasks.size(); t ++) {
                             System.out.println("     " + (t + 1) +  "." + 
                                     Tasks.get(t).TaskInformation());
+                            if (Tasks.get(t).outstanding()) { outstanding += 1; }
                         }
+
+                        System.out.println("     You have " + outstanding + 
+                            " outstanding Tasks remaining.");
                         break;
 
                     case "done":
@@ -111,10 +121,11 @@ public class Duke {
     }
 
     public static void greet() {
-        System.out.println("What can I do for you?\n");
+        System.out.println("     What can I do for you?");
     }
 
     public static void byebye() {
-        System.out.println("ByeBye. Hope to see you again soon!");
+        System.out.println("     ByeBye. Hope to see you again soon!");
     }
+
 }
