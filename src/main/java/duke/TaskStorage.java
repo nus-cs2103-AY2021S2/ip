@@ -16,11 +16,10 @@ import java.util.Scanner;
 
 public class TaskStorage {
     private File file;
-    private FileWriter writer;
     private Ui ui;
     public TaskStorage(String path) {
         try {
-            Ui ui = new Ui();
+            ui = new Ui();
             file = new File(path);
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -31,7 +30,7 @@ public class TaskStorage {
 
     public void storeData(TaskList tasks) {
         try {
-            writer = new FileWriter(file);
+            FileWriter writer = new FileWriter(file);
             ListIterator<Task> iter = tasks.listIterator();
             Task task;
             while (iter.hasNext()) {
