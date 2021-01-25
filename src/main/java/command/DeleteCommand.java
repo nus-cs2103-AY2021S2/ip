@@ -14,8 +14,12 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskManager tm, Ui ui) {
         try {
-            Task task = tm.deleteTask(deleteIndex);
-            ui.displayAfterDelete(deleteIndex, task);
+            if (tm.indexWithinRange(deleteIndex)) {
+                Task task = tm.deleteTask(deleteIndex);
+                ui.displayAfterDelete(deleteIndex, task);
+            } else {
+                ui.displayOutOfRange(deleteIndex);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

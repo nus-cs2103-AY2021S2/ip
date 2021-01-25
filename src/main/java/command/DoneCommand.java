@@ -14,8 +14,12 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskManager tm, Ui ui) {
         try {
-            Task task = tm.done(doneIndex);
-            ui.displayAfterDone(task);
+            if (tm.indexWithinRange(doneIndex)) {
+                Task task = tm.done(doneIndex);
+                ui.displayAfterDone(task);
+            } else {
+                ui.displayOutOfRange(doneIndex);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

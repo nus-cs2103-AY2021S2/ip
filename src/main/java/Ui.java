@@ -37,6 +37,21 @@ public class Ui {
         return sc.nextLine();
     }
 
+    public void displayWrongCommand(String message) {
+        System.out.println(prefix + message);
+        System.out.println(prefix + "Sorry, but we could not parse your input");
+        System.out.println(prefix + "Please recheck its validity...");
+    }
+
+    public void displayOutOfRange(int index) {
+        System.out.println(prefix + "There is no such index " + index + " in the task list.");
+    }
+
+    public void displayWrongCommand() {
+        System.out.println(prefix + "Sorry, but we could not parse your input");
+        System.out.println(prefix + "Please recheck its validity...");
+    }
+
     public void displayError(String message) {
         System.out.println("Duke is sorry about it, but we have encountered an error...");
         System.out.println(message);

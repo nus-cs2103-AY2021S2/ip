@@ -49,4 +49,8 @@ public class TaskManager {
     public boolean isEmpty() {
         return list.isEmpty();
     }
+
+    public boolean indexWithinRange(int index) {
+        return index < size() && index >= 0;
+    }
 }

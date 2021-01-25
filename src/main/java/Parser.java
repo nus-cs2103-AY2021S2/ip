@@ -15,7 +15,7 @@ public class Parser {
 
     }
 
-    public static Command parse(String commandStr) {
+    public Command parse(String commandStr) throws Exception {
         Command command = null;
         try {
             if (commandStr.toLowerCase().equals("bye")) {
@@ -23,10 +23,10 @@ public class Parser {
             } else if (commandStr.trim().toLowerCase().equals("list")) {
                 command = new ListCommand();
             } else if (commandStr.toLowerCase().split(" ")[0].equals("done")) {
-                int doneIndex = Integer.parseInt(commandStr.split(" ")[1]);
+                int doneIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
                 command = new DoneCommand(doneIndex);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("delete")) {
-                int deleteIndex = Integer.parseInt(commandStr.split(" ")[1]);
+                int deleteIndex = Integer.parseInt(commandStr.split(" ")[1]) - 1;
                 command = new DeleteCommand(deleteIndex);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("todo")) {
                 String todoName = commandStr.substring(5);
@@ -55,10 +55,10 @@ public class Parser {
                     command = new AddEventCommand(name, arr2[0], arr2[1]);
                 }
             } else {
-                throw new UnrecognizableInputException();
+                command = new WrongCommand();
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return command;
     }

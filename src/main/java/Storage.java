@@ -7,6 +7,8 @@ import main.java.entity.Todo;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +50,19 @@ public class Storage {
         if (type.equals("T")) {
             task = new Todo(strarr[2], isDone);
         } else if (type.equals("E")) {
-            task = new Event(strarr[2], strarr[4], strarr[3], isDone);
+            try {
+                LocalDate date = LocalDate.parse(strarr[4]);
+                task = new Event(strarr[2], strarr[3], date, isDone);
+            } catch (DateTimeParseException e) {
+                task = new Event(strarr[2], strarr[3], strarr[4], isDone);
+            }
         } else if (type.equals("D")) {
-            task = new Deadline(strarr[2], strarr[4], strarr[3], isDone);
+            try {
+                LocalDate date = LocalDate.parse(strarr[4]);
+                task = new Deadline(strarr[2], strarr[3], date, isDone);
+            } catch (DateTimeParseException e) {
+                task = new Deadline(strarr[2], strarr[3], strarr[4], isDone);
+            }
         } else {
             System.out.println("Error: Item type not categorized when reading from file. Returning null task...");
             task = null;

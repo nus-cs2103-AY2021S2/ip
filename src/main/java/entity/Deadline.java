@@ -26,6 +26,12 @@ public class Deadline extends Task {
         this.keyword = keyword;
     }
 
+    public Deadline(String name, String keyword, LocalDate deadlineDate, boolean isDone) {
+        super(name, isDone);
+        this.deadlineDate = deadlineDate;
+        this.keyword = keyword;
+    }
+
 
 
     @Override
@@ -35,7 +41,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileString() {
-        return "D|" + (this.isDone ? "1" : "0") + "|" + this.name + "|" + this.keyword + "|" + this.deadline;
+        return "D|" + (this.isDone ? "1" : "0") + "|" + this.name + "|" + this.keyword + "|" + (this.deadlineDate == null ? this.deadline : this.deadlineDate);
     }
 
 

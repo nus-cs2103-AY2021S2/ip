@@ -20,7 +20,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.displayLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = parser.parse(fullCommand);
                 c.execute(tm, ui);
                 isExit = c.isExit();
             } catch (Exception e) {
