@@ -1,4 +1,5 @@
 public class Event extends Task {
+
     protected String time;
 
     public Event(String name, String time) {

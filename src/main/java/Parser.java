@@ -20,9 +20,10 @@ public class Parser {
     public void handleToDo() throws IOException {
         String descriptionTask = command.substring(index + 1);
         ToDo newToDo = new ToDo(descriptionTask);
+
         tasks.add(newToDo);
         storage.addTask(newToDo);
-        ui.responseToAddTask(newToDo,tasks.getSize());
+        ui.responseToAddTask(newToDo, tasks.getSize());
     }
 
     public void handleDeadline() {
@@ -31,9 +32,11 @@ public class Parser {
             String descriptionDeadline = command.substring(index + 1, findSlash - 1);
             LocalDate date = DateValidation.handleDate(command.substring(findSlash + 4));
             Deadline newDeadline = new Deadline(descriptionDeadline, date);
+
             tasks.add(newDeadline);
             storage.addTask(newDeadline);
-            ui.responseToAddTask(newDeadline,tasks.getSize());
+            ui.responseToAddTask(newDeadline, tasks.getSize());
+
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -45,9 +48,11 @@ public class Parser {
             String descriptionEvent = command.substring(index + 1, findSlash - 1);
             String time = command.substring(findSlash + 4);
             Event newEvent = new Event(descriptionEvent, time);
+
             tasks.add(newEvent);
             storage.addTask(newEvent);
-            ui.responseToAddTask(newEvent,tasks.getSize());
+            ui.responseToAddTask(newEvent, tasks.getSize());
+
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -58,8 +63,10 @@ public class Parser {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
             Task toMark = tasks.find(taskIdentifier - 1);
+
             storage.markTask(toMark);
             ui.responseToDone(toMark);
+
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -70,9 +77,11 @@ public class Parser {
             taskIdentifier = Integer.parseInt(command.substring(index + 1));
             Validation.checkValidRange(tasks.getSize(), taskIdentifier);
             Task selected = tasks.find(taskIdentifier - 1);
+
             tasks.delete(taskIdentifier - 1);
             storage.deleteTask(selected);
-            ui.responseToDelete(selected,tasks.getSize());
+            ui.responseToDelete(selected, tasks.getSize());
+
         } catch (DukeException | IOException e) {
             System.out.println(e);
         }
@@ -84,6 +93,7 @@ public class Parser {
             Validation.checkValidCommand(command);
             index = command.indexOf(' ');
             findSlash = command.indexOf('/');
+
             if (index > -1) {
                 String type = command.substring(0, index);
                 switch (type) {

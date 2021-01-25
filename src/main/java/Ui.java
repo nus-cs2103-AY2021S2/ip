@@ -11,13 +11,13 @@ public class Ui {
     }
 
     public void responseToAddTask(Task task, int taskListSize) {
-        System.out.println("Done! One new task:\n" + task.toString() + "\nNow you have " +
-                taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+        System.out.println("Done! One new task:\n" + task.toString() + "\nNow you have "
+                 + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
     }
 
     public void responseToDelete(Task task, int taskListSize) {
-        System.out.println("Noted, I've removed this task:\n" + task.toString() +
-                "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+        System.out.println("Noted, I've removed this task:\n" + task.toString()
+                 + "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
     }
 
     public void responseToBye() {
