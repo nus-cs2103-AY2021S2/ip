@@ -8,17 +8,17 @@ Hello, this is
 ******************************************************
 You got it! I added this task:
    [T] [ ] buy milk
-Now you have 1 tasks.
+Now you have 1 taskList.
 ******************************************************
 ******************************************************
 You got it! I added this task:
    [D] [ ] do essay  (by tomorrow)
-Now you have 2 tasks.
+Now you have 2 taskList.
 ******************************************************
 ******************************************************
 You got it! I added this task:
    [E] [ ] go party  (at Thursday evening)
-Now you have 3 tasks.
+Now you have 3 taskList.
 ******************************************************
 ******************************************************
 Sweet! I have marked the following task as done:

@@ -1,7 +1,7 @@
 public class Parser {
     private static final String EXIT_COMMAND = "bye";
 
-    public boolean parse(String input, Tasks tasks) {
+    public boolean parse(String input, TaskList taskList) {
         if (input.equals(EXIT_COMMAND)) {
             // close program
             Ui.formatText();
@@ -11,16 +11,16 @@ public class Parser {
         } else if (input.equals("list")) {
             // show everything in the list
             Ui.formatText();
-            tasks.iterateList();
+            taskList.iterateList();
             Ui.formatText();
         } else if (input.split(" ", 2)[0].equals("done")) {
             // mark task with the given index as completed
-            tasks.markAsDone(input.split(" ", 2)[1]);
+            taskList.markAsDone(input.split(" ", 2)[1]);
         } else if (input.split(" ", 2)[0].equals("delete")) {
-            tasks.deleteTask(input.split(" ", 2)[1]);
+            taskList.deleteTask(input.split(" ", 2)[1]);
         } else {
             // add new task to list
-            tasks.addTask(input);
+            taskList.addTask(input);
         }
         return false;
     }

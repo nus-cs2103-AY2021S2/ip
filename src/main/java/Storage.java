@@ -11,7 +11,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void retrieveTasks(Tasks lst) throws IOException {
+    public void retrieveTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
         if (!data.exists()) {
             data.createNewFile();
@@ -24,7 +24,7 @@ public class Storage {
         }
     }
 
-    public void storeTasks(Tasks lst) throws IOException {
+    public void storeTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
         // store Tasks in a file
         FileWriter fw = new FileWriter(data, false);

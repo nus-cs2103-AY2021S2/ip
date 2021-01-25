@@ -7,15 +7,15 @@ import java.util.Scanner;
  * @author Damith C. Rajapakse, Wu Weiming
  */
 public class Duke {
-    private Tasks tasks;
+    private TaskList taskList;
     private Storage storage;
     private Ui ui;
 
     public Duke(String filePath) throws IOException {
-        this.tasks = new Tasks();
+        this.taskList = new TaskList();
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        storage.retrieveTasks(tasks);
+        storage.retrieveTasks(taskList);
     }
 
     public static void main(String[] args) {
@@ -35,13 +35,13 @@ public class Duke {
 
         while (true) {
             String input = sc.nextLine();
-            boolean shouldExit = parser.parse(input, tasks);
+            boolean shouldExit = parser.parse(input, taskList);
             if (shouldExit) {
                 break;
             }
         }
         sc.close();
-        storage.storeTasks(tasks);
+        storage.storeTasks(taskList);
     }
 
 }

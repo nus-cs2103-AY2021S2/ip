@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Class to handle all the tasks.
  */
-public class Tasks {
+public class TaskList {
     private static final String ADD_TODO_COMMAND = "todo";
     private static final String ADD_DEADLINE_COMMAND = "deadline";
     private static final String ADD_EVENT_COMMAND = "event";
