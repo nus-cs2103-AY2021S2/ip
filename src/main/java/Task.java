@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 /**
@@ -16,9 +17,13 @@ public abstract class Task {
     /**
      * Marks the task as done and prints out to console that task is done.
      */
-     void done() {
+     public void done() {
         this.isDone = true;
         Ui.printWithStyle(new String[] {"Nice! I've marked this task as done:", this.toString()});
+    }
+
+    public LocalDate getDate() {
+         return LocalDate.MIN;
     }
 
     @Override

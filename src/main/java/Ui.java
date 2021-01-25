@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Ui {
 
     /**
@@ -5,6 +7,14 @@ public class Ui {
      * @param output array of strings to be printed out
      */
     public static void printWithStyle(String[] output) {
+        System.out.println("    ________________________________________________________________");
+        for (String str : output) {
+            System.out.println("    " + str);
+        }
+        System.out.println("    ________________________________________________________________");
+    }
+
+    public static void printWithStyle(List<String> output) {
         System.out.println("    ________________________________________________________________");
         for (String str : output) {
             System.out.println("    " + str);
