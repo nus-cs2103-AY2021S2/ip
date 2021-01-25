@@ -16,11 +16,11 @@ public class DeleteCommand extends Command {
      * Constructor for DeleteCommand
      *
      * @param command Delete command
-     * @param description Task name
+     * @param selection Selected task
      */
-    public DeleteCommand(String command, String description) {
+    public DeleteCommand(String command, String selection) {
         this.command = command;
-        this.description = description;
+        this.description = selection;
         this.date = "";
     }
 
