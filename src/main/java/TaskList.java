@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -51,28 +53,43 @@ public class TaskList {
     }
 
     public void strToTask(String strTask) throws MikeInvalidInputException {
-        Pattern p = Pattern.compile("(\\d)\\. \\[([TDE])\\] \\[([X ])\\] (.+) \\(at: (.+)\\)");
-        Matcher m = p.matcher(strTask);
-        m.find();
+        Pattern pattern = Pattern.compile("(\\d)\\. \\[([TDE])\\] \\[([X ])\\] (.+)");
+        Matcher matcher = pattern.matcher(strTask);
+        Matcher descriptionMatcher;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm:ss a");
+        LocalDateTime dateTimeObject;
 
-        switch(m.group(2)) {
+        matcher.find();
+        boolean isDoneTask = matcher.group(3).equals("X");
+
+        switch(matcher.group(2)) {
             case "T":
-                this.addTaskToList(new TodoTask(m.group(4)));
+                this.addTaskToList(new TodoTask(matcher.group(4)));
                 break;
 
             case "E":
-                this.addTaskToList(new EventTask(m.group(4), m.group(5)));
+                pattern = Pattern.compile("(.+) (?=\\(at: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d:\\d\\d " +
+                        "\\w\\w)\\))");
+                descriptionMatcher = pattern.matcher(matcher.group(4));
+                descriptionMatcher.find();
+                dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
+                this.addTaskToList(new EventTask(descriptionMatcher.group(1), dateTimeObject));
                 break;
 
             case "D":
-                this.addTaskToList(new DeadlineTask(m.group(4), m.group(5)));
+                pattern = Pattern.compile("(.+) (?=\\(by: (\\d\\d \\w\\w\\w \\d\\d\\d\\d, \\d\\d:\\d\\d:\\d\\d " +
+                        "\\w\\w)\\))");
+                descriptionMatcher = pattern.matcher(matcher.group(4));
+                descriptionMatcher.find();
+                dateTimeObject = LocalDateTime.parse(descriptionMatcher.group(2), format);
+                this.addTaskToList(new DeadlineTask(descriptionMatcher.group(1), dateTimeObject));
                 break;
 
             default:
                 throw new MikeInvalidInputException("No such task type");
         }
-        if (!m.group(3).equals(" ")) {
-            this.getNthTask(Integer.parseInt(m.group(1))).isDone();
+        if (isDoneTask) {
+            this.getNthTask(Integer.parseInt(matcher.group(1))).completeTask();
         }
     }
 
@@ -88,4 +105,5 @@ public class TaskList {
         }
         return buffer.toString();
     }
+
 }
