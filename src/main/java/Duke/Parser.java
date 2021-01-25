@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    enum commandType {
+    public enum commandType {
         INPUT_DEADLINE,
         INPUT_EVENT,
         FILE_DEADLINE,
