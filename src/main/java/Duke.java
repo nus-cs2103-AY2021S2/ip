@@ -10,14 +10,14 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         */
-        ChatBot c = new ChatBot();
+        Parser p = new Parser();
 
         Scanner sc = new Scanner(System.in);
 
         String input = sc.nextLine();
 
         while(!input.equals("bye")) {
-        	c.parser(input);
+        	p.parser(input);
         	input = sc.nextLine();
         }
 

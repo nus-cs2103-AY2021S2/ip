@@ -34,7 +34,7 @@ class Storage {
 		}
 	}
 
-	ArrayList<Task> load() {
+	TaskList load() {
 		ArrayList<Task> list = new ArrayList<Task>();
 		try {
 			BufferedReader br = Files.newBufferedReader(this.data.toPath());
@@ -44,7 +44,6 @@ class Storage {
 				String[] info = line.split("1!1");
 
 				if (info[0].equals("todo")) {
-					System.out.println(info[1]);
 					list.add(new ToDo(info[1], Boolean.parseBoolean(info[2])));
 				} else if (info[0].equals("deadline")) {
 					list.add(new Deadline(info[1], info[2], Boolean.parseBoolean(info[3])));
@@ -55,7 +54,7 @@ class Storage {
 		} catch (IOException e) {
 
 		}
-		return list;
+		return new TaskList(list);
 	}
 
 	void save(ArrayList<Task> mem) {
