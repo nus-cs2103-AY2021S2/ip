@@ -1,5 +1,1 @@
-1. [T] [ ] 123
-2. [E] [X] 123 (at: 12 Dec 1212, 12:12 PM)
-3. [D] [ ] iuasdv pqweuhf 9-	u23gr-9	r971-7y 7g08bf0283gr0	723gr- q2r-uqwhe-9uqwgf -7yh (by: 12 Dec 1212, 12:12 PM)
-4. [E] [ ] 123 (at: 09 Nov 2001, 02:00 PM)
-5. [D] [ ] 123 (by: 12 Dec 1212, 12:12 PM)
+1. [E] [ ] 123 (at: 12 Dec 1212, 12:12 PM)

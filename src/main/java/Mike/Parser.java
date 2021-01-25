@@ -1,3 +1,8 @@
+package Mike;
+
+import Command.*;
+import Exception.MikeInvalidInputException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -17,7 +22,7 @@ public class Parser {
     /**
      * Reads user input and parses it
      *
-     * @return Command type object with parameters entered by user
+     * @return Command.Command type object with parameters entered by user
      */
     public static Command parseInput(Scanner scanner) throws MikeInvalidInputException {
         String userInput = scanner.nextLine();

@@ -1,8 +1,12 @@
+package Command;
+import Mike.TaskList;
+import Exception.MikeInvalidInputException;
+
 public interface Command {
     /**
      * Checks if chatbot should exit after command
      *
-     * @return value of isExitCommand in Command objects
+     * @return value of isExitCommand in Command.Command objects
      */
     boolean isExitCommand();
 
@@ -11,6 +15,7 @@ public interface Command {
      *
      * @return resultant tasklist after command is run
      */
+    /*TODO change exception thrown*/
     TaskList runCommand(TaskList taskList) throws MikeInvalidInputException;
 
     /**

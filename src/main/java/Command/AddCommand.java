@@ -1,3 +1,7 @@
+package Command;
+import Mike.TaskList;
+import Task.*;
+
 public abstract class AddCommand implements Command {
     protected String taskDescription;
     protected TaskList taskList;

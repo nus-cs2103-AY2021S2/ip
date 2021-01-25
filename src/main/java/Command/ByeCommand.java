@@ -1,3 +1,6 @@
+package Command;
+import Mike.TaskList;
+
 public class ByeCommand implements Command {
 
     public ByeCommand() {
