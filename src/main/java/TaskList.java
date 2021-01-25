@@ -7,6 +7,11 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = new ArrayList<>();
+        this.taskList.addAll(taskList);
+    }
+
     public void add(Task task) {
         this.taskList.add(task);
     }

@@ -24,8 +24,5 @@ public class Ui {
      */
     public void outputMessage(String message) {
         System.out.println(BORDER + "\t" + message + "\n" + BORDER);
-    //        if(!this.continueInput) {
-    //            System.exit(0);
-    //        }
     }
 }
