@@ -16,7 +16,7 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle event without parameters
             throw new DukeException(ui.eventFormatError());
         }
@@ -29,6 +29,7 @@ public class EventCommand implements Command {
             LocalDateTime ldt = LocalDateTime.parse(eTaskDate, dtf);
             EventTask newEventTask = new EventTask(eTaskName, ldt);
             taskList.add(newEventTask);
+            storage.saveTaskList();
             ui.printAddToList(newEventTask);
         } catch (ArrayIndexOutOfBoundsException e) { // handle wrong formats
             throw new DukeException(ui.eventFormatError());

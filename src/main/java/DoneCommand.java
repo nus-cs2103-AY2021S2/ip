@@ -12,7 +12,7 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
             throw new DukeException(ui.doneCmdTooManyArgsError());
         }
@@ -32,6 +32,7 @@ public class DoneCommand implements Command {
             }
             Task doneTask = taskList.getIndex(taskIndex);
             doneTask.markDone();
+            storage.saveTaskList();
             ui.printDoneMessage(doneTask);
         }
     }

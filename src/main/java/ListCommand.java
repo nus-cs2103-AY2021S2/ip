@@ -10,7 +10,7 @@ public class ListCommand implements Command{
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length > 1) { // handle commands such as "list abc", "list 1 2 3"
             throw new DukeException(ui.listCmdError());
         }

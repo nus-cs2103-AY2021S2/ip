@@ -12,7 +12,7 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle todo without parameters
             throw new DukeException("Sorry human, please enter a name for this task.");
         }
@@ -20,6 +20,7 @@ public class TodoCommand implements Command {
         TodoTask newTodoTask = new TodoTask(taskName);
 
         taskList.add(newTodoTask);
+        storage.saveTaskList();
         ui.printAddToList(newTodoTask);
     }
 

@@ -16,7 +16,7 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle deadline without parameters
             throw new DukeException(ui.deadlineFormatError());
         }
@@ -30,6 +30,7 @@ public class DeadlineCommand implements Command {
             DeadlineTask newDeadlineTask = new DeadlineTask(dTaskName, ldt);
 
             taskList.add(newDeadlineTask);
+            storage.saveTaskList();
             ui.printAddToList(newDeadlineTask);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ui.deadlineFormatError());

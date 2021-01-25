@@ -1,18 +1,16 @@
 public class DeleteCommand implements Command {
-    private String fullCmd;
     private String[] fullCmdStrArray;
     private Ui ui;
 
     TaskList taskList = Duke.taskList;
 
     public DeleteCommand(String fullCmd, Ui ui) {
-        this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
         this.ui = ui;
     }
 
     @Override
-    public void run() throws DukeException {
+    public void run(Storage storage) throws DukeException {
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
             throw new DukeException(ui.deleteCmdTooManyArgsError());
         }
@@ -36,6 +34,7 @@ public class DeleteCommand implements Command {
         }
         Task deletedTask = taskList.getIndex(taskIndex);
         taskList.removeIndex(taskIndex);
+        storage.saveTaskList();
         ui.printDeletedMessage(deletedTask);
     }
 }

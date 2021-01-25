@@ -25,7 +25,8 @@ public class Duke {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
             try {
-                parser.parse(input);
+                Command toRun = parser.parse(input);
+                toRun.run(storage);
             } catch (DukeException e) {
                 ui.printDukeException(e);
             }
@@ -36,11 +37,7 @@ public class Duke {
             }
         }
         sc.close();
-        try {
-            storage.saveTaskList();
-        } catch (DukeException e) {
-            ui.printDukeException(e);
-        }
+
         if (input.equals("bye")) {
             ui.printBye();
         }

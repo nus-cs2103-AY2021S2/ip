@@ -1,7 +1,7 @@
 public class Parser {
     private Ui ui = new Ui();
 
-    public void parse(String fullCmd) throws DukeException {
+    public Command parse(String fullCmd) throws DukeException {
         String[] fullCmdStrArray = fullCmd.split(" ");
         Command toRun = null;
         CommandName cmd;
@@ -30,7 +30,7 @@ public class Parser {
             toRun = new DeleteCommand(fullCmd, ui);
             break;
         }
-        toRun.run();
+        return toRun;
     }
 
     public static boolean isNumber(String str) {
