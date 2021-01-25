@@ -6,77 +6,87 @@ public class Duke {
         String greeting = "Hey yo, I'm Travis.\nI make you work. \n";
         String goodbye = "    Bye bye, catch you soon.";
         Scanner sc = new Scanner(System.in);
-        String input = "";
         ArrayList<Task> listOfTasks = new ArrayList<>();
         int numberOfTasks = 0;
+        String input, description = "", time = "";
 
+        String[] descriptionAndTime;
         System.out.println(greeting);
-        input = sc.nextLine();
+        Command taskType = Command.NONE;
 
-        while (!input.equals("bye")) {
-            String command = input.split(" ")[0];
-            if (input.equals("list")) {
-                System.out.println("    Here are the tasks in your list:");
-                for (int i = 1; i <= numberOfTasks; i++) {
-                    System.out.println("    " + i + ". " + listOfTasks.get(i - 1).getStatus());
-                }
-                System.out.println();
-            } else if (command.equals("done")) {
-                int taskNumber = Integer.parseInt(input.split(" ")[1]);
-                listOfTasks.get(taskNumber - 1).setDone(true);
-                System.out.println("    Nice! I've marked this task as done: \n" + "      "
-                        + listOfTasks.get(taskNumber - 1).getStatus());
-            } else if (command.equals("delete")) {
-                int deleteIndex = Integer.parseInt(input.split(" ")[1]);
-                System.out.println("    Noted. I've removed this task:");
-                System.out.println("      " + listOfTasks.get(deleteIndex - 1).getStatus());
-                numberOfTasks--;
-                System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
-                listOfTasks.remove(deleteIndex - 1);
-            } else {
-                try {
-                    if (!command.equals("todo") && !command.equals("event") && !command.equals("deadline")) {
-                        throw new TaskException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-                    }
+        while (!taskType.equals(Command.BYE)) {
+            try {
+                input = sc.nextLine();
+                String[] taskInformation = input.split(" ", 2);
+                String[] commands = input.split(" ");
+                taskType = Command.valueOf(commands[0].toUpperCase());
 
-                    String[] taskInformation = input.split(" ", 2);
-                    if (taskInformation.length < 2) {
-                        throw new TaskException(
-                                "    ☹ OOPS!!! The description of a " + taskInformation[0] + " cannot be empty.\n");
-                    }
+                switch (taskType) {
+                    case LIST:
+                        System.out.println("    Here are the tasks in your list:");
+                        for (int i = 1; i <= numberOfTasks; i++) {
+                            System.out.println("    " + i + ". " + listOfTasks.get(i - 1).getStatus());
+                        }
+                        System.out.println();
+                        break;
 
-                    if (command.equals("todo")) {
-                        listOfTasks.add(new ToDo(taskInformation[1]));
-                    } else {
-                        String[] descriptionAndTime = taskInformation[1].split("/");
-                        if (descriptionAndTime.length < 2) {
+                    case DELETE:
+                        int deleteIndex = Integer.parseInt(input.split(" ")[1]);
+                        System.out.println("    Noted. I've removed this task:");
+                        System.out.println("      " + listOfTasks.get(deleteIndex - 1).getStatus());
+                        numberOfTasks--;
+                        System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
+                        listOfTasks.remove(deleteIndex - 1);
+                        System.out.println();
+                        break;
+                    case DONE:
+                        int taskNumber = Integer.parseInt(commands[1]);
+                        listOfTasks.get(taskNumber - 1).setDone(true);
+                        System.out.println("    Nice! I've marked this task as done: \n" + "      "
+                                + listOfTasks.get(taskNumber - 1).getStatus());
+                        System.out.println();
+                        break;
+                    case DEADLINE:
+                    case EVENT:
+                    case TODO:
+                        if (taskInformation.length < 2) {
                             throw new TaskException(
-                                    "    ☹ OOPS!!! The time of a " + taskInformation[0] + " cannot be empty.\n");
+                                    "    ☹ OOPS!!! The description of a " + taskInformation[0] + " cannot be empty.\n");
                         }
-                        String description = descriptionAndTime[0];
-                        String time = descriptionAndTime[1].split(" ", 2)[1];
-                        if (command.equals("deadline")) {
-
-                            listOfTasks.add(new Deadlines(description, time));
-                        } else if (command.equals("event")) {
-
-                            listOfTasks.add(new Event(description, time));
+                        if (!taskType.equals(Command.TODO)) {
+                            descriptionAndTime = taskInformation[1].split("/");
+                            if (descriptionAndTime.length < 2) {
+                                throw new TaskException(
+                                        "    ☹ OOPS!!! The time of a " + taskInformation[0] + " cannot be empty.\n");
+                            }
+                            description = descriptionAndTime[0];
+                            time = descriptionAndTime[1].split(" ", 2)[1];
                         }
-                    }
 
-                    System.out.println("    Got it. I've added this task: ");
-                    System.out.println("      " + listOfTasks.get(numberOfTasks).getStatus());
-                    numberOfTasks++;
-                    System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
-                } catch (TaskException e) {
-                    System.out.println(e.getMessage());
+                        listOfTasks.add(taskType.equals(Command.EVENT) ? new Event(description, time)
+                                : taskType.equals(Command.TODO) ? new ToDo(taskInformation[1])
+                                        : new Deadlines(description, time));
+                        System.out.println("    Got it. I've added this task: ");
+                        System.out.println("      " + listOfTasks.get(numberOfTasks).getStatus());
+                        numberOfTasks++;
+                        System.out.println("    Now you have " + numberOfTasks + " tasks in the list.\n");
+                        break;
+                    case NONE:
+                        throw new TaskException("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                    case BYE:
+                        break;
+
                 }
 
+            } catch (TaskException e) {
+                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
 
-            input = sc.nextLine();
         }
         sc.close();
         System.out.println(goodbye);
+
     }
 }
