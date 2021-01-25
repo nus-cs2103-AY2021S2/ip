@@ -12,6 +12,10 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    // https://stackoverflow.com/a/34934226 Adding jackson via gradle
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
 }
 
 test {
