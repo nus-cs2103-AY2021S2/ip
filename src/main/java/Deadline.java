@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String desc, boolean isDone, String by) {
+        super(desc, isDone);
+        this.by = by;
+    }
+
     static public Deadline parse(String input) throws DukeException {
         String[] arr = input.split("deadline");
         if (arr.length < 2) throw new DukeException("Deadline description cannot be empty");
