@@ -10,4 +10,9 @@ public class Deadlines extends Task {
     public String getStatus() {
         return "[D]" + super.getStatus() + "(by: " + this.deadlineTime + ")";
     }
+
+    @Override
+    public String saveStatus() {
+        return "D" + super.saveStatus();
+    }
 }

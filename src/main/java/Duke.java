@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -82,6 +85,18 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println("    ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            }
+
+            try {
+                File savedTasks = new File("savedTasks.txt");
+                savedTasks.createNewFile();
+                FileWriter writer = new FileWriter("savedTasks.txt");
+                for (int i = 0; i < numberOfTasks; i++) {
+                    writer.write(listOfTasks.get(i).saveStatus());
+                }
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
         }
