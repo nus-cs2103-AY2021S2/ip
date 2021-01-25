@@ -1,13 +1,21 @@
 import main.java.*;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 public class Duke {
 
+
     private static final String indent = "         ";
     private static final String horizSep = indent + "________________________________________________";
+    private static final List<Task> taskList = new ArrayList<>();
 
     private static void logMessage(DukeCommand command, String message, Integer numTasks, Task relevantTask) {
         if (command == DukeCommand.BYE || command == DukeCommand.WELCOME) {
@@ -29,16 +37,52 @@ public class Duke {
         }
     }
 
+    private static void writeToFile() {
+//        String home = System.getProperty("user.home");
+
+//        Path dirPath = Paths.get(home, "data");
+//        Path filePath = Paths.get(home,"data", "duke.txt");
+
+        Path dirPath = Paths.get("data");
+        Path filePath = Paths.get("data", "duke.txt");
+
+//        System.out.println(dirPath);
+//        System.out.println(filePath);
+
+        try {
+            boolean dirExists = Files.exists(dirPath);
+            boolean fileExists = Files.exists(filePath);
+
+            if (!dirExists) {
+                Files.createDirectory(dirPath);
+            }
+            if (!fileExists) {
+                Files.createFile(filePath);
+            }
+
+            BufferedWriter bfWriter = Files.newBufferedWriter(filePath);
+
+            for (Task task : taskList) {
+                bfWriter.write(task.toString() + "\n");
+            }
+            bfWriter.flush();
+            bfWriter.close();
+
+        } catch(IOException err) {
+            err.printStackTrace();
+        }
+    }
+
+//    private static void readFromFile() {
+//
+//    }
+
+
     public static void main(String[] args) {
-
-        List<Task> taskList = new ArrayList<>();
-
 
         String greeting = indent + " Hello! I'm Duke\n" + indent + " What can I do for you?\n";
         String farewell = indent + " Bye. Hope to see you again soon!\n";
         Scanner sc = new Scanner(System.in);
-
-
 
 
         logMessage(DukeCommand.WELCOME, greeting, 0, null);
@@ -47,7 +91,6 @@ public class Duke {
 
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
-
 
             try {
 
@@ -67,6 +110,7 @@ public class Duke {
                         }
 
                         Task removedTask = taskList.remove(Integer.parseInt(params[1]) - 1);
+                        writeToFile();
                         logMessage(DukeCommand.DELETE_TASK, "", taskList.size(), removedTask);
 
                     } catch (Exception err) {
@@ -109,6 +153,7 @@ public class Duke {
 
                     Todo newTask = new Todo(params[1]);
                     taskList.add(newTask);
+                    writeToFile();
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
 
@@ -128,6 +173,7 @@ public class Duke {
 
                     Deadline newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
                     taskList.add(newTask);
+                    writeToFile();
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
                 } else if (params[0].equals("event")) {
@@ -157,6 +203,7 @@ public class Duke {
 
                     Event newTask = new Event(eventParams[0], eventParams[1]);
                     taskList.add(newTask);
+                    writeToFile();
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
                 } else {
