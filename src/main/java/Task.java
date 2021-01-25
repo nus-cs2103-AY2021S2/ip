@@ -1,10 +1,16 @@
 public class Task {
+    protected char type;
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    public Task(char type, int isDone, String description) {
+        this.type = type;
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone == 1;
+    }
+
+    public String getFileString() {
+        return String.format("%c // %d // %s", this.type, isDone ? 1 : 0, this.description);
     }
 
     public String getStatusIcon() {
