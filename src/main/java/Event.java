@@ -1,11 +1,25 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
-    protected String at;
-    protected static String type = "E";
+    private LocalDateTime at;
+    private static String type = "E";
 
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException{
         super(description);
-        this.at = at;
+        setTime(at);
+    }
+
+    private void setTime(String time) throws DukeException{
+        try {
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+            this.at = dateTime;
+        } catch (Exception e){
+            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
+        }
     }
 
 //    public String archiveEvent() {
@@ -15,6 +29,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String time = this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
+        return "[E]" + super.toString() + " (at: " + time + ")";
     }
 }
