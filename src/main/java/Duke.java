@@ -16,7 +16,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException dukeEx) {
-            ui.respondToCommand(dukeEx.toString());
+            ui.response(dukeEx.toString());
             tasks = new TaskList();
         }
     }
@@ -26,13 +26,10 @@ public class Duke {
         while (true) {
             String input = sc.nextLine();
             try {
-                ui.handleCommand(input, tasks);
-                storage.save(tasks);
-            } catch(DukeException dukeEx) {
+                ui.handleCommand(input, tasks, storage);
+            } catch (DukeException dukeEx) {
                 // Echoes out reason for invalid inputs
-                ui.respondToCommand(dukeEx.toString());
-            } catch(IOException ioEx) {
-                System.out.println(ioEx);
+                ui.response(dukeEx.toString());
             }
         }
     }

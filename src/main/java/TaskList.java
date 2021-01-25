@@ -10,11 +10,13 @@ public class TaskList {
     }
 
     public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+        this.taskList = new ArrayList<>();
+        this.taskList.add(null);
+        this.taskList.addAll(taskList);
     }
 
     public int size() {
-        return taskList.size();
+        return taskList.size() - 1;
     }
 
     public void add(Task task) {
@@ -28,6 +30,5 @@ public class TaskList {
     public Task get(int i) {
         return taskList.get(i);
     }
-
 
 }

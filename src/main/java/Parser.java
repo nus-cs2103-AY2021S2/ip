@@ -12,6 +12,7 @@ public class Parser {
 
         switch (command) {
         case "delete":
+        case "done":
         case "todo":
             description = text;
             break;

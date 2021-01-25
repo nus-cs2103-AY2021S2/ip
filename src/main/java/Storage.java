@@ -20,7 +20,6 @@ public class Storage {
     public List<Task> load() throws DukeException {
         try {
             List<Task> taskList = new ArrayList<>();
-            taskList.add(null);
             File file = new File(filePath);
             File dir = new File(dirPath);
             handleNonExistentFiles(file, dir);
@@ -58,27 +57,35 @@ public class Storage {
         }
     }
 
-    public void save(TaskList tasks) throws IOException {
+    public void save(TaskList tasks) throws DukeException {
         File file = new File(filePath);
         File dir = new File(dirPath);
         handleNonExistentFiles(file, dir);
-        FileWriter fileWriter = new FileWriter(file, false);
 
-        for (int i = 1; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            fileWriter.write(task.writeContentFormat() + System.lineSeparator());
+        try {
+            FileWriter fileWriter = new FileWriter(file, false);
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task task = tasks.get(i);
+                fileWriter.write(task.writeContentFormat() + System.lineSeparator());
+            }
+            fileWriter.close();
+        } catch(IOException ex) {
+            throw new DukeException(DukeExceptionType.SAVE_ERROR);
         }
-        fileWriter.close();
     }
 
-    private void handleNonExistentFiles(File file, File dir) throws IOException {
-        if (!Files.isDirectory(Paths.get(dirPath))) {
-            // Create data folder and duke.txt if do not exist
-            dir.mkdir();
-            file.createNewFile();
-        } else if (!file.exists()) {
-            // Create duke.txt if do not exist
-            file.createNewFile();
+    private void handleNonExistentFiles(File file, File dir) throws DukeException {
+        try {
+            if (!Files.isDirectory(Paths.get(dirPath))) {
+                // Create data folder and duke.txt if do not exist
+                dir.mkdir();
+                file.createNewFile();
+            } else if (!file.exists()) {
+                // Create duke.txt if do not exist
+                file.createNewFile();
+            }
+        } catch(IOException ex) {
+            throw new DukeException(DukeExceptionType.FILE_CREATION_ERROR);
         }
     }
 
