@@ -19,6 +19,11 @@ public class Duke {
         new Duke("Duke.txt").run();
     }
 
+    /**
+     * Main body of Duke program.
+     * Command is created by parsing the input and then executed.
+     * Error message is shown if there is DukeException.
+     */
     public void run() {
 
         ui.showWelcome();

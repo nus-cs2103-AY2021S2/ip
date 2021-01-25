@@ -15,12 +15,22 @@ public class TaskList {
         this.size = list.size();
     }
 
+    /**
+     * Mark the numbered task as done.
+     *
+     * @param num
+     */
     public void doneTask(int num) {
 
         list.get(num).markAsDone();
 
     }
 
+    /**
+     * Delete the numbered task from the list of tasks.
+     *
+     * @param num
+     */
     public void deleteTask(int num) {
 
         size = size - 1;
@@ -29,6 +39,13 @@ public class TaskList {
 
     }
 
+    /**
+     * Add the required task into the list of tasks.
+     *
+     * @param action
+     * @param task
+     * @param time
+     */
     public void addTask(String action, String task, String time) {
 
         size = size + 1;
@@ -43,6 +60,9 @@ public class TaskList {
 
     }
 
+    /**
+     * Show all the tasks in the list.
+     */
     public void listTask() {
 
         for (int i = 0; i < size; i++) {
