@@ -2,6 +2,9 @@ package com.tjtanjin.ip;
 
 import java.util.Scanner;
 
+/**
+ * Ui class handles direct interactions between the application and the user
+ */
 public class Ui {
 
     /**
