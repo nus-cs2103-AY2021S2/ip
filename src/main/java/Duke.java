@@ -2,6 +2,7 @@ package main.java;
 
 import java.util.Scanner;
 
+import main.java.exceptions.DateFormatException;
 import main.java.exceptions.EmptyDescriptionException;
 import main.java.exceptions.EmptyTimeException;
 import main.java.exceptions.InvalidInputException;
@@ -34,6 +35,18 @@ public class Duke {
      */
     private static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private static void printTasks(String[] sArray) {
+        if (sArray.length == 1) {
+            taskManager.printTasks();
+        } else {
+            try {
+                taskManager.printTasksOnDate(sArray[1]);
+            } catch (DateFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     /**
@@ -79,7 +92,8 @@ public class Duke {
     private static void inputAdd(String s) {
         try {
             taskManager.addTask(s);
-        } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException e) {
+        } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException |
+                DateFormatException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -101,7 +115,7 @@ public class Duke {
         case "bye":
             return false;
         case "list":
-            taskManager.printTasks();
+            printTasks(sArray);
             break;
         case "done":
             inputDone(sArray[1]);

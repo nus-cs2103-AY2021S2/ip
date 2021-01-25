@@ -2,10 +2,10 @@ package main.java.subfiles;
 
 import java.util.ArrayList;
 
-import main.java.exceptions.EmptyDescriptionException;
-import main.java.exceptions.EmptyTimeException;
-import main.java.exceptions.InvalidInputException;
-import main.java.exceptions.ListOutOfBoundsException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import main.java.exceptions.*;
 
 /**
  * The TaskManager class contains a list of tasks created by
@@ -56,16 +56,18 @@ public class TaskManager {
      *                            the deadline.
      */
     private void addDeadline(String s)
-            throws EmptyDescriptionException, EmptyTimeException {
+            throws EmptyDescriptionException, EmptyTimeException, DateFormatException {
         try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(9, sArray[0].length() - 1);
-            String t = sArray[1].substring(3);
+            LocalDate t = LocalDate.parse(sArray[1].substring(3));
             tasks.add(new Deadline(s, t));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("deadline");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyTimeException("deadline");
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
         }
     }
 
@@ -80,16 +82,18 @@ public class TaskManager {
      *                            the event.
      */
     private void addEvent(String s)
-            throws EmptyDescriptionException, EmptyTimeException {
+            throws EmptyDescriptionException, EmptyTimeException, DateFormatException {
         try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(6, sArray[0].length() - 1);
-            String t = sArray[1].substring(3);
+            LocalDate t = LocalDate.parse(sArray[1].substring(3));
             tasks.add(new Event(s, t));
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("event");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyTimeException("event");
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
         }
     }
 
@@ -109,7 +113,8 @@ public class TaskManager {
      *                               deadline, nor an event.
      */
     public void addTask(String s)
-            throws EmptyDescriptionException, EmptyTimeException, InvalidInputException {
+            throws EmptyDescriptionException, EmptyTimeException, InvalidInputException,
+            DateFormatException {
         String command = s.split(" ", 2)[0];
 
         switch (command) {
@@ -140,6 +145,62 @@ public class TaskManager {
         for (int i = 1; i < tasks.size() + 1; i++) {
             Task task = tasks.get(i - 1);
             System.out.println(i + ". " + task.toString());
+        }
+    }
+
+    private void printDeadlinesOnDate(LocalDate date) {
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t instanceof Deadline) {
+                Deadline d = (Deadline) t;
+                if (d.getDateAsLocalDate().equals(date)) {
+                    deadlines.add(d);
+                }
+            }
+        }
+
+        if (deadlines.size() == 0) {
+            System.out.println("You have no deadlines due on " + date.toString() + ".");
+        } else {
+            int i = 1;
+            System.out.println("Here are the deadlines due on " + date.toString() + ":");
+            for (Deadline d : deadlines) {
+                System.out.println(i + ". " + d.toString());
+                i++;
+            }
+        }
+    }
+
+    private void printEventsOnDate(LocalDate date) {
+        ArrayList<Event> events = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t instanceof Event) {
+                Event e = (Event) t;
+                if (e.getDateAsLocalDate().equals(date)) {
+                    events.add(e);
+                }
+            }
+        }
+
+        if (events.size() == 0) {
+            System.out.println("You have no events due on " + date.toString() + ".");
+        } else {
+            int i = 1;
+            System.out.println("Here are the events due on " + date.toString() + ":");
+            for (Event e : events) {
+                System.out.println(i + ". " + e.toString());
+                i++;
+            }
+        }
+    }
+
+    public void printTasksOnDate(String s) throws DateFormatException {
+        try {
+            LocalDate date = LocalDate.parse(s);
+            printDeadlinesOnDate(date);
+            printEventsOnDate(date);
+        } catch (DateTimeParseException e) {
+            throw new DateFormatException();
         }
     }
 
