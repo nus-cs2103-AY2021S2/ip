@@ -168,15 +168,17 @@ public class Timmy {
             } else if (input.contains("[D]")) {
                 String[] tokens = input.split("] ", 2);
                 String[] nextTokens = tokens[1].split(" ", 2);
-                String taskInfo = nextTokens[0] + " /by"
-                        + nextTokens[1].substring(nextTokens[1].indexOf(':') + 1, nextTokens[1].indexOf(')'));
-                addTask("deadline", taskInfo);
+                String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
+                Task task = new Deadline(nextTokens[0], date);
+                tasks.add(noOfTasks, task);
+                noOfTasks++;
             } else {
                 String[] tokens = input.split("] ", 2);
                 String[] nextTokens = tokens[1].split(" ", 2);
-                String taskInfo = nextTokens[0] + " /at"
-                        + nextTokens[1].substring(nextTokens[1].indexOf(':') + 1, nextTokens[1].indexOf(')'));
-                addTask("event", taskInfo);
+                String date = nextTokens[1].substring(nextTokens[1].indexOf(':') + 2, nextTokens[1].indexOf(')'));
+                Task task = new Event(nextTokens[0], date);
+                tasks.add(noOfTasks, task);
+                noOfTasks++;
             }
             if (input.contains("\u2713")) {
                 markTask(taskIndex);
