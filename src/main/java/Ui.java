@@ -36,6 +36,29 @@ public class Ui {
         }
     }
 
+    public static void argumentError() {
+        System.out.println("Too many arguments, please give me just 1 task to mark as completed");
+    }
+
+    public static void unknownCommand() {
+        System.out.println("Unfortunately I don't know what you want me to do :L");
+    }
+
+    public static void todoError() {
+        System.out.println("I don't understand your todo command, the syntax should be {todo} {description}");
+    }
+
+    public static void deadlineError() {
+        System.out.println("I don't understand your deadline command, the syntax should be " +
+                "{deadline} {description} /by {yyyy-MM-dd hhmm} with deadline datetime given in 24hr format");
+    }
+
+    public static void eventError() {
+        System.out.println("I don't understand your deadline command, the syntax should be " +
+                "{deadline} {description} /at {yyyy-MM-dd hhmm} /to {yyyy-MM-dd hhmm} " +
+                "with deadline datetime given in 24hr format");
+    }
+
     public static void printList(myList taskList) {
         System.out.println("Here's your list of tasks!" + taskList.toString());
     }
