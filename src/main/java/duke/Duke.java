@@ -10,8 +10,13 @@ import duke.Tasks.Todo;
 
 public class Duke {
 
+    /** Storage instance to read and write file */
     private Storage storage;
+
+    /** TaskList instance to store and handle tasks */
     private TaskList tasks;
+
+    /** Ui instance to interact with user */
     private Ui ui;
 
     public Duke(String path) {
@@ -20,6 +25,7 @@ public class Duke {
         storage = new Storage(path, tasks);
     }
 
+    /** Runs the program and handles each command from user */
     public void run() {
         ui.greetUser();
         Parser commandparser = new Parser();

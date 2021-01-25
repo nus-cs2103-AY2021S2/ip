@@ -14,10 +14,14 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /** Filewriter instance to write to file */
     private FileWriter writer;
-    private File dataFile;
-    public TaskList tasks;
 
+    /** File instance to store data */
+    private File dataFile;
+
+    /** Tasklist instance to store and handle tasks */
+    public TaskList tasks;
 
     public Storage(String path, TaskList tasks) {
         dataFile = new File(path);
@@ -34,6 +38,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a file and stores tasks in TaskList
+     *
+     * @param TaskList to store tasks
+     * */
     public void fileToList(TaskList taskList) {
         try {
             Scanner reader = new Scanner(dataFile);
@@ -72,6 +81,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Goes through TaskList and parses task into string
+     *
+     * @param TaskList
+     * @return String of tasks
+     * */
     public String taskListToString(TaskList tasks) {
         String res = "";
         ArrayList<Task> taskList = tasks.taskList;
@@ -99,6 +114,11 @@ public class Storage {
         return res;
     }
 
+    /** Writes the tasks in TaskList to file
+     *
+     * @param TaskList
+     * @throws IOException if there is an IO exception
+     * */
     public void write(TaskList taskList) {
         try {
             writer = new FileWriter(dataFile);
@@ -108,10 +128,5 @@ public class Storage {
             System.out.println((e.getMessage()));
         }
     }
-
-
-
-
-
 
 }
