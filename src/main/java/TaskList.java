@@ -21,9 +21,7 @@ public class TaskList {
      * @param num
      */
     public void doneTask(int num) {
-
         list.get(num).markAsDone();
-
     }
 
     /**
@@ -32,11 +30,9 @@ public class TaskList {
      * @param num
      */
     public void deleteTask(int num) {
-
         size = size - 1;
         Task t = list.get(num);
         list.remove(num);
-
     }
 
     /**
@@ -47,7 +43,6 @@ public class TaskList {
      * @param time
      */
     public void addTask(String action, String task, String time) {
-
         size = size + 1;
 
         if (action.equals("todo")) {
@@ -57,18 +52,15 @@ public class TaskList {
         } else if (action.equals("event")) {
             list.add(new Event(task, time));
         }
-
     }
 
     /**
      * Show all the tasks in the list.
      */
     public void listTask() {
-
         for (int i = 0; i < size; i++) {
             System.out.println((i + 1) + "." + list.get(i));
         }
-
     }
 
     public void findTask(String task) {

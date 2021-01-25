@@ -25,9 +25,7 @@ public class Duke {
      * Error message is shown if there is DukeException.
      */
     public void run() {
-
         ui.showWelcome();
-
         boolean isExit = false;
         while (!isExit) {
             try {

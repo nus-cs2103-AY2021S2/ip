@@ -13,7 +13,6 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String string) throws DukeException {
-
         String action, info;
         Command command;
 
@@ -55,7 +54,6 @@ public class Parser {
      * @throws DukeException
      */
     public static String getTask(String info) throws DukeException {
-
         String task;
 
         if (info.equals("")) {
@@ -70,7 +68,6 @@ public class Parser {
         }
 
         return task;
-
     }
 
     /**
@@ -81,7 +78,6 @@ public class Parser {
      * @throws DukeException
      */
     public static String getTimeAt(String info) throws DukeException {
-        
         String time;
 
         if (info.contains(" /at ")) {
@@ -108,7 +104,6 @@ public class Parser {
      * @throws DukeException
      */
     public static String getTimeBy(String info) throws DukeException {
-
         String time;
 
         if (info.contains(" /by ")) {

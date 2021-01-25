@@ -6,7 +6,6 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
         int num;
         Task t;
 
@@ -25,7 +24,6 @@ public class DoneCommand extends Command {
             ui.showDone(t);
             storage.store(tasks.list);
         }
-
     }
 
     @Override

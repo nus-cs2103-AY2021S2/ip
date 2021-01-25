@@ -22,7 +22,6 @@ public class Storage {
     public void store(ArrayList<Task> tasks) throws DukeException {
 
         try {
-
             FileWriter fw = new FileWriter(filepath);
             int size = tasks.size();
             String string, task, time;
@@ -39,12 +38,11 @@ public class Storage {
                     fw.write(string + "\n");
                 }
             }
-            fw.close();
 
+            fw.close();
         } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! There is an error in storing the file.");
         }
-
     }
 
     /**
@@ -56,7 +54,6 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
 
         try {
-
             File f = new File(filepath);
             Scanner scan = new Scanner(f);
             ArrayList<Task> list = new ArrayList<>();
@@ -65,7 +62,6 @@ public class Storage {
             Task task;
 
             while (scan.hasNext()) {
-
                 string = scan.nextLine();
                 action = string.charAt(1);
                 done = string.charAt(4);
@@ -103,8 +99,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
         }
-
     }
-
 
 }

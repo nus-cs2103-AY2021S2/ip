@@ -9,9 +9,11 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-------------------------------" +
+                "--------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-------------------------------" +
+                "--------------------------------");
     }
 
     public void showError(String error) {
@@ -27,7 +29,8 @@ public class Ui {
     }
 
     public void showLine() {
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-------------------------------" +
+                "--------------------------------");
     }
 
     public void showList() {
