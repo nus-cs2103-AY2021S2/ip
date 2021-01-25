@@ -11,7 +11,8 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline
-     * @param description Duke.Tasks.Task name
+     *
+     * @param description Task name
      * @param by Specific date/time which task is to be done by
      */
     public Deadline(String description, LocalDate by) {
@@ -19,6 +20,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Content to write into storage file
+     *
+     * @return String format for task information
+     */
     @Override
     public String writeContentFormat() {
         return String.format("D | %s | %s", super.writeContentFormat(), by);
@@ -26,6 +32,7 @@ public class Deadline extends Task {
 
     /**
      * Returns task type, status icon, task name and due date
+     *
      * @return String format specific to deadline task
      */
     @Override

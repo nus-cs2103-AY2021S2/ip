@@ -4,8 +4,18 @@ import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.DukeExceptionType;
 
+/**
+ * Handles all parsing of input by user into commands, description and date (if applicable)
+ */
 public class Parser {
 
+    /**
+     * Determines command given by user input
+     *
+     * @param text Input given by user
+     * @return Command to be supplied to be executed
+     * @throws DukeException If given an empty description, empty selection, invalid integer, unrecognized command
+     */
     public static Command parse(String text) throws DukeException {
         String command = command(text);
         String description = description(text);

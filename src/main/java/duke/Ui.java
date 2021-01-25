@@ -2,14 +2,25 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles all commandline related interactions
+ */
 public class Ui {
     private Scanner sc;
 
+    /**
+     * Constructor for Ui
+     */
     public Ui() {
         welcomeUser();
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads user input
+     *
+     * @return user input
+     */
     public String fullCommand() {
         return sc.nextLine();
     }
@@ -20,6 +31,11 @@ public class Ui {
         response(output);
     }
 
+    /**
+     * Echoes out response for user's input
+     *
+     * @param output Message to be shown to user
+     */
     public void response(String output) {
         String responseMsg = "\t____________________________________________________________\n"
                 + "\t" + output + "\n"

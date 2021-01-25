@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Enum class to differentiate Duke.Exceptions.DukeException types
+ * Enum class to differentiate DukeException types
  */
 public enum DukeExceptionType {
     EMPTY_SELECTION, EMPTY_DESCRIPTION, INVALID_INTEGER, UNKNOWN_INPUT, SELECTION_EXCEED_RANGE, INVALID_DATE_FORMAT,

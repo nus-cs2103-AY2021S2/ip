@@ -9,14 +9,29 @@ import duke.Utility;
 
 import java.time.LocalDate;
 
+/**
+ * Handles adding of ToDo, Event and Deadline tasks
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Constructor for AddCommand, for ToDo task
+     *
+     * @param command ToDo command
+     * @param description Task name of ToDo
+     */
     public AddCommand(String command, String description) {
         super.command = command;
         super.description = description;
         super.date = "";
     }
 
+    /**
+     * Overloaded constructor for AddCommand, for Event and Deadline tasks
+     *
+     * @param command Event or Deadline command
+     * @param description Task name of Event or Deadline
+     */
     public AddCommand(String command, String description, String date) {
         super.command = command;
         super.description = description;
@@ -54,6 +69,14 @@ public class AddCommand extends Command {
         return "\n\tNow you have " + tasks.size() + " tasks in the list.";
     }
 
+    /**
+     * Adds task to TaskList, saves to storage file and outputs response to terminal
+     *
+     * @param tasks TaskList
+     * @param ui Ui instance
+     * @param storage Storage instance
+     * @throws DukeException If invalid date given for event or deadline task
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (command) {
@@ -71,6 +94,11 @@ public class AddCommand extends Command {
         ui.response(output);
     }
 
+    /**
+     * Determines if Exit is called by user
+     *
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -8,9 +8,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for Duke.Tasks.Task
+     * Constructor for Task
      *
-     * @param description Duke.Tasks.Task Name
+     * @param description Task Name
      */
     public Task(String description) {
         this.description = description;
@@ -36,7 +36,7 @@ public class Task {
     /**
      * Returns task name
      *
-     * @return Duke.Tasks.Task name
+     * @return Task name
      */
     public String getDescription() {
         return String.format("%s", description);
