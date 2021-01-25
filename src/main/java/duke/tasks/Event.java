@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+public class Event extends DateTask {
 
-    protected LocalDateTime at;
+    protected LocalDateTime datetime;
 
     public Event(String description, LocalDateTime dt) {
         this(description, dt, false);
     }
     public Event(String description, LocalDateTime dt, boolean isDone) {
         super(description, isDone);
-        this.at = dt;
+        this.datetime = dt;
     }
 
     public static Event parse(String s) throws DukeExceptionIllegalArgument {
@@ -39,10 +39,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Parser.formatDate(at) + ")";
+        return "[E]" + super.toString() + " (at: " + Parser.formatDate(datetime) + ")";
     }
 
     public String toFileString() {
-        return "E | " + ((isDone) ? 1 : 0) + " | " + description + " | " + Parser.formatDateISO(at);
+        return "E | " + ((isDone) ? 1 : 0) + " | " + description + " | " + Parser.formatDateISO(datetime);
     }
 }
