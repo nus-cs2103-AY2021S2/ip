@@ -1,15 +1,29 @@
 package duke;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.*;
-import java.io.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 
 public class Duke {
 
@@ -22,53 +36,42 @@ public class Duke {
         BufferedReader br;
         StringTokenizer st;
 
-        public FastIO()
-        {
+        public FastIO() {
             super(new BufferedOutputStream(System.out));
             br = new BufferedReader(new
                     InputStreamReader(System.in));
         }
 
-        String next()
-        {
-            while (st == null || !st.hasMoreElements())
-            {
-                try
-                {
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
                     st = new StringTokenizer(br.readLine());
                 }
-                catch (IOException  e)
-                {
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             return st.nextToken();
         }
 
-        int nextInt()
-        {
+        int nextInt() {
             return Integer.parseInt(next());
         }
 
-        long nextLong()
-        {
+        long nextLong() {
             return Long.parseLong(next());
         }
 
-        double nextDouble()
-        {
+        double nextDouble() {
             return Double.parseDouble(next());
         }
 
-        String nextLine()
-        {
+        String nextLine() {
             String str = "";
-            try
-            {
+            try {
                 str = br.readLine();
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
             return str;
@@ -229,27 +232,27 @@ public class Duke {
                 while (s.hasNext()) {
                     String[] line = s.nextLine().split(" \\| ");
                     switch (line[0]) {
-                        case "T":
-                            Task task = new Task(line[2]);
-                            if (line[1].equals("1")) {
-                                task.setDone();
-                            }
-                            leest.add(task);
-                            break;
-                        case "D":
-                            Deadline deadline = new Deadline(line[2], line[3]);
-                            if (line[1].equals("1")) {
-                                deadline.setDone();
-                            }
-                            leest.add(deadline);
-                            break;
-                        case "E":
-                            Event event = new Event(line[2], line[3]);
-                            if (line[1].equals("1")) {
-                                event.setDone();
-                            }
-                            leest.add(event);
-                            break;
+                    case "T":
+                        Task task = new Task(line[2]);
+                        if (line[1].equals("1")) {
+                            task.setDone();
+                        }
+                        leest.add(task);
+                        break;
+                    case "D":
+                        Deadline deadline = new Deadline(line[2], line[3]);
+                        if (line[1].equals("1")) {
+                            deadline.setDone();
+                        }
+                        leest.add(deadline);
+                        break;
+                    case "E":
+                        Event event = new Event(line[2], line[3]);
+                        if (line[1].equals("1")) {
+                            event.setDone();
+                        }
+                        leest.add(event);
+                        break;
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -372,77 +375,77 @@ public class Duke {
             String[] split = input.split("\\s+");
 
             switch (split[0]) {
-                case "list":
-                    if (leest.size() == 0) {
-                        ui.emptyListMessage();
-                    } else {
-                        ui.showList(leest);
-                    }
-                    break;
-                case "done":
-                    try {
-                        int done = Integer.parseInt(split[1]) - 1;
-                        leest.get(done).setDone();
-                        ui.setDone(leest.get(done));
-                        storage.saveAsFile(leest);
-                    } catch (Exception e) {
-                        ui.errorMessage("invalidDone");
-                    }
-                    break;
-                case "bye":
-                    ui.byeBye();
-                    return;
-                case "todo":
-                    try {
-                        leest.add(new Task(input.substring(5)));
-                        ui.taskAdded(leest.get(leest.size() - 1));
-                        ui.showTaskListSize(leest.size());
-                        storage.saveAsFile(leest);
-                    } catch (Exception e) {
-                        ui.errorMessage("invalidTodo");
-                    }
-                    break;
-                case "deadline":
-                    try {
-                        String[] splitagain = input.substring(9).split("/by");
-                        leest.add(new Deadline(splitagain[0], splitagain[1].substring(1)));
-                        ui.taskAdded(leest.get(leest.size() - 1));
-                        ui.showTaskListSize(leest.size());
-                        storage.saveAsFile(leest);
-                    } catch (DateTimeParseException de) {
-                        ui.errorMessage("dateTimeError");
-                    } catch (Exception e) {
-                        ui.errorMessage("invalidDeadline");
-                    }
-                    break;
-                case "event":
-                    try {
-                        String[] splitagain2 = input.substring(6).split("/at");
-                        leest.add(new Event(splitagain2[0], splitagain2[1].substring(1)));
-                        ui.taskAdded(leest.get(leest.size() - 1));
-                        ui.showTaskListSize(leest.size());
-                        storage.saveAsFile(leest);
-                    } catch (DateTimeParseException de) {
-                        ui.errorMessage("dateTimeError");
-                    } catch (Exception e) {
-                        //System.out.println(e);
-                        ui.errorMessage("invalidEvent");
-                    }
-                    break;
-                case "delete":
-                    try {
-                        Task toDelete = leest.get(Integer.parseInt(split[1]) - 1);
-                        ui.deleteTask(toDelete);
-                        leest.remove(toDelete);
-                        ui.showTaskListSize(leest.size());
-                        storage.saveAsFile(leest);
-                    } catch (Exception e) {
-                        ui.errorMessage("invalidDelete");
-                    }
-                    break;
-                default:
-                    ui.errorMessage("unknownInput");
-                    break;
+            case "list":
+                if (leest.size() == 0) {
+                    ui.emptyListMessage();
+                } else {
+                    ui.showList(leest);
+                }
+                break;
+            case "done":
+                try {
+                    int done = Integer.parseInt(split[1]) - 1;
+                    leest.get(done).setDone();
+                    ui.setDone(leest.get(done));
+                    storage.saveAsFile(leest);
+                } catch (Exception e) {
+                    ui.errorMessage("invalidDone");
+                }
+                break;
+            case "bye":
+                ui.byeBye();
+                return;
+            case "todo":
+                try {
+                    leest.add(new Task(input.substring(5)));
+                    ui.taskAdded(leest.get(leest.size() - 1));
+                    ui.showTaskListSize(leest.size());
+                    storage.saveAsFile(leest);
+                } catch (Exception e) {
+                    ui.errorMessage("invalidTodo");
+                }
+                break;
+            case "deadline":
+                try {
+                    String[] splitagain = input.substring(9).split("/by");
+                    leest.add(new Deadline(splitagain[0], splitagain[1].substring(1)));
+                    ui.taskAdded(leest.get(leest.size() - 1));
+                    ui.showTaskListSize(leest.size());
+                    storage.saveAsFile(leest);
+                } catch (DateTimeParseException de) {
+                    ui.errorMessage("dateTimeError");
+                } catch (Exception e) {
+                    ui.errorMessage("invalidDeadline");
+                }
+                break;
+            case "event":
+                try {
+                    String[] splitagain2 = input.substring(6).split("/at");
+                    leest.add(new Event(splitagain2[0], splitagain2[1].substring(1)));
+                    ui.taskAdded(leest.get(leest.size() - 1));
+                    ui.showTaskListSize(leest.size());
+                    storage.saveAsFile(leest);
+                } catch (DateTimeParseException de) {
+                    ui.errorMessage("dateTimeError");
+                } catch (Exception e) {
+                    //System.out.println(e);
+                    ui.errorMessage("invalidEvent");
+                }
+                break;
+            case "delete":
+                try {
+                    Task toDelete = leest.get(Integer.parseInt(split[1]) - 1);
+                    ui.deleteTask(toDelete);
+                    leest.remove(toDelete);
+                    ui.showTaskListSize(leest.size());
+                    storage.saveAsFile(leest);
+                } catch (Exception e) {
+                    ui.errorMessage("invalidDelete");
+                }
+                break;
+            default:
+                ui.errorMessage("unknownInput");
+                break;
             }
         }
     }
@@ -487,28 +490,28 @@ public class Duke {
          */
         public void errorMessage(String s) {
             switch (s) {
-                case "unknownInput":
-                    System.out.println("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
-                    break;
-                case "invalidDelete":
-                    System.out.println("☹ OOPS!!! Please indicate a valid task to delete uwu");
-                    break;
-                case "invalidEvent":
-                    System.out.println("☹ OOPS!!! Please define your event properly uwu.");
-                    break;
-                case "dateTimeError":
-                    System.out.println("☹ OOPS!!! Please define your todo date/time in the " +
-                            "YYYY-MM-DD HH:MM format uwu.");
-                    break;
-                case "invalidDeadline":
-                    System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
-                    break;
-                case "invalidTodo":
-                    System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
-                    break;
-                case "invalidDone":
-                    System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
-                    break;
+            case "unknownInput":
+                System.out.println("☹ OOPS!!! Sumimasen, but I don't know what that means T^T");
+                break;
+            case "invalidDelete":
+                System.out.println("☹ OOPS!!! Please indicate a valid task to delete uwu");
+                break;
+            case "invalidEvent":
+                System.out.println("☹ OOPS!!! Please define your event properly uwu.");
+                break;
+            case "dateTimeError":
+                System.out.println("☹ OOPS!!! Please define your todo date/time in the " +
+                        "YYYY-MM-DD HH:MM format uwu.");
+                break;
+            case "invalidDeadline":
+                System.out.println("☹ OOPS!!! Please define your deadline properly uwu.");
+                break;
+            case "invalidTodo":
+                System.out.println("☹ OOPS!!! Please define your todo properly uwu.");
+                break;
+            case "invalidDone":
+                System.out.println("☹ OOPS!!! Please indicate a valid task to complete uwu");
+                break;
             }
         }
 
