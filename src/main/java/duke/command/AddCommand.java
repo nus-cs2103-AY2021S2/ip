@@ -7,18 +7,18 @@ import duke.Storage;
 import duke.DukeException;
 
 public class AddCommand extends Command {
-  private Task task;
+        private Task task;
 
-  public AddCommand(Task task) {
-    super(false);
-    this.task = task;
-  }
+        public AddCommand(Task task) {
+                super(false);
+                this.task = task;
+        }
 
-  public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-    taskList.add(task);
-    ui.printIndented("Got it. I've added this task:");
-    ui.printIndented(String.format("  %s", task));
-    ui.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
-    storage.write(taskList.toDataString());
-  }
+        public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+                taskList.add(task);
+                ui.printIndented("Got it. I've added this task:");
+                ui.printIndented(String.format("    %s", task));
+                ui.printIndented(String.format("Now you have %d tasks in the list.", taskList.size()));
+                storage.write(taskList.toDataString());
+        }
 }
