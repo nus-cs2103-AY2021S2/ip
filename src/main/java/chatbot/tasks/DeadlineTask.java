@@ -13,6 +13,10 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     public String writeToFileFormat() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
         return String.format("%s|%s|%s|%s",

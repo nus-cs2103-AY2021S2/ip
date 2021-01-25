@@ -15,6 +15,10 @@ public class EventTask extends Task{
         this.endTime = endTime;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     public String writeToFileFormat() {
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
         return String.format("%s|%s|%s|%s|%s",

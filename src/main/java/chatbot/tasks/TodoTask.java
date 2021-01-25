@@ -8,6 +8,10 @@ public class TodoTask extends Task {
         this.type = "[T]";
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     public String writeToFileFormat() {
         return String.format("%s|%s|%s",
                 "T",
