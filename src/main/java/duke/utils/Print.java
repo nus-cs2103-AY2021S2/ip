@@ -1,4 +1,4 @@
-package Utils;
+package duke.utils;
 
 public class Print {
     private static final String LINE_BREAK = "------------------------------------------------------------";

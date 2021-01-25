@@ -1,14 +1,14 @@
-package Task;
+package duke.task;
 
-import Exceptions.InvalidDateException;
-import Exceptions.InvalidInputException;
-import Utils.Command;
-import Utils.DateTime;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidInputException;
+import duke.utils.Command;
+import duke.utils.DateTime;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import static Utils.Print.printWithIndentation;
+import static duke.utils.Print.printWithIndentation;
 
 public class TaskList {
     private ArrayList<Task> taskList;

@@ -1,6 +1,4 @@
-package Task;
-
-import Utils.Command;
+package duke.task;
 
 public abstract class Task {
     protected String description;

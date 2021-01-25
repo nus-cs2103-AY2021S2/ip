@@ -1,15 +1,15 @@
-import Exceptions.DukeException;
-import Exceptions.IncompleteInputException;
-import Exceptions.UnknownCommandException;
-import Storage.Storage;
-import Task.*;
-import Utils.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.IncompleteInputException;
+import duke.exceptions.UnknownCommandException;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.utils.Command;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Utils.Print.printWithIndentation;
+import static duke.utils.Print.printWithIndentation;
 
 public class Duke {
     private static final String BOT_NAME = "Chip the Squirrel";

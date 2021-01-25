@@ -1,6 +1,6 @@
-package Exceptions;
+package duke.exceptions;
 
-import Utils.Command;
+import duke.utils.Command;
 
 public class IncompleteInputException extends DukeException {
     String message;
