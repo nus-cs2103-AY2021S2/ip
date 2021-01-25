@@ -1,11 +1,12 @@
 package main.java;
 
-import java.util.Scanner;
-
+import main.java.command.Command;
 import main.java.subfiles.Storage;
 import main.java.subfiles.TaskList;
 import main.java.subfiles.Ui;
 import main.java.subfiles.Parser;
+
+import java.util.Scanner;
 
 /**
  * The Duke program is an interactive application which
@@ -20,30 +21,27 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
-    private Parser parser;
 
     public Duke(String path, String filename) {
         taskList = new TaskList();
         storage = new Storage(path, filename);
-        ui = new Ui(taskList);
-        parser = new Parser(ui);
+        ui = new Ui();
     }
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        boolean hasInput = true;
+        boolean isExit = false;
 
         ui.greet();
         storage.loadData(taskList);
-        while (hasInput) {
-            String s = sc.nextLine();
-            hasInput = parser.parse(s);
-            System.out.println();
+        while (!isExit) {
+            String s = ui.readCommand();
+            Command c = Parser.parse(s);
+            c.execute(taskList, ui);
+            isExit = c.isExit();
+            ui.showLine();
         }
         storage.saveData(taskList);
         ui.bye();
-
-        sc.close();
     }
 
     /**

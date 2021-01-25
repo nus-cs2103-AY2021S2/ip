@@ -1,11 +1,13 @@
 package main.java.subfiles;
 
-public class Parser {
-    private Ui ui;
+import main.java.command.AddCommand;
+import main.java.command.Command;
+import main.java.command.DeleteCommand;
+import main.java.command.DoneCommand;
+import main.java.command.ExitCommand;
+import main.java.command.PrintCommand;
 
-    public Parser(Ui ui) {
-        this.ui = ui;
-    }
+public class Parser {
 
     /**
      * Calls the task manager to perform either task addition,
@@ -17,25 +19,20 @@ public class Parser {
      * @return True if the user input is not a terminating
      *         input, and false otherwise.
      */
-    public boolean parse(String s) {
+    public static Command parse(String s) {
         String[] sArray = s.split(" ");
 
         switch (sArray[0]) {
         case "bye":
-            return false;
+            return new ExitCommand();
         case "list":
-            ui.printTasks(s);
-            break;
+            return new PrintCommand(s);
         case "done":
-            ui.inputDone(sArray[1]);
-            break;
+            return new DoneCommand(sArray[1]);
         case "delete":
-            ui.inputDelete(sArray[1]);
-            break;
+            return new DeleteCommand(sArray[1]);
         default:
-            ui.inputAdd(s);
-            break;
+            return new AddCommand(s);
         }
-        return true;
     }
 }
