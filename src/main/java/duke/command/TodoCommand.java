@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.data.Data;
+import duke.Ui;
+import duke.task.Todo;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
-
-import static duke.data.Data.updateDataFile;
+import duke.DukeException;
+import duke.storage.Storage;
 
 public class TodoCommand extends Command {
 
@@ -17,7 +16,8 @@ public class TodoCommand extends Command {
     @Override
     public void process() throws DukeException {
         Task task = Todo.createTodo(command);
-        TaskList.addTask(task, Data.getTasks());
-        updateDataFile();
+        TaskList.addTask(task, Storage.getTasks());
+        Ui.displayAddedTask(task, Storage.getTasks());
+        Storage.updateDataFile();
     }
 }

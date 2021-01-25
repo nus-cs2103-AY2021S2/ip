@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.data.Data;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import static duke.data.Data.updateDataFile;
+import duke.DukeException;
+import duke.storage.Storage;
 
 public class DoneCommand extends Command {
 
@@ -16,9 +15,10 @@ public class DoneCommand extends Command {
     @Override
     public void process() throws DukeException {
         try {
-            Task task = Data.getTasks().get(Integer.parseInt(command[1]) - 1);
+            Task task = Storage.getTasks().get(Integer.parseInt(command[1]) - 1);
             TaskList.markDone(task);
-            updateDataFile();
+            Ui.displayDone(task);
+            Storage.updateDataFile();
         } catch (Exception e) {
             throw new DukeException("That doesn't seem like a valid order number...");
         }

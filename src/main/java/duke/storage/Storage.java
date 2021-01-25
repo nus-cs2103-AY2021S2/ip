@@ -1,4 +1,4 @@
-package duke.data;
+package duke.storage;
 
 import duke.*;
 import duke.command.CommandType;
@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Data {
+public class Storage {
     public static final String splitter = " /&/ ";
     private static ArrayList<Task> tasks;
-    private static final String PATHNAME = "./src/main/java/duke/data/data.txt";
+    private static final String PATHNAME = "./src/main/java/duke/storage/data.txt";
 
     public static ArrayList<Task> getTasks() {
         return tasks;

@@ -5,7 +5,6 @@ import duke.command.*;
 import java.util.Scanner;
 
 import static duke.Ui.displayError;
-import static duke.data.Data.updateDataFile;
 
 public class Parser {
 
@@ -47,7 +46,8 @@ public class Parser {
                 case DELETE:
                     command = new DeleteCommand(args);
                     break;
-                case INVALID: default:
+                case INVALID:
+                default:
                     command = new InvalidCommand();
                 }
                 command.process();

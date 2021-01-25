@@ -1,7 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.data.Data;
+import duke.storage.Storage;
 
 public class Todo extends Task {
     public Todo(String description) {
@@ -14,8 +14,9 @@ public class Todo extends Task {
         }
         return new Todo(command[1]);
     }
+
     public String getFormattedString() {
-        return "TODO" + Data.splitter + (isDone? "1" : "0") + Data.splitter+ description + "\n";
+        return "TODO" + Storage.splitter + (isDone ? "1" : "0") + Storage.splitter + description + "\n";
     }
 
     @Override

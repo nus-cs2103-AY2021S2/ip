@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.data.Data;
+import duke.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
-
-import static duke.data.Data.updateDataFile;
+import duke.DukeException;
+import duke.storage.Storage;
 
 public class DeleteCommand extends Command {
 
@@ -16,8 +16,9 @@ public class DeleteCommand extends Command {
     public void process() throws DukeException {
         try {
             int id = Integer.parseInt(command[1]) - 1;
-            TaskList.deleteTask(id, Data.getTasks());
-            updateDataFile();
+            Task task = TaskList.deleteTask(id, Storage.getTasks());
+            Ui.displayRemovedTask(task, Storage.getTasks());
+            Storage.updateDataFile();
         } catch (Exception e) {
             throw new DukeException("That doesn't seem like a valid order number...");
         }

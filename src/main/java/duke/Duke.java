@@ -1,6 +1,6 @@
 package duke;
 
-import duke.data.Data;
+import duke.storage.Storage;
 
 import static duke.Ui.*;
 
@@ -8,7 +8,7 @@ public class Duke {
     public static void main(String[] args) {
         try {
             displayWelcome();
-            Data.initialiseList();
+            Storage.initialiseList();
             Parser.parseAndProcessInput();
             displayFarewell();
         } catch (Exception e) {

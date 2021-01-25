@@ -6,14 +6,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static duke.Ui.*;
-
 public class TaskList {
 
     public static void addTask(Task task, ArrayList<Task> tasks) throws DukeException {
         try {
             tasks.add(task);
-            displayAddedTask(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
@@ -22,16 +19,14 @@ public class TaskList {
     public static void markDone(Task task) throws DukeException {
         try {
             task.markDone();
-            displayDone(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }
 
-    public static void deleteTask(int taskId, ArrayList<Task> tasks) throws DukeException {
+    public static Task deleteTask(int taskId, ArrayList<Task> tasks) throws DukeException {
         try {
-            Task task = tasks.remove(taskId);
-            displayRemovedTask(task);
+            return tasks.remove(taskId);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }

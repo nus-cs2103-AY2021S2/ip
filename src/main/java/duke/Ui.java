@@ -1,6 +1,5 @@
 package duke;
 
-import duke.data.Data;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class Ui {
     protected static void displayWelcome() {
         display(
                 "█▄ ▄█ ▄▀▀ █▀▄ ▄▀▄ █▄ █ ▄▀▄ █   █▀▄ ▄▀▀\n"
-                        +"█ ▀ █ ▀▄▄ █▄▀ ▀▄▀ █ ▀█ █▀█ █▄▄ █▄▀ ▄██\n\n"
+                        + "█ ▀ █ ▀▄▄ █▄▀ ▀▄▀ █ ▀█ █▀█ █▄▄ █▄▀ ▄██\n\n"
                         + "Welcome!\n"
                         + "I'm Ronald, the best McSpicy ever.\n"
                         + "What can I do for you today?");
@@ -41,8 +40,7 @@ public class Ui {
                 + "Thanks for coming!\nWe hope to see you again!");
     }
 
-    public static void displayAllTasks() {
-        ArrayList<Task> tasks = Data.getTasks();
+    public static void displayAllTasks(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
             sb.append("You don't have anything on your menu at the moment!\n\n" +
@@ -66,18 +64,18 @@ public class Ui {
         display(sb.toString());
     }
 
-    public static void displayAddedTask(Task task) {
+    public static void displayAddedTask(Task task, ArrayList<Task> tasks) {
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
                 + "\nYou now have "
-                + Data.getTasks().size()
+                + tasks.size()
                 + " order(s)!");
     }
 
-    public static void displayRemovedTask(Task task) {
+    public static void displayRemovedTask(Task task, ArrayList<Task> tasks) {
         display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
-                "\nYou have " + Data.getTasks().size() + " order(s) left!");
+                "\nYou have " + tasks.size() + " order(s) left!");
     }
 
     public static void displayDone(Task task) {
