@@ -22,20 +22,20 @@ Hello from
     ------------------------------------------------------
     ------------------------------------------------------
     Got it. I've added this task:
-    [D][✘]return book (by: June 6th)
+    [D][✘]return book (by: WEDNESDAY,2月 10 2021)
     Now you have 3 tasks in the list.
     ------------------------------------------------------
     ------------------------------------------------------
     Got it. I've added this task:
-    [E][✘]project meeting (at: Aug 6th 2-4pm)
+    [E][✘]project meeting (at: WEDNESDAY,5月 12 2021)
     Now you have 4 tasks in the list.
     ------------------------------------------------------
     ------------------------------------------------------
     Here are the tasks in your list:
     1.[T][✘]borrow book
     2.[T][✘]read book
-    3.[D][✘]return book (by: June 6th)
-    4.[E][✘]project meeting (at: Aug 6th 2-4pm)
+    3.[D][✘]return book (by: WEDNESDAY,2月 10 2021)
+    4.[E][✘]project meeting (at: WEDNESDAY,5月 12 2021)
     ------------------------------------------------------
     ------------------------------------------------------
     Nice! I've marked this task as done:
@@ -43,14 +43,14 @@ Hello from
     ------------------------------------------------------
     ------------------------------------------------------
     Nice! I've marked this task as done:
-    4.[E][✓]project meeting (at: Aug 6th 2-4pm)
+    4.[E][✓]project meeting (at: WEDNESDAY,5月 12 2021)
     ------------------------------------------------------
     ------------------------------------------------------
     Here are the tasks in your list:
     1.[T][✘]borrow book
     2.[T][✓]read book
-    3.[D][✘]return book (by: June 6th)
-    4.[E][✓]project meeting (at: Aug 6th 2-4pm)
+    3.[D][✘]return book (by: WEDNESDAY,2月 10 2021)
+    4.[E][✓]project meeting (at: WEDNESDAY,May 12 2021)
     ------------------------------------------------------
     ------------------------------------------------------
     OOPS!!! The description of a task cannot be empty. :-(
@@ -62,12 +62,18 @@ Hello from
     OOPS!!! the Task you choosing isn't existed :-(
     ------------------------------------------------------
     ------------------------------------------------------
-    OOPS!!! The deadline of a deadline task cannot be empty. :-(
-    Please enter according to the format eg.description /by deadline
+    OOPS!!! The deadline of a deadline task should be meaningful. :-(
+    Please enter according to the format eg.description /by YYYY-MM-DD
     ------------------------------------------------------
     ------------------------------------------------------
-    OOPS!!! The period of a event task cannot be empty. :-(
-    Please enter according to the format eg.description /at period
+    OOPS!!! The period of a event task should be meaningful. :-(
+    Please enter according to the format eg.description /at YYYY-MM-DD
+    ------------------------------------------------------
+    ------------------------------------------------------
+this task hasn't determine the time
+    ------------------------------------------------------
+    ------------------------------------------------------
+There are 107day(s) before the event starting
     ------------------------------------------------------
     ------------------------------------------------------
     Bye. (>_<) Hope to see you again soon!

@@ -1,12 +1,26 @@
-public class Deadline extends Task{
-    protected String by;
-    public Deadline(String description,String by) {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class Deadline extends Task {
+    protected LocalDate by;
+
+    public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
+        ;
     }
 
     @Override
     public String getTaskInfo() {
-        return "[D]" + super.getTaskInfo() + " (by: " + by + ")";
+        return "[D]" + super.getTaskInfo() + " (by: "
+                + by.getDayOfWeek() + "," + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override
+    public String getPeriodDays() {
+        LocalDate now = LocalDate.parse(LocalDate.now().toString());
+        return "There are " + String.valueOf(now.until(by, ChronoUnit.DAYS)) + "day(s) before the deadline";
+    }
+
 }

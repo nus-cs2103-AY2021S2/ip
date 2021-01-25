@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Duke {
     private static String INDENTATION = "    ";
@@ -27,14 +29,17 @@ public class Duke {
             break;
         case "error_done_empty":
         case "error_delete_empty":
+        case "error_date_empty":
             System.out.println(INDENTATION + "OOPS!!! The number cannot be empty :-(");
             break;
         case "error_done_no_meaning":
         case "error_delete_no_meaning":
+        case "error_date_no_meaning":
             System.out.println(INDENTATION + "OOPS!!! Please input the number of the Task :-(");
             break;
         case "error_done_non_existed_task":
         case "error_delete_non_existed_task":
+        case "error_date_non_existed_task":
             System.out.println(INDENTATION + "OOPS!!! the Task you choosing isn't existed :-(");
             break;
         case "error_todo_empty":
@@ -43,12 +48,12 @@ public class Duke {
             System.out.println(INDENTATION + "OOPS!!! The description of a task cannot be empty. :-(");
             break;
         case "error_deadline_by":
-            System.out.println(INDENTATION + "OOPS!!! The deadline of a deadline task cannot be empty. :-(");
-            System.out.println(INDENTATION + "Please enter according to the format eg.description /by deadline");
+            System.out.println(INDENTATION + "OOPS!!! The deadline of a deadline task should be meaningful. :-(");
+            System.out.println(INDENTATION + "Please enter according to the format eg.description /by YYYY-MM-DD");
             break;
         case "error_event_at":
-            System.out.println(INDENTATION + "OOPS!!! The period of a event task cannot be empty. :-(");
-            System.out.println(INDENTATION + "Please enter according to the format eg.description /at period");
+            System.out.println(INDENTATION + "OOPS!!! The period of a event task should be meaningful. :-(");
+            System.out.println(INDENTATION + "Please enter according to the format eg.description /at YYYY-MM-DD");
             break;
         default:
             System.out.println(INDENTATION + "Got it. I've added this task:");
@@ -120,6 +125,24 @@ public class Duke {
                     printReply("error_delete_non_existed_task");
                 }
                 break;
+            case "date":
+                try {
+                    taskList.get(Integer.parseInt(commandSplit[1]) - 1);
+                    System.out.println(INDENTATION + HORIZON);
+                    System.out.println(taskList.get(Integer.parseInt(commandSplit[1]) - 1).getPeriodDays());
+                    System.out.println(INDENTATION + HORIZON);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    printReply("error_date_empty");
+                } catch (NumberFormatException e) {
+                    printReply("error_date_no_meaning");
+                } catch (NullPointerException e) {
+                    printReply("error_date_non_existed_task");
+                } catch (IndexOutOfBoundsException e) {
+                    printReply("error_date_non_existed_task");
+                }
+                break;
+
+
             case "todo":
                 try {
                     String test = commandSplit[1];
@@ -144,9 +167,13 @@ public class Duke {
                 try {
                     taskList.add(new Deadline(commandSplit[0].trim(), commandSplit[1].trim()));
                     printReply(command);
+                    //System.out.println(taskList.get(taskList.size() - 1));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     printReply("error_deadline_by");
+                } catch (DateTimeParseException e) {
+                    printReply("error_deadline_by");
                 }
+
                 break;
             case "event":
                 try {
@@ -161,6 +188,8 @@ public class Duke {
                     taskList.add(new Event(commandSplit[0].trim(), commandSplit[1].trim()));
                     printReply(command);
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    printReply("error_event_at");
+                } catch (DateTimeParseException e) {
                     printReply("error_event_at");
                 }
 
