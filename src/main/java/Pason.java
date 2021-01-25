@@ -1,5 +1,6 @@
-import javax.swing.*;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.regex.Pattern;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class Pason {
     private static List<Task> tasks = new ArrayList<>();
@@ -130,8 +133,10 @@ public class Pason {
         try {
             String[] splitInput;
             splitInput = input.substring(8).trim().split(" /by ");
-            if (splitInput.length == 2) {
-                Deadline newDeadline = new Deadline(splitInput[0], splitInput[1]);
+            if(splitInput.length == 2) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                LocalDateTime deadlineBy = LocalDateTime.parse(splitInput[1], formatter);
+                Deadline newDeadline = new Deadline(splitInput[0], deadlineBy);
                 saveTask(newDeadline);
                 printMessage("Done! I've added a new deadline:\n\t" + newDeadline + "\nNow there are " + tasks.size() + " tasks in your list.");
             } else if (splitInput.length == 1) {
@@ -141,7 +146,11 @@ public class Pason {
             } else {
                 throw new PasonException("You've entered an invalid format. Please use: deadline <description> /by <when>");
             }
+        } catch(DateTimeParseException e) {
+            printMessage("Oops! You've entered an invalid date and time format.\nPlease use: dd/mm/yyyy hh:mm");
         } catch(PasonException e) {
+            printMessage("Oops! " + e.getMessage());
+        } catch(Exception e) {
             printMessage("Oops! " + e.getMessage());
         }
     }
@@ -151,18 +160,25 @@ public class Pason {
             String[] splitInput;
             splitInput = input.substring(5).trim().split(" /at ");
             if (splitInput.length == 2) {
-                Event newEvent = new Event(splitInput[0], splitInput[1]);
+                String[] dateAndTime = splitInput[1].split(" ");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate eventDate = LocalDate.parse(dateAndTime[0], formatter);
+                Event newEvent = new Event(splitInput[0], eventDate, (dateAndTime.length == 1 ? null : dateAndTime[1]));
                 saveTask(newEvent);
                 printMessage("Done! I've added a new event:\n\t" + newEvent + "\nNow there are " + tasks.size() + " tasks in your list.");
             } else if (splitInput.length == 1) {
                 System.out.println(splitInput[0]);
-                throw new PasonException("Please enter a by date for '" + splitInput[0] + "'");
+                throw new PasonException("Please enter an at date for '" + splitInput[0] + "'");
             } else if (splitInput.length == 0) {
                 throw new PasonException("Please enter a description followed by the date in the format: event <description> /at <when>");
             } else {
                 throw new PasonException("You've entered an invalid format. Please use: event <description> /at <when>");
             }
+        } catch(DateTimeParseException e) {
+            printMessage("Oops! You've entered an invalid date format.\nPlease use: dd/mm/yyyy");
         } catch(PasonException e) {
+            printMessage("Oops! " + e.getMessage());
+        } catch(Exception e) {
             printMessage("Oops! " + e.getMessage());
         }
     }
@@ -230,13 +246,14 @@ public class Pason {
             }
             return newToDo;
         } else if(splitString[0].equals("E") && splitString.length == 4) {
-            Event newEvent = new Event(splitString[2], splitString[3]);
+            String[] eventDateAndExtra = splitString[3].split(" ");
+            Event newEvent = new Event(splitString[2], LocalDate.parse(eventDateAndExtra[0]), (eventDateAndExtra.length == 1 ? null : eventDateAndExtra[1]));
             if(splitString[1].equals("1")) {
                 newEvent.markAsDone();
             }
             return newEvent;
         } else if(splitString[0].equals("D") && splitString.length == 4) {
-            Deadline newDeadline = new Deadline(splitString[2], splitString[3]);
+            Deadline newDeadline = new Deadline(splitString[2], LocalDateTime.parse(splitString[3]));
             if(splitString[1].equals("1")) {
                 newDeadline.markAsDone();
             }

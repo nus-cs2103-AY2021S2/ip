@@ -1,9 +1,9 @@
 list
 todo Do CS2103T quiz
 list
-deadline Complete week 2 iP /by Sunday
+deadline Complete week 3 iP /by 27/01/2021 1300
 list
-event Birthday party /at Mon 2-4pm
+event Birthday party /at 06/02/2021 3-6pm
 list
 done 1
 list

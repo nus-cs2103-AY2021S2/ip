@@ -16,24 +16,24 @@ Here are the tasks in your list:
 ____________________________________________________________
 ____________________________________________________________
 Done! I've added a new deadline:
-	[D][✘] Complete week 2 iP (by: Sunday)
+	[D][✘] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
 Now there are 2 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][✘] Do CS2103T quiz
-2. [D][✘] Complete week 2 iP (by: Sunday)
+2. [D][✘] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
 ____________________________________________________________
 ____________________________________________________________
 Done! I've added a new event:
-	[E][✘] Birthday party (at: Mon 2-4pm)
+	[E][✘] Birthday party (at: 6 Feb 2021 3-6pm)
 Now there are 3 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][✘] Do CS2103T quiz
-2. [D][✘] Complete week 2 iP (by: Sunday)
-3. [E][✘] Birthday party (at: Mon 2-4pm)
+2. [D][✘] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
+3. [E][✘] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Good job! I've marked this task as done:
@@ -42,28 +42,28 @@ ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] Do CS2103T quiz
-2. [D][✘] Complete week 2 iP (by: Sunday)
-3. [E][✘] Birthday party (at: Mon 2-4pm)
+2. [D][✘] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
+3. [E][✘] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Good job! I've marked this task as done:
-[D][✓] Complete week 2 iP (by: Sunday)
+[D][✓] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] Do CS2103T quiz
-2. [D][✓] Complete week 2 iP (by: Sunday)
-3. [E][✘] Birthday party (at: Mon 2-4pm)
+2. [D][✓] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
+3. [E][✘] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Good job! I've marked this task as done:
-[E][✓] Birthday party (at: Mon 2-4pm)
+[E][✓] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
 1. [T][✓] Do CS2103T quiz
-2. [D][✓] Complete week 2 iP (by: Sunday)
-3. [E][✓] Birthday party (at: Mon 2-4pm)
+2. [D][✓] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
+3. [E][✓] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Oops! I can't help you with this command yet. Sorry!
@@ -84,8 +84,8 @@ Now there are 2 tasks in your list.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list:
-1. [D][✓] Complete week 2 iP (by: Sunday)
-2. [E][✓] Birthday party (at: Mon 2-4pm)
+1. [D][✓] Complete week 3 iP (by: 27 Jan 2021 1:00pm)
+2. [E][✓] Birthday party (at: 6 Feb 2021 3-6pm)
 ____________________________________________________________
 ____________________________________________________________
 Bye! I shall go rest now. PAge me when you need me!
