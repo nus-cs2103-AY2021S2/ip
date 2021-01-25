@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +20,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         System.out.println(logo);
         System.out.println("Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?");
+        System.out.println("If you try to enter date and time, please enter it like this: \"yyyy-MM-dd HH:mm\"");
         System.out.println("    ____________________________________________________________\n");
         Duke myDuke = new Duke();
         Scanner input = new Scanner(System.in);
@@ -117,6 +121,26 @@ public class Duke {
                 } else {
                     addToList(myDuke, command.substring(6));
                 }
+            } else if (command.startsWith("myTaskToday")) {
+                if (command.length() != 11) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    printTaskToday(myDuke);
+                }
+            } else if (command.startsWith("myTaskOn ")) {
+                if (command.length() == 9) {
+                    try {
+                        executeFalseCommand(command);
+                    } catch (DukeException err) {
+                        printErrMsg(err);
+                    }
+                } else {
+                    printTaskThisDay(myDuke, LocalDateTime.parse(command.substring(9) + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                }
             } else {
                 try {
                     executeFalseCommand(command);
@@ -153,11 +177,13 @@ public class Duke {
         Task task;
         if (taskdescription.contains("/at")) {
             String taskName = taskdescription.substring(0, taskdescription.indexOf("/at"));
-            String dlTime = taskdescription.substring(taskdescription.indexOf("/at") + 4);
-            task = new Event(taskName, dlTime);
+            String dateTime = taskdescription.substring(taskdescription.indexOf("/at") + 4);
+            LocalDateTime eventTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            task = new Event(taskName, eventTime);
         } else if (taskdescription.contains("/by")) {
             String taskName = taskdescription.substring(0, taskdescription.indexOf("/by"));
-            String dlTime = taskdescription.substring(taskdescription.indexOf("/by") + 4);
+            String dateTime = taskdescription.substring(taskdescription.indexOf("/by") + 4);
+            LocalDateTime dlTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
             task = new Deadline(taskName, dlTime);
         } else {
             task = new ToDo(taskdescription);
@@ -193,9 +219,9 @@ public class Duke {
         } else if (command.startsWith("bye")) {
             throw new DukeException("     bye command should not have body, Sir!");
         } else if (command.startsWith("done ")) {
-            throw new DukeException("     No body or wrong body format or unvalid number for done command, Sir!");
+            throw new DukeException("     No body or wrong body format or invalid number for done command, Sir!");
         } else if (command.startsWith("delete ")) {
-            throw new DukeException("     No body or wrong body format or unvalid number for delete command, Sir!");
+            throw new DukeException("     No body or wrong body format or invalid number for delete command, Sir!");
         } else if (command.startsWith("todo ")) {
             throw new DukeException("     No body detected for todo command, Sir!");
         } else if (command.startsWith("deadline ")) {
@@ -208,7 +234,8 @@ public class Duke {
     }
 
     public static void printErrMsg(DukeException err) {
-        System.out.println("    ____________________________________________________________\n" + err.getMessage() + "\n" + "    ____________________________________________________________\n");
+        System.out.println("    ____________________________________________________________\n" + err.getMessage() +
+                "\n" + "    ____________________________________________________________\n");
     }
 
     public static boolean isNumeric(String strNum) {
@@ -221,6 +248,38 @@ public class Duke {
             return false;
         }
         return true;
+    }
+
+    public static void printTaskToday(Duke duke) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the tasks today:");
+        int index = 1;
+        for (Task task : duke.listToDo) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, LocalDateTime.now()))
+                    || (task instanceof Event && sameDay(((Event) task).eTime, LocalDateTime.now()))) {
+                System.out.format("     %d. " + task.printTask() + "\n", index);
+                index++;
+            }
+        }
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    public static void printTaskThisDay(Duke duke, LocalDateTime dateTime) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the tasks on " + dateTime.toString().substring(0,10) + ":");
+        int index = 1;
+        for (Task task : duke.listToDo) {
+            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))
+                    || (task instanceof Event && sameDay(((Event) task).eTime, dateTime))) {
+                System.out.format("     %d. " + task.printTask() + "\n", index);
+                index++;
+            }
+        }
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    public static boolean sameDay(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        return ((dateTime1.getDayOfYear() == dateTime2.getDayOfYear()) && (dateTime1.getYear() == dateTime2.getYear()));
     }
 }
 
