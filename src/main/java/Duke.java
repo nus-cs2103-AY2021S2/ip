@@ -1,260 +1,79 @@
-import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Duke {
-    private ArrayList<Task> listToDo;
-    private File taskFile;
+    private final Ui ui;
+    private final TaskList tasklist;
+    private final Storage storage;
 
-    private Duke() {
-        try {
-            this.listToDo = new ArrayList<>();
-            Path filePath = Paths.get("data/DanhDuke.txt");
-            if (Files.exists(filePath)) {
-                this.taskFile = filePath.toFile();
-            } else if (Files.exists(Paths.get("data"))) {
-                Files.createFile(Paths.get("data/DanhDuke.txt"));
-                this.taskFile = filePath.toFile();
-            } else {
-                Files.createDirectories(Paths.get("data"));
-                Files.createFile(Paths.get("data/DanhDuke.txt"));
-                this.taskFile = filePath.toFile();
-            }
-        } catch (IOException ie) {
-            System.out.println("Something went wrong" + ie.getMessage());
-        }
+    private Duke(String txtPathname, String dirPathname) {
+        this.ui = new Ui();
+        this.storage = new Storage(txtPathname, dirPathname);
+        this.tasklist = new TaskList();
     }
 
-    public static void main(String[] args) throws IOException{
-        echoHi();
-        Duke myDuke = new Duke();
-        writeBack(myDuke);
-        Scanner input = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        Duke myDuke = new Duke("data/DanhDuke.txt", "data");
+        myDuke.ui.echoHi();
+        myDuke.storage.writeBack(myDuke.tasklist.listUsed);
         boolean signalToExit = false;
-        while (!signalToExit && input.hasNextLine()) {
-            String command = input.nextLine();
-            if (command.startsWith("list")) {
-                if (command.length() != 4) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    printList(myDuke);
-                }
-            } else if (command.startsWith("bye")) {
-                if (command.length() != 3) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
+        while (!signalToExit && myDuke.ui.stillHaveCommand()) {
+            String commandLine = myDuke.ui.readCommand();
+            Command command = Parser.parse(commandLine, myDuke.tasklist.listUsed);
+            switch (command.commandTitle) {
+                case "list":
+                    myDuke.ui.echoPrintList(myDuke.tasklist.listUsed);
+                    break;
+                case "bye":
+                    myDuke.ui.echoBye();
                     signalToExit = true;
-                }
-            } else if (command.startsWith("done ")) {
-                if (command.length() == 5 || !isNumeric(command.substring(5))) {
+                    break;
+                case "done":
+                    markTaskDone(myDuke, Integer.parseInt(command.commandContent));
+                    break;
+                case "delete":
+                    deleteTask(myDuke, Integer.parseInt(command.commandContent));
+                    break;
+                case "todo":
+                case "deadline":
+                case "event":
+                    addToList(myDuke, command.commandContent);
+                    break;
+                case "myTaskToday":
+                    myDuke.ui.echoTaskToday(myDuke.tasklist.listUsed);
+                    break;
+                case "myTaskOn":
+                    myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
+                            LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                    break;
+                default:
                     try {
-                        executeFalseCommand(command);
+                        executeFalseCommand(command.commandContent);
                     } catch (DukeException err) {
-                        printErrMsg(err);
+                        myDuke.ui.echoErrMsg(err);
                     }
-                } else if (Integer.parseInt(command.substring(5)) > myDuke.listToDo.size()) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    markTaskDone(myDuke, Integer.parseInt(command.substring(5)));
-                }
-            } else if (command.startsWith("delete ")) {
-                if (command.length() == 7 || !isNumeric(command.substring(7))) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else if (Integer.parseInt(command.substring(7)) > myDuke.listToDo.size()) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    deleteTask(myDuke, Integer.parseInt(command.substring(7)));
-                }
-            } else if (command.startsWith("todo ")) {
-                if (command.length() == 5) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    addToList(myDuke, command.substring(5));
-                }
-            } else if (command.startsWith("deadline ")) {
-                if (command.length() == 9 || !command.contains("/by ")) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else if (command.indexOf("/by ") + 4 == command.length()) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    addToList(myDuke, command.substring(9));
-                }
-            } else if (command.startsWith("event ")) {
-                if (command.length() == 6 || !command.contains("/at ")) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else if (command.indexOf("/at ") + 4 == command.length()) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    addToList(myDuke, command.substring(6));
-                }
-            } else if (command.startsWith("myTaskToday")) {
-                if (command.length() != 11) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    printTaskToday(myDuke);
-                }
-            } else if (command.startsWith("myTaskOn ")) {
-                if (command.length() == 9) {
-                    try {
-                        executeFalseCommand(command);
-                    } catch (DukeException err) {
-                        printErrMsg(err);
-                    }
-                } else {
-                    printTaskThisDay(myDuke, LocalDateTime.parse(command.substring(9) + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-                }
-            } else {
-                try {
-                    executeFalseCommand(command);
-                } catch (DukeException err) {
-                    printErrMsg(err);
-                }
-            }
-            if (command.equals("bye")) {
-                echoBye();
             }
         }
     }
 
-    public static void echoBye() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ____________________________________________________________\n");
+    public static void addToList(Duke duke, String taskDescription) {
+        Task task = duke.tasklist.addTask(taskDescription);
+        duke.storage.updateFile(duke.tasklist.listUsed);
+        duke.ui.echoAddToList(task, duke.tasklist.listUsed.size());
     }
 
-    public static void echoHi() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("    ____________________________________________________________");
-        System.out.println(logo);
-        System.out.println("Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?");
-        System.out.println("    ____________________________________________________________\n");
+    public static void markTaskDone(Duke duke, int index) {
+        Task task = duke.tasklist.doneTask(index);
+        duke.storage.updateFile(duke.tasklist.listUsed);
+        duke.ui.echoMarkTaskDone(task);
     }
 
-    public static void printList(Duke duke) {
-        int index = 1;
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks in your list:");
-        for (Task task : duke.listToDo) {
-            System.out.format("     %d. " + task.printTask() + "\n", index);
-            index++;
-        }
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    public static void addToList(Duke duke, String taskdescription) throws IOException {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        Task task;
-        if (taskdescription.contains("/at")) {
-            String taskName = taskdescription.substring(0, taskdescription.indexOf("/at"));
-            String dateTime = taskdescription.substring(taskdescription.indexOf("/at") + 4);
-            LocalDateTime eventTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            task = new Event(taskName, eventTime);
-        } else if (taskdescription.contains("/by")) {
-            String taskName = taskdescription.substring(0, taskdescription.indexOf("/by"));
-            String dateTime = taskdescription.substring(taskdescription.indexOf("/by") + 4);
-            LocalDateTime dlTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-            task = new Deadline(taskName, dlTime);
-        } else {
-            task = new ToDo(taskdescription);
-        }
-        FileWriter fw = new FileWriter(duke.taskFile, true);
-        fw.write(task.printTask() + "\n");
-        fw.close();
-        System.out.println("       " + task.printTask());
-        duke.listToDo.add(task);
-        System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size());
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    public static void markTaskDone(Duke duke, int index) throws IOException {
-        System.out.println("    ____________________________________________________________");
-        Task task = duke.listToDo.get(index - 1);
-        task.markAsDone();
-        FileWriter fw = new FileWriter(duke.taskFile);
-        String toWrite = "";
-        for (Task task1 : duke.listToDo) {
-            toWrite += task1.printTask() + "\n";
-        }
-        fw.write(toWrite);
-        fw.close();
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + task.printTask());
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    public static void deleteTask(Duke duke, int index) throws IOException {
-        System.out.println("    ____________________________________________________________");
-        Task task = duke.listToDo.get(index - 1);
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println("       " + task.printTask());
-        System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size() - 1);
-        System.out.println("    ____________________________________________________________\n");
-        duke.listToDo.remove(index - 1);
-        FileWriter fw = new FileWriter(duke.taskFile);
-        String toWrite = "";
-        for (Task task1 : duke.listToDo) {
-            toWrite += task1.printTask() + "\n";
-        }
-        fw.write(toWrite);
-        fw.close();
+    public static void deleteTask(Duke duke, int index) {
+        Task task = duke.tasklist.listUsed.get(index - 1);
+        duke.ui.echoDeleteTask(task);
+        duke.tasklist.deleteTask(index);
+        duke.storage.updateFile(duke.tasklist.listUsed);
     }
 
     public static void executeFalseCommand(String command) throws DukeException {
@@ -262,109 +81,19 @@ public class Duke {
             throw new DukeException("     list command should not have body, Sir!");
         } else if (command.startsWith("bye")) {
             throw new DukeException("     bye command should not have body, Sir!");
-        } else if (command.startsWith("done ")) {
+        } else if (command.startsWith("done")) {
             throw new DukeException("     No body or wrong body format or invalid number for done command, Sir!");
-        } else if (command.startsWith("delete ")) {
+        } else if (command.startsWith("delete")) {
             throw new DukeException("     No body or wrong body format or invalid number for delete command, Sir!");
-        } else if (command.startsWith("todo ")) {
+        } else if (command.startsWith("todo")) {
             throw new DukeException("     No body detected for todo command, Sir!");
-        } else if (command.startsWith("deadline ")) {
+        } else if (command.startsWith("deadline")) {
             throw new DukeException("     no body detected or no dlTime detected for deadline command, Sir!");
-        } else if (command.startsWith("event ")) {
+        } else if (command.startsWith("event")) {
             throw new DukeException("     no body detected or no eTime detected for Event command, Sir!");
         } else {
             throw new DukeException("     Invalid command format");
         }
-    }
-
-    public static void printErrMsg(DukeException err) {
-        System.out.println("    ____________________________________________________________\n" + err.getMessage() +
-                "\n" + "    ____________________________________________________________\n");
-    }
-
-    public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
-            return false;
-        }
-        try {
-            double randomNo = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
-    public static void printTaskToday(Duke duke) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks today:");
-        int index = 1;
-        for (Task task : duke.listToDo) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, LocalDateTime.now()))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, LocalDateTime.now()))) {
-                System.out.format("     %d. " + task.printTask() + "\n", index);
-                index++;
-            }
-        }
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    public static void printTaskThisDay(Duke duke, LocalDateTime dateTime) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks on " + dateTime.toString().substring(0,10) + ":");
-        int index = 1;
-        for (Task task : duke.listToDo) {
-            if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))
-                    || (task instanceof Event && sameDay(((Event) task).eTime, dateTime))) {
-                System.out.format("     %d. " + task.printTask() + "\n", index);
-                index++;
-            }
-        }
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    public static boolean sameDay(LocalDateTime dateTime1, LocalDateTime dateTime2) {
-        return ((dateTime1.getDayOfYear() == dateTime2.getDayOfYear()) && (dateTime1.getYear() == dateTime2.getYear()));
-    }
-
-    public static void writeBack(Duke duke) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(duke.taskFile));
-        String line = reader.readLine();
-        while (line != null) {
-            switch (line.substring(1,2)) {
-                case "T":
-                    if (line.charAt(4) == ' ') {
-                        duke.listToDo.add(new ToDo(line.substring(7)));
-                    } else {
-                        ToDo newToDo = new ToDo(line.substring(7));
-                        newToDo.markAsDone();
-                        duke.listToDo.add(newToDo);
-                    }
-                    break;
-                case "D":
-                    int dlIndex = line.indexOf("(by: ");
-                    LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    if (line.charAt(4) == ' ') {
-                        duke.listToDo.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
-                    } else {
-                        Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
-                        newDL.markAsDone();
-                        duke.listToDo.add(newDL);
-                    }
-                    break;
-                default:
-                    int etIndex = line.indexOf("(at: ");
-                    LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    if (line.charAt(4) == ' ') {
-                        duke.listToDo.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
-                    } else {
-                        Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
-                        newDL.markAsDone();
-                        duke.listToDo.add(newDL);
-                    }
-            }
-            line = reader.readLine();
-        }
-        reader.close();
     }
 }
 
