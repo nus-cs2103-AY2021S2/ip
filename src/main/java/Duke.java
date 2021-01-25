@@ -1,12 +1,18 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-  private ArrayList<Task> tasklist;
+  protected ArrayList<Task> tasklist;
 
-  public Duke() {
-    this.tasklist = new ArrayList<>();
+  public Duke(ArrayList<Task> tasklist) {
+    this.tasklist = tasklist;
+  }
+
+  public ArrayList<Task> getTasklist() {
+    return this.tasklist;
   }
 
   public void list() {
@@ -28,7 +34,12 @@ public class Duke {
     String[] inputs = input.split(" ");
     String output = "";
     for (int i = 1; i < inputs.length; i++) {
-      output += " " + inputs[i];
+
+      if (i == 1) {
+        output += inputs[i];
+      } else {
+        output += " " + inputs[i];
+      }
     }
     return output;
   }
@@ -101,7 +112,7 @@ public class Duke {
     } catch (DescriptionError e) {
       System.out.println(e.getMessage());
     }
-    if (input.length()!=4) {
+    if (input.length() != 4) {
       String inputDes = this.inputEventDescription(input);
       Todo task = new Todo(inputDes);
       System.out.println(" ___________________________________________");
@@ -120,9 +131,9 @@ public class Duke {
     } catch (DescriptionError e) {
       System.out.println(e.getMessage());
     }
-    if (input.length()!=8) {
+    if (input.length() != 8) {
       Deadline task = new Deadline(input.split(" ")[1] + " " + input.split(" ")[2],
-              input.split("/by")[1]);
+              input.split("/by ")[1]);
       System.out.println("Got it. I've added this task: ");
       this.addList(task);
       System.out.println(task);
@@ -141,7 +152,7 @@ public class Duke {
     if (input.length() != 5) {
       System.out.println(input.split("/at")[1]);
       Event task = new Event(input.split(" ")[1] + " " + input.split(" ")[2],
-              input.split("/at")[1]);
+              input.split("/at ")[1]);
       System.out.println("Got it. I've added this task: ");
       this.addList(task);
       System.out.println(task);
@@ -180,8 +191,12 @@ public class Duke {
     }
   }
 
-  public static void main(String[] args) throws DescriptionError, UnknownInputError {
-    Duke duke = new Duke();
+  public static void main(String[] args) throws DescriptionError, UnknownInputError, IOException {
+    //ArrayList<Task> list = new ArrayList<>();
+    //Duke duke = new Duke(list);
+    Store store = new Store();
+    ArrayList<Task> memTask = store.load();
+    Duke duke = new Duke(memTask);
     duke.greeting();
     Scanner scan = new Scanner(System.in);
     while (scan.hasNext()) {
@@ -192,14 +207,19 @@ public class Duke {
         duke.list();
       } else if (input.split(" ")[0].equals("done")) {
         duke.done(input);
+        store.save(duke.getTasklist());
       } else if (input.split(" ")[0].equals("todo")) {
         duke.todo(input);
+        store.save(duke.getTasklist());
       } else if (input.split(" ")[0].equals("deadline")) {
         duke.deadline(input);
+        store.save(duke.getTasklist());
       } else if (input.split(" ")[0].equals("event")) {
         duke.event(input);
+        store.save(duke.getTasklist());
       } else if (input.split(" ")[0].equals("delete")) {
         duke.deleteTask(input);
+        store.save(duke.getTasklist());
       } else {
         try {
           throw new UnknownInputError("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

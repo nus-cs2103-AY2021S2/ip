@@ -1,4 +1,4 @@
-public class Event extends Task{
+public class Event extends Task {
 
   protected String by;
 
@@ -10,6 +10,12 @@ public class Event extends Task{
 
   @Override
   public String toString() {
-    return "[E]" + super.toString() + " (at:" + by + ")";
+    return "[E]" + super.toString() + " (at: " + by + ")";
+  }
+
+  @Override
+  public String saveText() {
+    return "E" + "," + this.getStatusIcon() + "," + this.getDescription() + "," + this.by;
+
   }
 }

@@ -11,5 +11,11 @@ public class Todo extends Task {
     return "[T]" + super.toString();
   }
 
+  @Override
+  public String saveText() {
+    return "T" + "," + this.getStatusIcon() + "," + this.getDescription();
+
+  }
+
 
 }
