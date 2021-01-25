@@ -1,7 +1,7 @@
 todo buy tomato
-deadline return book /by june 6th
+deadline return book /by 2020-06-06
 todo eat fruits
-event sing a song /at 5oclock
+event sing a song /at 2020-05-09
 list
 done 3
 list
