@@ -1,6 +1,6 @@
 ------------------------------------------------
 Hi! I'm Timmy!
-What can Timmy do for you today?
+What can Timmy note down for you today?
 ------------------------------------------------
 ------------------------------------------------
 Ok! I've added this task:
@@ -76,4 +76,7 @@ Here are the tasks in your list:
 4.[T][?] borrow book
 5.[D][?] return book (by: Sunday)
 6.[E][?] project meeting (at: Mon 2-4pm)
+------------------------------------------------
+------------------------------------------------
+Bye! Hope to see you again!
 ------------------------------------------------

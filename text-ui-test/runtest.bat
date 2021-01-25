@@ -19,3 +19,5 @@ java -classpath C:\Users\Jerard\OneDrive\Desktop\CS2103T\repos\ip\bin Duke < inp
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
+
+pause
