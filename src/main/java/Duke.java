@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+
 
 /**
  * A personal task managing chatbot project.
@@ -66,7 +68,7 @@ public class Duke {
                         throw new DukeException("deadline date/time cannot be empty");
                     }
                     String description = input.split("/by", 2)[0].replace("deadline", "");
-                    String date = input.split("/by", 2)[1].strip();
+                    LocalDate date = LocalDate.parse(input.split("/by", 2)[1].strip());
                     Deadline deadline = new Deadline(description, date);
                     tasks.add(deadline);
                     Commands.printAddedTask(tasks, deadline);
@@ -83,7 +85,7 @@ public class Duke {
                         throw new DukeException("event date/time cannot be empty");
                     }
                     String description = input.split("/at", 2)[0].replace("event", "");
-                    String date = input.split("/at", 2)[1].strip();
+                    LocalDate date = LocalDate.parse(input.split("/at", 2)[1].strip());
 
                     Event event = new Event(description, date);
                     tasks.add(event);
