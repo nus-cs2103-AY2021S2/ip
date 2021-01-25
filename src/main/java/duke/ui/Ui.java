@@ -11,14 +11,30 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Handles I/O for program.
+ *
+ * Uses System.out and System.in exclusively.
+ */
 public class Ui {
 
     private BufferedReader in;
 
+    /**
+     * Creates reader for stdin
+     */
     public Ui() {
         in = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    /**
+     * Returns one line of user input from stdin.
+     *
+     * Blocking call.
+     *
+     * @return User input.
+     * @throws DukeExceptionIllegalArgument When I/O Exception occurs.
+     */
     public String getUserInput() throws DukeExceptionIllegalArgument {
         try {
             return in.readLine();
@@ -26,11 +42,26 @@ public class Ui {
             throw new DukeExceptionIllegalArgument("Failed to read input.");
         }
     }
+
+    /**
+     * Returns one line of user input from stdin, with message prompt to user.
+     *
+     * @param pre Message prompt.
+     * @return User input.
+     * @throws DukeExceptionIllegalArgument When I/O Exception occurs.
+     */
     public String getUserInput(String pre) throws DukeExceptionIllegalArgument {
         System.out.print(pre);
         return getUserInput();
     }
 
+    /**
+     * Send exception for pretty printing.
+     *
+     * Exception message can be composed of multiple lines.
+     *
+     * @param e Exception.
+     */
     public void showError(DukeException e) {
         String message = String.valueOf(e).strip();
         if (message.contains("\n")) {
@@ -44,6 +75,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints main program logo
+     */
     public void showWelcomeScreen() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -53,6 +87,14 @@ public class Ui {
         System.out.print(logo);
     }
 
+    /**
+     * Prints load screen upon successful task list load.
+     *
+     * If number of tasks is 0, message printed assumed no task list exists.
+     * Otherwise, number of tasks is also printed.
+     *
+     * @param numTasks Number of tasks in loaded list.
+     */
     public void showLoadingSuccess(int numTasks) {
         if (numTasks == 0) {
             showMessage(
@@ -69,6 +111,15 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints load screen upon failure to write to file.
+     *
+     * For read-only file access by user - task list can still be loaded.
+     * Indication to user that file cannot be written to, and serves as important
+     * signal to user that changes are not preserved.
+     *
+     * @param numTasks Number of tasks in loaded list.
+     */
     public void showFileWriteError(int numTasks) {
         showMessage(
                 "Welcome to Duke!",
@@ -79,6 +130,12 @@ public class Ui {
                 "You have " + numTasks + " task" + (numTasks == 1 ? "" : "s") + " in your list.");
     }
 
+    /**
+     * Prints load screen upon failure to load file.
+     *
+     * Occurs when directory cannot be created, or when file cannot be created
+     * or read.
+     */
     public void showFileLoadingError() {
         showMessage(
                 "Welcome to Duke!",
@@ -87,6 +144,12 @@ public class Ui {
                 "New task list created, but changes will not be saved.");
     }
 
+    /**
+     * Prints load screen upon failure to load list.
+     *
+     * Occurs when file can be read, but the contents cannot be parsed
+     * as a task list.
+     */
     public void showLoadingError() {
         showMessage(
                 "Welcome to Duke!",
@@ -95,6 +158,17 @@ public class Ui {
                 "A new task list has been created.");
     }
 
+    /**
+     * Pretty prints messages on stdout.
+     *
+     * The most general method. Prefix and postfix string arguments are
+     * provided for convenience, in particular for prefix to avoid concatenating
+     * with potentially long list of lines.
+     *
+     * @param pre Prefix message.
+     * @param lines List of messages.
+     * @param post Postfix message.
+     */
     public void showMessage(String pre, List<String> lines, String post) {
         String border = "    ____________________________________________________________";
         String indent = "     ";
@@ -115,16 +189,50 @@ public class Ui {
         System.out.println(border);
         System.out.println();
     }
+
+    /**
+     * Pretty prints messages on stdout.
+     *
+     * Convenience function.
+     *
+     * @param pre Prefix message.
+     * @param lines List of messages.
+     */
     public void showMessage(String pre, List<String> lines) {
         showMessage(pre, lines, "");
     }
+
+    /**
+     * Pretty prints messages on stdout.
+     *
+     * Convenience function.
+     *
+     * @param lines List of messages.
+     * @param post Postfix message.
+     */
     public void showMessage(List<String> lines, String post) {
         lines.add(post);
         showMessage("", lines, post);
     }
+
+    /**
+     * Pretty prints messages on stdout.
+     *
+     * Convenience function.
+     *
+     * @param lines List of messages.
+     */
     public void showMessage(List<String> lines) {
         showMessage("", lines, "");
     }
+
+    /**
+     * Pretty prints messages on stdout.
+     *
+     * Convenience function.
+     *
+     * @param lines Variable number of messages.
+     */
     public void showMessage(String ... lines) {
         showMessage("", Arrays.asList(lines), "");
     }

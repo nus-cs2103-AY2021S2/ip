@@ -11,6 +11,15 @@ public class Duke {
     private Ui ui;
     private boolean isLocalTaskList; // in event file cannot be written to
 
+    /**
+     * Initializes the main program given directory used to save user tasks.
+     *
+     * Attempts to load the task list from the file, displaying the status
+     * of the task list depending on load success.
+     *
+     * @param filePath UNIX-like directory path to file.
+     *                 Does not need to be initialized beforehand.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         ui.showWelcomeScreen();
@@ -36,6 +45,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the main REPL for the program.
+     */
     public void run() {
         boolean isProgramTerminating = false;
         while (!isProgramTerminating) {
