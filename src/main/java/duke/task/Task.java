@@ -29,5 +29,16 @@ public abstract class Task {
         isDone = true;
     }
 
+    
+    /** 
+     * Returns true if description contains kw, false otherwise
+     * 
+     * @param kw
+     * @return boolean
+     */
+    public boolean contains(String kw) {
+        return description.contains(kw);
+    }
+
     public abstract String toSavedString();
 }

@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -72,6 +73,13 @@ public class Parser {
                     } else {
                         return new AddCommand(new Event(splitEventInput[0], splitEventInput[1]));
                     }
+                }
+
+            case "find":
+                if (splitInput.length < 2) {
+                  throw new DukeException("Keyword is missing");
+                } else {
+                  return new FindCommand(splitInput[1]);
                 }
 
             default:
