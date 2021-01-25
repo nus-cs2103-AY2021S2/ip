@@ -1,11 +1,16 @@
 public class deadline extends Task {
-    protected String description;
-    protected boolean done;
     protected String date;
 
     deadline(String description, String date) {
         super(description);
         this.date = date;
+    }
+
+    public String get_date() { return date; }
+
+    @Override
+    public String get_initial() {
+        return "D";
     }
 
     @Override
