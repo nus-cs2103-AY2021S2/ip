@@ -42,7 +42,7 @@ public class Ui {
     }
 
     public static void displayAllTasks() {
-        ArrayList<Task> tasks = Data.tasks;
+        ArrayList<Task> tasks = Data.getTasks();
         StringBuilder sb = new StringBuilder();
         if (tasks.size() == 0) {
             sb.append("You don't have anything on your menu at the moment!\n\n" +
@@ -70,14 +70,14 @@ public class Ui {
         display("Cool! I've added the following item to your order list.\n\n    "
                 + task
                 + "\nYou now have "
-                + Data.tasks.size()
+                + Data.getTasks().size()
                 + " order(s)!");
     }
 
     public static void displayRemovedTask(Task task) {
         display("Aw man... I told Donald that was a bad item to put on the menu.\n"
                 + "Here you go, I've removed this item from your order list!\n\n    " + task +
-                "\nYou have " + Data.tasks.size() + " order(s) left!");
+                "\nYou have " + Data.getTasks().size() + " order(s) left!");
     }
 
     public static void displayDone(Task task) {

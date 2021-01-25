@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.data.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +32,13 @@ public class Event extends Task {
     }
 
     public String getFormattedString() {
-        return "EVENT::" + (isDone ? "1::" : "0::") + description + "::" + date + "\n";
+        return "EVENT"
+                + Data.splitter
+                + (isDone ? "1" : "0")
+                + Data.splitter
+                + description
+                + Data.splitter
+                + date + "\n";
     }
 
     @Override

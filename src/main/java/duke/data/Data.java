@@ -14,9 +14,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-
-    public static ArrayList<Task> tasks;
+    public static final String splitter = " /&/ ";
+    private static ArrayList<Task> tasks;
     private static final String PATHNAME = "./src/main/java/duke/data/data.txt";
+
+    public static ArrayList<Task> getTasks() {
+        return tasks;
+    }
 
     public static void initialiseList() throws DukeException {
         tasks = new ArrayList<>();
@@ -26,7 +30,7 @@ public class Data {
             if (!isEmptyFile) {
                 Scanner sc = new Scanner(f);
                 while (sc.hasNextLine()) {
-                    Task task = getTaskFromString(sc.nextLine());
+                    Task task = convertStringToTask(sc.nextLine());
                     tasks.add(task);
                 }
             }
@@ -35,8 +39,8 @@ public class Data {
         }
     }
 
-    private static Task getTaskFromString(String taskString) throws DukeException {
-        String[] taskArgs = taskString.split("::", 4);
+    private static Task convertStringToTask(String taskString) throws DukeException {
+        String[] taskArgs = taskString.split(splitter, 4);
         try {
             CommandType type = CommandType.valueOf(taskArgs[0]);
             boolean isDone = Integer.parseInt(taskArgs[1]) == 1;

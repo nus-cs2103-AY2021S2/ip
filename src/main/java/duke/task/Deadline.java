@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.data.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,7 +33,13 @@ public class Deadline extends Task {
     }
 
     public String getFormattedString() {
-        return "DEADLINE::" + (isDone? "1::" : "0::") + description + "::" + date + "\n";
+        return "DEADLINE"
+                + Data.splitter
+                + (isDone ? "1" : "0")
+                + Data.splitter
+                + description
+                + Data.splitter
+                + date + "\n";
     }
 
     @Override

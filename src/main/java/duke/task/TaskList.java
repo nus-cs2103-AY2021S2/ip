@@ -1,20 +1,18 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.data.Data;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import static duke.Ui.*;
-import static duke.data.Data.updateDataFile;
 
 public class TaskList {
 
-    public static void addTask(Task task) throws DukeException {
+    public static void addTask(Task task, ArrayList<Task> tasks) throws DukeException {
         try {
-            Data.tasks.add(task);
-            updateDataFile();
+            tasks.add(task);
             displayAddedTask(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
@@ -24,20 +22,18 @@ public class TaskList {
     public static void markDone(Task task) throws DukeException {
         try {
             task.markDone();
-            updateDataFile();
             displayDone(task);
         } catch (Exception e) {
             throw new DukeException(e.getMessage());
         }
     }
 
-    public static void deleteTask(String[] command) throws DukeException {
+    public static void deleteTask(int taskId, ArrayList<Task> tasks) throws DukeException {
         try {
-            Task task = Data.tasks.remove(Integer.parseInt(command[1]) - 1);
-            updateDataFile();
+            Task task = tasks.remove(taskId);
             displayRemovedTask(task);
         } catch (Exception e) {
-            throw new DukeException("That doesn't seem like a valid order number...");
+            throw new DukeException(e.getMessage());
         }
     }
 
