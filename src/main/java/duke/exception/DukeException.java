@@ -1,11 +1,9 @@
 package duke.exception;
 
-
 /**
  * Customized exception class
  */
 public class DukeException extends Exception {
-
 
     /** Create customized exception class objects
      * @param message
@@ -13,7 +11,6 @@ public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);
     }
-
 
     /**
      * Display exception message
