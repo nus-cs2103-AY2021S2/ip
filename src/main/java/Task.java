@@ -10,13 +10,7 @@ public class Task {
     public boolean isDone() { return done; }
 
     public void finish() {
-        if (this.done) {
-            System.out.println("That task's already done!");
-        } else {
-            this.done = true;
-            System.out.println("Congrats! The following task has been marked as done:");
-            System.out.println("  " + this.toString());
-        }
+        this.done = true;
     }
 
     protected String getStatus() {
