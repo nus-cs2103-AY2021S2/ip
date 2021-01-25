@@ -1,28 +1,43 @@
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
-    private final ArrayList<Task> listToDo;
+    private ArrayList<Task> listToDo;
+    private File taskFile;
 
     private Duke() {
-        this.listToDo = new ArrayList<>();
+        try {
+            this.listToDo = new ArrayList<>();
+            Path filePath = Paths.get("data/DanhDuke.txt");
+            if (Files.exists(filePath)) {
+                this.taskFile = filePath.toFile();
+            } else if (Files.exists(Paths.get("data"))) {
+                Files.createFile(Paths.get("data/DanhDuke.txt"));
+                this.taskFile = filePath.toFile();
+            } else {
+                Files.createDirectories(Paths.get("data"));
+                Files.createFile(Paths.get("data/DanhDuke.txt"));
+                this.taskFile = filePath.toFile();
+            }
+        } catch (IOException ie) {
+            System.out.println("Something went wrong" + ie.getMessage());
+        }
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("    ____________________________________________________________");
-        System.out.println(logo);
-        System.out.println("Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?");
-        System.out.println("If you try to enter date and time, please enter it like this: \"yyyy-MM-dd HH:mm\"");
-        System.out.println("    ____________________________________________________________\n");
+    public static void main(String[] args) throws IOException{
+        echoHi();
         Duke myDuke = new Duke();
+        writeBack(myDuke);
         Scanner input = new Scanner(System.in);
         boolean signalToExit = false;
         while (!signalToExit && input.hasNextLine()) {
@@ -160,6 +175,18 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    public static void echoHi() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("    ____________________________________________________________");
+        System.out.println(logo);
+        System.out.println("Hello! I'm Danh's Duke\nWhat can I do for you, Mr Danh?");
+        System.out.println("    ____________________________________________________________\n");
+    }
+
     public static void printList(Duke duke) {
         int index = 1;
         System.out.println("    ____________________________________________________________");
@@ -171,7 +198,7 @@ public class Duke {
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void addToList(Duke duke, String taskdescription) {
+    public static void addToList(Duke duke, String taskdescription) throws IOException {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task: ");
         Task task;
@@ -188,22 +215,32 @@ public class Duke {
         } else {
             task = new ToDo(taskdescription);
         }
+        FileWriter fw = new FileWriter(duke.taskFile, true);
+        fw.write(task.printTask() + "\n");
+        fw.close();
         System.out.println("       " + task.printTask());
         duke.listToDo.add(task);
         System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size());
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void markTaskDone(Duke duke, int index) {
+    public static void markTaskDone(Duke duke, int index) throws IOException {
         System.out.println("    ____________________________________________________________");
         Task task = duke.listToDo.get(index - 1);
         task.markAsDone();
+        FileWriter fw = new FileWriter(duke.taskFile);
+        String toWrite = "";
+        for (Task task1 : duke.listToDo) {
+            toWrite += task1.printTask() + "\n";
+        }
+        fw.write(toWrite);
+        fw.close();
         System.out.println("     Nice! I've marked this task as done: ");
         System.out.println("       " + task.printTask());
         System.out.println("    ____________________________________________________________\n");
     }
 
-    public static void deleteTask(Duke duke, int index) {
+    public static void deleteTask(Duke duke, int index) throws IOException {
         System.out.println("    ____________________________________________________________");
         Task task = duke.listToDo.get(index - 1);
         System.out.println("     Noted. I've removed this task: ");
@@ -211,6 +248,13 @@ public class Duke {
         System.out.format("     Now you have %d tasks in the list.\n", duke.listToDo.size() - 1);
         System.out.println("    ____________________________________________________________\n");
         duke.listToDo.remove(index - 1);
+        FileWriter fw = new FileWriter(duke.taskFile);
+        String toWrite = "";
+        for (Task task1 : duke.listToDo) {
+            toWrite += task1.printTask() + "\n";
+        }
+        fw.write(toWrite);
+        fw.close();
     }
 
     public static void executeFalseCommand(String command) throws DukeException {
@@ -280,6 +324,47 @@ public class Duke {
 
     public static boolean sameDay(LocalDateTime dateTime1, LocalDateTime dateTime2) {
         return ((dateTime1.getDayOfYear() == dateTime2.getDayOfYear()) && (dateTime1.getYear() == dateTime2.getYear()));
+    }
+
+    public static void writeBack(Duke duke) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(duke.taskFile));
+        String line = reader.readLine();
+        while (line != null) {
+            switch (line.substring(1,2)) {
+                case "T":
+                    if (line.charAt(4) == ' ') {
+                        duke.listToDo.add(new ToDo(line.substring(7)));
+                    } else {
+                        ToDo newToDo = new ToDo(line.substring(7));
+                        newToDo.markAsDone();
+                        duke.listToDo.add(newToDo);
+                    }
+                    break;
+                case "D":
+                    int dlIndex = line.indexOf("(by: ");
+                    LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    if (line.charAt(4) == ' ') {
+                        duke.listToDo.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
+                    } else {
+                        Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
+                        newDL.markAsDone();
+                        duke.listToDo.add(newDL);
+                    }
+                    break;
+                default:
+                    int etIndex = line.indexOf("(at: ");
+                    LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    if (line.charAt(4) == ' ') {
+                        duke.listToDo.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
+                    } else {
+                        Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
+                        newDL.markAsDone();
+                        duke.listToDo.add(newDL);
+                    }
+            }
+            line = reader.readLine();
+        }
+        reader.close();
     }
 }
 
