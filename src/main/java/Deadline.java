@@ -1,23 +1,29 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private String By;
+    private LocalDateTime By;
 
-    Deadline (String Description, String By) {
-        super(Description);
-        this.By = By;
+    Deadline (String description, LocalDateTime by) {
+        super(description); this.By = by;
     }
 
-    Deadline (String[] creationCommand) {
-        super(Integer.parseInt(creationCommand[1]), creationCommand[2]);
-        this.By = creationCommand[3];
-    }
+    Deadline (String[] parsedCommand) {
+        // formar as TYPE | STATE | DESCRIPTION | DATETIME | BY
+        super(Integer.parseInt(parsedCommand[1]), parsedCommand[2],
+                LocalDateTime.parse(parsedCommand[3], Task.parseFormat));
 
-    @Override
-    public String TaskInformation () {
-        return "[D]" + super.TaskInformation() + " (by: " + this.By + ")";
+        this.By = LocalDateTime.parse(parsedCommand[4], Task.parseFormat);
     }
 
     @Override
-    public String creationCommand () {
-        return "D :: " + super.creationCommand() + " :: " + this.By;
+    public String taskInformation () {
+        return "[D]" + super.taskInformation() + " [ by: " + 
+                this.By.format(Task.outputFormat) + " ]";
+    }
+
+    @Override
+    public String taskParseCommand () {
+        return "D :: " + super.taskParseCommand() + " :: " + 
+                this.By.format(Task.parseFormat);
     }
 }
