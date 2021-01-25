@@ -1,13 +1,14 @@
 public class DeleteCommand extends Command {
 
-    public DeleteCommand(String action, String info, String time) {
-        super(action, info, time);
+    public DeleteCommand(String action, String info) {
+        super(action, info);
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
-        int num = 0;
+        int num, size;
+        Task t;
 
         try {
             num = Integer.parseInt(info);
@@ -18,8 +19,14 @@ public class DeleteCommand extends Command {
         if (num > tasks.size || num == 0) {
             throw new DukeException("☹ OOPS!!! There is no such task number.");
         } else {
-            tasks.deleteTask(num - 1);
+            num--;
+            t = (tasks.list).get(num);
+            tasks.deleteTask(num);
+            size = tasks.size;
+            ui.showDelete(t, size);
+            storage.store(tasks.list);
         }
+
     }
 
     @Override

@@ -1,11 +1,10 @@
 public abstract class Command {
 
-    protected String action, info, time;
+    protected String action, info;
 
-    public Command(String action, String info, String time) {
+    public Command(String action, String info) {
         this.action = action;
         this.info = info;
-        this.time = time;
     }
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

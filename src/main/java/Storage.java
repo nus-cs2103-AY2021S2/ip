@@ -19,7 +19,7 @@ public class Storage {
 
             FileWriter fw = new FileWriter(filepath);
             int size = tasks.size();
-            String string = "", task = "", time = "";
+            String string, task, time;
 
             for (int i = 0; i < size; i++) {
                 string = tasks.get(i).toString();
@@ -36,7 +36,7 @@ public class Storage {
             fw.close();
 
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+            throw new DukeException("☹ OOPS!!! There is an error in storing the file.");
         }
 
     }
@@ -77,7 +77,7 @@ public class Storage {
                 } else if (action == 'E') {
                     task = new Event(info, time);
                 } else {
-                    task = null;
+                    throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
                 }
 
                 if (done == 'X') {
@@ -89,7 +89,7 @@ public class Storage {
             return list;
 
         } catch (FileNotFoundException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, there is no such file.");
+            throw new DukeException("☹ OOPS!!! There is an error in loading the file.");
         }
 
     }
