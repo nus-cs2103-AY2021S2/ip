@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'checkstyle'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'com.nus.duke'
@@ -9,6 +10,7 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+
 sourceSets {
     main {
         java {
@@ -16,9 +18,15 @@ sourceSets {
         }
     }
 }
+
+application {
+    mainClassName = "com.nus.duke.Duke"
+}
+
 test {
     useJUnitPlatform()
 }
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
