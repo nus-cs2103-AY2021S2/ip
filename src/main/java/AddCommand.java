@@ -1,5 +1,4 @@
 public abstract class AddCommand implements Command {
-    protected boolean isExitCommand = false;
     protected String taskDescription;
     protected TaskList taskList;
     protected Task taskToAdd;

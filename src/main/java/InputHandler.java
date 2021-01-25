@@ -20,6 +20,7 @@ public class InputHandler {
     public static Command parseInput(Scanner scanner) throws MikeInvalidInputException {
         String userInput = scanner.nextLine();
         String[] userInputArr = userInput.split(" ");
+        String errorMsg = "";
 
         switch (userInputArr[0].toLowerCase()) {
             case BYE_COMMAND:
