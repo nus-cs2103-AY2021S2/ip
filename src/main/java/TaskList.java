@@ -131,7 +131,7 @@ public class TaskList {
      * @param taskString Task string to deserialize.
      * @return Updated TaskList with deserialized task added.
      */
-    public TaskList deserializeTask(String taskString) {
+    public TaskList deserializeTask(String taskString) throws OwenException {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
 
         String taskTypeString = taskString.split(" | ", 2)[0];

@@ -96,7 +96,7 @@
 
     ____________________________________________________________
     Noted. I've removed this task:
-        [D][X] return book (by: Sunday)
+        [D][X] return book (by: January 25 2021 5:00 PM)
     Now you have 0 tasks in the list.
     ____________________________________________________________
 

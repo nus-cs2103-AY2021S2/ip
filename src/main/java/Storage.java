@@ -29,7 +29,11 @@ public class Storage {
             Scanner scanner = new Scanner(this.file);
             while (scanner.hasNextLine()) {
                 String taskString = scanner.nextLine();
-                taskList = taskList.deserializeTask(taskString);
+                try {
+                    taskList = taskList.deserializeTask(taskString);
+                } catch (OwenException exception) {
+                    System.err.println(exception.getMessage());
+                }
             }
             scanner.close();
 

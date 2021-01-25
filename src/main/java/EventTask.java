@@ -38,8 +38,13 @@ public class EventTask extends Task {
 
     @Override
     public String serialize() {
-        String serializeFormat = "EVENT | %b | %s | %s";
-        return String.format(serializeFormat, this.isDone, this.description, this.startEndTime);
+        String serializeFormat = "EVENT | %b | %s | %s | %s";
+        return String.format(
+                serializeFormat,
+                this.isDone,
+                this.description,
+                this.start.getAsInputFormat(),
+                this.end.getAsInputFormat());
     }
 
     /**
@@ -47,12 +52,13 @@ public class EventTask extends Task {
      * @param string String to deserialize.
      * @return EventTask deserialized from string.
      */
-    public static EventTask deserialize(String string) {
+    public static EventTask deserialize(String string) throws OwenException {
         String[] fields = string.split(" \\| ");
         boolean isDone = Boolean.valueOf(fields[1]);
         String description = fields[2];
-        String startEndTime = fields[3];
-        return new EventTask(description, isDone, startEndTime);
+        DateTime start = DateTime.parse(fields[3]);
+        DateTime end = DateTime.parse(fields[4]);
+        return new EventTask(description, isDone, start, end);
     }
 
     @Override

@@ -30,7 +30,8 @@ public class DeadlineTask extends Task {
     @Override
     public String serialize() {
         String serializeFormat = "DEADLINE | %b | %s | %s";
-        return String.format(serializeFormat, this.isDone, this.description, this.deadline);
+        return String.format(
+                serializeFormat, this.isDone, this.description, this.deadline.getAsInputFormat());
     }
 
     /**
@@ -38,12 +39,12 @@ public class DeadlineTask extends Task {
      * @param string String to deserialize.
      * @return DeadlineTask deserialized from string.
      */
-    public static DeadlineTask deserialize(String string) {
+    public static DeadlineTask deserialize(String string) throws OwenException {
         String[] fields = string.split(" \\| ");
         System.out.println(fields);
         boolean isDone = Boolean.valueOf(fields[1]);
         String description = fields[2];
-        String deadline = fields[3];
+        DateTime deadline = DateTime.parse(fields[3]);
         return new DeadlineTask(description, isDone, deadline);
     }
 
