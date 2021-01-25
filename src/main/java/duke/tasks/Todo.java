@@ -12,7 +12,7 @@ public class Todo extends Task {
 
     public static Todo parse(String s) throws DukeExceptionIllegalArgument {
         if (s.equals("")) {
-            throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
+            throw new DukeExceptionIllegalArgument("The description of a todo cannot be empty.");
         }
         return new Todo(s);
     }

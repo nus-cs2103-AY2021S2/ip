@@ -18,7 +18,7 @@ public class DukeCommandDelete extends DukeCommand {
         try {
             this.index = Integer.parseInt(arg) - 1;
         } catch (Exception e) {
-            throw new DukeExceptionIllegalArgument("Argument must be an integer.");
+            throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
         }
     }
     @Override

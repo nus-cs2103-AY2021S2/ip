@@ -45,7 +45,8 @@ public abstract class DukeCommand {
             task = Deadline.parse(arg);
             return new DukeCommandAdd(task);
         default:
-            throw new DukeExceptionCommandNotFound("Command '" + cmd + "' is invalid.");
+            throw new DukeExceptionCommandNotFound("Command '" + cmd + "' is invalid. Valid commands:"
+                    + "\nbye, list, done, delete, event, todo, deadline");
         }
     }
 

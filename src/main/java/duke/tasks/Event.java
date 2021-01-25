@@ -29,10 +29,11 @@ public class Event extends Task {
             throw new DukeExceptionIllegalArgument("The description of an event cannot be empty.");
         }
         if (tokens.length == 1 || tokens[1].equals("")) {
-            throw new DukeExceptionIllegalArgument("An event must have both description and time.");
+            throw new DukeExceptionIllegalArgument(
+                    "An event must have both description and time, delimited by '/at'.");
         }
 
-        LocalDateTime dt = Parser.parseDate(tokens[1]);
+        LocalDateTime dt = Parser.parseDate(tokens[1].strip());
         return new Event(tokens[0], dt);
     }
 

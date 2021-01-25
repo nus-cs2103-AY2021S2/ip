@@ -27,10 +27,11 @@ public class Deadline extends Task {
             throw new DukeExceptionIllegalArgument("The description of a deadline cannot be empty.");
         }
         if (tokens.length == 1 || tokens[1].equals("")) {
-            throw new DukeExceptionIllegalArgument("An deadline must have both description and time.");
+            throw new DukeExceptionIllegalArgument(
+                    "An deadline must have both description and time, delimited by '/by'.");
         }
 
-        LocalDateTime dt = Parser.parseDate(tokens[1]);
+        LocalDateTime dt = Parser.parseDate(tokens[1].strip());
         return new Deadline(tokens[0], dt);
     }
 
