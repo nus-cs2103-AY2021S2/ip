@@ -19,11 +19,11 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
         if (checkCommands.length == 1 || !isNumber(checkCommands[1])) {
-            throw new InvalidTaskSelectionException();
+            throw new TaskSelectionInvalidException();
         }
         int num = Integer.parseInt(checkCommands[1]);
         if (num > 0 && num <= tasks.size()) {
-            tasks.get(num - 1).markAsDone();
+            tasks.getTask(num - 1).markAsDone();
             ui.showDoneTask(tasks, num);
 
         } else {
