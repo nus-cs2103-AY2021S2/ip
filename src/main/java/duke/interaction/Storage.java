@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 import duke.common.DukeException;
@@ -22,7 +25,11 @@ public class Storage {
         } catch (DukeException.StorageReadError e) {
             System.err.println(e);
 
-
+            try {
+                Files.copy(saveFile.toPath(), Path.of("data/duke.bak"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                System.err.println(ex);
+            }
 
             return new TaskList();
         } catch (FileNotFoundException e) {
