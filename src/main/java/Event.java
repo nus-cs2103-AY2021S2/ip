@@ -5,11 +5,15 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private LocalDateTime at;
-    private static String type = "E";
+    private final String type = "E";
 
     public Event(String description, String at) throws DukeException{
         super(description);
         setTime(at);
+    }
+
+    public String getType(){
+        return this.type;
     }
 
     private void setTime(String time) throws DukeException{

@@ -1,4 +1,5 @@
 //import java.lang.reflect.Array;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,6 +23,44 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
     }
+
+//    private ArrayList<Task> initialiseMyList(String filePath){
+//        ArrayList<Task> myList = new ArrayList<>();
+//        File f = new File(filePath); // create a File for the given file path
+//        Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
+//        int taskNumber = 1;
+//        while (scanner.hasNext()) {
+//            String task = scanner.nextLine();
+//            String type = task.substring(0,3);
+//            String status = task.substring(4,5);
+//            boolean isDone;
+//            if (status.equals("\u2713")){
+//                isDone = true;
+//            } else{
+//                isDone = false;
+//            }
+//
+//            if (task.substring(0,2).equals("T")){
+//                String[] description = {task.substring(7),""};
+//                addToDo(description, myList);
+//            }
+//            if (task.substring(0,2).equals("D")){
+//                String[] parts = task.substring(7).split(" (", 2);
+//                String description = parts[0];
+//                String time = parts[1].replace(")", "");
+//
+//            }
+//            if (task.substring(0,2).equals("E")){
+//                String[] parts = task.substring(7).split(" (", 2);
+//                String description = parts[0];
+//                String time = parts[1].replace(")", "");
+//
+//            }
+//            addEvent(parts, myList);
+//            myList.append();
+//            taskNumber += 1;
+//        }
+//    }
 
     private void run() throws DukeException {
         Scanner input = new Scanner(System.in);

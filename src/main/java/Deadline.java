@@ -9,11 +9,20 @@ import java.util.Locale;
 public class Deadline extends Task {
 
     private LocalDateTime by;
-    private static String type = "D";
+    private final String type = "D";
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
         setTime(by);
+    }
+
+    public String getType(){
+        return this.type;
+    }
+
+    public String getTime(){
+        String time = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
+        return time;
     }
 
     private void setTime(String time) throws DukeException{
@@ -28,7 +37,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String time = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
+        String time = this.getTime();
+//       this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return "[D]" + super.toString() + " (by: " + time + ")";
     }
 }

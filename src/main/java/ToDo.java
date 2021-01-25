@@ -1,9 +1,13 @@
 public class ToDo extends Task {
 
-    private static String type = "T";
+    private final String type = "T";
 
     public ToDo(String description) {
         super(description);
+    }
+
+    public String getType(){
+        return this.type;
     }
 
     @Override

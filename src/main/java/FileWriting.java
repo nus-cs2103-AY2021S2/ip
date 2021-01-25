@@ -1,5 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class FileWriting {
@@ -8,6 +11,24 @@ public class FileWriting {
         FileWriter writer = new FileWriter(filePath);
         for(Task t: myList) {
             writer.write(t.toString() + System.lineSeparator());
+//            String separator = " | ";
+//            String type = t.getType();
+//            String description = t.getDescription();
+//            String status = (t.getStatus() ? "1" : "0");
+//
+//            if (type.equals("T")) {
+//                writer.write(type + separator + status + separator + description + System.lineSeparator());
+//            } else {
+//                if (type.equals("D")) {
+//                    String time = t.getTime();
+//                    writer.write(type + separator + status + separator + description + System.lineSeparator());
+//                } else {
+//                    if (type.equals("T")) {
+//                        String time = t.getTime();
+//                        writer.write(type + separator + status + separator + description + System.lineSeparator());
+//                    }
+//                }
+//            }
         }
         writer.close();
     }
