@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +23,10 @@ public class InputHandler {
     public static Command parseInput(Scanner scanner) throws MikeInvalidInputException {
         String userInput = scanner.nextLine();
         String[] userInputArr = userInput.split(" ");
+        Pattern pattern;
+        Matcher matcher;
 
+        /*TODO: abstract out try catches and use string error message instead*/
         switch (userInputArr[0].toLowerCase()) {
             case BYE_COMMAND:
                 return new ByeCommand();
@@ -38,12 +44,11 @@ public class InputHandler {
                 }
 
             case TODO_COMMAND:
-                try {
-                    Pattern p = Pattern.compile("(?i)todo (.+)");
-                    Matcher m = p.matcher(userInput);
-                    m.find();
-                    return new TodoCommand(m.group(1));
-                } catch (IllegalStateException e) {
+                pattern = Pattern.compile("(?i)todo (.+)");
+                matcher = pattern.matcher(userInput);
+                if(matcher.find()) {
+                    return new TodoCommand(matcher.group(1));
+                } else {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Todo command format. eg.\n" +
                             "   todo <description>");
@@ -51,22 +56,30 @@ public class InputHandler {
 
             case EVENT_COMMAND:
                 try {
-                    Pattern p = Pattern.compile("(?i)event (.+) /at (.+)");
-                    Matcher m = p.matcher(userInput);
-                    m.find();
-                    return new EventCommand(m.group(1), m.group(2));
-                } catch (IllegalStateException e) {
+                    pattern = Pattern.compile("(?i)event (.+) /at (\\d\\d-\\d\\d-\\d\\d\\d\\d) ?(\\d\\d:\\d\\d)?");
+                    matcher = pattern.matcher(userInput);
+                    matcher.find();
+                    Date dateObject;
+                    if (matcher.groupCount() == 4) {
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+                        dateObject = format.parse(matcher.group(2) + " " + matcher.group(3));
+                    } else {
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                        dateObject = format.parse(matcher.group(2));
+                    }
+                    return new EventCommand(matcher.group(1), matcher.group(2));
+                } catch (IllegalStateException | ParseException e) {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Event command format. eg.\n" +
-                            "   event <description> /at <deadline>");
+                            "   event <description> /at <dd-MM-yyyy> (optional)<hh:mm>");
                 }
 
             case DEADLINE_COMMAND:
                 try {
-                    Pattern p = Pattern.compile("(?i)deadline (.+) /by (.+)");
-                    Matcher m = p.matcher(userInput);
-                    m.find();
-                    return new DeadlineCommand(m.group(1), m.group(2));
+                    pattern = Pattern.compile("(?i)deadline (.+) /by (.+)");
+                    matcher = pattern.matcher(userInput);
+                    matcher.find();
+                    return new DeadlineCommand(matcher.group(1), matcher.group(2));
                 } catch (IllegalStateException e) {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Deadline command format. eg.\n" +
