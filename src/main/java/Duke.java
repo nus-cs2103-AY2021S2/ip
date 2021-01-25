@@ -1,5 +1,8 @@
 import java.util.*;
 import java.io.*;
+import java.time.*;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -77,7 +80,17 @@ public class Duke {
 							throw new DukeException("OOPS!!! A date and time is needed.");
 						}
 						
-						Task dl = new Task(split[0], 'D', split[1]);
+						LocalDate dt = LocalDate.now();
+						
+						try {
+						
+							dt = LocalDate.parse(split[1]);
+						
+						} catch(DateTimeParseException dte) {
+							throw new DukeException("OOPS!!! The date format should be in YYYY-MM-DD");
+						}
+						
+						Task dl = new Task(split[0], 'D', dt);
 						tl.add(dl);
 						
 						System.out.println("Got it. I've added this task:");
@@ -97,7 +110,17 @@ public class Duke {
 							throw new DukeException("OOPS!!! A date and time is needed.");
 						}
 						
-						Task ev = new Task(split[0], 'E', split[1]);
+						LocalDate dtt = LocalDate.now();
+						
+						try {
+						
+							dtt = LocalDate.parse(split[1]);
+						
+						} catch(DateTimeParseException e) {
+							throw new DukeException("OOPS!!! The date format should be in YYYY-MM-DD");
+						}
+						
+						Task ev = new Task(split[0], 'E', dtt);
 						tl.add(ev);
 						
 						System.out.println("Got it. I've added this task:");
@@ -165,7 +188,7 @@ public class Duke {
 					String name = split[2];
 					
 					if (type == 'D' || type == 'E') {
-						String dateTime = split[3];
+						LocalDate dateTime = LocalDate.parse(split[3]);
 						
 						Task t = new Task(name, type, dateTime);
 						if (done)
@@ -237,10 +260,10 @@ public class Duke {
 class Task {
 	private String name;
 	private char type;
-	private String dateTime;
+	private LocalDate dateTime;
 	private boolean done;
 	
-	public Task(String n, char t, String dt) {
+	public Task(String n, char t, LocalDate dt) {
 		name = n;
 		type = t;
 		dateTime = dt;
@@ -262,7 +285,7 @@ class Task {
 	}
 	
 	public String getDate() {
-		return dateTime;
+		return dateTime.toString();
 	}
 	
 	public boolean getDone() {
@@ -284,10 +307,10 @@ class Task {
 		
 		switch (type) {
 			case 'D':
-				str += " (by: "+dateTime+")";
+				str += " (by: "+dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))+")";
 				break;
 			case 'E':
-				str += " (at: "+dateTime+")";
+				str += " (at: "+dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))+")";
 				break;
 		}
 		
