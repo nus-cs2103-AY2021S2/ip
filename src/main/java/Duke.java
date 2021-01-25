@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -55,15 +56,17 @@ public class Duke {
     }
 
     private static Task defineTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
-            EmptyDescriptionException {
+            EmptyDescriptionException, DateTimeParseException {
         if (checkValidCommand(command)) {
             if (taskInputAndDate[0].length() == 0) {
                 throw new EmptyDescriptionException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
             } else if (command.equals(TaskTypes.TODO.getType())) {
                 return new ToDo(taskInputAndDate[0]);
             } else if (command.equals(TaskTypes.DEADLINE.getType())) {
+                taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
                 return new Deadline(taskInputAndDate[0], LocalDateTime.parse(taskInputAndDate[1], formatter));
             } else {
+                taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
                 return new Event(taskInputAndDate[0], LocalDateTime.parse(taskInputAndDate[1], formatter));
             }
         } else {
@@ -121,7 +124,7 @@ public class Duke {
     }
 
     private static void addTask(String command, String[] taskInputAndDate) throws InvalidCommandException,
-            EmptyDescriptionException {
+            EmptyDescriptionException, DateTimeParseException {
         Task task = defineTask(command, taskInputAndDate);
         taskList.add(task);
         System.out.println("Got it. I've added this task:\n" + task);
@@ -208,11 +211,13 @@ public class Duke {
                             System.err.println("Please pass a valid index!");
                         }
                     } else {
-                        taskInputAndDate[1] = taskInputAndDate[1].trim().substring(3);
                         try {
                             addTask(command, taskInputAndDate);
                         } catch (InvalidCommandException | EmptyDescriptionException e) {
                             System.err.println(e.getMessage());
+                        } catch (DateTimeParseException e) {
+                            System.err.println("Please enter your date in one of the following formats:");
+                            System.err.println("d/M/yyyy HHmm OR d MMM yy HHmm OR dd-MM-yy HHmm");
                         }
                     }
                 }
