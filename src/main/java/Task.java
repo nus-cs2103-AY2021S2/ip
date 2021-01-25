@@ -4,6 +4,7 @@
  * and a boolean to determine if it has been completed.
  */
 public class Task {
+
     protected String name;
     protected boolean isDone;
 
@@ -16,7 +17,7 @@ public class Task {
         return "[" + (isDone ? "X" : " ") + "] " + this.name;
     }
 
-    public void setIsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 

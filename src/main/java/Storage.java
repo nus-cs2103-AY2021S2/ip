@@ -1,22 +1,30 @@
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Storage handles the loading of tasks from the file and making changes
  * to the file based on user commands.
  */
 public class Storage {
+
     protected String path;
     protected File localFile;
-    protected boolean fileOriginallyPresent;
+    protected boolean isFileOriginallyPresent;
     protected DateValidation validate;
 
     public Storage(String path) {
         this.path = path;
         this.localFile = new File(path);
-        this.fileOriginallyPresent = true;
+        this.isFileOriginallyPresent = true;
         this.validate = new DateValidation();
     }
 
@@ -30,7 +38,7 @@ public class Storage {
         }
         if (!localFile.exists()) {
             try {
-                this.fileOriginallyPresent = false;
+                this.isFileOriginallyPresent = false;
                 localFile.createNewFile();
             } catch (IOException e) {
                 System.out.println(e);
@@ -56,13 +64,14 @@ public class Storage {
      */
     public List<Task> loadTasks() {
         List<Task> tasks = new ArrayList<Task>();
-        if (this.fileOriginallyPresent) {
+        if (this.isFileOriginallyPresent) {
             Scanner contents = null;
             try {
                 contents = new Scanner((this.localFile));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+
             while (contents.hasNext()) {
                 String data = contents.nextLine();
                 Character type = data.charAt(1);
@@ -74,7 +83,7 @@ public class Storage {
                     String todoDescription = data.substring(7);
                     ToDo todo = new ToDo(todoDescription);
                     if (isDone == 'X') {
-                        todo.setIsDone();
+                        todo.setDone();
                     }
                     tasks.add(todo);
                     break;
@@ -83,7 +92,7 @@ public class Storage {
                     String by = data.substring(startingIndex + 5, endingIndex);
                     Deadline deadline = new Deadline(deadlineDescription, validate.convertDate(by));
                     if (isDone == 'X') {
-                        deadline.setIsDone();
+                        deadline.setDone();
                     }
                     tasks.add(deadline);
                     break;
@@ -92,7 +101,7 @@ public class Storage {
                     String time = data.substring(startingIndex + 5, endingIndex);
                     Event event = new Event(eventDescription, time);
                     if (isDone == 'X') {
-                        event.setIsDone();
+                        event.setDone();
                     }
                     tasks.add(event);
                     break;
@@ -112,12 +121,14 @@ public class Storage {
         File temp = new File("data/temp.txt");
         temp.createNewFile();
         FileWriter tempFile = new FileWriter(temp, true);
+
         while (contents.hasNext()) {
             String data = contents.nextLine();
             if (!data.equals(task.toString())) {
                 tempFile.write(data + "\n");
             }
         }
+
         tempFile.close();
         copyFile(temp,localFile);
         temp.delete();
@@ -139,10 +150,11 @@ public class Storage {
             if (!data.equals(task.toString())) {
                 tempFile.write(data + "\n");
             } else {
-                task.setIsDone();
+                task.setDone();
                 tempFile.write(task.toString() + "\n");
             }
         }
+
         tempFile.close();
         copyFile(temp, localFile);
         temp.delete();
@@ -159,10 +171,12 @@ public class Storage {
         FileOutputStream out = new FileOutputStream(output);
         byte[] data = new byte[1024];
         int len = in.read(data);
+
         while (len != -1) {
             out.write(data, 0, len);
             len = in.read(data);
         }
+
         in.close();
         out.close();
     }

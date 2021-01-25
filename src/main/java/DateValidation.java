@@ -30,7 +30,7 @@ public class DateValidation {
      */
     public LocalDate convertDate(String date) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        LocalDate createDate = LocalDate.parse(date,format);
+        LocalDate createDate = LocalDate.parse(date, format);
         return createDate;
 
     }

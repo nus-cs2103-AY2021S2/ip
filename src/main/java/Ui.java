@@ -22,8 +22,8 @@ public class Ui {
      * @param taskListSize Number of tasks in the TaskList.
      */
     public void responseToAddTask(Task task, int taskListSize) {
-        System.out.println("Done! One new task:\n" + task.toString() + "\nNow you have " +
-                taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+        System.out.println("Done! One new task:\n" + task.toString() + "\nNow you have "
+                 + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
     }
 
     /**
@@ -32,8 +32,8 @@ public class Ui {
      * @param taskListSize Number of tasks in the TaskList.
      */
     public void responseToDelete(Task task, int taskListSize) {
-        System.out.println("Noted, I've removed this task:\n" + task.toString() +
-                "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
+        System.out.println("Noted, I've removed this task:\n" + task.toString()
+                 + "\nNow you have " + taskListSize + ((taskListSize == 1) ? " task" : " tasks") + " in the list");
     }
 
     /**
