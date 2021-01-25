@@ -1,15 +1,20 @@
-import java.util.*;
+import java.io.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException {
         System.out.println("Hello! I'm Amanda :)\nWhat can I do for you?");
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
         ArrayList<Task> list = new ArrayList<Task>();
-        int index = 0;
+        readFileIntoList("duke.txt", list);
+        int index = list.size();
         while (!command.equals("bye")) {
             String[] tokens = command.split(" ");
             String commandType = tokens[0];
             try {
+
                 if (commandType.equals("list")) {
                     // SHOW LIST
                     System.out.println("Here are the tasks in your list:");
@@ -68,8 +73,46 @@ public class Duke {
             }
             command = scanner.nextLine();
         }
+
         if (command.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
+            // CONVERT LIST INTO FILE
+            PrintWriter writer = new PrintWriter("duke.txt");
+            for (Task task : list) {
+                writer.println(task.toString());
+            } writer.close();
         }
     }
+
+    static void readFileIntoList(String fileName, ArrayList<Task> list) throws IOException {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            Task task;
+            line = reader.readLine();
+            while (line != null) {
+                String[] tokens = line.split(" \\| ");
+                if (tokens[0].equals("T")) {
+                    task = new Todo(tokens[2]);
+                    task.isDone = tokens[1].equals("1");
+                    list.add(task);
+                    line = reader.readLine();
+                } else if (tokens[0].equals("D")) {
+                    task = new Deadline(tokens[2], tokens[3]);
+                    task.isDone = tokens[1].equals("1");
+                    list.add(task);
+                    line = reader.readLine();
+                } else if (tokens[0].equals("E")) {
+                    task = new Event(tokens[2], tokens[3]);
+                    task.isDone = tokens[1].equals("1");
+                    list.add(task);
+                    line = reader.readLine();
+                }
+            }
+        } catch (IOException e) {
+            File file = new File("duke.txt");
+        }
+    }
+
 }
