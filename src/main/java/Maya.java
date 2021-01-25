@@ -1,18 +1,28 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Duke {
+public class Maya {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String logo = "          ____                               \n" +
+                "        ,'  , `.                                   \n" +
+                "     ,-+-,.' _ |                                   \n" +
+                "  ,-+-. ;   , ||                                   \n" +
+                " ,--.'|'   |  ;|                                   \n" +
+                "|   |  ,', |  ':  ,--.--.        .--,    ,--.--.   \n" +
+                "|   | /  | |  || /       \\     /_ ./|   /       \\  \n" +
+                "'   | :  | :  |,.--.  .-. | , ' , ' :  .--.  .-. | \n" +
+                ";   . |  ; |--'  \\__\\/: . ./___/ \\: |   \\__\\/: . . \n" +
+                "|   : |  | ,     ,\" .--.; | .  \\  ' |   ,\" .--.; | \n" +
+                "|   : '  |/     /  /  ,.  |  \\  ;   :  /  /  ,.  | \n" +
+                ";   | |`-'     ;  :   .'   \\  \\  \\  ; ;  :   .'   \\\n" +
+                "|   ;/         |  ,     .-./   :  \\  \\|  ,     .-./\n" +
+                "'---'           `--`---'        \\  ' ; `--`---'    \n" +
+                "                                 `--` ";
 
+        System.out.println(logo);
 
         System.out.println("    ____________________________________");
-        System.out.println("    Hello! I'm Duke \n    What can I do for you?");
+        System.out.println("    Hello, I'm Maya! \n    What can I do for you?");
         System.out.println("    ____________________________________");
 
         Scanner sc = new Scanner(System.in);
