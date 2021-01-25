@@ -1,26 +1,20 @@
-package duke;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Deadlines extends Task {
 
-    private String dueDate;
+    private LocalDate dueDate;
+    private LocalTime dueTime;
 
-    public Deadlines(String title, String dueBy) {
+
+    public Deadlines(String title, LocalDate dueBy, LocalTime time) {
         super(title);
         this.dueDate = dueBy;
-    }
-
-    public Deadlines(String title, Boolean b, String dueBy) {
-        super(title, b);
-        this.dueDate = dueBy;
-    }
-
-    @Override
-    public String changeFormat(){
-        return "D" + super.changeFormat() + ":" + this.dueDate;
+        this.dueTime = time;
     }
 
     @Override
     public String toString() {
-        return  "[D]" + super.toString() +  "(by:" + dueDate + ")";
+        return  "[D]" + super.toString() +  "(by:" + dueDate + " " + this.dueTime.toString() +")" ;
     }
 }
