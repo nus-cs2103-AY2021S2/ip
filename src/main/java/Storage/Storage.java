@@ -24,6 +24,12 @@ public class Storage {
     public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
+        File dir = new File("data");
+
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
         File f = new File(filePath);
         f.createNewFile();
         Scanner sc = new Scanner(f);
@@ -62,8 +68,9 @@ public class Storage {
     }
 
     public void save(ArrayList<Task> tasks) throws DukeException {
-        File f = new File(filePath);
         try {
+            File f = new File(filePath);
+
             f.createNewFile();
             FileWriter fw = new FileWriter(filePath);
             StringBuilder sb = new StringBuilder();
