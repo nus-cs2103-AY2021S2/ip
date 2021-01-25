@@ -13,6 +13,25 @@ public class Deadline extends Task {
     }
 
     /**
+     * Overloaded constructor method
+     * @param description task description
+     * @param deadline task deadline
+     * @param isDone task done status
+     */
+    public Deadline(String description, String deadline, boolean isDone){
+        super(description, isDone);
+        this.deadline = deadline;
+    }
+
+    /**
+     * Getter method for task deadline.
+     * @return string of task deadline
+     */
+    public String getDeadline(){
+        return this.deadline;
+    }
+
+    /**
      * Overrides Task's toString method.
      * @return String output for the deadline.
      */

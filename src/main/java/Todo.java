@@ -8,6 +8,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isDone){
+        super(description, isDone);
+    }
+
     /**
      * Overrides Task's toString method.
      * @return String output for the todo.

@@ -29,11 +29,28 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+
     /**
      * To mark the task as done.
      */
     public void markAsDone(){
         this.isDone = true;
+    }
+
+    /**
+     * Getter for checking if Task is done.
+     * @return boolean for whether the task is done.
+     */
+    public boolean getIsDone(){
+        return this.isDone;
+    }
+
+    /**
+     * Getter for the task description.
+     * @return string for task description.
+     */
+    public String getDescription(){
+        return this.description;
     }
 
     /**
