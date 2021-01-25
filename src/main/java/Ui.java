@@ -5,13 +5,11 @@ import Exception.DukeException;
 public class Ui {
     private Scanner sc;
     private Parser parser;
-    private Storage storage;
 
-    public Ui(Scanner sc, Storage storage, Parser parser) {
+    public Ui(Scanner sc, Parser parser) {
         printStatements();
         this.sc = sc;
         this.parser = parser;
-        this.storage = storage;
     }
 
     public void executeInput() {

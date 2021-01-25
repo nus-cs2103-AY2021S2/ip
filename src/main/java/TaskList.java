@@ -12,7 +12,6 @@ import java.util.Scanner;
 import Exception.*;
 
 public class TaskList {
-    private Scanner sc;
     private List<Task> newStorage;
 
     public TaskList(List<Task> initialisedStorage) {
@@ -62,8 +61,15 @@ public class TaskList {
         System.out.println("Now you have " + this.newStorage.size() + " tasks in the list.");
     }
 
+    public void listTask(List<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            printTask(i, tasks.get(i));
+        }
+    }
 
-
+    public void setTaskAsDone(int value) {
+        this.newStorage.get(value).setDone(true);
+    }
 
 
     public void deleteTask(String userInput) {

@@ -22,13 +22,11 @@ public class Parser {
             return false;
         } else if (inputBreakdown[0].equals("list")) {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < tasks.size(); i++) {
-                taskList.printTask(i, tasks.get(i));
-            }
+            taskList.listTask(tasks);
         } else if (inputBreakdown[0].equals("done")) {
             System.out.println("Nice! I've marked this task as done:");
             int selectedIndex = Integer.valueOf(inputBreakdown[1]) - 1;
-            tasks.get(selectedIndex).setDone(true);
+            taskList.setTaskAsDone(selectedIndex);
             taskList.printTask(selectedIndex, tasks.get(selectedIndex));
         } else if (inputBreakdown[0].equals("delete")) {
             taskList.deleteTask(userInput);
