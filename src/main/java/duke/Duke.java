@@ -6,6 +6,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.UI;
 
+/**
+ * Disclaimer: This iteration of folder is heavily influenced by the folder structure
+ *      and coding style of se-edu/addressbook-level2
+ */
 public class Duke {
     private Storage storage;
     private UI ui;
