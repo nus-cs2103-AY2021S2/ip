@@ -12,6 +12,11 @@ public class Ekud {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Construct a new instance of the Ekud chatbot.
+     *
+     * @param filePath Path to the saved tasks
+     */
     public Ekud(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,9 @@ public class Ekud {
         }
     }
 
+    /**
+     * Main execution loop.
+     */
     public void run() {
         ui.showWelcome();
 

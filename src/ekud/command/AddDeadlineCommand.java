@@ -8,16 +8,26 @@ import ekud.ui.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Command that creates a deadline task.
+ */
 public class AddDeadlineCommand extends AddTimedTaskCommand {
+    /**
+     * Construct a deadline-task-creating command.
+     *
+     * @param description The description of the deadline
+     * @param dateTime The date and time of the deadline
+     */
     public AddDeadlineCommand(String description, LocalDateTime dateTime) {
         super(description, dateTime);
     }
 
     /**
-     * Execute this task by adding a deadline into the list, followed by common procedures of all add commands
-     * @param tasks   the list of tasks
-     * @param ui the user interface
-     * @param storage the file writer
+     * Execute this task by adding a deadline into the list, followed by common procedures of all add commands.
+     *
+     * @param tasks   The list of tasks
+     * @param ui The user interface
+     * @param storage The file writer
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

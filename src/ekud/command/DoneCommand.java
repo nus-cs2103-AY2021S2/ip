@@ -6,17 +6,26 @@ import ekud.task.Task;
 import ekud.task.TaskList;
 import ekud.ui.Ui;
 
+/**
+ * Command that marks a task as completed.
+ */
 public class DoneCommand extends ModificationCommand {
     protected int index;
+
+    /**
+     * Construct a command that marks a task as completed.
+     * @param index The index of the task as given by the "list" command
+     */
     public DoneCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Mark the task at index as done
-     * @param tasks the list of tasks
-     * @param ui the user interface
-     * @param storage the file writer
+     * Mark the task at index as done.
+     *
+     * @param tasks The list of tasks
+     * @param ui The user interface
+     * @param storage The file writer
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

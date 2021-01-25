@@ -13,6 +13,9 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Command parser
+ */
 public class Parser {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^(?<command>\\S+)(?:\\s+(?<arguments>.*))?");
     private static final Pattern TIMED_TASK_ARGS = Pattern.compile(
@@ -31,6 +34,14 @@ public class Parser {
         EVENT
     }
 
+    /**
+     * Create an AddCommand from specified command type and arguments.
+     *
+     * @param commandType The type of Task to create, namely ToDo, Deadline or Event
+     * @param arguments All extra arguments necessary for the given task
+     * @return The AddCommand that can be used to construct the task
+     * @throws DukeException If the command type is invalid or any problems with arguments
+     */
     private static AddCommand createAddCommand(CommandType commandType, String arguments) throws DukeException {
         if (arguments.isBlank()) {
             throw new NoTaskDescriptionException();
@@ -64,6 +75,13 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parse a given line of command into an executable Command.
+     *
+     * @param fullCommand The String containing the entire command
+     * @return The Command that can be executed to satisfy the fullCommand given
+     * @throws DukeException If any parts of the command are invalid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         final Matcher matcher = COMMAND_FORMAT.matcher(fullCommand.trim());
 
