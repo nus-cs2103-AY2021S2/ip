@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The EventCommand class encapsulates information and methods about a EventCommand.
+ */
 public class EventCommand implements Command {
     private String fullCmd;
     private String[] fullCmdStrArray;
@@ -21,6 +24,14 @@ public class EventCommand implements Command {
         this.ui = ui;
     }
 
+    /**
+     * Processes the event command by adding a new event task to the list of tasks,
+     * writing it into the saved data file of tasks and displaying a message on the CLI.
+     *
+     * @param storage The storage object that writes data to the saved data file of tasks.
+     * @param taskList The list of tasks.
+     * @throws DukeException if the format of the Event command is invalid.
+     */
     @Override
     public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle event without parameters

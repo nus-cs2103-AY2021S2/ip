@@ -4,6 +4,11 @@ import duke.command.Command;
 
 import java.util.Scanner;
 
+/**
+ * The Duke class is the entry point into the chatbot program.
+ * It scans in user input and adds/deletes/lists tasks based on the user input.
+ * It prints the action reply to the CLI.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;

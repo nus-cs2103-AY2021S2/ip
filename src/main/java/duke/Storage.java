@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * The Storage class encapsulates information and methods to handle loading and saving tasks
+ * to and from a saved data file.
+ */
 public class Storage {
 
     private String filePath;
@@ -19,6 +23,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the changes to the saved data file after every change.
+     *
+     * @param taskList The list of tasks.
+     * @throws DukeException if the file is unable to be found or is unable to be written to.
+     */
     public void saveTaskList(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
@@ -32,6 +42,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Populates the task list with the tasks saved in the task data file upon start of program.
+     *
+     * @param taskList The task list to be populated
+     * @throws DukeException if the file is unable to be found or the file's contents are in the wrong format.
+     */
     public void initializeTaskList(TaskList taskList) throws DukeException {
         try {
             File savedTaskList = new File(filePath);
@@ -50,6 +66,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the contents of the saved data file of tasks in String form to Task form
+     *
+     * @param taskString Task in String form.
+     * @return Corresponding Task.
+     * @throws DukeException if the Task String is in the wrong format.
+     */
     public Task loadTaskFromFile(String taskString) throws DukeException {
         String[] taskStringArr = taskString.split("\\|");
         CommandName commandName = CommandName.valueOf(taskStringArr[0]);
