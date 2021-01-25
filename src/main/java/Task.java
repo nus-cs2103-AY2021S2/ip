@@ -1,13 +1,7 @@
 public class Task {
-    private char taskType;
+    private final char taskType;
     private boolean markAsDone;
-    private String taskName;
-
-    public Task(boolean markAsDone, String taskName) {
-        this.taskType = 'T';
-        this.markAsDone = markAsDone;
-        this.taskName = taskName;
-    }
+    private final String taskName;
 
     public Task(char taskType, boolean markAsDone, String taskName) {
         this.taskType = taskType;

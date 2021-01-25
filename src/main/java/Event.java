@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    LocalDate dateTime;
+    private final LocalDate dateTime;
 
     public Event(boolean markAsDone, String taskName, LocalDate dateTime) {
         super('E', markAsDone, taskName);
