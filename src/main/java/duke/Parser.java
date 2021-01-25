@@ -159,9 +159,10 @@ public class Parser {
     }
 
     /**
-     * Return description of task based on enccoded input.
+     * Return description of task based on encoded input.
      * @param input encoded input from save file.
      * @return description of task.
+     * @throws DukeCorruptedStorageException when the encoded input is not of the right format.
      */
     public static String obtainDescription(String input) throws DukeCorruptedStorageException{
         String[] separatedInput = input.split(DATA_SEPARATOR);
@@ -171,6 +172,12 @@ public class Parser {
         return separatedInput[TODO_DESCRIPTION_PARAM];
     }
 
+    /**
+     * Return true if encoded task is marked as done, otherwise false.
+     * @param input encoded task from save file.
+     * @return true if encoded task is marked as done.
+     * @throws DukeCorruptedStorageException when the encoded task is not of the right format.
+     */
     public static boolean isEncodedTaskDone(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String isDone = separatedInput[IS_DONE_PARAM];
@@ -183,6 +190,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Return LocalDate of either the Event's date or Deadline's date.
+     * @param input encoded task used to get the LocalDate.
+     * @return LocalDate based on input.
+     * @throws DukeCorruptedStorageException when the encoded task is not of the right format.
+     */
     public static LocalDate obtainEncodedDate(String input) throws DukeCorruptedStorageException {
         String[] separatedInput = input.split(DATA_SEPARATOR);
         String date = separatedInput[ENCODE_DATE_PARAM];
