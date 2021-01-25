@@ -1,7 +1,7 @@
 package duke.exceptions;
 
-public class InvalidTaskSelectionException extends DukeException {
-    public InvalidTaskSelectionException() {
+public class TaskSelectionInvalidException extends DukeException {
+    public TaskSelectionInvalidException() {
         super("\tPlease enter task number after command.\n");
     }
 }
