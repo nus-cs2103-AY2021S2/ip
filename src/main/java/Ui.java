@@ -8,6 +8,8 @@ public class Ui {
 
     private final Scanner in;
     private final PrintStream out;
+
+    /** The username of the user running the program. */
     public String username;
 
     public Ui() {
