@@ -50,9 +50,9 @@ public class SwitchBlade {
     }
 
     private static void addDeadline(String input, myList taskList) {
-        if (input.contains("/by") && (findDatetime(input, "/by") != null)) {
-            String datetime = findDatetime(input, "/by");
-            String description = input.replace("/by" + datetime, "");
+        if (input.contains("/by") && (Parser.findDeadlineDatetime(input) != null)) {
+            String datetime = Parser.findDeadlineDatetime(input);
+            String description = Parser.findDescription(input);
             taskList.addDeadline(description, datetime);
         } else {
             System.out.println("It seems like you have not specified the deadline correctly :(");
@@ -60,25 +60,27 @@ public class SwitchBlade {
     }
 
     private static void addEvent(String input, myList taskList) {
-        if (input.contains("/at") && (findDatetime(input, "/at") != null)) {
-            String datetime = findDatetime(input, "/at");
-            String description = input.replace("/at" + datetime, "");
-            taskList.addEvent(description, datetime);
+        if (input.contains("/at") && (Parser.findEventDatetime(input) != null)) {
+            String[] datetimeArr = Parser.findEventDatetime(input);
+            String description = Parser.findDescription(input);
+
+            if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null)
+                taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
         } else {
             System.out.println("It seems like you have not specified the date and time correctly :(");
         }
     }
 
-    private static String findDatetime(String input, String argument) {
-        int argumentIndex = input.lastIndexOf(argument);
-        String output = input.substring(argumentIndex + argument.length());
-
-        if (output.replaceAll("\\s", "").length() < 1) {
-            System.out.println("Please enter a valid date or time");
-            return null;
-        }
-        return output;
-    }
+//    private static String findDatetime(String input, String argument) {
+//        int argumentIndex = input.lastIndexOf(argument);
+//        String output = input.substring(argumentIndex + argument.length());
+//
+//        if (output.replaceAll("\\s", "").length() < 1) {
+//            System.out.println("Please enter a valid date or time");
+//            return null;
+//        }
+//        return output;
+//    }
 
     public static void main(String[] args) {
 
