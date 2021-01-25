@@ -1,14 +1,13 @@
-import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class Duke {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Task> taskList = new ArrayList<>();
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     private static void introduction() {
         String logo = " ____        _        \n"
@@ -59,9 +58,9 @@ public class Duke {
             } else if (command.equals(TaskTypes.TODO.getType())) {
                 return new ToDo(taskInputAndDate[0]);
             } else if (command.equals(TaskTypes.DEADLINE.getType())) {
-                return new Deadline(taskInputAndDate[0], LocalDate.parse(taskInputAndDate[1], formatter));
+                return new Deadline(taskInputAndDate[0], LocalDateTime.parse(taskInputAndDate[1], formatter));
             } else {
-                return new Event(taskInputAndDate[0], LocalDate.parse(taskInputAndDate[1], formatter));
+                return new Event(taskInputAndDate[0], LocalDateTime.parse(taskInputAndDate[1], formatter));
             }
         } else {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" +
