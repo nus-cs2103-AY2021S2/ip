@@ -13,6 +13,13 @@ class Task {
         this.condition = condition;
     }
 
+    public Task(boolean done, String taskName, String type, String condition) {
+        this.done = done;
+        this.taskName = taskName;
+        this.type = type;
+        this.condition = condition;
+    }
+
     public void markAsDone() {
         this.done = true;
     }

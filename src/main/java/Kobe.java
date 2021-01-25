@@ -27,12 +27,11 @@ public class Kobe {
         try (BufferedReader br = new BufferedReader(
                 new FileReader(home + "/ip/src/main/data/kobe.txt", StandardCharsets.US_ASCII))) {
 
-//            ArrayList<String> textFile = new ArrayList<>();
             String readLine = br.readLine();
             do {
                 System.out.println(readLine);
+                addItemByString(readLine);
                 readLine = br.readLine();
-                //Need to add actual tasks too
             }
             while (readLine != null);
 
@@ -118,6 +117,56 @@ public class Kobe {
         System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
                  currentTask);
         System.out.println(ind + "Kobe sees that you have " + tasks.size() + " task(s) in the list.\n" + line);
+    }
+
+    public static void addItemByString(String text) {
+        String[] intoParts1 = text.split("\\[", 2);
+        String type = intoParts1[1].substring(0, 1);
+//        System.out.println(Arrays.toString(intoParts1));
+//        System.out.println("Type: " + type);
+
+        String[] intoParts2 = intoParts1[1].split("\\[", 2);
+        String isItDone = intoParts2[1].substring(0, 1);
+//        System.out.println(Arrays.toString(intoParts2));
+//        System.out.println("Done: " + isItDone);
+
+        String[] intoParts3 = intoParts2[1].split("\\]", 2);
+        String taskName = intoParts3[1].substring(1);
+//        System.out.println("intoParts3: " + Arrays.toString(intoParts3));
+//        System.out.println("Task: " + currentTask);
+//        System.out.println("length: " + intoParts3[1].split(":", 2).length);
+
+        String condition = "";
+
+        if (intoParts3[1].split(":", 2).length != 1) { //There is a condition, cos it can be split even more
+            //Task without the condition
+            intoParts3 = intoParts3[1].substring(1).split("\\(", 2);
+            taskName = intoParts3[0].substring(0);
+//            System.out.println("NewTask: " + taskName);
+
+            //Getting the condition
+            String[] intoParts4 = intoParts3[1].split(": ", 2);
+//            System.out.println("intoParts4: " + Arrays.toString(intoParts4));
+            String[] intoParts5 = intoParts4[1].split("\\)", 2);
+
+            condition = intoParts5[0].substring(0);
+//            System.out.println(Arrays.toString(intoParts5));
+//            System.out.println("Condition: " + condition);
+        } else {}
+
+        if (type.equals("T")) {
+            type = "todo";
+        } else if (type.equals("D")) {
+            type = "deadline";
+        } else if (type.equals("E")) {
+            type = "event";
+        }
+
+        boolean isItDoneBoolean = false;
+        if (isItDone.equals("X")) {
+            isItDoneBoolean = true;
+        }
+        tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
     }
 
     public static void goodbye() {
