@@ -3,8 +3,6 @@ public class InvalidTaskFormatException extends Exception {
         super(message);
     }
 
-    //hello
-
     public void printMessage() {
         System.out.println(super.getMessage());
     }
