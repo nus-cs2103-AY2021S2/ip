@@ -1,3 +1,10 @@
+package mike;
+
+import mike.task.Deadline;
+import mike.task.Event;
+import mike.task.Task;
+import mike.task.ToDo;
+
 public class Parser {
     public static Command parseCommand(String input) {
         return Command.valueOf(input.toUpperCase());

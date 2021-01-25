@@ -1,3 +1,5 @@
+package mike;
+
 public class ParseException extends RuntimeException {
     private final String description;
 

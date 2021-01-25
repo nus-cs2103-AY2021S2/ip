@@ -1,3 +1,7 @@
+package mike;
+
+import mike.task.Task;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -28,7 +32,7 @@ public class Mike {
             String input = sc.next();
             try {
                 Command command = Parser.parseCommand(input);
-                switch(command) {
+                switch (command) {
                 case BYE:
                     ui.exit();
                     return;
@@ -63,7 +67,7 @@ public class Mike {
                         taskList.add(addedTask);
                         ui.showAddSuccess(taskList, addedTask);
                         storage.save(taskList);
-                    } catch(ParseException e) {
+                    } catch (ParseException e) {
                         ui.showError(e);
                     } catch (IOException e) {
                         ui.showIOError(e);
@@ -74,7 +78,7 @@ public class Mike {
             } catch (IllegalArgumentException e) {
                 ui.showGeneralError();
             }
-        } while(true);
+        } while (true);
     }
 
     public static void main(String[] args) {

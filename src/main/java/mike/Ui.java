@@ -1,4 +1,7 @@
-import javax.imageio.stream.ImageOutputStreamImpl;
+package mike;
+
+import mike.task.Task;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
@@ -19,7 +22,7 @@ public class Ui {
 
     public void init() {
         setLengthOfChatBox();
-        formatInChatBox("Hello I'm Mike\nWhat can I do for you?\n");
+        formatInChatBox("Hello I'm mike.Mike\nWhat can I do for you?\n");
     }
 
     public void exit() {
