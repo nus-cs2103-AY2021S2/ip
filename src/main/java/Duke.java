@@ -1,6 +1,11 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import java.io.File;
+import java.io.PrintWriter;
 
 /**
  * Duke is a personal assistant chat bot that helps users to
@@ -14,17 +19,40 @@ public class Duke {
     Tasks tasks = new Tasks();
 
     public static void main(String[] args) {
-        Duke e = new Duke();
-        e.run();
+        Duke d = new Duke();
+        try {
+            d.run();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
-    public void run() {
+    public void run() throws IOException {
         printHello();
         Scanner sc = new Scanner(System.in);
+        File data = new File("duke.txt");
+        if (!data.exists()) {
+            data.createNewFile();
+        } else {
+            Scanner s = new Scanner(data);
+            while (s.hasNextLine()) {
+                String txt = s.nextLine();
+                tasks.readTask(txt);
+            }
+        }
 
         while (true) {
             String input = sc.nextLine();
             if (input.equals(EXIT_COMMAND)) {
+                // store Tasks in a file
+                FileWriter fw = new FileWriter(data);
+                List<Task> taskLst = tasks.fetchTasks();
+
+                for (Task item : taskLst) {
+                    fw.write(item.getDescription() + "\n");
+                }
+                fw.close();
+
                 // close program
                 formatText();
                 System.out.println("Bye, see you soon! Don't miss me too much.");

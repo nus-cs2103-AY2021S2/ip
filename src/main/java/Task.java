@@ -16,6 +16,11 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
      * Checks task completion status and returns formatted status icon.
      *
@@ -30,6 +35,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return this.isDone + "`" + this.description;
     }
 
     @Override

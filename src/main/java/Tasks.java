@@ -1,8 +1,6 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +24,10 @@ public class Tasks {
             i++;
         }
     };
+
+    public List<Task> fetchTasks() {
+        return lst;
+    }
 
     /**
      * Checks for task in the given index and marks it as completed if valid.
@@ -83,6 +85,7 @@ public class Tasks {
 
                 if (command.startsWith(ADD_DEADLINE_COMMAND)) {
                     Deadline deadline = new Deadline(description, localDate);
+
                     lst.add(deadline);
                     System.out.println("You got it! I added this task:\n   "
                             + deadline.toString());
@@ -121,6 +124,27 @@ public class Tasks {
             System.err.println("Oof, did you type a valid number or not?");
         } catch (IndexOutOfBoundsException exception) {
             System.err.println("You don't have so many items, dumbass!");
+        }
+    }
+
+    public void readTask(String str) {
+        String[] split = str.split("`");
+
+        switch (split[0]) {
+            case "Todo":
+                Todo todo = new Todo(split[2], Boolean.parseBoolean(split[1]));
+                lst.add(todo);
+                break;
+            case "Deadline":
+                Deadline deadline = new Deadline(Boolean.parseBoolean(split[1]),
+                        split[2], LocalDate.parse(split[3]));
+                lst.add(deadline);
+                break;
+            case "Event":
+                Event event = new Event(Boolean.parseBoolean(split[1]),
+                        split[2], LocalDate.parse(split[3]));
+                lst.add(event);
+                break;
         }
     }
 
