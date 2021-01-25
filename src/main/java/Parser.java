@@ -42,9 +42,9 @@ public class Parser {
         String noCommand = input.split("\\s+", 2)[1];
 
         if (noCommand.contains("/by"))
-            return noCommand.split("/by")[0];
+            return noCommand.split("/by")[0].stripLeading().stripTrailing();
         else if (noCommand.contains("/at"))
-            return noCommand.split("/at")[0];
+            return noCommand.split("/at")[0].stripLeading().stripTrailing();
         else
             return null;
     }
