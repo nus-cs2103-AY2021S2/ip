@@ -77,26 +77,31 @@ public class Tasks {
                         + todo.toString());
                 countTasks();
             } else {
-                String[] separateDetails = split[1].split("/by |/at ");
-                String description = separateDetails[0];
+                try {
+                    String[] separateDetails = split[1].split("/by |/at ");
+                    String description = separateDetails[0];
 
-                String date = separateDetails[1];
-                LocalDate localDate = LocalDate.parse(date);
+                    String date = separateDetails[1];
+                    LocalDate localDate = LocalDate.parse(date);
 
-                if (command.startsWith(ADD_DEADLINE_COMMAND)) {
-                    Deadline deadline = new Deadline(description, localDate);
+                    if (command.startsWith(ADD_DEADLINE_COMMAND)) {
+                        Deadline deadline = new Deadline(description, localDate);
 
-                    lst.add(deadline);
-                    System.out.println("You got it! I added this task:\n   "
-                            + deadline.toString());
-                } else {
-                    // command is ADD_EVENT_COMMAND
-                    Event event = new Event(description, localDate);
-                    lst.add(event);
-                    System.out.println("You got it! I added this task:\n   "
-                            + event.toString());
+                        lst.add(deadline);
+                        System.out.println("You got it! I added this task:\n   "
+                                + deadline.toString());
+                    } else {
+                        // command is ADD_EVENT_COMMAND
+                        Event event = new Event(description, localDate);
+                        lst.add(event);
+                        System.out.println("You got it! I added this task:\n   "
+                                + event.toString());
+                    }
+                    countTasks();
+                } catch (ArrayIndexOutOfBoundsException e){
+                    System.err.println("Did you format your request properly? " +
+                            "This is getting old.");
                 }
-                countTasks();
             }
             Duke.formatText();
         } catch (DateTimeParseException e) {
