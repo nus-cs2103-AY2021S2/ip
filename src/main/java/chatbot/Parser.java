@@ -4,8 +4,10 @@ import chatbot.commands.*;
 import chatbot.exceptions.ChatBotException;
 import chatbot.exceptions.InvalidCommandTypeException;
 import chatbot.exceptions.InvalidDateFormatException;
+import chatbot.exceptions.InvalidTimeFormatException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -19,6 +21,15 @@ public class Parser {
             return LocalDate.parse(date, dateFormat);
         } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException();
+        }
+    }
+
+    private static LocalDateTime formatTime(String time) throws InvalidTimeFormatException {
+        try {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MM yyyy hh:mm a");
+            return LocalDateTime.parse(time, timeFormat);
+        } catch (DateTimeParseException e) {
+            throw new InvalidTimeFormatException();
         }
     }
 
@@ -53,7 +64,11 @@ public class Parser {
                     String[] timeArray = words[1].split(" /at ");
                     String eventName = timeArray[0].strip();
                     String time = timeArray[1];
-                    return new EventCommand(eventName, time);
+                    String[] timePeriod = time.split("-");
+                    String startTime = timePeriod[0];
+                    String date = startTime.substring(0, 10);
+                    String endTime = date + timePeriod[1];
+                    return new EventCommand(eventName, formatTime(startTime), formatTime(endTime));
                 case "done":
                     return new DoneCommand(Integer.parseInt(words[1]));
                 case "delete":

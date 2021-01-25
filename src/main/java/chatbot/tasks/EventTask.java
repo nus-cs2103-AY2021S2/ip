@@ -1,25 +1,35 @@
 package chatbot.tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task{
     private String type;
-    private String time;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
-    public EventTask(String taskName, String time) {
+    public EventTask(String taskName, LocalDateTime startTime, LocalDateTime endTime) {
         super(taskName);
         this.type = "[E]";
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public String writeToFileFormat() {
-        return String.format("%s|%s|%s|%s",
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+        return String.format("%s|%s|%s|%s|%s",
                 "T",
                 isDone == true ? "1" : "0",
                 taskName,
-                time);
+                startTime.format(timeFormat),
+                endTime.format(timeFormat));
     }
 
     @Override
     public String toString() {
-        return this.type + super.toString() + " (" + this.time + ")";
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+        DateTimeFormatter hourFormat = DateTimeFormatter.ofPattern("hh:mm a");
+        return this.type + super.toString() + " (at: " + this.startTime.format(timeFormat)
+                + " to " + this.endTime.format(hourFormat) + ")";
     }
 }

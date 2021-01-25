@@ -1,6 +1,7 @@
 package chatbot;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -38,8 +39,8 @@ public class TaskHandler {
         taskList.add(new DeadlineTask(taskName, deadline));
     }
 
-    public void addEventTask(String taskName, String time) {
-        taskList.add(new EventTask(taskName, time));
+    public void addEventTask(String taskName, LocalDateTime startTime, LocalDateTime endTime) {
+        taskList.add(new EventTask(taskName, startTime, endTime));
     }
 
     public Task taskIsDone(int index) throws IndexOutOfRangeException, TaskDoneException {
@@ -74,6 +75,7 @@ public class TaskHandler {
             String taskName = words[2].strip();
 
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
             switch (type) {
                 case "T": {
                     Task task = new TodoTask(taskName);
@@ -93,7 +95,9 @@ public class TaskHandler {
                     break;
                 }
                 case "E": {
-                    Task task = new EventTask(taskName, words[3]);
+                    LocalDateTime startTime = LocalDateTime.parse(words[3].strip(), timeFormat);
+                    LocalDateTime endTime = LocalDateTime.parse(words[4].strip(), timeFormat);
+                    Task task = new EventTask(taskName,startTime, endTime);
                     if (isDone) {
                         task.taskDone();
                     }
