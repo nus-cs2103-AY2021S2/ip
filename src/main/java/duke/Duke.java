@@ -1,3 +1,6 @@
+package duke;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,6 +9,8 @@ public class Duke {
     private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
     private static Scanner sc = new Scanner(System.in);
     static final String lines = "----------------------------------------";
+    private static ArrayList<Task> list = new ArrayList<Task>();
+    private static DataStorage storage  = new DataStorage();
 
     public static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
@@ -64,15 +69,16 @@ public class Duke {
                if(userInput.contains("/at")) {
 
                     String dueDetails[] = userInput.split("/at ");
-                    String date[] = dueDetails[dueDetails.length - 1].split(" ");
-
+                   /* String date[] = dueDetails[dueDetails.length - 1].split(" ");
                     String[] startTimeArr = date[date.length - 1].split("-");
                     String startTime = startTimeArr[0];
                     String endTime = startTimeArr[startTimeArr.length - 1];
+
+                  */
                     taskName = returnTaskName(dueDetails[0], "event");
 
-                    if (!taskName.equals("no task name") || !checkForAdditionalInfo(date[0])) {
-                        taskArraylist.add(new Events(taskName, date[0], startTime, endTime));
+                    if (!taskName.equals("no task name") || !checkForAdditionalInfo(dueDetails[1])) {
+                        taskArraylist.add(new Events(taskName, dueDetails[1]));
                         addToTask = 1;
                     }
                 } else{
@@ -153,7 +159,7 @@ public class Duke {
         }
     }
 
-    public static void executeCommand(String command) throws DukeException {
+    public static void executeCommand(String command) throws DukeException, IOException {
 
         String commandArray[] = command.split("\\s+");
 
@@ -176,6 +182,7 @@ public class Duke {
                     System.out.println(lines + "\nNice! I'll make this task as done: \n"
                             + taskArraylist.get(index).toString() + "\n" + lines);
                 }
+                storage.save(taskArraylist);
                 break;
 
             case("delete"):
@@ -185,15 +192,22 @@ public class Duke {
                             + taskArraylist.get(indexInArray).toString() + "\n" + lines);
                     taskArraylist.remove(indexInArray);
                 }
+
+                storage.save(taskArraylist);
                 break;
             default:
                 addTask(command, commandArray[0]);
+                storage.save(taskArraylist);
+
+                break;
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+
+    public static void main(String[] args) throws DukeException, IOException {
 
         displayWelcomeMessage();
+        taskArraylist = storage.load();
 
         String userInput = sc.nextLine();
 
