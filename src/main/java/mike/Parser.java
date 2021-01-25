@@ -5,11 +5,29 @@ import mike.task.Event;
 import mike.task.Task;
 import mike.task.ToDo;
 
+/**
+ * Parses input from the user
+ */
 public class Parser {
+
+    /**
+     * Returns a Command with the enum type by parsing the input
+     *
+     * @param input String object representing the user's input
+     * @return a Command of the enum type
+     */
     public static Command parseCommand(String input) {
         return Command.valueOf(input.toUpperCase());
     }
 
+    /**
+     * Returns a Task Object by parsing the description depending on the Command
+     *
+     * @param command an object of the Command type
+     * @param input the input of the user
+     * @return the Task corresponding to the user's command
+     * @throws ParseException if parsing fails
+     */
     public static Task parseDescription(Command command, String input) throws ParseException {
         switch (command) {
         case TODO:
@@ -23,6 +41,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a ToDo by parsing the input
+     * Used when the command is todo
+     *
+     * @param input the input from the user
+     * @return a ToDo Object based on the input
+     * @throws ParseException if the description is empty
+     */
     private static ToDo parseToDo(String input) throws ParseException {
         if (input.equals(" ") || input.isEmpty()) {
             throw new ParseException("OOPS!!! The description of a todo cannot be empty.");
@@ -31,6 +57,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Deadline by parsing the input
+     * Used when the command is deadline
+     *
+     * @param input the input from the user
+     * @return a Deadline Object based on the input
+     * @throws ParseException if the description is empty
+     */
     private static Deadline parseDeadline(String input) throws ParseException {
         if (input.equals(" ") || input.isEmpty()) {
             throw new ParseException("OOPS!!! The description of a deadline cannot be empty.");
@@ -44,6 +78,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns an Event by parsing the input
+     * Used when the command is event
+     *
+     * @param input the input from the user
+     * @return a Event Object based on the input from the user
+     * @throws ParseException if the description is empty
+     */
     private static Event parseEvent(String input) throws ParseException {
         if (input.equals(" ") || input.isEmpty()) {
             throw new ParseException("OOPS!!! The description of an event cannot be empty.");
@@ -57,6 +99,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns a Task that is parsed from a String
+     * Used to parse lines from a file for tasks
+     *
+     * @param line the String to be parsed for tasks
+     * @return a Task Object created from line
+     */
     public static Task parseLineInFile(String line) {
         Task task;
         if (line.charAt(1) == 'T') {

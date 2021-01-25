@@ -12,6 +12,11 @@ public class Mike {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Create a Mike Object with a taskList from an existing file
+     * Otherwise creates a Mike Object with an empty taskList
+     * @param filePath the path of the *.txt file holding information of existing tasks
+     */
     public Mike(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
