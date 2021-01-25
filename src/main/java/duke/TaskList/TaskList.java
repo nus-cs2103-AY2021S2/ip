@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class TaskList {
 
     private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
+    private static ArrayList<Task> findTaskArraylist = new ArrayList<Task>();
+
     private static UI ui = new UI();
 
     /**Add a todo task to arraylist

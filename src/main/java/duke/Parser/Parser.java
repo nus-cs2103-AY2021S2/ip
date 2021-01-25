@@ -43,11 +43,18 @@ public class Parser {
             ExitCommand ec = new ExitCommand();
             return ec.isExit();
         }
-
         String commandArray[] = input.split("\\s+");
         int size =  taskList.getTaskListArray().size();
 
-        if(commandArray[0].equals("list") && isValidTaskNumber(0, "list",size)){
+        if(commandArray[0].equals("find")){
+            if(userInput.isBlank()){
+                throw new DukeException("Please input task description to be searched.");
+            }else {
+                SearchCommand sc = new SearchCommand(userInput, taskList);
+                sc.execute(taskList, ui, null);
+            }
+        }
+        else if(commandArray[0].equals("list") && isValidTaskNumber(0, "list",size)){
             ListCommand lc = new ListCommand(null, taskList);
             lc.execute(taskList, ui, null);
         } else if(commandArray[0].equals("delete") &&

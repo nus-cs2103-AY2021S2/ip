@@ -1,5 +1,6 @@
 package duke.UI;
 
+import duke.command.SearchCommand;
 import duke.task.Task;
 
 import java.util.Scanner;
@@ -25,7 +26,6 @@ public class UI {
         System.out.println(lines + "\n" + " Good day! I'm Duke" + "\n" + " How can I help you today? " + "\n" + lines);
 
     }
-
 
     /**
      * Print out bye message to user
