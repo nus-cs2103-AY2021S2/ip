@@ -8,6 +8,12 @@ public class Event extends Task {
         this.start = start;
         this.end = end;
     }
+    
+    public Event (boolean done, String name, String start, String end) { 
+        super(done, name);
+        this.start = start; 
+        this.end = end;
+    }
 
     public static Event createEvent (String str) throws ChatException {
         if (!str.startsWith("event")) {
@@ -88,6 +94,10 @@ public class Event extends Task {
         return this.end;
     }
 
+    public String allParameterStr() {
+        return String.format("E,%s,%s,%s,%s", this.getDone(), this.getName(), this.getStart(), this.getEnd());
+    }
+    
     @Override
     public String toString() {
         return String.format("[E]%s (at: %s-%s)", super.toString(), this.getStart(), this.getEnd());
