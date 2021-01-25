@@ -17,20 +17,21 @@ public class DukeCommandDelete extends DukeCommand {
     public DukeCommandDelete(String arg) throws DukeExceptionIllegalArgument {
         if (arg.equals("all")) {
             this.index = -1; // Special delete all
+        } else {
+            try {
+                this.index = Integer.parseInt(arg) - 1;
+            } catch (Exception e) {
+                throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
+            }
         }
 
-        try {
-            this.index = Integer.parseInt(arg) - 1;
-        } catch (Exception e) {
-            throw new DukeExceptionIllegalArgument("Need to specify task number to delete.");
-        }
     }
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument{
         if (index == -1) {
-            ui.getUserInput("Confirm deletion of all tasks (y/[n])? ");
-            if (ui.getUserInput().equalsIgnoreCase("y")) {
+            String reply = ui.getUserInput("Confirm deletion of all tasks (y/[n])? ");
+            if (reply.equalsIgnoreCase("y")) {
                 tasks.deleteAll();
                 loader.write(tasks);
                 ui.showMessage("All tasks successfully deleted.");
