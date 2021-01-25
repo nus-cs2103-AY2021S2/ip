@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
@@ -61,12 +62,16 @@ public class TaskList {
             task = data.substring(7, secondSeg);
             time = data.substring(secondSeg + 5, endSeg);
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
         if (taskType == 'T') {
             tasksList.add(new ToDo(task));
-        } else if (taskType == 'D') {
-            tasksList.add(new Deadline(task, time));
         } else {
-            tasksList.add(new Event(task, time));
+            LocalDateTime formatDate = LocalDateTime.parse(time, formatter);
+            if (taskType == 'D') {
+                tasksList.add(new Deadline(task, formatDate));
+            } else {
+                tasksList.add(new Event(task, formatDate));
+            }
         }
         if(data.charAt(4) == 'X') {
             tasksList.get(tasksList.size() - 1).setCompleted();
