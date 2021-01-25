@@ -20,7 +20,9 @@ public class Storage {
         this.file = new File(filepath);
         FileReader fr;
         try {
+            file.getParentFile().mkdirs();
             file.createNewFile();
+            System.out.println(file.getAbsolutePath());
             fr = new FileReader(file);
             br = new BufferedReader(fr);
         } catch (IOException e) {

@@ -18,7 +18,9 @@ public class Parser {
     public Command parse(String commandStr) throws Exception {
         Command command = null;
         try {
-            if (commandStr.toLowerCase().equals("bye")) {
+            if (commandStr == null) {
+                command = new ExitCommand();
+            } else if (commandStr.toLowerCase().equals("bye")) {
                 command = new ExitCommand();
             } else if (commandStr.trim().toLowerCase().equals("list")) {
                 command = new ListCommand();

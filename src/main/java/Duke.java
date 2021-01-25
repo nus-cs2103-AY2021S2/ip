@@ -2,6 +2,8 @@ package main.java;
 
 import main.java.command.Command;
 
+import java.util.NoSuchElementException;
+
 public class Duke {
     private Ui ui;
     private TaskManager tm;
@@ -23,6 +25,9 @@ public class Duke {
                 Command c = parser.parse(fullCommand);
                 c.execute(tm, ui);
                 isExit = c.isExit();
+            } catch (NoSuchElementException e) {
+                ui.displayExit();
+                break;
             } catch (Exception e) {
                 ui.displayError(e.getMessage());
             } finally {
