@@ -1,3 +1,0 @@
-Deadline`true`do work `2020-01-01
-Todo`true`hello
-Event`false`eoir `2020-02-03

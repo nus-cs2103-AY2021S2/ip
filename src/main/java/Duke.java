@@ -15,12 +15,18 @@ import java.io.PrintWriter;
 public class Duke {
     private static final String EXIT_COMMAND = "bye";
 
-    List<Task> lst = new ArrayList<>();
-    Tasks tasks = new Tasks();
+    Tasks tasks;
+    Storage storage;
+
+    public Duke(String filePath) throws IOException {
+        this.tasks = new Tasks();
+        this.storage = new Storage(filePath);
+        storage.retrieveTasks(tasks);
+    }
 
     public static void main(String[] args) {
-        Duke d = new Duke();
         try {
+            Duke d = new Duke("duke.txt");
             d.run();
         } catch (IOException e) {
             System.err.println(e);
@@ -30,29 +36,12 @@ public class Duke {
     public void run() throws IOException {
         printHello();
         Scanner sc = new Scanner(System.in);
-        File data = new File("duke.txt");
-        if (!data.exists()) {
-            data.createNewFile();
-        } else {
-            Scanner s = new Scanner(data);
-            while (s.hasNextLine()) {
-                String txt = s.nextLine();
-                tasks.readTask(txt);
-            }
-        }
+        Storage storage = new Storage("duke.txt");
 
         while (true) {
             String input = sc.nextLine();
             if (input.equals(EXIT_COMMAND)) {
-                // store Tasks in a file
-                FileWriter fw = new FileWriter(data);
-                List<Task> taskLst = tasks.fetchTasks();
-
-                for (Task item : taskLst) {
-                    fw.write(item.getDescription() + "\n");
-                }
-                fw.close();
-
+                storage.storeTasks(tasks);
                 // close program
                 formatText();
                 System.out.println("Bye, see you soon! Don't miss me too much.");
