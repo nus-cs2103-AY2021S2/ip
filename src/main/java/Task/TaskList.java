@@ -8,10 +8,18 @@ import java.util.ArrayList;
 import static Utils.Print.printWithIndentation;
 
 public class TaskList {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public void setTaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     public void printTasks() {
