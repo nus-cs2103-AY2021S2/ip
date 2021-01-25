@@ -1,0 +1,4 @@
+T|false|buy tomato
+D|false|return book|june 6th
+T|true|eat fruits
+E|false|sing a song|5oclock

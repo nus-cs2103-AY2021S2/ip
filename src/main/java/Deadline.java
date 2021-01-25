@@ -22,6 +22,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return String.format("%s|%b|%s|%s", "D", isDone, desc, by);
+    }
+
+    @Override
     public String toString() {
         return "[D]" + getStatusIcon() + " " + desc + " (by: " + by + ")";
     }

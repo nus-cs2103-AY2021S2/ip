@@ -17,6 +17,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String toFileString() {
+        return String.format("%s|%b|%s", "T", isDone, desc);
+    }
+
+    @Override
     public String toString() {
         return "[T]" + getStatusIcon() + " " + desc;
     }
