@@ -16,6 +16,7 @@ public class DateTime {
         // Put the pattern with more info in front as
         // longer datetime strings are unable to be parsed by shorter formatters
         String[] patterns = new String[]{"dd/MM/yyyy HHmm", "dd/MM/yyyy"};
+
         DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
         Arrays.stream(patterns).map(DateTimeFormatter::ofPattern).forEach(builder::appendOptional);
 
@@ -33,6 +34,23 @@ public class DateTime {
         // Length of dd/MM/yyyy
         dateOnly = str.length() <= 10;
         ldt = LocalDateTime.parse(str, PARSE_FORMATTER);
+    }
+
+    private DateTime(LocalDateTime ldt, boolean dateOnly) {
+        this.ldt = ldt;
+        this.dateOnly = dateOnly;
+    }
+
+    public String toISODateTime() {
+        return ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
+
+    public static DateTime fromISODateTime(String str, boolean dateOnly) {
+        return new DateTime(LocalDateTime.parse(str, DateTimeFormatter.ISO_LOCAL_DATE_TIME), dateOnly);
+    }
+
+    public boolean getDateOnly() {
+        return dateOnly;
     }
 
     @Override

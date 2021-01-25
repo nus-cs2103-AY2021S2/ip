@@ -44,30 +44,22 @@ public class Storage {
     public Task parseLine(String line) {
         // Need double backslashes to escape the literal "\|" or else it will be parsed as an escape sequence
         String[] words = line.split(" \\| ");
-
         String taskTypeStr = words[0];
-        boolean isDone = words[1].equals("1");
-        String content = words[2];
-        String datetime = words.length == 4 ? words[3] : "";
 
         Task t;
 
         switch (taskTypeStr) {
         case "T":
-            t = new Todo(content);
+            t = Todo.deserialize(line);
             break;
         case "D":
-            t = new Deadline(content, datetime);
+            t = Deadline.deserialize(line);
             break;
         case "E":
-            t = new Event(content, datetime);
+            t = Event.deserialize(line);
             break;
         default:
             throw new DukeException("Found invalid task type. Allowed task types: [T, D, E]");
-        }
-
-        if (isDone) {
-            t.markDone();
         }
 
         return t;
@@ -77,7 +69,7 @@ public class Storage {
         StringBuilder sb = new StringBuilder();
 
         taskLst.forEach(t -> {
-            sb.append(serializeTask(t));
+            sb.append(t.getSerialized());
             sb.append("\n");
         });
 
@@ -89,38 +81,5 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException(String.format("Error with saveTaskLst: %s", e));
         }
-    }
-
-    public String serializeTask(Task t) {
-        String contentStr = t.getContent();
-        String isDoneStr = t.getIsDone() ? "1" : "0";
-
-        String taskTypeStr;
-        String dateTimeStr = null;
-        String className = t.getClass().getSimpleName();
-        switch (className) {
-        case "Todo":
-            taskTypeStr = "T";
-            break;
-        case "Deadline":
-            taskTypeStr = "D";
-            dateTimeStr = ((Deadline)t).getBy();
-            break;
-        case "Event":
-            taskTypeStr = "E";
-            dateTimeStr = ((Event)t).getAt();
-            break;
-        default:
-            throw new DukeException("Unable to serialize found task type of " + className);
-        }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s | %s | %s", taskTypeStr, isDoneStr, contentStr));
-
-        if (dateTimeStr != null) {
-            sb.append(String.format(" | %s", dateTimeStr));
-        }
-
-        return sb.toString();
     }
 }

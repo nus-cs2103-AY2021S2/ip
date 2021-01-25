@@ -23,6 +23,14 @@ public class Task {
         isDone = true;
     }
 
+    public String getSerializedIsDone() {
+        return isDone ? "1" : "0";
+    }
+
+    public String getSerialized() {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getContent());
