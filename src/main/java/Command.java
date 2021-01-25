@@ -1,3 +1,8 @@
-public enum Command {
-    BYE, DONE, TODO, DEADLINE, EVENT, DELETE, LIST
+public abstract class Command {
+    public Command() {
+    }
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+
+    public abstract boolean isExit();
 }
