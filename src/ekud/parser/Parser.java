@@ -15,8 +15,10 @@ import ekud.command.ByeCommand;
 import ekud.command.Command;
 import ekud.command.DeleteCommand;
 import ekud.command.DoneCommand;
+import ekud.command.FindCommand;
 import ekud.command.ListCommand;
 import ekud.common.exception.DukeException;
+import ekud.common.exception.IncompleteDetailException;
 import ekud.common.exception.InvalidCommandException;
 import ekud.common.exception.InvalidTaskIndexException;
 import ekud.common.exception.NoTaskDescriptionException;
@@ -137,6 +139,12 @@ public class Parser {
             }
             return createAddCommand(func, arguments);
 
+        case FIND:
+            if (arguments.isBlank()) {
+                throw new IncompleteDetailException("keyword");
+            }
+            return new FindCommand(arguments);
+
         default:
             throw new InvalidCommandException();
         }
@@ -149,6 +157,7 @@ public class Parser {
         BYE,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
 }
