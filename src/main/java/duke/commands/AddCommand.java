@@ -24,8 +24,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws
-            DukeException, DateTimeParseException, StringIndexOutOfBoundsException, IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException,
+            DateTimeParseException, StringIndexOutOfBoundsException, IOException {
         Task temp;
         String description;
         String dateTime;
@@ -97,7 +97,7 @@ public class AddCommand extends Command {
                         LocalTime endTime = LocalTime.
                                 parse(endTimeString, DateTimeFormatter.ofPattern("HHmm"));
                         if (endTime.compareTo(startTime) < 0) {
-                            throw new InvalidTimeDurationException();
+                            throw new TimeDurationInvalidException();
                         }
                         temp = new EventTask(description, date, startTime, endTime);
                     }
