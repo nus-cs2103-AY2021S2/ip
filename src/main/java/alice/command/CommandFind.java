@@ -21,8 +21,7 @@ public class CommandFind extends Command {
 	@Override
 	public Alice execute(Alice agent) {
 		try{
-			String searchString = tokens[1];
-			if (searchString.length() == 0) {
+			if (tokens.length < 2 || tokens[1].length() == 0) {
 				throw new IllegalArgumentException();
 			}
 			List<Task> identified = IntStream.range(0, agent.getData().count())
