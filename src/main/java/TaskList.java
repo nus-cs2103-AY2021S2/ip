@@ -46,6 +46,26 @@ public class TaskList {
         return tasks.get(taskNumber);
     }
 
+    public void findWithKeyword(String keyword) {
+        int numberOfMatches = 0;
+        int tracker = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            String task = tasks.get(i).toString();
+            boolean isPresent = task.toLowerCase().contains(keyword.toLowerCase());
+            if (isPresent) {
+                if (tracker == 0) {
+                    Ui.responseToFind();
+                    tracker++;
+                }
+                System.out.println(task);
+                numberOfMatches++;
+            }
+        }
+        if (numberOfMatches == 0) {
+            Ui.responseToNoMatches();
+        }
+    }
+
     /**
      * Returns the number of tasks in the task list.
      * @return Number of tasks.

@@ -64,5 +64,13 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:\n" + task.toString());
     }
 
+    public static void responseToFind() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    public static void responseToNoMatches() {
+        System.out.println("There are no matching tasks! Time to add one!");
+    }
+
 
 }

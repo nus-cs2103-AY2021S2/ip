@@ -107,6 +107,11 @@ public class Parser {
         }
     }
 
+    public void handleFind(){
+        String keyword = command.substring(index + 1);
+        tasks.findWithKeyword(keyword);
+    }
+
     /**
      * Main method to make sense of the user command and to determine
      * which command it is.
@@ -136,6 +141,9 @@ public class Parser {
                     break;
                 case "delete":
                     handleDelete();
+                    break;
+                case "find":
+                    handleFind();
                     break;
                 }
             } else {
