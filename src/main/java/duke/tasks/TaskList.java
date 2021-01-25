@@ -38,6 +38,10 @@ public class TaskList {
         tasks.remove(taskIndex);
     }
 
+    public void deleteAll() {
+        tasks.clear();
+    }
+
     public void addTask(Task t) {
         tasks.add(t);
     }

@@ -26,6 +26,10 @@ public class Ui {
             throw new DukeExceptionIllegalArgument("Failed to read input.");
         }
     }
+    public String getUserInput(String pre) throws DukeExceptionIllegalArgument {
+        System.out.print(pre);
+        return getUserInput();
+    }
 
     public void showError(DukeException e) {
         String message = String.valueOf(e).strip();
