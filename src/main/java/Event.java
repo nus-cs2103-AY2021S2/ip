@@ -10,4 +10,9 @@ public class Event extends Task {
     public String getStatus() {
         return "[E]" + super.getStatus() + "(at: " + this.eventTime + ")";
     }
+
+    @Override
+    public String saveStatus() {
+        return "E" + super.saveStatus();
+    }
 }

@@ -8,4 +8,9 @@ public class ToDo extends Task {
     public String getStatus() {
         return "[T]" + super.getStatus();
     }
+
+    @Override
+    public String saveStatus() {
+        return "T" + super.saveStatus();
+    }
 }

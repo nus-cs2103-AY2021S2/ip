@@ -15,4 +15,8 @@ public class Task {
         String isDoneSymbol = isDone ? "[X] " : "[ ] ";
         return isDoneSymbol + this.description;
     }
+
+    public String saveStatus() {
+        return " | " + (this.isDone ? "1" : "0") + " | " + this.description + "\n";
+    }
 }
