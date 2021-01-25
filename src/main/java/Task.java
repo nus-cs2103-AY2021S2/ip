@@ -1,8 +1,16 @@
 // Original definition from the webpage of course
 // https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 
+<<<<<<< HEAD
 // TODO: Throw exception when description/by/at contains " | "
 public abstract class Task {
+=======
+import java.time.format.DateTimeFormatter;
+
+public class Task {
+    protected static DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected static DateTimeFormatter outfmt = DateTimeFormatter.ofPattern("HH:mm, dd MMM yyyy");
+>>>>>>> branch-Level-8
     protected String description;
     protected boolean isDone;
 

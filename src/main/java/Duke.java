@@ -130,7 +130,13 @@ public class Duke {
         if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline must have a due date.");
         }
-        Task t = tasks.addDeadline(tokens[0], tokens[1]);
+
+        Task t;
+        try {
+            t = tasks.addDeadline(tokens[0], tokens[1]);
+        } catch (DukeExceptionIllegalDate e) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline should be in format 'YYYY-MM-DD hh:mm'.");
+        }
         loader.write(tasks);
         Duke.respondAdd(t, tasks);
     }
@@ -146,7 +152,13 @@ public class Duke {
         if (tokens.length == 1 || (tokens.length == 2 && tokens[1].equals(""))) {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! An event must have a time.");
         }
-        Task t = tasks.addEvent(tokens[0], tokens[1]);
+
+        Task t;
+        try {
+            t = tasks.addEvent(tokens[0], tokens[1]);
+        } catch (DukeExceptionIllegalDate e) {
+            throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline should be in format 'YYYY-MM-DD hh:mm'.");
+        }
         loader.write(tasks);
         Duke.respondAdd(t, tasks);
     }
