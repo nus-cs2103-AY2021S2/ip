@@ -13,6 +13,9 @@ public class Duke {
         tasks = new TaskList(storage.loadTasks());
     }
 
+    /**
+     * Initializes the app.
+     */
     public void run() {
         ui.showWelcome();
         Scanner scan = new Scanner(System.in);
