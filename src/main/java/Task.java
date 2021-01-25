@@ -1,7 +1,8 @@
 // Original definition from the webpage of course
 // https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
 
-public class Task {
+// TODO: Throw exception when description/by/at contains " | "
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -32,4 +33,6 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
+
+    public abstract String toFileString();
 }

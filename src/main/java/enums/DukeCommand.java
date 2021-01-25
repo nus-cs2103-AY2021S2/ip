@@ -44,4 +44,17 @@ public enum DukeCommand {
         }
         return line.substring(line.indexOf(' ')+1);
     }
+
+    public static DukeCommand getCommandFromString(String cmd) throws DukeExceptionCommandNotFound {
+        switch (cmd) {
+        case "E":
+            return EVENT;
+        case "T":
+            return TODO;
+        case "D":
+            return DEADLINE;
+        default:
+            throw new DukeExceptionCommandNotFound("Command '" + cmd + "' is invalid.");
+        }
+    }
 }
