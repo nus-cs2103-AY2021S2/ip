@@ -10,6 +10,8 @@ import exceptions.*;
 
 public class Duke {
 
+    static FileLoader loader;
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,8 +27,14 @@ public class Duke {
         });
 
         // REPL
-        ArrayList<Task> userData = new ArrayList<>();
-        TaskList tasks = new TaskList();
+        // TODO: Exception for when file cannot be written to
+        try {
+            loader = new FileLoader("./data/tasks.txt");
+        } catch (IOException e) {
+            System.out.println("TODO: File cannot be written to, terminate here");
+            System.exit(1);
+        }
+        TaskList tasks = loader.read();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(System.in));
         boolean stopProgram = false;
@@ -82,6 +90,7 @@ public class Duke {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The task number must be a valid task.");
         }
         tasks.setDone(idx);
+        loader.write(tasks);
         Duke.respondDone(tasks.getTask(idx));
     }
 
@@ -97,6 +106,7 @@ public class Duke {
         }
         Task t = tasks.getTask(idx);
         tasks.deleteTask(idx);
+        loader.write(tasks);
         Duke.respondDelete(t, tasks);
     }
 
@@ -105,6 +115,7 @@ public class Duke {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         Task t = tasks.addTodo(s);
+        loader.write(tasks);
         Duke.respondAdd(t, tasks);
     }
 
@@ -120,6 +131,7 @@ public class Duke {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! A deadline must have a due date.");
         }
         Task t = tasks.addDeadline(tokens[0], tokens[1]);
+        loader.write(tasks);
         Duke.respondAdd(t, tasks);
     }
 
@@ -135,6 +147,7 @@ public class Duke {
             throw new DukeExceptionIllegalArgument("☹ OOPS!!! An event must have a time.");
         }
         Task t = tasks.addEvent(tokens[0], tokens[1]);
+        loader.write(tasks);
         Duke.respondAdd(t, tasks);
     }
 
