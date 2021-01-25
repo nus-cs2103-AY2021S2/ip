@@ -1,9 +1,7 @@
-import java.util.List;
-
 public class DoneCmd implements Command {
-    private final List<Task> lst;
+    private final TaskList lst;
 
-    public DoneCmd(List<Task> lst) {
+    public DoneCmd(TaskList lst) {
         this.lst = lst;
     }
 

@@ -1,9 +1,9 @@
-import java.util.List;
+
 
 public class DeleteCmd implements Command {
-    private final List<Task> lst;
+    private final TaskList lst;
 
-    public DeleteCmd(List<Task> lst) {
+    public DeleteCmd(TaskList lst) {
         this.lst = lst;
     }
 

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.List;
 
 public class Storage {
     private final static String DIR_NAME = System.getProperty("user.dir") + File.separator + "data";
@@ -22,7 +21,7 @@ public class Storage {
         }
     }
 
-    public List<Task> fillTaskLst(List<Task> taskLst) {
+    public TaskList fillTaskLst(TaskList taskLst) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -65,7 +64,7 @@ public class Storage {
         return t;
     }
 
-    public void saveTaskLst(List<Task> taskLst) {
+    public void saveTaskLst(TaskList taskLst) {
         StringBuilder sb = new StringBuilder();
 
         taskLst.forEach(t -> {

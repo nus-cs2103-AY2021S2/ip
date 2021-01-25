@@ -1,10 +1,10 @@
 import java.util.List;
 
 public class AddCmd implements Command {
-    private final List<Task> lst;
+    private final TaskList lst;
     private final TaskType taskType;
 
-    public AddCmd(List<Task> lst, TaskType taskType) {
+    public AddCmd(TaskList lst, TaskType taskType) {
         this.lst = lst;
         this.taskType = taskType;
     }

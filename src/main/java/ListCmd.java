@@ -1,9 +1,7 @@
-import java.util.List;
-
 public class ListCmd implements Command {
-    private final List<Task> lst;
+    private final TaskList lst;
 
-    public ListCmd(List<Task> lst) {
+    public ListCmd(TaskList lst) {
         this.lst = lst;
     }
 

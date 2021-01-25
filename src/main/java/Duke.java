@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -6,7 +5,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskLst = new ArrayList<>();
+        TaskList taskLst = new TaskList();
         boolean isExited = false;
         Storage storage = null;
 
