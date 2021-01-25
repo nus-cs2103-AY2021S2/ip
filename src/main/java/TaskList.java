@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class Commands{
+class {
 
     static final String FORMAT_LINE = "....................................................";
 
