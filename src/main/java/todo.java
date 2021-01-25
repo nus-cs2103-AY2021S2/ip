@@ -1,10 +1,13 @@
+import java.time.LocalDate;
+import java.time.Month;
+
 public class todo extends Task {
     todo(String description) {
         super(description);
     }
 
     @Override
-    public String get_date() { return "error"; }
+    public LocalDate get_date() { return LocalDate.of(2020, 1, 25); }
     @Override
     public String get_initial() { return "T"; }
     @Override

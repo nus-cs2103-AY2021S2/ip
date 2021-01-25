@@ -1,12 +1,14 @@
-public class event extends Task {
-    protected String date;
+import java.time.LocalDate;
 
-    event(String description, String date) {
+public class event extends Task {
+    protected LocalDate date;
+
+    event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
-    public String get_date() { return date; }
+    public LocalDate get_date() { return date; }
 
     @Override
     public String get_initial() { return "E"; }

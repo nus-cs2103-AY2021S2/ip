@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public abstract class Task {
     protected String description;
     protected boolean done = false;
@@ -30,7 +32,7 @@ public abstract class Task {
     }
 
     public abstract String get_initial();
-    public abstract String get_date();
+    public abstract LocalDate get_date();
 
     @Override
     public String toString() {

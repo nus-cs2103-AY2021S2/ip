@@ -37,13 +37,13 @@ public class Duke {
                         break;
                     case "deadline":
                         check_spl_length(spl, 2, "deadline");
-                        String[] spl2 = spl[1].split("/by", 2);
+                        String[] spl2 = spl[1].split(" /by ", 2);
                         check_spl_length(spl2, 2, "deadline");
                         process_deadline(spl2);
                         break;
                     case "event":
                         check_spl_length(spl, 2, "event");
-                        String[] spl3 =spl[1].split("/at", 2);
+                        String[] spl3 =spl[1].split(" /at ", 2);
                         check_spl_length(spl3, 2, "event");
                         process_event(spl3);
                         break;
@@ -114,6 +114,7 @@ public class Duke {
             throw new InvalidTaskFormatException(LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task + LINE);
     }
 
+    /*
     static void process_task(String[] spl) throws InvalidTaskFormatException {
         Task new_task;
         switch(spl[0]) {
@@ -135,6 +136,8 @@ public class Duke {
         System.out.println(LINE + SPACE + "Done adding the " + spl[0] + "task: " + storage.get(count - 1) + LINE);
     }
 
+     */
+
     static void process_todo(String[] spl) throws InvalidTaskFormatException {
         storage.add(new todo(spl[1]));
         count++;
@@ -142,13 +145,13 @@ public class Duke {
     }
 
     static void process_deadline(String[] spl) {
-        storage.add(new deadline(spl[0], spl[1]));
+        storage.add(new deadline(spl[0], LocalDate.parse(spl[1])));
         count++;
         System.out.println(LINE + SPACE + "Done adding the DEADLINE Task: " + storage.get(count - 1) + LINE);
     }
 
     static void process_event(String[] spl) {
-        storage.add(new event(spl[0], spl[1]));
+        storage.add(new event(spl[0], LocalDate.parse(spl[1])));
         count++;
         System.out.println(LINE + SPACE + "Done adding the EVENT Task: " + storage.get(count - 1) + LINE);
     }
@@ -192,10 +195,10 @@ public class Duke {
                     to_add = new todo(spl[2]);
                     break;
                 case "D":
-                    to_add = new deadline(spl[2], spl[3]);
+                    to_add = new deadline(spl[2], LocalDate.parse(spl[3]));
                     break;
                 case "E":
-                    to_add = new event(spl[2], spl[3]);
+                    to_add = new event(spl[2], LocalDate.parse(spl[3]));
                     break;
                 default:
                     to_add = new todo("error");
@@ -217,7 +220,7 @@ public class Duke {
             if (zero.equals("T")) {
                 fw.write(zero + between + one + between + two + "\n");
             } else {
-                String three = t.get_date();
+                LocalDate three = t.get_date();
                 fw.write(zero + between + one + between + two + between + three + "\n");
             }
         }
