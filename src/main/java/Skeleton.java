@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.io.File;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
@@ -11,9 +12,10 @@ public class Skeleton {
 
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Task> storage = new ArrayList<>();
-    static int current  = 0;
-    
+
     public static void main(String[] args) {
+        FileManager fm = new FileManager();
+        fm.loadFile();
         greet();
         Scanner sc = new Scanner(System.in);
         String cmd = sc.next();
@@ -21,6 +23,7 @@ public class Skeleton {
             try {
                 switch (cmd) {
                     case "bye":
+                        fm.saveFile();
                         terminate();
                         break;
                     case "list":
@@ -40,8 +43,8 @@ public class Skeleton {
                         add(new Event(parts1[0], parts1[1]));
                         break;
                     case "done":
-                        int done = sc.nextInt();
-                        done(2);
+                        int number = sc.nextInt();
+                        done(number);
                         break;
                     case "delete":
                         int no = sc.nextInt();
@@ -62,10 +65,9 @@ public class Skeleton {
     static void add(Task task) throws DukeException {
         storage.add(task);
         System.out.println("ALRIGHT. I HAVE ALREADY ADDED THE TASK");
-        System.out.println(storage.get(current));
+        System.out.println(task);
         System.out.println("Now you have " + storage.size() + " tasks in the list.");
         System.out.println();
-        current++;
     }
 
     static void done(int value) throws DukeException {
