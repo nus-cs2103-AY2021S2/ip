@@ -44,6 +44,10 @@ public class Task {
         isDone = true;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Returns a description of the task, formatted with an
      * "X" if it has been marked as done.

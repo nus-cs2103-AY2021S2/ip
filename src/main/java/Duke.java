@@ -1,13 +1,18 @@
 package main.java;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 
 import main.java.exceptions.EmptyDescriptionException;
 import main.java.exceptions.EmptyTimeException;
 import main.java.exceptions.InvalidInputException;
 import main.java.exceptions.ListOutOfBoundsException;
 
-import main.java.subfiles.TaskManager;
+import main.java.subfiles.*;
 
 /**
  * The Duke program is an interactive application which
@@ -116,6 +121,55 @@ public class Duke {
         return true;
     }
 
+    private static void loadData(String path, String filename) {
+        File f = new File(path);
+        if (!f.exists()) {
+            f.mkdir();
+        }
+
+        f = new File(path + filename);
+        try {
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                taskManager.addTaskFromData(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                f.createNewFile();
+            } catch (IOException ex) {
+                System.out.println("Something went wrong during the creation of your save file.");
+            }
+        }
+    }
+
+    private static void saveData(String path, String filename) {
+        File f = new File(path + filename);
+        try {
+            FileWriter fw = new FileWriter(path + filename);
+            ArrayList<Task> tasks = taskManager.getTasks();
+
+            for (Task t : tasks) {
+                if (t instanceof ToDo) {
+                    fw.write("T | " + (t.isDone() ? 1 : 0) +
+                            " | " + t.getName());
+                } else if (t instanceof Deadline) {
+                    Deadline d = (Deadline) t;
+                    fw.write("D | " + (d.isDone() ? 1 : 0) + " | " +
+                            d.getName() + " | " + d.getDate());
+                } else {
+                    Event e = (Event) t;
+                    fw.write("E | " + (e.isDone() ? 1 : 0) + " | " +
+                            e.getName() + " | " + e.getDate());
+                }
+                fw.write(System.lineSeparator());
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong during the saving of your file.");
+        }
+    }
+
     /**
      * The main method which is executed when the Duke program
      * is run.
@@ -123,14 +177,18 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
+        String PATH = "../src/main/java/data/";
+        String FILENAME = "duke.txt";
         Scanner sc = new Scanner(System.in);
         boolean hasInput = true;
 
         greet();
+        loadData(PATH, FILENAME);
         while (hasInput) {
             String s = sc.nextLine();
             hasInput = executeInput(s);
         }
+        saveData(PATH, FILENAME);
         exit();
 
         sc.close();

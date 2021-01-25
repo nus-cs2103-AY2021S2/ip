@@ -131,6 +131,22 @@ public class TaskManager {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    public void addTaskFromData(String s) {
+        String[] sArray = s.split(" \\| ");
+
+        if (sArray[0].equals("T")) {
+            tasks.add(new ToDo(sArray[2]));
+        } else if (sArray[0].equals("D")) {
+            tasks.add(new Deadline(sArray[2], sArray[3]));
+        } else {
+            tasks.add(new Event(sArray[2], sArray[3]));
+        }
+
+        if (sArray[1].equals("1")) {
+            tasks.get(tasks.size() - 1).setDone();
+        }
+    }
+
     /**
      * Prints the list of tasks added by the user till this point,
      * based on the order they were added by the user.
@@ -193,6 +209,10 @@ public class TaskManager {
         } catch (IndexOutOfBoundsException e) {
             throw new ListOutOfBoundsException(tasks.size());
         }
+    }
+
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
 }
