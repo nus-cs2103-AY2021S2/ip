@@ -32,14 +32,14 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        TaskFileWriter writer = null;
+        Storage storage = new Storage();
+        ArrayList<Task> tasks;
         try {
-            writer = new TaskFileWriter();
+            tasks = storage.readTasks();
         } catch(IOException e) {
             System.err.println("Unable to create file");
+            tasks = new ArrayList<>();
         }
-        // TODO: Load from file
-        ArrayList<Task> tasks = new ArrayList<>();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -130,9 +130,9 @@ public class Duke {
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
-                if (writer != null) {
+                if (storage != null) {
                     try {
-                        writer.writeTasks(tasks);
+                        storage.writeTasks(tasks);
                     } catch (IOException e) {
                         System.err.println("Unable to write to file");
                     }
