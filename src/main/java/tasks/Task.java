@@ -1,6 +1,6 @@
 package tasks;
 
-public class Task {
+public abstract class Task {
     protected String description;
     protected Boolean isDone;
     protected String taskType;

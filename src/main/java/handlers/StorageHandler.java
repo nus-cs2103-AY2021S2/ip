@@ -5,6 +5,7 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+import utils.Formatter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,26 +22,29 @@ public class StorageHandler {
         this.path = path;
     }
 
-    public ArrayList<Task> openFile() throws DukeException {
+    public ArrayList<Task> readFile() throws DukeException {
         File file = new File(path);
         ArrayList<Task> taskList = new ArrayList<>();
         int lineIndex = 1;
 
         if(!file.exists()) {
-            createFile(file);
+            try {
+                createFile(file);
+            } catch (DukeException e) {
+                throw new DukeException("Could not create a new file.");
+            }
         }
 
         try {
             Scanner scanner = new Scanner(file);
-
             while(scanner.hasNext()) {
                 String line = scanner.nextLine();
-                Task task = processFile(line, lineIndex);
+                Task task = processLine(line, lineIndex);
                 taskList.add(task);
                 lineIndex++;
             }
-        } catch (FileNotFoundException e) {
-            throw new DukeException("File not found!");
+        } catch (FileNotFoundException | DukeException e) {
+            throw new DukeException(e.getMessage());
         }
 
         return taskList;
@@ -55,7 +59,7 @@ public class StorageHandler {
         }
     }
 
-    private Task processFile(String line, int lineIndex) throws DukeException {
+    private Task processLine(String line, int lineIndex) throws DukeException {
         String[] lineArr = line.split(" \\| ");
 
         String typeOfTask;
@@ -105,7 +109,7 @@ public class StorageHandler {
         }
     }
 
-    public void writeToFile(ArrayList<Task> taskList) throws IOException, DukeException {
+    public void writeFile(ArrayList<Task> taskList) throws IOException, DukeException {
         FileWriter fileWriter = new FileWriter(path);
         StringBuilder stringToWrite = new StringBuilder();
 

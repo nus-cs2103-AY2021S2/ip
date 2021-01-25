@@ -1,8 +1,12 @@
+package apollo;
+
+import exceptions.DukeException;
 import handlers.StorageHandler;
 import tasks.Task;
 
 import utils.Formatter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Apollo {
@@ -12,9 +16,14 @@ public class Apollo {
     private final StorageHandler storageHandler;
 
     public Apollo() {
-        this.taskList = new ArrayList<>();
         this.storageHandler = new StorageHandler(STORAGE_PATH);
         displayWelcomeText();
+
+        try {
+            this.taskList = this.storageHandler.readFile();
+        } catch (DukeException e) {
+            this.taskList = new ArrayList<>();
+        }
     }
 
     private void displayWelcomeText() {
@@ -23,5 +32,13 @@ public class Apollo {
 
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    public void saveBeforeExit() {
+        try {
+            storageHandler.writeFile(taskList);
+        } catch (IOException | DukeException e) {
+            Formatter.printBetweenLines(e.getMessage());
+        }
     }
 }
