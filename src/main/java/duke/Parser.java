@@ -11,6 +11,13 @@ import duke.task.Event;
 import duke.task.Todo;
 
 public class Parser {
+  
+  /** 
+   * Returns a command based on user input
+   * @param userInput
+   * @return Command
+   * @throws DukeException
+   */
   public static final Command parse(String userInput) throws DukeException {
     if (userInput.equals("list")) {
       return new ListCommand();

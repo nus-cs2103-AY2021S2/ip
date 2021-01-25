@@ -14,6 +14,14 @@ public class AddCommand extends Command {
     this.task = task;
   }
 
+  
+  /** 
+   * Adds a new task to taskList
+   * @param taskList
+   * @param ui
+   * @param storage
+   * @throws DukeException
+   */
   public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
     taskList.add(task);
     ui.printIndented("Got it. I've added this task:");

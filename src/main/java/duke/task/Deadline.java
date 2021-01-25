@@ -16,11 +16,21 @@ public class Deadline extends Task {
     this.deadline = LocalDate.parse(deadline);
   }
 
+  
+  /** 
+   * Returns a string representation of Todo
+   * @return String
+   */
   @Override
   public String toString() {
     return String.format("[D]%s (by: %s)", super.toString(), deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
   }
 
+  
+  /** 
+   * Returns a string representation of Deadline to be saved in data file
+   * @return String
+   */
   public String toSavedString() {
     return String.format("D | %d | %s | %s", super.isDone ? 1 : 0, super.description, deadline);
   }

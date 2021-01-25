@@ -14,6 +14,11 @@ public abstract class Task {
     this.isDone = isDone;
 }
 
+  
+  /** 
+   * Returns a string representation of task
+   * @return String
+   */
   @Override
   public String toString() {
     return String.format("[%s] %s", isDone ? "X" : " ", description);
