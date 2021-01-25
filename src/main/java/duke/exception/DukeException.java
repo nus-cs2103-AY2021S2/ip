@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * DukeException class to handle various types of exception in DukeBot
  */

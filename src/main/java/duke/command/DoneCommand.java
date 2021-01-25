@@ -1,6 +1,14 @@
+package duke.command;
+
+import duke.exception.*;
+import duke.Storage;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.Ui;
+
 public class DoneCommand extends Command {
 
-    DoneCommand(String commandType, int index) {
+    public DoneCommand(String commandType, int index) {
         super.commandType = commandType;
         super.commandDetails = "";
         super.dateTime = "";

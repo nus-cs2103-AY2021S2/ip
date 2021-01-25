@@ -1,3 +1,8 @@
+package duke;
+
+import duke.exception.*;
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,7 +41,6 @@ public class Storage {
     }
 
     public void saveData(TaskList taskList) throws DukeException {
-        System.out.println(taskList.get(0));
         try {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);

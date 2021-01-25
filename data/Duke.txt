@@ -1,1 +1,1 @@
-E | 0 | buy book
+T | 0 |  add book

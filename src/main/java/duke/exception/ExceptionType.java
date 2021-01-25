@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * Enum class which consists of the different types of exception
  */

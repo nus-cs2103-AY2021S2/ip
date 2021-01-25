@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Task class created when user inputs todo, event, deadline
  */

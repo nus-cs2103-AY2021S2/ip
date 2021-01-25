@@ -1,10 +1,17 @@
+package duke.command;
+
+import duke.exception.*;
+import duke.Storage;
+import duke.task.*;
+import duke.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class AddTask extends Command {
 
-    AddTask(String command, String commandDetails) {
+    public AddTask(String command, String commandDetails) {
         super.commandType = command;
         super.commandDetails = commandDetails;
         super.dateTime = "";
