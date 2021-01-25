@@ -12,13 +12,13 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             command = new ListCommand();
         } else {
-            String[] check = fullCommand.split(" ");
-            if (check[0].equals("done")) {
-                command = new DoneCommand(check);
-            } else if (check[0].equals("delete")) {
-                command = new DeleteCommand(check);
+            String[] splitCommands = fullCommand.split(" ");
+            if (splitCommands[0].equals("done")) {
+                command = new DoneCommand(splitCommands);
+            } else if (splitCommands[0].equals("delete")) {
+                command = new DeleteCommand(splitCommands);
             } else {
-                command = new AddCommand(fullCommand, check);
+                command = new AddCommand(fullCommand, splitCommands);
             }
         }
         return command;
