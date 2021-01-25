@@ -2,9 +2,19 @@ package duke;
 
 import duke.command.*;
 
+/**
+ *  The Parser class encapsulates methods to handle user commands.
+ */
 public class Parser {
     private Ui ui = new Ui();
 
+    /**
+     * Returns a Command corresponding to the command the user input.
+     *
+     * @param fullCmd The full user input string.
+     * @return Command corresponding to user input.
+     * @throws DukeException if the user input a command with invalid format.
+     */
     public Command parse(String fullCmd) throws DukeException {
         String[] fullCmdStrArray = fullCmd.split(" ");
         Command toRun = null;
@@ -37,6 +47,12 @@ public class Parser {
         return toRun;
     }
 
+    /**
+     * Checks whether a string is a number in String type.
+     *
+     * @param str The string to be checked.
+     * @return True if the string is a number in String type, false otherwise.
+     */
     public static boolean isNumber(String str) {
         try {
             Integer.parseInt(str);

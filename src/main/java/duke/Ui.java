@@ -2,11 +2,17 @@ package duke;
 
 import duke.task.Task;
 
+/**
+ *  The Ui class encapsulates methods to handle text displays to the CLI.
+ */
 public class Ui {
     private static final String TOP_BORDER = "╭------------------------------------------------------╮";
     private static final String BTM_BORDER = "╰|╱ ---------------------------------------------------╯";
     private static final String PADDING = "  ";
 
+    /**
+     * Prints the chatbot's greeting message when a user starts the chatbot.
+     */
     public static void printGreeting() {
         String logo = "              .--.    .-.         .-.   \n" +
                 "             : .-'    : :         : :   \n" +
@@ -22,6 +28,11 @@ public class Ui {
         System.out.println(greeting);
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the list command with the wrong format.
+     *
+     * @return String containing error message of invalid list command.
+     */
     public String listCmdError() {
         String errorMsg = "Sorry human, I do not understand your command." +
                 "\n" +
@@ -30,6 +41,11 @@ public class Ui {
         return errorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the done command with too many parameters.
+     *
+     * @return String containing error message of invalid done command.
+     */
     public String doneCmdTooManyArgsError() {
         String errorMsg = "Sorry human, please enter only one task for me to mark as complete." +
                 "\n" +
@@ -38,11 +54,21 @@ public class Ui {
         return errorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the done command with no parameters.
+     *
+     * @return String containing error message of invalid done command.
+     */
     public String doneCmdNoArgsError() {
         String errorMsg = "Sorry human, please enter a task number.";
         return errorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the done command with the wrong parameter.
+     *
+     * @return String containing error message of invalid done command.
+     */
     public String doneCmdInvalidArgsError() {
         String errorMsg = "Sorry human, please enter the number of the task you want me to" +
                 "\n" +
@@ -51,6 +77,11 @@ public class Ui {
         return errorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the event command with the wrong format.
+     *
+     * @return String containing error message of invalid event command.
+     */
     public String eventFormatError() {
         String eErrorMsg = "Invalid format. Please enter as such:" +
                 "\n" +
@@ -59,6 +90,11 @@ public class Ui {
         return eErrorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the deadline command with the wrong format.
+     *
+     * @return String containing error message of invalid deadline command.
+     */
     public String deadlineFormatError() {
         String dErrorMsg = "Invalid format. Please enter as such:" +
                 "\n" +
@@ -67,6 +103,11 @@ public class Ui {
         return dErrorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the wrong date format.
+     *
+     * @return String containing error message of invalid date input.
+     */
     public String dateFormatError() {
         String dateErrorMsg = "Invalid date format. Please enter as such:" +
                 "\n" +
@@ -75,6 +116,11 @@ public class Ui {
         return dateErrorMsg;
     }
 
+    /**
+     * Returns an error message in a string when a user inputs the delete command with too many parameters.
+     *
+     * @return String containing error message of invalid delete command.
+     */
     public String deleteCmdTooManyArgsError() {
         String errorMsg = "Sorry human, please enter only one task for me to delete." +
                 "\n" +
@@ -83,6 +129,11 @@ public class Ui {
         return errorMsg;
     }
 
+    /**
+     * Prints error message from DukeException.
+     *
+     * @param e DukeException.
+     */
     public void printDukeException(DukeException e) {
         System.out.println(e);
     }
@@ -96,6 +147,11 @@ public class Ui {
         System.out.println(BTM_BORDER);
     }
 
+    /**
+     * Prints completed task message.
+     *
+     * @param task Task that has just been marked as done.
+     */
     public void printDoneMessage(Task task) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Well done human on completing " + task.getTaskName() + "!");
@@ -105,6 +161,11 @@ public class Ui {
     }
 
 
+    /**
+     * Prints all tasks.
+     *
+     * @param taskList List of all tasks.
+     */
     public void printList(TaskList taskList) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Here are the tasks in your list:");
@@ -114,6 +175,12 @@ public class Ui {
         System.out.println(BTM_BORDER);
     }
 
+    /**
+     * Prints added task to list message.
+     *
+     * @param task Task that has just been added to list.
+     * @param taskList List of all tasks.
+     */
     public void printAddToList(Task task, TaskList taskList) {
         System.out.println(TOP_BORDER);
         System.out.println(PADDING + "Got it: I've added this task:");
@@ -122,6 +189,9 @@ public class Ui {
         System.out.println(BTM_BORDER);
     }
 
+    /**
+     * Prints goodbye message.
+     */
     public void printBye() {
         String farewell = " ╭---------------------------------------╮\n"
                 + " |  Bye! Hope you complete your tasks!   |\n"

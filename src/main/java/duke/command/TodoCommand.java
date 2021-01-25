@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.TodoTask;
 
+/**
+ * The TodoCommand class encapsulates information and methods about a TodoCommand.
+ */
 public class TodoCommand implements Command {
     private String fullCmd;
     private String[] fullCmdStrArray;
@@ -17,6 +20,15 @@ public class TodoCommand implements Command {
         this.ui = ui;
     }
 
+
+    /**
+     * Processes the todo command by adding a new todo task to the list of tasks,
+     * writing it into the saved data file of tasks and displaying a message on the CLI.
+     *
+     * @param storage The storage object that writes data to the saved data file of tasks.
+     * @param taskList The list of tasks.
+     * @throws DukeException if the format of the Todo command is invalid.
+     */
     @Override
     public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length == 1) { // handle todo without parameters

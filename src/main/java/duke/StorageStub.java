@@ -13,7 +13,7 @@ public class StorageStub extends Storage{
 
     }
 
-    public void initializeTestFile() throws IOException {
+    private void initializeTestFile() throws IOException {
         File savedTaskList = new File(PATH_NAME);
         savedTaskList.getParentFile().mkdirs();
         savedTaskList.createNewFile();

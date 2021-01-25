@@ -4,6 +4,9 @@ import duke.*;
 import duke.task.Task;
 import duke.TaskList;
 
+/**
+ * The DeleteCommand class encapsulates information and methods about a DeleteCommand.
+ */
 public class DeleteCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
@@ -13,6 +16,14 @@ public class DeleteCommand implements Command {
         this.ui = ui;
     }
 
+    /**
+     *  * Processes the delete command by removing the specified task from the list of tasks,
+     *  * removing it from the saved data file of tasks and displaying a message on the CLI.
+     *
+     * @param storage The storage object that writes data to the saved data file of tasks.
+     * @param taskList The list of tasks.
+     * @throws DukeException if the format of the Delete command is invalid.
+     */
     @Override
     public void run(Storage storage, TaskList taskList) throws DukeException {
         if (fullCmdStrArray.length > 2) { // too many parameters (>1)
