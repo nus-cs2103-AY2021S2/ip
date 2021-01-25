@@ -111,7 +111,7 @@ public class TaskList {
     }
 
     /**
-     * Add Task to TaskList using input.
+     * Decide whether the input is to add a new task or find tasks in the existing tasklist.
      * @param input input used to get the relevant information of Task.
      * @throws DukeUnknownArgumentsException when the input arguments for the creation of the
      * Task is unknown.
@@ -173,6 +173,11 @@ public class TaskList {
         ui.printTaskList(tasks);
     }
 
+    /**
+     * Print tasks that contain input description.
+     * @param input used to get the description to print the tasks with the description.
+     * @throws DukeNoDescriptionException when the description given is empty.
+     */
     public void find(String input) throws DukeNoDescriptionException {
         String description = Parser.parseFindInput(input);
         ArrayList<Task> selectedTask = new ArrayList<>();
