@@ -30,7 +30,7 @@ public class Event extends Task {
         }
         if (tokens.length == 1 || tokens[1].equals("")) {
             throw new DukeExceptionIllegalArgument(
-                    "An event must have both description and time, delimited by '/at'.");
+                    "An event must have both description and time,\ndelimited by '/at'.");
         }
 
         LocalDateTime dt = Parser.parseDate(tokens[1].strip());

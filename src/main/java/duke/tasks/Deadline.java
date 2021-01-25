@@ -28,7 +28,7 @@ public class Deadline extends Task {
         }
         if (tokens.length == 1 || tokens[1].equals("")) {
             throw new DukeExceptionIllegalArgument(
-                    "An deadline must have both description and time, delimited by '/by'.");
+                    "An deadline must have both description and time,\ndelimited by '/by'.");
         }
 
         LocalDateTime dt = Parser.parseDate(tokens[1].strip());
