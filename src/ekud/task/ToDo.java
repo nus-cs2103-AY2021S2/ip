@@ -1,6 +1,6 @@
 package ekud.task;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class ToDo extends Task {
     public ToDo(String description) {

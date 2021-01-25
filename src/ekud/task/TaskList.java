@@ -1,8 +1,8 @@
 package ekud.task;
 
-import ekud.common.exception.InvalidTaskIndexException;
-
 import java.util.*;
+
+import ekud.common.exception.*;
 
 public class TaskList implements Iterable<Task> {
     private final Vector<Task> taskArray;
@@ -10,6 +10,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Construct a new TaskList from existing tasks.
+     *
      * @param taskArray the array containing existing tasks
      */
     public TaskList(Collection<Task> taskArray) {
@@ -25,12 +26,13 @@ public class TaskList implements Iterable<Task> {
      * Construct a new TaskList with no existing tasks
      */
     public TaskList() {
-        this.taskArray = new Vector<>();
-        this.doneCount = 0;
+        taskArray = new Vector<>();
+        doneCount = 0;
     }
 
     /**
      * Add a new task to the end of the existing list.
+     *
      * @param newTask the task to be added
      */
     public void add(Task newTask) {
@@ -39,13 +41,14 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Remove a task by index.
+     *
      * @param index the index of the task to be removed
      * @return task removed from list
      * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
      */
     public Task remove(int index) throws InvalidTaskIndexException {
         try {
-            Task deletedTask =  taskArray.remove(index);
+            Task deletedTask = taskArray.remove(index);
             if (deletedTask.isDone) {
                 --doneCount;
             }
@@ -57,6 +60,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Return the number of stored tasks.
+     *
      * @return the number of stored tasks
      */
     public int size() {
@@ -65,6 +69,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the task at the specified position in this TaskList.
+     *
      * @param index index of the element to return
      * @return Task at the specified index
      * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
@@ -79,6 +84,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Mark the task at index as done.
+     *
      * @param index index of the task to be marked as done
      * @return the task marked as done
      * @throws InvalidTaskIndexException if the index is out of range (index < 0 || index >= size())
@@ -96,6 +102,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Get the number of incomplete tasks.
+     *
      * @return number of incomplete tasks
      */
     public int getIncompleteRemaining() {
@@ -104,6 +111,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Returns the last task of the TaskList.
+     *
      * @return the last task of the TaskList, i.e., the component at index size() - 1
      */
     public Task last() {
@@ -112,6 +120,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Tests if this TaskList has no tasks.
+     *
      * @return true if and only if this TaskList has no tasks, that is, its size is zero; false otherwise.
      */
     public boolean isEmpty() {
@@ -119,8 +128,8 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns an iterator over the tasks in this list in proper sequence.
-     * The returned iterator is fail-fast.
+     * Returns an iterator over the tasks in this list in proper sequence. The returned iterator is fail-fast.
+     *
      * @return an iterator over the elements in this list in proper sequence
      */
     public Iterator<Task> iterator() {
@@ -129,6 +138,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Export the internal list of tasks as an unmodifiable list.
+     *
      * @return an unmodifiable view of the task list.
      */
     public List<Task> export() {

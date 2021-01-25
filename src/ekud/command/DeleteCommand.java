@@ -1,21 +1,22 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
-import ekud.storage.Storage;
-import ekud.task.Task;
-import ekud.task.TaskList;
-import ekud.ui.Ui;
+import ekud.common.exception.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public class DeleteCommand extends ModificationCommand {
     protected int index;
+
     public DeleteCommand(int index) {
         this.index = index;
     }
 
     /**
      * Delete a task by its index
-     * @param tasks the list of tasks
-     * @param ui the user interface
+     *
+     * @param tasks   the list of tasks
+     * @param ui      the user interface
      * @param storage the file writer
      */
     @Override

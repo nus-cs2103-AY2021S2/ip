@@ -1,16 +1,16 @@
 package ekud;
 
-import ekud.command.Command;
-import ekud.common.exception.DukeException;
-import ekud.parser.Parser;
-import ekud.storage.Storage;
-import ekud.task.TaskList;
-import ekud.ui.Ui;
+import ekud.command.*;
+import ekud.common.exception.*;
+import ekud.parser.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public class Ekud {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Ekud(String filePath) {
         ui = new Ui();
@@ -21,6 +21,10 @@ public class Ekud {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Ekud("data/tasks.txt").run();
     }
 
     public void run() {
@@ -40,9 +44,5 @@ public class Ekud {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Ekud("data/tasks.txt").run();
     }
 }

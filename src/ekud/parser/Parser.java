@@ -1,35 +1,19 @@
 package ekud.parser;
 
-import ekud.command.*;
-import ekud.common.exception.DukeException;
-import ekud.common.exception.InvalidCommandException;
-import ekud.common.exception.InvalidTaskIndexException;
-import ekud.common.exception.NoTaskDescriptionException;
+import java.time.*;
+import java.time.format.*;
+import java.util.regex.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import ekud.command.*;
+import ekud.common.exception.*;
 
 public class Parser {
     private static final Pattern COMMAND_FORMAT = Pattern.compile("^(?<command>\\S+)(?:\\s+(?<arguments>.*))?");
     private static final Pattern TIMED_TASK_ARGS = Pattern.compile(
             "(?<description>.*)\\s+"
-            + "(?<separator>/(?:by|at))\\s+"
-            + "(?<datetime>.*)");
+                    + "(?<separator>/(?:by|at))\\s+"
+                    + "(?<datetime>.*)");
     private static final Pattern DATE_TIME_FORMAT = Pattern.compile("^[0-3]?\\d/[0-1]?\\d/\\d{4}\\s+\\d{4}");
-
-    private enum CommandType {
-        LIST,
-        DONE,
-        DELETE,
-        BYE,
-        TODO,
-        DEADLINE,
-        EVENT
-    }
 
     private static AddCommand createAddCommand(CommandType commandType, String arguments) throws DukeException {
         if (arguments.isBlank()) {
@@ -82,48 +66,58 @@ public class Parser {
         }
 
         switch (func) {
-            case LIST:
-                if (arguments.isBlank()) {
-                    return new ListCommand();
-                }
+        case LIST:
+            if (arguments.isBlank()) {
+                return new ListCommand();
+            }
 
-                LocalDate date;
-                try {
-                    date = LocalDate.parse(arguments, DateTimeFormatter.ofPattern("d/M/yyyy"));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Invalid date format, use d/M/yyyy");
-                }
-                return new ListCommand(date);
+            LocalDate date;
+            try {
+                date = LocalDate.parse(arguments, DateTimeFormatter.ofPattern("d/M/yyyy"));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Invalid date format, use d/M/yyyy");
+            }
+            return new ListCommand(date);
 
-            case DONE:
-                try {
-                    int index = Integer.parseInt(arguments) - 1;
-                    return new DoneCommand(index);
-                } catch (NumberFormatException e) {
-                    throw new InvalidTaskIndexException();
-                }
+        case DONE:
+            try {
+                int index = Integer.parseInt(arguments) - 1;
+                return new DoneCommand(index);
+            } catch (NumberFormatException e) {
+                throw new InvalidTaskIndexException();
+            }
 
-            case DELETE:
-                try {
-                    int index = Integer.parseInt(arguments) - 1;
-                    return new DeleteCommand(index);
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidTaskIndexException();
-                }
+        case DELETE:
+            try {
+                int index = Integer.parseInt(arguments) - 1;
+                return new DeleteCommand(index);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                throw new InvalidTaskIndexException();
+            }
 
-            case BYE:
-                return new ByeCommand();
+        case BYE:
+            return new ByeCommand();
 
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                if (arguments.isBlank()) {
-                    throw new NoTaskDescriptionException();
-                }
-                return createAddCommand(func, arguments);
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            if (arguments.isBlank()) {
+                throw new NoTaskDescriptionException();
+            }
+            return createAddCommand(func, arguments);
 
-            default:
-                throw new InvalidCommandException();
+        default:
+            throw new InvalidCommandException();
         }
+    }
+
+    private enum CommandType {
+        LIST,
+        DONE,
+        DELETE,
+        BYE,
+        TODO,
+        DEADLINE,
+        EVENT
     }
 }

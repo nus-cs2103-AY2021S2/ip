@@ -1,26 +1,24 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
-import ekud.storage.Storage;
-import ekud.task.Task;
-import ekud.task.TaskList;
-import ekud.task.TaskWithDateTime;
-import ekud.ui.Ui;
+import java.time.*;
+import java.util.*;
 
-import java.time.LocalDate;
-import java.util.Vector;
+import ekud.common.exception.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public class ListCommand extends Command {
     private final boolean filter;
     private LocalDate date;
 
     public ListCommand(LocalDate date) {
-        this.filter = true;
+        filter = true;
         this.date = date;
     }
 
     public ListCommand() {
-        this.filter = false;
+        filter = false;
     }
 
     /**
@@ -51,8 +49,9 @@ public class ListCommand extends Command {
         for (Task task : tasks) {
             if (task instanceof TaskWithDateTime) {
                 TaskWithDateTime t = (TaskWithDateTime) task;
-                if (t.getDateTime().toLocalDate().equals(date))
+                if (t.getDateTime().toLocalDate().equals(date)) {
                     toPrint.add(t);
+                }
             }
         }
         if (toPrint.isEmpty()) {

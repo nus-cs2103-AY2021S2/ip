@@ -1,6 +1,6 @@
 package ekud.task;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public abstract class Task {
     protected String description;

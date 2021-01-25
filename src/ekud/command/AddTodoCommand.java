@@ -1,10 +1,9 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
-import ekud.storage.Storage;
-import ekud.task.TaskList;
-import ekud.task.ToDo;
-import ekud.ui.Ui;
+import ekud.common.exception.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String description) {
@@ -13,8 +12,9 @@ public class AddTodoCommand extends AddCommand {
 
     /**
      * Execute this command by adding a todo into the list, followed by common procedures of all add commands
-     * @param tasks the list of tasks
-     * @param ui the user interface
+     *
+     * @param tasks   the list of tasks
+     * @param ui      the user interface
      * @param storage the file writer
      */
     @Override

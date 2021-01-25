@@ -1,9 +1,9 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
-import ekud.storage.Storage;
-import ekud.task.TaskList;
-import ekud.ui.Ui;
+import ekud.common.exception.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public abstract class AddCommand extends ModificationCommand {
     protected String description;
@@ -16,7 +16,7 @@ public abstract class AddCommand extends ModificationCommand {
      * Save all tasks to disk
      *
      * @param tasks   the list of tasks
-     * @param ui the user interface
+     * @param ui      the user interface
      * @param storage the file writer
      */
     @Override

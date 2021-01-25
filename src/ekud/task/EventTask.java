@@ -1,7 +1,7 @@
 package ekud.task;
 
-import java.time.LocalDateTime;
-import java.util.LinkedList;
+import java.time.*;
+import java.util.*;
 
 public class EventTask extends TaskWithDateTime {
     public EventTask(String description, LocalDateTime at) {

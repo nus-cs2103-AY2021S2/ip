@@ -1,12 +1,11 @@
 package ekud.command;
 
-import ekud.common.exception.DukeException;
-import ekud.storage.Storage;
-import ekud.task.EventTask;
-import ekud.task.TaskList;
-import ekud.ui.Ui;
+import java.time.*;
 
-import java.time.LocalDateTime;
+import ekud.common.exception.*;
+import ekud.storage.*;
+import ekud.task.*;
+import ekud.ui.*;
 
 public class AddEventCommand extends AddTimedTaskCommand {
     public AddEventCommand(String description, LocalDateTime dateTime) {
@@ -15,8 +14,9 @@ public class AddEventCommand extends AddTimedTaskCommand {
 
     /**
      * Execute this task by adding a deadline into the list, followed by common procedures of all add commands
-     * @param tasks the list of tasks
-     * @param ui the user interface
+     *
+     * @param tasks   the list of tasks
+     * @param ui      the user interface
      * @param storage the file writer
      */
     @Override

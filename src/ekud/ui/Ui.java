@@ -1,11 +1,10 @@
 package ekud.ui;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Ui {
-//    private Parser parser;
+    //    private Parser parser;
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
     private static final String PADDING = "\t";
     private static final String WELCOME_MESSAGE = "Yo! I'm ekud.Ekud!\nWhat you want?";
