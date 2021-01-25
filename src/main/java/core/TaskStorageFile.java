@@ -1,5 +1,7 @@
 package core;
 
+import core.task.Task;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,6 +1,6 @@
 import core.IOManager;
 import core.InputHandler;
-import core.TaskManager;
+import core.task.TaskManager;
 
 public class Duke {
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package core;
 
+import core.task.Task;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package core;
 
+import core.task.TaskManager;
+
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.BiFunction;

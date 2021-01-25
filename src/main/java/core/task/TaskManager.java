@@ -1,4 +1,7 @@
-package core;
+package core.task;
+
+import core.TaskStorage;
+import core.TaskStorageFile;
 
 import java.io.IOException;
 import java.nio.file.Path;

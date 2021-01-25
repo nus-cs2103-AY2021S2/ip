@@ -1,5 +1,7 @@
 package core;
 
+import core.task.*;
+
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 

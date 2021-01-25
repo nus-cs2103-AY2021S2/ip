@@ -1,6 +1,8 @@
-package core;
+package core.task;
 
-public class Event extends Task{
+import core.task.Task;
+
+public class Event extends Task {
     private String atTime;
 
     public Event(String desc) {
