@@ -18,15 +18,20 @@ public class Parser {
 
     public static String[] findEventDatetime(String input) {
         // split by /at and /to
-        String output = findDatetime(input, "/at");
+        String output = input;
+
+        if (input.contains("/at"))
+            output = findDatetime(input, "/at");
 
         if (output != null) {
             // first element would be the start datetime
             // second element would be the end datetime
+
             String[] outputArr = output.split("/to");
-            for (int i = 0; i < outputArr.length; i++) {
+//            System.out.println(outputArr[0]);
+
+            for (int i = 0; i < outputArr.length; i++)
                 outputArr[i] =  outputArr[i].stripLeading().stripTrailing();
-            }
             return outputArr;
         }
 
@@ -34,7 +39,6 @@ public class Parser {
     }
 
     public static String findDescription(String input) {
-        System.out.println(input.split("\\s+", 2)[1]);
         String noCommand = input.split("\\s+", 2)[1];
 
         if (noCommand.contains("/by"))

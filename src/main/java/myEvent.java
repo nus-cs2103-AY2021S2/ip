@@ -18,9 +18,19 @@ public class myEvent extends Task {
         }
     }
 
-    myEvent(String description, String datetime, Boolean completion) {
+    myEvent(String description, String[] datetimeInputArr, Boolean completion) {
         super(description, completion);
-        this.datetime = datetime.stripLeading().stripTrailing();
+
+        String[] startDatetimeArr = datetimeInputArr[0].split(", ");
+        String[] endDatetimeArr = datetimeInputArr[1].split(", ");
+
+        if (startDatetimeArr.length == 2 && endDatetimeArr.length == 2) {
+            this.startDatetime = new DateTime(startDatetimeArr[0], startDatetimeArr[1]);
+            this.endDatetime = new DateTime(endDatetimeArr[0], endDatetimeArr[1]);
+        } else {
+            this.startDatetime = new DateTime(startDatetimeArr[0]);
+            this.endDatetime = new DateTime(endDatetimeArr[0]);
+        }
     }
 
     @Override

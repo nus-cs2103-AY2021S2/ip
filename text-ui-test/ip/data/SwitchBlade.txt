@@ -1,6 +1,6 @@
 T | todo borrow book | F
-D | Sunday | deadline return book | F
-E | Mon 2-4pm | event project meeting | F
+D | 2019-11-15, 1600 | return book | F
+E | 2021-01-26 /to 2021-01-26 | project meeting | F
 T | todo borrow book | F
-D | Sunday | deadline return book | F
-E | Mon 2-4pm | event project meeting | F
+D | 2019-11-15, 1600 | return book | F
+E | 2021-01-26 /to 2021-01-26 | project meeting | F

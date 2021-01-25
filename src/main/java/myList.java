@@ -72,7 +72,6 @@ public class myList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-
         for (int i = 0; i < taskList.size(); i++) {
             sb.append("\n"
                     + (i + 1)

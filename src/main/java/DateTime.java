@@ -17,10 +17,11 @@ public class DateTime {
 
 
     DateTime(String date, String time) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        this.localDate = LocalDate.parse(date);
-        this.localTime = LocalTime.parse(time, dateTimeFormatter);
+        this.localDate = LocalDate.parse(date, dateFormatter);
+        this.localTime = LocalTime.parse(time, timeFormatter);
         this.localDateTime = localDate.atTime(localTime);
     }
 
@@ -29,6 +30,13 @@ public class DateTime {
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(localDateTime);
         else
             return DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDate);
+    }
+
+    public String savingDatetime() {
+        if (localDateTime != null)
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd, HHmm").format(localDateTime);
+        else
+            return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
     }
 
     @Override

@@ -26,8 +26,10 @@ public class Storage {
                         output.add(d);
                         break;
                     case "E":
-                        myEvent e = new myEvent(stringArr[2], stringArr[1], stringArr[3].equals("T"));
-                        output.add(e);
+                        if (Parser.findEventDatetime(stringArr[1]) != null) {
+                            myEvent e = new myEvent(stringArr[2], Parser.findEventDatetime(stringArr[1]), stringArr[3].equals("T"));
+                            output.add(e);
+                        }
                         break;
                     case "T":
                         Task t = new Task(stringArr[1], stringArr[2].equals("T"));
@@ -63,10 +65,12 @@ public class Storage {
         for (Task t : outputToFile) {
             if (t instanceof Deadline) {
                 sb.append("D | "
-                        + ((Deadline) t).datetime);
+                        + ((Deadline) t).datetime.savingDatetime());
             } else if (t instanceof myEvent) {
                 sb.append("E | "
-                        + ((myEvent) t).datetime);
+                        + ((myEvent) t).startDatetime.savingDatetime()
+                        + " /to "
+                        + ((myEvent) t).endDatetime.savingDatetime());
             } else {
                 sb.append("T");
             }

@@ -2,10 +2,6 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    Ui() {
-
-    }
-
     public static void fileError() {
         System.out.println("Some errors were encountered with the file");
     }

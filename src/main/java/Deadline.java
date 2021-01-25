@@ -11,9 +11,14 @@ public class Deadline extends Task{
             this.datetime = new DateTime(datetime[0]);
     }
 
-    Deadline(String description, String datetime, Boolean completion) {
+    Deadline(String description, String datetimeInput, Boolean completion) {
         super(description, completion);
-        this.datetime = datetime.stripLeading().stripTrailing();
+
+        String[] datetime = datetimeInput.split(", ", 2);
+        if (datetime.length == 2)
+            this.datetime = new DateTime(datetime[0], datetime[1]);
+        else
+            this.datetime = new DateTime(datetime[0]);
     }
 
     @Override
