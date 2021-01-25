@@ -1,7 +1,10 @@
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
     private static String PARTING_LINE = "____________________________________________________________";
@@ -10,6 +13,7 @@ public class Duke {
 
     public static void main(String[] args) {
         printGreeting();
+        syncTasksFromFile();
 
         Scanner sc = new Scanner(System.in);
         boolean isOver = false;
@@ -78,7 +82,7 @@ public class Duke {
         if (index < tasks.size()) {
             Task completedTask = tasks.get(index);
             completedTask.complete();
-            updateTasks();
+            updateTasksInFile();
             System.out.println(" Marked. How cool is that?");
             System.out.println("  " + completedTask);
         } else {
@@ -90,7 +94,7 @@ public class Duke {
         if (index < tasks.size()) {
             Task removingTask = tasks.get(index);
             tasks.remove(index);
-            updateTasks();
+            updateTasksInFile();
             System.out.println(" Following task is removed:");
             System.out.println("  " + removingTask);
             System.out.println(" Now you have " + tasks.size() + " tasks.");
@@ -102,12 +106,47 @@ public class Duke {
     public static void addThisTask(Task task) {
         System.out.println(" Added: ");
         tasks.add(task);
-        updateTasks();
+        updateTasksInFile();
         System.out.println("  " + task);
         System.out.println(" Now you have " + tasks.size() + " tasks.");
     }
 
-    public static void updateTasks() {
+    public static void syncTasksFromFile() {
+        try {
+            File f = new File(FILE_PATH);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+                String[] keyWords = line.split(" \\| ");
+                String taskType = keyWords[0].strip();
+                String taskName;
+                String taskStatus;
+                Task thisTask;
+
+                if (taskType.equals("T")) {
+                    taskName = keyWords[2];
+                    thisTask = new Todo(taskName);
+                } else if (taskType.equals("D")) {
+                    taskName = keyWords[2];
+                    String deadline = keyWords[3];
+                    thisTask = new Deadline(taskName, deadline);
+                } else {
+                    taskName = keyWords[2];
+                    String date = keyWords[3];
+                    thisTask = new Event(taskName, date);
+                }
+                taskStatus = keyWords[1].strip();
+                if (taskStatus.equals("1")) {
+                    thisTask.complete();
+                }
+                tasks.add(thisTask);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void updateTasksInFile() {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
             for (Task task : tasks) {
