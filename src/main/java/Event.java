@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an Event task that start at a specific time and ends at a specific time.
  */
@@ -30,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String fileString() {
-        int statusNum = this.isDone? 1 : 0;
-        return "E | " + statusNum + " | " +this.description + " | " + at;
+        int statusNum = this.isDone ? 1 : 0;
+        return "E | " + statusNum + " | " + this.description + " | " + at;
     }
 }
