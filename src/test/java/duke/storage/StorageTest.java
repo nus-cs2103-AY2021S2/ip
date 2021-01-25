@@ -1,6 +1,6 @@
 package duke.storage;
 
-import duke.exceptions.InvalidSaveFileFormatException;
+import duke.exceptions.SaveFileInvalidFormatException;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -17,7 +17,7 @@ public class StorageTest {
     @Test
     public void testStorage_invalidSaveTextFormat_throwsInvalidSaveFileFormatException() {
         Storage storage = new Storage(System.getProperty("user.dir") + "/java/duke/storage/StorageTest.txt");
-        assertThrows(InvalidSaveFileFormatException.class, () -> storage.load());
+        assertThrows(SaveFileInvalidFormatException.class, () -> storage.load());
     }
 
 }
