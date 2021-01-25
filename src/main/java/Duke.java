@@ -23,7 +23,6 @@ public class Duke {
                 if (userInput.equals("bye")) {
                     response.append("Bye. Hope to see you soon!");
                     Duke.printWithBorders(response.toString());
-                    Duke.saveTasks(tasks);
                     return;
                 } else if (userInput.equals("list")) {
                     response.append("Here are the tasks in your list:\n");
@@ -70,6 +69,7 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
                 Duke.printWithBorders(response.toString());
+                Duke.saveTasks(tasks);
             } catch (DukeException | IOException e) {
                 Duke.printWithBorders(e.getMessage());
             }
