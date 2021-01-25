@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static final int TODO = 1;
@@ -109,7 +112,7 @@ public class Duke {
             } else if (cmd.contains("delete")){
                 int index = Integer.parseInt(cmd.substring(7));
                 taskList.removeTask(index );
-            } else {
+            } else{
                 taskList = performChildTask(taskList, cmd);
             }
             System.out.println(printLine());
@@ -119,10 +122,11 @@ public class Duke {
         return taskList;
     }
 
+
     public static TaskList performChildTask(TaskList taskList, String cmd) {
-        int taskType = checkChildTask(cmd);
-        String task = checkInput(cmd, taskType);
-        int seg = cmd.indexOf("/");
+        InputChecker checker = new InputChecker();
+        int taskType = checker.checkTaskType(cmd);
+        String task = checker.checkFrontInput(cmd, taskType);
         if(!task.isEmpty()) {
             try {
                 if (taskType == -1) {
@@ -133,14 +137,15 @@ public class Duke {
                     if (taskType == TODO) {
                         ToDo newToDo = new ToDo(task);
                         performAddTask(taskList, newToDo);
-                    } else if (taskType == DEADLINE) {
-                        String by = cmd.substring(seg + 4);
-                        Deadline newDeadLine = new Deadline(task, by);
-                        performAddTask(taskList, newDeadLine);
                     } else {
-                        String at = cmd.substring(seg + 4);
-                        Event newEvent = new Event(task, at);
-                        performAddTask(taskList, newEvent);
+                        LocalDateTime date = checker.dateFormatter(cmd);
+                        if (taskType == DEADLINE) {
+                            Deadline newDeadLine = new Deadline(task, date);
+                            performAddTask(taskList, newDeadLine);
+                        } else {
+                            Event newEvent = new Event(task, date);
+                            performAddTask(taskList, newEvent);
+                        }
                     }
                     printTotalTasks(taskList);
                 }
@@ -149,50 +154,6 @@ public class Duke {
             }
         }
         return taskList;
-    }
-
-    public static int checkChildTask(String cmd) {
-        if (cmd.indexOf("todo") == 0 && cmd.contains("todo")) {
-            return TODO;
-        } else if (cmd.indexOf("deadline") == 0 && cmd.contains("deadline")) {
-            return DEADLINE;
-        } else if (cmd.indexOf("event") == 0 && cmd.contains("event")) {
-            return EVENT;
-        } else {
-            return -1;
-        }
-    }
-
-    public static String checkInput(String cmd, int taskID) {
-        String task = new String();
-        String type = new String();
-        try {
-            if (taskID == TODO) {
-                type = "todo";
-                if(cmd.length() > 4) {
-                    task = cmd.substring(5);
-                }
-            } else if (taskID == DEADLINE) {
-                type = "deadline";
-                int seg = cmd.indexOf("/");
-                if(cmd.length() > 8 && seg != -1) {
-                    task = cmd.substring(9, seg);
-                }
-            } else {
-                type = "event";
-                int seg = cmd.indexOf("/");
-                if(cmd.length() > 5 && seg != -1) {
-                    task = cmd.substring(6, seg);
-                }
-            }
-            if(task.equals("")){
-                throw new DukeException(" ☹ OOPS!!! " +
-                    "The description of a " + type + " cannot be empty.");
-            }
-        } catch (DukeException de) {
-            System.out.println(de.getMessage());
-        }
-        return task;
     }
 
     public static void performAddTask(TaskList taskList, Task task) {
