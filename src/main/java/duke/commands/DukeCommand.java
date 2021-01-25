@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.*;
+import duke.parser.Parser;
 import duke.storage.FileLoader;
 import duke.tasks.*;
 import duke.ui.Ui;
@@ -44,6 +45,8 @@ public abstract class DukeCommand {
         case "deadline":
             task = Deadline.parse(arg);
             return new DukeCommandAdd(task);
+        case "find":
+            return new DukeCommandFind(arg);
         default:
             throw new DukeExceptionCommandNotFound("Command '" + cmd + "' is invalid. Valid commands:"
                     + "\nbye, list, done, delete, event, todo, deadline");

@@ -142,20 +142,24 @@ public class Parser {
     }
 
     public static String formatDate(LocalDateTime dt) {
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         if (dt.getHour() == 0 && dt.getMinute() == 0) {
-            if (dt.getYear() == now.getYear()) {
+            if (dt.getYear() == now.getYear() && now.isBefore(dt.plusDays(1))) {
                 return dt.format(READABLE_DATE_FORMAT);
             } else {
                 return dt.format(READABLE_DATE_YEAR_FORMAT);
             }
         } else {
-            if (dt.getYear() == now.getYear()) {
+            if (dt.getYear() == now.getYear() && now.isBefore(dt)) {
                 return dt.format(READABLE_DATETIME_FORMAT);
             } else {
                 return dt.format(READABLE_DATETIME_YEAR_FORMAT);
             }
         }
+    }
+
+    public static String formatDateFull(LocalDateTime dt) {
+        return dt.format(READABLE_DATETIME_YEAR_FORMAT);
     }
 
     public static String formatDateISO(LocalDateTime dt) {
