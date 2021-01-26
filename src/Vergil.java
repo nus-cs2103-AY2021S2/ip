@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -20,77 +21,136 @@ public class Vergil {
                 if (command.equals("bye")) {
                     System.out.println("Bye. See you soon!");
                 } else if (command.equals("list")) {
-                    for (int i = 0; i < tasks.size(); i++) {
-                        System.out.printf("%d. %s\n", i + 1, tasks.get(i));
-                    }
+                    listTasks(tasks);
                 } else if (command.startsWith("done")) {
-                    if (command.equals("done")) {
-                        throw new VergilException(
-                                "Sorry! 'done' requires typing the list number of the task.");
-                    }
-                    Task task = tasks.get(Integer.parseInt(command.split(" ")[1]) - 1);
-                    if (task.isDone()) {
-                        System.out.printf("You have already completed this task: %s\n",
-                                task);
-                    } else {
-                        task.doTask();
-                        System.out.println("Sweet! Task completed:");
-                        System.out.printf("   %s\n", task);
-                    }
+                    completeTask(command, tasks);
                 } else if (command.startsWith("delete")) {
-                    if (command.equals("delete")) {
-                        throw new VergilException(
-                                "Sorry! 'delete' requires typing the list number of the task.");
-                    }
-                    Task task = tasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
-                        System.out.println("Acknowledged. Task deleted:");
-                        System.out.printf("   %s\n", task);
+                    deleteTask(command, tasks);
                 } else if (command.startsWith("todo")) {
-                    if (command.equals("todo")) {
-                        throw new VergilException(
-                                "Sorry! 'todo' requires typing a description of the task.");
-                    }
-                    String desc = command.split(" ", 2)[1];
-                    tasks.add(new Todo(desc));
-                    System.out.printf("Added '%s' as a ToDo task.\n", desc);
+                    addTodo(command, tasks);
                 } else if (command.startsWith("deadline")) {
-                    if (command.equals("deadline")) {
-                        throw new VergilException(
-                                "Sorry! 'deadline' requires typing a description of," +
-                                " the keyword '/by', and a due time for the task.");
-                    }
-                    String[] bySplit = command.split(" /by ");
-                    String desc = bySplit[0].split(" ", 2)[1];
-                    String time = bySplit[1];
-
-                    tasks.add(new Deadline(desc, time));
-                    System.out.printf("Added '%s' as a deadline task by '%s'.\n",
-                            desc,
-                            time);
+                   addDeadline(command, tasks);
                 } else if (command.startsWith("event")) {
-                    if (command.equals("event")) {
-                        throw new VergilException(
-                                "Sorry! 'event' requires typing a description of," +
-                                        " the keyword '/at', and a scheduled time for the task.");
-                    }
-
-                    String[] atSplit = command.split(" /at ");
-                    String desc = atSplit[0].split(" ", 2)[1];
-                    String time = atSplit[1];
-
-                    tasks.add(new Event(desc, time));
-                    System.out.printf("Added '%s' as an event task by '%s'.\n",
-                            desc,
-                            time);
+                    addEvent(command, tasks);
                 } else {
                     throw new VergilException("Sorry! I cannot resolve this command.");
                 }
             } catch (VergilException e) {
                 System.out.println(e.getMessage());
-            } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Sorry! The command's format is invalid.");
             }
             System.out.println();
         } while (!command.equals("bye"));
+    }
+
+    /**
+     * Adds a Todo task to a given list of tasks.
+     * @param command the 'todo' command to be processed and added as a task.
+     * @param tasks the list of tasks to be modified.
+     * @throws VergilException if the 'todo' command's formatting is invalid.
+     */
+    public static void addTodo(String command, List<Task> tasks) throws VergilException {
+        try {
+            String desc = command.split(" ", 2)[1];
+            tasks.add(new Todo(desc));
+            System.out.printf("Added '%s' as a ToDo task.\n", desc);
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! 'todo' commands should be typed as follows: todo <description>");
+        }
+    }
+
+    /**
+     * Adds a Deadline task to a given list of tasks.
+     * @param command the 'deadline' command to be processed and added as a task.
+     * @param tasks the list of tasks to be modified.
+     * @throws VergilException if the 'deadline' command's formatting is invalid.
+     */
+    public static void addDeadline(String command, List<Task> tasks) throws VergilException {
+        try {
+            String[] bySplit = command.split(" /by ");
+            String desc = bySplit[0].split(" ", 2)[1];
+            String time = bySplit[1];
+
+            tasks.add(new Deadline(desc, time));
+            System.out.printf("Added '%s' as a deadline task by '%s'.\n", desc, time);
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! 'deadline' commands should be typed as follows: "
+                    + "deadline <description> /by <time>");
+        }
+    }
+
+    /**
+     * Adds an Event task to a given list of tasks.
+     * @param command the 'event' command to be processed and added as task.
+     * @param tasks the list of tasks to be modified.
+     * @throws VergilException if the 'event' command's formatting is invalid.
+     */
+    public static void addEvent(String command, List<Task> tasks) throws VergilException {
+        try {
+            String[] atSplit = command.split(" /at ");
+            String desc = atSplit[0].split(" ", 2)[1];
+            String time = atSplit[1];
+
+            tasks.add(new Event(desc, time));
+            System.out.printf("Added '%s' as an event task at '%s'.\n", desc, time);
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! 'event' commands should be typed as follows: "
+                    + "event <description> /at <time>");
+        }
+    }
+
+    /**
+     * Marks a task in the list as done. Does nothing if the task is already completed.
+     * @param command the 'done' command to be processed and completed as a task.
+     * @param tasks the list of tasks to be modified.
+     * @throws VergilException if the 'done' command's formatting is invalid, or if there is no matching task
+     * in the list.
+     */
+    public static void completeTask(String command, List<Task> tasks) throws VergilException {
+        try {
+            int taskSerialNum = Integer.parseInt(command.split(" ")[1]);
+            Task t = tasks.get(taskSerialNum - 1);
+            if (t.isDone()) {
+                System.out.printf("You have already completed this task: %s\n", t);
+            } else {
+                t.doTask();
+                System.out.println("Sweet! Task completed:");
+                System.out.printf("   %s\n", t);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+           throw new VergilException("Sorry! 'done' commands should be typed as follows: done <task number in list>");
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! There is no task with the given number in the list.");
+        }
+    }
+
+    /**
+     * Deletes a specific task from the given list.
+     * @param command the 'delete' command to be processed and deleted (as a task) from the list.
+     * @param tasks the list of tasks to be modified.
+     * @throws VergilException if the 'delete' command's formatting is invalid, or if there is no matching task
+     * in the list.
+     */
+    public static void deleteTask(String command, List<Task> tasks) throws VergilException {
+        try {
+            int taskSerialNum = Integer.parseInt(command.split(" ")[1]);
+            Task t = tasks.remove(taskSerialNum - 1);
+            System.out.println("Acknowledged. Task deleted:");
+            System.out.printf("   %s\n", t);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! 'delete' commands should be typed as follows: "
+                    + "delete <task number in list>");
+        } catch (IndexOutOfBoundsException e) {
+            throw new VergilException("Sorry! There is no task with the given number in the list.");
+        }
+    }
+
+    /**
+     * Displays the current tasks on the given list.
+     * @param tasks the list of tasks to be displayed.
+     */
+    public static void listTasks(List<Task> tasks) {
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, tasks.get(i));
+        }
     }
 }

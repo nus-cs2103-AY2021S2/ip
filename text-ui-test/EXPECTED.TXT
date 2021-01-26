@@ -5,7 +5,7 @@ How may I help you?
 
 >>> Added 'this project' as a deadline task by 'midnight'.
 
->>> Added 'bro's wedding' as an event task by 'summer vacation'.
+>>> Added 'bro's wedding' as an event task at 'summer vacation'.
 
 >>> 1. [T][ ] make coffee
 2. [D][ ] this project (by: midnight)
@@ -39,29 +39,29 @@ How may I help you?
 3. [E][X] bro's wedding (at: summer vacation)
 4. [T][X] drink coffee
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! There is no task with the given number in the list.
 
->>> Sorry! 'todo' requires typing a description of the task.
+>>> Sorry! 'todo' commands should be typed as follows: todo <description>
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! 'deadline' commands should be typed as follows: deadline <description> /by <time>
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! 'event' commands should be typed as follows: event <description> /at <time>
 
 >>> 1. [T][X] make coffee
 2. [D][X] this project (by: midnight)
 3. [E][X] bro's wedding (at: summer vacation)
 4. [T][X] drink coffee
 
->>> Sorry! 'delete' requires typing the list number of the task.
+>>> Sorry! 'delete' commands should be typed as follows: delete <task number in list>
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! 'delete' commands should be typed as follows: delete <task number in list>
 
 >>> Acknowledged. Task deleted:
    [T][X] make coffee
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! There is no task with the given number in the list.
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! There is no task with the given number in the list.
 
 >>> 1. [D][X] this project (by: midnight)
 2. [E][X] bro's wedding (at: summer vacation)
@@ -76,7 +76,7 @@ How may I help you?
 >>> Acknowledged. Task deleted:
    [T][X] drink coffee
 
->>> Sorry! The command's format is invalid.
+>>> Sorry! There is no task with the given number in the list.
 
 >>> Bye. See you soon!
 
