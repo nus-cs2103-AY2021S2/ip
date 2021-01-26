@@ -18,18 +18,30 @@ public class Event extends Task{
         this.at = at;
     }
 
+    /**
+     * Constructor for Event class object, used for storage.
+     * @param description event description
+     * @param at starting and ending time
+     */
     public Event(String description, boolean isDone, String at) {
         super(description);
         this.at = at;
         this.isDone = isDone;
     }
 
-
+    /**
+     * Acts as a helper method to print out the details of the event.
+     * @return the details of the event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
 
+    /**
+     * Helper method to get the details of the event to be stored.
+     * @returnthe the details of the event to be stored
+     */
     @Override
     public String infoToStore() {
         String divider = " | ";

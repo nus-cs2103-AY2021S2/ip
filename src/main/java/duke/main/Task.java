@@ -34,11 +34,19 @@ public class Task {
         }
     }
 
+    /**
+     * Acts as a helper method to print out the details of the task
+     * @return the details of the task
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Helper method to get the details of the task to be stored
+     * @returnthe the details of the task to be stored
+     */
     public String infoToStore() {
         String divider = " | ";
         return (isDone ? "1" : "0") + divider

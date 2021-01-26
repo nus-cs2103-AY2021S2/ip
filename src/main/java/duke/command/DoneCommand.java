@@ -4,12 +4,24 @@ import duke.main.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Complete a task to the taskList.
+ */
 public class DoneCommand extends Command {
     private int taskToComplete;
+
+    /**
+     * Constructor for the DoneCommand class.
+     * @param taskToComplete an index for the Task object to be done
+     */
     public DoneCommand(int taskToComplete) {
         this.taskToComplete = taskToComplete;
     }
 
+    /**
+     * Executes the action of completing the task.
+     * @return the corresponding results to be printed to user
+     */
     @Override
     public String[] execute() {
         String[] res;

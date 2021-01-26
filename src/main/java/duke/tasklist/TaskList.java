@@ -4,9 +4,16 @@ import duke.main.DukeException;
 import duke.main.Task;
 import java.util.ArrayList;
 
+/**
+ * Contains the task list and functions related to modifying it.
+ */
 public class TaskList {
     private static ArrayList<Task> tasks;
 
+    /**
+     * Constructor for the tasklist class object.
+     * @param tasks parsed tasks from storage
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -17,12 +24,10 @@ public class TaskList {
 
 
     /**
-     * Verify if the given taskIndex is valid.
-     * Three possible errors are handled. Namely, they are:
-     *      1. no taskIndex;
-     *      2. taskIndex is not an integer;
-     *      3. taskIndex is out of bound;
-     * @param taskIndex taskIndex from user input, in String.
+     * Verifies if the given taskIndex is valid.
+     * One possible errors are handled. Namely, they are:
+     *      1. taskIndex is out of bound;
+     * @param taskIndex taskIndex from user input after parsed
      * @return index in int if it is valid
      * @throws DukeException if invalid index is provided
      */
@@ -37,8 +42,9 @@ public class TaskList {
     }
 
     /**
-     * Remove the task with the given index and print the confirmation message.
-     * @param taskIndex taskIndex from user input, in String.
+     * Removes the task with the given index and print the confirmation message.
+     * @param taskIndex taskIndex from user input
+     * @return the corresponding results to be printed to users
      * @throws DukeException when an invalid taskIndex is entered
      */
     public static String[] deleteTask(int taskIndex) throws DukeException {
@@ -56,11 +62,12 @@ public class TaskList {
     }
 
     /**
-     * Complete the task with the given index and print the confirmation message.
+     * Completes the task with the given index and print the confirmation message.
      *
      * One possible error is handled. Namely, it is:
      *      1. the task has been completed;
-     * @param taskIndex taskIndex from user input, in String.
+     * @param taskIndex taskIndex from user input
+     * @return the corresponding results to be printed to users
      * @throws DukeException when an invalid taskIndex is entered
      */
     public static String[] completeTask(int taskIndex) throws DukeException {
@@ -78,6 +85,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Adds the task given to the task list
+     * @param newTask a new task to be added
+     * @return the corresponding results to be printed to users
+     */
     public static String[] addTask(Task newTask) {
         tasks.add(newTask);
 
@@ -91,6 +103,10 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Lists the tasks in the task list
+     * @return the information of the tasks present
+     */
     public static String[] getAllTaskListInfo() {
         String[] res;
         if (tasks.isEmpty()) {
