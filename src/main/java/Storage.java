@@ -49,4 +49,26 @@ class Storage {
         System.out.println(deletedTask);
         System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
     }
+
+    String listOutTaskInString() {
+        String res = "";
+
+        for(Task t: list) {
+            res += "Done tasks: " + System.lineSeparator();
+
+            if(t.getIsDone()) {
+                res += t.toString() + System.lineSeparator();
+            }
+        }
+
+        for(Task t: list) {
+            res += "Pending tasks: " + System.lineSeparator();
+
+            if(!t.getIsDone()) {
+                res += t.toString() + System.lineSeparator();
+            }
+        }
+
+        return res;
+    }
 }

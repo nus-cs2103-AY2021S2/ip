@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.NoSuchElementException;
 
 class Chatbox {
     private final Storage storage;
