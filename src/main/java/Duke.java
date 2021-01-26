@@ -47,7 +47,7 @@ public class Duke {
             } else {
                 String[] split = cmd.split("/by");
                 if (cmd.equals(split[0])) {
-                    String msg = "I apologize, please use '/by' argument to specify time for 'deadline'.";
+                    String msg = "I apologize, please use '/by' argument to specify date for 'deadline'.";
                     DukeException exception = new DukeException(msg);
                     System.out.println(exception);
                 } else {
