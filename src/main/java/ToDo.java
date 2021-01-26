@@ -4,11 +4,11 @@
 
 public class ToDo extends Task{
     public ToDo(String description){
-        super(description);
+        super(description, "T");
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + this.getLetterCode() + "]" + super.toString();
     }
 }
