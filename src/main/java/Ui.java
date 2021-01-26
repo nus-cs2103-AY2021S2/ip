@@ -53,7 +53,7 @@ public class Ui {
     public void showDeleteMessage(Task task, int listSize){
         System.out.println("---------------------------------------------");
         System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
+        System.out.println("  " + task);
         System.out.println("Now you have " + listSize + " tasks in the list.");
         System.out.println("---------------------------------------------");
     }

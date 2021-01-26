@@ -29,7 +29,7 @@ public class TaskList {
 //        }
 
         for (String s : myTasks) {
-            String[] parts = s.split(" | ", 3);
+            String[] parts = s.split(" \\| ", 3);
             String type = parts[0];
 
             if (type.equals("T")) {
@@ -41,7 +41,7 @@ public class TaskList {
 
             if (type.equals("D")) {
                 boolean isCompleted = isDone(parts[1]);
-                String[] details = parts[2].split(" | ", 2);
+                String[] details = parts[2].split(" \\| ", 2);
                 String description = details[0];
                 String time = details[1];
 
@@ -55,7 +55,7 @@ public class TaskList {
 
             if (type.equals("E")) {
                 boolean isCompleted = isDone(parts[1]);
-                String[] details = parts[2].split(" | ", 2);
+                String[] details = parts[2].split(" \\| ", 2);
                 String description = details[0];
                 String time = details[1];
 

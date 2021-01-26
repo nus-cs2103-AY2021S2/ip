@@ -29,9 +29,9 @@ public class Task {
         this.isDone = true;
     }
 
-    public void setSatus(boolean isDone){
-        this.isDone = isDone;
-    }
+//    public void setSatus(boolean isDone){
+//        this.isDone = isDone;
+//    }
 
     public boolean getStatus() { return this.isDone; }
 
