@@ -20,7 +20,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         LocalDate date = this.getTime();
-        return String.format("%s (at: %s %s %s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear());
+        return String.format("%s (by: %s %s %s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear());
 
     }
 }
