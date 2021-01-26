@@ -22,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Returns a specific String format of this Event's date to store locally when writing to file.
+     *
      * @return String format of this Event's date.
      */
     public String getDateToStore() {
@@ -30,6 +31,7 @@ public class Event extends Task {
 
     /**
      * Returns String description of this Event task, identified by "[E]", along with the date of this Event.
+     *
      * @return String description.
      */
     @Override

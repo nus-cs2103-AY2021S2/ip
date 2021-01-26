@@ -22,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a specific String format of this Deadline's date to store locally when writing to file.
+     *
      * @return String format of this Deadline's date.
      */
     public String getDateToStore() {
@@ -30,6 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Returns String description of this Deadline task, identified by "[D]", along with the date of this Deadline.
+     *
      * @return String description.
      */
     @Override

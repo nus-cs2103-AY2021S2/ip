@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Returns String description of this ToDo task, identified by "[T]".
+     *
      * @return String description.
      */
     @Override

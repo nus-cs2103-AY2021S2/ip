@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Marks task at specified position to be done.
+     *
      * @param pos position of task to be marked.
      */
     public void setTaskDone(int pos) {
@@ -49,6 +50,7 @@ public class TaskList {
 
     /**
      * Prints the task at the specified position.
+     *
      * @param pos position of task to be printed.
      */
     public void printTask(int pos) {
@@ -61,6 +63,7 @@ public class TaskList {
 
     /**
      * Adds a task to the existing list of tasks.
+     *
      * @param t task to be added to the list.
      */
     public void addTask(Task t) {
@@ -69,6 +72,7 @@ public class TaskList {
 
     /**
      * Removes the task at the specified position from the list.
+     *
      * @param pos position of the task to be removed.
      */
     public void deleteTask(int pos) {

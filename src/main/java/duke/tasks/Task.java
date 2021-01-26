@@ -18,6 +18,7 @@ public abstract class Task {
 
     /**
      * Returns the description of a Task.
+     *
      * @return String description of a task.
      */
     public String getDescription() {
@@ -33,6 +34,7 @@ public abstract class Task {
 
     /**
      * Checks if this Task is marked as done.
+     *
      * @return boolean indicating if this Task is done.
      */
     public boolean isDone() {
@@ -41,6 +43,7 @@ public abstract class Task {
 
     /**
      * Returns String description of this Task item with status indicating if it is marked as done.
+     *
      * @return String description of this Task.
      */
     @Override
