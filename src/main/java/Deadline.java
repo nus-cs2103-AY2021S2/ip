@@ -13,6 +13,10 @@ public class Deadline extends Task{
         this.time = time;
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     @Override
     public Task doTask() {
         return new Deadline(this.job, true, this.time);

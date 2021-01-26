@@ -1,6 +1,6 @@
 public class Task {
     protected final String job;
-    private final Boolean done;
+    protected final Boolean done;
     public Task(String job) {
         this.job = job;
         this.done = false;
@@ -17,6 +17,10 @@ public class Task {
 
     public String getJob() {
         return this.job;
+    }
+
+    public Boolean getDone() {
+        return this.done;
     }
 
     public String toString() {
