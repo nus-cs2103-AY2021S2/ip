@@ -3,10 +3,12 @@ import java.util.ArrayList;
 public class TaskManager {
     int listLength;
     ArrayList<Task> list;
+    String path;
 
-    public TaskManager(ArrayList<Task> list, int listLength) {
+    public TaskManager(ArrayList<Task> list, int listLength, String path) {
         this.list = list;
         this.listLength = listLength;
+        this.path = path;
     }
 
     //checks the type of instruction given based on the first word in the user input
@@ -56,9 +58,11 @@ public class TaskManager {
             StringBuffer sb = new StringBuffer();
             for (int i = 1; i < info.length; i++) {
                 sb.append(info[i]);
-                if (i != info.length - 1) { sb.append(" "); }
+                if (i != info.length - 1) {
+                    sb.append(" ");
+                }
             }
-            task = new ToDo(sb.toString());
+            task = new ToDo(sb.toString(), "T");
         } else if (info[0].equals("event") || info[0].equals("deadline")) {
             if (length == 1) {
                 if (info[0].equals("event")) {
@@ -69,13 +73,13 @@ public class TaskManager {
             }
             StringBuffer description = new StringBuffer();
             StringBuffer dateAndTime = new StringBuffer();
-            boolean descriptionDone = false;
+            boolean isDescriptionDone = false;
             for (int i = 1; i < info.length; i++) {
                 if (info[i].equals("/at") || info[i].equals("/by")) {
-                    descriptionDone = true;
+                    isDescriptionDone = true;
                     i++;
                 }
-                if (descriptionDone) {
+                if (isDescriptionDone) {
                     dateAndTime.append(info[i]);
                     if (i != info.length - 1) {
                         dateAndTime.append(" ");
@@ -88,9 +92,9 @@ public class TaskManager {
                 }
             }
             if (info[0].equals("event")) {
-                task = new Event(description.toString(), dateAndTime.toString());
+                task = new Event(description.toString(), dateAndTime.toString(), "E");
             } else if (info[0].equals("deadline")) {
-                task = new Deadline(description.toString(), dateAndTime.toString());
+                task = new Deadline(description.toString(), dateAndTime.toString(), "D");
             }
         }
         list.add(task);

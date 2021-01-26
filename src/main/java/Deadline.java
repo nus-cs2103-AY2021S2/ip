@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
     String by;
 
-    public Deadline(String description, String by) {
-        super(description);
+
+    public Deadline(String description, String by, String type) {
+        super(description, type);
         this.by = by;
     }
 
@@ -10,4 +13,5 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
+
 }
