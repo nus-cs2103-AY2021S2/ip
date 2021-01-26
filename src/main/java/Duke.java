@@ -4,18 +4,24 @@ import java.util.Scanner;
 public class Duke {
     private Ui ui;
     private TaskList tasks;
+    private Storage storage;
 
     public Duke() {
         this.ui = new Ui();
         this.tasks = new TaskList();
+        this.storage = new Storage();
+        try {
+            storage.readFile(tasks);
+        } catch (DukeException e) {
+            ui.printError(e.getMessage());
+        }
     }
 
     private static final String[] commands = { "bye", "list", "done", "todo", "deadline", "event",
             "delete"};
 
-    // Divider for Duke's Hello message.
-    private static final String BORDER = "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-            + "+-+-+-+-+-+";
+    private static final String PARENT_DIRECTORY = "data";
+    private static final String FILENAME = "duke.txt";
 
 //    // Iterates through ArrayList and prints each element.
 //    public void iterateList() {
@@ -61,7 +67,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExitCommand();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
