@@ -2,6 +2,8 @@ package duke.common;
 
 public final class DukeString {
     public static final String SEPARATOR = "--------------------------------------";
+    public static final String SEPARATOR_ERR = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String MESSAGE_BYE = "Goodbye!";
     public static final String MESSAGE_DONE = "Nice! I've marked this as done: ";
@@ -25,9 +27,9 @@ public final class DukeString {
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
     public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
     public static final String EXCEPTION_EMPTY_DEADLINEDATE = "Sorry, the date of a deadline must be specified.";
-    public static final String EXCEPTION_EMPTY_EVENTDATE  =
+    public static final String EXCEPTION_EMPTY_EVENTDATE =
             "Sorry, the start and end date of an event must be specified.";
-    public static final String EXCEPTION_INVALID_EVENTEND  =
+    public static final String EXCEPTION_INVALID_EVENTEND =
             "Sorry, the end date of an event must be after the start date.";
     public static final String EXCEPTION_STORAGE_READ_ERROR =
             "Sorry, there has been an error reading your tasks.\nMaking a copy of your tasks at data/duke.bak.";
