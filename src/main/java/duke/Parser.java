@@ -33,6 +33,8 @@ public class Parser {
         case DELETE:
             toRun = new DeleteCommand(fullCmd, ui);
             break;
+        case FIND:
+            toRun = new FindCommand(fullCmd, ui);
         }
         return toRun;
     }

@@ -6,5 +6,6 @@ public enum CommandName {
     DELETE,
     TODO,
     EVENT,
-    DEADLINE
+    DEADLINE,
+    FIND
 }
