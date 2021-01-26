@@ -13,7 +13,7 @@ public class Duke {
         this.storage = new Storage();
 
         String filePath = this.ui.askFilePath();
-        tasks = new TaskList(this.storage.load(filePath));
+        tasks = new TaskList(this.storage.load(filePath , ui));
 
         this.ui.showGreeting();
         boolean isExit = false;
@@ -26,7 +26,9 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
+            } catch (DukeDeadlineException e) {
+                ui.showError(e.getMessage());
+            }finally {
                 ui.showLine();
             }
         }
