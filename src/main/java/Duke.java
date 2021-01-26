@@ -1,9 +1,10 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        DukeList list = new DukeList();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -12,15 +13,36 @@ public class Duke {
         String bound = "____________________________________________________________";
         String topBound = "____________________________________________________________\n";
         String bottomBound = "\n____________________________________________________________\n";
+        Scanner sc = new Scanner(System.in);
+        DukeList list = new DukeList();
+        String path = "data/duke.txt";
+        File dir = new File("data");
+        File f = new File(path);
+        try {
+            if (!dir.exists()) {
+                dir.mkdirs();
+            } else { //read the file and make the  duke obj
+                readFromFile(path, list);
+            }
+            if (!f.exists()) f.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Something went wrong!");
+            sc.close();
+        }
 
-        System.out.println(topBound + logo + "\nHello! I'm Duke\n" + "What can I do for you?\n" + bottomBound);
+        System.out.println(topBound + logo + "\nHello! I'm Duke\nWhat can I do for you today?" + bottomBound);
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] arr = input.split("/");
             if (input.equals("bye")) {
-                System.out.println(topBound + "Good bye! Stay calm and keep coding o7" + bottomBound);
-                sc.close();
+                try {
+                    list.writeToFile(path);
+                    System.out.println(topBound + "Good bye! Stay calm and keep coding o7" + bottomBound);
+                    sc.close();
+                } catch (IOException e) {
+                    System.out.println("Error in saving list!");
+                }
                 break;
             } else if (input.equals("list")) {
                 System.out.println(bound);
@@ -40,7 +62,7 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     // parameter for done is not an Integer
                     System.out.println(topBound + "done must be followed by an Integer ie. done 1. Try again!"
-                        + bottomBound);
+                            + bottomBound);
                 }
             } else if (arr[0].startsWith("todo")) {
                 try {
@@ -104,11 +126,45 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     // parameter for delete is not an Integer
                     System.out.println(topBound + "delete must be followed by an Integer, ie. delete 1. Try again!"
-                        + bottomBound);
+                            + bottomBound);
                 }
             } else {
                 // unknown command
                 System.out.println(topBound + "OOPS!!! I'm sorry, but I don't know what that means :-(" + bottomBound);
+            }
+        }
+    }
+    public static void readFromFile(String filePath, DukeList list) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNextLine()) {
+            String curr = s.nextLine();
+            String[] currArray = curr.split("\\|");
+
+            if (currArray[0].equals("T")) {
+                ToDos currTask;
+                if (currArray[1].equals("0")) {
+                    currTask = new ToDos(currArray[2]);
+                } else {
+                    currTask = new ToDos(currArray[2], true);
+                }
+                list.add(currTask);
+            } else if (currArray[0].equals("D")) {
+                Deadlines currTask;
+                if (currArray[1].equals("0")) {
+                    currTask = new Deadlines(currArray[2], currArray[3]);
+                } else {
+                    currTask = new Deadlines(currArray[2], currArray[3], true);
+                }
+                list.add(currTask);
+            } else if (currArray[0].equals("E")) {
+                Events currTask;
+                if (currArray[1].equals("0")) {
+                    currTask = new Events(currArray[2], currArray[3]);
+                } else {
+                    currTask = new Events(currArray[2], currArray[3], true);
+                }
+                list.add(currTask);
             }
         }
     }

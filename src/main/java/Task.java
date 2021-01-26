@@ -11,8 +11,21 @@ public class Task {
         this.done = false;
     }
 
+    public Task(String name, boolean isDone) {
+        this.taskName = name;
+        this.done = isDone;
+    }
+
     public void markAsDone() {
         done = true;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public String getTaskName() {
+        return taskName;
     }
 
     @Override
