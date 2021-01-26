@@ -1,96 +1,108 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+
 public class Event extends Task {
 
-    private String start;
-    private String end;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
 
-    private Event (String name, String start, String end) {
+    private Event (String name, LocalDateTime start, LocalDateTime end) {
         super(name);
         this.start = start;
         this.end = end;
     }
 
     public static Event createEvent (String str) throws ChatException {
+        String formatStr = "Please input with this format:\n" +
+                "event [name] /at [end date/time]-[start date/time]\n" +
+                "* start and end date/time should be written as dd/MM/yyyy HH:mm\n" +
+                "* i.e. 2019/03/19 22:00-2019/03/19 23:00\n" +
+                "* i.e. 2019/03/19 22:00 - 2019/03/19 23:00";
+        
         if (!str.startsWith("event")) {
             //i.e. event(followed by one or more empty spaces)
             //i.e. list
-            throw new ChatException("wrong instruction for event\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("wrong instruction for event\n" + formatStr);
         } else if (str.strip().equals("event")) {
             //i.e. event
-            throw new ChatException("event name, start and end date/time missing\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("event name, start and end date/time missing\n" + formatStr);
         } else if (!str.startsWith("event ")) {
             //i.e. eventfinal exam
-            throw new ChatException("no spacing after event\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("no spacing after event\n" + formatStr);
         }
 
         String tempStr = str.replace("event ", "").stripLeading();
         if (tempStr.startsWith("/at")) {
             //i.e. event /at
             //i.e. event /at tmr 5-6pm
-            throw new ChatException("event name missing\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("event name missing\n" + formatStr);
         } else if (!tempStr.contains("/at")) {
             //i.e. event final exam
             //i.e. event final exam 5-6pm
-            throw new ChatException("/at missing\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("/at missing\n" + formatStr);
         } else if (!tempStr.contains(" /at ")) {
             //i.e. event final exam/at
             //i.e. event final exam/at 5-6pm
             //i.e. event final exam /at5-6pm
             //i.e. event final exam/at5-6pm
-            throw new ChatException("missing spaces before or after /at\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("missing spaces before or after /at\n" + formatStr);
         }
 
         String[] tempArr = tempStr.split(" /at ");
         if (tempArr.length < 2) {
             //i.e. event final exam /at
-            throw new ChatException("missing start and end date/time\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("missing start and end date/time\n" + formatStr);
         } else if (tempArr.length > 2 || tempArr[1].contains("/at")) {
             //i.e. event final exam /at /at 5-6pm
-            throw new ChatException("not allowed to have more than 1 ' /at '\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("not allowed to have more than 1 ' /at '\n" + formatStr);
         } else if (!tempArr[1].contains("-")) {
             //i.e. event final exam /at 5pm
-            throw new ChatException("missing '-'\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
+            throw new ChatException("missing '-'\n" + formatStr);
         }
 
         String[] timeArr = tempArr[1].split("-");
         if (timeArr.length < 2) {
             //i.e. event final exam /at 5-
-            throw new ChatException("missing start or end date/time\n" +
-                    "Please input with this format:\n" +
-                    "event [name] /at [end date/time]-[start date/time]");
-        } else {
-            return new Event(tempArr[0].strip(), timeArr[0].stripLeading(), timeArr[1].stripTrailing());
+            throw new ChatException("missing start or end date/time\n" + formatStr);
+        } 
+        
+        try {
+            String startStr = timeArr[0].strip();
+            String endStr = timeArr[1].strip();
+            LocalDateTime startDateTime = LocalDateTime.parse(startStr, inputFormatter);
+            LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
+            if (startDateTime.isAfter(endDateTime)) {
+                throw new ChatException("Start date/time is after end date/time\n" + formatStr);
+            }
+            return new Event(tempArr[0].strip(), startDateTime, endDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ChatException("Start or end date/time is of wrong format\n" + formatStr);
         }
+        
     }
 
-    public String getStart() {
+    public LocalDateTime getStart() {
         return this.start;
     }
 
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return this.end;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s-%s)", super.toString(), this.getStart(), this.getEnd());
+        String startStr = this.getStart().format(displayFormatter);
+        String endStr = this.getEnd().format(displayFormatter);
+        if (this.getStart().toString().split("T")[0].equals(this.getEnd().toString().split("T")[0])) {
+            //start and end are of the same day
+            DateTimeFormatter tempFormatter = DateTimeFormatter.ofPattern("h:mma");
+            endStr = this.getEnd().format(tempFormatter);
+        }
+        return String.format("[E]%s (at: %s - %s)", super.toString(), startStr, endStr);
     }
 
 }
