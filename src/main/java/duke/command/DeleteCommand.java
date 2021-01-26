@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.task.Task;
 import duke.TaskList;
-
+/**
+ * Represents a command that deletes task from the task list.
+ */
 public class DeleteCommand implements Command {
 
     private int deletedID;
@@ -13,19 +15,33 @@ public class DeleteCommand implements Command {
         this.deletedID = deletedID;
     }
 
+    /**
+     * Returns a boolean value to signal the bot to exit.
+     * @return True if command signals bot to be terminated.
+     */
     public boolean shouldExit() {
         return false;
     }
 
+    /**
+     * Gets the reply message.
+     * @return The reply message for this command.
+     */
     public String getResponse() {
         return "Noted. I've removed this duke.task:\n  " + deletedTask
         + "\nNow you have " + numTasks + " tasks in the list.\n";
     }
 
+    /**
+     * Executes the command.
+     * @param taskList List of tasks to be used for execution of the command.
+     * @return List of tasks after the execution of the command.
+     */
     public TaskList execute(TaskList taskList) {
         deletedTask = taskList.getTask(deletedID);
         taskList.removeTask(deletedID);
         numTasks = taskList.getSize();
         return taskList;
     }
+
 }

@@ -3,7 +3,9 @@ package duke.command;
 import java.time.LocalDate;
 import duke.TaskList;
 import duke.task.EventTask;
-
+/**
+ * Represents a command that adds Event tasks.
+ */
 public class AddEvent extends AddCommand {
 
     private LocalDate eventDate;
@@ -11,10 +13,12 @@ public class AddEvent extends AddCommand {
     private String endTime;
 
     /**
-     * Constructor for commands.AddCommand class duke.command name and description.
-     *
-     * @param commandType Type of command
-     * @param description Description of the duke.command.
+     * Constructor for a commands that adds Event tasks.
+     * @param commandType Type of command.
+     * @param description Description of the task.
+     * @param eventDate Date of the event.
+     * @param startTime Start time of the event.
+     * @param endTime End time of the event
      */
     public AddEvent(String commandType, String description, LocalDate eventDate, String startTime, String endTime) {
         super(commandType, description);
@@ -23,6 +27,20 @@ public class AddEvent extends AddCommand {
         this.endTime = endTime;
     }
 
+    /**
+     * Gets the reply message.
+     * @return The reply message for this command.
+     */
+    @Override
+    public String getResponse() {
+        return super.getResponse() + super.newTask.toString();
+    }
+
+    /**
+     * Executes the command.
+     * @param taskList List of tasks to be used for execution of the command.
+     * @return List of tasks after the execution of the command.
+     */
     @Override
     public TaskList execute(TaskList taskList) {
         int taskID = taskList.getSize() + 1;
@@ -30,10 +48,5 @@ public class AddEvent extends AddCommand {
         taskList.addTask(newTask);
         numTasks = taskList.getSize();
         return taskList;
-    }
-
-    @Override
-    public String getResponse() {
-        return super.getResponse() + super.newTask.toString();
     }
 }

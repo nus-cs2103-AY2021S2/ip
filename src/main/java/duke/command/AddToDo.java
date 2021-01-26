@@ -2,19 +2,34 @@ package duke.command;
 
 import duke.TaskList;
 import duke.task.ToDoTask;
-
+/**
+ * Represents a command that adds to-do tasks.
+ */
 public class AddToDo extends AddCommand {
 
     /**
-     * Constructor for commands.AddCommand class duke.command name and description.
-     *
-     * @param commandType Type of the command
-     * @param description Description of the duke.command.
+     * Constructor for a commands that adds to-do tasks.
+     * @param commandType Type of command.
+     * @param description Description of the task.
      */
     public AddToDo(String commandType, String description) {
         super(commandType, description);
     }
 
+    /**
+     * Gets the reply message.
+     * @return The reply message for this command.
+     */
+    @Override
+    public String getResponse() {
+        return super.getResponse() + super.newTask.toString();
+    }
+
+    /**
+     * Executes the command.
+     * @param taskList List of tasks to be used for execution of the command.
+     * @return List of tasks after the execution of the command.
+     */
     @Override
     public TaskList execute(TaskList taskList) {
         int taskID = taskList.getSize() + 1;
@@ -24,8 +39,4 @@ public class AddToDo extends AddCommand {
         return taskList;
     }
 
-    @Override
-    public String getResponse() {
-        return super.getResponse() + super.newTask.toString();
-    }
 }
