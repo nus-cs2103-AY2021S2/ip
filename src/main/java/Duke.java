@@ -12,7 +12,7 @@ public class Duke {
         try {
             tasks = new TaskList();
             tasks.load(storage);
-            ui.output("Saved data successfully loaded.");
+            ui.print("Saved data successfully loaded.");
         } catch (IOException e) {
             tasks = new TaskList();
         }
@@ -21,13 +21,13 @@ public class Duke {
     public void run() {
         try {
             Scanner sc = new Scanner(System.in);
-            ui.output("Greetings. My name is I-01B, but you may call me DUKE.");
-            ui.output("What can I assist you with?");
+            ui.print("Greetings. My name is I-01B, but you may call me DUKE.");
+            ui.print("What can I assist you with?");
             Parser parser = new Parser();
             while (sc.hasNext()) {
                 String command = sc.nextLine();
                 if (command.equals("bye")) {
-                    ui.output("I hope I have been of assistance. Goodbye. C:");
+                    ui.print("I hope I have been of assistance. Goodbye. C:");
                     break;
                 } else {
                     Command parsedCmd = null;
@@ -35,9 +35,9 @@ public class Duke {
                     String argument = parsedCmd.getArguments();
                     switch (parsedCmd.getCommand()) {
                     case LIST:
-                        ui.output("This is your to-do list:");
+                        ui.print("This is your to-do list:");
                         for (int i = 0; i < tasks.size(); i++) {
-                            ui.output((i + 1) + ". " + tasks.get(i));
+                            ui.print((i + 1) + ". " + tasks.get(i));
                         }
                         break;
                     case DONE:
@@ -45,62 +45,52 @@ public class Duke {
                         Task toDo = tasks.get(doneIndex);
                         toDo.doTask();
                         storage.markDoneInFile(doneIndex);
-                        ui.output("Affirmative. The following task has been marked as done: \n" + toDo);
+                        ui.print("Affirmative. The following task has been marked as done: \n" + toDo);
                         break;
                     case DELETE:
                         int delIndex = Integer.parseInt(argument) - 1;
                         Task toDelete = tasks.get(Integer.parseInt(argument) - 1);
                         tasks.remove(delIndex);
                         storage.deleteFromFile(delIndex);
-                        ui.output("Affirmative. The following task has been removed: \n" + toDelete);
+                        ui.print("Affirmative. The following task has been removed: \n" + toDelete);
                         break;
                     case TODO:
                         if (argument.isBlank()) {
-                            String msg = "I apologize, please input description for 'todo'.";
-                            DukeException exception = new DukeException(msg);
-                            throw exception;
+                            throw new DukeException("I apologize, please input description for 'todo'.");
                         } else {
                             Task newTask = new Todo(argument);
                             tasks.add(newTask);
                             storage.addToFile(newTask);
-                            ui.output("Added to to-do list: \n" + newTask);
+                            ui.print("Added to to-do list: \n" + newTask);
                         }
                         break;
                     case DEADLINE:
                         if (argument.isBlank()) {
-                            String msg = "I apologize, please input description and time for 'deadline'.";
-                            DukeException exception = new DukeException(msg);
-                            throw exception;
+                            throw new DukeException("I apologize, please input description and time for 'deadline'.");
                         } else {
                             String[] split = argument.split("/by");
                             if (argument.equals(split[0])) {
-                                String msg = "I apologize, please use '/by' argument to specify date for 'deadline'.";
-                                DukeException exception = new DukeException(msg);
-                                throw exception;
+                                throw new DukeException("I apologize, please use '/by' argument to specify date for 'deadline'.");
                             } else {
                                 Task newTask = new Deadline(split[0].strip(), split[1].strip());
                                 tasks.add(newTask);
                                 storage.addToFile(newTask);
-                                ui.output("Added to to-do list: \n" + newTask);
+                                ui.print("Added to to-do list: \n" + newTask);
                             }
                         }
                         break;
                     case EVENT:
                         if (argument.isBlank()) {
-                            String msg = "I apologize, please input description and time for 'event'.";
-                            DukeException exception = new DukeException(msg);
-                            throw exception;
+                            throw new DukeException("I apologize, please input description and time for 'event'.");
                         } else {
                             String[] split = argument.split("/at");
                             if (argument.equals(split[0])) {
-                                String msg = "I apologize, please use '/at' argument to specify time for 'event'.";
-                                DukeException exception = new DukeException(msg);
-                                throw exception;
+                                throw new DukeException("I apologize, please use '/at' argument to specify time for 'event'.");
                             } else {
                                 Task newTask = new Event(split[0].strip(), split[1].strip());
                                 tasks.add(newTask);
                                 storage.addToFile(newTask);
-                                ui.output("Added to to-do list: \n" + newTask);
+                                ui.print("Added to to-do list: \n" + newTask);
                             }
                         }
                         break;
@@ -111,7 +101,7 @@ public class Duke {
                 }
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            ui.showError(e);
         }
     }
 

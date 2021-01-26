@@ -7,6 +7,6 @@ public class DukeException extends Throwable {
 
     @Override
     public String toString() {
-        return "ErRoR: " + msg;
+        return msg;
     }
 }

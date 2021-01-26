@@ -1,7 +1,6 @@
 public class Parser {
-    Parser() {
 
-    }
+    Parser() {}
 
     public Command parseCommand(String command) throws DukeException {
         String strippedCommand = command.strip();
