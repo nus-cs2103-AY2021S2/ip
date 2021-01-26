@@ -1,5 +1,6 @@
-package duke.parser;
+package java.duke.parser;
 
+import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

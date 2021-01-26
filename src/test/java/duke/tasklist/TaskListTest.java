@@ -1,5 +1,6 @@
-package duke.tasklist;
+package java.duke.tasklist;
 
+import duke.tasklist.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
