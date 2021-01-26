@@ -32,10 +32,14 @@ public class TaskList {
     }
 
     public String display() {
-        StringBuilder items = new StringBuilder();
-        for (int i = 0; i < tasks.size(); i++) {
-            items.append(String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n");
+        if (tasks.size() > 0) {
+            StringBuilder items = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                items.append(String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n");
+            }
+            return items.toString().trim();
+        } else {
+            return "Your to-do list is empty! Nice!";
         }
-        return items.toString().trim();
     }
 }

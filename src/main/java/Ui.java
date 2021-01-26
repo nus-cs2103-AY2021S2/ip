@@ -31,6 +31,10 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    public void showError(Exception e) {
+        borderPrint(e.getMessage());
+    }
+
     public String readCommand() {
         return scanner.nextLine();
     }
