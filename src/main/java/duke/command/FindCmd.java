@@ -15,6 +15,7 @@ public class FindCmd extends Command {
 
     @Override
     public String execute(TaskList lst) {
+        // Split the search terms and search individually
         String[] wordsToFind = cmdArgs.split(" ");
 
         HashSet<Task> hs = new HashSet<>();
@@ -22,10 +23,14 @@ public class FindCmd extends Command {
             hs.addAll(lst.find(word));
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
-
         Iterator<Task> iter = hs.iterator();
+        if (!iter.hasNext()) {
+            return String.format("There are no matching tasks in your list for search '%s'.\n", cmdArgs);
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Here are the matching tasks in your list for search '%s':\n", cmdArgs));
+
         int sn = 1;
         while (iter.hasNext()) {
             sb.append(String.format("%d. %s\n", sn, iter.next()));
