@@ -46,4 +46,25 @@ public class TaskList {
     System.out.println("Now you have " + this.tasklist.size() + " tasks in the list.");
   }
 
+  /**
+   * Outputs matching taks in the arraylist to a keyword
+   */
+
+  public void findtask(String keyword) {
+    ArrayList<Task> list = new ArrayList<>();
+    int i = 1;
+    for (Task t : this.tasklist) {
+      if (t.getDescription().contains(keyword)) {
+        list.add(t);
+      }
+    }
+    System.out.println(" ___________________________________________");
+    System.out.println("Here are the tasks in your matching list:");
+    for (Task task : list) {
+      System.out.println(i + ". " + task);
+      i++;
+    }
+    System.out.println(" ___________________________________________");
+  }
+
 }
