@@ -3,6 +3,12 @@ package duke;
 public class Parser {
     public Parser() {}
 
+    /**
+     * Returns boolean value indicating whether input text is numerical
+     *
+     * @param str string to be tested
+     * @return boolean value
+     */
     public static boolean isNumber(String str) {
         // check for null or empty
         if (str == null || str.length() == 0) {
@@ -18,6 +24,16 @@ public class Parser {
         return true;
     }
 
+
+    /**
+     * Returns an array of strings with processed text inputs
+     * e.g. a processed input for deadline reading /by 2019-02-20 8pm will be ["DDL", "0", "reading", "2019-02-20 8pm"]
+     * the returned array will then be passed to other functions in Duke.java for further processing
+     *
+     * @param inputLine input by user
+     * @return an array of processes strings
+     * @throws DukeException If user input is in invalid formats
+     */
     public String[] processInput(String inputLine) throws DukeException{
         String[] result = new String[5];
 
