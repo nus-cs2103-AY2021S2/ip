@@ -8,6 +8,7 @@ public class Duke {
     public static String CLOSING = "Goodbye!";
 
     public static void terminate() {
+        Storage.saveTasks(tasks);
         echo(CLOSING);
         System.exit(0);
     }
@@ -126,6 +127,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        tasks = Storage.loadTasks();
         echo(GREETING);
         prompt();
     }
