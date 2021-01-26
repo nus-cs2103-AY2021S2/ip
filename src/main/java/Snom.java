@@ -4,13 +4,13 @@
  *
  * @author: Sharptail
  */
-
 import java.util.ArrayList;
 
 public class Snom {
     private static Snomio snomio = new Snomio(System.in, System.out);
+    private static SnomFile snomFile = new SnomFile("./src/main/resources", "snom.txt");
     private static ArrayList<Task> taskList = new ArrayList<>();
-    
+
     public static void main(String[] args) {
         init();
         execute();
@@ -18,11 +18,13 @@ public class Snom {
     }
 
     /**
-     * Initialising the chatbot application.
-     * This is just the startup messages for now.
-     * Might be useful for expansion in the future.
+     * Initialises the chatbot application.
+     * Creates a new save file or read from save file if exists.
      */
     public static void init(){
+        snomFile.init();
+        taskList = snomFile.readFile();
+
         snomio.println("--------------------------------");
         snomio.println("Bonjour! I'm Snom! *squish*");
         snomio.println("Try giving me some commands, I might be able to do something!");
@@ -32,9 +34,11 @@ public class Snom {
     }
 
     /**
-     * This is the main execution code that will run all the respective command.
+     * Executes the main code that will run all the respective command.
      * Commands will simply be validated by switch cases. Dont need exception for this.
      * Contents will be validated with exception before execution.
+     *
+     * @throws SnomException if error occurs specific to Snom
      */
     public static void execute(){
         String input;
@@ -84,9 +88,9 @@ public class Snom {
     }
 
     /**
-     * This method is to print out the entire task list
+     * Prints out the entire task list.
      *
-     * @throws SnomException throw exception if there is content after the command or there isn't any task in the task list
+     * @throws SnomException if there is content after the command or there isn't any task in the task list
      */
     public static void printTaskList() throws SnomException{
         if(taskList.size() > 0){
@@ -100,7 +104,7 @@ public class Snom {
     }
 
     /**
-     * This method add the given task, can be a todo, deadline or event task.
+     * Adds the given task to task list, can be a todo, deadline or event task.
      * Then prints out respective messages.
      *
      * @param task either Todo, Deadline, Event
@@ -110,14 +114,15 @@ public class Snom {
         snomio.println("Got it. I've added this task:");
         snomio.println("\t" + task.toString());
         snomio.println("Now you have " + taskList.size() + " tasks in the list.");
+        snomFile.saveFile(taskList);
     }
 
     /**
-     * This method mark the task by the given task number as finish.
+     * Set the task status by the given task numbers as finished.
      * Then prints out the complete messages.
      *
      * @param taskNums       task number list that needs to mark as finish
-     * @throws SnomException throws exception when the task number is not available in the task list.
+     * @throws SnomException If the task number is not available in the task list.
      */
     public static void finishTask(int[] taskNums) throws SnomException{
         for(int i = 0; i < taskNums.length; i++){
@@ -132,15 +137,16 @@ public class Snom {
             }catch(IndexOutOfBoundsException e){
                 throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
             }
+            snomFile.saveFile(taskList);
         }
     }
 
     /**
-     * This method removes the given task numbers from the task list.
+     * Removes the given task numbers from the task list.
      * Then prints out the deleted messages.
      *
      * @param  taskNums      task number list that needs to be removed
-     * @throws SnomException throws exception when the task number is not available in the task list.
+     * @throws SnomException If the task number is not available in the task list.
      */
     public static void deleteTask(int[] taskNums) throws SnomException{
         for(int i = 0; i < taskNums.length; i++){
@@ -155,6 +161,7 @@ public class Snom {
             }catch(IndexOutOfBoundsException e){
                 throw new SnomException("Oops! You have entered a task number: " + taskNums[i] + " which is invalid! Please try again!");
             }
+            snomFile.saveFile(taskList);
         }
     }
 }

@@ -16,4 +16,9 @@ delete 3
 list
 delete 1 3
 list
+todo borrow book
+deadline return book /by Sunday
+event meeting /at Monday
+finish 2 4
+list
 bye

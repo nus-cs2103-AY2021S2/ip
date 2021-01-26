@@ -32,6 +32,15 @@ public class Task {
         this.status = status;
     }
 
+    /**
+     * Returns a string for saving purposes
+     *
+     * @return formatted string
+     */
+    public String toSaveString(){
+        return (status ? "true" : "false") + "," + this.description;
+    }
+
     @Override
     public String toString(){
         return "[" + this.getStatusSymbol() + "]" + this.description;
