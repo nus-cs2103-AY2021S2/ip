@@ -1,6 +1,9 @@
 package duke.utils;
 
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 import duke.dukeexceptions.InvalidTaskTypeException;
 
 import java.time.LocalDateTime;
@@ -9,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileTaskStringConverter {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
+            + "[dd-MM-yy HHmm]");
 
     public static List<String> allTaskToAllString(List<Task> list) {
         List<String> result = new ArrayList<>();
@@ -29,6 +33,7 @@ public class FileTaskStringConverter {
 
     private static String taskToString(Task task) {
         String done = task.isDone() ? "1" : "0";
+
         if (task instanceof ToDo) {
             return "T | " + done + " | " + task.getDescription();
         } else if (task instanceof Event) {
@@ -41,6 +46,7 @@ public class FileTaskStringConverter {
     private static Task stringToTask(String input) throws InvalidTaskTypeException {
         String[] separated = input.split(" \\| ");
         char taskType = separated[0].charAt(0);
+
         if (taskType == 'T') {
             ToDo t = new ToDo(separated[2]);
             if (separated[1].equals("1")) {

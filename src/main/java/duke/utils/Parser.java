@@ -1,6 +1,14 @@
 package duke.utils;
 
-import duke.commands.*;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.ToDoCommand;
 import duke.dukeexceptions.EmptyArgumentException;
 import duke.dukeexceptions.InvalidDateTimeException;
 import duke.dukeexceptions.InvalidIndexInputException;
@@ -13,12 +21,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private static final Pattern checkNum = Pattern.compile("^[0-9]$");
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm]"
+            + "[dd-MM-yy HHmm]");
+
     private final TaskList taskList;
     private final Ui ui;
     private final Storage storage;
-    private static final Pattern checkNum = Pattern.compile("^[0-9]$");
-    protected static final DateTimeFormatter formatter = DateTimeFormatter
-            .ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
 
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -32,7 +41,6 @@ public class Parser {
         String command = commandAndInput[0];
 
         switch (command) {
-
             case ToDoCommand.COMMAND_WORD:
                 return prepareToDo(commandAndInput);
 
@@ -69,9 +77,10 @@ public class Parser {
         } else {
             String description = arguments[1];
             String[] taskInputAndDate = description.split("/", 2);
+
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
-            System.out.println(taskInputAndDate[1]);
+
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
                 return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
@@ -87,8 +96,10 @@ public class Parser {
         } else {
             String description = arguments[1];
             String[] taskInputAndDate = description.split("/", 2);
+
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
+
             try {
                 LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
                 return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
@@ -113,6 +124,7 @@ public class Parser {
             throw new EmptyArgumentException("Please pass an index after the 'done' command!");
         } else {
             int position = calcListPos(arguments[1], arguments[0]);
+
             if (this.taskList.getList().size() == 0){
                 throw new InvalidIndexInputException("You have already done all tasks!");
             } else if (position >= this.taskList.getList().size() || position < 0) {
@@ -129,6 +141,7 @@ public class Parser {
             throw new EmptyArgumentException("Please pass an index after the 'delete' command!");
         } else {
             int position = calcListPos(arguments[1], arguments[0]);
+
             if (this.taskList.getList().size() == 0){
                 throw new InvalidIndexInputException("There are no tasks to delete!");
             } else if (position >= this.taskList.getList().size() || position < 0) {

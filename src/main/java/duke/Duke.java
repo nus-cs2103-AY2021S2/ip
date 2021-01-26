@@ -2,29 +2,28 @@ package duke;
 
 import duke.commands.Command;
 import duke.dukeexceptions.DukeException;
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.TaskList;
-import duke.utils.*;
+import duke.utils.Parser;
+import duke.utils.Storage;
+import duke.utils.Ui;
 
-import java.io.FileNotFoundException;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Duke {
     private static final String FILE_PATH = "./src/main/java/duke/tasks.txt";
-    private static Ui ui;
-    private static Storage storage;
-    private static TaskList taskList;
 
     private static void run() {
-        ui = new Ui();
+        Ui ui = new Ui();
         ui.introduction();
-        storage = new Storage(FILE_PATH, ui);
-        taskList = storage.loadFromFile();
+        Storage storage = new Storage(FILE_PATH, ui);
+        TaskList taskList = storage.loadFromFile();
 
         Scanner scannerInput = new Scanner(System.in);
         ui.showMsg("What can I do for you?");
+
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String input = scannerInput.nextLine();
