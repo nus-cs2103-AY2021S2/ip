@@ -8,8 +8,8 @@ public class PrintListCommand implements ICommand {
     @Override
     public void execute(String parameters) {
         System.out.println(listToString());
-
     }
+
     private String listToString() {
         String content="";
         Integer count = 1;

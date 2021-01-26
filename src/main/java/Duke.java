@@ -60,6 +60,8 @@ public class Duke {
         ICommand deleteCommand = new CommandDecorator(new DeleteCommand(taskList));
         deleteCommand = new CommandWrite(deleteCommand,storage);
 
+        ICommand findCommand = new CommandDecorator(new FindCommand(taskList));
+
         commands.add("done", doneCommand);
         commands.add("list", listCommand);
         commands.add("bye", exitCommand);
@@ -67,5 +69,6 @@ public class Duke {
         commands.add("todo", toDoCommand);
         commands.add("deadline", deadlineCommand);
         commands.add("delete", deleteCommand);
+        commands.add("find", findCommand);
     }
 }
