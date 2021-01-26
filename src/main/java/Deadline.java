@@ -1,22 +1,27 @@
-public class Deadline extends Task {
-    protected String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task {
+    protected LocalDate date;
+
+    public Deadline(String description, LocalDate date) {
         super(description, "D");
-        this.time = time;
+        this.date = date;
     }
 
     @Override
     public String serialize() {
-        return String.format("%s|%b|%s|%s", getType(), isDone, getDescription(), time);
+        return String.format("%s|%b|%s|%s", getType(), isDone, getDescription(),
+                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
-    public String getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(), time);
+        return String.format("[%s][%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(),
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }
