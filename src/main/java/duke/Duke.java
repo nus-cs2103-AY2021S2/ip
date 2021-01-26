@@ -18,6 +18,7 @@ public class Duke {
     /**
      * Constructor for a new Duke instance. Takes as a single parameter, <code>filePath</code>, which determines the
      * location from which tasks will be read from or saved to hard disk
+     *
      * @param filePath relative file path of <code>.txt</code> file where tasks will be saved/loaded from
      */
     public Duke(String filePath) {
@@ -30,6 +31,10 @@ public class Duke {
             tasks = new TaskList();
         }
         parser = new Parser(ui, storage, tasks);
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
     /**
@@ -51,9 +56,5 @@ public class Duke {
                 break;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

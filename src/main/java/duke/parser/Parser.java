@@ -17,9 +17,10 @@ public class Parser {
 
     /**
      * Constructor for the Parser class
-     * @param ui Ui object that interacts with user
+     *
+     * @param ui      Ui object that interacts with user
      * @param storage Storage object that handles saving/loading of tasks to and from hard disk
-     * @param tasks TaskList object which contains all the tasks in the program
+     * @param tasks   TaskList object which contains all the tasks in the program
      */
     public Parser(Ui ui, Storage storage, TaskList tasks) {
         this.ui = ui;
@@ -31,6 +32,7 @@ public class Parser {
      * Parses the raw command from the user, deciphers the intent and executes it. Adds/deletes/modifies tasks in
      * <code>task</code> and displays messages via <code>ui</code>. Displays error message in the event
      * that the command is not recognizable.
+     *
      * @param fullCommand raw command provided as a String
      * @return true if the user enters "bye", a sign to terminate the program
      */

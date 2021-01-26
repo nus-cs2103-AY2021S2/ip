@@ -15,8 +15,9 @@ public class Task {
 
     /**
      * Constructor for Task class
+     *
      * @param description of task
-     * @param type of task
+     * @param type        of task
      * @see TaskStatus
      */
     public Task(String description, TaskType type) {
@@ -27,9 +28,10 @@ public class Task {
 
     /**
      * Constructor for Task class with completion status specified
+     *
      * @param description of task
-     * @param type of task
-     * @param completion <code>true</code> if the event is completed, <code>false</code> otherwise
+     * @param type        of task
+     * @param completion  <code>true</code> if the event is completed, <code>false</code> otherwise
      * @see TaskStatus
      */
     public Task(String description, TaskType type, Boolean completion) {
@@ -39,73 +41,8 @@ public class Task {
     }
 
     /**
-     * Returns true if task is marked as completed
-     * @return true if task is marked as completed
-     */
-    public boolean contains(String query) {
-        return this.description.contains(query);
-    }
-
-    /**
-     * Returns true if task is marked as completed
-     * @return true if task is marked as completed
-     */
-    public boolean isComplete() {
-        return this.status == TaskStatus.COMPLETED;
-    }
-
-    /**
-     * Mark class as completed
-     */
-    public void markComplete() {
-        this.status = TaskStatus.COMPLETED;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        switch (this.type) {
-            case TODO:
-                output.append("[T]");
-                break;
-            case EVENT:
-                output.append("[E]");
-                break;
-            case DEADLINE:
-                output.append("[D]");
-                break;
-        }
-        output.append(this.isComplete() ? "[X] " : "[ ] ");
-        output.append(this.description);
-        return output.toString();
-    }
-
-    /**
-     * Returns the String formatted entry for writing to disk
-     * @return String formatted entry to be written to disk by Storage objects
-     */
-    public String storageEntry() {
-        StringBuilder output = new StringBuilder();
-        switch (this.type) {
-            case TODO:
-                output.append("T");
-                break;
-            case EVENT:
-                output.append("E");
-                break;
-            case DEADLINE:
-                output.append("D");
-                break;
-        }
-        output.append("|");
-        output.append(this.isComplete() ? "1" : "0");
-        output.append("|");
-        output.append(this.description);
-        return output.toString();
-    }
-
-    /**
      * Parse commands and creates Todo, Event or Deadline objects based on the type of command
+     *
      * @param command to be parsed
      * @return Respective Task object based on command issued
      * @throws DukeException if incomplete or unrecognizable command issued
@@ -132,6 +69,7 @@ public class Task {
 
     /**
      * Parse record read from disk by Storage objects and returns the corresponding Task object
+     *
      * @param fullRecord Single entry read from file
      * @return Corresponding Task object
      */
@@ -160,5 +98,74 @@ public class Task {
             break;
         }
         return output;
+    }
+
+    /**
+     * Returns true if task is marked as completed
+     *
+     * @return true if task is marked as completed
+     */
+    public boolean contains(String query) {
+        return this.description.contains(query);
+    }
+
+    /**
+     * Returns true if task is marked as completed
+     *
+     * @return true if task is marked as completed
+     */
+    public boolean isComplete() {
+        return this.status == TaskStatus.COMPLETED;
+    }
+
+    /**
+     * Mark class as completed
+     */
+    public void markComplete() {
+        this.status = TaskStatus.COMPLETED;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        switch (this.type) {
+        case TODO:
+            output.append("[T]");
+            break;
+        case EVENT:
+            output.append("[E]");
+            break;
+        case DEADLINE:
+            output.append("[D]");
+            break;
+        }
+        output.append(this.isComplete() ? "[X] " : "[ ] ");
+        output.append(this.description);
+        return output.toString();
+    }
+
+    /**
+     * Returns the String formatted entry for writing to disk
+     *
+     * @return String formatted entry to be written to disk by Storage objects
+     */
+    public String storageEntry() {
+        StringBuilder output = new StringBuilder();
+        switch (this.type) {
+        case TODO:
+            output.append("T");
+            break;
+        case EVENT:
+            output.append("E");
+            break;
+        case DEADLINE:
+            output.append("D");
+            break;
+        }
+        output.append("|");
+        output.append(this.isComplete() ? "1" : "0");
+        output.append("|");
+        output.append(this.description);
+        return output.toString();
     }
 }

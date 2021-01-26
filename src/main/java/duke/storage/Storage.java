@@ -19,6 +19,7 @@ public class Storage {
 
     /**
      * Constructor for Storage class. Takes as input the file path where the data will be read/written to
+     *
      * @param filePath File path where data will be read/written to
      */
     public Storage(String filePath) {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Save tasks to hard disk
+     *
      * @param taskList List\<Task\> of tasks to be written to disk
      * @throws DukeException If IOException encountered
      */
@@ -52,9 +54,10 @@ public class Storage {
 
     /**
      * Loads tasks from hard disk
+     *
      * @return List\<Task\> of tasks read from hard disk
      * @throws DukeException If FileNotFoundException occurs which is possible in the event that the file is
-     * missing/not created yet
+     *                       missing/not created yet
      */
     public List<Task> load() throws DukeException {
         try {

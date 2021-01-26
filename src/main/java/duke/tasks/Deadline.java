@@ -17,9 +17,10 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline class
+     *
      * @param description of the Deadline task
-     * @param date that the task is due
-     * @param time that the task is due
+     * @param date        that the task is due
+     * @param time        that the task is due
      */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description, TaskType.DEADLINE);
@@ -29,10 +30,11 @@ public class Deadline extends Task {
 
     /**
      * Constructor for the Deadline class with completion status specified
+     *
      * @param description of the Deadline task
-     * @param date that the task is due
-     * @param time that the task is due
-     * @param completed <code>true</code> if the event is completed, <code>false</code> otherwise
+     * @param date        that the task is due
+     * @param time        that the task is due
+     * @param completed   <code>true</code> if the event is completed, <code>false</code> otherwise
      */
     public Deadline(String description, LocalDate date, LocalTime time, Boolean completed) {
         super(description, TaskType.DEADLINE, completed);
@@ -42,8 +44,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for the Deadline class whereby only date is given for the deadline but not time
+     *
      * @param description of the Deadline task
-     * @param date that the task is due
+     * @param date        that the task is due
      */
     public Deadline(String description, LocalDate date) {
         super(description, TaskType.DEADLINE);
@@ -54,9 +57,10 @@ public class Deadline extends Task {
     /**
      * Constructor for the Deadline class whereby only date is given for the deadline but not time
      * with completion status specified
+     *
      * @param description of the Deadline task
-     * @param date that the task is due
-     * @param completed <code>true</code> if the event is completed, <code>false</code> otherwise
+     * @param date        that the task is due
+     * @param completed   <code>true</code> if the event is completed, <code>false</code> otherwise
      */
     public Deadline(String description, LocalDate date, Boolean completed) {
         super(description, TaskType.DEADLINE, completed);
@@ -64,40 +68,13 @@ public class Deadline extends Task {
         this.time = null;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder(super.toString());
-        output.append(" (by: ");
-        output.append(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        if (this.time != null) {
-            output.append(" ");
-            output.append(this.time.format(DateTimeFormatter.ofPattern("h:mm a")));
-        }
-        output.append(")");
-        return output.toString();
-    }
-
-    /**
-     * Returns the String formatted entry for writing to disk
-     * @return String formatted entry to be written to disk by Storage objects
-     */
-    public String storageEntry() {
-        StringBuilder output = new StringBuilder(super.storageEntry());
-        output.append("|");
-        output.append(this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        if (this.time != null) {
-            output.append(" ");
-            output.append(this.time.format(DateTimeFormatter.ofPattern("HH:mm")));
-        }
-        return output.toString();
-    }
-
     /**
      * Parse command meant to create Deadline tasks
+     *
      * @param command to be parsed
      * @return Deadline object created based on command issued
      * @throws DukeException if command is empty or missing "/by" delimiter which provides deadline, deadline not
-     * provided in an acceptable format or command is empty
+     *                       provided in an acceptable format or command is empty
      */
     public static Deadline parseDeadline(String command) throws DukeException {
         if (command.isEmpty()) {
@@ -119,5 +96,34 @@ public class Deadline extends Task {
                     "'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'");
         }
 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder(super.toString());
+        output.append(" (by: ");
+        output.append(this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        if (this.time != null) {
+            output.append(" ");
+            output.append(this.time.format(DateTimeFormatter.ofPattern("h:mm a")));
+        }
+        output.append(")");
+        return output.toString();
+    }
+
+    /**
+     * Returns the String formatted entry for writing to disk
+     *
+     * @return String formatted entry to be written to disk by Storage objects
+     */
+    public String storageEntry() {
+        StringBuilder output = new StringBuilder(super.storageEntry());
+        output.append("|");
+        output.append(this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        if (this.time != null) {
+            output.append(" ");
+            output.append(this.time.format(DateTimeFormatter.ofPattern("HH:mm")));
+        }
+        return output.toString();
     }
 }
