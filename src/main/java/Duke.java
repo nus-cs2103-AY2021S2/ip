@@ -1,4 +1,8 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 public class Duke {
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "history.txt";
@@ -124,6 +128,13 @@ public class Duke {
             String[] deadlineWords = realWord.split("/by");
             String deadlineWord = deadlineWords[0];
             String deadlineTime = deadlineWords[1];
+
+            String[] deadlineDateHours = deadlineTime.split(" ");
+            LocalDate deadlineDate = LocalDate.parse(deadlineDateHours[1]);
+            LocalTime deadlineHour = LocalTime.parse(deadlineDateHours[2]);
+            Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
+            lst.add(deadline);
+            doTaskFinally(deadline, lst);
             Deadline deadline = new Deadline(deadlineWord, deadlineTime);
             taskManager.add(deadline);
             doTaskFinally(deadline);
@@ -138,6 +149,13 @@ public class Duke {
             String[] eventWords = realWord.split("/at");
             String eventWord = eventWords[0];
             String eventTime = eventWords[1];
+
+            String[] eventDateHours = eventTime.split(" ");
+            LocalDate eventDate = LocalDate.parse(eventDateHours[0]);
+            LocalTime eventHour = LocalTime.parse(eventDateHours[1]);
+            Event event = new Event(eventWord, eventDate, eventHour);
+            lst.add(event);
+            doTaskFinally(event, lst);
             Event event = new Event(eventWord, eventTime);
             taskManager.add(event);
             doTaskFinally(event);
