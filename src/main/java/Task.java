@@ -12,6 +12,10 @@ public abstract class Task {
 
     public boolean isDone() { return isDone; }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void markAsDone() {
         this.isDone = true;
     }

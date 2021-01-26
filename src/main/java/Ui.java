@@ -85,4 +85,18 @@ public class Ui {
     public void showError(Exception e) {
         borderPrint(e.getMessage());
     }
+
+    public void displayList(TaskList tasks) {
+        StringBuilder items = new StringBuilder();
+        for (int i = 1; i <= tasks.size(); i++) {
+            items.append(String.valueOf(i) + ". " + tasks.get(i).toString() + "\n");
+        }
+        String output = items.toString().trim();
+        if (output.length() > 0) {
+            output = "Here's all the matches I found:\n" + output;
+        } else {
+            output = "I couldn't find anything!";
+        }
+        borderPrint(output);
+    }
 }

@@ -2,6 +2,7 @@
  * Parses user commands and triggers corresponding effects.
  */
 public class CommandParser {
+    private static final int SPLIT_LIMIT = 2;
     private TaskList tasks;
     private Ui ui;
 
@@ -19,7 +20,7 @@ public class CommandParser {
     public boolean parseCommand(String userInput) throws DukeException {
         if (userInput.toLowerCase().equals("list")) {
             // display list
-            ui.borderPrint(tasks.display());
+            ui.displayList(tasks);
         } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
             // finish a task
             String[] bits = userInput.split(" ");
@@ -50,6 +51,15 @@ public class CommandParser {
             Task newTask = TaskParser.parseTask(userInput);
             tasks.add(newTask);
             ui.showAddedTask(newTask, tasks.size());
+        } else if (userInput.toLowerCase().startsWith("find")) {
+            // find task in list
+            String[] bits = userInput.split(" ", SPLIT_LIMIT);
+            if (bits.length == 1) {
+                throw new DukeException("Oops! Usage: find [search pattern]");
+            } else {
+                TaskList matchingTasks = tasks.find(bits[1]);
+                ui.displayList(matchingTasks);
+            }
         } else if (userInput.toLowerCase().equals("bye")) {
             // end session
             return false;
