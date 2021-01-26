@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Duke {
@@ -54,7 +55,7 @@ public class Duke {
         addedTaskReply(todo);
     }
 
-    public static void addDeadline(Command command) {
+    public static void addDeadline(Command command) throws DateTimeParseException {
         String[] parts = command.getArgs().split("/by");
 
         if (parts.length != 2) {
@@ -151,6 +152,9 @@ public class Duke {
             }
         } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException exception) {
             reply(formatLine(exception.getMessage()));
+        } catch (DateTimeParseException exception) {
+            System.out.println(exception.getMessage());
+            reply(formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
         }
 
         return true;
