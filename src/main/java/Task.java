@@ -1,10 +1,12 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String taskType;
 
-    public Task(String description) {
+    public Task(String description, String taskType) {
         this.description = description;
         this.isDone = false;
+        this.taskType = taskType;
     }
 
     public String getStatus() {
@@ -13,6 +15,10 @@ public class Task {
 
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String getTaskType() {
+        return taskType;
     }
 
     @Override
