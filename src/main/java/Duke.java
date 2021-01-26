@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.Scanner;
+
 
 enum Call {
     DELETE, TODO, EVENT, DEADLINE, LIST, DONE
@@ -6,7 +8,7 @@ enum Call {
 
 public class Duke {
     static String input = " ";
-    static List<Task> list = new ArrayList<>();
+    static ArrayList<Task> list = new ArrayList<>();
     public static void main(String[] args) throws Exception {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -144,71 +146,5 @@ public class Duke {
     }
 }
 
-class Task {
-    String task;
-    Boolean completed;
-
-    Task(String t) {
-        this.task = t;
-        this.completed = false;
-    }
-
-    public void isCompleted() {
-        this.completed = true;
-    }
-
-    public String completedBox() {
-        if (this.completed) {
-            return "[X] ";
-        } else {
-            return "[ ] ";
-        }
-    }
-
-    @Override
-    public String toString() {
-        return this.completedBox() + this.task;
-    }
-}
-
-class Todo extends Task {
-    Todo(String t) {
-        super(t);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + this.completedBox() + this.task;
-    }
-
-}
-
-class Deadline extends Task {
-    String date;
-
-    Deadline(String t, String due) {
-        super(t);
-        this.date = due;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + this.completedBox() + this.task + "(by: " + this.date + ")";
-    }
-}
-
-class Event extends Task {
-    String date;
-
-    Event(String task, String date) {
-        super(task);
-        this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + this.completedBox() + this.task + "(at: " + this.date + ")";
-    }
-}
 
 
