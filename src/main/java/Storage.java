@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,5 +26,14 @@ public class Storage {
             tasks.add(scanner.nextLine());
         }
         return tasks;
+    }
+
+    public void updateTaskList(TaskList taskList) throws IOException {
+        FileWriter writer = new FileWriter(filePath);
+        ArrayList<Task> tasks = taskList.getTaskList();
+        for (Task t : tasks) {
+            writer.write(t.toString() + System.lineSeparator());
+        }
+        writer.close();
     }
 }
