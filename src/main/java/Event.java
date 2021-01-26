@@ -1,13 +1,20 @@
-public class Event extends Task {
-    String timeframe;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String timeframe) {
+public class Event extends Task {
+    LocalDateTime start;
+    LocalDateTime end;
+
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.timeframe = timeframe;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
-        return "[E]"+super.toString()+" (at: " + timeframe + ")";
+        return "[E]"+super.toString()+" (at: "
+                + start.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + " to "
+                + end.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + ")";
     }
 }
