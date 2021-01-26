@@ -1,19 +1,40 @@
+/**
+ * Simulates a todo task.
+ */
 public class ToDo extends Task {
 
+    /**
+     * Creates a new todo object.
+     *
+     * @param details Details of the todo task.
+     */
     public ToDo(String details) {
         super(details);
     }
 
+    /**
+     * Private constructor to complete this task.
+     *
+     * @param details Details of the todo task.
+     * @param indicator Denotes that event is completed regardless of boolean value passed.
+     */
     private ToDo(String details, boolean indicator) {
         super(details, indicator);
     }
 
-    // overrides completeTask() method
+    /**
+     * Completes the todo task.
+     *
+     * @return New completed todo object with the same details.
+     */
     public ToDo completeTask() {
         return new ToDo(this.getTask_details(), true);
     }
 
-    // overrides taskStatus() method
+    /**
+     * Returns a String describing the todo task as well as its completion status.
+     * @return
+     */
     public String taskStatus() {
         if (this.isDone()) {
             return "T 1 " + this.getTask_details();

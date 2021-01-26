@@ -1,7 +1,17 @@
+/**
+ * Exception class to denote errors arising from incorrect user input or
+ * failed task list file reading.
+ */
 public class DukeException extends Exception {
 
+    /** States if the error is unknown */
     private boolean unknown;
 
+    /**
+     * Creates new DukeException with a description.
+     *
+     * @param message Describes the error.
+     */
     public DukeException(String message) {
         super(message);
         if (message.equals("unknown")) {
@@ -11,6 +21,11 @@ public class DukeException extends Exception {
         }
     }
 
+    /**
+     * Returns a String describing the error to the user.
+     *
+     * @return String describing the error.
+     */
     public String errorMessage() {
         if (unknown) {
             return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";

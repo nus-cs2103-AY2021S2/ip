@@ -1,19 +1,45 @@
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /** String array of user input */
     private String[] input;
 
+    /**
+     * Creates Parser object from given String input.
+     *
+     * @param input String input to be parsed.
+     */
     public Parser(String input) {
         this.input = input.split(" ");
     }
 
+    /**
+     * Returns a new Parser object with the new given String input.
+     *
+     * @param input New String input to be parsed.
+     * @return New Parser object with given String input.
+     */
     public Parser newInput(String input) {
         return new Parser(input);
     }
 
+    /**
+     * Returns first word or letter from user input.
+     *
+     * @return The first word or letter from user input.
+     */
     public String getCommand() {
         return input[0];
     }
 
+    /**
+     * Returns number, given by user, indicating index of task on task list to be modified.
+     *
+     * @return Integer stating the index of the task on task list to be modified.
+     * @throws DukeException If no input is found.
+     */
     public int getIndexToModify() throws DukeException {
 
         String index = "";
@@ -27,6 +53,11 @@ public class Parser {
         return Integer.parseInt(index) - 1;
     }
 
+    /**
+     * Returns description of the Task that user wants to add.
+     *
+     * @return String comprising description of the task.
+     */
     public String getTaskDescription() {
         String output = "";
 
@@ -41,6 +72,11 @@ public class Parser {
         return output;
     }
 
+    /**
+     * Returns String comprising date or deadline of the task.
+     *
+     * @return String comprising date or deadline of the task.
+     */
     public String getDate() {
         if (getCommand().equals("todo")) {
             return "Task has no date";
@@ -49,6 +85,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns String comprising time of the task.
+     *
+     * @return String comprising time of the task.
+     */
     public String getTime() {
         if (getCommand().equals("todo")) {
             return "Task has no time";

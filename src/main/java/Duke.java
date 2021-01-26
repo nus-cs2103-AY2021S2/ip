@@ -2,12 +2,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
 
+/**
+ * Task List manager that can store task lists.
+ */
 public class Duke {
 
+    /** Storage to handle task list files */
     private Storage storage;
+
+    /** TaskList to hold list of tasks */
     private TaskList taskList;
+
+    /** Ui to display messages for user */
     private Ui ui;
 
+    /**
+     * Creates a new Duke object that contains a list of tasks from file at given path.
+     * If no file is found, an empty task list is created instead.
+     *
+     * @param filePath Path of the file that contains the lists of tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +32,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     *
+     * @throws DukeException If user input is incorrect.
+     */
     public void run() throws DukeException {
 
         ui.displayWelcomeMessage();
@@ -108,6 +127,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main program to be run.
+     * @param args Input.
+     * @throws DukeException If user input is incorrect.
+     */
     public static void main(String[] args) throws DukeException {
         new Duke("dukeTaskList.txt").run();
     }

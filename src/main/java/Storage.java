@@ -8,16 +8,35 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Reads and writes task list file.
+ * If the given file path leads to an empty file, Storage will write a new file in
+ * the given path.
+ */
 public class Storage {
 
+    /** task list file. */
     private File file;
+
+    /** directory path of the task list file. */
     private String filePath;
 
+    /**
+     * Initializes Storage with a file path to read a file.
+     *
+     * @param filePath path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
     }
 
+    /**
+     * Reads the file from filePath.
+     *
+     * @return An ArrayList of type Task containing tasks.
+     * @throws DukeException if no file found at given filePath.
+     */
     public ArrayList<Task> readFile() throws DukeException {
 
         ArrayList<Task> output = new ArrayList<>();
@@ -89,6 +108,11 @@ public class Storage {
         return output;
     }
 
+    /**
+     * Writes into the file from a given list of tasks.
+     *
+     * @param taskList List of tasks to write into the file.
+     */
     public void writeFile(TaskList taskList) {
         try {
             FileWriter fileWriter = new FileWriter(file);

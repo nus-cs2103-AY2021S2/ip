@@ -2,61 +2,79 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Fast I/O is a class to quicken I/O operations
+ * Eases the use of Buffered Reader for faster I/O operations.
  * @source https://www.geeksforgeeks.org/fast-io-in-java-in-competitive-programming/
  */
-class FastIO extends PrintWriter 
-{ 
-    BufferedReader br; 
+class FastIO extends PrintWriter {
+
+    /** BufferedReader object to read input */
+    BufferedReader br;
+
+    /** Indicates String */
     StringTokenizer st;
 
-    public FastIO() 
-    { 
+    /**
+     * Creates new FastIO object to read input.
+     */
+    public FastIO() {
         super(new BufferedOutputStream(System.out)); 
-        br = new BufferedReader(new
-                InputStreamReader(System.in));
-    } 
+        br = new BufferedReader(new InputStreamReader(System.in));
+    }
 
-    String next() 
-    { 
-        while (st == null || !st.hasMoreElements()) 
-        { 
+    /**
+     * Reads next input as a String.
+     *
+     * @return String of next input.
+     */
+    public String next() {
+        while (st == null || !st.hasMoreElements()) {
             try
-            { 
+            {
                 st = new StringTokenizer(br.readLine()); 
-            } 
-            catch (IOException  e) 
-            { 
+            } catch (IOException e) {
                 e.printStackTrace(); 
             } 
-        } 
+        }
         return st.nextToken(); 
-    } 
+    }
 
-    int nextInt() 
-    { 
+    /**
+     * Reads next input as an Integer.
+     *
+     * @return Integer of the next input.
+     */
+    int nextInt() {
         return Integer.parseInt(next()); 
-    } 
+    }
 
-    long nextLong() 
-    { 
+    /**
+     * Reads next input as a Long.
+     *
+     * @return Long of the next input.
+     */
+    long nextLong() {
         return Long.parseLong(next()); 
-    } 
+    }
 
-    double nextDouble() 
-    { 
+    /**
+     * Reads next input as a Double.
+     *
+     * @return Double of the next input.
+     */
+    double nextDouble() {
         return Double.parseDouble(next()); 
-    } 
+    }
 
-    String nextLine() 
-    { 
+    /**
+     * Reads the next line of input as a String.
+     *
+     * @return String consisting of next line of input.
+     */
+    String nextLine() {
         String str = ""; 
-        try
-        { 
+        try {
             str = br.readLine(); 
-        } 
-        catch (IOException e) 
-        { 
+        } catch (IOException e) {
             e.printStackTrace(); 
         } 
         return str; 

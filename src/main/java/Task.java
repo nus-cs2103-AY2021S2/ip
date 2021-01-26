@@ -1,11 +1,18 @@
-// Task to be added to a list
+/**
+ * Simulates a task to be completed.
+ */
 public class Task {
 
-    // task_details states what the task is
-    // done indicates whether the task is done
+    /** states what the task is */
     private String task_details;
+
+    /** indicates whether task is completed */
     private boolean done;
 
+    /** Creates a task.
+     *
+     * @param details details of the task.
+     */
     Task(String details){
         task_details = details;
         done = false;
@@ -17,22 +24,34 @@ public class Task {
         done = true;
     }
 
-    // returns task details
+    /** returns task details.
+     *
+     * @return task details.
+     */
     public String getTask_details() {
         return task_details;
     }
 
-    // checks if task is done
+    /** checks if task is completed.
+     *
+     * @return completion status.
+     */
     public boolean isDone() {
         return done;
     }
 
-    // completes the task
+    /** completes the task.
+     *
+     * @return new completed Task with the same details.
+     */
     public Task completeTask() {
         return new Task(task_details, true);
     }
 
-    // states if task is completed or not
+    /** returns completed status and task details as a String.
+     *
+     * @return String stating completion status and task details.
+     */
     public String taskStatus() {
         if (done) {
            return "1 " + task_details;
