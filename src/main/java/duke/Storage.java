@@ -19,11 +19,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to load and save list of tasks into a text file
+ */
 public class Storage {
     private String path;
     private File file;
     private static DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Storage constructor
+     *
+     * @param path Filepath of .txt file to save tasks in
+     * @throws FileIoException If Duke is unable to read the file
+     */
     public Storage(String path) throws FileIoException {
         this.path = path;
         try {
@@ -35,6 +44,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads saved tasks
+     *
+     * @return ArrayList of saved tasks
+     * @throws FileIoException If Duke is unable to read the file
+     */
     public ArrayList<Task> getTasks() throws FileIoException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -69,9 +84,15 @@ public class Storage {
         return list;
     }
 
-    public void writeFile(TaskList tasks) throws IOException {
+    /**
+     * Writes tasks into .txt file
+     *
+     * @param taskList List of tasks
+     * @throws IOException If Duke is unable to write the file
+     */
+    public void writeFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(path);
-        ArrayList<Task> list = tasks.getList();
+        ArrayList<Task> list = taskList.getList();
 
         for (Task curr : list) {
             String storageString = curr.toStorageString();

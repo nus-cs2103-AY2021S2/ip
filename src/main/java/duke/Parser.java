@@ -13,8 +13,18 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
+/**
+ * Parser class to parse user input
+ */
 public class Parser {
 
+    /**
+     * Parses user input and returns the corresponding command
+     *
+     * @param str User input
+     * @return Corresponding command for Duke to execute
+     * @throws UnknownInputException If unable to parse the command
+     */
     public Command parse(String str) throws UnknownInputException {
         if (str.startsWith("bye")) {
             return new ByeCommand();
@@ -31,6 +41,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input for adding tasks and returns the corresponding command
+     *
+     * @param str User input
+     * @return Corresponding command for Duke to execute
+     * @throws UnknownInputException If unable to parse the command
+     */
     public Command addTasks(String str) throws UnknownInputException {
         if (str.startsWith("todo ")) {
             Todo curr = new Todo(str.substring(5), false);

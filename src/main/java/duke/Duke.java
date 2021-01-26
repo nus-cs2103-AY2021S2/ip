@@ -10,11 +10,19 @@ import duke.tasks.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Duke main class
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Duke object
+     *
+     * @param filePath Path where task are stored in disk
+     */
     public Duke(String filePath) throws FileIoException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -36,7 +44,7 @@ public class Duke {
                 String command = ui.nextCommand();
                 Parser parser = new Parser();
                 Command c = parser.parse(command);
-                c.excecute(taskList);
+                c.execute(taskList);
                 storage.writeFile(taskList);
                 if (c instanceof ByeCommand) {
                     isBye = true;
