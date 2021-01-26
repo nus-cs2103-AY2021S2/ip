@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class CommandNotFoundException extends DukeException {
-    CommandNotFoundException(String message) {
+    public CommandNotFoundException(String message) {
         super(message);
     }
 }

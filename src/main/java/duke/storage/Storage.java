@@ -1,3 +1,13 @@
+package duke.storage;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.parser.Parser;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -11,7 +21,7 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
-    Storage(String path) {
+    public Storage(String path) {
         filePath = path;
     }
 

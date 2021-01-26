@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.storage.Storage;
+import duke.exception.DukeException;
+
 public abstract class AddCommand extends Command {
     public void addThisTask(TaskList tasks, Task task, Storage storage) {
         System.out.println(" Added: ");

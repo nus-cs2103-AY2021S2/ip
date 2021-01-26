@@ -1,9 +1,14 @@
+package duke.ui;
+
+import duke.task.TaskList;
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
     private static final String PARTING_LINE = "____________________________________________________________";
 
-    Ui() {}
+    public Ui() {}
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);

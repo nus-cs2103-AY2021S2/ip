@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class DescriptionMissingException extends DukeException {
-    DescriptionMissingException(String message) {
+    public DescriptionMissingException(String message) {
         super(message);
     }
 }

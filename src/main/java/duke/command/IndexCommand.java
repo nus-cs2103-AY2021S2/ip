@@ -1,7 +1,11 @@
+package duke.command;
+
+import duke.exception.DescriptionMissingException;
+
 public abstract class IndexCommand extends Command {
     protected String fullCommand;
 
-    IndexCommand(String fullCommand) {
+    public IndexCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 

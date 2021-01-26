@@ -1,3 +1,19 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.command.TodoCommand;
+import duke.command.DeadlineCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.exception.DukeException;
+import duke.exception.CommandNotFoundException;
+import duke.exception.InvalidDateTimeException;
+
+
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -5,7 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    Parser() {}
+    public Parser() {}
 
     public static Command parseCommand(String input) throws DukeException {
         int endIndex = input.indexOf(" ");

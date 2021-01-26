@@ -1,5 +1,7 @@
+package duke.exception;
+
 public class TaskIndexOutOfBoundException extends DukeException {
-    TaskIndexOutOfBoundException(String message) {
+    public TaskIndexOutOfBoundException(String message) {
         super(message);
     }
 }

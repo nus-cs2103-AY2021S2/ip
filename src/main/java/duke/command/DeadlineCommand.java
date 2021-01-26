@@ -1,9 +1,21 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.exception.DescriptionMissingException;
+import duke.exception.InvalidDateTimeException;
+import duke.parser.Parser;
+
+
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends AddCommand {
     String fullCommand;
 
-    DeadlineCommand(String fullCommand) {
+    public DeadlineCommand(String fullCommand) {
         this.fullCommand = fullCommand;
     }
 
