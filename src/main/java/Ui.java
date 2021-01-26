@@ -63,6 +63,17 @@ public class Ui {
         System.out.println("Here's your list of tasks!" + taskList.toString());
     }
 
+    public static void printFoundTasks(ArrayList<Task> taskArrayList) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here's the tasks I found with your search term!\n");
+
+        for (Task t : taskArrayList) {
+            sb.append(t);
+        }
+
+        System.out.println(sb.toString());
+    }
+
     public static void shutdown() {
         System.out.println("See you soon!");
     }

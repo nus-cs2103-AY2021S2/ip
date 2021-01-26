@@ -46,6 +46,6 @@ public class Parser {
         else if (noCommand.contains("/at"))
             return noCommand.split("/at")[0].stripLeading().stripTrailing();
         else
-            return null;
+            return noCommand;
     }
 }

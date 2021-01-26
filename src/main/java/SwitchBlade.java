@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -29,7 +30,13 @@ public class SwitchBlade {
                 if (input.split("\\s+").length == 2) {
                     int index = Integer.parseInt(input.split("\\s+")[1]);
                     taskList.delete(index - 1);
-                } else Ui.argumentError();
+                } else {
+                    Ui.argumentError();
+                }
+                break;
+            case "find":
+                ArrayList<Task> foundTasks = taskList.findTasks(Parser.findDescription(input));
+                Ui.printFoundTasks(foundTasks);
                 break;
             default:
                 Ui.unknownCommand();
