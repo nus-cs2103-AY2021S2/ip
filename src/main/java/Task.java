@@ -1,7 +1,7 @@
 public class Task {
-    String description;
-    boolean isDone;
-    String type;
+    protected String description;
+    protected boolean isDone;
+    protected String type;
 
     public Task(String description, String type) {
         this.description = description;
@@ -13,6 +13,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * converts the task object into a string
+     *
+     * @return string containing information about the task object
+     */
     @Override
     public String toString() {
         return this.isDone ? "[X] " + description : "[ ] " + description;

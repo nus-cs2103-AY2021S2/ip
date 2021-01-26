@@ -2,12 +2,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Date {
-    LocalDate date;
+    private LocalDate date;
 
     public Date(String date) {
         this.date = LocalDate.parse(date);
     }
 
+    /**
+     * Returns the date object in a MMM dd yyyy format.
+     * @return a string representing the date in the object
+     */
     public String toFormattedString() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command {
-    String[] info;
+    protected String[] info;
 
     public DeleteCommand(String[] info) {
         this.info = info;
@@ -10,9 +10,20 @@ public class DeleteCommand extends Command {
         return info[0].equals("bye");
     }
 
+    /**
+     * removes a task from the list using the given information.
+     * The information may not be accurate and throw a DukeException
+     * if the provided information is inaccurate.
+     *
+     * @param tasks a TaskList object that contains the tasks of the user
+     * @param ui helps to print statement to let user know what has been done
+     * @param storage contains the filepath of the file to store the given tasks into
+     * @throws DukeException if the provided information is invalid
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.delete(info);
-        ui.deletedTask(task, tasks.listLength);
+        int listLength = tasks.getListLength();
+        ui.deletedTask(task, listLength);
     }
 }
