@@ -22,6 +22,7 @@ public class Parser {
 
         if (str.equals("list")) {
             System.out.println("Here are the tasks in your list!");
+            list.getNumItems();
             list.printTasks();
 
         } else if (mdone.find()) {
