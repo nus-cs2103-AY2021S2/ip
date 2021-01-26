@@ -4,6 +4,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String generateText() {
+        return String.format("T # %d # %s", this.isDone ? 1 : 0, this.description);
+    }
+
+    @Override
     public String toString() {
         if (this.isDone) {
             return "[T][X] " + this.description;

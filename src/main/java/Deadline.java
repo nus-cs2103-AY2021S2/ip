@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.dateBy = dateBy;
     }
 
+    @Override
+    public String generateText() {
+        return String.format("D # %d # %s # %s", this.isDone ? 1 : 0, this.description, this.dateBy);
+    }
+
     public String getDeadline() { //get deadline in format of String eg. (by: Sunday)
         return "(by: " + dateBy + ")";
     }

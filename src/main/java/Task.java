@@ -7,11 +7,13 @@ public class Task {
         this.isDone = false;
     }
 
-    void markAsDone() {
+    public String generateText() { return this.description; }
+
+    public void markAsDone() {
         this.isDone = true;
     }
 
-    String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
