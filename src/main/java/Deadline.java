@@ -1,7 +1,13 @@
-public class Deadline extends Task {
-    protected String by;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String des, String by) {
+public class Deadline extends Task {
+    protected LocalDateTime by;
+
+    public Deadline(String des, LocalDateTime by) {
         super(des);
         this.by = by;
     }
@@ -10,15 +16,20 @@ public class Deadline extends Task {
         if (line.equals("")) {
             throw new DukeException("☹ OOPS!!!The description of a todo cannot be empty.\n");
         } else {
-            String[] split = line.split("/by");
+            String[] split = line.split("/by ");
             String task = split[0];
-            String by = split[1];
-            return new Deadline(task, by);
+            String[] temp = split[1].split(" ");
+            String date = temp[0];
+            LocalTime time = LocalTime.parse(temp[1]);
+            LocalDate d = LocalDate.parse(date);
+            LocalDateTime dt = d.atTime(time);
+            //System.out.println(d.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            return new Deadline(task, dt);
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by:" + by + ")";
+        return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy h a")) + ")";
     }
 }
