@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -9,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 public class Duke {
+
+    public static DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
     public static void writeToFile(File file, ArrayList<Task> list) {
         try {
@@ -85,13 +91,19 @@ public class Duke {
                     break;
                 case DEADLINE:
                     String[] arr2 = s.split(" /by ");
-                    if (arr.length < 2) {
+                    if (arr.length < 2 || arr2[0].split(" ").length < 2) {
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
                     if (arr2.length < 2) {
                         throw new DukeException("OOPS!!! You did not set a deadline using '/by'.");
                     }
-                    Deadline d = new Deadline(arr2[0].substring(9), arr2[1]);
+                    LocalDateTime deadlineDate;
+                    try {
+                        deadlineDate = LocalDateTime.parse(arr2[1], DATETIME_FORMAT);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
+                    }
+                    Deadline d = new Deadline(arr2[0].substring(9), deadlineDate);
                     list.add(d);
                     writeToFile(data, list);
                     System.out.println(taskConfirmation + d
@@ -101,13 +113,19 @@ public class Duke {
                     break;
                 case EVENT:
                     String[] arr3 = s.split(" /at ");
-                    if (arr.length < 2) {
+                    if (arr.length < 2 || arr3[0].split(" ").length < 2) {
                         throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                     }
                     if (arr3.length < 2) {
                         throw new DukeException("OOPS!!! You did not set the date/time of the event using '/at'.");
                     }
-                    Event e = new Event(arr3[0].substring(6), arr3[1]);
+                    LocalDateTime eventDate;
+                    try {
+                        eventDate = LocalDateTime.parse(arr3[1], DATETIME_FORMAT);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("OOPS!!! Please input date and time in the following format: dd-MM-yyyy HHmm.");
+                    }
+                    Event e = new Event(arr3[0].substring(6), eventDate);
                     list.add(e);
                     writeToFile(data, list);
                     System.out.println(taskConfirmation + e
