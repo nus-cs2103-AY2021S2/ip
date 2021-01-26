@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,9 +94,15 @@ public class Duke {
      *                the task and the deadline
      *                to submit it by.
      */
-    public static void addDeadline(String command) {
-        tasks.add(new Deadline(command.substring(9).split("/")[0],
-                command.substring(9).split("/")[1].substring(3)));
+
+    public static void addDeadline(String command) throws InvalidDateTimeFormatException{
+        try {
+            tasks.add(new Deadline(command.substring(9).split("/")[0],
+                    LocalDateTime.parse(command.substring(9)
+                    .split("/")[1].substring(3), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))));
+        } catch (DateTimeParseException e){
+            throw new InvalidDateTimeFormatException();
+        }
         int count = tasks.size();
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
@@ -116,10 +125,17 @@ public class Duke {
      *                which contains the name of
      *                the event and the date and time.
      */
-    public static void addEvent(String command) {
-        tasks.add(new Event(command.substring(6).split("/")[0],
-                command.substring(6).split("/")[1].substring(3)));
+
+    public static void addEvent(String command) throws InvalidDateTimeFormatException {
+        try {
+            tasks.add(new Event(command.substring(6).split("/")[0],
+                    LocalDateTime.parse(command.substring(6).split("/")[1].substring(3),
+                            DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))));
+        } catch (DateTimeParseException e){
+            throw new InvalidDateTimeFormatException();
+        }
         int count = tasks.size();
+        count++;
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
@@ -178,9 +194,19 @@ public class Duke {
                 System.out.println("\nOOPS!!! The description of a todo cannot be empty.\n");
             }
         } else if (command.split(" ")[0].equals("deadline")) {
-            addDeadline(command);
+            try {
+                addDeadline(command);
+            } catch (InvalidDateTimeFormatException e) {
+                System.out.println("\nDate time format is invalid. " +
+                        "Please enter the date and time in the following format: DD-MM-YYYY HHMM\n");
+            }
         } else if (command.split(" ")[0].equals("event")) {
-            addEvent(command);
+            try {
+                addEvent(command);
+            } catch (InvalidDateTimeFormatException e) {
+                System.out.println("\nDate time format is invalid. " +
+                        "Please enter the date and time in the following format: DD-MM-YYYY HHMM\n");
+            }
         } else if (command.split(" ")[0].equals("delete")) {
             deleteTask(command);
         } else {
