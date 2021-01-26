@@ -133,9 +133,6 @@ public class Duke {
             LocalDate deadlineDate = LocalDate.parse(deadlineDateHours[1]);
             LocalTime deadlineHour = LocalTime.parse(deadlineDateHours[2]);
             Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
-            lst.add(deadline);
-            doTaskFinally(deadline, lst);
-            Deadline deadline = new Deadline(deadlineWord, deadlineTime);
             taskManager.add(deadline);
             doTaskFinally(deadline);
         } catch (StringIndexOutOfBoundsException e) {
@@ -154,9 +151,6 @@ public class Duke {
             LocalDate eventDate = LocalDate.parse(eventDateHours[0]);
             LocalTime eventHour = LocalTime.parse(eventDateHours[1]);
             Event event = new Event(eventWord, eventDate, eventHour);
-            lst.add(event);
-            doTaskFinally(event, lst);
-            Event event = new Event(eventWord, eventTime);
             taskManager.add(event);
             doTaskFinally(event);
         } catch (StringIndexOutOfBoundsException e) {

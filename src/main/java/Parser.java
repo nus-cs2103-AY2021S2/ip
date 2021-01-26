@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 public class Parser {
     private static final String splitString = "p@nt3k";
 
@@ -14,12 +16,14 @@ public class Parser {
                 ToDo task = new ToDo(jobName, done);
                 lst.add(task);
             } else if (job.equals("Deadline")) {
-                String jobTime = previousVersionTasks[3];
-                Deadline task = new Deadline(jobName, done, jobTime);
+                LocalDate jobDate = LocalDate.parse(previousVersionTasks[3]);
+                LocalTime jobTime = LocalTime.parse(previousVersionTasks[4]);
+                Deadline task = new Deadline(jobName, done, jobDate, jobTime);
                 lst.add(task);
             } else if (job.equals("Event")) {
-                String jobTime = previousVersionTasks[3];
-                Event task = new Event(jobName, done, jobTime);
+                LocalDate jobDate = LocalDate.parse(previousVersionTasks[3]);
+                LocalTime jobTime = LocalTime.parse(previousVersionTasks[4]);
+                Event task = new Event(jobName, done, jobDate, jobTime);
                 lst.add(task);
             }
         }
@@ -44,6 +48,8 @@ public class Parser {
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(task.getDone());
                 taskInStringForm.append(splitString);
+                taskInStringForm.append(((Deadline)task).getDate());
+                taskInStringForm.append(splitString);
                 taskInStringForm.append(((Deadline)task).getTime());
             } else if (task instanceof Event) {
                 taskInStringForm.append("Event");
@@ -51,6 +57,8 @@ public class Parser {
                 taskInStringForm.append(task.getJob());
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(task.getDone());
+                taskInStringForm.append(splitString);
+                taskInStringForm.append(((Event)task).getDate());
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(((Event)task).getTime());
             }

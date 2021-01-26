@@ -17,8 +17,11 @@ public class Event extends Task{
         this.date = date;
         this.time = time;
     }
+    public LocalDate getDate() {
+        return this.date;
+    }
 
-    public String getTime() {
+    public LocalTime getTime() {
         return this.time;
     }
 
