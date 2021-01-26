@@ -7,11 +7,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
 
+    /**
+     * Constructs Duke chatbot.
+     * @param filepath The filepath of where the data is going to be stored at.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -23,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs Duke chatbot.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
