@@ -1,17 +1,18 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner input;
+    private final Scanner input;
 
     public Ui() {
         this.input = new Scanner(System.in);
     }
 
     public String readCommand() {
-        String command = input.nextLine();
-        return command;
+        return input.nextLine();
     }
 
     public boolean stillHaveCommand() {

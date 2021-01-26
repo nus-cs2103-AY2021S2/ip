@@ -1,3 +1,7 @@
+package duke;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Parser {
@@ -63,6 +67,11 @@ public class Parser {
             if (commandLine.length() == 9) {
                 return new Command("executeFalseCommand", "myTaskOn");
             } else {
+                try {
+                    LocalDateTime.parse(commandLine.substring(9) + " 00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                } catch (Exception e) {
+                    return new Command("executeFalseCommand", "myTaskOn");
+                }
                 return new Command("myTaskOn", commandLine.substring(9) + " 00:00");
             }
         } else {

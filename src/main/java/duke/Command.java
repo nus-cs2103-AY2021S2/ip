@@ -1,3 +1,5 @@
+package duke;
+
 public class Command {
     public String commandTitle;
     public String commandContent;

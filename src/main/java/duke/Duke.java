@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -91,6 +93,10 @@ public class Duke {
             throw new DukeException("     no body detected or no dlTime detected for deadline command, Sir!");
         } else if (command.startsWith("event")) {
             throw new DukeException("     no body detected or no eTime detected for Event command, Sir!");
+        } else if (command.startsWith("myTaskToday")) {
+            throw new DukeException("     myTaskToday command should not have body, Sir!");
+        } else if (command.startsWith("myTaskOn")) {
+            throw new DukeException("     No body or wrong body format for myTaskOn command, Sir!");
         } else {
             throw new DukeException("     Invalid command format");
         }

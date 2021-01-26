@@ -1,6 +1,7 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class Event extends Task {
     public LocalDateTime eTime;
