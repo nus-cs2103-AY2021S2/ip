@@ -10,12 +10,11 @@ public class TaskList {
 
     public TaskList() {}
 
-    public static void createTask(String input) {
+    public static void createTask(String input, Scanner sc) {
         ArrayList<Task> lst = new ArrayList<>();
         Storage store = new Storage();
         String home = store.getHome();
         String file = store.defaultFilePath();
-        Scanner sc = new Scanner(System.in);
         if (input.equals("list")) {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < lst.size(); i++) {

@@ -40,7 +40,7 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again!");
                 break;
             } else {
-                tl.createTask(input);
+                tl.createTask(input, sc);
             }
         }
     }
