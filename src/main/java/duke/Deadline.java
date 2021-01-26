@@ -29,12 +29,12 @@ public class Deadline extends Task{
     @Override
     public String getFormattedData() {
         String currentTime = time == null ? "" : " " + time;
-        return  "D | " + super.getFormattedData() + "| " + date + currentTime;
+        return  "D | " + super.getFormattedData() + " | " + date + currentTime;
     }
 
     @Override
     public String toString() {
-        String exactTime = time == null ? "" : " " + time.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        return "[D]" + super.toString() + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + exactTime + ")";
+        String exactTime = time == null ? "" : " " + time.format(DateTimeFormatter.ofPattern("hh:mma"));
+        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + exactTime + ")";
     }
 }

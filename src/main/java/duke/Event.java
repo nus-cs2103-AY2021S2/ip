@@ -21,12 +21,12 @@ public class Event extends Task{
 
     @Override
     public String getFormattedData() {
-        return  "E | " + super.getFormattedData() + "| " + date + " " + duration;
+        return  "E | " + super.getFormattedData() + " | " + date + " " + duration;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 duration + ")";
     }
 }
