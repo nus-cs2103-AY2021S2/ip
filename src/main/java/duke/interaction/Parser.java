@@ -9,6 +9,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.common.DukeException;
@@ -102,7 +103,6 @@ public class Parser {
             if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
                 throw new DukeException.EmptyEventDate();
             }
-
             if (LocalDateTime.parse(dates[0].trim()).compareTo(LocalDateTime.parse(dates[1].trim())) >= 0) {
                 throw new DukeException.InvalidEventEnd();
             }
@@ -117,6 +117,11 @@ public class Parser {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);
             }
             return new TodoCommand(scanner.nextLine().trim());
+        case DukeString.COMMAND_FIND:
+            if (!scanner.hasNext()) {
+                throw new DukeException.EmptyDescription(DukeString.COMMAND_FIND);
+            }
+            return new FindCommand(scanner.next());
         default:
             throw new DukeException.InvalidCommand();
 
