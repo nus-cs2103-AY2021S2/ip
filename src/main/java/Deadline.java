@@ -36,7 +36,6 @@ public class Deadline extends Task {
 
     @Override
     public Task finishTask() {
-        System.out.println("Nice! I've marked this task as done: ");
         return new Deadline(this.task, this.deadline,true);
     }
 

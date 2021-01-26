@@ -13,7 +13,6 @@ public class Task {
     }
 
     public Task finishTask() {
-        System.out.println("Nice! I've marked this task as done: ");
         return new Task(this.task, true);
     }
 

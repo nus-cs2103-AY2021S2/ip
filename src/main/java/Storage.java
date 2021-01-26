@@ -53,10 +53,10 @@ public class Storage {
         return tasks;
     }
 
-    public void writeFile(List<Task> tasks) throws DukeException {
+    public void writeFile(TaskList tasks) throws DukeException {
         try {
             FileWriter file = new FileWriter(this.filePath, false);
-            for (Task task: tasks) {
+            for (Task task: tasks.getTasks()) {
                 file.write(String.format(task.saveString() + "%n"));
             }
             file.close();
