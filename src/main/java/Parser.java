@@ -64,6 +64,12 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     command = new AddEventCommand(name, arr2[0], arr2[1]);
                 }
+            } else if (commandStr.toLowerCase().split(" ")[0].equals("find")) {
+                String keyword = commandStr.substring(5);
+                if (keyword.trim().length() == 0) {
+                    throw new IllegalInputFormatException();
+                }
+                command = new FindCommand(keyword);
             } else {
                 command = new WrongCommand();
             }

@@ -87,4 +87,20 @@ public class TaskManager {
     public boolean indexWithinRange(int index) {
         return index < size() && index >= 0;
     }
+
+    /**
+     * Search through the existing task list for a specific keyword
+     * Add all occurrences of the tasks to return list
+     * @param keyword keyword string to search
+     * @return list of tasks containing the keyword
+     */
+    public List<Task> findByKeyword(String keyword) {
+        List<Task> result =  new ArrayList<>();
+        for (Task task: list) {
+            if (task.getName().contains(keyword)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
 }

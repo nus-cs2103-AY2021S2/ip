@@ -1,4 +1,5 @@
 T|1|1
-D|0|cs2102 homework|by|22 jan 2020
-D|1|cs2107 homework|by|tmr
-T|0|cs2103t
+T|0|get book
+E|0|book festival|on|2020-11-23
+D|0|ne return harry potter|by|next month
+E|0|alice's birthday|on|25rd march
