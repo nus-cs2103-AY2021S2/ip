@@ -1,2 +1,0 @@
-T | 0 | borrow book
-E | 1 | sing | sat
