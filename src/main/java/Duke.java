@@ -1,7 +1,10 @@
 import java.io.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) throws IOException {
@@ -47,15 +50,15 @@ public class Duke {
                         numOfItems++;
                         System.out.println("Now you have " + numOfItems + " tasks in the list.");
                         break;
-                    case "deadline":
-                        deadlineCommand(inputArr, tasks, numOfItems, input);
+                    case "event":
+                        eventCommand(inputArr, tasks, numOfItems, input);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(numOfItems).toString());
                         numOfItems++;
                         System.out.println("Now you have " + numOfItems + " tasks in the list.");
                         break;
-                    case "event":
-                        eventCommand(inputArr, tasks, numOfItems, input);
+                    case "deadline":
+                        deadlineCommand(inputArr, tasks, input);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(numOfItems).toString());
                         numOfItems++;
@@ -129,12 +132,11 @@ public class Duke {
      * Command method when the user types in "deadline".
      * @param inputArr Command input in array form.
      * @param tasks List of tasks.
-     * @param numOfItems Number of items in the list.
      * @param input Original input.
      * @throws DukeMissingInputException Throws Missing Input Exception when missing input.
      */
-    public static void deadlineCommand(String[] inputArr, List<Task> tasks, int numOfItems, String input)
-            throws DukeMissingInputException {
+    public static void deadlineCommand(String[] inputArr, List<Task> tasks, String input)
+            throws DukeMissingInputException, DukeWrongInputException {
         String description = "";
         String deadline = "";
         boolean foundBy = false;
@@ -154,7 +156,13 @@ public class Duke {
             }
         }
         deadline = deadline.trim();
-        tasks.add(new Deadline(description, deadline));
+        if (isDate(deadline)){
+            LocalDate dateDeadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dateDeadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            tasks.add(new Deadline(description, dateDeadline));
+        } else {
+            throw new DukeWrongInputException("OOPS!!! Please enter your deadline in the format: deadline /by yyyy-mm-dd :-(");
+        }
     }
 
     /**
@@ -255,5 +263,20 @@ public class Duke {
         while (reader.readLine() != null) {lines++;};
         reader.close();
         return lines;
+    }
+
+
+     /** Method to check if a certain string is of date format.
+     * @param str - input string to be checked if it is in the format of a string
+     * @return boolean value telling us whether the string is a date or just simple text.
+     */
+    public static boolean isDate(String str) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-mm-DD");
+        try {
+            LocalDate.parse(str, dateTimeFormatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 }
