@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Completes a task.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     private static final String DONE_TASK_MESSAGE = "Nice! I've marked this task as done:\n";

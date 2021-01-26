@@ -1,9 +1,11 @@
 package duke.commands;
 
 import duke.tasks.DeadlineTask;
-
 import java.time.LocalDateTime;
 
+/**
+ * Creates a Deadline task.
+ */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";

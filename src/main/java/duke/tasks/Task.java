@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Represents a task.
+ */
 public abstract class Task {
     private String taskType;
     private String name;
@@ -17,16 +20,31 @@ public abstract class Task {
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Returns the name of the task.
+     * @return name of task
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the identifier of the type of task.
+     * @return identifier of task type
+     */
     public abstract String getTaskType();
 
+    /**
+     * Checks if the task is already completed.
+     * @return true if task is completed, else false
+     */
     public boolean isDone() {
         return isCompleted;
     }
 
+    /**
+     * Marks a task as completed.
+     */
     public void completeTask() {
         this.isCompleted = true;
     }

@@ -15,15 +15,27 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used to read and write to a file.
+ */
 public class Storage {
     private static final String DEFAULT_FILEPATH = "duke.txt";
 
     private final Path path;
 
+    /**
+     * Creates a {@code Storage} object with the default file path.
+     * @throws InvalidStorageFilePathException if the default file path is invalid
+     */
     public Storage() throws InvalidStorageFilePathException {
         this(DEFAULT_FILEPATH);
     }
 
+    /**
+     * Creates a {@code Storage} object with the given file path.
+     * @param path file path to read or write to
+     * @throws InvalidStorageFilePathException if the file path is invalid
+     */
     public Storage(String path) throws InvalidStorageFilePathException {
         if (!isValidFilePath(path)) {
             throw new InvalidStorageFilePathException("The file path of a storage file should end with '.txt'");
@@ -35,10 +47,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if a file indicated by the given file path is text file.
+     * @param filePath file path to be checked
+     * @return true if the file path ends with '.txt', else false
+     */
     private static boolean isValidFilePath(String filePath) {
         return filePath.endsWith(".txt");
     }
 
+    /**
+     * Saves the list of tasks by writing into the file if the list if updated by the previous command.
+     * @param taskList updated task list
+     * @throws StorageException if an error occurs while writing to the file
+     */
     public void saveTasksIfPresent(TaskList taskList) throws StorageException {
         if (taskList == null) {
             return;
@@ -51,6 +73,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks found in the file and parses the tasks into an operational format.
+     * @return {@code TaskList} that represents the current list of tasks in the file
+     * @throws IOException if an error occurs while reading from the file
+     */
     public TaskList loadTasks() throws IOException {
         TaskList taskList = new TaskList();
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
@@ -63,6 +90,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Converts a task string into a {@code Task} object.
+     * @param taskString task string to be converted
+     * @return {@code Task}
+     */
     public static Task convertStringToTask(String taskString) {
         Task task = null;
         String[] arr = taskString.split("\\s\\|\\s");
@@ -83,6 +115,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Converts a list of tasks into a list of strings formatted to be stored in a file.
+     * @param taskList task list to be converted
+     * @return a list of formatted task strings
+     */
     public static List<String> convertAllTasksToString(TaskList taskList) {
         List<String> taskStrings = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -92,8 +129,15 @@ public class Storage {
         return taskStrings;
     }
 
+    /**
+     * Converts a {@code Task} into a formatted task string.
+     * String format: "taskType | taskStatus | taskName", with an additional " | additionalInfo]"
+     * depending on the type of the task.
+     * @param task task object to be converted
+     * @return formatted string describing the task
+     */
     public static String convertTaskToString(Task task) {
-        // String format: "<taskType> | <taskStatus> | <taskName>", [" | <additionalInfo>]"]
+        // 
         StringBuilder encodedTaskString = new StringBuilder();
         encodedTaskString.append(task.getTaskType());
         encodedTaskString.append(" | ");

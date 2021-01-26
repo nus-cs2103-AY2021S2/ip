@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasks.EventTask;
 
+/**
+ * Creates an Event task.
+ */
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";

@@ -15,15 +15,27 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The main entry point to the chatbot application.
+ * Initializes the application and starts user interaction.
+ */
 public class Main {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Entry point of the application.
+     * @param args an optional user-specified filepath used to initialize the storage
+     */
     public static void main(String[] args) {
         new Main().run(args);
     }
 
+    /**
+     * Runs the application until user terminates with an exit command.
+     * @param args an optional user-specified filepath used to initialize the storage
+     */
     public void run(String[] args) {
         // Initialize the required components
         initialize(args);
@@ -35,6 +47,10 @@ public class Main {
         exit();
     }
 
+    /**
+     * Initializes the required components and prints the welcome greeting.
+     * @param args an optional user-specified filepath used to initialize the storage
+     */
     private void initialize(String[] args) {
         try {
             this.ui = new Ui();
@@ -51,12 +67,21 @@ public class Main {
         }
     }
 
+    /**
+     * Prints the exit message
+     */
     private void exit() {
-        // Print exit message
         ui.printExitMessage();
         ui.printDivider();
     }
 
+    /**
+     * Initializes the storage using the specified filepath. If user did not specify a filepath, 
+     * then the default filepath will be used.
+     * @param args an optional user-specified filepath used to initialize the storage
+     * @return a Storage object that is used to read and write to a file
+     * @throws InvalidStorageFilePathException if the specified filepath is invalid
+     */
     private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
         if (args.length > 0) {
             // User has specified a file path for the storage
@@ -67,6 +92,9 @@ public class Main {
         }
     }
 
+    /**
+     * Runs the loop asking for user commands and execute the command until user enters exit command.
+     */
     private void runLoop() {
         Command command = null;
         do {
@@ -86,11 +114,20 @@ public class Main {
         } while (!ByeCommand.isByeCommand(command));
     }
 
+    /**
+     * Executes the command and return a CommandResult instance.
+     * @param command user command
+     * @return result command
+     */
     private CommandResult executeCommand(Command command) {
         command.setTaskList(taskList);
         return command.execute();
     }
 
+    /**
+     * Update the cached task list if it was modified by the previous command.
+     * @param taskList updated task list
+     */
     private void updateTaskListIfPresent(TaskList taskList) {
         if (taskList != null) {
             this.taskList = taskList;
