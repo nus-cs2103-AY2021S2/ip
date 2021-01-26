@@ -24,6 +24,10 @@ public class Duke {
         parser = new Parser(ui, storage, tasks);
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     public void run() {
         this.ui.displayWelcomeMessage();
 
@@ -39,9 +43,5 @@ public class Duke {
                 break;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

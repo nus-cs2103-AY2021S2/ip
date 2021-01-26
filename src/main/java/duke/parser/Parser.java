@@ -1,9 +1,9 @@
 package duke.parser;
 
+import duke.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.DukeException;
 import duke.ui.Ui;
 
 public class Parser {

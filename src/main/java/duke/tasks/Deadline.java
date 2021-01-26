@@ -2,8 +2,8 @@ package duke.tasks;
 
 import duke.DukeException;
 
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -36,6 +36,28 @@ public class Deadline extends Task {
         this.time = null;
     }
 
+    public static Deadline parseDeadline(String description) throws DukeException {
+        if (description.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (!description.contains("/by")) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline must contain a time.");
+        }
+        String[] partitioned = description.split("/by");
+        String desc = partitioned[0].strip();
+        String[] datetime = partitioned[1].strip().split(" ");
+        try {
+            if (datetime.length == 2) {
+                return new Deadline(desc, LocalDate.parse(datetime[0]), LocalTime.parse(datetime[1]));
+            } else {
+                return new Deadline(desc, LocalDate.parse(datetime[0]));
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! The datetime description of a deadline must be either of the form" +
+                    "'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'");
+        }
+
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(super.toString());
@@ -58,27 +80,5 @@ public class Deadline extends Task {
             output.append(this.time.format(DateTimeFormatter.ofPattern("HH:mm")));
         }
         return output.toString();
-    }
-
-    public static Deadline parseDeadline(String description) throws DukeException {
-        if (description.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else if (!description.contains("/by")) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline must contain a time.");
-        }
-        String[] partitioned = description.split("/by");
-        String desc = partitioned[0].strip();
-        String[] datetime = partitioned[1].strip().split(" ");
-        try {
-            if (datetime.length == 2) {
-                return new Deadline(desc, LocalDate.parse(datetime[0]), LocalTime.parse(datetime[1]));
-            } else {
-                return new Deadline(desc, LocalDate.parse(datetime[0]));
-            }
-        } catch (DateTimeParseException e) {
-            throw new DukeException("☹ OOPS!!! The datetime description of a deadline must be either of the form" +
-                    "'YYYY-MM-DD' or 'YYYY-MM-DD hh:mm'");
-        }
-
     }
 }
