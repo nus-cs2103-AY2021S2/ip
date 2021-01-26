@@ -1,10 +1,15 @@
 package core.task;
 
-import core.task.Task;
-
+/**
+ * Describes an Event.
+ */
 public class Event extends Task {
     private String atTime;
 
+    /**
+     * Creates a new Event task with a description. Must contain '/at' after which should be the event time.
+     * @param desc - the description
+     */
     public Event(String desc) {
         super(desc);
 

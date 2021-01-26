@@ -1,13 +1,18 @@
 package core.task;
 
-import core.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates a Deadline type Task.
+ */
 public class Deadline extends Task {
     private LocalDate byTime;
 
+    /**
+     * Creates a new Deadline task with a description. Must contain '/by' after which should be the event time.
+     * @param desc - description
+     */
     public Deadline(String desc) {
         super(desc);
 

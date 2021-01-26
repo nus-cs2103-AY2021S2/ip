@@ -11,7 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class TaskStorageFile implements TaskStorage {
+/**
+ * Implementation of a {@code TaskStorage} in a file location.
+ */
+public class TaskStorageFile extends TaskStorage {
 
     @Override
     public void saveTaskList(ArrayList<Task> tm, Path fileLocation) throws IOException {

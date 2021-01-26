@@ -10,6 +10,9 @@ import core.task.Todo;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
+/**
+ * Enumerates the input types.
+ */
 public enum InputType {
     FIND(x -> x.toLowerCase().trim().startsWith("find"), (tm, data) -> {
         StringBuilder ret = new StringBuilder("Matched items : \n");
@@ -94,6 +97,11 @@ public enum InputType {
         this.func = func;
     }
 
+    /**
+     * Returns whether the given data is of this input type. Encapsulates input parsing.
+     * @param x - the given string
+     * @return - whether it is of this {@code InputType}
+     */
     public boolean doesMatch(String x) {
         if (this.toMatch == null || x == null)
             return false;
@@ -101,8 +109,13 @@ public enum InputType {
         return toMatch.test(x);
     }
 
+    /**
+     * Encapsulates the action associated with the particular {@code InputType}.
+     * @param tm - instance of {@code TaskManager}
+     * @param data - data to act on
+     * @return - the output of the action to be outputted.
+     */
     public String apply(TaskManager tm, String data) {
-
         return func.apply(tm, data);
     }
 }
