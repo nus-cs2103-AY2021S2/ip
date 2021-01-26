@@ -1,5 +1,3 @@
-import java.util.Date;
-
 public class myEvent extends Task {
     DateTime startDatetime, endDatetime;
 
@@ -37,10 +35,11 @@ public class myEvent extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        if (this.completed)
+        if (this.completed) {
             sb.append("[E] [x] ");
-        else
+        } else {
             sb.append("[E] [ ] ");
+        }
 
         sb.append(this.description
                 + " at: "

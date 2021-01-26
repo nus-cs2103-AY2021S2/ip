@@ -2,11 +2,6 @@ public class Task {
     protected String description;
     protected boolean completed;
 
-    Task() {
-        description = "";
-        completed = false;
-    }
-
     Task(String description) {
         this.description = description.stripLeading().stripTrailing();
         completed = false;
@@ -33,10 +28,11 @@ public class Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        if (this.completed)
+        if (this.completed) {
             sb.append("[T] [x] ");
-        else
+        } else {
             sb.append("[T] [ ] ");
+        }
 
         sb.append(this.description);
         return sb.toString();

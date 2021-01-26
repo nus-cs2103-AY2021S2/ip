@@ -26,17 +26,19 @@ public class DateTime {
     }
 
     public String getDatetime() {
-        if (localDateTime != null)
+        if (localDateTime != null) {
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(localDateTime);
-        else
+        } else {
             return DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDate);
+        }
     }
 
     public String savingDatetime() {
-        if (localDateTime != null)
+        if (localDateTime != null) {
             return DateTimeFormatter.ofPattern("yyyy-MM-dd, HHmm").format(localDateTime);
-        else
+        } else {
             return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
+        }
     }
 
     @Override

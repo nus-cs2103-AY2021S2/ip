@@ -14,7 +14,9 @@ public class SwitchBlade {
                 if (input.split("\\s+").length == 2) {
                     int index = Integer.parseInt(input.split("\\s+")[1]);
                     taskList.markCompleted(index - 1);
-                } else Ui.argumentError();
+                } else {
+                    Ui.argumentError();
+                }
                 break;
             case "todo":
                 addTask(input,taskList);
@@ -29,7 +31,9 @@ public class SwitchBlade {
                 if (input.split("\\s+").length == 2) {
                     int index = Integer.parseInt(input.split("\\s+")[1]);
                     taskList.delete(index - 1);
-                } else Ui.argumentError();
+                } else {
+                    Ui.argumentError();
+                }
                 break;
             default:
                 Ui.unknownCommand();
@@ -39,7 +43,9 @@ public class SwitchBlade {
     private static void addTask(String input, myList taskList) {
         if (input.replaceAll("todo", "").length() > 0) {
             taskList.addTask(input);
-        } else Ui.todoError();
+        } else {
+            Ui.todoError();
+        }
     }
 
     private static void addDeadline(String input, myList taskList) {
@@ -48,7 +54,9 @@ public class SwitchBlade {
             String description = Parser.findDescription(input);
 
             taskList.addDeadline(description, datetime);
-        } else Ui.deadlineError();
+        } else {
+            Ui.deadlineError();
+        }
     }
 
     private static void addEvent(String input, myList taskList) {
@@ -58,7 +66,9 @@ public class SwitchBlade {
 
             if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null)
                 taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
-        } else Ui.eventError();
+        } else {
+            Ui.eventError();
+        }
     }
 
     public static void main(String[] args) {
@@ -70,14 +80,16 @@ public class SwitchBlade {
         Scanner sc = new Scanner(System.in);
         String input = "bye";
 
-        if (sc.hasNext())
+        if (sc.hasNext()) {
             input = sc.nextLine();
+        }
 
         while (!input.equalsIgnoreCase("bye")) {
             processCommand(input, taskList);
 
-            if (sc.hasNext())
+            if (sc.hasNext()) {
                 input = sc.nextLine();
+            }
         }
 
         Ui.shutdown();
