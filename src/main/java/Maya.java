@@ -8,6 +8,13 @@ public class Maya {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Initialises a newly created Maya Object
+     * so that it represents a Bot.
+     *
+     * @param filePath a String of the path
+     *                 where the TaskList is stored.
+     */
     public Maya(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +27,11 @@ public class Maya {
         }
     }
 
+    /**
+     * Starts the Maya object to accept user commands.
+     * Processes user commands by utilising Parser object
+     * to make sense of the user command.
+     */
     public void run() {
         ui.showWelcome();
 

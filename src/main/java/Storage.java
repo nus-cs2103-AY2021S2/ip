@@ -11,10 +11,29 @@ import java.nio.file.Paths;
 public class Storage {
     File file;
 
+    /**
+     * Initialises a newly created Storage object
+     * so that it represents a File
+     * where the TaskList will be stored in.
+     *
+     * @param pathname a String representing the path
+     *                 where the list will be stored.
+     */
     public Storage(String pathname) {
         file = new File(Paths.get(pathname).toString());
     }
 
+    /**
+     * Creates a new file in the path specified
+     * and return an empty TaskList if file does not exist.
+     * Otherwise, reads from the existing file
+     * and translates its contents into a TaskList.
+     *
+     *
+     * @return a TaskList object according to the file specified.
+     * @throws IOException if an I/O error occurred.
+     * @throws UnknownCommandException if file contents contain unsupported Task object.
+     */
     TaskList load() throws IOException, UnknownCommandException {
         if (file.exists()) {
             return new TaskList(this.convertFileToList());
@@ -24,6 +43,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses the contents of the TaskList in the specified file
+     * and translates the file into a List<Task> object.
+     *
+     * @return a List<Task> containing the Task objects as specified in the file.
+     * @throws FileNotFoundException if file specified by the path is not found.
+     * @throws UnknownCommandException if the tag stored in the TaskList
+     *                                      does not correspond to Todo, Deadline or Event.
+     */
     List<Task> convertFileToList() throws FileNotFoundException, UnknownCommandException {
         Scanner sc = new Scanner(file);
         List<Task> list = new ArrayList<>();
@@ -54,12 +82,24 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Creates a file according to the specified pathName.
+     *
+     * @throws IOException if an I/O error occurred.
+     */
     void createFile() throws IOException {
         // Create directory and file
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
 
+    /**
+     * Overwrites the file with the new updated TaskList.
+     *
+     * @param list a List<Task> object derived from TaskList
+     *             with the updated Task objects.
+     * @throws IOException if an I/O error occurred.
+     */
     void writeToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(file.getAbsolutePath());
 
@@ -72,6 +112,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Adds a Task to the bottom of the file containing the TaskList.
+     *
+     * @param task a Task object to be added to the TaskList.
+     * @throws IOException if an I/O error occurred.
+     */
     void appendToFile(Task task) throws IOException {
         // create a FileWriter in append mode
         FileWriter fw = new FileWriter(file.getAbsolutePath(), true);
@@ -79,6 +125,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Translates a Task object into String format to be stored into the file.
+     *
+     * @param task a Task object to be translated to String.
+     * @return a String representation of the Task Object suitable to be stored in the file.
+     */
     String translateTask(Task task) {
         int isDone = task.isDone ? 1 : 0;
         if (task instanceof Todo) {
