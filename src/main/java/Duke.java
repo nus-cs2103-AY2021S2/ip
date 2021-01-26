@@ -11,8 +11,25 @@ import java.util.regex.Matcher;
  */
 public class Duke {
     private static List<Task> listOfTasks = new ArrayList<>();
-    private static Storage storage = new Storage("data/duke.txt");
+    private static Storage storage;
     private Ui ui = new Ui();
+
+    Duke() {
+
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File f = new File("data/duke.txt");
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        storage = new Storage("data/duke.txt");
+    }
 
 
     /**
