@@ -98,10 +98,16 @@ public class Duke {
                     task = new Todo(taskArr[2]);
                     break;
                 case "E":
-                    task = new Event(taskArr[2], taskArr[3]);
+                    String[] deadlineArr = { taskArr[3] , taskArr[4]};
+                    LocalDateTime[] deadlines = new LocalDateTime[2];
+                    for(int i = 0 ; i < deadlineArr.length; i++) {
+                        deadlines[i] = parseDate(deadlineArr[i]);
+                    }
+                    task = new Event(taskArr[2], deadlines[0], deadlines[1]);
                     break;
                 case "D":
-                    task = new Deadline(taskArr[2], taskArr[3]);
+                    LocalDateTime deadline = parseDate(taskArr[3]);
+                    task = new Deadline(taskArr[2], deadline);
                 }
                 if (taskArr[1] == "1") {
                     task.markAsDone();
@@ -141,7 +147,7 @@ public class Duke {
         int nextSpace = getNextSpace(command,start);
         String deadline = command.substring(nextSpace+1);
         try {
-            return LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+            return parseDate(deadline);
         } catch (DateTimeParseException e) {
             throw new DukeDeadlineException("Format of the deadline of a deadline task should be (Year-Month-Day time (24 hours))");
         }
@@ -149,6 +155,10 @@ public class Duke {
 
     public static int getNextSpace(String command, int start) {
         return command.indexOf(" ",start);
+    }
+
+    public static LocalDateTime parseDate(String date) {
+        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
     }
 
     public static LocalDateTime[] retrieveEventDeadline(String command, int start) throws DukeDeadlineException {
@@ -160,12 +170,11 @@ public class Duke {
         if(timeArr.length != 2) {
             throw new DukeDeadlineException("Format of the deadline of a Event task should be (Year-Month-Day Time(24 hours)-Time(24 hours)");
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d Hmm");
             LocalDateTime[] deadlineArr = new LocalDateTime[2];
             for (int i = 0; i < deadlineArr.length; i++) {
                 StringBuilder str = new StringBuilder(date);
                 str.append(timeArr[i]);
-                deadlineArr[i] = LocalDateTime.parse(str,formatter);
+                deadlineArr[i] = parseDate(str.toString());
             }
             return deadlineArr;
         }
