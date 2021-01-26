@@ -1,14 +1,16 @@
+package duke.task;
+
 public class Todo extends Task{
-    Todo(String task) {
+    public Todo(String task) {
         super(task);
     }
 
-    Todo(boolean done, String task) {
+    public Todo(boolean done, String task) {
         super(task);
         this.done = done;
     }
 
-    String fileString() {
+    public String fileString() {
         return "T | " + this.done + " | " + this.task;
     }
 

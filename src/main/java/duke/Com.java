@@ -1,4 +1,6 @@
-enum Com {
+package duke;
+
+public enum Com {
     LIST,
     DONE,
     DELETE,
