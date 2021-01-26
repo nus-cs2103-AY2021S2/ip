@@ -1,4 +1,6 @@
 import util.Formatter;
+import util.Ui;
+
 import static util.Parser.*;
 
 import java.time.format.DateTimeParseException;
@@ -10,19 +12,7 @@ public class Sweh {
     public static TaskList taskList = new TaskList();
 
     public static void main(String[] args) {
-        String logo = " _____  _    _ _____ _   _ \n" +
-            "/  ___|| |  | |  ___| | | | \n" +
-            "\\ `--. | |  | | |__ | |_| | \n" +
-            " `--. \\| |/\\| |  __||  _  | \n" +
-            "/\\__/ /\\  /\\  / |___| | | | \n" +
-            "\\____/  \\/  \\/\\____/\\_| |_/ \n";
-
-        String greeting = "Hello, I am\n" 
-            + logo
-            + "\nYour Simple Word-Executed Helper!"
-            + "\nWhat shall we do today?\n";
-                                  
-        System.out.println(greeting);
+        System.out.println(Ui.greeting());
 
         taskList.readFromDisk();
         
