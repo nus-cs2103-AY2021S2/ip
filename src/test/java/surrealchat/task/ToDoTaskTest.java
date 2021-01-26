@@ -16,4 +16,16 @@ public class ToDoTaskTest {
         assertEquals(new ToDoTask("Do CS2103T quiz", false).saveTask(),
                 "T/split/0/split/Do CS2103T quiz");
     }
+
+    @Test
+    public void testToDoTaskType(){
+        assertEquals(new ToDoTask("Do CS2103T quiz", false).getType(),
+                "T");
+    }
+
+    @Test
+    public void testDescription() {
+        assertEquals(new ToDoTask("Do CS2103T quiz", false).getDescription(),
+                "Do CS2103T quiz");
+    }
 }

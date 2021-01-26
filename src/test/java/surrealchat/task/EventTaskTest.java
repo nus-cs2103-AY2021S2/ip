@@ -18,4 +18,10 @@ public class EventTaskTest {
         assertEquals(new EventTask("Do CS2103T quiz", LocalDate.parse("2020-10-21"), false).saveTask(),
                 "E/split/0/split/Do CS2103T quiz /at 2020-10-21");
     }
+
+    @Test
+    public void testEventTaskType(){
+        assertEquals(new EventTask("Do CS2103T quiz", LocalDate.parse("2020-10-21"), false).getType(),
+                "E");
+    }
 }

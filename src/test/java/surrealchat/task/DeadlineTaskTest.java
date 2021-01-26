@@ -18,4 +18,10 @@ public class DeadlineTaskTest {
         assertEquals(new DeadlineTask("Do CS2103T quiz", LocalDate.parse("2020-10-21"), false).saveTask(),
                 "D/split/0/split/Do CS2103T quiz /by 2020-10-21");
     }
+
+    @Test
+    public void testDeadlineTaskType(){
+        assertEquals(new DeadlineTask("Do CS2103T quiz", LocalDate.parse("2020-10-21"), false).getType(),
+                "D");
+    }
 }

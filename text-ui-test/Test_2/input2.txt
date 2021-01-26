@@ -1,0 +1,12 @@
+orang
+vegetal
+list
+done
+done 1
+undone
+undone 1
+delete
+delete 1
+find
+find CS2103T
+bye
