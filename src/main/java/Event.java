@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Events are Tasks that take place at a certain and date.
  */
 public class Event extends Task {
+
     protected LocalDate time;
 
     public Event(String description, LocalDate time) {

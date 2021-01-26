@@ -5,6 +5,7 @@ import java.util.ArrayList;
  * An ArrayList is used for this purpose.
  */
 public class TaskList {
+
     private static ArrayList<Task> tasks;
 
     TaskList(ArrayList<Task> tasks) {

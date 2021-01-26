@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
  * Deadlines are Tasks that must be completed before a certain date.
  */
 public class Deadline extends Task {
+
     protected LocalDate by;
 
     public Deadline(String description, LocalDate by) {

@@ -4,7 +4,9 @@
 public class Task {
 
     protected String description;
+
     protected boolean isDone;
+
     protected int taskType;
 
     public Task(String description) {
