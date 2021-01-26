@@ -1,8 +1,4 @@
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,43 +8,28 @@ public class Haha {
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Database database = new Database();
     private static final String LINE_BREAK = "____________________________________________________________\n";
-    private static final String LOGO = " _    _          _    _\n" +
-            "| |  | |   /\\   | |  | |   /\\\n" +
-            "| |__| |  /  \\  | |__| |  /  \\\n" +
-            "|  __  | / /\\ \\ |  __  | / /\\ \\\n" +
-            "| |  | |/ ____ \\| |  | |/ ____ \\\n" +
-            "|_|  |_/_/    \\_\\_|  |_/_/    \\_\\\n";
-    private static final String STARTER = "Hello from\n" + LOGO
-            + LINE_BREAK
-            + "Dude, I'm HAHA.\n"
-            + "What can I do for you?\n"
-            + "Hint: deadline & event to include date & time\n"
-            + "e.g. 2020-02-02 18:00\n"
-            + "(Oh when you are done, say bye)\n"
-            + LINE_BREAK;
+
+    private Storage storage;
+    private Ui ui;
+
+    public Haha() {
+        this.storage = new Storage();
+        this.ui = new Ui();
+    }
 
     public static void main(String[] args) {
-        // Pre input setup
-        System.out.println(STARTER);
-
+        Haha haha = new Haha();
         // Local saved records
         try {
-            String currentDir = System.getProperty("user.dir");
-            Path folder = Paths.get(currentDir, "data");
-            Path file = Paths.get(currentDir, "data", "database.txt");
-            if (Files.notExists(folder)) {
-                Files.createDirectories(folder);
-            }
-            if (Files.notExists(file)) {
-                Files.createFile(file);
-            }
-            List<String> list = Files.readAllLines(file);
+            List<String> list = haha.storage.getTasks();
             database.readTasks(list);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+        haha.run();
+    }
 
+    public void run() {
         // Start while loop
         while (SCANNER.hasNext()) {
             try {
@@ -65,7 +46,6 @@ public class Haha {
                 System.out.println(ex);
                 System.out.println(LINE_BREAK);
             }
-
         }
     }
 
