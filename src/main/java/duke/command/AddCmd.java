@@ -33,7 +33,7 @@ public class AddCmd extends Command {
 
     @Override
     public String execute(TaskList lst) {
-        Task task;
+        Task task = null;
         String[] words;
 
         validateNotEmpty(cmdArgs, "OOPS!!! The description of a task cannot be empty");
@@ -51,9 +51,6 @@ public class AddCmd extends Command {
             words = cmdArgs.split("/by");
             trimStrArr(words);
             task = new Deadline(words[0], words[1]);
-            break;
-        default:
-            task = new Task("placeholder task");
             break;
         }
 

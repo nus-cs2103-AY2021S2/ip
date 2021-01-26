@@ -8,6 +8,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    private Event(String content, boolean isDone, String at) {
+        super(content, isDone);
+        this.at = at;
+    }
+
     public String getAt() {
         return at;
     }
@@ -18,12 +23,7 @@ public class Event extends Task {
         String content = words[2];
         String at = words[3];
 
-        Event event = new Event(content, at);
-        if (isDone) {
-            event.markDone();
-        }
-
-        return event;
+        return new Event(content, isDone, at);
     }
 
     @Override

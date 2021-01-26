@@ -1,12 +1,17 @@
 package duke.task;
 
-public class Task {
+public abstract class Task {
     private final String content;
     private boolean isDone;
 
     public Task(String content) {
         this.content = content;
-        this.isDone = false;
+        isDone = false;
+    }
+
+    protected Task(String content, boolean isDone) {
+        this.content = content;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -25,9 +30,7 @@ public class Task {
         isDone = true;
     }
 
-    public String getSerialized() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract String getSerialized();
 
     @Override
     public String toString() {

@@ -5,17 +5,16 @@ public class Todo extends Task {
         super(content);
     }
 
+    private Todo(String content, boolean isDone) {
+        super(content, isDone);
+    }
+
     public static Todo deserialize(String str) {
         String[] words = str.split(" \\| ");
         boolean isDone = Boolean.parseBoolean(words[1]);
         String content = words[2];
 
-        Todo todo = new Todo(content);
-        if (isDone) {
-            todo.markDone();
-        }
-
-        return todo;
+        return new Todo(content, isDone);
     }
 
     @Override
