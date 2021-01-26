@@ -46,6 +46,7 @@ public class Parser {
 
             String taskInfo = tokens[1];
             int taskIndex = Integer.parseInt(taskInfo) - 1;
+
             return new DoneCommand(taskIndex);
         }
         case "delete": {
@@ -53,46 +54,58 @@ public class Parser {
 
             String taskInfo = tokens[1];
             int taskIndex = Integer.parseInt(taskInfo) - 1;
+
             return new DeleteCommand(taskIndex);
         }
         case "todo": {
             emptyDescriptionChecker(tokens);
 
             String taskInfo = tokens[1];
+
             return new AddCommand(new ToDo(taskInfo));
         }
         case "deadline": {
             emptyDescriptionChecker(tokens);
 
             String taskInfo = tokens[1];
+
             if (!(taskInfo.contains("/by"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
+
             String[] taskInfoArr = taskInfo.split(" /by ", 2);
+
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
+
             String[] dateAndTime = taskInfoArr[1].split(" ");
             String date = parseDate(dateAndTime[0]);
             String time = parseTime(dateAndTime[1]);
             String by = date + " " + time;
+
             return new AddCommand(new Deadline(taskInfoArr[0], by));
         }
         case "event": {
             emptyDescriptionChecker(tokens);
 
             String taskInfo = tokens[1];
+
             if (!(taskInfo.contains("/at"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
+
             String[] taskInfoArr = taskInfo.split(" /at ", 2);
+
             if (taskInfoArr.length < 2) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
             }
+
             String[] dateAndTime = taskInfoArr[1].split(" ");
             String date = parseDate(dateAndTime[0]);
             String time = parseTime(dateAndTime[1]);
             String by = date + " " + time;
+
             return new AddCommand(new Event(taskInfoArr[0], by));
         }
         case "bye": {

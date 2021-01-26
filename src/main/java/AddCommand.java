@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 public class AddCommand extends Command {
+
     Task task;
 
     public AddCommand(Task task) {

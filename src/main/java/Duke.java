@@ -10,6 +10,7 @@ public class Duke {
     public Duke(String filePath) {
         this.ui = new Ui();
         this.parser = new Parser();
+
         try {
             this.storage = new Storage(filePath);
             tasklist = new TaskList(storage.load());
@@ -24,6 +25,7 @@ public class Duke {
         ui.showWelcome();
         ui.showLine();
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -39,6 +41,7 @@ public class Duke {
                 ui.showLine();
             }
         }
+
         ui.showExit();
         ui.showLine();
     }
