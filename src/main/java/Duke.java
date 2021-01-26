@@ -1,13 +1,9 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    /** Number of tasks added by the user */
-    private static int count;
-
     /** List of tasks added by the user */
-    private static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks = DataFile.getData();
 
     /**
      * Prints welcome message for the user.
@@ -50,6 +46,12 @@ public class Duke {
         System.out.println("Good job, I have marked this task as done!");
         System.out.println(tasks.get(index).toString());
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        try {
+            DataFile.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            System.out.println("Sorry, unable to save data to the hard disk.");
+        }
+
     }
 
     /**
@@ -66,7 +68,7 @@ public class Duke {
             throw new InvalidTodoException();
         }
         tasks.add(new Todo(command.substring(5)));
-        count++;
+        int count = tasks.size();
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
@@ -74,6 +76,11 @@ public class Duke {
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        try {
+            DataFile.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            System.out.println("Sorry, unable to save data to the hard disk.");
+        }
     }
 
     /**
@@ -87,7 +94,7 @@ public class Duke {
     public static void addDeadline(String command) {
         tasks.add(new Deadline(command.substring(9).split("/")[0],
                 command.substring(9).split("/")[1].substring(3)));
-        count++;
+        int count = tasks.size();
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
@@ -95,6 +102,11 @@ public class Duke {
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        try {
+            DataFile.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            System.out.println("Sorry, unable to save data to the hard disk.");
+        }
     }
 
     /**
@@ -107,7 +119,7 @@ public class Duke {
     public static void addEvent(String command) {
         tasks.add(new Event(command.substring(6).split("/")[0],
                 command.substring(6).split("/")[1].substring(3)));
-        count++;
+        int count = tasks.size();
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Got it. I've added this task: ");
         System.out.println(tasks.get(count - 1).toString());
@@ -115,6 +127,11 @@ public class Duke {
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        try {
+            DataFile.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            System.out.println("Sorry, unable to save data to the hard disk.");
+        }
     }
 
     /**
@@ -130,11 +147,16 @@ public class Duke {
         System.out.println("I've removed the task:");
         System.out.println(tasks.get(deleteIndex));
         tasks.remove(deleteIndex);
-        count--;
+        int count = tasks.size();
         System.out.println("Now you have " + count
                 + (count == 1 ? " task" : " tasks")
                 + " in the list.");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        try {
+            DataFile.saveDataToFile(tasks);
+        } catch (UnableToSaveDataException e) {
+            System.out.println("Sorry, unable to save data to the hard disk.");
+        }
     }
 
     /**

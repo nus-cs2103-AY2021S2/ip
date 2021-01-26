@@ -8,6 +8,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getSaveString() {
+        return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
