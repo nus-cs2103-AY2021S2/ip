@@ -8,102 +8,28 @@ public class Parser {
     Parser() {}
 
     public static Command parseCommand(String input) throws DukeException {
-        int endIndex = input.strip().indexOf(" ");
+        int endIndex = input.indexOf(" ");
         String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
         Command command;
 
-        if (potentialCommand.toUpperCase().equals("TODO")) {
-            command = Command.TODO;
-        } else if (potentialCommand.toUpperCase().equals("DEADLINE")) {
-            command = Command.DEADLINE;
-        } else if (potentialCommand.toUpperCase().equals("EVENT")) {
-            command = Command.EVENT;
-        } else if (potentialCommand.toUpperCase().equals("LIST")) {
-            command = Command.LIST;
-        } else if (potentialCommand.toUpperCase().equals("DONE")) {
-            command = Command.DONE;
-        } else if (potentialCommand.toUpperCase().equals("BYE")) {
-            command = Command.BYE;
-        } else if (potentialCommand.toUpperCase().equals("DELETE")) {
-            command = Command.DELETE;
+        if (potentialCommand.equalsIgnoreCase("TODO")) {
+            command = new TodoCommand(input);
+        } else if (potentialCommand.equalsIgnoreCase("DEADLINE")) {
+            command = new DeadlineCommand(input);
+        } else if (potentialCommand.equalsIgnoreCase("EVENT")) {
+            command = new EventCommand(input);
+        } else if (potentialCommand.equalsIgnoreCase("LIST")) {
+            command = new ListCommand();
+        } else if (potentialCommand.equalsIgnoreCase("DONE")) {
+            command = new DoneCommand(input);
+        } else if (potentialCommand.equalsIgnoreCase("BYE")) {
+            command = new ExitCommand();
+        } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
+            command = new DeleteCommand(input);
         } else {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }
         return command;
-    }
-
-    public static int getDoneIndex(String input) throws DescriptionMissingException {
-        String[] doneInstructions = input.strip().split(" ");
-
-        if (doneInstructions.length != 2) {
-            throw new DescriptionMissingException("Argument missing!");
-        } else {
-            try {
-                String indexString = doneInstructions[1].strip();
-                return Integer.parseInt(indexString) - 1;
-            } catch (NumberFormatException e) {
-                throw new DescriptionMissingException("Invalid argument!");
-            }
-        }
-    }
-
-    public static int getDeleteIndex(String input) throws DescriptionMissingException {
-        String[] deleteInstructions = input.strip().split(" ");
-
-        if (deleteInstructions.length != 2) {
-            throw new DescriptionMissingException("Argument missing!");
-        } else {
-            try {
-                String indexString = deleteInstructions[1].strip();
-                return Integer.parseInt(indexString) - 1;
-            } catch (NumberFormatException e) {
-                throw new DescriptionMissingException("Invalid argument!");
-            }
-        }
-    }
-
-    public static Todo getTodo(String input) throws DescriptionMissingException {
-        String name = input.substring(4).strip();
-        if (name.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
-        } else {
-            return new Todo(name);
-        }
-    }
-
-    public static Deadline getDeadline(String input)
-            throws DescriptionMissingException, InvalidDateTimeException {
-        String nameDeadline = input.substring(8).strip();
-        if (nameDeadline.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
-        }
-
-        String[] nameAndDeadline = nameDeadline.split("/by");
-        if (nameAndDeadline.length < 2) {
-            throw new DescriptionMissingException("Argument missing!");
-        }
-        String name = nameAndDeadline[0].strip();
-        String deadline = nameAndDeadline[1].strip();
-
-        LocalDateTime cutOffTime = parseDateTime(deadline);
-        return new Deadline(name, cutOffTime);
-    }
-
-    public static Event getEvent(String input) throws DescriptionMissingException, InvalidDateTimeException {
-        String nameDate = input.substring(5).strip();
-        if (nameDate.equals("")) {
-            throw new DescriptionMissingException("Argument missing!");
-        }
-
-        String[] nameAndDate = nameDate.split("/at");
-        if (nameAndDate.length < 2) {
-            throw new DescriptionMissingException("Argument missing!");
-        }
-        String name = nameAndDate[0].strip();
-        String Date = nameAndDate[1].strip();
-
-        LocalDateTime startTime = parseDateTime(Date);
-        return new Event(name, startTime);
     }
 
     public static LocalDateTime parseDateTime(String dateTime) throws InvalidDateTimeException {

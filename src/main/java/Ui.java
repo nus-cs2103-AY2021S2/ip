@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -8,8 +7,7 @@ public class Ui {
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        return input;
+        return sc.nextLine();
     }
 
     public void showWelcome() {
