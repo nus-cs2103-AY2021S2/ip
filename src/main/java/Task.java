@@ -27,6 +27,7 @@ public class Task {
 
     public Task taskParser(String record) {
         if (record.contains("[T]")) {
+
             if (record.contains("\u2713")) {
                 String[] description = record.split("\u2713 ");
                 String content = description[1];
