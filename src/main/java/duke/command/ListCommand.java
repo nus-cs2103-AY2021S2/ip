@@ -4,12 +4,24 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * A ListCommand is when the user wants to view the current list of tasks
+ */
 public class ListCommand extends Command{
 
+    /**
+     * Initialises the reply, for the tasks to be added on to
+     */
     public ListCommand(){
         super("");
     }
 
+    /**
+     * Executes the command
+     * @param ui the ui to respond to the user's input
+     * @param s The storage to save the TaskList to
+     * @param list The current list of tasks
+     */
     public void execute(Ui ui, Storage s, TaskList list) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
