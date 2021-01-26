@@ -7,6 +7,10 @@ import task.Task;
 import task.Todo;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 /**
  * Handles duke operations and parses input commands.
@@ -27,10 +31,18 @@ public class Duke {
     public DukeTaskList dukeTaskList;
 
     /**
-     * Instantiates a new duke.
+     * Datetime parsed format.
      */
-    //TODO: handle file not found exception
-    public Duke() throws IOException {
+    public static DateTimeFormatter format = DateTimeFormatter
+            .ofPattern("dd/MM/yyyy, hh:mma", Locale.US);
+
+    /**
+     * Instantiates a new duke.
+     *
+     * @throws IOException the io exception
+     */
+//TODO: handle file not found exception
+    public Duke() throws IOException, DukeException {
         this.dukeStorage = new DukeStorage();
         this.dukeTaskList = new DukeTaskList(this.dukeStorage.load());
         this.dukeResponse = new DukeResponse();
@@ -42,6 +54,7 @@ public class Duke {
      * @param input the input message.
      * @return integer. 0 represents an terminating entry, 1 represents a continuing entry.
      * @throws DukeException the duke exception
+     * @throws IOException   the io exception
      */
     public int parse(String input) throws DukeException, IOException {
         String[] parsedInput = input.split("\\s+", 2);
@@ -66,10 +79,15 @@ public class Duke {
             if (args.length < 2 || args[1].length() == 0) {
                 throw new DukeMissingArgumentsException();
             }
-            Event currEvent = new Event(args[0], args[1].substring(1));
-            dukeTaskList.add(currEvent);
-            dukeResponse.addTask(currEvent, dukeTaskList.size());
-            break;
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(args[1].substring(1), format);
+                Event currEvent = new Event(args[0], dateTime);
+                dukeTaskList.add(currEvent);
+                dukeResponse.addTask(currEvent, dukeTaskList.size());
+                break;
+            } catch (DateTimeParseException e) {
+                throw new DukeDateFormatException();
+            }
         }
         case ("deadline"): {
             if (parsedInput.length < 2) {
@@ -79,10 +97,15 @@ public class Duke {
             if (args.length < 2 || args[1].length() == 0) {
                 throw new DukeMissingArgumentsException();
             }
-            Deadline currDeadline = new Deadline(args[0], args[1].substring(1));
-            dukeTaskList.add(currDeadline);
-            dukeResponse.addTask(currDeadline, dukeTaskList.size());
-            break;
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(args[1].substring(1), format);
+                Deadline currDeadline = new Deadline(args[0], dateTime);
+                dukeTaskList.add(currDeadline);
+                dukeResponse.addTask(currDeadline, dukeTaskList.size());
+                break;
+            } catch (DateTimeParseException e) {
+                throw new DukeDateFormatException();
+            }
         }
         case ("delete"):
             if (parsedInput.length < 2) {

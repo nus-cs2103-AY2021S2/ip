@@ -1,12 +1,13 @@
 package task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Event extends Task{
     protected LocalDateTime at;
-    public static String parseFormat = "dd-MM-yyyy, hh:mma";
+    public static String parseFormat = "dd/MM/yyyy, hh:mma";
     public static String outputFormat = "dd MMM yyyy, hh:mma";
     /**
      * Instantiates a new event task.
@@ -14,10 +15,13 @@ public class Event extends Task{
      * @param description the event description
      * @param at          the at
      */
-    public Event(String description, String at) {
+    public Event(String description, LocalDateTime at) {
         super(description);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(parseFormat, Locale.US);
-        this.at = LocalDateTime.parse(at, format);
+        this.at = at;
+    }
+
+    public String getSimpleAt() {
+        return at.format(DateTimeFormatter.ofPattern(parseFormat));
     }
 
     public String getAt() {

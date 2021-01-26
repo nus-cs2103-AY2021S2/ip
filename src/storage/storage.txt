@@ -1,2 +1,3 @@
-Todo | te
-Deadline | aasdasd  |  asdasd
+Deadline | assda | 25/10/1997, 10:30PM
+Deadline | asdas | 25/10/1997, 10:30PM
+Event | asd | 25/10/1997, 10:30PM
