@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Parses user commands and triggers corresponding effects.
  */
