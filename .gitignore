@@ -18,6 +18,3 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Duke save data
 savedata.txt
-
-# Production artifacts
-src/main/java/META-INF/
