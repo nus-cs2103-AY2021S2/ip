@@ -19,6 +19,13 @@ public class Parser {
     public Parser()  {
     }
 
+    /**
+     * Returns a Command after parsing the input that is received from the user.
+     * Invalid input would result in DukeException being thrown.
+     * @param input: Input receives from the user
+     * @return Command: specific Command relating to the input which requires execution
+     * @throws DukeException: Exception is thrown when an invalid command is given
+     */
     public Command parse(String input) throws DukeException {
         String[] args = input.split(" ");
         this.command = args[0];
