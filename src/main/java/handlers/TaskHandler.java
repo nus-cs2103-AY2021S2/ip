@@ -2,6 +2,7 @@ package handlers;
 
 import enums.Commands;
 
+import exceptions.DukeException;
 import exceptions.InvalidOptionException;
 
 import tasks.Deadline;
@@ -9,14 +10,17 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import utils.DateFormatter;
 import utils.Formatter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskHandler {
 
-    public static void addTask(Commands command, String input, ArrayList<Task> taskList) throws InvalidOptionException {
+    public static void addTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
         int numberOfTasks = taskList.size();
+        LocalDate date;
 
         switch (command) {
         case TODO:
@@ -37,7 +41,10 @@ public class TaskHandler {
 
             String deadlineMessage = input.substring(0, indexOfBy);
             String by = input.substring(indexOfBy + 4);
-            Task deadline = new Deadline(deadlineMessage, by);
+
+            date = DateFormatter.encodeDate(by);
+
+            Task deadline = new Deadline(deadlineMessage, date);
             taskList.add(deadline);
             numberOfTasks += 1;
             Formatter.printBetweenLines("Got it. I've added this task:",
@@ -54,7 +61,10 @@ public class TaskHandler {
 
             String eventMessage = input.substring(0, indexOfAt);
             String at = input.substring(indexOfAt + 4);
-            Task event = new Event(eventMessage, at);
+
+            date = DateFormatter.encodeDate(at);
+
+            Task event = new Event(eventMessage, date);
             taskList.add(event);
             numberOfTasks += 1;
             Formatter.printBetweenLines("Got it. I've added this task:",

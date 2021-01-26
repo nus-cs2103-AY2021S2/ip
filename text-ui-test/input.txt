@@ -9,7 +9,7 @@ deadline   /by
 deadline   /by
 deadline finish book /by
 deadline finish book /by
-deadline finish book /by tomorrow
+deadline finish book /by 2021-01-30
 list
 event
 event
@@ -17,11 +17,11 @@ event   /at
 event   /at
 event competition /at
 event competition /at
-event competition /at monday
+event competition /at 2021-01-30
 list
 todo go fishing
-deadline finish tutorial /by wednesday
-event play soccer /at thursday
+deadline finish tutorial /by 2021-01-30
+event play soccer /at 2021-01-30
 todo go to the gym
 list
 done 8
@@ -30,7 +30,7 @@ done 7
 list
 done 1
 list
-deadline eat dinner /by tonight
+deadline eat dinner /by 2021-01-30
 list
 done 8
 list
