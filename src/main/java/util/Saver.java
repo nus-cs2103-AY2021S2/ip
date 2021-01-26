@@ -30,6 +30,7 @@ public class Saver {
         while(sc.hasNext()) {
             output.append(sc.nextLine());
         }
+        sc.close();
         return output.toString();
     }
 }

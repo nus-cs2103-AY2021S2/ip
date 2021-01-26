@@ -3,6 +3,7 @@ import java.util.Optional;
 
 public class Event extends Task {
     private String eventTime;
+    public static final char TYPE_SYMBOL = 'E';
 
     public Event(String desc, String eventTime) {
         super(desc);
@@ -39,5 +40,15 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + eventTime + ")";
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return toSaveFormatPrefix() + saveDelimiter + eventTime;
+    }
+
+    @Override
+    public char typeSymbol() {
+        return TYPE_SYMBOL;
     }
 }

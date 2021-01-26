@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Sweh {
     public static TaskList taskList = new TaskList();
+
     public static void main(String[] args) {
         String logo = " _____  _    _ _____ _   _ \n" +
             "/  ___|| |  | |  ___| | | | \n" +
@@ -20,6 +21,8 @@ public class Sweh {
             + "\nWhat shall we do today?\n";
                                   
         System.out.println(greeting);
+
+        taskList.readFromDisk();
         
         Scanner sc = new Scanner(System.in);
         while (true) {

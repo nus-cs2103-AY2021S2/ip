@@ -2,6 +2,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class ToDo extends Task {
+    public static final char TYPE_SYMBOL = 'T';
+
     public ToDo(String description) {
         super(description);
     }
@@ -22,5 +24,15 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return super.toSaveFormatPrefix();
+    }
+
+    @Override
+    public char typeSymbol() {
+        return TYPE_SYMBOL;
     }
 }

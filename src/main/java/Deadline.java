@@ -3,6 +3,7 @@ import java.util.Optional;
 
 public class Deadline extends Task {
     private String endDate;
+    public static final char TYPE_SYMBOL = 'D';
 
     public Deadline(String desc, String endDate) {
         super(desc);
@@ -39,5 +40,15 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + endDate + ")";
+    }
+
+    @Override
+    public String toSaveFormat() {
+        return toSaveFormatPrefix() + saveDelimiter + endDate;
+    }
+
+    @Override
+    public char typeSymbol() {
+        return TYPE_SYMBOL;
     }
 }

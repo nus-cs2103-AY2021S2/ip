@@ -1,6 +1,7 @@
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
+    protected static final char saveDelimiter = '|';
 
     public Task(String desc) {
         this.description = desc;
@@ -18,4 +19,13 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    protected String toSaveFormatPrefix() {
+        return String.valueOf(typeSymbol()) + saveDelimiter + (isDone ? "1" : "0")
+                + saveDelimiter + description;
+    }
+
+    public abstract String toSaveFormat();
+
+    public abstract char typeSymbol();
 }
