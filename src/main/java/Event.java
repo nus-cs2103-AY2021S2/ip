@@ -6,16 +6,13 @@ public class Event extends Task{
         this.eventTime = eventTime;
     }
 
+    public String getEventTime() {
+        return eventTime;
+    }
+
     @Override
     public String toString() {
-        String[] str = eventTime.split(" ");
-        String date = "";
-        for(int i = 1; i < str.length; i++) {
-            date = date.concat(str[i]);
-            if(i != str.length-1) {
-                date = date + " ";
-            }
-        }
-        return super.toString() + "(at: " + date + ")";
+        String str = eventTime.strip();
+        return super.toString() + "(at: " + str + ")";
     }
 }

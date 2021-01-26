@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
     String command;
     String description;
@@ -55,8 +58,9 @@ public class Parser {
                     if(str.length == 1) {
                         throw new InvalidArgumentException("Please input task description!\n");
                     }
+                    String deadLine = arr[1].strip();
+                    processDate(deadLine);
 
-                    this.deadline = arr[1];
                     this.description = arr[0];
                     break;
                 case "event":
@@ -70,8 +74,8 @@ public class Parser {
                     if(s.length == 1) {
                         throw new InvalidArgumentException("Please input task description!\n");
                     }
-
-                    this.deadline = a[1];
+                    String eventTime = a[1].strip();
+                    processDate(eventTime);
                     this.description = a[0];
                     break;
             }
@@ -80,5 +84,32 @@ public class Parser {
 
     public boolean isEquals(String type) {
         return command.equals(type);
+    }
+
+    public void processDate(String date) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d HHmm");
+        DateValidator dateTimeValidator = new DateValidatorUsingDateFormat(dateTimeFormatter);
+
+        if(!dateTimeValidator.isValid(date)) {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            DateValidator dateValidator = new DateValidatorUsingDateFormat(dateFormatter);
+            if(!dateValidator.isValid(date)) {
+                this.deadline = date;
+            } else {
+                LocalDate d1 = LocalDate.parse(date);
+                String day = d1.getDayOfWeek().toString();
+                String month = d1.getMonth().toString();
+                int year = d1.getYear();
+                this.deadline = String.format("%s %s %d", day, month, year);
+            }
+        } else {
+            String[] deadLineArray = date.split(" ");
+            LocalDate d1 = LocalDate.parse(deadLineArray[0]);
+            String day = d1.getDayOfWeek().toString();
+            String month = d1.getMonth().toString();
+            int year = d1.getYear();
+            this.deadline = String.format("%s %s %d %s", day, month, year, deadLineArray[1]);
+
+        }
     }
 }
