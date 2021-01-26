@@ -108,7 +108,7 @@ public class Duke {
     }
 
     private void shutDown() {
-        System.out.println("See you soon boss!\n");
+        System.out.println("See you soon boss!");
         System.exit(0);
     }
 }

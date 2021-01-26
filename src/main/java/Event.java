@@ -2,12 +2,12 @@ public class Event extends Task {
     protected String at;
 
     public Event(String name, String at) {
-        super(name);
+        super(name, "E");
         this.at = at;
     }
 
     public Event(String input) throws DukeException {
-        super(input.split(" /at ", 2)[0]);
+        super(input.split(" /at ", 2)[0], "E");
 
         String[] split = input.split(" /at ", 2);
         if (split.length != 2) {
@@ -18,6 +18,6 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return super.toString() + " (at: " + at + ")";
     }
 }

@@ -2,12 +2,12 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String name, String by) {
-        super(name);
+        super(name, "D");
         this.by = by;
     }
 
     public Deadline(String input) throws DukeException {
-        super(input.split(" /by ", 2)[0]);
+        super(input.split(" /by ", 2)[0], "D");
 
         String[] split = input.split(" /by ", 2);
         if (split.length != 2) {
@@ -18,6 +18,6 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " + by + ")";
     }
 }

@@ -1,9 +1,11 @@
-public class Task {
+public abstract class Task {
     protected String name;
     protected boolean isDone;
+    protected final String icon;
 
-    public Task(String name) {
+    protected Task(String name, String icon) {
         this.name = name;
+        this.icon = icon;
         isDone = false;
     }
 
@@ -12,7 +14,7 @@ public class Task {
     }
 
     public String toString() {
-        String status = isDone ? "[X]" : "[ ]";
-        return status + " " + this.name;
+        String doneIcon = isDone ? "[X]" : "[ ]";
+        return "[" + icon + "]" + doneIcon + " " + this.name;
     }
 }
