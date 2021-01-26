@@ -6,9 +6,7 @@ import task.Event;
 import task.Task;
 import task.Todo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Handles duke operations and parses input commands.
@@ -68,7 +66,7 @@ public class Duke {
             if (args.length < 2 || args[1].length() == 0) {
                 throw new DukeMissingArgumentsException();
             }
-            Event currEvent = new Event(args[0], args[1]);
+            Event currEvent = new Event(args[0], args[1].substring(1));
             dukeTaskList.add(currEvent);
             dukeResponse.addTask(currEvent, dukeTaskList.size());
             break;
@@ -81,7 +79,7 @@ public class Duke {
             if (args.length < 2 || args[1].length() == 0) {
                 throw new DukeMissingArgumentsException();
             }
-            Deadline currDeadline = new Deadline(args[0], args[1]);
+            Deadline currDeadline = new Deadline(args[0], args[1].substring(1));
             dukeTaskList.add(currDeadline);
             dukeResponse.addTask(currDeadline, dukeTaskList.size());
             break;

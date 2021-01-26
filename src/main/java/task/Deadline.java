@@ -1,11 +1,13 @@
 package task;
 
-/**
- * A task type deadline object.
- */
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
+public class Deadline extends Task{
+    protected LocalDateTime by;
+    public static String parseFormat = "dd-MM-yyyy, hh:mma";
+    public static String outputFormat = "dd MMM yyyy, hh:mma";
     /**
      * Instantiates a new deadline task.
      *
@@ -14,20 +16,16 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(parseFormat, Locale.US);
+        this.by = LocalDateTime.parse(by, format);
     }
 
-    /**
-     * Gets deadline by date.
-     *
-     * @return the by date
-     */
     public String getBy() {
-        return this.by;
+        return by.format(DateTimeFormatter.ofPattern(outputFormat));
     }
 
     @Override
     public String toString() {
-        return "DEADLINE \u00BB " + super.description + " (by: " + by + ") " + super.getStatusIcon();
+        return "DEADLINE \u00BB " + super.description + " (by: " + getBy() + ") " + super.getStatusIcon();
     }
 }
