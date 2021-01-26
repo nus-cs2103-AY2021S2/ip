@@ -46,7 +46,7 @@ public class DukeFile {
         }
     }
 
-    private static void markDoneInFile(int index) {
+    public static void markDoneInFile(int index) {
         File save = new File("./data/duke.txt");
         File temp = new File("./data/temp.txt");
         int ctr = 0;
@@ -61,7 +61,7 @@ public class DukeFile {
                 if (ctr != index) {
                     fw.write(sc.nextLine() + System.lineSeparator());
                 } else {
-                    sc.nextLine();
+                    fw.write(sc.nextLine().replaceFirst("false", "true") + System.lineSeparator());
                 }
                 ctr++;
             }

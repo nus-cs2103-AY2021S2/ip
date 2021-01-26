@@ -1,9 +1,6 @@
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
-import duke.util.CopyPasta;
 
 public class Duke {
     private static ArrayList<Task> todoList;
@@ -20,6 +17,7 @@ public class Duke {
             int index = Integer.parseInt(indexString) - 1;
             Task toDo = todoList.get(index);
             toDo.doTask();
+            DukeFile.markDoneInFile(index);
             System.out.println("Affirmative. The following task has been marked as done: \n" + toDo);
         } else if (strippedCommand.startsWith("delete")) {
             String indexString = strippedCommand.substring(6).strip();
