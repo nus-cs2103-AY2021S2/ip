@@ -3,7 +3,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-// DEALS WITH LOADING TASKS FROM FILE & SAVING TASKS IN FILE
+/**
+ * Storage deals with loading tasks from file and saving tasks in file.
+ *
+ * @author Amanda Ang
+ */
 public class Storage {
     protected String filePath;
 
@@ -11,6 +15,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Read pre-existing file from previous usage of bot into a list.
+     *
+     * @return existing list of tasks
+     * @throws IOException
+     */
     public ArrayList<Task> load() throws IOException{
         BufferedReader reader = null;
         ArrayList<Task> list = new ArrayList<>();
@@ -45,6 +55,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Update tasks on file with the updated list of tasks
+     *
+     * @param updatedList the finalised list of tasks after program terminates
+     * @throws FileNotFoundException
+     */
     public void save(ArrayList<Task> updatedList) throws FileNotFoundException {
         PrintWriter writer = new PrintWriter(filePath);
         for (Task task : updatedList) {
