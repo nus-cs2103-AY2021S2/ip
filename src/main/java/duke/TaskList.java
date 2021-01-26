@@ -15,6 +15,10 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    private TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     /**
      * Obtains a task based on ID specified.
      * @param id ID of task to be obtained.
@@ -60,14 +64,28 @@ public class TaskList {
         tasks.add(index, task);
     }
 
+    /**
+     * Finds a key word within task list and returns a new list containing tasks with keyword.
+     * @param key Keyword to be matched with.
+     * @return A new list containing tasks with the keyword specified.
+     */
+    public TaskList findKeyWord(String key) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(key)) {
+                temp.add(task);
+            }
+        }
+        return new TaskList(temp);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
+            sb.append("\n");
             sb.append((i + 1) + ". ");
             sb.append(tasks.get(i).toString());
-            sb.append("\n");
         }
         return sb.toString();
     }
