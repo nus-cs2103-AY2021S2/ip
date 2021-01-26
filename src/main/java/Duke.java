@@ -21,7 +21,6 @@ public class Duke {
         System.out.println(greet);
 
         Scanner sc = new Scanner(System.in);
-        System.out.println(sc.hasNext());
         input = sc.nextLine();
         cleanInput();
         Call call;
@@ -56,11 +55,8 @@ public class Duke {
                 case DELETE -> commandDelete();
             }
 
-            System.out.println(sc.hasNext());
-            input = sc.next();
+            input = sc.nextLine();
             cleanInput();
-            System.out.println(input);
-
         }
 
         System.out.println("input was: " + input);
@@ -87,7 +83,6 @@ public class Duke {
     }
 
     static void cleanInput() {
-//        input = input.strip();
         input = input.replaceAll("\n", "");
         input = input.toLowerCase();
     }
