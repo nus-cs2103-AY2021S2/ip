@@ -10,35 +10,67 @@ class TaskList {
 		this.list = new ArrayList<Task>();
 	}
 
+	/**
+	 * creates a TaskList from a given Task ArrayList
+	 * @param a ArrayList of Task
+	 */
 	TaskList(ArrayList<Task> a) {
 		this.list = a;
 	}
 
+	/**
+	 * get the entire Task ArrayList
+	 * @return Task ArrayList
+	 */
 	ArrayList<Task> get() {
 		return this.list;
 	}
 
+	/**
+	 * get the task at the given index with 1-based indexing
+	 * @param n index of task
+	 * @return task at index n (1-based indexing)
+	 */
 	Task get(int n) {
 		return this.list.get(n - 1);
 	}
 
-	Task store(Task t) {
+	/**
+	 * Appends the task at the end of the list
+	 * @param t Task to be appended
+	 */
+	void store(Task t) {
 		this.list.add(t);
-		return t;
 	}
 
+	/**
+	 * Deletes the given task in the list
+	 * @param t the task to be removed from the list
+	 */
 	void delete(Task t) {
 		this.list.remove(t);
 	}
 
+	/**
+	 * resets the list into an empty list
+	 */
 	void clear() {
 		this.list.clear();
 	}
 
+	/**
+	 * returns the number of items in the list
+	 * @return the number of items in the list
+	 */
 	int size() {
 		return this.list.size();
 	}
 
+	/**
+	 * Provides a string containing the Tasks in the that return true for onDay
+	 * @param day the given day
+	 * @return string in the form of a list of the tasks to be done on that day
+	 */
 	String tasksOnDay(String day) {
 		String s = "";
 		int count = 1;

@@ -10,13 +10,16 @@ public class Parser {
 	private final Storage storage;
 	private static Hashtable<String, Consumer<String>> functions;
 
+	/**
+	 * loads the txt file into mem and displays the welcome message
+	 */
 	public Parser() {		
 		this.storage = new Storage();
 		this.mem = this.storage.load();
 		Ui.welcome();
 	}
 
-	void initialize() {
+	private void initialize() {
 
 		functions = new Hashtable<>();
 
@@ -31,6 +34,10 @@ public class Parser {
 		functions.put("delete", this::delete);
     }
 
+	/**
+	 * reads the string and determines which function to call
+	 * @param s user input
+	 */
 	public void parser(String s) {
 		Scanner sc = new Scanner(s);
 		String inputs = sc.next();
@@ -51,56 +58,56 @@ public class Parser {
 		this.storage.save(this.mem.get());
 	}
 
-	void store(Task t) {
+	private void store(Task t) {
 		this.mem.store(t);
 		Ui.store(t, this.mem.size());
 	}
 
-	void list() {
+	private void list() {
 		Ui.list(this.mem);
 	}
 
-	void done(String s) {
+	private void done(String s) {
 		int i = Integer.parseInt(s);
 		Task t = this.mem.get(i);
 		t.finish();
 		Ui.done(t);
 	}
 
-	void toDo(String s) {
+	private void toDo(String s) {
 		ToDo t = new ToDo(s);
 		this.store(t);
 	}
 
-	void deadline(String s) {
+	private void deadline(String s) {
 		String[] inputs = s.split(" /by ");
 		Deadline t = new Deadline(inputs[0], inputs[1]);
 		this.store(t);
 	}
 
-	void event(String s) {
+	private void event(String s) {
 		String[] inputs = s.split(" /at ");
 		Event t = new Event(inputs[0], inputs[1]);
 		this.store(t);
 	}
 
-	void delete(String s) {
+	private void delete(String s) {
 		int i = Integer.parseInt(s);
 		Task t = this.mem.get(i);
 		this.mem.delete(t);
 		Ui.delete(t, this.mem.size());
 	}
 
-	void tasksOnDay(String s) {
+	private void tasksOnDay(String s) {
 		Ui.tasksOnDay(this.mem, s);
 	}
 
-	void clear() {
+	private void clear() {
 		this.mem.clear();
 		Ui.clear();
 	}
 
-	boolean checkValid(String s) {
+	private boolean checkValid(String s) {
 		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
 	}
 }
