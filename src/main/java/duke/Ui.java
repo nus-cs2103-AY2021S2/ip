@@ -39,8 +39,25 @@ public class Ui {
             i++;
         }
         output += Duke.line;
-        Duke.print(output);
         return output; // for storage
+    }
+
+    protected void printListTasks(TaskList taskList){
+        String output = listTasks(taskList);
+        System.out.println(output);
+    }
+
+    protected void find(TaskList taskList, String currLine){
+        String output = "Here are the matching tasks in your list \n";
+        String toFind = currLine.split("find")[1].strip();
+        String[] tasksByLine = listTasks(taskList).split("\n");
+        for (String line: tasksByLine){
+            if(line.contains(toFind)){
+                System.out.println(line);
+            }
+        }
+
+
     }
 
 }
