@@ -96,6 +96,12 @@ class Parser {
                 }
                 return new Command("myTaskOn", commandLine.substring(9) + " 00:00");
             }
+        } else if (commandLine.startsWith("find ")) {
+            if (commandLine.length() == 5) {
+                return new Command("executeFalseCommand", "find");
+            } else {
+                return new Command("find", commandLine.substring(5));
+            }
         } else {
             return new Command("executeFalseCommand", "");
         }
@@ -112,7 +118,7 @@ class Parser {
             return false;
         }
         try {
-            double randomNo = Double.parseDouble(strNum);
+            Double.parseDouble(strNum);
         } catch (NumberFormatException nfe) {
             return false;
         }

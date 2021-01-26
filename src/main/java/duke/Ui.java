@@ -146,17 +146,6 @@ class Ui {
     }
 
     /**
-     * Helper function that checks if 2 dateTime refers to the same day or not.
-     *
-     * @param dateTime1 First dateTime input
-     * @param dateTime2 Second dateTime input
-     * @return answer in form of boolean.
-     */
-    public boolean sameDay(LocalDateTime dateTime1, LocalDateTime dateTime2) {
-        return ((dateTime1.getDayOfYear() == dateTime2.getDayOfYear()) && (dateTime1.getYear() == dateTime2.getYear()));
-    }
-
-    /**
      * print all the tasks of Today.
      *
      * @param taskList The tasklist related.
@@ -173,5 +162,35 @@ class Ui {
             }
         }
         System.out.println("    ____________________________________________________________\n");
+    }
+
+    /**
+     * Print all the tasks that match the pattern of a find command.
+     *
+     * @param taskList The taskList related.
+     * @param pattern The String pattern given by find command.
+     */
+    public void echoPrintFindResult(ArrayList<Task> taskList, String pattern) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks:");
+        int index = 1;
+        for (Task task : taskList) {
+            if (task.taskName.contains(pattern)) {
+                System.out.format("     %d. " + task.printTask() + "\n", index);
+                index++;
+            }
+        }
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    /**
+     * Helper function that checks if 2 dateTime refers to the same day or not.
+     *
+     * @param dateTime1 First dateTime input
+     * @param dateTime2 Second dateTime input
+     * @return answer in form of boolean.
+     */
+    public boolean sameDay(LocalDateTime dateTime1, LocalDateTime dateTime2) {
+        return ((dateTime1.getDayOfYear() == dateTime2.getDayOfYear()) && (dateTime1.getYear() == dateTime2.getYear()));
     }
 }

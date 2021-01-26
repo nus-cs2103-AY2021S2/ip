@@ -71,6 +71,9 @@ class Duke {
                 myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
                         LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
                 break;
+            case "find":
+                myDuke.ui.echoPrintFindResult(myDuke.tasklist.listUsed, command.commandContent);
+                break;
             default:
                 try {
                     executeFalseCommand(command.commandContent);
