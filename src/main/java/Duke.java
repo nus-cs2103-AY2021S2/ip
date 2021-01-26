@@ -191,7 +191,8 @@ public class Duke {
                     System.out.printf("  %s. %s\n", total, tasks.get(total - 1));
                     System.out.printf("\n  Total %s tasks, only %s left to be done!\n", total, undone);
                     System.out.println(border);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (Exception e) {
+                    // catches both ParseException and IndexOutOfBounds exception
                     System.out.println(border + "\n  Oops! Please add an event using" +
                             "\n  the 24-hour time format as follows:\n");
                     System.out.println("  event <task description> /at <YYYY-MM-DD> <HH:MM> to <YYYY-MM-DD> <HH:MM>\n" + border);
