@@ -16,6 +16,8 @@ public class Haha {
             + LINE_BREAK
             + "Dude, I'm HAHA.\n"
             + "What can I do for you?\n"
+            + "Hint: deadline & event to include date & time\n"
+            + "e.g. 2020-02-02 18:00\n"
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
 
