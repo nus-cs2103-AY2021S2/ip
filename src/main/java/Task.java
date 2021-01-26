@@ -15,7 +15,17 @@ public abstract class Task {
         return string;
     }
 
+    abstract public String toFileString();
+
     public void setDone() {
         this.isDone = true;
+    }
+
+    public String getDesc() {
+        return this.content;
+    }
+
+    public boolean getDone() {
+        return this.isDone;
     }
 }

@@ -8,16 +8,39 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         TaskManager taskManager = new TaskManager();
         CommandMap commands = new CommandMap(new CommandDecorator(new DefaultCommand()));
+        Storage storage= new Storage(taskManager);
 
         ICommand printCommand = new CommandDecorator(new PrintCommand());
-        commands.add("done", new CommandDecorator(new DoneCommand(taskManager)));
-        commands.add("list", new CommandDecorator(new PrintListCommand(taskManager)));
-        commands.add("bye", new CommandDecorator(new ExitCommand(taskManager)));
-        commands.add("event", new CommandDecorator(new AddCommand(taskManager,new EventFactory())));
-        commands.add("todo", new CommandDecorator(new AddCommand(taskManager,new ToDoFactory())));
-        commands.add("deadline", new CommandDecorator(new AddCommand(taskManager,new DeadlineFactory())));
-        commands.add("delete", new CommandDecorator(new DeleteCommand(taskManager)));
+
+        ICommand doneCommand = new CommandDecorator(new DoneCommand(taskManager));
+        doneCommand = new CommandWrite(doneCommand,storage);
+
+        ICommand listCommand =new CommandDecorator(new PrintListCommand(taskManager));
+
+        ICommand exitCommand =new CommandDecorator(new ExitCommand(taskManager));
+
+        ICommand eventCommand = new CommandDecorator(new AddCommand(taskManager,new EventFactory()));
+        eventCommand = new CommandWrite(eventCommand,storage);
+
+        ICommand deadlineCommand =new CommandDecorator(new AddCommand(taskManager,new DeadlineFactory()));
+        deadlineCommand = new CommandWrite(deadlineCommand,storage);
+
+        ICommand toDoCommand = new CommandDecorator(new AddCommand(taskManager,new ToDoFactory()));
+        toDoCommand = new CommandWrite(toDoCommand,storage);
+
+        ICommand deleteCommand = new CommandDecorator(new DeleteCommand(taskManager));
+        deleteCommand = new CommandWrite(deleteCommand,storage);
+
+        commands.add("done", doneCommand);
+        commands.add("list", listCommand);
+        commands.add("bye", exitCommand);
+        commands.add("event", eventCommand);
+        commands.add("todo", toDoCommand);
+        commands.add("deadline", deadlineCommand);
+        commands.add("delete", deleteCommand);
         printCommand.execute(getIntro());
+        storage.read();
+
         try {
             while (!taskManager.hasExited()) {
                 String input = scanner.nextLine();
