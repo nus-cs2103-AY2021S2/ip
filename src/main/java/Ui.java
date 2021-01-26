@@ -1,5 +1,5 @@
 public class Ui {
-    public static void execute(Command command, TaskList taskList, Task task) {
+    public static void execute(Command command, TaskList taskList, String status) {
         switch (command) {
             case BYE:
                 System.out.println("    Bye bye, catch you soon.");
@@ -19,15 +19,16 @@ public class Ui {
                 System.out.println("    Here are the tasks in your list:");
                 taskList.print();
                 break;
+            case FIND:
+                System.out.println("    Here are the matching tasks in your list:");
+                taskList.printContains(status);
+                break;
             case NONE:
                 break;
 
-            default:
-                break;
-
         }
-        if (!(command.equals(Command.LIST) || command.equals(Command.BYE))) {
-            System.out.println("      " + task.getStatus());
+        if (!(command.equals(Command.LIST) || command.equals(Command.BYE) || command.equals(Command.FIND))) {
+            System.out.println("      " + status);
             System.out.println("    Now you have " + taskList.numberOfTasks() + " tasks in the list.\n");
         }
 

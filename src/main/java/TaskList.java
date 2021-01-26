@@ -27,4 +27,14 @@ public class TaskList {
     public Task get(int taskIndex) {
         return this.listOfTasks.get(taskIndex);
     }
+
+    public void printContains(String words) {
+        int j = 0;
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            if (this.listOfTasks.get(i).doesDescriptionContain(words)) {
+                j++;
+                System.out.println("    " + j + "." + this.listOfTasks.get(i).getStatus());
+            }
+        }
+    }
 }

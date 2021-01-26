@@ -11,7 +11,9 @@ public class Parser {
             this.command = Command.valueOf(this.information[0].toUpperCase());
 
             switch (this.command) {
-
+                case FIND:
+                    this.description = this.information[1];
+                    break;
                 case DELETE:
                 case DONE:
                     this.taskIndex = Integer.parseInt(this.information[1]);
@@ -28,7 +30,6 @@ public class Parser {
                 case BYE:
                 case NONE:
                 case LIST:
-
             }
         } catch (IllegalArgumentException e) {
             this.command = Command.NONE;
