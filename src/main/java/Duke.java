@@ -10,7 +10,6 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         TaskList taskList = new TaskList();
-        LocalDate date = null;
 
         Parser parser = new Parser(sc.nextLine());
         while (parser.isCommandNotBye()) {
