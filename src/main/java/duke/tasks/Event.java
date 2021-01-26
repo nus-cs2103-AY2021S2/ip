@@ -4,23 +4,23 @@ import duke.DukeException;
 
 public class Event extends Task {
 
-    private final String timing;
+    private final String location;
 
-    public Event(String description, String timing) {
+    public Event(String description, String location) {
         super(description, TaskType.EVENT);
-        this.timing = timing;
+        this.location = location;
     }
 
-    public Event(String description, String timing, Boolean completed) {
+    public Event(String description, String location, Boolean completed) {
         super(description, TaskType.EVENT, completed);
-        this.timing = timing;
+        this.location = location;
     }
 
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(super.toString());
         output.append(" (at: ");
-        output.append(this.timing);
+        output.append(this.location);
         output.append(")");
         return output.toString();
     }
@@ -28,7 +28,7 @@ public class Event extends Task {
     public String storageEntry() {
         StringBuilder output = new StringBuilder(super.storageEntry());
         output.append("|");
-        output.append(this.timing);
+        output.append(this.location);
         return output.toString();
     }
 
