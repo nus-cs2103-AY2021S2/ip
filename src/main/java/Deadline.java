@@ -13,6 +13,10 @@ public class Deadline extends Task {
         this.doneBy = doneBy;
     }
 
+    public String fileFormat() {
+        return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " + this.doneBy;
+    }
+
     @Override
     public Deadline markAsDone() {
         return new Deadline(description, doneBy, true);

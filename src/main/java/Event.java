@@ -13,6 +13,10 @@ public class Event extends Task {
         this.timeRange = timeRange;
     }
 
+    public String fileFormat() {
+        return "E | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " + this.timeRange;
+    }
+
     @Override
     public Event markAsDone() {
         return new Event(description, timeRange, true);

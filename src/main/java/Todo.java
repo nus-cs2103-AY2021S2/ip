@@ -15,6 +15,10 @@ public class Todo extends Task {
         return new Todo(description, true);
     }
 
+    public String fileFormat() {
+        return "T | " + (super.isDone ? "1 | " : "0 | ") + this.description;
+    }
+
     @Override
     public String toString() {
         return "[T][" + getStatusIcon() + "] " + description;
