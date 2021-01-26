@@ -4,7 +4,7 @@ package duke;
  * Class ToDo represents a thing to do in the taskList that Duke can taken note.
  * ToDo object only has it name specified without date and time.
  */
-public class ToDo extends Task {
+class ToDo extends Task {
 
     /**
      * Returns a todo with the specified name (description).

@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * Storage: deals with loading tasks from the file and saving tasks in the file
  * TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
  */
-public class Duke {
+class Duke {
     private final Ui ui;
     private final TaskList tasklist;
     private final Storage storage;
@@ -45,37 +46,37 @@ public class Duke {
             String commandLine = myDuke.ui.readCommand();
             Command command = Parser.parse(commandLine, myDuke.tasklist.listUsed);
             switch (command.commandTitle) {
-                case "list":
-                    myDuke.ui.echoPrintList(myDuke.tasklist.listUsed);
-                    break;
-                case "bye":
-                    myDuke.ui.echoBye();
-                    signalToExit = true;
-                    break;
-                case "done":
-                    markTaskDone(myDuke, Integer.parseInt(command.commandContent));
-                    break;
-                case "delete":
-                    deleteTask(myDuke, Integer.parseInt(command.commandContent));
-                    break;
-                case "todo":
-                case "deadline":
-                case "event":
-                    addToList(myDuke, command.commandContent);
-                    break;
-                case "myTaskToday":
-                    myDuke.ui.echoTaskToday(myDuke.tasklist.listUsed);
-                    break;
-                case "myTaskOn":
-                    myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
-                            LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-                    break;
-                default:
-                    try {
-                        executeFalseCommand(command.commandContent);
-                    } catch (DukeException err) {
-                        myDuke.ui.echoErrMsg(err);
-                    }
+            case "list":
+                myDuke.ui.echoPrintList(myDuke.tasklist.listUsed);
+                break;
+            case "bye":
+                myDuke.ui.echoBye();
+                signalToExit = true;
+                break;
+            case "done":
+                markTaskDone(myDuke, Integer.parseInt(command.commandContent));
+                break;
+            case "delete":
+                deleteTask(myDuke, Integer.parseInt(command.commandContent));
+                break;
+            case "todo":
+            case "deadline":
+            case "event":
+                addToList(myDuke, command.commandContent);
+                break;
+            case "myTaskToday":
+                myDuke.ui.echoTaskToday(myDuke.tasklist.listUsed);
+                break;
+            case "myTaskOn":
+                myDuke.ui.echoTaskThisDay(myDuke.tasklist.listUsed,
+                        LocalDateTime.parse(command.commandContent, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+                break;
+            default:
+                try {
+                    executeFalseCommand(command.commandContent);
+                } catch (DukeException err) {
+                    myDuke.ui.echoErrMsg(err);
+                }
             }
         }
     }
@@ -83,7 +84,7 @@ public class Duke {
     /**
      * Perform 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
      *
-     * @param duke The duke instance related to this action
+     * @param duke            The duke instance related to this action
      * @param taskDescription The desciption of the task that we want to add
      */
     public static void addToList(Duke duke, String taskDescription) {
@@ -96,7 +97,7 @@ public class Duke {
      * Perform 3 actions: mark a task in taskList as Done, show results with user and
      * change taskFile content correspondingly.
      *
-     * @param duke The duke instance related to this action
+     * @param duke  The duke instance related to this action
      * @param index The index of that task in taskList
      */
     public static void markTaskDone(Duke duke, int index) {
@@ -108,7 +109,8 @@ public class Duke {
     /**
      * Perform 3 actions: delete a task in taskList, show results with user and
      * change taskFile content correspondingly.
-     * @param duke The duke instance related to this action
+     *
+     * @param duke  The duke instance related to this action
      * @param index The index of that task in taskList
      */
     public static void deleteTask(Duke duke, int index) {

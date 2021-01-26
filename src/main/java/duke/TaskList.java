@@ -2,14 +2,15 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
  * Class TaskList represents a taskList and provides operations to interact with that taskList.
  * Operations provided: addTask, doneTask, deleteTask.
  */
-public class TaskList {
-    public  ArrayList<Task> listUsed;
+class TaskList {
+    public ArrayList<Task> listUsed;
 
     /**
      * Returns a TaskList.

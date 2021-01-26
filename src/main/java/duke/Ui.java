@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ import java.util.Scanner;
  * Class Ui helps Danh's Duke interact with user by calling suitable method.
  * Ui has 2 main functions: read input and return output with print.
  */
-public class Ui {
+class Ui {
     private final Scanner input;
 
     /**
@@ -20,6 +21,7 @@ public class Ui {
 
     /**
      * Read a command line entered by user and return it.
+     *
      * @return the command line entered by user.
      */
     public String readCommand() {
@@ -28,6 +30,7 @@ public class Ui {
 
     /**
      * Check if user still enter command line or not.
+     *
      * @return answer in form of boolean
      */
     public boolean stillHaveCommand() {
@@ -77,7 +80,7 @@ public class Ui {
     /**
      * Print the results of adding a task to taskList.
      *
-     * @param task The task added
+     * @param task      The task added
      * @param noOfTasks Number of tasks in taskList after adding.
      */
     public void echoAddToList(Task task, int noOfTasks) {
@@ -130,7 +133,7 @@ public class Ui {
      */
     public void echoTaskThisDay(ArrayList<Task> taskList, LocalDateTime dateTime) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("     Here are the tasks on " + dateTime.toString().substring(0,10) + ":");
+        System.out.println("     Here are the tasks on " + dateTime.toString().substring(0, 10) + ":");
         int index = 1;
         for (Task task : taskList) {
             if ((task instanceof Deadline && sameDay(((Deadline) task).dlTime, dateTime))

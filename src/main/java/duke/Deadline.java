@@ -3,21 +3,20 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  * The Deadline represents a deadline, which is a type of task that Danh's Duke can take note.
  * Deadline has 2 main components:
  * the Deadline description: taskName
  * the Deadline due date: dlTime
  */
-public class Deadline extends Task{
+class Deadline extends Task {
     public LocalDateTime dlTime;
 
     /**
      * Returns a Deadline with specified description (name) and due date.
      *
      * @param taskName the Deadline description
-     * @param dlTime the Deadline due date
+     * @param dlTime   the Deadline due date
      */
     public Deadline(String taskName, LocalDateTime dlTime) {
         super(taskName);

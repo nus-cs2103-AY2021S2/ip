@@ -1,18 +1,21 @@
 package duke;
 
 import java.io.*;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
  * Class Storage helps Danh's Duke keep the data in .txt file up to date,
  * and load it from that file when the Danh's Duke wakes up.
  */
-public class Storage {
+class Storage {
     private File taskFile;
 
     /**
@@ -50,36 +53,36 @@ public class Storage {
         String line = reader.readLine();
         while (line != null) {
             switch (line.substring(1, 2)) {
-                case "T":
-                    if (line.charAt(4) == ' ') {
-                        taskList.add(new ToDo(line.substring(7)));
-                    } else {
-                        ToDo newToDo = new ToDo(line.substring(7));
-                        newToDo.markAsDone();
-                        taskList.add(newToDo);
-                    }
-                    break;
-                case "D":
-                    int dlIndex = line.indexOf("(by: ");
-                    LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    if (line.charAt(4) == ' ') {
-                        taskList.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
-                    } else {
-                        Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
-                        newDL.markAsDone();
-                        taskList.add(newDL);
-                    }
-                    break;
-                default:
-                    int etIndex = line.indexOf("(at: ");
-                    LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    if (line.charAt(4) == ' ') {
-                        taskList.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
-                    } else {
-                        Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
-                        newDL.markAsDone();
-                        taskList.add(newDL);
-                    }
+            case "T":
+                if (line.charAt(4) == ' ') {
+                    taskList.add(new ToDo(line.substring(7)));
+                } else {
+                    ToDo newToDo = new ToDo(line.substring(7));
+                    newToDo.markAsDone();
+                    taskList.add(newToDo);
+                }
+                break;
+            case "D":
+                int dlIndex = line.indexOf("(by: ");
+                LocalDateTime dlTime = LocalDateTime.parse(line.substring(dlIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                if (line.charAt(4) == ' ') {
+                    taskList.add(new Deadline(line.substring(7, dlIndex - 1), dlTime));
+                } else {
+                    Deadline newDL = new Deadline(line.substring(7, dlIndex - 1), dlTime);
+                    newDL.markAsDone();
+                    taskList.add(newDL);
+                }
+                break;
+            default:
+                int etIndex = line.indexOf("(at: ");
+                LocalDateTime eventTime = LocalDateTime.parse(line.substring(etIndex + 5, line.length() - 1), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                if (line.charAt(4) == ' ') {
+                    taskList.add(new Deadline(line.substring(7, etIndex - 1), eventTime));
+                } else {
+                    Deadline newDL = new Deadline(line.substring(7, etIndex - 1), eventTime);
+                    newDL.markAsDone();
+                    taskList.add(newDL);
+                }
             }
             line = reader.readLine();
         }

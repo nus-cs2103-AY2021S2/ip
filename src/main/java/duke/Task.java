@@ -4,7 +4,7 @@ package duke;
  * Class Task represents a task that can be taken note by Danh's Duke.
  * Task has 3 types: ToDo, Deadline, Event.
  */
-public class Task {
+class Task {
     public String taskName;
     public boolean taskDone;
 
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     *
+     * Mark a task as (Done).
      */
     public void markAsDone() {
         this.taskDone = true;

@@ -2,19 +2,20 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
  * Class Parser is the tool that helps Danh's Duke understand the command from user.
  */
-public class Parser {
+class Parser {
 
     /**
      * This method is the main method of Parser, which takes in a command line
      * ans returns appropriate Command (object).
      *
      * @param commandLine The command line aentered by user.
-     * @param taskList The taskList of the Duke that wants to understand this command line
+     * @param taskList    The taskList of the Duke that wants to understand this command line
      * @return the correct command for Duke to execute.
      */
     public static Command parse(String commandLine, ArrayList<Task> taskList) {
@@ -102,6 +103,7 @@ public class Parser {
 
     /**
      * This is helper function to help Parser checks if the index number format given by command line is correct or not.
+     *
      * @param strNum the String that we want to check contains number or not.
      * @return the answer in form of boolean.
      */

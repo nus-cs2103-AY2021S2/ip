@@ -10,13 +10,14 @@ import java.time.format.DateTimeFormatter;
  * The event name (description): taskName
  * The time of event: eTime
  */
-public class Event extends Task {
+class Event extends Task {
     public LocalDateTime eTime;
 
     /**
      * Returns an event with specified name and time
+     *
      * @param taskName The event name (description)
-     * @param eTime The time of event
+     * @param eTime    The time of event
      */
     public Event(String taskName, LocalDateTime eTime) {
         super(taskName);
