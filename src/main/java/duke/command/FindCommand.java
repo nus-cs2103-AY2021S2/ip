@@ -19,7 +19,11 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList findTasks = tasks.findAll(this.input);
-        ui.speak("Here are the matching tasks in your list:");
-        System.out.println(findTasks.toString());
+        if (findTasks.size() > 0) {
+            ui.speak("Here are the matching tasks in your list:");
+            System.out.println(findTasks.toString());
+        } else {
+            ui.speak("We did not find any matching tasks with the criteria: " + this.input + " :(");
+        }
     }
 }
