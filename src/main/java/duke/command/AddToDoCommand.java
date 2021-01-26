@@ -1,3 +1,9 @@
+package duke.command;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+import duke.task.ToDo;
+
 import java.util.LinkedList;
 
 public class AddToDoCommand extends Command{
@@ -5,7 +11,7 @@ public class AddToDoCommand extends Command{
         super(userMessage);
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");

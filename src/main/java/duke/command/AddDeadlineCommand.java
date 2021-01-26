@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.TaskList;
+
 public class AddDeadlineCommand extends Command{
     public AddDeadlineCommand(String userMessage){
         super(userMessage);
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
 

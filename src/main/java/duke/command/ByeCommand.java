@@ -1,3 +1,7 @@
+package duke.command;
+import duke.ui.Ui;
+import duke.task.TaskList;
+
 import java.util.LinkedList;
 
 public class ByeCommand extends Command{

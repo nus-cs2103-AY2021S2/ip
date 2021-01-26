@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 public class Command {
     protected String userMessage;
     protected static boolean exit;

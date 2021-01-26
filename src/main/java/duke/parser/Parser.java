@@ -1,5 +1,10 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+
 public class Parser {
-    public static Command parse(String userMessage) throws DukeException{
+    public static Command parse(String userMessage) throws DukeException {
         if (userMessage.equals("list")) {
             return new ListCommand(userMessage);
         }

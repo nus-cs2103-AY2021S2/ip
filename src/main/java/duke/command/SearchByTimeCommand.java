@@ -1,3 +1,12 @@
+package duke.command;
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -7,7 +16,7 @@ public class SearchByTimeCommand extends Command{
         super(userMessage);
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String[] info;
         LocalDateTime time;

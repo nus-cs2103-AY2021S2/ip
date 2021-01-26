@@ -1,4 +1,13 @@
+package duke;
+
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private Scanner keyboard;
@@ -43,7 +52,7 @@ public class Duke {
             storage.saveTasks(taskList);
         }
         catch (Exception e){
-            ui.display(e.getMessage());
+            ui.display("OOPS! There is something wrong: " + e.getMessage());
         }
 
     }

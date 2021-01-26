@@ -1,9 +1,16 @@
+package duke.command;
+
+import duke.ui.Ui;
+import duke.exception.DukeException;
+import duke.task.Event;
+import duke.task.TaskList;
+
 public class AddEventCommand extends Command{
     public AddEventCommand(String userMessage){
         super(userMessage);
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException{
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         StringBuilder builder = new StringBuilder();
         builder.append("Got it! I've added this task:\n");
         int spaceIndex = userMessage.indexOf(" ");
