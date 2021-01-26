@@ -11,13 +11,12 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException {
-        this.taskList = new TaskList();
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
-        storage.retrieveTasks(taskList);
-    }
 
+    /**
+     * Main method for Duke class.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             Duke d = new Duke("duke.txt");
@@ -27,6 +26,24 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructor for Duke class.
+     *
+     * @param filePath location where file with task list would be stored.
+     * @throws IOException if filePath is invalid.
+     */
+    public Duke(String filePath) throws IOException {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        storage.retrieveTasks(taskList);
+    }
+
+    /**
+     * Method that runs the Duke application.
+     *
+     * @throws IOException if filePath or system input is invalid.
+     */
     public void run() throws IOException {
         ui.printHello();
         Scanner sc = new Scanner(System.in);

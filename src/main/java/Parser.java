@@ -1,6 +1,13 @@
 public class Parser {
     private static final String EXIT_COMMAND = "bye";
 
+    /**
+     * Takes in user input and deconstructs the command given by the user.
+     *
+     * @param input input provided by user on console.
+     * @param taskList list of current tasks.
+     * @return true if the user has executed an exit command.
+     */
     public boolean parse(String input, TaskList taskList) {
         if (input.equals(EXIT_COMMAND)) {
             // close program
