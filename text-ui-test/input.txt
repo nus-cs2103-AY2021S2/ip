@@ -19,3 +19,4 @@ event buy book
 deadline buy book /by 2020-02
 deadline buy book /by 1800
 event project meeting /at 2020-10-10 1400
+bye
