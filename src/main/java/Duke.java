@@ -1,8 +1,14 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
+    private Ui ui;
+    private TaskList tasks;
 
-    private static final ArrayList<Task> tasks = new ArrayList<>(100);
+    public Duke() {
+        this.ui = new Ui();
+        this.tasks = new TaskList();
+    }
 
     private static final String[] commands = { "bye", "list", "done", "todo", "deadline", "event",
             "delete"};
@@ -11,59 +17,22 @@ public class Duke {
     private static final String BORDER = "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
             + "+-+-+-+-+-+";
 
-    // Prints a string with a 4-space indent.
-    public void indentedPrint(String s) {
-        System.out.println("    " + s);
-    }
+//    // Iterates through ArrayList and prints each element.
+//    public void iterateList() {
+//        String outputString = "";
+//
+//        for (int i = 0; i < tasks.size(); i++) {
+//            outputString += ui.formatString((i + 1) + ". " + tasks.get(i));
+//        }
+//
+//        ui.display(outputString);
+//    }
 
-    public void indentedPrint(int i) {
-        System.out.println("    " + i);
-    }
-
-    // Prints the divider.
-    public void printDivider() {
-        indentedPrint(BORDER);
-    }
-
-    // Greeting message from Duke.
-    public void greet() {
-        System.out.println(BORDER);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println(BORDER);
-        System.out.println("How may I help you?");
-    }
-
-    // Adds Task to ArrayList.
-    public void addTask(Task t) {
-        tasks.add(t);
-    }
-
-    // Iterates through ArrayList and prints each element.
-    public void iterateList() {
-        for (int i = 0; i < tasks.size(); i++) {
-            this.indentedPrint((i + 1) + ". " + tasks.get(i));
-        }
-    }
-
-    public Task getTask(int index) {
-        return tasks.get(index - 1);
-    }
-
-    // Marks Task at index number to the desired boolean value.
-    public void setTask(int index, boolean b) {
-        Task targetTask = tasks.get(index - 1);
-        targetTask.setDone(b);
-    }
-
-    // Returns the number of tasks in the ArrayList.
-    public int getTasksSize() {
-        return tasks.size();
-    }
+//    // Marks Task at index number to the desired boolean value.
+//    public void setTask(int index, boolean b) {
+//        Task targetTask = tasks.get(index - 1);
+//        targetTask.setDone(b);
+//    }
 
     public void checkInput(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
@@ -85,7 +54,147 @@ public class Duke {
         }
     }
 
-    public void deleteTask(int index) {
-        tasks.remove(index - 1);
+    public void run() {
+        ui.showGreeting();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui);
+                isExit = c.isExitCommand();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
+//        new Duke().run();
+//
+//        Scanner sc = new Scanner(System.in);
+//        boolean toExit = false;
+//        while (!toExit) {
+//            String input = sc.nextLine();
+//            String[] arr = input.split(" ", 2);
+//
+//            // First word of input is used as switch argument.
+//            switch (arr[0]) {
+//            case "bye":
+//                duke.exit();
+//                toExit = true;
+//                break;
+//            case "list":
+//                duke.iterateList();
+//                break;
+//            case "done":
+//
+//                try {
+//                    duke.checkArgument("done", input);
+//                } catch (DukeException de){
+//                    duke.printDivider();
+//                    duke.indentedPrint(de.getMessage());
+//                    duke.printDivider();
+//                    break;
+//                }
+//
+//                int index = Integer.parseInt(arr[1]);
+//                duke.setTask(index, true);
+//
+//                duke.printDivider();
+//                duke.indentedPrint("Nice! I've marked this task as done:");
+//                duke.indentedPrint(duke.getTask(index).toString());
+//                duke.printDivider();
+//                break;
+//            case "todo":
+//
+//                try {
+//                    duke.checkArgument("todo", input);
+//                } catch (DukeException de){
+//                    duke.printDivider();
+//                    duke.indentedPrint(de.getMessage());
+//                    duke.printDivider();
+//                    break;
+//                }
+//
+//                Todo t = new Todo(arr[1]);
+//                duke.addTask(t);
+//
+//                duke.printDivider();
+//                duke.indentedPrint("Got it. I've added this task:");
+//                duke.indentedPrint(" " + t.toString());
+//                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+//                        " task(s) in the list.");
+//                duke.printDivider();
+//                break;
+//            case "deadline":
+//
+//                try {
+//                    duke.checkArgument("deadline", input);
+//                } catch (DukeException de){
+//                    duke.printDivider();
+//                    duke.indentedPrint(de.getMessage());
+//                    duke.printDivider();
+//                    break;
+//                }
+//
+//                String[] dSplit = arr[1].split(" /by ");
+//                Deadline d = new Deadline(dSplit[0], dSplit[1]);
+//                duke.addTask(d);
+//
+//                duke.printDivider();
+//                duke.indentedPrint("Got it. I've added this task:");
+//                duke.indentedPrint(" " + d.toString());
+//                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+//                        " task(s) in the list.");
+//                duke.printDivider();
+//                break;
+//            case "event":
+//                String[] eSplit = arr[1].split(" /at ");
+//                Event e = new Event(eSplit[0], eSplit[1]);
+//                duke.addTask(e);
+//
+//                duke.printDivider();
+//                duke.indentedPrint("Got it. I've added this task:");
+//                duke.indentedPrint(" " + e.toString());
+//                duke.indentedPrint("Now you have " + duke.getTasksSize() +
+//                        " task(s) in the list.");
+//                duke.printDivider();
+//                break;
+//            case "delete":
+//                try {
+//                    duke.checkArgument("delete", input);
+//                } catch (DukeException de){
+//                    duke.printDivider();
+//                    duke.indentedPrint(de.getMessage());
+//                    duke.printDivider();
+//                    break;
+//                }
+//
+//                int index1 = Integer.parseInt(arr[1]);
+//
+//                duke.printDivider();
+//                duke.indentedPrint("Noted. I've removed this task: ");
+//                duke.indentedPrint(" " + duke.getTask(index1).toString());
+//                duke.indentedPrint("Now you have " + (duke.getTasksSize() - 1) +
+//                        " task(s) in the list.");
+//                duke.printDivider();
+//
+//                duke.deleteTask(index1);
+//                break;
+//            default:
+//                duke.printDivider();
+//
+//                try {
+//                    duke.checkInput(input);
+//                } catch (DukeException de) {
+//                    duke.indentedPrint(de.getMessage());
+//                }
+//
+//                duke.printDivider();
+//                break;
+//            }
+//        }
     }
 }
