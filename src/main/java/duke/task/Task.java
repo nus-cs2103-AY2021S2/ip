@@ -6,14 +6,14 @@ package main.java.duke.task;
  * functions which enable the user to mark the task as done.
  *
  * @author  arsatis
- * @version 1.0
- * @since   2021-01-19
+ * @version 1.1
+ * @since   2021-01-26
  */
 public class Task {
-    /** Description of the task */
+    /** Description of the task. */
     protected String name;
 
-    /** Indicates whether the task has been done by the user */
+    /** Indicates whether the task has been done by the user. */
     protected boolean isDone;
 
     /**
@@ -44,6 +44,11 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Returns the name (description) of the task.
+     *
+     * @return The name (description) of the task.
+     */
     public String getName() {
         return name;
     }

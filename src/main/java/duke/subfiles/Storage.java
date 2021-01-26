@@ -11,15 +11,37 @@ import java.io.IOException;
 import main.java.duke.exceptions.DateFormatException;
 import main.java.duke.task.*;
 
+/**
+ * The Storage class manages the loading and storing of tasks.
+ *
+ * @author  arsatis
+ * @version 1.1
+ * @since   2021-01-26
+ */
 public class Storage {
+    /** The path leading to the save file. */
     private String path;
+
+    /** The name of the save file. */
     private String filename;
 
+    /**
+     * Default constructor for the Storage class.
+     *
+     * @param path The path leading to the save file.
+     * @param filename The name of the save file.
+     */
     public Storage(String path, String filename) {
         this.path = path;
         this.filename = filename;
     }
 
+    /**
+     * Loads the data stored in the save file.
+     *
+     * @param taskList The list of tasks that the user has in
+     *                 the current execution of the Duke program.
+     */
     public void loadData(TaskList taskList) {
         File f = new File(path);
         if (!f.exists()) {
@@ -43,6 +65,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the list of tasks that the user currently has in
+     * the save file.
+     *
+     * @param taskList The list of tasks that the user has in
+     *                 the current execution of the Duke program.
+     */
     public void saveData(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(path + filename);

@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import main.java.duke.exceptions.DateFormatException;
 import main.java.duke.exceptions.EmptyDescriptionException;
-import main.java.duke.exceptions.EmptyTimeException;
+import main.java.duke.exceptions.EmptyDateException;
 import main.java.duke.exceptions.InvalidInputException;
 import main.java.duke.exceptions.ListOutOfBoundsException;
 import main.java.duke.task.Deadline;
@@ -16,20 +16,20 @@ import main.java.duke.task.Task;
 import main.java.duke.task.ToDo;
 
 /**
- * The TaskManager class contains a list of tasks created by
+ * The TaskList class contains a list of tasks created by
  * user input, and allows the user to add, print, or delete
  * tasks, as well as to mark a task in the list as done.
  *
  * @author  arsatis
- * @version 1.0
- * @since   2021-01-19
+ * @version 1.1
+ * @since   2021-01-26
  */
 public class TaskList {
-    /** List of tasks created by user input */
+    /** List of tasks created by user input. */
     private ArrayList<Task> tasks;
 
     /**
-     * Default constructor for the TaskManager class.
+     * Default constructor for the TaskList class.
      */
     public TaskList() {
         tasks = new ArrayList<>();
@@ -60,11 +60,12 @@ public class TaskList {
      *          to the list of tasks.
      * @throws EmptyDescriptionException If no description is provided
      *                                   for the deadline.
-     * @throws EmptyTimeException If no date or time is specified for
-     *                            the deadline.
+     * @throws EmptyDateException If no date is specified for the deadline.
+     * @throws DateFormatException If the specified date is incorrectly
+     *                             formatted.
      */
     private void addDeadline(String s)
-            throws EmptyDescriptionException, EmptyTimeException, DateFormatException {
+            throws EmptyDescriptionException, EmptyDateException, DateFormatException {
         try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(9, sArray[0].length() - 1);
@@ -73,7 +74,7 @@ public class TaskList {
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("deadline");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyTimeException("deadline");
+            throw new EmptyDateException("deadline");
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -86,11 +87,12 @@ public class TaskList {
      *          to the list of tasks.
      * @throws EmptyDescriptionException If no description is provided
      *                                   for the event.
-     * @throws EmptyTimeException If no date or time is specified for
-     *                            the event.
+     * @throws EmptyDateException If no date is specified for the event.
+     * @throws DateFormatException If the specified date is incorrectly
+     *                             formatted.
      */
     private void addEvent(String s)
-            throws EmptyDescriptionException, EmptyTimeException, DateFormatException {
+            throws EmptyDescriptionException, EmptyDateException, DateFormatException {
         try {
             String[] sArray = s.split("/", 2);
             s = sArray[0].substring(6, sArray[0].length() - 1);
@@ -99,7 +101,7 @@ public class TaskList {
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException("event");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new EmptyTimeException("event");
+            throw new EmptyDateException("event");
         } catch (DateTimeParseException e) {
             throw new DateFormatException();
         }
@@ -114,14 +116,16 @@ public class TaskList {
      *          to the list of tasks.
      * @throws EmptyDescriptionException If no description is provided
      *                                   for the task.
-     * @throws EmptyTimeException If no date or time is specified for
+     * @throws EmptyDateException If no date or time is specified for
      *                            the task, which is either a deadline
      *                            or an event.
      * @throws InvalidInputException If the task is neither a to-do, a
      *                               deadline, nor an event.
+     * @throws DateFormatException If the specified date is incorrectly
+     *                             formatted.
      */
     public void addTask(String s)
-            throws EmptyDescriptionException, EmptyTimeException, InvalidInputException,
+            throws EmptyDescriptionException, EmptyDateException, InvalidInputException,
             DateFormatException {
         String command = s.split(" ", 2)[0];
 
@@ -144,6 +148,14 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Adds a to-do, deadline, or event, to the list of tasks, based on
+     * previously saved data.
+     *
+     * @param s A line from the user's save data.
+     * @throws DateFormatException If the specified date is incorrectly
+     *                             formatted.
+     */
     public void addTaskFromData(String s) throws DateFormatException {
         String[] sArray = s.split(" \\| ");
 
@@ -176,6 +188,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of deadlines added by the user till this point,
+     * due on the date specified by the user, based on the order they
+     * were added by the user.
+     *
+     * @param date The date specified by the user.
+     */
     private void printDeadlinesOnDate(LocalDate date) {
         ArrayList<Deadline> deadlines = new ArrayList<>();
         for (Task t : tasks) {
@@ -199,6 +218,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of events added by the user till this point,
+     * happening on the date specified by the user, based on the order
+     * they were added by the user.
+     *
+     * @param date The date specified by the user.
+     */
     private void printEventsOnDate(LocalDate date) {
         ArrayList<Event> events = new ArrayList<>();
         for (Task t : tasks) {
@@ -222,6 +248,15 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of deadlines and events added by the user till this point,
+     * due or happening on the date specified by the user, based on the order
+     * they were added by the user.
+     *
+     * @param s The date specified by the user.
+     * @throws DateFormatException If the specified date is incorrectly
+     *                             formatted.
+     */
     public void printTasksOnDate(String s) throws DateFormatException {
         try {
             LocalDate date = LocalDate.parse(s);
@@ -294,6 +329,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of tasks which the user currently has in his/her
+     * task list.
+     *
+     * @return The list of tasks which the user currently has.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

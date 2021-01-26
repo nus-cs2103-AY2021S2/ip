@@ -2,9 +2,21 @@ package main.java.duke.subfiles;
 
 import java.util.Scanner;
 
+/**
+ * The Ui class manages interactions with the user, based on
+ * user input.
+ *
+ * @author  arsatis
+ * @version 1.1
+ * @since   2021-01-26
+ */
 public class Ui {
+    /** Scanner class used to read user input. */
     private Scanner sc;
 
+    /**
+     * Default constructor for the Ui class.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -25,15 +37,28 @@ public class Ui {
         sc.close();
     }
 
+    /**
+     * Reads the user's input from the command line.
+     *
+     * @return The user's input formatted as a String object.
+     */
     public String readCommand() {
         String s = sc.nextLine();
         return s;
     }
 
+    /**
+     * Displays a horizontal line on the GUI.
+     */
     public void showLine() {
         System.out.println("__________");
     }
 
+    /**
+     * Displays the error message produced by a command.
+     *
+     * @param s The error message produced by the command.
+     */
     public void showError(String s) {
         System.out.println(s);
     }

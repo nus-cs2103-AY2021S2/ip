@@ -7,17 +7,22 @@ import main.java.duke.command.DoneCommand;
 import main.java.duke.command.ExitCommand;
 import main.java.duke.command.PrintCommand;
 
+/**
+ * The Parser class parses the user input as a Command.
+ *
+ * @author  arsatis
+ * @version 1.1
+ * @since   2021-01-26
+ */
 public class Parser {
 
     /**
-     * Calls the task manager to perform either task addition,
-     * deletion, printing, or marking as done, based on the
-     * user input. Also terminates the program if a terminating
-     * input is supplied by the user.
+     * Parses the user input as either an ExitCommand, PrintCommand,
+     * DoneCommand, DeleteCommand, or AddCommand, based on the
+     * user input.
      *
-     * @param s A user input.
-     * @return True if the user input is not a terminating
-     *         input, and false otherwise.
+     * @param s The user input.
+     * @return A Command, whose type is based on the user input.
      */
     public static Command parse(String s) {
         String[] sArray = s.split(" ");
@@ -35,4 +40,5 @@ public class Parser {
             return new AddCommand(s);
         }
     }
+
 }
