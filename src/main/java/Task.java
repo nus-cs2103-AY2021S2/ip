@@ -8,6 +8,12 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String task, boolean isDone) {
+        task = task.strip();
+        this.task = task;
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
         if (isDone) {
             return "\u2713";

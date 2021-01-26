@@ -1,11 +1,25 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
         ArrayList<Task> tasks = new ArrayList<>();
+        String relPath = "./src/main/java/data/All Tasks.txt";
+
+        try {
+            //File f = new File("./");
+            //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
+            FileAccessor.ReadFromTasks(relPath, tasks);
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            System.out.println("EXCEPTION");
+            //File f = new File("./src/main/java/data/All Task.txt");
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -89,6 +103,12 @@ public class Duke {
                     } else {
                         throw new IllegalArgumentException();
                     }
+
+                    /*try {
+                        FileAccessor.WriteToTasks(relPath, tasks);
+                    } catch (IOException e) {
+                        System.out.println("Unable to save to hard drive");
+                    }*/
                 } catch (IllegalArgumentException e) {
                     System.out.println(line + " Please enter 'todo (your task)', " +
                             "or 'deadline (your task) / (deadline date timing)',\n or " +
