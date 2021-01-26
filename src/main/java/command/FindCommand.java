@@ -33,7 +33,7 @@ public class FindCommand implements Command{
     @Override
     public String getResponse() {
         StringBuilder buffer = new StringBuilder();
-
+        buffer.append("Here are the matching tasks in your list: \n");
         for (int i = 1; i <= this.foundTasks.size(); i++) {
             buffer.append(i);
             buffer.append(". ");
