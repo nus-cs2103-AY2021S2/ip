@@ -3,7 +3,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -63,11 +62,31 @@ public class Duke {
     }
 
     private static Task parseStringToTask(String str) {
-        return null;
+        String[] tokens = str.split(" \\| ");
+        try {
+            switch (tokens[0]) {
+            case "T":
+                final ToDo todo = new ToDo(tokens[2]);
+                if (tokens[1].equals("1")) todo.markAsDone();
+                return todo; 
+            case "D":
+                final Deadline deadline = new Deadline(tokens[2], tokens[3]);
+                if (tokens[1].equals("1")) deadline.markAsDone();
+                return deadline; 
+            case "E":
+                final Event event = new Event(tokens[2], tokens[3]);
+                if (tokens[1].equals("1")) event.markAsDone();
+                return event;
+            default:
+                return null;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     private static String encodeTaskToString(Task task) {
-        return null;
+        return task.encode();
     }
 
     private static void saveFile(List<String> data) {
@@ -75,7 +94,7 @@ public class Duke {
         if (!Files.exists(path))
             createDirectoryAndFile();
         try {
-            Files.write(path, data, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            Files.write(path, data, StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.err.println("Duke cannot save file.");
             e.printStackTrace();
