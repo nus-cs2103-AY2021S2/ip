@@ -1,21 +1,26 @@
-public class Event extends Task {
-    private String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    private LocalDate datetime;
+
+    public Event(String description, LocalDate time) {
         super(description);
-        this.time = time;
+        this.datetime = time;
     }
 
     public String getSaveString() {
+        String datetimeString = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (this.isDone()) {
-            return String.format("event [isDone] %s /on %s\n", description, time);
+            return String.format("event [isDone] %s /on %s\n", description, datetimeString);
         } else {
-            return String.format("event %s /on %s\n", description, time);
+            return String.format("event %s /on %s\n", description, datetimeString);
         }
     }
 
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (on: %s)", getStatus(), description, time);
+        String datetimeString = datetime.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return String.format("[E][%s] %s (on: %s)", getStatus(), description, datetimeString);
     }
 }
