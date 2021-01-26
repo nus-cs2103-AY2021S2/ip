@@ -11,7 +11,7 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    protected Scanner sc;
+    protected Scanner scanner;
     protected TaskList tasks;
 
     /**
@@ -19,8 +19,8 @@ public class Ui {
      *
      * @param sc Scanner for user input.
      */
-    public Ui(Scanner sc) {
-        this.sc = sc;
+    public Ui(Scanner scanner) {
+        this.scanner = scanner;
         this.tasks = null;
     }
 
@@ -41,7 +41,7 @@ public class Ui {
      */
     public void run() {
         while (true) {
-            String input = sc.nextLine();
+            String input = this.scanner.nextLine();
             System.out.println("  ~~~");
             String output = "";
             try {

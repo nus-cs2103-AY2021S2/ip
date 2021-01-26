@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,11 +38,11 @@ public class Storage {
             Files.createFile(this.path);
             return tasks;
         }
-        BufferedReader br = Files.newBufferedReader(this.path);
-        String taskType = br.readLine();
+        BufferedReader reader = Files.newBufferedReader(this.path);
+        String taskType = reader.readLine();
         while (taskType != null) {
             Task newTask;
-            String taskName = br.readLine();
+            String taskName = reader.readLine();
             switch (taskType) {
             case "T": {
                 newTask = new Todo(taskName);
@@ -58,12 +59,12 @@ public class Storage {
             default:
                 return tasks;
             }
-            boolean isDone = Boolean.parseBoolean(br.readLine());
+            boolean isDone = Boolean.parseBoolean(reader.readLine());
             if (isDone) {
                 newTask.markAsDone();
             }
             tasks.add(newTask);
-            taskType = br.readLine();
+            taskType = reader.readLine();
         }
         return tasks;
     }
@@ -75,15 +76,15 @@ public class Storage {
      * @throws IOException If unable to save to file.
      */
     public void save(List<Task> tasks) throws IOException {
-        BufferedWriter bw = Files.newBufferedWriter(this.path);
+        BufferedWriter writer = Files.newBufferedWriter(this.path);
         for (Task task : tasks) {
-            bw.write(task.toString().charAt(1));
-            bw.newLine();
-            bw.write(task.name);
-            bw.newLine();
-            bw.write(Boolean.toString(task.isDone));
-            bw.newLine();
+            writer.write(task.toString().charAt(1));
+            writer.newLine();
+            writer.write(task.name);
+            writer.newLine();
+            writer.write(Boolean.toString(task.isDone));
+            writer.newLine();
         }
-        bw.flush();
+        writer.flush();
     }
 }
