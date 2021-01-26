@@ -314,4 +314,4 @@
      An error occurred:
      You have entered "BLAH", which is an unrecognised command. Please try again!
     ____________________________________________________________
-     Bye. Hope to see you again soon!
+     Goodbye! Hope to see you again soon!

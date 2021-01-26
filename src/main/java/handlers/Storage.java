@@ -6,7 +6,6 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 import utils.DateFormatter;
-import utils.Formatter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,10 +16,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StorageHandler {
+public class Storage {
     private final String path;
 
-    public StorageHandler(String path) {
+    public Storage(String path) {
         this.path = path;
     }
 

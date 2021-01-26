@@ -51,7 +51,7 @@ public class Parser {
             }
         case BYE:
             apollo.saveBeforeExit();
-            Formatter.printlnWithIndentation("Bye. Hope to see you again soon!");
+            Ui.displayGoodbyeText();
             System.exit(0);
             break;
         case TODO:
@@ -76,7 +76,7 @@ public class Parser {
             }
             break;
         default:
-            Formatter.printBetweenLines("Invalid command, please try again!");
+            Ui.showErrorMessage("Invalid command, please try again!");
         }
     }
 }

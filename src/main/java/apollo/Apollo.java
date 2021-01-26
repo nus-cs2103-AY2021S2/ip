@@ -1,10 +1,11 @@
 package apollo;
 
 import exceptions.DukeException;
-import handlers.StorageHandler;
+import handlers.Storage;
 import tasks.Task;
 
-import utils.Formatter;
+import tasks.TaskList;
+import utils.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,33 +13,34 @@ import java.util.ArrayList;
 public class Apollo {
     private static final String BOT_NAME = "Apollo the Robot";
     private static final String STORAGE_PATH = "data/ApolloTaskData.txt";
-    private ArrayList<Task> taskList;
-    private final StorageHandler storageHandler;
+    private TaskList taskList;
+    private final Storage storageHandler;
+    private final Ui ui;
 
     public Apollo() {
-        this.storageHandler = new StorageHandler(STORAGE_PATH);
-        displayWelcomeText();
+        this.storageHandler = new Storage(STORAGE_PATH);
+        this.ui = new Ui();
 
         try {
-            this.taskList = this.storageHandler.readFile();
+            this.taskList = new TaskList(this.storageHandler.readFile());
         } catch (DukeException e) {
-            this.taskList = new ArrayList<>();
+            ui.showLoadingError();
+            this.taskList = new TaskList();
         }
+
+        ui.displayWelcomeText(BOT_NAME);
+        ui.startInputManager(this);
     }
 
-    private void displayWelcomeText() {
-        Formatter.printBetweenLines("Hello! I'm " + BOT_NAME + "!", "What would you like to do today?");
-    }
-
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
+    public TaskList getTasks() {
+        return taskList;
     }
 
     public void saveBeforeExit() {
         try {
-            storageHandler.writeFile(taskList);
+            storageHandler.writeFile(taskList.getTaskList());
         } catch (IOException | DukeException e) {
-            Formatter.printBetweenLines(e.getMessage());
+            Ui.showMessageBetweenLines(e.getMessage());
         }
     }
 }

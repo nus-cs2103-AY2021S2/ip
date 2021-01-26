@@ -11,7 +11,7 @@ import tasks.Task;
 import tasks.Todo;
 
 import utils.DateFormatter;
-import utils.Formatter;
+import utils.Ui;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,10 +27,7 @@ public class TaskHandler {
             Task todo = new Todo(input);
             taskList.add(todo);
             numberOfTasks += 1;
-            Formatter.printBetweenLines("Got it. I've added this task:",
-                    Formatter.INDENTATION + todo.toString(),
-                    "Now you have " + numberOfTasks + " tasks in the list."
-            );
+            Ui.showTaskAddedText(todo.toString(), numberOfTasks);
             break;
         case DEADLINE:
             int indexOfBy = input.trim().indexOf("/by");
@@ -47,10 +44,7 @@ public class TaskHandler {
             Task deadline = new Deadline(deadlineMessage, date);
             taskList.add(deadline);
             numberOfTasks += 1;
-            Formatter.printBetweenLines("Got it. I've added this task:",
-                    Formatter.INDENTATION + deadline.toString(),
-                    "Now you have " + numberOfTasks + " tasks in the list."
-            );
+            Ui.showTaskAddedText(deadline.toString(), numberOfTasks);
             break;
         case EVENT:
             int indexOfAt = input.trim().indexOf("/at");
@@ -67,34 +61,31 @@ public class TaskHandler {
             Task event = new Event(eventMessage, date);
             taskList.add(event);
             numberOfTasks += 1;
-            Formatter.printBetweenLines("Got it. I've added this task:",
-                    Formatter.INDENTATION + event.toString(),
-                    "Now you have " + numberOfTasks + " tasks in the list."
-            );
+            Ui.showTaskAddedText(event.toString(), numberOfTasks);
             break;
         }
     }
 
     public static void listTasks(ArrayList<Task> taskList) {
-        Formatter.printHorizontalLine();
+        Ui.showLine();
 
         if (taskList.isEmpty()) {
-            Formatter.printlnWithIndentation("You have not added any tasks yet.");
+            Ui.showMessageWithIndentation("You have not added any tasks yet.");
         }
 
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            Formatter.printlnWithIndentation(index + ". " + taskList.get(i).toString());
+            Ui.showMessageWithIndentation(index + ". " + taskList.get(i).toString());
         }
 
-        Formatter.printHorizontalLine();
+        Ui.showLine();
     }
 
     public static void doneTask(String input, ArrayList<Task> taskList) {
         int index = Integer.parseInt(input) - 1;
         Task task = taskList.get(index);
         task.markAsDone();
-        Formatter.printBetweenLines("Nice! I've marked this task as done:", task.toString());
+        Ui.showMessageBetweenLines("Nice! I've marked this task as done:", task.toString());
     }
 
     public static void deleteTask(String input, ArrayList<Task> taskList) {
@@ -103,8 +94,6 @@ public class TaskHandler {
         taskList.remove(index);
         Integer numberOfTasks = taskList.size();
 
-        Formatter.printBetweenLines("Noted. I've removed this task:",
-                Formatter.INDENTATION + task.toString(),
-                "Now you have " + numberOfTasks.toString() + " tasks in the list.");
+        Ui.showTaskDeletedText(task.toString(), numberOfTasks);
     }
 }
