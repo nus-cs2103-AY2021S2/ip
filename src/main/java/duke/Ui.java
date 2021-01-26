@@ -59,5 +59,17 @@ public class Ui {
         System.out.println(HORIZ_SEP + "\n");
     }
 
+    public static void showMatchedTasks(TaskList taskList) {
+
+        ListIterator<Task> taskIter = taskList.getTasks().listIterator();
+
+        System.out.println(HORIZ_SEP);
+        System.out.println(INDENT + " Here are the matching tasks in your list:");
+        while (taskIter.hasNext()) {
+            Task curr = taskIter.next();
+            System.out.println(INDENT + " " + String.valueOf(taskIter.nextIndex()) + "." + curr);
+        }
+        System.out.println(HORIZ_SEP + "\n");
+    }
 
 }

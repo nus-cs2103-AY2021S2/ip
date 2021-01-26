@@ -1,5 +1,8 @@
 package main.java.duke;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 import java.nio.file.Paths;
@@ -55,6 +58,26 @@ public class Duke {
 
                 } else if (dukeCommand.getCommand() == Command.INVALID) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+
+                } else if (dukeCommand.getCommand() == Command.FIND) {
+                    if (dukeCommand.getDetails().length() == 0) {
+                        throw new DukeException("☹ OOPS!!! Search keyword cannot be empty");
+                    }
+
+                    ListIterator<Task> taskIter = taskList.getTasks().listIterator();
+                    String keyword = dukeCommand.getDetails();
+                    TaskList matchedTasks = new TaskList();
+
+                    while (taskIter.hasNext()) {
+                        Task curr = taskIter.next();
+
+                        if (curr.getDescription().contains(keyword)) {
+                            matchedTasks.add(curr);
+                        }
+                    }
+
+                    Ui.showMatchedTasks(matchedTasks);
+
 
                 } else {
                     Task newTask = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
