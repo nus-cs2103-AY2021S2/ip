@@ -4,11 +4,11 @@ public class TaskList {
     private static ArrayList<Task> tasks;
 
     TaskList(ArrayList<Task> tasks) {
-        tasks = tasks;
+        this.tasks = tasks;
     }
 
     TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public void add(Task task) {
