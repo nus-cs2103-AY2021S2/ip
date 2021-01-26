@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 public class TaskList {
 
@@ -64,7 +64,7 @@ public class TaskList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             sb.append((i + 1) + ". ");
             sb.append(tasks.get(i).toString());
             sb.append("\n");

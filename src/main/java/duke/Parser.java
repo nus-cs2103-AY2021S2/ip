@@ -1,16 +1,16 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.ByeCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddToDo;
+import java.time.LocalDate;
+
 import duke.command.AddDeadline;
 import duke.command.AddEvent;
-
-import java.time.LocalDate;
+import duke.command.AddToDo;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 /**
  * Represents a parser that handles input from a user.
@@ -65,7 +65,6 @@ public class Parser {
         default:
             throw new DukeException("Invalid duke.command. Please enter a valid one");
         }
-        
     }
 
     private static AddDeadline processDeadline(String input) throws Exception {

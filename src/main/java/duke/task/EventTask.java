@@ -35,7 +35,6 @@ public class EventTask extends Task {
     public String serializeEvent() {
         return eventDate.toString() + " | " + startTime + " | " + endTime;
     }
-    
     @Override
     public String toString() {
         return "[E]" + super.checkBoxToString() + description + " (at: " + eventDate.getDayOfMonth()

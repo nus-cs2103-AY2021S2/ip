@@ -9,12 +9,17 @@ public class DoneCommand implements Command {
     private final int id;
     private String response;
 
+    /**
+     * Constructor for done command.
+     * @param id ID of task to be marked as done.
+     */
     public DoneCommand(int id) {
         this.id = id;
     }
 
-    /** 
-     * @return boolean
+    /**
+     * Returns positive if command terminates chat bot.
+     * @return True if this command terminates chat bot.
      */
     public boolean shouldExit() {
         return false;
@@ -38,5 +43,4 @@ public class DoneCommand implements Command {
         response = taskList.getTask(id).toString();
         return taskList;
     }
-    
 }
