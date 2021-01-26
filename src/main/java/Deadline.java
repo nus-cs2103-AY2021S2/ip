@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import static java.time.format.DateTimeFormatter.*;
@@ -42,7 +43,7 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() +
                 (endDate != null
-                        ? "(by: " + endDate.format(ISO_LOCAL_DATE) + ")"
+                        ? "(by: " + endDate.format(DateTimeFormatter.ofPattern("E, d MMM yy")) + ")"
                         : "");
     }
 

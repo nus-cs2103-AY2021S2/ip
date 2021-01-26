@@ -1,6 +1,8 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import static java.time.format.DateTimeFormatter.*;
+
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -39,7 +41,7 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() +
                 (eventTime != null
-                        ? "(at: " + eventTime + ")"
+                        ? "(at: " + eventTime.format(DateTimeFormatter.ofPattern("E, d MMM yy")) + ")"
                         : "");
     }
 
