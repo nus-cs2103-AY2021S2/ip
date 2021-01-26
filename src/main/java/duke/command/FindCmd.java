@@ -28,7 +28,7 @@ public class FindCmd extends Command {
         Iterator<Task> iter = hs.iterator();
         int sn = 1;
         while (iter.hasNext()) {
-            sb.append(String.format("%d. %s", sn, iter.next()));
+            sb.append(String.format("%d. %s\n", sn, iter.next()));
             sn++;
         }
 
