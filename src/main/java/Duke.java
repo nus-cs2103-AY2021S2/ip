@@ -8,9 +8,10 @@ import java.util.regex.Pattern;
 import java.io.File;
 
 public class Duke {
+    private Storage storage;
+
     public static void main(String[] args) throws DukeException, IOException {
-        List<Task> list = new ArrayList<>();
-        int numitems = 0;
+        TaskList list = new TaskList();
         File saveFile = new File("./myData.txt");
 
         if (!saveFile.exists()) {
@@ -25,26 +26,24 @@ public class Duke {
                 char taskType = taskStr.charAt(1);
                 int len = taskStr.length();
                 if (taskType == 'T') {
-                    list.add(numitems, new Todo(taskStr.substring(7)));
-                    numitems++;
+                    list.addTodo(taskStr.substring(7));
+
                 } else if (taskType == 'D'){
                     int ind = taskStr.indexOf(" (by: ");
-                    list.add(numitems, new Deadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1)));
-                    numitems++;
+                    list.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+
                 } else if (taskType == 'E'){
                     int ind = taskStr.indexOf(" (at: ");
-                    list.add(numitems, new Event(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1)));
-                    numitems++;
+                    list.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+
                 }
                 if (taskStr.charAt(4) == 'X') {
-                    list.get(numitems - 1).markAsDone();
+                    list.getAtInd(list.getNumItems() - 1).markAsDone();
                 }
             }
         }
 
         FileWriter fw = new FileWriter("./myData.txt");
-        //System.out.println(saveFile.getAbsolutePath());
-        //Task[] list = new Task[100];
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -52,7 +51,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I am\n" + logo);
-        System.out.println("You currently have " + numitems + " tasks.");
+        System.out.println("You currently have " + list.getNumItems() + " tasks.");
         System.out.println("What can I do for you?");
         System.out.println("---------------------------------");
         Scanner sc = new Scanner(System.in);
@@ -76,62 +75,52 @@ public class Duke {
 
             if (str.equals("list")) {
                 System.out.println("Here are the tasks in your list!");
-                for (int i = 0; i < numitems; i++) {
-                    System.out.println(i+1 + "." + list.get(i));
-
-                }
+                list.printTasks();
 
             } else if (mdone.find()) {
                 System.out.println("Good job, I've marked the task as done!");
                 int n = Integer.parseInt(mdone.group(2)) - 1;
-                list.get(n).markAsDone();
-                System.out.println(list.get(n));
+                list.getAtInd(n).markAsDone();
+                System.out.println(list.getAtInd(n));
             } else if (mtodo.find()) {
                 System.out.println(mtodo.group(2));
                 if (mtodo.group(2).equals("")) {
                     throw new DukeException("The description of a Todo cannot be empty!");
                 }
-                list.add(numitems, new Todo(mtodo.group(2)));
-                //fw.write(list.get(numitems).toString() + "\n");
+                list.addTodo(mtodo.group(2));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list.get(numitems));
-                numitems += 1;
-                System.out.println("Now you have " + numitems + " tasks in the list.");
+                System.out.println(list.getAtInd(list.getNumItems() - 1));
+                System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
             } else if (mdl.find()) {
                 if (mdl.group(2).equals("")) {
                     throw new DukeException("The description of a Deadline cannot be empty!");
                 }
                 System.out.println(mdl.group(4));
-                list.add(numitems, new Deadline(mdl.group(2), mdl.group(4)));
-                //fw.write(list.get(numitems).toString() + "\n");
+                list.addDeadline(mdl.group(2), mdl.group(4));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list.get(numitems));
-                numitems += 1;
-                System.out.println("Now you have " + numitems + " tasks in the list.");
+                System.out.println(list.getAtInd(list.getNumItems() - 1));
+                System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
             } else if (mev.find()) {
                 if (mev.group(2).equals("")) {
                     throw new DukeException("The description of an Event cannot be empty!");
                 }
-                list.add(numitems, new Event(mev.group(2), mev.group(4)));
-                //fw.write(list.get(numitems).toString() + "\n");
+                list.addEvent(mev.group(2), mev.group(4));
                 System.out.println("Got it!. I have added the following task:");
-                System.out.println(list.get(numitems));
-                numitems += 1;
-                System.out.println("Now you have " + numitems + " tasks in the list.");
+                System.out.println(list.getAtInd(list.getNumItems() - 1));
+                System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
             } else if (mdel.find()) {
                 System.out.println("Okay I have removed this task!");
                 int n = Integer.parseInt(mdel.group(2)) - 1;
-                System.out.println(list.get(n));
-                list.remove(n);
-                numitems -= 1;
-                System.out.println("Now you have " + numitems + " tasks in the list.");
+                System.out.println(list.getAtInd(n));
+                list.deleleTask(n);
+                System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
             } else {
                 throw new DukeException("I don't know what that means!!!!");
             }
             str = sc.nextLine();
         }
-        for (int i = 0; i < numitems; i++) {
-            fw.write(list.get(i).toString() + "\n");
+        for (int i = 0; i < list.getNumItems(); i++) {
+            fw.write(list.getAtInd(i).save() + "\n");
         }
         System.out.println("Bye friend, see you soon!");
         fw.close();
