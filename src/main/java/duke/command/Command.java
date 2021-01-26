@@ -1,20 +1,23 @@
 package duke.command;
 
-import duke.Com;
+import duke.*;
 
-public class Command {
-    Com command;
+public abstract class Command {
     String arguments;
+    boolean isExit;
 
-    public Command(Com command, String arguments) {
-        this.command = command;
+    public Command(String arguments) {
         this.arguments = arguments;
+        this.isExit = false;
     }
 
-    public Com getCommand() {
-        return this.command;
-    }
     public String getArguments() {
         return this.arguments;
+    }
+
+    public abstract void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException;
+
+    public boolean isExit() {
+        return isExit;
     }
 }

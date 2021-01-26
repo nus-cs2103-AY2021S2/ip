@@ -1,6 +1,7 @@
 package duke;
 
 public enum Com {
+    BYE,
     LIST,
     DONE,
     DELETE,

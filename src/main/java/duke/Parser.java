@@ -1,31 +1,33 @@
 package duke;
 
-import duke.command.Command;
+import duke.command.*;
 
 public class Parser {
 
     Parser() {}
 
-    public Command parseCommand(String command) throws DukeException {
+    public static Command parse(String command) throws DukeException {
         String strippedCommand = command.strip();
         Command result = null;
-        if (strippedCommand.equals("list")) {
-            result = new Command(Com.LIST, "");
+        if (strippedCommand.equals("bye")) {
+            result = new ByeCommand("");
+        } else if (strippedCommand.equals("list")) {
+            result = new ListCommand("");
         } else if (strippedCommand.startsWith("done")) {
             String args = strippedCommand.substring(4).strip();
-            result = new Command(Com.DONE, args);
+            result = new DoneCommand(args);
         } else if (strippedCommand.startsWith("delete")) {
             String args = strippedCommand.substring(6).strip();
-            result = new Command(Com.DELETE, args);
+            result = new DeleteCommand(args);
         } else if (strippedCommand.startsWith("todo")) {
             String args = strippedCommand.substring(4).strip();
-            result = new Command(Com.TODO, args);
+            result = new TodoCommand(args);
         } else if (strippedCommand.startsWith("deadline")) {
             String args = strippedCommand.substring(8).strip();
-            result = new Command(Com.DEADLINE, args);
+            result = new DeadlineCommand(args);
         } else if (strippedCommand.startsWith("event")) {
             String args = strippedCommand.substring(5).strip();
-            result = new Command(Com.EVENT, args);
+            result = new EventCommand(args);
         } else {
             String msg = "I apologize, I do not comprehend your command.";
             DukeException exception = new DukeException(msg);

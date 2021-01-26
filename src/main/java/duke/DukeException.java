@@ -3,7 +3,7 @@ package duke;
 public class DukeException extends Throwable {
     private String msg;
 
-    DukeException(String msg) {
+    public DukeException(String msg) {
         this.msg = msg;
     }
 
