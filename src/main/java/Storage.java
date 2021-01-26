@@ -43,13 +43,15 @@ public class Storage {
         FileWriter fw;
         try {
             fw = new FileWriter(file);
+
             for (Task t : taskList) {
                 fw.write(String.join(";", t.exportData()) + "\n");
             }
+
             fw.close();
+
         } catch (IOException e) {
-            throw new DukeException(
-                    "Please delete \"data/dukeData.txt\" file and run this command again!");
+            throw new DukeException("Please delete \"data/dukeData.txt\" file and run this command again!");
         }
     }
 
@@ -59,9 +61,9 @@ public class Storage {
      * @return List of tasks
      */
     public List<Task> loadTaskList() throws DukeException {
-        
         List<Task> lst = new ArrayList<>();
         Scanner sc;
+
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
@@ -78,6 +80,7 @@ public class Storage {
             }
 
             String[] s = input.split(";");
+            
             switch (s[0]) {
             case "T":
                 lst.add(Todo.importData(s));

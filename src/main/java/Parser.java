@@ -15,6 +15,7 @@ public class Parser {
      */
     public static void parseInput(String input) throws DukeInputException {
         String[] s = input.split(" ", 2);
+
         String command = s[0];
         String args = s.length == 2 ? s[1] : "";
 
@@ -45,8 +46,7 @@ public class Parser {
         case "help":
             break;
         default: 
-            throw new DukeInputException(
-                    "I'm sorry, but I don't know what that means :-(");
+            throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
         } 
     }
 
@@ -57,6 +57,7 @@ public class Parser {
      */
     public static void checkImportFormat(String input) throws DukeInputException {
         String[] s = input.split(";",3);
+
         if (s.length == 3 && (s[1].equals("0") || s[1].equals("1"))) {
 
             String[] args = s[2].split(";", 2);
@@ -85,7 +86,7 @@ public class Parser {
             LocalDate date = LocalDate.parse(s);
         } catch (DateTimeParseException e) {
             throw new DukeInputException(
-                    String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", s));
+                String.format("\"%s\" is a wrong date format! Please use YYYY-MM-DD format.", s));
         }
     }
 
@@ -99,11 +100,9 @@ public class Parser {
         String[] args = s.split(" /by ");
 
         if (args.length < 2) {
-            throw new DukeInputException(
-                    "Description and duedate should be separated by \"/by\"");
+            throw new DukeInputException("Description and duedate should be separated by \"/by\"");
         } else if (args.length > 2) {
-            throw new DukeInputException(
-                    "Please do not use \"/by\" multiple times!");
+            throw new DukeInputException("Please do not use \"/by\" multiple times!");
         } else {
             checkValidDate(args[1]);
         }
@@ -113,11 +112,9 @@ public class Parser {
         String[] args = s.split(" /at ");
 
         if (args.length < 2) {
-            throw new DukeInputException(
-                    "Description and date should separated by \"/at\"");
+            throw new DukeInputException("Description and date should separated by \"/at\"");
         } else if (args.length > 2) {
-            throw new DukeInputException(
-                    "Please do not use \"/at\" multiple times!");
+            throw new DukeInputException("Please do not use \"/at\" multiple times!");
         } else {
             checkValidDate(args[1]);
         }
@@ -148,8 +145,4 @@ public class Parser {
             }
         }
     }
-
-
-
-
 }
