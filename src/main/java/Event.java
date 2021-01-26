@@ -2,13 +2,13 @@ public class Event extends Task {
     protected String period;
 
     public Event(String description, String period) {
-        super(description);
+        super(description, "E");
         this.period = period;
     }
 
     @Override
-    public String getType() {
-        return "E";
+    public String serialize() {
+        return String.format("%s|%b|%s|%s", getType(), isDone, getDescription(), period);
     }
 
     public String getPeriod() {

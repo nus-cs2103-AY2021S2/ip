@@ -1,9 +1,12 @@
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
-    protected Task(String description) {
+    protected Task(String description, String type) {
         this.description = description;
+        this.isDone = false;
+        this.type = type;
     }
 
     public String getDescription() {
@@ -18,11 +21,15 @@ public abstract class Task {
         }
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
 
-    public abstract String getType();
+    public abstract String serialize();
 
     public abstract String toString();
 }

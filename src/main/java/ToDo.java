@@ -1,11 +1,11 @@
 public class ToDo extends Task {
     public ToDo(String description) {
-        super(description);
+        super(description, "T");
     }
 
     @Override
-    public String getType() {
-        return "T";
+    public String serialize() {
+        return String.format("%s|%b|%s", getType(), isDone, getDescription());
     }
 
     @Override

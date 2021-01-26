@@ -2,13 +2,13 @@ public class Deadline extends Task {
     protected String time;
 
     public Deadline(String description, String time) {
-        super(description);
+        super(description, "D");
         this.time = time;
     }
 
     @Override
-    public String getType() {
-        return "D";
+    public String serialize() {
+        return String.format("%s|%b|%s|%s", getType(), isDone, getDescription(), time);
     }
 
     public String getTime() {
