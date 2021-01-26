@@ -12,6 +12,7 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     static TaskList tasks = new TaskList();
+
     /*
      * Main class to handle the input
      *
