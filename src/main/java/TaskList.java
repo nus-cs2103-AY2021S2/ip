@@ -15,6 +15,13 @@ public class TaskList {
         this.taskList = initialiseList(myTasks);
     }
 
+    private boolean isDone(String icon){
+        if (icon.equals("\u2713")){
+            return true;
+        }
+        return false;
+    }
+
     private ArrayList<Task> initialiseList(ArrayList<String> myTasks) {
         ArrayList<Task> taskList = new ArrayList<>();
 //        if(myTasks.isEmpty()){
@@ -22,17 +29,19 @@ public class TaskList {
 //        }
 
         for (String s : myTasks) {
-            String[] parts = s.split(" | ", 2);
+            String[] parts = s.split(" | ", 3);
             String type = parts[0];
+
             if (type.equals("T")) {
-                String description = parts[1];
-                // addTodo
-                Task newTask = new ToDo(description);
+                boolean isCompleted = isDone(parts[1]);
+                String description = parts[2];
+                Task newTask = new ToDo(description, isCompleted);
                 taskList.add(newTask);
             }
 
             if (type.equals("D")) {
-                String[] details = parts[1].split(" | ");
+                boolean isCompleted = isDone(parts[1]);
+                String[] details = parts[2].split(" | ", 2);
                 String description = details[0];
                 String time = details[1];
 
@@ -40,12 +49,13 @@ public class TaskList {
                 LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
                 String by = dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-dd H:mm"));
 
-                Task newTask = new Deadline(description, by);
+                Task newTask = new Deadline(description, by, isCompleted);
                 taskList.add(newTask);
             }
 
             if (type.equals("E")) {
-                String[] details = parts[1].split(" | ");
+                boolean isCompleted = isDone(parts[1]);
+                String[] details = parts[2].split(" | ", 2);
                 String description = details[0];
                 String time = details[1];
 
@@ -53,7 +63,7 @@ public class TaskList {
                 LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
                 String by = dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-dd H:mm"));
 
-                Task newTask = new Event(description, by);
+                Task newTask = new Event(description, by, isCompleted);
                 taskList.add(newTask);
             }
         }

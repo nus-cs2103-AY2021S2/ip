@@ -161,11 +161,12 @@ public class Parser {
 //        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
 //        boolean isValid = false;
 //        try{
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm", Locale.ENGLISH);
-        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+        System.out.println(time);
+            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm", Locale.ENGLISH);
+            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
 //            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
-        System.out.println("converting time");
-        boolean isValid = true;
+//        System.out.println("converting time");
+            boolean isValid = true;
 //        } catch (Exception e){
 //            isValid = false;
 //            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");

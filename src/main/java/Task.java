@@ -5,8 +5,15 @@ public class Task {
     protected String separator = " | ";
 
     public Task(String description) {
+        this(description, false);
+//        this.description = description;
+//        this.isDone = false;
+//        this.type = "";
+    }
+
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
 //        this.type = "";
     }
 
@@ -20,6 +27,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public void setSatus(boolean isDone){
+        this.isDone = isDone;
     }
 
     public boolean getStatus() { return this.isDone; }

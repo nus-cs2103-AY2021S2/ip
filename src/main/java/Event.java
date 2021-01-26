@@ -8,7 +8,11 @@ public class Event extends Task {
     private final String type = "E";
 
     public Event(String description, String at) {
-        super(description);
+       this(description, at, false);
+    }
+
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         setTime(at);
     }
 
