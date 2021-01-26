@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -6,7 +10,7 @@ public class Vergil {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String command;
-        ArrayList<Task> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = load();
 
         System.out.println("Welcome! I'm Vergil!");
         System.out.println("How may I help you?");
@@ -24,14 +28,19 @@ public class Vergil {
                     listTasks(tasks);
                 } else if (command.startsWith("done")) {
                     completeTask(command, tasks);
+                    save(tasks);
                 } else if (command.startsWith("delete")) {
                     deleteTask(command, tasks);
+                    save(tasks);
                 } else if (command.startsWith("todo")) {
                     addTodo(command, tasks);
+                    save(tasks);
                 } else if (command.startsWith("deadline")) {
-                   addDeadline(command, tasks);
+                    addDeadline(command, tasks);
+                    save(tasks);
                 } else if (command.startsWith("event")) {
                     addEvent(command, tasks);
+                    save(tasks);
                 } else {
                     throw new VergilException("Sorry! I cannot resolve this command.");
                 }
@@ -152,5 +161,49 @@ public class Vergil {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, tasks.get(i));
         }
+    }
+
+    public static void save(List<Task> tasks) throws VergilException {
+        try {
+            FileWriter fw = new FileWriter("data/vergil_list.sav");
+            for (Task t:tasks) {
+                fw.write(t.getSaveString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new VergilException("Error! Unable to save list.");
+        }
+    }
+
+    public static ArrayList<Task> load() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            Scanner scan = new Scanner(new File("data/vergil_list.sav"));
+
+            while (scan.hasNextLine()) {
+                // INDEX | ITEM
+                // ------------
+                // 0     | Task type
+                // 1     | Task description
+                // 2     | Task completion status
+                // 3     | Task time (if any)
+                String[] taskDetails = scan.nextLine().split("::");
+                switch (taskDetails[0]) {
+                case "t":
+                    tasks.add(new Todo(taskDetails[1], Boolean.parseBoolean(taskDetails[2])));
+                    break;
+                case "d":
+                    tasks.add(new Deadline(taskDetails[1], taskDetails[3], Boolean.parseBoolean(taskDetails[2])));
+                    break;
+                case "e":
+                    tasks.add(new Event(taskDetails[1], taskDetails[3], Boolean.parseBoolean(taskDetails[2])));
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            // No save file found; create a new file if there are any new tasks.
+        }
+
+        return tasks;
     }
 }

@@ -39,6 +39,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String getSaveString() {
+        return String.format("%s::%b", description, isDone);
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", description);
