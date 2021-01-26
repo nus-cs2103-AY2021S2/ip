@@ -1,11 +1,18 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a personal chatbot that helps the user keep track of their tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList list;
     private Ui ui;
 
+    /**
+     * Constructor for this Duke object.
+     * @param   filePath  File path to save task to hard disk.
+     */
     public Duke(String filePath) {
         try {
             this.storage = new Storage(filePath);
@@ -17,6 +24,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs Duke, allowing it to start serving the user.
+     */
     public void run() throws DukeException, IOException {
         storage.initialise(list);
         ui.initialise();
@@ -31,6 +41,9 @@ public class Duke {
         ui.finalise();
     }
 
+    /**
+     * Drives the program.
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("./myData.txt").run();
     }

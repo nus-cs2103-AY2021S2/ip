@@ -1,9 +1,21 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Makes sense of user input and commands.
+ */
 public class Parser {
+    /**
+     * Constructor for this Parser object.
+     */
     public Parser() {
     }
+
+    /**
+     * Parses a given string such that Duke can understand commands.
+     * @param  list The TaskList object containing all tasks.
+     * @param  str The string to be parsed.
+     */
     public static void parse(TaskList list, String str) throws DukeException {
         Pattern pdone = Pattern.compile("^(done )([0-9]+)");
         Matcher mdone = pdone.matcher(str);

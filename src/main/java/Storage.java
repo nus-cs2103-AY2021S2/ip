@@ -3,24 +3,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Deals with the loading and saving of tasks to the hard disk.
+ */
 public class Storage {
     protected String filePath;
     protected File saveFile;
     protected FileWriter filewriter;
 
+    /**
+     * Constructor for this Storage object.
+     * @param   filePath  File path to save task to hard disk.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.saveFile = new File(filePath);
     }
 
-    public void finalise(TaskList list) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < list.getNumItems(); i++) {
-            fw.write(list.getAtInd(i).save() + "\n");
-        }
-        fw.close();
-    }
-
+    /**
+     * Reads and adds saved tasks from the hard disk.
+     * Creates a new save file if it does not exist.
+     * @param  list The TaskList object containing all tasks.
+     */
     public void initialise(TaskList list) throws IOException {
         if (!saveFile.exists()) {
             boolean isCreated = saveFile.createNewFile();
@@ -50,6 +54,18 @@ public class Storage {
                 }
             }
         }
+    }
+
+    /**
+     * Saves all tasks in the TaskList to the harddrive.
+     * @param  list The TaskList object containing all tasks.
+     */
+    public void finalise(TaskList list) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < list.getNumItems(); i++) {
+            fw.write(list.getAtInd(i).save() + "\n");
+        }
+        fw.close();
     }
 
 }
