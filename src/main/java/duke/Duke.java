@@ -17,7 +17,11 @@ public class Duke {
         
 		chatBot();
     }
-
+	
+	/**
+	* This method initiates the chatbot of the Duke program. It call upon various 
+	* classes responsibile for different functionalities of Duke.
+	*/
     public static void chatBot(){
 		
 		Ui ui = new Ui();
