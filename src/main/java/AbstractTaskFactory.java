@@ -1,17 +1,22 @@
 /**
  * Abstract class for the generation of Tasks.
  */
-public abstract class AbstractTaskFactory {
-
+abstract class AbstractTaskFactory {
+    /**
+     *
+     * @param parameters Information needed to create task.
+     * @return New generated task.
+     * @throws IllegalArgumentException
+     */
     protected abstract Task createTask(String parameters) throws IllegalArgumentException;
+
     /**
      * Generate Tasks depending on the type needed.
      *
      * @param parameters string representation of the task information.
      * @return Task Task generated.
      */
-    public Task getTask(String parameters) {
+    protected Task getTask(String parameters) {
         return this.createTask(parameters);
     }
-
 }

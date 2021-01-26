@@ -1,4 +1,4 @@
-public class DeleteCommand implements ICommand{
+class DeleteCommand implements ICommand{
     TaskList tasks;
 
     public DeleteCommand(TaskList tasks) {
@@ -9,6 +9,7 @@ public class DeleteCommand implements ICommand{
         try {
             int count = Integer.parseInt(parameters);
             Task removedTask = tasks.deleteTask(count);
+
             System.out.println("Noted. I've removed this task:");
             System.out.println(removedTask.toString());
             System.out.println(String.format("Now you have %d tasks in the list",tasks.getTasks().size()));

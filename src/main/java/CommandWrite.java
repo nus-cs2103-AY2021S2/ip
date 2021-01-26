@@ -3,7 +3,7 @@ import java.io.IOException;
  * Wrapper Command that writes all tasks from taskList to file
  * after executing the given command.
  */
-public class CommandWrite implements ICommand{
+class CommandWrite implements ICommand{
     private ICommand decoratedCommand;
     private Storage storage;
 
@@ -14,7 +14,7 @@ public class CommandWrite implements ICommand{
      * @param decoratedCommand Command to executed before writing to file.
      * @param storage Object responsible for writing the contents in taskList to file.
      */
-    public CommandWrite(ICommand decoratedCommand,Storage storage){
+    CommandWrite(ICommand decoratedCommand,Storage storage){
         this.storage = storage;
         this.decoratedCommand = decoratedCommand;
     }

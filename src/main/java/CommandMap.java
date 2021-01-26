@@ -1,9 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * Class that maps keywords to appropriate commands.
  */
-public class CommandMap{
+class CommandMap{
     private Map<String, ICommand> commands;
     private ICommand defaultCommand;
 
@@ -13,7 +14,7 @@ public class CommandMap{
      *
      * @param defaultCommand Command that will be executed if keyword given does not match any existing keywords.
      */
-    public CommandMap(ICommand defaultCommand) {
+    CommandMap(ICommand defaultCommand) {
         this.commands = new HashMap<String, ICommand>();
         this.defaultCommand = defaultCommand;
     }
@@ -24,9 +25,10 @@ public class CommandMap{
      * @param string Keyword to be mapped.
      * @param command Command to be executed.
      */
-    public void add(String string, ICommand command) {
+    protected void add(String string, ICommand command) {
         commands.put(string,command);
     }
+
     /**
      * Returns the command that is mapped to keyword. Will return defaultCommand if string does not
      * exist in the Map.
@@ -34,10 +36,8 @@ public class CommandMap{
      * @param string Keyword
      * @return Command that corresponded with keyword.
      */
-    public ICommand get(String string) {
+    protected ICommand get(String string) {
         ICommand command = commands.getOrDefault(string,defaultCommand);
         return command;
     }
-
-
 }

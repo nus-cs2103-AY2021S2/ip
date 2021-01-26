@@ -1,4 +1,4 @@
-public class DeadlineFactory extends AbstractTaskFactory{
+class DeadlineFactory extends AbstractTaskFactory{
     @Override
     protected Task createTask(String parameters) throws IllegalArgumentException {
         String[] inputArray = parameters.split("/by",2);

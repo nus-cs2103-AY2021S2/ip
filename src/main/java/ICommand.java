@@ -2,7 +2,7 @@
  * Interface for Command.
  *
  */
-public interface ICommand {
+interface ICommand {
     /**
      * Execute given action based on the command.
      *

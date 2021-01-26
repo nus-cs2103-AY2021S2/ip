@@ -1,15 +1,15 @@
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
     private CommandMap commands;
     private TaskList taskList;
     private Ui ui;
+
     public Duke() {
         this.taskList = new TaskList();
         this.storage = new Storage(taskList);
-        this.commands = new CommandMap(new CommandDecorator(new DefaultCommand()));
+        this.commands = new CommandMap(new CommandBorder(new DefaultCommand()));
         this.ui = new Ui();
     }
 
@@ -20,7 +20,7 @@ public class Duke {
     }
 
     private void run() {
-        ICommand printCommand = new CommandDecorator(new PrintCommand());
+        ICommand printCommand = new CommandBorder(new PrintCommand());
         printCommand.execute(ui.getIntro());
         try {
             this.storage.read();
@@ -42,23 +42,23 @@ public class Duke {
 
     private void initialiseCommandMap() {
 
-        ICommand doneCommand = new CommandDecorator(new DoneCommand(taskList));
+        ICommand doneCommand = new CommandBorder(new DoneCommand(taskList));
         doneCommand = new CommandWrite(doneCommand,storage);
 
-        ICommand listCommand =new CommandDecorator(new PrintListCommand(taskList));
+        ICommand listCommand =new CommandBorder(new PrintListCommand(taskList));
 
-        ICommand exitCommand =new CommandDecorator(new ExitCommand(taskList));
+        ICommand exitCommand =new CommandBorder(new ExitCommand(taskList));
 
-        ICommand eventCommand = new CommandDecorator(new AddCommand(taskList,new EventFactory()));
+        ICommand eventCommand = new CommandBorder(new AddCommand(taskList,new EventFactory()));
         eventCommand = new CommandWrite(eventCommand,storage);
 
-        ICommand deadlineCommand =new CommandDecorator(new AddCommand(taskList,new DeadlineFactory()));
+        ICommand deadlineCommand =new CommandBorder(new AddCommand(taskList,new DeadlineFactory()));
         deadlineCommand = new CommandWrite(deadlineCommand,storage);
 
-        ICommand toDoCommand = new CommandDecorator(new AddCommand(taskList,new ToDoFactory()));
+        ICommand toDoCommand = new CommandBorder(new AddCommand(taskList,new ToDoFactory()));
         toDoCommand = new CommandWrite(toDoCommand,storage);
 
-        ICommand deleteCommand = new CommandDecorator(new DeleteCommand(taskList));
+        ICommand deleteCommand = new CommandBorder(new DeleteCommand(taskList));
         deleteCommand = new CommandWrite(deleteCommand,storage);
 
         commands.add("done", doneCommand);

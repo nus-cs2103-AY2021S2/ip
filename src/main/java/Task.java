@@ -1,11 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 /**
  * Abstract class for tasks. Contains information about the task description and
  * whether is has been carried out.
  */
-public abstract class Task {
+abstract class Task {
     private String content;
     private boolean isDone;
 
@@ -14,10 +15,11 @@ public abstract class Task {
      *
      * @param content description of the task.
      */
-    protected Task(String content) {
+    Task(String content) {
         this.content = content;
         this.isDone = false;
     }
+
     /**
      * String representation of whether the task is done.
      * To be used by the concrete implementation of Tasks only.
@@ -31,6 +33,7 @@ public abstract class Task {
         string += this.content;
         return string;
     }
+
     /**
      * Information needed to be write/read in/to file.
      * In the format of Type|
@@ -39,7 +42,8 @@ public abstract class Task {
      */
     abstract public String toFileString();
 
-    public String parseDate(String string){
+
+    String parseDate(String string){
         try{
             LocalDate date = LocalDate.parse(string);
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -52,7 +56,7 @@ public abstract class Task {
      * Set Task to be done.
      *
      */
-    public void setDone() {
+    protected void setDone() {
         this.isDone = true;
     }
 
@@ -61,7 +65,7 @@ public abstract class Task {
      *
      * @return Description of Task
      */
-    public String getDesc() {
+    protected String getDesc() {
         return this.content;
     }
 
@@ -70,7 +74,7 @@ public abstract class Task {
      *
      * @return Boolean representation of whether task is done or not.
      */
-    public boolean getDone() {
+    protected boolean getDone() {
         return this.isDone;
     }
 }

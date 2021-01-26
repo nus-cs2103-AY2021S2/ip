@@ -1,6 +1,7 @@
-import java.util.Scanner;
-
-public class Parser {
+/**
+ * Parser class used to parse input into appropriate formats.
+ */
+class Parser {
     /**
      * Parse given line into an array where the first element is a keyword.
      *

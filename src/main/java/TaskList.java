@@ -1,23 +1,23 @@
 import java.util.ArrayList;
 
-public class TaskList {
+class TaskList {
     private ArrayList<Task> list;
     private boolean isDone;
 
-    public TaskList() {
+    TaskList() {
         list = new ArrayList<>();
         isDone = false;
     }
 
-    public ArrayList<Task> getTasks() {
+    protected ArrayList<Task> getTasks() {
         return this.list;
     }
 
-    public void addTask(Task content) {
+    protected void addTask(Task content) {
         list.add(content);
     }
 
-    public void addTask(String[] tasks) {
+    protected void addTask(String[] tasks) {
         String type = tasks[0].strip();
         String done = tasks[1].strip();
         String desc = tasks[2].strip();
@@ -40,10 +40,9 @@ public class TaskList {
         if (done.equals("1")) {
             task.setDone();
         }
-
     }
-    //note count starts from 1 not 0
-    public void setTaskDone(int count) throws IllegalArgumentException {
+
+    protected void setTaskDone(int count) throws IllegalArgumentException {
         if (count > list.size() || count <= 0) {
             throw new IllegalArgumentException("Error: Task number out of range.");
         } else {
@@ -51,7 +50,7 @@ public class TaskList {
         }
     }
 
-    public Task deleteTask(int count) throws IllegalArgumentException {
+    protected Task deleteTask(int count) throws IllegalArgumentException {
         if (count > list.size() || count <= 0) {
             throw new IllegalArgumentException("Error: Task number out of range.");
         } else {
@@ -60,11 +59,11 @@ public class TaskList {
         }
     }
 
-    public void setExited() {
+    protected void setExited() {
         this.isDone = true;
     }
 
-    public boolean hasExited() {
+    protected boolean hasExited() {
         return this.isDone;
     }
 

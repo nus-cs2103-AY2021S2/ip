@@ -1,23 +1,25 @@
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 /**
  * Handles the interaction the user and the program.
  */
-public class Ui {
+class Ui {
     Scanner scanner;
-    public Ui(){
+    Ui(){
         scanner = new Scanner(System.in);
     }
 
-    public String getLine() throws NoSuchElementException {
+    protected String getLine() throws NoSuchElementException {
         return scanner.nextLine();
     }
+
     /**
      * Generates the string representation of the introduction.
      *
      * @return String representing the introduction to Duke.
      */
-    public String getIntro(){
+    protected String getIntro(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -27,6 +29,7 @@ public class Ui {
 
         return intro;
     }
+
     /**
      * Command that prints the list existing in TaskList.
      * (Only applicable if inputs are fed via file direction)

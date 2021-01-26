@@ -1,4 +1,4 @@
-public class ExitCommand implements ICommand {
+class ExitCommand implements ICommand {
     private TaskList tasks;
 
     public ExitCommand(TaskList tasks) {

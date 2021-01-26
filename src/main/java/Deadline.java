@@ -1,15 +1,13 @@
-/**
- * Object representation of a deadline. Has a by date which represents the deadline of the task.
- */
-public class Deadline extends Task{
+class Deadline extends Task{
     private String deadline;
+
     /**
-     * Deadline
+     * Deadline constructor.
      *
      * @param content Task description
      * @param deadline The deadline task has to be completed by.
      */
-    public Deadline(String content,String deadline){
+    Deadline(String content,String deadline){
         super(content);
         this.deadline = deadline;
     }

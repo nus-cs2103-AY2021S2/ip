@@ -1,4 +1,4 @@
-public class Event extends Task{
+class Event extends Task{
     private String timeRange;
 
     public Event(String content,String timeRange){

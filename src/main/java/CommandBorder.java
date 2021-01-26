@@ -1,17 +1,18 @@
 /**
  * Place borders for each command given.
  */
-public class CommandDecorator implements ICommand {
-
+class CommandBorder implements ICommand {
     private ICommand decoratedCommand;
+
     /**
      * Generate Tasks depending on the type needed.
      *
      * @param decoratedCommand Command to be wrapped.
      */
-    public CommandDecorator(ICommand decoratedCommand) {
+    CommandBorder(ICommand decoratedCommand) {
         this.decoratedCommand = decoratedCommand;
     }
+
     /**
      * Print out borders as well as executing the wrapped Command.
      *
