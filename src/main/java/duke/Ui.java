@@ -10,25 +10,15 @@ public class Ui {
 	
 	private Parser p;
 	
-	/**
-	* Constructor for the Ui class.
-	*/
 	public Ui() {
 		p = new Parser();
 	}
 	
-	/**
-	* Prints the greeting for the chatbot.
-	*/
 	public void greeting() {
 		System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 	}
 	
-	/**
-	* Gets the input of the user and passes it to the Parser for processing
-	* @param tl TaskList to be perform the commands on
-	*/
 	public void getInput(TaskList tl) {
 		
 		Scanner sc = new Scanner(System.in);

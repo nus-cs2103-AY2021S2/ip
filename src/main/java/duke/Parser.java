@@ -10,38 +10,14 @@ public class Parser {
 	
 	private boolean end;
 	
-	/**
-	* Constructor for the Parser class
-	*/
 	public Parser() {
 		end = false;
 	}
 	
-	/**
-	* Returns the End object which indicates whether the chatbot has been terminated by the user.
-	* @return boolean object. True - chatbot ended, False - chatbot still running
-	*/
 	public boolean checkEnd() {
 		return end;
 	}
 	
-	/**
-	* Returns a String object which contains the output from processing user's input. This method will process
-	* the user's input and perform functions accordingly to the TaskList object supplied in the argument <p>
-	* The in String argument should be a valid command. The following are commands acceptable by the process function:<br/>
-	* <ul>
-	* <li>list - Displays current list items</li>
-	* <li>bye - Exits Duke program</li>
-	* <li>done <int:number> - Marks item number specified (1-based) as done</li>
-	* <li>todo <String:name> - Creates an item type of "todo" inside TaskList</li>
-	* <li>deadline <String:name> /by <String:date> - Creates an item type of "deadline" inside TaskList. The date should be specified in an YYYY-MM-DD format</li>
-	* <li>event <String:name> /at <String:date> - Creates an item type of "event" inside TaskList. The date should be specified in an YYYY-MM-DD format</li>
-	* <li>delete <int:number> - Deletes item number specified (1-based)</li>
-	* </ul>
-	* @param in the input command entered by user
-	* @param TaskList the TaskList object the commands will be processed on
-	* @return String object containing results of processing 
-	*/
 	public String process(String in, TaskList tl){
 		
 		try {
