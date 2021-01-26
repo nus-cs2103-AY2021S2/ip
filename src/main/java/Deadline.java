@@ -1,9 +1,12 @@
-public class Deadline extends Task {
-    protected String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task {
+    protected LocalDate date;
+
+    public Deadline(String description, LocalDate date) {
         super(description);
-        this.time = time;
+        this.date = date;
     }
 
     @Override
@@ -11,12 +14,13 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(), time);
+        return String.format("[%s][%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(),
+                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

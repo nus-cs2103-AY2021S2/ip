@@ -1,5 +1,9 @@
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -115,7 +119,7 @@ public class Duke {
         Matcher descMatcher = descPattern.matcher(cmd);
         if (!descMatcher.find()) {
             throw new DukeException("The description of a deadline cannot be empty!\n"
-                    + "Expected format: deadline <DESCRIPTION> /by <TIME>");
+                    + "Expected format: deadline <DESCRIPTION> /by <DATE TIME>");
         }
 
         Pattern timePattern = Pattern.compile("(?i)deadline\\s+(\\w.*)\\s+\\/by\\s+(\\w.*)");
@@ -123,16 +127,22 @@ public class Duke {
 
         if (!timeMatcher.find()) {
             throw new DukeException("A deadline must have a time!\n"
-                    + "Expected format: deadline <DESCRIPTION> /by <TIME>");
+                    + "Expected format: deadline <DESCRIPTION> /by <DATE TIME>");
         }
 
         String taskDesc = timeMatcher.group(1);
-        String time = timeMatcher.group(2);
+        String dateStr = timeMatcher.group(2);
 
-        Deadline deadline = new Deadline(taskDesc, time);
-        tasks.add(deadline);
+        try {
+            LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            Deadline deadline = new Deadline(taskDesc, date);
+            tasks.add(deadline);
 
-        printAddTaskAck(deadline);
+            printAddTaskAck(deadline);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException(String.format("Sorry, I don't recognize this date: '%s'\n"
+                    + "Use this format please: yyyy-mm-dd", dateStr));
+        }
     }
 
     private boolean isAddEventCmd(String cmd) {
