@@ -114,8 +114,6 @@ public class Duke {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
                 String[] spliced = input.substring(9).split(" /by ");
-                System.out.println(spliced[0]);
-                System.out.println(spliced[1]);
                 task = new Deadline(spliced[0], spliced[1]);
                 return task;
             } else if (command.equals("event")) {

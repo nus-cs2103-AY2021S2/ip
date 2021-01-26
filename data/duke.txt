@@ -1,4 +1,3 @@
-D|1|kejar deadline |by 20 jan
-T|0|nikahin margaret /by 2024
-D|0|punya anak |at january 2023
-E|1|ke rumah matheus |at 2023
+T|0|nikahin jessen
+D|1|beli jus|2020-10-03
+T|0|tidur
