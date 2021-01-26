@@ -11,11 +11,11 @@ public class Duke {
 	private static String DIVIDER = "____________________________________________________________";
 	
 	private Scanner scanner;
-	private ArrayList<Task> tasks;
+	private TaskList tasks;
 	
 	public Duke() {
         this.scanner = new Scanner(System.in);
-        this.tasks = new ArrayList<>();
+        this.tasks = new TaskList();
     }
 	
     public static void main(String[] args) {
@@ -38,12 +38,12 @@ public class Duke {
             try {
                 // display list
                 if (userInput.toLowerCase().equals("list")) {
-                    displayList();
+                    tasks.display();
                 // finish a task
                 } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
                     String[] bits = userInput.split(" ");
-                    int idx = Integer.parseInt(bits[1]) - 1; // zero-indexed task index
-                    if (idx < 0 || idx >= tasks.size()) {
+                    int idx = Integer.parseInt(bits[1]);
+                    if (idx < 1 || idx > tasks.size()) {
                         throw new DukeException("Oops! That doesn't appear to be a valid task number.");
                     } else {
                         finishTask(tasks.get(idx));
@@ -51,8 +51,8 @@ public class Duke {
 				// manually remove task
                 } else if (userInput.toLowerCase().matches("^(delete|remove) \\d+$")) {
                     String[] bits = userInput.split(" ");
-                    int idx = Integer.parseInt(bits[1]) - 1; // zero-indexed task index
-                    if (idx < 0 || idx >= tasks.size()) {
+                    int idx = Integer.parseInt(bits[1]);
+                    if (idx < 1 || idx > tasks.size()) {
                         throw new DukeException("Oops! That doesn't appear to be a valid task number.");
                     } else {
                         deleteTask(idx);
@@ -115,13 +115,6 @@ public class Duke {
 		System.out.println(DIVIDER);
         System.out.println("Bye! Hope to see you again :)");
         System.out.println(DIVIDER);
-	}
-	
-	private void displayList() {
-		for (int i = 0; i < tasks.size(); i++) {
-			String item = String.valueOf(i + 1) + ". " + tasks.get(i).toString();
-			System.out.println(item);
-		}
 	}
 	
 	private Task parseTask(String taskString) throws DukeException {
@@ -206,7 +199,7 @@ public class Duke {
 		try {
 			FileWriter saveWriter = new FileWriter("savedata.txt");
 			StringBuilder saveStringBuilder = new StringBuilder();
-			for (int i = 0; i < tasks.size(); i++) {
+			for (int i = 1; i <= tasks.size(); i++) {
 				saveStringBuilder.append(tasks.get(i).getSaveString());
 			}
 			saveWriter.write(saveStringBuilder.toString());
