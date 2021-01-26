@@ -7,7 +7,7 @@ public class Ui {
                 + "| '--'D|| '--'U|| '--'K|| '--'E|\n"
                 + "`------'`------'`------'`------'";
 
-        System.out.println("Hello, this is\n" + logo);
+        System.out.println("Hello, this is\n" + logo + "\n What can I do for you today?\n");
     }
 
     public static void sayGoodbye() {
