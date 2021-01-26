@@ -1,7 +1,6 @@
 package duke.parser;
 
 import duke.DukeException;
-import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -12,19 +11,15 @@ import duke.ui.Ui;
 public class Parser {
 
     private final Ui ui;
-    private final Storage storage;
     private final TaskList tasks;
 
     /**
      * Constructor for the Parser class
-     *
-     * @param ui      Ui object that interacts with user
-     * @param storage Storage object that handles saving/loading of tasks to and from hard disk
+     *  @param ui      Ui object that interacts with user
      * @param tasks   TaskList object which contains all the tasks in the program
      */
-    public Parser(Ui ui, Storage storage, TaskList tasks) {
+    public Parser(Ui ui, TaskList tasks) {
         this.ui = ui;
-        this.storage = storage;
         this.tasks = tasks;
     }
 
