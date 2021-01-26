@@ -57,27 +57,27 @@ public class Parser {
         String[] tokenized = Parser.tokenize(command);
         String firstWord = tokenized[0];
         switch (firstWord) {
-            case "todo":
-                LegitCommand.TODO.setDetail(tokenized[1]);
-                return LegitCommand.TODO;
-            case "deadline":
-                LegitCommand.DEADLINE.setDetail(tokenized[1]);
-                return LegitCommand.DEADLINE;
-            case "event":
-                LegitCommand.EVENT.setDetail(tokenized[1]);
-                return LegitCommand.EVENT;
-            case "list":
-                return LegitCommand.LIST;
-            case "done":
-                LegitCommand.DONE.setDetail(tokenized[1]);
-                return LegitCommand.DONE;
-            case "delete":
-                LegitCommand.DELETE.setDetail(tokenized[1]);
-                return LegitCommand.DELETE;
-            case "bye":
-                return LegitCommand.BYE;
-            default:
-                throw new IllegalStateException("Unexpected value: " + firstWord);
+        case "todo":
+            LegitCommand.TODO.setDetail(tokenized[1]);
+            return LegitCommand.TODO;
+        case "deadline":
+            LegitCommand.DEADLINE.setDetail(tokenized[1]);
+            return LegitCommand.DEADLINE;
+        case "event":
+            LegitCommand.EVENT.setDetail(tokenized[1]);
+            return LegitCommand.EVENT;
+        case "list":
+            return LegitCommand.LIST;
+        case "done":
+            LegitCommand.DONE.setDetail(tokenized[1]);
+            return LegitCommand.DONE;
+        case "delete":
+            LegitCommand.DELETE.setDetail(tokenized[1]);
+            return LegitCommand.DELETE;
+        case "bye":
+            return LegitCommand.BYE;
+        default:
+            throw new IllegalStateException("Unexpected value: " + firstWord);
         }
     }
 

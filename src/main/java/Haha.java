@@ -19,35 +19,6 @@ public class Haha {
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
 
-
-    private static boolean executeCommand(LegitCommand command) {
-        switch (command) {
-            case BYE:
-                System.out.println("Bye now!");
-                return true;
-            case TODO:
-                database.addToDB(new Todo(false, LegitCommand.TODO.getDetail()));
-                break;
-            case EVENT:
-                database.addToDB(new Event(false, LegitCommand.EVENT.getDetail()));
-                break;
-            case DEADLINE:
-                database.addToDB(new Deadline(false, LegitCommand.DEADLINE.getDetail()));
-                break;
-            case LIST:
-                database.listFromDB();
-                break;
-            case DONE:
-                database.markDoneToDB(LegitCommand.DONE.getDetail());
-                break;
-            case DELETE:
-                database.deleteFromDB(LegitCommand.DELETE.getDetail());
-                break;
-        }
-        return false;
-    }
-
-
     public static void main(String[] args) {
         // Pre input setup
         System.out.println(STARTER);
@@ -71,5 +42,33 @@ public class Haha {
 
         }
     }
+
+    private static boolean executeCommand(LegitCommand command) {
+        switch (command) {
+        case BYE:
+            System.out.println("Bye now!");
+            return true;
+        case TODO:
+            database.addToDB(new Todo(false, LegitCommand.TODO.getDetail()));
+            break;
+        case EVENT:
+            database.addToDB(new Event(false, LegitCommand.EVENT.getDetail()));
+            break;
+        case DEADLINE:
+            database.addToDB(new Deadline(false, LegitCommand.DEADLINE.getDetail()));
+            break;
+        case LIST:
+            database.listFromDB();
+            break;
+        case DONE:
+            database.markDoneToDB(LegitCommand.DONE.getDetail());
+            break;
+        case DELETE:
+            database.deleteFromDB(LegitCommand.DELETE.getDetail());
+            break;
+        }
+        return false;
+    }
+
 
 }
