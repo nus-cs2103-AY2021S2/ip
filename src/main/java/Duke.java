@@ -4,17 +4,25 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+    private static String FILE_PATH = "./data/";
+    private static String FILE_NAME = "history.txt";
+    private static String greetings = "Hi, I am Bebong, a self-centered bot. I can't do anything for you.";
+    private static String bye = "Goodbye, hope to not see you again.";
+    private Storage storage;
+    private TaskManager taskManager;
 
+    public static void main(String[] args) {
+        Duke duke = new Duke(FILE_PATH, FILE_NAME);
+        duke.doCommand();
+    }
+
+    public Duke(String filePath, String fileName) {
+        storage = new Storage(filePath, fileName);
+        taskManager = new TaskManager(storage.readPreviousFile());
+    }
+
+    private void doCommand() {
         Scanner sc = new Scanner(System.in);
-        String greetings = "Hi, I am Bebong, a self-centered bot. I can't do anything for you.";
-        String bye = "Goodbye, hope to not see you again.";
-        List<Task> lst = new ArrayList<>();
         System.out.println(greetings);
 
         while (sc.hasNext()) {
@@ -26,19 +34,20 @@ public class Duke {
                 break;
             }
             else if (word.equals("list")) {
-                doList(lst);
+                doList();
             }
             else if (command.equals("done")) {
                 int index = Integer.parseInt(tmp[1]);
-                lst = doDone(lst, index);
+                doDone(index);
             }
             else if (command.equals("delete")) {
                 int index = Integer.parseInt(tmp[1]);
-                lst = doDelete(lst, index);
+                doDelete(index);
             }
             else {
-                lst = doTask(word, lst);
+                doTask(word);
             }
+            storage.saveTasks(taskManager);
         }
     }
 
@@ -46,54 +55,52 @@ public class Duke {
         System.out.println(bye);
     }
 
-    private static void doList(List<Task> lst) {
-        for (int i=0; i < lst.size(); i++) {
+    private void doList() {
+        for (int i=0; i < taskManager.size(); i++) {
             System.out.print(i+1);
             System.out.print(".");
-            System.out.println(lst.get(i));
+            System.out.println(taskManager.get(i));
         }
     }
 
-    private static List<Task> doDone(List<Task> lst, int index) {
+    private void doDone(int index) {
         try {
-            Task currTask = lst.get(index - 1);
+            Task currTask = taskManager.get(index - 1);
             currTask = currTask.doTask();
-            lst.set(index - 1, currTask);
+            taskManager.set(index - 1, currTask);
             System.out.println("Nice I have marked this task as done!");
             System.out.println(currTask);
         }
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The description of a done cannot be empty.");
         }
-        return lst;
     }
 
-    private static List<Task> doDelete(List<Task> lst, int index) {
+    private void doDelete(int index) {
         try {
-            Task currTask = lst.get(index - 1);
+            Task currTask = taskManager.get(index - 1);
             System.out.println("Noted. I've removed this task: ");
             System.out.println(currTask);
-            lst.remove(index - 1);
-            System.out.println("Now you have " + lst.size() + " tasks in the list.");
+            taskManager.remove(index - 1);
+            System.out.println("Now you have " + taskManager.size() + " tasks in the list.");
         }
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("☹ OOPS!!! The description of a delete cannot be empty.");
         }
-        return lst;
     }
 
-    private static List<Task> doTask(String word, List<Task> lst) {
+    private void doTask(String word) {
         try {
             String[] tmp = word.split(" ");
             String command = tmp[0];
             if (command.equals("todo")) {
-                lst = doToDo(word, lst);
+                doToDo(word);
             }
             else if (command.equals("deadline")) {
-                lst = doDeadline(word, lst);
+                doDeadline(word);
             }
             else if (command.equals("event")) {
-                lst = doEvent(word, lst);
+                doEvent(word);
             }
             else {
                 throw new NoMeaningException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -102,22 +109,20 @@ public class Duke {
         catch (NoMeaningException e){
             System.out.println(e.getMessage());
         }
-        return lst;
     }
 
-    private static List<Task> doToDo(String word, List<Task> lst) throws NoMeaningException {
+    private void doToDo(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(5);
             ToDo todo = new ToDo(realWord);
-            lst.add(todo);
-            doTaskFinally(todo, lst);
+            taskManager.add(todo);
+            doTaskFinally(todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        return lst;
     }
 
-    private static List<Task> doDeadline(String word, List<Task> lst) throws NoMeaningException {
+    private void doDeadline(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(9);
             String[] deadlineWords = realWord.split("/by");
@@ -130,13 +135,15 @@ public class Duke {
             Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
             lst.add(deadline);
             doTaskFinally(deadline, lst);
+            Deadline deadline = new Deadline(deadlineWord, deadlineTime);
+            taskManager.add(deadline);
+            doTaskFinally(deadline);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
-        return lst;
     }
 
-    private static List<Task> doEvent(String word, List<Task> lst) throws NoMeaningException {
+    private void doEvent(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(6);
             String[] eventWords = realWord.split("/at");
@@ -149,15 +156,17 @@ public class Duke {
             Event event = new Event(eventWord, eventDate, eventHour);
             lst.add(event);
             doTaskFinally(event, lst);
+            Event event = new Event(eventWord, eventTime);
+            taskManager.add(event);
+            doTaskFinally(event);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a event cannot be empty.");
         }
-        return lst;
     }
 
-    private static void doTaskFinally(Task task, List<Task> lst) {
+    private void doTaskFinally(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + lst.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskManager.size() + " tasks in the list.");
     }
 }
