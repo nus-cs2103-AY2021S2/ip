@@ -11,6 +11,8 @@ public abstract class Task {
         this.done = true;
     }
 
+    abstract String fileString();
+
     @Override
     public String toString() {
         if (this.done) {

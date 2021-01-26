@@ -1,8 +1,44 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
 public class Duke {
     private static ArrayList<Task> todoList;
+    private static void addToFile(Task task) {
+        File save = new File("./data/duke.txt");
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter(save, true);
+            fw.write(task.fileString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void deleteFromFile(int index) {
+        File save = new File("./data/duke.txt");
+    }
+    private static void loadData() throws IOException {
+        File save = new File("./data/duke.txt");
+        save.createNewFile();
+        Scanner sc = new Scanner(save);
+        while (sc.hasNext()) {
+            String taskString = sc.nextLine();
+            String[] taskArgsArray = taskString.split(" [|] ");
+            Task task;
+            if (taskArgsArray[0].equals("T")) {
+                task = new Todo(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2]);
+            } else if (taskArgsArray[0].equals("D")) {
+                task = new Deadline(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
+            } else {
+                task = new Event(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
+            }
+            todoList.add(task);
+        }
+        sc.close();
+    }
     private static void processCommand(String command) {
         String strippedCommand = command.strip();
         if (strippedCommand.equals("list")) {
@@ -31,6 +67,7 @@ public class Duke {
             } else {
                 Task newTask = new Todo(cmd);
                 todoList.add(newTask);
+                addToFile(newTask);
                 System.out.println("Added to to-do list: \n" + newTask);
             }
         } else if (strippedCommand.startsWith("deadline")) {
@@ -48,6 +85,7 @@ public class Duke {
                 } else {
                     Task newTask = new Deadline(split[0].strip(), split[1].strip());
                     todoList.add(newTask);
+                    addToFile(newTask);
                     System.out.println("Added to to-do list: \n" + newTask);
                 }
             }
@@ -66,6 +104,7 @@ public class Duke {
                 } else {
                     Task newTask = new Event(split[0].strip(), split[1].strip());
                     todoList.add(newTask);
+                    addToFile(newTask);
                     System.out.println("Added to to-do list: \n" + newTask);
                 }
             }
@@ -79,7 +118,13 @@ public class Duke {
     public static void main(String[] args) {
         todoList = new ArrayList<>();
         Scanner sc =  new Scanner(System.in);
-        System.out.println("Greetings. My name is I-01B, but you may call me DUKE. What can I assist you with?");
+        System.out.println("Greetings. My name is I-01B, but you may call me DUKE.");
+        try {
+            loadData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Saved data successfully loaded. What can I assist you with?");
         while (sc.hasNext()) {
             String command = sc.nextLine();
             if (command.equals("bye")) {
