@@ -10,7 +10,7 @@ import java.util.Scanner;
 public interface Storage {
     Path SAVE_PATH = Paths.get("data", "sweh.txt");
 
-    static File getFile() throws IOException{
+    static File getFile() throws IOException {
         File file = new File(SAVE_PATH.toString());
         (new File(SAVE_PATH.getParent().toString())).mkdir();
         file.createNewFile();
@@ -27,7 +27,7 @@ public interface Storage {
         File file = getFile();
         Scanner sc = new Scanner(file);
         StringBuilder output = new StringBuilder();
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             output.append(sc.nextLine());
         }
         sc.close();

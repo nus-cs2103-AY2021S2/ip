@@ -1,12 +1,13 @@
 import util.Formatter;
 import util.Ui;
 
-import static util.Parser.*;
-
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import static util.Parser.getArgMap;
+import static util.Parser.getCommand;
 
 public class Sweh {
     public static TaskList taskList = new TaskList();
@@ -15,7 +16,7 @@ public class Sweh {
         System.out.println(Ui.greeting());
 
         taskList.readFromDisk();
-        
+
         Scanner sc = new Scanner(System.in);
         while (true) {
             String cmd = sc.nextLine();

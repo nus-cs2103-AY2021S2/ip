@@ -10,7 +10,7 @@ public interface Formatter {
 
         String[] strArray = combined.split("\n");
         StringBuilder stringBuilder = new StringBuilder();
-        for (String s: strArray) {
+        for (String s : strArray) {
             stringBuilder.append("\t").append(s).append("\n");
         }
 
@@ -25,6 +25,6 @@ public interface Formatter {
     }
 
     static String formatList(List<String> strList) {
-        return formatList(strList.toArray(new String[] { }));
+        return formatList(strList.toArray(new String[]{}));
     }
 }
