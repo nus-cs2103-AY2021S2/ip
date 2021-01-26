@@ -1,18 +1,15 @@
 import java.util.Scanner;
 import java.util.List;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
 
     private Ui ui;
-    private File file;
+    private Storage storage;
     private List<Task> tasks;
 
     // Helper functions
@@ -33,26 +30,12 @@ public class Duke {
         return Integer.parseInt(args) - 1;
     }
 
-    public void writeToFile(Task task) throws IOException {
-        FileWriter fw = new FileWriter(file, true);
-        fw.write(task.toFileString());
-        fw.close();
-    }
-
     // Commands
     public void addTodo(Command command) throws IOException {
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
-        writeToFile(todo);
+        storage.writeToFile(todo);
         ui.addedTaskReply(todo, tasks.size());
-    }
-
-    public void addTodo(String[] parts) {
-        Task todo = new Todo(parts[2]);
-        if (parts[1].equals("X")) {
-            todo.markDone();
-        }
-        tasks.add(todo);
     }
 
     public void addDeadline(Command command) throws IOException, DateTimeParseException {
@@ -63,17 +46,9 @@ public class Duke {
         } else {
             Task deadline = new Deadline(parts[0], parts[1]);
             tasks.add(deadline);
-            writeToFile(deadline);
+            storage.writeToFile(deadline);
             ui.addedTaskReply(deadline, tasks.size());
         }
-    }
-
-    public void addDeadline(String[] parts) throws DateTimeParseException {
-        Task deadline = new Deadline(parts[2], parts[3]);
-        if (parts[1].equals("X")) {
-            deadline.markDone();
-        }
-        tasks.add(deadline);
     }
 
     public void addEvent(Command command) throws IOException {
@@ -84,28 +59,9 @@ public class Duke {
         } else {
             Task event = new Event(parts[0], parts[1]);
             tasks.add(event);
-            writeToFile(event);
+            storage.writeToFile(event);
             ui.addedTaskReply(event, tasks.size());
         }
-    }
-
-    public void addEvent(String[] parts) {
-        Task event = new Event(parts[2], parts[3]);
-        if (parts[1].equals("X")) {
-            event.markDone();
-        }
-        tasks.add(event);
-    }
-
-    public void updateFile() throws IOException {
-        StringBuffer buffer = new StringBuffer();
-        for (Task task : tasks) {
-            buffer.append(task.toFileString());
-        }
-
-        FileWriter fw = new FileWriter(file);
-        fw.write(buffer.toString());
-        fw.close();
     }
 
     public void done(Command command) throws IOException {
@@ -115,7 +71,7 @@ public class Duke {
             throw new TaskNotFoundException();
         } else {
             tasks.get(index).markDone();
-            updateFile();
+            storage.updateFile(tasks);
             ui.markDoneReply(tasks.get(index));
         }
     }
@@ -127,7 +83,7 @@ public class Duke {
             throw new TaskNotFoundException();
         } else {
             Task deletedTask = tasks.remove(index);
-            updateFile();
+            storage.updateFile(tasks);
             ui.deleteReply(deletedTask, tasks.size());
         }
     }
@@ -172,53 +128,15 @@ public class Duke {
         return true;
     }
 
-    public void readFromFile(String input) {
-        String[] parts = Arrays.stream(input.split("\\|"))
-            .map(String::trim)
-            .toArray(String[]::new);
-
-        try {
-            switch (parts[0]) {
-            case Command.TODO:
-                addTodo(parts);
-                break;
-            case Command.EVENT:
-                addEvent(parts);
-                break;
-            case Command.DEADLINE:
-                addDeadline(parts);
-                break;
-            default:
-                throw new UnknownCommandException();
-            }
-        } catch (UnknownCommandException exception) {
-            ui.reply(ui.formatLine(exception.getMessage()));
-        } catch (DateTimeParseException exception) {
-            ui.reply(ui.formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
-        }
-    }
-
     public Duke() throws IOException {
         tasks = new ArrayList<>();
         ui = new Ui();
-
-        File dir = new File(DIR_NAME);
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-
-        file = new File(DIR_NAME + "/" + FILE_NAME);
-        if (!file.createNewFile()) {
-            Scanner fileSc = new Scanner(file);
-            while (fileSc.hasNextLine()) {
-                readFromFile(fileSc.nextLine());
-            }
-            fileSc.close();
-        }
-
+        storage = new Storage(DIR_NAME, FILE_NAME);
+    
+        storage.readFromFile(tasks, ui);
         ui.greet();
-        Scanner sc = new Scanner(System.in);
 
+        Scanner sc = new Scanner(System.in);
         while (readInput(sc));
     }
 
