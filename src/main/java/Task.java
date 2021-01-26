@@ -1,6 +1,6 @@
 public class Task {
     protected final String task;
-    private final boolean done;
+    protected final boolean done;
 
     Task(String task) {
         this.task = task;
@@ -15,6 +15,13 @@ public class Task {
     public Task finishTask() {
         System.out.println("Nice! I've marked this task as done: ");
         return new Task(this.task, true);
+    }
+
+    public String saveString() {
+        if (this.done) {
+            return "1|" + this.task;
+        }
+        return "0|" + this.task;
     }
 
     @Override
