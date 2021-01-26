@@ -4,6 +4,10 @@ public class Vergil {
     private Parser parser;
     private TaskList taskList;
 
+    /**
+     * Constructs a Vergil object with a specified save file path.
+     * @param filePath the path to the save file.
+     */
     public Vergil(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -16,6 +20,10 @@ public class Vergil {
         }
     }
 
+    /**
+     * Runs the Vergil chatbot system, making use of the Ui, Storage, Parser,
+     * and TaskList objects.
+     */
     public void run() {
         boolean hasFinished = false;
         Command cmd;
