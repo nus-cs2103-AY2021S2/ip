@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 import java.io.*;
 
@@ -19,18 +20,26 @@ public class Duke {
                     int mid = data.indexOf("|");
                     String name;
                     String date = null;
+                    int year = -999;
+                    int mon = -999;
+                    int day = -999;
                     if(mid > 0) {
                         name = data.substring(0, mid-1);
                         date = data.substring(mid+2);
+                        year = Integer.valueOf(date.substring(0, 4));
+                        mon = Integer.valueOf(date.substring(5, 7));
+                        day = Integer.valueOf(date.substring(8));
                     } else {
                         name = data;
                     }
                     if(type == 'T') {
                         tasks.add(new ToDo(name, done));
                     } else if(type == 'D') {
-                        tasks.add(new Deadline(name, date, done));
+                        LocalDate d = LocalDate.of(year, mon, day);
+                        tasks.add(new Deadline(name, d, done));
                     } else if(type == 'E') {
-                        tasks.add(new Event(name, date, done));
+                        LocalDate d = LocalDate.of(year, mon, day);
+                        tasks.add(new Event(name, d, done));
                     }
 
                 }
@@ -125,7 +134,12 @@ public class Duke {
                     int iend = commands.indexOf("/");
                     String subString1= commands.substring(iend1+1 , iend-1);
                     String subString2= commands.substring(iend+4);
-                    tasks.add(new Deadline(subString1, subString2));
+                    System.out.println(subString1);
+                    System.out.println(subString2);
+                    int year = Integer.valueOf(subString2.substring(0, 4));
+                    int mon = Integer.valueOf(subString2.substring(5, 7));
+                    int day = Integer.valueOf(subString2.substring(8));
+                    tasks.add(new Deadline(subString1, LocalDate.of(year, mon, day)));
                     tasks.get(tasks.size()-1).addTask(tasks.size());
                     BufferedWriter writer = new BufferedWriter(
                             new FileWriter("data/duke.txt", true));
@@ -139,7 +153,7 @@ public class Duke {
                 }
                 catch(StringIndexOutOfBoundsException e){
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The due date of a deadline cannot be empty. (Format: /by + date)");
+                    System.out.println("     ☹ OOPS!!! The due date of a deadline cannot be empty. (Format: /by + date[YYYY-MM-DD])");
                     System.out.println("    ____________________________________________________________");
                 }
             } else if(commands.split(" ")[0].equals("event")) {
@@ -148,7 +162,10 @@ public class Duke {
                     int iend = commands.indexOf("/");
                     String subString1= commands.substring(iend1+1 , iend-1);
                     String subString2= commands.substring(iend+4);
-                    tasks.add(new Event(subString1, subString2));
+                    int year = Integer.valueOf(subString2.substring(0, 4));
+                    int mon = Integer.valueOf(subString2.substring(5, 7));
+                    int day = Integer.valueOf(subString2.substring(8));
+                    tasks.add(new Event(subString1, LocalDate.of(year, mon, day)));
                     tasks.get(tasks.size()-1).addTask(tasks.size());
                     BufferedWriter writer = new BufferedWriter(
                             new FileWriter("data/duke.txt", true));
@@ -161,7 +178,7 @@ public class Duke {
                 }
                 catch(StringIndexOutOfBoundsException e){
                     System.out.println("    ____________________________________________________________");
-                    System.out.println("     ☹ OOPS!!! The start and end date of an event cannot be empty.(Format: /at + duration)");
+                    System.out.println("     ☹ OOPS!!! The start and end date of an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])");
                     System.out.println("    ____________________________________________________________");
                 }
             } else if(commands.split(" ")[0].equals("delete")) {

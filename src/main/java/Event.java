@@ -1,12 +1,14 @@
-public class Event extends Task{
-    protected String at;
+import java.time.LocalDate;
 
-    public Event(String name, String at) {
+public class Event extends Task{
+    protected LocalDate at;
+
+    public Event(String name, LocalDate at) {
         super(name);
         this.at = at;
     }
 
-    public Event(String name, String at, boolean done) {
+    public Event(String name, LocalDate at, boolean done) {
         super(name);
         this.at = at;
         this.done = done;
@@ -23,7 +25,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at.getMonth() + " " + at.getDayOfMonth() + " " + at.getYear() + ")";
     }
 }
 
