@@ -16,7 +16,7 @@ public class Duke {
 
     private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
     public static void main(String[] args)  {
         try {
