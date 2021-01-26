@@ -57,6 +57,22 @@ public class Bot {
             }
             return message;
         }
+        if (input.matches("^delete \\d+$")) {
+            int taskNo = Integer.parseInt(input.replaceFirst("delete ", "")) - 1;
+
+            // Check if in memory
+            if (taskNo > memory.size() - 1) {
+                return formatMessage("Unable to remove item!");
+            }
+
+            // Mark complete
+            Task task = memory.remove(taskNo);
+
+            String message = formatMessage("Noted, I have removed this task.");
+            message += "\n" + task;
+            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+            return message;
+        }
         if (input.matches("^done \\d+$")) {
             int taskNo = Integer.parseInt(input.substring(5)) - 1;
 
@@ -71,6 +87,7 @@ public class Bot {
 
             String message = formatMessage("Nice, I've marked the task as done!");
             message += "\n" + task;
+            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
             return message;
         }
         if (input.startsWith("todo")) {
@@ -96,6 +113,8 @@ public class Bot {
                 message += "\n" + task;
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
+            } else {
+                throw new BotException(this, "The description of a deadline cannot be empty!");
             }
         }
         if (input.startsWith("event")) {
@@ -108,6 +127,8 @@ public class Bot {
                 message += "\n" + task;
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
+            } else {
+                throw new BotException(this, "The description of an event cannot be empty!");
             }
         }
 
