@@ -5,7 +5,7 @@ import lihua.commands.*;
 public class Messages {
     public static final String MESSAGE_HELLO =
             "Hello! My name is Lihua.\n" +
-                    "What can I do for you today? (=~ω~=)";
+                    "What can I do for you today? (=V=)";
     public static final String MESSAGE_GET_HELP =
             "Sorry, I do not understand your command :')\n" +
                     "If you are stuck, type 'help' to get a list of operations available.";
@@ -13,7 +13,7 @@ public class Messages {
             "-------------------------------------------------";
     public static final String MESSAGE_INFORM_EXIT =
             "Exiting Lihua as requested...\n" +
-                    "Goodbye! Hope to see you again soon! (=~ω~=)";
+                    "Goodbye! Hope to see you again soon! (=V=)";
     public static final String MESSAGE_REPORTING_ADDING_FAILURE =
             "Sorry, the task adding failed. :( Please check your storage devices.";
     public static final String MESSAGE_VIEW_COMMANDS =
