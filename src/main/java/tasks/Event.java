@@ -14,13 +14,13 @@ public class Event extends Task {
         this.taskType = "Event";
     }
 
-    public Event(String description, Boolean isDone, String at) {
+    public Event(String description, Boolean isDone, LocalDate at) {
         super(description, isDone);
         this.at = at;
         this.taskType = "Event";
     }
 
-    public String getAt() {
+    public LocalDate getAt() {
         return this.at;
     }
 

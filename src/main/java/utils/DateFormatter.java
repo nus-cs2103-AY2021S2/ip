@@ -20,4 +20,11 @@ public class DateFormatter {
     public static String decodeDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
+
+    public static String decodeDateForStorage(LocalDate date) {
+        String dateVal = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        dateVal.trim();
+        dateVal.replace(" ", "-");
+        return dateVal;
+    }
 }

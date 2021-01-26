@@ -13,13 +13,13 @@ public class Deadline extends Task {
         this.taskType = "Deadline";
     }
 
-    public Deadline(String description, Boolean isDone, String by) {
+    public Deadline(String description, Boolean isDone, LocalDate by) {
         super(description, isDone);
         this.by = by;
         this.taskType = "Deadline";
     }
 
-    public String getBy() {
+    public LocalDate getBy() {
         return this.by;
     }
 

@@ -5,6 +5,7 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+import utils.DateFormatter;
 import utils.Formatter;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -67,6 +69,7 @@ public class StorageHandler {
         String taskDescription;
         Boolean isTaskDone;
         Task task;
+        LocalDate date;
 
         try {
             typeOfTask = lineArr[0];
@@ -91,16 +94,18 @@ public class StorageHandler {
         case "D":
             try {
                 String by = lineArr[3];
-                task = new Deadline(taskDescription, isTaskDone, by);
-            } catch (IndexOutOfBoundsException e) {
+                date = DateFormatter.encodeDate(by);
+                task = new Deadline(taskDescription, isTaskDone, date);
+            } catch (IndexOutOfBoundsException | DukeException e) {
                 throw new DukeException("Failed to read from saved file!");
             }
             return task;
         case "E":
             try {
                 String at = lineArr[3];
-                task = new Event(taskDescription, isTaskDone, at);
-            } catch (IndexOutOfBoundsException e) {
+                date = DateFormatter.encodeDate(at);
+                task = new Event(taskDescription, isTaskDone, date);
+            } catch (IndexOutOfBoundsException | DukeException e) {
                 throw new DukeException("Failed to read from saved file!");
             }
             return task;
@@ -124,6 +129,7 @@ public class StorageHandler {
 
     private String formatTask(Task task) throws DukeException {
         String line;
+        LocalDate date;
         String description = task.getDescription();
         int isDone;
 
@@ -138,10 +144,12 @@ public class StorageHandler {
         if (task.getTaskType().equals("Todo")) {
             line = String.format("T | %d | %s", isDone, description);
         } else if (task.getTaskType().equals("Deadline")) {
-            String by = ((Deadline) task).getBy();
+            date = ((Deadline) task).getBy();
+            String by = DateFormatter.decodeDateForStorage(date);
             line = String.format("D | %d | %s | %s", isDone, description, by);
         } else if (task.getTaskType().equals("Event")) {
-            String at = ((Event) task).getAt();
+            date = ((Event) task).getAt();
+            String at = DateFormatter.decodeDateForStorage(date);
             line = String.format("E | %d | %s | %s", isDone, description, at);
         } else {
             throw new DukeException("Task type unknown, could not write to file!");
