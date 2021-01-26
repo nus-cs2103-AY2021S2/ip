@@ -75,7 +75,10 @@ public class Ui {
                 "load",
                 "  - Load previously saved checklist",
                 "help",
-                "  - Display list of commands"));
+                "  - Display list of commands",
+                "search [keyword]",
+                "  - Display all task containing the following keyword.",
+                "  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date."));
     }
 
     public void displayError(DukeException e) {
@@ -87,11 +90,15 @@ public class Ui {
     }
 
     public void displayList(List<String> lst) {
-        System.out.println(BORDER_LINE);
-        echoSingle("Here are the tasks in your list:");
-        echo(lst);
-        System.out.println(BORDER_LINE);
-        System.out.println();
+        if (lst.size() == 0) {
+            echoSingleBorder("No task found!");
+        } else {
+            System.out.println(BORDER_LINE);
+            echoSingle("Here are the tasks in your list:");
+            echo(lst);
+            System.out.println(BORDER_LINE);
+            System.out.println();
+        }
     }
 
     public void completeTask(String task) {

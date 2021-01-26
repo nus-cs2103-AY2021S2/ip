@@ -33,6 +33,10 @@ public abstract class Task {
         return isDone ? "X" : " ";
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatus(), description);

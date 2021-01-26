@@ -23,6 +23,10 @@
  *   - Load previously saved checklist
  * <p>help
  *   - Display list of commands
+ * <p>
+ * search [keyword/date]
+ * <p>  - Display all task containing the following keyword.
+ * <p>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
  */
 public class Duke {
 
@@ -99,6 +103,10 @@ public class Duke {
                     break;
                 case "help":
                     ui.help();
+                    break;
+                case "search":
+                    ui.displayList(tasks.search(args));
+                    break;
                 } 
             } catch (DukeException e) {
                 ui.displayError(e);

@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Wrapper class for Checklist
@@ -43,13 +44,15 @@ public class TaskList {
         return t;
     }
 
-    public List<Task> retrieveByDate(LocalDate d) {
-        List<Task> results = new ArrayList<>();
-        for (Task t : lst) {
-            if (d.equals(t.date)) {
-                results.add(t);
+    public List<String> searchByDate(LocalDate d) {
+        List<String> results = new ArrayList<>();
+
+        for (int i = 0; i < lst.size(); i++) {
+            if (d.equals(lst.get(i).date)) {
+                results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
             }
         }
+
         return results;
     }
 
@@ -68,6 +71,24 @@ public class TaskList {
 
     public List<Task> toList() {
         return new ArrayList<>(lst);
+    }
+
+    public List<String> search(String keyword) {
+        try {
+            LocalDate date = LocalDate.parse(keyword);
+            return searchByDate(date);
+        } catch (DateTimeParseException e) {
+
+            List<String> results = new ArrayList<>();
+
+            for (int i = 0; i < lst.size(); i++) {
+                if (lst.get(i).getDescription().contains(keyword)) {
+                    results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
+                }
+            }
+    
+            return results;
+        }
     }
     
 }
