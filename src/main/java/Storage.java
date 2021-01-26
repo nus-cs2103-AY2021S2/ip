@@ -34,7 +34,7 @@ public class Storage {
         }
     }
 
-    public void write(List<Task> taskList) {
+    public void write(TaskList taskList) {
         File tasks = new File(filePath);
         System.out.println("10");
         try {

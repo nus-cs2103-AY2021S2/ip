@@ -35,7 +35,6 @@ public class Duke {
                 description = s.nextLine();
             }
         }
-        storage.write(tasks);
         try {
             manageTask(description);
         } catch (DukeException e) {
