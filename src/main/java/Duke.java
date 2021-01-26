@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 
 public class Duke {
     public static String tab = "     ";
@@ -52,7 +53,8 @@ public class Duke {
                         String task = inputArr[0];
 
                         String scannedInput = inputArr[1];
-                        String description, date;
+                        String description;
+                        LocalDate date;
                         int taskIndex;
 
                         switch (task) {
@@ -90,9 +92,9 @@ public class Duke {
                                 printNumTasks();
                                 break;
                             case "deadline":
-                                String[] arrOfInputD = scannedInput.split("/by");
+                                String[] arrOfInputD = scannedInput.split("/by ");
                                 description = arrOfInputD[0];
-                                date = arrOfInputD[1];
+                                date = LocalDate.parse(arrOfInputD[1]);
                                 Deadlines deadline = new Deadlines(description, date);
                                 tasks.add(deadline);
                                 printAdd(numTasks);
@@ -102,9 +104,9 @@ public class Duke {
                                 printNumTasks();
                                 break;
                             case "event":
-                                String[] arrOfInputE = scannedInput.split("/at");
+                                String[] arrOfInputE = scannedInput.split("/at ");
                                 description = arrOfInputE[0];
-                                date = arrOfInputE[1];
+                                date = LocalDate.parse(arrOfInputE[1]);
                                 Events event = new Events(description, date);
                                 tasks.add(event);
                                 printAdd(numTasks);
