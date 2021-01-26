@@ -62,13 +62,19 @@ public class TaskList {
     }
 
     /**
-     * Displays list by iterating through the list members.
+     * Returns the tasks in the list that matches the keyword argument.
+     *
+     * @param keyword the keyword to search for a Task.
+     * @return a List<Task> containing all matching tasks.
      */
-    void displayList() {
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 1; i <= listSize; i++) {
-            System.out.printf("    %d.%s\n", i, list.get(i - 1));
+    List<Task> searchTask(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+
+        for (Task t : list) {
+            if(t.name.contains(keyword)) {
+                matchingTasks.add(t);
+            }
         }
+        return matchingTasks;
     }
-    
 }
