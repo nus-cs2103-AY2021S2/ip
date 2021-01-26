@@ -205,13 +205,20 @@ public class Vergil {
                 String[] taskDetails = scan.nextLine().split("::");
                 switch (taskDetails[0]) {
                 case "t":
-                    tasks.add(new Todo(taskDetails[1], Boolean.parseBoolean(taskDetails[2])));
+                    tasks.add(new Todo(
+                            taskDetails[1],
+                            Boolean.parseBoolean(taskDetails[2])));
                     break;
                 case "d":
-                    tasks.add(new Deadline(taskDetails[1], taskDetails[3], Boolean.parseBoolean(taskDetails[2])));
+                    tasks.add(new Deadline(
+                            taskDetails[1],
+                            LocalDateTime.parse(taskDetails[3]),
+                            Boolean.parseBoolean(taskDetails[2])));
                     break;
                 case "e":
-                    tasks.add(new Event(taskDetails[1], taskDetails[3], Boolean.parseBoolean(taskDetails[2])));
+                    tasks.add(new Event(taskDetails[1],
+                            LocalDateTime.parse(taskDetails[3]),
+                            Boolean.parseBoolean(taskDetails[2])));
                     break;
                 }
             }
