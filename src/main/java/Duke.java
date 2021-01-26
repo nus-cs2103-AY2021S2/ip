@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 import duke.common.DukeBot;
 
+/**
+ * Duke is a chatbot that manages your tasks with persistent storage.
+ */
 public class Duke {
     /**
      * The entry point for the Duke chatbot.

@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * A utility class that consolidates strings used by Duke.
+ */
 public final class DukeString {
     public static final String SEPARATOR = "--------------------------------------";
     public static final String SEPARATOR_ERR = "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";

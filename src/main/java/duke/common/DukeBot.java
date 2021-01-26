@@ -8,6 +8,9 @@ import duke.interaction.Storage;
 import duke.interaction.Ui;
 import duke.task.TaskList;
 
+/**
+ * Instance of duke that keeps track of the current state.
+ */
 public class DukeBot {
     private final Scanner scanner;
     private final Parser parser;
