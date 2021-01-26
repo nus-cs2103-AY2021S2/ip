@@ -8,21 +8,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage to save session.
- * <p> Default path is "data/dukeData.txt" if unstated.
+ * Storage to save tasklist to a text file.
+ * <p>
+ * Default path is "data/dukeData.txt".
  */
 public class Storage {
     private File file;
     private static final String DEFAULT_PATH = "data/dukeData.txt";
 
+    /**
+     * Create storage with default path "data/dukeData.txt".
+     */
     public Storage() {
         file = new File(DEFAULT_PATH);
     }
 
+    /**
+     * Create storage with custom path.
+     */
     public Storage(String path) {
         file = new File(path);
     }
 
+    /**
+     * Save tasklist to a text file.
+     * @param taskList Current tasklist.
+     * @throws DukeException If the file is invalid or cannot be open for any reason.
+     */
     public void saveTaskList(List<Task> taskList) throws DukeException {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
@@ -43,7 +55,7 @@ public class Storage {
 
 
     /**
-     * Reads and returns checklist
+     * Reads and returns tasklist from a text file.
      * @return List of tasks
      */
     public List<Task> loadTaskList() throws DukeException {

@@ -2,11 +2,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parser checks if input is valid.
+ * Parser checks for invalid input.
  */
 public class Parser {
 
-
+    /**
+     * Checks if input from user is valid.
+     * <p>
+     * Only accepts valid commands, followed by valid parameters.
+     * @param input Input from user.
+     * @throws DukeInputException If input is invalid.
+     */
     public static void parseInput(String input) throws DukeInputException {
         String[] s = input.split(" ", 2);
         String command = s[0];
@@ -44,6 +50,11 @@ public class Parser {
         } 
     }
 
+    /**
+     * Checks if input from text file is valid.
+     * @param input Line from saved file.
+     * @throws DukeInputException If input is invalid.
+     */
     public static void checkImportFormat(String input) throws DukeInputException {
         String[] s = input.split(";",3);
         if (s.length == 3 && (s[1].equals("0") || s[1].equals("1"))) {

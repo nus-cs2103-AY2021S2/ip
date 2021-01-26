@@ -1,27 +1,36 @@
 /**
  * Duke is a task manager.
- * 
- * <p>Currently supports these functionalities:
- * 
- * <p>bye 
+ * <p>
+ * Currently supports these functionalities:
+ * <p>
+ * bye 
  *   - Close Duke
- * <p>list
+ * <p>
+ * list
  *   - List out all task
- * <p>done [number]
+ * <p>
+ * done [number]
  *   - Mark selected task as done
- * <p>todo [description]
+ * <p>
+ * todo [description]
  *   - Add a todo task
- * <p>deadline [description] /by [due date]
+ * <p>
+ * deadline [description] /by [due date]
  *   - Add a deadline task with a due date (YYYY-MM-DD)
- * <p>event [description] /at [date]
+ * <p>
+ * event [description] /at [date]
  *   - Add a event task with a date (YYYY-MM-DD)
- * <p>delete [number]
+ * <p>
+ * delete [number]
  *   - Delete a task
- * <p>save
+ * <p>
+ * save
  *   - save checklist to "data/dukeData.txt"
- * <p>load
+ * <p>
+ * load
  *   - Load previously saved checklist
- * <p>help
+ * <p>
+ * help
  *   - Display list of commands
  */
 public class Duke {
@@ -46,7 +55,7 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke bot
+     * Starts the Duke bot.
      */
     public void start() {
         ui.greetings();
@@ -106,7 +115,7 @@ public class Duke {
         }
     }
 
-    private void completeTask(String num) throws DukeException {
+    private void completeTask(String num) throws DukeInputException {
         int taskNum = Integer.parseInt(num);
         Task t = tasks.completeTask(taskNum - 1);
         ui.completeTask(t.toString());
@@ -117,7 +126,7 @@ public class Duke {
         ui.addTask(t.toString(), tasks.size());
     }
 
-    private void deleteTask(String num) throws DukeException {
+    private void deleteTask(String num) throws DukeInputException {
         int taskNum = Integer.parseInt(num);
         Task t = tasks.deleteTask(taskNum - 1);
         ui.deleteTask(t.toString(), tasks.size());

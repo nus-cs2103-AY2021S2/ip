@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.List;
 
 /**
- * List of all responses
+ * Ui interacts with users to receive input and display output.
  */
 public class Ui {
 
@@ -18,6 +18,10 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads input from user.
+     * @return String input.
+     */
     public String readInput() {
         return sc.nextLine();
     }
@@ -46,14 +50,19 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Displays greeting messages when Duke starts.
+     */
     public void greetings() {
         System.out.println(LOGO);
         echoBorder(List.of("Hello! I'm Duke",
                 "What can I do for you?",
-                "Enter \"load\" to restore previously saved checklist.",
                 "Enter \"help\" to see list of commands."));
     }
 
+    /**
+     * Lists out commands and their functions.
+     */
     public void help() {
         echoBorder(List.of("List of commands:",
                 "bye",
@@ -78,14 +87,25 @@ public class Ui {
                 "  - Display list of commands"));
     }
 
+    /**
+     * Displays error messages.
+     * @param e Error to be displayed.
+     */
     public void displayError(DukeException e) {
         echoSingleBorder(e.getMessage());
     }
 
+    /**
+     * Displays goodbye message.
+     */
     public void exit() {
         echoSingleBorder("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays list contents.
+     * @param lst List to be displayed.
+     */
     public void displayList(List<String> lst) {
         System.out.println(BORDER_LINE);
         echoSingle("Here are the tasks in your list:");
@@ -94,26 +114,46 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * Displays message after task is marked as done.
+     * @param task Task  marked as done.
+     */
     public void completeTask(String task) {
         echoBorder(List.of("Nice! I've marked this task as done:", task));
     }
 
+    /**
+     * Displays added task and the current number of task in the TaskList.
+     * @param task Task added to TaskList.
+     * @param size Current size of TaskList.
+     */
     public void addTask(String task, int size) {
         echoBorder(List.of("Got it. I've added this task:",
                 task,
                 "Now you have " + size + " tasks in the list."));
     }
 
+    /**
+     * Displays deleted task and the current number of task in the TaskList.
+     * @param task Task deleted from TaskList.
+     * @param size Current size of TaskList.
+     */
     public void deleteTask(String task, int size) {
         echoBorder(List.of("Noted. I've removed this task:",
                 task,
                 "Now you have " + size + " tasks in the list."));
     }
 
+    /**
+     * Displays messages after TaskList has been saved.
+     */
     public void saved() {
         echoSingleBorder("TaskList have been saved!");
     }
 
+    /**
+     * Displays messages after TaskList has been loaded.
+     */
     public void loaded() {
         echoSingleBorder("TaskList loaded successfully!");
     }

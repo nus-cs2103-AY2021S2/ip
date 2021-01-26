@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an deadline task.
- * Has a due date.
  */
 public class Deadline extends Task {
 
@@ -16,21 +15,21 @@ public class Deadline extends Task {
      * Factory method for creating deadline task.
      * @param input Description of the task and its due date.
      * Due date should be indicated after "/by".
-     * @return A deadline task
-     * @throws DukeException if due date is missing
+     * @return A deadline task.
+     * @throws DukeInputException If due date is missing.
      */
-    public static Deadline createDeadline(String input) throws DukeException {
+    public static Deadline createDeadline(String input) throws DukeInputException {
         String[] details = input.split(" /by ");
 
         if (!input.contains("/by") || details.length == 1) {
-            throw new DukeException("Due date is missing!");
+            throw new DukeInputException("Due date is missing!");
         }
 
         LocalDate date;
         try {
             date = LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Wrong date format! Please use YYYY-MM-DD");
+            throw new DukeInputException("Wrong date format! Please use YYYY-MM-DD");
         }
 
         return new Deadline(details[0], date);
