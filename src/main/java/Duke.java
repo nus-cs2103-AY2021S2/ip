@@ -8,7 +8,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("   Hello there! I'm Duke, always here for you!");
+        System.out.println("   Hello there! I'm Rawrz, always here for you!");
         System.out.println("   How can I help you today?");
 
         ArrayList<Task> arrL = new ArrayList<>();
@@ -84,7 +84,7 @@ public class Duke {
                 input = sc.nextLine();
             }
         }
-        System.out.println("___\n   Bye! Hope to see you again! :)\n___\n");
+        System.out.println("___\n   Bye! Hope to see you again! Rawr! :)\n___\n");
     }
 
     void checkCommand(String input, String command, int index, int counter) throws DukeException {
