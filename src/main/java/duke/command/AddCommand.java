@@ -1,6 +1,10 @@
-package duke;
+package duke.command;
 
-public class AddCommand extends Command{
+import duke.*;
+import duke.task.Task;
+import duke.task.TaskList;
+
+public class AddCommand extends Command {
 
     private Task task;
 

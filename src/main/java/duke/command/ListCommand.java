@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.*;
+import duke.task.TaskList;
 
 public class ListCommand extends Command{
     private String date;

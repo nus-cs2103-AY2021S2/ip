@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,11 +7,11 @@ import java.util.List;
 public class TaskList {
     private List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = new ArrayList<>(taskList);
     }
 
