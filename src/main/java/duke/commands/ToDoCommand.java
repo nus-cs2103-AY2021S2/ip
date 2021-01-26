@@ -7,6 +7,7 @@ import duke.utils.Ui;
 
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
+
     private String todo;
 
     public ToDoCommand(TaskList taskList, Ui ui, Storage storage, String todo) {

@@ -6,6 +6,7 @@ import duke.utils.Ui;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+
     private int position;
 
     public DeleteCommand(TaskList taskList, Ui ui, Storage storage, int position) {

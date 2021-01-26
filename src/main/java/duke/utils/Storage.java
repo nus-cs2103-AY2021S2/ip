@@ -13,9 +13,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private Scanner scannerFile;
-    private String filepath;
-    private Ui ui;
+    private final String filepath;
+    private final Ui ui;
 
     public Storage(String filepath, Ui ui) {
         this.filepath = filepath;
@@ -31,14 +30,16 @@ public class Storage {
     public TaskList loadFromFile() {
         try {
             File file = new File(filepath);
+
             List<String> txt = new ArrayList<>();
             if (file.exists()) {
-                this.scannerFile = new Scanner(file);
-                while (this.scannerFile.hasNextLine()) {
-                    txt.add(this.scannerFile.nextLine());
+                Scanner scannerFile = new Scanner(file);
+                while (scannerFile.hasNextLine()) {
+                    txt.add(scannerFile.nextLine());
                 }
-                this.scannerFile.close();
+                scannerFile.close();
             }
+
             if (txt.size() == 0) {
                 this.emptyFile();
                 return new TaskList();
@@ -67,11 +68,13 @@ public class Storage {
     public void writeToFile(TaskList taskList) throws IOException {
         List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
         FileWriter fw = new FileWriter(this.filepath);
-        String text = "";
+
+        StringBuilder text = new StringBuilder();
         for (String s : allStringTasks) {
-            text += s + "\n";
+            text.append(s).append("\n");
         }
-        fw.write(text);
+
+        fw.write(text.toString());
         fw.close();
     }
 

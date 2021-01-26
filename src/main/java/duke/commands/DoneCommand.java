@@ -6,6 +6,7 @@ import duke.utils.Ui;
 
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
+
     private int position;
 
     public DoneCommand(TaskList taskList, Ui ui, Storage storage, int position) {

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
+
     private String task;
     private LocalDateTime dateTime;
 
