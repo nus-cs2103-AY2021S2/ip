@@ -1,7 +1,10 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 
 
 public class Duke {
@@ -167,7 +170,8 @@ public class Duke {
                     throw new InvalidDeadlineException(deadline);
                 } else {
                     String taskTime = taskSegments[taskSegments.length - 1];
-                    Deadline myTask = new Deadline(taskContent, taskTime);
+                    LocalDate t = LocalDate.parse(taskTime);
+                    Deadline myTask = new Deadline(taskContent, t);
                     taskList.add(myTask);
 
                     System.out.println("____________________________________________________________\n"
@@ -192,7 +196,8 @@ public class Duke {
                     throw new InvalidEventException(event);
                 } else {
                     String taskTime = taskSegments[taskSegments.length - 1];
-                    Event myTask = new Event(taskContent, taskTime);
+                    LocalDateTime t = LocalDateTime.parse(taskTime);
+                    Event myTask = new Event(taskContent, t);
                     taskList.add(myTask);
 
                     System.out.println("____________________________________________________________\n"

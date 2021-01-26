@@ -1,16 +1,21 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 class Deadline extends Task {
     protected boolean isDone;
-    protected String time;
+    protected LocalDate time;
     protected final static String type = "[D]";
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, LocalDate time) {
         super(description);
         this.isDone = false;
         this.time = time;
     }
 
     public String getTime() {
-        return this.time;
+        return this.time.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
