@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    static final String lineAfterCommand = "____________________________________________________________";
+    static final String LINE_AFTER_COMMAND = "____________________________________________________________";
 
     private Storage storage;
     private List<Task> tasks;
@@ -35,15 +35,16 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
-        System.out.println(lineAfterCommand + "\nHello! I'm  Duke");
-        System.out.println("What can I do for you?\n" + lineAfterCommand + "\n");
+        System.out.println(LINE_AFTER_COMMAND + "\nHello! I'm  Duke");
+        System.out.println("What can I do for you?\n" + LINE_AFTER_COMMAND + "\n");
+
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
             if (command.equals("bye")){
                 doBye();
                 break;
             }
-            System.out.println(lineAfterCommand);
+            System.out.println(LINE_AFTER_COMMAND);
             String[] inputs = command.split(" ");
             try {
                 if (command.equals("list")) {
@@ -60,61 +61,73 @@ public class Duke {
                     tasks.add(task);
                     System.out.println("  " + task);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-                    System.out.println(lineAfterCommand + "\n");
+                    System.out.println(LINE_AFTER_COMMAND + "\n");
                 }
             }
             catch (DukeException e) {
                 System.out.println(e.getMessage());
-                System.out.println(lineAfterCommand + "\n");
+                System.out.println(LINE_AFTER_COMMAND + "\n");
+                continue;
+            }
+            catch (DukeExceptionDeadline e) {
+                System.out.println(e.getMessage());
+                System.out.println(LINE_AFTER_COMMAND + "\n");
                 continue;
             }
             try {
                 storage.writeFile(tasks);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+                System.out.println(LINE_AFTER_COMMAND + "\n");
             }
         }
     }
 
     public static void doBye() {
-        System.out.println(lineAfterCommand + "\nBye. Hope to see you again soon!\n" + lineAfterCommand + "\n");
+        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n" + LINE_AFTER_COMMAND + "\n");
     }
 
     public static void iterateList(List<Task> tasks) {
         if (tasks.size() == 0) {
             System.out.println("There are no task in your list");
-            System.out.println(lineAfterCommand + "\n");
+            System.out.println(LINE_AFTER_COMMAND + "\n");
             return;
         }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(String.valueOf(i + 1) + "." + tasks.get(i));
         }
-        System.out.println(lineAfterCommand + "\n");
+        System.out.println(LINE_AFTER_COMMAND + "\n");
     }
 
-    public static Task processTask(String command, String input) throws DukeException {
-        Task task;
-        if (command.equals("todo")) {
-            if (input.length() <= 5) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+    public static Task processTask(String command, String input) throws DukeException, DukeExceptionDeadline {
+        Task task = new Task("");
+        try {
+            if (command.equals("todo")) {
+                if (input.substring(5).equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                task = new Todo(input.substring(5));
+                return task;
+            } else if (command.equals("deadline")) {
+                if (input.substring(9).equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                String[] spliced = input.substring(9).split(" /by ");
+                System.out.println(spliced[0]);
+                System.out.println(spliced[1]);
+                task = new Deadline(spliced[0], spliced[1]);
+                return task;
+            } else if (command.equals("event")) {
+                if (input.substring(6).equals("")) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                String[] spliced = input.substring(6).split(" /at ");
+                task = new Event(spliced[0], spliced[1]);
+                return task;
             }
-            task = new Todo(input.substring(5));
-            return task;
-        } else if (command.equals("deadline")) {
-            if (input.length() <= 9) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            String[] spliced = input.substring(9).split("/");
-            task = new Deadline(spliced[0], spliced[1]);
-            return task;
-        } else if (command.equals("event")) {
-            if (input.length() <= 6) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-            }
-            String[] spliced = input.substring(6).split("/");
-            task = new Event(spliced[0], spliced[1]);
-            return task;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the input is kinda faulty :-(");
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
@@ -124,7 +137,7 @@ public class Duke {
             int index = Integer.parseInt(inputs[1]) - 1;
             tasks.set(index, tasks.get(index).finishTask());
             System.out.println("  " + tasks.get(index));
-            System.out.println(lineAfterCommand + "\n");
+            System.out.println(LINE_AFTER_COMMAND + "\n");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The index of done cannot be empty.");
         }
@@ -141,7 +154,7 @@ public class Duke {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + deleted);
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            System.out.println(lineAfterCommand + "\n");
+            System.out.println(LINE_AFTER_COMMAND + "\n");
         }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The index of delete cannot be empty.");

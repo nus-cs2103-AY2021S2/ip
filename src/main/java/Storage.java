@@ -19,7 +19,11 @@ public class Storage {
             return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
         }
         else if (type.equals("D")) {
-            return bool.equals("1") ? new Deadline(commands[0], commands[1], true) : new Deadline(commands[0], commands[1]);
+            try {
+                return bool.equals("1") ? new Deadline(commands[0], commands[1], true) : new Deadline(commands[0], commands[1]);
+            } catch (DukeExceptionDeadline e) {
+                throw new DukeExceptionCorruptedData("The deadline task in the txt file corrupted");
+            }
         }
         else if (type.equals("E")) {
             return bool.equals("1") ? new Event(commands[0], commands[1], true) : new Event(commands[0], commands[1]);

@@ -24,6 +24,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + this.deadline;
+        return "[E]" + super.toString() + " (at: " + this.deadline + ")";
     }
 }
