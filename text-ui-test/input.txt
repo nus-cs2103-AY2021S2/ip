@@ -23,6 +23,7 @@ deadline eat an apple /by /by
 deadline eat an apple /by /by night
 deadline eat an apple /by night /by
 deadline eat an apple /by night
+deadline eat an apple /by 30/01/2021 23:59
 event
 eventfinal exam
 event 
@@ -41,6 +42,10 @@ event final exam /at /at
 event final exam /at /at Mon 2-5
 event final exam /at Mon 2-5 /at
 event final exam /at Mon 2-5
+event final exam /at 01/02/2021 11:00 - 01/02/2021 02:00
+event final exam /at 01/02/2021 11:00 - 01/02/2021 12:00
+event camp /at 01/02/2021 11:00 - 02/02/2021 12:00
+delete 4
 list
 done
 done1
