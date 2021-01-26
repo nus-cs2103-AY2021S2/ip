@@ -1,3 +1,5 @@
+package owen;
+
 /**
  * Encapsulates the command's type, arguments, and original
  * command string.

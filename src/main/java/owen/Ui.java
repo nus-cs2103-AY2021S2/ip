@@ -1,3 +1,5 @@
+package owen;
+
 import java.util.Scanner;
 
 /**
