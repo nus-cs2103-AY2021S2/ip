@@ -52,12 +52,12 @@ public class TaskManager {
         if (task.isDone()) {
             throw new TaskAlreadyDoneException();
         } else {
-            task.getDone();
+            task.setDone();
         }
     }
 
     public void doTaskByTaskUid(int id) {
-        retrieveTaskByTaskUid(id).getDone();
+        retrieveTaskByTaskUid(id).setDone();
     }
 
     public List<Task> retrieveAllTasks() {
