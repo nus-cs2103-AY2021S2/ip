@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.File;
@@ -76,7 +77,7 @@ public class Duke {
         tasks.add(todo);
     }
 
-    public static void addDeadline(Command command) throws IOException {
+    public static void addDeadline(Command command) throws IOException, DateTimeParseException {
         String[] parts = command.getArgs().split("/by");
 
         if (parts.length != 2) {
@@ -89,7 +90,7 @@ public class Duke {
         }
     }
 
-    public static void addDeadline(String[] parts) {
+    public static void addDeadline(String[] parts) throws DateTimeParseException {
         Task deadline = new Deadline(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             deadline.markDone();
@@ -204,6 +205,9 @@ public class Duke {
             }
         } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException | IOException exception) {
             reply(formatLine(exception.getMessage()));
+        } catch (DateTimeParseException exception) {
+            System.out.println(exception.getMessage());
+            reply(formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
         }
 
         return true;
@@ -214,18 +218,23 @@ public class Duke {
             .map(String::trim)
             .toArray(String[]::new);
 
-        switch (parts[0]) {
-        case Command.TODO:
-            addTodo(parts);
-            break;
-        case Command.EVENT:
-            addEvent(parts);
-            break;
-        case Command.DEADLINE:
-            addDeadline(parts);
-            break;
-        default:
-            throw new UnknownCommandException();
+        try {
+            switch (parts[0]) {
+                case Command.TODO:
+                    addTodo(parts);
+                    break;
+                case Command.EVENT:
+                    addEvent(parts);
+                    break;
+                case Command.DEADLINE:
+                    addDeadline(parts);
+                    break;
+                default:
+                    throw new UnknownCommandException();
+                }
+        } catch (DateTimeParseException exception) {
+            System.out.println(exception.getMessage());
+            reply(formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
         }
     }
 
