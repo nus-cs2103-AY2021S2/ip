@@ -1,12 +1,24 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // @@author: VRSoorya (??)
 // adapted from GitHub repo nus-cs2103-AY2021S2/ip
 
 public class Duke {
     private static List<Task> tasks = new ArrayList<>();
+    // source: https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
+    // inserts correct file path separator on *nix and Windows
+    private static java.nio.file.Path dataPath = java.nio.file.Paths.get(
+            "../../../data",
+            "olaf.txt");
+
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
@@ -37,18 +49,21 @@ public class Duke {
                 System.out.println(border + "\n  " + out + "\n" + border);
                 break;
             } else if(command.equalsIgnoreCase("list")){
-                if (tasks.size()>0) {
-                    System.out.println(border + "\n  Here are all the tasks in your list:\n");
-                    int idx = 0;
-                    int undone = 0;
-                    // adapted from: https://howtodoinjava.com/java/collections/arraylist/iterate-through-objects/
-                    while (tasks.size() > idx) {
-                        Task toPrint = tasks.get(idx++);
-                        System.out.printf("  %s. %s\n", idx, toPrint);
-                        undone += toPrint.isNotDone();
+                try {
+                    readData();
+                    if (tasks.size()>0) {
+                        System.out.println(border + "\n  Here are all the tasks in your list:\n");
+                        int idx = 0;
+                        int undone = 0;
+                        // adapted from: https://howtodoinjava.com/java/collections/arraylist/iterate-through-objects/
+                        while (tasks.size() > idx) {
+                            Task toPrint = tasks.get(idx++);
+                            System.out.printf("  %s. %s\n", idx, toPrint);
+                            undone += toPrint.isNotDone();
+                        }
+                        System.out.printf("\n  Only %s tasks left to be done!\n%s\n", undone, border);
                     }
-                    System.out.printf("\n  Only %s tasks left to be done!\n%s\n", undone, border);
-                } else {
+                } catch (IOException e) {
                     System.out.println(border + "\n  You don't have any tasks yet :)" +
                             "\n  Type 'help' to see how you can add a task\n" + border);
                 }
@@ -56,6 +71,8 @@ public class Duke {
                 try {
                     int idx = Integer.parseInt(command.split(" ")[1]);
                     tasks.get(idx - 1).markAsDone();
+                    saveData();
+
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
                             .reduce(0, Integer::sum);
@@ -83,6 +100,8 @@ public class Duke {
                 try {
                     int idx = Integer.parseInt(command.split(" ")[1]);
                     Task deleted = tasks.remove(idx - 1);
+                    saveData();
+
                     System.out.println(border + "\n  Got it, this task is now deleted:\n");
                     System.out.printf("  %s. %s\n", idx, deleted);
                     System.out.printf("\n  You now have %s tasks left if your list.\n", tasks.size());
@@ -107,6 +126,8 @@ public class Duke {
                 try {
                     String expression = command.split(" ", 2)[1];
                     tasks.add(new Todo(expression));
+                    saveData();
+
                     int total = tasks.size();
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
@@ -124,6 +145,8 @@ public class Duke {
                     String expression = command.split(" ", 2)[1];
                     String[] parts = expression.split("/by", 2);
                     tasks.add(new Deadline(parts[0], parts[1]));
+                    saveData();
+
                     int total = tasks.size();
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
@@ -142,6 +165,8 @@ public class Duke {
                     String expression = command.split(" ", 2)[1];
                     String[] parts = expression.split("/at", 2);
                     tasks.add(new Event(parts[0], parts[1]));
+                    saveData();
+
                     int total = tasks.size();
                     int undone = tasks.stream()
                             .mapToInt(Task::isNotDone)
@@ -162,5 +187,53 @@ public class Duke {
                 System.out.println(help + border);
             }
         }
+    }
+
+    private static void saveData() {
+        try {
+            if (tasks.size() > 0) {
+                String tasksToStringIterable = tasks.stream()
+                        .map(Task::toString)
+                        .reduce((a, b) -> a + "\n" + b)
+                        .get();
+
+                // adapted from: https://attacomsian.com/blog/java-save-string-to-text-file
+                // write string to a file
+                Files.writeString(dataPath,
+                        tasksToStringIterable,
+                        StandardCharsets.UTF_8,
+                        StandardOpenOption.CREATE,
+                        StandardOpenOption.TRUNCATE_EXISTING);
+            } else {
+                Files.deleteIfExists(dataPath);
+            }
+        } catch (IOException ignore) {
+            // program is safe to continue
+            // StandardOpenOption.CREATE handles the case when file does not exist
+        }
+    }
+
+    private static void readData() throws IOException {
+        tasks = Files.readAllLines(dataPath,
+                StandardCharsets.UTF_8)
+                .stream()
+                .map(Duke::readTaskFromData)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    private static Task readTaskFromData(String line) {
+        if (line.startsWith("[T]")) {
+            String expression = line.split("] ", 2)[1];
+            return new Todo(expression);
+        } else if (line.startsWith("[D]")) {
+            String expression = line.split("] ", 2)[1];
+            String[] parts = expression.split("by:", 2);
+            return new Deadline(parts[0], parts[1]);
+        } else if (line.startsWith("[E]")) {
+            String expression = line.split("] ", 2)[1];
+            String[] parts = expression.split("at:", 2);
+            return new Event(parts[0], parts[1]);
+        }
+        return null;
     }
 }
