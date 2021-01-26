@@ -31,8 +31,8 @@ public class ErrorChecker {
     public boolean isValid() {
         String taskType = "";
 
-        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo")
-                && !input.startsWith("deadline") && !input.startsWith("event")) {
+        if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("find")
+                && !input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
             System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + new IllegalInputException("").toString()
                     + "\n" + Duke.LINE);
             return false;
@@ -51,6 +51,8 @@ public class ErrorChecker {
                 String taskToDelete = input.substring(7);
                 int taskToDeleteInt = Integer.parseInt(taskToDelete);
                 tasks.get(taskToDeleteInt - 1);
+            } else if (input.startsWith("find")) {
+                input.substring(6);
             } else if (input.startsWith("todo")) {
                 taskType = "todo";
                 input.substring(6);
@@ -76,6 +78,9 @@ public class ErrorChecker {
                 System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
                         + new IllegalDoneDeleteException(ex.getMessage(), taskType).toString() + "\n" + Duke.LINE);
                 return false;
+            } else if (input.startsWith("from")) {
+                System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
+                        + new IllegalFindException(ex.getMessage()).toString() + "\n" + Duke.LINE);
             } else {
                 System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
                         + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" +  Duke.LINE);

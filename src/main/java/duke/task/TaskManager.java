@@ -29,6 +29,8 @@ public class TaskManager {
                 markDone(input);
             } else if (input.startsWith("delete")) {
                 deleteTask(input);
+            } else if (input.startsWith("find")) {
+                findTasks(input);
             } else {
                 addNewTask(input);
             }
@@ -81,6 +83,20 @@ public class TaskManager {
         }
 
         System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.LINE);
+    }
+
+    public void findTasks(String input) {
+        String description = input.substring(5);
+
+        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).description.contains(description)) {
+                System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+
+        System.out.println(Duke.LINE);
     }
 
     public void listEvents() {
