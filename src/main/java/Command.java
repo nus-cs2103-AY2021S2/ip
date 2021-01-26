@@ -147,6 +147,21 @@ public class Command {
                 System.out.println("     ☹ OOPS!!! The start and end date of an event cannot be empty.(Format: /at + duration[YYYY-MM-DD])");
                 System.out.println("    ____________________________________________________________");
             }
+        } else if(command.split(" ")[0].equals("find")) {
+            String match = command.split(" ")[1];
+            BufferedReader reader = new BufferedReader(new FileReader("data/duke.txt"));
+            String line = reader.readLine();
+            int counter = 0;
+            int secondcounter = 1;
+            System.out.println("     Here are the matching tasks in your list:");
+            while (line != null) {
+                if(line.indexOf(match) != -1) {
+                    System.out.println("     " + secondcounter + "." + tasks.tasks.get(counter).toString());
+                    secondcounter++;
+                }
+                line = reader.readLine();
+                counter++;
+            }
         } else if(command.equals("bye")) {
             System.out.println("     Bye. Hope to see you again soon!");
         } else {
