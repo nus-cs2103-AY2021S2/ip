@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents the execution of Done Command
+ */
 public class DoneCmd extends Command {
     private final String cmdArgs;
 
@@ -11,6 +14,12 @@ public class DoneCmd extends Command {
         this.cmdArgs = cmdArgs;
     }
 
+    /**
+     * Returns the response of the bot after execution of command
+     *
+     * @param lst TaskList
+     * @return response
+     */
     @Override
     public String execute(TaskList lst) {
         int idx = Integer.parseInt(cmdArgs) - 1;

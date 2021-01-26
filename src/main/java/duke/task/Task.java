@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Base Task class.
+ */
 public class Task {
     private final String content;
     private boolean isDone;

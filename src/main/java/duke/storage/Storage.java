@@ -5,6 +5,11 @@ import duke.task.*;
 
 import java.io.*;
 
+/**
+ * Represents the external storage used by Duke to remember tasks on restarts. Duke is currently saving tasks to a
+ * single text file and reading from that file on startup.
+ *
+ */
 public class Storage {
     private final static String DIR_NAME = System.getProperty("user.dir") + File.separator + "data";
     private final static String FILE_NAME = DIR_NAME + File.separator + "tasks.txt";
@@ -21,6 +26,13 @@ public class Storage {
         file.createNewFile();
     }
 
+    /**
+     * Fills the given TaskList with data read from storage. The TaskList will be modified in-place.
+     *
+     * @param taskLst the TaskList to have data filled in
+     * @return taskLst the original TaskList
+     * @throws IOException if there is a problem reading from file
+     */
     public TaskList fillTaskLst(TaskList taskLst) throws IOException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -39,7 +51,7 @@ public class Storage {
         return taskLst;
     }
 
-    public Task parseLine(String line) {
+    private Task parseLine(String line) {
         // Need double backslashes to escape the literal "\|" or else it will be parsed as an escape sequence
         String[] words = line.split(" \\| ");
         String taskTypeStr = words[0];
@@ -63,6 +75,11 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Saves the tasks in the given TaskList to storage.
+     *
+     * @param taskLst the TaskList to retrieve tasks from
+     */
     public void saveTaskLst(TaskList taskLst) {
         StringBuilder sb = new StringBuilder();
 

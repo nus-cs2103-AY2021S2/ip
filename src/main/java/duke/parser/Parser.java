@@ -6,7 +6,18 @@ import duke.task.TaskType;
 
 import java.util.Arrays;
 
+/**
+ * Interprets user input and routes them to the correct command
+ */
 public class Parser {
+
+    /**
+     * Returns the Command to process the line of user input. Returned Commands are initialised with arguments
+     * from user input.
+     *
+     * @param input A line of user input
+     * @return Command
+     */
     public static Command parse(String input) {
         String[] words = input.trim().split(" ");
         String cmdStr = words[0];

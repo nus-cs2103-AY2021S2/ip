@@ -16,6 +16,9 @@ public class Duke {
     private final TaskList taskLst;
     private Storage storage;
 
+    /**
+     * The constructor of Duke. Components needed to run Duke should be initialized here.
+     */
     public Duke() {
         ui = new Ui();
         taskLst = new TaskList();
@@ -30,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The run method of Duke. Do `new Duke().run()` to start Duke.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;

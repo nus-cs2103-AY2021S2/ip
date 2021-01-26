@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Represents the UI of Duke. Provides methods to print to screen.
+ */
 public class Ui {
     private void printLine() {
         System.out.println("\t____________________________________________________________");

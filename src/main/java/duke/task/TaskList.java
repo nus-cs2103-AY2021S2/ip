@@ -3,6 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+/**
+ * Represents the list where tasks are stored.
+ */
 public class TaskList {
     private final ArrayList<Task> lst;
 
@@ -10,23 +13,51 @@ public class TaskList {
         lst = new ArrayList<>();
     }
 
-    public void add(Task t) {
-        lst.add(t);
+    /**
+     * Appends the task to the end of the list.
+     *
+     * @param task task to be appended to this list
+     */
+    public void add(Task task) {
+        lst.add(task);
     }
 
-    public Task get(int idx) {
-        return lst.get(idx);
+    /**
+     * Returns the task at the specified position in this list.
+     *
+     * @param index index of the task to return
+     * @return the task at the specified position in this list
+     */
+    public Task get(int index) {
+        return lst.get(index);
     }
 
-    public Task remove(int idx) {
-        return lst.remove(idx);
+    /**
+     * Returns the task at the specified position in this list. Shifts any subsequent tasks to the left.
+     *
+     * @param index the index of the task to be removed
+     * @return the task that was removed from this list
+     */
+    public Task remove(int index) {
+        return lst.remove(index);
     }
 
-    public void forEach(Consumer<? super Task> consumer) {
-        lst.forEach(consumer);
+    /**
+     * Performs the given action for each task in the list until all tasks have been processed. Actions are performed
+     * in order of iteration.
+     *
+     * @param action the action to be performed for each task
+     */
+    public void forEach(Consumer<? super Task> action) {
+        lst.forEach(action);
     }
 
+    /**
+     * Returns the number of tasks in this list
+     *
+     * @return the number of tasks in this list
+     */
     public int size() {
-        return this.lst.size();
+        return lst.size();
     }
 }
