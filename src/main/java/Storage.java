@@ -5,14 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.StringBuilder;
 
-public class Storage {
+class Storage {
     private static final String FILE_NAME = "duke.txt";
     private TaskList tasks;
 
-    public Storage(TaskList tasks) {
+    Storage(TaskList tasks) {
         this.tasks = tasks;
     }
-    public void read() {
+
+    protected void read() {
         try {
             FileReader reader = new FileReader(FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -35,7 +36,7 @@ public class Storage {
         }
     }
 
-    public void write() throws IOException {
+    protected void write() throws IOException {
         StringBuilder sb = new StringBuilder();
         for (Task task: tasks.getTasks()) {
             sb.append(task.toFileString());

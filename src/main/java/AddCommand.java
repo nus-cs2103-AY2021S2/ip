@@ -1,11 +1,10 @@
-public class AddCommand implements ICommand {
+class AddCommand implements ICommand {
     private TaskList tasks;
-    AbstractTaskFactory taskFactory;
+    private AbstractTaskFactory taskFactory;
 
     AddCommand(TaskList tasks, AbstractTaskFactory taskFactory) {
         this.tasks = tasks;
         this.taskFactory = taskFactory;
-
     }
 
     @Override

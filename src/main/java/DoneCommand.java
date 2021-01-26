@@ -1,4 +1,4 @@
-public class DoneCommand implements ICommand {
+class DoneCommand implements ICommand {
     private TaskList tasks;
 
     DoneCommand(TaskList tasks) {

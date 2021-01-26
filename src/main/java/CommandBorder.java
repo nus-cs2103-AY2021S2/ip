@@ -1,8 +1,7 @@
-public class CommandDecorator implements ICommand {
-
+class CommandBorder implements ICommand {
     private ICommand decoratedCommand;
 
-    public CommandDecorator(ICommand decoratedCommand) {
+    CommandBorder(ICommand decoratedCommand) {
         this.decoratedCommand = decoratedCommand;
     }
 

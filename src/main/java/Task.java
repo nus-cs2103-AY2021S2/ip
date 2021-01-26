@@ -2,11 +2,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public abstract class Task {
+abstract class Task {
     private String content;
     private boolean isDone;
 
-    public Task(String content) {
+    Task(String content) {
         this.content = content;
         this.isDone = false;
     }
@@ -19,9 +19,9 @@ public abstract class Task {
         return string;
     }
 
-    abstract public String toFileString();
+    abstract String toFileString();
 
-    public String parseDate(String string){
+    String parseDate(String string){
         try{
             LocalDate date = LocalDate.parse(string);
             return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -30,15 +30,15 @@ public abstract class Task {
         }
     }
 
-    public void setDone() {
+    protected void setDone() {
         this.isDone = true;
     }
 
-    public String getDesc() {
+    protected String getDesc() {
         return this.content;
     }
 
-    public boolean getDone() {
+    protected boolean getDone() {
         return this.isDone;
     }
 }

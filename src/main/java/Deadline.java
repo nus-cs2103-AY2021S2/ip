@@ -1,7 +1,7 @@
-public class Deadline extends Task{
+class Deadline extends Task{
     private String deadline;
 
-    public Deadline(String content,String deadline){
+    Deadline(String content,String deadline){
         super(content);
         this.deadline = deadline;
     }
@@ -10,6 +10,7 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]"+super.toString()+ String.format(" (by:%s)",this.parseDate(this.deadline.strip()));
     }
+
     @Override
     public String toFileString() {
         String done;
