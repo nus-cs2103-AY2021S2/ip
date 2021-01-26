@@ -49,7 +49,8 @@ public class Duke {
                     final Task removed = store.remove(index);
                     System.out.println("\tNoted. I've removed this task: ");
                     System.out.printf("\t%s\n", removed);
-                    System.out.printf("\tNow you have %d task%s in the list.\n", store.size(), store.size() == 1 ? "" : "s");
+                    System.out.printf("\tNow you have %d task%s in the list.\n", store.size(),
+                            store.size() == 1 ? "" : "s");
                 } else {
                     System.out.println("\tOops! The index is out of bound.");
                 }
@@ -59,9 +60,9 @@ public class Duke {
         } else {
             System.out.println("\tPlease follow this format \"done <index>\".");
         }
-	}
+    }
 
-	private static void addTaskToList(List<Task> store, String command, String input) {
+    private static void addTaskToList(List<Task> store, String command, String input) {
         boolean isInsert = false;
         if (store.size() >= 100) {
             System.out.println("\tSorry. The database is full!");
@@ -83,9 +84,21 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
             } else {
                 final String task = splitOnBy[0].split("deadline ", 2)[1].strip();
-                final String datetime = splitOnBy[1].strip();
-                store.add(new Deadline(task, datetime));
-                isInsert = true;
+                final String[] datetime = splitOnBy[1].strip().split(" ");
+
+                Deadline deadline = null;
+                if (datetime.length == 1) {
+                    deadline = Deadline.create(task, datetime[0]);
+                } else if (datetime.length == 2) {
+                    deadline = Deadline.create(task, datetime[0], datetime[1]);
+                }
+
+                if (deadline != null) {
+                    store.add(deadline);
+                    isInsert = true;
+                } else {
+                    System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
+                }
             }
         } else if (command.equals("event")) {
             final int index = input.indexOf(" /at ");
@@ -95,9 +108,21 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
             } else {
                 final String task = splitOnAt[0].split("event ", 2)[1].strip();
-                final String datetime = splitOnAt[1].strip();
-                store.add(new Event(task, datetime));
-                isInsert = true;
+                final String[] datetime = splitOnAt[1].strip().split(" ");
+
+                Event event = null;
+                if (datetime.length == 1) {
+                    event = Event.create(task, datetime[0]);
+                } else if (datetime.length == 2) {
+                    event = Event.create(task, datetime[0], datetime[1]);
+                }
+
+                if (event != null) {
+                    store.add(event);
+                    isInsert = true;
+                } else {
+                    System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
+                }
             }
         } else {
             System.out.println("\tOops! Try inputting \"todo|deadline|event <task> (</by|/at> <datetime>)\".");

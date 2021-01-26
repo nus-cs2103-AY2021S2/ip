@@ -1,7 +1,6 @@
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Event extends Task {
@@ -39,16 +38,11 @@ public class Event extends Task {
 		}
 	}
 
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public LocalTime getTime() {
-		return time;
-	}
-
-	public LocalDateTime getDateTime() {
-		return LocalDateTime.of(date, time);
+	public String getDateTime() {
+		if (time == null) {
+			return date.toString();
+		}
+		return String.format("%s %s", this.date, this.time);
 	}
 
 	@Override
