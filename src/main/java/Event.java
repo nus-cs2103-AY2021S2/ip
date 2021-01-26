@@ -10,10 +10,12 @@ public class Event extends Task {
      * @param description Description of the task
      * @param at Date of the task
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
         this.at = at;
     }
+
+    public String saveTask() { return "E | " + super.saveTask() + " | " + this.at; }
 
     /**
      * Converts this object to a string that represents the event-task

@@ -11,10 +11,11 @@ public class Task {
     /**
      * Initializes a newly created Task object with a description.
      * @param description Description of the task
+     * @param isDone Whether or not the task is done
      */
-    public Task(String description) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -34,6 +35,11 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String saveTask() {
+        int done = isDone ? 1 : 0;
+        return done + " | " + this.description;
     }
 
     /**
