@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Ui {
     private static final String INDENTATION = "    ";
     private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
@@ -26,11 +24,11 @@ public class Ui {
         reply(msg);
     }
 
-    public void list(List<Task> tasks) {
+    public void list(TaskList tasks) {
         String msg = formatLine("Here are the tasks in your list:");
 
         for (int i = 0; i < tasks.size(); i++) {
-            msg += formatLine((i + 1) + ". " + tasks.get(i));            
+            msg += formatLine((i + 1) + ". " + tasks.getTaskAt(i));            
         }
         reply(msg);
     }

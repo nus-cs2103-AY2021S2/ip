@@ -1,10 +1,9 @@
+import java.util.Arrays;
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 public class Storage {
     private File file;
@@ -18,7 +17,7 @@ public class Storage {
         this.file = new File(dirName + "/" + fileName);
     }
 
-    private void addTodo(String[] parts, List<Task> tasks) {
+    private void addTodo(String[] parts, TaskList tasks) {
         Task todo = new Todo(parts[2]);
         if (parts[1].equals("X")) {
             todo.markDone();
@@ -26,7 +25,7 @@ public class Storage {
         tasks.add(todo);
     }
 
-    private void addDeadline(String[] parts, List<Task> tasks) throws DateTimeParseException {
+    private void addDeadline(String[] parts, TaskList tasks) throws DateTimeParseException {
         Task deadline = new Deadline(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             deadline.markDone();
@@ -34,7 +33,7 @@ public class Storage {
         tasks.add(deadline);
     }
 
-    private void addEvent(String[] parts, List<Task> tasks) {
+    private void addEvent(String[] parts, TaskList tasks) {
         Task event = new Event(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             event.markDone();
@@ -42,10 +41,10 @@ public class Storage {
         tasks.add(event);
     }
 
-    private void parseLine(String line, List<Task> tasks, Ui ui) {
+    private void parseLine(String line, TaskList tasks, Ui ui) {
         String[] parts = Arrays.stream(line.split("\\|"))
-        .map(String::trim)
-        .toArray(String[]::new);
+                .map(String::trim)
+                .toArray(String[]::new);
 
         try {
             switch (parts[0]) {
@@ -68,7 +67,7 @@ public class Storage {
         }
     }
 
-    public void readFromFile(List<Task> tasks, Ui ui) throws IOException {
+    public void readFromFile(TaskList tasks, Ui ui) throws IOException {
         if (!this.file.createNewFile()) {
             Scanner fileSc = new Scanner(this.file);
             while (fileSc.hasNextLine()) {
@@ -84,10 +83,10 @@ public class Storage {
         fw.close();
     }
 
-    public void updateFile(List<Task> tasks) throws IOException {
+    public void updateFile(TaskList tasks) throws IOException {
         StringBuffer buffer = new StringBuffer();
-        for (Task task : tasks) {
-            buffer.append(task.toFileString());
+        for (int i = 0; i < tasks.size(); i++) {
+            buffer.append(tasks.getTaskAt(i).toFileString());
         }
 
         FileWriter fw = new FileWriter(file);

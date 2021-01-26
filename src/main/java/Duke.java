@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
@@ -10,7 +8,7 @@ public class Duke {
 
     private Ui ui;
     private Storage storage;
-    private List<Task> tasks;
+    private TaskList tasks;
 
     // Helper functions
     public int getIndex(String args) {
@@ -57,9 +55,9 @@ public class Duke {
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
         } else {
-            tasks.get(index).markDone();
+            tasks.getTaskAt(index).markDone();
             storage.updateFile(tasks);
-            ui.markDoneReply(tasks.get(index));
+            ui.markDoneReply(tasks.getTaskAt(index));
         }
     }
 
@@ -116,7 +114,7 @@ public class Duke {
     }
 
     public Duke() throws IOException {
-        tasks = new ArrayList<>();
+        tasks = new TaskList();
         ui = new Ui();
         storage = new Storage(DIR_NAME, FILE_NAME);
     
