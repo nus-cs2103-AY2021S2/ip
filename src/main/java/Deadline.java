@@ -12,6 +12,11 @@ public class Deadline extends Task {
         this.timeBy = timeBy;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return this.dateBy;
+    }
+
     public String getDeadline() { //get deadline in format of String eg. (by: Sunday)
         return "(by: " + dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 timeBy.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";

@@ -14,6 +14,11 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    @Override
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     public String getTime() {
         return "(at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
                 this.startTime.format(DateTimeFormatter.ofPattern("hh:mma")) + "-" +

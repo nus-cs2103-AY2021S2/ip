@@ -1,6 +1,13 @@
+import java.time.LocalDate;
+
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
     }
 
     @Override
