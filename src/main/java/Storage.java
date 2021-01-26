@@ -8,17 +8,20 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Database {
-    private String filePath;
+public class Storage {
+    private final String filePath;
 
-    Database(String path) {
+    Storage(String path) {
         filePath = path;
     }
 
-    public void syncFromFile(ArrayList<Task> tasks) {
+    public ArrayList<Task> syncFromFile() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
+
         try {
             File f = new File(filePath);
             Scanner sc = new Scanner(f);
+
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] keyWords = line.split(" \\| ");
@@ -45,18 +48,17 @@ public class Database {
                 }
                 tasks.add(thisTask);
             }
+            return tasks;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found:" + e.getMessage());
-        } catch (InvalidDateTimeException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("File not found!");
         }
     }
 
-    public void updateInFile(ArrayList<Task> tasks) {
+    public void updateInFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task : tasks) {
-                fw.write(task.toFileString() + "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toFileString() + "\n");
             }
             fw.close();
         } catch (IOException e) {

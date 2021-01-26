@@ -1,11 +1,18 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Printer {
+public class Ui {
     private static final String PARTING_LINE = "____________________________________________________________";
 
-    Printer() {}
+    Ui() {}
 
-    public static void printGreeting() {
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        return input;
+    }
+
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -18,15 +25,15 @@ public class Printer {
         System.out.println(PARTING_LINE);
     }
 
-    public static void printLine() {
+    public void printLine() {
         System.out.println(PARTING_LINE);
     }
 
-    public static void sayGoodBye() {
+    public void sayGoodBye() {
         System.out.println(" See you.");
     }
 
-    public static void listTasks(ArrayList<Task> tasks) {
+    public void listTasks(TaskList tasks) {
         System.out.println(" Here are the tasks: ");
         for (int i = 0; i < tasks.size(); i++) {
             Task tempTask = tasks.get(i);

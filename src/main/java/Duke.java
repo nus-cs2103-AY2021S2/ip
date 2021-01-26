@@ -1,30 +1,32 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class Duke {
-    private static final ArrayList<Task> tasks = new ArrayList<>();
-    private final String FILE_PATH = System.getProperty("user.dir") + "/duke.txt";
-    private final Database dukeDataBase = new Database(FILE_PATH);
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
 
-    Duke() {}
+    Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.syncFromFile());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
-        Duke dukeBot = new Duke();
-        dukeBot.run();
+        new Duke(System.getProperty("user.dir") + "/duke.txt").run();
     }
 
     public void run() {
-        Printer.printGreeting();
-        dukeDataBase.syncFromFile(tasks);
-        Processor processor = new Processor(tasks, dukeDataBase);
+        ui.showWelcome();
+        Processor processor = new Processor(tasks, storage, ui);
 
-        Scanner sc = new Scanner(System.in);
         boolean isOver = false;
         while (!isOver) {
-            String input = sc.nextLine();
-            Printer.printLine();
+            String input = ui.readCommand();
+            ui.printLine();
             isOver = processor.processSentence(input);
-            Printer.printLine();
+            ui.printLine();
         }
     }
 }
