@@ -150,7 +150,7 @@ public class Parser {
             String[] details = command[1].split(" /at ", 2);
 
             if (details.length == 1 || !isValidTime(details[1])){
-                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm");
+                throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-MM-dd HH:mm");
             }
 
             String description = details[0];
