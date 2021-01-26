@@ -19,10 +19,12 @@ public class ListUpdater {
                 taskObject = new ToDo(taskInfo[2], "T");
                 taskObject.isDone = taskInfo[1].equals("1") ?  true :  false;
             } else if (taskInfo[0].equals("E")) {
-                taskObject = new Event(taskInfo[2], taskInfo[3], "E");
+                Date date = new Date(taskInfo[3]);
+                taskObject = new Event(taskInfo[2], date, taskInfo[4], "E");
                 taskObject.isDone = taskInfo[1].equals("1") ?  true :  false;
             } else if (taskInfo[0].equals("D")) {
-                taskObject = new Deadline(taskInfo[2], taskInfo[3], "D");
+                Date date = new Date(taskInfo[3]);
+                taskObject = new Deadline(taskInfo[2], date, "D");
                 taskObject.isDone = taskInfo[1].equals("1") ?  true :  false;
             }
             list.add(taskObject);

@@ -92,9 +92,12 @@ public class TaskManager {
                 }
             }
             if (info[0].equals("event")) {
-                task = new Event(description.toString(), dateAndTime.toString(), "E");
+                String[] details = dateAndTime.toString().split(" ");
+                Date date = new Date(details[0]);
+                task = new Event(description.toString(), date, details[1], "E");
             } else if (info[0].equals("deadline")) {
-                task = new Deadline(description.toString(), dateAndTime.toString(), "D");
+                Date date = new Date(dateAndTime.toString());
+                task = new Deadline(description.toString(), date, "D");
             }
         }
         list.add(task);

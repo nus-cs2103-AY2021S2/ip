@@ -14,8 +14,8 @@ public class FileWriting {
             } else if (task.type.equals("E")) {
                 Event myTask = (Event) task;
                 s = task.isDone
-                        ? "E" + " , " + "1" + " , " + task.description + " , " + myTask.dateAndDuration
-                        : "E" + " , " + "0" + " , " + task.description + " , " + myTask.dateAndDuration;
+                        ? "E" + " , " + "1" + " , " + task.description + " , " + myTask.date + " , " + myTask.duration
+                        : "E" + " , " + "0" + " , " + task.description + " , " + myTask.date + " , " + myTask.duration;
 
             } else if (task.type.equals("D")) {
                 Deadline myTask = (Deadline) task;

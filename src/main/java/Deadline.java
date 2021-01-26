@@ -1,17 +1,16 @@
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    String by;
+    Date by;
 
-
-    public Deadline(String description, String by, String type) {
-        super(description, type);
+    public Deadline(String description, Date by, String type) {
+        super(description,type);
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.toFormattedString() + ")";
     }
 
 }
