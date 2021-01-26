@@ -46,10 +46,11 @@ public class DateTime {
      * @return Pretty prints the date and if applicable, time stored in this object
      */
     public String getDatetime() {
-        if (localDateTime != null)
+        if (localDateTime != null) {
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(localDateTime);
-        else
+        } else {
             return DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDate);
+        }
     }
 
     /**
@@ -58,10 +59,11 @@ public class DateTime {
      * @return String of date and if applicable, time in system interpretable format for future use
      */
     public String savingDatetime() {
-        if (localDateTime != null)
+        if (localDateTime != null) {
             return DateTimeFormatter.ofPattern("yyyy-MM-dd, HHmm").format(localDateTime);
-        else
+        } else {
             return DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
+        }
     }
 
     @Override

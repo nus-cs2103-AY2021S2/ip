@@ -1,5 +1,3 @@
-import java.util.Date;
-
 /**
  * Tasks with 2 dates will use an Event, class is named myEvent to avoid confusion with Java defined one
  *
@@ -42,10 +40,11 @@ public class myEvent extends Task {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        if (this.completed)
+        if (this.completed) {
             sb.append("[E] [x] ");
-        else
+        } else {
             sb.append("[E] [ ] ");
+        }
 
         sb.append(this.description
                 + " at: "
