@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.time.format.DateTimeParseException;
 
 public class Duke {
@@ -41,6 +42,16 @@ public class Duke {
 
                         this.ui.print("You have " + this.tasks.outstandingTasks().size() 
                                 + " undone tasks.");
+                        break;
+
+                    case "undone":
+                        ArrayList<Task> undoneTasks = this.tasks.outstandingTasks();
+
+                        for (int i = 0; i < undoneTasks.size(); ++ i) {
+                            this.ui.print(i + 1 + ". " + undoneTasks.get(i).taskInformation(
+                                Ui.outputFormat));
+                        }
+
                         break;
                     
                     case "done":
