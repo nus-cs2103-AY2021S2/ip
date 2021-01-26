@@ -5,14 +5,15 @@ import exceptions.DukeException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DateFormatter {
     public static LocalDate encodeDate(String date) throws DukeException {
         try {
             return LocalDate.parse(date);
-        } catch (DateTimeException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("An error occurred while encoding date,"
-                    + " try the yyyy-mm-dd format.");
+                    + " use the yyyy-mm-dd format.");
         }
     }
 
