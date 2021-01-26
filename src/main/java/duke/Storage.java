@@ -1,16 +1,16 @@
 package duke;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Scanner;
+
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.ToDoTask;
-
-import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Encapsulates the methods for handling local storage.
@@ -44,7 +44,7 @@ public class Storage {
 
         try {
             Scanner sc = new Scanner(file);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String newLine = sc.nextLine();
                 Task task = processFileContents(newLine, taskID);
                 taskList.addTask(task);
@@ -128,19 +128,19 @@ public class Storage {
         String description = lineContents[2];
 
         switch (taskType) {
-            case "T":
-                return new ToDoTask(description, taskID, status);
-            case "D":
-                String time = lineContents[4];
-                LocalDate deadline = LocalDate.parse(lineContents[3]);
-                return new DeadlineTask(description, taskID, status, deadline, time);
-            case "E":
-                LocalDate eventDate = LocalDate.parse(lineContents[3]);
-                String startTime = lineContents[4];
-                String endTime = lineContents[5];
-                return new EventTask(description, taskID, status, eventDate, startTime, endTime);
-            default:
-                throw new DukeException("Error in file reading: Unknown task type");
+        case "T":
+            return new ToDoTask(description, taskID, status);
+        case "D":
+            String time = lineContents[4];
+            LocalDate deadline = LocalDate.parse(lineContents[3]);
+            return new DeadlineTask(description, taskID, status, deadline, time);
+        case "E":
+            LocalDate eventDate = LocalDate.parse(lineContents[3]);
+            String startTime = lineContents[4];
+            String endTime = lineContents[5];
+            return new EventTask(description, taskID, status, eventDate, startTime, endTime);
+        default:
+            throw new DukeException("Error in file reading: Unknown task type");
         }
     }
 

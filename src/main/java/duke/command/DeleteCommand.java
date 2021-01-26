@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.TaskList;
+import duke.task.Task;
 /**
  * Represents a command that deletes task from the task list.
  */
@@ -11,6 +11,10 @@ public class DeleteCommand implements Command {
     private Task deletedTask;
     private int numTasks;
 
+    /**
+     * Constructor for delete command.
+     * @param deletedID ID of the task to be deleted.
+     */
     public DeleteCommand(int deletedID) {
         this.deletedID = deletedID;
     }
@@ -29,7 +33,7 @@ public class DeleteCommand implements Command {
      */
     public String getResponse() {
         return "Noted. I've removed this duke.task:\n  " + deletedTask
-        + "\nNow you have " + numTasks + " tasks in the list.\n";
+            + "\nNow you have " + numTasks + " tasks in the list.\n";
     }
 
     /**

@@ -1,7 +1,8 @@
 package duke;
 
-import duke.command.Command;
 import java.io.IOException;
+
+import duke.command.Command;
 
 /**
  * Represents the duke chat bot.
