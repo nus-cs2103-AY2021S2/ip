@@ -4,7 +4,9 @@ import java.util.Scanner;
 
 import java.nio.file.Paths;
 
-
+/**
+ * Represents the highest level code responsible for Duke's operations.
+ */
 public class Duke {
 
 

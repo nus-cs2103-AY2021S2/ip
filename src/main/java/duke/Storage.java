@@ -10,16 +10,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles read and write operations for Task objects in Duke.
+ */
 public class Storage {
     private final Path filePath;
     private final Path dirPath;
 
+    /**
+     * Creates a Storage object
+     *
+     * @param filePath relative file path to where the data is stored
+     * @param dirPath relative directory path
+     */
     public Storage(Path filePath, Path dirPath) {
         this.filePath = filePath;
         this.dirPath = dirPath;
     }
 
-
+    /**
+     * Writes data (Task objects) to the file
+     *
+     * @param taskList the current list of tasks
+     */
     public void writeToFile(TaskList taskList) {
 //        String home = System.getProperty("user.home");
 
@@ -51,7 +64,11 @@ public class Storage {
         }
     }
 
-
+    /**
+     * Reads data (Task objects) from the file
+     *
+     * @return the list of Task objects stored in the file
+     */
     public List<Task> readFromFile(){
 
         List<Task> tasksList = new ArrayList<>();
