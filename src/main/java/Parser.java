@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -113,9 +114,12 @@ public class Parser {
      * return description of todo */
     public String parseAddToDo(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
+//        System.out.println("successful split command");
         if(command.length == 1 || command[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
+//            System.out.println("parsing");
+//            System.out.println(command[1]);
             return command[1];
         }
     }
@@ -126,7 +130,6 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else{
             String[] details = command[1].split(" /by ", 2);
-
             if (details.length == 1 || !isValidTime(details[1])){
                 throw new DukeException("OOPS!!! The time of a deadline is invalid.");
             }
@@ -155,15 +158,18 @@ public class Parser {
     }
 
     public boolean isValidTime(String time) throws DukeException{
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
-        boolean isValid;
-        try{
-            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
-            isValid = true;
-        } catch (Exception e){
-            isValid = false;
-            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
-        }
+//        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
+//        boolean isValid = false;
+//        try{
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm", Locale.ENGLISH);
+        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+//            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+        System.out.println("converting time");
+        boolean isValid = true;
+//        } catch (Exception e){
+//            isValid = false;
+//            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
+//        }
         return isValid;
     }
 

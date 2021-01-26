@@ -10,7 +10,6 @@ public class Deadline extends Task {
 
     private LocalDateTime by;
     private final String type = "D";
-    private String separator = " | ";
 
     public Deadline(String description, String by) {
         super(description);

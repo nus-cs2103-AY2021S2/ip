@@ -1,7 +1,8 @@
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Ui {
-    //private final Scanner in;
+    private final Scanner in = new Scanner(System.in);
 
     public Ui(){
         startDuke();
@@ -20,8 +21,8 @@ public class Ui {
     }
 
     public String getUserCommand(){
-        Scanner input = new Scanner(System.in);
-        String fullInputLine = input.nextLine();
+//        Scanner input = new Scanner(System.in);
+        String fullInputLine = in.nextLine();
         return fullInputLine;
     }
 
@@ -30,8 +31,8 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
         int len = taskList.getSize();
         for (int i = 1; i < len + 1; i++) {
-            Task curTask = taskList.getTask(i - 1);
-            System.out.println(i + "." + curTask);
+            Task curTask = taskList.getTask(i);
+            System.out.println(i + ". " + curTask);
         }
         System.out.println("---------------------------------------------");
     }

@@ -6,7 +6,6 @@ public class Event extends Task {
 
     private LocalDateTime at;
     private final String type = "E";
-    private String separator = " | ";
 
     public Event(String description, String at) {
         super(description);

@@ -17,6 +17,10 @@ public class TaskList {
 
     private ArrayList<Task> initialiseList(ArrayList<String> myTasks) {
         ArrayList<Task> taskList = new ArrayList<>();
+//        if(myTasks.isEmpty()){
+//            return taskList;
+//        }
+
         for (String s : myTasks) {
             String[] parts = s.split(" | ", 2);
             String type = parts[0];
@@ -62,7 +66,7 @@ public class TaskList {
     }
 
     public Task getTask(int taskNumber) {
-        Task task = this.taskList.get(taskNumber);
+        Task task = this.taskList.get(taskNumber - 1);
         return task;
     }
 
@@ -74,12 +78,15 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public void deleteTask(int taskNumber) {
-        this.taskList.remove(taskNumber);
+    public Task deleteTask(int taskNumber) {
+        Task curTask = this.taskList.remove(taskNumber - 1);
+        return curTask;
     }
 
-    public void markTaskAsDone(int taskNumber) {
-        this.taskList.get(taskNumber).markAsDone();
+    public Task markTaskAsDone(int taskNumber) {
+        Task curTask = this.taskList.get(taskNumber - 1);
+        curTask.markAsDone();
+        return curTask;
     }
 }
 

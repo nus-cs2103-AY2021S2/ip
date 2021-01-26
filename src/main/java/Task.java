@@ -2,6 +2,7 @@ public class Task {
     private String description;
     private boolean isDone;
     private String type;
+    protected String separator = " | ";
 
     public Task(String description) {
         this.description = description;
@@ -25,6 +26,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "["+this.getStatusIcon()+"] "+this.getDescription();
+        return this.getStatusIcon() + separator + this.getDescription();
     }
 }
