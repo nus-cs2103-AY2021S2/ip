@@ -9,9 +9,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class.
+ *
+ * Handles primarily date parsing.
+ */
 public class Parser {
 
-    // Some date formats inspired from: https://balusc.omnifaces.org/2007/09/dateutil.html
+    /**
+     * List of supported datetime formats for parsing,
+     * partially inspired by { @link https://balusc.omnifaces.org/2007/09/dateutil.html }.
+     */
     private static final DateTimeFormatter[] DATE_FORMATS = new DateTimeFormatter[]{
             // Time
             // "hh a", "hh.mm a", // Same/Next day, 12-hour format, 00 minute
@@ -61,11 +69,60 @@ public class Parser {
     private static final DateTimeFormatter READABLE_DATETIME_YEAR_FORMAT =
             DateTimeFormatter.ofPattern("E h:mm a, d MMM yyyy");
 
-
+    /**
+     * Parses datetime string relative to current time.
+     *
+     * The datetime string must be in the following specified formats, with text
+     * months in title case. In some cases, the time or date may be omitted, upon which
+     * the parsing rules are as follows:
+     *
+     * 1. If only time is supplied, parse as upcoming datetime with the specified time.
+     * 2. If no time is supplied, parse as upcoming datetime at midnight.
+     * 3. If year is not supplied, parse as upcoming datetime with the specified time/day/month.
+     * 4. If date and year supplied, parsed as specified datetime.
+     *
+     * e.g. if datetime string is "13 Jan" and the current date is "25 Jan 2021",
+     * this will be parsed as "13 Jan 2022, 00:00".
+     *
+     * Available date formats:
+     * - 13 Sep
+     * - 13 Sep 2020
+     * - 13 September
+     * - 13 September 2020
+     * - 13/9
+     * - 13/9/2020
+     * - Sep 13
+     * - September 13
+     * - 2020-09-13
+     *
+     * Available time formats:
+     * - 9:23
+     * - 23:09
+     *
+     * Available datetime formats:
+     * - 13 Sep 9:03
+     * - 13/9 9:03
+     * - 9:03 13 Sep
+     * - 9:03 13/9/2020
+     *
+     * @param input Datetime string.
+     * @return LocalDateTime.
+     * @throws DukeExceptionIllegalArgument When parsing fails.
+     */
     public static LocalDateTime parseDate(String input) throws DukeExceptionIllegalArgument {
         return parseDate(input, LocalDateTime.now());
     }
-    // Additional now param for mocking
+
+    /**
+     * Parses datetime string relative to supplied datetime.
+     *
+     * Method created primarily for mocking. See parsing rules for parseDate.
+     *
+     * @param input Datetime string.
+     * @param now LocalDateTime.
+     * @return LocalDateTime.
+     * @throws DukeExceptionIllegalArgument When parsing fails.
+     */
     public static LocalDateTime parseDate(String input, LocalDateTime now) throws DukeExceptionIllegalArgument {
         input = input.strip();
         now = now.withSecond(0).withNano(0);
@@ -146,6 +203,16 @@ public class Parser {
                 + "\n- Date and time separated by a single space ' '");
     }
 
+    /**
+     * Returns formatted string based on supplied datetime.
+     *
+     * If task falls on current year but has not expired, no year will be inserted.
+     * Tasks falling midnight is considered not expired on the same day.
+     * If task has time specified other than midnight, the time will be inserted.
+     *
+     * @param dt LocalDateTime.
+     * @return Formatted datetime string.
+     */
     public static String formatDate(LocalDateTime dt) {
         LocalDateTime now = LocalDateTime.now();
         if (dt.getHour() == 0 && dt.getMinute() == 0) {
@@ -163,10 +230,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns formatted string as complete datetime.
+     *
+     * @param dt LocalDateTime.
+     * @return Formatted datetime string.
+     */
     public static String formatDateFull(LocalDateTime dt) {
         return dt.format(READABLE_DATETIME_YEAR_FORMAT);
     }
 
+    /**
+     * Returns formatted string in ISO format, i.e. 'YYYY-MM-DD hh:mm'
+     *
+     * @param dt LocalDateTime.
+     * @return Formatted datetime string.
+     */
     public static String formatDateISO(LocalDateTime dt) {
         return dt.format(ISO_DATETIME_FORMAT);
     }

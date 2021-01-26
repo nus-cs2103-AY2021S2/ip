@@ -4,6 +4,11 @@ import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Exit command.
+ *
+ * Allows main loop to terminate program.
+ */
 public class DukeCommandBye extends DukeCommand {
     @Override
     public boolean isExit() {

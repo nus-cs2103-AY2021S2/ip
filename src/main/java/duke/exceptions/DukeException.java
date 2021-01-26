@@ -1,5 +1,10 @@
 package duke.exceptions;
 
+/**
+ * General exception class for Duke.
+ *
+ * All exceptions thrown by Duke should inherit from this class.
+ */
 public class DukeException extends Exception {
 
     protected String description;

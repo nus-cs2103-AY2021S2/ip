@@ -7,6 +7,12 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Delete command.
+ *
+ * Removes single or all tasks from task list, the latter executed using the 'delete all'
+ * keyphrase.
+ */
 public class DukeCommandDelete extends DukeCommand {
 
     private int index;
@@ -26,6 +32,7 @@ public class DukeCommandDelete extends DukeCommand {
         }
 
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader)
             throws DukeExceptionFileNotWritable, DukeExceptionIllegalArgument{

@@ -5,31 +5,72 @@ import duke.exceptions.DukeExceptionIllegalArgument;
 
 import java.time.format.DateTimeFormatter;
 
-// TODO: Throw exception when description/by/at contains " | "
+/**
+ * Task class.
+ *
+ * Bulk of the definition comes from the original webpage by CS2103 at
+ * { @link https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html }.
+ * General class representing all tasks. Should not be instantiated directly.
+ */
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for Task.
+     *
+     * @param description Description of Task
+     */
     public Task(String description) {
         this(description, false);
     }
+
+    /**
+     * Constructor for Task.
+     *
+     * @param description Description of Task.
+     * @param isDone Whether task is completed.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
+
+    /**
+     * Marks task as done.
+     *
+     * No exception thrown if task is already marked as done.
+     */
     public void setDone() {
         isDone = true;
     }
 
+    /**
+     * Returns description of Task.
+     *
+     * @return Description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns status icon representing completion of Task.
+     *
+     * @return Tick or cross.
+     */
     public String getStatusIcon() {
         return (isDone ? "\u2713": "\u2718");
     }
 
+    /**
+     * Returns Task by parsing a task string.
+     *
+     * @param s Task string.
+     * @return Task.
+     * @throws DukeExceptionIllegalArgument If invalid task string supplied.
+     */
     public static Task parseFileString(String s) throws DukeExceptionIllegalArgument {
         String[] args = s.split(" \\| ");
         boolean isDone = args[1].equals("1");
@@ -54,11 +95,21 @@ public class Task {
         return task;
     }
 
+    /**
+     * For pretty printing on stdout.
+     *
+     * @return String representation of Task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + getDescription();
     }
 
+    /**
+     * For minified printing into file.
+     *
+     * @return String representation of Task.
+     */
     public String toFileString() {
         return toString();
     }

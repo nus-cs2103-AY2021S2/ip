@@ -16,8 +16,15 @@ public class FileLoader {
     public boolean isWritable;
     public boolean isReadable;
 
-    // Load file containing task list information
-    @SuppressWarnings("ResultOfMethodCallIgnored")
+    /**
+     * Loads the string path to the task database.
+     *
+     * If uninitialized, will attempt to initialize.
+     * Checks whether file is readable/writable prior to loading of tasks.
+     *
+     * @param pathStr Path to database.
+     * @throws DukeExceptionFileNotAccessible If file cannot be created/read.
+     */
     public FileLoader(String pathStr) throws DukeExceptionFileNotAccessible {
         f = new File(pathStr);
         isReadable = f.canRead();
@@ -39,12 +46,25 @@ public class FileLoader {
         }
     }
 
+    /**
+     * Throws exception if file not writable.
+     *
+     * Used to indicate that a file can be read, but cannot be written (read-only).
+     *
+     * @throws DukeExceptionFileNotWritable When file cannot be written to.
+     */
     public void throwIfNotWritable() throws DukeExceptionFileNotWritable {
         if (!isWritable) {
             throw new DukeExceptionFileNotWritable("Unable to write to file.");
         }
     }
 
+    /**
+     * Writes tasks in tasklist to file.
+     *
+     * @param t TaskList.
+     * @throws DukeExceptionFileNotWritable When file cannot be written to.
+     */
     public void write(TaskList t) throws DukeExceptionFileNotWritable {
         if (isWritable) {
             try (FileWriter writer = new FileWriter(f, false)){
@@ -57,6 +77,12 @@ public class FileLoader {
         }
     }
 
+    /**
+     * Reads tasks using file pointer initialized in constructor.
+     *
+     * @return TaskList.
+     * @throws DukeExceptionIllegalArgument When file cannot be read/loaded.
+     */
     public TaskList read() throws DukeExceptionFileNotAccessible, DukeExceptionIllegalArgument {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(f));

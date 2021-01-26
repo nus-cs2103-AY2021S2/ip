@@ -15,6 +15,17 @@ public abstract class DukeCommand {
         return false;
     }
 
+    /**
+     * Returns command based on user input line.
+     *
+     * The first-hop parsing occurs here.
+     * The rest of the parsing is offloaded to the individual parsing classes.
+     *
+     * @param line User input string.
+     * @return DukeCommand.
+     * @throws DukeExceptionCommandNotFound When command supplied is invalid.
+     * @throws DukeExceptionIllegalArgument When task parsing error occurs.
+     */
     public static DukeCommand parse(String line)
             throws DukeExceptionCommandNotFound, DukeExceptionIllegalArgument {
         line = line.strip(); // input sanitization

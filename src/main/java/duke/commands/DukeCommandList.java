@@ -8,6 +8,12 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * List command.
+ *
+ * If 'toSort' is provided during construction, the list view will be
+ * sorted in order of Todo < Event (chronological) < Deadline (chronological).
+ */
 public class DukeCommandList extends DukeCommand {
 
     protected boolean toSort;
