@@ -28,7 +28,8 @@ public class Storage {
             }
             reader.close();
         } catch(FileNotFoundException e) {
-            System.out.println("No existing file found. Creating...");
+            System.out.println("No existing file found.");
+
         } catch (IOException e) {
             e.printStackTrace();
         }

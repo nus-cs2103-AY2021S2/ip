@@ -23,6 +23,7 @@ public class Duke {
         ICommand printCommand = new CommandDecorator(new PrintCommand());
         printCommand.execute(ui.getIntro());
         try {
+            this.storage.read();
             while (!taskList.hasExited()) {
                 String input = ui.getLine();
                 String[] inputArray = Parser.parse(input);
