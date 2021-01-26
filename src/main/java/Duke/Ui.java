@@ -61,6 +61,29 @@ public class Ui {
         System.out.println(); // Blank line
     }
 
+    // Print the entire list of task
+    public void printTaskListforKeyword(TaskList taskList, String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+
+        int counter = 1;
+                
+        // Shows the list of user inputs with its numbering starting from 1
+        for (int index = 0; index < taskList.size(); index++) {
+            /* Only print the listing and increment the counter if the task descriptions
+            contains the keyword */
+            if (taskList.get(index).description.contains(keyword)) {
+                System.out.println(counter + ". " + taskList.get(index).toString());
+                counter++;
+            }
+        }
+
+        // Print "None" if there is no task that match the keyword
+        if (counter == 1) {
+            System.out.println("None");
+        }
+        System.out.println(); // Blank line
+    }
+
     // General Printing 
     public void generalPrint(String stringToPrint) {
         System.out.println(stringToPrint);
