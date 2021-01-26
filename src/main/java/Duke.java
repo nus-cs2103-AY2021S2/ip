@@ -35,7 +35,7 @@ public class Duke {
                 item.markAsDone();
                 System.out.println("Nice job! I've marked this task as done:\n"
                         + item.toString());
-            } else if ((commandArr[0]).equals("delete")){
+            } else if ((commandArr[0]).equals("delete")) {
                 Task item = currList.remove(Integer.parseInt(commandArr[1]) - 1);
                 System.out.println("Gotcha. I've removed this task:\n"
                         + item.toString()
@@ -45,37 +45,37 @@ public class Duke {
                 String wholeTask;
                 Task item;
                 switch (taskType) {
-                    case "todo":
-                        if (commandArr.length == 1) {
-                            System.out.println("Oops! The description of todo cannot be empty!");
-                            continue;
-                        }
-                        wholeTask = commandArr[1];
-                        item = new Todo(wholeTask);
-                        break;
-                    case "deadline": {
-                        if (commandArr.length == 1) {
-                            System.out.println("Oops! The description of deadline cannot be empty!");
-                            continue;
-                        }
-                        wholeTask = commandArr[1];
-                        String[] taskArr = wholeTask.split("/");
-                        item = new Deadline(taskArr[0], taskArr[1]);
-                        break;
-                    }
-                    case "event": {
-                        if (commandArr.length == 1) {
-                            System.out.println("Oops! The description of event cannot be empty!");
-                            continue;
-                        }
-                        wholeTask = commandArr[1];
-                        String[] taskArr = wholeTask.split("/");
-                        item = new Event(taskArr[0], taskArr[1]);
-                        break;
-                    }
-                    default:
-                        System.out.println("Oops! I don't know what this means! :(");
+                case "todo":
+                    if (commandArr.length == 1) {
+                        System.out.println("Oops! The description of todo cannot be empty!");
                         continue;
+                    }
+                    wholeTask = commandArr[1];
+                    item = new Todo(wholeTask);
+                    break;
+                case "deadline": {
+                    if (commandArr.length == 1) {
+                        System.out.println("Oops! The description of deadline cannot be empty!");
+                        continue;
+                    }
+                    wholeTask = commandArr[1];
+                    String[] taskArr = wholeTask.split("/");
+                    item = new Deadline(taskArr[0], taskArr[1]);
+                    break;
+                }
+                case "event": {
+                    if (commandArr.length == 1) {
+                        System.out.println("Oops! The description of event cannot be empty!");
+                        continue;
+                    }
+                    wholeTask = commandArr[1];
+                    String[] taskArr = wholeTask.split("/");
+                    item = new Event(taskArr[0], taskArr[1]);
+                    break;
+                }
+                default:
+                    System.out.println("Oops! I don't know what this means! :(");
+                    continue;
                 }
                 currList.add(item);
                 System.out.println("Got it. I've added this task:\n"
