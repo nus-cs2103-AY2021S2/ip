@@ -1,4 +1,8 @@
+package chat;
+
 import java.util.Scanner;
+
+import chat.task.Task;
 
 public class Ui {
     //deals with interactions with the user

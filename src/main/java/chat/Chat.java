@@ -1,3 +1,10 @@
+package chat;
+
+import chat.command.Command;
+import chat.TaskList;
+import chat.Storage;
+import chat.Ui;
+
 public class Chat {
     private Storage storage;
     private TaskList tasks;

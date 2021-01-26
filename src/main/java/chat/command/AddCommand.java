@@ -1,3 +1,14 @@
+package chat.command;
+
+import chat.ChatException;
+import chat.TaskList;
+import chat.Storage;
+import chat.Ui;
+import chat.task.Task;
+import chat.task.Todo;
+import chat.task.Deadline; 
+import chat.task.Event;
+
 public class AddCommand extends Command{
     
     String inputStr; 

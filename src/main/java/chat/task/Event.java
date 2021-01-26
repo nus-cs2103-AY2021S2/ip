@@ -1,7 +1,10 @@
+package chat.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
+
+import chat.ChatException;
 
 public class Event extends Task {
 

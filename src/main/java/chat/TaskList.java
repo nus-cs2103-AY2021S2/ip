@@ -1,4 +1,8 @@
+package chat;
+
 import java.util.ArrayList;
+
+import chat.task.Task;
 
 public class TaskList {
     //contains the task list

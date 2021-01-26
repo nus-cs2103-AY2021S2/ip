@@ -1,8 +1,15 @@
+package chat;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import chat.task.Task;
+import chat.task.Todo;
+import chat.task.Deadline;
+import chat.task.Event;
 
 public class Storage {
     //deals with loading tasks from the file and saving tasks in the file

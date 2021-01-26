@@ -1,3 +1,11 @@
+package chat.command;
+
+import chat.ChatException;
+import chat.TaskList;
+import chat.Storage;
+import chat.Ui;
+import chat.task.Task;
+
 public class DoneCommand extends Command {
 
     String inputStr;

@@ -1,3 +1,11 @@
+package chat.command;
+
+import chat.ChatException;
+import chat.TaskList;
+import chat.Storage;
+import chat.Ui;
+import chat.task.Task;
+
 public abstract class Command {
     
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException;

@@ -1,3 +1,7 @@
+package chat.task;
+
+import chat.ChatException;
+
 public class Todo extends Task {
 
     private Todo (String name) {
