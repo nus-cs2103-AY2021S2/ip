@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * Wrapper class around list of tasks to handle operations.
+ */
 public class TaskList {
 
     private List<Task> list;
@@ -8,10 +11,19 @@ public class TaskList {
         this.list = list;
     }
 
+    /**
+     * Get underlying list of tasks.
+     * @return List of tasks
+     */
     public List<Task> getList() {
         return list;
     }
 
+    /**
+     * Get specific task by index.
+     * @param index Index of task
+     * @return Task at that index
+     */
     public Task get(int index) {
         Task selected = list.get(index);
         return selected;
@@ -21,18 +33,33 @@ public class TaskList {
         return list.size();
     }
 
-    public Task markAsDone(int itemNo) {
-        Task selected = list.get(itemNo);
+    /**
+     * Mark task as done.
+     * @param index Index of task
+     * @return Done task.
+     */
+    public Task markAsDone(int index) {
+        Task selected = list.get(index);
         selected.markAsDone();
         return selected;
     }
 
-    public Task delete(int itemNo) {
-        Task selected = list.get(itemNo);
-        list.remove(itemNo);
+    /**
+     * Delete task.
+     * @param index Index of task
+     * @return Deleted task.
+     */
+    public Task delete(int index) {
+        Task selected = list.get(index);
+        list.remove(index);
         return selected;
     }
 
+    /**
+     * Add task.
+     * @param task Task to be added
+     * @return Done task.
+     */
     public void add(Task task) {
         this.list.add(task);
     }

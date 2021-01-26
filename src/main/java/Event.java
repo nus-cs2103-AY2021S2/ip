@@ -13,6 +13,12 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
+    /**
+     * Factory method to create Event task based on input
+     * @param input User input
+     * @return Event object
+     * @throws DukeException If parsing input fails
+     */
     static public Event parse(String input) throws DukeException {
         String[] arr = input.split("event");
         if (arr.length < 2) throw new DukeException("Event description cannot be empty");
@@ -28,6 +34,10 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Convert to file string for saving.
+     * @return File string
+     */
     @Override
     public String toFileString() {
         return String.format("%s|%b|%s|%s", "E", isDone, desc, at);

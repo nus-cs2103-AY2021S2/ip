@@ -13,6 +13,12 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    /**
+     * Factory method to create Deadline task based on input
+     * @param input User input
+     * @return Deadline object
+     * @throws DukeException If parsing input fails
+     */
     static public Deadline parse(String input) throws DukeException {
         String[] arr = input.split("deadline");
         if (arr.length < 2) throw new DukeException("Deadline description cannot be empty");
@@ -28,6 +34,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Convert to file string for saving.
+     * @return File string
+     */
     @Override
     public String toFileString() {
         return String.format("%s|%b|%s|%s", "D", isDone, desc, by);

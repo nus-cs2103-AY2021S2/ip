@@ -8,6 +8,12 @@ public class Todo extends Task {
         super(desc, isDone);
     }
 
+    /**
+     * Factory method to create Todo task based on input
+     * @param input User input
+     * @return Todo object
+     * @throws DukeException If parsing input fails
+     */
     static public Todo parse(String input) throws DukeException {
         String[] arr = input.split("todo");
         if (arr.length < 2) throw new DukeException("Todo description cannot be empty");
@@ -20,6 +26,10 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Convert to file string for saving.
+     * @return File string
+     */
     @Override
     public String toFileString() {
         return String.format("%s|%b|%s", "T", isDone, desc);

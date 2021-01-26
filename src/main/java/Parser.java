@@ -1,3 +1,6 @@
+/**
+ * Parses commands and executes them.
+ */
 public class Parser {
 
     TaskList taskList;
@@ -8,6 +11,12 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Parses user input into commands that are executed.
+     * @param input User input.
+     * @return flag to stop the bot
+     * @throws DukeException If input parsing fails.
+     */
     public boolean parse(String input) throws DukeException {
         if (input.equals("list")) {
             ui.print(taskList.toString());

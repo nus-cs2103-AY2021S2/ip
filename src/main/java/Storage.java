@@ -6,6 +6,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles loading and saving tasks from/to stored text file.
+ */
 public class Storage {
     private static final String path = "data/duke.txt";
 
@@ -19,6 +22,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads list of tasks from file
+     * @return List of tasks
+     */
     public List<Task> loadTasks() {
         List<Task> tl = new ArrayList<>();
         List<String> lines = getLines();
@@ -33,6 +40,10 @@ public class Storage {
         return tl;
     }
 
+    /**
+     * Save list of tasks to file
+     * @param list List of tasks.
+     */
     public void saveTasks(List<Task> list) {
         List<String> lines = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
