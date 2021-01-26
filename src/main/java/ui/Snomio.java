@@ -1,6 +1,6 @@
-/**
+package ui; /**
  * Deals with interactions with the user.
- * This Snomio simply compile both BufferedReader and BufferedWriter
+ * This ui.Snomio simply compile both BufferedReader and BufferedWriter
  * for easier I/O usages. For eg. read commands, contents, numbers
  * from user's input.
  *
@@ -8,6 +8,10 @@
  *
  * @author: Sharptail
  */
+import exceptions.SnomException;
+import tasks.Task;
+import tasks.TaskList;
+
 import java.io.*;
 import java.util.StringTokenizer;
 

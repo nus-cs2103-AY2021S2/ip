@@ -1,6 +1,11 @@
+package parser;
+
+import commands.*;
+import exceptions.SnomException;
+
 public class Parser {
 
-    public static Command parse(String commandStr){
+    public static Command parse(String commandStr) throws SnomException {
         CommandEnum commandEnum = CommandEnum.getCommand(commandStr);
         switch(commandEnum){
             case LIST:
@@ -18,7 +23,7 @@ public class Parser {
             case EVENT:
                 return new AddCommand(CommandEnum.EVENT);
             default:
+                throw new SnomException("OOPS!!! I'm sorry, but I don't know what '\" + input + \"' means :-(\"");
         }
-        return null;
     }
 }

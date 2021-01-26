@@ -1,3 +1,11 @@
+package commands;
+
+import exceptions.SnomException;
+import storage.Storage;
+import tasks.Task;
+import tasks.TaskList;
+import ui.Snomio;
+
 public class FinishCommand extends Command{
     public FinishCommand(CommandEnum type) {
         super(type);

@@ -1,3 +1,7 @@
+package tasks;
+
+import exceptions.SnomException;
+
 public class Event extends TaskWithDate{
     public Event(String description, String dateTime) throws SnomException {
         super(description, dateTime);

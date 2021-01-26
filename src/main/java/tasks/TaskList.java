@@ -1,3 +1,7 @@
+package tasks;
+
+import exceptions.SnomException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -34,7 +38,7 @@ public class TaskList {
      * Adds the given task to task list, can be a todo, deadline or event task.
      * Then prints out respective messages.
      *
-     * @param task either Todo, Deadline, Event
+     * @param task either tasks.Todo, tasks.Deadline, tasks.Event
      */
     public void addTask(Task task){
         list.add(task);

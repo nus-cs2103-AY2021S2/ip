@@ -1,3 +1,7 @@
+package tasks;
+
+import exceptions.SnomException;
+
 public class Deadline extends TaskWithDate {
     public Deadline(String description, String dateTime) throws SnomException {
         super(description, dateTime);

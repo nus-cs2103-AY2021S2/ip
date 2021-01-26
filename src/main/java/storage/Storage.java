@@ -1,9 +1,12 @@
-/**
+package storage; /**
  * This class handles any files related process for Snom
  * Eg. Create, Write, Delete save files.
  *
  * @author Sharptail
  */
+
+import exceptions.SnomException;
+import tasks.*;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -50,7 +53,7 @@ public class Storage {
      *
      * @return array list of tasks
      */
-    public ArrayList<Task> readFile() throws SnomException{
+    public ArrayList<Task> readFile() throws SnomException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(path);

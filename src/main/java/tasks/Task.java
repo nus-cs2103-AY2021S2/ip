@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * This class is to store task's information
  *

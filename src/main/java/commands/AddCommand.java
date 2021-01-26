@@ -1,3 +1,13 @@
+package commands;
+
+import exceptions.SnomException;
+import storage.Storage;
+import tasks.Deadline;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.Todo;
+import ui.Snomio;
+
 public class AddCommand extends Command{
     public AddCommand(CommandEnum type) {
         super(type);

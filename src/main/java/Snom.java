@@ -1,3 +1,10 @@
+import commands.Command;
+import exceptions.SnomException;
+import parser.Parser;
+import storage.Storage;
+import tasks.TaskList;
+import ui.Snomio;
+
 /**
  * Snom is a Personal Assistant Chatbot that helps
  * a person to keep track of various things.
@@ -30,10 +37,9 @@ public class Snom {
                 isExit = command.isExit();
             } catch (SnomException e) {
                 snomio.showError(e.getMessage());
-            } finally{
-                snomio.close();
             }
         }
+        snomio.close();
     }
 
     public static void main(String[] args) {
