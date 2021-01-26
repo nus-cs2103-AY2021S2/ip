@@ -7,7 +7,35 @@ public class Command {
         this.list = list;
     }
 
-    public List<Task> handleCommand(String command) throws DukeException {
+    public List<Task> handleFileCommand(String command) throws DukeException { //T # 1 # read book # June 6th
+        String[] inputs = command.split(" # ");
+        //System.out.println(inputs[0] + " ");
+        String action = inputs[0];
+        if (action.equals("T")) {
+            ToDo newTask = new ToDo(inputs[2]);
+            if (Integer.parseInt(inputs[1]) == 1) {
+                newTask.markAsDone();
+            }
+            list.add(newTask);
+        } else if (action.equals("D")) {
+            Deadline newTask = new Deadline(inputs[2], inputs[3]);
+            if (Integer.parseInt(inputs[1]) == 1) {
+                newTask.markAsDone();
+            }
+            list.add(newTask);
+        } else if (action.equals("E")) {
+            Event newTask = new Event(inputs[2], inputs[3]);
+            if (Integer.parseInt(inputs[1]) == 1) {
+                newTask.markAsDone();
+            }
+            list.add(newTask);
+        } else {
+            throw new DukeException("Sorry! No such command is allowed.");
+        }
+        return list;
+    }
+
+    public List<Task> handleUserCommand(String command) throws DukeException {
         String[] inputs = command.split(" ");
         if (inputs.length == 0) {
             throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");

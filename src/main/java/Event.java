@@ -6,6 +6,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    @Override
+    public String generateText() {
+        return String.format("E # %d # %s # %s", this.isDone ? 1 : 0, this.description, this.time);
+    }
+
     public String getTime() {
         return "(at: " + this.time + ")";
     }
