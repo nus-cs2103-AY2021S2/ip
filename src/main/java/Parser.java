@@ -10,7 +10,8 @@ public class Parser {
 
     void invalidCommandChecker(String taskType) throws InvalidCommandException {
         if (!(taskType.equals("todo") || taskType.equals("done") || taskType.equals("list") || taskType.equals("event")
-                || taskType.equals("deadline") || taskType.equals("delete") || taskType.equals("bye"))) {
+                || taskType.equals("deadline") || taskType.equals("delete") || taskType.equals("bye")
+                || taskType.equals("find"))) {
             throw new InvalidCommandException("Sorry, I don't know what that means...");
         }
     }
@@ -94,6 +95,13 @@ public class Parser {
             String time = parseTime(dateAndTime[1]);
             String by = date + " " + time;
             return new AddCommand(new Event(taskInfoArr[0], by));
+        }
+        case "find": {
+            emptyDescriptionChecker(tokens);
+
+            String taskInfo = tokens[1];
+
+            return new FindCommand(taskInfo);
         }
         case "bye": {
             return new ExitCommand();
