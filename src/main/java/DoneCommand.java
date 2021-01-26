@@ -1,6 +1,5 @@
 public class DoneCommand extends Command {
-    String[] info;
-    boolean isBye = false;
+    protected String[] info;
 
     public DoneCommand(String[] info) {
         this.info = info;
@@ -10,6 +9,7 @@ public class DoneCommand extends Command {
     public boolean isBye() {
         return info[0].equals("bye");
     }
+
 
     /**
      * changes the state of a task to completed.

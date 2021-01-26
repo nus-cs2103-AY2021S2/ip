@@ -1,12 +1,13 @@
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    Date by;
+    protected Date by;
 
     public Deadline(String description, Date by, String type) {
         super(description,type);
         this.by = by;
     }
+
 
     /**
      * displays the deadline details and whether it is completed.

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> taskList;
-    int listLength;
+    private ArrayList<Task> taskList;
+    private int listLength;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
@@ -13,6 +13,7 @@ public class TaskList {
         this.taskList = new ArrayList<>();
         this.listLength = 0;
     }
+
 
     /**
      * creates a Task object and adds it to the TaskList object
@@ -77,6 +78,7 @@ public class TaskList {
 
     }
 
+
     /**
      * removes a task from the TaskList. The task is determined by the user input
      * found in the string array.
@@ -94,6 +96,7 @@ public class TaskList {
         listLength--;
         return task;
     }
+
 
     /**
      * changes the state of the task to completed. The task is determined by the user input
@@ -113,6 +116,14 @@ public class TaskList {
         Task tobeDone = taskList.get(Integer.parseInt(info[1]) - 1);
         tobeDone.completed();
         return tobeDone;
+    }
+
+    public ArrayList<Task> getList() {
+        return taskList;
+    }
+
+    public int getListLength() {
+        return listLength;
     }
 
 }

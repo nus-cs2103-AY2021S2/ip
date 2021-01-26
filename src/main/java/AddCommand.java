@@ -1,6 +1,5 @@
 public class AddCommand extends Command {
-    String[] info;
-    boolean isBye = false;
+    protected String[] info;
 
     public AddCommand(String[] info) {
         this.info = info;
@@ -10,6 +9,7 @@ public class AddCommand extends Command {
     public boolean isBye() {
         return info[0].equals("bye");
     }
+
 
     /**
      * adds a task to the list using the given information.

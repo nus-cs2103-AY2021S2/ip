@@ -1,12 +1,13 @@
 public class Event extends Task{
-    Date date;
-    String duration;
+    protected Date date;
+    protected String duration;
 
     public Event(String description, Date date, String duration, String type) {
         super(description, type);
         this.date = date;
         this.duration = duration;
     }
+
 
     /**
      * converts the Event object to a String

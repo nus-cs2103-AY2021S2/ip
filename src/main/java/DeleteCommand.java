@@ -1,5 +1,5 @@
 public class DeleteCommand extends Command {
-    String[] info;
+    protected String[] info;
 
     public DeleteCommand(String[] info) {
         this.info = info;
@@ -9,6 +9,7 @@ public class DeleteCommand extends Command {
     public boolean isBye() {
         return info[0].equals("bye");
     }
+
 
     /**
      * removes a task from the list using the given information.
@@ -23,6 +24,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.delete(info);
-        ui.deletedTask(task, tasks.listLength);
+        int listLength = tasks.getListLength();
+        ui.deletedTask(task, listLength);
     }
 }

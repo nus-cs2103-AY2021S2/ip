@@ -6,6 +6,7 @@ public class TaskListTest {
     @Test
     public void testListLength() {
         TaskList tasks = new TaskList();
-        assertEquals(tasks.listLength, 0);
+        int length = tasks.getListLength();
+        assertEquals(length, 0);
     }
 }

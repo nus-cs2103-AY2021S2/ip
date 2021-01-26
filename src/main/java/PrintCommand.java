@@ -1,5 +1,5 @@
 public class PrintCommand extends Command {
-    String[] info;
+    protected String[] info;
 
     public PrintCommand(String[] info) {
         this.info = info;
@@ -9,6 +9,7 @@ public class PrintCommand extends Command {
     public boolean isBye() {
         return info[0].equals("bye");
     }
+
 
     /**
      * prints the tasks stored in the TaskList object.

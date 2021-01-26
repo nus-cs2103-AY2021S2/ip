@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Date {
-    LocalDate date;
+    private LocalDate date;
 
     public Date(String date) {
         this.date = LocalDate.parse(date);

@@ -36,17 +36,20 @@ public class Ui {
         System.out.println("OOPS! The file hasn't been created yet");
     }
 
+
     /**
      * Prints lines to show the user what task has been added.
      *
      * @param tasks TaskList of all the tasks
      */
     void addedTask(TaskList tasks) {
-        Task task = tasks.taskList.get(tasks.listLength - 1);
+        int numberOfTasks = tasks.getListLength();
+        Task task = tasks.getList().get(numberOfTasks - 1);
         System.out.println("Got it. I've added this task:");
         System.out.println("    " + task);
-        System.out.println("Now you have " + (tasks.listLength) + " tasks in the list.");
+        System.out.println("Now you have " + (numberOfTasks) + " tasks in the list.");
     }
+
 
     /**
      * prints all the task in the list
@@ -54,12 +57,13 @@ public class Ui {
      * @param tasks TaskList containing all the user's tasks
      */
     void printList(TaskList tasks) {
-        ArrayList<Task> list = tasks.taskList;
+        ArrayList<Task> list = tasks.getList();
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0;  i < tasks.listLength; i++) {
+        for (int i = 0;  i < list.size(); i++) {
             System.out.println( (i+1) + "."  + list.get(i));
         }
     }
+
 
     /**
      * notifies the user that a specific task has been removed from the TaskList.
@@ -72,6 +76,7 @@ public class Ui {
         System.out.println(task);
         System.out.println("Now you have " + listLength + " tasks in the list.");
     }
+
 
     /**
      * notifies the user that a specific task has been completed.

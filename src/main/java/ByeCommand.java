@@ -7,6 +7,7 @@ public class ByeCommand extends Command {
         return true;
     }
 
+
     /**
      * Stores all the tasks into a file. Filepath of the file
      * will be obtained from the Storage object.

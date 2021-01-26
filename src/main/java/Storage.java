@@ -2,11 +2,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
 
     /**
      * stores the tasks in the TaskList object into a file.
@@ -18,7 +19,8 @@ public class Storage {
      */
     void store(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task task : list.taskList) {
+        ArrayList<Task> tasks = list.getList();
+        for (Task task : tasks) {
             String s = "";
             if (task.type.equals("T")) {
                 s = task.isDone ? "T" + " , " + "1" + " , " + task.description
