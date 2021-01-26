@@ -52,6 +52,6 @@ public class Event extends Task {
 
 	@Override
 	public String encode() {
-		return String.format("E | %s | %s | %s", this.isDone ? "1" : "0", this.description, this.dateTime);
+		return String.format("E | %s | %s | %s", this.isDone ? "1" : "0", this.description, this.getDateTime());
 	}
 }

@@ -62,7 +62,8 @@ public class Duke {
     }
 
     private static Task parseStringToTask(String str) {
-        String[] tokens = str.split(" \\| ");
+        final String[] tokens = str.split(" \\| ");
+        String[] datetime;
         try {
             switch (tokens[0]) {
             case "T":
@@ -70,11 +71,23 @@ public class Duke {
                 if (tokens[1].equals("1")) todo.markAsDone();
                 return todo; 
             case "D":
-                final Deadline deadline = new Deadline(tokens[2], tokens[3]);
+                datetime = tokens[3].split(" ", 2);
+                Deadline deadline;
+                if (datetime.length == 2) {
+                    deadline = Deadline.create(tokens[2], datetime[0].strip(), datetime[1].strip());
+                } else {
+                    deadline = Deadline.create(tokens[2], datetime[0].strip());
+                }
                 if (tokens[1].equals("1")) deadline.markAsDone();
-                return deadline; 
+                return deadline;
             case "E":
-                final Event event = new Event(tokens[2], tokens[3]);
+                datetime = tokens[3].split(" ", 2);
+                Event event;
+                if (datetime.length == 2) {
+                    event = Event.create(tokens[2], datetime[0].strip(), datetime[1].strip());
+                } else {
+                    event = Event.create(tokens[2], datetime[0].strip());
+                }
                 if (tokens[1].equals("1")) event.markAsDone();
                 return event;
             default:
