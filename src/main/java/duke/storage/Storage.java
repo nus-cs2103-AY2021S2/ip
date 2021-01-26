@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Storage {
-    private File file;
+    private final File file;
 
     public Storage() {
         this.file = new File("data", "duke.txt");

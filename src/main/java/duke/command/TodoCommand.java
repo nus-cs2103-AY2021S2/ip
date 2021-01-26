@@ -7,7 +7,7 @@ import duke.task.Todo;
 import duke.ui.Ui;
 
 public class TodoCommand extends Command {
-    private Todo todo;
+    private final Todo todo;
 
     public TodoCommand(String description) throws DukeException {
         if (description.equals("")) {
