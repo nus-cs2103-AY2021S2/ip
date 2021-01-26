@@ -17,6 +17,13 @@ public class Task {
     }
 
     /**
+     * Set state of task as done once the task is completed
+     */
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    /**
      * Retrieve the status of task
      * @return Cross if task is marked as completed, empty string if incomplete
      */
@@ -25,10 +32,11 @@ public class Task {
     }
 
     /**
-     * Set state of task as done once the task is completed
+     * Retrieve the description of task
+     * @return String format of task description
      */
-    public void markAsDone() {
-        this.isDone = true;
+    public String getDescription() {
+        return this.description;
     }
 
     /**

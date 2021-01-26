@@ -3,30 +3,30 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = new ArrayList<>();
-        this.taskList.addAll(taskList);
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = new ArrayList<>();
+        this.tasks.addAll(tasks);
     }
 
     public void add(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
     }
 
     public void remove(Task task) {
-        this.taskList.remove(task);
+        this.tasks.remove(task);
     }
 
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public Task get(int index) {
-        return this.taskList.get(index);
+        return this.tasks.get(index);
     }
 }

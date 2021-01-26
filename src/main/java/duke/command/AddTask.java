@@ -26,13 +26,13 @@ public class AddTask extends Command {
         switch (commandType) {
         case "event":
             formatDateTime();
-            newTask = new Event(this.commandDetails, LocalDate.parse(this.dateTime,
-                    DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            newTask = new Event(this.commandDetails,
+                    LocalDate.parse(this.dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy")));
             break;
         case "deadline":
             formatDateTime();
-            newTask = new Deadline(this.commandDetails, LocalDate.parse(this.dateTime,
-                    DateTimeFormatter.ofPattern("MMM dd yyyy")));
+            newTask = new Deadline(this.commandDetails,
+                    LocalDate.parse(this.dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy")));
             break;
         case "todo":
             newTask = new ToDo(this.commandDetails);
@@ -41,7 +41,8 @@ public class AddTask extends Command {
             break;
         }
         taskList.add(newTask);
-        if(newTask != null) {
+
+        if (newTask != null) {
             this.outputMessage += "\t  " + newTask.toString() + "\n\t Now you have "
                     + taskList.size() + " tasks in the list.";
         }
@@ -55,21 +56,19 @@ public class AddTask extends Command {
         } else {
             result = commandDetails.trim().split(" /by ");
         }
+
         this.dateTime = result[1];
         this.commandDetails = result[0];
 
-        if(!validDateTime(this.dateTime)) {
+        if (!validDateTime(this.dateTime)) {
             throw new DukeException(ExceptionType.INVALID_DATETIME, "");
         }
     }
 
     private boolean validDateTime(String dateTime) {
-        try
-        {
+        try {
             LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        }
-        catch (DateTimeParseException ex)
-        {
+        } catch (DateTimeParseException ex) {
             return false;
         }
         return true;
@@ -77,9 +76,6 @@ public class AddTask extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (this.commandDetails.equals("")) {
-            throw new DukeException(ExceptionType.BLANK_DESCRIPTION, this.commandType);
-        }
         handleNewTask(taskList);
         storage.saveData(taskList);
         ui.display(this.outputMessage);
