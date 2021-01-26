@@ -14,7 +14,8 @@ class Storage {
 
 	Storage() {
 		try {
-			Path location = Path.of(Parser.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+			File jarDir = new File(Parser.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+			Path location = Path.of(jarDir.getParentFile().getPath());
 			Path dir = location.resolve("data");
 			Path file = dir.resolve("list.txt");
 
@@ -26,8 +27,6 @@ class Storage {
 			}
 
 			this.data = new File(file.toUri());
-
-		} catch (URISyntaxException e) {
 
 		} catch (IOException e) {
 
