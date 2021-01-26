@@ -8,52 +8,86 @@ Hello from
 What can I do for you?
 ------------------------------------
 ------------------------------------
-Invalid action, type 'help' for more options
+Error: Invalid instruction, type 'help' for more options.
 ------------------------------------
 ------------------------------------
-Got it! I have added this task:
-[T][ ] play catching
-You have 1 task(s) now!
+Task successfully added! You now have 1 task(s)!
 ------------------------------------
 ------------------------------------
-Got it! I have added this task:
-[D][ ] read book (by: sunday 3pm)
-You have 2 task(s) now!
+Error: Invalid date specified, please adhere to the format: /by YYYY-MM-DD
 ------------------------------------
 ------------------------------------
-Got it! I have added this task:
-[E][ ] swimming class (at: monday 4-6pm)
-You have 3 task(s) now!
+Error: Invalid date specified, please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD
+------------------------------------
+------------------------------------
+Task successfully added! You now have 2 task(s)!
 ------------------------------------
 ------------------------------------
 1.[T][ ] play catching
-2.[D][ ] read book (by: sunday 3pm)
-3.[E][ ] swimming class (at: monday 4-6pm)
+2.[E][ ] swimming class (from: Mar 3 2020 to: Mar 3 2020)
 ------------------------------------
 ------------------------------------
 Yay your task is done! :D
 ------------------------------------
 ------------------------------------
 1.[T][X] play catching
-2.[D][ ] read book (by: sunday 3pm)
-3.[E][ ] swimming class (at: monday 4-6pm)
+2.[E][ ] swimming class (from: Mar 3 2020 to: Mar 3 2020)
 ------------------------------------
 ------------------------------------
-Task is already completed!
+Error: Task is already completed!
 ------------------------------------
 ------------------------------------
 1.[T][X] play catching
-2.[D][ ] read book (by: sunday 3pm)
-3.[E][ ] swimming class (at: monday 4-6pm)
+2.[E][ ] swimming class (from: Mar 3 2020 to: Mar 3 2020)
 ------------------------------------
 ------------------------------------
 Yay your task is done! :D
 ------------------------------------
 ------------------------------------
 1.[T][X] play catching
-2.[D][X] read book (by: sunday 3pm)
-3.[E][ ] swimming class (at: monday 4-6pm)
+2.[E][X] swimming class (from: Mar 3 2020 to: Mar 3 2020)
+------------------------------------
+------------------------------------
+The following task has been deleted:
+[T][X] play catching
+------------------------------------
+------------------------------------
+1.[E][X] swimming class (from: Mar 3 2020 to: Mar 3 2020)
+------------------------------------
+------------------------------------
+Error: Usage for delete: delete <task index> | Description: delete by index a given task
+------------------------------------
+------------------------------------
+1.[E][X] swimming class (from: Mar 3 2020 to: Mar 3 2020)
+------------------------------------
+------------------------------------
+The following task has been deleted:
+[E][X] swimming class (from: Mar 3 2020 to: Mar 3 2020)
+------------------------------------
+------------------------------------
+Task successfully added! You now have 1 task(s)!
+------------------------------------
+------------------------------------
+Task successfully added! You now have 2 task(s)!
+------------------------------------
+------------------------------------
+1.[T][ ] final one
+A total of 1 task(s) were found.
+------------------------------------
+------------------------------------
+1.[T][ ] final one
+2.[T][ ] really meh
+------------------------------------
+------------------------------------
+The following task has been deleted:
+[T][ ] final one
+------------------------------------
+------------------------------------
+The following task has been deleted:
+[T][ ] really meh
+------------------------------------
+------------------------------------
+You have no task at the moment!
 ------------------------------------
 ------------------------------------
 Bye! See you later :D
-------------------------------------
