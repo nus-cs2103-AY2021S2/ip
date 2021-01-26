@@ -6,18 +6,34 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Parser is the class that parses raw user commands and executes the intended effect
+ */
 public class Parser {
 
     private final Ui ui;
     private final Storage storage;
     private final TaskList tasks;
 
+    /**
+     * Constructor for the Parser class
+     * @param ui Ui object that interacts with user
+     * @param storage Storage object that handles saving/loading of tasks to and from hard disk
+     * @param tasks TaskList object which contains all the tasks in the program
+     */
     public Parser(Ui ui, Storage storage, TaskList tasks) {
         this.ui = ui;
         this.storage = storage;
         this.tasks = tasks;
     }
 
+    /**
+     * Parses the raw command from the user, deciphers the intent and executes it. Adds/deletes/modifies tasks in
+     * <code>task</code> and displays messages via <code>ui</code>. Displays error message in the event
+     * that the command is not recognizable.
+     * @param fullCommand raw command provided as a String
+     * @return true if the user enters "bye", a sign to terminate the program
+     */
     public boolean parse(String fullCommand) {
         try {
             StringBuilder response = new StringBuilder();
