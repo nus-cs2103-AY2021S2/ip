@@ -1,9 +1,9 @@
-package main.java;
+package main.java.duke;
 
 public class Deadline extends Task {
     protected static final String TAG = "[D]";
 
-    Deadline(String name) {
+    public Deadline(String name) {
         super(name);
     }
 

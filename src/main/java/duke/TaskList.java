@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class TaskList {
     protected List<Task> tasks;
     protected Storage storage;
 
-    TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
         this.storage = new Storage();
     }

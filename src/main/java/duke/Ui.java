@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Ui {
     protected Scanner sc;
     protected TaskList tasks;
 
-    Ui(Scanner sc) {
+    public Ui(Scanner sc) {
         this.sc = sc;
         this.tasks = null;
     }

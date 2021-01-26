@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Duke {
     protected Ui ui;
     protected TaskList tasks;
 
-    Duke() {
+    public Duke() {
         this.ui = new Ui(new Scanner(System.in));
         this.tasks = new TaskList();
     }

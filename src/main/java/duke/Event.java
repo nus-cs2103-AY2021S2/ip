@@ -1,9 +1,9 @@
-package main.java;
+package main.java.duke;
 
 public class Event extends Task {
     protected static final String TAG = "[E]";
 
-    Event(String name) {
+    public Event(String name) {
         super(name);
     }
 

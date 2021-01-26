@@ -1,9 +1,9 @@
-package main.java;
+package main.java.duke;
 
 public class Todo extends Task {
     protected static final String TAG = "[T]";
 
-    Todo(String name) {
+    public Todo(String name) {
         super(name);
     }
 
