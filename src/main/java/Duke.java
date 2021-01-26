@@ -53,11 +53,19 @@ public class Duke {
             Todo addedTask = new Todo(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"));
             Duke.ls.add(addedTask);
         } else if (splits[0].equals("D")) {
-            Deadline addedTask = new Deadline(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
-            Duke.ls.add(addedTask);
+            try {
+                Deadline addedTask = new Deadline(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Duke.ls.add(addedTask);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         } else if (splits[0].equals("E")) {
-            Event addedTask = new Event(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
-            Duke.ls.add(addedTask);
+            try {
+                Event addedTask = new Event(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Duke.ls.add(addedTask);
+            } catch (DukeException e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -178,12 +186,16 @@ public class Duke {
                 throw new ArgumentException(1);
             }
         } else if (userInput.startsWith("deadline ")) {
-            String[] splits = userInput.split("deadline | /by ");
+            String[] splits = userInput.split("deadline |/by ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
-                Duke.ls.add(addedTask);
-                System.out.println("Got it, I've added this task to the list: ");
-                System.out.println("  " + addedTask);
+                try {
+                    Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
+                    Duke.ls.add(addedTask);
+                    System.out.println("Got it, I've added this task to the list: ");
+                    System.out.println("  " + addedTask);
+                } catch (DukeException ex) {
+                    System.out.println(ex);
+                }
             } else {
                 throw new ArgumentException(2);
             }
