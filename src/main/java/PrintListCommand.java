@@ -1,3 +1,6 @@
+/**
+ * A command that represents printing the <code>TaskList</code>
+ */
 public class PrintListCommand extends Command {
     public PrintListCommand() {
 
