@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Handles any printing required to the user such that no other classes should print to user
+ *
+ * @author leeyueyang
+ */
 public class Ui {
 
     public static void fileError() {

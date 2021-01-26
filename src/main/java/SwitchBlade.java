@@ -1,6 +1,11 @@
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Main class of the chatbot
+ *
+ * @author leeyueyang
+ */
 public class SwitchBlade {
 
     private static void processCommand(String input, myList taskList) {
@@ -61,6 +66,10 @@ public class SwitchBlade {
         } else Ui.eventError();
     }
 
+    /**
+     *
+     * @param args User defined arguments when running the project from command line
+     */
     public static void main(String[] args) {
 
         Ui.init();
