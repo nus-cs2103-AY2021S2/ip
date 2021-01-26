@@ -15,26 +15,28 @@ public class EventTask extends Task {
         this.endDate = end;
     }
 
-    private EventTask(boolean done, String desc, String date) {
+    private EventTask(boolean done, String desc, final LocalDateTime start, final LocalDateTime end) {
         super(desc);
         super.isDone = done;
-        this.event = date;
+        this.startDate = start;
+        this.endDate = end;
     }
 
     @Override
     public String serialise() {
         return String.format(
-                "%s\255%b\255%s\255%s",
+                "%s\255%b\255%s\255%s\255%s",
                 DukeString.COMMAND_EVENT,
                 super.isDone,
                 super.description,
-                event
+                startDate.toString(),
+                endDate.toString()
         );
     }
 
     public static EventTask deserialise(String input) {
         String[] tokens = input.split("\255");
-        return new EventTask(tokens[1].equals("true"), tokens[2], tokens[3]);
+        return new EventTask(tokens[1].equals("true"), tokens[2], LocalDateTime.parse(tokens[3]), LocalDateTime.parse(tokens[4]));
     }
 
     @Override

@@ -13,7 +13,7 @@ public class DeadlineTask extends Task {
         this.deadline = date;
     }
 
-    private DeadlineTask(boolean done, String desc, String date) {
+    private DeadlineTask(boolean done, String desc, LocalDateTime date) {
         super(desc);
         super.isDone = done;
         this.deadline = date;
@@ -26,13 +26,13 @@ public class DeadlineTask extends Task {
                 DukeString.COMMAND_DEADLINE,
                 super.isDone,
                 super.description,
-                deadline
+                deadline.toString()
         );
     }
 
     public static DeadlineTask deserialise(String input) {
         String[] tokens = input.split("\255");
-        return new DeadlineTask(tokens[1].equals("true"), tokens[2], tokens[3]);
+        return new DeadlineTask(tokens[1].equals("true"), tokens[2], LocalDateTime.parse(tokens[3]));
     }
 
     @Override
