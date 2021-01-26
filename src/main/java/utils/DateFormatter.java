@@ -11,15 +11,12 @@ public class DateFormatter {
         try {
             return LocalDate.parse(date);
         } catch (DateTimeException e) {
-            throw new DukeException("An error occurred while encoding date: " + e.getMessage());
+            throw new DukeException("An error occurred while encoding date,"
+                    + " try the yyyy-mm-dd format.");
         }
     }
 
-    public static String decodeDate(LocalDate date) throws DukeException {
-        try {
-            return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        } catch (DateTimeException e) {
-            throw new DukeException("An error occurred while decoding date: " + e.getMessage());
-        }
+    public static String decodeDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 }
