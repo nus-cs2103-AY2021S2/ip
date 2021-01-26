@@ -1,8 +1,8 @@
 package com.tjtanjin.ip;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.time.DateTimeException;
 
 /**
  * The Parser class parses user input before calling the appropriate command classes for execution.
