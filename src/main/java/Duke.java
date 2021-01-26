@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -6,7 +10,7 @@ public class Duke {
     public enum Commands {
         USAGE, LIST,
         TODO, DEADLINE, EVENT,
-        DONE, DELETE, BYE
+        DONE, DELETE, SAVE, BYE
     }
 
     public static void main(String[] args) {
@@ -43,6 +47,9 @@ public class Duke {
                         break;
                     case DELETE:
                         delete(collection, input);
+                        break;
+                    case SAVE:
+                        save(collection);
                         break;
                     case BYE:
                         exit = bye(sc);
@@ -126,6 +133,7 @@ public class Duke {
         Duke.say("\t- event <task_description> /at <date_time>");
         Duke.say("\t- done <task_number>");
         Duke.say("\t- delete <task_number>");
+        Duke.say("\t- save");
         Duke.say("\t- bye");
     }
 
@@ -185,6 +193,52 @@ public class Duke {
             throw new DukeException("I need a task number...");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I don't think there is such a task...");
+        }
+    }
+
+    public static void save(ArrayList<Task> collection) throws DukeException {
+        try {
+            Path dirPath = Paths.get(System.getProperty("user.dir"), "data");
+            Files.createDirectories(dirPath); // force create directories
+
+            Path filePath = Paths.get(dirPath.toString(), "duke.txt");
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < collection.size(); i++) {
+                Task task = collection.get(i);
+
+                // Task type
+                if (task instanceof Todo)
+                    sb.append('T');
+                else if (task instanceof Deadline)
+                    sb.append('D');
+                else if (task instanceof Event)
+                    sb.append('E');
+
+                // Status
+                sb.append(" | ");
+                if (task.getStatusIcon().equals("*"))
+                    sb.append("1");
+                else
+                    sb.append("0");
+
+                // Description
+                sb.append(" | ");
+                sb.append(task.getDescription());
+
+                // Args
+                if (task instanceof Deadline) {
+                    sb.append(" | ");
+                    sb.append(((Deadline)task).getBy());
+                } else if (task instanceof Event) {
+                    sb.append(" | ");
+                    sb.append(((Event)task).getAt());
+                }
+                sb.append('\n');
+            }
+            Files.write(filePath, sb.toString().getBytes());
+        } catch (IOException e) {
+            throw new DukeException("I don't think there is such a file...");
         }
     }
 
