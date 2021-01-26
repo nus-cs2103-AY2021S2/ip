@@ -1,12 +1,35 @@
-public class Deadline extends Task {
-    private final String deadline;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    Deadline(String task, String deadline) {
+public class Deadline extends Task {
+    private final LocalDate deadline;
+
+    //private static final String INPUT_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy";
+
+    Deadline(String task, String deadline) throws DukeExceptionDeadline {
         super(task);
-        this.deadline = deadline;
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            this.deadline = LocalDate.parse(deadline, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getMessage());
+            throw new DukeExceptionDeadline("Wrong format of date. The format should be yyyy-MM-dd");
+        }
     }
 
-    Deadline(String task, String deadline, boolean done) {
+    Deadline(String task, String deadline, boolean done) throws DukeExceptionDeadline {
+        super(task, done);
+        try{
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+            this.deadline = LocalDate.parse(deadline, formatter);
+        } catch (DateTimeParseException e) {
+            throw new DukeExceptionDeadline("Wrong format of date. The format should be yyyy-mm-dd");
+        }
+    }
+
+    Deadline(String task, LocalDate deadline, boolean done) {
         super(task, done);
         this.deadline = deadline;
     }
@@ -19,6 +42,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + this.deadline;
+        String date = this.deadline.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
+        return "[D]" + super.toString() + " (by: " + date + ")";
     }
 }
