@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Task {
 
     private String name;

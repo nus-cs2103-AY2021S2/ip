@@ -1,235 +1,41 @@
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.ArrayList;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    private static ArrayList<Task> taskArr = new ArrayList<>();
-    private static String greetingCat = "(=^. .^=)";
-    private static String goodByeCat = "(=^. .^=*)";
-    private static String goCat = "(=^. .^=)~~";
-    private static String gdJobCat = "\\(=^> <^=)/";
-
-    public static void lines() {
-        System.out.println("__________________________" +
-                "__________________________________");
-    }
-
-    public static void greet() {
-        System.out.println(greetingCat);
-        System.out.println("Mew! I'm Chat the Cat");
-        System.out.println("What can I do for you?");
-    }
-
-    public static void echo(String s) {
-        System.out.println(s);
-    }
-
-    public static void goodbye() {
-        System.out.println("*** Goodbye *** " + goodByeCat);
-    }
-
-    public static void printAddedSuccess(Task task) {
-        System.out.println(goCat);
-        System.out.println("Mew! I've added this task:");
-        System.out.println(task);
-        System.out.println(String.format("\n** Now you have %d tasks in the list **", taskArr.size()));
-    }
-
-    public static void addTodo(String s) {
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            Task task = Todo.createTodo(s);
-            taskArr.add(task);
-            printAddedSuccess(task);
+            tasks = new TaskList(storage.load());
         } catch (ChatException e) {
-            System.out.println(e);
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 
-    public static void addDeadline(String s) {
-        try {
-            Task task = Deadline.createDeadline(s);
-            taskArr.add(task);
-            printAddedSuccess(task);
-        } catch (ChatException e) {
-            System.out.println(e);
-        }
-    }
-
-    public static void addEvent(String s) {
-        try {
-            Task task = Event.createEvent(s);
-            taskArr.add(task);
-            printAddedSuccess(task);
-        } catch (ChatException e) {
-            System.out.println(e);
-        }
-    }
-
-    public static void list() {
-        int i = 0;
-        System.out.println(" * list *");
-        while (i < taskArr.size()) {
-            System.out.println(Integer.toString(i + 1) + ". " + taskArr.get(i));
-            i++;
-        }
-    }
-
-    public static Task checkCommandIndex(String command, String str) throws ChatException { 
-        //for commands with format: [command] [index]
-        //returns valid index if index is correct
-        if (str.strip().equals(command)) {
-            throw new ChatException(String.format("Missing index\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", command));
-        } else if (!str.contains(" ")) {
-            throw new ChatException(String.format("Missing space before index\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", command));
-        }
-        try {
-            int i = Integer.parseInt(str.split(" ")[1]) - 1;
-            return taskArr.get(i);
-        } catch (IndexOutOfBoundsException e1) {
-            //list is empty, hence i results in index out of bounds
-            //or when i >= taskArr.size()
-            throw new ChatException("List is empty or index is out of bounds");
-        } catch (NumberFormatException e3){
-            //i.e. [command] string
-            throw new ChatException(String.format("Index should be an integer\n" +
-                    "Please input with this format:\n" +
-                    "%s [index]", command));
-        }
-    }
-    
-    public static void done(String str) throws ChatException {
-        try {
-            Task task = checkCommandIndex("done", str);
-            if (task.getDone()) {
-                throw new ChatException(String.format("Task already completed\n%s", task));
-            } else {
-                task.completed();
-                System.out.println(gdJobCat);
-                System.out.println("Mew! I've marked this task as done:");
-                System.out.println(task);
-                System.out.println("\n* Good job, you deserve a kit-kat *");
-            }
-        } catch (ChatException e) {
-            throw e;
-        }
-    }
-    
-    
-    public static void deleteTask(String s) throws ChatException{
-        try {
-            Task task = checkCommandIndex("delete", s);
-            taskArr.remove(task);
-            System.out.println(goCat);
-            System.out.println("Mew! I've removed this task:");
-            System.out.println(task);
-            System.out.println(String.format("\n** Now you have %d tasks in the list **", taskArr.size()));
-        } catch (ChatException e) {
-            throw e;
-        }
-    }
-    
-    //Task data will be stored at "data/tasks.txt"
-    private static String dir = System.getProperty("user.dir");
-    private static Path dirPath = Paths.get(dir, "data");
-    private static Path filePath = Paths.get(dir, "data", "tasks.txt");
-    
-    //Save task data if there is change in task data
-    private static void save() throws IOException { 
-        if (!taskArr.equals(load())) {
-            String newStr = ""; 
-            for (Task t : taskArr) {
-                newStr += t.allParameterStr() + "\n";
-            }
-            Files.writeString(filePath, newStr);
-        }
-    }
-    
-    //load once Chat starts up
-    //returns task array from saved data
-    private static ArrayList<Task> load() throws IOException { 
-        if (!Files.exists(filePath)) {
-            if (!Files.exists(dirPath)) {
-                Files.createDirectory(dirPath);
-            } 
-            Files.createFile(filePath);
-        }
-        String lines = Files.readString(filePath);
-        ArrayList<Task> taskArrFromFile = new ArrayList<>();
-        
-        if (!lines.isEmpty()) {
-            String[] strArr = lines.split("\n");
-            for (String s : strArr) {
-                String[] parArr = s.split(","); //parameter array
-                if (parArr[0].equals("T")) {
-                    taskArrFromFile.add(new Todo(Boolean.parseBoolean(parArr[1]), parArr[2]));
-                } else if (parArr[0].equals("D")) {
-                    taskArrFromFile.add(new Deadline(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3]));
-                } else {
-                    //E
-                    taskArrFromFile.add(new Event(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3], parArr[4]));
-                }
-            }
-            if (taskArr.isEmpty()) {
-                taskArr = taskArrFromFile;
-            }
-        }
-        return taskArrFromFile;
-    }
-    
-    
-    public static void main(String[] args) throws IOException {
-        //only add lines in here
-        lines();
-        greet();
-        lines();
-
-        load(); 
-        
-        Scanner sc = new Scanner(System.in);
-        String str = sc.nextLine();
-        while (!str.equals("bye")) {
-            lines();
+    public void run() {
+        ui.lines();
+        ui.greet();
+        ui.lines();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                if (str.equals("list")) {
-                    list();
-                } else if (str.startsWith("done")) {
-                    done(str);
-                } else if (str.startsWith("todo")) {
-                    addTodo(str);
-                } else if (str.startsWith("deadline")) {
-                    addDeadline(str);
-                } else if (str.startsWith("event")) {
-                    addEvent(str);
-                } else if (str.startsWith("delete")) { 
-                    deleteTask(str);
-                } else {
-                    ChatException error = new ChatException("Sorry this instruction does not exist!\n" +
-                            "Please choose from the following: " +
-                            "todo, deadline, event, done, list, bye");
-                    System.out.println(error);
-                }
-                
-                save();
-                
+                String fullCommand = ui.readCommand();
+                ui.lines(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (ChatException e) {
-                System.out.println(e);
+                ui.showError(e);
+            } finally {
+                ui.lines();
             }
-            
-            lines();
-            str = sc.nextLine();
         }
-        lines();
-        goodbye();
-        lines();
     }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+    
 }
