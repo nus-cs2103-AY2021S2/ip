@@ -11,9 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class handles the loading and saving of tasks to hard disk
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructor for Storage class. Takes as input the file path where the data will be read/written to
+     * @param filePath File path where data will be read/written to
+     */
     public Storage(String filePath) {
         this.file = new File(filePath);
 
@@ -23,6 +30,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save tasks to hard disk
+     * @param taskList List\<Task\> of tasks to be written to disk
+     * @throws DukeException If IOException encountered
+     */
     public void save(List<Task> taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(this.file);
@@ -38,6 +50,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from hard disk
+     * @return List\<Task\> of tasks read from hard disk
+     * @throws DukeException If FileNotFoundException occurs which is possible in the event that the file is
+     * missing/not created yet
+     */
     public List<Task> load() throws DukeException {
         try {
             Scanner scanner = new Scanner(this.file);
