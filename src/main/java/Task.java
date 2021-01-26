@@ -1,4 +1,3 @@
-
 /**
  * Encapsulates information and state of a Task.
  * Supports modifying status of a task.
