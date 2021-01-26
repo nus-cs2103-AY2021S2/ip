@@ -23,9 +23,9 @@ public class Storage {
     /**
      * Reads and adds saved tasks from the hard disk.
      * Creates a new save file if it does not exist.
-     * @param  list The TaskList object containing all tasks.
+     * @param  tasks The TaskList object containing all tasks.
      */
-    public void initialise(TaskList list) throws IOException {
+    public void initialise(TaskList tasks) throws IOException {
         if (!saveFile.exists()) {
             boolean isCreated = saveFile.createNewFile();
             if (isCreated) {
@@ -38,19 +38,19 @@ public class Storage {
                 char taskType = taskStr.charAt(1);
                 int len = taskStr.length();
                 if (taskType == 'T') {
-                    list.addTodo(taskStr.substring(7));
+                    tasks.addTodo(taskStr.substring(7));
 
                 } else if (taskType == 'D'){
                     int ind = taskStr.indexOf(" (by: ");
-                    list.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+                    tasks.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
 
                 } else if (taskType == 'E'){
                     int ind = taskStr.indexOf(" (at: ");
-                    list.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
+                    tasks.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
 
                 }
                 if (taskStr.charAt(4) == 'X') {
-                    list.getAtInd(list.getNumItems() - 1).markAsDone();
+                    tasks.getAtInd(tasks.getNumItems() - 1).markAsDone();
                 }
             }
         }
@@ -58,12 +58,12 @@ public class Storage {
 
     /**
      * Saves all tasks in the TaskList to the harddrive.
-     * @param  list The TaskList object containing all tasks.
+     * @param  tasks The TaskList object containing all tasks.
      */
-    public void finalise(TaskList list) throws IOException {
+    public void finalise(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < list.getNumItems(); i++) {
-            fw.write(list.getAtInd(i).save() + "\n");
+        for (int i = 0; i < tasks.getNumItems(); i++) {
+            fw.write(tasks.getAtInd(i).save() + "\n");
         }
         fw.close();
     }

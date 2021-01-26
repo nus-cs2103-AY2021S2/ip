@@ -24,10 +24,10 @@ public class Ui {
 
     /**
      * Tells the user how many tasks they have currently.
-     * @param  list The TaskList object containing all tasks.
+     * @param  tasks The TaskList object containing all tasks.
      */
-    public void tasksLeft(TaskList list) {
-        System.out.println("You currently have " + list.getNumItems() + " tasks.");
+    public void tasksLeft(TaskList tasks) {
+        System.out.println("You currently have " + tasks.getNumItems() + " tasks.");
     }
 
     /**

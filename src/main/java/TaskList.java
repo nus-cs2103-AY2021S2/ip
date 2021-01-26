@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
 /**
- * Manages a list of Tasks with the ability to add/remove tasks.
+ * Manages a tasks of Tasks with the ability to add/remove tasks.
  */
 public class TaskList {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
     protected int numItems;
 
     /**
      * Constructor for this TaskList object.
      */
     TaskList() {
-        this.list = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
         this.numItems = 0;
     }
 
@@ -28,7 +28,7 @@ public class TaskList {
      * @param  str description of the task.
      */
     public void addTodo(String str) {
-        list.add(numItems, new Todo(str));
+        tasks.add(numItems, new Todo(str));
         numItems++;
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
      * @param  by  deadline of task.
      */
     public void addDeadline(String str, String by) {
-        list.add(numItems, new Deadline(str, by));
+        tasks.add(numItems, new Deadline(str, by));
         numItems++;
     }
 
@@ -48,7 +48,7 @@ public class TaskList {
      * @param  at  location of Event task.
      */
     public void addEvent(String str, String at) {
-        list.add(numItems, new Event(str, at));
+        tasks.add(numItems, new Event(str, at));
         numItems++;
     }
 
@@ -57,7 +57,7 @@ public class TaskList {
      */
     public void printTasks() {
         for (int i = 0; i < numItems; i++) {
-            System.out.println(i+1 + "." + list.get(i));
+            System.out.println(i+1 + "." + tasks.get(i));
         }
     }
 
@@ -67,15 +67,15 @@ public class TaskList {
      * @return task at the given index in the TaskList.
      */
     public Task getAtInd(int n) {
-        return list.get(n);
+        return tasks.get(n);
     }
 
     /**
      * Deletes the task at the given index in the TaskList.
      * @param n index of the task to be deleted.
      */
-    public void deleleTask(int n) {
-        list.remove(n);
+    public void deleteTask(int n) {
+        tasks.remove(n);
         numItems--;
     }
 }
