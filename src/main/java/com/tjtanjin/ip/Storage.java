@@ -32,18 +32,18 @@ public class Storage {
         if (!tasksFile.getParentFile().isDirectory()) {
             try {
                 if (!tasksFile.getParentFile().mkdirs()) {
-                    throw new IOException();
+                    throw new DukeException();
                 }
-            } catch (IOException e) {
+            } catch (DukeException e) {
                 Ui.showError("Unable to create storage directory.");
             }
         }
         if (!tasksFile.exists()) {
             try {
                 if (!tasksFile.createNewFile()) {
-                    throw new IOException();
+                    throw new DukeException();
                 }
-            } catch (IOException e) {
+            } catch (IOException | DukeException e) {
                 Ui.showError("Unable to create storage file.");
             }
         }

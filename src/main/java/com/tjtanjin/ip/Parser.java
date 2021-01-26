@@ -117,9 +117,9 @@ public class Parser {
             if (index < TaskList.getTasks().size() && index >= 0) {
                 return index;
             } else {
-                throw new IndexOutOfBoundsException();
+                throw new DukeException();
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | DukeException e) {
             if (cmd.equals("done")) {
                 Ui.showError("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
             } else {
