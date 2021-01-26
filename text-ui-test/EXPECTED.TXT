@@ -61,4 +61,20 @@ Here are the tasks in your list:
 1. [D][ ] return book  (by: 10 Mar 2020 - 1800)
 2. [E][X] project meeting  (at: 28 Jan 2020 - 0800)
 
+Got it. I've added this task:
+  [T][ ] buy book
+Now you have 3 tasks in the list.
+
+Here are the tasks in your list:
+1. [D][ ] return book  (by: 10 Mar 2020 - 1800)
+2. [E][X] project meeting  (at: 28 Jan 2020 - 0800)
+3. [T][ ] buy book
+
+Here are the matching tasks in your list:
+1. [D][ ] return book  (by: 10 Mar 2020 - 1800)
+2. [T][ ] buy book
+
+Here are the matching tasks in your list:
+None
+
 Bye. Hope to see you again soon!

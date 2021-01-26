@@ -74,4 +74,13 @@ public class Parser {
         }
         return null;
     }
+
+    /**
+     * Parse a find command.
+     * @param fullCommand Command / input for find.
+     * @return The keyword for the find command.
+     */
+    public String parseForFind(String fullCommand) {
+        return fullCommand.substring(5);
+    }
 }

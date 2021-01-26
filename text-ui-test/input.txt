@@ -14,4 +14,8 @@ delete 1
 list
 delete 3
 list
+todo buy book
+list
+find book
+find test
 bye
