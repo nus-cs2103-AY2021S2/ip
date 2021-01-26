@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class TaskList {
@@ -8,6 +10,10 @@ public class TaskList {
 
     public TaskList() {
         lst = new ArrayList<>();
+    }
+
+    public int size() {
+        return this.lst.size();
     }
 
     public void add(Task t) {
@@ -26,7 +32,29 @@ public class TaskList {
         lst.forEach(consumer);
     }
 
-    public int size() {
-        return this.lst.size();
+    public List<Task> find(String findStr) {
+        String[] wordsToFind = findStr.split(" ");
+
+        List<Task> result = new ArrayList<>();
+        HashSet<Task> found = new HashSet<>();
+
+        for (String target : wordsToFind) {
+            for (Task t : lst) {
+                if (found.contains(t)) {
+                    continue;
+                }
+
+                if (t.hasStrInProps(target)) {
+                    found.add(t);
+                    result.add(t);
+                }
+            }
+
+            if (found.size() == result.size()) {
+                break;
+            }
+        }
+
+        return result;
     }
 }

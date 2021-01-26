@@ -26,6 +26,17 @@ public class Event extends Task {
         return event;
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    @Override
+    public boolean hasStrInProps(String str) {
+        return getContent().contains(str) || at.contains(str);
+    }
+
     @Override
     public String getSerialized() {
         return String.format("E | %s | %s | %s", getIsDone(), getContent(), at);

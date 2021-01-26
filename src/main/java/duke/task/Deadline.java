@@ -35,6 +35,17 @@ public class Deadline extends Task {
         return deadline;
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    @Override
+    public boolean hasStrInProps(String str) {
+        return getContent().contains(str);
+    }
+
     @Override
     public String getSerialized() {
         return String.format("D | %s | %s | %s | %s", getIsDone(), getContent(),

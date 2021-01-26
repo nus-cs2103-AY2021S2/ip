@@ -18,6 +18,17 @@ public class Todo extends Task {
         return todo;
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    @Override
+    public boolean hasStrInProps(String str) {
+        return getContent().contains(str);
+    }
+
     @Override
     public String getSerialized() {
         return String.format("T | %s | %s", getIsDone(), getContent());
