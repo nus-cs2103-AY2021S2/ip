@@ -1,6 +1,15 @@
 package duke;
 
 public class Parser {
+
+    /**
+     * Returns a 2 element String array delimited by a spacebar, regardless of imput
+     * If input is 1 word, the second element is an empty string.
+     * If input is 0 words, both elements are empty strings.
+     * 
+     * @param command String to be parsed.
+     * @return String array with 2 elements.
+     */
     public static String[] parseCommand(String command) {
         String[] stringArr = command.split(" ", 2);
         if (stringArr.length == 1) {
@@ -9,6 +18,14 @@ public class Parser {
         return stringArr;
     }
 
+    /**
+     * Returns String array with size depending on the command.
+     * 
+     * @param command the command that is given by the user.
+     * @param params String to be parsed.
+     * @return Parsed String array.
+     * @throws DukeException
+     */
     public static String[] parseParams(DukeCommand command, String params) throws DukeException {
         String[] paramArr;
         if (params.length() == 0) {
@@ -44,6 +61,13 @@ public class Parser {
         return paramArr;
     }
 
+    /**
+     * Parses input from the file and returns a Task
+     * 
+     * @param line String repesenting a task.
+     * @return Task that the input from the file represents
+     * @throws DukeException
+     */
     public static Task parseTaskFromFile(String line) throws DukeException {
         String[] parsedLine = line.split(" ~ ");
         TaskType taskType = TaskType.fromString(parsedLine[0]);
@@ -69,6 +93,14 @@ public class Parser {
         return newTask;
     }
 
+    /**
+     * Parses an int from a string, and throws a DukeException if the input
+     * is not an integer.
+     * 
+     * @param integerString String that represents an integer.
+     * @return an Integer.
+     * @throws DukeException
+     */
     public static int parseInt(String integerString) throws DukeException {
         try {
             return Integer.parseInt(integerString);

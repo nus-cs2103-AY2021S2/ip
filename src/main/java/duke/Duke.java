@@ -1,11 +1,17 @@
 package duke;
 
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke Bot that interprets user input.
+     * 
+     * @param filePath Location of the storage list
+     */
     public Duke(String[] filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
