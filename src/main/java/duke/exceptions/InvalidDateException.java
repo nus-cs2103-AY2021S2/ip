@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Exception thrown when date is invalid.
+ */
 public class InvalidDateException extends DukeException{
 
     public InvalidDateException(String invalidDate) {

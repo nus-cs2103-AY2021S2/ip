@@ -2,6 +2,9 @@ package duke.exceptions;
 
 import duke.utils.Command;
 
+/**
+ * Exception thrown when input is incomplete.
+ */
 public class IncompleteInputException extends DukeException {
     String message;
     public IncompleteInputException(Command command) {

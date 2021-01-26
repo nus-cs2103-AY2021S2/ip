@@ -9,11 +9,18 @@ import duke.utils.Command;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Main class of the application.
+ */
 public class Duke {
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Creates a new instance of Duke.
+     * @param filePath The save file path.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         taskList = new TaskList();
@@ -21,6 +28,9 @@ public class Duke {
         loadData();
     }
 
+    /**
+     * Loads data from save file.
+     */
     public void loadData() {
         try {
             ArrayList<Task> tasks = storage.load();
@@ -34,6 +44,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves data to save file.
+     */
     public void saveData() {
         try {
             storage.save(taskList.getTaskList());
@@ -43,6 +56,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes input after it is parsed by the parser.
+     * @param command Command that is to be excecuted.
+     * @param tokens Input String split into tokens.
+     * @throws DukeException
+     */
     public void processInput(Command command, String[] tokens) throws DukeException {
         switch(command) {
             case SKIP:
@@ -82,14 +101,14 @@ public class Duke {
         saveData();
     }
 
-    public void run() {
+    private void run() {
         ui.showWelcomeMessage();
 
         while (ui.hasMoreTokens()) {
             String input = ui.getUserCommand();
 
             try {
-                String[] tokens = Parser.splitIntoTokens(input);
+                String[] tokens = Parser.splitIntoSubstrings(input);
                 Command command = Parser.parseCommand(tokens);
                 processInput(command, tokens);
             } catch (DukeException e) {

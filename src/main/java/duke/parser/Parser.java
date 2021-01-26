@@ -3,20 +3,34 @@ package duke.parser;
 import duke.exceptions.UnknownCommandException;
 import duke.utils.Command;
 
+/**
+ * Parse input.
+ */
 public class Parser {
-    public static String[] splitIntoTokens(String input) {
+    /**
+     * Splits input into substrings.
+     * @param input User input.
+     * @return String[] array of substrings.
+     */
+    public static String[] splitIntoSubstrings(String input) {
         return input.split(" ", 2);
     }
 
-    public static Command parseCommand(String[] tokens) throws UnknownCommandException {
-        if (tokens[0].isEmpty()) {
+    /**
+     * Parse user input.
+     * @param subStrings substrings of user input.
+     * @return Command that has been parsed.
+     * @throws UnknownCommandException If input cannot be parsed.
+     */
+    public static Command parseCommand(String[] subStrings) throws UnknownCommandException {
+        if (subStrings[0].isEmpty()) {
             return Command.SKIP;
         }
 
         try {
-            return Command.valueOf(tokens[0].trim().toUpperCase());
+            return Command.valueOf(subStrings[0].trim().toUpperCase());
         } catch (IllegalArgumentException e){
-            throw new UnknownCommandException(tokens[0].trim());
+            throw new UnknownCommandException(subStrings[0].trim());
         }
     }
 }

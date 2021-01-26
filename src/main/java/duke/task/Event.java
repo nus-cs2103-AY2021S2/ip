@@ -4,9 +4,18 @@ import duke.utils.DateTime;
 
 import java.time.LocalDate;
 
+/**
+ * Event task.
+ */
 public class Event extends Task {
+    /** Date of event */
     protected LocalDate at;
 
+    /**
+     * Creates new instance of event.
+     * @param description Description of event.
+     * @param at Date of event.
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
