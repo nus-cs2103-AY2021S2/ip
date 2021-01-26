@@ -35,9 +35,9 @@ public class Task {
     // states if task is completed or not
     public String taskStatus() {
         if (done) {
-           return "[X] " + task_details;
+           return "1 " + task_details;
         } else {
-            return "[ ] " + task_details;
+            return "0 " + task_details;
         }
     }
 }

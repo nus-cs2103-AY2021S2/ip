@@ -20,9 +20,9 @@ public class Deadline extends Task {
     // overrides taskStatus() method
     public String taskStatus() {
         if (this.isDone()) {
-            return "[D][X] " + this.getTask_details() + " (by: " + deadline + ")";
+            return "D 1 " + this.getTask_details() + " (by: " + deadline + ")";
         } else {
-            return "[D][ ] " + this.getTask_details() + " (by: " + deadline + ")";
+            return "D 0 " + this.getTask_details() + " (by: " + deadline + ")";
         }
     }
 }
