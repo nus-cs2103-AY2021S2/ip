@@ -158,7 +158,6 @@ public class Duke {
         deadline = deadline.trim();
         if (isDate(deadline)){
             LocalDate dateDeadline = LocalDate.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            dateDeadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
             tasks.add(new Deadline(description, dateDeadline));
         } else {
             throw new DukeWrongInputException("OOPS!!! Please enter your deadline in the format: deadline /by yyyy-mm-dd :-(");
@@ -221,10 +220,12 @@ public class Duke {
                     tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
                     break;
                 case "E":
+
                     tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
                     break;
                 case "D":
-                    tasks.add(new Deadline(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                    LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
+                    tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
                     break;
             }
         }
@@ -245,7 +246,7 @@ public class Duke {
             } else if (t instanceof Event) {
                 fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Event) t).getTimeslot()));
             } else if (t instanceof Deadline) {
-                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Deadline) t).getDeadline()));
+                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Deadline) t).getDeadline().toString()));
             }
         }
         fw.close();

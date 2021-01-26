@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param deadline task deadline
      * @param isDone task done status
      */
-    public Deadline(String description, String deadline, boolean isDone){
+    public Deadline(String description, LocalDate deadline, boolean isDone){
         super(description, isDone);
         this.deadline = deadline;
     }
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * Getter method for task deadline.
      * @return string of task deadline
      */
-    public String getDeadline(){
+    public LocalDate getDeadline(){
         return this.deadline;
     }
 
@@ -40,6 +40,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 }
