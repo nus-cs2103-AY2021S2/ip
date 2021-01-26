@@ -28,9 +28,12 @@ public class Storage {
             try {
                 saveFile.createNewFile();
             } catch (Exception err) {
-                System.out.println(err.getMessage());
+                String errorMsg = "There was an error creating the save file!\n"
+                        + "You can still use this todo list, but your data won't be saved.";
+                throw new DukeException(errorMsg);
             }
         } catch (DukeException e) {
+            tasks.clear();
             String errorMsg = "Looks like the save data's been corrupted.\n"
                     + "Please avoid manually editing this file!\n"
                     + "For now, I've cleared the save data.";
