@@ -23,10 +23,185 @@ public class Duke {
     }
 
     public static void main(String[] args) throws Exception {
-//        initialisation();
-//        FileReading.printTaskList();
         new Duke("data/tasks.txt").run();
     }
+
+    private void run() throws DukeException {
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    private void runCommandLoopUntilExitCommand() {
+        String commandText;
+        do{
+            commandText = ui.getUserCommand();
+            String operator = new Parser().parseOperator(commandText);
+            executeCommand(operator, commandText);
+        } while(commandText.equals("bye"));
+    }
+
+    private void executeCommand(String operator, String commandText){
+        Parser commandParser = new Parser();
+        switch (operator){
+            case "done":
+                int taskNumberToComplete = commandParser.parseCommand(commandText);
+                completeTask(taskNumberToComplete);
+                break;
+            case "delete":
+                int taskNumberToDelete = commandParser.parseCommand(commandText);
+                deleteTask(taskNumberToDelete);
+                break;
+            case "todo":
+                String description = commandParser.parseCommand(commandText);
+                addToDo(description);
+                break;
+            case "deadline":
+                String[] detailsDeadline = commandParser.parseCommand(commandText);
+                addDeadline(detailsDeadline );
+                break;
+            case "event":
+                String[] detailsEvent = commandParser.parseCommand(commandText);
+                addEvent(detailsEvent);
+                break;
+            case "display":
+                displayList();
+                break;
+        }
+        storage.updateTaskList(tasks);
+    }
+
+    private void addEvent(String[] details) throws DukeException{
+        try {
+            String description = details[0];
+            String time = details[1];
+            Event newTask = new Event(description, time);
+            tasks.addTask(newTask);
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    private void addDeadline(String[] details) throws DukeException{
+        try {
+            String description = details[0];
+            String time = details[1];
+            Deadline newTask = new Deadline(description, time);
+            tasks.addTask(newTask);
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    private void addToDo(String description) throws DukeException{
+        try {
+            ToDo newTask = new ToDo(description);
+            tasks.addTask(newTask);
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    private void completeTask(int taskNumber) throws DukeException{
+        try{
+            tasks.markTaskAsDone(taskNumber);
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    private void deleteTask(int taskNumber) throws DukeException{
+        try {
+            tasks.deleteTask(taskNumber);
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
+        }
+    }
+
+    private void displayList(){
+        ui.printMyTask(tasks);
+    }
+
+    private void exit() {
+        ui.showGoodbyeMessage();
+        System.exit(0);
+    }
+}
+
+//        while (input.hasNextLine()) {
+//            String s = input.nextLine();
+//            if (s.toLowerCase().equals("bye")) {
+//                exit();
+//                break;
+//            }
+//            if (s.toLowerCase().equals("list")) {
+//                ui.printMyTask(tasks);
+//            } else {
+//                try {
+//                    tasks.executeTask(s);
+////                    executeTask(s, taskList, tasks);
+//                } catch (DukeException e) {
+//                    ui.showErrorMessage(e);
+//                }
+//            }
+//        }
+//    }
+//
+//    private void executeCommand(String s, TaskList myList) throws DukeException {
+//        String[] parts = s.split(" ", 2);
+//        String taskType = parts[0];
+//
+//        if (!taskList.contains(taskType.toLowerCase())) {
+//            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        }
+//
+//        if (taskType.toLowerCase().equals("done")) {
+//            try {
+//                markTask(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        }
+//
+//        if (taskType.toLowerCase().equals("delete")) {
+//            try {
+//                deleteTask(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        }
+//
+//        if (taskType.toLowerCase().equals("todo")) {
+//            try {
+//                addToDo(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        }
+//
+//        if (taskType.toLowerCase().equals("deadline")) {
+//            try {
+//                addDeadline(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        }
+//        if (taskType.toLowerCase().equals("event")) {
+//            try {
+//                addEvent(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e.getMessage());
+//            }
+//        }
+//    }
+//
+
+
+/*
 
 //    private ArrayList<Task> initialiseMyList(String filePath){
 //        ArrayList<Task> myList = new ArrayList<>();
@@ -66,92 +241,17 @@ public class Duke {
 //        }
 //    }
 
-    private void run() throws DukeException {
-        Scanner input = new Scanner(System.in);
-//        TaskList myList = new ArrayList<>();
-        // initialize task list
-        ArrayList<String> taskList = new ArrayList<>();
-        taskList.add("todo");
-        taskList.add("deadline");
-        taskList.add("event");
-        taskList.add("done");
-        taskList.add("delete");
+//    private void runCommandLoop() {
+//        Command command;
+//        do {
+//            String userCommandText = ui.getUserCommand();
+//            command = new Parser().parseCommand(userCommandText);
+//            CommandResult result = executeCommand(command);
+//            recordResult(result);
+//            ui.showResultToUser(result);
+//        } while (!ExitCommand.isExit(command));
+//    }
 
-        while (input.hasNextLine()) {
-            String s = input.nextLine();
-            if (s.toLowerCase().equals("bye")) {
-                exit();
-                break;
-            }
-            if (s.toLowerCase().equals("list")) {
-                ui.printMyTask(tasks);
-            } else {
-                try {
-                    executeTask(s, taskList, tasks);
-                } catch (DukeException e) {
-                    ui.showErrorMessage(e);
-                }
-            }
-        }
-    }
-
-    private void executeTask(String s, ArrayList<String> taskList, TaskList myList) throws DukeException {
-        String[] parts = s.split(" ", 2);
-        String taskType = parts[0];
-
-        if (!taskList.contains(taskType.toLowerCase())) {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-
-        if (taskType.toLowerCase().equals("done")) {
-            try {
-                markTask(parts, myList);
-                FileWriting.saveTaskList(myList);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-
-        if (taskType.toLowerCase().equals("delete")) {
-            try {
-                deleteTask(parts, myList);
-                FileWriting.saveTaskList(myList);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-
-        if (taskType.toLowerCase().equals("todo")) {
-            try {
-                addToDo(parts, myList);
-                FileWriting.saveTaskList(myList);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-
-        if (taskType.toLowerCase().equals("deadline")) {
-            try {
-                addDeadline(parts, myList);
-                FileWriting.saveTaskList(myList);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-        if (taskType.toLowerCase().equals("event")) {
-            try {
-                addEvent(parts, myList);
-                FileWriting.saveTaskList(myList);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
-    }
-
-    private void exit(){
-        ui.showGoodbyeMessage();
-        System.exit(0);
-    }
 
 //    private void displayList(ArrayList<Task> myList){
 //        System.out.println("---------------------------------------------");
@@ -172,7 +272,7 @@ public class Duke {
             try {
                 completeTask(parts, myList);
             } catch (DukeException e) {
-                ui.showErrorMessage(e);
+                ui.showErrorMessage(e.getMessage());
             }
         }
     }
@@ -200,7 +300,7 @@ public class Duke {
             try {
                 removeTask(parts, myList);
             } catch (DukeException e){
-                ui.showErrorMessage(e);
+                ui.showErrorMessage(e.getMessage());
             }
         }
     }
@@ -296,3 +396,5 @@ public class Duke {
         }
     }
 }
+
+ */

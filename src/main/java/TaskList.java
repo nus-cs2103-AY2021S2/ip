@@ -7,27 +7,27 @@ public class TaskList {
     // tasks in schedule
     private ArrayList<Task> taskList;
 
-    public TaskList(){
-        this.taskList = new ArrayList<Task> ();
+    public TaskList() {
+        this.taskList = new ArrayList<Task>();
     }
 
-    public TaskList(ArrayList<String> myTasks){
+    public TaskList(ArrayList<String> myTasks) {
         this.taskList = initialiseList(myTasks);
     }
 
-    private ArrayList<Task> initialiseList(ArrayList<String> myTasks){
-        ArrayList<Task> taskList = new ArrayList<> ();
-        for (String s: myTasks){
+    private ArrayList<Task> initialiseList(ArrayList<String> myTasks) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (String s : myTasks) {
             String[] parts = s.split(" | ", 2);
             String type = parts[0];
-            if (type.equals("T")){
+            if (type.equals("T")) {
                 String description = parts[1];
                 // addTodo
                 Task newTask = new ToDo(description);
                 taskList.add(newTask);
             }
 
-            if (type.equals("D")){
+            if (type.equals("D")) {
                 String[] details = parts[1].split(" | ");
                 String description = details[0];
                 String time = details[1];
@@ -40,7 +40,7 @@ public class TaskList {
                 taskList.add(newTask);
             }
 
-            if (type.equals("E")){
+            if (type.equals("E")) {
                 String[] details = parts[1].split(" | ");
                 String description = details[0];
                 String time = details[1];
@@ -57,30 +57,31 @@ public class TaskList {
     }
 
 
-    public int getSize(){
+    public int getSize() {
         return this.taskList.size();
     }
 
-    public Task getTask(int taskNumber){
+    public Task getTask(int taskNumber) {
         Task task = this.taskList.get(taskNumber);
         return task;
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
-    private void addTask(Task task){
+    public void addTask(Task task) {
         this.taskList.add(task);
     }
 
-    private void deleteTask(int taskNumber){
+    public void deleteTask(int taskNumber) {
         this.taskList.remove(taskNumber);
     }
 
-    private void markTaskAsDone(int taskNumber){
+    public void markTaskAsDone(int taskNumber) {
         this.taskList.get(taskNumber).markAsDone();
     }
+}
 
 //    public void executeTask(String operator, String taskDetails) throws DukeException {
 //        ArrayList<Task> myList = getTaskList();
@@ -135,4 +136,3 @@ public class TaskList {
 //        }
 //    }
 
-}

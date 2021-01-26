@@ -13,6 +13,8 @@ public class Parser {
 
     private ArrayList<String> initialiseOperators(){
         ArrayList<String> list = new ArrayList<>();
+        list.add("bye");
+        list.add("list");
         list.add("todo");
         list.add("deadline");
         list.add("event");
@@ -21,11 +23,18 @@ public class Parser {
         return list;
     }
 
+    public String parseOperator(String userInput){
+        String[] parts = userInput.split(" ", 2);
+        return parts[0];
+    }
+
     public void parseCommand(String userInput) throws DukeException{
-        //bye
-//
         String[] command = splitCommand(userInput);
         String operator = command[0].toLowerCase();
+
+        if (userInput.equals("list")){
+            parseDisplay();
+        }
 
         if (!isValidOperator(operator)) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -55,6 +64,10 @@ public class Parser {
     private String[] splitCommand(String userInput){
         return userInput.split(" ", 2);
     }
+
+//    private void parseDisplay(){
+//
+//    }
 
     private int parseDone(String[] command) throws DukeException{
         if (command.length == 1) {
@@ -123,7 +136,7 @@ public class Parser {
             return new String[] {description, at};
         }
     }
-    
+
     private boolean isValidTime(String time){
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
         boolean isValid;
