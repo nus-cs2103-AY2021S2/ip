@@ -83,6 +83,6 @@ public class Deadline extends DateTask {
      * @return String representation of Deadline.
      */
     public String toFileString() {
-        return "D | " + ((isDone) ? 1 : 0) + " | " + description + " | " + Parser.formatDateISO(datetime);
+        return "D\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + Parser.formatDateISO(datetime);
     }
 }

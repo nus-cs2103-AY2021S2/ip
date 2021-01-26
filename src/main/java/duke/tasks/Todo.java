@@ -61,6 +61,6 @@ public class Todo extends Task {
      * @return String representation of Todo.
      */
     public String toFileString() {
-        return "T | " + ((isDone) ? 1 : 0) + " | " + description;
+        return "T\t" + ((isDone) ? 1 : 0) + "\t" + description;
     }
 }

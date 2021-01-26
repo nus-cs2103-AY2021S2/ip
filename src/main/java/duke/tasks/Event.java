@@ -82,6 +82,6 @@ public class Event extends DateTask {
      * @return String representation of Event.
      */
     public String toFileString() {
-        return "E | " + ((isDone) ? 1 : 0) + " | " + description + " | " + Parser.formatDateISO(datetime);
+        return "E\t" + ((isDone) ? 1 : 0) + "\t" + description + "\t" + Parser.formatDateISO(datetime);
     }
 }
