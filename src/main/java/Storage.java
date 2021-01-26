@@ -21,8 +21,8 @@ public class Storage {
     public ArrayList<String> load() throws DukeException {
         try {
             ArrayList<String> tasks = new ArrayList<>();
-            File f = new File(this.filePath); // create a File for the given file path
-            Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
+            File f = new File(this.filePath);
+            Scanner scanner = new Scanner(f);
             while (scanner.hasNext()) {
                 tasks.add(scanner.nextLine());
             }

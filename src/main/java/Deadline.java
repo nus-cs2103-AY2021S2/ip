@@ -30,21 +30,14 @@ public class Deadline extends Task {
     }
 
     private void setTime(String time) {
-//        try {
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
-            this.by = dateTime;
-
-//        } catch (Exception e){
-//            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
-//        }
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
+        this.by = dateTime;
     }
 
     @Override
     public String toString() {
         String time = this.getTime();
-//       this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
-//        return "[D]" + super.toString() + " (by: " + time + ")";
         return type + separator + super.toString() + separator + time;
     }
 }

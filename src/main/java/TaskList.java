@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
-    // tasks in schedule
+
     private ArrayList<Task> taskList;
 
     public TaskList() {
@@ -24,9 +24,6 @@ public class TaskList {
 
     private ArrayList<Task> initialiseList(ArrayList<String> myTasks) {
         ArrayList<Task> taskList = new ArrayList<>();
-//        if(myTasks.isEmpty()){
-//            return taskList;
-//        }
 
         for (String s : myTasks) {
             String[] parts = s.split(" \\| ", 3);
@@ -99,57 +96,4 @@ public class TaskList {
         return curTask;
     }
 }
-
-//    public void executeTask(String operator, String taskDetails) throws DukeException {
-//        ArrayList<Task> myList = getTaskList();
-//        String[] description = taskDetails.split(" | ", 2);
-//
-//        if (!operatorList.contains(operator.toLowerCase())) {
-//            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-//        }
-//
-//        if (operator.toLowerCase().equals("done")) {
-//            try {
-//                markTaskAsDone(description);
-////                FileWriting.saveTaskList(myList);
-//            } catch (DukeException e) {
-//                ui.showErrorMessage(e);
-//            }
-//        }
-//
-//        if (operator.toLowerCase().equals("delete")) {
-//            try {
-//                deleteTask(parts, myList);
-//                FileWriting.saveTaskList(myList);
-//            } catch (DukeException e) {
-//                ui.showErrorMessage(e);
-//            }
-//        }
-//
-//        if (operator.toLowerCase().equals("todo")) {
-//            try {
-//                addToDo(parts, myList);
-//                FileWriting.saveTaskList(myList);
-//            } catch (DukeException e) {
-//                ui.showErrorMessage(e);
-//            }
-//        }
-//
-//        if (operator.toLowerCase().equals("deadline")) {
-//            try {
-//                addDeadline(parts, myList);
-//                FileWriting.saveTaskList(myList);
-//            } catch (DukeException e) {
-//                ui.showErrorMessage(e);
-//            }
-//        }
-//        if (operator.toLowerCase().equals("event")) {
-//            try {
-//                addEvent(parts, myList);
-//                FileWriting.saveTaskList(myList);
-//            } catch (DukeException e) {
-//                ui.showErrorMessage(e);
-//            }
-//        }
-//    }
 
