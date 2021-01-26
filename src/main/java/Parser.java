@@ -23,6 +23,8 @@ public class Parser {
       } else if (input.split(" ")[0].equals("done")) {
         done(input, tasklist);
         store.save(tasklist.getTasklist());
+      } else if (input.split(" ")[0].equals("find")) {
+        tasklist.findtask(input.split(" ")[1]);
       } else if (input.split(" ")[0].equals("todo")) {
         todo(input, tasklist);
         store.save(tasklist.getTasklist());
