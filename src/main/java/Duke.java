@@ -9,20 +9,16 @@ import java.io.File;
 
 public class Duke {
     private Storage storage;
+    private TaskList list;
+    private Ui ui;
 
     public static void main(String[] args) throws DukeException, IOException {
         TaskList list = new TaskList();
         Storage storage = new Storage("./myData.txt");
+        Ui ui = new Ui();
         storage.initialise(list);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I am\n" + logo);
-        System.out.println("You currently have " + list.getNumItems() + " tasks.");
-        System.out.println("What can I do for you?");
-        System.out.println("---------------------------------");
+        ui.initialise();
+        ui.tasksLeft(list);
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals("bye")) {
@@ -30,6 +26,6 @@ public class Duke {
             str = sc.nextLine();
         }
         storage.finalise(list);
-        System.out.println("Bye friend, see you soon!");
+        ui.finalise();
     }
 }
