@@ -1,22 +1,37 @@
 package core;
 
+
 import java.io.*;
 
+/**
+ * The main IOManager of the program, manages reading input and outputting.
+ */
 public class IOManager {
     private InputListener listener;
     private InputStream is;
     private PrintWriter pw;
 
+    /**
+     * Creates a new IOManager using {@code System.in} and {@code System.out}.
+     */
     public IOManager() {
         this(System.in, System.out);
     }
 
+    /**
+     * Creates a new IOManager using specified input and output streams.
+     * @param is - input stream
+     * @param ps - output stream
+     */
     public IOManager(InputStream is, PrintStream ps) {
         this.is = is;
         this.pw = new PrintWriter(ps);
     }
 
-
+    /**
+     * Sets a new {@code InputListener} instance to handle the input.
+     * @param listener
+     */
     public void setListener(InputListener listener) {
         this.listener = listener;
     }
