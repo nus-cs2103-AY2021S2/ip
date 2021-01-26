@@ -111,6 +111,30 @@
 	____________________________________________________________
 
 	____________________________________________________________
+	  List of commands:
+	  bye
+	  - Close Duke
+	  list
+	    - List out all task
+	  done [number]
+	    - Mark selected task as done
+	  todo [description]
+	    - Add a todo task
+	  deadline [description] /by [due date]
+	    - Add a deadline task with a due date (YYYY-MM-DD)
+	  event [description] /at [date]
+	    - Add a event task with a date (YYYY-MM-DD)
+	  delete [number]
+	    - Delete a task
+	  save
+	    - save checklist to "data/dukeData.txt"
+	  load
+	    - Load previously saved checklist
+	  help
+	    - Display list of commands
+	____________________________________________________________
+
+	____________________________________________________________
 	  Bye. Hope to see you again soon!
 	____________________________________________________________
 

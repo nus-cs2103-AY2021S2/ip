@@ -14,7 +14,8 @@ public class Deadline extends Task {
 
     /**
      * Factory method for creating deadline task.
-     * @param input Description of the task and its due date. Due date should be indicated after "/by".
+     * @param input Description of the task and its due date.
+     * Due date should be indicated after "/by".
      * @return A deadline task
      * @throws DukeException if due date is missing
      */

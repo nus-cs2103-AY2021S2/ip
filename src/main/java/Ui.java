@@ -22,24 +22,24 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void echo(List<String> msgs) {
+    private void echo(List<String> msgs) {
         for (String s : msgs) {
             System.out.println("\t  " + s);
         }
     }
 
-    public void echoSingle(String msg) {
+    private void echoSingle(String msg) {
         System.out.println("\t  " + msg);
     }
 
-    public void echoBorder(List<String> msgs) {
+    private void echoBorder(List<String> msgs) {
         System.out.println(BORDER_LINE);
         echo(msgs);
         System.out.println(BORDER_LINE);
         System.out.println();
     }
 
-    public void echoSingleBorder(String msg) {
+    private void echoSingleBorder(String msg) {
         System.out.println(BORDER_LINE);
         echoSingle(msg);
         System.out.println(BORDER_LINE);
@@ -55,7 +55,8 @@ public class Ui {
     }
 
     public void help() {
-        echoBorder(List.of("bye",
+        echoBorder(List.of("List of commands:",
+                "bye",
                 "- Close Duke",
                 "list",
                 "  - List out all task",
@@ -72,7 +73,9 @@ public class Ui {
                 "save",
                 "  - save checklist to \"data/dukeData.txt\"",
                 "load",
-                "  - Load previously saved checklist"));
+                "  - Load previously saved checklist",
+                "help",
+                "  - Display list of commands"));
     }
 
     public void displayError(DukeException e) {

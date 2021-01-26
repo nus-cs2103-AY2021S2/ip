@@ -1,14 +1,3 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
-import java.time.LocalDate;
-
 /**
  * Duke is a task manager.
  * 
@@ -32,6 +21,8 @@ import java.time.LocalDate;
  *   - save checklist to "data/dukeData.txt"
  * <p>load
  *   - Load previously saved checklist
+ * <p>help
+ *   - Display list of commands
  */
 public class Duke {
 
@@ -106,6 +97,8 @@ public class Duke {
                     tasks = new TaskList(storage.loadTaskList());
                     ui.loaded();
                     break;
+                case "help":
+                    ui.help();
                 } 
             } catch (DukeException e) {
                 ui.displayError(e);

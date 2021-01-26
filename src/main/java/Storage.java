@@ -12,8 +12,8 @@ import java.util.Scanner;
  * <p> Default path is "data/dukeData.txt" if unstated.
  */
 public class Storage {
-    File file;
-    public static final String DEFAULT_PATH = "data/dukeData.txt";
+    private File file;
+    private static final String DEFAULT_PATH = "data/dukeData.txt";
 
     public Storage() {
         file = new File(DEFAULT_PATH);
@@ -36,7 +36,8 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Please delete \"data/dukeData.txt\" file and run this command again!");
+            throw new DukeException(
+                    "Please delete \"data/dukeData.txt\" file and run this command again!");
         }
     }
 
@@ -78,7 +79,5 @@ public class Storage {
             }
         }
         return lst;
-    } 
-    
-
+    }
 }

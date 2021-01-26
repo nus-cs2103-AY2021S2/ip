@@ -17,4 +17,5 @@ done 100
 load
 save
 load
+help
 bye

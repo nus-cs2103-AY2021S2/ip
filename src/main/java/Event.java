@@ -14,7 +14,8 @@ public class Event extends Task {
 
     /**
      * Factory method for creating Event task.
-     * @param input Description of the task and its date. Date should be indicated after "/at".
+     * @param input Description of the task and its date.
+     * Date should be indicated after "/at".
      * @return An Event task
      * @throws DukeException if date is missing
      */
