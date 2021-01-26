@@ -2,8 +2,9 @@ import java.util.*;
 
 public class Justin {
     public static void main(String[] args) {
-
+        
         /*
+         * This is feature 1
          * Justin is a chatbot that help users plan and organise tasks
          * Justin stands for JUSt a TImetable(New) : JUSTIN
          *
