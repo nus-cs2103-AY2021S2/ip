@@ -1,9 +1,24 @@
-import main.java.*;
-import java.io.*;
+import main.java.Deadline;
+import main.java.DukeCommand;
+import main.java.DukeException;
+import main.java.Event;
+import main.java.Task;
+import main.java.Todo;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.IOException;
+
 import java.time.LocalDate;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -73,7 +88,7 @@ public class Duke {
 
     private static List<Task> readFromFile() throws IOException {
 
-        ArrayList<Task> tasksList = new ArrayList<>();
+        List<Task> tasksList = new ArrayList<>();
         final String DELIMITER = " \\| ";
 
         try {
