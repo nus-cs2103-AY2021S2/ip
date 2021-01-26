@@ -13,6 +13,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Initialising certain fields.
+     *
+     * @throws DukeException If there are Exceptions.
+     */
     public Duke() throws DukeException {
         ui = new Ui();
         ui.welcomeMessage();
@@ -26,7 +31,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * Runs the program.
+     */
     public void run() {
         boolean isExit = false;
         while (!isExit) {

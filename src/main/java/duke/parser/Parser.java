@@ -4,10 +4,18 @@ import duke.Exceptions.*;
 import duke.command.*;
 
 public class Parser {
-    public static Command parseTask(String task) throws DukeException {
-        String[] line = task.split(" ", 2); // split type of task from description
+
+    /**
+     * Returns a command on what to do with the given description.
+     *
+     * @param input String of an input.
+     * @return Command.
+     * @throws DukeException If the input is blank.
+     */
+    public static Command parseTask(String input) throws DukeException {
+        String[] line = input.split(" ", 2); // split type of task from description
         String type = line[0]; // type of task
-        if (task.isBlank()) {
+        if (input.isBlank()) {
             throw new EmptyLineException(" ");
         }
         if (line.length != 2) {

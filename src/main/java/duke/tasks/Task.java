@@ -6,6 +6,11 @@ public class Task {
     protected String statusIcon;
     protected String isDoneString;
 
+    /**
+     * Initialises a new task.
+     *
+     * @param taskName Description of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
@@ -13,6 +18,9 @@ public class Task {
         this.isDoneString = "0 / ";
     }
 
+    /**
+     * Marks the given task as completed.
+     */
     public void markAsDone() {
         this.isDone = true;
         this.statusIcon = "[\u2713] ";
@@ -20,14 +28,20 @@ public class Task {
 
     }
 
-    public String getStatusIcon() {
-        return statusIcon;
-    }
-
+    /**
+     * Returns a string of description to be saved in the myDuke.txt.
+     *
+     * @return A String.
+     */
     public String toSave() {
         return this.taskName;
     }
 
+    /**
+     * Returns a string of description to be printed out.
+     *
+     * @return A String.
+     */
     public String toString() {
         return statusIcon + this.taskName;
     }
