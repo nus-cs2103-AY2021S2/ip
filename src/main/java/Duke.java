@@ -18,9 +18,7 @@ public class Duke {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
-            String task = s.next();
-            String line = s.nextLine();
-            System.out.println(task + line);
+            System.out.println(s.nextLine());
         }
     }
 
