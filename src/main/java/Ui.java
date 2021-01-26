@@ -2,7 +2,8 @@ public class Ui {
     private static final String INDENTATION = "    ";
     private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
 
-    public Ui() {}
+    public Ui() {
+    }
 
     /**
      * Formats given string with indentation and line break

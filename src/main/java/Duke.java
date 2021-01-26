@@ -157,12 +157,12 @@ public class Duke {
         tasks = new TaskList();
         ui = new Ui();
         storage = new Storage(DIR_NAME, FILE_NAME);
-    
+
         storage.readFromFile(tasks, ui);
         ui.greet();
 
         Scanner sc = new Scanner(System.in);
-        while (readInput(sc));
+        while (readInput(sc)) ;
     }
 
     public static void main(String[] args) throws IOException {
