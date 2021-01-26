@@ -1,8 +1,9 @@
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.printExitMsg();
+        storage.write(tasks);
     }
 
     @Override

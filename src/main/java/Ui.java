@@ -80,4 +80,8 @@ public class Ui {
         display(msg);
     }
 
+    public void printError(String msg) {
+        display(msg);
+    }
+
 }

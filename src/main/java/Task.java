@@ -23,6 +23,10 @@ public class Task {
         this.done = b;
     }
 
+    public String getSaveFormat() {
+        return getStatusIcon() + " | " + this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
