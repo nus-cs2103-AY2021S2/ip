@@ -1,17 +1,28 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
+    private static String fileName;
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String task, deadline, keyword;
         int firstSpace, firstSlash, option;
+
+        //Loading from file
+        System.out.println("Please enter file name : ");
+        fileName = scanner.nextLine();
+        loadTaskList();
+
         //Greet User
         printGreetings();
         String command = scanner.nextLine();
         while (!command.equalsIgnoreCase("bye")) {
+            boolean change = true;
             printLine();
 
             firstSpace = command.indexOf(" ");
@@ -23,6 +34,7 @@ public class Duke {
                 case "list":
                     //Display all task added
                     listTasks();
+                    change = false;
                     break;
                 case "done":
                     // -1 as ArrayList starts from 0 , user input starts from 1
@@ -52,15 +64,59 @@ public class Duke {
                     System.out.println("OOPS!!! I`m sorry. but i don`t know what that means :-(");
                     break;
                 }
+                if (change) {
+                    saveTaskList();
+                }
             } catch (DukeException e) {
                 System.out.printf("OOPS!!! %s %s cannot be empty.\n", e.getMessage(), keyword);
             }
             printLine();
             command = scanner.nextLine();
-        }  //Exits the program
+        }
+        //Exits the program
         printLine();
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
+    }
+    public static void loadTaskList() {
+        try {
+            File f = new File(fileName);
+            f.createNewFile();
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String strTask = s.nextLine();
+                String[] taskArr = strTask.split(",");
+                Task task = null;
+                switch (taskArr[0]) {
+                case "T":
+                    task = new Todo(taskArr[2]);
+                    break;
+                case "E":
+                    task = new Event(taskArr[2], taskArr[3]);
+                    break;
+                case "D":
+                    task = new Deadline(taskArr[2], taskArr[3]);
+                }
+                if (taskArr[1] == "1") {
+                    task.markAsDone();
+                }
+                taskList.add(task);
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to create file");
+        }
+    }
+
+    public static void saveTaskList() {
+        try{
+            FileWriter fw = new FileWriter(fileName);
+            for(Task t : taskList) {
+                fw.write(t.save());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("File cannot be opened");
+        }
     }
 
     public static void deleteTask(int option) {

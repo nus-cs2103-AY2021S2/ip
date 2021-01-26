@@ -1,4 +1,5 @@
 public class Deadline extends Task{
+    private static final char SYMBOL = 'D';
     private String deadline;
 
     public Deadline(String desc, String deadline) {
@@ -8,6 +9,11 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[D] %s (by: %s)", super.toString(), this.deadline);
+        return String.format("[%c] %s (by: %s)", SYMBOL, super.toString(), this.deadline);
+    }
+
+    @Override
+    public String save() {
+        return String.format("%c,%s,%s\n", SYMBOL, super.save(), this.deadline);
     }
 }
