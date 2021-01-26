@@ -1,9 +1,13 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Duke {
-    private static final ArrayList<Task> taskList = new ArrayList<>();
+    protected static final ArrayList<Task> taskList = new ArrayList<>();
     protected static boolean canExit = false;
+
 
     //user commands
     private final static String listCommand = "list";
@@ -224,6 +228,8 @@ public class Duke {
         }
 
     public static void main(String[] args) {
+
+        String path = "duke.txt";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -234,6 +240,11 @@ public class Duke {
 
         Greet();
 
+
+        TaskRecord.taskRecorder(path);
+        TaskRecord.taskHistory(path);
+
+
         while(!canExit) {
             try {
                 storeTask();
@@ -241,6 +252,8 @@ public class Duke {
                 System.out.println(e.toString());
             }
         }
+
+        TaskRecord.record(taskList, path);
 
     }
 }
