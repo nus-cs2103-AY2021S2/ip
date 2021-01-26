@@ -1,5 +1,7 @@
+package duke.tasks;
+
 /**
- * A base abstract class whose instances represent a unique Task.
+ * A base abstract class whose instances represent a unique duke.tasks.Task.
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu

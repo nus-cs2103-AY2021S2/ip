@@ -1,14 +1,22 @@
+package duke.tasks;
+
+import duke.commands.Command;
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Todo;
+
+import duke.exceptions.DukeException;
 import java.util.List;
 import java.util.ArrayList;
 
 /**
- * A controller class that manages the Tasks of each User of the DukeBot.
+ * A controller class that manages the Tasks of each User of the duke.DukeBot.
  * <p>
- * The purpose of this class is to allow DukeBot to be used concurrently
- * by multiple users by separating static-level Task members that should
- * not be shared by all Users of the Task class.
+ * The purpose of this class is to allow duke.DukeBot to be used concurrently
+ * by multiple users by separating static-level duke.tasks.Task members that should
+ * not be shared by all Users of the duke.tasks.Task class.
  * <p>
- * Note, this class assumes that it has been correctly called by the DukeBot
+ * Note, this class assumes that it has been correctly called by the duke.DukeBot
  * and that the only possible source of errors are in the User description
  * String. (I.e. Assumes the Commands provided are correct or appropriate)
  * <p>
@@ -27,9 +35,9 @@ public class TaskManager {
     }
 
     /**
-     * Main access point of the TaskManager API which handles all Task functionality.
+     * Main access point of the duke.tasks.TaskManager API which handles all duke.tasks.Task functionality.
      *
-     * @param taskType    A Command Enum representing the relevant command for the given description
+     * @param taskType    A duke.commands.Command Enum representing the relevant command for the given description
      * @param description User input String that should NOT contain the command string
      *                    E.g. If the user supplies "todo Eat cake" then the description is "eat cake"
      */
@@ -59,9 +67,9 @@ public class TaskManager {
                 this.end(description);
                 break;
             default:
-                // If this error is reached that means that a valid Command Enum was created and has not been
+                // If this error is reached that means that a valid duke.commands.Command Enum was created and has not been
                 // included in the switch statements above
-                String errorStr = "The Command given was not recognised. Try updating the version";
+                String errorStr = "The duke.commands.Command given was not recognised. Try updating the version";
                 throw new DukeException(errorStr);
             }
         } catch (DukeException e) {
@@ -72,24 +80,24 @@ public class TaskManager {
     }
 
     /**
-     * Returns true if the TaskManager is active.
-     * The TaskManager becomes inactive once a user sends the END Command.
+     * Returns true if the duke.tasks.TaskManager is active.
+     * The duke.tasks.TaskManager becomes inactive once a user sends the END duke.commands.Command.
      *
-     * @return true if the TaskManager is active and false otherwise
+     * @return true if the duke.tasks.TaskManager is active and false otherwise
      */
     public boolean isActive() {
         return this.isActive == true;
     }
 
     /**
-     * Sets the current TaskManager to be inactive, effectively switching it off.
+     * Sets the current duke.tasks.TaskManager to be inactive, effectively switching it off.
      */
     public void setInactive() {
         this.isActive = false;
     }
 
     /**
-     * Sets the current TaskManager to be active, effectively switching it on.
+     * Sets the current duke.tasks.TaskManager to be active, effectively switching it on.
      */
     public void setActive() {
         this.isActive = true;
@@ -108,7 +116,7 @@ public class TaskManager {
                     "following descriptor: " + description;
             throw new DukeException(errorStr);
         } else {
-            System.out.println();  // Add space between user input and DukeBot response
+            System.out.println();  // Add space between user input and duke.DukeBot response
             System.out.println("Here are the tasks in your list:");
             int count = 1;
             for (Task task : taskList) {
@@ -120,9 +128,9 @@ public class TaskManager {
     }
 
     /**
-     * Adds a Todo Task to the task list.
+     * Adds a duke.commands.Todo duke.tasks.Task to the task list.
      *
-     * @param description The description of the Todo Task
+     * @param description The description of the duke.commands.Todo duke.tasks.Task
      * @throws DukeException If the description string is empty
      */
     protected void addTodo(String description) throws DukeException {
@@ -132,17 +140,17 @@ public class TaskManager {
         } else {
             Task newTodo = new Todo(description);
             taskList.add(newTodo);
-            System.out.println();  // Add space between user input and DukeBot response
+            System.out.println();  // Add space between user input and duke.DukeBot response
             System.out.println("New to-do added:\n" + newTodo);
             System.out.println("\n");
         }
     }
 
     /**
-     * Adds an Event Task to the task list.
+     * Adds an duke.commands.Event duke.tasks.Task to the task list.
      *
-     * @param description The description of the Event Task
-     * @throws DukeException If the description string does not follow the correct format for specifying an Event
+     * @param description The description of the duke.commands.Event duke.tasks.Task
+     * @throws DukeException If the description string does not follow the correct format for specifying an duke.commands.Event
      */
     protected void addEvent(String description) throws DukeException {
         String errorStr = "";
@@ -163,16 +171,16 @@ public class TaskManager {
 
         Task newEvent = new Event(descriptor, at);
         taskList.add(newEvent);
-        System.out.println();  // Add space between user input and DukeBot response
+        System.out.println();  // Add space between user input and duke.DukeBot response
         System.out.println("New event added:\n" + newEvent);
         System.out.println("\n");
     }
 
     /**
-     * Adds a Deadline Task to the task list.
+     * Adds a duke.commands.Deadline duke.tasks.Task to the task list.
      *
-     * @param description The description of the Deadline Task
-     * @throws DukeException If the description string does not follow the correct format for specifying a Deadline
+     * @param description The description of the duke.commands.Deadline duke.tasks.Task
+     * @throws DukeException If the description string does not follow the correct format for specifying a duke.commands.Deadline
      */
     protected void addDeadline(String description) throws DukeException {
         String errorStr = "";
@@ -182,10 +190,10 @@ public class TaskManager {
             errorStr = "The description of a 'deadline' cannot be empty.";
         } else if (!description.contains("/by")) {
             errorStr = "The description of a 'deadline' must contain a /by term separating " +
-                    "the descriptor from the Deadline time. For example: " +
+                    "the descriptor from the duke.commands.Deadline time. For example: " +
                     "event Submit financial reports /by Friday, 6pm";
         } else if (descriptor.equals("") || by.equals("")) {
-            errorStr = "Neither the descriptor nor the Deadline time can be empty.\n" +
+            errorStr = "Neither the descriptor nor the duke.commands.Deadline time can be empty.\n" +
                     "Received the following: " + description;
         }
 
@@ -193,13 +201,13 @@ public class TaskManager {
 
         Task newDeadline = new Deadline(descriptor, by);
         taskList.add(newDeadline);
-        System.out.println();  // Add space between user input and DukeBot response
+        System.out.println();  // Add space between user input and duke.DukeBot response
         System.out.println("New deadline added:\n" + newDeadline);
         System.out.println("\n");
     }
 
     /**
-     * Marks an existing Task as done.
+     * Marks an existing duke.tasks.Task as done.
      *
      * @param description A String containing the (1-indexed) list index of the target task
      * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
@@ -213,7 +221,7 @@ public class TaskManager {
             Task doneTask = taskList.get(doneIndex);
             doneTask.markAsDone();
 
-            System.out.println();  // Add space between user input and DukeBot response
+            System.out.println();  // Add space between user input and duke.DukeBot response
             System.out.println("The following task has been marked as done: ");
             System.out.println(doneTask + "\n");
         } catch (NumberFormatException e) {
@@ -233,7 +241,7 @@ public class TaskManager {
     }
 
     /**
-     * Deletes an existing Task and removes it from the task list.
+     * Deletes an existing duke.tasks.Task and removes it from the task list.
      *
      * @param description A String containing the (1-indexed) list index of the target task
      * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
@@ -246,7 +254,7 @@ public class TaskManager {
 
             Task deletedTask = taskList.remove(deleteIndex);
 
-            System.out.println();  // Add space between user input and DukeBot response
+            System.out.println();  // Add space between user input and duke.DukeBot response
             System.out.println("The following task has been deleted: ");
             System.out.println(deletedTask);
             System.out.println("There are now " + taskList.size() + " items in the list.\n");
@@ -268,10 +276,10 @@ public class TaskManager {
     }
 
     /**
-     * Deactivates the TaskManager effectively shutting it down.
+     * Deactivates the duke.tasks.TaskManager effectively shutting it down.
      *
      * @param description The remainder of the user input String (after removing the command) which should be empty
-     * @throws DukeException If the user input String contains a non-empty description of if the TaskManager is already
+     * @throws DukeException If the user input String contains a non-empty description of if the duke.tasks.TaskManager is already
      *                       inactive.
      */
     protected void end(String description) throws DukeException {
@@ -281,14 +289,14 @@ public class TaskManager {
                     "called without any further descriptor. However, it " +
                     "received the following descriptor: " + description;
         } else if (!this.isActive) {
-            errorStr = "The DukeBot is currently inactive.";
+            errorStr = "The duke.DukeBot is currently inactive.";
         }
         if (!errorStr.equals("")) throw new DukeException(errorStr);
 
-        // Otherwise, set the DukeBot to be inactive
+        // Otherwise, set the duke.DukeBot to be inactive
         this.setInactive();
         System.out.println();
-        System.out.println("DukeBot shutting down.\n\n");
+        System.out.println("duke.DukeBot shutting down.\n\n");
     }
 
 }

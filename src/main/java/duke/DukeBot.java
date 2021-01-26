@@ -1,12 +1,16 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.commands.Command;
+import duke.tasks.TaskManager;
+import duke.exceptions.DukeException;
+
 import java.util.Scanner;
-import java.util.List;
 
 /**
- * DukeBot is the controller class for the CLI chat-bot Duke.
+ * duke.DukeBot is the controller class for the CLI chat-bot duke.Duke.
  * <p>
- * DukeBot parses user input Strings for valid commands and thus only
- * allows valid commands to be sent to the TaskManager.
+ * duke.DukeBot parses user input Strings for valid commands and thus only
+ * allows valid commands to be sent to the duke.tasks.TaskManager.
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu

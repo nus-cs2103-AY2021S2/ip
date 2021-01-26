@@ -1,8 +1,12 @@
+package duke.commands;
+
+import duke.exceptions.DukeException;
+
 import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Command is an Enum class that handles valid commands to the DukeBot chat-bot.
+ * duke.commands.Command is an Enum class that handles valid commands to the duke.DukeBot chat-bot.
  * <p>
  * The possible valid commands are:
  * LIST
@@ -12,12 +16,12 @@ import java.util.HashMap;
  */
 public enum Command {
     LIST("list"),           // For listing all Tasks
-    TODO("todo"),           // For Todo Tasks
+    TODO("todo"),           // For duke.commands.Todo Tasks
     EVENT("event"),         // For /at Events
     DEADLINE("deadline"),   // For /by Deadlines
-    DONE("done"),           // For marking a Task as complete
-    DELETE("delete"),       // For deleting a Task
-    END("bye");             // For terminating the DukeBot
+    DONE("done"),           // For marking a duke.tasks.Task as complete
+    DELETE("delete"),       // For deleting a duke.tasks.Task
+    END("bye");             // For terminating the duke.DukeBot
 
 
     private final String command;
@@ -39,7 +43,7 @@ public enum Command {
     //Reused from https://howtodoinjava.com/java/enum/java-enum-string-example/
     private static final Map<String, Command> lookup = new HashMap<>();
 
-    // Populate the lookup table with all possible Command Enums
+    // Populate the lookup table with all possible duke.commands.Command Enums
     static {
         for (Command cmd : Command.values()) {
             lookup.put(cmd.getCommand(), cmd);
@@ -50,7 +54,7 @@ public enum Command {
      * Searches for the relevant Enum that matches the String command.
      *
      * @param commandStr The String command whose Enum is to be returned
-     * @return Command Enum that matches the given String command or null
+     * @return duke.commands.Command Enum that matches the given String command or null
      */
     public static Command get(String commandStr) throws DukeException {
         Command command = lookup.get(commandStr);
