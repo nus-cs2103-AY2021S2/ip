@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.Command;
 import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -8,19 +7,19 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
-    private String location = "./duke.txt";
-    private Path path;
+    private final String location = "./duke.txt";
+    private final Path path;
 
     public Storage() {
         this.path = Paths.get(location);
@@ -38,7 +37,6 @@ public class Storage {
         FileWriter file = new FileWriter(this.location);
         for(Task t: list){
             String data = "";
-            String tasktype = t.getType();
 
             switch(t.getType()){
                 case "todo":{
@@ -73,17 +71,17 @@ public class Storage {
                     break;
                 }
                 case "event": {
-                    list.add(new Event(ar[1], ar[2]));
+                    list.add(new Event(ar[1], LocalDate.parse(ar[2])));
                     break;
                 }
                 case "deadline": {
-                    list.add(new Deadline(ar[1], ar[2]));
+                    list.add(new Deadline(ar[1], LocalDate.parse(ar[2])));
                     break;
                 }
             }
             if(ar[ar.length-1].equals("T")) list.get(list.size()-1).done();
         }
-        Command cmd = new ListCommand(list);
+        new ListCommand(list);
         return list;
 
 

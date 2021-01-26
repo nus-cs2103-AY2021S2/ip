@@ -3,12 +3,13 @@ package duke.command;
 import duke.task.Deadline;
 import duke.task.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DeadlineCommand extends Command{
 
 
-    public DeadlineCommand(ArrayList<Task> list, String task, String by){
+    public DeadlineCommand(ArrayList<Task> list, String task, LocalDate by){
         super("");
         Deadline t = new Deadline(task, by);
         list.add(t);

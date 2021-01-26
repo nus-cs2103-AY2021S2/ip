@@ -4,8 +4,9 @@ import duke.command.*;
 import duke.exception.CommandException;
 import duke.task.Task;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,25 +15,26 @@ public class Parser {
     // takes care of parsing the input, then calls Command with appropriate arguments;
     public Parser(){
         Scanner sc = new Scanner(System.in);
-        Command cmd = new HelloCommand();
+        new HelloCommand();
         Storage s = new Storage();
         ArrayList<Task> list = new ArrayList<>();
         try{
             list = s.loadData();
         } catch (IOException e){
-
+            e.printStackTrace();
         }
         while(sc.hasNextLine()){
-            System.out.println(list.size());
             String line = sc.nextLine();
             String command = line.split(" ")[0];
+            boolean byeSaid = false;
             try {
                 switch (command) {
                     case "bye":
-                        cmd = new ByeCommand();
+                        new ByeCommand();
+                        byeSaid = true;
                         break;
                     case "list": {
-                        cmd = new ListCommand(list);
+                        new ListCommand(list);
                         break;
                     }
                     case "done": {
@@ -40,7 +42,7 @@ public class Parser {
                         if(ar.length==1) throw new CommandException("Which task are you done with?");
                         line = line.split(" ",2)[1];
                         int index = Integer.parseInt(line)-1;
-                        cmd = new DoneCommand(list,index);
+                        new DoneCommand(list,index);
                         break;
                     }
                     case "delete": {
@@ -48,14 +50,14 @@ public class Parser {
                         if(ar.length==1) throw new CommandException("Which task are you deleting?");
                         line = line.split(" ",2)[1];
                         int index = Integer.parseInt(line)-1;
-                        cmd = new DeleteCommand(list,index);
+                        new DeleteCommand(list,index);
                         break;
                     }
                     case "todo": {
                         String[] ar = line.split(" ",2);
                         if(ar.length==1) throw new CommandException("I can't add an empty task to the list!");
                         line = line.split(" ",2)[1];
-                        cmd = new TodoCommand(list, line);
+                        new TodoCommand(list, line);
                         break;
                     }
                     case "deadline": {
@@ -64,7 +66,12 @@ public class Parser {
                         line = line.split(" ",2)[1];
                         String[] result = line.split("/by ");
                         if(result.length==1) throw new CommandException("Er... when do you need to finish this /by?");
-                        cmd = new DeadlineCommand(list, result[0], result[1]);
+                        try{
+                            LocalDate date = LocalDate.parse(result[1]);
+                            new DeadlineCommand(list, result[0], date);
+                        } catch (DateTimeParseException e){
+                            throw new CommandException("Please input a valid date as yyyy-mm-dd");
+                        }
                         break;
                     }
                     case "event": {
@@ -73,25 +80,32 @@ public class Parser {
                         line = line.split(" ",2)[1];
                         String[] result = line.split("/at ");
                         if(result.length==1) throw new CommandException("Er... /at what time does this event start?");
-                        cmd = new EventCommand(list, result[0], result[1]);
+
+                        try{
+                            LocalDate date = LocalDate.parse(result[1]);
+                            new EventCommand(list, result[0], date);
+                        } catch (DateTimeParseException e){
+                            throw new CommandException("Please input your date as yyyy-mm-dd");
+                        }
                         break;
                     }
                     default: {
-                        cmd = new ExceptionCommand("I don't understand");
+                        new ExceptionCommand("I don't understand");
                         break;
                     }
                 }
 
             } catch (IndexOutOfBoundsException | NumberFormatException e){
-                cmd = new ExceptionCommand("Please enter a valid value");
+                new ExceptionCommand("Please enter a valid value");
             } catch (CommandException e){
-                cmd = new ExceptionCommand(e.getMessage());
+                new ExceptionCommand(e.getMessage());
             }
             try {
                 s.storeData(list);
             } catch (IOException e) {
-
+                e.printStackTrace();
             }
+            if(byeSaid) break;
         }
         sc.close();
     }
