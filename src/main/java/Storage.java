@@ -8,6 +8,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * stores the tasks in the TaskList object into a file.
+     * tasks will be stored in a specific string format,
+     * each task occupying one line.
+     *
+     * @param list TaskList containing all the tasks of the user
+     * @throws IOException if filepath is wrong
+     */
     void store(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : list.taskList) {
@@ -33,6 +41,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * loads the tasks stored in the file into a ArrayList of Tasks.
+     * if file is empty, empty list is returned
+     *
+     * @return ArrayList of Tasks given by the user previously
+     * @throws IOException if the file is misread or file cannot be found
+     */
     ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
