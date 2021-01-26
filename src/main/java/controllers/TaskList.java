@@ -88,7 +88,7 @@ public class TaskList {
             throw new DukeBlankTaskException("The Todo you are trying to add cannot be blank!");
         }
         Optional<? extends Todo> newTodoObject =
-                Optional.ofNullable(new Todo(String.join(" ", newTodoList)));
+                Optional.of(new Todo(String.join(" ", newTodoList)));
         try {
             this.todosView.added(newTodoObject, this.todosList.size() + 1);
         } catch (Exception e) {
@@ -120,7 +120,8 @@ public class TaskList {
         int idxDelete = Integer.parseInt(deleteTodoArgs.get(0)) - 1;
         if (idxDelete >= this.todosList.size()) {
             throw new DukeTaskIndexOutOfRangeException(
-                    "The index you input has an index that is beyond the range of the number of tasks you currently have. Please try again.");
+                    "The index you input has an index that is beyond the range of the number of tasks you "
+                            + "currently have. Please try again.");
         }
 
         // render deleted view
@@ -129,7 +130,7 @@ public class TaskList {
         // remove from stream
         return new TaskList(
                 IntStream.range(0, this.todosList.size()).filter(idx -> idx != idxDelete)
-                        .mapToObj(idx -> this.todosList.get(idx)).collect(Collectors.toList()));
+                        .mapToObj(this.todosList::get).collect(Collectors.toList()));
     }
 
     /**
@@ -174,8 +175,10 @@ public class TaskList {
 
         // if no deadline input or /by without any deadline, throw exception
         if (deadline.size() <= 1) {
-            String exceptionMessage =
-                    "Please add a /by followed by the deadline time and date in DD/MM/YYYY HHMM to specify a time and date for the Deadline task. If there is no time for this event, perhaps consider creating a todo instead.";
+            // @formatter:off
+            String exceptionMessage = "Please add a /by followed by the deadline time and date in DD/MM/YYYY "
+                    + "HHMM to specify a time and date for the Deadline task. If there is no time for "
+                    + "this deadline perhaps consider creating a todo instead.";
             throw new DukeBlankDetailsException(exceptionMessage);
         }
 
@@ -185,7 +188,7 @@ public class TaskList {
         // wrong format
         Optional<Deadline> newDeadline;
         try {
-            newDeadline = Optional.ofNullable(new Deadline(String.join(" ", message),
+            newDeadline = Optional.of(new Deadline(String.join(" ", message),
                     String.join(" ", deadline.subList(1, deadline.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
@@ -226,7 +229,7 @@ public class TaskList {
 
         // iterate through list to find where escape character is
         // once found, everything after is part of the deadline
-        newEventList.stream().forEach(substring -> {
+        newEventList.forEach(substring -> {
             if (substring.contains("/")) {
                 eventTime.add(substring);
             } else if (eventTime.size() == 0) {
@@ -243,8 +246,10 @@ public class TaskList {
 
         // if no deadline input or /by without any deadline, throw exception
         if (eventTime.size() <= 1) {
-            String exceptionMessage =
-                    "Please add a /at followed by the event time and date in DD/MM/YYYY HHMM to specify a time and date for the Event task. If there is no time for this event, perhaps consider creating a todo instead.";
+            // @formatter:off
+            String exceptionMessage = "Please add a /by followed by the event time and date in DD/MM/YYYY "
+                            + "HHMM to specify a time and date for the Event task. If there is no time for "
+                            + "this event perhaps consider creating a todo instead.";
             throw new DukeBlankDetailsException(exceptionMessage);
         }
 
@@ -253,7 +258,7 @@ public class TaskList {
         // Creating an event might throw an exception if the date is in the wrong format
         Optional<Event> newEvent;
         try {
-            newEvent = Optional.ofNullable(new Event(String.join(" ", message),
+            newEvent = Optional.of(new Event(String.join(" ", message),
                     String.join(" ", eventTime.subList(1, eventTime.size()))));
         } catch (DateTimeParseException e) {
             throw new DukeDateTimeParseException(
@@ -290,7 +295,7 @@ public class TaskList {
         return new TaskList(IntStream.range(0, this.todosList.size()).mapToObj(idx -> {
             if (idx == idxIsDone) {
                 Optional<? extends Todo> doneTodo =
-                        this.todosList.get(idx).map(todo -> todo.markAsDone());
+                        this.todosList.get(idx).map(Todo::markAsDone);
                 try {
                     this.todosView.markAsDone(doneTodo);
                 } catch (Exception e) {
