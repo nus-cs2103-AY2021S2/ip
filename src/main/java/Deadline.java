@@ -15,7 +15,7 @@ public class Deadline extends Task {
     
     public Deadline (boolean done, String name, String end) { 
         super(done, name);
-        this.end = end;
+        this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
     public static Deadline createDeadline (String str) throws ChatException {
@@ -77,7 +77,7 @@ public class Deadline extends Task {
     }
 
     public String allParameterStr() {
-        return String.format("D,%s,%s,%s", this.getDone(), this.getName(), this.getEnd());
+        return String.format("D,%s,%s,%s", this.getDone(), this.getName(), this.getEnd().format(inputFormatter));
     }
     
     @Override

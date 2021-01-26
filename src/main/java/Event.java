@@ -18,8 +18,8 @@ public class Event extends Task {
     
     public Event (boolean done, String name, String start, String end) { 
         super(done, name);
-        this.start = start; 
-        this.end = end;
+        this.start = LocalDateTime.parse(start, inputFormatter);
+        this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
     public static Event createEvent (String str) throws ChatException {
@@ -100,7 +100,8 @@ public class Event extends Task {
     }
 
     public String allParameterStr() {
-        return String.format("E,%s,%s,%s,%s", this.getDone(), this.getName(), this.getStart(), this.getEnd());
+        return String.format("E,%s,%s,%s,%s", this.getDone(), this.getName(), this.getStart().format(inputFormatter),
+                this.getEnd().format(inputFormatter));
     }
     
     @Override
