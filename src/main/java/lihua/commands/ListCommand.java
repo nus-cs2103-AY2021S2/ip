@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class ListCommand extends Command {
     private final LocalDate date;
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List done all the tasks. " +
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List down all the tasks. " +
             "List done all the tasks on a specific date, if additional date argument is given\n"
             + "---- Example 1: " + COMMAND_WORD + "\n"
             + "---- Example 2: " + COMMAND_WORD + " [yyyy-mm-dd]";

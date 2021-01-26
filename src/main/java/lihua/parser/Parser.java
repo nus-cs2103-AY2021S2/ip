@@ -57,6 +57,9 @@ public class Parser {
             case "help":
                 command = new HelpCommand();
                 break;
+            case "find":
+                command = new FindCommand(split[1]);
+                break;
             default:
                 command = new HelpCommand(false);
                 break;
