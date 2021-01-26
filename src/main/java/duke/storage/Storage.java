@@ -13,7 +13,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-
+/**
+ * Stores the task list and implements functions for saving and loading.
+ */
 public class Storage {
     private static TaskList taskList;
     private static String rootProject = System.getProperty("user.dir");
@@ -22,6 +24,10 @@ public class Storage {
     private static Path dataFolderPath =
             Paths.get(rootProject,"src", "main", "java", "duke", "data");
 
+    /**
+     * Initializes the storage class
+     * @throws DukeException when an error happens when loading data from storage
+     */
     public Storage() throws DukeException {
         init();
     }
@@ -31,6 +37,10 @@ public class Storage {
         taskList = new TaskList(loadData(dataFilePath));
     }
 
+    /**
+     * Saves the current task list into storage, used by the public.
+     * @throws DukeException when an error occurs while saving data, eg. no access rights
+     */
     public static void saveData() throws DukeException {
         saveData(dataFilePath, TaskList.getAllTasks());
     }

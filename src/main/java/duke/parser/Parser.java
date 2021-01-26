@@ -13,11 +13,19 @@ import duke.main.Task;
 import duke.main.Todo;
 import java.util.Locale;
 
+/**
+ * Parses the user input and return corresponding Command objects for execution.
+ */
 public class Parser {
+
+    /**
+     * Constructor
+     */
     public Parser() {
 
     }
     /**
+     * Parses the user input.
      * 1. Takes in the first word from user input and carries out relevant actions based on
      *      the word by printing out corresponding replies.
      * 2. A command is NOT case sensitive.
@@ -28,8 +36,8 @@ public class Parser {
      *      based on discussion of #Issue 14 in forum.
      *      Credit to @samuelfangjw who mentioned it first.
      * @param message user input
-     * @throws IllegalArgumentException thrown if user enters an invalid command
      * @throws DukeException thrown if user enters a valid command but invalid related information
+     *                       or an invalid command
      */
     public Command parseMessage(String message)
             throws DukeException{
@@ -96,6 +104,7 @@ public class Parser {
         }
         return index;
     }
+
     private Command preTodoTask(String description) throws DukeException {
         if (description == null) {
             throw new DukeException("Please provide a description when creating todo.");

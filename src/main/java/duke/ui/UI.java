@@ -2,6 +2,9 @@ package duke.ui;
 
 import java.util.Scanner;
 
+/**
+ * Interacts with user by receiving input and printing results from user commands.
+ */
 public class UI {
     private static final String[] greet = {
             " ____        _        ",
@@ -25,6 +28,9 @@ public class UI {
 
     private final Scanner in;
 
+    /**
+     * Constructor and inits the scanner for input.
+     */
     public UI() {
         this.in = new Scanner(System.in);
     }
@@ -43,22 +49,40 @@ public class UI {
         return res.toString();
     }
 
+    /**
+     * Prints the welcome message when duke starts.
+     */
     public static void greet() {
         System.out.println(formatMessage(greet));
     }
 
+    /**
+     * Prints the exit message when duke closes.
+     */
     public static void bye() {
         System.out.println(formatMessage(exit));
     }
 
+    /**
+     * Helper method that prints the message or reply after the user command is executed.
+     * @param msg
+     */
     private static void printReply(String msg) {
         System.out.println(msg);
     }
 
+    /**
+     * Takes in user input.
+     * @return user input as String
+     */
     public String getUserInput() {
         return in.nextLine();
     }
 
+    /**
+     * Prints the result after the command is executed.
+     * @param msg result from Command class .execute method
+     */
     public static void printMessage(String[] msg) {
         printReply(formatMessage(msg));
     }

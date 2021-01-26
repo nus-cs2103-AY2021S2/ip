@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit test for Todo class.
+ */
 public class TodoTest {
     @Test
     public void testStringConversion(){

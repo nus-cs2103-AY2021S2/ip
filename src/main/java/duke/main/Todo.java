@@ -15,17 +15,29 @@ public class Todo extends Task{
         super(description);
     }
 
-
+    /**
+     * Constructor for todo class object, used for storage
+     * @param description todo description
+     * @param isDone if the todo is done
+     */
     public Todo(String description, boolean isDone) {
         super(description);
         this.isDone = isDone;
     }
 
+    /**
+     * Acts as a helper method to print out the details of the todo
+     * @return the details of the todo
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Helper method to get the details of the todo task to be stored
+     * @returnthe the details of the todo task to be stored
+     */
     @Override
     public String infoToStore() {
         String divider = " | ";
