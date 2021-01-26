@@ -27,7 +27,7 @@ public class Duke {
 
     public void start() {
         storage.getLastSave(taskList);
-        parser.start(this, taskList, ui);
+        parser.start(this, taskList, ui, storage);
     }
 
 

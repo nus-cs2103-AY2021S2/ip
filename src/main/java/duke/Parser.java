@@ -5,12 +5,12 @@ public class Parser {
     public Parser(){
     }
 
-    protected void start(Duke duke,TaskList taskList, Ui ui){
+    protected void start(Duke duke,TaskList taskList, Ui ui, Storage storage){
         Scanner sc = new Scanner(System.in);
         String scannedLine = sc.nextLine();
         while (duke.isOn) {
             try {
-                handleCommand(duke, scannedLine, taskList, ui);
+                handleCommand(duke, scannedLine, taskList, ui, storage);
             } catch (Exception e) {
                 System.out.format("%s\n☹ %s\n%s", Duke.line, e.getMessage(), Duke.line);
             } finally {
@@ -19,14 +19,14 @@ public class Parser {
         }
     }
 
-    protected void handleCommand(Duke duke,String currLine, TaskList taskList, Ui ui) throws Exception {
+    protected void handleCommand(Duke duke,String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
         // basic commands
         currLine = currLine.toLowerCase();
         String[] parsedLine = currLine.split(" ");
         if (currLine.startsWith("list")) {
             ui.listTasks(taskList);
         } else if(currLine.startsWith("save")){
-            Storage.save(ui, taskList);
+            storage.save(ui, taskList);
             System.out.println("Your information has been saved!");
         } else if (currLine.startsWith("bye")) {
             taskList.bye(duke);

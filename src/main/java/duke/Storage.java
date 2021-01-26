@@ -38,7 +38,7 @@ public class Storage {
         }
     }
 
-    protected static void save(Ui ui, TaskList taskList){
-        FileWriting.writeToFile(ui.listTasks(taskList));
+    protected void save(Ui ui, TaskList taskList){
+        FileWriting.write(filePath,ui.listTasks(taskList));
     }
 }

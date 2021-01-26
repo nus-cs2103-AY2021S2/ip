@@ -12,8 +12,8 @@ public class FileWriting {
         fw.close();
     }
 
-    protected static void writeToFile( String string) {
-        String file2 = "data/duke.txt";
+    protected static void write(String filePath, String string) {
+        String file2 = filePath;
         try {
             writeToFile(file2,string );
         } catch (IOException e) {
