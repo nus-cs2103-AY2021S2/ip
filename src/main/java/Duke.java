@@ -1,4 +1,6 @@
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -9,12 +11,13 @@ import java.util.regex.Matcher;
  */
 public class Duke {
     private static List<Task> listOfTasks = new ArrayList<>();
+    private static Storage storage = new Storage("data/duke.txt");
 
     /**
      * Prints all the tasks stored on the list.
      */
 
-    private static void printAllTasks() {
+    public static void printAllTasks() {
         int counter = 1;
         for (Task currentTask : listOfTasks) {
             System.out.println(counter + "." + currentTask);
@@ -22,15 +25,17 @@ public class Duke {
         }
     }
 
+
     /**
      * adds a Task to the list, and prints a message on to the console
      * @param incomingTask
      */
 
-    private static void addTask(Task incomingTask) {
+    private static void addTask(Task incomingTask) throws IOException {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + incomingTask);
         listOfTasks.add(incomingTask);
+        storage.saveTasks(listOfTasks);
         System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
     }
 
@@ -41,6 +46,7 @@ public class Duke {
      * @return  the index of the task to mark done.
      * @throws DukeException for the case when done is empty or when the integer cannot be parsed.
      */
+
     private static int parseMarkDone(String input) throws DukeException {
         //for the case when "done" in the input string is followed by variable number of space.
         if (input.toLowerCase().matches("^done\\s*$")) {
@@ -98,9 +104,10 @@ public class Duke {
      * @param indexToDelete index of the task to be deleted.
      */
 
-    private static void deleteTask(int indexToDelete) {
+    private static void deleteTask(int indexToDelete) throws IOException {
         Task task = listOfTasks.get(indexToDelete-1);
         listOfTasks.remove(indexToDelete-1);
+        storage.saveTasks(listOfTasks);
         System.out.println("Noted. I've removed this task:");
         System.out.println("\t" + task);
         System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
@@ -183,12 +190,20 @@ public class Duke {
 
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
+        //initialize listOfTasks From Storage
+        try {
+            listOfTasks = storage.loadStorage();
+        } catch (Exception err) {
+            System.out.println(err.getMessage());
+        }
+
         String input;
         Scanner sc = new Scanner(System.in);
         // Read in user input, determine the type of command that is being issued, (if any) parses the command
         //and performs the necessary action.
         while (sc.hasNextLine()) {
-            input = sc.nextLine();
+            input = sc.nextLine().trim();
             try {
                 if (input.equals("bye")) break;
                 if (input.equals("list")) {
@@ -215,7 +230,10 @@ public class Duke {
 
             } catch (DukeException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+
         }
         System.out.println("Bye. Hope to see you again soon!");
     }
