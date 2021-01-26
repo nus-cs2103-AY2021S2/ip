@@ -18,7 +18,7 @@ public class Event extends Task{
             return "[E][X] " + this.name + "(" + this.time + ")";
         }
         else{
-            return "[E][ ] " + this.name + "(" + this.time + ")";
+            return "[E][_] " + this.name + "(" + this.time + ")";
         }
     }
 }

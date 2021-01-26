@@ -14,7 +14,7 @@ public class Todo extends Task{
                 return "[T][X] " + this.getName();
             }
             else{
-                return "[T][ ] " + this.getName();
+                return "[T][_] " + this.getName();
             }
     }
 
