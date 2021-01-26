@@ -1,6 +1,6 @@
 package command;
 import mike.TaskList;
-import task.*;
+import task.Task;
 import exception.MikeInvalidInputException;
 
 public class DoneCommand implements Command {
