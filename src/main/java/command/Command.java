@@ -1,6 +1,6 @@
 package command;
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
-import exception.MikeInvalidInputException;
 
 public interface Command {
     /**
@@ -16,7 +16,7 @@ public interface Command {
      * @return resultant tasklist after command is run
      */
     /*TODO change exception thrown*/
-    TaskList runCommand(TaskList taskList) throws MikeInvalidInputException;
+    TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException;
 
     /**
      * Gets the response of the command

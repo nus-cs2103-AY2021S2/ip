@@ -46,7 +46,7 @@ public class Mike {
 
     /**
      * Initialises mike chatbot by printing welcome message and reading stored tasklist file from specified filepath
-     * @param filepath filepath to tasklist to read from
+     * @param filepath filepath to saved taskList
      */
     public void mikeInit(String filepath) {
         this.filePath = filepath;
@@ -64,8 +64,8 @@ public class Mike {
             this.taskList = inputCommand.runCommand(this.taskList);
             this.storage.updateListFile(this.taskList);
             return inputCommand.getResponse();
-        } catch (MikeInvalidInputException e) {
-            throw new MikeCommandExecutionException(e.getMessage());
+        } catch (MikeCommandExecutionException e) {
+            throw new MikeCommandExecutionException(e.getCommand() ,e.getMessage());
         }
     }
 }
