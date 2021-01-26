@@ -1,12 +1,14 @@
 package duke.tasks;
 
-import duke.utils.Task;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     private List<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
 
     public TaskList(List<Task> converted) {
         this.taskList = new ArrayList<>(converted);
@@ -18,11 +20,15 @@ public class TaskList {
     }
 
     public void printList() {
-        System.out.println("Here are the tasks in your list:");
-        int counter = 1;
-        for (Task t : this.taskList) {
-            System.out.println(counter + ". " + t);
-            counter++;
+        if (this.taskList.size() == 0) {
+            System.out.println("You have completed all tasks!");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            int counter = 1;
+            for (Task t : this.taskList) {
+                System.out.println(counter + ". " + t);
+                counter++;
+            }
         }
     }
 

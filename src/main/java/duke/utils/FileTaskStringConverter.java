@@ -1,8 +1,6 @@
 package duke.utils;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.ToDo;
+import duke.tasks.*;
 import duke.dukeexceptions.InvalidTaskTypeException;
 
 import java.time.LocalDateTime;

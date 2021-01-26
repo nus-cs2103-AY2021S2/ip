@@ -7,6 +7,7 @@ import duke.dukeexceptions.InvalidIndexInputException;
 import duke.tasks.TaskList;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,6 +17,8 @@ public class Parser {
     private final Ui ui;
     private final Storage storage;
     private static final Pattern checkNum = Pattern.compile("^[0-9]$");
+    protected static final DateTimeFormatter formatter = DateTimeFormatter
+            .ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
 
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -68,8 +71,9 @@ public class Parser {
             String[] taskInputAndDate = description.split("/", 2);
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
+            System.out.println(taskInputAndDate[1]);
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1]);
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
                 return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
@@ -86,7 +90,7 @@ public class Parser {
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1]);
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1].substring(3), formatter);
                 return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();

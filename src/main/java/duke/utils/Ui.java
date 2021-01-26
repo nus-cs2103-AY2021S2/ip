@@ -22,9 +22,9 @@ public class Ui {
     }
 
     public void showHelp() {
-        System.out.println("Valid commands include the following:");
-        System.out.println("'todo', 'deadline', 'event', 'list', 'delete', 'bye'");
-        System.out.println("Please start your input with one of the above commands!");
+        System.err.println("Valid commands include the following:");
+        System.err.println("'todo', 'deadline', 'event', 'list', 'delete', 'bye'");
+        System.err.println("Please start your input with one of the above commands!");
     }
 
     public void repeatInput() {
