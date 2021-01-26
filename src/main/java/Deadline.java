@@ -19,13 +19,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return String.format("[D][%s] %s (by: %s)", 
-            this.getStatusIcon(), super.toString(), this.by);
-=======
         return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), 
             super.toString(), this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
-        //return "[D]" + super.toString() + " (by: " + by + ")";
->>>>>>> branch-Level-8
     }
 }
