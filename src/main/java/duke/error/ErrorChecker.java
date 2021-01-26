@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 public class ErrorChecker {
     protected String input;
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
 
     /**
      * Constructs a new ErrorChecker object used for checking errors in user input.
      *
      * @param input  User input.
-     * @param list Task list.
+     * @param tasks Task list.
      */
-    public ErrorChecker(String input, ArrayList<Task> list) {
+    public ErrorChecker(String input, ArrayList<Task> tasks) {
         this.input = input;
-        this.list = list;
+        this.tasks = tasks;
     }
 
     /**
@@ -28,7 +28,7 @@ public class ErrorChecker {
      *
      * @return True is input is valid and formatted correctly, and false otherwise.
      */
-    public boolean check() {
+    public boolean isValid() {
         String taskType = "";
 
         if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo")
@@ -44,13 +44,13 @@ public class ErrorChecker {
                 input.substring(6);
                 String taskToMark = input.substring(5);
                 int taskToMarkInt = Integer.parseInt(taskToMark);
-                list.get(taskToMarkInt - 1);
+                tasks.get(taskToMarkInt - 1);
             } else if (input.startsWith("delete")) {
                 taskType = "delete";
                 input.substring(8);
                 String taskToDelete = input.substring(7);
                 int taskToDeleteInt = Integer.parseInt(taskToDelete);
-                list.get(taskToDeleteInt - 1);
+                tasks.get(taskToDeleteInt - 1);
             } else if (input.startsWith("todo")) {
                 taskType = "todo";
                 input.substring(6);
