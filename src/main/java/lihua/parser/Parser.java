@@ -1,6 +1,13 @@
 package lihua.parser;
 
-import lihua.commands.*;
+import lihua.commands.AddCommand;
+import lihua.commands.Command;
+import lihua.commands.DeleteCommand;
+import lihua.commands.DoneCommand;
+import lihua.commands.ExitCommand;
+import lihua.commands.HelpCommand;
+import lihua.commands.ListCommand;
+
 import lihua.tasks.Deadline;
 import lihua.tasks.Event;
 import lihua.tasks.ToDo;
@@ -86,11 +93,13 @@ public class Parser {
         String[] split = userInput.split("\\s+/by\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
+
         int index = userInput.indexOf("deadline") + 8;
         while (userInput.charAt(index) == ' ') {
             index++;
         }
         String content = userInput.substring(index);
+
         return new Deadline(content, LocalDate.parse(date));
     }
 
@@ -106,11 +115,13 @@ public class Parser {
         String[] split = userInput.split("\\s+/at\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
         userInput = split[0];
+
         int index = userInput.indexOf("event") + 5;
         while (userInput.charAt(index) == ' ') {
             index++;
         }
         String content = userInput.substring(index);
+
         return new Event(content, LocalDate.parse(date));
     }
 
@@ -128,6 +139,7 @@ public class Parser {
         while (userInput.charAt(index) == ' ') {
             index++;
         }
+
         return new ToDo(userInput.substring(index));
     }
 }

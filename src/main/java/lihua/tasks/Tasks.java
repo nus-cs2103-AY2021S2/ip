@@ -89,6 +89,7 @@ public class Tasks {
      */
     public JSONArray getJsonArray() {
         JSONArray jsonArray = new JSONArray();
+
         for (Task t : tasks) {
             jsonArray.add(t.toJsonObject());
         }

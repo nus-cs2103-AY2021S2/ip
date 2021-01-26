@@ -9,7 +9,8 @@ public class ExitCommand extends Command {
     /** Command word for exit command */
     public static final String COMMAND_WORD = "bye";
     /** Command help information for exit command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exit the application. Data will be auto-saved.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Exit the application. Data will be auto-saved.\n"
             + "---- Example: " + COMMAND_WORD;
 
     /**

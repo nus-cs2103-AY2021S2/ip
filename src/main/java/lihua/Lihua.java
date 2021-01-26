@@ -1,3 +1,5 @@
+package lihua;
+
 import lihua.commands.Command;
 import lihua.commands.CommandResult;
 import lihua.commands.ExitCommand;

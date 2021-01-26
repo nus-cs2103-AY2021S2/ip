@@ -51,6 +51,7 @@ public class Deadline extends Task {
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("type", "deadline");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);

@@ -11,8 +11,9 @@ public class ListCommand extends Command {
     /** Command word for list command */
     public static final String COMMAND_WORD = "list";
     /** Command help information for list command */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": List done all the tasks. " +
-            "List done all the tasks on a specific date, if additional date argument is given\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List done all the tasks. "
+            + "List done all the tasks on a specific date, if additional date argument is given\n"
             + "---- Example 1: " + COMMAND_WORD + "\n"
             + "---- Example 2: " + COMMAND_WORD + " [yyyy-mm-dd]";
 

@@ -50,6 +50,7 @@ public class Event extends Task {
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("type", "event");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);

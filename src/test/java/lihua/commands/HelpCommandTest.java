@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HelpCommandTest {
     @Test
     public void commandDescription_noGivenInput_descriptionMatches() {
-        String expected = "help: Shows application usage instructions.\n"
+        String EXPECTED = "help: Shows application usage instructions.\n"
                 + "---- Example: help";
-        assertEquals(expected, HelpCommand.MESSAGE_USAGE);
+        assertEquals(EXPECTED, HelpCommand.MESSAGE_USAGE);
     }
 }

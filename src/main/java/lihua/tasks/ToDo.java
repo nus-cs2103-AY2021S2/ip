@@ -32,6 +32,7 @@ public class ToDo extends Task {
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("type", "todo");
         jsonObject.put("isDone", isDone);
         jsonObject.put("description", name);
