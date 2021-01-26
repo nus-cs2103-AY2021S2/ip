@@ -27,17 +27,17 @@ public class Duke {
     }
 
     public void run() {
-        try {
-            ui.showWelcome();
-            boolean isExit = false;
-            while (!isExit) {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
                 String fullCmd = ui.readCommand();
                 Command parsedCmd = Parser.parse(fullCmd);
                 parsedCmd.execute(storage, ui, taskList);
                 isExit = parsedCmd.isExit();
+            } catch (DukeException e) {
+                ui.showError(e);
             }
-        } catch (DukeException e) {
-            ui.showError(e);
         }
     }
 
