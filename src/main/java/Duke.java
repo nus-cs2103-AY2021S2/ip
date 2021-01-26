@@ -111,12 +111,15 @@ public class Duke {
             }
         } else if (userInput.startsWith("deadline ")) {
             String[] splits = userInput.split("deadline |/by ");
-            System.out.println(Arrays.asList(splits));
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), Arrays.asList(splits).get(2));
-                Duke.ls.add(addedTask);
-                System.out.println("Got it, I've added this task to the list: ");
-                System.out.println("  " + addedTask);
+                try {
+                    Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), Arrays.asList(splits).get(2));
+                    Duke.ls.add(addedTask);
+                    System.out.println("Got it, I've added this task to the list: ");
+                    System.out.println("  " + addedTask);
+                } catch (DukeException ex) {
+                    System.out.println(ex);
+                }
             } else {
                 throw new ArgumentException(2);
             }
