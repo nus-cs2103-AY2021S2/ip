@@ -55,7 +55,7 @@ class FileReader {
         }
     }
 
-    Task toTask(String input) {
+    Task toTask(String input) throws DukeException{
         Scanner sc = new Scanner(input);
         String command = sc.next();
 
@@ -68,7 +68,7 @@ class FileReader {
             second = args[1].trim();
         }
 
-        switch(command){
+        switch(command) {
             case "todo":
                 return new Todo(first);
             case "event":

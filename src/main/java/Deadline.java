@@ -23,6 +23,12 @@ class Deadline extends Task{
     }
 
     @Override
+    String toFileString() {
+        return String.format("event %s | %s %s", description,
+                preposition, date.format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+    }
+
+    @Override
     public String toString(){
         String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format("[D][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);

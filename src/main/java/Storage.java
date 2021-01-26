@@ -67,7 +67,7 @@ class Storage {
 
         for(Task t: list) {
             if(t.getIsDone()) {
-                res += t.toString() + System.lineSeparator();
+                res += t.toFileString() + System.lineSeparator();
             }
         }
 
@@ -75,7 +75,7 @@ class Storage {
 
         for(Task t: list) {
             if(!t.getIsDone()) {
-                res += t.toString() + System.lineSeparator();
+                res += t.toFileString() + System.lineSeparator();
             }
         }
 

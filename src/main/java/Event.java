@@ -23,6 +23,12 @@ public class Event extends Task{
     }
 
     @Override
+    String toFileString() {
+        return String.format("event %s | %s %s", description,
+                preposition, date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
+
+    @Override
     public String toString(){
         String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return String.format("[E][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);
