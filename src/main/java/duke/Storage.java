@@ -12,15 +12,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Encapsulates the methods for handling local storage.
+ */
 public class Storage {
 
     private final String path;
 
+    /**
+     * Constructor for storage.
+     * @param path A string containing the path to the file.
+     */
     Storage(String path) {
         this.path = path;
     }
 
-
+    /**
+     * Opens and returns a task list from local storage if present.
+     * @return A task list after opening from path.
+     * @throws DukeException If a file is not already present.
+     */
     public TaskList open() throws DukeException {
 
         File file = new File(path);
@@ -45,6 +56,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes the task list provided to local storage.
+     * @param taskList Task list to be written to local storage.
+     * @throws IOException If an error occurs during writing to file.
+     * @throws DukeException If unable to format file contents.
+     */
     public void write(TaskList taskList) throws IOException, DukeException {
         FileWriter fw = new FileWriter(path);
         StringBuilder sb = new StringBuilder();
@@ -58,6 +75,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Creates a file.
+     * @param file File object to be created from.
+     * @throws DukeException If unable to create new file.
+     */
     private void createFile(File file) throws DukeException {
         try {
             file.getParentFile().mkdirs();
@@ -67,6 +89,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Format task into a string to be stored on local storage.
+     * @param task Task to be formatted into a string.
+     * @return Task that has been formatted into a string.
+     * @throws DukeException If unknown task type.
+     */
     private String formatFileContents(Task task) throws DukeException {
         String format;
         String description = task.getDescription();
@@ -81,11 +109,18 @@ public class Storage {
             String eventDateTime = ((EventTask) task).serializeEvent();
             format = String.format("E | %d | %s | %s", status, description, eventDateTime);
         } else {
-            throw new DukeException("Error in file writing: Unknown duke.task type");
+            throw new DukeException("Error in file writing: Unknown task type");
         }
         return format;
     }
 
+    /**
+     * Formats a line of string from a file into a Task object.
+     * @param newLine Line from string read from file to be converted to a task.
+     * @param taskID ID of task to be created.
+     * @return Task converted from string read from file.
+     * @throws DukeException If task type is unknown.
+     */
     private Task processFileContents(String newLine, int taskID) throws DukeException {
         String[] lineContents = newLine.split(" \\| ");
         String taskType = lineContents[0];
@@ -105,7 +140,7 @@ public class Storage {
                 String endTime = lineContents[5];
                 return new EventTask(description, taskID, status, eventDate, startTime, endTime);
             default:
-                throw new DukeException("Error in file reading: Unknown duke.task type");
+                throw new DukeException("Error in file reading: Unknown task type");
         }
     }
 

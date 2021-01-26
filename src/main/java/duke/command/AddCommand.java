@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.TaskList;
+import duke.task.Task;
 /**
  * Represents a command that adds tasks.
  */
