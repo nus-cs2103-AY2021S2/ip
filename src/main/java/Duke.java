@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import weiliang.bot.Bot;
+import weiliang.bot.BotException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,7 +13,12 @@ public class Duke {
         try (Scanner scanner = new Scanner(System.in)) {
             while (bot.isActive()) {
                 System.out.print("You: ");
-                String reply = bot.respond(scanner.nextLine());
+                String reply;
+                try {
+                    reply = bot.respond(scanner.nextLine());
+                } catch (BotException e) {
+                    reply = bot.formatMessage(e.getMessage());
+                }
                 // Additional line break
                 System.out.println();
                 System.out.println(reply);

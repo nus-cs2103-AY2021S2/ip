@@ -24,7 +24,7 @@ public class Bot {
         this.memory = new ArrayList<>();
     }
 
-    private String formatMessage(String message) {
+    public String formatMessage(String message) {
         return name + ": " + message.replace("{{bot:name}}", name);
     }
 
@@ -36,7 +36,7 @@ public class Bot {
         return active;
     }
 
-    public String respond(String input) {
+    public String respond(String input) throws BotException {
         // Clear leading and trailing whitespace
         input = input.strip();
 
@@ -83,8 +83,7 @@ public class Bot {
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
             } else {
-                // Reserved for later part
-                // throw new BotException(this, message);
+                throw new BotException(this, "The description of a todo cannot be empty!");
             }
         }
         if (input.startsWith("deadline")) {
@@ -113,7 +112,8 @@ public class Bot {
         }
 
         // Default
-        return formatMessage("Sorry! I don't understand you.");
+        // Don't actually need to throw bot exception
+        throw new BotException(this, "Don't understand.");
     }
 
 }
