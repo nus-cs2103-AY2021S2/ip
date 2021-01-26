@@ -58,6 +58,11 @@ public class Duke {
 
                 } else {
                     Task newTask = Parser.parseRemainder(dukeCommand.getCommand(), dukeCommand.getDetails());
+
+                    if (newTask == null) {
+                        throw new DukeException("parseRemainder() returned null instead of a new task to add...");
+                    }
+
                     taskList.add(newTask);
                     storage.writeToFile(taskList);
                     Ui.showSuccessfulAdd(taskList.getTasks().size(), newTask);
