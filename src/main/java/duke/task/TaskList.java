@@ -103,6 +103,28 @@ public class TaskList {
         return out.toString();
     }
 
+    public String tasksContaining(String str) {
+        StringBuilder out = new StringBuilder();
+        int i = 1;
+
+        for (Task task : taskList) {
+            if (task.containsTerm(str)) {
+                out.append(i++);
+                out.append(". ");
+                out.append(task.toString());
+                out.append('\n');
+            }
+        }
+
+        if (out.length() == 0) {
+            out.append(DukeString.MESSAGE_NONE_FOUND);
+        } else {
+            out.deleteCharAt(out.length() - 1);
+        }
+
+        return out.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();

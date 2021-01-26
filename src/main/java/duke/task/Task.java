@@ -23,6 +23,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public boolean containsTerm(String term) {
+        return this.description.contains(term);
+    }
+
     @Override
     public String toString() {
         return String.format("[%c] %s", isDone ? '✓' : 'X', description);

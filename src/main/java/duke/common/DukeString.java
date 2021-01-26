@@ -14,6 +14,8 @@ public final class DukeString {
     public static final String MESSAGE_LIST = "Here are the tasks in your list:\n";
     public static final String MESSAGE_LIST_EMPTY = "You have no tasks.";
     public static final String MESSAGE_DELETE = "Got it. I've removed this task:\n\t%s\nNow you have %d tasks.";
+    public static final String MESSAGE_FIND = "Here are the matching tasks in your list:\n";
+    public static final String MESSAGE_NONE_FOUND = "Sorry, I did not find any tasks matching %s.";
 
     public static final String COMMAND_BYE = "bye";
     public static final String COMMAND_LIST = "list";
@@ -25,6 +27,7 @@ public final class DukeString {
     public static final String COMMAND_EVENT_TO = "/to";
     public static final String COMMAND_TODO = "todo";
     public static final String COMMAND_DELETE = "delete";
+    public static final String COMMAND_FIND = "find";
 
     public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
