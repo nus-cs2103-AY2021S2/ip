@@ -8,9 +8,19 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class Storage helps Danh's Duke keep the data in .txt file up to date,
+ * and load it from that file when the Danh's Duke wakes up.
+ */
 public class Storage {
     private File taskFile;
 
+    /**
+     * Returns a Storage with specified path of txt file and the folder containing it.
+     *
+     * @param txtPathname The pathname of the txt file.
+     * @param dirPathname The pathname of the directory containing txt file.
+     */
     public Storage(String txtPathname, String dirPathname) {
         try {
             Path filePath = Paths.get(txtPathname);
@@ -29,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the data written in txt file back to Danh's Duke memory when it wakes up.
+     *
+     * @param taskList The taskList of Duke to load data to.
+     * @throws IOException Exception related to open and access txt file.
+     */
     public void writeBack(ArrayList<Task> taskList) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
         String line = reader.readLine();
@@ -70,6 +86,11 @@ public class Storage {
         reader.close();
     }
 
+    /**
+     * Update the taask file (txt file) correspondingly when there are changes to taskList.
+     *
+     * @param taskList the TaskList that have been changed.
+     */
     public void updateFile(ArrayList<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(this.taskFile);

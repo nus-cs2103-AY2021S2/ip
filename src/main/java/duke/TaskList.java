@@ -4,13 +4,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class TaskList represents a taskList and provides operations to interact with that taskList.
+ * Operations provided: addTask, doneTask, deleteTask.
+ */
 public class TaskList {
     public  ArrayList<Task> listUsed;
 
+    /**
+     * Returns a TaskList.
+     */
     public TaskList() {
         this.listUsed = new ArrayList<>();
     }
 
+    /**
+     * Add a task with specified description to TaskList.
+     *
+     * @param taskDescription The description of task.
+     * @return The task that have been added.
+     */
     public Task addTask(String taskDescription) {
         Task task;
         if (taskDescription.contains("/at")) {
@@ -30,12 +43,23 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Mark a task in TaskList as (Done).
+     *
+     * @param index Index of the done task in TaskList.
+     * @return the Task that marked as (Done).
+     */
     public Task doneTask(int index) {
         Task task = this.listUsed.get(index - 1);
         task.markAsDone();
         return task;
     }
 
+    /**
+     * Delete a task from TaskList.
+     *
+     * @param index Index of the deleted task in TaskList.
+     */
     public void deleteTask(int index) {
         this.listUsed.remove(index - 1);
     }

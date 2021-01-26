@@ -4,17 +4,38 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class Duke represents Danh's Duke, a powerful assistant that can take note of your task everyday and
+ * help you control them easily.
+ * <p>
+ * Duke has 3 main components:
+ * Ui: deals with interactions with the user
+ * Storage: deals with loading tasks from the file and saving tasks in the file
+ * TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
+ */
 public class Duke {
     private final Ui ui;
     private final TaskList tasklist;
     private final Storage storage;
 
+    /**
+     * Returns a Duke with Ui, Storage, TaskList initialized.
+     *
+     * @param txtPathname The pathname of the taskFile stored in hard disk to remember tasks when shut down Duke.
+     * @param dirPathname The pathname of the folder that stores taskFile.
+     */
     private Duke(String txtPathname, String dirPathname) {
         this.ui = new Ui();
         this.storage = new Storage(txtPathname, dirPathname);
         this.tasklist = new TaskList();
     }
 
+    /**
+     * The main method illustrates full usage of Danh's Duke before shutting it down
+     *
+     * @param args by default
+     * @throws IOException exception regarding open and access taskFile
+     */
     public static void main(String[] args) throws IOException {
         Duke myDuke = new Duke("data/DanhDuke.txt", "data");
         myDuke.ui.echoHi();
@@ -59,18 +80,37 @@ public class Duke {
         }
     }
 
+    /**
+     * Perform 3 actions: add new task to taskList, show results with user and change taskFile content correspondingly.
+     *
+     * @param duke The duke instance related to this action
+     * @param taskDescription The desciption of the task that we want to add
+     */
     public static void addToList(Duke duke, String taskDescription) {
         Task task = duke.tasklist.addTask(taskDescription);
         duke.storage.updateFile(duke.tasklist.listUsed);
         duke.ui.echoAddToList(task, duke.tasklist.listUsed.size());
     }
 
+    /**
+     * Perform 3 actions: mark a task in taskList as Done, show results with user and
+     * change taskFile content correspondingly.
+     *
+     * @param duke The duke instance related to this action
+     * @param index The index of that task in taskList
+     */
     public static void markTaskDone(Duke duke, int index) {
         Task task = duke.tasklist.doneTask(index);
         duke.storage.updateFile(duke.tasklist.listUsed);
         duke.ui.echoMarkTaskDone(task);
     }
 
+    /**
+     * Perform 3 actions: delete a task in taskList, show results with user and
+     * change taskFile content correspondingly.
+     * @param duke The duke instance related to this action
+     * @param index The index of that task in taskList
+     */
     public static void deleteTask(Duke duke, int index) {
         Task task = duke.tasklist.listUsed.get(index - 1);
         duke.ui.echoDeleteTask(task);
@@ -78,6 +118,13 @@ public class Duke {
         duke.storage.updateFile(duke.tasklist.listUsed);
     }
 
+    /**
+     * Tell Duke that this command format is wrong,
+     * let it execute the action of throwing an exception to catch and handle.
+     *
+     * @param command The short syntax of the wrong format command
+     * @throws DukeException Special exception related to wrong format of command entered into Danh's Duke
+     */
     public static void executeFalseCommand(String command) throws DukeException {
         if (command.startsWith("list")) {
             throw new DukeException("     list command should not have body, Sir!");
