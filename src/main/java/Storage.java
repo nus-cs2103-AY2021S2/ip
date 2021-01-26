@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     public String pathString;
     public StringBuffer stringBufferOfData;
@@ -20,12 +23,25 @@ public class Storage {
         numTasks = 0;
     }
 
+    /**
+     * Creates data directory and text file.
+     * @throws IOException for createDirectories and createFile methods.
+     */
     public void createFile() throws IOException {
         Path dirPath = Paths.get(System.getProperty("user.dir") + "/data");
         Files.createDirectories(dirPath);
         Files.createFile(Paths.get(pathString));
     }
 
+    /**
+     * Scans file for any existing tasks,
+     * parses data to separate task type, boolean isDone and description,
+     * adds ToDos/Deadlines/Events objects to arraylist of tasks.
+     * Adds data to a StringBuffer.
+     * Increments number of tasks accordingly.
+     * @param tasks arraylist to add tasks to.
+     * @throws FileNotFoundException if file does not exist yet.
+     */
     public void loadFileContents(ArrayList<Task> tasks) throws FileNotFoundException {
         File file = new File(pathString);
         Scanner scanFile = new Scanner(file);
@@ -65,6 +81,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes or appends to file
+     * depending on whether there is existing data in the file.
+     * Appends text to StringBuffer.
+     * @param data text to be added to the file.
+     * @throws IOException for FileWriter.
+     */
     public void addToFile(String data) throws IOException {
         FileWriter fw;
         if (numTasks <= 0) {
@@ -80,6 +103,13 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Replaces text in StringBuffer
+     * and writes to the file.
+     * @param before text to be replaced.
+     * @param after new replacement text.
+     * @throws IOException for FileWriter.
+     */
     public void modifyFile(String before, String after) throws IOException {
         int startIndex = stringBufferOfData.indexOf(before);
         int endIndex = startIndex + before.length();
@@ -90,6 +120,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Deletes specified text from StringBuffer,
+     * and writes to the file.
+     * @param data text to be deleted.
+     * @throws IOException for FileWriter.
+     */
     public void deleteFromFile(String data) throws IOException {
         int startIndex = stringBufferOfData.indexOf(data);
         int endIndex = startIndex + data.length() + 1;

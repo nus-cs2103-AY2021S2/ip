@@ -1,3 +1,6 @@
+/**
+ * Represents tasks.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -12,26 +15,37 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Returns String format of task
+     * @return String format of task
+     */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Changes boolean isDone to true.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns String of error message for empty description
+     * @return String of error message for empty description
+     */
     public String getEmptyDescError() {
         return "cannot be empty.";
     }
 
+    /**
+     * Formats data for saving into text file.
+     * @return isDone | description
+     */
     public String formatData() {
         return (isDone ? "1" : "0") + " | " + description;
     }

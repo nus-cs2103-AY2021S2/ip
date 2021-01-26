@@ -1,10 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
 
     public Parser() {}
 
+    /**
+     * Parses user input Strings into an arraylist of Strings for easier access.
+     *
+     * @param scan the scanner used to scan user input.
+     * @return an arraylist of Strings.
+     * Elements of the arraylist are in the sequence:
+     * command name, task index/description, date/error name (if applicable).
+     */
     public ArrayList<String> parseInputToList(Scanner scan) {
         String input = scan.nextLine();
         ArrayList<String> result = new ArrayList<>();
