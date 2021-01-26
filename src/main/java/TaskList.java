@@ -31,15 +31,14 @@ public class TaskList {
         tasks.clear();
     }
 
-    public String display() {
-        if (tasks.size() > 0) {
-            StringBuilder items = new StringBuilder();
-            for (int i = 0; i < tasks.size(); i++) {
-                items.append(String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n");
+    public TaskList find(String search) {
+        TaskList matchingTasks = new TaskList();
+        String searchPattern = "^.*" + search.toLowerCase() + ".*$";
+        for (Task task : tasks) {
+            if (task.getDescription().toLowerCase().matches(searchPattern)) {
+                matchingTasks.add(task);
             }
-            return items.toString().trim();
-        } else {
-            return "Your to-do list is empty! Nice!";
         }
+        return matchingTasks;
     }
 }

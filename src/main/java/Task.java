@@ -7,6 +7,10 @@ public abstract class Task {
         this.done = false; // tasks always start as not done
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public boolean isDone() { return done; }
 
     public void finish() {
