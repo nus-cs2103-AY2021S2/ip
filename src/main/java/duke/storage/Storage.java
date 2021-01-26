@@ -75,17 +75,17 @@ public class Storage {
         String description = taskInfoArr[2].strip();
         Task res = null;
         switch(type) {
-            case "T":
-                res = new Todo(description, isDone);
-                break;
-            case "E":
-                String at = taskInfoArr[3].strip();
-                res = new Event(description, isDone, at);
-                break;
-            case "D":
-                String by = taskInfoArr[3].strip();
-                res = new Deadline(description, isDone, by);
-                break;
+        case "T":
+            res = new Todo(description, isDone);
+            break;
+        case "E":
+            String at = taskInfoArr[3].strip();
+            res = new Event(description, isDone, at);
+            break;
+        case "D":
+            String by = taskInfoArr[3].strip();
+            res = new Deadline(description, isDone, by);
+            break;
         }
         return res;
     }

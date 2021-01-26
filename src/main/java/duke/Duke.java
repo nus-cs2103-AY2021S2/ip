@@ -15,7 +15,6 @@ public class Duke {
     private UI ui;
 
     public Duke() {
-
     }
 
     public static void main(String[] args) {

@@ -1,10 +1,8 @@
 package duke.main;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Inherited from Task, used to store information related to tasks of type 'deadline'.

@@ -31,8 +31,7 @@ public class Parser {
      * @throws IllegalArgumentException thrown if user enters an invalid command
      * @throws DukeException thrown if user enters a valid command but invalid related information
      */
-    public Command parseMessage(String message)
-            throws DukeException{
+    public Command parseMessage(String message) throws DukeException{
         String[] msgArray = message.split(" ", 2);
         String commandWord = msgArray[0];
         String otherInfo = null;
@@ -132,8 +131,7 @@ public class Parser {
         } catch (NullPointerException e) {
             throw new DukeException("Please provide the relevant information " +
                     "when creating a task.");
-        }
-        catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please use /by when creating deadline or " +
                     "/at when creating event.");
         }
