@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +19,7 @@ public class Duke {
             File myFile = new File("duke.txt");
             if (myFile.createNewFile()) {
                 System.out.println("File created: " + myFile.getName());
+
             } else {
                 System.out.println("File already exists");
                 Scanner myReader = new Scanner(myFile);
@@ -27,11 +30,13 @@ public class Duke {
                         storageList.add(new Todo(description));
                     } else if (type.contains("[D]")) {
                         String description = type.substring(type.indexOf("  ") + 2, type.indexOf(" (") + 1);
-                        String date = type.substring(type.indexOf("by: ") + 3, type.indexOf(")"));
+                        String dateString = type.substring(type.indexOf("by: ") + 4, type.indexOf(")"));
+                        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                         storageList.add(new Deadline(description, date));
                     } else if (type.contains("[E]")) {
                         String description = type.substring(type.indexOf("  ") + 2, type.indexOf(" (") + 1);
-                        String time = type.substring(type.indexOf("at: ") + 3, type.indexOf(")"));
+                        String timeString = type.substring(type.indexOf("at: ") + 4, type.indexOf(")"));
+                        LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                         storageList.add(new Event(description, time));
                     }
                 }
@@ -108,15 +113,19 @@ public class Duke {
                             String taskString = str.toString();
                             StringBuilder byStringBuilder = new StringBuilder();
                             for (int k = slashIndex + 1; k < parts.length; k++) {
-                                byStringBuilder.append(" ");
+                                if (k != slashIndex + 1) {
+                                    byStringBuilder.append(" ");
+                                }
                                 byStringBuilder.append(parts[k]);
                             }
+                            String DateString = byStringBuilder.toString();
+                            LocalDate date = LocalDate.parse(DateString);
                             if (keyword.equals("deadline")) {
-                                Deadline deadline = new Deadline(taskString, byStringBuilder.toString());
+                                Deadline deadline = new Deadline(taskString, date);
                                 storageList.add(deadline);
                                 System.out.println(deadline.toString());
                             } else {
-                                Event event = new Event(taskString, byStringBuilder.toString());
+                                Event event = new Event(taskString, date);
                                 storageList.add(event);
                                 System.out.println(event.toString());
                             }
