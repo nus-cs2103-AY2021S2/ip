@@ -80,7 +80,7 @@ public class Parser {
     private static void checkValidDeadline(String s) throws DukeInputException {
         String[] args = s.split(" /by ");
         if (args.length < 2) {
-            throw new DukeInputException("Please include both a description and a date separated by a \"/by\"");
+            throw new DukeInputException("Description and duedate should be separated by \"/by\"");
         } else if (args.length > 2) {
             throw new DukeInputException("Please do not use \"/by\" multiple times!");
         } else {
@@ -91,7 +91,7 @@ public class Parser {
     private static void checkValidEvent(String s) throws DukeInputException {
         String[] args = s.split(" /at ");
         if (args.length < 2) {
-            throw new DukeInputException("Please include both a description and a date separated by a \"/at\"");
+            throw new DukeInputException("Description and date should separated by \"/at\"");
         } else if (args.length > 2) {
             throw new DukeInputException("Please do not use \"/at\" multiple times!");
         } else {

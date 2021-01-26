@@ -23,7 +23,7 @@ public class Storage {
         file = new File(path);
     }
 
-    public void saveCheckList(List<Task> checkList) throws DukeException {
+    public void saveTaskList(List<Task> taskList) throws DukeException {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
         }
@@ -31,7 +31,7 @@ public class Storage {
         FileWriter fw;
         try {
             fw = new FileWriter(file);
-            for (Task t : checkList) {
+            for (Task t : taskList) {
                 fw.write(String.join(";", t.exportData()) + "\n");
             }
             fw.close();
@@ -45,14 +45,14 @@ public class Storage {
      * Reads and returns checklist
      * @return List of tasks
      */
-    public List<Task> loadCheckList() throws DukeException {
+    public List<Task> loadTaskList() throws DukeException {
         
         List<Task> lst = new ArrayList<>();
         Scanner sc;
         try {
             sc = new Scanner(file);
         } catch (FileNotFoundException e) {
-            throw new DukeException("Save file not found!");
+            throw new DukeException("No save found!");
         }
 
         while (sc.hasNextLine()) {

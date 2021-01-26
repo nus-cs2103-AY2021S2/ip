@@ -34,196 +34,99 @@ import java.time.LocalDate;
  *   - Load previously saved checklist
  */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        Duke duke = new Duke();
-        duke.start();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
+        ui = new Ui();
+        try {
+            tasks = new TaskList(storage.loadTaskList());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
     }
 
-    private List<Task> checkList = new ArrayList<>();
-    private static String BORDER_LINE = "____________________________________________________________";
+    public static void main(String[] args) {
+        Duke duke = new Duke("data/dukeData.txt");
+        duke.start();
+    }
 
     /**
      * Starts the Duke bot
      */
     public void start() {
-        Scanner sc = new Scanner(System.in);
-
-        echo(List.of("Hello! I'm Duke","What can I do for you?","Enter \"load\" to restore previously saved checklist."));
+        ui.greetings();
 
         for (;;) {
-            String command = sc.next();
-            String input = sc.nextLine().strip();
+
+            String input = ui.readInput();
+
+            try {
+                Parser.parseInput(input);
+            } catch (DukeInputException e) {
+                ui.displayError(e);
+                continue;
+            }
+
+            String[] s = input.split(" ", 2);
+            String command = s[0];
+            String args = s.length == 2 ? s[1] : "";
 
             try {
                 switch(command) { 
                 case "bye": 
-                    echo("Bye. Hope to see you again soon!");  
-                    return; 
+                    ui.exit(); 
+                    return;
                 case "list": 
-                    displayList(checkList);
+                    ui.displayList(tasks.listOutTask());
                     break; 
                 case "done":
-                    completeTask(input);
+                    completeTask(args);
                     break;
                 case "todo":
-                    checkList.add(Todo.createTodo(input));
-                    taskAdded();
+                    addTask(Todo.createTodo(args));
                     break;
                 case "deadline":
-                    checkList.add(Deadline.createDeadline(input));
-                    taskAdded();
+                    addTask(Deadline.createDeadline(args));
                     break;
                 case "event":
-                    checkList.add(Event.createEvent(input));
-                    taskAdded();
+                    addTask(Event.createEvent(args));
                     break;
                 case "delete":
-                    deleteTask(input);
+                    deleteTask(args);
                     break;
                 case "save":
-                    saveCheckList();
+                    storage.saveTaskList(tasks.toList());
+                    ui.saved();
                     break;
                 case "load":
-                    checkList = loadCheckList();
+                    tasks = new TaskList(storage.loadTaskList());
+                    ui.loaded();
                     break;
-                default: 
-                    echo("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } 
             } catch (DukeException e) {
-                echo(e.getMessage());
+                ui.displayError(e);
             }
         }
-    }
-
-    private void echo(String s) {
-        System.out.println("\t" + BORDER_LINE);
-        System.out.println("\t  " + s);
-        System.out.println("\t" + BORDER_LINE + "\n");
-    }
-
-    private void echo(List<String> lst) {
-        System.out.println("\t" + BORDER_LINE);
-        for (String s : lst) {
-            System.out.println("\t  " + s);
-        }
-        System.out.println("\t" + BORDER_LINE + "\n");
-    }
-
-    private void displayList(List<Task> lst) {
-        System.out.println("\t" + BORDER_LINE);
-        System.out.println("\tHere are the tasks in your list:");
-
-        int num = 1;
-        for (Task t : lst) {
-            System.out.printf("\t  %d. %s\n", num++, t);
-        }
-        System.out.println("\t" + BORDER_LINE + "\n");
     }
 
     private void completeTask(String num) throws DukeException {
-        int taskNum;
-        try {
-            taskNum = Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            throw new DukeException("This is not a valid number!");
-        }
-        if (taskNum > checkList.size()) {
-            throw new DukeException("This number is too big!");
-        }
-
-        Task t = checkList.get(taskNum-1);
-        t.completed();
-        
-        echo(List.of("Nice! I've marked this task as done:", t.toString()));
+        int taskNum = Integer.parseInt(num);
+        Task t = tasks.completeTask(taskNum - 1);
+        ui.completeTask(t.toString());
     }
 
-    private void taskAdded() {
-        echo(List.of("Got it. I've added this task:",
-                checkList.get(checkList.size()-1).toString(),
-                "Now you have " + checkList.size() + " tasks in the list."));
+    private void addTask(Task t) {
+        tasks.addTask(t);
+        ui.addTask(t.toString(), tasks.size());
     }
 
     private void deleteTask(String num) throws DukeException {
-        int taskNum;
-        try {
-            taskNum = Integer.parseInt(num);
-        } catch (NumberFormatException e) {
-            throw new DukeException("This is not a valid number!");
-        }
-        if (taskNum > checkList.size()) {
-            throw new DukeException("This number is too big!");
-        }
-        
-        Task t = checkList.get(taskNum-1);
-        checkList.remove(taskNum-1);
-        
-        echo(List.of("Noted. I've removed this task:",
-                t.toString(),
-                "Now you have " + checkList.size() + " tasks in the list."));
-    }
-
-    private List<Task> loadCheckList() {
-        
-        List<Task> lst = new ArrayList<>();
-        File f = new File("data/dukeData.txt");
-        Scanner sc;
-        try {
-            sc = new Scanner(f);
-        } catch (FileNotFoundException e) {
-            echo(List.of("No save found!", "Creating new list.."));
-            return lst;
-        }
-
-        while (sc.hasNextLine()) {  
-            String[] s = sc.nextLine().split(";");
-            switch (s[0]) {
-            case "T":
-                lst.add(Todo.importData(s));
-                break;
-            case "D":
-                lst.add(Deadline.importData(s));
-                break;
-            case "E":
-                lst.add(Event.importData(s));
-                break;
-            default:
-                echo(List.of("File corrupted and unable to load", "Creating new list.."));
-                return new ArrayList<>();
-            }
-        }
-        echo("Checklist loaded successfully!");
-        return lst;
-
-    } 
-    
-    private void saveCheckList() {
-        String path = "data/dukeData.txt";
-
-        File f = new File(path);
-        if (!f.getParentFile().exists()) {
-            f.getParentFile().mkdir();
-        }
-
-        FileWriter fw;
-        try {
-            fw = new FileWriter(path);
-            for (Task t : checkList) {
-                fw.write(String.join(";", t.exportData()) + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            echo("Please delete \"data/dukeData.txt\" file and run this command again!");
-            return;
-        }
-
-        echo("Checklist saved!");
+        int taskNum = Integer.parseInt(num);
+        Task t = tasks.deleteTask(taskNum - 1);
+        ui.deleteTask(t.toString(), tasks.size());
     }
 }
