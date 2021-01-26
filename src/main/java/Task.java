@@ -20,6 +20,16 @@ public class Task {
         return state;
     }
 
+    public String taskSave() {
+        String stateB;
+        if (state == Task_State.DONE) {
+            stateB = "1";
+        } else {
+            stateB = "0";
+        }
+        return " | " + stateB + " | " + input;
+    }
+
     @Override
     public String toString() {
         return "[" + state + "] " + input;

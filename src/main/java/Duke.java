@@ -17,9 +17,10 @@ public class Duke {
         System.out.println("   Hello there! I'm Duke, always here for you!");
         System.out.println("   How can I help you today?");
 
-        SaveToFile fio = new SaveToFile();
+
 
         ArrayList<Task> arrL = new ArrayList<>();
+        SaveToFile fio = new SaveToFile(arrL);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
