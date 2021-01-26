@@ -37,7 +37,23 @@ public class Ui {
         return this.readLine();
     }
 
-    public void printTask(int numbering, String task){
-        System.out.printf("%2s. %s\n", numbering, task);
+    public void printTask(String numbering, String task){
+        System.out.printf("%2s %s\n", numbering, task);
+    }
+
+    private void printTaskNum(int numTasks) {
+        System.out.printf("Now you have %d task in the list\n", numTasks);
+    }
+
+    public void showSuccessMarkDone(String task, int numTasks) {
+        System.out.println("Got it. I`ve added this task:");
+        this.printTask("", task);
+        printTaskNum(numTasks);
+    }
+
+    public void showSuccessDeleteTask(String task, int numTasks) {
+        System.out.println("Noted. I`ve removed this task:");
+        printTask("", task);
+        printTaskNum(numTasks);
     }
 }

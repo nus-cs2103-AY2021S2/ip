@@ -26,6 +26,8 @@ public class Parser {
         if (firstSpace == -1) {
             throw new DukeException("The description cannot be empty");
         }
+
+        return null;
     }
 
     public static LocalDateTime parseDate(String date) {
