@@ -1,5 +1,10 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Event extends Task{
     private final String type;
     private final LocalDate date;
@@ -25,6 +30,11 @@ public class Event extends Task{
         return this.time;
     }
 
+    public String printDateTime() {
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(this.date, this.time, ZoneId.of("Asia/Singapore"));
+        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).format(zonedDateTime);
+    }
+
     @Override
     public Event doTask() {
         return new Event(this.job, true, this.date, this.time);
@@ -32,6 +42,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString() + "(at:" + this.date + " " + this.time + ")";
+        return "[" + this.type + "]" + super.toString() + "(at:" + printDateTime() + ")";
     }
 }

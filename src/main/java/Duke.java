@@ -6,8 +6,7 @@ import java.time.LocalTime;
 public class Duke {
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "history.txt";
-    private static String greetings = "Hi, I am Bebong, a self-centered bot. I can't do anything for you.";
-    private static String bye = "Goodbye, hope to not see you again.";
+    private Ui ui;
     private Storage storage;
     private TaskManager taskManager;
 
@@ -17,20 +16,21 @@ public class Duke {
     }
 
     public Duke(String filePath, String fileName) {
+        ui = new Ui();
         storage = new Storage(filePath, fileName);
         taskManager = new TaskManager(storage.readPreviousFile());
     }
 
     private void doCommand() {
         Scanner sc = new Scanner(System.in);
-        System.out.println(greetings);
+        ui.printGreetings();
 
         while (sc.hasNext()) {
             String word = sc.nextLine();
             String[] tmp = word.split(" ");
             String command = tmp[0];
             if (word.equals("bye")) {
-                doBye(bye);
+                ui.printBye();
                 break;
             }
             else if (word.equals("list")) {
@@ -51,15 +51,10 @@ public class Duke {
         }
     }
 
-    private static void doBye(String bye) {
-        System.out.println(bye);
-    }
-
     private void doList() {
         for (int i=0; i < taskManager.size(); i++) {
-            System.out.print(i+1);
-            System.out.print(".");
-            System.out.println(taskManager.get(i));
+            Task task = taskManager.get(i);
+            ui.printList(i, task);
         }
     }
 
@@ -68,24 +63,21 @@ public class Duke {
             Task currTask = taskManager.get(index - 1);
             currTask = currTask.doTask();
             taskManager.set(index - 1, currTask);
-            System.out.println("Nice I have marked this task as done!");
-            System.out.println(currTask);
+            ui.printDoneSuccess(currTask);
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("☹ OOPS!!! The description of a done cannot be empty.");
+            ui.printDoneFail();
         }
     }
 
     private void doDelete(int index) {
         try {
             Task currTask = taskManager.get(index - 1);
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(currTask);
             taskManager.remove(index - 1);
-            System.out.println("Now you have " + taskManager.size() + " tasks in the list.");
+            ui.printDeleteSuccess(currTask, taskManager.size());
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("☹ OOPS!!! The description of a delete cannot be empty.");
+            ui.printDeleteFail();
         }
     }
 
@@ -107,7 +99,7 @@ public class Duke {
             }
         }
         catch (NoMeaningException e){
-            System.out.println(e.getMessage());
+            ui.printTaskFail(e);
         }
     }
 
@@ -148,8 +140,8 @@ public class Duke {
             String eventTime = eventWords[1];
 
             String[] eventDateHours = eventTime.split(" ");
-            LocalDate eventDate = LocalDate.parse(eventDateHours[0]);
-            LocalTime eventHour = LocalTime.parse(eventDateHours[1]);
+            LocalDate eventDate = LocalDate.parse(eventDateHours[1]);
+            LocalTime eventHour = LocalTime.parse(eventDateHours[2]);
             Event event = new Event(eventWord, eventDate, eventHour);
             taskManager.add(event);
             doTaskFinally(event);
@@ -159,8 +151,6 @@ public class Duke {
     }
 
     private void doTaskFinally(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskManager.size() + " tasks in the list.");
+        ui.printTaskFinally(task, taskManager.size());
     }
 }
