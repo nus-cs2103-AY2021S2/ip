@@ -106,4 +106,33 @@ public class TaskList {
     public ArrayList<Task> getTaskArrayList() {
         return taskArrayList;
     }
+
+    /**
+     * Returns String containing statuses of tasks containing a keyword.
+     *
+     * @param keyword Keyword used to search tasks.
+     * @return String containing statuses of tasks found.
+     */
+    public String search(String keyword) {
+
+        ArrayList<Task> found = new ArrayList<>();
+
+        for (Task t : taskArrayList) {
+            if (t.getTask_details().contains(keyword)) {
+                found.add(t);
+            }
+        }
+
+        String output = "";
+
+        for (int i = 0; i < found.size(); i++) {
+            if (i == found.size() - 1) {
+                output = output + found.get(i).taskStatus();
+            } else {
+                output = output + found.get(i).taskStatus() + "\n";
+            }
+        }
+
+        return output;
+    }
 }

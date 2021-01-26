@@ -114,6 +114,12 @@ public class Duke {
                     storage.writeFile(taskList);
                     parser = parser.newInput(reader.nextLine());
 
+                // user wants to find tasks using a keyword
+                } else if (command.equals("find")) {
+                    String keyword = parser.getKeyword();
+                    ui.displayTaskSearch(keyword, taskList);
+                    parser = parser.newInput(reader.nextLine());
+
                 } else {
                     throw new DukeException("unknown");
                 }
@@ -129,6 +135,7 @@ public class Duke {
 
     /**
      * Main program to be run.
+     *
      * @param args Input.
      * @throws DukeException If user input is incorrect.
      */

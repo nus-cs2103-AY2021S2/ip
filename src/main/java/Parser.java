@@ -54,6 +54,21 @@ public class Parser {
     }
 
     /**
+     * Returns keyword given by user to search tasks for.
+     *
+     * @return String of the keyword.
+     * @throws DukeException If no keyword is found.
+     */
+    public String getKeyword() throws DukeException {
+
+        try {
+            return input[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("search");
+        }
+    }
+
+    /**
      * Returns description of the Task that user wants to add.
      *
      * @return String comprising description of the task.

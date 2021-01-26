@@ -33,6 +33,8 @@ public class DukeException extends Exception {
             return "☹ OOPS!!! No file found.";
         } else if (this.getMessage().equals("delete")) {
             return "☹ OOPS!!! You must state which task to delete.";
+        } else if (this.getMessage().equals("search")) {
+            return "☹ OOPS!!! You must give a keyword.";
         } else {
             return "☹ OOPS!!! The description of a " + this.getMessage() + " cannot be empty.";
         }

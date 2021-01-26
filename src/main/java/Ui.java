@@ -63,6 +63,17 @@ public class Ui {
     }
 
     /**
+     * Displays list of tasks containing a given keyword.
+     *
+     * @param keyword Keyword used to search through tasks.
+     * @param taskList TaskList containing list of tasks to be searched through.
+     */
+    public void displayTaskSearch(String keyword, TaskList taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(taskList.search(keyword));
+    }
+
+    /**
      * Displays message when list of tasks is not found.
      */
     public void displayLoadingError() {
