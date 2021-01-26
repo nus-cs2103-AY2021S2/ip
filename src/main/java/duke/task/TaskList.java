@@ -8,17 +8,17 @@ import duke.common.DukeException;
 import duke.common.DukeString;
 
 public class TaskList {
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /**
      * Constructs a new TaskList with an empty list.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     private TaskList(List<Task> list) {
-        this.taskList = list;
+        this.tasks = list;
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskList {
      * @param task the task to be added to the list
      */
     public void addTask(final Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -68,8 +68,8 @@ public class TaskList {
      * @return the String format of the specified task
      */
     public String doneTask(final int idx) {
-        taskList.get(idx - 1).markDone();
-        return taskList.get(idx - 1).toString();
+        tasks.get(idx - 1).markDone();
+        return tasks.get(idx - 1).toString();
     }
 
     /**
@@ -78,7 +78,7 @@ public class TaskList {
      * @return the String format of the deleted task
      */
     public String deleteTask(final int idx) {
-        return taskList.remove(idx - 1).toString();
+        return tasks.remove(idx - 1).toString();
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskList {
      * @return the number of tasks in the list
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -95,7 +95,7 @@ public class TaskList {
      */
     public String serialise() {
         StringBuilder out = new StringBuilder();
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             out.append(task.serialise());
             out.append('\n');
         }
@@ -107,12 +107,12 @@ public class TaskList {
     public String toString() {
         StringBuilder out = new StringBuilder();
 
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             out.append(i + 1);
             out.append(". ");
-            out.append(taskList.get(i));
+            out.append(tasks.get(i));
 
-            if (i != taskList.size() - 1) {
+            if (i != tasks.size() - 1) {
                 out.append('\n');
             }
         }

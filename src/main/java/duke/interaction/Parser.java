@@ -16,13 +16,13 @@ import duke.common.DukeString;
 
 
 public class Parser {
-    private boolean bye;
+    private boolean isBye;
 
     /**
      * Constructs a new Parser.
      */
     public Parser() {
-        this.bye = false;
+        this.isBye = false;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Parser {
      * @return the value of bye
      */
     public boolean isBye() {
-        return this.bye;
+        return this.isBye;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Parser {
         }
         switch (scanner.next().toLowerCase()) {
         case DukeString.COMMAND_BYE:
-            this.bye = true;
+            this.isBye = true;
             return new ExitCommand();
         case DukeString.COMMAND_LIST:
             return new ListCommand();

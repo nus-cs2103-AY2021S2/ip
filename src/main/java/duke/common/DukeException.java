@@ -24,20 +24,20 @@ public class DukeException {
 
     public static class EmptyDeadlineDate extends IllegalArgumentException {
         public EmptyDeadlineDate() {
-            super(DukeString.EXCEPTION_EMPTY_DEADLINEDATE);
+            super(DukeString.EXCEPTION_EMPTY_DEADLINE_DATE);
         }
     }
 
 
     public static class EmptyEventDate extends IllegalArgumentException {
         public EmptyEventDate() {
-            super(DukeString.EXCEPTION_EMPTY_EVENTDATE);
+            super(DukeString.EXCEPTION_EMPTY_EVENT_DATE);
         }
     }
 
     public static class InvalidEventEnd extends IllegalArgumentException {
         public InvalidEventEnd() {
-            super(DukeString.EXCEPTION_INVALID_EVENTEND);
+            super(DukeString.EXCEPTION_INVALID_EVENT_END);
         }
     }
 
