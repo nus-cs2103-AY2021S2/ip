@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 public class DoneCommand extends Command {
 
-    private int index;
+    private final int index;
 
     private static final String NO_INDEX_ERROR = "Please specify a duke.task index!";
     private static final String INDEX_NOT_INT_ERROR = "Please specify a number instead!";

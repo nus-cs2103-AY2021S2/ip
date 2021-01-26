@@ -11,9 +11,9 @@ import duke.ui.Ui;
  * Main class for Duke application.
  */
 public class Duke {
-    private Ui ui;
-    private TaskList tasks;
-    private Storage storage;
+    private final Ui ui;
+    private final TaskList tasks;
+    private final Storage storage;
 
     public Duke() {
         this.ui = new Ui();

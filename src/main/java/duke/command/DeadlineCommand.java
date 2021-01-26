@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
 
-    private Deadline deadline;
+    private final Deadline deadline;
 
     private static final String NO_ARGUMENT_ERROR = "Please specify a deadline!";
 

@@ -20,7 +20,6 @@ public class Parser {
     public static Command parse(String inputString) throws DukeException {
         String[] splitInput = inputString.split(" ", 2);
 
-        Command c;
         if (splitInput.length < 2) {
             splitInput = new String[]{splitInput[0], ""};
         }

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 public class EventCommand extends Command {
 
-    private Event event;
+    private final Event event;
 
     private static final String NO_ARGUMENT_ERROR = "Please specify a valid event!";
 
