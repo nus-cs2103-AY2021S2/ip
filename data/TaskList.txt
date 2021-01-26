@@ -1,6 +1,0 @@
-T
-borrow book
-false
-D
-read book (by: 2020-02-02)
-true
