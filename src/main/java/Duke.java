@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -16,6 +17,15 @@ public class Duke {
         System.out.println(lines);
 
         LinkedList<Task> tasks = new LinkedList<>();
+
+        System.out.println(lines);
+        ImpAndExp ine = new ImpAndExp(tasks);
+        try {
+            ine.importData();
+        } catch (IOException e) {
+            System.err.println("Hope you won't see this :p");
+        }
+        System.out.println(lines);
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -109,6 +119,11 @@ public class Duke {
             }
             System.out.println(lines);
             input = sc.nextLine();
+        }
+        try {
+            ine.exportData();
+        } catch (IOException e) {
+            System.err.println("Hope you won't see this :p");
         }
         System.out.println(lines);
         System.out.println(indentation + "Bye. Hope to see you again soon!");

@@ -51,4 +51,10 @@ public class Task {
             return checkType() + checkDone() + this.task + "(at: " + this.date + ")";
         }
     }
+
+    public String export() {
+        String done = this.done ? " 1" : " 0";
+        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at " + this.date;
+        return this.type + done + this.task + deadline;
+    }
 }
