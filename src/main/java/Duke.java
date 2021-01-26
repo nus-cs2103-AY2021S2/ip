@@ -67,6 +67,9 @@ public class Duke {
                     throw new IncompleteInputException(command);
                 }
                 break;
+            case FIND:
+                ui.showFilteredTasks(taskList.getFilteredTaskList(tokens[1]));
+                break;
             case LIST:
                 ui.showTasks(taskList.getTaskList());
                 break;

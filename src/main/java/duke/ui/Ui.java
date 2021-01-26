@@ -59,6 +59,21 @@ public class Ui {
         }
     }
 
+    public void showFilteredTasks(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            printWithIndentation("No matching tasks were found.");
+        } else {
+            String[] outputArr = new String[taskList.size() + 1];
+            outputArr[0] = "Here are the matching tasks in your list:";
+
+            for (int i = 0; i < taskList.size(); i++) {
+                outputArr[i + 1] = (i + 1) + "." + taskList.get(i).toString();
+            }
+
+            printWithIndentation(outputArr);
+        }
+    }
+
     public void showSuccessfulDeleteMessage(int numTasks, Task task) {
         String formattedTasksCount = numTasks > 1 ? String.format("%d tasks", numTasks) : "1 task";
 
