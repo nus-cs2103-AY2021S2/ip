@@ -1,8 +1,6 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * Encompasses the behavior of the Duke chat-bot. Keeps track of Tasks in a List, tasks.
@@ -24,7 +22,9 @@ public class Duke {
 
         storage = DukeStorage.createStorage("./data/duke.txt");
         tasks = new ArrayList<>();
-        storage.loadTaskList(tasks);
+        if (storage != null) {
+            storage.loadTaskList(tasks);
+        }
 
         Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
@@ -32,7 +32,6 @@ public class Duke {
             printLine();
             dispatchCommand(command);
             if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
                 printLine();
                 break;
             }
@@ -45,26 +44,23 @@ public class Duke {
      * Passing the command to the relevant task creation methods.
      *
      * @param taskCommand String of command that describes the task to be created.
+     * @throws DukeException if task creation is invalid.
      */
-    public static Task dispatchTaskCreation(String taskCommand) {
-        Task newTask = null;
+    public static Task dispatchTaskCreation(String taskCommand) throws DukeException {
+        Task newTask;
         taskCommand = taskCommand.trim();
-        try {
-            switch (taskCommand.split(" ")[0]) {
-                case "todo":
-                    newTask = createToDo(taskCommand);
-                    break;
-                case "deadline":
-                    newTask = createDeadline(taskCommand);
-                    break;
-                case "event":
-                    newTask = createEvent(taskCommand);
-                    break;
-                default:
-                    throw new DukeException("Task cannot be created: " + taskCommand);
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        switch (taskCommand.split(" ")[0]) {
+            case "todo":
+                newTask = createToDo(taskCommand);
+                break;
+            case "deadline":
+                newTask = createDeadline(taskCommand);
+                break;
+            case "event":
+                newTask = createEvent(taskCommand);
+                break;
+            default:
+                throw new DukeException("Task cannot be created: " + taskCommand);
         }
         return newTask;
     }
@@ -82,6 +78,9 @@ public class Duke {
         command = command.trim();
         try {
             switch (command.split(" ")[0]) {
+                case "bye":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    break;
                 case "list":
                     printList();
                     break;
@@ -98,6 +97,9 @@ public class Duke {
                 case "event":
                     Task newTask = dispatchTaskCreation(command);
                     addTask(newTask);
+                    if (storage != null) {
+                        storage.storeTask(command);
+                    }
                     break;
                 default:
                     throwIllegalArgumentEx(command);
@@ -125,8 +127,9 @@ public class Duke {
     /**
      * Finds and marks task specified in the command string after calling done.
      * Handles exceptions that include index out of bounds and number format.
+     * Saves to storage.
      *
-     * @param command Command inputted into the console handled by dispatch method.
+     * @param command "done {task number}"
      */
     private static void handleDone(String command) {
         try {
@@ -134,7 +137,9 @@ public class Duke {
             Task currTask = tasks.get(taskNum);
             currTask.markDone();
             System.out.println("Swee chai. It's done.\n" + currTask);
-
+            if (storage != null) {
+                storage.updateTaskDone(taskNum);
+            }
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number from 1 to " + tasks.size() + " after done!");
         } catch (IndexOutOfBoundsException e) {
@@ -146,12 +151,24 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes the task in the list. Updates storage.
+     * Handles number format and index out of bounds exceptions.
+     *
+     * @param command "delete {task number}"
+     */
     private static void handleDelete(String command) {
         try {
-            Task currTask = tasks.remove(Integer.parseInt(command.split(" ")[1]) - 1);
+            int taskNum = Integer.parseInt(command.split(" ")[1]) - 1;
+            Task currTask = tasks.remove(taskNum);
             System.out.println("See la. It's deleted.\n" + currTask +
                     "\nYou currently have " + tasks.size() + " task(s) in the list.");
-        } catch (Exception e) {
+            if (storage != null) {
+                storage.deleteTask(taskNum);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a number from 1 to " + tasks.size() + " after delete!");
+        } catch (IndexOutOfBoundsException e) {
             if (tasks.size() == 0) {
                 System.out.println("Your list is empty!");
             } else {
@@ -233,7 +250,7 @@ public class Duke {
         if (command.length() > 0) {
             throw new IllegalArgumentException("That is not a valid command!\n" +
                     "These are the possible commands:\n" +
-                    "\"list\" \"done\" \"todo\" \"deadline\" \"event\"");
+                    "\"list\" \"done\" \"delete\" \"todo\" \"deadline\" \"event\" \"bye\"");
         } else {
             throw new IllegalArgumentException("What are you trying to say?\n" +
                     "Please enter something ...");
