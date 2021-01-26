@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Encapsulates information and state of a Deadline.
@@ -5,19 +7,25 @@
  */
 public class Deadline extends Task {
     /** Deadline of task. */
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Initialises a new Deadline with text description.
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     @Override
     public String toString() {
+<<<<<<< HEAD
         return String.format("[D][%s] %s (by: %s)", 
             this.getStatusIcon(), super.toString(), this.by);
+=======
+        return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), 
+            super.toString(), this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        //return "[D]" + super.toString() + " (by: " + by + ")";
+>>>>>>> branch-Level-8
     }
 }
