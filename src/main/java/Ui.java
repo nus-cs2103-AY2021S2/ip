@@ -29,12 +29,16 @@ public class Ui {
     }
 
     public void printList(ArrayList<Task> tasks, int numTasks) {
-        System.out.println(tab + "Here are the tasks in your list:");
-        for (int i = 0; i < numTasks; i++) {
-            int num = i + 1;
-            Task task = tasks.get(i);
-            System.out.println(
-                    tab + num + "." + task.toString());
+        if (numTasks <= 0) {
+            System.out.println(tab + "Yay! There are no tasks in your list.");
+        } else {
+            System.out.println(tab + "Here are the tasks in your list:");
+            for (int i = 0; i < numTasks; i++) {
+                int num = i + 1;
+                Task task = tasks.get(i);
+                System.out.println(
+                        tab + num + "." + task.toString());
+            }
         }
     }
 
@@ -68,5 +72,9 @@ public class Ui {
 
     public void printIdkError() {
         System.out.println(tab + "I'm sorry, I'm not sure what that means.");
+    }
+
+    public void printDateError() {
+        System.out.println(tab + "Oops! Date should be in YYYY-MM-DD format.");
     }
 }

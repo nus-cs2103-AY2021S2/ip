@@ -1,5 +1,6 @@
-T | 0 | water plants
 T | 0 | read book
-D | 1 | homework  | 2021-01-29
-T | 0 | text raz
-E | 0 | new ep  | 2021-01-26
+D | 1 | project | 2021-01-28
+E | 0 | birthday | 2021-03-07
+T | 1 | buy water
+D | 0 | return books | 2021-04-27
+E | 0 | meeting | 2021-05-14
