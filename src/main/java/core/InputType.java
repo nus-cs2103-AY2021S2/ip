@@ -1,11 +1,26 @@
 package core;
 
-import core.task.*;
+import core.task.Deadline;
+import core.task.Event;
+import core.task.Task;
+import core.task.TaskAlreadyDoneException;
+import core.task.TaskManager;
+import core.task.Todo;
 
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
 public enum InputType {
+    FIND(x -> x.toLowerCase().trim().startsWith("find"), (tm, data) -> {
+        StringBuilder ret = new StringBuilder("Matched items : \n");
+        var data2 = data.substring(5);
+        int cnt = 1;
+
+        for (var x : tm.retrieveAllTasks().stream().filter(x -> x.contains(data2.trim())).toArray()) {
+            ret.append(cnt++).append(". ").append(x).append("\n");
+        }
+        return ret.toString();
+    }),
 
 
     DEADLINE(x -> x.toLowerCase().startsWith("deadline"), (tm, data) -> {
@@ -35,6 +50,7 @@ public enum InputType {
     LIST(x -> x.toLowerCase().startsWith("list"), (tm, data) -> {
         StringBuilder ret = new StringBuilder();
         int cnt = 1;
+
         for (var x : tm.retrieveAllTasks()) {
             ret.append(cnt++).append(". ").append(x).append("\n");
         }
@@ -86,6 +102,7 @@ public enum InputType {
     }
 
     public String apply(TaskManager tm, String data) {
+
         return func.apply(tm, data);
     }
 }

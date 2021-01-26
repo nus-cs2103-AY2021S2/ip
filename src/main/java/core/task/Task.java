@@ -49,4 +49,8 @@ public class Task implements Serializable {
         return "[" + getStatusIcon() + "] " + getTaskDescription();
     }
 
+    public boolean contains(String word) {
+        return taskDescription.toLowerCase().contains(word.toLowerCase());
+    }
+
 }
