@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows application usage instructions.\n"
             + "---- Example: " + COMMAND_WORD;
-    public boolean isAskingForHelp = true;
+    private boolean isAskingForHelp = true;
 
     /**
      * Initializes a new default HelpCommand.

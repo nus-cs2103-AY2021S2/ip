@@ -53,6 +53,12 @@ public class Tasks {
         return tasks.get(i - 1);
     }
 
+    /**
+     * Finds tasks by a given keyword.
+     *
+     * @param keyWord The keyword specified.
+     * @return A readable string representation of all tasks whose name contain the keyword as part of the substring.
+     */
     public String listTasks(String keyWord) {
         String message = "";
         // tasks is not null, but maybe empty

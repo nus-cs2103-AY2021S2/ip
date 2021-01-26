@@ -1,11 +1,6 @@
 package lihua.commons;
 
-import lihua.commands.AddCommand;
-import lihua.commands.DoneCommand;
-import lihua.commands.DeleteCommand;
-import lihua.commands.ListCommand;
-import lihua.commands.HelpCommand;
-import lihua.commands.ExitCommand;
+import lihua.commands.*;
 
 /**
  * Messages class containing static messages of Lihua.
@@ -36,6 +31,7 @@ public class Messages {
                     + "\n" + DoneCommand.MESSAGE_USAGE
                     + "\n" + DeleteCommand.MESSAGE_USAGE
                     + "\n" + ListCommand.MESSAGE_USAGE
+                    + "\n" + FindCommand.MESSAGE_USAGE
                     + "\n" + HelpCommand.MESSAGE_USAGE
                     + "\n" + ExitCommand.MESSAGE_USAGE;
     /** Invalid index report message */

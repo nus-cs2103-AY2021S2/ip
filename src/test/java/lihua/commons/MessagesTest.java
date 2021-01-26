@@ -1,5 +1,6 @@
 package lihua.commons;
 
+import lihua.commands.ListCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MessagesTest {
     public static final String MESSAGE_HELLO_EXPECTED =
             "Hello! My name is Lihua.\n" +
-                    "What can I do for you today? (=~ω~=)";
+                    "What can I do for you today? (=V=)";
     public static final String MESSAGE_GET_HELP_EXPECTED =
             "Sorry, I do not understand your command :')\n" +
                     "If you are stuck, type 'help' to get a list of operations available.";
@@ -15,7 +16,7 @@ public class MessagesTest {
             "-------------------------------------------------";
     public static final String MESSAGE_INFORM_EXIT_EXPECTED =
             "Exiting Lihua as requested...\n" +
-                    "Goodbye! Hope to see you again soon! (=~ω~=)";
+                    "Goodbye! Hope to see you again soon! (=V=)";
     public static final String MESSAGE_REPORTING_ADDING_FAILURE_EXPECTED =
             "Sorry, the task adding failed. :( Please check your storage devices.";
     public static final String MESSAGE_VIEW_COMMANDS_EXPECTED =
@@ -27,10 +28,11 @@ public class MessagesTest {
                     + "---- Example: done [valid index number]"
                     + "\n" + "delete: Remove a specific task from the list.\n"
                     + "---- Example: delete [valid index number]"
-                    + "\n" + "list: List done all the tasks. " +
-                    "List done all the tasks on a specific date, if additional date argument is given\n"
+                    + "\n" + "list: List down all the tasks. " +
+                    "List down all the tasks on a specific date, if additional date argument is given\n"
                     + "---- Example 1: list\n"
                     + "---- Example 2: list [yyyy-mm-dd]"
+                    + "\n" + "find: List down all the tasks containing the key word specified."
                     + "\n" + "help: Shows application usage instructions.\n"
                     + "---- Example: help"
                     + "\n" + "bye: Exit the application. Data will be auto-saved.\n"
