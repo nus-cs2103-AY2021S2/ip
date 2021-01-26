@@ -1,4 +1,5 @@
 /**
+ * Deals with interactions with the user.
  * This Snomio simply compile both BufferedReader and BufferedWriter
  * for easier I/O usages. For eg. read commands, contents, numbers
  * from user's input.
@@ -19,8 +20,117 @@ public class Snomio extends PrintWriter {
         reader = new BufferedReader(new InputStreamReader(is));
     }
 
-    public boolean hasMoreWord(){
-        return tokenizer.hasMoreTokens();
+    /**
+     * Prints a horizontal line.
+     * Note that the output is not flushed. Remember to flush after calling the method.
+     */
+    public void showLine(){
+        println("--------------------------------");
+    }
+
+    /**
+     * Prints given message as an error
+     *
+     * @param errMsg error message
+     */
+    public void showError(String errMsg){
+        showLine();
+        println("Error: " + errMsg);
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints an error of unable to load save file and prompt user a new save file will be created.
+     */
+    public void showLoadingError(){
+        showError("Failed to load file. A new save file will be created.");
+    }
+
+    /**
+     * Prints the welcome message of Snom on startup.
+     */
+    public void showWelcomeMsg(){
+        showLine();
+        println("Bonjour! I'm Snom! *squish*");
+        println("Try giving me some commands, I might be able to do something!");
+        println("[type 'bye' to exit program]");
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints out the entire task list.
+     *
+     * @throws SnomException if there is content after the command or there isn't any task in the task list
+     */
+    public void showTaskList(TaskList taskList) throws SnomException{
+        showLine();
+        if(taskList.getSize() > 0){
+            println("Here are the tasks in your list:");
+            for(int i = 0; i < taskList.getSize(); i++){
+                println((i+1) + ". " + taskList.getTask(i).toString());
+            }
+        }else{
+            throw new SnomException("You have no task in your list right now, try adding some and try again :D");
+        }
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints out the task added into the taskList and size of current taskList.
+     *
+     * @param task     task added
+     * @param listSize task list size
+     */
+    public void showTaskAdded(Task task, int listSize){
+        showLine();
+        println("Got it. I've added this task:");
+        println("\t" + task.toString());
+        println("Now you have " + listSize + " tasks in the list.");
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints the list of recent finished tasks.
+     *
+     * @param finishedTasks list of finished tasks
+     */
+    public void showFinishedTasks(Task[] finishedTasks) {
+        showLine();
+        println("Great Job! I've marked this task(s) as finish:");
+        for(Task task: finishedTasks){
+            println("\t" + task.toString());
+        }
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints the list of recently deleted tasks.
+     *
+     * @param deletedTasks list of deleted tasks
+     */
+    public void showDeletedTasks(Task[] deletedTasks) {
+        showLine();
+        println("Noted, I've removed this task(s)");
+        for(Task task: deletedTasks){
+            println("\t" + task.toString());
+        }
+        showLine();
+        flush();
+    }
+
+    /**
+     * Prints exit message.
+     */
+    public void showExitMessage(){
+        showLine();
+        println("Ciao! Hope to see you again soon!");
+        showLine();
+        flush();
     }
 
     /**

@@ -10,17 +10,11 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SnomFile {
+public class Storage {
     private Path path;
 
-    public SnomFile(String directory, String filename){
+    public Storage(String directory, String filename){
         this.path = Paths.get(directory + "/" + filename);
-    }
-
-    /**
-     * Creates the directory and the file with the given path
-     */
-    public void init(){
         createFolder();
         createFile();
     }
@@ -82,7 +76,7 @@ public class SnomFile {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new SnomException(e.getMessage());
         }
         return taskList;
     }
@@ -90,12 +84,12 @@ public class SnomFile {
     /**
      * Writes the given task list into the save file
      *
-     * @param list list of tasks
+     * @param taskList list of tasks
      */
-    public void saveFile(ArrayList<Task> list){
+    public void saveFile(TaskList taskList){
         try {
             Files.writeString(path, "");
-            for(Task task: list){
+            for(Task task: taskList.getList()){
                 Files.writeString(path, task.toSaveString() + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
