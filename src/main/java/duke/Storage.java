@@ -41,7 +41,6 @@ public class Storage {
                             ((Deadline) task).getEndTime());
                     break;
                 case "TODO":
-                    task = (ToDo) task;
                     toBeSaved = String.format("%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
@@ -49,7 +48,6 @@ public class Storage {
                     // System.out.println("im at todo");
                     break;
                 case "EVENT":
-                    task = (Event) task;
                     toBeSaved = String.format("%s|%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
