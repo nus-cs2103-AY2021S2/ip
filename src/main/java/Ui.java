@@ -1,10 +1,8 @@
 package main.java;
 
 import main.java.entity.Task;
-
 import java.util.List;
 import java.util.Scanner;
-
 public class Ui {
 
     private Scanner sc;

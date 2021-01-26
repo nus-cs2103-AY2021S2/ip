@@ -1,12 +1,7 @@
 package main.java;
 
-import main.java.entity.Deadline;
-import main.java.entity.Event;
-import main.java.entity.Task;
-import main.java.entity.Todo;
-
+import main.java.entity.*;
 import java.io.*;
-import java.nio.Buffer;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -73,7 +68,6 @@ public class Storage {
     }
 
     public void updateFile(List<Task> list){
-//        FileOutputStream fos = new FileOutputStream(file, false);
         try {
             FileWriter fw = new FileWriter(file, false);
             for (Task task : list) {

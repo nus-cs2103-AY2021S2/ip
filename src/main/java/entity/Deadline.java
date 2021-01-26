@@ -32,8 +32,6 @@ public class Deadline extends Task {
         this.keyword = keyword;
     }
 
-
-
     @Override
     public String toString() {
         return "[D][" + (this.isDone ? "X" : " ") + "] " + this.name + " (" + keyword + ": " + (this.deadlineDate == null ? this.deadline : this.deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";

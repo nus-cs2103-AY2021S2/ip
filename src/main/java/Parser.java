@@ -1,11 +1,7 @@
 package main.java;
 
 import main.java.command.*;
-import main.java.entity.Event;
-import main.java.entity.Task;
 import main.java.exceptions.IllegalInputFormatException;
-import main.java.exceptions.UnrecognizableInputException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 

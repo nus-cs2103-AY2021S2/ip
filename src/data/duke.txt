@@ -1,1 +1,4 @@
 T|1|1
+D|0|cs2102 homework|by|22 jan 2020
+D|1|cs2107 homework|by|tmr
+T|0|cs2103t

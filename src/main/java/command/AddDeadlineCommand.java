@@ -3,9 +3,7 @@ package main.java.command;
 import main.java.TaskManager;
 import main.java.Ui;
 import main.java.entity.Deadline;
-import main.java.entity.Event;
 import main.java.entity.Task;
-
 import java.time.LocalDate;
 
 public class AddDeadlineCommand extends AddCommand {
