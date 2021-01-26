@@ -87,4 +87,13 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("    " + task);
     }
+
+    void printFilteredList(TaskList tasks) {
+        ArrayList<Task> list = tasks.getList();
+        int listLength = tasks.getListLength();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0;  i < listLength; i++) {
+            System.out.println( (i+1) + "."  + list.get(i));
+        }
+    }
 }

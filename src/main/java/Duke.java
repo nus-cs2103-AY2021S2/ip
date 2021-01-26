@@ -27,6 +27,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
+                ui.showLine();
                 c.execute(tasks, ui, storage);
                 isBye = c.isBye();
                 ui.showLine();

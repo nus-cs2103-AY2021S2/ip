@@ -20,6 +20,8 @@ public class Parser {
             return new PrintCommand(info);
         } else if (info[0].equals("bye")){
             return new ByeCommand();
+        } else if (info[0].equals("find")) {
+            return new FindCommand(info);
         } else {
             throw new DukeException("Sorry but I don't understand what that means! :-(");
         }
