@@ -28,37 +28,68 @@ public class Parser {
             }
         }
 
-        if (firstSpace == -1) {
-            throw new DukeException("The description cannot be empty");
-        }
-
         //Commands that needs a description
         Task task = null;
         if(keyword.equalsIgnoreCase("todo")) {
+            checkDescription(firstSpace);
             task = new Todo(fullCommand.substring(firstSpace));
+        } else if (keyword.equalsIgnoreCase("deadline") || keyword.equalsIgnoreCase("event")){
+            checkDescription(firstSpace);
+            task = createTaskWithDeadline(fullCommand, keyword, firstSpace);
         } else {
-            int firstSlash = fullCommand.indexOf("/");
-            String taskDescription = fullCommand.substring(firstSpace, firstSlash);
-            task = createTaskWithDeadline(fullCommand, keyword, taskDescription, firstSlash);
+            return null;
         }
 
         return new AddCommand(task);
     }
 
-    private static Task createTaskWithDeadline(String fullCommand, String keyword, String taskDecription, int firstSlash) throws DukeDeadlineException {
+    private static void checkDescription(int firstSpace) throws DukeException {
+        if (firstSpace == -1) {
+            throw new DukeException("OOPS!!! The description cannot be empty.");
+        }
+    }
+
+    private static Task createTaskWithDeadline(String fullCommand, String keyword, int firstSpace) throws DukeDeadlineException {
         Task t = null;
-        int nextSpace = fullCommand.indexOf(" ", firstSlash) + 1;
+        int firstSlash = fullCommand.indexOf("/");
+
         if (firstSlash == -1) {
-            throw new DukeDeadlineException("Deadline is missing");
+            throw new DukeDeadlineException("OOPS!!! The deadline of a task cannot be empty.");
         }
 
+        int nextSpace = fullCommand.indexOf(" ", firstSlash) + 1;
+        String taskDescription = fullCommand.substring(firstSpace, firstSlash);
+        String errorMessage;
         switch (keyword) {
         case "deadline":
-            String errorMessage = "Format of the deadline of a deadline task should be (Year-Month-Day time (24 hours)";
+            errorMessage = "OOPS!!! Format of the deadline of a deadline task should be " +
+                                "(Year-Month-Day time (24 hours)";
             LocalDateTime deadline = parseDate(fullCommand.substring(nextSpace), errorMessage);
-            t = new Deadline(taskDecription, deadline);
+            t = new Deadline(taskDescription, deadline);
+            break;
+        case "event":
+            errorMessage = "OOPS!!! Format of the time period of a Event task should be " +
+                            "(Year-Month-Day Time(24 hours)-Time(24 hours)";
+            LocalDateTime[] deadlines = parseDates(fullCommand.substring(nextSpace), errorMessage);
+            t = new Event(taskDescription, deadlines[0], deadlines[1]);
+            break;
         }
         return t;
+    }
+
+    public static LocalDateTime[] parseDates(String data, String errorMessage) throws DukeDeadlineException {
+        int firstSpace = data.indexOf(" ");
+        String date = data.substring(0,firstSpace);
+        data = data.substring(firstSpace + 1);
+        String[] timePeriod = data.split("-");
+        if (timePeriod.length != 2) {
+            throw new DukeDeadlineException(errorMessage);
+        }
+        LocalDateTime[] deadline = new LocalDateTime[2];
+        for (int i = 0; i < timePeriod.length; i++) {
+            deadline[i] = parseDate(date + " " + timePeriod[i], errorMessage);
+        }
+        return deadline;
     }
 
     public static LocalDateTime parseDate(String date, String errorMessage) throws DukeDeadlineException{
