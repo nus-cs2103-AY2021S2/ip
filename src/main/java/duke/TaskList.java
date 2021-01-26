@@ -26,4 +26,14 @@ public class TaskList {
     public void removeIndex(int i) {
         this.taskList.remove(i);
     }
+
+    public TaskList find(String keyword) {
+        TaskList toReturn = new TaskList();
+        for (Task t : this.taskList) {
+            if (t.getTaskName().contains(keyword)) {
+                toReturn.add(t);
+            }
+        }
+        return toReturn;
+    }
 }

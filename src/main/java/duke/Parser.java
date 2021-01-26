@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -49,6 +50,9 @@ public class Parser {
             break;
         case DELETE:
             toRun = new DeleteCommand(fullCmd, ui);
+            break;
+        case FIND:
+            toRun = new FindCommand(fullCmd, ui);
             break;
         default:
             throw new DukeException("Sorry human, I have not been trained to process that command.");
