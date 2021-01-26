@@ -1,6 +1,5 @@
 package weiliang.bot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import weiliang.bot.task.Deadline;
@@ -14,17 +13,19 @@ public class Bot {
 
     private boolean active;
     private List<Task> memory;
+    private String storagePath;
 
-    public Bot(String name) {
+    public Bot(String name, String storagePath) {
         this.name = name;
         this.logo = "  ___ _            _     ___      _   \n" + " / __(_)_ __  _ __| |___| _ ) ___| |_ \n"
                 + " \\__ \\ | '  \\| '_ \\ / -_) _ \\/ _ \\  _|\n" + " |___/_|_|_|_| .__/_\\___|___/\\___/\\__|\n"
                 + "             |_|                      \n\n";
         this.active = true;
-        this.memory = new ArrayList<>();
+        this.storagePath = storagePath;
+        this.memory = Storage.readFile(storagePath);
     }
 
-    private String formatMessage(String message) {
+    public String formatMessage(String message) {
         return name + ": " + message.replace("{{bot:name}}", name);
     }
 
@@ -36,7 +37,7 @@ public class Bot {
         return active;
     }
 
-    public String respond(String input) {
+    public String respond(String input) throws BotException {
         // Clear leading and trailing whitespace
         input = input.strip();
 
@@ -45,6 +46,7 @@ public class Bot {
             return formatMessage("Hello! My name is {{bot:name}}!");
         }
         if (input.equalsIgnoreCase("bye")) {
+            Storage.storeFile(storagePath, memory);
             active = false;
             return formatMessage("Bye. Hope to see you again soon!");
         }
@@ -55,6 +57,22 @@ public class Bot {
             for (int i = 0; i < memory.size(); i++) {
                 message += "\n" + (i + 1) + "." + memory.get(i);
             }
+            return message;
+        }
+        if (input.matches("^delete \\d+$")) {
+            int taskNo = Integer.parseInt(input.replaceFirst("delete ", "")) - 1;
+
+            // Check if in memory
+            if (taskNo > memory.size() - 1) {
+                return formatMessage("Unable to remove item!");
+            }
+
+            // Mark complete
+            Task task = memory.remove(taskNo);
+
+            String message = formatMessage("Noted, I have removed this task.");
+            message += "\n" + task;
+            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
             return message;
         }
         if (input.matches("^done \\d+$")) {
@@ -71,6 +89,7 @@ public class Bot {
 
             String message = formatMessage("Nice, I've marked the task as done!");
             message += "\n" + task;
+            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
             return message;
         }
         if (input.startsWith("todo")) {
@@ -83,8 +102,7 @@ public class Bot {
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
             } else {
-                // Reserved for later part
-                // throw new BotException(this, message);
+                throw new BotException(this, "The description of a todo cannot be empty!");
             }
         }
         if (input.startsWith("deadline")) {
@@ -97,6 +115,8 @@ public class Bot {
                 message += "\n" + task;
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
+            } else {
+                throw new BotException(this, "The description of a deadline cannot be empty!");
             }
         }
         if (input.startsWith("event")) {
@@ -109,11 +129,14 @@ public class Bot {
                 message += "\n" + task;
                 message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
                 return message;
+            } else {
+                throw new BotException(this, "The description of an event cannot be empty!");
             }
         }
 
         // Default
-        return formatMessage("Sorry! I don't understand you.");
+        // Don't actually need to throw bot exception
+        throw new BotException(this, "Don't understand.");
     }
 
 }

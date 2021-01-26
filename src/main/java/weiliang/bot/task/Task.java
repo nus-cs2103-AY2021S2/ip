@@ -13,6 +13,10 @@ public class Task {
         this.completed = true;
     }
 
+    public String toFormattedString() {
+        return "T | " + (completed ? 1 : 0) + " | " + task;
+    }
+
     @Override
     public String toString() {
         return "[T][" + (completed ? "X" : " ") + "] " + task;
