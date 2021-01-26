@@ -13,7 +13,7 @@ public class SearchCommand extends Command {
 
     @Override
     public TaskList execute(TaskList tasks, UI ui, DataStorage storage) throws DukeException {
-        tasks.findTask(input);
+        tasks.findTask(input,tasks);
         return tasks;
     }
 }

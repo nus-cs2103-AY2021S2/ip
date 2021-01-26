@@ -55,7 +55,7 @@ public class UI {
     }
 
     public void printFindHeader() {
-        System.out.println("\n     Here are the matching tasks in your list:");
+        System.out.println("\nHere are the matching tasks in your list:");
     }
 
     /**

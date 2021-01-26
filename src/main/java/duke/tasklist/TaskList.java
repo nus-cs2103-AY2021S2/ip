@@ -101,8 +101,11 @@ public class TaskList {
 
     /** Find task in array list of task
      * @param input
+     * @param t tasklist
      */
-    public void findTask(String input) {
+    public void findTask(String input, TaskList t) {
+        findTaskArraylist.clear();
+        taskArraylist = t.getTaskListArray();
         for (int i = 0; i < taskArraylist.size(); i++) {
             if (taskArraylist.get(i).getTaskName().contains(input)) {
                 findTaskArraylist.add(taskArraylist.get(i));
