@@ -1,5 +1,7 @@
 package utils;
 
+import apollo.Apollo;
+
 import enums.Commands;
 
 import exceptions.DukeException;
@@ -13,7 +15,7 @@ import java.util.Locale;
 
 public class Parser {
 
-    public static void handleInput(String s, ArrayList<Task> taskList) throws DukeException {
+    public static void handleInput(String s, ArrayList<Task> taskList, Apollo apollo) throws DukeException {
         String input = s.trim();
         Commands command;
 
@@ -48,6 +50,7 @@ public class Parser {
                 throw new InvalidOptionException(command.name());
             }
         case BYE:
+            apollo.saveBeforeExit();
             Formatter.printlnWithIndentation("Bye. Hope to see you again soon!");
             System.exit(0);
             break;
