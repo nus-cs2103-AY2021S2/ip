@@ -19,7 +19,7 @@ public class Duke {
         this.parser = new Parser(taskList, ui);
     }
 
-    public void start() {
+    private void start() {
         ui.greet();
         while (isActive) {
             String input = ui.askForInput();
