@@ -15,16 +15,19 @@ public class Event extends Task {
 
     /**
      * Factory method to create Event task based on input
+     *
      * @param input User input
      * @return Event object
      * @throws DukeException If parsing input fails
      */
     static public Event parse(String input) throws DukeException {
         String[] arr = input.split("event");
-        if (arr.length < 2) throw new DukeException("Event description cannot be empty");
+        if (arr.length < 2) {
+            throw new DukeException("Event description cannot be empty");
+        }
 
         String body = arr[1].strip();
-        if(!body.trim().isEmpty()) {
+        if (!body.trim().isEmpty()) {
             String[] parts = body.split("/at");
             String desc = parts[0].strip();
             String at = parts[1].strip();
@@ -36,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Convert to file string for saving.
+     *
      * @return File string
      */
     @Override

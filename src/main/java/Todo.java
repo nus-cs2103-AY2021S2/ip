@@ -10,13 +10,16 @@ public class Todo extends Task {
 
     /**
      * Factory method to create Todo task based on input
+     *
      * @param input User input
      * @return Todo object
      * @throws DukeException If parsing input fails
      */
     static public Todo parse(String input) throws DukeException {
         String[] arr = input.split("todo");
-        if (arr.length < 2) throw new DukeException("Todo description cannot be empty");
+        if (arr.length < 2) {
+            throw new DukeException("Todo description cannot be empty");
+        }
 
         String body = arr[1].strip();
         if (!body.trim().isEmpty()) {
@@ -28,6 +31,7 @@ public class Todo extends Task {
 
     /**
      * Convert to file string for saving.
+     *
      * @return File string
      */
     @Override

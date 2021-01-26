@@ -21,6 +21,7 @@ public class Task {
 
     /**
      * Get status icon representing done state.
+     *
      * @return Status icon
      */
     public String getStatusIcon() {
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Convert to file string for saving.
+     *
      * @return File string
      */
     public String toFileString() {

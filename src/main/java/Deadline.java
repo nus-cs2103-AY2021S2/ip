@@ -15,16 +15,19 @@ public class Deadline extends Task {
 
     /**
      * Factory method to create Deadline task based on input
+     *
      * @param input User input
      * @return Deadline object
      * @throws DukeException If parsing input fails
      */
     static public Deadline parse(String input) throws DukeException {
         String[] arr = input.split("deadline");
-        if (arr.length < 2) throw new DukeException("Deadline description cannot be empty");
+        if (arr.length < 2) {
+            throw new DukeException("Deadline description cannot be empty");
+        }
 
         String body = arr[1].strip();
-        if(!body.trim().isEmpty()) {
+        if (!body.trim().isEmpty()) {
             String[] parts = body.split("/by");
             String desc = parts[0].strip();
             String by = parts[1].strip();
@@ -36,6 +39,7 @@ public class Deadline extends Task {
 
     /**
      * Convert to file string for saving.
+     *
      * @return File string
      */
     @Override

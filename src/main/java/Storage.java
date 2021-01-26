@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Loads list of tasks from file
+     *
      * @return List of tasks
      */
     public List<Task> loadTasks() {
@@ -42,6 +43,7 @@ public class Storage {
 
     /**
      * Save list of tasks to file
+     *
      * @param list List of tasks.
      */
     public void saveTasks(List<Task> list) {
@@ -68,14 +70,14 @@ public class Storage {
         boolean isDone = Boolean.valueOf(parts[1]);
         String desc = parts[2];
         switch (type) {
-        case "T":
-            return new Todo(desc, isDone);
-        case "D":
-            return new Deadline(desc, isDone, parts[3]);
-        case "E":
-            return new Event(desc, isDone, parts[3]);
-        default:
-            throw new DukeException("String parsing failed");
+            case "T":
+                return new Todo(desc, isDone);
+            case "D":
+                return new Deadline(desc, isDone, parts[3]);
+            case "E":
+                return new Event(desc, isDone, parts[3]);
+            default:
+                throw new DukeException("String parsing failed");
         }
     }
 
@@ -83,7 +85,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(path);
             StringBuilder sb = new StringBuilder();
-            for(int i = 0; i < lines.size(); i++) {
+            for (int i = 0; i < lines.size(); i++) {
                 sb.append(lines.get(i));
                 if (i != lines.size() - 1) {
                     sb.append("\n");

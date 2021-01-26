@@ -13,6 +13,7 @@ public class Parser {
 
     /**
      * Parses user input into commands that are executed.
+     *
      * @param input User input.
      * @return flag to stop the bot
      * @throws DukeException If input parsing fails.
