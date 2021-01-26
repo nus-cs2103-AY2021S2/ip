@@ -21,19 +21,19 @@ What can I do for you?
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Got it. I've added this task: 
-	Task added: [D][✘] math assignment (by: Sunday)
+	Task added: [D][✘] math assignment (by: 2021-01-27)
 	Now you have 2 tasks in the list.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Got it. I've added this task: 
-	Task added: [E][✘] project meeting (at: 27 Jan)
+	Task added: [E][✘] project meeting (at: 2021-01-29 10:30)
 	Now you have 3 tasks in the list.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✘] borrow book
-	2. [D][✘] math assignment (by: Sunday)
-	3. [E][✘] project meeting (at: 27 Jan)
+	2. [D][✘] math assignment (by: 2021-01-27)
+	3. [E][✘] project meeting (at: 2021-01-29 10:30)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Nice! I've marked this task as done:
@@ -42,17 +42,17 @@ What can I do for you?
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✓] borrow book
-	2. [D][✘] math assignment (by: Sunday)
-	3. [E][✘] project meeting (at: 27 Jan)
+	2. [D][✘] math assignment (by: 2021-01-27)
+	3. [E][✘] project meeting (at: 2021-01-29 10:30)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Noted. I've removed this task: 
-	[D][✘] math assignment (by: Sunday)
+	[D][✘] math assignment (by: 2021-01-27)
 	Now you have 2 tasks in the list.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Nice! I've marked this task as done:
-	[E][✓] project meeting (at: 27 Jan)
+	[E][✓] project meeting (at: 2021-01-29 10:30)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Oops! The index is out of bound.
@@ -60,7 +60,7 @@ What can I do for you?
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✓] borrow book
-	2. [E][✓] project meeting (at: 27 Jan)
+	2. [E][✓] project meeting (at: 2021-01-29 10:30)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Please follow this format "todo <task>".
@@ -97,60 +97,47 @@ What can I do for you?
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✓] borrow book
-	2. [E][✓] project meeting (at: 27 Jan)
+	2. [E][✓] project meeting (at: 2021-01-29 10:30)
 	3. [T][✘] todo
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
+	Please follow this format "YYYY-MM-DD [hh:mm[:ss]]" for datetime.
+────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────
 	Got it. I've added this task: 
-	Task added: [D][✘] physics homework (by: Monday)
+	Task added: [E][✘] dinner with Jen (at: 2021-01-28)
 	Now you have 4 tasks in the list.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
-	Got it. I've added this task: 
-	Task added: [E][✘] dinner with Jen (at: 28 Jan)
-	Now you have 5 tasks in the list.
+	Here are the tasks in your list:
+	1. [T][✓] borrow book
+	2. [E][✓] project meeting (at: 2021-01-29 10:30)
+	3. [T][✘] todo
+	4. [E][✘] dinner with Jen (at: 2021-01-28)
+────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────
+	Please follow this format "YYYY-MM-DD [hh:mm[:ss]]" for datetime.
+────────────────────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────────────────────
+	Please follow this format "YYYY-MM-DD [hh:mm[:ss]]" for datetime.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✓] borrow book
-	2. [E][✓] project meeting (at: 27 Jan)
+	2. [E][✓] project meeting (at: 2021-01-29 10:30)
 	3. [T][✘] todo
-	4. [D][✘] physics homework (by: Monday)
-	5. [E][✘] dinner with Jen (at: 28 Jan)
-────────────────────────────────────────────────────────────────────────────────
-────────────────────────────────────────────────────────────────────────────────
-	Got it. I've added this task: 
-	Task added: [D][✘] chemistry assignment (by: /by /by Tuesday)
-	Now you have 6 tasks in the list.
-────────────────────────────────────────────────────────────────────────────────
-────────────────────────────────────────────────────────────────────────────────
-	Got it. I've added this task: 
-	Task added: [E][✘] tea with Wilson (at: /by /at 30 Jan)
-	Now you have 7 tasks in the list.
-────────────────────────────────────────────────────────────────────────────────
-────────────────────────────────────────────────────────────────────────────────
-	Here are the tasks in your list:
-	1. [T][✓] borrow book
-	2. [E][✓] project meeting (at: 27 Jan)
-	3. [T][✘] todo
-	4. [D][✘] physics homework (by: Monday)
-	5. [E][✘] dinner with Jen (at: 28 Jan)
-	6. [D][✘] chemistry assignment (by: /by /by Tuesday)
-	7. [E][✘] tea with Wilson (at: /by /at 30 Jan)
+	4. [E][✘] dinner with Jen (at: 2021-01-28)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Noted. I've removed this task: 
-	[D][✘] physics homework (by: Monday)
-	Now you have 6 tasks in the list.
+	[E][✘] dinner with Jen (at: 2021-01-28)
+	Now you have 3 tasks in the list.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
-	Nice! I've marked this task as done:
-	[E][✓] dinner with Jen (at: 28 Jan)
+	Oops! The index is out of bound.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
-	Noted. I've removed this task: 
-	[E][✘] tea with Wilson (at: /by /at 30 Jan)
-	Now you have 5 tasks in the list.
+	Oops! The index is out of bound.
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Oops! Please input a number.
@@ -167,10 +154,8 @@ What can I do for you?
 ────────────────────────────────────────────────────────────────────────────────
 	Here are the tasks in your list:
 	1. [T][✓] borrow book
-	2. [E][✓] project meeting (at: 27 Jan)
+	2. [E][✓] project meeting (at: 2021-01-29 10:30)
 	3. [T][✘] todo
-	4. [E][✓] dinner with Jen (at: 28 Jan)
-	5. [D][✘] chemistry assignment (by: /by /by Tuesday)
 ────────────────────────────────────────────────────────────────────────────────
 ────────────────────────────────────────────────────────────────────────────────
 	Bye. Hope to see you again soon!

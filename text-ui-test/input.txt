@@ -1,8 +1,8 @@
 list
 todo borrow book
 list
-deadline math assignment /by Sunday
-event project meeting /at 27 Jan
+deadline math assignment /by 2021-01-27 
+event project meeting /at    2021-01-29   10:30
 list
 done 1
 list
@@ -22,9 +22,9 @@ deadline programming assignment /by
 event class gathering /at
 list
 deadline         physics homework       /by     Monday      
-   event      dinner with Jen  /at      28 Jan
+   event      dinner with Jen  /at      2021-01-28
 list
-deadline chemistry assignment /by /by /by Tuesday
+deadline chemistry assignment /by /by /by 2021-02-25
 event tea with Wilson /at /by /at 30 Jan
 list
 delete       4
