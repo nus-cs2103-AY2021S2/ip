@@ -5,6 +5,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Returns String description of this ToDo task, identified by "[T]".
+     *
+     * @return String description.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

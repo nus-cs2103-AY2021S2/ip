@@ -13,6 +13,9 @@ public class DoneCommand extends Command {
         this.position = position;
     }
 
+    /**
+     * Marks Task at previously specified position of tasklist as done, before printing a confirmation message.
+     */
     @Override
     public void execute() {
         this.taskList.setTaskDone(this.position);

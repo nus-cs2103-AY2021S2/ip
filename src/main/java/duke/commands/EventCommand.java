@@ -18,6 +18,9 @@ public class EventCommand extends Command {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Adds an Event task with previously specified description and dateTime to taskList.
+     */
     @Override
     public void execute() {
         Event e = new Event(this.task, this.dateTime);

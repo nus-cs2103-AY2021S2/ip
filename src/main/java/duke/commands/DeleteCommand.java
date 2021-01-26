@@ -13,8 +13,12 @@ public class DeleteCommand extends Command {
         this.position = position;
     }
 
+    /**
+     * Deletes Task at the previously specified position in the taskList.
+     * Thereafter, prints confirmation and remaining number of tasks.
+     */
     @Override
-    public void execute() throws IndexOutOfBoundsException {
+    public void execute() {
         System.out.println("Noted. I've removed this task:");
         this.taskList.printTask(this.position);
         this.taskList.deleteTask(this.position);

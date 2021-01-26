@@ -22,6 +22,12 @@ public class Storage {
         this.ui = ui;
     }
 
+    /**
+     * Loads stored Tasks from local file and returns a TaskList populated with these Tasks.
+     * If file is empty or does not exist, an empty TaskList will be returned.
+     *
+     * @return TaskList populated with Tasks, if applicable.
+     */
     public TaskList loadFromFile() {
         try {
             File file = new File(filepath);
@@ -52,7 +58,14 @@ public class Storage {
         }
     }
 
-    public void writeToFile(List<String> allStringTasks) throws IOException {
+    /**
+     * Writes all Tasks to file, and saves file to specified filepath.
+     *
+     * @param taskList list of all tasks.
+     * @throws IOException if unable to write to file completely.
+     */
+    public void writeToFile(TaskList taskList) throws IOException {
+        List<String> allStringTasks = FileTaskStringConverter.allTaskToAllString(taskList.getList());
         FileWriter fw = new FileWriter(this.filepath);
         String text = "";
         for (String s : allStringTasks) {

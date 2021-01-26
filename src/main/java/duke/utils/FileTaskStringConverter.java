@@ -8,9 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FileTaskStringConverter {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[d/M/yyyy HHmm][d MMM yy HHmm][dd-MM-yy HHmm]");
 
+    /**
+     * Returns a List of Strings, each String representing 1 Task in the specified list.
+     *
+     * @param list List of Tasks to convert to Strings.
+     * @return List of Strings.
+     */
     public static List<String> allTaskToAllString(List<Task> list) {
         List<String> result = new ArrayList<>();
         for (Task t : list) {
@@ -19,6 +26,14 @@ public class FileTaskStringConverter {
         return result;
     }
 
+    /**
+     * Returns a List of Tasks, each Task converted from 1 String in the specified list.
+     *
+     * @param list List of Strings to convert to Tasks.
+     * @return List of Tasks.
+     * @throws InvalidTaskTypeException if local storage file contains invalid Task identified, i.e. not [T], [E] or
+     *     [D].
+     */
     public static List<Task> allStringToAllTask(List<String> list) throws InvalidTaskTypeException {
         List<Task> result = new ArrayList<>();
         for (String s : list) {

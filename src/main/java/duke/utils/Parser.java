@@ -26,7 +26,17 @@ public class Parser {
         this.storage = storage;
     }
 
-    public Command parse(String input) throws NumberFormatException, EmptyArgumentException, InvalidDateTimeException,
+    /**
+     * Returns command associated with the command line input from user.
+     *
+     * @param input command line input from user.
+     * @return command associated with input from user.
+     * @throws EmptyArgumentException when only a 1 word command is passed without any following input.
+     * @throws InvalidDateTimeException when date entered by user is not a valid date or not an acceptable date format.
+     * @throws InvalidIndexInputException when index entered by user is not a number or not within range of 1 to
+     *     the size of the TaskList.
+     */
+    public Command parse(String input) throws EmptyArgumentException, InvalidDateTimeException,
             InvalidIndexInputException {
         String[] commandAndInput = input.split(" ", 2);
         String command = commandAndInput[0];
