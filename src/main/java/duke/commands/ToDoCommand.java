@@ -1,5 +1,12 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+import duke.utils.Storage;
+import duke.utils.Ui;
+
 public class ToDoCommand extends Command {
-    static final String COMMAND_WORD = "todo";
+    public static final String COMMAND_WORD = "todo";
     private String todo;
 
     public ToDoCommand(TaskList taskList, Ui ui, Storage storage, String todo) {

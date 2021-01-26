@@ -1,8 +1,15 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.utils.FileTaskStringConverter;
+import duke.utils.Storage;
+import duke.utils.Ui;
+
 import java.io.IOException;
 import java.util.List;
 
 public class ByeCommand extends Command {
-    static final String COMMAND_WORD = "bye";
+    public static final String COMMAND_WORD = "bye";
 
     public ByeCommand(TaskList taskList, Ui ui, Storage storage) {
         super(taskList, ui, storage);

@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.utils.Storage;
+import duke.utils.Ui;
+
 public class DoneCommand extends Command {
-    static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "done";
     private int position;
 
     public DoneCommand(TaskList taskList, Ui ui, Storage storage, int position) {

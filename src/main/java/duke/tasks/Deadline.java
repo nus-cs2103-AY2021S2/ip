@@ -1,22 +1,26 @@
+package duke.tasks;
+
+import duke.utils.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+public class Deadline extends Task {
     private final LocalDateTime date;
 
-    Event(String description, String date) {
+    public Deadline(String description, String date) {
         super(description);
         this.date = LocalDateTime.parse(date, formatter);
     }
 
-    Event(String description, LocalDateTime date) {
+    public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getDate() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getDate() + ")";
     }
 
     public String getDate() {

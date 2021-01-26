@@ -1,5 +1,11 @@
+package duke.commands;
+
+import duke.tasks.TaskList;
+import duke.utils.Storage;
+import duke.utils.Ui;
+
 public class DeleteCommand extends Command {
-    static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete";
     private int position;
 
     public DeleteCommand(TaskList taskList, Ui ui, Storage storage, int position) {

@@ -1,9 +1,17 @@
+package duke;
+
+import duke.commands.Command;
+import duke.dukeexceptions.DukeException;
+import duke.dukeexceptions.InvalidTaskTypeException;
+import duke.tasks.TaskList;
+import duke.utils.*;
+
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private static final String FILE_PATH = "./src/main/java/tasks.txt";
+    private static final String FILE_PATH = "./src/main/java/duke/tasks.txt";
     private static Ui ui;
     private static Storage storage;
     private static TaskList taskList;

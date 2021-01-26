@@ -1,3 +1,5 @@
+package duke.dukeexceptions;
+
 public class InvalidDateTimeException extends DukeException {
     public InvalidDateTimeException() {
         super("Please enter your date in one of the following formats:\n"
