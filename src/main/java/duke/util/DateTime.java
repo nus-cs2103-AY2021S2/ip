@@ -6,12 +6,20 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
 
+/**
+ * Represents a date-time object without a timezone.
+ */
 public class DateTime {
     private final LocalDateTime ldt;
     private final boolean dateOnly;
 
+    /** Formatter used for parsing date/datetime strings */
     private final static DateTimeFormatter PARSE_FORMATTER;
+
+    /** Output formatter used when instance does not have dateOnly */
     private final static DateTimeFormatter DATETIME_FORMATTER;
+
+    /** Output formatter used when instance has dateOnly */
     private final static DateTimeFormatter DATE_FORMATTER;
 
     static {
@@ -43,10 +51,24 @@ public class DateTime {
         this.dateOnly = dateOnly;
     }
 
+    /**
+     * Returns an ISO-8601 datetime string. If the instance was created with a date string (without time),
+     * hour, minute and second fields will be defaulted to 0.
+     *
+     * @return an ISO-8601 datetime string
+     */
     public String toISODateTime() {
         return ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
+    /**
+     * Recreates a DateTime instance from an ISO-8601 datetime string. The dateOnly parameter will indicate if the time
+     * details should be ignored.
+     *
+     * @param str the ISO-8601 datetime string
+     * @param dateOnly the boolean indicating if time details should be ignored
+     * @return a DateTime instance created from the given ISO-8601 datetime string
+     */
     public static DateTime fromISODateTime(String str, boolean dateOnly) {
         return new DateTime(LocalDateTime.parse(str, DateTimeFormatter.ISO_LOCAL_DATE_TIME), dateOnly);
     }

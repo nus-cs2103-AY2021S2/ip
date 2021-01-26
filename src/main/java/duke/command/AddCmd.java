@@ -3,6 +3,9 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.*;
 
+/**
+ * Represents the execution of Add Command
+ */
 public class AddCmd extends Command {
     private final String cmdArgs;
     private final TaskType taskType;
@@ -26,6 +29,12 @@ public class AddCmd extends Command {
         return strArr;
     }
 
+    /**
+     * Returns the response of the bot after execution of command
+     *
+     * @param lst TaskList
+     * @return response
+     */
     @Override
     public String execute(TaskList lst) {
         Task task;
