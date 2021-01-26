@@ -41,6 +41,28 @@ public class Parser {
         } 
     }
 
+    public static void checkImportFormat(String input) throws DukeInputException {
+        String[] s = input.split(";",3);
+        if (s.length == 3 && (s[1].equals("0") || s[1].equals("1"))) {
+            String[] args = s[2].split(";", 2);
+            switch (s[0]) {
+            case "T":
+                checkValidTodo(args[0]);
+                break;
+            case "D":
+                checkValidDeadline(String.join(" /by ", args));
+                break;
+            case "E":
+                checkValidDeadline(String.join(" /at ", args));
+                break;
+            default:
+                throw new DukeInputException("Not a valid Task type");
+            }
+        } else {
+            throw new DukeInputException("Incorrect format");
+        }
+    }
+
     private static void checkValidDate(String s) throws DukeInputException {
         try {
             LocalDate date = LocalDate.parse(s);
@@ -100,6 +122,8 @@ public class Parser {
             }
         }
     }
+
+
 
 
 }
