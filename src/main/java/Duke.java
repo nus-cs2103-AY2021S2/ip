@@ -13,14 +13,17 @@ public class Duke {
     public static String line = "     ............................................................";
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int numTasks = 0;
+    public static StringBuffer stringBufferOfData = new StringBuffer();
+    public static String pathString;
+    public static Path filepath;
 
     public static void main(String[] args) throws IOException {
         printIntro();
         Scanner scan = new Scanner(System.in);
 
         String currentDir = System.getProperty("user.dir");
-        String pathString = currentDir + "/data/duke.txt";
-        Path filepath = Paths.get(pathString);
+        pathString = currentDir + "/data/duke.txt";
+        filepath = Paths.get(pathString);
 
         try {
             loadFileContents(pathString);
@@ -55,13 +58,21 @@ public class Duke {
                         switch (task) {
                             case "done":
                                 taskIndex = Integer.parseInt(scannedInput) - 1;
+                                String before = tasks.get(taskIndex).formatData();
+
                                 tasks.get(taskIndex).markAsDone();
+                                String after = tasks.get(taskIndex).formatData();
+
+                                modifyFile(before, after);
 
                                 printDone(taskIndex);
                                 break;
                             case "delete":
                                 taskIndex = Integer.parseInt(scannedInput) - 1;
                                 Task deletedTask = tasks.get(taskIndex);
+
+                                deleteFromFile(deletedTask.formatData());
+
                                 tasks.remove(taskIndex);
                                 printDelete(deletedTask.toString());
 
@@ -186,6 +197,12 @@ public class Duke {
 
         while (scanFile.hasNext()) {
             String fileData = scanFile.nextLine();
+            if (numTasks <= 0) {
+                stringBufferOfData.append(fileData);
+            } else {
+                stringBufferOfData.append("\n").append(fileData);
+            }
+
             String[] dataArr = fileData.split(" \\| ", 4);
             String taskType = dataArr[0];
             String isDone = dataArr[1];
@@ -218,11 +235,33 @@ public class Duke {
         if (numTasks <= 0) {
             fw = new FileWriter(pathString);
             fw.write(data);
+            stringBufferOfData.append(data);
         } else {
             fw = new FileWriter(pathString, true);
             fw.write(System.lineSeparator() + data);
+            stringBufferOfData.append("\n").append(data);
         }
 
+        fw.close();
+    }
+
+    private static void modifyFile(String before, String after) throws IOException {
+        int startIndex = stringBufferOfData.indexOf(before);
+        int endIndex = startIndex + before.length();
+        stringBufferOfData.replace(startIndex, endIndex, after);
+
+        FileWriter fw = new FileWriter(pathString);
+        fw.write(stringBufferOfData.toString());
+        fw.close();
+    }
+
+    private static void deleteFromFile(String data) throws IOException {
+        int startIndex = stringBufferOfData.indexOf(data);
+        int endIndex = startIndex + data.length() + 1;
+        stringBufferOfData.delete(startIndex, endIndex);
+
+        FileWriter fw = new FileWriter(pathString);
+        fw.write(stringBufferOfData.toString());
         fw.close();
     }
 }
