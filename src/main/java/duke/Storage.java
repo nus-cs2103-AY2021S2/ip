@@ -26,6 +26,7 @@ public class Storage {
             file = new File(path);
             file.createNewFile();
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             throw new FileIoException();
         }
     }

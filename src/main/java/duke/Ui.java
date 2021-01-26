@@ -16,7 +16,7 @@ public class Ui {
     }
 
     public void printWelcomeText() {
-        System.out.println(divider + space + "(≧∇≦)ﾉ Konichiwa~ Watashi wa Duke desu! \n"
+        System.out.println(divider + space + "Konichiwa~ Watashi wa Duke desu! \n"
                + space + "What can I do for you today?\n" + divider);
     }
 

@@ -36,14 +36,14 @@ public class Duke {
                 c.excecute(taskList);
                 storage.writeFile(taskList);
                 if(c instanceof ByeCommand) {
-                    isBye = false;
+                    isBye = true;
                 }
             }
         }
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke("test/duke.txt").run();
+        new Duke("data.txt").run();
 
 
     }
