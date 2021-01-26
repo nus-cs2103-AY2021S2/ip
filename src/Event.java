@@ -23,6 +23,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getSaveString() {
+        return String.format("e::%s::%s", super.getSaveString(), time);
+    }
+
+    @Override
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), time);
     }

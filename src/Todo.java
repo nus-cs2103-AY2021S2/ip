@@ -17,6 +17,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getSaveString() {
+        return String.format("t::%s", super.getSaveString());
+    }
+
+    @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
     }

@@ -23,6 +23,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getSaveString() {
+        return String.format("d::%s::%s", super.getSaveString(), time);
+    }
+
+    @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), time);
     }
