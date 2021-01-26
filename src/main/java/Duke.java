@@ -13,19 +13,6 @@ public class Duke {
     private List<Task> tasks;
 
     // Helper functions
-    public Command parseInput(String input) {
-        String[] parts = input.split(" ", 2);
-
-        Command command;
-        if (parts.length < 2) {
-            command = new Command(parts[0]);
-        } else {
-            command = new Command(parts[0], parts[1]);
-        }
-
-        return command;
-    }
-
     public int getIndex(String args) {
         return Integer.parseInt(args) - 1;
     }
@@ -92,7 +79,7 @@ public class Duke {
         String input = sc.nextLine().trim();
 
         try {
-            Command command = parseInput(input);
+            Command command = Parser.parseInput(input);
 
             switch (command.getInstruction()) {
             case Command.BYE:
