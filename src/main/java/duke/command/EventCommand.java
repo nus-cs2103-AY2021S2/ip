@@ -11,19 +11,23 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        if (arguments.isBlank()) {
-            throw new DukeException("I apologize, please input description and time for 'event'.");
-        } else {
-            String[] split = arguments.split("/at");
-            if (arguments.equals(split[0])) {
-                throw new DukeException("I apologize, please use '/at' argument to specify time for 'event'.");
+    public void execute(Storage storage, Ui ui, TaskList taskList) {
+        try {
+            if (arguments.isBlank()) {
+                throw new DukeException("I apologize, please input description and time for 'event'.");
             } else {
-                Task newTask = new Event(split[0].strip(), split[1].strip());
-                taskList.add(newTask);
-                storage.addToFile(newTask);
-                ui.print("Added to to-do list: \n" + newTask);
+                String[] split = arguments.split("/at");
+                if (arguments.equals(split[0])) {
+                    throw new DukeException("I apologize, please use '/at' argument to specify time for 'event'.");
+                } else {
+                    Task newTask = new Event(split[0].strip(), split[1].strip());
+                    taskList.add(newTask);
+                    storage.addToFile(newTask);
+                    ui.print("Added to to-do list: \n" + newTask);
+                }
             }
+        } catch (DukeException e) {
+            ui.showError(e);
         }
     }
 }

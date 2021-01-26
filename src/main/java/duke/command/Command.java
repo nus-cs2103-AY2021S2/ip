@@ -15,7 +15,7 @@ public abstract class Command {
         return this.arguments;
     }
 
-    public abstract void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException;
+    public abstract void execute(Storage storage, Ui ui, TaskList taskList);
 
     public boolean isExit() {
         return isExit;

@@ -36,8 +36,8 @@ public class Duke {
                 parsedCmd.execute(storage, ui, taskList);
                 isExit = parsedCmd.isExit();
             }
-        } catch (DukeException dukeException) {
-            ui.showError(dukeException);
+        } catch (DukeException e) {
+            ui.showError(e);
         }
     }
 

@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+    public void execute(Storage storage, Ui ui, TaskList taskList) {
         int delIndex = Integer.parseInt(arguments) - 1;
         Task toDelete = taskList.get(Integer.parseInt(arguments) - 1);
         taskList.remove(delIndex);

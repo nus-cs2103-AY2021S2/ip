@@ -7,31 +7,29 @@ public class Parser {
     Parser() {}
 
     public static Command parse(String command) throws DukeException {
-        String strippedCommand = command.strip();
+        String strippedCmd = command.strip();
         Command result = null;
-        if (strippedCommand.equals("bye")) {
+        if (strippedCmd.equals("bye")) {
             result = new ByeCommand("");
-        } else if (strippedCommand.equals("list")) {
+        } else if (strippedCmd.equals("list")) {
             result = new ListCommand("");
-        } else if (strippedCommand.startsWith("done")) {
-            String args = strippedCommand.substring(4).strip();
+        } else if (strippedCmd.startsWith("done")) {
+            String args = strippedCmd.substring(4).strip();
             result = new DoneCommand(args);
-        } else if (strippedCommand.startsWith("delete")) {
-            String args = strippedCommand.substring(6).strip();
+        } else if (strippedCmd.startsWith("delete")) {
+            String args = strippedCmd.substring(6).strip();
             result = new DeleteCommand(args);
-        } else if (strippedCommand.startsWith("todo")) {
-            String args = strippedCommand.substring(4).strip();
+        } else if (strippedCmd.startsWith("todo")) {
+            String args = strippedCmd.substring(4).strip();
             result = new TodoCommand(args);
-        } else if (strippedCommand.startsWith("deadline")) {
-            String args = strippedCommand.substring(8).strip();
+        } else if (strippedCmd.startsWith("deadline")) {
+            String args = strippedCmd.substring(8).strip();
             result = new DeadlineCommand(args);
-        } else if (strippedCommand.startsWith("event")) {
-            String args = strippedCommand.substring(5).strip();
+        } else if (strippedCmd.startsWith("event")) {
+            String args = strippedCmd.substring(5).strip();
             result = new EventCommand(args);
         } else {
-            String msg = "I apologize, I do not comprehend your command.";
-            DukeException exception = new DukeException(msg);
-            throw exception;
+            throw new DukeException("I apologize, I do not comprehend your command.");
         }
         return result;
     }
