@@ -1,6 +1,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,10 +47,14 @@ public class Parser {
         return parsedTask;
     }
 
+
+    // Methods for extracting dates and formatting dates.
+
+    
     /**
-     * finds date and time within the string
+     * finds date within the string
      * @param input
-     * @return
+     * @return The sustring containing the date only
      */
 
 
@@ -65,14 +70,8 @@ public class Parser {
     }
 
     public static LocalDate parseDate (String input) {
-        String regex = "(?<year>\\d{4})-(?<month>\\d{1,2})-(?<day>\\d{1,2})"; // format YYYY-MM-DD
-        Pattern dateFormat = Pattern.compile(regex);
-        Matcher m = dateFormat.matcher(input);
-        m.find();
-        String day = String.format("%02d", Integer.parseInt(m.group("day")));
-        String month = String.format("%02d", Integer.parseInt(m.group("month")));
-        String year = m.group("year");
-        return LocalDate.parse(year + '-' + month + '-' + day);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+        return LocalDate.parse(input,dateTimeFormatter);
     }
 
     public static class ParseException extends Exception {
