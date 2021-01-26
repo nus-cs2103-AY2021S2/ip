@@ -10,6 +10,20 @@ import java.time.temporal.ChronoUnit;
 public class Duke {
     protected static final ArrayList<Task> taskList = new ArrayList<>();
     protected static boolean canExit = false;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
 
     //user commands
@@ -20,6 +34,10 @@ public class Duke {
     private final static String ToDos = "todo"; //tasks without any date/time attached to it
     private final static String Deadlines = "deadline"; //tasks that need to be done before a specific date/time
     private final static String Events = "event"; //tasks that start at a specific time and ends at a specific time
+
+    public void run() {
+
+    }
 
     public static void getTasks() {
         int i = 1;
