@@ -284,7 +284,7 @@ public class Duke {
 
         // create folders if necessary
         File directory = new File(dataDirName);
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdirs();
         }
 
@@ -295,8 +295,7 @@ public class Duke {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(data.toString());
             bw.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             printer.println(String.format("Warning: failed to save. Message: %s", ex.getMessage()));
         }
     }
