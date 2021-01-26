@@ -32,7 +32,7 @@ public class Duke {
   }
 
   public static void main(String[] args) throws DescriptionError, UnknownInputError, IOException {
-    Duke duke = new Duke("src/main/java/duke.text");
+    Duke duke = new Duke("duke.text");
     duke.run();
 
   }
