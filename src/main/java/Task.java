@@ -2,27 +2,32 @@
  * Represents a Task consisting of a description and completion status.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    public String description;
+    public boolean isDone;
 
-    /** Creates a task instance.
-     @param description String describing the task
+    /**
+     * Creates a task instance.
+     *
+     * @param description String describing the task
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    /** Retrieves the status symbol of the task depending on the completion status
+    /**
+     * Retrieves the status symbol of the task depending on the completion status
+     *
      * @return String with ths status character
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
 
-    /** Marks task as done
+    /**
+     * Marks task as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -31,6 +36,7 @@ public class Task {
      *
      * @return A String containing information about the task.
      */
+    @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
