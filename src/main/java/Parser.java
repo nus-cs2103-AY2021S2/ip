@@ -41,14 +41,14 @@ public class Parser {
                 throw new DukeException("please provide a description for deadline");
             }
             try {
-                String date = messageSplit[1].split("by ")[1];
-                Task deadline = new Deadline(messageMain[1], date);
+                String[] dateTime = messageSplit[1].split("by ")[1].split(" ", 2);
+                Task deadline = new Deadline(messageMain[1], dateTime[0], dateTime[1]);
                 tasks.addTask(deadline);
                 ui.print("Got it. I've added this task:\n" + deadline + tasks.queryNumTasks());
             } catch(ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("please provide a time for deadline");
+                throw new DukeException("please provide a date and time for deadline");
             } catch(DateTimeParseException e) {
-                throw new DukeException("please provide date as YYYY-MM-DD");
+                throw new DukeException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
 
@@ -57,14 +57,14 @@ public class Parser {
                 throw new DukeException("please provide a description for event");
             }
             try {
-                String date = messageSplit[1].split("at ")[1];
-                Task event = new Event(messageMain[1], date);
+                String[] dateTime = messageSplit[1].split("at ")[1].split(" ", 2);
+                Task event= new Event(messageMain[1], dateTime[0], dateTime[1]);
                 tasks.addTask(event);
                 ui.print("Got it. I've added this task:\n" + event + tasks.queryNumTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("please provide a time for event");
+                throw new DukeException("please provide a date and time for event");
             } catch(DateTimeParseException e) {
-                throw new DukeException("please provide date as YYYY-MM-DD");
+                throw new DukeException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
 

@@ -28,14 +28,14 @@ public class Storage {
                     savedTasks.add(savedToDo);
                     break;
                 case "D":
-                    Deadline savedDeadline = new Deadline(line[2], line[3]);
+                    Deadline savedDeadline = new Deadline(line[2], line[3], line[4]);
                     if (line[1].equals("X")) {
                         savedDeadline.setDone();
                     }
                     savedTasks.add(savedDeadline);
                     break;
                 case "E":
-                    Event savedEvent = new Event(line[2], line[3]);
+                    Event savedEvent = new Event(line[2], line[3], line[4]);
                     if (line[1].equals("X")) {
                         savedEvent.setDone();
                     }
@@ -50,15 +50,15 @@ public class Storage {
 
     void save(ArrayList<Task> tasks) throws DukeException{
         try {
-            FileWriter fw = new FileWriter("duke.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
                 String currLine = t.getSymbol() + "#" + t.getStatus() + "#" + t.getName();
                 if (t instanceof Deadline) {
                     Deadline d = (Deadline) t;
-                    currLine += "#" + d.getTime().toString();
+                    currLine += "#" + d.getDate().toString() + "#" + d.getTime().toString();
                 } else if (t instanceof Event) {
                     Event e = (Event) t;
-                    currLine += "#" + e.getTime().toString();
+                    currLine += "#" + e.getDate().toString() + "#" + e.getTime().toString();
                 }
                 currLine += "\n";
                 fw.write(currLine);

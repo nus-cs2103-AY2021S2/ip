@@ -1,15 +1,22 @@
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    private final LocalDate time;
+    private final LocalDate date;
+    private final LocalTime time;
 
-    Event(String name, String time) throws DateTimeParseException {
+    Event(String name, String date, String time) throws DateTimeParseException {
         super(name);
-        this.time = LocalDate.parse(time);
+        this.date = LocalDate.parse(date);
+        this.time = LocalTime.parse(time);
     }
 
-    LocalDate getTime() {
+    LocalDate getDate() {
+        return this.date;
+    }
+
+    LocalTime getTime() {
         return this.time;
     }
 
@@ -19,7 +26,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        LocalDate date = this.getTime();
-        return String.format("%s (at: %s %s %s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear());
+        return String.format("%s (at: %s %s %s %s:%s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear(), time.getHour(), time.getMinute());
+
     }
 }
