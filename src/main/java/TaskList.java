@@ -79,11 +79,15 @@ public class TaskList {
         numItems--;
     }
 
+    /**
+     * Prints the tasks which contain the given string.
+     * @param str given keyword string
+     */
     public void matchTasks(String str) {
         int n = 0;
         for (int i = 0; i < numItems; i++) {
-            if (list.get(i).toString().contains(str)) {
-                System.out.println(n+1 + "." + list.get(i));
+            if (tasks.get(i).toString().contains(str)) {
+                System.out.println(n+1 + "." + tasks.get(i));
                 n++;
             }
         }

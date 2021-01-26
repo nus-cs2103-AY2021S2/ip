@@ -29,18 +29,11 @@ public class Parser {
         Pattern pEvent = Pattern.compile("^([Ee]vent )([a-zA-Z_0-9 ]*+)(\\/at )([a-zA-Z_0-9 ]*+)");
         Matcher mEvent = pEvent.matcher(str);
 
-<<<<<<< HEAD
         Pattern pDelete = Pattern.compile("^(delete )([0-9]+)");
         Matcher mDelete = pDelete.matcher(str);
-=======
+
         Pattern pFind = Pattern.compile("^(find )([a-zA-Z_0-9 ]+)");
         Matcher mFind = pFind.matcher((str));
-
-        if (str.equals("list")) {
-            System.out.println("Here are the tasks in your list!");
-            list.getNumItems();
-            list.printTasks();
->>>>>>> branch-Level-9
 
         if (str.equals("list")) {
             System.out.println("Here are the tasks in your tasks!");
@@ -79,22 +72,14 @@ public class Parser {
             System.out.println("Now you have " + tasks.getNumItems() + " tasks in the tasks.");
         } else if (mDelete.find()) {
             System.out.println("Okay I have removed this task!");
-<<<<<<< HEAD
             int n = Integer.parseInt(mDelete.group(2)) - 1;
             System.out.println(tasks.getAtInd(n));
             tasks.deleteTask(n);
-            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the tasks.");
-=======
-            int n = Integer.parseInt(mdel.group(2)) - 1;
-            System.out.println(list.getAtInd(n));
-            list.deleleTask(n);
-            System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
+            System.out.println("Now you have " + tasks.getNumItems() + " tasks in the list.");
         } else if (mFind.find()) {
             System.out.println("Here are the matching tasks in your list!");
             String word = mFind.group(2);
-            list.matchTasks(word);
-
->>>>>>> branch-Level-9
+            tasks.matchTasks(word);
         } else {
             throw new DukeException("I don't know what that means!!!!");
         }
