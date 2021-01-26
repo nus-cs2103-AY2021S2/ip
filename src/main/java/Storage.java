@@ -12,6 +12,7 @@ public class Storage {
     public ArrayList<Task> load(String fileName) {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
+            //TODO refractor to Praser.java
             File f = new File(fileName);
             f.createNewFile();
             Scanner s = new Scanner(f);

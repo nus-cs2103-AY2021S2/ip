@@ -23,14 +23,14 @@ public class Duke {
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.excute(tasks, ui, storage);
-                isExist = c.isExit();
+                isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
         }
-
+        this.storage.save(tasks.getTaskList());
     }
     public static void main(String[] args) {
         new Duke().run();
