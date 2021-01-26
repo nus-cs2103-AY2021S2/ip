@@ -29,15 +29,15 @@ public class Duke {
 
 		load();
 
-        // get user input
-        String userInput = ui.readCommand();
-
+		String userInput;
         // loop until the user exits
         while (isActive) {
+			// get user input
+			userInput = ui.readCommand();
             try {
                 // display list
                 if (userInput.toLowerCase().equals("list")) {
-                    tasks.display();
+                    ui.borderPrint(tasks.display());
                 // finish a task
                 } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
                     String[] bits = userInput.split(" ");
@@ -67,9 +67,6 @@ public class Duke {
             } catch (Exception e) {
                 ui.borderPrint(e.getMessage());
             }
-
-			// get user input
-			userInput = ui.readCommand();
         }
 		
 		// exit sequence
@@ -179,10 +176,11 @@ public class Duke {
 		saveTasks();
 	}
 	
-	private void deleteTask(int idx) throws DukeException {
+	private void deleteTask(int idx) {
 		String msg = String.format("Removed task: %s\nYou now have %d items on your todo list.",
 				tasks.remove(idx).toString(),
 				tasks.size());
+		ui.borderPrint(msg);
 		saveTasks();
 	}
 

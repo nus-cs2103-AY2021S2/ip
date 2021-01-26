@@ -31,10 +31,11 @@ public class TaskList {
         tasks.clear();
     }
 
-    public void display() {
+    public String display() {
+        StringBuilder items = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            String item = String.valueOf(i + 1) + ". " + tasks.get(i).toString();
-            System.out.println(item);
+            items.append(String.valueOf(i + 1) + ". " + tasks.get(i).toString() + "\n");
         }
+        return items.toString().trim();
     }
 }
