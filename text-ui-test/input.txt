@@ -5,10 +5,12 @@ list
 deadline
 deadline return book
 deadline return book /by Sunday
+deadline return book /by 31-01-2021 1800
 list
 event
 event project meeting
 event project meeting /at Mon 2-4pm
+event project meeting /at 29-01-2021 1300
 list
 done
 done 1
