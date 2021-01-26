@@ -1,3 +1,6 @@
+/**
+ * Command that prints the list existing in TaskList.
+ */
 public class PrintListCommand implements ICommand {
     private TaskList tasks;
 

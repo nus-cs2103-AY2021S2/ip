@@ -1,6 +1,14 @@
+/**
+ * Object representation of a deadline. Has a by date which represents the deadline of the task.
+ */
 public class Deadline extends Task{
     private String deadline;
-
+    /**
+     * Deadline
+     *
+     * @param content Task description
+     * @param deadline The deadline task has to be completed by.
+     */
     public Deadline(String content,String deadline){
         super(content);
         this.deadline = deadline;
@@ -10,6 +18,7 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]"+super.toString()+ String.format(" (by:%s)",this.parseDate(this.deadline.strip()));
     }
+
     @Override
     public String toFileString() {
         String done;
