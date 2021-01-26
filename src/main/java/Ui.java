@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Encapsulates the visuals used in chatting with user.
+ */
 public class Ui {
 
 	/**
@@ -16,10 +19,16 @@ public class Ui {
         System.out.println("----------------------------------------------------------");
     }
 
+    /**
+     * Prints a line to separate each reply.
+     */
     public void separateLine() {
     	System.out.println("----------------------------------------------------------");
     }
 
+    /**
+     * Prints a bye statement before exit.
+     */
     public void sayBye() {
     	System.out.println("Byebye~ Hope to see you again soon!");
     }

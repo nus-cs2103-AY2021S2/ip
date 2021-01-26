@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Creates a file on disk to store list of tasks.
+ */
 public class Storage {
 
 	public Storage() {
