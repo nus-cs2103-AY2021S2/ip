@@ -19,6 +19,5 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", 
             this.getStatusIcon(), super.toString(), this.by);
-        //return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
