@@ -9,12 +9,14 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filepath);
         this.isActive = true;
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showError(e);
             this.tasks = new TaskList();
         }
+
         this.commandParser = new CommandParser(tasks, ui);
     }
 
