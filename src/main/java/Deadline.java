@@ -1,12 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends AbstractTask {
-    protected String by;
+    protected LocalDate by;
 
     /*
      * Constructs a deadline task using the description and the deadline timing
      */
-    public Deadline(String description, String by) throws DukeEmptyDescriptionException {
+    public Deadline(String description, String by) throws DukeEmptyDescriptionException, DateTimeParseException {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     /*
@@ -14,6 +18,7 @@ public class Deadline extends AbstractTask {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), by);
+        String byFormatted = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return String.format("[D]%s (by: %s)", super.toString(), byFormatted);
     }
 }
