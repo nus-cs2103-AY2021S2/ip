@@ -28,8 +28,7 @@ class FastIO extends PrintWriter {
      */
     public String next() {
         while (st == null || !st.hasMoreElements()) {
-            try
-            {
+            try {
                 st = new StringTokenizer(br.readLine()); 
             } catch (IOException e) {
                 e.printStackTrace(); 
