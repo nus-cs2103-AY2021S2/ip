@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.io.IOException;
 
 /**
  * A DeleteCommand is when the user wants to delete a task from the list

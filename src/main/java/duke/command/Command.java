@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.io.IOException;
 
 /**
  * Handles the commands input from the user
@@ -18,7 +18,7 @@ public class Command {
      * Constructor to initialise the reply of the command
      * @param reply the reply of the command
      */
-    public Command(String reply){
+    public Command(String reply) {
         this.reply = reply;
     }
 
@@ -26,7 +26,7 @@ public class Command {
      * Checks if the command is "bye", in which case terminate Duke
      * @return whether the command is a ByeCommand
      */
-    public boolean getIsBye(){
+    public boolean getIsBye() {
         return this.isBye;
     }
 

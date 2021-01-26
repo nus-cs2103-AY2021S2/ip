@@ -1,16 +1,17 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-import java.io.IOException;
 
 /**
  * A DoneCommand is when the user wants to mark a task as done
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private int index;
 

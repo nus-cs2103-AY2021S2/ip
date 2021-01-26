@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * A DeadlineCommand is the command when the user wants to add a deadline task

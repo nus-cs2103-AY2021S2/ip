@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * An Event is an instance of a task happening /at a particular date
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate at;
 
@@ -14,7 +14,7 @@ public class Event extends Task{
      * @param description description of the event
      * @param at date that the event takes place
      */
-    public Event(String description, LocalDate at){
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
         this.type = "event";
@@ -24,7 +24,7 @@ public class Event extends Task{
      * Gets the date the event occurs
      * @return the date of the event
      */
-    public String getAt(){
+    public String getAt() {
         return this.at.toString();
     }
 

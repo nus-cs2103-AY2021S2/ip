@@ -3,13 +3,13 @@ package duke.task;
 /**
  * A Todo type of task.
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructor to initialise a todo task with a description
      * @param description the decription of the task
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
         this.type = "todo";
     }

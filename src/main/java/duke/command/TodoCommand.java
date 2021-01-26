@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Todo;
 
-import java.io.IOException;
 
 /**
  * A TodoCommand is when the user wants to add a todo task to the list

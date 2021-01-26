@@ -12,7 +12,7 @@ public class Task {
      * Constructor which initialises the description of a task and sets it as not done
      * @param description task description
      */
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.type = "task";
@@ -22,7 +22,7 @@ public class Task {
      * Gets an icon based on the status of the task
      * @return tick if done, blank if not
      */
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         //return tick symbol if done
         return (isDone ? "\u2713" : " ");
     }
@@ -30,7 +30,7 @@ public class Task {
     /**
      * Sets the task as done
      */
-    public void done(){
+    public void done() {
         this.isDone = true;
     }
 
@@ -38,7 +38,7 @@ public class Task {
      * Gets the type of the task, todo, deadline or event.
      * @return type of the task
      */
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
@@ -46,7 +46,7 @@ public class Task {
      * Gets the description of the task
      * @return the description of the task
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
@@ -54,7 +54,7 @@ public class Task {
      * Gets the done status of the task
      * @return T if done, F if not
      */
-    public String getIsDone(){
+    public String getIsDone() {
         return (this.isDone) ? "T" : "F";
     }
 

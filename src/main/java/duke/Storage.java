@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +10,13 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * Storage class to handle saving and loading data in the TaskList
@@ -31,7 +33,7 @@ public class Storage {
     public Storage() {
         this.path = Paths.get(location);
         File file = new File(location);
-        if(Files.notExists(this.path)){
+        if (Files.notExists(this.path)) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -47,22 +49,27 @@ public class Storage {
      */
     public void storeData(ArrayList<Task> list) throws IOException{
         FileWriter file = new FileWriter(this.location);
-        for(Task t: list){
+        for (Task t: list) {
             String data = "";
 
-            switch(t.getType()){
-                case "todo":{
-                    data = String.format("%s|%s|%s", t.getType(), t.getDescription(), t.getIsDone());
-                    break;
-                }
-                case "event":{
-                    data = String.format("%s|%s|%s|%s", t.getType(), t.getDescription(), ((Event)t).getAt(), t.getIsDone());
-                    break;
-                }
-                case "deadline":{
-                    data = String.format("%s|%s|%s|%s", t.getType(), t.getDescription(), ((Deadline)t).getBy(), t.getIsDone());
-                    break;
-                }
+            switch(t.getType()) {
+            case "todo": {
+                data = String.format("%s|%s|%s", t.getType(), t.getDescription(), t.getIsDone());
+                break;
+            }
+            case "event": {
+                data = String.format("%s|%s|%s|%s",
+                        t.getType(), t.getDescription(), ((Event) t).getAt(), t.getIsDone());
+                break;
+            }
+            case "deadline": {
+                data = String.format("%s|%s|%s|%s",
+                        t.getType(), t.getDescription(), ((Deadline) t).getBy(), t.getIsDone());
+                break;
+            }
+            default: {
+                break;
+            }
             }
             file.write(data + "\n");
         }

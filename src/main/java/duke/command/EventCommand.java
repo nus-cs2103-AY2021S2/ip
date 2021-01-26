@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * An EventCommand is when the user wants to add an event task to the list
@@ -21,7 +21,7 @@ public class EventCommand extends Command{
      * @param task the task description
      * @param at when the event is /at
      */
-    public EventCommand(String task, LocalDate at){
+    public EventCommand(String task, LocalDate at) {
         super("");
         this.description = task;
         this.at = at;

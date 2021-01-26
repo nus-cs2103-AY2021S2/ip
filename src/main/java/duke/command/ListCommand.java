@@ -7,12 +7,12 @@ import duke.Ui;
 /**
  * A ListCommand is when the user wants to view the current list of tasks
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Initialises the reply, for the tasks to be added on to
      */
-    public ListCommand(){
+    public ListCommand() {
         super("");
     }
 
@@ -28,9 +28,13 @@ public class ListCommand extends Command{
         for (int i = 0; i < list.getSize(); i++) {
             sb.append("\t");
             sb.append(i + 1).append(". ").append(list.getItem(i));
-            if (i != list.getSize() - 1) sb.append("\n");
+            if (i != list.getSize() - 1) {
+                sb.append("\n");
+            }
         }
-        if (list.getSize() == 0) sb.append("\tYour list is empty!");
+        if (list.getSize() == 0) {
+            sb.append("\tYour list is empty!");
+        }
         this.reply = sb.toString();
         ui.reply(this.reply);
     }

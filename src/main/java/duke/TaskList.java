@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Handles the ArrayList representing the list of tasks
@@ -14,7 +14,7 @@ public class TaskList {
      * Constructor for the TaskList
      * @param list the list comprising the tasks
      */
-    public TaskList(ArrayList<Task> list){
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
@@ -29,7 +29,7 @@ public class TaskList {
      * Adds a task to the list
      * @param t the task to be added
      */
-    public void addTask(Task t){
+    public void addTask(Task t) {
         this.list.add(t);
     }
 
@@ -37,7 +37,7 @@ public class TaskList {
      * Deletes a task from the list
      * @param index the index of the list to be deleted
      */
-    public void deleteTask(int index){
+    public void deleteTask(int index) {
         this.list.remove(index);
     }
 
@@ -45,7 +45,7 @@ public class TaskList {
      * Gets the size of the list of tasks
      * @return the size of the list
      */
-    public int getSize(){
+    public int getSize() {
         return this.list.size();
     }
 
@@ -53,7 +53,7 @@ public class TaskList {
      * Gets the list of tasks
      * @return the list of tasks
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.list;
     }
 
@@ -62,7 +62,7 @@ public class TaskList {
      * @param index the index of the item
      * @return the item in that index in the list
      */
-    public Task getItem(int index){
+    public Task getItem(int index) {
         return this.list.get(index);
     }
 
