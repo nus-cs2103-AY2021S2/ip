@@ -6,11 +6,12 @@ public class Ui {
     public Ui(){
     }
 
-    protected void addTask(Task task, int size){
+    protected String addTask(Task task, int size){
         String output = Duke.line + "\n" + " Got it. I've added this task: \n"
                 + task.printNew() + "\n Now you have " + size
                 + " tasks in the list" + "\n" + Duke.line;
         Duke.print(output);
+        return output; // for testing
     }
 
     protected void doTask(Task task){
