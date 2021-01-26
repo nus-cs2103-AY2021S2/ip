@@ -1,10 +1,10 @@
 package duke.storage;
 
 import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
 import duke.utils.Command;
 import duke.utils.DateTime;
 
@@ -42,18 +42,18 @@ public class Storage {
                 Command taskType = Command.valueOf(tokens[0]);
                 Task task;
 
-                switch(taskType) {
-                    case EVENT:
-                        task = new Event(tokens[2], DateTime.parseDate(tokens[3]));
-                        break;
-                    case DEADLINE:
-                        task = new Deadline(tokens[2], DateTime.parseDate(tokens[3]));
-                        break;
-                    case TODO:
-                        task = new Todo(tokens[2]);
-                        break;
-                    default:
-                        throw new DukeException("Sorry something when wrong loading your safe file :(");
+                switch (taskType) {
+                case EVENT:
+                    task = new Event(tokens[2], DateTime.parseDate(tokens[3]));
+                    break;
+                case DEADLINE:
+                    task = new Deadline(tokens[2], DateTime.parseDate(tokens[3]));
+                    break;
+                case TODO:
+                    task = new Todo(tokens[2]);
+                    break;
+                default:
+                    throw new DukeException("Sorry something when wrong loading your safe file :(");
                 }
 
                 if (tokens[1].equals("true")) {
@@ -75,7 +75,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             StringBuilder sb = new StringBuilder();
 
-            for (Task task : tasks)  {
+            for (Task task : tasks) {
                 sb.append(task.serialise()).append('\n');
             }
 

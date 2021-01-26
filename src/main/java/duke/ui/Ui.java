@@ -15,7 +15,7 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public static void printWithIndentation(String ... strings) {
+    public static void printWithIndentation(String... strings) {
         System.out.println(INDENT + LINE_BREAK);
 
         for (String s : strings) {
