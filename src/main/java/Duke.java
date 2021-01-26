@@ -1,8 +1,4 @@
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
 
 /*
 Need to address:
@@ -16,7 +12,7 @@ Need to address:
 public class Duke {
     public static void main(String[] args) throws IOException {
         Ui.greet();
-        TaskList.check_file_folder_specifications();
+        TaskList.checkFileFolderSpecifications();
         Parser.parse();
     }
 }

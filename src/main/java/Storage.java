@@ -2,13 +2,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+
 public class Storage {
 
-    static int upload_from_hard_drive(ArrayList<Task> storage) throws FileNotFoundException {
+    static int uploadFromHardDrive(ArrayList<Task> storage) throws FileNotFoundException {
         int count = 0;
         File f = new File("./data/tasks.txt");
         Scanner s = new Scanner(f);
@@ -17,18 +19,19 @@ public class Storage {
             String[] spl = s.nextLine().split("@@@", 4);
             Task to_add;
             switch(spl[0]) {
-                case "T":
-                    to_add = new todo(spl[2]);
-                    break;
-                case "D":
-                    to_add = new deadline(spl[2], LocalDate.parse(spl[3]));
-                    break;
-                case "E":
-                    to_add = new event(spl[2], LocalDate.parse(spl[3]));
-                    break;
-                default:
-                    to_add = new todo("error");
+            case "T":
+                to_add = new Todo(spl[2]);
+                break;
+            case "D":
+                to_add = new Deadline(spl[2], LocalDate.parse(spl[3]));
+                break;
+            case "E":
+                to_add = new Event(spl[2], LocalDate.parse(spl[3]));
+                break;
+            default:
+                to_add = new Todo("error");
             }
+
             if (spl[1].equals("1")) {
                 to_add.finished();
             }
@@ -37,18 +40,18 @@ public class Storage {
         return count;
     }
 
-    static void upload_to_hard_drive(ArrayList<Task>
+    static void uploadToHardDrive(ArrayList<Task>
                                              storage) throws IOException {
         FileWriter fw = new FileWriter("./data/tasks.txt");
         String between = "@@@";
         for (Task t : storage) {
-            String zero = t.get_initial();
-            String one =  t.get_done();
-            String two = t.get_description();
+            String zero = t.getInitial();
+            String one =  t.getDone();
+            String two = t.getDescription();
             if (zero.equals("T")) {
                 fw.write(zero + between + one + between + two + "\n");
             } else {
-                LocalDate three = t.get_date();
+                LocalDate three = t.getDate();
                 fw.write(zero + between + one + between + two + between + three + "\n");
             }
         }

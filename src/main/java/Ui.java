@@ -18,19 +18,19 @@ public class Ui {
         return LINE + SPACE + "ERROR! D: The format for the following task is wrong: " + task + LINE;
     }
 
-    public static void output_message_task(String keyword, Task task) {
+    public static void outputMessageTask(String keyword, Task task) {
         System.out.println(LINE + SPACE + "Done adding the " + keyword + " Task: " + task + LINE);
     }
 
-    public static void output_message_done(Task task) {
+    public static void outputMessageDone(Task task) {
         System.out.println(LINE + SPACE + "Good job! Another Task completed! I have marked it as done:\n" + SPACE + task + LINE);
     }
 
-    public static void output_message_delete(Task task) {
+    public static void outputMessageDelete(Task task) {
         System.out.println(LINE + SPACE + "Deleted the following task: " + task + LINE);
     }
 
-    public static void output_message_list(ArrayList<Task> storage, int count) {
+    public static void outputMessageList(ArrayList<Task> storage, int count) {
         System.out.println(LINE);
         for (int i = 1; i <= count; i++) {
             System.out.println(SPACE + i + ". " + storage.get(i-1));
@@ -38,7 +38,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public static void output_message_bye() {
+    public static void outputMessageBye() {
         System.out.println(LINE + SPACE + "Byee, hope to see you again soon!" + LINE);
     }
 }

@@ -2,40 +2,40 @@ import java.time.LocalDate;
 
 public abstract class Task {
     protected String description;
-    protected boolean done = false;
+    protected boolean isDone = false;
 
     public Task(String description) {
         this.description = description;
     }
 
+    public abstract String getInitial();
+    public abstract LocalDate getDate();
+
     public void finished() {
-        done = true;
+        isDone = true;
     }
 
-    protected String statusicon() {
-        if (done) {
+    protected String statusIcon() {
+        if (isDone) {
             return "[X] ";
         } else {
             return "[ ] ";
         }
     }
 
-    public String get_done() {
-        if (done) {
+    public String getDone() {
+        if (isDone) {
             return "1";
         }
         return "0";
     }
 
-    public String get_description() {
+    public String getDescription() {
         return description;
     }
 
-    public abstract String get_initial();
-    public abstract LocalDate get_date();
-
     @Override
     public String toString() {
-        return this.statusicon() + description;
+        return this.statusIcon() + description;
     }
 }
