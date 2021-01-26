@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
     private final LocalDateTime startDate;
@@ -14,6 +15,11 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to %s)", super.toString(), startDate, endDate);
+        return String.format(
+                "[E]%s (from: %s to %s)",
+                super.toString(),
+                startDate.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma")),
+                endDate.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma"))
+        );
     }
 }

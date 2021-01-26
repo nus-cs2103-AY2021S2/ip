@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DeadlineTask extends Task {
     private final LocalDateTime deadline;
@@ -12,6 +13,10 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format(
+                "[D]%s (by: %s)",
+                super.toString(),
+                deadline.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma"))
+        );
     }
 }
