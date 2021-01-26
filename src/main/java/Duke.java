@@ -12,9 +12,114 @@ import java.time.temporal.ChronoUnit;
 import java.time.LocalTime;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
 
-        // open FastIO to read input
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            taskList = new TaskList(storage.readFile());
+        } catch (DukeException e) {
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() throws DukeException {
+
+        ui.displayWelcomeMessage();
+
+        FastIO reader = new FastIO();
+        String input = reader.nextLine();
+        Parser parser = new Parser(input);
+
+        try {
+            while (true) {
+
+                String command = parser.getCommand();
+
+                // user exits the program
+                if (command.equals("bye")) {
+                    ui.displayClosingMessage();
+                    break;
+
+                    // user wants list of tasks
+                } else if (command.equals("list")) {
+                    ui.displayListMessage(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                    // user wants to complete a task
+                } else if (command.equals("done")) {
+                    int index = parser.getIndexToModify();
+                    taskList = taskList.completeTask(index);
+                    ui.displayTaskCompleted(taskList.getTask(index));
+                    storage.writeFile(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                    // user wants to delete a task
+                } else if (command.equals("delete")) {
+                    int index = parser.getIndexToModify();
+                    Task task = taskList.getTask(index);
+                    taskList = taskList.deleteTask(index);
+                    ui.displayTaskDeleted(task, taskList);
+                    storage.writeFile(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                    // user wants to add a ToDo
+                } else if (command.equals("todo")) {
+                    String taskDesc = parser.getTaskDescription();
+                    ToDo newTask = new ToDo(taskDesc);
+                    taskList = taskList.addTask(newTask);
+                    ui.displayTaskAdded(newTask, taskList);
+                    storage.writeFile(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                    // user wants to add a Deadline
+                } else if (command.equals("deadline")) {
+                    String taskDesc = parser.getTaskDescription();
+                    LocalDate date = LocalDate.parse(parser.getDate(),
+                            DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    LocalTime time = LocalTime.parse(parser.getTime(),
+                            DateTimeFormatter.ofPattern("HHmm"));
+
+                    Deadline newTask = new Deadline(taskDesc, date, time);
+                    taskList = taskList.addTask(newTask);
+                    ui.displayTaskAdded(newTask, taskList);
+                    storage.writeFile(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                    // user wants to add an Event
+                } else if (command.equals("event")) {
+                    String taskDesc = parser.getTaskDescription();
+                    LocalDate date = LocalDate.parse(parser.getDate(),
+                            DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    LocalTime time = LocalTime.parse(parser.getTime(),
+                            DateTimeFormatter.ofPattern("HHmm"));
+
+                    Event newTask = new Event(taskDesc, date, time);
+                    taskList = taskList.addTask(newTask);
+                    ui.displayTaskAdded(newTask, taskList);
+                    storage.writeFile(taskList);
+                    parser = parser.newInput(reader.nextLine());
+
+                } else {
+                    throw new DukeException("unknown");
+                }
+            }
+
+        } catch (DukeException e) {
+            System.out.println(e.errorMessage());
+
+        } finally {
+            reader.close();
+        }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke("dukeTaskList.txt").run();
+        /* // open FastIO to read input
         FastIO reader = new FastIO();
 
         // greeting for user to see
@@ -202,93 +307,8 @@ public class Duke {
         } finally {
             // close FastIO to print exit statement
             reader.close();
-        }
+        } */
     }
 
-    private static ArrayList<Task> readFile(File file) {
-
-        ArrayList<Task> output = new ArrayList<>();
-
-        try {
-            Scanner scanner = new Scanner(file);
-
-        Task toAdd;
-
-        while (scanner.hasNext()) {
-            String taskLine = scanner.nextLine();
-            String[] split = taskLine.split(" ");
-            String taskType = split[0];
-            String taskDone = split[1];
-            boolean done = taskDone.equals("1");
-            String task = "";
-            String date = "";
-
-            int counter;
-            outerloop:
-            for (counter = 2; counter < split.length; counter++) {
-                if (split[counter].startsWith("-")) {
-                    break outerloop;
-                } else {
-                    if (counter == 1) {
-                        task = task + split[counter];
-                    } else {
-                        task = task + " " + split[counter];
-                    }
-                }
-            }
-
-            boolean first = true;
-            for (counter = counter + 1; counter < split.length; counter++) {
-                if (first) {
-                    date = date + split[counter];
-                    first = false;
-                } else {
-                    date = date + " " + split[counter];
-                }
-            }
-
-            if (taskType.equals("E")) {
-                toAdd = new Event(task, date);
-            } else if (taskType.equals("D")) {
-                toAdd = new Deadline(task, date);
-            } else {
-                toAdd = new ToDo(task);
-            }
-
-            if (done) {
-                toAdd.completeTask();
-            }
-
-            output.add(toAdd);
-        }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Error, file not found. BUG!");
-        }
-
-        return output;
-    }
-
-    private static void writeFile(ArrayList<Task> arr, File file) {
-
-        try {
-            FileWriter fileWriter = new FileWriter(file);
-            String toWrite = "";
-
-            for (int i = 0; i < arr.size(); i++) {
-                if (i == arr.size()) {
-                    toWrite = toWrite + arr.get(i).taskStatus();
-                } else {
-                    toWrite = toWrite + arr.get(i).taskStatus() + "\n";
-                }
-            }
-
-            fileWriter.write(toWrite);
-            fileWriter.close();
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
 

@@ -31,12 +31,12 @@ public class Deadline extends Task {
             return "D 1 "
                     + this.getTask_details()
                     + " (by: " + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
-                    + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
+                    + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         } else {
             return "D 0 "
                     + this.getTask_details()
                     + " (by: " + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
-                    + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
+                    + deadlineTime.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
         }
     }
 }

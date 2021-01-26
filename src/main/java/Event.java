@@ -30,13 +30,13 @@ public class Event extends Task {
             if (this.isDone()) {
                 return "E 1 "
                         + this.getTask_details()
-                        + " (by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
-                        + time.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
+                        + " (on: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                        + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
             } else {
                 return "E 0 "
                         + this.getTask_details()
-                        + " (by: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
-                        + time.format(DateTimeFormatter.ofPattern("HHmm")) + ")";
+                        + " (on: " + date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + " "
+                        + time.format(DateTimeFormatter.ofPattern("HHmm")) + " )";
             }
         }
 }

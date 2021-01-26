@@ -13,7 +13,11 @@ public class DukeException extends Exception {
 
     public String errorMessage() {
         if (unknown) {
-            return " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } else if (this.getMessage().equals("loading error")) {
+            return "☹ OOPS!!! No file found.";
+        } else if (this.getMessage().equals("delete")) {
+            return "☹ OOPS!!! You must state which task to delete.";
         } else {
             return "☹ OOPS!!! The description of a " + this.getMessage() + " cannot be empty.";
         }
