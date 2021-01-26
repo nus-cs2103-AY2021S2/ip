@@ -74,6 +74,16 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    public TaskList findAll(String criteria) {
+        List<Task> tempTask = new ArrayList<Task>();
+        for (Task task: tasks) {
+            if (task.getName().contains(criteria)) {
+                tempTask.add(task);
+            }
+        }
+        return new TaskList(tempTask, this.storage);
+    }
+
     /**
      * Filters the current list of Tasks and returns a new list of tasks with the specified date.
      * @param date: Filter date in LocalDate

@@ -25,6 +25,10 @@ public class Task {
         this.status = true;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Retrieves date of task
      * @return LocalDate: date of task
