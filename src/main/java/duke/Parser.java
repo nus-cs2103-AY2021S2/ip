@@ -1,10 +1,11 @@
+package duke;
 import java.util.Scanner;
 
 public class Parser {
     public Parser(){
     }
 
-    public void start(Duke duke,TaskList taskList, Ui ui){
+    protected void start(Duke duke,TaskList taskList, Ui ui){
         Scanner sc = new Scanner(System.in);
         String scannedLine = sc.nextLine();
         while (duke.isOn) {
@@ -18,7 +19,7 @@ public class Parser {
         }
     }
 
-    public void handleCommand(Duke duke,String currLine, TaskList taskList, Ui ui) throws Exception {
+    protected void handleCommand(Duke duke,String currLine, TaskList taskList, Ui ui) throws Exception {
         // basic commands
         currLine = currLine.toLowerCase();
         String[] parsedLine = currLine.split(" ");

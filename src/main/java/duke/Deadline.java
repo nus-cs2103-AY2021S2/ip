@@ -1,12 +1,15 @@
+package duke;
+
+
 public class Deadline extends Task{
     private String info;
-    public Deadline(String taskLine) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
+    protected Deadline(String taskLine) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
         super(taskLine);
         checkTask(taskLine);
         buildInfo();
     }
 
-    private void checkTask(String taskLine) throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+    protected void checkTask(String taskLine) throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
         if (taskLine.length() < 2) {
             throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
         } else if (!taskLine.contains("/by")) {
@@ -31,7 +34,7 @@ public class Deadline extends Task{
         return info;
     }
     @Override
-    public String type(){
+    protected String type(){
         return "D";
     }
 }

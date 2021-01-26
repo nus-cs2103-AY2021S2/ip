@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -10,7 +12,7 @@ public class Task {
     String dateTime;
     LocalDate date;
 
-    public Task(String taskLine) {
+    protected Task(String taskLine) {
         this.taskLine = taskLine;
         this.name = "";
         this.dateTime = "";

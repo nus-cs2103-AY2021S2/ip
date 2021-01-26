@@ -1,3 +1,4 @@
+package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -17,7 +18,7 @@ public class FileReading {
         return output;
     }
 
-    public static String readFile(String args) {
+    protected static String readFile(String args) {
         String output = "";
         try {
             output = printFileContents(args);

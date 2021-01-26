@@ -1,3 +1,5 @@
+package duke;
+
 public class Storage {
     String taskListStr;
     String filePath;
@@ -6,14 +8,14 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void getLastSave(TaskList taskList){
+    protected void getLastSave(TaskList taskList){
         this.taskListStr = FileReading.readFile(filePath);
         System.out.println("These are the tasks on your todolist");
         System.out.println(taskListStr);
         addSavedTasks(taskList);
     }
 
-    private  void addSavedTasks(TaskList taskList){
+    protected  void addSavedTasks(TaskList taskList){
         String[] lines = taskListStr.split("\n");
         for (int i = 0; i < lines.length ; i++) {
             if (!lines[i].contains(Duke.line)) {
@@ -36,7 +38,7 @@ public class Storage {
         }
     }
 
-    public static void save(Ui ui, TaskList taskList){
+    protected static void save(Ui ui, TaskList taskList){
         FileWriting.writeToFile(ui.listTasks(taskList));
     }
 }

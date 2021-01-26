@@ -1,3 +1,4 @@
+package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 /*
@@ -11,7 +12,7 @@ public class FileWriting {
         fw.close();
     }
 
-    public static void writeToFile( String string) {
+    protected static void writeToFile( String string) {
         String file2 = "data/duke.txt";
         try {
             writeToFile(file2,string );

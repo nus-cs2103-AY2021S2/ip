@@ -1,6 +1,5 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+package duke;
+
 /*
 Code was refractored after week 2
 Credit of light reuse: James Lee
@@ -22,12 +21,7 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.start();
-    }
-
-    public static void print(String s) {
+    protected static void print(String s) {
         System.out.println(s);
     }
 
