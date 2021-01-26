@@ -91,6 +91,19 @@ public class TaskList {
         );
     }
 
+    public String findTask(HashMap<String, String> argMap) throws NoSuchElementException {
+        if (!argMap.containsKey("desc")) {
+            throw new NoSuchElementException("Error: Search keyword cannot be empty.");
+        }
+
+        return "Tasks that match \"" + argMap.get("desc") + "\": \n" + Formatter.formatList(taskList
+                .stream()
+                .map(Task::toString)
+                .filter(t -> t.contains(argMap.get("desc")))
+                .collect(Collectors.toList())
+        );
+    }
+
     public boolean saveToDisk() {
         StringBuilder saveLines = new StringBuilder();
         for (Task t: taskList) {

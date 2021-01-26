@@ -45,6 +45,8 @@ public class Sweh {
                     return taskList.addTask(Deadline.newInstance(argMap));
                 case "event":
                     return taskList.addTask(Event.newInstance(argMap));
+                case "find":
+                    return taskList.findTask(argMap);
                 case "bye":
                     return "Bye. See ya again soon!";
                 default:
