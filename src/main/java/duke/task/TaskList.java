@@ -97,49 +97,49 @@ public class TaskList {
     public void addTask(String type, String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         switch (type) {
-            case "todo":
-                if (inputArr.length == 1) {
-                    throw new DukeException("       OOPS!!! The description of a todo cannot be empty.");
+        case "todo":
+            if (inputArr.length == 1) {
+                throw new DukeException("       OOPS!!! The description of a todo cannot be empty.");
+            } else {
+                this.tasks.add(new Todo(0, fullCommand.substring(5)));
+            }
+            break;
+        case "deadline":
+            if (inputArr.length == 1) {
+                throw new DukeException("       OOPS!!! The description and due date "
+                        + "of a deadline cannot be empty.");
+            } else {
+                String[] details = fullCommand.substring(9).split(" /by ");
+                if (details.length == 1) {
+                    throw new DukeException("       OOPS!!! The due date of a deadline "
+                            + "cannot be empty.");
                 } else {
-                    this.tasks.add(new Todo(0, fullCommand.substring(5)));
-                }
-                break;
-            case "deadline":
-                if (inputArr.length == 1) {
-                    throw new DukeException("       OOPS!!! The description and due date "
-                            + "of a deadline cannot be empty.");
-                } else {
-                    String[] details = fullCommand.substring(9).split(" /by ");
-                    if (details.length == 1) {
-                        throw new DukeException("       OOPS!!! The due date of a deadline "
-                                + "cannot be empty.");
-                    } else {
-                        try {
-                            this.tasks.add(new Deadline(0, details[0], LocalDate.parse(details[1])));
-                        } catch (DateTimeParseException ex) {
-                            throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
-                        }
+                    try {
+                        this.tasks.add(new Deadline(0, details[0], LocalDate.parse(details[1])));
+                    } catch (DateTimeParseException ex) {
+                        throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
                     }
                 }
-                break;
-            case "event":
-                if (inputArr.length == 1) {
-                    throw new DukeException("       OOPS!!! The description and time frame "
-                            + "of an event cannot be empty.");
+            }
+            break;
+        case "event":
+            if (inputArr.length == 1) {
+                throw new DukeException("       OOPS!!! The description and time frame "
+                        + "of an event cannot be empty.");
+            } else {
+                String[] details = fullCommand.substring(6).split(" /at ");
+                if (details.length == 1) {
+                    throw new DukeException("       OOPS!!! The time frame of an event "
+                            + "cannot be empty.");
                 } else {
-                    String[] details = fullCommand.substring(6).split(" /at ");
-                    if (details.length == 1) {
-                        throw new DukeException("       OOPS!!! The time frame of an event "
-                                + "cannot be empty.");
-                    } else {
-                        try {
-                            this.tasks.add(new Event(0, details[0], LocalDate.parse(details[1])));
-                        } catch (DateTimeParseException ex) {
-                            throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
-                        }
+                    try {
+                        this.tasks.add(new Event(0, details[0], LocalDate.parse(details[1])));
+                    } catch (DateTimeParseException ex) {
+                        throw new DukeException("       OOPS!!! The date has to be in the format yyyy-mm-dd.");
                     }
                 }
-                break;
+            }
+            break;
         }
         System.out.println("     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"

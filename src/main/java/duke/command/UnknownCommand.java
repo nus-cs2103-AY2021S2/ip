@@ -31,5 +31,7 @@ public class UnknownCommand extends Command {
      * @return False to continue the program.
      */
     @Override
-    public boolean isExit() { return false; }
+    public boolean isExit() {
+        return false;
+    }
 }

@@ -64,21 +64,21 @@ public class Storage {
             throw new DukeException("File not found.");
         }
         ArrayList<Task> tasks = new ArrayList<>();
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String[] currTask = sc.nextLine().split(" // ");
             String type = currTask[0];
             switch (type) {
-                case "T":
-                    tasks.add(new Todo(Integer.parseInt(currTask[1]), currTask[2]));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(Integer.parseInt(currTask[1]),
-                            currTask[2], LocalDate.parse(currTask[3])));
-                    break;
-                case "E":
-                    tasks.add(new Event(Integer.parseInt(currTask[1]),
-                            currTask[2], LocalDate.parse(currTask[3])));
-                    break;
+            case "T":
+                tasks.add(new Todo(Integer.parseInt(currTask[1]), currTask[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(Integer.parseInt(currTask[1]),
+                        currTask[2], LocalDate.parse(currTask[3])));
+                break;
+            case "E":
+                tasks.add(new Event(Integer.parseInt(currTask[1]),
+                        currTask[2], LocalDate.parse(currTask[3])));
+                break;
             }
         }
         return tasks;

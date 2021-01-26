@@ -12,8 +12,8 @@ import duke.ui.Ui;
  */
 public class Duke {
     private final Storage storage;
-    private TaskList taskList;
     private final Ui ui;
+    private TaskList taskList;
 
     /**
      * Constructs Duke chatbot.
@@ -30,13 +30,17 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     /**
      * Runs Duke chatbot.
      */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
@@ -49,9 +53,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
