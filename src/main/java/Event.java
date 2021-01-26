@@ -16,7 +16,8 @@ public class Event extends Task{
         String[] parsedTask = taskLine.split("event");
         parsedTask = parsedTask[1].split("/at");
         this.name = parsedTask[0].strip();
-        this.dateTime = parsedTask[0].strip();
+        this.dateTime = parsedTask[1].strip();
+        setDateTimeLD(dateTime);
         this.info = name + " at: " + dateTime ;
     }
 

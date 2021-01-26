@@ -19,6 +19,7 @@ public class Deadline extends Task{
         parsedTask = parsedTask[1].split("/by");
         this.name = parsedTask[0].strip();
         this.dateTime = parsedTask[1].strip();
+        setDateTimeLD(dateTime);
         this.info = name + " by: " + dateTime;
     }
 

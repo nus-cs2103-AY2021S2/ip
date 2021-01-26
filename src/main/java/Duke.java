@@ -13,6 +13,7 @@ public class Duke {
         Save save = new Save(duke);
         save.getLastSave();
         save.run();
+
     }
 
     public static void print(String s) {
