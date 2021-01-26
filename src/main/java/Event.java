@@ -17,6 +17,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String saveTask() {
+        return String.format("E | %s | %s | %s\n", super.getStatusIcon(),
+                description, duration);
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + duration + ")";
     }

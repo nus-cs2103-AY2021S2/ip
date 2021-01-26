@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -14,12 +14,11 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
-        //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public Task finishTask() {
-        return new Task(this.description, true);
-    }
+    public abstract Task finishTask();
+
+    public abstract String saveTask();
 
     @Override
     public String toString() {

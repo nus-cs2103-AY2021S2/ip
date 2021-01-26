@@ -1,6 +1,11 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.StringBuilder;
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
+
 
 public class DukeSimulator {
     private final String line = "    ____________________________________________________________\n";
@@ -18,12 +23,6 @@ public class DukeSimulator {
     }
 
     public void greeting() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
         System.out.print(line + greeting + line);
     }
@@ -40,6 +39,7 @@ public class DukeSimulator {
         command = sc.nextLine();
         while(!command.equals("bye")) {
             processCmd(command);
+            System.out.println(line + tasks() + line);
             command = sc.nextLine();
         }
         bye();
@@ -83,9 +83,9 @@ public class DukeSimulator {
         String taskCount =
                 String.format("     Now you have %d task(s) in the list\n",
                         taskList.size());
-        String addTask = line + "     Got it. I've added this task:\n"
+        String addedTask = line + "     Got it. I've added this task:\n"
                 + "\t" + t.toString() + "\n" + taskCount + line;
-        System.out.print(addTask);
+        System.out.print(addedTask);
     }
 
     private Task toDoMaker(String command) throws DukeMissingDescriptionException {
@@ -96,9 +96,33 @@ public class DukeSimulator {
         }
     }
 
-//    private Task deadlineMaker(String command) {
+//    private deadLineMaker(String command) throws DukeException {
+//        String[] parsedCmd = command.split(" /by ", 2);
+//        if(pasedCmd.length == 1) {
 //
+//        }
 //    }
+
+//    private void save() {
+//        try {
+//            Path dataPath = Paths.get(DATA_DIR);
+//            Files.createDirectories(dataPath);
+//            File saveFile = new File("./data/save.txt");
+//            FileWriter fw = new FileWriter(saveFile);
+//            fw.write(tasks());
+//            fw.close();
+//        } catch(IOException e) {
+//
+//        }
+//    }
+
+    private String tasks() {
+        StringBuilder sb = new StringBuilder("");
+        for(Task t : taskList) {
+            sb.append(t.saveTask());
+        }
+        return sb.toString();
+    }
 
     private void printList() {
         int index = 1;
@@ -110,7 +134,7 @@ public class DukeSimulator {
         System.out.print(line);
     }
 
-    public void doneTask(String s) {
+    private void doneTask(String s) {
         int taskNum = Integer.valueOf(s);
         Task t = taskList.get(taskNum - 1);
         t = t.finishTask();
@@ -120,7 +144,7 @@ public class DukeSimulator {
         System.out.print(line + statement + line);
     }
 
-    public void deleteTask(String s) {
+    private void deleteTask(String s) {
         int taskNum = Integer.valueOf(s);
         Task t = taskList.get(taskNum - 1);
         taskList.remove(taskNum - 1);
