@@ -1,9 +1,9 @@
 /**
  * An implementation of the Task class that represents Deadline Tasks.
- *
+ * <p>
  * Deadline tasks are tasks that take a description, track whether they are done or not,
  * and take a /by parameter, specifying the Deadline time of the Deadline.
- *
+ * <p>
  * The Deadline class is visually represented with the prefix: [D]
  *
  * @author Douglas Wei Jing Allwood

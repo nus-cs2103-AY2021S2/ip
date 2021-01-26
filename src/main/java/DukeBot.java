@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * DukeBot is the controller class for the CLI chat-bot Duke.
- *
+ * <p>
  * DukeBot parses user input Strings for valid commands and thus only
  * allows valid commands to be sent to the TaskManager.
  *
@@ -23,7 +23,7 @@ public class DukeBot {
     /**
      * Activates the chat-bot so that it keeps taking inputs from the user via System.in
      * until the "bye" input is given.
-     *
+     * <p>
      * The run method ensures that the user has provided a valid command, otherwise it
      * prints out a warning message.
      */

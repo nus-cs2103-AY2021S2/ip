@@ -1,9 +1,9 @@
 /**
  * An implementation of the Task class that represents Event Tasks.
- *
+ * <p>
  * Event tasks are tasks that take a description, track whether they are done or not,
  * and take an /at parameter, specifying the Date & Location of the Event.
- *
+ * <p>
  * The Event class is visually represented with the prefix: [E]
  *
  * @author Douglas Wei Jing Allwood

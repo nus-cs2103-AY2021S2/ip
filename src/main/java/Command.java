@@ -3,9 +3,9 @@ import java.util.HashMap;
 
 /**
  * Command is an Enum class that handles valid commands to the DukeBot chat-bot.
- *
+ * <p>
  * The possible valid commands are:
- *   LIST
+ * LIST
  *
  * @author Douglas Wei Jing Allwood
  * @author douglas_allwood@u.nus.edu

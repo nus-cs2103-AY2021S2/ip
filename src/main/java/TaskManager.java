@@ -3,15 +3,15 @@ import java.util.ArrayList;
 
 /**
  * A controller class that manages the Tasks of each User of the DukeBot.
- *
+ * <p>
  * The purpose of this class is to allow DukeBot to be used concurrently
  * by multiple users by separating static-level Task members that should
  * not be shared by all Users of the Task class.
- *
+ * <p>
  * Note, this class assumes that it has been correctly called by the DukeBot
  * and that the only possible source of errors are in the User description
  * String. (I.e. Assumes the Commands provided are correct or appropriate)
- *
+ * <p>
  * Functionality:
  * 1. Create, store, and delete Tasks
  * 2. Store meta data about Tasks (e.g. count)
@@ -29,7 +29,7 @@ public class TaskManager {
     /**
      * Main access point of the TaskManager API which handles all Task functionality.
      *
-     * @param taskType A Command Enum representing the relevant command for the given description
+     * @param taskType    A Command Enum representing the relevant command for the given description
      * @param description User input String that should NOT contain the command string
      *                    E.g. If the user supplies "todo Eat cake" then the description is "eat cake"
      */
@@ -37,32 +37,32 @@ public class TaskManager {
         description = description.strip(); // Remove surrounding whitespace
         try {
             switch (taskType) {
-                case LIST:
-                    this.listAll(description);
-                    break;
-                case TODO:
-                    this.addTodo(description);
-                    break;
-                case EVENT:
-                    this.addEvent(description);
-                    break;
-                case DEADLINE:
-                    this.addDeadline(description);
-                    break;
-                case DONE:
-                    this.markAsDone(description);
-                    break;
-                case DELETE:
-                    this.delete(description);
-                    break;
-                case END:
-                    this.end(description);
-                    break;
-                default:
-                    // If this error is reached that means that a valid Command Enum was created and has not been
-                    // included in the switch statements above
-                    String errorStr = "The Command given was not recognised. Try updating the version";
-                    throw new DukeException(errorStr);
+            case LIST:
+                this.listAll(description);
+                break;
+            case TODO:
+                this.addTodo(description);
+                break;
+            case EVENT:
+                this.addEvent(description);
+                break;
+            case DEADLINE:
+                this.addDeadline(description);
+                break;
+            case DONE:
+                this.markAsDone(description);
+                break;
+            case DELETE:
+                this.delete(description);
+                break;
+            case END:
+                this.end(description);
+                break;
+            default:
+                // If this error is reached that means that a valid Command Enum was created and has not been
+                // included in the switch statements above
+                String errorStr = "The Command given was not recognised. Try updating the version";
+                throw new DukeException(errorStr);
             }
         } catch (DukeException e) {
             // Print any errors encountered in the user input string
@@ -272,7 +272,7 @@ public class TaskManager {
      *
      * @param description The remainder of the user input String (after removing the command) which should be empty
      * @throws DukeException If the user input String contains a non-empty description of if the TaskManager is already
-     * inactive.
+     *                       inactive.
      */
     protected void end(String description) throws DukeException {
         String errorStr = "";
