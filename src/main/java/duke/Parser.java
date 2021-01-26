@@ -39,6 +39,10 @@ public class Parser {
             this.thirdSpecifier = Optional.empty();
         }
 
+        if (this.command.equals("find") && this.secondSpecifier.isEmpty()) {
+            throw new DukeException("Enter your search criteria!");
+        }
+
         if (this.command.equals("todo") && this.secondSpecifier.isEmpty()) {
             throw new DukeException("There\'s no task name specified!");
         }
@@ -77,6 +81,8 @@ public class Parser {
                 return new AddTaskCommand(event);
             case "done":
                 return new DoneTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
+            case "find":
+                return new FindCommand(this.secondSpecifier.get());
             case "delete":
                 return new DeleteTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
             case "bye":

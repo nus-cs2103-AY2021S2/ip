@@ -22,6 +22,10 @@ public class Task {
         this.status = true;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public LocalDate getDate() {
         return this.date;
     }

@@ -43,6 +43,16 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    public TaskList findAll(String criteria) {
+        List<Task> tempTask = new ArrayList<Task>();
+        for (Task task: tasks) {
+            if (task.getName().contains(criteria)) {
+                tempTask.add(task);
+            }
+        }
+        return new TaskList(tempTask, this.storage);
+    }
+
     public List<Task> getByDate(LocalDate date) {
         List<Task> tempTask = new ArrayList<Task>();
         for (Task task: tasks) {
