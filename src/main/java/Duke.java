@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,6 +53,8 @@ public class Duke {
             } else if(command.equalsIgnoreCase("list")){
                 try {
                     readData();
+
+                    // print iteratively if there are tasks in the list
                     if (tasks.size()>0) {
                         System.out.println(border + "\n  Here are all the tasks in your list:\n");
                         int idx = 0;
@@ -71,6 +75,7 @@ public class Duke {
                 try {
                     int idx = Integer.parseInt(command.split(" ")[1]);
                     tasks.get(idx - 1).markAsDone();
+
                     saveData();
 
                     int undone = tasks.stream()
@@ -143,8 +148,12 @@ public class Duke {
             } else if(command.toLowerCase().startsWith("deadline")){
                 try {
                     String expression = command.split(" ", 2)[1];
-                    String[] parts = expression.split("/by", 2);
-                    tasks.add(new Deadline(parts[0], parts[1]));
+                    String[] descriptionSplit = expression.split("/by", 2);
+                    // references: https://stackoverflow.com/questions/43845215/java-regex-to-check-for-date-and-time
+                    LocalDateTime deadline = LocalDateTime.parse(descriptionSplit[1].trim(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    tasks.add(new Deadline(descriptionSplit[0], deadline));
+
                     saveData();
 
                     int total = tasks.size();
@@ -155,16 +164,23 @@ public class Duke {
                     System.out.printf("  %s. %s\n", total, tasks.get(total-1));
                     System.out.printf("\n  Total %s tasks, only %s left to be done!\n", total, undone);
                     System.out.println(border);
-                } catch (IndexOutOfBoundsException e) {
+                } catch (Exception e) {
+                    // catches both ParseException and IndexOutOfBounds exception
                     System.out.println(border + "\n  Oops! Please add a deadline using" +
                             "\n  the 24-hour time format as follows:\n");
-                    System.out.println("  deadline <task description> /by <DD-MM-YYYY HHMM>\n" + border);
+                    System.out.println("  deadline <task description> /by <YYYY-MM-DD> <HH:MM>\n" + border);
                 }
             } else if(command.toLowerCase().startsWith("event")) {
                 try {
                     String expression = command.split(" ", 2)[1];
-                    String[] parts = expression.split("/at", 2);
-                    tasks.add(new Event(parts[0], parts[1]));
+                    String[] descriptionSplit = expression.split("/at", 2);
+                    String[] durationSplit = descriptionSplit[1].trim().split(" to ");
+                    LocalDateTime start = LocalDateTime.parse(durationSplit[0].trim(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime end = LocalDateTime.parse(durationSplit[1].trim(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    tasks.add(new Event(descriptionSplit[0], start, end));
+
                     saveData();
 
                     int total = tasks.size();
@@ -178,7 +194,7 @@ public class Duke {
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(border + "\n  Oops! Please add an event using" +
                             "\n  the 24-hour time format as follows:\n");
-                    System.out.println("  event <task description> /at <DD-MM-YYYY HHMM> to <DD-MM-YYYY HHMM>\n" + border);
+                    System.out.println("  event <task description> /at <YYYY-MM-DD> <HH:MM> to <YYYY-MM-DD> <HH:MM>\n" + border);
                 }
             } else if (command.equalsIgnoreCase("help")) {
                 System.out.println(border + "\n" + help + border);
@@ -222,18 +238,31 @@ public class Duke {
     }
 
     private static Task readTaskFromData(String line) {
+        boolean taskIsDone = (line.charAt(4) == 'X');
+        Task output = null;
+
         if (line.startsWith("[T]")) {
             String expression = line.split("] ", 2)[1];
-            return new Todo(expression);
+            output = new Todo(expression);
         } else if (line.startsWith("[D]")) {
             String expression = line.split("] ", 2)[1];
-            String[] parts = expression.split("by:", 2);
-            return new Deadline(parts[0], parts[1]);
+            String[] dateTimeSplit = expression.split(" \\(by:", 2);
+            LocalDateTime deadline = LocalDateTime.parse(dateTimeSplit[1].trim(),
+                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
+            output = new Deadline(dateTimeSplit[0], deadline);
         } else if (line.startsWith("[E]")) {
             String expression = line.split("] ", 2)[1];
-            String[] parts = expression.split("at:", 2);
-            return new Event(parts[0], parts[1]);
+            String[] descriptionSplit = expression.split(" \\(at: ", 2);
+            String[] durationSplit = descriptionSplit[1].split(" to ");
+            LocalDateTime start = LocalDateTime.parse(durationSplit[0].trim(),
+                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"));
+            LocalDateTime end = LocalDateTime.parse(durationSplit[1].trim(),
+                    DateTimeFormatter.ofPattern("d MMM yyyy HH:mm)"));
+            output = new Event(descriptionSplit[0], start, end);
         }
-        return null;
+        if (taskIsDone) {
+            output.markAsDone();
+        }
+        return output;
     }
 }
