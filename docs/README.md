@@ -41,7 +41,8 @@ Keep scrolling to find them.
 
 ## Commands related to tasks
 
-### `todo (insert task description)` - Add ToDo task command
+###  Add ToDo task - `todo`
+Format: `todo DESCRIPTION`
 
 Key this command in along with task description to cause Meme Man to add a ToDo task.
 Everytime a task is added, the new total number of tasks is displayed.
@@ -57,7 +58,8 @@ Meme Man is now adding to-do task: [T][✘] Watch CS2103T lecture
 Total number of tasks: 1
 ```
 
-### `deadline (insert task description) /by (insert date)` - Add Deadline task command
+### Add Deadline task - `deadline`
+Format: `deadline DESCRIPTION /by DATE`
 
 Key this command in along with task description and deadline date to cause Meme Man to add a Deadline task.
 Deadline date must be in this format: YYYY-MM-DD.
@@ -89,7 +91,8 @@ Outcome for incorrect date format:
 "Input date format is incorrect. Not stonks!"
 ```
 
-### `event (insert task description) /at (insert date)` - Add Event task command
+### Add Event task - `event`
+Format: `event DESCRIPTION /at DATE`
 
 Key this command in along with task description and event date to cause Meme Man to add a Event task.
 Event date must be in this format: YYYY-MM-DD.
@@ -121,7 +124,8 @@ This applies to all 3 types of tasks:
 Empty (insert task type) task description. Not stonks!
 ```
 
-### `done (insert number)` - Do task command
+### Mark task as done - `done`
+Format: `done TASK_NUMBER`
 
 Key this command in along with task number to put a tick for that task.
 
@@ -164,7 +168,8 @@ I would have wanted to say Stonks...
 but your usage of an illegal operation is Not Stonks!
 ```
 
-### `undone (insert number)` - Undo task command
+### Mark task as undone - `undone`
+Format: `undone TASK_NUMBER`
 
 Key this command in along with task number to put a cross for that task.
 
@@ -197,7 +202,8 @@ Outcome if task was not done in the first place:
 This task is already not done. Not stonks anyway!
 ```
 
-### `delete (insert number)` - Delete task command
+### Delete task - `delete`
+Format: `delete TASK_NUMBER`
 
 Key this command in along with task number to delete the corresponding task.
 Meme Man will display how many tasks you have left.
@@ -227,7 +233,9 @@ Outcome if task number is invalid:
 ```
 Invalid task number. Not stonks!
 ```
-### `find (insert keyword)` - Find tasks command
+### Find tasks - `find`
+Format: `find KEYWORD`
+
 Key this command in along with a single keyword to find tasks that contain that keyword.
 Case-insensitive.
 
@@ -255,11 +263,13 @@ My search returned nothing. Not stonks!
 
 ## Other commands
 
-### `bye` - Exit command
+### Exit - `bye`
+Format: `bye`
 
 Key this command in to cause Meme Man to save your tasks and EJECT you... er... I mean leave...
 
-### `list` - List command
+### List - `list`
+Format: `list`
 
 Key this command in to cause Meme Man to show you your tasks in order and whether you have completed the tasks.
 
@@ -290,11 +300,15 @@ Outcome if there is nothing in task list:
 I have nothing to print. Not stonks!
 ```
 
-### `orang` - Easter egg command
+### Easter egg - `orang`
+Format: `orang`
+
 The orang here refers to the Surreal Memes orange (spelled "Orang"), not Orang Utan orang.
 Key this command in and you'd be pleasantly surprised at how punny Orang can be (AND have a realisation about the nature of CS2103/T).
 
-### `vegetal` - Easter egg command
+### Easter egg - `vegetal`
+Format: `vegetal`
+
 Did someone said... NO VEGETALS?
 
 ### Invalid commands
