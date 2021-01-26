@@ -2,7 +2,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private String date;
     private LocalDateTime localDate;
 
     public Deadline(String input, String date) {
@@ -13,7 +12,8 @@ public class Deadline extends Task {
 
     public Deadline(String input, String date, int done) {
         super(input);
-        this.date = date;
+        LocalDateTime lDate = new ParseDates().parseString(date);
+        this.localDate = lDate;
         if (done == 1) {
             this.doTask();
         }
@@ -21,17 +21,14 @@ public class Deadline extends Task {
 
     @Override
     public String taskSave() {
-        return "D" + super.taskSave() + " | " + date;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        return "D" + super.taskSave() + " | " + localDate.format(dateTimeFormatter);
     }
 
     @Override
-<<<<<<< HEAD
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
-=======
+
     public String toString(){
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         return "[D]" + super.toString() + " (by: " + localDate.format(dateTimeFormatter) + ")";
->>>>>>> branch-Level-8
     }
 }

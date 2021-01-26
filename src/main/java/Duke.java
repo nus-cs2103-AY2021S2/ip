@@ -93,15 +93,12 @@ public class Duke {
                 input = sc.nextLine();
             }
         }
-<<<<<<< HEAD
+
         System.out.println("___\n   Bye! Hope to see you again! Rawr! :)\n___\n");
-=======
-        System.out.println("___\n   Bye! Hope to see you again! :)\n___\n");
-        for (int i = 0; i < arrL.size(); i++) {
-            fio.writeToFile(arrL.get(i));
+        for (Task task : arrL) {
+            fio.writeToFile(task);
         }
         fio.closeFile();
->>>>>>> branch-Level-7
     }
 
     void checkCommand(String input, String command, int index, int counter) throws DukeException {

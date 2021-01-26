@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-public class Event extends Task {
-    private String date;
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     private LocalDateTime localDate;
->>>>>>> branch-Level-8
 
     public Event(String input, String date) {
         super(input);
@@ -17,7 +12,8 @@ public class Event extends Task{
 
     public Event(String input, String date, int done) {
         super(input);
-        this.date = date;
+        LocalDateTime lDate = new ParseDates().parseString(date);
+        this.localDate = lDate;
         if (done == 1) {
             this.doTask();
         }
@@ -25,7 +21,8 @@ public class Event extends Task{
 
     @Override
     public String taskSave() {
-        return "E" + super.taskSave() + " | " + date;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+        return "E" + super.taskSave() + " | " + localDate.format(dateTimeFormatter);
     }
 
     @Override
