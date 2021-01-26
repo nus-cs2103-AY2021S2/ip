@@ -10,9 +10,9 @@ public enum DukeCommand {
     TODO;
 
     /**
-     * This method checks whether the user's input is a valid duke.command.
-     * @param value input duke.command from the user.
-     * @return the boolean to indicate whether is it a valid duke.command.
+     * This method checks whether the user's input is a valid command.
+     * @param value input command from the user.
+     * @return the boolean to indicate whether is it a valid command.
      */
     public static boolean isContains(String value) {
         for (DukeCommand cmd : values()) {
