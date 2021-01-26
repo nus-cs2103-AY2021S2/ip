@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -63,6 +64,7 @@ public class Duke {
                     if (taskName.equals("")) {
                         throw new DukeException("deadline");
                     }
+                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("by", "").stripLeading());
                     Deadlines curr = new Deadlines(taskName, arr[1].replaceFirst("by", "")
                             .stripLeading());
                     list.add(curr);
@@ -80,6 +82,7 @@ public class Duke {
                     if (taskName.equals("")) {
                         throw new DukeException("event");
                     }
+                    LocalDate d = LocalDate.parse(arr[1].replaceFirst("by", "").stripLeading());
                     Events curr = new Events(taskName, arr[1].replaceFirst("at", "").stripLeading());
                     list.add(curr);
                     System.out.println(topBound + "Got it! I've added this task:\n" + "  " + curr
