@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -19,7 +23,36 @@ public class Duke {
         return true;
     }
 
+    public static void taskListWriter(String rootDir, List<Task> taskList) {
+
+        // checking if data folder exists
+        File dataFolder = new File(rootDir + "/data");
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+        }
+
+        // delete the original file if exist
+        File oldFile = new File(rootDir + "/data/duke.txt");
+        if (oldFile.exists()) {
+            oldFile.delete();
+        }
+
+        // create a new file and update its content with the updated tasklist
+        File updatedFile = new File(rootDir + "/data/duke.txt");
+        try {
+            FileWriter fw = new FileWriter(rootDir + "/data/duke.txt", true);
+            for (Task t : taskList) {
+                fw.write(t.toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Unable to write in: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) throws DukeException{
+
+        String rootDir = System.getProperty("user.dir");
 
         // initialise all necessary variables
         Scanner inputScanner = new Scanner(System.in);
@@ -79,6 +112,7 @@ public class Duke {
                     // print out relevant information
                     System.out.println("    Nice! I've marked this task as done:");
                     System.out.println("     " + currentTask.toString());
+                    taskListWriter(rootDir, taskList);
 
                 } else if (userInput.startsWith("todo")) {
                     // check if the todos description is provided
@@ -96,6 +130,7 @@ public class Duke {
                     System.out.println("    Got it. I've added this task:");
                     System.out.println("     " + newTodo.toString());
                     System.out.println("    Now you have " + taskCounter + " tasks in the list.");
+                    taskListWriter(rootDir, taskList);
 
                 } else if (userInput.startsWith("deadline")) {
                     // check if the deadline description is provided
@@ -122,6 +157,7 @@ public class Duke {
                     System.out.println("    Got it. I've added this task:");
                     System.out.println("     " + newDL.toString());
                     System.out.println("    Now you have " + taskCounter + " tasks in the list.");
+                    taskListWriter(rootDir, taskList);
 
 
                 } else if (userInput.startsWith("event")) {
@@ -148,6 +184,7 @@ public class Duke {
                     System.out.println("    Got it. I've added this task:");
                     System.out.println("     " + newEvent.toString());
                     System.out.println("    Now you have " + taskCounter + " tasks in the list.");
+                    taskListWriter(rootDir, taskList);
 
                 } else if (userInput.startsWith("delete")) {
                     // check if delete index is provided
@@ -177,6 +214,7 @@ public class Duke {
                     System.out.println("    Noted. I've removed this task:");
                     System.out.println("     " + currentTask.toString());
                     System.out.println("    Now you have " + taskCounter + " tasks in the list.");
+                    taskListWriter(rootDir, taskList);
                 } else {
                     throw new DukeException("I'm sorry, I don't understand what that means.");
                 }
