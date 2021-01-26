@@ -125,8 +125,29 @@ public class Duke {
                                 break;
                             }
                         }
-                    }
-                    else {
+                    } else if (keyword.equals("find")) {
+                        if (parts.length == 1) {
+                            throw new InsufficientArgumentsException("Insufficient arguments provided");
+                        }
+                        ui.println("Here are the matching tasks in your list");
+                        StringBuilder str = new StringBuilder();
+                        for (int i = 1; i < parts.length; i++) {
+                            str.append(" ");
+                            str.append(parts[i]);
+                        }
+                        String findString = str.toString();
+                        for (Task t: TaskList.getTasklist()) {
+                            if (t.toString().contains(findString)) {
+                                ui.println(t.toString());
+                            }
+                        }
+                        if (ui.canRead()) {
+                            userInput = ui.read();
+                            if (userInput.equals("bye")) {
+                                break;
+                            }
+                        }
+                    } else {
                         throw new IllegalKeywordException("Invalid keyword");
                     }
                 }
