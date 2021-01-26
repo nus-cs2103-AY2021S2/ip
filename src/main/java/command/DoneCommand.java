@@ -1,7 +1,7 @@
 package command;
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
-import task.*;
-import exception.MikeInvalidInputException;
+import task.Task;
 
 public class DoneCommand implements Command {
 
@@ -18,8 +18,14 @@ public class DoneCommand implements Command {
         return false;
     }
 
+    /**
+     * Execute command and marks the task in the provided taskList as done
+     * @param taskList TaskList object that contains the task to mark done
+     * @return TaskList object after marking task as done in list
+     * @throws MikeCommandExecutionException if task to be marked done does not exist in the taskList provided
+     */
     @Override
-    public TaskList runCommand(TaskList taskList) throws MikeInvalidInputException {
+    public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
         try {
             for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
@@ -30,7 +36,7 @@ public class DoneCommand implements Command {
             this.taskToDone.completeTask();
             return this.taskList;
         } catch (NullPointerException e) {
-            throw new MikeInvalidInputException("OOPS!! The task is not in the list");
+            throw new MikeCommandExecutionException("DoneCommand", "The task is not in the list");
         }
 
     }

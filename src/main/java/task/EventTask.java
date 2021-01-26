@@ -24,6 +24,11 @@ public class EventTask extends Task {
         }
     }
 
+    /**
+     * Convert LocalDateTime object to a string representation
+     * @param dateObject LocalDateTime object to be converted
+     * @return string of formatted LocalDateTime object
+     */
     private String dateToString(LocalDateTime dateObject) {
         return DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a").format(dateObject);
     }

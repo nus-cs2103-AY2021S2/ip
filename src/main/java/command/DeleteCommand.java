@@ -1,24 +1,32 @@
 package command;
+import exception.MikeCommandExecutionException;
 import mike.TaskList;
-import task.*;
-import exception.MikeInvalidInputException;
+import task.Task;
 
 public class DeleteCommand implements Command {
     int taskIndexToDelete;
     Task taskToDelete;
     TaskList taskList;
 
+    /**
+     * Constructor for the delete command which takes in the index of the task to delete
+     * @param taskIndexToDelete index of the task to delete
+     */
     public DeleteCommand(int taskIndexToDelete) {
         this.taskIndexToDelete = taskIndexToDelete;
     }
 
     @Override
-    public boolean isExitCommand() {
-        return false;
-    }
+    public boolean isExitCommand() { return false; }
 
+    /**
+     * Execute command and deletes the task in the provided taskList
+     * @param taskList TaskList object to remove the task from
+     * @return TaskList object after removing task from list
+     * @throws MikeCommandExecutionException if task to be deleted does not exist in the taskList provided
+     */
     @Override
-    public TaskList runCommand(TaskList taskList) throws MikeInvalidInputException {
+    public TaskList runCommand(TaskList taskList) throws MikeCommandExecutionException {
         this.taskList = taskList;
         try {
             for (int i = 1; i <= this.taskList.getNumTasks(); i++) {
@@ -29,7 +37,7 @@ public class DeleteCommand implements Command {
             this.taskList.deleteNthTask(taskIndexToDelete);
             return this.taskList;
         } catch (NullPointerException e) {
-            throw new MikeInvalidInputException("OOPS!! The task is not in the list");
+            throw new MikeCommandExecutionException("DeleteCommand", "The task is not in the list");
         }
 
     }
