@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class Duke {
@@ -16,9 +18,13 @@ public class Duke {
             //File f = new File("./");
             //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
             FileAccessor.ReadFromTasks(relPath, tasks);
+
         } catch (FileNotFoundException | IllegalArgumentException e) {
             System.out.println("EXCEPTION");
-            //File f = new File("./src/main/java/data/All Task.txt");
+            try {
+                Files.createDirectory(Paths.get("./src/main/java/data/"));
+            } catch (Exception e1){}
+            //File f = new File(relPath); //no need to create file here will get auto created when writing
         }
 
         String logo = " ____        _        \n"

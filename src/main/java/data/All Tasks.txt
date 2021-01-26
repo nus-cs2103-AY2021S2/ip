@@ -1,3 +1,2 @@
-E|0|dsf|sdf
-T|1|chill
-D|0|dsf|fg sdf
+T|0|chill
+E|1|sdf|sdf
