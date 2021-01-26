@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 public class TodoCommand extends AddCommand {
     public TodoCommand(String taskDescription) {

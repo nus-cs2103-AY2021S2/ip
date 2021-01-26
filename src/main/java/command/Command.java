@@ -1,6 +1,6 @@
-package Command;
-import Mike.TaskList;
-import Exception.MikeInvalidInputException;
+package command;
+import mike.TaskList;
+import exception.MikeInvalidInputException;
 
 public interface Command {
     /**

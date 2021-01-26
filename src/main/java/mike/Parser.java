@@ -1,7 +1,7 @@
-package Mike;
+package mike;
 
-import Command.*;
-import Exception.MikeInvalidInputException;
+import command.*;
+import exception.MikeInvalidInputException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,11 +62,10 @@ public class Parser {
                 try {
                     pattern = Pattern.compile("(?i)event (.+) /at (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
-                    LocalDateTime dateTimeObject;
 
                     matcher.find();
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+                    LocalDateTime dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
 
                     return new EventCommand(matcher.group(1), dateTimeObject);
                 } catch (IllegalStateException e) {
@@ -79,11 +78,10 @@ public class Parser {
                 try {
                     pattern = Pattern.compile("(?i)deadline (.+) /by (\\d?\\d-\\d\\d-\\d\\d\\d\\d \\d?\\d:\\d\\d)");
                     matcher = pattern.matcher(userInput);
-                    LocalDateTime dateTimeObject;
 
                     matcher.find();
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
+                    LocalDateTime dateTimeObject = LocalDateTime.parse(matcher.group(2), format);
 
                     return new DeadlineCommand(matcher.group(1), dateTimeObject);
                 } catch (IllegalStateException e) {

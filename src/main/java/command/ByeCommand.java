@@ -1,5 +1,5 @@
-package Command;
-import Mike.TaskList;
+package command;
+import mike.TaskList;
 
 public class ByeCommand implements Command {
 

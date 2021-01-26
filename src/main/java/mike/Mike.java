@@ -1,8 +1,8 @@
-package Mike;
+package mike;
 
-import Command.Command;
-import Exception.MikeCommandExecutionException;
-import Exception.MikeInvalidInputException;
+import command.Command;
+import exception.MikeCommandExecutionException;
+import exception.MikeInvalidInputException;
 
 public class Mike {
 
@@ -22,7 +22,7 @@ public class Mike {
             "                                      /'     /\\_/\\     `\\\n" +
             "                                             \"-V-\"";
 
-    private final String filePath = "data/TodoList.txt";
+    public String filePath = System.getProperty("user.dir") + "/data/TodoList.txt";
     public boolean isRunning;
     public TaskList taskList;
     Storage storage;
@@ -36,12 +36,21 @@ public class Mike {
     }
 
     /**
-     * Prints initialisation message
+     * Initialises mike chatbot by printing welcome message and reading stored tasklist file
      */
     public void mikeInit() {
         System.out.println("Hello from\n" + this.logo);
         this.storage = new Storage(filePath);
-        this.taskList = storage.readListFromFile(filePath);
+        this.taskList = storage.readListFromFile();
+    }
+
+    /**
+     * Initialises mike chatbot by printing welcome message and reading stored tasklist file from specified filepath
+     * @param filepath filepath to tasklist to read from
+     */
+    public void mikeInit(String filepath) {
+        this.filePath = filepath;
+        this.mikeInit();
     }
 
     /**

@@ -1,9 +1,9 @@
-package Mike;
+package mike;
 
-import Task.DeadlineTask;
-import Task.EventTask;
-import Task.TodoTask;
-import Exception.MikeInvalidInputException;
+import task.DeadlineTask;
+import task.EventTask;
+import task.TodoTask;
+import exception.MikeInvalidInputException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskList {
-    private List<Task.Task> taskList;
+    private List<task.Task> taskList;
     private int numTasks = 0;
 
     public TaskList() {
@@ -25,7 +25,7 @@ public class TaskList {
      *
      * @param task task to be added to list
      */
-    public void addTaskToList(Task.Task task) {
+    public void addTaskToList(task.Task task) {
         taskList.add(task);
         numTasks++;
     }
@@ -45,7 +45,7 @@ public class TaskList {
      * @param i the index of the task to be retrieved
      * @return the Task.Task object
      */
-    public Task.Task getNthTask(int i) {
+    public task.Task getNthTask(int i) {
         return this.taskList.get(i - 1);
     }
 

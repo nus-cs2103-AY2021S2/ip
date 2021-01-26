@@ -1,6 +1,6 @@
-package Command;
-import Mike.TaskList;
-import Task.*;
+package command;
+import mike.TaskList;
+import task.*;
 
 import java.time.LocalDateTime;
 

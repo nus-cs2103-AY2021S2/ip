@@ -1,8 +1,8 @@
-package Mike;
+package mike;
 
-import Command.Command;
-import Exception.MikeInvalidInputException;
-import Exception.MikeCommandExecutionException;
+import command.Command;
+import exception.MikeInvalidInputException;
+import exception.MikeCommandExecutionException;
 
 import java.util.Scanner;
 

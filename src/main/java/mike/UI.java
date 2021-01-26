@@ -1,4 +1,4 @@
-package Mike;
+package mike;
 
 public class UI {
     public static void printResponse(String response) {

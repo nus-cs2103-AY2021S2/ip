@@ -1,6 +1,6 @@
-package Mike;
+package mike;
 
-import Exception.MikeInvalidInputException;
+import exception.MikeInvalidInputException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,9 +17,9 @@ public class Storage {
     }
 
     public void updateListFile(TaskList taskList) throws MikeInvalidInputException {
-        String strToWrite = "";
         try {
             if (!this.listFile.exists()) {
+                this.listFile.getParentFile().mkdir();
                 this.listFile.createNewFile();
             }
             FileWriter fw = new FileWriter(this.listFile.getPath());
@@ -31,14 +31,18 @@ public class Storage {
     }
 
     /* TODO catch exceptions better */
-    public TaskList readListFromFile(String filepath){
+    public TaskList readListFromFile(){
         TaskList taskList = new TaskList();
         try {
+            if (!this.listFile.exists()) {
+                this.listFile.getParentFile().mkdir();
+                this.listFile.createNewFile();
+            }
             Scanner scanner = new Scanner(this.listFile);
             while(scanner.hasNextLine()) {
                 taskList.strToTask(scanner.nextLine());
             }
-        } catch (FileNotFoundException | MikeInvalidInputException e) {
+        } catch (MikeInvalidInputException | IOException e) {
             UI.printResponse(e.getMessage());
         }
         return taskList;

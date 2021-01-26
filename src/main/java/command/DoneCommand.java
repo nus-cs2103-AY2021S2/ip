@@ -1,7 +1,7 @@
-package Command;
-import Mike.TaskList;
-import Task.*;
-import Exception.MikeInvalidInputException;
+package command;
+import mike.TaskList;
+import task.*;
+import exception.MikeInvalidInputException;
 
 public class DoneCommand implements Command {
 

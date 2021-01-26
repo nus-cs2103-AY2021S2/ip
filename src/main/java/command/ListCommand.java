@@ -1,6 +1,5 @@
-package Command;
-import Mike.TaskList;
-import Task.*;
+package command;
+import mike.TaskList;
 
 public class ListCommand implements Command {
     private boolean isExitCommand = false;
