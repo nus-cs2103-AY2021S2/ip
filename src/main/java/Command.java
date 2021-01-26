@@ -6,7 +6,7 @@ public class Command {
         this.targetIndex = targetIndex;
         this.duke = duke;
     }
-    
+
     public Duke execute() {
         throw new UnsupportedOperationException("This method is to"
                 + " be implemented by child classes.");
