@@ -4,8 +4,17 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Parser is involved with parsing user commands in Duke.
+ */
 public class Parser {
 
+    /**
+     * Parses user input to create a DukeCommand
+     * @param input User input to be parsed.
+     * @return a DukeCommand that contains a Command and a String
+     * containing more details
+     */
     public static DukeCommand parseCommand(String input) {
         try {
             String[] params = input.split(" ", 2);
@@ -42,7 +51,13 @@ public class Parser {
         return null;
     }
 
-
+    /**
+     * Parses a DukeCommand further if necessary.
+     *
+     * @param command a Command
+     * @param details Additional details on the command
+     * @return the Task the user intends to create
+     */
     public static Task parseRemainder(Command command, String details) {
         try {
             if (command == Command.TODO) {

@@ -1,9 +1,17 @@
 package main.java.duke;
 
+/**
+ * Parent class of Todo, Event, Deadline
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a Task.
+     *
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
