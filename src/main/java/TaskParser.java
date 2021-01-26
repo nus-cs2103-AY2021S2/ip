@@ -1,9 +1,19 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses String representations of Tasks into Task objects.
+ */
 public class TaskParser {
     private static final int SPLIT_LIMIT = 2;
 
+    /**
+     * Parses a String representation of a Task into a Task object, and returns the resultant Task object.
+     *
+     * @param taskString String representation of the Task to be parsed.
+     * @return Task object parsed from the input String.
+     * @throws DukeException If an Exception occurs as a result of the String being malformed.
+     */
     public static Task parseTask(String taskString) throws DukeException {
         Task newTask;
         String desc;

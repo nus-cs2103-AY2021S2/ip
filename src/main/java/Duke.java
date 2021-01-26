@@ -17,7 +17,7 @@ public class Duke {
         }
         this.commandParser = new CommandParser(tasks, ui);
     }
-    
+
     public static void main(String[] args) {
         Duke duke = new Duke("savedata.txt");
         duke.run();

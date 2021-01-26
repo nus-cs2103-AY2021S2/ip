@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses user commands and triggers corresponding effects.
+ */
 public class CommandParser {
     private TaskList tasks;
     private Ui ui;
@@ -10,6 +13,12 @@ public class CommandParser {
         this.ui = ui;
     }
 
+    /**
+     * Parses a user-input command and triggers the relevant effects.
+     * @param userInput String representation of the command to be parsed.
+     * @return Boolean flag used to indicate whether the program should terminate or not.
+     * @throws DukeException If an Exception occurs due to a malformed command.
+     */
     public boolean parseCommand(String userInput) throws DukeException {
         // display list
         if (userInput.toLowerCase().equals("list")) {

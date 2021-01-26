@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline object.
+ */
 public class Deadline extends Task {
     private LocalDate deadline;
 
@@ -9,6 +12,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns a String representing this object to be saved into a save data file.
+     * @return String representation of this object, formatted for save data use.
+     */
     public String getSaveString() {
         String datetimeString = deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (this.isDone()) {
