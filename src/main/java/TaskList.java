@@ -56,4 +56,21 @@ public class TaskList {
     void addTask(Task task) {
         tasks.add(task);
     }
+
+    /**
+     * Finds <code>Task</code> in the ArrayList that contains the matching word
+     * @param keyWord indicates the word to find
+     * @return an ArrayList that contains the <code>Tasks</code> that has the keyword
+     */
+    public ArrayList<Task> findTask(String keyWord) {
+        ArrayList<Task> matchingWords = new ArrayList<>();
+
+        for (Task t : tasks) {
+            if (t.toString().contains(keyWord)) {
+                matchingWords.add(t);
+            }
+        }
+
+        return matchingWords;
+    }
 }
