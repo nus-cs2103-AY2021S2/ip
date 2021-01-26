@@ -13,6 +13,8 @@ list
 done
 done 2
 list
+find
+find book
 delete
 delete 3
 list

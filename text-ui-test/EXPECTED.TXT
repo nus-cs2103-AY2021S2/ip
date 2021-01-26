@@ -61,6 +61,13 @@ duke.DukeException: The description of a done cannot be empty.
     3: [E][ ] project meeting (at: 01 Jan 2021)
     _______________________________________
     
+duke.DukeException: The description of a find cannot be empty.
+    _______________________________________
+    Here are the matching tasks in your list:
+      [T][ ] borrow book
+      [D][X] return book (by: Dec 11 2020)
+    _______________________________________
+    
 duke.DukeException: A number must be provided.
     _______________________________________
     Noted. I have removed this task:
