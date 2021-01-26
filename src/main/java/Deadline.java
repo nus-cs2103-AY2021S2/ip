@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     private void setTime(String time) {
-        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
         LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
         this.by = dateTime;
     }
