@@ -1,0 +1,7 @@
+T // 0 // read book
+T // 0 // return book
+T // 1 // smash book
+T // 0 // burn book
+T // 0 // helpla
+T // 0 // lololol
+T // 0 // hehehehe

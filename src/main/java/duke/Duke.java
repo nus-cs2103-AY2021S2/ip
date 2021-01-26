@@ -9,8 +9,8 @@ import duke.ui.Ui;
 
 public class Duke {
     private final Storage storage;
-    private TaskList taskList;
     private final Ui ui;
+    private TaskList taskList;
 
     public Duke(String filepath) {
         ui = new Ui();
@@ -23,10 +23,14 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
@@ -39,9 +43,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

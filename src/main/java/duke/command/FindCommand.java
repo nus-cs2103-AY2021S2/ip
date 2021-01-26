@@ -5,19 +5,17 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class AddTaskCommand extends Command {
-    protected String type;
+public class FindCommand extends Command {
     protected String fullCommand;
 
-    public AddTaskCommand(String type, String fullCommand) {
+    public FindCommand(String fullCommand) {
         super();
-        this.type = type;
         this.fullCommand = fullCommand;
     }
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.addTask(this.type, this.fullCommand);
+        taskList.find(this.fullCommand);
     }
 
     @Override
