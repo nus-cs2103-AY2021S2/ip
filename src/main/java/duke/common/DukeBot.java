@@ -35,8 +35,13 @@ public class DukeBot {
             try {
                 command = parser.parseInput(scanner.nextLine());
                 printOut(command.execute(taskList));
-                this.storage.writeTasks(taskList);
-            } catch (DukeException.InvalidCommand | DukeException.EmptyDescription | DukeException.InvalidTask e) {
+
+            } catch (DukeException.InvalidCommand
+                    | DukeException.InvalidTask
+                    | DukeException.EmptyDescription
+                    | DukeException.EmptyDeadlineDate
+                    | DukeException.EmptyEventDate
+                    | DukeException.InvalidEventEnd e) {
                 printOut(e.getMessage());
             }
 

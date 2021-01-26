@@ -2,12 +2,17 @@ package duke.task;
 
 import duke.common.DukeString;
 
-public class EventTask extends Task {
-    private final String event;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public EventTask(final String desc, final String date) {
+public class EventTask extends Task {
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
+
+    public EventTask(final String desc, final LocalDateTime start, final LocalDateTime end) {
         super(desc);
-        this.event = date;
+        this.startDate = start;
+        this.endDate = end;
     }
 
     private EventTask(boolean done, String desc, String date) {
@@ -34,6 +39,11 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), event);
+        return String.format(
+                "[E]%s (from: %s to %s)",
+                super.toString(),
+                startDate.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma")),
+                endDate.format(DateTimeFormatter.ofPattern("dd LLL uu hhmma"))
+        );
     }
 }
