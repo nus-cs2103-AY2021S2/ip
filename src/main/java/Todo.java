@@ -3,6 +3,10 @@ public class Todo extends Task {
     private Todo (String name) {
         super(name);
     }
+    
+    public Todo (boolean done, String name) {
+        super(done, name);
+    }
 
     public static Todo createTodo (String str) throws ChatException {
         if (!str.startsWith("todo")) {
@@ -26,6 +30,10 @@ public class Todo extends Task {
         }
     }
 
+    public String allParameterStr() { 
+        return String.format("T,%s,%s", this.getDone(), this.getName());
+    }
+    
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -1,5 +1,11 @@
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Duke {
 
@@ -132,13 +138,63 @@ public class Duke {
         }
     }
     
-
-    public static void main(String[] args) {
+    //Task data will be stored at "data/tasks.txt"
+    private static String dir = System.getProperty("user.dir");
+    private static Path dirPath = Paths.get(dir, "data");
+    private static Path filePath = Paths.get(dir, "data", "tasks.txt");
+    
+    //Save task data if there is change in task data
+    private static void save() throws IOException { 
+        if (!taskArr.equals(load())) {
+            String newStr = ""; 
+            for (Task t : taskArr) {
+                newStr += t.allParameterStr() + "\n";
+            }
+            Files.writeString(filePath, newStr);
+        }
+    }
+    
+    //load once Chat starts up
+    //returns task array from saved data
+    private static ArrayList<Task> load() throws IOException { 
+        if (!Files.exists(filePath)) {
+            if (!Files.exists(dirPath)) {
+                Files.createDirectory(dirPath);
+            } 
+            Files.createFile(filePath);
+        }
+        String lines = Files.readString(filePath);
+        ArrayList<Task> taskArrFromFile = new ArrayList<>();
+        
+        if (!lines.isEmpty()) {
+            String[] strArr = lines.split("\n");
+            for (String s : strArr) {
+                String[] parArr = s.split(","); //parameter array
+                if (parArr[0].equals("T")) {
+                    taskArrFromFile.add(new Todo(Boolean.parseBoolean(parArr[1]), parArr[2]));
+                } else if (parArr[0].equals("D")) {
+                    taskArrFromFile.add(new Deadline(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3]));
+                } else {
+                    //E
+                    taskArrFromFile.add(new Event(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3], parArr[4]));
+                }
+            }
+            if (taskArr.isEmpty()) {
+                taskArr = taskArrFromFile;
+            }
+        }
+        return taskArrFromFile;
+    }
+    
+    
+    public static void main(String[] args) throws IOException {
         //only add lines in here
         lines();
         greet();
         lines();
 
+        load(); 
+        
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals("bye")) {
@@ -162,9 +218,13 @@ public class Duke {
                             "todo, deadline, event, done, list, bye");
                     System.out.println(error);
                 }
+                
+                save();
+                
             } catch (ChatException e) {
                 System.out.println(e);
             }
+            
             lines();
             str = sc.nextLine();
         }

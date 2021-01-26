@@ -6,6 +6,11 @@ public class Deadline extends Task {
         super(name);
         this.end = end;
     }
+    
+    public Deadline (boolean done, String name, String end) { 
+        super(done, name);
+        this.end = end;
+    }
 
     public static Deadline createDeadline (String str) throws ChatException {
         if (!str.startsWith("deadline")) {
@@ -69,6 +74,10 @@ public class Deadline extends Task {
         return this.end;
     }
 
+    public String allParameterStr() {
+        return String.format("D,%s,%s,%s", this.getDone(), this.getName(), this.getEnd());
+    }
+    
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.getEnd());

@@ -8,7 +8,12 @@ public abstract class Task {
     public Task (String name) {
         this.name = name;
     }
-
+    
+    public Task (boolean done, String name) { 
+        this.done = done; 
+        this.name = name;
+    }
+    
     public String getName() {
         return this.name;
     }
@@ -20,6 +25,8 @@ public abstract class Task {
     public void completed() {
         this.done = true;
     }
+    
+    public abstract String allParameterStr();
 
     @Override
     public String toString() {
