@@ -15,26 +15,58 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns the number of tasks contained in the task list
+     *
+     * @return int of the number of tasks
+     */
     public int getTaskCount() {
         return taskList.size();
     }
 
+    /**
+     * Returns the task specified from the task list
+     *
+     * @param i the task index of the task to be extracted
+     * @return the Task to be extracted
+     */
     public Task getTask(int i) {
         return this.taskList.get(i-1);
     }
 
+    /**
+     * Returns the task list
+     *
+     * @return the task list
+     */
     public List<Task> getTaskList() {
         return this.taskList;
     }
 
+    /**
+     * adds a specified task to the task list
+     *
+     * @param task the task that is to be added to the task list
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * deletes a specified task from the task list
+     *
+     * @param taskIndex the index of the task that is to be removed from the task list
+     */
     public void deleteTask(int taskIndex) {
         this.taskList.remove(taskIndex-1);
     }
 
+    /**
+     * Returns a boolean value of whether the requested task exists in the task list
+     *
+     * @param index the task index of the task requested
+     * @return the boolean of whether the task exists
+     */
     public boolean checkTaskExist(int index) {
         if (index < 1 || index >= this.taskList.size()) {
             return false;
@@ -43,6 +75,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * prints out all tasks to the console in the format
+     */
     public void printTask() {
         int i = 1;
         for (Task t : this.taskList) {

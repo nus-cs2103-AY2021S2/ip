@@ -16,6 +16,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a list of tasks contained in a List<Task> by reading inputs from text file
+     * If the text file is empty or there is loading errors, an empty List<Task> is returned
+     *
+     * @return tasklist
+     * @throws DukeException If there is reading error of the text file
+     */
     public List<Task> load() throws DukeException{
         List<Task> taskList = new ArrayList<>();
 
@@ -69,6 +76,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes tasklist into text file
+     *
+     * @param taskList a list of all the tasks
+     */
     public void save(TaskList taskList) {
         List<Task> tasks = taskList.getTaskList();
         // checking if data folder exists
