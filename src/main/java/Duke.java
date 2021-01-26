@@ -1,20 +1,29 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 public class Duke {
 
+    private static final String FILE_DIR = "duke.txt";
+
     protected enum Command {
         LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE
     }
 
-    protected static ArrayList<Task> tasks = new ArrayList<>(100);
+    private static ArrayList<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean continueDuke = true;
 
         greet();
+
+        try {
+            load();
+        } catch (DukeException e) {
+            echo(e.getMessage());
+        }
 
         while (continueDuke) {
             String input = scanner.nextLine().trim();
@@ -27,27 +36,27 @@ public class Duke {
 
         try {
             switch (Command.valueOf(tokenizedInput[0].toUpperCase())) {
-                case LIST:
-                    listTask();
-                    break;
-                case DONE:
-                    doneTask(tokenizedInput);
-                    break;
-                case BYE:
-                    exit();
-                    return false;
-                case TODO:
-                    addTodo(tokenizedInput);
-                    break;
-                case DEADLINE:
-                    addDeadline(tokenizedInput);
-                    break;
-                case EVENT:
-                    addEvent(tokenizedInput);
-                    break;
-                case DELETE:
-                    deleteTask(tokenizedInput);
-                    break;
+            case LIST:
+                listTask();
+                break;
+            case DONE:
+                doneTask(tokenizedInput);
+                break;
+            case BYE:
+                exit();
+                return false;
+            case TODO:
+                addTodo(tokenizedInput);
+                break;
+            case DEADLINE:
+                addDeadline(tokenizedInput);
+                break;
+            case EVENT:
+                addEvent(tokenizedInput);
+                break;
+            case DELETE:
+                deleteTask(tokenizedInput);
+                break;
             }
 
             return true;
@@ -115,6 +124,12 @@ public class Duke {
         }
         builder.append(" in the list.");
 
+        try {
+            save();
+        } catch (DukeException e) {
+            echo(e.getMessage());
+        }
+
         echo(builder.toString());
     }
 
@@ -131,6 +146,12 @@ public class Duke {
             echo("Nice! I've marked this task as done:\n\t" + tasks.get(taskIndex));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("☹ Sorry, please enter a valid task number.\n\tCommand: done [task number]");
+        }
+
+        try {
+            save();
+        } catch (DukeException e) {
+            echo(e.getMessage());
         }
     }
 
@@ -163,6 +184,12 @@ public class Duke {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("☹ Sorry, please enter a valid task number.\n\tCommand: delete [task number]");
         }
+
+        try {
+            save();
+        } catch (DukeException e) {
+            echo(e.getMessage());
+        }
     }
 
     public static void greet() {
@@ -173,6 +200,32 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println(logo);
         echo("Hello! I'm Duke.\nWhat can I do for you today?");
+    }
+    
+    public static void load() throws DukeException {
+        try {
+            FileInputStream fileIn = new FileInputStream(FILE_DIR);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            tasks = (ArrayList<Task>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException e) {
+            // file not found, no tasks loaded
+        } catch (IOException | ClassNotFoundException e) {
+            throw new DukeException("☹ Sorry, something went wrong while I was loading saved data from file.");
+        }
+    }
+
+    public static void save() throws DukeException {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(FILE_DIR);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(tasks);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            throw new DukeException("☹ Sorry, something went wrong while I was saving data to file.");
+        }
     }
 
     public static void exit() {
