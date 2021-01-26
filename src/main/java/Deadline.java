@@ -17,8 +17,12 @@ public class Deadline extends Task {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + temp[1];
     }
 
+    public String saveToFile() {
+        return "D" + super.toString() + " | " + by;
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + extractDateTime(by) + ")";
+        return "D" + super.toString() + " | " + extractDateTime(by);
     }
 }

@@ -16,8 +16,12 @@ public class Event extends Task {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + temp[1];
     }
 
+    public String saveToFile() {
+        return "E" + super.toString() + " | " + at;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + extractDateTime(at) + ")";
+        return "E" + super.toString() + " | " + extractDateTime(at);
     }
 }

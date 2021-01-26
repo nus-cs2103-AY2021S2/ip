@@ -10,7 +10,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : " ");
+        return (isDone ? "1" : "0");
     }
 
     public String getDescription() {
@@ -21,7 +21,11 @@ public class Task {
         this.isDone = true;
     }
 
+    public String saveToFile() {
+        return " | " + getStatusIcon() + " | " + getDescription();
+    }
+
     public String toString() {
-        return "[" + getStatusIcon() + "]" + " " + getDescription();
+        return " | " + getStatusIcon() + " | " + getDescription();
     }
 }
