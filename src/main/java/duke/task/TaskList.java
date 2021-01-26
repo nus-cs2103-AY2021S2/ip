@@ -89,6 +89,19 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> getFilteredTaskList(String searchString) {
+        ArrayList<Task> filteredArr = new ArrayList<>();
+        searchString = searchString.toLowerCase();
+
+        for (Task task : taskList) {
+            if (task.description.toLowerCase().contains(searchString)) {
+                filteredArr.add(task);
+            }
+        }
+
+        return filteredArr;
+    }
+
     public int getSize() {
         return taskList.size();
     }
