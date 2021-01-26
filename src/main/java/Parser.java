@@ -8,6 +8,10 @@ public class Parser {
 
   }
 
+  /**
+   * Reads in the input by the user from the commandline and processes it.
+   */
+
   public void userinput(TaskList tasklist, Storage store) throws IOException, DescriptionError {
     Scanner scan = new Scanner(System.in);
     while (scan.hasNext()) {
@@ -43,6 +47,9 @@ public class Parser {
     }
 
   }
+  /**
+   * Handles "done" command by the user by marking the tasks with "x".
+   */
 
   public void done(String input, TaskList taskList) {
     try {
@@ -91,7 +98,9 @@ public class Parser {
     return output;
   }
 
-
+  /**
+   * Handles todo command by the user by creating a todo object and placing it into the arraylist.
+   */
   public void todo(String input, TaskList taskList) throws DescriptionError {
     try {
       if (input.length() == 4) {
@@ -109,6 +118,11 @@ public class Parser {
       System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
     }
   }
+
+
+  /**
+   * Handles deadline command by the user by creating a deadline object.
+   */
 
   public void deadline(String input, TaskList taskList) {
     try {
@@ -133,6 +147,11 @@ public class Parser {
     }
   }
 
+
+  /**
+   * Handles event command by the user by creating event object and placing it into the arraylist.
+   */
+
   public void event(String input, TaskList taskList) {
     try {
       if (input.length() == 5) {
@@ -151,6 +170,11 @@ public class Parser {
       System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
     }
   }
+
+
+  /**
+   * Handles delete ommand by the user by removing the tasks inside the arraylist.
+   */
 
   public void deleteTask(String input, TaskList taskList) {
     try {

@@ -13,6 +13,10 @@ public class Storage {
   protected String path;
   protected File file;
 
+  /**
+   * Creates Storage object with the filepath.
+   * @ param filepath The filepath storing all the previous tasklists data
+   */
   public Storage(String filepath) throws IOException {
     this.path = filepath;
     File filestr = new File(path);
@@ -23,6 +27,9 @@ public class Storage {
   public Storage() {
 
   }
+  /**
+   * Iterates through the task arraylist and stores each element into a textfile.
+   */
 
   public void save(ArrayList<Task> task) throws IOException {
     FileWriter fileWriter = new FileWriter(this.file);
@@ -38,6 +45,11 @@ public class Storage {
     }
   }
 
+  /**
+   * Loads any previous tasks from a text file by storing the contents inside ArrayList.
+   * @ return The Arraylist consisting of all the tasks in the text file.
+   * @ throws IOException if the file cannot be found in the specified path.
+   */
   public ArrayList<Task> load() throws IOException {
     ArrayList<Task> tasks = new ArrayList<Task>();
     try {

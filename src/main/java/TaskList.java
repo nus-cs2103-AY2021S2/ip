@@ -15,6 +15,11 @@ public class TaskList {
     return this.tasklist;
   }
 
+
+  /**
+   * Iterates the arraylist and outputs each tasks inside.
+   */
+
   public void list() {
     int i = 1;
     System.out.println(" ___________________________________________");
@@ -29,6 +34,11 @@ public class TaskList {
   public void addList(Task input) {
     this.tasklist.add(input);
   }
+
+
+  /**
+   * delete the tasks from the arraylist and output the notification text.
+   */
 
   public void delete(int num) {
     Task task = this.tasklist.remove(num - 1);
