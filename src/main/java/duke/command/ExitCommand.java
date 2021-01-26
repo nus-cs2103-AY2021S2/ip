@@ -1,9 +1,8 @@
 package duke.command;
 
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 import duke.data.DataStorage;
-import duke.exception.DukeException;
-import duke.TaskList.TaskList;
-import duke.UI.UI;
 
 /**
  * Create exit command class
@@ -13,8 +12,8 @@ public class ExitCommand extends Command {
     /**
      * Constructor to create exit command object
      */
-    public ExitCommand(){
-        super(null,null);
+    public ExitCommand() {
+        super(null, null);
         this.isExit = true;
     }
 
@@ -23,10 +22,9 @@ public class ExitCommand extends Command {
      * @param ui
      * @param storage
      * @return
-     * @throws DukeException
      */
     @Override
-    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage) throws DukeException {
+    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage) {
         ui.displayEndMessage();
         return null;
     }

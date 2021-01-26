@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.TaskList.TaskList;
-import duke.UI.UI;
-import duke.data.DataStorage;
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import duke.tasklist.TaskList;
+import duke.ui.UI;
+import duke.data.DataStorage;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Create add command class
@@ -20,7 +20,7 @@ public class AddCommand extends Command {
      * Constructor to create add command object
      */
     public AddCommand(String input, TaskList taskList) {
-        super(input,taskList);
+        super(input, taskList);
     }
 
     /** Add task into task list and return task list
@@ -34,8 +34,8 @@ public class AddCommand extends Command {
      * @return TaskList
      * @throws DukeException
      */
-    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage, String type,
-                            LocalDate dueDate, LocalTime startTime, LocalTime endTime) throws DukeException { 
+    public TaskList execute(TaskList tasklist, UI ui, DataStorage storage, String type, LocalDate dueDate,
+                            LocalTime startTime, LocalTime endTime) throws DukeException {
         switch (type) {
         case ("todo"):
             tasklist.addToDo(this.input);
@@ -43,19 +43,21 @@ public class AddCommand extends Command {
         case ("deadlines"):
             System.out.println("hehe " + this.input);
             tasklist.addDeadline(this.input, dueDate, startTime);
-           break;
+            break;
         case ("events"):
             tasklist.addEvent(this.input, dueDate, startTime, endTime);
-          break;
-       }
+            break;
+        default:
+            break;
+        }
 
-       ArrayList<Task> taskArrayList = tasklist.getTaskListArray();
-       int curr_size = taskArrayList.size();
+        ArrayList<Task> taskArrayList = tasklist.getTaskListArray();
+        int currentSize = taskArrayList.size();
 
-       ui.displayAddedTaskMessage(tasklist.getTask(curr_size-1), curr_size);
-       storage.save(tasklist.getTaskListArray());
+        ui.displayAddedTaskMessage(tasklist.getTask(currentSize - 1), currentSize);
+        storage.save(tasklist.getTaskListArray());
 
-       return tasklist;
+        return tasklist;
     }
 
 }

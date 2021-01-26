@@ -30,8 +30,8 @@ public class Event extends Task {
      * @param  endTime
      */
 
-    public Event(String title,Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
-        super(title,b);
+    public Event(String title, Boolean b, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        super(title, b);
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -41,7 +41,7 @@ public class Event extends Task {
      * @return String
      */
     @Override
-    public String changeFormat(){
+    public String changeFormat() {
         return "E" + super.changeFormat() + "," + this.date + "," + this.startTime + "," + this.endTime;
     }
 
@@ -50,6 +50,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return  "[E]" + super.toString() + "(at: " + this.date + " " + this.startTime + " " + this.endTime + ")";
+        return "[E]" + super.toString() + "(at: " + this.date + " " + this.startTime + " " + this.endTime + ")";
     }
 }

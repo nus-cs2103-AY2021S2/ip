@@ -1,14 +1,14 @@
 package duke.data;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class DataStorage {
     private static final String filePath = "./src/main/java/duke/data/data.txt";
@@ -23,10 +23,10 @@ public class DataStorage {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
 
-        if(!file.exists()){
+        if (!file.exists()) {
             try {
                 file.createNewFile();
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new DukeException("Error creating file");
             }
         }
@@ -47,7 +47,7 @@ public class DataStorage {
                 writer.flush();
             }
             writer.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException("error writing into file");
         }
 

@@ -1,12 +1,12 @@
 package duke.command;
 
+import duke.tasklist.TaskList;
+import duke.ui.UI;
+import duke.data.DataStorage;
+
 /**
  * Create list command class
  */
-import duke.data.DataStorage;
-import duke.TaskList.TaskList;
-import duke.UI.UI;
-
 public class ListCommand extends Command {
 
     /**
@@ -14,7 +14,7 @@ public class ListCommand extends Command {
      */
 
     public ListCommand(String input, TaskList tl) {
-        super(input,tl);
+        super(input, tl);
     }
 
     /** Display all the task found in list
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @return
      */
     @Override
-    public TaskList execute(TaskList tasks, UI ui, DataStorage storage){
+    public TaskList execute(TaskList tasks, UI ui, DataStorage storage) {
         tasks.showAllTask("list");
         return null;
     }

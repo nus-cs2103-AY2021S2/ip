@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList.TaskList;
-import duke.UI.UI;
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 import duke.data.DataStorage;
 import duke.exception.DukeException;
 
@@ -17,7 +17,7 @@ public class Command {
      * @param input
      * @param taskList
      */
-    public Command (String input, TaskList taskList){
+    public Command (String input, TaskList taskList) {
         this.input = input;
         this.isExit = false;
     }
@@ -27,12 +27,11 @@ public class Command {
      * @param ui
      * @param storage
      * @return
-     * @throws DukeException
      */
     public TaskList execute(TaskList tasklist, UI ui, DataStorage storage) throws DukeException {
-        if(this.input.equals("bye")){
+        if (this.input.equals("bye")) {
             Command ec = new ExitCommand();
-            ec.execute(tasklist,ui,storage);
+            ec.execute(tasklist, ui , storage);
         }
         return tasklist;
     }
@@ -40,7 +39,7 @@ public class Command {
     /** Return boolean to terminate/continue the program
      * @return boolean
      */
-    public static boolean isExit(){
+    public static boolean isExit() {
         return isExit;
     }
 

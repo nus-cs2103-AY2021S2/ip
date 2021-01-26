@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.tasklist.TaskList;
+import duke.ui.UI;
 import duke.data.DataStorage;
 import duke.exception.DukeException;
-import duke.TaskList.TaskList;
-import duke.UI.UI;
 
 /**
  * Create done command class
@@ -23,11 +23,10 @@ public class DoneCommand extends Command {
      * @param ui
      * @param storage
      * @return
-     * @throws DukeException
      */
     @Override
     public TaskList execute(TaskList tasks, UI ui, DataStorage storage) throws DukeException {
-        tasks.markAsDone(Integer.parseInt(input)-1);
+        tasks.markAsDone(Integer.parseInt(input) - 1);
         storage.save(tasks.getTaskListArray());
         return tasks;
     }

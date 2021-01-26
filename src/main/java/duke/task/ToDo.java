@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
 
     @Override
-    public String changeFormat(){
+    public String changeFormat() {
         return "T" + super.changeFormat();
     }
 
@@ -29,6 +29,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return  "[T]" + super.toString();
+        return "[T]" + super.toString();
     }
 }

@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
  * Stores all type of task
  */
 public class Task {
+    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     protected String description;
     protected boolean isCompleted;
-
-    private static DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * Empty constructor
@@ -24,7 +24,7 @@ public class Task {
     /** Constructor to create task object
      * @param title
      */
-    public Task(String title){
+    public Task(String title) {
         this.description = title;
         this.isCompleted = false;
     }
@@ -33,15 +33,15 @@ public class Task {
      * @param title
      * @param b
      */
-    public Task(String title, boolean b){
+    public Task(String title, boolean b) {
         this.description = title;
-         this.isCompleted = b;
+        this.isCompleted = b;
     }
 
     /**
      * Set task to completed
      */
-    public void setCompleted(){
+    public void setCompleted() {
         this.isCompleted = true;
     }
 
@@ -52,49 +52,49 @@ public class Task {
         return (this.isCompleted ? "\u2718" : " ");
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return (this.isCompleted ? "\u2718" : " ");
     }
 
     /** Return description of task
      * @return
      */
-    public String getTaskName(){
+    public String getTaskName() {
         return this.description;
     }
 
     /** Return customized representation of task to add to data file
      * @return
      */
-    public String changeFormat(){
-        return "," +  this.isCompleted + "," + this.getTaskName();
+    public String changeFormat() {
+        return "," + this.isCompleted + "," + this.getTaskName();
     }
 
     /** Return the string version of task from data file to task objects
-     * @param string_task
+     * @param stringTask
      * @return
      */
-    public Task changeToTaskFormat(String string_task) {
+    public Task changeToTaskFormat(String stringTask) {
 
-        if(string_task.charAt(0) == 'T'){
-            String[] tasks = string_task.split(",");
+        if (stringTask.charAt(0) == 'T') {
+            String[] tasks = stringTask.split(",");
             return new ToDo(tasks[2], Boolean.parseBoolean(tasks[1]));
-        } else if(string_task.charAt(0) == 'D'){
-            String[] tasks = string_task.split(",");
+        } else if (stringTask.charAt(0) == 'D') {
+            String[] tasks = stringTask.split(",");
 
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
 
-            return new Deadline(tasks[2], Boolean.parseBoolean(tasks[1]),date, startTime);
-        }else if(string_task.charAt(0) == 'E'){
-            String[] tasks = string_task.split(",");
+            return new Deadline(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime);
+        } else if (stringTask.charAt(0) == 'E') {
+            String[] tasks = stringTask.split(",");
 
             LocalDate date = LocalDate.parse(tasks[3], dateFormatter);
             LocalTime startTime = LocalTime.parse(tasks[4], timeFormatter);
             LocalTime endTime = LocalTime.parse(tasks[5], timeFormatter);
 
-            return new Event(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime,endTime);
-        } else{
+            return new Event(tasks[2], Boolean.parseBoolean(tasks[1]), date, startTime, endTime);
+        } else {
             return new Task();
         }
     }

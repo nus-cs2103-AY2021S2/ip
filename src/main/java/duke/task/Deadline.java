@@ -37,7 +37,7 @@ public class Deadline extends Task {
      * @return String
      */
     @Override
-    public String changeFormat(){
+    public String changeFormat() {
         return "D" + super.changeFormat() + "," + this.dueDate + "," + this.dueTime;
     }
 
@@ -46,6 +46,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return  "[D]" + super.toString() + " (by: " + this.dueDate + " " + this.dueTime + ")";
+        return "[D]" + super.toString() + " (by: " + this.dueDate + " " + this.dueTime + ")";
     }
 }

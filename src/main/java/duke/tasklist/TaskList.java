@@ -1,13 +1,15 @@
-package duke.TaskList;
-
-import duke.UI.UI;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.*;
+package duke.tasklist;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import duke.ui.UI;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * Store an array list of task
@@ -23,7 +25,7 @@ public class TaskList {
     /**Add a todo task to arraylist
      * @param description
      */
-    public void addToDo(String description)  {
+    public void addToDo(String description) {
         taskArraylist.add(new ToDo(description));
     }
 
@@ -33,7 +35,7 @@ public class TaskList {
      * @param endTime
      */
     public void addDeadline(String description, LocalDate dueDate, LocalTime endTime) {
-        taskArraylist.add(new Deadline(description,dueDate, endTime));
+        taskArraylist.add(new Deadline(description, dueDate, endTime));
     }
 
     /**Add an event task to arraylist
@@ -43,25 +45,25 @@ public class TaskList {
      * @param endTime
      */
     public void addEvent(String description, LocalDate dueDate, LocalTime startTime, LocalTime endTime) {
-        taskArraylist.add(new Event(description,false,dueDate, startTime, endTime));
+        taskArraylist.add(new Event(description, false , dueDate, startTime, endTime));
     }
 
     /**
      * Print out all task in array list
      * @param type
      */
-    public void showAllTask(String type){
+    public void showAllTask(String type) {
         ArrayList<Task> taskList;
 
-        if(type.equals("find")){
+        if (type.equals("find")) {
             ui.printFindHeader();
             taskList = findTaskArraylist;
-        }else {
+        } else {
             ui.printListHeader();
             taskList = taskArraylist;
         }
         for (int i = 0; i < taskList.size(); i++) {
-            ui.printTask(i,taskList.get(i) );
+            ui.printTask(i, taskList.get(i));
         }
         ui.displayLines();
     }
@@ -69,7 +71,7 @@ public class TaskList {
     /** Update specific task to completed
      * @param index  position(index) of task in array list
      */
-    public void markAsDone(int index){
+    public void markAsDone(int index) {
         taskArraylist.get(index).setCompleted();
         ui.displayDoneTaskMessage(taskArraylist.get(index));
         taskArraylist.get(index).setCompleted();
@@ -78,7 +80,7 @@ public class TaskList {
     /** Delete specific task given the index of task in array list
      * @param index  position(index) of task in array list
      */
-    public void deleteTask(int index){
+    public void deleteTask(int index) {
         ui.displayDeletedTaskMessage(taskArraylist.get(index));
         taskArraylist.remove(index);
     }
@@ -86,20 +88,23 @@ public class TaskList {
     /** Return arraylist of task
      * @return arraylist of task
      */
-    public ArrayList<Task> getTaskListArray(){
+    public ArrayList<Task> getTaskListArray() {
         return this.taskArraylist;
     }
 
     /** Set current array list of task to given array list from parameter
      * @param al array list of task
      */
-    public void setTaskArraylist (ArrayList<Task> al){
-       this.taskArraylist = al;
+    public void setTaskArraylist (ArrayList<Task> al) {
+        this.taskArraylist = al;
     }
 
-    public void findTask(String input){
-        for(int i=0; i<taskArraylist.size();i++){
-            if(taskArraylist.get(i).getTaskName().contains(input)){
+    /** Find task in array list of task
+     * @param input
+     */
+    public void findTask(String input) {
+        for (int i = 0; i < taskArraylist.size(); i++) {
+            if (taskArraylist.get(i).getTaskName().contains(input)) {
                 findTaskArraylist.add(taskArraylist.get(i));
             }
         }
@@ -110,7 +115,7 @@ public class TaskList {
      * @param index position(index) of task in array list
      * @return
      */
-    public Task getTask(int index){
+    public Task getTask(int index) {
         return taskArraylist.get(index);
     }
 }
