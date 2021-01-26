@@ -1,4 +1,7 @@
+import java.util.Scanner;
+
 public class Ui {
+    //private final Scanner in;
 
     public Ui(){
         startDuke();
@@ -14,6 +17,15 @@ public class Ui {
         System.out.println("---------------------------------------------");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println("---------------------------------------------");
+    }
+
+    public String getUserCommand(){
+        Scanner input = new Scanner(System.in);
+        String fullInputLine = input.nextLine();
+        while (input.hasNextLine()) {
+            fullInputLine = input.nextLine();
+        }
+        return fullInputLine;
     }
 
     public void printMyTask(TaskList taskList) {
@@ -62,9 +74,9 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
-    public void showErrorMessage(DukeException e){
+    public void showErrorMessage(String message){
         System.out.println("---------------------------------------------");
-        System.out.println(e.getMessage());
+        System.out.println(message);
         System.out.println("---------------------------------------------");
     }
 }

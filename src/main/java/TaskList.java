@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -5,13 +6,28 @@ import java.util.ArrayList;
 public class TaskList {
     // tasks in schedule
     private ArrayList<Task> taskList;
+    private ArrayList<String> operatorList;
 
     public TaskList(){
         this.taskList = new ArrayList<Task> ();
+        initialiseOperators();
     }
 
     public TaskList(ArrayList<String> myTasks){
+        this.taskList = initialiseList(myTasks);
+        initialiseOperators();
+    }
 
+    private void initialiseOperators(){
+        this.operatorList.add("todo");
+        this.operatorList.add("deadline");
+        this.operatorList.add("event");
+        this.operatorList.add("done");
+        this.operatorList.add("delete");
+    }
+
+    private ArrayList<Task> initialiseList(ArrayList<String> myTasks){
+        ArrayList<Task> taskList = new ArrayList<> ();
         for (String s: myTasks){
             String[] parts = s.split(" | ", 2);
             String type = parts[0];
@@ -19,7 +35,7 @@ public class TaskList {
                 String description = parts[1];
                 // addTodo
                 Task newTask = new ToDo(description);
-                addTask(newTask);
+                taskList.add(newTask);
             }
 
             if (type.equals("D")){
@@ -32,7 +48,7 @@ public class TaskList {
                 String by = dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-dd H:mm"));
 
                 Task newTask = new Deadline(description, by);
-                addTask(newTask);
+                taskList.add(newTask);
             }
 
             if (type.equals("E")){
@@ -45,10 +61,12 @@ public class TaskList {
                 String by = dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-dd H:mm"));
 
                 Task newTask = new Event(description, by);
-                addTask(newTask);
+                taskList.add(newTask);
             }
         }
+        return taskList;
     }
+
 
     public int getSize(){
         return this.taskList.size();
@@ -59,11 +77,73 @@ public class TaskList {
         return task;
     }
 
+    public ArrayList<Task> getTaskList(){
+        return this.taskList;
+    }
+
     private void addTask(Task task){
         this.taskList.add(task);
     }
 
-    public void removeTask(int taskNumber){
-        this.taskList.get(taskNumber);
+    private void deleteTask(int taskNumber){
+        this.taskList.remove(taskNumber);
     }
+
+    private void markTaskAsDone(int taskNumber){
+        this.taskList.get(taskNumber).markAsDone();
+    }
+
+//    public void executeTask(String operator, String taskDetails) throws DukeException {
+//        ArrayList<Task> myList = getTaskList();
+//        String[] description = taskDetails.split(" | ", 2);
+//
+//        if (!operatorList.contains(operator.toLowerCase())) {
+//            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        }
+//
+//        if (operator.toLowerCase().equals("done")) {
+//            try {
+//                markTaskAsDone(description);
+////                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e);
+//            }
+//        }
+//
+//        if (operator.toLowerCase().equals("delete")) {
+//            try {
+//                deleteTask(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e);
+//            }
+//        }
+//
+//        if (operator.toLowerCase().equals("todo")) {
+//            try {
+//                addToDo(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e);
+//            }
+//        }
+//
+//        if (operator.toLowerCase().equals("deadline")) {
+//            try {
+//                addDeadline(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e);
+//            }
+//        }
+//        if (operator.toLowerCase().equals("event")) {
+//            try {
+//                addEvent(parts, myList);
+//                FileWriting.saveTaskList(myList);
+//            } catch (DukeException e) {
+//                ui.showErrorMessage(e);
+//            }
+//        }
+//    }
+
 }
