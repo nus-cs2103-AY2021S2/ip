@@ -30,7 +30,7 @@ public class Parser {
         return lst;
     }
 
-    public static String convertTasksToString(TaskManager taskManager) {
+    public static String convertTasksToString(TaskList taskManager) {
         List<String> lst = new ArrayList<>();
         for (int i=0; i < taskManager.size(); i++) {
             Task task = taskManager.get(i);

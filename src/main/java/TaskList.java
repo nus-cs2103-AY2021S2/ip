@@ -1,8 +1,8 @@
 import java.util.List;
-public class TaskManager {
+public class TaskList {
     private List<Task> listOfTasks;
 
-    public TaskManager(List<Task> listOfTasks) {
+    public TaskList(List<Task> listOfTasks) {
         this.listOfTasks = listOfTasks;
     }
 

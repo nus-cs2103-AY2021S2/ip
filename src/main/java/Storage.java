@@ -32,8 +32,8 @@ public class Storage {
         return listOfTasks;
     }
 
-    public void saveTasks(TaskManager taskManager) {
-        String taskToSave = Parser.convertTasksToString(taskManager);
+    public void saveTasks(TaskList taskList) {
+        String taskToSave = Parser.convertTasksToString(taskList);
         try {
             FileWriter writer = new FileWriter(this.filePath + this.fileName);
             writer.write(taskToSave);

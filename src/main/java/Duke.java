@@ -8,7 +8,7 @@ public class Duke {
     private static String FILE_NAME = "history.txt";
     private Ui ui;
     private Storage storage;
-    private TaskManager taskManager;
+    private TaskList taskList;
 
     public static void main(String[] args) {
         Duke duke = new Duke(FILE_PATH, FILE_NAME);
@@ -18,7 +18,7 @@ public class Duke {
     public Duke(String filePath, String fileName) {
         ui = new Ui();
         storage = new Storage(filePath, fileName);
-        taskManager = new TaskManager(storage.readPreviousFile());
+        taskList = new TaskList(storage.readPreviousFile());
     }
 
     private void doCommand() {
@@ -47,22 +47,22 @@ public class Duke {
             else {
                 doTask(word);
             }
-            storage.saveTasks(taskManager);
+            storage.saveTasks(taskList);
         }
     }
 
     private void doList() {
-        for (int i=0; i < taskManager.size(); i++) {
-            Task task = taskManager.get(i);
+        for (int i=0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
             ui.printList(i, task);
         }
     }
 
     private void doDone(int index) {
         try {
-            Task currTask = taskManager.get(index - 1);
+            Task currTask = taskList.get(index - 1);
             currTask = currTask.doTask();
-            taskManager.set(index - 1, currTask);
+            taskList.set(index - 1, currTask);
             ui.printDoneSuccess(currTask);
         }
         catch (ArrayIndexOutOfBoundsException e) {
@@ -72,9 +72,9 @@ public class Duke {
 
     private void doDelete(int index) {
         try {
-            Task currTask = taskManager.get(index - 1);
-            taskManager.remove(index - 1);
-            ui.printDeleteSuccess(currTask, taskManager.size());
+            Task currTask = taskList.get(index - 1);
+            taskList.remove(index - 1);
+            ui.printDeleteSuccess(currTask, taskList.size());
         }
         catch (ArrayIndexOutOfBoundsException e) {
             ui.printDeleteFail();
@@ -107,7 +107,7 @@ public class Duke {
         try {
             String realWord = word.substring(5);
             ToDo todo = new ToDo(realWord);
-            taskManager.add(todo);
+            taskList.add(todo);
             doTaskFinally(todo);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -125,7 +125,7 @@ public class Duke {
             LocalDate deadlineDate = LocalDate.parse(deadlineDateHours[1]);
             LocalTime deadlineHour = LocalTime.parse(deadlineDateHours[2]);
             Deadline deadline = new Deadline(deadlineWord, deadlineDate, deadlineHour);
-            taskManager.add(deadline);
+            taskList.add(deadline);
             doTaskFinally(deadline);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -143,7 +143,7 @@ public class Duke {
             LocalDate eventDate = LocalDate.parse(eventDateHours[1]);
             LocalTime eventHour = LocalTime.parse(eventDateHours[2]);
             Event event = new Event(eventWord, eventDate, eventHour);
-            taskManager.add(event);
+            taskList.add(event);
             doTaskFinally(event);
         } catch (StringIndexOutOfBoundsException e) {
             throw new NoMeaningException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -151,6 +151,6 @@ public class Duke {
     }
 
     private void doTaskFinally(Task task) {
-        ui.printTaskFinally(task, taskManager.size());
+        ui.printTaskFinally(task, taskList.size());
     }
 }
