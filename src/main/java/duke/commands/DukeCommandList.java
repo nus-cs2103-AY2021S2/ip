@@ -2,11 +2,14 @@ package duke.commands;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
 import duke.storage.FileLoader;
-import duke.tasks.*;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * List command.
