@@ -7,4 +7,9 @@ public class ToDo extends Task {
 	public String toString() {
 		return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
 	}
+
+	@Override
+	public String encode() {
+		return String.format("T | %s | %s", this.isDone ? "1" : "0", this.description);
+	}
 }

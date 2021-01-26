@@ -1,6 +1,12 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Duke {
     public static void main(final String[] args) {
@@ -11,6 +17,16 @@ public class Duke {
         horizontalLine();
 
         final List<Task> store = new ArrayList<>();
+        final List<String> lines = loadFile();
+        if (lines == null) { // No files exist or file is corrupted
+            createDirectoryAndFile();
+        } else { // File may contains bad data: for now we ignore them
+            store.addAll(lines.stream()
+                    .map(str -> parseStringToTask(str))
+                    .filter(task -> task != null)
+                    .collect(Collectors.toList()));
+        }
+
         final Scanner scan = new Scanner(System.in);
         while (scan.hasNextLine()) {
             final String input = scan.nextLine().strip();
@@ -18,6 +34,12 @@ public class Duke {
             horizontalLine();
 
             if (input.toLowerCase().equals("bye")) {
+                // save file
+                final List<String> data = store.stream()
+                        .map(task -> encodeTaskToString(task))
+                        .filter(str -> str != null).collect(Collectors.toList());
+                saveFile(data);
+
                 System.out.println("\tBye. Hope to see you again soon!");
                 horizontalLine();
                 break;
@@ -39,6 +61,72 @@ public class Duke {
         scan.close();
     }
 
+    private static Task parseStringToTask(String str) {
+        String[] tokens = str.split(" \\| ");
+        try {
+            switch (tokens[0]) {
+            case "T":
+                final ToDo todo = new ToDo(tokens[2]);
+                if (tokens[1].equals("1")) todo.markAsDone();
+                return todo; 
+            case "D":
+                final Deadline deadline = new Deadline(tokens[2], tokens[3]);
+                if (tokens[1].equals("1")) deadline.markAsDone();
+                return deadline; 
+            case "E":
+                final Event event = new Event(tokens[2], tokens[3]);
+                if (tokens[1].equals("1")) event.markAsDone();
+                return event;
+            default:
+                return null;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    private static String encodeTaskToString(Task task) {
+        return task.encode();
+    }
+
+    private static void saveFile(List<String> data) {
+        Path path = Paths.get(".", "data", "duke.txt");
+        if (!Files.exists(path))
+            createDirectoryAndFile();
+        try {
+            Files.write(path, data, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.err.println("Duke cannot save file.");
+            e.printStackTrace();
+        }
+    }
+
+    private static void createDirectoryAndFile() {
+        Path dir = Paths.get(".", "data");
+        Path path = Paths.get(".", "data", "duke.txt");
+        try {
+            if (!Files.exists(dir))
+                Files.createDirectory(dir);
+            Files.createFile(path);
+        } catch (IOException e) {
+            System.err.println("Parent directory does not exist.");
+            e.printStackTrace();
+        }
+    }
+
+    private static List<String> loadFile() {
+        Path path = Paths.get(".", "data", "duke.txt");
+        if (!Files.exists(path))
+            return null;
+        try {
+            return Files.readAllLines(path, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.err.println("Duke cannot read the file.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private static void deleteTask(List<Task> store, String input) {
         final String[] splitOnSpace = input.split(" ", 2);
 
@@ -49,7 +137,8 @@ public class Duke {
                     final Task removed = store.remove(index);
                     System.out.println("\tNoted. I've removed this task: ");
                     System.out.printf("\t%s\n", removed);
-                    System.out.printf("\tNow you have %d task%s in the list.\n", store.size(), store.size() == 1 ? "" : "s");
+                    System.out.printf("\tNow you have %d task%s in the list.\n", store.size(),
+                            store.size() == 1 ? "" : "s");
                 } else {
                     System.out.println("\tOops! The index is out of bound.");
                 }
@@ -59,9 +148,9 @@ public class Duke {
         } else {
             System.out.println("\tPlease follow this format \"done <index>\".");
         }
-	}
+    }
 
-	private static void addTaskToList(List<Task> store, String command, String input) {
+    private static void addTaskToList(List<Task> store, String command, String input) {
         boolean isInsert = false;
         if (store.size() >= 100) {
             System.out.println("\tSorry. The database is full!");
