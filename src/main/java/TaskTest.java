@@ -14,6 +14,7 @@ public class TaskTest {
 
 	@Test
 	public void testStringConversion() {
-		assertEquals("[D][ ] project (by: Jan 21 2020)", new Deadline("project", "2020-01-21").toString());
+		assertEquals("[D][ ] project (by: Jan 21 2020)", 
+            new Deadline("project", "2020-01-21").toString());
 	}
 }
