@@ -68,7 +68,6 @@ public class Deadline extends Task {
         this.keyword = keyword;
     }
 
-
     /**
      * Override toString() method to be displayed in Ui
      * e.g. "[D][ ] cs2102 homework (by: 22 jan 2020)"
