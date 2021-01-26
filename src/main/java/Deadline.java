@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDate dueDate;
     private static final String TYPE = "D";
 
     /**
@@ -36,14 +35,12 @@ public class Deadline extends Task {
         return new Deadline(details[0], date);
     }
 
-    private Deadline(String description, LocalDate dueDate) {
-        super(description);
-        this.dueDate = dueDate;
+    private Deadline(String description, LocalDate date) {
+        super(description, date);
     }
 
-    private Deadline(boolean isDone, String description, LocalDate dueDate) {
-        super(description);
-        this.dueDate = dueDate;
+    private Deadline(boolean isDone, String description, LocalDate date) {
+        super(description, date);
         this.isDone = isDone;
     }
 
@@ -52,7 +49,7 @@ public class Deadline extends Task {
         return String.format("[%s]%s (by: %s)",
                 TYPE,
                 super.toString(),
-                dueDate.format(DateTimeFormatter.ofPattern("d MMM")));
+                date.format(DateTimeFormatter.ofPattern("d MMM")));
     }
 
     /**
@@ -63,7 +60,7 @@ public class Deadline extends Task {
         return List.of(TYPE,
                 isDone ? "1" : "0",
                 description,
-                dueDate.toString());
+                date.toString());
     }
 
     /**

@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    private LocalDate date;
     private static final String TYPE = "E";
 
     /**
@@ -37,13 +36,11 @@ public class Event extends Task {
     }
 
     private Event(String description, LocalDate date) {
-        super(description);
-        this.date = date;
+        super(description, date);
     }
 
     private Event(boolean isDone, String description, LocalDate date) {
-        super(description);
-        this.date = date;
+        super(description, date);
         this.isDone = isDone;
     }
 

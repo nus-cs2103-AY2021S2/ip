@@ -1,4 +1,5 @@
 import java.util.List;
+import java.time.LocalDate;
 
 /**
  * Represents a Task.
@@ -7,10 +8,18 @@ import java.util.List;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDate date;
 
     public Task(String description) {
         this.description = description;
-        isDone = false;
+        this.isDone = false;
+        this.date = null;
+    }
+
+    public Task(String description, LocalDate date) {
+        this.description = description;
+        this.isDone = false;
+        this.date = date;
     }
 
     /**
