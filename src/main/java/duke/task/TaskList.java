@@ -6,13 +6,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * A TaskList class to represent a list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructs a TaskList.
+     * @param tasks The list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Lists all tasks.
+     */
     public void list() {
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -21,6 +31,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Completes a task in the TaskList.
+     * @param fullCommand Command given by user.
+     * @throws DukeException If user input format is wrong.
+     */
     public void done(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length < 3) {
@@ -45,6 +60,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the TaskList.
+     * @param fullCommand Command given by user.
+     * @throws DukeException If user input format is wrong.
+     */
     public void delete(String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         if (inputArr.length < 3) {
@@ -68,6 +88,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a task to the TaskList.
+     * @param type The type of task.
+     * @param fullCommand Command given by user.
+     * @throws DukeException If user input format is wrong.
+     */
     public void addTask(String type, String fullCommand) throws DukeException {
         String[] inputArr = fullCommand.split(" ");
         switch (type) {
@@ -120,6 +146,11 @@ public class TaskList {
                 + "     Now you have " + this.tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Checks if given String is not Numeric.
+     * @param str String to be checked.
+     * @return True if not numeric, False otherwise.
+     */
     private static boolean isNotNumeric(String str) {
         if (str == null || str.length() == 0) {
             return true;

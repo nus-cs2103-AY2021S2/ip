@@ -14,13 +14,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A Storage class to handle storage operations.
+ */
 public class Storage {
     private final File file;
 
+    /**
+     * Constructs Storage.
+     * @param path The filepath of where the data file is to be stored at.
+     */
     public Storage(String path) {
         this.file = new File(path);
     }
 
+    /**
+     * Creates the data file and directory which contains it if it does not exists.
+     * @throws DukeException If unable to create file/directory.
+     */
     public void createFileAndDirectory() throws DukeException {
         try {
             File dir = new File("data");
@@ -40,6 +51,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from data file to Duke.
+     * @return The list of tasks to be loaded.
+     * @throws DukeException If file cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         Scanner sc;
         try {
@@ -68,6 +84,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the list of task to the data file.
+     * @param tasks The list of tasks to be stored.
+     * @throws DukeException If unable to save data.
+     */
     public void save(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, true);
@@ -81,6 +102,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Clears the data in the existing data file.
+     * @throws DukeException If unable to clear data.
+     */
     public void clear() throws DukeException {
         try {
             FileWriter cleaner = new FileWriter(file, false);
