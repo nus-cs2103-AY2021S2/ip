@@ -1,8 +1,8 @@
-deadline read book /by Someday
-event cs2103 lecture /at next Thursday
+deadline read book /by 1997-30-02 1800
+event cs2103 lecture /at next Thursday 2010-15-12
 list
-deadline cs2103 assignment /by Thursday 2359
-event cs2103 lecture /at this Thursday too!! :566&:$$
+deadline cs2103 assignment /by Thursday 1992-29-04
+event cs2103 lecture /at 2007-11-03
 done 3
 list
 done 4

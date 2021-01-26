@@ -1,3 +1,1 @@
 
-T | 0 | Nothing
-T | 0 | Yes

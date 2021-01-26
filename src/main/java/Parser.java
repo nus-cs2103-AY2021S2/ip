@@ -1,15 +1,14 @@
-<<<<<<< HEAD
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-=======
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
->>>>>>> branch-level-8
+
 
 public class Parser {
     /**
@@ -66,13 +65,13 @@ public class Parser {
     }
 
     public static LocalDate parseDate (String input) {
-        String regex = "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})"; // format YYYY-MM-DD
+        String regex = "(?<year>\\d{4})-(?<month>\\d{1,2})-(?<day>\\d{1,2})"; // format YYYY-MM-DD
         Pattern dateFormat = Pattern.compile(regex);
         Matcher m = dateFormat.matcher(input);
         m.find();
-        String day = m.group("day");
-        String month = m.group("month");
-        String year = m.group( "year");
+        String day = String.format("%02d", Integer.parseInt(m.group("day")));
+        String month = String.format("%02d", Integer.parseInt(m.group("month")));
+        String year = m.group("year");
         return LocalDate.parse(year + '-' + month + '-' + day);
     }
 

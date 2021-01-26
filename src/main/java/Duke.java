@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -204,9 +205,11 @@ public class Duke {
         //initialize listOfTasks From Storage
         try {
             listOfTasks = storage.loadStorage();
-        } catch (Exception err) {
-            System.out.println(err.getMessage());
+        } catch (FileNotFoundException err) {
+            System.out.println("Error in reading file /data/duke.txt");
+            return;
         }
+
         String input;
         // Read in user input, determine the type of command that is being issued, (if any) parses the command
         //and performs the necessary action.
@@ -238,7 +241,8 @@ public class Duke {
 
             } catch (DukeException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
-            } catch (Exception e) {
+            } catch (IOException e) {
+                System.out.println(e.getCause());
                 System.out.println(e.getMessage());
             }
 

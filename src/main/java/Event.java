@@ -13,16 +13,18 @@ public class Event extends Task {
         String dateString = Parser.extractDate(at);
         if (!dateString.equals("")) {
             this.dateOfEvent = Parser.parseDate(dateString);
-            String convertedDateString = dateOfEvent.format(DateTimeFormatter.ofPattern("MMM d yyyy"));  // convert the format
-            this.at = at.replaceAll(dateString, convertedDateString);
+            this.at = at;
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Sorry Unable to Parse Date for Event. Did you put in yyyy-mm-dd format?");
         }
     }
 
     @Override
     public String toString() {
-        return "[" + this.getLetterCode() + "]" + super.toString() + " (at: " + at + ")";
+        String dateString = Parser.extractDate(at);
+        String convertedDateString = dateOfEvent.format(DateTimeFormatter.ofPattern("MMM d yyyy"));  // convert the format
+        String modified_at = at.replaceAll(dateString, convertedDateString);
+        return "[" + this.getLetterCode() + "]" + super.toString() + " (at: " + modified_at + ")";
     }
 
     @Override
