@@ -48,7 +48,9 @@ public class Deadline extends Todo {
      */
     private LocalDateTime parseStringToLocalDateTime(String deadlineString)
             throws DateTimeParseException {
-        return LocalDateTime.parse(deadlineString.length() == 15 ? deadlineString
+        // @formatter:off
+        return LocalDateTime.parse(deadlineString.length() == 15 
+                ? deadlineString
                 : String.format("0%s", deadlineString), inputDateFormat);
     }
 

@@ -47,7 +47,9 @@ public class Event extends Todo {
      */
     private LocalDateTime parseStringToLocalDateTime(String eventDateTimeString)
             throws DateTimeParseException {
-        return LocalDateTime.parse(eventDateTimeString.length() == 15 ? eventStringDateTime
+        // @formatter:off
+        return LocalDateTime.parse(eventDateTimeString.length() == 15 
+                ? eventStringDateTime
                 : String.format("0%s", eventStringDateTime), inputDateFormat);
     }
 

@@ -71,7 +71,7 @@ public class TaskList {
                 // split message by space as delimiter
                 List<String> splitMessage = Arrays.asList(message.split(" "));
                 // if any part of split message is contained in keywordList, return true
-                return splitMessage.stream().filter(keywordList::contains).count() > 0;
+                return splitMessage.stream().anyMatch(keywordList::contains);
             }).orElse(false);
         }).collect(Collectors.toList()));
     }
