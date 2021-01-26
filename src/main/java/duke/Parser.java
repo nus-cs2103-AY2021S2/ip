@@ -1,10 +1,20 @@
 package duke;
 import java.util.Scanner;
 
+/**
+ * Handles individual inputs and interprets the commands from the user.
+ */
 public class Parser {
     public Parser(){
     }
 
+    /**
+     * Only constructor for parser. Catches cases where the user inputs an invalid command.
+     * @param duke
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     protected void start(Duke duke,TaskList taskList, Ui ui, Storage storage){
         Scanner sc = new Scanner(System.in);
         String scannedLine = sc.nextLine();
@@ -19,6 +29,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Listens to input. Parses the input into the command, body and date/time.
+     * Activates taskList to manage the task.
+     * Activates UI to respond to the user.
+     * Hanldes commands:
+     * "list", "save", "bye", "delete", "done", "todo" , "deadline", "event".
+     * @param duke
+     * @param currLine the current input from the user
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @throws Exception when an invalid command is made. i.e. the first word in the input is
+     * invalid
+     */
     protected void handleCommand(Duke duke,String currLine, TaskList taskList, Ui ui, Storage storage) throws Exception {
         // basic commands
         currLine = currLine.toLowerCase();

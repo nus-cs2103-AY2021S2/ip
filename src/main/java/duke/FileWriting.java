@@ -4,6 +4,10 @@ import java.io.IOException;
 /*
 Taken from 2103T file access demo
  */
+
+/**
+ * A class that is used to write files and catch checked exceptions
+ */
 public class FileWriting {
 
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
@@ -12,6 +16,11 @@ public class FileWriting {
         fw.close();
     }
 
+    /**
+     * Writes into file and catches IO excpetion.
+     * @param filePath
+     * @param string
+     */
     protected static void write(String filePath, String string) {
         String file2 = filePath;
         try {

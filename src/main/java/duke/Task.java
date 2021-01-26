@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Task (should be an abstract class but it is currently not) is a superclass
+ * of Event, Deadline and Todo.
+ * Duke manages these tasks.
+ */
 public class Task {
     protected String type = "";
     boolean isDone = false;
@@ -12,6 +17,11 @@ public class Task {
     String dateTime;
     LocalDate date;
 
+    /**
+     * Constructor for Task that sets all the instance variables to a default state.
+     * eg, name = "";
+     * @param taskLine untouched input from the user
+     */
     protected Task(String taskLine) {
         this.taskLine = taskLine;
         this.name = "";
