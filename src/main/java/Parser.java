@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Parser {
 
     public static Command parse(String inputString) throws DukeException {
@@ -30,5 +33,20 @@ public class Parser {
         default:
             throw new DukeException("Sorry, I don't quite understand!");
         }
+    }
+
+    public static LocalDateTime parseInputToDateTime(String dateTime) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
+        return LocalDateTime.parse(dateTime, format);
+    }
+
+    public static LocalDateTime parseSaveToDateTime(String dateTime) {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return LocalDateTime.parse(dateTime, format);
+    }
+
+    public static String parseDateTimeToString(LocalDateTime dateTime) {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
+        return dateTime.format(pattern);
     }
 }

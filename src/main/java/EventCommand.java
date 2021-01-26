@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class EventCommand extends Command {
 
     private Event event;
@@ -13,7 +15,8 @@ public class EventCommand extends Command {
             if (descArr.length < 2) {
                 throw new DukeException(NO_ARGUMENT_ERROR);
             }
-            this.event = new Event(descArr[0], descArr[1]);
+            LocalDateTime time = Parser.parseInputToDateTime(descArr[1]);
+            this.event = new Event(descArr[0], time);
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }
