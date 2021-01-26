@@ -9,12 +9,12 @@ import java.util.List;
  * Class that sets up the save/load system in project Duke.
  */
 
-public class FileManager {
+public class Storage {
 
     static Path dir = Paths.get("data");
     static Path file = Paths.get("data/saveFile.txt");
 
-    public FileManager() {
+    public Storage() {
         if (!Files.isDirectory(dir)) {
             try {
                 Files.createDirectory(dir);
@@ -31,11 +31,11 @@ public class FileManager {
      * Function that saves the file after each usage of duke, saves when the user inputs the command
      * "bye".
      */
-    public static void saveFile() {
+    public void saveFile(TaskList store) {
         try {
             String save = "";
-            for (int i = 0; i < Skeleton.storage.size(); i++) {
-                save += Skeleton.storage.get(i) + "\n";
+            for (int i = 0; i < store.storage.size(); i++) {
+                save += store.storage.get(i).getData() + "\n";
             }
             save = save.replaceAll("\u2713", "1");
             save = save.replaceAll("\u2718", "0");
@@ -52,10 +52,10 @@ public class FileManager {
     /**
      * Function that loads the file from previous usages of the chatbot Duke.
      */
-    public static void loadFile() {
+    public void loadFile(TaskList store) {
         try {
             List<String> contents = Files.readAllLines(Paths.get("data/saveFile.txt"));
-            Skeleton.storage.clear();
+            store.storage.clear();
             for (int i = 0; i < contents.size(); i++) {
                 char type = contents.get(i).charAt(0);
                 char isDone = contents.get(i).charAt(1);
@@ -64,15 +64,15 @@ public class FileManager {
                 rest = rest.replaceFirst("^\\s*"," ");
                 switch (type) {
                     case 'T':
-                        Skeleton.storage.add(new Todo(rest, status));
+                        store.storage.add(new Todo(rest, status));
                         break;
                     case 'D':
                         String[] restD1 = rest.split("by:");
-                        Skeleton.storage.add(new Deadline(restD1[0], status, restD1[1]));
+                        store.storage.add(new Deadline(restD1[0], status, restD1[1]));
                         break;
                     case 'E':
                         String[] restE1 = rest.split("at:");
-                        Skeleton.storage.add(new Event(restE1[0], status, restE1[1]));
+                        store.storage.add(new Event(restE1[0], status, restE1[1]));
                         break;
                     default:
                         break;

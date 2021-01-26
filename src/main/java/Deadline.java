@@ -6,6 +6,7 @@ public class Deadline extends Task {
 
     public LocalDate by;
     protected char type;
+
     public Deadline(String task, String by) {
         super(task);
         by = by.replaceFirst(" ", "");
@@ -22,9 +23,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-
         return "[" + type + "]"  + super.toString()
                 + "(by:" + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+    }
 
+    @Override
+    public String getData() {
+        return "[" + type + "]"  + super.toString()
+                + "(by:" + by + ")";
     }
 }
