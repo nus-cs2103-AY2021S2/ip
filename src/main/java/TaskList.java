@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class TaskList {
     private ArrayList<Task> list;
@@ -59,7 +60,18 @@ class TaskList {
         }
     }
 
-    protected void setExited() {
+    public List<Task> findTasksWithString(String keyword) {
+        List<Task> tasksWithString = new ArrayList<>();
+        for (Task t: list) {
+            String taskDesc = t.getDesc();
+            if (taskDesc.contains(keyword)) {
+                tasksWithString.add(t);
+            }
+        }
+        return tasksWithString;
+    }
+
+    public void setExited() {
         this.isDone = true;
     }
 
