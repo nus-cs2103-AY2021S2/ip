@@ -20,9 +20,9 @@ public class Event extends Task {
         // overrides taskStatus() method
         public String taskStatus() {
             if (this.isDone()) {
-                return "[E][X] " + this.getTask_details() + " (at: " + date + ")";
+                return "E 1 " + this.getTask_details() + " (at: " + date + ")";
             } else {
-                return "[E][ ] " + this.getTask_details() + " (at: " + date + ")";
+                return "E 0 " + this.getTask_details() + " (at: " + date + ")";
             }
         }
 }

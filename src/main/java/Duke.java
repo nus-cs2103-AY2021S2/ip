@@ -1,4 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -10,11 +17,19 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+        File taskListFile;
+
+        // check if dukeTaskList file has been made
+        if (Files.notExists(Path.of("dukeTaskList.txt"))) {
+            taskListFile = new File("dukeTaskList.txt");
+        } else {
+            taskListFile = new File("dukeTaskList.txt");
+            taskArrayList = readFile(taskListFile);
+        }
+
         // read user input
         String input = reader.nextLine();
-
-        // create list to store tasks
-        ArrayList<Task> taskArrayList = new ArrayList<>();
 
         try {
             while (true) {
@@ -43,6 +58,7 @@ public class Duke {
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(to_complete.completeTask().taskStatus());
 
+                    writeFile(taskArrayList, taskListFile);
                     input = reader.nextLine();
 
                     // user wants to add a ToDo task
@@ -70,6 +86,7 @@ public class Duke {
                     System.out.println(toAdd.taskStatus());
                     System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
 
+                    writeFile(taskArrayList, taskListFile);
                     input = reader.nextLine();
 
                     // user wants to add a Deadline
@@ -115,6 +132,7 @@ public class Duke {
                     System.out.println(toAdd.taskStatus());
                     System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
 
+                    writeFile(taskArrayList, taskListFile);
                     input = reader.nextLine();
 
                     // user wants to add an Event
@@ -160,6 +178,7 @@ public class Duke {
                     System.out.println(toAdd.taskStatus());
                     System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
 
+                    writeFile(taskArrayList, taskListFile);
                     input = reader.nextLine();
 
                 // user wants to delete a task from the list
@@ -174,6 +193,7 @@ public class Duke {
                     System.out.println(to_remove.taskStatus());
                     System.out.println("Now you have " + taskArrayList.size() + " tasks in the list");
 
+                    writeFile(taskArrayList, taskListFile);
                     input = reader.nextLine();
 
                 // user input is unknown
@@ -190,6 +210,92 @@ public class Duke {
         } finally {
             // close FastIO to print exit statement
             reader.close();
+        }
+    }
+
+    private static ArrayList<Task> readFile(File file) {
+
+        ArrayList<Task> output = new ArrayList<>();
+
+        try {
+            Scanner scanner = new Scanner(file);
+
+        Task toAdd;
+
+        while (scanner.hasNext()) {
+            String taskLine = scanner.nextLine();
+            String[] split = taskLine.split(" ");
+            String taskType = split[0];
+            String taskDone = split[1];
+            boolean done = taskDone.equals("1");
+            String task = "";
+            String date = "";
+
+            int counter;
+            outerloop:
+            for (counter = 2; counter < split.length; counter++) {
+                if (split[counter].startsWith("-")) {
+                    break outerloop;
+                } else {
+                    if (counter == 1) {
+                        task = task + split[counter];
+                    } else {
+                        task = task + " " + split[counter];
+                    }
+                }
+            }
+
+            boolean first = true;
+            for (counter = counter + 1; counter < split.length; counter++) {
+                if (first) {
+                    date = date + split[counter];
+                    first = false;
+                } else {
+                    date = date + " " + split[counter];
+                }
+            }
+
+            if (taskType.equals("E")) {
+                toAdd = new Event(task, date);
+            } else if (taskType.equals("D")) {
+                toAdd = new Deadline(task, date);
+            } else {
+                toAdd = new ToDo(task);
+            }
+
+            if (done) {
+                toAdd.completeTask();
+            }
+
+            output.add(toAdd);
+        }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Error, file not found. BUG!");
+        }
+
+        return output;
+    }
+
+    private static void writeFile(ArrayList<Task> arr, File file) {
+
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            String toWrite = "";
+
+            for (int i = 0; i < arr.size(); i++) {
+                if (i == arr.size()) {
+                    toWrite = toWrite + arr.get(i).taskStatus();
+                } else {
+                    toWrite = toWrite + arr.get(i).taskStatus() + "\n";
+                }
+            }
+
+            fileWriter.write(toWrite);
+            fileWriter.close();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

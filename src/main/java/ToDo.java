@@ -16,9 +16,9 @@ public class ToDo extends Task {
     // overrides taskStatus() method
     public String taskStatus() {
         if (this.isDone()) {
-            return "[T][X] " + this.getTask_details();
+            return "T 1 " + this.getTask_details();
         } else {
-            return "[T][ ] " + this.getTask_details();
+            return "T 0 " + this.getTask_details();
         }
     }
 }
