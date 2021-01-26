@@ -93,4 +93,20 @@ public class TaskList {
         return tobeDone;
     }
 
+    TaskList find(String keyword) throws DukeException {
+        if (keyword.length() == 0) {
+            throw new DukeException("OOPS! No keyword is given!");
+        }
+        String keywordLowerCased = keyword.toLowerCase();
+        TaskList filteredList = new TaskList();
+        for (Task task : taskList) {
+            String description = task.description.toLowerCase();
+            if (description.contains(keywordLowerCased)) {
+                filteredList.taskList.add(task);
+                filteredList.listLength++;
+            }
+        }
+        return filteredList;
+    }
+
 }
