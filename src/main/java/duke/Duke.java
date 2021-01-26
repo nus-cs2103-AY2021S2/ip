@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke{
+public class Duke {
     private Storage storage;
     private TaskManager taskManager;
     private Ui ui;

@@ -5,6 +5,7 @@ import java.time.LocalDate;
  * Represents a task that has to be done.
  */
 public class Task{
+
     protected String description;
     protected boolean isCompleted;
 
@@ -13,7 +14,7 @@ public class Task{
         this.isCompleted = isCompleted;
     }
 
-    public void markComplete(){
+    public void markComplete() {
         this.isCompleted = true;
     }
 

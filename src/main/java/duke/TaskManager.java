@@ -12,7 +12,7 @@ public class TaskManager{
     private final static String LIST = "list";
     private final static String DUE = "due";
 
-    public Task add(String type, String task, boolean isCompleted, boolean isOldData)  {
+    public Task add(String type, String task, boolean isCompleted)  {
         if (type.equals(TODO)) {
             Task newTask = new ToDo(task, isCompleted);
             list.add(newTask);
@@ -55,7 +55,6 @@ public class TaskManager{
     public ArrayList<Task> getTasksOn(String date) {
         LocalDate currentDate = LocalDate.parse(date);
         System.out.println("Here are the tasks due on " + date + ": " );
-        int counter = 1;
         ArrayList<Task> dueList = new ArrayList<>();
         for(Task task : list) {
             if(task.getTaskDate().equals(currentDate)) {
@@ -70,7 +69,7 @@ public class TaskManager{
             String[] arr = task.split(" ", 3);
             String type = arr[0];
             boolean isCompleted = arr[1].equals("1");
-            add(arr[0], arr[2], isCompleted, true);
+            add(type, arr[2], isCompleted);
         }
     }
 

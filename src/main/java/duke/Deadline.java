@@ -7,18 +7,18 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that has a deadline.
  */
 public class Deadline extends Task{
+
     protected LocalDate date;
     protected LocalTime time;
 
-
     Deadline(String description, boolean isCompleted, String deadline) {
         super(description, isCompleted);
-        String[] dateTime = deadline.split(" ");
-        String deadlineDate = dateTime[0];
-        this.date = LocalDate.parse(deadlineDate);
-        if (dateTime.length == 2) {
-            String deadlineTime = dateTime[1];
-            this.time = LocalTime.parse(deadlineTime);
+        String[] dateAndTime = deadline.split(" ");
+        String date = dateAndTime[0];
+        this.date = LocalDate.parse(date);
+        if (dateAndTime.length == 2) {
+            String time = dateAndTime[1];
+            this.time = LocalTime.parse(time);
         } else {
             this.time = null;
         }

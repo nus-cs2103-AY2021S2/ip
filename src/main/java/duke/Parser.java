@@ -14,7 +14,7 @@ public class Parser {
 
     public static ArrayList<String> parseToStart(ArrayList<String> oldData) {
         ArrayList<String> parsedData = new ArrayList<>();
-        for(String s : oldData) {
+        for (String s : oldData) {
             String[] array = s.split(" \\| ");
             if (s.contains("T")) {
                 array[0] = "todo";
@@ -24,8 +24,8 @@ public class Parser {
                 array[0] = "event";
             }
             String parsedString = array[0];
-            for(int i = 1; i < array.length; i++) {
-                if(i == 3) {
+            for (int i = 1; i < array.length; i++) {
+                if (i == 3) {
                     parsedString = array[0].equals("deadline") ? parsedString + " /by " + array[i] : parsedString
                             + " /at " + array[i];
                 } else {

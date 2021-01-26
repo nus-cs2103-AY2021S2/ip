@@ -10,6 +10,7 @@ import java.util.Scanner;
  * Represents a class that stores and real files stored in the hard disk.
  */
 public class Storage{
+
     private String fileUrl;
 
     Storage(String fileUrl) {

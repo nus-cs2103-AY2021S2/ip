@@ -1,5 +1,5 @@
 package duke;
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Represents a task that has no deadline.

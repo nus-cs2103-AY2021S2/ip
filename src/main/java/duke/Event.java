@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
  * Represents a task that happens on a specific date and time.
  */
 public class Event extends Task{
+
     protected LocalDate date;
     protected String duration;
-
 
     Event(String description, boolean isCompleted, String time) {
         super(description, isCompleted);

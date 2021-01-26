@@ -1,9 +1,9 @@
 package duke;
-import java.io.IOException;
+
 /**
  * Represents a list command keyed in by the user.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     ListCommand(String[] parsedCommand) {
         super(parsedCommand);
@@ -16,7 +16,7 @@ public class ListCommand extends Command{
      * @param ui Ui object that handles user interaction.
      * @param storage Storage object that handles the updating of stored file.
      */
-    public void execute(TaskManager taskManager, Ui ui, Storage storage)  {
+    public void execute(TaskManager taskManager, Ui ui, Storage storage) {
         ui.showAllTasks(taskManager.getList());
     }
 }

@@ -36,7 +36,7 @@ public class Ui {
     }
 
     public void showAllTasks(ArrayList<Task> list) {
-        if(list.size() == 0) {
+        if (list.size() == 0) {
             System.out.println("There are no tasks in your list.");
         } else {
             System.out.println("Here are the tasks in your list:");
@@ -58,6 +58,5 @@ public class Ui {
             System.out.println((i + 1) + ". " + list.get(i));
         }
         System.out.println("");
-
     }
 }

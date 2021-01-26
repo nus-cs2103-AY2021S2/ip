@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 /**
  * Represents a bye command keyed in by the user.
  */
