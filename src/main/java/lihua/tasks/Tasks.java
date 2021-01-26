@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.json.simple.JSONArray;
 
@@ -50,6 +51,22 @@ public class Tasks {
     public Task getTaskDone(int i) throws IndexOutOfBoundsException {
         tasks.get(i - 1).setDone(true);
         return tasks.get(i - 1);
+    }
+
+    public String listTasks(String keyWord) {
+        String message = "";
+        // tasks is not null, but maybe empty
+        for (int i = 1; i <= tasks.size(); i++) {
+            if (tasks.get(i - 1).getName().toLowerCase().contains(keyWord.toLowerCase())) {
+                message += String.format("%d. %s\n", i, tasks.get(i - 1));
+            }
+        }
+        if (message.equals("")) {
+            message = String.format("Tasks containing '%s' do not exist :')", keyWord);
+        } else {
+            message = String.format("Here are all your tasks containing '%s':\n%sGood luck. :D", keyWord, message);
+        }
+        return message;
     }
 
     /**

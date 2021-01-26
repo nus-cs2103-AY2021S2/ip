@@ -7,6 +7,7 @@ import lihua.commands.DoneCommand;
 import lihua.commands.ExitCommand;
 import lihua.commands.HelpCommand;
 import lihua.commands.ListCommand;
+import lihua.commands.FindCommand;
 
 import lihua.tasks.Deadline;
 import lihua.tasks.Event;
@@ -69,6 +70,9 @@ public class Parser {
                 break;
             case "help":
                 command = new HelpCommand();
+                break;
+            case "find":
+                command = new FindCommand(split[1]);
                 break;
             default:
                 command = new HelpCommand(false);

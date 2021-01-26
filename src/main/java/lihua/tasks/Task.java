@@ -30,6 +30,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * Gets the date for the class.
      *

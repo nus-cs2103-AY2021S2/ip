@@ -13,8 +13,8 @@ import lihua.commands.ExitCommand;
 public class Messages {
     /** Hello message */
     public static final String MESSAGE_HELLO =
-            "Hello! My name is Lihua.\n"
-                    + "What can I do for you today? (=~ω~=)";
+            "Hello! My name is Lihua.\n" +
+                    "What can I do for you today? (=V=)";
     /** Help prompt message */
     public static final String MESSAGE_GET_HELP =
             "Sorry, I do not understand your command :')\n"
@@ -25,7 +25,7 @@ public class Messages {
     /** Exit message */
     public static final String MESSAGE_INFORM_EXIT =
             "Exiting Lihua as requested...\n"
-                    + "Goodbye! Hope to see you again soon! (=~ω~=)";
+                    + "Goodbye! Hope to see you again soon! (=V=)";
     /** Adding task failure message */
     public static final String MESSAGE_REPORTING_ADDING_FAILURE =
             "Sorry, the task adding failed. :( Please check your storage devices.";
