@@ -5,8 +5,6 @@ import java.util.Scanner;
 
 public class UI implements Serializable {
     
-    private Parser parser;
-    
     public UI() {
         System.out.println("Hello! I'm Kelbot\n" + "What can I do for you?");
     }
@@ -15,10 +13,6 @@ public class UI implements Serializable {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         return new Parser(input);
-    }
-    
-    public Parser getParser() {
-        return this.parser;
     }
     
     public void sayGoodbye() {

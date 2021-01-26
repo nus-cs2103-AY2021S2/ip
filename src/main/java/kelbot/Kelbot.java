@@ -56,12 +56,12 @@ public class Kelbot implements Serializable {
                     try {
                         if (taskName == "") {
                             throw new KelbotException("Task name cannot be empty!");
-                        } else if (date == null) {
-                
                         } else if (command == Command.TODO) {
                             TodoTask newTodoTask = new TodoTask(taskName);
                             taskList.add(newTodoTask);
                             ui.printAdd(newTodoTask, taskList.getSize());
+                        } else if (date == null) {
+    
                         } else if (command == Command.DEADLINE) {
                             DeadlineTask newDeadlineTask = new DeadlineTask(taskName, date);
                             taskList.add(newDeadlineTask);
@@ -83,7 +83,7 @@ public class Kelbot implements Serializable {
     }
     
     public static void main(String[] args) throws KelbotException {
-        java.nio.file.Path path = java.nio.file.Paths.get("data", "Kelbot.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get("src", "main", "data", "Kelbot.txt");
         new Kelbot(path).run();
     }
 }
