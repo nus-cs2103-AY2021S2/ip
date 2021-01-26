@@ -27,26 +27,20 @@ public class Duke {
             try {
                 String command = scanner.next();
                 listen(command);
-            } catch (DukeInvalidCommandException e) {
-                System.out.println("Sorry I don't understand, please key in a valid command!\n");
-            } catch (DukeToDoException e) {
-                System.out.println("ToDo description cannot be blank!\n");
-            } catch (DukeEventException e) {
-                System.out.println("Event command must follow the format: description /at time\n");
-            } catch (DukeDeadlineException e) {
-                System.out.println("Deadline command must follow the format: description /by time\n");
+            } catch (DukeException e) {
+                System.out.println("Sorry boss something went wrong: ");
+                System.out.println(e.getMessage());
             } finally {
-                System.out.println("Hit me up boss.");
+                System.out.println("\nHit me up boss.");
             }
         }
     }
 
     private void greet() {
-        System.out.println("Hello, I'm Duke!\n" + "What can I do for you?\n");
+        System.out.println("Hello Boss, I'm your top henchman.\n" + "What can I do for you?\n");
     }
 
-    private void listen(String command) throws
-            DukeInvalidCommandException, DukeToDoException, DukeEventException, DukeDeadlineException {
+    private void listen(String command) throws DukeException {
         switch (command) {
         case "bye":
             shutDown();
@@ -73,13 +67,13 @@ public class Duke {
             addToList(new ToDo(scanner.nextLine().substring(1)));
             break;
         default:
-            throw new DukeInvalidCommandException();
+            throw new DukeException("Invalid command, please provide a supported command.");
         }
     }
 
     private void addToList(Task task) {
         tasks.add(task);
-        System.out.println("A new challenger has appeared: " + task + "\n");
+        System.out.println("Here's a new task: " + task);
     }
 
     private void printList() {
@@ -98,7 +92,7 @@ public class Duke {
         task.markAsDone();
         System.out.println("Impressive, yet another task has been done: \n"
                 + task
-                + "\nOne step closer to freedom now boss.\n");
+                + "\nOne step closer to freedom now boss.");
     }
 
     private void deleteTask(int index) {
@@ -106,7 +100,7 @@ public class Duke {
         tasks.remove(index - 1);
         System.out.println("Alrighty bossman. I shall wipe this task off the face of the earth: \n"
                 + task
-                + "\nGood riddance.\n");
+                + "\nGood riddance.");
     }
 
     private void shutDown() {
