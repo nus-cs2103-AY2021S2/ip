@@ -1,18 +1,33 @@
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.List;
 
 public class Duke {
     static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
     String logo;
-    Tasklist list;
-    public Duke(){
+    TaskList list;
+
+    public Duke() {
         this.logo =
                 " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        this.list = new Tasklist();
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
+        this.list = new TaskList();
 
+    }
+
+    public Duke(TaskList list) {
+        this.logo =
+                " ____        _        \n"
+                        + "|  _ \\ _   _| | _____ \n"
+                        + "| | | | | | | |/ / _ \\\n"
+                        + "| |_| | |_| |   <  __/\n"
+                        + "|____/ \\__,_|_|\\_\\___|\n";
+        this.list = list;
     }
 
     public void greet() {
@@ -25,15 +40,15 @@ public class Duke {
     public void addTask(String message, String type, String date) {
         Task task = null;
         switch (type) {
-            case "todo":
-                task = new Todo(message);
-                break;
-            case "deadline":
-                task = new Deadline(message, date);
-                break;
-            case "event":
-                task = new Event(message, date);
-                break;
+        case "todo":
+            task = new Todo(message);
+            break;
+        case "deadline":
+            task = new Deadline(message, date);
+            break;
+        case "event":
+            task = new Event(message, date);
+            break;
         }
 
         list.addItem(task);
@@ -70,4 +85,11 @@ public class Duke {
     public void showTasks() {
         list.printList();
     }
+
+    public String getTasks() {
+        return list.getTasksAsString();
+    }
+
+    public List<Task> getList() { return list.getLst();}
+
 }
