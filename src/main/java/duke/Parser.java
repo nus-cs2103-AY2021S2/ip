@@ -40,6 +40,8 @@ public class Parser {
             } else if (params[0].equals("event")) {
                 return new DukeCommand(Command.EVENT, params[1]);
 
+            } else if (params[0].equals("find")) {
+                return new DukeCommand(Command.FIND, params[1]);
             } else {
                 return new DukeCommand(Command.INVALID, "");
             }
