@@ -13,6 +13,10 @@ public class Event extends Task{
         this.time = time;
     }
 
+    public String getTime() {
+        return this.time;
+    }
+
     @Override
     public Event doTask() {
         return new Event(this.job, true, this.time);
