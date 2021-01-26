@@ -47,6 +47,28 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Task index must be in range!");
             }
+        } else if (line.startsWith("find ")) {
+            // Find string in the list of tasks
+            String findStr = line.substring(5);
+            int index = 0;
+            boolean isFound = false;
+            for (AbstractTask task : tasks) {
+                if (task.toString().contains(findStr)) {
+                    isFound = true;
+                    break;
+                }
+            }
+            if (!isFound) {
+                System.out.println("No tasks with the keyword found!");
+            } else {
+                System.out.println("\tI've found the following task(s) with the specified keyword:");
+                for (AbstractTask task : tasks) {
+                    if (task.toString().contains(findStr)) {
+                        index++;
+                        System.out.printf("\t%d. %s\n", index, task.toString());
+                    }
+                }
+            }
         } else {
             // No command, add the line task based on the prefix inside.
             try {
