@@ -31,6 +31,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Format the task into custom format before saving into data file
      */
