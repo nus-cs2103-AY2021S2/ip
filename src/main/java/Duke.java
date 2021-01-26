@@ -12,7 +12,7 @@ public class Duke {
         FileWriter fw = null;
         try {
             fw = new FileWriter(save, true);
-            fw.write(task.fileString());
+            fw.write(task.fileString() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -28,11 +28,13 @@ public class Duke {
             temp.createNewFile();
             Scanner sc = new Scanner(save);
             FileWriter fw = new FileWriter(temp);
-            while(sc.hasNext()) {
+            while(sc.hasNextLine()) {
                 //skip the line to be deleted
                 if (ctr != index) {
+                    System.out.println("line added");
                     fw.write(sc.nextLine());
                 }
+                sc.nextLine();
                 ctr++;
             }
             fw.close();
@@ -48,7 +50,9 @@ public class Duke {
     }
 
     private static void loadData() throws IOException {
+        File directory = new File("data");
         File save = new File("./data/duke.txt");
+        directory.mkdir();
         save.createNewFile();
         Scanner sc = new Scanner(save);
         while (sc.hasNext()) {
