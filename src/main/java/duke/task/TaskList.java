@@ -118,6 +118,8 @@ public class TaskList {
 
         if (out.length() == 0) {
             out.append(DukeString.MESSAGE_NONE_FOUND);
+        } else {
+            out.deleteCharAt(out.length() - 1);
         }
 
         return out.toString();
