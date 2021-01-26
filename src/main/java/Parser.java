@@ -11,7 +11,10 @@ public class Parser {
             throw new DukeException("Please enter a command");
         }
 
-        if (keyword.equalsIgnoreCase("list")) {
+        //Commands that does not need a description
+        if (keyword.equalsIgnoreCase("bye")) {
+            return new SaveCommand(keyword);
+        } else if (keyword.equalsIgnoreCase("list")) {
             return new ListCommand();
         } else if (keyword.equalsIgnoreCase("done") || keyword.equalsIgnoreCase("delete")) {
             int option = Integer.parseInt(fullCommand.substring(firstSpace + 1)) - 1;
@@ -27,7 +30,14 @@ public class Parser {
             throw new DukeException("The description cannot be empty");
         }
 
-        return null;
+        //Commands that needs a description
+        Task task = null;
+        if(keyword.equalsIgnoreCase("todo")) {
+            task = new Todo(fullCommand.substring(firstSpace));
+        }
+
+        //String taskDescription = fullCommand.substring(firstSpace, firstSlash);
+        return new AddCommand(task);
     }
 
     public static LocalDateTime parseDate(String date) {

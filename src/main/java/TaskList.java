@@ -39,4 +39,13 @@ public class TaskList {
             ui.showSuccessDeleteTask(t.toString(), taskList.size());
         }
     }
+
+    public void addTask(Ui ui, Task task) {
+        taskList.add(task);
+        ui.showSuccessAddTask(task.toString(), taskList.size());
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
+    }
 }
