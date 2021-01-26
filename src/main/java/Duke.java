@@ -13,21 +13,19 @@ public class Duke {
     public static String line = "     ............................................................";
     public static ArrayList<Task> tasks = new ArrayList<>();
     public static int numTasks = 0;
-//    public static Scanner scanFile;
 
     public static void main(String[] args) throws IOException {
         printIntro();
         Scanner scan = new Scanner(System.in);
 
-        String home = System.getProperty("user.home");
-        String pathString = home + "/ip/data/duke.txt";
+        String currentDir = System.getProperty("user.dir");
+        String pathString = currentDir + "/data/duke.txt";
         Path filepath = Paths.get(pathString);
 
         try {
             loadFileContents(pathString);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            Path dirPath = Paths.get(home + "/ip/data");
+            Path dirPath = Paths.get(currentDir + "/data");
             Files.createDirectories(dirPath);
             Files.createFile(filepath);
         }
@@ -188,7 +186,7 @@ public class Duke {
 
         while (scanFile.hasNext()) {
             String fileData = scanFile.nextLine();
-            String[] dataArr = fileData.split(" |", 4);
+            String[] dataArr = fileData.split(" \\| ", 4);
             String taskType = dataArr[0];
             String isDone = dataArr[1];
             String desc = dataArr[2];
@@ -198,16 +196,19 @@ public class Duke {
                     ToDos newTodo = new ToDos(desc, isDone.equals("1"));
                     tasks.add(newTodo);
                     numTasks++;
+                    break;
                 case "D":
                     String by = dataArr[3];
                     Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
                     tasks.add(newDeadline);
                     numTasks++;
+                    break;
                 case "E":
                     String at = dataArr[3];
                     Events newEvent = new Events(desc, at, isDone.equals("1"));
                     tasks.add(newEvent);
                     numTasks++;
+                    break;
             }
         }
     }
