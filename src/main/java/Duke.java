@@ -1,11 +1,20 @@
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
-    public static ArrayList<Task> ls = new ArrayList<Task>();
+    public static ArrayList<Task> ls = new ArrayList<>();
 
     public static void main(String[] args) {
+        try {
+            Duke.loadData();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
         Scanner sc = new Scanner(System.in);
         System.out.println("Duke: Hello I'm Duke, what can I do for you?");
         System.out.println("-----------------------------------------------------");
@@ -13,33 +22,63 @@ public class Duke {
         String userInput = sc.nextLine();
         System.out.println("User Input: " + userInput);
         while (!"bye".equals(userInput)) {
-            if ("list".equals(userInput)) {
-                Duke.printList();
-            } else if (userInput.startsWith("done ")) {
-                try {
-                    Duke.setAsDone(userInput);
-                } catch (DukeException ex) {
-                    System.out.println(ex);
-                }
-            } else if (userInput.startsWith("delete ")) {
-                try {
-                    Duke.deleteFromList(userInput);
-                } catch (DukeException ex) {
-                    System.out.println(ex);
-                }
-            } else {
-                try {
-                    Duke.addTask(userInput);
-                } catch (DukeException ex) {
-                    System.out.println(ex);
-                }
-            }
+            Duke.processCommand(userInput);
+            Duke.writeTaskList();
             System.out.println("Enter an input ('bye' to quit): ");
             userInput = sc.nextLine();
             System.out.println("User Input: " + userInput);
         }
         System.out.println("Duke: Bye, hope to see you again! :)");
         System.out.println("-----------------------------------------------------");
+    }
+
+    public static void loadData() throws FileNotFoundException {
+        File dataFolder = new File("data");
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+        }
+        File dukeFile = new File("data/duke.txt");
+        if (dukeFile.exists()) {
+            Scanner s = new Scanner(dukeFile); // create a Scanner using the File as the source
+            while (s.hasNext()) {
+                Duke.readTaskList(s.nextLine());
+            }
+            Duke.printList();
+        }
+    }
+
+    public static void readTaskList(String taskData) {
+        String[] splits = taskData.split(" \\| ");
+        if (splits[0].equals("T")) {
+            Todo addedTask = new Todo(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"));
+            Duke.ls.add(addedTask);
+        } else if (splits[0].equals("D")) {
+            Deadline addedTask = new Deadline(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+            Duke.ls.add(addedTask);
+        } else if (splits[0].equals("E")) {
+            Event addedTask = new Event(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+            Duke.ls.add(addedTask);
+        }
+    }
+
+
+    public static void writeNewFile(String filePath, String userInput) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(userInput);
+        fw.close();
+    }
+
+    public static void writeTaskList() {
+        String userInput = "";
+        for (Task t : Duke.ls) {
+            userInput += System.lineSeparator() + t.saveTask();
+        }
+        String filePath = "data/duke.txt";
+        try {
+            writeNewFile(filePath, userInput);
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        }
     }
 
     /**
@@ -91,18 +130,47 @@ public class Duke {
     }
 
     /**
+     * Processes a command given by user.
+     * @param userInput Command from user
+     */
+    public static void processCommand(String userInput) {
+        if ("list".equals(userInput)) {
+            Duke.printList();
+        } else if (userInput.startsWith("done ")) {
+            try {
+                Duke.setAsDone(userInput);
+            } catch (DukeException ex) {
+                System.out.println(ex);
+            }
+        } else if (userInput.startsWith("delete ")) {
+            try {
+                Duke.deleteFromList(userInput);
+            } catch (DukeException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            try {
+                Duke.addTask(userInput, false);
+            } catch (DukeException ex) {
+                System.out.println(ex);
+            }
+        }
+    }
+
+    /**
      * Adds a task into the list and prints out the task added with the number of tasks in the list.
      * @param userInput Takes in command from user in the given formats for each task type:
      *                  <p> todo task: todo &lt;task_description&gt; </p>
      *                  <p> deadline task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
      *                  <p> event task: event &lt;event_description&gt; /at &lt;date&gt; </p>
+     * @param isDone True if task to be added is done, else false.
      * @throws DukeException Throws error if the keyword or format is wrong.
      */
-    public static void addTask(String userInput) throws DukeException {
+    public static void addTask(String userInput, boolean isDone) throws DukeException {
         if (userInput.startsWith("todo ")) {
             String[] splits = userInput.split("todo ");
             if (splits.length == 2) {
-                Todo addedTask = new Todo(Arrays.asList(splits).get(1));
+                Todo addedTask = new Todo(Arrays.asList(splits).get(1), isDone);
                 Duke.ls.add(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);
@@ -110,10 +178,9 @@ public class Duke {
                 throw new ArgumentException(1);
             }
         } else if (userInput.startsWith("deadline ")) {
-            String[] splits = userInput.split("deadline |/by ");
-            System.out.println(Arrays.asList(splits));
+            String[] splits = userInput.split("deadline | /by ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), Arrays.asList(splits).get(2));
+                Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
                 Duke.ls.add(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);
@@ -121,9 +188,9 @@ public class Duke {
                 throw new ArgumentException(2);
             }
         } else if (userInput.startsWith("event ")) {
-            String[] splits = userInput.split("event |/at ");
+            String[] splits = userInput.split("event | /at ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Event addedTask = new Event(Arrays.asList(splits).get(1), Arrays.asList(splits).get(2));
+                Event addedTask = new Event(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
                 Duke.ls.add(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);
@@ -136,5 +203,4 @@ public class Duke {
         System.out.println("Now you have " + Duke.ls.size() + " tasks in the list.");
         System.out.println("-----------------------------------------------------");
     }
-
 }

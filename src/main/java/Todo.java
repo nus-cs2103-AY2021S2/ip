@@ -3,9 +3,11 @@ public class Todo extends Task {
      * Initializes a newly created todo-task object with a description.
      * @param description Description of the task
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
+
+    public String saveTask() { return "T | " + super.saveTask(); }
 
     /**
      * Converts this object to a string that represents the todo-task

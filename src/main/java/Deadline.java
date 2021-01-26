@@ -10,10 +10,12 @@ public class Deadline extends Task {
      * @param description Description of the task
      * @param by Date of the task
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
         this.by = by;
     }
+
+    public String saveTask() { return "D | " + super.saveTask() + " | " + this.by; }
 
     /**
      * Converts this object to a string that represents the deadline-task
