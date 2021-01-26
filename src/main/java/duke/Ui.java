@@ -14,6 +14,11 @@ public class Ui {
     protected Scanner sc;
     protected TaskList tasks;
 
+    /**
+     * Initialises user interface using scanner to obtain user input.
+     *
+     * @param sc Scanner for user input.
+     */
     public Ui(Scanner sc) {
         this.sc = sc;
         this.tasks = null;

@@ -16,6 +16,9 @@ import java.nio.file.Paths;
 public class Storage {
     protected final Path path;
 
+    /**
+     * Initialises storage using a preset file path.
+     */
     public Storage() {
         this.path = Paths.get("data/TaskList.txt");
     }
