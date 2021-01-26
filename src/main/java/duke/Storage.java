@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -15,6 +17,8 @@ import java.util.Scanner;
 public class Storage {
     private String path;
     private File file;
+    private static DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
 
     public Storage(String path) throws FileIoException {
         this.path = path;
@@ -38,11 +42,11 @@ public class Storage {
                 String taskName = spiltString[2];
 
                 if(spiltString.length == 4) {
-                    String time = spiltString[3];
+                    LocalDate time = LocalDate.parse(spiltString[3], OUTPUT_FORMATTER);
                     if(taskType.equals("D")) {
-                        list.add(new Deadline(taskName,isCompleted, time));
+                        list.add(new Deadline(taskName,isCompleted, time.toString()));
                     } else if(taskType.equals("E")) {
-                        list.add(new Event(taskName, isCompleted, time));
+                        list.add(new Event(taskName, isCompleted, time.toString()));
                     } else {
                         throw new FileIoException();
                     }
