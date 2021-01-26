@@ -20,9 +20,9 @@ public class Event extends Task {
 
     public String getData() {
         if (isDone == true) {
-            return "E!@#1!@#" + taskInfo + "!@#" + dateInfo;
+            return "E!@#1!@#" + taskInfo + "!@#" + startDateInfo + "!@#" + endDateInfo;
         } else {
-            return "E!@#0!@#" + taskInfo + "!@#" + dateInfo;
+            return "E!@#0!@#" + taskInfo + "!@#" + startDateInfo + "!@#" + endDateInfo;
         }
     }
 }

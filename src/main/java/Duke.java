@@ -169,14 +169,17 @@ public class Duke {
                     taskList.add(newTodo);
                 } else if (taskData.startsWith("D")) {
                     String[] listOfData = taskData.split("!@#", 4);
-                    Task newDeadline = new Deadline(listOfData[2], listOfData[3]);
+                    LocalDate localDate = LocalDate.parse(listOfData[3]);
+                    Task newDeadline = new Deadline(listOfData[2], localDate);
                     if (listOfData[1].equals("1")) {
                         newDeadline.completed();
                     }
                     taskList.add(newDeadline);
                 } else if (taskData.startsWith("E")) {
-                    String[] listOfData = taskData.split("!@#", 4);
-                    Task newEvent = new Event(listOfData[2], listOfData[3]);
+                    String[] listOfData = taskData.split("!@#", 5);
+                    LocalDate startDate = LocalDate.parse(listOfData[3]);
+                    LocalDate endDate = LocalDate.parse(listOfData[4]);
+                    Task newEvent = new Event(listOfData[2], startDate, endDate);
                     if (listOfData[1].equals("1")) {
                         newEvent.completed();
                     }
