@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.ArrayIndexOutOfBoundsException;
@@ -54,22 +56,13 @@ public class Parser {
             throw new KeywordException();
         }
         this.tm.writeToDisk();
-        /*try {
-            FileWriter fw = new FileWriter("tasklist/mytasks.txt");
-            for (Task t: this.store) {
-                fw.write(t.toString() + "\n");
-            }
-            fw.close();
-        } catch (IOException err) {
-            err.printStackTrace();
-        }*/
     }
 
     /**
      * Starts chat, reads user input and replies.
      * Exits when user says bye.
      */
-    void chat() {
+    public void chat() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 

@@ -1,3 +1,4 @@
+package duke;
 
 /**
  * Encapsulates information of potential exceptions in Duke.

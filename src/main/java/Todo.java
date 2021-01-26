@@ -1,3 +1,4 @@
+package duke;
 
 /**
  * Encapsulates information and state of a Todo.
