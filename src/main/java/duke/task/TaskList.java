@@ -1,9 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final ArrayList<Task> lst;
@@ -32,29 +32,7 @@ public class TaskList {
         lst.forEach(consumer);
     }
 
-    public List<Task> find(String findStr) {
-        String[] wordsToFind = findStr.split(" ");
-
-        List<Task> result = new ArrayList<>();
-        HashSet<Task> found = new HashSet<>();
-
-        for (String target : wordsToFind) {
-            for (Task t : lst) {
-                if (found.contains(t)) {
-                    continue;
-                }
-
-                if (t.hasStrInProps(target)) {
-                    found.add(t);
-                    result.add(t);
-                }
-            }
-
-            if (found.size() == result.size()) {
-                break;
-            }
-        }
-
-        return result;
+    public List<Task> find(String target) {
+        return lst.stream().filter(task -> task.hasStrInProps(target)).collect(Collectors.toList());
     }
 }
