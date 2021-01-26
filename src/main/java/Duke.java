@@ -15,41 +15,42 @@ public class Duke {
             printLine();
 
             firstSpace = command.indexOf(" ");
-            keyword = firstSpace == -1 ? command : command.substring(0,firstSpace).toLowerCase();
-            firstSlash = command.indexOf("/");;
+            keyword = firstSpace == -1 ? command : command.substring(0, firstSpace).toLowerCase();
+            firstSlash = command.indexOf("/");
+
             try {
                 switch (keyword) {
-                    case "list":
-                        //Display all task added
-                        listTasks();
-                        break;
-                    case "done":
-                        // -1 as ArrayList starts from 0 , user input starts from 1
-                        option = getChoice(command, firstSpace);
-                        //Mark task of choice as done
-                        completeTask(option);
-                        break;
-                    case "delete":
-                        option = getChoice(command, firstSpace);
-                        deleteTask(option);
-                        break;
-                    case "todo":
-                        task = retrieveTask(command, firstSpace, command.length());
-                        addTask(new Todo(task));
-                        break;
-                    case "deadline":
-                        task = retrieveTask(command, firstSpace, firstSlash);
-                        deadline = retrieveDeadline(command, firstSlash);
-                        addTask(new Deadline(task, deadline));
-                        break;
-                    case "event":
-                        task = retrieveTask(command, firstSpace, firstSlash);
-                        deadline = retrieveDeadline(command, firstSlash);
-                        addTask(new Event(task, deadline));
-                        break;
-                    default:
-                        System.out.println("OOPS!!! I`m sorry. but i don`t know what that means :-(");
-                        break;
+                case "list":
+                    //Display all task added
+                    listTasks();
+                    break;
+                case "done":
+                    // -1 as ArrayList starts from 0 , user input starts from 1
+                    option = getChoice(command, firstSpace);
+                    //Mark task of choice as done
+                    completeTask(option);
+                    break;
+                case "delete":
+                    option = getChoice(command, firstSpace);
+                    deleteTask(option);
+                    break;
+                case "todo":
+                    task = retrieveTask(command, firstSpace, command.length());
+                    addTask(new Todo(task));
+                    break;
+                case "deadline":
+                    task = retrieveTask(command, firstSpace, firstSlash);
+                    deadline = retrieveDeadline(command, firstSlash);
+                    addTask(new Deadline(task, deadline));
+                    break;
+                case "event":
+                    task = retrieveTask(command, firstSpace, firstSlash);
+                    deadline = retrieveDeadline(command, firstSlash);
+                    addTask(new Event(task, deadline));
+                    break;
+                default:
+                    System.out.println("OOPS!!! I`m sorry. but i don`t know what that means :-(");
+                    break;
                 }
             } catch (DukeException e) {
                 System.out.printf("OOPS!!! %s %s cannot be empty.\n", e.getMessage(), keyword);
@@ -61,6 +62,7 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
+
     public static void deleteTask(int option) {
         Task removed_task = taskList.get(option);
         taskList.remove(option);
@@ -76,19 +78,19 @@ public class Duke {
     public static String retrieveDeadline(String command, int start) {
         boolean space = false;
         StringBuilder res = new StringBuilder();
-        for(int i = start + 1; i < command.length(); i++) {
+        for (int i = start + 1; i < command.length(); i++) {
             if (!space && command.charAt(i) == ' ') {
                 space = true;
                 continue;
             }
-            if(space) {
+            if (space) {
                 res.append(command.charAt(i));
             }
         }
         return res.toString();
     }
 
-    public static String retrieveTask(String command , int start, int end) throws DukeException {
+    public static String retrieveTask(String command, int start, int end) throws DukeException {
         // RetrieveTask starts from the space after the keyword
         // RetrieveTask ends either end of the string or before / (deadline and event)
         // E.g <keyword> <description> (datetime/time)
@@ -99,7 +101,7 @@ public class Duke {
         } else if (end == -1) {
             throw new DukeException("The deadline of a");
         }
-        return command.substring(start,end);
+        return command.substring(start, end);
     }
 
     public static void addTask(Task newTask) {
@@ -131,18 +133,19 @@ public class Duke {
     }
 
     public static void printTask(String numbering, Task task) {
-        System.out.printf("%2s %s\n", numbering , task);
+        System.out.printf("%2s %s\n", numbering, task);
     }
 
     public static void listTasks() {
-        for(int i = 0; i < taskList.size(); i++) {
-            printTask (i+1+ "." , taskList.get(i));
+        for (int i = 0; i < taskList.size(); i++) {
+            printTask(i + 1 + ".", taskList.get(i));
         }
     }
 
     public static void printLine() {
         System.out.println("----------------------------------------------");
     }
+
     public static void printGreetings() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
