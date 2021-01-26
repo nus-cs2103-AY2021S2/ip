@@ -10,7 +10,7 @@ public class Ui {
         return sc.nextLine();
     }
     public void showLoadSuccess() {
-        System.out.println("Saved data successfully loaded.");
+        System.out.println("Saved data found and successfully loaded.");
     }
     public void showWelcome() {
         System.out.println("Greetings. My name is I-01B, but you may call me DUKE.");
