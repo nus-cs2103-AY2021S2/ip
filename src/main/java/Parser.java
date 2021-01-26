@@ -18,7 +18,9 @@ public class Parser {
             taskList.markAsDone(input.split(" ", 2)[1]);
         } else if (input.split(" ", 2)[0].equals("delete")) {
             taskList.deleteTask(input.split(" ", 2)[1]);
-        } else {
+        } else if (input.split(" ", 2)[0].equals("find")) {
+            taskList.searchTask(input.split(" ", 2)[1]);
+        }else {
             // add new task to list
             taskList.addTask(input);
         }

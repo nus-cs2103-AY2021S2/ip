@@ -132,6 +132,17 @@ public class TaskList {
         }
     }
 
+    public void searchTask(String str) {
+        System.out.println("Here are the items that match your search:");
+        int i = 1;
+        for (Task item : lst) {
+            if (item.description.toLowerCase().contains(str.toLowerCase())) {
+                System.out.println(i + ". " + item.toString());
+                i++;
+            }
+        }
+    }
+
     public void readTask(String str) {
         String[] split = str.split("`");
 
