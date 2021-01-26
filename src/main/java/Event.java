@@ -1,9 +1,6 @@
-public class Event extends Task{
-    private String date;
-
-    public Event(String description, String date){
-        super(description);
-        this.date = date;
+public class Event extends TaskWithDate{
+    public Event(String description, String dateTime) throws SnomException {
+        super(description, dateTime);
     }
 
     @Override
@@ -13,6 +10,6 @@ public class Event extends Task{
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + "(at: " + this.date + ")";
+        return "[E]" + super.toString() + "(at: " + getDateTimeString() + ")";
     }
 }

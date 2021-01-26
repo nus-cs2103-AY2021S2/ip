@@ -1,9 +1,6 @@
-public class Deadline extends Task {
-    private String deadline;
-
-    public Deadline(String description, String deadline){
-        super(description);
-        this.deadline = deadline;
+public class Deadline extends TaskWithDate {
+    public Deadline(String description, String dateTime) throws SnomException {
+        super(description, dateTime);
     }
 
     @Override
@@ -13,6 +10,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString(){
-        return "[D]" + super.toString() + "(by: " + this.deadline + ")";
+        return "[D]" + super.toString() + "(by: " + getDateTimeString() + ")";
     }
 }
