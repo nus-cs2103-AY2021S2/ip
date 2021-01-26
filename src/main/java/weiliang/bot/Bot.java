@@ -1,6 +1,5 @@
 package weiliang.bot;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import weiliang.bot.task.Deadline;
@@ -14,14 +13,16 @@ public class Bot {
 
     private boolean active;
     private List<Task> memory;
+    private String storagePath;
 
-    public Bot(String name) {
+    public Bot(String name, String storagePath) {
         this.name = name;
         this.logo = "  ___ _            _     ___      _   \n" + " / __(_)_ __  _ __| |___| _ ) ___| |_ \n"
                 + " \\__ \\ | '  \\| '_ \\ / -_) _ \\/ _ \\  _|\n" + " |___/_|_|_|_| .__/_\\___|___/\\___/\\__|\n"
                 + "             |_|                      \n\n";
         this.active = true;
-        this.memory = new ArrayList<>();
+        this.storagePath = storagePath;
+        this.memory = Storage.readFile(storagePath);
     }
 
     public String formatMessage(String message) {
@@ -45,6 +46,7 @@ public class Bot {
             return formatMessage("Hello! My name is {{bot:name}}!");
         }
         if (input.equalsIgnoreCase("bye")) {
+            Storage.storeFile(storagePath, memory);
             active = false;
             return formatMessage("Bye. Hope to see you again soon!");
         }

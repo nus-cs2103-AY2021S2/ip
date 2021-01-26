@@ -10,6 +10,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String toFormattedString() {
+        return "D | " + (completed ? 1 : 0) + " | " + task + " | " + timing;
+    }
+
+    @Override
     public String toString() {
         return "[D][" + (completed ? "X" : " ") + "] " + task + " (by: " + timing + ")";
     }

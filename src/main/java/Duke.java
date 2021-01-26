@@ -6,7 +6,7 @@ import weiliang.bot.BotException;
 public class Duke {
     public static void main(String[] args) {
         // Init bot
-        Bot bot = new Bot("SimpleBot");
+        Bot bot = new Bot("SimpleBot", "memory.txt");
         System.out.println(bot.getInitMessage());
         
         // Perform main logic loop
