@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -218,7 +220,7 @@ public class Duke {
         //initialize listOfTasks From Storage
         try {
             listOfTasks = storage.loadStorage();
-        } catch (FileNotFoundException err) {
+        } catch (DukeException err) {
             System.out.println("Error in reading file /data/duke.txt");
             return;
         }

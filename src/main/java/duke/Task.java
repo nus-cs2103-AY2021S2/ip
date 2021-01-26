@@ -1,3 +1,4 @@
+package duke;
 /**
  * Stores information of a Task - the description and a boolean flag to indicate if the task is done.
  */

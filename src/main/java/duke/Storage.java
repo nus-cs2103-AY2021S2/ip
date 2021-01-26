@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -29,7 +31,7 @@ public class Storage {
                  savedListOfTasks.add(t);
              }
              return savedListOfTasks;
-         } catch (FileNotFoundException) {
+         } catch (FileNotFoundException err) {
              throw new DukeException("Error fetching data from Storage in the desired format.");
          }
      }

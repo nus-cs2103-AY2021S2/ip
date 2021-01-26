@@ -1,3 +1,4 @@
+package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +26,6 @@ public class Parser {
         this.inputCommand = inputCommand;
     }
 
-    parseCommand()
 
 
 

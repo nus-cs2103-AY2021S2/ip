@@ -1,3 +1,4 @@
+package duke;
 /**
  *  A type of task that is to be done.
  */
