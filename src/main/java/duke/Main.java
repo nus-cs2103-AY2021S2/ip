@@ -1,3 +1,13 @@
+package duke;
+
+import duke.duke.Duke;
+import duke.exceptions.InvalidArgumentException;
+import duke.exceptions.InvalidCommandException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -44,10 +54,10 @@ public class Main {
                     bot.markAsDone(parser.description);
                     Storage.saveFile(f, bot);
                 } else if (parser.isEquals("todo")) {
-                    bot.addTask(parser.description, parser.command, null);
+                    bot.addTask(parser.description, parser.getCommand(), null);
                     Storage.saveFile(f, bot);
                 } else if (parser.isEquals("deadline") || parser.isEquals("event")) {
-                    bot.addTask(parser.description, parser.command, parser.deadline);
+                    bot.addTask(parser.description, parser.getCommand(), parser.getDeadline());
                     Storage.saveFile(f, bot);
                 } else if (parser.isEquals("delete")) {
                     bot.removeTask(parser.description);

@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Event extends Task {
     protected final String eventTime;
 

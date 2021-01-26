@@ -1,8 +1,10 @@
+package duke.utils;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class DateValidatorUsingDateFormat implements DateValidator{
+public class DateValidatorUsingDateFormat implements DateValidator {
     private final DateTimeFormatter dateFormatter;
 
     public DateValidatorUsingDateFormat(DateTimeFormatter dateFormatter) {

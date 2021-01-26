@@ -1,4 +1,11 @@
-import java.util.List;
+package duke.duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.ui.Ui;
 
 public class Duke {
     String logo;
@@ -45,7 +52,7 @@ public class Duke {
 
     public void removeTask(String id) {
         int n = Integer.parseInt(id) - 1;
-        Task task = list.lst.get(n);
+        Task task = list.getLst().get(n);
         list.removeItem(n);
         Ui.showRemoveTaskMessage(task, list.getLst());
     }
@@ -61,6 +68,10 @@ public class Duke {
         Ui.showTasksToUser(list.getLst());
     }
 
-    public List<Task> getList() { return list.getLst();}
+    public TaskList getList() { return list;}
+
+    public String getLogo() {
+        return this.logo;
+    }
 
 }

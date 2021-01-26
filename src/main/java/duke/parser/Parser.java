@@ -1,9 +1,17 @@
+package duke.parser;
+
+import duke.duke.Duke;
+import duke.exceptions.InvalidArgumentException;
+import duke.exceptions.InvalidCommandException;
+import duke.utils.DateValidator;
+import duke.utils.DateValidatorUsingDateFormat;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    public String description;
     String command;
-    String description;
     String deadline;
 
     public Parser() {
@@ -39,8 +47,9 @@ public class Parser {
                     throw new InvalidArgumentException("Invalid command! " +
                             "Please input task number using 'delete (number)'.\n");
                 }
-                if (Integer.parseInt(starr[1]) > bot.list.lst.size()) {
-                    throw new InvalidArgumentException("Please input argument <= to " + bot.list.lst.size() + "!\n");
+                if (Integer.parseInt(starr[1]) > bot.getList().getLst().size()) {
+                    throw new InvalidArgumentException("Please input argument <= to "
+                            + bot.getList().getLst().size() + "!\n");
                 }
                 this.description = starr[1];
                 break;
@@ -108,5 +117,12 @@ public class Parser {
             this.deadline = String.format("%s %s %d %s", day, month, year, deadLineArray[1]);
 
         }
+    }
+
+    public String getCommand() {
+        return command;
+    }
+    public String getDeadline() {
+        return deadline;
     }
 }

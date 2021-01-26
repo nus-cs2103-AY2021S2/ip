@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.duke.Duke;
+import duke.tasks.Task;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -11,7 +16,7 @@ public class Ui {
     static PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
 
     public static void showWelcomeMessage(Duke bot) {
-        pw.printf("Hello from%n%s%n", bot.logo);
+        pw.printf("Hello from%n%s%n", bot.getLogo());
         pw.println("Hello! I'm Duke");
         pw.println("What can I do for you?");
 
