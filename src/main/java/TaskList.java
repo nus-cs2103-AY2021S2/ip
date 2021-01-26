@@ -15,7 +15,7 @@ public class TaskList {
     }
 
     public boolean checkValidOption(Ui ui, int option) {
-        boolean result = option < 0 || option > this.taskList.size();
+        boolean result = option < 0 || option >= this.taskList.size();
         if (result) {
             ui.showError("Invalid task Option");
         }

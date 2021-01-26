@@ -22,6 +22,7 @@ public class Storage {
                 taskList.add(task);
             }
             this.fileName = fileName;
+            s.close();
         } catch (IOException e) {
             ui.showError("Unable to create file");
         }

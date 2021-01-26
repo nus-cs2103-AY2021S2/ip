@@ -48,7 +48,7 @@ public class Ui {
     }
 
     public void showSuccessMarkDone(String task, int numTasks) {
-        String message = "Got it. I`ve added this task:";
+        String message = "Got it. I`ve mark this task as done:";
         this.printExecuteResult(message, task, numTasks, "");
     }
 
