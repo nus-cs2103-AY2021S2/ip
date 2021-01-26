@@ -56,10 +56,14 @@ public class Parser {
             return new DeleteCommand(taskIndex);
         }
         case "todo": {
+            emptyDescriptionChecker(tokens);
+
             String taskInfo = tokens[1];
             return new AddCommand(new ToDo(taskInfo));
         }
         case "deadline": {
+            emptyDescriptionChecker(tokens);
+
             String taskInfo = tokens[1];
             if (!(taskInfo.contains("/by"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
@@ -75,6 +79,8 @@ public class Parser {
             return new AddCommand(new Deadline(taskInfoArr[0], by));
         }
         case "event": {
+            emptyDescriptionChecker(tokens);
+
             String taskInfo = tokens[1];
             if (!(taskInfo.contains("/at"))) {
                 throw new InvalidDescriptionException("Sorry, I am unable to process what was written after the command...");
