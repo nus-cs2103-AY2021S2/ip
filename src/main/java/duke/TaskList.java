@@ -51,4 +51,25 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a List<Task> consisting of tasks which contain the keyword
+     * If nothing is found, an empty List is returned
+     *
+     * @param keyword the keyword we aim to find.
+     * @return List of found tasks
+     */
+    public List<Task> findTask(String keyword) {
+        List<Task> foundTasks = new ArrayList<>();
+
+        for (Task t : this.taskList) {
+            String taskDesc = t.getDescription();
+
+            if (taskDesc.contains(keyword)) {
+                foundTasks.add(t);
+            }
+        }
+
+        return foundTasks;
+    }
+
 }

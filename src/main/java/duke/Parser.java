@@ -87,6 +87,15 @@ public class Parser {
                     throw new DukeException("Please enter a numerical task number.");
                 }
             }
+
+        } else if (inputLine.startsWith("find")) {
+            if (inputLine.equals("find")) {
+                throw new DukeException("Please tell me which task you'd like to find.");
+            } else {
+                String temp = inputLine.substring(5);
+                result[0] = "FND";
+                result[1] = temp;
+            }
         } else {
             throw new DukeException("I'm sorry, I don't understand what that means.");
         }
