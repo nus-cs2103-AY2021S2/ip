@@ -1,6 +1,6 @@
 package task;
 
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Instantiates a new todo task.
      *
