@@ -12,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Duke class constructor
+     *
+     * @param filePath Path directory to location of storage file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts up the Duke Bot program, read and response to user various inputs accordingly
+     */
     public void run() {
         boolean continueInput = true;
 

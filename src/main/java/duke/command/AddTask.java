@@ -9,13 +9,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * AddTask handles the addition of event, deadline and todo tasks to the list only
+ */
 public class AddTask extends Command {
 
+    /**
+     * AddTask Constructor
+     *
+     * @param command Task name
+     * @param commandDetails Task details
+     */
     public AddTask(String command, String commandDetails) {
         super.commandType = command;
         super.commandDetails = commandDetails;
         super.dateTime = "";
         super.outputMessage = "";
+        // index is -1 because it is only used in done and delete tasks
         super.index = -1;
     }
 
@@ -74,13 +84,26 @@ public class AddTask extends Command {
         return true;
     }
 
+    /**
+     * Adds task to TaskList, save the updated TaskList into data file and output message to the command line
+     *
+     * @param tasks TaskList
+     * @param ui Instance of Ui
+     * @param storage Instance of Storage
+     * @throws DukeException If the input is invalid date format
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        handleNewTask(taskList);
-        storage.saveData(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        handleNewTask(tasks);
+        storage.saveData(tasks);
         ui.display(this.outputMessage);
     }
 
+    /**
+     * Determines if whether the Duke Bot should continue processing the user input
+     *
+     * @return True
+     */
     @Override
     public boolean continueInput() {
         return true;

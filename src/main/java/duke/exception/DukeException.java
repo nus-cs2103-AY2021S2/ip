@@ -9,8 +9,9 @@ public class DukeException extends Exception {
 
     /**
      * Constructor for DukeException
-     * @param typeException type of exception caught by the DukeBot
-     * @param taskType type of task
+     *
+     * @param typeException Type of exception caught by the DukeBot
+     * @param taskType Type of task
      */
     public DukeException(ExceptionType typeException, String taskType) {
         super();
@@ -20,7 +21,8 @@ public class DukeException extends Exception {
 
     /**
      * A custom error message will be generated depending on exception type
-     * @return error message
+     *
+     * @return Error message
      */
     @Override
     public String getMessage() {

@@ -11,8 +11,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for DeadLine class
-     * @param description details of the task
-     * @param by specific date/time to complete the task
+     *
+     * @param description Details of the task
+     * @param by Specific date/time to complete the task
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -21,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Displays simplified version of task type, description and deadline of tasks in Duke.txt
+     *
      * @return String format regarding the task deadline information
      */
     @Override
@@ -30,6 +32,7 @@ public class Deadline extends Task {
 
     /**
      * Displays task type, description and deadline of task
+     *
      * @return String format regarding the task deadline information
      */
     @Override

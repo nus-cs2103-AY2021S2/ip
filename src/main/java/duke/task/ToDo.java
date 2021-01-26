@@ -6,7 +6,8 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Constructor for ToDo class
-     * @param description details of the task
+     *
+     * @param description Details of the task
      */
     public ToDo(String description) {
         super(description);
@@ -14,6 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Displays simplified version of task type and description in Duke.txt
+     *
      * @return String format regarding the ToDo task
      */
     @Override
@@ -23,6 +25,7 @@ public class ToDo extends Task {
 
     /**
      * Displays task type and task description
+     *
      * @return String format of ToDO task
      */
     @Override

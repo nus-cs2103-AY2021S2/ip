@@ -6,8 +6,18 @@ import duke.exception.*;
 import java.util.Collections;
 import java.util.HashSet;
 
+/**
+ * Parser class which translates input of user to task command, task description and date
+ */
 public class Parser {
 
+    /**
+     * Decipher command based on the input of the user
+     *
+     * @param input Input provided by the user
+     * @return Command to be executed by the Duke Bot
+     * @throws DukeException If the user gives an empty description (except bye and list commands) or an invalid input
+     */
     public static Command parse(String input) throws DukeException {
         String[] commandStr = input.trim().split("\\s+");
         String taskCommand = commandStr[0];

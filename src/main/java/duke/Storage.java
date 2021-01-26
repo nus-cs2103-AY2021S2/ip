@@ -12,16 +12,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to manage saving tasks into the list and loading of tasks from the list when requested by the user
+ */
 public class Storage {
     private final String fileDirectory;
     private final String pathDirectory;
 
+    /**
+     * Storage class constructor
+     *
+     * @param fileDirectory Location where the list of tasks will be stored
+     */
     public Storage(String fileDirectory) {
         this.fileDirectory = fileDirectory;
         this.pathDirectory = fileDirectory.replaceFirst("/Duke.txt", "");
     }
 
-    public File fileConfiguration() throws DukeException {
+    private File fileConfiguration() throws DukeException {
         File dataDirectory = new File(this.pathDirectory);
         File dataFile = new File(this.fileDirectory);
 
@@ -40,13 +48,20 @@ public class Storage {
         }
     }
 
-    public void saveData(TaskList taskList) throws DukeException {
+
+    /**
+     * Write list of tasks into the data file Duke.txt
+     *
+     * @param tasks List of tasks to write into data file
+     * @throws DukeException If there is error in saving the data into file Duke.txt
+     */
+    public void saveData(TaskList tasks) throws DukeException {
         try {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
 
-            for (int index = 0; index < taskList.size(); index++) {
-                Task currTask = taskList.get(index);
+            for (int index = 0; index < tasks.size(); index++) {
+                Task currTask = tasks.get(index);
                 fileWriter.write(currTask.formatTask() + System.lineSeparator());
             }
             fileWriter.close();
@@ -55,9 +70,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Read list of tasks from data file Duke.txt
+     *
+     * @return List of tasks from storage data file in ArrayList format
+     * @throws DukeException If there is an error in loading the data from file Duke.txt
+     */
     public ArrayList<Task> loadData() throws DukeException {
         try {
-            ArrayList<Task> taskList = new ArrayList<>();
+            ArrayList<Task> tasks = new ArrayList<>();
             File dataFile = fileConfiguration();
             Scanner sc = new Scanner(dataFile);
 
@@ -84,10 +105,10 @@ public class Storage {
                     if (taskDetails[1].equals("1")) {
                         newTask.markAsDone();
                     }
-                    taskList.add(newTask);
+                    tasks.add(newTask);
                 }
             }
-            return taskList;
+            return tasks;
         } catch (IOException ex) {
             throw new DukeException(ExceptionType.LOADING_ERROR, "");
         }
