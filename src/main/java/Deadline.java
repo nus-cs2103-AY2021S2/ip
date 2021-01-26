@@ -1,12 +1,17 @@
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDate by;
 
-    public Deadline(String description, TaskType taskType, String by) {
+    public Deadline(String description, TaskType taskType, String by) throws DukeException {
         super(description, taskType);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeException e) {
+            throw new DukeException("Date is not in the correct format");
+        }
     }
 
     @Override
