@@ -12,39 +12,8 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException, IOException {
         TaskList list = new TaskList();
-        File saveFile = new File("./myData.txt");
-
-        if (!saveFile.exists()) {
-            boolean isCreated = saveFile.createNewFile();
-            if (isCreated) {
-                System.out.println("New save file created!");
-            }
-        } else {
-            Scanner fileScanner = new Scanner(saveFile);
-            while (fileScanner.hasNext()) {
-                String taskStr = fileScanner.nextLine();
-                char taskType = taskStr.charAt(1);
-                int len = taskStr.length();
-                if (taskType == 'T') {
-                    list.addTodo(taskStr.substring(7));
-
-                } else if (taskType == 'D'){
-                    int ind = taskStr.indexOf(" (by: ");
-                    list.addDeadline(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
-
-                } else if (taskType == 'E'){
-                    int ind = taskStr.indexOf(" (at: ");
-                    list.addEvent(taskStr.substring(7, ind + 1), taskStr.substring(ind + 6, len - 1));
-
-                }
-                if (taskStr.charAt(4) == 'X') {
-                    list.getAtInd(list.getNumItems() - 1).markAsDone();
-                }
-            }
-        }
-
-        FileWriter fw = new FileWriter("./myData.txt");
-
+        Storage storage = new Storage("./myData.txt");
+        storage.initialise(list);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -119,10 +88,7 @@ public class Duke {
             }
             str = sc.nextLine();
         }
-        for (int i = 0; i < list.getNumItems(); i++) {
-            fw.write(list.getAtInd(i).save() + "\n");
-        }
+        storage.finalise(list);
         System.out.println("Bye friend, see you soon!");
-        fw.close();
     }
 }
