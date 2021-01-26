@@ -17,7 +17,8 @@ public class Parser {
      * @throws DukeException if input has no keyword or if task has no description.
      */
     public void process(String input) throws DukeException {
-        if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+        if (input.contains("todo") || input.contains("deadline") 
+            || input.contains("event") || input.contains("find")) {
             if (input.split(" ").length == 1) {
                 throw new EmptyException();
             }
@@ -43,6 +44,10 @@ public class Parser {
             System.out.println(t.toString());
             System.out.println(String.format("Now you have %s tasks in the list.", 
                         this.tm.taskVolume()));
+        } else if (input.contains("find")) {
+            String item = input.replaceAll("find ", "");
+            System.out.println("Here are the matching tasks in your list: ");
+            this.tm.find(item);
         } else if (input.contains("done")) {
             int num = Integer.valueOf(input.split(" ")[1]);
             //this.store.get(num - 1).markAsDone();

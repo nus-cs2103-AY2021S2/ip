@@ -38,6 +38,19 @@ public class TaskManager {
         return this.store.size();
     }
 
+    /**
+     * Prints the line(s) that contain the element user is finding.
+     */
+    public void find(String item) {
+        int counter = 1;
+        for (Task t: this.store) {
+            if (t.toString().contains(item)) {
+                System.out.println(counter + ". " + t.toString());
+            }
+            counter += 1;
+        }
+    }
+
     public void writeToDisk() {
         try {
             FileWriter fw = new FileWriter("tasklist/mytasks.txt");
