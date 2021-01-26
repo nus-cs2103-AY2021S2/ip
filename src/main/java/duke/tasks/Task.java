@@ -22,6 +22,57 @@ public class Task {
         this.status = completion ? TaskStatus.COMPLETED : TaskStatus.PENDING;
     }
 
+    public boolean contains(String query) {
+        return this.description.contains(query);
+    }
+
+    public boolean isComplete() {
+        return this.status == TaskStatus.COMPLETED;
+    }
+
+    public void markComplete() {
+        this.status = TaskStatus.COMPLETED;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        switch (this.type) {
+            case TODO:
+                output.append("[T]");
+                break;
+            case EVENT:
+                output.append("[E]");
+                break;
+            case DEADLINE:
+                output.append("[D]");
+                break;
+        }
+        output.append(this.isComplete() ? "[X] " : "[ ] ");
+        output.append(this.description);
+        return output.toString();
+    }
+
+    public String storageEntry() {
+        StringBuilder output = new StringBuilder();
+        switch (this.type) {
+            case TODO:
+                output.append("T");
+                break;
+            case EVENT:
+                output.append("E");
+                break;
+            case DEADLINE:
+                output.append("D");
+                break;
+        }
+        output.append("|");
+        output.append(this.isComplete() ? "1" : "0");
+        output.append("|");
+        output.append(this.description);
+        return output.toString();
+    }
+
     public static Task parseTask(String userInput) throws DukeException {
         try {
             String[] inputSplit = userInput.split(" ", 2);
@@ -67,52 +118,5 @@ public class Task {
             break;
         }
         return output;
-    }
-
-    public boolean isComplete() {
-        return this.status == TaskStatus.COMPLETED;
-    }
-
-    public void markComplete() {
-        this.status = TaskStatus.COMPLETED;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder output = new StringBuilder();
-        switch (this.type) {
-        case TODO:
-            output.append("[T]");
-            break;
-        case EVENT:
-            output.append("[E]");
-            break;
-        case DEADLINE:
-            output.append("[D]");
-            break;
-        }
-        output.append(this.isComplete() ? "[X] " : "[ ] ");
-        output.append(this.description);
-        return output.toString();
-    }
-
-    public String storageEntry() {
-        StringBuilder output = new StringBuilder();
-        switch (this.type) {
-        case TODO:
-            output.append("T");
-            break;
-        case EVENT:
-            output.append("E");
-            break;
-        case DEADLINE:
-            output.append("D");
-            break;
-        }
-        output.append("|");
-        output.append(this.isComplete() ? "1" : "0");
-        output.append("|");
-        output.append(this.description);
-        return output.toString();
     }
 }
