@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.Deadline;
 import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Event;
@@ -19,7 +20,14 @@ public class AddEventCommand extends Command{
         if (spaceIndex == -1 || dateIndex - spaceIndex == 1) throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         String eventName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
         String at = userMessage.substring(dateIndex + 4);
-        Event event = new Event(eventName,at);
+        Event event;
+        try{
+            event = new Event(eventName,at);
+        }
+        catch (Exception e){
+            throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+        }
+
         taskList.addTasks(event);
 
         builder.append("[" + event.getStatusIcon() + "] " + event.getTaskName());

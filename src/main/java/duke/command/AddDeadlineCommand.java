@@ -21,7 +21,13 @@ public class AddDeadlineCommand extends Command{
 
         String deadlineName = userMessage.substring(spaceIndex + 1,dateIndex - 1);
         String by = userMessage.substring(dateIndex + 4);
-        Deadline deadline = new Deadline(deadlineName,by);
+        Deadline deadline;
+        try{
+            deadline = new Deadline(deadlineName,by);
+        }
+        catch (Exception e){
+            throw new DukeException("OOPS! The input format is wrong! Should be YYYY-MM-DD HH:MM");
+        }
         taskList.addTasks(deadline);
 
         builder.append("[" + deadline.getStatusIcon() + "] " + deadline.getTaskName());

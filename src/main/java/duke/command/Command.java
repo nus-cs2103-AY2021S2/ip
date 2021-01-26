@@ -17,8 +17,6 @@ public class Command {
         return exit;
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
-        return;
-    }
+    public void execute(TaskList taskList, Ui ui) throws DukeException {}
 
 }
