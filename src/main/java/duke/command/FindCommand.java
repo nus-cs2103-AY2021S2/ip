@@ -1,0 +1,45 @@
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+/**
+ * A FindCommand is when the user wants to find tasks containing a particular keyword
+ */
+public class FindCommand extends Command {
+    private String keyword;
+
+    /**
+     * Constructor to initialise the keyword to find
+     * @param keyword the keyword to find
+     */
+    public FindCommand(String keyword) {
+        super("");
+        this.keyword = keyword;
+    }
+
+    /**
+     * Executes the command
+     * @param ui the ui to respond to the user's input
+     * @param s The storage to save the tasklist to
+     * @param list The current list of tasks
+     */
+    public void execute(Ui ui, Storage s, TaskList list) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < list.getSize(); i++) {
+            if (list.getItem(i).getDescription().contains(keyword)) {
+                sb.append("\t");
+                sb.append(i + 1).append(". ").append(list.getItem(i));
+                sb.append("\n");
+            }
+        }
+        if (list.getSize() == 0) {
+            sb.append("\tYour list is empty!");
+        }
+        this.reply = sb.toString();
+        ui.reply(this.reply);
+    }
+
+}
