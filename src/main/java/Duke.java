@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,6 +81,8 @@ public class Duke {
                 System.out.println("Task description cannot be empty, ignoring!");
             } catch (DukeException e) {
                 System.out.println("Reached an error!");
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid Date Format!");
             }
         }
     }
