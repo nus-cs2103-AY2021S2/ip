@@ -1,13 +1,16 @@
+import java.time.LocalDateTime;
 public class Event extends Task{
-    private String deadline;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public Event(String desc, String deadline) {
+    public Event(String desc, LocalDateTime start, LocalDateTime end) {
         super(desc);
-        this.deadline = deadline;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", super.toString(), this.deadline);
+        return String.format("[E] %s (%s - %s)", super.toString(), super.format(this.start), super.format(this.end));
     }
 }
