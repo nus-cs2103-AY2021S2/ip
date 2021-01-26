@@ -41,7 +41,7 @@ public class Ui {
      * @param messages a String array that contains the message body.
      * @return the generated message for the user.
      */
-    private String generateMessage(String[] messages) {
+    public String generateMessage(String[] messages) {
         StringBuilder output = new StringBuilder(LINE_PARTITION);
         for (String message : messages) {
             output.append(message).append(System.lineSeparator());
