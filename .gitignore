@@ -17,3 +17,4 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 src/Sandbox.java
 data/vergil_list.sav
+src/VergilBkp.java
