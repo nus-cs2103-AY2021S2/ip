@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
 
     protected String at;
@@ -7,8 +10,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String extractDateTime(String at) {
+        String[] temp = at.split(" ");
+        LocalDate date = LocalDate.parse(temp[0]);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + temp[1];
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + extractDateTime(at) + ")";
     }
 }
