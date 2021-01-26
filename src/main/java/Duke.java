@@ -7,70 +7,7 @@ import duke.util.CopyPasta;
 
 public class Duke {
     private static ArrayList<Task> todoList;
-    private static void addToFile(Task task) {
-        File save = new File("./data/duke.txt");
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(save, true);
-            fw.write(task.fileString() + System.lineSeparator());
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private static void deleteFromFile(int index) {
-        File save = new File("./data/duke.txt");
-        File temp = new File("./data/temp.txt");
-        int ctr = 0;
-        try {
-            //create temp file
-            temp.createNewFile();
-            Scanner sc = new Scanner(save);
-            FileWriter fw = new FileWriter(temp);
-            //copy all lines except line to be deleted to temp
-            while(sc.hasNextLine()) {
-                //skip the line to be deleted
-                if (ctr != index) {
-                    System.out.println("line added");
-                    fw.write(sc.nextLine() + System.lineSeparator());
-                } else {
-                    sc.nextLine();
-                }
-                ctr++;
-            }
-            fw.close();
-            sc.close();
-            //delete original save and rename temp to save
-            save.delete();
-            temp.renameTo(save);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private static void loadData() throws IOException {
-        File directory = new File("data");
-        File save = new File("./data/duke.txt");
-        directory.mkdir();
-        save.createNewFile();
-        Scanner sc = new Scanner(save);
-        while (sc.hasNext()) {
-            String taskString = sc.nextLine();
-            String[] taskArgsArray = taskString.split(" [|] ");
-            Task task;
-            if (taskArgsArray[0].equals("T")) {
-                task = new Todo(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2]);
-            } else if (taskArgsArray[0].equals("D")) {
-                task = new Deadline(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
-            } else {
-                task = new Event(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
-            }
-            todoList.add(task);
-        }
-        sc.close();
-    }
     private static void processCommand(String command) {
         String strippedCommand = command.strip();
         if (strippedCommand.equals("list")) {
@@ -89,7 +26,7 @@ public class Duke {
             int index = Integer.parseInt(indexString) - 1;
             Task toDo = todoList.get(index);
             todoList.remove(index);
-            deleteFromFile(index);
+            DukeFile.deleteFromFile(index);
             System.out.println("Affirmative. The following task has been removed: \n" + toDo);
         } else if (strippedCommand.startsWith("todo")) {
             String cmd = strippedCommand.substring(4).strip();
@@ -100,7 +37,7 @@ public class Duke {
             } else {
                 Task newTask = new Todo(cmd);
                 todoList.add(newTask);
-                addToFile(newTask);
+                DukeFile.addToFile(newTask);
                 System.out.println("Added to to-do list: \n" + newTask);
             }
         } else if (strippedCommand.startsWith("deadline")) {
@@ -118,7 +55,7 @@ public class Duke {
                 } else {
                     Task newTask = new Deadline(split[0].strip(), split[1].strip());
                     todoList.add(newTask);
-                    addToFile(newTask);
+                    DukeFile.addToFile(newTask);
                     System.out.println("Added to to-do list: \n" + newTask);
                 }
             }
@@ -137,7 +74,7 @@ public class Duke {
                 } else {
                     Task newTask = new Event(split[0].strip(), split[1].strip());
                     todoList.add(newTask);
-                    addToFile(newTask);
+                    DukeFile.addToFile(newTask);
                     System.out.println("Added to to-do list: \n" + newTask);
                 }
             }
@@ -153,7 +90,7 @@ public class Duke {
         Scanner sc =  new Scanner(System.in);
         System.out.println("Greetings. My name is I-01B, but you may call me DUKE.");
         try {
-            loadData();
+            DukeFile.loadData(todoList);
         } catch (IOException e) {
             e.printStackTrace();
         }
