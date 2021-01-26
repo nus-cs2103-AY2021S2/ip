@@ -73,6 +73,13 @@ public class Duke {
         }
     }
 
+    public void find(Command command) {
+        String keyword = command.getArgs();
+
+        TaskList matchingTasks = tasks.findMatchingTasks(keyword);
+        ui.listMatchingTasks(matchingTasks);
+    }
+
     public boolean readInput(Scanner sc) {
         String input = sc.nextLine().trim();
 
@@ -91,6 +98,9 @@ public class Duke {
                 break;
             case Command.DELETE:
                 delete(command);
+                break;
+            case Command.FIND:
+                find(command);
                 break;
             case Command.TODO:
                 addTodo(command);

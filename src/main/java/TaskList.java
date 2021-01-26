@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -22,5 +22,16 @@ public class TaskList {
 
     public Task getTaskAt(int index) {
         return tasks.get(index);
+    }
+
+    public TaskList findMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
     }
 }

@@ -25,12 +25,12 @@ public class Ui {
     }
 
     public void list(TaskList tasks) {
-        String msg = formatLine("Here are the tasks in your list:");
+        StringBuilder msg = new StringBuilder(formatLine("Here are the tasks in your list:"));
 
         for (int i = 0; i < tasks.size(); i++) {
-            msg += formatLine((i + 1) + ". " + tasks.getTaskAt(i));            
+            msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
         }
-        reply(msg);
+        reply(msg.toString());
     }
 
     public void exit() {
@@ -55,5 +55,18 @@ public class Ui {
                 + formatLine("  " + deletedTask)
                 + formatLine("Now you have " + numTasks + " tasks in the list.");
         reply(msg);
+    }
+
+    public void listMatchingTasks(TaskList tasks) {
+        if (tasks.size() > 0) {
+            StringBuilder msg = new StringBuilder(formatLine("Here are the matching tasks in your list:"));
+
+            for (int i = 0; i < tasks.size(); i++) {
+                msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
+            }
+            reply(msg.toString());
+        } else {
+            reply(formatLine("No matching tasks were found."));
+        }
     }
 }
