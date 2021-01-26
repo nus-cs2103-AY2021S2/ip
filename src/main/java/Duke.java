@@ -1,5 +1,6 @@
 import main.java.*;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,27 +39,19 @@ public class Duke {
         String farewell = indent + " Bye. Hope to see you again soon!\n";
         Scanner sc = new Scanner(System.in);
 
-
-
-
         logMessage(DukeCommand.WELCOME, greeting, 0, null);
 
         while (sc.hasNextLine()) {
-
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
 
-
             try {
-
                 if (next.equals("bye")) {
-
                     logMessage(DukeCommand.BYE, farewell, 0, null);
                     sc.close();
                     return;
 
                 } else if (params[0].equals("delete")) {
-
                     try {
                         Integer index = Integer.parseInt(params[1]) - 1;
 
@@ -72,8 +65,6 @@ public class Duke {
                     } catch (Exception err) {
                         throw new DukeException(err.getMessage());
                     }
-
-
 
                 } else if (next.equals("list")) {
                     ListIterator<Task> taskIter = taskList.listIterator();
@@ -119,14 +110,21 @@ public class Duke {
                     }
 
                     String[] deadlineParams = params[1].split(" /by ");
+                    System.out.println(Arrays.toString(deadlineParams));
 
                     if (deadlineParams.length == 1) {
                         throw new DukeException("deadline not given for this Deadline!");
                     }
 
+                    Pattern pt = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+                    Matcher mt = pt.matcher(deadlineParams[1]);
+
+                    if (!mt.find()) {
+                        throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD' after description");
+                    }
 
 
-                    Deadline newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                    Deadline newTask = new Deadline(deadlineParams[0], LocalDate.parse(deadlineParams[1]));
                     taskList.add(newTask);
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
@@ -148,14 +146,23 @@ public class Duke {
                         throw new DukeException("time of Event was not specified!");
                     }
 
-                    Pattern pt = Pattern.compile("\\d-\\dp?a?m");
-                    Matcher mt = pt.matcher(timeParams[1]);
+                    Pattern datePt = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+                    Matcher dateMt = datePt.matcher(timeParams[0]); // timeParams[0] refers to the date
 
-                    if (!mt.find()) {
-                        throw new DukeException("Invalid time range for the event!");
+                    if (!dateMt.find()) {
+                        throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD {time range}' after description");
                     }
 
-                    Event newTask = new Event(eventParams[0], eventParams[1]);
+
+                    Pattern timePt = Pattern.compile("\\d{1,2}-\\d{1,2}p?a?m");
+                    Matcher timeMt = timePt.matcher(timeParams[1]); // timeParams[1] refers to the time
+
+                    if (!timeMt.find()) {
+                        throw new DukeException("OOPS!!! Please enter a valid time range in this format \"{start}-{end}\"" +
+                                " and include am/pm after");
+                    }
+
+                    Event newTask = new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
                     taskList.add(newTask);
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
 
