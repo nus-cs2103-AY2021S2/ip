@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
@@ -25,8 +26,8 @@ public class Deadline extends Task {
         LocalDateTime eventTime = null;
         boolean isDone = argMap.containsKey("done");
 
-        if (argMap.containsKey("at")) {
-            eventTime = LocalDateTime.parse(argMap.get("at"));
+        if (argMap.containsKey("by")) {
+            eventTime = LocalDateTime.parse(argMap.get("by"));
         }
 
         return new Deadline(desc, eventTime, isDone);
@@ -36,7 +37,7 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() +
                 (endDate != null
-                        ? "(at: " + endDate + ")"
+                        ? "(by: " + endDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + ")"
                         : "");
     }
 
