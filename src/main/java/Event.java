@@ -1,13 +1,30 @@
-public class Event extends Task{
-    private final String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    Event(String description, String time){
+public class Event extends Task{
+    private final String preposition;
+    private final LocalDate date;
+
+    Event(String description, String prepositionAndTime) throws DukeException{
         super(description);
-        this.time = time;
+        String[] strings = splitPrepositionAndTime(prepositionAndTime);
+
+        if(strings.length != 2) {
+            throw new DukeException("Please provide a preposition and a date after '/'.");
+        }
+
+        try {
+            preposition = strings[0];
+            date = LocalDate.parse(strings[1]);
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Date must be in the format yyyy-mm-dd.");
+        }
     }
 
     @Override
     public String toString(){
-        return String.format("[E][%s] %s (%s)", getStatusIcon(), description, time);
+        String dateStr = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return String.format("[E][%s] %s (%s %s)", getStatusIcon(), description, preposition, dateStr);
     }
 }
