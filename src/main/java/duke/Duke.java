@@ -45,6 +45,10 @@ public class Duke {
                     index = Parser.parseInt(params[0]);
                     this.ui.sendToUser(this.tasks.doTask(index));
                     break;
+                case FIND:
+                    params = Parser.parseParams(command, commandArr[1]);
+                    this.ui.sendToUser(this.tasks.findTask(params[0]));
+                    break;
                 case TODO:
                     params = Parser.parseParams(command, commandArr[1]);
                     this.ui.sendToUser(this.tasks.addTask(new Todo(params[0], TaskType.TODO)));
@@ -78,6 +82,7 @@ enum DukeCommand {
     LIST,
     DELETE,
     DONE,
+    FIND,
     TODO,
     EVENT,
     DEADLINE;

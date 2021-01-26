@@ -41,6 +41,16 @@ public class TaskList {
                 + task.toString();
     }
 
+    public String findTask(String phrase) {
+        String str = "Here are the matching tasks in your list:\n      ";
+        for (Task t: this.tasks) {
+            if (t.description.contains(phrase)) {
+                str += t.toString() + "\n      ";
+            }
+        }
+        return str.substring(0, str.length() - 7);
+    }
+
     public String listTasks() {
         return this.toString();
     }

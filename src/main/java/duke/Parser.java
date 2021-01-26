@@ -23,6 +23,8 @@ public class Parser {
             // Fallthrough
         case DONE:
             // Fallthrough
+        case FIND:
+            // Fallthrough
         case TODO:
             paramArr = new String[] {params};
             break;
