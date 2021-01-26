@@ -19,6 +19,7 @@ public class Ui {
 
     /**
      * Displays a message properly formatted with borders
+     *
      * @param message to be displayed
      */
     public void displayMessage(String message) {
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Retrieves full command from the user
+     *
      * @return raw user command
      */
     public String getUserCommand() {
