@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,6 +19,11 @@ public class Task {
         return (isDone ? "X" : " ");
         //return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
+    public String timeFormat(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern(MMM d yyyy));
+    }
+
 
     public Task finishTask() {
         return new Task(this.description, true);
