@@ -5,6 +5,7 @@ import java.util.Scanner;
  * Deals with interactions with the user
  */
 public class Ui {
+
     Scanner sc;
 
     public Ui() {
@@ -60,6 +61,7 @@ public class Ui {
      */
     public void showExit() {
         sc.close();
+
         System.out.println("Bye! Hope to see you again!");
     }
 
@@ -71,6 +73,7 @@ public class Ui {
         System.out.println("Here are the tasks in your list:");
 
         ArrayList<Task> tasks = tasklist.getList();
+
         for (int j = 0; j < tasks.size(); j++) {
             System.out.println(j + 1 + "." + tasks.get(j).toString());
         }
@@ -102,5 +105,4 @@ public class Ui {
         System.out.println("Ok! I've added this task:\n" + tasklist.getList().get(tasklist.getList().size() - 1).toString());
         System.out.println("Currently, you have " + tasklist.getList().size() + " task(s) in the list!");
     }
-
 }

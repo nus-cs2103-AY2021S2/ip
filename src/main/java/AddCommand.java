@@ -4,6 +4,7 @@ import java.io.IOException;
  * A command that represents adding a <code>Task</code> into a <code>TaskList</code>
  */
 public class AddCommand extends Command {
+
     Task task;
 
     public AddCommand(Task task) {

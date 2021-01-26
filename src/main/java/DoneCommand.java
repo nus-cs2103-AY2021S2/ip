@@ -4,6 +4,7 @@ import java.io.IOException;
  * A command that represents marking a <code>Task</code> in a <code>TaskList</code>
  */
 public class DoneCommand extends Command{
+
     int taskIndex;
 
     public DoneCommand(int taskIndex) {
