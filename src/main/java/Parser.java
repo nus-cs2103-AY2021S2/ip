@@ -1,4 +1,10 @@
 public class Parser {
+    /**
+     * Returns a Command object created by parsing the given input.
+     *
+     * @param input User's input.
+     * @return Command
+     */
     public static Command parseInput(String input) {
         String[] parts = input.split(" ", 2);
 
