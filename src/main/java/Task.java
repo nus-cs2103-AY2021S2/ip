@@ -31,6 +31,10 @@ public abstract class Task {
         return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
+    public String saveFormat(LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+    }
+
     public String getStatusIcon() {
         return (this.isDone) ? "X" : " ";
     }
