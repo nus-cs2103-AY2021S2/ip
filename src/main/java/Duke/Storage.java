@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** 
+ * Represents the storage where the program stores the list of tasks on.
+ */
 public class Storage {
 
     private final String filePath;
@@ -47,7 +50,12 @@ public class Storage {
         return true;
     }
 
-    // Rewrite the entire file from the file path based on the task list given
+    /**
+     * Rewrite the entire file from the file path based on the task list given.
+     * 
+     * @param taskList A list of task.
+     * @throws FileNotFoundException If the file cannot be found.
+     */
     public void writeToFile(TaskList taskList) throws FileNotFoundException {
         // Push the file content to the page
         FileWriter fileWriter;
@@ -65,7 +73,12 @@ public class Storage {
         }
     }
 
-    // Load and return the file content from the task file
+    /**
+     * Load and return the file content from the task file.
+     * 
+     * @return An array list representing the file contents.
+     * @throws FileNotFoundException If the file cannot be found.
+     */
     public ArrayList<String> loadFileContent() throws FileNotFoundException {
         
         File file = new File(filePath);

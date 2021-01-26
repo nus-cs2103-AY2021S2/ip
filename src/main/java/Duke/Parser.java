@@ -3,6 +3,9 @@ package Duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser to make sense of string inputs.
+ */
 public class Parser {
     public enum commandType {
         INPUT_DEADLINE,
@@ -11,6 +14,14 @@ public class Parser {
         FILE_EVENT
     }
     
+    /**
+     * 
+     * Returns an object which contains the description and date of a task.
+     * 
+     * @param fullCommand The input that the parser will try to make sense of.
+     * @param cmdType The command type which determines how we try to interpret the data.
+     * @return An object which contains the description and date of a task.
+     */
     public StringDatePair parse(String fullCommand, commandType cmdType) {
         if (cmdType == commandType.INPUT_DEADLINE) {
             // Split up the string into the description and date accordingly

@@ -4,6 +4,14 @@ import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+* The Duke application is a to do list application where users are able to 
+* create, remove and see their to do list.
+*
+* @author  Low En Haoa
+* @version 0.1
+* @since   2021-01-26 
+*/
 public class Duke {
 
     private final Storage storage;
@@ -18,6 +26,14 @@ public class Duke {
 		}
     }
 
+    /**
+     * Method to run the duke application by showing a greetings to the user first.
+     * Runs a while loop that only terminates when the user inputs "bye".
+     * Check for keywords at the start of the input such as "list", "todo", "deadline",
+     * "events" and perform different action base on it.
+     * 
+     * @throws DukeException
+     */
     public void run() throws DukeException {
         // Output initial greeting before asking for input
         ui.showInitialGreeting();
@@ -158,6 +174,14 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Returns the duke object with access to the data in the file path.
+     * If the data is not empty, load the file content into the task list.
+     * Else, load an empty task list where the user can start using the application.
+     *
+     * @param filePath File path in the hard disk to store the current task list.
+     * @throws DukeException for any error.
+     */
     public Duke(String filePath) throws DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -167,6 +191,8 @@ public class Duke {
         } catch (FileNotFoundException | DukeException ex) {
             ui.printLoadingError();
             taskList = new TaskList();
+        } catch (Exception ex) {
+            throw new DukeException();
         }
     }
 }
