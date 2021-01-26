@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public abstract class Task {
     private String content;
     private boolean isDone;
@@ -16,6 +20,15 @@ public abstract class Task {
     }
 
     abstract public String toFileString();
+
+    public String parseDate(String string){
+        try{
+            LocalDate date = LocalDate.parse(string);
+            return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            return string;
+        }
+    }
 
     public void setDone() {
         this.isDone = true;
