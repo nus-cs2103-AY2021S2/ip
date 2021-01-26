@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
@@ -13,13 +12,13 @@ public class Event extends Task {
 
     public Event(int done, String description, String at) {
         super(done, description);
-        this.at = LocalDate.parse(at);;
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return "[D]" + super.toString() + " (at: " + at.format(formatter) + ")";
+        return "[E]" + super.toString() + " (at: " + at.format(formatter) + ")";
     }
 
     @Override
