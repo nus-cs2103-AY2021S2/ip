@@ -10,10 +10,19 @@ public class Storage {
 	
 	private File f;
 	
+	/**
+	* Constructor for the Storage class. The filename argument will be used to create file for storing 
+	* and retrieving the user's TaskList.
+	* @param filename the name of the file to save TaskList information
+	*/
 	public Storage(String filename) {
 		f = new File(filename);
 	}
 	
+	/**
+	* Returns the TaskList object previously saved by the chatbot when the user terminates the program.
+	* @return TaskList object
+	*/
 	public TaskList loadTaskList() {
 		
 		try {
@@ -69,6 +78,10 @@ public class Storage {
 		
 	}
 	
+	/**
+	* Saves the TaskList object provided in the argument into the file created by the constructor of this class.
+	* @param TaskList object to be saved
+	*/
 	public void saveTaskList(TaskList tl){
 		
 		try {
