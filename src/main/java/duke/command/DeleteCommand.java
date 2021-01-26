@@ -1,8 +1,11 @@
 package duke.command;
 
-import duke.*;
-import duke.task.Task;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * The DeleteCommand class encapsulates information and methods about a DeleteCommand.
@@ -11,6 +14,12 @@ public class DeleteCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Delete Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying delete messages to the CLI.
+     */
     public DeleteCommand(String fullCmd, Ui ui) {
         this.fullCmdStrArray = fullCmd.split(" ");;
         this.ui = ui;
@@ -36,10 +45,10 @@ public class DeleteCommand implements Command {
         }
 
         if (!Parser.isNumber(fullCmdStrArray[1])) { // handle commands such as 'delete a', 'delete hello'
-            String errorMsg = "Sorry human, please enter the number of the task you want me to" +
-                    "\n" +
-                    "  " +
-                    "delete.";
+            String errorMsg = "Sorry human, please enter the number of the task you want me to"
+                    + "\n"
+                    + "  "
+                    + "delete.";
             throw new DukeException(errorMsg);
         }
 

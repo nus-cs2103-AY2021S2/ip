@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandName;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  *  The Parser class encapsulates methods to handle user commands.
@@ -43,6 +50,8 @@ public class Parser {
         case DELETE:
             toRun = new DeleteCommand(fullCmd, ui);
             break;
+        default:
+            throw new DukeException("Sorry human, I have not been trained to process that command.");
         }
         return toRun;
     }

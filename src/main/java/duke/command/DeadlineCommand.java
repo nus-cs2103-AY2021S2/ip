@@ -1,15 +1,15 @@
 package duke.command;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.DeadlineTask;
-import duke.TaskList;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * The DeadlineCommand class encapsulates information and methods about a DeadlineCommand.
@@ -19,6 +19,12 @@ public class DeadlineCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Deadline Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying deadline messages to the CLI.
+     */
     public DeadlineCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
@@ -26,8 +32,8 @@ public class DeadlineCommand implements Command {
     }
 
     /**
-     *  * Processes the deadline command by adding a new deadline task to the list of tasks,
-     *  * writing it into the saved data file of tasks and displaying a message on the CLI.
+     *  Processes the deadline command by adding a new deadline task to the list of tasks,
+     *  writing it into the saved data file of tasks and displaying a message on the CLI.
      *
      * @param storage The storage object that writes data to the saved data file of tasks.
      * @param taskList The list of tasks.

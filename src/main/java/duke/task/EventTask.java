@@ -29,7 +29,8 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh.mm a")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy hh.mm a")) + ")";
     }
 
     /**
@@ -37,6 +38,7 @@ public class EventTask extends Task {
      * @return String for chatbot to save into a saved data file of tasks.
      */
     public String getSavingString() {
-        return "EVENT" + super.getSavingString() + SEPARATOR + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
+        return "EVENT" + super.getSavingString() + SEPARATOR
+                + date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + "\n";
     }
 }

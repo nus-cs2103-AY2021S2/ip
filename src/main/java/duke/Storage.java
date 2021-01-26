@@ -1,8 +1,5 @@
 package duke;
 
-import duke.command.CommandName;
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.command.CommandName;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 /**
  * The Storage class encapsulates information and methods to handle loading and saving tasks
@@ -109,6 +112,8 @@ public class Storage {
                 throw new DukeException("Save data file corrupted");
             }
             break;
+        default:
+            throw new DukeException("Save data file corrupted");
         }
         if (taskStatus == -1 || taskToReturn == null) {
             throw new DukeException("Saved data file corrupted.");

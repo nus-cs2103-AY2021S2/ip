@@ -1,11 +1,16 @@
 package duke.task;
 
 public class Task {
+    private static final String SEPARATOR = "|";
     protected String taskName;
     protected boolean isDone;
 
-    private static final String SEPARATOR = "|";
 
+    /**
+     * Create and initialize a Task.
+     *
+     * @param taskName The name of the task the user wishes to add.
+     */
     public Task (String taskName) {
         this.taskName = taskName;
         this.isDone = false;

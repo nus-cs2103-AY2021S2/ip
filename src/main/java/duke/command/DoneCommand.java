@@ -15,6 +15,12 @@ public class DoneCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Done Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying done to the CLI.
+     */
     public DoneCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;

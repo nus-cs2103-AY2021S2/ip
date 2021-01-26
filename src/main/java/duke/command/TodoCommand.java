@@ -14,12 +14,17 @@ public class TodoCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Todo Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying todo messages to the CLI.
+     */
     public TodoCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;
         this.ui = ui;
     }
-
 
     /**
      * Processes the todo command by adding a new todo task to the list of tasks,

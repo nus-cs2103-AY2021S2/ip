@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.EventTask;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * The EventCommand class encapsulates information and methods about a EventCommand.
@@ -18,6 +18,12 @@ public class EventCommand implements Command {
     private String[] fullCmdStrArray;
     private Ui ui;
 
+    /**
+     * Create and initialize a Event Command.
+     *
+     * @param fullCmd The full user input in String form.
+     * @param ui The ui object responsible for displaying event messages to the CLI.
+     */
     public EventCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
         this.fullCmdStrArray = fullCmd.split(" ");;

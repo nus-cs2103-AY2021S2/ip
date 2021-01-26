@@ -1,8 +1,8 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
+
+import duke.command.Command;
 
 /**
  * The Duke class is the entry point into the chatbot program.
@@ -10,13 +10,17 @@ import java.util.Scanner;
  * It prints the action reply to the CLI.
  */
 public class Duke {
+    private static final String PATH_NAME = "./data/saved_task_list.txt";
     private Ui ui;
     private Storage storage;
     private TaskList taskList = new TaskList();
     private Parser parser = new Parser();
 
-    private static final String PATH_NAME = "./data/saved_task_list.txt";
-
+    /**
+     * Create and initialize a Duke object that initializes the storage and ui.
+     *
+     * @param filePath Relative file path to the saved data file of tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes user input.
+     */
     public void run() {
         ui.printGreeting();
         Scanner sc = new Scanner(System.in);
