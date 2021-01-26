@@ -20,7 +20,6 @@ public class TaskManager {
             allTasks = new ArrayList<>();
             return;
         }
-
         savePath = Paths.get("data", "taskstore");
         try {
             allTasks = taskStorage.retrieveTaskList(savePath);
@@ -35,37 +34,37 @@ public class TaskManager {
         allTasks.add(task);
     }
 
-    public Task retrieveTaskByListID(int id) {
+    public Task retrieveTaskByListId(int id) {
         return allTasks.get(id);
     }
 
-    public Task retrieveTaskByTaskUID(int id) {
+    public Task retrieveTaskByTaskUid(int id) {
         for (var e : allTasks) {
-            if (e.getTaskUID() == id) {
+            if (e.getTaskUid() == id) {
                 return e;
             }
         }
         return null;
     }
 
-    public void doTaskByListID(int id) {
-        var task = retrieveTaskByListID(id);
+    public void doTaskByListId(int id) {
+        var task = retrieveTaskByListId(id);
         if (task.isDone()) {
             throw new TaskAlreadyDoneException();
         } else {
-            task.markAsDone();
+            task.setDone();
         }
     }
 
-    public void doTaskByTaskUID(int id) {
-        retrieveTaskByTaskUID(id).markAsDone();
+    public void doTaskByTaskUid(int id) {
+        retrieveTaskByTaskUid(id).setDone();
     }
 
     public List<Task> retrieveAllTasks() {
         return allTasks;
     }
 
-    public void deleteTaskByListID(int id) {
+    public void deleteTaskByListId(int id) {
         allTasks.remove(id);
     }
 

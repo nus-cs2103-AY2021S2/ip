@@ -32,8 +32,8 @@ public enum InputType {
     DONE(x -> x.toLowerCase().startsWith("done"), (tm, data) -> {
         try {
             int loc = Integer.parseInt(data.substring(5)) - 1;
-            tm.doTaskByListID(loc);
-            return "The task has been set to done ! \n - " + tm.retrieveTaskByListID(loc);
+            tm.doTaskByListId(loc);
+            return "The task has been set to done ! \n - " + tm.retrieveTaskByListId(loc);
         } catch (NumberFormatException e1) {
             return "Not a valid index given !!";
         } catch (IndexOutOfBoundsException | TaskAlreadyDoneException e) {
@@ -70,8 +70,8 @@ public enum InputType {
     DELETE(x -> x.toLowerCase().startsWith("delete"), (tm, data) -> {
         try {
             int loc = Integer.parseInt(data.substring(5)) - 1;
-            Task x = tm.retrieveTaskByListID(loc);
-            tm.deleteTaskByListID(loc);
+            Task x = tm.retrieveTaskByListId(loc);
+            tm.deleteTaskByListId(loc);
             return "The task has been deleted ! \n - " + x;
         } catch (NumberFormatException e1) {
             return "Not a valid index given !!";
