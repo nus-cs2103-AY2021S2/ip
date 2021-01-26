@@ -27,12 +27,15 @@ public class TaskList {
         this.taskList.remove(i);
     }
 
-    public TaskList find(String keyword) {
+    public TaskList find(String keyword) throws DukeException {
         TaskList toReturn = new TaskList();
         for (Task t : this.taskList) {
             if (t.getTaskName().contains(keyword)) {
                 toReturn.add(t);
             }
+        }
+        if (toReturn.getSize() == 0) {
+            throw new DukeException("Sorry human, no such task seems to exists.");
         }
         return toReturn;
     }

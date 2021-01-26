@@ -12,7 +12,7 @@ public class FindCommand implements Command {
 
     public FindCommand(String fullCmd, Ui ui) {
         this.fullCmd = fullCmd;
-        this.fullCmdStrArray = fullCmd.split(" ");;
+        this.fullCmdStrArray = fullCmd.split(" ", 2);
         this.ui = ui;
     }
     @Override
@@ -22,10 +22,6 @@ public class FindCommand implements Command {
         }
         String toFind = fullCmdStrArray[1];
         TaskList matchingTasks = taskList.find(toFind);
-        if (matchingTasks.getSize() == 0) {
-            throw new DukeException("Sorry human, no such task seems to exists.");
-        } else {
-            ui.printList(matchingTasks);
-        }
+        ui.printList(matchingTasks);
     }
 }
