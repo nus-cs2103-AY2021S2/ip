@@ -7,7 +7,7 @@ import java.util.Locale;
 public class Event extends Task{
     protected LocalDateTime at;
     public static String parseFormat = "dd-MM-yyyy, hh:mma";
-    public static String outputFormat = "dd/MM/yyyy, hh:mma";
+    public static String outputFormat = "dd MMM yyyy, hh:mma";
     /**
      * Instantiates a new event task.
      *
