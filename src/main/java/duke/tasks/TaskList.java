@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -40,10 +40,10 @@ public class TaskList {
             return true;
         } else if (obj instanceof TaskList) {
             TaskList otherTaskList = (TaskList) obj;
-            if (this.taskList != null && otherTaskList.taskList != null) {
-                return this.taskList.equals(otherTaskList.taskList);
+            if (taskList != null && otherTaskList.taskList != null) {
+                return taskList.equals(otherTaskList.taskList);
             } else {
-                return this.taskList == null && otherTaskList.taskList == null;
+                return taskList == null && otherTaskList.taskList == null;
             }
         } else {
             return false;

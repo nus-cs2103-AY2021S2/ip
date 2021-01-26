@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EventTaskTest {
     private static final String taskName = "Project Meeting";
     private static final String eventTime = "Friday 2-4pm";
-    
+
     @Test
     public void testStringConversion() {
         assertEquals("[E][ ] Project Meeting (at: Friday 2-4pm)",
@@ -36,12 +36,12 @@ public class EventTaskTest {
     }
 
     @Test
-    public void isDone_completedTask_success() {
+    public void isDone_completedTask_true() {
         assertTrue(new EventTask(taskName, true, eventTime).isDone());
     }
 
     @Test
-    public void isDone_notCompletedTask_success() {
+    public void isDone_notCompletedTask_false() {
         assertFalse(new EventTask(taskName, false, eventTime).isDone());
     }
 

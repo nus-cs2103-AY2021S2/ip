@@ -2,14 +2,12 @@ package duke.commands;
 
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
-    public static final String EXIT_MESSAGE = "Exiting...";
 
-    public ByeCommand() {
-    }
+    private static final String MESSAGE_EXIT = "Exiting...";
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(EXIT_MESSAGE);
+        return new CommandResult(MESSAGE_EXIT);
     }
 
     public static boolean isByeCommand(Command command) {

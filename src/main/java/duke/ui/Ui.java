@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.io.PrintStream;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -10,21 +11,20 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
     private final Scanner in;
     private final PrintStream out;
 
     public Ui() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
+        in = new Scanner(System.in);
+        out = System.out;
     }
 
     public String getUserInput() {
-        String userInput = in.nextLine();
-        return userInput;
+        return in.nextLine();
     }
-    
+
     public void printDivider() {
         out.println(DIVIDER);
     }
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     public void printExitMessage() {
-        out.println(EXIT_MESSAGE);
+        out.println(MESSAGE_EXIT);
     }
 
     public void print(String messageForUser) {

@@ -1,8 +1,8 @@
 package duke.tasks;
 
 public abstract class Task {
-    private String taskType;
-    private String name;
+    private final String taskType;
+    private final String name;
     private boolean isCompleted;
 
     public Task(String taskType, String name) {
@@ -28,7 +28,7 @@ public abstract class Task {
     }
 
     public void completeTask() {
-        this.isCompleted = true;
+        isCompleted = true;
     }
 
     @Override

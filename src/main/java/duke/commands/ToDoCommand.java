@@ -4,10 +4,11 @@ import duke.tasks.ToDoTask;
 
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
-    private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
-    private static final String TASKLIST_SIZE_MESSAGE_FORMAT = "Now you have %d tasks in your list.";
 
-    private String taskName;
+    private static final String MESSAGE_ADDED_TASK = "Got it. I've added this task:\n  ";
+    private static final String MESSAGE_TASKLIST_SIZE_FORMAT = "Now you have %d tasks in your list.";
+
+    private final String taskName;
 
     public ToDoCommand(String taskName) {
         this.taskName = taskName;
@@ -17,7 +18,7 @@ public class ToDoCommand extends Command {
     public CommandResult execute() {
         ToDoTask task = new ToDoTask(taskName);
         taskList.addTask(task);
-        return new CommandResult(ADDED_TASK_MESSAGE + task.toString() + "\n" +
-                String.format(TASKLIST_SIZE_MESSAGE_FORMAT, taskList.size()), taskList);
+        return new CommandResult(MESSAGE_ADDED_TASK + task.toString() + "\n"
+                + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList);
     }
 }

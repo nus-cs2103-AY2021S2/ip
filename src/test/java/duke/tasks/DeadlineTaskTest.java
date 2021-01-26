@@ -11,16 +11,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DeadlineTaskTest {
     private static final String taskName = "Return Book";
-    private static final LocalDateTime dateTime = LocalDateTime.parse("24/1/2021 1800", 
+    private static final LocalDateTime dateTime = LocalDateTime.parse("24/1/2021 1800",
             Formatter.INPUT_DATE_FORMATTER);
-    
+
     @Test
     public void testStringConversion() {
-        assertEquals("[D][ ] Return Book (by: Jan 24 2021, 6:00PM)", 
+        assertEquals("[D][ ] Return Book (by: Jan 24 2021, 6:00PM)",
                 new DeadlineTask(taskName, dateTime).toString());
-        assertEquals("[D][ ] Return Book (by: Jan 24 2021, 6:00PM)", 
+        assertEquals("[D][ ] Return Book (by: Jan 24 2021, 6:00PM)",
                 new DeadlineTask(taskName, false, dateTime).toString());
-        assertEquals("[D][X] Return Book (by: Jan 24 2021, 6:00PM)", 
+        assertEquals("[D][X] Return Book (by: Jan 24 2021, 6:00PM)",
                 new DeadlineTask(taskName, true, dateTime).toString());
     }
 
@@ -40,12 +40,12 @@ public class DeadlineTaskTest {
     }
 
     @Test
-    public void isDone_completedTask_success() {
+    public void isDone_completedTask_true() {
         assertTrue(new DeadlineTask(taskName, true, dateTime).isDone());
     }
 
     @Test
-    public void isDone_notCompletedTask_success() {
+    public void isDone_notCompletedTask_false() {
         assertFalse(new DeadlineTask(taskName, false, dateTime).isDone());
     }
 
@@ -55,7 +55,7 @@ public class DeadlineTaskTest {
         deadlineTask.completeTask();
         assertTrue(deadlineTask.isDone());
     }
-    
+
     @Test
     public void getDeadline_deadlineTask_success() {
         assertEquals("Jan 24 2021, 6:00PM", new DeadlineTask(taskName, dateTime).getDeadline());

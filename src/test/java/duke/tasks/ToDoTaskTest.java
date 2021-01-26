@@ -8,19 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ToDoTaskTest {
     private static final String taskName = "Read Book";
-    
+
     @Test
     public void testStringConversion() {
         assertEquals("[T][ ] Read Book", new ToDoTask(taskName).toString());
         assertEquals("[T][ ] Read Book", new ToDoTask(taskName, false).toString());
         assertEquals("[T][X] Read Book", new ToDoTask(taskName, true).toString());
     }
-    
+
     @Test
     public void getName_emptyString_success() {
         assertEquals("", new ToDoTask("").getName());
     }
-    
+
     @Test
     public void getName_nonEmptyString_success() {
         assertEquals(taskName, new ToDoTask(taskName).getName());
@@ -32,12 +32,12 @@ public class ToDoTaskTest {
     }
 
     @Test
-    public void isDone_completedTask_success() {
+    public void isDone_completedTask_true() {
         assertTrue(new ToDoTask(taskName, true).isDone());
     }
 
     @Test
-    public void isDone_notCompletedTask_success() {
+    public void isDone_notCompletedTask_false() {
         assertFalse(new ToDoTask(taskName, false).isDone());
     }
 
