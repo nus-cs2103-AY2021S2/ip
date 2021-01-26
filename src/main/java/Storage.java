@@ -9,15 +9,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Store {
+public class Storage {
   protected String path;
   protected File file;
 
-  public Store() throws IOException {
-    File filestr = new File("src/main/java/duke.text");
+  public Storage(String filepath) throws IOException {
+    this.path = filepath;
+    File filestr = new File(path);
     filestr.createNewFile();
     this.file = filestr;
-    this.path = file.getAbsolutePath();
+  }
+
+  public Storage() {
+
   }
 
   public void save(ArrayList<Task> task) throws IOException {
@@ -74,6 +78,7 @@ public class Store {
       System.out.println("no file");
     }
     return tasks;
+
   }
 
 

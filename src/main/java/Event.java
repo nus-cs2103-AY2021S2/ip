@@ -3,11 +3,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-  protected LocalDateTime by;
+  protected String by;
 
   public Event(String description, String by) {
     super(description);
-    this.by = dateTime(by);
+    this.by = by;
   }
 
   private LocalDateTime dateTime(String by) {
@@ -17,8 +17,7 @@ public class Event extends Task {
 
   @Override
   public String toString() {
-    DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
-    return "[E]" + super.toString() + " (at:" + by.format(format) + ")";
+    return "[E]" + super.toString() + " (at:" + by + ")";
   }
 
   @Override
