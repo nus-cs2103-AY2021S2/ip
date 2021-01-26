@@ -1,12 +1,19 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
+    private static final String DIR_NAME = "data";
+    private static final String FILE_NAME = "duke.txt";
     private static final String INDENTATION = "    ";
     private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
 
     private static List<Task> tasks = new ArrayList<>();
+    private static File file;
 
     // Helper functions
     public static String formatLine(String line) {
@@ -41,6 +48,12 @@ public class Duke {
         return Integer.parseInt(args) - 1;
     }
 
+    public static void writeToFile(Task task) throws IOException {
+        FileWriter fw = new FileWriter(file, true);
+        fw.write(task.toFileString());
+        fw.close();
+    }
+
     // Commands
     public static void greet() {
         String msg = formatLine("Hello! I'm Duke")
@@ -48,13 +61,22 @@ public class Duke {
         reply(msg);
     }
 
-    public static void addTodo(Command command) {
+    public static void addTodo(Command command) throws IOException {
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
+        writeToFile(todo);
         addedTaskReply(todo);
     }
 
-    public static void addDeadline(Command command) {
+    public static void addTodo(String[] parts) {
+        Task todo = new Todo(parts[2]);
+        if (parts[1].equals("X")) {
+            todo.markDone();
+        }
+        tasks.add(todo);
+    }
+
+    public static void addDeadline(Command command) throws IOException {
         String[] parts = command.getArgs().split("/by");
 
         if (parts.length != 2) {
@@ -62,11 +84,20 @@ public class Duke {
         } else {
             Task deadline = new Deadline(parts[0], parts[1]);
             tasks.add(deadline);
+            writeToFile(deadline);
             addedTaskReply(deadline);
         }
     }
 
-    public static void addEvent(Command command) {
+    public static void addDeadline(String[] parts) {
+        Task deadline = new Deadline(parts[2], parts[3]);
+        if (parts[1].equals("X")) {
+            deadline.markDone();
+        }
+        tasks.add(deadline);
+    }
+
+    public static void addEvent(Command command) throws IOException {
         String[] parts = command.getArgs().split("/at");
 
         if (parts.length != 2) {
@@ -74,30 +105,52 @@ public class Duke {
         } else {
             Task event = new Event(parts[0], parts[1]);
             tasks.add(event);
+            writeToFile(event);
             addedTaskReply(event);
         }
     }
 
-    public static void done(Command command) {
+    public static void addEvent(String[] parts) {
+        Task event = new Event(parts[2], parts[3]);
+        if (parts[1].equals("X")) {
+            event.markDone();
+        }
+        tasks.add(event);
+    }
+
+    public static void updateFile() throws IOException {
+        StringBuffer buffer = new StringBuffer();
+        for (Task task : tasks) {
+            buffer.append(task.toFileString());
+        }
+
+        FileWriter fw = new FileWriter(file);
+        fw.write(buffer.toString());
+        fw.close();
+    }
+
+    public static void done(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
         } else {
             tasks.get(index).markDone();
+            updateFile();
             String msg = formatLine("Nice! I've marked this task as done:")
                     + formatLine("  " + tasks.get(index));
             reply(msg);
         }
     }
 
-    public static void delete(Command command) {
+    public static void delete(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
             throw new TaskNotFoundException();
         } else {
             Task deletedTask = tasks.remove(index);
+            updateFile();
             String msg = formatLine("Noted. I've removed this task:")
                     + formatLine("  " + deletedTask)
                     + formatLine("Now you have " + tasks.size() + " tasks in the list.");
@@ -125,44 +178,78 @@ public class Duke {
             Command command = parseInput(input);
 
             switch (command.getInstruction()) {
-                case Command.BYE:
-                    exit();
-                    return false;
-                case Command.LIST:
-                    list();
-                    break;
-                case Command.DONE:
-                    done(command);
-                    break;
-                case Command.DELETE:
-                    delete(command);
-                    break;
-                case Command.TODO:
-                    addTodo(command);
-                    break;
-                case Command.EVENT:
-                    addEvent(command);
-                    break;
-                case Command.DEADLINE:
-                    addDeadline(command);
-                    break;
-                default:
-                    throw new UnknownCommandException();
+            case Command.BYE:
+                exit();
+                return false;
+            case Command.LIST:
+                list();
+                break;
+            case Command.DONE:
+                done(command);
+                break;
+            case Command.DELETE:
+                delete(command);
+                break;
+            case Command.TODO:
+                addTodo(command);
+                break;
+            case Command.EVENT:
+                addEvent(command);
+                break;
+            case Command.DEADLINE:
+                addDeadline(command);
+                break;
+            default:
+                throw new UnknownCommandException();
             }
-        } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException exception) {
+        } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException | IOException exception) {
             reply(formatLine(exception.getMessage()));
         }
 
         return true;
     }
 
-    public static void main(String[] args) {
+    public static void readFromFile(String input) {
+        String[] parts = Arrays.stream(input.split("\\|"))
+            .map(String::trim)
+            .toArray(String[]::new);
+
+        switch (parts[0]) {
+        case Command.TODO:
+            addTodo(parts);
+            break;
+        case Command.EVENT:
+            addEvent(parts);
+            break;
+        case Command.DEADLINE:
+            addDeadline(parts);
+            break;
+        default:
+            throw new UnknownCommandException();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+
+        File dir = new File(DIR_NAME);
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        file = new File(DIR_NAME + "/" + FILE_NAME);
+        if (!file.createNewFile()) {
+            Scanner fileSc = new Scanner(file);
+            while (fileSc.hasNextLine()) {
+                readFromFile(fileSc.nextLine());
+            }
+            fileSc.close();
+        }
 
         greet();
         Scanner sc = new Scanner(System.in);
