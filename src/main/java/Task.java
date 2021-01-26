@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected final String description;
     protected boolean done;
 
@@ -12,6 +12,8 @@ public class Task {
     public void finish() {
         this.done = true;
     }
+
+    public abstract String getSaveString();
 
     protected String getStatus() {
         if (this.done) {
