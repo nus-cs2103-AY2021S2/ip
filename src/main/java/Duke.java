@@ -1,7 +1,16 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import customClass.*;
+
+import customClass.Command;
+import customClass.Task;
+import customClass.LogicHandler;
+import customClass.Load;
+import customClass.Save;
+
 
 public class Duke {
     public static void main(String[] args) {
@@ -22,6 +31,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         List<Task> list = new ArrayList<>();
+        Save dataSaver = new Save();
+        LogicHandler logic = new LogicHandler();
+        Load dataLoader = new Load();
         Command currentCommand;
         try {
             currentCommand = Command.valueOf(input.split(" ")[0].toUpperCase());
@@ -29,82 +41,46 @@ public class Duke {
             currentCommand = Command.ERROR;
         }
 
+        try {
+            dataLoader.loadData(list);
+        } catch (IOException e) {
+            // Do not output error message, instead, create the dir and file
+            File dir = new File("src/data");
+            dir.mkdir();
+            File file = new File("src/data/tasks.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException err) {
+                System.out.println("Error: " + err);
+            }
+        }
+
         while (currentCommand != Command.BYE) {
             System.out.println("____________________________________________________________");
             switch (currentCommand) {
-                case LIST:
-                    // Check if the command is list and display the list of tasks.
-                    String temp = "";
-
-                    for (int i = 0; i < list.size(); i++) {
-                        temp += String.format("%d. %s", i + 1, list.get(i));
-                        if (i != list.size() - 1) {
-                            temp += "\n";
-                        }
-                    }
-                    System.out.println(temp);
-                    break;
-                case DONE:
-                    int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
-
-                    list.get(itemNumber).toggleIsDone();
-                    System.out.println(
-                            "Nice! I've marked this task as done:\n" +
-                                    list.get(itemNumber)
-                    );
-                    break;
-                case TODO:
-                    try {
-                        Todo todo = new Todo(input.split(" ", 2)[1]);
-                        list.add(todo);
-                        System.out.println("added: " + todo);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Oops, your todo requires at least a description.");
-                    }
-                    break;
-                case DEADLINE:
-                    try {
-                        String taskAndDate = input.split(" ", 2)[1];
-                        String task = taskAndDate.split(" /by ")[0];
-                        String date = taskAndDate.split(" /by ")[1];
-                        Deadline deadline = new Deadline(task, date);
-                        list.add(deadline);
-                        System.out.println("added: " + deadline);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Oops, your deadline requires both a description and date.");
-                    }
-                    break;
-                case EVENT:
-                    try {
-                        String taskAndDate = input.split(" ", 2)[1];
-                        String task = taskAndDate.split(" /at ")[0];
-                        String date = taskAndDate.split(" /at ")[1];
-                        Event event = new Event(task, date);
-                        list.add(event);
-                        System.out.println("added: " + event);
-                        System.out.println("Now you have " + list.size() + " tasks in the list.");
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Oops, your Event requires both a description and date");
-                    }
-                    break;
-                case DELETE:
-                    try {
-                        int index = Integer.valueOf(input.split(" ", 2)[1]);
-                        System.out.println("Noted. I've removed the task:\n" + list.get(index - 1) +
-                                "\nNow you have " + (list.size() - 1) + " tasks in the list.");
-                        list.remove(index - 1);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Delete requires a number");
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println(e);
-                    } catch (NumberFormatException e) {
-                        System.out.println(e);
-                    }
-                    break;
-                case ERROR:
-                    System.out.println("Oops, that is not a command I support.");
+            case LIST:
+                logic.list(list);
+                break;
+            case DONE:
+                logic.done(input, list);
+                break;
+            case TODO:
+                logic.todo(input, list);
+                break;
+            case DEADLINE:
+                logic.deadline(input, list);
+                break;
+            case EVENT:
+                logic.event(input, list);
+                break;
+            case DELETE:
+                logic.delete(input, list);
+                break;
+            case ERROR:
+                System.out.println("Oops, that is not a command I support.");
+                break;
+            default:
+                System.out.println("Internal error in code.");
             }
 
             System.out.println("____________________________________________________________");
@@ -115,6 +91,7 @@ public class Duke {
                 currentCommand = Command.ERROR;
             }
         }
+        dataSaver.save(list);
 
         System.out.println("Bye. Hope to see you again soon!");
     }
