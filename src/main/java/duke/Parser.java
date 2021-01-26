@@ -24,7 +24,9 @@ public class Parser {
         currLine = currLine.toLowerCase();
         String[] parsedLine = currLine.split(" ");
         if (currLine.startsWith("list")) {
-            ui.listTasks(taskList);
+            ui.printListTasks(taskList);
+        } else if(currLine.startsWith("find")){
+            ui.find(taskList, currLine);
         } else if(currLine.startsWith("save")){
             storage.save(ui, taskList);
             System.out.println("Your information has been saved!");
