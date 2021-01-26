@@ -1,23 +1,19 @@
-public class Save {
+public class Storage {
     String taskListStr;
-    Duke duke;
-    public Save(Duke duke){
+    String filePath;
+    public Storage(String filePath){
         this.taskListStr="";
-        this.duke = duke;
+        this.filePath = filePath;
     }
 
-    public void getLastSave(){
-        this.taskListStr = FileReading.readFile("data/duke.txt");
+    public void getLastSave(TaskList taskList){
+        this.taskListStr = FileReading.readFile(filePath);
         System.out.println("These are the tasks on your todolist");
         System.out.println(taskListStr);
-        addSavedTasks();
+        addSavedTasks(taskList);
     }
 
-    public void run(){
-        duke.start();
-    }
-
-    private  void addSavedTasks(){
+    private  void addSavedTasks(TaskList taskList){
         String[] lines = taskListStr.split("\n");
         for (int i = 0; i < lines.length ; i++) {
             if (!lines[i].contains(Duke.line)) {
@@ -35,12 +31,12 @@ public class Save {
                 if (details[0].contains("X")) {
                     currTask.isDone = true;
                 }
-                duke.list.add(currTask);
+                taskList.list.add(currTask);
             }
         }
     }
 
-    public static void save(Duke duke){
-        FileWriting.writeToFile(duke.listTasks());
+    public static void save(Ui ui, TaskList taskList){
+        FileWriting.writeToFile(ui.listTasks(taskList));
     }
 }
