@@ -10,11 +10,20 @@ import java.io.*;
 import java.time.LocalDate;
 
 public class Storage {
+    /** Default path in which the task data is stored */
     public static final String DATA_PATH = "data/lihua.json";
 
+    /**
+     * Initializes an storage instance.
+     */
     public Storage() {
     }
 
+    /**
+     * Loads the tasks from hard disk.
+     *
+     * @return The task list object, generated from data extracted from hard disk.
+     */
     public Tasks load() {
         Tasks tasks = new Tasks();
         try {
@@ -58,6 +67,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the tasks configuration to hard disk. The new data will overwrite old data.
+     *
+     * @param tasks The tasks configuration to be saved in hard disk.
+     */
     public void saveTasks(Tasks tasks) {
         JSONArray jsonArray = tasks.getJsonArray();
 

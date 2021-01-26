@@ -14,25 +14,51 @@ public class Tasks {
     private final List<Task> tasks;
 
     /**
-     * Initialize the task list with an empty ArrayList
+     * Initializes the task list with an empty ArrayList
      */
     public Tasks() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the task list.
+     *
+     * @param t The task object to be added to the list.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Removes the task from the list at a specific index.
+     *
+     * @param i The index of the task to be deleted.
+     * @return The task that gets deleted.
+     * @throws IndexOutOfBoundsException If the i specified is invalid for the list.
+     */
     public Task removeTask(int i) throws IndexOutOfBoundsException {
         return tasks.remove(i - 1);
     }
 
+    /**
+     * Retrieves the task from the list at a specific index.
+     *
+     * @param i The index of the task to be retrieved.
+     * @return The task at index i.
+     * @throws IndexOutOfBoundsException If the i specified is invalid for the list.
+     */
     public Task getTaskDone(int i) throws IndexOutOfBoundsException {
         tasks.get(i - 1).setDone(true);
         return tasks.get(i - 1);
     }
 
+    /**
+     * Lists down the content of the list in a readable string manner.
+     *
+     * @param date The date on which the tasks is expected to be finished.
+     * @return If the specified date is null, returns the string representation for all tasks;
+     * if the specified date is not null, returns the string representation of all the tasks on the date.
+     */
     public String listTasks(LocalDate date) {
         String message = "";
         // tasks is not null, but maybe empty
@@ -56,6 +82,11 @@ public class Tasks {
         return message;
     }
 
+    /**
+     * Wraps the task list object inside a json array to be stored in hard disk.
+     *
+     * @return The json array representing the task list.
+     */
     public JSONArray getJsonArray() {
         JSONArray jsonArray = new JSONArray();
         for (Task t : tasks) {
@@ -64,6 +95,11 @@ public class Tasks {
         return jsonArray;
     }
 
+    /**
+     * Gets the current size of the task list.
+     *
+     * @return The size of the task list.
+     */
     public int getSize() {
         return tasks.size();
     }

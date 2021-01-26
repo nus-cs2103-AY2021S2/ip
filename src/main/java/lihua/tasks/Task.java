@@ -8,7 +8,9 @@ import java.time.LocalDate;
  * Represent a task in the task list
  */
 public class Task {
+    /** The name/description/content of the task */
     protected String name;
+    /** Indicator of whether the task is done or not */
     protected boolean isDone;
 
     /**
@@ -28,6 +30,11 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Gets the date for the class.
+     *
+     * @return NULL as this is a dummy method.
+     */
     public LocalDate getDate() {
         return null;
     }
@@ -42,6 +49,11 @@ public class Task {
         return String.format("[%s] %s", doneMark, name);
     }
 
+    /**
+     * Wraps the task object inside a json object to be stored in hard disk.
+     *
+     * @return NULL as this is a dummy method.
+     */
     public JSONObject toJsonObject() {
         return null;
     }
