@@ -62,7 +62,7 @@ public class Ui {
     }
 
     // Print the entire list of task
-    public void printTaskListforKeyword(TaskList taskList, String keyword) {
+    public void printKeywordTaskList(TaskList taskList, String keyword) {
         System.out.println("Here are the matching tasks in your list:");
 
         int counter = 1;

@@ -169,7 +169,7 @@ public class Duke {
             } else if (userInput.startsWith("find")) {
                 // Find a return a list of task that is related to the keyword
                 String keyword = new Parser().parseForFind(userInput);
-                ui.printTaskListforKeyword(taskList, keyword);
+                ui.printKeywordTaskList(taskList, keyword);
             } else {
                 // Unable to detect the user's input
                 ui.printUnreadableError();
