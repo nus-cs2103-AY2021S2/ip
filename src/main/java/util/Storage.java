@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public interface Saver {
+public interface Storage {
     Path SAVE_PATH = Paths.get("data", "sweh.txt");
 
     static File getFile() throws IOException{

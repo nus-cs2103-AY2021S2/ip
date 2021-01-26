@@ -4,17 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class SaverTest {
+class StorageTest {
 
     @org.junit.jupiter.api.Test
     void writeSave() throws IOException {
-        Saver.writeSave("sweg");
+        Storage.writeSave("sweg");
     }
 
     @Test
     void getFile() throws IOException {
-        System.out.println(Saver.getFile().toString());
+        System.out.println(Storage.getFile().toString());
     }
 }

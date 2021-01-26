@@ -1,5 +1,5 @@
 import util.Formatter;
-import util.Saver;
+import util.Storage;
 import static util.Parser.*;
 
 import java.io.File;
@@ -98,7 +98,7 @@ public class TaskList {
         }
 
         try {
-            Saver.writeSave(saveLines.toString());
+            Storage.writeSave(saveLines.toString());
         } catch (IOException e) {
             return false;
         }
@@ -110,7 +110,7 @@ public class TaskList {
         File file;
         Scanner sc;
         try {
-            file = Saver.getFile();
+            file = Storage.getFile();
             sc = new Scanner(file);
         } catch (IOException e) {
             return false;
