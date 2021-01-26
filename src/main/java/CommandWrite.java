@@ -3,7 +3,7 @@ import java.io.IOException;
 public class CommandWrite implements ICommand{
     private ICommand decoratedCommand;
     private Storage storage;
-    private TaskManager taskManager;
+    private TaskList taskList;
 
     public CommandWrite(ICommand decoratedCommand,Storage storage){
         this.storage = storage;

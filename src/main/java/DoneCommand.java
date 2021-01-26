@@ -1,7 +1,7 @@
 public class DoneCommand implements ICommand {
-    private TaskManager tasks;
+    private TaskList tasks;
 
-    DoneCommand(TaskManager tasks) {
+    DoneCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 

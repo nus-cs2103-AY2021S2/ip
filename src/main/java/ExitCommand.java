@@ -1,7 +1,7 @@
 public class ExitCommand implements ICommand {
-    private TaskManager tasks;
+    private TaskList tasks;
 
-    public ExitCommand(TaskManager tasks) {
+    public ExitCommand(TaskList tasks) {
         this.tasks = tasks;
     }
 

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class TaskManager {
+public class TaskList {
     private ArrayList<Task> list;
     private boolean isDone;
 
-    public TaskManager() {
+    public TaskList() {
         list = new ArrayList<>();
         isDone = false;
     }

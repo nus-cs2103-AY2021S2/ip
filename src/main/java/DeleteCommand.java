@@ -1,7 +1,7 @@
 public class DeleteCommand implements ICommand{
-    TaskManager tasks;
+    TaskList tasks;
 
-    public DeleteCommand(TaskManager tasks) {
+    public DeleteCommand(TaskList tasks) {
         this.tasks = tasks;
     }
     @Override

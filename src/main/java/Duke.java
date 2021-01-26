@@ -1,34 +1,63 @@
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Duke {
+    private Storage storage;
+    private CommandMap commands;
+    private TaskList taskList;
+    private Ui ui;
+    public Duke() {
+        this.taskList = new TaskList();
+        this.storage = new Storage(taskList);
+        this.commands = new CommandMap(new CommandDecorator(new DefaultCommand()));
+        this.ui = new Ui();
+    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
-        CommandMap commands = new CommandMap(new CommandDecorator(new DefaultCommand()));
-        Storage storage= new Storage(taskManager);
+        Duke currentSession = new Duke();
+        currentSession.initialiseCommandMap();
+        currentSession.run();
+    }
 
+    private void run() {
         ICommand printCommand = new CommandDecorator(new PrintCommand());
+        printCommand.execute(ui.getIntro());
+        try {
+            while (!taskList.hasExited()) {
+                String input = ui.getLine();
+                String[] inputArray = Parser.parse(input);
+                if (inputArray.length == 2) {
+                    commands.get(inputArray[0]).execute(inputArray[1]);
+                } else if (inputArray.length == 1) {
+                    //for commands with only one word, will give error msg if command requires more than 1.
+                    commands.get(inputArray[0]).execute(" ");
+                }
+            }
+        } catch (NoSuchElementException e) {
+            printCommand.execute(ui.showNoMoreLinesError());
+        }
 
-        ICommand doneCommand = new CommandDecorator(new DoneCommand(taskManager));
+    }
+
+    private void initialiseCommandMap() {
+
+        ICommand doneCommand = new CommandDecorator(new DoneCommand(taskList));
         doneCommand = new CommandWrite(doneCommand,storage);
 
-        ICommand listCommand =new CommandDecorator(new PrintListCommand(taskManager));
+        ICommand listCommand =new CommandDecorator(new PrintListCommand(taskList));
 
-        ICommand exitCommand =new CommandDecorator(new ExitCommand(taskManager));
+        ICommand exitCommand =new CommandDecorator(new ExitCommand(taskList));
 
-        ICommand eventCommand = new CommandDecorator(new AddCommand(taskManager,new EventFactory()));
+        ICommand eventCommand = new CommandDecorator(new AddCommand(taskList,new EventFactory()));
         eventCommand = new CommandWrite(eventCommand,storage);
 
-        ICommand deadlineCommand =new CommandDecorator(new AddCommand(taskManager,new DeadlineFactory()));
+        ICommand deadlineCommand =new CommandDecorator(new AddCommand(taskList,new DeadlineFactory()));
         deadlineCommand = new CommandWrite(deadlineCommand,storage);
 
-        ICommand toDoCommand = new CommandDecorator(new AddCommand(taskManager,new ToDoFactory()));
+        ICommand toDoCommand = new CommandDecorator(new AddCommand(taskList,new ToDoFactory()));
         toDoCommand = new CommandWrite(toDoCommand,storage);
 
-        ICommand deleteCommand = new CommandDecorator(new DeleteCommand(taskManager));
+        ICommand deleteCommand = new CommandDecorator(new DeleteCommand(taskList));
         deleteCommand = new CommandWrite(deleteCommand,storage);
 
         commands.add("done", doneCommand);
@@ -38,36 +67,5 @@ public class Duke {
         commands.add("todo", toDoCommand);
         commands.add("deadline", deadlineCommand);
         commands.add("delete", deleteCommand);
-        printCommand.execute(getIntro());
-        storage.read();
-
-        try {
-            while (!taskManager.hasExited()) {
-                String input = scanner.nextLine();
-                String[] inputArray = input.split(" ", 2);
-                if (inputArray.length == 2) {
-                    commands.get(inputArray[0]).execute(inputArray[1]);
-                } else if (inputArray.length == 1) {
-                    //for commands with only one word, will give error msg if command requires more than 1.
-                    commands.get(inputArray[0]).execute(" ");
-                }
-            }
-        } catch (NoSuchElementException e) {
-            printCommand.execute("Error. No more lines detected. Exiting...");
-        }
-        finally {
-            scanner.close();
-        }
-    }
-
-    private static String getIntro(){
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String intro ="Hello I'm\n" + logo +"\nWhat can I do for you?\n";
-
-        return intro;
     }
 }

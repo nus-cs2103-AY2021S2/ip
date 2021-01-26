@@ -1,10 +1,8 @@
-import java.util.StringJoiner;
-
 public class AddCommand implements ICommand {
-    private TaskManager tasks;
+    private TaskList tasks;
     AbstractTaskFactory taskFactory;
 
-    AddCommand(TaskManager tasks, AbstractTaskFactory taskFactory) {
+    AddCommand(TaskList tasks, AbstractTaskFactory taskFactory) {
         this.tasks = tasks;
         this.taskFactory = taskFactory;
 

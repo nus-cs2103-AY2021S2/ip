@@ -7,9 +7,9 @@ import java.lang.StringBuilder;
 
 public class Storage {
     private static final String FILE_NAME = "duke.txt";
-    private TaskManager tasks;
+    private TaskList tasks;
 
-    public Storage(TaskManager tasks) {
+    public Storage(TaskList tasks) {
         this.tasks = tasks;
     }
     public void read() {

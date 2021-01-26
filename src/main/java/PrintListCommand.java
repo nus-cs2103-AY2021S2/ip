@@ -1,7 +1,7 @@
 public class PrintListCommand implements ICommand {
-    private TaskManager tasks;
+    private TaskList tasks;
 
-    public PrintListCommand(TaskManager tasks){
+    public PrintListCommand(TaskList tasks){
         this.tasks = tasks;
     }
 
