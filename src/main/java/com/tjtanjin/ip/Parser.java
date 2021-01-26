@@ -2,6 +2,7 @@ package com.tjtanjin.ip;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.time.DateTimeException;
 
 /**
  * The Parser class parses user input before calling the appropriate command classes for execution.
@@ -199,11 +200,10 @@ public class Parser {
                 taskDates[0] = LocalDate.parse(startEndDates[0].trim());
                 taskDates[1] = LocalDate.parse(startEndDates[1].trim());
             }
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException | DateTimeException e) {
             if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
                 Ui.showError("Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
             } else {
-                System.out.println(e.getMessage());
                 Ui.showError("Invalid date specified, "
                         + "please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD");
             }
