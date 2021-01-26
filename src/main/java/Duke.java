@@ -25,7 +25,7 @@ public class Duke {
     }
 
     public static void main(String[] launchArgs) throws Exception {
-        new Duke("../CS2103_iP/data/tasks.txt").run();
+        new Duke("../duke/data/tasks.txt").run();
     }
 
     private void run() throws DukeException {
