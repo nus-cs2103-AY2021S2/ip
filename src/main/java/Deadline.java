@@ -5,7 +5,7 @@ public class Deadline extends TaskWithDate {
 
     @Override
     public String toSaveString(){
-        return "D," + super.toSaveString() + "," + this.deadline;
+        return "D," + super.toSaveString();
     }
 
     @Override

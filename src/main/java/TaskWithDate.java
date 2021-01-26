@@ -53,4 +53,12 @@ public class TaskWithDate extends Task{
             throw new SnomException("Oops! Please enter a valid date time format [YYYY-MM-DD HH:MM]");
         }
     }
+
+    @Override
+    public String toSaveString(){
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("yyyy-MM-dd[ HH:mm]")
+                .toFormatter();
+        return super.toSaveString() + ", " + this.dateTime.format(formatter);
+    }
 }

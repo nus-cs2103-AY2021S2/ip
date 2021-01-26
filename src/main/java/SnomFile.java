@@ -56,7 +56,7 @@ public class SnomFile {
      *
      * @return array list of tasks
      */
-    public ArrayList<Task> readFile(){
+    public ArrayList<Task> readFile() throws SnomException{
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(path);

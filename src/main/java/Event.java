@@ -5,7 +5,7 @@ public class Event extends TaskWithDate{
 
     @Override
     public String toSaveString(){
-        return "E," + super.toSaveString() + "," + this.date;
+        return "E," + super.toSaveString();
     }
 
     @Override

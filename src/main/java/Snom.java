@@ -23,7 +23,11 @@ public class Snom {
      */
     public static void init(){
         snomFile.init();
-        taskList = snomFile.readFile();
+        try {
+            taskList = snomFile.readFile();
+        } catch (SnomException e) {
+            snomio.println(e.getMessage());
+        }
 
         snomio.println("--------------------------------");
         snomio.println("Bonjour! I'm Snom! *squish*");
