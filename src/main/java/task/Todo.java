@@ -4,7 +4,6 @@ import simulator.DukeException;
 
 public class Todo extends Task {
 
-
     public Todo(String[] input) throws DukeException {
         this.type = "T";
         if (input.length != 0) {

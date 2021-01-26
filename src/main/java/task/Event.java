@@ -2,11 +2,27 @@ package task;
 
 import simulator.DukeException;
 
+import static simulator.Design.printBox;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+
 public class Event extends Task {
-    protected StringBuilder date = new StringBuilder();
+    protected LocalDate date = null;
+    protected LocalTime time = null;
 
     public String getDate() {
-        return date.toString();
+        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+    public String getTime() {
+        if (this.time != null) {
+            return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        } else {
+            return null;
+        }
     }
 
     public Event(String[] input) throws DukeException {
@@ -14,11 +30,18 @@ public class Event extends Task {
         if (input.length != 0) {
             for (int i = 0; i < input.length; i++) {
                 if (input[i].equals("/at")) {
-                    for (int j = i; j < input.length - 2; j++) {
-                        this.date.append(input[j + 1]);
-                        this.date.append(" ");
+                    try {
+                        this.date = LocalDate.parse(input[i + 1]);
+                        this.time = LocalTime.parse(input[i + 2]);
+                    } catch (ArrayIndexOutOfBoundsException ex) {
+                        if (this.time == null) {
+                            printBox("WARNING! No Time Detected!");
+                        } else if (this.date == null) {
+                            throw new DukeException("☹ OOPS!!! Date of Deadline cannot be empty, please check!");
+                        } else {
+                            throw new DukeException("☹ OOPS!!! Date & Time of Deadline cannot be empty, please check!");
+                        }
                     }
-                    this.date.append(input[input.length - 1]);
                     break;
                 } else {
                     this.description.append(input[i]);
@@ -27,29 +50,39 @@ public class Event extends Task {
             }
 
         } else {
-            throw new DukeException("☹ OOPS!!! Description of todo cannot be empty, please check!");
+            throw new DukeException("☹ OOPS!!! Description of Event cannot be empty, please check!");
         }
     }
 
     public Event(String status, String[] input) throws DukeException {
         this.type = "E";
         this.isDone = status.equals("complete");
-        if (input.length != 0) {
-            if (input.length != 2) {
-                throw new DukeException("☹ OOPS!!! Date of todo cannot be empty, please check!");
+        try {
+            this.description.append(input[0]);
+            this.date = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("dd MMM yyyy"));
+            this.time = LocalTime.parse(input[2], DateTimeFormatter.ofPattern("hh:mm a"));
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            if (this.time == null) {
+                printBox("WARNING!!! \n"
+                        + "     Event with no Timing Specified Detected!");
+            } else if (this.date == null) {
+                throw new DukeException("☹ OOPS!!! Date of Event cannot be empty, please check!");
             } else {
-                this.description.append(input[0]);
-                this.date.append(input[1]);
+                throw new DukeException("☹ OOPS!!! Description of Event cannot be empty, please check!");
             }
-        } else {
-            throw new DukeException("☹ OOPS!!! Description of todo cannot be empty, please check!");
         }
     }
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + "[" + this.getStatusIcon() + "] " + this.description + "(at: "
-                + this.date.toString() + ")";
+        if (this.time == null) {
+            return "[" + this.type + "]" + "[" + this.getStatusIcon() + "] " + this.description + "(at: "
+                    + this.getDate() + ")";
+        } else {
+            return "[" + this.type + "]" + "[" + this.getStatusIcon() + "] " + this.description + "(at: "
+                    + this.getDate() + " "
+                    + this.getTime() + ")";
+        }
     }
 
 }

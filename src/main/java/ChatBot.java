@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
@@ -19,7 +20,7 @@ import simulator.DukeException;
 import task.*;
 
 public class ChatBot {
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
     private File data;
 
     public ChatBot() {
@@ -54,11 +55,8 @@ public class ChatBot {
                     list.add(task);
                 }
             }
-        } catch (DukeException ex) {
+        } catch (DukeException | IOException ex) {
             printBox(ex.getMessage());
-        } catch (IOException ex) {
-            printBox(ex.getMessage());
-
         }
     }
 
@@ -72,7 +70,14 @@ public class ChatBot {
                 writer.write(type + "|" + status + "|" + description);
             } else {
                 String date = type.equals("D") ? ((Deadline) task).getDate() : ((Event) task).getDate();
-                writer.write(type + "|" + status + "|" + description + "@" + date);
+                if ((type.equals("D")
+                        ? ((Deadline) task).getTime() == null
+                        : ((Event) task).getTime() == null)) {
+                    writer.write(type + "|" + status + "|" + description + "@" + date);
+                } else {
+                    String time = type.equals("D") ? ((Deadline) task).getTime() : ((Event) task).getTime();
+                    writer.write(type + "|" + status + "|" + description + "@" + date + "@" + time);
+                }
             }
             writer.newLine();
         }
@@ -124,7 +129,6 @@ public class ChatBot {
             }
         } catch (DukeException err) {
             printBox(err.getMessage());
-
         } catch (Exception err) {
             printBox("☹ OOPS!!! Incorrect input, please check!");
         }
