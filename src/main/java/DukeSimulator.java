@@ -5,6 +5,9 @@ import java.lang.StringBuilder;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 
 public class DukeSimulator {
@@ -16,6 +19,8 @@ public class DukeSimulator {
             + "      -event (insert event name here) /at (insert time here)\n"
             + "      eg: 'deadline typing /by 1pm'\n"
             + line;
+    private final String directory = "C:/users/chian/Desktop/CS2103/ip/data/";
+    private final String fileName = "data.txt";
     private List<Task> taskList;
 
     public DukeSimulator() {
@@ -34,14 +39,16 @@ public class DukeSimulator {
 
     public void run() {
         greeting();
+        loadTaskList();
         Scanner sc = new Scanner(System.in);
         String command;
         command = sc.nextLine();
         while(!command.equals("bye")) {
             processCmd(command);
-            System.out.println(line + tasks() + line);
+            save();
             command = sc.nextLine();
         }
+
         bye();
     }
 
@@ -96,29 +103,50 @@ public class DukeSimulator {
         }
     }
 
-//    private deadLineMaker(String command) throws DukeException {
-//        String[] parsedCmd = command.split(" /by ", 2);
-//        if(pasedCmd.length == 1) {
-//
-//        }
-//    }
+    private void save() {
+        try {
+            FileWriter fw = new FileWriter(directory + fileName);
+            fw.write(tasks());
+            fw.close();
+        } catch(IOException e) {
+            System.out.println("Unable to save file!");
+        }
+    }
 
-//    private void save() {
-//        try {
-//            Path dataPath = Paths.get(DATA_DIR);
-//            Files.createDirectories(dataPath);
-//            File saveFile = new File("./data/save.txt");
-//            FileWriter fw = new FileWriter(saveFile);
-//            fw.write(tasks());
-//            fw.close();
-//        } catch(IOException e) {
-//
-//        }
-//    }
+    private void loadTaskList() {
+        try {
+            File f = new File(directory + fileName);
+            f.createNewFile();
+            Scanner sc = new Scanner(f);
+            while (sc.hasNext()) {
+                String strTask = sc.nextLine();
+                String[] taskArray = strTask.split(" \\| ");
+                Task t = null;
+                switch (taskArray[0]) {
+                    case "T":
+                        t = new ToDo(taskArray[2]);
+                        break;
+                    case "E":
+                        t = new Event(taskArray[2], taskArray[3]);
+                        break;
+                    case "D":
+                        t = new Deadline(taskArray[2], taskArray[3]);
+                        break;
+                }
+                if(taskArray[1].equals("X")) {
+                    t = t.finishTask();
+                }
+                taskList.add(t);
+            }
+        } catch (IOException e) {
+            System.out.println("Unable to load file!");
+        }
+    }
+
 
     private String tasks() {
         StringBuilder sb = new StringBuilder("");
-        for(Task t : taskList) {
+        for (Task t : taskList) {
             sb.append(t.saveTask());
         }
         return sb.toString();
@@ -127,7 +155,7 @@ public class DukeSimulator {
     private void printList() {
         int index = 1;
         System.out.print(line);
-        for(Task t : taskList) {
+        for (Task t : taskList) {
             System.out.print(String.format("     %d. %s\n",
                     index++, t.toString()));
         }
