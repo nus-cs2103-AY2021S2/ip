@@ -11,5 +11,15 @@ public class Ui{
         System.out.println(message);
     }
 
+    public void greet() {
+        System.out.println("");
+    }
 
+    public void exit() {
+        System.out.println("");
+    }
+
+    public void showHelp() {
+        System.out.println("");
+    }
 }

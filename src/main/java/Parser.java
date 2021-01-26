@@ -2,36 +2,31 @@ public class Parser {
 
     public Command parse(String input) {
         String[] splitInput = input.split(" ", 2);
-        String uncheckedCommand = splitInput[0].toUpperCase();
-        String details = "For those without details";
-        if (splitInput.length > 1) {
-            details = splitInput[1];
-        }
-        Input command = checkCommand(uncheckedCommand);
+        splitInput[0] = splitInput[0].toUpperCase();
+        Input command = checkCommand(splitInput[0]);
         switch(command) {
         case LIST:
-            return new ListCommand(details);
+            return new ListCommand(splitInput);
         case TODO:
-            return new TodoCommand(details);
         case DEADLINE:
-            return new DeadlineCommand(details);
         case EVENT:
-            return new EventCommand(details);
+            return new AddCommand(splitInput);
+        case DELETE:
         case DONE:
-            return new DoneCommand(details);
+            return new EditCommand(splitInput);
         case BYE:
-            return new ByeCommand(details);
+            return new ExitCommand();
         default:
-            return new ErrorCommand(details);
+            return new HelpCommand(splitInput);
         }
     }
 
     private Input checkCommand(String command) {
         try {
-            Input inputCommand = Input.valueOf(command);
-            return inputCommand;
+            return Input.valueOf(command);
         } catch (IllegalArgumentException e) {
             return Input.ERROR;
         }
     }
+
 }

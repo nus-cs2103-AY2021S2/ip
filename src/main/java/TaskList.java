@@ -12,6 +12,22 @@ public class TaskList {
         taskList.add(task);
     }
 
+    public Task accessTask(int taskNumber) {
+        return taskList.get(taskNumber);
+    }
+
+    public void markTaskAsDone(int taskNumber) {
+        taskList.get(taskNumber).markAsDone();
+    }
+
+    public void deleteTask(int taskNumber) {
+        taskList.remove(taskNumber);
+    }
+
+    public int length() {
+        return taskList.size();
+    }
+
     public TaskList filterByTask(String type) {
         if (type == "ToDo") {
             return new TaskList(taskList
