@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,12 +17,14 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        readTasks();
         System.out.println("Hello from\n" + Duke.logo);
         System.out.println("What can I do for you?");
 
         while(scanner.hasNextLine()) {
             String line = scanner.nextLine();
             processLine(line);
+            saveTasks();
         }
     }
 
@@ -121,5 +124,48 @@ public class Duke {
         }
         System.out.printf("\tDuke: Now you have %d tasks.\n", tasks.size());
         System.out.println("\tadded: " + tasks.get(tasks.size() - 1));
+    }
+
+
+    /*
+     * Save the contents to disk
+     *
+     */
+    public static void saveTasks() {
+        try {
+            FileOutputStream taskFile = new FileOutputStream("data/duke.txt");
+            ObjectOutputStream taskObjectStream = new ObjectOutputStream(taskFile);
+            Integer taskSize = Duke.tasks.size();
+            taskObjectStream.writeObject(taskSize);
+            for (AbstractTask task : Duke.tasks) {
+                taskObjectStream.writeObject(task);
+            }
+            taskObjectStream.flush();
+            taskObjectStream.close();
+        } catch (IOException e) {
+            //Create a new file anyways
+        }
+    }
+
+    /*
+     * Read tasks from disk
+     */
+    public static void readTasks() {
+        try {
+            FileInputStream taskFile = new FileInputStream("data/duke.txt");
+            ObjectInputStream taskObjectStream = new ObjectInputStream(taskFile);
+            Integer taskSize = (Integer) taskObjectStream.readObject();
+            for(int i = 0;i < taskSize;i++) {
+                AbstractTask task = (AbstractTask) taskObjectStream.readObject();
+                Duke.tasks.add(task);
+            }
+            taskObjectStream.close();
+        } catch (IOException e) {
+            System.out.println("No saved task file, continuing with empty list!\n");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Something went wrong, resetting task file!\n");
+            File taskFile = new File("data/duke.txt");
+            taskFile.delete();
+        }
     }
 }

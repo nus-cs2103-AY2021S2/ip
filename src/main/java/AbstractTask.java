@@ -1,4 +1,6 @@
-public abstract class AbstractTask {
+import java.io.Serializable;
+
+public abstract class AbstractTask implements Serializable {
     protected String description;
     protected boolean isDone;
 
