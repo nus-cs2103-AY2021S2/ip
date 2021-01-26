@@ -3,12 +3,12 @@ package util;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 
-public class Parser {
-    public static String getCommand(String input) {
+public interface Parser {
+    static String getCommand(String input) {
         return input.split(" ", 2)[0];
     }
 
-    public static HashMap<String, String> getArgMap(String input) throws InputMismatchException {
+    static HashMap<String, String> getArgMap(String input) throws InputMismatchException {
         HashMap<String, String> argMap = new HashMap<>();
 
         if (input.split(" ").length < 2) {
