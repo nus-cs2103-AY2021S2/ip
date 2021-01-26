@@ -1,7 +1,9 @@
 package duke;
 
 public class Parser {
-    public Parser() {}
+
+    public Parser() {
+    }
 
     public static boolean isNumber(String str) {
         // check for null or empty
@@ -14,11 +16,11 @@ public class Parser {
                 return false;
             }
         }
-
         return true;
     }
 
     public String[] processInput(String inputLine) throws DukeException{
+
         String[] result = new String[5];
 
         if (inputLine.equals("list")) {
@@ -28,7 +30,9 @@ public class Parser {
         } else if (inputLine.equals("done")) {
             throw new DukeException("The task number of a done cannot be empty. Please try again.");
         } else if (inputLine.startsWith("done")) {
+
             String index = inputLine.substring(5);
+
              if (isNumber(index)) {
                  result[0] = "DON";
                  result[1] = index;
@@ -49,11 +53,13 @@ public class Parser {
             } else {
                 String dlMsg = inputLine.substring(9);
                 String[] temp = dlMsg.split(" /by ");
+
                 if (temp.length == 1) {
                     throw new DukeException("Please enter a deadline completion time.");
                 } else {
                     String dlDesc = temp[0];
                     String by = temp[1];
+
                     result[0] = "DDL";
                     result[1] = dlDesc;
                     result[2] = by;
@@ -65,11 +71,13 @@ public class Parser {
             } else {
                 String dlMsg = inputLine.substring(6);
                 String[] temp = dlMsg.split(" /at ");
+
                 if (temp.length == 1) {
                     throw new DukeException("Please enter an event time.");
                 } else {
                     String evDesc = temp[0];
                     String at = temp[1];
+
                     result[0] = "ENT";
                     result[1] = evDesc;
                     result[2] = at;
@@ -80,6 +88,7 @@ public class Parser {
                 throw new DukeException("Please tell me which task you'd like to delete.");
             } else {
                 String temp = inputLine.substring(7);
+
                 if (isNumber(temp)) {
                     result[0] = "DLT";
                     result[1] = temp;
