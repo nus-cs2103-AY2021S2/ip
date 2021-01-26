@@ -10,28 +10,12 @@ import java.io.IOException;
 public class Duke {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
-    private static final String INDENTATION = "    ";
-    private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
 
-    private List<Task> tasks = new ArrayList<>();
+    private Ui ui;
     private File file;
+    private List<Task> tasks;
 
     // Helper functions
-    public String formatLine(String line) {
-        return INDENTATION + line + "\n";
-    }
-
-    public void reply(String msg) {
-        System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
-    }
-
-    public void addedTaskReply(Task task) {
-        String msg = formatLine("Got it. I've added this task:")
-                + formatLine("  " + task)
-                + formatLine("Now you have " + tasks.size() + " tasks in the list.");
-        reply(msg);
-    }
-
     public Command parseInput(String input) {
         String[] parts = input.split(" ", 2);
 
@@ -56,17 +40,11 @@ public class Duke {
     }
 
     // Commands
-    public void greet() {
-        String msg = formatLine("Hello! I'm Duke")
-                + formatLine("What can I do for you?");
-        reply(msg);
-    }
-
     public void addTodo(Command command) throws IOException {
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
         writeToFile(todo);
-        addedTaskReply(todo);
+        ui.addedTaskReply(todo, tasks.size());
     }
 
     public void addTodo(String[] parts) {
@@ -86,7 +64,7 @@ public class Duke {
             Task deadline = new Deadline(parts[0], parts[1]);
             tasks.add(deadline);
             writeToFile(deadline);
-            addedTaskReply(deadline);
+            ui.addedTaskReply(deadline, tasks.size());
         }
     }
 
@@ -107,7 +85,7 @@ public class Duke {
             Task event = new Event(parts[0], parts[1]);
             tasks.add(event);
             writeToFile(event);
-            addedTaskReply(event);
+            ui.addedTaskReply(event, tasks.size());
         }
     }
 
@@ -138,9 +116,7 @@ public class Duke {
         } else {
             tasks.get(index).markDone();
             updateFile();
-            String msg = formatLine("Nice! I've marked this task as done:")
-                    + formatLine("  " + tasks.get(index));
-            reply(msg);
+            ui.markDoneReply(tasks.get(index));
         }
     }
 
@@ -152,24 +128,8 @@ public class Duke {
         } else {
             Task deletedTask = tasks.remove(index);
             updateFile();
-            String msg = formatLine("Noted. I've removed this task:")
-                    + formatLine("  " + deletedTask)
-                    + formatLine("Now you have " + tasks.size() + " tasks in the list.");
-            reply(msg);
+            ui.deleteReply(deletedTask, tasks.size());
         }
-    }
-
-    public void list() {
-        String msg = formatLine("Here are the tasks in your list:");
-
-        for (int i = 0; i < tasks.size(); i++) {
-            msg += formatLine((i + 1) + ". " + tasks.get(i));            
-        }
-        reply(msg);
-    }
-
-    public void exit() {
-        reply(formatLine("Bye. Hope to see you again soon!"));
     }
 
     public boolean readInput(Scanner sc) {
@@ -180,10 +140,10 @@ public class Duke {
 
             switch (command.getInstruction()) {
             case Command.BYE:
-                exit();
+                ui.exit();
                 return false;
             case Command.LIST:
-                list();
+                ui.list(tasks);
                 break;
             case Command.DONE:
                 done(command);
@@ -204,10 +164,9 @@ public class Duke {
                 throw new UnknownCommandException();
             }
         } catch (UnknownCommandException | EmptyDescriptionException | InvalidTaskException | TaskNotFoundException | IOException exception) {
-            reply(formatLine(exception.getMessage()));
+            ui.reply(ui.formatLine(exception.getMessage()));
         } catch (DateTimeParseException exception) {
-            System.out.println(exception.getMessage());
-            reply(formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
+            ui.reply(ui.formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
         }
 
         return true;
@@ -220,31 +179,28 @@ public class Duke {
 
         try {
             switch (parts[0]) {
-                case Command.TODO:
-                    addTodo(parts);
-                    break;
-                case Command.EVENT:
-                    addEvent(parts);
-                    break;
-                case Command.DEADLINE:
-                    addDeadline(parts);
-                    break;
-                default:
-                    throw new UnknownCommandException();
-                }
+            case Command.TODO:
+                addTodo(parts);
+                break;
+            case Command.EVENT:
+                addEvent(parts);
+                break;
+            case Command.DEADLINE:
+                addDeadline(parts);
+                break;
+            default:
+                throw new UnknownCommandException();
+            }
+        } catch (UnknownCommandException exception) {
+            ui.reply(ui.formatLine(exception.getMessage()));
         } catch (DateTimeParseException exception) {
-            System.out.println(exception.getMessage());
-            reply(formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
+            ui.reply(ui.formatLine("☹ Please provide dates in the \"dd/mm/yyyy hhmm\" or \"dd/mm/yyyy\" format"));
         }
     }
 
     public Duke() throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        tasks = new ArrayList<>();
+        ui = new Ui();
 
         File dir = new File(DIR_NAME);
         if (!dir.exists()) {
@@ -260,7 +216,7 @@ public class Duke {
             fileSc.close();
         }
 
-        greet();
+        ui.greet();
         Scanner sc = new Scanner(System.in);
 
         while (readInput(sc));
