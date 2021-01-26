@@ -2,14 +2,27 @@ package main.java.duke.command;
 
 import main.java.duke.exceptions.DateFormatException;
 import main.java.duke.exceptions.EmptyDescriptionException;
-import main.java.duke.exceptions.EmptyTimeException;
+import main.java.duke.exceptions.EmptyDateException;
 import main.java.duke.exceptions.InvalidInputException;
 
 import main.java.duke.subfiles.TaskList;
 import main.java.duke.subfiles.Ui;
 
+/**
+ * The AddCommand class is a command whose execution triggers the
+ * addition of a task into the TaskList, based on the user input.
+ *
+ * @author  arsatis
+ * @version 1.1
+ * @since   2021-01-26
+ */
 public class AddCommand extends Command {
 
+    /**
+     * Default constructor for the AddCommand class.
+     *
+     * @param command The user input formatted as a String object.
+     */
     public AddCommand(String command) {
         super(command);
     }
@@ -19,21 +32,29 @@ public class AddCommand extends Command {
      * list upon receiving a user input that attempts to add
      * a task to the list.
      *
-     * @param taskList
-     * @param ui
+     * @param taskList A TaskList object containing the list of tasks
+     *                 which the program currently has.
+     * @param ui A Ui object which the current program is using to manage
+     *           interactions with the user.
      */
     @Override
     public void execute(TaskList taskList, Ui ui) {
         try {
             taskList.addTask(command);
-        } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException |
+        } catch (EmptyDescriptionException | EmptyDateException | InvalidInputException |
                 DateFormatException e) {
             ui.showError(e.getMessage());
         }
     }
 
+    /**
+     * Returns true if the command is an ExitCommand, and false otherwise.
+     *
+     * @return False, since this is not an ExitCommand.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
+
 }

@@ -11,21 +11,31 @@ import main.java.duke.subfiles.Ui;
  * enables users to store and modify their tasks.
  *
  * @author  arsatis
- * @version 1.0
- * @since   2021-01-19
+ * @version 1.1
+ * @since   2021-01-26
  */
 public class Duke {
-    /** Task list which manages the tasks created by user input */
+    /** Task list which manages the tasks created by user input. */
     private TaskList taskList;
+
+    /** Storage which manages the loading and storing of tasks. */
     private Storage storage;
+
+    /** Ui which manages interactions with the user. */
     private Ui ui;
 
+    /**
+     * Default constructor for the Duke class.
+     */
     public Duke(String path, String filename) {
         taskList = new TaskList();
         storage = new Storage(path, filename);
         ui = new Ui();
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         boolean isExit = false;
 
@@ -44,7 +54,7 @@ public class Duke {
 
     /**
      * The main method which is executed when the Duke program
-     * is run.
+     * is executed.
      *
      * @param args Unused.
      */

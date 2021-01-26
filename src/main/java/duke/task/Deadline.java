@@ -10,11 +10,11 @@ import java.time.format.DateTimeFormatter;
  * and a date which the deadline is due.
  *
  * @author  arsatis
- * @version 1.0
- * @since   2021-01-19
+ * @version 1.1
+ * @since   2021-01-26
  */
 public class Deadline extends Task {
-    /** Date which the deadline is due */
+    /** Date which the deadline is due. */
     private LocalDate date;
 
     /**
@@ -28,10 +28,20 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Returns the date the Deadline is due on, formatted as a String.
+     *
+     * @return The date the Deadline is due on, formatted as a String.
+     */
     public String getDate() {
         return date.toString();
     }
 
+    /**
+     * Returns the date the Deadline is due on, formatted as a LocalDate.
+     *
+     * @return The date the Deadline is due on, formatted as a LocalDate.
+     */
     public LocalDate getDateAsLocalDate() {
         return date;
     }

@@ -2,7 +2,7 @@ package main.java.duke.exceptions;
 
 /**
  * The InvalidInputException class is an exception thrown
- * by the Task Manager when an invalid input or command is
+ * by the TaskList when an invalid input or command is
  * supplied by the user.
  *
  * @author  arsatis

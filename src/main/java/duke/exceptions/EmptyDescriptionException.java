@@ -2,7 +2,7 @@ package main.java.duke.exceptions;
 
 /**
  * The EmptyDescriptionException class is an exception thrown
- * by the Task Manager when a description is not supplied for a
+ * by the TaskList when a description is not supplied for a
  * task by the user input.
  *
  * @author  arsatis
