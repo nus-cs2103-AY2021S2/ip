@@ -19,6 +19,7 @@ public class Storage {
         File file = new File(DEFAULT_PATH);
         if (Files.notExists(this.filePath)) {
             try {
+                System.out.println("created new file");
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -33,7 +34,7 @@ public class Storage {
             String toBeSaved = "";
             switch (task.getTaskType()) {
                 case "DEADLINE":
-                    toBeSaved = String.format("%s|#|%s|#|%s|#|%s",
+                    toBeSaved = String.format("%s|%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
                             task.getDescription(),
@@ -41,14 +42,15 @@ public class Storage {
                     break;
                 case "TODO":
                     task = (ToDo) task;
-                    toBeSaved = String.format("%s|#|%s|#|%s",
+                    toBeSaved = String.format("%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
                             task.getDescription());
+                    // System.out.println("im at todo");
                     break;
                 case "EVENT":
                     task = (Event) task;
-                    toBeSaved = String.format("%s|#|%s|#|%s",
+                    toBeSaved = String.format("%s|%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
                             task.getDescription(),
@@ -67,7 +69,8 @@ public class Storage {
         Scanner sc = new Scanner(filePath.toFile());
         List<Task> taskList = new ArrayList<>();
         while (sc.hasNext()) {
-            String[] storedTask = sc.nextLine().split("|#|");
+            String line = sc.nextLine();
+            String[] storedTask = line.split("\\|");
             String taskType = storedTask[0];
             boolean isDone = storedTask[1].equals("true");
             Task taskToBeAdded = null;
@@ -86,6 +89,7 @@ public class Storage {
             }
             taskList.add(taskToBeAdded);
         }
+        sc.close();
         return taskList;
     }
 }

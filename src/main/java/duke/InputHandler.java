@@ -1,18 +1,21 @@
 package duke;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+
 public class InputHandler {
-    private final ArrayList<Task> taskList;
+    private final List<Task> taskList;
 
     public InputHandler() {
         this.taskList = new ArrayList<>();
     }
 
-    public InputHandler(ArrayList<Task> taskList) {
+    public InputHandler(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public ArrayList<Task> getTaskList() {
+    public List<Task> getTaskList() {
         return this.taskList;
     }
 
@@ -35,6 +38,7 @@ public class InputHandler {
             newList.set(idxDone, newTask);
             System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
                     newTask.getTaskType(), newTask.getStatusIcon(), newTask.getDescription());
+
             return new InputHandler(newList);
         } else if (command.equals("delete")){
             int idxDel = Integer.parseInt(splitInput[1]) - 1;
