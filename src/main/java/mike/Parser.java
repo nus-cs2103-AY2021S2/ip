@@ -25,6 +25,7 @@ public class Parser {
     private static final String EVENT_COMMAND = "event";
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     /**
      * Reads user input and parses it to return a command object
@@ -104,6 +105,20 @@ public class Parser {
                     throw new MikeInvalidInputException(
                             " ☹ OOPS!!! Input does not match Delete command format. eg.\n" +
                             "   Delete <index of task to delete>");
+                }
+
+            case FIND_COMMAND:
+                try {
+                    pattern = Pattern.compile("(?i)find (.+)");
+                    matcher = pattern.matcher(userInput);
+
+                    matcher.find();
+
+                    return new FindCommand(matcher.group(1));
+                } catch (IllegalStateException e) {
+                    throw new MikeInvalidInputException(
+                            " ☹ OOPS!!! Input does not match Find command format. eg.\n" +
+                            "   find <keyword> ");
                 }
 
             default:
