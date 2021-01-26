@@ -14,18 +14,30 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        this.printLine();
+        this.showLine();
         System.out.println("Hello! I`m Duke");
         System.out.println("How can i help you?");
-        this.printLine();
+        this.showLine();
+    }
+
+    private String readLine() {
+        return s.nextLine();
     }
 
     public String askFilePath() {
         System.out.println("Please enter file name : ");
-        return s.nextLine();
+        return this.readLine();
     }
 
     public void showError(String error) {
         System.out.println(error);
+    }
+
+    public String readCommand() {
+        return this.readLine();
+    }
+
+    public void printTask(int numbering, String task){
+        System.out.printf("%2s. %s\n", numbering, task);
     }
 }

@@ -1,4 +1,4 @@
-public class DoneCommand {
+public class DoneCommand extends Command{
     private int option;
 
     public DoneCommand(int option) {

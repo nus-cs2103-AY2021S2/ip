@@ -1,16 +1,42 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.IOException;
 
 public class Duke {
-    private static String fileName;
-    private static ArrayList<Task> taskList = new ArrayList<>();
+    private Ui ui;
+    private TaskList tasks;
+    private Storage storage;
 
+    public void run() {
+        this.ui = new Ui();
+        this.storage = new Storage();
+
+        String filePath = this.ui.askFilePath();
+        tasks = new TaskList(this.storage.load(filePath));
+
+        this.ui.showGreeting();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.excute(tasks, ui, storage);
+                isExist = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+
+    }
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    /*
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String task, keyword;
@@ -84,52 +110,6 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
-    public static void loadTaskList() {
-        try {
-            File f = new File(fileName);
-            f.createNewFile();
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                String strTask = s.nextLine();
-                String[] taskArr = strTask.split(",");
-                Task task = null;
-                switch (taskArr[0]) {
-                case "T":
-                    task = new Todo(taskArr[2]);
-                    break;
-                case "E":
-                    String[] deadlineArr = { taskArr[3] , taskArr[4]};
-                    LocalDateTime[] deadlines = new LocalDateTime[2];
-                    for(int i = 0 ; i < deadlineArr.length; i++) {
-                        deadlines[i] = parseDate(deadlineArr[i]);
-                    }
-                    task = new Event(taskArr[2], deadlines[0], deadlines[1]);
-                    break;
-                case "D":
-                    LocalDateTime deadline = parseDate(taskArr[3]);
-                    task = new Deadline(taskArr[2], deadline);
-                }
-                if (taskArr[1] == "1") {
-                    task.markAsDone();
-                }
-                taskList.add(task);
-            }
-        } catch (IOException e) {
-            System.out.println("Unable to create file");
-        }
-    }
-
-    public static void saveTaskList() {
-        try{
-            FileWriter fw = new FileWriter(fileName);
-            for(Task t : taskList) {
-                fw.write(t.save());
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("File cannot be opened");
-        }
-    }
 
     public static void deleteTask(int option) {
         Task removed_task = taskList.get(option);
@@ -157,9 +137,6 @@ public class Duke {
         return command.indexOf(" ",start);
     }
 
-    public static LocalDateTime parseDate(String date) {
-        return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
-    }
 
     public static LocalDateTime[] retrieveEventDeadline(String command, int start) throws DukeDeadlineException {
         int firstSpace = getNextSpace(command,start) + 1;
@@ -221,31 +198,5 @@ public class Duke {
             System.out.println(message);
         }
     }
-
-    public static void printTask(String numbering, Task task) {
-        System.out.printf("%2s %s\n", numbering, task);
-    }
-
-    public static void listTasks() {
-        for (int i = 0; i < taskList.size(); i++) {
-            printTask(i + 1 + ".", taskList.get(i));
-        }
-    }
-
-    public static void printLine() {
-        System.out.println("----------------------------------------------");
-    }
-
-    public static void printGreetings() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printLine();
-        System.out.println("Hello! I`m Duke");
-        System.out.println("How can i help you?");
-        printLine();
-    }
+    */
 }
