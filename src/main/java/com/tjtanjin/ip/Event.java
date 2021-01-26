@@ -8,27 +8,33 @@ import java.time.format.DateTimeFormatter;
  * support for an endDate.
  */
 public class Event extends Task {
-    private final LocalDate startEndDate;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Constructor for Event class.
      * @param taskName name of task
      * @param status task completion status
-     * @param startEndDate start to end datetime for given task
+     * @param taskDates array of dates (first element is start date, second element is end date)
      */
-    public Event(String taskName, String status, LocalDate startEndDate) {
+    public Event(String taskName, String status, LocalDate[] taskDates) {
         super(taskName, status, "EVENT");
-        this.startEndDate = startEndDate;
+        this.startDate = taskDates[0];
+        this.endDate = taskDates[1];
     }
 
     @Override
-    public LocalDate getDate() {
-        return this.startEndDate;
+    public LocalDate[] getDates() {
+        LocalDate[] taskDates = new LocalDate[2];
+        taskDates[0] = this.startDate;
+        taskDates[1] = this.endDate;
+        return taskDates;
     }
 
     @Override
     public String toString() {
         return super.toString()
-                + " (at: " + this.startEndDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + " (from: " + this.startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                        + " to: " + this.endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

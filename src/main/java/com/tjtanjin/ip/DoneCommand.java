@@ -16,7 +16,7 @@ public class DoneCommand {
         TaskList.markTaskDone(index);
         String taskName = task.getTaskName();
         String taskType = task.getType().toUpperCase();
-        LocalDate taskDate = task.getDate();
-        Storage.saveTask(index, "DONE", taskName, "complete", taskType, taskDate);
+        LocalDate[] taskDates = task.getDates();
+        Storage.saveTask(index, "DONE", taskName, "complete", taskType, taskDates);
     }
 }

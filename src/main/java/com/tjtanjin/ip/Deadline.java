@@ -14,16 +14,18 @@ public class Deadline extends Task {
      * Constructor for Deadline class.
      * @param taskName name of task
      * @param status task completion status
-     * @param endDate end datetime for given task
+     * @param taskDates array of dates (defaults to first element for deadline end date)
      */
-    public Deadline(String taskName, String status, LocalDate endDate) {
+    public Deadline(String taskName, String status, LocalDate[] taskDates) {
         super(taskName, status, "DEADLINE");
-        this.endDate = endDate;
+        this.endDate = taskDates[0];
     }
 
     @Override
-    public LocalDate getDate() {
-        return this.endDate;
+    public LocalDate[] getDates() {
+        LocalDate[] taskDates = new LocalDate[1];
+        taskDates[0] = this.endDate;
+        return taskDates;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class Parser {
         cmdInfo.put(Cmd.DEADLINE.toString(),
                 "deadline <name> /by <end date> | Description: adds a new deadline task");
         cmdInfo.put(Cmd.EVENT.toString(),
-                "event <name> /at <start date - end date> | Description: adds a new event task");
+                "event <name> /from <start date> /to <end date> | Description: adds a new event task");
         cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
         cmdInfo.put(Cmd.FIND.toString(), "find <name> | Description: finds task by name");
@@ -84,11 +84,11 @@ public class Parser {
             if (taskName == null) {
                 return;
             }
-            LocalDate taskDate = parseTaskDate(input);
-            if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDate == null) {
+            LocalDate[] taskDates = parseTaskDates(input);
+            if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDates[0] == null) {
                 return;
             }
-            AddCommand.execute(taskType, taskName, taskDate);
+            AddCommand.execute(taskType, taskName, taskDates);
 
         //program finds task by name on find
         } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
@@ -162,7 +162,7 @@ public class Parser {
             } else if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
                 taskName = taskDetails.split("/by", 2)[0].trim();
             } else {
-                taskName = taskDetails.split("/at", 2)[0].trim();
+                taskName = taskDetails.split("/from", 2)[0].trim();
             }
             return taskName;
         } catch (IndexOutOfBoundsException e) {
@@ -185,25 +185,29 @@ public class Parser {
      * Parses task due date from user input
      * @param input input provided by user
      */
-    public static LocalDate parseTaskDate(String input) {
+    public static LocalDate[] parseTaskDates(String input) {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
-        LocalDate taskDate = null;
+        LocalDate[] taskDates = new LocalDate[2];
 
         try {
             if (taskType.toUpperCase().equals(Cmd.DEADLINE.toString())) {
-                taskDate = LocalDate.parse(taskDetails.split("/by", 2)[1].trim());
+                taskDates[0] = LocalDate.parse(taskDetails.split("/by", 2)[1].trim());
             } else if (taskType.toUpperCase().equals(Cmd.EVENT.toString())) {
-                taskDate = LocalDate.parse(taskDetails.split("/at", 2)[1].trim());
+                String[] startEndDates = taskDetails.split("/from", 2)[1].split("/to", 2);
+                taskDates[0] = LocalDate.parse(startEndDates[0].trim());
+                taskDates[1] = LocalDate.parse(startEndDates[1].trim());
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
             if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
                 Ui.showError("Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
             } else {
-                Ui.showError("Invalid date specified, please adhere to the format: /at YYYY-MM-DD");
+                System.out.println(e.getMessage());
+                Ui.showError("Invalid date specified, "
+                        + "please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD");
             }
         }
-        return taskDate;
+        return taskDates;
     }
 }

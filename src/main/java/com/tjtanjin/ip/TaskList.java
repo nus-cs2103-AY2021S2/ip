@@ -15,14 +15,14 @@ public class TaskList {
      * Adds a new task.
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
-     * @param taskDate due date of task
+     * @param taskDates taskDates array of dates (defaults to first element for deadline end date)
      */
-    public static void addTask(String taskType, String taskName, LocalDate taskDate) {
+    public static void addTask(String taskType, String taskName, LocalDate[] taskDates) {
         Task task;
         if (taskType.equalsIgnoreCase("DEADLINE")) {
-            task = new Deadline(taskName, "incomplete", taskDate);
+            task = new Deadline(taskName, "incomplete", taskDates);
         } else if (taskType.equalsIgnoreCase("EVENT")) {
-            task = new Event(taskName, "incomplete", taskDate);
+            task = new Event(taskName, "incomplete", taskDates);
         } else {
             task = new ToDo(taskName, "incomplete");
         }

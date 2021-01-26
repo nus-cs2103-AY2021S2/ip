@@ -15,7 +15,7 @@ public class DeleteCommand {
         TaskList.deleteTask(index);
         String taskName = task.getTaskName();
         String taskType = task.getType().toUpperCase();
-        LocalDate taskDate = task.getDate();
-        Storage.saveTask(index, "DELETE", taskName, "complete", taskType, taskDate);
+        LocalDate[] taskDates = task.getDates();
+        Storage.saveTask(index, "DELETE", taskName, "complete", taskType, taskDates);
     }
 }

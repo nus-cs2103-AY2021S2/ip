@@ -82,10 +82,16 @@ public class Storage {
             tasks.add(new ToDo(taskName, status));
         } else if (type.equals("DEADLINE")) {
             String endDate = (String) taskDetails.get("endDate");
-            tasks.add(new Deadline(taskName, status, LocalDate.parse(endDate)));
+            LocalDate[] taskDates = new LocalDate[1];
+            taskDates[0] = LocalDate.parse(endDate);
+            tasks.add(new Deadline(taskName, status, taskDates));
         } else {
-            String startEndDate = (String) taskDetails.get("startEndDate");
-            tasks.add(new Event(taskName, status, LocalDate.parse(startEndDate)));
+            String startDate = (String) taskDetails.get("startDate");
+            String endDate = (String) taskDetails.get("endDate");
+            LocalDate[] taskDates = new LocalDate[2];
+            taskDates[0] = LocalDate.parse(startDate);
+            taskDates[1] = LocalDate.parse(endDate);
+            tasks.add(new Event(taskName, status, taskDates));
         }
     }
 
@@ -97,11 +103,11 @@ public class Storage {
      * @param taskName name of task
      * @param status status of task (incomplete or complete)
      * @param type type of task (todo, deadline or event)
-     * @param dueDate due date for task (null for todo)
+     * @param taskDates array of dates (defaults to first element for deadline end date)
      */
     @SuppressWarnings("unchecked")
     public static void saveTask(int index, String saveType, String taskName,
-            String status, String type, LocalDate dueDate) {
+            String status, String type, LocalDate[] taskDates) {
 
         JSONObject taskDetails = new JSONObject();
         taskDetails.put("taskName", taskName);
@@ -109,12 +115,15 @@ public class Storage {
         taskDetails.put("type", type);
 
         //convert datetime to string
-        if (dueDate != null) {
-            String dueDateStr = dueDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (taskDates[0] != null) {
             if (type.equals("DEADLINE")) {
+                String dueDateStr = taskDates[0].format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 taskDetails.put("endDate", dueDateStr);
             } else if (type.equals("EVENT")) {
-                taskDetails.put("startEndDate", dueDateStr);
+                String startDateStr = taskDates[0].format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                String endDateStr = taskDates[1].format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                taskDetails.put("startDate", startDateStr);
+                taskDetails.put("endDate", endDateStr);
             }
         }
 

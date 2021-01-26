@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {
-    private Task task = new Task("Test Task", "incomplete", "TODO");
+    private final Task task = new Task("Test Task", "incomplete", "TODO");
 
     @Test
     void getTaskName_whenInvoke_thenOutputTaskName() {
@@ -32,8 +32,8 @@ public class TaskTest {
 
     @Test
     void getDate_whenInvoke_thenOutputTaskDate() {
-        LocalDate expected = null;
-        LocalDate taskDate = task.getDate();
+        LocalDate[] expected = null;
+        LocalDate[] taskDate = task.getDates();
         assertEquals(expected, taskDate);
     }
 

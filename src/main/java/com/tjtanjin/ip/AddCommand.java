@@ -11,11 +11,11 @@ public class AddCommand {
      * Forwards the add task operation to TaskList.
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
-     * @param taskDate due date for task (null for todo)
+     * @param taskDates array of dates
      */
-    public static void execute(String taskType, String taskName, LocalDate taskDate) {
-        TaskList.addTask(taskType, taskName, taskDate);
+    public static void execute(String taskType, String taskName, LocalDate[] taskDates) {
+        TaskList.addTask(taskType, taskName, taskDates);
         Storage.saveTask(TaskList.getTasks().size(), "NEW",
-                taskName, "incomplete", taskType.toUpperCase(), taskDate);
+                taskName, "incomplete", taskType.toUpperCase(), taskDates);
     }
 }

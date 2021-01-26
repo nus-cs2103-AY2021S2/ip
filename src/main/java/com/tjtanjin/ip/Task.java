@@ -37,7 +37,7 @@ public class Task {
         return this.type;
     }
 
-    public LocalDate getDate() {
+    public LocalDate[] getDates() {
         return null;
     }
 
