@@ -18,7 +18,7 @@ import main.java.duke.command.PrintCommand;
 public class Parser {
 
     /**
-     * Parses the user input as either an ExitCommand, PrintCommand,
+     * Parses the user input as either an ExitCommand, PrintCommand, FindCommand,
      * DoneCommand, DeleteCommand, or AddCommand, based on the
      * user input.
      *

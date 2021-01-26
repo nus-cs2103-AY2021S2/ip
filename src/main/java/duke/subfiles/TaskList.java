@@ -267,6 +267,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the list of tasks added by the user till this point,
+     * containing the keyword specified by the user, based on the order
+     * they were added by the user.
+     *
+     * @param s User input containing the keyword.
+     */
     public void findTasksWithKeyword(String s) {
         String keyword = s.split(" ", 2)[1].toLowerCase();
 
@@ -294,7 +301,7 @@ public class TaskList {
      * user should specify the index of the task in the list
      * which he or she intends to mark as done.
      *
-     * @param s Index of the task to be marked as done
+     * @param s User input containing the index of the task to be marked as done
      *          in the list of tasks, in String format.
      * @throws InvalidInputException If the user provided a non-integer index
      *                               in the user input.
@@ -325,8 +332,8 @@ public class TaskList {
      * list of tasks. The user should specify the index of the
      * task in the list which he or she intends to delete.
      *
-     * @param s Index of the task to be marked as done
-     *          in the list of tasks, in String format.
+     * @param s User input containing the index of the task to be deleted from
+     *          the list of tasks, in String format.
      * @throws InvalidInputException If the user provided a non-integer index
      *                               in the user input.
      * @throws ListOutOfBoundsException If the user provided an index which is
