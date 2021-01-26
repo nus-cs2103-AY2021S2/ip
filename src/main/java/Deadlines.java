@@ -13,8 +13,19 @@ public class Deadlines extends Task {
         this.dueTime = time;
     }
 
+    public Deadlines(String title, Boolean b, LocalDate dueBy, LocalTime time) {
+        super(title, b);
+        this.dueDate = dueBy;
+        this.dueTime = time;
+    }
+
+    @Override
+    public String changeFormat(){
+        return "D" + super.changeFormat() + "," + this.dueDate + "," + this.dueTime;
+    }
+
     @Override
     public String toString() {
-        return  "[D]" + super.toString() +  "(by:" + dueDate + " " + this.dueTime.toString() +")" ;
+        return  "[D]" + super.toString() + " (by: " + this.dueDate + " " + this.dueTime + ")";
     }
 }
