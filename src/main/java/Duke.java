@@ -172,9 +172,21 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
             } else {
                 final String task = splitOnBy[0].split("deadline ", 2)[1].strip();
-                final String datetime = splitOnBy[1].strip();
-                store.add(new Deadline(task, datetime));
-                isInsert = true;
+                final String[] datetime = splitOnBy[1].strip().split(" ", 2);
+
+                Deadline deadline = null;
+                if (datetime.length == 1) {
+                    deadline = Deadline.create(task, datetime[0].strip());
+                } else if (datetime.length == 2) {
+                    deadline = Deadline.create(task, datetime[0].strip(), datetime[1].strip());
+                }
+
+                if (deadline != null) {
+                    store.add(deadline);
+                    isInsert = true;
+                } else {
+                    System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
+                }
             }
         } else if (command.equals("event")) {
             final int index = input.indexOf(" /at ");
@@ -184,9 +196,21 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
             } else {
                 final String task = splitOnAt[0].split("event ", 2)[1].strip();
-                final String datetime = splitOnAt[1].strip();
-                store.add(new Event(task, datetime));
-                isInsert = true;
+                final String[] datetime = splitOnAt[1].strip().split(" ", 2);
+
+                Event event = null;
+                if (datetime.length == 1) {
+                    event = Event.create(task, datetime[0].strip());
+                } else if (datetime.length == 2) {
+                    event = Event.create(task, datetime[0].strip(), datetime[1].strip());
+                }
+
+                if (event != null) {
+                    store.add(event);
+                    isInsert = true;
+                } else {
+                    System.out.println("\tPlease follow this format \"YYYY-MM-DD [hh:mm[:ss]]\" for datetime.");
+                }
             }
         } else {
             System.out.println("\tOops! Try inputting \"todo|deadline|event <task> (</by|/at> <datetime>)\".");
