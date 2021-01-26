@@ -52,8 +52,16 @@ public class Storage {
                 }
 
                 if (!taskType.equals("T")) {
+                    String fullDate, day, month, year;
                     counter++;
-                    LocalDate date = LocalDate.parse(split[counter], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    day = split[counter];
+                    counter++;
+                    month = split[counter];
+                    counter++;
+                    year = split[counter];
+                    fullDate = day + " " + month + " " + year;
+                    LocalDate date = LocalDate.parse(fullDate, DateTimeFormatter.ofPattern("d MMM yyyy"));
+
                     counter++;
                     LocalTime time = LocalTime.parse(split[counter], DateTimeFormatter.ofPattern("HHmm"));
 

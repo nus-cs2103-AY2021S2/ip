@@ -42,7 +42,7 @@ public class TaskList {
         String output = "";
 
         for (int i = 0; i < taskArrayList.size(); i++) {
-            if (i == taskArrayList.size()) {
+            if (i == taskArrayList.size() - 1) {
                 output = output + getTask(i).taskStatus();
             } else {
                 output = output + getTask(i).taskStatus() + "\n";
