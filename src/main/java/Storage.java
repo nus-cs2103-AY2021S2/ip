@@ -1,0 +1,64 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Storage {
+    private String filepath;
+    private ArrayList<Task> tasks;
+    private Parser parser;
+
+    Storage(String filepath) {
+        this.filepath = filepath;
+        tasks = new ArrayList<>();
+        parser = new Parser();
+    }
+
+    public ArrayList<Task> load() {
+        try {
+            File myFile = new File("duke.txt");
+            if (myFile.createNewFile()) {
+                System.out.println("File created: " + myFile.getName());
+            } else {
+                System.out.println("File already exists");
+                Scanner myReader = new Scanner(myFile);
+                while (myReader.hasNextLine()) {
+                    String type = myReader.nextLine();
+                    if (type.contains("[T]")) {
+                        String description = parser.parseTodoDescription(type);
+                        tasks.add(new Todo(description));
+                    } else if (type.contains("[D]")) {
+                        String description = parser.parseDeadlineEventDescription(type);
+                        String dateString = parser.parseDateTimeDeadline(type);
+                        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        tasks.add(new Deadline(description, date));
+                    } else if (type.contains("[E]")) {
+                        String description = parser.parseDeadlineEventDescription(type);
+                        String timeString = parser.parseDateTimeEvent(type);
+                        LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        tasks.add(new Event(description, time));
+                    }
+                }
+                myReader.close();
+            }
+        } catch (IOException e){
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+        return tasks;
+    }
+
+    public void save() throws FileNotFoundException {
+        PrintWriter myWriter = new PrintWriter("duke.txt");
+        for (Task t : TaskList.getTasklist()) {
+            myWriter.println(t.toString());
+        }
+        myWriter.flush();
+        myWriter.close();
+
+    }
+}

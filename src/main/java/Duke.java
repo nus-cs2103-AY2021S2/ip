@@ -1,55 +1,30 @@
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> storageList = new ArrayList<>();
+
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    String name = "Link";
+
+    public Duke(String filepath) {
+        ui = new Ui();
+        storage = new Storage(filepath);
+        tasks = new TaskList(storage.load());
+    }
+
+
+
+    public void run() {
         int listCounter;
-        String name = "Link";
         String userInput;
-        System.out.println("Hello! I'm " + name);
-        System.out.println("How are you feeling today?");
+        ui.println("Hello! I'm " + name);
+        ui.println("How are you feeling today?");
 
         try {
-            File myFile = new File("duke.txt");
-            if (myFile.createNewFile()) {
-                System.out.println("File created: " + myFile.getName());
-
-            } else {
-                System.out.println("File already exists");
-                Scanner myReader = new Scanner(myFile);
-                while (myReader.hasNextLine()) {
-                    String type = myReader.nextLine();
-                    if (type.contains("[T]")) {
-                        String description = type.substring(type.indexOf("  ") + 2);
-                        storageList.add(new Todo(description));
-                    } else if (type.contains("[D]")) {
-                        String description = type.substring(type.indexOf("  ") + 2, type.indexOf(" (") + 1);
-                        String dateString = type.substring(type.indexOf("by: ") + 4, type.indexOf(")"));
-                        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        storageList.add(new Deadline(description, date));
-                    } else if (type.contains("[E]")) {
-                        String description = type.substring(type.indexOf("  ") + 2, type.indexOf(" (") + 1);
-                        String timeString = type.substring(type.indexOf("at: ") + 4, type.indexOf(")"));
-                        LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                        storageList.add(new Event(description, time));
-                    }
-                }
-                myReader.close();
-            }
-        } catch (IOException e){
-            System.out.println("An error occurred");
-            e.printStackTrace();
-        }
-        Scanner sc = new Scanner(System.in);
-        try {
-            while (sc.hasNextLine()) {
-                userInput = sc.nextLine();
+            while (ui.canRead()) {
+                userInput = ui.read();
                 if (userInput.equals("bye")) {
                     break;
                 }
@@ -59,27 +34,22 @@ public class Duke {
                     String[] parts = copy.split(" ");
                     String keyword = parts[0];
                     if (userInput.equals("list")) {
-                        System.out.println("Here are the tasks in your list:");
-                        while (storageList.size() != listCounter) {
-                            System.out.println(listCounter + "." + storageList.get(listCounter - 1).toString());
+                        ui.println("Here are the tasks in your list:");
+                        while (tasks.size() != listCounter) {
+                            ui.println(listCounter + "." + tasks.get(listCounter - 1).toString());
                             listCounter++;
                         }
-                        System.out.println(listCounter + "." + storageList.get(listCounter - 1).toString());
-                        userInput = sc.nextLine();
+                        ui.println(listCounter + "." + tasks.get(listCounter - 1).toString());
+                        userInput = ui.read();
                     } else if (keyword.equals("done")) {
                         if (parts.length > 2) {
                             throw new InsufficientArgumentsException("Wrong arguments");
                         }
                         int index = Integer.parseInt(parts[1]);
-                        System.out.println(storageList.get(index - 1).markAsDone());
-                        PrintWriter myWriter = new PrintWriter("duke.txt");
-                        for (Task t : storageList) {
-                            myWriter.println(t.toString());
-                        }
-                        myWriter.flush();
-                        myWriter.close();
-                        if (sc.hasNextLine()) {
-                            userInput = sc.nextLine();
+                        ui.println(tasks.get(index - 1).markAsDone());
+                        storage.save();
+                        if (ui.canRead()) {
+                            userInput = ui.read();
                             if (userInput.equals("bye")) {
                                 break;
                             }
@@ -88,7 +58,7 @@ public class Duke {
                         if (parts.length == 1) {
                             throw new InsufficientArgumentsException("Insufficient arguments provided");
                         }
-                        System.out.println("Got it. I've added this task:");
+                        ui.println("Got it. I've added this task:");
                         StringBuilder str = new StringBuilder();
                         if (keyword.equals("todo")) {
                             for (int i = 1; i < parts.length; i++) {
@@ -97,8 +67,8 @@ public class Duke {
                             }
                             String taskString = str.toString();
                             Todo todo = new Todo(taskString);
-                            storageList.add(todo);
-                            System.out.println(todo.toString());
+                            tasks.add(todo);
+                            ui.println(todo.toString());
                         } else {
                             int slashIndex = 0;
                             for (int i = 0; i < parts.length; i++) {
@@ -122,23 +92,18 @@ public class Duke {
                             LocalDate date = LocalDate.parse(DateString);
                             if (keyword.equals("deadline")) {
                                 Deadline deadline = new Deadline(taskString, date);
-                                storageList.add(deadline);
-                                System.out.println(deadline.toString());
+                                tasks.add(deadline);
+                                ui.println(deadline.toString());
                             } else {
                                 Event event = new Event(taskString, date);
-                                storageList.add(event);
-                                System.out.println(event.toString());
+                                tasks.add(event);
+                                ui.println(event.toString());
                             }
                         }
-                        System.out.println("Now you have " + storageList.size() + " tasks in the list.");
-                        PrintWriter myWriter = new PrintWriter("duke.txt");
-                        for (Task t : storageList) {
-                            myWriter.println(t.toString());
-                        }
-                        myWriter.flush();
-                        myWriter.close();
-                        if (sc.hasNextLine()) {
-                            userInput = sc.nextLine();
+                        ui.println("Now you have " + tasks.size() + " tasks in the list.");
+                        storage.save();
+                        if (ui.canRead()) {
+                            userInput = ui.read();
                             if (userInput.equals("bye")) {
                                 break;
                             }
@@ -148,19 +113,14 @@ public class Duke {
                             throw new InsufficientArgumentsException("Wrong arguments");
                         }
                         int index = Integer.parseInt(parts[1]);
-                        System.out.println("Noted. I've removed this task:");
-                        System.out.println(storageList.get(index - 1).toString());
-                        storageList.remove(index-1);
-                        System.out.println("Now you have " + storageList.size() + " tasks in the list.");
+                        ui.println("Noted. I've removed this task:");
+                        ui.println(tasks.get(index - 1).toString());
+                        tasks.remove(index-1);
+                        ui.println("Now you have " + tasks.size() + " tasks in the list.");
 
-                        PrintWriter myWriter = new PrintWriter("duke.txt");
-                        for (Task t : storageList) {
-                            myWriter.println(t.toString());
-                        }
-                        myWriter.flush();
-                        myWriter.close();
-                        if (sc.hasNextLine()) {
-                            userInput = sc.nextLine();
+                        storage.save();
+                        if (ui.canRead()) {
+                            userInput = ui.read();
                             if (userInput.equals("bye")) {
                                 break;
                             }
@@ -174,17 +134,22 @@ public class Duke {
                     break;
                 }
             }
-            System.out.println("Bye. Talk to me anytime!");
+            ui.println("Bye. Talk to me anytime!");
         } catch (InsufficientArgumentsException err) {
-            System.out.println("Number of arguments is invalid. Try again");
+            ui.println("Number of arguments is invalid. Try again");
         } catch(IllegalKeywordException err) {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ui.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (NumberFormatException n) {
-            System.out.println("Done command must be followed by a number");
+            ui.println("Done command must be followed by a number");
         } catch (IOException e) {
-            System.out.println("Error writing to file");
+            ui.println("Error writing to file");
             e.printStackTrace();
         }
-
     }
+
+
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
+    }
+
 }
