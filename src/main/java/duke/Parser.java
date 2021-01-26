@@ -27,15 +27,15 @@ public class Parser {
                 output.append("  ").append(i + 1).append(".").append(tasks.get(i)).append("\n");
             }
         } else if (input.split(" ")[0].equals("done")) {
-            int i;
+            int inputNumber;
             try {
-                i = Integer.parseInt(input.split(" ")[1]);
+                inputNumber = Integer.parseInt(input.split(" ")[1]);
             } catch (Exception ex) {
                 throw new DukeException("  Please provide an integer.");
             }
 
             try {
-                tasks.markAsDone(i - 1);
+                tasks.markAsDone(inputNumber - 1);
             } catch (IndexOutOfBoundsException ex) {
                 throw new DukeException("  That number is invalid.");
             } catch (IOException ex) {
@@ -43,18 +43,18 @@ public class Parser {
             }
 
             output.append("  Successfully marked as done:\n");
-            output.append("  ").append(tasks.get(i - 1)).append("\n");
-        } else if (input.split(" ")[0].equals("delete")){
-            int i;
+            output.append("  ").append(tasks.get(inputNumber - 1)).append("\n");
+        } else if (input.split(" ")[0].equals("delete")) {
+            int inputNumber;
             try {
-                i = Integer.parseInt(input.split(" ")[1]);
+                inputNumber = Integer.parseInt(input.split(" ")[1]);
             } catch (Exception ex) {
                 throw new DukeException("  Please provide an integer.");
             }
 
             Task taskToRemove;
             try {
-                taskToRemove = tasks.remove(i - 1);
+                taskToRemove = tasks.remove(inputNumber - 1);
             } catch (IndexOutOfBoundsException ex) {
                 throw new DukeException("  That number is invalid.");
             } catch (IOException ex) {
@@ -64,6 +64,22 @@ public class Parser {
             output.append("  Successfully removed:\n");
             output.append("    ").append(taskToRemove).append("\n");
             output.append("  Total tasks in list: ").append(tasks.size()).append("\n");
+        } else if (input.split(" ")[0].equals("find")) {
+            String inputString;
+            try {
+                inputString = input.split(" ")[1].toLowerCase();
+            } catch (Exception ex) {
+                throw new DukeException("  Please provide a keyword to search for.");
+            }
+
+            output.append("  Matching tasks in list:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                for (String word : tasks.get(i).toString().split(" ")) {
+                    if (inputString.equals(word.toLowerCase())) {
+                        output.append("  ").append(i + 1).append(".").append(tasks.get(i)).append("\n");
+                    }
+                }
+            }
         } else {
             Task task;
             switch (input.split(" ")[0]) {
