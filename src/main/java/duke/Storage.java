@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,22 +1,8 @@
-import main.java.*;
+package main.java.duke;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.IOException;
-
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.nio.file.Files;
 
 
 public class Duke {

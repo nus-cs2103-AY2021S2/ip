@@ -1,4 +1,4 @@
-package main.java;
+package main.java.duke;
 
 public class DukeCommand {
     private final Command command;
