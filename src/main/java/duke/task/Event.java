@@ -2,17 +2,17 @@ package duke.task;
 
 import java.time.LocalDate;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDate at;
 
-    public Event(String description, LocalDate at){
+    public Event(String description, LocalDate at) {
         super(description);
         this.at = at;
         this.type = "event";
     }
 
-    public String getAt(){
+    public String getAt() {
         return this.at.toString();
     }
 

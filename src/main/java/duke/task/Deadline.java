@@ -2,17 +2,17 @@ package duke.task;
 
 import java.time.LocalDate;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate by;
 
-    public Deadline(String description, LocalDate by){
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
         this.type = "deadline";
     }
 
-    public String getBy(){
+    public String getBy() {
         return this.by.toString();
     }
 

@@ -5,30 +5,30 @@ public class Task {
     protected boolean isDone;
     protected String type;
 
-    public Task(String description){
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.type = "task";
     }
 
-    public String getStatusIcon(){
+    public String getStatusIcon() {
         //return tick or cross symbols
         return (isDone ? "\u2713" : " ");
     }
 
-    public void done(){
+    public void done() {
         this.isDone = true;
     }
 
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public String getIsDone(){
+    public String getIsDone() {
         return (this.isDone) ? "T" : "F";
     }
 

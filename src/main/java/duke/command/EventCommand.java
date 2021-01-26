@@ -1,20 +1,20 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     private final String description;
     private final LocalDate at;
 
 
-    public EventCommand(String task, LocalDate at){
+    public EventCommand(String task, LocalDate at) {
         super("");
         this.description = task;
         this.at = at;
