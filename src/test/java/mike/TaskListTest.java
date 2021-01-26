@@ -17,7 +17,7 @@ public class TaskListTest {
                 "1. [T] [ ] task1\n" +
                 "2. [T] [ ] task2\n" +
                 "3. [E] [ ] Event1 (at: 09 Oct 2000, 10:00 PM)\n" +
-                "4. [D] [ ] Deadline1 (by: 09 Oct 2000, 10:00 PM)";
+                "4. [D] [ ] Deadline1 (by: 09 Oct 2000, 10:00 PM)\n";
 
         TaskList taskList = new TaskList();
         taskList.addTaskToList(new TodoTask("task1"));

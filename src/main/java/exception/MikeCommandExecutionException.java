@@ -1,7 +1,7 @@
 package exception;
 
 public class MikeCommandExecutionException extends Exception {
-    private String failedCommand = "";
+    private String failedCommand;
     /**
      * Execution to be thrown when an error in command execution has occurred
      */

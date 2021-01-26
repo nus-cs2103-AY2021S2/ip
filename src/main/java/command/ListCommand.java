@@ -25,7 +25,7 @@ public class ListCommand implements Command {
 
     /**
      * Wrap taskList.toString() with minor formatting
-     * @return
+     * @return header for list before tasks
      */
     @Override
     public String getResponse() {

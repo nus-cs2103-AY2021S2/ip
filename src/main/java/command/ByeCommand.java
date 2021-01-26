@@ -13,7 +13,7 @@ public class ByeCommand implements Command {
     /**
      * Perform no operations on TaskList object
      * Accepts and returns TaskList due to compatibility
-     * @param taskList
+     * @param taskList tasklist provided
      * @return unmodified tasklist
      */
     @Override
