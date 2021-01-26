@@ -75,7 +75,6 @@ public class Duke {
                 try {
                     int idx = Integer.parseInt(command.split(" ")[1]);
                     tasks.get(idx - 1).markAsDone();
-
                     saveData();
 
                     int undone = tasks.stream()
