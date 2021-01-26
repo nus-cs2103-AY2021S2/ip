@@ -1,6 +1,7 @@
 import util.Formatter;
 import static util.Parser.*;
 
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -61,6 +62,8 @@ public class Sweh {
             }
         } catch (NoSuchElementException | IndexOutOfBoundsException e) {
             return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Please input dates in the form YYYY-MM-DD";
         }
     }
 

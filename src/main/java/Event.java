@@ -1,19 +1,20 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import static java.time.format.DateTimeFormatter.*;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Event extends Task {
-    private LocalDateTime eventTime;
+    private LocalDate eventTime;
     public static final String COMMAND_STRING = "event";
 
-    public Event(String desc, LocalDateTime eventTime) {
+    public Event(String desc, LocalDate eventTime) {
         super(desc);
         this.eventTime = eventTime;
     }
 
-    public Event(String desc, LocalDateTime eventTime, boolean isDone) {
+    public Event(String desc, LocalDate eventTime, boolean isDone) {
         super(desc, isDone);
         this.eventTime = eventTime;
     }
@@ -24,11 +25,11 @@ public class Event extends Task {
         }
 
         String desc = argMap.get("desc");
-        LocalDateTime eventTime = null;
+        LocalDate eventTime = null;
         boolean isDone = argMap.containsKey("done");
 
         if (argMap.containsKey("at")) {
-            eventTime = LocalDateTime.parse(argMap.get("at"));
+            eventTime = LocalDate.parse(argMap.get("at"), ISO_LOCAL_DATE);
         }
 
         return new Event(desc, eventTime, isDone);
