@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -10,7 +13,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String task, deadline, keyword;
+        String task, keyword;
+        LocalDateTime deadline;
         int firstSpace, firstSlash, option;
 
         //Loading from file
@@ -57,8 +61,8 @@ public class Duke {
                     break;
                 case "event":
                     task = retrieveTask(command, firstSpace, firstSlash);
-                    deadline = retrieveDeadline(command, firstSlash);
-                    addTask(new Event(task, deadline));
+                    LocalDateTime[] deadlines = retrieveEventDeadline(command, firstSlash);
+                    addTask(new Event(task,deadlines[0], deadlines[1]));
                     break;
                 default:
                     System.out.println("OOPS!!! I`m sorry. but i don`t know what that means :-(");
@@ -69,6 +73,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 System.out.printf("OOPS!!! %s %s cannot be empty.\n", e.getMessage(), keyword);
+            } catch (DukeDeadlineException e) {
+                System.out.println(e.getMessage());
             }
             printLine();
             command = scanner.nextLine();
@@ -131,19 +137,38 @@ public class Duke {
         return Integer.parseInt(command.substring(firstSpace + 1)) - 1;
     }
 
-    public static String retrieveDeadline(String command, int start) {
-        boolean space = false;
-        StringBuilder res = new StringBuilder();
-        for (int i = start + 1; i < command.length(); i++) {
-            if (!space && command.charAt(i) == ' ') {
-                space = true;
-                continue;
-            }
-            if (space) {
-                res.append(command.charAt(i));
-            }
+    public static LocalDateTime retrieveDeadline(String command, int start) throws DukeDeadlineException{
+        int nextSpace = getNextSpace(command,start);
+        String deadline = command.substring(nextSpace+1);
+        try {
+            return LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+        } catch (DateTimeParseException e) {
+            throw new DukeDeadlineException("Format of the deadline of a deadline task should be (Year-Month-Day time (24 hours))");
         }
-        return res.toString();
+    }
+
+    public static int getNextSpace(String command, int start) {
+        return command.indexOf(" ",start);
+    }
+
+    public static LocalDateTime[] retrieveEventDeadline(String command, int start) throws DukeDeadlineException {
+        int firstSpace = getNextSpace(command,start) + 1;
+        int nextSpace = getNextSpace(command,firstSpace) + 1;
+        String date = command.substring(firstSpace, nextSpace);
+        String times = command.substring(nextSpace);
+        String[] timeArr = times.split("-");
+        if(timeArr.length != 2) {
+            throw new DukeDeadlineException("Format of the deadline of a Event task should be (Year-Month-Day Time(24 hours)-Time(24 hours)");
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d Hmm");
+            LocalDateTime[] deadlineArr = new LocalDateTime[2];
+            for (int i = 0; i < deadlineArr.length; i++) {
+                StringBuilder str = new StringBuilder(date);
+                str.append(timeArr[i]);
+                deadlineArr[i] = LocalDateTime.parse(str,formatter);
+            }
+            return deadlineArr;
+        }
     }
 
     public static String retrieveTask(String command, int start, int end) throws DukeException {

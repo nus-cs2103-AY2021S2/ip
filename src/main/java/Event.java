@@ -1,19 +1,24 @@
+import java.time.LocalDateTime;
 public class Event extends Task{
     private static final char SYMBOL = 'E';
-    private String deadline;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public Event(String desc, String deadline) {
+    public Event(String desc, LocalDateTime start, LocalDateTime end) {
         super(desc);
-        this.deadline = deadline;
+        this.start = start;
+        this.end = end;
     }
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", super.toString(), this.deadline);
+        return String.format("[%c] %s (%s - %s)", SYMBOL, super.toString(),
+                    super.format(this.start), super.format(this.end));
     }
 
     @Override
     public String save() {
-        return String.format("%c,%s,%s\n", SYMBOL, super.save(), this.deadline);
+        return String.format("%c,%s,%s,%s\n", SYMBOL, super.save(),
+                    super.saveFormat(this.start), super.saveFormat(this.end));
     }
 }

@@ -16,18 +16,18 @@ Now you have 1 task in the list
 ----------------------------------------------
 ----------------------------------------------
 Got it. I`ve added this task:
-   [D] [ ]  return by  (by: June 6th)
+   [D] [ ]  return book  (by: Feb 10 2020 1800)
 Now you have 2 task in the list
 ----------------------------------------------
 ----------------------------------------------
 Got it. I`ve added this task:
-   [E] [ ]  project meeting  (at: Mon 2-4pm)
+   [E] [ ]  project meeting  (May 10 2020 1400 - May 10 2020 1600)
 Now you have 3 task in the list
 ----------------------------------------------
 ----------------------------------------------
-1. [T] [ ]  read book
-2. [D] [ ]  return by  (by: June 6th)
-3. [E] [ ]  project meeting  (at: Mon 2-4pm)
+1. [T] [X]  read book
+2. [D] [ ]  return book  (by: Feb 10 2020 1800)
+3. [E] [ ]  project meeting  (May 10 2020 1400 - May 10 2020 1600)
 ----------------------------------------------
 ----------------------------------------------
 Nice! I`ve marked this task as done:
@@ -38,8 +38,8 @@ Invalid option
 ----------------------------------------------
 ----------------------------------------------
 1. [T] [X]  read book
-2. [D] [ ]  return by  (by: June 6th)
-3. [E] [ ]  project meeting  (at: Mon 2-4pm)
+2. [D] [ ]  return book  (by: Feb 10 2020 1800)
+3. [E] [ ]  project meeting  (May 10 2020 1400 - May 10 2020 1600)
 ----------------------------------------------
 ----------------------------------------------
 Got it. I`ve added this task:
@@ -48,8 +48,8 @@ Now you have 4 task in the list
 ----------------------------------------------
 ----------------------------------------------
 1. [T] [X]  read book
-2. [D] [ ]  return by  (by: June 6th)
-3. [E] [ ]  project meeting  (at: Mon 2-4pm)
+2. [D] [ ]  return book  (by: Feb 10 2020 1800)
+3. [E] [ ]  project meeting  (May 10 2020 1400 - May 10 2020 1600)
 4. [T] [ ]  join sports club
 ----------------------------------------------
 ----------------------------------------------
@@ -58,8 +58,8 @@ Nice! I`ve marked this task as done:
 ----------------------------------------------
 ----------------------------------------------
 1. [T] [X]  read book
-2. [D] [ ]  return by  (by: June 6th)
-3. [E] [ ]  project meeting  (at: Mon 2-4pm)
+2. [D] [ ]  return book  (by: Feb 10 2020 1800)
+3. [E] [ ]  project meeting  (May 10 2020 1400 - May 10 2020 1600)
 4. [T] [X]  join sports club
 ----------------------------------------------
 ----------------------------------------------
@@ -79,4 +79,13 @@ OOPS!!! The description of a event cannot be empty.
 ----------------------------------------------
 ----------------------------------------------
 OOPS!!! The deadline of a event cannot be empty.
+----------------------------------------------
+----------------------------------------------
+Format of the deadline of a deadline task should be (Year-Month-Day time (24 hours))
+----------------------------------------------
+----------------------------------------------
+Format of the deadline of a deadline task should be (Year-Month-Day time (24 hours))
+----------------------------------------------
+----------------------------------------------
+Format of the deadline of a Event task should be (Year-Month-Day Time(24 hours)-Time(24 hours)
 ----------------------------------------------
