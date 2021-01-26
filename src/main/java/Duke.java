@@ -21,28 +21,6 @@ public class Duke {
             String task = s.next();
             String line = s.nextLine();
             System.out.println(task + line);
-            if (task == "Todo:") {
-                try {
-                    Todo td = Todo.makeTodo(line);
-                    lst.add(td);
-                } catch (DukeException e) {
-                    System.err.println("☹ OOPS!!! The description of a todo cannot be empty.\n");
-                }
-            } else if (task == "Deadline:") {
-                try {
-                    Deadline dl = Deadline.makeDeadline(line);
-                    lst.add(dl);
-                } catch (DukeException e) {
-                    System.err.println("☹ OOPS!!! The description of a deadline cannot be empty.\n");
-                }
-            } else if (task == "Event:") {
-                try {
-                    Event e = Event.makeEvent(line);
-                    lst.add(e);
-                } catch (DukeException dukeException) {
-                    System.err.println("☹ OOPS!!! The description of an event cannot be empty.\n");
-                }
-            }
         }
     }
 
