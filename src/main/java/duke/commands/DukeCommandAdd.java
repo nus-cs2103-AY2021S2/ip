@@ -6,6 +6,11 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Add command.
+ *
+ * Adds task to task list and writes changes to file.
+ */
 public class DukeCommandAdd extends DukeCommand {
 
     private Task task;

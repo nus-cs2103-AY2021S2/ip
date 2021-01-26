@@ -6,6 +6,11 @@ import duke.storage.FileLoader;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Done command.
+ *
+ * Marks task as done and saves task list to file.
+ */
 public class DukeCommandDone extends DukeCommand {
 
     private int index;

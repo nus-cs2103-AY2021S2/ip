@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Find command.
+ *
+ * Filters tasks according to supplied date range and displays list to user.
+ */
 public class DukeCommandFind extends DukeCommand {
 
     protected Optional<LocalDateTime> from;
