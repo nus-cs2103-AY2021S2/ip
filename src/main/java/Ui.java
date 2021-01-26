@@ -38,6 +38,10 @@ public class Ui {
     }
 
     /**
+     * Display found tasks.
+     */
+
+    /**
      * Display added task.
      * @param task Added task
      */

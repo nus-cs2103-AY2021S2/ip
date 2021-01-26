@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,21 @@ public class TaskList {
      */
     public List<Task> getList() {
         return tasks;
+    }
+
+    /**
+     * Find tasks that match the search term.
+     * @param term Search term
+     * @return TaskList containing filtered results.
+     */
+    public TaskList findTasks(String term) {
+        List<Task> result = new ArrayList<Task>();
+        for (Task task : tasks) {
+            if(task.desc.contains(term)) {
+                result.add(task);
+            }
+        }
+        return new TaskList(result);
     }
 
     /**

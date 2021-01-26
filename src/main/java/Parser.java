@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Parses commands and executes them.
  */
@@ -21,6 +23,10 @@ public class Parser {
     public boolean parse(String input) throws DukeException {
         if (input.equals("list")) {
             ui.print(taskList.toString());
+        } else if (input.startsWith("find")) {
+            String searchTerm = input.split(" ")[1];
+            TaskList findResult = taskList.findTasks(searchTerm);
+            ui.print(findResult.toString());
         } else if (input.startsWith("done")) {
             int itemNo = Integer.parseInt(input.split(" ")[1]);
             Task selected = taskList.markAsDone(itemNo - 1);
