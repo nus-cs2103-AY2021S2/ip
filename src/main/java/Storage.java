@@ -18,16 +18,20 @@ public class Storage {
          this.filePath = filePath;
      }
 
-     public List<Task> loadStorage() throws FileNotFoundException {
+     public List<Task> loadStorage() throws DukeException {
          List<Task> savedListOfTasks = new ArrayList<>();
-         File fileSource = new File(filePath);
-         Scanner scanner = new Scanner(fileSource);
-         while(scanner.hasNextLine()) {
-             String line = scanner.nextLine();
-             Task t = Parser.parseTaskFromStoredFormat(line);
-             savedListOfTasks.add(t);
+         try {
+             File fileSource = new File(filePath);
+             Scanner scanner = new Scanner(fileSource);
+             while (scanner.hasNextLine()) {
+                 String line = scanner.nextLine();
+                 Task t = Parser.parseTaskFromStoredFormat(line);
+                 savedListOfTasks.add(t);
+             }
+             return savedListOfTasks;
+         } catch (FileNotFoundException) {
+             throw new DukeException("Error fetching data from Storage in the desired format.");
          }
-         return savedListOfTasks;
      }
 
      public void saveTasks(List<? extends Task> listOfTasks) throws IOException {

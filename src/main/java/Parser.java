@@ -13,13 +13,23 @@ import java.util.regex.Pattern;
 
 public class Parser {
     /**
-     * A class containing methods to parse input String for more information of what type of event it is.
+     * A class containing static methods to parse input String for more information of what type of event it is.
+     * Initialise a Parser that accepts in a String input Command, which it can Parse and determine the appropriate CommandType
+     * to issue to the caller.
+     *
      */
 
-    /**
-<<<<<<< HEAD
-     * initializes the record of tasks from a text file containing saved data since the last time the application was opened.
-     */
+    private String inputCommand;
+
+    Parser(String inputCommand) {
+        this.inputCommand = inputCommand;
+    }
+
+    parseCommand()
+
+
+
+
 
 
     public static Task parseTaskFromStoredFormat(String input){
@@ -50,7 +60,7 @@ public class Parser {
 
     // Methods for extracting dates and formatting dates.
 
-    
+
     /**
      * finds date within the string
      * @param input

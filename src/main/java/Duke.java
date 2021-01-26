@@ -13,10 +13,23 @@ import java.util.regex.Matcher;
 public class Duke {
     private static List<Task> listOfTasks = new ArrayList<>();
     private static Storage storage;
-    private Ui ui = new Ui();
+    private Ui ui;
+    private TaskList tasks;
 
     Duke() {
+        this.storage = initializeStorage();
+        this.ui = new Ui();
+        try {
+            tasks = new TaskList(storage.loadStorage());
+        } catch ( DukeException err) {
+            System.out.println(err.getMessage());
+            tasks = new TaskList();
+        }
+    }
 
+
+
+    private Storage initializeStorage() {
         File directory = new File("data");
         if (!directory.exists()) {
             directory.mkdir();
@@ -29,7 +42,7 @@ public class Duke {
                 e.printStackTrace();
             }
         }
-        storage = new Storage("data/duke.txt");
+        return new Storage("data/duke.txt");
     }
 
 

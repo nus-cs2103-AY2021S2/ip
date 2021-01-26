@@ -9,6 +9,10 @@ public class TaskList implements Iterable<Task> {
 
      private static List<Task> listOfTasks;
 
+     public TaskList() {
+         this.listOfTasks = new ArrayList<Task>();
+     }
+
      public TaskList (List<Task> listOfTasks) {
          this.listOfTasks = listOfTasks;
      }
