@@ -2,7 +2,11 @@ package core;
 
 import core.task.Task;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -26,10 +30,11 @@ public class TaskStorageFile implements TaskStorage {
                     if(x instanceof ArrayList<?>) {
                         return (ArrayList<Task>) x;
                     }else {
-                        return null;
+                        return new ArrayList<Task>();
                     }
                 } catch (ClassNotFoundException e) {
-                    return null;
+                    Files.deleteIfExists(fileLocation);
+                    return new ArrayList<Task>();
                 }
             }
         } else {
