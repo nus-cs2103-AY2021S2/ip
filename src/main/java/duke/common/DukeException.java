@@ -1,5 +1,8 @@
 package duke.common;
 
+/**
+ * A utility class to consolidate all exceptions related to Duke.
+ */
 public class DukeException {
     public static class InvalidCommand extends IllegalArgumentException {
         public InvalidCommand() {
