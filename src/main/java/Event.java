@@ -1,14 +1,21 @@
-public class Event extends Task {
-    private String dateInfo;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String taskInfo, String dateInfo) {
+public class Event extends Task {
+    private LocalDate startDateInfo;
+    private LocalDate endDateInfo;
+
+    public Event(String taskInfo, LocalDate startDateInfo, LocalDate endDateInfo) {
         super(taskInfo);
-        this.dateInfo = dateInfo;
+        this.startDateInfo = startDateInfo;
+        this.endDateInfo = endDateInfo;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (" + dateInfo + ")";
+        return "[E]" + super.toString() + " ("
+                + startDateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + " to "
+                + endDateInfo.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     public String getData() {
