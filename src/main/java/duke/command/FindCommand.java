@@ -18,6 +18,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds all tasks matching the keyword obtained from the arguments from initialisation.
+     *
      * @throws DukeException if insufficient arguments are passed or arguments are invalid
      */
     @Override

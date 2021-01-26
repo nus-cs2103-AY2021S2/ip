@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Obtains task to be deleted from the arguments from initialisation and deletes it from the data file.
+     * Obtains task to be deleted from the arguments from command initialisation and deletes it from the data file.
      *
      * @throws DukeException if argument passed does not correspond to a valid task number
      */
