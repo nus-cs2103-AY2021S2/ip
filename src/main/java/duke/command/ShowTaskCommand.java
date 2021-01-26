@@ -18,17 +18,28 @@ public class ShowTaskCommand extends Command {
     private LocalDate date;
     private ShowTaskType taskType;
 
+    /**
+     * Creates a command for listing tasks
+     */
     public ShowTaskCommand() {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ALL;
     }
 
+    /**
+     * Overloads ShowTaskCommand() method with specified date
+     * @param date: show tasks with specific date
+     */
     public ShowTaskCommand(LocalDate date) {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ONE;
         this.date = date;
     }
 
+    /**
+     * Overloads ShowTaskCommand() method with date in string
+     * @param date: show tasks with specific date in string, format: yyyy-mm-dd
+     */
     public ShowTaskCommand(String date) {
         super();
         this.taskType = ShowTaskType.SHOW_TASK_ONE;
@@ -40,6 +51,12 @@ public class ShowTaskCommand extends Command {
         }
     }
 
+    /**
+     * Execute action to list tasks
+     * @param tasks: list of tasks
+     * @param ui: UI required for conversation
+     * @param storage: Storage required for .txt file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.size() == 0) {
@@ -50,7 +67,7 @@ public class ShowTaskCommand extends Command {
         } else {
             List<Task> tempTask = tasks.getByDate(date);
             ui.speak("Here you go! Your list of items:");
-            System.out.println(tasks.toString());
+            System.out.println(tempTask.toString());
         }
     }
 }
