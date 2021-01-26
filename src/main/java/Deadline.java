@@ -1,38 +1,63 @@
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import static java.time.format.DateTimeFormatter.*;
+
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Deadline extends Task {
-    private String endDate;
-    public static final char TYPE_SYMBOL = 'D';
+    private LocalDate endDate;
+    public static final String COMMAND_STRING = "deadline";
 
-    public Deadline(String desc, String endDate) {
+    public Deadline(String desc, LocalDate endDate) {
         super(desc);
         this.endDate = endDate;
     }
 
-    public static Deadline newInstance(HashMap<String, String> argMap) throws NoSuchElementException {
+    public Deadline(String desc, LocalDate endDate, boolean isDone) {
+        super(desc, isDone);
+        this.endDate = endDate;
+    }
+
+    public static Deadline newInstance(HashMap<String, String> argMap)
+            throws NoSuchElementException, DateTimeParseException {
         if (!argMap.containsKey("desc")) {
             throw new NoSuchElementException("Error: The description for todo cannot be empty.");
         }
 
         String desc = argMap.get("desc");
-        String endDate = argMap.getOrDefault("by", "N/A");
-        return new Deadline(desc, endDate);
+        LocalDate eventTime = null;
+        boolean isDone = argMap.containsKey("done");
+
+        if (argMap.containsKey("by")) {
+            eventTime = LocalDate.parse(argMap.get("by"), ISO_LOCAL_DATE);
+        }
+
+        return new Deadline(desc, eventTime, isDone);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + endDate + ")";
+        return "[D]" + super.toString() +
+                (endDate != null
+                        ? "(by: " + endDate.format(DateTimeFormatter.ofPattern("E, d MMM yy")) + ")"
+                        : "");
     }
 
     @Override
-    public String toSaveFormat() {
-        return toSaveFormatPrefix() + saveDelimiter + endDate;
+    protected HashMap<String, String> saveArgs() {
+        HashMap<String, String> argMap = new HashMap<>();
+        if (endDate != null) {
+            argMap.put("by", endDate.toString());
+        }
+        return argMap;
     }
 
     @Override
-    public char typeSymbol() {
-        return TYPE_SYMBOL;
+    public String commandString() {
+        return COMMAND_STRING;
     }
 }
