@@ -78,4 +78,14 @@ public class TaskList {
         tasks.remove(n);
         numItems--;
     }
+
+    public void matchTasks(String str) {
+        int n = 0;
+        for (int i = 0; i < numItems; i++) {
+            if (list.get(i).toString().contains(str)) {
+                System.out.println(n+1 + "." + list.get(i));
+                n++;
+            }
+        }
+    }
 }
