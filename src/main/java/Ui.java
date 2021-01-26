@@ -1,8 +1,4 @@
 public class Ui {
-    public Ui() {
-
-    }
-
     void showWelcome() {
         String logo = "          ____                               \n" +
                 "        ,'  , `.                                   \n" +
@@ -38,7 +34,4 @@ public class Ui {
     void showError(String err) {
         System.out.println("    " + err);
     }
-
-
-
 }
