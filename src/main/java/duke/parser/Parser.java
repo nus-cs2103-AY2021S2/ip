@@ -1,7 +1,6 @@
 package duke.parser;
 
 import duke.exceptions.DukeExceptionIllegalArgument;
-import duke.exceptions.DukeExceptionIllegalDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

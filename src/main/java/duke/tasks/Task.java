@@ -1,9 +1,6 @@
-package duke.tasks;// Original definition from the webpage of course
-// https://nus-cs2103-ay2021s2.github.io/website/schedule/week2/project.html
-import duke.commands.DukeCommand;
-import duke.exceptions.DukeExceptionIllegalArgument;
+package duke.tasks;
 
-import java.time.format.DateTimeFormatter;
+import duke.exceptions.DukeExceptionIllegalArgument;
 
 // TODO: Throw exception when description/by/at contains " | "
 public class Task {
