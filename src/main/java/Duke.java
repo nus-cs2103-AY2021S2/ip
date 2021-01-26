@@ -8,14 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Duke {
-	private static String DIVIDER = "____________________________________________________________";
-	
-	private Scanner scanner;
 	private TaskList tasks;
+	private Ui ui;
 	
 	public Duke() {
-        this.scanner = new Scanner(System.in);
         this.tasks = new TaskList();
+        this.ui = new Ui();
     }
 	
     public static void main(String[] args) {
@@ -25,16 +23,16 @@ public class Duke {
 
 	public void run() {
 		// display welcome sequence
-		start();
+		ui.welcome();
 
 		load();
 
         // get user input
-        String userInput = scanner.nextLine();
+        String userInput = ui.readCommand();
 
         // loop until the user exits
         while (!userInput.toLowerCase().equals("bye")) {
-            System.out.println(DIVIDER);
+			ui.showBorder();
             try {
                 // display list
                 if (userInput.toLowerCase().equals("list")) {
@@ -66,22 +64,17 @@ public class Duke {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println(DIVIDER);
+            ui.showBorder();
 
-            // get next input
-            userInput = scanner.nextLine();
+			// get user input
+			userInput = ui.readCommand();
         }
 		
 		// exit sequence
-		quit();
+		ui.quit();
     }
 	
-	private void start() {
-		System.out.println(DIVIDER);
-        System.out.println("Welcome to Duke!");
-        System.out.println("What can I do for you?");
-        System.out.println(DIVIDER);
-	}
+
 
 	private void load() {
 		try {
@@ -109,12 +102,6 @@ public class Duke {
 			tasks.clear();
 			saveTasks();
 		}
-	}
-	
-	private void quit() {
-		System.out.println(DIVIDER);
-        System.out.println("Bye! Hope to see you again :)");
-        System.out.println(DIVIDER);
 	}
 	
 	private Task parseTask(String taskString) throws DukeException {
