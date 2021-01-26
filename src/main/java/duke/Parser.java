@@ -16,7 +16,7 @@ public class Parser {
     private Optional<String> secondSpecifier;
     private Optional<String> thirdSpecifier;
 
-    public Parser()  {
+    public Parser() {
     }
 
     /**
@@ -63,33 +63,33 @@ public class Parser {
         }
 
         switch (this.command) {
-            case "list":
-                if (this.secondSpecifier.isEmpty()) {
-                    return new ShowTaskCommand();
-                } else if (this.secondSpecifier.get().equals("today")) {
-                    return new ShowTaskCommand(LocalDate.now());
-                } else if (this.secondSpecifier.get().equals("tomorrow")) {
-                    return new ShowTaskCommand(LocalDate.now().plus(1, ChronoUnit.DAYS));
-                } else {
-                    return new ShowTaskCommand(this.secondSpecifier.get());
-                }
-            case "todo":
-                Todo todo = new Todo(this.secondSpecifier.get());
-                return new AddTaskCommand(todo);
-            case "deadline":
-                Deadline deadline = new Deadline(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
-                return new AddTaskCommand(deadline);
-            case "event":
-                Event event = new Event(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
-                return new AddTaskCommand(event);
-            case "done":
-                return new DoneTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
-            case "delete":
-                return new DeleteTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
-            case "bye":
-                return new ByeCommand();
-            default:
-                throw new DukeException("There\'s no such command! Try todo?");
+        case "list":
+            if (this.secondSpecifier.isEmpty()) {
+                return new ShowTaskCommand();
+            } else if (this.secondSpecifier.get().equals("today")) {
+                return new ShowTaskCommand(LocalDate.now());
+            } else if (this.secondSpecifier.get().equals("tomorrow")) {
+                return new ShowTaskCommand(LocalDate.now().plus(1, ChronoUnit.DAYS));
+            } else {
+                return new ShowTaskCommand(this.secondSpecifier.get());
+            }
+        case "todo":
+            Todo todo = new Todo(this.secondSpecifier.get());
+            return new AddTaskCommand(todo);
+        case "deadline":
+            Deadline deadline = new Deadline(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
+            return new AddTaskCommand(deadline);
+        case "event":
+            Event event = new Event(this.secondSpecifier.get(), LocalDate.parse(this.thirdSpecifier.get()));
+            return new AddTaskCommand(event);
+        case "done":
+            return new DoneTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
+        case "delete":
+            return new DeleteTaskCommand(Integer.parseInt(this.secondSpecifier.orElse("-1")));
+        case "bye":
+            return new ByeCommand();
+        default:
+            throw new DukeException("There\'s no such command! Try todo?");
         }
     }
 }
