@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,6 +58,8 @@ public class Duke {
                 }
             } catch (IllegalArgumentException e) {
                 Duke.say("Oh no... I'm not trained with these commands yet...");
+            } catch (DateTimeParseException e) {
+                Duke.say("Oh no... Please specify a proper date... (Format: YYYY-MM-DD)");
             } catch (DukeException e) {
                 Duke.say("Oh no... " + e.getMessage());
             }
@@ -144,7 +148,7 @@ public class Duke {
         }
     }
 
-    public static void add(ArrayList<Task> collection, String input) throws DukeException {
+    public static void add(ArrayList<Task> collection, String input) throws DukeException, DateTimeParseException {
         // Parse input
         String[] parsedInputArr = Duke.parseInput(input);
 
@@ -162,9 +166,9 @@ public class Duke {
         if (parsedInputArr[0].equals("todo"))
             collection.add(new Todo(parsedInputArr[1]));
         else if (parsedInputArr[0].equals("deadline"))
-            collection.add(new Deadline(parsedInputArr[1], parsedInputArr[2]));
+            collection.add(new Deadline(parsedInputArr[1], LocalDate.parse(parsedInputArr[2])));
         else if (parsedInputArr[0].equals("event"))
-            collection.add(new Event(parsedInputArr[1], parsedInputArr[2]));
+            collection.add(new Event(parsedInputArr[1], LocalDate.parse(parsedInputArr[2])));
         Duke.say("Got it, I have added the task '" + parsedInputArr[1] + "' to your collection.");
     }
 
