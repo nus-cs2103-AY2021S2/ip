@@ -11,8 +11,8 @@ public class Parser {
     public static Command parse(String input) throws DukeException {
         String[] commandStr = input.trim().split("\\s+");
         String taskCommand = commandStr[0];
-        Command commandType = null;
         String taskDetails = formatInput(taskCommand, input);
+        Command commandType = null;
 
         switch (taskCommand) {
         case "bye":
@@ -42,41 +42,43 @@ public class Parser {
     }
 
      private static String formatInput(String taskCommand, String input)  throws DukeException {
-         String taskDetails = "";
+         String taskStr = "";
 
          if (!taskCommand.equals("bye") && !taskCommand.equals("list")) {
              checkValidInput(taskCommand);
-             taskDetails = formatTaskDetails(taskCommand, input);
-             checkBlankDescription(taskCommand, taskDetails);
+             taskStr = formatTaskDetails(taskCommand, input);
+             checkBlankDescription(taskCommand, taskStr);
          }
-         return taskDetails;
+         return taskStr;
      }
 
     private static String formatTaskDetails(String taskCommand, String input) {
         input = input.replaceFirst(taskCommand + " ", "");
-        String taskDetails = "";
+        String taskStr = "";
 
         if (taskCommand.equals("event")) {
-            taskDetails = input.split(" /at")[0].replaceFirst("event ", "");
+            taskStr = input.split(" /at")[0].replaceFirst("event ", "");
         } else if (taskCommand.equals("deadline")) {
-            taskDetails = input.split(" /by")[0].replaceFirst("deadline ", "");
+            taskStr = input.split(" /by")[0].replaceFirst("deadline ", "");
         } else {
-            taskDetails = input;
+            taskStr = input;
         }
-        return taskDetails;
+        return taskStr;
     }
 
     private static void checkValidInput(String taskCommand) throws DukeException {
         HashSet<String> validInputSet = new HashSet<>();
+
         Collections.addAll(validInputSet, "bye", "list", "done",
                 "delete", "todo", "event", "deadline", "find");
-        if(!validInputSet.contains(taskCommand)) {
+
+        if (!validInputSet.contains(taskCommand)) {
             throw new DukeException(ExceptionType.INVALID_INPUT, taskCommand);
         }
     }
 
     private static void checkBlankDescription(String taskCommand, String taskDetails) throws DukeException {
-        if(taskCommand.equals(taskDetails)) {
+        if (taskCommand.equals(taskDetails)) {
             throw new DukeException(ExceptionType.BLANK_DESCRIPTION, taskCommand);
         }
     }

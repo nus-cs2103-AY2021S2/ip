@@ -1,8 +1,8 @@
 package duke;
 
 import duke.exception.DukeException;
-import org.junit.Test;
 
+import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
@@ -20,5 +20,4 @@ public class ParserTest {
                 Parser.parse("event project meeting /at Jan 27 2021").getTaskDetails());
 
     }
-
 }

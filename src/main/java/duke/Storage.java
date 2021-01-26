@@ -26,11 +26,11 @@ public class Storage {
         File dataFile = new File(this.fileDirectory);
 
         try {
-            if(!(Files.isDirectory(Paths.get(this.pathDirectory)))) {
+            if (!(Files.isDirectory(Paths.get(this.pathDirectory)))) {
                 // Handles folder does not exist case
                 dataDirectory.mkdir();
                 dataFile.createNewFile();
-            } else if(!dataFile.exists()) {
+            } else if (!dataFile.exists()) {
                 // Handles file does not exist
                 dataFile.createNewFile();
             }
@@ -45,7 +45,7 @@ public class Storage {
             File dataFile = fileConfiguration();
             FileWriter fileWriter = new FileWriter(dataFile, false);
 
-            for(int index = 0; index < taskList.size(); index++) {
+            for (int index = 0; index < taskList.size(); index++) {
                 Task currTask = taskList.get(index);
                 fileWriter.write(currTask.formatTask() + System.lineSeparator());
             }
@@ -56,11 +56,11 @@ public class Storage {
     }
 
     public ArrayList<Task> loadData() throws DukeException {
-        ArrayList<Task> taskList = new ArrayList<>();
-
         try {
+            ArrayList<Task> taskList = new ArrayList<>();
             File dataFile = fileConfiguration();
             Scanner sc = new Scanner(dataFile);
+
             while (sc.hasNext()) {
                 String[] taskDetails = sc.nextLine().split("[|]");
                 String taskType = taskDetails[0];
@@ -79,6 +79,7 @@ public class Storage {
                 default:
                     break;
                 }
+
                 if (taskType.equals("T") || taskType.equals("E") || taskType.equals("D")) {
                     if (taskDetails[1].equals("1")) {
                         newTask.markAsDone();
