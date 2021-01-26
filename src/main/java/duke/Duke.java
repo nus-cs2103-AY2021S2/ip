@@ -22,6 +22,9 @@ public class Duke{
         }
     }
 
+    /**
+     * Handles the user interaction and execution of commands.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -2,6 +2,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that happens on a specific date and time.
+ */
 public class Event extends Task{
     protected LocalDate date;
     protected String duration;
@@ -19,11 +22,19 @@ public class Event extends Task{
         return this.date;
     }
 
+    /**
+     * Returns formatted string of the event task details to store in harddisk file.
+     * @return Formatted string.
+     */
     @Override
     public String getFormattedData() {
         return  "E | " + super.getFormattedData() + " | " + date + " " + duration;
     }
 
+    /**
+     * Returns description of the event, status of the event as well as its date and time.
+     * @return String.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +

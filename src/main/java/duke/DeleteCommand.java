@@ -2,8 +2,20 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Represents a delete command keyed in by the user.
+ */
 public class DeleteCommand extends Command {
 
+    /**
+     * Executes the delete command by removing the task from the list, printing the deleted task to the user and updating the stored file.
+     *
+     * @param taskManager TaskManager object that maintains the list of tasks.
+     * @param ui Ui object that handles user interaction.
+     * @param storage Storage object that handles the updating of stored file.
+     * @throws IOException If the list of tasks are not in the correct storage format.
+     * @throws DukeException If the task number specified as done is not valid.
+     */
     DeleteCommand(String[] parsedCommand) {
         super(parsedCommand);
     }

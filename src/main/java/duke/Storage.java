@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a class that stores and real files stored in the hard disk.
+ */
 public class Storage{
     private String fileUrl;
 
@@ -13,7 +16,12 @@ public class Storage{
         this.fileUrl = fileUrl;
     }
 
-
+    /**
+     * Loads all tasks stored in the file at the specified fileUrl.
+     *
+     * @return ArrayList<String> List containing all previously stored tasks.
+     * @throws FileNotFoundException If the file cannot be found at the specified file url.
+     */
     public ArrayList<String> load() throws FileNotFoundException {
         File storageFile = new File(fileUrl);
         Scanner sc = new Scanner(storageFile);
@@ -24,7 +32,12 @@ public class Storage{
         return data;
     }
 
-
+    /**
+     * Stores and writes all tasks in the input list to file at the specified fileUrl.
+     *
+     * @param taskList ArrayList<String> containing all current tasks.
+     * @throws IOException If the tasks strings are not in the correct storage format.
+     */
     public void store(ArrayList<String> taskList) throws IOException {
         FileWriter fw = new FileWriter(fileUrl);
         String data = taskList.size() == 0 ? "" : taskList.get(0);
