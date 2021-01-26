@@ -18,14 +18,33 @@ import duke.common.DukeString;
 public class Parser {
     private boolean bye;
 
+    /**
+     * Constructs a new Parser.
+     */
     public Parser() {
         this.bye = false;
     }
 
+    /**
+     * Getter for the bye field.
+     * Used to indicate that the parser received a bye.
+     * @return the value of bye
+     */
     public boolean isBye() {
         return this.bye;
     }
 
+    /**
+     * Parse the input as given, construct the appropriate command with content, if any.
+     * @param input the command string to be parsed from the user
+     * @return the appropriate command with content and dates, if any
+     * @throws DukeException.InvalidCommand if there is no command found
+     * @throws DukeException.InvalidTask if the task specified for done or delete is invalid
+     * @throws DukeException.EmptyDescription if the description for a task is empty
+     * @throws DukeException.EmptyDeadlineDate if the command is deadline and no date is specified
+     * @throws DukeException.EmptyEventDate if the command is event and both dates are not specified
+     * @throws DukeException.InvalidEventEnd if the command is event and the end is before the start
+     */
     public Command parseInput(final String input) throws
             DukeException.InvalidCommand,
             DukeException.InvalidTask,

@@ -34,5 +34,8 @@ public final class DukeString {
     public static final String EXCEPTION_STORAGE_READ_ERROR =
             "Sorry, there has been an error reading your tasks.\nMaking a copy of your tasks at data/duke.bak.";
     public static final String EXCEPTION_STORAGE_WRITE_ERROR = "Sorry, there has been an error writing your tasks.";
-    private DukeString() { }
+
+    private DukeString() {
+
+    }
 }

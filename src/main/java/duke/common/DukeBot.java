@@ -14,6 +14,11 @@ public class DukeBot {
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * Constructs a new DukeBot with the associated input scanner, saving to the specified path.
+     * @param sc the scanner with the input stream to be parsed
+     * @param path the path of the save file for persistent storage
+     */
     public DukeBot(final Scanner sc, final String path) {
         this.scanner = sc;
         this.parser = new Parser();
@@ -21,6 +26,9 @@ public class DukeBot {
         this.taskList = this.storage.readTasks();
     }
 
+    /**
+     * Starts the input loop with the associated input stream, ending only on a bye command.
+     */
     public void run() {
         Command command;
 

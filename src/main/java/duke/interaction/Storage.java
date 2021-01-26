@@ -15,10 +15,20 @@ import duke.task.TaskList;
 public class Storage {
     private final File saveFile;
 
+    /**
+     * Construct a new Storage object with the associated save path.
+     * Does not attempt to create file until a write is called.
+     * @param filePath the path of the file to be used for persistent storage
+     */
     public Storage(String filePath) {
         this.saveFile = new File(filePath);
     }
 
+    /**
+     * Read the tasks from the given save file, if it exists and can be read. Otherwise, return an empty TaskList.
+     * If the file is malformed, create a backup of the file before proceeding with empty TaskList.
+     * @return the TaskList as read from the save file, if it exists and can be read. Otherwise, return empty TaskList
+     */
     public TaskList readTasks() {
         try (Scanner sc = new Scanner(saveFile)) {
             return TaskList.deserialise(sc);
@@ -37,6 +47,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the given TaskList out to file, if valid. Otherwise, creates a new file.
+     * @param taskList the task list to be written out
+     */
     public void writeTasks(TaskList taskList) {
         this.saveFile.getParentFile().mkdirs();
 

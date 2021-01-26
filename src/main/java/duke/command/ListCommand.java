@@ -5,6 +5,11 @@ import duke.task.TaskList;
 
 public class ListCommand implements Command {
 
+    /**
+     * Formats the task list into a human readable format
+     * @param taskList the task list to be read by the command
+     * @return a formatted version of the task list, as a String
+     */
     @Override
     public String execute(final TaskList taskList) {
         if (taskList.size() != 0) {

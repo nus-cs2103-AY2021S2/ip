@@ -4,13 +4,21 @@ public abstract class Task {
     protected final String description;
     protected boolean isDone;
 
-    public Task(final String desc) {
+    protected Task(final String desc) {
         this.description = desc;
         this.isDone = false;
     }
 
+    /**
+     * Serialise this task into a format that can be saved.
+     * Implementation dependent.
+     * @return a serialised version of the task, implementation dependent.
+     */
     public abstract String serialise();
 
+    /**
+     * Marks this task as done.
+     */
     public void markDone() {
         isDone = true;
     }
