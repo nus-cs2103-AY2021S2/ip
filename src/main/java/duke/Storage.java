@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,7 +37,7 @@ public class Storage {
         }
     }
 
-    protected ArrayList<Task> loadData() throws DukeException {
+    public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> ledger = new ArrayList<>(100);
         try {
             BufferedReader bufferedReader = Files.newBufferedReader(saveFilePath);
@@ -50,7 +52,7 @@ public class Storage {
         return ledger;
     }
 
-    protected static void saveData(ArrayList<Task> tasks) throws DukeException {
+    public void saveData(ArrayList<Task> tasks) throws DukeException {
         try {
             ArrayList<String> ledger = new ArrayList<>();
             for(Task t : tasks) {
