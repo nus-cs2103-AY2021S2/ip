@@ -2,7 +2,6 @@ package mike;
 
 import command.Command;
 import exception.MikeCommandExecutionException;
-import exception.MikeInvalidInputException;
 
 public class Mike {
 

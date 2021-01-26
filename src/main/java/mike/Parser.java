@@ -1,13 +1,14 @@
 package mike;
 
-import command.Command;
 import command.ByeCommand;
+import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.EventCommand;
 import command.ListCommand;
 import command.TodoCommand;
+import command.FindCommand;
 import exception.MikeInvalidInputException;
 
 import java.time.LocalDateTime;
