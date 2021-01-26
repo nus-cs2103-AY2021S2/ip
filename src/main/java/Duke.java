@@ -1,45 +1,36 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-
 public class Duke {
-	private TaskList tasks;
-	private Ui ui;
-	private Storage storage;
-	private boolean isActive;
-	
-	public Duke(String filepath) {
+    private TaskList tasks;
+    private Ui ui;
+    private Storage storage;
+    private boolean isActive;
+    
+    public Duke(String filepath) {
         this.ui = new Ui();
-		this.storage = new Storage(filepath);
-		this.isActive = true;
+        this.storage = new Storage(filepath);
+        this.isActive = true;
 
-		try {
-			tasks = new TaskList(storage.load());
-		} catch (DukeException e) {
-			ui.showError(e);
-			this.tasks = new TaskList();
-		}
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showError(e);
+            this.tasks = new TaskList();
+        }
     }
-	
+    
     public static void main(String[] args) {
-		Duke duke = new Duke("savedata.txt");
-		duke.run();
-	}
+        Duke duke = new Duke("savedata.txt");
+        duke.run();
+    }
 
-	public void run() {
-		// display welcome sequence
-		ui.welcome();
+    public void run() {
+        // display welcome sequence
+        ui.welcome();
 
-		String userInput;
+        String userInput;
         // loop until the user exits
         while (isActive) {
-			// get user input
-			userInput = ui.readCommand();
+            // get user input
+            userInput = ui.readCommand();
             try {
                 // display list
                 if (userInput.toLowerCase().equals("list")) {
@@ -53,7 +44,7 @@ public class Duke {
                     } else {
                         finishTask(tasks.get(idx));
                     }
-				// manually remove task
+                // manually remove task
                 } else if (userInput.toLowerCase().matches("^(delete|remove) \\d+$")) {
                     String[] bits = userInput.split(" ");
                     int idx = Integer.parseInt(bits[1]);
@@ -64,9 +55,9 @@ public class Duke {
                     }
                 // add task to list
                 } else if (userInput.toLowerCase().matches("^(todo|deadline|event)( .+)?$")) {
-					addTask(Parser.parseTask(userInput), true);
-				} else if (userInput.toLowerCase().equals("bye")) {
-                	endSession();
+                    addTask(Parser.parseTask(userInput), true);
+                } else if (userInput.toLowerCase().equals("bye")) {
+                    endSession();
                 } else {
                     throw new DukeException("I don't understand that command!");
                 }
@@ -74,43 +65,43 @@ public class Duke {
                 ui.borderPrint(e.getMessage());
             }
         }
-		
-		// exit sequence
-		ui.quit();
+        
+        // exit sequence
+        ui.quit();
     }
 
-	private void addTask(Task task, boolean isVerbose) throws DukeException {
-		tasks.add(task);
-		if (isVerbose) {
-			String msg = String.format("I've added this task: %s\nYou now have %d items on your todo list.",
-					task.toString(),
-					tasks.size());
-			ui.borderPrint(msg);
-		}
-		storage.saveTasks(tasks);
-	}
-	
-	private void finishTask(Task task) throws DukeException {
-		if (task.isDone()) {
-			throw new DukeException("That task's already done!");
-		} else {
-			task.finish();
-			String msg = String.format("Congrats! The following task has been marked as done:\n  %s",
-					task.toString());
-			ui.borderPrint(msg);
-		}
-		storage.saveTasks(tasks);
-	}
-	
-	private void deleteTask(int idx) throws DukeException {
-		String msg = String.format("Removed task: %s\nYou now have %d items on your todo list.",
-				tasks.remove(idx).toString(),
-				tasks.size());
-		ui.borderPrint(msg);
-		storage.saveTasks(tasks);
-	}
+    private void addTask(Task task, boolean isVerbose) throws DukeException {
+        tasks.add(task);
+        if (isVerbose) {
+            String msg = String.format("I've added this task: %s\nYou now have %d items on your todo list.",
+                    task.toString(),
+                    tasks.size());
+            ui.borderPrint(msg);
+        }
+        storage.saveTasks(tasks);
+    }
+    
+    private void finishTask(Task task) throws DukeException {
+        if (task.isDone()) {
+            throw new DukeException("That task's already done!");
+        } else {
+            task.finish();
+            String msg = String.format("Congrats! The following task has been marked as done:\n  %s",
+                    task.toString());
+            ui.borderPrint(msg);
+        }
+        storage.saveTasks(tasks);
+    }
+    
+    private void deleteTask(int idx) throws DukeException {
+        String msg = String.format("Removed task: %s\nYou now have %d items on your todo list.",
+                tasks.remove(idx).toString(),
+                tasks.size());
+        ui.borderPrint(msg);
+        storage.saveTasks(tasks);
+    }
 
-	private void endSession() {
-		isActive = false;
-	}
+    private void endSession() {
+        isActive = false;
+    }
 }
