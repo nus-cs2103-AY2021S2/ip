@@ -1,11 +1,19 @@
 public abstract class Command {
     protected String[] details;
     protected Input taskType;
+    protected boolean isExit;
 
-    public Command() {}
+    public Command() {
+        this.isExit = false;
+    }
 
     public Command(String[] details) {
         this.details = details;
+        this.isExit = false;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 
     public abstract void execute (TaskList taskList, Ui ui, Storage storage);

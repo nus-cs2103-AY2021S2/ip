@@ -1,9 +1,11 @@
 public class Parser {
 
-    public Command parse(String input) {
+    public static Command parse(String input) {
         String[] splitInput = input.split(" ", 2);
         splitInput[0] = splitInput[0].toUpperCase();
         Input command = checkCommand(splitInput[0]);
+        splitInput[0] = command.name();
+        System.out.println("AAA");
         switch(command) {
         case LIST:
             return new ListCommand(splitInput);
@@ -21,7 +23,7 @@ public class Parser {
         }
     }
 
-    private Input checkCommand(String command) {
+    private static Input checkCommand(String command) {
         try {
             return Input.valueOf(command);
         } catch (IllegalArgumentException e) {

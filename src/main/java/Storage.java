@@ -9,11 +9,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() {
+    public TaskList load() {
         //Dukedata/tasklist.txt
         File tasks = new File(filePath);
         System.out.println("1");
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList(new ArrayList<Task>());
         boolean newFile = false;
         try {
             if (tasks.createNewFile()) {
@@ -54,12 +54,12 @@ public class Storage {
         }
     }
 
-    public List<Task> deserialize() {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList deserialize() {
+        TaskList taskList = new TaskList(new ArrayList<Task>());
         try {
             FileInputStream fileInputStream = new FileInputStream(filePath);
             ObjectInputStream objInputStream = new ObjectInputStream(fileInputStream);
-            taskList = (ArrayList<Task>) objInputStream.readObject();
+            taskList = (TaskList) objInputStream.readObject();
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
         } catch (IOException e) {

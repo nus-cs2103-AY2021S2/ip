@@ -6,14 +6,14 @@ public class AddCommand extends Command{
     }
 
     public Task makeTask() {
-        String[] splitInfo = details[1].split("", 2);
+        String[] splitInfo = details[1].split(" ", 3);
         switch(taskType) {
         case TODO:
             return new ToDo(details[1]);
         case EVENT:
-            return new Event(splitInfo[0], splitInfo[1]);
+            return new Event(splitInfo[0], splitInfo[2]);
         case DEADLINE:
-            return new Deadline(splitInfo[0], splitInfo[1]);
+            return new Deadline(splitInfo[0], splitInfo[2]);
         default:
             return new ToDo("This task should not have appeared!");
         }

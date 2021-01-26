@@ -11,12 +11,15 @@ public class ListCommand extends Command {
             case "-d":
                 System.out.println("These are the deadlines in your list:\n"
                         + taskList.filterByTask("Deadline"));
+                break;
             case "-e":
                 System.out.println("These are the events in your list:\n"
                         + taskList.filterByTask("Event"));
+                break;
             case "-t":
-                System.out.println("These are the events in your list:\n"
-                        + taskList.filterByTask("Event"));
+                System.out.println("These are the todos in your list:\n"
+                        + taskList.filterByTask("ToDo"));
+                break;
             default:
                 System.out.println("Bruh! Only use -d, -e, -t to get the specific type"
                         + "of task you want!");

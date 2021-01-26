@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TaskList {
+public class TaskList implements Serializable {
     private List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
@@ -54,7 +55,7 @@ public class TaskList {
         String list = "";
         for (int i = 0; i < taskList.size(); i++) {
             String rank = String.valueOf(i + 1);
-            list = rank + "." + taskList.get(i);
+            list = list + rank + "." + taskList.get(i) + "\n";
         }
         return list;
     }
