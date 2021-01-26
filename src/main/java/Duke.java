@@ -1,4 +1,7 @@
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -107,9 +110,11 @@ public class Duke {
         if (!matcher.find()) {
             throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
         }
-        String deadline = matcher.group();
 
-        return new Deadline(taskName, deadline);
+        String deadlineStr = matcher.group();
+        LocalDateTime deadlineOfTask = parseDateStr(deadlineStr);
+
+        return new Deadline(taskName, deadlineOfTask);
     }
 
     public static Event createEventTask(String input) throws DukeException {
@@ -127,9 +132,11 @@ public class Duke {
         if (!matcher.find()) {
             throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
         }
-        String time = matcher.group();
 
-        return new Event(taskName, time);
+        String timeStr = matcher.group();
+        LocalDateTime timeOfEvent = parseDateStr(timeStr);
+
+        return new Event(taskName, timeOfEvent);
     }
 
     public static void markTaskAsDone(String input, ArrayList<Task> tasks) throws DukeException {
@@ -170,6 +177,19 @@ public class Duke {
             throw new DukeException("Please delete a task that exists in the list. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be deleted.");
         } catch (NumberFormatException numberFormatException) {
             throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+        }
+    }
+
+    public static LocalDateTime parseDateStr(String dateStr) throws DukeException {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateStr, formatter);
+            if (dateTime.isBefore(LocalDateTime.now())) {
+                throw new DukeException("Please enter a date/time in the future.");
+            }
+            return dateTime;
+        } catch (DateTimeParseException dateTimeParseException) {
+            throw new DukeException("Please format your date as such: 15/01/2021 1845 (day/month/year time in 24H format)");
         }
     }
 
