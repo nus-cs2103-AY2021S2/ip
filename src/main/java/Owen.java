@@ -18,7 +18,7 @@ public class Owen implements Chatbot {
     private static final String STORAGE_PATH = "data/owen.txt";
 
     private final boolean isRunning;
-    private final Response latestResponse;
+    private final String latestResponse;
     private final TaskList taskList;
     private final Storage storage;
 
@@ -36,13 +36,13 @@ public class Owen implements Chatbot {
                 + " VV-VV \n";
         stringBuilder.append(logo);
         stringBuilder.append("\nHello I am Owen the Owl!");
-        this.latestResponse = new DefaultResponse(stringBuilder.toString());
+        this.latestResponse = stringBuilder.toString();
 
         this.storage = new Storage(STORAGE_PATH);
         this.taskList = this.storage.readTaskList();
     }
 
-    private Owen(boolean isRunning, Response latestResponse, TaskList taskList, Storage storage) {
+    private Owen(boolean isRunning, String latestResponse, TaskList taskList, Storage storage) {
         this.isRunning = isRunning;
         this.latestResponse = latestResponse;
         this.taskList = taskList;
@@ -51,7 +51,7 @@ public class Owen implements Chatbot {
 
     @Override
     public Owen shutdown() {
-        Response shutdownResponse = new DefaultResponse("Bye. Hope to see you again soon!");
+        String shutdownResponse = "Bye. Hope to see you again soon!";
         return new Owen(false, shutdownResponse, this.taskList, this.storage);
     }
 
@@ -61,7 +61,7 @@ public class Owen implements Chatbot {
     }
 
     @Override
-    public Response getResponse() {
+    public String getResponse() {
         return this.latestResponse;
     }
 
@@ -102,7 +102,7 @@ public class Owen implements Chatbot {
                 throw new OwenException("I'm sorry, but I don't know what that means...");
             }
         } catch (OwenException exception) {
-            Response exceptionResponse = new DefaultResponse(exception.getMessage());
+            String exceptionResponse = exception.getMessage();
             return new Owen(this.isRunning, exceptionResponse, this.taskList, this.storage);
         }
     }
@@ -122,22 +122,22 @@ public class Owen implements Chatbot {
                 + "Got it. I've added this task:\n"
                 + "    %s\n"
                 + "Now you have %d tasks in the list.";
-        Response addResponse = new DefaultResponse(String.format(
-                addedFormat, addedTaskList.getTask(numTasks), numTasks));
-        Storage addStorage = this.storage.writeTaskList(addedTaskList);
-        return new Owen(this.isRunning, addResponse, addedTaskList, addStorage);
+        String addedResponse = String.format(
+                addedFormat, addedTaskList.getTask(numTasks), numTasks);
+        Storage addedStorage = this.storage.writeTaskList(addedTaskList);
+        return new Owen(this.isRunning, addedResponse, addedTaskList, addedStorage);
     }
 
     private Owen listTasks() {
-        Response listResponse = new DefaultResponse(this.taskList.toString());
+        String listResponse = this.taskList.toString();
         return new Owen(this.isRunning, listResponse, this.taskList, this.storage);
     }
 
     private Owen doneTask(int taskNumber) throws OwenException {
         TaskList doneTaskList = this.taskList.markAsDone(taskNumber);
         String doneFormat = "Nice! I've marked this task as done:\n    %s";
-        Response doneResponse = new DefaultResponse(String.format(
-                doneFormat, doneTaskList.getTask(taskNumber).toString()));
+        String doneResponse = String.format(
+                doneFormat, doneTaskList.getTask(taskNumber).toString());
         Storage doneStorage = this.storage.writeTaskList(doneTaskList);
         return new Owen(this.isRunning, doneResponse, doneTaskList, doneStorage);
     }
@@ -149,8 +149,8 @@ public class Owen implements Chatbot {
                 + "    %s\n"
                 + "Now you have %d tasks in the list.";
         int newNumTasks = deleteTaskList.getNumTasks();
-        Response deleteResponse = new DefaultResponse(String.format(
-                deleteFormat, this.taskList.getTask(taskNumber), newNumTasks));
+        String deleteResponse = String.format(
+                deleteFormat, this.taskList.getTask(taskNumber), newNumTasks);
         Storage deleteStorage = this.storage.writeTaskList(deleteTaskList);
         return new Owen(this.isRunning, deleteResponse, deleteTaskList, deleteStorage);
     }

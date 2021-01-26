@@ -16,9 +16,9 @@ public interface Chatbot {
 
     /**
      * Gets latest response from the chatbot.
-     * @return Latest formatted response from the chatbot.
+     * @return Latest response from the chatbot.
      */
-    public Response getResponse();
+    public String getResponse();
 
     /**
      * Parses command and returns chatbot with updated state.

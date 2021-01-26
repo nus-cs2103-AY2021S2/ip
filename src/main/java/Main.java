@@ -1,19 +1,16 @@
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         Chatbot owen = new Owen();
-        Response response = owen.getResponse();
-        System.out.println(response);
+        Ui ui = new Ui();
 
-        Scanner scanner = new Scanner(System.in);
+        String response = owen.getResponse();
+        ui.outputResponse(response);
 
         while (owen.isRunning()) {
-            String command = scanner.nextLine();
+            String command = ui.getInput();
             owen = owen.parseCommand(command);
-            System.out.println(owen.getResponse().getFormattedResponse());
+            response = owen.getResponse();
+            ui.outputResponse(response);
         }
-
-        scanner.close();
     }
 }
