@@ -19,6 +19,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     */
     public void run() {
         ui.showLine();
         ui.showWelcome();

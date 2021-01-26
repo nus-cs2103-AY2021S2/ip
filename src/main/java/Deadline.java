@@ -1,3 +1,7 @@
+/**
+ * A subclass of task that has an extra variable to keep track of date and overrides toString() method of
+ * <code>Task</code>
+ */
 public class Deadline extends Task {
 
     protected String by;

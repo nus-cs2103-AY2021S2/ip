@@ -2,12 +2,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Takes in user input and makes sense of it for the program
+ */
 public class Parser {
 
     public Parser() {
 
     }
 
+    /**
+     * Checks whether the command is invalid
+     * @param taskType the first word of the input
+     * @throws InvalidCommandException is thrown when there is an error related to unknown command
+     */
     void invalidCommandChecker(String taskType) throws InvalidCommandException {
         if (!(taskType.equals("todo") || taskType.equals("done") || taskType.equals("list") || taskType.equals("event")
                 || taskType.equals("deadline") || taskType.equals("delete") || taskType.equals("bye"))) {
@@ -15,22 +23,43 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether the command has an empty description
+     * @param tokens specifies an array of the user input
+     * @throws EmptyDescriptionException  is thrown when there is an error related to an empty description after a command
+     */
     void emptyDescriptionChecker(String[] tokens) throws EmptyDescriptionException {
         if (tokens.length < 2) {
             throw new EmptyDescriptionException("Sorry, nothing was written after the command so I am unable to process...");
         }
     }
 
+    /**
+     * Converts the date to a suitable format so that the program is able to understand
+     * @param date Date in the format of yyyy-mm-dd
+     * @return Returns the date in (MMM d yyyy) format in String
+     */
     public String parseDate(String date) {
         LocalDate d1 = LocalDate.parse(date);
         return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Converts the time to a suitable format so that the program is able to understand
+     * @param time time in the format of (hh:mm) in 24 hour time
+     * @return Returns the time in (hh:mm a) format in String
+     */
     public String parseTime(String time) {
         return LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"))
                 .format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
+    /**
+     * Makes sense of the command given in string for the program to be able to take action
+     * @param fullCommand the entire string of the user input
+     * @return Returns a <code>Command</code> that specifies what the user is asking the program to do
+     * @throws DukeException is thrown when there is an error related to duke
+     */
     public Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split(" ", 2);
         String taskType = tokens[0];

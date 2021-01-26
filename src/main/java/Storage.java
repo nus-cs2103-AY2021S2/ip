@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from a file and saving tasks to the file
+ */
 public class Storage {
 
     String filePath;
@@ -20,6 +23,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Scans the file and save the tasks into an ArrayList of Task
+     * @throws FileNotFoundException is thrown when there the file could not be found
+     */
     void scanTaskList() throws FileNotFoundException {
         Scanner sc = new Scanner(myFile);
 
@@ -48,6 +55,12 @@ public class Storage {
             tasks.add(task);
         }
     }
+
+    /**
+     * Stores the <code>TaskList</code> into a file
+     * @param tasklist A class that stores the ArrayList of <code>Tasks</code>
+     * @throws IOException is thrown when there is an error related to input and output
+     */
     public void writeToFile(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         ArrayList<Task> tasks = tasklist.getList();
@@ -57,6 +70,10 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads the ArrayList
+     * @return Returns the ArrayList of <code>Task</code>
+     */
     public ArrayList<Task> load() {
         return tasks;
     }
