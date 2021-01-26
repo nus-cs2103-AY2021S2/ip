@@ -32,7 +32,7 @@ public class Duke {
      * Check for keywords at the start of the input such as "list", "todo", "deadline",
      * "events" and perform different action base on it.
      * 
-     * @throws DukeException
+     * @throws DukeException If there is any error with duke.
      */
     public void run() throws DukeException {
         // Output initial greeting before asking for input

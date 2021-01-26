@@ -15,10 +15,10 @@ public class Event extends Task {
     private final LocalDateTime at;
 
     /**
-     * Constructor for the Event task, specificing the description of the task and
+     * Constructor for the Event task, specifying the description of the task and
      * the date time to be completed at.
-     * @param description
-     * @param at
+     * @param description Description of the event task.
+     * @param at Date time for the event to be completed at.
      */
     public Event(String description, LocalDateTime at) {
         super(description);
@@ -26,11 +26,11 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for the Event task, specificing the description of the task,
+     * Constructor for the Event task, specifying the description of the task,
      * the date time to be completed at and whether the task has been completed.
-     * @param description
-     * @param at
-     * @param isDone
+     * @param description Description of the event task.
+     * @param at Date time for the event to be completed at.
+     * @param isDone Determine whether the task is done or not.
      */
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);

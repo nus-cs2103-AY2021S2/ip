@@ -12,7 +12,7 @@ public class Task {
     /**
      * Constructor for the task, specifying the description.
      * By default, the task is not done yet.
-     * @param description
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -22,7 +22,7 @@ public class Task {
     /**
      * Constructor for the task, specifying the description and whether the task is done.
      * 
-     * @param description
+     * @param description Description of the task.
      */
     public Task(String description, boolean isDone) {
         this.description = description;

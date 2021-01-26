@@ -9,19 +9,20 @@ package Duke;
 public class ToDo extends Task {
 
     /**
-     * Constructor for the Deadline task, specificing the description of the task.
-     * @param description
+     * Constructor for the Deadline task, specifying the description of the task.
+     *
+     * @param description Description of the to do task.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Constructor for the Deadline task, specificing the description of the task and
+     * Constructor for the Deadline task, specifying the description of the task and
      * whether the task has been completed.
      * 
-     * @param description
-     * @param isDone
+     * @param description Description of the to do task.
+     * @param isDone Determine whether the task is done or not.
      */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);

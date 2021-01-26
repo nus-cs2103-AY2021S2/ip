@@ -11,7 +11,7 @@ public class TaskList {
     
     ArrayList<Task> taskList;
 
-    /** Consturctor to create an empty task list. */
+    /** Constructor to create an empty task list. */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
