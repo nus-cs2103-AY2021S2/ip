@@ -1,0 +1,4 @@
+D | 0 | read book | Someday
+E | 0 | cs2103 lecture | next Thursday
+D | 1 | cs2103 assignment | Thursday 2359
+E | 1 | cs2103 lecture | this Thursday too!! :566&:$$
