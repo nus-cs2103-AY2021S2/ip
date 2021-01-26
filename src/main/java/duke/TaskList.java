@@ -54,5 +54,17 @@ public class TaskList {
 	public Task getTask(int i) {
 		return taskList.get(i);
 	}
-	
+
+	public boolean equals(TaskList tl) {
+		if (this.count() == tl.count()) {
+			for (int i = 0; i < this.count(); i++) {
+				if (!this.taskList.get(i).equals(tl.getTask(i)))
+					return false;
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

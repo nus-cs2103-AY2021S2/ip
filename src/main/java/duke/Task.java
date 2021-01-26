@@ -44,7 +44,27 @@ public class Task {
 	public void mark() {
 		done = true;
 	}
-	
+
+	public boolean equals(Task t) {
+		if (this.type == t.type) {
+			if (!this.name.equals(t.name))
+				return false;
+
+			if (this.type == 'D' || this.type == 'E') {
+				if (this.dateTime.compareTo(t.dateTime) != 0)
+					return false;
+			}
+
+			if (this.done != t.done)
+				return false;
+
+			return true;
+
+		} else {
+			return false;
+		}
+	}
+
 	public String toString() {
 		
 		String str = "["+type+"]";
