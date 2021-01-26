@@ -68,6 +68,20 @@ public class Parser {
                 response.append(" duke.tasks in the list.");
             } else if (fullCommand.startsWith("on")) {
                 // TODO: Implement a command that fetches all deadlines on a given date
+            } else if (fullCommand.startsWith("find")) {
+                String query = fullCommand.split(" ", 2)[1];
+                response.append("Here are the matching tasks in your list:\n");
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task task = tasks.get(i);
+                    if (task.contains(query)) {
+                        response.append(i + 1);
+                        response.append(".");
+                        response.append(task);
+                        if (i != tasks.size() - 1) {
+                            response.append("\n");
+                        }
+                    }
+                }
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

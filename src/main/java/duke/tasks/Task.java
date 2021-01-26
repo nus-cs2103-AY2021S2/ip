@@ -22,6 +22,10 @@ public class Task {
         this.status = completion ? TaskStatus.COMPLETED : TaskStatus.PENDING;
     }
 
+    public boolean contains(String query) {
+        return this.description.contains(query);
+    }
+
     public boolean isComplete() {
         return this.status == TaskStatus.COMPLETED;
     }
