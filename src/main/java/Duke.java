@@ -325,7 +325,7 @@ public class Duke {
         // should be rearranged elesewhere
         try {
             Save.setupTasksFile();
-            Todo.main(new String[]{});
+            Deadline.main(new String[]{});
         } catch (IOException e) {
             e.printStackTrace();
         }
