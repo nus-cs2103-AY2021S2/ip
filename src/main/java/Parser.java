@@ -113,6 +113,15 @@ public class Parser {
         }
     }
 
+    public String parseFindTask(String commandText) throws DukeException {
+        String[] command = commandText.split(" ", 2);
+        if(command.length == 1 || command[1].isBlank()) {
+            throw new DukeException("OOPS!!! There is no matching task.");
+        } else{
+            return command[1];
+        }
+    }
+
     public boolean isValidTime(String time) throws DukeException {
         try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm", Locale.ENGLISH);
