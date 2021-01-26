@@ -9,17 +9,17 @@ What can I do for you?
 
 ☺ Got it. I've added this task:
 [D][ ] homework (by: 12 jan)
-Now you have 1 tasks in the list.
+Now you have 1 duke.tasks in the list.
 
 
 ☺ Got it. I've added this task:
 [T][ ] eat medicine
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 
 
 ☺ Got it. I've added this task:
 [E][ ] shopping (at: orchard)
-Now you have 3 tasks in the list.
+Now you have 3 duke.tasks in the list.
 
 
 ☺ Nice! I've marked this task as done:
@@ -28,5 +28,5 @@ Now you have 3 tasks in the list.
 
 ☺ Noted. I've removed this task:
 [T][✓] eat medicine
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 
