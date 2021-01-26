@@ -21,9 +21,9 @@ public class ListCommand extends Command{
             throw new DukeException("Your task list is empty.");
         }
 
-        //Clone the task list for filtering
+        //Clone the duke.task list for filtering
         TaskList printTaskList = taskList.clone();
-        //If there is date in the command, only display the events or deadlines on the particular date.
+        //If there is date in the duke.command, only display the events or deadlines on the particular date.
         if (date != null) {
             if(!date.isEmpty() || !date.isBlank())
                 printTaskList = printTaskList.filterByDate(date);

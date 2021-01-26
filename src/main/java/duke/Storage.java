@@ -16,8 +16,9 @@ public class Storage {
     public Storage(String filePath) {
         file = new File(filePath);
         File folder = file.getParentFile();
-        if (!folder.exists())
+        if (!folder.exists()) {
             folder.mkdir();
+        }
     }
 
     public List<Task> load() throws DukeException {

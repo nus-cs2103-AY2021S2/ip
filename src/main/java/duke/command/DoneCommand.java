@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int listSize = taskList.size();
         if (listSize <= 0) {
-            throw new DukeException("Your tasks list is empty.");
+            throw new DukeException("Your task list is empty.");
         }
 
         if (index < 0 || index >= listSize) {
