@@ -1,3 +1,6 @@
 [T][X] cry
 [T][X] shout
 [D][ ] hw (by: 2019-12-01)
+[T][X] eat
+[T][ ] cry
+[E][ ] work (at: home)
