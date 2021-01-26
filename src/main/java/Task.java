@@ -11,6 +11,10 @@ class Task {
         return description;
     }
 
+    boolean getIsDone() {
+        return isDone;
+    }
+
     String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick or X symbols
     }
