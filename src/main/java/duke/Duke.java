@@ -1,5 +1,10 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 /**
- * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * duke.Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 
 public class Duke {

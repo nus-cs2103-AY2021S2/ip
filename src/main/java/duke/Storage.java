@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +20,7 @@ public class Storage {
             folder.mkdir();
     }
 
-    List<Task> load() throws DukeException {
+    public List<Task> load() throws DukeException {
         Scanner sc = null;
         try {
             sc = new Scanner(file);
@@ -46,7 +50,7 @@ public class Storage {
         return taskList;
     }
 
-    void saveFile(TaskList taskList) throws DukeException {
+    public void saveFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(taskList.toStorageString());
