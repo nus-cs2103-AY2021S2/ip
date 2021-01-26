@@ -24,7 +24,7 @@ public class Parser {
             ui.showBye();
             break;
         case "list":
-            taskList.displayList();
+            ui.showList(taskList.list, false);
             break;
         case "done":
             // To get the index
@@ -65,6 +65,14 @@ public class Parser {
             } else {
                 throw new NoSuchElementException("☹ OOPS!!! The description of"
                         + " an event cannot be empty.");
+            }
+            break;
+        case "find":
+            String searchString = sc.nextLine();
+            if (!searchString.equals("")) {
+                ui.showList(taskList.searchTask(searchString.trim()), true);
+            } else {
+                throw new NoSuchElementException("    ☹ OOPS!!! The search keyword cannot be empty.");
             }
             break;
         case "delete":
