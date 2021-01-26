@@ -77,9 +77,6 @@ public class AddTask extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (this.commandDetails.equals("")) {
-            throw new DukeException(ExceptionType.BLANK_DESCRIPTION, this.commandType);
-        }
         handleNewTask(taskList);
         storage.saveData(taskList);
         ui.display(this.outputMessage);
