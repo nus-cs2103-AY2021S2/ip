@@ -14,6 +14,9 @@ public class ToDoCommand extends Command {
         this.todo = todo;
     }
 
+    /**
+     * Adds a ToDo task with previously specified description to taskList.
+     */
     @Override
     public void execute() {
         ToDo t = new ToDo(this.todo);

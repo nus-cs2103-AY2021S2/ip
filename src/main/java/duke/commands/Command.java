@@ -17,6 +17,10 @@ public abstract class Command {
 
     public abstract void execute();
 
+    /**
+     * Returns signal to indicate if command is end of program.
+     * @return boolean signal to indicate end of program.
+     */
     public boolean isExit() {
         return false;
     }

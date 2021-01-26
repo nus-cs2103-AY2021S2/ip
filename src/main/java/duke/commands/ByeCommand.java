@@ -1,12 +1,10 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
-import duke.utils.FileTaskStringConverter;
 import duke.utils.Storage;
 import duke.utils.Ui;
 
 import java.io.IOException;
-import java.util.List;
 
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
@@ -15,6 +13,9 @@ public class ByeCommand extends Command {
         super(taskList, ui, storage);
     }
 
+    /**
+     * Saves all Tasks in taskList to local file, and then prints exit message.
+     */
     @Override
     public void execute() {
         try {
@@ -26,6 +27,10 @@ public class ByeCommand extends Command {
         }
     }
 
+    /**
+     * Returns signal indicating to exit the program.
+     * @return boolean signal indicating to exit the program.
+     */
     @Override
     public boolean isExit() {
         return true;

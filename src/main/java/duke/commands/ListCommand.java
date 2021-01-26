@@ -11,6 +11,9 @@ public class ListCommand extends Command {
         super(taskList, ui, storage);
     }
 
+    /**
+     * Prints all tasks in taskList.
+     */
     @Override
     public void execute() {
         this.taskList.printList();

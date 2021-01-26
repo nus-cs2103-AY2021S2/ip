@@ -18,6 +18,9 @@ public class DeadlineCommand extends Command {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Adds a Deadline task with previously specified description and dateTime to taskList.
+     */
     @Override
     public void execute() {
         Deadline d = new Deadline(this.task, this.dateTime);
