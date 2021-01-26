@@ -37,23 +37,28 @@ public class Ui {
         return this.readLine();
     }
 
-    public void printTask(String numbering, String task){
+    public void printTask(String numbering, String task) {
         System.out.printf("%2s %s\n", numbering, task);
     }
 
-    private void printTaskNum(int numTasks) {
+    private void printExecuteResult(String message, String task , int numTasks, String numbering) {
+        System.out.println(message);
+        printTask(numbering,task);
         System.out.printf("Now you have %d task in the list\n", numTasks);
     }
 
     public void showSuccessMarkDone(String task, int numTasks) {
-        System.out.println("Got it. I`ve added this task:");
-        this.printTask("", task);
-        printTaskNum(numTasks);
+        String message = "Got it. I`ve added this task:";
+        this.printExecuteResult(message, task, numTasks, "");
     }
 
     public void showSuccessDeleteTask(String task, int numTasks) {
-        System.out.println("Noted. I`ve removed this task:");
-        printTask("", task);
-        printTaskNum(numTasks);
+        String message = "Noted. I`ve removed this task:";
+        this.printExecuteResult(message, task, numTasks, "");
+    }
+
+    public void showSuccessAddTask(String task, int numTasks) {
+        String message = "Got it. I`ve added this task:";
+        this.printExecuteResult(message, task, numTasks, "");
     }
 }
