@@ -1,5 +1,5 @@
 package duke;
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     ByeCommand(String[] parsedAction) {
         super(parsedAction);

@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage{
+public class Storage {
     private String fileUrl;
 
     Storage(String fileUrl) {
         this.fileUrl = fileUrl;
     }
-
 
     public ArrayList<String> load() throws FileNotFoundException {
         File storageFile = new File(fileUrl);
@@ -23,7 +22,6 @@ public class Storage{
         }
         return data;
     }
-
 
     public void store(ArrayList<String> taskList) throws IOException {
         FileWriter fw = new FileWriter(fileUrl);

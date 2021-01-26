@@ -1,7 +1,6 @@
 package duke;
 import java.util.ArrayList;
 
-
 public class DueCommand extends Command {
 
     DueCommand(String[] parsedCommand) {

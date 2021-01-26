@@ -1,7 +1,7 @@
 package duke;
 import java.io.IOException;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     DoneCommand(String[] parsedCommand) {
         super(parsedCommand);
