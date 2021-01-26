@@ -88,4 +88,14 @@ public class TaskManager{
     public ArrayList<Task> getList() {
         return this.list;
     }
+
+    public ArrayList<Task> retrieveMatchingTasks(String keyword) {
+        ArrayList<Task> taskList = new ArrayList<>();
+        for (Task task : list) {
+            if (task.description.contains(keyword)) {
+                taskList.add(task);
+            }
+        }
+        return taskList;
+    }
 }

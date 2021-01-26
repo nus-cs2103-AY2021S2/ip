@@ -59,4 +59,16 @@ public class Ui {
         }
         System.out.println("");
     }
+
+    public void showMatchingTasks(ArrayList<Task> list) {
+        if (list.size() == 0) {
+            System.out.println("Sorry! There are no matching task.");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println((i + 1) + ". " + list.get(i));
+            }
+        }
+        System.out.println("");
+    }
 }

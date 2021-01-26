@@ -11,6 +11,7 @@ public class Parser {
     private final static String DEADLINE = "deadline";
     private final static String LIST = "list";
     private final static String DUE = "due";
+    private final static String FIND = "find";
 
     public static ArrayList<String> parseToStart(ArrayList<String> oldData) {
         ArrayList<String> parsedData = new ArrayList<>();
@@ -43,7 +44,7 @@ public class Parser {
         } else {
             String[] inputArray = input.split(" ", 2);
             String command = inputArray[0];
-            if (command.equals(DELETE) || command.equals(DONE) || command.equals(DUE)) {
+            if (command.equals(DELETE) || command.equals(DONE) || command.equals(DUE) || command.equals(FIND)) {
                 if (inputArray.length == 1) {
                     throw new DukeException("Missing argument! Please try again.");
                 } else if (inputArray.length > 2) {
@@ -51,13 +52,15 @@ public class Parser {
                 } else {
                     try {
                         //Check if the second argument is a valid integer
-                        if(command.equals(DONE) || command.equals(DELETE)) {
+                        if (command.equals(DONE) || command.equals(DELETE)) {
                             Integer.parseInt(inputArray[1]);
                             return command.equals(DELETE) ? new DeleteCommand(inputArray) : new DoneCommand(inputArray);
-                        } else {
+                        } else if (command.equals(DUE)) {
                             //Check if the second argument is a valid date
                             LocalDate.parse(inputArray[1]);
                             return new DueCommand(inputArray);
+                        } else {
+                            return new FindCommand(inputArray);
                         }
                     } catch (NumberFormatException e) {
                         throw new DukeException("Invalid command! Please key in a task number as the second argument.");
