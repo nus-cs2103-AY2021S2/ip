@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Command {
@@ -37,6 +40,7 @@ public class Command {
 
     public List<Task> handleUserCommand(String command) throws DukeException {
         String[] inputs = command.split(" ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         if (inputs.length == 0) {
             throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");
         }
@@ -63,25 +67,33 @@ public class Command {
             list.add(newToDo);
             System.out.println(Aligner.align(newToDo.toString()));
             System.out.println(Aligner.align("Now you have a whopping " + list.size() + " task(s) in the list."));
-        } else if (action.equals("deadline")) {
+        } else if (action.equals("deadline")) { //input format yyyy-mm-dd tttt
             if (inputs.length == 1) {
                 throw new DukeException("OOPS! The description of a deadline cannot be empty.");
             }
             int indexOfDate = command.indexOf("/");
             System.out.println(Aligner.align("Sure! I've added this task:"));
-            String date = command.substring(indexOfDate + 4);
-            Deadline newDeadline = new Deadline(command.substring(9, indexOfDate), date);
+            String dateAndTime = command.substring(indexOfDate + 4);
+            String date = dateAndTime.split(" ")[0];
+            String time = dateAndTime.split(" ")[1];
+            Deadline newDeadline = new Deadline(command.substring(9, indexOfDate), LocalDate.parse(date),
+                    LocalTime.parse(time, formatter));
             list.add(newDeadline);
             System.out.println(Aligner.align(newDeadline.toString()));
             System.out.println(Aligner.align("Now you have a whopping " + list.size() + " task(s) in the list."));
-        } else if (action.equals("event")) {
+        } else if (action.equals("event")) { //input format: yyyy-mm-dd tttt-tttt
             if (inputs.length == 1) {
                 throw new DukeException("OOPS! The description of an event cannot be empty.");
             }
             int indexOfDate = command.indexOf("/");
             System.out.println(Aligner.align("Sure! I've added this task:"));
-            String date = command.substring(indexOfDate + 4);
-            Event newEvent = new Event(command.substring(6, indexOfDate), date);
+
+            String dateAndTime = command.substring(indexOfDate + 4);
+            String date = dateAndTime.split(" ")[0];
+            String startTime = dateAndTime.split(" ")[1].split("-")[0];
+            String endTime = dateAndTime.split(" ")[1].split("-")[1];
+            Event newEvent = new Event(command.substring(6, indexOfDate), LocalDate.parse(date),
+                    LocalTime.parse(startTime, formatter), LocalTime.parse(endTime, formatter));
             list.add(newEvent);
             System.out.println(Aligner.align(newEvent.toString()));
             System.out.println(Aligner.align("Now you have a whopping " + list.size() + " task(s) in the list."));
@@ -91,6 +103,20 @@ public class Command {
             System.out.println(Aligner.align("Alright! I've removed this task:"));
             System.out.println(Aligner.align(removedTask.toString()));
             System.out.println(Aligner.align("Now you have a whopping " + list.size() + " task(s) in the list."));
+        } else if (action.equals("date")) {
+            if (inputs.length == 1) {
+                throw new DukeException("OOPS! Please give me the date that you want to check in YYYY-MM-DD format.");
+            }
+            LocalDate d = LocalDate.parse(inputs[1]);
+            List<Task> toPrint = new ArrayList<>();
+            for (Task t : list) {
+                if (t.getDate() != null && t.getDate().equals(d)) {
+                    toPrint.add(t);
+                }
+            }
+            for (int i = 1; i < toPrint.size() + 1; i++) {
+                System.out.println(Aligner.align(i + "." + toPrint.get(i - 1).toString()));
+            }
         } else {
             throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
         }

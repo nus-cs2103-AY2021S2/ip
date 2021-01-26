@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected final String description;
     protected boolean isDone;
@@ -7,9 +9,17 @@ public class Task {
         this.isDone = false;
     }
 
+
     public String generateText() { return this.description; }
 
     public void markAsDone() {
+
+    public LocalDate getDate() {
+        return null;
+    }
+
+    void markAsDone() {
+
         this.isDone = true;
     }
 
