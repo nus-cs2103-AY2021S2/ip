@@ -67,16 +67,17 @@ public class Snomio extends PrintWriter {
      * This method is exclusive to read the content of the commands with Delimiters (deadline, event)
      *
      * @param command        command to be executed
+     * @param delim          delimiter to split the date from content
      * @return               the content of a task
      * @throws SnomException throws exception if the content is empty
      */
-    public String[] readContentWithDate(String command, String date) throws SnomException {
+    public String[] readContentWithDate(String command, String delim) throws SnomException {
         String content = this.readContent(command);
-        String[] array = content.split(date);
+        String[] array = content.split(delim);
         if(array.length == 2){
             return array;
         }else if(array.length < 2){
-            throw new SnomException("Please enter a valid " + command + " date!");
+            throw new SnomException("Please enter at least one date for your " + command + "!");
         }else{
             throw new SnomException("Oops! You have entered more than ONE date, please try again!");
         }
