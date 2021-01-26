@@ -9,7 +9,7 @@ public class Duke {
     private boolean isRunning;
     private TaskList taskList;
     private final Storage storageHandler;
-    private final String path = "ip/src/main/java/duke/data/TaskListData.txt";
+    private final String path = "./data/TaskListData.txt";
     private Ui ui;
 
     public Duke() {
@@ -29,7 +29,7 @@ public class Duke {
         return isRunning;
     }
 
-    public String getResponse(String input) {
+    public void getResponse(String input) {
         Command command;
         ui.printLine();
         try {
@@ -39,9 +39,8 @@ public class Duke {
             storageHandler.write(taskList);
             ui.printResponse(command.getResponse());
             ui.printLine();
-            return command.getResponse();
         } catch (DukeException | IOException e) {
-            return e.getMessage();
+            ui.printResponse(e.toString());
         }
     }
 

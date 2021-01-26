@@ -60,7 +60,7 @@ public class Storage {
 
     private void createFile(File file) throws DukeException {
         try {
-            file.getParentFile().mkdir();
+            file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
             throw new DukeException("Unable to create new file.");
