@@ -74,4 +74,20 @@ public class TaskList {
         this.list.remove(index);
         return task;
     }
+
+    /**
+     * Finds tasks with name same as some text
+     *
+     * @param text Given text
+     * @return List of tasks
+     */
+    public TaskList find(String text) {
+        TaskList result = new TaskList();
+        for(Task curr : this.list) {
+            if(curr.getName().contains(text)) {
+                result.addTask(curr);
+            }
+        }
+        return result;
+    }
 }

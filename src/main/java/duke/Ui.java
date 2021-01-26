@@ -9,9 +9,9 @@ import java.util.Scanner;
  * Ui class to manage user input and Duke output
  */
 public class Ui {
-    private static final String space = "     ";
-    private static final String divider = "    -------------------------------------------->>>>>\n";
-    public Scanner sc;
+    private static final String SPACE = "     ";
+    private static final String DIVIDER = "    -------------------------------------------->>>>>\n";
+    private final Scanner sc;
 
     /**
      * Ui constructor
@@ -24,15 +24,15 @@ public class Ui {
      * Prints welcome message
      */
     public void printWelcomeText() {
-        System.out.println(divider + space + "Konichiwa~ Watashi wa Duke desu! \n" + space
-                + "What can I do for you today?\n" + divider);
+        System.out.println(DIVIDER + SPACE + "Konichiwa~ Watashi wa Duke desu! \n" + SPACE
+                + "What can I do for you today?\n" + DIVIDER);
     }
 
     /**
      * Prints exit message
      */
     public void printGoodbye() {
-        System.out.println(divider + space + "Sayonara, matta ne~ \n" + divider);
+        System.out.println(DIVIDER + SPACE + "Sayonara, matta ne~ \n" + DIVIDER);
     }
 
     /**
@@ -41,18 +41,18 @@ public class Ui {
      * @param list List of tasks
      */
     public void printList(TaskList list) {
-        String resultString = divider;
+        String resultString = DIVIDER;
 
         if (list.size() == 0) {
-            resultString = resultString + space + "Ara, the list is empty right now!\n";
+            resultString = resultString + SPACE + "Ara, the list is empty right now!\n";
         } else {
-            resultString = resultString + space + "Hai~ Current tasks are: \n";
+            resultString = resultString + SPACE + "Hai~ Current tasks are: \n";
             for (int i = 0; i < list.size(); i++) {
-                resultString = resultString + space + (i + 1) + ". " + list.getTask(i).toString() + "\n";
+                resultString = resultString + SPACE + (i + 1) + ". " + list.getTask(i).toString() + "\n";
             }
         }
 
-        resultString = resultString + divider;
+        resultString = resultString + DIVIDER;
         System.out.println(resultString);
     }
 
@@ -62,7 +62,7 @@ public class Ui {
      * @param text Given text
      */
     public void printText(String text) {
-        System.out.println(divider + space + text + "\n" + divider);
+        System.out.println(DIVIDER + SPACE + text + "\n" + DIVIDER);
     }
 
     /**
@@ -71,8 +71,8 @@ public class Ui {
      * @param task Given task that is marked as done
      */
     public void printCompletedMsg(Task task) {
-        System.out.println(divider + space + "Otsukare! I've marked this task as done: \n" + space + "  "
-                + task.toString() + "\n" + divider);
+        System.out.println(DIVIDER + SPACE + "Otsukare! I've marked this task as done: \n" + SPACE + "  "
+                + task.toString() + "\n" + DIVIDER);
     }
 
     /**
@@ -82,8 +82,8 @@ public class Ui {
      * @param size Number of tasks left in list
      */
     public void printDeleteMsg(Task task, int size) {
-        System.out.println(divider + space + "Yayyyy! I've removed the task: \n" + space + "  " + task.toString() + "\n"
-                + space + "Now you have " + size + " task(s) left!\n" + divider);
+        System.out.println(DIVIDER + SPACE + "Yayyyy! I've removed the task: \n" + SPACE + "  " + task.toString() + "\n"
+                + SPACE + "Now you have " + size + " task(s) left!\n" + DIVIDER);
     }
 
     /**
@@ -93,8 +93,23 @@ public class Ui {
      * @param size Number of tasks now on list
      */
     public void printTask(Task task, int size) {
-        System.out.println(divider + space + "Ayyyyy I've added the task: \n" + space + "  " + task.toString() + "\n"
-                + space + "Now you have " + size + " task(s) in the list.\n" + divider);
+        System.out.println(DIVIDER + SPACE + "Ayyyyy I've added the task: \n" + SPACE + "  " + task.toString() + "\n"
+                + SPACE + "Now you have " + size + " task(s) in the list.\n" + DIVIDER);
+    }
+
+    public void printSearchResults(TaskList taskList) {
+        if (taskList.size() == 0) {
+            System.out.println(DIVIDER + SPACE + "There are no matching results D:\n" + DIVIDER);
+        } else {
+            String resultString = DIVIDER;
+            resultString = resultString + SPACE + "Hai~ The search results are are: \n";
+            for (int i = 0; i < taskList.size(); i++) {
+                resultString = resultString + SPACE + (i + 1) + ". " + taskList.getTask(i).toString() + "\n";
+            }
+            resultString = resultString + DIVIDER;
+            System.out.println(resultString);
+        }
+
     }
 
     /**

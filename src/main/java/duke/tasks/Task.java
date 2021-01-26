@@ -27,6 +27,14 @@ public abstract class Task {
     }
 
     /**
+     * Gets task name
+     * @return Task name
+     */
+    public String getName() {
+        return this.taskName;
+    }
+
+    /**
      * Marks the task as completed
      */
     public void setCompleted() {

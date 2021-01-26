@@ -11,6 +11,7 @@ public class DoneCommand extends Command {
 
     /**
      * Done command constructor
+     *
      * @param taskNum Index of task to be marked as done
      */
     public DoneCommand(int taskNum) {
@@ -20,6 +21,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task as done and prints ui message
+     *
      * @param list List of tasks
      */
     @Override

@@ -41,7 +41,7 @@ public class Duke {
 
         if (ui.hasNextCommand()) {
             while (!isBye) {
-                String command = ui.nextCommand();
+                String command = ui.getNextCommand();
                 Parser parser = new Parser();
                 Command c = parser.parse(command);
                 c.execute(taskList);

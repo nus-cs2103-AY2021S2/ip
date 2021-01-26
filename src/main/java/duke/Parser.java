@@ -1,11 +1,6 @@
 package duke;
 
-import duke.commands.ByeCommand;
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 
 import duke.exceptions.UnknownInputException;
 
@@ -31,11 +26,14 @@ public class Parser {
         } else if (str.startsWith("list")) {
             return new ListCommand();
         } else if (str.startsWith("delete")) {
-            int taskNum = Integer.valueOf(str.substring(7));
+            int taskNum = Integer.parseInt(str.substring(7));
             return new DeleteCommand(taskNum);
         } else if (str.startsWith("done")) {
-            int taskNum = Integer.valueOf(str.substring(5));
+            int taskNum = Integer.parseInt(str.substring(5));
             return new DoneCommand(taskNum);
+        } else if (str.startsWith("find")) {
+            String text = str.substring(5);
+            return new FindCommand(text);
         } else {
             return addTasks(str);
         }
