@@ -6,24 +6,13 @@ import java.util.ArrayList;
 public class TaskList {
     // tasks in schedule
     private ArrayList<Task> taskList;
-    private ArrayList<String> operatorList;
 
     public TaskList(){
         this.taskList = new ArrayList<Task> ();
-        initialiseOperators();
     }
 
     public TaskList(ArrayList<String> myTasks){
         this.taskList = initialiseList(myTasks);
-        initialiseOperators();
-    }
-
-    private void initialiseOperators(){
-        this.operatorList.add("todo");
-        this.operatorList.add("deadline");
-        this.operatorList.add("event");
-        this.operatorList.add("done");
-        this.operatorList.add("delete");
     }
 
     private ArrayList<Task> initialiseList(ArrayList<String> myTasks){
