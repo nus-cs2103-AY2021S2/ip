@@ -3,18 +3,33 @@ package main.java.command;
 import main.java.TaskManager;
 import main.java.Ui;
 
+/**
+ * A super abstract class for Command
+ * with default empty constructor
+ * execute(tm, ui) function to be override
+ * and isExit() function to be inherited or override
+ */
 public abstract class Command {
-    String commandLine;
 
+    /**
+     * Default empty Constructor of Command
+     */
     public Command() {
 
     }
-    public Command(String commandLine) {
-        this.commandLine = commandLine;
-    }
 
+    /**
+     * execute function for commands,
+     * to be override by sub-classes
+     * @param tm Associated TaskManager
+     * @param ui Associated Ui
+     */
     public abstract void execute(TaskManager tm, Ui ui);
 
+    /**
+     * Check if the command will call exit
+     * @return true only if task is ExitCommand
+     */
     public boolean isExit() {
         return false;
     }

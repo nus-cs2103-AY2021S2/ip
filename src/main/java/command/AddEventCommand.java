@@ -7,23 +7,46 @@ import main.java.entity.Task;
 
 import java.time.LocalDate;
 
+/**
+ * Command to add a Event Task
+ */
 public class AddEventCommand extends AddCommand {
     String eventName;
     String keyword;
     String dateString;
     LocalDate date;
+
+    /**
+     * Creates a command to add a Event task
+     * @param eventName name of event
+     * @param keyword preposition as time-specifier
+     * @param dateString string representation of deadline
+     */
     public AddEventCommand(String eventName, String keyword, String dateString) {
         this.eventName = eventName;
         this.keyword = keyword;
         this.dateString = dateString;
     }
 
+    /**
+     * Creates a command to add a Event task
+     * @param eventName name of event
+     * @param keyword preposition as time-specifier
+     * @param date LocalDate representation of deadline
+     */
     public AddEventCommand(String eventName, String keyword, LocalDate date) {
         this.eventName = eventName;
         this.keyword = keyword;
         this.date = date;
     }
 
+    /**
+     * execute add task command
+     * call TaskManager to add the particular task
+     * and Ui to display add message
+     * @param tm Associated TaskManager
+     * @param ui Associated Ui
+     */
     @Override
     public void execute(TaskManager tm, Ui ui) {
         Task task;

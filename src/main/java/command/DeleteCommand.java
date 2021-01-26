@@ -4,13 +4,28 @@ import main.java.TaskManager;
 import main.java.Ui;
 import main.java.entity.Task;
 
+/**
+ * Command to delete a task
+ */
 public class DeleteCommand extends Command {
     int deleteIndex;
+
+    /**
+     * Creates a Command to delete a task
+     * @param deleteIndex task-to-delete index
+     */
     public DeleteCommand(int deleteIndex) {
         super();
         this.deleteIndex = deleteIndex;
     }
 
+    /**
+     * execute delete task command
+     * call TaskManager to delete the particular task
+     * and Ui to display delete message
+     * @param tm Associated TaskManager
+     * @param ui Associated Ui
+     */
     @Override
     public void execute(TaskManager tm, Ui ui) {
         try {

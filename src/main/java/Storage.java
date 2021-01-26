@@ -1,22 +1,21 @@
 package main.java;
 
-import main.java.entity.Deadline;
-import main.java.entity.Event;
-import main.java.entity.Task;
-import main.java.entity.Todo;
-
+import main.java.entity.*;
 import java.io.*;
-import java.nio.Buffer;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
+/**
+ * A utility class to be called only by TaskManager to help manage
+ * Tasks stored on disk
+ */
+class Storage {
 
     private File file;
     private BufferedReader br;
-    public Storage(String filepath) {
+    protected Storage(String filepath) {
         this.file = new File(filepath);
         FileReader fr;
         try {
@@ -31,7 +30,7 @@ public class Storage {
         }
     }
 
-    public List<Task> readAll() {
+    protected List<Task> readAll() {
         List<Task> list = new ArrayList<>();
         String str;
         try {
@@ -44,7 +43,7 @@ public class Storage {
         return list;
     }
 
-    public Task readItem(String str) {
+    protected Task readItem(String str) {
         String[] strarr = str.split("\\|");
         String type = strarr[0];
         boolean isDone = strarr[1].equals("1");
@@ -72,8 +71,7 @@ public class Storage {
         return task;
     }
 
-    public void updateFile(List<Task> list){
-//        FileOutputStream fos = new FileOutputStream(file, false);
+    protected void updateFile(List<Task> list){
         try {
             FileWriter fw = new FileWriter(file, false);
             for (Task task : list) {

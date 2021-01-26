@@ -4,18 +4,22 @@ import main.java.command.Command;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Main class
+ * Duke is a task management system that employs a friendly UI to help you manage your tasks
+ */
 public class Duke {
     private Ui ui;
     private TaskManager tm;
     private Parser parser;
 
-    public Duke(String filepath) {
+    private Duke(String filepath) {
         this.ui = new Ui();
         this.tm = new TaskManager(filepath);
         this.parser = new Parser();
     }
 
-    public void run() {
+    private void run() {
         ui.greeting();
         boolean isExit = false;
         while (!isExit) {

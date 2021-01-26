@@ -1,15 +1,8 @@
 package main.java.command;
 
-import main.java.TaskManager;
-import main.java.Ui;
+/**
+ * Abstract super class for all Add Commands
+ */
+abstract class AddCommand extends Command {
 
-public class AddCommand extends Command {
-    public AddCommand() {
-        super();
-    }
-
-    @Override
-    public void execute(TaskManager tm, Ui ui) {
-
-    }
 }

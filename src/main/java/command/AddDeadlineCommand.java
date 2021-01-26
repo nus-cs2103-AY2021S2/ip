@@ -3,28 +3,49 @@ package main.java.command;
 import main.java.TaskManager;
 import main.java.Ui;
 import main.java.entity.Deadline;
-import main.java.entity.Event;
 import main.java.entity.Task;
-
 import java.time.LocalDate;
 
+/**
+ * Command to add a Deadline Task
+ */
 public class AddDeadlineCommand extends AddCommand {
-    String deadlineName;
-    String keyword;
-    String dateString;
-    LocalDate date;
+    protected String deadlineName;
+    protected String keyword;
+    protected String dateString;
+    protected LocalDate date;
+
+    /**
+     * Creates a command to add a Deadline task
+     * @param deadlineName name of task
+     * @param keyword preposition as time-specifier
+     * @param dateString string representation of deadline
+     */
     public AddDeadlineCommand(String deadlineName, String keyword, String dateString) {
         this.deadlineName = deadlineName;
         this.keyword = keyword;
         this.dateString = dateString;
     }
 
+    /**
+     * Creates a command to add a Deadline task
+     * @param deadlineName name of task
+     * @param keyword preposition as time-specifier
+     * @param date LocalDate representation of deadline
+     */
     public AddDeadlineCommand(String deadlineName, String keyword, LocalDate date) {
         this.deadlineName = deadlineName;
         this.keyword = keyword;
         this.date = date;
     }
 
+    /**
+     * execute add task command
+     * call TaskManager to add the particular task
+     * and Ui to display add message
+     * @param tm Associated TaskManager
+     * @param ui Associated Ui
+     */
     @Override
     public void execute(TaskManager tm, Ui ui) {
         Task task;

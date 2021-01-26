@@ -5,14 +5,29 @@ import main.java.Ui;
 import main.java.entity.Task;
 import main.java.entity.Todo;
 
+/**
+ * Command to add a Todo Task
+ */
 public class AddTodoCommand extends AddCommand {
     private String todoName;
+
+    /**
+     * Creates a Command to add a Todo Task
+     * @param todoName name of Todo Task to be added
+     */
     public AddTodoCommand(String todoName) {
         super();
         this.todoName = todoName;
     }
 
 
+    /**
+     * execute add task command
+     * call TaskManager to add the particular task
+     * and Ui to display add message
+     * @param tm Associated TaskManager
+     * @param ui Associated Ui
+     */
     @Override
     public void execute(TaskManager tm, Ui ui) {
         Task task = new Todo(todoName);
