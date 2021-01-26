@@ -7,10 +7,20 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeConverter {
     protected String[] inputSplit;
 
+    /**
+     * Constructs a new DateTimeConverter object to convert date and time Strings to LocalDate and LocalTime.
+     *
+     * @param inputSplit  String input that has been split into description, date, from time and to time.
+     */
     public DateTimeConverter(String[] inputSplit) {
         this.inputSplit = inputSplit;
     }
 
+    /**
+     * Returns LocalDate object converted from user inputted date String of format dd-MM-yyyy.
+     *
+     * @return LocalDate created from inputted date.
+     */
     public LocalDate convertDate() {
         String date = inputSplit[1].substring(3);
 
@@ -23,6 +33,12 @@ public class DateTimeConverter {
         return formattedDate;
     }
 
+    /**
+     * Returns LocalTime object converted from user inputted time of format h AM/PM.
+     *
+     * @param s  Type of time, start (indicated by "from") or end (indicated by "to") time.
+     * @return LocalTime created from input time.
+     */
     public LocalTime convertTime(String s) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h a");
 

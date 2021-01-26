@@ -10,6 +10,11 @@ public class Duke {
     protected static ArrayList<Task> list;
     public static final String LINE = (char) 9 + "--------------------------------------------------------------------";
 
+    /**
+     * Takes user inputted tasks and passes them to the TaskManager.
+     *
+     * @param args  Java command line inputs.
+     */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"

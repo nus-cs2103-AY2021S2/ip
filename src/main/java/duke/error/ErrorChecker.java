@@ -11,11 +11,23 @@ public class ErrorChecker {
     protected String input;
     protected ArrayList<Task> list;
 
+    /**
+     * Constructs a new ErrorChecker object used for checking errors in user input.
+     *
+     * @param input  User input.
+     * @param list Task list.
+     */
     public ErrorChecker(String input, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
     }
 
+    /**
+     * Checks whether the input is valid and formatted correctly.
+     * If input is invalid, user will be prompted to re-enter valid input in correct format.
+     *
+     * @return True is input is valid and formatted correctly, and false otherwise.
+     */
     public boolean check() {
         String taskType = "";
 
