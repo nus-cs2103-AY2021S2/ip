@@ -1,4 +1,8 @@
 public class Ui {
+
+    /**
+     * Prints a welcome message on the console when Duke is first opened.
+     */
     public void printHello() {
         String logo = ".------..------..------..------.\n"
                 + "|D.--. ||U.--. ||K.--. ||E.--. |\n"
@@ -10,6 +14,10 @@ public class Ui {
         System.out.println("Hello, this is\n" + logo + "\n What can I do for you today?\n");
     }
 
+    /**
+     * Prints a goodbye message on the console when Duke is closed after detecting
+     * the exit command.
+     */
     public static void sayGoodbye() {
         System.out.println("Bye, see you soon! Don't miss me too much.");
     }

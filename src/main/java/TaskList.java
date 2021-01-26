@@ -143,6 +143,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Determines if task is Todo, Deadline or Event and handles them accordingly.
+     *
+     * @param str input from user.
+     */
     public void readTask(String str) {
         String[] split = str.split("`");
 
@@ -164,6 +169,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Outputs current number of active tasks in the TaskList.
+     */
     public void countTasks() {
         System.out.println("Now you have " + lst.size() + " tasks.");
     }

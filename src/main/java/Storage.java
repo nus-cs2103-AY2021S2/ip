@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class deals with loading tasks from a file and saving tasks
+ * in a file.
+ */
 public class Storage {
     String filePath;
 
@@ -11,6 +15,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Retrieves existing tasks saved from previous sessions on a file and
+     * transfers the tasks into TaskList.
+     *
+     * @param lst list of tasks.
+     * @throws IOException if file path is invalid.
+     */
     public void retrieveTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
         if (!data.exists()) {
@@ -24,6 +35,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores existing tasks into a file to be retrieved in other sessions by
+     * retrieving the tasks in TaskList.
+     *
+     * @param lst list of tasks.
+     * @throws IOException if file path is invalid.
+     */
     public void storeTasks(TaskList lst) throws IOException {
         File data = new File(filePath);
         // store Tasks in a file
