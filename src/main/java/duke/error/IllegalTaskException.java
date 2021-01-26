@@ -1,13 +1,13 @@
 package duke.error;
 
-class IllegalTaskException extends StringIndexOutOfBoundsException {
+public class IllegalTaskException extends StringIndexOutOfBoundsException {
     protected String taskType;
 
-    IllegalTaskException(String message) {
+    public IllegalTaskException(String message) {
         super(message);
     }
 
-    IllegalTaskException(String message, String taskType) {
+    public IllegalTaskException(String message, String taskType) {
         super(message);
         this.taskType = taskType;
     }

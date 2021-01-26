@@ -39,8 +39,8 @@ public class TaskManager {
     public void markDone(String input) {
         Task task = list.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Good job! You got " + task.description
-                + " done!\n" + Duke.line);
+        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Good job! You got " + task.description
+                + " done!\n" + Duke.LINE);
     }
 
     public void addNewTask(String input) {
@@ -67,7 +67,7 @@ public class TaskManager {
             System.out.println("File path not found: " + ex.getMessage());
         }
 
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.line);
+        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Added: " + newTask.toString() + "\n" + Duke.LINE);
     }
 
     public void deleteTask(String input) {
@@ -80,14 +80,14 @@ public class TaskManager {
             System.out.println("File path not found: " + ex.getMessage());
         }
 
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.line);
+        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Deleted: " + task.toString() + "\n" + Duke.LINE);
     }
 
     public void listEvents() {
-        System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
+        System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
         for (int i = 0; i < list.size(); i++) {
             System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + list.get(i).toString());
         }
-        System.out.println(Duke.line);
+        System.out.println(Duke.LINE);
     }
 }

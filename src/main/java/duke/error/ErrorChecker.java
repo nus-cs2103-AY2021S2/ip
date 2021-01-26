@@ -21,8 +21,8 @@ public class ErrorChecker {
 
         if (!input.startsWith("done") && !input.startsWith("delete") && !input.startsWith("todo")
                 && !input.startsWith("deadline") && !input.startsWith("event")) {
-            System.out.println(Duke.line + "\n" + (char) 9 + (char) 9 + new IllegalInputException("").toString()
-                    + "\n" + Duke.line);
+            System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + new IllegalInputException("").toString()
+                    + "\n" + Duke.LINE);
             return false;
         }
 
@@ -61,27 +61,27 @@ public class ErrorChecker {
             }
         } catch (StringIndexOutOfBoundsException ex) {
             if (input.startsWith("done") || input.startsWith("delete")) {
-                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
-                        + new IllegalDoneDeleteException(ex.getMessage(), taskType).toString() + "\n" + Duke.line);
+                System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
+                        + new IllegalDoneDeleteException(ex.getMessage(), taskType).toString() + "\n" + Duke.LINE);
                 return false;
             } else {
-                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
-                        + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" +  Duke.line);
+                System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
+                        + new IllegalTaskException(ex.getMessage(), taskType).toString() + "\n" +  Duke.LINE);
                 return false;
             }
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
-                    + new OutOfBoundsDoneDeleteException(ex.getMessage()).toString() + "\n" +  Duke.line);
+            System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
+                    + new OutOfBoundsDoneDeleteException(ex.getMessage()).toString() + "\n" +  Duke.LINE);
             return false;
         } catch (DateTimeParseException ex) {
             if (input.startsWith("deadline")) {
-                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+                System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
                         + "Oops, I don't understand that date format!\n" + (char) 9 + (char) 9
-                        + "Please re-enter with the format DD-MM-YYYY!\n" + Duke.line);
+                        + "Please re-enter with the format DD-MM-YYYY!\n" + Duke.LINE);
             } else {
-                System.out.println(Duke.line + "\n" + (char) 9 + (char) 9
+                System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9
                         + "Oops, I don't understand that date format!\n"  + (char) 9 + (char) 9
-                        + "Please re-enter with the format DD-MM-YYYY /from H AM/PM /to H AM/PM!\n" + Duke.line);
+                        + "Please re-enter with the format DD-MM-YYYY /from H AM/PM /to H AM/PM!\n" + Duke.LINE);
             }
             return false;
         }

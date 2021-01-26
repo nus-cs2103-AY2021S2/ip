@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Duke {
     protected static ArrayList<Task> list;
-    public static final String line = (char) 9 + "--------------------------------------------------------------------";
+    public static final String LINE = (char) 9 + "--------------------------------------------------------------------";
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -28,7 +28,7 @@ public class Duke {
             TaskManager taskManager = new TaskManager();
 
             if (input.equals("bye")) {
-                System.out.println(line + "\n" + (char) 9 + (char) 9 + "Bye! See you soon :)\n" + line);
+                System.out.println(LINE + "\n" + (char) 9 + (char) 9 + "Bye! See you soon :)\n" + LINE);
                 scanner.close();
                 break;
             } else {
