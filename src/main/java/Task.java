@@ -1,11 +1,11 @@
 public abstract class Task {
     protected final String description;
-    protected boolean isDone;
+    protected boolean isDone = false;
     protected final String type;
 
     public Task(String type, boolean isDone, String description) {
         this.type = type;
-        this.isDone = false;
+        this.isDone = isDone;
         this.description = description;
     }
 
@@ -24,6 +24,10 @@ public abstract class Task {
 
     public boolean getIsDone() {
         return isDone;
+    }
+
+    public String fileStorageFormat() {
+        return type + "|" + getIsDone() + "|" + description;
     }
 
 }
