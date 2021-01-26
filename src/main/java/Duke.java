@@ -103,6 +103,18 @@ public class Duke {
     }
 
     /**
+     * Finds and lists tasks matching the given keyword
+     *
+     * @param command Command containing the keyword to search for
+     */
+    public void find(Command command) {
+        String keyword = command.getArgs();
+
+        TaskList matchingTasks = tasks.findMatchingTasks(keyword);
+        ui.listMatchingTasks(matchingTasks);
+    }
+
+    /**
      * Processes user's input and executes the respective command
      *
      * @param sc Scanner object for reading user's input
@@ -126,6 +138,9 @@ public class Duke {
                 break;
             case Command.DELETE:
                 delete(command);
+                break;
+            case Command.FIND:
+                find(command);
                 break;
             case Command.TODO:
                 addTodo(command);

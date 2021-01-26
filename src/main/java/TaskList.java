@@ -23,4 +23,15 @@ public class TaskList {
     public Task getTaskAt(int index) {
         return tasks.get(index);
     }
+
+    public TaskList findMatchingTasks(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task: tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
+    }
 }
