@@ -1,11 +1,16 @@
 package duke;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Deadline extends Task {
 
+    @JsonProperty
     protected String by;
 
+    private Deadline() {}
+
     /**
-     * Deadline Constructor
+     * Deadline constructor
      * @param description
      * @param by
      */

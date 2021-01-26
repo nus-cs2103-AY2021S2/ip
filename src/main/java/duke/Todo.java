@@ -2,8 +2,12 @@ package duke;
 
 public class Todo extends Task {
 
+    private Todo() {
+        super();
+    }
+
     /**
-     * Todo Constructor
+     * Todo constructor
      * @param description
      */
     public Todo(String description) {
