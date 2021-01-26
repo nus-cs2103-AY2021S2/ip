@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class Parser {
@@ -9,7 +11,7 @@ public class Parser {
     private final static String LIST = "list";
     private final static String DUE = "due";
 
-    public static ArrayList<String> arrangeForStart(ArrayList<String> oldData) {
+    public static ArrayList<String> parseToStart(ArrayList<String> oldData) {
         ArrayList<String> parsedData = new ArrayList<>();
         for(String s : oldData) {
             String[] array = s.split(" \\| ");
@@ -34,29 +36,37 @@ public class Parser {
         return parsedData;
     }
 
-    public static String[] check(String input) throws DukeException {
+    public static Command parse(String input) throws DukeException {
         if (input.equals("")) {
             throw new DukeException("No command typed! Please key in a valid command.");
         } else {
             String[] inputArray = input.split(" ", 2);
             String command = inputArray[0];
-            if (command.equals(DELETE) || command.equals(DONE)) {
+            if (command.equals(DELETE) || command.equals(DONE) || command.equals(DUE)) {
                 if (inputArray.length == 1) {
-                    throw new DukeException("Missing argument! Please key in the command followed by the task number.");
+                    throw new DukeException("Missing argument! Please try again.");
                 } else if (inputArray.length > 2) {
-                    throw new DukeException("Additional arguments! Please key in the command followed by the task number.");
+                    throw new DukeException("Additional arguments! Please try again.");
                 } else {
                     try {
                         //Check if the second argument is a valid integer
-                        Integer.parseInt(inputArray[1]);
-                        return inputArray;
+                        if(command.equals(DONE) || command.equals(DELETE)) {
+                            Integer.parseInt(inputArray[1]);
+                            return command.equals(DELETE) ? new DeleteCommand(inputArray) : new DoneCommand(inputArray);
+                        } else {
+                            //Check if the second argument is a valid date
+                            LocalDate.parse(inputArray[1]);
+                            return new DueCommand(inputArray);
+                        }
                     } catch (NumberFormatException e) {
                         throw new DukeException("Invalid command! Please key in a task number as the second argument.");
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("Invalid date format! Please key in date in the form yyyy-mm-dd.");
                     }
                 }
             } else if (command.equals(LIST)) {
                 if (inputArray.length == 1) {
-                    return inputArray;
+                    return new ListCommand(inputArray);
                 } else {
                     throw new DukeException("Additional arguments! Please key in only the command.");
                 }
@@ -66,13 +76,13 @@ public class Parser {
                 } else {
                     String description = inputArray[1];
                     if (command.equals(TODO)) {
-                        return inputArray;
+                        return new AddCommand(inputArray);
                     } else if ((command.equals(EVENT) && description.contains("/at")) ||
                             (command.equals(DEADLINE) && description.contains("by"))) {
                         String[] arr = command.equals(EVENT) ? description.split("/at", 2) :
                                 description.split("/by", 2);
                         if (arr.length == 2) {
-                            return inputArray;
+                            return new AddCommand(inputArray);
                         } else {
                             throw new DukeException("Invalid command! Please try again.");
                         }
@@ -81,13 +91,8 @@ public class Parser {
                     }
                 }
             } else if (command.equals("bye")) {
-                return inputArray;
-            } else if (command.equals(DUE)) {
-                if (inputArray.length == 1) {
-                    throw new DukeException("Missing argument! Please key in a date.");
-                }
-                return inputArray;
-            } else {
+                return new ByeCommand(inputArray);
+            }  else {
                 throw new DukeException("Invalid command! Please try again.");
             }
         }

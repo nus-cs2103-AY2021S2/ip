@@ -4,51 +4,71 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke{
-    public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
-        Scanner sc = new Scanner(System.in);
-        // Loading file from hard disk
-        Storage storage = new Storage("./src/main/data/Data.txt");
+    private Storage storage;
+    private TaskManager taskManager;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskManager = new TaskManager();
         try {
             ArrayList<String> oldData = storage.load();
-            ArrayList<String> parsedData = Parser.arrangeForStart(oldData);
+            ArrayList<String> parsedData = Parser.parseToStart(oldData);
+            taskManager.upload(parsedData);
+        } catch (FileNotFoundException e) {
+            ui.showError("Storage file not found!");
+        }
+    }
+
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        Scanner sc = new Scanner(System.in);
+        while (!isExit) {
+            String input = sc.nextLine();
+            try {
+                Command command = Parser.parse(input);
+                command.execute(taskManager, ui, storage);
+                isExit = command.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (IOException e) {
+                ui.showError("Internal error! Storage file not in the correct format.");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        /*TaskManager taskManager = new TaskManager();
+        Scanner sc = new Scanner(System.in);
+        Storage storage = new Storage("./src/main/data/Data.txt");
+        Ui ui = new Ui();
+        ui.showWelcome();
+        // Loading file from hard disk
+        try {
+            ArrayList<String> oldData = storage.load();
+            ArrayList<String> parsedData = Parser.parseToStart(oldData);
             taskManager.upload(parsedData);
         } catch (FileNotFoundException e) {
             System.out.println("Storage file not found!");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
         }
-        //After loading file from hard disk
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\n" + "What can I do for you?");
-        System.out.println("");
         //Taking in current session's tasks and other commands
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             String input = sc.nextLine();
             try {
-                String[] checkedInput = Parser.check(input);
-                String command = checkedInput[0];
-                if (command.equals("bye")) {
-                    break;
-                } else {
-                    taskManager.manage(checkedInput);
-                    if(!command.equals("list")) {
-                        //Update harddisk file after every change in tasklist
-                        ArrayList<String> modifiedTaskList = taskManager.retrieveTasksforStorage();
-                        storage.store(modifiedTaskList);
-                    }
-                }
+                Command command = Parser.parse(input);
+                command.execute(taskManager, ui, storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
-                System.out.println("");
+                ui.showError(e.getMessage());
             } catch (IOException e) {
-                System.out.println("Storage file not in the correct format!");
+                ui.showError("Storage file not in the correct format!");
             }
         }
-        System.out.println("Bye. Hope to see you again soon!");
+        */
+         new Duke("./src/main/data/Data.txt").run();
+
     }
 }
