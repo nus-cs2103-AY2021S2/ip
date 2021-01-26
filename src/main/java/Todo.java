@@ -1,29 +1,29 @@
 public class Todo extends Task{
-    private String info;
-    public Todo(String[] taskDetails) throws ArrayIndexOutOfBoundsException{
-        super(taskDetails);
+    public Todo(String taskLine) throws ArrayIndexOutOfBoundsException{
+        super(taskLine);
         checkTask();
         buildInfo();
     }
     private void checkTask() throws  ArrayIndexOutOfBoundsException{
-        if (this.taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a todo cannot be empty.");
-    }
-    private void buildInfo(){
-        String output = "";
-        for(String s: taskDetails ){
-            output += s + " ";
+        if (this.taskLine.length() < 2) {
+            throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        info = output;
     }
-    public String printNew(){
-        return "[T][ ] " + info;
+    private void buildInfo() {
+
+        String[] taskParsed = taskLine.split("todo");
+        this.dateTime ="";
+        this.name = taskParsed[1].strip(); // taskParsed[0] == ""
+    }
+    protected String printNew(){
+        return "[T][ ] " + name;
     }
     @Override
     public String toString(){
-        return info;
+        return name;
     }
     @Override
-    public String type(){
+    protected String type(){
         return "T";
     }
 

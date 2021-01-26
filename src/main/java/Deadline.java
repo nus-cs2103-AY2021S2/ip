@@ -1,37 +1,28 @@
 public class Deadline extends Task{
     private String info;
-    public Deadline(String[] taskDetails) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
-        super(taskDetails);
-        checkTask();
+    public Deadline(String taskLine) throws ArrayIndexOutOfBoundsException,IllegalArgumentException{
+        super(taskLine);
+        checkTask(taskLine);
         buildInfo();
     }
 
-    private void buildInfo(){
-        String output = "";
-        int i = 1;
-        while(!taskDetails[i].equals("/by")) {
-            output += taskDetails[i] + " ";
-            i++;
-        }
-        i++;
-        output =  output + "(at: " ;
-        while(i < taskDetails.length){
-            output += taskDetails[i] + " ";
-            i++;
-        }
-        info = output + ")";
-    }
-    private void checkTask() throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
-        if (taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
-        else{
-            for(String s: taskDetails){
-                if (s.equals("/by")) return;
-            }
+    private void checkTask(String taskLine) throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+        if (taskLine.length() < 2) {
+            throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Deadline cannot be empty.");
+        } else if (!taskLine.contains("/by")) {
             throw new IllegalArgumentException("☹ OOPS!!! The Deadline needs an '/by' time.");
         }
     }
 
-    public String printNew(){
+    private void buildInfo() {
+        String[] parsedTask = taskLine.split("deadline");
+        parsedTask = parsedTask[1].split("/by");
+        this.name = parsedTask[0].strip();
+        this.dateTime = parsedTask[1].strip();
+        this.info = name + " by: " + dateTime;
+    }
+
+    protected String printNew(){
         return "[D][ ] " + info;
     }
     @Override

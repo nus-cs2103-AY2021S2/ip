@@ -1,92 +1,111 @@
 import java.util.*;
-
+/*
+Code was refractored after week 2
+Credit of light reuse: James Lee
+ */
 public class Duke {
-    public List<Task> list = new ArrayList<>();
-    public static String line = "____________________________________________________________";
-    public Duke(){
-    }
-
-    public void doTask (int taskNum){
-        if(list.size()<1 ) throw new ArrayIndexOutOfBoundsException("You have no tasks to do!");
-        if(taskNum < 1 || taskNum > list.size() ) throw new ArrayIndexOutOfBoundsException("That task does not exist");
-        Task curr = list.get(taskNum - 1);
-        curr.done = true;
-        System.out.format(Duke.line + "\n Nice! I've marked this task as done: " +
-                "\n [%s] [%s] %s" +
-                "\n" + Duke.line,curr.type(),curr.status(),curr.toString());
-    }
-
-    public void delete(int num) throws ArrayIndexOutOfBoundsException{
-        if(list.size()<1) throw new ArrayIndexOutOfBoundsException("You have no tasks to delete!");
-        if(num < 1 || num > list.size() ) throw new ArrayIndexOutOfBoundsException("That task does not exist");
-        Task curr = list.get(num-1);
-        list.remove(num-1);
-        String deleted = "["+ curr.type() +"]"+"[" + curr.status() +"] "+curr.toString();
-        System.out.format("%s\nNoted. I've removed this task: \n %s\nNow you have %d tasks in the list\n%s", line, deleted ,list.size(),line);
-    }
-
-    public void printTasks() throws ArrayIndexOutOfBoundsException {
-        if(list.size()<1) throw new ArrayIndexOutOfBoundsException("You have no tasks!");
-        System.out.println(line);
-        int i = 1;
-        for(Task s: this.list){
-            System.out.format("%d. [%s] [%s] %s \n", i, s.type(), s.status() ,s.toString());
-            i++;
-        }
-        System.out.println(line);
-    }
-
-    public void addTask(Task t){
-        list.add(t);
-    }
-
-    public void handleTask(String[] currLine) throws Exception {
-        String command = currLine[0];
-        if (command.equals("list")) this.printTasks();
-        else if (command.equals("delete")) this.delete(Integer.parseInt(currLine[1]));
-        else if(command.equals("done")) this.doTask(Integer.parseInt(currLine[1]));
-        else{
-            String output = "";
-            output += line + "\n" + " Got it. I've added this task: \n";
-            Task t;
-            if (command.equals("todo")) t = new Todo(currLine);
-            else if (command.equals("deadline")) t = new Deadline(currLine);
-            else if(command.equals("event"))t = new Event(currLine);
-            else{
-                throw new Exception("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            list.add(t);
-            output += "  "+t.printNew();
-            output += "\n Now you have "+list.size() + " tasks in the list" + "\n" + line;
-            System.out.println(output);
-        }
-    }
-
     public static void main(String[] args) {
         System.out.println(Duke.line + "\n"
-                +"Hello! I'm Duke\n"
-                +"What can I do for you?\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
                 + Duke.line);
-        Duke D = new Duke();
+        Duke duke = new Duke();
+        Save save = new Save(duke);
+        save.getLastSave();
+        save.run();
+    }
+
+    public static void print(String s) {
+        System.out.println(s);
+    }
+
+    public List<Task> list = new ArrayList<>();
+    private boolean isOn = false;
+    public static String line = "____________________________________________________________";
+
+    public Duke() {
+        this.isOn = true;
+    }
+
+    public void start() {
         Scanner sc = new Scanner(System.in);
         String scannedLine = sc.nextLine();
-        String[] lineList = scannedLine.split(" ");
-        String currString = lineList[0];
-        while (!currString.equals("bye")) {
-            try{
-                D.handleTask(lineList);
-            }
-            catch (Exception e){
-                    System.out.format("%s\n☹ %s\n%s",Duke.line,e.getMessage(),Duke.line);
-            }
-            finally{
+        while (isOn) {
+            try {
+                this.handleCommand(scannedLine);
+            } catch (Exception e) {
+                System.out.format("%s\n☹ %s\n%s", Duke.line, e.getMessage(), Duke.line);
+            } finally {
                 scannedLine = sc.nextLine();
-                lineList = scannedLine.split(" ");
-                currString = lineList[0];
             }
         }
-        System.out.println(line + "\n" + " Bye. Hope to see you again soon!"+"\n" + line);
+    }
 
+    private void handleCommand(String currLine) throws Exception {
+        // basic commands
+        currLine = currLine.toLowerCase();
+        String[] parsedLine = currLine.split(" ");
+        if (currLine.startsWith("list")) {
+            print(this.listTasks());
+        } else if(currLine.startsWith("save")){
+            Save.save(this);
+            System.out.println("Your information has been saved!");
+        } else if (currLine.startsWith("bye")) {
+            bye();
+        } else if (currLine.startsWith("delete")) {
+            this.delete(Integer.parseInt(parsedLine[1]));
+        } else if (currLine.startsWith("done")) {
+            this.doTask(Integer.parseInt(parsedLine[1]));
+        } else if (currLine.startsWith("todo")) {
+            addTask(new Todo(currLine));
+        } else if (currLine.startsWith("deadline")) {
+            addTask(new Deadline(currLine));
+        } else if (currLine.startsWith("event")) {
+            addTask(new Event(currLine));
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
 
+    private void addTask(Task t) {
+        list.add(t);
+        String output = line + "\n" + " Got it. I've added this task: \n"
+                + t.printNew() + "\n Now you have " + list.size()
+                + " tasks in the list" + "\n" + line;
+        print(output);
+    }
+
+    private void doTask(int taskNum) {
+        Task curr = list.get(taskNum - 1);
+        curr.isDone = true;
+        System.out.format(Duke.line + "\n Nice! I've marked this task as done: " +
+                "\n [%s] [%s] %s" +
+                "\n" + Duke.line, curr.type(), curr.status(), curr.toString());
+    }
+
+    private void delete(int num) throws ArrayIndexOutOfBoundsException {
+        Task curr = list.get(num - 1);
+        list.remove(num - 1);
+        String deleted = "[" + curr.type() + "]" + "[" + curr.status() + "] " + curr.toString();
+        System.out.format("%s\nNoted. I've removed this task: \n %s\nNow you have %d tasks in the list\n%s",
+                line, deleted, list.size(), line);
+    }
+
+    // I'll need to change this later
+    public String listTasks() throws ArrayIndexOutOfBoundsException {
+        String output = "";
+        output += line +"\n";
+        int i = 1;
+        for (Task s : this.list) {
+            output += String.format("%d.[%s][%s] %s \n", i, s.type(), s.status(), s.toString());
+            i++;
+        }
+        output += line;
+        return output;
+    }
+
+    private void bye() {
+        isOn = false;
+        print(line + "\n" + " Bye. Hope to see you again soon!" + "\n" + line);
     }
 }

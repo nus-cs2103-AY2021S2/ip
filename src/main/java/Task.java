@@ -1,19 +1,24 @@
 public class Task {
-    public String type = "";
-    boolean done = false;
-    String[] taskDetails;
-    public Task(String[] taskDetails){
-        this.taskDetails = taskDetails;
+    protected String type = "";
+    boolean isDone = false;
+    String taskLine;
+    String name;
+    String dateTime;
+
+    public Task(String taskLine) {
+        this.taskLine = taskLine;
+        this.name = "";
+        this.dateTime = "";
     }
-    public String status(){
-        String status = done ?  "X":  " ";
+    protected String status(){
+        String status = isDone ?  "X":  "O";
         return status;
     }
-    public String printNew(){
+    protected String printNew(){
         return toString();
     }
 
-    public String type(){
+    protected String type(){
         return "task";
     }
 }
