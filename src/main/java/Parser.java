@@ -20,6 +20,9 @@ public class Parser {
         Pattern pdel = Pattern.compile("^(delete )([0-9]+)");
         Matcher mdel = pdel.matcher(str);
 
+        Pattern pFind = Pattern.compile("^(find )([a-zA-Z_0-9 ]+)");
+        Matcher mFind = pFind.matcher((str));
+
         if (str.equals("list")) {
             System.out.println("Here are the tasks in your list!");
             list.getNumItems();
@@ -62,6 +65,11 @@ public class Parser {
             System.out.println(list.getAtInd(n));
             list.deleleTask(n);
             System.out.println("Now you have " + list.getNumItems() + " tasks in the list.");
+        } else if (mFind.find()) {
+            System.out.println("Here are the matching tasks in your list!");
+            String word = mFind.group(2);
+            list.matchTasks(word);
+
         } else {
             throw new DukeException("I don't know what that means!!!!");
         }
