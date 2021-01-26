@@ -17,8 +17,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> collection = new ArrayList<Task>();
         boolean exit = false;
+        
+        // Attempt to load tasks file
+        ArrayList<Task> collection;
+        try {
+            collection = load("data/duke.txt");
+        } catch (IOException e) {
+            collection = new ArrayList<Task>();
+        }
 
         // Welcomes user
         greeting();
@@ -198,6 +205,35 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I don't think there is such a task...");
         }
+    }
+
+    public static ArrayList<Task> load(String dataPath) throws IOException {
+        ArrayList<Task> collection = new ArrayList<Task>();
+        Path dirPath = Paths.get(System.getProperty("user.dir"), "data");
+        Path filePath = Paths.get(dirPath.toString(), "duke.txt");
+
+        ArrayList<String> lines = (ArrayList<String>)Files.readAllLines(filePath);
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i).replace('|', ' ');
+            String[] splitLine = line.split("[ ]+");
+            System.out.println(line);
+
+            Task task;
+            if (splitLine[0].equals("T"))
+                task = new Todo(splitLine[2]);
+            else if (splitLine[0].equals("D")) {
+                task = new Deadline(splitLine[2], LocalDate.parse(splitLine[3]));
+            }
+            else
+                task = new Event(splitLine[2], LocalDate.parse(splitLine[3]));
+
+            if (splitLine[1].equals("1"))
+                task.markAsDone();
+
+            collection.add(task);
+        }
+
+        return collection;
     }
 
     public static void save(ArrayList<Task> collection) throws DukeException {
