@@ -77,4 +77,12 @@ class Ui {
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
 	}
+
+	static void clear() {
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+		System.out.println("      The list has been cleared");
+		System.out.println("    ____________________________________________________________");
+		System.out.println("");
+	}
 }

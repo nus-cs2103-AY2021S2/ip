@@ -31,6 +31,10 @@ class TaskList {
 		this.list.remove(t);
 	}
 
+	void clear() {
+		this.list.clear();
+	}
+
 	int size() {
 		return this.list.size();
 	}

@@ -1,17 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Hashtable;
+import java.util.Scanner;
 import java.util.function.Consumer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.net.URISyntaxException;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
@@ -27,17 +18,17 @@ public class Parser {
 
 	void initialize() {
 
-		functions = new Hashtable<String, Consumer<String>>();
+		functions = new Hashtable<>();
 
-		functions.put("done", x -> this.done(x));
+		functions.put("done", this::done);
 		
-		functions.put("todo", x -> this.toDo(x));
+		functions.put("todo", this::toDo);
 
-		functions.put("deadline", x -> this.deadline(x));
+		functions.put("deadline", this::deadline);
 
-		functions.put("event", x -> this.event(x));
+		functions.put("event", this::event);
 
-		functions.put("delete", x -> this.delete(x));
+		functions.put("delete", this::delete);
     }
 
 	public void parser(String s) {
@@ -48,10 +39,12 @@ public class Parser {
 			this.list();
 		} else if (inputs.equals("taskson")) {
 			this.tasksOnDay(sc.nextLine().stripLeading());
+		} else if (inputs.equals("clear")) {
+			this.clear();
 		} else if (!this.checkValid(inputs)) {
 			Ui.invalidInput();
 		} else if (sc.hasNext()) {
-			this.functions.get(inputs).accept(sc.nextLine().stripLeading());
+			functions.get(inputs).accept(sc.nextLine().stripLeading());
 		} else {
 			Ui.emptyDescription(inputs);
 		}
@@ -69,7 +62,7 @@ public class Parser {
 
 	void done(String s) {
 		int i = Integer.parseInt(s);
-		Task t = this.mem.get(i - 1);
+		Task t = this.mem.get(i);
 		t.finish();
 		Ui.done(t);
 	}
@@ -100,6 +93,11 @@ public class Parser {
 
 	void tasksOnDay(String s) {
 		Ui.tasksOnDay(this.mem, s);
+	}
+
+	void clear() {
+		this.mem.clear();
+		Ui.clear();
 	}
 
 	boolean checkValid(String s) {

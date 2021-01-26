@@ -1,14 +1,12 @@
 package duke;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.net.URISyntaxException;
-import java.io.IOException;
-import java.io.File;
-import java.io.BufferedReader;
+import java.util.ArrayList;
 
 class Storage {
 
