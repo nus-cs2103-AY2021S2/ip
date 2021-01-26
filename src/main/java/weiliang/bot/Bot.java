@@ -105,7 +105,7 @@ public class Bot {
         }
         if (input.startsWith("deadline")) {
             if (input.matches("^deadline .+ \\/by .+$")) {
-                String[] inputs = input.replaceFirst("deadline ", "").split("/by");
+                String[] inputs = input.replaceFirst("deadline ", "").split(" /by ");
                 Task task = new Deadline(inputs[0], inputs[1]);
                 memory.add(task);
                 
@@ -119,7 +119,7 @@ public class Bot {
         }
         if (input.startsWith("event")) {
             if (input.matches("^event .+ \\/at .+$")) {
-                String[] inputs = input.replaceFirst("event ", "").split("/at");
+                String[] inputs = input.replaceFirst("event ", "").split(" /at ");
                 Task task = new Event(inputs[0], inputs[1]);
                 memory.add(task);
                 
