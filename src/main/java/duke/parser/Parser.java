@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.CommandOption;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.main.Deadline;
 import duke.main.DukeException;
@@ -41,10 +42,10 @@ public class Parser {
      */
     public Command parseMessage(String message) throws DukeException{
         String[] msgArray = message.split(" ", 2);
-        String commandWord = msgArray[0];
+        String commandWord = msgArray[0].strip();
         String otherInfo = null;
         if (msgArray.length > 1) {
-            otherInfo = msgArray[1];
+            otherInfo = msgArray[1].strip();
         }
         Command command;
         try {
@@ -67,6 +68,9 @@ public class Parser {
                 break;
             case DELETE:
                 command = preDeleteTask(otherInfo);
+                break;
+            case FIND:
+                command = preFindTask(otherInfo);
                 break;
             default:
                 throw new DukeException("Unexpected value: " + commandEnum);
@@ -144,5 +148,12 @@ public class Parser {
             throw new DukeException("Please use /by when creating deadline or " +
                     "/at when creating event.");
         }
+    }
+
+    private Command preFindTask(String keyword) throws DukeException {
+        if (keyword == null || keyword.equals(" ") || keyword.equals("") ) {
+            throw new DukeException("Please enter a keyword when finding the task.");
+        }
+        return new FindCommand(keyword);
     }
 }

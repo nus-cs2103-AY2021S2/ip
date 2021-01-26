@@ -121,4 +121,30 @@ public class TaskList {
         }
         return res;
     }
+
+    /**
+     * Finds all tasks containing the given keyword.
+     * @param keyword user input, a keyword of task description to be searched
+     * @return the information of the tasks containing the given keyword
+     */
+    public static String[] findTasks(String keyword) {
+        ArrayList<String> res = new ArrayList<>();
+        res.add("Here are the matching tasks in your list:");
+
+        int i = 1;
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                String description = " " + i + "." + task.toString();
+                res.add(description);
+                i++;
+            }
+        }
+
+        if (res.size() == 1) {
+            res.clear();
+            res.add("Sorry, no relevant tasks found:(");
+        }
+
+        return res.toArray(new String[0]);
+    }
 }
