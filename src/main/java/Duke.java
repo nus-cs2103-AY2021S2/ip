@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 	private static String DIVIDER = "____________________________________________________________";
@@ -100,7 +103,12 @@ public class Duke {
 			if (taskParts.length == 1) {
 				throw new DukeException("Oops! Usage: event [desc] /on [date]");
 			} else {
-				newTask = new Event(taskParts[0], taskParts[1]);
+				try {
+					LocalDate datetime = LocalDate.parse(taskParts[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+					newTask = new Event(taskParts[0], datetime);
+				} catch (Exception e) {
+					throw new DukeException("Looks like your date's formatted incorrectly! Try this: dd/mm/yyyy");
+				}
 			}
 		} else {
 			desc = taskString.split("deadline")[1].trim();
@@ -108,7 +116,12 @@ public class Duke {
 			if (taskParts.length == 1) {
 				throw new DukeException("Oops! Usage: deadline [desc] /by [date]");
 			} else {
-				newTask = new Deadline(taskParts[0], taskParts[1]);
+				try {
+					LocalDate datetime = LocalDate.parse(taskParts[1], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+					newTask = new Deadline(taskParts[0], datetime);
+				} catch (Exception e) {
+					throw new DukeException("Looks like your date's formatted incorrectly! Try this: dd/mm/yyyy");
+				}
 			}
 		}
 		return newTask;
