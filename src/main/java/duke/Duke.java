@@ -19,7 +19,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadData());
         } catch (DukeException ex) {
-            ui.display(ex.toString());
+            ui.display(ex.getMessage());
             tasks = new TaskList();
         }
     }
@@ -34,7 +34,7 @@ public class Duke {
                 continueInput = command.continueInput();
             }
             catch (DukeException ex) {
-                ui.display(ex.toString());
+                ui.display(ex.getMessage());
             }
         }
     }
