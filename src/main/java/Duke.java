@@ -13,26 +13,26 @@ public class Duke {
     private static final String INDENTATION = "    ";
     private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
 
-    private static List<Task> tasks = new ArrayList<>();
-    private static File file;
+    private List<Task> tasks = new ArrayList<>();
+    private File file;
 
     // Helper functions
-    public static String formatLine(String line) {
+    public String formatLine(String line) {
         return INDENTATION + line + "\n";
     }
 
-    public static void reply(String msg) {
+    public void reply(String msg) {
         System.out.println(REPLY_OUTLINE + "\n" + msg + REPLY_OUTLINE + "\n");
     }
 
-    public static void addedTaskReply(Task task) {
+    public void addedTaskReply(Task task) {
         String msg = formatLine("Got it. I've added this task:")
                 + formatLine("  " + task)
                 + formatLine("Now you have " + tasks.size() + " tasks in the list.");
         reply(msg);
     }
 
-    public static Command parseInput(String input) {
+    public Command parseInput(String input) {
         String[] parts = input.split(" ", 2);
 
         Command command;
@@ -45,31 +45,31 @@ public class Duke {
         return command;
     }
 
-    public static int getIndex(String args) {
+    public int getIndex(String args) {
         return Integer.parseInt(args) - 1;
     }
 
-    public static void writeToFile(Task task) throws IOException {
+    public void writeToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(file, true);
         fw.write(task.toFileString());
         fw.close();
     }
 
     // Commands
-    public static void greet() {
+    public void greet() {
         String msg = formatLine("Hello! I'm Duke")
                 + formatLine("What can I do for you?");
         reply(msg);
     }
 
-    public static void addTodo(Command command) throws IOException {
+    public void addTodo(Command command) throws IOException {
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
         writeToFile(todo);
         addedTaskReply(todo);
     }
 
-    public static void addTodo(String[] parts) {
+    public void addTodo(String[] parts) {
         Task todo = new Todo(parts[2]);
         if (parts[1].equals("X")) {
             todo.markDone();
@@ -77,7 +77,7 @@ public class Duke {
         tasks.add(todo);
     }
 
-    public static void addDeadline(Command command) throws IOException, DateTimeParseException {
+    public void addDeadline(Command command) throws IOException, DateTimeParseException {
         String[] parts = command.getArgs().split("/by");
 
         if (parts.length != 2) {
@@ -90,7 +90,7 @@ public class Duke {
         }
     }
 
-    public static void addDeadline(String[] parts) throws DateTimeParseException {
+    public void addDeadline(String[] parts) throws DateTimeParseException {
         Task deadline = new Deadline(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             deadline.markDone();
@@ -98,7 +98,7 @@ public class Duke {
         tasks.add(deadline);
     }
 
-    public static void addEvent(Command command) throws IOException {
+    public void addEvent(Command command) throws IOException {
         String[] parts = command.getArgs().split("/at");
 
         if (parts.length != 2) {
@@ -111,7 +111,7 @@ public class Duke {
         }
     }
 
-    public static void addEvent(String[] parts) {
+    public void addEvent(String[] parts) {
         Task event = new Event(parts[2], parts[3]);
         if (parts[1].equals("X")) {
             event.markDone();
@@ -119,7 +119,7 @@ public class Duke {
         tasks.add(event);
     }
 
-    public static void updateFile() throws IOException {
+    public void updateFile() throws IOException {
         StringBuffer buffer = new StringBuffer();
         for (Task task : tasks) {
             buffer.append(task.toFileString());
@@ -130,7 +130,7 @@ public class Duke {
         fw.close();
     }
 
-    public static void done(Command command) throws IOException {
+    public void done(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
@@ -144,7 +144,7 @@ public class Duke {
         }
     }
 
-    public static void delete(Command command) throws IOException {
+    public void delete(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
         if (index < 0 || index >= tasks.size()) {
@@ -159,7 +159,7 @@ public class Duke {
         }
     }
 
-    public static void list() {
+    public void list() {
         String msg = formatLine("Here are the tasks in your list:");
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -168,11 +168,11 @@ public class Duke {
         reply(msg);
     }
 
-    public static void exit() {
+    public void exit() {
         reply(formatLine("Bye. Hope to see you again soon!"));
     }
 
-    public static boolean readInput(Scanner sc) {
+    public boolean readInput(Scanner sc) {
         String input = sc.nextLine().trim();
 
         try {
@@ -213,7 +213,7 @@ public class Duke {
         return true;
     }
 
-    public static void readFromFile(String input) {
+    public void readFromFile(String input) {
         String[] parts = Arrays.stream(input.split("\\|"))
             .map(String::trim)
             .toArray(String[]::new);
@@ -238,7 +238,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public Duke() throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -264,5 +264,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (readInput(sc));
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Duke();
     }
 }
