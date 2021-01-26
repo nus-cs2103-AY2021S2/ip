@@ -1,1 +1,3 @@
-T | 0 | Read a bookT | 0 | Makeshift
+
+T | 0 | Nothing
+T | 0 | Yes

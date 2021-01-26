@@ -20,7 +20,7 @@ public class Storage {
 
      public List<Task> loadStorage() throws FileNotFoundException {
          List<Task> savedListOfTasks = new ArrayList<>();
-         File fileSource = new File("data/duke.txt");
+         File fileSource = new File(filePath);
          Scanner scanner = new Scanner(fileSource);
          while(scanner.hasNextLine()) {
              String line = scanner.nextLine();
@@ -36,7 +36,7 @@ public class Storage {
          fw.close();
          FileWriter fw_append = new FileWriter(filePath,true);
          for (Task t : listOfTasks) {
-            fw_append.write(t.getSavedStringFormat());
+            fw_append.write(t.getSavedStringFormat() + "\n");
          }
          fw_append.close();
      }
