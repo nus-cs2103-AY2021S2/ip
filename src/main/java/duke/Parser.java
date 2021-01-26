@@ -17,10 +17,21 @@ public class Parser {
         String command = line.split(" ")[0];
         try {
             switch (command) {
-                case "bye":
+                case "bye": {
                     return new ByeCommand();
+                }
                 case "list": {
                     return new ListCommand();
+                }
+                case "find": {
+                    String[] ar = line.split(" ");
+                    if(ar.length>2){
+                        throw new CommandException("I can only handle one keyword!");
+                    } else if(ar.length==1) {
+                        throw new CommandException("What keyword are you searching for?");
+                    } else {
+                        return new FindCommand(ar[1]);
+                    }
                 }
                 case "done": {
                     String[] ar = line.split(" ", 2);
