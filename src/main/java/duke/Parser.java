@@ -47,6 +47,11 @@ public class Parser {
             } else if (commandLine.indexOf("/by ") + 4 == commandLine.length()) {
                 return new Command("executeFalseCommand", "deadline");
             } else {
+                try {
+                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/by ") + 4), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                } catch (Exception e) {
+                    return new Command("executeFalseCommand", "myTaskOn");
+                }
                 return new Command("deadline", commandLine.substring(9));
             }
         } else if (commandLine.startsWith("event ")) {
@@ -55,6 +60,11 @@ public class Parser {
             } else if (commandLine.indexOf("/at ") + 4 == commandLine.length()) {
                 return new Command("executeFalseCommand", "event");
             } else {
+                try {
+                    LocalDateTime.parse(commandLine.substring(commandLine.indexOf("/at ") + 4), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                } catch (Exception e) {
+                    return new Command("executeFalseCommand", "myTaskOn");
+                }
                 return new Command("event", commandLine.substring(6));
             }
         } else if (commandLine.startsWith("myTaskToday")) {
