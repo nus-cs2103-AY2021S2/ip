@@ -58,7 +58,7 @@ public class Duke {
                 if (args.length < 2 || args[1].length() == 0) {
                     throw new DukeMissingArgumentsException();
                 }
-                Event currEvent = new Event(args[0], args[1]);
+                Event currEvent = new Event(args[0], args[1].substring(1));
                 taskList.add(currEvent);
                 dukeResponse.addTask(currEvent, taskList.size());
                 break;
@@ -71,7 +71,7 @@ public class Duke {
                 if (args.length < 2 || args[1].length() == 0) {
                     throw new DukeMissingArgumentsException();
                 }
-                Deadline currDeadline = new Deadline(args[0], args[1]);
+                Deadline currDeadline = new Deadline(args[0], args[1].substring(1));
                 taskList.add(currDeadline);
                 dukeResponse.addTask(currDeadline, taskList.size());
                 break;
