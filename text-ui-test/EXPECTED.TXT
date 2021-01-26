@@ -16,7 +16,7 @@ What do you want?
     Command not recognised.
     _______________________________________
     
-DukeException: The description of a todo cannot be empty.
+duke.DukeException: The description of a todo cannot be empty.
     _______________________________________
     Got it. I've added this task:
     [T][ ] borrow book
@@ -27,16 +27,16 @@ DukeException: The description of a todo cannot be empty.
     1: [T][ ] borrow book
     _______________________________________
     
-DukeException: The description of a deadline cannot be empty.
-DukeException: Date is not in the correct format
+duke.DukeException: The description of a deadline cannot be empty.
+duke.DukeException: Date is not in the correct format
     _______________________________________
     Got it. I've added this task:
     [D][ ] return book (by: Dec 11 2020)
     Now you have 2 tasks in the list.
     _______________________________________
     
-DukeException: The description of a event cannot be empty.
-DukeException: Date is not in the correct format
+duke.DukeException: The description of a event cannot be empty.
+duke.DukeException: Date is not in the correct format
     _______________________________________
     Got it. I've added this task:
     [E][ ] project meeting (at: 01 Jan 2021)
@@ -49,7 +49,7 @@ DukeException: Date is not in the correct format
     3: [E][ ] project meeting (at: 01 Jan 2021)
     _______________________________________
     
-DukeException: The description of a done cannot be empty.
+duke.DukeException: The description of a done cannot be empty.
     _______________________________________
     Nice! I've marked this task as done:
       [D][X] return book (by: Dec 11 2020)
@@ -61,7 +61,7 @@ DukeException: The description of a done cannot be empty.
     3: [E][ ] project meeting (at: 01 Jan 2021)
     _______________________________________
     
-DukeException: A number must be provided.
+duke.DukeException: A number must be provided.
     _______________________________________
     Noted. I have removed this task:
     [E][ ] project meeting (at: 01 Jan 2021)

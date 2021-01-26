@@ -22,7 +22,6 @@ public class Storage {
     public TaskList load() throws DukeException {
         File fileDirectory = new File(this.directoryPath);
         if (!fileDirectory.exists()) {
-            System.out.println("hi");
             fileDirectory.mkdirs();
         }
         File file = new File(this.filePath);

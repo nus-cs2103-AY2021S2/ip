@@ -13,14 +13,14 @@ What do you want?
     2: [D][X] return book (by: Dec 11 2020)
     _______________________________________
     
-DukeException: A number must be provided.
+duke.DukeException: A number must be provided.
     _______________________________________
     Noted. I have removed this task:
     [T][ ] borrow book
     Now you have 1 tasks in the list.
     _______________________________________
     
-DukeException: A task with this number does not exist.
+duke.DukeException: A task with this number does not exist.
     _______________________________________
     Noted. I have removed this task:
     [D][X] return book (by: Dec 11 2020)
