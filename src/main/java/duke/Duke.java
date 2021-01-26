@@ -47,15 +47,21 @@ public class Duke {
                     break;
                 case TODO:
                     params = Parser.parseParams(command, commandArr[1]);
-                    this.ui.sendToUser(this.tasks.addTask(new Todo(params[0], TaskType.TODO)));
+                    this.ui.sendToUser(this.tasks.addTask(
+                        new Todo(params[0], TaskType.TODO)
+                    ));
                     break;
                 case EVENT:
                     params = Parser.parseParams(command, commandArr[1]);
-                    this.ui.sendToUser(this.tasks.addTask(new Event(params[0], TaskType.EVENT, params[1])));
+                    this.ui.sendToUser(this.tasks.addTask(
+                        new Event(params[0], TaskType.EVENT, params[1])
+                    ));
                     break;
                 case DEADLINE:
                     params = Parser.parseParams(command, commandArr[1]);
-                    this.ui.sendToUser(this.tasks.addTask(new Deadline(params[0], TaskType.DEADLINE, params[1])));
+                    this.ui.sendToUser(this.tasks.addTask(
+                        new Deadline(params[0], TaskType.DEADLINE, params[1])
+                    ));
                     break;
                 default:
                     this.ui.showError();
