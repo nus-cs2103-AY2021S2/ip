@@ -73,7 +73,7 @@ public class Duke {
                                 ToDos todo = new ToDos(description);
                                 tasks.add(todo);
                                 printAdd(numTasks);
-                                writeToFile(pathString, todo.formatData());
+                                addToFile(pathString, todo.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -85,7 +85,7 @@ public class Duke {
                                 Deadlines deadline = new Deadlines(description, date);
                                 tasks.add(deadline);
                                 printAdd(numTasks);
-                                writeToFile(pathString, deadline.formatData());
+                                addToFile(pathString, deadline.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -97,7 +97,7 @@ public class Duke {
                                 Events event = new Events(description, date);
                                 tasks.add(event);
                                 printAdd(numTasks);
-                                writeToFile(pathString, event.formatData());
+                                addToFile(pathString, event.formatData());
 
                                 numTasks++;
                                 printNumTasks();
@@ -213,9 +213,16 @@ public class Duke {
         }
     }
 
-    private static void writeToFile(String pathString, String data) throws IOException {
-        FileWriter fw = new FileWriter(pathString);
-        fw.write(data);
+    private static void addToFile(String pathString, String data) throws IOException {
+        FileWriter fw;
+        if (numTasks <= 0) {
+            fw = new FileWriter(pathString);
+            fw.write(data);
+        } else {
+            fw = new FileWriter(pathString, true);
+            fw.write(System.lineSeparator() + data);
+        }
+
         fw.close();
     }
 }

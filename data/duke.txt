@@ -1,1 +1,4 @@
-T | 0 | eat fruits
+T | 0 | water plants
+D | 0 | homework  |  tomorrow
+E | 0 | party  |  7pm
+T | 0 | read book
