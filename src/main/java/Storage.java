@@ -96,7 +96,7 @@ public class Storage {
             ArrayList<Task> arr = taskList.getTaskArrayList();
 
             for (int i = 0; i < arr.size(); i++) {
-                if (i == arr.size()) {
+                if (i == arr.size() - 1) {
                     toWrite = toWrite + arr.get(i).taskStatus();
                 } else {
                     toWrite = toWrite + arr.get(i).taskStatus() + "\n";
