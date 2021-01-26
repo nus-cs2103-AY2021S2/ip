@@ -1,3 +1,6 @@
+/**
+ * Deals with the interactions with the user.
+ */
 public class Ui {
     public Ui(){
     }

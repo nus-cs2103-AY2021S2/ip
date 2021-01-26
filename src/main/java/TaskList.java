@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Manages a list of Tasks with the ability to add/remove tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> list;
     protected int numItems;

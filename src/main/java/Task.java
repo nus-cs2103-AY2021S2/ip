@@ -1,3 +1,6 @@
+/**
+ * Represents tasks the user wants to keep track of.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

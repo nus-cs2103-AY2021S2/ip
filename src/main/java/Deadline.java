@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Task Object that has a certain deadline to be met.
+ */
 public class Deadline extends Task {
     protected String by;
     protected LocalDate byDate;

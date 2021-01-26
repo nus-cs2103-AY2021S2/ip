@@ -1,6 +1,9 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Makes sense of user input and commands.
+ */
 public class Parser {
     public Parser() {
     }

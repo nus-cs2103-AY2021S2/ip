@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Deals with the loading and saving of tasks to the hard disk.
+ */
 public class Storage {
     protected String filePath;
     protected File saveFile;

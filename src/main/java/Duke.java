@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents a personal chatbot that helps the user keep track of their tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList list;
