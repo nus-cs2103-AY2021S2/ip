@@ -37,4 +37,10 @@ public class SwitchBladeTest {
     public void parserDeadlineDescTest() {
         assertEquals("read books", Parser.findDescription("deadline read books /by 2021-12-05"));
     }
+
+    @Test
+    public void taskTest() {
+        Task t = new Task("read books");
+        assertEquals("[T] [ ] read books", t.toString());
+    }
 }
