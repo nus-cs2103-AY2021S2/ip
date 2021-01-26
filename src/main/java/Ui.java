@@ -96,4 +96,18 @@ public class Ui {
         displayListSize(size);
     }
 
+    /**
+     * Display search result based on given result task list
+     * @param result task list found
+     */
+    public void displaySearchResult(List<Task> result) {
+        if (result.isEmpty()) {
+            System.out.println(prefix + "Sorry, there is no task found.");
+        } else {
+            System.out.println(prefix + "We found " + result.size() + " results:");
+            for (Task task: result) {
+                System.out.println(prefix + task);
+            }
+        }
+    }
 }

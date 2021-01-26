@@ -38,7 +38,7 @@ public class Parser {
                 command = new AddTodoCommand(todoName);
             } else if (commandStr.toLowerCase().split(" ")[0].equals("deadline")) {
                 String[] arr = commandStr.split(" /");
-                String name = arr[0].substring(6);
+                String name = arr[0].substring(9);
                 String[] arr2 = arr[1].split(" ", 2);
                 try {
                     LocalDate timeDate = LocalDate.parse(arr2[1]);
@@ -56,6 +56,12 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     command = new AddEventCommand(name, arr2[0], arr2[1]);
                 }
+            } else if (commandStr.toLowerCase().split(" ")[0].equals("find")) {
+                String keyword = commandStr.substring(5);
+                if (keyword.trim().length() == 0) {
+                    throw new IllegalInputFormatException();
+                }
+                command = new FindCommand(keyword);
             } else {
                 command = new WrongCommand();
             }
