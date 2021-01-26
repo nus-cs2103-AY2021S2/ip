@@ -5,6 +5,11 @@ public class Deadline extends Task {
     super(description);
     this.by = by.trim();
   }
+
+  @Override
+  public String toFileString() {
+    return String.format("%s | %s | %s\n", Command.DEADLINE, super.toFileString(), this.by);
+  }
   
   @Override
   public String toString() {

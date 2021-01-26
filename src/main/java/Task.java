@@ -11,6 +11,11 @@ public class Task {
     this.isDone = true;
   }
 
+  public String toFileString() {
+    char done = this.isDone ? 'X' : ' ';
+    return String.format("%c | %s", done, this.description);
+  }
+
   public String toString() {
     char done = this.isDone ? 'X' : ' ';
     return String.format("[%c] %s", done, this.description);
