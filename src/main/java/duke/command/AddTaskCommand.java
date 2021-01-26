@@ -14,7 +14,8 @@ public class AddTaskCommand extends Command {
 
     /**
      * Constructs AddTaskCommand.
-     * @param type The type of task.
+     *
+     * @param type        The type of task.
      * @param fullCommand The command given.
      */
     public AddTaskCommand(String type, String fullCommand) {
@@ -25,9 +26,10 @@ public class AddTaskCommand extends Command {
 
     /**
      * Executes the add task depending on the type of task.
+     *
      * @param taskList The list of tasks.
-     * @param ui The user interface.
-     * @param storage The storage handler.
+     * @param ui       The user interface.
+     * @param storage  The storage handler.
      * @throws DukeException If user input format is wrong.
      */
     @Override
@@ -37,6 +39,7 @@ public class AddTaskCommand extends Command {
 
     /**
      * Program does not exit.
+     *
      * @return False to continue the program.
      */
     @Override

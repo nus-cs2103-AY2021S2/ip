@@ -17,9 +17,10 @@ public class UnknownCommand extends Command {
 
     /**
      * Prints error message when unknown command encountered.
+     *
      * @param taskList The list of tasks.
-     * @param ui The user interface.
-     * @param storage The storage handler.
+     * @param ui       The user interface.
+     * @param storage  The storage handler.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -28,6 +29,7 @@ public class UnknownCommand extends Command {
 
     /**
      * Program does not exit.
+     *
      * @return False to continue the program.
      */
     @Override

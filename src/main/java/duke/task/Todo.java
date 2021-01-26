@@ -6,7 +6,8 @@ package duke.task;
 public class Todo extends Task {
     /**
      * Constructs Todo.
-     * @param isDone Determines if task is completed.
+     *
+     * @param isDone      Determines if task is completed.
      * @param description Task description.
      */
     public Todo(int isDone, String description) {

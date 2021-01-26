@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs DoneCommand.
+     *
      * @param fullCommand The command given.
      */
     public DoneCommand(String fullCommand) {
@@ -22,9 +23,10 @@ public class DoneCommand extends Command {
 
     /**
      * Executes task completion.
+     *
      * @param taskList The list of tasks.
-     * @param ui The user interface.
-     * @param storage The storage handler.
+     * @param ui       The user interface.
+     * @param storage  The storage handler.
      * @throws DukeException If user input format is wrong.
      */
     @Override
@@ -34,6 +36,7 @@ public class DoneCommand extends Command {
 
     /**
      * Program does not exit.
+     *
      * @return False to continue the program.
      */
     @Override

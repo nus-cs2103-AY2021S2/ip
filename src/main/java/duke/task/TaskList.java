@@ -14,10 +14,24 @@ public class TaskList {
 
     /**
      * Constructs a TaskList.
+     *
      * @param tasks The list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * Checks if given String is not Numeric.
+     *
+     * @param str String to be checked.
+     * @return True if not numeric, False otherwise.
+     */
+    private static boolean isNotNumeric(String str) {
+        if (str == null || str.length() == 0) {
+            return true;
+        }
+        return !str.chars().allMatch(Character::isDigit);
     }
 
     /**
@@ -33,6 +47,7 @@ public class TaskList {
 
     /**
      * Completes a task in the TaskList.
+     *
      * @param fullCommand Command given by user.
      * @throws DukeException If user input format is wrong.
      */
@@ -56,12 +71,14 @@ public class TaskList {
                 }
             }
         } else {
-            throw new DukeException("       OOPS!!! The format should be \"done #\".");
+            throw new DukeException("       OOPS!!! The format should be "
+                    + "\"done ##\" where ## is the task number.");
         }
     }
 
     /**
      * Deletes a task from the TaskList.
+     *
      * @param fullCommand Command given by user.
      * @throws DukeException If user input format is wrong.
      */
@@ -84,13 +101,46 @@ public class TaskList {
                 }
             }
         } else {
-            throw new DukeException("       OOPS!!! The format should be \"delete #\".");
+            throw new DukeException("       OOPS!!! The format should be "
+                    + "\"delete ##\" where ## is the task number.");
+        }
+    }
+
+    /**
+     * Finds all task in task list that contains a given keyword.
+     *
+     * @param fullCommand Command given by user.
+     * @throws DukeException If user input format is wrong.
+     */
+    public void find(String fullCommand) throws DukeException {
+        String[] inputArr = fullCommand.split(" ");
+        if (inputArr.length < 3) {
+            if (inputArr.length == 1) {
+                throw new DukeException("       OOPS!!! The keyword cannot be empty.");
+            } else {
+                ArrayList<Task> temp = new ArrayList<>();
+                for (Task currTask : tasks) {
+                    String currDescription = currTask.getDescription();
+                    if (currDescription.contains(inputArr[1])) {
+                        temp.add(currTask);
+                    }
+                }
+                System.out.println("     Here are the matching tasks in your list:");
+                for (int j = 0; j < temp.size(); j++) {
+                    Task tempTask = temp.get(j);
+                    System.out.println("     " + (j + 1) + "." + tempTask.toString());
+                }
+            }
+        } else {
+            throw new DukeException("       OOPS!!! The format should be "
+                    + "\"find ####\" where #### is the keyword to search.");
         }
     }
 
     /**
      * Adds a task to the TaskList.
-     * @param type The type of task.
+     *
+     * @param type        The type of task.
      * @param fullCommand Command given by user.
      * @throws DukeException If user input format is wrong.
      */
@@ -144,18 +194,6 @@ public class TaskList {
         System.out.println("     Got it. I've added this task:\n"
                 + "       " + this.tasks.get(this.tasks.size() - 1).toString() + "\n"
                 + "     Now you have " + this.tasks.size() + " tasks in the list.");
-    }
-
-    /**
-     * Checks if given String is not Numeric.
-     * @param str String to be checked.
-     * @return True if not numeric, False otherwise.
-     */
-    private static boolean isNotNumeric(String str) {
-        if (str == null || str.length() == 0) {
-            return true;
-        }
-        return !str.chars().allMatch(Character::isDigit);
     }
 
     public ArrayList<Task> getTaskList() {

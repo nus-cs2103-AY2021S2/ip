@@ -6,32 +6,32 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * A DeleteCommand class to perform task deletion.
+ * A FindCommand class to find tasks that contain a given keyword.
  */
-public class DeleteCommand extends Command {
+public class FindCommand extends Command {
     protected String fullCommand;
 
     /**
-     * Constructs DeleteCommand.
+     * Constructs FindCommand.
      *
      * @param fullCommand The command given.
      */
-    public DeleteCommand(String fullCommand) {
+    public FindCommand(String fullCommand) {
         super();
         this.fullCommand = fullCommand;
     }
 
     /**
-     * Executes task deletion.
+     * Executes task find.
      *
      * @param taskList The list of tasks.
      * @param ui       The user interface.
      * @param storage  The storage handler.
-     * @throws DukeException If user input format is wrong.
+     * @throws DukeException
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.delete(this.fullCommand);
+        taskList.find(this.fullCommand);
     }
 
     /**

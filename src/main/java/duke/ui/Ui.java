@@ -20,7 +20,8 @@ public class Ui {
 
     /**
      * Constructs Ui with InputStream and PrintStream.
-     * @param in The input stream of the user interface.
+     *
+     * @param in  The input stream of the user interface.
      * @param out The print stream of the user interface.
      */
     public Ui(InputStream in, PrintStream out) {
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Reads inputs from user.
+     *
      * @return The user input.
      */
     public String readCommand() {
@@ -70,6 +72,7 @@ public class Ui {
 
     /**
      * Prints given error message.
+     *
      * @param message The error message to be printed.
      */
     public void showError(String message) {

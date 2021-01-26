@@ -11,9 +11,10 @@ public class Event extends Task {
 
     /**
      * Constructs Event.
-     * @param isDone Determines if task is completed.
+     *
+     * @param isDone      Determines if task is completed.
      * @param description Task description.
-     * @param at Date of Event.
+     * @param at          Date of Event.
      */
     public Event(int isDone, String description, LocalDate at) {
         super('E', isDone, description);
@@ -22,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Creates String to be stored in the data file.
+     *
      * @return String in the format to be stored in data file.
      */
     @Override

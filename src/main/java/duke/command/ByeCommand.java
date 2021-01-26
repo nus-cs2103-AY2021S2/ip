@@ -18,9 +18,10 @@ public class ByeCommand extends Command {
 
     /**
      * Executes program exit.
+     *
      * @param taskList The list of tasks.
-     * @param ui The user interface.
-     * @param storage The storage handler.
+     * @param ui       The user interface.
+     * @param storage  The storage handler.
      * @throws DukeException If there is storage operation error.
      */
     @Override
@@ -32,6 +33,7 @@ public class ByeCommand extends Command {
 
     /**
      * Exits program.
+     *
      * @return True to exit program.
      */
     @Override

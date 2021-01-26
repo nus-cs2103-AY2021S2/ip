@@ -8,6 +8,7 @@ import duke.command.*;
 public class Parser {
     /**
      * Parses the given String into a Command.
+     *
      * @param fullCommand The user input to be parsed.
      * @return The command as parsed from the input.
      */
@@ -27,6 +28,8 @@ public class Parser {
             return new AddTaskCommand(type, fullCommand);
         case "bye":
             return new ByeCommand();
+        case "find":
+            return new FindCommand(fullCommand);
         default:
             return new UnknownCommand();
         }

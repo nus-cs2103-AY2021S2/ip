@@ -17,6 +17,7 @@ public class Duke {
 
     /**
      * Constructs Duke chatbot.
+     *
      * @param filepath The filepath of where the data is going to be stored at.
      */
     public Duke(String filepath) {

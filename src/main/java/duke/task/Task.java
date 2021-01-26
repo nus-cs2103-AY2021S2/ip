@@ -10,8 +10,9 @@ public class Task {
 
     /**
      * Constructs Task.
-     * @param type The type of task.
-     * @param isDone Determines if task is completed.
+     *
+     * @param type        The type of task.
+     * @param isDone      Determines if task is completed.
      * @param description Task description.
      */
     public Task(char type, int isDone, String description) {
@@ -22,6 +23,7 @@ public class Task {
 
     /**
      * Creates String to be stored in the data file.
+     *
      * @return String in the format to be stored in data file.
      */
     public String getFileString() {
@@ -30,6 +32,7 @@ public class Task {
 
     /**
      * Creates status icon.
+     *
      * @return Status icon of task whether completed or not.
      */
     public String getStatusIcon() {
@@ -41,6 +44,10 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     @Override

@@ -11,9 +11,10 @@ public class Deadline extends Task {
 
     /**
      * Constructs Deadline.
-     * @param isDone Determines if task is completed.
+     *
+     * @param isDone      Determines if task is completed.
      * @param description Task description.
-     * @param by Due date.
+     * @param by          Due date.
      */
     public Deadline(int isDone, String description, LocalDate by) {
         super('D', isDone, description);
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Creates String to be stored in the data file.
+     *
      * @return String in the format to be stored in data file.
      */
     @Override
