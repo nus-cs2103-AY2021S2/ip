@@ -27,7 +27,7 @@ public class Duke {
             Pattern ptodo = Pattern.compile("^([Tt]odo )([a-zA-Z_0-9 ]*+)");
             Matcher mtodo = ptodo.matcher(str);
 
-            Pattern pdl = Pattern.compile("^([Dd]eadline )([a-zA-Z_0-9 ]*+)(\\/by )([a-zA-Z_0-9 ]*+)");
+            Pattern pdl = Pattern.compile("^([Dd]eadline )([a-zA-Z_0-9 ]*+)(\\/by )([a-zA-Z_0-9 -]*+)");
             Matcher mdl = pdl.matcher(str);
 
             Pattern pev = Pattern.compile("^([Ee]vent )([a-zA-Z_0-9 ]*+)(\\/at )([a-zA-Z_0-9 ]*+)");
@@ -62,6 +62,7 @@ public class Duke {
                 if (mdl.group(2).equals("")) {
                     throw new DukeException("The description of a Deadline cannot be empty!");
                 }
+                System.out.println(mdl.group(4));
                 list.add(numitems, new Deadline(mdl.group(2), mdl.group(4)));
                 System.out.println("Got it!. I have added the following task:");
                 System.out.println(list.get(numitems));
