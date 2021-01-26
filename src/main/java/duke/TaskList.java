@@ -14,6 +14,12 @@ public class TaskList {
         this.tasks = taskList;
     }
 
+    /**
+     * Adds a Task to the TaskList.
+     * 
+     * @param task Task to be added.
+     * @return Success Message String.
+     */
     public String addTask(Task task) {
         this.tasks.add(task);
         return "Got it. I've added this task:\n    "
@@ -21,6 +27,13 @@ public class TaskList {
                 + this.sizeToString();
     }
 
+    /**
+     * Deletes a task from the TaskList, given an index.
+     * 
+     * @param taskIndex 1-based index for the task to be deleted.
+     * @return Success Mesasge String.
+     * @throws DukeException
+     */
     public String deleteTask(int taskIndex) throws DukeException {
         if (taskIndex <= 0 || taskIndex > this.tasks.size()) {
             throw new DukeException("A task with this number does not exist.");
@@ -31,6 +44,13 @@ public class TaskList {
                 + this.sizeToString();
     }
     
+    /**
+     * Marks a task in the TaskList as done, given an index
+     * 
+     * @param taskIndex 1-based index for the task to be deleted.
+     * @return Success Message String.
+     * @throws DukeException
+     */
     public String doTask(int taskIndex) throws DukeException {
         if (taskIndex <= 0 || taskIndex > this.tasks.size()) {
             throw new DukeException("A task with this number does not exist.");
@@ -41,10 +61,20 @@ public class TaskList {
                 + task.toString();
     }
 
+    /**
+     * Returns the tasks that are in the TaskList.
+     * 
+     * @return String representing the tasks in the TaskList.
+     */
     public String listTasks() {
         return this.toString();
     }
 
+    /**
+     * Returns the save String representation of a TaskList.
+     * 
+     * @return a String representing a TaskList.
+     */
     public String saveTaskListString() {
         String str = "";
         for (Task t: this.tasks) {
@@ -54,6 +84,11 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Returns a String representation of the amount of tasks in the TaskList.
+     * 
+     * @return String representation of the amount of tasks in the TaskList.
+     */
     private String sizeToString() {
         return "\n    Now you have " + this.tasks.size() + " tasks in the list.";
     }

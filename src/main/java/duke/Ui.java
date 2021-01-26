@@ -9,6 +9,11 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints Text formatted between 2 lines.
+     * 
+     * @param text Text to be printed.
+     */
     public void sendToUser(String text) {
         String line = "    _______________________________________\n    ";
         System.out.println(line + text + "\n" + line);
@@ -18,14 +23,27 @@ public class Ui {
         System.out.println("Error.");
     }
 
+    /**
+     * Prints the exception.
+     * 
+     * @param e The exception to be printed.
+     */
     public void showError(Exception e) {
         System.out.println(e);
     }
 
+    /**
+     * Reads a line from stdin.
+     * 
+     * @return String representing a command.
+     */
     public String readCommand() {
         return this.sc.nextLine();
     }
 
+    /**
+     * Prints a greeting message.
+     */
     public void greet() {
         String logo = 
                   " ____        _        \n" 
@@ -38,6 +56,9 @@ public class Ui {
         System.out.println("Hello! I'm a bot called Duke. Beep boop. \nWhat do you want?\n");
     }
 
+    /**
+     * Prints a closing message.
+     */
     public void bye() {
         this.sc.close();
         this.sendToUser("BYE AND HAVE A GOOD DAY. Beep boop.");

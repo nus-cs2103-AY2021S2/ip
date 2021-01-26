@@ -10,6 +10,12 @@ public class Storage {
     private String directoryPath;
     private String filePath;
 
+    /**
+     * Returns a Storage object which performs saving and loading functions.
+     * 
+     * @param filePathArr an Array with the relative file path. 
+     * eg. "data/duke.txt" would be ["data", "duke.txt"]
+     */
     public Storage(String[] filePathArr) {
         String relativeFilePath = "";
         for (int i = 0; i < filePathArr.length - 1; i++) {
@@ -19,6 +25,14 @@ public class Storage {
         this.filePath = this.directoryPath + File.separator + filePathArr[filePathArr.length - 1];
     }
 
+    /**
+     * Returns a TaskList loaded from the defined filePath
+     * If filepath does not exist, returns a TaskList with an empty
+     * list of Tasks.
+     * 
+     * @return TaskList loaded from file
+     * @throws DukeException
+     */
     public TaskList load() throws DukeException {
         File fileDirectory = new File(this.directoryPath);
         if (!fileDirectory.exists()) {
@@ -44,6 +58,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks to the file with defined filepath.
+     * If the TaskList is empty, saves an empty file.
+     * 
+     * @param taskList Tasklist with the Tasks to be saved
+     * @throws DukeException
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(filePath, false);

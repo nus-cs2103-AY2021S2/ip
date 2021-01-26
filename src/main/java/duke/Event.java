@@ -7,6 +7,14 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Returns an Event class.
+     * 
+     * @param description description of the task.
+     * @param taskType the type of the task.
+     * @param at the date that the task will happen.
+     * @throws DukeException
+     */
     public Event(String description, TaskType taskType, String at) throws DukeException {
         super(description, taskType);
         try {

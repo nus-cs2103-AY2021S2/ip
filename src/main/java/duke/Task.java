@@ -15,6 +15,11 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns a Unicode representation of Boolean Values.
+     * 
+     * @return Unicode Character.
+     */
     public String getStatusIcon() {
         // return (isDone ? "✓" : "✘");
         // return (isDone ? "\u2713" : "\u2718");
@@ -25,6 +30,11 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Returns a String representing how it will be saved on the disk.
+     * 
+     * @return String save representation of object.
+     */
     public String saveTaskString() {
         String delimiter = " ~ ";
         return this.taskType.toString() 
@@ -56,6 +66,12 @@ enum TaskType {
         return this.type;
     }
 
+    /**
+     * Generates a TaskType Object based on the Short-form String version.
+     * 
+     * @param type String that represents the type in short-form
+     * @return TaskType
+     */
     public static TaskType fromString(String type) {
         for (TaskType t: TaskType.values()) {
             if (t.toString().equals(type)) {
