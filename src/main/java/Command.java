@@ -12,6 +12,7 @@ public class Command {
 
     public List<Task> handleFileCommand(String command) throws DukeException { //T # 1 # read book # June 6th
         String[] inputs = command.split(" # ");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         //System.out.println(inputs[0] + " ");
         String action = inputs[0];
         if (action.equals("T")) {
@@ -21,17 +22,27 @@ public class Command {
             }
             list.add(newTask);
         } else if (action.equals("D")) {
-            Deadline newTask = new Deadline(inputs[2], inputs[3]);
+            String dateAndTime = inputs[3];
+            String date = dateAndTime.split(" ")[0];
+            String time = dateAndTime.split(" ")[1];
+            Deadline newDeadline = new Deadline(inputs[2], LocalDate.parse(date),
+                    LocalTime.parse(time, formatter));
             if (Integer.parseInt(inputs[1]) == 1) {
-                newTask.markAsDone();
+                newDeadline.markAsDone();
             }
-            list.add(newTask);
+            list.add(newDeadline);
         } else if (action.equals("E")) {
-            Event newTask = new Event(inputs[2], inputs[3]);
+            String dateAndTime = inputs[3];
+            String date = dateAndTime.split(" ")[0];
+            String startTime = dateAndTime.split(" ")[1].split("-")[0];
+            String endTime = dateAndTime.split(" ")[1].split("-")[1];
+            Event newEvent = new Event(inputs[2], LocalDate.parse(date),
+                    LocalTime.parse(startTime, formatter), LocalTime.parse(endTime, formatter));
+
             if (Integer.parseInt(inputs[1]) == 1) {
-                newTask.markAsDone();
+                newEvent.markAsDone();
             }
-            list.add(newTask);
+            list.add(newEvent);
         } else {
             throw new DukeException("Sorry! No such command is allowed.");
         }

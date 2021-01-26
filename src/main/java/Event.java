@@ -21,7 +21,9 @@ public class Event extends Task {
 
     @Override
     public String generateText() {
-        return String.format("E # %d # %s # %s", this.isDone ? 1 : 0, this.description, this.time);
+        return String.format("E # %d # %s # %s %s-%s", this.isDone ? 1 : 0, this.description, this.date,
+                this.startTime.format(DateTimeFormatter.ofPattern("HHmm")),
+                this.endTime.format(DateTimeFormatter.ofPattern("HHmm")));
     }
 
     public String getTime() {

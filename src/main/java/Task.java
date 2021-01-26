@@ -9,17 +9,13 @@ public class Task {
         this.isDone = false;
     }
 
-
     public String generateText() { return this.description; }
-
-    public void markAsDone() {
 
     public LocalDate getDate() {
         return null;
     }
 
-    void markAsDone() {
-
+    public void markAsDone() {
         this.isDone = true;
     }
 
