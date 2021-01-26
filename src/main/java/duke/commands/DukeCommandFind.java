@@ -23,8 +23,30 @@ public class DukeCommandFind extends DukeCommand {
 
     protected Optional<LocalDateTime> from;
     protected Optional<LocalDateTime> to;
+    protected String search;
 
     public DukeCommandFind(String input) throws DukeExceptionIllegalArgument {
+        // Process any keywords first, assumed stripped
+        search = "";
+        if (!input.startsWith("/from ")&&(!input.startsWith("/to "))) {
+            int searchIndex = input.length();
+            int fromIndex = input.indexOf(" /from");
+            int toIndex = input.indexOf(" /to");
+            if (fromIndex != -1 && searchIndex > fromIndex) {
+                searchIndex = fromIndex;
+            }
+            if (toIndex != -1 && searchIndex > toIndex) {
+                searchIndex = toIndex;
+            }
+
+            search = input.substring(0, searchIndex);
+            input = input.substring(searchIndex).strip();
+            input = input.strip();
+        }
+
+        // Date parsing
+        from = Optional.empty();
+        to = Optional.empty();
         if (input.startsWith("/from ")) {
             input = input.substring(6);
             if (input.contains(" /to ")) {
@@ -33,7 +55,6 @@ public class DukeCommandFind extends DukeCommand {
                 to = Optional.of(Parser.parseDate(dates[1].strip()));
             } else {
                 from = Optional.of(Parser.parseDate(input));
-                to = Optional.empty();
             }
         } else if (input.startsWith("/to ")) {
             input = input.substring(4);
@@ -43,12 +64,7 @@ public class DukeCommandFind extends DukeCommand {
                 from = Optional.of(Parser.parseDate(dates[1].strip()));
             } else {
                 to = Optional.of(Parser.parseDate(input));
-                from = Optional.empty();
             }
-        } else {
-            throw new DukeExceptionIllegalArgument(
-                    "Argument must be valid dates following the "
-                    + "\n'/from' and/or '/to' options.");
         }
         if (from.isPresent() && to.isPresent() && from.get().isAfter(to.get())) {
             throw new DukeExceptionIllegalArgument(
@@ -58,38 +74,74 @@ public class DukeCommandFind extends DukeCommand {
 
     @Override
     public void execute(TaskList tasks, Ui ui, FileLoader loader) throws DukeExceptionIllegalArgument{
-        ArrayList<DateTask> view = new ArrayList<>();
+        boolean datedSearch = (from.isPresent() || to.isPresent());
+        ArrayList<Task> view = new ArrayList<>();
+        ArrayList<Integer> viewIndex = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
-            if (!(task instanceof DateTask)) {
-                continue;
-            }
 
-            DateTask datetask = (DateTask) task;
-            System.out.println(datetask.getDatetime());
-            if (from.isPresent() && from.get().isAfter(datetask.getDatetime())) {
+            if (datedSearch) {
+                if (!(task instanceof DateTask)) {
+                    continue;
+                }
+                DateTask datetask = (DateTask) task;
+                if (from.isPresent() && from.get().isAfter(datetask.getDatetime())) {
+                    continue;
+                }
+                if (to.isPresent() && to.get().isBefore(datetask.getDatetime())) {
+                    continue;
+                }
+            }
+            if (!task.getDescription().contains(search)) {
                 continue;
             }
-            if (to.isPresent() && to.get().isBefore(datetask.getDatetime())) {
-                continue;
-            }
-            view.add(datetask);
+            // If date enabled, must sort by DateTasks only.
+
+            view.add(task);
+            viewIndex.add(i+1);
         }
 
+        // Empty task view list
+        if (view.isEmpty()) {
+            List<String> lines = new ArrayList<>();
+            lines.add("No tasks matching search term / date range");
+            if (from.isPresent()) {
+                lines.add(" from:  " + Parser.formatDateFull(from.get()));
+            }
+            if (to.isPresent()) {
+                lines.add(" till:  " + Parser.formatDateFull(to.get()));
+            }
+            if (!search.isBlank()) {
+                lines.add(" query: '" + search + "'");
+            }
+            ui.showMessage(lines);
+            return;
+        }
+
+        // Sorting disabled to allow list indexing... Might re-enable as option
         // Print list in sorted order of datetime
         // IntelliJ's coding recommendations reduced it to this, pretty impressive
-        view.sort(Comparator.comparing(DateTask::getDatetime));
+        // if (datedSearch) {
+        //     view.sort(Comparator.comparing(t -> ((DateTask) t).getDatetime()));
+        // } else {
+        //    view.sort(Comparator.comparing(Task::getDescription));
+        // }
+
+        // Get output
         List<String> lines = new ArrayList<>();
-        lines.add("Here are the tasks requested in sorted order,");
+        lines.add("Found " + view.size() + " task(s) matching search term / date range");
         if (from.isPresent()) {
             lines.add(" from:  " + Parser.formatDateFull(from.get()));
         }
         if (to.isPresent()) {
             lines.add(" till:  " + Parser.formatDateFull(to.get()));
         }
+        if (!search.isBlank()) {
+            lines.add(" query: '" + search + "'");
+        }
         lines.add("");
-        for (DateTask t : view) {
-            String s = " - " + t.toString();
+        for (int i = 0; i < view.size(); i++) {
+            String s = "" + viewIndex.get(i) + ". " + view.get(i).toString();
             lines.add(s);
         }
         ui.showMessage(lines);
