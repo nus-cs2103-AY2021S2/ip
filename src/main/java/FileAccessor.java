@@ -34,25 +34,28 @@ public class FileAccessor {
     }
 
     //assume in correct format
-    /*public static void WriteToTasks(String path, ArrayList<Task> tasks) throws IOException {
+    public static void WriteToTasks(String path, ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(path);
+        String s = "";
         for(Task task : tasks) {
             String done = "0";
             if(task.isDone) {
                 done = "1";
             }
-            String s = "";
+            //'\n' may not work in all OS, use the System.lineSeparator()
             if(task instanceof Todo) {
                 Todo todo = (Todo)task;
-                s = s + "T|" + done + "|" + todo.task + "\n";
+                s = s + "T|" + done + "|" + todo.task + System.lineSeparator();
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline)task;
-                s = s + "D|" + done + "|" + deadline.task + "|" + deadline.deadline + "\n";
+                s = s + "D|" + done + "|" + deadline.task + "|" + deadline.deadline + System.lineSeparator();
             } else {
                 Event event = (Event)task;
-                s = s + "E|" + done + "|" + event.task + "|" + event.event + "\n";
+                s = s + "E|" + done + "|" + event.task + "|" + event.event + System.lineSeparator();
             }
-            fw.write(s);
         }
-    }*/
+        fw.write(s);//write all as one string outside or else will keep writing for each task, but somehow give
+        // ioexception when put inside for loop?
+        fw.close();//rmb to close
+    }
 }

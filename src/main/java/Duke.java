@@ -104,11 +104,11 @@ public class Duke {
                         throw new IllegalArgumentException();
                     }
 
-                    /*try {
+                    try {
                         FileAccessor.WriteToTasks(relPath, tasks);
                     } catch (IOException e) {
                         System.out.println("Unable to save to hard drive");
-                    }*/
+                    }
                 } catch (IllegalArgumentException e) {
                     System.out.println(line + " Please enter 'todo (your task)', " +
                             "or 'deadline (your task) / (deadline date timing)',\n or " +
