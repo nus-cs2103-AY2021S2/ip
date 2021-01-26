@@ -186,10 +186,14 @@ public class Duke {
                     + "Expected format: list");
         }
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = tasks.get(i);
-            int index = i + 1;
-            printer.println(String.format("%d.%s", index, t));
+        if (tasks.size() == 0) {
+            printer.println("No tasks currently!");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                Task t = tasks.get(i);
+                int index = i + 1;
+                printer.println(String.format("%d.%s", index, t));
+            }
         }
     }
 
