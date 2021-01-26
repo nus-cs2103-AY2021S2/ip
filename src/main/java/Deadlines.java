@@ -9,7 +9,7 @@ public class Deadlines extends Task{
         this.by = by;
     }
 
-    public Deadlines(String description, String by, boolean isDone) {
+    public Deadlines(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }

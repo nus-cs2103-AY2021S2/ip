@@ -217,13 +217,13 @@ public class Duke {
                     numTasks++;
                     break;
                 case "D":
-                    String by = dataArr[3];
+                    LocalDate by = LocalDate.parse(dataArr[3]);
                     Deadlines newDeadline = new Deadlines(desc, by, isDone.equals("1"));
                     tasks.add(newDeadline);
                     numTasks++;
                     break;
                 case "E":
-                    String at = dataArr[3];
+                    LocalDate at = LocalDate.parse(dataArr[3]);
                     Events newEvent = new Events(desc, at, isDone.equals("1"));
                     tasks.add(newEvent);
                     numTasks++;
