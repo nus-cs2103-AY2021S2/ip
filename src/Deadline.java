@@ -1,12 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String time;
+    private LocalDateTime time;
 
     /**
      * Constructs a deadline task.
      * @param description a description of the deadline task.
      * @param time the time the task is due.
      */
-    public Deadline(String description, String time) {
+    public Deadline(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
@@ -17,13 +20,15 @@ public class Deadline extends Task {
      * @param time the time the task is due.
      * @param isDone the completion status of the task.
      */
-    public Deadline(String description, String time, boolean isDone) {
+    public Deadline(String description, LocalDateTime time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), time);
+        return String.format("[D]%s (by: %s)",
+                super.toString(),
+                time.format(DateTimeFormatter.ofPattern("d MMM y @ h:mm a")));
     }
 }

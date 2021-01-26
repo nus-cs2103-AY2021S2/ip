@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -54,7 +57,8 @@ public class Vergil {
             tasks.add(new Todo(desc));
             System.out.printf("Added '%s' as a ToDo task.\n", desc);
         } catch (IndexOutOfBoundsException e) {
-            throw new VergilException("Sorry! 'todo' commands should be typed as follows: todo <description>");
+            throw new VergilException("Sorry! 'todo' commands should be typed as follows:\n"
+                    + "    todo <description>");
         }
     }
 
@@ -68,13 +72,18 @@ public class Vergil {
         try {
             String[] bySplit = command.split(" /by ");
             String desc = bySplit[0].split(" ", 2)[1];
-            String time = bySplit[1];
+            LocalDateTime time = LocalDateTime.parse(
+                    bySplit[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
 
             tasks.add(new Deadline(desc, time));
-            System.out.printf("Added '%s' as a deadline task by '%s'.\n", desc, time);
-        } catch (IndexOutOfBoundsException e) {
-            throw new VergilException("Sorry! 'deadline' commands should be typed as follows: "
-                    + "deadline <description> /by <time>");
+            System.out.printf(
+                    "Added '%s' as a deadline task by '%s'.\n",
+                    desc,
+                    time.format(DateTimeFormatter.ofPattern("d MMM y @ h:mm a")));
+
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            throw new VergilException("Sorry! 'deadline' commands should be typed as follows:\n"
+                    + "    deadline <description> /by <date (d/m/yyyy)> <time, 24 hours (hhmm)>");
         }
     }
 
@@ -88,13 +97,18 @@ public class Vergil {
         try {
             String[] atSplit = command.split(" /at ");
             String desc = atSplit[0].split(" ", 2)[1];
-            String time = atSplit[1];
+            LocalDateTime time = LocalDateTime.parse(
+                    atSplit[1], DateTimeFormatter.ofPattern("d/M/y HHmm"));
 
             tasks.add(new Event(desc, time));
-            System.out.printf("Added '%s' as an event task at '%s'.\n", desc, time);
-        } catch (IndexOutOfBoundsException e) {
-            throw new VergilException("Sorry! 'event' commands should be typed as follows: "
-                    + "event <description> /at <time>");
+            System.out.printf(
+                    "Added '%s' as a event task at '%s'.\n",
+                    desc,
+                    time.format(DateTimeFormatter.ofPattern("d MMM y @ h:mm a")));
+
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            throw new VergilException("Sorry! 'event' commands should be typed as follows:\n"
+                    + "    event <description> /at <date (d/m/yyyy)> <time, 24 hours (hhmm)>");
         }
     }
 
@@ -117,7 +131,8 @@ public class Vergil {
                 System.out.printf("   %s\n", t);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-           throw new VergilException("Sorry! 'done' commands should be typed as follows: done <task number in list>");
+           throw new VergilException("Sorry! 'done' commands should be typed as follows:\n"
+                   + "    done <task number in list>");
         } catch (IndexOutOfBoundsException e) {
             throw new VergilException("Sorry! There is no task with the given number in the list.");
         }
@@ -137,8 +152,8 @@ public class Vergil {
             System.out.println("Acknowledged. Task deleted:");
             System.out.printf("   %s\n", t);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new VergilException("Sorry! 'delete' commands should be typed as follows: "
-                    + "delete <task number in list>");
+            throw new VergilException("Sorry! 'delete' commands should be typed as follows:\n"
+                    + "    delete <task number in list>");
         } catch (IndexOutOfBoundsException e) {
             throw new VergilException("Sorry! There is no task with the given number in the list.");
         }
