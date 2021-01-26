@@ -21,9 +21,6 @@ public class DateFormatter {
     }
 
     public static String decodeDateForStorage(LocalDate date) {
-        String dateVal = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dateVal.trim();
-        dateVal.replace(" ", "-");
-        return dateVal;
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

@@ -1,4 +1,4 @@
-package duke.util;
+package duke.tasks;
 
 import duke.ui.Ui;
 import duke.enums.Commands;
@@ -6,10 +6,7 @@ import duke.enums.Commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.util.DateFormatter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.Apollo;
 
+import duke.tasks.TaskHandler;
 import duke.ui.Ui;
 import duke.enums.Commands;
 
