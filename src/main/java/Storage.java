@@ -1,4 +1,9 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,11 +22,12 @@ public class Storage {
 
     /**
      * Read pre-existing file from previous usage of bot into a list.
+     * If no such file can be found, then create a new .txt file.
      *
      * @return existing list of tasks
      * @throws IOException
      */
-    public ArrayList<Task> load() throws IOException{
+    public ArrayList<Task> load() throws IOException {
         BufferedReader reader = null;
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -50,7 +56,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            File file = new File("duke.txt");
+            new File("duke.txt");
         }
         return list;
     }

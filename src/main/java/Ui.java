@@ -21,11 +21,13 @@ public class Ui {
     }
 
     public void showDone(Task completedTask) {
-        System.out.println("Nice! I've marked this task as done:\n" +  completedTask.toString());
+        System.out.println("Nice! I've marked this task as done:\n"
+                           + completedTask.toString());
     }
 
     public void showAddTask(ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
+        System.out.println("Got it. I've added this task:\n"
+                           + list.get(list.size() - 1));
         System.out.printf("Now you have %d task(s) in the list.\n", list.size());
     }
 
@@ -34,7 +36,8 @@ public class Ui {
     }
 
     public void showDeleteTask(ArrayList<Task> list, Task deletedTask) {
-        System.out.println("Noted. I've removed this task:\n" + deletedTask.toString());
+        System.out.println("Noted. I've removed this task:\n"
+                           + deletedTask.toString());
         System.out.printf("Now you have %d tasks in the list.\n", list.size());
     }
 

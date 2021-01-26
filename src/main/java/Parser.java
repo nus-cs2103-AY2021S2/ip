@@ -66,7 +66,7 @@ public class Parser {
                     Task task = new Todo(description);
                     tasks.addTask(task);
                     ui.showAddTask(tasks.list);
-                } catch (StringIndexOutOfBoundsException e){
+                } catch (StringIndexOutOfBoundsException e) {
                     ui.showInvalidTodo();
                 }
             } else if (commandType.equals("deadline")) {

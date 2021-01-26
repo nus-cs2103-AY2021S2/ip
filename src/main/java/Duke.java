@@ -1,4 +1,5 @@
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,7 +18,7 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException, FileNotFoundException {
+    public void run() throws FileNotFoundException {
         ui.showGreetings();
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
@@ -34,7 +35,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException, DukeException {
+    public static void main(String[] args) throws FileNotFoundException {
         new Duke("duke.txt").run();
     }
 
