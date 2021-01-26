@@ -31,7 +31,7 @@ public class FindCommand extends Command {
         if (results.size() == 0) {
             this.ui.showMsg("There are no tasks matching your input :(");
         } else {
-            this.ui.showMsg("There are the search results:");
+            this.ui.showMsg("These are the search results:");
             printList(results);
         }
     }

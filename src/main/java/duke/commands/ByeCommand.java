@@ -1,10 +1,12 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
+import duke.utils.FileTaskStringConverter;
 import duke.utils.Storage;
 import duke.utils.Ui;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
@@ -19,8 +21,7 @@ public class ByeCommand extends Command {
     @Override
     public void execute() {
         try {
-            List<String> converted = FileTaskStringConverter.allTaskToAllString(taskList.getList());
-            this.storage.writeToFile(converted);
+            this.storage.writeToFile(this.taskList);
 
             String endMessage = "Bye. Hope to see you again soon!";
             this.ui.showMsg(endMessage);
