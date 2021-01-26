@@ -12,17 +12,17 @@ Now you have 1 tasks.
 --------------------------------------
 --------------------------------------
 Got it. I've added this task:
-	[D][X] return book (by: Sunday)
+	[D][X] return book (by: 01 Nov 20 1015AM)
 Now you have 2 tasks.
 --------------------------------------
 --------------------------------------
 Got it. I've added this task:
-	[E][X] project meeting (at: Mon 2-4pm)
+	[E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
 Now you have 3 tasks.
 --------------------------------------
 --------------------------------------
 Nice! I've marked this as done: 
-[D][?] return book (by: Sunday)
+[D][?] return book (by: 01 Nov 20 1015AM)
 --------------------------------------
 --------------------------------------
 Got it. I've added this task:
@@ -32,67 +32,9 @@ Now you have 4 tasks.
 --------------------------------------
 Here are the tasks in your list:
 1. [T][X] borrow book
-2. [D][?] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
+2. [D][?] return book (by: 01 Nov 20 1015AM)
+3. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
 4. [T][X] borrow other book
---------------------------------------
---------------------------------------
-Sorry, I did not understand that.
---------------------------------------
---------------------------------------
-Sorry, I did not understand that.
---------------------------------------
---------------------------------------
-Sorry, I did not understand that.
---------------------------------------
---------------------------------------
-Sorry, I did not understand that.
---------------------------------------
---------------------------------------
-Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][?] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
-4. [T][X] borrow other book
---------------------------------------
---------------------------------------
-Nice! I've marked this as done: 
-[T][?] borrow other book
---------------------------------------
---------------------------------------
-Sorry, I could not find that task.
---------------------------------------
---------------------------------------
-Sorry, I could not find that task.
---------------------------------------
---------------------------------------
-Sorry, the description of a todo cannot be empty.
---------------------------------------
---------------------------------------
-Sorry, the description of a deadline cannot be empty.
---------------------------------------
---------------------------------------
-Sorry, the description of a event cannot be empty.
---------------------------------------
---------------------------------------
-Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][?] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
-4. [T][?] borrow other book
---------------------------------------
---------------------------------------
-Sorry, I could not find that task.
---------------------------------------
---------------------------------------
-Sorry, I could not find that task.
---------------------------------------
---------------------------------------
-Here are the tasks in your list:
-1. [T][X] borrow book
-2. [D][?] return book (by: Sunday)
-3. [E][X] project meeting (at: Mon 2-4pm)
-4. [T][?] borrow other book
 --------------------------------------
 --------------------------------------
 Got it. I've removed this task:
@@ -101,9 +43,60 @@ Now you have 3 tasks.
 --------------------------------------
 --------------------------------------
 Here are the tasks in your list:
-1. [D][?] return book (by: Sunday)
-2. [E][X] project meeting (at: Mon 2-4pm)
-3. [T][?] borrow other book
+1. [D][?] return book (by: 01 Nov 20 1015AM)
+2. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+3. [T][X] borrow other book
+--------------------------------------
+--------------------------------------
+Sorry, I did not understand that.
+--------------------------------------
+--------------------------------------
+Sorry, I did not understand that.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a todo cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a deadline cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the date of a deadline must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the description of a event cannot be empty.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the start and end date of an event must be specified.
+--------------------------------------
+--------------------------------------
+Sorry, the end date of an event must be after the start date.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Sorry, I could not find that task.
+--------------------------------------
+--------------------------------------
+Here are the tasks in your list:
+1. [D][?] return book (by: 01 Nov 20 1015AM)
+2. [E][X] project meeting (from: 01 Nov 20 1015AM to 01 Nov 20 1020AM)
+3. [T][X] borrow other book
 --------------------------------------
 --------------------------------------
 Goodbye!
