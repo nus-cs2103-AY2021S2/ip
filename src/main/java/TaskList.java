@@ -23,42 +23,50 @@ public class TaskList {
 
     public Task deleteTask(int i) throws DukeException {
         Task t;
+
         try {
             t = lst.get(i);
             lst.remove(i);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\"%d\" is an invalid number!", i));
         }
+
         return t;
     }
 
     public Task completeTask(int i) throws DukeException {
         Task t;
+
         try {
             t = lst.get(i);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\"%d\" is an invalid number!", i));
         }
         t.completed();
+
         return t;
     }
 
     public List<Task> retrieveByDate(LocalDate d) {
         List<Task> results = new ArrayList<>();
+
         for (Task t : lst) {
             if (d.equals(t.date)) {
                 results.add(t);
             }
         }
+
         return results;
     }
 
     public List<String> listOutTask() {
         List<String> stringlst = new ArrayList<>();
         int counter = 1;
+
         for (Task t : lst) {
             stringlst.add(String.format("%d. %s", counter++, t.toString()));
         }
+        
         return stringlst;
     }
 

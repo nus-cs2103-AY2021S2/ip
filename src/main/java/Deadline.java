@@ -27,6 +27,7 @@ public class Deadline extends Task {
         }
 
         LocalDate date;
+        
         try {
             date = LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {

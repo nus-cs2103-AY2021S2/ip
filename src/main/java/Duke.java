@@ -33,6 +33,7 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
+        
         try {
             tasks = new TaskList(storage.loadTaskList());
         } catch (DukeException e) {
