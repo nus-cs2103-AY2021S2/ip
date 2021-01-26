@@ -23,22 +23,22 @@ Expected outcome:
 
 Example of usage: 
 
-`deadline complete assignment /By tmr 2359`
+`deadline complete assignment /by 2021-01-05`
 
 Expected outcome:
 
 `Got it. I've added this task: 
-       [D][ ] complete assignment (By tmr 2359)
+       [D][ ] complete assignment (05 Jan 2021)
      Now you have 6 tasks in the list.`
 	 
 Example of usage: 
 
-`event attend meeting /Fri 2pm-3pm`
+`event attend meeting /from 2021-01-05 to 2021-01-06`
 
 Expected outcome:
 
 `Got it. I've added this task: 
-       [E][ ] attend meeting (Fri 2pm-3pm)
+       [E][ ] attend meeting (05 Jan 2021 to 06 Jan 2021)
      Now you have 7 tasks in the list.`
 
 ### Feature 2 - View list

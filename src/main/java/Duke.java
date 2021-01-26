@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
     public static void main(String[] args) {
@@ -77,9 +79,11 @@ public class Duke {
             } else if (textInput.startsWith("deadline")) {
                 try {
                     textInput = textInput.substring(9);
-                    int index = textInput.indexOf("/");
+                    int index = textInput.indexOf("/by ");
                     if (index != -1) {
-                        Task task = new Deadline(textInput.substring(0, index - 1), textInput.substring(index + 1));
+                        String dateInfo = textInput.substring(index + 4);
+                        LocalDate localDate = LocalDate.parse(dateInfo);
+                        Task task = new Deadline(textInput.substring(0, index - 1), localDate);
                         listOfTasks.add(task);
                         System.out.println("\t_____________________________________________________________");
                         System.out.println("\t Got it. I've added this task:");
@@ -93,19 +97,29 @@ public class Duke {
                     System.out.println("\t_____________________________________________________________");
                     System.out.println("\t ☹ OOPS!!! The description of a deadline cannot be empty.");
                     System.out.println("\t_____________________________________________________________");
+                } catch (DateTimeParseException e) {
+                    System.out.println("INVALID COMMAND!");
                 }
             } else if (textInput.startsWith("event")) {
                 try {
                     textInput = textInput.substring(6);
-                    int index = textInput.indexOf("/");
+                    int index = textInput.indexOf("/from ");
                     if (index != -1) {
-                        Task task = new Event(textInput.substring(0, index - 1), textInput.substring(index + 1));
-                        listOfTasks.add(task);
-                        System.out.println("\t_____________________________________________________________");
-                        System.out.println("\t Got it. I've added this task:");
-                        System.out.println("\t   " + task);
-                        System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
-                        System.out.println("\t_____________________________________________________________");
+                        String dateInfo = textInput.substring(index + 6);
+                        int index2 = dateInfo.indexOf("to ");
+                        if (index2 != -1) {
+                            LocalDate startDate = LocalDate.parse(dateInfo.substring(0, index2 - 1));
+                            LocalDate endDate = LocalDate.parse(dateInfo.substring(index2 + 3));
+                            Task task = new Event(textInput.substring(0, index - 1), startDate, endDate);
+                            listOfTasks.add(task);
+                            System.out.println("\t_____________________________________________________________");
+                            System.out.println("\t Got it. I've added this task:");
+                            System.out.println("\t   " + task);
+                            System.out.println("\t Now you have " + listOfTasks.size() + " tasks in the list.");
+                            System.out.println("\t_____________________________________________________________");
+                        } else {
+                            System.out.println("INVALID COMMAND!");
+                        }
                     } else {
                         System.out.println("INVALID COMMAND!");
                     }
@@ -113,6 +127,8 @@ public class Duke {
                     System.out.println("\t_____________________________________________________________");
                     System.out.println("\t ☹ OOPS!!! The description of a event cannot be empty.");
                     System.out.println("\t_____________________________________________________________");
+                } catch (DateTimeParseException e) {
+                    System.out.println("INVALID COMMAND!");
                 }
             } else {
                 System.out.println("\t_____________________________________________________________");
