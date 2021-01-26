@@ -5,7 +5,29 @@ import java.util.ArrayList;
 public class Duke {
     static final String lineAfterCommand = "____________________________________________________________";
 
+    private Storage storage;
+    private List<Task> tasks;
+
     public static void main(String[] args) {
+        try {
+            new Duke("./data/duke.txt").run();
+        }
+        catch (DukeExceptionFolder e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        catch (DukeExceptionCorruptedData e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+    }
+
+    public Duke(String filepath) throws DukeExceptionFolder,DukeExceptionCorruptedData {
+        this.storage = new Storage(filepath);
+        this.tasks = storage.load();
+    }
+
+    public void run() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +37,6 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         System.out.println(lineAfterCommand + "\nHello! I'm  Duke");
         System.out.println("What can I do for you?\n" + lineAfterCommand + "\n");
-        List<Task> tasks = new ArrayList<>();
         while (scanner.hasNext()) {
             String command = scanner.nextLine();
             if (command.equals("bye")){
@@ -27,6 +48,7 @@ public class Duke {
             try {
                 if (command.equals("list")) {
                     iterateList(tasks);
+                    continue;
                 } else if (inputs[0].equals("done")) {
                     finishATask(tasks, inputs);
                 }
@@ -44,6 +66,12 @@ public class Duke {
             catch (DukeException e) {
                 System.out.println(e.getMessage());
                 System.out.println(lineAfterCommand + "\n");
+                continue;
+            }
+            try {
+                storage.writeFile(tasks);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -66,23 +94,23 @@ public class Duke {
     }
 
     public static Task processTask(String command, String input) throws DukeException {
-        Task task = new Task("");
+        Task task;
         if (command.equals("todo")) {
-            if (input.substring(5).equals("")) {
+            if (input.length() <= 5) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
             task = new Todo(input.substring(5));
             return task;
         } else if (command.equals("deadline")) {
-            if (input.substring(9).equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            if (input.length() <= 9) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             String[] spliced = input.substring(9).split("/");
             task = new Deadline(spliced[0], spliced[1]);
             return task;
         } else if (command.equals("event")) {
-            if (input.substring(6).equals("")) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            if (input.length() <= 6) {
+                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             }
             String[] spliced = input.substring(6).split("/");
             task = new Event(spliced[0], spliced[1]);

@@ -18,6 +18,11 @@ public class Event extends Task{
     }
 
     @Override
+    public String saveString() {
+        return "E|" + super.saveString() + "|" + this.deadline;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + this.deadline;
     }

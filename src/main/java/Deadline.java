@@ -18,6 +18,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String saveString() {
+        return "D|" + super.saveString() + "|" + this.deadline;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + this.deadline;
     }
