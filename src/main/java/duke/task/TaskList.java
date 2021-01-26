@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Represents the list where tasks are stored.
@@ -11,6 +13,15 @@ public class TaskList {
 
     public TaskList() {
         lst = new ArrayList<>();
+    }
+
+    /**
+     * Returns the number of tasks in this list
+     *
+     * @return the number of tasks in this list
+     */
+    public int size() {
+        return lst.size();
     }
 
     /**
@@ -52,12 +63,7 @@ public class TaskList {
         lst.forEach(action);
     }
 
-    /**
-     * Returns the number of tasks in this list
-     *
-     * @return the number of tasks in this list
-     */
-    public int size() {
-        return lst.size();
+    public List<Task> find(String target) {
+        return lst.stream().filter(task -> task.hasStrInProps(target)).collect(Collectors.toList());
     }
 }

@@ -57,6 +57,17 @@ public class Deadline extends Task {
                 by.getDateOnly(), by.toISODateTime());
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    @Override
+    public boolean hasStrInProps(String str) {
+        return getContent().contains(str);
+    }
+
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(), getContent(), by);

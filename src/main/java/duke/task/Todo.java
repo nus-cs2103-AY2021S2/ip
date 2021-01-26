@@ -38,6 +38,17 @@ public class Todo extends Task {
         return String.format("T | %s | %s", getIsDone(), getContent());
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    @Override
+    public boolean hasStrInProps(String str) {
+        return getContent().contains(str);
+    }
+
     @Override
     public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), getContent());

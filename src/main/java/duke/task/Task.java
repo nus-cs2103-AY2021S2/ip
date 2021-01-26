@@ -32,6 +32,14 @@ public class Task {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Returns true if the task contains str in one of its fields
+     *
+     * @param str the target string
+     * @return true if the task contains str in one of its fields
+     */
+    public boolean hasStrInProps(String str) { throw new UnsupportedOperationException(); }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), getContent());

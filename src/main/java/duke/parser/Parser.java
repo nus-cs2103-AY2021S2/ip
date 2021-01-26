@@ -46,6 +46,9 @@ public class Parser {
         case "delete":
             cmd = new DeleteCmd(cmdArgs);
             break;
+        case "find":
+            cmd = new FindCmd(cmdArgs);
+            break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that command means :-(");
         }
