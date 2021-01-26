@@ -1,9 +1,15 @@
 public class Event extends Task{
     protected String at;
 
-    public Event(int number, String name, String at) {
-        super(number, name);
+    public Event(String name, String at) {
+        super(name);
         this.at = at;
+    }
+
+    public Event(String name, String at, boolean done) {
+        super(name);
+        this.at = at;
+        this.done = done;
     }
 
     @Override
@@ -17,7 +23,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + at + ")";
     }
 }
 

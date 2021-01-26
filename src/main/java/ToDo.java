@@ -1,8 +1,11 @@
 public class ToDo extends Task{
-    public ToDo(int number, String name) {
-        super(number, name);
+    public ToDo(String name) {
+        super(name);
     }
-
+    public ToDo(String name, boolean done) {
+        super(name);
+        this.done = done;
+    }
     @Override
     public void addTask(int count) throws DukeException{
         if(this.name.equals("todo")) {

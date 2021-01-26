@@ -1,9 +1,14 @@
 public class Deadline extends Task{
     protected String by;
 
-    public Deadline(int number, String name, String by) {
-        super(number, name);
+    public Deadline(String name, String by) {
+        super(name);
         this.by = by;
+    }
+    public Deadline(String name, String by, boolean done) {
+        super(name);
+        this.by = by;
+        this.done = done;
     }
 
     @Override
@@ -17,7 +22,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }
 

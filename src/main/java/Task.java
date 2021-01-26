@@ -1,10 +1,8 @@
 public class Task {
-    public int number;
     public boolean done;
     public String name;
 
-    public Task(int number, String name) {
-        this.number = number;
+    public Task(String name) {
         this.done = false;
         this.name = name;
     }
