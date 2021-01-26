@@ -1,6 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class CommandParser {
     private TaskList tasks;
     private Ui ui;
@@ -11,11 +8,11 @@ public class CommandParser {
     }
 
     public boolean parseCommand(String userInput) throws DukeException {
-        // display list
         if (userInput.toLowerCase().equals("list")) {
+            // display list
             ui.borderPrint(tasks.display());
-        // finish a task
         } else if (userInput.toLowerCase().matches("^(do(ne)?|finish(ed)?|completed?) \\d+$")) {
+            // finish a task
             String[] bits = userInput.split(" ");
             int idx = Integer.parseInt(bits[1]);
             if (idx < 1 || idx > tasks.size()) {
@@ -25,12 +22,12 @@ public class CommandParser {
                 if (finishedTask.isDone()) {
                     throw new DukeException("That task's already done!");
                 } else {
-                    finishedTask.finish();
+                    finishedTask.markAsDone();
                     ui.showDoneTask(finishedTask);
                 }
             }
-        // manually remove task
         } else if (userInput.toLowerCase().matches("^(delete|remove) \\d+$")) {
+            // manually remove task
             String[] bits = userInput.split(" ");
             int idx = Integer.parseInt(bits[1]);
             if (idx < 1 || idx > tasks.size()) {
@@ -39,13 +36,13 @@ public class CommandParser {
                 Task removedTask = tasks.remove(idx);
                 ui.showRemovedTask(removedTask, tasks.size());
             }
-        // add task to list
         } else if (userInput.toLowerCase().matches("^(todo|deadline|event)( .+)?$")) {
+            // add task to list
             Task newTask = TaskParser.parseTask(userInput);
             tasks.add(newTask);
             ui.showAddedTask(newTask, tasks.size());
-        // end session
         } else if (userInput.toLowerCase().equals("bye")) {
+            // end session
             return false;
         } else {
             throw new DukeException("I don't understand that command!");
