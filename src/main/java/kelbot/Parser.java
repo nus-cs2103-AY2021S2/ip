@@ -1,20 +1,9 @@
-import com.sun.source.doctree.SerialDataTree;
+package kelbot;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-enum Command {
-    BYE,
-    LIST,
-    TODO,
-    DEADLINE,
-    EVENT,
-    DONE,
-    DELETE
-}
-
-public class Parser implements Serializable {
+public class Parser {
     
     private Command command;
     private String taskName = "";
