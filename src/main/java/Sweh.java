@@ -1,7 +1,8 @@
 import util.Formatter;
+import static util.Parser.*;
 
+import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Sweh {
@@ -36,26 +37,23 @@ public class Sweh {
     }
 
     public static String respond(String commandString) {
-        String[] commandArr = commandString.split(" ", 2);
-        String command = commandArr[0];
-        Optional<String> argOptional = commandArr.length > 1
-            ? Optional.of(commandArr[1])
-            : Optional.empty();
+        String command = getCommand(commandString);
+        HashMap<String, String> argMap = getArgMap(commandString);
 
         try {
             switch (command) {
                 case "list":
                     return taskList.listTasks();
                 case "done":
-                    return taskList.markTaskDone(argOptional);
+                    return taskList.markTaskDone(argMap);
                 case "delete":
-                    return taskList.deleteTask(argOptional);
+                    return taskList.deleteTask(argMap);
                 case "todo":
-                    return taskList.addTask(ToDo.newInstance(argOptional));
+                    return taskList.addTask(ToDo.newInstance(argMap));
                 case "deadline":
-                    return taskList.addTask(Deadline.newInstance(argOptional));
+                    return taskList.addTask(Deadline.newInstance(argMap));
                 case "event":
-                    return taskList.addTask(Event.newInstance(argOptional));
+                    return taskList.addTask(Event.newInstance(argMap));
                 case "bye":
                     return "Bye. See ya again soon!";
                 default:

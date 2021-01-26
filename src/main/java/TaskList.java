@@ -4,10 +4,7 @@ import util.Saver;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -47,11 +44,11 @@ public class TaskList {
             + taskList.get(position).toString();
     }
 
-    public String markTaskDone(Optional<String> args) throws NoSuchElementException, 
+    public String markTaskDone(HashMap<String, String> argMap) throws NoSuchElementException,
             IndexOutOfBoundsException {
         int position;
         try {
-            position = Integer.parseInt(args.get()) - 1;
+            position = Integer.parseInt(argMap.get("desc")) - 1;
             taskList.get(position).markDone();
         } catch (NoSuchElementException e) {
             throw new NoSuchElementException("Error: Please incude the index of the task.");
@@ -65,12 +62,12 @@ public class TaskList {
             + taskList.get(position).toString();
     }
 
-    public String deleteTask(Optional<String> args) throws NoSuchElementException, 
+    public String deleteTask(HashMap<String, String> argMap) throws NoSuchElementException,
             IndexOutOfBoundsException {
         int position;
         Task taskToRemove;
         try {
-            position = Integer.parseInt(args.get()) - 1;
+            position = Integer.parseInt(argMap.get("desc")) - 1;
             taskToRemove = taskList.get(position);
             taskList.remove(position);
         } catch (NoSuchElementException | NumberFormatException e) {

@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -8,18 +9,14 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public static ToDo newInstance(Optional<String> argsOpt) throws NoSuchElementException{
-        String args;
-
-        try {
-            args = argsOpt.get();
-        } catch (NoSuchElementException e) {
+    public static ToDo newInstance(HashMap<String, String> argMap) throws NoSuchElementException {
+        if (!argMap.containsKey("desc")) {
             throw new NoSuchElementException("Error: The description for todo cannot be empty.");
         }
-        
-        return new ToDo(args);
-    }
 
+        String desc = argMap.get("desc");
+        return new ToDo(desc);
+    }
 
     @Override
     public String toString() {

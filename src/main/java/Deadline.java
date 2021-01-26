@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -10,31 +11,14 @@ public class Deadline extends Task {
         this.endDate = endDate;
     }
 
-    public static Deadline newInstance(String args) {
-        String[] argArr = args.split("/");
-        for (String s: argArr) {
-            if (s.startsWith("by ")) {
-                return new Deadline(argArr[0], s.substring(3));
-            }
-        }
-        return new Deadline(argArr[0], "N/A");
-    }
-
-    public static Deadline newInstance(Optional<String> argsOpt) throws NoSuchElementException{
-        String[] argArr;
-
-        try {
-            argArr = argsOpt.get().split("/");
-        } catch (NoSuchElementException e) {
-            throw new NoSuchElementException("Error: The description for deadline cannot be empty");
+    public static Deadline newInstance(HashMap<String, String> argMap) throws NoSuchElementException {
+        if (!argMap.containsKey("desc")) {
+            throw new NoSuchElementException("Error: The description for todo cannot be empty.");
         }
 
-        for (String s: argArr) {
-            if (s.startsWith("by ")) {
-                return new Deadline(argArr[0], s.substring(3));
-            }
-        }
-        return new Deadline(argArr[0], "N/A");
+        String desc = argMap.get("desc");
+        String endDate = argMap.getOrDefault("by", "N/A");
+        return new Deadline(desc, endDate);
     }
 
     @Override
