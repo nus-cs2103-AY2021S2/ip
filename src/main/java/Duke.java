@@ -1,5 +1,6 @@
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +22,7 @@ public class Duke {
         this.printer = printer;
         this.input = new Scanner(inputStream);
         tasks = new ArrayList<>();
+        loadTasks();
     }
 
     public static void main(String[] args) {
@@ -79,6 +81,8 @@ public class Duke {
                 } catch (DukeException ex) {
                     printer.println(ex.getMessage());
                 }
+
+                saveTasks();
             }
         }
     }
@@ -275,6 +279,50 @@ public class Duke {
         }
     }
 
+    private void loadTasks() {
+        // try to open file
+        try {
+            File f = new File(dataDirName + File.separator + dataFileName);
+            Scanner sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                String taskSerial = sc.nextLine();
+                String[] fields = taskSerial.split("\\|");
+
+                String type = fields[0];
+                boolean isDone = Boolean.parseBoolean(fields[1]);
+                String description = fields[2];
+
+                Task t;
+
+                switch (type) {
+                case "T":
+                    t = new ToDo(description);
+                    break;
+                case "E":
+                    String period = fields[3];
+                    t = new Event(description, period);
+                    break;
+                case "D":
+                    String time = fields[3];
+                    t = new Deadline(description, time);
+                    break;
+                default:
+                    throw new DukeException(String.format("Warning: invalid type '%s'. Aborting!", type));
+                }
+
+                if (isDone) {
+                    t.markAsDone();
+                }
+
+                addTask(t);
+            }
+        } catch (FileNotFoundException ex) {
+            // If no data file then nothing to load.
+        } catch (DukeException ex) {
+            printer.println(ex.getMessage());
+        }
+    }
+
     private void saveTasks() {
         // marshall data to save
         StringBuilder data = new StringBuilder();
@@ -282,6 +330,7 @@ public class Duke {
             data.append(t.serialize()).append("\n");
         }
 
+        // Solution below adapted from https://tinyurl.com/y35nn2nl
         // create folders if necessary
         File directory = new File(dataDirName);
         if (!directory.exists()) {
@@ -302,11 +351,9 @@ public class Duke {
 
     private void addTask(Task t) {
         tasks.add(t);
-        saveTasks();
     }
 
     private void removeTaskAt(int index) {
         tasks.remove(index);
-        saveTasks();
     }
 }
