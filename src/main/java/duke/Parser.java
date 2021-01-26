@@ -23,7 +23,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
-            commandType = new AddTask(taskCommand, input.replaceFirst(taskCommand, ""));
+            commandType = new AddTask(taskCommand, input.replaceFirst(taskCommand + " ", ""));
             break;
         case "delete":
             commandType = new DeleteTask(taskCommand, Integer.parseInt(commandStr[1]));

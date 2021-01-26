@@ -10,13 +10,13 @@ public class DeleteTask extends Command {
 
     public DeleteTask(String commandType, int index) {
         super.commandType = commandType;
-        super.commandDetails = "";
+        super.commandDetails = String.valueOf(index);
         super.dateTime = "";
         super.outputMessage = "";
         super.index = index;
     }
 
-    public void handleDeleteTask(TaskList taskList) {
+    private void handleDeleteTask(TaskList taskList) {
         Task deleteTask = taskList.get(index - 1);
         taskList.remove(deleteTask);
         this.outputMessage = "Noted. I've removed this task: \n" + "\t  " + deleteTask.toString()

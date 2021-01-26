@@ -10,13 +10,13 @@ public class DoneCommand extends Command {
 
     public DoneCommand(String commandType, int index) {
         super.commandType = commandType;
-        super.commandDetails = "";
+        super.commandDetails = String.valueOf(index);
         super.dateTime = "";
         super.outputMessage = "";
         super.index = index;
     }
 
-    public void markDoneTask(TaskList taskList) {
+    private void markDoneTask(TaskList taskList) {
         Task doneTask = taskList.get(this.index - 1);
         doneTask.markAsDone();
         this.outputMessage = " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();

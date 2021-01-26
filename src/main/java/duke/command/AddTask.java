@@ -19,7 +19,7 @@ public class AddTask extends Command {
         super.index = -1;
     }
 
-    public void handleNewTask(TaskList taskList) throws DukeException {
+    private void handleNewTask(TaskList taskList) throws DukeException {
         Task newTask = null;
         this.outputMessage = " Got it. I've added this task: \n";
 
@@ -47,7 +47,7 @@ public class AddTask extends Command {
         }
     }
 
-    public void formatDateTime() throws DukeException {
+    private void formatDateTime() throws DukeException {
         String[] result;
 
         if (commandType.equals("event")) {
@@ -63,7 +63,7 @@ public class AddTask extends Command {
         }
     }
 
-    public boolean validDateTime(String dateTime) {
+    private boolean validDateTime(String dateTime) {
         try
         {
             LocalDate.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd yyyy"));

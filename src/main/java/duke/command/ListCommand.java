@@ -15,7 +15,7 @@ public class ListCommand extends Command {
         super.index = -1;
     }
 
-    public void retrieveList(TaskList taskList) {
+    private void retrieveList(TaskList taskList) {
         StringBuilder currText = new StringBuilder(" Here are the tasks in your list:");
 
         for (int num = 1; num <= taskList.size(); num++) {

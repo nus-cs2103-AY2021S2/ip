@@ -15,7 +15,7 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void greetUser() {
+    private void greetUser() {
         String output = " Hello! I'm Duke\n" + "\t What can I do for you?";
         display(output);
     }
