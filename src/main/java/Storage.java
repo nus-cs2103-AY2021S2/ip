@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class DukeFile {
+public class Storage {
     public static void addToFile(Task task) {
         File save = new File("./data/duke.txt");
         FileWriter fw = null;
