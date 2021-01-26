@@ -16,7 +16,7 @@ public class Task implements Serializable {
         taskUID = UID_CURR++;
     }
 
-    public int getTaskUID() {
+    public int getTaskUid() {
         return taskUID;
     }
 
@@ -33,7 +33,7 @@ public class Task implements Serializable {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markAsDone() {
+    public void getDone() {
         this.isDone = true;
     }
 
