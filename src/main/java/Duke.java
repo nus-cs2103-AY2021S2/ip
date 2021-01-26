@@ -6,11 +6,15 @@ public class Duke {
     private final ArrayList<Task> tasks;
 
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo =
+                "$$    $$                                $$\n" +
+                "$$    $$                                $$\n" +
+                "$$    $$   $$$$$$   $$$$$$$    $$$$$$$  $$$$$$$   $$$$$$ $$$$    $$$$$$   $$$$$$$\n" +
+                "$$$$$$$$  $$    $$  $$    $$  $$        $$    $$  $$   $$   $$        $$  $$    $$\n" +
+                "$$    $$  $$$$$$$$  $$    $$  $$        $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n" +
+                "$$    $$  $$        $$    $$  $$        $$    $$  $$   $$   $$  $$    $$  $$    $$\n" +
+                "$$    $$   $$$$$$$  $$    $$   $$$$$$$  $$    $$  $$   $$   $$   $$$$$$$  $$    $$\n";
+
         System.out.println("Hello from\n" + logo);
 
         Duke duke = new Duke();
@@ -37,7 +41,7 @@ public class Duke {
     }
 
     private void greet() {
-        System.out.println("Hello Boss, I'm your top henchman.\n" + "What can I do for you?\n");
+        System.out.println("Greetings Boss, I'm your top henchman.\n" + "What can I do for you?\n");
     }
 
     private void listen(String command) throws DukeException {
