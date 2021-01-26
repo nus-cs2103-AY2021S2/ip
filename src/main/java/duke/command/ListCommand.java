@@ -3,10 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ListCommand extends Command{
 
@@ -14,7 +10,7 @@ public class ListCommand extends Command{
         super("");
     }
 
-    public void execute(Ui ui, Storage s, TaskList list) throws IOException {
+    public void execute(Ui ui, Storage s, TaskList list) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < list.getSize(); i++) {
