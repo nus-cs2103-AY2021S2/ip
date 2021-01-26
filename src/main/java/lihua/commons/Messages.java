@@ -1,19 +1,24 @@
 package lihua.commons;
 
-import lihua.commands.*;
+import lihua.commands.AddCommand;
+import lihua.commands.DoneCommand;
+import lihua.commands.DeleteCommand;
+import lihua.commands.ListCommand;
+import lihua.commands.HelpCommand;
+import lihua.commands.ExitCommand;
 
 public class Messages {
     public static final String MESSAGE_HELLO =
-            "Hello! My name is Lihua.\n" +
-                    "What can I do for you today? (=~ω~=)";
+            "Hello! My name is Lihua.\n"
+                    + "What can I do for you today? (=~ω~=)";
     public static final String MESSAGE_GET_HELP =
-            "Sorry, I do not understand your command :')\n" +
-                    "If you are stuck, type 'help' to get a list of operations available.";
+            "Sorry, I do not understand your command :')\n"
+                    + "If you are stuck, type 'help' to get a list of operations available.";
     public static final String MESSAGE_LINE =
             "-------------------------------------------------";
     public static final String MESSAGE_INFORM_EXIT =
-            "Exiting Lihua as requested...\n" +
-                    "Goodbye! Hope to see you again soon! (=~ω~=)";
+            "Exiting Lihua as requested...\n"
+                    + "Goodbye! Hope to see you again soon! (=~ω~=)";
     public static final String MESSAGE_REPORTING_ADDING_FAILURE =
             "Sorry, the task adding failed. :( Please check your storage devices.";
     public static final String MESSAGE_VIEW_COMMANDS =
@@ -25,6 +30,6 @@ public class Messages {
                     + "\n" + HelpCommand.MESSAGE_USAGE
                     + "\n" + ExitCommand.MESSAGE_USAGE;
     public static final String MESSAGE_REPORTING_INVALID_INDEX =
-            "Sorry, the index you specified does not exist :'), " +
-                    "please type 'list' to see available indices to delete.";
+            "Sorry, the index you specified does not exist :'), "
+                    + "please type 'list' to see available indices to delete.";
 }

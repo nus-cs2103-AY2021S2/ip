@@ -1,10 +1,14 @@
 package lihua.storage;
 
-import lihua.tasks.*;
+import lihua.tasks.Deadline;
+import lihua.tasks.Event;
+import lihua.tasks.Task;
+import lihua.tasks.Tasks;
+import lihua.tasks.ToDo;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -35,6 +39,7 @@ public class Storage {
                 String type = (String) jsonObject.get("type");
                 String description = (String) jsonObject.get("description");
                 boolean isDone = (boolean) jsonObject.get("isDone");
+
                 Task t = null;
                 // either one of the cases will be entered
                 // <-> t will not be null
@@ -65,6 +70,7 @@ public class Storage {
             File fileToCreate = new File(DATA_PATH);
             fileToCreate.getParentFile().mkdir();
             fileToCreate.createNewFile();
+
             FileWriter fileWriter = new FileWriter(DATA_PATH);
             fileWriter.write(jsonArray.toJSONString());
             fileWriter.close();
