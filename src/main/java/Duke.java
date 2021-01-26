@@ -1,6 +1,6 @@
 import main.java.*;
-
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,10 +89,11 @@ public class Duke {
                             task = new Todo(inputArr[2]);
                             break;
                         case "D":
-                            task = new Deadline(inputArr[2], inputArr[3]);
+                            task = new Deadline(inputArr[2], LocalDate.parse(inputArr[3]));
                             break;
                         case "E":
-                            task = new Event(inputArr[2], inputArr[3]);
+                            String[] timeParams = inputArr[3].split(" ", 2);
+                            task = new Event(inputArr[2], LocalDate.parse(timeParams[0]), timeParams[1]);
                             break;
                     }
 
@@ -125,6 +126,7 @@ public class Duke {
         List<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
+
         try {
             Path dirPath = Paths.get("data");
             Path filePath = Paths.get("data", "duke.txt");
@@ -146,20 +148,16 @@ public class Duke {
 
         logMessage(DukeCommand.WELCOME, greeting, 0, null);
 
-
         while (sc.hasNextLine()) {
-
             String next = sc.nextLine();
             String[] params = next.split(" ", 2);
 
             try {
-
                 if (next.equals("bye")) {
                     logMessage(DukeCommand.BYE, farewell, 0, null);
                     sc.close();
                     return;
                 } else if (params[0].equals("delete")) {
-
                     Integer index = Integer.parseInt(params[1]) - 1;
 
                     if (index >= taskList.size()) {
@@ -219,9 +217,15 @@ public class Duke {
                         throw new DukeException("deadline not given for this Deadline!");
                     }
 
+                    Pattern pt = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+                    Matcher mt = pt.matcher(deadlineParams[1]);
+
+                    if (!mt.find()) {
+                        throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD' after description");
+                    }
 
 
-                    Deadline newTask = new Deadline(deadlineParams[0], deadlineParams[1]);
+                    Deadline newTask = new Deadline(deadlineParams[0], LocalDate.parse(deadlineParams[1]));
                     taskList.add(newTask);
                     writeToFile(taskList);
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);
@@ -244,14 +248,23 @@ public class Duke {
                         throw new DukeException("time of Event was not specified!");
                     }
 
-                    Pattern pt = Pattern.compile("\\d-\\dp?a?m");
-                    Matcher mt = pt.matcher(timeParams[1]);
+                    Pattern datePt = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+                    Matcher dateMt = datePt.matcher(timeParams[0]); // timeParams[0] refers to the date
 
-                    if (!mt.find()) {
-                        throw new DukeException("Invalid time range for the event!");
+                    if (!dateMt.find()) {
+                        throw new DukeException("OOPS!!! Please enter '/by YYYY-MM-DD {time range}' after description");
                     }
 
-                    Event newTask = new Event(eventParams[0], eventParams[1]);
+
+                    Pattern timePt = Pattern.compile("\\d{1,2}-\\d{1,2}p?a?m");
+                    Matcher timeMt = timePt.matcher(timeParams[1]); // timeParams[1] refers to the time
+
+                    if (!timeMt.find()) {
+                        throw new DukeException("OOPS!!! Please enter a valid time range in this format \"{start}-{end}\"" +
+                                " and include am/pm after");
+                    }
+
+                    Event newTask = new Event(eventParams[0], LocalDate.parse(timeParams[0]), timeParams[1]);
                     taskList.add(newTask);
                     writeToFile(taskList);
                     logMessage(DukeCommand.ADD_TASK, "", taskList.size(), newTask);

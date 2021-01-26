@@ -1,30 +1,35 @@
 package main.java;
 
-public class Deadline extends Task {
-    private String doneBy;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String doneBy) {
+public class Deadline extends Task {
+    private final LocalDate deadline;
+
+    public Deadline(String description, LocalDate deadline) {
         super(description);
-        this.doneBy = doneBy;
+        this.deadline = deadline;
     }
 
-    public Deadline(String description, String doneBy, boolean isDone) {
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
         super(description, isDone);
-        this.doneBy = doneBy;
+        this.deadline = deadline;
     }
 
     public String fileFormat() {
-        return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " + this.doneBy;
+        return "D | " + (super.isDone ? "1 | " : "0 | ") + this.description + " | " +
+                this.deadline.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @Override
     public Deadline markAsDone() {
-        return new Deadline(description, doneBy, true);
+        return new Deadline(description, deadline, true);
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: " + doneBy + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (by: " +
+                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }
