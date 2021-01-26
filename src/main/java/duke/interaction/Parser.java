@@ -1,5 +1,6 @@
 package duke.interaction;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import duke.command.Command;
@@ -27,6 +28,7 @@ public class Parser {
 
     public Command parseInput(final String input) throws DukeException.InvalidCommand, DukeException.EmptyDescription {
         Scanner scanner = new Scanner(input);
+        String[] tokens;
 
         if (!scanner.hasNext()) {
             throw new DukeException.InvalidCommand();
@@ -51,12 +53,26 @@ public class Parser {
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_DEADLINE);
             }
-            return new DeadlineCommand(scanner.nextLine());
+
+            tokens = scanner.nextLine().split(DukeString.COMMAND_DEADLINE_SEP);
+
+            if (tokens.length < 2 || tokens[1].isBlank()) {
+                throw new DukeException.EmptyDateTime(DukeString.COMMAND_DEADLINE);
+            }
+
+            return new DeadlineCommand(tokens[0].trim(), LocalDateTime.parse(tokens[1].trim()));
         case DukeString.COMMAND_EVENT:
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_EVENT);
             }
-            return new EventCommand(scanner.nextLine());
+
+            tokens = scanner.nextLine().split(DukeString.COMMAND_EVENT_SEP);
+
+            if (tokens.length < 2 || tokens[1].isBlank()) {
+                throw new DukeException.EmptyDateTime(DukeString.COMMAND_EVENT);
+            }
+
+            return new EventCommand(tokens[0].trim(), LocalDateTime.parse(tokens[1].trim()));
         case DukeString.COMMAND_TODO:
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);

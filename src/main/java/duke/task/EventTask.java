@@ -1,9 +1,11 @@
 package duke.task;
 
-public class EventTask extends Task {
-    private final String event;
+import java.time.LocalDateTime;
 
-    public EventTask(final String desc, final String date) {
+public class EventTask extends Task {
+    private final LocalDateTime event;
+
+    public EventTask(final String desc, final LocalDateTime date) {
         super(desc);
         this.event = date;
     }

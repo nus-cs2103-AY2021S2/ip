@@ -19,5 +19,11 @@ public class DukeException {
         }
     }
 
+    public static class EmptyDateTime extends IllegalArgumentException {
+        public EmptyDateTime(final String type) {
+            super(String.format(DukeString.EXCEPTION_INVALID_DATETIME, type));
+        }
+    }
+
 
 }

@@ -14,12 +14,15 @@ public final class DukeString {
     public static final String COMMAND_LIST = "list";
     public static final String COMMAND_DONE = "done";
     public static final String COMMAND_DEADLINE = "deadline";
+    public static final String COMMAND_DEADLINE_SEP = "/by";
     public static final String COMMAND_EVENT = "event";
+    public static final String COMMAND_EVENT_SEP = "/at";
     public static final String COMMAND_TODO = "todo";
     public static final String COMMAND_DELETE = "delete";
 
     public static final String EXCEPTION_INVALID_COMMAND = "Sorry, I did not understand that.";
     public static final String EXCEPTION_EMPTY_DESCRIPTION = "Sorry, the description of a %s cannot be empty.";
     public static final String EXCEPTION_INVALID_TASK = "Sorry, I could not find that task.";
+    public static final String EXCEPTION_INVALID_DATETIME = "Sorry, the date of a %s must be specified.";
     private DukeString() { }
 }
