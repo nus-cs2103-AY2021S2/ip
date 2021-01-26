@@ -1,13 +1,28 @@
 package duke;
 
+/**
+ * Represents the stored data of the Duke.
+ */
 public class Storage {
     String taskListStr;
     String filePath;
+
+    /**
+     * Only constructor for Storage class.
+     * Sets the filepath for the stored file.
+     * @param filePath
+     */
     public Storage(String filePath){
         this.taskListStr="";
         this.filePath = filePath;
     }
 
+    /**
+     * Obtains the last save of tasks as a string and stores it as an instance variable.
+     * Parses the string and inteprets them as tasks that are stored in the current instance
+     * of taskList in Duke.
+     * @param taskList list of current tasks that the duke has.
+     */
     protected void getLastSave(TaskList taskList){
         this.taskListStr = FileReading.readFile(filePath);
         System.out.println("These are the tasks on your todolist");
@@ -15,6 +30,11 @@ public class Storage {
         addSavedTasks(taskList);
     }
 
+    /**
+     * Parses string, in the "list" format, and interprets them into commands that the current
+     * instance of Duke should have.
+     * @param taskList list of current tasks that the duke has.
+     */
     protected  void addSavedTasks(TaskList taskList){
         String[] lines = taskListStr.split("\n");
         for (int i = 0; i < lines.length ; i++) {

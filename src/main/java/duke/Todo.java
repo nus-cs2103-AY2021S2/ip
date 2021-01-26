@@ -1,6 +1,14 @@
 package duke;
 
+/**
+ * Todo is a type of task with only a body, and no date/time.
+ */
 public class Todo extends Task{
+    /**
+     * Constructs Todo instance
+     * @param taskLine untouched input from the user
+     * @throws ArrayIndexOutOfBoundsException
+     */
     public Todo(String taskLine) throws ArrayIndexOutOfBoundsException{
         super(taskLine);
         checkTask();

@@ -6,6 +6,10 @@ import java.util.Scanner;
 /*
 Taken from 2103T file access demo
  */
+
+/**
+ * A class that is used to read files and catch checked exceptions
+ */
 public class FileReading {
 
     private static String printFileContents(String filePath) throws FileNotFoundException {
@@ -18,10 +22,16 @@ public class FileReading {
         return output;
     }
 
-    protected static String readFile(String args) {
+    /**
+     * Reads file and generates a string of the contents.
+     * Catches FileNotFoundExceptions.
+     * @param filePath
+     * @return
+     */
+    protected static String readFile(String filePath) {
         String output = "";
         try {
-            output = printFileContents(args);
+            output = printFileContents(filePath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } finally{
