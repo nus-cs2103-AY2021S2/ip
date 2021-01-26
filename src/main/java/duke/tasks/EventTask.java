@@ -20,6 +20,11 @@ public class EventTask extends Task {
     }
 
     @Override
+    public String getTaskType() {
+        return IDENTIFIER;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventTime + ")";
     }

@@ -40,8 +40,7 @@ public class Main {
             this.ui = new Ui();
             this.storage = initializeStorage(args);
             this.taskList = storage.loadTasks();
-
-            // Print greeting
+            ui.printDivider();
             ui.printGreeting();
         } catch (InvalidStorageFilePathException ex) {
             ui.print("Failed to initialize storage. Exiting...");
@@ -55,6 +54,7 @@ public class Main {
     private void exit() {
         // Print exit message
         ui.printExitMessage();
+        ui.printDivider();
     }
 
     private Storage initializeStorage(String[] args) throws InvalidStorageFilePathException {
@@ -71,7 +71,9 @@ public class Main {
         Command command = null;
         do {
             try {
+                ui.printDivider();
                 String userInput = ui.getUserInput();
+                ui.printDivider();
                 command = new Parser().parseCommand(userInput);
                 CommandResult commandResult = executeCommand(command);
                 storage.saveTasksIfPresent(commandResult.getUpdatedTaskList());

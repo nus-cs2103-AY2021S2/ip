@@ -21,9 +21,7 @@ public abstract class Task {
         return name;
     }
 
-    public String getTaskType() {
-        return taskType;
-    }
+    public abstract String getTaskType();
 
     public boolean isDone() {
         return isCompleted;

@@ -33,4 +33,20 @@ public class TaskList {
     public void completeTask(int index) {
         taskList.get(index).completeTask();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof TaskList) {
+            TaskList otherTaskList = (TaskList) obj;
+            if (this.taskList != null && otherTaskList.taskList != null) {
+                return this.taskList.equals(otherTaskList.taskList);
+            } else {
+                return this.taskList == null && otherTaskList.taskList == null;
+            }
+        } else {
+            return false;
+        }
+    }
 }

@@ -23,4 +23,23 @@ public class CommandResult {
     public TaskList getUpdatedTaskList() {
         return updatedTaskList;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof CommandResult) {
+            CommandResult objCommandResult = (CommandResult) obj;
+            if (!this.messageForUser.equals(objCommandResult.messageForUser)) {
+                return false;
+            }
+            if (this.updatedTaskList != null && objCommandResult.updatedTaskList != null) {
+                return this.updatedTaskList.equals(objCommandResult.updatedTaskList);
+            } else {
+                return this.updatedTaskList == null && objCommandResult.updatedTaskList == null;
+            }
+        } else {
+            return false;
+        }
+    }
 }

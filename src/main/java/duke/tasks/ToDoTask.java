@@ -12,6 +12,11 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    public String getTaskType() {
+        return IDENTIFIER;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

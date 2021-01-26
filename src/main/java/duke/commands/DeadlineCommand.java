@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
-    private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
-    private static final String TASKLIST_SIZE_MESSAGE_FORMAT = "Now you have %d tasks in your list.";
+    public static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
+    public static final String TASKLIST_SIZE_MESSAGE_FORMAT = "Now you have %d tasks in your list.";
 
     private String taskName;
     private LocalDateTime deadline;

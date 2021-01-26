@@ -21,28 +21,24 @@ public class Ui {
     }
 
     public String getUserInput() {
-        show(DIVIDER);
         String userInput = in.nextLine();
-        show(DIVIDER);
         return userInput;
+    }
+    
+    public void printDivider() {
+        out.println(DIVIDER);
     }
 
     public void printGreeting() {
         String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO);
-        show(DIVIDER, welcomeMsg);
+        out.println(welcomeMsg);
     }
 
     public void printExitMessage() {
-        show(EXIT_MESSAGE, DIVIDER);
+        out.println(EXIT_MESSAGE);
     }
 
     public void print(String messageForUser) {
-        show(messageForUser);
-    }
-
-    private void show(String... messages) {
-        for (String msg : messages) {
-            out.println(msg);
-        }
+        out.println(messageForUser);
     }
 }
