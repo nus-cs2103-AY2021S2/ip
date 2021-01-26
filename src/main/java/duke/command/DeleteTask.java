@@ -28,6 +28,7 @@ public class DeleteTask extends Command {
         if (index <= 0 || index > taskList.size()) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
+
         handleDeleteTask(taskList);
         storage.saveData(taskList);
         ui.display(outputMessage);

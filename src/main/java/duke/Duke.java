@@ -26,14 +26,15 @@ public class Duke {
 
     public void run() {
         boolean continueInput = true;
+
         while (continueInput) {
             String input = ui.nextCommand();
+
             try {
                 Command command = Parser.parse(input);
                 command.execute(tasks, ui, storage);
                 continueInput = command.continueInput();
-            }
-            catch (DukeException ex) {
+            } catch (DukeException ex) {
                 ui.display(ex.getMessage());
             }
         }

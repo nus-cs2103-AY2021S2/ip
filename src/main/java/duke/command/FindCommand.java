@@ -22,6 +22,7 @@ public class FindCommand extends Command {
         for (int num = 1; num <= taskList.size(); num++) {
             Task currentTask = taskList.get(num - 1);
             String description = currentTask.getDescription();
+
             if(ignoreCase(description, this.commandDetails)) {
                 index++;
                 currText.append("\n\t ").append(index).append(".").append(currentTask.toString());
