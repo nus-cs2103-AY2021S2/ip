@@ -1,12 +1,15 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task {
-    private String time;
+    private LocalDateTime time;
 
     /**
      * Constructs an event task.
      * @param description a description of the task.
      * @param time the time the task is scheduled to occur.
      */
-    public Event(String description, String time) {
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
@@ -17,7 +20,7 @@ public class Event extends Task {
      * @param time the time the task is scheduled to occur.
      * @param isDone the completion status of the task.
      */
-    public Event(String description, String time, boolean isDone) {
+    public Event(String description, LocalDateTime time, boolean isDone) {
         super(description, isDone);
         this.time = time;
     }
@@ -29,6 +32,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), time);
+        return String.format("[D]%s (at: %s)",
+                super.toString(),
+                time.format(DateTimeFormatter.ofPattern("d MMM y @ h:mm a")));
     }
 }
