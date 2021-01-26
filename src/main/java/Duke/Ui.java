@@ -5,7 +5,7 @@ public class Ui {
     // Initial greetings when the user first open duke
     public void showInitialGreeting() {
         String initialGreeting = "Hello I'm Duke \n"
-            + "What can I do for you? \n";
+                + "What can I do for you? \n";
         System.out.println(initialGreeting);
     }
 

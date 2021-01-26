@@ -44,8 +44,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", 
-            super.getStatusIcon(), 
-            super.toString(), 
+            super.getStatusIcon(), super.toString(), 
             at.format(DateTimeFormatter.ofPattern("d MMM yyyy - HHmm")));
     }
 }
