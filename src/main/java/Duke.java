@@ -36,7 +36,6 @@ public class Duke {
                 String sequence = read[1];
                 String[] data = sequence.split("] ");
                 Task newTask = new ToDos(data[1]);
-                System.out.println(data[1]);
                 if (sequence.contains("\u2718")) {
                     newTask.markAsDone();
                 }
