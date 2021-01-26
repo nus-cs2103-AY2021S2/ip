@@ -1,14 +1,19 @@
 import util.Formatter;
 import util.Storage;
-import static util.Parser.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static util.Parser.getArgMap;
+import static util.Parser.getCommand;
+
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -27,8 +32,8 @@ public class TaskList {
 
         saveToDisk();
 
-        return "Gotcha. I've added the task: \n    " 
-                + task 
+        return "Gotcha. I've added the task: \n    "
+                + task
                 + taskCountMsg();
     }
 
@@ -40,8 +45,8 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Error: Please enter a number within the list.");
         }
-        return "Nice, another job well done!\n" 
-            + taskList.get(position).toString();
+        return "Nice, another job well done!\n"
+                + taskList.get(position).toString();
     }
 
     public String markTaskDone(HashMap<String, String> argMap) throws NoSuchElementException,
@@ -58,8 +63,8 @@ public class TaskList {
 
         saveToDisk();
 
-        return "Nice, another job well done!\n" 
-            + taskList.get(position).toString();
+        return "Nice, another job well done!\n"
+                + taskList.get(position).toString();
     }
 
     public String deleteTask(HashMap<String, String> argMap) throws NoSuchElementException,
@@ -78,9 +83,9 @@ public class TaskList {
 
         saveToDisk();
 
-        return "I've removed the task:\n" 
-            + taskToRemove.toString()
-            + taskCountMsg();
+        return "I've removed the task:\n"
+                + taskToRemove.toString()
+                + taskCountMsg();
     }
 
     public String listTasks() {
@@ -106,7 +111,7 @@ public class TaskList {
 
     public boolean saveToDisk() {
         StringBuilder saveLines = new StringBuilder();
-        for (Task t: taskList) {
+        for (Task t : taskList) {
             saveLines.append(t.toSaveFormat()).append('\n');
         }
 
@@ -129,7 +134,7 @@ public class TaskList {
             return false;
         }
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String saveLine = sc.nextLine();
             String command = getCommand(saveLine);
             HashMap<String, String> argMap = getArgMap(saveLine);

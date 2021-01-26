@@ -1,15 +1,14 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import static java.time.format.DateTimeFormatter.*;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+
 public class Event extends Task {
-    private LocalDate eventTime;
     public static final String COMMAND_STRING = "event";
+    private final LocalDate eventTime;
 
     public Event(String desc, LocalDate eventTime) {
         super(desc);
@@ -21,7 +20,8 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
-    public static Event newInstance(HashMap<String, String> argMap) throws NoSuchElementException, DateTimeParseException {
+    public static Event newInstance(HashMap<String, String> argMap)
+            throws NoSuchElementException, DateTimeParseException {
         if (!argMap.containsKey("desc")) {
             throw new NoSuchElementException("Error: The description for todo cannot be empty.");
         }

@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
 public abstract class Task {
-    private String description;
-    private boolean isDone;
     protected static final char saveDelimiter = '|';
+    private final String description;
+    private boolean isDone;
 
     public Task(String desc) {
         this.description = desc;
@@ -34,12 +34,10 @@ public abstract class Task {
         savedString.append(description);
         savedString.append((isDone ? "/done " : ""));
 
-        saveArgs().forEach((k,v) -> {
-            savedString.append("/").append(k).append(" ").append(v);
-        });
+        saveArgs().forEach((k, v) -> savedString.append("/").append(k).append(" ").append(v));
 
         return savedString.toString();
-    };
+    }
 
     protected abstract HashMap<String, String> saveArgs();
 
