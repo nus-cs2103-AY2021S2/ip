@@ -110,7 +110,6 @@ public class Duke {
                     }
 
                     String[] deadlineParams = params[1].split(" /by ");
-                    System.out.println(Arrays.toString(deadlineParams));
 
                     if (deadlineParams.length == 1) {
                         throw new DukeException("deadline not given for this Deadline!");
