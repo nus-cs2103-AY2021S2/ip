@@ -152,12 +152,12 @@ public class Command {
             BufferedReader reader = new BufferedReader(new FileReader("data/duke.txt"));
             String line = reader.readLine();
             int counter = 0;
-            int secondcounter = 1;
+            int secondCounter = 1;
             System.out.println("     Here are the matching tasks in your list:");
             while (line != null) {
                 if(line.indexOf(match) != -1) {
-                    System.out.println("     " + secondcounter + "." + tasks.tasks.get(counter).toString());
-                    secondcounter++;
+                    System.out.println("     " + secondCounter + "." + tasks.tasks.get(counter).toString());
+                    secondCounter++;
                 }
                 line = reader.readLine();
                 counter++;
