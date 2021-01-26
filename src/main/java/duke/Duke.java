@@ -114,6 +114,25 @@ public class Duke {
                     System.out.println("Requested task does not exist");
                     ui.showLine();
                 }
+
+            } else if (parsedInput[0].equals("FND")) {
+                String keyword = parsedInput[1];
+
+                List<Task> foundTasks = tasks.findTask(keyword);
+
+                if (foundTasks.isEmpty()) {
+                    ui.showCannotFind();
+                    ui.showLine();
+                } else {
+                    ui.showFoundText();
+                    int i = 1;
+                    for (Task t : foundTasks) {
+                        System.out.println(i + ". " + t.toString());
+                        i++;
+                    }
+                    ui.showLine();
+                }
+
             } else {
                 System.out.println("Something went wrong!");
             }

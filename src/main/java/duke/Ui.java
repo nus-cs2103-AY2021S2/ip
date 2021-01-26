@@ -52,5 +52,13 @@ public class Ui {
         System.out.println("Noted. I've removed this task:");
     }
 
+    // printings related to find
+    public void showCannotFind() {
+        System.out.println("I'm sorry, I can't find the task requested");
+    }
+
+    public void showFoundText() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 
 }
