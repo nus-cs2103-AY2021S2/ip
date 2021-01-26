@@ -8,6 +8,8 @@ Hello from
 ____________________________________________________________
 Dude, I'm HAHA.
 What can I do for you?
+Hint: deadline & event to include date & time
+e.g. 2020-02-02 18:00
 (Oh when you are done, say bye)
 ____________________________________________________________
 
@@ -21,19 +23,19 @@ Here are your list of tasks:
 ____________________________________________________________
 
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Jan 2 2020 06.00 PM)
 Now you have 2 tasks in the list
 ____________________________________________________________
 
 Got it. I've added this task:
-  [E][ ] project meeting (at: Mon 2-4pm)
+  [E][ ] project meeting (at: Mar 12 2020 11.00 AM)
 Now you have 3 tasks in the list
 ____________________________________________________________
 
 Here are your list of tasks:
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
+2.[D][ ] return book (by: Jan 2 2020 06.00 PM)
+3.[E][ ] project meeting (at: Mar 12 2020 11.00 AM)
 ____________________________________________________________
 
 Nice! I've marked this task as done:
@@ -41,17 +43,17 @@ Nice! I've marked this task as done:
 ____________________________________________________________
 
 Nice! I've marked this task as done:
-[D][X] return book (by: Sunday)
+[D][X] return book (by: Jan 2 2020 06.00 PM)
 ____________________________________________________________
 
 Here are your list of tasks:
 1.[T][X] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
+2.[D][X] return book (by: Jan 2 2020 06.00 PM)
+3.[E][ ] project meeting (at: Mar 12 2020 11.00 AM)
 ____________________________________________________________
 
 Nice! I've marked this task as done:
-[E][X] project meeting (at: Mon 2-4pm)
+[E][X] project meeting (at: Mar 12 2020 11.00 AM)
 ____________________________________________________________
 
 OOPS!!! I'm sorry, but I don't know what that means :-(
@@ -90,8 +92,8 @@ Try specify the right task number
 ____________________________________________________________
 
 Here are your list of tasks:
-1.[D][X] return book (by: Sunday)
-2.[E][X] project meeting (at: Mon 2-4pm)
+1.[D][X] return book (by: Jan 2 2020 06.00 PM)
+2.[E][X] project meeting (at: Mar 12 2020 11.00 AM)
 ____________________________________________________________
 
 Bye now!

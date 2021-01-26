@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 public class Parser {
@@ -17,6 +19,19 @@ public class Parser {
         if (input.isEmpty()) {
             throw new HahaEmptyCommandException(input);
         }
+    }
+
+    static LocalDate getDate(String str) {
+        if (str.contains("/at")) {
+            return LocalDate.parse(str.split("/at ")[1].split(" ")[0]);
+        } else {
+            return LocalDate.parse(str.split("/by ")[1].split(" ")[0]);
+        }
+    }
+
+    static LocalTime getTime(String str) {
+        String[] token = str.split(" ");
+        return LocalTime.parse(token[token.length - 1]);
     }
 
     static void handleEmptyDescriptionCommand(String input) throws HahaEmptyDescriptionException {
