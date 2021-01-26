@@ -11,11 +11,11 @@ public class Todo extends Task {
      * Factory method for creating Todo task.
      * @param description Description of the task
      * @return A todo task
-     * @throws DukeException if description is empty
+     * @throws DukeInputException if description is empty
      */
-    public static Todo createTodo(String description) throws DukeException {
+    public static Todo createTodo(String description) throws DukeInputException {
         if (description.length() == 0) {
-                throw new DukeException("The description of Todo cannot be empty.");
+                throw new DukeInputException("The description of Todo cannot be empty.");
         }
         return new Todo(description);
     }
