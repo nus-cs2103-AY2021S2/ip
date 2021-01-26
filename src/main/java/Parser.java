@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
@@ -47,6 +46,7 @@ public class Parser {
     }
 
   }
+
   /**
    * Handles "done" command by the user by marking the tasks with "x".
    */
@@ -101,6 +101,7 @@ public class Parser {
   /**
    * Handles todo command by the user by creating a todo object and placing it into the arraylist.
    */
+
   public void todo(String input, TaskList taskList) throws DescriptionError {
     try {
       if (input.length() == 4) {
@@ -147,7 +148,6 @@ public class Parser {
     }
   }
 
-
   /**
    * Handles event command by the user by creating event object and placing it into the arraylist.
    */
@@ -170,7 +170,6 @@ public class Parser {
       System.out.println("Now you have " + taskList.getTasklist().size() + " tasks in the list.");
     }
   }
-
 
   /**
    * Handles delete ommand by the user by removing the tasks inside the arraylist.

@@ -9,12 +9,12 @@ public class TaskList {
   }
 
   public TaskList() {
+
   }
 
   public ArrayList<Task> getTasklist() {
     return this.tasklist;
   }
-
 
   /**
    * Iterates the arraylist and outputs each tasks inside.
@@ -34,7 +34,6 @@ public class TaskList {
   public void addList(Task input) {
     this.tasklist.add(input);
   }
-
 
   /**
    * delete the tasks from the arraylist and output the notification text.

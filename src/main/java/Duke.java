@@ -14,6 +14,7 @@ public class Duke {
    * Creates Duke with the file path.
    * @ param filePath The path storing all the past tasklist not deleted by the user
    */
+
   public Duke(String filePath) throws IOException {
     storage = new Storage(filePath);
     try {
@@ -27,6 +28,7 @@ public class Duke {
   /**
    * Outputs the greeting and initiaties the userinput parase command to take in inputs from usher.
    */
+
   public void run() throws IOException, DescriptionError {
     ui = new Ui();
     ui.greeting();

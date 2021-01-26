@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
@@ -27,6 +25,7 @@ public class Storage {
   public Storage() {
 
   }
+
   /**
    * Iterates through the task arraylist and stores each element into a textfile.
    */
@@ -50,6 +49,7 @@ public class Storage {
    * @ return The Arraylist consisting of all the tasks in the text file.
    * @ throws IOException if the file cannot be found in the specified path.
    */
+
   public ArrayList<Task> load() throws IOException {
     ArrayList<Task> tasks = new ArrayList<Task>();
     try {
