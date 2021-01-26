@@ -1,3 +1,7 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -6,6 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
+    private static final String dataDirName = "data/";
+    private static final String dataFileName = "duke.dat";
+
     private final PrintStream printer;
     private final Scanner input;
     private final ArrayList<Task> tasks;
@@ -94,7 +101,7 @@ public class Duke {
             String taskDesc = toDoMatcher.group(1);
 
             ToDo toDo = new ToDo(taskDesc);
-            tasks.add(toDo);
+            addTask(toDo);
 
             printAddTaskAck(toDo);
         } else {
@@ -118,7 +125,7 @@ public class Duke {
                     + "Expected format: deadline <DESCRIPTION> /by <TIME>");
         }
 
-        Pattern timePattern = Pattern.compile("(?i)deadline\\s+(\\w.*)\\s+\\/by\\s+(\\w.*)");
+        Pattern timePattern = Pattern.compile("(?i)deadline\\s+(\\w.*)\\s+/by\\s+(\\w.*)");
         Matcher timeMatcher = timePattern.matcher(cmd);
 
         if (!timeMatcher.find()) {
@@ -130,7 +137,7 @@ public class Duke {
         String time = timeMatcher.group(2);
 
         Deadline deadline = new Deadline(taskDesc, time);
-        tasks.add(deadline);
+        addTask(deadline);
 
         printAddTaskAck(deadline);
     }
@@ -149,7 +156,7 @@ public class Duke {
                     + "Expected format: event <DESCRIPTION> /at <PERIOD>");
         }
 
-        Pattern periodPattern = Pattern.compile("(?i)event\\s+(\\w.*)\\s+\\/at\\s+(\\w.*)");
+        Pattern periodPattern = Pattern.compile("(?i)event\\s+(\\w.*)\\s+/at\\s+(\\w.*)");
         Matcher periodMatcher = periodPattern.matcher(cmd);
 
         if (!periodMatcher.find()) {
@@ -161,7 +168,7 @@ public class Duke {
         String period = periodMatcher.group(2);
 
         Event event = new Event(taskDesc, period);
-        tasks.add(event);
+        addTask(event);
 
         printAddTaskAck(event);
     }
@@ -256,7 +263,7 @@ public class Duke {
                 // Valid argument in range
                 int index = arg - 1;
                 Task t = tasks.get(index);
-                tasks.remove(index);
+                removeTaskAt(index);
                 printer.println("Noted. I've removed this task:");
                 printer.println(String.format("%s", t.toString()));
                 printer.println(String.format("Now you have %d task(s) in the list.", tasks.size()));
@@ -266,5 +273,41 @@ public class Duke {
             throw new DukeException(String.format("Illegal argument: '%s'. Expected integer.\n"
                     + "Valid task numbers are 1 to %d.", argStr, tasks.size()));
         }
+    }
+
+    private void saveTasks() {
+        // marshall data to save
+        StringBuilder data = new StringBuilder();
+        for (Task t : tasks) {
+            data.append(t.serialize()).append("\n");
+        }
+
+        // create folders if necessary
+        File directory = new File(dataDirName);
+        if (!directory.exists()){
+            directory.mkdirs();
+        }
+
+        // open/create file
+        File file = new File(dataDirName + File.separator + dataFileName);
+        try {
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(data.toString());
+            bw.close();
+        }
+        catch (IOException ex) {
+            printer.println(String.format("Warning: failed to save. Message: %s", ex.getMessage()));
+        }
+    }
+
+    private void addTask(Task t) {
+        tasks.add(t);
+        saveTasks();
+    }
+
+    private void removeTaskAt(int index) {
+        tasks.remove(index);
+        saveTasks();
     }
 }
