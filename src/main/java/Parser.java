@@ -4,6 +4,19 @@ import java.util.Scanner;
 
 public class Parser {
 
+    /**
+     * Parses the user command and instructs the tasklist, ui or sc
+     * to carry out different functions according to the command argument.
+     *
+     * @param command user input
+     * @param sc Scanner object.
+     * @param ui Ui object.
+     * @param taskList TaskList object.
+     * @param storage Storage object.
+     * @throws NoSuchElementException if additional user input required is not provided.
+     * @throws UnknownCommandException if command is not supported by Maya.
+     * @throws IOException if null is supplied to Storage or if file is not found.
+     */
     static void parse(String command, Scanner sc, Ui ui, TaskList taskList, Storage storage)
             throws NoSuchElementException, UnknownCommandException, IOException {
         switch(command) {

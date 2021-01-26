@@ -5,11 +5,22 @@ public class TaskList {
     List<Task> list;
     int listSize;
 
+    /**
+     * Initialises a newly created TaskList object
+     * so that it represents an empty List<Task>.
+     */
     public TaskList() {
         this.list = new ArrayList<Task>();
         this.listSize = 0;
     }
 
+    /**
+     * Initialises a newly created TaskList object
+     * so that it represents a List of Tasks
+     * as given in the argument list.
+     *
+     * @param list a List<Task> containing Task objects.
+     */
     public TaskList(List<Task> list) {
         this.list = list;
         this.listSize = list.size();
@@ -20,8 +31,7 @@ public class TaskList {
      * Prints out a response to indicate successful adding of task.
      * Prints out the current number of tasks in the list.
      *
-     * @param task
-     * @return void
+     * @param task a Task object to be added into the TaskList
      */
     void addTask(Task task) {
         list.add(task);
@@ -32,12 +42,12 @@ public class TaskList {
         System.out.printf("    Now you have %d tasks in the list.\n", listSize);
     }
 
-     /**
+    /**
      * Removes the task of the given index from the task list.
      * Prints out a response to indicate successful removing of task.
      * Prints out the current number of tasks in the list.
-     * @param index
-     * @return void
+     *
+     * @param index the 1-based index of the Task object to be removed.
      */
     void removeTask(int index) {
         Task temp = list.get(index - 1);
@@ -52,7 +62,8 @@ public class TaskList {
     /**
      * Marks the task of the given index as done.
      * Prints out a response to indicate successful marking of task.
-     * @param index
+     *
+     * @param index the 1-based index of the Task object to be removed.
      */
     void markTaskAsDone(int index) {
         Task temp = list.get(index - 1);
