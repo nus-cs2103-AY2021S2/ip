@@ -9,8 +9,8 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute() {
+        this.taskList.setTaskDone(this.position);
         System.out.println("Nice! I've marked this task as done:");
         this.taskList.printTask(this.position);
-        this.taskList.setTaskDone(this.position);
     }
 }

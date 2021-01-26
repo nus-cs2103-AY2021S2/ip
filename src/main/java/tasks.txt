@@ -1,4 +1,3 @@
-T | 1 | read book
 D | 0 | return book | 6/6/2021 2359
 E | 0 | project meeting | 15/12/2020 0911
 T | 1 | join sports club

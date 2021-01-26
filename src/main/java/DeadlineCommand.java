@@ -1,15 +1,19 @@
+import java.time.LocalDateTime;
+
 public class DeadlineCommand extends Command {
     static final String COMMAND_WORD = "deadline";
-    private String[] taskInputAndDate;
+    private String task;
+    private LocalDateTime dateTime;
 
-    public DeadlineCommand(TaskList taskList, Ui ui, Storage storage, String[] taskInputAndDate) {
+    public DeadlineCommand(TaskList taskList, Ui ui, Storage storage, String task, LocalDateTime dateTime) {
         super(taskList, ui, storage);
-        this.taskInputAndDate = taskInputAndDate;
+        this.task = task;
+        this.dateTime = dateTime;
     }
 
     @Override
     public void execute() {
-        Deadline d = new Deadline(taskInputAndDate[0], taskInputAndDate[1]);
+        Deadline d = new Deadline(this.task, this.dateTime);
         System.out.println("Got it. I've added this task:\n" + d);
         this.taskList.addTask(d);
     }

@@ -1,7 +1,13 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Parser {
     private final TaskList taskList;
     private final Ui ui;
     private final Storage storage;
+    private static final Pattern checkNum = Pattern.compile("^[0-9]$");
 
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
@@ -9,7 +15,8 @@ public class Parser {
         this.storage = storage;
     }
 
-    public Command parse(String input) throws NumberFormatException, EmptyArgumentException, InvalidDateTimeException, InvalidIndexInputException {
+    public Command parse(String input) throws NumberFormatException, EmptyArgumentException, InvalidDateTimeException,
+            InvalidIndexInputException {
         String[] commandAndInput = input.split(" ", 2);
         String command = commandAndInput[0];
 
@@ -45,7 +52,7 @@ public class Parser {
         return new ToDoCommand(this.taskList, this.ui, this.storage, arguments[0]);
     }
 
-    private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException { // check date input here using regex
+    private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please input a valid task description!");
         } else {
@@ -53,11 +60,16 @@ public class Parser {
             String[] taskInputAndDate = description.split("/", 2);
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
-            return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate);
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1]);
+                return new DeadlineCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
         }
     }
 
-    private Command prepareEvent(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException { // check date input here using regex
+    private Command prepareEvent(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
         if (arguments.length == 1) {
             throw new EmptyArgumentException("Please input a valid task description!");
         } else {
@@ -65,16 +77,22 @@ public class Parser {
             String[] taskInputAndDate = description.split("/", 2);
             taskInputAndDate[0] = taskInputAndDate[0].trim();
             taskInputAndDate[1] = taskInputAndDate[1].trim();
-            return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate);
+            try {
+                LocalDateTime dateTime = LocalDateTime.parse(taskInputAndDate[1]);
+                return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
         }
     }
 
-    private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException { // use regex to check number
-        if (false) {
+    private int calcListPos(String taskIndex, String command) throws InvalidIndexInputException {
+        Matcher m = checkNum.matcher(taskIndex);
+        if (m.find()) {
+            return Integer.parseInt(taskIndex) - 1;
+        } else {
             throw new InvalidIndexInputException("'" + command + "' is command word; please pass a numerical index or "
                     + "start your task with another word!");
-        } else {
-            return Integer.parseInt(taskIndex) - 1;
         }
     }
 
@@ -85,8 +103,9 @@ public class Parser {
             int position = calcListPos(arguments[1], arguments[0]);
             if (this.taskList.getList().size() == 0){
                 throw new InvalidIndexInputException("You have already done all tasks!");
-            } else if (position > this.taskList.getList().size() || position <= 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to " + this.taskList.getList().size() + "!");
+            } else if (position >= this.taskList.getList().size() || position < 0) {
+                throw new InvalidIndexInputException("Please input an index from 1 to "
+                        + this.taskList.getList().size() + "!");
             } else {
                 return new DoneCommand(this.taskList, this.ui, this.storage, position);
             }
@@ -100,8 +119,9 @@ public class Parser {
             int position = calcListPos(arguments[1], arguments[0]);
             if (this.taskList.getList().size() == 0){
                 throw new InvalidIndexInputException("There are no tasks to delete!");
-            } else if (position > this.taskList.getList().size() || position <= 0) {
-                throw new InvalidIndexInputException("Please input an index from 1 to " + this.taskList.getList().size() + "!");
+            } else if (position >= this.taskList.getList().size() || position < 0) {
+                throw new InvalidIndexInputException("Please input an index from 1 to "
+                        + this.taskList.getList().size() + "!");
             } else {
                 return new DeleteCommand(this.taskList, this.ui, this.storage, position);
             }
