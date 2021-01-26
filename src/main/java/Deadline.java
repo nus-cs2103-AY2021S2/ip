@@ -1,13 +1,16 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
 
-    private String deadline;
+    private LocalDate deadline;
 
     /**
      * Constructor method.
      * @param description String that describes the task.
      * @param deadline String that describes the deadline.
      */
-    public Deadline(String description, String deadline){
+    public Deadline(String description, LocalDate deadline){
         super(description);
         this.deadline = deadline;
     }
@@ -18,6 +21,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + deadline + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.format(DateTimeFormatter.ofPattern("dd MMM yy")) + ")";
     }
 }
