@@ -11,6 +11,12 @@ import static duke.ui.CommandType.*;
 
 public class Parser {
 
+    /**
+     * Parses the input string from the user and returns a Command according to the input.
+     * @param inputString input string from user
+     * @return Command object according to user's input
+     * @throws DukeException
+     */
     public static Command parse(String inputString) throws DukeException {
         String[] splitInput = inputString.split(" ", 2);
 
@@ -43,16 +49,32 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses an input String and returns a LocalDateTime in the "d/MM/yyyy Hmm" format.
+     * @param dateTime date and time String specified by user input
+     * @return LocalDateTime object in the "d/MM/yyyy Hmm" format.
+     */
     public static LocalDateTime parseInputToDateTime(String dateTime) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
         return LocalDateTime.parse(dateTime, format);
     }
 
+    /**
+     * Parses an input String according to the format of a saved Task in /data/duke.txt and
+     * returns LocalDateTime object in the "d/MM/yyyy Hmm" format.
+     * @param dateTime date and time String in the saved Task format
+     * @return LocalDateTime object in the "d/MM/yyyy Hmm" format.
+     */
     public static LocalDateTime parseSaveToDateTime(String dateTime) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
         return LocalDateTime.parse(dateTime, format);
     }
 
+    /**
+     * Parses a LocalDateTime object and returns a String according to the output format.
+     * @param dateTime LocalDateTime object
+     * @return a String object that conforms to the output format
+     */
     public static String parseDateTimeToString(LocalDateTime dateTime) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
         return dateTime.format(pattern);

@@ -17,6 +17,11 @@ public class Storage {
         this.file = new File("data", "duke.txt");
     }
 
+    /**
+     * Checks if parent and file directory exists. Creates the parent and file directory
+     * if they do not exist.
+     * @throws DukeException
+     */
     public void createNewFile() throws DukeException {
         try {
             if (!this.file.getParentFile().exists()) {
@@ -31,6 +36,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads saved txt file and adds the tasks to Duke's TaskList.
+     * @param tasks Duke's TaskList
+     * @throws DukeException
+     */
     public void readFile(TaskList tasks) throws DukeException {
         createNewFile();
         try {
@@ -63,6 +73,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Helper function to add tasks to TaskList.
+     * @param tasks Duke's TaskList
+     * @param t input Task
+     * @param isDone isDone boolean value of task t
+     */
     private void addToTasks(TaskList tasks, Task t, String isDone) {
         if (isDone.trim().equals("1")) {
             t.setDone(true);
@@ -70,6 +86,11 @@ public class Storage {
         tasks.addTask(t);
     }
 
+    /**
+     * Writes the current TaskList to txt file.
+     * @param tasks Duke's TaskList
+     * @throws DukeException
+     */
     public void write(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.file);
