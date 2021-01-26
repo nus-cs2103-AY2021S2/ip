@@ -11,13 +11,14 @@ public class DukeException extends Exception {
     /**
      * duke.Duke message dividers.
      */
-    public final static String  DIVIDER1 = "\n═══════════════════════════╣"
+    public final static String DIVIDER1 = "\n═══════════════════════════╣"
             + "DUKE╠═══════════════════════════\n";
     /**
      * duke.Duke message dividers.
      */
-    public final static String  DIVIDER2 = "\n════════════════════════════"
+    public final static String DIVIDER2 = "\n════════════════════════════"
             + "════════════════════════════════\n";
+
     /**
      * Instantiates a new duke.Duke exception.
      *

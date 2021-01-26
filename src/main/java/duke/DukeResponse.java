@@ -19,12 +19,12 @@ public class DukeResponse {
     /**
      * Duke message dividers.
      */
-    public final static String  DIVIDER1 = "\n═══════════════════════════╣"
+    public final static String DIVIDER1 = "\n═══════════════════════════╣"
             + "DUKE╠═══════════════════════════\n";
     /**
      * Duke message dividers.
      */
-    public final static String  DIVIDER2 = "\n════════════════════════════"
+    public final static String DIVIDER2 = "\n════════════════════════════"
             + "════════════════════════════════\n";
     /**
      * Duke task add headers.
@@ -87,7 +87,7 @@ public class DukeResponse {
      */
     public void deleteTask(Task task, int count) {
         this.currentMessage = TASK_DELETE_HEADER + Color.BLUE_BOLD
-                + Emoji.TRASH +  Color.RESET + " " + task
+                + Emoji.TRASH + Color.RESET + " " + task
                 + TASK_FOOTER1 + count + TASK_FOOTER2;
         printMessage();
     }
@@ -108,14 +108,14 @@ public class DukeResponse {
      *
      * @param list the list
      */
-    public void listTasks(ArrayList<Task> list) throws DukeEmptyTaskListException {
+    public void listTasks(DukeTaskList list) throws DukeEmptyTaskListException {
         if (list.size() == 0) {
             throw new DukeEmptyTaskListException();
         }
         StringBuilder strList = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            String currStr = (i+1) + " \u00BB " + task.toString() + "\n";
+            String currStr = (i + 1) + " \u00BB " + task.toString() + "\n";
             strList.append(currStr);
         }
         this.currentMessage = strList.substring(0,

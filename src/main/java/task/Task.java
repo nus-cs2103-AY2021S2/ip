@@ -34,13 +34,23 @@ public class Task {
 
     /**
      * Retrieves status string.
-     *r
+     * r
+     *
      * @return status icon. A check mark for complete tasks , an x mark otherwise.
      */
     public String getStatusIcon() {
         return (isDone
                 ? Color.GREEN_BOLD + "\u2713" + Color.RESET
                 : Color.RED_BOLD + "\u2718" + Color.RESET);
+    }
+
+    /**
+     * Gets task description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
