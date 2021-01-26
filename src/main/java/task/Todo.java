@@ -4,20 +4,30 @@ import simulator.DukeException;
 
 public class Todo extends Task {
 
-    protected String type = "T";
 
     public Todo(String[] input) throws DukeException {
-        super(input);
+        this.type = "T";
         if (input.length != 0) {
-        for (String s : input) {
-            this.description.append(s + " ");
+            for (String s : input) {
+                this.description.append(s);
+                this.description.append(" ");
+            }
+        } else {
+            throw new DukeException("☹ OOPS!!! Description of todo cannot be empty, please check!");
         }
-    } else {
-        throw new DukeException("☹ OOPS!!! Description of todo cannot be empty, please check!");
-    }
 
     }
-    
+
+    public Todo(String status, String input) throws DukeException {
+        this.type = "T";
+        this.isDone = status.equals("complete");
+        if (input.length() != 0) {
+            this.description.append(input);
+        } else {
+            throw new DukeException("☹ OOPS!!! Description of todo cannot be empty, please check!");
+        }
+    }
+
     @Override
     public String toString() {
         return "[" + this.type + "]" + "[" + this.getStatusIcon() + "] " + this.description;

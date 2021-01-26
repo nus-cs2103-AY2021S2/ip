@@ -5,35 +5,35 @@ import task.Task;
 import java.util.List;
 
 public class Design {
-    public static String markMsg = "You have marked this task as completed: \n";
-    public static String addMsg = "Roger that! Added the following task: \n \n      ";
-    public static String deleteMsg = "Roger that! Deleted the follow task: \n \n      ";
-    public static String indent4 = "     ";
-    public static String topBorder = "\n    ********************************* \n";
-    public static String btmBorder = "    ********************************* \n";
+    public final static String MARK_MSG = "You have marked this task as completed: \n";
+    public final static String ADD_MSG = "Roger that! Added the following task: \n \n      ";
+    public final static String DELETE_MSG = "Roger that! Deleted the follow task: \n \n      ";
+    public final static String indent4 = "     ";
+    public final static String TOP_BORDER = "\n    ********************************* \n";
+    public final static String BOTTOM_BORDER = "    ********************************* \n";
 
-    public static String welcomeMsg = "         █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ \n"
+    public final static String WELCOME_MSG = "         █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ \n"
             + "         █░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█ \n"
             + "         █░░║║║╠─║─║─║║║║║╠─░░█ \n"
             + "         █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█ \n"
             + "         █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ \n";
-    public static String logo = "         ──────▄▀▄─────▄▀▄ \n"
+    public final static String LOGO = "         ──────▄▀▄─────▄▀▄ \n"
             + "         ─────▄█░░▀▀▀▀▀░░█▄ \n"
             + "         ─▄▄──█░░░░░░░░░░░█──▄▄ \n"
             + "         █▄▄█─█░░▀░░┬░░▀░░█─█▄▄█ ";
 
-    public static String greeting = "Hey there! I'm Kawaii Kat \n"
+    public final static String GREETING_MSG = "Hey there! I'm Kawaii Kat \n"
             + "     How can i assist you ~nya~?";
 
-    public static String exitMessage = "Farewell. See you soon :)!";
+    public final static String EXIT_MSG = "Farewell. See you soon :)!";
 
     public static void printBox(String input) {
-        System.out.println(topBorder + indent4 + input
-                + "\n" + btmBorder);
+        System.out.println(TOP_BORDER + indent4 + input
+                + "\n" + BOTTOM_BORDER);
     }
 
     public static void printList(List<Task> list) {
-        System.out.print(topBorder);
+        System.out.print(TOP_BORDER);
         System.out.println("     This is your present task list: \n");
         for (int i = 1; i <= list.size(); i++) {
             if (i == list.size()) {
@@ -44,6 +44,6 @@ public class Design {
                         + list.get(i - 1));
             }
         }
-        System.out.println(btmBorder);
+        System.out.println(BOTTOM_BORDER);
     }
 }
