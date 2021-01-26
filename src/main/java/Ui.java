@@ -8,6 +8,9 @@ public class Ui {
     public Ui () {
     }
 
+    /**
+     * Greets the user.
+     */
     public void initialise() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,10 +22,17 @@ public class Ui {
         System.out.println("---------------------------------");
     }
 
+    /**
+     * Tells the user how many tasks they have currently.
+     * @param  list The TaskList object containing all tasks.
+     */
     public void tasksLeft(TaskList list) {
         System.out.println("You currently have " + list.getNumItems() + " tasks.");
     }
 
+    /**
+     * Bids farewell to the user.
+     */
     public void finalise() {
         System.out.println("Bye friend, see you soon!");
     }

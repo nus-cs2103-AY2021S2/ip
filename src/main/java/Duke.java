@@ -24,6 +24,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs Duke, allowing it to start serving the user.
+     */
     public void run() throws DukeException, IOException {
         storage.initialise(list);
         ui.initialise();
@@ -38,6 +41,9 @@ public class Duke {
         ui.finalise();
     }
 
+    /**
+     * Drives the program.
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("./myData.txt").run();
     }

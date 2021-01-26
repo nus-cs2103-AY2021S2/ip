@@ -14,18 +14,33 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Checks and returns the status of the task.
+     * @return task status.
+     */
     public String getStatusIcon() {
         return isDone ? "[X] " : "[ ] ";
     }
 
+    /**
+     * Sets the task isDone status to be true.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Converts information about the task to be saved to hard disk.
+     * @return string containing information about the task.
+     */
     public String save() {
         return toString();
     }
 
+    /**
+     * Returns a string representation of the Task.
+     * @return task completion status and description.
+     */
     @Override
     public String toString() {
         return this.getStatusIcon() + this.description;

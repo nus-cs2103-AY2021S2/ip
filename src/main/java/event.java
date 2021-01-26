@@ -14,6 +14,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns a string representation of the Event Task.
+     * @return the type of task, task completion status, and location.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + at + ")";
