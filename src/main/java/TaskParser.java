@@ -1,8 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Parser {
+public class TaskParser {
     private static final int SPLIT_LIMIT = 2;
+
     public static Task parseTask(String taskString) throws DukeException {
         Task newTask;
         String desc;
@@ -61,4 +62,6 @@ public class Parser {
         }
         return newTask;
     }
+
+
 }

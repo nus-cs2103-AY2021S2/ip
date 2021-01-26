@@ -18,7 +18,7 @@ public class Storage {
             Scanner saveReader = new Scanner(savefile);
             while (saveReader.hasNextLine()) {
                 String savedata = saveReader.nextLine();
-                tasks.add(Parser.parseTask(savedata));
+                tasks.add(TaskParser.parseTask(savedata));
             }
             saveReader.close();
         } catch (FileNotFoundException e) {
@@ -44,7 +44,7 @@ public class Storage {
 
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
-            FileWriter saveWriter = new FileWriter("savedata.txt");
+            FileWriter saveWriter = new FileWriter(filepath);
             StringBuilder saveStringBuilder = new StringBuilder();
             for (int i = 1; i <= tasks.size(); i++) {
                 saveStringBuilder.append(tasks.get(i).getSaveString());

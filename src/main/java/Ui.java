@@ -8,6 +8,10 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+    public String readCommand() {
+        return scanner.nextLine();
+    }
+
     public void welcome() {
         System.out.println(DIVIDER);
         System.out.println("Welcome to Duke!");
@@ -21,21 +25,33 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public void showBorder() {
-        System.out.println(DIVIDER);
-    }
-
     public void borderPrint(String msg) {
         System.out.println(DIVIDER);
         System.out.println(msg);
         System.out.println(DIVIDER);
     }
 
-    public void showError(Exception e) {
-        borderPrint(e.getMessage());
+    public void showAddedTask(Task task, int listSize) {
+        String msg = String.format("I've added this task: %s\nYou now have %d items on your todo list.",
+                task.toString(),
+                listSize);
+        borderPrint(msg);
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    public void showRemovedTask(Task task, int listSize) {
+        String msg = String.format("I've removed this task: %s\nYou now have %d items on your todo list.",
+                task.toString(),
+                listSize);
+        borderPrint(msg);
+    }
+
+    public void showDoneTask(Task task) {
+        String msg = String.format("Congrats! The following task has been marked as done:\n  %s",
+                task.toString());
+        borderPrint(msg);
+    }
+
+    public void showError(Exception e) {
+        borderPrint(e.getMessage());
     }
 }
