@@ -1,21 +1,20 @@
 package duke;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class InputHandler {
-    private final List<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public InputHandler() {
         this.taskList = new ArrayList<>();
     }
 
-    public InputHandler(List<Task> taskList) {
+    public InputHandler(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public List<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
@@ -38,7 +37,6 @@ public class InputHandler {
             newList.set(idxDone, newTask);
             System.out.printf(">>> Nice! I've marked this task as done:\n  [%s] [%s] %s\n",
                     newTask.getTaskType(), newTask.getStatusIcon(), newTask.getDescription());
-
             return new InputHandler(newList);
         } else if (command.equals("delete")){
             int idxDel = Integer.parseInt(splitInput[1]) - 1;
@@ -68,7 +66,7 @@ public class InputHandler {
                 // parse input
                 String[] taskDetails = splitInput[1].split("/by");
                 String taskDescription = taskDetails[0];
-                String endTime =  taskDetails[1];
+                LocalDate endTime =  LocalDate.parse(taskDetails[1]);
                 // create Deadline Task
                 Deadline newDeadline = new Deadline(taskDescription, endTime);
                 newList.add(newDeadline);
@@ -81,7 +79,7 @@ public class InputHandler {
                 // parse input
                 String[] taskDetails = splitInput[1].split("/at");
                 String taskDescription = taskDetails[0];
-                String eventTime =  taskDetails[1];
+                LocalDate eventTime =  LocalDate.parse(taskDetails[1]);
 
                 // create Event Task
                 Event newEvent = new Event(taskDescription, eventTime);
