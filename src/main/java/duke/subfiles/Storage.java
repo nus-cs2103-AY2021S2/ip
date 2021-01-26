@@ -79,16 +79,16 @@ public class Storage {
 
             for (Task t : tasks) {
                 if (t instanceof ToDo) {
-                    fw.write("T | " + (t.isDone() ? 1 : 0) +
-                            " | " + t.getName());
+                    fw.write("T | " + (t.isDone() ? 1 : 0)
+                            + " | " + t.getName());
                 } else if (t instanceof Deadline) {
                     Deadline d = (Deadline) t;
-                    fw.write("D | " + (d.isDone() ? 1 : 0) + " | " +
-                            d.getName() + " | " + d.getDate());
+                    fw.write("D | " + (d.isDone() ? 1 : 0) + " | "
+                            + d.getName() + " | " + d.getDate());
                 } else {
                     Event e = (Event) t;
-                    fw.write("E | " + (e.isDone() ? 1 : 0) + " | " +
-                            e.getName() + " | " + e.getDate());
+                    fw.write("E | " + (e.isDone() ? 1 : 0) + " | "
+                            + e.getName() + " | " + e.getDate());
                 }
                 fw.write(System.lineSeparator());
             }

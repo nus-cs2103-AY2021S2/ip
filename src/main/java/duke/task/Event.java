@@ -54,8 +54,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E][" + (isDone ? "X" : " ") + "] " + name +
-                " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E][" + (isDone ? "X" : " ") + "] " + name + " (at: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }

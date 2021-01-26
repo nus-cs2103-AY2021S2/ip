@@ -54,8 +54,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D][" + (isDone ? "X" : " ") + "] " + name +
-                " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D][" + (isDone ? "X" : " ") + "] " + name + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
 }
