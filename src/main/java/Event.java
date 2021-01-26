@@ -1,5 +1,5 @@
 public class Event extends Task {
-    private String time;
+    private final String time;
 
     Event(String name, String time) {
         super(name);
@@ -10,8 +10,12 @@ public class Event extends Task {
         return this.time;
     }
 
+    String getSymbol() {
+        return "E";
+    }
+
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.getTime());
+        return String.format("%s (at: %s)", super.toString(), this.getTime());
     }
 }

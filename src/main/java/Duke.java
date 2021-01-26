@@ -1,4 +1,8 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     static final String INDENT = "        ";
@@ -13,10 +17,32 @@ public class Duke {
         }
         System.out.println(BORDER + "\n");
     }
-    
+
     public static String getNumTasks() {
         return "\nNow you have " + tasks.size() + " tasks in the list.";
     }
+
+    public static void saveData() {
+        try {
+            FileWriter dataOut = new FileWriter("duke.txt");
+            for (Task t : tasks) {
+                String currLine = t.getSymbol() + "#" + t.getStatus() + "#" + t.getName();
+                if (t instanceof Deadline) {
+                    Deadline d = (Deadline) t;
+                    currLine += "#" + d.getTime();
+                } else if (t instanceof Event) {
+                    Event e = (Event) t;
+                    currLine += "#" + e.getTime();
+                }
+                currLine += "\n";
+                dataOut.write(currLine);
+            }
+            dataOut.close();
+        } catch (IOException e) {
+            System.out.println("Cannot save tasks" + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         String logo = "      _       __  __  \n"
                     + "     | |     / _|/ _| \n"
@@ -25,6 +51,39 @@ public class Duke {
                     + "| |__| |  __/ | | |   \n"
                     + " \\____/ \\___|_| |_| \n";
         print("Hello I'm\n" + logo + "\nWhat can I do for you?");
+
+        try {
+            File data = new File("duke.txt");
+            Scanner dataIn = new Scanner(data);
+            while (dataIn.hasNext()) {
+                String[] line = dataIn.nextLine().split("#", 3);
+                switch (line[0]) {
+                case "T":
+                    ToDo savedToDo = new ToDo(line[2]);
+                    if (line[1].equals("X")) {
+                        savedToDo.setDone();
+                    }
+                    tasks.add(savedToDo);
+                    break;
+                case "D":
+                    Deadline savedDeadline = new Deadline(line[2].split("#")[0], line[2].split("#")[1]);
+                    if (line[1].equals("X")) {
+                        savedDeadline.setDone();
+                    }
+                    tasks.add(savedDeadline);
+                    break;
+                case "E":
+                    Event savedEvent = new Event(line[2].split("#")[0], line[2].split("#")[1]);
+                    if (line[1].equals("X")) {
+                        savedEvent.setDone();
+                    }
+                    tasks.add(savedEvent);
+                }
+            }
+        } catch(FileNotFoundException e){
+
+        }
+
 
         Scanner sc = new Scanner(System.in);
         while(true) {
@@ -126,6 +185,7 @@ public class Duke {
 
             case bye:
                 print("Bye. Hope to see you again!");
+                saveData();
                 return;
             }
         }
