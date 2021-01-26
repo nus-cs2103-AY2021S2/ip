@@ -1,42 +1,34 @@
 public class Event extends Task{
     private String info;
-    public Event(String[] taskDetails) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
-        super(taskDetails);
-        checkTask();
+    public Event(String taskLine) throws ArrayIndexOutOfBoundsException, IllegalArgumentException {
+        super(taskLine);
+        checkTask(taskLine);
         buildInfo();
     }
-    private void buildInfo(){
-        String output = "";
-        int i = 1;
-        while(!taskDetails[i].equals("/at")) {
-            output += taskDetails[i] + " ";
-            i++;
-        }
-        i++;
-        output =  output + "(at: " ;
-        while(i < taskDetails.length){
-            output += taskDetails[i] + " ";
-            i++;
-        }
-        info = output + ")";
-    }
-    private void checkTask() throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
-        if (taskDetails.length < 2) throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Event cannot be empty.");
-        else{
-            for(String s: taskDetails){
-                if (s.equals("/at")) return;
-            }
+    private void checkTask(String taskLine) throws  ArrayIndexOutOfBoundsException, IllegalArgumentException{
+        if (taskLine.length() < 2) {
+            throw new ArrayIndexOutOfBoundsException("☹ OOPS!!! The description of a Event cannot be empty.");
+        } else if (!taskLine.contains("/at")) {
             throw new IllegalArgumentException("☹ OOPS!!! The Event needs an '/at' time.");
         }
     }
-    public String printNew(){
+    private void buildInfo(){
+        String[] parsedTask = taskLine.split("event");
+        parsedTask = parsedTask[1].split("/at");
+        this.name = parsedTask[0].strip();
+        this.dateTime = parsedTask[1].strip();
+        setDateTimeLD(dateTime);
+        this.info = name + " at: " + dateTime ;
+    }
+
+    protected String printNew(){
         return "[E][ ] " + info;
     }
     public String toString(){
         return info;
     }
     @Override
-    public String type(){
+    protected String type(){
         return "E";
     }
 }
