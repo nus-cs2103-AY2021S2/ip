@@ -29,7 +29,7 @@ public class Tasks {
     }
 
     public Task getTaskDone(int i) throws IndexOutOfBoundsException {
-        tasks.get(i).setDone(true);
+        tasks.get(i - 1).setDone(true);
         return tasks.get(i - 1);
     }
 

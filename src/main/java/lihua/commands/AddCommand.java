@@ -23,7 +23,7 @@ public class AddCommand extends Command {
             tasks.addTask(toAdd);
             String noun = tasks.getSize() <= 1? "task": "tasks";
             String message = String.format(
-                    "Got it. I have added this task to your list:\n%s\n" +
+                    "Got it. I have added this task to your list:\n---- %s\n" +
                             "Now you have %d %s in total. Good luck.", toAdd.toString(), tasks.getSize(), noun);
             return new CommandResult(message);
         } catch (Exception e) {
