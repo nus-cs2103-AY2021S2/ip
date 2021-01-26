@@ -19,4 +19,8 @@ public class Task {
     public String saveStatus() {
         return " | " + (this.isDone ? "1" : "0") + " | " + this.description + "\n";
     }
+
+    public boolean doesDescriptionContain(String word) {
+        return this.description.contains(word);
+    }
 }
