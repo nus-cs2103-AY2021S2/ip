@@ -1,20 +1,29 @@
-public class Event extends Task{
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+public class Event extends Task {
+
     protected char type;
-    public Event(String task, String by) {
+    public LocalDate at;
+
+    public Event(String task, String at) {
         super(task);
-        this.by = by;
+        at = at.replaceFirst(" ", "");
+        this.at = LocalDate.parse(at);
         this.type = 'E';
     }
 
-    public Event(String task, boolean isDone, String by) {
+    public Event(String task, boolean isDone, String at) {
         super(task, isDone);
         this.type = 'E';
-        this.by = by;
+        at = at.replaceFirst(" ", "");
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public String toString() {
-        return "[" + type + "]"  + super.toString() + "(at:" + by + ")";
+        return "[" + type + "]" + super.toString()
+                + "(at:" + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
