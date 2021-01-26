@@ -5,12 +5,7 @@ public class DoneCommand extends Command{
         this.option = option;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        boolean isSuccess = taskList.markAsDone(this.option);
-        if (isSuccess) {
-
-        } else {
-
-        }
+    public void excute(TaskList taskList, Ui ui, Storage storage) {
+        taskList.markAsDone(ui, this.option);
     }
 }
