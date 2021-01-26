@@ -16,14 +16,14 @@ public class TaskList {
 
     public boolean checkValidOption(Ui ui, int option) {
         boolean result = option < 0 || option > this.taskList.size();
-        if (!result) {
+        if (result) {
             ui.showError("Invalid task Option");
         }
         return result;
     }
 
     public void markAsDone(Ui ui, int option) {
-        if(checkValidOption(ui, option)) {
+        if(!checkValidOption(ui, option)) {
             Task task = taskList.get(option);
             if (!task.markAsDone()) {
                 ui.showError("Task is already marked done");
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     public void deleteTask(Ui ui, int option) {
-        if(checkValidOption(ui, option)) {
+        if(!checkValidOption(ui, option)) {
             Task t = taskList.remove(option);
             ui.showSuccessDeleteTask(t.toString(), taskList.size());
         }
