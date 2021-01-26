@@ -2,7 +2,16 @@ package duke;
 
 import java.time.LocalDate;
 
-import duke.command.*;
+import duke.command.AddDeadline;
+import duke.command.AddEvent;
+import duke.command.AddToDo;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 /**
  * Represents a parser that handles input from a user.
