@@ -1,13 +1,13 @@
 package com.tjtanjin.ip;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
-    Task task = new Task("Test Task", "incomplete", "TODO");
+    private Task task = new Task("Test Task", "incomplete", "TODO");
 
     @Test
     void getTaskName_whenInvoke_thenOutputTaskName() {

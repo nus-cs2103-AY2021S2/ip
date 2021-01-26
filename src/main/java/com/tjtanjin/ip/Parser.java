@@ -1,7 +1,7 @@
 package com.tjtanjin.ip;
 
-import java.util.HashMap;
 import java.time.LocalDate;
+import java.util.HashMap;
 
 /**
  * The Parser class parses user input before calling the appropriate command classes for execution.
@@ -22,7 +22,7 @@ public class Parser {
     }
 
     //list storing commands/descriptions, ideally store in json file
-    private final static HashMap<String, String> cmdInfo = new HashMap<>();
+    private static final HashMap<String, String> cmdInfo = new HashMap<>();
 
     /**
      * Constructor for Parser class that initialises all valid commands.
@@ -113,7 +113,7 @@ public class Parser {
 
         try {
             int index = Integer.parseInt(parsedString[1]) - 1;
-            if (index < TaskList.tasks.size() && index >= 0) {
+            if (index < TaskList.getTasks().size() && index >= 0) {
                 return index;
             } else {
                 throw new IndexOutOfBoundsException();

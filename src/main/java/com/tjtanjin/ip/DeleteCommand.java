@@ -11,7 +11,7 @@ public class DeleteCommand {
      * @param index of task to delete
      */
     public static void execute(int index) {
-        Task task = TaskList.tasks.get(index);
+        Task task = TaskList.getTasks().get(index);
         TaskList.deleteTask(index);
         String taskName = task.getTaskName();
         String taskType = task.getType().toUpperCase();

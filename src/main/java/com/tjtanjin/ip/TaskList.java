@@ -1,7 +1,7 @@
 package com.tjtanjin.ip;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * TaskList manages all tasks and their operations.
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class TaskList {
 
     //use arraylist to store tasks
-    public static ArrayList<Task> tasks = Storage.loadTasks();
+    private static final ArrayList<Task> tasks = Storage.loadTasks();
 
     /**
      * Adds a new task.
@@ -29,6 +29,10 @@ public class TaskList {
         tasks.add(task);
         int numTasks = tasks.size();
         Ui.showInfo("Task successfully added! You now have " + numTasks + " task(s)!");
+    }
+
+    public static ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -77,6 +81,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find tasks whose name contains input from user.
+     * @param taskName name of task
+     */
     public static void findTask(String taskName) {
         if (tasks.size() == 0) {
             Ui.showInfo("You have no task at the moment!");

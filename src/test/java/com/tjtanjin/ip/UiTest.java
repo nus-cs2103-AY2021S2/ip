@@ -1,11 +1,14 @@
 package com.tjtanjin.ip;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 public class UiTest {
 
@@ -15,7 +18,7 @@ public class UiTest {
 
     @BeforeEach
     public void setUp() {
-    System.setOut(new PrintStream(outputStreamCaptor));
+        System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @AfterEach

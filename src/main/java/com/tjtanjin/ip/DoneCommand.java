@@ -12,7 +12,7 @@ public class DoneCommand {
      * @param index of task to mark as done
      */
     public static void execute(int index) {
-        Task task = TaskList.tasks.get(index);
+        Task task = TaskList.getTasks().get(index);
         TaskList.markTaskDone(index);
         String taskName = task.getTaskName();
         String taskType = task.getType().toUpperCase();

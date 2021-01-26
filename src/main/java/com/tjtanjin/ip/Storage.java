@@ -1,24 +1,25 @@
 package com.tjtanjin.ip;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * The Storage class handles the saving/loading of tasks from hard disk.
  */
 public class Storage {
 
-    public static ArrayList<Task> tasks = new ArrayList<>();
-    public static JSONArray taskList = new JSONArray();
+    private static JSONArray taskList = new JSONArray();
+    private static final ArrayList<Task> tasks = new ArrayList<>();
 
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     /**
@@ -50,20 +51,17 @@ public class Storage {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("./data/tasks.json"))
-        {
+        try (FileReader reader = new FileReader("./data/tasks.json")) {
             //read JSON file
             Object obj = jsonParser.parse(reader);
 
             taskList = (JSONArray) obj;
 
             //load each task
-            taskList.forEach( emp -> parseTaskGroup( (JSONObject) emp ) );
-
+            taskList.forEach(emp -> parseTaskGroup((JSONObject) emp));
         } catch (IOException | ParseException e) {
             System.out.println("No saved task found.");
         }
-
         return tasks;
     }
 
@@ -71,8 +69,7 @@ public class Storage {
      * Retrieve individual task information and repopulate them into taskList.
      * @param task task to retrieve information for
      */
-    private static void parseTaskGroup(JSONObject task)
-    {
+    private static void parseTaskGroup(JSONObject task) {
         JSONObject taskDetails = (JSONObject) task.get("task");
 
         String taskName = (String) taskDetails.get("taskName");
