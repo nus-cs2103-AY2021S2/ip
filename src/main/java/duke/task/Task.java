@@ -3,13 +3,18 @@ package duke.task;
 /**
  * Base Task class.
  */
-public class Task {
+public abstract class Task {
     private final String content;
     private boolean isDone;
 
     public Task(String content) {
         this.content = content;
-        this.isDone = false;
+        isDone = false;
+    }
+
+    protected Task(String content, boolean isDone) {
+        this.content = content;
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {
@@ -28,17 +33,9 @@ public class Task {
         isDone = true;
     }
 
-    public String getSerialized() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract String getSerialized();
 
-    /**
-     * Returns true if the task contains str in one of its fields
-     *
-     * @param str the target string
-     * @return true if the task contains str in one of its fields
-     */
-    public boolean hasStrInProps(String str) { throw new UnsupportedOperationException(); }
+    public abstract boolean hasStrInProps(String str);
 
     @Override
     public String toString() {

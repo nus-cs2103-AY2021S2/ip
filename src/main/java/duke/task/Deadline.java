@@ -13,8 +13,8 @@ public class Deadline extends Task {
         this.by = new DateTime(by);
     }
 
-    private Deadline(String content, DateTime dt) {
-        super(content);
+    private Deadline(String content, boolean isDone, DateTime dt) {
+        super(content, isDone);
         this.by = dt;
     }
 
@@ -38,12 +38,7 @@ public class Deadline extends Task {
         boolean isDateOnly = Boolean.parseBoolean(words[3]);
         String isoStr = words[4];
 
-        Deadline deadline = new Deadline(content, DateTime.fromISODateTime(isoStr, isDateOnly));
-        if (isDone) {
-            deadline.markDone();
-        }
-
-        return deadline;
+        return new Deadline(content, isDone, DateTime.fromISODateTime(isoStr, isDateOnly));
     }
 
     /**
