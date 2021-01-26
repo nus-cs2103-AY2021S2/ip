@@ -20,6 +20,7 @@ public class ByeCommand extends Command {
         try {
             List<String> converted = FileTaskStringConverter.allTaskToAllString(taskList.getList());
             this.storage.writeToFile(converted);
+
             String endMessage = "Bye. Hope to see you again soon!";
             this.ui.showMsg(endMessage);
         } catch (IOException e) {
