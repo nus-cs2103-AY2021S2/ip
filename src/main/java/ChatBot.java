@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import static simulator.Design.*;
 
 import simulator.DukeException;
@@ -7,9 +8,11 @@ import task.*;
 
 public class ChatBot {
     private ArrayList<Task> list;
+
     public ChatBot() {
         list = new ArrayList<>();
     }
+
     public String getTally() {
         return "     Currently you have " + list.size() + " tasks in the list.";
     }
@@ -53,9 +56,7 @@ public class ChatBot {
             }
         } catch (DukeException err) {
             printBox(err.getMessage());
-
-        }
-        catch (Exception err) {
+        } catch (Exception err) {
             printBox("☹ OOPS!!! Incorrect input, please check!");
         }
     }
