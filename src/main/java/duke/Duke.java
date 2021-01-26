@@ -18,7 +18,6 @@ public class Duke {
         this.parser = new Parser();
         this.taskList = new TaskList();
         this.storage = new Storage(filePath);
-
     }
 
     protected static void print(String s) {
