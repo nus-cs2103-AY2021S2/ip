@@ -1,17 +1,25 @@
 package duke.command;
 
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+import java.io.IOException;
+
 public class Command {
 
-    String reply;
+    protected String reply;
+    protected boolean isBye = false;
 
     public Command(String reply){
         this.reply = reply;
     }
 
-    public void dukeReply(){
-        System.out.println("\t____________________________________________________________");
-        System.out.println("\t" + this.reply);
-        System.out.println("\t____________________________________________________________");
+    public boolean getIsBye(){
+        return this.isBye;
     }
 
+    public void execute(Ui ui, Storage s, TaskList list)throws IOException {
+    }
 }

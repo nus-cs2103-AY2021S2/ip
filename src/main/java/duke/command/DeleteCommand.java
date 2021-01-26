@@ -1,17 +1,28 @@
 package duke.command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
-    public DeleteCommand(ArrayList<Task> list, int index) {
-        super("");
-        Task t = list.get(index);
-        list.remove(index);
-        this.reply = "Noted. I've removed this task:\n\t" + t.toString()
-                + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.";
 
-        super.dukeReply();
+    private int index;
+    public DeleteCommand(int index) {
+        super("");
+        this.index = index;
+    }
+
+    public void execute(Ui ui, Storage s, TaskList list) throws IOException {
+        Task t = list.getItem(index);
+        list.deleteTask(index);
+        this.reply = "Noted. I've removed this task:\n\t" + t.toString()
+                + "\n\tNow you have " + list.getSize() + " task" + (list.getSize() != 1 ? "s " : " ") + "in the list.";
+        s.storeData(list.getList());
+        ui.reply(this.reply);
     }
 }

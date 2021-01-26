@@ -1,21 +1,37 @@
 package duke.command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.task.Event;
-import duke.task.Task;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class EventCommand extends Command{
 
+    private final String description;
+    private final LocalDate at;
 
-    public EventCommand(ArrayList<Task> list, String task, LocalDate at){
+
+    public EventCommand(String task, LocalDate at){
         super("");
-        Event t = new Event(task, at);
-        list.add(t);
-        this.reply = "Got it. I've added this task:\n\t" + t.toString()
-                + "\n\tNow you have " + list.size() + " task" + (list.size() != 1 ? "s " : " ") + "in the list.";
-        super.dukeReply();
+        this.description = task;
+        this.at = at;
+    }
 
+
+    public void execute(Ui ui, Storage s, TaskList list) throws IOException {
+        Event t = new Event(this.description, this.at);
+        list.addTask(t);
+        this.reply = "Got it. I've added this task:\n\t" + t.toString()
+                + "\n\tNow you have " + list.getSize() + " task" + (list.getSize() != 1 ? "s " : " ") + "in the list.";
+        s.storeData(list.getList());
+        ui.reply(this.reply);
     }
 }
+
+
+
+
+
