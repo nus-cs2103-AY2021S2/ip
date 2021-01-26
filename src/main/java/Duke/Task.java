@@ -26,16 +26,16 @@ public class Task {
 
     // Message that a task has been successfully added
     public String successMessage(int taskListSize) {
-        return String.format("Got it. I've added this task:\n" +
-        "  %s\n" + "Now you have %d tasks in the list.\n",
-        this.toString(), taskListSize);
+        return String.format("Got it. I've added this task:\n" 
+                + "  %s\n" + "Now you have %d tasks in the list.\n",
+                this.toString(), taskListSize);
     }
 
     // Message that a task has been successfully deleted
     public String deleteMessage(int taskListSize) {
-        return String.format("Noted. I've removed this task:\n" +
-        "  %s\n" + "Now you have %d tasks in the list.\n",
-        this.toString(), taskListSize);
+        return String.format("Noted. I've removed this task:\n" 
+                + "  %s\n" + "Now you have %d tasks in the list.\n",
+                this.toString(), taskListSize);
     }
 
     @Override

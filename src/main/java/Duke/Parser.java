@@ -43,8 +43,7 @@ public class Parser {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
             LocalDateTime by = LocalDateTime.parse(
                 taskInputValues[1].substring(0, taskInputValues[1].length() - 1), 
-                dateFormatter
-            );
+                dateFormatter);
 
             // Return the description and date pair
             return new StringDatePair(description, by);
@@ -57,8 +56,7 @@ public class Parser {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMM yyyy - HHmm");
             LocalDateTime at = LocalDateTime.parse(
                 taskInputValues[1].substring(0, taskInputValues[1].length() - 1),
-                dateFormatter
-            );
+                dateFormatter);
 
             // Return the description and date pair
             return new StringDatePair(description, at);
