@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.LocalTime;
 
 public class Duke {
     public static void main(String[] args) throws DukeException {
@@ -82,7 +86,6 @@ public class Duke {
                     }
 
                     String task = "";
-                    String deadline = "";
 
                     int counter;
                     outerloop:
@@ -98,17 +101,12 @@ public class Duke {
                         }
                     }
 
-                    boolean first = true;
-                    for (counter = counter + 1; counter < split.length; counter++) {
-                        if (first) {
-                            deadline = deadline + split[counter];
-                            first = false;
-                        } else {
-                            deadline = deadline + " " + split[counter];
-                        }
-                    }
+                    counter++;
+                    LocalDate date = LocalDate.parse(split[counter], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    counter++;
+                    LocalTime time = LocalTime.parse(split[counter], DateTimeFormatter.ofPattern("HHmm"));
 
-                    Deadline toAdd = new Deadline(task, deadline);
+                    Deadline toAdd = new Deadline(task, date, time);
                     taskArrayList.add(toAdd);
 
                     System.out.println("Got it. I've added this task:");
@@ -127,7 +125,6 @@ public class Duke {
                     }
 
                     String task = "";
-                    String date = "";
 
                     int counter;
                     outerloop:
@@ -143,17 +140,12 @@ public class Duke {
                         }
                     }
 
-                    boolean first = true;
-                    for (counter = counter + 1; counter < split.length; counter++) {
-                        if (first) {
-                            date = date + split[counter];
-                            first = false;
-                        } else {
-                            date = date + " " + split[counter];
-                        }
-                    }
+                    counter++;
+                    LocalDate date = LocalDate.parse(split[counter], DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                    counter++;
+                    LocalTime time = LocalTime.parse(split[counter], DateTimeFormatter.ofPattern("HHmm"));
 
-                    Event toAdd = new Event(task, date);
+                    Event toAdd = new Event(task, date, time);
                     taskArrayList.add(toAdd);
 
                     System.out.println("Got it. I've added this task:");
