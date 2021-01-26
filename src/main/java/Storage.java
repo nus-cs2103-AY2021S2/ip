@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles saving and loading the TaskList to/from the hard disk via a save data text file.
+ */
 public class Storage {
     private String filepath;
 
@@ -11,6 +14,12 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads list of Tasks from the text file specified in the Storage object's filepath.
+     *
+     * @return ArrayList of the Tasks stored in the save data file.
+     * @throws DukeException If an Exception occurs as a result of the stored save data being malformed.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -42,6 +51,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves list of Tasks to the save data file.
+     * @param tasks The list of Tasks to be saved to the file.
+     * @throws DukeException If an Exception occurs as a result of the stored save data being malformed.
+     */
     public void saveTasks(TaskList tasks) throws DukeException {
         try {
             FileWriter saveWriter = new FileWriter(filepath);

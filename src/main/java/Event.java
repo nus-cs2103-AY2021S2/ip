@@ -9,6 +9,10 @@ public class Event extends Task {
         this.datetime = time;
     }
 
+    /**
+     * Returns a String representing this object to be saved into a save data file.
+     * @return String representation of this object, formatted for save data use.
+     */
     public String getSaveString() {
         String datetimeString = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         if (this.isDone()) {

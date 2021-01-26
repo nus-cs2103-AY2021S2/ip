@@ -3,6 +3,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Returns a String representing this object to be saved into a save data file.
+     * @return String representation of this object, formatted for save data use.
+     */
     public String getSaveString() {
         if (this.isDone()) {
             return String.format("todo [isDone] %s\n", description);
