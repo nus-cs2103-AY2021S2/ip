@@ -6,8 +6,17 @@ import duke.task.TaskList;
 import duke.task.Task;
 import duke.Ui;
 
+/**
+ * DoneCommand handles the marking of tasks as done status in the list only
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * DoneCommand Constructor
+     *
+     * @param commandType Task name
+     * @param index Integer index on the display list in command line
+     */
     public DoneCommand(String commandType, int index) {
         super.commandType = commandType;
         super.commandDetails = String.valueOf(index);
@@ -22,17 +31,31 @@ public class DoneCommand extends Command {
         this.outputMessage = " Nice! I've marked this task as done:\n" + "\t  " + doneTask.toString();
     }
 
+    /**
+     * Mark selected task as done status from the TaskList,
+     * Save the updated TaskList into file and output message to command line
+     *
+     * @param tasks TaskList
+     * @param ui Instance of Ui
+     * @param storage Instance of Storage
+     * @throws DukeException If the integer input is out of list range (negative, 0 or greater than TaskList size)
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (index <= 0 || index > taskList.size()) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (index <= 0 || index > tasks.size()) {
             throw new DukeException(ExceptionType.INVALID_INTEGER, "");
         }
 
-        markDoneTask(taskList);
-        storage.saveData(taskList);
+        markDoneTask(tasks);
+        storage.saveData(tasks);
         ui.display(outputMessage);
     }
 
+    /**
+     * Determines if whether the Duke Bot should continue processing the user input
+     *
+     * @return True
+     */
     @Override
     public boolean continueInput() {
         return true;

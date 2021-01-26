@@ -9,7 +9,8 @@ public class Task {
 
     /**
      * Constructor for Task class
-     * @param description details of the task
+     *
+     * @param description Details of the task
      */
     public Task(String description) {
         this.description = description;
@@ -25,6 +26,7 @@ public class Task {
 
     /**
      * Retrieve the status of task
+     *
      * @return Cross if task is marked as completed, empty string if incomplete
      */
     public String getStatusIcon() {
@@ -33,6 +35,7 @@ public class Task {
 
     /**
      * Retrieve the description of task
+     *
      * @return String format of task description
      */
     public String getDescription() {
@@ -48,7 +51,8 @@ public class Task {
 
     /**
      * Format task status icon and task details as string
-     * @return task status icon and task details
+     *
+     * @return Task status icon and task details
      */
     @Override
     public String toString() {

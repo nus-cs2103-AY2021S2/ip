@@ -11,8 +11,9 @@ public class Event extends Task {
 
     /**
      * Constructor for Event class
-     * @param description details of the task
-     * @param at starts and ends at specific date/time to complete the task
+     *
+     * @param description Details of the task
+     * @param at Starts and ends at specific date/time to complete the task
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     /**
      * Displays simplified version of task type, description and timeframe of tasks in Duke.txt
+     *
      * @return String format regarding the Event details
      */
     @Override
@@ -30,6 +32,7 @@ public class Event extends Task {
 
     /**
      * Displays task type, description and timeframe of tasks
+     *
      * @return String format regarding the Event details
      */
     @Override

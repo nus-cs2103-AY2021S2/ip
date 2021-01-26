@@ -5,13 +5,23 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * FindCommand handles the filtering of tasks in the list that matches the keyword given by the user only
+ */
 public class FindCommand extends Command {
 
+    /**
+     * FindCommand Constructor
+     *
+     * @param commandType Task name
+     * @param commandDetails Task details
+     */
     public FindCommand(String commandType, String commandDetails) {
         super.commandType = commandType;
         super.commandDetails = commandDetails;
         super.dateTime = "";
         super.outputMessage = "";
+        // index is -1 because it is only used in done and delete tasks
         super.index = -1;
     }
 
@@ -35,12 +45,25 @@ public class FindCommand extends Command {
         return string.toLowerCase().contains(subString.toLowerCase());
     }
 
+    /**
+     * Find a subset of tasks from the TaskList given a keyword input from the user and
+     * Display the result as output message in the command line
+     *
+     * @param tasks TaskList
+     * @param ui Instance of Ui
+     * @param storage Instance of Storage
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        retrieveMatchingTasks(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        retrieveMatchingTasks(tasks);
         ui.display(outputMessage);
     }
 
+    /**
+     * Determines if whether the Duke Bot should continue processing the user input
+     *
+     * @return True
+     */
     @Override
     public boolean continueInput() {
         return true;
