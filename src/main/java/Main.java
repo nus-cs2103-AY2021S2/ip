@@ -1,4 +1,5 @@
 import duke.Duke;
+import exception.DukeDateFormatException;
 import exception.DukeException;
 
 import java.io.FileNotFoundException;
@@ -6,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"

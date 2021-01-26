@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class Deadline extends Task{
     protected LocalDateTime by;
-    public static String parseFormat = "dd-MM-yyyy, hh:mma";
+    public static String parseFormat = "dd/MM/yyyy, hh:mma";
     public static String outputFormat = "dd MMM yyyy, hh:mma";
     /**
      * Instantiates a new deadline task.
@@ -14,10 +14,13 @@ public class Deadline extends Task{
      * @param description the deadline description
      * @param by          the by
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, LocalDateTime by) {
         super(description);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(parseFormat, Locale.US);
-        this.by = LocalDateTime.parse(by, format);
+        this.by = by;
+    }
+
+    public String getSimpleBy() {
+        return by.format(DateTimeFormatter.ofPattern(parseFormat));
     }
 
     public String getBy() {
