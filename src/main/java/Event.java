@@ -10,4 +10,9 @@ public class Event extends Task {
 	public String toString() {
 		return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.dateTime);
 	}
+
+	@Override
+	public String encode() {
+		return String.format("E | %s | %s | %s", this.isDone ? "1" : "0", this.description, this.dateTime);
+	}
 }

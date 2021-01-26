@@ -10,4 +10,9 @@ public class Deadline extends Task {
 	public String toString() {
 		return String.format("[D][%s] %s (by: %s)", this.getStatusIcon(), this.description, this.dateTime);
 	}
+
+	@Override
+	public String encode() {
+		return String.format("D | %s | %s | %s", this.isDone ? "1" : "0", this.description, this.dateTime);
+	}
 }

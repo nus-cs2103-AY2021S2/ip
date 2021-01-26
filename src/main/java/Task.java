@@ -1,6 +1,7 @@
 public abstract class Task {
     protected boolean isDone;
     protected final String description;
+    public abstract String encode();
 
     protected Task(final boolean isDone, final String description) {
         this.isDone = isDone;
