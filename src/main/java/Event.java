@@ -17,6 +17,6 @@ public class Event extends Task {
     @Override
     public String getSaveFormat() {
         return "E | " + (isDone() ? "1" : "0") + " | " + description +
-                " | " + time;
+                " | " + Parser.parseDateTimeToString(time);
     }
 }

@@ -37,11 +37,13 @@ public class Storage {
                     addToTasks(tasks, t, taskSplit[1]);
                     break;
                 case "D":
-                    Deadline d = new Deadline(taskSplit[2], taskSplit[3]);
+                    Deadline d = new Deadline(taskSplit[2],
+                            Parser.parseSaveToDateTime(taskSplit[3].trim()));
                     addToTasks(tasks, d, taskSplit[1]);
                     break;
                 case "E":
-                    Event e = new Event(taskSplit[2], taskSplit[3]);
+                    Event e = new Event(taskSplit[2],
+                            Parser.parseSaveToDateTime(taskSplit[3].trim()));
                     addToTasks(tasks, e, taskSplit[1]);
                     break;
                 default:
