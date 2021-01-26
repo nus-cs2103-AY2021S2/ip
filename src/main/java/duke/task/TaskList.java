@@ -28,4 +28,16 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
+
+    public TaskList find(String keyword) {
+        TaskList results = new TaskList();
+        keyword = keyword.toLowerCase();
+        for (Task t : tasks) {
+            String description = t.getDescription().toLowerCase();
+            if (description.contains(keyword)) {
+                results.addTask(t);
+            }
+        }
+        return results;
+    }
 }
