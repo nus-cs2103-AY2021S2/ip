@@ -49,7 +49,7 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("../src/main/java/data/", "duke.txt").run();
+        new Duke("../data/", "duke.txt").run();
     }
 
 }
