@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 // DEALS WITH MAKING SENSE OF USER'S COMMAND
 public class Parser {
@@ -41,6 +42,10 @@ public class Parser {
 
     static String parseEventDate(String command) {
         return command.substring(6).split(" /at ")[1];
+    }
+
+    static String parseKeyword(String command) {
+        return command.substring(5);
     }
 
     static boolean hasExited(String command) {
@@ -88,6 +93,15 @@ public class Parser {
                 Task deletedTask = tasks.list.get(taskIndex);
                 tasks.removeTask(taskIndex);
                 ui.showDeleteTask(tasks.list, deletedTask);
+            } else if (commandType.equals("find")) {
+                String keyword = Parser.parseKeyword(command);
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                for (Task task : tasks.list) {
+                    if (task.description.contains(keyword)) {
+                        matchingTasks.add(task);
+                    }
+                }
+                ui.showMatchingTasks(matchingTasks);
             } else {
                 throw new DukeException(ui.showInvalidCommand());
             }

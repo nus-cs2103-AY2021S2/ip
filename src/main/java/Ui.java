@@ -14,8 +14,17 @@ public class Ui {
     public void showList(ArrayList<Task> list) {
         System.out.println("Here are the tasks in your list:");
         int taskNumber = 1;
-        for (Task x : list) {
-            System.out.printf("%d. " + x + "\n", taskNumber);
+        for (Task task : list) {
+            System.out.printf("%d. " + task + "\n", taskNumber);
+            taskNumber++;
+        }
+    }
+
+    public void showMatchingTasks(ArrayList<Task> list) {
+        System.out.println("Here are the matching tasks in your list:");
+        int taskNumber = 1;
+        for (Task task : list) {
+            System.out.printf("%d. " + task + "\n", taskNumber);
             taskNumber++;
         }
     }
