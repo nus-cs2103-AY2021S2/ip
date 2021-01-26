@@ -1,9 +1,6 @@
 package kelbot;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
@@ -36,6 +33,8 @@ public class Storage {
     }
     
     public void save(ArrayList<Task> taskList) {
+        File file = new File(this.path.toString());
+        file.getParentFile().mkdirs();
         try {
             FileOutputStream fos = new FileOutputStream(this.path.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fos);

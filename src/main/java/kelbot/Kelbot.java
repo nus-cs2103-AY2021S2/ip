@@ -1,5 +1,6 @@
 package kelbot;
 
+import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -87,7 +88,7 @@ public class Kelbot implements Serializable {
     }
     
     public static void main(String[] args) throws KelbotException {
-        java.nio.file.Path path = java.nio.file.Paths.get("src", "main", "data", "Kelbot.txt");
+        java.nio.file.Path path = java.nio.file.Paths.get(".", "data", "Kelbot.txt");
         new Kelbot(path).run();
     }
 }
