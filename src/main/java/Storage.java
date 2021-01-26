@@ -11,6 +11,10 @@ public class Storage {
     protected File saveFile;
     protected FileWriter filewriter;
 
+    /**
+     * Constructor for this Storage object.
+     * @param   filePath  File path to save task to hard disk.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         this.saveFile = new File(filePath);

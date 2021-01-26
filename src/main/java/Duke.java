@@ -9,6 +9,10 @@ public class Duke {
     private TaskList list;
     private Ui ui;
 
+    /**
+     * Constructor for this Duke object.
+     * @param   filePath  File path to save task to hard disk.
+     */
     public Duke(String filePath) {
         try {
             this.storage = new Storage(filePath);

@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
  * Makes sense of user input and commands.
  */
 public class Parser {
+    /**
+     * Constructor for this Parser object.
+     */
     public Parser() {
     }
     public static void parse(TaskList list, String str) throws DukeException {

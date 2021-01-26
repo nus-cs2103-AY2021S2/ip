@@ -7,6 +7,9 @@ public class TaskList {
     protected ArrayList<Task> list;
     protected int numItems;
 
+    /**
+     * Constructor for this TaskList object.
+     */
     TaskList() {
         this.list = new ArrayList<Task>();
         this.numItems = 0;

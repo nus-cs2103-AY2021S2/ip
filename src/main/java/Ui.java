@@ -2,7 +2,10 @@
  * Deals with the interactions with the user.
  */
 public class Ui {
-    public Ui(){
+    /**
+     * Constructor for this Ui object.
+     */
+    public Ui () {
     }
 
     public void initialise() {

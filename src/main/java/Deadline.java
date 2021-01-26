@@ -8,6 +8,11 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate byDate;
 
+    /**
+     * Constructor for this Deadline object.
+     * @param   description  Task Description.
+     * @param   by           Due date of task.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
