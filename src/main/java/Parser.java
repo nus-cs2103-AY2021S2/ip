@@ -1,4 +1,17 @@
+/**
+ * Parser will be used to manipulate any String to retrieve the desired output
+ *
+ * @author leeyueyang
+ */
+
 public class Parser {
+
+    /**
+     *
+     * @param input String to be manipulated
+     * @param argument argument to search for, typically either /by or /at
+     * @return String found after the argument
+     */
     private static String findDatetime(String input, String argument) {
         int argumentIndex = input.lastIndexOf(argument);
         String output = input.substring(argumentIndex + argument.length());
@@ -11,11 +24,21 @@ public class Parser {
         return output.stripLeading().stripTrailing();
     }
 
+    /**
+     *
+     * @param input String to be manipulated
+     * @return Datetime String for Deadline type Tasks
+     */
     public static String findDeadlineDatetime(String input) {
         // split by /at and /to
         return findDatetime(input, "/by");
     }
 
+    /**
+     *
+     * @param input String to be manipulated
+     * @return String[] containing start datetime and end datetime
+     */
     public static String[] findEventDatetime(String input) {
         // split by /at and /to
         String output = input;
@@ -38,6 +61,11 @@ public class Parser {
         return null;
     }
 
+    /**
+     *
+     * @param input String to be manipulated
+     * @return Removes command from input string and returns description without datetime
+     */
     public static String findDescription(String input) {
         String noCommand = input.split("\\s+", 2)[1];
 

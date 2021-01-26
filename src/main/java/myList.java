@@ -2,6 +2,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Contains an ArrayList of Tasks with its own methods that handle user printing and saving to file
+ *
+ * @author leeyueyang
+ */
 public class myList {
     ArrayList<Task> taskList;
 

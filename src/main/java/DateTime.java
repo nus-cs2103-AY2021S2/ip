@@ -4,18 +4,33 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * DateTime class to remove storing of user specified dates as a String
+ *
+ * @author leeyueyang
+ */
 public class DateTime {
     LocalDate localDate;
     LocalTime localTime;
     LocalDateTime localDateTime;
 
+    /**
+     * Used when user does not specify time
+     *
+     * @param date User specified date
+     */
     DateTime(String date) {
         this.localDate = LocalDate.parse(date);
         this.localTime = null;
         this.localDateTime = null;
     }
 
-
+    /**
+     * Used when user specifies time
+     *
+     * @param date User specified date
+     * @param time User specified time
+     */
     DateTime(String date, String time) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -25,6 +40,11 @@ public class DateTime {
         this.localDateTime = localDate.atTime(localTime);
     }
 
+    /**
+     * Used when user needs an output to the Ui
+     *
+     * @return Pretty prints the date and if applicable, time stored in this object
+     */
     public String getDatetime() {
         if (localDateTime != null)
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(localDateTime);
@@ -32,6 +52,11 @@ public class DateTime {
             return DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(localDate);
     }
 
+    /**
+     * Used when system needs to store this datetime in file
+     *
+     * @return String of date and if applicable, time in system interpretable format for future use
+     */
     public String savingDatetime() {
         if (localDateTime != null)
             return DateTimeFormatter.ofPattern("yyyy-MM-dd, HHmm").format(localDateTime);

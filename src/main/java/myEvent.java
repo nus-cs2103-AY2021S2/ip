@@ -1,5 +1,10 @@
 import java.util.Date;
 
+/**
+ * Tasks with 2 dates will use an Event, class is named myEvent to avoid confusion with Java defined one
+ *
+ * @author leeyueyang
+ */
 public class myEvent extends Task {
     DateTime startDatetime, endDatetime;
 

@@ -1,3 +1,8 @@
+/**
+ * Tasks with 1 datetime will use a Deadline object
+ *
+ * @author leeyueyang
+ */
 public class Deadline extends Task{
     DateTime datetime;
 
