@@ -1,6 +1,6 @@
-public class Task {
-    private Boolean isDone;
-    private String taskInfo;
+public abstract class Task {
+    protected Boolean isDone;
+    protected String taskInfo;
 
     public Task(String taskInfo) {
         isDone = false;
@@ -21,4 +21,6 @@ public class Task {
     public void completed() {
         isDone = true;
     }
+
+    public abstract String getData();
 }

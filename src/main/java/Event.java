@@ -10,4 +10,12 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (" + dateInfo + ")";
     }
+
+    public String getData() {
+        if (isDone == true) {
+            return "E!@#1!@#" + taskInfo + "!@#" + dateInfo;
+        } else {
+            return "E!@#0!@#" + taskInfo + "!@#" + dateInfo;
+        }
+    }
 }

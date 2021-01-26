@@ -1,10 +1,15 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner read = new Scanner(System.in);
-        ArrayList<Task> listOfTasks = new ArrayList<>();
+
+        ArrayList<Task> listOfTasks = readDataFromFile();
 
         System.out.println("\t_____________________________________________________________");
         System.out.println("\t Hello! I'm Duke\n\t What can I do for you");
@@ -129,5 +134,64 @@ public class Duke {
         System.out.println("\t_____________________________________________________________");
         System.out.println("\t Bye. Hope to see you again soon!");
         System.out.println("\t_____________________________________________________________");
+        writeDataIntoFile(listOfTasks);
+    }
+
+    private static ArrayList<Task> readDataFromFile() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        try {
+            File file = new File("data/duke.txt");
+            Scanner readFile = new Scanner(file);
+            while (readFile.hasNextLine()) {
+                String taskData = readFile.nextLine();
+                if (taskData.startsWith("T")) {
+                    String[] listOfData = taskData.split("!@#", 3);
+                    Task newTodo = new ToDo(listOfData[2]);
+                    if (listOfData[1].equals("1")) {
+                        newTodo.completed();
+                    }
+                    taskList.add(newTodo);
+                } else if (taskData.startsWith("D")) {
+                    String[] listOfData = taskData.split("!@#", 4);
+                    Task newDeadline = new Deadline(listOfData[2], listOfData[3]);
+                    if (listOfData[1].equals("1")) {
+                        newDeadline.completed();
+                    }
+                    taskList.add(newDeadline);
+                } else if (taskData.startsWith("E")) {
+                    String[] listOfData = taskData.split("!@#", 4);
+                    Task newEvent = new Event(listOfData[2], listOfData[3]);
+                    if (listOfData[1].equals("1")) {
+                        newEvent.completed();
+                    }
+                    taskList.add(newEvent);
+                } else {
+                    //
+                }
+            }
+        } catch (FileNotFoundException e) {
+            File file = new File("data/duke.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+        return taskList;
+    }
+
+    private static void writeDataIntoFile(ArrayList<Task> taskList) {
+        try {
+            FileWriter writeFile = new FileWriter("data/duke.txt");
+            while (taskList.size() != 0) {
+                Task task = taskList.get(0);
+                writeFile.write(task.getData());
+                writeFile.write("\n");
+                taskList.remove(0);
+            }
+            writeFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
