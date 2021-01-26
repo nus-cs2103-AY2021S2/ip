@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
+import duke.util.CopyPasta;
 
 public class Duke {
     private static ArrayList<Task> todoList;
@@ -17,9 +18,35 @@ public class Duke {
             e.printStackTrace();
         }
     }
+
     private static void deleteFromFile(int index) {
         File save = new File("./data/duke.txt");
+        File temp = new File("./data/temp.txt");
+        int ctr = 0;
+        try {
+            //create temp file
+            temp.createNewFile();
+            Scanner sc = new Scanner(save);
+            FileWriter fw = new FileWriter(temp);
+            while(sc.hasNext()) {
+                //skip the line to be deleted
+                if (ctr != index) {
+                    fw.write(sc.nextLine());
+                }
+                ctr++;
+            }
+            fw.close();
+            sc.close();
+            //copy contents of temp to save
+            CopyPasta.copyPasta(temp, save);
+            //delete temp file
+            temp.delete();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
+
     private static void loadData() throws IOException {
         File save = new File("./data/duke.txt");
         save.createNewFile();
@@ -57,6 +84,7 @@ public class Duke {
             int index = Integer.parseInt(indexString) - 1;
             Task toDo = todoList.get(index);
             todoList.remove(index);
+            deleteFromFile(index);
             System.out.println("Affirmative. The following task has been removed: \n" + toDo);
         } else if (strippedCommand.startsWith("todo")) {
             String cmd = strippedCommand.substring(4).strip();
