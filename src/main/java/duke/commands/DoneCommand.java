@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.exceptions.IndexOutOfBoundException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 

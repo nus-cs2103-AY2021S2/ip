@@ -9,11 +9,11 @@ public abstract class Task {
         this.isCompleted = isCompleted;
     }
 
-    public String getStatus(){
+    public String getStatus() {
         return isCompleted ? "\u2713" : "\u2717";
     }
 
-    public void setCompleted(){
+    public void setCompleted() {
         this.isCompleted = true;
     }
 
@@ -21,6 +21,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "["+this.getStatus()+"] " + this.taskName;
+        return "[" + this.getStatus() + "] " + this.taskName;
     }
 }

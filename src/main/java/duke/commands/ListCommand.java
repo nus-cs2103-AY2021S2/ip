@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public ListCommand() {
         super(CommandType.LIST);
     }

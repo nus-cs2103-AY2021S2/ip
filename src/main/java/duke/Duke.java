@@ -2,13 +2,15 @@ package duke;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.FileIoException;
-import duke.tasks.*;
+
+import duke.tasks.TaskList;
+
 import java.io.IOException;
 
 public class Duke {
-
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -16,6 +18,7 @@ public class Duke {
     public Duke(String filePath) throws FileIoException {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             taskList = new TaskList(storage.getTasks());
         } catch (DukeException e) {
@@ -28,14 +31,14 @@ public class Duke {
         ui.printWelcomeText();
         boolean isBye = false;
 
-        if(ui.hasNextCommand()) {
-            while(!isBye) {
+        if (ui.hasNextCommand()) {
+            while (!isBye) {
                 String command = ui.nextCommand();
                 Parser parser = new Parser();
                 Command c = parser.parse(command);
                 c.excecute(taskList);
                 storage.writeFile(taskList);
-                if(c instanceof ByeCommand) {
+                if (c instanceof ByeCommand) {
                     isBye = true;
                 }
             }
@@ -44,7 +47,5 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("data.txt").run();
-
-
     }
 }

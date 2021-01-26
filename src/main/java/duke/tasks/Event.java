@@ -3,8 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-public class Event extends Task{
+public class Event extends Task {
     private static DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private LocalDate at;
 
@@ -14,9 +13,8 @@ public class Event extends Task{
     }
 
     public String toStorageString() {
-        return "[E] || "+ (this.isCompleted ? "1" : "0")
-                + " || " + this.taskName + " || " + this.at.format(OUTPUT_FORMATTER);
-
+        return "[E] || " + (this.isCompleted ? "1" : "0") + " || " + this.taskName + " || "
+                + this.at.format(OUTPUT_FORMATTER);
     }
 
     @Override

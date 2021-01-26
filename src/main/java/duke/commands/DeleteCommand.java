@@ -11,7 +11,6 @@ public class DeleteCommand extends Command {
         this.taskNum = taskNum;
     }
 
-
     @Override
     public void excecute(TaskList list) {
         Task curr = list.delete(taskNum - 1);

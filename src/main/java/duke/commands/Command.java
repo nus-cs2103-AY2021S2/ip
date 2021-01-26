@@ -1,6 +1,7 @@
 package duke.commands;
 
 import duke.tasks.TaskList;
+
 import duke.Ui;
 
 public abstract class Command {
@@ -12,8 +13,6 @@ public abstract class Command {
         this.ui = new Ui();
     }
 
-
-
     public CommandType getType() {
         return type;
     }
@@ -21,4 +20,3 @@ public abstract class Command {
     public abstract void excecute(TaskList list);
 
 }
-
