@@ -84,13 +84,13 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"deadline <todo> /by <datetime>\".");
             } else {
                 final String task = splitOnBy[0].split("deadline ", 2)[1].strip();
-                final String[] datetime = splitOnBy[1].strip().split(" ");
+                final String[] datetime = splitOnBy[1].strip().split(" ", 2);
 
                 Deadline deadline = null;
                 if (datetime.length == 1) {
-                    deadline = Deadline.create(task, datetime[0]);
+                    deadline = Deadline.create(task, datetime[0].strip());
                 } else if (datetime.length == 2) {
-                    deadline = Deadline.create(task, datetime[0], datetime[1]);
+                    deadline = Deadline.create(task, datetime[0].strip(), datetime[1].strip());
                 }
 
                 if (deadline != null) {
@@ -108,13 +108,13 @@ public class Duke {
                 System.out.println("\tPlease follow this format \"event <todo> /at <datetime>\".");
             } else {
                 final String task = splitOnAt[0].split("event ", 2)[1].strip();
-                final String[] datetime = splitOnAt[1].strip().split(" ");
+                final String[] datetime = splitOnAt[1].strip().split(" ", 2);
 
                 Event event = null;
                 if (datetime.length == 1) {
-                    event = Event.create(task, datetime[0]);
+                    event = Event.create(task, datetime[0].strip());
                 } else if (datetime.length == 2) {
-                    event = Event.create(task, datetime[0], datetime[1]);
+                    event = Event.create(task, datetime[0].strip(), datetime[1].strip());
                 }
 
                 if (event != null) {
