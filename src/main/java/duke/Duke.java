@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    protected static ArrayList<Task> list;
+    protected static ArrayList<Task> tasks;
     public static final String LINE = (char) 9 + "--------------------------------------------------------------------";
 
     /**
@@ -26,7 +26,7 @@ public class Duke {
         System.out.println("Hello! How can I help you?");
 
         Scanner scanner = new Scanner(System.in);
-        list  = new ArrayList<>();
+        tasks  = new ArrayList<>();
 
         while (scanner.hasNext()) {
             String input = scanner.nextLine();
@@ -37,7 +37,7 @@ public class Duke {
                 scanner.close();
                 break;
             } else {
-                taskManager.takeEvent(input, list);
+                taskManager.takeEvent(input, tasks);
             }
 
         }

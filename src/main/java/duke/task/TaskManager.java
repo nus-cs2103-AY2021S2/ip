@@ -9,22 +9,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskManager {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
     protected FileSaver fileSaver;
 
     public TaskManager() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
         fileSaver = new FileSaver();
     }
 
-    public void takeEvent(String input, ArrayList<Task> list) {
-        this.list = list;
-        ErrorChecker e = new ErrorChecker(input, list);
+    public void takeEvent(String input, ArrayList<Task> tasks) {
+        this.tasks = tasks;
+        ErrorChecker e = new ErrorChecker(input, tasks);
 
         if (input.equals("list")) {
             listEvents();
             return;
-        } else if (e.check()) {
+        } else if (e.isValid()) {
             if (input.startsWith("done")) {
                 markDone(input);
             } else if (input.startsWith("delete")) {
@@ -37,7 +37,7 @@ public class TaskManager {
     }
 
     public void markDone(String input) {
-        Task task = list.get(Integer.parseInt(input.substring(5)) - 1);
+        Task task = tasks.get(Integer.parseInt(input.substring(5)) - 1);
         task.markAsDone();
         System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Good job! You got " + task.description
                 + " done!\n" + Duke.LINE);
@@ -59,10 +59,10 @@ public class TaskManager {
                     dateTimeConverter.convertDate(), dateTimeConverter.convertTime("from"),
                     dateTimeConverter.convertTime("to"));
         }
-        list.add(newTask);
+        tasks.add(newTask);
 
         try {
-            fileSaver.saveToFile("DukeList.txt", list);
+            fileSaver.saveToFile("DukeList.txt", tasks);
         } catch (IOException ex) {
             System.out.println("File path not found: " + ex.getMessage());
         }
@@ -71,11 +71,11 @@ public class TaskManager {
     }
 
     public void deleteTask(String input) {
-        Task task = list.get(Integer.parseInt(input.substring(7)) - 1);
-        list.remove(Integer.parseInt(input.substring(7)) - 1);
+        Task task = tasks.get(Integer.parseInt(input.substring(7)) - 1);
+        tasks.remove(Integer.parseInt(input.substring(7)) - 1);
 
         try {
-            fileSaver.saveToFile("DukeList.txt", list);
+            fileSaver.saveToFile("DukeList.txt", tasks);
         } catch (IOException ex) {
             System.out.println("File path not found: " + ex.getMessage());
         }
@@ -85,8 +85,8 @@ public class TaskManager {
 
     public void listEvents() {
         System.out.println(Duke.LINE + "\n" + (char) 9 + (char) 9 + "Here is a list of your tasks:");
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + list.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("" + (char) 9 + (char) 9 + (char) 9 + (i + 1) + ". " + tasks.get(i).toString());
         }
         System.out.println(Duke.LINE);
     }
