@@ -5,6 +5,9 @@ import main.java.duke.Event;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Used to test Event, a subclass of Task.
+ */
 public class EventTest {
     @Test
     public void testName() {

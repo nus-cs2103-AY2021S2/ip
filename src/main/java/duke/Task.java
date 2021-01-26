@@ -16,12 +16,23 @@ public class Task {
     protected boolean isDone;
     protected final LocalDate date;
 
+    /**
+     * Initialises task using task description.
+     *
+     * @param name Description of task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
         this.date = calculateDate(name);
     }
 
+    /**
+     * Calculates the date given a task description. Returns null if no date is given.
+     *
+     * @param name Task description.
+     * @return Date if specified in task description.
+     */
     public LocalDate calculateDate(String name) {
         String[] inputs = name.substring(0, name.length() - 1).split(": ");
         if (inputs.length > 1) {
@@ -31,10 +42,18 @@ public class Task {
         return null;
     }
 
+    /**
+     * Sets task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Provides the task description with a reformatted date if applicable.
+     *
+     * @return Reformatted description of task.
+     */
     @Override
     public String toString() {
         String result = this.name;

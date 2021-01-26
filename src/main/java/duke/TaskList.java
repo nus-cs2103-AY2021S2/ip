@@ -12,15 +12,29 @@ public class TaskList {
     protected List<Task> tasks;
     protected Storage storage;
 
+    /**
+     * Initialises task list using an arraylist and Storage object.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.storage = new Storage();
     }
 
+    /**
+     * Gets size of task list.
+     *
+     * @return Number of tasks in task list.
+     */
     public int size() {
         return this.tasks.size();
     }
 
+    /**
+     * Gets task at index of task list.
+     *
+     * @param index Index of task to return.
+     * @return Task at specified index.
+     */
     public Task get(int index) {
         return this.tasks.get(index);
     }

@@ -5,6 +5,9 @@ import main.java.duke.Deadline;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Used to test Deadline, a subclass of Task.
+ */
 public class DeadlineTest {
     @Test
     public void testName() {
