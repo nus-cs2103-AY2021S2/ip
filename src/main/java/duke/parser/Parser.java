@@ -38,6 +38,8 @@ public class Parser {
             return new EventCommand(argument);
         case DELETE:
             return new DeleteCommand(argument);
+        case FIND:
+            return new FindCommand(argument);
         default:
             throw new DukeException("Sorry, I don't quite understand!");
         }
