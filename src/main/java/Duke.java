@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,10 +30,10 @@ public class Duke {
                 String currLine = t.getSymbol() + "#" + t.getStatus() + "#" + t.getName();
                 if (t instanceof Deadline) {
                     Deadline d = (Deadline) t;
-                    currLine += "#" + d.getTime();
+                    currLine += "#" + d.getTime().toString();
                 } else if (t instanceof Event) {
                     Event e = (Event) t;
-                    currLine += "#" + e.getTime();
+                    currLine += "#" + e.getTime().toString();
                 }
                 currLine += "\n";
                 dataOut.write(currLine);
@@ -132,6 +133,8 @@ public class Duke {
                     print("Got it. I've added this task:\n" + deadline + getNumTasks());
                 } catch(ArrayIndexOutOfBoundsException e) {
                     print((new DukeException("please provide a time for deadline")).toString());
+                } catch(DateTimeParseException e) {
+                    print((new DukeException("please provide date as YYYY-MM-DD")).toString());
                 }
                 break;
 
