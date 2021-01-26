@@ -1,17 +1,29 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
-        System.out.println("Hello, I am Duke, your personal Assistant. How may I help you today?:");
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine().trim();
+    public static void main(String[] args) throws IOException {
+
+        //Level 7
+        File file = new File("src/main/data/duke.txt");
+        if (file.createNewFile()) {
+            System.out.println("Hard Disk created.");
+        } else {
+            System.out.println("Hard Disk loaded.");
+        }
 
         // Initialise list
         List<Task> tasks = new ArrayList<>();
-        int numOfItems = 0;
+        int numOfItems = getFileLinesCount(file);
+        loadHardDrive(file,tasks);
         String[] command = {"list", "bye", "todo", "deadline", "event"};
+
+        // Level 1 - 6.
+        System.out.println("Hello, I am Duke, your personal Assistant. How may I help you today?:");
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine().trim();
 
         // User input
         while (!input.equals("bye")) {
@@ -66,6 +78,7 @@ public class Duke {
             }
             input = sc.nextLine().trim();
         }
+        saveHardDrive(file, tasks);
         byeCommand();
         sc.close();
     }
@@ -183,5 +196,64 @@ public class Duke {
      */
     public static void deleteCommand(String[] inputArr, List<Task> tasks){
         tasks.remove(Integer.parseInt(inputArr[1]) - 1);
+    }
+
+    /**
+     * Loads hard drive from the file
+     * @param file Input file (hard drive)
+     * @param tasks current list of tasks
+     * @throws FileNotFoundException throws file not found exception if file is not found at target location.
+     */
+    public static void loadHardDrive(File file, List<Task> tasks) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){
+            String[] entry = sc.nextLine().split(" / ");
+            switch (entry[0]){
+                case "T":
+                    tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
+                    break;
+                case "E":
+                    tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                    break;
+            }
+        }
+        sc.close();
+    }
+
+    /**
+     * Saves the information from the current list of tasks to the hard drive (duke.txt)
+     * @param file target file
+     * @param tasks current list of tasks
+     * @throws IOException throw IOException when there is an error with the file.
+     */
+    public static void saveHardDrive(File file, List<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(file);
+        for (Task t: tasks) {
+            if (t instanceof Todo) {
+                fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
+            } else if (t instanceof Event) {
+                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Event) t).getTimeslot()));
+            } else if (t instanceof Deadline) {
+                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Deadline) t).getDeadline()));
+            }
+        }
+        fw.close();
+    }
+
+    /**
+     * Returns the number of lines in the file.
+     * @param file input file
+     * @return returns an int of the number of lines in the text file
+     * @throws IOException throw IOException when there is an error with the file.
+     */
+    public static int getFileLinesCount(File file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        int lines = 0;
+        while (reader.readLine() != null) {lines++;};
+        reader.close();
+        return lines;
     }
 }
