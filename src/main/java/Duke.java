@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +9,6 @@ public class Duke {
     private static ArrayList<Task> taskArraylist = new ArrayList<Task>();
     private static Scanner sc = new Scanner(System.in);
     static final String lines = "----------------------------------------";
-    private static DataStorage storage  = new DataStorage();
 
     public static void displayWelcomeMessage() {
         String logo = " ____        _        \n"
@@ -73,7 +71,7 @@ public class Duke {
                 break;
             case ("event"):
 
-                if(userInput.contains("/at")) {
+               if(userInput.contains("/at")) {
 
                     String dueDetails[] = userInput.split("/at ");
                     String dateTime[] = dueDetails[1].split(" ");
@@ -90,7 +88,7 @@ public class Duke {
                     taskName = returnTaskName(dueDetails[0], "event");
 
                     if (!taskName.equals("no task name") || !checkForAdditionalInfo(dueDetails[1])) {
-                        taskArraylist.add(new Events(taskName, false, localdate, LocalTime.parse(startTime,inputFormat),
+                        taskArraylist.add(new Events(taskName, localdate, LocalTime.parse(startTime,inputFormat),
                                 LocalTime.parse(endTime,inputFormat)));
                         addToTask = 1;
                     }
@@ -210,11 +208,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException {
 
         displayWelcomeMessage();
 
         String userInput = sc.nextLine();
+
         while (!userInput.equals("bye")) {
             executeCommand(userInput);
             userInput = sc.nextLine();
