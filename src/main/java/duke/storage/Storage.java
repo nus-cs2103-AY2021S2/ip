@@ -94,13 +94,14 @@ public class Storage {
     }
 
     /**
-     * Updates the data file with the tasks saved into the program.
+     * Updates the data file with the tasks saved into the program. If data file has been shifted from its original
+     * position, a new data file will be created with the existing task items.
      *
-     * @throws DukeException if the data file cannot be written into or has been shifted
+     * @throws DukeException if the data file cannot be written into
      */
     public static void updateDataFile() throws DukeException {
         try {
-//            new File(pathName).createNewFile();
+            new File(pathName).createNewFile();
             FileWriter fw = new FileWriter(pathName);
             StringBuilder sb = new StringBuilder();
             for (Task task : tasks) {
