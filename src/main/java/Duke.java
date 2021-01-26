@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -73,6 +74,8 @@ public class Duke {
                     print("Got it. I've added this task:\n" + deadline + getNumTasks());
                 } catch(ArrayIndexOutOfBoundsException e) {
                     print((new DukeException("please provide a time for deadline")).toString());
+                } catch(DateTimeParseException e) {
+                    print((new DukeException("please provide date as YYYY-MM-DD")).toString());
                 }
                 break;
 

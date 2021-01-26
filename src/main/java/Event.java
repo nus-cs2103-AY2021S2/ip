@@ -1,17 +1,21 @@
-public class Event extends Task {
-    private String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-    Event(String name, String time) {
+public class Event extends Task {
+    private final LocalDate time;
+
+    Event(String name, String time) throws DateTimeParseException {
         super(name);
-        this.time = time;
+        this.time = LocalDate.parse(time);
     }
 
-    String getTime() {
+    LocalDate getTime() {
         return this.time;
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.getTime());
+        LocalDate date = this.getTime();
+        return String.format("[E]%s (at: %s %s %s)", super.toString(), date.getDayOfMonth(), date.getMonth(), date.getYear());
     }
 }
