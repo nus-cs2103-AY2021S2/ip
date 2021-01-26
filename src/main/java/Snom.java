@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Snom {
     private static Snomio snomio = new Snomio(System.in, System.out);
-    private static SnomFile snomFile = new SnomFile("./src/main/resources", "snom.txt");
+    private static SnomFile snomFile = new SnomFile("./src/main/data", "snom.txt");
     private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
