@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,11 +16,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class to handle saving and loading data in the TaskList
+ */
 public class Storage {
 
     private final String location = "./duke.txt";
     private final Path path;
 
+    /**
+     * A constructor for Storage
+     * Attempts to get the file from the location, and if it does not exist, creates a new file.
+     */
     public Storage() {
         this.path = Paths.get(location);
         File file = new File(location);
@@ -34,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores the data to the text file at the location
+     * @param list the list of tasks
+     * @throws IOException when an invalid filename is used in FileWriter
+     */
     public void storeData(ArrayList<Task> list) throws IOException{
         FileWriter file = new FileWriter(this.location);
         for(Task t: list){
@@ -58,6 +69,11 @@ public class Storage {
         file.close();
     }
 
+    /**
+     * Loads the data from the saved text file
+     * @return the list of Tasks as read from the text file
+     * @throws FileNotFoundException when the scanner attempts to access an invalid file path
+     */
     public ArrayList<Task> loadData() throws FileNotFoundException{
         try {
             Scanner sc = new Scanner(path.toFile());

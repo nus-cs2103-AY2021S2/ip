@@ -1,4 +1,4 @@
-todo|hi|F
-deadline|you |2021-01-25|T
-todo|hi|F
-deadline|hieaj o |1234-12-21|F
+deadline|hieaj o |1234-12-21|T
+todo|2|F
+todo|5|F
+event|party |2021-01-20|F

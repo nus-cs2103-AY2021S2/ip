@@ -3,20 +3,33 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.Deadline;
 import duke.task.Task;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
+/**
+ * A DeleteCommand is when the user wants to delete a task from the list
+ */
 public class DeleteCommand extends Command {
 
     private int index;
+
+    /**
+     * Constructor to initialise the reply and the index to be deleted
+     * @param index the index of the task to be deleted
+     */
     public DeleteCommand(int index) {
         super("");
         this.index = index;
     }
 
+    /**
+     * Executes the command
+     * @param ui the ui to respond to the user's input
+     * @param s The storage to save the TaskList to
+     * @param list The current list of tasks
+     * @throws IOException when the list fails to be saved
+     */
     public void execute(Ui ui, Storage s, TaskList list) throws IOException {
         Task t = list.getItem(index);
         list.deleteTask(index);

@@ -6,13 +6,25 @@ import duke.exception.CommandException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser class to parse the input from users and return the appropriate instance of a command
+ */
 public class Parser {
 
-    // takes care of parsing the input, then calls Command with appropriate arguments;
+    /**
+     * Constructor for a Parser
+     */
     public Parser() {
-
     }
 
+    /**
+     * Parses the line input by the user
+     * @param line the line input by the uer
+     * @return A command corresponding to the input
+     * @throws CommandException when command is not understood
+     * @throws IndexOutOfBoundsException when command delete is called on an index that is out of bounds
+     * @throws NumberFormatException when command delete is called on an index that is not a number
+     */
     public Command parse(String line) throws CommandException,IndexOutOfBoundsException,NumberFormatException{
         String command = line.split(" ")[0];
         try {
@@ -77,7 +89,5 @@ public class Parser {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new CommandException("Please enter a valid value");
         }
-
     }
-
 }

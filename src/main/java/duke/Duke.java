@@ -1,19 +1,26 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.CommandException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import duke.exception.*;
-import duke.task.*;
-import duke.command.*;
 
+/**
+ * The entry point for the task helper Duke
+ *
+ * @author Foo Chuan Le, Nicholas
+ */
 public class Duke {
-    private Parser p;
-    private Storage s;
+    private final Parser p;
+    private final Storage s;
     private TaskList list;
-    private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Constructor for Duke, to initialise UI, Storage and Parser
+     * tries to load TaskList from storage, else start a new empty TaskList
+     */
     public Duke() {
         ui = new Ui();
         s = new Storage();
@@ -25,6 +32,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot
+     * Takes user input by line and executes the corresponding command,
+     * or prompts the user if the command is not understood with ui.showError()
+     */
     public void run(){
         ui.welcome();
         boolean isBye = false;
@@ -38,10 +50,16 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (IOException | NumberFormatException e){
                 ui.showError("Please enter a valid number!");
+            } catch (IndexOutOfBoundsException e){
+                ui.showError("You don't have a task at that index!");
             }
         }
     }
 
+    /**
+     * Starting point for Duke
+     * @param args The command line arguments
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
