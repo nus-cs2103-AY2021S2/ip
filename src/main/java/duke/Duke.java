@@ -1,9 +1,11 @@
 package duke;
 
 import duke.command.Command;
-
 import java.io.IOException;
 
+/**
+ * Represents the duke chat bot.
+ */
 public class Duke {
 
     private boolean isRunning;
@@ -12,6 +14,9 @@ public class Duke {
     private final String path = "./data/TaskListData.txt";
     private Ui ui;
 
+    /**
+     * Constructor for the duke chat bot.
+     */
     public Duke() {
         isRunning = true;
         storageHandler = new Storage(path);
@@ -24,11 +29,18 @@ public class Duke {
         ui.displayWelcomeMessage();
     }
 
-
+    /**
+     * Checks if the bot is running.
+     * @return A boolean value representing if the chat bot is running.
+     */
     public boolean isRunning() {
         return isRunning;
     }
 
+    /**
+     * Gets a response from the chat bot based on an input string.
+     * @param input Input to the chat bot from a user.
+     */
     public void getResponse(String input) {
         Command command;
         ui.printLine();

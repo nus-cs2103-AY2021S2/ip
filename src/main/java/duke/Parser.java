@@ -12,8 +12,17 @@ import duke.command.AddEvent;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a parser that handles input from a user.
+ */
 public class Parser {
 
+    /**
+     * Parses the input provided and returns a command.
+     * @param input Input string to be parsed.
+     * @return A command after parsing the input.
+     * @throws DukeException If invalid command is given.
+     */
     public static Command parse(String input) throws DukeException {
 
         String[] processedInput = input.split(" ");
@@ -78,7 +87,7 @@ public class Parser {
         return new AddEvent("event", description, eventDate, startTime, endTime);
     }
 
-    public static String processDescription(String[] processedInput) {
+    private static String processDescription(String[] processedInput) {
         StringBuilder sb = new StringBuilder();
         for (int i = 1; i < processedInput.length; i++) {
             sb.append(processedInput[i] + " ");
