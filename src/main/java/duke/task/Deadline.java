@@ -4,9 +4,18 @@ import duke.utils.DateTime;
 
 import java.time.LocalDate;
 
+/**
+ * Deadline task.
+ */
 public class Deadline extends Task {
+    /** Date the task is to be completed by. */
     protected LocalDate by;
 
+    /**
+     * Creates new instance of deadline.
+     * @param description Description of deadline.
+     * @param by Date the task is to be completed by.
+     */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;

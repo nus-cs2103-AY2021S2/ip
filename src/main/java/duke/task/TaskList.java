@@ -9,21 +9,44 @@ import duke.utils.DateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents list of tasks.
+ */
 public class TaskList {
+    /** Lists of tasks. */
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates a new instance of TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Updates tasks.
+     * @param tasks new tasks.
+     */
     public void setTaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-
+    /**
+     * Returns list of tasks.
+     * @return List of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Adds a task to the list of tasks.
+     * @param command Command to determine type of task to add.
+     * @param input Input string.
+     * @return Task The task that was added.
+     * @throws ArrayIndexOutOfBoundsException If input is not complete.
+     * @throws InvalidDateException If date is invalid.
+     * @throws UnknownCommandException If command is invalid.
+     */
     public Task addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
         String[] tokens;
         Task task;
@@ -59,6 +82,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Marks a task as done.
+     * @param idx Index of task to mark as done.
+     * @return Task that was marked as done.
+     * @throws InvalidInputException If index is not in valid range.
+     */
     public Task markAsDone(int idx) throws InvalidInputException {
         Task task;
         try {
@@ -72,6 +101,12 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Deletes a task.
+     * @param idx Index of task to be deleted.
+     * @return Task that was deleted.
+     * @throws InvalidInputException If index is not in valid range.
+     */
     public Task delete(int idx) throws InvalidInputException {
         Task task;
         try {
@@ -102,6 +137,10 @@ public class TaskList {
         return filteredArr;
     }
 
+    /**
+     * Returns size of list of tasks.
+     * @return size of list of tasks.
+     */
     public int getSize() {
         return tasks.size();
     }

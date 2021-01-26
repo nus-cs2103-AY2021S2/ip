@@ -14,13 +14,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages storage information for the program.
+ */
 public class Storage {
+    /** File path of save file */
     private final String filePath;
 
+    /**
+     * Creates new instance of Storage.
+     * @param filePath File path of save file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads a list of tasks from the save file.
+     * @return List of tasks.
+     * @throws IOException If file could not be read.
+     * @throws DukeException If save file is corrupted.
+     */
     public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -67,6 +81,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves a list of tasks to the save file.
+     * @param tasks List of tasks to be saved.
+     * @throws DukeException If unable to save to file.
+     */
     public void save(ArrayList<Task> tasks) throws DukeException {
         try {
             File f = new File(filePath);
