@@ -267,6 +267,28 @@ public class TaskList {
         }
     }
 
+    public void findTasksWithKeyword(String s) {
+        String keyword = s.split(" ", 2)[1].toLowerCase();
+
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.getName().toLowerCase().contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+
+        if (matchingTasks.size() == 0) {
+            System.out.println("You have no matching tasks in your list.");
+        } else {
+            int i = 1;
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task t : matchingTasks) {
+                System.out.println(i + ". " + t.toString());
+                i++;
+            }
+        }
+    }
+
     /**
      * Marks a task that is specified by the user as done. The
      * user should specify the index of the task in the list

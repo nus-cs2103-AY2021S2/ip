@@ -5,6 +5,7 @@ import main.java.duke.command.Command;
 import main.java.duke.command.DeleteCommand;
 import main.java.duke.command.DoneCommand;
 import main.java.duke.command.ExitCommand;
+import main.java.duke.command.FindCommand;
 import main.java.duke.command.PrintCommand;
 
 /**
@@ -32,6 +33,8 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new PrintCommand(s);
+        case "find":
+            return new FindCommand(s);
         case "done":
             return new DoneCommand(s);
         case "delete":
