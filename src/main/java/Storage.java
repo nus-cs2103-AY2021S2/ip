@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the reading and writing of information to an external file.
+ */
 public class Storage {
     private String filepath;
     private ArrayList<Task> tasks;
@@ -18,6 +21,11 @@ public class Storage {
         parser = new Parser();
     }
 
+    /**
+     * Reads the existing txt file and stores the text into Task objects.
+     * If the file does not exist, it creates a new file.
+     * @return the list of tasks that contains the task objects.
+     */
     public ArrayList<Task> load() {
         try {
             File myFile = new File("duke.txt");
@@ -52,6 +60,10 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current information into a txt file.
+     * @throws FileNotFoundException
+     */
     public void save() throws FileNotFoundException {
         PrintWriter myWriter = new PrintWriter("duke.txt");
         for (Task t : TaskList.getTasklist()) {
