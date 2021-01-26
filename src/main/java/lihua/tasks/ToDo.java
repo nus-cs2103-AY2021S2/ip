@@ -24,6 +24,11 @@ public class ToDo extends Task {
         return String.format("[T][%s] %s", doneMark, name);
     }
 
+    /**
+     * Wraps the todo object inside a json object to be stored in hard disk.
+     *
+     * @return The json object representing the todo object.
+     */
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();

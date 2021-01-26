@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * Represent an lihua.tasks.Event item, which is a child of lihua.tasks.Task
  */
 public class Event extends Task {
+    /** The date of the event */
     private final LocalDate period;
 
     /**
@@ -21,6 +22,11 @@ public class Event extends Task {
         this.period = period;
     }
 
+    /**
+     * Gets the date of the event.
+     *
+     * @return The date of the event.
+     */
     public LocalDate getDate() {
         return period;
     }
@@ -36,6 +42,11 @@ public class Event extends Task {
                 period.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
+    /**
+     * Wraps the event object inside a json object to be stored in hard disk.
+     *
+     * @return The json obejct representing the deadline object.
+     */
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();

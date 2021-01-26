@@ -7,13 +7,14 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Represent a lihua.tasks.Deadline item, which is a child of lihua.tasks.Task
+ * Represents a lihua.tasks.Deadline item, which is a child of lihua.tasks.Task
  */
 public class Deadline extends Task {
     private final LocalDate by;
 
     /**
-     * Initialize a lihua.tasks.Deadline item with a given end time
+     * Initializes a lihua.tasks.Deadline item with a given end time
+     *
      * @param name The name of the deadline
      * @param by The end time of the item, assumed to be 'yyyy-mm-dd'
      */
@@ -22,6 +23,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Gets the date of the deadline.
+     *
+     * @return The date of the deadline.
+     */
     public LocalDate getDate() {
         return by;
     }
@@ -37,6 +43,11 @@ public class Deadline extends Task {
                 by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
+    /**
+     * Wraps the deadline object inside a json object to be stored in hard disk.
+     *
+     * @return The json object representing the deadline object.
+     */
     @Override
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();

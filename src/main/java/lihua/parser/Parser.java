@@ -11,6 +11,12 @@ public class Parser {
 
     // need to handle input argument mismatch here
     // e.g. if the input is 'wrong', the program should handle the exception and prompt get-help message
+    /**
+     * Parses user input string and returns relevant command.
+     *
+     * @param userInput User input string.
+     * @return Relevant command, as specified in the userInput.
+     */
     public Command parseUserInput(String userInput) {
         // Allow multiple white spaces between:
         // first argument, center argument(s), and last argument.
@@ -68,6 +74,14 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Extracts a deadline object out of the user input string.
+     *
+     * @param userInput User input string.
+     * @return The deadline object, as specified by the user input string.
+     * @throws Exception If the user input string starts with 'deadline' but the format is incorrect,
+     * an exception will be thrown.
+     */
     private Deadline getDeadline(String userInput) throws Exception {
         String[] split = userInput.split("\\s+/by\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
@@ -80,6 +94,14 @@ public class Parser {
         return new Deadline(content, LocalDate.parse(date));
     }
 
+    /**
+     * Extracts an event object out of the user input string.
+     *
+     * @param userInput User input string.
+     * @return The event object, as specified by the user input string.
+     * @throws Exception If the user input string starts with 'event' but the format is incorrect,
+     * an exception will be thrown.
+     */
     private Event getEvent(String userInput) throws Exception {
         String[] split = userInput.split("\\s+/at\\s+");
         String date = split[1]; // Assume the argument is correct, or an Exception will be thrown.
@@ -92,6 +114,15 @@ public class Parser {
         return new Event(content, LocalDate.parse(date));
     }
 
+
+    /**
+     * Extracts a todo object out of the user input string.
+     *
+     * @param userInput User input string.
+     * @return The todo object, as specified by the user input string.
+     * @throws Exception If the user input string starts with 'todo' but the format is incorrect,
+     * an exception will be thrown.
+     */
     private ToDo getToDo(String userInput) throws Exception {
         int index = userInput.indexOf("todo") + 4;
         while (userInput.charAt(index) == ' ') {
