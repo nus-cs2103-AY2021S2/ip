@@ -1,4 +1,6 @@
-package owen;
+package owen.task;
+
+import owen.OwenException;
 
 /**
  * Todo task without any date/time attached to it.

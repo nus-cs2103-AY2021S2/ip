@@ -1,4 +1,4 @@
-package owen;
+package owen.command;
 
 /**
  * Type of command that Owen understands.

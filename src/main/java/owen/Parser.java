@@ -1,5 +1,8 @@
 package owen;
 
+import owen.command.Command;
+import owen.command.CommandType;
+
 /**
  * Parser responsible for parsing commands.
  */

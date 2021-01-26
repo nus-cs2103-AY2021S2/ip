@@ -1,4 +1,4 @@
-package owen;
+package owen.task;
 
 /**
  * An abstract task with a description and a status.

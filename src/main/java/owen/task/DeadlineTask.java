@@ -1,4 +1,7 @@
-package owen;
+package owen.task;
+
+import owen.DateTime;
+import owen.OwenException;
 
 /**
  * Deadline task that need to be done before a specific date/time.

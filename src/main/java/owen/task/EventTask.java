@@ -1,4 +1,7 @@
-package owen;
+package owen.task;
+
+import owen.DateTime;
+import owen.OwenException;
 
 /**
  * Event task that start and ends at specific times.

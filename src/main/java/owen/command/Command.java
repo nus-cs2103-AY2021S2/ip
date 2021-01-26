@@ -1,4 +1,4 @@
-package owen;
+package owen.command;
 
 /**
  * Encapsulates the command's type, arguments, and original
