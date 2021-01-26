@@ -1,8 +1,16 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command {
 
     private int index;
 
-    private static final String NO_INDEX_ERROR = "Please specify a task index!";
+    private static final String NO_INDEX_ERROR = "Please specify a duke.task index!";
     private static final String INDEX_NOT_INT_ERROR = "Please specify a number instead!";
     private static final String OUT_OF_BOUND_ERROR = "Not in the list!";
 

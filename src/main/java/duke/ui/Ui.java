@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -48,7 +53,7 @@ public class Ui {
     }
 
     public void printAddTaskAck(Task t, TaskList tasks) {
-        String taskCountMsg = "Now you have " + tasks.getTasksSize() + " task(s) in the list.";
+        String taskCountMsg = "You now have " + tasks.getTasksSize() + " task(s) in the list.";
         display(ADD_TASK_ACK, " " + t.toString(), taskCountMsg);
     }
 

@@ -1,5 +1,13 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.DukeException;
+import duke.ui.CommandType;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static duke.ui.CommandType.*;
 
 public class Parser {
 
@@ -12,7 +20,7 @@ public class Parser {
         }
         String argument = splitInput[1].trim();
 
-        CommandType commandType = CommandType.valueOf(splitInput[0].trim()
+        CommandType commandType = valueOf(splitInput[0].trim()
                 .toUpperCase());
 
         switch (commandType) {

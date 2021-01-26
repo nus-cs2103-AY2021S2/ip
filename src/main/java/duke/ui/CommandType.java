@@ -1,3 +1,5 @@
+package duke.ui;
+
 public enum CommandType {
     BYE,
     LIST,
