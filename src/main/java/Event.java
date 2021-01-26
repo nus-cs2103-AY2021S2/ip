@@ -10,4 +10,11 @@ public class Event extends Task {
         return "[E][" + getStatusIcon() + "] " + description
                 + " (at: " + eventTiming + ")";
     }
+
+    @Override
+    public String unparse() {
+        return null;
+    }
+
+
 }

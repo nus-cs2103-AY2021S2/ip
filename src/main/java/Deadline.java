@@ -11,4 +11,9 @@ public class Deadline extends Task {
         return "[D][" + getStatusIcon() + "] " + description
                 + " (by: " + deadline + ")";
     }
+
+    @Override
+    public String unparse() {
+        return null;
+    }
 }

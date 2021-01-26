@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -283,21 +284,22 @@ public class Duke {
             // just enough args
             parseNextArgs(firstWord, userInput, firstSpaceIndex);
 
+            // save tasksFile
+            TaskList.saveTasksList(taskList);
+            
         } catch (UnsupportedCommandException | InvalidArgumentException | MissingArgumentException e) {
             // is it better to detect unsupported first command earlier?
-            // currently being detected at the end of many if blocks
-//            print(new String[]{e.getMessage()});
+            // currently being detected at the end of many if blocks 
+            // maybe should save list of supported commands in another file (String[]{todo, deadline, event}
             printException(e.getMessage());
             return true;
         } catch (Exception e) {
             String errMsg = "didn't expect this exception " + e;
-//            print(new String[]{errMsg});
             printException(errMsg);
             return true;
         }
 
         return true;
-        // catch exceptions where substring end is wrong i.e. extra arguments not found?
     }
 
     public static void printExitMsg() {
@@ -318,6 +320,15 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        // random testing things
+        // should be rearranged elesewhere
+        try {
+            Save.setupTasksFile();
+            Todo.main(new String[]{});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         intro();
 
