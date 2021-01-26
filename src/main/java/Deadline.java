@@ -20,4 +20,8 @@ public class Deadline extends Task {
     public String toString() {
         return super.toString() + " (by: " + by + ")";
     }
+
+    public String toLog() {
+        return super.toLog() + " | " + by;
+    }
 }

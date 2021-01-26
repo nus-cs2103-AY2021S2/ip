@@ -17,4 +17,9 @@ public abstract class Task {
         String doneIcon = isDone ? "[X]" : "[ ]";
         return "[" + icon + "]" + doneIcon + " " + this.name;
     }
+
+    public String toLog() {
+        String doneIcon = isDone ? "T" : "F";
+        return icon + " | " + doneIcon + " | " + this.name;
+    }
 }

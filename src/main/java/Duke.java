@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,52 +54,34 @@ public class Duke {
             break;
         case "deadline":
             // substring from index=1 to ignore the whitespace following "deadline", at index = 0.
-            addToList(new Deadline(scanner.nextLine().substring(1)));
+            addTask(new Deadline(scanner.nextLine().substring(1)));
             break;
         case "delete":
             deleteTask(scanner.nextInt());
             break;
         case "done":
-            taskDone(scanner.nextInt());
+            doneTask(scanner.nextInt());
             break;
         case "event":
             // substring from index=1 to ignore the whitespace following "event", at index = 0.
-            addToList(new Event(scanner.nextLine().substring(1)));
+            addTask(new Event(scanner.nextLine().substring(1)));
             break;
         case "list":
-            printList();
+            printTasks();
             break;
         case "todo":
             // substring from index=1 to ignore the whitespace at index = 0.
-            addToList(new ToDo(scanner.nextLine().substring(1)));
+            addTask(new ToDo(scanner.nextLine().substring(1)));
             break;
         default:
             throw new DukeException("Invalid command, please provide a supported command.");
         }
     }
 
-    private void addToList(Task task) {
+    private void addTask(Task task) {
         tasks.add(task);
         System.out.println("Here's a new task: " + task);
-    }
-
-    private void printList() {
-        System.out.println("You have " + tasks.size() + " task(s) in the list:");
-
-        int i = 1;
-        for (Task t : tasks) {
-            System.out.println(i + ". " + t);
-            i++;
-        }
-        System.out.println();
-    }
-
-    private void taskDone(int index) {
-        Task task = tasks.get(index - 1);
-        task.markAsDone();
-        System.out.println("Impressive, yet another task has been done: \n"
-                + task
-                + "\nOne step closer to freedom now boss.");
+        saveList();
     }
 
     private void deleteTask(int index) {
@@ -105,6 +90,43 @@ public class Duke {
         System.out.println("Alrighty bossman. I shall wipe this task off the face of the earth: \n"
                 + task
                 + "\nGood riddance.");
+        saveList();
+    }
+
+    private void doneTask(int index) {
+        Task task = tasks.get(index - 1);
+        task.markAsDone();
+        System.out.println("Impressive, yet another task has been done: \n"
+                + task
+                + "\nOne step closer to freedom now boss.");
+        saveList();
+    }
+
+    private void printTasks() {
+        System.out.println("You have " + tasks.size() + " task(s) in the list:");
+
+        int i = 1;
+        for (Task t : tasks) {
+            System.out.println(i + ". " + t);
+            i++;
+        }
+    }
+
+    private void saveList() {
+        try {
+            FileWriter fw = new FileWriter("duke_saved_tasks");
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (Task t : tasks) {
+                bw.write(t.toLog() + "\n");
+//                System.out.println(t.toLog());
+            }
+
+            bw.close();
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     private void shutDown() {
