@@ -4,6 +4,8 @@ import duke.command.*;
 import duke.exception.CommandException;
 import duke.task.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -55,7 +57,12 @@ public class Parser {
                         line = line.split(" ",2)[1];
                         String[] result = line.split("/by ");
                         if(result.length==1) throw new CommandException("Er... when do you need to finish this /by?");
-                        cmd = new DeadlineCommand(list, result[0], result[1]);
+                        try{
+                            LocalDate date = LocalDate.parse(result[1]);
+                            cmd = new DeadlineCommand(list, result[0], date);
+                        } catch (DateTimeParseException e){
+                            throw new CommandException("Please input a valid date as yyyy-mm-dd");
+                        }
                         break;
                     }
                     case "event": {
@@ -64,7 +71,13 @@ public class Parser {
                         line = line.split(" ",2)[1];
                         String[] result = line.split("/at ");
                         if(result.length==1) throw new CommandException("Er... /at what time does this event start?");
-                        cmd = new EventCommand(list, result[0], result[1]);
+
+                        try{
+                            LocalDate date = LocalDate.parse(result[1]);
+                            cmd = new EventCommand(list, result[0], date);
+                        } catch (DateTimeParseException e){
+                            throw new CommandException("Please input your date as yyyy-mm-dd");
+                        }
                         break;
                     }
                     default: {

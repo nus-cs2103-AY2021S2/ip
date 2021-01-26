@@ -1,16 +1,19 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 public class Event extends Task{
 
-    protected String at;
+    protected LocalDate at;
 
-    public Event(String description, String at){
+    public Event(String description, LocalDate at){
         super(description);
         this.at = at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.at + ")";
+        return "[E]" + super.toString() + String.format("(at: %s %s %s)",
+                this.at.getMonth(), this.at.getDayOfMonth(), this.at.getYear());
     }
 }
