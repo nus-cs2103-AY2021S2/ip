@@ -25,12 +25,12 @@ public class TaskList {
         this.lst.get(id).done();
     }
 
-    public void printList() {
+    /*public void printList() {
         for (int i = 0; i < lst.size(); i++) {
             pw.printf("%d.%s%n", i + 1, lst.get(i));
         }
         pw.flush();
-    }
+    }*/
 
     public String getTasksAsString() {
         return lst.stream().map(Object::toString)
