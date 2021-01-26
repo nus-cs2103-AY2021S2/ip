@@ -1,7 +1,7 @@
 package duke.exceptions;
 
-public class UnknownCommandException extends DukeException{
-    public UnknownCommandException (String command) {
+public class UnknownCommandException extends DukeException {
+    public UnknownCommandException(String command) {
         super("Sorry I do not understand the command \"" + command + "\" :(");
     }
 }

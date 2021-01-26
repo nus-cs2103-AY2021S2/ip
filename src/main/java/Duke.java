@@ -2,7 +2,8 @@ import duke.exceptions.DukeException;
 import duke.exceptions.IncompleteInputException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.utils.Command;
 
@@ -21,6 +22,10 @@ public class Duke {
         loadData();
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     public void loadData() {
         try {
             ArrayList<Task> tasks = storage.load();
@@ -36,7 +41,7 @@ public class Duke {
 
     public void saveData() {
         try {
-            storage.save(taskList.getTaskList());
+            storage.save(taskList.getTasks());
         } catch (DukeException e) {
             ui.showErrorMessage(e.getMessage());
             System.exit(0);
@@ -71,7 +76,7 @@ public class Duke {
                 ui.showFilteredTasks(taskList.getFilteredTaskList(tokens[1]));
                 break;
             case LIST:
-                ui.showTasks(taskList.getTaskList());
+                ui.showTasks(taskList.getTasks());
                 break;
             default:
                 try {
@@ -99,9 +104,5 @@ public class Duke {
                 ui.showErrorMessage(e.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

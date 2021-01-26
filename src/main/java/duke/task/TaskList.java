@@ -10,18 +10,18 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public void setTaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public void setTaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
     public Task addTask(Command command, String input) throws ArrayIndexOutOfBoundsException, InvalidDateException, UnknownCommandException {
@@ -29,32 +29,32 @@ public class TaskList {
         Task task;
 
         switch (command) {
-            case TODO:
-                task = new Todo(input);
-                break;
-            case DEADLINE:
-                tokens = input.split(" /by ", 2);
-                input = tokens[0];
-                try {
-                    task = new Deadline(input, DateTime.parseDate(tokens[1]));
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateException(tokens[1]);
-                }
-                break;
-            case EVENT:
-                tokens = input.split(" /at ", 2);
-                input = tokens[0];
-                try {
-                    task = new Event(input, DateTime.parseDate(tokens[1]));
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateException(tokens[1]);
-                }
-                break;
-            default:
-                throw new UnknownCommandException(command.name());
+        case TODO:
+            task = new Todo(input);
+            break;
+        case DEADLINE:
+            tokens = input.split(" /by ", 2);
+            input = tokens[0];
+            try {
+                task = new Deadline(input, DateTime.parseDate(tokens[1]));
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateException(tokens[1]);
+            }
+            break;
+        case EVENT:
+            tokens = input.split(" /at ", 2);
+            input = tokens[0];
+            try {
+                task = new Event(input, DateTime.parseDate(tokens[1]));
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateException(tokens[1]);
+            }
+            break;
+        default:
+            throw new UnknownCommandException(command.name());
         }
 
-        taskList.add(task);
+        tasks.add(task);
 
         return task;
     }
@@ -62,9 +62,9 @@ public class TaskList {
     public Task markAsDone(int idx) throws InvalidInputException {
         Task task;
         try {
-            task = taskList.get(idx);
+            task = tasks.get(idx);
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidInputException(taskList.size());
+            throw new InvalidInputException(tasks.size());
         }
 
         task.markAsDone();
@@ -75,16 +75,16 @@ public class TaskList {
     public Task delete(int idx) throws InvalidInputException {
         Task task;
         try {
-            task = taskList.get(idx);
+            task = tasks.get(idx);
         } catch (IndexOutOfBoundsException e) {
-            if (taskList.size() == 0) {
+            if (tasks.size() == 0) {
                 throw new InvalidInputException();
             } else {
-                throw new InvalidInputException(taskList.size());
+                throw new InvalidInputException(tasks.size());
             }
         }
 
-        taskList.remove(idx);
+        tasks.remove(idx);
 
         return task;
     }
@@ -93,7 +93,7 @@ public class TaskList {
         ArrayList<Task> filteredArr = new ArrayList<>();
         searchString = searchString.toLowerCase();
 
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task.description.toLowerCase().contains(searchString)) {
                 filteredArr.add(task);
             }
@@ -103,6 +103,6 @@ public class TaskList {
     }
 
     public int getSize() {
-        return taskList.size();
+        return tasks.size();
     }
 }
