@@ -1,4 +1,6 @@
-public class Task extends AbstractTask{
+package duke;
+
+public class Task extends AbstractTask {
 
     /*
      * Constructs a task using the description
