@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
 public class Duke {
     private static List<Task> listOfTasks = new ArrayList<>();
     private static Storage storage = new Storage("data/duke.txt");
+    private Ui ui = new Ui();
+
 
     /**
      * Prints all the tasks stored on the list.
@@ -180,30 +182,19 @@ public class Duke {
         return new ToDo(description);
     }
 
-
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-
+    public void run(){
+        ui.displayWelcomeMessage();
         //initialize listOfTasks From Storage
         try {
             listOfTasks = storage.loadStorage();
         } catch (Exception err) {
             System.out.println(err.getMessage());
         }
-
         String input;
-        Scanner sc = new Scanner(System.in);
         // Read in user input, determine the type of command that is being issued, (if any) parses the command
         //and performs the necessary action.
-        while (sc.hasNextLine()) {
-            input = sc.nextLine().trim();
+        while (ui.hasUserInput()) {
+            input = ui.getUserCommand();
             try {
                 if (input.equals("bye")) break;
                 if (input.equals("list")) {
@@ -236,5 +227,11 @@ public class Duke {
 
         }
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+
+    public static void main(String[] args) {
+        Duke chatbot  = new Duke();
+        chatbot.run();
     }
 }
