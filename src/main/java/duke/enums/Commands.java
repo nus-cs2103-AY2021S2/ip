@@ -1,4 +1,4 @@
-package enums;
+package duke.enums;
 
 public enum Commands {
     LIST,

@@ -1,17 +1,15 @@
-package handlers;
+package duke.util;
 
-import enums.Commands;
+import duke.ui.Ui;
+import duke.enums.Commands;
 
-import exceptions.DukeException;
-import exceptions.InvalidOptionException;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidOptionException;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
-import utils.DateFormatter;
-import utils.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

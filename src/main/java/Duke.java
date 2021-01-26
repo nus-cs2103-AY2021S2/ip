@@ -1,4 +1,4 @@
-import apollo.Apollo;
+import duke.Apollo;
 
 public class Duke {
 

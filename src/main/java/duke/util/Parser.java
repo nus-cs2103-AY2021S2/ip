@@ -1,14 +1,14 @@
-package utils;
+package duke.util;
 
-import apollo.Apollo;
+import duke.Apollo;
 
-import enums.Commands;
+import duke.ui.Ui;
+import duke.enums.Commands;
 
-import exceptions.DukeException;
-import exceptions.InvalidOptionException;
-import exceptions.UnrecognisedCommandException;
-import handlers.TaskHandler;
-import tasks.Task;
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidOptionException;
+import duke.exceptions.UnrecognisedCommandException;
+import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Locale;

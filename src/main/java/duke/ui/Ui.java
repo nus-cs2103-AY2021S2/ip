@@ -1,6 +1,7 @@
-package utils;
+package duke.ui;
 
-import apollo.Apollo;
+import duke.Apollo;
+import duke.util.Parser;
 
 import java.util.Scanner;
 

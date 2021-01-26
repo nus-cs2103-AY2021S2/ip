@@ -1,14 +1,12 @@
-package apollo;
+package duke;
 
-import exceptions.DukeException;
-import handlers.Storage;
-import tasks.Task;
+import duke.exceptions.DukeException;
+import duke.util.Storage;
 
-import tasks.TaskList;
-import utils.Ui;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Apollo {
     private static final String BOT_NAME = "Apollo the Robot";
