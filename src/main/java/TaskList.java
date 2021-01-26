@@ -136,20 +136,20 @@ public class TaskList {
         String[] split = str.split("`");
 
         switch (split[0]) {
-            case "Todo":
-                Todo todo = new Todo(split[2], Boolean.parseBoolean(split[1]));
-                lst.add(todo);
-                break;
-            case "Deadline":
-                Deadline deadline = new Deadline(Boolean.parseBoolean(split[1]),
-                        split[2], LocalDate.parse(split[3]));
-                lst.add(deadline);
-                break;
-            case "Event":
-                Event event = new Event(Boolean.parseBoolean(split[1]),
-                        split[2], LocalDate.parse(split[3]));
-                lst.add(event);
-                break;
+        case "Todo":
+            Todo todo = new Todo(split[2], Boolean.parseBoolean(split[1]));
+            lst.add(todo);
+            break;
+        case "Deadline":
+            Deadline deadline = new Deadline(Boolean.parseBoolean(split[1]),
+                    split[2], LocalDate.parse(split[3]));
+            lst.add(deadline);
+            break;
+        case "Event":
+            Event event = new Event(Boolean.parseBoolean(split[1]),
+                    split[2], LocalDate.parse(split[3]));
+            lst.add(event);
+            break;
         }
     }
 
