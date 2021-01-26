@@ -6,6 +6,9 @@ import duke.exceptions.DukeException;
 
 import java.util.Scanner;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * duke.DukeBot is the controller class for the CLI chat-bot duke.Duke.
  * <p>
@@ -21,7 +24,8 @@ public class DukeBot {
 
     public DukeBot(Scanner scanner) {
         this.scanner = scanner;
-        this.taskManager = new TaskManager();
+        Path pathToData = Paths.get("data/duke.txt");
+        this.taskManager = new TaskManager(pathToData);
     }
 
     /**

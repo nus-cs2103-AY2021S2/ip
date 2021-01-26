@@ -6,8 +6,20 @@ import duke.commands.Event;
 import duke.commands.Todo;
 
 import duke.exceptions.DukeException;
+
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+
 
 /**
  * A controller class that manages the Tasks of each User of the duke.DukeBot.
@@ -28,10 +40,88 @@ import java.util.ArrayList;
 public class TaskManager {
     protected boolean isActive;
     protected List<Task> taskList;
+    protected final Path PATH;
 
-    public TaskManager() {
+    public TaskManager(Path PATH) {
         this.isActive = true;
         this.taskList = new ArrayList<>(100);
+        this.PATH = PATH;
+        downloadStoredDataIfExists(PATH);
+    }
+
+    /**
+     * Loads in Task data from a text file and populates the Task List with it.
+     *
+     * @param PATH Path instance that points to the text file containing Task data.
+     */
+    public void downloadStoredDataIfExists(Path PATH) {
+        // Check if the data/ parent directory exists, if not create it
+        File directory = new File(String.valueOf(PATH.getParent()));
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        try {
+            // Initialise scanner on the file
+            File dataFile = new File(PATH.toString());
+            Scanner scanner = new Scanner(dataFile);
+
+            // Count how many Tasks are loaded in
+            int count = 0;
+
+            // Populate taskList
+            while (scanner.hasNext()) {
+                String taskTypeDescription[] = scanner.nextLine().split("\\s", 2);
+                String taskType = taskTypeDescription[0];
+                String taskDescription = taskTypeDescription[1];
+                Command command = Command.get(taskType);
+                switch (command) {
+                case TODO:
+                    this.addTodo(taskDescription);
+                    break;
+                case EVENT:
+                    this.addEvent(taskDescription);
+                    break;
+                case DEADLINE:
+                    this.addDeadline(taskDescription);
+                    break;
+                }
+                count++;
+            }
+
+            if (count > 0) {
+                System.out.println(count + " tasks were loaded from storage.");
+            } else {
+                System.out.println("No tasks found in storage, initialising empty Task List.");
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No such storage file exists: " + PATH.toString() + "\nProceeding without.");
+        } catch (DukeException dukeException) {
+            System.out.println(dukeException);
+        }
+    }
+
+    public void saveData() {
+        // Check if the data/ parent directory exists, if not create it
+        File directory = new File(String.valueOf(PATH.getParent()));
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        try {
+            FileWriter fw = new FileWriter(PATH.toString());
+            fw.write(this.taskListToString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String taskListToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Task task : taskList) {
+            stringBuilder.append(task.getClass() + " " + task.getDescription());
+        }
     }
 
     /**
@@ -50,18 +140,23 @@ public class TaskManager {
                 break;
             case TODO:
                 this.addTodo(description);
+                this.saveData();
                 break;
             case EVENT:
                 this.addEvent(description);
+                this.saveData();
                 break;
             case DEADLINE:
                 this.addDeadline(description);
+                this.saveData();
                 break;
             case DONE:
                 this.markAsDone(description);
+                this.saveData();
                 break;
             case DELETE:
                 this.delete(description);
+                this.saveData();
                 break;
             case END:
                 this.end(description);
@@ -296,7 +391,7 @@ public class TaskManager {
         // Otherwise, set the duke.DukeBot to be inactive
         this.setInactive();
         System.out.println();
-        System.out.println("duke.DukeBot shutting down.\n\n");
+        System.out.println("DukeBot shutting down.\n\n");
     }
 
 }

@@ -25,6 +25,10 @@ public abstract class Task {
         return ("[" + icon + "]"); //return tick or X symbols within square brackets
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Marks a task as done.
      */
