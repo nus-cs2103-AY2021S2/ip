@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,7 +8,7 @@ import java.util.regex.Pattern;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         boolean shouldRun = true;
 
         greet();
@@ -132,7 +133,7 @@ public class Duke {
         return new Event(taskName, time);
     }
 
-    public static void markTaskAsDone(String input, ArrayList<Task> tasks) throws DukeException {
+    public static void markTaskAsDone(String input, List<Task> tasks) throws DukeException {
         int taskIdx;
         String taskIdxStr;
         try {
@@ -152,7 +153,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String input, ArrayList<Task> tasks) throws DukeException {
+    public static void deleteTask(String input, List<Task> tasks) throws DukeException {
         int taskIdx;
         String taskIdxStr;
         try {
@@ -173,7 +174,7 @@ public class Duke {
         }
     }
 
-    public static String getNumberOfTasksString(ArrayList<Task> tasks) {
+    public static String getNumberOfTasksString(List<Task> tasks) {
         return String.format("Now you have %d items in your list", tasks.size());
     }
 
