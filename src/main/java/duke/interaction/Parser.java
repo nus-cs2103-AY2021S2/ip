@@ -26,7 +26,12 @@ public class Parser {
         return this.bye;
     }
 
-    public Command parseInput(final String input) throws DukeException.InvalidCommand, DukeException.EmptyDescription {
+    public Command parseInput(final String input) throws
+            DukeException.InvalidCommand,
+            DukeException.InvalidTask,
+            DukeException.EmptyDescription,
+            DukeException.EmptyEventDate,
+            DukeException.InvalidEventEnd {
         Scanner scanner = new Scanner(input);
         String[] tokens;
 
@@ -57,7 +62,7 @@ public class Parser {
             tokens = scanner.nextLine().split(DukeString.COMMAND_DEADLINE_SEP);
 
             if (tokens.length < 2 || tokens[1].isBlank()) {
-                throw new DukeException.EmptyDateTime(DukeString.COMMAND_DEADLINE);
+                throw new DukeException.EmptyDeadlineDate();
             }
 
             return new DeadlineCommand(tokens[0].trim(), LocalDateTime.parse(tokens[1].trim()));
@@ -69,10 +74,24 @@ public class Parser {
             tokens = scanner.nextLine().split(DukeString.COMMAND_EVENT_SEP);
 
             if (tokens.length < 2 || tokens[1].isBlank()) {
-                throw new DukeException.EmptyDateTime(DukeString.COMMAND_EVENT);
+                throw new DukeException.EmptyEventDate();
             }
 
-            return new EventCommand(tokens[0].trim(), LocalDateTime.parse(tokens[1].trim()));
+            String[] dates = tokens[1].split(DukeString.COMMAND_EVENT_TO);
+
+            if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
+                throw new DukeException.EmptyEventDate();
+            }
+
+            if (LocalDateTime.parse(dates[0].trim()).compareTo(LocalDateTime.parse(dates[1].trim())) >= 0) {
+                throw new DukeException.InvalidEventEnd();
+            }
+
+            return new EventCommand(
+                    tokens[0].trim(),
+                    LocalDateTime.parse(dates[0].trim()),
+                    LocalDateTime.parse(dates[1].trim())
+            );
         case DukeString.COMMAND_TODO:
             if (!scanner.hasNext()) {
                 throw new DukeException.EmptyDescription(DukeString.COMMAND_TODO);

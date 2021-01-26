@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import duke.task.EventTask;
 
 public class EventCommand extends AddCommand {
-    public EventCommand(final String content, final LocalDateTime date) {
-        super(new EventTask(content, date));
+    public EventCommand(final String content, final LocalDateTime startDate, final LocalDateTime endDate) {
+        super(new EventTask(content, startDate, endDate));
     }
 }

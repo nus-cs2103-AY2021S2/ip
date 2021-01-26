@@ -19,11 +19,21 @@ public class DukeException {
         }
     }
 
-    public static class EmptyDateTime extends IllegalArgumentException {
-        public EmptyDateTime(final String type) {
-            super(String.format(DukeString.EXCEPTION_INVALID_DATETIME, type));
+    public static class EmptyDeadlineDate extends IllegalArgumentException {
+        public EmptyDeadlineDate() {
+            super(DukeString.EXCEPTION_EMPTY_DEADLINEDATE);
         }
     }
 
+    public static class EmptyEventDate extends IllegalArgumentException {
+        public EmptyEventDate() {
+            super(DukeString.EXCEPTION_EMPTY_EVENTDATE);
+        }
+    }
 
+    public static class InvalidEventEnd extends IllegalArgumentException {
+        public InvalidEventEnd() {
+            super(DukeString.EXCEPTION_INVALID_EVENTEND);
+        }
+    }
 }
