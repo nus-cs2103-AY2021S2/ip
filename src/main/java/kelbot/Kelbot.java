@@ -82,6 +82,10 @@ public class Kelbot implements Serializable {
         }
     }
     
+    public TaskList getTaskList() {
+        return taskList;
+    }
+    
     public static void main(String[] args) throws KelbotException {
         java.nio.file.Path path = java.nio.file.Paths.get("src", "main", "data", "Kelbot.txt");
         new Kelbot(path).run();

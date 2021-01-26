@@ -13,13 +13,6 @@ public class Task implements Serializable {
     }
     
     /*
-     * Called when the task's name needs to be referenced.
-     */
-    public String getName() {
-        return this.name;
-    }
-    
-    /*
      * Called when the task has been completed by the user. It will mark the task as done.
      */
     public void complete() {
