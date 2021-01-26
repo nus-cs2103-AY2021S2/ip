@@ -35,6 +35,7 @@ public class DukeBot {
             } catch (DukeException.InvalidCommand
                     | DukeException.InvalidTask
                     | DukeException.EmptyDescription
+                    | DukeException.EmptyDeadlineDate
                     | DukeException.EmptyEventDate
                     | DukeException.InvalidEventEnd e) {
                 printOut(e.getMessage());

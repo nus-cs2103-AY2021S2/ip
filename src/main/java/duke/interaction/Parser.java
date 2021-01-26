@@ -30,6 +30,7 @@ public class Parser {
             DukeException.InvalidCommand,
             DukeException.InvalidTask,
             DukeException.EmptyDescription,
+            DukeException.EmptyDeadlineDate,
             DukeException.EmptyEventDate,
             DukeException.InvalidEventEnd {
         Scanner scanner = new Scanner(input);
