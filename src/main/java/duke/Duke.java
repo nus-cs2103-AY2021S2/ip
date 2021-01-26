@@ -37,6 +37,10 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     /**
      * Handles the running of the Duke program by continually fetching user commands, parsing them and then executing
      * them
