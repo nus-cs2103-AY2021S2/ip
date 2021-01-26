@@ -38,7 +38,7 @@ public class Task {
     }
 
     public LocalDate[] getDates() {
-        return null;
+        return new LocalDate[1];
     }
 
     /**

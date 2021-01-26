@@ -32,9 +32,9 @@ public class TaskTest {
 
     @Test
     void getDate_whenInvoke_thenOutputTaskDate() {
-        LocalDate[] expected = null;
+        LocalDate[] expected = new LocalDate[1];
         LocalDate[] taskDate = task.getDates();
-        assertEquals(expected, taskDate);
+        assertEquals(expected[0], taskDate[0]);
     }
 
     @Test
