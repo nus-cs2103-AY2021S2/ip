@@ -3,7 +3,10 @@ package duke.command;
 import duke.DukeException;
 import duke.Helper;
 import duke.TaskList;
-import duke.task.*;
+import duke.task.TaskException;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class AddCommand extends Command {
     public AddCommand(String[] commandSplit) {

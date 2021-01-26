@@ -16,9 +16,15 @@ import duke.task.TaskException;
 import java.util.regex.Pattern;
 
 public class Parser {
+
+    static final String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
+    static final String DEADLINE_REGEX = "^\\[D\\] \\[(?: |X)\\] ..* \\(by: ..*\\)$";
+    static final String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
+
+
     /**
      * Parses the user input to find and handle commands containing keywords.
-     * @param userInput
+     * @param userInput user command input to be parsed
      * @throws DukeException if command is in an incorrect format.
      */
     public static Command handleInput(String userInput) throws DukeException {
@@ -48,11 +54,8 @@ public class Parser {
      */
     public static Task stringToTask(String input) throws TaskException, DukeException {
         //Check if it is a valid task first
-        String TODO_REGEX = "^\\[T\\] \\[(?: |X)\\] ..*$";
         Pattern toDoPattern = Pattern.compile(TODO_REGEX);
-        String DEADLINE_REGEX = "^\\[D\\] \\[(?: |X)\\] ..* \\(by: ..*\\)$";
         Pattern deadlinePattern = Pattern.compile(DEADLINE_REGEX);
-        String EVENT_REGEX = "^\\[E\\] \\[(?: |X)\\] ..* \\(at: ..*\\)$";
         Pattern eventPattern = Pattern.compile(EVENT_REGEX);
         //If it is a To Do command
         if (toDoPattern.matcher(input).find()) {
@@ -85,12 +88,13 @@ public class Parser {
                     String taskDescription = taskDescriptionWithDoneBrackets.substring(4);
                     String eventDateWithClosingBracket = Helper.join(inputSplitBySpaces, atIndex + 1,
                             inputSplitBySpaces.length - 1);
-                    String eventDate = eventDateWithClosingBracket.substring(0, eventDateWithClosingBracket.length() - 1);
+                    String eventDate = eventDateWithClosingBracket.substring(0,
+                            eventDateWithClosingBracket.length() - 1);
                     return new Event(taskDescription, eventDate);
                 }
             } else {
                 throw new TaskException("Invalid task entry.");
             }
         }
-     }
+    }
 }

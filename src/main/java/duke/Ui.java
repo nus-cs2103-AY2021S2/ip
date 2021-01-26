@@ -30,7 +30,7 @@ public class Ui {
      */
     public static void printWithStyle(String output) {
         System.out.println("    ________________________________________________________________");
-        System.out.println("    " + output );
+        System.out.println("    " + output);
         System.out.println("    ________________________________________________________________");
     }
 }

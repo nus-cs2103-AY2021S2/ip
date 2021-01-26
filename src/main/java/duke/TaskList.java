@@ -10,7 +10,7 @@ public class TaskList {
     ArrayList<Task> list;
     Storage storage;
 
-    public TaskList() throws DukeException{
+    public TaskList() throws DukeException {
         this.storage = new Storage();
         Ui.printWithStyle("Reading tasks from file...");
         this.list = storage.readTasksFromFile();
@@ -83,7 +83,6 @@ public class TaskList {
     /**
      * Applies a function to all tasks in the list.
      * @param funct function to be applied.
-     * @param <T> the output type
      */
     public void forEach(Consumer<Task> funct) {
         for (Task task : list) {
