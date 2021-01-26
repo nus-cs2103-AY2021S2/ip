@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Duke {
     private Storage storage;
-    private TaskList list;
+    private TaskList tasks;
     private Ui ui;
 
     /**
@@ -19,7 +19,7 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.list = new TaskList();
+        this.tasks = new TaskList();
         this.ui = new Ui();
 
     }
@@ -28,21 +28,21 @@ public class Duke {
      * Runs Duke, allowing it to start serving the user.
      */
     public void run() throws DukeException, IOException {
-        storage.initialise(list);
+        storage.initialise(tasks);
         ui.initialise();
-        ui.tasksLeft(list);
+        ui.tasksLeft(tasks);
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
         while (!str.equals("bye")) {
-            Parser.parse(list, str);
+            Parser.parse(tasks, str);
             str = sc.nextLine();
         }
-        storage.finalise(list);
+        storage.finalise(tasks);
         ui.finalise();
     }
 
     /**
-     * Drives the program.
+     * Returns a string representation of the customer.
      */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("./myData.txt").run();
