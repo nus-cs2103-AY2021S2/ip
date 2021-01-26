@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
+
     private String task;
     private LocalDateTime dateTime;
 

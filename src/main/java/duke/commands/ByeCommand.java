@@ -19,7 +19,9 @@ public class ByeCommand extends Command {
     @Override
     public void execute() {
         try {
-            this.storage.writeToFile(taskList);
+            List<String> converted = FileTaskStringConverter.allTaskToAllString(taskList.getList());
+            this.storage.writeToFile(converted);
+
             String endMessage = "Bye. Hope to see you again soon!";
             this.ui.showMsg(endMessage);
         } catch (IOException e) {

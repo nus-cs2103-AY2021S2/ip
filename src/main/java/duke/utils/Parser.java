@@ -2,6 +2,7 @@ package duke.utils;
 
 import duke.commands.*;
 import duke.dukeexceptions.EmptyArgumentException;
+import duke.dukeexceptions.EmptyListException;
 import duke.dukeexceptions.InvalidDateTimeException;
 import duke.dukeexceptions.InvalidIndexInputException;
 import duke.tasks.TaskList;
@@ -9,6 +10,7 @@ import duke.tasks.TaskList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,9 +37,10 @@ public class Parser {
      * @throws InvalidDateTimeException when date entered by user is not a valid date or not an acceptable date format.
      * @throws InvalidIndexInputException when index entered by user is not a number or not within range of 1 to
      *     the size of the TaskList.
+     * @throws EmptyListException when trying to find by keyword but TaskList is empty.
      */
     public Command parse(String input) throws EmptyArgumentException, InvalidDateTimeException,
-            InvalidIndexInputException {
+            InvalidIndexInputException, EmptyListException {
         String[] commandAndInput = input.split(" ", 2);
         String command = commandAndInput[0];
 
@@ -51,6 +54,9 @@ public class Parser {
 
             case EventCommand.COMMAND_WORD:
                 return prepareEvent(commandAndInput);
+
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(commandAndInput);
 
             case DoneCommand.COMMAND_WORD:
                 return prepareDone(commandAndInput);
@@ -70,7 +76,7 @@ public class Parser {
     }
 
     private Command prepareToDo(String[] arguments) {
-        return new ToDoCommand(this.taskList, this.ui, this.storage, arguments[0]);
+        return new ToDoCommand(this.taskList, this.ui, this.storage, arguments[1]);
     }
 
     private Command prepareDeadline(String[] arguments) throws EmptyArgumentException, InvalidDateTimeException {
@@ -104,6 +110,18 @@ public class Parser {
                 return new EventCommand(this.taskList, this.ui, this.storage, taskInputAndDate[0], dateTime);
             } catch (DateTimeParseException e) {
                 throw new InvalidDateTimeException();
+            }
+        }
+    }
+
+    private Command prepareFind(String[] arguments) throws EmptyArgumentException, EmptyListException {
+        if (arguments.length == 1) {
+            throw new EmptyArgumentException("Please pass a word after the 'find' command!");
+        } else {
+            if (this.taskList.getList().size() == 0) {
+                throw new EmptyListException();
+            } else {
+                return new FindCommand(this.taskList, this.ui, this.storage, arguments[1]);
             }
         }
     }

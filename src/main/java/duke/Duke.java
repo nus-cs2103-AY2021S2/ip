@@ -2,12 +2,9 @@ package duke;
 
 import duke.commands.Command;
 import duke.dukeexceptions.DukeException;
-import duke.dukeexceptions.InvalidTaskTypeException;
 import duke.tasks.TaskList;
 import duke.utils.*;
 
-import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
