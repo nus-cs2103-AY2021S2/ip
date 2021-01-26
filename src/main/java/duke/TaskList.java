@@ -57,6 +57,11 @@ public class TaskList {
         tasks.clear();
     }
 
+    /**
+     * Finds all Tasks whose descriptions contain the search parameter and returns them in a TaskList.
+     * @param search Search parameter, as a String.
+     * @return TaskList containing all the matching Tasks.
+     */
     public TaskList find(String search) {
         TaskList matchingTasks = new TaskList();
         String searchPattern = "^.*" + search.toLowerCase() + ".*$";
