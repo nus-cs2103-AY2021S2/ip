@@ -24,6 +24,13 @@ public class Task {
         return "[ ]";
     }
 
+    public Task taskParser(String record) {
+        if (record.contains("[T]")) {
+            return new Todo("");
+        }
+        return new Todo(" ");
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + getDescription();
