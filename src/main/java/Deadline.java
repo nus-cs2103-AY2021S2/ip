@@ -1,13 +1,18 @@
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Deadline extends Task {
-    private String endDate;
-    public static final char TYPE_SYMBOL = 'D';
+    private LocalDateTime endDate;
+    public static final String COMMAND_STRING = "deadline";
 
-    public Deadline(String desc, String endDate) {
+    public Deadline(String desc, LocalDateTime endDate) {
         super(desc);
+        this.endDate = endDate;
+    }
+
+    public Deadline(String desc, LocalDateTime endDate, boolean isDone) {
+        super(desc, isDone);
         this.endDate = endDate;
     }
 
@@ -17,8 +22,14 @@ public class Deadline extends Task {
         }
 
         String desc = argMap.get("desc");
-        String endDate = argMap.getOrDefault("by", "N/A");
-        return new Deadline(desc, endDate);
+        LocalDateTime eventTime = null;
+        boolean isDone = argMap.containsKey("done");
+
+        if (argMap.containsKey("at")) {
+            eventTime = LocalDateTime.parse(argMap.get("at"));
+        }
+
+        return new Deadline(desc, eventTime, isDone);
     }
 
     @Override
@@ -27,12 +38,16 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toSaveFormat() {
-        return toSaveFormatPrefix() + saveDelimiter + endDate;
+    protected HashMap<String, String> saveArgs() {
+        HashMap<String, String> argMap = new HashMap<>();
+        if (endDate != null) {
+            argMap.put("by", endDate.toString());
+        }
+        return argMap;
     }
 
     @Override
-    public char typeSymbol() {
-        return TYPE_SYMBOL;
+    public String commandString() {
+        return COMMAND_STRING;
     }
 }

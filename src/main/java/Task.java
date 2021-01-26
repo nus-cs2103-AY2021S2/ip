@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -6,6 +8,11 @@ public abstract class Task {
     public Task(String desc) {
         this.description = desc;
         this.isDone = false;
+    }
+
+    public Task(String desc, boolean isDone) {
+        this.description = desc;
+        this.isDone = isDone;
     }
 
     public void markDone() {
@@ -20,12 +27,21 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    protected String toSaveFormatPrefix() {
-        return String.valueOf(typeSymbol()) + saveDelimiter + (isDone ? "1" : "0")
-                + saveDelimiter + description;
-    }
+    public String toSaveFormat() {
+        StringBuilder savedString = new StringBuilder();
+        savedString.append(commandString());
+        savedString.append(" ");
+        savedString.append(description);
+        savedString.append((isDone ? "/done " : ""));
 
-    public abstract String toSaveFormat();
+        saveArgs().forEach((k,v) -> {
+            savedString.append("/").append(k).append(" ").append(v);
+        });
 
-    public abstract char typeSymbol();
+        return savedString.toString();
+    };
+
+    protected abstract HashMap<String, String> saveArgs();
+
+    public abstract String commandString();
 }

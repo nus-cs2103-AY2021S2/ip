@@ -1,8 +1,8 @@
 import util.Formatter;
 import util.Saver;
+import static util.Parser.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -118,23 +118,20 @@ public class TaskList {
 
         while(sc.hasNextLine()) {
             String saveLine = sc.nextLine();
-            String[] argArr = saveLine.split("\\|");
+            String command = getCommand(saveLine);
+            HashMap<String, String> argMap = getArgMap(saveLine);
             Task newTask;
 
-            switch (argArr[0].charAt(0)) {
-                case ToDo.TYPE_SYMBOL:
-                    newTask = new ToDo(argArr[2]);
+            switch (command) {
+                case ToDo.COMMAND_STRING:
+                    newTask = ToDo.newInstance(argMap);
                     break;
-                case Deadline.TYPE_SYMBOL:
-                    newTask = new Deadline(argArr[2], argArr[3]);
+                case Deadline.COMMAND_STRING:
+                    newTask = Deadline.newInstance(argMap);
                     break;
                 default:
-                    newTask = new Event(argArr[2], argArr[3]);
+                    newTask = Event.newInstance(argMap);
                     break;
-            }
-
-            if (argArr[1].equals("1")) {
-                newTask.markDone();
             }
 
             taskList.add(newTask);

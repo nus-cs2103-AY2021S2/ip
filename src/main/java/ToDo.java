@@ -1,12 +1,15 @@
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class ToDo extends Task {
-    public static final char TYPE_SYMBOL = 'T';
+    public static final String COMMAND_STRING = "todo";
 
     public ToDo(String description) {
         super(description);
+    }
+
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     public static ToDo newInstance(HashMap<String, String> argMap) throws NoSuchElementException {
@@ -15,7 +18,7 @@ public class ToDo extends Task {
         }
 
         String desc = argMap.get("desc");
-        return new ToDo(desc);
+        return new ToDo(desc, argMap.containsKey("done"));
     }
 
     @Override
@@ -24,12 +27,13 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toSaveFormat() {
-        return super.toSaveFormatPrefix();
+    protected HashMap<String, String> saveArgs() {
+        HashMap<String, String> argMap = new HashMap<>();
+        return argMap;
     }
 
     @Override
-    public char typeSymbol() {
-        return TYPE_SYMBOL;
+    public String commandString() {
+        return COMMAND_STRING;
     }
 }
