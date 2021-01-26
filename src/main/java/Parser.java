@@ -23,53 +23,62 @@ public class Parser {
         return list;
     }
 
-    public String parseOperator(String userInput){
+    public String parseOperator(String userInput) throws DukeException {
         String[] parts = userInput.split(" ", 2);
+        String operator = parts[0];
+        if (!isValidOperator(operator)) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
         return parts[0];
     }
 
-    public void parseCommand(String userInput) throws DukeException{
-        String[] command = splitCommand(userInput);
-        String operator = command[0].toLowerCase();
-
-        if (userInput.equals("list")){
-            parseDisplay();
-        }
-
-        if (!isValidOperator(operator)) {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else {
-            if (operator.equals("done")) {
-                parseDone(command);
-            }
-            if (operator.equals("delete")){
-                parseDelete(command);
-            }
-            if (operator.equals("todo")) {
-                parseAddToDo(command);
-            }
-            if (operator.equals("deadline")) {
-                parseAddDeadline(command);
-            }
-            if (operator.equals("event")) {
-                parseAddEvent(command);
-            }
-        }
-    }
+//    public void parseCommand(String userInput) throws DukeException{
+//        String[] command = splitCommand(userInput);
+//        String operator = command[0].toLowerCase();
+//
+//        if (userInput.equals("list")){
+//            parseDisplay();
+//        }
+//
+//        if (!isValidOperator(operator)) {
+//            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+//        } else {
+//            if (operator.equals("done")) {
+//                parseDone(command);
+//            }
+//            if (operator.equals("delete")){
+//                parseDelete(command);
+//            }
+//            if (operator.equals("todo")) {
+//                parseAddToDo(command);
+//            }
+//            if (operator.equals("deadline")) {
+//                parseAddDeadline(command);
+//            }
+//            if (operator.equals("event")) {
+//                parseAddEvent(command);
+//            }
+//        }
+//    }
 
     private boolean isValidOperator(String operator){
         return validOperators.contains(operator.toLowerCase());
     }
 
-    private String[] splitCommand(String userInput){
-        return userInput.split(" ", 2);
-    }
+//    private String[] splitCommand(String userInput){
+//        return userInput.split(" ", 2);
+//    }
 
 //    private void parseDisplay(){
 //
 //    }
+    private String[] parseCommand(String userInput){
+        String[] command = userInput.split(" ", 2);
+        return command;
+}
 
-    private int parseDone(String[] command) throws DukeException{
+    public int parseDone(String commandText) throws DukeException{
+        String[] command = commandText.split(" ", 2);
         if (command.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
@@ -82,7 +91,12 @@ public class Parser {
         }
     }
 
-    private int parseDelete(String[] command) throws DukeException {
+//    public int tryDone(String commandText) throws DukeException {
+//
+//    }
+
+    public int parseDelete(String commandText) throws DukeException {
+        String[] command = commandText.split(" ", 2);
         if (command.length == 1) {
             throw new DukeException("OOPS!!! Please specify the task number.");
         } else {
@@ -97,7 +111,8 @@ public class Parser {
 
     /**
      * return description of todo */
-    private String parseAddToDo(String[] command) throws DukeException {
+    public String parseAddToDo(String commandText) throws DukeException {
+        String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else{
@@ -105,7 +120,8 @@ public class Parser {
         }
     }
 
-    private String[] parseAddDeadline(String[] command) throws DukeException {
+    public String[] parseAddDeadline(String commandText) throws DukeException {
+        String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else{
@@ -121,7 +137,8 @@ public class Parser {
         }
     }
 
-    private String[] parseAddEvent(String[] command) throws DukeException {
+    public String[] parseAddEvent(String commandText) throws DukeException {
+        String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         } else{
@@ -137,7 +154,7 @@ public class Parser {
         }
     }
 
-    private boolean isValidTime(String time){
+    public boolean isValidTime(String time) throws DukeException{
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
         boolean isValid;
         try{
@@ -151,12 +168,12 @@ public class Parser {
     }
 
 
-    private String extractOperator(String userInput){
+    public String extractOperator(String userInput){
         String[] parts = userInput.split(" ", 2);
         return parts[0];
     }
 
-    private String extractDescription(String userInput) {
+    public String extractDescription(String userInput) {
         String[] parts = userInput.split(" ", 2);
         return parts[1];
     }

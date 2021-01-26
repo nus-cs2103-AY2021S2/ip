@@ -8,7 +8,7 @@ public class Event extends Task {
     private final String type = "E";
     private String separator = " | ";
 
-    public Event(String description, String at) throws DukeException{
+    public Event(String description, String at) {
         super(description);
         setTime(at);
     }
@@ -17,14 +17,14 @@ public class Event extends Task {
         return this.type;
     }
 
-    private void setTime(String time) throws DukeException{
-        try {
+    private void setTime(String time) {
+//        try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
             LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
             this.at = dateTime;
-        } catch (Exception e){
-            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
-        }
+//        } catch (Exception e){
+//            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
+//        }
     }
 
 //    public String archiveEvent() {

@@ -11,7 +11,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         Ui ui = new Ui();
         Storage storage = new Storage(filePath);
         try {
@@ -35,86 +35,98 @@ public class Duke {
         String commandText;
         do{
             commandText = ui.getUserCommand();
-            String operator = new Parser().parseOperator(commandText);
-            executeCommand(operator, commandText);
+            try {
+                String operator = new Parser().parseOperator(commandText);
+                executeCommand(operator, commandText);
+            } catch (DukeException e){
+                ui.showErrorMessage(e.getMessage());
+            }
         } while(commandText.equals("bye"));
     }
 
-    private void executeCommand(String operator, String commandText){
+    private void executeCommand(String operator, String commandText) throws DukeException {
         Parser commandParser = new Parser();
-        switch (operator){
-            case "done":
-                int taskNumberToComplete = commandParser.parseCommand(commandText);
-                completeTask(taskNumberToComplete);
-                break;
-            case "delete":
-                int taskNumberToDelete = commandParser.parseCommand(commandText);
-                deleteTask(taskNumberToDelete);
-                break;
-            case "todo":
-                String description = commandParser.parseCommand(commandText);
-                addToDo(description);
-                break;
-            case "deadline":
-                String[] detailsDeadline = commandParser.parseCommand(commandText);
-                addDeadline(detailsDeadline );
-                break;
-            case "event":
-                String[] detailsEvent = commandParser.parseCommand(commandText);
-                addEvent(detailsEvent);
-                break;
-            case "display":
-                displayList();
-                break;
+        try {
+            switch (operator) {
+                case "done":
+//                int taskNumberToComplete = commandParser.parseCommand(commandText);
+                    int taskNumberToComplete = commandParser.parseDone(commandText);
+                    completeTask(taskNumberToComplete);
+                    break;
+                case "delete":
+//                int taskNumberToDelete = commandParser.parseCommand(commandText);
+                    int taskNumberToDelete = commandParser.parseDelete(commandText);
+                    deleteTask(taskNumberToDelete);
+                    break;
+                case "todo":
+//                String description = commandParser.parseCommand(commandText);
+                    String description = commandParser.parseAddToDo(commandText);
+                    addToDo(description);
+                    break;
+                case "deadline":
+//                String[] detailsDeadline = commandParser.parseCommand(commandText);
+                    String[] detailsDeadline = commandParser.parseAddDeadline(commandText);
+                    addDeadline(detailsDeadline);
+                    break;
+                case "event":
+                    String[] detailsEvent = commandParser.parseAddEvent(commandText);
+                    addEvent(detailsEvent);
+                    break;
+                case "display":
+                    displayList();
+                    break;
+            }
+        } catch (DukeException e){
+            ui.showErrorMessage(e.getMessage());
         }
         storage.updateTaskList(tasks);
     }
 
-    private void addEvent(String[] details) throws DukeException{
-        try {
+    private void addEvent(String[] details) {
+//        try {
             String description = details[0];
             String time = details[1];
             Event newTask = new Event(description, time);
             tasks.addTask(newTask);
-        } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
-        }
+//        } catch (DukeException e){
+//            ui.showErrorMessage(e.getMessage());
+//        }
     }
 
-    private void addDeadline(String[] details) throws DukeException{
-        try {
+    private void addDeadline(String[] details) {
+//        try {
             String description = details[0];
             String time = details[1];
             Deadline newTask = new Deadline(description, time);
             tasks.addTask(newTask);
-        } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
-        }
+//        } catch (DukeException e){
+//            ui.showErrorMessage(e.getMessage());
+//        }
     }
 
-    private void addToDo(String description) throws DukeException{
-        try {
+    private void addToDo(String description) {
+//        try {
             ToDo newTask = new ToDo(description);
             tasks.addTask(newTask);
-        } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
-        }
+//        } catch (DukeException e){
+//            ui.showErrorMessage(e.getMessage());
+//        }
     }
 
-    private void completeTask(int taskNumber) throws DukeException{
-        try{
+    private void completeTask(int taskNumber) {
+//        try{
             tasks.markTaskAsDone(taskNumber);
-        } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
-        }
+//        } catch (DukeException e){
+//            ui.showErrorMessage(e.getMessage());
+//        }
     }
 
-    private void deleteTask(int taskNumber) throws DukeException{
-        try {
+    private void deleteTask(int taskNumber) {
+//        try {
             tasks.deleteTask(taskNumber);
-        } catch (DukeException e){
-            ui.showErrorMessage(e.getMessage());
-        }
+//        } catch (DukeException e){
+//            ui.showErrorMessage(e.getMessage());
+//        }
     }
 
     private void displayList(){

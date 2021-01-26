@@ -12,7 +12,7 @@ public class Deadline extends Task {
     private final String type = "D";
     private String separator = " | ";
 
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String by) {
         super(description);
         setTime(by);
     }
@@ -26,14 +26,14 @@ public class Deadline extends Task {
         return time;
     }
 
-    private void setTime(String time) throws DukeException{
-        try {
+    private void setTime(String time) {
+//        try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-dd H:mm");
             LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
             this.by = dateTime;
-        } catch (Exception e){
-            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
-        }
+//        } catch (Exception e){
+//            throw new DukeException("OOPS!! Please follow the correct data/time format: yyyy-mm-dd hh:mm");
+//        }
     }
 
     @Override

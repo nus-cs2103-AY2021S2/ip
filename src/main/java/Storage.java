@@ -18,22 +18,30 @@ public class Storage {
         return this.filePath;
     }
 
-    public ArrayList<String> load() throws FileNotFoundException {
-        ArrayList<String> tasks = new ArrayList<>();
-        File f = new File(this.filePath); // create a File for the given file path
-        Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
-        while (scanner.hasNext()) {
-            tasks.add(scanner.nextLine());
+    public ArrayList<String> load() throws DukeException {
+        try {
+            ArrayList<String> tasks = new ArrayList<>();
+            File f = new File(this.filePath); // create a File for the given file path
+            Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
+            while (scanner.hasNext()) {
+                tasks.add(scanner.nextLine());
+            }
+            return tasks;
+        } catch (FileNotFoundException e){
+            throw new DukeException("OOPS!! File is not found.");
         }
-        return tasks;
     }
 
-    public void updateTaskList(TaskList taskList) throws IOException {
-        FileWriter writer = new FileWriter(filePath);
-        ArrayList<Task> tasks = taskList.getTaskList();
-        for (Task t : tasks) {
-            writer.write(t.toString() + System.lineSeparator());
+    public void updateTaskList(TaskList taskList) throws DukeException {
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            ArrayList<Task> tasks = taskList.getTaskList();
+            for (Task t : tasks) {
+                writer.write(t.toString() + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e){
+            throw new DukeException("OOPS!! Task list failed to update.");
         }
-        writer.close();
     }
 }
