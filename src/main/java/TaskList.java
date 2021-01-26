@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task objects, and governs interactions between Tasks and this List.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 

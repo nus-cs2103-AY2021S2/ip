@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses String representations of Tasks into Task objects.
+ */
 public class TaskParser {
     private static final int SPLIT_LIMIT = 2;
 

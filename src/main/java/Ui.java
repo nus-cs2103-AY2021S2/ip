@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Handles receiving user input and outputting relevant textual information for the user to see.
+ */
 public class Ui {
     private static final String DIVIDER = "____________________________________________________________";
     private Scanner scanner;
