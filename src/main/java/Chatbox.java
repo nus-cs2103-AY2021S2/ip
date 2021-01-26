@@ -8,9 +8,24 @@ class Chatbox {
         storage = new Storage();
     }
 
-    void initialize(){
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    Chatbox(List<Task> list) {
+        storage = new Storage(list);
+    }
+
+    static Chatbox initialize(){
+        try {
+            FileReader fr = new FileReader();
+            List<Task> list = fr.readFile();
+
+            System.out.println("Hello! I'm Duke");
+            System.out.println("What can I do for you?");
+
+            return new Chatbox(list);
+
+        } catch(DukeException e) {
+            System.err.println(e.getMessage());
+            return new Chatbox();
+        }
     }
 
     //accept the input

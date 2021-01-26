@@ -8,11 +8,17 @@ class Storage {
         list = new ArrayList<>();
     }
 
+    Storage(List<Task> list) {
+        this.list = list;
+    }
+
     void add(Task task){
         list.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+
+        writeToHardDisk();
     }
 
     void listOut(){
@@ -28,12 +34,14 @@ class Storage {
         }
     }
 
-    void markTaskAsDone(String num){
+    void markTaskAsDone(String num) {
         int index = Integer.valueOf(num) - 1;
         Task targetTask = list.get(index);
         targetTask.markAsDone();
         System.out.println("Nice! I've mark this task as done");
         System.out.println(targetTask);
+
+        writeToHardDisk();
     }
 
     void delete(String num) throws DukeException {
@@ -48,27 +56,37 @@ class Storage {
         System.out.println("Noted, I've removed this task: ");
         System.out.println(deletedTask);
         System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+
+        writeToHardDisk();
     }
 
     String listOutTaskInString() {
         String res = "";
 
-        for(Task t: list) {
-            res += "Done tasks: " + System.lineSeparator();
+        res += "Done tasks: " + System.lineSeparator();
 
+        for(Task t: list) {
             if(t.getIsDone()) {
                 res += t.toString() + System.lineSeparator();
             }
         }
 
-        for(Task t: list) {
-            res += "Pending tasks: " + System.lineSeparator();
+        res += "Pending tasks: " + System.lineSeparator();
 
+        for(Task t: list) {
             if(!t.getIsDone()) {
                 res += t.toString() + System.lineSeparator();
             }
         }
 
         return res;
+    }
+
+    void writeToHardDisk(){
+        try {
+            DukeFileWriter.writeFile(listOutTaskInString());
+        } catch(DukeException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

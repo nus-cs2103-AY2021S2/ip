@@ -3,10 +3,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String args[]){
-        Chatbox chatbox = new Chatbox();
+        Chatbox chatbox = Chatbox.initialize();
         Scanner sc = new Scanner(System.in);
-
-        chatbox.initialize();
 
         String currInput = "";
 
