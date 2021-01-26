@@ -17,6 +17,20 @@ public class Duke {
     }
 
     public static void chatBot(){
+		
+		Ui ui = new Ui();
+		ui.greeting();
+		
+		Storage st = new Storage("tasklist");
+		TaskList tl = st.loadTaskList();
+		
+		ui.getInput(tl);
+		
+		st.saveTaskList(tl);
+		
+		//===============================================
+		
+		/* 
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
@@ -157,12 +171,12 @@ public class Duke {
         }
 		
 		saveTaskList(tl);
-		System.out.println("Bye. Hope to see you again soon!");
+		System.out.println("Bye. Hope to see you again soon!"); */
 					
         
     }
 	
-	private static TaskList loadTaskList(){
+	/* private static TaskList loadTaskList(){
 		File f = new File("tasklist");
 		try {
 			if (f.createNewFile()) {
@@ -253,11 +267,11 @@ public class Duke {
 			
 		}
 		
-	}
+	} */
 	
 }
 
-class Task {
+/* class Task {
 	private String name;
 	private char type;
 	private LocalDate dateTime;
@@ -366,4 +380,4 @@ class TaskList {
 		return taskList.get(i);
 	}
 	
-}
+} */
