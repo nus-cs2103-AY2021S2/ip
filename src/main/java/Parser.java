@@ -45,6 +45,9 @@ public class Parser {
             break;
         case "help":
             break;
+        case "search":
+            checkValidSearch(args);
+            break;
         default: 
             throw new DukeInputException("I'm sorry, but I don't know what that means :-(");
         } 
@@ -143,6 +146,12 @@ public class Parser {
                 throw new DukeInputException(
                         String.format("\"%s\" is not a valid number!", s));
             }
+        }
+    }
+
+    private static void checkValidSearch(String s) throws DukeInputException {
+        if (s.length() == 0) {
+            throw new DukeInputException("Enter a keyword to search!");
         }
     }
 }

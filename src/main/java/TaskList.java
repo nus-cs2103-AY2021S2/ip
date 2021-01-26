@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Wrapper class for tasklist.
@@ -70,25 +71,8 @@ public class TaskList {
     }
 
     /**
-     * Retrieve list of tasks on the given date.
-     * @param d Date of tasks.
-     * @return List of tasks.
-     */
-    public List<Task> retrieveByDate(LocalDate d) {
-        List<Task> results = new ArrayList<>();
-
-        for (Task t : lst) {
-            if (d.equals(t.date)) {
-                results.add(t);
-            }
-        }
-
-        return results;
-    }
-
-    /**
      * Convert tasks to a numbered list of strings.
-     * @return List of numbered task.
+     * @return List of numbered tasks.
      */
     public List<String> listOutTask() {
         List<String> stringlst = new ArrayList<>();
@@ -117,4 +101,43 @@ public class TaskList {
         return new ArrayList<>(lst);
     }
 
+    /**
+     * Returns list of tasks on the given date.
+     * @param d Date of task.
+     * @return List of numbered tasks with the following date.
+     */
+    public List<String> searchByDate(LocalDate d) {
+        List<String> results = new ArrayList<>();
+
+        for (int i = 0; i < lst.size(); i++) {
+            if (d.equals(lst.get(i).date)) {
+                results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * Returns list of tasks with the given keyword.
+     * @param keyword Keyword to search.
+     * @return List of numbered tasks containing the given keyword.
+     */
+    public List<String> search(String keyword) {
+        try {
+            LocalDate date = LocalDate.parse(keyword);
+            return searchByDate(date);
+        } catch (DateTimeParseException e) {
+
+            List<String> results = new ArrayList<>();
+
+            for (int i = 0; i < lst.size(); i++) {
+                if (lst.get(i).getDescription().contains(keyword)) {
+                    results.add(String.format("%d. %s", i + 1, lst.get(i).toString()));
+                }
+            }
+    
+            return results;
+        }
+    }
 }

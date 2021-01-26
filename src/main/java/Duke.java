@@ -4,34 +4,38 @@
  * Currently supports these functionalities:
  * <p>
  * bye 
- *   - Close Duke
+ * <p>  - Close Duke
  * <p>
  * list
- *   - List out all task
+ * <p>  - List out all task
  * <p>
  * done [number]
- *   - Mark selected task as done
+ * <p>  - Mark selected task as done
  * <p>
  * todo [description]
- *   - Add a todo task
+ * <p>  - Add a todo task
  * <p>
  * deadline [description] /by [due date]
- *   - Add a deadline task with a due date (YYYY-MM-DD)
+ * <p>  - Add a deadline task with a due date (YYYY-MM-DD)
  * <p>
  * event [description] /at [date]
- *   - Add a event task with a date (YYYY-MM-DD)
+ * <p>  - Add a event task with a date (YYYY-MM-DD)
  * <p>
  * delete [number]
- *   - Delete a task
+ * <p>  - Delete a task
  * <p>
  * save
- *   - save checklist to "data/dukeData.txt"
+ * <p>  - save checklist to "data/dukeData.txt"
  * <p>
  * load
- *   - Load previously saved checklist
+ * <p>  - Load previously saved checklist
  * <p>
  * help
- *   - Display list of commands
+ * <p>  - Display list of commands
+ * <p>
+ * search [keyword/date]
+ * <p>  - Display all task containing the following keyword.
+ * <p>  - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
  */
 public class Duke {
 
@@ -109,6 +113,10 @@ public class Duke {
                     break;
                 case "help":
                     ui.help();
+                    break;
+                case "search":
+                    ui.displayList(tasks.search(args));
+                    break;
                 } 
             } catch (DukeException e) {
                 ui.displayError(e);

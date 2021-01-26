@@ -7,7 +7,6 @@
 	____________________________________________________________
 	  Hello! I'm Duke
 	  What can I do for you?
-	  Enter "load" to restore previously saved checklist.
 	  Enter "help" to see list of commands.
 	____________________________________________________________
 
@@ -132,6 +131,21 @@
 	    - Load previously saved checklist
 	  help
 	    - Display list of commands
+	  search [keyword]
+	    - Display all task containing the following keyword.
+	    - If keyword is in a valid date format(YYYY-MM-DD), display all task on that date.
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  5. [D][ ] return book (by: 24 Jan)
+	____________________________________________________________
+
+	____________________________________________________________
+	  Here are the tasks in your list:
+	  1. [T][X] read book
+	  2. [D][ ] return book (by: 6 Jun)
+	  5. [D][ ] return book (by: 24 Jan)
 	____________________________________________________________
 
 	____________________________________________________________
