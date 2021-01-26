@@ -2,59 +2,68 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
+    public static class EmptyDescriptionException extends Exception {
+        private static final long serialVersionUID = 1L;
+
+        public EmptyDescriptionException () {
+            super("! Task description cannot be empty.");
+        }
+    }
+
     protected enum TaskState {
         done, undone;
     }
 
-    protected final static DateTimeFormatter parseFormat = DateTimeFormatter.ofPattern(
-            "yyyy-MM-dd HHmm");
-    protected final static DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern(
-            "eee, dd MMM yyyy HH:mm a");
-
-    protected String Description;
-    protected TaskState State;
-    protected LocalDateTime CreatedDateTime;
+    protected String description;
+    protected TaskState state;
+    protected LocalDateTime createdDateTime;
 
     // constructors
-    public Task (int state, String description, LocalDateTime createdDateTime) {
-        this.State = (state > 0 ? TaskState.done : TaskState.undone);
-        this.Description = description;
-        this.CreatedDateTime = createdDateTime;
+    public Task (String description, boolean isDone, LocalDateTime createdDateTime) 
+            throws Task.EmptyDescriptionException {
+        
+        if (description.isEmpty()) {
+            throw new Task.EmptyDescriptionException();
+        }
+        
+        this.state = (isDone ? TaskState.done : TaskState.undone);
+        this.description = description;
+        this.createdDateTime = createdDateTime;
     }
 
-    public Task (String description) {
-        this(0, description, LocalDateTime.now());
+    public Task (String description) throws Task.EmptyDescriptionException {
+        this(description, false, LocalDateTime.now());
     }
 
     // accessors
     public boolean isDone () {
-        return (this.State == TaskState.undone);
+        return (this.state == TaskState.undone);
+    }
+
+    public String taskInformation (DateTimeFormatter outputFormat) {
+        return "[" + (this.state == TaskState.done ? "X" : " ") 
+                + "] " + this.description + " [ created: " 
+                + this.createdDateTime.format(outputFormat) + " ]";
+    }
+
+    public String toCommand (String delimiter, DateTimeFormatter parseFormat) {
+        // unique parsing sequence for Task
+        return (this.state == TaskState.done ? 1 : 0) + delimiter + this.description
+                + delimiter + this.createdDateTime.format(parseFormat);
     }
 
     // mutators
-    public void markAsDone () {
-        switch (this.State) {
+    public void markAsDone (DateTimeFormatter outputFormat) {
+        switch (this.state) {
         case done:
             System.out.println("     This task has already been marked done!\n     "
-                    + taskInformation());
+                    + taskInformation(outputFormat));
             break;
 
         case undone:
-            this.State = TaskState.done;
+            this.state = TaskState.done;
             System.out.println("     Woohoo! I've marked this task as done\n     " 
-                    + taskInformation());
+                    + taskInformation(outputFormat));
         }
-    }
-
-    public String taskInformation () {
-        return "[" + (this.State == TaskState.done ? "X" : " ") 
-                + "] " + this.Description;
-    }
-
-
-    public String taskParseCommand () {
-        // unique parsing sequence for Task
-        return (this.State == TaskState.done ? 1 : 0) + " :: " + this.Description
-                + " :: " + this.CreatedDateTime.format(parseFormat);
     }
 }

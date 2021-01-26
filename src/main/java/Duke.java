@@ -1,159 +1,102 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    ______________________________________________________________________");
-        System.out.println("     Reading saved tasks under User A0183450J ...");
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private String username;
 
-        ArrayList<Task> tasks = TaskInterpreter.readTasks("A0183450J");
-        System.out.println("     What can I do for you today?");
-        System.out.println("    ______________________________________________________________________\n");
+    public Duke (String username) {
+        this.ui = new Ui();
+        this.ui.brace();
+        this.ui.greet();
 
+        this.username = username;
+        this.storage = new Storage(this.username);
+
+        this.ui.storageReading(this.username);
+        this.tasks = this.storage.readTasks();
+        
+        this.ui.brace();
+    }
+
+    public void run () {
         Scanner scanner = new Scanner(System.in);
-        DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
         user_active: while (true) {
             String command = scanner.next();
-            String description;
-            int subcommandIndex;
 
-            System.out.println("    ______________________________________________________________________");
-            switch (command) {
-            case "bye":
-                break user_active;
+            this.ui.brace();
+            try {
+                switch (command) {
+                    case "bye":
+                        break user_active;
+                    
+                    case "list":
+                        for (int i = 0; i < this.tasks.size(); ++ i) {
+                            this.ui.print(i + 1 + ". " + this.tasks.get(i).taskInformation(
+                                    Ui.outputFormat));
+                        }
 
-            case "list":
-                int outstandingTasks = 0;
+                        this.ui.print("You have " + this.tasks.outstandingTasks().size() 
+                                + " undone tasks.");
+                        break;
+                    
+                    case "done":
+                        int taskIndex = scanner.nextInt();
+                        this.tasks.markAsDone(taskIndex, Ui.outputFormat);
+                        break;
+                    
+                    case "todo":
+                        this.tasks.add(new ToDo(scanner.nextLine()));
+                        this.ui.addedTask(this.tasks);
+                        break;
+                    
+                    case "event":
+                        this.tasks.add(Parser.parseNewTaskCommand(
+                                scanner.nextLine().trim(), "/at"));
 
-                for (int i = 0; i < tasks.size(); i ++) {
-                    System.out.println("     " + (i + 1) +  ". " 
-                            + tasks.get(i).taskInformation());
+                        this.ui.addedTask(this.tasks);
+                        break;
 
-                    if (! tasks.get(i).isDone()) { 
-                        outstandingTasks += 1; 
+                    case "deadline":
+                        this.tasks.add(Parser.parseNewTaskCommand(
+                                scanner.nextLine().trim(), "/by"));
+                        
+                        this.ui.addedTask(this.tasks);
+                        break;
+                    
+                    case "delete":
+                        this.ui.removedTask(this.tasks, this.tasks.remove(
+                                scanner.nextInt() - 1));
+
+                        break;
+                    default:
+                        this.ui.confuzzled();
                     }
-                }
-
-                System.out.println("     You have " + outstandingTasks 
-                        + " outstanding tasks remaining ...");
-                break;
-
-            case "done":
-                try { 
-                    int taskIndex = scanner.nextInt();
-                    tasks.get(taskIndex - 1).markAsDone();
-                } catch (Exception NonIntegerException) {
-                    System.out.println("     tasks must be denoted with Integers! :(");
-                }
-
-                break;
-
-            case "todo":
-                description = scanner.nextLine();
-
-                if (description.isEmpty()) {
-                    System.out.println("     the task description cannot be empty!! :o");
-                } else {
-                    tasks.add(new ToDo(description.trim()));
-                    updateTasks(tasks);
-                }
-
-                break;
-
-            case "deadline":
-                description = scanner.nextLine().trim();
-                subcommandIndex = description.indexOf("/by");
-                
-                try {
-                    LocalDateTime By = LocalDateTime.parse(description.substring(subcommandIndex + 3).trim(),
-                            inputDateFormat);
-
-                    description = description.substring(0, subcommandIndex - 1).trim();
-
-                    if (description.isEmpty()) {
-                        System.out.println("     the task description cannot be empty!! :o");
-                    } else {
-                        tasks.add(new Deadline(description, By));
-                        updateTasks(tasks);
-                    }
-
-                } catch (Exception E) {
-                    System.out.println("     /by command cannot be empty and must be in " 
-                            + "yyyy-MM-dd HHmm format! T.T");
-                }
-
-                break;
-
-            case "event":
-                description = scanner.nextLine().trim();
-                subcommandIndex = description.indexOf("/at");
-                
-                try {
-                    LocalDateTime At = LocalDateTime.parse(description.substring(subcommandIndex + 3).trim(),
-                            inputDateFormat);
-
-                    description = description.substring(0, subcommandIndex - 1).trim();
-
-                    if (description.isEmpty()) {
-                        System.out.println("     the task description cannot be empty!! :o");
-                    } else {
-                        tasks.add(new Event(description, At));
-                        updateTasks(tasks);
-                    }
-
-                } catch (Exception E) {
-                    System.out.println("     /at command cannot be empty and must be in "
-                            + "yyyy-MM-dd HHmm format! T.T");
-                }
-
-                break;
-
-            case "delete":
-                try {
-
-                    Task dead = tasks.remove(scanner.nextInt() - 1);
-                    System.out.println("     Removed task:");
-                    System.out.println("     " + dead.taskInformation());
-                    System.out.println("     " + tasks.size() + " tasks remaining ...");
-
-                } catch (Exception NonNumberE) {
-                    System.out.println("     the task does not exist or has to be denoted by Integers! ._.");
-                }
-                break;
-                
-            default:    // appends to list
-                System.out.println("     what do you mean... D:");
+            } catch (DateTimeParseException E) {
+                this.ui.print("! Input datetime must be of format yyyy-MM-dd HHmm");
+            } catch (Exception E) {
+                this.ui.print(E.getMessage());
             }
-            System.out.println("    ______________________________________________________________________\n");
+
+            this.ui.brace();
         }
-
-        System.out.println("     Saving tasks under User A0183450J ...");
-
-        try {
-            TaskInterpreter.saveTasks(tasks, "A0183450J");
-        } catch (IOException DataSaveException) {
-            System.out.println("     Tasks save failed spectacularly!");
-        }
-
-        System.out.println("     Bye... Hope to see you again soon!");
 
         scanner.close();
+
+        try {
+            this.storage.saveTasks(this.tasks);
+        } catch (Exception E) {
+
+        }
+
+        this.ui.byebye();
     }
 
-    public static void updateTasks (ArrayList<Task> tasks) {
-        System.out.println("     Added task:");
-        System.out.println("     " + tasks.get(tasks.size() - 1).taskInformation());
-        System.out.println("     Now you have " + tasks.size() + " tasks in the list.");
-    }
 
+    public static void main(String[] args) {
+        new Duke("A0183450J").run();
+    }
 }

@@ -1,29 +1,29 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    private LocalDateTime By;
+    private LocalDateTime by;
 
-    Deadline (String description, LocalDateTime by) {
-        super(description); this.By = by;
+    public Deadline (String description, LocalDateTime by)
+            throws Task.EmptyDescriptionException  {
+        super(description); this.by = by;
     }
 
-    Deadline (String[] parsedCommand) {
-        // formar as TYPE | STATE | DESCRIPTION | DATETIME | BY
-        super(Integer.parseInt(parsedCommand[1]), parsedCommand[2],
-                LocalDateTime.parse(parsedCommand[3], Task.parseFormat));
-
-        this.By = LocalDateTime.parse(parsedCommand[4], Task.parseFormat);
-    }
-
-    @Override
-    public String taskInformation () {
-        return "[D]" + super.taskInformation() + " [ by: " + 
-                this.By.format(Task.outputFormat) + " ]";
+    public Deadline (String description, boolean isDone, LocalDateTime createdDateTime,
+            LocalDateTime by) throws Task.EmptyDescriptionException {
+        super(description, isDone, createdDateTime);
+        this.by = by;
     }
 
     @Override
-    public String taskParseCommand () {
-        return "D :: " + super.taskParseCommand() + " :: " + 
-                this.By.format(Task.parseFormat);
+    public String taskInformation (DateTimeFormatter outputFormat) {
+        return "[D]" + super.taskInformation(outputFormat) + " [ by: " + 
+                this.by.format(outputFormat) + " ]";
+    }
+
+    @Override
+    public String toCommand (String delimiter, DateTimeFormatter parseFormat) {
+        return "D" + delimiter + super.toCommand(delimiter, parseFormat) + delimiter + 
+                this.by.format(parseFormat);
     }
 }
