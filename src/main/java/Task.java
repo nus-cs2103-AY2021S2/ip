@@ -3,28 +3,12 @@ public class Task {
     private final boolean done;
 
     Task(String task) {
-        String processedTask = "";
-        String[] tmp = task.split("/");
-        if (tmp.length > 1) {
-            processedTask = tmp[0] + "(" + tmp[1] + ")";
-        }
-        else {
-            processedTask = task;
-        }
-        this.task = processedTask;
+        this.task = task;
         this.done = false;
     }
 
     Task(String task, boolean done) {
-        String processedTask = "";
-        String[] tmp = task.split("/");
-        if (tmp.length > 1) {
-            processedTask = tmp[0] + "(" + tmp[1] + ")";
-        }
-        else {
-            processedTask = task;
-        }
-        this.task = processedTask;
+        this.task = task;
         this.done = done;
     }
 
