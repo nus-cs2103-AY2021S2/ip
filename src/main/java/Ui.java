@@ -25,6 +25,12 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    public void borderPrint(String msg) {
+        System.out.println(DIVIDER);
+        System.out.println(msg);
+        System.out.println(DIVIDER);
+    }
+
     public String readCommand() {
         return scanner.nextLine();
     }

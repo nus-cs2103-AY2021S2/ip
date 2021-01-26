@@ -10,10 +10,12 @@ import java.time.temporal.ChronoUnit;
 public class Duke {
 	private TaskList tasks;
 	private Ui ui;
+	private boolean isActive;
 	
 	public Duke() {
         this.tasks = new TaskList();
         this.ui = new Ui();
+        this.isActive = true;
     }
 	
     public static void main(String[] args) {
@@ -31,8 +33,7 @@ public class Duke {
         String userInput = ui.readCommand();
 
         // loop until the user exits
-        while (!userInput.toLowerCase().equals("bye")) {
-			ui.showBorder();
+        while (isActive) {
             try {
                 // display list
                 if (userInput.toLowerCase().equals("list")) {
@@ -57,14 +58,15 @@ public class Duke {
                     }
                 // add task to list
                 } else if (userInput.toLowerCase().matches("^(todo|deadline|event)( .+)?$")) {
-                    addTask(parseTask(userInput), true);
+					addTask(parseTask(userInput), true);
+				} else if (userInput.toLowerCase().equals("bye")) {
+                	isActive = false;
                 } else {
                     throw new DukeException("I don't understand that command!");
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                ui.borderPrint(e.getMessage());
             }
-            ui.showBorder();
 
 			// get user input
 			userInput = ui.readCommand();
@@ -73,8 +75,6 @@ public class Duke {
 		// exit sequence
 		ui.quit();
     }
-	
-
 
 	private void load() {
 		try {
@@ -95,12 +95,12 @@ public class Duke {
 				System.out.println(err.getMessage());
 			}
 		} catch (DukeException e) {
+			tasks.clear();
+			saveTasks();
 			String errorMsg = "Looks like the save data's been corrupted.\n"
 					+ "Please avoid manually editing this file!\n"
 					+ "For now, I've cleared the save data.";
-			System.out.println(errorMsg);
-			tasks.clear();
-			saveTasks();
+			ui.borderPrint(errorMsg);
 		}
 	}
 	
@@ -159,8 +159,10 @@ public class Duke {
 	private void addTask(Task task, boolean isVerbose) {
 		tasks.add(task);
 		if (isVerbose) {
-			System.out.println("I've added this task: " + task.toString());
-			System.out.printf("You now have %d items on your todo list.\n", tasks.size());
+			String msg = String.format("I've added this task: %s\nYou now have %d items on your todo list.",
+					task.toString(),
+					tasks.size());
+			ui.borderPrint(msg);
 		}
 		saveTasks();
 	}
@@ -170,15 +172,17 @@ public class Duke {
 			throw new DukeException("That task's already done!");
 		} else {
 			task.finish();
-			System.out.println("Congrats! The following task has been marked as done:");
-			System.out.println("  " + task.toString());
+			String msg = String.format("Congrats! The following task has been marked as done:\n  %s",
+					task.toString());
+			ui.borderPrint(msg);
 		}
 		saveTasks();
 	}
 	
-	private void deleteTask(int idx) {
-		System.out.println("Removed task: " + tasks.remove(idx).toString());
-		System.out.printf("You now have %d items on your todo list.\n", tasks.size());
+	private void deleteTask(int idx) throws DukeException {
+		String msg = String.format("Removed task: %s\nYou now have %d items on your todo list.",
+				tasks.remove(idx).toString(),
+				tasks.size());
 		saveTasks();
 	}
 
@@ -194,7 +198,7 @@ public class Duke {
 		} catch (Exception e) {
 			String errorMsg = "Save file not found!\n" +
 					"Please don't manually edit the save file.";
-			System.out.println(errorMsg);
+			ui.borderPrint(errorMsg);
 		}
 	}
 }
