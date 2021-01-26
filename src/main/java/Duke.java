@@ -28,21 +28,22 @@ public class Duke {
             temp.createNewFile();
             Scanner sc = new Scanner(save);
             FileWriter fw = new FileWriter(temp);
+            //copy all lines except line to be deleted to temp
             while(sc.hasNextLine()) {
                 //skip the line to be deleted
                 if (ctr != index) {
                     System.out.println("line added");
-                    fw.write(sc.nextLine());
+                    fw.write(sc.nextLine() + System.lineSeparator());
+                } else {
+                    sc.nextLine();
                 }
-                sc.nextLine();
                 ctr++;
             }
             fw.close();
             sc.close();
-            //copy contents of temp to save
-            CopyPasta.copyPasta(temp, save);
-            //delete temp file
-            temp.delete();
+            //delete original save and rename temp to save
+            save.delete();
+            temp.renameTo(save);
         } catch (IOException e) {
             e.printStackTrace();
         }

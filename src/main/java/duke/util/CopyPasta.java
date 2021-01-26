@@ -9,15 +9,15 @@ import java.util.Scanner;
 public class CopyPasta {
     public static void copyPasta(File copy, File paste) {
         try {
-            //remove all data from target paste file
-            paste.delete();
-            paste.createNewFile();
             //perform copypasta
             Scanner sc = new Scanner(copy);
-            FileWriter fw = new FileWriter(paste);
+            String string = "";
             while (sc.hasNext()) {
-                fw.write(sc.nextLine());
+                string = string + sc.nextLine() + System.lineSeparator();
             }
+            System.out.println(string);
+            FileWriter fw = new FileWriter(paste);
+            fw.write(string);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
