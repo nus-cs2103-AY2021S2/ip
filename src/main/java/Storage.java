@@ -5,8 +5,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    public static void addToFile(Task task) {
-        File save = new File("./data/duke.txt");
+    public String filePath;
+    
+    Storage(String filePath) {
+        this.filePath = filePath;
+    }
+    
+    public void addToFile(Task task) {
+        File save = new File(this.filePath);
         FileWriter fw = null;
         try {
             fw = new FileWriter(save, true);
@@ -17,8 +23,8 @@ public class Storage {
         }
     }
 
-    public static void deleteFromFile(int index) {
-        File save = new File("./data/duke.txt");
+    public void deleteFromFile(int index) {
+        File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
         int ctr = 0;
         try {
@@ -46,8 +52,8 @@ public class Storage {
         }
     }
 
-    public static void markDoneInFile(int index) {
-        File save = new File("./data/duke.txt");
+    public void markDoneInFile(int index) {
+        File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
         int ctr = 0;
         try {
@@ -75,9 +81,9 @@ public class Storage {
         }
     }
 
-    public static void loadData(List list) throws IOException {
+    public void loadData(List list) throws IOException {
         File directory = new File("data");
-        File save = new File("./data/duke.txt");
+        File save = new File(this.filePath);
         directory.mkdir();
         save.createNewFile();
         Scanner sc = new Scanner(save);
