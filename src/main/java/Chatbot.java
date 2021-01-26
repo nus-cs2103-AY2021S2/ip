@@ -25,5 +25,5 @@ public interface Chatbot {
      * @param command String command to parse.
      * @return Chatbot with updated internal state.
      */
-    public Chatbot parseCommand(String command);
+    public Chatbot parseCommand(String commandString);
 }

@@ -5,16 +5,6 @@
  * with updated internal state.
  */
 public class Owen implements Chatbot {
-    private enum Command {
-        TODO,
-        EVENT,
-        DEADLINE,
-        LIST,
-        DONE,
-        DELETE,
-        BYE,
-    }
-
     private static final String STORAGE_PATH = "data/owen.txt";
 
     private final boolean isRunning;
@@ -66,36 +56,21 @@ public class Owen implements Chatbot {
     }
 
     @Override
-    public Owen parseCommand(String command) {
-        String[] splitCommand = command.split(" ", 2);
-        String parsedCommandString = splitCommand[0];
-
+    public Owen parseCommand(String commandString) {
         try {
-            // Try converting command to enum
-            Command parsedCommand;
-            try {
-                parsedCommand = Command.valueOf(parsedCommandString.toUpperCase());
-            } catch (IllegalArgumentException exception) {
-                throw new OwenException("I'm sorry, but I don't know what that means...");
-            }
+            Command command = Parser.parseCommand(commandString);
 
-            switch (parsedCommand) {
+            switch (command.getType()) {
             case TODO:
             case EVENT:
             case DEADLINE:
-                return this.addTask(command);
+                return this.addTask(command.getOriginal());
             case LIST:
                 return this.listTasks();
             case DONE:
-                if (splitCommand.length < 2) {
-                    throw new OwenException("Task number must be specified...");
-                }
-                return this.doneTask(this.parseTaskNumber(splitCommand[1]));
+                return this.doneTask(parseTaskNumber(command.getArgs()));
             case DELETE:
-                if (splitCommand.length < 2) {
-                    throw new OwenException("Task number must be specified...");
-                }
-                return this.deleteTask(this.parseTaskNumber(splitCommand[1]));
+                return this.deleteTask(parseTaskNumber(command.getArgs()));
             case BYE:
                 return this.shutdown();
             default:
@@ -107,7 +82,7 @@ public class Owen implements Chatbot {
         }
     }
 
-    private int parseTaskNumber(String taskNumber) throws OwenException {
+    private static int parseTaskNumber(String taskNumber) throws OwenException {
         try {
             return Integer.parseInt(taskNumber);
         } catch (NumberFormatException exception) {
