@@ -8,11 +8,7 @@ public class Event extends Task{
         this.duration = duration;
     }
 
-    /**
-     * converts the Event object to a String
-     *
-     * @return String showing the details of the Event object
-     */
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.toFormattedString() + " " + duration + ")";

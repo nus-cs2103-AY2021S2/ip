@@ -14,12 +14,7 @@ public class TaskList {
         this.listLength = 0;
     }
 
-    /**
-     * creates a Task object and adds it to the TaskList object
-     *
-     * @param info String array containing details of the user input
-     * @throws DukeException if the user input is not specified properly
-     */
+
     void add(String[] info) throws DukeException {
         int length = info.length;
         Task task = null;
@@ -77,14 +72,7 @@ public class TaskList {
 
     }
 
-    /**
-     * removes a task from the TaskList. The task is determined by the user input
-     * found in the string array.
-     *
-     * @param info String array containing user input
-     * @return Task that has been removed
-     * @throws DukeException if the task number provided is less than 0 or more than the number of tasks in the TaskList
-     */
+
     Task delete(String[] info) throws DukeException {
         int taskIndex = Integer.parseInt(info[1]) - 1;
         if (taskIndex > listLength || taskIndex < 0) {
@@ -95,14 +83,7 @@ public class TaskList {
         return task;
     }
 
-    /**
-     * changes the state of the task to completed. The task is determined by the user input
-     * found in the string array.
-     *
-     * @param info String array containing user input
-     * @return Task that has been completed
-     * @throws DukeException if the task number provided is less than 0 or more than the number of tasks in the TaskList
-     */
+
     Task done(String[] info) throws DukeException {
         if (info.length == 1) {
             throw new DukeException("OOPS! Task completed is not specified");

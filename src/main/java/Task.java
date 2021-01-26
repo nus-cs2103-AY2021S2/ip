@@ -13,11 +13,7 @@ public class Task {
         this.isDone = true;
     }
 
-    /**
-     * converts the task object into a string
-     *
-     * @return string containing information about the task object
-     */
+
     @Override
     public String toString() {
         return this.isDone ? "[X] " + description : "[ ] " + description;

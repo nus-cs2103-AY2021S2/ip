@@ -10,14 +10,7 @@ public class PrintCommand extends Command {
         return info[0].equals("bye");
     }
 
-    /**
-     * prints the tasks stored in the TaskList object.
-     *
-     * @param tasks a TaskList object that contains the tasks of the user
-     * @param ui helps to print statement to let user know what has been done
-     * @param storage contains the filepath to the file to store the given tasks into
-     * @throws DukeException if the provided inormation is invalid
-     */
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.printList(tasks);
