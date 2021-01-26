@@ -1,6 +1,12 @@
 package java.duke;
 
-import main.java.duke.*;
+import main.java.duke.Command;
+import main.java.duke.Deadline;
+import main.java.duke.DukeCommand;
+import main.java.duke.Event;
+import main.java.duke.Parser;
+import main.java.duke.Task;
+
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
