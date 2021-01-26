@@ -26,8 +26,8 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui) {
         try {
             taskList.addTask(command);
-        } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException |
-                DateFormatException e) {
+        } catch (EmptyDescriptionException | EmptyTimeException | InvalidInputException
+                | DateFormatException e) {
             ui.showError(e.getMessage());
         }
     }
