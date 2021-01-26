@@ -1,9 +1,9 @@
 package mike;
 
+import exception.MikeCommandExecutionException;
 import task.DeadlineTask;
 import task.EventTask;
 import task.TodoTask;
-import exception.MikeInvalidInputException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -59,7 +59,12 @@ public class TaskList {
         this.taskList.remove(i - 1);
     }
 
-    public void strToTask(String strTask) throws MikeInvalidInputException {
+    /**
+     * Convert string representation of a task to a Task object
+     * @param strTask String representation of task to be converted
+     * @throws MikeCommandExecutionException if string representation of the task is of an invalid format
+     */
+    public void strToTask(String strTask) throws MikeCommandExecutionException {
         Pattern pattern = Pattern.compile("(\\d)\\. \\[([TDE])\\] \\[([X ])\\] (.+)");
         Matcher matcher = pattern.matcher(strTask);
         Matcher descriptionMatcher;
@@ -93,7 +98,7 @@ public class TaskList {
                 break;
 
             default:
-                throw new MikeInvalidInputException("No such task type");
+                throw new MikeCommandExecutionException("strToTask error","No such task type");
         }
         if (isDoneTask) {
             this.getNthTask(Integer.parseInt(matcher.group(1))).completeTask();

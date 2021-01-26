@@ -1,9 +1,8 @@
 package mike;
 
-import exception.MikeInvalidInputException;
+import exception.MikeCommandExecutionException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,7 +15,13 @@ public class Storage {
         this.listFile = new File(filePath);
     }
 
-    public void updateListFile(TaskList taskList) throws MikeInvalidInputException {
+    /**
+     * Update saved tasklist file after command execution
+     * Create file if it does not exist
+     * @param taskList taskList to be saved
+     * @throws MikeCommandExecutionException if tasklist cannot be saved to file
+     */
+    public void updateListFile(TaskList taskList) throws MikeCommandExecutionException {
         try {
             if (!this.listFile.exists()) {
                 this.listFile.getParentFile().mkdir();
@@ -26,11 +31,10 @@ public class Storage {
             fw.write(taskList.toString());
             fw.close();
         } catch (IOException e) {
-            throw new MikeInvalidInputException("File does not exist");
+            throw new MikeCommandExecutionException("Write to saved list error", "File does not exist");
         }
     }
 
-    /* TODO catch exceptions better */
     public TaskList readListFromFile(){
         TaskList taskList = new TaskList();
         try {
@@ -42,9 +46,12 @@ public class Storage {
             while(scanner.hasNextLine()) {
                 taskList.strToTask(scanner.nextLine());
             }
-        } catch (MikeInvalidInputException | IOException e) {
-            UI.printResponse(e.getMessage());
+        } catch (MikeCommandExecutionException e) {
+            UI.printException(e.getCommand() , e.getMessage());
+        } catch (IOException e) {
+            UI.printException(e.getMessage());
         }
+
         return taskList;
     }
 }

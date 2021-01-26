@@ -1,6 +1,13 @@
 package mike;
 
-import command.*;
+import command.Command;
+import command.ByeCommand;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ListCommand;
+import command.TodoCommand;
 import exception.MikeInvalidInputException;
 
 import java.time.LocalDateTime;
@@ -20,7 +27,7 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
 
     /**
-     * Reads user input and parses it
+     * Reads user input and parses it to return a command object
      *
      * @return Command.Command type object with parameters entered by user
      */
