@@ -1,8 +1,9 @@
+import java.io.IOException;
 import java.util.*;
 import duke.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // String logo = " ____        _        \n"
         //         + "|  _ \\ _   _| | _____ \n"
         //         + "| | | | | | | |/ / _ \\\n"
@@ -11,8 +12,11 @@ public class Duke {
         // System.out.println("Hello from\n" + logo);
         System.out.println("Hello, I'm Bob");
         Scanner scanner = new Scanner(System.in);
+        Storage storage = new Storage();
+        List<Task> savedTaskList = storage.loadData();
 
-        InputHandler io = new InputHandler();
+        InputHandler io = new InputHandler(savedTaskList);
+
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
@@ -20,6 +24,7 @@ public class Duke {
                 break;
             } else {
                 io = io.processInput(input);
+                storage.writeData(io.getTaskList());
             }
         }
     }
