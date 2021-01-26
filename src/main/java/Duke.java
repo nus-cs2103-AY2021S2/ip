@@ -4,14 +4,18 @@ import java.time.LocalDate;
 public class Duke {
 
     private Storage storage;
+
     private TaskList tasks;
+
     private Ui ui;
-    String name = "Link";
+
+    String name;
 
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
         tasks = new TaskList(storage.load());
+        name = "Link";
     }
 
 

@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class Storage {
     private String filepath;
+
     private ArrayList<Task> tasks;
+    
     private Parser parser;
 
     Storage(String filepath) {
@@ -34,12 +36,14 @@ public class Storage {
                     } else if (type.contains("[D]")) {
                         String description = parser.parseDeadlineEventDescription(type);
                         String dateString = parser.parseDateTimeDeadline(type);
-                        LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        LocalDate date = LocalDate.parse(dateString,
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                         tasks.add(new Deadline(description, date));
                     } else if (type.contains("[E]")) {
                         String description = parser.parseDeadlineEventDescription(type);
                         String timeString = parser.parseDateTimeEvent(type);
-                        LocalDate time = LocalDate.parse(timeString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        LocalDate time = LocalDate.parse(timeString,
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                         tasks.add(new Event(description, time));
                     }
                 }
