@@ -18,7 +18,7 @@ public class Todo extends Task {
 
     @Override
     public String unparse() {
-        return "T" + delimiter + description + delimiter + isDone;
+        return "T" + delimiter + description + delimiter + isDone + System.lineSeparator();
     }
 
     //T;;desc;;true

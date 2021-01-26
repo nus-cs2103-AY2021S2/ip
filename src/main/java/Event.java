@@ -20,8 +20,9 @@ public class Event extends Task {
 
     @Override
     public String unparse() {
+        // should abstract e here away
         return "E" + delimiter + description + delimiter + isDone
-                + delimiter + eventTiming;
+                + delimiter + eventTiming + System.lineSeparator();
     }
 
     //E;;desc;;true;;timing

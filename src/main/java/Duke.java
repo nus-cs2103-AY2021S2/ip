@@ -293,6 +293,9 @@ public class Duke {
             // maybe should save list of supported commands in another file (String[]{todo, deadline, event}
             printException(e.getMessage());
             return true;
+        } catch (IOException e) {
+            printException(e.getMessage());
+            return true;
         } catch (Exception e) {
             String errMsg = "didn't expect this exception " + e;
             printException(errMsg);
@@ -325,7 +328,7 @@ public class Duke {
         // should be rearranged elesewhere
         try {
             Save.setupTasksFile();
-            Deadline.main(new String[]{});
+            // Deadline.main(new String[]{});
         } catch (IOException e) {
             e.printStackTrace();
         }

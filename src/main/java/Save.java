@@ -7,6 +7,11 @@ import java.util.ArrayList;
 // should be called fileSetup
 // level 7 files should be in another folder/pkg
 public class Save {
+    public static Path taskListFilePath;
+    public static final String projectDir = System.getProperty("user.dir");
+    public static final java.nio.file.Path dataFilePath = java.nio.file.Paths.get(
+            projectDir, "src", "data", "tasks.txt"); // todo rename as tasklistF..P..
+
     public static boolean doesFileOrDirExist(Path path) {
         if (java.nio.file.Files.exists(path)) {
             return true;
@@ -20,9 +25,8 @@ public class Save {
 
     // testing method
     public static void setupTasksFile() throws IOException {
-        String projectDir = System.getProperty("user.dir");
 
-        java.nio.file.Path dataFilePath = java.nio.file.Paths.get(projectDir, "src", "data", "tasks.txt");
+
         boolean doesDataFileExist = doesFileOrDirExist(dataFilePath);
 
         if (doesDataFileExist) {
