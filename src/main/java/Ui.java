@@ -2,7 +2,8 @@ public class Ui {
     private static final String INDENTATION = "    ";
     private static final String REPLY_OUTLINE = INDENTATION + "____________________________________________________________";
 
-    public Ui() {}
+    public Ui() {
+    }
 
     public String formatLine(String line) {
         return INDENTATION + line + "\n";
@@ -25,12 +26,12 @@ public class Ui {
     }
 
     public void list(TaskList tasks) {
-        String msg = formatLine("Here are the tasks in your list:");
+        StringBuilder msg = new StringBuilder(formatLine("Here are the tasks in your list:"));
 
         for (int i = 0; i < tasks.size(); i++) {
-            msg += formatLine((i + 1) + ". " + tasks.getTaskAt(i));            
+            msg.append(formatLine((i + 1) + ". " + tasks.getTaskAt(i)));
         }
-        reply(msg);
+        reply(msg.toString());
     }
 
     public void exit() {

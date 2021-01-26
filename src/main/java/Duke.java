@@ -6,9 +6,9 @@ public class Duke {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
 
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
     // Helper functions
     public int getIndex(String args) {
@@ -117,12 +117,12 @@ public class Duke {
         tasks = new TaskList();
         ui = new Ui();
         storage = new Storage(DIR_NAME, FILE_NAME);
-    
+
         storage.readFromFile(tasks, ui);
         ui.greet();
 
         Scanner sc = new Scanner(System.in);
-        while (readInput(sc));
+        while (readInput(sc)) ;
     }
 
     public static void main(String[] args) throws IOException {

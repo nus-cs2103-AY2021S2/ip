@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 public class Storage {
-    private File file;
+    private final File file;
 
     public Storage(String dirName, String fileName) {
         File dir = new File(dirName);
@@ -84,7 +84,7 @@ public class Storage {
     }
 
     public void updateFile(TaskList tasks) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             buffer.append(tasks.getTaskAt(i).toFileString());
         }
