@@ -6,16 +6,20 @@ public class Duke {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
 
-    private Ui ui;
-    private Storage storage;
-    private TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
 
-    // Helper functions
-    public int getIndex(String args) {
+    private int getIndex(String args) {
         return Integer.parseInt(args) - 1;
     }
 
-    // Commands
+    /**
+     * Adds a new Todo to the TaskList.
+     *
+     * @param command Command with details about the Todo to be created.
+     * @throws IOException If an error occurs while writing to the file.
+     */
     public void addTodo(Command command) throws IOException {
         Task todo = new Todo(command.getArgs());
         tasks.add(todo);
@@ -23,6 +27,13 @@ public class Duke {
         ui.addedTaskReply(todo, tasks.size());
     }
 
+    /**
+     * Adds a new Deadline to the TaskList
+     *
+     * @param command Command with details about the Deadline to be created.
+     * @throws IOException If an error occurs while writing to the file.
+     * @throws DateTimeParseException If date provided is not of the "dd/mm/yyyy hhmm" or "dd/mm/yyyy" format.
+     */
     public void addDeadline(Command command) throws IOException, DateTimeParseException {
         String[] parts = command.getArgs().split("/by");
 
@@ -36,6 +47,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Adds a new Event to the TaskList
+     *
+     * @param command Command with details about the Event to be created.
+     * @throws IOException If an error occurs while writing to the file.
+     */
     public void addEvent(Command command) throws IOException {
         String[] parts = command.getArgs().split("/at");
 
@@ -49,6 +66,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Marks a task as done
+     *
+     * @param command Command containing the index of the task to mark as done.
+     * @throws IOException If an error occurs while writing to the file.
+     */
     public void done(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
@@ -61,6 +84,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Deletes a task
+     *
+     * @param command Command containing the index of the task to delete.
+     * @throws IOException If an error occurs while writing to the file.
+     */
     public void delete(Command command) throws IOException {
         int index = getIndex(command.getArgs());
 
@@ -73,6 +102,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Processes user's input and executes the respective command
+     *
+     * @param sc Scanner object for reading user's input
+     * @return False if the program should terminate, else true.
+     */
     public boolean readInput(Scanner sc) {
         String input = sc.nextLine().trim();
 
@@ -113,6 +148,11 @@ public class Duke {
         return true;
     }
 
+    /**
+     * Constructor for the Duke class.
+     *
+     * @throws IOException If an error occurs while reading from the file.
+     */
     public Duke() throws IOException {
         tasks = new TaskList();
         ui = new Ui();

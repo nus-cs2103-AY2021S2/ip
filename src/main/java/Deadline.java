@@ -5,16 +5,16 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 
 public class Deadline extends Task {
-  private static DateTimeFormatter BY_FORMATTER = new DateTimeFormatterBuilder()
+  private static final DateTimeFormatter BY_FORMATTER = new DateTimeFormatterBuilder()
       .appendPattern("dd/MM/yyyy")
       .appendPattern("[ HHmm]")
       .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
       .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
       .toFormatter();
-  private static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
-  private static DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+  private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+  private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
 
-  private boolean hasTime;
+  private final boolean hasTime;
   protected LocalDateTime by;
 
   public Deadline(String description, String by) throws DateTimeParseException {

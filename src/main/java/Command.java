@@ -40,10 +40,20 @@ public class Command {
     }    
   }
 
+  /**
+   * Returns the command's instruction
+   *
+   * @return instruction
+   */
   public String getInstruction() {
     return this.instruction;
   }
 
+  /**
+   * Return the command's arguments
+   *
+   * @return arguments
+   */
   public String getArgs() {
     return this.args;
   }
