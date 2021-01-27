@@ -124,6 +124,43 @@ This applies to all 3 types of tasks:
 Empty (insert task type) task description. Not stonks!
 ```
 
+### Edit task description - `edit`
+Format: `edit TASK_NUMBER /edit NEW_DESCRIPTION`
+
+Key this command in along with task number, "/edit" and a new description to change that task's description.
+
+Example of usage:
+
+`edit 1 /edit Do CS2103T optional ip tasks`
+
+Expected outcome:
+```
+You have edited a task description to this:
+Do CS2103T optional ip tasks
+```
+
+Outcome if you only put edit command:
+```
+Did you forget to add the task number and new description? Not stonks!
+```
+
+Outcomes if you forget to put /edit:
+```
+Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!
+
+Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks! (Happens if you only put a number too!)
+```
+
+Outcome if you did not put a proper task number but still have /edit:
+```
+Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!
+```
+
+Outcome if your description is empty but you still put /edit:
+```
+Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!
+```
+
 ### Mark task as done - `done`
 Format: `done TASK_NUMBER`
 

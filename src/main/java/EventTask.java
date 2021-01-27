@@ -20,8 +20,43 @@ public class EventTask extends Task {
     }
 
     /**
-     * Converts the task into a string format for saving into file.
-     * @return Task in string format for file storage.
+     * Changes the description of the EventTask
+     * @param newDescription New description of the task.
+     * @return New EventTask with edited description
+     */
+    public EventTask editDescription(String newDescription) {
+        return new EventTask(newDescription, this.event, this.isDone);
+    }
+
+    /**
+     * Marks an EventTask as done.
+     * @return EventTask that is marked as done
+     */
+    public EventTask markAsDone() {
+        if (!this.isDone) {
+            return new EventTask(this.getDescription(), this.event, true);
+        } else {
+            throw new UnsupportedOperationException("This task is already done.\n" +
+                    "I would have wanted to say Stonks...\n" +
+                    "but your usage of an illegal operation is Not Stonks!");
+        }
+    }
+
+    /**
+     * Marks an EventTask as undone.
+     * @return EventTask that is marked as undone.
+     */
+    public EventTask markAsUndone() {
+        if (this.isDone) {
+            return new EventTask(this.getDescription(), this.event, false);
+        } else {
+            throw new UnsupportedOperationException("This task is already not done. Not stonks anyway!");
+        }
+    }
+
+    /**
+     * Converts the EventTask into a string format for saving into file.
+     * @return EventTask in string format for file storage.
      */
     @Override
     public String saveTask() {
@@ -29,8 +64,8 @@ public class EventTask extends Task {
     }
 
     /**
-     * Converts the task into a string format for display on user output.
-     * @return Task in string format for user output.
+     * Converts the EventTask into a string format for display on user output.
+     * @return EventTask in string format for user output.
      */
     @Override
     public String toString() {

@@ -5,9 +5,9 @@ package surrealchat.task;
  * Represents an abstract task, which task subclasses inherit from.
  */
 public abstract class Task {
-    protected String description;
-    protected String type;
-    protected boolean isDone;
+    protected final String description;
+    protected final String type;
+    protected final boolean isDone;
 
     /**
      * Creates instance of Task object.
@@ -46,7 +46,7 @@ public abstract class Task {
     }
 
     /**
-     * Gives a description of the task.
+     * Gives a description of the Task.
      * @return Task description.
      */
     public String getDescription() {
@@ -54,31 +54,25 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done.
+     * Changes the description of the Task
+     * @return New Task with edited description
      */
-    public void markAsDone() {
-        if (!this.isDone) {
-            this.isDone = true;
-        } else {
-            throw new UnsupportedOperationException("This task is already done.\n" +
-                    "I would have wanted to say Stonks...\n" +
-                    "but your usage of an illegal operation is Not Stonks!");
-        }
-    }
+    public abstract Task editDescription(String newDescription);
 
     /**
-     * Marks the task as undone.
+     * Marks the Task as done.
+     * @return Task marked as done.
      */
-    public void markAsUndone() {
-        if (this.isDone) {
-            this.isDone = false;
-        } else {
-            throw new UnsupportedOperationException("This task is already not done. Not stonks anyway!");
-        }
-    }
+    public abstract Task markAsDone();
 
     /**
-     * Converts the task into a string format for saving into file.
+     * Marks the Task as undone.
+     * @return Task marked as undone.
+     */
+    public abstract Task markAsUndone();
+
+    /**
+     * Converts the Task into a string format for saving into file.
      * @return Task in string format for file storage.
      */
     public String saveTask() {
@@ -86,7 +80,7 @@ public abstract class Task {
     }
 
     /**
-     * Converts the task into a string format for display on user output.
+     * Converts the Task into a string format for display on user output.
      * @return Task in string format for user output.
      */
     @Override

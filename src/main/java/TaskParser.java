@@ -141,10 +141,10 @@ public class TaskParser {
         } else {
             //Split the description into description and deadline
             String[] descriptionSplitArray = taskDescription.split("/by");
-            LocalDate deadlineDate = this.parseDate(descriptionSplitArray[1].trim());
-
-            //Create Deadline task
             try {
+                LocalDate deadlineDate = this.parseDate(descriptionSplitArray[1].trim());
+
+                //Create Deadline task
                 DeadlineTask newTask = new DeadlineTask(descriptionSplitArray[0].trim(),
                         deadlineDate, this.parseIsDoneInt(isDone));
                 this.taskManagement.addTask(newTask);
@@ -161,10 +161,10 @@ public class TaskParser {
         } else {
             //Split the description into description and event
             String[] descriptionSplitArray = taskDescription.split("/at");
-            LocalDate eventDate = this.parseDate(descriptionSplitArray[1].trim());
-
-            //Create Event task
             try {
+                LocalDate eventDate = this.parseDate(descriptionSplitArray[1].trim());
+
+                //Create Event task
                 EventTask newTask = new EventTask(descriptionSplitArray[0].trim(),
                         eventDate, this.parseIsDoneInt(isDone));
                 this.taskManagement.addTask(newTask);
@@ -172,11 +172,46 @@ public class TaskParser {
             } catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur
                 throw new ArrayIndexOutOfBoundsException("Wrong formatting. Did you forget to put '/at'? Not stonks!");
             }
+
         }
     }
 
     private boolean checkInvalidTaskNumber(int taskNumber) {
         return ((taskNumber <= 0) || (taskNumber > this.taskManagement.getTaskList().size()));
+    }
+
+    /**
+     * Edits the description of a task.
+     * @param rawDescription A raw user input with both task number and new description.
+     * @return Pair of "editDescript" string and the edited task.
+     */
+    public Pair<String, Task> editDescription(String rawDescription) {
+        if (rawDescription.isEmpty()) {
+            throw new NoSuchElementException("Did you forget to add the task number and new description? Not stonks!");
+        } else {
+            //Split the description into task number and description
+            String[] descriptionSplitArray = rawDescription.split("/edit");
+            try {
+                int taskNumber = Integer.valueOf(descriptionSplitArray[0].trim());
+                String newDescription = descriptionSplitArray[1].trim();
+                //Edit task description
+                if (this.checkInvalidTaskNumber(taskNumber)) {
+                    throw new IllegalArgumentException("Invalid task number. Not stonks!");
+                } else if (newDescription.isEmpty()) {
+                    throw new IllegalArgumentException("No description provided for editing. Not stonks!");
+                } else {
+                    Task editedTask = this.taskManagement.editDescription(taskNumber, newDescription);
+                    return new Pair<String, Task>("editDescript", editedTask);
+                }
+            } catch (NumberFormatException e) { //Can happen if clean split does not occur.
+                throw new NumberFormatException(
+                        "Task number not parsed. Did you forget to put '/edit'? Or did you not put a number? Not stonks!");
+            }
+            catch (ArrayIndexOutOfBoundsException e) { //Happens if split does not occur.
+                throw new ArrayIndexOutOfBoundsException(
+                        "Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!");
+            }
+        }
     }
 
     /**

@@ -72,6 +72,11 @@ public class SurrealChat {
                     this.taskParser.parseUserTaskInput(userCommand, description);
             this.userOutput.printOutput(taskPair);
             break;
+        case "edit":
+            description = this.userInput.getInputDescription(); //Get raw form
+            Pair<String, Task> editPair = this.taskParser.editDescription(description);
+            this.userOutput.printOutput(editPair);
+            break;
         case "done":
             description = this.userInput.getInputDescription(); //Get raw form
             int taskNumber = this.userInput.getInputNumber(description); //Process to obtain int

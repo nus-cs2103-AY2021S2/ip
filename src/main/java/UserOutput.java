@@ -65,8 +65,16 @@ public class UserOutput {
             } else {
                 throw new ClassCastException("Invalid class casting. Not stonks!");
             }
-        case "markDone":
+        case "editDescript":
             Task task;
+            if (pair.getSecondItem() instanceof Task) {
+                task = (Task)pair.getSecondItem();
+                this.printEditDescription(task);
+                break;
+            } else {
+                throw new ClassCastException("Invalid class casting. Not stonks!");
+            }
+        case "markDone":
             if (pair.getSecondItem() instanceof Task) {
                 task = (Task)pair.getSecondItem();
                 this.printTaskDone(task);
@@ -157,6 +165,11 @@ public class UserOutput {
         String printTaskType = this.spellTaskType(taskType);
         System.out.printf("Meme Man has added %s task: %s\n", printTaskType, task);
         System.out.printf("Total number of tasks: %d\n\n", total);
+    }
+
+    private void printEditDescription(Task editTask) {
+        System.out.println("You have edited a task description to this:");
+        System.out.println(editTask.getDescription() + "\n");
     }
 
     private void printTaskDone(Task doneTask) {

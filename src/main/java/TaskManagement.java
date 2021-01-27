@@ -33,13 +33,24 @@ public class TaskManagement {
     }
 
     /**
+     * Changes the description of a task designated by a number.
+     * @param taskNumber Position number of task (starting from 1) to be edited.
+     * @param newDescription New description of the task.
+     * @return Task that has been edited.
+     */
+    public Task editDescription(int taskNumber, String newDescription) {
+        Task editedTask = this.taskList.get(taskNumber - 1).editDescription(newDescription);
+        this.taskList.set(taskNumber - 1, editedTask);
+        return editedTask;
+    }
+
+    /**
      * Marks a task designated by number as done.
      * @param taskNumber Position number of task (starting from 1) to be marked as done.
      * @return Task that has been marked as done.
      */
     public Task markAsDone(int taskNumber) {
-        Task doneTask = this.taskList.get(taskNumber - 1);
-        doneTask.markAsDone();
+        Task doneTask = this.taskList.get(taskNumber - 1).markAsDone();
         this.taskList.set(taskNumber - 1, doneTask);
         return doneTask;
     }
@@ -50,8 +61,7 @@ public class TaskManagement {
      * @return Task that has been marked as undone.
      */
     public Task markAsUndone(int taskNumber) {
-        Task undoneTask = this.taskList.get(taskNumber - 1);
-        undoneTask.markAsUndone();
+        Task undoneTask = this.taskList.get(taskNumber - 1).markAsUndone();
         this.taskList.set(taskNumber - 1, undoneTask);
         return undoneTask;
     }

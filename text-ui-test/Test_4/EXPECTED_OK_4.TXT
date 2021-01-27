@@ -1,0 +1,98 @@
+I am Meme Man. Whoms't be entering the VIMension?
+I speak a lot. For I am verbose!
+
+Total number of tasks loaded from file: 0
+
+Meme Man has added todo task: [T][?] Watch CS2103T lecture
+Total number of tasks: 1
+
+I print the tasks:
+1. [T][?] Watch CS2103T lecture
+Hmmst've... Stonks
+
+Meme Man has added deadline task: [D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+Total number of tasks: 2
+
+Meme Man has added deadline task: [D][?] Do CS2103T ip (by: 2021-01-01)
+Total number of tasks: 3
+
+Meme Man has added event task: [E][?] Attend CS2101 class (at: 2021-01-01)
+Total number of tasks: 4
+
+I print the tasks:
+1. [T][?] Watch CS2103T lecture
+2. [D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+3. [D][?] Do CS2103T ip (by: 2021-01-01)
+4. [E][?] Attend CS2101 class (at: 2021-01-01)
+Hmmst've... Stonks
+
+Stonks! You've done this task:
+Watch CS2103T lecture
+
+Stonks! You've done this task:
+Do CS2103T lecture quiz
+
+I print the tasks:
+1. [T][?] Watch CS2103T lecture
+2. [D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+3. [D][?] Do CS2103T ip (by: 2021-01-01)
+4. [E][?] Attend CS2101 class (at: 2021-01-01)
+Hmmst've... Stonks
+
+Not stonks! This task has been marked as undone:
+Watch CS2103T lecture
+
+Not stonks! This task has been marked as undone:
+Do CS2103T lecture quiz
+
+I print the tasks:
+1. [T][?] Watch CS2103T lecture
+2. [D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+3. [D][?] Do CS2103T ip (by: 2021-01-01)
+4. [E][?] Attend CS2101 class (at: 2021-01-01)
+Hmmst've... Stonks
+
+Stonks! You've done this task:
+Watch CS2103T lecture
+
+Stonks! You've done this task:
+Do CS2103T lecture quiz
+
+Stonks! You've done this task:
+Do CS2103T ip
+
+Stonks! You've done this task:
+Attend CS2101 class
+
+I print the tasks:
+1. [T][?] Watch CS2103T lecture
+2. [D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+3. [D][?] Do CS2103T ip (by: 2021-01-01)
+4. [E][?] Attend CS2101 class (at: 2021-01-01)
+Hmmst've... Stonks
+
+Here are my search results:
+1. [E][?] Attend CS2101 class (at: 2021-01-01)
+Hmmst've... Stonks
+
+You have edited a task description to this:
+Do CS2103T optional ip tasks
+
+This task has been deleted:
+[E][?] Attend CS2101 class (at: 2021-01-01)
+Total number of tasks: 3
+
+This task has been deleted:
+[D][?] Do CS2103T ip (by: 2021-01-01)
+Total number of tasks: 2
+
+This task has been deleted:
+[D][?] Do CS2103T lecture quiz (by: 2021-01-01)
+Total number of tasks: 1
+
+This task has been deleted:
+[T][?] Do CS2103T optional ip tasks
+Total number of tasks: 0
+
+Saving tasks now...
+You have been EJECTED!
