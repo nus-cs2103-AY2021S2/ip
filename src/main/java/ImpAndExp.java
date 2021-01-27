@@ -45,8 +45,8 @@ public class ImpAndExp {
 
     public void exportData() throws IOException {
         FileWriter fw = new FileWriter("data/savedList.txt");
-        for (int i = 0; i < storage.size(); i++) {
-            fw.write(storage.get(i).export());
+        for (Task task : storage) {
+            fw.write(task.export());
             fw.write(System.lineSeparator());
         }
         fw.close();
