@@ -11,7 +11,7 @@ public class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
-    // todo rm
+    // todo diff from addTask
     public void add(Task t) {
         this.taskArrayList.add(t);
     }
@@ -115,5 +115,13 @@ public class TaskList {
 
 
 
-
+    public void findTasks(String s) {
+        TaskList filtered = new TaskList();
+        for (Task t : taskArrayList) {
+            if (t.description.contains(s)) {
+                filtered.add(t);
+            }
+        }
+        Ui.printTaskList(filtered);
+    }
 }
