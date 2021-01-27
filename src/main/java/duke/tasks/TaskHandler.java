@@ -76,6 +76,23 @@ public class TaskHandler {
         Ui.showLine();
     }
 
+    public static void listTasksWithMessage(ArrayList<Task> taskList, String message) {
+        Ui.showLine();
+
+        if (taskList.isEmpty()) {
+            Ui.showMessageWithIndentation("You have not added any tasks yet.");
+        } else {
+            Ui.showMessageWithIndentation(message);
+        }
+
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            Ui.showMessageWithIndentation(index + ". " + taskList.get(i).toString());
+        }
+
+        Ui.showLine();
+    }
+
     public static void doneTask(String input, ArrayList<Task> taskList) {
         int index = Integer.parseInt(input) - 1;
         Task task = taskList.get(index);
@@ -90,5 +107,24 @@ public class TaskHandler {
         Integer numberOfTasks = taskList.size();
 
         Ui.showTaskDeletedText(task.toString(), numberOfTasks);
+    }
+
+    public static void findTasks(String query, ArrayList<Task> taskList) {
+        int size = taskList.size();
+        ArrayList<Task> itemsFound = new ArrayList<>();
+
+        for(int i = 0; i < size; i++) {
+            if(taskList.get(i).description.contains(query)) {
+                Task task = taskList.get(i);
+                itemsFound.add(task);
+            }
+        }
+
+        if (itemsFound.size() > 0) {
+            listTasksWithMessage(itemsFound, "Here are the matching tasks in your list:");
+        } else {
+            Ui.showMessageBetweenLines("There are no matching tasks in your list.");
+        }
+
     }
 }
