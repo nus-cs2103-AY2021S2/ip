@@ -34,6 +34,11 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    public LocalDate changeDeadline(LocalDate deadline){
+        this.deadline = deadline;
+        return this.deadline;
+    }
+
     /**
      * Overrides Task's toString method.
      * @return String output for the deadline.

@@ -21,6 +21,11 @@ public class Event extends Task {
         return this.timeslot;
     }
 
+    public String changeTimeslot(String timeslot){
+        this.timeslot = timeslot;
+        return this.timeslot;
+    }
+
     /**
      * Overrides Task's toString method.
      * @return String output for the event.
