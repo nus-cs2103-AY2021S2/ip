@@ -25,7 +25,6 @@ public class Duke {
                 if(current.contains("todo")) {
                     Task task = Todo.readTask(current);
                     list.add(task);
-    
                 } else if (current.contains("deadline")) {
                     list.add(Deadline.readTask(current));
                 } else if (current.contains("event")) {
