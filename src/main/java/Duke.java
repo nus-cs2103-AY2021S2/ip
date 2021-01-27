@@ -3,6 +3,11 @@ import Exceptions.InvalidDateException;
 import Exceptions.InvalidInputException;
 import Exceptions.InvalidTaskNumberException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +17,7 @@ public class Duke {
     final static String horzLine = "    _________________________________________________";
     static List<Task> list = new ArrayList<>();
     static boolean exit = false;
+    static String filePath = "./data/duke.txt";
 
     public static void welcome() {
         String logo = " ____        _        \n"
@@ -59,11 +65,11 @@ public class Duke {
 
             if (taskNumber >= 0 && taskNumber <= list.size() - 1) {
                 list.get(taskNumber).markAsDone();
+                overWriteFile(filePath, list);
                 System.out.println(horzLine
                         + "\n     Nice! I've marked this task as done:\n"
                         + "        " + list.get(taskNumber) + "\n"
                         + horzLine);
-
                 checker = true;
             }
         }
@@ -79,6 +85,8 @@ public class Duke {
         Task newTask;
         StringTokenizer token = new StringTokenizer(userInput);
         int numWord = token.countTokens();
+        String taskName;
+        String taskDate;
 
         if (numWord == 1) {
             throw new EmptyDescriptionException(horzLine
@@ -89,7 +97,8 @@ public class Duke {
         }
 
         if (userInput.startsWith("todo")) {
-            newTask = new ToDo(userInput.substring(5));
+            taskName = userInput.substring(5);
+            newTask = new ToDo(taskName);
         } else {
             int index = userInput.indexOf('/');
 
@@ -99,16 +108,21 @@ public class Duke {
                         + horzLine);
             } else {
                 if (userInput.startsWith("deadline")) {
-                    newTask = new Deadline(userInput.substring(9, index),
-                            userInput.substring(index + 4));
+                    taskName = userInput.substring(9, index);
+                    taskDate = userInput.substring(index + 4);
+
+                    newTask = new Deadline(taskName, taskDate);
                 } else {
-                    newTask = new Event(userInput.substring(6, index),
-                            userInput.substring(index + 4));
+                    taskName = userInput.substring(6, index);
+                    taskDate =  userInput.substring(index + 4);
+
+                    newTask = new Event(taskName, taskDate);
                 }
             }
         }
 
         list.add(newTask);
+        overWriteFile(filePath, list);
         System.out.println(horzLine
                 + "\n      Got it. I've added this task:\n"
                 + "            " + newTask + "\n"
@@ -131,6 +145,7 @@ public class Duke {
                         + "\n     Now you have " + (list.size() - 1) + " tasks in the list.\n"
                         + horzLine);
                 list.remove(taskNumber);
+                overWriteFile(filePath, list);
                 checker = true;
             }
         }
@@ -142,9 +157,90 @@ public class Duke {
         }
     }
 
+    //When Duke startup, read file content & input into a list.
+    public static void readFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        Task task;
+        String taskDescription;
+        String taskDate;
+
+        while (s.hasNextLine()) {
+            String taskString = s.nextLine();
+            String taskDone = taskString.substring(4, 5);
+            int indexOfDivider = taskString.indexOf('|', 8);
+
+            if (taskString.startsWith("T")) {
+                taskDescription = taskString.substring(8);
+                task = new ToDo(taskDescription);
+
+            } else {
+                taskDescription = taskString.substring(8, indexOfDivider - 1);
+                taskDate = taskString.substring(indexOfDivider + 2);
+
+                if (taskString.startsWith("D")) {
+                    task = new Deadline(taskDescription, taskDate);
+                } else {
+                    task = new Event(taskDescription, taskDate);
+                }
+            }
+
+            if (taskDone.equals("1")) {
+                task.markAsDone();
+            }
+
+            list.add(task);
+        }
+    }
+
+    public static void overWriteFile(String filePath, List<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+
+            for (Task task : list) {
+                boolean done = task.isDone;
+                String doneString = "0";
+                String taskDescription = task.description;
+                String taskDate;
+
+                if (done) {
+                    doneString = "1";
+                }
+
+                if (task.taskType.equals("ToDo")) {
+                    fw.write("T | " + doneString + " | " + taskDescription + "\n");
+                } else {
+                    taskDate = task.getTaskDate();
+
+                    if (task.taskType.equals("Deadline")) {
+                        fw.write("D | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");
+                    } else {
+                        fw.write("E | " + doneString + " | " + taskDescription + "| " + taskDate + "\n");
+                    }
+                }
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        File file = new File (filePath);
         welcome();
+
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            } else {
+                readFileContents(filePath);
+            }
+        } catch (IOException ex) {
+            System.out.println("     ☹ OOPS!!! Error creating the folder. " +
+                    "Please create a data folder before trying again!");
+        }
 
         while (!exit) {
             try {

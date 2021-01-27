@@ -4,6 +4,12 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        this.taskType = "Deadline";
+    }
+
+    @Override
+    public String getTaskDate() {
+        return this.by;
     }
 
     @Override
