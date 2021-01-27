@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.lang.Integer.parseInt;
 
-
 public class Duke {
     public static void main(String[] args) throws FileNotFoundException {
         String logo = " ____        _        \n"
@@ -69,6 +68,7 @@ public class Duke {
                 default :
                     addError();
             }
+
             cmd = sc.nextLine();
             pre = cmd.split("\\s+");
         }
@@ -112,6 +112,59 @@ public class Duke {
     private static void addError() {
         System.out.println("Command not understood");
     }
+
+    private static void addToDo(ArrayList<Task> tasks, String[] pre) {
+        String s = "";
+        for (int i = 1; i < pre.length; i++) {
+            s = s + pre[i] + " ";
+        }
+        if (!s.equals("")) {
+            tasks.add(new Todo(s,false));
+            System.out.println("Got it. I've added this task:");
+            System.out.println(tasks.get(tasks.size() - 1));
+            printTotalTasks(tasks.size());
+        }
+        else {
+            System.out.println("Please add a description for todo.");
+        }
+    }
+
+    private static void addEvent(ArrayList<Task> tasks, String cmd) {
+        String[] pre2 = cmd.split("/at");
+        try {
+            String s = pre2[0];
+            String t = pre2[1];
+            System.out.println("Got it. I've added this task:");
+            tasks.add(new Event(s, false, t));
+            System.out.println(tasks.get(tasks.size() - 1));
+            printTotalTasks(tasks.size());
+        }
+        catch (ArrayIndexOutOfBoundsException  e){
+            System.out.println("Please enter a description for event");
+        }
+    }
+
+    private static void addDeadline(ArrayList<Task> tasks, String cmd) {
+        String[] pre2 = cmd.split("/by");
+        try {
+            String s = pre2[0];
+            String t = pre2[1];
+            System.out.println("Got it. I've added this task:");
+            tasks.add(new Deadline(s, false, t));
+            System.out.println(tasks.get(tasks.size() - 1));
+            printTotalTasks(tasks.size());
+        }
+        catch (ArrayIndexOutOfBoundsException  e){
+            System.out.println("Please enter a description for deadline");
+        }
+    }
+
+    private static void printTasks(ArrayList<Task> tasks) {
+        System.out.println("Here are the tasks in your list:\n");
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println(i + ". " + tasks.get(i-1));
+        }
+
 
     private static void addToDo(ArrayList<Task> tasks, String[] pre) {
         String s = "";

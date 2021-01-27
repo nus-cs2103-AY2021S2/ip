@@ -15,10 +15,10 @@ public class Event extends Task{
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[E][X] " + this.name + "(" + this.time + ")";
+            return "[E][X] " + this.name + "(" + this.time + " )";
         }
         else{
-            return "[E][_] " + this.name + "(" + this.time + ")";
+            return "[E][ ] " + this.name + "(" + this.time + " )";
         }
     }
 }

@@ -15,10 +15,10 @@ public class Deadline extends Task{
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[D][X] " + this.getName() + "(" + this.getDeadline() + ")";
+            return "[D][X] " + this.getName() + "(" + this.getDeadline() + " )";
         }
         else{
-            return "[D][_] "  + this.getName() + "(" + this.getDeadline() + ")";
+            return "[D][ ] "  + this.getName() + "(" + this.getDeadline() + " )";
         }
     }
 }
