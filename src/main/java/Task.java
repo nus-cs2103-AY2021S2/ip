@@ -1,15 +1,15 @@
 public class Task {
     protected final String task;
-    protected final boolean done;
+    protected final boolean isDone;
 
     Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
-    Task(String task, boolean done) {
+    Task(String task, boolean isDone) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public Task finishTask() {
@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return "1|" + this.task;
         }
         return "0|" + this.task;
@@ -26,7 +26,7 @@ public class Task {
     @Override
     public String toString() {
         String tick = " ";
-        if (this.done){
+        if (this.isDone){
             tick = "X";
         }
         return "[" + tick + "]" + " " + this.task;

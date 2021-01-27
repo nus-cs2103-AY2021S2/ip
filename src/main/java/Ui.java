@@ -1,5 +1,6 @@
 public class Ui {
-    static final String LINE_AFTER_COMMAND = "____________________________________________________________";
+    static final String LINE_AFTER_COMMAND = "___________________________________" +
+            "_________________________";
 
     public static void showMessage(String message) {
         System.out.println(message);
@@ -22,7 +23,8 @@ public class Ui {
     }
 
     public static void doBye() {
-        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n" + LINE_AFTER_COMMAND + "\n");
+        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n"
+                + LINE_AFTER_COMMAND + "\n");
     }
 
     public static void printLine() {

@@ -64,14 +64,13 @@ public class Duke {
         }
     }
 
-    public static Task processTask(String command, String description, String deadline) throws DukeException, DukeExceptionDeadline{
+    public static Task processTask(String command, String description, String deadline)
+            throws DukeException, DukeExceptionDeadline {
         if (command.equals("todo")) {
             return new Todo(description);
-        }
-        else if (command.equals("deadline")) {
+        } else if (command.equals("deadline")) {
             return new Deadline(description, deadline);
-        }
-        else if (command.equals("event")) {
+        } else if (command.equals("event")) {
             return new Event(description, deadline);
         }
         throw new DukeException("Invalid Command");
