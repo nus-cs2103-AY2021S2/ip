@@ -124,6 +124,7 @@ public class DukeStorage {
             content.append("\n");
         }
         FileWriter fw = new FileWriter(this.fileName);
+        if (content.length() == 0) return;
         fw.write(content.substring(0, content.toString().length() - 1));
         fw.close();
     }
