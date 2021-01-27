@@ -49,7 +49,8 @@ public abstract class Task {
      * @return String completion icon.
      */
     protected String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); //return [X] or [ ] symbols
+        //return [X] or [ ] symbols
+        return (isDone ? "[X]" : "[ ]");
     }
 
     /**

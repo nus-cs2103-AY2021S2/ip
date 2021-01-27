@@ -1,6 +1,4 @@
 package tlylt.haha;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Representation of a deadline task.

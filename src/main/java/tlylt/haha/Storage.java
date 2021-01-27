@@ -20,14 +20,13 @@ public class Storage {
         try {
             String currentDir = System.getProperty("user.dir");
             Path folder = Paths.get(currentDir, "Haha_data");
-            Path file = Paths.get(currentDir, "Haha_data", "database.txt");
+            this.file = Paths.get(currentDir, "Haha_data", "database.txt");
             if (Files.notExists(folder)) {
                 Files.createDirectories(folder);
             }
             if (Files.notExists(file)) {
                 Files.createFile(file);
             }
-            this.file = file;
         } catch (IOException e) {
             e.printStackTrace();
         }

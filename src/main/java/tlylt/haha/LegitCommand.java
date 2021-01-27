@@ -22,7 +22,7 @@ public enum LegitCommand {
     LegitCommand(String rep) {
         this.rep = rep;
     }
-
+    
     /**
      * Setter for command detail. This will include information like
      * the task number for "done" command.

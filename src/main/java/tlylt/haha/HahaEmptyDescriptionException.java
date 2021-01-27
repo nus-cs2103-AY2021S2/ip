@@ -10,7 +10,7 @@ public class HahaEmptyDescriptionException extends HahaException {
 
     @Override
     public String toString() {
-        return "OOPS!!! The description of a " + getCommand() +
-                " cannot be empty.";
+        return "OOPS!!! The description of a " + getCommand()
+                + " cannot be empty.";
     }
 }

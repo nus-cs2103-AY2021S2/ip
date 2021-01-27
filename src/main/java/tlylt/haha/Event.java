@@ -1,5 +1,4 @@
 package tlylt.haha;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Representation of a Event task.
