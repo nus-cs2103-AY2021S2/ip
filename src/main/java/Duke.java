@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -6,20 +5,21 @@ import java.util.stream.Collectors;
 public class Duke {
     private final Ui ui;
     private final Storage storage;
-    private final List<Task> tasks;
+    private final TaskList tasks;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new ArrayList<>();
-        final List<String> lines = storage.loadFile();
+        final List<String> lines = storage.loadFile(); //TODO: Change to return List<Task>
         if (lines == null) { // No files exist or file is corrupted
+            tasks = new TaskList();
             storage.createDirectoryAndFile();
         } else { // File may contains bad data: for now we ignore them
-            tasks.addAll(lines.stream()
+            List<Task> t = lines.stream()
                     .map(str -> parseStringToTask(str))
                     .filter(task -> task != null)
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList());
+            tasks = new TaskList(t);
         }
     }
 
@@ -34,9 +34,7 @@ public class Duke {
 
             if (input.toLowerCase().equals("bye")) {
                 // save file
-                final List<String> data = tasks.stream()
-                        .map(task -> encodeTaskToString(task))
-                        .filter(str -> str != null).collect(Collectors.toList());
+                final List<String> data = tasks.encode();
                 storage.saveFile(data);
 
                 System.out.println("\tBye. Hope to see you again soon!");
@@ -102,18 +100,14 @@ public class Duke {
         }
     }
 
-    private static String encodeTaskToString(Task task) {
-        return task.encode();
-    }
-
-    private static void deleteTask(List<Task> tasks, String input) {
+    private static void deleteTask(TaskList tasks, String input) {
         final String[] splitOnSpace = input.split(" ", 2);
 
         if (splitOnSpace.length == 2 && !splitOnSpace[1].strip().equals("")) {
             try {
                 final int index = Integer.parseInt(splitOnSpace[1].strip()) - 1;
                 if (0 <= index && index < tasks.size()) {
-                    final Task removed = tasks.remove(index);
+                    final Task removed = tasks.delete(index);
                     System.out.println("\tNoted. I've removed this task: ");
                     System.out.printf("\t%s\n", removed);
                     System.out.printf("\tNow you have %d task%s in the list.\n", tasks.size(),
@@ -129,7 +123,7 @@ public class Duke {
         }
     }
 
-    private static void addTaskToList(List<Task> tasks, String command, String input) {
+    private static void addTaskToList(TaskList tasks, String command, String input) {
         boolean isInsert = false;
         if (tasks.size() >= 100) {
             System.out.println("\tSorry. The database is full!");
@@ -197,21 +191,21 @@ public class Duke {
 
         if (isInsert) {
             System.out.println("\tGot it. I've added this task: ");
-            System.out.printf("\tTask added: %s\n", tasks.get(tasks.size() - 1));
+            System.out.printf("\tTask added: %s\n", tasks.getTaskDescription(tasks.size() - 1));
             System.out.printf("\tNow you have %d task%s in the list.\n", tasks.size(), tasks.size() == 1 ? "" : "s");
         }
     }
 
-    private static void markTaskAsDone(List<Task> tasks, String input) {
+    private static void markTaskAsDone(TaskList tasks, String input) {
         final String[] splitOnSpace = input.split(" ", 2);
 
         if (splitOnSpace.length == 2 && !splitOnSpace[1].strip().equals("")) {
             try {
                 final int index = Integer.parseInt(splitOnSpace[1].strip()) - 1;
                 if (0 <= index && index < tasks.size()) {
-                    tasks.get(index).markAsDone();
+                    tasks.markAsDone(index);
                     System.out.println("\tNice! I've marked this task as done:");
-                    System.out.printf("\t%s\n", tasks.get(index));
+                    System.out.printf("\t%s\n", tasks.getTaskDescription(index));
                 } else {
                     System.out.println("\tOops! The index is out of bound.");
                 }
@@ -223,15 +217,12 @@ public class Duke {
         }
     }
 
-    private static void listTasks(List<Task> tasks) {
+    private static void listTasks(TaskList tasks) {
         if (tasks.size() == 0) {
             System.out.println("\tHmm... You do not have any tasks!");
         } else {
             System.out.println("\tHere are the tasks in your list:");
         }
-        int i = 0;
-        for (final Task t : tasks) {
-            System.out.printf("\t%d. %s\n", ++i, t);
-        }
+        tasks.list();
     }
 }
