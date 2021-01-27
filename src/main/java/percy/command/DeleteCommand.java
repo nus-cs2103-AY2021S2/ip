@@ -3,7 +3,9 @@ package percy.command;
 import percy.task.Task;
 import percy.task.TaskList;
 import percy.ui.UserInterface;
+import percy.storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
@@ -24,9 +26,10 @@ public class DeleteCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList) { // Is task list Immutable?
+    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
         Task deleteTask = taskList.getTaskList().get(taskNum - 1);
         taskList.deleteTaskFromList(deleteTask);
+        storage.save(taskList);
         return UserInterface.makeDeleteMsg(deleteTask, taskList);
     }
 }

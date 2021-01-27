@@ -1,3 +1,9 @@
 todo return book
 list
+todo
+blah
+done 1
+deadline return book /by Sunday
+event project meeting /at Mon 2-4pm
+list
 bye

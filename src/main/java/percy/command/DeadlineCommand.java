@@ -1,9 +1,13 @@
 package percy.command;
 
+import percy.exception.NoDescriptionException;
 import percy.ui.UserInterface;
 import percy.task.Deadline;
 import percy.task.Task;
 import percy.task.TaskList;
+import percy.storage.Storage;
+
+import java.io.IOException;
 
 public class DeadlineCommand extends Command {
     private String deadlineDescription;
@@ -24,10 +28,19 @@ public class DeadlineCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList) { // Is task list Immutable?
+    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
+        try {
+            if (deadlineDescription.isEmpty()) {
+                throw new NoDescriptionException("deadline");
+            }
+        } catch(NoDescriptionException ex) {
+            UserInterface.makeMsg(ex.toString());
+        }
+
         Task deadlineTask = new Deadline(deadlineDescription, date);
 
         taskList.addTaskToList(deadlineTask);
+        storage.save(taskList);
         return UserInterface.makeAddMsg(deadlineTask, taskList);
     }
 }

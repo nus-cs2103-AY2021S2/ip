@@ -1,5 +1,7 @@
 package percy.command;
 
+import percy.exception.PercyException;
+
 public class Parser {
     public static String fullCmd;
 
@@ -22,6 +24,8 @@ public class Parser {
             return new ListCommand();
         case "delete":
             return new DeleteCommand(this.getTaskNumber());
+        case "bye":
+            return new ByeCommand();
         default:
             return new UnknownCommand();
         }
@@ -60,6 +64,11 @@ public class Parser {
 
     public static String getDeadlineDescription() { // same as EventDescription
         String[] splitCommand = fullCmd.split(" ", 2);
+        /*
+        if (splitCommand.length < 2) { // no description
+
+        }
+         */
         String description = splitCommand[1]
                 .substring(0, splitCommand[1].indexOf("/"))
                 .trim();

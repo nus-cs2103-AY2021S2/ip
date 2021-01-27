@@ -3,6 +3,7 @@ package percy.command;
 import percy.task.Task;
 import percy.task.TaskList;
 import percy.ui.UserInterface;
+import percy.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class ListCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList, Storage storage) {
         return UserInterface.makeListMsg(taskList);
     }
 }

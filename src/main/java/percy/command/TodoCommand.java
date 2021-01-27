@@ -2,13 +2,12 @@ package percy.command;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-
-import percy.exception.TodoException;
+import percy.exception.NoDescriptionException;
 import percy.task.Task;
 import percy.task.TaskList;
 import percy.task.Todo;
 import percy.ui.UserInterface;
+import percy.storage.Storage;
 
 public class TodoCommand extends Command {
     private String todoDescription;
@@ -29,16 +28,17 @@ public class TodoCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList) { // Is task list Immutable?
+    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
         try {
             if (todoDescription.isEmpty()) {
-                throw new TodoException();
+                throw new NoDescriptionException("todo");
             }
-        } catch(TodoException ex){
+        } catch(NoDescriptionException ex){
             return UserInterface.makeMsg(ex.toString());
         }
         Task todo = new Todo(todoDescription);
         taskList.addTaskToList(todo);
+        storage.save(taskList);
         return UserInterface.makeAddMsg(todo, taskList);
     }
 }

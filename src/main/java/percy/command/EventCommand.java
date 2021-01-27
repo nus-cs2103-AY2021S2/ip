@@ -5,6 +5,9 @@ import percy.task.TaskList;
 
 import percy.task.Event;
 import percy.ui.UserInterface;
+import percy.storage.Storage;
+
+import java.io.IOException;
 
 public class EventCommand extends Command {
     private String eventDescription;
@@ -26,10 +29,11 @@ public class EventCommand extends Command {
      *
      * @param taskList The TaskList from the main Duke object.
      */
-    public String execute(TaskList taskList) { // Is task list Immutable?
+    public String execute(TaskList taskList, Storage storage) throws IOException { // Is task list Immutable?
         Task event = new Event(eventDescription, date);
 
         taskList.addTaskToList(event);
+        storage.save(taskList);
         return UserInterface.makeAddMsg(event, taskList);
     }
 }

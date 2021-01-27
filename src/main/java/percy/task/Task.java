@@ -24,6 +24,9 @@ public class Task {
     }
      */
 
+    public String getStatusNumber() {
+        return (isDone ? "1" : "0");
+    }
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : " "); //return tick or X symbols
@@ -31,6 +34,10 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String formatToFile() {
+        return this.getStatusNumber() + " | " + description;
     }
 
     @Override
