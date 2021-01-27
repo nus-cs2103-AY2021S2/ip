@@ -4,6 +4,7 @@ package duke.exceptions;
  * Represents an exception thrown when an invalid input follows after a command.
  */
 public class InvalidOptionException extends DukeException {
+
     private String message;
     private final String INDENTATION = "    ";
 

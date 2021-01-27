@@ -8,6 +8,7 @@ import java.time.LocalDate;
  * Represents a Task with a Deadline.
  */
 public class Deadline extends Task {
+
     protected LocalDate by;
 
     /**

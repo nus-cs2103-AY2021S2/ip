@@ -2,7 +2,6 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.util.Storage;
-
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -12,6 +11,7 @@ import java.io.IOException;
  * The Apollo bot handling Storage, TaskList and Ui.
  */
 public class Apollo {
+
     private static final String BOT_NAME = "Apollo the Robot";
     private static final String STORAGE_PATH = "data/ApolloTaskData.txt";
     private TaskList taskList;

@@ -2,10 +2,8 @@ package duke.tasks;
 
 import duke.ui.Ui;
 import duke.enums.Commands;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
-
 import duke.util.DateFormatter;
 
 import java.time.LocalDate;
