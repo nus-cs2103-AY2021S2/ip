@@ -98,6 +98,8 @@ public class Duke {
                 } catch (DukeException ex) {
                     ui.printFormatted(ex.getMessage());
                 }
+            } else if (request.equals("find")) {
+                ui.printFound(tasks.findTask(args));
             } else {
                 try {
                     throwDK();

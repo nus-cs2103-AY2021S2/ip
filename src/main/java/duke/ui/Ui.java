@@ -100,4 +100,16 @@ public class Ui {
         msg += "  " + task;
         printFormatted(msg);
     }
+
+    public void printFound(TaskList tasks) {
+        LinkedList<Task> lst = tasks.getList();
+        String msg = "Here are the matching tasks in your list:\n";
+        for (int i = 1; i <= lst.size(); i++) {
+            msg += i + ". " + lst.get(i - 1);
+            if (i < lst.size()) {
+                msg += "\n";
+            }
+        }
+        printFormatted(msg);
+    }
 }
