@@ -7,7 +7,7 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
-    public String saveTask() { return "T | " + super.saveTask(); }
+    protected String saveTask() { return "T | " + super.saveTask(); }
 
     /**
      * Converts this object to a string that represents the todo-task

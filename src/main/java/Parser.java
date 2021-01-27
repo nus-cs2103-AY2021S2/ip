@@ -11,7 +11,7 @@ public class Parser {
      * Processes a command given by user.
      * @param userInput Command from user
      */
-    public void processCommand(String userInput) {
+    protected void processCommand(String userInput) {
         if ("list".equals(userInput)) {
             printList();
         } else if (userInput.startsWith("done ")) {
@@ -28,7 +28,7 @@ public class Parser {
             }
         } else {
             try {
-                addTask(userInput, false);
+                addTaskToList(userInput, false);
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
@@ -40,7 +40,7 @@ public class Parser {
      * @param userInput Takes in command from user in the format: done &lt;indexOfItem&gt;
      * @throws DukeException Throws error if the indexOfItem given is invalid
      */
-    public void setAsDone(String userInput) throws DukeException {
+    protected void setAsDone(String userInput) throws DukeException {
         try {
             int indexToMark = Integer.parseInt(userInput.substring(5));
             Task ts = tasks.getTask(indexToMark);
@@ -58,7 +58,7 @@ public class Parser {
      * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
      * @throws DukeException Throws error if the indexOfItem given is invalid
      */
-    public void deleteFromList(String userInput) throws DukeException {
+    protected void deleteFromList(String userInput) throws DukeException {
         try {
             int indexToDelete = Integer.parseInt(userInput.substring(7));
             Task ts = tasks.getTask(indexToDelete);
@@ -81,7 +81,7 @@ public class Parser {
      * @param isDone True if task to be added is done, else false.
      * @throws DukeException Throws error if the keyword or format is wrong.
      */
-    public void addTask(String userInput, boolean isDone) throws DukeException {
+    protected void addTaskToList(String userInput, boolean isDone) throws DukeException {
         if (userInput.startsWith("todo ")) {
             String[] splits = userInput.split("todo ");
             if (splits.length == 2) {
@@ -126,7 +126,7 @@ public class Parser {
     /**
      * Prints out the list of all events.
      */
-    public void printList() {
+    protected void printList() {
         System.out.println("Here are the tasks in your list:");
         System.out.println(tasks.toString());
         System.out.println("-----------------------------------------------------");

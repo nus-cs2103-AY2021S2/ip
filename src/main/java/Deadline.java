@@ -24,7 +24,7 @@ public class Deadline extends Task {
         }
     }
 
-    public String saveTask() { return "D | " + super.saveTask() + " | " + this.by; }
+    protected String saveTask() { return "D | " + super.saveTask() + " | " + this.by; }
 
     /**
      * Converts this object to a string that represents the deadline-task

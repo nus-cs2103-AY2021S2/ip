@@ -23,7 +23,7 @@ public class Event extends Task {
         }
     }
 
-    public String saveTask() { return "E | " + super.saveTask() + " | " + this.at; }
+    protected String saveTask() { return "E | " + super.saveTask() + " | " + this.at; }
 
     /**
      * Converts this object to a string that represents the event-task

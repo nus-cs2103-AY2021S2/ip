@@ -9,14 +9,14 @@ public class Ui {
         System.out.println("-----------------------------------------------------");
     }
 
-    public String nextInput() {
+    protected String nextInput() {
         System.out.println("Enter an input ('bye' to quit): ");
         String userInput = sc.nextLine();
         System.out.println("User Input: " + userInput);
         return userInput;
     }
 
-    public void close() {
+    protected void close() {
         System.out.println("Duke: Bye, hope to see you again! :)");
         System.out.println("-----------------------------------------------------");
     }

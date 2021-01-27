@@ -22,7 +22,7 @@ public class Task {
      * Checks whether the task is done or not.
      * @return String representing a tick if the task is done, else a String of a space
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         if (isDone) {
             return ("\u2713"); //return tick
         } else {
@@ -33,11 +33,11 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markAsDone() {
+    protected void markAsDone() {
         this.isDone = true;
     }
 
-    public String saveTask() {
+    protected String saveTask() {
         int done = isDone ? 1 : 0;
         return done + " | " + this.description;
     }
