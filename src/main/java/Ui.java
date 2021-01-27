@@ -30,22 +30,28 @@ public class Ui {
     public void printMyTask(TaskList taskList) {
         System.out.println("---------------------------------------------");
         System.out.println("Here are the tasks in your list:");
+
+        // loop through list and print every task in a new line
         int len = taskList.getSize();
         for (int i = 1; i < len + 1; i++) {
             Task curTask = taskList.getTask(i-1);
             System.out.println(i + ". " + curTask);
         }
+
         System.out.println("---------------------------------------------");
     }
 
     public void printMatchingTask(ArrayList<Task> matchingTask) {
         System.out.println("---------------------------------------------");
         System.out.println("Here are the matching tasks in your list:");
+
+        // loop through list and print every task in a new line
         int len = matchingTask.size();
         for (int i = 1; i < len + 1; i++) {
             Task curTask = matchingTask.get(i-1);
             System.out.println(i + ". " + curTask);
         }
+
         System.out.println("---------------------------------------------");
     }
 
