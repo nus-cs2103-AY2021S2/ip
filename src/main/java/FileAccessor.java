@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileAccessor {
-    public static void ReadFromTasks(String path, ArrayList<Task> tasks) throws FileNotFoundException {
+    public static ArrayList<Task> ReadFromTasks(String path, ArrayList<Task> tasks) throws FileNotFoundException {
         File f = new File(path);
         Scanner sc = new Scanner(f);
         while(sc.hasNext()) {
@@ -31,6 +31,7 @@ public class FileAccessor {
                 throw new IllegalArgumentException();
             }
         }
+        return tasks;
     }
 
     //assume in correct format

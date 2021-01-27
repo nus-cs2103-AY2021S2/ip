@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 
 public class Ui {
-    public static String logo = " ____        _        \n"
+    private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    public static String line = "____________________________________________"+
+    private static String line = "____________________________________________"+
             "________________\n";
+
+    public static String lineGetter() {
+        return line;
+    }
 
     public static String intro() {
         return "Hello from\n" + logo + "\n" + line + " Hey there! I'm Duke\n" +
@@ -36,7 +40,7 @@ public class Ui {
         return s + line;
     }
 
-    public static String IllegalArgExc() {
+    public static String illegalArgExc() {
         return line + " Please enter 'todo (your task)', " +
                 "or 'deadline (your task) / (deadline date time)',\n or " +
                 "'event (event name) / (event date time)' to add tasks.\n " +
@@ -45,10 +49,17 @@ public class Ui {
                 "enter 'bye'.\n"+ line;
     }
 
-    public static String addTask(ArrayList<Task> tasks) {
-        return line + " Got it. I've added this task:\n" +
-                " " + tasks.get(tasks.size() - 1) + "\n" + " Now you have "
-                + tasks.size() + " tasks in the list\n" + line;
+    public static String dateTimeParseExc() {
+        return line + " Enter date and time in this format yyyy-mm-dd hh:mm\n" + line;
+    }
+
+    public static String unableSave() {
+        return line + " Unable to save to hard drive\n" + line;
+    }
+
+    public static String addTask(Task task, int size) {
+        return line + " Got it. I've added this task:\n" + " " + task + "\n"
+                + " Now you have " + size + " tasks in the list\n" + line;
     }
 
     public static String deleteTask(Task task, int size) {

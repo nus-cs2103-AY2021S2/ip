@@ -14,7 +14,8 @@ public class Event extends Task {
         String trimmed = split[1].trim();
         String[] split1 = trimmed.split(" ");
         if(split1.length != 2) {
-            throw new ArrayIndexOutOfBoundsException(" Enter date and time in this format yyyy-mm-dd hh:mm\n");
+            throw new ArrayIndexOutOfBoundsException(Ui.lineGetter() + " Enter date and time " +
+                    "in this format yyyy-mm-dd hh:mm\n" + Ui.lineGetter());
         }
         this.event = LocalDateTime.parse(split1[0].trim() + "T" + split1[1]);
     }
