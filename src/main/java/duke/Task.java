@@ -1,8 +1,8 @@
 package duke;
 
 /**
- * Represents a task listed in DukeObjects.Duke and can be marked as done. Can statically create subclasses of DukeObjects.Duke.Task, namely:
- * DukeObjects.Duke.Event, DukeObjects.Duke.Deadline, DukeObjects.Duke.ToDo
+ * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Task, namely:
+ * Event, Deadline, ToDo
  */
 public class Task {
     protected boolean isDone;
@@ -26,7 +26,8 @@ public class Task {
     }
 
     /**
-     * Passes the command to the relevant task creation methods.
+     * Passes the command to the relevant task creation methods, namely:
+     * createEvent, createDeadline, createToDo
      *
      * @param taskCommand String of command that describes the task to be created.
      * @throws DukeException if task creation is invalid.
@@ -51,10 +52,10 @@ public class Task {
     }
 
     /**
-     * Creates DukeObjects.Duke.Task from the command with todo.
+     * Creates ToDo Task from a command with todo.
      *
-     * @param command User input with the command todo.
-     * @return DukeObjects.Duke.Task created.
+     * @param command User input with the word todo.
+     * @return Task created.
      * @throws DukeException if there is no description of the task.
      */
     private static Task createToDo(String command) throws DukeException {
@@ -65,10 +66,10 @@ public class Task {
     }
 
     /**
-     * Creates DukeObjects.Duke.Task from the command with deadline.
+     * Creates Task from a command with deadline.
      *
-     * @param command User input with the command deadline.
-     * @return DukeObjects.Duke.Task created.
+     * @param command User input with the word deadline.
+     * @return Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no deadline specified by "/by".
      */
@@ -84,10 +85,10 @@ public class Task {
     }
 
     /**
-     * Creates DukeObjects.Duke.Task from the command with event.
+     * Creates Task from a command with event.
      *
-     * @param command User input with the command event.
-     * @return DukeObjects.Duke.Task created.
+     * @param command User input with the word event.
+     * @return Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no duration specified by "/at".
      */

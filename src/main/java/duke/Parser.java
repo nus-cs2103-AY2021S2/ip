@@ -1,12 +1,18 @@
 package duke;
 
 /**
- * DukeObjects.Duke.Parser for DukeObjects.Duke commands, with access to its task list, and storage.
+ * Parser for Duke commands, with access to its task list, and storage.
  */
 public class Parser {
     private TaskList tasks;
     private Storage storage;
 
+    /**
+     * Creates a Parser object for the Duke instance.
+     *
+     * @param tasks   The current TaskList used.
+     * @param storage The current Storage used.
+     */
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -109,7 +115,7 @@ public class Parser {
     /**
      * Adds specified task into task list and prints user feedback.
      *
-     * @param task DukeObjects.Duke.Task to be added.
+     * @param task Task to be added.
      */
     private void addTask(Task task) {
         tasks.add(task);

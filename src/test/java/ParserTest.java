@@ -30,26 +30,3 @@ class ParserTest {
         tl.remove(0);
     }
 }
-
-class TaskStub extends Task {
-    static int i = 0;
-    TaskStub(String desc) {
-        super(desc);
-    }
-
-    public static Task dispatchTaskCreation(String command) {
-        i = 1;
-        return new Task("testing");
-    }
-}
-
-class UiStub extends Ui {
-    static int i = 0;
-    UiStub() {
-        super();
-    }
-
-    public static void printErr(String command) {
-        i = 1;
-    }
-}

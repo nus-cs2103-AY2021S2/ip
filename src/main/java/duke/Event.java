@@ -1,13 +1,13 @@
 package duke;
 
 /**
- * Represents a task with a duration specified in the at argument.
+ * Represents a task with a duration specified in the "at" argument.
  */
 public class Event extends Task {
     protected String at;
 
     /**
-     * Creates a task with a duration specified in the by argument.
+     * Creates a task with a duration specified in the "at" argument.
      *
      * @param description Describes the task.
      * @param at          Specifies the duration of this task.
