@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
@@ -47,9 +49,9 @@ public class TaskData {
 
         switch(taskType){
             case "D":
-                return new Deadline(taskDescription, taskStatus, content[3]);
+                return new Deadline(taskDescription, taskStatus, LocalDateTime.parse(content[3], DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
             case "E":
-                return new Event(taskDescription, taskStatus, content[3]);
+                return new Event(taskDescription, taskStatus, LocalDateTime.parse(content[3], DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")));
             case "T":
                 return new Todo(taskDescription, taskStatus);
             default:

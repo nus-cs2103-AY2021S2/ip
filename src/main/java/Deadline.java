@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     @Override
     public String toTxt(){
-        return "D " + super.toTxt() + " | " + by + "\n";
+        return "D " + super.toTxt() + " | " + by.format(DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")) + "\n";
     }
 
     @Override

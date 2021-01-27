@@ -11,7 +11,7 @@ public class Event extends Task {
 
     @Override
     public String toTxt(){
-        return "E " + super.toTxt() + " | " + at + "\n";
+        return "E " + super.toTxt() + " | " + at.format(DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")) + "\n";
     }
 
     @Override

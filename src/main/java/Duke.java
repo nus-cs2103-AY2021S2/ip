@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,11 +19,18 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        int count = 0;
+
 
         final String path = "src/main/java/data/tasks.txt";
         TaskData taskData = new TaskData(path);
         ArrayList<Task> taskList = taskData.openFile();
+        int count;
+
+        if (taskList.isEmpty()) {
+            count = 0;
+        } else {
+            count = taskList.size();
+        }
 
         //commands entered by the user
         while(!str.equals("bye")) {
@@ -48,7 +56,7 @@ public class Duke {
             if (str.equals("list")) {
                 //display them back to the user when requested
                 System.out.println("Here are the tasks in your list:");
-                if (taskList.isEmpty()) {
+                if (count == 0) {
                     System.out.println("There is no task in the list.");
                 } else {
                     for (int i = 1; i <= taskList.size(); i++) {
@@ -106,21 +114,26 @@ public class Duke {
                     if (type.equals("todo")) {
                         taskList.add(new Todo(detail,0));
                     } else if (type.equals("event")) {
-
-                        String name = detail.substring(0, detail.indexOf(" /at "));
-                        String time = detail.substring(detail.indexOf(" /at ") + 5);
-
-                        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                        LocalDateTime at = LocalDateTime.parse(time, dateTimeFormat);
-                        taskList.add(new Event(name, 0, at));
-
+                        try {
+                            String name = detail.substring(0, detail.indexOf(" /at "));
+                            String time = detail.substring(detail.indexOf(" /at ") + 5);
+                            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                            LocalDateTime at = LocalDateTime.parse(time, dateTimeFormat);
+                            taskList.add(new Event(name, 0, at));
+                        } catch (DateTimeParseException ex) {
+                            System.out.println("The input date time format is invalid. Please use: yyyy-MM-dd HHmm");
+                        }
                     } else if (type.equals("deadline")) {
-                        String name = detail.substring(0, detail.indexOf(" /by "));
-                        String time = detail.substring(detail.indexOf(" /by ") + 5);
+                        try {
+                            String name = detail.substring(0, detail.indexOf(" /by "));
+                            String time = detail.substring(detail.indexOf(" /by ") + 5);
 
-                        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                        LocalDateTime by = LocalDateTime.parse(time, dateTimeFormat);
-                        taskList.add(new Deadline(name, 0, by));
+                            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                            LocalDateTime by = LocalDateTime.parse(time, dateTimeFormat);
+                            taskList.add(new Deadline(name, 0, by));
+                        } catch (DateTimeParseException ex) {
+                            System.out.println("The input date time format is invalid. Please use: yyyy-MM-dd HHmm");
+                        }
 
                     }
                     count++;
