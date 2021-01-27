@@ -99,7 +99,9 @@ public class Storage {
                 }
                 String at = fileScanner.next();
                 String time = fileScanner.next();
-                TaskList.tasks.add(new Event(desc, LocalDate.parse(at), LocalTime.parse(time)));
+                String start = time.substring(0, 5);
+                String end = time.substring(6, 11);
+                TaskList.tasks.add(new Event(desc, LocalDate.parse(at), LocalTime.parse(start), LocalTime.parse(end)));
                 if (done.equals("1")) {
                     TaskList.tasks.get(i).markAsDone();
                 }
@@ -131,7 +133,7 @@ public class Storage {
                     isDone = 1;
                 }
                 fw.write("E | " + isDone + " | " + task.description + " | " + ((Event) task).at + " "
-                        + ((Event) task).time);
+                        + ((Event) task).start + "-" + ((Event) task).end);
             } else {
                 int isDone = 0;
                 if (task.isDone) {

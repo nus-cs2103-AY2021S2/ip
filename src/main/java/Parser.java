@@ -19,22 +19,52 @@ public class Parser {
      */
     public static void parse(String command) throws DukeException, IOException {
         Ui ui = new Ui();
+
+        boolean cond1 = command.length() == 4;
+        boolean cond2 = command.length() == 5;
+        boolean cond3 = command.length() == 6 && !command.substring(0, 6).equals("delete")
+                && !command.substring(0, 4).equals("find") && !command.substring(0, 4).equals("done");
+        boolean cond4 = command.length() == 8 && !command.substring(0, 8).equals("deadline")
+                && !command.substring(0, 4).equals("find") && !command.substring(0, 4).equals("done")
+                && !command.substring(0, 6).equals("delete");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         if (command.equals("bye")) {
             ui.bye();
         } else if (command.equals("list")) {
             TaskList.list();
+        } else if (command.length() <= 3) {
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
+        } else if (cond1) {
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
+        } else if (cond2) {
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
+        } else if (cond3) {
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
+        } else if (cond4) {
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
         } else if (command.substring(0, 4).equals("done")) {
             TaskList.done(Integer.parseInt(command.substring(5)));
-        } else if (command.substring(0, 6).equals("delete")) {
-            TaskList.delete(Integer.parseInt(command.substring(7)));
         } else if (command.substring(0, 4).equals("todo")) {
             ui.todo(command.substring(5));
+        } else if (command.substring(0, 4).equals("find")) {
+            ui.find(command.substring(5));
         } else if (command.substring(0, 5).equals("event")) {
             String desc = "";
             String date = "";
-            String time = "";
-            String localTime = "";
+            String start = "";
+            String end = "";
+            String localStart = "";
+            String localEnd = "";
             for (int i = 6; i < command.length(); i++) {
                 if (command.charAt(i) == ' ' && command.charAt(i + 1) == '/') {
                     break;
@@ -49,16 +79,22 @@ public class Parser {
                     date += command.charAt(i);
                 }
             }
-            time = command.substring(desc.length() + 12 + date.length());
+            start = command.substring(desc.length() + 12 + date.length(), desc.length() + 16 + date.length());
+            end = command.substring(desc.length() + 17 + date.length(), desc.length() + 21 + date.length());
             if (desc.equals("")) {
-                ui.event("", null, null);
+                ui.event("", null, null, null);
             } else if (date.equals("")) {
-                ui.event(desc, null, null);
-            } else if (time.equals("")) {
-                ui.event(desc, LocalDate.parse(format(date), formatter), null);
+                ui.event(desc, null, null, null);
+            } else if (start.equals("")) {
+                ui.event(desc, LocalDate.parse(format(date), formatter), null, null);
+            } else if (end.equals("")) {
+                ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), null);
             }
-            localTime += time.substring(0, 2) + ":" + time.substring(2, 4);
-            ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
+            localStart += start.substring(0, 2) + ":" + start.substring(2, 4);
+            localEnd += end.substring(0, 2) + ":" + end.substring(2, 4);
+            ui.event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localStart), LocalTime.parse(localEnd));
+        } else if (command.substring(0, 6).equals("delete")) {
+            TaskList.delete(Integer.parseInt(command.substring(7)));
         } else if (command.substring(0, 8).equals("deadline")) {
             String desc = "";
             String date = "";

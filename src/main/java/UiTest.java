@@ -26,9 +26,9 @@ public class UiTest {
      */
     @Test
     void event() throws DukeException {
-        ui.event("read book", LocalDate.parse("2001-02-03"), LocalTime.parse("11:11"));
-        assertEquals(new Event("read book", LocalDate.parse("2001-02-03"), LocalTime.parse("11:11")).toString(),
-                TaskList.tasks.get(1).toString());
+        ui.event("read book", LocalDate.parse("2001-02-03"), LocalTime.parse("11:11"), LocalTime.parse("12:12"));
+        assertEquals(new Event("read book", LocalDate.parse("2001-02-03"), LocalTime.parse("11:11"),
+                LocalTime.parse("12:12")).toString(), TaskList.tasks.get(1).toString());
     }
 
     /**

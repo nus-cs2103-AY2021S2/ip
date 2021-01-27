@@ -15,7 +15,8 @@ class EventTest {
      */
     @Test
     void testToString() {
-        assertEquals("[E][ ] read book (at: 2019-01-02 12:45)",
-                new Event("read book", LocalDate.parse("2019-01-02"), LocalTime.parse("12:45")).toString());
+        assertEquals("[E][ ] read book (at: 2019-01-02 12:45-15:45)",
+                new Event("read book", LocalDate.parse("2019-01-02"),
+                        LocalTime.parse("12:45"), LocalTime.parse("15:45")).toString());
     }
 }
