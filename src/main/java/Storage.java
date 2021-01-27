@@ -15,6 +15,9 @@ public class Storage {
     protected ArrayList<Task> tasks;
     protected ArrayList<String> inputs;
 
+    /**
+     * Saves current session state to file
+     */
     public void saveHistory() {
         File file = new File(sessionFile);
         try {
@@ -34,6 +37,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Load previous session state from file
+     * @throws IOException
+     */
     public void loadHistory() throws IOException {
         if (!new File(sessionFile).exists()) {
             return;
