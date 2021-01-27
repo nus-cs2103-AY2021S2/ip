@@ -1,4 +1,4 @@
-class Task {
+abstract class Task {
     protected final String taskName;
     protected boolean isDone;
 
@@ -13,10 +13,5 @@ class Task {
 
     public boolean isComplete() {
         return this.isDone;
-    }
-
-    @Override
-    public String toString() {
-        return taskName;
     }
 }
