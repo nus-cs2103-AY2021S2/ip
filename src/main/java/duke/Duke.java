@@ -14,6 +14,11 @@ public class Duke {
     private Ui ui;
     private static TaskList tasks;
     private static Storage storage;
+
+    /**
+     * Creates a new Duke object with the given file-path for {@Storage}.
+     * @param filePath file path for initialization of Storage
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath).load();
@@ -25,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Calls the subroutines that the bot is meant to run.
+     */
     public void run() {
         listenInput();
         quit();

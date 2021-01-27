@@ -7,10 +7,18 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Implementation for parsing of input to be routed to specific handlers.
+ *  @author Soon Keat Neo
+ *  @version CS2103T AY20/21 Sem 1 iP
+ */
+
 public class Parser {
     /**
      * Handle the input and passes to the relevant methods.
-     * @param inputString User input string to be handled.
+     * @param inputString User input string to be handled
+     * @param tasks Task List to be manipulated
+     * @param storage {@Storage} object to be used
      */
     public static void parse(String inputString, TaskList tasks, Storage storage) {
 

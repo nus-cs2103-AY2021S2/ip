@@ -1,7 +1,9 @@
 package duke.task;
 
 /**
- * Implementation for tasks with no schedules assigned.
+ * Implementation for {@Task} with no schedules assigned.
+ * @author Soon Keat Neo
+ * @version CS2103T AY20/21 Sem 1 iP
  */
 
 public class Todo extends Task {

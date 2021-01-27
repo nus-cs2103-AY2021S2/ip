@@ -1,5 +1,11 @@
 package duke;
 
+/**
+ * Implementation for the chat-bot UI.
+ * @author Soon Keat Neo
+ * @version CS2103T AY20/21 Sem 1 iP
+ */
+
 public class Ui {
     final private static String SEPARATORS = "~~~~~~~~~~~~~~~~~~~~~~";
 

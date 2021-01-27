@@ -8,16 +8,34 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/**
+ * Stores and manages the list of {@Task} created.
+ * @author Soon Keat Neo
+ * @version CS2103T AY20/21 Sem 1 iP v0.1
+ */
 public class TaskList {
     private static List<Task> taskList;
+
+    /**
+     * Creates a new task list without reading from existing storage.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
+
+    /**
+     * Overloaded constructor creating a new task list reading from existing {@Storage}.
+     * @param storage Storage object to be read from
+     */
     public TaskList(Storage storage) {
         taskList = new ArrayList<>();
         initializeTasks(storage.read());
     }
 
+    /**
+     * Adds a new {@Task} to the task list.
+     * @param task Given task to be added to the task list
+     */
     public void addTask(Task task) {
         taskList.add(task);
         Ui.printMessage("Wakarimashita! Task added to list:");
@@ -26,8 +44,8 @@ public class TaskList {
     }
 
     /**
-     * Mark the task passed to the method as complete.
-     * @param inputString User input string.
+     * Mark the specified task as complete.
+     * @param inputString User input string
      */
     public void completeTask(String inputString, Storage storage) {
         try {
@@ -58,7 +76,8 @@ public class TaskList {
 
     /**
      * Delete the specified task from the list.
-     * @param inputString User input string.
+     * @param inputString User input string
+     * @param storage Storage object to remove from disk
      */
     public void deleteTask(String inputString, Storage storage) {
         try {
@@ -92,12 +111,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets the current size of the task list.
+     * @return An integer representing the number of items in the list
+     */
     public int getSize() {
         return taskList.size();
     }
 
     /**
      * Initializes the task list from the data file.
+     * @param fileContents The contents of the file in a given List
      */
     public void initializeTasks(List<String> fileContents) {
         for (int i = 0; i < fileContents.size(); i++) {

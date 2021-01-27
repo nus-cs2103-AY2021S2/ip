@@ -6,6 +6,8 @@ import java.util.Locale;
 
 /**
  * Implementation for tasks with a specified end-date.
+ *  @author Soon Keat Neo
+ *  @version CS2103T AY20/21 Sem 1 iP
  */
 
 public class Deadline extends Task {

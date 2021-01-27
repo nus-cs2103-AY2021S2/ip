@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Implementation for tasks with a given start-time and end-time.
+ *  @author Soon Keat Neo
+ *  @version CS2103T AY20/21 Sem 1 iP
  */
 
 public class Event extends Task {
