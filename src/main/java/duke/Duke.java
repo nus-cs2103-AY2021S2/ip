@@ -10,17 +10,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
 public class Duke {
     private static final String workingDirPath = System.getProperty("user.dir");
     private static final String saveFilePath = java.nio.file.Paths.get(workingDirPath, "saveFile.json").toString();
     private static final String divider = "\t____________________________________________________________\n";
+    private static final ObjectMapper mapper = JsonMapper.builder()
+        .findAndAddModules()
+        .build();
     private static List<Task> tasks;
     private static BufferedReader in;
     private static BufferedWriter out;
@@ -106,10 +112,18 @@ public class Duke {
         if (description.trim().equals("")) {
             throw new DukeException("Deadline requires a description.");
         }
-        String by = input.substring(bySwitchIndex + 4);
-        if (by.trim().equals("")) {
+        String byStr = input.substring(bySwitchIndex + 4);
+        if (byStr.trim().equals("")) {
             throw new DukeException("Deadline requires '/by' to be specified.");
         }
+
+        LocalDate by;
+        try {
+            by = LocalDate.parse(byStr);
+        } catch (DateTimeException dte) {
+            throw new DukeException("Deadline /by needs to be in a valid format (e.g. yyyy-MM-dd)");
+        }
+
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
         save();
@@ -125,10 +139,18 @@ public class Duke {
         if (description.trim().equals("")) {
             throw new DukeException("Event requires a description.");
         }
-        String at = input.substring(atSwitchIndex + 4);
-        if (at.trim().equals("")) {
+        String atStr = input.substring(atSwitchIndex + 4);
+        if (atStr.trim().equals("")) {
             throw new DukeException("Event requires '/at' to be specified.");
         }
+
+        LocalDate at;
+        try {
+            at = LocalDate.parse(atStr);
+        } catch (DateTimeException dte) {
+            throw new DukeException("Event /at needs to be in a valid format (e.g. yyyy-MM-dd)");
+        }
+
         Event event = new Event(description, at);
         tasks.add(event);
         save();
@@ -230,7 +252,6 @@ public class Duke {
         try (BufferedOutputStream outSaveFile = new BufferedOutputStream(new FileOutputStream(saveFile, false))
         ) {
             // https://github.com/FasterXML/jackson-databind/pull/1309
-            ObjectMapper mapper = new ObjectMapper();
             mapper.writerFor(new TypeReference<List<Task>>() {}).writeValue(outSaveFile, tasks);
         }
     }
@@ -242,7 +263,6 @@ public class Duke {
         try (BufferedInputStream inSaveFile = new BufferedInputStream(new FileInputStream(saveFile))
         ) {
             // https://github.com/FasterXML/jackson-databind/pull/1309
-            ObjectMapper mapper = new ObjectMapper();
             tasks = mapper.readerFor(new TypeReference<ArrayList<Task>>() {}).readValue(inSaveFile);
         } catch (MismatchedInputException mie) {
             // empty saveFile.json
