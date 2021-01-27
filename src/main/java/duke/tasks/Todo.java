@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Represents task without time attribute.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Deletes a task.
+ */
 public class DeleteCommand extends Command{
     String taskNumber;
 
@@ -8,6 +11,10 @@ public class DeleteCommand extends Command{
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Returns index of task to be deleted.
+     * @return task index
+     */
     public String getTaskNumber() {
         return taskNumber;
     }

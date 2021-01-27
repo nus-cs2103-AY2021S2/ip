@@ -11,9 +11,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Used to write to a file.
+ */
 public class FileWriting {
-    public static void writeToFile(File f, Duke duke) throws IOException {
-        FileWriter fw = new FileWriter(f);
+
+    /**
+     * Saves list of tasks by writing into the file whenever a command updates the task list.
+     * @param file the file that is written to
+     * @param duke a Duke object that manages task list operations
+     * @throws IOException if error occurs while writing to the file
+     */
+    public static void writeToFile(File file, Duke duke) throws IOException {
+        FileWriter fw = new FileWriter(file);
         List<Task> taskList = duke.getList().getLst();
         StringBuilder textToAdd = new StringBuilder();
         for (Task curr : taskList) {
