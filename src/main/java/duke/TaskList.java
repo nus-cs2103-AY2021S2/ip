@@ -22,9 +22,8 @@ class TaskList {
 		return this.list.get(n - 1);
 	}
 
-	Task store(Task t) {
+	void store(Task t) {
 		this.list.add(t);
-		return t;
 	}
 
 	void delete(Task t) {

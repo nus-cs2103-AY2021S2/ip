@@ -3,7 +3,6 @@ package duke;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +13,8 @@ class Storage {
 
 	Storage() {
 		try {
-			File jarDir = new File(Parser.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+			File jarDir = new File(Parser.class.getProtectionDomain().getCodeSource()
+					.getLocation().getPath());
 			Path location = Path.of(jarDir.getParentFile().getPath());
 			Path dir = location.resolve("data");
 			Path file = dir.resolve("list.txt");

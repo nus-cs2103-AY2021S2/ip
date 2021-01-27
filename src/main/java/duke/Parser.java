@@ -101,6 +101,7 @@ public class Parser {
 	}
 
 	boolean checkValid(String s) {
-		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
+		return s.equals("todo") || s.equals("deadline") || s.equals("event")
+				|| s.equals("done") || s.equals("delete");
 	}
 }

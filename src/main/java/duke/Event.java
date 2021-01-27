@@ -18,7 +18,8 @@ class Event extends Task {
 
 	@Override
 	String saveName() {
-		return String.format("event1!1%s1!1%s1!1%b", super.getName(), this.time.toString(), super.getIsDone());
+		return String.format("event1!1%s1!1%s1!1%b", super.getName(),
+				this.time.toString(), super.getIsDone());
 	}
 
 	@Override
@@ -34,6 +35,7 @@ class Event extends Task {
 
 	@Override
 	public String toString() {
-		return String.format("[E]%s (at: %s)", super.toString(), this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
+		return String.format("[E]%s (at: %s)", super.toString(),
+				this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
 	}
 }
