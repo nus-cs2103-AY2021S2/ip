@@ -34,22 +34,17 @@ public class Duke {
             if (word.equals("bye")) {
                 ui.printBye();
                 break;
-            }
-            else if (word.equals("list")) {
+            } else if (word.equals("list")) {
                 doList();
-            }
-            else if (command.equals("done")) {
+            } else if (command.equals("done")) {
                 int index = Integer.parseInt(tmp[1]);
                 doDone(index);
-            }
-            else if (command.equals("delete")) {
+            } else if (command.equals("delete")) {
                 int index = Integer.parseInt(tmp[1]);
                 doDelete(index);
-            }
-            else if (command.equals("find")) {
+            } else if (command.equals("find")) {
                 doFind(word);
-            }
-            else {
+            } else {
                 doTask(word);
             }
             storage.saveTasks(taskList);
@@ -107,7 +102,8 @@ public class Duke {
             List<Task> searchedTaskList = taskList.find(toSearch);
             ui.printFindSuccess(searchedTaskList);
         } catch (StringIndexOutOfBoundsException e) {
-            ui.printFindFail(new NoMeaningException("☹ OOPS!!! The description of a find cannot be empty."));
+            ui.printFindFail(new NoMeaningException(
+                    "☹ OOPS!!! The description of a find cannot be empty."));
         }
     }
 
@@ -121,18 +117,15 @@ public class Duke {
             String command = tmp[0];
             if (command.equals("todo")) {
                 doToDo(word);
-            }
-            else if (command.equals("deadline")) {
+            } else if (command.equals("deadline")) {
                 doDeadline(word);
-            }
-            else if (command.equals("event")) {
+            } else if (command.equals("event")) {
                 doEvent(word);
+            } else {
+                throw new NoMeaningException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            else {
-                throw new NoMeaningException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        }
-        catch (NoMeaningException e){
+        } catch (NoMeaningException e){
             ui.printTaskFail(e);
         }
     }
@@ -148,7 +141,8 @@ public class Duke {
             taskList.add(todo);
             doTaskFinally(todo);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NoMeaningException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new NoMeaningException(
+                    "☹ OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
@@ -170,7 +164,8 @@ public class Duke {
             taskList.add(deadline);
             doTaskFinally(deadline);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NoMeaningException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new NoMeaningException(
+                    "☹ OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
@@ -192,7 +187,8 @@ public class Duke {
             taskList.add(event);
             doTaskFinally(event);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new NoMeaningException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new NoMeaningException(
+                    "☹ OOPS!!! The description of a event cannot be empty.");
         }
     }
 

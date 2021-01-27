@@ -1,14 +1,14 @@
 public class Task {
     protected final String job;
-    protected final Boolean done;
+    protected final Boolean isDone;
     public Task(String job) {
         this.job = job;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String job, Boolean done) {
+    public Task(String job, Boolean isDone) {
         this.job = job;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -28,13 +28,13 @@ public class Task {
     /**
      * Done status getter.
      */
-    public Boolean getDone() {
-        return this.done;
+    public Boolean getDoneStatus() {
+        return this.isDone;
     }
 
     public String toString() {
         String status = "";
-        if (done) {
+        if (isDone) {
             status = "[X] ";
         }
         else {

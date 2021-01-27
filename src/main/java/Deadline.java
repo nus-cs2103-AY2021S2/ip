@@ -16,8 +16,8 @@ public class Deadline extends Task{
         this.time = time;
     }
 
-    Deadline(String job, Boolean done, LocalDate date, LocalTime time) {
-        super(job, done);
+    Deadline(String job, Boolean isDone, LocalDate date, LocalTime time) {
+        super(job, isDone);
         this.type = "D";
         this.date = date;
         this.time = time;
@@ -41,8 +41,11 @@ public class Deadline extends Task{
      * Print the new format of date and time.
      */
     public String printDateTime() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(this.date, this.time, ZoneId.of("Asia/Singapore"));
-        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).format(zonedDateTime);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(
+                this.date, this.time, ZoneId.of("Asia/Singapore"));
+        return DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.FULL)
+                .format(zonedDateTime);
     }
 
     /**
@@ -55,6 +58,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString() + "(by:" + printDateTime() + ")";
+        return "[" + this.type + "]" + super.toString()
+                + "(by:" + printDateTime() + ")";
     }
 }
