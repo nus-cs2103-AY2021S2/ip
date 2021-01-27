@@ -1,8 +1,5 @@
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,7 +17,7 @@ public class Duke {
 
     public static void main(String[] args) throws IOException {
 
-        UI.Greet();
+        UI.greet();
 
         storage.tasks = new ArrayList<>(100);
         storage.inputs = new ArrayList<>(100);
@@ -55,7 +52,7 @@ public class Duke {
     }
 
     public static String parseInput(String input) throws DukeException {
-        HashMap<String,String> tokenizedInput = Parser.ParseInput(input); 
+        HashMap<String, String> tokenizedInput = Parser.parseInput(input);
         switch (tokenizedInput.get("command")) {
         case "bye":
             return "Bye. Hope to see you again soon!";

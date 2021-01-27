@@ -5,7 +5,7 @@ import exception.DukeInvalidArgumentsException;
 
 public class Parser {
 
-    public static HashMap<String,String> ParseInput(String input) throws DukeInvalidArgumentsException {
+    public static HashMap<String, String> parseInput(String input) throws DukeInvalidArgumentsException {
         HashMap<String, String> keyValuePairs = new HashMap<>();
 
         String[] commands = input.split(" /");
@@ -14,18 +14,18 @@ public class Parser {
 
         String command = firstWords[0];
         keyValuePairs.put("command", command);
-        
-        if (firstWords.length > 1){
+
+        if (firstWords.length > 1) {
             String info = String.join(" ", Arrays.copyOfRange(firstWords, 1, firstWords.length));
             keyValuePairs.put("info", info);
         }
 
-        for (int i = 1; i < commands.length; i++){
+        for (int i = 1; i < commands.length; i++) {
             String[] words = commands[i].trim().split(" ");
 
             String key = words[0];
             String value = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
-            
+
             if (keyValuePairs.containsKey(key)) {
                 throw new DukeInvalidArgumentsException(command, String.format("Dupicate argument /%s", key));
             }
