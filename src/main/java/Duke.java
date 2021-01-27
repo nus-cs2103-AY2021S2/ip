@@ -1,15 +1,14 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class Duke {
+
     public static ArrayList<Task> list = new ArrayList<>();
     private static final String horizontalLine = "____________________________________________________________";
 
@@ -19,8 +18,10 @@ public class Duke {
         try {
             File savedTasksFile = new File("data/duke.txt");
             if (!savedTasksFile.exists()) {
-                File parentDir = savedTasksFile.getParentFile();
-                parentDir.mkdir();
+                if (!savedTasksFile.getParentFile().exists()) {
+                    File parentDir = savedTasksFile.getParentFile();
+                    parentDir.mkdir();
+                }
                 savedTasksFile.createNewFile();
             }
             loadTasks(savedTasksFile);
