@@ -1,2 +1,4 @@
-T;;1234;;false
-D;;1238940;;false;;6pm
+T;;read book;;false
+D;;return book;;false;;Sunday
+E;;project meeting;;false;;Mon 2-4pm
+D;;do homework;;false;;no idea :-p

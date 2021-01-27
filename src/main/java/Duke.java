@@ -284,6 +284,7 @@ public class Duke {
             // just enough args
             parseNextArgs(firstWord, userInput, firstSpaceIndex);
 
+            // UPON SUCCESSFUL COMMAND EXECUTION
             // save tasksFile
             TaskList.saveTasksList(taskList);
             
@@ -294,6 +295,7 @@ public class Duke {
             printException(e.getMessage());
             return true;
         } catch (IOException e) {
+            // todo see if you can offer better help
             printException(e.getMessage());
             return true;
         } catch (Exception e) {
@@ -325,10 +327,9 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // random testing things
-        // should be rearranged elesewhere
+        // should be rearranged elsewhere
         try {
-            Save.setupTasksFile();
-            // Deadline.main(new String[]{});
+            Save.loadFromHardDisk(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }

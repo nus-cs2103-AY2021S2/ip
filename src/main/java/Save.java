@@ -3,13 +3,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-// should be called fileSetup
+// should be called fileSetup, but loadfromharddisk method doesn't fit
 // level 7 files should be in another folder/pkg
 public class Save {
-    public static Path taskListFilePath;
     public static final String projectDir = System.getProperty("user.dir");
-    public static final java.nio.file.Path dataFilePath = java.nio.file.Paths.get(
+    public static final java.nio.file.Path taskListFilePath = java.nio.file.Paths.get(
             projectDir, "src", "data", "tasks.txt"); // todo rename as tasklistF..P..
 
     public static boolean doesFileOrDirExist(Path path) {
@@ -23,13 +23,13 @@ public class Save {
         }
     }
 
+    public static boolean doesTaskFileExist() {
+        return doesFileOrDirExist(taskListFilePath);
+    }
+
     // testing method
     public static void setupTasksFile() throws IOException {
-
-
-        boolean doesDataFileExist = doesFileOrDirExist(dataFilePath);
-
-        if (doesDataFileExist) {
+        if (doesTaskFileExist()) {
             return;
         } else {
             java.nio.file.Path dataDirPath = java.nio.file.Paths.get(projectDir, "src", "data");
@@ -57,12 +57,43 @@ public class Save {
         // e.g. public static void setupDataFiles();
         // before that, call loadFromHardDisk();
 
-    public static boolean loadFromHardDisk() {
+    public static boolean loadFromHardDisk(ArrayList<Task> taskList) throws IOException {
         // if no files in harddisk
             // return false and set up
         // if only empty files, return false
 
-        return false;
+        if (doesTaskFileExist()) {
+            // load it
+            File f = new File(taskListFilePath.toString());
+            Scanner sc = new Scanner(f);
+            while (sc.hasNextLine()) {
+                // much hardcoding to parse which class' unparse method to use
+                // figure out how to use polymorphism?
+                String line = sc.nextLine();
+                String letter = line.substring(0, 1);
+                Task t;
+                switch (letter) {
+                case "T":
+                    t = Todo.parse(line);
+                    break;
+                case "E":
+                    t = Event.parse(line);
+                    break;
+                case "D":
+                    t = Deadline.parse(line);
+                    break;
+                default:
+                    // todo
+                    t = null;
+                    break;
+                }
+                taskList.add(t);
+            }
+            return true;
+        } else {
+            setupTasksFile();
+            return false;
+        }
     }
 
 
