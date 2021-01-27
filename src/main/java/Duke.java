@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package main.java;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +11,9 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         boolean shouldRun = true;
+        DataStorage storage = new DataStorage();
 
+        tasks = startup(storage);
         greet();
 
         while (shouldRun) {
@@ -67,6 +70,8 @@ public class Duke {
                 echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
             }
         }
+
+        shutdown(storage, tasks);
     }
 
     public static void greet() {
@@ -176,6 +181,25 @@ public class Duke {
 
     public static String getNumberOfTasksString(List<Task> tasks) {
         return String.format("Now you have %d items in your list", tasks.size());
+    }
+
+    public static List<Task> startup(DataStorage storage) {
+        try {
+            storage.createBackingStoreIfNotExists();
+            return storage.readTasks();
+        } catch (DukeException dukeException) {
+            echo(dukeException.getMessage());
+            System.exit(0);
+        }
+        return null;
+    }
+
+    public static void shutdown(DataStorage storage, List<Task> tasks) {
+        try {
+            storage.saveTasks(tasks);
+        } catch (DukeException dukeException) {
+            echo(dukeException.getMessage());
+        }
     }
 
     public static void echo(String input) {

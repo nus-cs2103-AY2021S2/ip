@@ -1,5 +1,14 @@
-public class Event extends Task{
+package main.java;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Event extends Task {
+    @JsonProperty
     private String timeOfEvent;
+
+    protected Event() {
+        super();
+    }
 
     public Event(String taskName, String timeOfEvent) {
         super(taskName);

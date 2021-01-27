@@ -1,5 +1,14 @@
-public class Deadline extends Task{
+package main.java;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class Deadline extends Task {
+    @JsonProperty
     private String deadline;
+
+    protected Deadline() {
+        super();
+    }
 
     public Deadline(String taskName, String deadline) {
         super(taskName);
