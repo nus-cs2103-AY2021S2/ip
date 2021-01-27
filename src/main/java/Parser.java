@@ -26,6 +26,8 @@ public class Parser {
             } catch (DukeException ex) {
                 System.out.println(ex);
             }
+        } else if (userInput.startsWith("find ")) {
+            findFromList(userInput);
         } else {
             try {
                 addTaskToList(userInput, false);
@@ -70,6 +72,23 @@ public class Parser {
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             throw new ArgumentException(4);
         }
+    }
+
+    /**
+     * Finds all tasks in the list that matches the keyword given by user.
+     *
+     * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
+     */
+    protected void findFromList(String userInput) {
+        TaskList tasksMatchingKeyword = new TaskList();
+        String keyword = userInput.substring(5);
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getDescription().contains(keyword)) {
+                tasksMatchingKeyword.addTask(task);
+            }
+        }
+        printList(tasksMatchingKeyword);
     }
 
     /**
@@ -132,6 +151,13 @@ public class Parser {
         System.out.println("-----------------------------------------------------");
     }
 
-
+    /**
+     * Prints out the list of all matching events.
+     */
+    protected void printList(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(tasks.toString());
+        System.out.println("-----------------------------------------------------");
+    }
 
 }
