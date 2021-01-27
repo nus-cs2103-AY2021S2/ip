@@ -10,7 +10,7 @@ What can I do for you?
 ------------------------------
 That is not a valid command!
 These are the possible commands:
-"list" "done" "todo" "deadline" "event"
+"list" "done" "delete" "todo" "deadline" "event" "bye"
 ------------------------------
 ------------------------------
 Your list is empty!
@@ -106,7 +106,7 @@ Here are the tasks in your list:
 ------------------------------
 That is not a valid command!
 These are the possible commands:
-"list" "done" "todo" "deadline" "event"
+"list" "done" "delete" "todo" "deadline" "event" "bye"
 ------------------------------
 ------------------------------
 Bye. Hope to see you again soon!
