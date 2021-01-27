@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @Type(value = Event.class, name = "Event")
 })
 public class Task {
+
     @JsonProperty
     protected boolean isDone;
     @JsonProperty
