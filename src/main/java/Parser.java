@@ -33,7 +33,7 @@ public class Parser {
             if (this.command.equals("list")) {
                 return command;
             } else if (this.command.equals("done") || this.command.equals("delete")
-                    || this.command.equals("todo")) {
+                    || this.command.equals("todo") || this.command.equals("find")) {
                 return this.description.substring(this.command.length() + 1);
             } else if (this.command.equals("deadline")) {
                 String[] phrases = this.description.split(" /by ");
@@ -59,7 +59,8 @@ public class Parser {
     public String getDeadLine() throws DukeException {
         try {
             if (this.command.equals("done") || this.command.equals("delete")
-                    || this.command.equals("todo") || this.command.equals("list")) {
+                    || this.command.equals("todo") || this.command.equals("list")
+                    || this.command.equals("find")) {
                 return "";
             } else if (this.command.equals("deadline")) {
                 String[] phrases = this.description.split(" /by ");

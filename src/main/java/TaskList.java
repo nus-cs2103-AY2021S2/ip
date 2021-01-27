@@ -89,6 +89,29 @@ public class TaskList {
     }
 
     /**
+     * Finding Tasks that match the keyword
+     * @param keyword Keyword to find in list of Tasks
+     */
+    public void findTasks(String keyword) {
+        List<Task> temp = new ArrayList<>();
+        for (Task task: this.tasks) {
+            if (task.toString().contains(keyword)) {
+                temp.add(task);
+            }
+        }
+        if (temp.size() == 0) {
+            Ui.showMessage("No matching task");
+            return;
+        }
+        Ui.showMessageInALine("Here are the matching tasks in your list:");
+        for (int i = 0; i < temp.size(); i++) {
+            Ui.showMessageInALine(String.valueOf(i + 1) + "." + temp.get(i));
+        }
+        Ui.printLine();
+
+    }
+
+    /**
      * Get List of Task
      * @return List of Task
      */
