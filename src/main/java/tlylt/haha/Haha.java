@@ -9,6 +9,9 @@ public class Haha {
     private final Storage storage = new Storage();
     private final Ui ui = new Ui();
 
+    /**
+     * Enters the program execution.
+     */
     public static void main(String[] args) {
         Haha haha = new Haha();
         List<String> list = haha.storage.getTasks();
@@ -16,6 +19,9 @@ public class Haha {
         haha.run();
     }
 
+    /**
+     * Drives the program to handle user interaction.
+     */
     public void run() {
         ui.welcome();
         // Start while loop

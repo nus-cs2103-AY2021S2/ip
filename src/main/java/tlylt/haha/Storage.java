@@ -7,9 +7,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility for storing tasks to file.
+ */
 public class Storage {
     private Path file;
 
+    /**
+     * Initialises by checking and creating storage file if needed.
+     */
     public Storage() {
         try {
             String currentDir = System.getProperty("user.dir");
@@ -27,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads storage file content into list for further parsing.
+     *
+     * @return List of String containing task details from file.
+     */
     public List<String> getTasks() {
         try {
             return Files.readAllLines(file);

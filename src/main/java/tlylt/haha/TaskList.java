@@ -7,18 +7,35 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representation of a task handler.
+ * Mainly for handling of task after receiving user input.
+ * "database" in this class refers to the main data structure that will
+ * hold all the information when program is running.
+ */
 public class TaskList {
     private final List<Task> database = new ArrayList<>();
 
+    /**
+     * Outputs information about adding of task to database.
+     */
     void tellAdd() {
         System.out.println("Got it. I've added this task:");
     }
 
+    /**
+     * Outputs information about size of database.
+     */
     void tellSize() {
         String task = database.size() > 1 ? " tasks" : " task";
         System.out.println("Now you have " + database.size() + task + " in the list");
     }
 
+    /**
+     * Adds task into database.
+     *
+     * @param task Task created by user.
+     */
     void addToDB(Task task) {
         database.add(task);
         tellAdd();
@@ -26,6 +43,11 @@ public class TaskList {
         tellSize();
     }
 
+    /**
+     * Removes task from database.
+     *
+     * @param inputNum String that will be parsed for task number.
+     */
     void deleteFromDB(String inputNum) {
         try {
             int num = Parser.taskNumber(inputNum);
@@ -41,12 +63,20 @@ public class TaskList {
         }
     }
 
+    /**
+     * Reads tasks from a file that contains previous usage.
+     *
+     * @param file Content of previously recorded tasks.
+     */
     void readTasks(List<String> file) {
         List<Task> tasks = new ArrayList<>();
         file.forEach(line -> tasks.add(Parser.parseLine(line)));
         database.addAll(tasks);
     }
 
+    /**
+     * Updates database to file.
+     */
     void updateFile() {
         List<String> str = new ArrayList<>();
         database.forEach(task -> str.add(task.fileStorageFormat()));
@@ -58,6 +88,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Lists out all the tasks in database.
+     */
     void listFromDB() {
         if (database.size() == 0) {
             System.out.println("You have nothing going on!");
@@ -71,6 +104,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks selected task as done.
+     *
+     * @param inputNum String for parsing task number.
+     */
     void markDoneToDB(String inputNum) {
         try {
             int givenIndex = Parser.taskNumber(inputNum) - 1;
@@ -91,6 +129,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Responds to the respective command and perform database related tasks.
+     *
+     * @param command Valid command given by user.
+     * @param ui      Ui component.
+     * @return Whether the user wants to exit.
+     */
     boolean executeCommand(LegitCommand command, Ui ui) {
         switch (command) {
         case BYE:
