@@ -25,13 +25,19 @@ public class Storage {
         filePath = path;
     }
 
+    public void createFileNotExists(File file) throws IOException {
+        file.createNewFile();
+    }
+
     public ArrayList<Task> syncFromFile() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
             File f = new File(filePath);
+            if (!f.exists()) {
+                createFileNotExists(f);
+            }
             Scanner sc = new Scanner(f);
-
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] keyWords = line.split(" \\| ");
@@ -61,6 +67,8 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found!");
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
@@ -75,4 +83,6 @@ public class Storage {
             System.out.println("Has no targeted file in: " + e.getMessage());
         }
     }
+
+
 }
