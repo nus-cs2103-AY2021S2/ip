@@ -1,15 +1,13 @@
 package duke.util;
 
 import duke.Apollo;
-
+import duke.tasks.Task;
 import duke.tasks.TaskHandler;
 import duke.ui.Ui;
 import duke.enums.Commands;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidOptionException;
 import duke.exceptions.UnrecognisedCommandException;
-import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Locale;

@@ -1,6 +1,7 @@
 package duke.exceptions;
 
 public class InvalidOptionException extends DukeException {
+
     private String message;
     private final String INDENTATION = "    ";
 
