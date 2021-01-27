@@ -1,10 +1,12 @@
+package jeff;
+
 public class ToDo extends Task{
 
-    ToDo(String name) {
+    public ToDo(String name) {
         super(name);
     }
 
-    String getSymbol() {
+    public String getSymbol() {
         return "T";
     }
 }

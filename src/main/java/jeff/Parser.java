@@ -1,8 +1,10 @@
+package jeff;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    static boolean execute(String message, TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public static boolean execute(String message, TaskList tasks, Ui ui, Storage storage) throws JeffException {
         boolean isExit = false;
         String[] messageSplit = message.split(",");
         String[] messageMain = messageSplit[0].split(" ", 2);
@@ -10,7 +12,7 @@ public class Parser {
         try {
             cmd = Command.valueOf(messageMain[0]);
         } catch(IllegalArgumentException e) {
-            throw new DukeException("I can't understand the message");
+            throw new JeffException("I can't understand the message");
         }
 
         switch(cmd) {
@@ -29,7 +31,7 @@ public class Parser {
 
         case todo:
             if (messageMain.length < 2) {
-                throw new DukeException("please provide a description for todo");
+                throw new JeffException("please provide a description for todo");
             }
             Task todo = new ToDo(messageMain[1]);
             tasks.addTask(todo);
@@ -38,7 +40,7 @@ public class Parser {
 
         case deadline:
             if (messageMain.length < 2) {
-                throw new DukeException("please provide a description for deadline");
+                throw new JeffException("please provide a description for deadline");
             }
             try {
                 String[] dateTime = messageSplit[1].split("by ")[1].split(" ", 2);
@@ -46,15 +48,15 @@ public class Parser {
                 tasks.addTask(deadline);
                 ui.print("Got it. I've added this task:\n" + deadline + tasks.queryNumTasks());
             } catch(ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("please provide a date and time for deadline");
+                throw new JeffException("please provide a date and time for deadline");
             } catch(DateTimeParseException e) {
-                throw new DukeException("please provide datetime as YYYY-MM-DD HH:MM");
+                throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
 
         case event:
             if (messageMain.length < 2) {
-                throw new DukeException("please provide a description for event");
+                throw new JeffException("please provide a description for event");
             }
             try {
                 String[] dateTime = messageSplit[1].split("at ")[1].split(" ", 2);
@@ -62,15 +64,15 @@ public class Parser {
                 tasks.addTask(event);
                 ui.print("Got it. I've added this task:\n" + event + tasks.queryNumTasks());
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("please provide a date and time for event");
+                throw new JeffException("please provide a date and time for event");
             } catch(DateTimeParseException e) {
-                throw new DukeException("please provide datetime as YYYY-MM-DD HH:MM");
+                throw new JeffException("please provide datetime as YYYY-MM-DD HH:MM");
             }
             break;
 
         case done:
             if(messageMain.length != 2) {
-                throw new DukeException("wrong number of arguments for done");
+                throw new JeffException("wrong number of arguments for done");
             }
             try {
                 int taskIndex = Integer.parseInt(messageMain[1]) - 1;
@@ -78,15 +80,15 @@ public class Parser {
                 doneTask.setDone();
                 ui.print("Nice! I've marked this task as done:\n" + doneTask);
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("task number does not exist");
+                throw new JeffException("task number does not exist");
             } catch(NumberFormatException e) {
-                throw new DukeException("indicate task number as an integer");
+                throw new JeffException("indicate task number as an integer");
             }
             break;
 
         case delete:
             if(messageMain.length != 2) {
-                throw new DukeException("wrong number of arguments for delete");
+                throw new JeffException("wrong number of arguments for delete");
             }
             try {
                 int taskIndex = Integer.parseInt(messageMain[1]) - 1;
@@ -94,9 +96,9 @@ public class Parser {
                 tasks.deleteTask(taskIndex);
                 ui.print("Noted. I've removed this task:\n" + toRemove + tasks.queryNumTasks());
             } catch(IndexOutOfBoundsException e) {
-                throw new DukeException("task number does not exist");
+                throw new JeffException("task number does not exist");
             } catch(NumberFormatException e) {
-                throw new DukeException("indicate task number as an integer");
+                throw new JeffException("indicate task number as an integer");
             }
             break;
 

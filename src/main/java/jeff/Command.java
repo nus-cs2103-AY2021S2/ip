@@ -1,3 +1,5 @@
+package jeff;
+
 public enum Command {
     list,
     todo,

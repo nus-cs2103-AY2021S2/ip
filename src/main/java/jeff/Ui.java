@@ -1,3 +1,5 @@
+package jeff;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -11,11 +13,11 @@ public class Ui {
                              + " \\____/ \\___|_| |_| \n";
     private final Scanner sc;
 
-    Ui() {
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
-    void print(String s) {
+    public void print(String s) {
         String[] sSplit = s.split("\n");
         System.out.println(BORDER);
         for(String line: sSplit) {
@@ -24,15 +26,15 @@ public class Ui {
         System.out.println(BORDER + "\n");
     }
 
-    void printError(String s) {
+    public void printError(String s) {
         print("OOPS!!! Error: " + s);
     }
 
-    void showWelcome() {
+    public void showWelcome() {
         print("Hello I'm\n" + LOGO + "\nWhat can I do for you?");
     }
 
-    String readMessage() {
+    public String readMessage() {
         return sc.nextLine();
     }
 }

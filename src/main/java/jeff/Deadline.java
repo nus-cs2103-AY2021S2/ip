@@ -1,3 +1,5 @@
+package jeff;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -6,21 +8,21 @@ public class Deadline extends Task{
     private final LocalDate date;
     private final LocalTime time;
 
-    Deadline(String name, String date, String time) throws DateTimeParseException {
+    public Deadline(String name, String date, String time) throws DateTimeParseException {
         super(name);
         this.date = LocalDate.parse(date);
         this.time = LocalTime.parse(time);
     }
 
-    LocalDate getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 
-    LocalTime getTime() {
+    public LocalTime getTime() {
         return this.time;
     }
 
-    String getSymbol() {
+    public String getSymbol() {
         return "D";
     }
 

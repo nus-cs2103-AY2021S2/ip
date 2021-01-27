@@ -1,3 +1,5 @@
+package jeff;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,11 +10,11 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws JeffException {
         try {
             File data = new File(filePath);
             Scanner sc = new Scanner(data);
@@ -44,11 +46,11 @@ public class Storage {
             }
             return savedTasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException("No saved tasks");
+            throw new JeffException("No saved tasks");
         }
     }
 
-    void save(ArrayList<Task> tasks) throws DukeException{
+    public void save(ArrayList<Task> tasks) throws JeffException {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
@@ -65,7 +67,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Cannot save tasks" + e.getMessage());
+            throw new JeffException("Cannot save tasks" + e.getMessage());
         }
     }
 }

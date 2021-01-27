@@ -1,37 +1,39 @@
+package jeff;
+
 import java.util.ArrayList;
 
 public class TaskList {
     private final ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> loadedTasks) {
+    public TaskList(ArrayList<Task> loadedTasks) {
         tasks = loadedTasks;
     }
 
-    ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
 
-    int getNumTasks() {
+    public int getNumTasks() {
         return tasks.size();
     }
 
-    String queryNumTasks() {
+    public String queryNumTasks() {
         return "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    Task getTask(int i){
+    public Task getTask(int i){
         return tasks.get(i);
     }
 
-    void addTask(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
-    void deleteTask(int i) {
+    public void deleteTask(int i) {
         tasks.remove(i);
     }
 }

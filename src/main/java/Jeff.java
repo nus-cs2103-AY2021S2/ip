@@ -1,15 +1,17 @@
-public class Duke {
+import jeff.*;
+
+public class Jeff {
 
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
 
-    public Duke(String filePath) {
+    public Jeff(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (JeffException e) {
             ui.printError(e.getMessage());
             tasks = new TaskList();
         }
@@ -22,13 +24,13 @@ public class Duke {
             String fullMessage = ui.readMessage();
             try {
                 isExit = Parser.execute(fullMessage, tasks, ui, storage);
-            } catch (DukeException d) {
+            } catch (JeffException d) {
                 ui.printError(d.getMessage());
             }
         }
     }
 
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Jeff("data.txt").run();
     }
 }
