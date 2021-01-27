@@ -1,15 +1,8 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeDateTimeException;
-import duke.exception.DukeDescriptionException;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -29,12 +22,12 @@ public class Parser {
         try {
             switch (command) {
                 case "todo":
-                    checkDescription(split);
+                    checkStringArgument(split, command);
                     String description = userInput.substring(5);
                     res = new AddCommand(new ToDo(description));
                     break;
                 case "deadline":
-                    checkDescription(split);
+                    checkStringArgument(split, command);
                     String[] deadlineDetails = userInput.substring(9).split(" /by ");
                     checkDateTime(deadlineDetails);
                     String deadlineDescription = deadlineDetails[0];
@@ -42,7 +35,7 @@ public class Parser {
                     res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
                     break;
                 case "event":
-                    checkDescription(split);
+                    checkStringArgument(split, command);
                     String[] eventDetails = userInput.substring(6).split(" /at ");
                     checkDateTime(eventDetails);
                     String eventDescription = eventDetails[0];
@@ -53,12 +46,17 @@ public class Parser {
                     res = new ListCommand();
                     break;
                 case "done":
-                    int completedTaskIdx = checkArgument(split, tasks);
+                    int completedTaskIdx = checkNumericalArgument(split, tasks);
                     res = new DoneCommand(completedTaskIdx);
                     break;
                 case "delete":
-                    int taskToDelete = checkArgument(split, tasks);
+                    int taskToDelete = checkNumericalArgument(split, tasks);
                     res = new DeleteCommand(taskToDelete);
+                    break;
+                case "find":
+                    checkStringArgument(split, command);
+                    String keyword = userInput.substring(5);
+                    res = new FindCommand(keyword);
                     break;
                 case "bye":
                     res = new ExitCommand();
@@ -72,9 +70,11 @@ public class Parser {
         return res;
     }
 
-    private static void checkDescription(String[] split) throws DukeDescriptionException {
-        if (split.length == 1) {
-            throw new DukeDescriptionException("You have not entered a description!");
+    private static void checkStringArgument(String[] split, String command) throws DukeArgumentException {
+        if (split.length == 1 && command.equals("find")) {
+            throw new DukeArgumentException("You have not entered a keyword!");
+        } else if (split.length == 1) {
+            throw new DukeArgumentException("You have not entered a task description!");
         }
     }
 
@@ -84,7 +84,7 @@ public class Parser {
         }
     }
 
-    private static int checkArgument(String[] split, TaskList tasks) throws DukeArgumentException {
+    private static int checkNumericalArgument(String[] split, TaskList tasks) throws DukeArgumentException {
         if (split.length > 2) {
             throw new DukeArgumentException("Please enter a numerical value for the task index!");
         }
