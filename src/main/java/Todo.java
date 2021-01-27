@@ -4,6 +4,10 @@ public class Todo extends Task{
         super(name);
     }
 
+    public Todo(String name, boolean done) {
+        super(name, done);
+    }
+
     @Override
     public String toString() {
         if (this.done) {

@@ -1,12 +1,49 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
+
+        ArrayList<Task> taskList = new ArrayList<>();
+
+        File tasksFile = new File("duke.txt");
+        if (!tasksFile.exists()) {
+            tasksFile.createNewFile();
+        }
+
+        Scanner readFile = new Scanner(tasksFile);
+        while (readFile.hasNext()) {
+            String taskName = "";
+            String nextTask = readFile.nextLine();
+            boolean done = false;
+            if (nextTask.charAt(4) == '1') {
+                done = true;
+            }
+            if (nextTask.startsWith("T")) {
+                taskName = nextTask.substring(8);
+                taskList.add(new Todo(taskName, done));
+            } else if (nextTask.startsWith("E")) {
+                int index = nextTask.lastIndexOf("|");
+                taskName = nextTask.substring(8, index - 1);
+                String time = nextTask.substring(index + 2);
+                taskList.add(new Event(taskName, done, time));
+            } else if (nextTask.startsWith("D")) {
+                int index = nextTask.lastIndexOf("|");
+                taskName = nextTask.substring(8, index - 1);
+                String deadline = nextTask.substring(index + 2);
+                taskList.add(new Deadline(taskName, done, deadline));
+            }
+        }
+
+
         System.out.println("Hello! I'm Bob :D\n" + "What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<>();
+
+        boolean updates = false;
 
         while (true) {
             String userInput = scanner.nextLine();
@@ -26,7 +63,7 @@ public class Duke {
                     Task updatedTask = taskList.get(index - 1);
                     updatedTask.status(true);
                     System.out.println("Good job! This task has been marked as done :)\n" + updatedTask);
-
+                    updates = true;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Remember to specify which task you are done with " +
                             "using a valid number", e);
@@ -41,7 +78,7 @@ public class Duke {
                     System.out.println("Alright, I have added this new todo.\n" +
                             newTodo + "\n" +
                             "There are a total of " + taskList.size() + " tasks now.");
-
+                    updates = true;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("The description of a todo cannot be empty.", e);
                 }
@@ -56,6 +93,7 @@ public class Duke {
                         System.out.println("Alright, I have added this new event.\n" +
                                 newEvent + "\n" +
                                 "There is a total of " + taskList.size() + " tasks now.");
+                        updates = true;
                     } else {
                         System.out.println("There is no event timing detected!\n" +
                                 "Please try again with a correct format");
@@ -74,6 +112,7 @@ public class Duke {
                         System.out.println("Alright, I have added this new deadline.\n" +
                                 newDeadline + "\n" +
                                 "There is a total of " + taskList.size() + " tasks now.");
+                        updates = true;
                     } else {
                         System.out.println("There is no deadline time and date detected!\n" +
                                 "Please try again with a correct format");
@@ -89,7 +128,7 @@ public class Duke {
                     Task deletedTask = taskList.remove(index - 1);
                     System.out.println("Alright, this task has been removed.\n" +
                             deletedTask + "\nThere are " + taskList.size() + " tasks left.");
-
+                    updates = true;
                 } catch (IndexOutOfBoundsException e) {
                     throw new DukeException("Remember to specify which task you want to remove" +
                             "using a valid number", e);
@@ -98,6 +137,26 @@ public class Duke {
                 }
             } else {
                 System.out.println("Sorry, I have no idea what that means :( Please try again!");
+            }
+            if (updates) {
+                FileWriter fw = new FileWriter("duke.txt");
+                for (int i = 0; i < taskList.size(); i++) {
+                    Task nextTask = taskList.get(i);
+                    String done = nextTask.done ? "1" : "0";
+                    String type = nextTask.toString().substring(1,2);
+                    String name = nextTask.name;
+                    String time = "";
+                    if (type.equals("E")) {
+                        int index = nextTask.toString().indexOf("at: ");
+                        time = nextTask.toString().substring(index + 4, nextTask.toString().length() - 1);
+                    } else if (type.equals("D")) {
+                        int index = nextTask.toString().indexOf("by: ");
+                        time = nextTask.toString().substring(index + 4, nextTask.toString().length() - 1);
+                    }
+                    fw.write(type + " | " + done + " | " + name + time + System.lineSeparator());
+                }
+                fw.close();
+                updates = false;
             }
         }
     }
