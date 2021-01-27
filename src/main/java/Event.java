@@ -10,4 +10,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + eventTime + ")";
     }
+
+    @Override
+    public String generateDataString() {
+        return "event" + taskName + eventTime + (done ? "done" : "notDone");
+    }
 }

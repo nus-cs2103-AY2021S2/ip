@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     String taskName;
     boolean done;
 
@@ -21,4 +21,6 @@ public class Task {
     public String toString() {
         return "[" + (done? "x" : " ") + "] " + taskName;
     }
+
+    public abstract String generateDataString();
 }
