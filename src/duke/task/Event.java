@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends Task {
     private static final String TYPE = "E";
     private static final String SEPARATOR = "\\|";

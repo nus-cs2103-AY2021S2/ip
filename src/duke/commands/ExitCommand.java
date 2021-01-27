@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.TaskList;
+
 import java.util.regex.Pattern;
 
 public class ExitCommand extends Command {

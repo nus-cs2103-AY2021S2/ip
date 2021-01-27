@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.commands.CommandResult;
+
 public interface Ui {
     String readCommand();
 

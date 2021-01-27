@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -6,6 +12,7 @@ public class DeleteCommand extends Command {
     private static final Pattern DELETE_INDEX = Pattern.compile("(?i)delete\\s+(\\d+)$");
 
     private final String argStr;
+
 
     private DeleteCommand(String argStr) {
         this.argStr = argStr;

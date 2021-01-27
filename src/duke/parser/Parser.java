@@ -1,3 +1,16 @@
+package duke.parser;
+
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddToDoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.DukeException;
+import duke.commands.ExitCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+
 public class Parser {
     public Command parseCmd(String rawInput) {
         String cmd = rawInput.trim();

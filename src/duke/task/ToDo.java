@@ -1,3 +1,5 @@
+package duke.task;
+
 public class ToDo extends Task {
     private static final String TYPE = "T";
     private static final String SEPARATOR = "\\|";

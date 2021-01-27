@@ -1,3 +1,5 @@
+package duke.commands;
+
 public class CommandResult {
     protected String feedback;
     protected boolean isExit;

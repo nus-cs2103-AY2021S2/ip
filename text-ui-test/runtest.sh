@@ -12,7 +12,7 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src/duke -Xlint:none -d ../bin $(find ../src/duke/* | grep .java)
 then
     echo "********** BUILD FAILURE **********"
     exit 1
