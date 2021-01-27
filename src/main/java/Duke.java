@@ -41,6 +41,7 @@ public class Duke {
     }
 
     static public void scanFile() throws FileNotFoundException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         File file = new File("data/duke.txt");
 
         Scanner fileScanner = new Scanner(file);
@@ -67,7 +68,7 @@ public class Duke {
                 }
                 String by = fileScanner.next();
                 String time = fileScanner.next();
-                tasks.add(new Deadline(desc, by, time));
+                tasks.add(new Deadline(desc, LocalDate.parse(format(by)), LocalTime.parse(time)));
                 if (done.equals("1")) {
                     tasks.get(i).markAsDone();
                 }
@@ -82,7 +83,7 @@ public class Duke {
                 }
                 String at = fileScanner.next();
                 String time = fileScanner.next();
-                tasks.add(new Event(desc, at, time));
+                tasks.add(new Event(desc, LocalDate.parse(format(at)), LocalTime.parse(time)));
                 if (done.equals("1")) {
                     tasks.get(i).markAsDone();
                 }
@@ -162,11 +163,13 @@ public class Duke {
             }
             String date = sc.next();
             String time = sc.next();
+            String localTime = "";
+            localTime += time.substring(0, 2) + ":" + time.substring(2, 4);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
             if (key.equals("event")) {
-                addTask(new Event(desc, date, time));
+                addTask(new Event(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime)));
             } else {
-                addTask(new Deadline(desc, date, time));
+                addTask(new Deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime)));
             }
         } else if (key.equals("delete")) {
             int n = sc.nextInt();
@@ -238,5 +241,15 @@ public class Duke {
                 "     | |_| | |_| |   <  __/\n" +
                 "     |____/ \\__,_|_|\\_\\___|\n\n     " +
                 "Hello! I'm Duke :P");
+    }
+
+    public static String format(String date) {
+        if (date.charAt(1) == '/') {
+            date = "0" + date;
+        }
+        if (date.charAt(4) == '/') {
+            date = date.substring(0, 3) + "0" + date.substring(3);
+        }
+        return date;
     }
 }

@@ -2,10 +2,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event extends Task {
-    String at;
-    String time;
+    LocalDate at;
+    LocalTime time;
 
-    public Event(String description, String at, String time) {
+    public Event(String description, LocalDate at, LocalTime time) {
         super(description);
         this.at = at;
         this.time = time;
