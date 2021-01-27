@@ -3,6 +3,7 @@ package main.java;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,80 +23,57 @@ public class TaskList {
         Ui.echo(builder.toString().trim());
     }
 
-    public void addTodo(String todoStr) throws DukeException {
-        Pattern p = Pattern.compile("(?<=todo ).*");
-        Matcher matcher = p.matcher(todoStr);
-        if (!matcher.find()) {
+    public void addTodo(HashMap<String, String> commands) throws DukeException {
+        String taskName = commands.get("info");
+        if (taskName == "") {
             throw new DukeException("Todo tasks should be formatted as such: todo [task name].");
         }
 
-        String taskName = matcher.group();
         Task todoTask = new Todo(taskName);
         tasks.add(todoTask);
 
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
     }
 
-    public void addEvent(String eventStr) throws DukeException {
-        // First get the task name
-        Pattern p = Pattern.compile("(?<=event )(.*)(?= \\/at)");
-        Matcher matcher = p.matcher(eventStr);
-        if (!matcher.find()) {
-            throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
-        }
-        String taskName = matcher.group();
+    public void addEvent(HashMap<String, String> commands) throws DukeException {
+        String eventName = commands.get("info");
+        String timeStr = commands.get("at");
 
-        // The get the time
-        p = Pattern.compile("(?<=\\/at ).*");
-        matcher = p.matcher(eventStr);
-        if (!matcher.find()) {
+        if (eventName == "" || timeStr == "") {
             throw new DukeException("Event tasks should be formatted as such: event [event name] /by [event time].");
         }
 
-        String timeStr = matcher.group();
         LocalDateTime timeOfEvent = parseDateStr(timeStr);
-        Event eventTask = new Event(taskName, timeOfEvent);
+        Event eventTask = new Event(eventName, timeOfEvent);
         tasks.add(eventTask);
 
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", eventTask.toString(), getNumberOfTasksString(tasks)));
     }
 
-    public void addDeadline(String deadlineStr) throws DukeException {
-        // First get the task name
-        Pattern p = Pattern.compile("(?<=deadline )(.*)(?= \\/by)");
-        Matcher matcher = p.matcher(deadlineStr);
-        if (!matcher.find()) {
-            throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
-        }
-        String taskName = matcher.group();
+    public void addDeadline(HashMap<String, String> commands) throws DukeException {
+        String deadlineName = commands.get("info");
+        String deadlineTimeStr = commands.get("by");
 
-        // The get the deadline
-        p = Pattern.compile("(?<=\\/by ).*");
-        matcher = p.matcher(deadlineStr);
-        if (!matcher.find()) {
+        if (deadlineName == "" || deadlineTimeStr == "") {
             throw new DukeException("Deadline tasks should be formatted as such: deadline [task name] /by [deadline].");
         }
 
-        String deadlineTimeStr = matcher.group();
         LocalDateTime deadlineOfTask = parseDateStr(deadlineTimeStr);
-        Deadline deadlineTask = new Deadline(taskName, deadlineOfTask);
+        Deadline deadlineTask = new Deadline(deadlineName, deadlineOfTask);
 
         tasks.add(deadlineTask);
 
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", deadlineTask.toString(), getNumberOfTasksString(tasks)));
     }
 
-    public void deleteTask(String input) throws DukeException {
-        int taskIdx;
-        String taskIdxStr;
-        try {
-            taskIdxStr = input.split(" ")[1];
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list].");
-        }
+    public void deleteTask(HashMap<String, String> commands) throws DukeException {
+        String taskToDeleteStr = commands.get("info");
 
+        if (taskToDeleteStr == "") {
+            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+        }
         try {
-            taskIdx = Integer.parseInt(taskIdxStr) - 1;
+            int taskIdx = Integer.parseInt(taskToDeleteStr) - 1;
             Task taskToDelete = tasks.get(taskIdx);
             tasks.remove(taskToDelete);
             Ui.echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
@@ -105,17 +83,16 @@ public class TaskList {
             throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
         }
     }
-    public void markTaskAsDone(String input) throws DukeException {
-        int taskIdx;
-        String taskIdxStr;
-        try {
-            taskIdxStr = input.split(" ")[1];
-        } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+
+    public void markTaskAsDone(HashMap<String, String> commands) throws DukeException {
+        String taskToMarkAsDoneStr = commands.get("info");
+
+        if (taskToMarkAsDoneStr == "") {
             throw new DukeException("Marking a task as done needs to be done like this: done [task number from list].");
         }
 
         try {
-            taskIdx = Integer.parseInt(taskIdxStr) - 1;
+            int taskIdx = Integer.parseInt(taskToMarkAsDoneStr) - 1;
             tasks.get(taskIdx).setDone();
             Ui.echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
@@ -124,6 +101,7 @@ public class TaskList {
             throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
         }
     }
+
     public String getNumberOfTasksString(List<Task> tasks) {
         return String.format("Now you have %d items in your list", tasks.size());
     }

@@ -1,5 +1,7 @@
 package main.java;
 
+import java.util.HashMap;
+
 public class Duke {
     static TaskList tasks;
     static DataStorage storage;
@@ -12,29 +14,30 @@ public class Duke {
         while (shouldRun) {
             try {
                 String input = Ui.readCommand();
-                switch (input.split(" ")[0]) {
+                HashMap<String, String> parsedCommands = Parser.parseCommand(input);
+                switch (parsedCommands.get("command")) {
+                case "todo": {
+                    tasks.addTodo(parsedCommands);
+                    break;
+                }
+                case "event": {
+                    tasks.addEvent(parsedCommands);
+                    break;
+                }
+                case "deadline": {
+                    tasks.addDeadline(parsedCommands);
+                    break;
+                }
                 case "list": {
                     tasks.listTasks();
                     break;
                 }
                 case "done": {
-                    tasks.markTaskAsDone(input);
+                    tasks.markTaskAsDone(parsedCommands);
                     break;
                 }
                 case "delete": {
-                    tasks.deleteTask(input);
-                    break;
-                }
-                case "todo": {
-                    tasks.addTodo(input);
-                    break;
-                }
-                case "deadline": {
-                    tasks.addDeadline(input);
-                    break;
-                }
-                case "event": {
-                    tasks.addEvent(input);
+                    tasks.deleteTask(parsedCommands);
                     break;
                 }
                 case "bye": {
