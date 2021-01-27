@@ -2,11 +2,22 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class EventTask extends Task{
+/**
+ * EventTask class models an actual task that the user is about to do or has completed
+ * with a given timing of the task. It also inherits from the Task class.
+ * Its details include the description
+ */
+public class EventTask extends Task {
 
     /** Timing of the event task */
     private LocalDate timing;
-
+    
+    /**
+     * Constructor to initialize the EventTask
+     *
+     * @param description the description of the EventTask
+     * @param timing the EventTask timing
+     */
     public EventTask(String description, String timing) {
         super(description, "[E]");
 
@@ -44,7 +55,10 @@ public class EventTask extends Task{
     public LocalDate getTimingAsLocalDate() {
         return this.timing;
     }
-
+    
+    /**
+     * toString method of EventTask which prints out details of the EventTask
+     */
     @Override
     public String toString() {
         return "       " + this.type + super.toString().trim() + " " + getTiming();

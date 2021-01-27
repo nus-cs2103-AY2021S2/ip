@@ -1,5 +1,9 @@
 package duke.tasks;
 
+/**
+ * Task class models an actual task that the user is about to do or has completed
+ * Its details include the description as well as the type of the task
+ */
 public class Task {
     /** description about task */
     protected String description;
@@ -9,7 +13,11 @@ public class Task {
 
     /** type of Task */
     protected String type = "";
-
+    
+    /**
+     * @param description the description of the task
+     * @param  type the task type
+     */
     public Task(String description, String type) {
         this.description = description;
         this.type = type;
@@ -59,6 +67,9 @@ public class Task {
         return this.description;
     }
     
+    /**
+     * toString method of Task which prints out details of the task
+     */
     @Override
     public String toString() {
         return "       " + this.getStatus() + " " + this.description;

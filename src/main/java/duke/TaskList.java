@@ -7,18 +7,31 @@ import duke.tasks.DeadlineTask;
 import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.ToDoTask;
+
 import java.time.LocalDate;
 
+/**
+ * TaskList class contains a list in which stores all the tasks that the user has inputted and not deltted
+ */
 public class TaskList {
 
     /** The list of tasks */
     private List<Task> inputList = new ArrayList<>();
-
+    
+    /**
+     * TaskList constructor to intialize a new empty TaskList
+     */
     public TaskList() {
         this.inputList = new ArrayList<>();
     }
 
+    /**
+     * TaskList constructor to intialize a new TaskList with a given ArrayList of tasks
+     * the tasks are all stored as string format which is processed before being
+     * added to the current task list
+     */
     public TaskList(ArrayList<String> tasks) {
+
         for (String taskStr: tasks) {
             String[] arr = taskStr.split("\\|");
 
@@ -32,8 +45,9 @@ public class TaskList {
 
                 DeadlineTask deadlineTask = new DeadlineTask(arr[2], reformattedDeadline);
 
-                if (arr[1].equals("1"))
+                if (arr[1].equals("1")) {
                     deadlineTask.markAsDone();
+                }
 
                 inputList.add(deadlineTask);
 
@@ -43,16 +57,18 @@ public class TaskList {
 
                 EventTask eventTask = new EventTask(arr[2], reformattedTiming);
 
-                if (arr[1].equals("1"))
+                if (arr[1].equals("1")) {
                     eventTask.markAsDone();
+                }
 
                 inputList.add(eventTask);
 
             } else {
                 ToDoTask toDoTask = new ToDoTask(arr[2]);
 
-                if (arr[1].equals("1"))
+                if (arr[1].equals("1")) {
                     toDoTask.markAsDone();
+                }
 
                 inputList.add(toDoTask);
             }
@@ -94,6 +110,7 @@ public class TaskList {
      * @return A ToDoTask
      */
     public ToDoTask handleToDoTask(String action) {
+
         int index = action.indexOf(" ");
         String description = action.substring(index + 1);
 
@@ -110,6 +127,7 @@ public class TaskList {
      * @return A EventTask
      */
     public EventTask handleEventTask(String action) {
+
         int actionIndex = action.indexOf(" ");
         int descriptionIndex = action.indexOf("/");
 
@@ -169,7 +187,6 @@ public class TaskList {
         Task task = this.inputList.remove(index - 1);
 
         return task;
-
     }
 
     /**
@@ -178,7 +195,9 @@ public class TaskList {
      * @return A string to be written into the file.
      */
     public String getListToWrite() {
+
         String result = "";
+
         for (int i = 0; i < inputList.size(); i++) {
             Task task = inputList.get(i);
             char type = task.getType();
@@ -239,9 +258,16 @@ public class TaskList {
 
         return result;
     }
-
+    
+    /**
+     * Returns a List of tasks that match the keyword inputted
+     *
+     * @param keyword the keyword to search for in the tasks
+     * @return the list of tasks which contain that keyword
+     */
     public List<Task> getMatch(String keyword) {
         List<Task> matchList = new ArrayList<>();
+
         for (Task task: inputList) {
             if (task.getDescription().contains(keyword)) {
                 matchList.add(task);

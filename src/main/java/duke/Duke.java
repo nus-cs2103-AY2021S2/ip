@@ -10,6 +10,9 @@ import duke.tasks.DeadlineTask;
 
 import java.util.List;
 
+/**
+ * Duke class that simulates the running of the Duke Program
+ */
 public class Duke {
 
     /** Storage instance that is used by Duke during run for loading and writing of file*/
@@ -21,25 +24,35 @@ public class Duke {
     /** Ui instance used by Duke during run to interact with User */
     private Ui ui;
 
+    /**
+     * Constructor for the Duke class
+     */
     public Duke(String filePath) {
 
         ui = new Ui();
 
         try {
+
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
+
         } catch (DukeException e) {
+
             ui.showLoadingError();
             tasks = new TaskList();
+
         }
     }
 
     /**
-     * Runs the Duke Program.
+     * Runs the Duke Program. The Duke Program will watch for user input and react accordingly to the
+     * user input in this method
      */
     public void run() {
         ui.printDivider();
-        ui.welcome();
+        
+        ui.printWelcome();
+        
         ui.printDivider();
 
         try {
@@ -48,30 +61,38 @@ public class Duke {
             while (carryOn) {
 
                 String action = ui.read();
+
                 Parser parser = new Parser(action);
                 parser.check();
+
                 String[] parsedAction = parser.getParsedAction();
 
                 switch (parsedAction[0]) {
-                case "todo":
+
+                    case "todo":
                     ui.printDivider();
+
                     ui.addPrint();
 
                     ToDoTask todo = tasks.handleToDoTask(action);
 
                     ui.printTask(todo);
                     ui.countTasks(tasks);
+
                     ui.printDivider();
+
                     break;
 
                 case "deadline":
                     ui.printDivider();
+
                     ui.addPrint();
 
                     DeadlineTask deadlineTask = tasks.handleDeadlineTask(action);
 
                     ui.printTask(deadlineTask);
                     ui.countTasks(tasks);
+
                     ui.printDivider();
                     break;
 
@@ -84,23 +105,29 @@ public class Duke {
 
                     ui.printTask(eventTask);
                     ui.countTasks(tasks);
+
                     ui.printDivider();
                     break;
 
                 case "list":
                     ui.printDivider();
+
                     ui.printStored(tasks);
+
                     ui.printDivider();
+
                     break;
 
                 case "done":
                     int number = Integer.valueOf(parsedAction[1]);
                     ui.printDivider();
+
                     ui.printMarked();
 
                     Task completed = tasks.handleDone(number);
 
                     ui.printTask(completed);
+
                     ui.printDivider();
                     break;
 
@@ -110,6 +137,7 @@ public class Duke {
                     String result = tasks.findOnDateTasks((parsedAction[1]));
 
                     ui.print(result);
+
                     ui.printDivider();
 
                     break;
@@ -123,6 +151,7 @@ public class Duke {
                     int index = Integer.valueOf(parsedAction[1]);
 
                     ui.printDivider();
+
                     ui.printRemoved();
 
                     Task task = tasks.handleDelete(index);
@@ -152,18 +181,26 @@ public class Duke {
             }
 
             ui.printDivider();
-            ui.bye();
+
+            ui.printBye();
+
             ui.printDivider();
 
             storage.write(tasks);
 
         } catch (DukeException e) {
             ui.printDivider();
+
             ui.print(e.getMessage());
+
             ui.printDivider();
         }
     }
 
+    /**
+     * main driver method to run the Duke program
+     * @param args variable arguments
+     */
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }

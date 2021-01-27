@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Storage class that is used for the reading and writing of the list file
+ */
 public class Storage {
 
     /** Filewriter instance used to write into the file */
@@ -19,9 +22,14 @@ public class Storage {
     /** Scanner instance that will be used to load file contents into Duke */
     private Scanner sc = null;
 
+    /**
+     * Storage class constructor to initialize the Storage object
+     * @param
+     */
     public Storage(String filepath) throws DukeOnlyIOException {
 
         try {
+
             this.file = new File(filepath);
             sc = new Scanner(this.file);
 
@@ -41,6 +49,7 @@ public class Storage {
      * @return An ArrayList of String
      */
     public ArrayList<String> load() {
+
         ArrayList<String> list = new ArrayList<>();
 
         while (sc.hasNext()) {

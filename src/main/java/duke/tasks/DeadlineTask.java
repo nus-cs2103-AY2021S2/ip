@@ -2,10 +2,21 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DeadlineTask extends Task{
-    /** The deadlin of the deadline task */
+/**
+ * DetailTask class models an actual task that the user is about to do or has completed
+ * with a given deadline. It also inherits from the Task class.
+ * Its details include the description
+ */
+public class DeadlineTask extends Task {
+    /** The deadline of the deadline task */
     private LocalDate deadline;
-
+    
+    /**
+     * Constructor to initalize a Deadline Task
+     *
+     * @param description the description of the task
+     * @param deadline the task deadline
+     */
     public DeadlineTask(String description, String deadline) {
         super(description, "[D]");
         this.deadline = LocalDate.parse(deadline);
@@ -42,7 +53,10 @@ public class DeadlineTask extends Task{
     public LocalDate getDeadlineAsLocalDate() {
         return this.deadline;
     }
-
+    
+    /**
+     * toString method of DeadlineTask which prints out details of the deadline task
+     */
     @Override
     public String toString() {
         return "       " + this.type + super.toString().trim() + " " + this.getDeadline();

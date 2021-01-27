@@ -1,12 +1,20 @@
 package duke;
 
 import duke.tasks.Task;
+
 import java.util.Scanner;
 import java.util.List;
 
+/**
+ * UI class that is responsible for reading user input and printing
+ */
 public class Ui {
-
-    public Ui() {}
+    
+    /**
+     * Constructor to initialize the UI Class
+     */
+    public Ui() {
+    }
 
     /**
      * Returns A string which is the user input.
@@ -24,23 +32,24 @@ public class Ui {
      * Prints the divider line.
      */
     public void printDivider() {
-        String divider = "    ___________________________________________";
-        System.out.println(divider);
+        String DIVIDER = "    ___________________________________________";
+        System.out.println(DIVIDER);
     }
 
     /**
      * Prints the welcome message.
      */
-    public void welcome() {
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
+    public void printWelcome() {
+        String INTRODUCTION = "     Hello! I'm Duke\n" + "     What can I do for you?";
+        System.out.println(INTRODUCTION);
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void bye() {
-        System.out.println("     Bye. Hope to see you again soon!");
+    public void printBye() {
+        String FAREWELL = "     Bye. Hope to see you again soon!";
+        System.out.println(FAREWELL);
     }
 
     /**
@@ -65,14 +74,17 @@ public class Ui {
      * Prints the message when a task is added.
      */
     public void addPrint() {
-        System.out.println("     Got it. I've added this task: ");
+        String PRINT_ADD_TASK = "     Got it. I've added this task: ";
+        System.out.println(PRINT_ADD_TASK);
     }
 
     /**
      * Prints the error when attempting to load file message.
      */
     public void showLoadingError() {
-        System.out.println("     Unable to load file. Creating new one");
+
+        String UNABLE_TO_LOAD = "     Unable to load file. Creating new one";
+        System.out.println(UNABLE_TO_LOAD);
     }
 
     /**
@@ -81,23 +93,42 @@ public class Ui {
      * @param list Tasklist
      */
     public void countTasks(TaskList list) {
-        System.out.println("     Now you have " + list.getList().size() + " tasks in the list.");
+
+        String COUNT_TASKS_MESSAGE = "     Now you have " + list.getList().size() + " tasks in the list.";
+        System.out.println(COUNT_TASKS_MESSAGE);
     }
 
     /**
      * Prints the message when a task is removed.
      */
     public static void printRemoved() {
-        System.out.println("     Noted. I've removed this task: ");
+
+        String REMOVE_TASK_MESSAGE = "     Noted. I've removed this task: ";
+        System.out.println(REMOVE_TASK_MESSAGE);
     }
 
     /**
      * Prints the message when a task is marked.
      */
     public static void printMarked() {
-        System.out.println("     " + "Nice! I've marked this task as done:");
-    }
 
+        String TASK_MARKED_MESSAGE =  "     Nice! I've marked this task as done:";
+        System.out.println(TASK_MARKED_MESSAGE);
+    }
+    
+    /**
+     * @param list the Task list to be printed
+     * Prints out the current task list
+     */
+    public void printList(List<Task> list) {
+        
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            System.out.println("      " + (i + 1) + "." + task.toString().trim());
+        }
+        
+    }
+    
     /**
      * Prints out the number of tasks inside the TaskList on list command.
      *
@@ -106,23 +137,18 @@ public class Ui {
     public void printStored(TaskList list) {
         List<Task> taskList = list.getList();
 
-        System.out.println("     Here are the tasks in your list:");
+        String TASKS_LIST_MESSAGE = "     Here are the tasks in your list:";
+        System.out.println(TASKS_LIST_MESSAGE);
 
-        for (int i = 0; i < list.getList().size(); i++) {
-            Task task = taskList.get(i);
-            System.out.println("      " + (i + 1) + "." + task.toString().trim());
-        }
+        this.printList(taskList);
     }
-
+    
+    /**
+     * Prints out the matching message when user is finding for a keyword in the list
+     */
     public void printMatching() {
-        System.out.println("     Here are the matching tasks in your list: ");
+        String PRINT_MATCHING_MESSAGE = "     Here are the matching tasks in your list: ";
+        System.out.println(PRINT_MATCHING_MESSAGE);
     }
-
-    public void printList(List<Task> list) {
-        System.out.println("     Here are the matching tasks in your list: ");
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            System.out.println("      " + (i + 1) + "." + task.toString().trim());
-        }
-    }
+    
 }
