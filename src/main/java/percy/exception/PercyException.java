@@ -1,9 +1,17 @@
 package percy.exception;
 
-public abstract class PercyException extends Exception {
+public class PercyException extends Exception {
+    String s;
+
     public PercyException() {
     }
 
+    public PercyException(String s) {
+        this.s = s;
+    }
+
     @Override
-    public abstract String toString();
+    public String toString() {
+        return s;
+    }
 }

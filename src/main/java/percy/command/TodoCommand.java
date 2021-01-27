@@ -11,6 +11,8 @@ import percy.task.Todo;
 import percy.ui.UserInterface;
 
 public class TodoCommand extends Command {
+    public static final String COMMAND = "todo";
+
     private String todoDescription;
     private String date;
 

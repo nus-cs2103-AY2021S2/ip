@@ -8,6 +8,8 @@ import percy.task.TaskList;
 import percy.task.Todo;
 
 public class DoneCommand extends Command {
+    public static final String COMMAND = "done";
+
     private int taskNum;
 
     public DoneCommand(int taskNum) {

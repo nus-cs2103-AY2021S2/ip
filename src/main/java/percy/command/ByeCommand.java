@@ -4,6 +4,8 @@ import percy.task.TaskList;
 import percy.ui.UserInterface;
 
 public class ByeCommand extends Command {
+    public static final String COMMAND = "bye";
+
     public ByeCommand() {
         super(true);
     }

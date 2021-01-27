@@ -7,6 +7,8 @@ import percy.ui.UserInterface;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
+    public static final String COMMAND = "list";
+
     public ListCommand() {
         super(false);
     }
