@@ -20,8 +20,6 @@ import java.util.Set;
 
 public class Duke {
 
-    public static final String fileName = "tasks.data";
-
     /**
      * The task list
      */
@@ -76,64 +74,6 @@ public class Duke {
             }
         }
         return (String[]) tokens.toArray();
-    }
-
-    /**
-     * Save the task list to disk
-     */
-    public static void saveToFile() {
-        try {
-            File fileObj = new File(fileName);
-            fileObj.createNewFile();
-            FileWriter fileWriter = new FileWriter(fileName);
-            // Convert task list to a string
-            StringBuilder data = new StringBuilder();
-            for (Task task : tasks) {
-                data.append(task.toSavedString());
-            }
-            fileWriter.write(data.toString());
-        } catch (IOException e) {
-            Ui.printError(e);
-        }
-    }
-
-    public static void readFromFile() {
-        try {
-            File fileObj = new File(fileName);
-            fileObj.createNewFile();
-            Scanner fileReader = new Scanner(fileObj);
-            StringBuilder data = new StringBuilder();
-            while (fileReader.hasNextLine()) {
-                data.append(fileReader.nextLine());
-            }
-            fileReader.close();
-            tasks.clear();
-            String[] lines = data.toString().split("\n");
-            for (String line:lines) {
-                String[] sections = line.split(" | ");
-                if (sections[0].equals("T")) {
-                    Task task = new TodoTask(sections[2]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                } else if (sections[0].equals("D")) {
-                    Task task = new DeadlineTask(sections[2], sections[3]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                } else if (sections[0].equals("E")) {
-                    Task task = new EventTask(sections[2], sections[3]);
-                    if (sections[1].equals("1")) {
-                        task.setIsDone(true);
-                    }
-                    tasks.add(task);
-                }
-            }
-        } catch (IOException e) {
-            Ui.printError(e);
-        }
     }
 
     /**
@@ -261,7 +201,7 @@ public class Duke {
                 throw new Exception("Unknown command!");
             }
         }
-        saveToFile();
+        Storage.saveToFile(tasks);
         Ui.printHorizontalLine();
         Ui.printEmptyLine();
         return !EXIT_COMMANDS.contains(command);
@@ -277,7 +217,7 @@ public class Duke {
         Ui.printLine("Sou, watashi desu!");
         Ui.printHorizontalLine();
         Ui.printEmptyLine();
-        readFromFile();
+        tasks = Storage.readFromFile();
         for (; ; ) {
             try {
                 if (!processCommand(sc.nextLine())) {
