@@ -1,3 +1,6 @@
+/**
+ * Class which deals with the UI interactions with the user.
+ */
 class Ui {
     static final String FORMAT_LINE = "....................................................";
 

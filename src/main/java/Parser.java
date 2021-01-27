@@ -1,8 +1,18 @@
 import java.time.LocalDate;
 
-class Parser {
+/**
+ * Represents a Parser which deals with making sense of user commands
+ */
+public class Parser {
     public static Ui ui = new Ui();
 
+    /**
+     * Extracts information from the user input and performs the appropriate actions
+     *
+     * @param input   String representing input entered by user
+     * @param tasks   Class containing the list of tasks being tracked
+     * @param storage Class dealing with loading tasks from the file and saving tasks in the file
+     */
     public static void parseInput(String input, TaskList tasks, Storage storage) {
         try {
             if (input.equals("list")) {

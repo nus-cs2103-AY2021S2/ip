@@ -21,7 +21,7 @@ public class Task {
      * @return String with ths status character
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); //return tick or X symbols
+        return (this.isDone ? "X" : " "); //return tick or X symbols
     }
 
     /**
@@ -41,6 +41,12 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns a String which gives information about the task in the
+     * format to be stored in a file.
+     *
+     * @return A String containing information about the task.
+     */
     public String fileString() {
         return this.description;
     }
