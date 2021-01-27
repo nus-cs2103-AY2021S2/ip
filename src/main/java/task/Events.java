@@ -34,7 +34,7 @@ public class Events extends Task {
 
     @Override
     public String tokenize() {
-        String isDoneString = isDone? "1" : "0";
+        String isDoneString = isDone ? "1" : "0";
 
         String result;
 
@@ -50,4 +50,5 @@ public class Events extends Task {
     public String toString() {
         return getDescription();
     }
+
 }

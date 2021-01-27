@@ -46,7 +46,7 @@ public class Deadlines extends Task {
     @Override
     public String tokenize() {
 
-        String isDoneString = isDone? "1" : "0";
+        String isDoneString = isDone ? "1" : "0";
 
         String result;
 

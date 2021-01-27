@@ -22,7 +22,7 @@ public class Todo extends Task {
 
     @Override
     public String tokenize() {
-        String isDoneString = isDone? "1" : "0";
+        String isDoneString = isDone ? "1" : "0";
         String result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
         return result;
     }

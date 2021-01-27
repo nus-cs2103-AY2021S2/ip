@@ -24,7 +24,7 @@ public class Storage {
         try {
             PrintWriter writer = new PrintWriter(this.directory + this.fileName, "UTF-8");
 
-            for (Task task: taskList.getList()) {
+            for (Task task : taskList.getList()) {
                 writer.println(task.tokenize());
             }
 
@@ -132,7 +132,7 @@ public class Storage {
         }
 
         try {
-            File file = new File (this.directory + this.fileName);
+            File file = new File(this.directory + this.fileName);
             if (file.createNewFile()) {
                 System.out.println("Created File: " + this.directory + this.fileName);
             } else {
