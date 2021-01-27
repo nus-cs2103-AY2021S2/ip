@@ -89,9 +89,9 @@ public class Parser {
             }
             ui.deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
         } else {
-            throw (new DukeException("\n    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "    ____________________________________________________________"));
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
         }
     }
 
