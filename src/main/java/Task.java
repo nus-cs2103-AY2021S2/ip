@@ -22,6 +22,15 @@ public class Task {
     }
 
     /**
+     * Returns description of task.
+     *
+     * @return String representing description of the task.
+     */
+    protected String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Checks whether the task is done or not.
      *
      * @return String representing a tick if the task is done, else a String of a space.
