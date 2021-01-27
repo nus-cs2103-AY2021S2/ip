@@ -4,14 +4,14 @@ package duke.tasks;
  * Represents a task.
  */
 public abstract class Task {
-    private final String taskType;
-    private final String name;
-    private boolean isCompleted;
+    protected final String taskType;
+    protected final String name;
+    protected boolean isCompleted;
 
     public Task(String taskType, String name) {
         this.taskType = taskType;
         this.name = name;
-        this.isCompleted = false;
+        isCompleted = false;
     }
 
     public Task(String taskType, String name, boolean isCompleted) {

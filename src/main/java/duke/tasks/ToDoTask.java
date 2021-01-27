@@ -16,7 +16,7 @@ public class ToDoTask extends Task {
 
     @Override
     public String getTaskType() {
-        return IDENTIFIER;
+        return taskType;
     }
 
     @Override

@@ -33,7 +33,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String getTaskType() {
-        return IDENTIFIER;
+        return taskType;
     }
 
     @Override

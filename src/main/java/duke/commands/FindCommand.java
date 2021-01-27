@@ -2,15 +2,15 @@ package duke.commands;
 
 import duke.tasks.Task;
 
+import static duke.utils.Messages.MESSAGE_FOUND_TASKS;
+import static duke.utils.Messages.MESSAGE_INDEX_TASK_FORMAT;
+import static duke.utils.Messages.MESSAGE_NO_MATCHES;
+
 /**
  * Finds tasks that contains specific keywords or phrases.
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-
-    private static final String MESSAGE_NO_MATCHES = "Sorry, there are no matching tasks in your list";
-    private static final String MESSAGE_FOUND_TASKS = "Here are the matching tasks in your list:";
-    private static final String MESSAGE_INDEX_TASK_FORMAT = "%d.%s";
 
     private final String searchWord;
 

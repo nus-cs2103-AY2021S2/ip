@@ -1,12 +1,12 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_EXIT;
+
 /**
  * Exits the application.
  */
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
-
-    private static final String MESSAGE_EXIT = "Exiting...";
 
     @Override
     public CommandResult execute() {

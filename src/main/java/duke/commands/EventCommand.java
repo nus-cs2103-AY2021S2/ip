@@ -2,14 +2,14 @@ package duke.commands;
 
 import duke.tasks.EventTask;
 
+import static duke.utils.Messages.MESSAGE_ADDED_TASK;
+import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
+
 /**
  * Creates an Event task.
  */
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
-
-    private static final String MESSAGE_ADDED_TASK = "Got it. I've added this task:\n  ";
-    private static final String MESSAGE_TASKLIST_SIZE_FORMAT = "Now you have %d tasks in your list.";
 
     private final String taskName;
     private final String eventTime;
@@ -23,7 +23,7 @@ public class EventCommand extends Command {
     public CommandResult execute() {
         EventTask task = new EventTask(taskName, eventTime);
         taskList.addTask(task);
-        return new CommandResult(MESSAGE_ADDED_TASK + task.toString() + "\n" +
-                String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList);
+        return new CommandResult(MESSAGE_ADDED_TASK + "\n  " + task.toString() + "\n"
+                + String.format(MESSAGE_TASKLIST_SIZE_FORMAT, taskList.size()), taskList);
     }
 }

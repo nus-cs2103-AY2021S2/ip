@@ -1,14 +1,14 @@
 package duke.commands;
 
+import static duke.utils.Messages.MESSAGE_EMPTY_TASKLIST;
+import static duke.utils.Messages.MESSAGE_INDEX_TASK_FORMAT;
+import static duke.utils.Messages.MESSAGE_SHOW_TASKLIST;
+
 /**
  * Lists the current tasks.
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
-
-    private static final String MESSAGE_EMPTY_TASKLIST = "You do not have anything to do at the moment!";
-    private static final String MESSAGE_SHOW_TASKLIST = "Here are the tasks in your list:";
-    private static final String MESSAGE_INDEX_TASK_FORMAT = "%d.%s";
 
     @Override
     public CommandResult execute() {
