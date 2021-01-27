@@ -1,6 +1,7 @@
 package tlylt.haha;
 public class Ui {
-    private static final String LINE_BREAK = "____________________________________________________________\n";
+    private static final String LINE_BREAK =
+            "____________________________________________________________\n";
     private static final String LOGO = " _    _          _    _\n" +
             "| |  | |   /\\   | |  | |   /\\\n" +
             "| |__| |  /  \\  | |__| |  /  \\\n" +
