@@ -29,7 +29,6 @@ public class Storage {
 
     static void saveData(String taskList) {
         try {
-            System.out.println(taskList);
             // save all tasks again if TaskList has tasks
             if (taskList.length() > 0) {
                 // splitting by "  %d. [" incase the task description uses periods and digits as well
