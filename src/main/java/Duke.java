@@ -82,7 +82,7 @@ public class Duke {
                     writeToFile(list);
                 } catch (DukeException error) {
                     printMessage("OOPS!!! The description of a deadline cannot be empty");
-                } catch(DateTimeParseException e) {
+                } catch(DateTimeParseException error) {
                     printMessage("OOPS!!! The date provided is invalid");
                 }
             } else if(check[0].equals("event")) {
@@ -130,7 +130,9 @@ public class Duke {
                         data.add(curr);
                         break;
                     case "D":
-                        curr = new Deadline(taskInfo[2], LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("dd MMM YYYY")));
+                        String[] localDate = taskInfo[3].split(" ");
+                        String date = localDate[0] + "-" + localDate[1] + "-" + localDate[2];
+                        curr = new Deadline(taskInfo[2], LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MMM-yyyy")));
                         if(taskInfo[1].equals("\u2713")) {
                             curr.markAsDone();
                         }
@@ -145,7 +147,7 @@ public class Duke {
                         break;
                 }
             }
-        } catch(IOException error) {
+        } catch(IOException | DateTimeParseException error) {
             printMessage("OOPS!!! It seems I've encountered an error. Please try again :-(");
         }
         return data;
