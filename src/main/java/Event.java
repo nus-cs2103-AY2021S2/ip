@@ -1,8 +1,17 @@
+package main.java;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
+    @JsonProperty
     private LocalDateTime timeOfEvent;
+
+    protected Event() {
+        super();
+    }
 
     public Event(String taskName, LocalDateTime timeOfEvent) {
         super(taskName);

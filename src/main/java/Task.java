@@ -1,11 +1,29 @@
-public abstract class Task {
+
+package main.java;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "d")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Todo.class, name = "Todo"),
+        @JsonSubTypes.Type(value = Deadline.class, name = "Deadline"),
+        @JsonSubTypes.Type(value = Event.class, name = "Event")
+})
+public class Task {
     protected String taskName;
     protected boolean done;
+
+    protected Task() {
+    }
 
     public Task(String taskName) {
         this.taskName = taskName;
         this.done = false;
     }
+
 
     public String getTaskName() {
         return taskName;
