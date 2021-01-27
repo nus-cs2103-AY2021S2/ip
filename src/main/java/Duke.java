@@ -30,13 +30,27 @@ public class Duke {
             this.listTask();
         } else if (commandWord.equals("done")) {
             this.doneTask(Integer.valueOf(command.split(" ")[1]));
-        }  else if (commandWord.equals("todo")){
+        } else if (commandWord.equals("todo")) {
             this.addToDo(command.substring(5));
+        } else if (commandWord.equals("event")) {
+            this.addEvent(command.substring(6));
         }
     }
 
     public void addToDo(String taskName) {
         ToDo newTask = new ToDo((taskName));
+        this.storedTasks.add(newTask);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + newTask);
+        if (this.storedTasks.size() == 1) {
+            System.out.println("Now you have " + this.storedTasks.size() + " task in the list");
+        } else {
+            System.out.println("Now you have " + this.storedTasks.size() + " tasks in the list");
+        }
+    }
+
+    public void addEvent(String taskName) {
+        Event newTask = new Event((taskName));
         this.storedTasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
