@@ -22,9 +22,8 @@ class TaskList {
 		return this.list.get(n - 1);
 	}
 
-	Task store(Task t) {
+	void store(Task t) {
 		this.list.add(t);
-		return t;
 	}
 
 	void delete(Task t) {
@@ -40,16 +39,29 @@ class TaskList {
 	}
 
 	String tasksOnDay(String day) {
-		String s = "";
+		String output = "";
 		int count = 1;
 		for (int i = 1; i <= this.size(); i += 1) {
 			Task t = this.list.get(i - 1);
 			if (t.onDay(day)) {
-				s += String.format("      %d.  %s\n", count, t);
+				output += String.format("      %d.  %s\n", count, t);
 				count += 1;
 			}
 		}
-		return s;
+		return output;
+	}
+
+	String find(String s) {
+		String output = "";
+		int count = 1;
+		for (int i = 1; i <= this.size(); i += 1) {
+			Task t = this.list.get(i - 1);
+			if (t.contains(s)) {
+				output += String.format("      %d.  %s\n", count, t);
+				count += 1;
+			}
+		}
+		return output;
 	}
 
 	@Override

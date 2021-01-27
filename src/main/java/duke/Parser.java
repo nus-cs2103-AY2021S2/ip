@@ -29,6 +29,8 @@ public class Parser {
 		functions.put("event", this::event);
 
 		functions.put("delete", this::delete);
+
+		functions.put("find", this::find);
     }
 
 	public void parser(String s) {
@@ -95,12 +97,16 @@ public class Parser {
 		Ui.tasksOnDay(this.mem, s);
 	}
 
+	void find(String s) {
+		Ui.find(this.mem, s);
+	}
+
 	void clear() {
 		this.mem.clear();
 		Ui.clear();
 	}
 
 	boolean checkValid(String s) {
-		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
+		return this.functions.containsKey(s);
 	}
 }

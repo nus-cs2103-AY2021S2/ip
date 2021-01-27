@@ -36,6 +36,10 @@ class Task {
 		return !this.isDone;
 	}
 
+	boolean contains(String s) {
+		return this.name.contains(s);
+	}
+
 	public String toString() {
 		String check = " ";
 		if (this.isDone) {

@@ -78,6 +78,15 @@ class Ui {
 		System.out.println("");
 	}
 
+	static void find(TaskList t, String s) {
+		System.out.println("    ____________________________________________________________");
+		System.out.println();
+		System.out.println("      Here are the matching tasks in your list:");
+		System.out.printf("%s", t.find(s));
+		System.out.println("    ____________________________________________________________");
+		System.out.println();
+	}
+
 	static void clear() {
 		System.out.println("    ____________________________________________________________");
 		System.out.println("");
