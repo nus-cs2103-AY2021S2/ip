@@ -16,10 +16,6 @@ public class Event extends Task {
         setTime(at);
     }
 
-    public String getType(){
-        return this.type;
-    }
-
     private void setTime(String time) {
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
         LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);

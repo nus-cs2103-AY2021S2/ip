@@ -22,7 +22,6 @@ public class Ui {
     }
 
     public String getUserCommand(){
-//        Scanner input = new Scanner(System.in);
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }

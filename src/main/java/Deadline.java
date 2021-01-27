@@ -20,10 +20,6 @@ public class Deadline extends Task {
         setTime(by);
     }
 
-    public String getType(){
-        return this.type;
-    }
-
     public String getTime(){
         String time = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return time;
