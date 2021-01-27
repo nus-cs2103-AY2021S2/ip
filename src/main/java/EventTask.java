@@ -16,8 +16,18 @@ public class EventTask extends Task {
         this.eventTime = LocalDateTime.parse(eventTime);
     }
 
+    public String getEventTime() {
+        return String.format(
+                "%d %s %s, %s",
+                this.eventTime.getDayOfMonth(),
+                this.eventTime.getMonth(),
+                this.eventTime.getYear(),
+                this.eventTime.toLocalTime()
+        );
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + (this.eventTime != null ? String.format(" (at: %s)", this.eventTime) : "");
+        return "[E]" + super.toString() + (this.eventTime != null ? String.format(" (at: %s)", this.getEventTime()) : "");
     }
 }

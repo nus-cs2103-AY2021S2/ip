@@ -16,8 +16,18 @@ public class DeadlineTask extends Task {
         this.dueTime = LocalDateTime.parse(dueTime);
     }
 
+    public String getDueTime() {
+        return String.format(
+                "%d %s %s, %s",
+                this.dueTime.getDayOfMonth(),
+                this.dueTime.getMonth(),
+                this.dueTime.getYear(),
+                this.dueTime.toLocalTime()
+        );
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + (this.dueTime != null ? String.format(" (by: %s)", this.dueTime) : "");
+        return "[D]" + super.toString() + (this.dueTime != null ? String.format(" (by: %s)", this.getDueTime()) : "");
     }
 }
