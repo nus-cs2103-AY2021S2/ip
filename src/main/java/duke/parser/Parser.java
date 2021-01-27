@@ -35,6 +35,10 @@ public class Parser {
         else if (userMessage.startsWith("search time")) {
             return new SearchByTimeCommand(userMessage);
         }
+        
+        else if (userMessage.startsWith("find")) {
+            return new SearchByTaskNameCommand(userMessage);
+        }
 
         else if(userMessage.equals("bye")) {
             return new ByeCommand(userMessage);
