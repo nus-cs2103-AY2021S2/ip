@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,6 +11,11 @@ public class Duke {
 
     public static void main(String[] args) {
         welcome();
+        try {
+            load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             System.out.println(line);
@@ -116,5 +125,50 @@ public class Duke {
                 throw new UnknownCommandException();
             }
         }
+    }
+
+    public static void load() throws IOException {
+        BufferedReader br = null;
+        try {
+            FileReader fr = new FileReader("./data/duke.txt");
+            br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parameters = line.split("\\|");
+                Task t;
+                switch (parameters[0]) {
+                case "T": {
+                    t = new ToDo(parameters[2]);
+                    break;
+                }
+                case "D": {
+                    t = new Deadline(parameters[2], parameters[3]);
+                    break;
+                }
+                case "E": {
+                    t = new Event(parameters[2], parameters[3]);
+                    break;
+                }
+                default: {
+                    throw new WrongFormatException();
+                }
+                }
+                if (parameters[1].equals("1")) {
+                    t.markAsDone();
+                }
+                list.add(t);
+            }
+
+        } catch (WrongFormatException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                br.close();
+            }
+        }
+    }
+
+    public static void save() {
+
     }
 }
