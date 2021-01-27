@@ -5,6 +5,12 @@ public class CommandParser {
 
     private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
 
+    /**
+     * Parses input from String class to Command class.
+     *
+     * @param input User string input
+     * @return Command object with respective details.
+     */
     public static Command parse(String input) {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
         if (!matcher.matches()) {

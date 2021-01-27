@@ -22,6 +22,12 @@ public class DateParser {
             .toFormatter();
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
 
+    /**
+     * Parses input from String class to LocalDateTime class.
+     *
+     * @param input User string input
+     * @return LocalDateTime object.
+     */
     public static LocalDateTime parseDateTime(String input) throws DukeException {
         String[] tokenizedInput = input.trim().split(" ", 2);
         LocalDate date;
@@ -62,6 +68,12 @@ public class DateParser {
         }
     }
 
+    /**
+     * Returns datetime in a standard format.
+     *
+     * @param dateTime LocalDateTime object to be formatted.
+     * @return String of datetime in standard format.
+     */
     public static String toString(LocalDateTime dateTime) {
         return OUTPUT_FORMATTER.format(dateTime);
     }
