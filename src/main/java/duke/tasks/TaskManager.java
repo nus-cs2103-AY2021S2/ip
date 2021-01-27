@@ -6,8 +6,25 @@ import duke.commands.Event;
 import duke.commands.Todo;
 
 import duke.exceptions.DukeException;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.Scanner;
+
+import java.nio.file.Path;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
+
+/**
+ * TODO:
+ * 1. Refactor IO into separate functions that handle all exceptions
+ *    * Input should return a Scanner and handle any missing directory (createIfMissing) / file exceptions
+ *    * Output should return void but throw an error if it encounters any problems (and no createIfMissing)
+ */
 
 /**
  * A controller class that manages the Tasks of each User of the duke.DukeBot.
@@ -28,10 +45,109 @@ import java.util.ArrayList;
 public class TaskManager {
     protected boolean isActive;
     protected List<Task> taskList;
+    protected final Path PATH;
 
-    public TaskManager() {
+    public TaskManager(Path PATH) {
         this.isActive = true;
         this.taskList = new ArrayList<>(100);
+        this.PATH = PATH;
+        downloadStoredDataIfExists(PATH);
+    }
+
+    /**
+     * Loads in Task data from a text file and populates the Task List with it.
+     *
+     * @param PATH Path instance that points to the text file containing Task data.
+     */
+    private void downloadStoredDataIfExists(Path PATH) {
+        // Check if the data/ parent directory exists, if not create it
+        File directory = new File(String.valueOf(PATH.getParent()));
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        try {
+            // Initialise scanner on the file
+            File dataFile = new File(PATH.toString());
+            Scanner scanner = new Scanner(dataFile);
+
+            // Count how many Tasks are loaded in
+            int count = 0;
+
+            // Populate taskList
+            while (scanner.hasNext()) {
+                String storedTaskArr[] = scanner.nextLine().split("\\|", 3);
+                String taskType = storedTaskArr[0].strip();
+                String taskIsDone = storedTaskArr[1].strip();
+                String taskDescription = storedTaskArr[2].strip();
+
+                // Handle each possible Command and its corresponding Task
+                Task newTask;
+                Command command = Command.get(taskType);
+                switch (command) {
+                case TODO:
+                    newTask = this.addTodo(taskDescription, false);
+                    break;
+                case EVENT:
+                    newTask = this.addEvent(taskDescription, false);
+                    break;
+                case DEADLINE:
+                    newTask = this.addDeadline(taskDescription, false);
+                    break;
+                default:
+                    throw new DukeException("A unrecognised Command was created, update 'downloadStoredDataIfExists'.");
+                }
+                if (taskIsDone.equals("done")) {
+                    newTask.markAsDone();
+                }
+                count++;
+            }
+
+            if (count > 0) {
+                System.out.println(count + " tasks were loaded from storage.");
+            } else {
+                System.out.println("No tasks found in storage, initialising empty Task List.");
+            }
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("No such storage file exists: " + PATH.toString() + "\nProceeding without.");
+        } catch (DukeException dukeException) {
+            System.out.println(dukeException);
+        }
+    }
+
+    /** Saves the Tasks in taskList to the PATH location. */
+    public void saveData() {
+        // Check if the data/ parent directory exists, if not create it
+        File directory = new File(String.valueOf(PATH.getParent()));
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        try {
+            FileWriter fw = new FileWriter(PATH.toString());
+            fw.write(this.taskListToString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns all the Tasks in the taskList as a single String that can be written to a file.
+     *
+     * @return A String that contains every Task in the taskList, formatted to be written to a file.
+     */
+    private String taskListToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Task task : taskList) {
+            String taskDone = task.getIsDone() ? "done" : "not-done";
+            String taskString = task.getClass().getSimpleName().toLowerCase() +
+                    " | " + taskDone +
+                    " | " + task.getConstructorString() +
+                    "\n";
+            stringBuilder.append(taskString);
+        }
+        return stringBuilder.toString();
     }
 
     /**
@@ -49,19 +165,24 @@ public class TaskManager {
                 this.listAll(description);
                 break;
             case TODO:
-                this.addTodo(description);
+                this.addTodo(description, true);
+                this.saveData();
                 break;
             case EVENT:
-                this.addEvent(description);
+                this.addEvent(description, true);
+                this.saveData();
                 break;
             case DEADLINE:
-                this.addDeadline(description);
+                this.addDeadline(description, true);
+                this.saveData();
                 break;
             case DONE:
-                this.markAsDone(description);
+                this.markAsDone(description, true);
+                this.saveData();
                 break;
             case DELETE:
-                this.delete(description);
+                this.delete(description, true);
+                this.saveData();
                 break;
             case END:
                 this.end(description);
@@ -133,16 +254,19 @@ public class TaskManager {
      * @param description The description of the duke.commands.Todo duke.tasks.Task
      * @throws DukeException If the description string is empty
      */
-    protected void addTodo(String description) throws DukeException {
+    protected Task addTodo(String description, boolean isVerbose) throws DukeException {
         if (description.equals("")) {
             String errorStr = "The description of a 'todo' cannot be empty.";
             throw new DukeException(errorStr);
         } else {
             Task newTodo = new Todo(description);
             taskList.add(newTodo);
-            System.out.println();  // Add space between user input and duke.DukeBot response
-            System.out.println("New to-do added:\n" + newTodo);
-            System.out.println("\n");
+            if (isVerbose) {
+                System.out.println();  // Add space between user input and duke.DukeBot response
+                System.out.println("New to-do added:\n" + newTodo);
+                System.out.println("\n");
+            }
+            return newTodo;
         }
     }
 
@@ -152,7 +276,7 @@ public class TaskManager {
      * @param description The description of the duke.commands.Event duke.tasks.Task
      * @throws DukeException If the description string does not follow the correct format for specifying an duke.commands.Event
      */
-    protected void addEvent(String description) throws DukeException {
+    protected Task addEvent(String description, boolean isVerbose) throws DukeException {
         String errorStr = "";
         String descriptor = description.split("/at", 2)[0];
         String at = description.split("/at", 2)[1];
@@ -171,9 +295,12 @@ public class TaskManager {
 
         Task newEvent = new Event(descriptor, at);
         taskList.add(newEvent);
-        System.out.println();  // Add space between user input and duke.DukeBot response
-        System.out.println("New event added:\n" + newEvent);
-        System.out.println("\n");
+        if (isVerbose) {
+            System.out.println();  // Add space between user input and duke.DukeBot response
+            System.out.println("New event added:\n" + newEvent);
+            System.out.println("\n");
+        }
+        return newEvent;
     }
 
     /**
@@ -182,7 +309,7 @@ public class TaskManager {
      * @param description The description of the duke.commands.Deadline duke.tasks.Task
      * @throws DukeException If the description string does not follow the correct format for specifying a duke.commands.Deadline
      */
-    protected void addDeadline(String description) throws DukeException {
+    protected Task addDeadline(String description, boolean isVerbose) throws DukeException {
         String errorStr = "";
         String descriptor = description.split("/by", 2)[0];
         String by = description.split("/by", 2)[1];
@@ -201,9 +328,13 @@ public class TaskManager {
 
         Task newDeadline = new Deadline(descriptor, by);
         taskList.add(newDeadline);
-        System.out.println();  // Add space between user input and duke.DukeBot response
-        System.out.println("New deadline added:\n" + newDeadline);
-        System.out.println("\n");
+
+        if (isVerbose) {
+            System.out.println();  // Add space between user input and duke.DukeBot response
+            System.out.println("New deadline added:\n" + newDeadline);
+            System.out.println("\n");
+        }
+        return newDeadline;
     }
 
     /**
@@ -212,7 +343,7 @@ public class TaskManager {
      * @param description A String containing the (1-indexed) list index of the target task
      * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
      */
-    protected void markAsDone(String description) throws DukeException {
+    protected Task markAsDone(String description, boolean isVerbose) throws DukeException {
         int doneIndex;
         try {
             doneIndex = Integer.parseInt(description);
@@ -221,9 +352,12 @@ public class TaskManager {
             Task doneTask = taskList.get(doneIndex);
             doneTask.markAsDone();
 
-            System.out.println();  // Add space between user input and duke.DukeBot response
-            System.out.println("The following task has been marked as done: ");
-            System.out.println(doneTask + "\n");
+            if (isVerbose) {
+                System.out.println();  // Add space between user input and duke.DukeBot response
+                System.out.println("The following task has been marked as done: ");
+                System.out.println(doneTask + "\n");
+            }
+            return doneTask;
         } catch (NumberFormatException e) {
             throw new DukeException("The value that follows 'done' must be an integer");
         } catch (IndexOutOfBoundsException e) {
@@ -246,7 +380,7 @@ public class TaskManager {
      * @param description A String containing the (1-indexed) list index of the target task
      * @throws DukeException If the description string cannot be parsed as an integer or is outside the valid range
      */
-    protected void delete(String description) throws DukeException {
+    protected Task delete(String description, boolean isVerbose) throws DukeException {
         int deleteIndex;
         try {
             deleteIndex = Integer.parseInt(description);
@@ -254,11 +388,13 @@ public class TaskManager {
 
             Task deletedTask = taskList.remove(deleteIndex);
 
-            System.out.println();  // Add space between user input and duke.DukeBot response
-            System.out.println("The following task has been deleted: ");
-            System.out.println(deletedTask);
-            System.out.println("There are now " + taskList.size() + " items in the list.\n");
-
+            if (isVerbose) {
+                System.out.println();  // Add space between user input and duke.DukeBot response
+                System.out.println("The following task has been deleted: ");
+                System.out.println(deletedTask);
+                System.out.println("There are now " + taskList.size() + " items in the list.\n");
+            }
+            return deletedTask;
         } catch (NumberFormatException e) {
             throw new DukeException("The value that follows 'delete' must be an integer");
         } catch (IndexOutOfBoundsException e) {
@@ -296,7 +432,7 @@ public class TaskManager {
         // Otherwise, set the duke.DukeBot to be inactive
         this.setInactive();
         System.out.println();
-        System.out.println("duke.DukeBot shutting down.\n\n");
+        System.out.println("DukeBot shutting down.\n\n");
     }
 
 }

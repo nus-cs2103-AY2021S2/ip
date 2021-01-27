@@ -26,6 +26,30 @@ public abstract class Task {
     }
 
     /**
+     * Returns the Task description String.
+     * @return The Task description String.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Returns the exact String required to Construct this Task.
+     *
+     * @return A String that can be used to construct an equivalent Task.
+     */
+    public abstract String getConstructorString();
+
+    /**
+     * Returns the isDone instance variable.
+     *
+     * @return The boolean isDone instance variable.
+     */
+    public boolean getIsDone() {
+        return isDone;
+    }
+
+    /**
      * Marks a task as done.
      */
     public void markAsDone() {
