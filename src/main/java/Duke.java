@@ -22,7 +22,7 @@ public class Duke {
 
 
         final String path = "src/main/java/data/tasks.txt";
-        TaskData taskData = new TaskData(path);
+        Storage taskData = new Storage(path);
         ArrayList<Task> taskList = taskData.openFile();
         int count;
 

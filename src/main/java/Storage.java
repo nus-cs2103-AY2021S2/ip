@@ -3,19 +3,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-public class TaskData {
-    protected String path;
-    protected ArrayList<Task> taskList = new ArrayList<>();
+public class Storage {
+    private String path;
+    private TaskList taskList = new TaskList();
 
-    public TaskData(String path) {
+    public Storage(String path) {
         this.path = path;
     }
 
-    public ArrayList<Task> openFile() throws DukeException{
+    public TaskList openFile() throws DukeException{
         File file = new File(path);
 
         if(!file.exists()) {
@@ -32,7 +31,7 @@ public class TaskData {
             while(sc.hasNext()) {
                 String txtLine = sc.nextLine();
                 Task task = processContent(txtLine);
-                taskList.add(task);
+                taskList.addTask(task);
             }
             return taskList;
         } catch(FileNotFoundException e){
@@ -63,7 +62,7 @@ public class TaskData {
     public void updateFile(){
         try{
             FileWriter fw = new FileWriter(path);
-            for(Task t : taskList) {
+            for(Task t : taskList.getTasks()) {
                 fw.write(t.toTxt());
             }
             fw.close();

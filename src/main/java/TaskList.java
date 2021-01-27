@@ -15,15 +15,19 @@ public class TaskList {
         return tasks.get(id - 1);
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     public int getSize() {
         return tasks.size();
     }
 
-    public void addTasks(Task ts) {
+    public void addTask(Task ts) {
         tasks.add(ts);
     }
 
-    public void removeTasks(Task ts) {
+    public void removeTask(Task ts) {
         tasks.remove(ts);
     }
 
