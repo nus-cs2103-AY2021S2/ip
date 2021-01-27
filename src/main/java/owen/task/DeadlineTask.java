@@ -9,6 +9,11 @@ import owen.OwenException;
 public class DeadlineTask extends Task {
     private final DateTime deadline;
 
+    /**
+     * Creates new deadline task with arguments.
+     * @param taskArgs Arguments in the format: description /by DD/MM/YYYY HHMM.
+     * @throws OwenException Arguments could not be parsed.
+     */
     public DeadlineTask(String taskArgs) throws OwenException {
         super();
 
@@ -43,6 +48,7 @@ public class DeadlineTask extends Task {
      * Deserialize string into a DeadlineTask.
      * @param string String to deserialize.
      * @return DeadlineTask deserialized from string.
+     * @throws OwenException Task could not be deserialized.
      */
     public static DeadlineTask deserialize(String string) throws OwenException {
         String[] fields = string.split(" \\| ");
