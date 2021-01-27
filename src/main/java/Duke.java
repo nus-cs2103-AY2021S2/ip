@@ -9,8 +9,6 @@ import java.util.Scanner;
  * - w/o number
  * - number out of range
  * - help command
- * - Task as abstract class with 3 subclasses (T/D/E)
- * - TaskList as a class !!!
  */
 
 public class Duke {
@@ -18,9 +16,14 @@ public class Duke {
     /**
      * The task list
      */
-    public static TaskList tasks = new TaskList();
+    private final TaskList tasks;
 
-    public static void main(String[] args) {
+    public Duke() {
+        this.tasks = new TaskList();
+        Storage.readFromFile(this.tasks);
+    }
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         Ui.printHorizontalLine();
         Ui.printEmptyLine();
@@ -30,15 +33,18 @@ public class Duke {
         Ui.printLine("Sou, watashi desu!");
         Ui.printHorizontalLine();
         Ui.printEmptyLine();
-        Storage.readFromFile(tasks);
         for (; ; ) {
             try {
-                if (!Parser.processCommand(sc.nextLine(), tasks)) {
+                if (!Parser.processCommand(sc.nextLine(), this.tasks)) {
                     break;
                 }
             } catch (Exception e) {
                 Ui.printError(e);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 }
