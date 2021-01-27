@@ -69,6 +69,7 @@ public class Parser {
         return errMsg;
     }
 
+
     private void parseNextArgs(String firstWord, String userInput, int firstSpaceIndex)
             throws MissingArgumentException, UnsupportedCommandException, InvalidArgumentException {
         // some variables declared upfront
@@ -161,9 +162,12 @@ public class Parser {
     }
 
     // should exceptions be all handled in parser or elsewhere? how do you test if the correct exception is thrown
-    // parse done, todos, deadline, event, delete commands
     // make enums for supported commands?
-    // return whether to keep scanner open
+    /**
+     * Main driver for parsing any user input
+     * @param userInput User input from terminal
+     * @return returns whether to keep scanner open
+     */
     public boolean parseInputLine(String userInput)  {
 
         // SETTING UP THE VARIABLES NEEDED FOR ERROR CHECKING / PARSING

@@ -1,9 +1,17 @@
 import static java.lang.Boolean.parseBoolean;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class    Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Creates a deadline object
+     * @param desc description of the deadline object
+     * @param deadline date/time that the deadline task is due
+     */
     public Deadline(String desc, String deadline) {
         super(desc);
         this.deadline = ParseDateTime.parse(deadline);
@@ -30,6 +38,12 @@ public class    Deadline extends Task {
     // the /at /by style of inputs won't affect this if they change, i think
 
     //E;;desc;;true;;timing
+
+    /**
+     * Creates a deadline object based on user input.
+     * @param oneLine One line of user input to be parsed into a deadline
+     * @return Deadline Object
+     */
     public static Deadline parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
         int start = 0;

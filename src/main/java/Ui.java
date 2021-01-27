@@ -4,6 +4,9 @@ public class Ui {
     public static final String indent = "      ";
     public static final String taskIndent = "  "; // just an extra indent for listing tasks
 
+    /**
+     * Prints introductory message.
+     */
     public static void intro() {
         String logo = " ______\n"
                 + "/______\\ Kiwi's\n"
@@ -16,6 +19,10 @@ public class Ui {
 
     }
 
+    /**
+     * Prints a formatted task list.
+     * @param taskList Task list to be printed
+     */
     public static void printTaskList(TaskList taskList) {
         System.out.println(lines);
 
@@ -32,9 +39,10 @@ public class Ui {
         System.out.println(lines);
     }
 
-    // helper method to format chat bot responses
-    // prints all strings in messages array in a separate indented line
-    // maybe can think of splitting strings that are too long into different lines
+    /**
+     * Helper method to format chat bot responses
+     * @param messages An array containing all messages to print in response to one command
+     */
     public static void print(String[] messages) {
         System.out.println(lines);
 
@@ -45,7 +53,10 @@ public class Ui {
         System.out.println(lines);
     }
 
-    // print formatted single-line message
+    /**
+     * Helper method to format chat bot response
+     * @param message A message to print in response to one command
+     */
     public static void print(String message) {
         System.out.println(lines);
 
@@ -55,11 +66,17 @@ public class Ui {
     }
 
 
-    // format your exception printing here
+    /**
+     * Formats printing of exception.
+     * @param errMsg Error message from the exception
+     */
     public static void printException(String errMsg) {
         print(new String[]{"Oops, Kiwi couldn't process that.", taskIndent + errMsg});
     }
 
+    /**
+     * Prints exit message
+     */
     public static void printExitMsg() {
         print("Bye. See you again soon!");
     }

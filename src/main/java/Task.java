@@ -4,22 +4,36 @@ public abstract class Task {
     protected static String delimiter = ";;";
     protected String taskType;
 
+    /**
+     * Creates simple task with one field
+     * @param description A string describing the task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    // used by parsing functions
+    /**
+     * Constructor used by parsing functions when saving from hard drive
+     * @param desc task description
+     * @param isDone completion status of task
+     */
     protected Task(String desc, Boolean isDone) {
         this.description = desc;
         this.isDone = isDone;
     }
 
-    public String getStatusIcon() {
+    /**
+     * Gets the symbol that represents if the object is completed.
+     * @return A string that represents if the task is completed or not.
+     */
+    protected String getStatusIcon() {
         return (isDone ? "/" : " ");
     }
 
-    // return type?
+    /**
+     * Marks the task as done so that a done symbol shows up in the task's toString.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -29,7 +43,10 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    // parse from task object to format for text file
+    /**
+     * Formats a string representing the task object to be saved to the hard drive.
+     * @return String representation of task object for storage file
+     */
     public abstract String unparse();
 
     // parse from text file to become a task object todo - this needs to be static so can't be abstract
