@@ -27,7 +27,7 @@ public class Storage {
         }
     }
 
-    public void readFromStorage(ArrayList<Task> taskList) {
+    public void readFromStorage(TaskList taskList) {
         try {
             Scanner fileScanner = new Scanner(dukeDataFile);
             while (fileScanner.hasNext()) {
@@ -38,7 +38,7 @@ public class Storage {
                     if (todoArgs[1].equals("done")) {
                         newToDo.MarkAsDone();
                     }
-                    taskList.add(newToDo);
+                    taskList.taskList.add(newToDo);
                     break;
 
                 case "deadline":
@@ -47,7 +47,7 @@ public class Storage {
                     if (deadlineArgs[2].equals("done")) {
                         newDeadline.MarkAsDone();
                     }
-                    taskList.add(newDeadline);
+                    taskList.taskList.add(newDeadline);
                     break;
 
                 case "event":
@@ -56,7 +56,7 @@ public class Storage {
                     if (eventArgs[2].equals("done")) {
                         newEvent.MarkAsDone();
                     }
-                    taskList.add(newEvent);
+                    taskList.taskList.add(newEvent);
                     break;
 
                 default:
@@ -68,9 +68,9 @@ public class Storage {
         }
     }
 
-    public void writeToStorage(ArrayList<Task> taskList) throws IOException {
+    public void writeToStorage(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(dukeDataFile);
-        taskList.forEach(task -> {
+        taskList.taskList.forEach(task -> {
             try {
                 fw.write(task.generateDataString() + System.lineSeparator());
             } catch (IOException e) {

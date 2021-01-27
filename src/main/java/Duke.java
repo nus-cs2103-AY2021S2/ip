@@ -15,7 +15,7 @@ public class Duke {
                 "    ____________________________________________________________\n");
 
         //data structure to store tasks
-        ArrayList<Task> taskList = new ArrayList<>();
+        TaskList taskList = new TaskList(new ArrayList<Task>());
 
         Ui ui = new Ui();
 

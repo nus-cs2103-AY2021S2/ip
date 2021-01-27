@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    public void runUi(ArrayList<Task> taskList, Storage storage) {
+    public void runUi(TaskList taskList, Storage storage) {
         Scanner sc = new Scanner(System.in);
         boolean Done = false;
         while (!Done) {
@@ -11,8 +11,8 @@ public class Ui {
             switch (nextCommand) {
             case "list":
                 System.out.println("    ____________________________________________________________");
-                for (int taskNum = 0; taskNum < taskList.size(); taskNum++) {
-                    System.out.println("     " + (taskNum + 1) + "." + taskList.get(taskNum));
+                for (int taskNum = 0; taskNum < taskList.taskList.size(); taskNum++) {
+                    System.out.println("     " + (taskNum + 1) + "." + taskList.taskList.get(taskNum));
                 }
                 System.out.println("    ____________________________________________________________");
                 break;
@@ -26,11 +26,11 @@ public class Ui {
                     break;
                 }
                 ToDo nextToDo = new ToDo(scanTest);
-                taskList.add(nextToDo);
+                taskList.taskList.add(nextToDo);
                 System.out.println("    ____________________________________________________________\n" +
                         "     task.add:");
                 System.out.println("       " + nextToDo + "\n" +
-                        "     task.count = [" + taskList.size() + "].");
+                        "     task.count = [" + taskList.taskList.size() + "].");
                 System.out.println("    ____________________________________________________________");
                 break;
 
@@ -39,11 +39,11 @@ public class Ui {
 
                 try {
                     Deadline nextDeadLine = new Deadline(deadLineArgs[0], deadLineArgs[1]);
-                    taskList.add(nextDeadLine);
+                    taskList.taskList.add(nextDeadLine);
                     System.out.println("    ____________________________________________________________\n" +
                             "     task.add:");
                     System.out.println("       " + nextDeadLine + "\n" +
-                            "     task.count = [" + taskList.size() + "].");
+                            "     task.count = [" + taskList.taskList.size() + "].");
                     System.out.println("    ____________________________________________________________");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("    ____________________________________________________________");
@@ -57,11 +57,11 @@ public class Ui {
 
                 try {
                     Event nextEvent = new Event(eventArgs[0], eventArgs[1]);
-                    taskList.add(nextEvent);
+                    taskList.taskList.add(nextEvent);
                     System.out.println("    ____________________________________________________________\n" +
                             "     task.add:");
                     System.out.println("       " + nextEvent + "\n" +
-                            "     task.count = [" + taskList.size() + "].");
+                            "     task.count = [" + taskList.taskList.size() + "].");
                     System.out.println("    ____________________________________________________________");
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("    ____________________________________________________________");
@@ -76,7 +76,7 @@ public class Ui {
                     int doneTarget = sc.nextInt();
                     System.out.println("    ____________________________________________________________\n" +
                             "     task.done = true:");
-                    Task targetTask = taskList.get(doneTarget - 1);
+                    Task targetTask = taskList.taskList.get(doneTarget - 1);
                     targetTask.MarkAsDone();
                     System.out.println("       " + targetTask);
                     System.out.println("    ____________________________________________________________");
@@ -93,11 +93,11 @@ public class Ui {
                     int removeTarget = sc.nextInt();
                     System.out.println("    ____________________________________________________________\n" +
                             "     task.remove :");
-                    Task targetTask = taskList.get(removeTarget - 1);
+                    Task targetTask = taskList.taskList.get(removeTarget - 1);
                     System.out.println("       " + targetTask);
                     System.out.println("    ____________________________________________________________");
 
-                    taskList.remove(removeTarget - 1);
+                    taskList.taskList.remove(removeTarget - 1);
                 } catch (Exception e) {
                     System.out.println("    ____________________________________________________________");
                     System.out.println("     Error: delete command format incorrect.");
