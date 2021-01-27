@@ -17,6 +17,8 @@ class Ui {
                 taskList.addDeadline(input[1], LocalDate.parse(input[2]));
             } else if (input[0].equals("event")) {
                 taskList.addEvent(input[1], LocalDate.parse(input[2]));
+            } else if (input[0].equals("find")) {
+                taskList.find(input[1]);
             }
         } catch (DukeException dukeException) {
             System.out.println(dukeException);

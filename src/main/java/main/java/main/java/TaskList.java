@@ -80,6 +80,14 @@ class TaskList {
         Storage.update(this.taskList);
     }
 
+    public void find(String keyWord) {
+        for (Task t : taskList) {
+            if (t.getTaskName().toString().contains(keyWord)) {
+                System.out.println(t);
+            }
+        }
+    }
+
     @Override
     public String toString() {
         if (this.taskList.size() == 1) {

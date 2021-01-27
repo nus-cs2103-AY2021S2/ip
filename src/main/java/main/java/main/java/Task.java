@@ -19,6 +19,10 @@ abstract class Task {
         this.isDone = true;
     }
 
+    public String getTaskName() {
+        return this.taskName;
+    }
+
     public static String printDate(LocalDate date) {
         String month = date.getMonth().toString().substring(0,3);
         String[] splitDate = date.toString().split("-");
