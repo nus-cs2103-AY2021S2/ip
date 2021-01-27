@@ -113,6 +113,11 @@ public class Parser {
 
                 // todo checkIfValidListIndex();
                 taskList.deleteTask(secondArg);
+            } else if (firstWord.equals("find")) {
+
+                desc = userInput.substring(firstSpaceIndex + 1).trim();
+                taskList.findTasks(desc);
+
             } else {
                 throw new UnsupportedCommandException();
             }

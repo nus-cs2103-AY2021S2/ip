@@ -129,5 +129,13 @@ public class TaskList {
         return errMsg;
     }
 
-
+    public void findTasks(String s) {
+        TaskList filtered = new TaskList();
+        for (Task t : taskArrayList) {
+            if (t.description.contains(s)) {
+                filtered.add(t);
+            }
+        }
+        Ui.printTaskList(filtered);
+    }
 }
