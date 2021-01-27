@@ -2,12 +2,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Deadline task. Represented by the task, the LocalDate object of the deadline,
+ * and a boolean state denoting whether the task has been done or not.
+ */
+
 public class Deadline extends Task {
     private final LocalDate deadline;
 
-    //private static final String INPUT_DATE_FORMAT = "yyyy-MM-dd";
     private static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy";
 
+    /**
+     * Constructor of a Deadline object
+     * @param task Task need to be done
+     * @param deadline Date when the task need to be done
+     * @throws DukeExceptionDeadline The date format is not in "yyyy-MM-dd"
+     */
     Deadline(String task, String deadline) throws DukeExceptionDeadline {
         super(task);
         try{
@@ -19,6 +29,13 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructor of a deadline object
+     * @param task Task need to be done
+     * @param deadline Date when the task need to be done
+     * @param done A boolean representing the state of the task (done or not)
+     * @throws DukeExceptionDeadline The date format is not in "yyyy-MM-dd"
+     */
     Deadline(String task, String deadline, boolean done) throws DukeExceptionDeadline {
         super(task, done);
         try{
@@ -29,21 +46,41 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructor of a deadline Object
+     * @param task Task need to be done
+     * @param deadline Date when the task need to be done
+     * @param done A boolean representing the state of the task (done or not)
+     */
     Deadline(String task, LocalDate deadline, boolean done) {
         super(task, done);
         this.deadline = deadline;
     }
 
+    /**
+     * Overriden method from the parent class Task. The purpose is to
+     * return a new done Task.
+     * @return a Task that has been done.
+     */
     @Override
     public Task finishTask() {
         return new Deadline(this.task, this.deadline,true);
     }
 
+    /**
+     * An overriden method from the parent class Task. The purpose is to
+     * return a string representation for txt files.
+     * @return String representation for txt files.
+     */
     @Override
     public String saveString() {
         return "D|" + super.saveString() + "|" + this.deadline;
     }
 
+    /**
+     * Overriden method from the object class.
+     * @return String representation of Deadline.
+     */
     @Override
     public String toString() {
         String date = this.deadline.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT));
