@@ -70,6 +70,7 @@ public class DukeStorage {
         switch (type) {
         case("Todo"): {
             return new Todo(description);
+            // Fallthrough
         }
         case("Deadline"): {
             if (currLine[2].length() < 1) {
@@ -81,7 +82,7 @@ public class DukeStorage {
             } catch (DateTimeParseException e) {
                 throw new DukeDateFormatException();
             }
-
+            // Fallthrough
         }
         case("Event"): {
             if (currLine[2].length() < 1) {
@@ -93,9 +94,11 @@ public class DukeStorage {
             } catch (DateTimeParseException e) {
                 throw new DukeDateFormatException();
             }
+            // Fallthrough
         }
         default :
             throw new DukeException("Invalid task. Removing...");
+            // Fallthrough
         }
     }
 
@@ -148,6 +151,7 @@ public class DukeStorage {
             case "Event": {
                 currTask = "Event | " + t.getDescription() + " | "
                         + ((Event) t).getSimpleAt();
+                break;
             }
             }
             content.append(currTask);

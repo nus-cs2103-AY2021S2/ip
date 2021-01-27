@@ -41,7 +41,6 @@ public class Duke {
      *
      * @throws IOException the io exception
      */
-//TODO: handle file not found exception
     public Duke() throws IOException, DukeException {
         this.dukeStorage = new DukeStorage();
         this.dukeTaskList = new DukeTaskList(this.dukeStorage.load());
@@ -61,6 +60,7 @@ public class Duke {
         switch (parsedInput[0]) {
         case (""):
             throw new DukeNoInputException();
+            // Fallthrough
         case ("todo"): {
             if (parsedInput.length < 2 || parsedInput[1].length() == 0) {
                 throw new DukeMissingArgumentsException();
@@ -139,8 +139,10 @@ public class Duke {
             dukeResponse.farewell();
             dukeStorage.unload(dukeTaskList);
             return 0;
+            // Fallthrough
         default:
             throw new DukeUnknownInputException();
+            // Fallthrough
         }
         return 1;
     }
