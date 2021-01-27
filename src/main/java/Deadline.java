@@ -43,9 +43,11 @@ public class Deadline extends Task {
      */
     @Override
     public String generateText() {
-        return String.format("D # %d # %s # %s %s", this.isDone ? 1 : 0, this.description,
-                this.dateBy,
-                this.timeBy.format(DateTimeFormatter.ofPattern("HHmm")));
+        return String.format("D # %d # %s # %s %s",
+                this.isDone ? 1 : 0,
+                        this.description, this.dateBy,
+                                this.timeBy.format(
+                                        DateTimeFormatter.ofPattern("HHmm")));
     }
 
     /**
@@ -55,8 +57,10 @@ public class Deadline extends Task {
      */
 
     public String getDeadline() { //get deadline in format of String eg. (by: Sunday)
-        return "(by: " + dateBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                timeBy.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
+        return "(by: " + dateBy.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                        + timeBy.format(
+                                DateTimeFormatter.ofPattern("hh:mma")) + ")";
     }
 
     @Override

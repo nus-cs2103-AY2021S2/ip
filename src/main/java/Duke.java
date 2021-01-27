@@ -44,7 +44,8 @@ public class Duke {
 
     public static void readData() {
         try {
-            tasks = fh.readFromFile(tasks); //reading input and putting into list
+            //reading input and putting into list
+            tasks = fh.readFromFile(tasks);
         } catch (DukeException ex) {
             ui.showError(ex.getMessage());
         } catch (IOException ex) {

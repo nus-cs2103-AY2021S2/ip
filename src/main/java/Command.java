@@ -2,6 +2,7 @@
  * Represents a user command.
  */
 
+
 public abstract class Command {
     protected final String fullCommand;
     protected final String action;

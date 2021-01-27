@@ -27,8 +27,10 @@ public class DoneCommand extends Command {
         }
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(5))) - 1;
         String toPrint = tasks.makeDone(taskNo);
-        Ui.print(Aligner.align("Good job! I've marked this task as done:"));
-        Ui.print(Aligner.align(toPrint));
+        Ui.print(
+                Aligner.align("Good job! I've marked this task as done:"));
+        Ui.print(
+                Aligner.align(toPrint));
         Ui.printLine();
     }
 }

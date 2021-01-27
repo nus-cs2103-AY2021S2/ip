@@ -47,8 +47,10 @@ public class Event extends Task {
     @Override
     public String generateText() {
         return String.format("E # %d # %s # %s %s-%s", this.isDone ? 1 : 0, this.description, this.date,
-                this.startTime.format(DateTimeFormatter.ofPattern("HHmm")),
-                this.endTime.format(DateTimeFormatter.ofPattern("HHmm")));
+                this.startTime.format(
+                        DateTimeFormatter.ofPattern("HHmm")),
+                this.endTime.format(
+                        DateTimeFormatter.ofPattern("HHmm")));
     }
 
     /**
@@ -58,9 +60,9 @@ public class Event extends Task {
      * of the event
      */
     public String getTime() {
-        return "(at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " +
-                this.startTime.format(DateTimeFormatter.ofPattern("hh:mma")) + "-" +
-                this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
+        return "(at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + this.startTime.format(DateTimeFormatter.ofPattern("hh:mma")) + "-"
+                        + this.endTime.format(DateTimeFormatter.ofPattern("hh:mma")) + ")";
     }
 
     @Override
