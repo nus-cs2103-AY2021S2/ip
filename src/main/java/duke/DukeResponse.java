@@ -1,6 +1,7 @@
 package duke;
 
 import exception.DukeEmptyTaskListException;
+import exception.DukeException;
 import misc.Color;
 import misc.Emoji;
 import task.Task;
@@ -108,9 +109,14 @@ public class DukeResponse {
      *
      * @param list the list
      */
-    public void listTasks(DukeTaskList list) throws DukeEmptyTaskListException {
+    public void listTasks(DukeTaskList list, boolean isFind) throws DukeException {
         if (list.size() == 0) {
-            throw new DukeEmptyTaskListException();
+            if (isFind) {
+                throw new DukeException("Woops! No task found under those parameters!");
+            } else {
+                throw new DukeEmptyTaskListException();
+            }
+
         }
         StringBuilder strList = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
@@ -118,8 +124,13 @@ public class DukeResponse {
             String currStr = (i + 1) + " \u00BB " + task.toString() + "\n";
             strList.append(currStr);
         }
-        this.currentMessage = strList.substring(0,
-                strList.toString().length() - 1);
+        if (isFind) {
+            this.currentMessage = "Found some tasks matching your find:\n" + strList.substring(0,
+                    strList.toString().length() - 1);
+        } else {
+            this.currentMessage = strList.substring(0,
+                    strList.toString().length() - 1);
+        }
         printMessage();
     }
 
