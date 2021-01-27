@@ -13,7 +13,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    // used by parsing functions
+    /**
+     * Constructor used by parsing functions when saving from hard drive
+     * @param desc task description
+     * @param isDone completion status of task
+     */
     protected Task(String desc, Boolean isDone) {
         this.description = desc;
         this.isDone = isDone;

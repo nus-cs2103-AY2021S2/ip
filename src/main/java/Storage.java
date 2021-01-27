@@ -39,6 +39,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if task file exists at hardcoded path
+     * @return if task file exists
+     */
     public static boolean doesTaskFileExist() {
         return doesFileOrDirExist(taskListFilePath);
     }

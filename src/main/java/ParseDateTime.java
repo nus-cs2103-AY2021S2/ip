@@ -30,6 +30,11 @@ public class ParseDateTime {
     // stores what format we're using after parsing once, so that don't need to keep parsing so much
     // upon every save to harddisk and loading
 
+    /**
+     * Formats a date time object as a string to save into hard disk
+     * @param d date time object to stringify
+     * @return String representation for hard disk
+     */
     public static String unparse(LocalDateTime d) {
         return unparseFormat1(d);
     }
@@ -49,8 +54,11 @@ public class ParseDateTime {
         return d;
     }
 
-    // todo use this in your task toString
-    // readable String for format 1
+    /**
+     * Formats date time into a readable string so that /list command is readable
+     * @param d date time object
+     * @return a user-friendly string
+     */
     public static String readableString(LocalDateTime d) {
         String patt = "dd MMM ha yyyy";
         DateTimeFormatter f2 = DateTimeFormatter.ofPattern(patt);

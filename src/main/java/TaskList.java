@@ -65,6 +65,10 @@ public class TaskList {
         bw.close();
     }
 
+    /**
+     * Adds task to array list and prints success message with task details
+     * @param t task object to add
+     */
     public void addTask(Task t) {
         taskArrayList.add(t);
 
