@@ -10,6 +10,7 @@ public class TaskList {
      * Marks the task at a particular index as done.
      *
      * @param index Index of the task to be removed.
+     * @param tasks List of all tasks.
      */
     public static void markDone(int index, List<Task> tasks) {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -30,6 +31,7 @@ public class TaskList {
      * @param command Command input by the user
      *                which contains the name of
      *                the task.
+     * @param tasks List of all tasks.
      * @throws InvalidTodoException If Todo does not
      *                              have a description.
      */
@@ -60,6 +62,8 @@ public class TaskList {
      *                which contains the name of
      *                the task and the deadline
      *                to submit it by.
+     * @param tasks List of all tasks.
+     * @throws InvalidDateTimeFormatException If the format of the date and time entered is incorrect.
      */
 
     public static void addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException{
@@ -91,6 +95,7 @@ public class TaskList {
      * @param command Command input by the user
      *                which contains the name of
      *                the event and the date and time.
+     * @param tasks List of all tasks.
      */
 
     public static void addEvent(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
@@ -122,6 +127,7 @@ public class TaskList {
      * @param command Command input by the user
      *                which contains the index of
      *                the task to be deleted.
+     * @param tasks List of all tasks.
      */
     public static void deleteTask(String command, List<Task> tasks) {
         int deleteIndex = Integer.parseInt(command.split(" ")[1]) - 1;
@@ -143,6 +149,8 @@ public class TaskList {
 
     /**
      * Lists all the tasks that have been input by the user.
+     *
+     * @param tasks List of all tasks.
      */
     public static void printList(List<Task> tasks) {
         int listCount = 1;

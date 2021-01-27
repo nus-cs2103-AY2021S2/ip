@@ -19,7 +19,11 @@ public class Event extends Task {
         return this.at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
     }
 
-
+    /**
+     * Formats string to be stored.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String getSaveString() {
         return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + formatDateForSaving();
