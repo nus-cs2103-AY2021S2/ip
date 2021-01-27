@@ -59,6 +59,9 @@ public class Duke {
                 int id = Integer.parseInt(c.args.get(0));
                 tasks.deleteTask(id);
                 ui.echo(ui.DELETE_TASK);
+            } else if (c.type == CommandType.FIND_TASKS) {
+                ui.echo(ui.FIND_TASKS);
+                tasks.findTasks(c.args.get(0));
             } else if (c.type == CommandType.LIST_TASKS) {
                 ui.echo(ui.SHOW_TASKS);
                 tasks.showTasks();

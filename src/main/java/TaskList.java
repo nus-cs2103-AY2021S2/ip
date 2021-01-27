@@ -86,6 +86,19 @@ public class TaskList {
     /**
      * Prints all the tasks in the task list.
      */
+    public void findTasks(String keyword) {
+        if (data.size() > 0){
+            for (int i = 1; i <= data.size(); i++) {
+                Task t = data.get(i - 1);
+                if (t.name.contains(keyword)) {
+                    System.out.println("   " + i + ": " + t);
+                }
+            }
+        } else {
+            System.out.println("   Looks like you haven't added any tasks.");
+        }
+    }
+
     public void showTasks() {
         if (data.size() > 0) {
             for (int i = 1; i <= data.size(); i++) {

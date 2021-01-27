@@ -18,6 +18,9 @@ public class Parser {
             return new Command(CommandType.LIST_TASKS);
         } else if (command.equals("done")) {
             return new Command(CommandType.COMPLETE_TASK, args[0]);
+        } else if (command.equals("find")) {
+            String xs = String.join(" ", args);
+            return new Command(CommandType.FIND_TASKS, xs);
         } else if (command.equals("todo")) {
             String xs = String.join(" ", args);
             return new Command(CommandType.ADD_TODO, xs);
