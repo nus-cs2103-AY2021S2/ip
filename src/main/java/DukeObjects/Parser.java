@@ -1,5 +1,7 @@
+package DukeObjects;
+
 /**
- * Parser for Duke commands, with access to its task list, and storage.
+ * Duke.Parser for Duke commands, with access to its task list, and storage.
  */
 public class Parser {
     private TaskList tasks;
@@ -107,7 +109,7 @@ public class Parser {
     /**
      * Adds specified task into task list and prints user feedback.
      *
-     * @param task Task to be added.
+     * @param task Duke.Task to be added.
      */
     private void addTask(Task task) {
         tasks.add(task);

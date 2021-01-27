@@ -1,4 +1,5 @@
-import java.util.List;
+package DukeObjects;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -9,9 +10,9 @@ public class Ui {
     }
 
     /**
-     * Static factory creation of Ui.
+     * Static factory creation of Duke.Ui.
      *
-     * @return Ui object started.
+     * @return Duke.Ui object started.
      */
     public static Ui startUi() {
         String logo = " ____        _        \n"
@@ -40,7 +41,7 @@ public class Ui {
     }
 
     /**
-     * Closes this Ui.
+     * Closes this Duke.Ui.
      */
     public void close() {
         scanner.close();
@@ -60,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Prints each Task in the list with its index, and remarks if the list is empty.
+     * Prints each Duke.Task in the list with its index, and remarks if the list is empty.
      *
      * @param tasks List of Tasks to be printed.
      */

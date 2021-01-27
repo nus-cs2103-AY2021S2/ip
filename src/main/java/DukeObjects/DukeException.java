@@ -1,3 +1,5 @@
+package DukeObjects;
+
 /**
  * Represents unchecked exceptions specific to Duke.
  */

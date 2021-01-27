@@ -1,3 +1,5 @@
+package DukeObjects;
+
 /**
  * Represents actions that can be used on Duke.
  * Actions are the first word in user input commands.

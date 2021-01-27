@@ -1,6 +1,8 @@
+package DukeObjects;
+
 /**
- * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Task, namely:
- * Event, Deadline, ToDo
+ * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Duke.Task, namely:
+ * Duke.Event, Duke.Deadline, Duke.ToDo
  */
 public class Task {
     protected boolean isDone;
@@ -43,16 +45,16 @@ public class Task {
                 newTask = createEvent(taskCommand);
                 break;
             default:
-                throw new DukeException("Task cannot be created: " + taskCommand);
+                throw new DukeException("Duke.Task cannot be created: " + taskCommand);
         }
         return newTask;
     }
 
     /**
-     * Creates Task from the command with todo.
+     * Creates Duke.Task from the command with todo.
      *
      * @param command User input with the command todo.
-     * @return Task created.
+     * @return Duke.Task created.
      * @throws DukeException if there is no description of the task.
      */
     private static Task createToDo(String command) throws DukeException {
@@ -63,10 +65,10 @@ public class Task {
     }
 
     /**
-     * Creates Task from the command with deadline.
+     * Creates Duke.Task from the command with deadline.
      *
      * @param command User input with the command deadline.
-     * @return Task created.
+     * @return Duke.Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no deadline specified by "/by".
      */
@@ -82,10 +84,10 @@ public class Task {
     }
 
     /**
-     * Creates Task from the command with event.
+     * Creates Duke.Task from the command with event.
      *
      * @param command User input with the command event.
-     * @return Task created.
+     * @return Duke.Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no duration specified by "/at".
      */
