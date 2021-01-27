@@ -30,6 +30,6 @@ public class Deadline extends Task {
     @Override
     public String getData() {
         return "[" + type + "]"  + super.toString()
-                + "(by:" + by + ")";
+                + " (by:" + by + ")";
     }
 }

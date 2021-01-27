@@ -30,6 +30,6 @@ public class Event extends Task {
     @Override
     public String getData() {
         return "[" + type + "]" + super.toString()
-                + "(at:" + at + ")";
+                + " (at:" + at + ")";
     }
 }
