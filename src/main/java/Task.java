@@ -14,8 +14,9 @@ public class Task implements Serializable {
         return (isDone ? "✓" : " ");
     }
 
-    public void markAsDone() {
+    public Task markAsDone() {
         this.isDone = true;
+        return this;
     }
 
     @Override

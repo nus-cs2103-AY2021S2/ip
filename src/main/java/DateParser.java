@@ -31,14 +31,14 @@ public class DateParser {
             throw e;
         }
 
-        if (tokenizedInput.length == 2) {
+        if (tokenizedInput.length == 1) {
+            time = LocalTime.MAX;
+        } else {
             try {
                 time = parseTime(tokenizedInput[1].trim());
             } catch (DukeException e) {
                 throw e;
             }
-        } else {
-            time = LocalTime.MAX;
         }
 
         return LocalDateTime.of(date, time);
