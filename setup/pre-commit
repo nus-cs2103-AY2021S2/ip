@@ -1,8 +1,12 @@
 #!/bin/sh
 # From gist at https://gist.github.com/chadmaughan/5889802
 
-# stash any unstaged changes
-git stash -q --keep-index
+# stash any unstaged changes (but not when merging)
+isMerging=1
+if ! git merge HEAD; then
+    git stash -q --keep-index
+    isMerging=0
+fi
 
 if ! ./gradlew check; then
     git stash pop -q
@@ -16,7 +20,9 @@ fi
 RESULT=$?
 
 # unstash the unstashed changes
-git stash pop -q
+if ! isMerging; then
+    git stash pop -q
+fi
 
 # return the './gradlew test' exit code
 exit $RESULT
