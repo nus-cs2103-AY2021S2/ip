@@ -1,8 +1,12 @@
+package main.java;
+
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,9 +14,11 @@ import java.util.regex.Pattern;
 public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         boolean shouldRun = true;
+        DataStorage storage = new DataStorage();
 
+        tasks = startup(storage);
         greet();
 
         while (shouldRun) {
@@ -69,6 +75,8 @@ public class Duke {
                 echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
             }
         }
+
+        shutdown(storage, tasks);
     }
 
     public static void greet() {
@@ -139,7 +147,7 @@ public class Duke {
         return new Event(taskName, timeOfEvent);
     }
 
-    public static void markTaskAsDone(String input, ArrayList<Task> tasks) throws DukeException {
+    public static void markTaskAsDone(String input, List<Task> tasks) throws DukeException {
         int taskIdx;
         String taskIdxStr;
         try {
@@ -159,7 +167,7 @@ public class Duke {
         }
     }
 
-    public static void deleteTask(String input, ArrayList<Task> tasks) throws DukeException {
+    public static void deleteTask(String input, List<Task> tasks) throws DukeException {
         int taskIdx;
         String taskIdxStr;
         try {
@@ -180,6 +188,10 @@ public class Duke {
         }
     }
 
+    public static String getNumberOfTasksString(List<Task> tasks) {
+        return String.format("Now you have %d items in your list", tasks.size());
+    }
+
     public static LocalDateTime parseDateStr(String dateStr) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -193,8 +205,23 @@ public class Duke {
         }
     }
 
-    public static String getNumberOfTasksString(ArrayList<Task> tasks) {
-        return String.format("Now you have %d items in your list", tasks.size());
+    public static List<Task> startup(DataStorage storage) {
+        try {
+            storage.createBackingStoreIfNotExists();
+            return storage.readTasks();
+        } catch (DukeException dukeException) {
+            echo(dukeException.getMessage());
+            System.exit(0);
+        }
+        return null;
+    }
+
+    public static void shutdown(DataStorage storage, List<Task> tasks) {
+        try {
+            storage.saveTasks(tasks);
+        } catch (DukeException dukeException) {
+            echo(dukeException.getMessage());
+        }
     }
 
     public static void echo(String input) {

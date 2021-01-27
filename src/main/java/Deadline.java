@@ -1,8 +1,17 @@
+package main.java;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
+    @JsonProperty
     private LocalDateTime deadline;
+
+    protected Deadline() {
+        super();
+    }
 
     public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
