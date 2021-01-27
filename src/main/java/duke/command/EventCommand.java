@@ -3,9 +3,9 @@ package duke.command;
 /**
  * Creates an Event task.
  */
-public class EventCommand extends Command{
-    String description;
-    String eventTime;
+public class EventCommand extends Command {
+    private final String description;
+    private final String eventTime;
 
     public EventCommand(String description, String eventTime) {
         super("event");
@@ -27,10 +27,5 @@ public class EventCommand extends Command{
      */
     public String getEventTime() {
         return eventTime;
-    }
-
-    @Override
-    public void run() {
-
     }
 }

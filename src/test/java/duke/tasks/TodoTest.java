@@ -1,23 +1,24 @@
 package duke.tasks;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    public void testIsDoneFunction() {
+    public void testIsDone() {
         Todo test = new Todo("test");
         Assertions.assertFalse(test.isDone);
     }
 
     @Test
-    public void testMarkAsDoneFunction() {
+    public void testMarkAsDone() {
         Todo test = new Todo(("test"));
         test.markAsDone();
         Assertions.assertTrue(test.isDone);
     }
 
     @Test
-    public void testGetStatusIconFunction() {
+    public void testGetStatusIcon() {
         Todo test = new Todo("test");
         Assertions.assertEquals("[ ]", test.getStatusIcon());
         test.markAsDone();

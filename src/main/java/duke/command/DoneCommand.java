@@ -3,8 +3,8 @@ package duke.command;
 /**
  * Completes a task.
  */
-public class DoneCommand extends Command{
-    String taskNumber;
+public class DoneCommand extends Command {
+    private final String taskNumber;
 
     public DoneCommand(String taskNumber) {
         super("done");
@@ -17,10 +17,5 @@ public class DoneCommand extends Command{
      */
     public String getTaskNumber() {
         return taskNumber;
-    }
-
-    @Override
-    public void run() {
-
     }
 }

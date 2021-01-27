@@ -3,8 +3,8 @@ package duke.command;
 /**
  * Deletes a task.
  */
-public class DeleteCommand extends Command{
-    String taskNumber;
+public class DeleteCommand extends Command {
+    private final String taskNumber;
 
     public DeleteCommand(String taskNumber) {
         super("delete");
@@ -17,10 +17,5 @@ public class DeleteCommand extends Command{
      */
     public String getTaskNumber() {
         return taskNumber;
-    }
-
-    @Override
-    public void run() {
-
     }
 }

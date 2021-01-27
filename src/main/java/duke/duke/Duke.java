@@ -11,27 +11,19 @@ import duke.ui.Ui;
  * A chat bot manager for handling task list operations.
  */
 public class Duke {
-    String logo;
-    TaskList list;
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final TaskList list;
 
     public Duke() {
-        this.logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
         this.list = new TaskList();
 
     }
 
     public Duke(TaskList list) {
-        this.logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
         this.list = list;
     }
 
@@ -92,14 +84,20 @@ public class Duke {
      * Returns task list.
      * @return task list
      */
-    public TaskList getList() { return list;}
+    public TaskList getList() {
+        return list;
+    }
 
     /**
      * Returns logo of chat bot.
      * @return logo of chat bot
      */
     public String getLogo() {
-        return this.logo;
+        return LOGO;
+    }
+
+    public int getNumberOfTasks() {
+        return list.size();
     }
 
 }

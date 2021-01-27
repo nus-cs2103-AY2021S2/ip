@@ -5,20 +5,20 @@ import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void testIsDoneFunction() {
+    public void testIsDone() {
         Event test = new Event("test", "test");
         Assertions.assertFalse(test.isDone);
     }
 
     @Test
-    public void testMarkAsDoneFunction() {
+    public void testMarkAsDone() {
         Event test = new Event("test", "test");
         test.markAsDone();
         Assertions.assertTrue(test.isDone);
     }
 
     @Test
-    public void testGetStatusIconFunction() {
+    public void testGetStatusIcon() {
         Event test = new Event("test", "test");
         Assertions.assertEquals("[ ]", test.getStatusIcon());
         test.markAsDone();

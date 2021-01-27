@@ -14,7 +14,7 @@ public class DateValidatorUsingDateFormat implements DateValidator {
     @Override
     public boolean isValid(String date) {
         try {
-            LocalDate.parse(date, this.dateFormatter);
+            LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {
             return false;
         }

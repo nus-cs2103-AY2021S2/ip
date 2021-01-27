@@ -7,10 +7,10 @@ import java.util.List;
  * Represents a list of {@code Task}
  */
 public class TaskList {
-    protected final List<Task> lst;
+    private final List<Task> lst;
 
     public TaskList() {
-        this.lst = new ArrayList<>();
+        lst = new ArrayList<>();
     }
 
     /**
@@ -18,7 +18,7 @@ public class TaskList {
      * @param task task to be added
      */
     public void addItem(Task task) {
-        this.lst.add(task);
+        lst.add(task);
     }
 
     /**
@@ -26,7 +26,7 @@ public class TaskList {
      * @param id index of task to be removed
      */
     public void removeItem(int id) {
-        this.lst.remove(id);
+        lst.remove(id);
     }
 
     /**
@@ -34,7 +34,7 @@ public class TaskList {
      * @param id
      */
     public void doneTask(int id) {
-        this.lst.get(id).markAsDone();
+        lst.get(id).markAsDone();
     }
 
     /**
@@ -43,5 +43,9 @@ public class TaskList {
      */
     public List<Task> getLst() {
         return lst;
+    }
+
+    public int size() {
+        return lst.size();
     }
 }

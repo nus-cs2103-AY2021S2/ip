@@ -4,7 +4,7 @@ package duke.tasks;
  * Represents a task with an event time.
  */
 public class Event extends Task {
-    protected final String eventTime;
+    private final String eventTime;
 
     public Event(String description, String eventTime) {
         super(description, "[E]");

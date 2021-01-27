@@ -4,7 +4,7 @@ package duke.command;
  * Represents a user command.
  */
 public abstract class Command {
-    String command;
+    protected final String command;
 
     public Command(String command) {
         this.command = command;
@@ -13,10 +13,4 @@ public abstract class Command {
     public String getCommand() {
         return this.command;
     }
-
-    /**
-     * Executes the command.
-     */
-    public abstract void run();
-
 }

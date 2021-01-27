@@ -1,23 +1,24 @@
 package duke.tasks;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void testIsDoneFunction() {
+    public void testIsDone() {
         Deadline test = new Deadline("test", "test");
         Assertions.assertFalse(test.isDone);
     }
 
     @Test
-    public void testMarkAsDoneFunction() {
+    public void testMarkAsDone() {
         Deadline test = new Deadline("test", "test");
         test.markAsDone();
         Assertions.assertTrue(test.isDone);
     }
 
     @Test
-    public void testGetStatusIconFunction() {
+    public void testGetStatusIcon() {
         Deadline test = new Deadline("test", "test");
         Assertions.assertEquals("[ ]", test.getStatusIcon());
         test.markAsDone();
