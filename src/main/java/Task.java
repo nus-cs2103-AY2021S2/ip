@@ -29,7 +29,7 @@ public class Task {
 
     @Override
     public String toString(){
-        return "[" + this.getStatusIcon() + "] " + this.getTaskDetail();
+        return "[" + this.getStatusIcon() + "] | " + this.getTaskDetail();
     }
 
 }
