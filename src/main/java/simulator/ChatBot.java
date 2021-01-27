@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import exception.DukeException;
-import simulator.Parser;
-import simulator.Storage;
 import task.*;
 
 import ui.Ui;
@@ -35,6 +33,7 @@ public class ChatBot {
         ArrayList<String> parsedInput = parser.parseInput(input);
         try {
             String command = parsedInput.get(0);
+
             if (command.equals("list")) {
                 Ui.printList(tasklist);
             } else {
@@ -48,24 +47,25 @@ public class ChatBot {
                     String description = parsedInput.get(1);
                     Task newTask;
                     String duration;
+
                     switch (command) {
-                        case "todo":
-                            newTask = new Todo(description);
-                            tasklist.addTask(newTask);
-                            break;
-                        case "deadline":
-                            duration = parsedInput.get(2);
-                            newTask = new Deadline(description, duration);
-                            tasklist.addTask(newTask);
-                            break;
-                        case "event":
-                            duration = parsedInput.get(2);
-                            newTask = new Event(description, duration);
-                            tasklist.addTask(newTask);
-                            break;
-                        default:
-                            Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
-                            break;
+                    case "todo":
+                        newTask = new Todo(description);
+                        tasklist.addTask(newTask);
+                        break;
+                    case "deadline":
+                        duration = parsedInput.get(2);
+                        newTask = new Deadline(description, duration);
+                        tasklist.addTask(newTask);
+                        break;
+                    case "event":
+                        duration = parsedInput.get(2);
+                        newTask = new Event(description, duration);
+                        tasklist.addTask(newTask);
+                        break;
+                    default:
+                        Ui.printBox("☹ OOPS!!! Incorrect input, please check!");
+                        break;
                     }
                 }
             }
