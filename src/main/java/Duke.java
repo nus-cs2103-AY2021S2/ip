@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Duke {
     // use collection for holding all tasks
-    private static final ArrayList<Task> taskList = new ArrayList<>();
+//    private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static TaskList taskList;
 
     // formatting for print messages
     private static final String lines = "    ______________________________________________";
@@ -215,7 +216,7 @@ public class Duke {
         switch (command) {
         case "bye":
         case "list":
-            throw new InvalidArgumentException("Too many commands provided. Did you mean '" + command + "'?");
+            throw new InvalidArgumentException("Too many arguments provided. Did you mean '" + command + "'?");
         default:
             break;
         }
@@ -286,7 +287,7 @@ public class Duke {
 
             // UPON SUCCESSFUL COMMAND EXECUTION
             // save tasksFile
-            TaskList.saveTasksList(taskList);
+            taskList.saveTasksList();
             
         } catch (UnsupportedCommandException | InvalidArgumentException | MissingArgumentException e) {
             // is it better to detect unsupported first command earlier?
@@ -296,7 +297,7 @@ public class Duke {
             return true;
         } catch (IOException e) {
             // todo see if you can offer better help
-            printException(e.getMessage());
+            print(new String[]{"Oops, error occurred in saving the file.", e.getMessage()});
             return true;
         } catch (Exception e) {
             String errMsg = "didn't expect this exception " + e;
@@ -329,9 +330,10 @@ public class Duke {
         // random testing things
         // should be rearranged elsewhere
         try {
-            Save.loadFromHardDisk(taskList);
+            taskList = TaskList.setupTaskList();
         } catch (IOException e) {
-            e.printStackTrace();
+            print(new String[]{"Something went wrong in loading the task file and parsing",
+                    e.getMessage()});
         }
 
         intro();

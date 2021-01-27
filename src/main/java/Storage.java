@@ -3,11 +3,17 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 // should be called fileSetup, but loadfromharddisk method doesn't fit
 // level 7 files should be in another folder/pkg
-public class Save {
+
+// todo
+// storage objects should store info about where each list/anything should be saved
+// have a final hashmap of where each object to store is stored
+// todo seems like storage object might be associated with the duke object? not sure
+public class Storage {
     public static final String projectDir = System.getProperty("user.dir");
     public static final java.nio.file.Path taskListFilePath = java.nio.file.Paths.get(
             projectDir, "src", "data", "tasks.txt"); // todo rename as tasklistF..P..
@@ -30,6 +36,7 @@ public class Save {
     // testing method
     public static void setupTasksFile() throws IOException {
         if (doesTaskFileExist()) {
+            // probably not gonna be used due to TaskList.java impl
             return;
         } else {
             java.nio.file.Path dataDirPath = java.nio.file.Paths.get(projectDir, "src", "data");
@@ -49,18 +56,9 @@ public class Save {
     }
 
 
-
-    // todo abstract everything away
-    // duke should only call save() function after any successful call
-    // save function checks if files exist, and then write the entire list to hard drive
-        // not exactly sure if the files existing should happen only at the start of the programme?
-        // e.g. public static void setupDataFiles();
-        // before that, call loadFromHardDisk();
-
-    public static boolean loadFromHardDisk(ArrayList<Task> taskList) throws IOException {
-        // if no files in harddisk
-            // return false and set up
-        // if only empty files, return false
+    // return whether any tasks have been loaded?
+    public static boolean loadFromHardDisk(TaskList taskList) throws IOException {
+        boolean isAnyTaskFound = false;
 
         if (doesTaskFileExist()) {
             // load it
@@ -88,13 +86,12 @@ public class Save {
                     break;
                 }
                 taskList.add(t);
+                isAnyTaskFound = true;
             }
-            return true;
         } else {
+            // probably not gonna be used due to TaskList.java impl
             setupTasksFile();
-            return false;
         }
+        return isAnyTaskFound;
     }
-
-
 }
