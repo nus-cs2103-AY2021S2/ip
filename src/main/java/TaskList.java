@@ -155,6 +155,12 @@ public class TaskList {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
+    /**
+     * Searches for task specified by user.
+     *
+     * @param command Command input by user.
+     * @param tasks List of tasks.
+     */
     public static void findTask(String command, List<Task> tasks) {
         int listCount = 1;
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
