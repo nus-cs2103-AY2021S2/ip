@@ -1,22 +1,20 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 import exception.DukeException;
 
 public class Storage {
-    
+    protected static String sessionFile = "./saved_session";
+
     protected ArrayList<Task> tasks;
     protected ArrayList<String> inputs;
 
-    protected static final String sessionFile = "./saved_session";
-    
     public void saveHistory() {
         File file = new File(sessionFile);
         try {
@@ -37,7 +35,9 @@ public class Storage {
     }
 
     public void loadHistory() throws IOException {
-        if (!new File(sessionFile).exists()) return;
+        if (!new File(sessionFile).exists()) {
+            return;
+        }
         InputStream fileInStream = new FileInputStream(sessionFile);
         BufferedReader reader = getReader(fileInStream);
 
