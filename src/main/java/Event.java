@@ -2,7 +2,7 @@ import static java.lang.Boolean.parseBoolean;
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    private LocalDateTime eventTiming;
+    private LocalDateTime eventTiming; // todo make a custom class for datetimes
 
     public Event(String desc, String eventTiming) {
         super(desc);
@@ -23,7 +23,7 @@ public class Event extends Task {
     public String unparse() {
         // should abstract e here away
         return "E" + delimiter + description + delimiter + isDone
-                + delimiter + eventTiming + System.lineSeparator();
+                + delimiter + ParseDateTime.unparse(eventTiming) + System.lineSeparator();
     }
 
     //E;;desc;;true;;timing
@@ -39,7 +39,6 @@ public class Event extends Task {
         int doneEndIdx = oneLine.indexOf(delimiter, descEndIdx + 1);
         String doneStr = oneLine.substring(descEndIdx + delimiter.length(), doneEndIdx);
         Boolean isDone = parseBoolean(doneStr);
-
 
         String eventTiming = oneLine.substring(doneEndIdx + delimiter.length());
 

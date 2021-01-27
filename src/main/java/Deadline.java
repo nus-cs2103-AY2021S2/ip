@@ -1,7 +1,7 @@
 import static java.lang.Boolean.parseBoolean;
 import java.time.LocalDateTime;
 
-public class Deadline extends Task {
+public class    Deadline extends Task {
     private LocalDateTime deadline;
 
     public Deadline(String desc, String deadline) {
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     @Override
     public String unparse() {
         return "D" + delimiter + description + delimiter + isDone
-                + delimiter + deadline + System.lineSeparator();
+                + delimiter + ParseDateTime.unparse(deadline) + System.lineSeparator();
     }
 
     // since this parsing is separate from the parsing in the duke function

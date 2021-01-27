@@ -16,15 +16,31 @@ public class ParseDateTime {
         return parseFormat1(s);
     }
 
+    // for saving minimal format back to list?
+    // maybe once there are more parsing formats, should create a CustomDateTime object that
+    // stores what format we're using after parsing once, so that don't need to keep parsing so much
+    // upon every save to harddisk and loading
+    public static String unparse(LocalDateTime d) {
+        return unparseFormat1(d);
+    }
+
+    private static String unparseFormat1(LocalDateTime d) {
+        String patt = "dd-MM ha yyyy";
+        DateTimeFormatter f2 = DateTimeFormatter.ofPattern(patt);
+        String str = f2.format(d);
+        return str.substring(0, patt.length() - 4);
+    }
+
     // where s is formatted like "30-04 6PM"
     private static LocalDateTime parseFormat1(String s) {
-        DateTimeFormatter f2 = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
-        int yyyy2 = Year.now().getValue();
-        LocalDateTime d2 = LocalDateTime.parse(s + " " + yyyy2, f2);
-        return d2;
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
+        int yyyy = Year.now().getValue();
+        LocalDateTime d = LocalDateTime.parse(s + " " + yyyy, f);
+        return d;
     }
 
     // todo use this in your task toString
+    // readable String for format 1
     public static String readableString(LocalDateTime d) {
         String patt = "dd MMM ha yyyy";
         DateTimeFormatter f2 = DateTimeFormatter.ofPattern(patt);

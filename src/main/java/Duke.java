@@ -30,10 +30,6 @@ public class Duke {
             remainOpen = parser.parseInputLine(userInput);
         }
 
-
-        System.out.println("testing outside");
-        Ui.printTaskList(taskList);
-
         sc.close();
     }
 }
