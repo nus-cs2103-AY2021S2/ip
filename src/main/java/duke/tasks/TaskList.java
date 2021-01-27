@@ -75,6 +75,4 @@ public class TaskList {
     public void markAsDone(int num) {
         tasks.get(num - 1).markAsDone();
     }
-
-
 }

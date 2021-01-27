@@ -16,6 +16,7 @@ public class showListCommand extends Command {
         if (tasks.getNumOfTasks() == 0) {
             throw new DukeException("There are currently no duke.tasks in your list.");
         }
+        
         ui.displayList(tasks.getTasks());
     }
 

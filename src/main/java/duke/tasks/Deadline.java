@@ -32,7 +32,8 @@ public class Deadline extends Task {
      * @return a String of the date time.
      */
     public String getDateTime() {
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
+        return dateTime.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }
 
     /**
@@ -42,7 +43,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toSave() {
-        return "D / " + super.isDoneString + super.taskName + " / " + dateTime;
+        return "D / " + super.isDoneString
+                + super.taskName + " / " + dateTime;
     }
 
     /**
@@ -52,6 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDateTime() + ")";
+        return "[D]" + super.toString()
+                + " (by: " + getDateTime() + ")";
     }
 }

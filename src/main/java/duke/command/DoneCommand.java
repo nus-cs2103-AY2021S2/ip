@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
         if (taskNum < 1 || taskNum > tasks.getNumOfTasks()) {
             throw new IncorrectNumberException(taskNum);
         }
+
         tasks.markAsDone(taskNum);
         ui.displayDoneTask(tasks.getTask(taskNum));
         storage.saveTasks(tasks.getTasks());

@@ -18,15 +18,16 @@ public class AddDeadlineCommand extends Command{
         if (description.isBlank()) {
             throw new UnknownInputException("deadline");
         }
+
         String[] name = description.split(" /by ", 2);
 
         if (name.length != 2) {
             throw new MissingDateException("");
         }
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime dateTime = LocalDateTime.parse(name[1], formatter);
         this.deadline = new Deadline(name[0], dateTime);
-
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

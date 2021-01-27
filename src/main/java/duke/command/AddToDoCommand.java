@@ -14,6 +14,7 @@ public class AddToDoCommand extends Command{
         if (description.isBlank()) {
             throw new UnknownInputException("todo");
         }
+
         this.todo = new ToDo(description);
     }
 

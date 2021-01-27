@@ -32,7 +32,8 @@ public class Event extends Task {
      * @return a String of the date time.
      */
     public String getDateTime() {
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
+        return dateTime.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"));
     }
 
     /**
@@ -42,7 +43,8 @@ public class Event extends Task {
      */
     @Override
     public String toSave() {
-        return "E / " + super.isDoneString + super.taskName + " / " + dateTime;
+        return "E / " + super.isDoneString
+                + super.taskName + " / " + dateTime;
     }
 
     /**
@@ -52,6 +54,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getDateTime() + ")";
+        return "[E]" + super.toString()
+                + " (at: " + getDateTime() + ")";
     }
 }
