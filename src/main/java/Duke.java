@@ -55,8 +55,6 @@ public class Duke {
             System.out.println(cmd);
             System.out.println(display.printLine());
         }
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println(display.printLine());
     }
 
     /**

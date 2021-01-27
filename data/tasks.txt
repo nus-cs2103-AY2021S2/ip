@@ -3,3 +3,4 @@
 [D][X] finsih hw (by: Jan 10 2019 14:00)
 [T][ ] fly higher
 [D][ ] noob (by: Jan 01 2010 12:00)
+[T][ ] read book
