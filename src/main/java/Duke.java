@@ -1,7 +1,9 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) throws DukeException {
         System.out.println("Hello! I'm Bob :D\n" + "What can I do for you?");
 
@@ -50,8 +52,11 @@ public class Duke {
                     int taskIndex = userInput.indexOf("/at");
                     if (taskIndex != -1) {
                         String taskName = userInput.substring(6, taskIndex - 1);
-                        String time = userInput.substring(taskIndex + 4);
-                        Event newEvent = new Event(taskName, time);
+                        String dateTime = userInput.substring(taskIndex + 4);
+                        int index = dateTime.indexOf(" ");
+                        String time = dateTime.substring(index - 1);
+                        LocalDate dateFormatted = LocalDate.parse(dateTime.substring(0, index));
+                        Event newEvent = new Event(taskName, dateFormatted, time);
                         taskList.add(newEvent);
                         System.out.println("Alright, I have added this new event.\n" +
                                 newEvent + "\n" +
@@ -69,7 +74,10 @@ public class Duke {
                     if (deadlineIndex != -1) {
                         String taskName = userInput.substring(9, deadlineIndex - 1);
                         String deadline = userInput.substring(deadlineIndex + 4);
-                        Deadline newDeadline = new Deadline(taskName, deadline);
+                        int index = deadline.indexOf(" ");
+                        String time = deadline.substring(index - 1);
+                        LocalDate dateFormatted = LocalDate.parse(deadline.substring(0, index));
+                        Deadline newDeadline = new Deadline(taskName, dateFormatted, time);
                         taskList.add(newDeadline);
                         System.out.println("Alright, I have added this new deadline.\n" +
                                 newDeadline + "\n" +

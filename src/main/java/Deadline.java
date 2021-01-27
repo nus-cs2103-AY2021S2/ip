@@ -1,17 +1,23 @@
-public class Deadline extends Task{
-    String deadline;
+import java.time.LocalDate;
 
-    public Deadline(String name, String deadline) {
+public class Deadline extends Task{
+    LocalDate deadline;
+    String time;
+
+    public Deadline(String name, LocalDate deadline, String time) {
         super(name);
         this.deadline = deadline;
+        this.time = time;
     }
 
     @Override
     public String toString() {
+        String head = "[D][ ] ";
         if (this.done) {
-            return "[D][X] " + this.name + " (by: " + this.deadline + ")";
-        } else {
-            return "[D][ ] " + this.name + " (by: " + this.deadline + ")";
+            head = "[D][X] ";
         }
+        return head + this.name + " (by: " + this.deadline.getMonth() + " "
+                + this.deadline.getDayOfMonth() + " " + this.deadline.getYear() + " "
+                + this.time + ")";
     }
 }
