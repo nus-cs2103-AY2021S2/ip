@@ -44,10 +44,12 @@ public class Storage {
                     String command = content[0];
                     String status = content[1];
                     Task task;
+
                     if (command.equals("T")) {
                         task = new Todo(status, content[2]);
                     } else {
                         String[] description = content[2].split("@");
+                        
                         if (command.equals("D")) {
                             task = new Deadline(status, description);
                         } else {

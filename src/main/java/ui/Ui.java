@@ -26,10 +26,8 @@ public class Ui {
             + "         ─────▄█░░▀▀▀▀▀░░█▄ \n"
             + "         ─▄▄──█░░░░░░░░░░░█──▄▄ \n"
             + "         █▄▄█─█░░▀░░┬░░▀░░█─█▄▄█ ";
-
     public final static String GREETING_MSG = "Hey there! I'm Kawaii Kat \n"
             + "     How can i assist you ~nya~?";
-
     public final static String EXIT_MSG = "Farewell. See you soon :)!";
 
 
