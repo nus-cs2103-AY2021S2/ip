@@ -1,5 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 
 public class Duke {
     ArrayList<Task> storedTasks;
@@ -56,6 +60,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
         System.out.println(this);
+        this.update();
     }
 
     public void addEvent(String taskName) throws DukeException {
@@ -67,6 +72,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
         System.out.println(this);
+        this.update();
     }
 
     public void addDeadline(String taskName) throws DukeException{
@@ -78,6 +84,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
         System.out.println(this);
+        this.update();
     }
 
     public void listTask() {
@@ -104,8 +111,9 @@ public class Duke {
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("  " + currTask);
         } else {
-            System.out.println("Task not found");
+            System.out.println("Tasgegk not found");
         }
+        this.update();
     }
 
     public void delete(String index) throws DukeException {
@@ -124,6 +132,46 @@ public class Duke {
             System.out.println(this);
         } else {
             System.out.println("Task not found");
+        }
+        this.update();
+    }
+
+    public void createFile() throws java.io.IOException  {
+        new File("./data").mkdirs();
+        File textFile = new File("./data/duke.txt");
+        textFile.delete();
+        textFile.createNewFile();
+    }
+
+    public void update() {
+        File textFile = new File("./data/duke.txt");
+        try {
+            this.createFile();
+            FileWriter fileWriter = new FileWriter(textFile);
+            for (Task t : this.storedTasks) {
+                if (t instanceof ToDo) {
+                    fileWriter.write("T | ");
+                } else if (t instanceof Deadline) {
+                    fileWriter.write("D | ");
+                } else if (t instanceof Event) {
+                    fileWriter.write("E | ");
+                }
+                if (t.isComplete()) {
+                    fileWriter.write("1 | " + t.taskName);
+                } else {
+                    fileWriter.write("0 | " + t.taskName);
+                }
+                if (t instanceof Deadline) {
+                    fileWriter.write(" | " + ((Deadline) t).getDate());
+                }
+                if (t instanceof Event) {
+                    fileWriter.write(" | " + ((Event) t).getDate());
+                }
+                fileWriter.write("\n");
+            }
+            fileWriter.close();
+        } catch (IOException exception) {
+            System.out.println(exception);
         }
     }
 
