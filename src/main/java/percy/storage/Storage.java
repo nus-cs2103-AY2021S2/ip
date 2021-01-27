@@ -4,8 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 import percy.exception.PercyException;
 import percy.task.Task;
@@ -50,16 +55,20 @@ public class Storage {
                 }
                 break;
             case Deadline.PREFIX:
-                String by = splitData[3]; // need to convert date later
-                taskList.add(new Deadline(description, by));
+                String[] dateTime = splitData[3].split(" ", 2);
+                LocalDate date = LocalDate.parse(dateTime[0]);
+                LocalTime time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+                taskList.add(new Deadline(description, date, time));
                 taskCount++;
                 if (status.equals("1")) {
                     taskList.get(taskCount - 1).doTask();
                 }
                 break;
             case Event.PREFIX:
-                String at = splitData[3];
-                taskList.add(new Event(description, at));
+                dateTime = splitData[3].split(" ", 2);
+                date = LocalDate.parse(dateTime[0]);
+                time = LocalTime.parse(dateTime[1], DateTimeFormatter.ofPattern("HHmm"));
+                taskList.add(new Event(description, date, time));
                 taskCount++;
                 if (status.equals("1")) {
                     taskList.get(taskCount - 1).doTask();

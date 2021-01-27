@@ -10,6 +10,8 @@ import percy.task.Todo;
 import percy.storage.Storage;
 
 public class DoneCommand extends Command {
+    public static final String COMMAND = "done";
+
     private int taskNum;
 
     public DoneCommand(int taskNum) {

@@ -1,3 +1,7 @@
+import percy.exception.PercyException;
+import percy.task.Deadline;
+import percy.task.Event;
+import percy.ui.UserInterface;
 
 import java.io.IOException;
 
@@ -25,16 +29,18 @@ public class Percy {
         while (true) {
             String command = UserInterface.readCommand();
             Parser parser = new Parser(command);
-            Command cmd = parser.getCommand();
-            String response;
             try {
-                response = cmd.execute(this.list, storage);
+                Command cmd = parser.getCommand();
+                String response = "";
+                response = cmd.execute(list, storage);
+                System.out.println(response);
+                if (cmd.isExit() == true) {
+                    break;
+                }
             } catch (IOException e) {
                 break;
-            }
-            System.out.println(response);
-            if (cmd.isExit()) {
-                break;
+            } catch (PercyException e) {
+                System.out.println(e.toString());
             }
         }
     }

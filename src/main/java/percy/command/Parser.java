@@ -2,6 +2,15 @@ package percy.command;
 
 import percy.exception.PercyException;
 
+import percy.task.Deadline;
+import percy.ui.UserInterface;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 public class Parser {
     public static String fullCmd;
 
@@ -9,22 +18,22 @@ public class Parser {
         this.fullCmd =  fullCmd.trim().strip();
     }
 
-    public Command getCommand() {
+    public Command getCommand() throws PercyException {
         String command = this.fullCmd.split(" ", 2)[0];
         switch (command) {
-        case "todo":
-            return new TodoCommand(this.getTodoDescription());
-        case "event":
-            return new EventCommand(this.getEventDescription(), this.getEventDate());
-        case "deadline":
-            return new DeadlineCommand(this.getDeadlineDescription(), this.getDeadlineDate());
-        case "done":
-            return new DoneCommand(this.getTaskNumber());
-        case "list":
+        case TodoCommand.COMMAND:
+            return new TodoCommand(getTodoDescription());
+        case EventCommand.COMMAND:
+            return new EventCommand(getEventDescription(), getEventDate(), getEventTime());
+        case DeadlineCommand.COMMAND:
+            return new DeadlineCommand(getDeadlineDescription(), getDeadlineDate(), getDeadlineTime());
+        case DoneCommand.COMMAND:
+            return new DoneCommand(getTaskNumber());
+        case ListCommand.COMMAND:
             return new ListCommand();
-        case "delete":
-            return new DeleteCommand(this.getTaskNumber());
-        case "bye":
+        case DeleteCommand.COMMAND:
+            return new DeleteCommand(getTaskNumber());
+        case ByeCommand.COMMAND:
             return new ByeCommand();
         default:
             return new UnknownCommand();
@@ -46,40 +55,111 @@ public class Parser {
         return description;
     }
 
-    public static String getEventDescription() {
-        String[] splitCommand = fullCmd.split(" ", 2);
-        String description = splitCommand[1]
-                                .substring(0, splitCommand[1].indexOf("/"))
-                                .trim();
-        return description;
-    }
-
-    public static String getEventDate() {
-        String[] splitCommand = fullCmd.split(" ", 2);
-        String date = splitCommand[1]
-                .substring(splitCommand[1].indexOf("/") + 4, splitCommand[1].length())
-                .trim();
-        return date;
-    }
-
-    public static String getDeadlineDescription() { // same as EventDescription
-        String[] splitCommand = fullCmd.split(" ", 2);
-        /*
-        if (splitCommand.length < 2) { // no description
-
+    public static String getEventDescription() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
+            String description = args[0].trim();
+            return description;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or  date/time of an event cannot be empty.");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
         }
-         */
-        String description = splitCommand[1]
-                .substring(0, splitCommand[1].indexOf("/"))
-                .trim();
-        return description;
     }
 
-    public static String getDeadlineDate() { // same as getEventDate
-        String[] splitCommand = fullCmd.split(" ", 2);
-        String date = splitCommand[1]
-                .substring(splitCommand[1].indexOf("/") + 4, splitCommand[1].length())
-                .trim();
-        return date;
+    public static LocalDate getEventDate() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
+            String[] dateTime = args[1].trim().split(" ",2);
+            LocalDate date = LocalDate.parse(dateTime[0].trim());
+            return date;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        } catch (DateTimeParseException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The date and time format of an event is wrong.");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        }
+    }
+
+    public static LocalTime getEventTime() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(EventCommand.DATE_TIME_PREFIX, 2);
+            String[] dateTime = args[1].trim().split(" ",2);
+            LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
+            return time;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or date/time of an event cannot be empty.");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        } catch (DateTimeParseException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The date and time format of an event is wrong.");
+            arr.addAll(EventCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        }
+    }
+
+    public static String getDeadlineDescription() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
+            String description = args[0].trim();
+            return description;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        }
+    }
+
+    public static LocalDate getDeadlineDate() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
+            String[] dateTime = args[1].trim().split(" ",2);
+            LocalDate date = LocalDate.parse(dateTime[0].trim());
+            return date;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        } catch (DateTimeParseException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The date and time format of a deadline is wrong.");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        }
+    }
+
+    public static LocalTime getDeadlineTime() throws PercyException {
+        try {
+            String[] splitCommand = fullCmd.split(" ", 2);
+            String[] args = splitCommand[1].split(DeadlineCommand.DATE_TIME_PREFIX, 2);
+            String[] dateTime = args[1].trim().split(" ",2);
+            LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
+            return time;
+        } catch (IndexOutOfBoundsException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        } catch (DateTimeParseException e) {
+            ArrayList<String> arr = new ArrayList<String>();
+            arr.add("OOPS!!! The date and time format of a deadline is wrong.");
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
+            throw new PercyException(UserInterface.makeMsg(arr));
+        }
     }
 }

@@ -59,6 +59,15 @@ public class UserInterface {
         return DIVIDER + INDENT + s.toString() + "\n" + DIVIDER;
     }
 
+    public static String makeMsg(ArrayList<String> stringArr) {
+        String str = DIVIDER;
+        for (String s: stringArr) {
+            str += INDENT + s.toString() + "\n";
+        }
+        str += DIVIDER;
+        return str;
+    }
+
     public void showBlankLine() {
         out.println();
     }

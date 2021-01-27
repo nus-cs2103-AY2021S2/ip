@@ -1,9 +1,16 @@
-todo return book
-list
 todo
-blah
-done 1
-deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
+todo return book
+deadline
+deadline 20/04/1992
+deadline /by 20/04/1992
+deadline submit project /by 20/04/1992
+deadline submit project /by
+deadline submit project /by 2021-01-29 0812
+event
+event 20/04/1992
+event /at 20/04/1992
+event submit project /at 20/04/1992
+event submit project /at
+event submit project /at 2021-01-29 0812
 list
 bye

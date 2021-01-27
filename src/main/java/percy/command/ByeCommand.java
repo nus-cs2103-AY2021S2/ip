@@ -5,6 +5,8 @@ import percy.ui.UserInterface;
 import percy.storage.Storage;
 
 public class ByeCommand extends Command {
+    public static final String COMMAND = "bye";
+
     public ByeCommand() {
         super(true);
     }

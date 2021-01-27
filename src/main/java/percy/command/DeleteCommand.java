@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
+    public static final String COMMAND = "delete";
+
     private int taskNum;
 
     public DeleteCommand(int taskNum) {

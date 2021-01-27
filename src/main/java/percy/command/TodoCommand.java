@@ -10,6 +10,8 @@ import percy.ui.UserInterface;
 import percy.storage.Storage;
 
 public class TodoCommand extends Command {
+    public static final String COMMAND = "todo";
+
     private String todoDescription;
     private String date;
 

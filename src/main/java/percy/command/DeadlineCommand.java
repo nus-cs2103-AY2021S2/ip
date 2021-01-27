@@ -9,14 +9,30 @@ import percy.storage.Storage;
 
 import java.io.IOException;
 
-public class DeadlineCommand extends Command {
-    private String deadlineDescription;
-    private String date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
-    public DeadlineCommand(String deadlineDescription, String date) {
+public class DeadlineCommand extends Command {
+    public static final String COMMAND = "deadline";
+
+    public static final String DATE_TIME_PREFIX =  " /by ";
+
+    private String deadlineDescription;
+    private LocalDate date;
+    private LocalTime time;
+
+    public static final ArrayList<String> USAGE_GUIDE = new ArrayList<String>(List.of(
+            "deadline: Adds a task that needs to be done before a specific date and time.",
+            "Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)",
+            "Example: deadline return book /by 2021-01-27 1800-2000"));
+
+    public DeadlineCommand(String deadlineDescription, LocalDate date, LocalTime time) {
         super(false);
         this.deadlineDescription = deadlineDescription;
         this.date = date;
+        this.time = time;
     }
 
     /**
@@ -37,8 +53,7 @@ public class DeadlineCommand extends Command {
             UserInterface.makeMsg(ex.toString());
         }
 
-        Task deadlineTask = new Deadline(deadlineDescription, date);
-
+        Task deadlineTask = new Deadline(deadlineDescription, date, time);
         taskList.addTaskToList(deadlineTask);
         storage.save(taskList);
         return UserInterface.makeAddMsg(deadlineTask, taskList);
