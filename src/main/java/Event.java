@@ -15,10 +15,14 @@ public class Event extends Task {
         return this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
+    private String formatDateForSaving() {
+        return this.at.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
 
     @Override
     public String getSaveString() {
-        return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.at;
+        return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + formatDateForSaving();
     }
 
     @Override

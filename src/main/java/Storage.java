@@ -5,11 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DataFile {
+public class Storage {
 
     private static Path fileLocation = Paths.get("./data", "duke.txt");
     private static Path directoryLocation = Paths.get("./data");
@@ -33,8 +34,6 @@ public class DataFile {
         return directoryExists;
     }
 
-
-
     private static void createDirectory() {
         try {
             Files.createDirectory(directoryLocation);
@@ -52,11 +51,10 @@ public class DataFile {
                     .map(task -> task.trim())
                     .filter(task -> !task.isEmpty())
                     .forEach(task -> {
-                        String[] split = task.split("\\|");
-                        String typeOfTask = split[0].trim();
-                        String isDone = split[1].trim();
-                        String name = split[2].trim();
-                        String time = typeOfTask.equals("T") ? "" : split[3].trim();
+                        String typeOfTask = Parser.parseTypeOfTask(task);
+                       String isDone = Parser.parseCompletionStatus(task);
+                        String name = Parser.parseName(task);
+                        LocalDateTime time = Parser.parseTime(task);
                         if (typeOfTask.equals("T")) {
                             tasks.add(new Todo(name));
                             if (isDone.equals("1")) {
@@ -104,12 +102,12 @@ public class DataFile {
         boolean fileExists = checkForFile();
         if(!fileExists) {
             createFile();
-            data = new ArrayList<Task>();
+            data = new ArrayList<>();
         } else {
             try {
                 data = getDataFromFile();
             } catch (UnableToLoadDataException er) {
-                System.out.println("\nI'm sorry, I am not able to load data.\n");
+                Ui.printUnableToLoadDataMessage();
             }
         }
         return data;
