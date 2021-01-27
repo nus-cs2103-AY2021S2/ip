@@ -81,6 +81,14 @@ public class TaskList {
         return this.list;
     }
 
+    /**
+     * Search for all the <code>Task</code> and return a <code>TaskList</code>
+     * Search for all the <code>Task</code> in <code>TaskList</code> that contains a series of character.
+     * Return a new <code>TaskList</code>
+     *
+     * @param str a series of character to use for finding
+     * @return a new TaskList containing all the found <code>Task</code>
+     */
     public TaskList findTask(String str) {
         LinkedList<Task> foundList = new LinkedList<>();
         for (int i = 0; i < list.size(); i++) {
