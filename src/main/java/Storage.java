@@ -3,7 +3,10 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    private String fileDir;
+    private final String fileDir;
+    private final String LOAD_ERROR_MESSAGE =
+            "☹ Sorry, something went wrong while I was loading saved data from file.";
+    private final String SAVE_ERROR_MESSAGE = "☹ Sorry, something went wrong while I was saving data to file.";
 
     public Storage(String fileDir) {
         this.fileDir = fileDir;
@@ -26,9 +29,9 @@ public class Storage {
             return taskList;
         } catch (FileNotFoundException e) {
             // expected exception: file not found therefore no tasks loaded
-            return new TaskList(new ArrayList<Task>());
+            return new TaskList(new ArrayList<>());
         } catch (IOException | ClassNotFoundException e) {
-            throw new DukeException("☹ Sorry, something went wrong while I was loading saved data from file.");
+            throw new DukeException(LOAD_ERROR_MESSAGE);
         }
     }
 
@@ -46,7 +49,7 @@ public class Storage {
             output.close();
             fileOut.close();
         } catch (IOException e) {
-            throw new DukeException("☹ Sorry, something went wrong while I was saving data to file.");
+            throw new DukeException(SAVE_ERROR_MESSAGE);
         }
     }
 }

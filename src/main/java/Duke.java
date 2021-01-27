@@ -46,9 +46,7 @@ public class Duke {
             }
 
         } catch (IllegalArgumentException e) {
-            ui.print("☹ Sorry, please enter a valid command.\n\tCommands available:\n\t\t- list\n\t\t" +
-                    "- done [task number]\n\t\t- todo [description]\n\t\t- deadline [description] /by [deadline]\n\t\t" +
-                    "- event [description] /at [datetime]\n\t\t- delete [task number]\n\t\t- bye");
+            ui.print(HelpCommand.ERROR_MESSAGE + HelpCommand.COMMAND_LIST);
         } catch (DukeException e) {
             ui.print(e.getMessage());
         }

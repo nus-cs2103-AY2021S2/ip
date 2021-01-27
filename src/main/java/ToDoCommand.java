@@ -1,8 +1,9 @@
 public class ToDoCommand extends Command {
 
     public static final String COMMAND = "todo";
-
     private final String description;
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a description for the todo.\n\t" +
+            "Command: todo [description]";
 
     private ToDoCommand(String description) {
         this.description = description;
@@ -31,8 +32,7 @@ public class ToDoCommand extends Command {
 
     public static ToDoCommand parseArguments(String input) throws DukeException {
         if (input.trim().equals("")) {
-            throw new DukeException("☹ Sorry, please enter a description for the todo.\n\t" +
-            "Command: todo [description]");
+            throw new DukeException(ERROR_MESSAGE);
         }
         return new ToDoCommand(input);
     }

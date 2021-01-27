@@ -2,9 +2,10 @@ public class DoneCommand extends Command {
 
     public static final String COMMAND = "done";
     private final String HEADER = "Nice! I've marked this task as done:\n\t";
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n\tCommand: done [task number]";
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number." +
+            "\n\tCommand: done [task number]";
 
-    private int taskIndex;
+    private final int taskIndex;
 
     private DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
