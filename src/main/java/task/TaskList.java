@@ -20,6 +20,23 @@ public class TaskList {
     }
 
     /**
+     * Find the specified <code>input</code> in the task list and
+     * print out the task with matching description.
+     *
+     * @param input search parameter.
+     */
+    public void find(String input) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasklist) {
+            String curr = task.getDetails();
+            if (curr.contains(input)) {
+                result.add(task);
+            }
+        }
+        Ui.printSearch(result);
+    }
+
+    /**
      * Returns a string that informs user of the total tally of the task in the task list.
      *
      * @return tally of task in task list.

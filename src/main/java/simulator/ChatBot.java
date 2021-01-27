@@ -47,6 +47,9 @@ public class ChatBot {
                     Task newTask;
                     String duration;
                     switch (command) {
+                        case "find":
+                            tasklist.find(description);
+                            break;
                         case "todo":
                             newTask = new Todo(description);
                             tasklist.addTask(newTask);

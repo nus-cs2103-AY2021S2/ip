@@ -1,6 +1,9 @@
 package ui;
 
+import task.Task;
 import task.TaskList;
+
+import java.util.ArrayList;
 
 /**
  * Class <code>Ui</code> contains all the string messages that interacts with users and methods
@@ -29,6 +32,7 @@ public class Ui {
 
     public final static String EXIT_MSG = "Farewell. See you soon :)!";
 
+
     /**
      * Surrounds the specified <code>input</code> with a asterisk border.
      *
@@ -48,13 +52,24 @@ public class Ui {
         System.out.print(TOP_BORDER);
         System.out.println("     This is your present task list: \n");
         for (int i = 1; i <= list.size(); i++) {
-            if (i == list.size()) {
-                System.out.println(indent4 + i + ") "
-                        + list.get(i - 1));
-            } else {
-                System.out.println(indent4 + i + ") "
-                        + list.get(i - 1));
-            }
+            System.out.println(indent4 + i + ") "
+                    + list.get(i - 1));
+        }
+        System.out.println(BOTTOM_BORDER);
+    }
+
+    /**
+     * Surrounds the elements the specified <code>list/code> of search result with a asterisk border.
+     *
+     * @param list searched elements to be border
+     */
+
+    public static void printSearch(ArrayList<Task> list) {
+        System.out.print(TOP_BORDER);
+        System.out.println("     Here are the matching tasks found: \n");
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println(indent4 + i + ") "
+                    + list.get(i - 1));
         }
         System.out.println(BOTTOM_BORDER);
     }
