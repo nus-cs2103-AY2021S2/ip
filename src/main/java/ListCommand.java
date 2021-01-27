@@ -28,8 +28,8 @@ public class ListCommand extends Command{
         for (int i = 1; i <= taskList.getTaskListLength(); i++) {
             String output = String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString());
             System.out.println(output);
-            ui.showNumberOfItems(taskList.getTaskListLength());
         }
+        ui.showNumberOfItems(taskList.getTaskListLength());
     }
 
     /**
