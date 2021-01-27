@@ -2,23 +2,41 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String args[]){
-        Chatbox chatbox = Chatbox.initialize();
-        Scanner sc = new Scanner(System.in);
+    private Storage storage;
+    private Ui ui;
+    private TaskList tasks;
 
-        String currInput = "";
-
-        while(true){
-            currInput = sc.nextLine();
-
-            if(currInput.equals("bye")) break;
-
-            chatbox.acceptInput(currInput);
-            chatbox.executeCommand();
+    public Main(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
 
-        chatbox.end();
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Statement statement = new Statement(fullCommand);
+                Command c = statement.parse();
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
+    }
 
-        sc.close();
+    public static void main(String[] args) {
+        new Main("../tasks.txt").run();
     }
 }

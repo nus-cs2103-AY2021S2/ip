@@ -3,11 +3,10 @@ import java.io.IOException;
 
 class DukeFileWriter {
 
-    static void writeFile(String input) throws DukeException{
+    void writeFile(String filePath, String input) throws DukeException{
 
         try {
-            String path = "../tasks.txt";
-            FileWriter fw = new FileWriter(path);
+            FileWriter fw = new FileWriter(filePath);
 
             fw.write(input);
             fw.close();

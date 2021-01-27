@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -7,9 +8,8 @@ import java.io.FileWriter;
 
 class FileReader {
 
-    List<Task> readFile() throws DukeException{
+    List<Task> readFile(String path) throws DukeException{
         try {
-            String path = "../tasks.txt";
             File f = new File(path);
 
             if(!f.exists()) {
@@ -55,29 +55,34 @@ class FileReader {
         }
     }
 
-    Task toTask(String input) throws DukeException{
-        Scanner sc = new Scanner(input);
-        String command = sc.next();
+    Task toTask(String input) {
+            Scanner sc = new Scanner(input);
+            String command = sc.next();
 
-        String[] args = sc.nextLine().split("[|]");
+            String[] args = sc.nextLine().split("[|]");
 
-        String first = args[0].trim();
-        String second = null;
+            String first = args[0].trim();
+            String second = null;
+            String preposition = null;
+            LocalDate date = null;
 
-        if(args.length == 2) {
-            second = args[1].trim();
-        }
+            if(args.length == 2) {
+                second = args[1].trim();
+                String[] prepositionAndDate = second.split("[\\s]");
+                preposition = prepositionAndDate[0];
+                date = LocalDate.parse(prepositionAndDate[1]);
+            }
 
-        switch(command) {
-            case "todo":
-                return new Todo(first);
-            case "event":
-                return new Event(first, second);
-            case "deadline":
-                return  new Deadline(first, second);
-            default:
-                return null;
-        }
+            switch(command) {
+                case "todo":
+                    return new Todo(first);
+                case "event":
+                    return new Event(first, preposition, date);
+                case "deadline":
+                    return  new Deadline(first, preposition, date);
+                default:
+                    return null;
+            }
     }
 
 }

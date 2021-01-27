@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 class Statement {
@@ -9,6 +11,7 @@ class Statement {
         argsTable = new Hashtable<>();
 
         argsTable.put("list", 0);
+        argsTable.put("bye", 0);
         argsTable.put("done", 1);
         argsTable.put("todo", 1);
         argsTable.put("delete", 1);
@@ -52,12 +55,55 @@ class Statement {
             throw new DukeException("OOPS! " + command + " requires a description and a time");
         }
 
-
-
         for(int i = 0; i < numOfArgs; i++){
             result.add(args[i]);
         }
 
         return result;
+    }
+
+    Command parse() throws DukeException{
+        try {
+            List<String> parsedArgs = parseStatement();
+            String command = parsedArgs.get(0);
+            String first = null;
+            String second = null;
+            String preposition = null;
+            LocalDate date = null;
+
+            if(parsedArgs.size() == 2) {
+                first = parsedArgs.get(1).trim();
+            }
+
+            if(parsedArgs.size() == 3) {
+                second = parsedArgs.get(2).trim();
+                String[] prepositionAndDate = second.split("[\\s]");
+
+                if(prepositionAndDate.length != 2) {
+                    throw new DukeException("Please provide a preposition and a date after '/'.");
+                }
+
+                preposition = prepositionAndDate[0];
+                date = LocalDate.parse(prepositionAndDate[1]);
+            }
+
+            switch (command) {
+                case "list":
+                    return new ListCommand();
+                case "bye":
+                    return new ExitCommand();
+                case "done":
+                    return new DoneCommand(first);
+                case "delete":
+                    return new DeleteCommand(first);
+                case "todo": case "deadline": case "event":
+                    return new AddCommand(command, first, preposition, date);
+                default:
+                    return null;
+            }
+        } catch(DateTimeParseException e) {
+            throw new DukeException("Date must be in the format yyyy-mm-dd.");
+        }
+
     }
 }

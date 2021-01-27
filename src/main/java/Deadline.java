@@ -6,20 +6,10 @@ class Deadline extends Task{
     private final String preposition;
     private final LocalDate date;
 
-    Deadline(String description, String prepositionAndTime) throws DukeException{
+    Deadline(String description, String preposition, LocalDate date) {
         super(description);
-        String[] strings = splitPrepositionAndTime(prepositionAndTime);
-
-        if(strings.length != 2) {
-            throw new DukeException("Please provide a preposition and a date after '/'.");
-        }
-
-        try {
-            preposition = strings[0];
-            date = LocalDate.parse(strings[1]);
-        } catch(DateTimeParseException e) {
-            throw new DukeException("Date must be in the format yyyy-mm-dd.");
-        }
+        this.preposition = preposition;
+        this.date = date;
     }
 
     @Override
