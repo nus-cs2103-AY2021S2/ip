@@ -11,7 +11,6 @@ public class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
-    // todo rm
     public void add(Task t) {
         this.taskArrayList.add(t);
     }
@@ -47,7 +46,10 @@ public class TaskList {
         }
     }
 
-    // should abstract away saving location
+    /**
+     * Saves the entire task list to hard drive
+     * @throws IOException
+     */
     public void saveTasksList() throws IOException {
         File f = new File(Storage.taskListFilePath.toString());
             // doesn't actually create a new file i think, converts an existing file
@@ -63,7 +65,6 @@ public class TaskList {
         bw.close();
     }
 
-
     public void addTask(Task t) {
         taskArrayList.add(t);
 
@@ -75,7 +76,11 @@ public class TaskList {
         Ui.print(messages);
     }
 
-    // todo move to tasklist
+    /**
+     * Deletes a task in the list
+     * @param i index of task to be deleted
+     * @throws InvalidArgumentException
+     */
     public void deleteTask(int i) throws InvalidArgumentException {
         if (i < 1 || i > taskArrayList.size()) {
             throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
@@ -92,6 +97,11 @@ public class TaskList {
      *
      * @param i off-by-one index of a task in array list
      */
+    /**
+     * Marks a task in the list done
+     * @param i index of task to mark done
+     * @throws InvalidArgumentException
+     */
     public void markDone(int i) throws InvalidArgumentException {
         if (i < 1 || i > taskArrayList.size()) {
             throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
@@ -104,9 +114,13 @@ public class TaskList {
     }
 
 
-
-
-    // todo should all error handling related to arguments be done before tasklist?
+    /**
+     * Formats error message if invalid list index provided
+     * @param i provided list index
+     * @param min minimum valid index
+     * @param max maximum valid index
+     * @return error message
+     */
     private static String invalidNumErrMsg(int i, int min, int max) {
         String errMsg = "Invalid list index given: " + i
                 + ". Number needs to be between " + min + " and " + max + " (inclusive). ";

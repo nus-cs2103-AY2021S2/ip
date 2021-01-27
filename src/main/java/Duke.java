@@ -6,6 +6,10 @@ public class Duke {
 //    private static final ArrayList<Task> taskList = new ArrayList<>();
     private static TaskList taskList;
 
+    /**
+     * Entry point of the duke programme
+     * @param args Irrelevant argument
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 

@@ -13,11 +13,21 @@ import java.util.Scanner;
 // storage objects should store info about where each list/anything should be saved
 // have a final hashmap of where each object to store is stored
 // todo seems like storage object might be associated with the duke object? not sure
+
+/**
+ * This class handles setting up the file to save Duke data to.
+ */
 public class Storage {
     public static final String projectDir = System.getProperty("user.dir");
     public static final java.nio.file.Path taskListFilePath = java.nio.file.Paths.get(
             projectDir, "src", "data", "tasks.txt"); // todo rename as tasklistF..P..
 
+
+    /**
+     * Checks if file or directory exists. Same mechanism for file or dir.
+     * @param path Path to check for file or directory
+     * @return True if it exists, false if it doesn't or any other error occured
+     */
     public static boolean doesFileOrDirExist(Path path) {
         if (java.nio.file.Files.exists(path)) {
             return true;
@@ -33,7 +43,10 @@ public class Storage {
         return doesFileOrDirExist(taskListFilePath);
     }
 
-    // testing method
+    /**
+     * Sets up the tasks file in the hardcoded path, if the task file doesn't exist yet
+     * @throws IOException
+     */
     public static void setupTasksFile() throws IOException {
         if (doesTaskFileExist()) {
             // probably not gonna be used due to TaskList.java impl
@@ -56,7 +69,12 @@ public class Storage {
     }
 
 
-    // return whether any tasks have been loaded?
+    /**
+     * Finds task file from hard coded path and loads them into a task file
+     * @param taskList taskList to load any tasks from hard disk into
+     * @return if any tasks have been found and loaded from hard disk
+     * @throws IOException
+     */
     public static boolean loadFromHardDisk(TaskList taskList) throws IOException {
         boolean isAnyTaskFound = false;
 

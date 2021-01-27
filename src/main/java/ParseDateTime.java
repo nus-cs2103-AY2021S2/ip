@@ -5,10 +5,19 @@ import java.time.format.DateTimeFormatter;
 
 // is ParseDateTime getting called from the wrong place?
 // should it be called from parser or the task subclasses?
+
+/**
+ * A class that helps parse user input strings into date time objects for relevant tasks
+ */
 public class ParseDateTime {
     // LIST OF SUPPORTED DATES
     // dd-MM ha i.e. "30-04 6PM"
 
+    /**
+     * Parses user input into a dateTimeObject by calling the relevant formatting function.
+     * @param s User input to parse
+     * @return A LocalDateTime object
+     */
     public static LocalDateTime parse(String s) {
         // format YYYY-MM-DD
         // todo exceptions/error
@@ -20,6 +29,7 @@ public class ParseDateTime {
     // maybe once there are more parsing formats, should create a CustomDateTime object that
     // stores what format we're using after parsing once, so that don't need to keep parsing so much
     // upon every save to harddisk and loading
+
     public static String unparse(LocalDateTime d) {
         return unparseFormat1(d);
     }
