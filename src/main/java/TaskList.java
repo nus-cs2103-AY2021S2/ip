@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,14 @@ public class TaskList {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
+        }
+        Ui.echo(builder.toString().trim());
+    }
+
+    public void listTasks(List<Task> customTaskList) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < customTaskList.size(); i++) {
+            builder.append(String.format("%d. %s\n", i + 1, customTaskList.get(i).toString()));
         }
         Ui.echo(builder.toString().trim());
     }
@@ -136,6 +145,22 @@ public class TaskList {
             throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. "
                     + "Task numbers need to be written as digits and not text.");
         }
+    }
+
+    public void findTasks(HashMap<String, String> commands) throws DukeException {
+        String searchTerm = commands.get("info");
+
+        if (searchTerm == "") {
+            throw new DukeException("To find a task, please use enter the following: find [search term]");
+        }
+        List<Task> foundList = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTaskName().contains(searchTerm)) {
+                foundList.add(task);
+            }
+        }
+        Ui.echo("Here are the tasks we found:");
+        listTasks(foundList);
     }
 
     /**

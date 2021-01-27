@@ -43,6 +43,10 @@ public class Duke {
                     tasks.deleteTask(parsedCommands);
                     break;
                 }
+                case "find": {
+                    tasks.findTasks(parsedCommands);
+                    break;
+                }
                 case "bye": {
                     Ui.echo("Bye. Hope to see you again soon!");
                     shouldRun = false;
