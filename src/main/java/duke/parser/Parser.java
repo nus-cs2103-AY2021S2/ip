@@ -17,16 +17,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    /*public String description;
-    Command command;
-    String deadline;
-
-    public Parser() {
-        this.command = "";
-        this.description = "";
-        this.deadline = "";
-
-    }*/
 
     public static Command processInput(String userInput, Duke bot) throws InvalidCommandException, InvalidArgumentException {
         String[] starr = userInput.split(" ", 2);
@@ -42,14 +32,13 @@ public class Parser {
                             "I'm sorry, but I don't know what that means :-()\n");
                 }
             }
-            //this.command = starr[0];
+
             if(starr[0].equals("bye")) {
                 userCommand = new ByeCommand();
             } else if(starr[0].equals("list")) {
                 userCommand = new ListCommand();
             }
         } else {
-            //this.command = starr[0];
             switch (starr[0]) {
             case "done":
                 try {
@@ -76,15 +65,12 @@ public class Parser {
                     throw new InvalidArgumentException("Please input argument <= to "
                             + bot.getList().getLst().size() + "!\n");
                 }
-                //this.description = starr[1];
-                //break;
+
                 userCommand = new DeleteCommand(starr[1]);
                 break;
             case "todo":
                 userCommand = new TodoCommand(starr[1]);
                 break;
-                //this.description = starr[1];
-                //break;
             case "deadline":
                 String[] arr = starr[1].split("/by");
                 if (arr.length == 1) {
@@ -97,9 +83,6 @@ public class Parser {
                     String deadLine = arr[1].strip();
                 userCommand = new DeadlineCommand(arr[0], processDate(deadLine));
                 break;
-                    /*processDate(deadLine);
-                    this.description = arr[0];
-                    break;*/
 
                 case "event":
                     String[] a = starr[1].split("/at");
@@ -114,16 +97,12 @@ public class Parser {
                     String eventTime = a[1].strip();
                     userCommand = new EventCommand(a[0], processDate(eventTime));
                     break;
-                    /*this.description = a[0];
-                    break;*/
+
             }
         }
         return userCommand;
     }
 
-    /*public static boolean isEquals(String type) {
-        return command.equals(type);
-    }*/
 
     public static String processDate(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d HHmm");
@@ -151,13 +130,5 @@ public class Parser {
 
         }
     }
-
-    /*public Command getCommand() {
-        return command;
-    }*/
-
-    /*public String getDeadline() {
-        return deadline;
-    }*/
 
 }
