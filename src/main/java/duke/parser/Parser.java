@@ -1,3 +1,7 @@
+package duke.parser;
+
+import duke.exception.DukeException;
+
 public class Parser {
     private String msg;
 

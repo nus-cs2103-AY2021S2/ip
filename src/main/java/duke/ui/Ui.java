@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.task.TaskList;
+import duke.task.Task;
+
 import java.util.LinkedList;
 
 public class Ui {

@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.exception.DukeException;
 import java.util.LinkedList;
 
 public class TaskList {
