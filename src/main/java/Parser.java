@@ -3,7 +3,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parses the user inputs into commands that the program understands and perform actions accordingly.
+     *
+     * @param command User inputs.
+     * @return Formatted date eg. changes 1/1/2011 to 01/01/2011.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     * @throws IOException   If the named file exists but is a rather than a regular file, does not exist but
+     *                       cannot be created, or cannot be opened for any other reason.
+     */
     public static void parse(String command) throws DukeException, IOException {
         Ui ui = new Ui();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
@@ -76,18 +89,24 @@ public class Parser {
             }
             ui.deadline(desc, LocalDate.parse(format(date), formatter), LocalTime.parse(localTime));
         } else {
-            throw (new DukeException("\n    ____________________________________________________________\n" +
-                    "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
-                    "    ____________________________________________________________"));
+            throw (new DukeException("\n    ____________________________________________________________\n"
+                    + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                    + "    ____________________________________________________________"));
         }
     }
 
+    /**
+     * Returns a formatted date of the given date string.
+     *
+     * @param date Date.
+     * @return Formatted date eg. changes 1/1/2011 to 01/01/2011.
+     */
     public static String format(String date) {
-        if(date.charAt(1) == '/') {
+        if (date.charAt(1) == '/') {
             date = "0" + date;
         }
-        if(date.charAt(4)=='/') {
-            date = date.substring(0,3) + "0" +date.substring(3);
+        if (date.charAt(4) == '/') {
+            date = date.substring(0, 3) + "0" + date.substring(3);
         }
         return date;
     }
