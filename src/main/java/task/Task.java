@@ -1,7 +1,7 @@
 package task;
 
 public class Task {
-    protected StringBuilder description = new StringBuilder();
+    protected String description;
     protected boolean isDone;
     protected String type;
 
@@ -26,7 +26,7 @@ public class Task {
     }
 
     public String getDetails() {
-        return this.description.toString();
+        return this.description;
     }
 
     @Override

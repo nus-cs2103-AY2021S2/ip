@@ -1,10 +1,8 @@
 package simulator;
 
-import task.Task;
+import task.TaskList;
 
-import java.util.List;
-
-public class Design {
+public class Ui {
     public final static String MARK_MSG = "You have marked this task as completed: \n";
     public final static String ADD_MSG = "Roger that! Added the following task: \n \n      ";
     public final static String DELETE_MSG = "Roger that! Deleted the follow task: \n \n      ";
@@ -32,7 +30,7 @@ public class Design {
                 + "\n" + BOTTOM_BORDER);
     }
 
-    public static void printList(List<Task> list) {
+    public static void printList(TaskList list) {
         System.out.print(TOP_BORDER);
         System.out.println("     This is your present task list: \n");
         for (int i = 1; i <= list.size(); i++) {
