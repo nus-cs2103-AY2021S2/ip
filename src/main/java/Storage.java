@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static String DEFAULT_PATH = "./data.txt";
+    private String path;
+    public Storage(String p) {
+        path = p;
+    }
 
-    public static void ensureFileExists() {
-        File file = new File(DEFAULT_PATH);
+    public void ensureFileExists() {
+        File file = new File(path);
         if (file.exists()) return;
 
         try {
@@ -19,7 +22,7 @@ public class Storage {
         }
     }
 
-    public static Task fromText(String str) {
+    public Task fromText(String str) {
         String[] xs = str.split(" \\| ");
         Task t;
 
@@ -35,9 +38,9 @@ public class Storage {
         return t;
     }
 
-    public static ArrayList<Task> loadTasks() {
+    public ArrayList<Task> load() {
         try {
-            File file = new File(DEFAULT_PATH);
+            File file = new File(path);
             Scanner reader = new Scanner(file);
 
             ArrayList<Task> tasks = new ArrayList<>();
@@ -51,11 +54,11 @@ public class Storage {
         }
     }
 
-    public static void saveTasks(ArrayList<Task> xs) {
-        ensureFileExists();
+    public void save(TaskList xs) {
+        this.ensureFileExists();
         try {
-            PrintWriter writer = new PrintWriter(DEFAULT_PATH);
-            for (Task t : xs) {
+            PrintWriter writer = new PrintWriter(path);
+            for (Task t : xs.data) {
                 writer.println(t.toText());
             }
 
