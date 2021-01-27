@@ -12,6 +12,10 @@ public class TaskList {
     private final Storage storage;
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList.
+     * @param storage storage to store and load tasks from
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.loadTasks();
