@@ -39,7 +39,9 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
-
+        case "find":
+            String toFind = arr[1];
+            taskList.findTasks(toFind);
             break;
         case "delete":
             try {
@@ -48,7 +50,6 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Enter an integer only");
             }
-
             break;
         case "todo":
             if (arr.length == 1) {
