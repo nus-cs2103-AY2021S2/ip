@@ -3,16 +3,30 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that can create a storage object that contains methods to
+ * read and write data to a file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor that creates a new Storage object.
+     *
+     * @param filePath the file path that is used to read and write
+     *                 data to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Method that reads the data from the file located at the file path.
+     *
+     * @return the list of tasks obtained from the stored data in the file.
+     */
     public TaskList readDataFromFile() {
         TaskList taskList = new TaskList();
         try {
@@ -59,6 +73,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Method that writes data to the file located at the file path.
+     *
+     * @param taskList the list of tasks to be stored in the file.
+     */
     public void writeDataIntoFile(TaskList taskList) {
         try {
             FileWriter writeFile = new FileWriter(filePath);
