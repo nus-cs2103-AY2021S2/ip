@@ -1,7 +1,9 @@
 package tlylt.haha;
 
+/**
+ * Representation of wrong command error.
+ */
 public class HahaWrongCommandException extends HahaException {
-
     HahaWrongCommandException(String command) {
         super(command);
     }

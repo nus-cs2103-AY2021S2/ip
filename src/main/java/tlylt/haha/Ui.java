@@ -1,4 +1,8 @@
 package tlylt.haha;
+
+/**
+ * Representation of all user interaction.
+ */
 public class Ui {
     private static final String LINE_BREAK =
             "____________________________________________________________\n";
@@ -17,14 +21,23 @@ public class Ui {
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
 
+    /**
+     * Outputs welcome message.
+     */
     public void welcome() {
         System.out.println(STARTER);
     }
 
+    /**
+     * Outputs linebreak.
+     */
     public void lineBreak() {
         System.out.println(LINE_BREAK);
     }
 
+    /**
+     * Outputs goodbye message.
+     */
     public void bye() {
         System.out.println("Bye now!");
     }

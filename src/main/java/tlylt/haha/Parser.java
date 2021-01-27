@@ -4,7 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 
+/**
+ * Utility class to parse user input.
+ */
 public class Parser {
+    /**
+     * Returns task number.
+     *
+     * @param command String to be parsed.
+     * @return Correct task number as an integer.
+     * @throws HahaTaskNumberNotIntException Task number given is not an integer.
+     */
     static int taskNumber(String command) throws HahaTaskNumberNotIntException {
         try {
             return Integer.parseInt("" + command.charAt(command.length() - 1));
@@ -13,16 +23,34 @@ public class Parser {
         }
     }
 
+    /**
+     * Helps to separate user input into two strings.
+     *
+     * @param command User input string.
+     * @return Command + details.
+     */
     static String[] tokenize(String command) {
         return command.split(" ", 2);
     }
 
+    /**
+     * Handles edge case of an empty command.
+     *
+     * @param input User input string.
+     * @throws HahaEmptyCommandException Command given is empty.
+     */
     static void handleEmptyCommand(String input) throws HahaEmptyCommandException {
         if (input.isEmpty()) {
             throw new HahaEmptyCommandException(input);
         }
     }
 
+    /**
+     * Gets the date in LocalDate.
+     *
+     * @param str User input string.
+     * @return Parsed date in LocalDate.
+     */
     static LocalDate getDate(String str) {
         if (str.contains("/at")) {
             return LocalDate.parse(str.split("/at ")[1].split(" ")[0]);
@@ -31,11 +59,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the time in LocalTime.
+     *
+     * @param str User input string.
+     * @return Parsed time in LocalTime.
+     */
     static LocalTime getTime(String str) {
         String[] token = str.split(" ");
         return LocalTime.parse(token[token.length - 1]);
     }
 
+    /**
+     * Handles edge case of an command without it's required description.
+     *
+     * @param input User input string.
+     * @throws HahaEmptyDescriptionException Command's required description is missing.
+     */
     static void handleEmptyDescriptionCommand(String input) throws HahaEmptyDescriptionException {
         // TaskType
         String task = Parser.tokenize(input)[0];
@@ -51,6 +91,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles invalid commands.
+     *
+     * @param input User input string.
+     * @throws HahaWrongCommandException Command not recognized.
+     */
     static void handleWrongCommand(String input) throws HahaWrongCommandException {
         // Check input starts with specified command words
         if (Arrays
@@ -61,7 +107,14 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Ensures safety of given command.
+     *
+     * @param input User input string.
+     * @throws HahaEmptyCommandException     Command is empty.
+     * @throws HahaWrongCommandException     Command is not recognized.
+     * @throws HahaEmptyDescriptionException Command does not have required description.
+     */
     static void handleSafety(String input) throws HahaEmptyCommandException,
             HahaWrongCommandException,
             HahaEmptyDescriptionException {
@@ -70,6 +123,12 @@ public class Parser {
         Parser.handleEmptyDescriptionCommand(input);
     }
 
+    /**
+     * Interprets command and returns respective command using LegitCommand Enum.
+     *
+     * @param command User input string.
+     * @return Proper command specified in LegitCommand.
+     */
     static LegitCommand handleInterpret(String command) {
         String[] tokenized = Parser.tokenize(command);
         String firstWord = tokenized[0];
@@ -98,6 +157,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input string.
+     *
+     * @param input User input string.
+     * @return Parsed LegitCommand.
+     * @throws HahaEmptyCommandException     Command is empty.
+     * @throws HahaWrongCommandException     Command is not recognized.
+     * @throws HahaEmptyDescriptionException Command does not have required description.
+     */
     static LegitCommand parseInput(String input) throws HahaEmptyCommandException,
             HahaWrongCommandException,
             HahaEmptyDescriptionException {
@@ -107,6 +175,12 @@ public class Parser {
         return Parser.handleInterpret(input);
     }
 
+    /**
+     * Checks each line and generates corresponding task.
+     *
+     * @param line A line of User input.
+     * @return Constructed task.
+     */
     static Task parseLine(String line) {
         String[] tokens = line.split("\\|");
         String type = tokens[0];

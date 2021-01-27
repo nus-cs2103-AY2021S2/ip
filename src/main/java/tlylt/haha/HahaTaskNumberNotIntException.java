@@ -1,5 +1,8 @@
 package tlylt.haha;
 
+/**
+ * Representation of task number error.
+ */
 public class HahaTaskNumberNotIntException extends HahaException {
 
     HahaTaskNumberNotIntException(String command) {
