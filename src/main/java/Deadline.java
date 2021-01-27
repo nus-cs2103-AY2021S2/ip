@@ -1,24 +1,34 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Deadline extends Task{
-    String deadline;
-    Deadline(String name,Boolean isDone, String deadline){
+    private LocalDate DeadlineDate;
+    private LocalTime DeadlineTime;
+    Deadline(String name,Boolean isDone, LocalDate DeadlineDate, LocalTime DeadlineTime){
         super(name,isDone);
-        this.deadline = deadline;
+        this.DeadlineDate = DeadlineDate;
+        this.DeadlineTime = DeadlineTime;
     }
-    public String getDeadline(){
-        return this.deadline;
+    public LocalDate getDeadlineDate(){
+        return this.DeadlineDate;
     }
+    public LocalTime getDeadlineTime() {
+        return DeadlineTime;
+    }
+
     @Override
     Deadline finish(){
-        return new Deadline(this.getName(), true, this.getDeadline()) ;
+        return new Deadline(this.getName(), true, this.getDeadlineDate(), this.getDeadlineTime()) ;
     }
 
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[D][X] " + this.getName() + "(" + this.getDeadline() + " )";
+            return "[D][X] " + this.getName() +" | "+ this.getDeadlineDate()+ " "  + this.getDeadlineTime();
         }
         else{
-            return "[D][ ] "  + this.getName() + "(" + this.getDeadline() + " )";
+            return "[D][_] " + this.getName() +" | " +this.getDeadlineDate()+ " " + this.getDeadlineTime();
+
         }
     }
 }
