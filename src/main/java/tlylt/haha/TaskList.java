@@ -104,13 +104,6 @@ public class TaskList {
         }
     }
 
-<<<<<<< HEAD
-    /**
-     * Marks selected task as done.
-     *
-     * @param inputNum String for parsing task number.
-     */
-=======
     private void findFromDB(String keyword, Ui ui) {
         System.out.println("Here are the matching tasks in your list:");
         boolean hasRelated = false;
@@ -128,7 +121,11 @@ public class TaskList {
         }
     }
 
->>>>>>> branch-Level-9
+    /**
+     * Marks selected task as done.
+     *
+     * @param inputNum String for parsing task number.
+     */
     void markDoneToDB(String inputNum) {
         try {
             int givenIndex = Parser.taskNumber(inputNum) - 1;

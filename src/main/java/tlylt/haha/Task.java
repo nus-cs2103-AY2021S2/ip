@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
     protected final String description;
-    protected boolean isDone = false;
+    protected boolean isDone;
     protected final String type;
     protected LocalDate date;
     protected LocalTime time;
