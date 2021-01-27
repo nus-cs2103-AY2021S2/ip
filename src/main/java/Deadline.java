@@ -12,9 +12,16 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+
     @Override
     public Deadline finishTask() {
         return new Deadline(description, by, true);
+    }
+
+    @Override
+    public String saveTask() {
+        return String.format("D | %s | %s | %s\n", super.getStatusIcon(),
+                description, by);
     }
 
     @Override
