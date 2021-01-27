@@ -38,7 +38,7 @@ public class Storage {
                     String[] listOfData = taskData.split("!@#", 3);
                     Task newTodo = new ToDo(listOfData[2]);
                     if (listOfData[1].equals("1")) {
-                        newTodo.completed();
+                        newTodo.completeTask();
                     }
                     taskList.addTask(newTodo);
                 } else if (taskData.startsWith("D")) {
@@ -46,7 +46,7 @@ public class Storage {
                     LocalDate localDate = LocalDate.parse(listOfData[3]);
                     Task newDeadline = new Deadline(listOfData[2], localDate);
                     if (listOfData[1].equals("1")) {
-                        newDeadline.completed();
+                        newDeadline.completeTask();
                     }
                     taskList.addTask(newDeadline);
                 } else if (taskData.startsWith("E")) {
@@ -55,7 +55,7 @@ public class Storage {
                     LocalDate endDate = LocalDate.parse(listOfData[4]);
                     Task newEvent = new Event(listOfData[2], startDate, endDate);
                     if (listOfData[1].equals("1")) {
-                        newEvent.completed();
+                        newEvent.completeTask();
                     }
                     taskList.addTask(newEvent);
                 } else {

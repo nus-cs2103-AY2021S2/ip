@@ -29,7 +29,7 @@ public abstract class Task {
     /**
      * Method that marks the task as done.
      */
-    public void completed() {
+    public void completeTask() {
         isDone = true;
     }
 
