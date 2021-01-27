@@ -26,12 +26,18 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Returns a String which gives information about the deadline in the
+     * format to be stored in a file.
+     *
+     * @return A String containing information about the deadline.
+     */
     @Override
     public String fileString() {
-        int statusNum = this.isDone? 1 : 0;
-        return "D | " + statusNum + " | " +this.description + " | " + by;
+        int statusNum = this.isDone ? 1 : 0;
+        return "D | " + statusNum + " | " + this.description + " | " + this.by;
     }
 }

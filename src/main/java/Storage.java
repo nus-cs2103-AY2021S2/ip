@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * Class which deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     public String filePath;
@@ -15,6 +18,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads tasks from a file.
+     *
+     * @return An ArrayList<Task> containing the tasks read from the file.
+     */
     public ArrayList<Task> readTasksFromFile() throws FileNotFoundException {
         File f = new File(this.filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
@@ -55,6 +63,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes tasks to a file.
+     *
+     * @param tasks An ArrayList<Task> containing the tasks to be written to the file.
+     */
     public void writeTasksToFile(ArrayList<Task> tasks) throws IOException {
 
         File dir = new File("data");

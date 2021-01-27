@@ -11,18 +11,18 @@ public class Duke {
     public Ui ui;
 
     Duke() {
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
         try {
-            tasks = new TaskList(storage.readTasksFromFile());
+            this.tasks = new TaskList(this.storage.readTasksFromFile());
         } catch (FileNotFoundException fileException) {
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
 
     }
 
     /**
-     * main method which runs the chatbot.
+     * Main method which serves as the entry point into the chatbot.
      *
      * @param args empty string array.
      */
@@ -32,9 +32,12 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the chatbot by taking in user input and processing it.
+     */
     public void run() {
 
-        ui.greetUser();
+        this.ui.greetUser();
 
         Scanner sc = new Scanner(System.in);
 
@@ -43,12 +46,12 @@ public class Duke {
             String input = sc.nextLine();
 
             try {
-                ui.echoCommand(input);
+                this.ui.echoCommand(input);
                 if (input.equals("bye")) {
-                    ui.farewellUser();
+                    this.ui.farewellUser();
                     break;
                 }
-                Parser.parseInput(input, tasks, storage);
+                Parser.parseInput(input, this.tasks, this.storage);
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());

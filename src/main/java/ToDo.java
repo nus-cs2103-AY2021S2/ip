@@ -6,7 +6,7 @@ public class ToDo extends Task {
     /**
      * Creates an todo instance.
      *
-     * @param description String describing the todo
+     * @param description String describing the todo.
      */
     public ToDo(String description) {
         super(description);
@@ -22,9 +22,15 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns a String which gives information about the todo in the
+     * format to be stored in a file.
+     *
+     * @return A String containing information about the todo.
+     */
     @Override
     public String fileString() {
-        int statusNum = this.isDone? 1 : 0;
-        return "T | " + statusNum + " | " +this.description;
+        int statusNum = this.isDone ? 1 : 0;
+        return "T | " + statusNum + " | " + this.description;
     }
 }
