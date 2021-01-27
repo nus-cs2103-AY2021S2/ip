@@ -1,6 +1,13 @@
 import java.util.Arrays;
 
+/** Parses the user inputs and returns Command objects. */
 public class Parser {
+    /**
+     * Begins parsing the input tokens.
+     *
+     * @param input User input split by spaces
+     * @return The Command object to be executed
+     */
     public static Command parse(String[] input) {
         String command = input[0];
         String[] args = Arrays.copyOfRange(input, 1, input.length);

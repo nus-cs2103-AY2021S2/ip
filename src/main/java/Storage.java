@@ -5,13 +5,20 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Describes the class that handles file I/O. */
 public class Storage {
     private String path;
+
+    /**
+     * Returns a Storage object that takes in an argument.
+     *
+     * @param p The path to the storage file
+     */
     public Storage(String p) {
         path = p;
     }
 
-    public void ensureFileExists() {
+    private void ensureFileExists() {
         File file = new File(path);
         if (file.exists()) return;
 
@@ -22,7 +29,7 @@ public class Storage {
         }
     }
 
-    public Task fromText(String str) {
+    private Task fromText(String str) {
         String[] xs = str.split(" \\| ");
         Task t;
 
@@ -38,6 +45,11 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Loads from the storage file
+     *
+     * @return An ArrayList of the Task objects
+     */
     public ArrayList<Task> load() {
         try {
             File file = new File(path);
@@ -54,6 +66,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves to the storage file
+     *
+     * @param xs The TaskList object
+     */
     public void save(TaskList xs) {
         this.ensureFileExists();
         try {

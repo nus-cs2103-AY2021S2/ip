@@ -1,3 +1,4 @@
+/** Describes every possible type of a command. */
 public enum CommandType {
     ADD_TODO,
     ADD_EVENT,

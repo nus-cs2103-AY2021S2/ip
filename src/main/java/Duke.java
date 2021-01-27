@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** Describes the main class. */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Returns a Duke object that takes in a file path.
+     *
+     * @param path The path to the storage file
+     */
     public Duke(String path) {
         storage = new Storage(path);
         ui = new Ui("Sonia");
@@ -17,6 +23,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the given command.
+     *
+     * @param c The command object
+     */
     public void executeCommand(Command c) {
         try {
             if (c.type == CommandType.ADD_TODO) {
@@ -63,12 +74,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Immediately stops the program.
+     */
     public void terminate() {
         storage.save(tasks);
         ui.closing();
         System.exit(0);
     }
 
+    /**
+     * The starting point of the class
+     * @param args Default arguments supplied
+     */
     public static void main(String[] args) {
         Duke sonia = new Duke("./data.txt");
         sonia.ui.greeting();
