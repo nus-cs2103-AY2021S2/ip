@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TaskList {
@@ -13,6 +14,10 @@ public class TaskList {
 
     public TaskList(List<Task> taskList) {
         this.taskList = new ArrayList<>(taskList);
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
     }
 
     public void add(Task task) {
@@ -37,6 +42,25 @@ public class TaskList {
 
     public TaskList clone() {
         return new TaskList(taskList);
+    }
+
+    public void clear() {
+        taskList.clear();
+    }
+
+    public void doneAll() {
+        for (Task t : taskList) {
+            t.setDone();
+        }
+    }
+
+    public boolean isAllDone() {
+        for (Task t : taskList) {
+            if(!t.getDone()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public TaskList filterByDate(String date) {

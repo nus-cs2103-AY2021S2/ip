@@ -1,9 +1,14 @@
 package duke.command;
 
-import duke.*;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Adds task to the task list.
+ */
 public class AddCommand extends Command {
 
     private Task task;
@@ -12,6 +17,13 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
+    /**
+     * Performs adding of task into the task list, prints a message to the user and saving the file to storage.
+     * @param taskList user's task list
+     * @param ui text UI object
+     * @param storage storage object
+     * @throws DukeException if there were errors encountered when saving the file.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(task);

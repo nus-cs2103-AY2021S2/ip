@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DateHelper;
+import duke.DukeHelper;
 
 import java.time.LocalDate;
 
@@ -24,7 +24,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), DateHelper.formatDate(at));
+        return String.format("[E]%s (at: %s)", super.toString(), DukeHelper.formatDate(at));
     }
 
     @Override
