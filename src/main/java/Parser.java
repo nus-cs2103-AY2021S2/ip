@@ -55,6 +55,24 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("INVALID COMMAND!");
             }
+        } else if (textInput.startsWith("find ")) {
+            String textToFind = textInput.substring(5);
+            if (!textToFind.isBlank()) {
+                System.out.println("\t_____________________________________________________________");
+                System.out.println("\t Here are the matching tasks in your list:");
+                int i = 1;
+                for (Task task : listOfTasks) {
+                    if (task.contains(textToFind)) {
+                        System.out.println("\t " + i + ". " + task);
+                    }
+                    i++;
+                }
+                System.out.println("\t_____________________________________________________________");
+            } else {
+                System.out.println("\t_____________________________________________________________");
+                System.out.println("\t ☹ OOPS!!! The description of find cannot be empty.");
+                System.out.println("\t_____________________________________________________________");
+            }
         } else if (textInput.startsWith("todo")) {
             try {
                 textInput = textInput.substring(5);

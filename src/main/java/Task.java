@@ -34,9 +34,21 @@ public abstract class Task {
     }
 
     /**
+     * Method that checks if the task description contains
+     * the given subString.
+     *
+     * @param subString the subString to search for inside the task
+     *                  description.
+     * @return true if task description contains subString, false otherwise.
+     */
+    public boolean contains(String subString) {
+        return taskInfo.contains(subString);
+    }
+
+    /**
      * Abstract method that converts the task into a
      * specific format before storing in a file.
      * @return a string of data obtained from the task.
      */
-    public abstract String getData();
+	public abstract String getData();
 }
