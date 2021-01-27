@@ -103,8 +103,8 @@ public class Duke {
      */
     private void doFind(String word){
         try {
-            String realWord = word.substring(5);
-            List<Task> searchedTaskList = taskList.find(realWord);
+            String toSearch = word.substring(5);
+            List<Task> searchedTaskList = taskList.find(toSearch);
             ui.printFindSuccess(searchedTaskList);
         } catch (StringIndexOutOfBoundsException e) {
             ui.printFindFail(new NoMeaningException("☹ OOPS!!! The description of a find cannot be empty."));
