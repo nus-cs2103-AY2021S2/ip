@@ -20,7 +20,9 @@ public class Storage {
 
     private void ensureFileExists() {
         File file = new File(path);
-        if (file.exists()) return;
+        if (file.exists()) {
+            return;
+        }
 
         try {
             file.createNewFile();
