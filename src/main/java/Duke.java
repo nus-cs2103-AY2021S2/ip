@@ -15,7 +15,7 @@ public class Duke {
      * @param command Command input by the user.
      * @throws InvalidCommandException If the command cannot be recognised.
      */
-    public static void runCommand(String command) throws InvalidCommandException{
+    public static void runCommand(String command) throws InvalidCommandException {
         if (command.equals("list")) {
             TaskList.printList(tasks);
         } else if (Parser.parsedCommand(command).equals("done")) {
@@ -41,6 +41,8 @@ public class Duke {
             }
         } else if (Parser.parsedCommand(command).equals("delete")) {
             TaskList.deleteTask(command, tasks);
+        } else if (Parser.parsedCommand(command).equals("find")) {
+            TaskList.findTask(command, tasks);
         } else {
             throw new InvalidCommandException();
         }
