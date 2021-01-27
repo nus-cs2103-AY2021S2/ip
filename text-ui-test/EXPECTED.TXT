@@ -47,5 +47,7 @@ Here are the tasks in your list:
 1. [E][ ] project meeting (at: Mon 2-4pm)
 2. [E][ ] gathering (at: Sunday afternoon)
 ____________________________________________________________
+OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
 Bye. Till next time!
 ____________________________________________________________
