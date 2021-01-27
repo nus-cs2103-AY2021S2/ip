@@ -10,6 +10,9 @@ public class EventTask extends Task {
     
     /*
      * Initializes Event Task
+     *
+     * @param name The name of the Event Task
+     * @param date The date that the Event Task must be completed by
      */
     
     public EventTask(String name, LocalDate date) {

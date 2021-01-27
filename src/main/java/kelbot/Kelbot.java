@@ -13,6 +13,8 @@ public class Kelbot implements Serializable {
     
     /*
      * Initializes Kelbot
+     *
+     * @param path The file path that Kelbot will read from to load up previous usage
      */
     
     public Kelbot(java.nio.file.Path path) {
@@ -92,7 +94,9 @@ public class Kelbot implements Serializable {
     }
     
     /*
-     * Returns Task List
+     * Gets Task List
+     *
+     * @return Task List
      */
     
     public TaskList getTaskList() {

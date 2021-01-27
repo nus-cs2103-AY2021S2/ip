@@ -15,6 +15,8 @@ public class UI implements Serializable {
     
     /*
      * Allow user to key in input
+     *
+     * @return Parser that takes in the input and returns the information needed
      */
     
     public Parser takeInput() {
@@ -33,6 +35,8 @@ public class UI implements Serializable {
     
     /*
      * Print out full list
+     *
+     * @param taskList The task list to be printed
      */
     
     public void printList(TaskList taskList) {
@@ -41,6 +45,8 @@ public class UI implements Serializable {
     
     /*
      * Print out message to show that task has been done
+     *
+     * @param task The task that has been marked done
      */
     
     public void printDone(Task task) {
@@ -50,6 +56,8 @@ public class UI implements Serializable {
     
     /*
      * Print out message to show that task has been deleted
+     *
+     * @param task The task that has been deleted
      */
     
     public void printDelete(Task task) {
@@ -59,6 +67,9 @@ public class UI implements Serializable {
     
     /*
      * Print out message to show that task has been added
+     *
+     * @param task The task that has been added
+     * @param taskSize The number of tasks in the task list
      */
     
     public void printAdd(Task task, int taskSize) {

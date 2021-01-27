@@ -12,6 +12,9 @@ public class Parser {
     
     /*
      * Initializes Parser
+     *
+     * @param input The input given by the user
+     * @throws DateTimeParseException if the date is invalid
      */
     
     public Parser(String input) throws DateTimeParseException {
@@ -76,7 +79,9 @@ public class Parser {
     }
     
     /*
-     * Return Command
+     * Gets Command
+     *
+     * @return the command read by this parser
      */
     
     public Command getCommand() {
@@ -84,7 +89,9 @@ public class Parser {
     }
     
     /*
-     * Return Task Name
+     * Gets Task Name
+     *
+     * @return the task name read by this parser
      */
     
     public String getTaskName() {
@@ -92,7 +99,9 @@ public class Parser {
     }
     
     /*
-     * Return Task Number
+     * Gets Task Number
+     *
+     * @return the task number read by this parser
      */
     
     public int getTaskNumber() {
@@ -100,7 +109,9 @@ public class Parser {
     }
     
     /*
-     * Return Date
+     * Gets Date
+     *
+     * @return the date read by this parser
      */
     
     public LocalDate getDate() {

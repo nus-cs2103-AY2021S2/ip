@@ -16,6 +16,8 @@ public class TaskList implements Serializable {
     
     /*
      * Initializes Task List with existing taskList
+     *
+     * @param taskList The task list that was loaded from Storage
      */
     
     public TaskList(ArrayList<Task> taskList) {
@@ -24,6 +26,8 @@ public class TaskList implements Serializable {
     
     /*
      * Returns Size of taskList
+     *
+     * @return Size of task list
      */
     
     public int getSize() {
@@ -35,7 +39,9 @@ public class TaskList implements Serializable {
     }
     
     /*
-     * Returns Task List
+     * Gets Task List
+     *
+     * @return Task List
      */
     
     public ArrayList<Task> getTaskList() {
@@ -44,6 +50,8 @@ public class TaskList implements Serializable {
     
     /*
      * Add Task to Task List
+     *
+     * @param task The task to be added
      */
     
     public void add(Task task) {
@@ -52,6 +60,9 @@ public class TaskList implements Serializable {
     
     /*
      * Mark a Task in Task List as Done by Task Number
+     *
+     * @param taskNumber The task number to be completed
+     * @return The task that is being marked
      */
     
     public Task done(int taskNumber) {
@@ -62,6 +73,9 @@ public class TaskList implements Serializable {
     
     /*
      * Delete a Task in Task List by Task Number
+     *
+     * @param taskNumber The task number to deleted
+     * @return The task that is being deleted
      */
     
     public Task delete(int taskNumber) {

@@ -9,6 +9,8 @@ public class Task implements Serializable {
     
     /*
      * Initializes Task
+     *
+     * @param name The name of the task
      */
     
     public Task(String name) {
@@ -26,6 +28,8 @@ public class Task implements Serializable {
     
     /*
      * Provide the status icon for the toString() method.
+     *
+     * @return the status icon
      */
     
     public String getStatusIcon() {

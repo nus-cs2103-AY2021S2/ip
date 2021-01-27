@@ -10,6 +10,9 @@ public class DeadlineTask extends Task {
     
     /*
      * Initializes Deadline Task
+     *
+     * @param name The name of the Deadline Task
+     * @param date The date that the Deadline Task must be completed by
      */
     
     public DeadlineTask(String name, LocalDate date) {
