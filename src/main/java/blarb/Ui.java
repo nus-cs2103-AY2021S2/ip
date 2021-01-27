@@ -37,11 +37,11 @@ class Ui {
      * Prints the logo of the chatbot.
      */
     public void rollCredits() {
-        String logo = " ____            _      ____   ____\n" +
-                "|    \\ |        / \\    |    \\ |    \\\n" +
-                "|____/ |       /___\\   |____/ |____/\n" +
-                "|    \\ |      /     \\  |  \\   |    \\\n" +
-                "|____/ |____ /       \\ |   \\_ |____/\n";
+        String logo = " ____            _      ____   ____\n"
+                + "|    \\ |        / \\    |    \\ |    \\\n"
+                + "|____/ |       /___\\   |____/ |____/\n"
+                + "|    \\ |      /     \\  |  \\   |    \\\n"
+                + "|____/ |____ /       \\ |   \\_ |____/\n";
         System.out.println("You are now in the presence of\n" + logo);
     }
 

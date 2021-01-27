@@ -43,7 +43,9 @@ public class Blarb {
         this("data/tasklist.txt");
     }
 
-
+    /**
+     * Runs Blarb in an input loop.
+     */
     public void run() {
         boolean active = true;
         while (active && ui.isAvailable()) {
