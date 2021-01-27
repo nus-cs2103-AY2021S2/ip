@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,7 +10,7 @@ public class Duke {
         welcome();
         try {
             load();
-        } catch (IOException e) {
+        } catch (IOException | WrongFormatException e) {
             e.printStackTrace();
         }
         Scanner sc = new Scanner(System.in);
@@ -21,11 +18,7 @@ public class Duke {
             System.out.println(line);
             try {
                 list(sc.nextLine());
-            } catch (EmptyDescriptionException e) {
-                System.out.println(e.toString());
-            } catch (UnknownCommandException e) {
-                System.out.println(e.toString());
-            } catch (WrongFormatException e) {
+            } catch (EmptyDescriptionException | UnknownCommandException | WrongFormatException | IOException e) {
                 System.out.println(e.toString());
             }
             finally {
@@ -41,7 +34,7 @@ public class Duke {
         System.out.println(line);
     }
 
-    public static void list(String msg) throws EmptyDescriptionException, UnknownCommandException, WrongFormatException {
+    public static void list(String msg) throws EmptyDescriptionException, UnknownCommandException, WrongFormatException, IOException {
         String[] msgs = msg.split(" ");
         switch (msgs[0]) {
             case "bye": {
@@ -125,9 +118,10 @@ public class Duke {
                 throw new UnknownCommandException();
             }
         }
+        save();
     }
 
-    public static void load() throws IOException {
+    public static void load() throws IOException, WrongFormatException {
         BufferedReader br = null;
         try {
             FileReader fr = new FileReader("./data/duke.txt");
@@ -158,9 +152,6 @@ public class Duke {
                 }
                 list.add(t);
             }
-
-        } catch (WrongFormatException e) {
-            e.printStackTrace();
         } finally {
             if (br != null) {
                 br.close();
@@ -168,7 +159,30 @@ public class Duke {
         }
     }
 
-    public static void save() {
-
+    public static void save() throws IOException {
+        BufferedWriter bw = null;
+        try {
+            FileWriter fw = new FileWriter("./data/duke.txt");
+            bw = new BufferedWriter(fw);
+            for (Task t : list) {
+                String line = "";
+                String isDone = t.getIsDone() ? "1" : "0";
+                if (t instanceof ToDo) {
+                    line = "T|" + isDone + "|" + t.getName();
+                } else if (t instanceof Deadline){
+                    Deadline dl = (Deadline) t;
+                    line = "D|" + isDone + "|" + dl.getName() + "|" + dl.getBy();
+                } else if (t instanceof Event){
+                    Event e = (Event) t;
+                    line = "D|" + isDone + "|" + e.getName() + "|" + e.getAt();
+                }
+                bw.write(line);
+                bw.newLine();
+            }
+        } finally {
+            if (bw != null) {
+                bw.close();
+            }
+        }
     }
 }
