@@ -98,7 +98,7 @@ public class DukeTest {
         Duke.tasks = new ArrayList<>(100);
 
         // Test
-        String testInput = "invalid input\nevent test /at too many /at date\n";
+        String testInput = "invalid input\nevent test /at 01/03/2020 1400 /at 01/03/2020 1400\n";
 
         InputStream in = makeInputStreamFromString(testInput);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -152,7 +152,7 @@ public class DukeTest {
     @Test
     public void parseInputDeadlineTooManyArgumentsThrowException() {
         DukeInvalidArgumentsException exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
-            Duke.parseInput("deadline test event /by too many /by dates");
+            Duke.parseInput("deadline test event /by 02/03/2020 1400 /by 02/03/2020 1400");
         });
 
         assertEquals("deadline", exception.getCommand());
@@ -182,7 +182,7 @@ public class DukeTest {
     @Test
     public void parseInputEventTooManyArgumentsThrowException() {
         DukeInvalidArgumentsException exception = assertThrows(DukeInvalidArgumentsException.class, () -> {
-            Duke.parseInput("event test event /at too many /at dates");
+            Duke.parseInput("event test event /at 01/03/2020 1400 /at 01/03/2020 1400");
         });
 
         assertEquals("event", exception.getCommand());
@@ -195,12 +195,12 @@ public class DukeTest {
         Duke.tasks = new ArrayList<>(100);
 
         // Test
-        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Sunday)\nNow you have 1 tasks in the list.";
-        assertEquals(expectedOutput, Duke.parseInput("deadline return book /by Sunday"));
+        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Mar 02 2020 1400)\nNow you have 1 tasks in the list.";
+        assertEquals(expectedOutput, Duke.parseInput("deadline return book /by 02/03/2020 1400"));
 
         assertEquals("return book", Duke.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[D][✗] return book (by: Sunday)", Duke.tasks.get(0).toString());
+        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", Duke.tasks.get(0).toString());
         assertTrue(Duke.tasks.get(0) instanceof DeadlineTask);
     }
 
@@ -210,12 +210,12 @@ public class DukeTest {
         Duke.tasks = new ArrayList<>(100);
 
         // Test
-        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mon 2-4pm)\nNow you have 1 tasks in the list.";
-        assertEquals(expectedOutput, Duke.parseInput("event project meeting /at Mon 2-4pm"));
+        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.";
+        assertEquals(expectedOutput, Duke.parseInput("event project meeting /at 01/03/2020 1400"));
 
         assertEquals("project meeting", Duke.tasks.get(0).getTaskInfo());
         assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[E][✗] project meeting (at: Mon 2-4pm)", Duke.tasks.get(0).toString());
+        assertEquals("[E][✗] project meeting (at: Mar 01 2020 1400)", Duke.tasks.get(0).toString());
         assertTrue(Duke.tasks.get(0) instanceof EventTask);
     }
 
@@ -240,17 +240,17 @@ public class DukeTest {
         Duke.tasks = new ArrayList<>(100);
 
         // Test
-        String testInput = "event project meeting /at Mon 2-4pm\nlist\ndone 1\nlist\n";
+        String testInput = "event project meeting /at 01/03/2020 1400\nlist\ndone 1\nlist\n";
 
         InputStream in = makeInputStreamFromString(testInput);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mon 2-4pm)\nNow you have 1 tasks in the list.\n"
-                + "1.[E][✗] project meeting (at: Mon 2-4pm)\n"
-                + "Nice! I've marked this task as done:\n  [E][✓] project meeting (at: Mon 2-4pm)\n"
-                + "1.[E][✓] project meeting (at: Mon 2-4pm)\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
+                + "1.[E][✗] project meeting (at: Mar 01 2020 1400)\n"
+                + "Nice! I've marked this task as done:\n  [E][✓] project meeting (at: Mar 01 2020 1400)\n"
+                + "1.[E][✓] project meeting (at: Mar 01 2020 1400)\n";
         assertEquals(expectedOutput, new String(out.toByteArray()));
     }
 
@@ -260,17 +260,17 @@ public class DukeTest {
         Duke.tasks = new ArrayList<>(100);
 
         // Test
-        String testInput = "deadline return book /by Sunday\nlist\ndone 1\nlist\n";
+        String testInput = "deadline return book /by 01/03/2020 1400\nlist\ndone 1\nlist\n";
 
         InputStream in = makeInputStreamFromString(testInput);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         Duke.chatLoop(in, out);
 
-        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Sunday)\nNow you have 1 tasks in the list.\n"
-                + "1.[D][✗] return book (by: Sunday)\n"
-                + "Nice! I've marked this task as done:\n  [D][✓] return book (by: Sunday)\n"
-                + "1.[D][✓] return book (by: Sunday)\n";
+        final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Mar 01 2020 1400)\nNow you have 1 tasks in the list.\n"
+                + "1.[D][✗] return book (by: Mar 01 2020 1400)\n"
+                + "Nice! I've marked this task as done:\n  [D][✓] return book (by: Mar 01 2020 1400)\n"
+                + "1.[D][✓] return book (by: Mar 01 2020 1400)\n";
         assertEquals(expectedOutput, new String(out.toByteArray()));
     }
 

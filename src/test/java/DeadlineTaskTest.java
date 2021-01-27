@@ -6,34 +6,34 @@ import org.junit.jupiter.api.Test;
 public class DeadlineTaskTest {
     @Test
     public void newDeadlineTaskPopulatesFields() {
-        DeadlineTask t = new DeadlineTask("return book", "June 6th");
+        DeadlineTask t = new DeadlineTask("return book", "02/03/2020 1400");
 
         assertEquals(false, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
-        assertEquals("June 6th", t.getDeadline());
-        assertEquals("[D][✗] return book (by: June 6th)", t.toString());
+        assertEquals("Mar 02 2020 1400", t.getDeadline());
+        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", t.toString());
     }
 
     @Test
     public void deadlineTaskSetDoneChangesCompletionState() {
-        DeadlineTask t = new DeadlineTask("return book", "June 6th");
+        DeadlineTask t = new DeadlineTask("return book", "02/03/2020 1400");
 
         assertEquals(false, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
-        assertEquals("June 6th", t.getDeadline());
-        assertEquals("[D][✗] return book (by: June 6th)", t.toString());
+        assertEquals("Mar 02 2020 1400", t.getDeadline());
+        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", t.toString());
 
         t.setTaskAsDone();
 
         assertEquals(true, t.getCompletionState());
         assertEquals("return book", t.getTaskInfo());
-        assertEquals("June 6th", t.getDeadline());
-        assertEquals("[D][✓] return book (by: June 6th)", t.toString());
+        assertEquals("Mar 02 2020 1400", t.getDeadline());
+        assertEquals("[D][✓] return book (by: Mar 02 2020 1400)", t.toString());
     }
 
     @Test
     public void deadlineTaskIsOfTypeTask() {
-        DeadlineTask t = new DeadlineTask("return book", "Today");
+        DeadlineTask t = new DeadlineTask("return book", "02/03/2020 1400");
 
         assertTrue(t instanceof Task);
     }
