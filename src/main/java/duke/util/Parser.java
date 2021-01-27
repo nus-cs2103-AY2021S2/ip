@@ -14,8 +14,18 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * Represents a parser that handles and makes sense of user input.
+ */
 public class Parser {
 
+    /**
+     * Handles and makes sense of input provided by the user.
+     * @param s User's input to the bot.
+     * @param taskList TaskList that contains the Tasks.
+     * @param apollo Instance of the bot.
+     * @throws DukeException Occurs when a command is unrecognised or options are invalid.
+     */
     public static void handleInput(String s, ArrayList<Task> taskList, Apollo apollo) throws DukeException {
         String input = s.trim();
         Commands command;
@@ -51,7 +61,7 @@ public class Parser {
                 throw new InvalidOptionException(command.name());
             }
         case BYE:
-            apollo.saveBeforeExit();
+            apollo.saveData();
             Ui.displayGoodbyeText();
             System.exit(0);
             break;
