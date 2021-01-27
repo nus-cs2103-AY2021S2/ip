@@ -6,6 +6,7 @@ import Ui.Ui;
 import Parser.Parser;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
 
 public class Duke {
     private Storage storage;
@@ -16,15 +17,13 @@ public class Duke {
         this.storage = new Storage();
         this.ui = new Ui();
         this.storage = new Storage();
+
+        ui.preload();
         try {
-            ui.preload();
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            if (e.getMessage().equals("NoFile")) {
-                ui.showNoLoadFileError();
-            }
-            if (e.getMessage().equals("MissingInfo")) {
-                ui.showMissingInfoError(e.getInfo());
+            if (e.getMessage().equals("LoadFileError")) {
+                ui.loadFileError();
             }
         }
     }

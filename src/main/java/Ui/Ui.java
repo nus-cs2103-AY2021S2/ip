@@ -70,16 +70,8 @@ public class Ui {
         System.out.println("");
     }
 
-
-    public void showNoLoadFileError() {
-        System.out.println("Oops! You don't seem to have a load file!");
-        System.out.println("Creating one now!!\n");
-    }
-
-    public void showMissingInfoError(String info) {
-        System.out.println("It seems one of your tasks is missing some info:");
-        System.out.println("-->    " + info);
-        System.out.println("We will be skipping this task!\n");
+    public void loadFileError() {
+        System.out.println("An error occurred while loading!!");
     }
 
     public void arrayIndexOutOfBoundsError() {

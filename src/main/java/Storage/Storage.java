@@ -34,7 +34,8 @@ public class Storage {
 
     public File getFileFromPath() throws DukeException {
         if (!Files.exists(this.dataFolder) || !Files.exists(this.dukeTxt)) {
-            throw new DukeException("NoFile");
+            System.out.println("Oops! You don't seem to have a load file!");
+            System.out.println("Creating one now!!\n");
         }
         try {
             Files.createDirectory(this.dataFolder);
@@ -48,7 +49,7 @@ public class Storage {
         return loadData;
     }
 
-    public List<DukeTask> parseFile(File data) {
+    public List<DukeTask> parseFile(File data) throws DukeException {
         try {
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
@@ -87,12 +88,14 @@ public class Storage {
                             break;
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("MissingInfo", line);
+                    System.out.println("It seems one of your tasks is missing some info:");
+                    System.out.println("-->    " + line);
+                    System.out.println("We will be skipping this task!\n");
                 }
             }
             reader.close();
-        } catch (FileNotFoundException | DukeException e) {
-            System.out.println("An error occurred while loading!!");
+        } catch (FileNotFoundException e) {
+            throw new DukeException("LoadFileError");
         }
         return this.loadfile;
     }
@@ -109,6 +112,4 @@ public class Storage {
             System.out.println("Error saving file!");
         }
     }
-
-
 }

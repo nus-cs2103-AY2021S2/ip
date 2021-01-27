@@ -1,0 +1,4 @@
+T | 1 | read book
+D | 0 | return book | 2020-06-06
+E | 0 | project meeting | Monday 14:00 - 16:00
+T | 1 | join sports club
