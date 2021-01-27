@@ -20,6 +20,13 @@ public class Ui {
             + "e.g. 2020-02-02 18:00\n"
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
+    private static final String TASK_NOT_FOUND = "OH WAIT A MINUTE!\n"
+            + ":(\n"
+            + "No related tasks in your list!";
+
+    public void taskNotFound() {
+        System.out.println(TASK_NOT_FOUND);
+    }
 
     /**
      * Outputs welcome message.

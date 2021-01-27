@@ -10,7 +10,9 @@ public enum LegitCommand {
     LIST("list"),
     DONE("done"),
     DELETE("delete"),
-    BYE("bye");
+    BYE("bye"),
+    FIND("find");
+    
     private final String rep;
     private String detail = "";
 

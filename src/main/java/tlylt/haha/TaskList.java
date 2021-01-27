@@ -104,11 +104,31 @@ public class TaskList {
         }
     }
 
+<<<<<<< HEAD
     /**
      * Marks selected task as done.
      *
      * @param inputNum String for parsing task number.
      */
+=======
+    private void findFromDB(String keyword, Ui ui) {
+        System.out.println("Here are the matching tasks in your list:");
+        boolean hasRelated = false;
+        for (int i = 0; i < database.size(); i++) {
+            String idx = Integer.toString(i + 1) + '.';
+            Task currentTask = database.get(i);
+            if (currentTask.description.contains(keyword)) {
+                String task = idx + database.get(i);
+                System.out.println(task);
+                hasRelated = true;
+            }
+        }
+        if (!hasRelated) {
+            ui.taskNotFound();
+        }
+    }
+
+>>>>>>> branch-Level-9
     void markDoneToDB(String inputNum) {
         try {
             int givenIndex = Parser.taskNumber(inputNum) - 1;
@@ -160,6 +180,9 @@ public class TaskList {
             this.markDoneToDB(LegitCommand.DONE.getDetail());
             this.updateFile();
             break;
+        case FIND:
+            this.findFromDB(LegitCommand.FIND.getDetail(), ui);
+            break;
         case DELETE:
             this.deleteFromDB(LegitCommand.DELETE.getDetail());
             this.updateFile();
@@ -167,5 +190,6 @@ public class TaskList {
         }
         return false;
     }
+
 
 }
