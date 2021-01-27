@@ -5,6 +5,9 @@ import weiliang.bot.task.Event;
 import weiliang.bot.task.Task;
 import weiliang.bot.task.TaskList;
 
+/**
+ * Main ui class
+ */
 public class UI {
 
     private String name;
@@ -13,6 +16,11 @@ public class UI {
     private boolean active;
     private TaskList tasks;
 
+    /**
+     * Creates an empty ui
+     * 
+     * @param name the name for the bot
+     */
     public UI(String name) {
         this.name = name;
         this.logo = "  ___ _            _     ___      _   \n" + " / __(_)_ __  _ __| |___| _ ) ___| |_ \n"
@@ -22,22 +30,50 @@ public class UI {
         this.tasks = new TaskList();
     }
 
+    /**
+     * Loads the tasks given list
+     * 
+     * @param tasks tasks to load
+     */
     public void loadTasks(TaskList tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Formats message to given form
+     * 
+     * @param message user input
+     * @return formatted bot message
+     */
     public String formatMessage(String message) {
         return name + ": " + message.replace("{{bot:name}}", name);
     }
 
+    /**
+     * Gets initialization message
+     * 
+     * @return init message
+     */
     public String getInitMessage() {
         return logo + formatMessage("Hi, my name is {{bot:name}}!");
     }
 
+    /**
+     * Check if the bot is alive
+     * 
+     * @return true if active
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * Gets a parsed input from bot
+     * 
+     * @param input user command
+     * @return bot formatted string response
+     * @throws DukeException if error while parsing
+     */
     public String respond(String input) throws DukeException {
         // Clear leading and trailing whitespace
         input = input.strip();
