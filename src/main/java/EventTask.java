@@ -5,11 +5,19 @@ public class EventTask extends Task {
 
     private LocalDateTime date;
 
+    /**
+     * Constructor for Event Task
+     * @param info Task info
+     * @param date date in the form "d/M/yyyy HHmm"
+     */
     public EventTask(String info, String date) {
         super(info);
         this.date = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
+    /**
+     * Accessor for date string
+     */
     public String getDate() {
         return date.format(DateTimeFormatter.ofPattern("MMM dd yyyy HHmm"));
     }

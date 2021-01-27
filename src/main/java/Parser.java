@@ -5,7 +5,12 @@ import exception.DukeInvalidArgumentsException;
 
 public class Parser {
 
-    public static HashMap<String, String> parseInput(String input) throws DukeInvalidArgumentsException {
+    /**
+     * Tokenize inputs and return dictionary of inputs.
+     * @param input The raw user input to be tokenized
+     * @return tokenized inputs keyed by token type
+     */
+    public static HashMap<String, String> ParseInput(String input) throws DukeInvalidArgumentsException {
         HashMap<String, String> keyValuePairs = new HashMap<>();
 
         String[] commands = input.split(" /");

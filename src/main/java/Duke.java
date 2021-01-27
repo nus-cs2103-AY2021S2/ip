@@ -15,6 +15,11 @@ public class Duke {
     protected static Storage storage = new Storage();
     protected static TaskList taskList = new TaskList(storage);
 
+    /**
+     * Entry point for program
+     * @param args command line arguments
+     * @throws IOException When file cannot be read.
+     */
     public static void main(String[] args) throws IOException {
 
         UI.greet();
@@ -27,7 +32,7 @@ public class Duke {
 
     }
 
-    public static void chatLoop(InputStream in, OutputStream out) throws IOException {
+    protected static void chatLoop(InputStream in, OutputStream out) throws IOException {
 
         BufferedReader reader = getReader(in);
         PrintStream writer = getWriter(out);
@@ -51,8 +56,8 @@ public class Duke {
         writer.println(e.getMessage());
     }
 
-    public static String parseInput(String input) throws DukeException {
-        HashMap<String, String> tokenizedInput = Parser.parseInput(input);
+    protected static String parseInput(String input) throws DukeException {
+        HashMap<String,String> tokenizedInput = Parser.ParseInput(input); 
         switch (tokenizedInput.get("command")) {
         case "bye":
             return "Bye. Hope to see you again soon!";

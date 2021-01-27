@@ -5,6 +5,9 @@ public class UI {
 
     private static final String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
 
+    /**
+     * Sends the greeting message
+     */
     public static void greet() {
         System.out.println("Hello from");
         System.out.println();
