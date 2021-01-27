@@ -53,6 +53,7 @@ public class DukeStorage {
         switch (type) {
         case("Todo"): {
             return new Todo(description);
+            // Fallthrough
         }
         case("Deadline"): {
             if (currLine[2].length() < 1) {
@@ -64,7 +65,6 @@ public class DukeStorage {
             } catch (DateTimeParseException e) {
                 throw new DukeDateFormatException();
             }
-
         }
         case("Event"): {
             if (currLine[2].length() < 1) {
