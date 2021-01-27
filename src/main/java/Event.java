@@ -3,13 +3,14 @@ import java.time.LocalDate;
 class Event extends Task {
     protected final LocalDate date;
 
-    public Event(String eventInfo) throws DukeException {
-        super((eventInfo.split("/at")[0]).substring(0,eventInfo.split("/at")[0].length() - 1));
-        try {
-            this.date = LocalDate.parse(eventInfo.split("/at")[1].substring(1));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input for new event");
-        }
+    public Event(String eventInfo, LocalDate date) {
+        super(eventInfo);
+        this.date = date;
+    }
+
+    public Event(String eventInfo, LocalDate date, boolean isDone) throws DukeException {
+        super(eventInfo, isDone);
+        this.date = date;
     }
 
     public String getDate() {

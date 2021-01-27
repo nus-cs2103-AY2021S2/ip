@@ -3,14 +3,14 @@ import java.time.LocalDate;
 class Deadline extends Task {
     protected final LocalDate date;
 
-    public Deadline(String deadlineInfo) throws DukeException {
-        super((deadlineInfo.split("/by")[0]).substring(0,
-                deadlineInfo.split("/by")[0].length() - 1));
-        try {
-            this.date = LocalDate.parse(deadlineInfo.split("/by")[1].substring(1));
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Invalid input for new deadline");
-        }
+    public Deadline(String deadlineInfo, LocalDate deadline) {
+        super(deadlineInfo);
+        this.date = deadline;
+    }
+
+    public Deadline(String deadlineInfo, LocalDate deadline, boolean isDone) {
+        super(deadlineInfo, isDone);
+        this.date = deadline;
     }
 
     public String getDate() {

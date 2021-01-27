@@ -9,6 +9,11 @@ abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
     public void completeTask() {
         this.isDone = true;
     }
