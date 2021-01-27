@@ -1,4 +1,11 @@
+/**
+ * Class that can create a todo task object.
+ */
 public class ToDo extends Task {
+    /**
+     * Constructor that creates the todo task.
+     * @param taskInfo the description of the todo task.
+     */
     public ToDo(String taskInfo) {
         super(taskInfo);
     }

@@ -1,7 +1,17 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that can create a Parser object that can interpret the user
+ * commands.
+ */
 public class Parser {
+    /**
+     * Method that interprets and executes the user command accordingly.
+     *
+     * @param listOfTasks the list of tasks for the user.
+     * @param textInput the command that was given by the user.
+     */
     public void executeCommand(TaskList listOfTasks, String textInput) {
         if (textInput.toLowerCase().equals("list")) {
             int i = 1;
