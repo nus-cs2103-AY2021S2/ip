@@ -92,4 +92,8 @@ public class Ui {
     public void showLoadingError(Exception e) {
         System.out.println(e.getMessage());
     }
+
+    public void showFoundListItems() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
 }

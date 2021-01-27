@@ -42,6 +42,8 @@ public class Parser {
             return new DeadlineCommand(command);
         case "delete":
             return new DeleteCommand(command);
+        case "find":
+            return new FindCommand(command);
         case "bye":
             return new ExitCommand(command);
         default:
