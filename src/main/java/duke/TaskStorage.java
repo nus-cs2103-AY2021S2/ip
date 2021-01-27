@@ -23,6 +23,7 @@ public class TaskStorage {
 
     /**
      * Constructor for TaskStorage.
+     *
      * @param path Path of the file to read from or write to.
      */
     public TaskStorage(String path) {
@@ -38,6 +39,7 @@ public class TaskStorage {
 
     /**
      * Writes data of existing tasks to a file.
+     *
      * @param tasks Existing user's tasks.
      */
     public void storeData(TaskList tasks) {
@@ -74,6 +76,7 @@ public class TaskStorage {
 
     /**
      * Retrieve data of tasks from file and construct a list of tasks previously added by the user.
+     *
      * @return A list of tasks retrieved from the storage.
      */
     public TaskList retrieveData() {

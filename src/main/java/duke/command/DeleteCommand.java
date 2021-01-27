@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor of DeleteCommand.
+     *
      * @param indexToDelete The index of the task to be deleted.
      */
     public DeleteCommand(int indexToDelete) {
@@ -24,6 +25,7 @@ public class DeleteCommand extends Command {
      * Removes task from list of tasks.
      * Updates the task storage.
      * Prompts the user that the task has been removed and show the total number of tasks.
+     *
      * @param tasks List of tasks.
      * @param ui Formats and prints message to user.
      * @param storage Updates tasks.txt of the removed task.

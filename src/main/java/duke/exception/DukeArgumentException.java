@@ -6,6 +6,7 @@ package duke.exception;
 public class DukeArgumentException extends DukeException {
     /**
      * Constructor of DukeArgumentException.
+     *
      * @param errorMsg Error Message prompting user of invalid argument.
      */
     public DukeArgumentException(String errorMsg) {

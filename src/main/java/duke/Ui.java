@@ -20,6 +20,7 @@ public class Ui {
 
     /**
      * Reads a line of user input and returns it.
+     *
      * @return String of user input.
      */
     public String readInput() {
@@ -28,6 +29,7 @@ public class Ui {
 
     /**
      * Formats and prints message to user.
+     *
      * @param message Message to be printed.
      */
 
@@ -39,6 +41,7 @@ public class Ui {
 
     /**
      * Formats and prints all tasks.
+     * 
      * @param tasks A list of user's tasks.
      */
 

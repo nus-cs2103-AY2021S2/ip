@@ -11,6 +11,7 @@ import duke.Ui;
 public class ExitCommand extends Command {
     /**
      * Executes the exit command.
+     *
      * @param tasks List of tasks.
      * @param ui Formats and prints message to user.
      * @param storage

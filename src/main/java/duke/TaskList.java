@@ -25,6 +25,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      * Constructs a TaskList with existing tasks specified in the method parameter.
+     *
      * @param tasks List of tasks.
      */
     public TaskList(List<Task> tasks) {
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * Returns an iterator for the list of tasks.
+     *
      * @return A task list iterator.
      */
     public ListIterator<Task> listIterator() {
@@ -42,6 +44,7 @@ public class TaskList {
 
     /**
      * Retrieves a task from the list of tasks.
+     *
      * @param taskIndex The index of the task to be retrieved.
      * @return A task from the list of tasks.
      */
@@ -51,6 +54,7 @@ public class TaskList {
 
     /**
      * Gets the size of TaskList.
+     *
      * @return An integer representing the number of tasks in the list.
      */
     public int getSize() {
@@ -59,6 +63,7 @@ public class TaskList {
 
     /**
      * Adds task to the list.
+     *
      * @param task The task to be added to the list of tasks.
      */
 
@@ -68,6 +73,7 @@ public class TaskList {
 
     /**
      * Removes task from the list.
+     *
      * @param taskIndex The index of the task to be removed.
      */
 

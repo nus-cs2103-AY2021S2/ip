@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructor of the Event class.
+     *
      * @param description A brief description of the Event.
      * @param eventTime Date and Time of the Event.
      */
@@ -23,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Constructor of the Event class.
+     *
      * @param description A brief description of the Event.
      * @param isDone "0" if the task is not done. "1" if the task is done.
      * @param eventTime Date and Time of the Event.
@@ -35,6 +37,7 @@ public class Event extends Task {
 
     /**
      * Returns the Date and Time of the Event.
+     *
      * @return A String representing the event date and time in the following format: "YYYY-MM-DD HHmm".
      */
     public String getDateTime() {
@@ -45,6 +48,7 @@ public class Event extends Task {
     /**
      * Returns a String representation of the Event to be displayed to the user.
      * Shows the description, date and time of the Event, as well as whether it is done.
+     *
      * @return A String representing the Event.
      */
     @Override

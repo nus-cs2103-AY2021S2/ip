@@ -10,6 +10,7 @@ import duke.Ui;
 public class InvalidCommand extends Command {
     /**
      * Prompts user of invalid command.
+     *
      * @param tasks
      * @param ui Formats and prints message to user.
      * @param storage

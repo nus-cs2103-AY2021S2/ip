@@ -13,6 +13,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of the Deadline class.
+     *
      * @param description A brief description of the Deadline.
      * @param deadline Date and Time of the Deadline.
      */
@@ -23,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of the Deadline class.
+     *
      * @param description A brief description of the deadline.
      * @param isDone "0" if task is not done. "1" if task is done.
      */
@@ -34,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the Date and Time of the Deadline.
+     *
      * @return A String representing the deadline in the following format: "YYYY-MM-DD HHmm".
      */
     public String getDateTime() {
@@ -44,6 +47,7 @@ public class Deadline extends Task {
     /**
      * Returns a String representation of the Deadline to be displayed to the user.
      * Shows the description, date and time of the Deadline, as well as whether it is done.
+     *
      * @return A String representing the Deadline.
      */
     @Override

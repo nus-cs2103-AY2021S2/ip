@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor of the Task class
+     *
      * @param description A brief description of the task.
      * @param isDone "0" if the task is done. "1" if the task is not done.
      */
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Displays whether a task is done.
+     *
      * @return A cross symbol if task is not done, a tick symbol if task is done.
      */
 
@@ -29,6 +31,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return A String describing the task.
      */
 
@@ -38,6 +41,7 @@ public class Task {
 
     /**
      * Returns the status of the task, whether it is done or not.
+     *
      * @return True if the task is done, false if task is not done.
      */
     public boolean isDone() {
@@ -62,6 +66,7 @@ public class Task {
 
     /**
      * Returns the status and the description of the task.
+     *
      * @return A tick/cross symbol and the description of the task.
      */
     @Override
