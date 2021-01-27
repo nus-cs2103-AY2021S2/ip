@@ -46,4 +46,8 @@ public class Task {
     public String getData() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
