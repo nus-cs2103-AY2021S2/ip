@@ -10,6 +10,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+
     /**
      * Formats string to be stored.
      *
@@ -25,9 +26,9 @@ public class Deadline extends Task {
         return this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
-  private String formatDateForSaving() {
-      return this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-  }
+    private String formatDateForSaving() {
+        return this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
 
     @Override
     public String toString() {

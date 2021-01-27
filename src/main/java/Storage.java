@@ -85,14 +85,13 @@ public class Storage {
         return tasks;
     }
 
-
     /**
      * Saves tasks input by the user on the data file.
      *
      * @param tasks Tasks to be saved on the file.
      * @throws UnableToSaveDataException If unable to save tasks to the file.
      */
-    public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException{
+     public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException {
         try {
             BufferedWriter writer = Files.newBufferedWriter(fileLocation, StandardCharsets.UTF_8);
             for (Task task : tasks) {

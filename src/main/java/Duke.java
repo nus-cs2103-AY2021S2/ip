@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Duke {
 
     /** List of tasks added by the user */
-    private static List<Task> tasks = Storage.getData();
+    private static final List<Task> tasks = Storage.getData();
 
     /**
      * Performs the specified action.
