@@ -29,5 +29,9 @@ public class Ui {
         System.out.println("Noted. I've removed this task: \n " + task + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
+    public void tellUserListFound() {
+        System.out.println("Here are the matching tasks in your list: " );
+    }
+
     
 }

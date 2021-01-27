@@ -15,7 +15,7 @@ class Event extends Task {
         this.date = date;
     }
 
-        /**
+    /**
      * returns a Event if the line stored in Storage of a Task is of type Event
      *
      * @param input

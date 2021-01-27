@@ -7,13 +7,11 @@ public class Parser {
     private Scanner scanner; 
     static String input;
     Ui userInterface;
-    private TaskList list;
 
     Parser(){
         scanner = new Scanner(System.in);
         userInterface = new Ui();
         userInterface.welcomeUser();
-        list = new TaskList();
     }
 
     /**
@@ -78,6 +76,10 @@ public class Parser {
 
     private Boolean inputContainsList() {
         return input.contains("list");
+    }
+
+    private Boolean inputContainsFind() {
+        return input.contains("find");
     }
 
 
@@ -202,6 +204,25 @@ public class Parser {
 
 ////////////// Command delete End ///////////////
 
+    /**
+     * Method formats input to content that user wishes to search for
+     */
+    private void contentToFind() {
+        input = input.replaceFirst("find", "");
+        input = input.strip(); 
+    }
+
+    private void displayFindList(TaskList list) {
+        contentToFind();
+        TaskList filteredList = list.filterFind(input); 
+        if (filteredList.size() == 0) {
+            System.out.print("No similar matched found.");
+        } else { 
+            userInterface.tellUserListFound();
+            filteredList.listAllTasks();
+        }
+    }
+
 
 
 
@@ -218,7 +239,14 @@ public class Parser {
             } else if (inputContainsDelete()) {
                 commandDelete(list);
             } else if (inputContainsList()) {
-                list.listAllTasks();
+                if (list.size() == 0) {
+                    System.out.print("You have 0 tasks in your list. ");
+                } else {
+                    System.out.println("Here are the tasks in your list:");
+                    list.listAllTasks();
+                }
+            } else if (inputContainsFind()) {
+                displayFindList(list);
             } else {
                 if(scanner.hasNextLine()) {
                     input = scanner.nextLine();

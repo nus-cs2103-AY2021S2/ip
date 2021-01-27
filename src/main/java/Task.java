@@ -28,6 +28,10 @@ public class Task {
         return this.completed;
     }
 
+    boolean taskMatch(String keyword) {
+        return this.task.contains(keyword);
+    }
+
     // public static Task readTask(String input) {
     //     String[] list = input.split(",", 3);
     //     return new Task(list[1], Boolean.parseBoolean(list[2]));

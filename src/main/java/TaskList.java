@@ -62,5 +62,16 @@ public class TaskList {
         }
     }
 
+    public TaskList filterFind(String keyword) {
+        TaskList filteredList = new TaskList();
+        for (int i = 0; i < list.size(); i++) { 
+            Task current = list.get(i); 
+            if (current.taskMatch(keyword)) {
+                filteredList.add(current); 
+            }
+        }
+        return filteredList;
+    }
+
 
 }
