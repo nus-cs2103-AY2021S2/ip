@@ -1,3 +1,5 @@
+package duke.tasks;
+
 public class Deadline extends Task {
     protected String after;
     public Deadline (String info, String after) {

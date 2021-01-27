@@ -1,5 +1,14 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.exceptions.MissingArgumentException;
+import duke.exceptions.NoKeywordException;
 
 public class Duke {
     public static void main(String[] args) {
@@ -8,10 +17,10 @@ public class Duke {
         ArrayList<Task> taskList = new ArrayList<>();
 
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println(logo);
         System.out.println("Hello Master. Nice to meet you, my name is " + name + ".");
