@@ -13,54 +13,38 @@ ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] eat later
+ Now you have 3 tasks in the list
+____________________________________________________________
+
+____________________________________________________________
+ Got it. I've added this task:
+ [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
  Now you have 4 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
- [D][✘] eat     mee siam (by: 2.30pm on Jan 2)
+ [E][✘] go to buffet (at: Dec 23 2020 23:23)
  Now you have 5 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
- Got it. I've added this task:
- [E][✘] go to buffet (at: when hungry)
- Now you have 6 tasks in the list
+ Here are the tasks in your list:
+ 1. [E][✘] go to buffet (at: Dec 23 2020 23:23)
+ 2. [T][✘] chill
+ 3. [T][✘] eat later
+ 4. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 5. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
- Here are the tasks in your list:
- 1. [T][✘] chill
- 2. [D][✘] dsfgf (by: fg)
- 3. [E][✘] dsf (at: hwef)
- 4. [T][✘] eat later
- 5. [D][✘] eat     mee siam (by: 2.30pm on Jan 2)
- 6. [E][✘] go to buffet (at: when hungry)
+ Good job on completing this task!
+ [E][✓] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
  Good job on completing this task!
  [T][✓] chill
-____________________________________________________________
-
-____________________________________________________________
- Good job on completing this task!
- [D][✓] dsfgf (by: fg)
-____________________________________________________________
-
-____________________________________________________________
- Good job on completing this task!
- [E][✓] dsf (at: hwef)
-____________________________________________________________
-
-____________________________________________________________
- Here are the tasks in your list:
- 1. [T][✓] chill
- 2. [D][✓] dsfgf (by: fg)
- 3. [E][✓] dsf (at: hwef)
- 4. [T][✘] eat later
- 5. [D][✘] eat     mee siam (by: 2.30pm on Jan 2)
- 6. [E][✘] go to buffet (at: when hungry)
 ____________________________________________________________
 
 ____________________________________________________________
@@ -69,80 +53,112 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Enter 'done' followed by a number between 1 and 6
+ Here are the tasks in your list:
+ 1. [E][✓] go to buffet (at: Dec 23 2020 23:23)
+ 2. [T][✓] chill
+ 3. [T][✓] eat later
+ 4. [D][✘] eat     mee siam (by: Jan 23 2021 20:21)
+ 5. [E][✘] go to buffet (at: Dec 23 2020 23:23)
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Good job on completing this task!
+ [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
+____________________________________________________________
+
+____________________________________________________________
+ Enter 'done' followed by a number between 1 and 5
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Enter date and time in this format yyyy-mm-dd hh:mm
+____________________________________________________________
+
+____________________________________________________________
+ Enter date and time in this format yyyy-mm-dd hh:mm
+____________________________________________________________
+
+____________________________________________________________
+ Enter date and time in this format yyyy-mm-dd hh:mm
+____________________________________________________________
+
+____________________________________________________________
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
 ____________________________________________________________
 
 ____________________________________________________________
- Please enter 'todo (your task)', or 'deadline (your task) / (deadline date timing)',
- or 'event (event name) / (event date timing' to add tasks.
+ Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
+ or 'event (event name) / (event date time)' to add tasks.
  To see your tasks enter 'list'.
  To complete a task enter 'done (number of the task in the list)'.
  And to close Duke enter 'bye'.
+____________________________________________________________
+
+____________________________________________________________
+ Enter date and time in this format yyyy-mm-dd hh:mm
+____________________________________________________________
+
+____________________________________________________________
+ Enter date and time in this format yyyy-mm-dd hh:mm
+____________________________________________________________
+
+____________________________________________________________
+ Enter date and time in this format yyyy-mm-dd hh:mm
 ____________________________________________________________
 
 ____________________________________________________________
  I've removed the following task:
- [T][✓] chill
- You now have 5 tasks in the list
-____________________________________________________________
-
-____________________________________________________________
- I've removed the following task:
- [D][✓] dsfgf (by: fg)
+ [E][✓] go to buffet (at: Dec 23 2020 23:23)
  You now have 4 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
  I've removed the following task:
- [E][✓] dsf (at: hwef)
+ [T][✓] chill
  You now have 3 tasks in the list
 ____________________________________________________________
 
@@ -153,29 +169,31 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
- Enter 'delete' followed by a number between 1 and 2
+ I've removed the following task:
+ [D][✓] eat     mee siam (by: Jan 23 2021 20:21)
+ You now have 1 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
- Enter 'done' followed by a number between 1 and 2
+ Enter 'delete' followed by a number between 1 and 1
+____________________________________________________________
+
+____________________________________________________________
+ Enter 'done' followed by a number between 1 and 1
 ____________________________________________________________
 
 ____________________________________________________________
  Got it. I've added this task:
  [T][✘] chill
- Now you have 3 tasks in the list
+ Now you have 2 tasks in the list
 ____________________________________________________________
 
 ____________________________________________________________
- Got it. I've added this task:
- [D][✘] dsfgf (by: fg)
- Now you have 4 tasks in the list
+ Enter date and time in this format yyyy-mm-dd hh:mm
 ____________________________________________________________
 
 ____________________________________________________________
- Got it. I've added this task:
- [E][✘] dsf (at: hwef)
- Now you have 5 tasks in the list
+ Enter date and time in this format yyyy-mm-dd hh:mm
 ____________________________________________________________
 
 ____________________________________________________________

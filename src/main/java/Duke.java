@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -118,11 +119,16 @@ public class Duke {
                     }
                 } catch (IllegalArgumentException e) {
                     System.out.println(line + " Please enter 'todo (your task)', " +
-                            "or 'deadline (your task) / (deadline date timing)',\n or " +
-                            "'event (event name) / (event date timing' to add tasks.\n " +
+                            "or 'deadline (your task) / (deadline date time)',\n or " +
+                            "'event (event name) / (event date time)' to add tasks.\n " +
                             "To see your tasks enter 'list'.\n To complete a task enter " +
                             "'done (number of the task in the list)'.\n And to close Duke " +
                             "enter 'bye'.\n"+ line);
+                } catch (DateTimeParseException e) {
+                    System.out.println(line+" Enter date and time in this format yyyy-mm-dd hh:mm\n"+line);
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println(line + e.getMessage() + line);//e.getmessage as for the diff array exception
+                    // print their specific msg
                 }
             }
         }

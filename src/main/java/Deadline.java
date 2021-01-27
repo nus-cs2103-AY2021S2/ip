@@ -1,5 +1,8 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    public String deadline;
+    public LocalDateTime deadline;
 
     public Deadline(String str) {
         super(str);//super must be 1st line..
@@ -8,16 +11,22 @@ public class Deadline extends Task {
             throw new IllegalArgumentException();
         }
         this.task = split[0].trim();
-        this.deadline = split[1].trim();
+        String trimmed = split[1].trim();
+        String[] split1 = trimmed.split(" ");
+        if(split1.length != 2) {
+            throw new ArrayIndexOutOfBoundsException(" Enter date and time in this format yyyy-mm-dd hh:mm\n");
+        }
+        this.deadline = LocalDateTime.parse(split1[0].trim() + "T" + split1[1]);
     }
 
     public Deadline(String[] str, boolean isDone) {//call from harddisc
         super(str[2], isDone);
-        this.deadline = str[3];
+        this.deadline = LocalDateTime.parse(str[3]);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " " + "(by: " + deadline + ")";
+        return "[D]" + super.toString() + " " + "(by: " +
+                deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }
