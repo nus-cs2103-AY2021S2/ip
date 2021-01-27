@@ -8,6 +8,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.DukeException;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 
@@ -30,6 +31,8 @@ public class Parser {
                 return DoneCommand.parseDoneCommand(cmd);
             } else if (DeleteCommand.isDeleteCommand(cmd)) {
                 return DeleteCommand.parseDeleteCommand(cmd);
+            } else if (FindCommand.isFindCommand(cmd)) {
+                return FindCommand.parseFindCommand(cmd);
             } else {
                 return new InvalidCommand(String.format("Sorry, I don't know what '%s' means", cmd));
             }
