@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     
     private String name;
-    private boolean done;
+    private boolean isDone;
     
     /**
      * Initializes Task
@@ -15,7 +15,7 @@ public class Task implements Serializable {
     
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
     
     /**
@@ -23,7 +23,7 @@ public class Task implements Serializable {
      */
     
     public void complete() {
-        this.done = true;
+        isDone = true;
     }
     
     /**
@@ -33,16 +33,15 @@ public class Task implements Serializable {
      */
     
     public String getStatusIcon() {
-        if (this.done) {
+        if (isDone) {
             return "[X]";
         } else {
             return "[ ]";
         }
     }
     
-    
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.name;
+        return this.getStatusIcon() + name;
     }
 }

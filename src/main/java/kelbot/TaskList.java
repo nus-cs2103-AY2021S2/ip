@@ -1,9 +1,8 @@
 package kelbot;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskList implements Serializable {
+public class TaskList {
     private ArrayList<Task> taskList;
     
     /**
@@ -55,7 +54,7 @@ public class TaskList implements Serializable {
      */
     
     public void add(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
     
     /**
@@ -65,7 +64,7 @@ public class TaskList implements Serializable {
      * @return The task that is being marked
      */
     
-    public Task done(int taskNumber) {
+    public Task complete(int taskNumber) {
         Task taskToComplete = taskList.get(taskNumber - 1);
         taskToComplete.complete();
         return taskToComplete;

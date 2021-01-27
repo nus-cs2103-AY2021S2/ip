@@ -16,7 +16,7 @@ public class Storage {
     
     public Storage(java.nio.file.Path path) {
         this.path = path;
-        this.fileExists = java.nio.file.Files.exists(path);
+        fileExists = java.nio.file.Files.exists(path);
     }
     
     /**
@@ -29,7 +29,7 @@ public class Storage {
     public TaskList load() throws KelbotException {
         if (fileExists) {
             try {
-                FileInputStream fis = new FileInputStream(this.path.toString());
+                FileInputStream fis = new FileInputStream(path.toString());
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 TaskList taskList = new TaskList((ArrayList<Task>) ois.readObject());
                 ois.close();
@@ -52,10 +52,10 @@ public class Storage {
      */
     
     public void save(ArrayList<Task> taskList) {
-        File file = new File(this.path.toString());
+        File file = new File(path.toString());
         file.getParentFile().mkdirs();
         try {
-            FileOutputStream fos = new FileOutputStream(this.path.toString());
+            FileOutputStream fos = new FileOutputStream(path.toString());
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(taskList);
             oos.close();

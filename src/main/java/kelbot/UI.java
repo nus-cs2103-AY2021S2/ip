@@ -1,9 +1,8 @@
 package kelbot;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
-public class UI implements Serializable {
+public class UI {
     
     /**
      * Initializes UI
@@ -69,12 +68,12 @@ public class UI implements Serializable {
      * Print out message to show that task has been added
      *
      * @param task The task that has been added
-     * @param taskSize The number of tasks in the task list
+     * @param taskListSize The number of tasks in the task list
      */
     
-    public void printAdd(Task task, int taskSize) {
+    public void printAdd(Task task, int taskListSize) {
         System.out.println("Okay! I have added:");
         System.out.println(task);
-        System.out.println("Now there are " + taskSize + " tasks on the list");
+        System.out.println("Now there are " + taskListSize + " tasks on the list");
     }
 }

@@ -22,6 +22,7 @@ public class EventTask extends Task {
     
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+        return "[E]" + super.toString()
+                + " (at:" + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
     }
 }
