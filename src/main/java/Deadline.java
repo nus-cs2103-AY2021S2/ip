@@ -20,6 +20,11 @@ public class Deadline extends Task {
         setTime(by);
     }
 
+    /**
+     * Return the due time of a Deadline task.
+     *
+     * @return Due time in String.
+     */
     public String getTime(){
         String time = this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")).replace("T", " ");
         return time;

@@ -21,11 +21,23 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
+
+    /**
+     * Returns text input command by user.
+     * If the user input is null, empty String is returned.
+     *
+     * @return Input command Line.
+     */
     public String getUserCommand(){
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
 
+    /**
+     * Print all tasks contained in a TaskList object.
+     *
+     * @param taskList TaskList object to be printed.
+     */
     public void printMyTask(TaskList taskList) {
         System.out.println("---------------------------------------------");
         System.out.println("Here are the tasks in your list:");
@@ -37,6 +49,11 @@ public class Ui {
         System.out.println("---------------------------------------------");
     }
 
+    /**
+     * Print matching tasks contained in an ArrayList.
+     *
+     * @param matchingTask List of tasks to be printed.
+     */
     public void printMatchingTask(ArrayList<Task> matchingTask) {
         System.out.println("---------------------------------------------");
         System.out.println("Here are the matching tasks in your list:");
