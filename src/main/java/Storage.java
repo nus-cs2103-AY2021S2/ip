@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,7 +39,7 @@ public class Storage {
             }
         }
         catch (FileNotFoundException e) {
-            throw new DukeException("\t\tFile not found!");
+            throw new DukeException("File not found!");
         }
         return taskArr;
 
@@ -55,7 +54,7 @@ public class Storage {
             fw.close();
         }
         catch (IOException e) {
-            throw new DukeException("\t\tError saving the Tasks into a file");
+            throw new DukeException("Error saving the Tasks into a file");
         }
     }
 
@@ -63,13 +62,13 @@ public class Storage {
         String arr[] = task.split(", ");
         Task result;
         if (arr.length == 0) {
-            throw new DukeException("\t\tRead invalid task from the file");
+            throw new DukeException("Read invalid task from the file");
         }
         String taskType = arr[0];
 
         if (taskType.equals("T")) {
             if (arr.length != 3) {
-                throw new DukeException("\t\tRead invalid Todo task from the file");
+                throw new DukeException("Read invalid Todo task from the file");
             }
             result = new ToDo(arr[2]);
             if (Integer.valueOf(arr[1]) == 1) {
@@ -78,7 +77,7 @@ public class Storage {
             return result;
         } else if (taskType.equals("D")) {
             if (arr.length != 4) {
-                throw new DukeException("\t\tRead invalid Deadline task from the file");
+                throw new DukeException("Read invalid Deadline task from the file");
             }
             result = new Deadline(arr[2], arr[3]);
             if (Integer.valueOf(arr[1]) == 1) {
@@ -86,14 +85,14 @@ public class Storage {
             }
         } else if (taskType.equals("E")) {
             if (arr.length != 4) {
-                throw new DukeException("\t\tRead invalid Event task from the file");
+                throw new DukeException("Read invalid Event task from the file");
             }
             result = new Deadline(arr[2], arr[3]);
             if (Integer.valueOf(arr[1]) == 1) {
                 result.isDone = true;
             }
         } else {
-            throw new DukeException("\t\tRead invalid Task type");
+            throw new DukeException("Read invalid Task type");
         }
 
         return result;

@@ -1,9 +1,9 @@
 //TODO consider using enum
-public class Execute {
+public class Parser {
     public TaskList taskList;
     public boolean isAlive;
 
-    public Execute (TaskList taskList) {
+    public Parser (TaskList taskList) {
         this.taskList = taskList;
         this.isAlive = true;
     }
@@ -25,7 +25,7 @@ public class Execute {
                     //TODO exception handling if num is not a number
                     taskList.markAsDone(Integer.valueOf(num));
                 } catch (NumberFormatException e) {
-                    throw new DukeException("\t\tEnter an integer only");
+                    throw new DukeException("Enter an integer only");
                 }
 
                 break;
@@ -34,27 +34,27 @@ public class Execute {
                     String num = arr[1];
                     taskList.deleteTask(Integer.valueOf(num));
                 } catch (NumberFormatException e) {
-                    throw new DukeException("\t\tEnter an integer only");
+                    throw new DukeException("Enter an integer only");
                 }
 
                 break;
             case "todo":
                 if (arr.length == 1) {
-                    throw new DukeException("\t\tSorry description of a todo cannot be empty");
+                    throw new DukeException("Sorry, description of a todo cannot be empty");
                 }
                 String toDo = arr[1];
                 taskList.addTask(new ToDo(toDo));
                 break;
             case "deadline":
                 if (arr.length == 1) {
-                    throw new DukeException("\t\tSorry description of a deadline cannot be empty");
+                    throw new DukeException("Sorry description of a deadline cannot be empty");
                 }
                 String deadline = arr[1];
                 taskList.addTask(new Deadline(getMsg(deadline, " /by "), getDateTime(deadline, " /by ")));
                 break;
             case "event":
                 if (arr.length == 1) {
-                    throw new DukeException("\t\tSorry description of an event cannot be empty");
+                    throw new DukeException("Sorry description of an event cannot be empty");
                 }
                 String event = arr[1];
                 taskList.addTask(new Event(getMsg(event, " /at "), getDateTime(event, " /at ")));
@@ -70,7 +70,7 @@ public class Execute {
         //TODO handle case when text does not contain "/at" or "/by"
         int index = text.indexOf(search);
         if (index == -1) {
-            throw new DukeException("\t\tStatement does not contain " + search);
+            throw new DukeException("Statement does not contain " + search);
         }
         return text.substring(index + 5);
     }
@@ -79,7 +79,7 @@ public class Execute {
         //TODO handle case when text does not contain "/at" or "/by"
         int index = text.indexOf(search);
         if (index == -1) {
-            throw new DukeException("\t\tStatement does not contain " + search);
+            throw new DukeException("Statement does not contain " + search);
         }
         return text.substring(0, index);
     }

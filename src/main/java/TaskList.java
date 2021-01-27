@@ -26,7 +26,7 @@ public class TaskList {
 
     public void deleteTask(int index) throws DukeException {
         if (index < 1 || index > getNoOfTasks()) {
-            throw new DukeException("\t\tThere is no such task number!");
+            throw new DukeException("There is no such task number!");
         }
         Task task = list.get(index - 1);
         this.list.remove(index - 1);
@@ -57,12 +57,7 @@ public class TaskList {
 
     //TODO consider throwing an exception (eg. DukeException)
     public void complain() throws DukeException {
-        throw new DukeException("\t\tSorry I do not understand that!");
-    }
-
-    public void exit() {
-        System.out.println("\t\t" + "See you again soon!");
-        this.isAlive = false;
+        throw new DukeException("Sorry I do not understand that!");
     }
 
     public void markAsDone(int num) throws DukeException{
@@ -81,9 +76,6 @@ public class TaskList {
 
     @Override
     public String toString() {
-//        return "\t\tHello! I'm Duke" +
-//                "\n" +
-//                "\t\tWhat can I do for you?\n";
         return "TaskList for Duke";
     }
 }

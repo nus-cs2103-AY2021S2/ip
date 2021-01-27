@@ -23,7 +23,7 @@ public class Deadline extends Task{
             this.localDateStr = dateTimeFormatter2.format(localDate);
         }
         catch (DateTimeParseException e) {
-            throw new DukeException("\t\tDate cannot be parsed");
+            throw new DukeException("Date cannot be parsed");
         }
     }
 
@@ -35,7 +35,7 @@ public class Deadline extends Task{
             this.localDateStr = formatter1.format(dateTime);
         }
         catch (DateTimeParseException e) {
-            throw new DukeException("\t\tDate and time cannot be parsed");
+            throw new DukeException("Date and time cannot be parsed");
         }
     }
 

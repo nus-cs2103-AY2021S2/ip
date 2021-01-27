@@ -3,24 +3,26 @@ import java.util.Scanner;
 public class Duke {
     private Storage storage;
     private TaskList taskList;
+    private Ui ui;
 
     public Duke() {
+        this.ui = new Ui();
         this.storage = new Storage();
         try {
             this.taskList = new TaskList(storage.loadFile());
-            System.out.println("\t\tLoading existing duke.txt file");
+            this.ui.loadingSuccess();
         }
         catch (DukeException e) {
-            System.out.println(e.getMessage());
+            this.ui.showError(e.getMessage());
             this.taskList = new TaskList();
-            System.out.println("\t\tA new duke.txt file will be created when you exit");
+            this.ui.loadingFailure();
         }
     }
 
 
     public void run() {
-        System.out.println(this);
-        Execute exec = new Execute(taskList);
+        this.ui.welcomeMsg();
+        Parser exec = new Parser(taskList);
         Scanner sc = new Scanner(System.in);
         String command;
 
@@ -29,29 +31,23 @@ public class Duke {
             try {
                 exec.executeCommand(command);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
             }
             if (!exec.isAlive) {
                 try {
                     this.storage.saveFile(this.taskList.list);
+                    ui.byeMsg();
                     sc.close();
                     break;
                 }
                 catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    ui.showError(e.getMessage());
                     break;
                 }
 
             }
 
         }
-    }
-
-    @Override
-    public String toString() {
-        return "\t\tHello! I'm Duke" +
-                "\n" +
-                "\t\tWhat can I do for you?\n";
     }
 
     public static void main(String[] args) {
