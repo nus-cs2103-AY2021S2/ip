@@ -27,7 +27,7 @@ public class Ui {
         return input;
     }
 
-    
+
 
     /**
      * Prints all the tasks stored on the TaskList.
