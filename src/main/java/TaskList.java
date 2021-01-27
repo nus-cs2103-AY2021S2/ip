@@ -31,4 +31,20 @@ public class TaskList {
         return joined;
     }
 
+    /**
+     * Returns list of all events.
+     */
+    @Override
+    public String toString() {
+        String stringToReturn = "";
+        for (int i=1; i<=this.getSize(); i++) {
+            if (i==this.getSize()) {
+                stringToReturn += "  " + i + ". " + this.getTask(i);
+            } else {
+                stringToReturn += "  " + i + ". " + this.getTask(i) + "\n";
+            }
+        }
+        return stringToReturn;
+    }
+
 }

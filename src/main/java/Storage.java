@@ -23,7 +23,6 @@ public class Storage {
             while (s.hasNext()) {
                 Duke.readTaskList(s.nextLine());
             }
-            Duke.printList();
         }
     }
 
