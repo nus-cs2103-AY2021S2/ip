@@ -1,6 +1,11 @@
+<<<<<<< .merge_file_a20048
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+=======
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+>>>>>>> .merge_file_a00388
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,6 +42,9 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println("Sorry boss something went wrong: ");
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Sorry boss something went wrong: ");
+                System.out.println("Please follow the Date-Time format: YYYY-MM-DD TIME");
             } finally {
                 System.out.println("\nHit me up boss.");
             }
