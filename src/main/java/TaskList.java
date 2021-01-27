@@ -89,4 +89,18 @@ public class TaskList {
         }
         return toPrint;
     }
+
+    public List<Task> findKeyword(String keyword) {
+        List<Task> tasksWithKeywords = new ArrayList<>();
+        for (Task t : tasks) {
+            String[] wordsOfDescription = t.getDescription().split(" ");
+            for (int i = 0; i < wordsOfDescription.length; i++) {
+                if (wordsOfDescription[i].equals(keyword)) {
+                    tasksWithKeywords.add(t);
+                    break;
+                }
+            }
+        }
+        return tasksWithKeywords;
+    }
 }
