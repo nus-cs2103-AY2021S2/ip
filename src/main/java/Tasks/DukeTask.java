@@ -1,3 +1,5 @@
+package Tasks;
+
 public class DukeTask {
     protected String name;
     protected boolean isDone;

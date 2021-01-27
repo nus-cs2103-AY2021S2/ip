@@ -1,18 +1,21 @@
+package Tasks;
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends DukeTask {
     private final LocalDate deadline;
 
-    public Deadlines(String name, LocalDate deadline) {
+    public Deadlines(String name, String deadline) {
         super(name, TaskType.DEADLINE);
-        this.deadline = deadline;
+        LocalDate date = LocalDate.parse(deadline);
+        this.deadline = date;
     }
 
-    public Deadlines(String name, boolean isDone, LocalDate deadline) {
+    public Deadlines(String name, boolean isDone, String deadline) {
         super(name, isDone, TaskType.DEADLINE);
-        this.deadline = deadline;
+        LocalDate date = LocalDate.parse(deadline);
+        this.deadline = date;
     }
 
     private String convertDate() {
@@ -31,7 +34,7 @@ public class Deadlines extends DukeTask {
 
     @Override
     public DukeTask markDone() {
-        return new Deadlines(this.name, true, this.deadline);
+        return new Deadlines(this.name, true, this.deadline.toString());
     }
 }
 
