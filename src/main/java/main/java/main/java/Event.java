@@ -2,7 +2,7 @@ package main.java;
 import java.time.LocalDate;
 
 class Event extends Task {
-    protected final LocalDate date;
+    private final LocalDate date;
 
     public Event(String eventInfo, LocalDate date) {
         super(eventInfo);
