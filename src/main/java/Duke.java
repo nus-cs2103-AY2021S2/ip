@@ -81,7 +81,7 @@ public class Duke {
             throw new DukeException("☹ Sorry, please enter a valid deadline format.\n\tCommand: deadline [description] /by [deadline]");
         }
 
-        Task newTask = new Deadline(deadlineDetails[0].trim(), deadlineDetails[1].trim());
+        Task newTask = new Deadline(deadlineDetails[0].trim(), DateParser.parseDateTime(deadlineDetails[1].trim()));
         addTask(newTask);
     }
 
@@ -95,7 +95,7 @@ public class Duke {
             throw new DukeException("☹ Sorry, please enter a valid event format.\n\t Command: event [description] /at [datetime]");
         }
 
-        Task newTask = new Event(eventDetails[0].trim(), eventDetails[1].trim());
+        Task newTask = new Event(eventDetails[0].trim(), DateParser.parseDateTime(eventDetails[1].trim()));
         addTask(newTask);
     }
 
