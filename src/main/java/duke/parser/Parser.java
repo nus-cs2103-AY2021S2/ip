@@ -1,18 +1,17 @@
 package duke.parser;
 
 import duke.command.Command;
-import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.CommandNotFoundException;
 import duke.exception.InvalidDateTimeException;
-
-
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -42,6 +41,8 @@ public class Parser {
             command = new ExitCommand();
         } else if (potentialCommand.equalsIgnoreCase("DELETE")) {
             command = new DeleteCommand(input);
+        } else if (potentialCommand.equalsIgnoreCase("FIND")) {
+            command = new FindCommand(input);
         } else {
             throw new CommandNotFoundException("What do you mean? I do not know this command.");
         }

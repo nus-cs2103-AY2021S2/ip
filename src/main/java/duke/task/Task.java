@@ -9,6 +9,10 @@ public class Task {
         isDone = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     /**
      * This is the setter to for the "isDone"
      * status of the Task.
