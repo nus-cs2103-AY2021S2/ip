@@ -8,8 +8,17 @@ import java.util.Scanner;
 
 import java.time.LocalDate;
 
+/**
+ * Stores the task list so that it can be recovered even after the user exits from the program.
+ */
 public class Storage {
 
+    /**
+     * When the user starts the program the saved task list is recovered from the saved file.
+     * @param storage Array List to enter the saved task list into.
+     * @return Returns the number of tasks that is now in the Array List.
+     * @throws FileNotFoundException In the case that the file where the task list was saved cannot be found.
+     */
     static int uploadFromHardDrive(ArrayList<Task> storage) throws FileNotFoundException {
         int count = 0;
         File f = new File("./data/tasks.txt");
@@ -40,6 +49,11 @@ public class Storage {
         return count;
     }
 
+    /**
+     * When the user exits a program the current task list is saved to a file.
+     * @param storage An Array List containing the tasks to be saved to the file.
+     * @throws IOException In case the file cannot be found.
+     */
     static void uploadToHardDrive(ArrayList<Task>
                                              storage) throws IOException {
         FileWriter fw = new FileWriter("./data/tasks.txt");

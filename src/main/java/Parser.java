@@ -1,7 +1,14 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Parses the inputs given by the user.
+ */
 public class Parser {
+    /**
+     * Determines the keyword and processes the input based on the keyword.
+     * @throws IOException In case of user errors.
+     */
     static void parse() throws IOException {
         Scanner sc = new Scanner(System.in);
         boolean canExitNow = false;
@@ -56,6 +63,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks whether a given String can be parsed as an Integer.
+     * @param s A string.
+     * @throws InvalidNumberException Thrown in the case where the String is not an Integer.
+     */
     static void isInt(String s) throws InvalidNumberException {
         try {
             int x = Integer.parseInt(s);
@@ -67,7 +79,14 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Checks whether an array (spl) is of the given length (x).
+     * This determines whether the format of the input is correct.
+     * @param spl Array of strings.
+     * @param x Length the array is supposed to be checked for.
+     * @param task To throw an error message dependent on the type of task.
+     * @throws InvalidTaskFormatException Thrown is the array is not of the given length.
+     */
     static void checkSplLength(String[] spl, int x, String task) throws InvalidTaskFormatException {
         if (spl.length != x) {
             throw new InvalidTaskFormatException(Ui.InvalidTaskFormatExceptionMessage(task));
