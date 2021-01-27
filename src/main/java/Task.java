@@ -10,6 +10,15 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, int doneInt) {
+        this.description = description;
+        if (doneInt == 1){
+            this.isDone = true;
+        }else{
+            this.isDone = false;
+        }
+    }
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); //return tick or X symbols
     }
@@ -22,4 +31,11 @@ public class Task {
     public void changeTaskToDone(){
         isDone = true;
     }
+
+    public String toSaveFormat(){
+        int isDoneInt = isDone ? 1 : 0;
+        return isDoneInt + "|" + description;
+    }
+
+
 }

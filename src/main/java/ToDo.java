@@ -5,8 +5,17 @@ public class ToDo extends Task{
         super(description);
     }
 
+    public ToDo(String description, int doneInt){
+        super(description, doneInt);
+    }
+
     @Override
     public String toString() {
         return "[T]"+ super.toString();
+    }
+
+    @Override
+    public String toSaveFormat(){
+        return "T|" + super.toSaveFormat();
     }
 }

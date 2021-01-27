@@ -1,14 +1,19 @@
 package main.java;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class ListManager extends Manager {
     protected ArrayList<Task> TaskArray;
     protected int numberOfTasks;
+    protected String pathOfDataFile;
 
-    public ListManager(){
-        TaskArray = new ArrayList<Task>();
-        numberOfTasks = 0;
+    public ListManager(String pathOfDataFile){
+        this.TaskArray = new ArrayList<Task>();
+        this.numberOfTasks = 0;
+        this.pathOfDataFile = pathOfDataFile;
     }
 
     public String welcomeLine(){
@@ -131,7 +136,7 @@ public class ListManager extends Manager {
     }
 
     public String handleTaskRelatedUserInput(String userInput) throws DukeException{
-
+        String outputString;
         if(checkStringStartingEquals(userInput, "done")){
             // done block
             int length = "done".length();
@@ -144,8 +149,7 @@ public class ListManager extends Manager {
             }else {
                 try {
                     int taskInt = Integer.parseInt(userInput.split(" ")[1]);
-                    String outputString = this.checkTaskAsDone(taskInt);
-                    return outputString;
+                    outputString = this.checkTaskAsDone(taskInt);
                 } catch (NumberFormatException e) {
                     throw new DukeException(defaultFormatting("Error! You must give a number " +
                             "corresponding to a task on the list to check as done"));
@@ -165,8 +169,7 @@ public class ListManager extends Manager {
             }else {
                 try {
                     int taskInt = Integer.parseInt(userInput.split(" ")[1]);
-                    String outputString = this.deleteTask(taskInt);
-                    return outputString;
+                    outputString = this.deleteTask(taskInt);
                 } catch (NumberFormatException e) {
                     throw new DukeException(defaultFormatting("Error! You must give a number " +
                             "corresponding to a task on the list to delete"));
@@ -177,12 +180,14 @@ public class ListManager extends Manager {
         }else{
             // event deadline to-do block
             try{
-                String outputString = this.addTask(userInput);
-                return outputString;
+                outputString = this.addTask(userInput);
             }catch (DukeException dukeException){
                 throw dukeException;
             }
         }
+
+        saveToFile();
+        return outputString;
     }
 
     public String deleteTask(int taskInt) throws DukeException{
@@ -209,5 +214,52 @@ public class ListManager extends Manager {
 
     private static boolean checkStringEquals(String userInput, String stringToCheck){
         return userInput.equals(stringToCheck) || userInput.equals(stringToCheck + " ");
+    }
+
+    private void saveToFile(){
+        try {
+            Writer fileWriter = new FileWriter("data/dukedata.txt", false);
+            for (int i = 0; i < TaskArray.size(); i++) {
+                String line = TaskArray.get(i).toSaveFormat();
+                fileWriter.write(line + "\n");
+            }
+            fileWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void restoreDataFromDataFile() throws FileNotFoundException{
+        try{
+            File dukeData = new File(pathOfDataFile);
+            Scanner dataReader = new Scanner(dukeData);
+
+            while (dataReader.hasNextLine()){
+                String data = dataReader.nextLine();
+                String[] arr = data.split("\\|");
+
+                String taskSymbol = arr[0];
+                int doneInt = Integer.valueOf(arr[1]);
+                String description = arr[2];
+
+                if (taskSymbol.equals("T")){
+                    TaskArray.add(new ToDo(description, doneInt));
+                    numberOfTasks++;
+                }else if(taskSymbol.equals("D")){
+                    TaskArray.add(new Deadline(description, arr[3], doneInt));
+                    numberOfTasks++;
+                }else if(taskSymbol.equals("E")){
+                    TaskArray.add(new Event(description, arr[3], doneInt));
+                    numberOfTasks++;
+                }
+
+            }
+            dataReader.close();
+
+            System.out.println(defaultFormatting("Data Successfuly Restored"));
+        }catch(FileNotFoundException e){
+            throw e;
+        }
     }
 }
