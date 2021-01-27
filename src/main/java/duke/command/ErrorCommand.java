@@ -1,6 +1,6 @@
-package Duke.command;
+package duke.command;
 
-import Duke.exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 public class ErrorCommand extends Command{
 	public ErrorCommand() {

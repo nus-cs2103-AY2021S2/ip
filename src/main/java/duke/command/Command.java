@@ -1,4 +1,4 @@
-package Duke.command;
+package duke.command;
 
 import java.util.function.Function;
 

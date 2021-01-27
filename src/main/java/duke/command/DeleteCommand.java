@@ -1,8 +1,8 @@
-package Duke.command;
+package duke.command;
 
 
-import Duke.task.Task;
-import Duke.exceptions.DukeException;
+import duke.task.Task;
+import duke.exceptions.DukeException;
 
 public class DeleteCommand extends Command{
 	public DeleteCommand(String task, String date) {

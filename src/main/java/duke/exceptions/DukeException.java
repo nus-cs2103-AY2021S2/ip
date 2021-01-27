@@ -1,6 +1,6 @@
-package Duke.exceptions;
+package duke.exceptions;
 
-import Duke.ui.Ui;
+import duke.ui.Ui;
 
 
 /**

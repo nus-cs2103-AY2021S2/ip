@@ -1,6 +1,6 @@
-package Duke.ui;
+package duke.ui;
 
-import Duke.task.Task;
+import duke.task.Task;
 /**
  * A class that store all the possible String format for Duke for code simplicity.
  */

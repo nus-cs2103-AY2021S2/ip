@@ -1,10 +1,10 @@
-package Duke.command;
+package duke.command;
 
-import Duke.task.Todo;
-import Duke.task.Deadlines;
-import Duke.task.Event;
-import Duke.ui.Ui;
-import Duke.exceptions.DukeException;
+import duke.task.Todo;
+import duke.task.Deadlines;
+import duke.task.Event;
+import duke.ui.Ui;
+import duke.exceptions.DukeException;
 
 public class AddCommand extends Command{
 	public AddCommand(String instruction, String task, String date) {

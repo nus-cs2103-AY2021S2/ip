@@ -1,10 +1,10 @@
-package Duke.driver;
+package duke.driver;
 
 import java.util.Scanner;
-import Duke.ui.Ui;
-import Duke.utils.TaskStorage;
-import Duke.command.Command;
-import Duke.utils.Parser;
+import duke.ui.Ui;
+import duke.utils.TaskStorage;
+import duke.command.Command;
+import duke.utils.Parser;
 
 
 /**

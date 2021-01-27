@@ -1,4 +1,6 @@
-import Duke.driver.DukeDriver;
+package duke;
+
+import duke.driver.DukeDriver;
 
 
 /**
