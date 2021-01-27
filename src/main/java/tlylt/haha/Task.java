@@ -24,7 +24,8 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); //return [X] or [ ] symbols
+        //return [X] or [ ] symbols
+        return (isDone ? "[X]" : "[ ]");
     }
 
     public String getTypeIcon() {

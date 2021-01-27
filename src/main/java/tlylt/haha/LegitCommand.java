@@ -15,15 +15,15 @@ public enum LegitCommand {
         this.rep = rep;
     }
 
-    void setDetail(String detail) {
+    public void setDetail(String detail) {
         this.detail = detail;
     }
 
-    String getDetail() {
+    public String getDetail() {
         return detail;
     }
 
-    String getRep() {
+    public String getRep() {
         return rep;
     }
 
