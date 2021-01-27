@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package duke;
 
 public class Duke {
 
@@ -15,14 +15,11 @@ public class Duke {
     }
 
     public void run() {
-
-        Scanner sc = new Scanner(System.in);
         ui.greet();
         boolean byeFlag = false;
-
         while (!byeFlag) {
             try {
-                String input = sc.nextLine();
+                String input = ui.readInput();
                 Command command = parser.parseCommand(input);
                 switch (command) {
                 case TODO:

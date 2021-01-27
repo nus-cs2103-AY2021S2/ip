@@ -1,4 +1,7 @@
+package duke;
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Ui {
 
@@ -8,6 +11,11 @@ public class Ui {
 
     public void greet() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + lineSpacing);
+    }
+
+    public String readInput() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
     public void taskAddConfirmation(Task t, TaskList taskList) {
