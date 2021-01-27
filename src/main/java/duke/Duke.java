@@ -9,12 +9,20 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a program for task tracking.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath a path representing the location of duke save file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runner for duke.
+     * Read, process input and will output accordingly.
+     */
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
@@ -100,6 +112,13 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Throw DukeException with fixed message.
+     * This method will always throw a DukeException with a fixed message. If
+     * user input is invalid, this method can be used to throw an exception.
+     *
+     * @throws DukeException
+     */
     public static void throwDK() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

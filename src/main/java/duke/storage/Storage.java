@@ -12,9 +12,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class for handling saving and loading of data.
+ */
 public class Storage {
     private File saveFile;
 
+    /**
+     * Constructor for <code>Storage</code>.
+     *
+     * @param filePath a path where the file is to be saved or loaded
+     */
     public Storage(String filePath) {
         saveFile = new File(filePath);
         String[] token = filePath.split("/");
@@ -33,6 +41,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Save <code>TaskList</code> by writing to a file.
+     * This method will iterate through <code>TaskFile</code> and save it
+     * into a text file.
+     *
+     * @param tasks the TaskList needed to save
+     */
     public void save(TaskList tasks) {
         List<Task> list = tasks.getList();
         try {
@@ -48,6 +63,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Return a LinkedList of <code>Task</code> by reading from a file.
+     * This method will read through the saved file and return a list of <code>Task</code>.
+     *
+     * @return
+     * @throws DukeException
+     */
     public LinkedList<Task> load() throws DukeException{
         try {
             LinkedList<Task> list = new LinkedList<>();
