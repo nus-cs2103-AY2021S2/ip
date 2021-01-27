@@ -17,7 +17,13 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * Duke storage object. Handles storing, loading, and unloading of task history
+ */
 public class DukeStorage {
+    /**
+     * File name.
+     */
     protected String fileName;
     /**
      * Datetime parsed format.
@@ -25,6 +31,9 @@ public class DukeStorage {
     public static DateTimeFormatter format = DateTimeFormatter
             .ofPattern("dd/MM/yyyy, hh:mma", Locale.US);
 
+    /**
+     * Instantiates a new Duke storage.
+     */
     protected DukeStorage() {
         this.fileName = "storage/storage.txt";
         File file = new File(this.fileName);
@@ -39,6 +48,14 @@ public class DukeStorage {
             System.out.println("Task list found! All's good.");
         }
     }
+
+    /**
+     * Parse task.
+     *
+     * @param line the line
+     * @return the task
+     * @throws DukeException the duke exception
+     */
     protected Task parse(String line) throws DukeException {
         String[] currLine = line.split("\\|");
         if (currLine[0].length() < 4) {
@@ -82,6 +99,13 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Load tasks from stored history file.
+     *
+     * @return the array list
+     * @throws IOException   the io exception
+     * @throws DukeException the duke exception
+     */
     protected ArrayList<Task> load() throws IOException, DukeException {
         File file = new File(fileName);
         try {
@@ -101,6 +125,12 @@ public class DukeStorage {
         return taskList;
     }
 
+    /**
+     * Unload tasks into stored history file.
+     *
+     * @param taskList the task list
+     * @throws IOException the io exception
+     */
     protected void unload(DukeTaskList taskList) throws IOException {
         StringBuilder content = new StringBuilder();
         for (Task t : taskList.getTaskList()) {
