@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Represents a task with an event time.
+ */
 public class Event extends Task {
     protected final String eventTime;
 
@@ -8,6 +11,10 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Returns time of the event.
+     * @return event time
+     */
     public String getEventTime() {
         return eventTime;
     }

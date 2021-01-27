@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Creates an Event task.
+ */
 public class EventCommand extends Command{
     String description;
     String eventTime;
@@ -10,10 +13,18 @@ public class EventCommand extends Command{
         this.eventTime = eventTime;
     }
 
+    /**
+     * Returns description of event task.
+     * @return description of event task
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns event time of task.
+     * @return event time of task
+     */
     public String getEventTime() {
         return eventTime;
     }

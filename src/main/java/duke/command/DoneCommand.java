@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Completes a task.
+ */
 public class DoneCommand extends Command{
     String taskNumber;
 
@@ -8,6 +11,10 @@ public class DoneCommand extends Command{
         this.taskNumber = taskNumber;
     }
 
+    /**
+     * Returns index of task to be marked as done.
+     * @return task index
+     */
     public String getTaskNumber() {
         return taskNumber;
     }

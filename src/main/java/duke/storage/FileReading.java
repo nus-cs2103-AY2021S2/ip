@@ -11,6 +11,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FileReading {
+
+    /**
+     * Retrieves and loads list of task stored into task list.
+     * @param file the file that task information retrieved from
+     * @return task retrieved task list
+     * @throws IOException
+     */
     public static TaskList loadTask(File file) throws IOException {
         FileReader fr = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fr);

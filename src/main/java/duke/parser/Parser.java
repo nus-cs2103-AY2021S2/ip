@@ -16,8 +16,19 @@ import duke.utils.DateValidatorUsingDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
 
+    /**
+     * Parses user input into a command.
+     * @param userInput user input string
+     * @param bot a Duke object that manages task list operations
+     * @return user command
+     * @throws InvalidCommandException if user input is an unrecognised command
+     * @throws InvalidArgumentException if argument is missing from user input
+     */
     public static Command processInput(String userInput, Duke bot) throws InvalidCommandException, InvalidArgumentException {
         String[] starr = userInput.split(" ", 2);
         Command userCommand = null;
@@ -103,7 +114,11 @@ public class Parser {
         return userCommand;
     }
 
-
+    /**
+     * Parses user input date in "yyyy-mm-dd" or "yyyy-mm-dd HHHH" form as formatted string.
+     * @param date user input date
+     * @return user input date in the format "dd/mm/yyyy HHHH"
+     */
     public static String processDate(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d HHmm");
         DateValidator dateTimeValidator = new DateValidatorUsingDateFormat(dateTimeFormatter);
