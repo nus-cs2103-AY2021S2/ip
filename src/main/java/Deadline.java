@@ -31,9 +31,20 @@ public class Deadline extends Task{
         */
     }
 
-    public Deadline(String description, String by, int doneInt){
+    public Deadline(String description, String by, int doneInt) throws TaskException{
         super(description, doneInt);
         this.deadlineBy = by;
+
+        try {
+            String trimmed = deadlineBy.trim();
+            if (trimmed.substring(0,4).contains("-")) {
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatone);
+            }else{
+                dateBy = LocalDate.parse(deadlineBy.trim(), formattwo);
+            }
+        }catch(Exception e){
+            throw new TaskException("deadline must be of the format date-month-year, in numbers.");
+        }
     }
 
     @Override

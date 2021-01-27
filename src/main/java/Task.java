@@ -36,6 +36,4 @@ public class Task {
         int isDoneInt = isDone ? 1 : 0;
         return isDoneInt + "|" + description;
     }
-
-
 }

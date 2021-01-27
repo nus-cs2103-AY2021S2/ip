@@ -1,3 +1,1 @@
-T|1|program stuff
-E|0|sleep|tonight
-D|0|submit quiz|tonight
+T|0|lalala

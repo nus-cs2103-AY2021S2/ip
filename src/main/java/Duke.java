@@ -43,7 +43,7 @@ public class Duke {
         ListManager listManager = new ListManager(PATH);
         try {
             listManager.restoreDataFromDataFile();
-        }catch(FileNotFoundException e){
+        }catch(DukeException e){
             System.out.println(e.getMessage());
         }
 

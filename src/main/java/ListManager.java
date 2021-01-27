@@ -235,10 +235,12 @@ public class ListManager extends Manager {
         }
     }
 
-    public void restoreDataFromDataFile() throws FileNotFoundException{
+    public void restoreDataFromDataFile() throws DukeException{
         try{
             File dukeData = new File(pathOfDataFile);
             Scanner dataReader = new Scanner(dukeData);
+            int tempNumberOfTasks = 0;
+            ArrayList<Task> tempArray = new ArrayList<>();
 
             while (dataReader.hasNextLine()){
                 String data = dataReader.nextLine();
@@ -249,22 +251,29 @@ public class ListManager extends Manager {
                 String description = arr[2];
 
                 if (taskSymbol.equals("T")){
-                    TaskArray.add(new ToDo(description, doneInt));
-                    numberOfTasks++;
+                    tempArray.add(new ToDo(description, doneInt));
+                    tempNumberOfTasks++;
                 }else if(taskSymbol.equals("D")){
-                    TaskArray.add(new Deadline(description, arr[3], doneInt));
-                    numberOfTasks++;
+                    try {
+                        tempArray.add(new Deadline(description, arr[3], doneInt));
+                    }catch(TaskException e){
+                        throw new DukeException(defaultFormatting("Data Corrupted, failed to restore data."));
+                    }
+                    tempNumberOfTasks++;
                 }else if(taskSymbol.equals("E")){
-                    TaskArray.add(new Event(description, arr[3], doneInt));
-                    numberOfTasks++;
+                    tempArray.add(new Event(description, arr[3], doneInt));
+                    tempNumberOfTasks++;
                 }
 
             }
             dataReader.close();
-
+            numberOfTasks = numberOfTasks + tempNumberOfTasks;
+            for (int i = 0; i < tempNumberOfTasks; i++) {
+                TaskArray.add(tempArray.get(i));
+            }
             System.out.println(defaultFormatting("Data Successfuly Restored"));
         }catch(FileNotFoundException e){
-            throw e;
+            throw new DukeException(pathOfDataFile + " not found, failed to restore data.");
         }
     }
 }
