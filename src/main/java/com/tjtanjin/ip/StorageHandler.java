@@ -14,7 +14,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
- * The Storage class handles the saving/loading of tasks from hard disk.
+ * StorageHandler manages the saving/loading of tasks from hard disk and is managed through the
+ * TaskHandler.
  */
 public class StorageHandler {
 

@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
- * TaskList manages all tasks and their operations.
+ * TaskHandler manages all task operations. It is managed through the CommandHandler and works directly
+ * with StorageHandler to store/load tasks.
  */
 public class TaskHandler {
 

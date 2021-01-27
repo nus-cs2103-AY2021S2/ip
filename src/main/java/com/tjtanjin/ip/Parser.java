@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
- * The Parser class parses user input and deals directly with the CommandHandler for command execution.
+ * Parser class parses user input and returns a response. It also deals directly with the CommandHandler
+ * for command execution.
  */
 public class Parser {
 

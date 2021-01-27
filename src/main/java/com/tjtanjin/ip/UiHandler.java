@@ -3,7 +3,8 @@ package com.tjtanjin.ip;
 import java.util.Scanner;
 
 /**
- * Ui class handles direct interactions between the application and the user
+ * UiHandler sits between the user and the parser, working directly with both parties to communicate
+ * responses.
  */
 public class UiHandler {
 
