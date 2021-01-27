@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Duke is a personal AI assistant that allows users to record down their task list
@@ -33,8 +33,6 @@ public class Duke {
                 ui.showError(e.getMessage());
             } catch (DukeMissingInputException e) {
                 ui.showError(e.getMessage());
-            } catch (NullPointerException e) {
-
             } finally {
                 ui.showLine();
             }

@@ -5,7 +5,7 @@ public class TaskList {
 
     private List<Task> tasks;
 
-    public TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
@@ -21,11 +21,11 @@ public class TaskList {
         tasks.remove(index);
     }
 
-    public List<Task> getTaskList(){
+    public List<Task> getTaskList() {
         return this.tasks;
     }
 
-    public int getTaskListLength(){
+    public int getTaskListLength() {
         return this.tasks.size();
     }
 

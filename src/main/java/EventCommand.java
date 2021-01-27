@@ -2,12 +2,13 @@ public class EventCommand extends Command {
 
     private String command;
 
-    public EventCommand(String command){
+    public EventCommand(String command) {
         this.command = command;
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         String description = "";
         String time = "";
         boolean foundAt = false;

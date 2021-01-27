@@ -7,21 +7,21 @@ public class Event extends Task {
      * @param description String to describe the task.
      * @param timeslot String to describe the timeslot.
      */
-    public Event(String description, String timeslot){
+    public Event(String description, String timeslot) {
         super(description);
         this.timeslot = timeslot;
     }
 
-    public Event(String description, String timeslot, boolean isDone){
+    public Event(String description, String timeslot, boolean isDone) {
         super(description, isDone);
         this.timeslot = timeslot;
     }
 
-    public String getTimeslot(){
+    public String getTimeslot() {
         return this.timeslot;
     }
 
-    public String changeTimeslot(String timeslot){
+    public String changeTimeslot(String timeslot) {
         this.timeslot = timeslot;
         return this.timeslot;
     }
