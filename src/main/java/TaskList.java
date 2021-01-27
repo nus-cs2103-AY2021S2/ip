@@ -25,7 +25,7 @@ public class TaskList {
         }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
-            Ui.showListItem(String.valueOf(i + 1) + "." + this.tasks.get(i));
+            Ui.showMessageInALine(String.valueOf(i + 1) + "." + this.tasks.get(i));
         }
         Ui.printLine();
     }

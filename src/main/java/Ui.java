@@ -6,7 +6,7 @@ public class Ui {
         System.out.println(LINE_AFTER_COMMAND);
     }
 
-    public static void showListItem(String item) {
+    public static void showMessageInALine(String item) {
         System.out.println(item);
     }
 
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     public static void finishTaskMessage(String message) {
-        Ui.showListItem("Nice! I've marked this task as done: ");
+        Ui.showMessageInALine("Nice! I've marked this task as done: ");
         System.out.println(" " + message);
         System.out.println(LINE_AFTER_COMMAND);
     }
