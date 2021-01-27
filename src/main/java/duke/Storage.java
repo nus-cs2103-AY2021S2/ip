@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.File;
@@ -37,21 +38,21 @@ public class Storage {
                     toBeSaved = String.format("%s|%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
-                            task.getDescription(),
+                            task.getTaskDescription(),
                             ((Deadline) task).getEndTime());
                     break;
                 case "TODO":
                     toBeSaved = String.format("%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
-                            task.getDescription());
+                            task.getTaskDescription());
                     // System.out.println("im at todo");
                     break;
                 case "EVENT":
                     toBeSaved = String.format("%s|%s|%s|%s",
                             task.getTaskType(),
                             task.getIsDone(),
-                            task.getDescription(),
+                            task.getTaskDescription(),
                             ((Event) task).getEventTime());
                     break;
                 default:
@@ -71,16 +72,17 @@ public class Storage {
             String[] storedTask = line.split("\\|");
             String taskType = storedTask[0];
             boolean isDone = storedTask[1].equals("true");
+            String taskDescription = storedTask[2];
             Task taskToBeAdded = null;
             switch (taskType) {
                 case "DEADLINE":
-                    taskToBeAdded = new Deadline(storedTask[2], storedTask[3], isDone);
+                    taskToBeAdded = new Deadline(taskDescription, LocalDate.parse(storedTask[3]), isDone);
                     break;
                 case "TODO":
-                    taskToBeAdded = new ToDo(storedTask[2], isDone);
+                    taskToBeAdded = new ToDo(taskDescription, isDone);
                     break;
                 case "EVENT":
-                    taskToBeAdded = new Event(storedTask[2], storedTask[3], isDone);
+                    taskToBeAdded = new Event(taskDescription, LocalDate.parse(storedTask[3]), isDone);
                     break;
                 default:
                     continue;

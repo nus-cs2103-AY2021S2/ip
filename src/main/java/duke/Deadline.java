@@ -6,12 +6,18 @@ public class Deadline extends Task{
     private static String taskType = "Deadline";
     private LocalDate endTime;
 
-    public Deadline(String description, LocalDate endTime) {
-        super(description);
+    public Deadline(String taskDescription, LocalDate endTime) {
+        super(taskDescription);
+        this.endTime = endTime;
+    }
+
+    public Deadline(String taskDescription, LocalDate endTime, boolean isDone) {
+        super(taskDescription, isDone);
         this.endTime = endTime;
     }
 
     public String getTaskType() {
+
         return taskType;
     }
 

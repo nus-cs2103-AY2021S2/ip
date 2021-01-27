@@ -2,21 +2,21 @@ package duke;
 
 public class Task {
     private static String taskType = "TASK";
-    private String description;
+    private String taskDescription;
     private boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
+    public Task(String taskDescription) {
+        this.taskDescription = taskDescription;
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
+    public Task(String taskDescription, boolean isDone) {
+        this.taskDescription = taskDescription;
         this.isDone = isDone;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
     public String getTaskType() {
@@ -25,7 +25,7 @@ public class Task {
 
     public Task setIsDone(boolean done) {
 
-        return new Task(this.description, done);
+        return new Task(this.taskDescription, done);
     }
 
     public boolean getIsDone() {

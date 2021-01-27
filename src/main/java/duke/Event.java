@@ -13,7 +13,7 @@ public class Event extends Task{
         this.eventTime = eventTime;
     }
 
-    public Event(String description, String eventTime, boolean isDone) {
+    public Event(String description, LocalDate eventTime, boolean isDone) {
         super(description, isDone);
         this.eventTime = eventTime;
     }
