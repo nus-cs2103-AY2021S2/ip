@@ -2,9 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    private LocalDate at;
+    private final LocalDate at;
 
-    public Event(String name, LocalDate at) throws DukeException {
+    public Event(String name, LocalDate at) {
         super(name);
         this.at = at;
     }
