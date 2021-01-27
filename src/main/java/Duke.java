@@ -10,9 +10,21 @@ import java.time.temporal.ChronoUnit;
 
 
 public class Duke {
-    private List commands;
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -23,36 +35,7 @@ public class Duke {
 
         String greeting = "Hello! I'm Duke\n" + "Please enter list below";
         dukePrint(greeting);
-        loop();
-    }
-
-//    private static class DukeException extends Exception {
-//        public DukeException(String errorMessage) {
-//            super(errorMessage);
-//        }
-//    }
-
-    private static void loadFile() {
-        try {
-            File myFile = new File("duke.txt");
-            Scanner myScanner = new Scanner(myFile);
-        } catch (Exception e) {
-            System.out.println("There is no file to load. No problem!");
-        }
-
-    }
-
-    private static void saveFile(List<Task> lt) {
-        try {
-            File myFile = new File("duke.txt");
-            if (myFile.exists()) {
-                myFile.delete(); //you might want to check if delete was successfull
-            } else {
-                myFile.createNewFile();
-            }
-        } catch (IOException e) {
-            System.out.println("Something bad happened");
-        }
+        new Duke("duke.txt").loop();
     }
 
 
@@ -71,13 +54,12 @@ public class Duke {
         System.out.println("----------------------\n");
     }
 
-    public static void loop() {
+    public void loop() {
         Scanner input = new Scanner(System.in);
         boolean end = false;
         boolean change = false;
 
         List<Task> myList = new ArrayList<>();
-        loadFile();
 
         while(!end) {
             change = false;
@@ -146,9 +128,6 @@ public class Duke {
 //                Task t = new Task(s);
 //                myList.add(t);
                 dukePrint("Please use todo, deadline, or event!");
-            }
-            if (change) {
-                saveFile(myList);
             }
         }
     }
