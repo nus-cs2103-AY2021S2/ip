@@ -12,6 +12,11 @@ public class TaskList {
         this.size = 0;
     }
 
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+        this.size = tasks.size();
+    }
+
     public void listing() {
         for (int i = 1; i < tasks.size() + 1; i++) {
             Ui.print(Aligner.align(i + "." + tasks.get(i - 1).toString()));
@@ -31,7 +36,7 @@ public class TaskList {
         return this.size;
     }
 
-    public String add(String fullCommand, String action) {
+    public String addByCommand(String fullCommand, String action) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         if (action.equals("todo")) {
             ToDo newToDo = new ToDo(fullCommand.substring(5));
@@ -63,7 +68,7 @@ public class TaskList {
         }
     }
 
-    public TaskList add(Task newTask) {
+    public TaskList addByTask(Task newTask) {
         this.tasks.add(newTask);
         this.size++;
         return this;

@@ -20,7 +20,7 @@ public class FileHandler {
             if (Integer.parseInt(inputs[1]) == 1) {
                 newTask.markAsDone();
             }
-            tasks = tasks.add(newTask);
+            tasks = tasks.addByTask(newTask);
         } else if (action.equals("D")) {
             String dateAndTime = inputs[3];
             String date = dateAndTime.split(" ")[0];
@@ -30,7 +30,7 @@ public class FileHandler {
             if (Integer.parseInt(inputs[1]) == 1) {
                 newDeadline.markAsDone();
             }
-            tasks = tasks.add(newDeadline);
+            tasks = tasks.addByTask(newDeadline);
         } else if (action.equals("E")) {
             String dateAndTime = inputs[3];
             String date = dateAndTime.split(" ")[0];
@@ -42,7 +42,7 @@ public class FileHandler {
             if (Integer.parseInt(inputs[1]) == 1) {
                 newEvent.markAsDone();
             }
-            tasks = tasks.add(newEvent);
+            tasks = tasks.addByTask(newEvent);
         } else {
             throw new DukeException("Sorry! No such command is allowed.");
         }
