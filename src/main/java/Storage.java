@@ -9,11 +9,17 @@ public class Storage {
         this.fileDir = fileDir;
     }
 
+    /**
+     * Loads TaskList saved on disk.
+     * If TaskList does not exist, initialise an empty TaskList.
+     *
+     * @return TaskList saved on disk, if it does not exist, an empty TaskList is returned instead.
+     * @throws DukeException If any error occurs while loading TaskList from disk.
+     */
     public TaskList load() throws DukeException {
         try {
             FileInputStream fileIn = new FileInputStream(fileDir);
             ObjectInputStream input = new ObjectInputStream(fileIn);
-//            ArrayList<Task> taskList = (ArrayList<Task>) input.readObject();
             TaskList taskList = (TaskList) input.readObject();
             input.close();
             fileIn.close();
@@ -26,6 +32,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves TaskList saved to disk.
+     *
+     * @param taskList TaskList to be stored to disk.
+     * @throws DukeException If any error occurs while saving TaskList to disk.
+     */
     public void save(TaskList taskList) throws DukeException {
         try {
             FileOutputStream fileOut = new FileOutputStream(fileDir);
