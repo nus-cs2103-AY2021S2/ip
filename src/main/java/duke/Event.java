@@ -1,8 +1,13 @@
 package duke;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Event extends Task {
 
+    @JsonProperty
     protected String at;
+
+    private Event() {}
 
     /**
      * Event (Task) constructor

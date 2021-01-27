@@ -1,18 +1,30 @@
 package duke;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+
 public class Duke {
+    private static final String workingDirPath = System.getProperty("user.dir");
+    private static final String saveFilePath = java.nio.file.Paths.get(workingDirPath, "saveFile.json").toString();
     private static final String divider = "\t____________________________________________________________\n";
     private static List<Task> tasks;
     private static BufferedReader in;
     private static BufferedWriter out;
+    private static File saveFile;
 
     /**
      * Entry point for Duke.Duke
@@ -21,7 +33,8 @@ public class Duke {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        tasks = new ArrayList<>();
+        load();
+
         in = new BufferedReader(new InputStreamReader(System.in));
         out = new BufferedWriter(new OutputStreamWriter(System.out));
 
@@ -80,6 +93,7 @@ public class Duke {
         }
         Todo todo = new Todo(input.substring(5));
         tasks.add(todo);
+        save();
         writeAddTask(todo);
     }
 
@@ -98,6 +112,7 @@ public class Duke {
         }
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
+        save();
         writeAddTask(deadline);
     }
 
@@ -116,6 +131,7 @@ public class Duke {
         }
         Event event = new Event(description, at);
         tasks.add(event);
+        save();
         writeAddTask(event);
     }
 
@@ -149,6 +165,7 @@ public class Duke {
         }
         Task task = tasks.get(selection - 1);
         task.markAsDone();
+        save();
         write("  [" + task.getStatusIcon() + "] " + task.getDescription());
     }
 
@@ -169,6 +186,7 @@ public class Duke {
         }
         Task task = tasks.get(selection - 1);
         tasks.remove(selection - 1);
+        save();
         writeDeleteTask(task);
     }
 
@@ -206,5 +224,29 @@ public class Duke {
             "  " + task,
             "Now you have " + tasks.size() + " tasks in the list."
         });
+    }
+
+    static void save() throws IOException {
+        try (BufferedOutputStream outSaveFile = new BufferedOutputStream(new FileOutputStream(saveFile, false))
+        ) {
+            // https://github.com/FasterXML/jackson-databind/pull/1309
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writerFor(new TypeReference<List<Task>>() {}).writeValue(outSaveFile, tasks);
+        }
+    }
+
+    static void load() throws IOException {
+        saveFile = new File(saveFilePath);
+        saveFile.createNewFile();
+
+        try (BufferedInputStream inSaveFile = new BufferedInputStream(new FileInputStream(saveFile))
+        ) {
+            // https://github.com/FasterXML/jackson-databind/pull/1309
+            ObjectMapper mapper = new ObjectMapper();
+            tasks = mapper.readerFor(new TypeReference<ArrayList<Task>>() {}).readValue(inSaveFile);
+        } catch (MismatchedInputException mie) {
+            // empty saveFile.json
+            tasks = new ArrayList<>();
+        }
     }
 }
