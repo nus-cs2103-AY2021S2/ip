@@ -1,5 +1,8 @@
 import java.util.*;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 enum Call {
@@ -8,14 +11,35 @@ enum Call {
 
 public class Duke {
     static String input = " ";
+    static File fileTest= new File("PreviousTaskList.txt");
+   
     static ArrayList<Task> list = new ArrayList<>();
+    
     public static void main(String[] args) throws Exception {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+        // System.out.println("file exists?: " + fileTest.exists());
+        if(fileTest.exists()) {
+            Scanner s = new Scanner(fileTest);
+            while (s.hasNext()) {
+                String current = s.nextLine().toLowerCase();
+                // System.out.println(current);
+                if(current.contains("todo")) {
+                    Task task = Todo.readTask(current);
+                    list.add(task);
+    
+                } else if (current.contains("deadline")) {
+                    list.add(Deadline.readTask(current));
+                } else if (current.contains("event")) {
+                    list.add(Event.readTask(current));
+                } else {
+                    if(s.hasNext()){
+                        current = s.nextLine();
+                    } else{
+                        throw new Exception("History saved corrupted");
+                    }
+                }
+            }
+        }
+
 
         String greet = "Hello! I'm Duke \n What can I do for you?";
         System.out.println(greet);
@@ -59,21 +83,27 @@ public class Duke {
             cleanInput();
         }
 
-        System.out.println("input was: " + input);
-        System.out.println("input is valid: " + validCommand());
+        // System.out.println("input was: " + input);
+        // System.out.println("input is valid: " + validCommand());
         System.out.println("Bye. Hope to see you again soon!");
         sc.close();
+
+        try {
+            byeCommand();
+        } catch (IOException io) {
+            System.out.print("Could not save list!");
+        }
     }
 
-    static void commandDone() {
+    static void commandDone() throws ArrayIndexOutOfBoundsException {
         try {
             String value = input.split(" ")[1];
             System.out.println(value);
             int val = Integer.parseInt(value);
             list.get(val - 1).isCompleted();
             System.out.println("Nice! I've marked this task as done:\n " + list.get(val - 1));
-        } catch (Exception e) {
-            throw e;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("Please key in which task number to tick off.");
         }
 
     }
@@ -88,9 +118,7 @@ public class Duke {
     }
 
     static void commandTodo() throws Exception{
-        System.out.println(input);
         String task = input.replaceFirst("todo", "");
-        System.out.println("task was: " + task);
         task = task.stripTrailing();
         if (task.isEmpty()) {
             throw new Exception("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -128,17 +156,39 @@ public class Duke {
     }
 
     static void commandList() {
-        System.out.println("Here are the tasks in your list:");
-        for(int i = 0; i < list.size(); i++) {
-            Task current = list.get(i);
-            System.out.println(i+1 + ". " + current);
+        if (list.size() == 0) {
+            System.out.print("You have 0 tasks in your list. ");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for(int i = 0; i < list.size(); i++) {
+                Task current = list.get(i);
+                System.out.println(i+1 + ". " + current);
+            }
         }
+
     }
 
     static boolean validCommand() {
         return input.contains("delete") || input.contains("event") || input.contains("done") ||
                 input.contains("todo") || input.contains("deadline") || input.contains("list");
     }
+
+    static void byeCommand() throws IOException {
+        FileWriter fw = new FileWriter("PreviousTaskList.txt");
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                if(i == 0) {
+                    fw.write(list.get(i).toCommand());
+                } else {
+                    fw.write(System.lineSeparator() + list.get(i).toCommand());
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fw.close();
+    }
+
 }
 
 
