@@ -2,6 +2,7 @@ public enum Queries {
     ADD,
     LIST,
     DONE,
+    DELETE,
     BYE;
 
     public static boolean containsValue(String value) {

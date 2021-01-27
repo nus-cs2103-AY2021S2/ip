@@ -84,9 +84,26 @@ public class Duke {
                         throw new DukeMissingDesException("DONE");
                     } catch (IndexOutOfBoundsException e) {
                         throw new DukeInvalidDesException("DONE");
+                    } catch (NumberFormatException e) {
+                        throw new DukeInvalidDesException("DONE");
                     }
                     break;
-
+                case DELETE:
+                    try {
+                        int taskNum = Integer.parseInt(userInput.split(" ")[1]);
+                        Task task = tasks.get(taskNum - 1);
+                        tasks.remove(taskNum - 1);
+                        response = "Noted. I've removed this task: \n"
+                                + " " + task + "\n";
+                        respond(response);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeMissingDesException("DELETE");
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new DukeInvalidDesException("DELETE");
+                    } catch (NumberFormatException e) {
+                        throw new DukeInvalidDesException("DELETE");
+                    }
+                    break;
                 case LIST:
                     for (int i = 0; i < tasks.size(); i++) {
                         Task t = tasks.get(i);
