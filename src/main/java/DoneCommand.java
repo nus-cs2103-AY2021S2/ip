@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
         try {
             Task task = taskList.markAsDone(taskIndex);
             return HEADER + task;
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ERROR_MESSAGE);
         }
     }
@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
         try {
             taskIndex = Integer.parseInt(input) - 1;
             return new DoneCommand(taskIndex);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);
         }
     }
