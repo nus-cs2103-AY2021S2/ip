@@ -100,4 +100,8 @@ public class Duke {
         return list.size();
     }
 
+    public void showTasksContainingKeyword(String keyword) {
+        Ui.showTasksToUser(list.tasksContainingKeyword(keyword));
+    }
+
 }

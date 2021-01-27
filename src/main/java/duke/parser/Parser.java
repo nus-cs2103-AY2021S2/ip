@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -52,7 +53,7 @@ public class Parser {
 
             if (userInputArray[0].equals("bye")) {
                 userCommand = new ByeCommand();
-            } else if (userInputArray[0].equals("list")) {
+            } else {
                 userCommand = new ListCommand();
             }
         } else {
@@ -104,11 +105,15 @@ public class Parser {
                     throw new InvalidArgumentException("Please input task due date using '/at (date)'!\n");
                 }
                 String[] s = a[0].split(" ", 2);
-                if (s.length == 1) {
+
+                if(s.length == 1) {
                     throw new InvalidArgumentException("Please input task description!\n");
                 }
                 String eventTime = a[1].strip();
                 userCommand = new EventCommand(a[0], processDate(eventTime));
+                break;
+            case "find":
+                userCommand = new FindCommand(userInputArray[1]);
                 break;
             }
         }

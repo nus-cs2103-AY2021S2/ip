@@ -31,7 +31,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
-     * @param id
+     * @param id index of task to be marked as done
      */
     public void doneTask(int id) {
         lst.get(id).markAsDone();
@@ -43,6 +43,16 @@ public class TaskList {
      */
     public List<Task> getLst() {
         return lst;
+    }
+
+    public List<Task> tasksContainingKeyword(String keyword) {
+        List<Task> tasksWithKeyword = new ArrayList<>();
+        for (Task task : lst) {
+            if (task.contains(keyword)) {
+                tasksWithKeyword.add(task);
+            }
+        }
+        return  tasksWithKeyword;
     }
 
     public int size() {

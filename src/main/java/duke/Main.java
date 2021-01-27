@@ -6,6 +6,7 @@ import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -54,7 +55,6 @@ public class Main {
                 TaskList previous = Storage.runFile(file);
                 bot = new Duke(previous);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,12 +91,12 @@ public class Main {
             bot.addTask(((EventCommand) userCommand).getDescription(), userCommand.getCommand(),
                     ((EventCommand) userCommand).getEventTime());
             Storage.saveFile(file, bot);
-
         } else if (userCommand instanceof DeleteCommand) {
             bot.removeTask(((DeleteCommand) userCommand).getTaskNumber());
             Storage.saveFile(file, bot);
+        } else if(userCommand instanceof FindCommand) {
+            bot.showTasksContainingKeyword(((FindCommand) userCommand).getKeyword());
         }
-
     }
 
     /**
