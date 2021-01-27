@@ -29,4 +29,16 @@ public class ParserTest {
             assertEquals(new DukeException("Invalid description of deadline").toString(),e.toString());
         }
     }
+
+    @Test
+    public void ParserToDo() {
+        Parser parser = new Parser();
+        try {
+            assertEquals(null, parser.processCommand("todo"));
+            fail();
+        } catch (DukeException e) {
+            assertEquals(new DukeException("Invalid input, description " +
+                    "of todo cannot be empty").toString(),e.toString());
+        }
+    }
 }
