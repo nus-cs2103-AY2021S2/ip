@@ -123,7 +123,7 @@ public class Duke {
                     input = sc.nextLine();
                 }
             }
-            System.out.println("Have a good day, Master.");
+            System.out.println("Have a good day, Master. Take care.");
             break;
         }
         System.exit(1);
