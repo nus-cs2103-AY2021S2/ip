@@ -66,7 +66,7 @@ public class Task {
 
     public String export() {
         String done = this.done ? " 1" : " 0";
-        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at " + this.date;
+        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at " + this.time;
         return this.type + done + this.task + deadline;
     }
 }
