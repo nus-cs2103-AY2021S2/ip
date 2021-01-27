@@ -1,5 +1,5 @@
 public class NoKeywordException extends Exception{
-    public NoKeywordException(String error) {
-        super(error);
+    public NoKeywordException(String err) {
+        super(err);
     }
 }
