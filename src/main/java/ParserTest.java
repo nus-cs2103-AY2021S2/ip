@@ -7,8 +7,13 @@ import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * A class that conducts JUnit test on the methods from Parser class.
+ */
 class ParserTest {
-
+    /**
+     * A test for the parse() method in Parse class.
+     */
     @Test
     void parse() throws IOException, DukeException {
         Parser.parse("todo borrow book");
@@ -21,6 +26,9 @@ class ParserTest {
                 , LocalTime.parse("17:30")).toString(), TaskList.tasks.get(2).toString());
     }
 
+    /**
+     * A test for the format() method in Parse class.
+     */
     @Test
     void format() {
         assertEquals("01/02/2001", Parser.format("1/2/2001"));
