@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class in an abstraction of a file loading and a saving system.
+ */
 public class Storage {
     public static final String DEFAULT_STORAGE_FILE = "data/duke.txt";
     public String filePath;
@@ -19,16 +22,29 @@ public class Storage {
 
     }
 
+    /**
+     * Constucts an instance of the Storage class.
+     */
     public Storage() {
         this.filePath = "data";
         this.f = new File(filePath, "duke.txt");
         this.f.getParentFile().mkdirs();
     }
 
+    /**
+     * Checks the validity of a filepath
+     * @param filePath the path of the file that is to be checked for validity
+     * @return boolean value stating is the file is a valid one
+     */
     public boolean isValidFileExtension(String filePath) {
         return filePath.endsWith(".txt");
     }
 
+    /**
+     * Loads duke.txt file from the local disk.
+     * @return a list of tasks that is written in the duke.txt file
+     * @throws DukeException an exception when loading a file from the local disk
+     */
     public ArrayList<Task> loadFile() throws DukeException {
 
         ArrayList<Task> taskArr = new ArrayList<>();
@@ -46,6 +62,11 @@ public class Storage {
 
     }
 
+    /**
+     * Saves a file to the disk with task details.
+     * @param TaskArr a list of tasks that needs to be saved to the disk
+     * @throws DukeException an exception when saving the file to the local disk
+     */
     public void saveFile(ArrayList<Task> TaskArr) throws DukeException {
         try {
             FileWriter fw = new FileWriter(DEFAULT_STORAGE_FILE);
@@ -59,6 +80,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts strings to Task instances
+     * @param task the task string that need to be converted to a Task Object
+     * @return Returns the task object
+     * @throws DukeException throws exception
+     */
     public Task stringToTask(String task) throws DukeException{
         String arr[] = task.split(", ");
         Task result;
@@ -99,6 +126,11 @@ public class Storage {
         return result;
     }
 
+    /**
+     * Converts Tasks to string
+     * @param task the task object that need to be converted to a String
+     * @return throws exception 
+     */
     public String taskToString(Task task) {
         int num = 0;
         String result = "";
