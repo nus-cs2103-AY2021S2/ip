@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Stores tasks as "{isDone ? 1 : 0} {command to create task}" in individual lines.
  */
 public class Storage {
-    private File file;
+    private final File file;
 
     private Storage(File file) {
         this.file = file;
