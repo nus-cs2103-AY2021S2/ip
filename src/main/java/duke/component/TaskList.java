@@ -10,10 +10,18 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Creates an empty TaskList.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a TaskList with tasks loaded from a string array.
+     * @param lines
+     * @throws WrongFormatException
+     */
     public TaskList(String[] lines) throws WrongFormatException {
         this.tasks = new ArrayList<>();
         for (String line : lines) {
@@ -42,6 +50,11 @@ public class TaskList {
             tasks.add(t);
         }
     }
+
+    /**
+     * Gets the list of tasks.
+     * @return
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }

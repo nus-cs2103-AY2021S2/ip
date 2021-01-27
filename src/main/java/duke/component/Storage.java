@@ -11,10 +11,19 @@ import java.util.ArrayList;
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a Storage with specified filePath.
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads lines from the specified filePath.
+     * @return
+     * @throws IOException
+     */
     public String[] load() throws IOException {
         ArrayList<String> lines = new ArrayList<>();
         BufferedReader br = null;
@@ -33,6 +42,11 @@ public class Storage {
         return lines.toArray(new String[lines.size()]);
     }
 
+    /**
+     * Writes lines into the specified filePath.
+     * @param tl
+     * @throws IOException
+     */
     public void save(TaskList tl) throws IOException {
         BufferedWriter bw = null;
         try {
