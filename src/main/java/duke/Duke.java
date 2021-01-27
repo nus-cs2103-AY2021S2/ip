@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -120,7 +121,21 @@ public class Duke {
             dukeResponse.deleteTask(deletedTask, dukeTaskList.size());
             break;
         case ("list"):
-            dukeResponse.listTasks(dukeTaskList);
+            dukeResponse.listTasks(dukeTaskList, false);
+            break;
+        case ("find"):
+            if (parsedInput.length < 2) {
+                throw new DukeMissingArgumentsException();
+            }
+            String subString = parsedInput[1];
+            ArrayList<Task> searchedList = new ArrayList<>();
+            for (Task t : dukeTaskList.getTaskList()) {
+                if (t.getDescription().contains(subString)) {
+                    searchedList.add(t);
+                }
+            }
+            DukeTaskList dukeSearchTaskList = new DukeTaskList(searchedList);
+            dukeResponse.listTasks(dukeSearchTaskList, true);
             break;
         case ("done"): {
             if (parsedInput.length < 2) {

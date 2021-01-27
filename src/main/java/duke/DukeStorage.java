@@ -52,7 +52,7 @@ public class DukeStorage {
 
         switch (type) {
         case("Todo"): {
-            return new Todo(description);
+            return new Todo(currLine[1].substring(1));
         }
         case("Deadline"): {
             if (currLine[2].length() < 1) {
