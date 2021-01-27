@@ -12,3 +12,107 @@
     What can I do for you?
     ____________________________________________________________
 
+    ____________________________________________________________
+     ☹ OOPS!!! The description of a todo cannot be empty.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+        [T][ ] return book
+    Now you have 1 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of a deadline cannot be empty.
+    deadline: Adds a task that needs to be done before a specific date and time.
+    Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: deadline return book /by 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of a deadline cannot be empty.
+    deadline: Adds a task that needs to be done before a specific date and time.
+    Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: deadline return book /by 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of a deadline cannot be empty.
+    deadline: Adds a task that needs to be done before a specific date and time.
+    Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: deadline return book /by 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The date and time format of a deadline is wrong.
+    deadline: Adds a task that needs to be done before a specific date and time.
+    Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: deadline return book /by 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of a deadline cannot be empty.
+    deadline: Adds a task that needs to be done before a specific date and time.
+    Parameters: TASK_DESCRIPTION /by DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: deadline return book /by 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+        [D][ ] submit project (by: Jan 29 2021 08:12am)
+    Now you have 2 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or  date/time of an event cannot be empty.
+    event: Adds a task that starts at a specific date and time and ends at a specific date and time.
+    Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: event project meeting /at 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of an event cannot be empty.
+    event: Adds a task that starts at a specific date and time and ends at a specific date and time.
+    Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: event project meeting /at 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of an event cannot be empty.
+    event: Adds a task that starts at a specific date and time and ends at a specific date and time.
+    Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: event project meeting /at 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The date and time format of an event is wrong.
+    event: Adds a task that starts at a specific date and time and ends at a specific date and time.
+    Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: event project meeting /at 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    OOPS!!! The description or date/time of an event cannot be empty.
+    event: Adds a task that starts at a specific date and time and ends at a specific date and time.
+    Parameters: TASK_DESCRIPTION /at DATE(yyyy-MM-dd) START_TIME(HHmm)-END_TIME(HHmm)
+    Example: event project meeting /at 2021-01-27 1800-2000
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Got it. I've added this task:
+        [E][ ] submit project (at: Jan 29 2021 08:12am)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+    Here are the tasks in your list:
+    1. [T][ ] return book
+    2. [D][ ] submit project (by: Jan 29 2021 08:12am)
+    3. [E][ ] submit project (at: Jan 29 2021 08:12am)
+    Now you have 3 tasks in the list.
+    ____________________________________________________________
+
+    ____________________________________________________________
+     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+    ____________________________________________________________
+

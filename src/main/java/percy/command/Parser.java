@@ -27,11 +27,13 @@ public class Parser {
         case DeadlineCommand.COMMAND:
             return new DeadlineCommand(getDeadlineDescription(), getDeadlineDate(), getDeadlineTime());
         case DoneCommand.COMMAND:
-            return new DoneCommand(this.getTaskNumber());
+            return new DoneCommand(getTaskNumber());
         case ListCommand.COMMAND:
             return new ListCommand();
         case DeleteCommand.COMMAND:
-            return new DeleteCommand(this.getTaskNumber());
+            return new DeleteCommand(getTaskNumber());
+        case ByeCommand.COMMAND:
+            return new ByeCommand();
         default:
             return new UnknownCommand();
         }
@@ -115,7 +117,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             ArrayList<String> arr = new ArrayList<String>();
             arr.add("OOPS!!! The description or date/time of a deadline cannot be empty.");
-            arr.addAll(EventCommand.USAGE_GUIDE);
+            arr.addAll(DeadlineCommand.USAGE_GUIDE);
             throw new PercyException(UserInterface.makeMsg(arr));
         }
     }
