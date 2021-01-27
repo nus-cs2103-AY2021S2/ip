@@ -1,13 +1,10 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
 
     /** List of tasks added by the user */
-    private static List<Task> tasks = Storage.getData();
+    private static final List<Task> tasks = Storage.getData();
 
     /**
      * Performs the specified action.
@@ -15,7 +12,7 @@ public class Duke {
      * @param command Command input by the user.
      * @throws InvalidCommandException If the command cannot be recognised.
      */
-    public static void runCommand(String command) throws InvalidCommandException{
+    public static void runCommand(String command) throws InvalidCommandException {
         if (command.equals("list")) {
             TaskList.printList(tasks);
         } else if (Parser.parsedCommand(command).equals("done")) {

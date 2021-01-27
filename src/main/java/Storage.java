@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.List;
 
 public class Storage {
 
-    private static Path fileLocation = Paths.get("./data", "duke.txt");
-    private static Path directoryLocation = Paths.get("./data");
     public static ArrayList<Task> data;
+    private static final Path fileLocation = Paths.get("./data", "duke.txt");
+    private static final Path directoryLocation = Paths.get("./data");
 
     private static void createFile() {
         try {
@@ -38,7 +37,7 @@ public class Storage {
         try {
             Files.createDirectory(directoryLocation);
             System.out.println("directory created");
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
 
@@ -52,7 +51,7 @@ public class Storage {
                     .filter(task -> !task.isEmpty())
                     .forEach(task -> {
                         String typeOfTask = Parser.parseTypeOfTask(task);
-                       String isDone = Parser.parseCompletionStatus(task);
+                        String isDone = Parser.parseCompletionStatus(task);
                         String name = Parser.parseName(task);
                         LocalDateTime time = Parser.parseTime(task);
                         if (typeOfTask.equals("T")) {
@@ -74,16 +73,16 @@ public class Storage {
                             }
                         }
                     });
-            } catch (IOException e) {
-                throw new UnableToLoadDataException();
-            }
+        } catch (IOException e) {
+            throw new UnableToLoadDataException();
+        }
         return tasks;
     }
 
-    public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException{
+    public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException {
         try {
             BufferedWriter writer = Files.newBufferedWriter(fileLocation, StandardCharsets.UTF_8);
-            for (Task task: tasks) {
+            for (Task task : tasks) {
                 writer.write(task.getSaveString());
                 writer.write("\n");
                 writer.flush();
@@ -96,11 +95,11 @@ public class Storage {
 
     public static ArrayList<Task> getData() {
         boolean directoryExists = checkForDirectory();
-        if(!directoryExists) {
+        if (!directoryExists) {
             createDirectory();
         }
         boolean fileExists = checkForFile();
-        if(!fileExists) {
+        if (!fileExists) {
             createFile();
             data = new ArrayList<>();
         } else {

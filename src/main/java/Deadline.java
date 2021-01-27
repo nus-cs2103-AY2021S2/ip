@@ -9,6 +9,7 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+
     @Override
     public String getSaveString() {
         return "D" + " | " + (isDone ? "1" : "0")
@@ -19,9 +20,9 @@ public class Deadline extends Task {
         return this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
     }
 
-  private String formatDateForSaving() {
-      return this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-  }
+    private String formatDateForSaving() {
+        return this.by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
 
     @Override
     public String toString() {

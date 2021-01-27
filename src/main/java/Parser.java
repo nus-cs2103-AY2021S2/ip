@@ -37,7 +37,9 @@ public class Parser {
     public static LocalDateTime parseTime(String task) {
         String[] split = task.split("\\|");
         String typeOfTask = split[0].trim();
-        LocalDateTime time = typeOfTask.equals("T") ? Parser.DateTimeParser("01-01-2001 0101") : Parser.DateTimeParser(split[3].trim());
+        LocalDateTime time = typeOfTask.equals("T")
+                             ? Parser.DateTimeParser("01-01-2001 0101")
+                             : Parser.DateTimeParser(split[3].trim());
         return time;
     }
 

@@ -1,7 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -34,7 +33,7 @@ public class TaskList {
      *                              have a description.
      */
     public static void addTodo(String command, List<Task> tasks) throws InvalidTodoException {
-        if(command.length() < 6) {
+        if (command.length() < 6) {
             throw new InvalidTodoException();
         }
         tasks.add(new Todo(command.substring(5)));
@@ -62,12 +61,12 @@ public class TaskList {
      *                to submit it by.
      */
 
-    public static void addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException{
+    public static void addDeadline(String command, List<Task> tasks) throws InvalidDateTimeFormatException {
         try {
             tasks.add(new Deadline(command.substring(9).split("/")[0],
                     LocalDateTime.parse(command.substring(9)
                             .split("/")[1].substring(3), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))));
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();
@@ -98,7 +97,7 @@ public class TaskList {
             tasks.add(new Event(command.substring(6).split("/")[0],
                     LocalDateTime.parse(command.substring(6).split("/")[1].substring(3),
                             DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))));
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException();
         }
         int count = tasks.size();

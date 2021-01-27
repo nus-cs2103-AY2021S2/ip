@@ -22,11 +22,13 @@ public class Event extends Task {
 
     @Override
     public String getSaveString() {
-        return "E" + " | " + (isDone ? "1" : "0") + " | " + this.description + " | " + formatDateForSaving();
+        return "E" + " | " + (isDone ? "1" : "0") + " | "
+                + this.description + " | " + formatDateForSaving();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.formatDate() + ")";
+        return "[E]" + super.toString()
+                + " (at: " + this.formatDate() + ")";
     }
 }
