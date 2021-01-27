@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
         try {
             Task task = taskList.deleteTask(taskIndex);
             return HEADER + task;
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException(ERROR_MESSAGE);
         }
     }
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         try {
             taskIndex = Integer.parseInt(input) - 1;
             return new DeleteCommand(taskIndex);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException(ERROR_MESSAGE);
         }
     }
