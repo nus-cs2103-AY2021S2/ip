@@ -17,12 +17,20 @@ public class LogicHandler {
     }
 
     public void done(String input, List<Task> list) {
-        int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
+        try {
+            int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
 
-        list.get(itemNumber).toggleIsDone();
-        System.out.println(
-                "Nice! I've marked this task as done:\n" + list.get(itemNumber)
-        );
+            list.get(itemNumber).toggleIsDone();
+            System.out.println(
+                    "Nice! I've marked this task as done:\n" + list.get(itemNumber)
+            );
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Oops, your done command should have a task number behind.");
+        } catch (NumberFormatException e) {
+            System.out.println("Oops, your done command should be followed by an integer.");
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Oops, your done command included an invalid index in the task list.");
+        }
     }
 
     public void todo(String input, List<Task> list) {

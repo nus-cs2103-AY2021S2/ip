@@ -1,2 +1,1 @@
-T --- 0 --- this
-E --- 0 --- now --- today
+T --- 0 --- thod
