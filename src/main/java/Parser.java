@@ -1,13 +1,40 @@
-public class InputProcessor {
-	private String command;
+public class Parser {
+	private String instruction;
 	private String taskName;
 	private String date;
 
-	public InputProcessor(String input) {
-		this.command = extractCommand(input);
-		this.taskName = extractTask(input, command);
-		this.date = extractDate(input, command);
+	public Parser(String input) {
+		this.instruction = extractCommand(input);
+		this.taskName = extractTask(input, instruction);
+		this.date = extractDate(input, instruction);
 	}
+
+	public final Command parse() {
+		Command command;
+		switch (instruction) {
+		case "bye":
+			command = new ExitCommand(taskName, date);
+			TaskStorage.writeToFiles(Task.getTaskList());
+			break;
+		case "list":
+			command = new ListCommand();
+			break;
+		case "done":
+			command = new DoneCommand(taskName, date);
+			break;
+		case "todo": case "deadline": case "event":
+			command = new AddCommand(instruction, taskName, date);
+			break;
+		case "delete":
+			command = new DeleteCommand(taskName, date);
+			break;
+		default:
+			command = new ErrorCommand();
+			break;
+		}
+		return command;
+	}
+
 
 	/**
 	 * extract the command key in by user.
@@ -50,14 +77,14 @@ public class InputProcessor {
 		String body = input.replaceAll(command, "").trim();
 		String[] parts = body.split("/", 2);
 		if (parts.length == 2) {
-			return parts[1];
+			return DateAndTime.converter(parts[1]);
 		} else {
 			return "";
 		}
 	}
 
-	public String getCommand() {
-		return this.command;
+	public String getInstruction() {
+		return this.instruction;
 	}
 
 	public String getTaskName() {

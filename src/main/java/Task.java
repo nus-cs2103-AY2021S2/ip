@@ -41,12 +41,6 @@ public class Task {
         this.date = date;
         capacity++;
         add(this);
-        if (DateAndTime.converter(date).equals("")) {
-            DukeException.DATEFORMATEXCEPTION();
-            this.date = date;
-        } else {
-            this.date = DateAndTime.converter(date);
-        }
     }
 
     Task(String taskName, String date, String done) {
