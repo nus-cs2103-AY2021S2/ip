@@ -9,12 +9,14 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Duke {
+    private final Ui ui;
+
+    public Duke() {
+        ui = new Ui();
+    }
+
     public void run() {
-        final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        horizontalLine();
+        ui.showWelcome();
 
         final List<Task> store = new ArrayList<>();
         final List<String> lines = loadFile();
@@ -31,7 +33,7 @@ public class Duke {
         while (scan.hasNextLine()) {
             final String input = scan.nextLine().strip();
             final String command = input.split(" ")[0];
-            horizontalLine();
+            ui.showLine();
 
             if (input.toLowerCase().equals("bye")) {
                 // save file
@@ -41,7 +43,7 @@ public class Duke {
                 saveFile(data);
 
                 System.out.println("\tBye. Hope to see you again soon!");
-                horizontalLine();
+                ui.showLine();
                 break;
             }
 
@@ -56,7 +58,7 @@ public class Duke {
             } else { // add task to list
                 addTaskToList(store, command, input);
             }
-            horizontalLine();
+            ui.showLine();
         }
         scan.close();
 
@@ -272,9 +274,5 @@ public class Duke {
         for (final Task t : store) {
             System.out.printf("\t%d. %s\n", ++i, t);
         }
-    }
-
-    private static void horizontalLine() {
-        System.out.println("────────────────────────────────────────────────────────────────────────────────");
     }
 }
