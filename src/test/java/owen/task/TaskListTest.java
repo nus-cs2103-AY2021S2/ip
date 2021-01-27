@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import jdk.jfr.Timestamp;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -113,5 +115,17 @@ public class TaskListTest {
                 + "2. [E][ ] test (at: January 1 2021 2:00 PM - January 1 2021 4:00 PM)\n"
                 + "3. [D][ ] test (by: January 1 2021 2:00 PM)";
         assertEquals(expected, taskList.toString());
+    }
+
+    @Test
+    public void findTask_taskExists_success() throws OwenException {
+        TaskList taskList = new TaskList();
+        taskList = taskList.addTask("todo apple");
+        taskList = taskList.addTask("event orange /at 1/1/2021 1400 - 01/01/2021 1600");
+        taskList = taskList.addTask("deadline app /by 1/1/2021 1400");
+
+        String expected = "1. [T][ ] apple\n"
+                + "3. [D][ ] app (by: January 1 2021 2:00 PM)";
+        assertEquals(expected, taskList.findTask("app"));
     }
 }

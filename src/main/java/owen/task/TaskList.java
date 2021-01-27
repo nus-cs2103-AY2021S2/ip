@@ -118,6 +118,26 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks that contain a search string.
+     * @param searchString String to search within task descriptions.
+     * @return Tasks that contain search string.
+     */
+    public String findTask(String searchString) {
+        List<String> taskListStrings = new ArrayList<>();
+
+        String taskListFormat = "%d. %s";
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
+            String description = task.getDescription();
+            if (description.contains(searchString)) {
+                taskListStrings.add(String.format(taskListFormat, i + 1, task));
+            }
+        }
+
+        return String.join("\n", taskListStrings);
+    }
+
+    /**
      * Serialize TaskList into a String.
      * @return Serialized version of TaskList as a String.
      */

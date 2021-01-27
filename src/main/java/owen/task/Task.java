@@ -23,6 +23,14 @@ public abstract class Task {
     }
 
     /**
+     * Gets task description.
+     * @return Task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Mark task as done and return copy with updated state.
      * @return Copy of task with the state updated to done.
      */
