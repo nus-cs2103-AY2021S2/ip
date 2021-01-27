@@ -11,6 +11,7 @@ public class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
+    // todo rm
     public void add(Task t) {
         this.taskArrayList.add(t);
     }
@@ -23,6 +24,7 @@ public class TaskList {
         return this.taskArrayList.get(i);
     }
 
+    // todo rm
     public Task remove(int i) {
         return this.taskArrayList.remove(i);
     }
@@ -58,4 +60,58 @@ public class TaskList {
         bw.flush();
         bw.close();
     }
+
+
+    public void addTask(Task t) {
+        taskArrayList.add(t);
+
+        String[] messages = {
+                "Success. I've added this task:",
+                Ui.taskIndent + t // standardize this indent,
+        };
+
+        Ui.print(messages);
+    }
+
+    // todo move to tasklist
+    public void deleteTask(int i) throws InvalidArgumentException {
+        if (i < 1 || i > taskArrayList.size()) {
+            throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
+        }
+
+        Ui.print(new String[]{"Got you. I've deleted this task:",
+                Ui.taskIndent + taskArrayList.get(i - 1)});
+
+        taskArrayList.remove(i - 1);
+    }
+
+    /**
+     * Mark specified task done
+     *
+     * @param i off-by-one index of a task in array list
+     */
+    public void markDone(int i) throws InvalidArgumentException {
+        if (i < 1 || i > taskArrayList.size()) {
+            throw new InvalidArgumentException(invalidNumErrMsg(i, 1, taskArrayList.size()));
+        }
+
+        taskArrayList.get(i - 1).markAsDone();
+
+        Ui.print(new String[]{"Good work! I've marked this task done:",
+                Ui.taskIndent + taskArrayList.get(i - 1)});
+    }
+
+
+
+
+    // todo should all error handling related to arguments be done before tasklist?
+    private static String invalidNumErrMsg(int i, int min, int max) {
+        String errMsg = "Invalid list index given: " + i
+                + ". Number needs to be between " + min + " and " + max + " (inclusive). ";
+        return errMsg;
+    }
+
+
+
+
 }

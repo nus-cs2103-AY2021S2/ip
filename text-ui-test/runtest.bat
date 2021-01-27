@@ -19,7 +19,10 @@ REM java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 REM
 REM REM compare the output to the expected output
 REM FC ACTUAL.TXT EXPECTED.TXT
-
+REM
 REM java -classpath ..\bin Duke < scratch.txt
 
-java -classpath ..\bin Duke < inputL8.txt
+REM test files for current usage
+REM includes saving bugs
+java -classpath ..\bin Duke < inputL8.txt > outputL8.txt
+FC outputL8.txt expectedL8.txt
