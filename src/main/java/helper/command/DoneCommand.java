@@ -14,12 +14,13 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int index = Integer.parseInt(doneString) - 1;
         try {
+            int index = Integer.parseInt(doneString) - 1;
             tasks.get(index).setDone(true);
             ui.dukePrint("Good! We finished task: " + doneString + ". " + tasks.get(index));
+            storage.saveFile(tasks);
         } catch (Exception e) {
-            ui.dukePrint("Uhhh.... Our list starts at 1..." +
+            ui.dukePrint("Please use a good index. Our list starts at 1..." +
                     " and ends at " + (tasks.size() + 1));
         }
     }

@@ -53,6 +53,7 @@ public class AddCommand extends Command {
                 }
             break;
         }
+        storage.saveFile(tasks);
     }
 
 }
