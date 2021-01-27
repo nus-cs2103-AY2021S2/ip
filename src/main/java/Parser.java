@@ -52,6 +52,11 @@ public class Parser {
                         int no = sc.nextInt();
                         tasks.delete(no);
                         break;
+                    case "find":
+                        String keyword = sc.nextLine();
+                        FindCommand fc = new FindCommand();
+                        fc.find(tasks, keyword);
+                        break;
                     default:
                         break;
                 }
