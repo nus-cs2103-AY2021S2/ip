@@ -10,15 +10,15 @@ What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
 added: [T][✘] clean room
-Now you have 1 tasks in the list.
+Now you have 1 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 added: [D][✘] assignment (by: thursday)
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 added: [E][✘] movie (at: tonight)
-Now you have 3 tasks in the list.
+Now you have 3 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Nice! I've marked this task as done:
@@ -32,7 +32,7 @@ ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed the task:
 [E][✘] movie (at: tonight)
-Now you have 2 tasks in the list.
+Now you have 2 duke.tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 1. [T][✘] clean room

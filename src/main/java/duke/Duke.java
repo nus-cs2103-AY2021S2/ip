@@ -1,9 +1,11 @@
-import customClass.Command;
-import customClass.Ui;
-import customClass.Storage;
-import customClass.TaskList;
-import customClass.Parser;
-import customClass.CommandRouter;
+package duke;
+
+import duke.customClass.Command;
+import duke.customClass.Ui;
+import duke.customClass.Storage;
+import duke.customClass.TaskList;
+import duke.customClass.Parser;
+import duke.customClass.CommandRouter;
 
 
 public class Duke {
@@ -38,7 +40,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/tasks.txt").run();
+        new Duke("src/data/duke.tasks.txt").run();
     }
 }
 

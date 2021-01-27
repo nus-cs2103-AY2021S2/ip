@@ -1,24 +1,25 @@
-package customClass;
+package duke.tasks;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    protected String by;
+public class Event extends Task {
+    protected String at;
 
-    public Deadline(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.by = by;
+        this.at = at;
     }
 
-    public Deadline(String description, boolean isDone, String by) {
+
+    public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.by = by;
+        this.at = at;
     }
 
     public String saveString() {
-        return isDone ? "D --- 1 --- " + description + " --- " + by : "D --- 0 --- " + description + " --- " + by;
+        return isDone ? "E --- 1 --- " + description + " --- " + at : "E --- 0 --- " + description + " --- " + at;
     }
 
     public static String convertToDate(String input) {
@@ -32,6 +33,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Deadline.convertToDate(by) + ")";
+        return "[E]" + super.toString() + " (at: " + Event.convertToDate(at) + ")";
     }
 }

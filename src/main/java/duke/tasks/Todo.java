@@ -1,6 +1,4 @@
-package customClass;
-
-import customClass.Task;
+package duke.tasks;
 
 public class Todo extends Task {
     public Todo(String description) {

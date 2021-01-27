@@ -1,4 +1,4 @@
-package customClass;
+package duke.customClass;
 
 import java.util.Scanner;
 

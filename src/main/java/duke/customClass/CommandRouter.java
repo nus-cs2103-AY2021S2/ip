@@ -1,4 +1,4 @@
-package customClass;
+package duke.customClass;
 
 public class CommandRouter {
     private boolean isExit;
