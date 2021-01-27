@@ -50,6 +50,9 @@ public class Parser {
                     storage.storeTask(command);
                 }
                 break;
+            case "find":
+                handleFind(command);
+                break;
             default:
                 Ui.throwIllegalArgumentEx(command);
                 break;
@@ -121,5 +124,27 @@ public class Parser {
         tasks.add(task);
         System.out.println("Your task has been added: " + task +
                 "\nYou currently have " + tasks.size() + " task(s) in the list.");
+    }
+
+    private void handleFind(String command) {
+        try {
+            String query = command.split(" ", 2)[1].trim();
+            StringBuffer reply = new StringBuffer();
+            boolean found = false;
+            for (int i = 1; i <= tasks.size(); i++) {
+                if (tasks.get(i - 1).toString().contains(query)) {
+                    found = true;
+                    reply.append(i + "." + tasks.get(i - 1) + "\n");
+                }
+            }
+            if (found) {
+                reply.insert(0, "Here are the matching tasks in your list:\n");
+                System.out.print(reply);
+            } else {
+                System.out.println("There are no tasks that match \"" + query + "\"!");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printErr("Please type in your query after find!");
+        }
     }
 }
