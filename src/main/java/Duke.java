@@ -24,7 +24,7 @@ public class Duke {
 
         ui.printWelcomeMessage();
 
-        while(sc.hasNextLine()) {
+        while (sc.hasNextLine()) {
             String input = sc.nextLine();
 
             String[] tokens = input.split(" ", 2);
@@ -41,7 +41,7 @@ public class Duke {
                     System.out.println("There are no tasks in your task list");
                 } else {
                     System.out.println("Here are the tasks in your task list:");
-                    for (int i = 0; i < taskList.size() ; i++ ) {
+                    for (int i = 0; i < taskList.size(); i++) {
                         System.out.println((i + 1) + ". "
                                 + taskList.get(i).getTypeIcon()
                                 + taskList.get(i).getStatusIcon() + " "
@@ -50,7 +50,7 @@ public class Duke {
                     }
                 }
 
-            } else if(command.equals("done")) {
+            } else if (command.equals("done")) {
 
                 // check for correct number of arguments
                 if (tokens.length < 2) {
