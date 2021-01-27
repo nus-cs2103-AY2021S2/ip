@@ -1,28 +1,23 @@
 import java.util.ArrayList;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
-        System.out.println("    ____________________________________________________________\n" +
-                "     Duke... booted...\n" +
-                "     requesting tasks\n" +
-                "    ____________________________________________________________\n");
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-        //data structure to store tasks
-        TaskList taskList = new TaskList(new ArrayList<Task>());
-
-        Ui ui = new Ui();
-
-        Storage storage = new Storage();
-
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskList = new TaskList();
         storage.readFromStorage(taskList);
+    }
 
+    public void run() {
         ui.runUi(taskList, storage);
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

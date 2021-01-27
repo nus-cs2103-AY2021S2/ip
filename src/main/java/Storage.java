@@ -2,27 +2,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     File dukeDataFile;
 
-    public Storage() {
+    public Storage(String filePath) {
         File dataDir = new File("data");
         if (!(dataDir.exists() && dataDir.isDirectory())) {
             if (!dataDir.mkdir()) {
                 System.out.println("Data dir not created.");
             }
         }
-        dukeDataFile = new File("data/duke.txt");
+        dukeDataFile = new File(filePath);
         if (!dukeDataFile.exists()) {
             try {
                 if (!dukeDataFile.createNewFile()) {
                     System.out.println("File not created.");
                 }
             } catch (IOException e) {
-                System.out.println("IOException caught.");
+                System.out.println("IOException caught: " + e.getMessage());
             }
         }
     }
