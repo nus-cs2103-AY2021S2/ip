@@ -25,7 +25,7 @@ public class EventTask extends Task {
      */
     public EventTask(String description, boolean isDone, LocalDate atDate, String time) {
         super(description);
-        super.isDone = false;
+        super.isDone = isDone;
         this.atDate = atDate;
         this.time = time;
     }

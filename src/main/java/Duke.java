@@ -1,5 +1,6 @@
 import duke.*;
 
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -49,7 +50,8 @@ public class Duke {
                 input = sc.nextLine();
                 command = input.split(" ");
             }
-            storage.saveData(tasks.getTasks());
+            ArrayList<Task> arrToSave = parser.consolidate();
+            storage.saveData(arrToSave);
             ui.sayGoodbye();
         }
         catch (DukeException e) {

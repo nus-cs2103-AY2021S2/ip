@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,7 +16,8 @@ public class Parser {
         DELETE,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        FIND
     }
 
     /**
@@ -57,13 +59,41 @@ public class Parser {
             case EVENT:
                 createEvent(tasks, command);
                 break;
+            case FIND:
+                String keyword = command[1];
+                search(tasks, keyword);
+                break;
             default:
-                throw (new IllegalArgumentException());
+                throw(new IllegalArgumentException());
             }
         }
         catch(IllegalArgumentException e) {
             throw new DukeException("Please enter a legit command...");
         }
+    }
+
+    public ArrayList<Task> consolidate() {
+        return tasks;
+    }
+
+    /**
+     * Lists all the tasks in the TaskList.
+     * @param tasks An ArrayList of Tasks
+     */
+    public static void search(ArrayList<Task> tasks, String keyword) {
+        System.out.println("----------------------------------------------");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (haveWord(task.getDescription(), keyword)) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
+        System.out.println("----------------------------------------------");
+    }
+
+    public static boolean haveWord(String description, String keyword) {
+        return description.contains(keyword);
     }
 
     /**
