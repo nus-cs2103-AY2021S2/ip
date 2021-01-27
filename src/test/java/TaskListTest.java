@@ -65,9 +65,9 @@ public class TaskListTest {
         tasks.addTask(t2);
         tasks.addTask(t3);
 
-        assertEquals("  1. [T][ ] join sports club\n" +
-                "  2. [D][\u2713] return book (By: 9 Sep 2019)\n" +
-                "  3. [E][ ] meeting (At: 1 Jan 2020)", tasks.toString());
+        assertEquals("  1. [T][ ] join sports club\n"
+                + "  2. [D][\u2713] return book (By: 9 Sep 2019)\n"
+                + "  3. [E][ ] meeting (At: 1 Jan 2020)", tasks.toString());
 
     }
 }
