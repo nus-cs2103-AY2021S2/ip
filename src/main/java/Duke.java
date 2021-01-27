@@ -22,17 +22,9 @@ public class Duke {
         String request = "";
 
         while (!request.equals("bye")) {
-            request = sc.nextLine();
-            String[] tk = request.split(" ");
-            request = tk[0];
-            String taskname = "";
-            // System.out.println(request);
-            for (int i = 1; i < tk.length; i++) {
-                taskname += tk[i];
-                if (i < tk.length - 1) {
-                    taskname += " ";
-                }
-            }
+            Parser parser = new Parser(sc.nextLine());
+            request = parser.getRequest();
+            String args = parser.getArgs();
 
             if (request.equals("bye")) {
                 ui.showBye();
@@ -41,7 +33,7 @@ public class Duke {
                 ui.printList(tasks);
             } else if (request.equals("done")) {
                 try {
-                    int taskNo = Integer.parseInt(taskname);
+                    int taskNo = Integer.parseInt(args);
                     ui.printMarked(tasks.markDone(taskNo));
                     storage.save(tasks);
                 } catch (DukeException ex) {
@@ -51,7 +43,7 @@ public class Duke {
                 }
             } else if (request.equals("delete")) {
                 try {
-                    int taskNo = Integer.parseInt(taskname);
+                    int taskNo = Integer.parseInt(args);
                     ui.printRemoved(tasks, tasks.removeTask(taskNo));
                     storage.save(tasks);
                 } catch (DukeException ex) {
@@ -61,7 +53,7 @@ public class Duke {
                 }
             } else if (request.equals("todo")) {
                 try {
-                    Task task = Task.createTask(taskname, request, "", "");
+                    Task task = Task.createTask(args, request, "", "");
                     ui.printAdded(tasks, tasks.addTask(task));
                     storage.save(tasks);
                 } catch (DukeException ex) {
@@ -69,7 +61,7 @@ public class Duke {
                 }
             } else if (request.equals("deadline")) {
                 try {
-                    String[] deadStr = formatCommand(taskname);
+                    String[] deadStr = parser.getFormattedCommand();
                     Task task = Task.createTask(deadStr[0], request, deadStr[1], deadStr[2]);
                     ui.printAdded(tasks, tasks.addTask(task));
                     storage.save(tasks);
@@ -78,7 +70,7 @@ public class Duke {
                 }
             } else if (request.equals("event")) {
                 try {
-                    String[] eventStr = formatCommand(taskname);
+                    String[] eventStr = parser.getFormattedCommand();
                     Task task = Task.createTask(eventStr[0], request, eventStr[1], eventStr[2]);
                     ui.printAdded(tasks, tasks.addTask(task));
                     storage.save(tasks);
@@ -99,22 +91,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
-
-
     public static void throwDK() throws DukeException {
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
-
-    public static String[] formatCommand(String n) throws DukeException {
-        try {
-            String[] arr = new String[3];
-            arr[0] = n.split("/")[0].split(" ")[0];
-            arr[1] = n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length() + 1, n.split("/")[1].length());
-            arr[2] = n.split("/")[1].split(" ")[0];
-            return arr;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The format you have entered is wrong.");
-        }
-    }
-
 }

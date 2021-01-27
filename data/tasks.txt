@@ -1,0 +1,8 @@
+E | 1 | read | 2019-09-16 | by
+D | 0 | eat | 2021-09-16 | by
+T | 0 | read a book
+E | 0 | read | 2019-01-01 | by
+D | 0 | read | 2020-01-01 | by
+T | 0 | xyz abc
+E | 0 | read a book  | 2021-01-01 | by
+E | 0 | read a book | 2019-01-01 | by
