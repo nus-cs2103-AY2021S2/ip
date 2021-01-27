@@ -17,6 +17,7 @@ public enum DukeActions {
      * The String form of each action.
      */
     public final String str;
+
     DukeActions(String str) {
         this.str = str;
     }

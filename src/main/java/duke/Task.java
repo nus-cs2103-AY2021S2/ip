@@ -1,8 +1,8 @@
 package duke;
 
 /**
- * Represents a task listed in DukeObjects.Duke and can be marked as done. Can statically create subclasses of DukeObjects.Duke.Task, namely:
- * DukeObjects.Duke.Event, DukeObjects.Duke.Deadline, DukeObjects.Duke.ToDo
+ * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Task, namely:
+ * Event, Deadline, ToDo
  */
 public class Task {
     protected boolean isDone;
@@ -35,17 +35,17 @@ public class Task {
         Task newTask;
         taskCommand = taskCommand.trim();
         switch (taskCommand.split(" ")[0]) {
-            case "todo":
-                newTask = createToDo(taskCommand);
-                break;
-            case "deadline":
-                newTask = createDeadline(taskCommand);
-                break;
-            case "event":
-                newTask = createEvent(taskCommand);
-                break;
-            default:
-                throw new DukeException("DukeObjects.Duke.Task cannot be created: " + taskCommand);
+        case "todo":
+            newTask = createToDo(taskCommand);
+            break;
+        case "deadline":
+            newTask = createDeadline(taskCommand);
+            break;
+        case "event":
+            newTask = createEvent(taskCommand);
+            break;
+        default:
+            throw new DukeException("DukeObjects.Duke.Task cannot be created: " + taskCommand);
         }
         return newTask;
     }

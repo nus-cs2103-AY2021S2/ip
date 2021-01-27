@@ -40,7 +40,8 @@ public class Storage {
     }
 
     /**
-     * Reads and creates the tasks from the file to store in the list. List will not change if file is not found/created.
+     * Reads and creates the tasks from the file to store in the list. List will not change if file is not
+     * found/created.
      */
     public void loadTaskList(TaskList tasks) {
         try {
