@@ -95,3 +95,22 @@ Expected outcome:
 `Noted. I've removed this task: 
        [T][X] Second Task
      Now you have 4 tasks in the list.`
+	 
+### Feature 5 - Find Task from list
+Enables the user to find for tasks from the task list
+
+## Usage
+
+### `find` - Use the find keyword
+
+The tasks matching the word(s) to find for will be displayed.
+
+Example of usage: 
+
+`find meeting`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:
+	 2. [D][X] prepare for meeting (05 Jan 2021)
+	 5. [E][ ] attend meeting (05 Jan 2021 to 08 Jan 2021)`
