@@ -11,9 +11,9 @@ import java.time.temporal.ChronoField;
  * DD/MM/YYYY HHMM or Month DD YYYY HH:MM AM/PM.
  */
 public class DateTime {
-    private final LocalDateTime dateTime;
     private static final DateTimeFormatter inputFormatter;
     private static final DateTimeFormatter outputFormatter;
+    private final LocalDateTime dateTime;
 
     static {
         DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();

@@ -1,12 +1,12 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import owen.command.Command;
-import owen.command.CommandType;
+import org.junit.jupiter.api.Test;
+
 import owen.OwenException;
 import owen.Parser;
+import owen.command.Command;
+import owen.command.CommandType;
 
 public class ParserTest {
     @Test
