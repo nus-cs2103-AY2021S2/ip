@@ -7,6 +7,7 @@ import duke.task.TaskList;
 import java.util.LinkedList;
 
 public class DoneCommand extends Command{
+
     public DoneCommand(String userMessage){
         super(userMessage);
     }
@@ -26,15 +27,13 @@ public class DoneCommand extends Command{
 
             StringBuilder builder = new StringBuilder();
             builder.append("Nice! I've marked this as done!\n");
-            builder.append("["+task.getStatusIcon()+"]"+task.getTaskName());
+            builder.append("["+task.getStatusIcon()+"]"+task.toString());
             String botMessage = builder.toString();
             ui.display(botMessage);
 
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! The description of a done is wrong.");
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e){
             throw new DukeException("OOPS!!! The event index of a done is wrong.");
         }
     }

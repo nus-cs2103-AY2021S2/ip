@@ -27,7 +27,7 @@ class AddEventCommandTest {
 
         LinkedList<Task> outputList = taskList.getTasks();
         Task output = outputList.getFirst();
-        assertEquals("[E]go to school (at: Jan 01 2020 19:00)",output.getTaskName());
+        assertEquals("[E]go to school (at: Jan 01 2020 19:00)",output.toString());
     }
 
     @org.junit.jupiter.api.Test

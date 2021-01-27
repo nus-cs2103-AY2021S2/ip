@@ -9,6 +9,17 @@ public class Deadline extends Task {
         this.by = stringToDatetime(by);
     }
 
+    public Deadline(String description, String by, boolean status){
+        super(description,status);
+        this.by = stringToDatetime(by);
+    }
+
+
+    public Deadline(String description, LocalDateTime by, boolean status){
+        super(description,status);
+        this.by = by;
+    }
+
     private LocalDateTime stringToDatetime(String by){
         return LocalDateTime.parse(by,DF1);
     }
@@ -17,22 +28,14 @@ public class Deadline extends Task {
         return DF2.format(by);
     }
 
+
     public LocalDateTime getBy(){
         return by;
     }
 
-    public Deadline(String description, String by, boolean status){
-        super(description,status);
-        this.by = stringToDatetime(by);
-    }
-
-    public Deadline(String description, LocalDateTime by, boolean status){
-        super(description,status);
-        this.by = by;
-    }
 
     @Override
-    public String getTaskName() {
+    public String toString() {
         return "[D]" + super.getTaskName() + " (by: " + datetimeToString(by) + ")";
     }
 }

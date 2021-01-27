@@ -15,6 +15,7 @@ public class Storage {
     private boolean existDir;
     private String dirPath;
 
+
     public Storage(String filePath, String dirPath){
         this.filePath = filePath;
         this.dirPath = dirPath;
@@ -22,17 +23,15 @@ public class Storage {
 
     public TaskList readTasks(TaskList taskList) throws FileNotFoundException {
         File f = new File(dirPath);
-        if (!f.exists()){
+        if ( ! f.exists()){
             existDir = f.mkdir();
         }
-
         try{
             f = new File(filePath);
-            if (!f.exists()){
+            if ( ! f.exists()){
                 existFile = f.createNewFile();
             }
-        }
-        catch (IOException e){
+        } catch (IOException e){
             throw new FileNotFoundException();
         }
 
@@ -48,8 +47,7 @@ public class Storage {
                 String name = info.substring(5);
                 ToDo todo = new ToDo(name,status);
                 taskList.addTasks(todo);
-            }
-            else if(type.equals("D")){
+            } else if(type.equals("D")){
                 int endNameIndex = info.indexOf("(");
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
@@ -57,8 +55,7 @@ public class Storage {
                 LocalDateTime byTime = LocalDateTime.parse(by,df);
                 Deadline deadline = new Deadline(name, byTime, status);
                 taskList.addTasks(deadline);
-            }
-            else if(type.equals("E")){
+            } else if(type.equals("E")){
                 int endNameIndex = info.indexOf("(");
                 int endTimeIndex = info.length() - 1;
                 String name = info.substring(5 , endNameIndex - 1);
@@ -67,10 +64,10 @@ public class Storage {
                 Event event = new Event(name, atTime, status);
                 taskList.addTasks(event);
             }
-
         }
         return taskList;
     }
+
 
     public void saveTasks(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
@@ -80,13 +77,12 @@ public class Storage {
             String textToAppend = builder.toString();
             fw.write(textToAppend);
             fw.close();
-        }
-        else{
+        } else{
             for (Task task:taskList.getTasks()){
                 int status = task.getStatus() ? 1 : 0;
                 builder.append(status);
                 builder.append("|");
-                String taskName = task.getTaskName();
+                String taskName = task.toString();
                 builder.append(taskName);
                 builder.append("\n");
             }
@@ -94,6 +90,5 @@ public class Storage {
             fw.write(textToAppend);
             fw.close();
         }
-
     }
 }

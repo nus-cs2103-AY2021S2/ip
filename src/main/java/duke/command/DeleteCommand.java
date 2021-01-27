@@ -7,6 +7,7 @@ import duke.task.TaskList;
 import java.util.LinkedList;
 
 public class DeleteCommand extends Command {
+
     public DeleteCommand(String userMessage) {
         super(userMessage);
     }
@@ -23,16 +24,14 @@ public class DeleteCommand extends Command {
 
             StringBuilder builder = new StringBuilder();
             builder.append("Noted. I've removed this task:\n");
-            builder.append("[" + task.getStatusIcon() + "]" + task.getTaskName());
+            builder.append("[" + task.getStatusIcon() + "]" + task.toString());
             taskList.delete(task);
             builder.append("\nNow you have " + taskList.getNumOfTasks() + " tasks in the list.");
             String botMessage = builder.toString();
             ui.display(botMessage);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! The description of a delete is wrong.");
-        }
-        catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e){
             throw new DukeException("OOPS!!! The event index of a delete is wrong.");
         }
     }

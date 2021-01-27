@@ -1,10 +1,12 @@
 package duke.command;
+import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.task.TaskList;
 
 import java.util.LinkedList;
 
 public class ByeCommand extends Command{
+
     public ByeCommand(String userMessage){
         super(userMessage);
     }

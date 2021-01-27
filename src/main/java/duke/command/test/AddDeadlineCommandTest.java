@@ -26,7 +26,7 @@ class AddDeadlineCommandTest {
 
         LinkedList<Task> outputList = taskList.getTasks();
         Task output = outputList.getFirst();
-        assertEquals("[D]go to school (by: Jan 01 2020 19:00)",output.getTaskName());
+        assertEquals("[D]go to school (by: Jan 01 2020 19:00)",output.toString());
     }
 
     @org.junit.jupiter.api.Test
