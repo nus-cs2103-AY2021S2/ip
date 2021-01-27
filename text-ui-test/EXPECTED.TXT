@@ -81,6 +81,14 @@ Swee chai. It's done.
 [D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
+Please type in your query after find!
+------------------------------
+------------------------------
+Here are the matching tasks in your list:
+3.[D][X] profit (by: 2022)
+4.[D][X] profit again (by: 28 Jan 2023, 6PM)
+------------------------------
+------------------------------
 Here are the tasks in your list:
 1.[T][ ] hustle
 2.[E][X] grinding (at: all day err day)
