@@ -1,11 +1,11 @@
-public class Todo extends Task{
+public class ToDo extends Task{
     protected char type;
-    public Todo(String task) {
+    public ToDo(String task) {
         super(task);
         this.type = 'T';
     }
 
-    public Todo(String task, boolean isDone) {
+    public ToDo(String task, boolean isDone) {
         super(task, isDone);
         this.type = 'T';
     }

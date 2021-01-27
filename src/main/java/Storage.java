@@ -64,7 +64,7 @@ public class Storage {
                 rest = rest.replaceFirst("^\\s*"," ");
                 switch (type) {
                     case 'T':
-                        store.storage.add(new Todo(rest, status));
+                        store.storage.add(new ToDo(rest, status));
                         break;
                     case 'D':
                         String[] restD1 = rest.split("by:");

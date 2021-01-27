@@ -27,7 +27,7 @@ public class TaskList {
         if (value <= 0 || value > storage.size()) {
             throw new DukeException("No such list item.");
         }
-        storage.get(value - 1).markAsDone();
+        storage.get(value - 1).setDone();
         System.out.println("ALRIGHT. THIS TASK HAS BEEN MARKED AS COMPLETE");
         System.out.println(storage.get(value - 1));
         System.out.println();

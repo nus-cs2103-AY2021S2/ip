@@ -32,7 +32,7 @@ public class Parser {
                         tasks.listItems();
                         break;
                     case "todo":
-                        tasks.add(new Todo(sc.nextLine()));
+                        tasks.add(new ToDo(sc.nextLine()));
                         break;
                     case "deadline":
                         String rest = sc.nextLine();
