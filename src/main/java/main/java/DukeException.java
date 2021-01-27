@@ -1,3 +1,5 @@
+package main.java;
+
 class DukeException extends Exception {
     private final String errorMessage;
 

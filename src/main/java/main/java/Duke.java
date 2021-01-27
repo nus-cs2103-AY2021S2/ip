@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Duke {
-    private TaskList taskList;
-    private Parser parser;
-    private Ui ui;
+    public TaskList taskList;
+    public Parser parser;
+    public Ui ui;
 
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
