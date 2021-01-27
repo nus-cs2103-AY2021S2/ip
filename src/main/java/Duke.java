@@ -45,6 +45,8 @@ public class Duke {
                     taskList.finishATask(description);
                 } else if (command.equals("delete")) {
                     taskList.deleteATask(description);
+                } else if (command.equals("find")) {
+                    taskList.findTasks(description);
                 } else {
                     Task task = processTask(command, description, deadline);
                     taskList.addTask(task);
