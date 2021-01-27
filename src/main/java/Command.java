@@ -3,13 +3,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Command {
-    List<Task> list;
+public abstract class Command {
+    protected final String fullCommand;
+    protected final String action;
 
-    public Command(List<Task> list) {
-        this.list = list;
+    public Command(String fullCommand, String action) {
+        this.fullCommand = fullCommand;
+        this.action = action;
     }
 
+    public abstract void execute(TaskList tasks) throws DukeException;
+
+    /*
     public List<Task> handleFileCommand(String command) throws DukeException { //T # 1 # read book # June 6th
         String[] inputs = command.split(" # ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
@@ -133,4 +138,5 @@ public class Command {
         }
         return list;
     }
+    */
 }

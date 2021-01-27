@@ -2,3 +2,5 @@ T # 0 # eat food
 E # 1 # buy stuff  # 2021-02-01 1438-2248
 D # 1 # read book  # 2021-02-03 1344
 E # 0 # code  # 2021-02-03 1300-2200
+T # 0 # buy computer
+E # 1 # casting  # 2021-02-03 1630-1700
