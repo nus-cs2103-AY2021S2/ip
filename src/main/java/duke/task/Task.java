@@ -12,6 +12,7 @@ public class Task {
     protected final static DateTimeFormatter DF1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected final static DateTimeFormatter DF2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
+
     /**
      * Default Constructor for Task object
      * that has no name and done-status as undone.
@@ -41,6 +42,7 @@ public class Task {
         isDone = status;
     }
 
+
     /**
      * Getter for task object's status icon.
      *
@@ -49,6 +51,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
+
     /**
      * Getter for task object's status.
      *
@@ -57,6 +60,7 @@ public class Task {
     public boolean getStatus(){
         return isDone;
     }
+
     /**
      * Getter for task object's name.
      *
@@ -74,6 +78,7 @@ public class Task {
     public String toString(){
         return this.taskName;
     }
+
 
     /**
      * Set the task as done.

@@ -3,7 +3,7 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.DukeException;
 
-import java.io.FileNotFoundException;
+
 
 /**
  * Represents a parser object that will read the input from
@@ -35,6 +35,8 @@ public class Parser {
             return new SearchByTimeCommand(userMessage);
         } else if (userMessage.equals("bye")) {
             return new ByeCommand(userMessage);
+        } else if (userMessage.startsWith("find")) {
+            return new SearchByTaskNameCommand(userMessage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

@@ -10,6 +10,7 @@ import duke.task.TaskList;
  * during the running of the program and starts add new events to the task list.
  */
 public class AddEventCommand extends Command{
+
     /**
      * Constructor for AddEventCommand object
      *

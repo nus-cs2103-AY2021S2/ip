@@ -34,6 +34,7 @@ public class TaskList {
     }
 
 
+
     /**
      * Getter for TaskList object's List of the current tasks.
      *
@@ -42,6 +43,7 @@ public class TaskList {
     public LinkedList<Task> getTasks(){
         return Tasks;
     }
+
 
     /**
      * Setter for adding task to a TaskList object.

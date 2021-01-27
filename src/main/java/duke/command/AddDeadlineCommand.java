@@ -16,10 +16,10 @@ public class AddDeadlineCommand extends Command{
      *
      * @param userMessage The message that the user inputs for further execution.
      */
-
     public AddDeadlineCommand(String userMessage){
         super(userMessage);
     }
+
     /**
      * The execution after parsing, it will add a deadline object into the tasks.
      * If the input is not correct, it will raise an exception.

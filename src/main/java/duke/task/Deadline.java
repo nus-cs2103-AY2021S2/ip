@@ -50,6 +50,7 @@ public class Deadline extends Task {
     }
 
 
+
     /**
      * Get the deadline time as a LocalDateTime object.
      * @return the the deadline time as a LocalDateTime object.
@@ -58,12 +59,12 @@ public class Deadline extends Task {
         return by;
     }
 
+
     /**
      * Get the task name for a deadline object.
      * @return A String object that represent the task name, including information
      * about the task type, name and deadline time.
      */
-
     @Override
     public String toString() {
         return "[D]" + super.getTaskName() + " (by: " + datetimeToString(by) + ")";

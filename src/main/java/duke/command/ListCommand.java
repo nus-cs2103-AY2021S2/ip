@@ -11,6 +11,7 @@ import java.util.LinkedList;
  * during the running of the program and starts to list all the tasks.
  */
 public class ListCommand extends Command{
+
     /**
      * Constructor for ListCommand object
      *

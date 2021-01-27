@@ -93,7 +93,6 @@ public class Storage {
      * @param taskList The taskList that will be used in the program.
      * @throws IOException if the program meets IO problem.
      */
-
     public void saveTasks(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
 

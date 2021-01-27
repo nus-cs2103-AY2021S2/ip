@@ -3,7 +3,6 @@ import duke.exception.DukeException;
 import duke.ui.Ui;
 import duke.task.TaskList;
 
-import java.util.LinkedList;
 /**
  * It is a command object extends from Command for the Duke program.
  * When the parser calls it, it will receive the requests from the users
@@ -11,6 +10,7 @@ import java.util.LinkedList;
  * of command as wants to exit, and hence terminates the program.
  */
 public class ByeCommand extends Command{
+
     /**
      * Constructor for ByeCommand object
      *
