@@ -2,7 +2,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * A class which contains list of user interfaces.
+ */
 public class Ui {
+    /**
+     * Say bye when the user logouts.
+     */
     public void bye() throws IOException {
         System.out.println("    ____________________________________________________________\n     " +
                 "Bye. Hope to see you again soon!\n" +
@@ -10,6 +16,9 @@ public class Ui {
         Storage.save();
     }
 
+    /**
+     * Welcome the user when login.
+     */
     public void greet() {
         System.out.println("    ____________________________________________________________\n     " +
                 " ____        _        \n" +
@@ -20,6 +29,13 @@ public class Ui {
                 "Hello! I'm Duke :P");
     }
 
+    /**
+     * Add ToDo object of the given description to the list.
+     *
+     * @param desc Description of what to be done.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     */
     public void todo(String desc) throws DukeException {
         if (desc.length() > 0) {
             TaskList.addTask(new ToDo(desc));
@@ -30,6 +46,15 @@ public class Ui {
         }
     }
 
+    /**
+     * Add Event object of the given description to the list.
+     *
+     * @param desc Description of the event.
+     * @param at   Date of the event.
+     * @param time Time of the event.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     */
     public void event(String desc, LocalDate at, LocalTime time) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException("\n    ____________________________________________________________\n" +
@@ -49,6 +74,15 @@ public class Ui {
         TaskList.addTask(new Event(desc, at, time));
     }
 
+    /**
+     * Add DeadLine object of the given description to the list.
+     *
+     * @param desc Description of the deadline.
+     * @param by   Date of the deadline.
+     * @param time Time of the deadline.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     */
     public void deadline(String desc, LocalDate by, LocalTime time) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException("\n    ____________________________________________________________\n" +
