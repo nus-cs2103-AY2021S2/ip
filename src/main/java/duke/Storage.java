@@ -12,6 +12,9 @@ class Storage {
 
 	private File data;
 
+	/**
+	 * initializes by finding out the location of the code and creating a folder for the data to be stored in
+	 */
 	Storage() {
 		try {
 			File jarDir = new File(Parser.class.getProtectionDomain().getCodeSource().getLocation().getPath());
@@ -33,6 +36,10 @@ class Storage {
 		}
 	}
 
+	/**
+	 * reads the data in the file and returns a TaskList
+	 * @return TaskList created from the data of the file
+	 */
 	TaskList load() {
 		ArrayList<Task> list = new ArrayList<Task>();
 		try {
@@ -56,6 +63,10 @@ class Storage {
 		return new TaskList(list);
 	}
 
+	/**
+	 * saves the given Task ArrayList into the txt file
+	 * @param mem Task ArrayList
+	 */
 	void save(ArrayList<Task> mem) {
 		
 		ArrayList<String> list = new ArrayList<String>();
