@@ -8,11 +8,10 @@ import duke.command.ListCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+
 import duke.exception.DukeException;
 import duke.exception.CommandNotFoundException;
 import duke.exception.InvalidDateTimeException;
-
-
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -21,8 +20,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    public Parser() {}
-
     public static Command parseCommand(String input) throws DukeException {
         int endIndex = input.indexOf(" ");
         String potentialCommand = (endIndex == -1) ? input : input.substring(0, endIndex);
@@ -59,7 +56,6 @@ public class Parser {
         String time = dateAndTime[1].strip();
         parsedDateTime = LocalDateTime.of(parseDate(date), parseTime(time));
         return parsedDateTime;
-
     }
 
     public static LocalDate parseDate(String date) throws InvalidDateTimeException {

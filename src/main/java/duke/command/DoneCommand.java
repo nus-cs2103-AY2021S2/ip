@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.exception.DukeException;
-import duke.task.Task;
 import duke.exception.TaskIndexOutOfBoundException;
 
 public class DoneCommand extends IndexCommand {
