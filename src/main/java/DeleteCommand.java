@@ -1,5 +1,12 @@
 import java.io.IOException;
 
+/**
+   * DeleteCommand inherits Command
+   * @param command the main action of the command
+   * @param task the index of task user wants to delete
+   * @param date is a null value for DeLete Command
+   */
+
 public class DeleteCommand extends Command {
 
     public DeleteCommand(String command, String task, String date) {

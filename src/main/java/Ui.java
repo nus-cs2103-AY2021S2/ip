@@ -2,6 +2,11 @@ import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+   * Ui provides all outputs that the user would face in different situations
+   * 
+   */
+  
 public class Ui {
     String welcome;
 
@@ -25,7 +30,6 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         String line = "";
         line = sc.nextLine();
-        
         return line;
     }
 

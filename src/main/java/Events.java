@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+   * Events inherits Task
+   * @param description the description of the task
+   * @param duration the due date specified by user
+   */
 public class Events extends Task {
 
     protected LocalDate duration;

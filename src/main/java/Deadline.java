@@ -1,6 +1,11 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+   * Deadline inherits Task
+   * @param command the main action of the command
+   * @param description the description of the task
+   * @param by the due date specified by user
+   */
 class Deadline extends Task {
 
     protected LocalDate by;

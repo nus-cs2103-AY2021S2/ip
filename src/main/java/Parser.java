@@ -1,5 +1,9 @@
-import java.time.LocalDate;
-
+/**
+   * Parser only has one method parse
+   * 
+   * This method processes the users input and
+   * outputs commands to be executed later on
+   */
 public class Parser {
 
     public static Command parse(String command) throws DukeException {

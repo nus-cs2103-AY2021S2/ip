@@ -1,4 +1,10 @@
 import java.io.IOException;
+/**
+   * DoneCommand inherits Command
+   * @param command the main action of the command
+   * @param task the index of task user wants to mark as done
+   * @param date is a null value for Done Command
+   */
 
 public class DoneCommand extends Command {
 

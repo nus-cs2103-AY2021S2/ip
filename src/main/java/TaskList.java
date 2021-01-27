@@ -1,4 +1,13 @@
 import java.util.*;
+
+/**
+   * TaskList initiates an internal list within the programme
+   * 
+   * This is done so that we can easily manipulate the list of task
+   * that the user would input,mark as done and delete
+   */
+
+
 public class TaskList {
     public List<Task> taskList;
 

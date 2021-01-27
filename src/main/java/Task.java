@@ -1,4 +1,9 @@
 import java.time.LocalDate;
+/**
+   * Task is a generic type to categories the users input
+   * @param description the description of the task
+   * @param isDone specifies if the task should be marked as done
+   */
 
 public class Task {
     protected String description;
