@@ -1,5 +1,5 @@
 public class MissingArgumentException extends Exception{
-    public MissingArgumentException(String error) {
-        super(error);
+    public MissingArgumentException(String err) {
+        super(err);
     }
 }
