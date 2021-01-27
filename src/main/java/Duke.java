@@ -65,7 +65,7 @@ public class Duke {
             } else if (request.equals("deadline")) {
                 try {
                     String[] deadStr = formatCommand(taskname);
-                    lst.add(new Task("D", deadStr[0], deadStr[1]));
+                    lst.add(new Task("D", deadStr[0], deadStr[1], deadStr[2]));
                     printAdded(lst);
                 } catch (DukeException ex) {
                     printFormatted(ex.getMessage());
@@ -73,7 +73,7 @@ public class Duke {
             } else if (request.equals("event")) {
                 try {
                     String[] eventStr = formatCommand(taskname);
-                    lst.add(new Task("E", eventStr[0], eventStr[1]));
+                    lst.add(new Task("E", eventStr[0], eventStr[1], eventStr[2]));
                     printAdded(lst);
                 } catch (DukeException ex) {
                     printFormatted(ex.getMessage());
@@ -114,9 +114,9 @@ public class Duke {
     public static String[] formatCommand(String n) throws DukeException {
         try {
             String[] arr = new String[3];
-            arr[0] = n.split("/")[0];
-            arr[1] = "(" + n.split("/")[1].split(" ")[0] + ":" +
-                    n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length(), n.split("/")[1].length()) + ")";
+            arr[0] = n.split("/")[0].split(" ")[0];
+            arr[1] = n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length() + 1, n.split("/")[1].length());
+            arr[2] = n.split("/")[1].split(" ")[0];
             return arr;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The format you have entered is wrong.");
