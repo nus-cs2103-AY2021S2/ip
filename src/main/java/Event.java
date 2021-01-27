@@ -1,22 +1,25 @@
-public class Event extends Task {
-    private String at;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String name, String at) throws DukeException {
+public class Event extends Task {
+    private LocalDate at;
+
+    public Event(String name, LocalDate at) throws DukeException {
         super(name);
         this.at = at;
     }
 
-    public Event(String name, String at, boolean done) {
+    public Event(String name, LocalDate at, boolean done) {
         super(name, done);
         this.at = at;
     }
 
-    public String getAt() {
+    public LocalDate getAt() {
         return this.at;
     }
 
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: " + at + ")";
+        return "[E]" + super.getStatus() + " (at: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

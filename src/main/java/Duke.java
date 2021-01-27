@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     public static ArrayList<Task> currentTasks = new ArrayList<>();
@@ -59,14 +61,14 @@ public class Duke {
                 case "deadline":
                     String inst1 = sc.nextLine();
                     String[] part1 = inst1.split("/by");
-                    addTask(new Deadline(part1[0].trim(), part1[1].trim()));
+                    addTask(new Deadline(part1[0].trim(), LocalDate.parse(part1[1].trim())));
                     System.out.println(partition);
                     writeTasks(savedTasks);
                     break;
                 case "event":
                     String inst2 = sc.nextLine();
                     String[] part2 = inst2.split("/at");
-                    addTask(new Event(part2[0].trim(), part2[1].trim()));
+                    addTask(new Event(part2[0].trim(), LocalDate.parse(part2[1].trim())));
                     System.out.println(partition);
                     writeTasks(savedTasks);
                     break;
@@ -83,7 +85,10 @@ public class Duke {
                 System.out.println(de.getMessage() + "\n" + partition);
             } catch (IOException ie) {
                 System.out.println("Cannot write to file: " + ie.getMessage() + "\n" + partition);
+            } catch (DateTimeParseException de) {
+                System.out.println("Input date/time cannot be parsed: " + de.getMessage() + "\n" + partition);
             }
+
             command = sc.next();
         }
 
@@ -159,12 +164,12 @@ public class Duke {
                 break;
             }
             case "E": {
-                Task toAdd = new Event(splits[2], sc.nextLine(), splits[1].equals("1"));
+                Task toAdd = new Event(splits[2], LocalDate.parse(sc.nextLine()), splits[1].equals("1"));
                 currentTasks.add(toAdd);
                 break;
             }
             case "D": {
-                Task toAdd = new Deadline(splits[2], sc.nextLine(), splits[1].equals("1"));
+                Task toAdd = new Deadline(splits[2], LocalDate.parse(sc.nextLine()), splits[1].equals("1"));
                 currentTasks.add(toAdd);
                 break;
             }
