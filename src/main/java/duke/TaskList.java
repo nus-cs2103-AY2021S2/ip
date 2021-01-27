@@ -119,14 +119,14 @@ public class TaskList {
                 taskList.add(newTodo);
             } else if (lineArray[0].strip().charAt(0) == 'D') {
                 // deadline
-                Deadline newDeadline = new Deadline(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
+                Deadline newDeadline = new Deadline(lineArray[2].strip(), lineArray[3].strip());
                 if (isDone) {
                     newDeadline.setDone();
                 }
                 taskList.add(newDeadline);
             } else if (lineArray[0].strip().charAt(0) == 'E') {
                 // event
-                Event newEvent = new Event(lineArray[2].strip(), LocalDate.parse(lineArray[3].strip()));
+                Event newEvent = new Event(lineArray[2].strip(), lineArray[3].strip());
                 if (isDone) {
                     newEvent.setDone();
                 }

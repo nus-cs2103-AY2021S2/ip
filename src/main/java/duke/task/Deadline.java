@@ -10,9 +10,9 @@ import java.util.Locale;
 
 public class Deadline extends Task {
     private final LocalDate lastDate;
-    public Deadline(String taskName, LocalDate lastDate) {
+    public Deadline(String taskName, String lastDate) {
         super(taskName, "D");
-        this.lastDate = lastDate;
+        this.lastDate = LocalDate.parse(lastDate);
     }
 
     public LocalDate getDate() {

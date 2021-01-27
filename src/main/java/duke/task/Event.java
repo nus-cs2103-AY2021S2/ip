@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     private final LocalDate startAndEnd;
-    public Event(String taskName, LocalDate startAndEnd) {
+    public Event(String taskName, String startAndEnd) {
         super(taskName, "E");
-        this.startAndEnd = startAndEnd;
+        this.startAndEnd = LocalDate.parse(startAndEnd);
     }
 
     public LocalDate getDate() {

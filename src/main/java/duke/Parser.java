@@ -37,10 +37,9 @@ public class Parser {
                 String[] eventString = inputString.split("/at");
                 String taskString = eventString[0].substring(6).trim();
                 String dateTime = eventString[1].trim();
-                LocalDate eventTime = LocalDate.parse(dateTime);
-                Event newEvent = new Event(taskString, eventTime);
+                Event newEvent = new Event(taskString, dateTime);
                 tasks.addTask(newEvent);
-                String saveToDisk = "E | 0 | " + taskString + " | " + eventTime;
+                String saveToDisk = "E | 0 | " + taskString + " | " + dateTime;
                 storage.saveTaskToDisk(saveToDisk);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new InvalidInputException("Your input format doesn't seem right! For events, it needs to be: event <title> /at [YYYY-MM-DD]");
@@ -51,7 +50,7 @@ public class Parser {
             try {
                 String[] eventString = inputString.split("/by");
                 String taskString = eventString[0].substring(9).trim();
-                LocalDate deadlineTime = LocalDate.parse(eventString[1].trim());
+                String deadlineTime = eventString[1].trim();
                 Deadline newDeadline = new Deadline(taskString, deadlineTime);
                 tasks.addTask(newDeadline);
                 String saveToDisk = "D | 0 | " + taskString + " | " + deadlineTime;
