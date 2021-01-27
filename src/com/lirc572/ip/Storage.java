@@ -1,3 +1,5 @@
+package com.lirc572.ip;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

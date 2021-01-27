@@ -1,3 +1,5 @@
+package com.lirc572.ip;
+
 public class Task {
     private boolean isDone;
     private final String name;

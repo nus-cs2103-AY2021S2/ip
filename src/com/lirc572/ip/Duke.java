@@ -1,3 +1,5 @@
+package com.lirc572.ip;
+
 import java.util.Scanner;
 
 /**

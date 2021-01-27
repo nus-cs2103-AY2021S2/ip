@@ -1,3 +1,5 @@
+package com.lirc572.ip;
+
 public class Ui {
     private static final String logo = " ____        _        \n" +
             "|  _ \\ _   _| | _____ \n" +
