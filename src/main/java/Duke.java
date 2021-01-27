@@ -34,6 +34,8 @@ public class Duke {
             this.addToDo(command.substring(5));
         } else if (commandWord.equals("event")) {
             this.addEvent(command.substring(6));
+        } else if (commandWord.equals("deadline")) {
+            this.addDeadline(command.substring(9));
         }
     }
 
@@ -51,6 +53,18 @@ public class Duke {
 
     public void addEvent(String taskName) {
         Event newTask = new Event((taskName));
+        this.storedTasks.add(newTask);
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + newTask);
+        if (this.storedTasks.size() == 1) {
+            System.out.println("Now you have " + this.storedTasks.size() + " task in the list");
+        } else {
+            System.out.println("Now you have " + this.storedTasks.size() + " tasks in the list");
+        }
+    }
+
+    public void addDeadline(String taskName) {
+        Deadline newTask = new Deadline((taskName));
         this.storedTasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
