@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public enum LegitCommand {
     DEADLINE("deadline"),
     EVENT("event"),
@@ -24,5 +26,5 @@ public enum LegitCommand {
     String getRep() {
         return rep;
     }
-    
+
 }

@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public abstract class HahaException extends Exception {
     private final String command;
 

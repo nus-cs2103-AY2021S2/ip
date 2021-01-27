@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public class HahaEmptyCommandException extends HahaException {
     HahaEmptyCommandException(String command) {
         super(command);

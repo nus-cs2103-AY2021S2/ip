@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public class HahaEmptyDescriptionException extends HahaException {
 
     HahaEmptyDescriptionException(String command) {

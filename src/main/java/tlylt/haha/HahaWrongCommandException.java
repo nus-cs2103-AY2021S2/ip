@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public class HahaWrongCommandException extends HahaException {
 
     HahaWrongCommandException(String command) {

@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public enum TaskType {
     DEADLINE("deadline"),
     EVENT("event"),

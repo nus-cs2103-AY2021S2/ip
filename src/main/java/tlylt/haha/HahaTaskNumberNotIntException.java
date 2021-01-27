@@ -1,3 +1,5 @@
+package tlylt.haha;
+
 public class HahaTaskNumberNotIntException extends HahaException {
 
     HahaTaskNumberNotIntException(String command) {
