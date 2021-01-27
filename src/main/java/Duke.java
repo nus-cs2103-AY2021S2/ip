@@ -1,10 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * An app that interacts with the users and help them list down tasks
+ * they need to do.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Main function of the class.
+     */
     public static void main(String[] args) {
         try {
             new Duke("./data/duke.txt").run();
@@ -17,11 +24,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructor of the Duke app
+     * @param filepath A string showing the path of the txt file
+     * @throws DukeExceptionFolder The 'data' folder doesn't exist
+     * @throws DukeExceptionCorruptedData The txt file format is corrupted
+     */
     public Duke(String filepath) throws DukeExceptionFolder, DukeExceptionCorruptedData {
         this.storage = new Storage(filepath);
         this.taskList = new TaskList(storage.load());
     }
 
+    /**
+     * After loading the data from the storage, run Duke application.
+     */
     public void run() {
         Ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
@@ -64,6 +80,15 @@ public class Duke {
         }
     }
 
+    /**
+     * A function that process the command from the users
+     * @param command The type of task given
+     * @param description The description of the task need to be done
+     * @param deadline The deadline of the task (if any)
+     * @return Task object based on the command
+     * @throws DukeException Command is not valid
+     * @throws DukeExceptionDeadline Deadline given is not in "yyyy-MM-dd"
+     */
     public static Task processTask(String command, String description, String deadline) throws DukeException, DukeExceptionDeadline{
         if (command.equals("todo")) {
             return new Todo(description);

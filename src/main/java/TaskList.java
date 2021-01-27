@@ -1,15 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that encapsulate, control, and evaluate a list of task.
+ */
 public class TaskList {
     static final String LINE_AFTER_COMMAND = "____________________________________________________________";
 
     private final List<Task> tasks;
 
+    /**
+     * Constructor of TaskList object
+     */
     TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
+    /**
+     * Constructor of TaskList object
+     * @param tasks List of Task
+     */
     TaskList(List<Task> tasks) {
         List<Task> newTasks = new ArrayList<Task>();
         for (Task task : tasks) {
@@ -18,6 +28,9 @@ public class TaskList {
         this.tasks = newTasks;
     }
 
+    /**
+     * Iterate Task object in list and ask Ui to print them
+     */
     public void iterateList() {
         if (this.tasks.size() == 0) {
             Ui.showMessage("There are no task in your list");
@@ -30,6 +43,11 @@ public class TaskList {
         Ui.printLine();
     }
 
+    /**
+     * Set a task to be done
+     * @param input The String representation of the index of the task
+     * @throws DukeException Index out of bound
+     */
     public void finishATask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input) - 1;
@@ -43,6 +61,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a task
+     * @param input The String representation of the index of the task
+     * @throws DukeException Index out of bound
+     */
     public void deleteATask(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input) - 1;
@@ -58,11 +81,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add task to the current TaskList
+     * @param task Task that is going to be added
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
         Ui.addTaskMessage(task.toString(), this.tasks.size());
     }
 
+    /**
+     * Get List of Task
+     * @return List of Task
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }

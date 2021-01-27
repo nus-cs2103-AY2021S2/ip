@@ -7,13 +7,28 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 
+/**
+ * A class that control the data saving and loading in Duke Application.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for Storage object
+     * @param filePath String representing relative path of the txt file
+     */
     Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Load the data from a line of text to be a Task object
+     * @param type String representing type of Task
+     * @param bool String representing the state of the Task
+     * @param commands Description of the task
+     * @return Task corresponding to the type, bool, abd commands
+     * @throws DukeExceptionCorruptedData The data format is incompatible
+     */
     private Task processData(String type, String bool, String[] commands) throws DukeExceptionCorruptedData {
         if (type.equals("T")) {
             return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
@@ -31,6 +46,12 @@ public class Storage {
         throw new DukeExceptionCorruptedData("The txt file is corrupted");
     }
 
+    /**
+     * Load data from the txt file
+     * @return List of Task object
+     * @throws DukeExceptionFolder The folder doesn't exist
+     * @throws DukeExceptionCorruptedData The data format is incompatible
+     */
     public List<Task> load() throws DukeExceptionFolder,DukeExceptionCorruptedData {
         List<Task> tasks = new ArrayList<>();
         File file = new File(this.filePath);
@@ -53,6 +74,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Write file to the existing file (if doesn't exist, create a new one)
+     * @param tasks TaskList wanted to be written
+     * @throws DukeException Wrong path
+     */
     public void writeFile(TaskList tasks) throws DukeException {
         try {
             FileWriter file = new FileWriter(this.filePath, false);
