@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.Scanner;
 
 public class Parser {
@@ -67,6 +68,36 @@ public class Parser {
                         list.add(new Task(task, 2));
                     } catch (IllegalArgumentException e) {
                         ui.printErr("The description or date of an event cannot be empty.");
+                    }
+                }
+            } else if (input.contains("find")) {
+                String search = "";
+                try {
+                    search = input.substring(5);
+                } catch (StringIndexOutOfBoundsException e) {
+                    ui.printErr("The search query cannot be empty.");
+                }
+                if (search.length() == 0) {
+                    ui.printErr("The search query cannot be empty.");
+                } else {
+                    int noOfHits = 0;
+                    ArrayDeque<Task> found = new ArrayDeque<>();
+                    for (int i = 0; i < list.size(); i++) {
+                        Task currTask = list.get(i);
+                        if (currTask.toString().contains(search)) {
+                            found.add(currTask);
+                            noOfHits++;
+                        }
+                    }
+                    if (noOfHits == 0) {
+                        ui.print("Looks like no tasks were found :(");
+                    } else {
+                        String[] output = new String[noOfHits + 1];
+                        output[0] = "Here are the matching tasks in your list:";
+                        for (int i = 1; i <= noOfHits; i++) {
+                            output[i] = i + "." + found.poll().toString();
+                        }
+                        ui.print(output);
                     }
                 }
             } else {
