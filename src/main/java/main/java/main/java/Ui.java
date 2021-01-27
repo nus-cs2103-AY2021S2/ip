@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 class Ui {
 
-    public void processCommand(String[] input, TaskList taskList) {
+    protected void processCommand(String[] input, TaskList taskList) {
         try {
             if (input[0].equals("list")) {
                 taskList.listTask();

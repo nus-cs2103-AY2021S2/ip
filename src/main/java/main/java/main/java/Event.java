@@ -14,7 +14,7 @@ class Event extends Task {
         this.date = date;
     }
 
-    public String getDate() {
+    protected String getDate() {
         return Task.printDate(this.date);
     }
 

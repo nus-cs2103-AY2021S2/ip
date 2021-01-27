@@ -21,15 +21,15 @@ class TaskList {
         }
     }
 
-    public void listTask() {
+    protected void listTask() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            Task currTask = taskList.get(i);
+            main.java.Task currTask = taskList.get(i);
             System.out.println(i + 1 + "." + currTask);
         }
     }
 
-    public void doneTask(int index) throws DukeException {
+    protected void doneTask(int index) throws DukeException {
         if (this.taskList.size() >= index) {
             Task currTask = this.taskList.get(index - 1);
             currTask.completeTask();

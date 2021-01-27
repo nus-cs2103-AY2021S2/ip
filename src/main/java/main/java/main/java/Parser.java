@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-class Parser {
+public class Parser{
 
     public String[] processCommand (String input) throws DukeException {
         String command = input.split(" ")[0];
@@ -25,7 +25,7 @@ class Parser {
         }
     }
 
-    public String[] processList(String input) throws DukeException {
+    private String[] processList(String input) throws DukeException {
         String[] result = new String[1];
         String[] processedInput = input.split(" ");
         if (processedInput.length > 1) {
@@ -36,7 +36,7 @@ class Parser {
         return result;
     }
 
-    public String[] processDone(String input) throws DukeException {
+    private String[] processDone(String input) throws DukeException {
         String[] result = new String[2];
         String[] processedInput = input.split(" ");
         if (processedInput.length == 1) {
@@ -54,7 +54,7 @@ class Parser {
         }
     }
 
-    public String[] processDelete(String input) throws DukeException {
+    private String[] processDelete(String input) throws DukeException {
         String[] result = new String[2];
         String[] processedInput = input.split(" ");
         if (processedInput.length == 1) {
@@ -72,7 +72,7 @@ class Parser {
         }
     }
 
-    public String[] processToDo(String input) throws DukeException {
+    private String[] processToDo(String input) throws DukeException {
         String[] result = new String[2];
         String[] processedInput = input.split(" ");
         if (processedInput.length == 1) {
@@ -85,7 +85,7 @@ class Parser {
         return result;
     }
 
-    public String[] processDeadLine(String input) throws DukeException {
+    private String[] processDeadLine(String input) throws DukeException {
         String[] result = new String[3];
         String[] processedInput = input.substring(9).split("/by");
         if (processedInput.length == 0) {
@@ -104,7 +104,7 @@ class Parser {
         }
     }
 
-    public String[] processEvent(String input) throws DukeException {
+    private String[] processEvent(String input) throws DukeException {
         String[] result = new String[3];
         String[] processedInput = input.substring(6).split("/at");
         if (processedInput.length == 0) {

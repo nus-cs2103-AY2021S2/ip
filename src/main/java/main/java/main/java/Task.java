@@ -15,7 +15,7 @@ abstract class Task {
         this.isDone = isDone;
     }
 
-    public void completeTask() {
+    protected void completeTask() {
         this.isDone = true;
     }
 
@@ -28,7 +28,7 @@ abstract class Task {
                 " " + day + " " + year;
     }
 
-    public boolean isComplete() {
+    protected boolean isComplete() {
         return this.isDone;
     }
 }

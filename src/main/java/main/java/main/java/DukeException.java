@@ -1,6 +1,6 @@
 package main.java;
 
-class DukeException extends Exception {
+public class DukeException extends Exception {
     private final String errorMessage;
 
     public DukeException(String error) {

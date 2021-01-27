@@ -42,7 +42,7 @@ public class Duke {
         System.out.println("What can I do for you?");
     }
 
-    public void process(String[] processedInput) {
+    private void process(String[] processedInput) {
         this.ui.processCommand(processedInput, this.taskList);
     }
 }
