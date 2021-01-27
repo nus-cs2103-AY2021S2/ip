@@ -1,21 +1,21 @@
 import java.util.Scanner;
 
-import java.util.Arrays;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import java.util.Arrays;
 
 public class Duke {
     private static TaskList tasks;
+    private static Storage storage;
 
     public static void main(String[] args) {
         tasks = new TaskList();
+        storage = new Storage();
         try {
-            Duke.loadData();
+            storage.loadData();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File not found :(");
         }
         Scanner sc = new Scanner(System.in);
         System.out.println("Duke: Hello I'm Duke, what can I do for you?");
@@ -32,21 +32,6 @@ public class Duke {
         }
         System.out.println("Duke: Bye, hope to see you again! :)");
         System.out.println("-----------------------------------------------------");
-    }
-
-    public static void loadData() throws FileNotFoundException {
-        File dataFolder = new File("data");
-        if (!dataFolder.exists()) {
-            dataFolder.mkdir();
-        }
-        File dukeFile = new File("data/duke.txt");
-        if (dukeFile.exists()) {
-            Scanner s = new Scanner(dukeFile); // create a Scanner using the File as the source
-            while (s.hasNext()) {
-                Duke.readTaskList(s.nextLine());
-            }
-            Duke.printList();
-        }
     }
 
     public static void readTaskList(String taskData) {
@@ -71,18 +56,10 @@ public class Duke {
         }
     }
 
-
-    public static void writeNewFile(String filePath, String userInput) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(userInput);
-        fw.close();
-    }
-
     public static void writeTaskList() {
         String userInput = tasks.joinToTxt();
-        String filePath = "data/duke.txt";
         try {
-            writeNewFile(filePath, userInput);
+            storage.writeNewFile(userInput);
         } catch (IOException e) {
             System.out.println("ERROR");
         }
