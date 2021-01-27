@@ -108,7 +108,7 @@ public class Duke {
                         } else {
                             System.out.println("\nNow you have "
                                                 + taskList.size()
-                                                + " tasks in the list, Master!");
+                                                + " tasks in the list, Master.");
                         }
 
                         input = sc.nextLine();
