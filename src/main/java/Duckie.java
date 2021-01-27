@@ -1,7 +1,10 @@
 package main.java;
 
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Scanner;
 
 /**
  * Duckie is an interactive chatbot that helps with user's tasks.
@@ -30,7 +33,6 @@ public class Duckie {
         System.out.println(line);
 
         Scanner sc = new Scanner(System.in);
-        int count = 0;
         ArrayList<Task> arr = new ArrayList<>();
 
         while (sc.hasNext()) {
@@ -41,7 +43,7 @@ public class Duckie {
 
                 if (input.equalsIgnoreCase("todo") ||
                         input.equalsIgnoreCase("event") ||
-                            input.equalsIgnoreCase("deadline")) {
+                        input.equalsIgnoreCase("deadline")) {
                     throw new DuckieException("there is nothing to do!");
                 }
 
@@ -52,14 +54,14 @@ public class Duckie {
 
                 } else if (input.equalsIgnoreCase("list")) {
                     System.out.println(line);
-                    if (count == 0) {
+                    if (arr.size() == 0) {
                         System.out.println("there are no tasks in your list!");
-                    } else if (count == 1) {
+                    } else if (arr.size() == 1) {
                         System.out.println("get to work! this is the task in your list: ");
                     } else {
                         System.out.println("get to work! these are the tasks in your list: ");
                     }
-                    for (int i = 0; i < count; i++) {
+                    for (int i = 0; i < arr.size(); i++) {
                         System.out.println(i + 1 + "." + arr.get(i).toString());
                     }
                     System.out.println(line);
@@ -79,13 +81,13 @@ public class Duckie {
                     arr.add(tempT);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempT.toString());
-                    count++;
-                    if (count == 0) {
+
+                    if (arr.size() == 0) {
                         System.out.println("there are no tasks in your list!");
-                    } else if (count == 1) {
-                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else if (arr.size() == 1) {
+                        System.out.println("you have " + arr.size() + " task in your list! keep working!");
                     } else {
-                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                        System.out.println("you have " + arr.size() + " tasks in your list! keep working!");
                     }
                     System.out.println(line);
 
@@ -93,19 +95,29 @@ public class Duckie {
                     if (!str[1].contains("/at")) {
                         throw new DuckieException("oops! please specify the time of your event using '/at'");
                     }
+
                     System.out.println(line);
                     String[] strE = str[1].split("/at", 2);
-                    Event tempE = new Event(strE[0], strE[1]);
+
+                    String inputDate = strE[1].trim();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                    Date date;
+                    try {
+                        date = format.parse(inputDate);
+                    } catch (Exception e) {
+                        throw new DuckieException("please enter date in the format dd-mm-yyyy");
+                    }
+                    Event tempE = new Event(strE[0], date);
                     arr.add(tempE);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempE.toString());
-                    count++;
-                    if (count == 0) {
+
+                    if (arr.size() == 0) {
                         System.out.println("there are no tasks in your list!");
-                    } else if (count == 1) {
-                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else if (arr.size() == 1) {
+                        System.out.println("you have " + arr.size() + " task in your list! keep working!");
                     } else {
-                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                        System.out.println("you have " + arr.size() + " tasks in your list! keep working!");
                     }
                     System.out.println(line);
 
@@ -113,19 +125,29 @@ public class Duckie {
                     if (!str[1].contains("/by")) {
                         throw new DuckieException("oops! please specify deadline using '/by'");
                     }
+
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
-                    Deadline tempD = new Deadline(strD[0], strD[1]);
+                    String inputDate = strD[1].trim();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                    Date date;
+                    try {
+                        date = format.parse(inputDate);
+                    } catch (Exception e) {
+                        throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
+                    }
+                    Deadline tempD = new Deadline(strD[0], date);
+
                     arr.add(tempD);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempD.toString());
-                    count++;
-                    if (count == 0) {
+
+                    if (arr.size() == 0) {
                         System.out.println("there are no tasks in your list!");
-                    } else if (count == 1) {
-                        System.out.println("you have " + count + " task in your list! keep working!");
+                    } else if (arr.size() == 1) {
+                        System.out.println("you have " + arr.size() + " task in your list! keep working!");
                     } else {
-                        System.out.println("you have " + count + " tasks in your list! keep working!");
+                        System.out.println("you have " + arr.size() + " tasks in your list! keep working!");
                     }
                     System.out.println(line);
 
@@ -135,13 +157,13 @@ public class Duckie {
                     int deleteNum = Integer.parseInt(str[1]);
                     System.out.println(arr.get(deleteNum - 1).toString());
                     arr.remove(deleteNum - 1);
-                    count--;
-                    if (count == 0) {
+
+                    if (arr.size() == 0) {
                         System.out.println("yay! you are done!");
-                    } else if (count == 1) {
-                        System.out.println("yay! you have " + count + " task left to do!");
+                    } else if (arr.size() == 1) {
+                        System.out.println("yay! you have " + arr.size() + " task left to do!");
                     } else {
-                        System.out.println("yay! you have " + count + " tasks left to do!");
+                        System.out.println("yay! you have " + arr.size() + " tasks left to do!");
                     }
                 } else {
                     throw new DuckieException("invalid input! please start with the word 'todo', 'event' or 'deadline',"
@@ -199,8 +221,8 @@ class Task {
  */
 
 class Deadline extends Task {
-    protected String by;
-    public Deadline(String description, String by) {
+    protected Date by;
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
@@ -233,8 +255,8 @@ class ToDo extends Task {
  * Event is specified by [E].
  */
 class Event extends Task {
-    protected String at;
-    public Event (String description, String at) {
+    protected Date at;
+    public Event (String description, Date at) {
         super(description);
         this.at = at;
     }
