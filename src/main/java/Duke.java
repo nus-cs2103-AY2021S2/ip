@@ -61,9 +61,7 @@ public class Duke {
         }
 
         Scanner sc = new Scanner(System.in);
-        String lineSpacing = "____________________________________________________________";
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + lineSpacing);
-        String taskConfirmation = "Got it. I've added this task:\n";
+        Ui.greet();
         boolean byeFlag = true;
 
         while (byeFlag) {
@@ -84,10 +82,7 @@ public class Duke {
                     ToDo t = new ToDo(s.substring(5));
                     list.add(t);
                     writeToFile(data, list);
-                    System.out.println(taskConfirmation + t
-                            + "\nNow you have " + list.size()
-                            + (list.size() < 2 ? " task " : " tasks ") + "in the list.\n"
-                            + lineSpacing);
+                    Ui.taskAddConfirmation(t, list);
                     break;
                 case DEADLINE:
                     String[] arr2 = s.split(" /by ");
@@ -106,10 +101,7 @@ public class Duke {
                     Deadline d = new Deadline(arr2[0].substring(9), deadlineDate);
                     list.add(d);
                     writeToFile(data, list);
-                    System.out.println(taskConfirmation + d
-                            + "\nNow you have " + list.size()
-                            + (list.size() < 2 ? " task " : " tasks ") + "in the list.\n"
-                            + lineSpacing);
+                    Ui.taskAddConfirmation(d, list);
                     break;
                 case EVENT:
                     String[] arr3 = s.split(" /at ");
@@ -128,23 +120,10 @@ public class Duke {
                     Event e = new Event(arr3[0].substring(6), eventDate);
                     list.add(e);
                     writeToFile(data, list);
-                    System.out.println(taskConfirmation + e
-                            + "\nNow you have " + list.size()
-                            + (list.size() < 2 ? " task " : " tasks ") + "in the list.\n"
-                            + lineSpacing);
+                    Ui.taskAddConfirmation(e, list);
                     break;
                 case LIST:
-                    if (list.isEmpty()) {
-                        System.out.println("There are no tasks in your list. Hooray!\n" + lineSpacing);
-                        continue;
-                    }
-                    System.out.println("Here are the tasks in your list:");
-                    int num = 1;
-                    for (Task task : list) {
-                        System.out.println(num + "." + task);
-                        num++;
-                    }
-                    System.out.println(lineSpacing);
+                    Ui.listTasks(list);
                     break;
                 case DONE:
                     if (arr.length < 2) {
@@ -155,10 +134,10 @@ public class Duke {
                         if (index < 1 || index > list.size()) {
                             throw new DukeException("OOPS!!! The numbered task does not exist.");
                         }
-                        list.get(index - 1).markAsDone();
+                        Task task = list.get(index - 1);
+                        task.markAsDone();
                         writeToFile(data, list);
-                        System.out.println("Nice! I've marked this task as done:\n" + list.get(index - 1)
-                                + "\n" + lineSpacing);
+                        Ui.taskDoneConfirmation(list, task);
                     } catch (NumberFormatException ex) {
                         throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
                     }
@@ -175,22 +154,18 @@ public class Duke {
                         Task task = list.get(index - 1);
                         list.remove(index - 1);
                         writeToFile(data, list);
-                        System.out.println("Noted! I've removed this task:\n" + task
-                                + "\nNow you have " + list.size()
-                                + (list.size() == 1 ? " task " : " tasks ") + "in the list.\n"
-                                + lineSpacing);
+                        Ui.taskDeleteConfirmation(list, task);
                     } catch (NumberFormatException exception) {
                         throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
                     }
                     break;
                 case BYE:
-                    System.out.println("Bye. Hope to see you again soon!\n" + lineSpacing);
+                    Ui.byeMessage();
                     byeFlag = false;
                     break;
                 }
             } catch (DukeException e) {
-                System.out.println("Duke has encountered an error: " + e.getMessage()
-                        + "\n" + lineSpacing);
+                Ui.dukeExceptionMessage(e);
             }
         }
     }
