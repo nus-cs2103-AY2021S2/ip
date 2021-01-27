@@ -27,7 +27,6 @@ public class TaskList extends ArrayList<Task> {
             System.out.println("    ____________________________________________________________\n     " +
                     "Here are the tasks in your list:\n    " +
                     "____________________________________________________________\n");
-            return;
         }
         for (int i = 0; i < tasks.size(); i++) {
             s += (i + 1) + "." + tasks.get(i) + "\n";

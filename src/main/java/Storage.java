@@ -40,9 +40,7 @@ public class Storage {
     }
 
     public void scanFile() throws FileNotFoundException, DukeException {
-        Ui ui = new Ui();
         File file = new File(filePath);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
         Scanner fileScanner = new Scanner(file);
         int i = 0;
@@ -122,15 +120,5 @@ public class Storage {
             }
         }
         fw.close();
-    }
-
-    public static String format(String date) {
-        if (date.charAt(1) == '/') {
-            date = "0" + date;
-        }
-        if (date.charAt(4) == '/') {
-            date = date.substring(0, 3) + "0" + date.substring(3);
-        }
-        return date;
     }
 }

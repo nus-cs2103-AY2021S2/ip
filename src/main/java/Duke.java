@@ -19,7 +19,6 @@ public class Duke {
     }
 
     public void run() throws DukeException, IOException {
-        //load file and scan from input
         Scanner sc = new Scanner(System.in);
         while(sc.hasNextLine()) {
             String command = sc.nextLine();
