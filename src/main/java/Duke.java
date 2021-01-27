@@ -113,7 +113,7 @@ public class Duke {
             System.out.println(h_rule);
             PrintWriter writer = new PrintWriter(log);
             for (String line : fileContents) {
-                writer.print(line);
+                writer.println(line);
             }
             writer.close();
         }
@@ -136,9 +136,9 @@ public class Duke {
 
         try {
             if (logFile.isFile()) {
-                Scanner logs = new Scanner("./logs");
+                Scanner logs = new Scanner(logFile);
                 while (logs.hasNextLine()) {
-                    System.out.print(logs.nextLine());
+                    System.out.println(logs.nextLine());
                 }
                 logs.close();
             } else {
