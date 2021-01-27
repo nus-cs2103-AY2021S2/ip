@@ -1,14 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that extends from Task parent class.
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
 
     private LocalDate deadline;
 
     /**
      * Constructor method.
-     * @param description String that describes the task.
-     * @param deadline String that describes the deadline.
+     * @param description task description.
+     * @param deadline LocalDate object that describes the deadline.
      */
     public Deadline(String description, LocalDate deadline){
         super(description);
@@ -17,9 +21,9 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor method
-     * @param description task description
-     * @param deadline task deadline
-     * @param isDone task done status
+     * @param description task description.
+     * @param deadline LocalDate object that describes the deadline.
+     * @param isDone task done status.
      */
     public Deadline(String description, LocalDate deadline, boolean isDone){
         super(description, isDone);
@@ -34,6 +38,11 @@ public class Deadline extends Task {
         return this.deadline;
     }
 
+    /**
+     * Method that allows user to change the deadline of task
+     * @param deadline new deadline to be changed to
+     * @return the new deadline
+     */
     public LocalDate changeDeadline(LocalDate deadline){
         this.deadline = deadline;
         return this.deadline;

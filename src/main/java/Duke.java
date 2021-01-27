@@ -1,5 +1,8 @@
 import java.io.*;
 
+/**
+ * Duke is a personal AI assistant that allows users to record down their task list
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;

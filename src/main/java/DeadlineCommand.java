@@ -2,14 +2,29 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Command to create a deadline object.
+ */
 public class DeadlineCommand extends Command {
 
     private String command;
 
+    /**
+     * Constructor method.
+     * @param command input command from user.
+     */
     public DeadlineCommand(String command){
         this.command = command;
     }
 
+    /**
+     * Execute method for deadline.
+     * @param taskList List of Tasks.
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @throws DukeMissingInputException If deadline command is missing description.
+     * @throws DukeWrongInputException If user input is not any of the commands available.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
         String description = "";
@@ -43,7 +58,7 @@ public class DeadlineCommand extends Command {
     }
 
     /** Method to check if a certain string is of date format.
-     * @param str - input string to be checked if it is in the format of a string
+     * @param str - input string to be checked if it is in the format of a string.
      * @return boolean value telling us whether the string is a date or just simple text.
      */
     public static boolean isDate(String str) {
@@ -56,6 +71,10 @@ public class DeadlineCommand extends Command {
         return true;
     }
 
+    /**
+     * Indicates whether command is an exit command.
+     * @return boolean value for whether command is an exit command.
+     */
     @Override
     public boolean isExit() {
         return false;
