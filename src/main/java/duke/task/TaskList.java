@@ -41,4 +41,13 @@ public class TaskList {
         return this.list;
     }
 
+    public TaskList findTask(String str) {
+        LinkedList<Task> foundList = new LinkedList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getName().contains(str)) {
+                foundList.add(list.get(i));
+            }
+        }
+        return new TaskList(foundList);
+    }
 }
