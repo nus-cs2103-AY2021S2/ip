@@ -74,4 +74,8 @@ public class Duke {
         return this.logo;
     }
 
+    public void showTasksContainingKeyword(String keyword) {
+        Ui.showTasksToUser(list.tasksContainingKeyword(keyword));
+    }
+
 }

@@ -22,6 +22,16 @@ public class TaskList {
         this.lst.get(id).markAsDone();
     }
 
+    public List<Task> tasksContainingKeyword(String keyword) {
+        List<Task> tasksWithKeyword = new ArrayList<>();
+        for (Task task : lst) {
+            if (task.contains(keyword)) {
+                tasksWithKeyword.add(task);
+            }
+        }
+        return  tasksWithKeyword;
+    }
+
     public List<Task> getLst() {
         return lst;
     }

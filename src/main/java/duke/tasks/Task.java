@@ -35,6 +35,16 @@ public class Task {
         return this.isDone;
     }
 
+    public boolean contains(String keyword) {
+        String[] descriptionArray = this.description.split(" ");
+        for (String s : descriptionArray) {
+            if (keyword.equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return getType() + getStatusIcon() + " " + description;
