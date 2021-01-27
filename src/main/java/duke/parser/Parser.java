@@ -6,6 +6,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.InvalidCommandException;
 import duke.commands.InvalidDescriptionException;
@@ -68,6 +69,8 @@ public class Parser {
             return new ListCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case FindCommand.COMMAND_WORD:
+            return parseArgumentsForFind(arguments);
         default:
             throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -177,5 +180,12 @@ public class Parser {
         } catch (NumberFormatException ex) {
             throw new InvalidDescriptionException("Please enter a valid task number");
         }
+    }
+
+    private Command parseArgumentsForFind(String arguments) throws NoDescriptionException {
+        if (arguments.isBlank()) {
+            throw new NoDescriptionException("Please enter a search word or phrase!");
+        }
+        return new FindCommand(arguments);
     }
 }
