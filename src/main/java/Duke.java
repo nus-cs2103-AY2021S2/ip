@@ -1,13 +1,16 @@
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Main class for Duke.
+ *
+ */
 
 public class Duke {
+    /**
+     * Driver code.
+     */
     public static void main(String[] args) throws FileNotFoundException {
         Ui ui;
         String logo = " ____        _        \n"
@@ -76,11 +79,25 @@ public class Duke {
         ui.printResponse(goodbye);
     }
 
+    /**
+     * Find a task.
+     * @param tasks list of tasks.
+     * @param s the key string.
+     * @param ui the ui used to scan.
+     */
+
     private static void findTasks(TaskList tasks, String s, Ui ui) {
         TaskList query = tasks.find(s);
         ui.printResponse("Here are the matching tasks in your list:\n");
         ui.printTasks(query);
     }
+
+    /**
+     * Delete a task.
+     * @param tasks list of tasks.
+     * @param n the target index.
+     * @param ui the ui used to scan.
+     */
 
     private static void deleteTask(TaskList tasks, int n, Ui ui) {
         try {
@@ -96,6 +113,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Print the number of tasks
+     * @param size the total of tasks.
+     * @param ui the ui used to scan.
+     */
+
     private static void printTotalTasks(int size, Ui ui) {
         String msg;
         if(size != 1) {
@@ -106,6 +129,13 @@ public class Duke {
         }
         ui.printResponse(msg);
     }
+
+    /**
+     * Mark a task as done.
+     * @param tasks list of tasks.
+     * @param n target index.
+     * @param ui the ui used to scan.
+     */
 
     private static void doneTask(TaskList tasks, int n,Ui ui) {
         try {
@@ -118,9 +148,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Print an error.
+     * @param ui the ui used to scan.
+     */
+
     private static void addError(Ui ui) {
         ui.printResponse("Command not understood");
     }
+
+    /**
+     * Add a todo task
+     * @param tasks list of tasks.
+     * @param pre input from user.
+     * @param ui the ui used to scan.
+     */
 
     private static void addToDo(TaskList tasks, String[] pre, Ui ui) {
         if (pre.length > 0) {
@@ -134,6 +176,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Add a event task
+     * @param tasks list of tasks.
+     * @param cmd input from user.
+     * @param ui the ui used to scan.
+     */
+
     private static void addEvent(TaskList tasks, String cmd,Ui ui) {
         String[] pre2 = cmd.split("/at");
         try {
@@ -142,10 +191,17 @@ public class Duke {
             ui.printResponse(tasks.get(tasks.size() - 1).toString());
             printTotalTasks(tasks.size(),ui);
         }
-        catch (ArrayIndexOutOfBoundsException  e){
+        catch (ArrayIndexOutOfBoundsException e) {
             ui.printResponse("Please enter a description for event");
         }
     }
+
+    /**
+     * Add a deadline task
+     * @param tasks list of tasks.
+     * @param cmd input from user.
+     * @param ui the ui used to scan.
+     */
 
     private static void addDeadline(TaskList tasks, String cmd, Ui ui) {
         String[] pre2 = cmd.split("/by");
@@ -155,15 +211,22 @@ public class Duke {
             ui.printResponse(tasks.get(tasks.size() - 1).toString());
             printTotalTasks(tasks.size(),ui);
         }
-        catch (ArrayIndexOutOfBoundsException  e){
+        catch (ArrayIndexOutOfBoundsException  e) {
             ui.printResponse("Please enter a description for deadline");
         }
     }
-    private static ArrayList<Task> readInput(ArrayList<String> strings){
+
+    /**
+     * Read input from an array of strings
+     * @param strings array to convert.
+     * @return the arrayList of tasks.
+     */
+
+    private static ArrayList<Task> readInput(ArrayList<String> strings) {
         ArrayList<Task> tasks = new ArrayList<>();
-        for(String i: strings){
+        for(String i: strings) {
             String[] texts = i.split("\\s+");
-            switch(texts[0].charAt(1)){
+            switch(texts[0].charAt(1)) {
                 case 'D':
                     tasks.add(Parser.stringToDeadline(i));
                     break;
@@ -177,5 +240,4 @@ public class Duke {
         }
     return tasks;
     }
-
 }
