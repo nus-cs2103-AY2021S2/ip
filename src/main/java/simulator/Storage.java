@@ -10,13 +10,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class <code>Storage</code> deals with loading tasks from file and saving taks in the file.
+ * Contains two method <code>load</code> and <code>save</code>.
+ */
 public class Storage {
     private File data;
 
+    /**
+     * Constructs a storage with file to be loaded or saved initialized.
+     */
     public Storage() {
         data = new File("./data.txt");
     }
 
+    /**
+     * Loads from the file into the the specified <code>list</code> and returns a <code>TaskList</code>.
+     *
+     * @param list tasks loaded.
+     * @return loaded list.
+     */
     public TaskList load(TaskList list) {
         try {
             if (data.createNewFile()) {
@@ -50,6 +63,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Save the task in the specified <code>list</code> into the file.
+     *
+     * @param list tasks saved
+     * @throws IOException IOException if file not found
+     */
     public void save(TaskList list) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(data));
         for (int i = 0; i < list.size(); i++) {

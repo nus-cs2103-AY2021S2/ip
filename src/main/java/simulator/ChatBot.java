@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import exception.DukeException;
-import simulator.Parser;
-import simulator.Storage;
 import task.*;
 
 import ui.Ui;

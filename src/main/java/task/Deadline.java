@@ -9,14 +9,29 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class <code>Deadline</code> extends <code>Task</code>. It contains date
+ * and time which describes the task.
+ */
+
 public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Returns a string of the task's date with the format "dd MM yyyy".
+     *
+     * @return formatted date.
+     */
     public String getDate() {
         return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
+    /**
+     * Return a string of the task's time with the format "hh:mm a".
+     *
+     * @return formatted time.
+     */
     public String getTime() {
         if (this.time != null) {
             return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
@@ -25,6 +40,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Contructs a Deadline task with description as specified in <code>description</code>, and the time and
+     * date specified by <code>duration</code> argument.
+     *
+     * @param description task description.
+     * @param duration    task duration.
+     * @throws DukeException DukeException if task date or description is empty.
+     */
     public Deadline(String description, String duration) throws DukeException {
         this.type = "D";
         if (description.length() != 0 && duration.length() != 0) {
@@ -52,6 +75,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Contructs a Deadline task with status as specified by <code>status</code> and the description,date and time
+     * specified by <code>input</code>.
+     *
+     * @param status task status.
+     * @param input  task description,date and time.
+     * @throws DukeException DukeException if task date or description is empty.
+     */
     public Deadline(String status, String[] input) throws DukeException {
         this.type = "D";
         this.isDone = status.equals("complete");

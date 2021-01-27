@@ -2,6 +2,10 @@ package ui;
 
 import task.TaskList;
 
+/**
+ * Class <code>Ui</code> contains all the string messages that interacts with users and methods
+ * <code>printBox</code> and <code>printList</code>.
+ */
 public class Ui {
     public final static String MARK_MSG = "You have marked this task as completed: \n";
     public final static String ADD_MSG = "Roger that! Added the following task: \n \n      ";
@@ -25,11 +29,21 @@ public class Ui {
 
     public final static String EXIT_MSG = "Farewell. See you soon :)!";
 
+    /**
+     * Surrounds the specified <code>input</code> with a asterisk border.
+     *
+     * @param input input to be bordered
+     */
     public static void printBox(String input) {
         System.out.println(TOP_BORDER + indent4 + input
                 + "\n" + BOTTOM_BORDER);
     }
 
+    /**
+     * Surrounds the elements of the specified <code>list/code> with a asterisk border.
+     *
+     * @param list elements to be border
+     */
     public static void printList(TaskList list) {
         System.out.print(TOP_BORDER);
         System.out.println("     This is your present task list: \n");
