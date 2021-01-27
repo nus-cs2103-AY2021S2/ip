@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import static java.lang.System.exit;
@@ -38,13 +40,13 @@ public class Duke {
                     case "deadline":
                         String inst1 = sc.nextLine();
                         String[] part1 = inst1.split("/by");
-                        addTask(new Deadline(part1[0], part1[1]));
+                        addTask(new Deadline(part1[0], LocalDate.parse(part1[1].trim())));
                         System.out.println(partition);
                         break;
                     case "event":
                         String inst2 = sc.nextLine();
                         String[] part2 = inst2.split("/at");
-                        addTask(new Event(part2[0], part2[1]));
+                        addTask(new Event(part2[0], LocalDate.parse(part2[1].trim())));
                         System.out.println(partition);
                         break;
                     case "delete":
@@ -58,6 +60,8 @@ public class Duke {
                 }
             } catch (DukeException de) {
                 System.out.println(de.getMessage() + "\n" + partition);
+            } catch (DateTimeParseException de) {
+                System.out.println("Input date/time cannot be parsed: " + de.getMessage() + "\n" + partition);
             }
 
             command = sc.next();
