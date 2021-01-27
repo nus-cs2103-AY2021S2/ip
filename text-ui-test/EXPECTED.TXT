@@ -68,6 +68,12 @@
     ____________________________________________________________
 
     ____________________________________________________________
+    Here are the matching tasks in your list:
+    1. [T][ ] borrow book
+    2. [D][X] return book (by: January 25 2021 5:00 PM)
+    ____________________________________________________________
+
+    ____________________________________________________________
     Noted. I've removed this task:
         [E][ ] project meeting (at: January 26 2021 3:00 PM - January 26 2021 5:00 PM)
     Now you have 2 tasks in the list.

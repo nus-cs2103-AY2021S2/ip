@@ -75,6 +75,8 @@ public class Owen implements Chatbot {
                 return this.doneTask(parseTaskNumber(command.getArgs()));
             case DELETE:
                 return this.deleteTask(parseTaskNumber(command.getArgs()));
+            case FIND:
+                return this.findTask(command.getArgs());
             case BYE:
                 return this.shutdown();
             default:
@@ -154,5 +156,17 @@ public class Owen implements Chatbot {
                 deleteFormat, this.taskList.getTask(taskNumber), newNumTasks);
         Storage deleteStorage = this.storage.writeTaskList(deleteTaskList);
         return new Owen(this.isRunning, deleteResponse, deleteTaskList, deleteStorage);
+    }
+
+    /**
+     * Finds task in Owen task list.
+     * @param searchString Search string to search within tasks.
+     * @return Copy of Owen with updated response.
+     */
+    private Owen findTask(String searchString) {
+        String findResult = this.taskList.findTask(searchString);
+        String findFormat = "Here are the matching tasks in your list:\n%s";
+        String findResponse = String.format(findFormat, findResult);
+        return new Owen(this.isRunning, findResponse, this.taskList, this.storage);
     }
 }
