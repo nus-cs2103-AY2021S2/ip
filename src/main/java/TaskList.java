@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that handles the backend of the program,
+ * storing all the tasklists of the user and handles
+ * each command.
+ */
+
 public class TaskList {
 
     public ArrayList<Task> storage;
@@ -28,7 +34,9 @@ public class TaskList {
     }
 
     /**
-     * function that deletes en entry in the list
+     * Method that deletes the item from the tasklist.
+     * @param value the position of the item to be deleted.
+     * @throws DukeException
      */
     void delete(int value) throws DukeException {
         if (value <= 0 || value > storage.size()) {
@@ -41,6 +49,9 @@ public class TaskList {
         System.out.println();
     }
 
+    /**
+     * Method that lists out all items in the current tasklist.
+     */
      void listItems() {
         if (storage.isEmpty()) {
             System.out.println("Empty list");

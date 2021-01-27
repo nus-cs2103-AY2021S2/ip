@@ -1,6 +1,10 @@
 import java.util.Scanner;
-
 import static java.lang.System.exit;
+
+
+/**
+ * Class that deals with the user input and pushes out the appropriate command
+ */
 
 public class Parser {
 
@@ -10,6 +14,11 @@ public class Parser {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * method that deals with the user input.
+     * @param tasks the TaskList obj that contains the current list
+     * @param fm the data.txt save file of the current user
+     */
     void readCommands(TaskList tasks, Storage fm) {
         String cmd = sc.next();
         while (true) {
@@ -54,6 +63,9 @@ public class Parser {
         }
     }
 
+    /**
+     *  Method that exits the program.
+     */
     void terminate() {
         System.out.println("GOOD BYE SEE YOU AGAIN!");
         System.out.println();

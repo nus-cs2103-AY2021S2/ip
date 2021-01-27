@@ -28,8 +28,8 @@ public class Storage {
     }
 
     /**
-     * Function that saves the file after each usage of duke, saves when the user inputs the command
-     * "bye".
+     * Saves the tasklist in /data/saveFile.txt
+     * @param store the current tasklist of the user
      */
     public void saveFile(TaskList store) {
         try {

@@ -1,3 +1,9 @@
+/**
+ * Class that represents the type of task, description of task
+ * and whether the task is done. Subclasses may include the date
+ * and time of the task.
+ */
+
 public class Task {
 
     protected String description;
