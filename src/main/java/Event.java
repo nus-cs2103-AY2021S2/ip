@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private LocalDateTime at;
-    private final String type = "E";
+    private String type = "E";
 
     public Event(String description, String at) {
        this(description, at, false);
@@ -17,6 +17,7 @@ public class Event extends Task {
     }
 
     private void setTime(String time) {
+        // convert time from String to LocalDateTime in specified format
         DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
         LocalDateTime dateTime = LocalDateTime.parse(time, inputFormat);
         this.at = dateTime;

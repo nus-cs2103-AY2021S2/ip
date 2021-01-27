@@ -9,7 +9,7 @@ import java.util.Locale;
 public class Deadline extends Task {
 
     private LocalDateTime by;
-    private final String type = "D";
+    private String type = "D";
 
     public Deadline(String description, String by) {
         this(description, by, false);

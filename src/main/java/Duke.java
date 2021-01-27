@@ -37,7 +37,10 @@ public class Duke {
     private void runCommandLoopUntilExitCommand() {
         String commandText = "";
         while (!commandText.equals("bye")){
+            // take user input
             commandText = ui.getUserCommand();
+
+            // identify operator and execute command accordingly
             try {
                 Parser commandParser = new Parser();
                 String operator = commandParser.parseOperator(commandText);
@@ -50,34 +53,36 @@ public class Duke {
 
     private void executeCommand(String operator, String commandText) throws DukeException {
         Parser commandParser = new Parser();
+
         try {
+            // parse command details according to their operator
             switch (operator) {
-                case "done":
-                    int taskNumberToComplete = commandParser.parseDone(commandText);
-                    completeTask(taskNumberToComplete);
-                    break;
-                case "delete":
-                    int taskNumberToDelete = commandParser.parseDelete(commandText);
-                    deleteTask(taskNumberToDelete);
-                    break;
-                case "todo":
-                    String description = commandParser.parseAddToDo(commandText);
-                    addToDo(description);
-                    break;
-                case "deadline":
-                    String[] detailsDeadline = commandParser.parseAddDeadline(commandText);
-                    addDeadline(detailsDeadline);
-                    break;
-                case "event":
-                    String[] detailsEvent = commandParser.parseAddEvent(commandText);
-                    addEvent(detailsEvent);
-                    break;
-                case "list":
-                    displayList();
-                    break;
-                case "find":
-                    String keyword = commandParser.parseFindTask(commandText);
-                    findTask(keyword);
+            case "done":
+                int taskNumberToComplete = commandParser.parseDone(commandText);
+                completeTask(taskNumberToComplete);
+                break;
+            case "delete":
+                int taskNumberToDelete = commandParser.parseDelete(commandText);
+                deleteTask(taskNumberToDelete);
+                break;
+            case "todo":
+                String description = commandParser.parseAddToDo(commandText);
+                addToDo(description);
+                break;
+            case "deadline":
+                String[] detailsDeadline = commandParser.parseAddDeadline(commandText);
+                addDeadline(detailsDeadline);
+                break;
+            case "event":
+                String[] detailsEvent = commandParser.parseAddEvent(commandText);
+                addEvent(detailsEvent);
+                break;
+            case "list":
+                displayList();
+                break;
+            case "find":
+                String keyword = commandParser.parseFindTask(commandText);
+                findTask(keyword);
             }
         } catch (DukeException e){
             ui.showErrorMessage(e.getMessage());
@@ -86,23 +91,32 @@ public class Duke {
     }
 
     private void addEvent(String[] details) {
+        // create a new Event
         String description = details[0];
         String time = details[1];
         Event newTask = new Event(description, time);
+
+        // add Event to tasks
         tasks.addTask(newTask);
         ui.showAddMessage(newTask, tasks.getSize());
     }
 
     private void addDeadline(String[] details) {
+        // create a new Deadline
         String description = details[0];
         String time = details[1];
         Deadline newTask = new Deadline(description, time);
+
+        // add Deadline to tasks
         tasks.addTask(newTask);
         ui.showAddMessage(newTask, tasks.getSize());
     }
 
     private void addToDo(String description) {
+        // create a new ToDo
         ToDo newTask = new ToDo(description);
+
+        // add ToDo to tasks
         tasks.addTask(newTask);
         ui.showAddMessage(newTask, tasks.getSize());
     }

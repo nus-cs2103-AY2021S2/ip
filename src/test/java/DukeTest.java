@@ -15,39 +15,40 @@ public class DukeTest {
     }
 
     @Test
-    public void parserInvalidOperatorTest() {
+    public void parserOperator_invalidOperator_exceptionThrown() {
         try {
-            final String[] invalidInput = {"", " ", "abc", "hello", "add meeting /at 2pm"};
+            String[] invalidInputs = {"", " ", "abc", "hello", "add meeting /at 2pm"};
 
-            for (String input: invalidInput){
+            for (String input: invalidInputs){
                 parser.parseOperator(input);
                 fail("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (final DukeException e ) {
-            final String msg = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } catch (DukeException e ) {
+            String msg = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             assertEquals(msg, e.getMessage());
         }
     }
 
     @Test
-    public void parserInvalidDeadlineDateTest() {
+    public void parserAddDeadline_invalidDeadlineDate_exceptionThrown() {
         try {
-            final String deadlineDescription = "deadline homework /by";
-            final String[] invalidDate = {"", " ", "abc", " 10/1/2020"};
+            String deadlineDescription = "deadline homework /by";
+            String[] invalidDates = {"", " ", "abc", " 10/1/2020"};
 
-            for (String date: invalidDate){
+            for (String date: invalidDates){
                 String testCommandText = deadlineDescription + date;
                 parser.parseAddDeadline(testCommandText);
                 fail("OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm");
             }
-        } catch (final DukeException e ) {
-            final String msg = "OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm";
+        } catch (DukeException e ) {
+            String msg = "OOPS!! Please follow the correct data/time format: yyyy-M-d H:mm";
             assertEquals(msg, e.getMessage());
         }
     }
 
     @Test
-    public void taskListDeleteTest(){
+    //featureUnderTest_testScenario_expectedBehavior()
+    public void addTask_addTaskInTestList_containedInTestList(){
         TaskList tasks = new TaskList();
         Task testTask = new Task("homework");
         tasks.addTask(testTask);
