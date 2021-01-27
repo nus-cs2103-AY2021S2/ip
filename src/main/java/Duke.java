@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -96,6 +97,8 @@ public class Duke {
                             "To see your tasks enter 'list'.\n To complete a task enter " +
                             "'done (number of the task in the list)'.\n And to close Duke " +
                             "enter 'bye'.\n"+ line);
+                } catch (DateTimeParseException e) {
+                    System.out.println(line+" Enter Date in this format yyyy-mm-dd\n"+line);
                 }
             }
         }

@@ -1,6 +1,6 @@
 todo     eat later
-deadline     eat     mee siam   /  2.30pm on Jan 2
-event    go to buffet   /    when hungry
+deadline     eat     mee siam   /  2021-01-23
+event    go to buffet   /    2020-12-23
 list
 done 1
 done 2
@@ -12,9 +12,17 @@ todo
 deadline
 deadline sdf
 deadline sdf /
+deadline sdf / er wr
+deadline sdf / 2020-43-03
+deadline sdf / 2020-03-43
+deadline sdf / 2020-43-43
 event
 event sdf
 event sdf /
+event sdf / er wr
+event sdf / 2020-43-03
+event sdf / 2020-03-43
+event sdf / 2020-43-43
 delete 1
 delete 1
 delete 1
