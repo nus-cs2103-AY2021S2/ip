@@ -23,6 +23,7 @@ public class Duke {
     private Scanner keyboard;
     private Storage storage;
     private Ui ui;
+
     /**
      * A constructor for Duke class
      *

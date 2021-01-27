@@ -11,6 +11,7 @@ public class TaskList {
     private LinkedList<Task> Tasks;
     private int numOfTasks;
 
+
     /**
      * Default Constructor for TaskList object
      * that has an empty LinkedList that can store Task object
@@ -22,6 +23,7 @@ public class TaskList {
         numOfTasks = 0;
     }
 
+
     /**
      * Getter for TaskList object's current number of tasks.
      *
@@ -30,6 +32,7 @@ public class TaskList {
     public int getNumOfTasks(){
         return numOfTasks;
     }
+
 
     /**
      * Getter for TaskList object's List of the current tasks.

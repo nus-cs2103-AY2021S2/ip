@@ -19,6 +19,7 @@ public class ListCommand extends Command{
     public ListCommand(String userMessage){
         super(userMessage);
     }
+
     /**
      * The execution after parsing, list out all the current tasks.
      *

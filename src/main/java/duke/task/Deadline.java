@@ -40,6 +40,7 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+
     private LocalDateTime stringToDatetime(String by){
         return LocalDateTime.parse(by,DF1);
     }
@@ -47,6 +48,7 @@ public class Deadline extends Task {
     private String datetimeToString(LocalDateTime by){
         return DF2.format(by);
     }
+
 
     /**
      * Get the deadline time as a LocalDateTime object.
@@ -61,6 +63,7 @@ public class Deadline extends Task {
      * @return A String object that represent the task name, including information
      * about the task type, name and deadline time.
      */
+
     @Override
     public String toString() {
         return "[D]" + super.getTaskName() + " (by: " + datetimeToString(by) + ")";

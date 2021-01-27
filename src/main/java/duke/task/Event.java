@@ -29,6 +29,7 @@ public class Event extends Task{
         super(description,status);
         this.at = stringToDatetime(at);
     }
+
     /**
      * Constructor for event object
      *
@@ -49,6 +50,7 @@ public class Event extends Task{
         return DF2.format(at);
     }
 
+
     /**
      * Get the event time as a LocalDateTime object.
      * @return the the event time as a LocalDateTime object.
@@ -56,7 +58,6 @@ public class Event extends Task{
     public LocalDateTime getAt(){
         return at;
     }
-
 
 
     /**

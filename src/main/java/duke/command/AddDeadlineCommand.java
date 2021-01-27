@@ -10,11 +10,13 @@ import duke.task.TaskList;
  * during the running of the program and starts add new deadlines to the task list.
  */
 public class AddDeadlineCommand extends Command{
+
     /**
      * Constructor for AddDeadlineCommand object
      *
      * @param userMessage The message that the user inputs for further execution.
      */
+
     public AddDeadlineCommand(String userMessage){
         super(userMessage);
     }

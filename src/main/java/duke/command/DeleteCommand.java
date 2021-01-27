@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * delete the tasks by task index.
  */
 public class DeleteCommand extends Command {
+
     /**
      * Constructor for DeleteCommand object
      *
@@ -20,6 +21,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String userMessage) {
         super(userMessage);
     }
+
     /**
      * The execution after parsing, it will delete the task based on the index.
      * If the input is not correct, it will raise an exception.

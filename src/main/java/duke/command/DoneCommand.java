@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * task as done.
  */
 public class DoneCommand extends Command{
+
     /**
      * Constructor for DoneCommand object
      *
@@ -20,6 +21,7 @@ public class DoneCommand extends Command{
     public DoneCommand(String userMessage){
         super(userMessage);
     }
+
     /**
      * The execution after parsing, it will mark the task as done based on the index.
      * If the input is not correct, it will raise an exception.

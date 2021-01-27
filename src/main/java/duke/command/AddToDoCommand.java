@@ -19,6 +19,7 @@ public class AddToDoCommand extends Command{
     public AddToDoCommand(String userMessage){
         super(userMessage);
     }
+
     /**
      * The execution after parsing, it will add a ToDo object into the tasks.
      * If the input is not correct, it will raise an exception.

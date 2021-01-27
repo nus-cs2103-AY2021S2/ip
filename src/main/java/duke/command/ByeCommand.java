@@ -19,6 +19,7 @@ public class ByeCommand extends Command{
     public ByeCommand(String userMessage){
         super(userMessage);
     }
+
     /**
      * The execution after parsing, it will change the static variable of all Command
      * object into exit = true, which means the user wants to exit.

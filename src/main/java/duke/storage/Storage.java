@@ -17,6 +17,7 @@ public class Storage {
     private boolean existDir;
     private String dirPath;
 
+
     /**
      * Constructor for Storage object
      *
@@ -27,6 +28,7 @@ public class Storage {
         this.filePath = filePath;
         this.dirPath = dirPath;
     }
+
     /**
      * The function will read the txt file based on the file path and
      * directory path and then returns the taskList.
@@ -83,6 +85,7 @@ public class Storage {
         return taskList;
     }
 
+
     /**
      * The function will save the tasks immediately after the program terminates into the txt file into the
      * path that the user specified.
@@ -90,6 +93,7 @@ public class Storage {
      * @param taskList The taskList that will be used in the program.
      * @throws IOException if the program meets IO problem.
      */
+
     public void saveTasks(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath, false);
 
