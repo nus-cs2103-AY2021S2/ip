@@ -110,13 +110,13 @@ public class Duke {
 
     public void delete(String index) throws DukeException {
         if (index.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The index to delete the task is missing.");
+            throw new DukeException("☹ OOPS!!! The index of the task to delete is missing.");
         }
         int deleteIndex;
         try {
             deleteIndex = Integer.parseInt(index.substring(1));
         } catch (NumberFormatException error) {
-            throw new DukeException("Index to delete must be an integer");
+            throw new DukeException("Index of the task to delete must be an integer");
         }
         if (this.storedTasks.size() >= deleteIndex) {
             System.out.println("Noted. I've removed this task:");
