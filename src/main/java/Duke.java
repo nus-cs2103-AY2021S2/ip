@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,8 +16,11 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        ArrayList<Task> taskList = new ArrayList<>();
         int count = 0;
+
+        final String path = "src/main/java/data/tasks.txt";
+        TaskData taskData = new TaskData(path);
+        ArrayList<Task> taskList = taskData.openFile();
 
         //commands entered by the user
         while(!str.equals("bye")) {
@@ -43,12 +46,14 @@ public class Duke {
             if (str.equals("list")) {
                 //display them back to the user when requested
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= count; i++) {
-                    System.out.println(i + ". " + taskList.get(i - 1));
-                }
-                if (count == 0) {
+                if (taskList.isEmpty()) {
                     System.out.println("There is no task in the list.");
+                } else {
+                    for (int i = 1; i <= taskList.size(); i++) {
+                        System.out.println(i + ". " + taskList.get(i - 1));
+                    }
                 }
+
                 System.out.println();
                 str = sc.nextLine();
             } else {
@@ -58,7 +63,7 @@ public class Duke {
                     //mark tasks as done
                     int number = toInteger(detail);
                     try {
-                        if(number < 1 || number > count){
+                        if(taskList.isEmpty() || number < 1 || number > taskList.size()){
                             throw new DukeException("The task index is invalid.\n");
                         }
                     } catch (DukeException ex) {
@@ -97,15 +102,15 @@ public class Duke {
                     //store task entered by the user
 
                     if (type.equals("todo")) {
-                        taskList.add(new Todo(detail));
+                        taskList.add(new Todo(detail,0));
                     } else if (type.equals("event")) {
                         String name = detail.substring(0, detail.indexOf(" /at"));
                         String time = detail.substring(detail.indexOf(" /at") + 5);
-                        taskList.add(new Event(name, time));
+                        taskList.add(new Event(name,0, time));
                     } else if (type.equals("deadline")) {
                         String name = detail.substring(0, detail.indexOf(" /by"));
                         String time = detail.substring(detail.indexOf(" /by") + 5);
-                        taskList.add(new Deadline(name, time));
+                        taskList.add(new Deadline(name,0, time));
                     }
                     count++;
                     if (count == 1) {
@@ -115,6 +120,7 @@ public class Duke {
                     }
                     str = sc.nextLine();
                 }
+                taskData.updateFile();
 
             }
         }
@@ -125,8 +131,7 @@ public class Duke {
 
     public static int toInteger(String toCheck) {
         try {
-            int i = Integer.parseInt(toCheck);
-            return i;
+            return Integer.parseInt(toCheck);
         }
         catch(Exception e) {
             return 0;
