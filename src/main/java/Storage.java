@@ -22,6 +22,7 @@ public class Storage {
     public Storage() {
         this.filePath = "data";
         this.f = new File(filePath, "duke.txt");
+        this.f.getParentFile().mkdirs();
     }
 
     public boolean isValidFileExtension(String filePath) {

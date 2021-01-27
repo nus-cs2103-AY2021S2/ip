@@ -51,7 +51,7 @@ public class Deadline extends Task{
 
         }
         catch (DukeException e) {
-            System.out.println(e.getMessage());
+            System.out.println("\t\t" + e.getMessage());
         }
         if (localDate == null) {
             return "[" + SHORT_HAND + "]" + super.toString() + " (by: " + this.by + ")";
