@@ -2,6 +2,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Scanner;
 
 
@@ -25,7 +26,7 @@ public class Duke {
     }
 
     public static void main(String[] launchArgs) throws Exception {
-        new Duke("../duke/data/tasks.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data/tasks.txt").run();
     }
 
     private void run() throws DukeException {
