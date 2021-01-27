@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Duke {
-    public static void main(final String[] args) {
+    public void run() {
         final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
@@ -59,6 +59,11 @@ public class Duke {
             horizontalLine();
         }
         scan.close();
+
+    }
+
+    public static void main(final String[] args) {
+        new Duke().run();
     }
 
     private static Task parseStringToTask(String str) {
