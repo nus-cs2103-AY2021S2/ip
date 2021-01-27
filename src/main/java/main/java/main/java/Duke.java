@@ -10,11 +10,22 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The main driver class for Duke. The tasklist contains the task list. The Ui deals
+ * with interactions with the user. The parser deals with making sense of the user
+ * commands.
+ */
 public class Duke {
     public TaskList taskList;
     public Parser parser;
     public Ui ui;
 
+    /**
+     * The main method of our program. The program terminates with the "bye" command.
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         Duke iceBear = new Duke();
@@ -34,6 +45,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Constructor for our Dukebot. The Dukebot will always start by first greeting the user
+     * whenever it is instantiated.
+     */
     public Duke() {
         this.taskList = new TaskList();
         this.parser = new Parser();

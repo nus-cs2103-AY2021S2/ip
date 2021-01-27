@@ -1,8 +1,11 @@
 package main.java;
 import java.time.LocalDate;
 
+/**
+ * Class that deals with interactions with the user.
+ */
 class Ui {
-
+    
     protected void processCommand(String[] input, TaskList taskList) {
         try {
             if (input[0].equals("list")) {

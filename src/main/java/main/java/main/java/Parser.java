@@ -4,8 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * The class that deals with making sense of the user command
+ */
 public class Parser{
 
+    /**
+     * The main method that reads the input from the user.
+     *
+     * @param input the input from the user
+     * @return a String[] data type that the other methods can process
+     * @throws DukeException together with the error message
+     */
     public String[] processCommand (String input) throws DukeException {
         String command = input.split(" ")[0];
         if (command.equals("list")) {
