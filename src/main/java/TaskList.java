@@ -34,12 +34,14 @@ public class TaskList {
         data.add(t);
     }
 
-    public void completeTask(int id) {
+    public void completeTask(int id) throws DukeInvalidArgumentException {
+        if (id > data.size()) throw new DukeInvalidArgumentException();
         Task t = data.get(id - 1);
         t.markAsDone();
     }
 
-    public void deleteTask(int id) {
+    public void deleteTask(int id) throws DukeInvalidArgumentException {
+        if (id > data.size()) throw new DukeInvalidArgumentException();
         data.remove(id - 1);
     }
 
