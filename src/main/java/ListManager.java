@@ -28,40 +28,51 @@ public class ListManager extends Manager {
 
         if(checkStringStartingEquals(userInput, "todo")){
 
+            int length = "todo".length();
             if (checkStringEquals(userInput, "todo")){
                 throw new DukeException(defaultFormatting("Error! The description of a todo cannot be empty!"));
+            }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+                throw new DukeException(defaultFormatting("Error! Please include a space after todo. " +
+                        "[eg. todo sleep]"));
             }else{
-                newTask = new ToDo(userInput.substring(5));
+                newTask = new ToDo(userInput.substring(length + 1));
             }
 
         }else if(checkStringStartingEquals(userInput, "event")) {
 
+            int length = "event".length();
             if (checkStringEquals(userInput, "event")){
                 throw new DukeException(defaultFormatting("Error! The description of a event cannot be empty!"));
+            }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+                throw new DukeException(defaultFormatting("Error! Please include a space after event. " +
+                        "[eg. event read /at 9pm]"));
             }else {
                 if (userInput.contains(" /at ")) {
-                    String[] arr = userInput.substring(6).split(" /at ");
+                    String[] arr = userInput.substring(length + 1).split(" /at ");
                     String eventDescription = arr[0];
                     String descriptionAt = arr[1];
                     newTask = new Event(eventDescription, descriptionAt);
                 }else{
                     throw new DukeException(defaultFormatting("Error! Please provide where and when the" +
-                            " event will take place after /at."));
+                            " event will take place after /at. [eg event read /at 9pm]"));
                 }
             }
         }else if(checkStringStartingEquals(userInput, "deadline")){
-
+            int length = "deadline".length();
             if (checkStringEquals(userInput, "deadline")){
                 throw new DukeException(defaultFormatting("Error! The description of a deadline cannot be empty!"));
+            }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+                throw new DukeException(defaultFormatting("Error! Please include a space after deadline. " +
+                        "[eg. deadline submit work /at 10am]"));
             }else {
                 if (userInput.contains(" /by ")) {
-                    String[] arr = userInput.substring(9).split(" /by ");
+                    String[] arr = userInput.substring(length+1).split(" /by ");
                     String deadlineDescription = arr[0];
                     String descriptionBy = arr[1];
                     newTask = new Deadline(deadlineDescription, descriptionBy);
                 }else{
                     throw new DukeException(defaultFormatting("Error! Please provide when the deadline " +
-                            "will be due after /by."));
+                            "will be due after /by. [eg. deadline submit work /at 10am]"));
                 }
             }
         }else{
@@ -123,9 +134,13 @@ public class ListManager extends Manager {
 
         if(checkStringStartingEquals(userInput, "done")){
             // done block
+            int length = "done".length();
             if (checkStringEquals(userInput, "done")){
                 throw new DukeException(defaultFormatting("Error! Please indicate the task " +
                         "which is done by its number on the list"));
+            }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+                throw new DukeException(defaultFormatting("Error! Please include a space after done. " +
+                        "[eg. done 1]"));
             }else {
                 try {
                     int taskInt = Integer.parseInt(userInput.split(" ")[1]);
@@ -140,9 +155,13 @@ public class ListManager extends Manager {
             }
         }else if(checkStringStartingEquals(userInput, "delete")){
             // delete block
+            int length = "delete".length();
             if (checkStringEquals(userInput, "delete")){
                 throw new DukeException(defaultFormatting("Error! Please indicate the task " +
                         "which want to delete by its number on the list"));
+            }else if(!checkStringEquals(userInput.substring(length,length+1), " ")){
+                throw new DukeException(defaultFormatting("Error! Please include a space after delete. " +
+                        "[eg. delete 1]"));
             }else {
                 try {
                     int taskInt = Integer.parseInt(userInput.split(" ")[1]);

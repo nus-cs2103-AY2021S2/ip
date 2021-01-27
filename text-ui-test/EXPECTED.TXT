@@ -30,10 +30,10 @@
      Error! The description of a deadline cannot be empty!
     ____________________________________________________________
     ____________________________________________________________
-     Error! Please provide where and when the event will take place after /at.
+     Error! Please provide where and when the event will take place after /at. [eg event read /at 9pm]
     ____________________________________________________________
     ____________________________________________________________
-     Error! Please provide when the deadline will be due after /by.
+     Error! Please provide when the deadline will be due after /by. [eg. deadline submit work /at 10am]
     ____________________________________________________________
     ____________________________________________________________
      Here are the tasks in your list:
