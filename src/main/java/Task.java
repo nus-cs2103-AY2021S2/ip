@@ -18,7 +18,7 @@ public abstract class Task {
         return s + taskInfo;
     }
 
-    public void completed() {
+    public void completeTask() {
         isDone = true;
     }
 

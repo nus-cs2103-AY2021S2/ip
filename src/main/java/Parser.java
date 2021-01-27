@@ -16,7 +16,7 @@ public class Parser {
             try {
                 int i = Integer.parseInt(textInput.substring(5));
                 Task task = listOfTasks.get(i - 1);
-                task.completed();
+                task.completeTask();
                 System.out.println("\t_____________________________________________________________");
                 System.out.println("\t Nice! I've marked this task as done:");
                 System.out.println("\t   " + task);
