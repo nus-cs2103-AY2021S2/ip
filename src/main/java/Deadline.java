@@ -1,8 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected LocalDateTime by;
 
-    public Deadline(String description, int status, String by) {
+    public Deadline(String description, int status, LocalDateTime by) {
         super(description,status);
         this.by = by;
     }
@@ -14,6 +18,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("HHmm, MMM dd yyyy")) + ")";
     }
 }

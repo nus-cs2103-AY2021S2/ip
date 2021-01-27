@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -104,13 +106,22 @@ public class Duke {
                     if (type.equals("todo")) {
                         taskList.add(new Todo(detail,0));
                     } else if (type.equals("event")) {
-                        String name = detail.substring(0, detail.indexOf(" /at"));
-                        String time = detail.substring(detail.indexOf(" /at") + 5);
-                        taskList.add(new Event(name,0, time));
+
+                        String name = detail.substring(0, detail.indexOf(" /at "));
+                        String time = detail.substring(detail.indexOf(" /at ") + 5);
+
+                        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                        LocalDateTime at = LocalDateTime.parse(time, dateTimeFormat);
+                        taskList.add(new Event(name, 0, at));
+
                     } else if (type.equals("deadline")) {
-                        String name = detail.substring(0, detail.indexOf(" /by"));
-                        String time = detail.substring(detail.indexOf(" /by") + 5);
-                        taskList.add(new Deadline(name,0, time));
+                        String name = detail.substring(0, detail.indexOf(" /by "));
+                        String time = detail.substring(detail.indexOf(" /by ") + 5);
+
+                        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                        LocalDateTime by = LocalDateTime.parse(time, dateTimeFormat);
+                        taskList.add(new Deadline(name, 0, by));
+
                     }
                     count++;
                     if (count == 1) {
