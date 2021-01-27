@@ -9,21 +9,25 @@ import java.nio.file.Paths;
 
 
 public class Duke {
-    public static void main(String[] args) {
+
+    private static String folderPath = "./src/main/java/data/";
+    private static String fileName = "All Tasks.txt";
+
+    public static void run() {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
-        String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
+        //String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
         // compared to this
 
         try {
             //File f = new File("./");
             //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
-            ArrayList<Task> prevTasks = FileAccessor.ReadFromTasks(relPath, new ArrayList<Task>());
+            ArrayList<Task> prevTasks = FileAccessor.ReadFromTasks(folderPath + fileName, new ArrayList<Task>());
             TaskList.setList(prevTasks);
         } catch (FileNotFoundException | IllegalArgumentException e) {
             //System.out.println("EXCEPTION");
             try {
-                Files.createDirectory(Paths.get("./src/main/java/data/"));
+                Files.createDirectory(Paths.get(folderPath));
                 TaskList.setList(new ArrayList<Task>());
             } catch (IOException e1){}//shld just be ioexception, shldnt come to this catch block
             //File f = new File(relPath); //no need to create file here will get auto created when writing
@@ -82,7 +86,7 @@ public class Duke {
                     }
 
                     try {
-                        FileAccessor.WriteToTasks(relPath, TaskList.getList());
+                        FileAccessor.WriteToTasks(folderPath+fileName, TaskList.getList());
                     } catch (IOException e) {
                         System.out.println(Ui.unableSave());
                     }
@@ -97,7 +101,10 @@ public class Duke {
                 }
             }
         }
-
         System.out.println(Ui.bye());
+    }
+
+    public static void main(String[] args) {
+        Duke.run();
     }
 }
