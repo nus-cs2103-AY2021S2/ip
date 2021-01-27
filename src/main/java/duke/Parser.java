@@ -39,6 +39,11 @@ public class Parser {
                 return new AddCommand(processInputs(inputs, dukeCommand));
             case LIST:
                 return inputs.length == 2 ? new ListCommand(inputs[1]) : new ListCommand();
+            case FIND:
+                if (inputs.length < 2) {
+                    throw new DukeException("You are missing the query!");
+                }
+                return new FindCommand(String.join(" ", Arrays.copyOfRange(inputs, 1, inputs.length)));
             default:
                 return null;
             }
@@ -77,6 +82,7 @@ public class Parser {
             throw new DukeException(String.format("The description of %s cannot be empty.", commandType));
         }
 
+        String desc;
         if (dukeCommand == DukeCommand.DEADLINE || dukeCommand == DukeCommand.EVENT) {
             String delimiter = dukeCommand == DukeCommand.DEADLINE ? "/by" : "/at";
             int index = Arrays.asList(arr).indexOf(delimiter);
@@ -97,7 +103,7 @@ public class Parser {
             }
 
             //Joins up the description
-            String desc = String.join(" ", Arrays.copyOfRange(arr, 1, index));
+            desc = String.join(" ", Arrays.copyOfRange(arr, 1, index));
             String date = arr[index + 1];
 
             if (!DukeHelper.isValidDate(date)) {
@@ -110,7 +116,8 @@ public class Parser {
                 return new Event(desc, date);
             }
         } else {
-            return new ToDo(String.join(" ", Arrays.copyOfRange(arr, 1, arr.length)));
+            desc = String.join(" ", Arrays.copyOfRange(arr, 1, arr.length));
+            return new ToDo(desc);
         }
     }
 }

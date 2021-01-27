@@ -9,6 +9,7 @@ public enum DukeCommand {
     DELETE,
     DONE,
     EVENT,
+    FIND,
     LIST,
     TODO;
 

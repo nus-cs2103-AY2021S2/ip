@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -68,8 +68,8 @@ public class Ui {
      * Prints a formatted list of task(s) to the user.
      * @param taskList current task list
      */
-    public void printList(TaskList taskList) {
-        System.out.printf("Here are the %s in your list:%n", taskList.size() >= 2 ? "tasks" : "task");
+    public void showListMessage(TaskList taskList, boolean isFind) {
+        System.out.printf("Here are the %s in your list:%n", isFind ? "matching tasks" : "tasks");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("%d.%s%n", i + 1, taskList.get(i).toString());
         }
@@ -96,14 +96,8 @@ public class Ui {
     }
 
     public void showDoneMessage(TaskList taskList) {
-        System.out.println("Nice! I've marked all your tasks as done.");
-        showList(taskList);
-    }
-
-    private void showList(TaskList tasks) {
-        for (Task t : tasks.getTaskList()) {
-            formattedPrint(t.toString());
-        }
+        System.out.println("Nice! I've marked all your tasks as done:");
+        printList(taskList);
     }
 
     /**
@@ -122,7 +116,7 @@ public class Ui {
      */
     public void showDeleteMessage(TaskList taskList) {
         System.out.println("Noted. I've removed all your tasks.");
-        showList(taskList);
+        printList(taskList);
         showSummaryMessage(0);
     }
 
@@ -135,6 +129,14 @@ public class Ui {
     }
 
     /**
+     * Prints the error message.
+     * @param message message to be printed
+     */
+    public void showError(String message) {
+        System.out.printf("☹️ OOPS!!! %s%n", message);
+    }
+
+    /**
      * Prepend the message with indent, then print.
      * @param message message to be printed
      */
@@ -143,12 +145,9 @@ public class Ui {
         System.out.printf(PRINT_FORMAT, message);
     }
 
-    /**
-     * Prints the error message.
-     * @param message message to be printed
-     */
-    public void showError(String message) {
-        System.out.printf("☹️ OOPS!!! %s%n", message);
+    private void printList(TaskList taskList) {
+        for (Task task : taskList.getTaskList()) {
+            formattedPrint(task.toString());
+        }
     }
-
 }

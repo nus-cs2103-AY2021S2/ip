@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
             if (taskList.isAllDone()) {
                 throw new DukeException("You have already completed all the tasks!");
             }
-            taskList.doneAll();
+            taskList.setAllDone();
             ui.showDoneMessage(taskList);
         } else {
             int index = Integer.parseInt(input) - 1;
