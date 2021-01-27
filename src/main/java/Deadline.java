@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    final DateTimeFormatter format = DateTimeFormatter.ofPattern("d-M-uuuu");
+    final DateTimeFormatter formatone = DateTimeFormatter.ofPattern("d-M-uuuu");
+    final DateTimeFormatter formattwo = DateTimeFormatter.ofPattern("uuuu-M-d");
+
 
     protected String deadlineBy;
     LocalDate dateBy;
@@ -13,7 +15,12 @@ public class Deadline extends Task{
         this.deadlineBy = by;
 
         try {
-            dateBy = LocalDate.parse(deadlineBy, format);
+            String trimmed = deadlineBy.trim();
+            if (trimmed.substring(0,4).contains("-")) {
+                dateBy = LocalDate.parse(deadlineBy.trim(), formatone);
+            }else{
+                dateBy = LocalDate.parse(deadlineBy.trim(), formattwo);
+            }
         }catch(Exception e){
             throw new TaskException("deadline must be of the format date-month-year, in numbers.");
         }
