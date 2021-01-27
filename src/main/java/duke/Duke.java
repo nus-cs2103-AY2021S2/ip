@@ -19,16 +19,16 @@ public class Duke {
     /**
      * DukeResponse object to handle responses.
      */
-    public DukeResponse dukeResponse;
+    private final DukeResponse dukeResponse;
 
     /**
      * DukeStorage object to handle history files.
      */
-    public DukeStorage dukeStorage;
+    private final DukeStorage dukeStorage;
     /**
      * DukeTaskList to handle task list operations.
      */
-    public DukeTaskList dukeTaskList;
+    private final DukeTaskList dukeTaskList;
 
     /**
      * Datetime parsed format.
