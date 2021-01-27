@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,6 +9,7 @@ public class Duke {
     private static TaskList tasks;
     private static Storage storage;
     private static Parser parser;
+    private static Ui ui;
 
     public static void main(String[] args) {
         tasks = new TaskList();
@@ -20,21 +21,14 @@ public class Duke {
         } catch (FileNotFoundException e) {
             System.out.println("File not found :(");
         }
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Duke: Hello I'm Duke, what can I do for you?");
-        System.out.println("-----------------------------------------------------");
-        System.out.println("Enter an input ('bye' to quit): ");
-        String userInput = sc.nextLine();
-        System.out.println("User Input: " + userInput);
+        ui = new Ui();
+        String userInput = ui.nextInput();
         while (!"bye".equals(userInput)) {
             parser.processCommand(userInput);
             Duke.writeTaskList();
-            System.out.println("Enter an input ('bye' to quit): ");
-            userInput = sc.nextLine();
-            System.out.println("User Input: " + userInput);
+            userInput = ui.nextInput();
         }
-        System.out.println("Duke: Bye, hope to see you again! :)");
-        System.out.println("-----------------------------------------------------");
+        ui.close();
     }
 
     public static void readTaskList(String taskData) {
@@ -59,7 +53,6 @@ public class Duke {
         }
     }
 
-    //PROBABLY IN UI
     public static void writeTaskList() {
         String userInput = tasks.joinToTxt();
         try {
