@@ -12,14 +12,28 @@ public class TaskList {
         tasklist = new ArrayList<>();
     }
 
+    public void find(String input) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasklist) {
+            String curr = task.getDetails();
+            if (curr.contains(input)) {
+                result.add(task);
+            }
+        }
+        Ui.printSearch(result);
+    }
+
+
     public String getTally() {
         return "     Currently you have " + tasklist.size() + " tasks in the list.";
     }
+
 
     public void addTask(Task task) {
         tasklist.add(task);
         Ui.printBox(Ui.ADD_MSG + task + "\n \n" + getTally());
     }
+
 
     public void completeTask(int index) {
         Task task = tasklist.get(index - 1);
@@ -37,6 +51,7 @@ public class TaskList {
     public int size() {
         return tasklist.size();
     }
+
 
     public Task get(int index) {
         return tasklist.get(index);

@@ -1,6 +1,9 @@
 package ui;
 
+import task.Task;
 import task.TaskList;
+
+import java.util.ArrayList;
 
 public class Ui {
     public final static String MARK_MSG = "You have marked this task as completed: \n";
@@ -25,6 +28,7 @@ public class Ui {
 
     public final static String EXIT_MSG = "Farewell. See you soon :)!";
 
+
     public static void printBox(String input) {
         System.out.println(TOP_BORDER + indent4 + input
                 + "\n" + BOTTOM_BORDER);
@@ -34,14 +38,21 @@ public class Ui {
         System.out.print(TOP_BORDER);
         System.out.println("     This is your present task list: \n");
         for (int i = 1; i <= list.size(); i++) {
-            if (i == list.size()) {
-                System.out.println(indent4 + i + ") "
-                        + list.get(i - 1));
-            } else {
-                System.out.println(indent4 + i + ") "
-                        + list.get(i - 1));
-            }
+            System.out.println(indent4 + i + ") "
+                    + list.get(i - 1));
         }
         System.out.println(BOTTOM_BORDER);
     }
+
+
+    public static void printSearch(ArrayList<Task> list) {
+        System.out.print(TOP_BORDER);
+        System.out.println("     Here are the matching tasks found: \n");
+        for (int i = 1; i <= list.size(); i++) {
+            System.out.println(indent4 + i + ") "
+                    + list.get(i - 1));
+        }
+        System.out.println(BOTTOM_BORDER);
+    }
+
 }

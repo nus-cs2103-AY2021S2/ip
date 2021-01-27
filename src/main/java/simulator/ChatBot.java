@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import exception.DukeException;
-import simulator.Parser;
-import simulator.Storage;
 import task.*;
 
 import ui.Ui;
@@ -49,6 +47,9 @@ public class ChatBot {
                     Task newTask;
                     String duration;
                     switch (command) {
+                        case "find":
+                            tasklist.find(description);
+                            break;
                         case "todo":
                             newTask = new Todo(description);
                             tasklist.addTask(newTask);
