@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    ArrayList<Task> listOfTasks;
+    private ArrayList<Task> listOfTasks;
 
     TaskList() {
         this.listOfTasks = new ArrayList<>();
