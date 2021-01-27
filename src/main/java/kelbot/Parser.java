@@ -10,6 +10,10 @@ public class Parser {
     private int taskNumber = 0;
     private LocalDate date = null;
     
+    /*
+     * Initializes Parser
+     */
+    
     public Parser(String input) throws DateTimeParseException {
         try {
             String[] commands = input.split(" ");
@@ -71,17 +75,33 @@ public class Parser {
     
     }
     
+    /*
+     * Return Command
+     */
+    
     public Command getCommand() {
         return this.command;
     }
+    
+    /*
+     * Return Task Name
+     */
     
     public String getTaskName() {
         return this.taskName;
     }
     
+    /*
+     * Return Task Number
+     */
+    
     public int getTaskNumber() {
         return this.taskNumber;
     }
+    
+    /*
+     * Return Date
+     */
     
     public LocalDate getDate() {
         return this.date;

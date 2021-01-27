@@ -8,6 +8,10 @@ public class DeadlineTask extends Task {
     
     protected LocalDate date;
     
+    /*
+     * Initializes Deadline Task
+     */
+    
     public DeadlineTask(String name, LocalDate date) {
         super(name);
         this.date = date;

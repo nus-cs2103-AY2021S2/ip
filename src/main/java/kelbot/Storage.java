@@ -8,10 +8,18 @@ public class Storage {
     private java.nio.file.Path path;
     private boolean fileExists;
     
+    /*
+     * Initializes Storage
+     */
+    
     public Storage(java.nio.file.Path path) {
         this.path = path;
         this.fileExists = java.nio.file.Files.exists(path);
     }
+    
+    /*
+     * Load data.txt file as Task List
+     */
     
     public TaskList load() throws KelbotException {
         if (fileExists) {
@@ -31,6 +39,10 @@ public class Storage {
         }
         return null;
     }
+    
+    /*
+     * Save Task List as data.txt file
+     */
     
     public void save(ArrayList<Task> taskList) {
         File file = new File(this.path.toString());

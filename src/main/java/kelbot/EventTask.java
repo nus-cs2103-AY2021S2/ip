@@ -8,6 +8,10 @@ public class EventTask extends Task {
     
     protected LocalDate date;
     
+    /*
+     * Initializes Event Task
+     */
+    
     public EventTask(String name, LocalDate date) {
         super(name);
         this.date = date;

@@ -11,6 +11,10 @@ public class Kelbot implements Serializable {
     private TaskList taskList;
     private UI ui;
     
+    /*
+     * Initializes Kelbot
+     */
+    
     public Kelbot(java.nio.file.Path path) {
         ui = new UI();
         storage = new Storage(path);
@@ -21,6 +25,10 @@ public class Kelbot implements Serializable {
             taskList = new TaskList();
         }
     }
+    
+    /*
+     * The main programme that runs after the Kelbot initialization.
+     */
     
     public void run() {
         while (true) {
@@ -83,9 +91,17 @@ public class Kelbot implements Serializable {
         }
     }
     
+    /*
+     * Returns Task List
+     */
+    
     public TaskList getTaskList() {
         return taskList;
     }
+    
+    /*
+     * Main programme
+     */
     
     public static void main(String[] args) throws KelbotException {
         java.nio.file.Path path = java.nio.file.Paths.get(".", "data", "Kelbot.txt");

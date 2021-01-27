@@ -7,6 +7,10 @@ public class Task implements Serializable {
     private String name;
     private boolean done;
     
+    /*
+     * Initializes Task
+     */
+    
     public Task(String name) {
         this.name = name;
         this.done = false;
@@ -15,6 +19,7 @@ public class Task implements Serializable {
     /*
      * Called when the task has been completed by the user. It will mark the task as done.
      */
+    
     public void complete() {
         this.done = true;
     }
@@ -22,6 +27,7 @@ public class Task implements Serializable {
     /*
      * Provide the status icon for the toString() method.
      */
+    
     public String getStatusIcon() {
         if (this.done) {
             return "[X]";

@@ -10,14 +10,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KelbotTest {
     
+    /*
+     * Test if command is being read properly
+     */
+    
     @Test
     public void testCommand() {
         String input = "todo Finish CS2103 Project";
         assertEquals(Command.TODO, new Parser(input).getCommand());
     }
     
+    /*
+     * Test if the correct task is being removed
+     */
+    
     @Test
-    public void testTaskList() {
+    public void testDelete() {
         List<Task> taskList = new ArrayList<>();
         TodoTask todoTask = new TodoTask("Finish CS2103 Project");
         taskList.add(todoTask);
@@ -26,8 +34,12 @@ public class KelbotTest {
         assertEquals(eventTask, taskList.remove(1));
     }
     
+    /*
+     * Test if the correct task is being removed
+     */
+    
     @Test
-    public void testPrintList() {
+    public void testDone() {
         TaskList taskList = new TaskList();
         TodoTask todoTask = new TodoTask("Finish CS2103 Project");
         taskList.add(todoTask);
