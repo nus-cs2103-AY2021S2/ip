@@ -5,7 +5,7 @@ import java.time.LocalDate;
  * This class represents a deadline task.
  */
 class Deadline extends Task {
-    protected final LocalDate date;
+    private final LocalDate date;
 
     /**
      * Creates a new deadline task object.

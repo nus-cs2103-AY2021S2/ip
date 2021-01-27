@@ -5,7 +5,7 @@ import java.time.LocalDate;
  * This class represents an event Task.
  */
 class Event extends Task {
-    protected final LocalDate date;
+    private final LocalDate date;
 
     /**
      * Creates a new event task object.
