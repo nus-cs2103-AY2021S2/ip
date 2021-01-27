@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 
 enum Call {
@@ -38,6 +41,9 @@ public class Duke {
                 }
             }
         }
+
+        LocalDate testDate = LocalDate.of(2000, 05, 03);
+        System.out.println("testDate: " + testDate.getMonth());
 
 
         String greet = "Hello! I'm Duke \n What can I do for you?";
@@ -130,8 +136,8 @@ public class Duke {
     static void commandDeadline() {
         String deadline = input.replaceFirst("deadline", "");
         deadline = deadline.stripLeading();
-        String[] deadlineArr = deadline.split("/");
-        Deadline current = new Deadline(deadlineArr[0], deadlineArr[1].replaceFirst("by ", ""));
+        String[] deadlineArr = deadline.split("/", 2);
+        Deadline current = new Deadline(deadlineArr[0], inputDeadline(deadlineArr[1]));
         list.add(current);
         System.out.println(addString(current));
     }
@@ -139,8 +145,8 @@ public class Duke {
     static void commandEvent() {
         String eventDetails = input.replaceFirst("event", "");
         eventDetails = eventDetails.stripLeading();
-        String[] eventDeats = eventDetails.split("/");
-        Event current = new Event(eventDeats[0], eventDeats[1].replaceFirst("at ", ""));
+        String[] eventDeats = eventDetails.split("/", 2);
+        Event current = new Event(eventDeats[0], inputDeadline(eventDeats[1]));
         list.add(current);
         System.out.println(addString(current));
     }
@@ -164,7 +170,29 @@ public class Duke {
                 System.out.println(i+1 + ". " + current);
             }
         }
+    }
 
+    static LocalDateTime inputDeadline(String inputDate) {
+        String[] dataArray = inputDate.split(" ");
+        LocalDate formatDate = inputDate(dataArray[1]);
+        LocalTime formatTime = inputTime(dataArray[2]);
+        return LocalDateTime.of(formatDate, formatTime);
+
+    }
+
+    static LocalDate inputDate(String input) {
+        String[] dateArray = input.split("/");
+        LocalDate date = LocalDate.of(Integer.parseInt(dateArray[2]), 
+                                            Integer.parseInt(dateArray[1]), 
+                                            Integer.parseInt(dateArray[0]));
+        return date;
+    }
+
+    static LocalTime inputTime(String input) {
+        String hour = input.substring(0, 2);
+        String minutes = input.substring(2); 
+        LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minutes));
+        return time;
     }
 
     static boolean validCommand() {

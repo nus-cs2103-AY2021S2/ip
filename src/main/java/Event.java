@@ -1,19 +1,23 @@
-class Event extends Task {
-    String date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
-    Event(String task, String date) {
+class Event extends Task {
+    LocalDateTime date;
+
+    Event(String task, LocalDateTime date) {
         super(task);
         this.date = date;
     }
 
-    Event(String task, Boolean isCompleted, String date){
+    Event(String task, Boolean isCompleted, LocalDateTime date){
         super(task, isCompleted);
         this.date = date;
     }
 
     public static Event readTask(String input) {
         String[] list = input.split(", ", 4);
-        return new Event(list[2], Boolean.parseBoolean(list[1]), list[3]);
+        return new Event(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 
     public String toCommand() {
@@ -21,6 +25,8 @@ class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + this.completedBox() + this.task + "(at: " + this.date + ")";
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM dd YYYY hh:mm a");
+        return "[E]" + this.completedBox() + this.task 
+                    + "(at: " + dateFormatter.format(Timestamp.valueOf(this.date)) + ")";
     }
 }
