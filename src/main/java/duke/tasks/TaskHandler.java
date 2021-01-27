@@ -11,8 +11,18 @@ import duke.util.DateFormatter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * TaskHandler that executes tasks related to a TaskList or Task.
+ */
 public class TaskHandler {
 
+    /**
+     * Adds a Task to the TaskList.
+     * @param command Command related to type of Task.
+     * @param input String representing the options related to the Command.
+     * @param taskList ArrayList of Tasks.
+     * @throws DukeException When an invalid option is passed together with a command.
+     */
     public static void addTask(Commands command, String input, ArrayList<Task> taskList) throws DukeException {
         int numberOfTasks = taskList.size();
         LocalDate date;
@@ -61,6 +71,10 @@ public class TaskHandler {
         }
     }
 
+    /**
+     * Lists out the Tasks in an ArrayList of Tasks.
+     * @param taskList ArrayList of Tasks.
+     */
     public static void listTasks(ArrayList<Task> taskList) {
         Ui.showLine();
 
@@ -76,6 +90,11 @@ public class TaskHandler {
         Ui.showLine();
     }
 
+    /**
+     * Marks a Task as done.
+     * @param input String representing "1" or "0" referring to whether a Task is done.
+     * @param taskList ArrayList of Tasks.
+     */
     public static void doneTask(String input, ArrayList<Task> taskList) {
         int index = Integer.parseInt(input) - 1;
         Task task = taskList.get(index);
@@ -83,6 +102,11 @@ public class TaskHandler {
         Ui.showMessageBetweenLines("Nice! I've marked this task as done:", task.toString());
     }
 
+    /**
+     * Deletes a Task from the TaskList.
+     * @param input String representing the index of the Task to be deleted.
+     * @param taskList ArrayList of Tasks.
+     */
     public static void deleteTask(String input, ArrayList<Task> taskList) {
         int index = Integer.parseInt(input) - 1;
         Task task = taskList.get(index);

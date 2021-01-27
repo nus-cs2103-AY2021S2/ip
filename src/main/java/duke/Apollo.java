@@ -8,6 +8,9 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * The Apollo bot handling Storage, TaskList and Ui.
+ */
 public class Apollo {
     private static final String BOT_NAME = "Apollo the Robot";
     private static final String STORAGE_PATH = "data/ApolloTaskData.txt";
@@ -15,6 +18,9 @@ public class Apollo {
     private final Storage storageHandler;
     private final Ui ui;
 
+    /**
+     * Constructor for Apollo.
+     */
     public Apollo() {
         this.storageHandler = new Storage(STORAGE_PATH);
         this.ui = new Ui();
@@ -30,11 +36,18 @@ public class Apollo {
         ui.startInputManager(this);
     }
 
+    /**
+     * Gets Apollo's TaskList.
+      * @return Apollo's TaskList.
+     */
     public TaskList getTasks() {
         return taskList;
     }
 
-    public void saveBeforeExit() {
+    /**
+     * Saves the user's TaskList data to persistent storage.
+     */
+    public void saveData() {
         try {
             storageHandler.writeFile(taskList.getTaskList());
         } catch (IOException | DukeException e) {

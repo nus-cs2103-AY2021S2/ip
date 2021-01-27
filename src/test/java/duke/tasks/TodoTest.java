@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests Todo creation.
+ */
 public class TodoTest {
     @Test
     public void testTodoCreation() {

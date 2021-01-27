@@ -15,13 +15,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Manages persistent storage of information.
+ */
 public class Storage {
     private final String path;
 
+    /**
+     * Constructor for Storage.
+     * @param path Path indicating where information should be stored or retrieved from.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Reads from a saved file. If a file does not yet exist, it creates a new file.
+     * @return ArrayList of Tasks created from saved tasks.
+     * @throws DukeException Occurs whenever a file could not be found or created.
+     */
     public ArrayList<Task> readFile() throws DukeException {
         File file = new File(path);
         ArrayList<Task> taskList = new ArrayList<>();
@@ -50,6 +62,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Creates a file to save to.
+     * @param file File to be saved to.
+     * @throws DukeException Occurs when file could not be created.
+     */
     private void createFile(File file) throws DukeException {
         try {
             file.getParentFile().mkdir();
@@ -59,6 +76,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Processes a line of text in the saved file.
+     * @param line Line being processed.
+     * @param lineIndex Index of the line in the file.
+     * @return Task created from line that is read from.
+     * @throws DukeException Occurs when saved file could not be read from or file format is incorrect.
+     */
     private Task processLine(String line, int lineIndex) throws DukeException {
         String[] lineArr = line.split(" \\| ");
 
@@ -112,6 +136,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes information in a TaskList to a file.
+     * @param taskList TaskList that is to be saved.
+     * @throws IOException Occurs when an IO exception has occurred while writing.
+     * @throws DukeException Occurs when an DukeException has been thrown.
+     */
     public void writeFile(ArrayList<Task> taskList) throws IOException, DukeException {
         FileWriter fileWriter = new FileWriter(path);
         StringBuilder stringToWrite = new StringBuilder();
@@ -125,6 +155,12 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Formats a Task in a standard manner for when writing to disk.
+     * @param task Task that is to be formatted to a String.
+     * @return Line that is to be saved.
+     * @throws DukeException Occurs when a Task is corrupted.
+     */
     private String formatTask(Task task) throws DukeException {
         String line;
         LocalDate date;

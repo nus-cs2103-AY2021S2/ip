@@ -9,6 +9,9 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests decode and encode methods of DateFormatter.
+ */
 public class DateFormatterTest {
     @Test
     public void testDateDecode() {

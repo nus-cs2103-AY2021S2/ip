@@ -8,6 +8,9 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests Deadline creation.
+ */
 public class DeadlineTest {
     @Test
     public void testDeadlineCreation() {
