@@ -8,7 +8,7 @@ public class Event extends Task {
 
     @Override
     public String toTxt(){
-        return "E |" + super.toString() + " | " + at;
+        return "E " + super.toTxt() + " | " + at + "\n";
     }
 
     @Override

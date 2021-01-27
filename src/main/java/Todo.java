@@ -6,7 +6,7 @@ public class Todo extends Task {
 
     @Override
     public String toTxt(){
-        return "T |" + super.toString();
+        return "T " + super.toTxt() + "\n";
     }
 
     @Override

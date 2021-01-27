@@ -19,6 +19,7 @@ public class Task {
 
     public void markAsDone(){
         this.isDone = true;
+        this.status = 1;
     }
 
     public String toTxt(){

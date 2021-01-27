@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final static String path = "ip/src/main/java/data/tasks.txt";
-
     public static void main(String[] args) throws DukeException{
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -18,11 +16,11 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        ArrayList<Task> taskList;
         int count = 0;
 
+        final String path = "src/main/java/data/tasks.txt";
         TaskData taskData = new TaskData(path);
-        taskList = taskData.openFile();
+        ArrayList<Task> taskList = taskData.openFile();
 
         //commands entered by the user
         while(!str.equals("bye")) {
@@ -48,12 +46,14 @@ public class Duke {
             if (str.equals("list")) {
                 //display them back to the user when requested
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= count; i++) {
-                    System.out.println(i + ". " + taskList.get(i - 1));
-                }
-                if (count == 0) {
+                if (taskList.isEmpty()) {
                     System.out.println("There is no task in the list.");
+                } else {
+                    for (int i = 1; i <= taskList.size(); i++) {
+                        System.out.println(i + ". " + taskList.get(i - 1));
+                    }
                 }
+
                 System.out.println();
                 str = sc.nextLine();
             } else {
@@ -63,7 +63,7 @@ public class Duke {
                     //mark tasks as done
                     int number = toInteger(detail);
                     try {
-                        if(number < 1 || number > count){
+                        if(taskList.isEmpty() || number < 1 || number > taskList.size()){
                             throw new DukeException("The task index is invalid.\n");
                         }
                     } catch (DukeException ex) {

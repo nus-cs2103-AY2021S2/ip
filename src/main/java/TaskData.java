@@ -16,10 +16,13 @@ public class TaskData {
     public ArrayList<Task> openFile() throws DukeException{
         File file = new File(path);
 
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new DukeException("File cannot be created.");
+        if(!file.exists()) {
+            try {
+                file.getParentFile().mkdir();
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException("File cannot be created.");
+            }
         }
 
         try {
@@ -29,15 +32,15 @@ public class TaskData {
                 Task task = processContent(txtLine);
                 taskList.add(task);
             }
+            return taskList;
         } catch(FileNotFoundException e){
             throw new DukeException("File cannot be found.");
         }
-        return taskList;
     }
 
     //Process txt into Task
     public Task processContent (String txtLine) throws DukeException{
-        String[] content = txtLine.split(" | ");
+        String[] content = txtLine.split(" \\| ");
         String taskType = content[0];
         int taskStatus = Integer.parseInt(content[1]);
         String taskDescription = content[2];
