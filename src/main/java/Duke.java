@@ -1,28 +1,49 @@
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 public class Duke {
-    enum Command {
-        list, done, delete, todo, deadline, event, bye;
+    
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException | IOException | ParseException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException | IOException e) {
+                ui.showError(e.getMessage());
+            } catch (NullPointerException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException, ParseException {
-
-        List<Task> taskList = new ArrayList<Task>(100);
-
+        new Duke("data.txt").run();
+        /*List<Task> taskList = new ArrayList<Task>(100);
+        
         String filePath = "data.txt";
         FileWriter fw = new FileWriter(filePath, true);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -41,6 +62,7 @@ public class Duke {
                 }
                 taskList.add(newTask);
             } else if (type.contains("D")) {
+                try{
                 String sequence = read[1];
                 String[] data = sequence.split("] ");
                 String secondData = data[1].replace("(by: ", "").replace(")", "");
@@ -48,14 +70,29 @@ public class Duke {
                 SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
                 Date date = formatter.parse(seperateTime[1]);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        
                 Task newTask = new Deadline(seperateTime[0], dateFormat.format(date));
                 if (sequence.contains("\u2718")) {
                     newTask.markAsDone();
                 }
                 taskList.add(newTask);
-
-            } else if (type.contains("E")) {
+            } catch (ParseException ex) {
+                String sequence = read[1];
+                String[] data = sequence.split("] ");
+                String secondData = data[1].replace("(by: ", "").replace(")", "");
+                SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
+                Date date = formatter.parse(secondData);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+                Task newTask = new Deadline(data[0], dateFormat.format(date));
+                if (sequence.contains("\u2718")) {
+                    newTask.markAsDone();
+                }
+                taskList.add(newTask);
+            }
+        
+        } else if (type.contains("E")) {
+            try{
                 String sequence = read[1];
                 String[] data = sequence.split("] ");
                 String secondData = data[1].replace("(at: ", "").replace(")", "");
@@ -68,11 +105,25 @@ public class Duke {
                    newTask.markAsDone();
                 }
                 taskList.add(newTask);
+            } catch (ParseException ex) {
+                String sequence = read[1];
+                String[] data = sequence.split("] ");
+                String secondData = data[1].replace("(at: ", "").replace(")", "");
+                SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.ENGLISH);
+                Date date = formatter.parse(secondData);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Task newTask = new Events(data[0], dateFormat.format(date));
+                if (sequence.contains("\u2718")) {
+                   newTask.markAsDone();
+                }
+                taskList.add(newTask);
+                
+                }
                 
             }
         }
         
-
+        
         br.close();
         
         
@@ -84,15 +135,15 @@ public class Duke {
             String logo = "Hello! I'm Duke\n"
                     + "What can I do for you?\n";
             System.out.println(logo);
-
+        
             while (sc.hasNext()) {
                 try {
                     String line = sc.nextLine();
                     String[] lineSplit = line.split(" ", 2);
                     Command command = Command.valueOf(lineSplit[0]);
-
+        
                     Scanner fileScanner = new Scanner(new File(filePath));
-
+        
                     if (command.equals(Command.bye)) {
                         break;
                     } else {
@@ -122,22 +173,19 @@ public class Duke {
                                 /*for (int i = 1; i <= taskList.size(); i++) {
                                     Task curTask = taskList.get(i - 1);
                                     System.out.println(i + "." + curTask.toString());
-                                }*/
+                                }
                                 while (fileScanner.hasNext()) {
                                     System.out.println(fileScanner.nextLine());
                                 }
                                 System.out.println("____________________________________________________________");
-
+        
                             }
                         } else if (command.equals(Command.done)) {
                             try {
-            
-            
-
                                 FileWriter tfw = new FileWriter(filePath);
                                 BufferedWriter tbw = new BufferedWriter(tfw);
                                 PrintWriter tpw = new PrintWriter(tbw);
-
+        
                                 int index = Integer.valueOf(lineSplit[1]) - 1;
                                 System.out.println(taskList.size());
                                 Task curTask = taskList.get(index);
@@ -145,7 +193,7 @@ public class Duke {
                                 System.out.println("____________________________________________________________\n"
                                         + "Nice! I've marked this task as done:\n" + curTask.toString()
                                         + "\n____________________________________________________________");
-
+        
                                 for (int i = 1; i <= taskList.size(); i++) {
                                     Task writeTask = taskList.get(i - 1);
                                     tpw.println(i + "." + writeTask.toString());
@@ -159,14 +207,14 @@ public class Duke {
                             }
                         } else if (command.equals(Command.delete)) {
                             try {
-                                File oldFile = new File(filePath);
+        
                     
-
+        
                                 FileWriter tfw = new FileWriter(filePath);
                                 BufferedWriter tbw = new BufferedWriter(tfw);
                                 PrintWriter tpw = new PrintWriter(tbw);
                                 
-
+        
                                 int index = Integer.valueOf(lineSplit[1]) - 1;
                                 Task curTask = taskList.get(index);
                                 taskList.remove(index);
@@ -232,10 +280,10 @@ public class Duke {
                                         "\u00a9 OOPS!!! I'm sorry, but I don't know what that means :-(");
                             }
                             pw.flush();
-
+        
                         }
                     }
-
+        
                 } catch (DukeException ex) {
                     System.out.println("____________________________________________________________\n"
                             + ex.getMessage() + "\n____________________________________________________________");
@@ -258,91 +306,6 @@ public class Duke {
             System.out.println("____________________________________________________________\n"
                     + "Bye. Hope to see you again soon!"
                     + "\n____________________________________________________________");
+        }*/
     }
-}
-class Task {
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2718" : " "); //return tick or X symbols
-    }
-
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    LocalDate getTime(){
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        return "["+this.getStatusIcon()+"] "+ this.description;
-    }
-
-}
-class Deadline extends Task{
-
-    protected LocalDate by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = LocalDate.parse(by);
-    }
-    @Override
-    LocalDate getTime(){
-        return this.by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
-}
-class ToDos extends Task {
-
-    public ToDos(String description)  {
-        super(description);
-
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-class Events extends Task {
-
-    protected LocalDate duration;
-
-    public Events(String description, String duration) {
-        super(description);
-        this.duration = LocalDate.parse(duration);
-    }
-    @Override
-    LocalDate getTime(){
-        return this.duration;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + "(at: " + duration.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
-}
-class DukeException extends Exception{
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
-    public DukeException(String message) {
-        super(message);
-    }
-
 }

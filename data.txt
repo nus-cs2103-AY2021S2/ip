@@ -1,3 +1,5 @@
 1.[T][✘] hi
-2.[T][ ] hi
-3.[E][ ] something (at: Feb 2 2019)
+2.[T][✘] me
+3.[D][✘] hello(by: Feb 2 2019)
+4.[D][✘] jk(by: Feb 2 2019)
+5.[D][✘] todo(by: Feb 2 2019)
