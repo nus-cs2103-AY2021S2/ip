@@ -23,22 +23,8 @@ public class Duke {
             parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0).
             toFormatter(Locale.ENGLISH);
 
-    private static void printIndentOutput(String output) {
-        System.out.println('\t' + output);
-    }
-
-    private static void printHorizontalLine() {
-        printIndentOutput("_____________________________________________________________________");
-    }
-
     private static boolean checkMatchString(String line, String match) {
         return line.length() >= match.length() && line.startsWith(match);
-    }
-
-    private static void printTaskListStatus(TaskList tasks, Task curTask) {
-        printIndentOutput("Got it. I've added this task:");
-        printIndentOutput("   " + curTask);
-        printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
     }
 
     private static String[] getCommandArgs(String line, String errorMessage) throws DukeException {
@@ -50,6 +36,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        Ui ui = new Ui();
         Storage storage = new Storage();
         TaskList tasks;
         try {
@@ -59,35 +46,26 @@ public class Duke {
             tasks = new TaskList();
         }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        printHorizontalLine();
-        printIndentOutput("What can I do for you?");
-        printHorizontalLine();
+        ui.printIntro();
 
         Scanner stdin = new Scanner(System.in);
         String line = stdin.nextLine();
         boolean end = false;
 
         while (line != null) {
-            printHorizontalLine();
+            ui.printHorizontalLine();
 
             try {
                 if (line.equals("bye")) {
-                    printIndentOutput("Bye. Hope to see you again soon!");
+                    ui.printIndentOutput("Bye. Hope to see you again soon!");
                     end = true;
                 } else if (line.equals("list")) {
                     if (tasks.size() <= 0) {
-                        printIndentOutput("The current list is empty.");
+                        ui.printIndentOutput("The current list is empty.");
                     } else {
-                        printIndentOutput("Here are the tasks in you list:");
+                        ui.printIndentOutput("Here are the tasks in you list:");
                         for (int i = 0; i < tasks.size(); i++) {
-                            printIndentOutput((i + 1) + ". " + tasks.getTask(i));
+                            ui.printIndentOutput((i + 1) + ". " + tasks.getTask(i));
                         }
                     }
                 } else if (checkMatchString(line, "done ")) {
@@ -96,8 +74,8 @@ public class Duke {
                         int index = Integer.parseInt(cmdArgs[1]);
                         Task curTask = tasks.getTask(index - 1);
                         curTask.markAsDone();
-                        printIndentOutput("Nice! I've marked this task as done:");
-                        printIndentOutput("   " + curTask);
+                        ui.printIndentOutput("Nice! I've marked this task as done:");
+                        ui.printIndentOutput("   " + curTask);
                     } catch (NumberFormatException e) {
                         throw new DukeException("The index of the task needs to be an integer.");
                     } catch (IndexOutOfBoundsException e) {
@@ -108,7 +86,7 @@ public class Duke {
                     String taskName = cmdArgs[1];
                     Task curTask = new Todo(taskName);
                     tasks.addTask(curTask);
-                    printTaskListStatus(tasks, curTask);
+                    ui.printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "deadline ")) {
                     String[] cmdArgs = getCommandArgs(line, "The description of a todo cannot be empty.");
                     String[] deadlineArgs = cmdArgs[1].split(" /by ", 2);
@@ -119,7 +97,7 @@ public class Duke {
                     LocalDateTime deadline = LocalDateTime.parse(deadlineArgs[1], formatter);
                     Task curTask = new Deadline(taskName, deadline);
                     tasks.addTask(curTask);
-                    printTaskListStatus(tasks, curTask);
+                    ui.printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "event ")) {
                     String[] cmdArgs = getCommandArgs(line, "The description of an event cannot be empty.");
                     String[] eventArgs = cmdArgs[1].split(" /at ", 2);
@@ -130,16 +108,16 @@ public class Duke {
                     LocalDateTime datetime = LocalDateTime.parse(eventArgs[1], formatter);
                     Task curTask = new Event(taskName, datetime);
                     tasks.addTask(curTask);
-                    printTaskListStatus(tasks, curTask);
+                    ui.printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "delete ")) {
                     String[] cmdArgs = getCommandArgs(line, "I'm sorry, but delete needs the index of a Task.");
                     try {
                         int index = Integer.parseInt(cmdArgs[1]);
                         Task curTask = tasks.getTask(index - 1);
                         tasks.removeTask(index - 1);
-                        printIndentOutput("Nice! I've removed this task:");
-                        printIndentOutput("   " + curTask);
-                        printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
+                        ui.printIndentOutput("Nice! I've removed this task:");
+                        ui.printIndentOutput("   " + curTask);
+                        ui.printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
                     } catch (NumberFormatException e) {
                         throw new DukeException("The index of the task needs to be an integer.");
                     } catch (IndexOutOfBoundsException e) {
@@ -156,10 +134,10 @@ public class Duke {
                     }
                 }
             } catch (DukeException e) {
-                printIndentOutput("OOPSIE!! " + e.getMessage());
+                ui.printError(e.getMessage());
             }
 
-            printHorizontalLine();
+            ui.printHorizontalLine();
 
             if (end) break;
 

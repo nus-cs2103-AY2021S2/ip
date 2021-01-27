@@ -23,8 +23,6 @@ public class Storage {
         this(Paths.get(".", "data"));
     }
 
-
-
     private File getFile() throws IOException {
         // Create file if does not exist
         if (file == null) {
