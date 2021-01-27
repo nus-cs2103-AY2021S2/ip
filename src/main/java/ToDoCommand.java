@@ -29,7 +29,11 @@ public class ToDoCommand extends Command {
         return true;
     }
 
-    public static ToDoCommand parseArguments(String input) {
+    public static ToDoCommand parseArguments(String input) throws DukeException {
+        if (input.trim().equals("")) {
+            throw new DukeException("☹ Sorry, please enter a description for the todo.\n\t" +
+            "Command: todo [description]");
+        }
         return new ToDoCommand(input);
     }
 }
