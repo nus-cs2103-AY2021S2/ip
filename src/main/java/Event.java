@@ -1,18 +1,29 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * A class that extends the Task class. An Event object corresponds to a Task object which has a description
+ * event date, start and end time.
+ */
 public class Event extends Task {
     LocalDate at;
-    LocalTime time;
+    LocalTime start;
+    LocalTime end;
 
-    public Event(String description, LocalDate at, LocalTime time) {
+    public Event(String description, LocalDate at, LocalTime start, LocalTime end) {
         super(description);
         this.at = at;
-        this.time = time;
+        this.start = start;
+        this.end = end;
     }
 
+    /**
+     * Returns a string representation of the Event object.
+     *
+     * @return String representation.
+     */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + " " + time + ")";
+        return "[E]" + super.toString() + " (at: " + at + " " + start + "-" + end + ")";
     }
 }

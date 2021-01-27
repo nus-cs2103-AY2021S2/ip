@@ -4,10 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class that deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     String filePath;
 
@@ -15,7 +17,16 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public List<Task> load() throws IOException, DukeException {
+    /**
+     * Check if there's any saved tasks and returns a list of tasks saved in the previous login.
+     *
+     * @return List of saved tasks.
+     * @throws DukeException If an invalid command is given by the user. It also happens when there's lack of
+     *                       information when task is created such as no description, date and time.
+     * @throws IOException   If the named file exists but is a rather than a regular file, does not exist but
+     *                       cannot be created, or cannot be opened for any other reason
+     */
+    public List<Task> check() throws IOException, DukeException {
         File file = new File(filePath);
         if (!file.exists()) {
             File directory = new File("data");
@@ -39,6 +50,13 @@ public class Storage {
         return TaskList.tasks;
     }
 
+    /**
+     * Scan the file to retrieve saved tasks from the previous login.
+     *
+     * @throws DukeException         If an invalid command is given by the user. It also happens when there's lack of
+     *                               information when task is created such as no description, date and time.
+     * @throws FileNotFoundException If the attempt to open the file denoted by a specified pathname has failed.
+     */
     public void scanFile() throws FileNotFoundException, DukeException {
         File file = new File(filePath);
 
@@ -81,7 +99,9 @@ public class Storage {
                 }
                 String at = fileScanner.next();
                 String time = fileScanner.next();
-                TaskList.tasks.add(new Event(desc, LocalDate.parse(at), LocalTime.parse(time)));
+                String start = time.substring(0, 5);
+                String end = time.substring(6, 11);
+                TaskList.tasks.add(new Event(desc, LocalDate.parse(at), LocalTime.parse(start), LocalTime.parse(end)));
                 if (done.equals("1")) {
                     TaskList.tasks.get(i).markAsDone();
                 }
@@ -90,6 +110,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Save current tasks in the tasklist to the file after the user logout so that it can be retrieve in the
+     * next login.
+     *
+     * @throws IOException If the named file exists but is a rather than a regular file, does not exist but
+     *                     cannot be created, or cannot be opened for any other reason.
+     */
     public static void save() throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
         for (int i = 0; i < TaskList.tasks.size(); i++) {
@@ -106,7 +133,7 @@ public class Storage {
                     isDone = 1;
                 }
                 fw.write("E | " + isDone + " | " + task.description + " | " + ((Event) task).at + " "
-                        + ((Event) task).time);
+                        + ((Event) task).start + "-" + ((Event) task).end);
             } else {
                 int isDone = 0;
                 if (task.isDone) {
