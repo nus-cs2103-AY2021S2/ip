@@ -13,10 +13,11 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        //initialize storage handler, task handler and parser
+        //initialize storage handler, task handler, command handler and parser
         StorageHandler storageHandler = new StorageHandler("./data/tasks.json");
         TaskHandler taskHandler = new TaskHandler(storageHandler);
-        Parser parser = new Parser(taskHandler);
+        CommandHandler commandHandler = new CommandHandler(taskHandler);
+        Parser parser = new Parser(commandHandler);
         Ui.showWelcome();
         listenInput(parser);
     }

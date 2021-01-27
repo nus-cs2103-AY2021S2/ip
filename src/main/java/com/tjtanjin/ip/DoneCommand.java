@@ -5,11 +5,21 @@ package com.tjtanjin.ip;
  */
 public class DoneCommand {
 
+    private final TaskHandler taskHandler;
+
+    /**
+     * Constructor for DoneCommand.
+     * @param taskHandler provides access for command to modify tasks
+     */
+    public DoneCommand(TaskHandler taskHandler) {
+        this.taskHandler = taskHandler;
+    }
+
     /**
      * Forwards the mark task as done operation to TaskList.
      * @param index of task to mark as done
      */
-    public void execute(TaskHandler taskList, int index) {
-        taskList.markTaskDone(index);
+    public void execute(int index) {
+        taskHandler.markTaskDone(index);
     }
 }

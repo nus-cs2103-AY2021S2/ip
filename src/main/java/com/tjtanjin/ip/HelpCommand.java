@@ -6,6 +6,12 @@ import java.util.HashMap;
  * Entry point for handling logic and execution of help command.
  */
 public class HelpCommand {
+
+    /**
+     * Constructor for HelpCommand.
+     */
+    public HelpCommand() {}
+
     /**
      * List all available command usage and descriptions.
      * @param cmdInfo mapping of each command and their information

@@ -6,6 +6,11 @@ package com.tjtanjin.ip;
 public class ByeCommand {
 
     /**
+     * Constructor for ByeCommand.
+     */
+    public ByeCommand() {}
+
+    /**
      * Exits the program.
      */
     public void execute() {

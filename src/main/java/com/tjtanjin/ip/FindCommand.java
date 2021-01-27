@@ -5,10 +5,20 @@ package com.tjtanjin.ip;
  */
 public class FindCommand {
 
+    private final TaskHandler taskHandler;
+
+    /**
+     * Constructor for FindCommand.
+     * @param taskHandler provides access for command to modify tasks
+     */
+    public FindCommand(TaskHandler taskHandler) {
+        this.taskHandler = taskHandler;
+    }
+
     /**
      * Forwards the find task operation to TaskList.
      */
-    public void execute(TaskHandler taskList, String taskName) {
-        taskList.findTask(taskName);
+    public void execute(String taskName) {
+        taskHandler.findTask(taskName);
     }
 }

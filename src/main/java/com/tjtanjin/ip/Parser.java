@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
- * The Parser class parses user input before calling the appropriate command classes for execution.
+ * The Parser class parses user input and deals directly with the CommandHandler for command execution.
  */
 public class Parser {
 
@@ -24,19 +24,25 @@ public class Parser {
 
     //list storing commands/descriptions, ideally store in json file
     private final HashMap<String, String> cmdInfo = new HashMap<>();
-    private final TaskHandler taskHandler;
-    private final AddCommand addCommand = new AddCommand();
-    private final ByeCommand byeCommand = new ByeCommand();
-    private final ListCommand listCommand = new ListCommand();
-    private final DoneCommand doneCommand = new DoneCommand();
-    private final DeleteCommand deleteCommand = new DeleteCommand();
-    private final HelpCommand helpCommand = new HelpCommand();
-    private final FindCommand findCommand = new FindCommand();
+    private final AddCommand addCommand;
+    private final ByeCommand byeCommand;
+    private final DeleteCommand deleteCommand;
+    private final DoneCommand doneCommand;
+    private final FindCommand findCommand;
+    private final HelpCommand helpCommand;
+    private final ListCommand listCommand;
 
     /**
      * Constructor for Parser class that initialises all valid commands.
      */
-    public Parser(TaskHandler taskHandler) {
+    public Parser(CommandHandler commandHandler) {
+        this.addCommand = commandHandler.getAddCommand();
+        this.byeCommand = commandHandler.getByeCommand();
+        this.deleteCommand = commandHandler.getDeleteCommand();
+        this.doneCommand = commandHandler.getDoneCommand();
+        this.findCommand = commandHandler.getFindCommand();
+        this.helpCommand = commandHandler.getHelpCommand();
+        this.listCommand = commandHandler.getListCommand();
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
         cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
         cmdInfo.put(Cmd.DONE.toString(),
@@ -49,8 +55,6 @@ public class Parser {
         cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
         cmdInfo.put(Cmd.FIND.toString(), "find <name> | Description: finds task by name");
-
-        this.taskHandler = taskHandler;
     }
 
     /**
@@ -63,32 +67,32 @@ public class Parser {
         if (input.toUpperCase().equals(Cmd.BYE.toString())) {
             byeCommand.execute();
 
-        //program shows entered tasks on list
+            //program shows entered tasks on list
         } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
-            listCommand.execute(taskHandler);
+            listCommand.execute();
 
-        //program marks task as complete on done
+            //program marks task as complete on done
         } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
             int index = parseIndex("done", input);
             if (index != -1) {
-                doneCommand.execute(taskHandler, index);
+                doneCommand.execute(index);
             }
 
-        //program removes task on delete
+            //program removes task on delete
         } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
             int index = parseIndex("delete", input);
             if (index != -1) {
-                deleteCommand.execute(taskHandler, index);
+                deleteCommand.execute(index);
             }
 
-        //program list help commands
+            //program list help commands
         } else if (input.toUpperCase().equals(Cmd.HELP.toString())) {
             helpCommand.execute(cmdInfo);
 
-        //program adds task on todo, deadline or event
+            //program adds task on todo, deadline or event
         } else if (input.toUpperCase().startsWith(Cmd.TODO.toString())
                 || input.toUpperCase().startsWith(Cmd.DEADLINE.toString())
-                        || input.toUpperCase().startsWith(Cmd.EVENT.toString())
+                || input.toUpperCase().startsWith(Cmd.EVENT.toString())
         ) {
             String taskType = parseTaskType(input);
             String taskName = parseTaskName(input);
@@ -99,16 +103,16 @@ public class Parser {
             if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDates[0] == null) {
                 return;
             }
-            addCommand.execute(taskHandler, taskType, taskName, taskDates);
+            addCommand.execute(taskType, taskName, taskDates);
 
-        //program finds task by name on find
+            //program finds task by name on find
         } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
             String taskName = parseTaskName(input);
             if (taskName != null) {
-                findCommand.execute(taskHandler, taskName);
+                findCommand.execute(taskName);
             }
 
-        //program informs user of invalid input
+            //program informs user of invalid input
         } else {
             Ui.showError("Invalid instruction, type 'help' for more options.");
         }
@@ -123,13 +127,8 @@ public class Parser {
         String[] parsedString = input.split("\\s+");
 
         try {
-            int index = Integer.parseInt(parsedString[1]) - 1;
-            if (index < taskHandler.getTasks().size() && index >= 0) {
-                return index;
-            } else {
-                throw new DukeException();
-            }
-        } catch (IndexOutOfBoundsException | DukeException e) {
+            return Integer.parseInt(parsedString[1]) - 1;
+        } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
                 Ui.showError("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
             } else {
