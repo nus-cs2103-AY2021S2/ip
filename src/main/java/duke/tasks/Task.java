@@ -11,7 +11,7 @@ public class Task {
         this.type = type;
     }
 
-    public void done() {
+    public void markAsDone() {
         this.isDone = true;
     }
 

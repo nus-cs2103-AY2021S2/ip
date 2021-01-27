@@ -21,20 +21,20 @@ public class FileReading {
             if(starr.length == 3) {
                 Todo curr = new Todo(starr[2]);
                 if(starr[1].equals("1")) {
-                    curr.done();
+                    curr.markAsDone();
                 }
                 taskList.addItem(curr);
             } else {
                 if(starr[0].equals("D")) {
                     Deadline curr = new Deadline(starr[2], starr[3]);
                     if(starr[1].equals("1")) {
-                        curr.done();
+                        curr.markAsDone();
                     }
                     taskList.addItem(curr);
                 } else if(starr[0].equals("E")) {
                     Event curr = new Event(starr[2], starr[3]);
                     if(starr[1].equals("1")) {
-                        curr.done();
+                        curr.markAsDone();
                     }
                     taskList.addItem(curr);
                 }

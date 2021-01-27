@@ -19,7 +19,7 @@ public class TaskList {
     }
 
     public void doneTask(int id) {
-        this.lst.get(id).done();
+        this.lst.get(id).markAsDone();
     }
 
     public List<Task> getLst() {
