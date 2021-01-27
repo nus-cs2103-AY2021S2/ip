@@ -57,7 +57,7 @@ public class Duke {
     }
 
     protected static String parseInput(String input) throws DukeException {
-        HashMap<String,String> tokenizedInput = Parser.ParseInput(input); 
+        HashMap<String,String> tokenizedInput = Parser.parseInput(input); 
         switch (tokenizedInput.get("command")) {
         case "bye":
             return "Bye. Hope to see you again soon!";
