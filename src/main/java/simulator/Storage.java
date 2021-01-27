@@ -1,6 +1,8 @@
 package simulator;
 
+import exception.DukeException;
 import task.*;
+import ui.Ui;
 
 import java.io.BufferedWriter;
 import java.io.File;

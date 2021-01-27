@@ -1,6 +1,6 @@
 package task;
 
-import simulator.DukeException;
+import exception.DukeException;
 
 public class Todo extends Task {
 

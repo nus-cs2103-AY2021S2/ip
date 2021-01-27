@@ -1,6 +1,6 @@
 package task;
 
-import simulator.Ui;
+import ui.Ui;
 
 import java.util.ArrayList;
 

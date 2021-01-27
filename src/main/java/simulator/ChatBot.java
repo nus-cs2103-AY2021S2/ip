@@ -1,12 +1,14 @@
+package simulator;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
-import simulator.DukeException;
+import exception.DukeException;
 import simulator.Parser;
 import simulator.Storage;
 import task.*;
 
-import simulator.Ui;
+import ui.Ui;
 
 public class ChatBot {
     private TaskList tasklist;

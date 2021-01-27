@@ -1,8 +1,8 @@
 package task;
 
-import simulator.DukeException;
+import exception.DukeException;
 
-import static simulator.Ui.printBox;
+import static ui.Ui.printBox;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
