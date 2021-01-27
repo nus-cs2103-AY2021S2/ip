@@ -100,4 +100,23 @@ public class OwenTest {
         owen = owen.parseCommand("delete 1");
         owen = owen.parseCommand("delete 1");
     }
+
+    @Test
+    public void findCommand_correctFormat_success() throws OwenException {
+        Owen owen = new Owen();
+
+        owen = owen.parseCommand("todo apple");
+        owen = owen.parseCommand("event orange /at 1/1/2021 1400 - 01/01/2021 1600");
+        owen = owen.parseCommand("deadline app /by 1/1/2021 1400");
+
+        owen = owen.parseCommand("find app");
+        String expected = "Here are the matching tasks in your list:\n"
+                + "1. [T][ ] apple\n"
+                + "3. [D][ ] app (by: January 1 2021 2:00 PM)";
+        assertEquals(expected, owen.getResponse());
+
+        owen = owen.parseCommand("delete 1");
+        owen = owen.parseCommand("delete 1");
+        owen = owen.parseCommand("delete 1");
+    }
 }
