@@ -40,7 +40,10 @@ public class Parser {
             else if (slash <= 10 || parameters.length <= 2) {
                 throw new EmptyDescriptionException("deadline");
             }
-            Deadline dl = new Deadline(command.substring(9, slash - 1), command.substring(slash + 4, command.length()));
+            String name = command.substring(9, slash - 1);
+            String date = command.substring(slash + 4, command.length());
+
+            Deadline dl = new Deadline(name, date);
             return new AddCommand(dl);
         }
         case "event": {
@@ -51,7 +54,9 @@ public class Parser {
             else if (slash <= 7 || parameters.length <= 2) {
                 throw new EmptyDescriptionException("event");
             }
-            Event e = new Event(command.substring(6, slash - 1), command.substring(slash + 4, command.length()));
+            String name = command.substring(6, slash - 1);
+            String date = command.substring(slash + 4, command.length());
+            Event e = new Event(name, date);
             return new AddCommand(e);
         }
         default: {
