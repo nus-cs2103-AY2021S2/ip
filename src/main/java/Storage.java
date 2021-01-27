@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
@@ -13,17 +12,12 @@ public class Storage {
      *
      * @param tasks task list
      */
-    public static void saveToFile(ArrayList<Task> tasks) {
+    public static void saveToFile(TaskList tasks) {
         try {
             File fileObj = new File(fileName);
             fileObj.createNewFile();
             FileWriter fileWriter = new FileWriter(fileName);
-            // Convert task list to a string
-            StringBuilder data = new StringBuilder();
-            for (Task task : tasks) {
-                data.append(task.toSavedString());
-            }
-            fileWriter.write(data.toString());
+            fileWriter.write(tasks.toSavedString());
         } catch (IOException e) {
             Ui.printError(e);
         }
@@ -32,8 +26,7 @@ public class Storage {
     /**
      *
      */
-    public static ArrayList<Task> readFromFile() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public static void readFromFile(TaskList tasks) {
         try {
             File fileObj = new File(fileName);
             fileObj.createNewFile();
@@ -69,6 +62,5 @@ public class Storage {
         } catch (IOException e) {
             Ui.printError(e);
         }
-        return tasks;
     }
 }

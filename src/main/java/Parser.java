@@ -60,7 +60,7 @@ public class Parser {
      * @param command the command to process
      * @return whether the program should continue (<code>true</code> if not an exit command)
      */
-    public static boolean processCommand(String command, ArrayList<Task> tasks) throws Exception {
+    public static boolean processCommand(String command, TaskList tasks) throws Exception {
         String[] tokens = command.split(" ");
         Ui.printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
@@ -68,10 +68,7 @@ public class Parser {
         } else {
             if (tokens[0].equals("list")) {
                 Ui.printLine("Here are the tasks in your list:");
-                int index = 0;
-                for (Task task : tasks) {
-                    Ui.printLine(String.format("%d.%s", ++index, task.toString()));
-                }
+                tasks.printAll();
             } else if (tokens[0].equals("done")) {
                 if (tokens.length < 2) {
                     throw new Exception("Please provide a valid task number!");
@@ -82,9 +79,9 @@ public class Parser {
                         throw new Exception("Please provide a valid task number!");
                     }
                     if (taskNumber <= tasks.size()) {
-                        tasks.get(taskNumber - 1).setIsDone(true);
+                        tasks.markAsDone(taskNumber);
                         Ui.printLine("Nice! I've marked this task as done:");
-                        Ui.printLine(String.format("  %s", tasks.get(Integer.parseInt(tokens[1]) - 1)));
+                        Ui.printLine(String.format("  %s", tasks.getTaskString(taskNumber)));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -101,10 +98,9 @@ public class Parser {
                         throw new Exception("Please provide a valid task number!");
                     }
                     if (taskNumber <= tasks.size()) {
-                        Task task = tasks.get(taskNumber - 1);
-                        tasks.remove(taskNumber - 1);
+                        String taskString = tasks.delete(taskNumber);
                         Ui.printLine("Noted. I've removed this task:");
-                        Ui.printLine(String.format("  %s", task));
+                        Ui.printLine(String.format("  %s", taskString));
                         Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                     } else {
                         throw new Exception("Task does not exist!");

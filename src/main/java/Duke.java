@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -19,7 +18,7 @@ public class Duke {
     /**
      * The task list
      */
-    public static ArrayList<Task> tasks = new ArrayList<>();
+    public static TaskList tasks = new TaskList();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -31,7 +30,7 @@ public class Duke {
         Ui.printLine("Sou, watashi desu!");
         Ui.printHorizontalLine();
         Ui.printEmptyLine();
-        tasks = Storage.readFromFile();
+        Storage.readFromFile(tasks);
         for (; ; ) {
             try {
                 if (!Parser.processCommand(sc.nextLine(), tasks)) {
