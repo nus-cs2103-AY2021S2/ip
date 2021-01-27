@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +16,18 @@ import java.util.Scanner;
 
 public class DukeLevel {
     public static void main(String[] args) {
+        ArrayList<Task> tasksArray = new ArrayList<>();
+
+        File dukeFile = new File("src\\main\\data\\duke.txt");
+        try {
+            if (!dukeFile.exists()) {
+                dukeFile.createNewFile();
+            }
+            loadData(tasksArray, dukeFile);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
         Scanner sc = new Scanner(System.in);
         String line = "    _________________________________________________";
 
@@ -22,9 +35,6 @@ public class DukeLevel {
         System.out.println("     Hello! I'm Duke :)");
         System.out.println("     What can I do for you?");
         System.out.println(line);
-
-        ArrayList<Task> tasksArray = new ArrayList<>();
-        int count = 0;
 
         while (sc.hasNext()) {
             try {
@@ -47,8 +57,8 @@ public class DukeLevel {
                         System.out.println("     Your list is empty, there is nothing to do. Yay!");
                     } else {
                         System.out.println("     Here are the tasks in your list:");
-                        for (int i = 0; i < count; i++) {
-                            System.out.println("      " + (i + 1) + "." + tasksArray.get(i).toString());
+                        for (int i = 0; i < tasksArray.size(); i++) {
+                            System.out.println("       " + (i+1) + ". " + tasksArray.get(i).toString());
                         }
                     }
                     System.out.println(line);
@@ -60,16 +70,19 @@ public class DukeLevel {
                     System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
                     System.out.println(line);
                 } else if (cmd.equalsIgnoreCase("delete")) {
-                    int cmdNum = Integer.parseInt(strArray[1]);
                     System.out.println(line);
-                    System.out.println("     Noted. I've removed this task: ");
-                    System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
-                    tasksArray.remove(cmdNum - 1);
-                    count--;
-                    if (count == 1) {
-                        System.out.println("     Now you have " + count + " task in the list.");
+                    if (tasksArray.isEmpty()) {
+                        System.out.println("     Oops! You have no tasks to delete.");
                     } else {
-                        System.out.println("     Now you have " + count + " tasks in the list.");
+                        int cmdNum = Integer.parseInt(strArray[1]);
+                        System.out.println("     Noted. I've removed this task: ");
+                        System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
+                        tasksArray.remove(cmdNum - 1);
+                    }
+                    if (tasksArray.size() == 1) {
+                        System.out.println("      Now you have " + tasksArray.size() + " task in the list.");
+                    } else {
+                        System.out.println("     Now you have " + tasksArray.size() + " tasks in the list.");
                     }
                     System.out.println(line);
                 } else {
@@ -105,11 +118,10 @@ public class DukeLevel {
                     } else {
                         throw new DukeException("I'm sorry but I don't know what this means :(");
                     }
-                    count++;
-                    if (count == 1) {
-                        System.out.println("     Now you have " + count + " task in the list.");
+                    if (tasksArray.size() == 1) {
+                        System.out.println("     Now you have " + tasksArray.size() + " task in the list.");
                     } else {
-                        System.out.println("     Now you have " + count + " tasks in the list.");
+                        System.out.println("     Now you have " + tasksArray.size() + " tasks in the list.");
                     }
                     System.out.println(line);
                 }
@@ -119,6 +131,61 @@ public class DukeLevel {
                 System.out.println(line);
             }
         }
+
+        try {
+            saveData(tasksArray, dukeFile);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    private static void loadData(ArrayList<Task> tasksArrayList, File fname) throws IOException {
+        Scanner sc = new Scanner(fname);
+        while (sc.hasNextLine()) {
+            String tempStr = sc.nextLine();
+            String checkForTick = tempStr.substring(0, 5);
+            String cmd = tempStr.substring(7);
+            if (tempStr.contains("[T]")) {
+                ToDo toDoTask = new ToDo(cmd);
+                if (!checkForTick.contains(" ")) {
+                    toDoTask.markAsDone();
+                }
+                tasksArrayList.add(toDoTask);
+            } else if (tempStr.contains("[D]")) {
+                String[] strArray = cmd.split("by:", 2);
+                String inst = strArray[0].substring(0, strArray[0].length() - 2);
+                String date = strArray[1].substring(0, strArray[1].length() - 1);
+                Deadline deadlineTask = new Deadline(inst + " ", date);
+                if (!checkForTick.contains(" ")) {
+                    deadlineTask.markAsDone();
+                }
+                tasksArrayList.add(deadlineTask);
+            } else if (tempStr.contains("[E]")) {
+                String[] strArray = cmd.split("at:", 2);
+                String inst = strArray[0].substring(0, strArray[0].length() - 2);
+                String date = strArray[1].substring(0, strArray[1].length() - 1);
+                Event eventTask = new Event(inst + " ", date);
+                if (!checkForTick.contains(" ")) {
+                    eventTask.markAsDone();
+                }
+                tasksArrayList.add(eventTask);
+            }
+        }
+        sc.close();
+    }
+
+    private static void saveData(ArrayList<Task> taskArrayList, File fname) throws IOException {
+        FileWriter fwriter = new FileWriter(fname);
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            if (taskArrayList.get(i) instanceof ToDo) {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            } else if (taskArrayList.get(i) instanceof Deadline) {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            } else {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            }
+        }
+        fwriter.close();
     }
 }
 
