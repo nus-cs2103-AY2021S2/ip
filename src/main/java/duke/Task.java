@@ -36,17 +36,17 @@ public class Task {
         Task newTask;
         taskCommand = taskCommand.trim();
         switch (taskCommand.split(" ")[0]) {
-            case "todo":
-                newTask = createToDo(taskCommand);
-                break;
-            case "deadline":
-                newTask = createDeadline(taskCommand);
-                break;
-            case "event":
-                newTask = createEvent(taskCommand);
-                break;
-            default:
-                throw new DukeException("DukeObjects.Duke.Task cannot be created: " + taskCommand);
+        case "todo":
+            newTask = createToDo(taskCommand);
+            break;
+        case "deadline":
+            newTask = createDeadline(taskCommand);
+            break;
+        case "event":
+            newTask = createEvent(taskCommand);
+            break;
+        default:
+            throw new DukeException("DukeObjects.Duke.Task cannot be created: " + taskCommand);
         }
         return newTask;
     }
