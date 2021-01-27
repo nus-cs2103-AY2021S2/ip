@@ -7,21 +7,37 @@ import duke.task.TaskList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private static final Pattern DELETE_KEYWORD = Pattern.compile("(?i)delete\\b");
     private static final Pattern DELETE_INDEX = Pattern.compile("(?i)delete\\s+(\\d+)$");
 
     private final String argStr;
 
-
     private DeleteCommand(String argStr) {
         this.argStr = argStr;
     }
 
+    /**
+     * Returns true if the input string starts with the keyword delete. False otherwise.
+     *
+     * @param input Command as a string.
+     * @return true if the input string starts with the keyword delete. False otherwise.
+     */
     public static boolean isDeleteCommand(String input) {
         return DELETE_KEYWORD.matcher(input).find();
     }
 
+    /**
+     * Parses the input command string as a delete command and returns a DeleteCommand if successful.
+     * Throws a DukeException with a relevant message if parsing fails.
+     *
+     * @param input Command as a string.
+     * @return The parsed DeleteCommand.
+     * @throws DukeException If parsing fails.
+     */
     public static DeleteCommand parseDeleteCommand(String input) throws DukeException {
         Matcher deleteMatcher = DELETE_INDEX.matcher(input);
         if (!deleteMatcher.find()) {
@@ -34,6 +50,13 @@ public class DeleteCommand extends Command {
         return new DeleteCommand(argStr);
     }
 
+    /**
+     * Deletes a task from tasks and returns a CommandResult indicating success or failure.
+     *
+     * @param tasks The task list to delete from.
+     * @param storage The storage used by Duke (unused).
+     * @return A CommandResult indicating success or failure.
+     */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String feedback;

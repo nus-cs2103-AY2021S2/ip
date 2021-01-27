@@ -10,12 +10,20 @@ import duke.task.TaskParseException;
 import duke.ui.TextUi;
 import duke.ui.Ui;
 
+/**
+ * A personal task list app.
+ */
 public class Duke {
     private final Storage storage;
     private final Ui ui;
     private final Parser parser;
     private TaskList tasks;
 
+    /**
+     * Constructs a Duke instance which uses the given file path as its data file.
+     *
+     * @param filePath The file path to use for Duke's data file.
+     */
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -28,11 +36,19 @@ public class Duke {
         ui = new TextUi();
     }
 
+    /**
+     * Creates a duke instance with a hardcoded data path and runs it.
+     *
+     * @param args Ignored command line arguments.
+     */
     public static void main(String[] args) {
         final String dataFilePath = "data/duke.dat";
         new Duke(dataFilePath).run();
     }
 
+    /**
+     * Shows a greeting to the user before entering the app's main loop. Exits when commanded to.
+     */
     public void run() {
         ui.showGreeting();
 

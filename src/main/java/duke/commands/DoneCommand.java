@@ -7,6 +7,9 @@ import duke.task.TaskList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Marks a task as done.
+ */
 public class DoneCommand extends Command {
     private static final Pattern DONE_KEYWORD = Pattern.compile("(?i)done\\b");
     private static final Pattern DONE_INDEX = Pattern.compile("(?i)done\\s+(\\d+)$");
@@ -17,10 +20,24 @@ public class DoneCommand extends Command {
         this.argStr = argStr;
     }
 
+    /**
+     * Returns true if the input string starts with the keyword done. False otherwise.
+     *
+     * @param input Command as a string.
+     * @return true if the input string starts with the keyword done. False otherwise.
+     */
     public static boolean isDoneCommand(String input) {
         return DONE_KEYWORD.matcher(input).find();
     }
 
+    /**
+     * Parses the input command string as a done command and returns a DoneCommand if successful.
+     * Throws a DukeException with a relevant message if parsing fails.
+     *
+     * @param input Command as a string.
+     * @return The parsed DoneCommand.
+     * @throws DukeException If parsing fails.
+     */
     public static DoneCommand parseDoneCommand(String input) throws DukeException {
         Matcher doneMatcher = DONE_INDEX.matcher(input);
         if (!doneMatcher.find()) {
@@ -33,6 +50,13 @@ public class DoneCommand extends Command {
         return new DoneCommand(argStr);
     }
 
+    /**
+     * Marks a task in tasks as done and returns a CommandResult indicating success or failure.
+     *
+     * @param tasks The task list to get the task from.
+     * @param storage The storage used by Duke (unused).
+     * @return A CommandResult indicating success or failure.
+     */
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String feedback;
