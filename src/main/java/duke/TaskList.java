@@ -20,7 +20,7 @@ public class TaskList {
      * Creates a new task list without reading from existing storage.
      */
     public TaskList() {
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -28,8 +28,32 @@ public class TaskList {
      * @param storage Storage object to be read from
      */
     public TaskList(Storage storage) {
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         initializeTasks(storage.read());
+    }
+
+    /**
+     * Prints a list of {@Task} matching the given string.
+     * @param inputString the String to search for
+     */
+    public void find(String inputString) {
+        List<Task> newList = new ArrayList<>();
+        boolean hasPrintedTasks = false;
+        int counter = 0;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
+            if (task.getDescription().toLowerCase().contains(inputString.toLowerCase())) {
+                if (!hasPrintedTasks) {
+                    Ui.printMessage("Here are the list of matching tasks: ");
+                    hasPrintedTasks = true;
+                }
+                Ui.printMessage((counter + 1) + ". " + task.toString());
+                counter += 1;
+            }
+        }
+        if (!hasPrintedTasks) {
+            Ui.printMessage("There are no matching tasks!");
+        }
     }
 
     /**
