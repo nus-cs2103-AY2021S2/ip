@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 public class Duke {
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "history.txt";
@@ -44,6 +45,9 @@ public class Duke {
             else if (command.equals("delete")) {
                 int index = Integer.parseInt(tmp[1]);
                 doDelete(index);
+            }
+            else if (command.equals("find")) {
+                doFind(word);
             }
             else {
                 doTask(word);
@@ -90,6 +94,16 @@ public class Duke {
         }
         catch (ArrayIndexOutOfBoundsException e) {
             ui.printDeleteFail();
+        }
+    }
+
+    private void doFind(String word){
+        try {
+            String realWord = word.substring(5);
+            List<Task> searchedTaskList = taskList.find(realWord);
+            ui.printFindSuccess(searchedTaskList);
+        } catch (StringIndexOutOfBoundsException e) {
+            ui.printFindFail(new NoMeaningException("☹ OOPS!!! The description of a find cannot be empty."));
         }
     }
 

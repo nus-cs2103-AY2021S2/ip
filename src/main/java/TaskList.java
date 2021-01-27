@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 public class TaskList {
     private List<Task> listOfTasks;
@@ -44,5 +45,16 @@ public class TaskList {
      */
     public Task remove(int i) {
         return this.listOfTasks.remove(i);
+    }
+
+    public List<Task> find(String toSearch) {
+        List<Task> listFound = new ArrayList<>();
+        for (int i=0; i < listOfTasks.size(); i++) {
+            Task iElementOfListOfTasks = listOfTasks.get(i);
+            if (iElementOfListOfTasks.getJob().contains(toSearch)) {
+                listFound.add(iElementOfListOfTasks);
+            }
+        }
+        return listFound;
     }
 }

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class Ui {
     private Scanner scan;
@@ -68,6 +69,17 @@ public class Ui {
      */
     public void printDeleteFail() {
         System.out.println(deleteFail);
+    }
+
+    public void printFindSuccess(List<Task> listOfSearchedTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i=0; i < listOfSearchedTasks.size(); i++) {
+            printList(i, listOfSearchedTasks.get(i));
+        }
+    }
+
+    public void printFindFail(NoMeaningException e) {
+        System.out.println(e.getMessage());
     }
 
     /**
