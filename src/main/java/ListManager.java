@@ -69,7 +69,12 @@ public class ListManager extends Manager {
                     String[] arr = userInput.substring(length+1).split(" /by ");
                     String deadlineDescription = arr[0];
                     String descriptionBy = arr[1];
-                    newTask = new Deadline(deadlineDescription, descriptionBy);
+
+                    try {
+                        newTask = new Deadline(deadlineDescription, descriptionBy);
+                    }catch (TaskException e){
+                        throw new DukeException(defaultFormatting(e.getMessage()));
+                    }
                 }else{
                     throw new DukeException(defaultFormatting("Error! Please provide when the deadline " +
                             "will be due after /by. [eg. deadline submit work /at 10am]"));
