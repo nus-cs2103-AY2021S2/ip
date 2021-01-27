@@ -4,6 +4,11 @@ public class Duke {
     static TaskList tasks;
     static DataStorage storage;
     static boolean shouldRun = true;
+
+    /**
+     * Entry point for the Duke program
+     * @param args Command line arguments which are not used. Do not waste your effort.
+     */
     public static void main(String[] args) {
 
         startup();
@@ -58,6 +63,9 @@ public class Duke {
         shutdown();
     }
 
+    /**
+     * Initialises the Duke program's backing store and reads any tasks that might be in the file.
+     */
     public static void startup() {
         try {
             storage = new DataStorage();
@@ -69,6 +77,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Shuts down the Duke program gracefully after writing any tasks in memory to the backing store.
+     */
     public static void shutdown() {
         tasks.persist(storage);
     }

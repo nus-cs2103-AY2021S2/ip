@@ -7,10 +7,17 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
+    /**
+     * Constructs a TaskList wrapper object.
+     * @param tasks Array of tasks to wrap around.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Lists tasks to the standard output.
+     */
     public void listTasks() {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -19,6 +26,11 @@ public class TaskList {
         Ui.echo(builder.toString().trim());
     }
 
+    /**
+     * Adds a Todo.
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If todo is not formatted properly.
+     */
     public void addTodo(HashMap<String, String> commands) throws DukeException {
         String taskName = commands.get("info");
         if (taskName == "") {
@@ -31,6 +43,11 @@ public class TaskList {
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
     }
 
+    /**
+     * Adds an Event.
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If Event is not formatted properly.
+     */
     public void addEvent(HashMap<String, String> commands) throws DukeException {
         String eventName = commands.get("info");
         String timeStr = commands.get("at");
@@ -45,7 +62,11 @@ public class TaskList {
 
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", eventTask.toString(), getNumberOfTasksString(tasks)));
     }
-
+    /**
+     * Adds an Deadline.
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If Deadline is not formatted properly.
+     */
     public void addDeadline(HashMap<String, String> commands) throws DukeException {
         String deadlineName = commands.get("info");
         String deadlineTimeStr = commands.get("by");
@@ -62,6 +83,11 @@ public class TaskList {
         Ui.echo(String.format("Added a deadline for you:\n%s\n%s", deadlineTask.toString(), getNumberOfTasksString(tasks)));
     }
 
+    /**
+     * Deletes a task
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If Delete command is not formatted properly.
+     */
     public void deleteTask(HashMap<String, String> commands) throws DukeException {
         String taskToDeleteStr = commands.get("info");
 
@@ -80,6 +106,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done.
+     * @param commands Commands parsed by the parser.
+     * @throws DukeException If "mark as done" command is not formatted properly.
+     */
     public void markTaskAsDone(HashMap<String, String> commands) throws DukeException {
         String taskToMarkAsDoneStr = commands.get("info");
 
@@ -98,10 +129,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a formatted string indicating how many tasks are in the list.
+     * @param tasks List of tasks to count.
+     * @return A string formatted to indicated how many tasks are in the list.
+     */
     public String getNumberOfTasksString(List<Task> tasks) {
         return String.format("Now you have %d items in your list", tasks.size());
     }
 
+    /**
+     * Writes tasks to the given datastorage object.
+     * @param storage DataStorage object to persist the tasks to.
+     */
     public void persist(DataStorage storage) {
         try {
             storage.saveTasks(tasks);
