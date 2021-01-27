@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Represents a normal task.
+ */
 public class ToDoTask extends Task {
     public static final String IDENTIFIER = "T";
 

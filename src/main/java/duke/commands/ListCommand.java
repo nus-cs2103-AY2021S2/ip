@@ -1,5 +1,8 @@
 package duke.commands;
 
+/**
+ * Lists the current tasks.
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     private static final String EMPTY_TASKLIST_MESSAGE = "You do not have anything to do at the moment!";

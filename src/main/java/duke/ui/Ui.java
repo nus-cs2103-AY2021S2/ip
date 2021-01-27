@@ -3,6 +3,10 @@ package duke.ui;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Handles the input/output of the application.
+ * Responsible for getting user input and printing messages to the console.
+ */
 public class Ui {
     private static final String DIVIDER = "------------------------------------------------------------";
     private static final String LOGO = " ____        _        \n"
@@ -20,24 +24,40 @@ public class Ui {
         this.out = System.out;
     }
 
+    /**
+     * Reads the user input string.
+     * @return full user input string
+     */
     public String getUserInput() {
-        String userInput = in.nextLine();
-        return userInput;
+        return in.nextLine();
     }
-    
+
+    /**
+     * Prints a horizontal line dividing separate messages.
+     */
     public void printDivider() {
         out.println(DIVIDER);
     }
 
+    /**
+     * Prints the welcome greeting.
+     */
     public void printGreeting() {
         String welcomeMsg = String.format("Hello! I'm\n%s\nWhat can I do for you?", LOGO);
         out.println(welcomeMsg);
     }
 
+    /**
+     * Prints the exit message.
+     */
     public void printExitMessage() {
         out.println(EXIT_MESSAGE);
     }
 
+    /**
+     * Prints the message to be shown to the user to the console.
+     * @param messageForUser message to be shown to user
+     */
     public void print(String messageForUser) {
         out.println(messageForUser);
     }

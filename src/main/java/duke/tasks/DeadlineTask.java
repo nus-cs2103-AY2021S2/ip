@@ -4,6 +4,9 @@ import duke.utils.Formatter;
 
 import java.time.LocalDateTime;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class DeadlineTask extends Task {
     public static final String IDENTIFIER = "D";
 
@@ -19,6 +22,10 @@ public class DeadlineTask extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Returns the deadline in a nicely formatted string. 
+     * @return formatted deadline string
+     */
     public String getDeadline() {
         return deadline.format(Formatter.OUTPUT_DATE_FORMATTER);
     }

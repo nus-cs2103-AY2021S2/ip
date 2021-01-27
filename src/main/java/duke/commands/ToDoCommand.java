@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasks.ToDoTask;
 
+/**
+ * Creates a ToDo task.
+ */
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     private static final String ADDED_TASK_MESSAGE = "Got it. I've added this task:\n  ";
