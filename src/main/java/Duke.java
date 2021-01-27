@@ -2,13 +2,23 @@ import java.util.*;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+
+    public Duke() {
+
+        this.ui = new Ui();
+        this.storage = new Storage(System.getProperty("user.dir") + "/data/", "duke.txt");
+        this.taskList = storage.load();
+
+    }
+
+    public void run() {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
-        Storage storage = new Storage();
-        ArrayList<Task> taskList = storage.load();
+        ui.printWelcomeMessage();
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -23,13 +33,17 @@ public class Duke {
                 break;
 
             } else if (command.equals("list")) {
-                System.out.println("Here are the tasks in your task list:");
-                for (int i = 0; i < taskList.size() ; i++ ) {
-                    System.out.println((i + 1) + "."
-                            + taskList.get(i).getTypeIcon()
-                            + taskList.get(i).getStatusIcon() + " "
-                            + taskList.get(i).getDescription()
-                    );
+                if (taskList.size() == 0) {
+                    System.out.println("There are no tasks in your task list");
+                } else {
+                    System.out.println("Here are the tasks in your task list:");
+                    for (int i = 0; i < taskList.size() ; i++ ) {
+                        System.out.println((i + 1) + ". "
+                                + taskList.get(i).getTypeIcon()
+                                + taskList.get(i).getStatusIcon() + " "
+                                + taskList.get(i).getDescription()
+                        );
+                    }
                 }
 
             } else if(command.equals("done")) {
@@ -84,7 +98,9 @@ public class Duke {
                 }
 
                 String[] split = tokens[1].split("/by", 2);
-                Task task = new Deadlines(split[0], split[1]);
+                String description = split[0];
+                String by = split.length > 1 ? split[1].strip() : null;
+                Task task = new Deadlines(description, by);
                 taskList.add(task);
 
                 System.out.println("Got it. I have added this task:");
@@ -99,7 +115,9 @@ public class Duke {
                 }
 
                 String[] split = tokens[1].split("/at", 2);
-                Task task = new Events(split[0], split[1]);
+                String description = split[0];
+                String at = split.length > 1 ? split[1] : null;
+                Task task = new Events(description, at);
                 taskList.add(task);
 
                 System.out.println("Got it. I have added this task:");
@@ -138,6 +156,10 @@ public class Duke {
             }
         }
     }
+
+    public static void main(String[] args) {
+
+        new Duke().run();
+
+    }
 }
-
-

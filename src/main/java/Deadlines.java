@@ -10,10 +10,9 @@ public class Deadlines extends Task {
 
     private LocalDateTime time;
 
-    private String by;
-
     public Deadlines(String description, String by) {
         super(description);
+
         System.out.println(description);
         System.out.println(by);
 
@@ -35,10 +34,10 @@ public class Deadlines extends Task {
 
     @Override
     public String getDescription() {
-        if (by == null) {
+        if (time == null) {
             return this.description;
         } else {
-            return String.format("%s (by: %s)", this.description, this.by);
+            return String.format("%s (by: %s)", this.description, this.time.format(formatter));
         }
     }
 
@@ -49,10 +48,10 @@ public class Deadlines extends Task {
 
         String result;
 
-        if (by == null) {
+        if (time == null) {
             result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
         } else {
-            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description + DELIMITER + this.by;
+            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description + DELIMITER + this.time.toString();
         }
         return result;
     }

@@ -3,25 +3,24 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
-    private static final String PATH = "/data/";
-    private static final String FILENAME = "duke.txt";
-    private static final String ROOT = System.getProperty("user.dir");
+    private String directory;
+    private String fileName;
 
-    public Storage() {
-
+    public Storage(String directory, String fileName) {
+        this.directory = directory;
+        this.fileName = fileName;
     }
 
-    public void save(ArrayList<Task> taskList) {
+    public void save(TaskList taskList) {
 
         try {
-            PrintWriter writer = new PrintWriter(ROOT + PATH + FILENAME, "UTF-8");
+            PrintWriter writer = new PrintWriter(this.directory + this.fileName, "UTF-8");
 
-            for (Task task: taskList) {
+            for (Task task: taskList.getList()) {
                 writer.println(task.tokenize());
             }
 
@@ -33,13 +32,13 @@ public class Storage {
 
     }
 
-    public ArrayList<Task> load() {
+    public TaskList load() {
 
         try {
-            File file = new File(ROOT + PATH + FILENAME);
+            File file = new File(this.directory + this.fileName);
             Scanner sc = new Scanner(file);
 
-            ArrayList<Task> taskList = new ArrayList<>();
+            TaskList taskList = new TaskList();
 
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
@@ -54,7 +53,7 @@ public class Storage {
 
         } catch (FileNotFoundException e) {
             createNewFile();
-            return new ArrayList<>();
+            return new TaskList();
         }
 
     }
@@ -123,15 +122,15 @@ public class Storage {
 
 
     private void createNewFile() {
-        File directory = new File(ROOT + PATH);
+        File directory = new File(this.directory);
         if (!directory.exists()) {
             directory.mkdir();
         }
 
         try {
-            File file = new File (ROOT + PATH + FILENAME);
+            File file = new File (this.directory + this.fileName);
             if (file.createNewFile()) {
-                System.out.println("Created File: " + ROOT + PATH + FILENAME);
+                System.out.println("Created File: " + this.directory + this.fileName);
             } else {
                 System.out.println("File already exists.");
             }
