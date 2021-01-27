@@ -98,20 +98,6 @@ public class Duke {
     }
 
     /**
-     * Process command find given by user.
-     * @param word String inputted by user.
-     */
-    private void doFind(String word){
-        try {
-            String realWord = word.substring(5);
-            List<Task> searchedTaskList = taskList.find(realWord);
-            ui.printFindSuccess(searchedTaskList);
-        } catch (StringIndexOutOfBoundsException e) {
-            ui.printFindFail(new NoMeaningException("☹ OOPS!!! The description of a find cannot be empty."));
-        }
-    }
-
-    /**
      * Process task type command given by user.
      * @param word the whole sentences entered by the user
      */
