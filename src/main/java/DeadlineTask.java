@@ -1,5 +1,7 @@
+import java.time.LocalDateTime;
+
 public class DeadlineTask extends Task {
-    private String dueTime;
+    private LocalDateTime dueTime;
 
     public DeadlineTask(String name) {
         super(name);
@@ -7,11 +9,11 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String name, String dueTime) {
         super(name);
-        this.dueTime = dueTime;
+        this.setDueTime(dueTime);
     }
 
     public void setDueTime(String dueTime) {
-        this.dueTime = dueTime;
+        this.dueTime = LocalDateTime.parse(dueTime);
     }
 
     @Override
