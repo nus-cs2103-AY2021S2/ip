@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,18 +12,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Storage {
-    // source: https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
+    // source: https://stackoverflow.com/questions/28947250/create-a-directory-if-it-does-not-exist-and-then-create-the-files-in-that-direct
     // inserts correct file path separator on *nix and Windows
     private static Path dataPath;
 
     Storage(String filePath) {
+        String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
+        String fileDirectory = filePathSplit[0];
+        String file = filePathSplit[1];
+        File directory = new File(fileDirectory);
+        if (! directory.exists()){
+            directory.mkdir();
+        }
         dataPath = Paths.get(filePath);
     }
 
     static void saveData(String taskList) {
         try {
+            System.out.println(taskList);
             // save all tasks again if TaskList has tasks
             if (taskList.length() > 0) {
+                // splitting by "  %d. [" incase the task description uses periods and digits as well
                 ArrayList<String> tasksWithoutIndex = new ArrayList<>(List.of(taskList.split("  \\d. \\[")));
                 String toSave = tasksWithoutIndex.stream()
                         .reduce((a, b) -> a + b)
@@ -53,8 +63,9 @@ public class Storage {
     }
 
     private Task readTaskFromData(String line) {
-        boolean taskIsDone = (line.charAt(4) == 'X');
+        boolean taskIsDone = (line.charAt(3) == 'X');
         Task output = null;
+        System.out.println(line);
 
         if (line.startsWith("T]")) {
             String expression = line.split("] ", 2)[1];

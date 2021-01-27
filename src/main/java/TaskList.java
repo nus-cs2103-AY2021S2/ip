@@ -33,7 +33,11 @@ public class TaskList {
         return tasks.remove(idx - 1);
     }
 
-    int getTotalTasksUndone() {
+    int getTotalNumberOfTasks() {
+        return tasks.size();
+    }
+
+    int getTotalNumberOfTasksUndone() {
         return tasks.stream()
                 .mapToInt(Task::isNotDone)
                 .reduce(0, Integer::sum);
@@ -43,7 +47,7 @@ public class TaskList {
     public String toString() {
         if (this.hasTasks()) {
             // adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
-            String taskList =  IntStream.range(0, tasks.size())
+            return IntStream.range(0, tasks.size())
                     .mapToObj(index -> String.format("  %s. %s\n",
                             index, tasks.get(index).toString()))
                     .reduce((a, b) -> a + b)
