@@ -36,10 +36,10 @@ public class Ui {
         System.out.println("\t____________________________________________________________\n");
         System.out.println("\t  Your tasks:");
         int listCounter = 1;
-        ListIterator<Task> iter = tasks.listIterator();
+        ListIterator<Task> iterator = tasks.getIterator();
         Task task;
-        while (iter.hasNext()) {
-            task = iter.next();
+        while (iterator.hasNext()) {
+            task = iterator.next();
             System.out.println("  \t  " + listCounter + "." + task);
             listCounter++;
         }

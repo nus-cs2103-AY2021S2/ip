@@ -31,24 +31,24 @@ public class TaskStorage {
     public void storeData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(file);
-            ListIterator<Task> iter = tasks.listIterator();
+            ListIterator<Task> iterator = tasks.getIterator();
             Task task;
-            while (iter.hasNext()) {
-                task = iter.next();
+            while (iterator.hasNext()) {
+                task = iterator.next();
                 char taskType = task.toString().charAt(1);
                 int done = task.isDone() ? 1 : 0;
                 String description = task.getDescription();
                 String details = "";
                 switch (taskType) {
-                    case 'D':
-                        Deadline deadline = (Deadline) task;
-                        details = deadline.getDateTime();
-                        break;
-                    case 'E':
-                        Event event = (Event) task;
-                        details = event.getDateTime();
-                        break;
-                    default:
+                case 'D':
+                    Deadline deadline = (Deadline) task;
+                    details = deadline.getDateTime();
+                    break;
+                case 'E':
+                    Event event = (Event) task;
+                    details = event.getDateTime();
+                    break;
+                default:
                 }
                 writer.write(taskType + " | " + done + " | " +  description +
                         (details.isBlank() ? "" : " | " + details));
@@ -72,20 +72,20 @@ public class TaskStorage {
                 String isDone = taskInfo[1];
                 String description = taskInfo[2];
                 switch (taskType) {
-                    case "T":
-                        retrievedTasks.add(new ToDo(description, isDone));
-                        break;
-                    case "D":
-                        String deadlineDetails = taskInfo[3];
-                        LocalDateTime deadline = LocalDateTime.parse(deadlineDetails, formatter);
-                        retrievedTasks.add(new Deadline(description, isDone, deadline));
-                        break;
-                    case "E":
-                        String eventDetails = taskInfo[3];
-                        LocalDateTime eventTime = LocalDateTime.parse(eventDetails, formatter);
-                        retrievedTasks.add(new Event(description, isDone, eventTime));
-                        break;
-                    default:
+                case "T":
+                    retrievedTasks.add(new ToDo(description, isDone));
+                    break;
+                case "D":
+                    String deadlineDetails = taskInfo[3];
+                    LocalDateTime deadline = LocalDateTime.parse(deadlineDetails, formatter);
+                    retrievedTasks.add(new Deadline(description, isDone, deadline));
+                    break;
+                case "E":
+                    String eventDetails = taskInfo[3];
+                    LocalDateTime eventTime = LocalDateTime.parse(eventDetails, formatter);
+                    retrievedTasks.add(new Event(description, isDone, eventTime));
+                    break;
+                default:
                 }
             }
         } catch (Exception e){

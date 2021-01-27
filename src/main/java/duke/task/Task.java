@@ -35,7 +35,7 @@ public class Task {
      * Update the task as completed.
      */
 
-    public void markDone() {
+    public void setDone() {
         this.isDone = true;
     }
 
@@ -43,7 +43,7 @@ public class Task {
      * Update the task as incomplete.
      */
 
-    public void markIncomplete() {
+    public void setNotDone() {
         this.isDone = false;
     }
 

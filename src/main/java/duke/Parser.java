@@ -28,43 +28,43 @@ public class Parser {
         Command res = null;
         try {
             switch (command) {
-                case "todo":
-                    checkDescription(split);
-                    String description = userInput.substring(5);
-                    res = new AddCommand(new ToDo(description));
-                    break;
-                case "deadline":
-                    checkDescription(split);
-                    String[] deadlineDetails = userInput.substring(9).split(" /by ");
-                    checkDateTime(deadlineDetails);
-                    String deadlineDescription = deadlineDetails[0];
-                    LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
-                    res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
-                    break;
-                case "event":
-                    checkDescription(split);
-                    String[] eventDetails = userInput.substring(6).split(" /at ");
-                    checkDateTime(eventDetails);
-                    String eventDescription = eventDetails[0];
-                    LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1], formatter);
-                    res = new AddCommand(new Event(eventDescription, eventDateTime));
-                    break;
-                case "list":
-                    res = new ListCommand();
-                    break;
-                case "done":
-                    int completedTaskIdx = checkArgument(split, tasks);
-                    res = new DoneCommand(completedTaskIdx);
-                    break;
-                case "delete":
-                    int taskToDelete = checkArgument(split, tasks);
-                    res = new DeleteCommand(taskToDelete);
-                    break;
-                case "bye":
-                    res = new ExitCommand();
-                    break;
-                default:
-                    res = new InvalidCommand();
+            case "todo":
+                checkDescription(split);
+                String description = userInput.substring(5);
+                res = new AddCommand(new ToDo(description));
+                break;
+            case "deadline":
+                checkDescription(split);
+                String[] deadlineDetails = userInput.substring(9).split(" /by ");
+                checkDateTime(deadlineDetails);
+                String deadlineDescription = deadlineDetails[0];
+                LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlineDetails[1], formatter);
+                res = new AddCommand(new Deadline(deadlineDescription, deadlineDateTime));
+                break;
+            case "event":
+                checkDescription(split);
+                String[] eventDetails = userInput.substring(6).split(" /at ");
+                checkDateTime(eventDetails);
+                String eventDescription = eventDetails[0];
+                LocalDateTime eventDateTime = LocalDateTime.parse(eventDetails[1], formatter);
+                res = new AddCommand(new Event(eventDescription, eventDateTime));
+                break;
+            case "list":
+                res = new ListCommand();
+                break;
+            case "done":
+                int completedTaskIdx = checkArgument(split, tasks);
+                res = new DoneCommand(completedTaskIdx);
+                break;
+            case "delete":
+                int taskToDelete = checkArgument(split, tasks);
+                res = new DeleteCommand(taskToDelete);
+                break;
+            case "bye":
+                res = new ExitCommand();
+                break;
+            default:
+                res = new InvalidCommand();
             }
         } catch (DukeException e) {
             ui.print(e.getMessage());
@@ -89,7 +89,7 @@ public class Parser {
             throw new DukeArgumentException("Please enter a numerical value for the task index!");
         }
         try {
-            int taskIndex = Integer.parseInt(split[1])-1;
+            int taskIndex = Integer.parseInt(split[1]) - 1;
             tasks.getTask(taskIndex);
             return taskIndex;
         } catch (NumberFormatException e) {

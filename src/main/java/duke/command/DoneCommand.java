@@ -12,10 +12,11 @@ public class DoneCommand extends Command {
         this.completedTaskIdx = completedTaskIdx;
     }
 
-    public void execute(TaskList tasks, Ui ui, TaskStorage storage) {
+    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
         Task completedTask = tasks.getTask(completedTaskIdx);
-        completedTask.markDone();
+        completedTask.setDone();
         storage.storeData(tasks);
         ui.print("Nice! I have marked this task as done:\n\t\t " + completedTask);
+        return true;
     }
 }

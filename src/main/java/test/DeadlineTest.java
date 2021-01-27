@@ -23,8 +23,8 @@ class DeadlineTest {
     void testDeadlineDone() {
         Deadline underTest = new Deadline("physics experiment",
                 LocalDateTime.parse("2020-11-29 2359", formatter));
-        underTest.markDone();
-        underTest.markIncomplete();
+        underTest.setDone();
+        underTest.setNotDone();
         assertEquals(underTest.isDone(), false);
     }
 

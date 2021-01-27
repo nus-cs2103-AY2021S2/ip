@@ -12,11 +12,12 @@ public class DeleteCommand extends Command {
         this.indexToDelete = indexToDelete;
     }
 
-    public void execute(TaskList tasks, Ui ui, TaskStorage storage) {
+    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
         Task removedTask = tasks.deleteTask(indexToDelete);
         storage.storeData(tasks);
         ui.print("I've removed this task:\n\t\t" + removedTask +
                 "\n\n\t  You have " +
                 tasks.getSize() + (tasks.getSize() == 1 ? " task" : " tasks") + " in your list");
+        return true;
     }
 }
