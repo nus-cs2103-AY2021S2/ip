@@ -16,14 +16,14 @@ public class Task implements Serializable {
      * Called when the task has been completed by the user. It will mark the task as done.
      */
     public void complete() {
-        this.isDone = true;
+        isDone = true;
     }
     
     /*
      * Provide the status icon for the toString() method.
      */
     public String getStatusIcon() {
-        if (this.isDone) {
+        if (isDone) {
             return "[X]";
         } else {
             return "[ ]";
@@ -32,6 +32,6 @@ public class Task implements Serializable {
     
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.name;
+        return this.getStatusIcon() + name;
     }
 }

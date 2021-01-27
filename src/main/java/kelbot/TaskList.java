@@ -26,7 +26,7 @@ public class TaskList {
     }
     
     public void add(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
     
     public Task complete(int taskNumber) {

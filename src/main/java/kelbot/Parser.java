@@ -1,6 +1,5 @@
 package kelbot;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -16,46 +15,46 @@ public class Parser {
             String[] commands = input.split(" ");
             
             if (input.equals("bye")) {
-                this.command = Command.BYE;
+                command = Command.BYE;
             } else if (input.equals("list")) {
-                this.command = Command.LIST;
+                command = Command.LIST;
             } else if (commands[0].equals("done")) {
-                this.command = Command.DONE;
-                this.taskNumber = Integer.parseInt(commands[1]);
+                command = Command.DONE;
+                taskNumber = Integer.parseInt(commands[1]);
             } else if (commands[0].equals("delete")) {
-                this.command = Command.DELETE;
-                this.taskNumber = Integer.parseInt(commands[1]);
+                command = Command.DELETE;
+                taskNumber = Integer.parseInt(commands[1]);
             } else if (commands[0].equals("todo")) {
-                this.command = Command.TODO;
+                command = Command.TODO;
                 for (int i = 1; i < commands.length; i++) {
-                    this.taskName += " " + commands[i];
+                    taskName += " " + commands[i];
                 }
             } else if (commands[0].equals("deadline")) {
-                this.command = Command.DEADLINE;
-                String date = "";
+                command = Command.DEADLINE;
+                String deadlineDate = "";
                 for (int i = 1; i < commands.length; i++) {
                     if (commands[i].equals("/by")) {
                         for (int j = i + 1; j < commands.length; j++) {
-                            date += commands[j];
+                            deadlineDate += commands[j];
                         }
                         break;
                     }
-                    this.taskName += " " + commands[i];
+                    taskName += " " + commands[i];
                 }
-                    this.date = LocalDate.parse(date);
+                    date = LocalDate.parse(deadlineDate);
             } else if (commands[0].equals("event")) {
-                this.command = Command.EVENT;
-                String date = "";
+                command = Command.EVENT;
+                String eventDate = "";
                 for (int i = 1; i < commands.length; i++) {
                     if (commands[i].equals("/at")) {
                         for (int j = i + 1; j < commands.length; j++) {
-                            date += commands[j];
+                            eventDate += commands[j];
                         }
                         break;
                     }
-                    this.taskName += " " + commands[i];
+                    taskName += " " + commands[i];
                 }
-                    this.date = LocalDate.parse(date);
+                    date = LocalDate.parse(eventDate);
             } else {
                 throw new KelbotException("Invalid Command");
             }
@@ -65,18 +64,18 @@ public class Parser {
     }
     
     public Command getCommand() {
-        return this.command;
+        return command;
     }
     
     public String getTaskName() {
-        return this.taskName;
+        return taskName;
     }
     
     public int getTaskNumber() {
-        return this.taskNumber;
+        return taskNumber;
     }
     
     public LocalDate getDate() {
-        return this.date;
+        return date;
     }
 }
