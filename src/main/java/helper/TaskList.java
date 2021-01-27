@@ -9,7 +9,7 @@ public class TaskList {
     private List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+        this.taskList = new ArrayList<>();
     }
 
     public TaskList() {

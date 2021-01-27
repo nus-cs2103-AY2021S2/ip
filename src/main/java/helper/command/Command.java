@@ -1,7 +1,18 @@
 package helper.command;
 
+import helper.DukeException;
+import helper.Storage;
+import helper.TaskList;
+import helper.Ui;
+
 public abstract class Command {
 
+    protected boolean isExit;
 
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }
