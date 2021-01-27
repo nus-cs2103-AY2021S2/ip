@@ -16,31 +16,14 @@ import java.util.Arrays;
 
 
 public class DukeSimulator {
-    private final String line = "    ____________________________________________________________\n";
-    private final String help = line + "     These are the proper format of Duke's commands:\n"
-            + "      -help\n"
-            + "      -todo (insert task name here)\n"
-            + "      -deadline (insert task name here) /by (insert time here)\n"
-            + "      -event (insert event name here) /at (insert time here)\n"
-            + "      eg: 'deadline typing /by 1pm'\n"
-            + line;
-    private final String directory = "C:/users/chian/Desktop/CS2103/ip/data/";
-    private final String fileName = "data.txt";
+
+
     private List<Task> taskList;
 
     public DukeSimulator() {
         taskList = new ArrayList<Task>();
     }
 
-    public void greeting() {
-        String greeting = "     Hello! I'm Duke\n" + "     What can I do for you?\n";
-        System.out.print(line + greeting + line);
-    }
-
-    public void bye() {
-        String byeMessage = line + "     Bye. Hope to see you again soon!\n" + line;
-        System.out.print(byeMessage);
-    }
 
     public void run() {
         greeting();
@@ -143,61 +126,10 @@ public class DukeSimulator {
             }
         }
     }
-    private void save() {
-        try {
-            FileWriter fw = new FileWriter(directory + fileName);
-            fw.write(tasks());
-            fw.close();
-        } catch(IOException e) {
-            System.out.println("Unable to save file!");
-        }
-    }
-
-    private void loadTaskList() {
-        try {
-            File f = new File(directory + fileName);
-            f.createNewFile();
-            Scanner sc = new Scanner(f);
-            while (sc.hasNext()) {
-                String strTask = sc.nextLine();
-                String[] taskArray = strTask.split(" \\| ");
-                Task t = null;
-                switch (taskArray[0]) {
-                    case "T":
-                        t = new ToDo(taskArray[2]);
-                        break;
-                    case "E":
-                        String[] timeArray = taskArray[3].split("-");
-                        LocalDateTime ldtStart = LocalDateTime.parse(timeArray[0],
-                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
-                        LocalDateTime ldtEnd = LocalDateTime.parse(timeArray[1],
-                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
-                        t = new Event(taskArray[2], ldtStart, ldtEnd);
-                        break;
-                    case "D":
-                        LocalDateTime ldt = LocalDateTime.parse(taskArray[3],
-                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
-                        t = new Deadline(taskArray[2], ldt);
-                        break;
-                }
-                if(taskArray[1].equals("X")) {
-                    t = t.finishTask();
-                }
-                taskList.add(t);
-            }
-        } catch (IOException e) {
-            System.out.println("Unable to load file!");
-        }
-    }
 
 
-    private String tasks() {
-        StringBuilder sb = new StringBuilder("");
-        for (Task t : taskList) {
-            sb.append(t.saveTask());
-        }
-        return sb.toString();
-    }
+
+
 
     private void printList() {
         int index = 1;
