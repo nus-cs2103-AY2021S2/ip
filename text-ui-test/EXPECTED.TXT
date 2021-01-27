@@ -56,13 +56,13 @@ Here are the tasks in your list:
 1.[E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
-EmptyDescriptionException: OOPS!!! The description of a(n) todo cannot be empty.
+exception.EmptyDescriptionException: OOPS!!! The description of a(n) todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-EmptyDescriptionException: OOPS!!! The description of a(n) deadline cannot be empty.
+exception.EmptyDescriptionException: OOPS!!! The description of a(n) deadline cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-WrongFormatException: OOPS!!! The description format is wrong
+exception.WrongFormatException: OOPS!!! The description format is wrong
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
