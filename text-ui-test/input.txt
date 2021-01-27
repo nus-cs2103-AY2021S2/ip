@@ -18,4 +18,10 @@ todo check errors
 done
 done a
 delete
+done1
+delete1
+delete 1
+todoa
+eventa /by 9pm
+deadlineb /by 10am
 bye
