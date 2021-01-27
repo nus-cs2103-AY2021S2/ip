@@ -16,6 +16,10 @@ public class Duke {
     private Parser parser;
     private Scanner sc;
 
+    /**
+     * Creates a Duke object
+     * @param filePath path of local file
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         try {
@@ -29,6 +33,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Tasker program which allows user to interact with
+     * to organize the user's Tasks.
+     */
     public void run() {
         try {
             ui.greetUser();
@@ -52,6 +60,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main Function
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke(Storage.saveFilePath);
         duke.run();

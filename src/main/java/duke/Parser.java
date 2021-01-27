@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 public class Parser {
     private TaskList taskList;
+    /** An ArrayList of Tasks obtained from TaskList **/
     private ArrayList<Task> tasks;
+
+    /** A collection of commands Tasker can execute **/
     public enum Command {
         LIST,
         DONE,
@@ -15,11 +18,20 @@ public class Parser {
         EVENT
     }
 
+    /**
+     * Constructs a Parser object.
+     * @param taskList TaskList
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
         this.tasks = this.taskList.getTasks();
     }
 
+    /**
+     * Generates output in response to the user's command.
+     * @param command Command in the form of a String array
+     * @throws DukeException If command could not be understood by Tasker.
+     */
     public void receive(String[] command) throws DukeException {
         try {
             String task = command[0].toUpperCase();
@@ -54,6 +66,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Lists all the tasks in the TaskList.
+     * @param tasks An ArrayList of Tasks
+     */
     public static void listTasks(ArrayList<Task> tasks) {
         System.out.println("----------------------------------------------");
         System.out.println("Here are the tasks in your list:");
@@ -62,6 +78,14 @@ public class Parser {
         }
         System.out.println("----------------------------------------------");
     }
+
+    /**
+     * Marks a task in the TaskList as "completed".
+     * @param tasks An ArrayList of Tasks
+     * @param index Index of task in ArrayList
+     * @throws IndexOutOfBoundsException If user provides a task number
+     * that does not exist
+     */
     public static void markTaskDone(ArrayList<Task> tasks, int index) throws IndexOutOfBoundsException{
         System.out.println("----------------------------------------------");
         Task t = tasks.get(index - 1);
@@ -70,6 +94,12 @@ public class Parser {
         System.out.println(t);
         System.out.println("----------------------------------------------");
     }
+
+    /**
+     * Removes a task from the TaskList.
+     * @param tasks An ArrayList of Tasks
+     * @param index Index of task in ArrayList
+     */
     public static void deleteTask(ArrayList<Task> tasks, int index) {
         System.out.println("----------------------------------------------");
         Task t = tasks.remove(index - 1);
@@ -78,11 +108,17 @@ public class Parser {
         System.out.println("Now there are " + tasks.size() + " tasks on the list");
         System.out.println("----------------------------------------------");
     }
-    public static void createTodo(ArrayList<Task> tasks, String[] com) {
+
+    /**
+     * Creates a ToDoTask.
+     * @param tasks An ArrayList of Tasks
+     * @param command A String array containing the full command
+     */
+    public static void createTodo(ArrayList<Task> tasks, String[] command) {
         System.out.println("----------------------------------------------");
         String todo = "";
-        for (int i = 1; i < com.length; i++) {
-            todo += " " + com[i];
+        for (int i = 1; i < command.length; i++) {
+            todo += " " + command[i];
         }
         ToDoTask newTodo = new ToDoTask(todo, false);
         tasks.add(newTodo);
@@ -91,25 +127,31 @@ public class Parser {
         System.out.println("Now there are " + tasks.size() + " tasks on the list");
         System.out.println("----------------------------------------------");
     }
-    public static void createDeadline(ArrayList<Task> tasks, String[] com) {
+
+    /**
+     * Creates a DeadlineTask.
+     * @param tasks An ArrayList of Tasks
+     * @param command A String array containing the full command
+     */
+    public static void createDeadline(ArrayList<Task> tasks, String[] command) {
         System.out.println("----------------------------------------------");
         String description = "";
         String by = "";
         String time = "";
-        for (int i = 1; i < com.length; i++) {
-            if (com[i].equals("/by")) {
-                for (int j = i + 1; j < com.length; j++) {
-                    if (com[j].equals("time:")) {
-                        for (int k = j + 1; k < com.length; k++) {
-                            time += " " + com[k];
+        for (int i = 1; i < command.length; i++) {
+            if (command[i].equals("/by")) {
+                for (int j = i + 1; j < command.length; j++) {
+                    if (command[j].equals("time:")) {
+                        for (int k = j + 1; k < command.length; k++) {
+                            time += " " + command[k];
                         }
                         break;
                     }
-                    by += com[j];
+                    by += command[j];
                 }
                 break;
             }
-            description += " " + com[i];
+            description += " " + command[i];
         }
         DeadlineTask deadLine = new DeadlineTask(description, false, LocalDate.parse(by), time);
         tasks.add(deadLine);
@@ -118,25 +160,31 @@ public class Parser {
         System.out.println("Now there are " + tasks.size() + " tasks on the list");
         System.out.println("----------------------------------------------");
     }
-    public static void createEvent(ArrayList<Task> tasks, String[] com) {
+
+    /**
+     * Creates an EventTask.
+     * @param tasks An ArrayList of Tasks
+     * @param command A String array containing the full command
+     */
+    public static void createEvent(ArrayList<Task> tasks, String[] command) {
         System.out.println("----------------------------------------------");
         String description = "";
         String at = "";
         String time = "";
-        for (int i = 1; i < com.length; i++) {
-            if (com[i].equals("/at")) {
-                for (int j = i + 1; j < com.length; j++) {
-                    if (com[j].equals("time:")) {
-                        for (int k = j + 1; k < com.length; k++) {
-                            time += " " + com[k];
+        for (int i = 1; i < command.length; i++) {
+            if (command[i].equals("/at")) {
+                for (int j = i + 1; j < command.length; j++) {
+                    if (command[j].equals("time:")) {
+                        for (int k = j + 1; k < command.length; k++) {
+                            time += " " + command[k];
                         }
                         break;
                     }
-                    at += com[j];
+                    at += command[j];
                 }
                 break;
             }
-            description += com[i];
+            description += command[i];
         }
         EventTask event = new EventTask(description, false, LocalDate.parse(at), time);
         tasks.add(event);
