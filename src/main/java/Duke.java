@@ -1,11 +1,9 @@
 package main.java;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -13,24 +11,24 @@ import java.util.regex.Pattern;
 
 public class Duke {
     public static void main(String[] args) {
+        List<Task> tasks;
         Scanner scanner = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         boolean shouldRun = true;
         DataStorage storage = new DataStorage();
 
         tasks = startup(storage);
-        greet();
+        Ui.greet();
 
         while (shouldRun) {
             try {
-                String input = scanner.nextLine().toLowerCase();
+                String input = Ui.readCommand();
                 switch (input.split(" ")[0]) {
                 case "list": {
                     StringBuilder builder = new StringBuilder();
                     for (int i = 0; i < tasks.size(); i++) {
                         builder.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
                     }
-                    echo(builder.toString().trim());
+                    Ui.echo(builder.toString().trim());
                     break;
                 }
                 case "done": {
@@ -44,53 +42,39 @@ public class Duke {
                 case "todo": {
                     Task todoTask = createTodoTask(input);
                     tasks.add(todoTask);
-                    echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
+                    Ui.echo(String.format("Added a deadline for you:\n%s\n%s", todoTask.toString(), getNumberOfTasksString(tasks)));
                     break;
                 }
                 case "deadline": {
                     Task deadline = createDeadlineTask(input);
                     tasks.add(deadline);
-                    echo(String.format("Added a deadline for you:\n%s\n%s", deadline.toString(), getNumberOfTasksString(tasks)));
+                    Ui.echo(String.format("Added a deadline for you:\n%s\n%s", deadline.toString(), getNumberOfTasksString(tasks)));
                     break;
                 }
                 case "event": {
                     Task event = createEventTask(input);
                     tasks.add(event);
-                    echo(String.format("Added a deadline for you:\n%s\n%s", event.toString(), getNumberOfTasksString(tasks)));
+                    Ui.echo(String.format("Added a deadline for you:\n%s\n%s", event.toString(), getNumberOfTasksString(tasks)));
                     break;
                 }
                 case "bye": {
-                    echo("Bye. Hope to see you again soon!");
+                    Ui.echo("Bye. Hope to see you again soon!");
                     shouldRun = false;
                     break;
                 }
                 default: {
-                    echo(String.format("I'm sorry, I don't know what %s means.", input));
+                    Ui.echo(String.format("I'm sorry, I don't know what %s means.", input));
                     break;
                 }
                 }
             } catch (DukeException dukeException) {
-                echo(String.format("Francis encountered an error while processing your request. Here are the details:\n%s", dukeException.getMessage()));
+                Ui.echo(String.format("Francis encountered an error while processing your request. Here are the details:\n%s", dukeException.getMessage()));
             } catch (Exception e) {
-                echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
+                Ui.echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
             }
         }
 
         shutdown(storage, tasks);
-    }
-
-    public static void greet() {
-        String logo = "______                    _       _           _\n" +
-                "|  ___|                  (_)     | |         | |\n" +
-                "| |_ _ __ __ _ _ __   ___ _ ___  | |     ___ | |__\n" +
-                "|  _| '__/ _` | '_ \\ / __| / __| | |    / _ \\| '_ \\\n" +
-                "| | | | | (_| | | | | (__| \\__ \\ | |___| (_) | | | |\n" +
-                "\\_| |_|  \\__,_|_| |_|\\___|_|___/ \\_____/\\___/|_| |_|\n" +
-                "\n" +
-                "\n";
-        System.out.println("Hello from\n" + logo + "(a.k.a Loh Jing Yen)");
-        System.out.println("What can I do for you?");
-        System.out.println("Enter a command below for me to assist you");
     }
 
     public static Task createTodoTask(String input) throws DukeException {
@@ -159,7 +143,7 @@ public class Duke {
         try {
             taskIdx = Integer.parseInt(taskIdxStr) - 1;
             tasks.get(taskIdx).setDone();
-            echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
+            Ui.echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             throw new DukeException("Please mark a task that exists in the list as done. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be marked as done.");
         } catch (NumberFormatException numberFormatException) {
@@ -180,7 +164,7 @@ public class Duke {
             taskIdx = Integer.parseInt(taskIdxStr) - 1;
             Task taskToDelete = tasks.get(taskIdx);
             tasks.remove(taskToDelete);
-            echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
+            Ui.echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
             throw new DukeException("Please delete a task that exists in the list. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be deleted.");
         } catch (NumberFormatException numberFormatException) {
@@ -210,7 +194,7 @@ public class Duke {
             storage.createBackingStoreIfNotExists();
             return storage.readTasks();
         } catch (DukeException dukeException) {
-            echo(dukeException.getMessage());
+            Ui.echo(dukeException.getMessage());
             System.exit(0);
         }
         return null;
@@ -220,13 +204,7 @@ public class Duke {
         try {
             storage.saveTasks(tasks);
         } catch (DukeException dukeException) {
-            echo(dukeException.getMessage());
+            Ui.echo(dukeException.getMessage());
         }
-    }
-
-    public static void echo(String input) {
-        System.out.println("------------------------------");
-        System.out.println(input);
-        System.out.println("------------------------------");
     }
 }
