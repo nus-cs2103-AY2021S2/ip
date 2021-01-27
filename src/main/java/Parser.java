@@ -50,6 +50,10 @@ public class Parser {
                     TaskList.processBye();
                     canExitNow = true;
                     break;
+                case "find":
+                    checkSplLength(spl, 2, "find");
+                    TaskList.processFind(spl);
+                    break;
                 default:
                     throw new InvalidKeywordException();
                 }

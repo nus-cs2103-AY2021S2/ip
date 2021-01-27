@@ -81,9 +81,16 @@ public class TaskList {
         Ui.outputMessageDone(current);
     }
 
+<<<<<<< HEAD
     /**
      * Prints the output message for a list of all the tasks to be printed out.
      */
+=======
+    static void processFind(String[] spl) {
+        Ui.outputMessageFind(storage, spl);
+    }
+
+>>>>>>> branch-Level-9
     static void processList() {
         Ui.outputMessageList(storage, count);
     }
