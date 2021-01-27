@@ -40,7 +40,7 @@ public class Duke {
     }
 
     /**
-     * Method that runs the Duke application.
+     * Runs the Duke application.
      *
      * @throws IOException if filePath or system input is invalid.
      */
