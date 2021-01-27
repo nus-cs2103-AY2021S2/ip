@@ -1,24 +1,50 @@
-public class Event extends Task{
-    protected final String time;
-    Event(String name, Boolean isDone,String time){
-        super(name,isDone);
-        this.time = time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+
+public class Event extends Task{
+    private LocalDate startDate;
+    private LocalTime startTime;
+    private LocalDate endDate;
+    private LocalTime endTime;
+    Event(String name, Boolean isDone,LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime){
+        super(name,isDone);
+        this.startTime = startTime;
+        this.startDate = startDate;
+        this.endTime = endTime;
+        this.endDate = endDate;
     }
-    String getTime(){
-        return this.time;
+
+    public LocalDate getStartDate() {
+        return startDate;
     }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
     @Override
     Event finish(){
-        return new Event(this.getName(), true,this.getTime()) ;
+        return new Event(this.getName(), true,this.getStartDate(),this.getStartTime(),
+                this.getEndDate(),this.getEndTime()) ;
     }
     @Override
     public String toString(){
         if(this.getIsDone()){
-            return "[E][X] " + this.name + "(" + this.time + ")";
+            return "[E][X] " + this.name + " | " + this.getStartDate()+ " " + this.getStartTime() +
+                    " ~ " + this.getEndDate()+ " " + this.getEndTime();
         }
         else{
-            return "[E][_] " + this.name + "(" + this.time + ")";
+            return "[E][_] " + this.name + " | " + this.getStartDate()+ " " + this.getStartTime() +
+                    " ~ " + this.getEndDate()+ " " + this.getEndTime();
         }
     }
 }
