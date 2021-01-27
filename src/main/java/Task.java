@@ -1,5 +1,4 @@
 public class Task {
-//    public boolean isDeadline;
     protected String description;
     protected boolean isDone;
     protected String taskType;

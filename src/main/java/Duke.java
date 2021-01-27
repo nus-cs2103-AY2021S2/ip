@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -81,12 +84,11 @@ public class Duke {
         }
     }
 
-    public static void addNewTask(String userInput) throws EmptyDescriptionException, InvalidDateException  {
+    public static void addNewTask(String userInput) throws EmptyDescriptionException, InvalidDateException {
         Task newTask;
         StringTokenizer token = new StringTokenizer(userInput);
         int numWord = token.countTokens();
         String taskName;
-        String taskDate;
 
         if (numWord == 1) {
             throw new EmptyDescriptionException(horzLine
@@ -96,38 +98,38 @@ public class Duke {
                     + horzLine);
         }
 
-        if (userInput.startsWith("todo")) {
-            taskName = userInput.substring(5);
-            newTask = new ToDo(taskName);
-        } else {
-            int index = userInput.indexOf('/');
-
-            if (index == -1) {
-                throw new InvalidDateException(horzLine
-                        + "\n     ☹ OOPS!!! You have entered an invalid date/time.\n"
-                        + horzLine);
+        try {
+            if (userInput.startsWith("todo")) {
+                taskName = userInput.substring(5);
+                newTask = new ToDo(taskName);
             } else {
+                int index = userInput.indexOf('/');
+
+                String dateString = userInput.substring(index + 4 /*, index + 13*/);
+                LocalDateTime dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+//                String timeString = userInput.substring(index + 14);
+//                LocalTime time = LocalTime.parse(timeString);
+
                 if (userInput.startsWith("deadline")) {
-                    taskName = userInput.substring(9, index);
-                    taskDate = userInput.substring(index + 4);
-
-                    newTask = new Deadline(taskName, taskDate);
+                    newTask = new Deadline(userInput.substring(9, index), dateTime);
                 } else {
-                    taskName = userInput.substring(6, index);
-                    taskDate =  userInput.substring(index + 4);
-
-                    newTask = new Event(taskName, taskDate);
+                    newTask = new Event(userInput.substring(6, index), dateTime);
                 }
             }
-        }
+            list.add(newTask);
+            overWriteFile(filePath, list);
+            System.out.println(horzLine
+                    + "\n      Got it. I've added this task:\n"
+                    + "            " + newTask + "\n"
+                    + "      Now you have " + list.size() + " tasks in the list.\n"
+                    + horzLine);
 
-        list.add(newTask);
-        overWriteFile(filePath, list);
-        System.out.println(horzLine
-                + "\n      Got it. I've added this task:\n"
-                + "            " + newTask + "\n"
-                + "      Now you have " + list.size() + " tasks in the list.\n"
-                + horzLine);
+        } catch (DateTimeException ex) {
+            System.out.println(horzLine
+                    + "\n     ☹ OOPS!!! You have entered an invalid date/time.\n"
+                    + horzLine);
+        }
     }
 
     public static void deleteTask(String userInput) throws InvalidTaskNumberException {
@@ -163,7 +165,7 @@ public class Duke {
         Scanner s = new Scanner(f);
         Task task;
         String taskDescription;
-        String taskDate;
+        LocalDateTime taskDate;
 
         while (s.hasNextLine()) {
             String taskString = s.nextLine();
@@ -176,7 +178,8 @@ public class Duke {
 
             } else {
                 taskDescription = taskString.substring(8, indexOfDivider - 1);
-                taskDate = taskString.substring(indexOfDivider + 2);
+                taskDate = LocalDateTime.parse(taskString.substring(indexOfDivider + 2));
+                //taskDate = taskString.substring(indexOfDivider + 2);
 
                 if (taskString.startsWith("D")) {
                     task = new Deadline(taskDescription, taskDate);
