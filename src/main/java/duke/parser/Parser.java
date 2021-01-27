@@ -38,14 +38,14 @@ public class Parser {
      * @return user command
      * @throws InvalidCommandException     if the user pass in an unrecognized command
      * @throws InvalidDescriptionException if the format of the arguments do not match the command
-     * @throws NoDescriptionException      if the arguments is empty when further information is required for the command
+     * @throws NoDescriptionException      if the arguments is empty when further information is required
      */
     public Command parseCommand(String userInput) throws InvalidCommandException,
             InvalidDescriptionException, NoDescriptionException {
         Matcher matcher = USER_COMMAND_FORMAT.matcher(userInput.strip());
 
         if (!matcher.matches()) {
-            throw new InvalidCommandException("Please enter a valid command!!!");
+            throw new InvalidCommandException("Please enter a command.");
         }
 
         // Get the command word as captured by the named-capturing group
@@ -96,14 +96,19 @@ public class Parser {
      *
      * @param arguments user input arguments string
      * @return {@code DeadlineCommand}
-     * @throws InvalidDescriptionException if the format of the date and time is invalid
      * @throws NoDescriptionException      if the description of the task is empty
+     * @throws InvalidDescriptionException if the format of the deadline is invalid
      * @see Parser#parseDateTime(String)
      */
-    private Command parseArgumentsForDeadline(String arguments) throws InvalidDescriptionException,
-            NoDescriptionException {
+    private Command parseArgumentsForDeadline(String arguments) throws NoDescriptionException,
+            InvalidDescriptionException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
+        }
+        if (!arguments.contains("/by")) {
+            throw new InvalidDescriptionException("Invalid description syntax. "
+                    + "Please follow the usage as shown below:\n"
+                    + "Usage: deadline <task_description> /by dd/mm/yyyy HHHH");
         }
         String[] deadlineInputArr = arguments.split("/by");
         String deadlineTaskName = deadlineInputArr[0].strip();
@@ -134,10 +139,17 @@ public class Parser {
      * @param arguments user input arguments string
      * @return {@code EventCommand}
      * @throws NoDescriptionException if the description of the task is empty
+     * @throws InvalidDescriptionException if the format of the event time is invalid
      */
-    private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException {
+    private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException, 
+            InvalidDescriptionException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
+        }
+        if (!arguments.contains("/at")) {
+            throw new InvalidDescriptionException("Invalid description syntax. "
+                    + "Please follow the usage as shown below:\n"
+                    + "Usage: event <task_description> /at <event_time>");
         }
         String[] eventInputArr = arguments.split("/at");
         String eventTaskName = eventInputArr[0].strip();

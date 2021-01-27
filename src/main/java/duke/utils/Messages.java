@@ -1,5 +1,8 @@
 package duke.utils;
 
+/**
+ * Container for messages to be shown to user.
+ */
 public class Messages {
     public static final String MESSAGE_EXIT = "Exiting...";
     

@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Formatter {
     /**
-     * User input datetime format e.g. 23/1/2021 1933
+     * User input datetime format, e.g. 23/1/2021 1933
      */
     public static final DateTimeFormatter INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/y HHmm");
 
