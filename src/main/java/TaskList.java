@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> lst = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     TaskList() {
+        this.tasks = new ArrayList<>();
     }
 
     public void add(Parser p) throws EmptyDescription {
@@ -21,34 +22,39 @@ public class TaskList {
             } else {
                 newTask = new Event(description, time);
             }
-            lst.add(newTask);
+            tasks.add(newTask);
             String instructions = Response.ADD.toString() + newTask + "\n" + this.status();
             Duke.output(instructions);
         }
     }
 
     public void delete(Parser p) {
-        int i = Integer.parseInt(p.getDescription());
-        String instructions = Response.DELETE.toString() + lst.get(i - 1) + "\n" + this.status();
-        lst.remove(i - 1);
+        int i = Integer.parseInt(p.getDescription()) - 1;
+        Task task = tasks.get(i);
+        tasks.remove(i);
+
+        String instructions = Response.DELETE.toString() + task + "\n" + this.status();
         Duke.output(instructions);
     }
 
-    public void markAsDone(Parser p) {
-        int i = Integer.parseInt(p.getDescription());
-        lst.set(i - 1, lst.get(i - 1).setDone());
-        Duke.output(Response.DONE.toString() + lst.get(i - 1) + "\n");
+    public void markAsDone(Parser p) throws EmptyDescription {
+        if (p.getDescription().equals("")) {
+            throw new EmptyDescription(p.getTypeOfTask());
+        }
+        int i = Integer.parseInt(p.getDescription()) - 1;
+        tasks.set(i, tasks.get(i).setDone());
+        Duke.output(Response.DONE.toString() + tasks.get(i) + "\n");
     }
 
     public void list() {
         String msg = "";
-        for(int i = 0; i < lst.size(); i++) {
-            msg += (i + 1) + "." + lst.get(i) + "\n";
+        for(int i = 0; i < tasks.size(); i++) {
+            msg += (i + 1) + "." + tasks.get(i) + "\n";
         }
         Duke.output(Response.LIST.toString() + msg);
     }
 
     public  String status() {
-        return "Now you have " + lst.size() + " tasks in the list.\n";
+        return "Now you have " + tasks.size() + " tasks in the list.\n";
     }
 }

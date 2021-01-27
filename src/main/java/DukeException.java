@@ -1,5 +1,8 @@
 /**
- * DukeException exceptions arising from the Duke program
+ * Represent exceptions arising from the Duke program.
+ *
+ * @author Oh Jun Ming
+ * @version 1.0
  */
 public class DukeException extends Exception{
 }

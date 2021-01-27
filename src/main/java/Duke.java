@@ -1,76 +1,110 @@
 /**
  * Duke program maintains a taskList for user to track tasks.
  * Reads user input tasks(todo, event, deadline).
- * Able to perfomr add, delete, markasDone tasks.
+ * Able to perform add, delete, markasDone tasks.
  *
  * @author Oh Jun Ming
  * @version 1.0
- * @Since 2020-01-17
  */
 import java.util.Scanner;
 
 public class Duke {
-    private static Boolean doExit = false;
+    private static Boolean shouldExit = false;
 
+    /**
+     * Initialise scanner.
+     *
+     * @param args
+     */
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
         Duke.initiate(s);
     }
 
+    /**
+     * Start Duke chat services.
+     *
+     * @param s Scanner variable for user input.
+     */
     public static void initiate(Scanner s) {
         Duke.Greet();
         TaskList tasklist = new TaskList();
         while(s.hasNextLine()){
             try {
                 Duke.process(s, tasklist);
-                if (doExit.equals(true)) {
+                if (shouldExit.equals(true)) {
                     break;
                 }
             } catch (EmptyDescription e) {
                 Duke.output(e.toString());
-            } catch (InvalidTypeofTask e) {
+            } catch (InvalidTypeOfTask e) {
                 Duke.output(e.toString());
             }
         }
         Duke.exit();
     }
 
-    public static void process(Scanner s, TaskList tasklist) throws InvalidTypeofTask, EmptyDescription {
+    /**
+     * Calls the respective typeOfTask.
+     *
+     * @param s Scanner variable for user input.
+     * @param tasklist List of tasks.
+     * @throws InvalidTypeOfTask
+     * @throws EmptyDescription
+     */
+    public static void process(Scanner s, TaskList tasklist) throws InvalidTypeOfTask, EmptyDescription {
         String input = s.nextLine();
         Parser p = new Parser();
         p = p.parse(input);
-//        System.out.println(p);
         String typeofTask = p.getTypeOfTask();
 
-        if (typeofTask.equals("bye")) {
-            doExit = true;
-        } else if (typeofTask.equals("list")) {
+        switch (typeofTask) {
+        case "bye":
+            shouldExit = true;
+            break;
+        case "list":
             tasklist.list();
-        } else if (typeofTask.equals("done")) {
+            break;
+        case "done":
             tasklist.markAsDone(p);
-        } else if (typeofTask.equals("delete")) {
-
+            break;
+        case "delete":
             tasklist.delete(p);
-        } else if (typeofTask.equals("todo") || typeofTask.equals("deadline") ||
-                        typeofTask.equals("event")){
+            break;
+        case "todo":
+        case "deadline":
+        case "event":
             tasklist.add(p);
-        }  else {
-            throw new InvalidTypeofTask();
+            break;
+        default:
+            throw new InvalidTypeOfTask();
         }
     }
 
+    /**
+     * Greets user.
+     */
     public static void Greet() {
         Duke.output(Response.GREET.toString());
     }
 
+    /**
+     * Echo user input.
+     */
     public static void echo(String msg) {
         Duke.output(msg+ "\n");
     }
 
+    /**
+     * Saying bye to user.
+     */
     public static void exit() {
         Duke.output(Response.EXIT.toString());
     }
 
+    /**
+     * Prints output to user in generic format.
+     */
     public static void output(String response) {
         System.out.println("---------------------------------------");
         System.out.println(response);

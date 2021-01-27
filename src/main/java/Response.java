@@ -1,3 +1,9 @@
+/**
+ * Stores all generic string responses back to user.
+ *
+ * @author Oh Jun Ming
+ * @version 1.0
+ */
 public enum Response {
     GREET("Hello! I'm Duke\nWhat can I do for you?\n"),
     EXIT("Bye. Hope to see you again soon!\n"),
@@ -8,10 +14,20 @@ public enum Response {
 
     private final String s;
 
+    /** Returns a Response message.
+     *
+     * @param s generic message.
+     * @return Response
+     */
     Response(String s) {
         this.s = s;
     }
 
+    /**
+     * Returns a String that contain generic response.
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         return s;
