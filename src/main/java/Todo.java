@@ -7,7 +7,7 @@ public class Todo extends Task {
      * Constructor method.
      * @param description String that describes the task.
      */
-    public Todo(String description){
+    public Todo(String description) {
         super(description);
     }
 
@@ -16,7 +16,7 @@ public class Todo extends Task {
      * @param description description of the task
      * @param isDone status of task
      */
-    public Todo(String description, boolean isDone){
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
@@ -25,7 +25,7 @@ public class Todo extends Task {
      * @return String output for the todo.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[T]" + super.toString();
     }
 }

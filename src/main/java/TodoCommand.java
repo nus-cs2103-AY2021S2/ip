@@ -9,7 +9,7 @@ public class TodoCommand extends Command{
      * Constructor method.
      * @param command
      */
-    public TodoCommand(String command){
+    public TodoCommand(String command) {
         this.command = command;
     }
 
@@ -22,13 +22,13 @@ public class TodoCommand extends Command{
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         String description = "";
         String[] commandArr = command.split(" ");
         if (command.equals("todo")) {
             throw new DukeMissingInputException("OOPS!!! The description of a todo cannot be empty.");
         } else {
-
             for (int i = 1; i < commandArr.length; i++) {
                 description += (commandArr[i] + " ");
             }

@@ -8,7 +8,7 @@ public class Ui {
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()){
+        while (sc.hasNext()) {
             return sc.nextLine();
         }
         return "";
@@ -57,7 +57,7 @@ public class Ui {
      * Show the task being marked as done.
      * @param task
      */
-    public void showTaskDone(Task task){
+    public void showTaskDone(Task task) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task.toString());
     }
@@ -65,7 +65,7 @@ public class Ui {
     /**
      * Show the list of tasks.
      */
-    public void showListItems(){
+    public void showListItems() {
         System.out.println("Here are the tasks on your list:");
     }
 
@@ -81,7 +81,7 @@ public class Ui {
     /**
      * Show good bye to user.
      */
-    public void showBye(){
+    public void showBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 

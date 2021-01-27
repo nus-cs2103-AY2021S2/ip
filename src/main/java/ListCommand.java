@@ -22,11 +22,13 @@ public class ListCommand extends Command{
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         ui.showListItems();
         for (int i = 1; i <= taskList.getTaskListLength(); i++) {
             String output = String.format("%s. %s", i, taskList.getTaskAtIndex(i - 1).toString());
             System.out.println(output);
+            ui.showNumberOfItems(taskList.getTaskListLength());
         }
     }
 
@@ -35,7 +37,7 @@ public class ListCommand extends Command{
      * @return boolean value for whether command is an exit command.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 }

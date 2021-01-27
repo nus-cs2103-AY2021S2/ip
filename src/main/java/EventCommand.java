@@ -9,7 +9,7 @@ public class EventCommand extends Command {
      * Constructor method.
      * @param command user command for creating event.
      */
-    public EventCommand(String command){
+    public EventCommand(String command) {
         this.command = command;
     }
 
@@ -22,7 +22,8 @@ public class EventCommand extends Command {
      * @throws DukeWrongInputException If user input is not any of the inputs available.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException,
+            DukeWrongInputException {
         String description = "";
         String time = "";
         boolean foundAt = false;

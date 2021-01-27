@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Overloaded constructor method.
      */
-    public TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
@@ -44,7 +44,7 @@ public class TaskList {
      * Gets the task list in arraylist form.
      * @return task list in arraylist form.
      */
-    public List<Task> getTaskList(){
+    public List<Task> getTaskList() {
         return this.tasks;
     }
 
@@ -52,7 +52,7 @@ public class TaskList {
      * Gets the total number of tasks in the list
      * @return total tasks in the list
      */
-    public int getTaskListLength(){
+    public int getTaskListLength() {
         return this.tasks.size();
     }
 

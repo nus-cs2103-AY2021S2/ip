@@ -33,20 +33,19 @@ public class Storage {
     public List<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(this.hardDrive);
         List<Task> tasks = new ArrayList<>();
-        while (sc.hasNextLine()){
+        while (sc.hasNextLine()) {
             String[] entry = sc.nextLine().split(" / ");
             switch (entry[0]){
-                case "T":
-                    tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
-                    break;
-                case "E":
-
-                    tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
-                    break;
-                case "D":
-                    LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
-                    tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
-                    break;
+            case "T":
+                tasks.add(new Todo(entry[2], Boolean.parseBoolean(entry[1])));
+                break;
+            case "E":
+                tasks.add(new Event(entry[2], entry[3], Boolean.parseBoolean(entry[1])));
+                break;
+            case "D":
+                LocalDate deadline = LocalDate.parse(entry[3], DateTimeFormatter.ofPattern("yyyy-mm-DD"));
+                tasks.add(new Deadline(entry[2], deadline, Boolean.parseBoolean(entry[1])));
+                break;
             }
         }
         sc.close();
@@ -64,9 +63,11 @@ public class Storage {
             if (t instanceof Todo) {
                 fw.write(String.format("T / %s / %s%n", t.getIsDone(), t.getDescription()));
             } else if (t instanceof Event) {
-                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Event) t).getTimeslot()));
+                fw.write(String.format("E / %s / %s / %s%n", t.getIsDone(), t.getDescription(),
+                        ((Event) t).getTimeslot()));
             } else if (t instanceof Deadline) {
-                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(), ((Deadline) t).getDeadline().toString()));
+                fw.write(String.format("D / %s / %s / %s%n", t.getIsDone(), t.getDescription(),
+                        ((Deadline) t).getDeadline().toString()));
             }
         }
         fw.close();
@@ -80,7 +81,9 @@ public class Storage {
     public int getFileLinesCount() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(this.hardDrive));
         int lines = 0;
-        while (reader.readLine() != null) {lines++;};
+        while (reader.readLine() != null) {
+            lines++;
+        }
         reader.close();
         return lines;
     }

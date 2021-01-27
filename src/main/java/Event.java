@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param description String to describe the task.
      * @param timeslot String to describe the timeslot.
      */
-    public Event(String description, String timeslot){
+    public Event(String description, String timeslot) {
         super(description);
         this.timeslot = timeslot;
     }
@@ -30,7 +30,7 @@ public class Event extends Task {
      * Getter method for Event time.
      * @return
      */
-    public String getTimeslot(){
+    public String getTimeslot() {
         return this.timeslot;
     }
 
@@ -39,7 +39,7 @@ public class Event extends Task {
      * @param timeslot
      * @return
      */
-    public String changeTimeslot(String timeslot){
+    public String changeTimeslot(String timeslot) {
         this.timeslot = timeslot;
         return this.timeslot;
     }
@@ -49,7 +49,7 @@ public class Event extends Task {
      * @return String output for the event.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + super.toString() + "(at: " + timeslot + ")";
     }
 }

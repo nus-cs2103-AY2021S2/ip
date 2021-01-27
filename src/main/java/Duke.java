@@ -1,4 +1,4 @@
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Duke is a AI assistant program that allows users to take note of their tasks.

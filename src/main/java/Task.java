@@ -2,6 +2,7 @@
  * Abstract parent class for all tasks including todos, events, deadlines.
  */
 public abstract class Task {
+
     protected String description;
     protected boolean isDone;
 
@@ -36,7 +37,7 @@ public abstract class Task {
     /**
      * To mark the task as done.
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -44,7 +45,7 @@ public abstract class Task {
      * Getter for checking if Task is done.
      * @return boolean for whether the task is done.
      */
-    public boolean getIsDone(){
+    public boolean getIsDone() {
         return this.isDone;
     }
 
@@ -52,7 +53,7 @@ public abstract class Task {
      * Getter for the task description.
      * @return string for task description.
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
