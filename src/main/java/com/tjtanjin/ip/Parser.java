@@ -24,7 +24,7 @@ public class Parser {
 
     //list storing commands/descriptions, ideally store in json file
     private final HashMap<String, String> cmdInfo = new HashMap<>();
-    private final TaskList taskList;
+    private final TaskHandler taskHandler;
     private final AddCommand addCommand = new AddCommand();
     private final ByeCommand byeCommand = new ByeCommand();
     private final ListCommand listCommand = new ListCommand();
@@ -36,7 +36,7 @@ public class Parser {
     /**
      * Constructor for Parser class that initialises all valid commands.
      */
-    public Parser(TaskList taskList) {
+    public Parser(TaskHandler taskHandler) {
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
         cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
         cmdInfo.put(Cmd.DONE.toString(),
@@ -50,7 +50,7 @@ public class Parser {
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
         cmdInfo.put(Cmd.FIND.toString(), "find <name> | Description: finds task by name");
 
-        this.taskList = taskList;
+        this.taskHandler = taskHandler;
     }
 
     /**
@@ -65,20 +65,20 @@ public class Parser {
 
         //program shows entered tasks on list
         } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
-            listCommand.execute(taskList);
+            listCommand.execute(taskHandler);
 
         //program marks task as complete on done
         } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
             int index = parseIndex("done", input);
             if (index != -1) {
-                doneCommand.execute(taskList, index);
+                doneCommand.execute(taskHandler, index);
             }
 
         //program removes task on delete
         } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
             int index = parseIndex("delete", input);
             if (index != -1) {
-                deleteCommand.execute(taskList, index);
+                deleteCommand.execute(taskHandler, index);
             }
 
         //program list help commands
@@ -99,13 +99,13 @@ public class Parser {
             if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDates[0] == null) {
                 return;
             }
-            addCommand.execute(taskList, taskType, taskName, taskDates);
+            addCommand.execute(taskHandler, taskType, taskName, taskDates);
 
         //program finds task by name on find
         } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
             String taskName = parseTaskName(input);
             if (taskName != null) {
-                findCommand.execute(taskList, taskName);
+                findCommand.execute(taskHandler, taskName);
             }
 
         //program informs user of invalid input
@@ -124,7 +124,7 @@ public class Parser {
 
         try {
             int index = Integer.parseInt(parsedString[1]) - 1;
-            if (index < taskList.getTasks().size() && index >= 0) {
+            if (index < taskHandler.getTasks().size() && index >= 0) {
                 return index;
             } else {
                 throw new DukeException();

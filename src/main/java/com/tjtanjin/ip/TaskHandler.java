@@ -6,19 +6,19 @@ import java.util.ArrayList;
 /**
  * TaskList manages all tasks and their operations.
  */
-public class TaskList {
+public class TaskHandler {
 
     //use arraylist to store tasks
-    private final Storage storage;
+    private final StorageHandler storageHandler;
     private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.
-     * @param storage storage to store and load tasks from
+     * @param storageHandler storage to store and load tasks from
      */
-    public TaskList(Storage storage) {
-        this.storage = storage;
-        this.tasks = storage.loadTasks();
+    public TaskHandler(StorageHandler storageHandler) {
+        this.storageHandler = storageHandler;
+        this.tasks = storageHandler.loadTasks();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskList {
             task = new ToDo(taskName, "incomplete");
         }
         tasks.add(task);
-        storage.saveTask(tasks.size(), "NEW",
+        storageHandler.saveTask(tasks.size(), "NEW",
                 taskName, "incomplete", taskType.toUpperCase(), taskDates);
         int numTasks = tasks.size();
         Ui.showInfo("Task successfully added! You now have " + numTasks + " task(s)!");
@@ -61,7 +61,7 @@ public class TaskList {
                 String taskName = task.getTaskName();
                 String taskType = task.getType().toUpperCase();
                 LocalDate[] taskDates = task.getDates();
-                storage.saveTask(index, "DONE", taskName, "complete", taskType, taskDates);
+                storageHandler.saveTask(index, "DONE", taskName, "complete", taskType, taskDates);
                 Ui.showInfo("Yay your task is done! :D");
             }
         } catch (IndexOutOfBoundsException e) {
@@ -80,7 +80,7 @@ public class TaskList {
             String taskName = task.getTaskName();
             String taskType = task.getType().toUpperCase();
             LocalDate[] taskDates = task.getDates();
-            storage.saveTask(index, "DELETE", taskName, "complete", taskType, taskDates);
+            storageHandler.saveTask(index, "DELETE", taskName, "complete", taskType, taskDates);
             Ui.showInfo("The following task has been deleted:\n" + task);
         } catch (IndexOutOfBoundsException e) {
             Ui.showError("The specified task index does not exist!");

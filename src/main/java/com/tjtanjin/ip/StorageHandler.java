@@ -16,13 +16,13 @@ import org.json.simple.parser.ParseException;
 /**
  * The Storage class handles the saving/loading of tasks from hard disk.
  */
-public class Storage {
+public class StorageHandler {
 
-    private static JSONArray taskList = new JSONArray();
-    private static final ArrayList<Task> tasks = new ArrayList<>();
-    private static String path;
+    private JSONArray taskList = new JSONArray();
+    private final ArrayList<Task> tasks = new ArrayList<>();
+    private final String path;
 
-    public Storage(String path) {
+    public StorageHandler(String path) {
         this.path = path;
     }
 
@@ -33,7 +33,7 @@ public class Storage {
     @SuppressWarnings("unchecked")
     public ArrayList<Task> loadTasks() {
 
-        File tasksFile = new File("./data/tasks.json");
+        File tasksFile = new File(this.path);
         if (!tasksFile.getParentFile().isDirectory()) {
             try {
                 if (!tasksFile.getParentFile().mkdirs()) {
@@ -56,7 +56,7 @@ public class Storage {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("./data/tasks.json")) {
+        try (FileReader reader = new FileReader(this.path)) {
             //read JSON file
             Object obj = jsonParser.parse(reader);
 
@@ -145,7 +145,7 @@ public class Storage {
         }
 
         //write JSON file
-        try (FileWriter file = new FileWriter("./data/tasks.json")) {
+        try (FileWriter file = new FileWriter(this.path)) {
 
             file.write(taskList.toJSONString());
             file.flush();

@@ -8,7 +8,7 @@ public class FindCommand {
     /**
      * Forwards the find task operation to TaskList.
      */
-    public void execute(TaskList taskList, String taskName) {
+    public void execute(TaskHandler taskList, String taskName) {
         taskList.findTask(taskName);
     }
 }
