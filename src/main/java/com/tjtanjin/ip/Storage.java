@@ -20,13 +20,18 @@ public class Storage {
 
     private static JSONArray taskList = new JSONArray();
     private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static String path;
+
+    public Storage(String path) {
+        this.path = path;
+    }
 
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     /**
      * Loads saved tasks from hard disk.
      */
     @SuppressWarnings("unchecked")
-    public static ArrayList<Task> loadTasks() {
+    public ArrayList<Task> loadTasks() {
 
         File tasksFile = new File("./data/tasks.json");
         if (!tasksFile.getParentFile().isDirectory()) {
@@ -69,7 +74,7 @@ public class Storage {
      * Retrieve individual task information and repopulate them into taskList.
      * @param task task to retrieve information for
      */
-    private static void parseTaskGroup(JSONObject task) {
+    private void parseTaskGroup(JSONObject task) {
         JSONObject taskDetails = (JSONObject) task.get("task");
 
         String taskName = (String) taskDetails.get("taskName");
@@ -106,7 +111,7 @@ public class Storage {
      * @param taskDates array of dates (defaults to first element for deadline end date)
      */
     @SuppressWarnings("unchecked")
-    public static void saveTask(int index, String saveType, String taskName,
+    public void saveTask(int index, String saveType, String taskName,
             String status, String type, LocalDate[] taskDates) {
 
         JSONObject taskDetails = new JSONObject();

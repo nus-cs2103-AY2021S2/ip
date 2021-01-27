@@ -7,7 +7,7 @@ public class ListCommand {
     /**
      * List all tasks entered by user.
      */
-    public static void execute() {
-        TaskList.showAllTasks();
+    public static void execute(TaskList taskList) {
+        taskList.showAllTasks();
     }
 }

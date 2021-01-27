@@ -13,7 +13,9 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        Parser parser = new Parser();
+        Storage storage = new Storage("./data/tasks.json");
+        TaskList taskList = new TaskList(storage);
+        Parser parser = new Parser(taskList);
         Ui.showWelcome();
         listenInput(parser);
     }

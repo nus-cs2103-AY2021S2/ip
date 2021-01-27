@@ -13,9 +13,7 @@ public class AddCommand {
      * @param taskName name of task
      * @param taskDates array of dates
      */
-    public static void execute(String taskType, String taskName, LocalDate[] taskDates) {
-        TaskList.addTask(taskType, taskName, taskDates);
-        Storage.saveTask(TaskList.getTasks().size(), "NEW",
-                taskName, "incomplete", taskType.toUpperCase(), taskDates);
+    public static void execute(TaskList taskList, String taskType, String taskName, LocalDate[] taskDates) {
+        taskList.addTask(taskType, taskName, taskDates);
     }
 }

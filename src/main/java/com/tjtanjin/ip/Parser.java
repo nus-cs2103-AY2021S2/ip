@@ -24,11 +24,12 @@ public class Parser {
 
     //list storing commands/descriptions, ideally store in json file
     private static final HashMap<String, String> cmdInfo = new HashMap<>();
+    private final TaskList taskList;
 
     /**
      * Constructor for Parser class that initialises all valid commands.
      */
-    public Parser() {
+    public Parser(TaskList taskList) {
         cmdInfo.put(Cmd.BYE.toString(), "bye | Description: exits the program");
         cmdInfo.put(Cmd.LIST.toString(), "list | Description: list all entered tasks");
         cmdInfo.put(Cmd.DONE.toString(),
@@ -41,6 +42,8 @@ public class Parser {
         cmdInfo.put(Cmd.DELETE.toString(), "delete <task index> | Description: delete by index a given task");
         cmdInfo.put(Cmd.HELP.toString(), "help | Description: list this help menu");
         cmdInfo.put(Cmd.FIND.toString(), "find <name> | Description: finds task by name");
+
+        this.taskList = taskList;
     }
 
     /**
@@ -55,20 +58,20 @@ public class Parser {
 
         //program shows entered tasks on list
         } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
-            ListCommand.execute();
+            ListCommand.execute(taskList);
 
         //program marks task as complete on done
         } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
             int index = parseIndex("done", input);
             if (index != -1) {
-                DoneCommand.execute(index);
+                DoneCommand.execute(taskList, index);
             }
 
         //program removes task on delete
         } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
             int index = parseIndex("delete", input);
             if (index != -1) {
-                DeleteCommand.execute(index);
+                DeleteCommand.execute(taskList, index);
             }
 
         //program list help commands
@@ -89,13 +92,13 @@ public class Parser {
             if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDates[0] == null) {
                 return;
             }
-            AddCommand.execute(taskType, taskName, taskDates);
+            AddCommand.execute(taskList, taskType, taskName, taskDates);
 
         //program finds task by name on find
         } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
             String taskName = parseTaskName(input);
             if (taskName != null) {
-                FindCommand.execute(taskName);
+                FindCommand.execute(taskList, taskName);
             }
 
         //program informs user of invalid input
@@ -109,12 +112,12 @@ public class Parser {
      * @param cmd cmd from user (done or delete)
      * @param input input provided by user
      */
-    public static int parseIndex(String cmd, String input) {
+    public int parseIndex(String cmd, String input) {
         String[] parsedString = input.split("\\s+");
 
         try {
             int index = Integer.parseInt(parsedString[1]) - 1;
-            if (index < TaskList.getTasks().size() && index >= 0) {
+            if (index < taskList.getTasks().size() && index >= 0) {
                 return index;
             } else {
                 throw new DukeException();
@@ -140,7 +143,7 @@ public class Parser {
      * Parses task type from user input
      * @param input input provided by user
      */
-    public static String parseTaskType(String input) {
+    public String parseTaskType(String input) {
         //split input on first space to retrieve task type
         String[] parsedString = input.split("\\s+", 2);
         return parsedString[0];
@@ -150,7 +153,7 @@ public class Parser {
      * Parses task name from user input
      * @param input input provided by user
      */
-    public static String parseTaskName(String input) {
+    public String parseTaskName(String input) {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails;
@@ -186,7 +189,7 @@ public class Parser {
      * Parses task due date from user input
      * @param input input provided by user
      */
-    public static LocalDate[] parseTaskDates(String input) {
+    public LocalDate[] parseTaskDates(String input) {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
