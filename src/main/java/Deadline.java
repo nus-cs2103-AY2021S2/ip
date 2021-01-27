@@ -3,24 +3,26 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    protected String by;
+    protected LocalDate localBy;
 
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.type = 'D';
-    }
-
-    public String getDeadlineTime() {
-        this.by = LocalDate.parse(by);
+        this.localBy = LocalDate.parse(by);
+        type = 'D';
     }
 
     public String getBy() {
-        return by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.by;
+    }
+
+    public String getFormattedBy() {
+        return localBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
+        return "[D]" + super.toString() + " (by: " + this.getFormattedBy() + ")";
     }
 }

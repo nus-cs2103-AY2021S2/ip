@@ -3,25 +3,25 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected LocalDate at;
+    protected String at;
+    protected LocalDate localAt;
 
     public Event(String description, String at) {
         super(description);
         this.at = at;
+        this.localAt = LocalDate.parse(at);
         this.type = 'E';
     }
 
-    public String getEventTime() {
-        return this.at;
-        this.at = LocalDate.parse(at);
-    }
-
     public String getAt() {
-        return at.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return this.at;
+    }
+    public String getFormattedAt() {
+        return localAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
+        return "[E]" + super.toString() + " (at: " + this.getFormattedAt() + ")";
     }
 }

@@ -135,11 +135,11 @@ public class Duke {
             }
             else if (type == 'D') {
                 Deadline deadline = (Deadline) task;
-                fileContent += type + " ; " + num + " ; " + description +  " ; " + deadline.getDeadlineTime() + "\n";
+                fileContent += type + " ; " + num + " ; " + description +  " ; " + deadline.getBy() + "\n";
             }
             else { //type 'E'
                 Event event = (Event) task;
-                fileContent += type + " ; " + num + " ; " + description +  " ; " + event.getEventTime() + "\n";
+                fileContent += type + " ; " + num + " ; " + description +  " ; " + event.getAt() + "\n";
             }
         }
         return fileContent;
