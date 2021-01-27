@@ -1,3 +1,0 @@
-[T][✓] hello
-[E][✓] help (at: now)
-[D][✓] die (by: tonight)
