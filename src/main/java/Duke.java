@@ -35,7 +35,7 @@ public class Duke {
         return line.length() >= match.length() && line.startsWith(match);
     }
 
-    private static void printTaskListStatus(ArrayList<Task> tasks, Task curTask) {
+    private static void printTaskListStatus(TaskList tasks, Task curTask) {
         printIndentOutput("Got it. I've added this task:");
         printIndentOutput("   " + curTask);
         printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
@@ -51,12 +51,12 @@ public class Duke {
 
     public static void main(String[] args) {
         Storage storage = new Storage();
-        ArrayList<Task> tasks;
+        TaskList tasks;
         try {
             tasks = storage.readTasks();
         } catch(IOException e) {
             System.err.println("Unable to create file");
-            tasks = new ArrayList<>();
+            tasks = new TaskList();
         }
 
         String logo = " ____        _        \n"
@@ -87,14 +87,14 @@ public class Duke {
                     } else {
                         printIndentOutput("Here are the tasks in you list:");
                         for (int i = 0; i < tasks.size(); i++) {
-                            printIndentOutput((i + 1) + ". " + tasks.get(i));
+                            printIndentOutput((i + 1) + ". " + tasks.getTask(i));
                         }
                     }
                 } else if (checkMatchString(line, "done ")) {
                     String[] cmdArgs = getCommandArgs(line, "I'm sorry, but done needs the index of a Task.");
                     try {
                         int index = Integer.parseInt(cmdArgs[1]);
-                        Task curTask = tasks.get(index - 1);
+                        Task curTask = tasks.getTask(index - 1);
                         curTask.markAsDone();
                         printIndentOutput("Nice! I've marked this task as done:");
                         printIndentOutput("   " + curTask);
@@ -107,7 +107,7 @@ public class Duke {
                     String[] cmdArgs = getCommandArgs(line, "The description of a todo cannot be empty.");
                     String taskName = cmdArgs[1];
                     Task curTask = new Todo(taskName);
-                    tasks.add(curTask);
+                    tasks.addTask(curTask);
                     printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "deadline ")) {
                     String[] cmdArgs = getCommandArgs(line, "The description of a todo cannot be empty.");
@@ -118,7 +118,7 @@ public class Duke {
                     String taskName = deadlineArgs[0];
                     LocalDateTime deadline = LocalDateTime.parse(deadlineArgs[1], formatter);
                     Task curTask = new Deadline(taskName, deadline);
-                    tasks.add(curTask);
+                    tasks.addTask(curTask);
                     printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "event ")) {
                     String[] cmdArgs = getCommandArgs(line, "The description of an event cannot be empty.");
@@ -129,14 +129,14 @@ public class Duke {
                     String taskName = eventArgs[0];
                     LocalDateTime datetime = LocalDateTime.parse(eventArgs[1], formatter);
                     Task curTask = new Event(taskName, datetime);
-                    tasks.add(curTask);
+                    tasks.addTask(curTask);
                     printTaskListStatus(tasks, curTask);
                 } else if (checkMatchString(line, "delete ")) {
                     String[] cmdArgs = getCommandArgs(line, "I'm sorry, but delete needs the index of a Task.");
                     try {
                         int index = Integer.parseInt(cmdArgs[1]);
-                        Task curTask = tasks.get(index - 1);
-                        tasks.remove(index - 1);
+                        Task curTask = tasks.getTask(index - 1);
+                        tasks.removeTask(index - 1);
                         printIndentOutput("Nice! I've removed this task:");
                         printIndentOutput("   " + curTask);
                         printIndentOutput("Now you have " + tasks.size() + " task(s) in the list.");
