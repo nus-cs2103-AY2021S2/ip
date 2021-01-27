@@ -15,6 +15,11 @@ class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * blah test dw this
+     * @param input
+     * @return
+     */
     public static Event readTask(String input) {
         String[] list = input.split(", ", 4);
         return new Event(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
