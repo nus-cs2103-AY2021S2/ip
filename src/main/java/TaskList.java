@@ -50,6 +50,10 @@ public class TaskList {
         Ui.outputMessageDone(current);
     }
 
+    static void processFind(String[] spl) {
+        Ui.outputMessageFind(storage, spl);
+    }
+
     static void processList() {
         Ui.outputMessageList(storage, count);
     }

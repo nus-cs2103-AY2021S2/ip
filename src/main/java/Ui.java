@@ -38,6 +38,18 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public static void outputMessageFind(ArrayList<Task> storage, String[] spl) {
+        System.out.println(LINE);
+        int i = 1;
+        for (Task t : storage) {
+            if (t.getDescription().contains(spl[1])) {
+                System.out.println(SPACE + i + ". " + t);
+                i++;
+            }
+        }
+        System.out.println(LINE);
+    }
+
     public static void outputMessageBye() {
         System.out.println(LINE + SPACE + "Byee, hope to see you again soon!" + LINE);
     }
