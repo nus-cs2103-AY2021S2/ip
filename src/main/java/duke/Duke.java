@@ -9,6 +9,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+
 public class Duke {
     private Scanner keyboard;
     private Storage storage;
@@ -21,20 +22,20 @@ public class Duke {
 
     }
 
+
     public void run(){
         TaskList taskList = new TaskList();
         // Read from storage
         try {
             taskList = storage.readTasks(taskList);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             ui.display("OOPS! There is something wrong: " + e.getMessage());
         }
 
         // In Execution
         ui.welcome();
         boolean isExit = false;
-        while (!isExit) {
+        while ( ! isExit) {
             try {
                 String fullCommand = ui.readCommand(keyboard);
                 Command c = Parser.parse(fullCommand);
@@ -45,13 +46,10 @@ public class Duke {
             }
         }
 
-
-
         // Save to files
         try {
             storage.saveTasks(taskList);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             ui.display("OOPS! There is something wrong: " + e.getMessage());
         }
 

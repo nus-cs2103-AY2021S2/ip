@@ -5,30 +5,14 @@ import duke.ui.Ui;
 
 import java.util.LinkedList;
 
-/**
- * It is a command object extends from Command for the Duke program.
- * When the parser calls it, it will receive the requests from the users
- * during the running of the program and starts to search the tasks that matches the name
- * user asks.
- */
+
 public class SearchByTaskNameCommand extends Command{
-    /**
-     * Constructor for SearchByTaskNameCommand object
-     *
-     * @param userMessage The message that the user inputs for further execution.
-     */
+
     public SearchByTaskNameCommand(String userMessage){
         super(userMessage);
     }
 
-    /**
-     * The execution after parsing, it will search relevant tasks based on the name.
-     * If the input is not correct, it will raise an exception.
-     *
-     * @param taskList The current taskList in the program.
-     * @param ui The current ui in the program.
-     * @throws DukeException if there are some cases such as the input name format is wrong.
-     */
+
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         String[] info;
         String name;

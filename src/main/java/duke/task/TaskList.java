@@ -7,23 +7,23 @@ public class TaskList {
     private LinkedList<Task> Tasks;
     private int numOfTasks;
 
-    // Initializer
+
     public TaskList(){
         Tasks = new LinkedList<Task>();
         numOfTasks = 0;
     }
 
-    // Getter
 
     public int getNumOfTasks(){
         return numOfTasks;
     }
 
+
     public LinkedList<Task> getTasks(){
         return Tasks;
     }
 
-    // Setter
+
     public void addTasks(Task task){
         Tasks.add(task);
         numOfTasks++;

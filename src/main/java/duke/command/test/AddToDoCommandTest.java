@@ -26,7 +26,7 @@ class AddToDoCommandTest {
 
         LinkedList<Task> outputList = taskList.getTasks();
         Task output = outputList.getFirst();
-        assertEquals("[T]go to school",output.getTaskName());
+        assertEquals("[T]go to school",output.toString());
     }
 
 

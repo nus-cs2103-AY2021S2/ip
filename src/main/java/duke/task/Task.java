@@ -8,7 +8,7 @@ public class Task {
     protected final static DateTimeFormatter DF1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected final static DateTimeFormatter DF2 = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    // Initializer
+
     public Task(){
         taskName = "";
         isDone = false;
@@ -17,7 +17,6 @@ public class Task {
     public Task(String taskName){
         this.taskName = taskName;
         isDone = false;
-
     }
 
     public Task(String taskName, boolean status){
@@ -25,7 +24,7 @@ public class Task {
         isDone = status;
     }
 
-    // Getter
+
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -39,7 +38,11 @@ public class Task {
     }
 
 
-    // Setter
+    public String toString(){
+        return this.taskName;
+    }
+
+
     public void markAsDone(){
         this.isDone = true;
     }
