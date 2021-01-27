@@ -16,6 +16,22 @@ import exception.DukeInvalidInputException;
 public class DukeTest {
 
     @Test
+    public void parseInputFindAbleToFindTasks() throws IOException, DukeException{
+        Duke.storage.tasks = new ArrayList<>(100);
+        Duke.storage.inputs = new ArrayList<>(100);
+
+        Duke.parseInput("todo test task 1");
+        Duke.parseInput("todo test task to find 1");
+        Duke.parseInput("todo test task 2");
+        Duke.parseInput("todo test task to find 2");
+
+        assertEquals("Here are the matching tasks in your list:\n"+
+            "2.[T][✗] test task to find 1\n" +
+            "4.[T][✗] test task to find 2", 
+            Duke.parseInput("find to find"));
+    }
+
+    @Test
     public void saveSessionAbleToLoad() throws IOException{
         File testFile = new File(Storage.sessionFile);
         if (testFile.exists())

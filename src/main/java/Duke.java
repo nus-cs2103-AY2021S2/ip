@@ -71,6 +71,8 @@ public class Duke {
             return taskList.executeDeadline(tokenizedInput);
         case "event":
             return taskList.executeEvent(tokenizedInput);
+        case "find":
+            return taskList.executeFind(tokenizedInput);
         default:
             throw new DukeInvalidInputException(input);
         }
