@@ -1,7 +1,7 @@
 package main.java;
 
 public class Event extends Task {
-    protected String eventAt;
+    private String eventAt;
     public Event(String description, String eventAt) {
         super(description);
         this.eventAt = eventAt;

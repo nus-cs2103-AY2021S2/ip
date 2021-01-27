@@ -1,65 +1,100 @@
-import main.java.DukeException;
-import main.java.ListManager;
+import main.java.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 public class Duke {
-    public static void main(String[] args) {
-        final String FILENAME = "dukedata.txt";
-        final String FOLDERNAME = "data";
-        final String PATH = FOLDERNAME + "/" + FILENAME;
+    private Storage dukeStorage;
+    private TaskList dukeTaskList;
+    private Ui dukeUi;
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        //System.out.println("Hello from\n" + logo);
+    final static String FILENAME = "dukedata.txt";
+    final static String FOLDERNAME = "data";
+    final static String PATH = FOLDERNAME + "/" + FILENAME;
 
-        try{
-            File folder = new File(FOLDERNAME);
-            if (folder.mkdir()){
-                System.out.println("Folder created: " + folder.getName());
-            }else{
-                // System.out.println("Folder already exists.");
-            }
-            File dataFile = new File(PATH);
-            if (dataFile.createNewFile()) {
-                System.out.println("File created: " + dataFile.getName());
-            } else {
-                // System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-        Scanner scanner = new Scanner(System.in);
-        ListManager listManager = new ListManager(PATH);
+    public Duke(String filePath,String folderName) {
+        dukeUi = new Ui();
         try {
-            listManager.restoreDataFromDataFile();
-        }catch(DukeException e){
-            System.out.println(e.getMessage());
+            dukeStorage = new Storage(filePath, folderName);
+            dukeTaskList = new TaskList(dukeStorage.load());
+            dukeUi.showLoadingSucess();
+        } catch (DukeException e) {
+            dukeUi.showLoadingError(e.getMessage());
+            dukeTaskList = new TaskList();
         }
+    }
 
-        System.out.println(listManager.welcomeLine());
-        String userinput = scanner.nextLine();
+    public void run() {
+        //...
+        Scanner scanner = new Scanner(System.in);
+        Parser stringParser = new Parser();
+        dukeUi.showWelcomeLine();
 
-        while ( !userinput.equals("bye")){
-            try {
-                String outputString = listManager.handleAllUserInput(userinput);
-                System.out.println(outputString);
-            }catch(DukeException e){
-                System.out.println(e.getMessage());
+        String userInput = scanner.nextLine();
+
+        while ( !userInput.equals("bye")){
+
+            if (stringParser.equalsToList(userInput)){
+                ArrayList<Task> currentTaskList = dukeTaskList.getCurrentTaskList();
+                Ui.showReturnTaskList(currentTaskList);
+            }else if(stringParser.equalsToDone(userInput)){
+                try {
+                    int taskDoneInt = stringParser.parseDoneCommand(userInput);
+                    Task doneTask = dukeTaskList.checkTaskAsDone(taskDoneInt);
+
+                    dukeUi.showTaskDone(doneTask);
+                }catch(DukeException e){
+                    dukeUi.showErrorMsg(e.getMessage());
+                }
+            }else if(stringParser.equalsToDelete(userInput)){
+                try{
+                    int taskDeleteInt = stringParser.parseDeleteCommand(userInput);
+                    Task deletedTask = dukeTaskList.deleteTask(taskDeleteInt);
+                    dukeUi.showTaskDeleted(deletedTask, dukeTaskList.getNumberOfTasks());
+                }catch(DukeException e){
+                    dukeUi.showErrorMsg(e.getMessage());
+                }
+            }else if(stringParser.equalsToToDo(userInput)){
+                try{
+                    String toDoDescription = stringParser.parseToDoCommand(userInput);
+                    Task toDoTask = dukeTaskList.addToDoTask(toDoDescription);
+                    dukeUi.showAddedTask(toDoTask, dukeTaskList.getNumberOfTasks());
+                }catch(DukeException e){
+                    dukeUi.showErrorMsg(e.getMessage());
+                }
+            }else if(stringParser.equalsToEvent(userInput)){
+                try {
+                    ArrayList<String> eventDescription = stringParser.parseEventCommand(userInput);
+                    Task eventTask = dukeTaskList.addEventTask(eventDescription);
+                    dukeUi.showAddedTask(eventTask, dukeTaskList.getNumberOfTasks());
+                }catch(DukeException e){
+                    dukeUi.showErrorMsg(e.getMessage());
+                }
+            }else if(stringParser.equalsToDeadline(userInput)) {
+                try {
+                    ArrayList<String> eventDescription = stringParser.parseDeadlineCommand(userInput);
+                    Task deadlineTask = dukeTaskList.addDeadlineTask(eventDescription);
+                    dukeUi.showAddedTask(deadlineTask, dukeTaskList.getNumberOfTasks());
+                } catch (DukeException e) {
+                    dukeUi.showErrorMsg(e.getMessage());
+                }
+
+            }else{
+                dukeUi.showErrorMsg("I'm sorry, but I don't know what that means");
             }
+            userInput = scanner.nextLine();
 
-            userinput = scanner.nextLine();
+            try {
+                dukeStorage.saveToFile(dukeTaskList.getCurrentTaskList());
+            }catch(DukeException e){
+                dukeUi.showErrorMsg(e.getMessage());
+            }
         }
-        System.out.println(listManager.goodbyeLine());
+        dukeUi.showGoodbyeLine();
+    }
+
+    public static void main(String[] args) {
+        new Duke(PATH, FOLDERNAME).run();
     }
 }
+

@@ -1,12 +1,12 @@
 package main.java;
 
-public abstract class Manager {
+public abstract class Output{
 
-    public String horizontalLine(){
+    private String horizontalLine(){
         return "    ____________________________________________________________";
     }
 
-    public String indentedString(String input){
+    private String indentedString(String input){
         return "     " + input;
     }
 
@@ -22,6 +22,5 @@ public abstract class Manager {
         }
 
         return toreturn + input;
-
     }
 }

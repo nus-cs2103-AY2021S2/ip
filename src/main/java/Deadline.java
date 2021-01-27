@@ -1,15 +1,13 @@
 package main.java;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+// import java.time.LocalDateTime;
 
 public class Deadline extends Task{
-    final DateTimeFormatter formatone = DateTimeFormatter.ofPattern("d-M-uuuu");
-    final DateTimeFormatter formattwo = DateTimeFormatter.ofPattern("uuuu-M-d");
-
-
-    protected String deadlineBy;
-    LocalDate dateBy;
+    private final DateTimeFormatter formatone = DateTimeFormatter.ofPattern("d-M-uuuu");
+    private final DateTimeFormatter formattwo = DateTimeFormatter.ofPattern("uuuu-M-d");
+    private String deadlineBy;
+    private LocalDate dateBy;
     public Deadline(String description, String by) throws TaskException{
         super(description);
         this.deadlineBy = by;

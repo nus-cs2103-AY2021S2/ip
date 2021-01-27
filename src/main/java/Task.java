@@ -3,7 +3,7 @@ package main.java;
 public class Task {
     protected String description;
 
-    protected boolean isDone;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
