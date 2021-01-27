@@ -26,10 +26,6 @@ public class DeadlineTask extends Task {
         );
     }
 
-    public String getDueTime() {
-        return dueTime;
-    }
-
     @Override
     public String toSavedString() {
         return String.format(

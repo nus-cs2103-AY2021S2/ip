@@ -26,10 +26,6 @@ public class EventTask extends Task {
         );
     }
 
-    public String getEventTime() {
-        return eventTime;
-    }
-
     @Override
     public String toSavedString() {
         return String.format(
