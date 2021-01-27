@@ -7,6 +7,7 @@ public class Ui {
     public final String SHOW_TASKS = "Here are your tasks!";
     public final String COMPLETE_TASK = "I have marked that task as done!";
     public final String DELETE_TASK = "I have deleted that task from the task list!";
+    public final String FIND_TASKS = "Finding tasks that match your search keyword...";
     private String name;
 
     public Ui(String n) {
