@@ -52,6 +52,10 @@ Your task has been added: [D][ ] profit (by: 2022)
 You currently have 3 task(s) in the list.
 ------------------------------
 ------------------------------
+Your task has been added: [D][ ] profit again (by: 28 Jan 2023, 6PM)
+You currently have 4 task(s) in the list.
+------------------------------
+------------------------------
 Expected argument describing task after "deadline"
 ------------------------------
 ------------------------------
@@ -62,6 +66,7 @@ Here are the tasks in your list:
 1.[T][ ] hustle
 2.[E][ ] grinding (at: all day err day)
 3.[D][ ] profit (by: 2022)
+4.[D][ ] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
 Swee chai. It's done.
@@ -72,36 +77,39 @@ Swee chai. It's done.
 [D][X] profit (by: 2022)
 ------------------------------
 ------------------------------
-Please enter a number from 1 to 3 after done!
+Swee chai. It's done.
+[D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
 Here are the tasks in your list:
 1.[T][ ] hustle
 2.[E][X] grinding (at: all day err day)
 3.[D][X] profit (by: 2022)
+4.[D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
 Swee chai. It's done.
 [T][X] hustle
 ------------------------------
 ------------------------------
-Please enter a number from 1 to 3 after done!
+Please enter a number from 1 to 4 after done!
 ------------------------------
 ------------------------------
-Please enter a number from 1 to 3 after delete!
+Please enter a number from 1 to 4 after delete!
 ------------------------------
 ------------------------------
-Please enter a number from 1 to 3 after delete!
+Please enter a number from 1 to 4 after delete!
 ------------------------------
 ------------------------------
 See la. It's deleted.
 [E][X] grinding (at: all day err day)
-You currently have 2 task(s) in the list.
+You currently have 3 task(s) in the list.
 ------------------------------
 ------------------------------
 Here are the tasks in your list:
 1.[T][X] hustle
 2.[D][X] profit (by: 2022)
+3.[D][X] profit again (by: 28 Jan 2023, 6PM)
 ------------------------------
 ------------------------------
 That is not a valid command!
