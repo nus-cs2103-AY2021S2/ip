@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 class Event extends Task {
-    protected final String timing;
+    protected final LocalDate date;
 
     public Event(String eventInfo) throws DukeException {
         super((eventInfo.split("/at")[0]).substring(0,eventInfo.split("/at")[0].length() - 1));
         try {
-            this.timing = eventInfo.split("/at")[1].substring(1);
+            this.date = LocalDate.parse(eventInfo.split("/at")[1].substring(1));
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Invalid input for new event");
         }
@@ -13,9 +15,9 @@ class Event extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[E][X] " + this.taskName + " (at: " + timing + ")";
+            return "[E][X] " + this.taskName + " (at: " + Task.printDate(date) + ")";
         } else {
-            return "[E][ ] " + this.taskName + " (at: " + timing + ")";
+            return "[E][ ] " + this.taskName + " (at: " + Task.printDate(date) + ")";
         }
     }
 }
