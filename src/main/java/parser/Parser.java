@@ -10,6 +10,7 @@ import commands.Command;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ExitCommand;
+import commands.FindCommand;
 import commands.ListCommand;
 import data.Deadline;
 import data.Event;
@@ -37,6 +38,8 @@ public class Parser {
             return prepareDone(input, tokens);
         case DeleteCommand.COMMAND_TEXT:
             return prepareDelete(input, tokens);
+        case FindCommand.COMMAND_TEXT:
+            return prepareFind(input, tokens);
         case ExitCommand.COMMAND_TEXT:
             return new ExitCommand();
         default:
@@ -131,5 +134,13 @@ public class Parser {
         }
 
         return new DeleteCommand(selection - 1);
+    }
+
+    private Command prepareFind(String input, String[] tokens) throws ParserException {
+        if (tokens.length < 2) {
+            throw new ParserException("Please specify what you are finding");
+        }
+
+        return new FindCommand(input.substring(5));
     }
 }

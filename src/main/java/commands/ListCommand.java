@@ -16,12 +16,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, TextUi ui) throws IOException {
-        String[] lines = new String[tasks.size()];
-
-        for (int i = 0; i < tasks.size(); i++) {
-            lines[i] = (i + 1) + "." + tasks.get(i).toString();
-        }
-
-        ui.write(lines);
+        ui.writeTasks(tasks);
     }
 }

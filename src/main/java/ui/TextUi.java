@@ -78,6 +78,21 @@ public class TextUi {
     }
 
     /**
+     * Writes the given tasks
+     * @param tasks
+     * @throws IOException
+     */
+    public void writeTasks(TaskList tasks) throws IOException {
+        String[] lines = new String[tasks.size()];
+
+        for (int i = 0; i < tasks.size(); i++) {
+            lines[i] = (i + 1) + "." + tasks.get(i).toString();
+        }
+
+        write(lines);
+    }
+
+    /**
      * Writes the acknowledgement message for adding a task
      * @param task
      * @param tasks
