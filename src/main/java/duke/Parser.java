@@ -26,6 +26,7 @@ public class Parser {
     private final static String LIST_COMMAND = "list";
     private final static String MARK_DONE_COMMAND = "done";
     private final static String EXIT_COMMAND = "bye";
+    private final static String FIND_COMMAND = "find";
 
     private static Pattern GET_KEYWORD = Pattern.compile("(\\S+).*");
 
@@ -260,6 +261,8 @@ public class Parser {
             super(message);
         }
     }
+
+
 
 
 }

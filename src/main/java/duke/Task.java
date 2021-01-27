@@ -36,4 +36,8 @@ public abstract class Task {
         return "[" + mark + "] " + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
 }

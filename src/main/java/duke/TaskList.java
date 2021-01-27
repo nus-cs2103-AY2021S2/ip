@@ -43,4 +43,15 @@ public class TaskList implements Iterable<Task> {
     public Iterator<Task> iterator() {
         return listOfTasks.iterator();
     }
+
+    public TaskList filterByWord(String keyword){
+         List<Task> filteredListOfTasks = new ArrayList<>();
+         for ( Task currentTask : listOfTasks ) {
+             boolean isContainsKeyword = currentTask.getDescription().contains(keyword);
+             if (isContainsKeyword) {
+                 filteredListOfTasks.add(currentTask);
+             }
+         }
+         return new TaskList(filteredListOfTasks);
+    }
 }
