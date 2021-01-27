@@ -3,8 +3,12 @@ package main.java;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Duckie is an interactive chatbot that helps with user's tasks.
@@ -22,7 +26,7 @@ import java.util.ArrayList;
  *
  * @author Wei Yutong
  * @version CS2103T AY20/21 Semester 2, Individual Project
- * 
+ *
  */
 
 public class Duckie {
@@ -52,7 +56,15 @@ public class Duckie {
             String[] sArr = s.split("\\|", 4);
 
             if (sArr[0].trim().equals("D")) {
-                Deadline tempD = new Deadline(sArr[2].trim(), sArr[3].trim());
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                Date date = null;
+                try {
+                    date = format.parse(sArr[3].trim());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Deadline tempD = new Deadline(sArr[2].trim(), date);
                 if (sArr[1].trim().equals("done")) {
                     tempD.isDone = true;
                 } else if (sArr[1].trim().equals("not done")){
@@ -60,7 +72,15 @@ public class Duckie {
                 }
                 AL.add(tempD);
             } else if (sArr[0].trim().equals("E")) {
-                Event tempE = new Event(sArr[2].trim(), sArr[3].trim());
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                Date date = null;
+                try {
+                    date = format.parse(sArr[3].trim());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Event tempE = new Event(sArr[2].trim(), date);
                 if (sArr[1].trim().equals("done")) {
                     tempE.isDone = true;
                 } else if (sArr[1].trim().equals("not done")) {
@@ -162,7 +182,16 @@ public class Duckie {
 
                     System.out.println(line);
                     String[] strE = str[1].split("/at", 2);
-                    Event tempE = new Event(strE[0], strE[1]);
+
+                    String inputDate = strE[1].trim();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                    Date date;
+                    try {
+                        date = format.parse(inputDate);
+                    } catch (Exception e) {
+                        throw new DuckieException("please enter date in the format dd-mm-yyyy");
+                    }
+                    Event tempE = new Event(strE[0], date);
                     arr.add(tempE);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempE.toString());
@@ -183,7 +212,16 @@ public class Duckie {
 
                     System.out.println(line);
                     String[] strD = str[1].split("/by", 2);
-                    Deadline tempD = new Deadline(strD[0], strD[1]);
+                    String inputDate = strD[1].trim();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HHmm", Locale.ENGLISH);
+                    Date date;
+                    try {
+                        date = format.parse(inputDate);
+                    } catch (Exception e) {
+                        throw new DuckieException("please enter date in the format dd-mm-yyyy HHmm");
+                    }
+                    Deadline tempD = new Deadline(strD[0], date);
+
                     arr.add(tempD);
                     System.out.println("ok! i've added this task:");
                     System.out.println(tempD.toString());
@@ -285,13 +323,13 @@ class Task {
  */
 
 class Deadline extends Task {
-    protected String by;
-    public Deadline(String description, String by) {
+    protected Date by;
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
 
-    public String getBy() {
+    public Date getBy() {
         return this.by;
     }
 
@@ -322,13 +360,13 @@ class ToDo extends Task {
  * Event is specified by [E].
  */
 class Event extends Task {
-    protected String at;
-    public Event (String description, String at) {
+    protected Date at;
+    public Event (String description, Date at) {
         super(description);
         this.at = at;
     }
 
-    public String getAt() {
+    public Date getAt() {
         return this.at;
     }
 
