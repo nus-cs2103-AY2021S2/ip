@@ -1,9 +1,14 @@
 package main.java;
 import java.time.LocalDate;
 
+/**
+ * The class in which Deadline, Event and ToDo inherits from.
+ * It contains several common methods shared by all subclasses.
+ */
 abstract class Task {
     protected final String taskName;
     protected boolean isDone;
+
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -15,7 +20,7 @@ abstract class Task {
         this.isDone = isDone;
     }
 
-    protected void completeTask() {
+    public void completeTask() {
         this.isDone = true;
     }
 
@@ -28,7 +33,7 @@ abstract class Task {
                 " " + day + " " + year;
     }
 
-    protected boolean isComplete() {
+    public boolean isComplete() {
         return this.isDone;
     }
 }

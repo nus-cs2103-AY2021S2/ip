@@ -6,8 +6,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 
+/**
+ * The class that deals with loading tasks from the file and saving tasks in the file.
+ */
 class Storage {
 
+    /**
+     * Creates a new text file so that the list of tasks can be saved on the hard disk.
+     */
     public static void createFile() throws java.io.IOException  {
         new File("./data").mkdirs();
         File textFile = new File("./data/duke.txt");
@@ -15,6 +21,11 @@ class Storage {
         textFile.createNewFile();
     }
 
+    /**
+     * Updates the text file whenever the task list changes.
+     *
+     * @param taskList the corresponding task list in which the text file is based on
+     */
     public static void update(ArrayList<Task> taskList) {
         File textFile = new File("./data/duke.txt");
         try {
@@ -47,6 +58,14 @@ class Storage {
         }
     }
 
+    /**
+     * Method to read an existing text file and convert it into a corresponding task list within
+     * the Dukebot.
+     *
+     * @param file the text file in which the task list is created from
+     * @param taskList the corresponding task list to copy the text file over
+     * @throws IOException
+     */
     public static void convert(File file, ArrayList<Task> taskList) throws IOException{
         Scanner scan = new Scanner(file);
         while (scan.hasNext()) {
@@ -70,7 +89,7 @@ class Storage {
         scan.close();
     }
 
-    public static String[] splitter(String input) {
+    private static String[] splitter(String input) {
         String[] result = new String[4];
         int counter = 0;
         result[0] = "";
@@ -85,7 +104,7 @@ class Storage {
         return result;
     }
 
-    public static LocalDate dateConverter(String date) {
+    private static LocalDate dateConverter(String date) {
         String month = date.substring(0,3);
         String day = date.split(" ")[1];
         String year = date.split(" ")[2];
