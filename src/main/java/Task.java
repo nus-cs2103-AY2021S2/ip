@@ -16,7 +16,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "/" : " "); // todo check if custom symbols okay
+        return (isDone ? "/" : " ");
     }
 
     // return type?

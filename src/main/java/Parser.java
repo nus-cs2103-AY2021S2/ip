@@ -160,7 +160,7 @@ public class Parser {
         return true;
     }
 
-
+    // should exceptions be all handled in parser or elsewhere? how do you test if the correct exception is thrown
     // parse done, todos, deadline, event, delete commands
     // make enums for supported commands?
     // return whether to keep scanner open

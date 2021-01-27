@@ -16,6 +16,8 @@ public class TaskList {
         this.taskArrayList.add(t);
     }
 
+    // is used in junit tests
+    // abstract away anything else that uses size directly on arraylist?
     public int size() {
         return this.taskArrayList.size();
     }

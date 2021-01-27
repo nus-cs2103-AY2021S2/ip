@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
     // use collection for holding all tasks
