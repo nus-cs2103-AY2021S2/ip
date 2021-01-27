@@ -75,8 +75,8 @@ public class Duke {
                     displayList();
                     break;
                 case "find":
-                    String keyWord = commandParser.parseFindTask(commandText);
-                    findTask();
+                    String keyword = commandParser.parseFindTask(commandText);
+                    findTask(keyword);
             }
         } catch (DukeException e){
             ui.showErrorMessage(e.getMessage());
@@ -120,8 +120,9 @@ public class Duke {
         ui.printMyTask(tasks);
     }
 
-    private void findTask() {
-
+    private void findTask(String keyword) {
+        ArrayList<Task> matchingTask = tasks.findMatchingTask(keyword);
+        ui.printMatchingTask(matchingTask);
     }
 
     private void exit() {

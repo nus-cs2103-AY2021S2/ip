@@ -22,6 +22,7 @@ public class Parser {
         list.add("event");
         list.add("done");
         list.add("delete");
+        list.add("find");
         return list;
     }
 

@@ -73,7 +73,7 @@ public class TaskList {
     }
 
     public Task getTask(int taskNumber) {
-        Task task = this.taskList.get(taskNumber - 1);
+        Task task = this.taskList.get(taskNumber);
         return task;
     }
 
@@ -94,6 +94,16 @@ public class TaskList {
         Task curTask = this.taskList.get(taskNumber - 1);
         curTask.markAsDone();
         return curTask;
+    }
+
+    public ArrayList<Task> findMatchingTask(String keyword){
+        ArrayList<Task> matchingTask = new ArrayList<> ();
+        for (Task t: this.taskList){
+            if (t.getDescription().contains(keyword)){
+                matchingTask.add(t);
+            }
+        }
+        return matchingTask;
     }
 }
 
