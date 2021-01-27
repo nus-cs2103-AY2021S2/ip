@@ -47,4 +47,18 @@ public class TaskList {
         return this.listOfTasks.remove(i);
     }
 
+    /**
+     * find the element of TaskList containing toSearch String
+     * @param toSearch the String we would like to find inside TaskList
+     */
+    public List<Task> find(String toSearch) {
+        List<Task> listFound = new ArrayList<>();
+        for (int i=0; i < listOfTasks.size(); i++) {
+            Task iElementListOfTasks = listOfTasks.get(i);
+            if (iElementListOfTasks.getJob().contains(toSearch)) {
+                listFound.add(iElementListOfTasks);
+            }
+        }
+        return listFound;
+    }
 }
