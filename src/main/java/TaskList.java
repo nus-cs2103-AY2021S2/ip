@@ -43,7 +43,8 @@ public class TaskList {
         Event eventTask = new Event(eventName, timeOfEvent);
         tasks.add(eventTask);
 
-        Ui.echo(String.format("Added a deadline for you:\n%s\n%s", eventTask.toString(), getNumberOfTasksString(tasks)));
+        Ui.echo(String.format("Added a deadline for you:\n%s\n%s",
+                eventTask.toString(), getNumberOfTasksString(tasks)));
     }
 
     public void addDeadline(HashMap<String, String> commands) throws DukeException {
@@ -59,14 +60,16 @@ public class TaskList {
 
         tasks.add(deadlineTask);
 
-        Ui.echo(String.format("Added a deadline for you:\n%s\n%s", deadlineTask.toString(), getNumberOfTasksString(tasks)));
+        Ui.echo(String.format("Added a deadline for you:\n%s\n%s",
+                deadlineTask.toString(), getNumberOfTasksString(tasks)));
     }
 
     public void deleteTask(HashMap<String, String> commands) throws DukeException {
         String taskToDeleteStr = commands.get("info");
 
         if (taskToDeleteStr == "") {
-            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+            throw new DukeException("Deleting a task as done needs to be done like this: "
+                    + "done [task number from list]. Task numbers need to be written as digits and not text.");
         }
         try {
             int taskIdx = Integer.parseInt(taskToDeleteStr) - 1;
@@ -74,9 +77,12 @@ public class TaskList {
             tasks.remove(taskToDelete);
             Ui.echo(String.format("I've removed this task from your list\n%s", taskToDelete.toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            throw new DukeException("Please delete a task that exists in the list. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be deleted.");
+            throw new DukeException("Please delete a task that exists in the list. "
+                    + "Task numbers that are 0 or lesser, "
+                    + "or greater than the number of items in the list cannot be deleted.");
         } catch (NumberFormatException numberFormatException) {
-            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+            throw new DukeException("Deleting a task as done needs to be done like this: done [task number from list]. "
+                    + "Task numbers need to be written as digits and not text.");
         }
     }
 
@@ -92,9 +98,12 @@ public class TaskList {
             tasks.get(taskIdx).setDone();
             Ui.echo(String.format("Nice! This task is done :)\n%s", tasks.get(taskIdx).toString()));
         } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
-            throw new DukeException("Please mark a task that exists in the list as done. Task numbers that are 0 or lesser, or greater than the number of items in the list cannot be marked as done.");
+            throw new DukeException("Please mark a task that exists in the list as done. "
+                    + "Task numbers that are 0 or lesser, "
+                    + "or greater than the number of items in the list cannot be marked as done.");
         } catch (NumberFormatException numberFormatException) {
-            throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. Task numbers need to be written as digits and not text.");
+            throw new DukeException("Marking a task as done needs to be done like this: done [task number from list]. "
+                    + "Task numbers need to be written as digits and not text.");
         }
     }
 
@@ -119,7 +128,8 @@ public class TaskList {
             }
             return dateTime;
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new DukeException("Please format your date as such: 15/01/2021 1845 (day/month/year time in 24H format)");
+            throw new DukeException("Please format your date as such: "
+                    + "15/01/2021 1845 (day/month/year time in 24H format)");
         }
     }
 }

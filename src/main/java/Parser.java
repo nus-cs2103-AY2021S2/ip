@@ -11,14 +11,16 @@ public class Parser {
         String command = firstHalf[0];
         commandList.put("command", command);
         if (firstHalf.length > 1) {
-            commandList.put("info", String.join(" ", Arrays.copyOfRange(firstHalf, 1, firstHalf.length)).trim());
+            commandList.put("info", String.join(" ",
+                    Arrays.copyOfRange(firstHalf, 1, firstHalf.length)).trim());
         }
 
-        if(tokens.length > 1) {
+        if (tokens.length > 1) {
             String[] secondHalf = tokens[1].split(" ");
             if (secondHalf.length > 0) {
                 String firstWord = secondHalf[0];
-                commandList.put(firstWord, String.join(" ", Arrays.copyOfRange(secondHalf, 1, secondHalf.length)).trim());
+                commandList.put(firstWord, String.join(" ",
+                        Arrays.copyOfRange(secondHalf, 1, secondHalf.length)).trim());
             }
         }
         return commandList;

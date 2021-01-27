@@ -1,9 +1,10 @@
 import java.util.HashMap;
 
 public class Duke {
-    static TaskList tasks;
-    static DataStorage storage;
-    static boolean shouldRun = true;
+    private static TaskList tasks;
+    private static DataStorage storage;
+    private static boolean shouldRun = true;
+
     public static void main(String[] args) {
 
         startup();
@@ -49,9 +50,11 @@ public class Duke {
                 }
                 }
             } catch (DukeException dukeException) {
-                Ui.echo(String.format("Francis encountered an error while processing your request. Here are the details:\n%s", dukeException.getMessage()));
+                Ui.echo(String.format("Francis encountered an error while processing your request. "
+                        + "Here are the details:\n%s", dukeException.getMessage()));
             } catch (Exception e) {
-                Ui.echo(String.format("Francis encountered an unexpected while processing your request. Here are the details:\n%s", e.getMessage()));
+                Ui.echo(String.format("Francis encountered an unexpected while processing your request. "
+                        + "Here are the details:\n%s", e.getMessage()));
             }
         }
 
