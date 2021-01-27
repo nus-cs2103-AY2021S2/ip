@@ -14,6 +14,20 @@ public class EventTask extends Task {
         this.eventTime = eventTime;
     }
 
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    @Override
+    public String toSavedString() {
+        return String.format(
+                "E | %d | %s | %s",
+                this.getIsDone() ? 1 : 0,
+                this.getName(),
+                this.getEventTime()
+        );
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + (this.eventTime != null ? String.format(" (at: %s)", this.eventTime) : "");

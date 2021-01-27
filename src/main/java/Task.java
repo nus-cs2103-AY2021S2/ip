@@ -15,6 +15,14 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String toSavedString() {
+        return String.format(
+                "%d | %s",
+                this.getIsDone() ? 1 : 0,
+                this.getName()
+        );
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getIsDone()? "X" : " ", this.getName());

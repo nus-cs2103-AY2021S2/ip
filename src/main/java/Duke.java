@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -12,10 +15,12 @@ import java.util.Set;
  * - number out of range
  * - help command
  * - Task as abstract class with 3 subclasses (T/D/E)
- * - TaskList as a class
+ * - TaskList as a class !!!
  */
 
 public class Duke {
+
+    public static final String fileName = "tasks.data";
 
     /**
      * The task list
@@ -94,6 +99,33 @@ public class Duke {
             }
         }
         return (String[]) tokens.toArray();
+    }
+
+    /**
+     * Save the task list to disk
+     */
+    public static void saveToFile() {
+        try {
+            File fileObj = new File(fileName);
+            fileObj.createNewFile();
+            FileWriter fileWriter = new FileWriter(fileName);
+            // Convert task list to a string
+            StringBuilder data = new StringBuilder();
+            for (Task task : tasks) {
+//                printLine(String.format("%d.%s", ++index, task.toString()));
+                data.append(task.toSavedString());
+            }
+            fileWriter.write(data.toString());
+//            Scanner fileReader = new Scanner(fileObj);
+//            StringBuilder data = new StringBuilder();
+//            while (fileReader.hasNextLine()) {
+//                data.append(fileReader.nextLine());
+//            }
+//            fileReader.close();
+//            String dataStr = data.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -221,6 +253,7 @@ public class Duke {
                 throw new Exception("Unknown command!");
             }
         }
+        saveToFile();
         printHorizontalLine();
         printEmptyLine();
         return !EXIT_COMMANDS.contains(command);
@@ -243,7 +276,7 @@ public class Duke {
         printLine("Sou, watashi desu!");
         printHorizontalLine();
         printEmptyLine();
-        for (;;) {
+        for (; ; ) {
             try {
                 if (!processCommand(sc.nextLine())) {
                     break;
