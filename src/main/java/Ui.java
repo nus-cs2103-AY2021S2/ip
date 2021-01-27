@@ -70,11 +70,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
-<<<<<<< HEAD
     /**
-     * Message to be printed when the program ends.
+     * Lists all the tasks with the searched for words.
+     * @param storage Array List of tasks.
+     * @param spl Array with the words that are being searched for in the Array List.
      */
-=======
     public static void outputMessageFind(ArrayList<Task> storage, String[] spl) {
         System.out.println(LINE);
         int i = 1;
@@ -87,7 +87,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
->>>>>>> branch-Level-9
+    /**
+     * Message to be printed when the program ends.
+     */
     public static void outputMessageBye() {
         System.out.println(LINE + SPACE + "Byee, hope to see you again soon!" + LINE);
     }

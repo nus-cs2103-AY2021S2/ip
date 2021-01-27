@@ -81,16 +81,17 @@ public class TaskList {
         Ui.outputMessageDone(current);
     }
 
-<<<<<<< HEAD
     /**
-     * Prints the output message for a list of all the tasks to be printed out.
+     * Prints the output message for a list of all the tasks which contain the keyword.
+     * @param spl Contains the keyword and the word that is being searched in the array.
      */
-=======
     static void processFind(String[] spl) {
         Ui.outputMessageFind(storage, spl);
     }
 
->>>>>>> branch-Level-9
+    /**
+     * Prints the output message for a list of all the tasks to be printed out.
+     */
     static void processList() {
         Ui.outputMessageList(storage, count);
     }
