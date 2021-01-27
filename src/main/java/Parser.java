@@ -1,16 +1,27 @@
 import java.util.Scanner;
 
+/**
+ * Parser class for CS2103T iP. Handles the logic of the program.
+ */
 public class Parser {
-    private TaskList list;
-    private Ui ui;
-    private Scanner sc;
+    private final TaskList list;
+    private final Ui ui;
+    private final Scanner sc;
 
+    /**
+     * Creates a Parser object.
+     * @param list TaskList object for data manipulation.
+     * @param ui Ui object for messages.
+     */
     public Parser(TaskList list, Ui ui) {
         this.list = list;
         this.ui = ui;
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Main logic of the program.
+     */
     public void poll() {
         String input = sc.nextLine();
         while (!input.equals("bye")) {
@@ -74,5 +85,6 @@ public class Parser {
             }
             input = sc.nextLine();
         }
+        sc.close();
     }
 }

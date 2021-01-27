@@ -4,11 +4,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * IO handler for CS2103T iP. Manages import of saved tasks upon program start and export
+ * of tasks upon program termination.
+ */
 public class Storage {
     private final TaskList storage;
     private final File data;
     private final Ui ui;
 
+    /**
+     * Creates a Storage object for data manipulation.
+     * @param tasks TaskList to be written into when importing saved tasks.
+     * @param ui Any messages generated will be directed to the provided Ui object.
+     */
     public Storage(TaskList tasks, Ui ui) {
         this.storage = tasks;
         this.ui = ui;
@@ -24,6 +33,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Imports saved tasks into TaskList.
+     * @throws FileNotFoundException When file is not found.
+     */
     public void importData() throws FileNotFoundException {
         Scanner sc = new Scanner(data);
         if (!sc.hasNext()) {
@@ -41,9 +54,14 @@ public class Storage {
             }
             storage.addImport(newTask);
         }
+        sc.close();
         ui.print("Tasks saved from last session imported! :)");
     }
 
+    /**
+     * Exports saved tasks.
+     * @throws IOException When there are IO errors.
+     */
     public void exportData() throws IOException {
         FileWriter fw = new FileWriter("data/savedList.txt");
         for (int i = 0; i < storage.size(); i++) {
