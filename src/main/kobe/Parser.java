@@ -1,14 +1,13 @@
-package parser;
+package kobe;
 
 public class Parser {
 
-    private void readInput(String text, TaskList tasks, Storage storage, Ui ui) {
+    public static void readInput(String command, TaskList tasks, Storage storage, Ui ui) {
         String[] commandArr = command.split(" ");
         String text = commandArr[0];
 
         if (text.equals("bye")) {
             Commands.goodbye(storage);
-            break;
         } else if (text.equals("list")) {
             Commands.showList(tasks, ui);
         } else if (text.equals("done")) {

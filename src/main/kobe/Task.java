@@ -1,4 +1,4 @@
-import java.util.*;
+package kobe;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -59,17 +59,20 @@ class Task {
                 conditionString = "(by: " + condition.substring(0) + ")";
             } else if (isConditionLocalDate) { //convert LocalDate to parsed date
                 conditionString = "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-            } else {}
+            } else {
+            }
 
         } else if (this.type.equals("event")) {
             typeString = "[E]";
             if (!this.condition.equals("")) {
                 conditionString = "(at: " + condition.substring(0) + ")";
             } else if (isConditionLocalDate) { //convert LocalDate to parsed date
-            conditionString = "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-            } else {}
+                conditionString = "(at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            } else {
+            }
 
-        } else {}
+        } else {
+        }
 
         //handles when condition is passed in as just date/time, or with the by/at in front.
 //        if (!this.condition.equals("")) {

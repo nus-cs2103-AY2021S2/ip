@@ -1,5 +1,5 @@
-    1. [T][X] abc                       
-    2. [D][X] def                       
-    3. [E][ ] ghi                       
-    4. [D][X] this (by: 22-04-1998)
-    5. [D][X] thou (by: Apr 21 1998)
+    1. [T][X] abc                        
+    2. [D][X] def                        
+    3. [D][X] this (by: 22-04-1998)
+    4. [D][X] thou (by: Apr 21 1998)
+    5. [D][X] this project haha (by: 28 Jan)

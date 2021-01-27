@@ -1,12 +1,8 @@
+package kobe;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
-
-import parser.Parser;
-import TaskList.TaskList;
-import Ui.Ui;
-import Storage.storage;
-import Commands.Commands;
 
 public class KobeN {
     private Storage storage;
@@ -18,13 +14,14 @@ public class KobeN {
     public KobeN(String filePath) {
         ui = new Ui();
         tasks = new TaskList();
-        storage = new Storage(filePath, tasks);
+        storage = new Storage(filePath, tasks, ui);
     }
 
 
     public static void main(String[] args) {
         Path path = Paths.get(HOME + "/ip/src/main/data/kobe.txt");
-        new KobeN(path).run();
+        String pathName = HOME + "/ip/src/main/data/kobe.txt";
+        new KobeN(pathName).run();
     }
 
     public void run() {

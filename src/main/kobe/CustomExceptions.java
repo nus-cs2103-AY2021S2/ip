@@ -1,10 +1,10 @@
-import java.util.*;
+package kobe;
 
 class CustomExceptions {
 
     //for incomplete commands
     public static class IncompleteDecriptionException extends KobeException {
-//        public IncompleteDecriptionException(String errMsg, Throwable cause) {
+        //        public IncompleteDecriptionException(String errMsg, Throwable cause) {
         public IncompleteDecriptionException(String errMsg) {
             super(errMsg);
 //            super(errMsg, cause);
@@ -13,7 +13,7 @@ class CustomExceptions {
 
     //for gibberish commands
     public static class IncorrectDecriptionException extends KobeException {
-//        public IncorrectDecriptionException(String errMsg, Throwable cause) {
+        //        public IncorrectDecriptionException(String errMsg, Throwable cause) {
         public IncorrectDecriptionException(String errMsg) {
             super(errMsg);
 //            super(errMsg, cause);

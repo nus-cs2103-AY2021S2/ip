@@ -1,4 +1,4 @@
-import java.util.*;
+package kobe;
 
 abstract class KobeException extends RuntimeException {
 

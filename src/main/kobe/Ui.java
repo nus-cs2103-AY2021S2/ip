@@ -1,4 +1,4 @@
-package Ui;
+package kobe;
 
 public class Ui {
     public static String ind = "    ";
