@@ -11,6 +11,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// test still under development, hope to be able to test the main method with this class
 public class DukeTest {
 
     // code taken from StackOverFlow at

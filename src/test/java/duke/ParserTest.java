@@ -9,8 +9,6 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.Parser;
-
 public class ParserTest {
 
     // code taken from StackOverFlow at
@@ -348,6 +346,7 @@ public class ParserTest {
         restoreStreams();
     }
 
+    @Test
     public void parserTasksOnDayTest() {
         setUpStreams();
 

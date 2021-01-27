@@ -33,7 +33,8 @@ class Deadline extends Task {
 	 */
 	@Override
 	String saveName() {
-		return String.format("deadline1!1%s1!1%s1!1%b", super.getName(), this.time.toString(), super.getIsDone());
+		return String.format("deadline1!1%s1!1%s1!1%b", super.getName(),
+				this.time.toString(), super.getIsDone());
 	}
 
 	/**
@@ -54,6 +55,7 @@ class Deadline extends Task {
 
 	@Override
 	public String toString() {
-		return String.format("[D]%s (by: %s)", super.toString(), this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
+		return String.format("[D]%s (by: %s)", super.toString(),
+				this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
 	}
 }
