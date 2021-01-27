@@ -1,2 +1,3 @@
 T|0|clean
 T|1|walk
+T|0|read book
