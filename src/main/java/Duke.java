@@ -2,8 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    // use collection for holding all tasks
-//    private static final ArrayList<Task> taskList = new ArrayList<>();
+    // todo should duke be instantiated?
     private static TaskList taskList;
 
     /**
@@ -13,8 +12,6 @@ public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // random testing things
-        // should be rearranged elsewhere
         try {
             taskList = TaskList.setupTaskList();
         } catch (IOException e) {
@@ -23,10 +20,10 @@ public class Duke {
         }
 
         Ui.intro();
-        Parser parser = new Parser(taskList);
 
         // variables to reuse
         String userInput;
+        Parser parser = new Parser(taskList);
         boolean remainOpen = true;
 
         while (remainOpen) {

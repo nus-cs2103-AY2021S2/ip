@@ -2,13 +2,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 // should be called fileSetup, but loadfromharddisk method doesn't fit
-// level 7 files should be in another folder/pkg
 
+/*
 // todo
 // storage objects should store info about where each list/anything should be saved
 // have a final hashmap of where each object to store is stored
@@ -18,9 +16,11 @@ import java.util.Scanner;
  * This class handles setting up the file to save Duke data to.
  */
 public class Storage {
+    // fixme this is wrong when run by bat file or jar file
     public static final String projectDir = System.getProperty("user.dir");
+
     public static final java.nio.file.Path taskListFilePath = java.nio.file.Paths.get(
-            projectDir, "src", "data", "tasks.txt"); // todo rename as tasklistF..P..
+            projectDir, "src", "data", "tasks.txt");
 
 
     /**
@@ -28,7 +28,7 @@ public class Storage {
      * @param path Path to check for file or directory
      * @return True if it exists, false if it doesn't or any other error occured
      */
-    public static boolean doesFileOrDirExist(Path path) {
+    public static boolean doesFileOrDirectoryExist(Path path) {
         if (java.nio.file.Files.exists(path)) {
             return true;
         } else if (java.nio.file.Files.notExists(path)) {
@@ -44,7 +44,7 @@ public class Storage {
      * @return if task file exists
      */
     public static boolean doesTaskFileExist() {
-        return doesFileOrDirExist(taskListFilePath);
+        return doesFileOrDirectoryExist(taskListFilePath);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Storage {
             return;
         } else {
             java.nio.file.Path dataDirPath = java.nio.file.Paths.get(projectDir, "src", "data");
-            boolean doesDataDirExist = doesFileOrDirExist(dataDirPath);
+            boolean doesDataDirExist = doesFileOrDirectoryExist(dataDirPath);
 
             // create directory if it doesn't exist
             if (!doesDataDirExist) {
@@ -103,7 +103,7 @@ public class Storage {
                     t = Deadline.parse(line);
                     break;
                 default:
-                    // todo
+                    // todo create exceptions for parsing from hard disk
                     t = null;
                     break;
                 }

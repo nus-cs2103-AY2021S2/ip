@@ -34,7 +34,6 @@ public class TaskList {
         return this.taskArrayList.isEmpty();
     }
 
-
     // setup at default location
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {
@@ -52,7 +51,7 @@ public class TaskList {
      */
     public void saveTasksList() throws IOException {
         File f = new File(Storage.taskListFilePath.toString());
-            // doesn't actually create a new file i think, converts an existing file
+        // doesn't actually create a new file i think, converts an existing file
 
         FileWriter fw = new FileWriter(f);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -117,7 +116,6 @@ public class TaskList {
                 Ui.taskIndent + taskArrayList.get(i - 1)});
     }
 
-
     /**
      * Formats error message if invalid list index provided
      * @param i provided list index
@@ -130,8 +128,6 @@ public class TaskList {
                 + ". Number needs to be between " + min + " and " + max + " (inclusive). ";
         return errMsg;
     }
-
-
 
 
 }

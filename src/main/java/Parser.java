@@ -1,19 +1,19 @@
 import java.io.IOException;
 
 public class Parser {
-    private TaskList taskList;
+    private final TaskList taskList;
 
     public Parser(TaskList taskListToWriteInto) {
         this.taskList = taskListToWriteInto;
     }
 
     // for every new command to support, need to add to cases here and if statements in parse method
-    // could simplify it somehow
+    // could simplify it somehow --> can tasktype enums each have error messages associated with them
     // todo definitely need to simplify, too much duplication?
     // but how else do you want to detect the first word if not for the space?
     private static void handleOnlyFirstArgGiven(String command)
             throws MissingArgumentException, UnsupportedCommandException {
-        String errMsg;
+        String errMsg = "";
 
         switch (command) {
         case "todo":
@@ -37,7 +37,6 @@ public class Parser {
 
         throw new MissingArgumentException(errMsg);
     }
-
 
     // for missing second/third arguments
     // replace String taskType with Enum later
@@ -144,10 +143,10 @@ public class Parser {
         }
     }
 
-
+    // return value represents if scanner needs to remain open
     private boolean checkAndHandleIfOneArgIsValid(String command)
             throws MissingArgumentException, UnsupportedCommandException {
-        // check if only one argument needed
+
         if (command.equals("bye")) {
             Ui.printExitMsg();
             return false;
@@ -157,12 +156,13 @@ public class Parser {
         }
 
         // print correct error message when insufficient arguments
-        handleOnlyFirstArgGiven(command); // try catch block not necessary, because of throws
+        handleOnlyFirstArgGiven(command);
         return true;
     }
 
     // should exceptions be all handled in parser or elsewhere? how do you test if the correct exception is thrown
     // make enums for supported commands?
+
     /**
      * Main driver for parsing any user input
      * @param userInput User input from terminal
@@ -222,5 +222,4 @@ public class Parser {
 
         return true;
     }
-
 }

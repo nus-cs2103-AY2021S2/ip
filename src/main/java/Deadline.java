@@ -1,11 +1,12 @@
 import static java.lang.Boolean.parseBoolean;
+
 import java.time.LocalDateTime;
 
 /**
  * Represents a task with a deadline.
  */
-public class    Deadline extends Task {
-    private LocalDateTime deadline;
+public class Deadline extends Task {
+    private final LocalDateTime deadline;
 
     /**
      * Creates a deadline object
@@ -34,11 +35,9 @@ public class    Deadline extends Task {
                 + delimiter + ParseDateTime.unparse(deadline) + System.lineSeparator();
     }
 
-    // since this parsing is separate from the parsing in the duke function
+    // note that this parsing is different from parsing user inputs.
+    // since this parsing for hard disk storage is separate from that parsing,
     // the /at /by style of inputs won't affect this if they change, i think
-
-    //E;;desc;;true;;timing
-
     /**
      * Creates a deadline object based on user input.
      * @param oneLine One line of user input to be parsed into a deadline
@@ -46,7 +45,6 @@ public class    Deadline extends Task {
      */
     public static Deadline parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
-        int start = 0;
         assert oneLine.startsWith("T" + delimiter);
 
         int descStartIdx = oneLine.indexOf(delimiter);
@@ -55,12 +53,12 @@ public class    Deadline extends Task {
 
         int doneEndIdx = oneLine.indexOf(delimiter, descEndIdx + 1);
         String doneStr = oneLine.substring(descEndIdx + delimiter.length(), doneEndIdx);
-        Boolean isDone = parseBoolean(doneStr);
+        boolean isDone = parseBoolean(doneStr);
 
 
         String deadline = oneLine.substring(doneEndIdx + delimiter.length());
 
-        return new Deadline(desc,  deadline, isDone);
+        return new Deadline(desc, deadline, isDone);
     }
 
     // for testing purposes
@@ -73,8 +71,6 @@ public class    Deadline extends Task {
         System.out.println(parse(t.unparse()));
         // test with other cases without relying on t
     }
-
-
 
 
 }

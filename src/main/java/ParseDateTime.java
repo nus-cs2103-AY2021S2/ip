@@ -72,19 +72,12 @@ public class ParseDateTime {
         LocalDate d3 = LocalDate.parse("2019-12-02");
         System.out.println(d3);
 
-        // formatting
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String test = "08-12";
-        int yyyy = Year.now().getValue();
-        LocalDate d = LocalDate.parse(test + "-" + yyyy, f);
-        System.out.println(d);
-        System.out.println(Year.now().getValue());
-
         // parser for dd-MM ha
         // time currently is hour only, and PM needs to be in caps
-        DateTimeFormatter f2 = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
+        // f2 and d2 work together to enable user to key in particular formats
         String test2 = "30-04 6PM";
         int yyyy2 = Year.now().getValue();
+        DateTimeFormatter f2 = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
         LocalDateTime d2 = LocalDateTime.parse(test2 + " " + yyyy2, f2);
         System.out.println(d2);
     }
