@@ -6,4 +6,7 @@ todo join sports club
 todo borrow book
 list
 deadline do homework /by no idea :-p
+blah
+todo
+deadline return book by 4
 bye

@@ -28,4 +28,7 @@ Here are the tasks in your list:
 Got it. I've added this task:
   [D][ ] do homework (by: no idea :-p)
 Now you have 6 tasks in the list
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+☹ OOPS!!! The description of a todo cannot be empty.
+Invalid input for new deadline
 Bye. Hope to see you again soon!

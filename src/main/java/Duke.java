@@ -26,21 +26,30 @@ public class Duke {
 
     public void performCommand(String command) {
         String commandWord = command.split(" ")[0];
-        if (commandWord.equals("list")) {
-            this.listTask();
-        } else if (commandWord.equals("done")) {
-            this.doneTask(Integer.valueOf(command.split(" ")[1]));
-        } else if (commandWord.equals("todo")) {
-            this.addToDo(command.substring(5));
-        } else if (commandWord.equals("event")) {
-            this.addEvent(command.substring(6));
-        } else if (commandWord.equals("deadline")) {
-            this.addDeadline(command.substring(9));
+        try {
+            if (commandWord.equals("list")) {
+                this.listTask();
+            } else if (commandWord.equals("done")) {
+                this.doneTask(Integer.valueOf(command.split(" ")[1]));
+            } else if (commandWord.equals("todo")) {
+                this.addToDo(command.substring(4));
+            } else if (commandWord.equals("event")) {
+                this.addEvent(command.substring(5));
+            } else if (commandWord.equals("deadline")) {
+                this.addDeadline(command.substring(8));
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (DukeException dukeError) {
+            System.out.println(dukeError);
         }
     }
 
-    public void addToDo(String taskName) {
-        ToDo newTask = new ToDo((taskName));
+    public void addToDo(String taskName) throws DukeException {
+        if (taskName.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+        }
+        ToDo newTask = new ToDo((taskName.substring(1)));
         this.storedTasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
@@ -51,8 +60,11 @@ public class Duke {
         }
     }
 
-    public void addEvent(String taskName) {
-        Event newTask = new Event((taskName));
+    public void addEvent(String taskName) throws DukeException {
+        if (taskName.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+        Event newTask = new Event((taskName.substring(1)));
         this.storedTasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
@@ -63,8 +75,11 @@ public class Duke {
         }
     }
 
-    public void addDeadline(String taskName) {
-        Deadline newTask = new Deadline((taskName));
+    public void addDeadline(String taskName) throws DukeException{
+        if (taskName.length() == 0) {
+            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+        Deadline newTask = new Deadline((taskName.substring(1)));
         this.storedTasks.add(newTask);
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + newTask);
