@@ -26,6 +26,7 @@ public class Parser {
      * <p> 4. Add todo-task: todo &lt;task_description&gt; </p>
      * <p> 5. Add deadline-task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
      * <p> 6. Add event-task: event &lt;event_description&gt; /at &lt;date&gt; </p>
+     * <p> 7. Find task using keyword: find &lt;keyword&gt; </p>
      * <p> 7. Exit Duke: bye </p>
      *
      * @param userInput Command from user.
@@ -98,7 +99,7 @@ public class Parser {
     /**
      * Finds all tasks in the list that matches the keyword given by user.
      *
-     * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
+     * @param userInput Takes in command from user in the format: find &lt;keyword&gt;
      */
     protected void findFromList(String userInput) {
         TaskList tasksMatchingKeyword = new TaskList();
