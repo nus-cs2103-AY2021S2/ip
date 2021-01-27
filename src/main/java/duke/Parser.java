@@ -60,6 +60,12 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new InvalidInputException("The format of your date and time seem to be wrong! Ensure it adheres to YYYY-MM-DD format.");
             }
+        } else if (inputString.startsWith("find")) {
+            try {
+                tasks.find(inputString.substring(5).trim());
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new InvalidInputException("Your input format doesn't seem right! For find, it needs to be: find <string>");
+            }
         } else {
             throw new InvalidCommandException();
         }

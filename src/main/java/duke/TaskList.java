@@ -11,11 +11,37 @@ import duke.task.Todo;
 public class TaskList {
     private static List<Task> taskList;
     public TaskList() {
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
     public TaskList(Storage storage) {
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         initializeTasks(storage.read());
+    }
+
+    /**
+     * Prints a list of {@Task} matching the given string.
+     */
+    public void find(String inputString) {
+        //Ui.printMessage("Looking for... " + inputString);
+        List<Task> newList = new ArrayList<>();
+        boolean hasPrintedTasks = false;
+        int counter = 0;
+        for (int i = 0; i < this.taskList.size(); i++) {
+            Task task = this.taskList.get(i);
+            if (task.getDescription().toLowerCase().contains(inputString.toLowerCase())) {
+                if (!hasPrintedTasks) {
+                    Ui.printMessage("Here are the list of matching tasks: ");
+                    hasPrintedTasks = true;
+                }
+                Ui.printMessage((counter + 1) + ". " + task.toString());
+                counter += 1;
+            }
+        }
+        if (!hasPrintedTasks) {
+            Ui.printMessage("There are no matching tasks!");
+        }
+
+
     }
 
     public void addTask(Task task) {
