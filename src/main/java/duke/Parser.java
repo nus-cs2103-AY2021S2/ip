@@ -142,6 +142,34 @@ public class Parser {
 					}
 					
 					break;
+                case "find":
+                    if (split.length <= 1) {
+                        throw new DukeException("OOPS!!! A search term needs to be specified.");
+                    }
+                    
+                    String searchTerm = split[1];
+                    
+                    TaskList searchList = new TaskList();
+                    for (int i = 0; i < tl.count(); i++) {
+                        Task t = tl.getTask(i);
+                        
+                        if (t.getName().contains(searchTerm)) {
+                            searchList.add(t);
+                            continue;
+                        }
+                        
+                        if (t.getType() == 'D' || t.getType() == 'E') {
+                            if (t.getDate().contains(searchTerm)) {
+                                searchList.add(t);
+                                continue;
+                            }
+                        }
+                    }
+                    
+                    res = "Here are the matching task in your list:\n";
+                    res += searchList.printList();
+                    
+                    break;
 				default:
 					throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 					
