@@ -155,4 +155,17 @@ public class TaskList {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     }
 
+    public static void findTask(String command, List<Task> tasks) {
+        int listCount = 1;
+        System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : tasks) {
+            if (task.toString().contains(command.split(" ")[1])) {
+                System.out.println("  " + listCount + "." + task.toString());
+                listCount++;
+            }
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    }
+
 }
