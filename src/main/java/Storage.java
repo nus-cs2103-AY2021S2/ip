@@ -15,6 +15,12 @@ public class Storage {
         return this.file.exists();
     }
 
+    /**
+     * Takes in an empty TaskList and adds the stored tasks into it.
+     *
+     * @param tasklist
+     * @throws FileNotFoundException
+     */
     public void initialise(TaskList tasklist) throws FileNotFoundException {
         if(isSavedHistory()) {
             Scanner s = new Scanner(this.file);
@@ -39,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Takes a TaskList that has been added with various Task to store those tasks
+     *
+     * @param tasklist
+     * @throws IOException
+     */
     public void saveHistory(TaskList tasklist) throws IOException {
         FileWriter fw = new FileWriter("PreviousTaskList.txt");
         try {

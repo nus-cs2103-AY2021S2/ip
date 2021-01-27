@@ -25,6 +25,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Function to call when we want to end main, to store the TaskList into storage
+     * 
+     * @throws IOException
+     */
     static void byeCommand() throws IOException {
         storage.saveHistory(list);
     }

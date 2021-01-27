@@ -15,11 +15,22 @@ class Event extends Task {
         this.date = date;
     }
 
+        /**
+     * returns a Event if the line stored in Storage of a Task is of type Event
+     *
+     * @param input
+     * @return Event created with reading from Storage file
+     */
     public static Event readTask(String input) {
         String[] list = input.split(", ", 4);
         return new Event(list[2], Boolean.parseBoolean(list[1]), LocalDateTime.parse(list[3]));
     }
 
+    /** 
+     * Gives a format of saving a Event into storage
+     * 
+     * @return String formatted to save a Event into storage
+     */
     public String toCommand() {
         return this.getClass().toString() + ", " + this.getCompleted() + ", " + this.task + ", " + this.date;
     }
