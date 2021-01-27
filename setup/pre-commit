@@ -2,10 +2,11 @@
 # From gist at https://gist.github.com/chadmaughan/5889802
 
 # stash any unstaged changes (but not when merging)
-isMerging=1
+isMerging=0
 if git merge HEAD --quiet; then
     git stash -q --keep-index
-    isMerging=0
+else
+    isMerging=1
 fi
 
 if ! ./gradlew check; then
@@ -20,9 +21,10 @@ fi
 RESULT=$?
 
 # unstash the unstashed changes
-if ! $isMerging; then
+if [ "$isMerging" -eq 0 ]; then
     git stash pop -q
 fi
 
 # return the './gradlew test' exit code
 exit $RESULT
+
