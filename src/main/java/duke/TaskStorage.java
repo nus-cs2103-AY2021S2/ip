@@ -14,9 +14,18 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * Class representing a storage for the user's tasks.
+ */
 public class TaskStorage {
     private File file;
     private Ui ui;
+
+    /**
+     * Constructor for TaskStorage.
+     *
+     * @param path Path of the file to read from or write to.
+     */
     public TaskStorage(String path) {
         try {
             ui = new Ui();
@@ -28,6 +37,11 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Writes data of existing tasks to a file.
+     *
+     * @param tasks Existing user's tasks.
+     */
     public void storeData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(file);
@@ -60,6 +74,11 @@ public class TaskStorage {
         }
     }
 
+    /**
+     * Retrieve data of tasks from file and construct a list of tasks previously added by the user.
+     *
+     * @return A list of tasks retrieved from the storage.
+     */
     public TaskList retrieveData() {
         List<Task> retrievedTasks = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

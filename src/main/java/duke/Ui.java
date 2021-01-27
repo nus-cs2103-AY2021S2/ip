@@ -5,20 +5,32 @@ import duke.task.Task;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * Class containing methods that interacts with the user.
+ */
 public class Ui {
     private Scanner sc;
 
+    /**
+     * Constructor of Ui.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads a line of user input and returns it.
+     *
+     * @return String of user input.
+     */
     public String readInput() {
         return sc.nextLine();
     }
 
     /**
-     * Print message to user.
-     * @param message Welcome/Goodbye message or a description of the task added.
+     * Formats and prints message to user.
+     *
+     * @param message Message to be printed.
      */
 
     public void print(String message) {
@@ -28,8 +40,9 @@ public class Ui {
     }
 
     /**
-     * Print all tasks.
-     * @param tasks A list of tasks entered by the user.
+     * Formats and prints all tasks.
+     * 
+     * @param tasks A list of user's tasks.
      */
 
     public void print(TaskList tasks) {
