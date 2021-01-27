@@ -18,10 +18,19 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class representing a Parser.
+ */
 public class Parser {
     private static final Ui ui = new Ui();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
+    /**
+     * Parses user input and returns a Command corresponding to user input.
+     * @param userInput The input of the user.
+     * @param tasks List of tasks.
+     * @return An executable command.
+     */
     public static Command parse(String userInput, TaskList tasks) {
         String[] split = userInput.split("\\s+");
         String command = split[0];
@@ -72,18 +81,36 @@ public class Parser {
         return res;
     }
 
+    /**
+     * Checks whether the user has entered a description for the task to be added.
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @throws DukeDescriptionException when user has not entered a description.
+     */
     private static void checkDescription(String[] split) throws DukeDescriptionException {
         if (split.length == 1) {
             throw new DukeDescriptionException("You have not entered a description!");
         }
     }
 
+    /**
+     * Checks whether the user has entered a date and time.
+     * @param details Pair of substrings obtained from removing "/by" or "/at" from user input.
+     * @throws DukeDateTimeException When user has not entered a date and time.
+     */
     private static void checkDateTime(String[] details) throws DukeDateTimeException {
         if (details.length < 2 || details[1].isBlank()) {
             throw new DukeDateTimeException("You have not entered a date and time!");
         }
     }
 
+    /**
+     * Checks whether the user has entered a valid task index.
+     * @param split Array of substrings obtained from removing blank spaces from user input.
+     * @param tasks List of tasks.
+     * @return Task index entered by user if it is valid.
+     * @throws DukeArgumentException When user enters a non-integer, an out of bounds index or if user
+     * has not entered any index.
+     */
     private static int checkArgument(String[] split, TaskList tasks) throws DukeArgumentException {
         if (split.length > 2) {
             throw new DukeArgumentException("Please enter a numerical value for the task index!");
