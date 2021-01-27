@@ -24,7 +24,7 @@ public class Ui {
         String userInput = in.nextLine();
         return userInput;
     }
-    
+
     public void printDivider() {
         out.println(DIVIDER);
     }
