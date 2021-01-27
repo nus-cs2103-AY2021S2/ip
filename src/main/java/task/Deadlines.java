@@ -42,7 +42,11 @@ public class Deadlines extends Task {
             return String.format("%s (by: %s)", this.description, this.time.format(formatter));
         }
     }
-
+    /**
+     * Converts the object into a String representation for storage
+     *
+     * @return  String represtentation
+     */
     @Override
     public String tokenize() {
 

@@ -31,7 +31,11 @@ public class Events extends Task {
             return String.format("%s (at: %s)", this.description, this.at);
         }
     }
-
+    /**
+     * Converts the object into a String representation for storage
+     *
+     * @return  String represtentation
+     */
     @Override
     public String tokenize() {
         String isDoneString = isDone? "1" : "0";
