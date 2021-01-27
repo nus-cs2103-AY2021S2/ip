@@ -9,6 +9,9 @@ import duke.task.Todo;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke is a basic to-do list application.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -26,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The driver method to run a created Duke object that responds to user input.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -41,6 +47,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method which initializes and runs Duke.
+     * @param args Unused.
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

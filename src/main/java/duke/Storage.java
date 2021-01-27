@@ -11,13 +11,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class handles any operations by Duke that involves writing or reading from a file.
+ */
 public class Storage {
     public String filePath;
     
     Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
+    /**
+     * Appends a Duke readable String representation of a Task to the end of the file designated by filePath.
+     * @param task the Task to be added.
+     */
     public void addToFile(Task task) {
         File save = new File(this.filePath);
         FileWriter fw = null;
@@ -30,6 +37,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a Task specified by its index (line number) from the file designated by filePath.
+     * @param index the index of the Task to be deleted.
+     */
     public void deleteFromFile(int index) {
         File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
@@ -59,6 +70,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Marks a Task specified by its index (line number) as done from the file designated by filePath.
+     * @param index the index of the Task to be marked as done.
+     */
     public void markDoneInFile(int index) {
         File save = new File(this.filePath);
         File temp = new File("./data/temp.txt");
@@ -88,10 +103,17 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the current Tasks from the file specified by filePath to Duke.
+     * If the file does not exist it is created.
+     * @param list The List for the Tasks to be stored in.
+     * @throws IOException
+     */
     public void loadData(List list) throws IOException {
-        File directory = new File("data");
         File save = new File(this.filePath);
-        directory.mkdir();
+        if (save.getParentFile() != null) {
+            save.getParentFile().mkdirs();
+        }
         save.createNewFile();
         Scanner sc = new Scanner(save);
         while (sc.hasNext()) {
