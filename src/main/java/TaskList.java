@@ -19,7 +19,8 @@ public class TaskList {
 
     public void listing() {
         for (int i = 1; i < tasks.size() + 1; i++) {
-            Ui.print(Aligner.align(i + "." + tasks.get(i - 1).toString()));
+            Ui.print(
+                    Aligner.align(i + "." + tasks.get(i - 1).toString()));
         }
     }
 
@@ -48,8 +49,9 @@ public class TaskList {
             String dateAndTime = fullCommand.substring(indexOfDate + 4);
             String date = dateAndTime.split(" ")[0];
             String time = dateAndTime.split(" ")[1];
-            Deadline newDeadline = new Deadline(fullCommand.substring(9, indexOfDate), LocalDate.parse(date),
-                    LocalTime.parse(time, formatter));
+            Deadline newDeadline = new Deadline(fullCommand.substring(9, indexOfDate),
+                    LocalDate.parse(date),
+                            LocalTime.parse(time, formatter));
             tasks.add(newDeadline);
             this.size++;
             return newDeadline.toString();
@@ -58,8 +60,12 @@ public class TaskList {
 
             String dateAndTime = fullCommand.substring(indexOfDate + 4);
             String date = dateAndTime.split(" ")[0];
-            String startTime = dateAndTime.split(" ")[1].split("-")[0];
-            String endTime = dateAndTime.split(" ")[1].split("-")[1];
+            String startTime = dateAndTime
+                                    .split(" ")[1]
+                                            .split("-")[0];
+            String endTime = dateAndTime
+                                    .split(" ")[1]
+                                            .split("-")[1];
             Event newEvent = new Event(fullCommand.substring(6, indexOfDate), LocalDate.parse(date),
                     LocalTime.parse(startTime, formatter), LocalTime.parse(endTime, formatter));
             tasks.add(newEvent);

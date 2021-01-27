@@ -34,10 +34,15 @@ public class FileHandler {
         } else if (action.equals("E")) {
             String dateAndTime = inputs[3];
             String date = dateAndTime.split(" ")[0];
-            String startTime = dateAndTime.split(" ")[1].split("-")[0];
-            String endTime = dateAndTime.split(" ")[1].split("-")[1];
+            String startTime = dateAndTime
+                                    .split(" ")[1]
+                                            .split("-")[0];
+            String endTime = dateAndTime
+                                    .split(" ")[1]
+                                            .split("-")[1];
             Event newEvent = new Event(inputs[2], LocalDate.parse(date),
-                    LocalTime.parse(startTime, formatter), LocalTime.parse(endTime, formatter));
+                    LocalTime.parse(startTime, formatter),
+                            LocalTime.parse(endTime, formatter));
 
             if (Integer.parseInt(inputs[1]) == 1) {
                 newEvent.markAsDone();

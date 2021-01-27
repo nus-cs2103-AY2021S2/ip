@@ -11,7 +11,8 @@ public class ListCommand extends Command {
         if (inputs.length == 0) {
             throw new DukeException("OOPS! Please enter a command or say bye so I can go back to sleep!");
         }
-        Ui.print(Aligner.align("Here are the tasks in your list:"));
+        Ui.print(
+                Aligner.align("Here are the tasks in your list:"));
         tasks.listing();
         Ui.printLine();
     }

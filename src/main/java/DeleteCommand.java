@@ -8,9 +8,14 @@ public class DeleteCommand extends Command {
         Ui.printLine();
         int taskNo = Integer.parseInt(String.valueOf(fullCommand.charAt(7))) - 1;
         String toPrint = tasks.remove(taskNo);
-        Ui.print(Aligner.align("Alright! I've removed this task:"));
-        Ui.print(Aligner.align(toPrint));
-        Ui.print(Aligner.align("Now you have a whopping " + tasks.size() + " task(s) in the list."));
+        Ui.print(
+                Aligner.align("Alright! I've removed this task:"));
+        Ui.print(
+                Aligner.align(toPrint));
+        Ui.print(
+                Aligner.align("Now you have a whopping "
+                        + tasks.size()
+                                + " task(s) in the list."));
         Ui.printLine();
     }
 }

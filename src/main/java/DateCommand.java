@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DateCommand extends Command {
@@ -17,7 +16,9 @@ public class DateCommand extends Command {
         LocalDate d = LocalDate.parse(inputs[1]);
         List<Task> toPrint = tasks.print(d);
         for (int i = 1; i < toPrint.size() + 1; i++) {
-            Ui.print(Aligner.align(i + "." + toPrint.get(i - 1).toString()));
+            Ui.print(
+                    Aligner.align(i + "."
+                            + toPrint.get(i - 1).toString()));
         }
         Ui.printLine();
     }
