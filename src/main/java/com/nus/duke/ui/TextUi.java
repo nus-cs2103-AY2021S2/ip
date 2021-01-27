@@ -7,7 +7,7 @@ public class TextUi {
 
     public static final int INDEX_OFFSET = 1;
     /**
-     * System-dependent line separator
+     * System-dependent line separator.
      */
     private static final String LS = System.lineSeparator();
     private static final String DIVIDER = "===================================================";

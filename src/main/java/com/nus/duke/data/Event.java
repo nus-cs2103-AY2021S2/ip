@@ -1,7 +1,6 @@
 package com.nus.duke.data;
 
 import com.nus.duke.parser.DateParser;
-
 import java.time.LocalDateTime;
 
 /**

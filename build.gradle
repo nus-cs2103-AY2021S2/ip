@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
@@ -11,12 +12,9 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main']
-        }
-    }
+checkstyle {
+    toolVersion '8.39'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
 }
 
 application {

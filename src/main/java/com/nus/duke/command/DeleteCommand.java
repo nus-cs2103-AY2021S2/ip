@@ -10,7 +10,8 @@ public class DeleteCommand extends Command {
     public static final String USAGE_MESSAGE = COMMAND + ": Delete a task\n"
             + "Usage: delete [index]\n"
             + "Example: delete 3";
-    public static final String SUCCESS_MESSAGE_TEMPLATE = "Noted. I have removed this task:\n%s\nYou now have %d tasks in the list.";
+    public static final String SUCCESS_MESSAGE_TEMPLATE = "Noted. I have removed this task:\n%s"
+            + "\nYou now have %d tasks in the list.";
     public static final String INDEX_ERROR_MESSAGE_TEMPLATE = "Invalid index number %d";
 
     private final int index;

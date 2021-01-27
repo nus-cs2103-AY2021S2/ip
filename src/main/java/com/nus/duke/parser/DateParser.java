@@ -1,7 +1,6 @@
 package com.nus.duke.parser;
 
 import com.nus.duke.common.DukeDateParserException;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,6 +38,7 @@ public class DateParser {
             dateComp = DateParser.parseDate(userDate);
             timeComp = DateParser.parseTime(userDate);
         } catch (DukeDateParserException ignored) {
+            // Ignored because we want to fallback to alternative parsing
         }
         if (dateComp == null && timeComp == null) {
             throw new DukeDateParserException("Improper date format");
@@ -72,6 +72,7 @@ public class DateParser {
             // Check if there is a date component
             dateComp = DateParser.parseDate(userDate);
         } catch (DukeDateParserException ignored) {
+            // Ignored because we want to fallback to alternative parsing
         }
 
         if (dateComp == null) {

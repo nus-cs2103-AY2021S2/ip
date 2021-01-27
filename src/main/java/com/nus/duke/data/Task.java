@@ -20,7 +20,7 @@ public abstract class Task implements Serializable, Searchable {
     /**
      * Creates a new task with the provided description.
      *
-     * @param description
+     * @param description Task description
      */
     public Task(String description) {
         this.description = description;
@@ -28,7 +28,7 @@ public abstract class Task implements Serializable, Searchable {
     }
 
     /**
-     * Mark the task as completed
+     * Mark the task as completed.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -38,10 +38,10 @@ public abstract class Task implements Serializable, Searchable {
      * Returns the status icon for the task. If done, returns a tick (unicode character), else it
      * will return space
      *
-     * @return
+     * @return Status icon for task
      */
     private String getStatusIcon() {
-        return (isDone ? "\u2713" : " "); //return tick or empty
+        return (isDone ? "\u2713" : " "); // return tick or empty
     }
 
     @Override

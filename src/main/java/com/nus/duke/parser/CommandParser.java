@@ -1,5 +1,8 @@
 package com.nus.duke.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.nus.duke.command.Command;
 import com.nus.duke.command.DeadlineCommand;
 import com.nus.duke.command.DeleteCommand;
@@ -11,8 +14,6 @@ import com.nus.duke.command.HelpCommand;
 import com.nus.duke.command.IncorrectCommand;
 import com.nus.duke.command.ListCommand;
 import com.nus.duke.command.TodoCommand;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CommandParser {
 
