@@ -5,5 +5,5 @@ import duke.TaskStorage;
 import duke.Ui;
 
 public abstract class Command {
-    public abstract void execute(TaskList tasks, Ui ui, TaskStorage storage);
+    public abstract boolean execute(TaskList tasks, Ui ui, TaskStorage storage);
 }

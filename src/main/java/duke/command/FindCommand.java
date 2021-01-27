@@ -15,7 +15,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList tasks, Ui ui, TaskStorage storage) {
+    public boolean execute(TaskList tasks, Ui ui, TaskStorage storage) {
         List<Task> temp = new ArrayList<>();
         TaskList allTasks = storage.retrieveData();
         for (int i = 0; i < allTasks.getSize(); i++) {
@@ -31,5 +31,6 @@ public class FindCommand extends Command {
             TaskList matchingTasks = new TaskList(temp);
             ui.print(matchingTasks);
         }
+        return true;
     }
 }

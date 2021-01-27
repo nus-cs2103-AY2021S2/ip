@@ -20,7 +20,7 @@ public class TaskList {
         this.ui = new Ui();
     }
 
-    public ListIterator<Task> listIterator() {
+    public ListIterator<Task> getIterator() {
         return this.tasks.listIterator();
     }
 
@@ -48,7 +48,7 @@ public class TaskList {
 
     public Task deleteTask(int taskIndex) {
         Task toRemove = tasks.get(taskIndex);
-        toRemove.markIncomplete();
+        toRemove.setNotDone();
         tasks.remove(taskIndex);
         return toRemove;
     }

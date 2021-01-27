@@ -6,26 +6,26 @@ public class Duke {
     private static TaskList tasks;
     private static TaskStorage storage;
     private static Ui ui;
-    public static boolean toExit;
+    private static boolean isActive;
 
 
     public Duke() {
         ui = new Ui();
         storage = new TaskStorage("data/tasks.txt");
         tasks = storage.retrieveData();
-        toExit = false;
+        isActive = true;
     }
 
     public void run() {
         ui.print("POWERED BY JARVIS\n\n\t  Hello! I'm Jarvis.\n\t  How may I help you?");
-        while (!toExit) {
+        while (isActive) {
             String userInput = ui.readInput();
             if (userInput.isBlank()) {
                 continue;
             }
             Command cmd = Parser.parse(userInput, tasks);
             if (cmd != null) {
-                cmd.execute(tasks, ui, storage);
+                isActive = cmd.execute(tasks, ui, storage);
             }
         }
     }
