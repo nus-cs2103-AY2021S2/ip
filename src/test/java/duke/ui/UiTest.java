@@ -10,30 +10,30 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
-    // Solution reused from https://www.baeldung.com/java-testing-system-out-println
+    // Ui testing adapted from https://www.baeldung.com/java-testing-system-out-println
     private final PrintStream stdout = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    
+
     @BeforeEach
     public void setUp() {
         // Reassign the standard output stream to a new PrintStream with a ByteArrayOutputStream
         // Any output will now be directed to this output stream
         System.setOut(new PrintStream(outputStreamCaptor));
     }
-    
+
     @AfterEach
     public void tearDown() {
         // Restore to original state by assigning output stream back to System.out
         System.setOut(stdout);
     }
-    
+
     @Test
     public void printDivider_whenInvoke_thenOutputCaptorSuccess() {
         new Ui().printDivider();
-        assertEquals("------------------------------------------------------------", 
+        assertEquals("------------------------------------------------------------",
                 outputStreamCaptor.toString().trim());
     }
-    
+
     @Test
     public void printGreeting_whenInvoke_thenOutputCaptorSuccess() {
         new Ui().printGreeting();
@@ -42,10 +42,10 @@ public class UiTest {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        assertEquals("Hello! I'm\n" + logo + "\nWhat can I do for you?", 
+        assertEquals("Hello! I'm\n" + logo + "\nWhat can I do for you?",
                 outputStreamCaptor.toString().trim());
     }
-    
+
     @Test
     public void printExitMessage_whenInvoke_thenOutputCaptorSuccess() {
         new Ui().printExitMessage();

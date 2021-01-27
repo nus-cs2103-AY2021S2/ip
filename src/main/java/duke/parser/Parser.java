@@ -12,10 +12,12 @@ import duke.commands.InvalidDescriptionException;
 import duke.commands.ListCommand;
 import duke.commands.NoDescriptionException;
 import duke.commands.ToDoCommand;
+
 import duke.utils.Formatter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,7 +104,6 @@ public class Parser {
         String userInputDateTime = deadlineInputArr[1].strip();
         LocalDateTime deadline = parseDateTime(userInputDateTime);
         return new DeadlineCommand(deadlineTaskName, deadline);
-
     }
 
     /**
@@ -115,8 +116,8 @@ public class Parser {
         try {
             return LocalDateTime.parse(dateString, Formatter.INPUT_DATE_FORMATTER);
         } catch (DateTimeParseException ex) {
-            throw new InvalidDescriptionException("Please enter a valid date and time for a deadline task " +
-                    "using this format:\ndeadline task_name /by dd/mm/yyyy HHHH");
+            throw new InvalidDescriptionException("Please enter a valid date and time for a deadline task "
+                    + "using this format:\ndeadline task_name /by dd/mm/yyyy HHHH");
         }
     }
 

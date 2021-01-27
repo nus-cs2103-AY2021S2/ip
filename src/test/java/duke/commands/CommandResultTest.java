@@ -22,9 +22,9 @@ public class CommandResultTest {
     public void getMessageForUser_nonEmptyMessage_success() {
         assertEquals("Working", new CommandResult("Working").getMessageForUser());
     }
-    
+
     @Test
-    public void getUpdatedTaskList_nullInput_success() {
+    public void getUpdatedTaskList_nullInput_nullReturned() {
         assertNull(new CommandResult("", null).getUpdatedTaskList());
     }
 
@@ -33,19 +33,19 @@ public class CommandResultTest {
         TaskListStub taskListStub = new TaskListStub();
         assertEquals(taskListStub, new CommandResult("", taskListStub).getUpdatedTaskList());
     }
-    
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("Message: completed");
-        
+
         assertTrue(commandResult.equals(new CommandResult("Message: completed")));
         assertTrue(commandResult.equals(new CommandResult("Message: completed", null)));
-        
+
         assertFalse(commandResult.equals(new CommandResult("Message: not completed")));
         assertFalse(commandResult.equals(new CommandResult("Message: completed", new TaskListStub())));
         assertFalse(commandResult.equals(1));
     }
-    
+
     class TaskListStub extends TaskList {
         private List<Task> taskList;
 

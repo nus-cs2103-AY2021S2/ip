@@ -5,13 +5,16 @@ import duke.tasks.EventTask;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDoTask;
+
 import duke.utils.Formatter;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
+
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,20 +100,26 @@ public class Storage {
      */
     public static Task convertStringToTask(String taskString) {
         Task task = null;
+
         String[] arr = taskString.split("\\s\\|\\s");
         String taskType = arr[0];
         String taskStatus = arr[1];
         String taskName = arr[2];
         boolean isTaskCompleted = taskStatus.equals("1");
-        if (taskType.equals(ToDoTask.IDENTIFIER)) {
+
+        switch (taskType) {
+        case ToDoTask.IDENTIFIER:
             task = new ToDoTask(taskName, isTaskCompleted);
-        } else if (taskType.equals(DeadlineTask.IDENTIFIER)) {
-            String taskDescription = arr[3];
-            LocalDateTime deadline = LocalDateTime.parse(taskDescription, Formatter.OUTPUT_DATE_FORMATTER);
+            break;
+        case DeadlineTask.IDENTIFIER:
+            String deadlineTaskDescription = arr[3];
+            LocalDateTime deadline = LocalDateTime.parse(deadlineTaskDescription, Formatter.OUTPUT_DATE_FORMATTER);
             task = new DeadlineTask(taskName, isTaskCompleted, deadline);
-        } else if (taskType.equals(EventTask.IDENTIFIER)) {
-            String taskDescription = arr[3];
-            task = new EventTask(taskName, isTaskCompleted, taskDescription);
+            break;
+        case EventTask.IDENTIFIER:
+            String eventTaskDescription = arr[3];
+            task = new EventTask(taskName, isTaskCompleted, eventTaskDescription);
+            break;
         }
         return task;
     }
@@ -139,11 +148,15 @@ public class Storage {
     public static String convertTaskToString(Task task) {
         // 
         StringBuilder encodedTaskString = new StringBuilder();
+
         encodedTaskString.append(task.getTaskType());
         encodedTaskString.append(" | ");
+
         encodedTaskString.append(task.isDone() ? "1" : "0");
         encodedTaskString.append(" | ");
+
         encodedTaskString.append(task.getName());
+
         if (task.getTaskType().equals("D")) {
             DeadlineTask deadlineTask = (DeadlineTask) task;
             encodedTaskString.append(" | ");

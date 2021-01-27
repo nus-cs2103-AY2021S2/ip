@@ -6,11 +6,15 @@ import duke.commands.CommandResult;
 import duke.commands.InvalidCommandException;
 import duke.commands.InvalidDescriptionException;
 import duke.commands.NoDescriptionException;
+
 import duke.parser.Parser;
+
 import duke.storage.InvalidStorageFilePathException;
 import duke.storage.Storage;
 import duke.storage.StorageException;
+
 import duke.tasks.TaskList;
+
 import duke.ui.Ui;
 
 import java.io.IOException;
@@ -53,9 +57,12 @@ public class Main {
      */
     private void initialize(String[] args) {
         try {
-            this.ui = new Ui();
-            this.storage = initializeStorage(args);
-            this.taskList = storage.loadTasks();
+            // Initialize the required components
+            ui = new Ui();
+            storage = initializeStorage(args);
+            taskList = storage.loadTasks();
+
+            // Print the welcome greeting 
             ui.printDivider();
             ui.printGreeting();
         } catch (InvalidStorageFilePathException ex) {
@@ -99,16 +106,25 @@ public class Main {
         Command command = null;
         do {
             try {
+                // Ask for user input
                 ui.printDivider();
                 String userInput = ui.getUserInput();
                 ui.printDivider();
+
+                // Parse the user input into an executable command
                 command = new Parser().parseCommand(userInput);
+
+                // Execute the command
                 CommandResult commandResult = executeCommand(command);
+
+                // Update the cached task list and save it to file
                 storage.saveTasksIfPresent(commandResult.getUpdatedTaskList());
                 updateTaskListIfPresent(commandResult.getUpdatedTaskList());
+
+                // Print the message for the user
                 ui.print(commandResult.getMessageForUser());
-            } catch (InvalidCommandException | StorageException | InvalidDescriptionException |
-                    NoDescriptionException ex) {
+            } catch (InvalidCommandException | StorageException | InvalidDescriptionException
+                    | NoDescriptionException ex) {
                 ui.print(ex.getMessage());
             }
         } while (!ByeCommand.isByeCommand(command));
@@ -133,5 +149,4 @@ public class Main {
             this.taskList = taskList;
         }
     }
-
 }
