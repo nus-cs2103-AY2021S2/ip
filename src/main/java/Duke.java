@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
+
 public class Duke {
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -74,7 +79,8 @@ public class Duke {
                 s = s.replaceAll("deadline ","");
                 String[] deadlineInfo = s.split(" /by ");
                 try {
-                    Deadline t = new Deadline(deadlineInfo[0],deadlineInfo[1]);
+                    LocalDate d1 = LocalDate.parse(deadlineInfo[1]);
+                    Deadline t = new Deadline(deadlineInfo[0],d1);
                     myList.add(t);
                     dukePrint("added new deadline: " + t);
                 }
@@ -85,7 +91,8 @@ public class Duke {
                 s = s.replaceAll("event ","");
                 String[] eventInfo = s.split(" /at ");
                 try {
-                    Event t = new Event(eventInfo[0],eventInfo[1]);
+                    LocalDate d1 = LocalDate.parse(eventInfo[1]);
+                    Event t = new Event(eventInfo[0],d1);
                     myList.add(t);
                     dukePrint("added new event: " + t);
                 }
