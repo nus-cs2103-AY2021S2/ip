@@ -40,6 +40,17 @@ public class Task implements Serializable {
         }
     }
     
+    /**
+     * Checks if the task name has given keyword
+     *
+     * @param keyword The keyword to be searched
+     * @return True if the task name has given keyword, False otherwise
+     */
+    
+    public boolean hasKeyword(String keyword) {
+        return name.contains(keyword);
+    }
+    
     @Override
     public String toString() {
         return this.getStatusIcon() + name;

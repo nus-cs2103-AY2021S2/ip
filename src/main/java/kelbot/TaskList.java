@@ -1,6 +1,7 @@
 package kelbot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -80,6 +81,23 @@ public class TaskList {
     public Task delete(int taskNumber) {
         Task taskToDelete = taskList.remove(taskNumber - 1);
         return taskToDelete;
+    }
+    
+    /**
+     * Searches through all the tasks to see which ones contains the given keyword
+     *
+     * @param keyword The keyword to be searched
+     * @return The task list that contains only the relevant tasks
+     */
+    
+    public ArrayList<Task> search(String keyword) {
+        ArrayList<Task>taskListToPrint = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.hasKeyword(keyword)) {
+                taskListToPrint.add(task);
+            }
+        }
+        return taskListToPrint;
     }
     
     @Override

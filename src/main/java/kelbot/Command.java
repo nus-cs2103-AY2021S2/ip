@@ -6,10 +6,12 @@ package kelbot;
 
 enum Command {
     BYE,
-    LIST,
-    TODO,
     DEADLINE,
-    EVENT,
+    DELETE,
     DONE,
-    DELETE
+    EVENT,
+    FIND,
+    LIST,
+    TODO
+
 }

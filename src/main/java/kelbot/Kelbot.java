@@ -37,8 +37,9 @@ public class Kelbot {
                 Parser parser = ui.takeInput();
                 
                 Command command = parser.getCommand();
-                String taskName = parser.getTaskName();
                 int taskNumber = parser.getTaskNumber();
+                String keyword = parser.getKeyword();
+                String taskName = parser.getTaskName();
                 LocalDate date = parser.getDate();
                 
                 if (command == Command.BYE) {
@@ -49,7 +50,7 @@ public class Kelbot {
                 } else if (command == Command.DONE || command == Command.DELETE) {
                     try {
                         if (taskNumber == 0) {
-                            throw new KelbotException("Which task did you finish?");
+                            throw new KelbotException("Which task are you referring to?");
                         } else if (command == Command.DONE) {
                             Task task = taskList.complete(taskNumber);
                             ui.printDone(task);
@@ -60,6 +61,17 @@ public class Kelbot {
                             } catch (IndexOutOfBoundsException e) {
                                 System.out.println("The list is empty");
                             }
+                        }
+                    } catch (KelbotException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command == Command.FIND) {
+                    try {
+                        if (keyword.equals("")) {
+                            throw new KelbotException("Keyword cannot be empty!");
+                        } else {
+                            TaskList taskListToPrint = new TaskList(taskList.search(keyword));
+                            ui.printRelevantTasks(taskListToPrint);
                         }
                     } catch (KelbotException e) {
                         System.out.println(e.getMessage());

@@ -6,8 +6,9 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     
     private Command command;
-    private String taskName = "";
     private int taskNumber = 0;
+    private String keyword = "";
+    private String taskName = "";
     private LocalDate date = null;
     
     /**
@@ -31,6 +32,11 @@ public class Parser {
             } else if (commands[0].equals("delete")) {
                 command = Command.DELETE;
                 taskNumber = Integer.parseInt(commands[1]);
+            } else if (commands[0].equals("find")) {
+                command = Command.FIND;
+                for (int i = 1; i < commands.length; i++) {
+                    keyword += " " + commands[i];
+                }
             } else if (commands[0].equals("todo")) {
                 command = Command.TODO;
                 for (int i = 1; i < commands.length; i++) {
@@ -88,6 +94,16 @@ public class Parser {
     
     public String getTaskName() {
         return taskName;
+    }
+
+    /**
+     * Gets Keyword
+     *
+     * @return the keyword read by this parser
+     */
+
+    public String getKeyword() {
+      return keyword;
     }
     
     /**
