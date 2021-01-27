@@ -1,6 +1,3 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,28 +15,28 @@ public class Duke {
     public static void runCommand(String command) throws InvalidCommandException{
         if (command.equals("list")) {
             TaskList.printList(tasks);
-        } else if (Parser.parsedCommand(command).equals("done")) {
+        } else if (Parser.parseCommand(command).equals("done")) {
             int index = Parser.parseDoneIndex(command);
             TaskList.markDone(index, tasks);
-        } else if (Parser.parsedCommand(command).equals("todo")) {
+        } else if (Parser.parseCommand(command).equals("todo")) {
             try {
                 TaskList.addTodo(command, tasks);
             } catch (InvalidTodoException e) {
                 Ui.printEmptyTodoMessage();
             }
-        } else if (Parser.parsedCommand(command).equals("deadline")) {
+        } else if (Parser.parseCommand(command).equals("deadline")) {
             try {
                 TaskList.addDeadline(command, tasks);
             } catch (InvalidDateTimeFormatException e) {
                 Ui.printInvalidDateFormatMessage();
             }
-        } else if (Parser.parsedCommand(command).equals("event")) {
+        } else if (Parser.parseCommand(command).equals("event")) {
             try {
                 TaskList.addEvent(command, tasks);
             } catch (InvalidDateTimeFormatException e) {
                 Ui.printInvalidDateFormatMessage();
             }
-        } else if (Parser.parsedCommand(command).equals("delete")) {
+        } else if (Parser.parseCommand(command).equals("delete")) {
             TaskList.deleteTask(command, tasks);
         } else {
             throw new InvalidCommandException();

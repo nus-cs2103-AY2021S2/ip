@@ -9,6 +9,12 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
     }
+
+    /**
+     * Formats string to be stored.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String getSaveString() {
         return "D" + " | " + (isDone ? "1" : "0")

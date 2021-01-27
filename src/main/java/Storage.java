@@ -44,6 +44,12 @@ public class Storage {
 
     }
 
+    /**
+     * Reads the data file and creates tasks.
+     *
+     * @return ArrayList consisting of all saved tasks.
+     * @throws UnableToLoadDataException If unable to load data from the file.
+     */
     public static ArrayList<Task> getDataFromFile() throws UnableToLoadDataException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -80,6 +86,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks input by the user on the data file.
+     *
+     * @param tasks Tasks to be saved on the file.
+     * @throws UnableToSaveDataException If unable to save tasks to the file.
+     */
     public static void saveDataToFile(List<Task> tasks) throws UnableToSaveDataException{
         try {
             BufferedWriter writer = Files.newBufferedWriter(fileLocation, StandardCharsets.UTF_8);
@@ -94,6 +106,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList containing all the tasks retrieved from storage.
+     * Creates data file if it doesn't exist.
+     *
+     * @return ArrayList of loaded tasks.
+     */
     public static ArrayList<Task> getData() {
         boolean directoryExists = checkForDirectory();
         if(!directoryExists) {

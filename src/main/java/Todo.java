@@ -4,6 +4,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Formats string to be stored.
+     *
+     * @return Formatted String.
+     */
     @Override
     public String getSaveString() {
         return "T" + " | " + (isDone ? "1" : "0") + " | " + this.description;
