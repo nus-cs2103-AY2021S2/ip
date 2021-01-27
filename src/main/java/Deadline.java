@@ -23,19 +23,31 @@ public class Deadline extends Task{
         this.time = time;
     }
 
+    /**
+     * Date Getter.
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Date Getter.
+     */
     public LocalTime getTime() {
         return this.time;
     }
 
+    /**
+     * Print the new format of date and time.
+     */
     public String printDateTime() {
         ZonedDateTime zonedDateTime = ZonedDateTime.of(this.date, this.time, ZoneId.of("Asia/Singapore"));
         return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).format(zonedDateTime);
     }
 
+    /**
+     * Return a new Deadline object after Task is executed.
+     */
     @Override
     public Task doTask() {
         return new Deadline(this.job, true, this.date, this.time);

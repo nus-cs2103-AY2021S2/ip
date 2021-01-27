@@ -5,6 +5,10 @@ import java.time.LocalTime;
 public class Parser {
     private static final String splitString = "p@nt3k";
 
+    /**
+     * Parse list of strings and convert it into list of tasks to get the TaskList from previous save.
+     * @param listOfString List of String to be parsed
+     */
     public static List<Task> parseResult(List<String> listOfString) {
         List<Task> lst = new ArrayList<>();
         for (String str : listOfString) {
@@ -30,6 +34,10 @@ public class Parser {
         return lst;
     }
 
+    /**
+     * Convert the current TaskList into String to be saved locally.
+     * @param taskManager TaskList to be converted
+     */
     public static String convertTasksToString(TaskList taskManager) {
         List<String> lst = new ArrayList<>();
         for (int i=0; i < taskManager.size(); i++) {

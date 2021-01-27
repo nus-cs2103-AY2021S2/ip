@@ -15,6 +15,10 @@ public class Storage {
         this.fileName = fileName;
     }
 
+    /**
+     * create directory locally if it doesn't exist yet
+     * @param filePath The name of the folder
+     */
     private String makeDirectory(String filePath) {
         File file = new File(filePath);
         Boolean bool = file.mkdirs();
@@ -22,6 +26,9 @@ public class Storage {
         return filePath;
     }
 
+    /**
+     * read previous save of List<Task> if it exist.
+     */
     public List<Task> readPreviousFile() {
         List<Task> listOfTasks = new ArrayList<>();
         try {
@@ -32,6 +39,10 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * save current TaskList locally
+     * @param taskList The task list we would like to save
+     */
     public void saveTasks(TaskList taskList) {
         String taskToSave = Parser.convertTasksToString(taskList);
         try {
@@ -43,6 +54,9 @@ public class Storage {
         }
     }
 
+    /**
+     * scan the .txt file that we have saved previously. helper function of readPreviousFile() function
+     */
     private List<String> scanFile() throws FileNotFoundException {
         List<String> fileInString = new ArrayList<>();
         File file = new File(this.filePath + this.fileName);

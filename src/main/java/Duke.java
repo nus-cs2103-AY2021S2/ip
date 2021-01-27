@@ -1,8 +1,7 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 public class Duke {
     private static String FILE_PATH = "./data/";
     private static String FILE_NAME = "history.txt";
@@ -21,6 +20,9 @@ public class Duke {
         taskList = new TaskList(storage.readPreviousFile());
     }
 
+    /**
+     * Process command given by user.
+     */
     private void doCommand() {
         Scanner sc = new Scanner(System.in);
         ui.printGreetings();
@@ -44,6 +46,9 @@ public class Duke {
                 int index = Integer.parseInt(tmp[1]);
                 doDelete(index);
             }
+            else if (command.equals("find")) {
+                doFind(word);
+            }
             else {
                 doTask(word);
             }
@@ -51,6 +56,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Process command list given by user.
+     */
     private void doList() {
         for (int i=0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -58,6 +66,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process command done given by user.
+     * @param index Index of task from TaskList
+     */
     private void doDone(int index) {
         try {
             Task currTask = taskList.get(index - 1);
@@ -70,6 +82,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process command delete given by user.
+     * @param index Index of task from TaskList
+     */
     private void doDelete(int index) {
         try {
             Task currTask = taskList.get(index - 1);
@@ -81,6 +97,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process task type command given by user.
+     * @param word the whole sentences entered by the user
+     */
     private void doTask(String word) {
         try {
             String[] tmp = word.split(" ");
@@ -103,6 +123,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process task command todo given by user.
+     * @param word the whole sentences entered by the user
+     */
     private void doToDo(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(5);
@@ -114,6 +138,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process task command deadline given by user.
+     * @param word the whole sentences entered by the user
+     */
     private void doDeadline(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(9);
@@ -132,6 +160,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process task command event given by user.
+     * @param word the whole sentences entered by the user
+     */
     private void doEvent(String word) throws NoMeaningException {
         try {
             String realWord = word.substring(6);
@@ -150,6 +182,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process task typed command after all the above functions.
+     * @param task Task to print
+     */
     private void doTaskFinally(Task task) {
         ui.printTaskFinally(task, taskList.size());
     }
