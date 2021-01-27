@@ -44,7 +44,7 @@ public class Duke {
             try {
                 Command command = Parser.parse(line);
                 command.execute();
-                isActive = !command.isToExit();
+                isActive = !command.willExit();
             } catch(DukeException e) {
                 ui.printError(e.getMessage());
             }

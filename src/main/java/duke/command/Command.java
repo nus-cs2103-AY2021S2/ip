@@ -34,7 +34,7 @@ public abstract class Command {
      *
      * @return A boolean whether this command terminates the chat bot
      */
-    public boolean isToExit() {
+    public boolean willExit() {
         return false;
     }
 }

@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
      * @return True boolean to indicate that the bot is exiting
      */
     @Override
-    public boolean isToExit() {
+    public boolean willExit() {
         return true;
     }
 }
