@@ -15,6 +15,7 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         Duke iceBear = new Duke();
         while (true) {
+            Parser parser = new Parser();
             String nextCommand = scan.nextLine();
             if (nextCommand.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -22,6 +23,12 @@ public class Duke {
             } else {
                 iceBear.performCommand(nextCommand);
             }
+        }
+    }
+
+    public static void printString(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            System.out.println(input[i]);
         }
     }
 
