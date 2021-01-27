@@ -7,10 +7,23 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * A class that is responsible for the interactions with a text file (i.e
+ * writing to the file and reading from the file)
+ */
+
 public class FileHandler {
 
     public FileHandler() { }
 
+    /**
+     * A method that reads a command containing a task and stores it in a task list
+     * @param command a <code>String</code> specifying a task to be stored
+     * @param tasks a <code>TaskList</code>
+     * @return a <code>TaskList</code> with the new task added
+     * @throws DukeException if the command is not "T" (for ToDo),
+     * "D" (for Deadline) or "E" (for Event)
+     */
     public TaskList handleFileCommand(String command, TaskList tasks) throws DukeException { //T # 1 # read book # June 6th
         String[] inputs = command.split(" # ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
@@ -49,6 +62,16 @@ public class FileHandler {
         return tasks;
     }
 
+    /**
+     * A method that reads from a text file and stores all the tasks specified within
+     * into a task list
+     * @param tasks a <code>TaskList</code> to store the tasks into
+     * @return a <code>TaskList</code> containing all the new tasks
+     * read from the file
+     * @throws IOException
+     * @throws DukeException
+     */
+
     public TaskList readFromFile(TaskList tasks) throws IOException, DukeException {
         File directory = new File("data");
         if (!directory.exists()) { //creating directory if it doesn't exist
@@ -69,6 +92,13 @@ public class FileHandler {
         }
         return tasks;
     }
+
+    /**
+     * A method to write all the tasks contained within the task list into a text file
+     * @param list the <code>TaskList</code> that contains the tasks to be written
+     *             into the text file
+     * @throws IOException
+     */
 
     public void writeToFile(TaskList list) throws IOException {
         //before writing to it, clear file to make sure it is empty and no content is leftover from last run

@@ -6,39 +6,54 @@
      What have you awoken MouMou for?
      ____________________________________________________________________
      ____________________________________________________________________
-                       Sure! I've added this task:                       
+                       Sure! I've added this todo:                       
                        [T][ ] get a goldendoodle                        
              Now you have a whopping 1 task(s) in the list.             
      ____________________________________________________________________
      ____________________________________________________________________
-                       Sure! I've added this task:                       
-           [D][ ] get present for ethel (by: Sunday 26th Jan)           
+                     Sure! I've added this deadline:                       
+           [D][ ] get present for ethel (by: Jan 26 2021 02:00PM)           
              Now you have a whopping 2 task(s) in the list.             
      ____________________________________________________________________
      ____________________________________________________________________
                     Here are the tasks in your list:                    
                       1.[T][ ] get a goldendoodle                       
-          2.[D][ ] get present for ethel (by: Sunday 26th Jan)          
+          2.[D][ ] get present for ethel (by: Jan 26 2021 02:00PM)          
      ____________________________________________________________________
      ____________________________________________________________________
-                       Sure! I've added this task:                       
-           [E][ ] ethel's birthday party (at: Sunday 8pm-12am)           
+                      Sure! I've added this event:                       
+           [E][ ] ethel's birthday party (at: Jan 26 2021 08:00PM-12:00AM)           
              Now you have a whopping 3 task(s) in the list.             
      ____________________________________________________________________
      ____________________________________________________________________
                 Good job! I've marked this task as done:                
-           [D][X] get present for ethel (by: Sunday 26th Jan)           
+           [D][X] get present for ethel (by: Jan 26 2021 02:00PM)           
      ____________________________________________________________________
      ____________________________________________________________________
                     Here are the tasks in your list:                    
                       1.[T][ ] get a goldendoodle                       
-          2.[D][X] get present for ethel (by: Sunday 26th Jan)          
-          3.[E][ ] ethel's birthday party (at: Sunday 8pm-12am)          
+          2.[D][X] get present for ethel (by: Jan 26 2021 02:00PM)          
+          3.[E][ ] ethel's birthday party (at: Jan 26 2021 08:00PM-12:00AM)          
      ____________________________________________________________________
      ____________________________________________________________________
-                       Sure! I've added this task:                       
+                       Sure! I've added this todo:                       
                          [T][ ] get a manicure                          
              Now you have a whopping 4 task(s) in the list.             
+     ____________________________________________________________________
+     ____________________________________________________________________
+        1.[D][X] get present for ethel (by: Jan 26 2021 02:00PM)
+    2.[E][ ] ethel's birthday party (at: Jan 26 2021 08:00PM-12:00AM)           
+     ____________________________________________________________________
+     ____________________________________________________________________
+                    Alright! I've removed this task:
+         [D][X] get present for ethel (by: Jan 26 2021 02:00PM)
+             Now you have a whopping 3 task(s) in the list.          
+     ____________________________________________________________________
+     ____________________________________________________________________
+                    Here are the tasks in your list:                    
+                      1.[T][ ] get a goldendoodle                                
+    2.[E][ ] ethel's birthday party (at: Jan 26 2021 08:00PM-12:00AM)
+                         3.[T][ ] get a manicure          
      ____________________________________________________________________
      ____________________________________________________________________
               Goodnight! MouMou will go back to sleep now.              

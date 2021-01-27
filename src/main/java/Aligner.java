@@ -1,6 +1,15 @@
+/**
+ * A class that is used to align text.
+ */
+
 public class Aligner {
     public Aligner() { }
 
+    /**
+     * Returns a string that is properly aligned.
+     * @param s the String that needs to be aligned
+     * @return an aligned String
+     */
     public static String align(String s) {
         int stringLength = s.length();
         int LINELENGTH = 73;
