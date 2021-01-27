@@ -10,6 +10,14 @@ class TaskList {
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+        File file = new File("./data/duke.txt");
+        try {
+            if (file.exists()) {
+                Storage.convert(file, this.taskList);
+            }
+        } catch (IOException exception) {
+            System.out.println(exception);
+        }
     }
 
     public void listTask() {
@@ -20,18 +28,9 @@ class TaskList {
         }
     }
 
-    public void doneTask(String index) throws DukeException {
-        if (index.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The index of the task is missing.");
-        }
-        int doneIndex;
-        try {
-            doneIndex = Integer.parseInt(index.substring(1));
-        } catch (NumberFormatException error) {
-            throw new DukeException("Index of task must be an integer");
-        }
-        if (this.taskList.size() >= doneIndex) {
-            Task currTask = this.taskList.get(doneIndex - 1);
+    public void doneTask(int index) throws DukeException {
+        if (this.taskList.size() >= index) {
+            Task currTask = this.taskList.get(index - 1);
             currTask.completeTask();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println("  " + currTask);

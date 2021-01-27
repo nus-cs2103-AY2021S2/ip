@@ -8,7 +8,7 @@ class Event extends Task {
         this.date = date;
     }
 
-    public Event(String eventInfo, LocalDate date, boolean isDone) throws DukeException {
+    public Event(String eventInfo, boolean isDone, LocalDate date) {
         super(eventInfo, isDone);
         this.date = date;
     }

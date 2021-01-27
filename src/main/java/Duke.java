@@ -9,36 +9,38 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Duke {
-    TaskList taskList;
-    Parser parser;
+    private TaskList taskList;
+    private Parser parser;
+    private Ui ui;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         Duke iceBear = new Duke();
-        iceBear.taskList.addToDo("kek");
-        iceBear.taskList.listTask();
-        /* while (true) {
-            Parser parser = new Parser();
+        while (true) {
             String nextCommand = scan.nextLine();
             if (nextCommand.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else {
-
+                   try {
+                       String[] processedText = iceBear.parser.processCommand(nextCommand);
+                       iceBear.process(processedText);
+                   } catch (DukeException exception) {
+                       System.out.println(exception);
+                   }
             }
-        } */
-    }
-
-    public static void printString(String[] input) {
-        for (int i = 0; i < input.length; i++) {
-            System.out.println(input[i]);
         }
     }
 
     public Duke() {
         this.taskList = new TaskList();
         this.parser = new Parser();
+        this.ui = new Ui();
         System.out.println("Hello! I'm Icebear");
         System.out.println("What can I do for you?");
+    }
+
+    public void process(String[] processedInput) {
+        this.ui.processCommand(processedInput, this.taskList);
     }
 }
