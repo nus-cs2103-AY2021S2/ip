@@ -7,9 +7,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String temp = String.format("[E]%s", super.toString());
-        if (temp.contains("/at")) {
-            temp = temp.replace("/at", "(at:") + ")";
-        }
-        return temp;
+        return formatString(temp, "/at");
     }
 }

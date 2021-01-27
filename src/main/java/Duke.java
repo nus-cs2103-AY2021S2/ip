@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +15,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
 
         String filePath = "duke.txt"; // File path to change
-        refreshFile(filePath); // Makes a new empty file
+        refreshFile(filePath); // Makes a new empty file or remakes a already existing file
 
         Scanner sc = new Scanner(System.in);
 

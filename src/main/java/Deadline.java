@@ -7,9 +7,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String temp = String.format("[D]%s", super.toString());
-        if (temp.contains("/by")) {
-            temp = temp.replace("/by", "(by:") + ")";
-        }
-        return temp;
+        return formatString(temp, "/by");
     }
 }
