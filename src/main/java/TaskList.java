@@ -5,8 +5,6 @@ import java.util.List;
  * Class that encapsulate, control, and evaluate a list of task.
  */
 public class TaskList {
-    static final String LINE_AFTER_COMMAND = "____________________________________________________________";
-
     private final List<Task> tasks;
 
     /**
@@ -36,7 +34,7 @@ public class TaskList {
             Ui.showMessage("There are no task in your list");
             return;
         }
-        System.out.println("Here are the tasks in your list:");
+        Ui.showMessageInALine("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
             Ui.showMessageInALine(String.valueOf(i + 1) + "." + this.tasks.get(i));
         }

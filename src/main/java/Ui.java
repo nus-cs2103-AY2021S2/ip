@@ -2,7 +2,8 @@
  * Class that control how Duke interacts with user.
  */
 public class Ui {
-    static final String LINE_AFTER_COMMAND = "____________________________________________________________";
+    static final String LINE_AFTER_COMMAND = "___________________________________" +
+            "_________________________";
 
     /**
      * Show a message added with a line
@@ -39,7 +40,8 @@ public class Ui {
      * Closing message when closing Duke
      */
     public static void doBye() {
-        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n" + LINE_AFTER_COMMAND + "\n");
+        System.out.println(LINE_AFTER_COMMAND + "\nBye. Hope to see you again soon!\n"
+                + LINE_AFTER_COMMAND + "\n");
     }
 
     /**

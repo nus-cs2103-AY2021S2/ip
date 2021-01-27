@@ -5,7 +5,7 @@
 
 public class Task {
     protected final String task;
-    protected final boolean done;
+    protected final boolean isDone;
 
     /**
      * Constructor of a Task object
@@ -13,17 +13,12 @@ public class Task {
      */
     Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
-    /**
-     * Constructor of a Task object
-     * @param task Task need to be done
-     * @param done State of the task
-     */
-    Task(String task, boolean done) {
+    Task(String task, boolean isDone) {
         this.task = task;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -39,7 +34,7 @@ public class Task {
      * @return String representation in txt files
      */
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return "1|" + this.task;
         }
         return "0|" + this.task;
@@ -52,7 +47,7 @@ public class Task {
     @Override
     public String toString() {
         String tick = " ";
-        if (this.done){
+        if (this.isDone){
             tick = "X";
         }
         return "[" + tick + "]" + " " + this.task;

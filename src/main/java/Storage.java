@@ -29,19 +29,20 @@ public class Storage {
      * @return Task corresponding to the type, bool, abd commands
      * @throws DukeExceptionCorruptedData The data format is incompatible
      */
-    private Task processData(String type, String bool, String[] commands) throws DukeExceptionCorruptedData {
+    private Task processData(String type, String bool, String[] commands)
+            throws DukeExceptionCorruptedData {
         if (type.equals("T")) {
             return bool.equals("1") ? new Todo(commands[0], true) : new Todo(commands[0]);
-        }
-        else if (type.equals("D")) {
+        } else if (type.equals("D")) {
             try {
-                return bool.equals("1") ? new Deadline(commands[0], commands[1], true) : new Deadline(commands[0], commands[1]);
+                return bool.equals("1") ? new Deadline(commands[0], commands[1], true)
+                        : new Deadline(commands[0], commands[1]);
             } catch (DukeExceptionDeadline e) {
                 throw new DukeExceptionCorruptedData("The deadline task in the txt file corrupted");
             }
-        }
-        else if (type.equals("E")) {
-            return bool.equals("1") ? new Event(commands[0], commands[1], true) : new Event(commands[0], commands[1]);
+        } else if (type.equals("E")) {
+            return bool.equals("1") ? new Event(commands[0], commands[1], true)
+                    : new Event(commands[0], commands[1]);
         }
         throw new DukeExceptionCorruptedData("The txt file is corrupted");
     }
@@ -63,8 +64,7 @@ public class Storage {
                 tasks.add(processData(commands[0], commands[1], Arrays.copyOfRange(commands, 2, 5)));
             }
             return tasks;
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             try {
                 file.createNewFile();
             } catch(IOException error) {

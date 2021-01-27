@@ -1,6 +1,7 @@
 import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import java.time.LocalDate;
 
 /**
  * Represents a Deadline task. Represented by the task, the LocalDate object of the deadline,
@@ -8,9 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Deadline extends Task {
-    private final LocalDate deadline;
-
     private static final String OUTPUT_DATE_FORMAT = "MMM dd yyyy";
+    private final LocalDate deadline;
 
     /**
      * Constructor of a Deadline object
@@ -20,12 +20,13 @@ public class Deadline extends Task {
      */
     Deadline(String task, String deadline) throws DukeExceptionDeadline {
         super(task);
-        try{
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
             this.deadline = LocalDate.parse(deadline, formatter);
         } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());
-            throw new DukeExceptionDeadline("Wrong format of date. The format should be yyyy-MM-dd");
+            throw new DukeExceptionDeadline("Wrong format of date." +
+                    " The format should be yyyy-MM-dd");
         }
     }
 
@@ -38,11 +39,12 @@ public class Deadline extends Task {
      */
     Deadline(String task, String deadline, boolean done) throws DukeExceptionDeadline {
         super(task, done);
-        try{
+        try {
             DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
             this.deadline = LocalDate.parse(deadline, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeExceptionDeadline("Wrong format of date. The format should be yyyy-mm-dd");
+            throw new DukeExceptionDeadline("Wrong format of date. " +
+                    "The format should be yyyy-mm-dd");
         }
     }
 
