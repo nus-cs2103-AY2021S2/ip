@@ -1,19 +1,19 @@
 ____________________________________________________________
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [T][✘] borrow book
 Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][✘] return book (by: Sunday)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][✘] project meeting (at: Mon 2-4pm)
 Now you have 3 tasks in the list.
 ____________________________________________________________
@@ -24,15 +24,15 @@ Here are the tasks in your list:
 3.[E][✘] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [T][✓] borrow book
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
-Nice! I've marked this task as done:
+Nice! I've marked this duke.task as done:
 [D][✓] return book (by: Sunday)
 ____________________________________________________________
 ____________________________________________________________
@@ -42,12 +42,12 @@ Here are the tasks in your list:
 3.[E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [D][✓] return book (by: Sunday)
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
-Noted. I've removed this task:
+Noted. I've removed this duke.task:
 [T][✓] borrow book
 Now you have 1 tasks in the list.
 ____________________________________________________________
@@ -56,13 +56,13 @@ Here are the tasks in your list:
 1.[E][✓] project meeting (at: Mon 2-4pm)
 ____________________________________________________________
 ____________________________________________________________
-exception.EmptyDescriptionException: OOPS!!! The description of a(n) todo cannot be empty.
+duke.exception.EmptyDescriptionException: OOPS!!! The description of a(n) todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-exception.EmptyDescriptionException: OOPS!!! The description of a(n) deadline cannot be empty.
+duke.exception.EmptyDescriptionException: OOPS!!! The description of a(n) deadline cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
-exception.WrongFormatException: OOPS!!! The description format is wrong
+duke.exception.WrongFormatException: OOPS!!! The description format is wrong
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!

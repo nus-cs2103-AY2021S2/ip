@@ -1,9 +1,9 @@
-package component;
+package duke.component;
 
-import task.Task;
-import task.ToDo;
-import task.Deadline;
-import task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 import java.io.*;
 import java.util.ArrayList;

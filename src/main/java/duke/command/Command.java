@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import component.TaskList;
-import component.Ui;
-import component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.component.Storage;
 
 public abstract class Command {
     public abstract void execute(TaskList taskList, Ui ui, Storage storage);

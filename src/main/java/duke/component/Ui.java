@@ -1,6 +1,6 @@
-package component;
+package duke.component;
 
-import task.Task;
+import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println(LINE);
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
         System.out.println(LINE);
     }
@@ -25,18 +25,18 @@ public class Ui {
     }
 
     public void showDone(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Nice! I've marked this duke.task as done:");
         System.out.println(t);
     }
 
     public void showDelete(Task t, TaskList tl) {
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("Noted. I've removed this duke.task:");
         System.out.println(t);
         System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
     }
 
     public void showAdd(Task t, TaskList tl) {
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this duke.task:");
         System.out.println(t);
         System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
     }

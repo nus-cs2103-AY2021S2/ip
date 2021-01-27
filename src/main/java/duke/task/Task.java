@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 public class Task {
     protected static String DATE_DISPLAY_FORMAT = "MMM d yyyy";

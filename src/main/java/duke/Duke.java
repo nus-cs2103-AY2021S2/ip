@@ -1,12 +1,14 @@
-import command.Command;
-import command.ExitCommand;
-import component.Parser;
-import component.Storage;
-import component.TaskList;
-import component.Ui;
-import exception.DukeException;
-import exception.EmptyDescriptionException;
-import exception.UnknownCommandException;
+package duke;
+
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.component.Parser;
+import duke.component.Storage;
+import duke.component.TaskList;
+import duke.component.Ui;
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.UnknownCommandException;
 
 import java.io.*;
 

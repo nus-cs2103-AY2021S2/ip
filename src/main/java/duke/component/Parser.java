@@ -1,13 +1,13 @@
-package component;
+package duke.component;
 
-import command.*;
+import duke.command.*;
 
-import exception.EmptyDescriptionException;
-import exception.UnknownCommandException;
-import exception.WrongFormatException;
-import task.ToDo;
-import task.Deadline;
-import task.Event;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.UnknownCommandException;
+import duke.exception.WrongFormatException;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Parser {
     public static Command parse(String command) throws UnknownCommandException, EmptyDescriptionException, WrongFormatException {
