@@ -16,49 +16,9 @@ public class Duke {
 
     public static DateTimeFormatter DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
-    public static void writeToFile(File file, ArrayList<Task> list) {
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list);
-            oos.close();
-            fos.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    public static ArrayList<Task> readFromFile(File file) {
-        try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            ArrayList<Task> result = (ArrayList<Task>) ois.readObject();
-            ois.close();
-            fis.close();
-            return result;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
     public static void main(String[] args) {
 
-        ArrayList<Task> list = new ArrayList<>();
-        File dir = new File("data");
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-        File data = new File(dir,"saved_tasks");
-        if (!data.exists()) {
-            try {
-                data.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            list = readFromFile(data);
-        }
+        ArrayList<Task> list = Storage.readFromFile();
 
         Scanner sc = new Scanner(System.in);
         Ui.greet();
@@ -81,7 +41,7 @@ public class Duke {
                     }
                     ToDo t = new ToDo(s.substring(5));
                     list.add(t);
-                    writeToFile(data, list);
+                    Storage.writeToFile(list);
                     Ui.taskAddConfirmation(t, list);
                     break;
                 case DEADLINE:
@@ -100,7 +60,7 @@ public class Duke {
                     }
                     Deadline d = new Deadline(arr2[0].substring(9), deadlineDate);
                     list.add(d);
-                    writeToFile(data, list);
+                    Storage.writeToFile(list);
                     Ui.taskAddConfirmation(d, list);
                     break;
                 case EVENT:
@@ -119,7 +79,7 @@ public class Duke {
                     }
                     Event e = new Event(arr3[0].substring(6), eventDate);
                     list.add(e);
-                    writeToFile(data, list);
+                    Storage.writeToFile(list);
                     Ui.taskAddConfirmation(e, list);
                     break;
                 case LIST:
@@ -136,7 +96,7 @@ public class Duke {
                         }
                         Task task = list.get(index - 1);
                         task.markAsDone();
-                        writeToFile(data, list);
+                        Storage.writeToFile(list);
                         Ui.taskDoneConfirmation(list, task);
                     } catch (NumberFormatException ex) {
                         throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
@@ -153,7 +113,7 @@ public class Duke {
                         }
                         Task task = list.get(index - 1);
                         list.remove(index - 1);
-                        writeToFile(data, list);
+                        Storage.writeToFile(list);
                         Ui.taskDeleteConfirmation(list, task);
                     } catch (NumberFormatException exception) {
                         throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
