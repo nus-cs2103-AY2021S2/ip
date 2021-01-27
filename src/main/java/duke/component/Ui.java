@@ -72,7 +72,6 @@ public class Ui {
         System.out.println(LINE);
     }
 
-<<<<<<< HEAD
     public void showNotFound() {
         System.out.println("Task not found!");
     }
