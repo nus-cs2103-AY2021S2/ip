@@ -46,8 +46,8 @@ public class DeadlineCommand extends Command {
                     "Command: deadline [description] /by [deadline]");
         }
 
-        String description = matcher.group(0);
-        LocalDateTime by = DateParser.parseDateTime(matcher.group(1));
+        String description = matcher.group(1);
+        LocalDateTime by = DateParser.parseDateTime(matcher.group(2));
 
         return new DeadlineCommand(description, by);
     }

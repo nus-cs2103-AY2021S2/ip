@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 public class CommandParser {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("(\\S+)\\W*(.*)");
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("\\W*(\\S+)\\W*(.*)");
 
     public static Command parse(String input) {
         Matcher matcher = COMMAND_FORMAT.matcher(input);
@@ -11,8 +11,8 @@ public class CommandParser {
             return new HelpCommand(true);
         }
 
-        String command = matcher.group(1);
-        String arguments = matcher.group(2);
+        String command = matcher.group(1).trim();
+        String arguments = matcher.group(2).trim();
 
         try {
             switch (command.toLowerCase()) {

@@ -46,8 +46,8 @@ public class EventCommand extends Command {
                     "Command: event [description] /at [datetime]");
         }
 
-        String description = matcher.group(0);
-        LocalDateTime at = DateParser.parseDateTime(matcher.group(1));
+        String description = matcher.group(1);
+        LocalDateTime at = DateParser.parseDateTime(matcher.group(2));
 
         return new EventCommand(description, at);
     }
