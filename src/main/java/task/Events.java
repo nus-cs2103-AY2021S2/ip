@@ -1,3 +1,5 @@
+package task;
+
 public class Events extends Task {
     private final String TYPE_ICON = "[E]";
     private final String ICON = "E";

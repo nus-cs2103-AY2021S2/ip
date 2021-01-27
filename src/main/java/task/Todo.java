@@ -1,4 +1,6 @@
-public class Todo extends Task{
+package task;
+
+public class Todo extends Task {
 
     private final String TYPE_ICON = "[T]";
     private final String ICON = "T";
@@ -26,5 +28,3 @@ public class Todo extends Task{
     }
 
 }
-
-
