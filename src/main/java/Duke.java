@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    public static final String line = "____________________________________________________________";
+    public static final String LINE = "____________________________________________________________";
     public static ArrayList<Task> list = new ArrayList<Task>();
 
     public static void main(String[] args) {
@@ -15,23 +15,23 @@ public class Duke {
         }
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
-            System.out.println(line);
+            System.out.println(LINE);
             try {
                 list(sc.nextLine());
             } catch (EmptyDescriptionException | UnknownCommandException | WrongFormatException | IOException e) {
                 System.out.println(e.toString());
             }
             finally {
-                System.out.println(line);
+                System.out.println(LINE);
             }
         }
     }
 
     public static void welcome() {
-        System.out.println(line);
+        System.out.println(LINE);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
-        System.out.println(line);
+        System.out.println(LINE);
     }
 
     public static void list(String msg) throws EmptyDescriptionException, UnknownCommandException, WrongFormatException, IOException {
@@ -169,12 +169,12 @@ public class Duke {
                 String isDone = t.getIsDone() ? "1" : "0";
                 if (t instanceof ToDo) {
                     line = "T|" + isDone + "|" + t.getName();
-                } else if (t instanceof Deadline){
+                } else if (t instanceof Deadline) {
                     Deadline dl = (Deadline) t;
-                    line = "D|" + isDone + "|" + dl.getName() + "|" + dl.getBy();
-                } else if (t instanceof Event){
+                    line = "D|" + isDone + "|" + dl.getName() + "|" + dl.getSaveBy();
+                } else if (t instanceof Event) {
                     Event e = (Event) t;
-                    line = "D|" + isDone + "|" + e.getName() + "|" + e.getAt();
+                    line = "D|" + isDone + "|" + e.getName() + "|" + e.getSaveAt();
                 }
                 bw.write(line);
                 bw.newLine();

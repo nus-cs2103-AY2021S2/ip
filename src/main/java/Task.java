@@ -1,4 +1,6 @@
 public class Task {
+    protected static String DATE_DISPLAY_FORMAT = "MMM d yyyy";
+    protected static String DATE_SAVE_FORMAT = "yyyy-MM-dd";
     private String name;
     private boolean isDone;
 
