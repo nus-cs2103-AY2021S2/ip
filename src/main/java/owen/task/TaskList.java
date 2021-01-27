@@ -16,6 +16,9 @@ public class TaskList {
 
     private final List<Task> taskList;
 
+    /**
+     * Creates empty task list.
+     */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
@@ -36,6 +39,7 @@ public class TaskList {
      * Adds a task to the task list.
      * @param task Task to add to the list.
      * @return Copy of the task list with the new task added.
+     * @throws OwenException Task could not be parsed.
      */
     public TaskList addTask(String task) throws OwenException {
         String[] taskSplit = task.split(" ", 2);
@@ -89,6 +93,7 @@ public class TaskList {
      * Marks the nth task as done.
      * @param taskNumber The number of the task to mark as done.
      * @return Copy of the task list with the nth task marked as done.
+     * @throws OwenException Task number does not exist.
      */
     public TaskList markAsDone(int taskNumber) throws OwenException {
         if (this.taskList.size() < taskNumber || taskNumber <= 0) {
@@ -105,6 +110,7 @@ public class TaskList {
      * Deletes the nth task from the task list.
      * @param taskNumber The number of the task to delete.
      * @return Copy of the task list with the nth task deleted.
+     * @throws OwenException Task number does not exist.
      */
     public TaskList deleteTask(int taskNumber) throws OwenException {
         if (this.taskList.size() < taskNumber || taskNumber <= 0) {
@@ -133,6 +139,7 @@ public class TaskList {
      * Deserialize Task and add it to TaskList.
      * @param taskString Task string to deserialize.
      * @return Updated TaskList with deserialized task added.
+     * @throws OwenException Task could not be deserialized.
      */
     public TaskList deserializeTask(String taskString) throws OwenException {
         List<Task> newTaskList = new ArrayList<>(this.taskList);

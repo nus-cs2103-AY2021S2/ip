@@ -6,6 +6,11 @@ import owen.OwenException;
  * Todo task without any date/time attached to it.
  */
 public class TodoTask extends Task {
+    /**
+     * Creates new todo task with arguments.
+     * @param taskArgs Arguments in the format: description.
+     * @throws OwenException Arguments could not be parsed.
+     */
     public TodoTask(String taskArgs) throws OwenException {
         super(taskArgs);
 
