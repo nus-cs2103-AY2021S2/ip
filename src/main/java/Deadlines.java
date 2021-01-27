@@ -1,11 +1,29 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadlines extends Task {
     private final String TYPE_ICON = "[D]";
+
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+
+    private LocalDateTime time;
 
     private String by;
 
     public Deadlines(String description, String by) {
         super(description);
-        this.by = by;
+        System.out.println(description);
+        System.out.println(by);
+
+        if (by == null) {
+            time = null;
+        } else {
+            try {
+                time = LocalDateTime.parse(by, formatter);
+            } catch (Exception e) {
+                time = null;
+            }
+        }
     }
 
     @Override
