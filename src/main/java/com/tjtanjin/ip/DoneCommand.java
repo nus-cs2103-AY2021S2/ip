@@ -9,7 +9,7 @@ public class DoneCommand {
      * Forwards the mark task as done operation to TaskList.
      * @param index of task to mark as done
      */
-    public static void execute(TaskList taskList, int index) {
+    public void execute(TaskList taskList, int index) {
         taskList.markTaskDone(index);
     }
 }
