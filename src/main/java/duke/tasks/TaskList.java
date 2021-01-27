@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.Exceptions.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -75,4 +77,32 @@ public class TaskList {
     public void markAsDone(int num) {
         tasks.get(num - 1).markAsDone();
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     * Returns a list of matching tasks.
+     *
+     * @param keyword Keyword of the task.
+     * @return A lists of matching tasks.
+     * @throws DukeException If there are no matching tasks.
+     */
+    public ArrayList<Task> findMatchingTasks(String keyword) throws DukeException {
+        ArrayList<Task> newList = new ArrayList<>();
+        boolean hasFoundMatchingTask = false;
+
+        for (Task task : tasks) {
+            if (task.getTaskName().contains(keyword)) {
+                newList.add(task);
+                hasFoundMatchingTask = true;
+            }
+        }
+
+        if (!hasFoundMatchingTask) {
+            throw new DukeException("There are no matching tasks in your list!");
+        }
+
+        return newList;
+    }
+>>>>>>> branch-Level-9
 }

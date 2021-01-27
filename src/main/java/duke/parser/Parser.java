@@ -15,7 +15,6 @@ public class Parser {
     public static Command parseTask(String input) throws DukeException {
         String[] line = input.split(" ", 2); // split type of task from description
         String type = line[0]; // type of task
-
         if (input.isBlank()) {
             throw new EmptyLineException(" ");
         }
@@ -29,6 +28,8 @@ public class Parser {
             return new DoneCommand(line[1]);
         case "delete":
             return new DeleteCommand(line[1]);
+        case "find":
+            return new FindCommand(line[1]);
         case "todo":
             return new AddToDoCommand(line[1]);
         case "deadline":
