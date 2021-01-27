@@ -1,5 +1,16 @@
+/**
+ * A class that deals with making sense of the user command
+ */
+
 public class Parser {
 
+    /**
+     * A static method that parses the user input in the form of a <code>String</code>
+     * to generate the corresponding <code>Command</code>
+     * @param userInput the user input in the form of a <code>String</code>
+     * @return a specific type of <code>Command</code>
+     * @throws DukeException
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] inputs = userInput.split(" ");
         if (inputs.length == 0) {

@@ -1,7 +1,28 @@
+/**
+ * Represents a command to add a task(ToDo/Deadline/Event) to
+ * the existing task list.
+ */
+
 public class AddCommand extends Command {
+    /**
+     * Constructor that takes in two parameters, <code>fullCommand</code> and <code>action</code>,
+     * where <code>fullCommand</code> is the full input entered by the user, and
+     * <code>action</code> is the type of task (<code>ToDo</code>/<code>Deadline</code>/<code>Event</code>)
+     * that is to be added
+     * @param fullCommand the full user input
+     * @param action the type of task to be added
+     */
     public AddCommand(String fullCommand, String action) {
         super(fullCommand, action);
     }
+
+    /**
+     * Adds a task (<code>ToDo</code>/<code>Deadline</code>/<code>Event</code>)
+     * into the given task list.
+     * @param tasks a task list that the task in question is to be added into
+     * @throws DukeException If the given command does not correspond to adding
+     * either a <code>Todo</code>, <code>Deadline</code> or <code>Event</code>
+     */
 
     @Override
     public void execute(TaskList tasks) throws DukeException {
