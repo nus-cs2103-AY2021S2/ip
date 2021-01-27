@@ -13,8 +13,8 @@ public class Storage {
     public Storage() {
         try {
             String currentDir = System.getProperty("user.dir");
-            Path folder = Paths.get(currentDir, "data");
-            Path file = Paths.get(currentDir, "data", "database.txt");
+            Path folder = Paths.get(currentDir, "Haha_data");
+            Path file = Paths.get(currentDir, "Haha_data", "database.txt");
             if (Files.notExists(folder)) {
                 Files.createDirectories(folder);
             }

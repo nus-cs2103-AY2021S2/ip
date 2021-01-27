@@ -51,7 +51,7 @@ public class TaskList {
         List<String> str = new ArrayList<>();
         database.forEach(task -> str.add(task.fileStorageFormat()));
         try {
-            Files.write(Paths.get(System.getProperty("user.dir"), "data", "database.txt"),
+            Files.write(Paths.get(System.getProperty("user.dir"), "Haha_data", "database.txt"),
                     str, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
