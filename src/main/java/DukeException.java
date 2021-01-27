@@ -3,10 +3,10 @@
  */
 public class DukeException{
     public static final void DATEFORMATEXCEPTION() {
-        System.out.println(Format.WRONGDATEFORMAT);
+        System.out.println(Ui.WRONGDATEFORMAT);
     }
     public static final void NumberFormatException() {
-        System.out.println(Format.KEYINNUMBER);
+        System.out.println(Ui.KEYINNUMBER);
     }
 
     /**
@@ -14,7 +14,7 @@ public class DukeException{
      *
      */
     public static final void emptyTaskException() {
-        System.out.println(Format.EMPTYTASK);
+        System.out.println(Ui.EMPTYTASK);
     }
 
 
@@ -23,7 +23,7 @@ public class DukeException{
      *
      */
     public static final void argumentErrorException() {
-        System.out.println(Format.TOOMANYARGUMENTS);
+        System.out.println(Ui.TOOMANYARGUMENTS);
     }
 
     /**
@@ -31,7 +31,7 @@ public class DukeException{
      *
      */
     public static final void missingDateErrorException() {
-        System.out.println(Format.MISSINGDATE);
+        System.out.println(Ui.MISSINGDATE);
     }
 
     /**
@@ -39,14 +39,14 @@ public class DukeException{
      *
      */
     public static final void commandErrorException() {
-        System.out.println(Format.COMMANDERROR);
+        System.out.println(Ui.COMMANDERROR);
     }
 
     /**
      * display the error message for missing task error.
      *
      */
-    public static final void taskErrorException() { System.out.println(Format.TASKERROR); }
+    public static final void taskErrorException() { System.out.println(Ui.TASKERROR); }
 
-    public static final void saveToFileError() { System.out.println(Format.SAVETOFILEERROR);}
+    public static final void saveToFileError() { System.out.println(Ui.SAVETOFILEERROR);}
 }

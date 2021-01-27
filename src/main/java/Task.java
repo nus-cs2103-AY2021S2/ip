@@ -76,8 +76,7 @@ public class Task {
         try {
             Task t = taskList.get(i - 1);
             taskList.get(i - 1).done = "X";
-            System.out.println(Format.UPPER + "Wah~ You done the task: "
-                    + " " + t.toString() + Format.LOWER);
+            Ui.doneTask(t);
         } catch (IndexOutOfBoundsException e) {
             DukeException.taskErrorException();
         }
@@ -87,8 +86,7 @@ public class Task {
         try {
             Task t = taskList.get(i - 1);
             taskList.remove(i - 1);
-            System.out.println(Format.UPPER + "Awww~ You've deleted the task: "
-                    + " " + t.toString() + Format.LOWER);
+            Ui.deleteTask(t);
             for (Task task : taskList) {
                 if (task.index > i) {
                     task.index--;

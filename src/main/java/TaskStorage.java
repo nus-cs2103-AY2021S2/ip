@@ -29,21 +29,21 @@ public class TaskStorage {
 		try {
 			File directory = new File(DIRECTORY);
 			if (!directory.exists()) {
-				System.out.println(Format.NODIRECTORY);
+				System.out.println(Ui.NODIRECTORY);
 				directory.mkdir();
-				Format.SLEEP();
+				Ui.SLEEP();
 			}
 
 			File file = new File(FILEPATH);
 			if (!file.exists()) {
-				System.out.println(Format.NOFILE);
+				System.out.println(Ui.NOFILE);
 				file.createNewFile();
-				Format.SLEEP();
+				Ui.SLEEP();
 			}
 
 			if (file.length() == 0) {
-				Format.SLEEP();
-				System.out.println(Format.EMPTYFILE);
+				Ui.SLEEP();
+				System.out.println(Ui.EMPTYFILE);
 				return;
 			}
 
@@ -72,7 +72,7 @@ public class TaskStorage {
 		}
 
 		sc.close();
-		Format.DONELOADING();
+		Ui.DONELOADING();
 
 	}
 }

@@ -11,12 +11,12 @@ public class DukeDriver {
      */
     public static void executeDuke() {
         Scanner sc = new Scanner(System.in);
-        System.out.println(Format.LOGO);
-        System.out.println(Format.GREETING);
+        System.out.println(Ui.LOGO);
+        System.out.println(Ui.GREETING);
 
-        System.out.println(Format.LOADFILE);
+        System.out.println(Ui.LOADFILE);
 
-        Format.SLEEP();
+        Ui.SLEEP();
 
         TaskStorage.loadFiles();
 
@@ -27,7 +27,7 @@ public class DukeDriver {
                 break;
             }
         }
-        System.out.println(Format.FAREWELL);
+        System.out.println(Ui.FAREWELL);
     }
 
     /**
@@ -56,7 +56,7 @@ public class DukeDriver {
     private static final void handleToDo(String task) {
         if (!task.equals("")) {
             Todo todo = new Todo(task);
-            System.out.println(Format.biggerBox(todo));
+            System.out.println(Ui.biggerBox(todo));
         } else {
             DukeException.emptyTaskException();
         }
@@ -77,7 +77,7 @@ public class DukeDriver {
                 DukeException.missingDateErrorException();
             } else {
                 Deadlines deadlines = new Deadlines(task, date);
-                System.out.println(Format.biggerBox(deadlines));
+                System.out.println(Ui.biggerBox(deadlines));
             }
         }
     }
@@ -97,7 +97,7 @@ public class DukeDriver {
                 DukeException.missingDateErrorException();
             } else {
                 Event event = new Event(task, date);
-                System.out.println(Format.biggerBox(event));
+                System.out.println(Ui.biggerBox(event));
             }
         }
     }
@@ -153,7 +153,7 @@ public class DukeDriver {
             TaskStorage.writeToFiles(Task.getTaskList());
             break;
         case "list":
-            Format.LISTING();
+            Ui.LISTING();
             break;
         case "done":
             handleDone(task);
