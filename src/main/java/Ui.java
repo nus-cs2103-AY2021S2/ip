@@ -13,14 +13,6 @@ public class Ui {
         name = n;
     }
 
-    public void printInvalidArgumentError() {
-        this.echo("Sorry, you have supplied invalid arguments.");
-    }
-
-    public void printInvalidCommandError() {
-        this.echo("Sorry, I don't understand the command.");
-    }
-
     public void echo(String message) {
         System.out.println(name + ": " + message);
     }
