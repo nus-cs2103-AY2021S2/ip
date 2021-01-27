@@ -1,9 +1,16 @@
 package duke.exceptions;
 
+/**
+ * Represents an exception thrown when an invalid input follows after a command.
+ */
 public class InvalidOptionException extends DukeException {
     private String message;
     private final String INDENTATION = "    ";
 
+    /**
+     * Constructor for InvalidOptionException.
+     * @param s Message of the Exception.
+     */
     public InvalidOptionException(String s) {
         super();
 
@@ -37,6 +44,10 @@ public class InvalidOptionException extends DukeException {
         }
     }
 
+    /**
+     * Gets the message of InvalidOptionException.
+     * @return Returns the message of InvalidOptionException.
+     */
     @Override
     public String getMessage() {
         return message;
