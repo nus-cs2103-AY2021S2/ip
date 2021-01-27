@@ -1,3 +1,7 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+
 
 
 public class DukeSimulator {
@@ -71,18 +76,13 @@ public class DukeSimulator {
 
     private void addTask(String command) throws DukeException {
         String[] parsedCommand = command.split(" ", 2);
-        if(parsedCommand.length == 1) {
-            throw new DukeMissingDescriptionException(parsedCommand[0]);
-        }
         Task t;
         if (parsedCommand[0].equals("todo")) {
             t = toDoMaker(parsedCommand[1]);
         } else if (parsedCommand[0].equals("deadline")) {
-            String[] ppCmd = parsedCommand[1].split(" /by ", 2);
-            t = new Deadline(ppCmd[0], ppCmd[1]);
+            t = deadlineMaker(parsedCommand[1]);
         } else if (parsedCommand[0].equals("event")) {
-            String[] ppCmd = parsedCommand[1].split(" /at ", 2);
-            t = new Event(ppCmd[0], ppCmd[1]);
+            t = eventMaker(parsedCommand[1]);
         } else {
             throw new DukeWrongCommandException(parsedCommand[0]);
         }
@@ -103,6 +103,46 @@ public class DukeSimulator {
         }
     }
 
+    private Task deadlineMaker(String command) throws DukeWrongFormatException,
+            DukeMissingDescriptionException {
+        String[] parsedCmd = command.split(" /by ", 2);
+        if(parsedCmd.length != 2) {
+            throw new DukeWrongFormatException("deadline");
+        } else if(parsedCmd[0].equals(" ") || parsedCmd[1].equals(" ")) {
+            throw new DukeMissingDescriptionException("deadline");
+        } else {
+            try {
+                LocalDateTime ldt = LocalDateTime.parse(parsedCmd[1],
+                        DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+                return new Deadline(parsedCmd[0], ldt);
+            } catch (DateTimeParseException e) {
+                throw new DukeWrongFormatException("deadline");
+            }
+        }
+    }
+
+    private Task eventMaker(String command) throws DukeWrongFormatException,
+            DukeMissingDescriptionException {
+        String[] parsedCmd = command.split(" /at ", 2);
+        if(parsedCmd.length != 2) {
+            throw new DukeWrongFormatException("event1");
+        } else if(parsedCmd[0].equals(" ") || parsedCmd[1].equals(" ")) {
+            throw new DukeMissingDescriptionException("event");
+        } else {
+            try {
+                String[] parsedDate = parsedCmd[1].split(" ");
+                String date = parsedDate[0];
+                String[] parsedTime = parsedDate[1].split("-");
+                LocalDateTime ldtStart = LocalDateTime.parse(date + " " + parsedTime[0],
+                        DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+                LocalDateTime ldtEnd = LocalDateTime.parse(date + " " + parsedTime[1],
+                        DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
+                return new Event(parsedCmd[0], ldtStart, ldtEnd);
+            } catch (Exception e) {
+                throw new DukeWrongFormatException("event");
+            }
+        }
+    }
     private void save() {
         try {
             FileWriter fw = new FileWriter(directory + fileName);
@@ -127,10 +167,17 @@ public class DukeSimulator {
                         t = new ToDo(taskArray[2]);
                         break;
                     case "E":
-                        t = new Event(taskArray[2], taskArray[3]);
+                        String[] timeArray = taskArray[3].split("-");
+                        LocalDateTime ldtStart = LocalDateTime.parse(timeArray[0],
+                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
+                        LocalDateTime ldtEnd = LocalDateTime.parse(timeArray[1],
+                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
+                        t = new Event(taskArray[2], ldtStart, ldtEnd);
                         break;
                     case "D":
-                        t = new Deadline(taskArray[2], taskArray[3]);
+                        LocalDateTime ldt = LocalDateTime.parse(taskArray[3],
+                                DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
+                        t = new Deadline(taskArray[2], ldt);
                         break;
                 }
                 if(taskArray[1].equals("X")) {
