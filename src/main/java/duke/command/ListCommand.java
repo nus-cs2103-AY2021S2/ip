@@ -1,11 +1,8 @@
-package duke.Command;
+package duke.command;
 
 import duke.Storage;
-import duke.Task;
 import duke.TaskList;
 import duke.Ui;
-
-import java.io.IOException;
 
 public class ListCommand extends Command {
 

@@ -1,4 +1,4 @@
-package duke.Command;
+package duke.command;
 
 import duke.Ui;
 import duke.TaskList;
@@ -10,7 +10,7 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
 
     private final int indexToDelete;
-    DeleteCommand(int indexToDelete) {
+    public DeleteCommand(int indexToDelete) {
         this.indexToDelete = indexToDelete;
     }
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         Task task = tasks.delete(indexToDelete);
         try {
             storage.saveTasks(tasks);
-        } catch ( IOException ) {
+        } catch ( IOException err) {
             return EXECUTION_FAIL;
         }
         System.out.println("Noted. I've removed this task:");
