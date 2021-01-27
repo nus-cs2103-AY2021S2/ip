@@ -20,9 +20,15 @@ public class Parser {
             return new ListCommand();
         }
         case "done": {
+            if (command.length() <= 5) {
+                throw new WrongFormatException();
+            }
             return new DoneCommand(Integer.parseInt(parameters[1]) - 1);
         }
         case "delete": {
+            if (command.length() <= 7) {
+                throw new WrongFormatException();
+            }
             return new DeleteCommand(Integer.parseInt(parameters[1]) - 1);
         }
         case "todo": {
@@ -58,6 +64,13 @@ public class Parser {
             String date = command.substring(slash + 4, command.length());
             Event e = new Event(name, date);
             return new AddCommand(e);
+        }
+        case "find": {
+            if (command.length() <= 5) {
+                throw new WrongFormatException();
+            }
+            String keyWord = command.substring(5, command.length());
+            return new FindCommand(keyWord);
         }
         default: {
             throw new UnknownCommandException();

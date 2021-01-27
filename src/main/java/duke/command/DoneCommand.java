@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (index > taskList.getTasks().size() - 1 || index < 0) {
-            System.out.println("Task does not exist!");
+            ui.showNotFound();
             return;
         }
         Task t = taskList.getTasks().get(index);

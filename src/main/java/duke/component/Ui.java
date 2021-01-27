@@ -15,7 +15,7 @@ public class Ui {
 
     public void showWelcome() {
         System.out.println(LINE);
-        System.out.println("Hello! I'm duke.Duke");
+        System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println(LINE);
     }
@@ -25,24 +25,35 @@ public class Ui {
     }
 
     public void showDone(Task t) {
-        System.out.println("Nice! I've marked this duke.task as done:");
+        System.out.println("Nice! I've marked this task as done:");
         System.out.println(t);
     }
 
     public void showDelete(Task t, TaskList tl) {
-        System.out.println("Noted. I've removed this duke.task:");
+        System.out.println("Noted. I've removed this task:");
         System.out.println(t);
         System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
     }
 
     public void showAdd(Task t, TaskList tl) {
-        System.out.println("Got it. I've added this duke.task:");
+        System.out.println("Got it. I've added this task:");
         System.out.println(t);
         System.out.println("Now you have " + tl.getTasks().size() + " tasks in the list.");
     }
 
     public void showLine() {
         System.out.println(LINE);
+    }
+
+    public void showNotFound() {
+        System.out.println("Task not found!");
+    }
+
+    public void showFound(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            System.out.println(i + "." + tasks.get(i - 1).toString());
+        }
     }
 
     public void showList(TaskList tl) {
