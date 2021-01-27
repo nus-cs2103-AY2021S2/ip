@@ -15,6 +15,12 @@ public class AddDeadlineCommand extends Command {
         this.deadline = deadline;
     }
 
+    /**
+     * Adds Deadline into given tasks and outputs corresponding acknowledgement message
+     * @param tasks
+     * @param ui
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui) throws IOException {
         tasks.add(deadline);

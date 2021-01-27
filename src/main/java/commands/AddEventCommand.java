@@ -15,6 +15,12 @@ public class AddEventCommand extends Command {
         this.event = event;
     }
 
+    /**
+     * Adds event into given tasks and outputs acknowledgement message
+     * @param tasks
+     * @param ui
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui) throws IOException {
         tasks.add(event);

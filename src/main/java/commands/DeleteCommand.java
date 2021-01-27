@@ -15,6 +15,12 @@ public class DeleteCommand extends Command {
         this.indexToDelete = indexToDelete;
     }
 
+    /**
+     * Deletes the selected task from the given tasks and outputs the corresponding acknowlegement message
+     * @param tasks
+     * @param ui
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui) throws IOException {
         if (indexToDelete < 0 || indexToDelete >= tasks.size()) {
