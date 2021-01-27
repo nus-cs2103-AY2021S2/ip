@@ -2,13 +2,22 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task object for CS2103T iP. Stores relevant data regarding a task, including type, task,
+ * date and time (if required) and whether it has been completed.
+ */
 public class Task {
     private final String task;
     private boolean done = false;
-    private final int type; // 0 is todo, 1 is deadline, 2 is event
+    private final int type;
     private final LocalDate date;
     private final LocalTime time;
 
+    /**
+     * Creates a Task object.
+     * @param s Description of task.
+     * @param i Type of task: 0 is todo, 1 is deadline, 2 is event
+     */
     public Task(String s, int i) {
         if (i == 0) {
             this.task = s;
@@ -30,10 +39,17 @@ public class Task {
         this.type = i;
     }
 
+    /**
+     * When called on a task, marks the task as done.
+     */
     public void markDone() {
         this.done = true;
     }
 
+    /**
+     * Checks for whether the task is done. Used as part of the toString() method.
+     * @return "[ ]" for not done, "[X]" for done.
+     */
     public String checkDone() {
         if (this.done) {
             return "[X]";
@@ -42,6 +58,10 @@ public class Task {
         }
     }
 
+    /**
+     * Checks for the task type. Used as part of the toString() method.
+     * @return T for todo, D for deadline and E for event.
+     */
     public String checkType() {
         if (this.type == 0) {
             return "[T]";
@@ -51,7 +71,11 @@ public class Task {
             return "[E]";
         }
     }
-    
+
+    /**
+     * A readable format of the Task.
+     * @return A string representation of the Task.
+     */
     public String toString() {
         if (this.type == 0) {
             return checkType() + checkDone() + this.task;
@@ -64,6 +88,10 @@ public class Task {
         }
     }
 
+    /**
+     * Generates a string that can be stored for import upon program start.
+     * @return A simplified string representation of the task.
+     */
     public String export() {
         String done = this.done ? " 1" : " 0";
         String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at " + this.time;
