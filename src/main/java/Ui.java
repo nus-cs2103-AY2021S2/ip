@@ -1,5 +1,5 @@
 /**
- * Ui class which stores all the basic UI stuff.
+ * Ui class which stores all the basic UI stuff like welcome message.
  */
 
 public class Ui {
