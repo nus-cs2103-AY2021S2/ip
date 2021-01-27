@@ -1,270 +1,39 @@
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-//import time.temporal.ChronoUnit;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
-
-
-public class Kobe {
-    public static String ind = "    ";
-    public static String line = ind + "____________________________________________________________\n" + ind;
-    public static String line2 = ind + "____________________________________________________________\n";
-    public static ArrayList<Task> tasks = new ArrayList<>();
-    public static String home = System.getProperty("user.home");
-
-    public static void main(String[] args) {
-
-        System.out.println(line + "Hello! I'm Kobe\n" + ind + "What can I do for you?\n" + line);
-
-        //Retrieve data
-        Path path = Paths.get(home + "/ip/src/main/data/kobe.txt"); //relative path
-        boolean directoryExists = java.nio.file.Files.exists(path); //not necessary, try-catch works
-
-        try (BufferedReader br = new BufferedReader(
-                new FileReader(home + "/ip/src/main/data/kobe.txt", StandardCharsets.US_ASCII))) {
-
-            boolean isFileEmpty = true;
-            String readLine = br.readLine();
-            while (readLine != null) {
-                isFileEmpty = false;
-                System.out.println(readLine);
-                addItemByString(readLine);
-                readLine = br.readLine();
-            }
-
-            if (!isFileEmpty) {
-                System.out.println(line + "Here are tasks that Kobe has retrieved!\n" + line);
-            }
-
-
-        } catch (IOException e) {
-            //do nothing
-        }
-
-
-        Scanner sc = new Scanner(System.in);
-
-        try {
-            while (sc.hasNext()) {
-                //Read the whole line, dissect each command word, including the condition after "/"
-                String command = sc.nextLine();
-                String[] commandArr = command.split(" ");
-                String text = commandArr[0];
-
-                if (text.equals("bye")) {
-                    goodbye();
-                    break;
-                } else if (text.equals("list")) {
-                    showList();
-                } else if (text.equals("done")) {
-                    int taskNumber = Integer.parseInt(commandArr[1]) - 1;
-                    completeTask(taskNumber);
-                } else if (text.equals("delete")) {
-                    int taskNumber = Integer.parseInt(commandArr[1]) - 1;
-                    deleteTask(taskNumber);
-                } else {
-                    String taskName = "";
-                    String type = text;
-                    String condition = "";
-
-
-                    String[] commandArrFirst2Parts = command.split(" ", 2);
-
-////                    Check for correct splitting
-//                    System.out.println("First2Parts: " + Arrays.toString(commandArrFirst2Parts));
-                    String firstWord = commandArrFirst2Parts[0];
+//import java.util.*;
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
+//import java.io.FileReader;
+//import java.io.FileWriter;
+//import java.io.IOException;
 //
-                    if (commandArrFirst2Parts.length == 1) {
-                        if (firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event")) {
-                            String errMessage = "Oh no! Kobe doesn't want your " + firstWord + " to be empty!";
-                            throw new CustomExceptions.IncompleteDecriptionException(errMessage);
-                        } else {
-                            String errMessage = "Oh no! Kobe doesn't know what you mean!";
-                            throw new CustomExceptions.IncorrectDecriptionException(errMessage);
-                        }
-                    }
-
-                    String[] commandArrSecond2Parts = commandArrFirst2Parts[1].split(" /", 2);
-
-                    //                //Check for correct splitting
-                    //                System.out.println("Second2Parts: " + Arrays.toString(commandArrSecond2Parts));
-
-
-                    taskName = commandArrSecond2Parts[0];
-
-                    //If the array is in 2 parts, there is a condition, add that
-                    if (commandArrSecond2Parts.length > 1) {
-                        condition = commandArrSecond2Parts[1].substring(3);
-                        //no "/by"
-                    }
-
-                    addItem(taskName, type, condition);
-                }
-            }
-        } catch (CustomExceptions.IncompleteDecriptionException e) {
-            System.out.println(e);
-        } catch (CustomExceptions.IncorrectDecriptionException e) {
-            System.out.println(e);
-        }
-
-        sc.close();
-    }
-
-    public static void addItem(String echoedText, String type, String condition) {
-        //Recognise if condition is time
-        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
-        df1.setLenient(false);
-        Task currentTask;
-        try {
-            df1.parse(condition);
-            LocalDate d1 = LocalDate.parse(condition);
-            currentTask = new Task(false, echoedText, type, d1);
-            tasks.add(currentTask);
-            System.out.print(line + "Got it! Kobe marked down this date!\n");
-            System.out.println(ind + "Kobe added this task:\n" + ind + ind +
-                    currentTask);
-        } catch (ParseException | NullPointerException e) { //not in the format
-//            tasks.add(new Task(echoedText, type, condition));
-            currentTask = new Task(echoedText, type, condition);
-            tasks.add(currentTask);
-            System.out.println(line + "Got it! Kobe added this task:\n" + ind + ind +
-                    currentTask);
-        }
-
-        System.out.println(ind + "Kobe sees that you have " + tasks.size() + " task(s) in the list.\n" + line);
-
-
-    }
-
-    public static void addItemByString(String text) {
-        String[] intoParts1 = text.split("\\[", 2);
-        String type = intoParts1[1].substring(0, 1);
-//        System.out.println(Arrays.toString(intoParts1));
-//        System.out.println("Type: " + type);
-
-        String[] intoParts2 = intoParts1[1].split("\\[", 2);
-        String isItDone = intoParts2[1].substring(0, 1);
-//        System.out.println(Arrays.toString(intoParts2));
-//        System.out.println("Done: " + isItDone);
-
-        String[] intoParts3 = intoParts2[1].split("\\]", 2);
-        String taskName = intoParts3[1].substring(1);
-//        System.out.println("intoParts3: " + Arrays.toString(intoParts3));
-//        System.out.println("Task: " + currentTask);
-//        System.out.println("length: " + intoParts3[1].split(":", 2).length);
-
-        String condition = "";
-
-        if (intoParts3[1].split(":", 2).length != 1) { //There is a condition, cos it can be split even more
-            //Task without the condition
-            intoParts3 = intoParts3[1].substring(1).split("\\(", 2);
-            String taskNameStr = intoParts3[0].substring(0);
-            taskName = taskNameStr.substring(0, taskNameStr.length()-1); //to fix extra space formed at the end
-//            System.out.println("NewTask: " + taskName);
-
-            //Getting the condition
-            String[] intoParts4 = intoParts3[1].split(": ", 2);
-//            System.out.println("intoParts4: " + Arrays.toString(intoParts4));
-            String[] intoParts5 = intoParts4[1].split("\\)", 2);
-
-            condition = intoParts5[0].substring(0);
-//            System.out.println(Arrays.toString(intoParts5));
-//            System.out.println("Condition: " + condition);
-        } else {}
-
-        if (type.equals("T")) {
-            type = "todo";
-        } else if (type.equals("D")) {
-            type = "deadline";
-        } else if (type.equals("E")) {
-            type = "event";
-        }
-
-        boolean isItDoneBoolean = false;
-        if (isItDone.equals("X")) {
-            isItDoneBoolean = true;
-        }
-
-        //Recognise time
-        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd");
-        df1.setLenient(false);
-        try {
-            df1.parse(condition);
-            LocalDate d1 = LocalDate.parse(condition);
-            tasks.add(new Task(isItDoneBoolean, taskName, type, d1));
-//            System.out.print(ind + "Kobe marked down this date!\n");
-        } catch (ParseException | NullPointerException e) { //not in the format
-            tasks.add(new Task(isItDoneBoolean, taskName, type, condition));
-        }
-
-
-    }
-
-    public static void goodbye() {
-        saveFile();
-        System.out.println(line + "Bye. Kobe saved your list.\n" + ind
-                + "Kobe hopes to see you again soon!\n" + line);
-    }
-
-    public static void showList() {
-        System.out.print(line + "Here are the tasks in your list:\n");
-        for(int i = 0; i < tasks.size(); i++) {
-            System.out.print(ind + (i+1) + ". " + tasks.get(i).toString() + "\n");
-        }
-        System.out.println(line);
-    }
-
-    public static void completeTask(int taskNumber) {
-        tasks.get(taskNumber).markAsDone();
-        System.out.print(line + "Nice work! Kobe will mark your task as done!\n" + ind);
-        System.out.println(ind + tasks.get(taskNumber));
-        System.out.println(line);
-    }
-
-    public static void deleteTask(int taskNumber) {
-        if (tasks.isEmpty()) { //Managing empty lists from the start
-            System.out.print(line + "Kobe sees no more tasks from the list!\n" + line + "\n");
-        } else {
-            System.out.print(line + "Okay! Kobe will remove your task from the list!\n" + ind);
-            System.out.println(ind + tasks.get(taskNumber));
-            tasks.remove(taskNumber);
-            System.out.println(ind + "Kobe sees that you now have " + tasks.size() + " task(s) in the list.");
-            if (tasks.isEmpty()) { //If it's now empty, inform them.
-                System.out.print(ind + "Your list is now empty!\n");
-            }
-            System.out.println(line);
-        }
-    }
-
-    //UPDATE THE KOBE.TXT FILE
-    public static void saveFile() {
-//        java.nio.file.Path path = java.nio.file.Paths.get("home/ip/src/main/data/kobe.txt");
-        java.nio.file.Path path = java.nio.file.Paths.get(home + "/ip/src/main/data");
-//        boolean directoryExists = java.nio.file.Files.exists(path);
-//        System.out.println("Directory Home: " + home);
-//        System.out.println("Directory: " + path.toString());
-//        System.out.println("Directory exists?: " + directoryExists);
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(home + "/ip/src/main/data/kobe.txt",
-                    StandardCharsets.US_ASCII))) {
-
-            for(int i = 0; i < tasks.size(); i++) {
-                bw.write(ind + (i+1) + ". " + tasks.get(i) + "\n");
-            }
-
-        } catch (IOException e) {
-            System.out.println("IOException: " + e);
-        }
-    }
-}
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
+//import java.text.DateFormat;
+//import java.text.SimpleDateFormat;
+//import java.text.ParseException;
+////import time.temporal.ChronoUnit;
+//
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.nio.charset.StandardCharsets;
+//
+//
+//public class Kobe {
+//
+//    public static ArrayList<Task> tasks = new ArrayList<>();
+//
+//
+//    public static void main(String[] args) {
+//
+//
+//        //Retrieve data
+//         //relative path
+//        boolean directoryExists = java.nio.file.Files.exists(path); //not necessary, try-catch works
+//
+//
+//
+//
+//
+//
+//
+//
+//}
