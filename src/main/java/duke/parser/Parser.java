@@ -1,17 +1,24 @@
 package duke.parser;
 
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 import duke.duke.Duke;
 import duke.exceptions.InvalidArgumentException;
 import duke.exceptions.InvalidCommandException;
 import duke.utils.DateValidator;
 import duke.utils.DateValidatorUsingDateFormat;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public String description;
-    String command;
+    /*public String description;
+    Command command;
     String deadline;
 
     public Parser() {
@@ -19,10 +26,11 @@ public class Parser {
         this.description = "";
         this.deadline = "";
 
-    }
+    }*/
 
-    public void processInput(String userInput, Duke bot) throws InvalidCommandException, InvalidArgumentException {
+    public static Command processInput(String userInput, Duke bot) throws InvalidCommandException, InvalidArgumentException {
         String[] starr = userInput.split(" ", 2);
+        Command userCommand = null;
         if (starr.length == 1) {
             if (!(starr[0].equals("bye") || starr[0].equals("list"))) {
                 if (starr[0].equals("todo") || starr[0].equals("done") ||
@@ -34,11 +42,28 @@ public class Parser {
                             "I'm sorry, but I don't know what that means :-()\n");
                 }
             }
-            this.command = starr[0];
+            //this.command = starr[0];
+            if(starr[0].equals("bye")) {
+                userCommand = new ByeCommand();
+            } else if(starr[0].equals("list")) {
+                userCommand = new ListCommand();
+            }
         } else {
-            this.command = starr[0];
+            //this.command = starr[0];
             switch (starr[0]) {
             case "done":
+                try {
+                    Integer.parseInt(starr[1]);
+                } catch (NumberFormatException ex) {
+                    throw new InvalidArgumentException("Invalid command! " +
+                            "Please input task number using 'delete (number)'.\n");
+                }
+                if (Integer.parseInt(starr[1]) > bot.getList().getLst().size()) {
+                    throw new InvalidArgumentException("Please input argument <= to "
+                            + bot.getList().getLst().size() + "!\n");
+                }
+                userCommand = new DoneCommand(starr[1]);
+                break;
             case "delete":
 
                 try {
@@ -51,11 +76,15 @@ public class Parser {
                     throw new InvalidArgumentException("Please input argument <= to "
                             + bot.getList().getLst().size() + "!\n");
                 }
-                this.description = starr[1];
+                //this.description = starr[1];
+                //break;
+                userCommand = new DeleteCommand(starr[1]);
                 break;
             case "todo":
-                this.description = starr[1];
+                userCommand = new TodoCommand(starr[1]);
                 break;
+                //this.description = starr[1];
+                //break;
             case "deadline":
                 String[] arr = starr[1].split("/by");
                 if (arr.length == 1) {
@@ -66,9 +95,11 @@ public class Parser {
                         throw new InvalidArgumentException("Please input task description!\n");
                     }
                     String deadLine = arr[1].strip();
-                    processDate(deadLine);
+                userCommand = new DeadlineCommand(arr[0], processDate(deadLine));
+                break;
+                    /*processDate(deadLine);
                     this.description = arr[0];
-                    break;
+                    break;*/
 
                 case "event":
                     String[] a = starr[1].split("/at");
@@ -81,18 +112,20 @@ public class Parser {
                         throw new InvalidArgumentException("Please input task description!\n");
                     }
                     String eventTime = a[1].strip();
-                    processDate(eventTime);
-                    this.description = a[0];
+                    userCommand = new EventCommand(a[0], processDate(eventTime));
                     break;
+                    /*this.description = a[0];
+                    break;*/
             }
         }
+        return userCommand;
     }
 
-    public boolean isEquals(String type) {
+    /*public static boolean isEquals(String type) {
         return command.equals(type);
-    }
+    }*/
 
-    public void processDate(String date) {
+    public static String processDate(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d HHmm");
         DateValidator dateTimeValidator = new DateValidatorUsingDateFormat(dateTimeFormatter);
 
@@ -100,13 +133,13 @@ public class Parser {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
             DateValidator dateValidator = new DateValidatorUsingDateFormat(dateFormatter);
             if(!dateValidator.isValid(date)) {
-                this.deadline = date;
+                return date;
             } else {
                 LocalDate d1 = LocalDate.parse(date);
                 String day = d1.getDayOfWeek().toString();
                 String month = d1.getMonth().toString();
                 int year = d1.getYear();
-                this.deadline = String.format("%s %s %d", day, month, year);
+                return String.format("%s %s %d", day, month, year);
             }
         } else {
             String[] deadLineArray = date.split(" ");
@@ -114,15 +147,17 @@ public class Parser {
             String day = d1.getDayOfWeek().toString();
             String month = d1.getMonth().toString();
             int year = d1.getYear();
-            this.deadline = String.format("%s %s %d %s", day, month, year, deadLineArray[1]);
+            return String.format("%s %s %d %s", day, month, year, deadLineArray[1]);
 
         }
     }
 
-    public String getCommand() {
+    /*public Command getCommand() {
         return command;
-    }
-    public String getDeadline() {
+    }*/
+
+    /*public String getDeadline() {
         return deadline;
-    }
+    }*/
+
 }
