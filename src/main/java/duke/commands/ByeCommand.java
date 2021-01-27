@@ -2,13 +2,23 @@ package duke.commands;
 
 import duke.tasks.TaskList;
 
+/**
+ * Command to quit Duke
+ */
 public class ByeCommand extends Command {
+    /**
+     * Exit command constructor
+     */
     public ByeCommand() {
         super(CommandType.EXIT);
     }
 
+    /**
+     * Exits program
+     * @param list List of tasks
+     */
     @Override
-    public void excecute(TaskList list) {
+    public void execute(TaskList list) {
         ui.printGoodbye();
     }
 }
