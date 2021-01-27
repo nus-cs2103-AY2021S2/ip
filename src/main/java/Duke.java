@@ -1,15 +1,17 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 import java.util.Arrays;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class Duke {
-    public static ArrayList<Task> ls = new ArrayList<>();
+    private static TaskList tasks;
 
     public static void main(String[] args) {
+        tasks = new TaskList();
         try {
             Duke.loadData();
         } catch (FileNotFoundException e) {
@@ -51,18 +53,18 @@ public class Duke {
         String[] splits = taskData.split(" \\| ");
         if (splits[0].equals("T")) {
             Todo addedTask = new Todo(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"));
-            Duke.ls.add(addedTask);
+            tasks.addTask(addedTask);
         } else if (splits[0].equals("D")) {
             try {
                 Deadline addedTask = new Deadline(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
-                Duke.ls.add(addedTask);
+                tasks.addTask(addedTask);
             } catch (DukeException e) {
                 System.out.println(e);
             }
         } else if (splits[0].equals("E")) {
             try {
                 Event addedTask = new Event(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
-                Duke.ls.add(addedTask);
+                tasks.addTask(addedTask);
             } catch (DukeException e) {
                 System.out.println(e);
             }
@@ -77,10 +79,7 @@ public class Duke {
     }
 
     public static void writeTaskList() {
-        String userInput = "";
-        for (Task t : Duke.ls) {
-            userInput += System.lineSeparator() + t.saveTask();
-        }
+        String userInput = tasks.joinToTxt();
         String filePath = "data/duke.txt";
         try {
             writeNewFile(filePath, userInput);
@@ -94,8 +93,8 @@ public class Duke {
      */
     public static void printList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i=1; i<=Duke.ls.size(); i++) {
-            System.out.println("  " + i + ". " + Duke.ls.get(i-1));
+        for (int i=1; i<=Duke.tasks.getSize(); i++) {
+            System.out.println("  " + i + ". " + Duke.tasks.getTask(i));
         }
         System.out.println("-----------------------------------------------------");
     }
@@ -108,7 +107,7 @@ public class Duke {
     public static void setAsDone(String userInput) throws DukeException {
         try {
             int indexToMark = Integer.parseInt(userInput.substring(5));
-            Task ts = Duke.ls.get(indexToMark - 1);
+            Task ts = Duke.tasks.getTask(indexToMark);
             ts.markAsDone();
             System.out.println("Nice! I've marked this task as done: ");
             System.out.println("  " + ts);
@@ -126,11 +125,11 @@ public class Duke {
     public static void deleteFromList(String userInput) throws DukeException {
         try {
             int indexToDelete = Integer.parseInt(userInput.substring(7));
-            Task ts = Duke.ls.get(indexToDelete - 1);
-            Duke.ls.remove(indexToDelete - 1);
+            Task ts = Duke.tasks.getTask(indexToDelete);
+            Duke.tasks.removeTask(indexToDelete);
             System.out.println("Okay! I've removed this task: ");
             System.out.println("  " + ts);
-            System.out.println("Now you have " + Duke.ls.size() + " tasks in the list.");
+            System.out.println("Now you have " + Duke.tasks.getSize() + " tasks in the list.");
             System.out.println("-----------------------------------------------------");
         } catch (NumberFormatException | IndexOutOfBoundsException ex) {
             throw new ArgumentException(4);
@@ -179,7 +178,7 @@ public class Duke {
             String[] splits = userInput.split("todo ");
             if (splits.length == 2) {
                 Todo addedTask = new Todo(Arrays.asList(splits).get(1), isDone);
-                Duke.ls.add(addedTask);
+                Duke.tasks.addTask(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);
             } else {
@@ -190,7 +189,7 @@ public class Duke {
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
                 try {
                     Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
-                    Duke.ls.add(addedTask);
+                    Duke.tasks.addTask(addedTask);
                     System.out.println("Got it, I've added this task to the list: ");
                     System.out.println("  " + addedTask);
                 } catch (DukeException ex) {
@@ -203,7 +202,7 @@ public class Duke {
             String[] splits = userInput.split("event | /at ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
                 Event addedTask = new Event(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
-                Duke.ls.add(addedTask);
+                Duke.tasks.addTask(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);
             } else {
@@ -212,7 +211,7 @@ public class Duke {
         } else {
             throw new KeywordException();
         }
-        System.out.println("Now you have " + Duke.ls.size() + " tasks in the list.");
+        System.out.println("Now you have " + Duke.tasks.getSize() + " tasks in the list.");
         System.out.println("-----------------------------------------------------");
     }
 }
