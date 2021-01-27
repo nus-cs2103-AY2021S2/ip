@@ -1,7 +1,7 @@
 package weiliang.bot.task;
 
 public class Task {
-    
+
     protected String task;
     protected boolean completed;
 
@@ -13,6 +13,10 @@ public class Task {
         this.completed = true;
     }
 
+    public String getDescription() {
+        return task;
+    }
+
     public String toFormattedString() {
         return "T | " + (completed ? 1 : 0) + " | " + task;
     }
@@ -21,5 +25,5 @@ public class Task {
     public String toString() {
         return "[T][" + (completed ? "X" : " ") + "] " + task;
     }
-    
+
 }

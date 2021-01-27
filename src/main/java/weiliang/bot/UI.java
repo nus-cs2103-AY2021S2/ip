@@ -169,6 +169,21 @@ public class UI {
                 throw new DukeException("The description of an event cannot be empty!");
             }
         }
+        if (input.matches("^find .+$")) {
+            String searchField = input.substring(5);
+            String message = formatMessage("Printing matches!");
+            int i = 0;
+            for (Task task : tasks) {
+                if (task.getDescription().contains(searchField)) {
+                    message += "\n" + (i+1) + "." + task;
+                }
+                i++;
+            }
+            if (i == 0) {
+                message += "\nNo results found!";
+            }
+            return message;
+        }
 
         // Default
         // Don't actually need to throw bot exception
