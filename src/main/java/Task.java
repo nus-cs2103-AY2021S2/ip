@@ -33,7 +33,7 @@ public abstract class Task {
         isDone = true;
     }
 
-    public abstract String toString();
-
     public abstract String serialize();
+
+    public abstract String toString();
 }

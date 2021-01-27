@@ -1,5 +1,5 @@
 public class InvalidCommand extends Command {
-    private String feedbackMsg;
+    private final String feedbackMsg;
 
     public InvalidCommand(String feedbackMsg) {
         this.feedbackMsg = feedbackMsg;

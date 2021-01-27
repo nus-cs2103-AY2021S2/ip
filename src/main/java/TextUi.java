@@ -24,7 +24,7 @@ public class TextUi implements Ui {
 
     @Override
     public void showCommandResult(CommandResult result) {
-        if (result.hasFeedback())  {
+        if (result.hasFeedback()) {
             out.println(result.getFeedback());
         }
     }

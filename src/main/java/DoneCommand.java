@@ -5,7 +5,7 @@ public class DoneCommand extends Command {
     private static final Pattern DONE_KEYWORD = Pattern.compile("(?i)done\\b");
     private static final Pattern DONE_INDEX = Pattern.compile("(?i)done\\s+(\\d+)$");
 
-    private String argStr;
+    private final String argStr;
 
     private DoneCommand(String argStr) {
         this.argStr = argStr;

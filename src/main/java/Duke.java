@@ -1,15 +1,8 @@
-
-
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
+    private final Ui ui;
+    private final Parser parser;
     private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
-
-    public static void main(String[] args) {
-        final String dataFilePath = "data/duke.dat";
-        new Duke(dataFilePath).run();
-    }
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -21,6 +14,11 @@ public class Duke {
         }
         parser = new Parser();
         ui = new TextUi();
+    }
+
+    public static void main(String[] args) {
+        final String dataFilePath = "data/duke.dat";
+        new Duke(dataFilePath).run();
     }
 
     public void run() {
