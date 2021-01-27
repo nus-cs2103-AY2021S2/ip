@@ -106,10 +106,10 @@ public class Storage {
     /**
      * Loads the current Tasks from the file specified by filePath to Duke.
      * If the file does not exist it is created.
-     * @param list The List for the Tasks to be stored in.
+     * @param taskList The TaskList for the Tasks to be stored in.
      * @throws IOException
      */
-    public void loadData(List list) throws IOException {
+    public void loadData(TaskList taskList) throws IOException {
         File save = new File(this.filePath);
         if (save.getParentFile() != null) {
             save.getParentFile().mkdirs();
@@ -127,7 +127,7 @@ public class Storage {
             } else {
                 task = new Event(Boolean.parseBoolean(taskArgsArray[1]), taskArgsArray[2], taskArgsArray[3]);
             }
-            list.add(task);
+            taskList.add(task);
         }
         sc.close();
     }
