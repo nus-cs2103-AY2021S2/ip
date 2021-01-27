@@ -72,6 +72,23 @@ public class Ui {
     }
 
     /**
+     * Print whenever find command is called successfully.
+     * @param listFound List<Task> found that we would like to print
+     */
+    public void printFindSuccess(List<Task> listFound) {
+        for (int i=0; i < listFound.size(); i++) {
+            printList(i, listFound.get(i));
+        }
+    }
+
+    /**
+     * Print whenever there is exception when find command is called.
+     */
+    public void printFindFail(NoMeaningException e) {
+        System.out.println(e.getMessage());
+    }
+
+    /**
      * Print whenever there is exception when task typed command is called.
      * @param e NoMeaningException that arises whenever task command failed.
      */
