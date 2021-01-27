@@ -1,11 +1,32 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
         ArrayList<Task> tasks = new ArrayList<>();
+        String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
+        // compared to this
+
+        try {
+            //File f = new File("./");
+            //System.out.println(f.getAbsolutePath());//to get the path to see which path java is looking
+            FileAccessor.ReadFromTasks(relPath, tasks);
+
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            System.out.println("EXCEPTION");
+            try {
+                Files.createDirectory(Paths.get("./src/main/java/data/"));
+            } catch (IOException e1){}//shld just be ioexception
+            //File f = new File(relPath); //no need to create file here will get auto created when writing
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -88,6 +109,12 @@ public class Duke {
                                 + tasks.size() + " tasks in the list\n" + line);
                     } else {
                         throw new IllegalArgumentException();
+                    }
+
+                    try {
+                        FileAccessor.WriteToTasks(relPath, tasks);
+                    } catch (IOException e) {
+                        System.out.println("Unable to save to hard drive");
                     }
                 } catch (IllegalArgumentException e) {
                     System.out.println(line + " Please enter 'todo (your task)', " +

@@ -11,6 +11,11 @@ public class Event extends Task {
         this.event = split[1].trim();
     }
 
+    public Event(String[] str, boolean isDone) {//call from harddisc
+        super(str[2], isDone);
+        this.event = str[3];
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() +" "+ "(at: " + event + ")";
