@@ -5,7 +5,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
+public class TaskList {
     private final List<Task> database = new ArrayList<>();
 
     void tellAdd() {
@@ -35,36 +35,13 @@ public class Database {
         } catch (HahaTaskNumberNotIntException ex) {
             System.out.println(ex);
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("OOPS! Wrong number!\n Try specify the right task number");
+            System.out.println("OOPS! Wrong number!\nTry specify the right task number");
         }
-    }
-
-    Task parseLine(String line) {
-        String[] tokens = line.split("\\|");
-        String type = tokens[0];
-        boolean isDone = tokens[1].equals("true");
-
-        String description = tokens[2];
-        Task task;
-        switch (type) {
-        case "T":
-            task = new Todo(isDone, description);
-            break;
-        case "D":
-            task = new Deadline(isDone, description);
-            break;
-        case "E":
-            task = new Event(isDone, description);
-            break;
-        default:
-            throw new IllegalStateException("Unexpected value: " + type);
-        }
-        return task;
     }
 
     void readTasks(List<String> file) {
         List<Task> tasks = new ArrayList<>();
-        file.forEach(line -> tasks.add(parseLine(line)));
+        file.forEach(line -> tasks.add(Parser.parseLine(line)));
         database.addAll(tasks);
     }
 
@@ -111,4 +88,37 @@ public class Database {
             System.out.println(ex);
         }
     }
+
+    boolean executeCommand(LegitCommand command, Ui ui) {
+        switch (command) {
+        case BYE:
+            ui.bye();
+            return true;
+        case TODO:
+            this.addToDB(new Todo(false, LegitCommand.TODO.getDetail()));
+            this.updateFile();
+            break;
+        case EVENT:
+            this.addToDB(new Event(false, LegitCommand.EVENT.getDetail()));
+            this.updateFile();
+            break;
+        case DEADLINE:
+            this.addToDB(new Deadline(false, LegitCommand.DEADLINE.getDetail()));
+            this.updateFile();
+            break;
+        case LIST:
+            this.listFromDB();
+            break;
+        case DONE:
+            this.markDoneToDB(LegitCommand.DONE.getDetail());
+            this.updateFile();
+            break;
+        case DELETE:
+            this.deleteFromDB(LegitCommand.DELETE.getDetail());
+            this.updateFile();
+            break;
+        }
+        return false;
+    }
+
 }

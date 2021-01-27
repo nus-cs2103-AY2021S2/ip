@@ -104,4 +104,26 @@ public class Parser {
         // Interpret
         return Parser.handleInterpret(input);
     }
+
+    static Task parseLine(String line) {
+        String[] tokens = line.split("\\|");
+        String type = tokens[0];
+        boolean isDone = tokens[1].equals("true");
+        String description = tokens[2];
+        Task task;
+        switch (type) {
+        case "T":
+            task = new Todo(isDone, description);
+            break;
+        case "D":
+            task = new Deadline(isDone, description);
+            break;
+        case "E":
+            task = new Event(isDone, description);
+            break;
+        default:
+            throw new IllegalStateException("Unexpected value: " + type);
+        }
+        return task;
+    }
 }

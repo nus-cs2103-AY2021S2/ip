@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
@@ -24,7 +25,11 @@ public class Storage {
         }
     }
 
-    public List<String> getTasks() throws IOException {
-        return Files.readAllLines(file);
+    public List<String> getTasks() {
+        try {
+            return Files.readAllLines(file);
+        } catch (IOException e) {
+            return new ArrayList<>();
+        }
     }
 }

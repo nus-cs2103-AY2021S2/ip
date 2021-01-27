@@ -2,6 +2,7 @@ todo borrow book
 list
 deadline return book /by 2020-01-02 18:00
 event project meeting /at 2020-03-12 11:00
+todo new project
 list
 done 1
 done 2
@@ -14,6 +15,7 @@ event
 done whatever
 blah blah
 delete 1
+delete 10
 done 2
 done 10
 list

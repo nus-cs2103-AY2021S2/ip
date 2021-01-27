@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
     protected final String description;
@@ -28,6 +29,12 @@ public abstract class Task {
         return "[" + type + "]";
     }
 
+    public String modifiedDescription(String id) {
+        String formatDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formatTime = time.format(DateTimeFormatter.ofPattern("hh.mm a"));
+        String formatDateTime = "(" + id + ": " + formatDate + " " + formatTime + ")";
+        return description.substring(0, description.indexOf('/')) + formatDateTime;
+    }
 
     public void setDone(boolean done) {
         isDone = done;

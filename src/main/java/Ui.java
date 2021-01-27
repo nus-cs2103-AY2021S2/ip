@@ -14,9 +14,16 @@ public class Ui {
             + "e.g. 2020-02-02 18:00\n"
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
-    
-    public Ui() {
-        // Pre input setup
+
+    public void welcome() {
         System.out.println(STARTER);
+    }
+
+    public void lineBreak() {
+        System.out.println(LINE_BREAK);
+    }
+
+    public void bye() {
+        System.out.println("Bye now!");
     }
 }
