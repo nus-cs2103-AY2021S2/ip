@@ -1,5 +1,7 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
@@ -58,7 +60,7 @@ public class Duke {
                         Duke.printAddedTask(newTask);
                         break;
                     case addEventCommand:
-                        String[] eventTimeAndTask = command.split("/at");
+                        String[] eventTimeAndTask = command.split("/at ");
                         //offset of 6 to remove "event " frm statement
                         newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
                         Duke.printAddedTask(newTask);
@@ -72,7 +74,7 @@ public class Duke {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
-            catch(DukeException ex){
+            catch(DukeException ex) {
                 System.err.println(ex.getMessage());
             }
         }

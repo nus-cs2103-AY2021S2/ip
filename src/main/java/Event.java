@@ -1,17 +1,28 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 //tasks that start at a specific time and ends at a specific time
 public class Event extends Task{
-    private String eventDuration;
-    Event(String eventDuration, String eventDetail){
+    private String eventDateString;
+    private LocalDate eventDate;
+    Event(String eventDateString, String eventDetail){
         super(eventDetail);
-        this.eventDuration = eventDuration;
+        try{
+            this.eventDate = Task.dateStringToDate(eventDateString);
+            this.eventDateString = eventDate.getMonth().toString().toLowerCase() + " " +
+                    eventDate.getDayOfMonth() + " " + eventDate.getYear();
+        }
+        catch(DateTimeException e){
+            System.err.println("Please input date in yyyy-MM-dd format.");
+        }
     }
 
-    public String getEventDuration(){
-        return this.eventDuration;
+    public LocalDate getEventDate(){
+        return this.eventDate;
     }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + "(at:" + this.eventDuration + ")";
+        return "[E]" + super.toString() + "(at:" + this.eventDateString + ")";
     }
 }
