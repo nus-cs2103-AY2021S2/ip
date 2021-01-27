@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor of a DeleteCommand
+     *
      * @param index Index of a task that this command is going to delete
      */
     public DeleteCommand(int index) {
@@ -20,6 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command to delete a task from the list
+     *
      * @throws DukeCommandException if there is no tasks to delete, index is out of range, an issue with deleting task
      * from the task list or an issue with saving the deletion to the hard disk
      */

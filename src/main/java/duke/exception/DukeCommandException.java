@@ -9,6 +9,7 @@ public class DukeCommandException extends DukeException{
 
     /**
      * Constructor for DukeCommandException
+     *
      * @param commandType Type of the command
      * @param params Parameters processed by the command
      * @param msg Error message that can be recalled
@@ -19,6 +20,7 @@ public class DukeCommandException extends DukeException{
 
     /**
      * Returns the type of the command
+     *
      * @return Type of the command
      */
     public String getCommandType() {
@@ -27,6 +29,7 @@ public class DukeCommandException extends DukeException{
 
     /**
      * Returns a string containing the parameters of the command
+     *
      * @return Parameters of the command
      */
     public String getParams() {

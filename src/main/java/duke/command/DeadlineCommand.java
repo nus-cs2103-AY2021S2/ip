@@ -16,6 +16,7 @@ public class DeadlineCommand extends Command{
 
     /**
      * Constructor of a DeadlineCommand
+     *
      * @param desc Description of a Deadline to be created
      * @param dateTime Date and time of when a Deadline to be created is ending
      */
@@ -26,6 +27,7 @@ public class DeadlineCommand extends Command{
 
     /**
      * Executes the Deadline command to create a Deadline task in the list
+     *
      * @throws DukeCommandException if there is an issue adding the Deadline into the task list or saving the tasks into
      * hard disk
      */

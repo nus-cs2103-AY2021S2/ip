@@ -4,6 +4,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Constructor for a ToDo task
+     *
      * @param desc Description of the task
      */
     public ToDo(String desc) {
@@ -12,6 +13,7 @@ public class ToDo extends Task {
 
     /**
      * Alternate constructor for a ToDo task whereby you can indicate it's completion
+     *
      * @param desc Description of the task
      * @param isDone Completion state of the task
      */
@@ -21,6 +23,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a letter symbol for the ToDo
+     *
      * @return Letter symbol for the ToDo
      */
     @Override
@@ -30,6 +33,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the ToDo's details in a format to be saved into the hard disk
+     *
      * @return ToDo's detail in a savable format
      */
     @Override

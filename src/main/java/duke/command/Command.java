@@ -13,6 +13,7 @@ public abstract class Command {
 
     /**
      * Setups the Ui and TaskManager instance
+     *
      * @param ui Ui instance to be shared
      * @param taskManager TaskManager instance to be shared
      */
@@ -23,12 +24,14 @@ public abstract class Command {
 
     /**
      * Executes the command
+     *
      * @throws DukeCommandException if any issue happened during the execution of the command
      */
     public abstract void execute() throws DukeCommandException;
 
     /**
      * Returns a boolean to indicate whether this command will terminate the chat bot
+     *
      * @return A boolean whether this command terminates the chat bot
      */
     public boolean isToExit() {

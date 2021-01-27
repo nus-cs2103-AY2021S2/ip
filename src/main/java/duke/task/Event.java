@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Constructor for an Event task
+     *
      * @param desc Description of the task
      * @param start Date and time when the task starts
      * @param end Date and time when the task ends
@@ -24,6 +25,7 @@ public class Event extends Task {
 
     /**
      * Alternate constructor for an Event task whereby you can indicate the completion status of the task
+     *
      * @param desc Description of the task
      * @param start Date and time when the task starts
      * @param end Date and time when the task ends
@@ -37,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Returns the description of the Event
+     *
      * @return Description of the Event
      */
     @Override
@@ -47,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Returns a letter symbol for the Event
+     *
      * @return Letter symbol for the Event
      */
     @Override
@@ -56,6 +60,7 @@ public class Event extends Task {
 
     /**
      * Returns the Event's details in a format to be saved into the hard disk
+     *
      * @return Event's detail in a savable format
      */
     @Override
@@ -67,6 +72,7 @@ public class Event extends Task {
 
     /**
      * Returns the date and time when the Event starts
+     *
      * @return Starting date and time of the Event
      */
     public LocalDateTime getStartDateTime() {
@@ -75,6 +81,7 @@ public class Event extends Task {
 
     /**
      * Returns the date and time when the Event ends
+     *
      * @return Ending date and time of the Event
      */
     public LocalDateTime getEndDateTime() {

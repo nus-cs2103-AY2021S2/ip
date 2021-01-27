@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor for a Task
+     *
      * @param desc Description of a task
      * @param isDone Completion of a task
      */
@@ -26,6 +27,7 @@ public class Task {
 
     /**
      * Provides the description of the task
+     *
      * @return Description of the task
      */
     public String getDesc() {
@@ -34,6 +36,7 @@ public class Task {
 
     /**
      * Provides the symbol for the task type
+     *
      * @return Symbol for the task type
      */
     public String getTypeSymbol() {
@@ -42,6 +45,7 @@ public class Task {
 
     /**
      * Provides the completion status of the task
+     *
      * @return Completion status of the task
      */
     public String getStatusSymbol() {
@@ -50,6 +54,7 @@ public class Task {
 
     /**
      * Returns the task's details in a format to be saved into the hard disk
+     *
      * @return Task's detail in a savable format
      */
     public String toSaveInfoString() {

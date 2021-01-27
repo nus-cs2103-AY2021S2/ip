@@ -17,6 +17,7 @@ public class TaskManager {
 
     /**
      * Adds a new ToDo into the task list
+     *
      * @param desc Description of the new ToDo
      * @return ToDo that was created
      * @throws DukeTaskException if description provided is empty
@@ -33,6 +34,7 @@ public class TaskManager {
 
     /**
      * Adds a new Deadline into the task list
+     *
      * @param desc Description of the new Deadline
      * @param dateTime Date and time when the new Deadline is due
      * @return Deadline that was created
@@ -50,6 +52,7 @@ public class TaskManager {
 
     /**
      * Adds a new Event into the task list
+     *
      * @param desc Description of the new Event
      * @param start Date and time when the new Event starts
      * @param end Date and time when the new Event ends
@@ -68,6 +71,7 @@ public class TaskManager {
 
     /**
      * Deletes a specific task from the task list
+     *
      * @param index Index of the task that you want to delete
      * @return Deleted task
      * @throws DukeTaskException if there is no task in the list or the index is out of range
@@ -85,6 +89,7 @@ public class TaskManager {
 
     /**
      * Marks a specific task in the task list as completed
+     *
      * @param index Index of the task that you want to complete
      * @throws DukeTaskException if there is no task in the list or the index is out of range
      */
@@ -102,6 +107,7 @@ public class TaskManager {
 
     /**
      * Returns a task in the list with a specific index
+     *
      * @param index Index of a task you want to retrieve
      * @return Task with the specified index
      */
@@ -111,6 +117,7 @@ public class TaskManager {
 
     /**
      * Returns a copy of the task list
+     *
      * @return A copy of the task list
      */
     public List<Task> getTasks() {
@@ -119,6 +126,7 @@ public class TaskManager {
 
     /**
      * Sets the content of the task list
+     *
      * @param tasks A task list to import the content from
      */
     public void setTasks(List<Task> tasks) {
@@ -127,6 +135,7 @@ public class TaskManager {
 
     /**
      * Returns the number of tasks in the task list
+     *
      * @return Number of tasks in the task list
      */
     public int getTasksSize() {

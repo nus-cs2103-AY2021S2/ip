@@ -6,6 +6,7 @@ import duke.exception.DukeCommandException;
 public class ExitCommand extends Command {
     /**
      * Executes the exit command to tell the Duke to exit
+     *
      * @throws DukeCommandException
      */
     @Override
@@ -14,6 +15,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true to indicate that the chat bot will be exiting
+     *
      * @return True boolean to indicate that the bot is exiting
      */
     @Override

@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Saves all tasks in the current session into the hard disk
+     *
      * @param tasks A list of tasks
      * @throws DukeSaveException if there is an issue writing into the hard disk
      */
@@ -52,6 +53,7 @@ public class Storage {
 
     /**
      * Loads tasks from the hard disk into current session's task list
+     *
      * @param taskManager TaskManager that contains the current session's task list
      * @throws DukeLoadException if there is an issue reading tasks from the hard disk
      */

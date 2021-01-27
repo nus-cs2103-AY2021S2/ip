@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a Deadline task
+     *
      * @param desc Description of the task
      * @param dateTime Date and time when the task needs to be completed
      */
@@ -20,6 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Alternate constructor for a Deadline task whereby you can indicate it's completion status
+     *
      * @param desc Description of the task
      * @param dateTime Date and time when the task needs to be completed
      * @param isDone Completion status of the task
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the description of the Deadline
+     *
      * @return Description of the Deadline
      */
     @Override
@@ -41,6 +44,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a letter symbol for the Deadline
+     *
      * @return Letter symbol for the Deadline
      */
     @Override
@@ -50,6 +54,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the Deadline's details in a format to be saved into the hard disk
+     *
      * @return Deadline's details in a savable format
      */
     @Override
@@ -61,6 +66,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the date and time at which the Deadline is due
+     *
      * @return Due date and time for the Deadline
      */
     public LocalDateTime getDateTime() {

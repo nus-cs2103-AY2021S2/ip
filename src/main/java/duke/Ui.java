@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Displays a message
+     *
      * @param msg Message to be displayed
      */
     public void printMsg(String msg) {
@@ -21,6 +22,7 @@ public class Ui {
 
     /**
      * Displays a default welcome message
+     *
      * @param botName Name of the chat bot to greet with
      */
     public void printWelcomeMsg(String botName) {
@@ -34,6 +36,7 @@ public class Ui {
 
     /**
      * Displays a message to indicate the addition of a new task
+     *
      * @param task Task that was added
      * @param tasksSize Number of total tasks after adding that new task
      */
@@ -47,6 +50,7 @@ public class Ui {
 
     /**
      * Displays a message to indicate the completion of a task
+     *
      * @param index Index of the completed task in the list
      * @param task Task that was completed
      */
@@ -60,6 +64,7 @@ public class Ui {
 
     /**
      * Displays a message to indicate the deletion of a task
+     *
      * @param task Task that was deleted
      * @param tasksSize Number of total tasks left after deleting that task
      */
@@ -74,6 +79,7 @@ public class Ui {
 
     /**
      * Display the tasks from the search result
+     *
      * @param tasks A list of tasks as search results
      */
     public void printFoundMsg(List<Task> tasks) {
@@ -88,6 +94,7 @@ public class Ui {
 
     /**
      * Displays all tasks currently in the list
+     *
      * @param tasks List of tasks
      */
     public void printTaskList(List<Task> tasks) {
@@ -102,6 +109,7 @@ public class Ui {
 
     /**
      * Displays an error message
+     *
      * @param msg Error message
      */
     public void printError(String msg) {

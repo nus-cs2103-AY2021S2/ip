@@ -11,6 +11,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor of a DoneCommand
+     *
      * @param index Index of a task that will be completed
      */
     public DoneCommand(int index) {
@@ -19,6 +20,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the Done command to complete the task that existed in the list
+     *
      * @throws DukeCommandException if there is no tasks to be completed, invalid task index, an issue with saving the
      * task's completion or an issue with updating the task's completion status
      */

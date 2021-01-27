@@ -18,6 +18,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for a FindCommand
+     *
      * @param keyword A String to check against task's description
      */
     public FindCommand(String keyword) {
@@ -26,6 +27,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructor for a FindCommand
+     *
      * @param keyword A String to check against task's description
      * @param date A date to filter the tasks with
      */
@@ -36,6 +38,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the Find command to search tasks that matches the keyword and occurs on the target date
+     *
      * @throws DukeCommandException if tasks cannot be retrieved
      */
     @Override

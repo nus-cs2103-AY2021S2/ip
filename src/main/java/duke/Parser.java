@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     /**
      * Parses a command string into an executable command
+     *
      * @param text A command string
      * @return An executable Command
      * @throws DukeException if the command string cannot be parsed
@@ -56,6 +57,7 @@ public class Parser {
 
     /**
      * Parses a command string into a ToDo command
+     *
      * @param text A command string
      * @return A ToDo command
      * @throws DukeCommandException if the command string contains an empty description
@@ -71,6 +73,7 @@ public class Parser {
 
     /**
      * Parses a command string into a Deadline command
+     *
      * @param text A command string
      * @return A Deadline command
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
@@ -104,6 +107,7 @@ public class Parser {
 
     /**
      * Parses a command string into an Event command
+     *
      * @param text A command string
      * @return An Event command
      * @throws DukeCommandException if the command string has insufficient parameters or invalid date time format
@@ -141,6 +145,7 @@ public class Parser {
 
     /**
      * Parses a command string into a Done command
+     *
      * @param text A command string
      * @return A Done command
      * @throws DukeCommandException if the index in the command string is invalid
@@ -158,6 +163,7 @@ public class Parser {
 
     /**
      * Parses a command string into a Delete command
+     *
      * @param text A command string
      * @return A Delete command
      * @throws DukeCommandException if the index in the command string is invalid
@@ -175,6 +181,7 @@ public class Parser {
 
     /**
      * Parses a command string into a Find command
+     *
      * @param text A command String
      * @return A Find command
      * @throws DukeCommandException if the parameters are empty or in invalid format
@@ -222,6 +229,7 @@ public class Parser {
 
     /**
      * Parses a command string into a List command
+     *
      * @param text A command string
      * @return A List command
      */
@@ -231,6 +239,7 @@ public class Parser {
 
     /**
      * Parses a command string into an Exit command
+     *
      * @param text A command string
      * @return An Exit command
      */

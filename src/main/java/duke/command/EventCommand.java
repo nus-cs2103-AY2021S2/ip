@@ -18,6 +18,7 @@ public class EventCommand extends Command{
 
     /**
      * Constructor of an EventCommand
+     *
      * @param desc Description of an Event that is going to be created
      * @param start Starting date and time of an Event that is going to be created
      * @param end Ending date and time of an Event that is going to be created
@@ -30,6 +31,7 @@ public class EventCommand extends Command{
 
     /**
      * Executes the Event command to create an Event task in the list
+     *
      * @throws DukeCommandException if there is an issue with adding the Event into the list or saving the Event into
      * the hard disk
      */
