@@ -14,7 +14,6 @@ public abstract class Task {
         this.description = description;
     }
 
-
     public String getStatusIcon() {
         return isDone ? "\u2718" : " ";
     }

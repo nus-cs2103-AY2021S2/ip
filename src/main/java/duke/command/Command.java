@@ -13,18 +13,18 @@ public abstract class Command {
     /**
      * Indicator used to differentiate exit command
      */
-    private boolean exit;
+    private boolean shouldExit;
 
     public Command() {
-        this.exit = false;
+        this.shouldExit = false;
     }
 
-    public Command(boolean exit) {
-        this.exit = exit;
+    public Command(boolean isExit) {
+        this.shouldExit = isExit;
     }
 
     public boolean isExit() {
-        return exit;
+        return shouldExit;
     }
 
     /**

@@ -100,8 +100,8 @@ public class Ui {
         showList(taskList);
     }
 
-    private void showList(TaskList taskList) {
-        for(Task t : taskList.getTaskList()) {
+    private void showList(TaskList tasks) {
+        for (Task t : tasks.getTaskList()) {
             formattedPrint(t.toString());
         }
     }

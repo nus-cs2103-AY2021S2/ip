@@ -4,7 +4,11 @@ import duke.DukeHelper;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
+
     private LocalDate by;
 
     public LocalDate getBy() {

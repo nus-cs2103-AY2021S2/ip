@@ -43,7 +43,7 @@ public class Storage {
             throw new DukeException("File not found");
         }
 
-        List<Task> taskList = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String item = sc.nextLine();
             String[] items = item.split(" \\| ");
@@ -54,32 +54,32 @@ public class Storage {
 
             switch (type) {
             case 'T':
-                taskList.add(new ToDo(done, desc));
+                tasks.add(new ToDo(done, desc));
                 break;
             case 'E':
-                taskList.add(new Event(done, desc, items[3]));
+                tasks.add(new Event(done, desc, items[3]));
                 break;
             case 'D':
-                taskList.add(new Deadline(done, desc, items[3]));
+                tasks.add(new Deadline(done, desc, items[3]));
                 break;
             }
         }
         sc.close();
-        return taskList;
+        return tasks;
     }
 
     /**
      * Saves the {@code Task} data to the storage file.
-     * @param taskList list of task(s) to be saved
+     * @param tasks list of task(s) to be saved
      * @throws DukeException if there were errors encountered when trying to write data to the file.
      */
-    public void saveFile(TaskList taskList) throws DukeException {
+    public void saveFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(taskList.toStorageString());
+            fileWriter.write(tasks.toStorageString());
             fileWriter.close();
-        } catch (IOException ex) {
-            throw new DukeException("Error Saving file");
+        } catch (IOException e) {
+            throw new DukeException("Error saving file");
         }
     }
 }

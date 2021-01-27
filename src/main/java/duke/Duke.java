@@ -8,7 +8,6 @@ import duke.task.TaskList;
  * Initialize the application and start interacting with users.
  */
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

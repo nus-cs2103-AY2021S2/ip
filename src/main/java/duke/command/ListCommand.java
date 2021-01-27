@@ -7,9 +7,10 @@ import duke.Ui;
 import duke.task.TaskList;
 
 /**
- * Lists all the tasks in the list to the user..
+ * Lists all the tasks in the list to the user.
  */
 public class ListCommand extends Command{
+
     private String date;
 
     public ListCommand() {

@@ -38,7 +38,7 @@ public class DukeHelper {
         try {
             LocalDate.parse(dateString);
             return true;
-        } catch (DateTimeParseException ex) {
+        } catch (DateTimeParseException e) {
             return false;
         }
     }
@@ -55,5 +55,4 @@ public class DukeHelper {
             return false;
         }
     }
-
 }

@@ -38,7 +38,7 @@ public class Parser {
             case TODO:
                 return new AddCommand(processInputs(inputs, dukeCommand));
             case LIST:
-                    return inputs.length == 2 ? new ListCommand(inputs[1]) : new ListCommand();
+                return inputs.length == 2 ? new ListCommand(inputs[1]) : new ListCommand();
             default:
                 return null;
             }
@@ -55,10 +55,12 @@ public class Parser {
         if (arr.length < 2) {
             throw new DukeException("You are missing the index!");
         }
+
         String input = arr[1];
         if (!DukeHelper.isNumeric(input) && !input.equals("all")) {
             throw new DukeException("Your input is not recognised.");
         }
+
         return input;
     }
 
