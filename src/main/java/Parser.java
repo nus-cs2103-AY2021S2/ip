@@ -66,7 +66,7 @@ public class Parser {
     }
 
 
-    private String getDateTime(String text, String search) throws DukeException {
+    public String getDateTime(String text, String search) throws DukeException {
         //TODO handle case when text does not contain "/at" or "/by"
         int index = text.indexOf(search);
         if (index == -1) {
@@ -75,7 +75,7 @@ public class Parser {
         return text.substring(index + 5);
     }
 
-    private String getMsg(String text, String search) throws DukeException {
+    public String getMsg(String text, String search) throws DukeException {
         //TODO handle case when text does not contain "/at" or "/by"
         int index = text.indexOf(search);
         if (index == -1) {
