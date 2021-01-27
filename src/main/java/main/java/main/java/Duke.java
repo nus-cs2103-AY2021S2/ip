@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class Duke {
-    public TaskList taskList;
-    public Parser parser;
-    public Ui ui;
+    private TaskList taskList;
+    private Parser parser;
+    private Ui ui;
 
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
