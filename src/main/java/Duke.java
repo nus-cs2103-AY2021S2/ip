@@ -1,63 +1,81 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
+    private final TaskList taskList;
 
-        ArrayList<Task> list = Storage.readFromFile();
+    public Duke(Ui ui, Storage storage, Parser parser, TaskList taskList) {
+        this.ui = ui;
+        this.storage = storage;
+        this.parser = parser;
+        this.taskList = taskList;
+    }
+
+    public void run() {
+
         Scanner sc = new Scanner(System.in);
-        Ui.greet();
-        boolean byeFlag = true;
+        ui.greet();
+        boolean byeFlag = false;
 
-        while (byeFlag) {
+        while (!byeFlag) {
             try {
                 String input = sc.nextLine();
-                Command command = Parser.parseCommand(input);
+                Command command = parser.parseCommand(input);
                 switch (command) {
                 case TODO:
-                    ToDo t = Parser.parseToDo(input);
-                    list.add(t);
-                    Storage.writeToFile(list);
-                    Ui.taskAddConfirmation(t, list);
+                    ToDo t = parser.parseToDo(input);
+                    taskList.addTask(t);
+                    storage.writeToFile(taskList);
+                    ui.taskAddConfirmation(t, taskList);
                     break;
                 case DEADLINE:
-                    Deadline d = Parser.parseDeadline(input);
-                    list.add(d);
-                    Storage.writeToFile(list);
-                    Ui.taskAddConfirmation(d, list);
+                    Deadline d = parser.parseDeadline(input);
+                    taskList.addTask(d);
+                    storage.writeToFile(taskList);
+                    ui.taskAddConfirmation(d, taskList);
                     break;
                 case EVENT:
-                    Event e = Parser.parseEvent(input);
-                    list.add(e);
-                    Storage.writeToFile(list);
-                    Ui.taskAddConfirmation(e, list);
+                    Event e = parser.parseEvent(input);
+                    taskList.addTask(e);
+                    storage.writeToFile(taskList);
+                    ui.taskAddConfirmation(e, taskList);
                     break;
                 case LIST:
-                    Ui.listTasks(list);
+                    ui.listTasks(taskList);
                     break;
                 case DONE:
-                    int doneIndex = Parser.parseDone(input, list);
-                    Task doneTask = list.get(doneIndex);
-                    list.get(doneIndex).markAsDone();
-                    Storage.writeToFile(list);
-                    Ui.taskDoneConfirmation(list, doneTask);
+                    int doneIndex = parser.parseDone(input, taskList);
+                    Task doneTask = taskList.getTask(doneIndex);
+                    taskList.markTaskAsDone(doneIndex);
+                    storage.writeToFile(taskList);
+                    ui.taskDoneConfirmation(doneTask);
                     break;
                 case DELETE:
-                    int deleteIndex = Parser.parseDelete(input, list);
-                    Task deletedTask = list.get(deleteIndex);
-                    list.remove(deleteIndex);
-                    Storage.writeToFile(list);
-                    Ui.taskDeleteConfirmation(list, deletedTask);
+                    int deleteIndex = parser.parseDelete(input, taskList);
+                    Task deleteTask = taskList.getTask(deleteIndex);
+                    taskList.deleteTask(deleteIndex);
+                    storage.writeToFile(taskList);
+                    ui.taskDeleteConfirmation(taskList, deleteTask);
                     break;
                 case BYE:
-                    Ui.byeMessage();
-                    byeFlag = false;
+                    ui.byeMessage();
+                    byeFlag = true;
                     break;
                 }
             } catch (DukeException e) {
-                Ui.dukeExceptionMessage(e);
+                ui.dukeExceptionMessage(e);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        Parser parser = new Parser();
+        TaskList taskList = storage.readFromFile();
+        new Duke(ui, storage, parser, taskList).run();
     }
 }

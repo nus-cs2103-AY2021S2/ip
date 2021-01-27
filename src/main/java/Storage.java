@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    public static ArrayList<Task> readFromFile() {
+    public TaskList readFromFile() {
         File dir = new File("data");
         if (!dir.exists()) {
             dir.mkdir();
@@ -18,33 +18,33 @@ public class Storage {
         if (!saved_tasks.exists()) {
             try {
                 saved_tasks.createNewFile();
-                return new ArrayList<>();
+                return new TaskList(new ArrayList<>());
             } catch (IOException e) {
                 e.printStackTrace();
-                return new ArrayList<>();
+                return new TaskList(new ArrayList<>());
             }
         } else {
             try {
                 FileInputStream fis = new FileInputStream(saved_tasks);
                 ObjectInputStream ois = new ObjectInputStream(fis);
-                ArrayList<Task> result = (ArrayList<Task>) ois.readObject();
+                TaskList result = (TaskList) ois.readObject();
                 ois.close();
                 fis.close();
                 return result;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
-                return new ArrayList<>();
+                return new TaskList(new ArrayList<>());
             }
         }
     }
 
-    public static void writeToFile(ArrayList<Task> list) {
+    public void writeToFile(TaskList tasks) {
         File dir = new File("data");
         File saved_tasks = new File(dir, "saved_tasks");
         try {
             FileOutputStream fos = new FileOutputStream(saved_tasks);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(list);
+            oos.writeObject(tasks);
             oos.close();
             fos.close();
         } catch (IOException ioe) {

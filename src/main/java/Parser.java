@@ -7,7 +7,7 @@ public class Parser {
 
     public static DateTimeFormatter INPUT_DATETIME_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
-    public static Command parseCommand(String input) throws DukeException {
+    public Command parseCommand(String input) throws DukeException {
         String[] arr = input.split(" ");
         try {
             return Command.valueOf(arr[0].toUpperCase());
@@ -16,7 +16,7 @@ public class Parser {
         }
     }
 
-    public static ToDo parseToDo(String input) throws DukeException {
+    public ToDo parseToDo(String input) throws DukeException {
         String[] arr = input.split(" ");
         if (arr.length < 2) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -24,7 +24,7 @@ public class Parser {
         return new ToDo(input.substring(5));
     }
 
-    public static Deadline parseDeadline(String input) throws DukeException {
+    public Deadline parseDeadline(String input) throws DukeException {
         String[] arr = input.split(" ");
         String[] arr2 = input.split(" /by ");
         if (arr.length < 2 || arr2[0].split(" ").length < 2) {
@@ -42,7 +42,7 @@ public class Parser {
         return new Deadline(arr2[0].substring(9), deadlineDate);
     }
 
-    public static Event parseEvent(String input) throws DukeException {
+    public Event parseEvent(String input) throws DukeException {
         String[] arr = input.split(" ");
         String[] arr3 = input.split(" /at ");
         if (arr.length < 2 || arr3[0].split(" ").length < 2) {
@@ -60,7 +60,8 @@ public class Parser {
         return new Event(arr3[0].substring(6), eventDate);
     }
 
-    public static int parseDone(String input, ArrayList<Task> tasks) throws DukeException {
+    public int parseDone(String input, TaskList taskList) throws DukeException {
+        ArrayList<Task> tasks = taskList.getTasks();
         String[] arr = input.split(" ");
         if (arr.length < 2) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
@@ -76,7 +77,8 @@ public class Parser {
         }
     }
 
-    public static int parseDelete(String input, ArrayList<Task> tasks) throws DukeException {
+    public int parseDelete(String input, TaskList taskList) throws DukeException {
+        ArrayList<Task> tasks = taskList.getTasks();
         String[] arr = input.split(" ");
         if (arr.length < 2) {
             throw new DukeException("OOPS!!! You did not enter the number corresponding to the task.");
