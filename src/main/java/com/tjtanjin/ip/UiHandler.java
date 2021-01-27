@@ -9,6 +9,7 @@ public class UiHandler {
 
     //color printing
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
@@ -56,7 +57,7 @@ public class UiHandler {
      * @param response error message to print
      */
     public void showError(String response) {
-        System.out.println(ANSI_RED + response);
+        System.out.println(ANSI_YELLOW + response);
     }
 
     /**
