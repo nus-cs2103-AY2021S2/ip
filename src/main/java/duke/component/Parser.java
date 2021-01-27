@@ -10,6 +10,14 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 public class Parser {
+    /**
+     * Parses command and generate task accordingly.
+     * @param command
+     * @return
+     * @throws UnknownCommandException
+     * @throws EmptyDescriptionException
+     * @throws WrongFormatException
+     */
     public static Command parse(String command) throws UnknownCommandException, EmptyDescriptionException, WrongFormatException {
         String[] parameters = command.split(" ");
         switch (parameters[0]) {
