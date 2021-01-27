@@ -15,9 +15,10 @@ public class HelpCommand {
     /**
      * List all available command usage and descriptions.
      * @param cmdInfo mapping of each command and their information
+     * @return string response after operation is done
      */
     public String execute(HashMap<String, String> cmdInfo) {
-        StringBuilder str = new StringBuilder("The available commands are as listed below:");
+        StringBuilder str = new StringBuilder("Info: The available commands are as listed below:");
         for (String info : cmdInfo.values()) {
             str.append("\n").append(info);
         }

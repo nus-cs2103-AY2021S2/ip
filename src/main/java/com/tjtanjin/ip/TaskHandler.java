@@ -26,6 +26,7 @@ public class TaskHandler {
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates taskDates array of dates (defaults to first element for deadline end date)
+     * @return string response after operation is done
      */
     public String addTask(String taskType, String taskName, LocalDate[] taskDates) {
         Task task;
@@ -52,6 +53,7 @@ public class TaskHandler {
     /**
      * Marks a task as done.
      * @param index index of task to mark as done
+     * @return string response after operation is done
      */
     public String markTaskDone(int index) {
         try {
@@ -81,6 +83,7 @@ public class TaskHandler {
     /**
      * Deletes a task.
      * @param index index of task to delete
+     * @return string response after operation is done
      */
     public String deleteTask(int index) {
         try {
@@ -105,6 +108,7 @@ public class TaskHandler {
 
     /**
      * Shows all tasks to user
+     * @return string response after operation is done
      */
     public String showAllTasks() {
         if (tasks.size() == 0) {
@@ -123,6 +127,7 @@ public class TaskHandler {
     /**
      * Find tasks whose name contains input from user.
      * @param taskName name of task
+     * @return string response after operation is done
      */
     public String findTask(String taskName) {
         if (tasks.size() == 0) {

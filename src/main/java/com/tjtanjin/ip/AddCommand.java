@@ -10,7 +10,7 @@ public class AddCommand {
     private final TaskHandler taskHandler;
 
     /**
-     * Constructor for TodoCommand.
+     * Constructor for AddCommand.
      * @param taskHandler provides access for command to modify tasks
      */
     public AddCommand(TaskHandler taskHandler) {
@@ -22,6 +22,7 @@ public class AddCommand {
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates array of dates
+     * @return string response after operation is done
      */
     public String execute(String taskType, String taskName, LocalDate[] taskDates) {
         return taskHandler.addTask(taskType, taskName, taskDates);

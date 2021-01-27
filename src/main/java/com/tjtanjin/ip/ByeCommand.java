@@ -14,6 +14,6 @@ public class ByeCommand {
      * Exits the program.
      */
     public void execute() {
-        System.exit(0);
+        UiHandler.terminate("Good bye, see you soon! :D");
     }
 }

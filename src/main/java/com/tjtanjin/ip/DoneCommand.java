@@ -16,8 +16,9 @@ public class DoneCommand {
     }
 
     /**
-     * Forwards the mark task as done operation to TaskList.
+     * Forwards the mark task as done operation to TaskHandler.
      * @param index of task to mark as done
+     * @return string response after operation is done
      */
     public String execute(int index) {
         return taskHandler.markTaskDone(index);

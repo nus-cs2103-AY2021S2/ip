@@ -16,6 +16,7 @@ public class ListCommand {
     }
     /**
      * List all tasks entered by user.
+     * @return string response after operation is done
      */
     public String execute() {
         return taskHandler.showAllTasks();

@@ -16,8 +16,9 @@ public class DeleteCommand {
     }
 
     /**
-     * Forwards the delete task operation to TaskList.
+     * Forwards the delete task operation to TaskHandler.
      * @param index of task to delete
+     * @return string response after operation is done
      */
     public String execute(int index) {
         return taskHandler.deleteTask(index);

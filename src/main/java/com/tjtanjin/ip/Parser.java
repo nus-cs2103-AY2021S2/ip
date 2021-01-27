@@ -60,6 +60,7 @@ public class Parser {
     /**
      * Parses input from user to determine action to take.
      * @param input input provided by user
+     * @return string response after operation is done
      */
     public String parseInput(String input) {
 
@@ -73,7 +74,6 @@ public class Parser {
         try {
             switch (Cmd.valueOf(command)) {
             case BYE:
-                UiHandler.terminate("Good bye, see you soon! :D");
                 byeCommand.execute();
                 return null;
             case DEADLINE:
@@ -103,6 +103,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a command provided by user is valid.
+     * @param command command provided by user
+     * @return true if command is valid, false otherwise
+     */
     private boolean isValidCommand(String command) {
         Cmd[] cmds = Cmd.values();
         for (Cmd cmd: cmds) {
@@ -117,6 +122,7 @@ public class Parser {
      * Parses index from user for done and delete command.
      * @param cmd cmd from user (done or delete)
      * @param input input provided by user
+     * @return index of task
      */
     public int parseIndex(String cmd, String input) throws DukeException {
         String[] parsedString = input.split("\\s+");
@@ -141,6 +147,7 @@ public class Parser {
     /**
      * Parses task name from user input
      * @param input input provided by user
+     * @return name of task
      */
     public String parseTaskName(String input) throws DukeException {
         String[] parsedString = input.split("\\s+", 2);
@@ -176,6 +183,7 @@ public class Parser {
     /**
      * Parses task due date from user input
      * @param input input provided by user
+     * @return array of dates for task
      */
     public LocalDate[] parseTaskDates(String input) throws DukeException {
         String[] parsedString = input.split("\\s+", 2);

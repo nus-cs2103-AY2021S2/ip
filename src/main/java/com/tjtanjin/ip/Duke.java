@@ -29,6 +29,7 @@ public class Duke {
     /**
      * Listens for input from the user.
      * @param parser class that handles parsing of input
+     * @param uiHandler class that handles all print operations to the user
      */
     private static void listenInput(Parser parser, UiHandler uiHandler) {
         Scanner sc = new Scanner(System.in);

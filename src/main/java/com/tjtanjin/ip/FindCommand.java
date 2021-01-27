@@ -16,7 +16,9 @@ public class FindCommand {
     }
 
     /**
-     * Forwards the find task operation to TaskList.
+     * Forwards the find task operation to TaskHandler.
+     * @param taskName name of task
+     * @return string response after operation is done
      */
     public String execute(String taskName) {
         return taskHandler.findTask(taskName);

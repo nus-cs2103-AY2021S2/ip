@@ -29,6 +29,7 @@ public class StorageHandler {
     //solution below adapted from https://howtodoinjava.com/java/library/json-simple-read-write-json-examples/
     /**
      * Loads saved tasks from hard disk.
+     * @return array list of tasks
      */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> loadTasks() {
@@ -112,6 +113,7 @@ public class StorageHandler {
      * @param status status of task (incomplete or complete)
      * @param type type of task (todo, deadline or event)
      * @param taskDates array of dates (defaults to first element for deadline end date)
+     * @return true if saving task was successful, false otherwise
      */
     @SuppressWarnings("unchecked")
     public boolean saveTask(int index, String saveType, String taskName,
