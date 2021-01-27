@@ -1,5 +1,11 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -98,8 +104,14 @@ public class DukeLevel {
                         if (!strArray[1].contains("/by")) {
                             throw new DukeException("Uh oh! Please specify a timing using /by.");
                         }
-                        System.out.println(line);
                         String[] tempStrArray = cmdTask.split("/by", 2);
+                        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+                        try {
+                            Date date = formatter.parse(tempStrArray[1]);
+                        } catch (Exception e) {
+                            throw new DukeException("Uh oh! Please enter a timing in the format dd-mm-yyyy");
+                        }
+                        System.out.println(line);
                         Deadline tempTask = new Deadline(tempStrArray[0], tempStrArray[1]);
                         tasksArray.add(tempTask);
                         System.out.println("     Got it. I've added this task: ");
@@ -187,6 +199,7 @@ public class DukeLevel {
         }
         fwriter.close();
     }
+
 }
 
 
