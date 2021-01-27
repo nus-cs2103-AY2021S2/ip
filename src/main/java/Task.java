@@ -9,16 +9,16 @@ public class Task {
     private final LocalDate date;
     private final LocalTime time;
 
-    public Task(String s, int i) {
-        if (i == 0) {
-            this.task = s;
+    public Task(String task, int type) {
+        if (type == 0) {
+            this.task = task;
             this.date = null;
             this.time = null;
         } else {
-            String[] info = s.split("/");
+            String[] info = task.split("/");
             if (info.length == 1 || info[0].equals(" ")) {
                 throw new IllegalArgumentException();
-            } else if (i == 1) {
+            } else if (type == 1) {
                 this.date = LocalDate.parse(info[1].substring(3));
                 this.time = null;
             } else {
@@ -27,7 +27,7 @@ public class Task {
             }
             this.task = info[0];
         }
-        this.type = i;
+        this.type = type;
     }
 
     public void markDone() {
@@ -59,14 +59,15 @@ public class Task {
             return checkType() + checkDone() + this.task + "(by: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
-            return checkType() + checkDone() + this.task + "(at: " +
-                    this.time.format(DateTimeFormatter.ofPattern("hh:mm a"))+ ")";
+            return checkType() + checkDone() + this.task + "(at: "
+                    + this.time.format(DateTimeFormatter.ofPattern("hh:mm a"))+ ")";
         }
     }
 
     public String export() {
         String done = this.done ? " 1" : " 0";
-        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at " + this.time;
+        String deadline = this.type == 0 ? "" : this.type == 1 ? "/by " + this.date : "/at "
+                + this.time;
         return this.type + done + this.task + deadline;
     }
 }

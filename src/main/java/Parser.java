@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 public class Parser {
-    private TaskList list;
-    private Ui ui;
-    private Scanner sc;
+    private final TaskList list;
+    private final Ui ui;
+    private final Scanner sc;
 
     public Parser(TaskList list, Ui ui) {
         this.list = list;
