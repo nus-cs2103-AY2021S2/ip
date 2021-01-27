@@ -1,5 +1,10 @@
+package Duke.task;
+
 import java.util.ArrayList;
 import java.util.List;
+import Duke.ui.Ui;
+import Duke.exceptions.DukeException;
+
 
 /**
  * A class that store the task that user key in.

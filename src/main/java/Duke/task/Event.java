@@ -1,3 +1,5 @@
+package Duke.task;
+
 /**
  * A subclass of Task that represent an event key in by user.
  */

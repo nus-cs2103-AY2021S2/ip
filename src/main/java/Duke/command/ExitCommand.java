@@ -1,5 +1,8 @@
+package Duke.command;
+
+import Duke.exceptions.DukeException;
 public class ExitCommand extends Command {
-	ExitCommand(String task, String date) {
+	public ExitCommand(String task, String date) {
 		super("bye", task, date, command -> {
 			return handleBye(task, date);
 		});

@@ -1,3 +1,8 @@
+package Duke.exceptions;
+
+import Duke.ui.Ui;
+
+
 /**
  * A class that store all the possible display of errorsException in Duke.
  */

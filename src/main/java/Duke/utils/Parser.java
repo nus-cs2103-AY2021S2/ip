@@ -1,3 +1,14 @@
+package Duke.utils;
+
+import Duke.task.Task;
+import Duke.command.Command;
+import Duke.command.ExitCommand;
+import Duke.command.DoneCommand;
+import Duke.command.ErrorCommand;
+import Duke.command.ListCommand;
+import Duke.command.AddCommand;
+import Duke.command.DeleteCommand;
+
 public class Parser {
 	private String instruction;
 	private String taskName;

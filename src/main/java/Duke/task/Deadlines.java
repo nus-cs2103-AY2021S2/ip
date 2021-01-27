@@ -1,3 +1,5 @@
+package Duke.task;
+
 /**
  * sub-class of Task to represents a task with deadline.
  */

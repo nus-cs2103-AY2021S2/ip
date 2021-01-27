@@ -1,5 +1,13 @@
+package Duke.command;
+
+import Duke.task.Todo;
+import Duke.task.Deadlines;
+import Duke.task.Event;
+import Duke.ui.Ui;
+import Duke.exceptions.DukeException;
+
 public class AddCommand extends Command{
-	AddCommand(String instruction, String task, String date) {
+	public AddCommand(String instruction, String task, String date) {
 		super(instruction, task, date, command -> {
 			if (instruction.equals("todo")) {
 				return handleToDo(task);

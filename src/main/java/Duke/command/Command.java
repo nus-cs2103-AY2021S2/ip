@@ -1,3 +1,5 @@
+package Duke.command;
+
 import java.util.function.Function;
 
 public abstract class Command {

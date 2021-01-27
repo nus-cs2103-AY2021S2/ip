@@ -1,3 +1,6 @@
+package Duke.task;
+
+
 /**
  * A sub-class of Task to represents a toDo task key in by user.
  */

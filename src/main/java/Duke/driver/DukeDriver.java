@@ -1,4 +1,11 @@
+package Duke.driver;
+
 import java.util.Scanner;
+import Duke.ui.Ui;
+import Duke.utils.TaskStorage;
+import Duke.command.Command;
+import Duke.utils.Parser;
+
 
 /**
  * Driver class of Duke that handles the command key in by user and respond.

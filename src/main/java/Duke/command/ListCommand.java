@@ -1,5 +1,8 @@
+package Duke.command;
+
+import Duke.ui.Ui;
 public class ListCommand extends Command{
-	ListCommand() {
+	public ListCommand() {
 		super("", "", "", command -> {
 			Ui.LISTING();
 			return false;

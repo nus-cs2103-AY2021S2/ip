@@ -1,5 +1,9 @@
+package Duke.command;
+
+import Duke.task.Task;
+import Duke.exceptions.DukeException;
 public class DoneCommand extends Command{
-	DoneCommand(String task, String date) {
+	public DoneCommand(String task, String date) {
 		super("done", task, date, command -> {
 			return handleDone(task);
 		});
