@@ -7,10 +7,13 @@ public class Parser {
     private Scanner scanner; 
     static String input;
     Ui userInterface;
+    private TaskList list;
 
     Parser(){
         scanner = new Scanner(System.in);
         userInterface = new Ui();
+        userInterface.welcomeUser();
+        list = new TaskList();
     }
 
     private void removeExtraLinesAndSpacesFromInput() {
@@ -22,7 +25,12 @@ public class Parser {
         if(scanner.hasNextLine()) {
             input = scanner.nextLine(); 
             removeExtraLinesAndSpacesFromInput();
-            analyseInput(list);
+            if(!inputDoesNotContainBye()) {
+                userInterface.userLeaving();
+                scanner.close();
+            } else {
+                analyseInput(list);
+            }
         } else {
             userInterface.userLeaving();
             scanner.close();
@@ -180,6 +188,7 @@ public class Parser {
             readInput(list);
         }
     }
+
 
 
 

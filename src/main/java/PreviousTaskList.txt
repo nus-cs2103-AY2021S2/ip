@@ -1,7 +1,12 @@
-class Todo, true,  borrow book
 class Event, true, project meeting , 2021-02-27T23:00
 class Deadline, false, return book , 2019-12-02T18:00
-class Todo, false,  sleep more
+class Todo, true,  sleep more
 class Todo, false,  add tasks
 class Deadline, false, individual project , 2021-01-27T23:59
 class Event, false, tuition sarah , 2021-01-26T18:00
+class Event, false, funan study , 2021-01-27T10:00
+class Deadline, false, return book , 2019-12-02T18:00
+class Event, false, 2107 tutotial , 2021-01-29T17:00
+class Event, false, daryl tuition , 2021-01-30T09:00
+class Deadline, false, 2105 assignment 0 , 2021-01-31T23:59
+class Event, false, job interview , 2022-01-01T17:00
