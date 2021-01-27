@@ -16,8 +16,8 @@ public class Event extends Task{
         this.time = time;
     }
 
-    Event(String job, Boolean done, LocalDate date, LocalTime time) {
-        super(job, done);
+    Event(String job, Boolean isDone, LocalDate date, LocalTime time) {
+        super(job, isDone);
         this.type = "E";
         this.date = date;
         this.time = time;
@@ -41,8 +41,11 @@ public class Event extends Task{
      * Print the new format of date and time.
      */
     public String printDateTime() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(this.date, this.time, ZoneId.of("Asia/Singapore"));
-        return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).format(zonedDateTime);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(
+                this.date, this.time, ZoneId.of("Asia/Singapore"));
+        return DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.FULL)
+                .format(zonedDateTime);
     }
 
     /**
@@ -55,6 +58,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[" + this.type + "]" + super.toString() + "(at:" + printDateTime() + ")";
+        return "[" + this.type + "]" + super.toString()
+                + "(at:" + printDateTime() + ")";
     }
 }

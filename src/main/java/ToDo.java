@@ -5,8 +5,8 @@ public class ToDo extends Task{
         this.type = "T";
     }
 
-    public ToDo(String job, Boolean done) {
-        super(job, done);
+    public ToDo(String job, Boolean isDone) {
+        super(job, isDone);
         this.type = "T";
     }
 

@@ -35,8 +35,9 @@ public class Storage {
             listOfTasks = Parser.parseResult(scanFile());
         } catch (FileNotFoundException e) {
             System.out.println("Looks like you don't have any previous file. We will create a new Task Manager for you!");
+        } finally {
+            return listOfTasks;
         }
-        return listOfTasks;
     }
 
     /**

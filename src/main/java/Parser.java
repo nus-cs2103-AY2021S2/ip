@@ -48,13 +48,13 @@ public class Parser {
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(task.getJob());
                 taskInStringForm.append(splitString);
-                taskInStringForm.append(task.getDone());
+                taskInStringForm.append(task.getDoneStatus());
             } else if (task instanceof Deadline) {
                 taskInStringForm.append("Deadline");
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(task.getJob());
                 taskInStringForm.append(splitString);
-                taskInStringForm.append(task.getDone());
+                taskInStringForm.append(task.getDoneStatus());
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(((Deadline)task).getDate());
                 taskInStringForm.append(splitString);
@@ -64,7 +64,7 @@ public class Parser {
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(task.getJob());
                 taskInStringForm.append(splitString);
-                taskInStringForm.append(task.getDone());
+                taskInStringForm.append(task.getDoneStatus());
                 taskInStringForm.append(splitString);
                 taskInStringForm.append(((Event)task).getDate());
                 taskInStringForm.append(splitString);
