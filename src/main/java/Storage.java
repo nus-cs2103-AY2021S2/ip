@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class responsible for loading and saving data into hard drive.
+ */
 public class Storage {
 
     private File hardDrive;
@@ -25,7 +28,7 @@ public class Storage {
 
     /**
      * Loads hard drive from the file
-     * @throws FileNotFoundException throws file not found exception if file is not found at target location.
+     * @throws FileNotFoundException if file is not found at target location.
      */
     public List<Task> load() throws FileNotFoundException {
         Scanner sc = new Scanner(this.hardDrive);
@@ -53,7 +56,7 @@ public class Storage {
     /**
      * Saves the information from the current list of tasks to the hard drive (duke.txt)
      * @param tasks current list of tasks
-     * @throws IOException throw IOException when there is an error with the file.
+     * @throws IOException if there is an error with the file.
      */
     public void save(List<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(this.hardDrive);
@@ -72,7 +75,7 @@ public class Storage {
     /**
      * Returns the number of lines in the file.
      * @return returns the number of lines in the text file
-     * @throws IOException throw IOException when there is an error with the file.
+     * @throws IOException if there is an error with the file.
      */
     public int getFileLinesCount() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(this.hardDrive));

@@ -1,3 +1,6 @@
+/**
+ * Exception when there is a wrong input from the user.
+ */
 public class DukeWrongInputException extends Exception{
     /**
      * Constructor method for Duke's Missing Input Exception.

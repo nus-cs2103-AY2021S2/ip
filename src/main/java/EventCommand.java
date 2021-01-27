@@ -1,11 +1,26 @@
+/**
+ * Command to create an Event.
+ */
 public class EventCommand extends Command {
 
     private String command;
 
+    /**
+     * Constructor method.
+     * @param command user command for creating event.
+     */
     public EventCommand(String command){
         this.command = command;
     }
 
+    /**
+     * Execute command for event command.
+     * @param taskList List of Tasks.
+     * @param ui Standard UI object.
+     * @param storage Standard storage object.
+     * @throws DukeMissingInputException If event command is missing description.
+     * @throws DukeWrongInputException If user input is not any of the inputs available.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeMissingInputException, DukeWrongInputException {
         String description = "";

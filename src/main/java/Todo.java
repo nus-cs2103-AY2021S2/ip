@@ -1,3 +1,6 @@
+/**
+ * Todo task class that has no deadline or specified time slot.
+ */
 public class Todo extends Task {
 
     /**
@@ -8,6 +11,11 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Overloaded constructor method
+     * @param description description of the task
+     * @param isDone status of task
+     */
     public Todo(String description, boolean isDone){
         super(description, isDone);
     }

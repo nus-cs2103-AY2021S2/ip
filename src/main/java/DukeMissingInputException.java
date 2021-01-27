@@ -1,3 +1,6 @@
+/**
+ * Exception when there is a missing input from user.
+ */
 public class DukeMissingInputException extends Exception {
 
     /**

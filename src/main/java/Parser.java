@@ -1,3 +1,6 @@
+/**
+ * Parser takes in a user command, parses it and returns the corresponding command.
+ */
 public class Parser {
 
     private TaskList taskList;
@@ -5,12 +8,24 @@ public class Parser {
     private Storage storage;
     private static String[] command = {"list", "bye", "todo", "deadline", "event"};
 
+    /**
+     * Constructor method
+     * @param taskList list of tasks
+     * @param ui standard ui object
+     * @param storage standard storage object
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;
     }
 
+    /**
+     * Parse method takes in command in the form of a string and returns a class.
+     * @param command user command input
+     * @return respective command object based on user input
+     * @throws DukeWrongInputException if system does not understand user input
+     */
     public static Command parse(String command) throws DukeWrongInputException {
         // User input
         String[] commandArr = command.trim().split(" ");
