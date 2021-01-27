@@ -1,57 +1,75 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 public class Duke {
+    public static final String logo = " ____        _\n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String divider = "____________________________________________________________\n";
+    public static final String filePath = "data/duke.txt";
+
     public static void main(String[] args) {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String divider = "____________________________________________________________\n";
-        System.out.println(divider + logo + "\nHello! I'm Duke\nWhat can I do for you?\n" + divider);
+        printMessage(logo + "\nHello! I'm Duke\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        List<Task> list = new ArrayList<>();
+        List<Task> list = readFromFile();
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
             String[] check = input.split(" ");
             if(input.equals("bye")) {
-                System.out.println(divider + "Bye. Hope to see you again soon!\n" + divider);
+                printMessage("Bye. Hope to see you again soon!");
+                writeToFile(list);
                 break;
             } else if(input.equals("list")) {
-                System.out.println(divider + "Here are the tasks in your list:");
-                for(int i = 1; i <= list.size(); i++) {
-                    System.out.println("  " + i + ". " + list.get(i-1));
+                StringBuilder message = new StringBuilder();
+                if(list.isEmpty()) {
+                    message.append("List is empty.");
+                } else {
+                    for(int i = 1; i <= list.size(); i++) {
+                        message.append("  " + i + ". " + list.get(i-1));
+                        if(i < list.size()) {
+                            message.append("\n");
+                        }
+                    }
                 }
-                System.out.println(divider);
+                printMessage(message.toString());
             } else if(check[0].equals("done")) {
                 try {
                     checkEmptyInput(check);
                     list.get(Integer.parseInt(check[1])-1).markAsDone();
-                    System.out.println(divider + "Nice! I've marked this task as done:\n  " + list.get(Integer.parseInt(check[1])-1) + "\n" + divider);
-                } catch (DukeException e) {
-                    System.out.println(divider + "OOPS!!! Please select an item to mark as done.\n" + divider);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(divider + "OOPS!!! Selected item does not exist.\n" + divider);
+                    printMessage("Nice! I've marked this task as done:\n  " + list.get(Integer.parseInt(check[1])-1));
+                    writeToFile(list);
+                } catch (DukeException error) {
+                    printMessage("OOPS!!! Please select an item to mark as done.");
+                } catch (IndexOutOfBoundsException error) {
+                    printMessage("OOPS!!! Selected item does not exist.");
                 }
             } else if(check[0].equals("delete")) {
                 try {
                     checkEmptyInput(check);
-                    System.out.println(divider + "Noted. I've removed this task:\n  " + list.remove(Integer.parseInt(check[1])-1) + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
-                } catch (DukeException e) {
-                    System.out.println(divider + "OOPS!!! Please select an item to delete.\n" + divider);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println(divider + "OOPS!!! Selected item does not exist.\n" + divider);
+                    printMessage("Noted. I've removed this task:\n  " + list.remove(Integer.parseInt(check[1])-1) + "\nNow you have " + list.size() + " tasks in the list.");
+                    writeToFile(list);
+                } catch (DukeException error) {
+                    printMessage("OOPS!!! Please select an item to delete.");
+                } catch (IndexOutOfBoundsException error) {
+                    printMessage("OOPS!!! Selected item does not exist.");
                 }
             } else if(check[0].equals("todo")) {
                 try {
                     checkEmptyInput(check);
                     Todo curr = new Todo(input.substring(5,input.length()));
                     list.add(curr);
-                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
-                } catch (DukeException e) {
-                    System.out.println(divider + "OOPS!!! The description of a todo cannot be empty.\n" + divider);
+                    printMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.");
+                    writeToFile(list);
+                } catch (DukeException error) {
+                    printMessage("OOPS!!! The description of a todo cannot be empty.");
                 }
             } else if(check[0].equals("deadline")) {
                 try {
@@ -59,9 +77,10 @@ public class Duke {
                     String[] temp = input.substring(9, input.length()).split(" /by ");
                     Deadline curr = new Deadline(temp[0], temp[1]);
                     list.add(curr);
-                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
-                } catch (DukeException e) {
-                    System.out.println(divider + "OOPS!!! The description of a deadline cannot be empty\n" + divider);
+                    printMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.");
+                    writeToFile(list);
+                } catch (DukeException error) {
+                    printMessage("OOPS!!! The description of a deadline cannot be empty");
                 }
             } else if(check[0].equals("event")) {
                 try {
@@ -69,13 +88,77 @@ public class Duke {
                     String[] temp = input.substring(6, input.length()).split(" /at ");
                     Event curr = new Event(temp[0], temp[1]);
                     list.add(curr);
-                    System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
-                } catch (DukeException e) {
-                    System.out.println(divider + "OOPS!!! The description of an event cannot be empty\n" + divider);
+                    printMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.");
+                    writeToFile(list);
+                } catch (DukeException error) {
+                    printMessage("OOPS!!! The description of an event cannot be empty");
                 }
             } else {
-                System.out.println(divider + "OOPS!!! I'm sorry, but I don't know what that means :-(\n" + divider);
+                printMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+        }
+    }
+
+    private static void printMessage(String message) {
+        System.out.println(divider + message + "\n" + divider);
+    }
+
+    private static List<Task> readFromFile() {
+        List<Task> data = new ArrayList<>();
+        try {
+            File txt = new File(filePath);
+            if(!txt.exists()) {
+                File parentDir = txt.getParentFile();
+                if(!parentDir.exists()) {
+                    parentDir.mkdir();
+                }
+                txt.createNewFile();
+            }
+            Scanner myReader = new Scanner(txt);
+            while(myReader.hasNextLine()) {
+                String[] taskInfo = myReader.nextLine().split(" \\| ");
+                Task curr;
+                switch(taskInfo[0]) {
+                    case "T":
+                        curr = new Todo(taskInfo[2]);
+                        if(taskInfo[1].equals("\u2713")) {
+                            curr.markAsDone();
+                        }
+                        data.add(curr);
+                        break;
+                    case "D":
+                        curr = new Deadline(taskInfo[2], taskInfo[3]);
+                        if(taskInfo[1].equals("\u2713")) {
+                            curr.markAsDone();
+                        }
+                        data.add(curr);
+                        break;
+                    case "E":
+                        curr = new Event(taskInfo[2], taskInfo[3]);
+                        if(taskInfo[1].equals("\u2713")) {
+                            curr.markAsDone();
+                        }
+                        data.add(curr);
+                        break;
+                }
+            }
+        } catch(IOException error) {
+            printMessage("OOPS!!! It seems I've encountered an error. Please try again :-(");
+        }
+        return data;
+    }
+
+    private static void writeToFile(List<Task> list) {
+        StringBuilder data = new StringBuilder();
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            for(Task task : list) {
+                data.append(task.toString() + "\n");
+            }
+            writer.write(data.toString());
+            writer.close();
+        } catch(IOException error) {
+            printMessage("OOPS!!! It seems I've encountered an error. Please try again :-(");
         }
     }
 
