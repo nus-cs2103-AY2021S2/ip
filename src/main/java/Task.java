@@ -1,21 +1,31 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
-    private String task;
-    private String date;
+    private final String task;
     private boolean done = false;
-    private int type; // 0 is todo, 1 is deadline, 2 is event
+    private final int type; // 0 is todo, 1 is deadline, 2 is event
+    private final LocalDate date;
+    private final LocalTime time;
 
     public Task(String s, int i) {
         if (i == 0) {
             this.task = s;
             this.date = null;
+            this.time = null;
         } else {
             String[] info = s.split("/");
             if (info.length == 1 || info[0].equals(" ")) {
                 throw new IllegalArgumentException();
+            } else if (i == 1) {
+                this.date = LocalDate.parse(info[1].substring(3));
+                this.time = null;
             } else {
-                this.task = info[0];
-                this.date = info[1].substring(3);
+                this.date = null;
+                this.time = LocalTime.parse(info[1].substring(3));
             }
+            this.task = info[0];
         }
         this.type = i;
     }
@@ -46,9 +56,11 @@ public class Task {
         if (this.type == 0) {
             return checkType() + checkDone() + this.task;
         } else if  (this.type == 1) {
-            return checkType() + checkDone() + this.task + "(by: " + this.date + ")";
+            return checkType() + checkDone() + this.task + "(by: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
-            return checkType() + checkDone() + this.task + "(at: " + this.date + ")";
+            return checkType() + checkDone() + this.task + "(at: " +
+                    this.time.format(DateTimeFormatter.ofPattern("hh:mm a"))+ ")";
         }
     }
 
