@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Checks if the list of tasks is empty.
+     *
      * @return true if there are no tasks in the list, else false
      */
     public boolean isEmpty() {
@@ -23,6 +24,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the list of tasks.
+     *
      * @return number of tasks in task list
      */
     public int size() {
@@ -31,6 +33,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of tasks.
+     *
      * @param task task to be added
      */
     public void addTask(Task task) {
@@ -39,6 +42,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list of tasks.
+     *
      * @param index the index of the task to be removed in the list
      */
     public void deleteTask(int index) {
@@ -47,6 +51,7 @@ public class TaskList {
 
     /**
      * Returns a task from the list of tasks according to the index specified.
+     *
      * @param index the index of the task to be retrieved
      * @return {@code Task}
      */
@@ -56,6 +61,7 @@ public class TaskList {
 
     /**
      * Marks a task in the list of tasks as completed.
+     *
      * @param index the index of the task to be marked as completed
      */
     public void completeTask(int index) {

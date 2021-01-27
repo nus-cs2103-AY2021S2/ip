@@ -21,6 +21,7 @@ public class CommandResult {
 
     /**
      * Returns the message to be printed to the user.
+     *
      * @return message for the user
      */
     public String getMessageForUser() {
@@ -29,6 +30,7 @@ public class CommandResult {
 
     /**
      * Returns the updated task list after the execution of a command.
+     *
      * @return updated task list
      */
     public TaskList getUpdatedTaskList() {

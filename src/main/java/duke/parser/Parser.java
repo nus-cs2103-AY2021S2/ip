@@ -32,12 +32,13 @@ public class Parser {
     public static final Pattern USER_COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<arguments>.*)");
 
     /**
-     * Parses user input into a command. 
+     * Parses user input into a command.
+     *
      * @param userInput full user input string
      * @return user command
-     * @throws InvalidCommandException if the user pass in an unrecognized command
-     * @throws InvalidDescriptionException if the format of the arguments do not match the command 
-     * @throws NoDescriptionException if the arguments is empty when further information is required for the command
+     * @throws InvalidCommandException     if the user pass in an unrecognized command
+     * @throws InvalidDescriptionException if the format of the arguments do not match the command
+     * @throws NoDescriptionException      if the arguments is empty when further information is required for the command
      */
     public Command parseCommand(String userInput) throws InvalidCommandException,
             InvalidDescriptionException, NoDescriptionException {
@@ -78,6 +79,7 @@ public class Parser {
 
     /**
      * Parses the arguments for the todo command.
+     *
      * @param arguments user input arguments string
      * @return {@code ToDoCommand}
      * @throws NoDescriptionException if the description of the task is empty
@@ -91,11 +93,12 @@ public class Parser {
 
     /**
      * Parses the arguments for the deadline command.
+     *
      * @param arguments user input arguments string
      * @return {@code DeadlineCommand}
      * @throws InvalidDescriptionException if the format of the date and time is invalid
-     * @throws NoDescriptionException if the description of the task is empty
-     * @see Parser#parseDateTime(String) 
+     * @throws NoDescriptionException      if the description of the task is empty
+     * @see Parser#parseDateTime(String)
      */
     private Command parseArgumentsForDeadline(String arguments) throws InvalidDescriptionException,
             NoDescriptionException {
@@ -111,6 +114,7 @@ public class Parser {
 
     /**
      * Parses the input date string format into a LocalDateTime object.
+     *
      * @param dateString user input date of the format "dd/mm/yyyy HHHH"
      * @return {@code LocalDateTime} object representing the date and time
      * @throws InvalidDescriptionException if the format of the date and time is invalid
@@ -126,6 +130,7 @@ public class Parser {
 
     /**
      * Parses the arguments for the event command.
+     *
      * @param arguments user input arguments string
      * @return {@code EventCommand}
      * @throws NoDescriptionException if the description of the task is empty
@@ -142,11 +147,12 @@ public class Parser {
 
     /**
      * Parses the arguments for the done command.
+     *
      * @param arguments user input arguments string
      * @return {@code DoneCommand}
      * @throws InvalidDescriptionException if the description is not a valid index
-     * @throws NoDescriptionException if the description of the task is empty
-     * @throws IndexOutOfBoundsException if the specified task number is outside of range
+     * @throws NoDescriptionException      if the description of the task is empty
+     * @throws IndexOutOfBoundsException   if the specified task number is outside of range
      */
     private Command parseArgumentsForDone(String arguments) throws InvalidDescriptionException,
             NoDescriptionException, IndexOutOfBoundsException {
@@ -163,11 +169,12 @@ public class Parser {
 
     /**
      * Parses the arguments for the delete command.
+     *
      * @param arguments user input arguments string
      * @return {@code DeleteCommand}
      * @throws InvalidDescriptionException if the description is not a valid index
-     * @throws NoDescriptionException if the description of the task is empty
-     * @throws IndexOutOfBoundsException if the specified task number is outside of range
+     * @throws NoDescriptionException      if the description of the task is empty
+     * @throws IndexOutOfBoundsException   if the specified task number is outside of range
      */
     private Command parseArgumentsForDelete(String arguments) throws InvalidDescriptionException,
             NoDescriptionException, IndexOutOfBoundsException {

@@ -22,6 +22,7 @@ public abstract class Task {
 
     /**
      * Returns the name of the task.
+     *
      * @return name of task
      */
     public String getName() {
@@ -30,12 +31,14 @@ public abstract class Task {
 
     /**
      * Returns the identifier of the type of task.
+     *
      * @return identifier of task type
      */
     public abstract String getTaskType();
 
     /**
      * Checks if the task is already completed.
+     *
      * @return true if task is completed, else false
      */
     public boolean isDone() {

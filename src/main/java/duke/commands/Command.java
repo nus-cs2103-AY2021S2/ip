@@ -10,6 +10,7 @@ public abstract class Command {
 
     /**
      * Sets the current instance of task list that the command will operate on.
+     *
      * @param taskList the current instance of task list
      */
     public void setTaskList(TaskList taskList) {
@@ -18,6 +19,7 @@ public abstract class Command {
 
     /**
      * Executes the command.
+     *
      * @return result command
      */
     public abstract CommandResult execute();

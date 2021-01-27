@@ -27,6 +27,7 @@ public class Ui {
 
     /**
      * Reads the user input string.
+     *
      * @return full user input string
      */
     public String getUserInput() {
@@ -57,6 +58,7 @@ public class Ui {
 
     /**
      * Prints the message to be shown to the user to the console.
+     *
      * @param messageForUser message to be shown to user
      */
     public void print(String messageForUser) {

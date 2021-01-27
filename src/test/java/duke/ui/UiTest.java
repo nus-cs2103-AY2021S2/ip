@@ -51,4 +51,10 @@ public class UiTest {
         new Ui().printExitMessage();
         assertEquals("Bye. Hope to see you again soon!", outputStreamCaptor.toString().trim());
     }
+
+    @Test
+    public void print_whenInvoke_thenOutputCaptorSuccess() {
+        new Ui().print("Testing print method of Ui class.");
+        assertEquals("Testing print method of Ui class.", outputStreamCaptor.toString().trim());
+    }
 }

@@ -20,6 +20,7 @@ public class EventTask extends Task {
 
     /**
      * Returns the event time.
+     *
      * @return event time
      */
     public String getEventTime() {

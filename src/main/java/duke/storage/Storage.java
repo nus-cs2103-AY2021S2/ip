@@ -28,6 +28,7 @@ public class Storage {
 
     /**
      * Creates a {@code Storage} object with the default file path.
+     *
      * @throws InvalidStorageFilePathException if the default file path is invalid
      */
     public Storage() throws InvalidStorageFilePathException {
@@ -36,6 +37,7 @@ public class Storage {
 
     /**
      * Creates a {@code Storage} object with the given file path.
+     *
      * @param path file path to read or write to
      * @throws InvalidStorageFilePathException if the file path is invalid
      */
@@ -52,6 +54,7 @@ public class Storage {
 
     /**
      * Checks if a file indicated by the given file path is text file.
+     *
      * @param filePath file path to be checked
      * @return true if the file path ends with '.txt', else false
      */
@@ -61,6 +64,7 @@ public class Storage {
 
     /**
      * Saves the list of tasks by writing into the file if the list if updated by the previous command.
+     *
      * @param taskList updated task list
      * @throws StorageException if an error occurs while writing to the file
      */
@@ -78,6 +82,7 @@ public class Storage {
 
     /**
      * Loads the list of tasks found in the file and parses the tasks into an operational format.
+     *
      * @return {@code TaskList} that represents the current list of tasks in the file
      * @throws IOException if an error occurs while reading from the file
      */
@@ -95,6 +100,7 @@ public class Storage {
 
     /**
      * Converts a task string into a {@code Task} object.
+     *
      * @param taskString task string to be converted
      * @return {@code Task}
      */
@@ -126,6 +132,7 @@ public class Storage {
 
     /**
      * Converts a list of tasks into a list of strings formatted to be stored in a file.
+     *
      * @param taskList task list to be converted
      * @return a list of formatted task strings
      */
@@ -142,6 +149,7 @@ public class Storage {
      * Converts a {@code Task} into a formatted task string.
      * String format: "taskType | taskStatus | taskName", with an additional " | additionalInfo]"
      * depending on the type of the task.
+     *
      * @param task task object to be converted
      * @return formatted string describing the task
      */

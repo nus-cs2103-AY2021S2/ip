@@ -30,6 +30,7 @@ public class Main {
 
     /**
      * Entry point of the application.
+     *
      * @param args an optional user-specified filepath used to initialize the storage
      */
     public static void main(String[] args) {
@@ -38,6 +39,7 @@ public class Main {
 
     /**
      * Runs the application until user terminates with an exit command.
+     *
      * @param args an optional user-specified filepath used to initialize the storage
      */
     public void run(String[] args) {
@@ -53,6 +55,7 @@ public class Main {
 
     /**
      * Initializes the required components and prints the welcome greeting.
+     *
      * @param args an optional user-specified filepath used to initialize the storage
      */
     private void initialize(String[] args) {
@@ -83,8 +86,9 @@ public class Main {
     }
 
     /**
-     * Initializes the storage using the specified filepath. If user did not specify a filepath, 
+     * Initializes the storage using the specified filepath. If user did not specify a filepath,
      * then the default filepath will be used.
+     *
      * @param args an optional user-specified filepath used to initialize the storage
      * @return a Storage object that is used to read and write to a file
      * @throws InvalidStorageFilePathException if the specified filepath is invalid
@@ -132,6 +136,7 @@ public class Main {
 
     /**
      * Executes the command and return a CommandResult instance.
+     *
      * @param command user command
      * @return result command
      */
@@ -142,6 +147,7 @@ public class Main {
 
     /**
      * Update the cached task list if it was modified by the previous command.
+     *
      * @param taskList updated task list
      */
     private void updateTaskListIfPresent(TaskList taskList) {

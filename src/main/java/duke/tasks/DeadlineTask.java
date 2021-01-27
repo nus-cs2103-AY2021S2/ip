@@ -23,7 +23,8 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Returns the deadline in a nicely formatted string. 
+     * Returns the deadline in a nicely formatted string.
+     *
      * @return formatted deadline string
      */
     public String getDeadline() {

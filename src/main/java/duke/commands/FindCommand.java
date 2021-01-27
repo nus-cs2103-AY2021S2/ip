@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasks.Task;
 
+/**
+ * Finds tasks that contains specific keywords or phrases.
+ */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 

@@ -15,6 +15,7 @@ public class ByeCommand extends Command {
 
     /**
      * Checks if a command is an instance of ByeCommand.
+     *
      * @param command user command
      * @return true if command is an instance of ByeCommand, else false
      */
