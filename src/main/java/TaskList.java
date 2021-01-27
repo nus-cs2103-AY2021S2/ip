@@ -84,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Prints all the tasks in the task list.
+     * Prints all the tasks in the task list matching the search keyword.
      */
     public void findTasks(String keyword) {
         if (data.size() > 0){
@@ -99,6 +99,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the tasks in the task list.
+     */
     public void showTasks() {
         if (data.size() > 0) {
             for (int i = 1; i <= data.size(); i++) {
