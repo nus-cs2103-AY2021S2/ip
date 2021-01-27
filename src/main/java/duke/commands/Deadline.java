@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * An implementation of the duke.tasks.Task class that represents duke.commands.Deadline Tasks.
  * <p>
@@ -14,11 +17,11 @@ import duke.tasks.Task;
  * @author douglas_allwood@u.nus.edu
  */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by.strip());
     }
 
     /**
@@ -33,6 +36,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -2,6 +2,9 @@ package duke.commands;
 
 import duke.tasks.Task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * An implementation of the duke.tasks.Task class that represents duke.commands.Event Tasks.
  * <p>
@@ -14,11 +17,11 @@ import duke.tasks.Task;
  * @author douglas_allwood@u.nus.edu
  */
 public class Event extends Task {
-    protected String at;
+    protected LocalDate at;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        this.at = LocalDate.parse(at.strip());
     }
 
     /**
@@ -33,6 +36,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + this.at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
