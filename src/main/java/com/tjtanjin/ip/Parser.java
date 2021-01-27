@@ -61,61 +61,56 @@ public class Parser {
      * Parses input from user to determine action to take.
      * @param input input provided by user
      */
-    public void parseInput(String input) {
+    public String parseInput(String input) {
 
-        //program exits on bye
-        if (input.toUpperCase().equals(Cmd.BYE.toString())) {
-            byeCommand.execute();
+        String[] parsedInput = input.split(" ", 2);
 
-            //program shows entered tasks on list
-        } else if (input.toUpperCase().equals(Cmd.LIST.toString())) {
-            listCommand.execute();
-
-            //program marks task as complete on done
-        } else if (input.toUpperCase().startsWith(Cmd.DONE.toString())) {
-            int index = parseIndex("done", input);
-            if (index != -1) {
-                doneCommand.execute(index);
-            }
-
-            //program removes task on delete
-        } else if (input.toUpperCase().startsWith(Cmd.DELETE.toString())) {
-            int index = parseIndex("delete", input);
-            if (index != -1) {
-                deleteCommand.execute(index);
-            }
-
-            //program list help commands
-        } else if (input.toUpperCase().equals(Cmd.HELP.toString())) {
-            helpCommand.execute(cmdInfo);
-
-            //program adds task on todo, deadline or event
-        } else if (input.toUpperCase().startsWith(Cmd.TODO.toString())
-                || input.toUpperCase().startsWith(Cmd.DEADLINE.toString())
-                || input.toUpperCase().startsWith(Cmd.EVENT.toString())
-        ) {
-            String taskType = parseTaskType(input);
-            String taskName = parseTaskName(input);
-            if (taskName == null) {
-                return;
-            }
-            LocalDate[] taskDates = parseTaskDates(input);
-            if (!taskType.equalsIgnoreCase(Cmd.TODO.toString()) && taskDates[0] == null) {
-                return;
-            }
-            addCommand.execute(taskType, taskName, taskDates);
-
-            //program finds task by name on find
-        } else if (input.toUpperCase().startsWith(Cmd.FIND.toString())) {
-            String taskName = parseTaskName(input);
-            if (taskName != null) {
-                findCommand.execute(taskName);
-            }
-
-            //program informs user of invalid input
-        } else {
-            Ui.showError("Invalid instruction, type 'help' for more options.");
+        String command = parsedInput[0].toUpperCase();
+        if (!isValidCommand(command)) {
+            return "Error: Invalid instruction, type /help for more options";
         }
+
+        try {
+            switch (Cmd.valueOf(command)) {
+            case BYE:
+                UiHandler.terminate("Good bye, see you soon! :D");
+                byeCommand.execute();
+                return null;
+            case DEADLINE:
+            case EVENT:
+            case TODO:
+                String taskName = parseTaskName(input);
+                LocalDate[] taskDates = parseTaskDates(input);
+                return addCommand.execute(command, taskName, taskDates);
+            case DELETE:
+                int deleteIndex = parseIndex("delete", input);
+                return deleteCommand.execute(deleteIndex);
+            case DONE:
+                int doneIndex = parseIndex("done", input);
+                return doneCommand.execute(doneIndex);
+            case FIND:
+                String searchTerm = parseTaskName(input);
+                return findCommand.execute(searchTerm);
+            case HELP:
+                return helpCommand.execute(cmdInfo);
+            case LIST:
+                return listCommand.execute();
+            default:
+                return "Error: Invalid instruction, type 'help' to see the options.";
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    private boolean isValidCommand(String command) {
+        Cmd[] cmds = Cmd.values();
+        for (Cmd cmd: cmds) {
+            if (cmd.name().equals(command)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -123,43 +118,31 @@ public class Parser {
      * @param cmd cmd from user (done or delete)
      * @param input input provided by user
      */
-    public int parseIndex(String cmd, String input) {
+    public int parseIndex(String cmd, String input) throws DukeException {
         String[] parsedString = input.split("\\s+");
 
         try {
             return Integer.parseInt(parsedString[1]) - 1;
         } catch (IndexOutOfBoundsException e) {
             if (cmd.equals("done")) {
-                Ui.showError("Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
+                throw new DukeException("Info: Usage for done: " + cmdInfo.get(Cmd.DONE.toString()));
             } else {
-                Ui.showError("Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
+                throw new DukeException("Info: Usage for delete: " + cmdInfo.get(Cmd.DELETE.toString()));
             }
-            return -1;
         } catch (NumberFormatException e) {
             if (cmd.equals("done")) {
-                Ui.showError("Index of task to mark as done must be a number!");
+                throw new DukeException("Info: Index of task to mark as done must be a number!");
             } else {
-                Ui.showError("Index of task to delete must be a number!");
+                throw new DukeException("Info: Index of task to delete must be a number!");
             }
-            return -1;
         }
-    }
-
-    /**
-     * Parses task type from user input
-     * @param input input provided by user
-     */
-    public String parseTaskType(String input) {
-        //split input on first space to retrieve task type
-        String[] parsedString = input.split("\\s+", 2);
-        return parsedString[0];
     }
 
     /**
      * Parses task name from user input
      * @param input input provided by user
      */
-    public String parseTaskName(String input) {
+    public String parseTaskName(String input) throws DukeException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails;
@@ -177,17 +160,16 @@ public class Parser {
             return taskName;
         } catch (IndexOutOfBoundsException e) {
             if (taskType.equalsIgnoreCase("TODO")) {
-                Ui.showError("Usage for todo: " + cmdInfo.get(Cmd.TODO.toString()));
+                throw new DukeException("Info: Usage for todo: " + cmdInfo.get(Cmd.TODO.toString()));
             } else if (taskType.equalsIgnoreCase("DEADLINE")) {
-                Ui.showError("Usage for deadline: " + cmdInfo.get(Cmd.DEADLINE.toString()));
+                throw new DukeException("Info: Usage for deadline: " + cmdInfo.get(Cmd.DEADLINE.toString()));
             } else if (taskType.equalsIgnoreCase("EVENT")) {
-                Ui.showError("Usage for event: " + cmdInfo.get(Cmd.EVENT.toString()));
+                throw new DukeException("Info: Usage for event: " + cmdInfo.get(Cmd.EVENT.toString()));
             } else if (taskType.equalsIgnoreCase("FIND")) {
-                Ui.showError("Usage for find: " + cmdInfo.get(Cmd.FIND.toString()));
+                throw new DukeException("Info: Usage for find: " + cmdInfo.get(Cmd.FIND.toString()));
             } else {
-                Ui.showError("Invalid instruction, perhaps you meant todo, deadline or event?");
+                throw new DukeException("Info: Invalid instruction, perhaps you meant todo, deadline or event?");
             }
-            return null;
         }
     }
 
@@ -195,7 +177,7 @@ public class Parser {
      * Parses task due date from user input
      * @param input input provided by user
      */
-    public LocalDate[] parseTaskDates(String input) {
+    public LocalDate[] parseTaskDates(String input) throws DukeException {
         String[] parsedString = input.split("\\s+", 2);
         String taskType = parsedString[0];
         String taskDetails = parsedString[1];
@@ -211,9 +193,9 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException | NullPointerException | DateTimeException e) {
             if (taskType.equalsIgnoreCase(Cmd.DEADLINE.toString())) {
-                Ui.showError("Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
+                throw new DukeException("Error: Invalid date specified, please adhere to the format: /by YYYY-MM-DD");
             } else {
-                Ui.showError("Invalid date specified, "
+                throw new DukeException("Error: Invalid date specified, "
                         + "please adhere to the format: /from YYYY-MM-DD /to YYYY-MM-DD");
             }
         }

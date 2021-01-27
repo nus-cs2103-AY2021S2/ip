@@ -27,7 +27,7 @@ public class TaskHandler {
      * @param taskName name of task
      * @param taskDates taskDates array of dates (defaults to first element for deadline end date)
      */
-    public void addTask(String taskType, String taskName, LocalDate[] taskDates) {
+    public String addTask(String taskType, String taskName, LocalDate[] taskDates) {
         Task task;
         if (taskType.equalsIgnoreCase("DEADLINE")) {
             task = new Deadline(taskName, "incomplete", taskDates);
@@ -37,10 +37,12 @@ public class TaskHandler {
             task = new ToDo(taskName, "incomplete");
         }
         tasks.add(task);
-        storageHandler.saveTask(tasks.size(), "NEW",
-                taskName, "incomplete", taskType.toUpperCase(), taskDates);
-        int numTasks = tasks.size();
-        Ui.showInfo("Task successfully added! You now have " + numTasks + " task(s)!");
+        if (storageHandler.saveTask(tasks.size(), "NEW",
+                taskName, "incomplete", taskType.toUpperCase(), taskDates)) {
+            return "Info: Your task has been added! You now have " + tasks.size() + " task(s)!";
+        } else {
+            return "Error: There was an error saving your task, please check your syntax and try again.";
+        }
     }
 
     public ArrayList<Task> getTasks() {
@@ -51,21 +53,28 @@ public class TaskHandler {
      * Marks a task as done.
      * @param index index of task to mark as done
      */
-    public void markTaskDone(int index) {
+    public String markTaskDone(int index) {
         try {
             Task task = tasks.get(index);
             if (task.getStatus().equals("complete")) {
-                Ui.showError("Task is already completed!");
+                return "Error: Task is already completed!";
             } else {
                 task.markCompleted();
                 String taskName = task.getTaskName();
                 String taskType = task.getType().toUpperCase();
                 LocalDate[] taskDates = task.getDates();
-                storageHandler.saveTask(index, "DONE", taskName, "complete", taskType, taskDates);
-                Ui.showInfo("Yay your task is done! :D");
+                if (storageHandler.saveTask(index, "DONE",
+                        taskName, "complete", taskType, taskDates)) {
+                    return "Info: Yay your task is done! :D";
+                } else {
+                    throw new DukeException("Error: There was an error marking your task as done, "
+                            + "please check your syntax and try again.");
+                }
             }
         } catch (IndexOutOfBoundsException e) {
-            Ui.showError("The specified task index does not exist!");
+            return "Error: The specified task index does not exist!";
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
@@ -73,31 +82,41 @@ public class TaskHandler {
      * Deletes a task.
      * @param index index of task to delete
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         try {
             Task task = tasks.get(index);
             tasks.remove(task);
             String taskName = task.getTaskName();
             String taskType = task.getType().toUpperCase();
             LocalDate[] taskDates = task.getDates();
-            storageHandler.saveTask(index, "DELETE", taskName, "complete", taskType, taskDates);
-            Ui.showInfo("The following task has been deleted:\n" + task);
+            if (storageHandler.saveTask(index, "DELETE",
+                    taskName, "complete", taskType, taskDates)) {
+                return "Info: The following task has been deleted:\n" + task;
+            } else {
+                throw new DukeException("Error: There was an error deleting your task, "
+                        + "please check your syntax and try again.");
+            }
         } catch (IndexOutOfBoundsException e) {
-            Ui.showError("The specified task index does not exist!");
+            return "Error: The specified task index does not exist!";
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
     /**
      * Shows all tasks to user
      */
-    public void showAllTasks() {
+    public String showAllTasks() {
         if (tasks.size() == 0) {
-            Ui.showInfo("You have no task at the moment!");
+            return "You have no task at the moment!";
         } else {
+            StringBuilder str = new StringBuilder("Info: ");
             for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i - 1);
-                Ui.showInfo(i + "." + task);
+                str.append(i).append(".").append(task).append("\n");
             }
+            str.append("You have ").append(tasks.size()).append(" task(s)!");
+            return str.toString();
         }
     }
 
@@ -105,19 +124,21 @@ public class TaskHandler {
      * Find tasks whose name contains input from user.
      * @param taskName name of task
      */
-    public void findTask(String taskName) {
+    public String findTask(String taskName) {
         if (tasks.size() == 0) {
-            Ui.showInfo("You have no task at the moment!");
+            return "Info: You have no task at the moment!";
         } else {
             int counter = 0;
+            StringBuilder str = new StringBuilder("Info: ");
             for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i - 1);
                 if (task.getTaskName().contains(taskName)) {
                     counter += 1;
-                    Ui.showInfo(counter + "." + task);
+                    str.append(counter).append(".").append(task).append("\n");
                 }
             }
-            Ui.showInfo("A total of " + counter + " task(s) were found.");
+            str.append("A total of ").append(counter).append(" task(s) were found.");
+            return str.toString();
         }
     }
 }

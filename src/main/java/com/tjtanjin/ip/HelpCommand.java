@@ -16,10 +16,11 @@ public class HelpCommand {
      * List all available command usage and descriptions.
      * @param cmdInfo mapping of each command and their information
      */
-    public void execute(HashMap<String, String> cmdInfo) {
-        Ui.showInfo("The available commands are as listed below:");
+    public String execute(HashMap<String, String> cmdInfo) {
+        StringBuilder str = new StringBuilder("The available commands are as listed below:");
         for (String info : cmdInfo.values()) {
-            Ui.showInfo(info);
+            str.append("\n").append(info);
         }
+        return str.toString();
     }
 }

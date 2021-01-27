@@ -13,31 +13,36 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        //initialize storage handler, task handler, command handler and parser
+        /*
+         * initialize ui handler, storage handler, task handler, command handler and parser
+         * then set them up to interact with each other and the user as below:
+         * User <-> UiHandler <-> Parser <-> CommandHandler <-> TaskHandler <-> StorageHandler
+         */
+        UiHandler uiHandler = new UiHandler();
         StorageHandler storageHandler = new StorageHandler("./data/tasks.json");
         TaskHandler taskHandler = new TaskHandler(storageHandler);
         CommandHandler commandHandler = new CommandHandler(taskHandler);
         Parser parser = new Parser(commandHandler);
-        Ui.showWelcome();
-        listenInput(parser);
+        listenInput(parser, uiHandler);
     }
 
     /**
      * Listens for input from the user.
      * @param parser class that handles parsing of input
      */
-    private static void listenInput(Parser parser) {
+    private static void listenInput(Parser parser, UiHandler uiHandler) {
         Scanner sc = new Scanner(System.in);
-        Ui.showDivider();
+        uiHandler.showWelcome();
+        uiHandler.showDivider();
 
         while (sc.hasNextLine()) {
-            Ui.showDivider();
+            uiHandler.showDivider();
 
-            String input = Ui.readCommand(sc);
+            String input = UiHandler.readCommand(sc);
 
-            parser.parseInput(input);
+            uiHandler.showResponse(parser.parseInput(input));
 
-            Ui.showDivider();
+            uiHandler.showDivider();
         }
     }
 }

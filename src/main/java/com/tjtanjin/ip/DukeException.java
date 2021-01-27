@@ -8,7 +8,7 @@ public class DukeException extends Exception {
     /**
      * Constructor for DukeException class for custom exceptions.
      */
-    public DukeException() {
-        super();
+    public DukeException(String errMsg) {
+        super(errMsg);
     }
 }

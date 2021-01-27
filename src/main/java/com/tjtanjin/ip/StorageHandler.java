@@ -34,23 +34,26 @@ public class StorageHandler {
     public ArrayList<Task> loadTasks() {
 
         File tasksFile = new File(this.path);
-        if (!tasksFile.getParentFile().isDirectory()) {
-            try {
+        try {
+            if (!tasksFile.getParentFile().isDirectory()) {
                 if (!tasksFile.getParentFile().mkdirs()) {
-                    throw new DukeException();
+                    throw new DukeException("Terminated: "
+                            + "Application has no permission to create storage file.");
                 }
-            } catch (DukeException e) {
-                Ui.showError("Unable to create storage directory.");
             }
-        }
-        if (!tasksFile.exists()) {
-            try {
-                if (!tasksFile.createNewFile()) {
-                    throw new DukeException();
+            if (!tasksFile.exists()) {
+                try {
+                    if (!tasksFile.createNewFile()) {
+                        throw new DukeException("Terminated:"
+                                + "Application has no permission to create storage file.");
+                    }
+                } catch (IOException e) {
+                    throw new DukeException("Terminated: "
+                            + "Application has no permission to create storage file.");
                 }
-            } catch (IOException | DukeException e) {
-                Ui.showError("Unable to create storage file.");
             }
+        } catch (DukeException e) {
+            UiHandler.terminate(e.getMessage());
         }
 
         //JSON parser object to parse read file
@@ -65,7 +68,7 @@ public class StorageHandler {
             //load each task
             taskList.forEach(emp -> parseTaskGroup((JSONObject) emp));
         } catch (IOException | ParseException e) {
-            System.out.println("No saved task found.");
+            //do nothing, empty file is ok just means nothing to load
         }
         return tasks;
     }
@@ -111,7 +114,7 @@ public class StorageHandler {
      * @param taskDates array of dates (defaults to first element for deadline end date)
      */
     @SuppressWarnings("unchecked")
-    public void saveTask(int index, String saveType, String taskName,
+    public boolean saveTask(int index, String saveType, String taskName,
             String status, String type, LocalDate[] taskDates) {
 
         JSONObject taskDetails = new JSONObject();
@@ -149,9 +152,11 @@ public class StorageHandler {
 
             file.write(taskList.toJSONString());
             file.flush();
+            return true;
 
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

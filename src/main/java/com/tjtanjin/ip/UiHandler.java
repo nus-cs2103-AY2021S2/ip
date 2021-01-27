@@ -5,12 +5,12 @@ import java.util.Scanner;
 /**
  * Ui class handles direct interactions between the application and the user
  */
-public class Ui {
+public class UiHandler {
 
     /**
      * Greets the user upon program launch.
      */
-    public static void showWelcome() {
+    public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -22,24 +22,45 @@ public class Ui {
     /**
      * Prints line divider between commands for clarity.
      */
-    public static void showDivider() {
+    public void showDivider() {
         System.out.println("------------------------------------");
     }
 
     /**
-     * Prints information to the user
-     * @param info information to print
+     * Check response and print as info or error.
+     * @param response error message to print
      */
-    public static void showInfo(String info) {
-        System.out.println(info);
+    public void showResponse(String response) {
+        if (response.startsWith("Error:")) {
+            showError(response);
+        } else {
+            showInfo(response);
+        }
+    }
+
+    /**
+     * Prints information to the user
+     * @param response information to print
+     */
+    public void showInfo(String response) {
+        System.out.println(response.split(" ", 2)[1]);
     }
 
     /**
      * Prints error message to the yser
-     * @param msg error message to print
+     * @param response error message to print
      */
-    public static void showError(String msg) {
-        System.out.println("Error: " + msg);
+    public void showError(String response) {
+        System.out.println(response);
+    }
+
+    /**
+     * Terminates the program with a final message.
+     * @param crashMsg message to print before termination
+     */
+    public static void terminate(String crashMsg) {
+        System.out.println(crashMsg);
+        System.exit(0);
     }
 
     /**
