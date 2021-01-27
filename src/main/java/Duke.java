@@ -2,15 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static int toInteger(String toCheck) {
-        try {
-            int i = Integer.parseInt(toCheck);
-            return i;
-        }
-        catch(Exception e) {
-            return 0;
-        }
-    }
+
     public static void main(String[] args){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,7 +16,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>();
         int count = 0;
 
         //commands entered by the user
@@ -52,7 +44,7 @@ public class Duke {
                 //display them back to the user when requested
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= count; i++) {
-                    System.out.println(i + ". " + list.get(i - 1));
+                    System.out.println(i + ". " + taskList.get(i - 1));
                 }
                 if (count == 0) {
                     System.out.println("There is no task in the list.");
@@ -75,8 +67,8 @@ public class Duke {
                         continue;
                     }
 
-                    list.get(number - 1).markAsDone();
-                    System.out.println("Nice! I've marked this task as done: \n" + list.get(number - 1) + "\n");
+                    taskList.get(number - 1).markAsDone();
+                    System.out.println("Nice! I've marked this task as done: \n" + taskList.get(number - 1) + "\n");
                     str = sc.nextLine();
                 } else if(type.equals("delete")){
 
@@ -91,7 +83,7 @@ public class Duke {
                         continue;
                     }
 
-                    Task removed = list.remove(number-1);
+                    Task removed = taskList.remove(number-1);
                     count--;
                     if (count == 1 || count == 0) {
                         System.out.println("Noted. I've removed this task:\n  " + removed + "\n"
@@ -105,21 +97,21 @@ public class Duke {
                     //store task entered by the user
 
                     if (type.equals("todo")) {
-                        list.add(new Todo(detail));
+                        taskList.add(new Todo(detail));
                     } else if (type.equals("event")) {
                         String name = detail.substring(0, detail.indexOf(" /at"));
                         String time = detail.substring(detail.indexOf(" /at") + 5);
-                        list.add(new Event(name, time));
+                        taskList.add(new Event(name, time));
                     } else if (type.equals("deadline")) {
                         String name = detail.substring(0, detail.indexOf(" /by"));
                         String time = detail.substring(detail.indexOf(" /by") + 5);
-                        list.add(new Deadline(name, time));
+                        taskList.add(new Deadline(name, time));
                     }
                     count++;
                     if (count == 1) {
-                        System.out.println("Got it. I've added this task:\n  " + list.get(0) + "\nNow you have " + count + " task in the list.\n");
+                        System.out.println("Got it. I've added this task:\n  " + taskList.get(0) + "\nNow you have " + count + " task in the list.\n");
                     } else {
-                        System.out.println("Got it. I've added this task:\n  " + list.get(count-1) + "\nNow you have " + count + " tasks in the list.\n");
+                        System.out.println("Got it. I've added this task:\n  " + taskList.get(count-1) + "\nNow you have " + count + " tasks in the list.\n");
                     }
                     str = sc.nextLine();
                 }
@@ -129,6 +121,16 @@ public class Duke {
 
         //exits when the user types bye
         System.out.println("Bye. Hope to see you again soon!\n");
+    }
+
+    public static int toInteger(String toCheck) {
+        try {
+            int i = Integer.parseInt(toCheck);
+            return i;
+        }
+        catch(Exception e) {
+            return 0;
+        }
     }
 
 }
