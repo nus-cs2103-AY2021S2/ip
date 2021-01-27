@@ -1,0 +1,6 @@
+list
+event 2101 meeting /at 30-06 6PM
+todo cycling
+deadline drawing /by 28-02 7AM
+event 2101 meeting /at 30-06 8AM
+bye

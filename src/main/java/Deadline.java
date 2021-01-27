@@ -1,14 +1,16 @@
+import java.time.LocalDateTime;
+
 public class Deadline extends Task {
-    private String deadline;
+    private LocalDateTime deadline;
 
     public Deadline(String desc, String deadline) {
         super(desc);
-        this.deadline = deadline;
+        this.deadline = ParseDateTime.parse(deadline);
     }
 
     @Override
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + description
-                + " (by: " + deadline + ")";
+                + " (by: " + ParseDateTime.readableString(deadline) + ")";
     }
 }
