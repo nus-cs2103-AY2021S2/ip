@@ -6,7 +6,9 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
-        List<Task> taskList = new ArrayList<>();
+
+        Storage storage = new Storage();
+        ArrayList<Task> taskList = storage.load();
 
         while(sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -17,6 +19,7 @@ public class Duke {
 
             if (command.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
+                storage.save(taskList);
                 break;
 
             } else if (command.equals("list")) {
@@ -136,3 +139,5 @@ public class Duke {
         }
     }
 }
+
+

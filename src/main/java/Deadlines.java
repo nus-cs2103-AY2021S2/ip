@@ -3,6 +3,8 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadlines extends Task {
     private final String TYPE_ICON = "[D]";
+    private final String ICON = "D";
+    private final String DELIMITER = "|";
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
@@ -33,12 +35,31 @@ public class Deadlines extends Task {
 
     @Override
     public String getDescription() {
-        return String.format("%s(by:%s)", this.description, this.by);
+        if (by == null) {
+            return this.description;
+        } else {
+            return String.format("%s (by: %s)", this.description, this.by);
+        }
+    }
+
+    @Override
+    public String tokenize() {
+
+        String isDoneString = isDone? "1" : "0";
+
+        String result;
+
+        if (by == null) {
+            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
+        } else {
+            result = ICON + DELIMITER + isDoneString + DELIMITER + this.description + DELIMITER + this.by;
+        }
+        return result;
     }
 
     @Override
     public String toString() {
-        return String.format("%s(by:%s)", this.description, this.by);
+        return getDescription();
     }
 
 }
