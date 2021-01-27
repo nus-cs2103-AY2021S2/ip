@@ -39,9 +39,19 @@ public class Ui {
         System.out.println();
     }
 
+    public void displayMatchingTasks(ArrayList<Task> tasks) {
+        System.out.println();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= tasks.size(); i++) {
+            Task t = tasks.get(i - 1);
+            System.out.println(i + "." + t);
+        }
+        System.out.println();
+    }
+
     public void displayList(ArrayList<Task> tasks) {
         System.out.println();
-        System.out.println("Here are the duke.tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= tasks.size(); i++) {
             Task t = tasks.get(i - 1);
             System.out.println(i + "." + t);

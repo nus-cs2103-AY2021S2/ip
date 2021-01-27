@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * initialises a storage object.
+     *
      * @throws DukeException due to IOException.
      */
     public Storage() throws DukeException {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * creates a new file if not found in directory.
+     *
      * @throws DukeException due to IOException.
      */
     public void createFile() throws DukeException {
@@ -43,7 +45,7 @@ public class Storage {
 
                 System.out.println("File already exists!");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! File creation error");
         }
     }
@@ -58,9 +60,9 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner s = new Scanner(f);
-            while(s.hasNextLine()) {
-               Task task = parseTasks(s.nextLine());
-               tasks.add(task);
+            while (s.hasNextLine()) {
+                Task task = parseTasks(s.nextLine());
+                tasks.add(task);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("☹ OOPS!!! File not found!");
@@ -83,19 +85,19 @@ public class Storage {
             LocalDateTime dateTime;
             String type = description[0];
             switch (type) {
-                case "T":
-                    t = new ToDo(description[2]);
-                    break;
+            case "T":
+                t = new ToDo(description[2]);
+                break;
 
-                case "D":
-                    dateTime = LocalDateTime.parse(description[3]);
-                    t = new Deadline(description[2], dateTime);
-                    break;
+            case "D":
+                dateTime = LocalDateTime.parse(description[3]);
+                t = new Deadline(description[2], dateTime);
+                break;
 
-                case "E":
-                    dateTime = LocalDateTime.parse(description[3]);
-                    t = new Event(description[2], dateTime);
-                    break;
+            case "E":
+                dateTime = LocalDateTime.parse(description[3]);
+                t = new Event(description[2], dateTime);
+                break;
             }
 
             if (description[1].equals("1")) {
@@ -103,7 +105,7 @@ public class Storage {
                 t.markAsDone();
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! I do not understand what are you saying!");
         }
 
@@ -112,6 +114,7 @@ public class Storage {
 
     /**
      * Saves tasks in the myDuke.txt file
+     *
      * @param tasks A list of tasks
      * @throws DukeException due to IOException.
      */

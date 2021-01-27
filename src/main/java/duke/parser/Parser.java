@@ -22,22 +22,24 @@ public class Parser {
             line = new String[]{type, ""};
         }
         switch (type) {
-            case "list":
-                return new showListCommand("list");
-            case "done":
-                return new DoneCommand(line[1]);
-            case "delete":
-                return new DeleteCommand(line[1]);
-            case "todo":
-                return new AddToDoCommand(line[1]);
-            case "deadline":
-                return new AddDeadlineCommand(line[1]);
-            case "event":
-                return new AddEventCommand(line[1]);
-            case "bye":
-                return new ByeCommand("bye");
-            default:
-                throw new IncorrectTypeException("");
+        case "list":
+            return new showListCommand("list");
+        case "done":
+            return new DoneCommand(line[1]);
+        case "delete":
+            return new DeleteCommand(line[1]);
+        case "find":
+            return new FindCommand(line[1]);
+        case "todo":
+            return new AddToDoCommand(line[1]);
+        case "deadline":
+            return new AddDeadlineCommand(line[1]);
+        case "event":
+            return new AddEventCommand(line[1]);
+        case "bye":
+            return new ByeCommand("bye");
+        default:
+            throw new IncorrectTypeException("");
         }
     }
 }
