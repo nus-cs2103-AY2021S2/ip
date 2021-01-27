@@ -21,4 +21,7 @@ delete 1
 delete 1
 delete 0
 done 0
+todo chill
+deadline dsfgf/fg
+event dsf/hwef
 bye

@@ -12,7 +12,8 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         sc.useDelimiter("\n");//only take in lines and not by whitespace, coz have one case where " " keeps the sc running to the next
         ArrayList<Task> tasks = new ArrayList<>();
-        String relPath = "./src/main/java/data/All Tasks.txt";
+        String relPath = "./src/main/java/data/All Tasks.txt";//for runtest.sh put .. coz the path for that is diff
+        // compared to this
 
         try {
             //File f = new File("./");
@@ -23,7 +24,7 @@ public class Duke {
             System.out.println("EXCEPTION");
             try {
                 Files.createDirectory(Paths.get("./src/main/java/data/"));
-            } catch (Exception e1){}
+            } catch (IOException e1){}//shld just be ioexception
             //File f = new File(relPath); //no need to create file here will get auto created when writing
         }
 
