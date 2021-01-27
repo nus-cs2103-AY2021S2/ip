@@ -1,8 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -75,12 +76,14 @@ public class Duke {
                 try {
                     checkEmptyInput(check);
                     String[] temp = input.substring(9, input.length()).split(" /by ");
-                    Deadline curr = new Deadline(temp[0], temp[1]);
+                    Deadline curr = new Deadline(temp[0], LocalDate.parse(temp[1]));
                     list.add(curr);
                     printMessage("Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.");
                     writeToFile(list);
                 } catch (DukeException error) {
                     printMessage("OOPS!!! The description of a deadline cannot be empty");
+                } catch(DateTimeParseException e) {
+                    printMessage("OOPS!!! The date provided is invalid");
                 }
             } else if(check[0].equals("event")) {
                 try {
@@ -127,7 +130,7 @@ public class Duke {
                         data.add(curr);
                         break;
                     case "D":
-                        curr = new Deadline(taskInfo[2], taskInfo[3]);
+                        curr = new Deadline(taskInfo[2], LocalDate.parse(taskInfo[3], DateTimeFormatter.ofPattern("dd MMM YYYY")));
                         if(taskInfo[1].equals("\u2713")) {
                             curr.markAsDone();
                         }
