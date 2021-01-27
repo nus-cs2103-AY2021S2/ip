@@ -38,5 +38,13 @@ public enum PrintText {
                     "    delete <task number>\n      \\_ deletes a task from the list\n" +
                     "    bye\n      \\_ exists this application\n";
         }
-    }
+    },
+
+    EMPTY_TASKLIST_MESSAGE {
+        @Override
+        public String toString() {
+            return BORDER + "\n  You don't have any tasks yet :)" +
+                    "\n  Type 'help' to see how you can add a task\n" + BORDER;
+        }
+    },
 }
