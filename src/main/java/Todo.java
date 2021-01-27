@@ -1,10 +1,16 @@
 public class Todo extends Task{
 
     private final String TYPE_ICON = "[T]";
-
+    private final String ICON = "T";
+    private final String DELIMITER = "|";
 
     public Todo(String description) {
         super(description);
+    }
+
+    public Todo(boolean isDone, String description) {
+        super(description);
+        this.isDone = isDone;
     }
 
     @Override
@@ -12,4 +18,12 @@ public class Todo extends Task{
         return this.TYPE_ICON;
     }
 
+    @Override
+    public String tokenize() {
+        String isDoneString = isDone? "1" : "0";
+        String result = ICON + DELIMITER + isDoneString + DELIMITER + this.description;
+        return result;
+    }
+
 }
+

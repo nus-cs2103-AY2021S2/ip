@@ -1,0 +1,2 @@
+T|0|clean
+T|1|walk
