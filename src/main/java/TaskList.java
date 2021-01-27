@@ -59,6 +59,17 @@ public class TaskList {
         return "Nice! I've marked this task as done:\n  " + t.toString();
     }
 
+    protected String executeFind(HashMap<String, String> tokenizedInput) {
+        String searchString = tokenizedInput.get("info");
+        String output = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < storage.tasks.size(); i++) {
+            if (storage.tasks.get(i).getTaskInfo().contains(searchString)) {
+                output += String.format("%d.%s\n", i + 1, storage.tasks.get(i));
+            }
+        }
+        return output.substring(0, output.length() - 1);
+    }
+
     protected String addTaskAndReturnMessage(Task task) {
         storage.tasks.add(task);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.", task.toString(),
