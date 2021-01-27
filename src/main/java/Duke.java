@@ -20,12 +20,24 @@ public class Duke {
     public void executeCommand(Command c) {
         try {
             if (c.type == CommandType.ADD_TODO) {
+                if (c.args.size() != 1) {
+                    throw new DukeInvalidArgumentException();
+                }
+
                 tasks.addTodo(c.args.get(0));
                 ui.echo(ui.ADD_TASK);
             } else if (c.type == CommandType.ADD_DEADLINE) {
+                if (c.args.size() != 2) {
+                    throw new DukeInvalidArgumentException();
+                }
+
                 tasks.addDeadline(c.args.get(0), c.args.get(1));
                 ui.echo(ui.ADD_TASK);
             } else if (c.type == CommandType.ADD_EVENT) {
+                if (c.args.size() != 2) {
+                    throw new DukeInvalidArgumentException();
+                }
+
                 tasks.addEvent(c.args.get(0), c.args.get(1));
                 ui.echo(ui.ADD_TASK);
             } else if (c.type == CommandType.COMPLETE_TASK) {
@@ -45,9 +57,9 @@ public class Duke {
                 throw new DukeInvalidCommandException();
             }
         } catch (DukeInvalidArgumentException e) {
-            ui.printInvalidArgumentError();
+            ui.echo(ui.INVALID_ARGUMENT);
         } catch (DukeInvalidCommandException e) {
-            ui.printInvalidCommandError();
+            ui.echo(ui.INVALID_COMMAND);
         }
     }
 
