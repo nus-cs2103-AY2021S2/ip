@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Valid commands that the user can execute.
+ */
 public enum DukeCommand {
     BYE,
     DEADLINE,
@@ -10,9 +13,9 @@ public enum DukeCommand {
     TODO;
 
     /**
-     * This method checks whether the user's input is a valid command.
-     * @param value input command from the user.
-     * @return the boolean to indicate whether is it a valid command.
+     * Returns a boolean to indicate whether the user's input is valid.
+     * @param value input command from the user
+     * @return the boolean to indicate whether is it a valid command
      */
     public static boolean isContains(String value) {
         for (DukeCommand cmd : values()) {

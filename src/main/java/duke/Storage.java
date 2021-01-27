@@ -10,9 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Stores and restores the user's task list.
+ */
 public class Storage {
+
     private final File file;
 
+    /**
+     * Initialize the storage file from the given directory and creates the folder if it does not exists.
+     * @param filePath directory of the storage file
+     */
     public Storage(String filePath) {
         file = new File(filePath);
         File folder = file.getParentFile();
@@ -21,6 +29,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the {@code Task} data from this storage file, and then returns it.
+     * Returns an empty {@code Task} if the file does not exist, or is not a regular file.
+     * @return a prepared list of task(s)
+     * @throws DukeException when it tries to open file that does not exists
+     */
     public List<Task> load() throws DukeException {
         Scanner sc = null;
         try {
@@ -28,36 +42,44 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found");
         }
-        List<Task> taskList = new ArrayList<>();
+
+        List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String item = sc.nextLine();
             String[] items = item.split(" \\| ");
+
             char type = items[0].charAt(0);
             int done = Integer.parseInt(items[1]);
             String desc = items[2];
+
             switch (type) {
             case 'T':
-                taskList.add(new ToDo(done, desc));
+                tasks.add(new ToDo(done, desc));
                 break;
             case 'E':
-                taskList.add(new Event(done, desc, items[3]));
+                tasks.add(new Event(done, desc, items[3]));
                 break;
             case 'D':
-                taskList.add(new Deadline(done, desc, items[3]));
+                tasks.add(new Deadline(done, desc, items[3]));
                 break;
             }
         }
         sc.close();
-        return taskList;
+        return tasks;
     }
 
-    public void saveFile(TaskList taskList) throws DukeException {
+    /**
+     * Saves the {@code Task} data to the storage file.
+     * @param tasks list of task(s) to be saved
+     * @throws DukeException if there were errors encountered when trying to write data to the file.
+     */
+    public void saveFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(taskList.toStorageString());
+            fileWriter.write(tasks.toStorageString());
             fileWriter.close();
-        } catch (IOException ex) {
-            throw new DukeException("Error Saving file");
+        } catch (IOException e) {
+            throw new DukeException("Error saving file");
         }
     }
 }

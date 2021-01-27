@@ -1,10 +1,14 @@
 package duke.task;
 
-import duke.DateHelper;
+import duke.DukeHelper;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Deadline task.
+ */
 public class Deadline extends Task {
+
     private LocalDate by;
 
     public LocalDate getBy() {
@@ -23,7 +27,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), DateHelper.formatDate(by));
+        return String.format("[D]%s (by: %s)", super.toString(), DukeHelper.formatDate(by));
     }
 
     @Override

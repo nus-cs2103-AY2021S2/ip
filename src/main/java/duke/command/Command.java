@@ -5,21 +5,30 @@ import duke.Storage;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * An abstract base class of executable commands.
+ */
 public abstract class Command {
 
-    private boolean exit;
+    /**
+     * Indicator used to differentiate exit command
+     */
+    private boolean shouldExit;
 
     public Command() {
-        this.exit = false;
+        this.shouldExit = false;
     }
 
-    public Command(boolean exit) {
-        this.exit = exit;
+    public Command(boolean isExit) {
+        this.shouldExit = isExit;
     }
 
     public boolean isExit() {
-        return exit;
+        return shouldExit;
     }
 
+    /**
+     * Performs the execution of the desired command.
+     */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }
