@@ -21,6 +21,16 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the exact String required to Construct this Task.
+     *
+     * @return A String that can be used to construct an equivalent Task.
+     */
+    @Override
+    public String getConstructorString() {
+        return getDescription() + " /at " + at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.at + ")";

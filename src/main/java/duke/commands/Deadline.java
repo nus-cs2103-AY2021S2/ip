@@ -21,6 +21,16 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the exact String required to Construct this Task.
+     *
+     * @return A String that can be used to construct an equivalent Task.
+     */
+    @Override
+    public String getConstructorString() {
+        return getDescription() + " /by " + by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + this.by + ")";

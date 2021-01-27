@@ -18,6 +18,16 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Returns the exact String required to Construct this Task.
+     *
+     * @return A String that can be used to construct an equivalent Task.
+     */
+    @Override
+    public String getConstructorString() {
+        return getDescription();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
