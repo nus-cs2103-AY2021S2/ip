@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class DukeController {
@@ -72,7 +75,8 @@ public class DukeController {
                             if (info.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty.");
                             }
-                            this.list.add(new Deadlines(info[0], info[1]));
+                            LocalDate deadline = LocalDate.parse(info[1]);
+                            this.list.add(new Deadlines(info[0], deadline));
                             break;
                         case ("event"):
                             if (doneLine.length == 1) {
@@ -82,7 +86,10 @@ public class DukeController {
                             if (info2.length == 1) {
                                 throw new DukeException("☹ OOPS!!! The timing of an event cannot be empty.");
                             }
-                            this.list.add(new Events(info2[0], info2[1]));
+                            String[] information = parseEvent(info2[1]);
+                            this.list.add(new Events(info2[0], information[0].toUpperCase(),
+                                    LocalTime.parse(information[1]),
+                                    LocalTime.parse(information[2])));
                             break;
                         default:
                             throw new DukeException("☹ OOPS!!! Command is not recognized!!");
@@ -101,10 +108,18 @@ public class DukeController {
     public void introduction() {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
+
     }
 
     public void goodbye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public String[] parseEvent(String date) {
+        String[] days = date.split(" ", 2);
+        String[] time = days[1].split(" - ", 2);
+
+        return new String[]{days[0], time[0], time[1]};
     }
 }
 
