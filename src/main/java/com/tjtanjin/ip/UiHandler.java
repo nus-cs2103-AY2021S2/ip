@@ -7,6 +7,10 @@ import java.util.Scanner;
  */
 public class UiHandler {
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
     /**
      * Greets the user upon program launch.
      */
@@ -16,14 +20,14 @@ public class UiHandler {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you?");
+        System.out.println(ANSI_GREEN + "Hello from\n" + logo + "\nWhat can I do for you?");
     }
 
     /**
      * Prints line divider between commands for clarity.
      */
     public void showDivider() {
-        System.out.println("------------------------------------");
+        System.out.println(ANSI_WHITE + "------------------------------------");
     }
 
     /**
@@ -43,7 +47,7 @@ public class UiHandler {
      * @param response information to print
      */
     public void showInfo(String response) {
-        System.out.println(response.split(" ", 2)[1]);
+        System.out.println(ANSI_GREEN + response.split(" ", 2)[1]);
     }
 
     /**
@@ -51,7 +55,7 @@ public class UiHandler {
      * @param response error message to print
      */
     public void showError(String response) {
-        System.out.println(response);
+        System.out.println(ANSI_RED + response);
     }
 
     /**
@@ -59,7 +63,7 @@ public class UiHandler {
      * @param crashMsg message to print before termination
      */
     public static void terminate(String crashMsg) {
-        System.out.println(crashMsg);
+        System.out.println(ANSI_RED + crashMsg);
         System.exit(0);
     }
 

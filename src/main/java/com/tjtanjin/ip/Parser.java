@@ -67,7 +67,7 @@ public class Parser {
 
         String command = parsedInput[0].toUpperCase();
         if (!isValidCommand(command)) {
-            return "Error: Invalid instruction, type /help for more options";
+            return "Error: Invalid instruction, type 'help' for more options";
         }
 
         try {
