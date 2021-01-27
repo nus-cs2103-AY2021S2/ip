@@ -1,5 +1,8 @@
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +17,9 @@ import exception.DukeInvalidInputException;
 public class Duke {
 
     protected static ArrayList<Task> tasks;
+    protected static ArrayList<String> inputs;
 
+    protected static final String sessionFile = "./saved_session";
     private static final String greetingMessage = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
@@ -25,18 +30,23 @@ public class Duke {
         System.out.println(greetingMessage);
 
         tasks = new ArrayList<>(100);
+        inputs = new ArrayList<>(100);
+        loadHistory();
 
         chatLoop(System.in, System.out);
 
     }
 
     public static void chatLoop(InputStream in, OutputStream out) throws IOException {
+
         BufferedReader reader = getReader(in);
         PrintStream writer = getWriter(out);
         String line = reader.readLine();
         while (line != null) {
             try {
                 writer.println(parseInput(line));
+                inputs.add(line);
+                saveHistory();
             } catch (DukeException e) {
                 handleException(e, writer);
             }
@@ -44,6 +54,42 @@ public class Duke {
                 break;
             }
             line = reader.readLine();
+        }
+    }
+
+    public static void saveHistory() {
+        File file = new File(sessionFile);
+        try {
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+
+            PrintStream out = new PrintStream(file);
+            for (int i = 0; i < inputs.size(); i++) {
+                out.println(inputs.get(i));
+            }
+            out.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadHistory() throws IOException {
+        if (!new File(sessionFile).exists()) return;
+        InputStream fileInStream = new FileInputStream(sessionFile);
+        BufferedReader reader = getReader(fileInStream);
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            try {
+                parseInput(line);
+                inputs.add(line);
+            } catch (DukeException e) {
+                // undefined behaviour
+                // Old command encountered
+            }
         }
     }
 

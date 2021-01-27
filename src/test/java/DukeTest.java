@@ -16,6 +16,67 @@ import exception.DukeInvalidInputException;
 public class DukeTest {
 
     @Test
+    public void saveSessionAbleToLoad() throws IOException{
+        File testFile = new File(Duke.sessionFile);
+        if (testFile.exists())
+            testFile.delete();
+        testFile.createNewFile();
+
+        Duke.tasks = new ArrayList<>(100);
+        Duke.inputs = new ArrayList<>(100);
+
+        PrintWriter out = new PrintWriter(testFile);
+        out.println("todo test history 1");
+        out.println("todo test history 2");
+        out.println("list");
+        out.println("todo test history 3");
+        out.println("todo test history 4");
+        out.println("done 2");
+        out.println("delete 3");
+        out.close();
+
+        Duke.loadHistory();
+
+        assertEquals(3, Duke.tasks.size());
+        assertTrue(Duke.tasks.get(1).getCompletionState());
+        assertEquals("test history 4", Duke.tasks.get(2).getTaskInfo());
+        assertEquals(7, Duke.inputs.size());
+    }
+
+    @Test
+    public void saveSessionAbleToSave() throws IOException, FileNotFoundException{
+        File testFile = new File(Duke.sessionFile);
+        if (testFile.exists())
+            testFile.delete();
+        testFile.createNewFile();
+
+        Duke.tasks = new ArrayList<>(100);
+        Duke.inputs = new ArrayList<>(100);
+
+        Duke.inputs.add("todo test history 1");
+        Duke.inputs.add("todo test history 2");
+        Duke.inputs.add("list");
+        Duke.inputs.add("todo test history 3");
+        Duke.inputs.add("todo test history 4");
+        Duke.inputs.add("done 2");
+        Duke.inputs.add("delete 3");
+
+        Duke.saveHistory();
+
+        BufferedReader in = new BufferedReader(new FileReader(Duke.sessionFile));
+
+        assertEquals("todo test history 1", in.readLine());
+        assertEquals("todo test history 2", in.readLine());
+        assertEquals("list", in.readLine());
+        assertEquals("todo test history 3", in.readLine());
+        assertEquals("todo test history 4", in.readLine());
+        assertEquals("done 2", in.readLine());
+        assertEquals("delete 3", in.readLine());
+
+        in.close();
+    }
+
+    @Test
     public void parseInputDeleteRemovesTaskFromList() throws DukeException {
         // Setup
         Duke.tasks = new ArrayList<>();
