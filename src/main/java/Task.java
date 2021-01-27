@@ -1,13 +1,13 @@
 public class Task {
     protected String info;
     protected boolean isDone;
-    //protected int taskType;
+    protected taskType type;
     private String output;
 
-    public Task(String info) {
+    public Task(String info, taskType type) {
         this.info = info;
-        //this.taskType = taskType;
         this.isDone = false;
+        this.type = type;
     }
 
     public String getInfo() {
@@ -26,6 +26,10 @@ public class Task {
         isDone = true;
         System.out.println("Well done, Master! I've marked this task as done:");
         return toString();
+    }
+
+    public taskType getType() {
+            return this.type;
     }
 
     @Override
