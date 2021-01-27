@@ -28,6 +28,7 @@ public class Deadline extends Task{
         }
         else{
             return "[D][_] " + this.getName() +" | " +this.getDeadlineDate()+ " " + this.getDeadlineTime();
+
         }
     }
 }
