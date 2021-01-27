@@ -6,8 +6,17 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String name, String by, boolean done) {
+        super(name, done);
+        this.by = by;
+    }
+
+    public String getBy() {
+        return this.by;
+    }
+
     @Override
     public String getStatus() {
-        return "[D]" + super.getStatus() + " (by:" + by + ")";
+        return "[D]" + super.getStatus() + " (by: " + by + ")";
     }
 }

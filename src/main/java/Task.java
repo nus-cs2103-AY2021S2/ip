@@ -2,12 +2,18 @@ public class Task {
     private String name;
     private boolean done;
 
-    Task(String name) throws DukeException {
-        if (name == null) {
-            throw new DukeException("I'm sorry, but I don't know what that means.");
-        }
+    Task(String name) {
         this.name = name;
         this.done = false;
+    }
+
+    Task(String name, boolean done) {
+        this.name = name;
+        this.done = done;
+    }
+
+    public boolean isDone() {
+        return this.done;
     }
 
     public String getName() {
@@ -15,7 +21,7 @@ public class Task {
     }
 
     public String getStatus() {
-        return "[" + (this.done ? "\u2713" : "\u2718") + "]" + this.name;
+        return "[" + (this.done ? "\u2713" : "\u2718") + "] " + this.name;
     }
 
     public void markDone() {
