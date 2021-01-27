@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.util.List;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.Collections;
 
 /**
  *  Juke is a chatbot that helps users keep track of tasks.
