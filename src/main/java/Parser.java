@@ -26,6 +26,13 @@ public class Parser {
         return list;
     }
 
+    /**
+     * Parse the operator input by user.
+     *
+     * @param userInput full text command input by user.
+     * @return Extracted operator.
+     * @throws DukeException If operator is not valid.
+     */
     public String parseOperator(String userInput) throws DukeException {
         String[] parts = userInput.split(" ", 2);
         String operator = parts[0];
@@ -44,6 +51,13 @@ public class Parser {
         return command;
 }
 
+    /**
+     * Return the task number to be marked as done.
+     *
+     * @param commandText full text command input by user.
+     * @return Task number.
+     * @throws DukeException If task number is empty or a non-integer is entered.
+     */
     public int parseDone(String commandText) throws DukeException{
         String[] command = commandText.split(" ", 2);
         if (command.length == 1) {
@@ -58,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Return the task number to be deleted.
+     *
+     * @param commandText full text command input by user.
+     * @return Task number.
+     * @throws DukeException If task number is empty or a non-integer is entered.
+     */
     public int parseDelete(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
         if (command.length == 1) {
@@ -73,7 +94,12 @@ public class Parser {
     }
 
     /**
-     * return description of todo */
+     * Return the description of a ToDo task to be added specified by user.
+     *
+     * @param commandText full text command input by user.
+     * @return Description of ToDo.
+     * @throws DukeException If description is empty.
+     */
     public String parseAddToDo(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
@@ -83,6 +109,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Return the description and due time of a Deadline task to be added specified by user.
+     *
+     * @param commandText full text command input by user.
+     * @return List containing description and due time of Deadline.
+     * @throws DukeException If description is empty or due time does not follow 'yyyy-M-d H:mm' format.
+     */
     public String[] parseAddDeadline(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
@@ -98,6 +131,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Return the description and time of an Event task to be added specified by user.
+     *
+     * @param commandText full text command input by user.
+     * @return List containing description and time of event.
+     * @throws DukeException If description is empty or time does not follow 'yyyy-M-d H:mm' format.
+     */
     public String[] parseAddEvent(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
@@ -114,6 +154,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Return the keyword specified by user.
+     *
+     * @param commandText full text command input by user.
+     * @return Keyword to be used for finding matching tasks.
+     * @throws DukeException If keyword is empty.
+     */
     public String parseFindTask(String commandText) throws DukeException {
         String[] command = commandText.split(" ", 2);
         if(command.length == 1 || command[1].isBlank()) {
@@ -123,7 +170,14 @@ public class Parser {
         }
     }
 
-    public boolean isValidTime(String time) throws DukeException {
+    /**
+     * Return if the time entered by user is valid.
+     *
+     * @param time Time of Deadline or Event.
+     * @return True if the time follows "yyyy-M-d H:mm"; else, return false.
+     * @throws DateTimeParseException If time is in invalid format.
+     */
+    public boolean isValidTime(String time) throws DateTimeParseException {
         try {
             DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-M-d H:mm", Locale.ENGLISH);
             inputFormat.parse(time);
@@ -131,16 +185,5 @@ public class Parser {
             return false;
         }
         return true;
-    }
-
-
-    public String extractOperator(String userInput){
-        String[] parts = userInput.split(" ", 2);
-        return parts[0];
-    }
-
-    public String extractDescription(String userInput) {
-        String[] parts = userInput.split(" ", 2);
-        return parts[1];
     }
 }

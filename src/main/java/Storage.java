@@ -18,6 +18,12 @@ public class Storage {
         return this.filePath;
     }
 
+    /**
+     * Return list of existing tasks stored in local text file.
+     *
+     * @return List of task details (type, status, description and time).
+     * @throws DukeException If local file is not found.
+     */
     public ArrayList<String> load() throws DukeException {
         try {
             ArrayList<String> tasks = new ArrayList<>();
@@ -32,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Store the TaskList in local text file.
+     *
+     * @param taskList TaskList containing Task objects.
+     * @throws DukeException If fail to write the file.
+     */
     public void updateTaskList(TaskList taskList) throws DukeException {
         try {
             FileWriter writer = new FileWriter(filePath);
