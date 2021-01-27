@@ -8,7 +8,7 @@ public class Parser {
 
 	private final TaskList mem;
 	private final Storage storage;
-	private static Hashtable<String, Consumer<String>> functions;
+	private final Hashtable<String, Consumer<String>> functions;
 
 	/**
 	 * loads the txt file into mem and displays the welcome message
@@ -16,12 +16,11 @@ public class Parser {
 	public Parser() {		
 		this.storage = new Storage();
 		this.mem = this.storage.load();
+		functions = new Hashtable<String, Consumer<String>>();
 		Ui.welcome();
 	}
 
 	private void initialize() {
-
-		functions = new Hashtable<>();
 
 		functions.put("done", this::done);
 		
@@ -32,6 +31,8 @@ public class Parser {
 		functions.put("event", this::event);
 
 		functions.put("delete", this::delete);
+
+		functions.put("find", this::find);
     }
 
 	/**
@@ -102,12 +103,17 @@ public class Parser {
 		Ui.tasksOnDay(this.mem, s);
 	}
 
-	private void clear() {
+	void find(String s) {
+		Ui.find(this.mem, s);
+	}
+
+	void clear() {
 		this.mem.clear();
 		Ui.clear();
 	}
 
-	private boolean checkValid(String s) {
-		return s.equals("todo") || s.equals("deadline") || s.equals("event") || s.equals("done") || s.equals("delete");
+
+	boolean checkValid(String s) {
+		return this.functions.containsKey(s);
 	}
 }
