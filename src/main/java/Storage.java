@@ -22,9 +22,9 @@ public class Storage {
             return path;
         }
     }
-    public void writeTasks(ArrayList<Task> tasks){
+    public void writeTasks(TaskList tasks){
         String s = "";
-        for(Task i: tasks){
+        for(Task i: tasks.getList()){
             s = s + i.toString() + "\n";
         }
         try{
