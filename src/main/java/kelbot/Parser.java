@@ -1,5 +1,6 @@
 package kelbot;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -13,6 +14,7 @@ public class Parser {
     public Parser(String input) throws DateTimeParseException {
         try {
             String[] commands = input.split(" ");
+            
             if (input.equals("bye")) {
                 this.command = Command.BYE;
             } else if (input.equals("list")) {
@@ -40,11 +42,7 @@ public class Parser {
                     }
                     this.taskName += " " + commands[i];
                 }
-                //try {
                     this.date = LocalDate.parse(date);
-                //} catch (DateTimeParseException e) {
-                //    System.out.println("Invalid Date");
-                //}
             } else if (commands[0].equals("event")) {
                 this.command = Command.EVENT;
                 String date = "";
@@ -57,18 +55,13 @@ public class Parser {
                     }
                     this.taskName += " " + commands[i];
                 }
-                //try {
                     this.date = LocalDate.parse(date);
-                //} catch (DateTimeParseException e) {
-                //    System.out.println("Invalid Date");
-                //}
             } else {
                 throw new KelbotException("Invalid Command");
             }
         } catch (KelbotException e) {
             System.out.println(e.getMessage());
         }
-    
     }
     
     public Command getCommand() {

@@ -1,9 +1,8 @@
 package kelbot;
 
-import java.io.Serializable;
 import java.util.Scanner;
 
-public class UI implements Serializable {
+public class UI {
     
     public UI() {
         System.out.println("Hello! I'm Kelbot\n" + "What can I do for you?");

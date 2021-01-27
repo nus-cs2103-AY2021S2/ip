@@ -33,6 +33,6 @@ public class KelbotTest {
         taskList.add(todoTask);
         EventTask eventTask = new EventTask("CS2103 Tutorial", LocalDate.parse("2020-01-27"));
         taskList.add(eventTask);
-        assertEquals(todoTask, taskList.done(1));
+        assertEquals(todoTask, taskList.complete(1));
     }
 }
