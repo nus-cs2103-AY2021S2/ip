@@ -1,5 +1,9 @@
-import java.util.*;
-import java.lang.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -18,6 +22,11 @@ public class Duke {
         printFormatted("Hello! I'm Duke\nWhat can I do for you?");
 
         LinkedList<Task> lst = new LinkedList<>();
+        try {
+            load(lst);
+        } catch (DukeException ex) {
+            printFormatted(ex.getMessage());
+        }
 
         while (!request.equals("bye")) {
             request = sc.nextLine();
@@ -57,7 +66,7 @@ public class Duke {
                 }
             } else if (request.equals("todo")) {
                 try {
-                    addTodo(lst, taskname);
+                    addTask(lst, taskname, request, "", "");
                     printAdded(lst);
                 } catch (DukeException ex) {
                     printFormatted(ex.getMessage());
@@ -65,7 +74,7 @@ public class Duke {
             } else if (request.equals("deadline")) {
                 try {
                     String[] deadStr = formatCommand(taskname);
-                    lst.add(new Task("D", deadStr[0], deadStr[1]));
+                    addTask(lst, deadStr[0], request, deadStr[1], deadStr[2]);
                     printAdded(lst);
                 } catch (DukeException ex) {
                     printFormatted(ex.getMessage());
@@ -73,7 +82,7 @@ public class Duke {
             } else if (request.equals("event")) {
                 try {
                     String[] eventStr = formatCommand(taskname);
-                    lst.add(new Task("E", eventStr[0], eventStr[1]));
+                    addTask(lst, eventStr[0], request, eventStr[1], eventStr[2]);
                     printAdded(lst);
                 } catch (DukeException ex) {
                     printFormatted(ex.getMessage());
@@ -97,6 +106,7 @@ public class Duke {
         String msg = "Noted. I've removed this task:\n" +
                 "  " + task +
                 "\n Now you have " + lst.size() + " tasks in the list.";
+        save(lst);
         printFormatted(msg);
     }
 
@@ -105,6 +115,23 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         lst.add(new Task("T", taskname));
+        save(lst);
+    }
+
+    public static void addTask(List<Task> lst, String taskname, String type, String date, String preposition) throws DukeException {
+        if (taskname.equals("")) {
+            throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        }
+        if (type.equals("todo")) {
+            lst.add(new Task("T", taskname));
+        } else if (type.equals("event")) {
+            lst.add(new Task("E", taskname, date, preposition));
+        } else if (type.equals("deadline")) {
+            lst.add(new Task("D", taskname, date, preposition));
+        } else {
+            throw new DukeException("☹ OOPS!!! Tried to add wrong task type!");
+        }
+        save(lst);
     }
 
     public static void throwDK() throws DukeException {
@@ -114,9 +141,9 @@ public class Duke {
     public static String[] formatCommand(String n) throws DukeException {
         try {
             String[] arr = new String[3];
-            arr[0] = n.split("/")[0];
-            arr[1] = "(" + n.split("/")[1].split(" ")[0] + ":" +
-                    n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length(), n.split("/")[1].length()) + ")";
+            arr[0] = n.split("/")[0].split(" ")[0];
+            arr[1] = n.split("/")[1].substring(n.split("/")[1].split(" ")[0].length() + 1, n.split("/")[1].length());
+            arr[2] = n.split("/")[1].split(" ")[0];
             return arr;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The format you have entered is wrong.");
@@ -148,14 +175,63 @@ public class Duke {
         printFormatted(msg);
     }
 
-    public static void markDone(List<Task> lst, int taskNo) throws DukeException{
-        if (taskNo >= lst.size() || taskNo < 0) {
+    public static void markDone(List<Task> lst, int taskNo) throws DukeException {
+        if (taskNo > lst.size() || taskNo < 0) {
             throw new DukeException(
                     String.format("Tried to mark nothing ????. (Size: %d | Task No: %d)", lst.size(), taskNo));
         }
         lst.get(taskNo - 1).setDone();
         String msg = "Nice! I've marked this task as done:\n";
         msg += "  " + lst.get(taskNo - 1);
+        save(lst);
         printFormatted(msg);
+    }
+
+    public static void save(List<Task> lst) {
+        try {
+            File saveFile = new File("./data/duke.txt");
+            File directory = new File("./data/");
+
+            if(!directory.exists()) {
+                directory.mkdir();
+            }
+
+            FileWriter fw = new FileWriter(saveFile);
+            for (int i = 0; i < lst.size(); i++) {
+                Task task = lst.get(i);
+                fw.write(task.toSaveFormat());
+                fw.write("\n");
+                fw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void load(List<Task> lst) throws DukeException {
+        try {
+            File saveFile = new File("./data/duke.txt");
+            if (saveFile.exists()) {
+                Scanner reader = new Scanner(saveFile);
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    String[] token = line.split(" \\| ");
+                    Task task;
+                    if (token[0].equals("T")) {
+                        task = new Task(token[0], token[2]);
+                    } else if (token[0].equals("E") || token[0].equals("D")) {
+                        task = new Task(token[0], token[2], token[3], token[4]);
+                    } else {
+                        throw new DukeException("Save file is corrupted ): Will be creating a new file");
+                    }
+                    if (token[1].equals("1")) {
+                        task.setDone();
+                    }
+                    lst.add(task);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
