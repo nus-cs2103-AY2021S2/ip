@@ -1,8 +1,8 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    public LocalDate event;
+    public LocalDateTime event;
 
     public Event(String str) {
         super(str);//super must be 1st line..
@@ -11,12 +11,17 @@ public class Event extends Task {
             throw new IllegalArgumentException();
         }
         this.task = split[0].trim();
-        this.event = LocalDate.parse(split[1].trim());
+        String trimmed = split[1].trim();
+        String[] split1 = trimmed.split(" ");
+        if(split1.length != 2) {
+            throw new ArrayIndexOutOfBoundsException(" Enter date and time in this format yyyy-mm-dd hh:mm\n");
+        }
+        this.event = LocalDateTime.parse(split1[0].trim() + "T" + split1[1]);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() +" "+ "(at: "
-                + event.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + event.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }
