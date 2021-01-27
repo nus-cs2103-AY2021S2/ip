@@ -18,7 +18,6 @@ public class Duke {
         } catch (FileNotFoundException fileException) {
             this.tasks = new TaskList();
         }
-
     }
 
     /**
@@ -28,21 +27,17 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
-
-
     }
 
     /**
      * Runs the chatbot by taking in user input and processing it.
      */
     public void run() {
-
         this.ui.greetUser();
 
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
-
             String input = sc.nextLine();
 
             try {
