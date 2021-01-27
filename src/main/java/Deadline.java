@@ -11,6 +11,11 @@ public class Deadline extends Task {
         super();
     }
 
+    /**
+     * Constructs a Deadline object.
+     * @param taskName Name of deadline task.
+     * @param deadline Time at which deadline task needs to be completed by.
+     */
     public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;

@@ -3,12 +3,20 @@ import java.util.Scanner;
 public class Ui {
     private static Scanner in = new Scanner(System.in);
 
+
+    /**
+     * Prints a string to the standard output.
+     * @param str String to print.
+     */
     public static void echo(String str) {
         System.out.println("------------------------------");
         System.out.println(str);
         System.out.println("------------------------------");
     }
 
+    /**
+     * Greets the user.
+     */
     public static void greet() {
         String logo = "______                    _       _           _\n"
                 + "|  ___|                  (_)     | |         | |\n"
@@ -23,6 +31,10 @@ public class Ui {
         System.out.println("Enter a command below for me to assist you");
     }
 
+    /**
+     * Reads commands from the standard input
+     * @return Command string entered by the user
+     */
     public static String readCommand() {
         return in.nextLine().toLowerCase();
     }

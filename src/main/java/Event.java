@@ -11,6 +11,11 @@ public class Event extends Task {
         super();
     }
 
+    /**
+     * Constructs an Event object.
+     * @param taskName Name of deadline task.
+     * @param timeOfEvent Time at which event will take place.
+     */
     public Event(String taskName, LocalDateTime timeOfEvent) {
         super(taskName);
         this.timeOfEvent = timeOfEvent;

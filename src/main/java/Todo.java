@@ -3,6 +3,10 @@ public class Todo extends Task {
         super();
     }
 
+    /**
+     * Constructs a Todo object.
+     * @param taskName Name of the todo.
+     */
     public Todo(String taskName) {
         super(taskName);
     }
