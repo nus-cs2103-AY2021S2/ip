@@ -4,8 +4,6 @@ import java.time.LocalDate;
  * Represents a Parser which deals with making sense of user commands
  */
 public class Parser {
-    public static Ui ui = new Ui();
-
     /**
      * Extracts information from the user input and performs the appropriate actions
      *
@@ -75,6 +73,11 @@ public class Parser {
                 }
                 tasks.deleteTask(index - 1);
                 storage.writeTasksToFile(tasks.getTaskList());
+            } else if (input.startsWith("find")) {
+                if (input.split(" ").length < 2) {
+                    throw new DukeException("Please enter a keyword to search for");
+                }
+                tasks.findTask(input.split(" ")[1]);
 
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");

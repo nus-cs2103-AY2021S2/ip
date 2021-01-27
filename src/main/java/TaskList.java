@@ -99,4 +99,30 @@ class TaskList {
         System.out.println(this.ui.FORMAT_LINE);
 
     }
+
+    /**
+     * Searches for tasks based on a keyword.
+     *
+     * @param keyword A String indicating the keyword to search for.
+     */
+    public void findTask(String keyword) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : this.tasks) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                filteredTasks.add(task);
+            }
+        }
+        if (filteredTasks.size() == 0) {
+            System.out.println("Sorry I could not find any matching tasks in your list.");
+        } else {
+            System.out.println(this.ui.FORMAT_LINE);
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < filteredTasks.size(); i++) {
+                Task task = filteredTasks.get(i);
+                System.out.println(i + 1 + "." + task.toString());
+
+            }
+            System.out.println(this.ui.FORMAT_LINE);
+        }
+    }
 }
