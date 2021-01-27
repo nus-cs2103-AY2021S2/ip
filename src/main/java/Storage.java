@@ -8,36 +8,60 @@ import java.io.FileNotFoundException;
 public class Storage {
 
     private String edit;
-    public Storage(String path, String name){
+
+    /**
+     * Constructor of storage class.
+     *
+     * @param path path of file.
+     * @param name name of file.
+     */
+
+    public Storage(String path, String name) {
         path = makeDirectory(path);
-        edit = path+name;
+        edit = path + name;
     }
-    public String makeDirectory(String path){
+
+    /**
+     * Make a directory
+     *
+     * @param path path of file.
+     * @return directory path
+     */
+    public String makeDirectory(String path) {
         File file = new File(path);
         file.mkdirs();
         if (!file.isDirectory()) {
             return "";
-        }
-        else {
+        } else {
             return path;
         }
     }
-    public void writeTasks(TaskList tasks){
+
+    /**
+     * Write the tasks in the TaskList to the directory.
+     *
+     * @param tasks list of tasks
+     */
+    public void writeTasks(TaskList tasks) {
         String s = "";
-        for(Task i: tasks.getList()){
+        for (Task i : tasks.getList()) {
             s = s + i.toString() + "\n";
         }
-        try{
+        try {
             FileWriter fw = new FileWriter(edit);
             fw.write(s);
             fw.close();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public ArrayList<String> readFile() throws FileNotFoundException{
+
+    /**
+     * Read the file and extract the schedule.
+     * @return ArrayList of strings of schedules.
+     */
+
+    public ArrayList<String> readFile() throws FileNotFoundException {
         try {
             ArrayList<String> tasks = new ArrayList<>();
             File f = new File(edit);
@@ -46,12 +70,8 @@ public class Storage {
                 tasks.add(s.nextLine());
             }
             return tasks;
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new FileNotFoundException("No File");
         }
     }
-
-
-
 }

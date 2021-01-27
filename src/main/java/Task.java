@@ -7,6 +7,12 @@ public class Task {
     protected DateTimeFormatter Date;
     protected DateTimeFormatter Time;
 
+    /**
+     * Constructor for tasks
+     * @param name task name.
+     * @param isDone task status.
+     */
+
     Task(String name,Boolean isDone){
         this.isDone = isDone;
         this.name = name;
@@ -14,14 +20,28 @@ public class Task {
         this.Time = DateTimeFormatter.ofPattern("hh:mm");
     }
 
-    String getName(){
+    /**
+     * Get the name for the task
+     * @return the task name.
+     */
+
+    String getName() {
         return this.name;
     }
-    DateTimeFormatter getDate() { return this.Date; }
-    DateTimeFormatter getTime() { return this.Time; }
-    Boolean getIsDone(){
+
+    /**
+     * Get the status for the task
+     * @return the task status.
+     */
+
+    Boolean getIsDone() {
         return this.isDone;
     }
+
+    /**
+     * Mark the task as done
+     * @return the new task.
+     */
 
     Task finish(){
         return new Task(this.getName(), true) ;

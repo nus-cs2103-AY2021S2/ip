@@ -3,7 +3,15 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    public static Todo stringToTodo(String string){
+
+    /**
+     * Parse a string to Todo.
+     * @param string the string.
+     * @return the todo needed.
+     *
+     */
+
+    public static Todo stringToTodo(String string) {
         String desc = "";
         String[] texts = string.split("\\s+");
         boolean status = (texts[0].charAt(4) == 'X');
@@ -12,6 +20,16 @@ public class Parser {
         }
         return new Todo(desc,status);
     }
+
+
+    /**
+     * Parse a string to Deadline.
+     * @param string the string.
+     * @return the deadline needed.
+     *
+     */
+
+
     public static Deadline stringToDeadline(String string){
         String missions = "";
         String[] time = string.split("[|]");
@@ -27,6 +45,14 @@ public class Parser {
                 , LocalDate.parse(times[1], DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                 , LocalTime.parse(times[2],DateTimeFormatter.ofPattern("HH:mm")));
     }
+
+    /**
+     * Parse a string to Event.
+     * @param string the string.
+     * @return the event needed.
+     *
+     */
+
     public static Event stringToEvent(String string){
         String missions = "";
 
@@ -48,13 +74,28 @@ public class Parser {
                 LocalTime.parse(end[2],DateTimeFormatter.ofPattern("HH:mm")));
     }
 
-    public static Todo parseTodo(String[] todo){
+    /**
+     * Parse input to Todo.
+     * @param todo array of strings of input.
+     * @return the todo needed.
+     *
+     */
+
+    public static Todo parseTodo(String[] todo) {
         String s = "";
         for (int i = 1; i < todo.length; i++) {
             s = s + todo[i] + " ";
         }
         return (new Todo(s,false));
     }
+
+    /**
+     * Parse input to Event.
+     * @param event array of strings of input.
+     * @return the event needed.
+     *
+     */
+
     public static Event parseEvent(String[] event) {
         String s = event[0];
         String[] dates = event[1].split("\\s+");
@@ -65,7 +106,15 @@ public class Parser {
         return new Event(s.substring(6), false, startDate,startTime,endDate,endTime);
     }
 
-    public static Deadline parseDeadlinne(String[] deadline){
+
+    /**
+     * Parse input to Deadline.
+     * @param deadline array of strings of input.
+     * @return the deadline needed.
+     *
+     */
+
+    public static Deadline parseDeadlinne(String[] deadline) {
         String s = deadline[0];
         String[] dates = deadline[1].split("\\s+");
         LocalDate deadlineDate = LocalDate.parse(dates[1], DateTimeFormatter.ofPattern("MM/dd/yyyy"));
