@@ -1,8 +1,12 @@
+import java.time.LocalDate;
+
 public class Event extends Task{
+    LocalDate date;
     String time;
 
-    public Event(String name, String time) {
+    public Event(String name, LocalDate date, String time) {
         super(name);
+        this.date = date;
         this.time = time;
     }
 
@@ -13,10 +17,12 @@ public class Event extends Task{
 
     @Override
     public String toString() {
+        String head = "[E][ ] ";
         if (this.done) {
-            return "[E][X] " + this.name + " (at: " + this.time + ")";
-        } else {
-            return "[E][ ] " + this.name + " (at: " + this.time + ")";
+            head = "[E][X] ";
         }
+        return head + this.name + " (by: " + this.date.getMonth() + " "
+                + this.date.getDayOfMonth() + " " + this.date.getYear() + " "
+                + this.time + ")";
     }
 }
