@@ -120,6 +120,14 @@ class TaskList {
         Storage.update(this.taskList);
     }
 
+    public void find(String keyWord) {
+        for (Task t : taskList) {
+            if (t.getTaskName().toString().contains(keyWord)) {
+                System.out.println(t);
+            }
+        }
+    }
+
     /**
      * Displays the number of tasks in the list in a special format.
      *

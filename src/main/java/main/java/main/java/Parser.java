@@ -30,6 +30,8 @@ public class Parser{
             return this.processDeadLine(input);
         } else if (command.equals("event")) {
             return this.processEvent(input);
+        } else if (command.equals("find")) {
+            return this.processFind(input);
         } else {
             throw new DukeException("Invalid command");
         }
@@ -84,14 +86,14 @@ public class Parser{
 
     private String[] processToDo(String input) throws DukeException {
         String[] result = new String[2];
-        String[] processedInput = input.split(" ");
-        if (processedInput.length == 1) {
+        String processedInput = input.substring(5);
+        if (input.length() <= 4) {
             throw new DukeException("Invalid input, description of todo cannot be empty");
-        } else if (processedInput[1].length() == 0) {
+        } else if (input.charAt(4) != ' ') {
             throw new DukeException("Invalid description of todo");
         }
         result[0] = "todo";
-        result[1] = processedInput[1];
+        result[1] = processedInput;
         return result;
     }
 
@@ -130,6 +132,18 @@ public class Parser{
             return result;
         } catch (DateTimeParseException exception) {
             throw new DukeException("Invalid date");
+        }
+    }
+
+    private String[] processFind(String input) throws DukeException {
+        String[] result = new String[2];
+        if (input.length() <= 5) {
+            throw new DukeException("Invalid input, no keyword found");
+        } else {
+            String processedInput = input.substring(5);
+            result[0] = "find";
+            result[1] = processedInput;
+            return result;
         }
     }
 }
