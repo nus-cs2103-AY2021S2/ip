@@ -1,13 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Duke {
+
     public static void main(String[] args) throws DukeException {
 
         List<Task> contentList = new ArrayList<>();
 
         System.out.println("Hello! I'm Duke \nWhat can I do for you?");
+
+        String filePath = "duke.txt"; // File path to change
+        refreshFile(filePath); // Makes a new empty file
 
         Scanner sc = new Scanner(System.in);
 
@@ -17,14 +26,17 @@ public class Duke {
 
             try {
                 if (input.equals("bye")) {
+                    try {
+                        appendToFile(filePath, printList(contentList));
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
                     textWarper("Bye. Hope to see you again soon!");
                     break;
 
                 } else if (input.equals("list")) {
                     output.append("Here are the tasks in your list: \n");
-                    for (int i = 0; i < contentList.size(); i++) {
-                        output.append(String.format("%d.%s%n", i + 1, contentList.get(i).toString()));
-                    }
+                    output.append(printList(contentList));
 
                 } else if (input.startsWith("done")) {
                     output.append("Nice! I've marked this task as done: \n  ");
@@ -74,15 +86,46 @@ public class Duke {
 
     }
 
-    public static void taskAdded(StringBuilder output, List<Task> contentList, Task temp) {
+    private static void taskAdded(StringBuilder output, List<Task> contentList, Task temp) {
         output.append("Got it. I've added this task:\n ");
         output.append(temp.toString() + "\n");
         output.append(String.format("Now you have %d tasks in the list.", contentList.size()));
     }
 
-    public static void textWarper(String a) {
+    private static void textWarper(String a) {
         System.out.println("____________________________________________________________");
         System.out.println(a);
         System.out.println("____________________________________________________________");
     }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void refreshFile(String filePath) {
+        try {
+            Files.delete(Paths.get(filePath));
+            writeToFile(filePath, "");
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+    private static String printList(List<Task> contentList) {
+        StringBuilder printStr = new StringBuilder();
+        for (int i = 0; i < contentList.size(); i++) {
+            String textToAdd = String.format("%d.%s%n", i + 1, contentList.get(i).toString());
+            printStr.append(textToAdd);
+        }
+        return printStr.toString();
+    }
+
 }

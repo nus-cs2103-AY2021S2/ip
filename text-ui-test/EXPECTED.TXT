@@ -29,13 +29,10 @@ Here are the tasks in your list:
 
 ____________________________________________________________
 ____________________________________________________________
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+DukeException: ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ____________________________________________________________
 ____________________________________________________________
-
-____________________________________________________________
-____________________________________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
+DukeException: ☹ OOPS!!! The description of a todo cannot be empty.
 ____________________________________________________________
 ____________________________________________________________
 Here are the tasks in your list: 
@@ -44,6 +41,11 @@ Here are the tasks in your list:
 3.[E][ ] project meeting (at: Mon 2-4pm)
 4.[D][ ] do homework (by: no idea :-p)
 
+____________________________________________________________
+____________________________________________________________
+Noted. I've removed this task: 
+  [E][ ] project meeting (at: Mon 2-4pm)
+Now you have 3 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Bye. Hope to see you again soon!
