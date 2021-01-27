@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents actions that can be used on DukeObjects.Duke.
+ * Represents actions that can be used on Duke.
  * Actions are the first word in user input commands.
  */
 public enum DukeActions {
@@ -17,6 +17,7 @@ public enum DukeActions {
      * The String form of each action.
      */
     public final String str;
+
     DukeActions(String str) {
         this.str = str;
     }

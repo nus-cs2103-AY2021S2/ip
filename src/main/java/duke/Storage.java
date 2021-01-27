@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Encompasses the abstraction of file operations for DukeObjects.Duke as DukeObjects.Duke.Storage.
+ * Encompasses the abstraction of file operations for Duke as a Storage.
  * Stores tasks as "{isDone ? 1 : 0} {command to create task}" in individual lines.
  */
 public class Storage {
@@ -20,8 +20,8 @@ public class Storage {
     /**
      * Hard coded static factory creation of java.io.File at path "./data/duke.txt"
      *
-     * @param filePath Path of the file to store tasks info from DukeObjects.Duke
-     * @return DukeObjects.Duke.Storage object to handle all storage changes
+     * @param filePath Path of the file to store the info.
+     * @return Storage object to handle all storage changes.
      */
     public static Storage createStorage(String filePath) {
         // Hard coded check for valid directory
@@ -34,7 +34,7 @@ public class Storage {
             file.createNewFile();
             return new Storage(file);
         } catch (IOException e) {
-            System.out.println("DukeObjects.Duke.Storage file cannot be created. List created will not be saved.");
+            System.out.println("Storage file cannot be created. List created will not be saved.");
             return null;
         }
     }
@@ -128,7 +128,7 @@ public class Storage {
     /**
      * Store the task to the back of this storage's file.
      *
-     * @param task DukeObjects.Duke.Task to be added into the file.
+     * @param task Task to be added into the file.
      */
     public void storeTask(String task) throws IndexOutOfBoundsException {
         try {

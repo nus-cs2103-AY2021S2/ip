@@ -2,15 +2,18 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Encompasses interactions with the user using Scanner to get input and outputs to the default System.out.
+ */
 public class Ui {
     private final Scanner scanner;
 
-    public Ui() {
+    private Ui() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Static factory creation of DukeObjects.Duke.Ui.
+     * Static factory creation of Ui.
      *
      * @return DukeObjects.Duke.Ui object started.
      */
@@ -41,7 +44,7 @@ public class Ui {
     }
 
     /**
-     * Closes this DukeObjects.Duke.Ui.
+     * Closes this Ui and its underlying Scanner.
      */
     public void close() {
         scanner.close();
@@ -61,7 +64,7 @@ public class Ui {
     }
 
     /**
-     * Prints each DukeObjects.Duke.Task in the list with its index, and remarks if the list is empty.
+     * Prints each Task in the list with its index, and remarks if the list is empty.
      *
      * @param tasks List of Tasks to be printed.
      */

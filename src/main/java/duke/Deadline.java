@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a task with a deadline specified in the by argument.
+ * Represents a task with a deadline specified in the "by" argument.
  * If deadline is parsable as a LocalDateTime or LocalDate, it will be stored in the variable byDateTime or byDate.
  */
 public class Deadline extends Task {
@@ -15,8 +15,8 @@ public class Deadline extends Task {
     protected LocalDate byDate;
 
     /**
-     * Creates a task with a deadline specified in the by argument.
-     * Tries to parse "by" in various DateTimeFormatter patterns and stores as LocalDateTime object in byDateTime,
+     * Creates a task with a deadline specified in the "by" argument.
+     * Tries to parse deadline in various DateTimeFormatter patterns and stores as LocalDateTime object in byDateTime,
      * or store as LocalDate object in byDate.
      *
      * @param description Describes the task.
