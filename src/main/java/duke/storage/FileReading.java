@@ -16,24 +16,25 @@ public class FileReading {
         BufferedReader bufferedReader = new BufferedReader(fr);
         TaskList taskList = new TaskList();
         String input = bufferedReader.readLine();
-        while(input != null) {
+
+        while (input != null) {
             String[] starr = input.split("\\s\\|\\s");
-            if(starr.length == 3) {
+            if (starr.length == 3) {
                 Todo curr = new Todo(starr[2]);
-                if(starr[1].equals("1")) {
+                if (starr[1].equals("1")) {
                     curr.markAsDone();
                 }
                 taskList.addItem(curr);
             } else {
-                if(starr[0].equals("D")) {
+                if (starr[0].equals("D")) {
                     Deadline curr = new Deadline(starr[2], starr[3]);
-                    if(starr[1].equals("1")) {
+                    if (starr[1].equals("1")) {
                         curr.markAsDone();
                     }
                     taskList.addItem(curr);
-                } else if(starr[0].equals("E")) {
+                } else if (starr[0].equals("E")) {
                     Event curr = new Event(starr[2], starr[3]);
-                    if(starr[1].equals("1")) {
+                    if (starr[1].equals("1")) {
                         curr.markAsDone();
                     }
                     taskList.addItem(curr);

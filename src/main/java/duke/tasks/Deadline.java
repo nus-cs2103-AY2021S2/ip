@@ -1,7 +1,7 @@
 package duke.tasks;
 
 public class Deadline extends Task {
-    protected final String deadline;
+    private final String deadline;
 
     public Deadline(String description, String deadline) {
         super(description, "[D]");

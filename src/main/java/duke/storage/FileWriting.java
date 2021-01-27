@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.duke.Duke;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -9,6 +10,7 @@ import duke.tasks.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.List;
 
 public class FileWriting {
@@ -16,6 +18,7 @@ public class FileWriting {
         FileWriter fw = new FileWriter(f);
         List<Task> taskList = duke.getList().getLst();
         StringBuilder textToAdd = new StringBuilder();
+
         for (Task curr : taskList) {
             if (curr.getStatus()) {
                 if (curr instanceof Todo) {

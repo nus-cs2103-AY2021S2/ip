@@ -1,8 +1,8 @@
 package duke.command;
 
-public class DeadlineCommand extends Command{
-    String description;
-    String deadline;
+public class DeadlineCommand extends Command {
+    private final String description;
+    private final String deadline;
 
     public DeadlineCommand(String description, String deadline) {
         super("deadline");
@@ -16,10 +16,5 @@ public class DeadlineCommand extends Command{
 
     public String getDeadline() {
         return deadline;
-    }
-
-    @Override
-    public void run() {
-
     }
 }

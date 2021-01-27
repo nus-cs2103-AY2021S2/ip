@@ -8,27 +8,19 @@ import duke.tasks.Todo;
 import duke.ui.Ui;
 
 public class Duke {
-    String logo;
-    TaskList list;
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final TaskList list;
 
     public Duke() {
-        this.logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
         this.list = new TaskList();
 
     }
 
     public Duke(TaskList list) {
-        this.logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
         this.list = list;
     }
 
@@ -68,10 +60,16 @@ public class Duke {
         Ui.showTasksToUser(list.getLst());
     }
 
-    public TaskList getList() { return list;}
+    public TaskList getList() {
+        return list;
+    }
 
     public String getLogo() {
-        return this.logo;
+        return LOGO;
+    }
+
+    public int getNumberOfTasks() {
+        return list.size();
     }
 
 }

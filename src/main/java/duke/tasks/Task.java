@@ -1,30 +1,26 @@
 package duke.tasks;
 
-public class Task {
-    protected String description;
+public abstract class Task {
+    protected final String description;
+    protected final String type;
     protected boolean isDone;
-    protected String type;
 
     public Task(String description, String type) {
         this.description = description;
-        this.isDone = false;
         this.type = type;
+        isDone = false;
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public String getStatusIcon() {
-        if (isDone) {
-            return "[X]";
-        } else {
-            return "[ ]";
-        }
+        return isDone ? "[X]" : "[ ]";
     }
 
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public String getDescription() {
@@ -32,7 +28,7 @@ public class Task {
     }
 
     public boolean getStatus() {
-        return this.isDone;
+        return isDone;
     }
 
     @Override
