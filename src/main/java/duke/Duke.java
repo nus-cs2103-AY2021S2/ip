@@ -27,7 +27,7 @@ public class Duke {
     }
 
     private Storage initializeStorage() {
-        File directory = new File("data");
+        File directory = new File("data"); // Check if directory exists.
         if (!directory.exists()) {
             directory.mkdir();
         }
@@ -41,13 +41,6 @@ public class Duke {
         }
         return new Storage("data/duke.txt");
     }
-
-
-    /**
-     * Prints all the tasks stored on the list.
-     */
-
-
 
 
     /**

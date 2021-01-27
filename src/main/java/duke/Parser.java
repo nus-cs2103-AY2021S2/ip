@@ -28,10 +28,6 @@ public class Parser {
 
 
 
-
-
-
-
     public static Task parseTaskFromStoredFormat(String input){
         String[] fields = input.split(" \\| ");
         String commandCode = fields[0];

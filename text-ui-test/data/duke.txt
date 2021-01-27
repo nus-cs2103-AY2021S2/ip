@@ -1,9 +1,0 @@
-D | 0 | read book | 1997-12-02 1800
-E | 0 | cs2103 lecture | next Thursday 2010-01-12
-D | 1 | cs2103 assignment | Thursday 1992-2-04
-E | 1 | cs2103 lecture | 2007-11-03
-D | 0 | read book | 1997-12-02 1800
-E | 0 | cs2103 lecture | next Thursday 2010-01-12
-D | 0 | cs2103 assignment | Thursday 1992-2-04
-E | 0 | cs2103 lecture | 2007-11-03
-T | 0 | lunch

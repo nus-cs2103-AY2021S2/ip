@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String by;
     private LocalDate dateOfDeadline;
+
     public Deadline(String description,String by) {
         super(description, "D");
         String dateString = Parser.extractDate(by);
@@ -16,7 +17,8 @@ public class Deadline extends Task {
             this.dateOfDeadline = Parser.parseDate(dateString);
             this.by = by;
         } else {
-            throw new IllegalArgumentException("Sorry Unable to Parse date for Deadline. Did you try to do it in yyyy-mm-dd format?");
+            throw new IllegalArgumentException("Sorry Unable to Parse date for Deadline. "
+                    + "Did you try to do it in yyyy-mm-dd format?");
         }
     }
 

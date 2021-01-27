@@ -31,6 +31,10 @@ public class Ui {
         return scForCommandLine.hasNextLine();
     }
 
+    /**
+     * Prints all the tasks stored on the TaskList.
+     */
+
     public void showUserAllTasks(TaskList listOfTasks){
         int counter = 1;
         for (Task currentTask : listOfTasks) {
