@@ -103,11 +103,16 @@ public class TaskList {
         return out.toString();
     }
 
+    /**
+     * Finds tasks that contain the given string, and outputs a formatted String with the tasks.
+     * @param str the string to search for
+     * @return a formatted version of the tasks
+     */
     public String tasksContaining(String str) {
         StringBuilder out = new StringBuilder();
         int i = 1;
 
-        for (Task task : taskList) {
+        for (Task task : tasks) {
             if (task.containsTerm(str)) {
                 out.append(i++);
                 out.append(". ");
