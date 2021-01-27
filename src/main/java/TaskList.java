@@ -38,6 +38,29 @@ public class TaskList {
         return list.size();
     }
 
+    public void findTasks(String toFind) {
+        ArrayList<Task> newList = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.taskDescription.contains(toFind)) {
+                newList.add(t);
+            }
+        }
+        String text = "";
+        if (newList.size() == 0) {
+            System.out.println("\t\tFound no related tasks");
+        } else {
+            text += "\t\tHere are the tasks in your list:\n";
+            for (int i = 0; i < newList.size(); i++) {
+                text += "\t\t" +
+                        (i+1) +
+                        ". " +
+                        newList.get(i) +
+                        "\n";
+            }
+            System.out.println(text);
+        }
+    }
+
     public void displayTasks() {
         String text = "";
         if (list.size() == 0) {

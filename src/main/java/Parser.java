@@ -19,6 +19,10 @@ public class Parser {
             case "list":
                 taskList.displayTasks();
                 break;
+            case "find":
+                String toFind = arr[1];
+                taskList.findTasks(toFind);
+                break;
             case "done":
                 try {
                     String num = arr[1];
