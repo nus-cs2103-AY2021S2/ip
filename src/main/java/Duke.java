@@ -1,10 +1,18 @@
 import java.util.Scanner;
 
+/**
+ * Duke is the main class that runs the whole program.
+ *
+ * @author Prabhakaran Gokul
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * This constructor initialises the Ui, Storage Classes
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -19,7 +27,11 @@ public class Duke {
         }
     }
 
-
+    /**
+     * This is the driver of the program.
+     * Parser class in initialised here and user inputs are parsed to
+     * perform the necessary actions. DukeExceptions are caught and handled here
+     */
     public void run() {
         this.ui.welcomeMsg();
         Parser exec = new Parser(taskList);

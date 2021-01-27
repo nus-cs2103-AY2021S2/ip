@@ -1,13 +1,25 @@
-//TODO consider using enum
+/**
+ * Parser class is an abstraction of an object that parses and interprets text messages into commands.
+ */
+
 public class Parser {
     public TaskList taskList;
     public boolean isAlive;
 
+    /**
+     * Instantiates the Parser with attributes.
+     * @param taskList the task list with a list of commands
+     */
     public Parser (TaskList taskList) {
         this.taskList = taskList;
         this.isAlive = true;
     }
 
+    /**
+     * This parses and executes relevant comments from the tasklist
+     * @param command the command given by the user
+     * @throws DukeException an exception due to errors in parsing text
+     */
     public void executeCommand(String command) throws DukeException {
         String arr[] = command.split(" ", 2);
         String firstWord = arr[0];
