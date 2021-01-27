@@ -15,6 +15,12 @@ public class DoneCommand extends Command {
         this.indexToSetDone = indexToSetDone;
     }
 
+    /**
+     * Marks the selected task as done and outputs the corresponding acknowledgement message
+     * @param tasks
+     * @param ui
+     * @throws IOException
+     */
     @Override
     public void execute(TaskList tasks, TextUi ui) throws IOException {
         if (indexToSetDone < 0 || indexToSetDone >= tasks.size()) {

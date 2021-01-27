@@ -14,7 +14,6 @@ import commands.ListCommand;
 import data.Deadline;
 import data.Event;
 import data.Todo;
-import duke.DukeException;
 
 public class Parser {
     /**
@@ -106,14 +105,14 @@ public class Parser {
 
     private Command prepareDone(String input, String[] tokens) throws ParserException {
         if (tokens.length < 2) {
-            throw new DukeException("Please specify a number");
+            throw new ParserException("Please specify a number");
         }
 
         int selection;
         try {
             selection = Integer.parseInt(tokens[1]);
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Invalid number");
+            throw new ParserException("Invalid number");
         }
 
         return new DoneCommand(selection - 1);
@@ -121,14 +120,14 @@ public class Parser {
 
     private Command prepareDelete(String input, String[] tokens) throws ParserException {
         if (tokens.length < 2) {
-            throw new DukeException("Please specify a number");
+            throw new ParserException("Please specify a number");
         }
 
         int selection;
         try {
             selection = Integer.parseInt(tokens[1]);
         } catch (NumberFormatException nfe) {
-            throw new DukeException("Invalid number");
+            throw new ParserException("Invalid number");
         }
 
         return new DeleteCommand(selection - 1);
