@@ -22,8 +22,8 @@ public class DukeTest {
             testFile.delete();
         testFile.createNewFile();
 
-        Duke.tasks = new ArrayList<>(100);
-        Duke.inputs = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
+        Duke.storage.inputs = new ArrayList<>(100);
 
         PrintWriter out = new PrintWriter(testFile);
         out.println("todo test history 1");
@@ -35,12 +35,12 @@ public class DukeTest {
         out.println("delete 3");
         out.close();
 
-        Duke.loadHistory();
+        Duke.storage.loadHistory();
 
-        assertEquals(3, Duke.tasks.size());
-        assertTrue(Duke.tasks.get(1).getCompletionState());
-        assertEquals("test history 4", Duke.tasks.get(2).getTaskInfo());
-        assertEquals(7, Duke.inputs.size());
+        assertEquals(3, Duke.storage.tasks.size());
+        assertTrue(Duke.storage.tasks.get(1).getCompletionState());
+        assertEquals("test history 4", Duke.storage.tasks.get(2).getTaskInfo());
+        assertEquals(7, Duke.storage.inputs.size());
     }
 
     @Test
@@ -50,18 +50,18 @@ public class DukeTest {
             testFile.delete();
         testFile.createNewFile();
 
-        Duke.tasks = new ArrayList<>(100);
-        Duke.inputs = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
+        Duke.storage.inputs = new ArrayList<>(100);
 
-        Duke.inputs.add("todo test history 1");
-        Duke.inputs.add("todo test history 2");
-        Duke.inputs.add("list");
-        Duke.inputs.add("todo test history 3");
-        Duke.inputs.add("todo test history 4");
-        Duke.inputs.add("done 2");
-        Duke.inputs.add("delete 3");
+        Duke.storage.inputs.add("todo test history 1");
+        Duke.storage.inputs.add("todo test history 2");
+        Duke.storage.inputs.add("list");
+        Duke.storage.inputs.add("todo test history 3");
+        Duke.storage.inputs.add("todo test history 4");
+        Duke.storage.inputs.add("done 2");
+        Duke.storage.inputs.add("delete 3");
 
-        Duke.saveHistory();
+        Duke.storage.saveHistory();
 
         BufferedReader in = new BufferedReader(new FileReader(Duke.sessionFile));
 
@@ -79,7 +79,7 @@ public class DukeTest {
     @Test
     public void parseInputDeleteRemovesTaskFromList() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>();
+        Duke.storage.tasks = new ArrayList<>();
 
         // Test
         Duke.parseInput("todo task 1");
@@ -87,15 +87,15 @@ public class DukeTest {
         Duke.parseInput("todo task 3");
         Duke.parseInput("delete 2");
 
-        assertEquals(2, Duke.tasks.size());
-        assertEquals(Duke.tasks.get(0).getTaskInfo(), "task 1");
-        assertEquals(Duke.tasks.get(1).getTaskInfo(), "task 3");
+        assertEquals(2, Duke.storage.tasks.size());
+        assertEquals(Duke.storage.tasks.get(0).getTaskInfo(), "task 1");
+        assertEquals(Duke.storage.tasks.get(1).getTaskInfo(), "task 3");
     }
 
     @Test
     public void chatLoopExceptionThrownPrintsMessageToOutput() throws IOException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         String testInput = "invalid input\nevent test /at 01/03/2020 1400 /at 01/03/2020 1400\n";
@@ -192,52 +192,52 @@ public class DukeTest {
     @Test
     public void parseInputNewDeadlineTask() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         final String expectedOutput = "Got it. I've added this task:\n  [D][✗] return book (by: Mar 02 2020 1400)\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("deadline return book /by 02/03/2020 1400"));
 
-        assertEquals("return book", Duke.tasks.get(0).getTaskInfo());
-        assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", Duke.tasks.get(0).toString());
-        assertTrue(Duke.tasks.get(0) instanceof DeadlineTask);
+        assertEquals("return book", Duke.storage.tasks.get(0).getTaskInfo());
+        assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
+        assertEquals("[D][✗] return book (by: Mar 02 2020 1400)", Duke.storage.tasks.get(0).toString());
+        assertTrue(Duke.storage.tasks.get(0) instanceof DeadlineTask);
     }
 
     @Test
     public void parseInputNewEventTask() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         final String expectedOutput = "Got it. I've added this task:\n  [E][✗] project meeting (at: Mar 01 2020 1400)\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("event project meeting /at 01/03/2020 1400"));
 
-        assertEquals("project meeting", Duke.tasks.get(0).getTaskInfo());
-        assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[E][✗] project meeting (at: Mar 01 2020 1400)", Duke.tasks.get(0).toString());
-        assertTrue(Duke.tasks.get(0) instanceof EventTask);
+        assertEquals("project meeting", Duke.storage.tasks.get(0).getTaskInfo());
+        assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
+        assertEquals("[E][✗] project meeting (at: Mar 01 2020 1400)", Duke.storage.tasks.get(0).toString());
+        assertTrue(Duke.storage.tasks.get(0) instanceof EventTask);
     }
 
     @Test
     public void parseInputNewTodoTask() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         final String expectedOutput = "Got it. I've added this task:\n  [T][✗] borrow book\nNow you have 1 tasks in the list.";
         assertEquals(expectedOutput, Duke.parseInput("todo borrow book"));
 
-        assertEquals("borrow book", Duke.tasks.get(0).getTaskInfo());
-        assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[T][✗] borrow book", Duke.tasks.get(0).toString());
-        assertTrue(Duke.tasks.get(0) instanceof TodoTask);
+        assertEquals("borrow book", Duke.storage.tasks.get(0).getTaskInfo());
+        assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
+        assertEquals("[T][✗] borrow book", Duke.storage.tasks.get(0).toString());
+        assertTrue(Duke.storage.tasks.get(0) instanceof TodoTask);
     }
 
     @Test
     public void chatLoopParseEventTaskInteractionOutput() throws IOException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         String testInput = "event project meeting /at 01/03/2020 1400\nlist\ndone 1\nlist\n";
@@ -257,7 +257,7 @@ public class DukeTest {
     @Test
     public void chatLoopParseDeadlineTaskInteractionOutput() throws IOException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         String testInput = "deadline return book /by 01/03/2020 1400\nlist\ndone 1\nlist\n";
@@ -277,7 +277,7 @@ public class DukeTest {
     @Test
     public void chatLoopParseTodoTaskInteractionOutput() throws IOException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         String testInput = "todo borrow book\nlist\ndone 1\nlist\n";
@@ -296,7 +296,7 @@ public class DukeTest {
     @Test
     public void chatLoopParseDoneSetsTaskAsDone() throws IOException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
 
         // Test
         String testInput = "todo help people\n" + "todo help myself\n" + "done 1\n" + "list\n";
@@ -316,54 +316,54 @@ public class DukeTest {
     @Test
     public void parseInputDoneSetsTaskAsDone() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
         Duke.parseInput("todo help people");
 
         // Test
-        assertEquals("help people", Duke.tasks.get(0).getTaskInfo());
-        assertEquals(false, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[T][✗] help people", Duke.tasks.get(0).toString());
+        assertEquals("help people", Duke.storage.tasks.get(0).getTaskInfo());
+        assertEquals(false, Duke.storage.tasks.get(0).getCompletionState());
+        assertEquals("[T][✗] help people", Duke.storage.tasks.get(0).toString());
 
         final String expectedOutput = "Nice! I've marked this task as done:\n  [T][✓] help people";
         assertEquals(expectedOutput, Duke.parseInput("done 1"));
 
-        assertEquals("help people", Duke.tasks.get(0).getTaskInfo());
-        assertEquals(true, Duke.tasks.get(0).getCompletionState());
-        assertEquals("[T][✓] help people", Duke.tasks.get(0).toString());
+        assertEquals("help people", Duke.storage.tasks.get(0).getTaskInfo());
+        assertEquals(true, Duke.storage.tasks.get(0).getCompletionState());
+        assertEquals("[T][✓] help people", Duke.storage.tasks.get(0).toString());
     }
 
     @Test
     public void parseInputAddToList() throws DukeException {
-        int tasksStateLength = Duke.tasks.size();
+        int tasksStateLength = Duke.storage.tasks.size();
 
         Duke.parseInput("todo help people");
 
-        assertEquals(tasksStateLength + 1, Duke.tasks.size());
+        assertEquals(tasksStateLength + 1, Duke.storage.tasks.size());
 
-        assertEquals("help people", Duke.tasks.get(tasksStateLength).getTaskInfo());
-        assertEquals(false, Duke.tasks.get(tasksStateLength).getCompletionState());
-        assertEquals("[T][✗] help people", Duke.tasks.get(tasksStateLength).toString());
+        assertEquals("help people", Duke.storage.tasks.get(tasksStateLength).getTaskInfo());
+        assertEquals(false, Duke.storage.tasks.get(tasksStateLength).getCompletionState());
+        assertEquals("[T][✗] help people", Duke.storage.tasks.get(tasksStateLength).toString());
     }
 
     @Test
     public void parseInputAddToListMaintainsOrder() throws DukeException {
-        int tasksStateLength = Duke.tasks.size();
+        int tasksStateLength = Duke.storage.tasks.size();
 
         Duke.parseInput("todo help people");
         Duke.parseInput("todo blah");
         Duke.parseInput("todo read book");
 
-        assertEquals(tasksStateLength + 3, Duke.tasks.size());
+        assertEquals(tasksStateLength + 3, Duke.storage.tasks.size());
 
-        assertEquals("help people", Duke.tasks.get(tasksStateLength).getTaskInfo());
-        assertEquals("blah", Duke.tasks.get(tasksStateLength + 1).getTaskInfo());
-        assertEquals("read book", Duke.tasks.get(tasksStateLength + 2).getTaskInfo());
+        assertEquals("help people", Duke.storage.tasks.get(tasksStateLength).getTaskInfo());
+        assertEquals("blah", Duke.storage.tasks.get(tasksStateLength + 1).getTaskInfo());
+        assertEquals("read book", Duke.storage.tasks.get(tasksStateLength + 2).getTaskInfo());
     }
 
     @Test
     public void parseInputListOutputTasksState() throws DukeException {
         // Setup
-        Duke.tasks = new ArrayList<>(100);
+        Duke.storage.tasks = new ArrayList<>(100);
         Duke.parseInput("todo help people");
         Duke.parseInput("todo blah");
         Duke.parseInput("todo read book");
