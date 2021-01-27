@@ -35,7 +35,7 @@ public class Duke {
 
         while(sc.hasNext()) {
             String str = sc.nextLine();
-            str = str.trim();
+            str = Parser.trimWhiteSpaces(str);
             if (str.equals("bye")) {
                 break;
             } else if(str.length()==0) {//if just enter spaces
@@ -48,14 +48,10 @@ public class Duke {
                 }
             } else {
                 try {
-                    String[] split = str.split(" ");
-                    String rest = "";
-                    for (int i = 1; i < split.length; i++) {
-                        rest = rest + " " + split[i];
-                    }
+                    String[] split = Parser.firstAndRest(str);
                     if (split[0].equals("done")) {
                         try {
-                            int num = Integer.parseInt(split[1]);
+                            int num = Parser.makeToInt(split[1]);
                             Task done = TaskList.doneTask(num - 1);
                             System.out.println(Ui.doneTask(done));
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -63,7 +59,7 @@ public class Duke {
                         }
                     } else if (split[0].equals("delete")) {
                         try {
-                            int num = Integer.parseInt(split[1]);
+                            int num = Parser.makeToInt(split[1]);
                             Task del = TaskList.deleteTask(num - 1);
                             System.out.println(Ui.deleteTask(del, TaskList.listSize()));
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
@@ -73,11 +69,11 @@ public class Duke {
                             || split[0].equals("event")) {
                         Task task;
                         if (split[0].equals("todo")) {
-                            task = new Todo(rest);
+                            task = new Todo(split[1]);
                         } else if (split[0].equals("deadline")) {
-                            task = new Deadline(rest);
+                            task = new Deadline(split[1]);
                         } else {
-                            task = new Event(rest);
+                            task = new Event(split[1]);
                         }
                         TaskList.addTask(task);
                         System.out.println(Ui.addTask(task, TaskList.listSize()));

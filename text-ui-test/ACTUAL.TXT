@@ -61,7 +61,10 @@ ____________________________________________________________
  Enter 'done' followed by a number between 1 and 3
 ____________________________________________________________
 
-For input string: "sdfs"
+____________________________________________________________
+ Enter a number after command, 'done (number)' or 'delete (number)'
+____________________________________________________________
+
 ____________________________________________________________
  Please enter 'todo (your task)', or 'deadline (your task) / (deadline date time)',
  or 'event (event name) / (event date time)' to add tasks.
