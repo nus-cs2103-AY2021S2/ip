@@ -1,4 +1,5 @@
 import static java.lang.Boolean.parseBoolean;
+
 import java.time.LocalDateTime;
 
 public class Event extends Task {
@@ -29,7 +30,6 @@ public class Event extends Task {
     //E;;desc;;true;;timing
     public static Event parse(String oneLine) {
         // some repetition in this function across all types of tasks but abstracting them might be costly
-        int start = 0;
         assert oneLine.startsWith("T" + delimiter);
 
         int descStartIdx = oneLine.indexOf(delimiter);
@@ -42,7 +42,7 @@ public class Event extends Task {
 
         String eventTiming = oneLine.substring(doneEndIdx + delimiter.length());
 
-        return new Event(desc,  eventTiming, isDone);
+        return new Event(desc, eventTiming, isDone);
     }
 
     // for testing purposes
@@ -55,6 +55,4 @@ public class Event extends Task {
         System.out.println(parse(t.unparse()));
         // test with other cases without relying on t
     }
-
-
 }

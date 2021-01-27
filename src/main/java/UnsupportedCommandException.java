@@ -3,7 +3,6 @@ public class UnsupportedCommandException extends Exception {
         super(errorMessage, err);
     }
 
-    // todo - can print out the command that was inputted wrongly
     public UnsupportedCommandException(String errorMessage) {
         super(errorMessage);
     }

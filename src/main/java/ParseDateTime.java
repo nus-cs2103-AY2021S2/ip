@@ -19,7 +19,7 @@ public class ParseDateTime {
     // for saving minimal format back to list?
     // maybe once there are more parsing formats, should create a CustomDateTime object that
     // stores what format we're using after parsing once, so that don't need to keep parsing so much
-    // upon every save to harddisk and loading
+    // upon every save to hard disk and loading
     public static String unparse(LocalDateTime d) {
         return unparseFormat1(d);
     }
@@ -39,7 +39,6 @@ public class ParseDateTime {
         return d;
     }
 
-    // todo use this in your task toString
     // readable String for format 1
     public static String readableString(LocalDateTime d) {
         String patt = "dd MMM ha yyyy";
@@ -54,19 +53,12 @@ public class ParseDateTime {
         LocalDate d3 = LocalDate.parse("2019-12-02");
         System.out.println(d3);
 
-        // formatting
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String test = "08-12";
-        int yyyy = Year.now().getValue();
-        LocalDate d = LocalDate.parse(test + "-" + yyyy, f);
-        System.out.println(d);
-        System.out.println(Year.now().getValue());
-
         // parser for dd-MM ha
         // time currently is hour only, and PM needs to be in caps
-        DateTimeFormatter f2 = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
+        // f2 and d2 work together to enable user to key in particular formats
         String test2 = "30-04 6PM";
         int yyyy2 = Year.now().getValue();
+        DateTimeFormatter f2 = DateTimeFormatter.ofPattern("dd-MM ha yyyy");
         LocalDateTime d2 = LocalDateTime.parse(test2 + " " + yyyy2, f2);
         System.out.println(d2);
     }

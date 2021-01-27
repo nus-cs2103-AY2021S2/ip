@@ -11,7 +11,6 @@ public class TaskList {
         this.taskArrayList = new ArrayList<>();
     }
 
-    // todo rm
     public void add(Task t) {
         this.taskArrayList.add(t);
     }
@@ -35,7 +34,6 @@ public class TaskList {
         return this.taskArrayList.isEmpty();
     }
 
-
     // setup at default location
     public static TaskList setupTaskList() throws IOException {
         if (Storage.doesTaskFileExist()) {
@@ -50,7 +48,7 @@ public class TaskList {
     // should abstract away saving location
     public void saveTasksList() throws IOException {
         File f = new File(Storage.taskListFilePath.toString());
-            // doesn't actually create a new file i think, converts an existing file
+        // doesn't actually create a new file i think, converts an existing file
 
         FileWriter fw = new FileWriter(f);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -62,7 +60,6 @@ public class TaskList {
         bw.flush();
         bw.close();
     }
-
 
     public void addTask(Task t) {
         taskArrayList.add(t);
@@ -103,17 +100,12 @@ public class TaskList {
                 Ui.taskIndent + taskArrayList.get(i - 1)});
     }
 
-
-
-
     // todo should all error handling related to arguments be done before tasklist?
     private static String invalidNumErrMsg(int i, int min, int max) {
         String errMsg = "Invalid list index given: " + i
                 + ". Number needs to be between " + min + " and " + max + " (inclusive). ";
         return errMsg;
     }
-
-
 
 
 }

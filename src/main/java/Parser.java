@@ -1,19 +1,19 @@
 import java.io.IOException;
 
 public class Parser {
-    private TaskList taskList;
+    private final TaskList taskList;
 
     public Parser(TaskList taskListToWriteInto) {
         this.taskList = taskListToWriteInto;
     }
 
     // for every new command to support, need to add to cases here and if statements in parse method
-    // could simplify it somehow
+    // could simplify it somehow --> can tasktype enums each have error messages associated with them
     // todo definitely need to simplify, too much duplication?
     // but how else do you want to detect the first word if not for the space?
     private static void handleOnlyFirstArgGiven(String command)
             throws MissingArgumentException, UnsupportedCommandException {
-        String errMsg;
+        String errMsg = "";
 
         switch (command) {
         case "todo":
@@ -37,7 +37,6 @@ public class Parser {
 
         throw new MissingArgumentException(errMsg);
     }
-
 
     // for missing second/third arguments
     // replace String taskType with Enum later
@@ -143,10 +142,10 @@ public class Parser {
         }
     }
 
-
+    // return value represents if scanner needs to remain open
     private boolean checkAndHandleIfOneArgIsValid(String command)
             throws MissingArgumentException, UnsupportedCommandException {
-        // check if only one argument needed
+
         if (command.equals("bye")) {
             Ui.printExitMsg();
             return false;
@@ -156,7 +155,7 @@ public class Parser {
         }
 
         // print correct error message when insufficient arguments
-        handleOnlyFirstArgGiven(command); // try catch block not necessary, because of throws
+        handleOnlyFirstArgGiven(command);
         return true;
     }
 
@@ -164,7 +163,7 @@ public class Parser {
     // parse done, todos, deadline, event, delete commands
     // make enums for supported commands?
     // return whether to keep scanner open
-    public boolean parseInputLine(String userInput)  {
+    public boolean parseInputLine(String userInput) {
 
         // SETTING UP THE VARIABLES NEEDED FOR ERROR CHECKING / PARSING
         int firstSpaceIndex = userInput.indexOf(" "); // todo can consider using split(" ", 2)?
@@ -218,5 +217,4 @@ public class Parser {
 
         return true;
     }
-
 }

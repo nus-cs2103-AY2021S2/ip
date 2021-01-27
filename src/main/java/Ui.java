@@ -1,8 +1,8 @@
 public class Ui {
     // formatting for print messages
     private static final String lines = "    ______________________________________________";
-    public static final String indent = "      ";
-    public static final String taskIndent = "  "; // just an extra indent for listing tasks
+    private static final String indent = "      ";
+    public static final String taskIndent = "  "; // an extra indent for listing tasks, is used outside this class
 
     public static void intro() {
         String logo = " ______\n"

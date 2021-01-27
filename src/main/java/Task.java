@@ -19,7 +19,6 @@ public abstract class Task {
         return (isDone ? "/" : " ");
     }
 
-    // return type?
     public void markAsDone() {
         this.isDone = true;
     }
