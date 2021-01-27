@@ -1,12 +1,11 @@
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import DukeObjects.Parser;
-import DukeObjects.TaskList;
-import DukeObjects.Task;
-import DukeObjects.Ui;
+import duke.Parser;
+import duke.TaskList;
+import duke.Task;
+import duke.Ui;
 
 class ParserTest {
     static TaskList tl;

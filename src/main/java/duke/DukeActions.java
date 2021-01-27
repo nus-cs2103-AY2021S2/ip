@@ -1,7 +1,7 @@
-package DukeObjects;
+package duke;
 
 /**
- * Represents actions that can be used on Duke.
+ * Represents actions that can be used on DukeObjects.Duke.
  * Actions are the first word in user input commands.
  */
 public enum DukeActions {

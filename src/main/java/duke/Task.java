@@ -1,8 +1,8 @@
-package DukeObjects;
+package duke;
 
 /**
- * Represents a task listed in Duke and can be marked as done. Can statically create subclasses of Duke.Task, namely:
- * Duke.Event, Duke.Deadline, Duke.ToDo
+ * Represents a task listed in DukeObjects.Duke and can be marked as done. Can statically create subclasses of DukeObjects.Duke.Task, namely:
+ * DukeObjects.Duke.Event, DukeObjects.Duke.Deadline, DukeObjects.Duke.ToDo
  */
 public class Task {
     protected boolean isDone;
@@ -45,16 +45,16 @@ public class Task {
                 newTask = createEvent(taskCommand);
                 break;
             default:
-                throw new DukeException("Duke.Task cannot be created: " + taskCommand);
+                throw new DukeException("DukeObjects.Duke.Task cannot be created: " + taskCommand);
         }
         return newTask;
     }
 
     /**
-     * Creates Duke.Task from the command with todo.
+     * Creates DukeObjects.Duke.Task from the command with todo.
      *
      * @param command User input with the command todo.
-     * @return Duke.Task created.
+     * @return DukeObjects.Duke.Task created.
      * @throws DukeException if there is no description of the task.
      */
     private static Task createToDo(String command) throws DukeException {
@@ -65,10 +65,10 @@ public class Task {
     }
 
     /**
-     * Creates Duke.Task from the command with deadline.
+     * Creates DukeObjects.Duke.Task from the command with deadline.
      *
      * @param command User input with the command deadline.
-     * @return Duke.Task created.
+     * @return DukeObjects.Duke.Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no deadline specified by "/by".
      */
@@ -84,10 +84,10 @@ public class Task {
     }
 
     /**
-     * Creates Duke.Task from the command with event.
+     * Creates DukeObjects.Duke.Task from the command with event.
      *
      * @param command User input with the command event.
-     * @return Duke.Task created.
+     * @return DukeObjects.Duke.Task created.
      * @throws DukeException if there is no description of the task.
      * @throws DukeException if there is no duration specified by "/at".
      */

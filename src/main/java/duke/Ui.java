@@ -1,4 +1,4 @@
-package DukeObjects;
+package duke;
 
 import java.util.Scanner;
 
@@ -10,9 +10,9 @@ public class Ui {
     }
 
     /**
-     * Static factory creation of Duke.Ui.
+     * Static factory creation of DukeObjects.Duke.Ui.
      *
-     * @return Duke.Ui object started.
+     * @return DukeObjects.Duke.Ui object started.
      */
     public static Ui startUi() {
         String logo = " ____        _        \n"
@@ -41,7 +41,7 @@ public class Ui {
     }
 
     /**
-     * Closes this Duke.Ui.
+     * Closes this DukeObjects.Duke.Ui.
      */
     public void close() {
         scanner.close();
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Prints each Duke.Task in the list with its index, and remarks if the list is empty.
+     * Prints each DukeObjects.Duke.Task in the list with its index, and remarks if the list is empty.
      *
      * @param tasks List of Tasks to be printed.
      */

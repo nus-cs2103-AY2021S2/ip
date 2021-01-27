@@ -1,11 +1,11 @@
-package DukeObjects;
+package duke;
 
 /**
- * Represents unchecked exceptions specific to Duke.
+ * Represents unchecked exceptions specific to DukeObjects.Duke.
  */
 public class DukeException extends RuntimeException {
     /**
-     * Creates a RuntimeException specific to Duke.
+     * Creates a RuntimeException specific to DukeObjects.Duke.
      *
      * @param errorMessage Message when the exception is thrown.
      */

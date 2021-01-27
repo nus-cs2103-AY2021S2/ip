@@ -1,4 +1,4 @@
-package DukeObjects;
+package duke;
 
 /**
  * Represents a task without any date/time attached.

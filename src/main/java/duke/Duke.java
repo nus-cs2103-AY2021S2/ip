@@ -1,10 +1,7 @@
-import DukeObjects.Ui;
-import DukeObjects.Storage;
-import DukeObjects.TaskList;
-import DukeObjects.Parser;
+package duke;
 
 /**
- * Encompasses the behavior of the Duke chat-bot. Keeps track of Tasks in a List, tasks.
+ * Encompasses the behavior of the DukeObjects.Duke chat-bot. Keeps track of Tasks in a List, tasks.
  * Stores tasks in "./data/duke.txt".
  */
 public class Duke {

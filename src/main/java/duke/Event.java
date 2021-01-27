@@ -1,4 +1,4 @@
-package DukeObjects;
+package duke;
 
 /**
  * Represents a task with a duration specified in the at argument.
