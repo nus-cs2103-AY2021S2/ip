@@ -19,13 +19,13 @@ public class Parser {
     private String inputCommand;
 
     //list of keyword Constants.
-    private static String ADD_DEADLINE_COMMAND  = "deadline";
-    private static String ADD_EVENT_COMMAND  = "event";
-    private static String ADD_TODO_COMMAND = "todo";
-    private static String DELETE_TASK_COMMAND = "delete";
-    private static String LIST_COMMAND = "list";
-    private static String MARK_DONE_COMMAND = "done";
-    private static String EXIT_COMMAND = "bye";
+    private final static String ADD_DEADLINE_COMMAND  = "deadline";
+    private final static String ADD_EVENT_COMMAND  = "event";
+    private final static String ADD_TODO_COMMAND = "todo";
+    private final static String DELETE_TASK_COMMAND = "delete";
+    private final static String LIST_COMMAND = "list";
+    private final static String MARK_DONE_COMMAND = "done";
+    private final static String EXIT_COMMAND = "bye";
 
     private static Pattern GET_KEYWORD = Pattern.compile("(\\S+).*");
 
@@ -36,44 +36,40 @@ public class Parser {
 
     public Command parseCommand() throws DukeException{
         String command = getKeyWord(inputCommand).toLowerCase();
+        Task t;
         switch(command) {
         case ADD_DEADLINE_COMMAND:
-            Task t = parseAddDeadline(inputCommand);
-            return new AddCommand(t);
+            return parseAddDeadline(inputCommand);
         case ADD_EVENT_COMMAND:
-            Task t = parseAddEvent(inputCommand);
-            return new AddCommand(t);
+            return parseAddEvent(inputCommand);
         case ADD_TODO_COMMAND :
-            Task t = parseAddToDo(inputCommand);
-            return new AddCommand(t);
+            return parseAddToDo(inputCommand);
         case DELETE_TASK_COMMAND:
-            int index = parseDelete(inputCommand);
-            return new DeleteCommand(index);
+            return parseDelete(inputCommand);
         case MARK_DONE_COMMAND:
-            int index = parseMarkDone(inputCommand);
-            return new MarkTaskCommand(index);
+            return parseMarkDone(inputCommand);
         case LIST_COMMAND:
-            parseListCommand();
-            return new ListCommand();
+            return parseListCommand(inputCommand);
         case EXIT_COMMAND:
-            parseExitCommand();
-            return new ExitCommand();
+            return parseExitCommand(inputCommand);
         default:
-            throw new DukeException("");
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
-    public void parseExitCommand(String inputCommand) throws DukeException {
+    public Command parseExitCommand(String inputCommand) throws DukeException {
         String regex = EXIT_COMMAND +"\\s*";
-        if (!inputCommand.matches(regex)) {
-            throw new DukeException("");
+        if (!inputCommand.toLowerCase().matches(regex)) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return new ExitCommand();
     }
 
-    public void parseListCommand(String inputCommand) throws DukeException {
+    public Command parseListCommand(String inputCommand) throws DukeException {
         String regex = LIST_COMMAND +"\\s*";
-        if (!inputCommand.matches(regex)) {
-            throw new DukeException("");
+        if (!inputCommand.toLowerCase().matches(regex)) {
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return new ListCommand();
     }
 
 
@@ -86,7 +82,7 @@ public class Parser {
      * @throws DukeException for the case when done is empty or when the integer cannot be parsed.
      */
 
-    public int parseMarkDone(String input) throws DukeException {
+    public Command parseMarkDone(String input) throws DukeException {
         //for the case when "done" in the input string is followed by variable number of space.
         if (input.toLowerCase().matches("^done\\s*$")) {
             throw new DukeException("The input cannot be empty.");
@@ -99,7 +95,7 @@ public class Parser {
             throw new DukeException("The input for done must be integer.");
         }
         int indexToMarkDone = Integer.parseInt(m.group(1));
-        return indexToMarkDone;
+        return new MarkTaskCommand(indexToMarkDone);
     }
 
     /**
@@ -110,7 +106,7 @@ public class Parser {
      * @throws DukeException when the delete is of the incorrect format or is empty.
      */
 
-    public int parseDelete(String input) throws DukeException{
+    public Command parseDelete(String input) throws DukeException{
         //for the case when "delete" is followed by variable number of space.
         if (input.toLowerCase().matches("^delete\\s*$")) {
             throw new DukeException("The input cannot be empty.");
@@ -122,7 +118,7 @@ public class Parser {
             throw new DukeException("The input for delete must be integer.");
         }
         int indexToDelete = Integer.parseInt(m.group(1));
-        return indexToDelete;
+        return new DeleteCommand(indexToDelete);
     }
 
     /**
@@ -132,7 +128,7 @@ public class Parser {
      * @throws DukeException command Todo is empty or of the incorrect format.
      */
 
-    public Task parseAddToDo (String input) throws DukeException{
+    public Command parseAddToDo (String input) throws DukeException{
         if (input.toLowerCase().matches("^todo\\s*$")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -143,7 +139,8 @@ public class Parser {
             throw new DukeException("The todo is of incorrect format.");
         }
         String description = m.group(1);
-        return new ToDo(description);
+        Task t = new ToDo(description);
+        return new AddCommand(t);
     }
 
     /**
@@ -153,7 +150,7 @@ public class Parser {
      * @throws DukeException when the deadline is empty.
      */
 
-    public Task parseAddDeadline(String input) throws DukeException {
+    public Command parseAddDeadline(String input) throws DukeException {
         if (input.toLowerCase().matches("^deadline\\s*$")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
@@ -165,7 +162,8 @@ public class Parser {
         }
         String description = m.group(1);
         String by = m.group(2);
-        return new Deadline(description,by);
+        Task t = new Deadline(description,by);
+        return new AddCommand(t);
     }
 
     /**
@@ -175,7 +173,7 @@ public class Parser {
      * @throws DukeException when the event command is empty or of incorrect format.
      */
 
-    public Task parseAddEvent(String input) throws DukeException{
+    public Command parseAddEvent(String input) throws DukeException{
         if (input.toLowerCase().matches("^event\\s*$")) {
             throw new DukeException("The description of a event cannot be empty.");
         }
@@ -187,11 +185,13 @@ public class Parser {
         }
         String description = m.group(1);
         String at = m.group(2);
-        return new Event(description,at);
+        Task t = new Event(description,at);
+        return new AddCommand(t);
     }
 
     public String getKeyWord(String inputCommand) {
         Matcher m = GET_KEYWORD.matcher(this.inputCommand);
+        m.matches();
         return m.group(1);
     }
 

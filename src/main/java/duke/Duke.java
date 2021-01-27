@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.Command;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -195,15 +197,24 @@ public class Duke {
         return new ToDo(description);
     }
 
-    public void run(){
+    public void run() {
         ui.displayWelcomeMessage();
-
-        String input;
-
-        while (ui.hasUserInput()) {
-            input = ui.getUserCommand();
+        boolean isExit = false; // set to false is a command fails to execute exit command
+        while (ui.hasUserInput() && !isExit) {
             try {
-                if (input.equals("bye")) break;
+                String input = ui.getUserCommand();
+                Parser parser = new Parser(input);
+                Command command = parser.parseCommand();
+                boolean isExecutionSuccess = command.execute(ui, tasks, storage);
+                isExit = !isExecutionSuccess;
+            } catch (DukeException e) {
+                System.out.println("OOPS!!! " + e.getMessage());
+            }
+        }
+    }
+
+
+                /**if (input.equals("bye")) break;
                 if (input.equals("list")) {
                     ui.showUserAllTasks(tasks);
                 } else if (CommandType.MARK_AS_DONE.isCommandTypeFor(input)) {
@@ -235,7 +246,9 @@ public class Duke {
 
         }
         System.out.println("Bye. Hope to see you again soon!");
-    }
+                 }
+                 */
+
 
 
     public static void main(String[] args) {
