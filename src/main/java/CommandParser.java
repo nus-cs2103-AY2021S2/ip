@@ -38,6 +38,8 @@ public class CommandParser {
                 return new HelpCommand(false);
             case ByeCommand.COMMAND:
                 return new ByeCommand();
+            case FindCommand.COMMAND:
+                return FindCommand.parseArguments(arguments);
             default:
                 return new HelpCommand(true);
             }

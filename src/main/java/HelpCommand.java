@@ -5,7 +5,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_LIST = "\tCommands available:\n\t\t" +
             "- list\n\t\t- done [task number]\n\t\t- todo [description]\n\t\t" +
             "- deadline [description] /by [deadline]\n\t\t- event [description] /at [datetime]\n\t\t- help\n\t\t" +
-            "- delete [task number]\n\t\t- bye";
+            "- delete [task number]\n\t\t- bye\n\t\t- find [keyword]";
     private boolean showError;
 
     public HelpCommand(boolean showError) {

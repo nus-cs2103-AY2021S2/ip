@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Task implements Serializable {
 
@@ -17,6 +18,10 @@ public class Task implements Serializable {
     public Task markAsDone() {
         this.isDone = true;
         return this;
+    }
+
+    public boolean containsText(String keyword) {
+        return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
     @Override
