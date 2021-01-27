@@ -91,6 +91,9 @@ public class Parser {
         case "delete":
             LegitCommand.DELETE.setDetail(tokenized[1]);
             return LegitCommand.DELETE;
+        case "find":
+            LegitCommand.FIND.setDetail(tokenized[1]);
+            return LegitCommand.FIND;
         case "bye":
             return LegitCommand.BYE;
         default:

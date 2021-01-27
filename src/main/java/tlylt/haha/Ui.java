@@ -2,13 +2,16 @@ package tlylt.haha;
 public class Ui {
     private static final String LINE_BREAK =
             "____________________________________________________________\n";
+
     private static final String LOGO = " _    _          _    _\n" +
             "| |  | |   /\\   | |  | |   /\\\n" +
             "| |__| |  /  \\  | |__| |  /  \\\n" +
             "|  __  | / /\\ \\ |  __  | / /\\ \\\n" +
             "| |  | |/ ____ \\| |  | |/ ____ \\\n" +
             "|_|  |_/_/    \\_\\_|  |_/_/    \\_\\\n";
-    private static final String STARTER = "Hello from\n" + LOGO
+
+    private static final String STARTER = "Hello from\n"
+            + LOGO
             + LINE_BREAK
             + "Dude, I'm HAHA.\n"
             + "What can I do for you?\n"
@@ -16,6 +19,14 @@ public class Ui {
             + "e.g. 2020-02-02 18:00\n"
             + "(Oh when you are done, say bye)\n"
             + LINE_BREAK;
+
+    private static final String TASK_NOT_FOUND = "OH WAIT A MINUTE!\n"
+            + ":(\n"
+            + "No related tasks in your list!";
+
+    public void taskNotFound() {
+        System.out.println(TASK_NOT_FOUND);
+    }
 
     public void welcome() {
         System.out.println(STARTER);
