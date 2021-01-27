@@ -1,9 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.MarkTaskCommand;
+import duke.command.*;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -40,28 +37,43 @@ public class Parser {
     public Command parseCommand() throws DukeException{
         String command = getKeyWord(inputCommand).toLowerCase();
         switch(command) {
-        case "deadline":
+        case ADD_DEADLINE_COMMAND:
             Task t = parseAddDeadline(inputCommand);
             return new AddCommand(t);
-        case "event":
+        case ADD_EVENT_COMMAND:
             Task t = parseAddEvent(inputCommand);
             return new AddCommand(t);
-        case "todo" :
+        case ADD_TODO_COMMAND :
             Task t = parseAddToDo(inputCommand);
             return new AddCommand(t);
-        case "delete":
+        case DELETE_TASK_COMMAND:
             int index = parseDelete(inputCommand);
             return new DeleteCommand(index);
-        case "done":
+        case MARK_DONE_COMMAND:
             int index = parseMarkDone(inputCommand);
             return new MarkTaskCommand(index);
-        case "list":
-
-
-
+        case LIST_COMMAND:
+            parseListCommand();
+            return new ListCommand();
+        case EXIT_COMMAND:
+            parseExitCommand();
+            return new ExitCommand();
+        default:
+            throw new DukeException("");
         }
+    }
+    public void parseExitCommand(String inputCommand) throws DukeException {
+        String regex = EXIT_COMMAND +"\\s*";
+        if (!inputCommand.matches(regex)) {
+            throw new DukeException("");
+        }
+    }
 
-
+    public void parseListCommand(String inputCommand) throws DukeException {
+        String regex = LIST_COMMAND +"\\s*";
+        if (!inputCommand.matches(regex)) {
+            throw new DukeException("");
+        }
     }
 
 
