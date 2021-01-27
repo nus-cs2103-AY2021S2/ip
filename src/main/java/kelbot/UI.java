@@ -38,4 +38,15 @@ public class UI implements Serializable {
         System.out.println(task);
         System.out.println("Now there are " + taskSize + " tasks on the list");
     }
+    
+    /**
+     * Prints the relevant tasks from given task list
+     *
+     * @param taskList The task list to be printed
+     */
+    
+    public void printRelevantTasks(TaskList taskList) {
+        System.out.println("These are the tasks that have your keyword");
+        System.out.println(taskList);
+    }
 }

@@ -27,8 +27,9 @@ public class Kelbot implements Serializable {
             try {
                 Parser parser = ui.takeInput();
                 Command command = parser.getCommand();
-                String taskName = parser.getTaskName();
                 int taskNumber = parser.getTaskNumber();
+                String keyword = parser.getKeyword();
+                String taskName = parser.getTaskName();
                 LocalDate date = parser.getDate();
                 if (command == Command.BYE) {
                     ui.sayGoodbye();
@@ -38,7 +39,7 @@ public class Kelbot implements Serializable {
                 } else if (command == Command.DONE || command == Command.DELETE) {
                     try {
                         if (taskNumber == 0) {
-                            throw new KelbotException("Which task did you finish?");
+                            throw new KelbotException("Which task are you referring to?");
                         } else if (command == Command.DONE) {
                             Task task = taskList.done(taskNumber);
                             ui.printDone(task);
@@ -49,6 +50,17 @@ public class Kelbot implements Serializable {
                             } catch (IndexOutOfBoundsException e) {
                                 System.out.println("The list is empty");
                             }
+                        }
+                    } catch (KelbotException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (command == Command.FIND) {
+                    try {
+                        if (keyword.equals("")) {
+                            throw new KelbotException("Keyword cannot be empty!");
+                        } else {
+                            TaskList taskListToPrint = new TaskList(taskList.search(keyword));
+                            ui.printRelevantTasks(taskListToPrint);
                         }
                     } catch (KelbotException e) {
                         System.out.println(e.getMessage());
