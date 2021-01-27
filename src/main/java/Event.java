@@ -23,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + super.timeFormat(start)
-                + super.timeFormat(end) + ")";
+        return String.format("[E]%s (at: %s - %s)", super.toString(),
+                super.timeFormat(start) , super.timeFormat(end));
     }
 }

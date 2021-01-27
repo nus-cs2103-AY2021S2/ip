@@ -21,7 +21,7 @@ public class Task {
     }
 
     public String timeFormat(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern(MMM d yyyy));
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy Hmm"));
     }
 
 
