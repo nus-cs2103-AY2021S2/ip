@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DateParser {
 
@@ -21,7 +23,7 @@ public class DateParser {
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern(OUTPUT_FORMAT);
 
     public static LocalDateTime parseDateTime(String input) throws DukeException {
-        String[] tokenizedInput = input.split(" ", 2);
+        String[] tokenizedInput = input.trim().split(" ", 2);
         LocalDate date;
         LocalTime time;
 
