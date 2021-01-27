@@ -36,7 +36,7 @@ public class Storage {
          }
      }
 
-     public void saveTasks(List<? extends Task> listOfTasks) throws IOException {
+     public void saveTasks(TaskList listOfTasks) throws IOException {
          FileWriter fw = new FileWriter(filePath);
          fw.write("");  // clear the file.
          fw.close();

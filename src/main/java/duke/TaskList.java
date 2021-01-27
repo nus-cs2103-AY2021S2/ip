@@ -24,8 +24,8 @@ public class TaskList implements Iterable<Task> {
      }
 
      public Task delete(int indexToDelete) {
-         Task taskToReturn = listOfTasks.get(indexToDelete);
-         listOfTasks.remove(indexToDelete);
+         Task taskToReturn = listOfTasks.get(indexToDelete-1);
+         listOfTasks.remove(indexToDelete-1);
          return taskToReturn;
      }
 
@@ -33,6 +33,10 @@ public class TaskList implements Iterable<Task> {
         Task task = listOfTasks.get(indexToMarkDone-1);
         task.markAsDone();
         return task;
+    }
+
+    public int size() {
+         return listOfTasks.size();
     }
 
     @Override

@@ -1,11 +1,9 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -13,10 +11,9 @@ import java.util.regex.Matcher;
  * main class containing the Duke Chatbot main logic.
  */
 public class Duke {
-    private static List<Task> listOfTasks = new ArrayList<>();
     private static Storage storage;
     private Ui ui;
-    private TaskList tasks;
+    TaskList tasks;
 
     Duke() {
         this.storage = initializeStorage();
@@ -28,8 +25,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-
 
     private Storage initializeStorage() {
         File directory = new File("data");
@@ -52,13 +47,7 @@ public class Duke {
      * Prints all the tasks stored on the list.
      */
 
-    public static void printAllTasks() {
-        int counter = 1;
-        for (Task currentTask : listOfTasks) {
-            System.out.println(counter + "." + currentTask);
-            counter++;
-        }
-    }
+
 
 
     /**
@@ -66,12 +55,12 @@ public class Duke {
      * @param incomingTask
      */
 
-    private static void addTask(Task incomingTask) throws IOException {
+    public void addTask(Task incomingTask) throws IOException {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + incomingTask);
-        listOfTasks.add(incomingTask);
-        storage.saveTasks(listOfTasks);
-        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+        tasks.add(incomingTask);
+        storage.saveTasks(tasks);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -104,9 +93,8 @@ public class Duke {
      * @param indexToMarkDone the index of the task to mark as done.
      */
 
-    private static void markTaskDone(int indexToMarkDone) {
-        Task task = listOfTasks.get(indexToMarkDone-1);
-        task.markAsDone();
+    public void markTaskDone(int indexToMarkDone) {
+        Task task = tasks.markTaskDone(indexToMarkDone);
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("\t" + task);
     }
@@ -139,13 +127,12 @@ public class Duke {
      * @param indexToDelete index of the task to be deleted.
      */
 
-    private static void deleteTask(int indexToDelete) throws IOException {
-        Task task = listOfTasks.get(indexToDelete-1);
-        listOfTasks.remove(indexToDelete-1);
-        storage.saveTasks(listOfTasks);
+    public void deleteTask(int indexToDelete) throws IOException {
+        Task task = tasks.delete(indexToDelete);
+        storage.saveTasks(tasks);
         System.out.println("Noted. I've removed this task:");
         System.out.println("\t" + task);
-        System.out.println("Now you have " + listOfTasks.size() + " tasks in the list.");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -217,23 +204,15 @@ public class Duke {
 
     public void run(){
         ui.displayWelcomeMessage();
-        //initialize listOfTasks From Storage
-        try {
-            listOfTasks = storage.loadStorage();
-        } catch (DukeException err) {
-            System.out.println("Error in reading file /data/duke.txt");
-            return;
-        }
 
         String input;
-        // Read in user input, determine the type of command that is being issued, (if any) parses the command
-        //and performs the necessary action.
+
         while (ui.hasUserInput()) {
             input = ui.getUserCommand();
             try {
                 if (input.equals("bye")) break;
                 if (input.equals("list")) {
-                    printAllTasks();
+                    ui.showUserAllTasks(tasks);
                 } else if (CommandType.MARK_AS_DONE.isCommandTypeFor(input)) {
                     int indexToMarkDone = parseMarkDone(input);
                     markTaskDone(indexToMarkDone);
