@@ -22,6 +22,7 @@ import java.util.ArrayList;
  *
  * @author Wei Yutong
  * @version CS2103T AY20/21 Semester 2, Individual Project
+ * 
  */
 
 public class Duckie {
