@@ -246,7 +246,7 @@ class Event extends Task {
 }
 
 /**
- * DuckieException inherits from Exception.
+ * DuckieException inherits from Exception class.
  */
 class DuckieException extends Exception {
     public DuckieException(String message) {
