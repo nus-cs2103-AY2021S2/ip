@@ -4,13 +4,13 @@ import java.util.regex.Pattern;
 
 public class DeadlineCommand extends Command {
 
-    private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=\\/by)\\/by\\W(.*)");
-    private static Matcher matcher;
-
     public static final String COMMAND = "deadline";
-
-    private String description;
-    private LocalDateTime by;
+    private static final Pattern COMMAND_FORMAT = Pattern.compile("(.*)\\W(?=/by)/by\\W(.*)");
+    private static final String ERROR_MESSAGE =
+            "☹ Sorry, please enter a valid description and datetime for the deadline\n\t" +
+            "Command: deadline [description] /by [deadline]";
+    private final String description;
+    private final LocalDateTime by;
 
     private DeadlineCommand(String description, LocalDateTime by) {
         this.description = description;
@@ -39,11 +39,10 @@ public class DeadlineCommand extends Command {
     }
 
     public static DeadlineCommand parseArguments(String input) throws DukeException {
-        matcher = COMMAND_FORMAT.matcher(input);
+        Matcher matcher = COMMAND_FORMAT.matcher(input);
 
         if (!matcher.matches()) {
-            throw new DukeException("☹ Sorry, please enter a valid description and datetime for the deadline\n\t" +
-                    "Command: deadline [description] /by [deadline]");
+            throw new DukeException(ERROR_MESSAGE);
         }
 
         String description = matcher.group(1);

@@ -1,8 +1,8 @@
 public class HelpCommand extends Command {
 
     public static final String COMMAND = "help";
-    private final String ERROR_MESSAGE = "☹ Sorry, please enter a valid command.\n";
-    private final String COMMAND_LIST = "\tCommands available:\n\t\t" +
+    public static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid command.\n";
+    public static final String COMMAND_LIST = "\tCommands available:\n\t\t" +
             "- list\n\t\t- done [task number]\n\t\t- todo [description]\n\t\t" +
             "- deadline [description] /by [deadline]\n\t\t- event [description] /at [datetime]\n\t\t- help\n\t\t" +
             "- delete [task number]\n\t\t- bye";

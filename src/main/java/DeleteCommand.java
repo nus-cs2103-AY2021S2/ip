@@ -2,7 +2,8 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND = "delete";
     private final String HEADER = "Noted! I've removed this task:\n\t";
-    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number.\n\tCommand: delete [task number]";
+    private static final String ERROR_MESSAGE = "☹ Sorry, please enter a valid task number." +
+            "\n\tCommand: delete [task number]";
 
     private int taskIndex;
 
