@@ -19,16 +19,14 @@ public class Duke {
         String userinput = scanner.nextLine();
 
         while ( !userinput.equals("bye")){
-            if (userinput.equals("list")){
-                System.out.println(listManager.returnTaskList());
-            }else{
-                try {
-                    String outputString = listManager.handleTaskRelatedUserInput(userinput);
-                    System.out.println(outputString);
-                }catch(DukeException e){
-                    System.out.println(e.getMessage());
-                }
+
+            try {
+                String outputString = listManager.handleAllUserInput(userinput);
+                System.out.println(outputString);
+            }catch(DukeException e){
+                System.out.println(e.getMessage());
             }
+
             userinput = scanner.nextLine();
         }
         System.out.println(listManager.goodbyeLine());

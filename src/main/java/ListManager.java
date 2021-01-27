@@ -12,7 +12,7 @@ public class ListManager extends Manager {
     }
 
     public String welcomeLine(){
-        return defaultFormatting("Hello! I'm Duke\n" + "     What can I do for you?");
+        return defaultFormatting("Hello! I'm Duke\n" + padSpaces("What can I do for you?", 5));
     }
 
     public String goodbyeLine(){
@@ -20,7 +20,7 @@ public class ListManager extends Manager {
     }
 
     public String getNumberOfTasks(){
-        return "     Now you have " + String.valueOf(numberOfTasks)+ " tasks in the list.";
+        return padSpaces("Now you have " + String.valueOf(numberOfTasks)+ " tasks in the list.", 5);
     }
 
     public String addTask(String userInput) throws DukeException{
@@ -70,7 +70,8 @@ public class ListManager extends Manager {
 
         TaskArray.add(newTask);
         numberOfTasks = numberOfTasks + 1;
-        String temp = "Got it. I've added this task:\n       " + newTask.toString() + "\n" + getNumberOfTasks();
+        String temp = "Got it. I've added this task:\n" + padSpaces(newTask.toString(), 7) +
+                "\n" + getNumberOfTasks();
         return defaultFormatting(temp);
     }
 
@@ -78,7 +79,8 @@ public class ListManager extends Manager {
         if (number >= 1 && number<= TaskArray.size()) {
             Task currentTask = TaskArray.get(number - 1);
             currentTask.changeTaskToDone();
-            return defaultFormatting("Nice! I've marked this task as done:\n       " + currentTask.toString());
+            return defaultFormatting("Nice! I've marked this task as done:\n" +
+                    padSpaces(currentTask.toString(),7));
         }else{
             throw new DukeException(defaultFormatting("Error! Please make sure the " +
                     "number given has a corresponding task!"));
@@ -94,7 +96,7 @@ public class ListManager extends Manager {
 
             Task currentTask = TaskArray.get(i);
 
-            String numberIndicator =  String.valueOf(i+1) + ".";
+            String numberIndicator =  (i+1) + ".";
             String temp = numberIndicator + currentTask.toString() + '\n';
 
             sb.append(indentedString( temp ));
@@ -102,6 +104,19 @@ public class ListManager extends Manager {
         sb.append(horizontalLine());
 
         return sb.toString();
+    }
+
+    public String handleAllUserInput(String userInput) throws DukeException{
+        if (checkStringEquals(userInput,"list")){
+            return this.returnTaskList();
+        }else{
+            try {
+                String outputString = this.handleTaskRelatedUserInput(userInput);
+                return outputString;
+            }catch(DukeException e){
+                throw e;
+            }
+        }
     }
 
     public String handleTaskRelatedUserInput(String userInput) throws DukeException{
@@ -158,7 +173,8 @@ public class ListManager extends Manager {
             TaskArray.remove(taskInt - 1);
             numberOfTasks = numberOfTasks - 1;
 
-            String a = "Noted. I've removed this task:\n       " + todelete.toString() + "\n" + getNumberOfTasks();
+            String a = "Noted. I've removed this task:\n" + padSpaces(todelete.toString(), 7) +
+                    "\n" + getNumberOfTasks();
 
             return defaultFormatting(a);
         }else{
