@@ -2,10 +2,12 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles the User interface interactions with the user. Provides various methods to read in the command
+ * and print out things to display.
+ */
 public class Ui {
-    /**
-     * Handles the User interface interactions with the user. Trims the command, prints out something to display.
-     */
+    /** logo for welcome message. */
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -16,11 +18,18 @@ public class Ui {
 
     private Scanner scForCommandLine= new Scanner(System.in);
 
+    /**
+     * displays the welcome message when first starting duke.
+     */
     public void displayWelcomeMessage() {
         System.out.println("Hello from\n" + LOGO);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * gets a line of user input from Command line, trimmed.
+     * @return String containing a line input from user.
+     */
     public String getUserCommand(){
         String input;
         input = scForCommandLine.nextLine().trim();

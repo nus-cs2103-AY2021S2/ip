@@ -8,17 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Responsible for storing and fetching the data of the tasks from the hard disk
+ */
+
 public class Storage {
-    /**
-     * Responsible for storing the data in a local .txt file. Fetches data from the .txt file, parses them and sends the
-     * Task out to the caller. Also receives new ArrayList, which it uses to rewrite  the .txt file.
-     */
 
      private String filePath;
 
-     Storage(String filePath) {
+    /**
+     * Constructor.
+     * @param filePath directory path to the file in which to save the tasks or load the tasks from
+     */
+
+    Storage(String filePath) {
          this.filePath = filePath;
      }
+
+    /**
+     * loads all the tasks from a file into a List.
+     * @return List of all tasks stored in a file
+     * @throws DukeException  when unable find the file
+     */
 
      public List<Task> loadStorage() throws DukeException {
          List<Task> savedListOfTasks = new ArrayList<>();
@@ -35,6 +46,13 @@ public class Storage {
              throw new DukeException("Error fetching data from Storage in the desired format.");
          }
      }
+
+    /**
+     * saves all the Tasks inside the List to a file on the hard disk.
+     *
+     * @param listOfTasks list of Tasks to save
+     * @throws IOException when there is error reading or writing to the file.
+     */
 
      public void saveTasks(TaskList listOfTasks) throws IOException {
          FileWriter fw = new FileWriter(filePath);
