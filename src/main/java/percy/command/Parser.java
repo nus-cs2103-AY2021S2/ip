@@ -11,11 +11,11 @@ public class Parser {
         String command = this.fullCmd.split(" ", 2)[0];
         switch (command) {
         case "todo":
-            return new TodoCommand(this.getTodoDescription());
+            return new TodoCommand(getTodoDescription());
         case "event":
-            return new EventCommand(this.getEventDescription(), this.getEventDate());
+            return new EventCommand(getEventDescription(), getEventDate(), this.getEvent);
         case "deadline":
-            return new DeadlineCommand(this.getDeadlineDescription(), this.getDeadlineDate());
+            return new DeadlineCommand(getDeadlineDescription(), getDeadlineDate());
         case "done":
             return new DoneCommand(this.getTaskNumber());
         case "list":
