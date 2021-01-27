@@ -1,8 +1,11 @@
 import java.io.*;
+<<<<<<< HEAD
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+=======
+>>>>>>> 9851305787ba74cae04684407d6fd1bf9cf7a1e1
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
@@ -79,6 +82,7 @@ public class DukeLevel {
                     System.out.println(line);
                     if (tasksArray.isEmpty()) {
                         System.out.println("     Oops! You have no tasks to delete.");
+<<<<<<< HEAD
                     } else {
                         int cmdNum = Integer.parseInt(strArray[1]);
                         System.out.println("     Noted. I've removed this task: ");
@@ -88,6 +92,17 @@ public class DukeLevel {
                     if (tasksArray.size() == 1) {
                         System.out.println("      Now you have " + tasksArray.size() + " task in the list.");
                     } else {
+=======
+                    } else {
+                        int cmdNum = Integer.parseInt(strArray[1]);
+                        System.out.println("     Noted. I've removed this task: ");
+                        System.out.println("       " + tasksArray.get(cmdNum - 1).toString());
+                        tasksArray.remove(cmdNum - 1);
+                    }
+                    if (tasksArray.size() == 1) {
+                        System.out.println("      Now you have " + tasksArray.size() + " task in the list.");
+                    } else {
+>>>>>>> 9851305787ba74cae04684407d6fd1bf9cf7a1e1
                         System.out.println("     Now you have " + tasksArray.size() + " tasks in the list.");
                     }
                     System.out.println(line);
@@ -184,6 +199,23 @@ public class DukeLevel {
             }
         }
         sc.close();
+<<<<<<< HEAD
+=======
+    }
+
+    private static void saveData(ArrayList<Task> taskArrayList, File fname) throws IOException {
+        FileWriter fwriter = new FileWriter(fname);
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            if (taskArrayList.get(i) instanceof ToDo) {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            } else if (taskArrayList.get(i) instanceof Deadline) {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            } else {
+                fwriter.write(taskArrayList.get(i).toString() + "\n");
+            }
+        }
+        fwriter.close();
+>>>>>>> 9851305787ba74cae04684407d6fd1bf9cf7a1e1
     }
 
     private static void saveData(ArrayList<Task> taskArrayList, File fname) throws IOException {
