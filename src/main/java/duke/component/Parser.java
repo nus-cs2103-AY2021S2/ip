@@ -62,6 +62,7 @@ public class Parser {
             }
             String name = command.substring(6, slash - 1);
             String date = command.substring(slash + 4, command.length());
+
             Event e = new Event(name, date);
             return new AddCommand(e);
         }
