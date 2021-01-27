@@ -17,7 +17,7 @@ public class DukeTest {
 
     @Test
     public void saveSessionAbleToLoad() throws IOException{
-        File testFile = new File(Duke.sessionFile);
+        File testFile = new File(Storage.sessionFile);
         if (testFile.exists())
             testFile.delete();
         testFile.createNewFile();
@@ -45,7 +45,7 @@ public class DukeTest {
 
     @Test
     public void saveSessionAbleToSave() throws IOException, FileNotFoundException{
-        File testFile = new File(Duke.sessionFile);
+        File testFile = new File(Storage.sessionFile);
         if (testFile.exists())
             testFile.delete();
         testFile.createNewFile();
@@ -63,7 +63,7 @@ public class DukeTest {
 
         Duke.storage.saveHistory();
 
-        BufferedReader in = new BufferedReader(new FileReader(Duke.sessionFile));
+        BufferedReader in = new BufferedReader(new FileReader(Storage.sessionFile));
 
         assertEquals("todo test history 1", in.readLine());
         assertEquals("todo test history 2", in.readLine());
