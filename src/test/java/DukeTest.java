@@ -20,6 +20,15 @@ public class DukeTest {
         test.add(new Todo("task 2",false));
         test.add(new Todo("task 3",true));
         TaskList list = new TaskList(test);
-        assertEquals(list.size(),3,"Wrong Answer");
+        assertEquals(3,list.size(),"Wrong Answer");
+    }
+    @Test
+    public void taskListGetIsCorrect(){
+        ArrayList<Task> test = new ArrayList<>();
+        test.add(new Todo("task 1",false));
+        test.add(new Todo("task 2",false));
+        test.add(new Todo("task 3",true));
+        TaskList list = new TaskList(test);
+        assertEquals("[T][X] task 3",list.get(2).toString(),"Wrong Answer");
     }
 }
