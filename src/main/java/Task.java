@@ -67,4 +67,19 @@ class Task {
         }
         return line;
     }
+
+    public static Task createTask(String taskName, String type, String date, String preposition) throws DukeException {
+        if (taskName.equals("")) {
+            throw new DukeException("☹ OOPS!!! The description of a " + type + " cannot be empty.");
+        }
+        if (type.equals("todo")) {
+            return new Task("T", taskName);
+        } else if (type.equals("event")) {
+            return new Task("E", taskName, date, preposition);
+        } else if (type.equals("deadline")) {
+            return new Task("D", taskName, date, preposition);
+        } else {
+            throw new DukeException("☹ OOPS!!! Tried to add wrong task type!");
+        }
+    }
 }
