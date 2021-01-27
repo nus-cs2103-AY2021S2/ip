@@ -86,6 +86,13 @@ public class Parser {
                 throw new InvalidOptionException(command.name());
             }
             break;
+        case FIND:
+            try {
+                TaskHandler.findTasks(inputArr[1], taskList);
+            } catch (IndexOutOfBoundsException e) {
+                throw new InvalidOptionException(command.name());
+            }
+            break;
         default:
             Ui.showErrorMessage("Invalid command, please try again!");
         }
