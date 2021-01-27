@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class Ui {
     /**
-     * Handles the User interface interactions with the user. Trims the command, prints out something to display.
+     * Handles the User interface interactions with the user. Trims the command,
+     * prints out something to display.
      */
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -12,7 +13,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String DIVIDER =
-            "\n___________________________________________________________________________\n";
+            "\n_______________________________________________________\n";
 
     private Scanner scForCommandLine= new Scanner(System.in);
 
