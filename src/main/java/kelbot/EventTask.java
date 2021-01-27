@@ -8,7 +8,7 @@ public class EventTask extends Task {
     
     protected LocalDate date;
     
-    /*
+    /**
      * Initializes Event Task
      *
      * @param name The name of the Event Task

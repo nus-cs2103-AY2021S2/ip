@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class UI implements Serializable {
     
-    /*
+    /**
      * Initializes UI
      */
     
@@ -13,7 +13,7 @@ public class UI implements Serializable {
         System.out.println("Hello! I'm Kelbot\n" + "What can I do for you?");
     }
     
-    /*
+    /**
      * Allow user to key in input
      *
      * @return Parser that takes in the input and returns the information needed
@@ -25,7 +25,7 @@ public class UI implements Serializable {
         return new Parser(input);
     }
     
-    /*
+    /**
      * Print out Goodbye message
      */
     
@@ -33,7 +33,7 @@ public class UI implements Serializable {
         System.out.println("Bye le bye! See you next time!");
     }
     
-    /*
+    /**
      * Print out full list
      *
      * @param taskList The task list to be printed
@@ -43,7 +43,7 @@ public class UI implements Serializable {
         System.out.println(taskList);
     }
     
-    /*
+    /**
      * Print out message to show that task has been done
      *
      * @param task The task that has been marked done
@@ -54,7 +54,7 @@ public class UI implements Serializable {
         System.out.println(task);
     }
     
-    /*
+    /**
      * Print out message to show that task has been deleted
      *
      * @param task The task that has been deleted
@@ -65,7 +65,7 @@ public class UI implements Serializable {
         System.out.println(task);
     }
     
-    /*
+    /**
      * Print out message to show that task has been added
      *
      * @param task The task that has been added

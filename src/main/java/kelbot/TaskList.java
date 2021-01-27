@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TaskList implements Serializable {
     private ArrayList<Task> taskList;
     
-    /*
+    /**
      * Initializes Task List with new taskList
      */
     
@@ -14,7 +14,7 @@ public class TaskList implements Serializable {
         this.taskList = new ArrayList<Task>();
     }
     
-    /*
+    /**
      * Initializes Task List with existing taskList
      *
      * @param taskList The task list that was loaded from Storage
@@ -24,7 +24,7 @@ public class TaskList implements Serializable {
         this.taskList = taskList;
     }
     
-    /*
+    /**
      * Returns Size of taskList
      *
      * @return Size of task list
@@ -38,7 +38,7 @@ public class TaskList implements Serializable {
         }
     }
     
-    /*
+    /**
      * Gets Task List
      *
      * @return Task List
@@ -48,7 +48,7 @@ public class TaskList implements Serializable {
         return taskList;
     }
     
-    /*
+    /**
      * Add Task to Task List
      *
      * @param task The task to be added
@@ -58,7 +58,7 @@ public class TaskList implements Serializable {
         this.taskList.add(task);
     }
     
-    /*
+    /**
      * Mark a Task in Task List as Done by Task Number
      *
      * @param taskNumber The task number to be completed
@@ -71,7 +71,7 @@ public class TaskList implements Serializable {
         return taskToComplete;
     }
     
-    /*
+    /**
      * Delete a Task in Task List by Task Number
      *
      * @param taskNumber The task number to deleted

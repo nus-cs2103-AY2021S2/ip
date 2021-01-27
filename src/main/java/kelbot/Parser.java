@@ -10,7 +10,7 @@ public class Parser {
     private int taskNumber = 0;
     private LocalDate date = null;
     
-    /*
+    /**
      * Initializes Parser
      *
      * @param input The input given by the user
@@ -78,7 +78,7 @@ public class Parser {
     
     }
     
-    /*
+    /**
      * Gets Command
      *
      * @return the command read by this parser
@@ -88,7 +88,7 @@ public class Parser {
         return this.command;
     }
     
-    /*
+    /**
      * Gets Task Name
      *
      * @return the task name read by this parser
@@ -98,7 +98,7 @@ public class Parser {
         return this.taskName;
     }
     
-    /*
+    /**
      * Gets Task Number
      *
      * @return the task number read by this parser
@@ -108,7 +108,7 @@ public class Parser {
         return this.taskNumber;
     }
     
-    /*
+    /**
      * Gets Date
      *
      * @return the date read by this parser

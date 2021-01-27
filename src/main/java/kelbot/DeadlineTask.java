@@ -8,7 +8,7 @@ public class DeadlineTask extends Task {
     
     protected LocalDate date;
     
-    /*
+    /**
      * Initializes Deadline Task
      *
      * @param name The name of the Deadline Task

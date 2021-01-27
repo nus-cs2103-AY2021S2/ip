@@ -11,7 +11,7 @@ public class Kelbot implements Serializable {
     private TaskList taskList;
     private UI ui;
     
-    /*
+    /**
      * Initializes Kelbot
      *
      * @param path The file path that Kelbot will read from to load up previous usage
@@ -28,7 +28,7 @@ public class Kelbot implements Serializable {
         }
     }
     
-    /*
+    /**
      * The main programme that runs after the Kelbot initialization.
      */
     
@@ -93,7 +93,7 @@ public class Kelbot implements Serializable {
         }
     }
     
-    /*
+    /**
      * Gets Task List
      *
      * @return Task List
@@ -103,7 +103,7 @@ public class Kelbot implements Serializable {
         return taskList;
     }
     
-    /*
+    /**
      * Main programme
      */
     
