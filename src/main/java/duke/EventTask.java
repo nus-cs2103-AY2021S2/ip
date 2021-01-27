@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
+    /** Date of event **/
     private LocalDate atDate;
+    /** Time of event **/
     private String time;
 
 //    public EventTask(String description, boolean isDone, String at) {
@@ -13,12 +15,26 @@ public class EventTask extends Task {
 //        this.at = at;
 //        this.atDate = null;
 //    }
+
+    /**
+     * Constructs an EventTask object.
+     * @param description Descriptions of the event
+     * @param isDone Boolean on whether the event is attended already
+     * @param atDate Date of event
+     * @param time Time of event
+     */
     public EventTask(String description, boolean isDone, LocalDate atDate, String time) {
         super(description);
         super.isDone = false;
         this.atDate = atDate;
         this.time = time;
     }
+
+    /**
+     * Returns a String that provides details of an EventTask
+     * with a unique header.
+     * @return String
+     */
     @Override
     public String toString() {
         if (this.atDate != null) {
@@ -28,6 +44,11 @@ public class EventTask extends Task {
         //error prone line below
         return "[E] " + super.toString() + " (by: " + this.atDate + ")";
     }
+
+    /**
+     * Returns a String that provides details of an EventTask.
+     * @return String
+     */
     @Override
     public String getTaskDetails() {
         String divider = " | ";

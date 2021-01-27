@@ -15,14 +15,27 @@ public class Storage {
     private static Path saveFolderPath =
             Paths.get(ROOT_PROJECT,"src", "data");
 
+    /**
+     * Constructs a Storage object.
+     * @param filePath Path of file
+     * @throws DukeException If database cannot be created or found.
+     */
     public Storage(Path filePath) throws DukeException {
         createDbIfNotFound();
     }
 
+    /**
+     * Returns the path for the address to save the file.
+     * @return Path
+     */
     public static Path getSaveFilePath() {
         return saveFilePath;
     }
 
+    /**
+     * Creates a file w/wo directory for storing of file.
+     * @throws DukeException If access rights issue is violated.
+     */
     protected static void createDbIfNotFound() throws DukeException {
         try {
             if (Files.notExists(saveFilePath)) {
@@ -32,11 +45,16 @@ public class Storage {
                 saveFilePath = Files.createFile(saveFilePath);
             }
         } catch (IOException e) {
-            throw new DukeException("Unable to access data stored, access rights issue."
+            throw new DukeException("Unable to access data stored."
                     + e);
         }
     }
 
+    /**
+     * Returns an ArrayList of Tasks by attempting to load that information from a stored file.
+     * @return An ArrayList of Tasks
+     * @throws DukeException If data could not be loaded.
+     */
     public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> ledger = new ArrayList<>(100);
         try {
@@ -52,6 +70,12 @@ public class Storage {
         return ledger;
     }
 
+    /**
+     * Saves the list of Tasks into a file to be recovered the
+     * next time the user needs it.
+     * @param tasks An ArrayList of Tasks
+     * @throws DukeException If data could not be saved.
+     */
     public void saveData(ArrayList<Task> tasks) throws DukeException {
         try {
             ArrayList<String> ledger = new ArrayList<>();
@@ -65,6 +89,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a Task which is converted from an input String.
+     * @param taskInfo String containing information about the Task
+     * @return Task
+     * @throws DukeException If task could not be created successfully due to input error
+     */
     private static Task stringToTask(String taskInfo) throws DukeException {
         String[] savedRecord = taskInfo.split("\\|");
         Task output;
