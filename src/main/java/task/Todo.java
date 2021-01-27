@@ -19,7 +19,11 @@ public class Todo extends Task {
     public String getTypeIcon() {
         return this.TYPE_ICON;
     }
-
+    /**
+     * Converts the object into a String representation for storage
+     *
+     * @return  String represtentation
+     */
     @Override
     public String tokenize() {
         String isDoneString = isDone? "1" : "0";

@@ -18,7 +18,12 @@ public class Storage {
         this.directory = directory;
         this.fileName = fileName;
     }
-
+    /**
+     * Saves the tasklist.
+     * Converts a tasklist into its string representation then saves it in a file
+     *
+     * @param taskList  the tasklist to be saved
+     */
     public void save(TaskList taskList) {
 
         try {
@@ -35,7 +40,11 @@ public class Storage {
         }
 
     }
-
+    /**
+     * Loads a text file and parses it into a tasklist
+     *
+     * @return
+     */
     public TaskList load() {
 
         try {
@@ -61,7 +70,12 @@ public class Storage {
         }
 
     }
-
+    /**
+     * parses a string representation of a task into a Task object
+     *
+     * @param data  String representation of task
+     * @return      the Task parsed
+     */
     private Task parseData(String data) {
         String[] tokens = data.split("\\|", 2);
         String taskSymbol = tokens[0];
@@ -78,7 +92,12 @@ public class Storage {
                 return null;
         }
     }
-
+    /**
+     * Creates an Event object from the Task details
+     *
+     * @param taskDetails   Task details of the event object
+     * @return              The Event Object specified
+     */
     private Task createEvent(String taskDetails) {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
@@ -97,6 +116,12 @@ public class Storage {
         return new Events(isDone, details, at);
     }
 
+    /**
+     * Creates a Deadline object from the Task details
+     *
+     * @param taskDetails   Task details of the deadline object
+     * @return              The Deadline Object specified
+     */
     private Task createDeadline(String taskDetails) {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
@@ -115,7 +140,12 @@ public class Storage {
         return new Events(isDone, details, by);
 
     }
-
+    /**
+     * Creates a Todo object from the Task details
+     *
+     * @param taskDetails   Task details of the todo object
+     * @return              The Todo Object specified
+     */
     private Task createTodo(String taskDetails) {
         String[] tokens = taskDetails.split("\\|");
         boolean isDone = !tokens[0].equals("0");
@@ -124,7 +154,9 @@ public class Storage {
         return new Todo(isDone, details);
     }
 
-
+    /**
+     * Creates a new file and directory
+     */
     private void createNewFile() {
         File directory = new File(this.directory);
         if (!directory.exists()) {
