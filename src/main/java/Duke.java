@@ -1,28 +1,57 @@
 import java.util.Scanner;
 
-import weiliang.bot.Bot;
-import weiliang.bot.BotException;
+import weiliang.bot.UI;
+import weiliang.bot.task.TaskList;
+import weiliang.bot.DukeException;
+import weiliang.bot.Storage;
 
-public class Duke {
-    public static void main(String[] args) {
-        // Init bot
-        Bot bot = new Bot("SimpleBot", "memory.txt");
-        System.out.println(bot.getInitMessage());
-        
+public class Duke implements Runnable {
+
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
+
+    public Duke() {
+        this.storage = new Storage("memory.txt");
+        this.ui = new UI("SimpleBot");
+    }
+
+    public void init() throws DukeException {
+        this.tasks = storage.loadTasks();
+        this.ui.loadTasks(tasks);
+    }
+    
+    @Override
+    public void run() {
+        System.out.println(ui.getInitMessage());
+
         // Perform main logic loop
         try (Scanner scanner = new Scanner(System.in)) {
-            while (bot.isActive()) {
+            while (ui.isActive()) {
                 System.out.print("You: ");
                 String reply;
                 try {
-                    reply = bot.respond(scanner.nextLine());
-                } catch (BotException e) {
-                    reply = bot.formatMessage(e.getMessage());
+                    reply = ui.respond(scanner.nextLine());
+                } catch (DukeException e) {
+                    reply = ui.formatMessage(e.getMessage());
                 }
                 // Additional line break
                 System.out.println();
                 System.out.println(reply);
             }
+
+            // Update after stopping
+            storage.storeFile(tasks);
+        }    
+    }
+
+    public static void main(String[] args) {
+        try {
+            Duke duke = new Duke();
+            duke.init();
+            duke.run();
+        } catch (DukeException e) {
+            e.printStackTrace();
         }
     }
 }

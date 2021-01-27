@@ -1,28 +1,29 @@
 package weiliang.bot;
 
-import java.util.List;
-
 import weiliang.bot.task.Deadline;
 import weiliang.bot.task.Event;
 import weiliang.bot.task.Task;
+import weiliang.bot.task.TaskList;
 
-public class Bot {
+public class UI {
 
     private String name;
     private String logo;
 
     private boolean active;
-    private List<Task> memory;
-    private String storagePath;
+    private TaskList tasks;
 
-    public Bot(String name, String storagePath) {
+    public UI(String name) {
         this.name = name;
         this.logo = "  ___ _            _     ___      _   \n" + " / __(_)_ __  _ __| |___| _ ) ___| |_ \n"
                 + " \\__ \\ | '  \\| '_ \\ / -_) _ \\/ _ \\  _|\n" + " |___/_|_|_|_| .__/_\\___|___/\\___/\\__|\n"
                 + "             |_|                      \n\n";
         this.active = true;
-        this.storagePath = storagePath;
-        this.memory = Storage.readFile(storagePath);
+        this.tasks = new TaskList();
+    }
+
+    public void loadTasks(TaskList tasks) {
+        this.tasks = tasks;
     }
 
     public String formatMessage(String message) {
@@ -37,7 +38,7 @@ public class Bot {
         return active;
     }
 
-    public String respond(String input) throws BotException {
+    public String respond(String input) throws DukeException {
         // Clear leading and trailing whitespace
         input = input.strip();
 
@@ -46,7 +47,6 @@ public class Bot {
             return formatMessage("Hello! My name is {{bot:name}}!");
         }
         if (input.equalsIgnoreCase("bye")) {
-            Storage.storeFile(storagePath, memory);
             active = false;
             return formatMessage("Bye. Hope to see you again soon!");
         }
@@ -54,89 +54,89 @@ public class Bot {
         // Task related
         if (input.equals("list")) {
             String message = formatMessage("Printing list!");
-            for (int i = 0; i < memory.size(); i++) {
-                message += "\n" + (i + 1) + "." + memory.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                message += "\n" + (i + 1) + "." + tasks.get(i);
             }
             return message;
         }
         if (input.matches("^delete \\d+$")) {
             int taskNo = Integer.parseInt(input.replaceFirst("delete ", "")) - 1;
 
-            // Check if in memory
-            if (taskNo > memory.size() - 1) {
+            // Check if in tasks
+            if (taskNo > tasks.size() - 1) {
                 return formatMessage("Unable to remove item!");
             }
 
             // Mark complete
-            Task task = memory.remove(taskNo);
+            Task task = tasks.remove(taskNo);
 
             String message = formatMessage("Noted, I have removed this task.");
             message += "\n" + task;
-            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+            message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
             return message;
         }
         if (input.matches("^done \\d+$")) {
             int taskNo = Integer.parseInt(input.substring(5)) - 1;
 
-            // Check if in memory
-            if (taskNo > memory.size() - 1) {
+            // Check if in tasks
+            if (taskNo > tasks.size() - 1) {
                 return formatMessage("Unable to remove item!");
             }
 
             // Mark complete
-            Task task = memory.get(taskNo);
+            Task task = tasks.get(taskNo);
             task.complete();
 
             String message = formatMessage("Nice, I've marked the task as done!");
             message += "\n" + task;
-            message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+            message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
             return message;
         }
         if (input.startsWith("todo")) {
             if (input.matches("^todo .+$")) {
                 Task task = new Task(input.replaceFirst("todo ", ""));
-                memory.add(task);
+                tasks.add(task);
                 
                 String message = formatMessage("Got it! I've added this task.");
                 message += "\n" + task;
-                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
                 return message;
             } else {
-                throw new BotException(this, "The description of a todo cannot be empty!");
+                throw new DukeException("The description of a todo cannot be empty!");
             }
         }
         if (input.startsWith("deadline")) {
             if (input.matches("^deadline .+ \\/by .+$")) {
                 String[] inputs = input.replaceFirst("deadline ", "").split(" /by ");
                 Task task = new Deadline(inputs[0], inputs[1]);
-                memory.add(task);
+                tasks.add(task);
                 
                 String message = formatMessage("Got it! I've added this task.");
                 message += "\n" + task;
-                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
                 return message;
             } else {
-                throw new BotException(this, "The description of a deadline cannot be empty!");
+                throw new DukeException("The description of a deadline cannot be empty!");
             }
         }
         if (input.startsWith("event")) {
             if (input.matches("^event .+ \\/at .+$")) {
                 String[] inputs = input.replaceFirst("event ", "").split(" /at ");
                 Task task = new Event(inputs[0], inputs[1]);
-                memory.add(task);
+                tasks.add(task);
                 
                 String message = formatMessage("Got it! I've added this task.");
                 message += "\n" + task;
-                message += "\n" + "Now you have " + memory.size() + " tasks in the list.";
+                message += "\n" + "Now you have " + tasks.size() + " tasks in the list.";
                 return message;
             } else {
-                throw new BotException(this, "The description of an event cannot be empty!");
+                throw new DukeException("The description of an event cannot be empty!");
             }
         }
 
         // Default
         // Don't actually need to throw bot exception
-        throw new BotException(this, "Don't understand.");
+        throw new DukeException("Don't understand.");
     }
 
 }

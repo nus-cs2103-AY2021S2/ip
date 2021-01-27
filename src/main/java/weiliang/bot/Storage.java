@@ -6,16 +6,21 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import weiliang.bot.task.Deadline;
 import weiliang.bot.task.Event;
 import weiliang.bot.task.Task;
+import weiliang.bot.task.TaskList;
 
 public class Storage {
 
-    public static void storeFile(String filename, List<Task> tasks) {
+    private String filename;
+
+    public Storage(String filename) {
+        this.filename = filename;
+    }
+
+    public void storeFile(TaskList tasks) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename))) {
             for (Task task : tasks) {
                 bufferedWriter.write(task.toFormattedString());
@@ -26,8 +31,8 @@ public class Storage {
         }
     }
 
-    public static List<Task> readFile(String filename) {
-        List<Task> tasks = new ArrayList<>();
+    public TaskList loadTasks() throws DukeException {
+        TaskList tasks = new TaskList();
 
         // Create if non-existent
         try {
@@ -40,7 +45,7 @@ public class Storage {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line = bufferedReader.readLine();
             while (line != null && !line.isEmpty()) {
-                tasks.add(Storage.parseTask(line));
+                tasks.add(parseTask(line));
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
@@ -50,7 +55,7 @@ public class Storage {
         return tasks;
     }
 
-    private static Task parseTask(String content) {
+    private Task parseTask(String content) {
         // Format -> D | 1 | details | timing
         String[] parts = content.split(" \\| ");
         Task task;
