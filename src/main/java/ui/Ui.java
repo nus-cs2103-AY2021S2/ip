@@ -10,7 +10,7 @@ public class Ui {
     public final static String TOP_BORDER = "\n    ********************************* \n";
     public final static String BOTTOM_BORDER = "    ********************************* \n";
 
-    public final static String WELCOME_MSG = "         █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ \n"
+    public final static String WELCOME_MSG = "    █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█ \n"
             + "         █░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█ \n"
             + "         █░░║║║╠─║─║─║║║║║╠─░░█ \n"
             + "         █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█ \n"
