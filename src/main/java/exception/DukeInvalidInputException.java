@@ -8,6 +8,10 @@ public class DukeInvalidInputException extends DukeException {
         super();
     }
 
+    /**
+     * Constructs an Invalid Input Exception with the invalid input string
+     * @return
+     */
     public DukeInvalidInputException(String invalidInput) {
         super(String.format("Invalid Input: %s", invalidInput));
         this.invalidInput = invalidInput;

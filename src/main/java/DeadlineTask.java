@@ -5,6 +5,11 @@ public class DeadlineTask extends Task {
 
     private LocalDateTime deadline;
 
+    /**
+     * Constructor
+     * @param info Task info
+     * @param deadline date in the form "d/M/yyyy HHmm"
+     */
     public DeadlineTask(String info, String deadline) {
         super(info);
         this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));

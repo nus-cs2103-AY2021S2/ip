@@ -10,7 +10,7 @@ import exception.DukeInvalidArgumentsException;
 public class ParserTest {
     @Test
     public void parserAbleToParseDone() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("done 2");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("done 2");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertTrue(tokenizedInput.containsKey("info"));
@@ -19,7 +19,7 @@ public class ParserTest {
     }
     @Test
     public void parserAbleToParseTodo() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("todo this is a todo");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("todo this is a todo");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertTrue(tokenizedInput.containsKey("info"));
@@ -28,7 +28,7 @@ public class ParserTest {
     }
     @Test
     public void parserAbleToParseDeadline() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("deadline this is a deadline /by 10/10/1010 1010");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("deadline this is a deadline /by 10/10/1010 1010");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertTrue(tokenizedInput.containsKey("info"));
@@ -39,7 +39,7 @@ public class ParserTest {
     }
     @Test
     public void parserAbleToParseEvent() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("event this is a event /at 10/10/1010 1010");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("event this is a event /at 10/10/1010 1010");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertTrue(tokenizedInput.containsKey("info"));
@@ -50,14 +50,14 @@ public class ParserTest {
     }
     @Test
     public void parserAbleToParseList() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("list");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("list");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertEquals("list", tokenizedInput.get("command"));
     }
     @Test
     public void parserAbleToParseDelete() throws DukeInvalidArgumentsException {
-        HashMap<String, String> tokenizedInput = Parser.ParseInput("delete 2");
+        HashMap<String, String> tokenizedInput = Parser.parseInput("delete 2");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertTrue(tokenizedInput.containsKey("info"));
