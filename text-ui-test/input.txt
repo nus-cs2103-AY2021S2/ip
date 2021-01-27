@@ -4,6 +4,7 @@ todo
 todo
 todo          a
 deadline drink milo /by Thursday
+deadline drink milo /by 2021-11-01
 deadline
 deadline
 deadline   asd

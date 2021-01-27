@@ -9,107 +9,105 @@ Hi there. I am
                              ████                                 
 
 How may I help you?
-Got it. I've added this task:
+Type Command> Got it. I've added this task:
 [T][ ] buy milo
 Now you have 1 task(s) in the list.
-Got it. I've added this task:
+Type Command> Got it. I've added this task:
 [T][ ] buy milk
 Now you have 2 task(s) in the list.
-The description of a todo cannot be empty!
+Type Command> The description of a todo cannot be empty!
 Expected format: todo <DESCRIPTION>
-The description of a todo cannot be empty!
+Type Command> The description of a todo cannot be empty!
 Expected format: todo <DESCRIPTION>
-Got it. I've added this task:
+Type Command> Got it. I've added this task:
 [T][ ] a
 Now you have 3 task(s) in the list.
-Got it. I've added this task:
-[D][ ] drink milo (by: Thursday)
+Type Command> Sorry, I don't recognize this date: 'Thursday'
+Use this format please: yyyy-MM-dd
+Type Command> Got it. I've added this task:
+[D][ ] drink milo (by: Nov 1 2021)
 Now you have 4 task(s) in the list.
-The description of a deadline cannot be empty!
-Expected format: deadline <DESCRIPTION> /by <TIME>
-The description of a deadline cannot be empty!
-Expected format: deadline <DESCRIPTION> /by <TIME>
-A deadline must have a time!
-Expected format: deadline <DESCRIPTION> /by <TIME>
-A deadline must have a time!
-Expected format: deadline <DESCRIPTION> /by <TIME>
-Got it. I've added this task:
+Type Command> The description of a deadline cannot be empty!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> The description of a deadline cannot be empty!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> A deadline must have a date!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> A deadline must have a date!
+Expected format: deadline <DESCRIPTION> /by <DATE>
+Type Command> Got it. I've added this task:
 [E][ ] milo party (at: 2pm - 6pm)
 Now you have 5 task(s) in the list.
-The description of an event cannot be empty!
+Type Command> The description of an event cannot be empty!
 Expected format: event <DESCRIPTION> /at <PERIOD>
-The description of an event cannot be empty!
+Type Command> The description of an event cannot be empty!
 Expected format: event <DESCRIPTION> /at <PERIOD>
-An event must have a period!
+Type Command> An event must have a period!
 Expected format: event <DESCRIPTION> /at <PERIOD>
-An event must have a period!
+Type Command> An event must have a period!
 Expected format: event <DESCRIPTION> /at <PERIOD>
-Task 10 does not exist!
+Type Command> Task 10 does not exist!
 Valid task numbers are 1 to 5.
-1.[T][ ] buy milo
+Type Command> 1.[T][ ] buy milo
 2.[T][ ] buy milk
 3.[T][ ] a
-4.[D][ ] drink milo (by: Thursday)
+4.[D][ ] drink milo (by: Nov 1 2021)
 5.[E][ ] milo party (at: 2pm - 6pm)
-Nice! I've marked this task as done:
+Type Command> Nice! I've marked this task as done:
 [T][✓] a
-1.[T][ ] buy milo
+Type Command> 1.[T][ ] buy milo
 2.[T][ ] buy milk
 3.[T][✓] a
-4.[D][ ] drink milo (by: Thursday)
+4.[D][ ] drink milo (by: Nov 1 2021)
 5.[E][ ] milo party (at: 2pm - 6pm)
-Nice! I've marked this task as done:
+Type Command> Nice! I've marked this task as done:
 [T][✓] buy milo
-A delete command must specify a task number.
-Valid task numbers are 1 to 5.
+Type Command> A delete command must specify a task number.
 Expected format: delete <TASK NUMBER>
-Noted. I've removed this task:
+Type Command> Noted. I've removed this task:
 [T][✓] buy milo
 Now you have 4 task(s) in the list.
-A delete command must specify a task number.
-Valid task numbers are 1 to 4.
+Type Command> A delete command must specify a task number.
 Expected format: delete <TASK NUMBER>
-1.[T][ ] buy milk
+Type Command> 1.[T][ ] buy milk
 2.[T][✓] a
-3.[D][ ] drink milo (by: Thursday)
+3.[D][ ] drink milo (by: Nov 1 2021)
 4.[E][ ] milo party (at: 2pm - 6pm)
-Task 5 does not exist!
+Type Command> Task 5 does not exist!
 Valid task numbers are 1 to 4.
-1.[T][ ] buy milk
+Type Command> 1.[T][ ] buy milk
 2.[T][✓] a
-3.[D][ ] drink milo (by: Thursday)
+3.[D][ ] drink milo (by: Nov 1 2021)
 4.[E][ ] milo party (at: 2pm - 6pm)
-Nice! I've marked this task as done:
+Type Command> Nice! I've marked this task as done:
 [T][✓] a
-1.[T][ ] buy milk
+Type Command> 1.[T][ ] buy milk
 2.[T][✓] a
-3.[D][ ] drink milo (by: Thursday)
+3.[D][ ] drink milo (by: Nov 1 2021)
 4.[E][ ] milo party (at: 2pm - 6pm)
-A done command must specify a task number.
-Valid task numbers are 1 to 4.
+Type Command> A done command must specify a task number.
 Expected format: done <TASK NUMBER>
-Task 10 does not exist!
+Type Command> Task 10 does not exist!
 Valid task numbers are 1 to 4.
-Got it. I've added this task:
+Type Command> Got it. I've added this task:
 [T][ ] something
 Now you have 5 task(s) in the list.
-Task 10 does not exist!
+Type Command> Task 10 does not exist!
 Valid task numbers are 1 to 5.
-A done command must specify a task number.
-Valid task numbers are 1 to 5.
+Type Command> A done command must specify a task number.
 Expected format: done <TASK NUMBER>
-Nice! I've marked this task as done:
+Type Command> Nice! I've marked this task as done:
 [T][✓] buy milk
-1.[T][✓] buy milk
+Type Command> 1.[T][✓] buy milk
 2.[T][✓] a
-3.[D][ ] drink milo (by: Thursday)
+3.[D][ ] drink milo (by: Nov 1 2021)
 4.[E][ ] milo party (at: 2pm - 6pm)
 5.[T][ ] something
-1.[T][✓] buy milk
+Type Command> 1.[T][✓] buy milk
 2.[T][✓] a
-3.[D][ ] drink milo (by: Thursday)
+3.[D][ ] drink milo (by: Nov 1 2021)
 4.[E][ ] milo party (at: 2pm - 6pm)
 5.[T][ ] something
-Please do not include any arguments after the list command.
+Type Command> Please do not include any arguments after the list command.
 Expected format: list
-Goodbye, cruel world!
+Type Command> Goodbye, cruel world!
