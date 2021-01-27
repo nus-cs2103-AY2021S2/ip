@@ -5,6 +5,7 @@ import duke.task.Task;
 import duke.exception.DukeException;
 import duke.exception.DukeCommandException;
 
+/** An executable command to delete a specified task */
 public class DeleteCommand extends Command {
     /** Index of the task that is going to be deleted */
     private int index;

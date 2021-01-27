@@ -1,5 +1,6 @@
 package duke.exception;
 
+/** An exception that happened due to chat bot trying to execute a command */
 public class DukeCommandException extends DukeException{
     /** Type of command that throws the exception */
     private String commandType;

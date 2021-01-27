@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.exception.DukeException;
 import duke.exception.DukeCommandException;
 
+/** An executable command to set a task as completed */
 public class DoneCommand extends Command {
     /** Index of the task that is going to be completed */
     private int index;

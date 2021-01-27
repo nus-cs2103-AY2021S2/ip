@@ -6,6 +6,7 @@ import duke.exception.DukeLoadException;
 
 import java.util.Scanner;
 
+/** A chat bot that can help the user manage their tasks */
 public class Duke {
     /** Name of the chat bot */
     private static final String CHATBOT_NAME = "Mantaro";

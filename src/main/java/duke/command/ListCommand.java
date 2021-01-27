@@ -5,6 +5,7 @@ import duke.exception.DukeCommandException;
 
 import java.util.List;
 
+/** An executable command to list down all tracked tasks */
 public class ListCommand extends Command {
     /**
      * Executes the List command to list out all tasks in the list

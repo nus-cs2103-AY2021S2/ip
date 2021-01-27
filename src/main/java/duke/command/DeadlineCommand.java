@@ -7,6 +7,7 @@ import duke.exception.DukeCommandException;
 
 import java.time.LocalDateTime;
 
+/** An executable command to create a task with a due date */
 public class DeadlineCommand extends Command{
     /** Description of a Deadline to be created */
     private String desc = "";

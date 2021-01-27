@@ -1,5 +1,6 @@
 package duke.task;
 
+/** A piece of work that user want to track */
 public class Task {
     /** Description of a task */
     protected String desc;

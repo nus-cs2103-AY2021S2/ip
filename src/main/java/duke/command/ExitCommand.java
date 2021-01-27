@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeCommandException;
 
+/** An executable command to close the chat bot */
 public class ExitCommand extends Command {
     /**
      * Executes the exit command to tell the Duke to exit

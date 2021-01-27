@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/** Tests to be run on the message output process of the chat bot */
 public class UiTest {
     /** A reference to the default output stream */
     private final PrintStream standardOut = System.out;

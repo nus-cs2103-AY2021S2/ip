@@ -7,6 +7,7 @@ import duke.exception.DukeCommandException;
 
 import java.time.LocalDateTime;
 
+/** An executable command to create a task with start date and end date */
 public class EventCommand extends Command{
     /** Description of an Event that is going to be created */
     private String desc = "";

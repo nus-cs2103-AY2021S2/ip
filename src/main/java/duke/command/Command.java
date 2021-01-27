@@ -4,6 +4,7 @@ import duke.Ui;
 import duke.TaskManager;
 import duke.exception.DukeCommandException;
 
+/** An executable comment issued by the user */
 public abstract class Command {
     /** An Ui instance that all commands will act upon */
     protected static Ui ui;

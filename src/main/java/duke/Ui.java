@@ -4,6 +4,7 @@ import duke.task.Task;
 
 import java.util.List;
 
+/** An object that handles the printing of chat bot's messages*/
 public class Ui {
     /** Borderlines to contain a display message*/
     private static final String BORDER = "___________________________________________________________";

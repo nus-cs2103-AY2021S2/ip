@@ -1,5 +1,6 @@
 package duke.task;
 
+/** A simple task without any additional info */
 public class ToDo extends Task {
     /**
      * Constructor for a ToDo task

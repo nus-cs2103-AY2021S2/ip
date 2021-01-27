@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
+/** Tests to be run on the read/write functionality of the chat bot */
 public class StorageTest {
     /** Directory path of the save file */
     private static final String PATH = "data/duke.txt";

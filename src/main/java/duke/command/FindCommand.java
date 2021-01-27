@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/** An executable command to find a task by keyword and/or date of occurrence */
 public class FindCommand extends Command {
     /** Keyword to search tasks with */
     private String keyword = "";

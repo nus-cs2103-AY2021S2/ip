@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
+/** An object that manage the storing, retrieving and removing of tasks from the chat bot */
 public class TaskManager {
     /** A list of tasks tracked by the chat bot */
     private List<Task> tasks = new ArrayList<>();

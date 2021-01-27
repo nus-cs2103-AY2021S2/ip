@@ -5,6 +5,7 @@ import duke.task.ToDo;
 import duke.exception.DukeException;
 import duke.exception.DukeCommandException;
 
+/** An executable command to create a basic task with description */
 public class ToDoCommand extends Command {
     /** Description of a ToDo that is going to be created */
     private String desc = "";

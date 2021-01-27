@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
+/** An utility class that provide read/write related operations */
 public class Storage {
     /** Directory path of the save file */
     private static final String PATH = "data/duke.txt";
