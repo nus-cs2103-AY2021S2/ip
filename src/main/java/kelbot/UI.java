@@ -32,9 +32,9 @@ public class UI {
         System.out.println(task);
     }
     
-    public void printAdd(Task task, int taskSize) {
+    public void printAdd(Task task, int taskListSize) {
         System.out.println("Okay! I have added:");
         System.out.println(task);
-        System.out.println("Now there are " + taskSize + " tasks on the list");
+        System.out.println("Now there are " + taskListSize + " tasks on the list");
     }
 }
