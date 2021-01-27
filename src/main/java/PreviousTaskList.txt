@@ -1,6 +1,7 @@
-class Todo, false,  borrow book
-class Deadline, false, return book , 2019-12-02T18:00
-class Deadline, true, return book , 2019-12-02T18:00
+class Todo, true,  borrow book
 class Event, true, project meeting , 2021-02-27T23:00
 class Deadline, false, return book , 2019-12-02T18:00
 class Todo, false,  sleep more
+class Todo, false,  add tasks
+class Deadline, false, individual project , 2021-01-27T23:59
+class Event, false, tuition sarah , 2021-01-26T18:00
