@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Duke {
     private static ArrayList<Task> list = new ArrayList<Task>();
     private static final String horizontalLine = "____________________________________________________________";
