@@ -7,6 +7,10 @@ import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
 
+/**
+ * Represents a 'deadline' command.
+ * Adds a new deadline to the task list.
+ */
 public class DeadlineCommand extends Command{
     public DeadlineCommand(String arguments) {
         super(arguments);

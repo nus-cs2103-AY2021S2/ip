@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Representation of most basic task with just a task description
+ */
 public class Todo extends Task{
     public Todo(String task) {
         super(task);
@@ -10,6 +13,10 @@ public class Todo extends Task{
         this.done = done;
     }
 
+    /**
+     * Returns a String representation of this Todo for storage to a file.
+     * @return String representation
+     */
     public String fileString() {
         return "T | " + this.done + " | " + this.task;
     }

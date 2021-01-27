@@ -4,6 +4,10 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents a 'bye' command.
+ * Exits Duke.
+ */
 public class ByeCommand extends Command {
 
     public ByeCommand(String arguments) {

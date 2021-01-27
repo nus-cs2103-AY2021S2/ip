@@ -7,6 +7,10 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a 'todo' command.
+ * Adds a new todo to the task list.
+ */
 public class TodoCommand extends Command {
 
     public TodoCommand(String arguments) {
