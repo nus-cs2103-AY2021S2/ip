@@ -20,6 +20,8 @@ public class Parser {
             return new DeleteCommand(userInput, "delete");
         } else if (action.equals("date")) {
             return new DateCommand(userInput, "date");
+        } else if (action.equals("find")) {
+            return new FindCommand(userInput, "find");
         } else {
             throw new DukeException("OOPS! Sorry, I have no idea what that means :(");
         }

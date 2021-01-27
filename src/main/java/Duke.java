@@ -29,6 +29,9 @@ public class Duke {
                 fullCommand = ui.readCommand();
             } catch (DukeException ex) {
                 System.out.println(ex);
+                Ui.printLine();
+                fullCommand = ui.readCommand();
+                Ui.printLine();
             }
         }
         end();
