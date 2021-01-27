@@ -4,7 +4,7 @@ package duke;
  * Deals with interactions with the user.
  */
 public class Ui {
-    static String horizontalLine = "\t--------------------------------\n";
+    private static final String HORIZONTAL_LINE = "\t--------------------------------\n";
 
     /**
      * Prints out the message in the Duke user interface format.
@@ -12,9 +12,9 @@ public class Ui {
      * @param str the string to be printed out
      */
     public void printFormatMessage(String str) {
-        System.out.print(Ui.horizontalLine);
+        System.out.print(HORIZONTAL_LINE);
         System.out.println(str);
-        System.out.print(Ui.horizontalLine);
+        System.out.print(HORIZONTAL_LINE);
     }
 
     /**

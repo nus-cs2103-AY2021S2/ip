@@ -1,12 +1,13 @@
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import org.junit.jupiter.api.Test;
 
 
 public class DukeTest {
     @Test
-    public void storageTest(){
+    public void storageTest() {
         Storage storage = new Storage("./data.txt");
         storage.readFile();
     }

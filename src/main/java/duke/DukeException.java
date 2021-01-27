@@ -4,7 +4,7 @@ package duke;
  * Self-defined DukeException to be thrown during execution.
  */
 public class DukeException extends Exception {
-    String errorMessage;
+    private String errorMessage;
 
     DukeException(String errorMessage) {
         this.errorMessage = errorMessage;
