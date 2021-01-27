@@ -1,15 +1,34 @@
 import java.util.Arrays;
 
+/**
+ * Parser processes commands.
+ */
 public class Parser {
+
+    /** List of tasks */
     private TaskList tasks;
 
+    /**
+     * Initializes a newly created Parser object with a given list of tasks.
+     *
+     * @param tasks List of tasks to process commands on.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }
 
     /**
      * Processes a command given by user.
-     * @param userInput Command from user
+     * <p> Commands recognised: </p>
+     * <p> 1. List out all tasks in list: list </p>
+     * <p> 2. Set task in list as done: done &lt;position_of_task_in_list&gt; </p>
+     * <p> 3. Delete task in list: delete &lt;position_of_task_in_list&gt; </p>
+     * <p> 4. Add todo-task: todo &lt;task_description&gt; </p>
+     * <p> 5. Add deadline-task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>
+     * <p> 6. Add event-task: event &lt;event_description&gt; /at &lt;date&gt; </p>
+     * <p> 7. Exit Duke: bye </p>
+     *
+     * @param userInput Command from user.
      */
     protected void processCommand(String userInput) {
         if ("list".equals(userInput)) {
@@ -37,8 +56,9 @@ public class Parser {
 
     /**
      * Sets a task as done and prints out the task marked as done.
+     *
      * @param userInput Takes in command from user in the format: done &lt;indexOfItem&gt;
-     * @throws DukeException Throws error if the indexOfItem given is invalid
+     * @throws DukeException Throws error if the indexOfItem given is invalid.
      */
     protected void setAsDone(String userInput) throws DukeException {
         try {
@@ -55,8 +75,9 @@ public class Parser {
 
     /**
      * Deletes a task in the list and prints out the task deleted with the remaining number of tasks in the list.
+     *
      * @param userInput Takes in command from user in the format: delete &lt;indexOfItem&gt;
-     * @throws DukeException Throws error if the indexOfItem given is invalid
+     * @throws DukeException Throws error if the indexOfItem given is invalid.
      */
     protected void deleteFromList(String userInput) throws DukeException {
         try {
@@ -74,6 +95,7 @@ public class Parser {
 
     /**
      * Adds a task into the list and prints out the task added with the number of tasks in the list.
+     *
      * @param userInput Takes in command from user in the given formats for each task type:
      *                  <p> todo task: todo &lt;task_description&gt; </p>
      *                  <p> deadline task: deadline &lt;task_description&gt; /by &lt;date&gt; </p>

@@ -18,7 +18,9 @@ public class TaskTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[\u2713] join sports club", new Task("join sports club", true).toString());
-        assertEquals("[ ] join sports club", new Task("join sports club", false).toString());
+        assertEquals("[\u2713] join sports club",
+                new Task("join sports club", true).toString());
+        assertEquals("[ ] join sports club",
+                new Task("join sports club", false).toString());
     }
 }

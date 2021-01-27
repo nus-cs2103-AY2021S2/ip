@@ -1,11 +1,25 @@
 import java.io.FileNotFoundException;
 
+/**
+ * Duke keeps track of a list of tasks.
+ */
 public class Duke {
+
+    /** List of tasks. */
     private TaskList tasks;
+
+    /** Storage that controls saving and reading file. */
     private Storage storage;
+
+    /** Parser that processes commands. */
     private Parser parser;
+
+    /** User Interface that handles interaction with user. */
     private Ui ui;
 
+    /**
+     * Initializes a newly created Duke object with empty task list, storage and parser.
+     */
     public Duke() {
         tasks = new TaskList();
         storage = new Storage(tasks);
