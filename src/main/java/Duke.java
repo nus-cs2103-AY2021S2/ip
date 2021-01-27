@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import exception.DukeException;
 import exception.DukeInvalidArgumentsException;
@@ -98,8 +99,8 @@ public class Duke {
     }
 
     public static String parseInput(String input) throws DukeException {
-        String[] tokenizedInput = input.split(" ");
-        switch (tokenizedInput[0]) {
+        HashMap<String,String> tokenizedInput = Parser.ParseInput(input); 
+        switch (tokenizedInput.get("command")) {
         case "bye":
             return "Bye. Hope to see you again soon!";
         case "list":
@@ -109,50 +110,41 @@ public class Duke {
         case "delete":
             return executeDelete(tokenizedInput);
         case "todo":
-            return executeTodo(input);
+            return executeTodo(tokenizedInput);
         case "deadline":
-            return executeDeadline(input);
+            return executeDeadline(tokenizedInput);
         case "event":
-            return executeEvent(input);
+            return executeEvent(tokenizedInput);
         default:
             throw new DukeInvalidInputException(input);
         }
     }
 
-    private static String executeEvent(String input) throws DukeInvalidArgumentsException {
-        if (input.trim().equals("event")) {
+    private static String executeEvent(HashMap<String,String> input) throws DukeInvalidArgumentsException {
+        if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("event", "The description of an event cannot be empty");
         }
-        String[] data = input.substring(6).split("/at");
-        if (data.length < 2) {
+        if (!input.containsKey("at")) {
             throw new DukeInvalidArgumentsException("event", "The date for an event cannot be empty");
         }
-        if (data.length > 2) {
-            throw new DukeInvalidArgumentsException("event", "There are too many date arguments");
-        }
-        return addTaskAndReturnMessage(new EventTask(data[0].trim(), data[1].trim()));
+        return addTaskAndReturnMessage(new EventTask(input.get("info"), input.get("at")));
     }
 
-    private static String executeDeadline(String input) throws DukeInvalidArgumentsException {
-        if (input.trim().equals("deadline")) {
+    private static String executeDeadline(HashMap<String,String> input) throws DukeInvalidArgumentsException {
+        if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("deadline", "The description of a deadline cannot be empty");
         }
-        String[] data = input.substring(9).split("/by");
-        if (data.length < 2) {
+        if (!input.containsKey("by")) {
             throw new DukeInvalidArgumentsException("deadline", "The date for a deadline cannot be empty");
         }
-        if (data.length > 2) {
-            throw new DukeInvalidArgumentsException("deadline", "There are too many date arguments");
-        }
-        return addTaskAndReturnMessage(new DeadlineTask(data[0].trim(), data[1].trim()));
+        return addTaskAndReturnMessage(new DeadlineTask(input.get("info"), input.get("by")));
     }
 
-    private static String executeTodo(String input) throws DukeInvalidArgumentsException {
-        if (input.trim().equals("todo")) {
+    private static String executeTodo(HashMap<String,String> input) throws DukeInvalidArgumentsException {
+        if (!input.containsKey("info")) {
             throw new DukeInvalidArgumentsException("todo", "The description of a todo cannot be empty");
         }
-        String info = input.substring(5);
-        return addTaskAndReturnMessage(new TodoTask(info));
+        return addTaskAndReturnMessage(new TodoTask(input.get("info")));
     }
 
     private static String addTaskAndReturnMessage(Task task) {
@@ -169,16 +161,16 @@ public class Duke {
         return output.substring(0, output.length() - 1);
     }
 
-    private static String executeDelete(String[] tokenizedInput) {
+    private static String executeDelete(HashMap<String,String> tokenizedInput) {
         // TODO: Add Exception for out of range deletion
-        Task t = tasks.remove(Integer.parseInt(tokenizedInput[1]) - 1);
+        Task t = tasks.remove(Integer.parseInt(tokenizedInput.get("info")) - 1);
         return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.", t.toString(),
                 tasks.size());
     }
 
-    private static String executeDone(String[] tokenizedInput) {
+    private static String executeDone(HashMap<String,String> tokenizedInput) {
         // TODO: Add Exception for out of range done
-        Task t = tasks.get(Integer.parseInt(tokenizedInput[1]) - 1);
+        Task t = tasks.get(Integer.parseInt(tokenizedInput.get("info")) - 1);
         t.setTaskAsDone();
         return "Nice! I've marked this task as done:\n  " + t.toString();
     }

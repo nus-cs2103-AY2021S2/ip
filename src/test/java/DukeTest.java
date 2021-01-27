@@ -106,7 +106,7 @@ public class DukeTest {
         Duke.chatLoop(in, out);
 
         final String expectedOutput = "Invalid Input: invalid input\n"
-                + "Command event encountered invalid arguments: There are too many date arguments\n";
+                + "Command event encountered invalid arguments: Dupicate argument /at\n";
         assertEquals(expectedOutput, new String(out.toByteArray()));
     }
 
@@ -156,7 +156,7 @@ public class DukeTest {
         });
 
         assertEquals("deadline", exception.getCommand());
-        assertEquals("There are too many date arguments", exception.getError());
+        assertEquals("Dupicate argument /by", exception.getError());
     }
 
     @Test
@@ -186,7 +186,7 @@ public class DukeTest {
         });
 
         assertEquals("event", exception.getCommand());
-        assertEquals("There are too many date arguments", exception.getError());
+        assertEquals("Dupicate argument /at", exception.getError());
     }
 
     @Test

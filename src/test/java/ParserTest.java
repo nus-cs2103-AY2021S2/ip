@@ -5,9 +5,11 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
+import exception.DukeInvalidArgumentsException;
+
 public class ParserTest {
     @Test
-    public void parserAbleToParseDone() {
+    public void parserAbleToParseDone() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("done 2");
         
         assertTrue(tokenizedInput.containsKey("command"));
@@ -16,7 +18,7 @@ public class ParserTest {
         assertEquals("2", tokenizedInput.get("info"));
     }
     @Test
-    public void parserAbleToParseTodo() {
+    public void parserAbleToParseTodo() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("todo this is a todo");
         
         assertTrue(tokenizedInput.containsKey("command"));
@@ -25,7 +27,7 @@ public class ParserTest {
         assertEquals("this is a todo", tokenizedInput.get("info"));
     }
     @Test
-    public void parserAbleToParseDeadline() {
+    public void parserAbleToParseDeadline() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("deadline this is a deadline /by 10/10/1010 1010");
         
         assertTrue(tokenizedInput.containsKey("command"));
@@ -36,7 +38,7 @@ public class ParserTest {
         assertEquals("10/10/1010 1010", tokenizedInput.get("by"));
     }
     @Test
-    public void parserAbleToParseEvent() {
+    public void parserAbleToParseEvent() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("event this is a event /at 10/10/1010 1010");
         
         assertTrue(tokenizedInput.containsKey("command"));
@@ -47,14 +49,14 @@ public class ParserTest {
         assertEquals("10/10/1010 1010", tokenizedInput.get("at"));
     }
     @Test
-    public void parserAbleToParseList() {
+    public void parserAbleToParseList() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("list");
         
         assertTrue(tokenizedInput.containsKey("command"));
         assertEquals("list", tokenizedInput.get("command"));
     }
     @Test
-    public void parserAbleToParseDelete() {
+    public void parserAbleToParseDelete() throws DukeInvalidArgumentsException {
         HashMap<String, String> tokenizedInput = Parser.ParseInput("delete 2");
         
         assertTrue(tokenizedInput.containsKey("command"));

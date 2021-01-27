@@ -1,9 +1,11 @@
 import java.util.Arrays;
 import java.util.HashMap;
 
+import exception.DukeInvalidArgumentsException;
+
 public class Parser {
 
-    public static HashMap<String,String> ParseInput(String input) {
+    public static HashMap<String,String> ParseInput(String input) throws DukeInvalidArgumentsException {
         HashMap<String, String> keyValuePairs = new HashMap<>();
 
         String[] commands = input.split(" /");
@@ -23,6 +25,10 @@ public class Parser {
 
             String key = words[0];
             String value = String.join(" ", Arrays.copyOfRange(words, 1, words.length));
+            
+            if (keyValuePairs.containsKey(key)) {
+                throw new DukeInvalidArgumentsException(command, String.format("Dupicate argument /%s", key));
+            }
             keyValuePairs.put(key, value);
         }
 
