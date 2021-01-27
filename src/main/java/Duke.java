@@ -2,7 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+
+
 public class Duke {
+    private List commands;
+
+
+
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,9 +23,32 @@ public class Duke {
         loop();
     }
 
-    private static class DukeException extends Exception {
-        public DukeException(String errorMessage) {
-            super(errorMessage);
+//    private static class DukeException extends Exception {
+//        public DukeException(String errorMessage) {
+//            super(errorMessage);
+//        }
+//    }
+
+    private static void loadFile() {
+        try {
+            File myFile = new File("duke.txt");
+            Scanner myScanner = new Scanner(myFile);
+        } catch (Exception e) {
+            System.out.println("There is no file to load. No problem!");
+        }
+
+    }
+
+    private static void saveFile(List<Task> lt) {
+        try {
+            File myFile = new File("duke.txt");
+            if (myFile.exists()) {
+                myFile.delete(); //you might want to check if delete was successfull
+            } else {
+                myFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Something bad happened");
         }
     }
 
@@ -40,10 +71,13 @@ public class Duke {
     public static void loop() {
         Scanner input = new Scanner(System.in);
         boolean end = false;
+        boolean change = false;
 
         List<Task> myList = new ArrayList<>();
+        loadFile();
 
         while(!end) {
+            change = false;
             String s = input.nextLine();
             if (s.equals("bye")) {
                 end = true;
@@ -56,6 +90,7 @@ public class Duke {
                 try {
                     myList.get(index).isDone = true;
                     dukePrint("Good! We finished task: " + s + ". " + myList.get(index));
+                    change = true;
                 } catch (Exception e) {
                     dukePrint("Uhhh.... Our list starts at 1..." +
                             " and ends at " + (myList.size() + 1));
@@ -66,6 +101,7 @@ public class Duke {
                 try {
                     dukePrint("OK! We removed task: " + s + ". " + myList.get(index));
                     myList.remove(index);
+                    change = true;
                 } catch (Exception e) {
                     dukePrint("Uhhh.... Our list starts at 1..." +
                             " and ends at " + (myList.size() + 1));
@@ -77,6 +113,7 @@ public class Duke {
                     Deadline t = new Deadline(deadlineInfo[0],deadlineInfo[1]);
                     myList.add(t);
                     dukePrint("added new deadline: " + t);
+                    change = true;
                 }
                 catch (Exception e) {
                     dukePrint("Deadline must have something after \" /by \"!");
@@ -88,6 +125,7 @@ public class Duke {
                     Event t = new Event(eventInfo[0],eventInfo[1]);
                     myList.add(t);
                     dukePrint("added new event: " + t);
+                    change = true;
                 }
                 catch (Exception e) {
                     dukePrint("Event must have something after \" /at \"!");
@@ -97,11 +135,15 @@ public class Duke {
                 Todo t = new Todo(s);
                 myList.add(t);
                 dukePrint("added new todo: " + t);
+                change = true;
             } else {
 //                throw new DukeException("I don't get it");
 //                Task t = new Task(s);
 //                myList.add(t);
                 dukePrint("Please use todo, deadline, or event!");
+            }
+            if (change) {
+                saveFile(myList);
             }
         }
     }
