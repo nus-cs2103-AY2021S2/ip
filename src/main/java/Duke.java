@@ -64,6 +64,9 @@ public class Duke {
                     addToDo(tasks, pre,ui);
                     storage.writeTasks(tasks);
                     break;
+                case "find" :
+                    findTasks(tasks,pre[1],ui);
+                    break;
                 default :
                     addError(ui);
             }
@@ -71,6 +74,12 @@ public class Duke {
             pre = cmd.split("\\s+");
         }
         ui.printResponse(goodbye);
+    }
+
+    private static void findTasks(TaskList tasks, String s, Ui ui) {
+        TaskList query = tasks.find(s);
+        ui.printResponse("Here are the matching tasks in your list:\n");
+        ui.printTasks(query);
     }
 
     private static void deleteTask(TaskList tasks, int n, Ui ui) {
