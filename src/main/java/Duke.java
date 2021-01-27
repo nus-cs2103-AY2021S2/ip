@@ -97,6 +97,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Process command find given by user.
+     * @param word String inputted by user.
+     */
     private void doFind(String word){
         try {
             String realWord = word.substring(5);

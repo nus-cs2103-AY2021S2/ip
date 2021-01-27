@@ -71,6 +71,10 @@ public class Ui {
         System.out.println(deleteFail);
     }
 
+    /**
+     * Print whenever find command is called successfully
+     * @param listOfSearchedTasks List<Task> we would like to print
+     */
     public void printFindSuccess(List<Task> listOfSearchedTasks) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i=0; i < listOfSearchedTasks.size(); i++) {
@@ -78,6 +82,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Print whenever there is exception when find command is called.
+     * @param e NoMeaningException that arises whenever find command failed.
+     */
     public void printFindFail(NoMeaningException e) {
         System.out.println(e.getMessage());
     }
