@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Duke {
@@ -57,11 +59,13 @@ public class Duke {
                 try {
                     checkEmptyInput(check);
                     String[] temp = input.substring(9, input.length()).split(" /by ");
-                    Deadline curr = new Deadline(temp[0], temp[1]);
+                    Deadline curr = new Deadline(temp[0], LocalDate.parse(temp[1]));
                     list.add(curr);
                     System.out.println(divider + "Got it. I've added this task:\n  " + curr + "\nNow you have " + list.size() + " tasks in the list.\n" + divider);
-                } catch (DukeException e) {
+                } catch(DukeException e) {
                     System.out.println(divider + "OOPS!!! The description of a deadline cannot be empty\n" + divider);
+                } catch(DateTimeParseException e) {
+                    System.out.println(divider + "OOPS!!! The date provided is invalid\n" + divider);
                 }
             } else if(check[0].equals("event")) {
                 try {
