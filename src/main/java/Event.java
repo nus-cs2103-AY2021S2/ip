@@ -1,9 +1,12 @@
+/**
+ * Event class that is
+ */
 public class Event extends Task {
 
     private String timeslot;
 
     /**
-     * Constructor method
+     * Overloaded Constructor method
      * @param description String to describe the task.
      * @param timeslot String to describe the timeslot.
      */
@@ -12,15 +15,30 @@ public class Event extends Task {
         this.timeslot = timeslot;
     }
 
+    /**
+     * Overloaded constructor method
+     * @param description
+     * @param timeslot
+     * @param isDone
+     */
     public Event(String description, String timeslot, boolean isDone){
         super(description, isDone);
         this.timeslot = timeslot;
     }
 
+    /**
+     * Getter method for Event time.
+     * @return
+     */
     public String getTimeslot(){
         return this.timeslot;
     }
 
+    /**
+     * Method to change event timeslot
+     * @param timeslot
+     * @return
+     */
     public String changeTimeslot(String timeslot){
         this.timeslot = timeslot;
         return this.timeslot;

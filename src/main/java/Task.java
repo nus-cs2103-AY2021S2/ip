@@ -1,3 +1,6 @@
+/**
+ * Abstract parent class for all tasks including todos, events, deadlines.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
