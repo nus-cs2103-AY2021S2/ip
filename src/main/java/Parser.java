@@ -96,7 +96,8 @@ public class Parser {
             String[] splits = userInput.split("deadline |/by ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
                 try {
-                    Deadline addedTask = new Deadline(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
+                    Deadline addedTask = new Deadline(Arrays.asList(splits).get(1),
+                            isDone, Arrays.asList(splits).get(2));
                     tasks.addTask(addedTask);
                     System.out.println("Got it, I've added this task to the list: ");
                     System.out.println("  " + addedTask);
@@ -109,7 +110,8 @@ public class Parser {
         } else if (userInput.startsWith("event ")) {
             String[] splits = userInput.split("event | /at ");
             if ((splits.length == 3) && !(splits[1].equals("")) && !(splits[2].equals(""))) {
-                Event addedTask = new Event(Arrays.asList(splits).get(1), isDone, Arrays.asList(splits).get(2));
+                Event addedTask = new Event(Arrays.asList(splits).get(1),
+                        isDone, Arrays.asList(splits).get(2));
                 tasks.addTask(addedTask);
                 System.out.println("Got it, I've added this task to the list: ");
                 System.out.println("  " + addedTask);

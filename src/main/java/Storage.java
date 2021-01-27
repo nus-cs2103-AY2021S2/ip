@@ -37,14 +37,16 @@ public class Storage {
             tasks.addTask(addedTask);
         } else if (splits[0].equals("D")) {
             try {
-                Deadline addedTask = new Deadline(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Deadline addedTask = new Deadline(Arrays.asList(splits).get(2),
+                        Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
                 tasks.addTask(addedTask);
             } catch (DukeException e) {
                 System.out.println(e);
             }
         } else if (splits[0].equals("E")) {
             try {
-                Event addedTask = new Event(Arrays.asList(splits).get(2), Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
+                Event addedTask = new Event(Arrays.asList(splits).get(2),
+                        Arrays.asList(splits).get(1).equals("1"), Arrays.asList(splits).get(3));
                 tasks.addTask(addedTask);
             } catch (DukeException e) {
                 System.out.println(e);
