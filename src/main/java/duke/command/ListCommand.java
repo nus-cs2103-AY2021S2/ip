@@ -47,6 +47,6 @@ public class ListCommand extends Command{
             throw new DukeException(String.format("You have no task on %s.", DukeHelper.formatDate(date)));
         }
 
-        ui.printList(printTaskList);
+        ui.showListMessage(printTaskList, false);
     }
 }

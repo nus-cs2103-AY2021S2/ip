@@ -47,15 +47,15 @@ public class TaskList {
         tasks.clear();
     }
 
-    public void doneAll() {
-        for (Task t : tasks) {
-            t.setDone();
+    public void setAllDone() {
+        for (Task task : tasks) {
+            task.setDone();
         }
     }
 
     public boolean isAllDone() {
-        for (Task t : tasks) {
-            if(!t.getDone()) {
+        for (Task task : tasks) {
+            if(!task.getDone()) {
                 return false;
             }
         }
