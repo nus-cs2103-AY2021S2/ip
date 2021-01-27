@@ -22,19 +22,32 @@ public class Event extends Task{
         this.date = date;
         this.time = time;
     }
+
+    /**
+     * Date Getter.
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Time Getter.
+     */
     public LocalTime getTime() {
         return this.time;
     }
 
+    /**
+     * Print the new format of date and time.
+     */
     public String printDateTime() {
         ZonedDateTime zonedDateTime = ZonedDateTime.of(this.date, this.time, ZoneId.of("Asia/Singapore"));
         return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL).format(zonedDateTime);
     }
 
+    /**
+     * Return a new Event object after Task is executed.
+     */
     @Override
     public Event doTask() {
         return new Event(this.job, true, this.date, this.time);
