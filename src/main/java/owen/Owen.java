@@ -5,7 +5,6 @@ import owen.task.TaskList;
 
 /**
  * Owen is a personal assistant chatbot.
- * 
  * As Owen is an immutable class, modifications will return a copy
  * with updated internal state.
  */
