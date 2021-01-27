@@ -1,6 +1,7 @@
 package duke;
 
 public class DukeException extends Exception {
+
     /**
      * Constructs a DukeException object.
      * @param e Error message

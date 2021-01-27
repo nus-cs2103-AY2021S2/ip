@@ -66,8 +66,7 @@ public class Parser {
             default:
                 throw(new IllegalArgumentException());
             }
-        }
-        catch(IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             throw new DukeException("Please enter a legit command...");
         }
     }
@@ -116,7 +115,8 @@ public class Parser {
      * @throws IndexOutOfBoundsException If user provides a task number
      * that does not exist
      */
-    public static void markTaskDone(ArrayList<Task> tasks, int index) throws IndexOutOfBoundsException{
+    public static void markTaskDone(ArrayList<Task> tasks, int index)
+            throws IndexOutOfBoundsException {
         System.out.println("----------------------------------------------");
         Task t = tasks.get(index - 1);
         t.markAsDone();
@@ -163,7 +163,8 @@ public class Parser {
      * @param tasks An ArrayList of Tasks
      * @param command A String array containing the full command
      */
-    public static void createDeadline(ArrayList<Task> tasks, String[] command) {
+    public static void createDeadline(ArrayList<Task> tasks,
+                                      String[] command) {
         System.out.println("----------------------------------------------");
         String description = "";
         String by = "";
@@ -183,7 +184,8 @@ public class Parser {
             }
             description += " " + command[i];
         }
-        DeadlineTask deadLine = new DeadlineTask(description, false, LocalDate.parse(by), time);
+        DeadlineTask deadLine = new DeadlineTask(description,
+                false, LocalDate.parse(by), time);
         tasks.add(deadLine);
         System.out.println("Added this:");
         System.out.println(deadLine);

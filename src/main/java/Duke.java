@@ -1,6 +1,5 @@
 import duke.*;
 
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -8,7 +7,6 @@ import java.util.*;
 // 1) deleting a non-existent task
 // 2) marking a non-existent task as done
 // 3) marking an already done task done again
-
 
 public class Duke {
     private Storage storage;
@@ -53,11 +51,9 @@ public class Duke {
             ArrayList<Task> arrToSave = parser.consolidate();
             storage.saveData(arrToSave);
             ui.sayGoodbye();
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
-        }
-        finally {
+        } finally {
             sc.close();
         }
     }
