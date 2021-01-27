@@ -22,24 +22,16 @@ public class Duke {
             FileAccessor.ReadFromTasks(relPath, tasks);
 
         } catch (FileNotFoundException | IllegalArgumentException e) {
-            System.out.println("EXCEPTION");
+            //System.out.println("EXCEPTION");
             try {
                 Files.createDirectory(Paths.get("./src/main/java/data/"));
             } catch (IOException e1){}//shld just be ioexception
             //File f = new File(relPath); //no need to create file here will get auto created when writing
         }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
         String line = "____________________________________________"+
                 "________________\n";
-        System.out.println(line + " Hey there! I'm Duke\n" +
-                " How can I help you?\n" + line);
+        System.out.println(Ui.intro());
 
         while(sc.hasNext()) {
             String str = sc.nextLine();
@@ -47,19 +39,13 @@ public class Duke {
             if (str.equals("bye")) {
                 break;
             } else if(str.length()==0) {//if just enter spaces
-                System.out.println(line + " Please enter a task\n"
-                        + line);
+                System.out.println(Ui.onlySpaces());
             } else if (str.equals("list")) {
-                System.out.print(line);
-                if (tasks.size() > 0) {
-                    System.out.println(" Here are the tasks in your list:");
-                    for (int j = 1; j <= tasks.size(); j++) {
-                        System.out.println(" " + j + ". " + tasks.get(j - 1));
-                    }
-                } else {
-                    System.out.println(" No tasks so far!");
+                try {
+                    System.out.println(Ui.printList(tasks));
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
                 }
-                System.out.println(line);
             } else {
                 try {
                     String[] split = str.split(" ");
@@ -70,12 +56,20 @@ public class Duke {
                     if (split[0].equals("done")) {
                         try {
                             int num = Integer.parseInt(split[1]);
-                            System.out.println(line + tasks.get(num - 1).doneTask()
-                                    + "\n" + line);
+                            Task done = null;
+                            if(num-1<tasks.size() && num-1>=0) {
+                                done = tasks.get(num-1);
+                                tasks.get(num - 1).doneTask();//later add exception for the tasklist class
+                                System.out.println(Ui.doneTask(done));
+                            }
+                            ///System.out.println(Ui.doneTask(done));
+                            //System.out.println(Ui.doneTask(tasks, num-1));
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             if (tasks.size()==0){
+                            //System.out.println(e.getMessage());//rmb do for parse
                                 System.out.println(line+" No tasks to complete!\n"+line);
                             } else {
+                                //System.out.println(e.getMessage());//rmb do for parse
                                 System.out.println(line + " Enter 'done' followed by a number between " +
                                         "1 and " + tasks.size() + "\n" + line);
                             }
@@ -83,13 +77,16 @@ public class Duke {
                     } else if (split[0].equals("delete")) {
                         try {
                             int num = Integer.parseInt(split[1]);
-                            System.out.println(line + " I've removed the following task:\n"
-                                    + " " +tasks.get(num - 1));
-                            tasks.remove(num-1);
-                            System.out.println(" You now have "+ tasks.size() + " tasks" +
-                                    " in the list\n" + line);
+                            Task toRem = null;
+                            if(num-1<tasks.size() && num-1>=0) {
+                                toRem = tasks.get(num-1);
+                                tasks.remove(num-1);//later add exception for the tasklist class, and return the deleted
+                                System.out.println(Ui.deleteTask(toRem, tasks.size()));
+                            }
+                            //System.out.println(Ui.deleteTask(toRem, tasks.size()));
                         } catch (NumberFormatException | IndexOutOfBoundsException e) {
                             if (tasks.size()==0){
+                                //System.out.println(e.getMessage());//rmb do for parse
                                 System.out.println(line+" No tasks to delete!\n" + line);
                             } else {
                                 System.out.println(line + " Enter 'delete' followed by a number between " +
@@ -105,9 +102,7 @@ public class Duke {
                         } else {
                             tasks.add(new Event(rest));
                         }
-                        System.out.println(line + " Got it. I've added this task:\n" +
-                                " " + tasks.get(tasks.size() - 1) + "\n" + " Now you have "
-                                + tasks.size() + " tasks in the list\n" + line);
+                        System.out.println(Ui.addTask(tasks));
                     } else {
                         throw new IllegalArgumentException();
                     }
@@ -118,12 +113,7 @@ public class Duke {
                         System.out.println("Unable to save to hard drive");
                     }
                 } catch (IllegalArgumentException e) {
-                    System.out.println(line + " Please enter 'todo (your task)', " +
-                            "or 'deadline (your task) / (deadline date time)',\n or " +
-                            "'event (event name) / (event date time)' to add tasks.\n " +
-                            "To see your tasks enter 'list'.\n To complete a task enter " +
-                            "'done (number of the task in the list)'.\n And to close Duke " +
-                            "enter 'bye'.\n"+ line);
+                    System.out.println(Ui.IllegalArgExc());
                 } catch (DateTimeParseException e) {
                     System.out.println(line+" Enter date and time in this format yyyy-mm-dd hh:mm\n"+line);
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -133,7 +123,6 @@ public class Duke {
             }
         }
 
-        System.out.println(line + " Bye, see you again!\n"
-                + line);
+        System.out.println(Ui.bye());
     }
 }

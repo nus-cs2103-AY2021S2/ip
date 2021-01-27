@@ -27,8 +27,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + task;
     }
 
-    public String doneTask() {
+    public void doneTask() {
         isDone = true;
-        return " Good job on completing this task!\n" + " " +toString();
     }
 }
