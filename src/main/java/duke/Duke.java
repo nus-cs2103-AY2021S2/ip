@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,10 +94,18 @@ public class Duke {
         if (description.trim().equals("")) {
             throw new DukeException("Deadline requires a description.");
         }
-        String by = input.substring(bySwitchIndex + 4);
-        if (by.trim().equals("")) {
+        String byStr = input.substring(bySwitchIndex + 4);
+        if (byStr.trim().equals("")) {
             throw new DukeException("Deadline requires '/by' to be specified.");
         }
+
+        LocalDate by;
+        try {
+            by = LocalDate.parse(byStr);
+        } catch (DateTimeException dte) {
+            throw new DukeException("Deadline /by needs to be in a valid format (e.g. yyyy-MM-dd)");
+        }
+
         Deadline deadline = new Deadline(description, by);
         tasks.add(deadline);
         writeAddTask(deadline);
@@ -110,10 +120,18 @@ public class Duke {
         if (description.trim().equals("")) {
             throw new DukeException("Event requires a description.");
         }
-        String at = input.substring(atSwitchIndex + 4);
-        if (at.trim().equals("")) {
+        String atStr = input.substring(atSwitchIndex + 4);
+        if (atStr.trim().equals("")) {
             throw new DukeException("Event requires '/at' to be specified.");
         }
+
+        LocalDate at;
+        try {
+            at = LocalDate.parse(atStr);
+        } catch (DateTimeException dte) {
+            throw new DukeException("Event /at needs to be in a valid format (e.g. yyyy-MM-dd)");
+        }
+
         Event event = new Event(description, at);
         tasks.add(event);
         writeAddTask(event);
