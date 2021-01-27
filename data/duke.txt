@@ -1,2 +1,3 @@
 0|[T]go tos chosd
-0|[T]set
+1|[T]set
+0|[E]go to sleep (at: Oct 10 2020 19:00)

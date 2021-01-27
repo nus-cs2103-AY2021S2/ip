@@ -11,11 +11,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
+/**
+ * It is a command object extends from Command for the Duke program.
+ * When the parser calls it, it will receive the requests from the users
+ * during the running of the program and starts to search the task that matches the time
+ * user asks.
+ */
 public class SearchByTimeCommand extends Command{
+    /**
+     * Constructor for SearchByTimeCommand object
+     *
+     * @param userMessage The message that the user inputs for further execution.
+     */
     public SearchByTimeCommand(String userMessage){
         super(userMessage);
     }
 
+    /**
+     * The execution after parsing, it will search relevant tasks based on the time.
+     * If the input is not correct, it will raise an exception.
+     *
+     * @param taskList The current taskList in the program.
+     * @param ui The current ui in the program.
+     * @throws DukeException if there are some cases such as the input time format is wrong.
+     */
     public void execute(TaskList taskList, Ui ui) throws DukeException {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String[] info;
@@ -25,9 +44,9 @@ public class SearchByTimeCommand extends Command{
         try{
             info = userMessage.split(" ",3);
             time = LocalDateTime.parse(info[2],df);
-        }
-        catch (Exception e){
-            throw new DukeException("The search input format is wrong, the format should be yyyy-MM-dd HH:mm!");
+        } catch (Exception e){
+            throw new DukeException("The search input format is wrong, the format should be: \n" +
+                    "search time yyyy-MM-dd HH:mm!");
         }
 
         LinkedList<Task> tasks = taskList.getTasks();
@@ -39,24 +58,20 @@ public class SearchByTimeCommand extends Command{
         for (Task single : tasks) {
             if (single instanceof ToDo){
                 continue;
-            }
-            else if (single instanceof Event){
+            } else if (single instanceof Event){
                 LocalDateTime eventTime = ((Event) single).getAt();
                 if (eventTime.isEqual(time)){
-                    builder.append("[" + single.getStatusIcon() + "]" + single.getTaskName() + "\n");
+                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + "\n");
                     numOfTasksFound++;
                 }
-            }
-            else if (single instanceof Deadline){
+            } else if (single instanceof Deadline){
                 LocalDateTime deadlineTime = ((Deadline) single).getBy();
                 if (deadlineTime.isEqual(time)){
-                    builder.append("[" + single.getStatusIcon() + "]" + single.getTaskName() + "\n");
+                    builder.append("[" + single.getStatusIcon() + "]" + single.toString() + "\n");
                     numOfTasksFound++;
                 }
             }
         }
-
-
         if (numOfTasksFound == 0){
             throw new DukeException("OOPS! There is no task that matches the time.");
         }
