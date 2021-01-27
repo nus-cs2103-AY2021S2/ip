@@ -33,11 +33,9 @@ public class DukeDriver {
     /**
      * handle done command by marking the task as done.
      *
-     * @param input user input.
-     * @param command command given by user.
+     * @param task name of the user task.
      */
-    private static final void handleDone(String input, String command) {
-        String task = extractTask(input, command);
+    private static final void handleDone(String task) {
         if (task.length() > 0) {
             try {
                 int num = Integer.parseInt(task);
@@ -53,11 +51,9 @@ public class DukeDriver {
     /**
      * handle todo command and create a todo task if task is not empty.
      *
-     * @param input user input.
-     * @param command user command.
+     * @param task name of the user task.
      */
-    private static final void handleToDo(String input, String command) {
-        String task = extractTask(input, command);
+    private static final void handleToDo(String task) {
         if (!task.equals("")) {
             Todo todo = new Todo(task);
             System.out.println(Format.biggerBox(todo));
@@ -70,15 +66,13 @@ public class DukeDriver {
     /**
      * handle deadline command by creating deadline task if task and date are not empty.
      *
-     * @param input user input.
-     * @param command user command.
+     * @param task name of the user task.
+     * @param date date of the task to be done.
      */
-    private static final void handleDeadline(String input, String command) {
-        String task = extractTask(input, command);
+    private static final void handleDeadline(String task, String date) {
         if (task.equals("")) {
             DukeException.emptyTaskException();
         } else {
-            String date = extractDate(input, command);
             if (date.equals("")) {
                 DukeException.missingDateErrorException();
             } else {
@@ -92,15 +86,13 @@ public class DukeDriver {
     /**
      * handle event command by creating event if task and date are not empty.
      *
-     * @param input user input.
-     * @param command user command.
+     * @param task name of the user task.
+     * @param date date of the task to be done.
      */
-    private static final void handleEvent(String input, String command) {
-        String task = extractTask(input, command);
+    private static final void handleEvent(String task, String date) {
         if (task.equals("")) {
             DukeException.emptyTaskException();
         } else {
-            String date = extractDate(input, command);
             if (date.equals("")) {
                 DukeException.missingDateErrorException();
             } else {
@@ -128,11 +120,9 @@ public class DukeDriver {
     /**
      * handle delete command key in by user by removing the task from the list if there is any.
      *
-     * @param input user input.
-     * @param command user command.
+     * @param task name of the user task.
      */
-    private static final void handleDelete(String input, String command) {
-        String task = extractTask(input, command);
+    private static final void handleDelete(String task) {
         if (task.length() > 0) {
             try {
                 int num = Integer.parseInt(task);
@@ -152,7 +142,10 @@ public class DukeDriver {
      * @return a boolean to whether to exit the program.
      */
     private static final boolean inputHandler(String message) {
-        String command = extractCommand(message);
+        InputProcessor ip = new InputProcessor(message);
+        String command = ip.getCommand();
+        String task = ip.getTaskName();
+        String date = ip.getDate();
         boolean end = false;
         switch (command) {
         case "bye":
@@ -163,19 +156,19 @@ public class DukeDriver {
             Format.LISTING();
             break;
         case "done":
-            handleDone(message, command);
+            handleDone(task);
             break;
         case "todo":
-            handleToDo(message, command);
+            handleToDo(task);
             break;
         case "deadline":
-            handleDeadline(message, command);
+            handleDeadline(task, date);
             break;
         case "event":
-            handleEvent(message, command);
+            handleEvent(task, date);
 	        break;
         case "delete":
-            handleDelete(message, command);
+            handleDelete(task);
             break;
         default:
             DukeException.commandErrorException();
@@ -185,51 +178,6 @@ public class DukeDriver {
     }
 
 
-    /**
-     * extract the command key in by user.
-     *
-     * @param input the input key in by user.
-     * @return String representation of the command word of the user input.
-     */
-    private static final String extractCommand(String input) {
-        return input.trim().toLowerCase().split(" ")[0];
-    }
 
-    /**
-     * extracting task name from user input.
-     * @param input user input.
-     * @param command user command.
-     * @return the task name if there is one and return empty string if task name empty.
-     */
-    private static final String extractTask(String input, String command) {
-        String body = input.replaceAll(command, "").trim();
-        if (command.equals("todo") || command.equals("delete")) {
-            return body;
-        } else if (command.equals("done")) {
-            return body.replaceAll("[^0-9]", "");
-        } else {
-            try {
-                return body.split("/")[0];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return "";
-            }
-        }
-    }
-
-    /**
-     * extract the date of the task to be done.
-     * @param input user input.
-     * @param command user command.
-     * @return the task date in String and return empty if there is no date.
-     */
-    private static final String extractDate(String input, String command) {
-        String body = input.replaceAll(command, "").trim();
-        String[] parts = body.split("/", 2);
-        if (parts.length == 2) {
-            return parts[1];
-        } else {
-            return "";
-        }
-    }
 
 }
