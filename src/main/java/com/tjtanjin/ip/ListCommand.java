@@ -6,14 +6,21 @@ package com.tjtanjin.ip;
 public class ListCommand {
 
     private final TaskHandler taskHandler;
+    private final String description;
 
     /**
      * Constructor for ListCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public ListCommand(TaskHandler taskHandler) {
+    public ListCommand(String description, TaskHandler taskHandler) {
+        this.description = description;
         this.taskHandler = taskHandler;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * List all tasks entered by user.
      * @return string response after operation is done

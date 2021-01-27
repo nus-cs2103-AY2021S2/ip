@@ -6,13 +6,19 @@ package com.tjtanjin.ip;
 public class DeleteCommand {
 
     private final TaskHandler taskHandler;
+    private final String description;
 
     /**
      * Constructor for DeleteCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public DeleteCommand(TaskHandler taskHandler) {
+    public DeleteCommand(String description, TaskHandler taskHandler) {
+        this.description = description;
         this.taskHandler = taskHandler;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**

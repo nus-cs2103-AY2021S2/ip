@@ -37,25 +37,11 @@ public class StorageHandler {
 
         File tasksFile = new File(this.path);
         try {
-            if (!tasksFile.getParentFile().isDirectory()) {
-                if (!tasksFile.getParentFile().mkdirs()) {
-                    throw new DukeException("Terminated: "
-                            + "Application has no permission to create storage file.");
-                }
-            }
-            if (!tasksFile.exists()) {
-                try {
-                    if (!tasksFile.createNewFile()) {
-                        throw new DukeException("Terminated:"
-                                + "Application has no permission to create storage file.");
-                    }
-                } catch (IOException e) {
-                    throw new DukeException("Terminated: "
-                            + "Application has no permission to create storage file.");
-                }
-            }
-        } catch (DukeException e) {
-            UiHandler.terminate(e.getMessage());
+            tasksFile.getParentFile().mkdirs();
+            tasksFile.createNewFile();
+        } catch (IOException e) {
+            UiHandler.terminate("Terminated: "
+                    + "Application has no permission to create storage file.");
         }
 
         //JSON parser object to parse read file
@@ -126,7 +112,7 @@ public class StorageHandler {
         taskDetails.put("type", type);
 
         //convert datetime to string
-        if (taskDates[0] != null) {
+        if (taskDates != null) {
             if (type.equals("DEADLINE")) {
                 String dueDateStr = taskDates[0].format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 taskDetails.put("endDate", dueDateStr);
@@ -141,7 +127,7 @@ public class StorageHandler {
         JSONObject taskGroup = new JSONObject();
         taskGroup.put("task", taskDetails);
 
-        //add each task to list
+        //add or update or delete task
         if (saveType.equals("NEW")) {
             taskList.add(taskGroup);
         } else if (saveType.equals("DONE")) {
@@ -158,7 +144,6 @@ public class StorageHandler {
             return true;
 
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }

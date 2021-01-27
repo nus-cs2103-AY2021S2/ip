@@ -5,10 +5,18 @@ package com.tjtanjin.ip;
  */
 public class ByeCommand {
 
+    private final String description;
+
     /**
      * Constructor for ByeCommand.
      */
-    public ByeCommand() {}
+    public ByeCommand(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * Exits the program.

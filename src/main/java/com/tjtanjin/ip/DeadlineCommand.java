@@ -3,22 +3,28 @@ package com.tjtanjin.ip;
 import java.time.LocalDate;
 
 /**
- * Entry point for handling logic and execution of add command.
+ * Entry point for handling logic and execution of deadline command.
  */
-public class AddCommand {
+public class DeadlineCommand {
 
     private final TaskHandler taskHandler;
+    private final String description;
 
     /**
-     * Constructor for AddCommand.
+     * Constructor for DeadlineCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public AddCommand(TaskHandler taskHandler) {
+    public DeadlineCommand(String description, TaskHandler taskHandler) {
+        this.description = description;
         this.taskHandler = taskHandler;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
-     * Forwards the add task operation to TaskHandler.
+     * Forwards the add deadline task operation to TaskHandler.
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates array of dates

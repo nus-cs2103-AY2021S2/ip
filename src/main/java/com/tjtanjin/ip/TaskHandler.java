@@ -113,7 +113,7 @@ public class TaskHandler {
      */
     public String showAllTasks() {
         if (tasks.size() == 0) {
-            return "You have no task at the moment!";
+            return "Info: You have no task at the moment!";
         } else {
             StringBuilder str = new StringBuilder("Info: ");
             for (int i = 1; i <= tasks.size(); i++) {

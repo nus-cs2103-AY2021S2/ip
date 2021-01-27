@@ -7,17 +7,26 @@ import java.util.HashMap;
  */
 public class HelpCommand {
 
+    private final HashMap<String, String> cmdInfo;
+    private final String description;
+
     /**
      * Constructor for HelpCommand.
      */
-    public HelpCommand() {}
+    public HelpCommand(String description, HashMap<String, String> cmdInfo) {
+        this.description = description;
+        this.cmdInfo = cmdInfo;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
 
     /**
      * List all available command usage and descriptions.
-     * @param cmdInfo mapping of each command and their information
      * @return string response after operation is done
      */
-    public String execute(HashMap<String, String> cmdInfo) {
+    public String execute() {
         StringBuilder str = new StringBuilder("Info: The available commands are as listed below:");
         for (String info : cmdInfo.values()) {
             str.append("\n").append(info);

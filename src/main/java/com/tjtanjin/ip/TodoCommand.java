@@ -1,18 +1,18 @@
 package com.tjtanjin.ip;
 
 /**
- * Entry point for handling logic and execution of find command.
+ * Entry point for handling logic and execution of todo command.
  */
-public class FindCommand {
+public class TodoCommand {
 
     private final TaskHandler taskHandler;
     private final String description;
 
     /**
-     * Constructor for FindCommand.
+     * Constructor for TodoCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public FindCommand(String description, TaskHandler taskHandler) {
+    public TodoCommand(String description, TaskHandler taskHandler) {
         this.description = description;
         this.taskHandler = taskHandler;
     }
@@ -22,11 +22,12 @@ public class FindCommand {
     }
 
     /**
-     * Forwards the find task operation to TaskHandler.
+     * Forwards the add todo task operation to TaskHandler.
+     * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @return string response after operation is done
      */
-    public String execute(String taskName) {
-        return taskHandler.findTask(taskName);
+    public String execute(String taskType, String taskName) {
+        return taskHandler.addTask(taskType, taskName, null);
     }
 }

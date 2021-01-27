@@ -6,13 +6,19 @@ package com.tjtanjin.ip;
 public class DoneCommand {
 
     private final TaskHandler taskHandler;
+    private final String description;
 
     /**
      * Constructor for DoneCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public DoneCommand(TaskHandler taskHandler) {
+    public DoneCommand(String description, TaskHandler taskHandler) {
+        this.description = description;
         this.taskHandler = taskHandler;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**
