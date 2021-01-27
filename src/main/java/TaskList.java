@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
-public class DukeBot {
-    private String name;
-    private ArrayList<Task> list;
+public class TaskList {
+    public ArrayList<Task> list;
     public boolean isAlive;
 
-    public DukeBot(String name) {
-
-        this.name = name;
+    public TaskList() {
         this.list = new ArrayList<>();
+        this.isAlive = true;
+    }
+
+    public TaskList(ArrayList<Task> taskArr) {
+        this.list = taskArr;
         this.isAlive = true;
     }
 
@@ -79,14 +81,9 @@ public class DukeBot {
 
     @Override
     public String toString() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        return "\t\tHello! I'm " +
-                this.name + "\n" +
-                "\t\tWhat can I do for you?\n";
+//        return "\t\tHello! I'm Duke" +
+//                "\n" +
+//                "\t\tWhat can I do for you?\n";
+        return "TaskList for Duke";
     }
 }

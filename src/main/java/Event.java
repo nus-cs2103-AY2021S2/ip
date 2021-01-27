@@ -1,5 +1,6 @@
 public class Event extends Task {
     protected final String at;
+    public final String SHORT_HAND = "E";
 
     public Event (String taskDescription, String at) {
         super(taskDescription);
@@ -8,6 +9,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[" + SHORT_HAND +  "]" + super.toString() + " (at: " + this.at + ")";
     }
 }

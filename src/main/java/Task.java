@@ -1,6 +1,8 @@
 public class Task {
+    public static final String SHORTHAND = "INVALID";
     protected final String taskDescription;
     protected boolean isDone;
+
 
     public Task(String taskDescription) {
         this.taskDescription = taskDescription;
