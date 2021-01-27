@@ -4,11 +4,18 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Class <code>Parser</code> deals with making sense of the user command.
+ * Contains method <code>parseInput</code>.
+ */
 public class Parser {
 
-    public Parser() {
-    }
-
+    /**
+     * Returns an <code>ArrayList</code> of strings that contains the parsed <code>input</code>.
+     *
+     * @param input input parsed.
+     * @return list of parsed input.
+     */
     public ArrayList<String> parseInput(String input) {
         ArrayList<String> result = new ArrayList<>();
         try {
