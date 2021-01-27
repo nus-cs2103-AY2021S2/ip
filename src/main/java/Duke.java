@@ -1,7 +1,9 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     // output strings
@@ -19,6 +21,10 @@ public class Duke {
 
     // scanner
     public static Scanner sc = new Scanner(System.in);
+
+    // file saving object from FileSaver class
+    public static FileSaver fs = new FileSaver();
+    public static DataManager dm = new DataManager();
 
     public static void greeting() {
         System.out.println(logo);
@@ -174,6 +180,7 @@ public class Duke {
                     default:
                         throw new DukeException("Sorry, I dont understand that");
                 }
+                fs.save(task);
             } catch (DukeException e) {
                 // TODO: handle exception
                 printErrorMessage(e.getMessage());
@@ -189,6 +196,12 @@ public class Duke {
 
     public static void main(String[] args) {
         greeting();
+        try {
+            fs.load(task);
+        } catch (DukeException e) {
+            //TODO: handle exception
+            printErrorMessage(e.getMessage());
+        }
         run();
         sc.close();
     }

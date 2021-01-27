@@ -11,6 +11,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     // public String getStatusIcon() {
     // return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     // }
@@ -24,5 +28,15 @@ public class Task {
         } else {
             return "[ ] " + this.description;
         }
+    }
+
+    public String savedFormat() {
+        String savedInfo;
+        if (this.isDone()) {
+            savedInfo = "T | 1 | " + this.getDescription(); 
+        } else {
+            savedInfo = "T | 0 | " + this.getDescription(); 
+        }
+        return savedInfo;
     }
 }
