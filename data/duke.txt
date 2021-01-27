@@ -2,4 +2,6 @@ T | 1 | ooeobew
 D | 1 | lol | 2019-09-09
 T | 1 | fnej
 D | 0 | hi | 2019-09-12
-T | 1 |  1 morw
+T | 1 | 1morw
+T | 0 |  book find 
+T | 0 |  book sell

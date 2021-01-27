@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 
 class Parser {
-    public static Ui ui = new Ui();
 
     public static void parseInput(String input, TaskList tasks, Storage storage) {
         try {
@@ -65,6 +64,11 @@ class Parser {
                 }
                 tasks.deleteTask(index - 1);
                 storage.writeTasksToFile(tasks.getTaskList());
+            } else if (input.startsWith("find")) {
+                if (input.split(" ").length < 2) {
+                    throw new DukeException("Please enter a keyword to search for");
+                }
+                tasks.findTask(input.split(" ")[1]);
 
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
