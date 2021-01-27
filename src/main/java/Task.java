@@ -21,7 +21,7 @@ public class Task {
      * @return String with ths status character
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); //return tick or X symbols
+        return (this.isDone ? "X" : " "); //return tick or X symbols
     }
 
     /**

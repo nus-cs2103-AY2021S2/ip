@@ -11,14 +11,13 @@ public class Duke {
     public Ui ui;
 
     Duke() {
-        ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
         try {
-            tasks = new TaskList(storage.readTasksFromFile());
+            this.tasks = new TaskList(this.storage.readTasksFromFile());
         } catch (FileNotFoundException fileException) {
-            tasks = new TaskList();
+            this.tasks = new TaskList();
         }
-
     }
 
     /**
@@ -28,27 +27,23 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
-
-
     }
 
     public void run() {
-
-        ui.greetUser();
+        this.ui.greetUser();
 
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNext()) {
-
             String input = sc.nextLine();
 
             try {
-                ui.echoCommand(input);
+                this.ui.echoCommand(input);
                 if (input.equals("bye")) {
-                    ui.farewellUser();
+                    this.ui.farewellUser();
                     break;
                 }
-                Parser.parseInput(input, tasks, storage);
+                Parser.parseInput(input, this.tasks, this.storage);
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
