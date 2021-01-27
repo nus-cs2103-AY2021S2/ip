@@ -5,22 +5,36 @@ import weiliang.bot.task.TaskList;
 import weiliang.bot.DukeException;
 import weiliang.bot.Storage;
 
+/**
+ * Main runner program
+ */
 public class Duke implements Runnable {
 
     private Storage storage;
     private TaskList tasks;
     private UI ui;
 
+    /**
+     * Constructor for main duke program
+     */
     public Duke() {
         this.storage = new Storage("memory.txt");
         this.ui = new UI("SimpleBot");
     }
 
+    /**
+     * Initializes duke experiment
+     * 
+     * @throws DukeException if fail to init
+     */
     public void init() throws DukeException {
         this.tasks = storage.loadTasks();
         this.ui.loadTasks(tasks);
     }
     
+    /**
+     * Runs simulation
+     */
     @Override
     public void run() {
         System.out.println(ui.getInitMessage());
@@ -45,6 +59,10 @@ public class Duke implements Runnable {
         }    
     }
 
+    /**
+     * Main runner method
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             Duke duke = new Duke();
