@@ -35,29 +35,6 @@ public class Duke {
     );
 
     /**
-     * Print one line with spaces in front
-     *
-     * @param line the line to print
-     */
-    public static void printLine(String line) {
-        System.out.println("     " + line);
-    }
-
-    /**
-     * Print a horizontal line
-     */
-    public static void printHorizontalLine() {
-        System.out.println("    " + "____________________________________________________________");
-    }
-
-    /**
-     * Print an empty line
-     */
-    public static void printEmptyLine() {
-        System.out.println();
-    }
-
-    /**
      * Tokenize a command
      *
      * @param command a line of command
@@ -116,7 +93,7 @@ public class Duke {
             }
             fileWriter.write(data.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            Ui.printError(e);
         }
     }
 
@@ -155,7 +132,7 @@ public class Duke {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Ui.printError(e);
         }
     }
 
@@ -167,15 +144,15 @@ public class Duke {
      */
     public static boolean processCommand(String command) throws Exception {
         String[] tokens = command.split(" ");
-        printHorizontalLine();
+        Ui.printHorizontalLine();
         if (EXIT_COMMANDS.contains(command)) {
-            printLine("Bye. Hope to see you again soon!");
+            Ui.printLine("Bye. Hope to see you again soon!");
         } else {
             if (tokens[0].equals("list")) {
-                printLine("Here are the tasks in your list:");
+                Ui.printLine("Here are the tasks in your list:");
                 int index = 0;
                 for (Task task : tasks) {
-                    printLine(String.format("%d.%s", ++index, task.toString()));
+                    Ui.printLine(String.format("%d.%s", ++index, task.toString()));
                 }
             } else if (tokens[0].equals("done")) {
                 if (tokens.length < 2) {
@@ -188,8 +165,8 @@ public class Duke {
                     }
                     if (taskNumber <= tasks.size()) {
                         tasks.get(taskNumber - 1).setIsDone(true);
-                        printLine("Nice! I've marked this task as done:");
-                        printLine(String.format("  %s", tasks.get(Integer.parseInt(tokens[1]) - 1)));
+                        Ui.printLine("Nice! I've marked this task as done:");
+                        Ui.printLine(String.format("  %s", tasks.get(Integer.parseInt(tokens[1]) - 1)));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -208,9 +185,9 @@ public class Duke {
                     if (taskNumber <= tasks.size()) {
                         Task task = tasks.get(taskNumber - 1);
                         tasks.remove(taskNumber - 1);
-                        printLine("Noted. I've removed this task:");
-                        printLine(String.format("  %s", task));
-                        printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                        Ui.printLine("Noted. I've removed this task:");
+                        Ui.printLine(String.format("  %s", task));
+                        Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                     } else {
                         throw new Exception("Task does not exist!");
                     }
@@ -223,9 +200,9 @@ public class Duke {
                 }
                 Task task = new TodoTask(tokens[1]);
                 tasks.add(task);
-                printLine("Got it! I've added this task:");
-                printLine("  " + task);
-                printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                Ui.printLine("Got it! I've added this task:");
+                Ui.printLine("  " + task);
+                Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
             } else if (tokens[0].equals("deadline")) {
                 if (tokens.length < 2) {
                     throw new Exception("Please provide a task name!");
@@ -237,9 +214,9 @@ public class Duke {
                         if (index + 1 < tokens.length) {
                             Task task = new DeadlineTask(tokens[1], tokens[index + 1]);
                             tasks.add(task);
-                            printLine("Got it! I've added this task:");
-                            printLine("  " + task);
-                            printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            Ui.printLine("Got it! I've added this task:");
+                            Ui.printLine("  " + task);
+                            Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                         } else {
                             throw new Exception("Please provide a valid due time!");
                         }
@@ -249,9 +226,9 @@ public class Duke {
                 if (dueTimeNotProvided) {
                     Task task = new DeadlineTask(tokens[1]);
                     tasks.add(task);
-                    printLine("Got it! I've added this task:");
-                    printLine("  " + task);
-                    printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                    Ui.printLine("Got it! I've added this task:");
+                    Ui.printLine("  " + task);
+                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                 }
             } else if (tokens[0].equals("event")) {
                 if (tokens.length < 2) {
@@ -264,9 +241,9 @@ public class Duke {
                         if (index + 1 < tokens.length) {
                             Task task = new EventTask(tokens[1], tokens[index + 1]);
                             tasks.add(task);
-                            printLine("Got it! I've added this task:");
-                            printLine("  " + task);
-                            printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                            Ui.printLine("Got it! I've added this task:");
+                            Ui.printLine("  " + task);
+                            Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                         } else {
                             throw new Exception("Please provide a valid event time!");
                         }
@@ -276,37 +253,30 @@ public class Duke {
                 if (eventTimeNotProvided) {
                     Task task = new EventTask(tokens[1]);
                     tasks.add(task);
-                    printLine("Got it! I've added this task:");
-                    printLine("  " + task);
-                    printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
+                    Ui.printLine("Got it! I've added this task:");
+                    Ui.printLine("  " + task);
+                    Ui.printLine(String.format("Now you have %d tasks in the list.", tasks.size()));
                 }
             } else {
                 throw new Exception("Unknown command!");
             }
         }
         saveToFile();
-        printHorizontalLine();
-        printEmptyLine();
+        Ui.printHorizontalLine();
+        Ui.printEmptyLine();
         return !EXIT_COMMANDS.contains(command);
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String logo = " ____        _        \n" +
-                "|  _ \\ _   _| | _____ \n" +
-                "| | | | | | | |/ / _ \\\n" +
-                "| |_| | |_| |   <  __/\n" +
-                "|____/ \\__,_|_|\\_\\___|";
-        printHorizontalLine();
-        printEmptyLine();
-        for (String line : logo.split("\n")) {
-            printLine(line);
-        }
-        printEmptyLine();
-        printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
-        printLine("Sou, watashi desu!");
-        printHorizontalLine();
-        printEmptyLine();
+        Ui.printHorizontalLine();
+        Ui.printEmptyLine();
+        Ui.printLogo();
+        Ui.printEmptyLine();
+        Ui.printLine("Who is the ultimate Personal Assistant Chatbot that helps keep track of various things?");
+        Ui.printLine("Sou, watashi desu!");
+        Ui.printHorizontalLine();
+        Ui.printEmptyLine();
         readFromFile();
         for (; ; ) {
             try {
@@ -314,7 +284,7 @@ public class Duke {
                     break;
                 }
             } catch (Exception e) {
-                printLine("Error: " + e.getMessage());
+                Ui.printError(e);
             }
         }
     }
