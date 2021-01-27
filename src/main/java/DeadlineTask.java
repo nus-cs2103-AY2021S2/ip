@@ -1,5 +1,7 @@
+import java.time.LocalDateTime;
+
 public class DeadlineTask extends Task {
-    private String dueTime;
+    private LocalDateTime dueTime;
 
     public DeadlineTask(String name) {
         super(name);
@@ -7,11 +9,21 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String name, String dueTime) {
         super(name);
-        this.dueTime = dueTime;
+        this.setDueTime(dueTime);
     }
 
     public void setDueTime(String dueTime) {
-        this.dueTime = dueTime;
+        this.dueTime = LocalDateTime.parse(dueTime);
+    }
+
+    public String getDueTime() {
+        return String.format(
+                "%d %s %s, %s",
+                this.dueTime.getDayOfMonth(),
+                this.dueTime.getMonth(),
+                this.dueTime.getYear(),
+                this.dueTime.toLocalTime()
+        );
     }
 
     public String getDueTime() {
@@ -30,6 +42,6 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + (this.dueTime != null ? String.format(" (by: %s)", this.dueTime) : "");
+        return "[D]" + super.toString() + (this.dueTime != null ? String.format(" (by: %s)", this.getDueTime()) : "");
     }
 }
