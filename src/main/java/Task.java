@@ -17,12 +17,26 @@ public class Task {
         return true;
     }
 
+    public String getType() {
+        if(this instanceof ToDo) {
+            return "T";
+        } else if(this instanceof Deadline) {
+            return "D";
+        } else {
+            return "E";
+        }
+    }
+
     public String getDescription() {
         return this.description;
     }
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     @Override
