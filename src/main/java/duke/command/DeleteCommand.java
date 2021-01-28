@@ -15,16 +15,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(Ui ui, TaskList tasks, Storage storage) {
+    public void execute(Ui ui, TaskList tasks, Storage storage) {
         Task task = tasks.delete(indexToDelete);
         try {
             storage.saveTasks(tasks);
         } catch ( IOException err) {
-            return EXECUTION_FAIL;
+            this.isExit = true;
         }
         System.out.println("Noted. I've removed this task:");
         System.out.println("\t" + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        return EXECUTION_SUCCESS;
     }
 }

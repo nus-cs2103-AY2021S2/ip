@@ -48,14 +48,14 @@ public class Duke {
 
     public void run() {
         ui.displayWelcomeMessage();
-        boolean isExit = false; // set to false is a command fails to execute exit command
-        while (!isExit) {
+        boolean shouldExit = false; // set to false is a command fails to execute exit command
+        while (!shouldExit) {
             try {
                 String input = ui.getUserCommand();
                 Parser parser = new Parser(input);
                 Command command = parser.parseCommand();
-                boolean isExecutionSuccess = command.execute(ui, tasks, storage);
-                isExit = !isExecutionSuccess;
+                command.execute(ui, tasks, storage);
+                shouldExit = command.shouldExit();
             } catch (DukeException e) {
                 System.out.println("OOPS!!! " + e.getMessage());
             }

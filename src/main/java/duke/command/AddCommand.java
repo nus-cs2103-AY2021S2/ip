@@ -15,7 +15,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean execute (Ui ui, TaskList tasks, Storage storage) {
+    public void execute (Ui ui, TaskList tasks, Storage storage) {
         System.out.println("Got it. I've added this task:");
         System.out.println("\t" + taskToBeAdded);
         tasks.add(taskToBeAdded);
@@ -23,10 +23,9 @@ public class AddCommand extends Command {
             storage.saveTasks(tasks);
         } catch (IOException err) {
             System.out.println("Error in loading storage from addCommand.execute...Check data/duke.txt");
-            return EXECUTION_FAIL;
+            this.isExit = true;
         }
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        return EXECUTION_SUCCESS;
     }
 
 }

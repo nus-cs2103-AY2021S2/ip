@@ -5,7 +5,11 @@ import duke.TaskList;
 import duke.Storage;
 
 public abstract class Command {
-    public static boolean EXECUTION_SUCCESS = true;
-    public static boolean EXECUTION_FAIL = false;
-    public abstract boolean execute(Ui ui, TaskList tasks, Storage storage);
+    protected boolean isExit = false;
+
+    public abstract void execute(Ui ui, TaskList tasks, Storage storage);
+    public boolean shouldExit() {
+        return isExit;
+    }
+
 }
