@@ -27,10 +27,10 @@ I print the tasks:
 Hmmst've... Stonks
 
 Stonks! You've done this task:
-Watch CS2103T lecture
+[T][?] Watch CS2103T lecture
 
 Stonks! You've done this task:
-Do CS2103T lecture quiz
+[D][?] Do CS2103T lecture quiz (by: 2021-01-01)
 
 I print the tasks:
 1. [T][?] Watch CS2103T lecture
@@ -40,10 +40,10 @@ I print the tasks:
 Hmmst've... Stonks
 
 Not stonks! This task has been marked as undone:
-Watch CS2103T lecture
+[T][?] Watch CS2103T lecture
 
 Not stonks! This task has been marked as undone:
-Do CS2103T lecture quiz
+[D][?] Do CS2103T lecture quiz (by: 2021-01-01)
 
 I print the tasks:
 1. [T][?] Watch CS2103T lecture
@@ -53,16 +53,16 @@ I print the tasks:
 Hmmst've... Stonks
 
 Stonks! You've done this task:
-Watch CS2103T lecture
+[T][?] Watch CS2103T lecture
 
 Stonks! You've done this task:
-Do CS2103T lecture quiz
+[D][?] Do CS2103T lecture quiz (by: 2021-01-01)
 
 Stonks! You've done this task:
-Do CS2103T ip
+[D][?] Do CS2103T ip (by: 2021-01-01)
 
 Stonks! You've done this task:
-Attend CS2101 class
+[E][?] Attend CS2101 class (at: 2021-01-01)
 
 I print the tasks:
 1. [T][?] Watch CS2103T lecture

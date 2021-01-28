@@ -9,9 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EventTaskTest {
     public static final String TEST_DESCRIPTION = "Do CS2103T quiz";
     public static final LocalDate TEST_EVENT = LocalDate.parse("2020-10-21");
-    public static final boolean TEST_DONE = false;
-    public static final EventTask STARTING_TASK = new EventTask(
-            EventTaskTest.TEST_DESCRIPTION, EventTaskTest.TEST_EVENT, EventTaskTest.TEST_DONE);
+    public static final EventTask STARTING_TASK = EventTask.createNewEventTask(
+            EventTaskTest.TEST_DESCRIPTION, EventTaskTest.TEST_EVENT);
 
     @Test
     public void testPrintStringConversion(){
@@ -45,7 +44,7 @@ public class EventTaskTest {
 
     @Test
     public void testMarkUndone() {
-        assertEquals(EventTaskTest.STARTING_TASK.markAsDone().markAsUndone().toString(),
+        assertEquals(EventTaskTest.STARTING_TASK.markAsDone().markAsDone().markAsDone().toString(),
                 "[E][\u2718] Do CS2103T quiz (at: 2020-10-21)");
     }
 }

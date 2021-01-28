@@ -8,15 +8,30 @@ import java.time.LocalDate;
 public class DeadlineTask extends Task {
     private LocalDate deadline;
 
-    /**
-     * Creates instance of DeadlineTask object.
-     * @param taskDescription The description of task.
-     * @param deadline LocalDate object of the date by which task should be completed.
-     * @param isDone Boolean flag of whether task is done or not.
-     */
-    public DeadlineTask(String taskDescription, LocalDate deadline, boolean isDone) {
+    private DeadlineTask(String taskDescription, LocalDate deadline, boolean isDone) {
         super(taskDescription, "D", isDone);
         this.deadline = deadline;
+    }
+
+    /**
+     * Creates new instance of DeadlineTask object.
+     * @param taskDescription The description of task.
+     * @param deadline LocalDate object of the date by which task should be completed.
+     * @return New DeadlineTask that is not done.
+     */
+    public static DeadlineTask createNewDeadlineTask(String taskDescription, LocalDate deadline) {
+        return new DeadlineTask(taskDescription, deadline, false);
+    }
+
+    /**
+     * Creates instance of DeadlineTask based on what was loaded from file.
+     * @param taskDescription The description of new task.
+     * @param deadline The deadline of the task.
+     * @param isDone Whether task was previously marked as done.
+     * @return DeadlineTask as loaded from file.
+     */
+    public static DeadlineTask loadDeadlineTaskFromFile(String taskDescription, LocalDate deadline, boolean isDone) {
+        return new DeadlineTask(taskDescription, deadline, isDone);
     }
 
     /**
@@ -29,30 +44,13 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Marks a Deadline as done.
-     * @return Deadline that is marked as done.
+     * Toggles a DeadlineTask between done and undone.
+     * @return Deadline that is marked as done/undone.
      */
     public DeadlineTask markAsDone() {
-        if (!this.isDone) {
-            return new DeadlineTask(this.getDescription(), this.deadline, true);
-        } else {
-            throw new UnsupportedOperationException("This task is already done.\n" +
-                    "I would have wanted to say Stonks...\n" +
-                    "but your usage of an illegal operation is Not Stonks!");
-        }
+        return new DeadlineTask(this.getDescription(), this.deadline, !this.isDone);
     }
 
-    /**
-     * Marks a Deadline as undone.
-     * @return Deadline that is marked as undone.
-     */
-    public DeadlineTask markAsUndone() {
-        if (this.isDone) {
-            return new DeadlineTask(this.getDescription(), this.deadline, false);
-        } else {
-            throw new UnsupportedOperationException("This task is already not done. Not stonks anyway!");
-        }
-    }
 
     /**
      * Converts the DeadlineTask into a string format for saving into file.

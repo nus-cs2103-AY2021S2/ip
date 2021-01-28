@@ -60,16 +60,11 @@ public abstract class Task {
     public abstract Task editDescription(String newDescription);
 
     /**
-     * Marks the Task as done.
-     * @return Task marked as done.
+     * Toggles the Task between done and undone.
+     * @return Task marked as done/undone.
      */
     public abstract Task markAsDone();
 
-    /**
-     * Marks the Task as undone.
-     * @return Task marked as undone.
-     */
-    public abstract Task markAsUndone();
 
     /**
      * Converts the Task into a string format for saving into file.

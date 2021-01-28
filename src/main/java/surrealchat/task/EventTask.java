@@ -8,15 +8,30 @@ import java.time.LocalDate;
 public class EventTask extends Task {
     private LocalDate event;
 
-    /**
-     * Creates instance of EventTask object.
-     * @param taskDescription The description of task.
-     * @param event LocalDate object of the date at which task should happen.
-     * @param isDone Boolean flag of whether task is done or not.
-     */
-    public EventTask(String taskDescription, LocalDate event, boolean isDone) {
+    private EventTask(String taskDescription, LocalDate event, boolean isDone) {
         super(taskDescription, "E", isDone);
         this.event = event;
+    }
+
+    /**
+     * Creates new instance of EventTask object.
+     * @param taskDescription The description of task.
+     * @param event LocalDate object of the date at which task should happen.
+     * @return New EventTask that is not done.
+     */
+    public static EventTask createNewEventTask(String taskDescription, LocalDate event) {
+        return new EventTask(taskDescription, event, false);
+    }
+
+    /**
+     * Creates instance of EventTask based on what was loaded from file.
+     * @param taskDescription The description of new task.
+     * @param event The event date of the task.
+     * @param isDone Whether task was previously marked as done.
+     * @return EventTask as loaded from file.
+     */
+    public static EventTask loadEventTaskFromFile(String taskDescription, LocalDate event, boolean isDone) {
+        return new EventTask(taskDescription, event, isDone);
     }
 
     /**
@@ -29,29 +44,11 @@ public class EventTask extends Task {
     }
 
     /**
-     * Marks an EventTask as done.
-     * @return EventTask that is marked as done
+     * Toggles an EventTask between done and undone.
+     * @return EventTask that is marked as done/undone.
      */
     public EventTask markAsDone() {
-        if (!this.isDone) {
-            return new EventTask(this.getDescription(), this.event, true);
-        } else {
-            throw new UnsupportedOperationException("This task is already done.\n" +
-                    "I would have wanted to say Stonks...\n" +
-                    "but your usage of an illegal operation is Not Stonks!");
-        }
-    }
-
-    /**
-     * Marks an EventTask as undone.
-     * @return EventTask that is marked as undone.
-     */
-    public EventTask markAsUndone() {
-        if (this.isDone) {
-            return new EventTask(this.getDescription(), this.event, false);
-        } else {
-            throw new UnsupportedOperationException("This task is already not done. Not stonks anyway!");
-        }
+        return new EventTask(this.getDescription(), this.event, !this.isDone);
     }
 
     /**

@@ -30,3 +30,4 @@ text-ui-test/Test_7/ACTUAL_OK_7.TXT
 text-ui-test/Test_8/ACTUAL_ERR_8.TXT
 text-ui-test/Test_8/ACTUAL_OK_8.TXT
 text-ui-test/Test_1/tasks.txt
+src/main/java/tasks.txt

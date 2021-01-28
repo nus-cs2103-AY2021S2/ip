@@ -1,10 +1,26 @@
-import surrealchat.Pair;
+import surrealchat.easteregg.EasterEgg;
+import surrealchat.easteregg.OrangEasterEgg;
+import surrealchat.easteregg.VegetalEasterEgg;
+
+import surrealchat.command.Command;
+import surrealchat.command.ToDoCommand;
+import surrealchat.command.DeadlineCommand;
+import surrealchat.command.EventCommand;
+import surrealchat.command.DoneCommand;
+import surrealchat.command.ListCommand;
+import surrealchat.command.EditCommand;
+import surrealchat.command.FindCommand;
+import surrealchat.command.DeleteCommand;
+
 import surrealchat.task.Task;
-import surrealchat.task.TaskParser;
+import surrealchat.task.TaskManagement;
+
 import surrealchat.user.UserInput;
 import surrealchat.user.UserOutput;
-import surrealchat.files.FileManagement;
 
+import surrealchat.file.FileManagement;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,14 +33,14 @@ import java.io.IOException;
 public class SurrealChat {
     protected static final String TASK_FILE_PATH = "tasks.txt";
     protected UserInput userInput;
-    protected TaskParser taskParser;
+    protected TaskManagement taskManagement;
     protected FileManagement fileManagement;
     protected UserOutput userOutput;
 
-    private SurrealChat(UserInput userInput, TaskParser taskParser,
+    private SurrealChat(UserInput userInput, TaskManagement taskManagement,
                         FileManagement fileManagement, UserOutput userOutput) {
         this.userInput = userInput;
-        this.taskParser = taskParser;
+        this.taskManagement = taskManagement;
         this.fileManagement = fileManagement;
         this.userOutput = userOutput;
     }
@@ -37,10 +53,10 @@ public class SurrealChat {
      */
     public static SurrealChat initSurrealChat(File filePath, boolean verboseFlag) {
         UserInput userInput = new UserInput(new Scanner(System.in));
-        TaskParser taskParser = new TaskParser();
+        TaskManagement taskManagement = new TaskManagement(new ArrayList<Task>());
         FileManagement fileManagement = new FileManagement(filePath);
         UserOutput userOutput = new UserOutput(verboseFlag);
-        return new SurrealChat(userInput, taskParser, fileManagement, userOutput);
+        return new SurrealChat(userInput, taskManagement, fileManagement, userOutput);
     }
 
     private void initialGreeting() {
@@ -61,48 +77,65 @@ public class SurrealChat {
             this.userInput.checkExcessArguments();
             maintainLoop = false; //Break out of infinite loop
             break;
-        case"list":
+        case "list":
             this.userInput.checkExcessArguments();
-            Pair<String, List<Task>> listPair = this.taskParser.sendListToPrint();
-            this.userOutput.printOutput(listPair);
+            Command listCommand = new ListCommand();
+            String outputList = listCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputList);
             break;
-        case "todo", "deadline", "event":
+        case "todo":
             String description = this.userInput.getInputDescription();
-            Pair<String, Pair<Task, Integer>> taskPair =
-                    this.taskParser.parseUserTaskInput(userCommand, description);
-            this.userOutput.printOutput(taskPair);
+            Command addToDoCommand = new ToDoCommand(description);
+            String outputString = addToDoCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
+            break;
+        case "deadline":
+            description = this.userInput.getInputDescription();
+            Command addDeadlineCommand = new DeadlineCommand(description);
+            outputString = addDeadlineCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
+            break;
+        case "event":
+            description = this.userInput.getInputDescription();
+            Command addEventCommand = new EventCommand(description);
+            outputString = addEventCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
             break;
         case "edit":
             description = this.userInput.getInputDescription(); //Get raw form
-            Pair<String, Task> editPair = this.taskParser.editDescription(description);
-            this.userOutput.printOutput(editPair);
+            Command editCommand = new EditCommand(description);
+            outputString = editCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
             break;
         case "done":
-            description = this.userInput.getInputDescription(); //Get raw form
-            int taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-            Pair<String, Task> donePair = this.taskParser.markAsDone(taskNumber);
-            this.userOutput.printOutput(donePair);
-            break;
-        case "undone":
-            description = this.userInput.getInputDescription(); //Get raw form
-            taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-            Pair<String, Task> undonePair = this.taskParser.markAsUndone(taskNumber);
-            this.userOutput.printOutput(undonePair);
+            String taskNumberString = this.userInput.getInputDescription(); //Get raw form
+            Command doneCommand = new DoneCommand(taskNumberString);
+            outputString = doneCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
             break;
         case "delete":
-            description = this.userInput.getInputDescription(); //Get raw form
-            taskNumber = this.userInput.getInputNumber(description); //Process to obtain int
-            Pair<String, Pair<Task, Integer>> deletePair = this.taskParser.deleteTask(taskNumber);
-            this.userOutput.printOutput(deletePair);
+            taskNumberString = this.userInput.getInputDescription(); //Get raw form
+            Command deleteCommand = new DeleteCommand(taskNumberString);
+            outputString = deleteCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
             break;
         case "find":
             String keyword = this.userInput.getInputDescription();
-            Pair<String, List<Task>> searchPair = this.taskParser.searchTasks(keyword);
-            this.userOutput.printOutput(searchPair);
+            Command findCommand = new FindCommand(keyword);
+            outputString = findCommand.execute(this.taskManagement);
+            this.userOutput.printOutput(outputString);
             break;
-        case "orang", "vegetal":
+        case "orang":
             this.userInput.checkExcessArguments();
-            this.printEasterEgg(userCommand);
+            EasterEgg orangEasterEgg = new OrangEasterEgg();
+            outputString = orangEasterEgg.execute();
+            this.userOutput.printEasterEggOutput(outputString);
+            break;
+        case "vegetal":
+            this.userInput.checkExcessArguments();
+            EasterEgg vegetalEasterEgg = new VegetalEasterEgg();
+            outputString = vegetalEasterEgg.execute();
+            this.userOutput.printEasterEggOutput(outputString);
             break;
         default:
             this.userInput.scannerNextLine(); //Clear input line
@@ -124,8 +157,8 @@ public class SurrealChat {
         //Try to read from file
         try {
             List<String> fileLines = surrealChat.fileManagement.loadTaskFile();
-            Pair<String, List<Task>> filePair = surrealChat.taskParser.parseFileLines(fileLines);
-            surrealChat.userOutput.printOutput(filePair);
+            String loadString = surrealChat.taskManagement.parseFileLines(fileLines);
+            surrealChat.userOutput.printVerbose(loadString);
         } catch (IOException e) {
             surrealChat.userOutput.printException(e);
         }
@@ -143,7 +176,7 @@ public class SurrealChat {
         }
 
         //Save and exit
-        List<String> fileTaskList = surrealChat.taskParser.convertTasksForFile();
+        List<String> fileTaskList = surrealChat.taskManagement.convertTasksForFile();
         surrealChat.fileManagement.saveTasksToFile(fileTaskList);
         surrealChat.userInput.closeScanner();
         surrealChat.exitProgram();

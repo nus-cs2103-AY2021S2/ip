@@ -7,8 +7,8 @@ list
 done 1
 done 2
 list
-undone 1
-undone 2
+done 1
+done 2
 list
 done 1
 done 2

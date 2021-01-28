@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToDoTaskTest {
     public static final String TEST_DESCRIPTION = "Do CS2103T quiz";
-    public static final boolean TEST_DONE = false;
-    public static final ToDoTask STARTING_TASK = new ToDoTask(ToDoTaskTest.TEST_DESCRIPTION, ToDoTaskTest.TEST_DONE);
+    public static final ToDoTask STARTING_TASK = ToDoTask.createNewToDoTask(TEST_DESCRIPTION);
 
     @Test
     public void testPrintStringConversion(){
@@ -47,7 +46,7 @@ public class ToDoTaskTest {
 
     @Test
     public void testMarkUndone() {
-        assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().markAsUndone().toString(),
+        assertEquals(ToDoTaskTest.STARTING_TASK.markAsDone().markAsDone().markAsDone().toString(),
                 "[T][\u2718] Do CS2103T quiz");
     }
 }

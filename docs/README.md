@@ -161,18 +161,24 @@ Outcome if your description is empty but you still put /edit:
 Wrong formatting. Did you forget to put '/edit' and/or the description? Not stonks!
 ```
 
-### Mark task as done - `done`
+### Mark task as done or undone - `done`
 Format: `done TASK_NUMBER`
 
-Key this command in along with task number to put a tick for that task.
+Key this command in along with task number. This toggles the done status
 
 Example of usage:
 
 `done 1`
 
-Expected outcome:
+Expected outcome if undone task is marked as done:
 ```
 Stonks! You've done this task:
+Do CS2103T lecture quiz
+```
+
+Expected outcome if done task is marked as undone:
+```
+Not stonks! This task has been marked as undone: 
 Do CS2103T lecture quiz
 ```
 
@@ -196,47 +202,6 @@ A task number is invalid if any of the following conditions are met:
 Outcome if task number is invalid:
 ```
 Invalid task number. Not stonks!
-```
-
-Outcome if task was already done:
-```
-This task is already done.
-I would have wanted to say Stonks...
-but your usage of an illegal operation is Not Stonks!
-```
-
-### Mark task as undone - `undone`
-Format: `undone TASK_NUMBER`
-
-Key this command in along with task number to put a cross for that task.
-
-Example of usage:
-
-`undone 1`
-
-Expected outcome:
-```
-Not stonks! This task has been marked as undone: 
-Do CS2103T lecture quiz
-```
-
-Outcome if number field is empty:
-```
-Did you forget to put a number for the command you just typed in? Not stonks!
-```
-Outcome if number field has anything other than number or improper number (e.g. `undone meme` or `undone 1b`):
-```
-Did you put something other than a number or did you put a number incorrectly? Not stonks!
-```
-
-Outcome if task number is invalid:
-```
-Invalid task number. Not stonks!
-```
-
-Outcome if task was not done in the first place:
-```
-This task is already not done. Not stonks anyway!
 ```
 
 ### Delete task - `delete`

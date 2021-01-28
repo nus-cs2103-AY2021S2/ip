@@ -21,20 +21,6 @@ Wrong formatting. Did you forget to put '/at'? Not stonks!
 
 Input date format is incorrect. Not stonks!
 
-This task is already done.
-I would have wanted to say Stonks...
-but your usage of an illegal operation is Not Stonks!
-
-This task is already not done. Not stonks anyway!
-
-Did you put something other than a number or did you put a number incorrectly? Not stonks!
-
-Invalid task number. Not stonks!
-
-Invalid task number. Not stonks!
-
-Invalid task number. Not stonks!
-
 Did you put something other than a number or did you put a number incorrectly? Not stonks!
 
 Invalid task number. Not stonks!

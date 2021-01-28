@@ -11,9 +11,7 @@ Did you forget to put a number for the command you just typed in? Not stonks!
 
 Invalid task number. Not stonks!
 
-Did you forget to put a number for the command you just typed in? Not stonks!
-
-Invalid task number. Not stonks!
+Command not recognised. Not stonks!
 
 Did you forget to put a number for the command you just typed in? Not stonks!
 

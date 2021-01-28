@@ -16,11 +16,9 @@ event Attend CS2101 class /at 2021-01-01
 list
 done 1
 done 2
-done 1
 list
-undone 1
-undone 1
-undone 2
+done 1
+done 2
 list
 done 1
 done 2
@@ -31,10 +29,6 @@ done notInt
 done 0
 done -1
 done 5
-undone notInt
-undone 0
-undone 5
-undone -1
 find
 find CS2101
 edit
