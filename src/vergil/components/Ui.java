@@ -32,6 +32,15 @@ public class Ui {
         System.out.println("Error! " + message);
     }
 
+    public void displayFindResult(TaskList resultsList) {
+        if (resultsList.getLength() > 0) {
+            System.out.println("Here's what I found: ");
+            displayTaskList(resultsList);
+        } else {
+            System.out.println("Oops! I couldn't find any task with the given keyword.");
+        }
+    }
+
     public void displayBye() {
         System.out.println("Bye. See you soon!");
     }

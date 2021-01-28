@@ -73,6 +73,22 @@ public class TaskList {
         }
     }
 
+    public int getLength() {
+        return tasks.size();
+    }
+
+    public TaskList find(String keyword) {
+        TaskList subList = new TaskList();
+
+        for (Task t:tasks) {
+            if (t.getDescription().contains(keyword)) {
+                subList.add(t);
+            }
+        }
+
+        return subList;
+    }
+
     public String toSaveString() {
         StringBuilder str = new StringBuilder();
 

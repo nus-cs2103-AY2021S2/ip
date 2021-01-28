@@ -78,6 +78,11 @@ public class Vergil {
                     ui.displaySuccess();
                     storage.save(taskList);
                     break;
+
+                case FIND:
+                    TaskList resultsList = taskList.find(cmd.getDesc());
+                    ui.displayFindResult(resultsList);
+                    break;
                 }
             } catch (VergilException e) {
                 ui.displayError(e.getMessage());

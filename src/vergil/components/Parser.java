@@ -62,6 +62,14 @@ public class Parser {
                         LocalDateTime.parse(command.split(" /at ")[1], DateTimeFormatter.ofPattern("d/M/y HHmm")),
                         0);
 
+            case "find":
+                return new Command(
+                        CommandType.FIND,
+                        command.split(" ", 2)[1],
+                        null,
+                        0
+                );
+
             default:
                 throw new VergilException("Unable to resolve command.");
             }
