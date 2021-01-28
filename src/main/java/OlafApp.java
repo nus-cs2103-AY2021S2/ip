@@ -1,12 +1,14 @@
-import common.PrintText;
-import io.Parser;
-import io.Ui;
-import storage.Storage;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+package src.main.java;
+
+import src.main.java.common.PrintText;
+import src.main.java.io.Parser;
+import src.main.java.io.Ui;
+import src.main.java.storage.Storage;
+import src.main.java.task.Deadline;
+import src.main.java.task.Event;
+import src.main.java.task.Task;
+import src.main.java.task.TaskList;
+import src.main.java.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.IOException;

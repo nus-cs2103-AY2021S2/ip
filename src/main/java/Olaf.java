@@ -1,6 +1,8 @@
-import io.Ui;
-import storage.Storage;
-import task.TaskList;
+package src.main.java;
+
+import src.main.java.io.Ui;
+import src.main.java.storage.Storage;
+import src.main.java.task.TaskList;
 
 import java.io.IOException;
 

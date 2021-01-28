@@ -1,9 +1,9 @@
-package storage;
+package src.main.java.storage;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import src.main.java.task.Deadline;
+import src.main.java.task.Event;
+import src.main.java.task.Task;
+import src.main.java.task.Todo;
 
 import java.io.File;
 import java.io.IOException;

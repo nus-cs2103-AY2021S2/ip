@@ -1,7 +1,7 @@
-package io;
+package src.main.java.io;
 
-import common.PrintText;
-import task.Task;
+import src.main.java.common.PrintText;
+import src.main.java.task.Task;
 
 public class Ui {
 

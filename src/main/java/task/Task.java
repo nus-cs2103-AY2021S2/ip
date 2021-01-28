@@ -1,4 +1,6 @@
-package task;// adapted from partial solution on the module webpage
+package src.main.java.task;
+
+// adapted from partial solution on the module webpage
 
 public class Task {
     protected String description;
