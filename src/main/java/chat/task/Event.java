@@ -3,6 +3,7 @@ package chat.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 
 import chat.ChatException;
 
@@ -38,6 +39,7 @@ public class Event extends Task {
             throw new ChatException("wrong instruction for event\n" + formatStr);
         } else if (str.strip().equals("event")) {
             //i.e. event
+            //i.e. event(followed by one or more empty spaces)
             throw new ChatException("event name, start and end date/time missing\n" + formatStr);
         } else if (!str.startsWith("event ")) {
             //i.e. eventfinal exam
@@ -73,23 +75,23 @@ public class Event extends Task {
             throw new ChatException("missing '-'\n" + formatStr);
         }
 
-        String[] timeArr = tempArr[1].split("-");
+        String[] timeArr = tempArr[1].strip().split("-");
         if (timeArr.length < 2) {
             //i.e. event final exam /at 5-
             throw new ChatException("missing start or end date/time\n" + formatStr);
-        } 
-        
-        try {
-            String startStr = timeArr[0].strip();
-            String endStr = timeArr[1].strip();
-            LocalDateTime startDateTime = LocalDateTime.parse(startStr, inputFormatter);
-            LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
-            if (startDateTime.isAfter(endDateTime)) {
-                throw new ChatException("Start date/time is after end date/time\n" + formatStr);
+        } else {
+            try {
+                String startStr = timeArr[0].strip();
+                String endStr = timeArr[1].strip();
+                LocalDateTime startDateTime = LocalDateTime.parse(startStr, inputFormatter);
+                LocalDateTime endDateTime = LocalDateTime.parse(endStr, inputFormatter);
+                if (startDateTime.isAfter(endDateTime)) {
+                    throw new ChatException("Start date/time is after end date/time\n" + formatStr);
+                }
+                return new Event(tempArr[0].strip(), startDateTime, endDateTime);
+            } catch (DateTimeParseException e) {
+                throw new ChatException("Start or end date/time is of wrong format\n" + formatStr);
             }
-            return new Event(tempArr[0].strip(), startDateTime, endDateTime);
-        } catch (DateTimeParseException e) {
-            throw new ChatException("Start or end date/time is of wrong format\n" + formatStr);
         }
         
     }
