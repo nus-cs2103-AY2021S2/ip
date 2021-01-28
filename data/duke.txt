@@ -1,5 +1,0 @@
-D,0,11,do homework,11,no idea :-p
-T,0,13,Dab on Homies
-E,0,7,Ninja_0,7,3pm EST
-T,0,13,Dab on Homies
-E,0,7,Ninja_0,7,3pm EST
