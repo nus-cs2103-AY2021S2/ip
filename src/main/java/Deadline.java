@@ -1,21 +1,41 @@
 import java.time.LocalDate;
 
+/**
+ * Represents a deadline task
+ */
 public class Deadline extends Task{
     LocalDate deadline;
     String time;
 
+    /**
+     * Constructor of a deadline
+     * @param name Name of the deadline
+     * @param deadline The deadline of the task
+     * @param time The due time of the task
+     */
     public Deadline(String name, LocalDate deadline, String time) {
         super(name);
         this.deadline = deadline;
         this.time = time;
     }
 
+    /**
+     * Constructor of a deadline
+     * @param name Name of the deadline
+     * @param done Status of the task
+     * @param deadline The deadline of the task
+     * @param time The due time of the task
+     */
     public Deadline(String name, boolean done, LocalDate deadline, String time) {
         super(name, done);
         this.deadline = deadline;
         this.time = time;
     }
 
+    /**
+     * Prints out the details of the Deadline, including the name, the due date, and due time.
+     * @return A string representing the deadline
+     */
     @Override
     public String toString() {
         String head = "[D][ ] ";

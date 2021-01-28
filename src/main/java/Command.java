@@ -1,3 +1,6 @@
+/**
+ * Represents the different types of possible commands.
+ */
 enum Command {
     LIST,
     TODO,

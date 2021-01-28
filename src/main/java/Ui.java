@@ -2,22 +2,38 @@ import java.util.Scanner;
 
 public class Ui {
 
-    public Ui() {
-    }
-
+    /**
+     * Prints an error message when the file containing the list of tasks
+     * cannot be found.
+     */
     public void showLoadingError() {
         System.out.println("There was an error in loading the file as it could not be found.");
     }
 
+    /**
+     * Prints a greeting message when Duke is initialised.
+     */
     public void showGreetings() {
         System.out.println("Hello! I'm Bob :D\n" + "What can I do for you?");
     }
 
+    /**
+     * Takes in user's input.
+     * @return user command
+     */
     public String listenToCommand() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * Provide relevant responses to user and accurate actions according to
+     * user's command.
+     * @param userInput User's command
+     * @param tasks The list of tasks user has
+     * @param storage The storage containing the saved list of task
+     * @return A boolean value indicating whether to continue taking in commands or not
+     */
     public boolean respondToCommand(String userInput, TaskList tasks, Storage storage) {
         Parser parser = new Parser();
         Command command = parser.parseCommand(userInput);
@@ -32,7 +48,7 @@ public class Ui {
             case DONE:
                 try {
                     int index = parser.parseNumber(userInput, 5);
-                    Task updatedTask = tasks.changeStatus(index, true);
+                    Task updatedTask = tasks.changeStatus(index - 1, true);
                     System.out.println("Good job! This task has been marked as done :)\n" + updatedTask);
                     storage.rewrite(tasks);
                 } catch (DukeException e) {
