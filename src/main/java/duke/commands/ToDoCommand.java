@@ -10,6 +10,10 @@ import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
  */
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Add a todo task\n"
+            + "Usage: todo <task_description>\n"
+            + "Example: todo Go CNY shopping";
 
     private final String taskName;
 

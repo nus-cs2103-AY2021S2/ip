@@ -11,6 +11,10 @@ import static duke.utils.Messages.MESSAGE_NO_MATCHES;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Find tasks that contains specific keywords or phrases\n"
+            + "Usage: find <keyword_or_phrase>"
+            + "Example: find book";
 
     private final String searchWord;
 

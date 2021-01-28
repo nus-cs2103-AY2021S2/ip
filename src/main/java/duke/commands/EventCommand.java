@@ -10,6 +10,10 @@ import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
  */
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Add an event task\n"
+            + "Usage: event <task_description> /at <event_time>\n"
+            + "Example: event Project Meeting /at NUS SoC COM1-0210";
 
     private final String taskName;
     private final String eventTime;

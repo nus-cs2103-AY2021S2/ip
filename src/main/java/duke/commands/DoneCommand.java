@@ -8,6 +8,10 @@ import static duke.utils.Messages.MESSAGE_INVALID_INDEX;
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Mark a task as completed\n"
+            + "Usage: done <task_number>"
+            + "Example: done 2";
 
     private final int index;
 

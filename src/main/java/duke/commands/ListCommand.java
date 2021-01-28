@@ -9,6 +9,9 @@ import static duke.utils.Messages.MESSAGE_SHOW_TASKLIST;
  */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Print the list of current tasks\n"
+            + "Usage: list";
 
     @Override
     public CommandResult execute() {

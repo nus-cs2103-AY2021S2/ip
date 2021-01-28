@@ -11,6 +11,10 @@ import static duke.utils.Messages.MESSAGE_TASKLIST_SIZE_FORMAT;
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+    public static final String MESSAGE_USAGE = "Command Word: " + COMMAND_WORD + "\n"
+            + "Description: Delete a task\n"
+            + "Usage: delete <task_number>\n"
+            + "Example: delete 2";
 
     private final int index;
 

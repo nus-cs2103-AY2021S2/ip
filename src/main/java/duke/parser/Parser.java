@@ -138,10 +138,10 @@ public class Parser {
      *
      * @param arguments user input arguments string
      * @return {@code EventCommand}
-     * @throws NoDescriptionException if the description of the task is empty
+     * @throws NoDescriptionException      if the description of the task is empty
      * @throws InvalidDescriptionException if the format of the event time is invalid
      */
-    private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException, 
+    private Command parseArgumentsForEvent(String arguments) throws NoDescriptionException,
             InvalidDescriptionException {
         if (arguments.isBlank()) {
             throw new NoDescriptionException("OOPS!!! The description of a task cannot be empty.");
