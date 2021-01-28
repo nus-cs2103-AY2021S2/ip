@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Parser {
@@ -13,10 +14,10 @@ public class Parser {
             input = scanner.nextLine();
             try {
                 if (!(input.contains("todo") || input.contains("event") || input.contains("deadline")
-                        || input.contains("list") || input.contains("done") || input.contains("delete"))) {
+                        || input.contains("list") || input.contains("done") || input.contains("delete") || input.contains("find"))) {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 } else if (input.equals("todo") || input.equals("event") || input.equals("deadline")
-                        || input.equals("done") || input.equals("delete")) {
+                        || input.equals("done") || input.equals("delete") || input.equals("find")) {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }                                // can add in more exceptions
             } catch (DukeException e) {
@@ -50,7 +51,6 @@ public class Parser {
                                 + arrayList.get(x - 1).description);
                         arrayList.set(x - 1, arrayList.get(x - 1).markAsDone());
                         System.out.println("--------------------------");
-
                     }
 
                 } catch (DukeException e) {
@@ -135,12 +135,32 @@ public class Parser {
                     System.out.println(e.getMessage());
                     System.out.println("--------------------------");
                 }
+
+            } else if (input.contains("find") && !(input.equals("find"))) {
+                System.out.println("--------------------------");
+                System.out.println("Here are the matching tasks in your list:");
+
+                ArrayList<Task> tt = new ArrayList<>();
+
+                for (Task task : arrayList) {
+                    tt.add(task);
+                }
+
+                for (Iterator<Task> iterator = tt.iterator(); iterator.hasNext();) {
+                    Task ttt = iterator.next();
+                    if(!ttt.description.contains(input.substring(5))) {
+                        iterator.remove();
+                    }
+                }
+
+                for (Task m : tt) {
+                    System.out.print(m.index + ". " + m);
+                    System.out.print("\n");
+                }
+                System.out.println("--------------------------");
             }
             new Storage().savingFile(arrayList, path);
         }
+
     }
-
-
-
-
 }
