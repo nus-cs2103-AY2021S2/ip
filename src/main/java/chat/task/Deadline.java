@@ -6,22 +6,46 @@ import java.time.format.DateTimeParseException;
 
 import chat.ChatException;
 
+/**
+ * Deadline is a type of <b>task</b> with an <b>end</b> date and time.
+ */
 public class Deadline extends Task {
 
     private LocalDateTime end;
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
-    
+
+    /**
+     * Initialises Deadline object.
+     * <p>Boolean done has been set to false by default.</p>
+     * 
+     * @param name Name or description of the task.
+     * @param end End date and time of the task.
+     */
     private Deadline (String name, LocalDateTime end) {
         super(name);
         this.end = end;
     }
-    
+
+    /**
+     * Initialises Deadline object.
+     * 
+     * @param done Boolean that tells if task is completed.
+     * @param name Name or description of the task.
+     * @param end End date and time of the task.
+     */
     public Deadline (boolean done, String name, String end) { 
         super(done, name);
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
+    /**
+     * Static method that creates a Deadline object.
+     * 
+     * @param str Inputted command string from user to Chat the Cat.
+     * @return Deadline object. 
+     * @throws ChatException If format of command is wrong.
+     */
     public static Deadline createDeadline (String str) throws ChatException {
         String formatStr = "Please input with this format:\n" + 
                 "deadline [name] /by [end date/time]\n" +
@@ -76,14 +100,31 @@ public class Deadline extends Task {
         
     }
 
+    /**
+     * Returns the end date and time of the task.
+     * 
+     * @return End date and time of the task.
+     */
     public LocalDateTime getEnd() {
         return this.end;
     }
 
+    /**
+     * Returns a comma separated string of all parameters.
+     *
+     * @return Comma separated string with all parameters listed out.
+     */
     public String allParameterStr() {
         return String.format("D,%s,%s,%s", this.getDone(), this.getName(), this.getEnd().format(inputFormatter));
     }
-    
+
+    /**
+     * Returns a string that shows the details of the task.
+     * <p>[ ] will be displayed if done = false.</p>
+     * <p>[X] will be displayed if done = true.</p>
+     *
+     * @return String showing details of task, i.e. [D][ ] name (by: end).
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.getEnd().format(displayFormatter));

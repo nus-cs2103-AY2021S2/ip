@@ -11,16 +11,28 @@ import chat.task.Todo;
 import chat.task.Deadline;
 import chat.task.Event;
 
+/**
+ * Storage class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    //deals with loading tasks from the file and saving tasks in the file
     
     private Path filePath;
-    
+
+    /**
+     * Initialises Storage object.
+     * 
+     * @param strFilePath Path of the file that is read and written to.
+     */
     public Storage(String strFilePath) {
         this.filePath = Paths.get(strFilePath);
     }
 
-    //Save task data if there is change in task data
+    /**
+     * If there is a change in data from the file, this method saves the new data to the file.
+     * 
+     * @param tasks TaskList object that contains a list of tasks.
+     * @throws ChatException If there is error loading file or file cannot be found.
+     */
     public void save(TaskList tasks) throws ChatException {
         try {
             if (!tasks.equals(load())) {
@@ -35,8 +47,13 @@ public class Storage {
         }
     }
 
-    //load once Chat starts up
-    //returns task array from saved data
+    /**
+     * Loads data of tasks from file and stores them in a list of tasks.
+     * <p>An empty list of tasks is created if file is empty.</p>
+     * 
+     * @return List of tasks loaded from data in file.
+     * @throws ChatException If there is error loading file or file cannot be found.
+     */
     public ArrayList<Task> load() throws ChatException {
         try {
             ArrayList<Task> taskListFromFile = new ArrayList<>();

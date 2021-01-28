@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Unit testing class for functions in Deadline class
+ */
+
 public class DeadlineTest {
 
     private static String formatStr = "Please input with this format:\n" +

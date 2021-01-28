@@ -7,10 +7,19 @@ import chat.command.DeleteCommand;
 import chat.command.AddCommand;
 import chat.command.ExitCommand;
 
+/**
+ * Parser class deals with making sense of user command.
+ */
+
 public class Parser {
-    //deals with making sense of user command
-    
-    //parse command
+
+    /**
+     * Parses command to their respective commands.
+     * 
+     * @param str Inputted command string from user to Chat the Cat.
+     * @return Command object.
+     * @throws ChatException If command is not known by Chat the Cat.
+     */
     public static Command parse(String str) throws ChatException {
         if (str.equals("list")) {
             return new ListCommand();
