@@ -124,4 +124,29 @@ public class LogicHandler {
             System.out.println(e);
         }
     }
+
+    public void find(String input, List<Task> list) {
+        try {
+            Find find = new Find();
+
+            String itemToFind = input.split(" ", 2)[1];
+            List<Task> newList = find.contains(itemToFind, list);
+
+            String temp = "";
+
+            for (int i = 0; i < newList.size(); i++) {
+                temp += String.format("%d. %s", i + 1, newList.get(i));
+                if (i != newList.size() - 1) {
+                    temp += "\n";
+                }
+            }
+            System.out.println(temp);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Oops, your find requires a string description to find a match.");
+        }
+    }
+
+    public void add(List<Task> list, Task t) {
+        list.add(t);
+    }
 }

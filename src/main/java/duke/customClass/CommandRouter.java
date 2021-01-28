@@ -40,6 +40,9 @@ public class CommandRouter {
         case DELETE:
             logic.delete(input, tasks.getList());
             break;
+        case FIND:
+            logic.find(input, tasks.getList());
+            break;
         case ERROR:
             System.out.println("Oops, that is not a command I support.");
             break;

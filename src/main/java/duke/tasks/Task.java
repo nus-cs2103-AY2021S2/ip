@@ -44,6 +44,11 @@ public class Task {
      * Generates the string to be saved for the next user session locally.
      * @return string representing task state.
      */
+
+    public String getDescription() {
+        return description;
+    }
+
     public String saveString() {
         return isDone ? "Task *** 1 *** " + description : "Task *** 0 *** " + description;
     }
