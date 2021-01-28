@@ -3,20 +3,20 @@ package chat.task;
 /**
  * An abstract class representing the basic form of a task.
  * <p>A task has a <b>name</b> (or description) to describe the task 
- * and a boolean <b>done</b> that tracks if the task has been completed.
- * <p>The boolean <b>done</b> is set to false by default.</p>
+ * and a boolean <b>isDone</b> that tracks if the task has been completed.
+ * <p>The boolean <b>isDone</b> is set to false by default.</p>
  */
 public abstract class Task {
     
     private String name;
-    private boolean done = false;
+    private boolean isDone = false;
     
     protected Task (String name) {
         this.name = name;
     }
     
-    protected Task (boolean done, String name) { 
-        this.done = done; 
+    protected Task (boolean isDone, String name) { 
+        this.isDone = isDone; 
         this.name = name;
     }
 
@@ -30,20 +30,20 @@ public abstract class Task {
     }
 
     /**
-     * Returns boolean done that shows if task has been completed.
+     * Returns boolean isDone that shows if task has been completed.
      * If true, then task is complete.
      * 
-     * @return Boolean done that tells if task is completed.
+     * @return Boolean isDone that tells if task is completed.
      */
-    public boolean getDone() {
-        return this.done;
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**
-     * Marks task as complete by setting done to true.
+     * Marks task as complete by setting isDone to true.
      */
     public void completed() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -55,14 +55,14 @@ public abstract class Task {
 
     /**
      * Returns a string that shows the details of the task.
-     * <p>[ ] will be displayed if done = false.</p>
-     * <p>[X] will be displayed if done = true.</p>
+     * <p>[ ] will be displayed if isDone = false.</p>
+     * <p>[X] will be displayed if isDone = true.</p>
      * 
      * @return String showing details of task, i.e. [ ] name.
      */
     @Override
     public String toString() {
-        if (this.getDone()) {
+        if (this.getIsDone()) {
             return "[X] " + this.getName();
         } else {
             return "[ ] " + this.getName();

@@ -35,8 +35,8 @@ public class DeleteCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
         Task task = checkCommandIndex(tasks, "delete", this.inputStr);
-        tasks.getTaskList().remove(task);
-        ui.printDeleteSuccess(task, tasks.getTaskList().size());
+        tasks.getTasks().remove(task);
+        ui.printDeleteSuccess(task, tasks.getTasks().size());
         storage.save(tasks);
     }
     

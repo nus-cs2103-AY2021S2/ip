@@ -37,7 +37,7 @@ public class Storage {
         try {
             if (!tasks.equals(load())) {
                 String newStr = "";
-                for (Task t : tasks.getTaskList()) {
+                for (Task t : tasks.getTasks()) {
                     newStr += t.allParameterStr() + "\n";
                 }
                 Files.writeString(filePath, newStr);
@@ -56,7 +56,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws ChatException {
         try {
-            ArrayList<Task> taskListFromFile = new ArrayList<>();
+            ArrayList<Task> tasksFromFile = new ArrayList<>();
             if (!Files.exists(filePath)) {
                 if (!Files.exists(filePath.getParent())) {
                     Files.createDirectory(filePath.getParent());
@@ -69,17 +69,17 @@ public class Storage {
                     for (String s : strArr) {
                         String[] parArr = s.split(","); //parameter array
                         if (parArr[0].equals("T")) {
-                            taskListFromFile.add(new Todo(Boolean.parseBoolean(parArr[1]), parArr[2]));
+                            tasksFromFile.add(new Todo(Boolean.parseBoolean(parArr[1]), parArr[2]));
                         } else if (parArr[0].equals("D")) {
-                            taskListFromFile.add(new Deadline(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3]));
+                            tasksFromFile.add(new Deadline(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3]));
                         } else {
                             //E
-                            taskListFromFile.add(new Event(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3], parArr[4]));
+                            tasksFromFile.add(new Event(Boolean.parseBoolean(parArr[1]), parArr[2], parArr[3], parArr[4]));
                         }
                     }
                 }
             }
-            return taskListFromFile;
+            return tasksFromFile;
         } catch (IOException e) {
             throw new ChatException("Error loading file");
         }

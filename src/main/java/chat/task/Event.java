@@ -19,7 +19,7 @@ public class Event extends Task {
 
     /**
      * Initialises Event object.
-     * <p>Boolean done has been set to false by default.</p>
+     * <p>Boolean isDone has been set to false by default.</p>
      * 
      * @param name Name or description of the task.
      * @param start Start date and time of the task.
@@ -34,13 +34,13 @@ public class Event extends Task {
     /**
      * Initialises Event object.
      * 
-     * @param done Boolean that tells if task is completed.
+     * @param isDone Boolean that tells if task is completed.
      * @param name Name or description of the task.
      * @param start Start date and time of the task.
      * @param end End date and time of the task.
      */
-    public Event (boolean done, String name, String start, String end) { 
-        super(done, name);
+    public Event (boolean isDone, String name, String start, String end) { 
+        super(isDone, name);
         this.start = LocalDateTime.parse(start, inputFormatter);
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
@@ -146,14 +146,14 @@ public class Event extends Task {
      * @return Comma separated string with all parameters listed out.
      */
     public String allParameterStr() {
-        return String.format("E,%s,%s,%s,%s", this.getDone(), this.getName(), this.getStart().format(inputFormatter),
+        return String.format("E,%s,%s,%s,%s", this.getIsDone(), this.getName(), this.getStart().format(inputFormatter),
                 this.getEnd().format(inputFormatter));
     }
 
     /**
      * Returns a string that shows the details of the task.
-     * <p>[ ] will be displayed if done = false.</p>
-     * <p>[X] will be displayed if done = true.</p>
+     * <p>[ ] will be displayed if isDone = false.</p>
+     * <p>[X] will be displayed if isDone = true.</p>
      *
      * @return String showing details of task, i.e. [E][ ] name (at: start - end).
      */
