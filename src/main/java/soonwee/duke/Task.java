@@ -1,3 +1,5 @@
+package soonwee.duke;
+
 public class Task {
 
     public String taskDesc;

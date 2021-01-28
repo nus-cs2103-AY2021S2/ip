@@ -1,3 +1,4 @@
+package soonwee.duke;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

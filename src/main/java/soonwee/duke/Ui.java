@@ -1,3 +1,4 @@
+package soonwee.duke;
 public class Ui {
     public String display;
 

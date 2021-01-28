@@ -1,3 +1,4 @@
+package soonwee.duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -42,7 +43,7 @@ public class Storage {
 
     public void readFile() {
         try {
-            File fileObject = new File("../../../data/tasks.txt");
+            File fileObject = new File("data/tasks.txt");
             Scanner reader = new Scanner(fileObject);
             while (reader.hasNextLine()) {
                 String data = reader.nextLine();
@@ -84,7 +85,7 @@ public class Storage {
 
     public void writeFile() {
         try {
-            FileWriter fileWriter = new FileWriter("../../../data/tasks.txt");
+            FileWriter fileWriter = new FileWriter("data/tasks.txt");
             for (int i = 0; i < this.taskList.getSize(); i++) {
                 fileWriter.write(this.taskList.getTask(i).toString() + "\n");
             }

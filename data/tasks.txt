@@ -1,6 +1,7 @@
 [E][ ] sleep (at: Jan 10 2019 18:00)
 [T][ ] sleeper
-[D][X] finsih hw (by: Jan 10 2019 14:00)
 [T][ ] fly higher
 [D][ ] noob (by: Jan 01 2010 12:00)
 [T][ ] read book
+[T][ ] hello
+[D][ ] go sleep (by: Jan 10 2019 14:00)

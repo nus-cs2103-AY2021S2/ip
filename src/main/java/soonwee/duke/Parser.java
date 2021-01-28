@@ -1,3 +1,4 @@
+package soonwee.duke;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -60,12 +61,13 @@ public class Parser {
 
     public LocalDateTime dateFormatter(String cmd) {
         int nextChar = -1;
+        int nextWord = 4;
         if(cmd.indexOf("/by") != -1) {
             nextChar = cmd.indexOf("/by");
         } else if(cmd.indexOf("/at") != -1) {
             nextChar = cmd.indexOf("/at");
         }
-        String date = cmd.substring(nextChar + 4);
+        String date = cmd.substring(nextChar + nextWord);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
         LocalDateTime formatDate = LocalDateTime.parse(date, formatter);
         return formatDate;

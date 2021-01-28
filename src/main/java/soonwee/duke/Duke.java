@@ -1,3 +1,4 @@
+package soonwee.duke;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -65,7 +66,7 @@ public class Duke {
      */
     public static TaskList performSecondTask() throws IOException {
         String cmd = new String();
-        Storage storage = new Storage("../../../data/tasks.txt");
+        Storage storage = new Storage("data/tasks.txt");
         BufferedReader input = new
             BufferedReader(new InputStreamReader(System.in));
         while (true) {
