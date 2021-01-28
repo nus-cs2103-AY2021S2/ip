@@ -6,8 +6,9 @@ import TaskList.TaskList;
 import Ui.Ui;
 
 public class ByeCommand extends Command {
+
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList t, Ui ui, Storage storage) {
         ui.goodbye();
     }
 

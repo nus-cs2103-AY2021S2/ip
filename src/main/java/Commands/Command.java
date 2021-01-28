@@ -16,9 +16,7 @@ public abstract class Command {
         this.storage = storage;
     }
 
-    Command() {
-
-    }
+    Command() { }
 
     public abstract void execute(TaskList t, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();
