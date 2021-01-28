@@ -53,6 +53,8 @@ public class Parser {
             return parseListCommand(inputCommand);
         case EXIT_COMMAND:
             return parseExitCommand(inputCommand);
+        case FIND_COMMAND:
+            return parseFindCommand(inputCommand);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -260,6 +262,17 @@ public class Parser {
         ParseException(String message){
             super(message);
         }
+    }
+
+    public Command parseFindCommand(String input) throws DukeException {
+        if (input.toLowerCase().matches("^" + FIND_COMMAND +"\\s*$")) {
+            throw new DukeException("The description of a find Command cannot be empty.");
+        }
+        String regex = "(\\S+)\\s+(.+)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m = pattern.matcher(input);
+        m.matches();
+        return new FindTaskCommand(m.group(2).trim());
     }
 
 

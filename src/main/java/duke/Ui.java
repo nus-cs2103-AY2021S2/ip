@@ -21,10 +21,25 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+
     public String getUserCommand(){
         String input;
-        input = scForCommandLine.nextLine().trim();
+        do {
+            input = scForCommandLine.nextLine().trim();
+        } while (shouldIgnore(input));
         return input;
+    }
+
+    /**
+     * Ignores input if string does not contain any non-space characters. ( Could have multiple spaces,tabs etc)
+     * @return true a boolean value to indicate if the string is to be ignored.
+     */
+    public boolean shouldIgnore(String input) {
+        if (input.trim().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

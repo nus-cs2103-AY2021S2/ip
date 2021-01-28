@@ -1,6 +1,7 @@
 D | 0 | read book | 2020-04-03
 D | 0 | read book | 2020-03-25
 D | 1 | read book | 2020-3-4
-D | 0 | something | 2020-09-08
-E | 0 | hi | 2020-01-22
+E | 1 | hi | 2020-01-22
 T | 0 | lunch
+D | 0 | lunch | 2020-09-03
+E | 0 | PARENT's having LUNCH | 2031-12-05

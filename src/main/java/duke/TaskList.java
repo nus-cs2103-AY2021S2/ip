@@ -44,10 +44,17 @@ public class TaskList implements Iterable<Task> {
         return listOfTasks.iterator();
     }
 
+    /**
+     * Finds all tasks whose description contains the keyword. The match is done case insensitively.
+     * @param keyword
+     * @return
+     */
+
     public TaskList filterByWord(String keyword){
          List<Task> filteredListOfTasks = new ArrayList<>();
          for ( Task currentTask : listOfTasks ) {
-             boolean isContainsKeyword = currentTask.getDescription().contains(keyword);
+             String description = currentTask.getDescription().toLowerCase();
+             boolean isContainsKeyword = description.contains(keyword.toLowerCase());
              if (isContainsKeyword) {
                  filteredListOfTasks.add(currentTask);
              }
