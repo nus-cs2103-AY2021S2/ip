@@ -49,6 +49,8 @@ public class Parser {
 
         try {
             switch (line) {
+            case ("find"):
+                return new FindCommand(doneLine[1]);
             case ("todo"):
                 return new AddCommand(new Todos(doneLine[1]));
             case ("deadline"):
@@ -61,11 +63,10 @@ public class Parser {
                         information[1], information[2]));
             default:
                 throw new DukeException("UnknownCommand");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("EmptyDetails", line);
         }
-    } catch (ArrayIndexOutOfBoundsException e) {
-        throw new DukeException("EmptyDetails", line);
-    }
-
     }
 }
 

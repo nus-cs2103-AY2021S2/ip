@@ -3,6 +3,7 @@ package Ui;
 import TaskList.TaskList;
 import Tasks.DukeTask;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -79,6 +80,16 @@ public class Ui {
         int i = 1;
         System.out.println("Here are the tasks in your list:");
         for (DukeTask items : taskList.getList()) {
+            System.out.println(String.format("%d.%s", i, items));
+            i++;
+        }
+        System.out.println("");
+    }
+
+    public void find(List<DukeTask> taskList) {
+        int i = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (DukeTask items : taskList) {
             System.out.println(String.format("%d.%s", i, items));
             i++;
         }
