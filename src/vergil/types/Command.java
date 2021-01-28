@@ -1,3 +1,5 @@
+package vergil.types;
+
 import java.time.LocalDateTime;
 
 public class Command {

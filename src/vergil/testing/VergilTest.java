@@ -1,4 +1,9 @@
+package vergil.testing;
+
 import org.junit.jupiter.api.Test;
+import vergil.components.TaskList;
+import vergil.types.Todo;
+import vergil.types.VergilException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VergilTest {

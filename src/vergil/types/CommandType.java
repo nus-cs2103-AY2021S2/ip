@@ -1,3 +1,5 @@
+package vergil.types;
+
 public enum CommandType {
     BYE,
     LIST,
