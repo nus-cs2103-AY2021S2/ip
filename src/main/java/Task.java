@@ -23,7 +23,6 @@ public class Task {
                 System.out.println("     Now you have " + count + " tasks in the list.");
             }
         }
-
     }
 
     @Override
