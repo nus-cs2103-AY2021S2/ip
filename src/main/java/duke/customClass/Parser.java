@@ -17,5 +17,4 @@ public class Parser {
         }
         return currentCommand;
     }
-
 }

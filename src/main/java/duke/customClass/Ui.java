@@ -6,9 +6,6 @@ import java.util.Scanner;
  * The Ui class handles the printing of the user interface and reading of user input.
  */
 public class Ui {
-    public Ui () {
-
-    }
 
     /**
      * A customized greeting message to be printed when the program starts.
