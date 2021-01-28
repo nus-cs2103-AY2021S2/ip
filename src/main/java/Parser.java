@@ -50,7 +50,6 @@ public class Parser {
                                 + arrayList.get(x - 1).description);
                         arrayList.set(x - 1, arrayList.get(x - 1).markAsDone());
                         System.out.println("--------------------------");
-
                     }
 
                 } catch (DukeException e) {
@@ -91,7 +90,6 @@ public class Parser {
 
                 System.out.println("Now you have " + arrayList.size() + " task(s) in the list");
                 System.out.println("--------------------------");
-
 
             } else if (input.contains("event") && !(input.equals("event"))) {
                 System.out.println("--------------------------");
@@ -139,8 +137,4 @@ public class Parser {
             new Storage().savingFile(arrayList, path);
         }
     }
-
-
-
-
 }

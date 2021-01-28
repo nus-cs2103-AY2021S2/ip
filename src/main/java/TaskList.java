@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     public TaskList() {
+
     }
     public void addToList(ArrayList<Task> arrayList, Task task) {
         task.index = arrayList.size() + 1;
