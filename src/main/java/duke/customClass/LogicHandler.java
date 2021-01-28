@@ -7,7 +7,15 @@ import duke.tasks.Todo;
 
 import java.util.List;
 
+/**
+ * Handles the process that happens when based on the input of the user.
+ */
 public class LogicHandler {
+    /**
+     * Triggered by the user typing 'list'.
+     * Prints out all tasks in the list currently.
+     * @param list List of tasks.
+     */
     public void list(List<Task> list) {
         // Check if the command is list and display the list of duke.tasks.
         String temp = "";
@@ -21,11 +29,16 @@ public class LogicHandler {
         System.out.println(temp);
     }
 
+    /**
+     * Updates the isDone status of a task of a specified index to true.
+     * @param input string input of user
+     * @param list list of tasks.
+     */
     public void done(String input, List<Task> list) {
         try {
             int itemNumber = Integer.valueOf(input.split(" ")[1]) - 1;
 
-            list.get(itemNumber).toggleIsDone();
+            list.get(itemNumber).setIsDone();
             System.out.println(
                     "Nice! I've marked this task as done:\n" + list.get(itemNumber)
             );
@@ -38,6 +51,11 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Add a todo task to the list of tasks.
+     * @param input string input of user.
+     * @param list list of tasks.
+     */
     public void todo(String input, List<Task> list) {
         try {
             Todo todo = new Todo(input.split(" ", 2)[1]);
@@ -49,6 +67,11 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Add a deadline task to the list of tasks.
+     * @param input string input of user.
+     * @param list list of tasks.
+     */
     public void deadline(String input, List<Task> list) {
         try {
             String taskAndDate = input.split(" ", 2)[1];
@@ -63,6 +86,11 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Add an Event task to the list of tasks.
+     * @param input string input of user.
+     * @param list list of tasks.
+     */
     public void event(String input, List<Task> list) {
         try {
             String taskAndDate = input.split(" ", 2)[1];
@@ -77,6 +105,11 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Deletes a task in the list of tasks given a specified task index integer.
+     * @param input string input of user.
+     * @param list list of tasks.
+     */
     public void delete(String input, List<Task> list) {
         try {
             int index = Integer.valueOf(input.split(" ", 2)[1]);
@@ -90,9 +123,5 @@ public class LogicHandler {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-    }
-
-    public void add(List<Task> list, Task t) {
-        list.add(t);
     }
 }

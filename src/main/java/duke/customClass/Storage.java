@@ -15,6 +15,12 @@ public class Storage {
         this.path = path;
     }
 
+    /**
+     * Checks if there is a file which contains the saved data from a previous session.
+     * If no file is found, then the program will create the file and continue as per normal.
+     * If a file is found, then the tasks in the file will be returned as a string of Tasks at the start of the program.
+     * @return A string of tasks in the save format, each separated by a newline.
+     */
     public String loadData() {
         try {
             File f = new File(path);
@@ -37,9 +43,9 @@ public class Storage {
         } catch (IOException e) {
             // Do not output error message, instead, create the dir and file
             // NOTE: THE PATH TO CREATE THE INIT FILE IS HARDCODED.
-            File dir = new File("src/data");
+            File dir = new File("data");
             dir.mkdir();
-            File file = new File("src/data/duke.tasks.txt");
+            File file = new File("data/duke.tasks.txt");
             try {
                 file.createNewFile();
             } catch (IOException err) {
@@ -49,6 +55,10 @@ public class Storage {
         }
     }
 
+    /**
+     * saves all the current tasks in the list as a string into a specified file that is stored locally.
+     * @param list List containing all the tasks.
+     */
     public void save(List<Task> list) {
         try {
             FileWriter fw = new FileWriter(path);

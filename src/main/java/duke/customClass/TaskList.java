@@ -8,6 +8,9 @@ import duke.tasks.Todo;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Handles the storing of the list of tasks as well as conversion of user's input Task objects.
+ */
 public class TaskList {
     private List<Task> list;
 
@@ -15,6 +18,11 @@ public class TaskList {
         this.list = new ArrayList<Task>();
     }
 
+    /**
+     * Converts the user's input from a valid string form to a Task object.
+     * The object is then added to a list of objects.
+     * @param data string of user's input.
+     */
     public void dataInput(String data) {
         String[] ArrayOfTasksFromLoad = data.split("\n");
 
@@ -38,6 +46,11 @@ public class TaskList {
             }
         }
     }
+
+    /**
+     * Returns a list of Tasks.
+     * @return list of Tasks.
+     */
     public List<Task> getList() {
         return list;
     }
