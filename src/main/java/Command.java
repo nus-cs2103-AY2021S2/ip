@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public abstract class Command {
     String command, task, date;
 
@@ -9,7 +7,7 @@ public abstract class Command {
         this.date = date;
     }
     
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     abstract boolean isExit();
 }

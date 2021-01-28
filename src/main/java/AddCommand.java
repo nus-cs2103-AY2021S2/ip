@@ -1,15 +1,11 @@
-import java.io.IOException;
-
 public class AddCommand extends Command {
 
     public AddCommand(String command, String task, String date) {
         super(command, task, date);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        // TODO Auto-generated method stub
+    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.command.equals("todo")) {
             Task newTask = new ToDos(task);
             taskList.add(newTask);
@@ -24,7 +20,6 @@ public class AddCommand extends Command {
 
         } else if (this.command.equals("event")) {
             Task newTask = new Events(this.task, this.date);
-            System.out.println("openis");
             taskList.add(newTask);
             storage.store(taskList.size() + "." + newTask.toString());
             ui.addCommandString(taskList.size(), newTask.toString());
@@ -33,7 +28,6 @@ public class AddCommand extends Command {
 
     @Override
     boolean isExit() {
-        // TODO Auto-generated method stub
         return false;
     }
     

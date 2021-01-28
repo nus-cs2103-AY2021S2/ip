@@ -18,14 +18,13 @@ public class Ui {
     }
 
     void showLoadingError() {
-        System.out.println("ERROR");
+        System.out.println("\u00a9 OOPS!!! Error loading file :-(");
     }
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         String line = "";
         line = sc.nextLine();
-        
         return line;
     }
 
@@ -34,7 +33,7 @@ public class Ui {
     }
 
     public void showError(String message) {
-        System.out.println("Error");
+        System.out.println("\u00a9 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     public void exitCommandString() {
@@ -42,10 +41,7 @@ public class Ui {
 	}
 
     public void addDeleteString(int size, String string) {
-        System.out.println(
-                                     "Noted. I've removed this task:\n  " + string + "\nNow you have "
-                                        + size + " tasks in the list."
-                                );
+        System.out.println("Noted. I've removed this task:\n  " + string + "\nNow you have " + size + " tasks in the list.");
         
 	}
 
