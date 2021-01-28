@@ -7,6 +7,11 @@ import java.util.List;
 
 import java.util.Scanner;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class FileSaver {
     public File file;
@@ -38,6 +43,18 @@ public class FileSaver {
         task.add(t);
     }
 
+    public static boolean isDateFormat(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(date.trim());
+        } catch (ParseException e) {
+            //TODO: handle exception
+            return false;
+        }
+        return true;
+    }
+
     public void parseTask(List<Task> task, String info) throws IndexOutOfBoundsException{
         String[] taskInfo = info.split(" \\| ");
         String type = taskInfo[0].trim();
@@ -51,8 +68,13 @@ public class FileSaver {
             addTask(task, e, taskInfo[1]);
             break;
         case "D":
-            Deadline d = new Deadline(taskInfo[2], taskInfo[3]);
-            addTask(task, d, taskInfo[1]);
+            String time = taskInfo[3];
+            if (isDateFormat(time)) {
+                LocalDate date = LocalDate.parse(time);
+                time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+            }
+            Deadline deadline = new Deadline(taskInfo[2], time);
+            addTask(task, deadline, taskInfo[1]);
             break;
         
         default:
@@ -66,14 +88,13 @@ public class FileSaver {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 parseTask(task, sc.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            throw new DukeException(
-                    "There is an error while loading file " + file.getName());
+            }    
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(
-                    "There is an error while reading file " + file.getName());
-        } 
+            //TODO: handle exception
+            throw new DukeException("File is not being read properly.");
+        } catch (FileNotFoundException f) {
+            throw new DukeException("File is not found");
+        }
     }
 
     public void save(List<Task> task) throws DukeException {

@@ -5,6 +5,13 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//to handle date and time
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Duke {
     // output strings
     public static String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
@@ -24,7 +31,6 @@ public class Duke {
 
     // file saving object from FileSaver class
     public static FileSaver fs = new FileSaver();
-    public static DataManager dm = new DataManager();
 
     public static void greeting() {
         System.out.println(logo);
@@ -36,7 +42,7 @@ public class Duke {
 
     public static void bye() {
         System.out.println(line);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(indentation + "Bye. Hope to see you again soon!");
         System.out.println(line);
         sc.close();
     }
@@ -54,6 +60,18 @@ public class Duke {
     // }
     // }
 
+    public static boolean isDateFormat(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(date.trim());
+        } catch (ParseException e) {
+            //TODO: handle exception
+            return false;
+        }
+        return true;
+    }
+
     public static void add(String[] userInput) throws DukeException {
         switch (userInput[0]) {
             case "todo":
@@ -67,7 +85,12 @@ public class Duke {
                 if (deadlineArr.length != 2) {
                     throw new DukeException("Missing component: due date");
                 }
-                Deadline d = new Deadline(deadlineArr);
+                String time = deadlineArr[1];
+                if (isDateFormat(time)) {
+                    LocalDate date = LocalDate.parse(time);
+                    time = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                }
+                Deadline d = new Deadline(deadlineArr[0], time);
                 task.add(d);
                 reportTask(d);
                 break;
