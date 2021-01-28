@@ -10,23 +10,22 @@ public class Storage {
     private static String fileName;
 
     public ArrayList<Task> load(String fileName,Ui ui) {
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
-            //TODO refractor to Praser.java
             File f = new File(fileName);
             f.createNewFile();
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String strTask = s.nextLine();
                 Task task = Parser.parseForText(strTask, ui);
-                taskList.add(task);
+                tasks.add(task);
             }
             this.fileName = fileName;
             s.close();
         } catch (IOException e) {
             ui.showError("Unable to create file");
         }
-        return taskList;
+        return tasks;
     }
 
     public void save(Collection<Task> taskList) {
