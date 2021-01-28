@@ -9,13 +9,18 @@ import duke.exceptions.DukeException;
 public class AddCommand extends Command{
 	public AddCommand(String instruction, String task, String date) {
 		super(instruction, task, date, command -> {
-			if (instruction.equals("todo")) {
-				return handleToDo(task);
-			} else if (instruction.equals("deadline")) {
-				return handleDeadline(task, date);
-			} else {
-				return handleEvent(task, date);
+			try {
+				if (instruction.equals("todo")) {
+					return handleToDo(task);
+				} else if (instruction.equals("deadline")) {
+					return handleDeadline(task, date);
+				} else {
+					return handleEvent(task, date);
+				}
+			} catch (DukeException e) {
+				System.out.println(e);
 			}
+			return false;
 		});
 	}
 
@@ -25,12 +30,13 @@ public class AddCommand extends Command{
 	 *
 	 * @param task name of the user task.
 	 */
-	private static final Boolean handleToDo(String task) {
+	private static final Boolean handleToDo(String task) throws DukeException {
 		if (!task.equals("")) {
 			Todo todo = new Todo(task);
 			System.out.println(Ui.biggerBox(todo));
 		} else {
-			DukeException.emptyTaskException();
+			throw new DukeException(Ui.EMPTYTASK);
+
 		}
 		return false;
 
@@ -63,12 +69,12 @@ public class AddCommand extends Command{
 	 * @param task name of the user task.
 	 * @param date date of the task to be done.
 	 */
-	private static final Boolean handleEvent(String task, String date) {
+	private static final Boolean handleEvent(String task, String date) throws DukeException {
 		if (task.equals("")) {
-			DukeException.emptyTaskException();
+			throw new DukeException(Ui.EMPTYTASK);
 		} else {
 			if (date.equals("")) {
-				DukeException.missingDateErrorException();
+				throw new DukeException(Ui.MISSINGDATE);
 			} else {
 				Event event = new Event(task, date);
 				System.out.println(Ui.biggerBox(event));

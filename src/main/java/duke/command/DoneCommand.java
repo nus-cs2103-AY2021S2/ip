@@ -1,11 +1,18 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.exceptions.DukeException;
+import duke.task.Task;
+import duke.ui.Ui;
+
 public class DoneCommand extends Command{
 	public DoneCommand(String task, String date) {
 		super("done", task, date, command -> {
-			return handleDone(task);
+			try {
+				return handleDone(task);
+			} catch (DukeException e) {
+				DukeException.argumentErrorException();
+			}
+			return false;
 		});
 	}
 
@@ -14,7 +21,7 @@ public class DoneCommand extends Command{
 	 *
 	 * @param task name of the user task.
 	 */
-	private static final Boolean handleDone(String task) {
+	private static final Boolean handleDone(String task) throws DukeException {
 		if (task.length() > 0) {
 			try {
 				int num = Integer.parseInt(task);
@@ -23,7 +30,7 @@ public class DoneCommand extends Command{
 				DukeException.NumberFormatException();
 			}
 		} else {
-			DukeException.argumentErrorException();
+			throw new DukeException(Ui.TOOMANYARGUMENTS);
 		}
 		return false;
 	}

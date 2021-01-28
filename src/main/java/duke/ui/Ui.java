@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.task.Task;
+
 /**
  * A class that store all the possible String format for Duke for code simplicity.
  */
@@ -22,6 +23,7 @@ public class Ui {
     public static final String COMMANDERROR = "I DON'T KNOW WHAT U SAYING BRO";
     public static final String TASKERROR = "Walao, no such task";
     public static final String SAVETOFILEERROR = "Huh? Where your file?";
+    public static final String EMPTYCOMMAND = "Walao, command cannot be empty!";
     public static final String FAREWELL = UPPER
             + "~~~~~~~~~~~ I Zao Liao. Don't Miss Meeeeeee ~~~~~~~~~~~."
             + LOWER;

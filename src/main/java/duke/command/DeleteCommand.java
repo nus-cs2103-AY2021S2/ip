@@ -3,12 +3,17 @@ package duke.command;
 
 import duke.task.Task;
 import duke.exceptions.DukeException;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command{
 	public DeleteCommand(String task, String date) {
 		super("delete", task, date, command -> {
-			return handleDelete(task, date);
-
+			try {
+				return handleDelete(task, date);
+			} catch (DukeException e) {
+				System.out.println(e.getMessage());
+			}
+			return false;
 		});
 	}
 
@@ -18,7 +23,7 @@ public class DeleteCommand extends Command{
 	 *
 	 * @param task name of the user task.
 	 */
-	private static final Boolean handleDelete(String task, String date) {
+	private static final Boolean handleDelete(String task, String date) throws DukeException {
 		if (task.length() > 0 && date.equals("")) {
 			try {
 				int num = Integer.parseInt(task);
@@ -27,7 +32,7 @@ public class DeleteCommand extends Command{
 				DukeException.NumberFormatException();
 			}
 		} else {
-			DukeException.argumentErrorException();
+			throw new DukeException(Ui.COMMANDERROR);
 		}
 		return false;
 	}

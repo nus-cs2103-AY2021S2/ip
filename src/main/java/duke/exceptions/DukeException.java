@@ -6,12 +6,20 @@ import duke.ui.Ui;
 /**
  * A class that store all the possible display of errorsException in Duke.
  */
-public class DukeException{
+public class DukeException extends Exception{
+    public DukeException(String errorMessage) {
+        super(errorMessage);
+    }
+
     public static final void DATEFORMATEXCEPTION() {
         System.out.println(Ui.WRONGDATEFORMAT);
     }
     public static final void NumberFormatException() {
         System.out.println(Ui.KEYINNUMBER);
+    }
+
+    public static final void EmptyCommandException() {
+        System.out.println(Ui.EMPTYCOMMAND);
     }
 
     /**
