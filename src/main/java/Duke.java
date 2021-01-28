@@ -90,6 +90,7 @@ public class Duke {
                         int arrayNumber = taskNumber - 1;
                         Task task = taskList.get(arrayNumber);
                         taskList.remove(arrayNumber);
+                        decrementNumOfTask();
                         saveTasksToInternalStorage(taskList);
                         System.out.println(formatMessage("The following task has been removed:\n"
                                 + task + "\n" + Task.getNumOfTasksString()));
@@ -168,5 +169,9 @@ public class Duke {
 
     static void loadTasksIntoTaskList(List<Task> taskList) {
         DukeFileReader.loadTasksIntoTaskList(taskList);
+    }
+
+    static void decrementNumOfTask() {
+        Task.decrementNumOfTask();
     }
 }

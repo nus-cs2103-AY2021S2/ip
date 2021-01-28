@@ -38,6 +38,10 @@ public class Task {
         numOfTasks++;
     }
 
+    public static void decrementNumOfTask() {
+        numOfTasks--;
+    }
+
     public static String getNumOfTasksString() {
         return "Now you have " + getNumOfTasks()
                 + (getNumOfTasks() == 1 ? " task" : " tasks")
