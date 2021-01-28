@@ -1,8 +1,8 @@
 /**
  * Class Task contains different task that Duke chatbot is doing.
  *
- * @version 28 Jan 2021
- * @author Zhang Peng
+ * @version 21 Jan 2021.
+ * @author Zhang Peng.
  */
 
 public class Task {
@@ -14,6 +14,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
     /**
      * This method is used to get the status icon of the task.
      * @return String This returns the status icon.
@@ -21,6 +22,7 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "[X]" : "[ ]"); //return tick or X symbols
     }
+
     /**
      * This method is used to mark the task as done
      * @return Task This returns the Task object with updated status icon.
@@ -29,6 +31,7 @@ public class Task {
         this.isDone = true;
         return this;
     }
+
     /**
      * This method is used to print out the task
      * @return String This returns and string representation of
@@ -37,6 +40,7 @@ public class Task {
     public String printTask() {
         return this.getStatusIcon() + " " + description;
     }
+
     /**
      * This is the toString() method of the class
      * @return String This returns the string representation of the task.
@@ -44,6 +48,7 @@ public class Task {
     public String toString() {
         return this.getStatusIcon() + " " + this.description;
     }
+
     /**
      * This method is used to decrase the number attached to that task.
      * @return Task This returns the Task object with updated index number.

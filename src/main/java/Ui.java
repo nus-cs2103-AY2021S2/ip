@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class Ui {
     public Ui() {
+
     }
 
     /**
@@ -26,8 +27,4 @@ public class Ui {
         Scanner scanner = new Scanner(System.in);
         new Parser().makingSenseOfUserCommand(arrayList, path, scanner);
     }
-
-
-
-
 }

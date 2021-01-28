@@ -22,7 +22,6 @@ class TaskListTest {
      void addToList() {
         new TaskList().addToList(l, t);
         assertEquals(1, l.size());
-
     }
 
     /**

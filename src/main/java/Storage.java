@@ -25,7 +25,8 @@ public class Storage {
                 String[] parts = line.split("by");
                 String part1 = parts[0];
                 String part2 = parts[1];
-                Task task = new Deadline(part1.substring(7,part1.length()-1), part2.substring(2,part2.length()-1));
+                Task task = new Deadline(part1.substring(7,part1.length()-1),
+                        part2.substring(2,part2.length()-1));
                 if (part1.charAt(4) == 'X') {
                     task.isDone = true;
                 }
@@ -35,7 +36,8 @@ public class Storage {
                 String[] parts = line.split("at");
                 String part1 = parts[0];
                 String part2 = parts[1];
-                Task task = new Event(part1.substring(7,part1.length()-1), part2.substring(2,part2.length()-1));
+                Task task = new Event(part1.substring(7,part1.length()-1),
+                        part2.substring(2,part2.length()-1));
                 if (part1.charAt(4) == 'X') {
                     task.isDone = true;
                 }
@@ -49,7 +51,6 @@ public class Storage {
                 task.index = arrayList.size() + 1;
                 arrayList.add(task);
             }
-
         }
     }
     /**
@@ -69,10 +70,11 @@ public class Storage {
             } else {
                 writeToFile(path, arrayList.get(i) + System.lineSeparator());
                 i++;
-                while (i <= arrayList.size()-1) {
+                while (i <= arrayList.size() - 1) {
                     appendToFile(path, arrayList.get(i) + System.lineSeparator());
                     i++;  // append to file with in the writetofile.
-                }}
+                }
+            }
 
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());

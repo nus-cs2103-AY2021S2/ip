@@ -25,6 +25,5 @@ class TaskTest {
             checker =1;
         }
         assertEquals(1, checker);
-
     }
 }

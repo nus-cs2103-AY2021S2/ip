@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Class Duke is the main class for the execution of Duke chatbot.
  *
- * @version 28 Jan 2021
- * @author Zhang Peng
+ * @version 21 Jan 2021.
+ * @author Zhang Peng.
  */
 public class Duke {
 
@@ -39,11 +39,9 @@ public class Duke {
             e.printStackTrace();
         }
 
-
         //read from the file content into the arrayList at the start.
         Scanner s = new Scanner(dukeFile);
         new Storage().loadingFile(arrayList, s);
-
 
         System.out.println("--------------------------");
         System.out.println("Hello! I'm Duke");
@@ -51,12 +49,7 @@ public class Duke {
         System.out.println("--------------------------");
 
         new Ui().interactWithUser(arrayList, path);
-
     }
-
-
-
-
 }
 
 
