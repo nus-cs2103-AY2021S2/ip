@@ -25,8 +25,14 @@ public class Events extends DukeTask {
         return String.format("%s %s - %s", this.day, this.start.toString(), this.end.toString());
     }
 
-    public static String[] parseEvent(String date) {
-        String[] days = date.split(" ", 2);
+    /**
+     * Parse the date in String form into a String array of date and timings.
+     *
+     * @param datetime String of the entire DateTime.
+     * @return String array of dates and timings.
+     */
+    public static String[] parseEvent(String datetime) {
+        String[] days = datetime.split(" ", 2);
         String[] time = days[1].split(" - ", 2);
 
         return new String[]{days[0], time[0], time[1]};

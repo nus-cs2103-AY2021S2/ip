@@ -1,15 +1,14 @@
 package Tasks;
 
 public class DukeTask {
-    protected String name;
-    protected boolean isDone;
-    protected TaskType type;
+    protected final String name;
+    protected final boolean isDone;
+    protected final TaskType type;
 
     enum TaskType {
         TODO("[T]"),
         DEADLINE("[D]"),
-        EVENT("[E]"),
-        EMPTY("[ ]");
+        EVENT("[E]");
 
         private final String type;
 
@@ -47,12 +46,12 @@ public class DukeTask {
     }
 
     public String getStatusIcon() {
-        return isDone ? "[X]" : "[ ]";
+        return (this.isDone) ? "[X]" : "[ ]";
     }
 
     public String formatDuke() {
         Character task = this.type.toType();
-        int done = isDone ? 1 : 0;
+        int done = (this.isDone) ? 1 : 0;
         return String.format("%s | %d | %s", task, done, this.name);
     }
 

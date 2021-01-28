@@ -5,7 +5,7 @@ import TaskList.TaskList;
 import Tasks.Deadlines;
 import Tasks.DukeTask;
 import Tasks.Events;
-import Tasks.Todos;
+import Tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,9 +60,9 @@ public class Storage {
                     case ("T"):
                         String info[] = lineData[1].split(" [|] ", 2);
                         if (info[0].equals("1")) {
-                            this.loadfile.add(new Todos(info[1], true));
+                            this.loadfile.add(new Todo(info[1], true));
                         } else {
-                            this.loadfile.add(new Todos(info[1], false));
+                            this.loadfile.add(new Todo(info[1], false));
                         }
                         break;
                     case ("D"):

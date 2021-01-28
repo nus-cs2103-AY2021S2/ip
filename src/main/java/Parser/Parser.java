@@ -4,7 +4,7 @@ import Commands.*;
 import Exceptions.DukeException;
 import Tasks.Deadlines;
 import Tasks.Events;
-import Tasks.Todos;
+import Tasks.Todo;
 
 public class Parser {
 
@@ -52,7 +52,7 @@ public class Parser {
             case ("find"):
                 return new FindCommand(doneLine[1]);
             case ("todo"):
-                return new AddCommand(new Todos(doneLine[1]));
+                return new AddCommand(new Todo(doneLine[1]));
             case ("deadline"):
                 String[] info = doneLine[1].split(" /by ");
                 return new AddCommand(new Deadlines(info[0], info[1]));

@@ -5,9 +5,6 @@ import TaskList.TaskList;
 import Ui.Ui;
 import Parser.Parser;
 
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-
 public class Duke {
     private Storage storage;
     private TaskList tasks;

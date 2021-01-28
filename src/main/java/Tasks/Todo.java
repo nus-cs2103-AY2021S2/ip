@@ -1,12 +1,12 @@
 package Tasks;
 
-public class Todos extends DukeTask {
+public class Todo extends DukeTask {
 
-    public Todos(String name) {
+    public Todo(String name) {
         super(name, TaskType.TODO);
     }
 
-    public Todos(String name, boolean isDone) {
+    public Todo(String name, boolean isDone) {
         super(name, isDone, TaskType.TODO);
     }
 

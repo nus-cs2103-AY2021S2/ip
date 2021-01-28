@@ -5,7 +5,7 @@ import Exceptions.DukeException;
 import Parser.Parser;
 import Tasks.Deadlines;
 import Tasks.Events;
-import Tasks.Todos;
+import Tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +29,7 @@ public class DukeTest {
         assertEquals(false, new ListCommand().isExit());
         assertEquals(false, new DoneCommand(0).isExit());
         assertEquals(false, new DeleteCommand(0).isExit());
-        assertEquals(false, new AddCommand(new Todos("test")).isExit());
+        assertEquals(false, new AddCommand(new Todo("test")).isExit());
         assertEquals(false, new AddCommand(new Deadlines("test", "2020-06-02")).isExit());
         assertEquals(false, new AddCommand(new Events("test", "Monday",
                 "10:00", "12:00")).isExit());

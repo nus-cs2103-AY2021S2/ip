@@ -34,14 +34,11 @@ public class Ui {
                 + "\nDisplay list of tasks:\n - list"
                 + "\nDelete task:\n - delete <task id>"
                 + "\nSet task as completed:\n - done <task id>"
-                + "\nFilter tasks by keyword keyword:\n - find <keyword>"
-              //  + "\nFilter tasks by due date:\n - filter <yyyy-mm-dd>"
+                + "\nFilter tasks by keyword (in description):\n - find <keyword>"
                 + "\nAdd a new task:\n - todo <task>"
                 + "\nAdd a new deadline:\n - deadline <task> /by <yyyy-mm-dd>"
                 + "\nAdd a new event:\n - event <name> /at <yyyy-mm-dd> <hh:mm> - <hh:mm>"
-             //   + "\nAdd a new weekly recurring task:\n - weekly <name> /every <day> <hhmm>\n"
-        + "\n**REMEMBER to exclude the < > when entering keywords\n");
-
+                + "\n**REMEMBER to exclude the < > when entering keywords\n");
     }
 
     public void preload() {
@@ -55,8 +52,7 @@ public class Ui {
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        String line = sc.nextLine();
-        return line;
+        return sc.nextLine();
     }
 
     public void add(DukeTask task, int size) {
