@@ -1,3 +1,6 @@
+package duke;
+
+import duke.command.Command;
 
 public class Duke {
     private Storage storage;

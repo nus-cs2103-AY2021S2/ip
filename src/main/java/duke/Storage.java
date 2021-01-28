@@ -1,3 +1,4 @@
+package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +6,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
 
 public class Storage {
     private String path;
