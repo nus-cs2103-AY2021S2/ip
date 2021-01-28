@@ -12,15 +12,16 @@ import duke.exceptions.NoKeywordException;
 
 public class Duke {
     public static void main(String[] args) {
-        String name = "Duke";
+        String name = "Alfred";
         String input;
         ArrayList<Task> taskList = new ArrayList<>();
 
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "     __      _     ____                  _\n"
+                + "    /  \\    | |   |  __| _____  ____    | |\n"
+                + "   / /\\ \\   | | __| |__ |  ___|/ __ \\   | |\n"
+                + "  / /__\\ \\  | ||__   __|| |   / ____/ __| |\n"
+                + " / ______ \\ | |   | |   | |   \\ \\___ / _  |\n"
+                + "/_/      \\_\\|_|   |_|   |_|    \\____|\\____|\n";
 
         System.out.println(logo);
         System.out.println("Hello Master. Nice to meet you, my name is " + name + ".");
