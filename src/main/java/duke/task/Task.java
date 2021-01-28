@@ -24,6 +24,14 @@ public class Task {
     }
 
     /**
+     * Gets the task description.
+     * @return Task description.
+     */
+    public String getDescription(){
+        return description;
+    }
+
+    /**
      * Gets the icon to display on the user interface based on the task status.
      * @return Tick for Done task and Cross for Not Done Task.
      */

@@ -82,6 +82,30 @@ public class Ui {
     }
 
     /**
+     * Displays all the tasks that contain the keyword.
+     * @param keyword Keyword to be found.
+     * @param tasks Task List used to find the matching tasks.
+     */
+    public void showFound(String keyword, TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getDescription().contains(keyword)) {
+                System.out.println(count + ". " + tasks.getTask(i));
+                count++;
+            }
+        }
+
+        if(count == 1) {
+            System.out.println("There is no matching task in the list. You can try another keyword.");
+        }
+
+    }
+
+
+    /**
      * Displays error messages when an exception is caught.
      * @param error Error being caught.
      */
