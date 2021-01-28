@@ -40,17 +40,17 @@ public class Task {
             return this.type;
     }
 
-    @Override
-    public String toString() {
-        String output = "[" + checkIcon() + "]" + this.info;
-        return output;
-    }
-
     public String toSave() {
         return this.getType().toString() + " " + this.getInfo();
     }
 
     public boolean getDoneStatus() {
         return this.isDone;
+    }
+
+    @Override
+    public String toString() {
+        String output = "[" + checkIcon() + "]" + this.info;
+        return output;
     }
 }
