@@ -57,12 +57,15 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToEvent() throws DukeException {
-        if (command.length() <= 9) {
+        if (command.length() <= 6) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
-            int indexOfAt = command.toLowerCase().indexOf("/at");
-            String subStrContent = command.substring(6, indexOfAt - 1);
-            String subStrTime = command.substring(indexOfAt + 4);
+            int indexOfAt = command.toLowerCase().indexOf(" /at ");
+            if (indexOfAt < 6) {
+                throw new DukeException("Invalid argument: /at not detected or no argument before /at.");
+            }
+            String subStrContent = command.substring(6, indexOfAt);
+            String subStrTime = command.substring(indexOfAt + 5);
             if (StringParser.isBlank(subStrContent)) {
                 throw new DukeException("Void argument: Content field is blank");
             } else if (StringParser.isBlank(subStrTime)) {
@@ -84,12 +87,15 @@ public class AddCommand extends Command {
      * @throws DukeException When command argument is invalid.
      */
     private Task convertToDeadline() throws DukeException {
-        if (command.length() <= 6) {
+        if (command.length() <= 9) {
             throw new DukeException("Invalid argument: Argument field cannot be empty.");
         } else {
-            int indexOfBy = command.toLowerCase().indexOf("/by");
-            String subStrContent = command.substring(9, indexOfBy - 1);
-            String subStrTime = command.substring(indexOfBy + 4);
+            int indexOfBy = command.toLowerCase().indexOf(" /by ");
+            if (indexOfBy < 9) {
+                throw new DukeException("Invalid argument: /by not detected or no argument before /by.");
+            }
+            String subStrContent = command.substring(9, indexOfBy);
+            String subStrTime = command.substring(indexOfBy + 5);
             if (StringParser.isBlank(subStrContent)) {
                 throw new DukeException("Void argument: Content field is blank");
             } else if (StringParser.isBlank(subStrTime)) {
