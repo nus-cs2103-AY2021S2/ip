@@ -12,6 +12,51 @@ What can I do for you?
 You do not have anything to do at the moment!
 ------------------------------------------------------------
 ------------------------------------------------------------
+Here are the list of available commands:
+Command Word: bye
+Description: Exit the program
+Usage: bye
+
+Command Word: list
+Description: Print the list of current tasks
+Usage: list
+
+Command Word: todo
+Description: Add a todo task
+Usage: todo <task_description>
+Example: todo Go CNY shopping
+
+Command Word: deadline
+Description: Add a deadline task with a date component and an optional time component
+Usage 1: deadline <task_description> /by dd/mm/yyyy
+Example: deadline Assignment 1 /by 31/1/2021
+Usage 2: deadline <task_description> /by dd/mm/yyyy HHHH
+Example: deadline Assignment 1 /by 31/1/2021 1800
+Example: deadline Assignment 2 /by 28/10/2021, 2359
+
+Command Word: event
+Description: Add an event task
+Usage: event <task_description> /at <event_time>
+Example: event Project Meeting /at NUS SoC COM1-0210
+
+Command Word: done
+Description: Mark a task as completed
+Usage: done <task_number>Example: done 2
+
+Command Word: delete
+Description: Delete a task
+Usage: delete <task_number>
+Example: delete 2
+
+Command Word: find
+Description: Find tasks that contains specific keywords or phrases
+Usage: find <keyword_or_phrase>Example: find book
+
+Command Word: help
+Description: Print available commands
+Usage: help
+------------------------------------------------------------
+------------------------------------------------------------
 Got it. I've added this task:
   [T][ ] read book
 Now you have 1 tasks in your list.
@@ -37,25 +82,42 @@ Nice! I've marked this task as done:
 [D][X] return book (by: Jan 24 2021, 6:00PM)
 ------------------------------------------------------------
 ------------------------------------------------------------
-Here are the tasks in your list:
-1.[T][ ] read book
-2.[D][X] return book (by: Jan 24 2021, 6:00PM)
-3.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
-------------------------------------------------------------
-------------------------------------------------------------
 OOPS!!! The description of a task cannot be empty.
 ------------------------------------------------------------
 ------------------------------------------------------------
+Invalid description syntax. Please follow the usage as shown below:
+Command Word: deadline
+Description: Add a deadline task with a date component and an optional time component
+Usage 1: deadline <task_description> /by dd/mm/yyyy
+Example: deadline Assignment 1 /by 31/1/2021
+Usage 2: deadline <task_description> /by dd/mm/yyyy HHHH
+Example: deadline Assignment 1 /by 31/1/2021 1800
+Example: deadline Assignment 2 /by 28/10/2021, 2359
+------------------------------------------------------------
+------------------------------------------------------------
+Unable to parse date. Please follow the usage as shown below:
+Command Word: deadline
+Description: Add a deadline task with a date component and an optional time component
+Usage 1: deadline <task_description> /by dd/mm/yyyy
+Example: deadline Assignment 1 /by 31/1/2021
+Usage 2: deadline <task_description> /by dd/mm/yyyy HHHH
+Example: deadline Assignment 1 /by 31/1/2021 1800
+Example: deadline Assignment 2 /by 28/10/2021, 2359
+------------------------------------------------------------
+------------------------------------------------------------
+Unable to parse time. Please follow the usage as shown below:
+Command Word: deadline
+Description: Add a deadline task with a date component and an optional time component
+Usage 1: deadline <task_description> /by dd/mm/yyyy
+Example: deadline Assignment 1 /by 31/1/2021
+Usage 2: deadline <task_description> /by dd/mm/yyyy HHHH
+Example: deadline Assignment 1 /by 31/1/2021 1800
+Example: deadline Assignment 2 /by 28/10/2021, 2359
+------------------------------------------------------------
+------------------------------------------------------------
 Got it. I've added this task:
-  [D][ ] cs2103t luminus quiz 2 (by: Jan 22 2021, 2:00PM)
+  [D][ ] CS2103T luminus quiz 2 (by: Jan 22 2021, 2:00PM)
 Now you have 4 tasks in your list.
-------------------------------------------------------------
-------------------------------------------------------------
-Here are the tasks in your list:
-1.[T][ ] read book
-2.[D][X] return book (by: Jan 24 2021, 6:00PM)
-3.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
-4.[D][ ] cs2103t luminus quiz 2 (by: Jan 22 2021, 2:00PM)
 ------------------------------------------------------------
 ------------------------------------------------------------
 Please indicate a task number to be marked as done.
@@ -68,20 +130,20 @@ Please enter a valid index!
 ------------------------------------------------------------
 ------------------------------------------------------------
 Nice! I've marked this task as done:
-[D][X] cs2103t luminus quiz 2 (by: Jan 22 2021, 2:00PM)
+[D][X] CS2103T luminus quiz 2 (by: Jan 22 2021, 2:00PM)
 ------------------------------------------------------------
 ------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] read book
 2.[D][X] return book (by: Jan 24 2021, 6:00PM)
 3.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
-4.[D][X] cs2103t luminus quiz 2 (by: Jan 22 2021, 2:00PM)
+4.[D][X] CS2103T luminus quiz 2 (by: Jan 22 2021, 2:00PM)
 ------------------------------------------------------------
 ------------------------------------------------------------
 OOPS!!! I'm sorry, but I don't know what that means :-(
 ------------------------------------------------------------
 ------------------------------------------------------------
-Please enter a valid task number
+Please indicate a task number to be marked as done.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Noted. I've removed this task:
@@ -90,13 +152,30 @@ Now you have 3 tasks in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Noted. I've removed this task:
-  [D][X] cs2103t luminus quiz 2 (by: Jan 22 2021, 2:00PM)
+  [D][X] CS2103T luminus quiz 2 (by: Jan 22 2021, 2:00PM)
 Now you have 2 tasks in your list.
 ------------------------------------------------------------
 ------------------------------------------------------------
 Here are the tasks in your list:
 1.[T][ ] read book
 2.[E][ ] project meeting for cs2103t (at: next friday 2-4pm)
+------------------------------------------------------------
+------------------------------------------------------------
+Got it. I've added this task:
+  [D][ ] book review (by: Jan 31 2021, 11:59PM)
+Now you have 3 tasks in your list.
+------------------------------------------------------------
+------------------------------------------------------------
+Here are the matching tasks in your list:
+1.[T][ ] read book
+3.[D][ ] book review (by: Jan 31 2021, 11:59PM)
+------------------------------------------------------------
+------------------------------------------------------------
+Here are the matching tasks in your list:
+1.[T][ ] read book
+------------------------------------------------------------
+------------------------------------------------------------
+Sorry, there are no matching tasks in your list
 ------------------------------------------------------------
 ------------------------------------------------------------
 Exiting...

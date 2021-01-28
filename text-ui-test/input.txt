@@ -1,21 +1,27 @@
 list
+help
 todo read book
 deadline return book /by 24/1/2021 1800
 event project meeting for cs2103t /at next friday 2-4pm
 list
 done 2
-list
 deadline
-deadline cs2103t luminus quiz 2 /by 22/1/2021 1400
-list
+deadline CS2103T luminus quiz 2
+deadline CS2103T luminus quiz 2 /by 22/1
+deadline CS2103T luminus quiz 2 /by 22/1/2021,2401
+deadline CS2103T luminus quiz 2 /by 22/1/2021,1400
 done 
 done read book
 done 100
 done 4
 list
 blah
-delete read book
+delete
 delete 2
 delete 3
 list
+deadline book review /by 31/1/2021, 2359
+find book
+find read book
+find random
 bye
