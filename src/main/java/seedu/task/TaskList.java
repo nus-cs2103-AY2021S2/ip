@@ -1,4 +1,4 @@
-package src.main.java.task;
+package seedu.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class TaskList {
             // adapted from: https://stackoverflow.com/questions/49080255/get-index-while-iterating-list-with-stream
             return IntStream.range(0, tasks.size())
                     .mapToObj(index -> String.format("  %s. %s\n",
-                            index+1, tasks.get(index).toString()))
+                            index + 1, tasks.get(index).toString()))
                     .reduce((a, b) -> a + b)
                     .get();
         }

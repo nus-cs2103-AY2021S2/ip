@@ -1,14 +1,14 @@
-package src.main.java;
+package seedu;
 
-import src.main.java.common.PrintText;
-import src.main.java.io.Parser;
-import src.main.java.io.Ui;
-import src.main.java.storage.Storage;
-import src.main.java.task.Deadline;
-import src.main.java.task.Event;
-import src.main.java.task.Task;
-import src.main.java.task.TaskList;
-import src.main.java.task.Todo;
+import seedu.common.PrintText;
+import seedu.io.Parser;
+import seedu.io.Ui;
+import seedu.storage.Storage;
+import seedu.task.Deadline;
+import seedu.task.Event;
+import seedu.task.Task;
+import seedu.task.TaskList;
+import seedu.task.Todo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,12 +26,13 @@ public class OlafApp {
         this.isActive = true;
     }
 
+    // todo: break this down into more methods...?
     void run() {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println(PrintText.WELCOME_MESSAGE);
 
-        while(isActive) {
+        while (isActive) {
             String command = null;
             try {
                 command = bf.readLine();
@@ -41,9 +42,9 @@ public class OlafApp {
 
             assert command != null;
 
-            if(command.equalsIgnoreCase("bye")){
+            if (command.equalsIgnoreCase("bye")) {
                 this.stop();
-            } else if(command.equalsIgnoreCase("list")){
+            } else if (command.equalsIgnoreCase("list")) {
                 // todo: use try catch here and make list printing a ui method
                 if (taskList.hasTasks()) {
                     // print iteratively if there are tasks in the list
@@ -55,7 +56,7 @@ public class OlafApp {
                 } else {
                     System.out.println(PrintText.EMPTY_TASKLIST_ERROR);
                 }
-            } else if(command.toLowerCase().startsWith("done")){
+            } else if (command.toLowerCase().startsWith("done")) {
                 try {
                     int id = Parser.parseIntParameter(command);
                     taskList.markTaskAsDone(id);
@@ -68,7 +69,7 @@ public class OlafApp {
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     ui.showInvalidIndexError();
                 }
-            } else if(command.toLowerCase().startsWith("delete")){
+            } else if (command.toLowerCase().startsWith("delete")) {
                 try {
                     int id = Parser.parseIntParameter(command);
                     Task deleted = taskList.deleteTask(id);
@@ -81,7 +82,7 @@ public class OlafApp {
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
                     ui.showInvalidIndexError();
                 }
-            } else if(command.toLowerCase().startsWith("todo")){
+            } else if (command.toLowerCase().startsWith("todo")) {
                 try {
                     String expression = Parser.parseParameter(command, " ", 1);
                     Todo newTodo = new Todo(expression);
@@ -94,13 +95,13 @@ public class OlafApp {
                 } catch (IndexOutOfBoundsException e) {
                     ui.showFormatError(PrintText.TODO_FORMAT);
                 }
-            } else if(command.toLowerCase().startsWith("deadline")){
+            } else if (command.toLowerCase().startsWith("deadline")) {
                 try {
-                    String expression = Parser.parseParameter(command, " ",1);
+                    String expression = Parser.parseParameter(command, " ", 1);
                     String description = Parser.parseParameter(expression, "/by", 0);
 
-                    String dateTime = Parser.parseParameter(expression,"/by",1);
-                    LocalDateTime deadline = Parser.parseDeadlineParameter(dateTime);
+                    String dateTime = Parser.parseParameter(expression, "/by", 1);
+                    LocalDateTime deadline = Parser.parseDateTimeParameter(dateTime);
 
                     Deadline newDeadline = new Deadline(description, deadline);
                     taskList.addTask(newDeadline);
@@ -113,17 +114,17 @@ public class OlafApp {
                     // catches both ParseException and IndexOutOfBounds exception
                     ui.showFormatError(PrintText.DEADLINE_FORMAT);
                 }
-            } else if(command.toLowerCase().startsWith("event")) {
+            } else if (command.toLowerCase().startsWith("event")) {
                 try {
-                    String expression = Parser.parseParameter(command, " ",1);
+                    String expression = Parser.parseParameter(command, " ", 1);
                     String description = Parser.parseParameter(expression, "/at", 0);
 
-                    String dateTime = Parser.parseParameter(expression,"/at",1);
-                    String start = Parser.parseParameter(dateTime," to ",0);
-                    String end = Parser.parseParameter(dateTime," to ",1);
+                    String dateTime = Parser.parseParameter(expression, "/at", 1);
+                    String start = Parser.parseParameter(dateTime, " to ", 0);
+                    String end = Parser.parseParameter(dateTime, " to ", 1);
 
-                    LocalDateTime startDateTime = Parser.parseDeadlineParameter(start);
-                    LocalDateTime endDateTime = Parser.parseDeadlineParameter(end);
+                    LocalDateTime startDateTime = Parser.parseDateTimeParameter(start);
+                    LocalDateTime endDateTime = Parser.parseDateTimeParameter(end);
 
                     Event newEvent = new Event(description, startDateTime, endDateTime);
                     taskList.addTask(newEvent);

@@ -1,4 +1,4 @@
-package src.main.java.io;
+package seedu.io;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +18,7 @@ public class Parser {
     }
 
     // used to get LocalDateTime parameters for deadline and event commands
-    public static LocalDateTime parseDeadlineParameter(String dateTime) {
+    public static LocalDateTime parseDateTimeParameter(String dateTime) {
         return LocalDateTime.parse(dateTime.trim(),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }

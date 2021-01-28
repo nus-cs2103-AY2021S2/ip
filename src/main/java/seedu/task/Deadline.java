@@ -1,9 +1,9 @@
-package src.main.java.task;
+package seedu.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     LocalDateTime deadline;
 
     public Deadline(String description, LocalDateTime deadline) {
@@ -13,7 +13,7 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]"+super.toString()+" (by: "
+        return "[D]" + super.toString() + " (by: "
                 + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"))
                 + ")";
     }

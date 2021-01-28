@@ -1,4 +1,4 @@
-package src.main.java.task;
+package seedu.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +15,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]"+super.toString()+" (at: "
+        return "[E]" + super.toString() + " (at: "
                 + start.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + " to "
                 + end.format(DateTimeFormatter.ofPattern("d MMM yyyy HH:mm")) + ")";
     }

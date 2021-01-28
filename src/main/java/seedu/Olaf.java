@@ -1,8 +1,8 @@
-package src.main.java;
+package seedu;
 
-import src.main.java.io.Ui;
-import src.main.java.storage.Storage;
-import src.main.java.task.TaskList;
+import seedu.io.Ui;
+import seedu.storage.Storage;
+import seedu.task.TaskList;
 
 import java.io.IOException;
 
@@ -31,6 +31,6 @@ public class Olaf {
     }
 
     public static void main(String[] args) throws IOException {
-        new Olaf("data/olaf.txt").run();
+        new Olaf("../../../../data/olaf.txt").run();
     }
 }

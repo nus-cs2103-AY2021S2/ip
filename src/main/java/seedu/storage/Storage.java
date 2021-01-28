@@ -1,9 +1,9 @@
-package src.main.java.storage;
+package seedu.storage;
 
-import src.main.java.task.Deadline;
-import src.main.java.task.Event;
-import src.main.java.task.Task;
-import src.main.java.task.Todo;
+import seedu.task.Deadline;
+import seedu.task.Event;
+import seedu.task.Task;
+import seedu.task.Todo;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,10 +24,13 @@ public class Storage {
     static Path dataPath;
 
     public Storage(String filePath) {
+
         String[] filePathSplit = filePath.split("(?:.(?!/))+$", 2);
-        String fileDirectory = filePathSplit[0];
+        // take file path with respect to OlafApp directory
+        String fileDirectory = "../" + filePathSplit[0];
+
         File directory = new File(fileDirectory);
-        if (! directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 

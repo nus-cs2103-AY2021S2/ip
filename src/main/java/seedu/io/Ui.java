@@ -1,7 +1,7 @@
-package src.main.java.io;
+package seedu.io;
 
-import src.main.java.common.PrintText;
-import src.main.java.task.Task;
+import seedu.common.PrintText;
+import seedu.task.Task;
 
 public class Ui {
 

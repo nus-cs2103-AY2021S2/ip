@@ -1,4 +1,4 @@
-package src.main.java.task;
+package seedu.task;
 
 // adapted from partial solution on the module webpage
 
@@ -16,7 +16,7 @@ public class Task {
     }
 
     public int isNotDone() {
-        return (isDone? 0 : 1);
+        return (isDone ? 0 : 1);
     }
 
     public void markAsDone() {

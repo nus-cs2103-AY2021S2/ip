@@ -1,4 +1,4 @@
-package src.main.java.common;
+package seedu.common;
 
 public enum PrintText {
     LOGO {
