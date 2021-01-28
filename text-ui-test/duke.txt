@@ -1,5 +1,12 @@
-1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[D][ ] do homework (by: no idea :-p)
-4.[D][ ] do dishes (by: Oct 11 2019)
-5.[E][ ] do tasks (at: Jan 15 2020)
+T | 0 | borrow book |  
+D | 0 | return book  | Sunday
+D | 0 | do dishes  | Oct 11 2019
+E | 0 | do tasks  | Jan 15 2020
+T | 0 | empty |  
+T | 0 | borrow book |  
+D | 0 | return book  | Sunday
+E | 0 | project meeting  | Mon 2-4pm
+D | 0 | do homework  | no idea :-p
+D | 0 | do dishes  | Oct 11 2019
+E | 0 | do tasks  | Jan 15 2020
+T | 0 | empty |  

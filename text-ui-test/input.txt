@@ -7,6 +7,6 @@ event do tasks /at 2020-01-15
 list
 blah
 todo
-list
 delete 3
+list
 bye

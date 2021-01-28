@@ -1,11 +1,15 @@
 public class ToDo extends Task {
 
     public ToDo(String i) {
-        super(i);
+        super("T", i);
+    }
+
+    public ToDo(String[] arr) {
+        super("T", arr);
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return super.toString();
     }
 }

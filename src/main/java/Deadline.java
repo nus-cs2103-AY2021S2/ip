@@ -1,12 +1,20 @@
 public class Deadline extends Task {
 
     public Deadline(String i) {
-        super(i);
+        super("D", i);
+    }
+
+    public Deadline(String[] arr) {
+        super("D", arr);
     }
 
     @Override
     public String toString() {
-        String temp = String.format("[D]%s", super.toString());
-        return formatString(temp, "/by");
+        if (this.getDate().equals(" ")) {
+            return super.toString();
+        } else {
+            return String.format("%s (by: %s)", super.toString(), this.getDate());
+        }
     }
+
 }
