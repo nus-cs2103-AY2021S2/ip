@@ -1,0 +1,3 @@
+[T] | [✘] | testtodo
+[D] | [✘] | testdeadline | (by: xyz)
+[E] | [✘] | testevent | (at: abc)

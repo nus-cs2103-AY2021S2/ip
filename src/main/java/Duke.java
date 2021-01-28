@@ -1,13 +1,39 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Duke {
+    private static String FILEPATH = "./data/tasks.txt";
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
     private static ArrayList<Task> userList = new ArrayList<>();
+    private static DukeDataStorage dukeData;
     public static void main(String[] args) {
+        try{
+            if(!Files.exists(Paths.get("./data"))){
+                Files.createDirectories(Paths.get("./data"));
+            }
+            dukeData = new DukeDataStorage(FILEPATH);
+        }
+        catch(IOException e){
+            System.err.println(e);
+        }
+        if(dukeData != null){
+            try {
+                userList = dukeData.getTaskList();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
         Duke.basicProgram();
     }
-    private static void basicProgram(){
+
+    private static void basicProgram() {
         final String greeting = HORIZONTAL_RULE + "\nHello! I am Duke\n" + "What can I do for you?\n" + HORIZONTAL_RULE;
         final String addTaskMessage = "Got it. I've added this task";
         final String exitCommand = "bye";
@@ -31,6 +57,8 @@ public class Duke {
                     case exitCommand:
                         System.out.println(command + ". Hope to see you again soon!\n" + HORIZONTAL_RULE);
                         sc.close();
+                        //add data back into the file
+                        Duke.dukeData.writeData(userList);
                         isBye = true;
                         break;
                     case listCommand:
@@ -48,7 +76,6 @@ public class Duke {
                         else {
                             newTask = new ToDo(command.split("todo ")[1]);
                             Duke.printAddedTask(newTask);
-//                            userList.add(newTask);
                         }
                         break;
                     case addDeadlineCommand:
@@ -62,7 +89,6 @@ public class Duke {
                         //offset of 6 to remove "event " frm statement
                         newTask = new Event(eventTimeAndTask[1], eventTimeAndTask[0].substring(6));
                         Duke.printAddedTask(newTask);
-//                        userList.add(newTask);
                         break;
                     case deleteCommand:
                         int taskNumToBeDeleted = Integer.parseInt(commandArr[1]);
@@ -81,6 +107,10 @@ public class Duke {
         for(int i = 0; i< userList.size();i++){
             System.out.println(i+1 +". " + userList.get(i).toString());
         }
+//        System.out.println(userList.size());
+//        for(Task x: userList){
+//            System.out.println(x.toString());
+//        }
     }
 
     private static void printDoneTask(int taskNumber){
