@@ -24,6 +24,8 @@ public class Parser {
         switch (line) {
             case ("bye"):
                 return new ByeCommand();
+            case("help"):
+                return new HelpCommand();
             case ("list"):
                 return new ListCommand();
             case ("done"):
@@ -48,10 +50,6 @@ public class Parser {
         case ("event"):
             String[] info2 = doneLine[1].split(" /at ");
             String[] information = Events.parseEvent(info2[1]);
-            System.out.println(info2[0]);
-            System.out.println(information[0]);
-            System.out.println(information[1]);
-            System.out.println(information[2]);
             return new AddCommand(new Events(info2[0], information[0],
                     information[1], information[2]));
         default:

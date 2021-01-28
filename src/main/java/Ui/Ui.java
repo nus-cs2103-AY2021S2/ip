@@ -21,7 +21,26 @@ public class Ui {
 
     public void introduction() {
         System.out.println("Hello from\n" + logo);
+        System.out.println("Please enter the keyword:\n" +
+                "        help\n" + "to see the list of commands\n");
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
+    }
+
+    public void help() {
+        System.out.println("Here is the list of commands:"
+                + "\nShow list of commands:\n - help"
+                + "\nExit duke:\n - bye"
+                + "\nDisplay list of tasks:\n - list"
+                + "\nDelete task:\n - delete <task id>"
+                + "\nSet task as completed:\n - done <task id>"
+              //  + "\nFilter tasks by keyword keyword:\n - find <keyword>"
+              //  + "\nFilter tasks by due date:\n - filter <yyyy-mm-dd>"
+                + "\nAdd a new task:\n - todo <task>"
+                + "\nAdd a new deadline:\n - deadline <task> /by <yyyy-mm-dd>"
+                + "\nAdd a new event:\n - event <name> /at <yyyy-mm-dd> <hh:mm> - <hh:mm>"
+             //   + "\nAdd a new weekly recurring task:\n - weekly <name> /every <day> <hhmm>\n"
+        + "\n**REMEMBER to exclude the < > when entering keywords\n");
+
     }
 
     public void preload() {
