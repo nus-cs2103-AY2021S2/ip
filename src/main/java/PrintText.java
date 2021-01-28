@@ -28,14 +28,14 @@ public enum PrintText {
     TODO_FORMAT {
         @Override
         public String toString() {
-            return "  todo <task description>";
+            return "  todo <task description>\n";
         }
     },
 
     DEADLINE_FORMAT {
         @Override
         public String toString() {
-            return "  deadline <task description> /by <YYYY-MM-DD HH:mm>";
+            return "  deadline <task description> /by <YYYY-MM-DD HH:mm>\n";
         }
     },
 
@@ -75,7 +75,7 @@ public enum PrintText {
         }
     },
 
-    EMPTY_TASKLIST_MESSAGE {
+    EMPTY_TASKLIST_ERROR {
         @Override
         public String toString() {
             return BORDER + "  You don't have any tasks yet :)" +

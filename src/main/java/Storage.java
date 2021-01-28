@@ -64,7 +64,6 @@ public class Storage {
     private Task readTaskFromData(String line) {
         boolean taskIsDone = (line.charAt(3) == 'X');
         Task output = null;
-        System.out.println(line);
 
         if (line.startsWith("T]")) {
             String expression = line.split("] ", 2)[1];

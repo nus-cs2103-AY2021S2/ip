@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class OlafApp {
     private TaskList taskList;
@@ -33,6 +32,7 @@ public class OlafApp {
             if(command.equalsIgnoreCase("bye")){
                 this.stop();
             } else if(command.equalsIgnoreCase("list")){
+                // todo: use try catch here and make list printing a ui method
                 if (taskList.hasTasks()) {
                     // print iteratively if there are tasks in the list
                     System.out.println(PrintText.BORDER
@@ -41,7 +41,7 @@ public class OlafApp {
                     System.out.printf("  Only %s tasks left to be done!\n%s",
                             taskList.getTotalNumberOfTasksUndone(), PrintText.BORDER);
                 } else {
-                    System.out.println(PrintText.EMPTY_TASKLIST_MESSAGE);
+                    System.out.println(PrintText.EMPTY_TASKLIST_ERROR);
                 }
             } else if(command.toLowerCase().startsWith("done")){
                 try {
@@ -54,7 +54,7 @@ public class OlafApp {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ui.showFormatError(PrintText.DONE_FORMAT);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    ui.showInvalidIndexError(PrintText.DONE_FORMAT);
+                    ui.showInvalidIndexError();
                 }
             } else if(command.toLowerCase().startsWith("delete")){
                 try {
@@ -67,7 +67,7 @@ public class OlafApp {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     ui.showFormatError(PrintText.DELETE_FORMAT);
                 } catch (IndexOutOfBoundsException | NumberFormatException e) {
-                    ui.showInvalidIndexError(PrintText.DELETE_FORMAT);
+                    ui.showInvalidIndexError();
                 }
             } else if(command.toLowerCase().startsWith("todo")){
                 try {

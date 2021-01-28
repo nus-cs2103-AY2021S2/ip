@@ -41,23 +41,14 @@ public class Ui {
     }
 
     // only for delete and done commands
-    void showInvalidIndexError(PrintText format) {
-        String description = "";
-        if (format.equals(PrintText.DONE_FORMAT)) {
-            description = "to mark as done:";
-        } else if (format.equals(PrintText.DELETE_FORMAT)) {
-            description = "to delete:";
-        }
-
-        String message = "  Oops! No such task found...\n"
-                + "  Please state the task number " + description + "\n\n"
-                + format
+    void showInvalidIndexError() {
+        String message = "  Oops! Please use a valid task number.\n\n"
                 + "  Type 'list' to view all tasks\n  and their respective numbers\n";
         System.out.print(this.formatResponse(message));
     }
 
     void showLoadingError() {
-        String message = "  No existing data found. Starting application...\n";
+        String message = "  No existing data found. Starting with empty Task list.\n";
         System.out.print(this.formatResponse(message));
     }
 }
