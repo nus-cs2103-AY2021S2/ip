@@ -2,16 +2,38 @@ package chat.task;
 
 import chat.ChatException;
 
+/**
+ * Todo is type of <b>task</b>. 
+ */
 public class Todo extends Task {
 
+    /**
+     * Initialises Todo object.
+     * <p>Boolean done has been set to false by default.</p>
+     * 
+     * @param name Name or description of the task.
+     */
     private Todo (String name) {
         super(name);
     }
-    
+
+    /**
+     * Initialises Todo object.
+     *
+     * @param done Boolean that tells if task is completed.
+     * @param name Name or description of the task.
+     */
     public Todo (boolean done, String name) {
         super(done, name);
     }
 
+    /**
+     * Static method that creates a Todo object.
+     * 
+     * @param str Inputted command string from user to Chat the Cat.
+     * @return Todo Object.
+     * @throws ChatException If format of command is wrong.
+     */
     public static Todo createTodo (String str) throws ChatException {
         if (!str.startsWith("todo")) {
             //i.e. deadline
@@ -34,10 +56,22 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Returns a comma separated string of all parameters.
+     *
+     * @return Comma separated string with all parameters listed out.
+     */
     public String allParameterStr() { 
         return String.format("T,%s,%s", this.getDone(), this.getName());
     }
-    
+
+    /**
+     * Returns a string that shows the details of the task.
+     * <p>[ ] will be displayed if done = false.</p>
+     * <p>[X] will be displayed if done = true.</p>
+     *
+     * @return String showing details of task, i.e. [T][ ] name.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

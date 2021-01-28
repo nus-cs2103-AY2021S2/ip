@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 import chat.ChatException;
 
+/**
+ * Event is a type of <b>task</b> with a <b>start</b> and <b>end</b> date and time.
+ */
 public class Event extends Task {
 
     private LocalDateTime start;
@@ -14,18 +17,41 @@ public class Event extends Task {
     private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     private static DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
 
+    /**
+     * Initialises Event object.
+     * <p>Boolean done has been set to false by default.</p>
+     * 
+     * @param name Name or description of the task.
+     * @param start Start date and time of the task.
+     * @param end End date and time of the task.
+     */
     private Event (String name, LocalDateTime start, LocalDateTime end) {
         super(name);
         this.start = start;
         this.end = end;
     }
-    
+
+    /**
+     * Initialises Event object.
+     * 
+     * @param done Boolean that tells if task is completed.
+     * @param name Name or description of the task.
+     * @param start Start date and time of the task.
+     * @param end End date and time of the task.
+     */
     public Event (boolean done, String name, String start, String end) { 
         super(done, name);
         this.start = LocalDateTime.parse(start, inputFormatter);
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
+    /**
+     * Static method that creates an Event object.
+     * 
+     * @param str Inputted command string from user to Chat the Cat.
+     * @return Event object.
+     * @throws ChatException If format of command is wrong.
+     */
     public static Event createEvent (String str) throws ChatException {
         String formatStr = "Please input with this format:\n" +
                 "event [name] /at [end date/time]-[start date/time]\n" +
@@ -96,19 +122,41 @@ public class Event extends Task {
         
     }
 
+    /**
+     * Returns the start date and time of the task.
+     * 
+     * @return Start date and time of the task.
+     */
     public LocalDateTime getStart() {
         return this.start;
     }
 
+    /**
+     * Returns the end date and time of the task.
+     *
+     * @return End date and time of the task.
+     */
     public LocalDateTime getEnd() {
         return this.end;
     }
 
+    /**
+     * Returns a comma separated string of all parameters.
+     *
+     * @return Comma separated string with all parameters listed out.
+     */
     public String allParameterStr() {
         return String.format("E,%s,%s,%s,%s", this.getDone(), this.getName(), this.getStart().format(inputFormatter),
                 this.getEnd().format(inputFormatter));
     }
-    
+
+    /**
+     * Returns a string that shows the details of the task.
+     * <p>[ ] will be displayed if done = false.</p>
+     * <p>[X] will be displayed if done = true.</p>
+     *
+     * @return String showing details of task, i.e. [E][ ] name (at: start - end).
+     */
     @Override
     public String toString() {
         String startStr = this.getStart().format(displayFormatter);

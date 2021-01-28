@@ -6,14 +6,31 @@ import chat.Storage;
 import chat.Ui;
 import chat.task.Task;
 
+/**
+ * A type of command that deals with marking tasks from list of tasks 
+ * from TaskList object, as done once completed.
+ */
 public class DoneCommand extends Command {
 
     String inputStr;
-    
+
+    /**
+     * Initialises DoneCommand object.
+     *
+     * @param inputStr Inputted command string from user to Chat the Cat.
+     */
     public DoneCommand(String inputStr) { 
         this.inputStr = inputStr; 
     }
-    
+
+    /**
+     * Method that marks tasks as done from list of tasks from TaskList object.
+     * 
+     * @param tasks TaskList object that contains a list of tasks.
+     * @param ui Ui object that gives responses to user.
+     * @param storage Storage object that interacts with task data in hard disk.
+     * @throws ChatException If format of command is wrong.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
         Task task = checkCommandIndex(tasks, "done", this.inputStr);
         if (task.getDone()) {
