@@ -25,6 +25,10 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+
     public void addToDo(Todo task) {
         taskList.add(task);
     }
