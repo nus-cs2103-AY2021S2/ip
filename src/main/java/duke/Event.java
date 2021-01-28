@@ -2,12 +2,12 @@ package duke;
 
 public class Event extends Task {
 
-    public Event(String i) {
-        super("E", i);
+    public Event(String input) {
+        super("E", input);
     }
 
-    public Event(String[] arr) {
-        super("E", arr);
+    public Event(String[] array) {
+        super("E", array);
     }
 
     @Override

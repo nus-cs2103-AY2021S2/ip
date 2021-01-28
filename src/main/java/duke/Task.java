@@ -8,25 +8,25 @@ import java.util.regex.Pattern;
 public class Task {
     private String identity;
     private String name;
-    private boolean completed;
+    private boolean isCompleted;
     private String date;
 
-    protected Task(String i, String n) {
-        this.identity = i;
-        this.completed = false;
-        if (n.contains("/")) {
-            String[] nameArr = n.split("/...");
-            name = nameArr[0];
-            date = formatDate(nameArr[1]);
+    protected Task(String identity, String name) {
+        this.identity = identity;
+        this.isCompleted = false;
+        if (name.contains("/")) {
+            String[] nameArr = name.split("/...");
+            this.name = nameArr[0];
+            this.date = formatDate(nameArr[1]);
         } else {
-            this.name = n;
+            this.name = name;
             this.date = " ";
         }
     }
 
-    protected Task(String i, String[] strArr) {
-        this.identity = i;
-        this.completed = Integer.parseInt(strArr[1]) == 1 ? true : false;
+    protected Task(String identity, String[] strArr) {
+        this.identity = identity;
+        this.isCompleted = Integer.parseInt(strArr[1]) == 1 ? true : false;
         this.name = strArr[2];
         this.date = strArr[3];
     }
@@ -59,7 +59,7 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return completed;
+        return isCompleted;
     }
 
     public String getName() {
@@ -71,7 +71,7 @@ public class Task {
     }
 
     public void setCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public String getDate() {

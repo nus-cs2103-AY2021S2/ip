@@ -2,8 +2,8 @@ package duke;
 
 public class ToDo extends Task {
 
-    public ToDo(String i) {
-        super("T", i);
+    public ToDo(String input) {
+        super("T", input);
     }
 
     public ToDo(String[] arr) {

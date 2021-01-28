@@ -2,8 +2,8 @@ package duke;
 
 public class Deadline extends Task {
 
-    public Deadline(String i) {
-        super("D", i);
+    public Deadline(String input) {
+        super("D", input);
     }
 
     public Deadline(String[] arr) {

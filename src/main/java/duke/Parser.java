@@ -39,53 +39,45 @@ public class Parser {
     private void identifyInput(String input) throws DukeGeneralException, DukeTaskException {
         Task temp;
         switch (getCommand(input)) {
-            case "bye":
-                try {
-                    storage.save(tasks);
-                } catch (IOException e) {
-                    ui.showLoadingError();
-                }
-                ui.showBye();
-                break;
-
-            case "list":
-                ui.showList(tasks);
-                break;
-
-            case "find":
-                ui.showFind(tasks, getMessage(input).trim());
-                break;
-
-            case "done":
-                tasks.setDone(ui.getIndex(input));
-                ui.showDone(input, tasks);
-                break;
-
-            case "todo":
-                temp = new ToDo(getMessage(input));
-                ui.showTaskAdded(tasks, temp);
-                tasks.add(temp);
-                break;
-
-            case "deadline":
-                temp = new Deadline(getMessage(input));
-                ui.showTaskAdded(tasks, temp);
-                tasks.add(temp);
-                break;
-
-            case "event":
-                temp = new Event(getMessage(input));
-                ui.showTaskAdded(tasks, temp);
-                tasks.add(temp);
-                break;
-
-            case "delete":
-                ui.showDeleteTask(input, tasks);
-                tasks.remove(ui.getIndex(input));
-                break;
-
-            default:
-                throw new DukeGeneralException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case "bye":
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                ui.showLoadingError();
+            }
+            ui.showBye();
+            break;
+        case "list":
+            ui.showList(tasks);
+            break;
+        case "find":
+            ui.showFind(tasks, getMessage(input).trim());
+            break;
+        case "done":
+            tasks.setDone(ui.getIndex(input));
+            ui.showDone(input, tasks);
+            break;
+        case "todo":
+            temp = new ToDo(getMessage(input));
+            ui.showTaskAdded(tasks, temp);
+            tasks.add(temp);
+            break;
+        case "deadline":
+            temp = new Deadline(getMessage(input));
+            ui.showTaskAdded(tasks, temp);
+            tasks.add(temp);
+            break;
+        case "event":
+            temp = new Event(getMessage(input));
+            ui.showTaskAdded(tasks, temp);
+            tasks.add(temp);
+            break;
+        case "delete":
+            ui.showDeleteTask(input, tasks);
+            tasks.remove(ui.getIndex(input));
+            break;
+        default:
+            throw new DukeGeneralException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
