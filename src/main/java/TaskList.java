@@ -20,15 +20,19 @@ public class TaskList {
     }
 
     public int getSize() {
-        return tasks.size();
+        if(tasks.isEmpty()){
+            return 0;
+        } else {
+            return tasks.size();
+        }
     }
 
     public void addTask(Task ts) {
         tasks.add(ts);
     }
 
-    public void removeTask(Task ts) {
-        tasks.remove(ts);
+    public Task removeTask(int id) {
+        return tasks.remove(id-1);
     }
 
     @Override

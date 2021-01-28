@@ -1,14 +1,8 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Scanner sc;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -16,7 +10,7 @@ public class Duke {
         try {
             tasks = storage.openFile();
         } catch (DukeException e) {
-            ui.showLoadingError();
+            ui.showError(e);
             tasks = new TaskList();
         }
     }
@@ -27,19 +21,19 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.showError(e);
             } finally {
                 ui.showLine();
             }
         }
     }
-    
-    public static void main(String[] args) throws DukeException {
+
+    public static void main(String[] args) {
         new Duke("src/main/java/data/tasks.txt").run();
     }
 
