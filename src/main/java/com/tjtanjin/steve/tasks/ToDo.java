@@ -1,7 +1,5 @@
 package com.tjtanjin.steve.tasks;
 
-import com.tjtanjin.steve.tasks.Task;
-
 /**
  * ToDo is a child class of Task, retaining all the
  * same functionalities as its parent.

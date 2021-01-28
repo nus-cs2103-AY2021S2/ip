@@ -1,5 +1,8 @@
 package com.tjtanjin.steve.parser;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+
 import com.tjtanjin.steve.commands.ByeCommand;
 import com.tjtanjin.steve.commands.CommandHandler;
 import com.tjtanjin.steve.commands.DeadlineCommand;
@@ -10,9 +13,6 @@ import com.tjtanjin.steve.commands.FindCommand;
 import com.tjtanjin.steve.commands.HelpCommand;
 import com.tjtanjin.steve.commands.ListCommand;
 import com.tjtanjin.steve.commands.TodoCommand;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
 
 /**
  * Parser class parses user input and returns a response. It also deals directly with the CommandHandler

@@ -1,12 +1,13 @@
 package com.tjtanjin.steve.parser;
 
 /**
- * Class for custom exception handling.
+ * Class for custom exception handling of invalid params format.
  */
 public class SteveInvalidParamsException extends Exception {
 
     /**
-     * Constructor for DukeException class for custom exceptions.
+     * Constructor for SteveInvalidParamsException class for custom exceptions
+     * of invalid params format.
      * @param errMsg error message
      */
     public SteveInvalidParamsException(String errMsg) {

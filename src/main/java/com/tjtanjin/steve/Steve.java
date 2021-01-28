@@ -1,17 +1,17 @@
 package com.tjtanjin.steve;
 
+import java.util.Scanner;
+
 import com.tjtanjin.steve.commands.CommandHandler;
 import com.tjtanjin.steve.parser.Parser;
 import com.tjtanjin.steve.storage.StorageHandler;
 import com.tjtanjin.steve.tasks.TaskHandler;
 import com.tjtanjin.steve.ui.UiHandler;
 
-import java.util.Scanner;
-
 /**
- * Duke is a project that eventually builds into a personal assistant chat bot.
+ * Steve is a project that eventually builds into a personal assistant chat bot.
  */
-public class Duke {
+public class Steve {
 
     /**
      * Entry point of the program, first greets then listens for input from user.

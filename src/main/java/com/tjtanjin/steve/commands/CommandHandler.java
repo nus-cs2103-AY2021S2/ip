@@ -1,8 +1,8 @@
 package com.tjtanjin.steve.commands;
 
-import com.tjtanjin.steve.tasks.TaskHandler;
-
 import java.util.HashMap;
+
+import com.tjtanjin.steve.tasks.TaskHandler;
 
 /**
  * The CommandHandler class manages all supported commands and provides them with the
