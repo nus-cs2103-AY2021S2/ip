@@ -3,10 +3,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class parser makes sense of the user commands
+ *
+ * @version 28 Jan 2021
+ * @author Zhang Peng
+ */
 public class Parser {
     public Parser() {
     }
 
+    /**
+     * This is the the method for making sense of the user commands
+     * @param arrayList takes in the arrayList
+     * @param path specifies the path to the file
+     * @param scanner takes in the a scanner to scan
+     * @return Nothing.
+     */
     public void makingSenseOfUserCommand(ArrayList<Task> arrayList, String path, Scanner scanner) {
         String input;
         while (scanner.hasNextLine()) {

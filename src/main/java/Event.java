@@ -1,7 +1,7 @@
 /**
  * Class Event is an extension of the Task class.
  *
- * @version 21 Jan 2021
+ * @version 28 Jan 2021
  * @author Zhang Peng
  */
 
