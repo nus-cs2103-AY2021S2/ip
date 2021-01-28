@@ -10,8 +10,9 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public Event(String name, boolean done, String time) {
+    public Event(String name, boolean done, LocalDate date, String time) {
         super(name, done);
+        this.date = date;
         this.time = time;
     }
 
@@ -21,7 +22,7 @@ public class Event extends Task{
         if (this.done) {
             head = "[E][X] ";
         }
-        return head + this.name + " (by: " + this.date.getMonth() + " "
+        return head + this.name + " (at: " + this.date.getMonth() + " "
                 + this.date.getDayOfMonth() + " " + this.date.getYear() + " "
                 + this.time + ")";
     }

@@ -1,0 +1,4 @@
+T | 0 | eat 
+T | 1 | at and sleep 
+E | 1 | sleep [X] sleep (by: JANUARY 20 2021 1600
+D | 0 | code FEBRUARY 10 2021 2pm

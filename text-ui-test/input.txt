@@ -1,25 +1,9 @@
-e
-eat and sleep
 todo eat
-todo
 todoeat and sleep
-event sleep /at 2am
-event sleep /by 2am
-event sleep well
-eventsleep well /at 2am
-event
-deadline code /by today
-deadline code /at today
-deadline code and sleep
-deadlinecode and sleep /by today
-deadline
+event sleep /at 2021-01-20 1600
+deadline code /by 2021-02-10 2pm
 list
-done
-done
 done 2
 done 3
-done2
-done abcde
-doneabcde
 list
 bye

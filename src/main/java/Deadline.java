@@ -10,9 +10,10 @@ public class Deadline extends Task{
         this.time = time;
     }
 
-    public Deadline(String name, boolean done, String deadline) {
+    public Deadline(String name, boolean done, LocalDate deadline, String time) {
         super(name, done);
         this.deadline = deadline;
+        this.time = time;
     }
 
     @Override
