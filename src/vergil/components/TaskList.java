@@ -5,9 +5,12 @@ import vergil.types.Todo;
 import vergil.types.Deadline;
 import vergil.types.Event;
 import vergil.types.VergilException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,6 +29,7 @@ public class TaskList {
 
             while (saveEntries.hasNextLine()) {
                 String[] taskDetails = saveEntries.nextLine().split("::");
+
                 switch (taskDetails[0]) {
                 case "t":
                     tasks.add(new Todo(
