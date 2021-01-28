@@ -1,13 +1,13 @@
 public class Event extends Task {
-    protected String location;
+    protected String timing;
 
     public Event(String description, String location) {
         super(description);
-        this.location = location;
+        this.timing = timing;
     }
 
     @Override
     public String toString() {
-        return "E | " + super.toString() + " | " + location;
+        return "E | " + super.toString() + " | " + timing;
     }
 }
