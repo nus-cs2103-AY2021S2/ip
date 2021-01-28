@@ -35,7 +35,7 @@ public class Storage {
                 Task task = null;
                 switch(taskArr[0]) {
                     case "T ":
-                        String input = "todo " + taskArr[2];
+                        String input = taskArr[2];
                         task = new Todo(input);
                         break;
                     case "D ":
@@ -51,7 +51,7 @@ public class Storage {
                     if (taskArr[1].equals("X ")) {
                         task.checkTask();
                     }
-                    taskList.add(task);
+                    taskList.addTask(task);
                 }
             }
         } catch (IOException e) {

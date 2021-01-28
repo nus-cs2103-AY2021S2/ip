@@ -6,10 +6,14 @@ import java.time.format.DateTimeParseException;
 public class Duke {
     public TaskList tasks;
     public Storage storage;
+    public Ui ui;
+    public Parser parser;
 
     public Duke() {
         this.tasks = new TaskList();
         this.storage = new Storage("C:/Users/Jeremias/Documents/GitHub/ip/data/", "data.txt");
+        this.ui = new Ui();
+        this.parser = new Parser();
     }
 
     public static void main(String[] args) {
@@ -18,7 +22,7 @@ public class Duke {
     }
 
     public void run() {
-        System.out.println("Greetings, I am Mr. C \nHow may I assist you?");
+        ui.printGreeting();
         storage.loadTaskList(tasks);
         Scanner sc = new Scanner(System.in);
         boolean exit = false;
@@ -26,7 +30,7 @@ public class Duke {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 exit = true;
-                System.out.println("Farewell sir/maam. Hope to see you again soon.");
+                ui.printBye();
             } else {
                 executeCommand(input);
                 save();
@@ -35,83 +39,78 @@ public class Duke {
     }
 
     public void executeCommand(String input) {
-        String[] command = input.split(" ");
+        String command = parser.parseCommand(input);
         try {
-            if (command[0].equals("todo")) {
-                if (command.length == 1) {
-                    throw new DukeException("Please describe the nature of your task sir/maam.");
-                } else if (command[1].equals("")) {
-                    throw new DukeException(("Please describe the nature of your task sir/maam."));
+            if (command.equals("todo")) {
+                if (parser.isCorrectTodo(input)) {
+                    String description = parser.parseTodoDescripton(input);
+                    Task task = new Todo(description);
+                    tasks.addTask(task);
+                    ui.printAddTask(task, tasks.size());
                 } else {
-                    tasks.addTask(new Todo(input));
+                    throw new WrongFormatDukeException(command);
                 }
-            } else if (command[0].equals("deadline")) {
-                if (command.length == 1) {
-                    throw new DukeException("Please describe the nature of your task sir/maam.");
-                } else if (command[1].equals("")) {
-                    throw new DukeException(("Please describe the nature of your task sir/maam."));
-                } else {
-                    String[] details = input.split(" /by ");
-                    if (details.length != 2) {
-                        throw new DukeException("Please specify the deadline for this task using /by.");
-                    }
+            } else if (command.equals("deadline")) {
+                if (parser.isCorrectDeadline(input)) {
                     try {
-                        LocalDateTime dateTime = LocalDateTime.parse(details[1], DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
-                        Deadline task = new Deadline(dateTime, details[0].substring(9));
+                        LocalDateTime dateTime = parser.parseDeadlineDate(input);
+                        String description = parser.parseDeadlineDescription(input);
+                        Deadline task = new Deadline(dateTime, description);
                         tasks.addTask(task);
+                        ui.printAddTask(task, tasks.size());
                     } catch (DateTimeParseException e) {
-                        System.out.println(e);
+                        ui.printError(new WrongFormatDukeException(command));
                     }
-                }
-            } else if (command[0].equals("event")) {
-                if (command.length == 1) {
-                    throw new DukeException("Please describe the nature of your task sir/maam.");
-                } else if (command[1].equals("")) {
-                    throw new DukeException(("Please describe the nature of your task sir/maam."));
                 } else {
-                    String[] details = input.split(" /at ");
-                    if (details.length != 2) {
-                        throw new DukeException("Please specify the date of this event using /at.");
-                    }
+                    throw new WrongFormatDukeException(command);
+                }
+            } else if (command.equals("event")) {
+                if (parser.isCorrectEvent(input)) {
                     try {
-                        LocalDateTime dateTime = LocalDateTime.parse(details[1], DateTimeFormatter.ofPattern("dd/M/yyyy Hmm"));
-                        Event task = new Event(dateTime, details[0].substring(6));
+                        LocalDateTime dateTime = parser.parseEventDate(input);
+                        String description = parser.parseEventDescription(input);
+                        Event task = new Event(dateTime, description);
                         tasks.addTask(task);
+                        ui.printAddTask(task, tasks.size());
                     } catch (DateTimeParseException e) {
-                        System.out.println(e);
+                        ui.printError(new WrongFormatDukeException(command));
                     }
-                }
-            } else if (command[0].equals("list")) {
-                if (command.length == 1) {
-                    tasks.printTasks();
                 } else {
-                    throw new DukeException("I am unable to comprehend what you have just said. I deeply regret my insufficiency.");
+                    throw new WrongFormatDukeException(command);
                 }
-            } else if (command[0].equals("done")) {
-                if (command.length == 1) {
-                    throw new DukeException("I apologise but I must ask you to specify the task you have conquered.");
-                } else if (command[1].equals("")) {
-                    throw new DukeException("I apologise but I must ask you to specify the task you have conquered.");
-                } else if (Integer.valueOf(command[1]) < 1 || Integer.valueOf(command[1]) > tasks.size()) {
-                    throw new DukeException("I apologise but there is no such index in your list of tasks sir/maam.");
+            } else if (command.equals("list")) {
+                if (parser.isCorrectList(input)) {
+                    ui.printTaskList(tasks);
                 } else {
-                    tasks.doneTask(Integer.valueOf(command[1]) - 1);
+                    throw new WrongFormatDukeException(command);
                 }
-            } else if (command[0].equals("delete")) {
-                if (command.length == 1) {
-                    throw new DukeException("I apologise but I must ask you to specify which task you wish to remove.");
-                } else if (command[1].equals("")) {
-                    throw new DukeException("I apologise but I must ask you to specify which task you wish to remove.");
-                } else if (Integer.valueOf(command[1]) < 1 || Integer.valueOf(command[1]) > tasks.size()) {
-                    throw new DukeException("I am incapable of deleting something that does not exist sir/maam.");
+            } else if (command.equals("done")) {
+                if (parser.isCorrectIndexCommand(input, tasks.size())) {
+                    int index = parser.parseIndex(input);
+                    tasks.doneTask(index);
+                    ui.printDoneTask(tasks.getTask(index));
                 } else {
-                    tasks.deleteTask(Integer.valueOf(command[1]) - 1);
+                    throw new WrongFormatDukeException(command);
+                }
+            } else if (command.equals("delete")) {
+                if (parser.isCorrectIndexCommand(input, tasks.size())) {
+                    int index = parser.parseIndex(input);
+                    Task deleted = tasks.deleteTask(index);
+                    ui.printDeleteTask(deleted);
+                } else {
+                    throw new WrongFormatDukeException(command);
+                }
+            } else if (command.equals("help")) {
+                if (parser.isCorrectHelp(input)) {
+                    ui.printHelp();
+                } else {
+                    throw new WrongFormatDukeException(command);
                 }
             } else {
-                throw new DukeException("I am unable to comprehend what you have just said. I deeply regret my insufficiency.");
+                throw new WrongCommandDukeException();
             }
         } catch (DukeException e) {
-            System.out.println(e);
+            ui.printError(e);
         }
     }
 

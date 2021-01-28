@@ -1,13 +1,8 @@
 public class Todo extends Task {
     private String description;
 
-    public Todo(String input) {
-        super(input);
-        String[] command = input.split(" ");
-        String description = "";
-        for (int i = 1; i < command.length; i++) {
-            description += command[i] + " ";
-        }
+    public Todo(String description) {
+        super(description);
         this.description = description;
     }
 

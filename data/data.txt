@@ -1,2 +1,4 @@
-E | X | work | at: 21-5-2019 1800
-D | O | return book | by: 13-8-2021 1700
+T | X | work 
+D | O | fly | by: 11-7-2018 1900
+E | O | xmas | at: 25-12-2021 1800
+T | O | submit homework 
