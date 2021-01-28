@@ -1,4 +1,11 @@
-package main.java;
+package duke.maincomponents;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,7 +14,7 @@ import java.util.Scanner;
 public class Storage {
     String pathOfDataFile;
 
-    public Storage(String filePath,String folderName) throws DukeException{
+    public Storage(String filePath,String folderName) throws DukeException {
         pathOfDataFile = filePath;
         try{
             File folder = new File(folderName);

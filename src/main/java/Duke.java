@@ -1,7 +1,9 @@
-import main.java.*;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.maincomponents.Parser;
+import duke.maincomponents.Storage;
+import duke.maincomponents.TaskList;
+import duke.maincomponents.Ui;
 
 public class Duke {
     private Storage dukeStorage;

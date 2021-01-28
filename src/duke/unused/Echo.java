@@ -1,4 +1,4 @@
-package main.java;
+package duke.unused;
 
 public class Echo{
 

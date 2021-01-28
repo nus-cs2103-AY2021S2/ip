@@ -1,4 +1,6 @@
-package main.java;
+package duke.maincomponents;
+
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,14 +22,14 @@ public class Ui{
     }
 
     public String numberOfTasksLine(int numberOfTasks){
-        return padSpaces("Now you have " + String.valueOf(numberOfTasks)+ " tasks in the list.", 5);
+        return padSpaces("Now you have " + String.valueOf(numberOfTasks)+ " task in the list.", 5);
     }
 
     public static void showReturnTaskList(ArrayList<Task> taskArray){
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalLine()).append('\n');
 
-        sb.append(indentedString("Here are the tasks in your list:\n"));
+        sb.append(indentedString("Here are the task in your list:\n"));
         for (int i = 0; i < taskArray.size(); i++) {
 
             Task currentTask = taskArray.get(i);

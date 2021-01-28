@@ -1,14 +1,16 @@
-package main.java;
+package duke.task;
+import duke.exceptions.TaskException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 // import java.time.LocalDateTime;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private final DateTimeFormatter formatone = DateTimeFormatter.ofPattern("d-M-uuuu");
     private final DateTimeFormatter formattwo = DateTimeFormatter.ofPattern("uuuu-M-d");
     private String deadlineBy;
     private LocalDate dateBy;
-    public Deadline(String description, String by) throws TaskException{
+    public Deadline(String description, String by) throws TaskException {
         super(description);
         this.deadlineBy = by;
 

@@ -1,4 +1,4 @@
-package main.java;
+package duke.exceptions;
 
 public class TaskException extends Exception{
     public TaskException(String message){

@@ -1,4 +1,7 @@
-package main.java;
+package duke.maincomponents;
+
+import duke.command.*;
+import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,7 @@ public class Parser {
         return checkStringStartingEquals(userInput, "done");
     }
 
-    public int parseDoneCommand(String userInput) throws DukeException{
+    public int parseDoneCommand(String userInput) throws DukeException {
         int length = "done".length();
         if (checkStringEquals(userInput, "done")){
             throw new DukeException("Error! Please indicate the task " +

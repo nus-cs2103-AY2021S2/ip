@@ -1,4 +1,10 @@
-package main.java;
+package duke.command;
+
+import duke.exceptions.DukeException;
+import duke.maincomponents.Storage;
+import duke.maincomponents.TaskList;
+import duke.maincomponents.Ui;
+import duke.task.Task;
 
 public class DeleteCommand implements Command {
     int taskDeleteInt;

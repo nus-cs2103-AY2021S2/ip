@@ -1,4 +1,11 @@
-package main.java;
+package duke.maincomponents;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.exceptions.DukeException;
+import duke.exceptions.TaskException;
 
 import java.util.ArrayList;
 
@@ -24,7 +31,7 @@ public class TaskList {
         return new ArrayList<Task>(TaskArray);
     }
 
-    public Task checkTaskAsDone(int number) throws DukeException{
+    public Task checkTaskAsDone(int number) throws DukeException {
         if (number >= 1 && number<= TaskArray.size()) {
             Task currentTask = TaskArray.get(number - 1);
             currentTask.changeTaskToDone();
