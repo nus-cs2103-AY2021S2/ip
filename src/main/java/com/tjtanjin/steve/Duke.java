@@ -1,4 +1,10 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve;
+
+import com.tjtanjin.steve.commands.CommandHandler;
+import com.tjtanjin.steve.parser.Parser;
+import com.tjtanjin.steve.storage.StorageHandler;
+import com.tjtanjin.steve.tasks.TaskHandler;
+import com.tjtanjin.steve.ui.UiHandler;
 
 import java.util.Scanner;
 

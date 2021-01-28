@@ -1,4 +1,4 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.commands;
 
 import java.util.HashMap;
 

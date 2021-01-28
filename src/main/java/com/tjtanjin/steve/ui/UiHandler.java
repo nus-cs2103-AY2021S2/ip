@@ -1,4 +1,4 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.ui;
 
 import java.util.Scanner;
 
@@ -18,11 +18,12 @@ public class UiHandler {
      * Greets the user upon program launch.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = "  _________ __\n"
+                + " /   _____//  |_  _______  __ ____\n"
+                + " \\_____  \\\\   __\\/ __ \\  \\/ // __ \\\n"
+                + " /        \\|  | \\  ___/|   /|  ___/\n"
+                + "/_______  /|__|  \\___  >\\_/  \\___  >\n"
+                + "        \\/           \\/          \\/";
         System.out.println(ANSI_GREEN + "Hello from\n" + logo + "\nWhat can I do for you?");
     }
 

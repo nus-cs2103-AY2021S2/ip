@@ -1,4 +1,6 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.commands;
+
+import com.tjtanjin.steve.ui.UiHandler;
 
 /**
  * Entry point for handling logic and execution of bye command.

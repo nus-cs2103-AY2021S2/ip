@@ -1,20 +1,22 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.commands;
+
+import com.tjtanjin.steve.tasks.TaskHandler;
 
 import java.time.LocalDate;
 
 /**
- * Entry point for handling logic and execution of deadline command.
+ * Entry point for handling logic and execution of event command.
  */
-public class DeadlineCommand {
+public class EventCommand {
 
     private final TaskHandler taskHandler;
     private final String description;
 
     /**
-     * Constructor for DeadlineCommand.
+     * Constructor for EventCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public DeadlineCommand(String description, TaskHandler taskHandler) {
+    public EventCommand(String description, TaskHandler taskHandler) {
         this.description = description;
         this.taskHandler = taskHandler;
     }
@@ -24,7 +26,7 @@ public class DeadlineCommand {
     }
 
     /**
-     * Forwards the add deadline task operation to TaskHandler.
+     * Forwards the add event task operation to TaskHandler.
      * @param taskType type of task (todo, deadline or event)
      * @param taskName name of task
      * @param taskDates array of dates

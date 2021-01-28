@@ -1,4 +1,4 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.storage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +8,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.tjtanjin.steve.tasks.Deadline;
+import com.tjtanjin.steve.tasks.Event;
+import com.tjtanjin.steve.tasks.Task;
+import com.tjtanjin.steve.tasks.ToDo;
+import com.tjtanjin.steve.ui.UiHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

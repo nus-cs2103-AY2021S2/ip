@@ -1,18 +1,20 @@
-package com.tjtanjin.ip;
+package com.tjtanjin.steve.commands;
+
+import com.tjtanjin.steve.tasks.TaskHandler;
 
 /**
- * Entry point for handling logic and execution of delete command.
+ * Entry point for handling logic and execution of done command.
  */
-public class DeleteCommand {
+public class DoneCommand {
 
     private final TaskHandler taskHandler;
     private final String description;
 
     /**
-     * Constructor for DeleteCommand.
+     * Constructor for DoneCommand.
      * @param taskHandler provides access for command to modify tasks
      */
-    public DeleteCommand(String description, TaskHandler taskHandler) {
+    public DoneCommand(String description, TaskHandler taskHandler) {
         this.description = description;
         this.taskHandler = taskHandler;
     }
@@ -22,11 +24,11 @@ public class DeleteCommand {
     }
 
     /**
-     * Forwards the delete task operation to TaskHandler.
-     * @param index of task to delete
+     * Forwards the mark task as done operation to TaskHandler.
+     * @param index of task to mark as done
      * @return string response after operation is done
      */
     public String execute(int index) {
-        return taskHandler.deleteTask(index);
+        return taskHandler.markTaskDone(index);
     }
 }
