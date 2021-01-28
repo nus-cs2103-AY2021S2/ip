@@ -5,6 +5,13 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
+    /**
+     * Returns a Command object based on the fullCommand given
+     * @param fullCommand (command entered by the user)
+     * @return Command comamnd
+     * @throws DukeException
+     * @throws DukeDeadlineException
+     */
     public static Command parse(String fullCommand) throws DukeException , DukeDeadlineException{
         int firstSpace = fullCommand.indexOf(" ");
         String keyword = firstSpace == -1 ? fullCommand : fullCommand.substring(0, firstSpace).toLowerCase();
@@ -77,6 +84,14 @@ public class Parser {
         return t;
     }
 
+    /**
+     * Returns a array of LocalDateTime object
+     * @param data String that contains the date
+     * @param errorMessage  error message to display when error is occur during prasing to LocalDateTIme
+     * @return LocalDateTime[].
+     * @throws DukeDeadlineException
+     */
+
     public static LocalDateTime[] parseDates(String data, String errorMessage) throws DukeDeadlineException {
         int firstSpace = data.indexOf(" ");
         String date = data.substring(0,firstSpace);
@@ -92,6 +107,13 @@ public class Parser {
         return deadline;
     }
 
+    /**
+     * Returns LocalDateTime object based on string given
+     * @param date String that contains the date in the format of yyyy-M-d hhmm
+     * @param errorMessage error message to display when error is occur during prasing to LocalDateTIme
+     * @return LocalDateTime
+     * @throws DukeDeadlineException
+     */
     public static LocalDateTime parseDate(String date, String errorMessage) throws DukeDeadlineException{
         try {
             return LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-M-d Hmm"));
@@ -99,6 +121,13 @@ public class Parser {
             throw new DukeDeadlineException(errorMessage);
         }
     }
+
+    /**
+     * Returns a Task Object based on the csvData provided
+     * @param csvData (a row from the saved file)
+     * @param ui (UI object for pririnting
+     * @return
+     */
 
     public static Task parseForText(String csvData,Ui ui) {
         String errorMessage = "The deadline for this task is corrupted (Required : yyyy-M-d hhmm";
