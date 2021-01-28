@@ -110,8 +110,8 @@ public class Ui {
     public void list(TaskList tasks) {
         int i = 0;
         System.out.println(" * list *");
-        while (i < tasks.getTaskList().size()) {
-            System.out.println(Integer.toString(i + 1) + ". " + tasks.getTaskList().get(i));
+        while (i < tasks.getTasks().size()) {
+            System.out.println(Integer.toString(i + 1) + ". " + tasks.getTasks().get(i));
             i++;
         }
     }

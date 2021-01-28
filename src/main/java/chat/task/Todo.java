@@ -9,7 +9,7 @@ public class Todo extends Task {
 
     /**
      * Initialises Todo object.
-     * <p>Boolean done has been set to false by default.</p>
+     * <p>Boolean isDone has been set to false by default.</p>
      * 
      * @param name Name or description of the task.
      */
@@ -20,11 +20,11 @@ public class Todo extends Task {
     /**
      * Initialises Todo object.
      *
-     * @param done Boolean that tells if task is completed.
+     * @param isDone Boolean that tells if task is completed.
      * @param name Name or description of the task.
      */
-    public Todo (boolean done, String name) {
-        super(done, name);
+    public Todo (boolean isDone, String name) {
+        super(isDone, name);
     }
 
     /**
@@ -62,13 +62,13 @@ public class Todo extends Task {
      * @return Comma separated string with all parameters listed out.
      */
     public String allParameterStr() { 
-        return String.format("T,%s,%s", this.getDone(), this.getName());
+        return String.format("T,%s,%s", this.getIsDone(), this.getName());
     }
 
     /**
      * Returns a string that shows the details of the task.
-     * <p>[ ] will be displayed if done = false.</p>
-     * <p>[X] will be displayed if done = true.</p>
+     * <p>[ ] will be displayed if isDone = false.</p>
+     * <p>[X] will be displayed if isDone = true.</p>
      *
      * @return String showing details of task, i.e. [T][ ] name.
      */

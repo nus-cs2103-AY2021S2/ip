@@ -54,10 +54,10 @@ public abstract class Command {
         }
         try {
             int i = Integer.parseInt(str.split(" ")[1]) - 1;
-            return tasks.getTaskList().get(i);
+            return tasks.getTasks().get(i);
         } catch (IndexOutOfBoundsException e1) {
             //list is empty, hence i results in index out of bounds
-            //or when i >= taskArr.size()
+            //or when i >= tasks.getTasks().size()
             throw new ChatException("List is empty or index is out of bounds");
         } catch (NumberFormatException e3){
             //i.e. [command] string

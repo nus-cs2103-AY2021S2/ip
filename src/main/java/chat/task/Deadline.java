@@ -17,7 +17,7 @@ public class Deadline extends Task {
 
     /**
      * Initialises Deadline object.
-     * <p>Boolean done has been set to false by default.</p>
+     * <p>Boolean isDone has been set to false by default.</p>
      * 
      * @param name Name or description of the task.
      * @param end End date and time of the task.
@@ -30,12 +30,12 @@ public class Deadline extends Task {
     /**
      * Initialises Deadline object.
      * 
-     * @param done Boolean that tells if task is completed.
+     * @param isDone Boolean that tells if task is completed.
      * @param name Name or description of the task.
      * @param end End date and time of the task.
      */
-    public Deadline (boolean done, String name, String end) { 
-        super(done, name);
+    public Deadline (boolean isDone, String name, String end) { 
+        super(isDone, name);
         this.end = LocalDateTime.parse(end, inputFormatter);
     }
 
@@ -115,13 +115,13 @@ public class Deadline extends Task {
      * @return Comma separated string with all parameters listed out.
      */
     public String allParameterStr() {
-        return String.format("D,%s,%s,%s", this.getDone(), this.getName(), this.getEnd().format(inputFormatter));
+        return String.format("D,%s,%s,%s", this.getIsDone(), this.getName(), this.getEnd().format(inputFormatter));
     }
 
     /**
      * Returns a string that shows the details of the task.
-     * <p>[ ] will be displayed if done = false.</p>
-     * <p>[X] will be displayed if done = true.</p>
+     * <p>[ ] will be displayed if isDone = false.</p>
+     * <p>[X] will be displayed if isDone = true.</p>
      *
      * @return String showing details of task, i.e. [D][ ] name (by: end).
      */

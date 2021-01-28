@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatException {
         Task task = checkCommandIndex(tasks, "done", this.inputStr);
-        if (task.getDone()) {
+        if (task.getIsDone()) {
             throw new ChatException(String.format("Task already completed\n%s", task));
         } else {
             task.completed();

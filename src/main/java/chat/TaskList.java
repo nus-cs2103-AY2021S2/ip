@@ -9,22 +9,22 @@ import chat.task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
 
     /**
      * Initialise TaskList object with empty list of tasks.
      */
     public TaskList() { 
-        this.taskList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
      * Initialise TaskList object.
      * 
-     * @param taskList List of tasks.
+     * @param tasks List of tasks.
      */
-    public TaskList(ArrayList<Task> taskList) { 
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) { 
+        this.tasks = tasks;
     }
 
     /**
@@ -32,8 +32,8 @@ public class TaskList {
      * 
      * @return List of tasks.
      */
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
     
 }

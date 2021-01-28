@@ -44,8 +44,8 @@ public class AddCommand extends Command{
             //inputStr starts with event
             task = Event.createEvent(this.inputStr);
         }
-        tasks.getTaskList().add(task);
-        ui.printAddedSuccess(task, tasks.getTaskList().size());
+        tasks.getTasks().add(task);
+        ui.printAddedSuccess(task, tasks.getTasks().size());
         storage.save(tasks);
     }
     
