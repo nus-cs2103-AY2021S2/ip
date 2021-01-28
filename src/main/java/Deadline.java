@@ -1,17 +1,17 @@
-public class Deadline extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by) throws EmptyArgument {
+public class Deadline extends Task {
+    protected LocalDate by;
+
+    public Deadline(String description, LocalDate by) throws EmptyArgument {
         super(description);
-        by = by.trim();
-        if (by.isEmpty()){
-            throw new EmptyArgument();
-        }
         this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (Deadline: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
+        return "[D]" + super.toString() + " (Deadline: " + by.format(formatter) + ")";
     }
 }

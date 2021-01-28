@@ -1,4 +1,6 @@
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +50,9 @@ public class Duke {
                         break;
                     case "deadline":
                         tokens = splitTokenIntoTwo(tokens[1]," /by ");
-                        store.add(new Deadline(tokens[0],tokens[1]));
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MM yyyy");
+                        LocalDate data = LocalDate.parse(tokens[1], formatter);
+                        store.add(new Deadline(tokens[0],data));
                         System.out.println("The following deadline item has been added:\n" +
                                 formatOrderedPrint(store,-1));
                         break;
