@@ -1,5 +1,6 @@
+package duke;
+
 import java.time.LocalDate;
-import java.util.Locale;
 
 public class Parser {
     private final Ui ui = new Ui();
