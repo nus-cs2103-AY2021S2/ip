@@ -1,7 +1,12 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+package duke;
+
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
+import duke.Deadline;
+import duke.Event;
+import duke.Duke;
+
 
 public class Ui {
     private static final String HORIZONTAL_RULE = "____________________________________________________________";
@@ -48,7 +53,4 @@ public class Ui {
         System.out.println(HORIZONTAL_RULE);
     }
 
-    public static void showLoadingError(String filePath)  {
-
-    }
 }

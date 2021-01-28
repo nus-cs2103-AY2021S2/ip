@@ -1,6 +1,9 @@
-//Deadlines: tasks that need to be done before a specific date/time
+package duke;
+
+import duke.Task;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
 public class Deadline extends Task{
     private String deadlineDateString;
     private LocalDate deadlineDate;
