@@ -1,20 +1,54 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    protected String after;
-    public Event (String info, String after) {
+    protected String location;
+    protected String dateTime;
+
+    public Event (String info, String afterAt) {
         super(info, taskType.Event);
-        this.after = after;
+        String[] afterAtList = afterAt.trim().split(" ", 2);
+        this.location = afterAtList[0];
+        this.dateTime = afterAtList[1];
+
     }
 
-    public Event(String info, String after, boolean isDone) {
+    public Event(String info, String afterAt, boolean isDone) {
         super(info, isDone);
         this.type = taskType.Event;
-        this.after = after;
+        String[] afterAtList = afterAt.split(" ", 2);
+        this.location = afterAtList[0];
+        this.dateTime = afterAtList[1];
+    }
+
+    public String getDateTime() {
+        //Example of date based on format: 10 Aug 2021
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        String[] dateList = this.dateTime.split(" ", 2);
+        LocalDate eventDate = LocalDate.parse(dateList[0]);
+
+        eventDate.format(dateFormat);
+
+        if (dateList.length == 2) {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm a");
+            LocalTime eventTime = LocalTime.parse(dateList[1]);
+
+            return eventDate + " " + eventTime.format(timeFormat);
+        } else {
+            return eventDate.toString();
+        }
+    }
+
+    public String getLocation() {
+        return this.location;
     }
 
     @Override
     public String toString(){
-        return "[E]" + super.toString() + " (at:" + this.after + ")";
+        return "[E]" + super.toString() + " (at: "
+                + getLocation() + " " + getDateTime() + ")";
     }
 }
