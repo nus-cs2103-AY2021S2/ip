@@ -1,6 +1,5 @@
 package duke;
 
-import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,7 +14,7 @@ public class TaskList {
     protected ArrayList<Task> collection;
 
     public TaskList() {
-        this.collection = new ArrayList<Task>();
+        this.collection = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> collection) {
@@ -63,12 +62,17 @@ public class TaskList {
 
         // Add to collection
         try {
-            if (type.equals("todo"))
-                this.collection.add(new Todo(args[0]));
-            else if (type.equals("deadline"))
-                this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
-            else if (type.equals("event"))
-                this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
+            switch (type) {
+                case "todo":
+                    this.collection.add(new Todo(args[0]));
+                    break;
+                case "deadline":
+                    this.collection.add(new Deadline(args[0], LocalDate.parse(args[1])));
+                    break;
+                case "event":
+                    this.collection.add(new Event(args[0], LocalDate.parse(args[1])));
+                    break;
+            }
         } catch (DateTimeParseException e) {
             throw new DukeException("Please specify a proper date... (Format: YYYY-MM-DD)");
         }

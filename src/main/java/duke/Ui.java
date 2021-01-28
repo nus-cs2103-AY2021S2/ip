@@ -37,13 +37,13 @@ public class Ui {
         this.showLine();
         this.say("Hey, hello there! I'm Duke, your personal chat bot.");
         this.say("To know more about what I can do, type 'usage'.");
-        this.say("Sooooo... Is there anything I can do for you today?");
+        this.say("So... Is there anything I can do for you today?");
     }
 
     public boolean toExit() {
         this.say("Are you sure? (Y/N)");
         String confirmation = this.ask();
-        if (confirmation.toLowerCase().equals("y") || confirmation.toLowerCase().equals("yes")) {
+        if (confirmation.equalsIgnoreCase("y") || confirmation.equalsIgnoreCase("yes")) {
             this.say("Alright, take care. I hope to see you again soon!");
             return true;
         }

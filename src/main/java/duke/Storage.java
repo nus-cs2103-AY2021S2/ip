@@ -22,7 +22,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> collection = new ArrayList<Task>();
+        ArrayList<Task> collection = new ArrayList<>();
 
         List<String> lines;
         try {
